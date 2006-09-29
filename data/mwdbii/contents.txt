@@ -1,0 +1,76 @@
+ MWDBPOLY.ZIP is the complete database.
+
+=====
+INFO:
+=====
+
+MWDBPOLY.ZIP contains a MWDBII database that is reasonably up to date, clean, 
+and modified to provide closed polygons without using an index file. 
+(Index files ARE available)
+
+The following files are in MWDBPOLY.ZIP:
+
+ PBORDER.TXT is a breakdown of PBORDER.PNT and notes on VECTOR graphics output.
+  
+ PCOAST.PNT (Header 1000 -1999) Note: Use this file when you don't want 
+                                       Political Borders
+  
+ PBORDER.PNT (Header 2000 - 2999) Note: Use this file in place of PCoast.pnt
+                                         when you want Political borders
+  
+ PUSA48.PNT (Header 4001 - 4052)     - Fred asked me to maintain his
+ PCANPROV.PNT (Header 4053 - 4064)   - original format where the headers
+ PMEXICO.PNT (Header 4065 - 4100)    - 4000 to 4999 are reserved for
+ PAUST.PNT (Header 4101 - 4107)      - internal political borders.
+  
+ PISLAND.PNT (Header 5000 - 5364)
+ PLAKE.PNT (Header 6000 - 6999)
+  
+ RIVER.PNT (Header 7000 - 7999) - Original MWDB II file (from Fred Pospeschil 
+                                - No Polygons) 
+=============
+MWDB History:
+=============
+
+The coordinate data was collected by the Central Intelligence Agency.
+
+The MICRO WORLD DATA BANK II Database was was produced and placed in the 
+Public Domain by Fred Pospeschil and Antonio Rivera. 
+
+  Additional map data base products may be obtained from:
+
+    Micro Doc (Fred Pospeschil)
+    3108 Jackson St.
+    Bellevue, NE  68005
+
+Charles Culberson (creator of Versamap) updated BORDER.PNT, added Australian
+and Canadian internal political borders, modified RIVER.PNT, removed the 
+Berlin air corridors from STATE.PNT, and moved the islands above Canada 
+from LAKE.PNT to ISLAND.PNT (this product and more - sold as shareware).
+
+    Charles Culberson
+    8 Ritter Lane
+    Newark, DE  19711
+
+Paul B. Anderson (of Global Associates, Ltd.) removed numerous duplicates 
+from LAKE.PNT and ISLAND.PNT, added Mexican internal political borders (from 
+data provided by US State Department), added Lakes Chad and Albert (Africa), 
+matched end points of geographical features inside COAST.PNT, BORDER.PNT, 
+ISLAND.PNT, LAKE.PNT, AUST.PNT, CANADA.PNT, and STATE.PNT to provide 
+closed polygons.
+
+The MWDB-POLY database is released to the Public Domain by: 
+
+  Global Associates, Ltd.
+  Suite 206
+  1206 Laskin Road
+  Virginia Beach, Va.
+
+  Ph. (804) 428-4902
+
+MWDB-POLY was produced, at GLOBAL ASSOCIATES, Ltd., from Charles Culberson's 
+version of the MWDB II to give existing programs that use the normal flat 
+file PNT/MAP format a closed polygon capability when producing a vector 
+graphics file output.
+
+Paul B. Anderson  Internet: pbander@infi.net

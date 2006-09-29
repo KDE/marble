@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
+	<MapStyle>
+
+		<name>Earth at Night</name>
+
+		<prefix>citylights</prefix>
+		<icon>citylights-preview.png</icon>
+
+		<description>This image of Earth’s city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). </description>
+		
+		<layer type="bitmap" name="citylights"/>
+
+		<installmap>citylights.jpg</installmap>
+
+	</MapStyle>
+</DeskGlobeML>

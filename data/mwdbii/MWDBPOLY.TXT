@@ -1,0 +1,314 @@
+                  Micro World Data Bank in Polygons (MWDB-POLY)
+
+                                INTRODUCTION
+                                ============
+
+         The full WDB-II is a digitial map data base produced by the
+     Central Intelligence Agency (CIA) and distributed by the National
+     Technical Information Service (NTIS), U.S.  Department of Commerce,
+     5285 Port Royal Road, Springfield, VA, 22161.  Micro WDB-POLY is a
+     highly compressed version which is suitable for use on micro computers
+     and was put in this configuration by Micro Doc as Micro WDB-II.  Global
+     Associates, Ltd added new data (primarily from Charles Culberson),
+     made various fixes to Micro WDB-II, and rearranged the data into
+     closed polygons.  Before describing Micro WDB-POLY a few words should
+     be said about the source file - WDB-II.  The following paragraphs are
+     paraphrased from the NTIS overview of WDB-II.
+
+            WDB-II is a digitial representation of the world
+        coastlines and boundries suitable for use in automated mapping
+        systems.  It contains approximately six million discrete
+        geographic points and was digitized using all available sources
+        of information.  Map scales used range from 1:750,000 to
+        1:4,000,000 with a nominal scale of 1:3,000,000.  These points
+        are grouped by and identified as describing (1) coast lines,
+        (2) country boundries, (3) state boundries (USA only), (4)
+        islands, (5) lakes, and (6) rivers.  Each of these groupings is
+        further broken down into features and subordinate classifications/
+        ranks.  These ranks are hierarchically structured, and are also
+        used for plotting symbol definition.
+
+            WDB-II, as provided by NTIS, is in a 20 character format
+        on five 9 track EBCDIC one-half inch magnetic tapes.  This data
+        base consists of two types of records, one for the line segment
+        identifier data, and the other for the latitude and longitude
+        values of each discrete point making up the line segment.  In
+        this format latitude and longitude values are recorded only as
+        integers in degrees, minutes, and seconds.  WDB-II is available
+        for $660.00 (Order Number PB-271 874 SET/HBG).
+
+         Clearly, WDB-II is an excellent data source when making large (4
+     x 6 foot) plots on a mainframe or minicomputer.  It is, however,
+     somewhat large (150 - 200 megabytes) for use on microcomputers.  Even
+     on the larger commercial online graphics systems, many points have to
+     be filtered out before generating displays.  For this reason many
+     people have spent considerable time over the past to filter and
+     compress this data into a form which could be used in desktop
+     computers.  To these people we wish to express our appreciation -
+     particularly Antonio Riveria who provided us with a copy of the
+     latest download of the file.
+
+         The WDB-II product from which MWDB-POLY is derived may no longer 
+     be availiable.  The CIA has replaced WDB-II with a RELATIONAL version.
+     
+         Contact Micro DOC (listed near the end of this document) for more 
+     information on the 1995 Relational WDB-II CD.
+
+
+                              BACKGROUND
+                              ==========
+
+         The present version began as a three megabyte ASCII text file
+     which contained some 318,568 points selected from all six of the line
+     types described above.  This file was then converted into a sixteen
+     bit integer format which reduced the size to just over one megabyte.
+     The file was divided into six files - one for each of the six line
+     types then the Internal Political Borders were broken down into 4 
+     separate files.  The file was configured such that it could be readily 
+     moved to most desk top microcomputers.  The following table provides a
+     brief statistical overview of the six line types which are contained
+     in the data base.
+
+
+                      Micro WDB-POLY File Composition
+                      ===============================
+         
+         -------------------------------------------------------
+         Detail PCOAST  PBORDER  PUSA48 PCANPROV  PMEXICO  PAUST
+         Level   .PNT    .PNT     .PNT    .PNT     .PNT    .PNT
+         -------------------------------------------------------
+
+           1     22917    49073   6624      4978      879   1975
+           2     27775    56754   6383      5714      997   2350
+           3      4314    10163   1478      1113      181    634
+           4      3033     7237    917       778      113    419
+           5       890     4019    740       418     1984    187
+         
+         Total   58929   127246  16142     13001     4154   5565
+         Lines       8      175     52        12       36      7
+
+         ---------------------------------------
+         Detail  PISLAND  PLAKE   RIVER    Total
+         Level    .PNT     .PNT   .PNT
+         ---------------------------------------
+
+           1      20309    4671   11146   122572
+           2      24190    5758   13217   143138
+           3       3832     791    1817    24323
+           4       2970     581    1254    17302
+           5       1618     617     760    11233
+         
+         Total    52919   12418   28194   318568
+         Lines      364      73     196      923
+         
+         The above table shows the number of points which are in each
+     file and for each level of detail.  It also shows the number of line
+     segments in each file.
+
+         Detail level 5 produces the least detailed graphics image.  The 
+     points at each level of detail are additive to the points at all lower 
+     levels.  For example, when using detail level 4 the points from both 
+     levels 4 and 5 must be used/retrieved.  Therefore, if one were drawing 
+     lake lines at detail level 4, a total of 1198 (581 + 617) points 
+     would be processed.  These 1198 points will describe 73 polygons.
+     
+         Note that the same number of polygons exist at all levels
+     of detail.  For example, regardless of which level of detail is
+     selected, there will always be 73 polygons described by the lake
+     data file.  
+
+         Actual use of the data in these files has shown that most
+     displays which cover a reasonably large area do not need all of the
+     detail provided at level 1.  A large area would be a major portion of
+     the U.S.  For large area plots level 3 or 4 is normally sufficient
+     and greatly reduces the number of points which must be processed. 
+    
+                 
+                 MICRO WDB-POLY FILE AND RECORD STRUCTURES
+                 =========================================
+
+         All Micro WDB-POLY files are sequential files composed of fixed
+     length six byte records which can be accessed randomly.  Each record
+     is composed of three 16-bit signed [short] integer fields which can
+     be read by all microcomputer languages.  There are no record seperators
+     used in these files.  The record layout is:
+
+                       | Code | Latitude | Longitude |
+
+         Within the Micro WDB-POLY files the records are stored as shown 
+     below.  In some cases there may be hundreds of points in a single line
+     segment.  In other cases there may be consecutive header records
+     which locate individual points to be plotted.
+
+     |Header|Point1|Point2|PointN|Header|Point1|Point2|PointN|Header
+     |Point1|Point2|Header|Header|Header|Point1|Point2|PointN|
+
+
+         The same format is used for both the line header records and
+     point records.  The usage of each field is as follows:
+
+
+                              FIELD DEFINITIONS
+                              =================
+
+     CODE - Line Header Records.
+
+     The CODE field is used to:
+
+        1.  Identify the type of line segment which is described by
+            the point records which follow it,
+
+        2.  Identify the line or point within the line type, and
+
+        3.  Provide the coordinates if the record describes a point.
+
+         In header records the CODE field is always a positive four digit
+     number in the form of: ABBB where
+
+           A =                             BBB =          CODE =
+            1 = Coast lines                 001 -> 008     1001 -> 1008
+            2 = International Borders       001 -> 175     2001 -> 2175
+            4 = Internal Political Borders (001 -> 107     4001 -> 4107)
+                  U.S.                      001 -> 052     4001 -> 4052
+                  Canada                    053 -> 064     4053 -> 4064
+                  Mexico                    065 -> 100     4065 -> 4100
+                  Australia                 101 -> 107     4101 -> 4107
+            5 = Islands                     001 -> 364     5001 -> 5364
+            6 = Lakes                       001 -> 073     6001 -> 6073
+            7 = Rivers                      001 -> 196     7001 -> 7196
+
+     CODE - Point records.
+
+         In point records the CODE field contains the detail level.  The
+     detail level is a value in the range of 1 through 5.  To properly
+     retrieve points at any detail level use the following comparison:
+
+        IF CODE >= DESIRED_DETAIL_LEVEL THEN ...
+
+
+     LATITUDE and LONGITUDE - In both header and point records.
+
+         The latitude and longitude fields contain the coordinate values
+     expressed in signed minutes.  The values in these fields are computed
+     with the formula COORD_VALUE = (Degrees * 60) + Minutes.  Thus, the
+     ranges of coordinate values in MWDB-POLY are:
+
+      90 00N =    5400
+      90 00S =   -5400
+     180 00E =   10800
+     180 00W =  -10800
+
+     NOTE: The Latitude and Longitude data can be converted on the fly to
+     Decimal Degrees by dividing the signed minutes values by 60.
+
+         MWDB-POLY uses the standard four quadrant cartesian coordinate
+     system in which north, south, east, and west are referenced to the
+     equator and the Greenwich meridian.
+
+         When a header record is followed by point records the
+     coordinates in the header record are the beginning of the line.  When
+     a header record is followed by another header record then the
+     coordinates in the header record should be plotted as a single point.
+     When working at low levels of detail it is common to find multiple
+     consecutive header records which locate isolated points.
+     
+         This documentation and the associated files are placed in the
+     public domain and may incorporated into other products without fee so
+     long as appropriate credits are included.  An appropriate credit line
+     would be - "This product contains/uses data originally placed in the
+     public domain by Fred Pospeschil and Antonio Riveria that has been
+     modified by Paul Anderson of Global Associates, Ltd. The Original
+     coordinate data was created by the Central Intelligence Agency."
+
+                            
+                            MWDBPOLY.ZIP CONTENTS
+                            =====================
+
+         MWDBPOLY.ZIP contains a MWDBII database that is reasonably up to 
+     date, clean, and modified to provide closed polygons without using an 
+     index file (Index files ARE available).
+
+     The following files are in MWDBPOLY.ZIP:
+
+     GLOBAL.TXT   - About Global Associates, Ltd.
+     GOODEIHS.BAS - Quick Basic program that draws Goode's Homolosine 
+                     projection interrupted for continental unities.  The 
+                     Plot file routines and the way the map is drawn inside 
+                     the "extensions" are NOT the best, but it works. The 
+                     plot files import into Corel Draw with no problems. 
+                     
+                     NOTE: The Open file statements will have to be modified 
+                     to reflect where the *.PNT files are located on your 
+                     system. This program was written for Quick Basic 4.5,
+                     however, it will run (slowly) with the Qbasic interpreter 
+                     that comes with MSDOS.
+     MWDBPOLY.TXT - This document.
+     PBORDER.TXT  - Notes on PBORDER.PNT and VECTOR graphics output.
+     PCOAST.PNT   - Use this file when you don't want Political Borders.
+     PBORDER.PNT  - Use this file in place of PCoast.pnt when you want 
+                     political borders.
+     PUSA48.PNT   - USA internal Political Borders.
+     PCANPROV.PNT - Canadian Internal political Borders.
+     PNTCONV.ZIP  - Two programs that can be used to convert the *.PNT files 
+                     to and from ASCII.
+     PMEXICO.PNT  - Mexican Internal Political Borders
+     PAUST.PNT    - Australian Internal Political Borders.
+     PISLAND.PNT  - Islands of the world.
+     PLAKE.PNT    - Lakes of the world.
+     RIVER.PNT    - Rivers of the world. Original MWDB II file (No Polygons).
+     SELECT.EXE   - This program is from the original MWDB II distribution 
+                     disks. You can use it to: 
+                
+                     1) Combine all the *.pnt files into 1 (one) file.
+                                           Or
+                     2) Create *.PNT/*.MAP/*.ALL or *.CCI files containing 
+                         less data.
+         
+     ------------------------------------------------------------------------
+     MWDB-POLY can be used AS IS with the following programs:           
+     
+       1) Charles Culberson's VersaMAP (70511.3134@compuserve.com)
+       2) Philip Voxland's WORLD (voxland@atlas.socsci.umn.edu)
+       3) Daan Strebe's GeoCART [MAC] http://terradata.com/
+       4) Scott Loomer's MicroCAM and WinCAM
+          ftp://ftp.usma.edu/g&ene/gsl/microcam/          
+          - or -
+          http://wolf.its.ilstu.edu/microcam/
+
+     ------------------------------------------------------------------------
+                            
+                            
+                              FINAL NOTES
+                              ===========
+
+         This document is a modified version of the original that is included
+     with the Micro WDB-II database.
+     
+     Additional map data base products may be obtained from:
+
+      Fred Pospeschil (AKA Micro Doc)
+      2739 42nd St.
+      Two Rivers, WI 54241-1111 
+
+      E-mail: fwp@excel.net 
+
+      - and -
+
+      Charles Culberson
+      8 Ritter Lane
+      Newark, DE  19711
+
+     The MWDB-POLY database is released to the Public Domain by: 
+
+      Global Associates, Ltd.
+      Suite 206
+      1206 Laskin Road
+      Virginia Beach, Va.
+
+      Ph. (804) 428-4902
+     
+     =====================================================================    
+         ALL USERS OF THESE MATERIALS ARE TOTALLY RESPONSIBLE FOR THEIR
+     USE AS THESE MATERIALS ARE PROVIDED WITHOUT EITHER EXPRESS OR IMPLIED
+     WARRANTIES OF ANY KIND.
+     =====================================================================

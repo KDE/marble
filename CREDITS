@@ -1,0 +1,10 @@
+Credits for various inspiration go to:
+
+	Daniel Molkentin,
+	Stefan Jordan
+	Nikolaus Zimmermann
+	Matthias Welwarsky (for a Windows app compile)
+	 tbscope@gmail.com
+	Josef Spillner -- for FIFO-bump mapping optimizations
+	Martin Konold -- optimiziation suggestions in TexColorizer
+	Frerich Raabe -- various FreeBSD fixes and Optimizations

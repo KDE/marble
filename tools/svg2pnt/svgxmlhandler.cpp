@@ -1,0 +1,90 @@
+#include "svgxmlhandler.h"
+#include <QDebug>
+
+SVGXmlHandler::SVGXmlHandler(const QString& targetfile){
+	m_header=8000;
+	m_pointnum=0;
+	m_initialized=false;
+	m_targetfile=targetfile;
+}
+
+bool SVGXmlHandler::startElement(const QString& namensraum, const QString& localName, const QString& qName, const QXmlAttributes& atts){
+	qDebug();
+	if (qName == "g"){
+		qDebug("Parsing Data ...");
+		m_initialized = true;
+	}
+
+	if (qName == "path" && m_initialized == true){
+		QString coordinates=atts.value("d");
+//		qDebug() << "Bitte" << coordinates;
+		QStringList stringlist;
+		coordinates.chop(2);
+		stringlist << coordinates.mid(1).split("L");
+// the last element is the first element
+//		stringlist.removeLast();
+		QString str;
+
+		bool firstheader = true;
+
+		QFile file( m_targetfile );
+		file.open( QIODevice::Append );
+		QDataStream stream( &file );  // read the data serialized from the file
+		stream.setByteOrder( QDataStream::LittleEndian );
+
+		int count = 0;
+		qDebug() << "Starting to write path" << atts.value("id");
+		foreach (str, stringlist){
+//			qDebug()<<str;
+			float x, y;
+			x = str.section(",",0,0).toFloat();
+			y = str.section(",",1,1).toFloat();
+			
+//			qDebug() << "x:" << x << "y:" << y;
+			
+			short header, lat, lng;	
+
+			if (firstheader == true){
+				header=m_header;
+				firstheader = false;
+			}
+			else {
+				if (stringlist.size() > 14){
+					if (count%9 == 0) header = 5;
+					else {
+						if (count%5 == 0) header = 3;
+						else{
+							if (count%2 == 0) header = 2;
+							else header = 1;
+						}
+					}
+				}
+				else {
+
+					if (stringlist.size() > 6){
+						if (count%2 == 0) header = 3;
+						else header = 1;
+					}
+					else{
+						header = 2;
+					}
+				}
+			}
+			if (count == stringlist.size()-1) header = 5;
+
+			lng=(int)(x*50-10800);
+			lat=-(int)(y*50-5400);
+
+			qDebug() << "lng:" << lng << "lat:" << lat << "header:" << header << "node#:" << m_pointnum;
+
+			stream << header << lat << lng;	
+			m_pointnum++;	
+			count++;		
+		}
+		
+		m_header++;
+
+	} 
+	return true;
+}
+

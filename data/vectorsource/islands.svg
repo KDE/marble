@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="216.00000px"
+   height="108.00000px"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.42.2"
+   sodipodi:docbase="/home/tackat/globepedia/data/vectorsource"
+   sodipodi:docname="islands.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path2582"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(-5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="20.217391"
+     inkscape:cx="236.52376"
+     inkscape:cy="62.586239"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1024"
+     inkscape:window-height="702"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     showguides="false"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       orientation="horizontal"
+       position="71.285782"
+       id="guide2149" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="230.84888"
+       id="guide2151" />
+    <sodipodi:guide
+       orientation="vertical"
+       position="232.79976"
+       id="guide2153" />
+    <sodipodi:guide
+       orientation="horizontal"
+       position="70.058616"
+       id="guide2155" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <image
+       id="image1367"
+       height="108.00000"
+       width="216.00000"
+       sodipodi:absref="/home/tackat/globepedia-data/world.topo.bathy.200407.3x10800x5400.B.jpg"
+       xlink:href="/home/tackat/globepedia-data/world.topo.bathy.200407.3x10800x5400.B.jpg"
+       x="216.00000"
+       y="0.0000000"
+       sodipodi:insensitive="true" />
+<!--    
+    <image
+	  id="image1367"
+	  height="108.00000"
+	  width="216.00000"
+	  sodipodi:absref="/home/tackat/globepedia-data/world.topo.bathy.200407.3x10800x5400.B.jpg"
+	  xlink:href="/home/tackat/globepedia-data/world.topo.bathy.200407.3x10800x5400.B.jpg"
+	  x="216.0000000000"
+	  y="0.0000000000"
+	  sodipodi:insensitive="true" /> -->    <path
+       style="opacity:1.0000000;color:#000000;fill:#ff0000;fill-opacity:0.50196081;fill-rule:evenodd;stroke:#000000;stroke-width:0.010000003;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
+       d="M 222.18524,45.168752 L 222.15278,45.183062 L 222.15008,45.225991 L 222.18254,45.257472 L 222.21500,45.240301 L 222.33944,45.266058 L 222.42872,45.308989 L 222.48825,45.331884 L 222.59916,45.317575 L 222.64245,45.248888 L 222.62892,45.225991 L 222.68033,45.200234 L 222.71820,45.203096 L 222.79936,45.154443 L 222.87782,45.151580 L 222.96980,45.085754 L 222.99415,45.008481 L 222.95357,44.948380 L 222.81289,44.939794 L 222.74796,44.911174 L 222.64245,44.939794 L 222.59105,44.976999 L 222.54776,44.971275 L 222.51260,45.031378 L 222.18524,45.168752 z "
+       id="path2936" />
+    <path
+       style="opacity:1.0000000;color:#000000;fill:#ff0000;fill-opacity:0.50196081;fill-rule:evenodd;stroke:#000000;stroke-width:0.010000003;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
+       d="M 221.82543,44.178508 L 221.65499,44.335918 L 221.63876,44.364538 L 221.64147,44.398881 L 221.66311,44.430363 L 221.72534,44.433225 L 221.79026,44.370262 L 221.82543,44.370262 L 221.84978,44.321608 L 221.87412,44.307298 L 221.87412,44.230025 L 221.85249,44.221439 L 221.84978,44.189957 L 221.82543,44.178508 z "
+       id="path2938" />
+    <path
+       style="opacity:1.0000000;color:#000000;fill:#ff0000;fill-opacity:0.50196081;fill-rule:evenodd;stroke:#000000;stroke-width:0.010000003;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1.0000000;visibility:visible;display:inline;overflow:visible"
+       d="M 222.18794,43.972448 L 222.19066,43.943827 L 222.30158,43.915207 L 222.38814,43.909484 L 222.56399,43.863692 L 222.67221,43.852244 L 222.66139,43.875139 L 222.55317,43.900897 L 222.46119,43.918069 L 222.38814,43.949551 L 222.31781,43.946689 L 222.23664,43.983894 L 222.18794,43.972448 z "
+       id="path2942" />
+  </g>
+</svg>

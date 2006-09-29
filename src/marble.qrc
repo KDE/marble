@@ -1,0 +1,21 @@
+<RCC>
+    <qresource>
+        <file>../data/bitmaps/cursor_bc.xpm</file>
+        <file>../data/bitmaps/cursor_bl.xpm</file>
+        <file>../data/bitmaps/cursor_br.xpm</file>
+        <file>../data/bitmaps/cursor_cl.xpm</file>
+        <file>../data/bitmaps/cursor_cr.xpm</file>
+        <file>../data/bitmaps/cursor_tc.xpm</file>
+        <file>../data/bitmaps/cursor_tl.xpm</file>
+        <file>../data/bitmaps/cursor_tr.xpm</file>
+    </qresource>
+    <qresource>
+        <file>icons/back.png</file>
+        <file>icons/down.png</file>
+        <file>icons/forward.png</file>
+        <file>icons/gohome.png</file>
+        <file>icons/up.png</file>
+        <file>icons/viewmag+.png</file>
+        <file>icons/viewmag-.png</file>
+    </qresource>
+</RCC>

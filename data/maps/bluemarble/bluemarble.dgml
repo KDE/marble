@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
+	<MapStyle>
+
+		<name>Satellite View</name>
+
+		<prefix>bluemarble</prefix>
+		<icon>bluemarble-preview.png</icon>
+
+		<description>Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA’s Earth Observatory </description>
+		
+		<layer type="bitmap" name="bluemarble"/>
+
+		<installmap>bluemarble.jpg</installmap>
+
+	</MapStyle>
+</DeskGlobeML>

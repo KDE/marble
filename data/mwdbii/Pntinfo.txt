@@ -1,0 +1,62 @@
+Subject: PNT file format
+From: Paul B. Anderson (804) 853-7595 E-mail: pbander@infi.net
+
+  The PNT format was devised by Fred Popeschil and Antonio Rivera for their
+public domain Micro World Data Bank II (MWDBII) data base.  The PNT file is
+a binary file where each full record consists of 3 short integer values. 
+
+				Possible
+  1st short Integer value:	Header Values	Feature
+				-------------	-------
+				1		Data Level 
+				2		Data Level
+				3		Data Level
+				4		Data Level
+				5		Data Level
+				1000 -> 1999	coastlines
+				2000 -> 2999	country
+				4000 -> 4999	internal political borders
+  				5000 -> 5999	island
+				6000 -> 6999	lake
+				7000 -> 7999	river
+ 
+   2nd short Integer value:   Latitude in signed minutes (+/- 5400)
+
+   3rd short Integer value:   Longitude in signed minutes (+/- 10800)
+
+POLYLINES:
+Latitude and longitude data in PNT files are arranged into polylines (or
+spaghetti). As an example (from MWDB-POLY), France is one polyline. All the
+lat/lon data points that make up France's coastlines and political borders
+are in one continuous line. 
+
+HEADER:
+The start of a new polyline is Indicated by a header value that is greater
+than 5. The list above, indicates all the possible polyline starting values.
+
+DATA LEVEL:
+The data level (1 -> 5) determines the amount of detail in your map.  When
+writing programs using this data, level 1 is full detail and level 5 is the
+least amount of detail.
+
+Level 1 -> plot all data points => 1
+Level 2 -> plot all data points => 2
+Level 3 -> plot all data points => 3
+Level 4 -> plot all data points => 4
+Level 5 -> plot all data points = 5
+
+The start of each new polyline is understood to be at level 5.  The end
+of each polyline will be at level 5.
+
+NOTEs: 
+
+Because the Short Integer is used, all latitude and longitude values
+are ROUNDED TO THE NEAREST MINUTE. This limits the usefulness of this
+data to small scale maps only.
+
+Multiply the 2nd or 3rd short integer values by 2.908882086657222D-04
+to go from signed minutes straight to Radians.
+ 
+Divide the 2nd or 3rd short integer values by 60 to go from signed minutes
+straight to Decimal Degrees.
+ 

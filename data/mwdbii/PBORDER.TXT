@@ -1,0 +1,258 @@
+ PBorder.TXT - General Notes and PolyLine breakdown of PBorder.pnt
+ 
+ You May have noticed the unusual drawing order of the polylines.
+ 
+ Some programs such as VersaMap can use this database, but can't
+ provide a fill capability. When importing the map program's vector 
+ output into a draw program the interior of each polygon will have 
+ no color. As a result, to select a polygon you have to click on 
+ the polygon's border.
+
+ To provide a standard area for selecting ANY polygon (in the Draw 
+ Program), each one is drawn so that its EASTERN border is on top of 
+ any other polygon around it.
+ 
+ Once a polygon has a fill color you can click anywhere on the fill 
+ to select it.
+ 
+ Problem Areas to Watch for:
+ ---------------------------
+ 
+ PROBLEM AREA #1:
+ At Data base Levels 1 & 2 a number of polylines in PBorder.pnt, PCoast.pnt,  
+ PIsland.pnt, and PCanProv.pnt exceed the maximum number of points (NODES) 
+ in a polyline imposed by MicroCAM (MicroCAM will display a message when 
+ it breaks a polyline), VersaMap (1999 nodes), and the "IMPORT" filters of 
+ most Draw Programs (usually 1801 nodes for HPGL, 1999 nodes for most other 
+ vector formats). 
+ 
+ I understand that some CAD programs don't have this problem.
+ 
+ Once the graphic is in a Draw Program you can manually connect the broken
+ nodes and save it in the Draw Program's Native File format; the polygons 
+ will remain intact.
+ 
+ Tip: To get at the broken nodes grab the corners of the graphic and enlarge
+      it to the Maximum size the Draw program will allow (Page size of 30 in. 
+      by 30 in. for Corel Draw).
+
+ If you "EXPORT" the file to another vector format the polygons that
+ exceed the MAX NODE LIMIT will be broken again.
+ 
+ Use of SELECT.EXE from the original MWDB II may be helpful here if your
+ map program doesn't allow changing the database point level.
+
+ PROBLEM AREA #2: Related to problem area #1 (broken polylines) is the
+ fact that programs with a zoom capability or the ability to change the
+ central latitude/longitude of the projection will break the polygon 
+ when the polyline intersects the map's borders. These areas still
+ have to be fixed with the draw program you use.
+ 
+ PROBLEM AREA #3:
+ Avoid "MIXING" MWDB-POLY with data from older versions of MWDB II. Gaps 
+ and overlays WILL occur in areas where the new border intersections 
+ were added.
+ 
+ -----
+ 
+ Polyline Data for PBorder.pnt (in Minutes)
+
+ Poly   Max    Min    Max    Min
+ Line   Lat    Lat    Lon    Lon     Country
+ ----  -----  -----  -----  -----   ---------
+ 
+ -- South America --
+ 
+ 2001    316  -2024  -2087  -4441   Brazil [1]
+ 2002  -1806  -2099  -3186  -3506   Uruguay
+ 2003  -1158  -1655  -3255  -3758   Paraguay
+ 2004   -581  -1374  -3447  -4179   Bolivia 1
+ 2005   -963   -976  -4131  -4148   Bolivia 2 (on West bank, Lake Titacaca)
+ 2006  -1307  -3143  -3219  -4415   Argentina 1
+ 2007  -3159  -3303  -3908  -4118   Argentina 2 (Tierra Del Fuego)
+ 2008  -3147  -3297  -4117  -4321   Chile 1 (Tierra Del Fuego)
+ 2009  -1050  -3233  -4020  -4543   Chile 2 [1]
+ 2010    347    127  -3099  -3276   French Guiana
+ 2011    360    110  -3239  -3484   Suriname
+ 2012    512     71  -3388  -3683   Guyana
+ 2013    732     39  -3588  -4403   Venezuela
+ 2014    748   -253  -4012  -4743   Colombia
+ 2015     -2  -1101  -4120  -4881   Peru
+ 2016     86   -300  -4513  -4861   Ecuador
+ 
+ -- Central America --
+ 
+ 2017    577    432  -4629  -4983   Panama
+ 2018    563    533  -4771  -4805   Panama Canal Zone
+ 2019    673    482  -4953  -5157   Costa Rica
+ 2020    901    642  -4988  -5261   Nicaragua
+ 2021    962    778  -4988  -5361   Honduras
+ 2022    867    789  -5262  -5406   El Salvador
+ 2023   1109    954  -5285  -5353   Belize
+ 2024   1069    825  -5293  -5535   Guatemala
+ 
+ -- Caribbean Island with National borders --
+
+ 2025   1196   1056  -4099  -4320   Dominican Republic
+ 2026   1197   1082  -4298  -4469   Haiti
+ 
+ -- North America --
+
+ 2027   1963    873  -5204  -7027   Mexico [1]
+ 2028   2963   1507  -4018  -7483   USA - Lower 48 [1]
+ 2029   4320   2515  -3337  -8460   Canada [1]
+ 2030   4284   3286  -7799 -10088   USA - Alaska [1]
+ 
+ -- Asia --
+
+ 2031   4664   2471  10800 -10789   Russia 1 [1]     
+ 2032   2317   2057   7775   7567   South Korea
+ 2033   2580   2260   7841   7459   North Korea
+ 2034   3213   1214   8086   4417   China
+ 2035   3129   2492   7194   5262   Mongolia
+ 2036   3326   2456   5239   2790   Kazakhstan [1]
+ 2037   -155   -642   9053   8451   Papua New Guinea
+ 2038    -21   -548   8460   7857   Indonesia (part of New Guinea)
+ 2039    263   -251   7141   6531   Indonesia - Kalimantan (on Borneo)
+ 2040    421     51   7157   6573   Malaysia - Sarawak & Sabah (on Borneo)
+ 2041    303    241   6922   6845   Brunei (on Borneo)
+ 2042   1403    514   6568   6128   Vietnam
+ 2043    882    623   6458   6140   Kampuchea (Cambodia)
+ 2044   1350    835   6462   6005   Laos  
+ 2045   1227    338   6338   5841   Thailand
+ 2046    403     76   6258   6007   Malaysia
+ 2047   1713    599   6070   5532   Myanmar (Burma)
+ 2048   2159    484   5844   4088   India
+ 2049   1598   1245   5560   5283   Bangladesh
+ 2050   1699   1602   5527   5325   Bhutan
+ 2051   1827   1581   5292   4803   Nepal
+ 2052   2224   1421   4669   3652   Pakistan
+ 2053   2594   2351   4817   4157   Kyrgyzstan
+ 2054   2462   2201   4511   4044   Tajikistan
+ 2055   2308   1763   4494   3630   Afganistan
+ 2056   2736   2231   4388   3360   Uzbekistan
+ 2057   2567   2108   4001   3146   Turkmenistan
+ 2058   2387   1505   3800   2642   Iran
+ 2059   2514   2304   3024   2700   Azerbaijan 1
+ 2060   2615   2462   2803   2401   Georgia
+ 2061   2478   2330   2797   2607   Armenia
+ 2062   2387   2331   2769   2686   Azerbaijan 2
+ 2063   2526   2149   2689   1564   Turkey 1
+ 2064   1805   1712   2905   2793   Kuwait
+ 2065   2243   1746   2914   2328   Iraq
+ 2066   2239   1939   2542   2137   Syria
+ 2067   2082   1984   2198   2106   Lebanon 
+ 2068   1569   1473   3097   3045   Qatar
+ 2069   1499    998   3591   3113   Oman 1
+ 2070   1583   1536   3391   3365   Oman 2
+ 2071   1565   1350   3383   3067   United Arab Emirates
+ 2072   1140    756   3185   2557   Yeman
+ 2073   1934    937   3340   2074   Saudi Arabia
+ 2074   2003   1751   2358   2098   Jordan
+ 2075   1953   1881   2134   2093   Westbank
+ 2076   1997   1769   2141   2056   Israel
+ 2077   1895   1873   2074   2053   Gaza Strip
+ 
+ -- Europe --
+
+ 2078   4205   3588   1895   1235   Finland
+ 2079   4267   3479   1864    296   Norway [1]
+ 2080   4143   3320   1450    666   Sweden
+ 2081   3580   3451   1693   1404   Estonia
+ 2082   3370   3075   1966   1390   Belarus
+ 2083   3485   3340   1693   1258   Latvia
+ 2084   3387   3234   1611   1263   Lithuania 1
+ 2085   3343   3317   1268   1256   Lithuania 2
+ 2086   3317   3260   1373   1176   Russia 2
+ 2087   3143   2663   2413   1329   Ukraine
+ 2088   3290   2940   1449    848   Poland
+ 2089   2977   2864   1353   1010   Slovakia
+ 2090   3063   2913   1132    726   Czech Republic
+ 2091   2909   2727   1809   1597   Moldova
+ 2092   2896   2617   1782   1216   Romania
+ 2093   2653   2475   1716   1342   Bulgaria
+ 2094   2527   2403   1746   1562   Turkey 2
+ 2095   2505   2183   1598   1201   Greece
+ 2096   2541   2451   1382   1227   Macedonia
+ 2097   2770   2507   1380   1108   Yugoslavia
+ 2098   2560   2379   1263   1157   Albania
+ 2099   2715   2546   1178    941   Bosnia and Herzegovina 1
+ 2100   2583   2544   1111   1020   Bosnia and Herzegovina 2
+ 2101   2792   2577   1168    810   Croatia
+ 2102   2915   2745   1374    966   Hungary
+ 2103   2941   2783   1029    572   Austria
+ 2104   2813   2725    991    803   Slovinia
+ 2105   2826   2275   1111    397   Italy
+ 2106   2639   2634    751    744   San Marino
+ 2107   3295   2836    902    352   Germany 1
+ 2108   3250   3230    854    825   Germany 2
+ 2109   3464   3288    657    485   Denmark
+ 2110   2836   2824    578    568   Liechtenstein
+ 2111   2868   2749    629    358   Switzerland
+ 2112   3208   3045    433    202   Netherlands
+ 2113   3011   2967    391    344   Luxembourg
+ 2114   3090   2970    384    153   Belgium
+ 2115   3065   2540    494   -287   France
+ 2116   2560   2547    109     87   Andorra
+ 2117   2626   2624    446    443   Monaco
+ 2118   2628   2160    201   -557   Spain
+ 2119   2529   2219   -371   -570   Portugal
+ 2120   2169   2166   -322   -323   Gibraltar
+ 2121   3349   2997    106   -343   England
+ 2122   3520   3278   -105   -374   Scotland
+ 2123   3201   3083   -160   -319   Wales
+ 2124   3315   3242   -326   -490   Northern Ireland
+ 2125   3322   3087   -360   -628   Ireland
+ 
+ -- Africa --
+
+ 2126    720   -100   3085   2459   Somalia
+ 2127    762    656   2605   2506   Djibouti
+ 2128   1081    742   2587   2187   Eritrea
+ 2129    893    206   2879   1979   Ethiopia
+ 2130   1388    209   2316   1310   Sudan
+ 2131   1899   1303   2149   1483   Egypt
+ 2132   1990   1170   1509    558   Libya
+ 2133   1410    447   1440    808   Chad
+ 2134    277   -280   2515   2037   Kenya
+ 2135    253    -89   2102   1774   Uganda
+ 2136    -59   -704   2427   1775   Tanzania
+ 2137    -64   -170   1854   1731   Rwanda
+ 2138   -138   -268   1851   1739   Brundi
+ 2139   -628  -1612   2451   1813   Mozambique
+ 2140   -562  -1028   2155   1961   Malawi
+ 2141   -937  -1345   1984   1514   Zimbabwe
+ 2142   -494  -1085   2022   1320   Zambia
+ 2143    323   -807   1877    732   Zaire
+ 2144    660    133   1649    865   Central African Republic
+ 2145  -1327  -2089   1973    988   South Africa 1
+ 2146  -1714  -1840   1767   1621   Lesotho
+ 2147  -1544  -1638   1928   1848   Swaziland
+ 2148  -1067  -1614   1762   1200   Botswana
+ 2149   -350  -1082   1445    704   Angola
+ 2150  -1019  -1738   1516    703   Namibia
+ 2151  -1358  -1394    885    865   South Africa 2
+ 2152    223   -301   1119    670   Congo
+ 2153   -263   -347    785    721   Cabinda
+ 2154    771     99    972    510   Cameroon
+ 2155    140   -237    872    522   Gabon
+ 2156    141     60    681    561   Rio Muni
+ 2157    833    256    880    161   Nigeria
+ 2158   1411    705    959     10   Niger
+ 2159   2240   1814    695    450   Tunisia
+ 2160   2225   1139    719   -520   Algeria
+ 2161    744    373    231     47   Benin
+ 2162    668    366    108     -9   Togo
+ 2163    670    284     72   -195   Ghana
+ 2164    905    564    144   -331   Burkina Faso
+ 2165    644    261   -149   -516   Cote D'Ivore
+ 2166   1500    608    255   -735   Mali
+ 2167   2155   1660    -61   -790   Morocco
+ 2168   1637    883   -288  -1024   Mauritania
+ 2169   1660   1246   -520  -1026   Western Sahara
+ 2170    514    261   -442   -689   Liberia
+ 2171    761    432   -459   -905   Guinea
+ 2172    600    415   -615   -798   Sierra Leone
+ 2173   1002    738   -681  -1052   Senegal
+ 2174    830    782   -828  -1010   Gambia
+ 2175    761    655   -819  -1003   Guinea-Bissau
