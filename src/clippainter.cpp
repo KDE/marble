@@ -17,7 +17,7 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){
 
 void ClipPainter::drawPolygon ( const QPolygon & pa, Qt::FillRule fillRule ){
 
-	m_clip = false;
+//	m_clip = false;
 
 	if (m_clip == true){	
 		drawPolyobject( pa );
@@ -33,7 +33,7 @@ void ClipPainter::drawPolygon ( const QPolygon & pa, Qt::FillRule fillRule ){
 
 void ClipPainter::drawPolyline ( const QPolygon & pa ){
 
-	m_clip = false;
+//	m_clip = false;
 
 	if (m_clip == true){	
 		drawPolyobject( pa );
