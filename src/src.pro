@@ -51,6 +51,8 @@ FORMS = katlastoolbox.ui katlastilecreatordialog.ui
 OPTIONS = release
 QMAKE_CXX_FLAGS_RELEASE += -O2 -msse
 
+DEFINES -=KDEBUILD
+
 QT += xml svg
 
 win32 {
