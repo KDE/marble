@@ -3,6 +3,10 @@
 #include <QDebug>
 #include "katlasmapscale.h"
 
+#ifdef KDEBUILD
+#include "katlasmapscale.moc"
+#endif
+
 const double earthdiameter = 6378.0;
 
 KAtlasMapScale::KAtlasMapScale(QObject* parent) : QObject(parent) {

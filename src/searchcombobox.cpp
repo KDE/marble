@@ -13,6 +13,10 @@
 #include <QAbstractItemView>
 #include "searchcombobox.h"
 
+#ifdef KDEBUILD
+#include "searchcombobox.moc"
+#endif
+
 SearchComboBox::SearchComboBox(QWidget* parent):QComboBox(parent){
 //	showPopup();
 //	connect(this, SIGNAL(editTextChanged(QString)), SLOT(showListView(QString)));

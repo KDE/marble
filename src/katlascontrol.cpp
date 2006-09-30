@@ -4,6 +4,10 @@
 #include <QStringListModel>
 
 #include "katlastoolbox.h"
+#ifdef KDEBUILD
+#include "katlastoolbox.moc"
+#include "katlascontrol.moc"
+#endif
 
 KAtlasControl::KAtlasControl(QWidget *parent)
    : QWidget(parent)

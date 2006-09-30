@@ -3,6 +3,11 @@
 #include <QTimer>
 #include "tilescissor.h"
 
+#ifdef KDEBUILD
+#include "katlastilecreatordialog.moc"
+#endif
+
+
 KAtlasTileCreatorDialog::KAtlasTileCreatorDialog(QWidget *parent) : QDialog(parent) {
 
 	setupUi(this);

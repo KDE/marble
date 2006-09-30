@@ -11,6 +11,10 @@
 #include <QDebug>
 #include <QStandardItemModel>
 #include "searchlistview.h"
+#ifdef KDEBUILD
+#include "searchlistview.moc"
+#endif
+
 
 SearchListView::SearchListView(QWidget* parent):QListView(parent){
 	connect(this, SIGNAL(activated(const QModelIndex&)), this, SIGNAL(centerOn(const QModelIndex&)));

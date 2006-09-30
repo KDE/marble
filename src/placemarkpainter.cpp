@@ -7,7 +7,12 @@
 #include "placemark.h"
 #include "katlasdirs.h"
 
+#ifdef KDEBUILD
+#include "placemarkpainter.moc"
+#endif
+
 #include <QDebug>
+
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	m_font = QFont("Sans Serif",8,QFont::Normal);

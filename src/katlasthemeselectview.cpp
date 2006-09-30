@@ -1,5 +1,10 @@
 #include "katlasthemeselectview.h"
 
+#ifdef KDEBUILD
+#include "katlasthemeselectview.moc"
+#endif
+
+
 #include <QResizeEvent>
 
 KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)

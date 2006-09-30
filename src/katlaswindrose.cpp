@@ -8,6 +8,10 @@
 
 #include <QDebug>
 
+#ifdef KDEBUILD
+#include "katlaswindrose.moc"
+#endif
+
 const double earthdiameter = 6378.0;
 
 KAtlasWindRose::KAtlasWindRose(QObject* parent) : QObject(parent) {

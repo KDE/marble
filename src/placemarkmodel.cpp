@@ -7,6 +7,10 @@
 #include <QDebug>
 #include <QTime>
 
+#ifdef KDEBUILD
+#include "placemarkmodel.moc"
+#endif
+
 PlaceMarkModel::PlaceMarkModel(QObject* obj) : QStandardItemModel(obj){
 	QModelIndex parent;
 //	parent = index(0, 0, parent);

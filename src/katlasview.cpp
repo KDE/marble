@@ -12,6 +12,10 @@
 #include "quaternion.h"
 #include "texcolorizer.h"
 
+#ifdef KDEBUILD
+#include "katlasview.moc"
+#endif
+
 KAtlasView::KAtlasView(QWidget *parent)
     : QWidget(parent)
 {

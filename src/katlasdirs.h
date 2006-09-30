@@ -30,7 +30,7 @@ class KAtlasDirs
 
     static QString localDir() 
 	{ 
-		return QString( QDir::homePath() + "/.globepedia/data");	// local path
+		return QString( QDir::homePath() + "/.katlas/data");	// local path
 	}
 
 };
