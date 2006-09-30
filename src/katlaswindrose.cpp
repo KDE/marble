@@ -46,7 +46,7 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, i
 	QPainter painter(&m_pixmap);
 
 	painter.setRenderHint(QPainter::Antialiasing, true);
-	painter.setPen(QColor(Qt::black));
+	painter.setPen( Qt::black );
 	painter.setBrush(QColor(192,192,192,192));
 
 	QString dirstr = tr("N");
@@ -60,7 +60,7 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, i
 
 	QPen outlinepen( QColor( 192,192,192,192 ) );
 	outlinepen.setWidth( 2 );
-	QBrush outlinebrush( QColor( Qt::black ) );
+	QBrush outlinebrush( Qt::black );
 
 	QPainterPath outlinepath;
 	const QPointF baseline( 0.5f * (float)( m_width - m_fontwidth ) , (float)(m_fontheight) + 2.0f );
