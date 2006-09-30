@@ -2,19 +2,28 @@ project(marble)
 
 option(QTONLY  "Build Qt only")
 
+find_package(Qt4 REQUIRED)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
-# search packages used by KDE
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include (MacroLibrary)
+if (NOT QTONLY)
+  # search packages used by KDE
+  find_package(KDE4 REQUIRED)
+  include (KDE4Defaults)
+  include (MacroLibrary)
+endif (NOT QTONLY)
 
-add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -DQT3_SUPPORT -msse -DKDEBUILD)
+
+if (QTONLY)
+  add_definitions (${QT_DEFINITIONS} -msse)
+  include_directories (${CMAKE_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${QT_INCLUDE_DIR})
+else (QTONLY)
+  add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -msse -DKDEBUILD)
+  include_directories (${CMAKE_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+endif (QTONLY)
+
 link_directories (${QT_LIBRARY_DIR})
-include_directories (${CMAKE_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
-
 
 set(marble_SRCS
 	fastmath.cpp
@@ -53,44 +62,20 @@ set(marble_SRCS
 set (marble_UI katlastilecreatordialog.ui
 	   katlastoolbox.ui)
 
-#create the implementation files from the ui files and add them to the list of sources
-#usage: KDE4_QTONLY_ADD_UI_FILES(foo_SRCS ${ui_files})
-macro (KDE4_QTONLY_ADD_UI_FILES _sources )
-   foreach (_current_FILE ${ARGN})
-
-      get_filename_component(_tmp_FILE ${_current_FILE} ABSOLUTE)
-      get_filename_component(_basename ${_tmp_FILE} NAME_WE)
-      set(_header ${CMAKE_CURRENT_BINARY_DIR}/ui_${_basename}.h)
-
-      # we need to run uic and replace some things in the generated file
-      # this is done by executing the cmake script kde4uic_qtonly.cmake
-      add_custom_command(OUTPUT ${_header}
-         COMMAND ${CMAKE_COMMAND}
-         ARGS
-         -DKDE4_HEADER:BOOL=ON
-         -DKDE_UIC_EXECUTABLE:FILEPATH=${QT_UIC_EXECUTABLE}
-         -DKDE_UIC_FILE:FILEPATH=${_tmp_FILE}
-         -DKDE_UIC_H_FILE:FILEPATH=${_header}
-         -DKDE_UIC_BASENAME:STRING=${_basename}
-	 -P ${CMAKE_SOURCE_DIR}/kde4uic_qtonly.cmake
-         MAIN_DEPENDENCY ${_tmp_FILE}
-      )
-      list(APPEND ${_sources} ${_header})
-   endforeach (_current_FILE)
-endmacro (KDE4_QTONLY_ADD_UI_FILES)
-
 if (QTONLY)
-kde4_qtonly_add_ui_files(marble_SRCS ${marble_UI} )
+  qt4_wrap_ui(marble_SRCS ${marble_UI})
+  qt4_automoc(${marble_SRCS})
 else (QTONLY)
-kde4_add_ui_files(marble_SRCS ${marble_UI} )
+  kde4_add_ui_files(marble_SRCS ${marble_UI})
+  kde4_automoc(${marble_SRCS})
 endif (QTONLY)
 
-
-
-kde4_automoc(${marble_SRCS})
-
 #kde4_add_library (marble SHARED ${marble_SRCS})
-kde4_add_executable (marble ${marble_SRCS})
+if (QTONLY)
+  add_executable (marble ${marble_SRCS})
+else (QTONLY)
+  kde4_add_executable (marble ${marble_SRCS})
+endif (QTONLY)
 
 if (QTONLY)
 	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY})
@@ -99,7 +84,7 @@ else (QTONLY)
 endif (QTONLY)
 
 #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
-install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
+install (TARGETS marble DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
 #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 
 install (FILES
