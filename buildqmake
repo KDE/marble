@@ -2,4 +2,4 @@
 cd src
 touch `grep .moc *.cpp | perl -p -i -e 's/.*include "//' | perl -p -i -e 's/"//'`
 cd ..
-qmake marble.pro
+$1 marble.pro
