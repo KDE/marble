@@ -1,0 +1,20 @@
+
+The data in the cities.txt file consists of data provided in 
+
+http://www.world-gazetteer.com/st/popdata.zip
+
+It's reduced down to all entries which provide lat/long data and which describe places with > 15.000 habitants with simplified names. 
+
+Copyright information on:
+
+http://www.world-gazetteer.com/home.htm
+
+all data © 2004 by Stefan Helders 
+
+This project is regarded as a free data provider. Some requests let me precise the copyright information. If you use its data/images the only thing I ask you is to promote this site. If you would like to republish the data presented here, please do not change the data and use a copyright note as described as follows:
+
+© by Stefan Helders www.world-gazetteer.com
+
+If you would like to create a map based on the population figures of this project, please use the following line:
+
+based on population data © by Stefan Helders www.world-gazetteer.com
