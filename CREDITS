@@ -1,10 +1,10 @@
 Credits for various inspiration go to:
 
-	Daniel Molkentin,
-	Stefan Jordan
-	Nikolaus Zimmermann
+	Daniel Molkentin -- For various suggestions and the initial Windows Nullsoft installer support 
+	Stefan Jordan -- suggestion of using quaternions
+	Nikolaus Zimmermann -- various fixes and Optimizations
 	Matthias Welwarsky (for a Windows app compile)
-	 tbscope@gmail.com
-	Josef Spillner -- for FIFO-bump mapping optimizations
+	Josef Spillner -- for help with FIFO-bump mapping optimizations
 	Martin Konold -- optimiziation suggestions in TexColorizer
 	Frerich Raabe -- various FreeBSD fixes and Optimizations
+	Joseph Wenninger -- adding initial cmake support
