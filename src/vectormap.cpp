@@ -8,7 +8,6 @@
 #include <cmath>
 #include <stdlib.h>
 
-#include "fastmath.h"
 #include "clippainter.h"
 #include "pntmap.h"
 

@@ -5,7 +5,6 @@
 #include <QColor>
 #include <cmath>
 
-#include "fastmath.h"
 #include "pntmap.h"
 #include "katlasdirs.h"
 #include "texloader.h"
