@@ -5,10 +5,9 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){
 	imgwidth = pd -> width(); imgheight = pd -> height();
 	currentxpos = currentypos = 0;
 //	firstborder = true;
-	left = 0; right = imgwidth-1;
-	top = 0; bottom = imgheight-1;	
+	left = -1; right = imgwidth;
+	top = -1; bottom = imgheight;	
 
-// qDebug("La");
 
 	m_clip = true;
 //	penblue.setColor(QColor( 0, 0, 255, 255));
@@ -70,11 +69,11 @@ void ClipPainter::drawPolyobject ( const QPolygon & pa ){
 // figure out the section of the current point 
 		currentxpos = 1;
 		if (currentPoint.x() < left) currentxpos = 0;
-		if (currentPoint.x() >= right) currentxpos = 2;
+		if (currentPoint.x() > right) currentxpos = 2;
 							
 		currentypos = 3;
 		if (currentPoint.y() < top) currentypos = 0;
-		if (currentPoint.y() >= bottom) currentypos = 6;
+		if (currentPoint.y() > bottom) currentypos = 6;
 
 		currentpos = currentypos + currentxpos;
 

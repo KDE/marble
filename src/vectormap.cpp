@@ -14,17 +14,24 @@
 const float rad2int = 21600.0 / M_PI;
 
 VectorMap::VectorMap(){
+
+	m_zlimit = 0.0f; m_plimit = 0.0f;
+	m_zBoundingBoxLimit = 0.0f; m_zPointLimit = 0.0f;	
+	imgrx = 0; imgry = 0; imgradius = 0;
+	imgwidth = 0; imgheight = 0;
+
 // Initialising booleans for horizoncrossing
 	horizonpair = false;
 	lastvisible = false;
 	currentlyvisible = false;
 	firsthorizon = false;
 
+	m_radius = 0; m_rlimit = 0;
+
 	m_brush = QBrush(QColor( 0, 0, 0));
 }
 
 VectorMap::~VectorMap(){
-	m_radius = 0;
 }
 
 

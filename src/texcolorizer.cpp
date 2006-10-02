@@ -46,7 +46,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 
 			emboss.buffer = 0;
 		
-			for (int x = 0; x < imgwidth; ++x, ++data, ++coastdata){
+			for (int x = 0; x < imgwidth ; ++x, ++data, ++coastdata){
 
 				// Cheap Embosss / Bumpmapping
 
@@ -83,7 +83,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 
 			const int dy = imgry - y;
 			int rx = (int)sqrt((float)(radius * radius - dy*dy));
-			int xleft = 0; int xright = imgwidth-1;
+			int xleft = 0; int xright = imgwidth;
 
 			if (imgrx-rx > 0){
 				xleft = imgrx - rx; xright = imgrx + rx;
