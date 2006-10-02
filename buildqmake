@@ -1,5 +1,7 @@
 #!/bin/sh
 cd src
 touch `grep .moc *.cpp | perl -p -i -e 's/.*include "//' | perl -p -i -e 's/"//'`
+/usr/share/qt4/bin/qmake src.pro -unix -o Makefile
+perl -pi -e 's/-pipe/-pipe -O2 -msse/g' Makefile
 cd ..
 $1 marble.pro
