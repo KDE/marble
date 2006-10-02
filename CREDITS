@@ -1,6 +1,6 @@
 Credits for various inspiration go to:
 
-	Daniel Molkentin -- For various suggestions and the initial Windows Nullsoft installer support 
+	Daniel Molkentin -- For various suggestions and the initial Windows Nullsoft installer support and for initial hosting in his SVN repository 
 	Stefan Jordan -- suggestion of using quaternions
 	Nikolaus Zimmermann -- various fixes and Optimizations
 	Matthias Welwarsky (for a Windows app compile)
