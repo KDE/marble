@@ -6,11 +6,11 @@
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
-	KAtlasControl gpcontrol(0);
-	gpcontrol.show();
+	KAtlasControl katlascontrol(0);
+	katlascontrol.show();
 	for ( int i = 1; i < argc; ++i ) {
 		if ( QFile::exists( app.arguments().at( i ) ) == true )
-			gpcontrol.addPlaceMarkFile( argv[i] );
+			katlascontrol.addPlaceMarkFile( argv[i] );
 
 		if ( strcmp( argv[ i ], "--timedemo" ) == 0 ) {
 			qDebug( "Running timedemo, stand by..." );
@@ -18,17 +18,17 @@ int main(int argc, char *argv[])
 			t.start();
 
 			for ( int j = 0; j < 100; ++j ) {
-				gpcontrol.moveLeft();
-//				gpcontrol.moveUp();
+				katlascontrol.moveLeft();
+//				katlascontrol.moveUp();
 			}
 /*
 			for ( int j = 0; j < 10; ++j ) {
 
 				for ( int i = 0; i < 5; ++i ){
-					gpcontrol.moveLeft();
+					katlascontrol.moveLeft();
 				}
 				for ( int i = 0; i < 5; ++i ){
-					gpcontrol.moveRight();
+					katlascontrol.moveRight();
 				}
 			}
 */

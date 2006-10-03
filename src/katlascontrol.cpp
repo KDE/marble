@@ -19,14 +19,14 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 	toolbox = new KAtlasToolBox(this);
 	toolbox -> setFixedWidth(185);
 
-	gpview=new KAtlasView(this);
-	gpview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding));
+	katlasview=new KAtlasView(this);
+	katlasview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding));
 
-	gpview->setMinimumZoom( toolbox->minimumZoom() );
+	katlasview->setMinimumZoom( toolbox->minimumZoom() );
 //	QStringListModel* placemarks = new QStringListModel();
 
-//	gpview->getPlaceMarks(placemarks);
-	toolbox -> setLocations(gpview->getPlaceMarkModel());
+//	katlasview->getPlaceMarks(placemarks);
+	toolbox -> setLocations(katlasview->getPlaceMarkModel());
 
 //	toolbox -> setLocations(placemarks);
 
@@ -35,50 +35,50 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 	QHBoxLayout *hlayout = new QHBoxLayout();	
 
 	hlayout->addWidget(toolbox);
-	hlayout->addWidget(gpview);
+	hlayout->addWidget(katlasview);
 	vlayout->addLayout(hlayout);
 
-	connect(toolbox, SIGNAL(goHome()), gpview, SLOT(goHome()));
-	connect(toolbox, SIGNAL(zoomChanged(int)), gpview, SLOT(zoomView(int)));
-	connect(toolbox, SIGNAL(zoomIn()), gpview, SLOT(zoomIn()));
-	connect(toolbox, SIGNAL(zoomOut()), gpview, SLOT(zoomOut()));
+	connect(toolbox, SIGNAL(goHome()), katlasview, SLOT(goHome()));
+	connect(toolbox, SIGNAL(zoomChanged(int)), katlasview, SLOT(zoomView(int)));
+	connect(toolbox, SIGNAL(zoomIn()), katlasview, SLOT(zoomIn()));
+	connect(toolbox, SIGNAL(zoomOut()), katlasview, SLOT(zoomOut()));
 
-	connect(toolbox, SIGNAL(moveLeft()), gpview, SLOT(moveLeft()));
-	connect(toolbox, SIGNAL(moveRight()), gpview, SLOT(moveRight()));
-	connect(toolbox, SIGNAL(moveUp()), gpview, SLOT(moveUp()));
-	connect(toolbox, SIGNAL(moveDown()), gpview, SLOT(moveDown()));
+	connect(toolbox, SIGNAL(moveLeft()), katlasview, SLOT(moveLeft()));
+	connect(toolbox, SIGNAL(moveRight()), katlasview, SLOT(moveRight()));
+	connect(toolbox, SIGNAL(moveUp()), katlasview, SLOT(moveUp()));
+	connect(toolbox, SIGNAL(moveDown()), katlasview, SLOT(moveDown()));
 
-	connect(gpview, SIGNAL(zoomChanged(int)), toolbox, SLOT(changeZoom(int)));
-	connect(toolbox, SIGNAL(centerOn(const QModelIndex&)), gpview, SLOT(centerOn(const QModelIndex&)));
-	connect(toolbox, SIGNAL(selectMapTheme(const QString&)), gpview, SLOT(setMapTheme(const QString&)));
+	connect(katlasview, SIGNAL(zoomChanged(int)), toolbox, SLOT(changeZoom(int)));
+	connect(toolbox, SIGNAL(centerOn(const QModelIndex&)), katlasview, SLOT(centerOn(const QModelIndex&)));
+	connect(toolbox, SIGNAL(selectMapTheme(const QString&)), katlasview, SLOT(setMapTheme(const QString&)));
 }
 
 void KAtlasControl::zoomIn()
 {
-	gpview->zoomIn();
+	katlasview->zoomIn();
 }
 
 void KAtlasControl::zoomOut()
 {
-	gpview->zoomOut();
+	katlasview->zoomOut();
 }
 
 void KAtlasControl::moveLeft()
 {
-	gpview->moveLeft();
+	katlasview->moveLeft();
 }
 
 void KAtlasControl::moveRight()
 {
-	gpview->moveRight();
+	katlasview->moveRight();
 }
 
 void KAtlasControl::moveUp()
 {
-	gpview->moveUp();
+	katlasview->moveUp();
 }
 
 void KAtlasControl::moveDown()
 {
-	gpview->moveDown();
+	katlasview->moveDown();
 }

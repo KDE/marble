@@ -24,7 +24,7 @@ PlaceMarkModel::PlaceMarkModel(QObject* obj) : QStandardItemModel(obj){
         setHeaderData(5, Qt::Horizontal, tr("Lon"));
         setHeaderData(6, Qt::Horizontal, tr("Population"));
 
-	load(KAtlasDirs::path("cities/cities.txt"));
+//	load(KAtlasDirs::path("placemarks/cities.txt"));
 }
 
 void PlaceMarkModel::load(QString filename){
@@ -64,6 +64,7 @@ void PlaceMarkModel::load(QString filename){
 
 	QStringList splitline;
 	int row = 0;
+
 	while(!stream.atEnd()){
 
 		rawline=stream.readLine();
@@ -106,19 +107,31 @@ void PlaceMarkModel::load(QString filename){
 		lat = latstring.left(latstring.size()-2).toFloat();
 		if (latstring.contains("S")) lat=-lat;
 
-		insertRows(row, 1, QModelIndex());
-		setData(index(row, 0, QModelIndex()), name, Qt::EditRole );
-		setData(index(row, 0, QModelIndex()), *placeicon, Qt::DecorationRole );
+		insertRow(row);
+/*
+                QStandardItem *item = new QStandardItem();
+		item->setData(name, Qt::EditRole);
+		item->setData(*placeicon, Qt::DecorationRole );
+                setItem(row, 0, item);
+                item = new QStandardItem();
+		item->setData(lat);
+                setItem(row, 4, item);
+                item = new QStandardItem();
+		item->setData(lng);
+                setItem(row, 5, item);
+*/
+
+		setData(index(row, 0), name, Qt::EditRole);
+		setData(index(row, 0), *placeicon, Qt::DecorationRole );
 
 //		setData(index(row, 1, QModelIndex()), state);
 //		setData(index(row, 2, QModelIndex()), country);
 //		setData(index(row, 3, QModelIndex()), role);
-		setData(index(row, 4, QModelIndex()), lat);
-		setData(index(row, 5, QModelIndex()), lng);
+		setData(index(row, 4), lat);
+		setData(index(row, 5), lng);
 //		setData(index(row, 6, QModelIndex()), population);
 
 		row++;
-//		qDebug("Hallo");
 //		PlaceMark *city = new PlaceMark(name,lat,lng);
 //		append( city );
 

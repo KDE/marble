@@ -35,10 +35,10 @@ public:
 	void moveUp();
 	void moveDown();
 
-	void addPlaceMarkFile( QString filename ){ gpview->addPlaceMarkFile( filename ); }
+	void addPlaceMarkFile( QString filename ){ katlasview->addPlaceMarkFile( filename ); }
 
 private:
-	KAtlasView* gpview;
+	KAtlasView* katlasview;
 	KAtlasToolBox* toolbox;
 };
 
