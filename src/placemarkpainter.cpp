@@ -1,8 +1,12 @@
 #include "placemarkpainter.h"
 
 #include <QAbstractItemModel>
+#include <QDebug>
 #include <QIcon>
+#include <QList>
 #include <QPainter>
+#include <QPoint>
+#include <QX11Info>
 #include "placecontainer.h"
 #include "placemark.h"
 #include "katlasdirs.h"
@@ -15,10 +19,10 @@
 
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
-	m_font = QFont("Sans Serif",8,QFont::Normal);
+	m_font = QFont("Sans Serif",8);
+	m_font.setStyleStrategy(QFont::ForceOutline);
 	m_fontheight = QFontMetrics(m_font).height();
 	m_fontascent = QFontMetrics(m_font).ascent();
-
 	m_citysymbol 
 
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_white.png"))
@@ -44,6 +48,8 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	QImage image( 1000 , m_fontheight, QImage::Format_ARGB32_Premultiplied);
 	image.fill(0); 
 	m_empty = QPixmap::fromImage(image);
+	m_widthscale = 1.15f; // 88.0f / 72.0f;
+//	m_widthscale = float( QX11Info::appDpiX () ) / 72.0f;
 
 }
 
@@ -62,7 +68,7 @@ void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAb
 }
 
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry, int radius, const PlaceContainer* placecontainer, Quaternion rotAxis ){
-
+//	qDebug("START");
 	int imgwidth = 2 * imgrx; int imgheight = 2 * imgry;
 	int x = 0; int y = 0; 
 
@@ -73,7 +79,19 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	painter->setFont(m_font);
 
 	QPixmap textpixmap;
-	QPainter textpainter; // begin?
+	QPainter textpainter;
+
+//	QPen outlinepen( QColor( 255,255,255,160 ) );
+//	outlinepen.setWidth( 1 );
+	QBrush outlinebrush( QColor( 255,255,255,160 ) );
+
+	QPainterPathStroker stroker;
+	stroker.setWidth( 1 );
+
+	QBrush shapebrush( QColor( 0,0,0,255) );
+
+
+	const QPointF baseline( 0.0f , (float)(m_fontascent) );
 
 	PlaceContainer::const_iterator it;
 
@@ -96,27 +114,78 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
 
-				if ( textpixmap.isNull() == true ){
-					int fontwidth = QFontMetrics(m_font).boundingRect(mark->name()).width();
+				int fontwidth = m_widthscale * QFontMetrics(m_font).width(mark->name());
 
-					textpixmap = m_empty.copy( QRect( 0, 0, fontwidth+10, m_fontheight) );
+				bool overlap = false;
 
+				PlaceContainer::const_iterator beforeit;
+
+				const QSize textSize( fontwidth, m_fontheight );
+
+				QPoint bottomRight( x + 2, y );
+				QPoint bottomLeft( x - fontwidth - 2, y );
+				QPoint topRight( x + 2, y - m_fontheight );
+				QPoint topLeft( x - fontwidth - 2, y - m_fontheight );
+				
+
+				QPoint labelplace;
+
+				foreach ( labelplace, QList<QPoint>() << bottomRight << bottomLeft << topRight << topLeft ) { 
+
+					overlap = false;
+					mark->setTextRect( QRect( labelplace, textSize ) );
+
+					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL-Iteratoren
+						PlaceMark* beforemark  = *beforeit; // kein Cast
+
+						if ( ( beforemark->visible() == true ) && ( mark->textRect() ).intersects( beforemark -> textRect()) ){
+								overlap = true;
+								break;
+						}
+					}
+					if ( overlap == false ){
+						
+						break;
+					}
+				}
+
+
+				if ( overlap == false) {
+				if ( textpixmap.isNull() == true ){					
+/*
+					QPainterPath shapepath;
+					shapepath.addText( baseline, m_font, mark->name() );
+					QPainterPath outlinepath = stroker.createStroke(shapepath);
+*/
+					textpixmap = m_empty.copy( QRect( 0, 0, fontwidth, m_fontheight) );
+//					textpixmap.fill(QColor(Qt::yellow));
 					textpainter.begin( &textpixmap );
+
 					textpainter.drawText( 0, m_fontascent, mark->name() );
+/*
+					textpainter.setRenderHint(QPainter::Antialiasing, true);
+					textpainter.fillPath( outlinepath, outlinebrush );
+					textpainter.fillPath( shapepath, shapebrush );
+*/
 					textpainter.end();
 
 					mark->setTextPixmap( textpixmap );
 				}
-
-				painter->drawPixmap( x + 2, y, textpixmap );
-
+					painter->drawPixmap( labelplace, textpixmap );
+					mark->setVisible( true );
+				}
+				else{
+					mark->setVisible( false );
+				}
 			}
 			else{
 				mark->clearTextPixmap();
+				mark->setVisible( false );
 			}
 		}
 		else {
 			mark->clearTextPixmap();
+			mark->setVisible( false );
 		}
 	}
 }

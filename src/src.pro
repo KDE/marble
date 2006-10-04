@@ -5,14 +5,13 @@
 TEMPLATE = app
 INCLUDEPATH += .
 # Input
-HEADERS += fastmath.h polygon.h \
+HEADERS += polygon.h \
 	   katlascontrol.h katlasview.h katlasviewinputhandler.h texcolorizer.h texloader.h texmapper.h quaternion.h \
            katlasglobe.h katlastoolbox.h pntmap.h vectorcomposer.h vectormap.h clippainter.h placemarkmanager.h \
 	   geopoint.h placecontainer.h placemarkstorage.h placefolder.h placemark.h searchlistview.h \
 	   maptheme.h katlasmapscale.h placemarkmodel.h placemarkpainter.h tilescissor.h \
 	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h xmlhandler.h
-SOURCES += fastmath.cpp \
-	   katlascontrol.cpp \
+SOURCES += katlascontrol.cpp \
            katlasview.cpp \
            katlasviewinputhandler.cpp \
            main.cpp \

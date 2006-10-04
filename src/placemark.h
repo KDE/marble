@@ -4,6 +4,7 @@
 // #include "geopoint.h"
 // #include <QDebug>
 #include <QPixmap>
+#include <QRect>
 #include "geopoint.h"
 #include "placemarkstorage.h"
 
@@ -23,12 +24,15 @@ public:
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
 	const QPixmap textPixmap() const { return m_textPixmap; }
+	const QRect textRect() const { return m_rect; }
 	void setTextPixmap( QPixmap textPixmap ){ m_textPixmap = textPixmap; }
-	void clearTextPixmap(){ if ( m_textPixmap.isNull() == false ) m_textPixmap = QPixmap(); }
+	void setTextRect( QRect textRect ){ m_rect = textRect;}
+	void clearTextPixmap(){ if ( m_textPixmap.isNull() == false ) { m_textPixmap = QPixmap(); } }
 
 private:
 	GeoPoint m_coordinate;
 	QPixmap m_textPixmap;
+	QRect m_rect;
 	int m_symbol;
 };
 

@@ -13,9 +13,12 @@
 #define PLACEMARKPAINTER_H
 
 #include <QFont>
+#include <QPainterPath>
 #include <QPixmap>
+#include <QRect>
 #include <QVector>
 #include "quaternion.h"
+
 /**
 @author Torsten Rahn
 */
@@ -41,6 +44,7 @@ private:
 	int m_fontheight, m_fontascent;
 	QVector<QPixmap> m_citysymbol;
 	QPixmap m_empty;
+	float m_widthscale;
 };
 
 #endif // PLACEMARKPAINTER_H

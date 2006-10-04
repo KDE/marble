@@ -26,7 +26,6 @@ endif (QTONLY)
 link_directories (${QT_LIBRARY_DIR})
 
 set(marble_SRCS
-	fastmath.cpp
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
