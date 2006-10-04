@@ -130,7 +130,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				QPoint labelplace;
 
-				foreach ( labelplace, QList<QPoint>() << bottomRight << bottomLeft << topRight << topLeft ) { 
+				foreach ( labelplace, QList<QPoint>() << bottomRight << topRight << bottomLeft <<  topLeft ) { 
 
 					overlap = false;
 					mark->setTextRect( QRect( labelplace, textSize ) );
