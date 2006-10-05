@@ -19,6 +19,7 @@
 
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
+
 	m_font = QFont("Sans Serif",8);
 	m_font.setStyleStrategy(QFont::ForceOutline);
 	m_fontheight = QFontMetrics(m_font).height();
@@ -53,6 +54,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 }
 
 void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAbstractItemModel* model, int row){
+
 	QModelIndex mpic = model->index(row,0,QModelIndex());
 	QIcon icon = (model->data(mpic, Qt::DecorationRole)).value<QIcon>();
 	QModelIndex mnametag = model->index(row,0,QModelIndex());
@@ -64,10 +66,11 @@ void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAb
 	painter->setPen(QColor(Qt::black));	
 	painter->setFont(m_font);
 	painter->drawText(x+8, y+8, nametag);
+
 }
 
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry, int radius, const PlaceContainer* placecontainer, Quaternion rotAxis ){
-//	qDebug("START");
+
 	int imgwidth = 2 * imgrx; int imgheight = 2 * imgry;
 	int x = 0; int y = 0; 
 
@@ -111,8 +114,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			x = (int)(imgrx + radius*qpos->v[Q_X]);
 			y = (int)(imgry + radius*qpos->v[Q_Y]);
 
+			// Don't process placemarks if they are outside the screen area
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
 
+				// Draw placemark symbol
 				painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
 
 				int fontwidth = QFontMetrics(m_font).width(mark->name());
@@ -123,6 +128,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				const QSize textSize( fontwidth, m_fontheight );
 
+				// Possible label orientations around the symbol
 				QPoint bottomRight( x + 2, y );
 				QPoint bottomLeft( x - fontwidth - 2, y );
 				QPoint topRight( x + 2, y - m_fontheight );
@@ -138,6 +144,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					overlap = false;
 					mark->setTextRect( QRect( labelplace, textSize ) );
 
+					// Compare coverage with all previous placemarks 
 					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL-Iteratoren
 						PlaceMark* beforemark  = *beforeit; // kein Cast
 
@@ -153,29 +160,31 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 				}
 
 
+				// Paint the label
 				if ( overlap == false) {
-				if ( textpixmap.isNull() == true ){					
-					// Paint the label
+					if ( textpixmap.isNull() == true ){					
+						// Draw the text on the label
 /*
-					QPainterPath shapepath;
-					shapepath.addText( baseline, m_font, mark->name() );
-					QPainterPath outlinepath = stroker.createStroke(shapepath);
+						QPainterPath shapepath;
+						shapepath.addText( baseline, m_font, mark->name() );
+						QPainterPath outlinepath = stroker.createStroke(shapepath);
 */
-					textpixmap = m_empty.copy( QRect( 0, 0, fontwidth, m_fontheight) );
-//					textpixmap.fill(QColor(Qt::yellow));
-					textpainter.begin( &textpixmap );
-					textpainter.setFont(m_font);
+						textpixmap = m_empty.copy( QRect( 0, 0, fontwidth, m_fontheight) );
 
-					textpainter.drawText( 0, m_fontascent, mark->name() );
+						textpainter.begin( &textpixmap );
+						textpainter.setFont(m_font);
+
+						textpainter.drawText( 0, m_fontascent, mark->name() );
 /*
-					textpainter.setRenderHint(QPainter::Antialiasing, true);
-					textpainter.fillPath( outlinepath, outlinebrush );
-					textpainter.fillPath( shapepath, shapebrush );
+						textpainter.setRenderHint(QPainter::Antialiasing, true);
+						textpainter.fillPath( outlinepath, outlinebrush );
+						textpainter.fillPath( shapepath, shapebrush );
 */
-					textpainter.end();
+						textpainter.end();
 
-					mark->setTextPixmap( textpixmap );
-				}
+						mark->setTextPixmap( textpixmap );
+					}
+					// Paint the label onto the map
 					painter->drawPixmap( labelplace, textpixmap );
 					mark->setVisible( true );
 				}
