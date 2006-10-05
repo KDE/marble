@@ -95,13 +95,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 //	QBrush shapebrush( QColor( 0,0,0,255) );
 
 
-	const QPointF baseline( 0.0f , (float)(m_fontascent) );
+//	const QPointF baseline( 0.0f , (float)(m_fontascent) );
 
 	PlaceContainer::const_iterator it;
 
-	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL-Iteratoren
+	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL iterators
 
-		PlaceMark* mark  = *it; // kein Cast
+		PlaceMark* mark  = *it; // no cast
 
 		*qpos = mark->getQuatPoint();
 
@@ -145,8 +145,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					mark->setTextRect( QRect( labelplace, textSize ) );
 
 					// Compare coverage with all previous placemarks 
-					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL-Iteratoren
-						PlaceMark* beforemark  = *beforeit; // kein Cast
+					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL iterators
+						PlaceMark* beforemark  = *beforeit; // no cast
 
 						if ( ( beforemark->visible() == true ) && ( mark->textRect() ).intersects( beforemark -> textRect()) ){
 								overlap = true;
