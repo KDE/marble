@@ -8,3 +8,4 @@ Credits for various inspiration go to:
 	Martin Konold -- optimiziation suggestions in TexColorizer
 	Frerich Raabe -- various FreeBSD fixes and Optimizations
 	Joseph Wenninger -- adding initial cmake support
+	Fredrik Höglund -- testing and bugfixes
