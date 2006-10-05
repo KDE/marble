@@ -125,8 +125,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				bool overlap = false;
 
-				PlaceContainer::const_iterator beforeit;
-
 				const QSize textSize( fontwidth, m_fontheight );
 
 				// Possible label orientations around the symbol
@@ -146,6 +144,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					mark->setTextRect( QRect( labelplace, textSize ) );
 
 					// Compare coverage with all previous placemarks 
+					PlaceContainer::const_iterator beforeit;
 					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL iterators
 						PlaceMark* beforemark  = *beforeit; // no cast
 

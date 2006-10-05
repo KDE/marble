@@ -36,9 +36,9 @@ private:
 	KAtlasGlobe* m_globe;
 	int dirx, diry;
 
-	bool m_pressed;
-	int m_pressedx, m_pressedy;
-	float m_presseda, m_pressedb;
+	bool m_leftpressed, m_midpressed;
+	int m_leftpressedx, m_leftpressedy, m_midpressedy;
+	float m_leftpresseda, m_leftpressedb;
 protected:
 	bool eventFilter( QObject *, QEvent * );
 };
