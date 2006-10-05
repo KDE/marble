@@ -101,6 +101,9 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 	}
 	m_maptheme->detectMaxTileLevel();
 
+	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
+	m_placecontainer ->clearTextPixmaps();
+
 	texmapper->setMap( "maps/" + m_maptheme->tilePrefix() + "_" );
 	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
 	m_parent->update();

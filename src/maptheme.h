@@ -2,6 +2,7 @@
 #define MAPTHEME_H
 
 #include <QObject>
+#include <QColor>
 
 class QStandardItemModel;
 
@@ -23,6 +24,7 @@ public:
 	QString name() const { return m_name; }
 	QString prefix() const { return m_prefix; }
 	QString icon() const { return m_icon; }
+	QColor labelColor() const { return m_labelcolor; }
 	QString tilePrefix() const { return ( m_prefix + "/" + m_installmap.left( m_installmap.length()-4 ) ); }
 	QString description() const { return m_description; }
 	QString installMap() const { return m_installmap; }
@@ -38,6 +40,7 @@ private:
 	QString m_name;
 	QString m_prefix;
 	QString m_icon;
+	QColor m_labelcolor;
 	QString m_tileprefix;
 	QString m_description;
 	QString m_installmap;

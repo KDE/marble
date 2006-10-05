@@ -35,12 +35,13 @@ public:
 	PlaceMarkPainter(QObject *parent = 0);
 	void paintPlaceMark(QPainter*, int, int, const QAbstractItemModel*, int);
 	void paintPlaceFolder(QPainter*, int, int, int, const PlaceContainer*, Quaternion );
-
+	void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
 public slots:
 
 
 private:
 	QFont m_font;
+	QColor m_labelcolor;
 	int m_fontheight, m_fontascent;
 	QVector<QPixmap> m_citysymbol;
 	QPixmap m_empty;

@@ -21,6 +21,8 @@
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 
 	m_font = QFont("Sans Serif",8);
+	m_labelcolor = QColor( Qt::black );
+
 	m_font.setStyleStrategy(QFont::ForceOutline);
 	m_fontheight = QFontMetrics(m_font).height();
 	m_fontascent = QFontMetrics(m_font).ascent();
@@ -80,7 +82,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	painter->setPen(QColor(Qt::black));	
 
 	QPainter textpainter;
-	textpainter.setPen(QColor(0,0,0,255));	
 	
 
 	QPixmap textpixmap;
@@ -173,6 +174,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 						textpainter.begin( &textpixmap );
 						textpainter.setFont(m_font);
+						textpainter.setPen(m_labelcolor);	
 
 						textpainter.drawText( 0, m_fontascent, mark->name() );
 /*

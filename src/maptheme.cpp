@@ -71,6 +71,18 @@ int MapTheme::open( QString path ){
 //					qDebug() << m_installmap;
 				}
 
+				m_labelcolor = Qt::black;
+				if( mapStyleSibling.tagName().toLower() == "labelstyle" ){
+					QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+					while( !labelStyleSibling.isNull() ){
+						if( labelStyleSibling.tagName().toLower() == "color" ){
+							m_labelcolor.setNamedColor( "#" + labelStyleSibling.text() );
+//							qDebug() << "#" + labelStyleSibling.text();
+						}
+						labelStyleSibling = labelStyleSibling.nextSiblingElement();
+					}
+				}
+
 				if( mapStyleSibling.tagName().toLower() == "layer" ){
 
 					m_bitmaplayer.enabled = false;

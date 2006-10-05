@@ -14,5 +14,9 @@
 
 		<layer type="vector" name="mwdbii"/>
 
+		<LabelStyle>
+			<color>000000</color>
+		</LabelStyle>
+
 	</MapStyle>
 </DeskGlobeML>

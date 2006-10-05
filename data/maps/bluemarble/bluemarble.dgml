@@ -13,5 +13,9 @@
 
 		<installmap>bluemarble.jpg</installmap>
 
+		<LabelStyle>
+			<color>ffffff</color>
+		</LabelStyle>
+
 	</MapStyle>
 </DeskGlobeML>

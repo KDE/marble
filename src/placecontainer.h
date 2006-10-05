@@ -15,6 +15,7 @@ public:
 
 	void setName( QString name ){ m_name = name; }
 	QString name() const {return m_name; }
+	void clearTextPixmaps() { foreach ( PlaceMark* mark, *this ) mark->clearTextPixmap(); }
 
 protected:	
 	QString m_name;
