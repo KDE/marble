@@ -130,6 +130,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 				
 
 				QPoint labelplace;
+				
+				// Find out whether the area around the placemark is covered already
 
 				foreach ( labelplace, QList<QPoint>() << bottomRight << topRight << bottomLeft <<  topLeft ) { 
 
@@ -153,6 +155,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				if ( overlap == false) {
 				if ( textpixmap.isNull() == true ){					
+					// Paint the label
 /*
 					QPainterPath shapepath;
 					shapepath.addText( baseline, m_font, mark->name() );
@@ -161,8 +164,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					textpixmap = m_empty.copy( QRect( 0, 0, fontwidth, m_fontheight) );
 //					textpixmap.fill(QColor(Qt::yellow));
 					textpainter.begin( &textpixmap );
+					textpainter.setFont(m_font);
 
-	textpainter.setFont(m_font);
 					textpainter.drawText( 0, m_fontascent, mark->name() );
 /*
 					textpainter.setRenderHint(QPainter::Antialiasing, true);

@@ -42,8 +42,9 @@ QPixmap& KAtlasMapScale::drawScaleBarPixmap(int radius, int width){
 	painter.setPen(QColor(Qt::black));
 	painter.setBrush(QColor(192,192,192,192));
 
-	painter.drawRect(0,0, m_pixmap.width()-1, m_pixmap.height()-1);
-	painter.translate(5,5);
+	painter.translate(.5, .5);
+ 	painter.drawRect(0,0, m_pixmap.width()-1, m_pixmap.height()-1);
+	painter.translate(4.5, 4.5);
 
 	paintScaleBar(&painter, radius, width);	
 	return m_pixmap;
