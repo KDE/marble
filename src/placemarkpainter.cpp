@@ -48,7 +48,6 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	QImage image( 1000 , m_fontheight, QImage::Format_ARGB32_Premultiplied);
 	image.fill(0); 
 	m_empty = QPixmap::fromImage(image);
-	m_widthscale = 1.15f; // 88.0f / 72.0f;
 //	m_widthscale = float( QX11Info::appDpiX () ) / 72.0f;
 
 }
@@ -76,19 +75,21 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	Quaternion* qpos = new Quaternion();
 
 	painter->setPen(QColor(Qt::black));	
-	painter->setFont(m_font);
+
+	QPainter textpainter;
+	textpainter.setPen(QColor(0,0,0,255));	
+	
 
 	QPixmap textpixmap;
-	QPainter textpainter;
 
 //	QPen outlinepen( QColor( 255,255,255,160 ) );
 //	outlinepen.setWidth( 1 );
-	QBrush outlinebrush( QColor( 255,255,255,160 ) );
+//	QBrush outlinebrush( QColor( 255,255,255,160 ) );
 
-	QPainterPathStroker stroker;
-	stroker.setWidth( 1 );
+//	QPainterPathStroker stroker;
+//	stroker.setWidth( 1 );
 
-	QBrush shapebrush( QColor( 0,0,0,255) );
+//	QBrush shapebrush( QColor( 0,0,0,255) );
 
 
 	const QPointF baseline( 0.0f , (float)(m_fontascent) );
@@ -114,7 +115,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
 
-				int fontwidth = m_widthscale * QFontMetrics(m_font).width(mark->name());
+				int fontwidth = QFontMetrics(m_font).width(mark->name());
 
 				bool overlap = false;
 
@@ -161,6 +162,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 //					textpixmap.fill(QColor(Qt::yellow));
 					textpainter.begin( &textpixmap );
 
+	textpainter.setFont(m_font);
 					textpainter.drawText( 0, m_fontascent, mark->name() );
 /*
 					textpainter.setRenderHint(QPainter::Antialiasing, true);
