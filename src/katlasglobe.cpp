@@ -58,9 +58,6 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	texmapper = new TextureMapper( "maps/" + m_maptheme->tilePrefix() + "_" );
 	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
 
-	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
-//	m_placecontainer ->clearTextPixmaps();
-
 	veccomposer = new VectorComposer();
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
 
@@ -75,8 +72,10 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
 
 	m_placecontainer = new PlaceContainer("placecontainer");
-
 	m_placemarkpainter = new PlaceMarkPainter();
+	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
+	m_placecontainer ->clearTextPixmaps();
+
 	m_radius = 2000;
 	m_rotAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
 
