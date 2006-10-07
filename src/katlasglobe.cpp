@@ -19,6 +19,10 @@ const float rad2int = 21600.0 / M_PI;
 
 KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 
+	texmapper = 0;
+	m_placemarkpainter = 0;
+	m_placecontainer = 0;
+
 	m_justModified = false;
 
 	m_maptheme = new MapTheme();
@@ -34,29 +38,12 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	if ( m_mapthemedirs.count() >= 1 ){
 		QStringList tmp = m_mapthemedirs.filter("etopo2.dgml");
 		if ( tmp.count() >= 1 )
-			selectedmap = tmp[0];
+			selectedmap = "maps/" + tmp[0];
 		else
-			selectedmap = m_mapthemedirs[0];
+			selectedmap = "maps/" + m_mapthemedirs[0];
 	}
-
-	m_maptheme->open( KAtlasDirs::path( "maps/" + selectedmap) );
-	if ( m_maptheme->maxTileLevel() < 1 ){
-		qDebug("Base tiles not available. Creating Tiles ... ");
-
-		KAtlasTileCreatorDialog tilecreatordlg( m_parent );
-		tilecreatordlg.setSummary( m_maptheme->name(), m_maptheme->description() );
-
-		TileScissor tilecreator( m_maptheme->prefix(), m_maptheme->installMap(), m_maptheme->bitmaplayer().dem);
-		QObject::connect( &tilecreator, SIGNAL( progress( int ) ), &tilecreatordlg, SLOT( setProgress( int ) ) );
-
-		QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
-
-		tilecreatordlg.exec();
-	}
-	m_maptheme->detectMaxTileLevel();
-
-	texmapper = new TextureMapper( "maps/" + m_maptheme->tilePrefix() + "_" );
-	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
+	
+	setMapTheme( selectedmap );
 
 	veccomposer = new VectorComposer();
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
@@ -70,11 +57,6 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 //	m_placemarkmodel -> sort( 0, Qt::AscendingOrder );
 	sortmodel -> sort( 0, Qt::AscendingOrder );
 	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
-
-	m_placecontainer = new PlaceContainer("placecontainer");
-	m_placemarkpainter = new PlaceMarkPainter();
-	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
-	m_placecontainer ->clearTextPixmaps();
 
 	m_radius = 2000;
 	m_rotAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
@@ -103,11 +85,23 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 	}
 	m_maptheme->detectMaxTileLevel();
 
-	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
+	if ( texmapper == 0 )
+		texmapper = new TextureMapper( "maps/" + m_maptheme->tilePrefix() + "_" );
+	else
+		texmapper->setMap( "maps/" + m_maptheme->tilePrefix() + "_" );
+
+	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
+
+	if ( m_placecontainer == 0)
+		m_placecontainer = new PlaceContainer("placecontainer");
+
 	m_placecontainer ->clearTextPixmaps();
 
-	texmapper->setMap( "maps/" + m_maptheme->tilePrefix() + "_" );
-	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
+	if ( m_placemarkpainter == 0)
+		m_placemarkpainter = new PlaceMarkPainter();
+
+	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
+
 	m_parent->update();
 
 	m_justModified = true;
