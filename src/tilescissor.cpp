@@ -83,12 +83,9 @@ void TileScissor::createTiles() {
 	
 	for ( int m=0; m < maxtilelevel; m++){
 		QApplication::processEvents(); 
-
-		QImageReader img( srcpath );
 /*
-		qDebug() << QString(" m: %1 imgh: %2 maxtilelevel: %3 imgw: %4").arg(m).arg(imgh).arg(maxtilelevel).arg(imgw);
-		qDebug() << QString(" y: %1 height: %2 ").arg((int)((float)(m*imgh)/(float)(maxtilelevel))).arg((int)((float)(imgh)/(float)(maxtilelevel)));
- */
+		QImageReader img( srcpath );
+
 		QRect rowsrc( 0, (int)((float)(m*imgh)/(float)(maxtilelevel)), imgw, 	(int)((float)(imgh)/(float)(maxtilelevel)) );
 		img.setClipRect( rowsrc );
 
@@ -98,9 +95,22 @@ void TileScissor::createTiles() {
 			QRect destrow(  QPoint( 0, 0 ), destsize );
 			img.setScaledClipRect( destrow );
 		}
-
 		QImage row = img.read();
-		if ( row.isNull() ) qDebug() << "Read-Error: " << img.errorString();
+*/
+		QImage img( srcpath );
+
+		QRect rowsrc( 0, (int)((float)(m*imgh)/(float)(maxtilelevel)), imgw, 	(int)((float)(imgh)/(float)(maxtilelevel)) );
+		QImage row = img.copy( rowsrc );
+		QSize destsize( stdimgw, 675 );
+
+		if ( smooth == true ){
+			img.scaled(destsize,  Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		}
+		else{
+			img.scaled(destsize,  Qt::IgnoreAspectRatio);
+		}
+
+//		if ( row.isNull() ) qDebug() << "Read-Error: " << img.errorString();
 
 		for ( int n=0; n < 2*maxtilelevel; n++) {
 			QApplication::processEvents(); 
