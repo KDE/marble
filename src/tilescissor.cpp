@@ -83,10 +83,11 @@ void TileScissor::createTiles() {
 	
 	for ( int m=0; m < maxtilelevel; m++){
 		QApplication::processEvents(); 
-/*
-		QImageReader img( srcpath );
 
 		QRect rowsrc( 0, (int)((float)(m*imgh)/(float)(maxtilelevel)), imgw, 	(int)((float)(imgh)/(float)(maxtilelevel)) );
+/*
+		// Unfortunately this code is out of order due to Qt 4.x regressions
+		QImageReader img( srcpath );
 		img.setClipRect( rowsrc );
 
 		if ( smooth == true ){
@@ -96,21 +97,18 @@ void TileScissor::createTiles() {
 			img.setScaledClipRect( destrow );
 		}
 		QImage row = img.read();
+		if ( row.isNull() ) qDebug() << "Read-Error: " << img.errorString();
 */
 		QImage img( srcpath );
 
-		QRect rowsrc( 0, (int)((float)(m*imgh)/(float)(maxtilelevel)), imgw, 	(int)((float)(imgh)/(float)(maxtilelevel)) );
 		QImage row = img.copy( rowsrc );
 		QSize destsize( stdimgw, 675 );
 
 		if ( smooth == true ){
-			img.scaled(destsize,  Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-		}
-		else{
-			img.scaled(destsize,  Qt::IgnoreAspectRatio);
+			row = img.scaled(destsize,  Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 		}
 
-//		if ( row.isNull() ) qDebug() << "Read-Error: " << img.errorString();
+		if ( row.isNull() ) qDebug() << "Read-Error! Null QImage!";
 
 		for ( int n=0; n < 2*maxtilelevel; n++) {
 			QApplication::processEvents(); 
