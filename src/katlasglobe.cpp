@@ -59,7 +59,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
 
 	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
-	m_placecontainer ->clearTextPixmaps();
+//	m_placecontainer ->clearTextPixmaps();
 
 	veccomposer = new VectorComposer();
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
