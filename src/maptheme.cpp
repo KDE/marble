@@ -71,7 +71,7 @@ int MapTheme::open( QString path ){
 //					qDebug() << m_installmap;
 				}
 
-				m_labelcolor = Qt::black;
+				m_labelcolor = QColor( 0, 0, 0, 255 );
 				if( mapStyleSibling.tagName().toLower() == "labelstyle" ){
 					QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
 					while( !labelStyleSibling.isNull() ){
@@ -82,6 +82,8 @@ int MapTheme::open( QString path ){
 						labelStyleSibling = labelStyleSibling.nextSiblingElement();
 					}
 				}
+
+				m_labelcolor.setAlpha(255);
 
 				if( mapStyleSibling.tagName().toLower() == "layer" ){
 

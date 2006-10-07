@@ -173,6 +173,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 						textpainter.begin( &textpixmap );
 						textpainter.setFont(m_font);
+						m_labelcolor.setAlpha(255);
 						textpainter.setPen(m_labelcolor);	
 
 						textpainter.drawText( 0, m_fontascent, mark->name() );
