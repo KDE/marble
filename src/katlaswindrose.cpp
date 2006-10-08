@@ -41,9 +41,9 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, i
 		return m_pixmap;
 	m_width = width; m_polarity = polarity;
 
-	QImage image( m_width, m_width + m_fontheight + 5, QImage::Format_ARGB32_Premultiplied);
-	image.fill(0);
-	m_pixmap = QPixmap::fromImage(image);
+	m_pixmap = QPixmap( m_width, m_width + m_fontheight + 5 );
+	m_pixmap.fill(Qt::transparent);
+
 	QPainter painter(&m_pixmap);
 
 	painter.setRenderHint(QPainter::Antialiasing, true);

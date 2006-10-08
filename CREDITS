@@ -1,11 +1,14 @@
 Credits for various inspiration go to:
 
 	Daniel Molkentin -- For various suggestions and the initial Windows Nullsoft installer support and for initial hosting in his SVN repository 
-	Stefan Jordan -- suggestion of using quaternions
-	Nikolaus Zimmermann -- various fixes and Optimizations
+	Stefan Jordan -- suggestion for using quaternions
+	Nikolaus Zimmermann -- lots of fixes and optimizations
 	Matthias Welwarsky (for a Windows app compile)
 	Josef Spillner -- for help with FIFO-bump mapping optimizations
 	Martin Konold -- optimiziation suggestions in TexColorizer
-	Frerich Raabe -- various FreeBSD fixes and Optimizations
+	Frerich Raabe -- lots of FreeBSD fixes and optimizations
 	Joseph Wenninger -- adding initial cmake support
 	Fredrik Höglund -- testing and bugfixes
+	Torsten Rahn -- for being myself and for being the original author and maintainer
+
+And special thanks to Rainer Endres for working on worldwide.kde.org and testing.

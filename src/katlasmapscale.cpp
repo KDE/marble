@@ -31,11 +31,8 @@ QPixmap& KAtlasMapScale::drawScaleBarPixmap(int radius, int width){
 		return m_pixmap;
 	m_radius = radius;
 
-	QImage image(width + 20, m_fontheight + m_scalebarheight + 20, QImage::Format_ARGB32_Premultiplied);
-	image.fill(0);
-	m_pixmap = QPixmap::fromImage(image);
-
-//	m_pixmap = QPixmap(width + 20, m_fontheight + m_scalebarheight + 20);
+	m_pixmap = QPixmap(width + 20, m_fontheight + m_scalebarheight + 20);
+	m_pixmap.fill(Qt::transparent);
 
 	QPainter painter(&m_pixmap);
 	

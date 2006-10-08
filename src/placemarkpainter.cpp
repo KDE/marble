@@ -48,11 +48,6 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"));
 
-	QImage image( 1000 , m_fontheight, QImage::Format_ARGB32_Premultiplied);
-	image.fill(0); 
-	m_empty = QPixmap::fromImage(image);
-//	m_widthscale = float( QX11Info::appDpiX () ) / 72.0f;
-
 }
 
 void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAbstractItemModel* model, int row){
@@ -61,10 +56,9 @@ void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAb
 	QIcon icon = (model->data(mpic, Qt::DecorationRole)).value<QIcon>();
 	QModelIndex mnametag = model->index(row,0,QModelIndex());
 	QString nametag = model->data(mnametag, Qt::DisplayRole).toString();
-//	painter->translate(x-4,y-4);
+
 	painter->drawPixmap(x-4, y-4, icon.pixmap(12,12));
 
-//	painter->translate(8,8);
 	painter->setPen(QColor(Qt::black));	
 	painter->setFont(m_font);
 	painter->drawText(x+8, y+8, nametag);
@@ -97,6 +91,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 
 //	const QPointF baseline( 0.0f , (float)(m_fontascent) );
+
+	QVector<PlaceMark*> visibleplacemarks;
+	visibleplacemarks.clear();
 
 	PlaceContainer::const_iterator it;
 
@@ -134,31 +131,28 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 				QPoint topLeft( x - fontwidth - 2, y - m_fontheight );
 				
 
-				QPoint labelplace;
+				QPoint labelplace = bottomRight;
 				
 				// Find out whether the area around the placemark is covered already
 
 				foreach ( labelplace, QList<QPoint>() << bottomRight << topRight << bottomLeft <<  topLeft ) { 
 
 					overlap = false;
-					mark->setTextRect( QRect( labelplace, textSize ) );
 
-					// Compare coverage with all previous placemarks 
-					PlaceContainer::const_iterator beforeit;
-					for ( beforeit=placecontainer->constBegin(); beforeit != it; beforeit++ ){ // STL iterators
-						PlaceMark* beforemark  = *beforeit; // no cast
+					const QRect textRect = QRect( labelplace, textSize ); 
 
-						if ( ( beforemark->visible() == true ) && ( mark->textRect() ).intersects( beforemark -> textRect()) ){
-								overlap = true;
-								break;
+					for ( QVector<PlaceMark*>::const_iterator beforeit = visibleplacemarks.constBegin(); beforeit != visibleplacemarks.constEnd(); beforeit++ ){ // STL iterators
+						if ( textRect.intersects( (*beforeit) -> textRect()) ){
+							overlap = true;
+							break;
 						}
 					}
+					
 					if ( overlap == false ){
-						
+						mark->setTextRect( textRect );				
 						break;
 					}
 				}
-
 
 				// Paint the label
 				if ( overlap == false) {
@@ -169,7 +163,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						shapepath.addText( baseline, m_font, mark->name() );
 						QPainterPath outlinepath = stroker.createStroke(shapepath);
 */
-						textpixmap = m_empty.copy( QRect( 0, 0, fontwidth, m_fontheight) );
+						textpixmap = QPixmap( fontwidth, m_fontheight );
+						textpixmap.fill(Qt::transparent);
 
 						textpainter.begin( &textpixmap );
 						textpainter.setFont(m_font);
@@ -188,20 +183,16 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					}
 					// Paint the label onto the map
 					painter->drawPixmap( labelplace, textpixmap );
-					mark->setVisible( true );
-				}
-				else{
-					mark->setVisible( false );
+					visibleplacemarks.append(mark);
+					painter->drawPixmap( labelplace, textpixmap );
 				}
 			}
 			else{
 				mark->clearTextPixmap();
-				mark->setVisible( false );
 			}
 		}
 		else {
 			mark->clearTextPixmap();
-			mark->setVisible( false );
 		}
 	}
 }

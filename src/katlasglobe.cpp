@@ -22,10 +22,17 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	texmapper = 0;
 	m_placemarkpainter = 0;
 	m_placecontainer = 0;
+	m_radius = 2000;
+	m_centeredItem = 0;
 
+	m_centered = false;
 	m_justModified = false;
 
+	m_rotAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
+
+	m_coastimg = new QImage(10,10,QImage::Format_ARGB32_Premultiplied);
 	m_maptheme = new MapTheme();
+
 
 	QStringList m_mapthemedirs = MapTheme::findMapThemes( "maps" );
 	QString selectedmap;
@@ -58,13 +65,6 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	sortmodel -> sort( 0, Qt::AscendingOrder );
 	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
 
-	m_radius = 2000;
-	m_rotAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
-
-	m_coastimg = new QImage(10,10,QImage::Format_ARGB32_Premultiplied);
-
-	m_centered = false;
-	m_centeredItem = 0;
 }
 
 void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
@@ -180,7 +180,6 @@ void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi){
 }
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
-//	m_rotAxis.createFromEuler( M_PI-(phi + 180.0) * M_PI / 180.0, M_PI+(theta + 180.0) * M_PI / 180.0, 0.0);
 	m_rotAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0, (theta + 180.0) * M_PI / 180.0, 0.0);
 //	m_rotAxis.display();
 	m_centered = false;
@@ -189,7 +188,6 @@ void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
 
 
 void KAtlasGlobe::rotateBy(const Quaternion& incRot){
-//	m_rotAxis.createFromEuler((float)(phi)/rad2int,(float)(theta)/rad2int,(float)(psi)/rad2int);
 	m_rotAxis = incRot * m_rotAxis;
 //	m_rotAxis.display();
 	m_centered = false;
