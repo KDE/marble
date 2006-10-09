@@ -43,6 +43,7 @@ bool KAtlasXmlHandler::startElement( const QString&, const QString&, const QStri
 		m_inPlacemark = true;
 		m_coordsset = false;
 		m_placemark = new PlaceMark();
+		m_placemark->setSymbol( 0 );
 	} 
 
 	if ( m_inPlacemark && nameLower == "name"){
@@ -102,7 +103,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inPlacemark && nameLower == "pop"){
 		int population = m_currentText.toInt();
-		int symbol = 0;
+		int symbol = 15;
 
 		if(population < 2500) symbol=1;
 		else if(population < 5000) symbol=2;
@@ -118,7 +119,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 		else if(population < 1000000) symbol=12;
 		else if(population < 2500000) symbol=13;
 		else if(population < 5000000) symbol=14;
-		else if(population < 7500000) symbol=15;
+//		else if(population < 7500000) symbol=15;
 
 		m_placemark->setSymbol( symbol );
 	}

@@ -48,6 +48,27 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"));
 
+	m_weightfilter
+
+	 << 9999
+	 << 4200
+	 << 3900
+	 << 3600
+
+	 << 3300
+	 << 3000
+	 << 2700
+	 << 2400
+
+	 << 2100
+	 << 1800
+	 << 1500
+	 << 1200
+
+	 << 900
+	 << 400
+	 << 200
+	 << 0;
 }
 
 void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAbstractItemModel* model, int row){
@@ -92,6 +113,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 //	const QPointF baseline( 0.0f , (float)(m_fontascent) );
 
+//	qDebug() << QString("Radius: %1").arg(radius); 
+
 	QVector<PlaceMark*> visibleplacemarks;
 	visibleplacemarks.clear();
 
@@ -99,7 +122,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL iterators
 
+
 		PlaceMark* mark  = *it; // no cast
+
+		if ( m_weightfilter.at( mark->symbol() ) > radius && mark->symbol() != 0 ) continue; 
 
 		*qpos = mark->getQuatPoint();
 
@@ -116,7 +142,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
 
 				// Draw placemark symbol
-				painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
 
 				int fontwidth = QFontMetrics(m_font).width(mark->name());
 
@@ -184,7 +209,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					// Paint the label onto the map
 					painter->drawPixmap( labelplace, textpixmap );
 					visibleplacemarks.append(mark);
-					painter->drawPixmap( labelplace, textpixmap );
+					painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
+				}
+				else {
+					if ( mark->symbol() == 0 )
+						painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
 				}
 			}
 			else{
