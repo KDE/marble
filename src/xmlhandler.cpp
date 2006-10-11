@@ -24,7 +24,6 @@ bool KAtlasXmlHandler::startDocument(){
 	m_inPlacemark = false;
 	m_inPoint = false;
 
-	QString m_currentText;
 	qDebug("Starting KML-Import"); 
 
 	return true;
@@ -61,6 +60,10 @@ bool KAtlasXmlHandler::startElement( const QString&, const QString&, const QStri
 	if ( m_inPlacemark && nameLower == "point"){
 		m_inPoint = true;
 	} 
+
+	if ( m_inPlacemark && nameLower == "role"){
+		m_currentText="";
+	}
 
 	if ( m_inPoint && nameLower == "coordinates"){
 		m_currentText="";
@@ -126,6 +129,10 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inKml && nameLower == "point"){
 		m_inPoint = false;
+	}
+
+	if ( m_inKml && nameLower == "role"){
+		m_placemark->setRole( m_currentText.at(0) );
 	}
 
 	if ( m_inPoint && nameLower == "coordinates"){

@@ -142,7 +142,22 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
 
 				// Draw placemark symbol
+				m_font.setWeight( 50 );
 
+				if ( mark->role() == 'R' ){ 
+					m_font.setItalic( true );
+//					m_font.setWeight( 63 );
+				}
+				else {
+					m_font.setItalic( false );
+				}
+				if ( mark->role() == 'B' || mark->role() == 'C' ) 
+					m_font.setUnderline( true );
+				else
+					m_font.setUnderline( false );
+				if ( mark->symbol() > 13 )
+					m_font.setWeight( 75 );
+		
 				int fontwidth = QFontMetrics(m_font).width(mark->name());
 
 				bool overlap = false;
@@ -192,8 +207,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						textpixmap.fill(Qt::transparent);
 
 						textpainter.begin( &textpixmap );
+
 						textpainter.setFont(m_font);
-						m_labelcolor.setAlpha(255);
+
+//						m_labelcolor.setAlpha(255);
 						textpainter.setPen(m_labelcolor);	
 
 						textpainter.drawText( 0, m_fontascent, mark->name() );

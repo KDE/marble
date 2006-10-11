@@ -3,6 +3,7 @@
 
 // #include "geopoint.h"
 // #include <QDebug>
+#include <QChar>
 #include <QPixmap>
 #include <QRect>
 #include "geopoint.h"
@@ -17,6 +18,9 @@ public:
 
 	void coordinate( float& lng, float& lat );
 	void setCoordinate( float lng, float lat );
+
+	const QChar role() const { return m_role; }
+	void setRole( QChar role ){ m_role = role; }
 
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
@@ -34,6 +38,7 @@ private:
 	QPixmap m_textPixmap;
 	QRect m_rect;
 	int m_symbol;
+	QChar m_role;
 };
 
 #endif // PLACEMARK_H
