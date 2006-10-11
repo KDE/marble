@@ -125,7 +125,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		PlaceMark* mark  = *it; // no cast
 
-		if ( m_weightfilter.at( mark->symbol() ) > radius && mark->symbol() != 0 ) continue; 
+		if ( m_weightfilter[mark->symbol()] > radius && mark->symbol() != 0 ) continue; 
 
 		*qpos = mark->getQuatPoint();
 
@@ -226,11 +226,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					// Paint the label onto the map
 					painter->drawPixmap( labelplace, textpixmap );
 					visibleplacemarks.append(mark);
-					painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
+					painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
 				}
 				else {
 					if ( mark->symbol() == 0 )
-						painter->drawPixmap( x-4, y-4 , m_citysymbol.at( mark->symbol() ));
+						painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
 				}
 			}
 			else{
