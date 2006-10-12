@@ -23,7 +23,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	m_font = QFont("Sans Serif",8);
 	m_labelcolor = QColor( 0, 0, 0, 255 );
 
-	m_font.setStyleStrategy(QFont::ForceOutline);
+//	m_font.setStyleStrategy(QFont::NoAntialias);
 	m_fontheight = QFontMetrics(m_font).height();
 	m_fontascent = QFontMetrics(m_font).ascent();
 	m_citysymbol 

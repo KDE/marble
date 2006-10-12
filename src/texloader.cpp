@@ -211,9 +211,8 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 			for (int j=1; j < m_n; j++){
 				curAvgLat += avglat;
 				curAvgLng += avglng;
-				float evallng = curAvgLng;
-				if (curAvgLng >= M_PI) evallng -= TWOPI;
-				getPixelValue( -evallng, curAvgLat, line[x-m_n+j]);
+				if (curAvgLng >= M_PI) curAvgLng -= TWOPI;
+				getPixelValue( -curAvgLng, curAvgLat, line[x-m_n+j]);
 			}
 		}
 
