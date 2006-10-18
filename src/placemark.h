@@ -25,6 +25,9 @@ public:
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
 
+	const int population() const { return m_population; }
+	void setPopulation( int population ){ m_population = population; }
+
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
 	const QPixmap textPixmap() const { return m_textPixmap; }
@@ -37,6 +40,7 @@ private:
 	GeoPoint m_coordinate;
 	QPixmap m_textPixmap;
 	QRect m_rect;
+	int m_population;
 	int m_symbol;
 	QChar m_role;
 };

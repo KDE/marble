@@ -47,6 +47,9 @@ private:
 	QVector<int> m_weightfilter;
 	QPixmap m_empty;
 	float m_widthscale;
+
+	bool testbug(); 
+	bool m_useworkaround;
 };
 
 #endif // PLACEMARKPAINTER_H

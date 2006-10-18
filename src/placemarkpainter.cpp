@@ -69,6 +69,8 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	 << 400
 	 << 200
 	 << 0;
+
+	m_useworkaround = testbug();
 }
 
 void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAbstractItemModel* model, int row){
@@ -203,23 +205,37 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						shapepath.addText( baseline, m_font, mark->name() );
 						QPainterPath outlinepath = stroker.createStroke(shapepath);
 */
-						textpixmap = QPixmap( fontwidth, m_fontheight );
-						textpixmap.fill(Qt::transparent);
+						if ( !m_useworkaround ) {
+							textpixmap = QPixmap( fontwidth, m_fontheight );
+							textpixmap.fill(Qt::transparent);
 
-						textpainter.begin( &textpixmap );
+							textpainter.begin( &textpixmap );
 
-						textpainter.setFont(m_font);
+							textpainter.setFont(m_font);
+							textpainter.setPen(m_labelcolor);	
+							textpainter.drawText( 0, m_fontascent, mark->name() );
 
-//						m_labelcolor.setAlpha(255);
-						textpainter.setPen(m_labelcolor);	
+//							textpainter.setRenderHint(QPainter::Antialiasing, true);
+//							textpainter.fillPath( outlinepath, outlinebrush );
+//							textpainter.fillPath( shapepath, shapebrush );
 
-						textpainter.drawText( 0, m_fontascent, mark->name() );
-/*
-						textpainter.setRenderHint(QPainter::Antialiasing, true);
-						textpainter.fillPath( outlinepath, outlinebrush );
-						textpainter.fillPath( shapepath, shapebrush );
-*/
-						textpainter.end();
+							textpainter.end();
+						}
+						else {
+							QImage textimage( fontwidth, m_fontheight, QImage::Format_ARGB32_Premultiplied );
+							textimage.fill( 0 );
+
+							textpainter.begin( &textimage );
+
+							textpainter.setFont(m_font);
+							textpainter.setPen(m_labelcolor);	
+							textpainter.drawText( 0, m_fontascent, mark->name() );
+
+							textpainter.end();
+							
+							textpixmap = QPixmap::fromImage( textimage );
+						}
+
 
 						mark->setTextPixmap( textpixmap );
 					}
@@ -241,4 +257,33 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			mark->clearTextPixmap();
 		}
 	}
+}
+
+bool PlaceMarkPainter::testbug(){
+
+	QString testchar("K");
+	QFont font("Sans Serif",10);
+
+	int fontheight = QFontMetrics(font).height();
+	int fontwidth = QFontMetrics(font).width(testchar);
+	int fontascent = QFontMetrics(font).ascent();
+
+	QPixmap pixmap ( fontwidth, fontheight );
+	pixmap.fill(Qt::transparent);
+
+	QPainter textpainter;
+	textpainter.begin(&pixmap);
+		textpainter.setPen( QColor(0,0,0,255) );
+		textpainter.setFont( font );
+		textpainter.drawText( 0, fontascent, testchar );
+	textpainter.end();
+
+	QImage image = pixmap.toImage();
+
+	for (int x = 0; x < fontwidth; x++)
+		for (int y = 0; y < fontheight; y++){
+			if ( qAlpha( image.pixel( x,y ) ) > 0 ) return false;
+		}
+
+	return true;
 }

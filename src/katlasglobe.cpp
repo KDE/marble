@@ -154,7 +154,7 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 //		timer->restart();
 	}
 	
-
+// this one paints the placemark that was searched for
 	if (m_centered == true) m_placemarkpainter->paintPlaceMark(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_placemarkmodel, m_centeredItem);
 
 	m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);

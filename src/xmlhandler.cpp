@@ -106,6 +106,8 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inPlacemark && nameLower == "pop"){
 		int population = m_currentText.toInt();
+		m_placemark->setPopulation( population );
+
 		int symbol = 15;
 
 		if(population < 2500) symbol=1;
