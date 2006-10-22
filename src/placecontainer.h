@@ -6,11 +6,9 @@
 
 #include <QDebug>
 
+inline bool popLessThan( PlaceMark* mark1, PlaceMark* mark2 ){ return mark1->population() > mark2->population(); }
+
 class PlaceContainer : public QVector<PlaceMark*> {
-
-protected:	
-	QString m_name;
-
 public:
 	PlaceContainer();
 	PlaceContainer( QString name );
@@ -18,12 +16,9 @@ public:
 	void setName( QString name ){ m_name = name; }
 	QString name() const {return m_name; }
 	inline void clearTextPixmaps() { foreach ( PlaceMark* mark, *this ) mark->clearTextPixmap(); }
-//	inline bool popLessThan( PlaceMark* mark1, PlaceMark* mark2 ){
-//		return mark1->population() < mark2->population(); 
-//		return true;
-//	}
-//	QVectorIterator<PlaceMark*> i;
-//	inline void sort() { qStableSort( begin(), end(), popLessThan ); }
+	inline void sort() { qStableSort( begin(), end(), popLessThan ); }
+protected:	
+	QString m_name;
 };
 
 #endif // PLACECONTAINER_H

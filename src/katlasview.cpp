@@ -217,7 +217,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 void KAtlasView::goHome(){
 //	globe->rotateTo(0, 0);
 	globe->rotateTo(54.8, -9.4);
-	zoomView(1100);
+	zoomView(1050); // default 1050
 
 	update(); // not obsolete in case the zoomlevel stays unaltered
 }

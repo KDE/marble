@@ -254,5 +254,7 @@ void KAtlasGlobe::addPlaceMarkFile( QString filename ){
 
 	reader.parse( source );
 
+	m_placecontainer->sort();
+
 	qDebug() << "Number of placemarks: " << m_placecontainer->size();
 }

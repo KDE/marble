@@ -17,8 +17,13 @@ int main(int argc, char *argv[])
 			QTime t;
 			t.start();
 
-			for ( int j = 0; j < 100; ++j ) {
-				katlascontrol.moveLeft();
+			for ( int j = 0; j < 10; ++j ) {
+				for ( int k = 0; k < 10; ++k ) {
+					katlascontrol.moveRight();
+				}
+				for ( int k = 0; k < 10; ++k ) {
+					katlascontrol.moveLeft();
+				}
 //				katlascontrol.moveUp();
 			}
 /*

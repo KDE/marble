@@ -19,6 +19,9 @@ public:
 	void coordinate( float& lng, float& lat );
 	void setCoordinate( float lng, float lat );
 
+	const QPoint symbolPos(){ return m_sympos; }
+	void setSymbolPos( QPoint sympos ){ m_sympos = sympos; }
+
 	const QChar role() const { return m_role; }
 	void setRole( QChar role ){ m_role = role; }
 
@@ -38,6 +41,7 @@ public:
 
 private:
 	GeoPoint m_coordinate;
+	QPoint m_sympos;
 	QPixmap m_textPixmap;
 	QRect m_rect;
 	int m_population;

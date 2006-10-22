@@ -6,6 +6,7 @@
 #include <QList>
 #include <QPainter>
 #include <QPoint>
+#include <QVectorIterator>
 #include <QX11Info>
 #include "placecontainer.h"
 #include "placemark.h"
@@ -240,13 +241,15 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						mark->setTextPixmap( textpixmap );
 					}
 					// Paint the label onto the map
-					painter->drawPixmap( labelplace, textpixmap );
-					visibleplacemarks.append(mark);
-					painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
+//					painter->drawPixmap( labelplace, textpixmap );
+					mark->setSymbolPos( QPoint( x-4, y-4 ) );
+					visibleplacemarks.append(mark);					
+//					painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
 				}
 				else {
 					if ( mark->symbol() == 0 )
-						painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
+						mark->setSymbolPos( QPoint( x-4, y-4 ) );
+//						painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
 				}
 			}
 			else{
@@ -256,6 +259,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 		else {
 			mark->clearTextPixmap();
 		}
+	}
+
+	QVector<PlaceMark*>::const_iterator visit = visibleplacemarks.constEnd();
+	while (visit != visibleplacemarks.constBegin()) {
+		--visit;
+		painter->drawPixmap( (*visit) -> textRect(), (*visit) -> textPixmap() );
+		painter->drawPixmap( (*visit) -> symbolPos(), m_citysymbol[ (*visit) -> symbol() ] );
 	}
 }
 

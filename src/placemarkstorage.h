@@ -5,7 +5,7 @@
 
 #include <QDebug>
 
-class PlaceMarkStorage : QObject {
+class PlaceMarkStorage {
 
 public:
 	PlaceMarkStorage();
