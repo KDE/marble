@@ -124,7 +124,7 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 			if (currentlyvisible != lastvisible) manageCrossHorizon();
 // Take care of screencrossing crossings if horizon is visible
 // Filter Points which aren't on the visible Hemisphere
-			if ( z > m_zPointLimit){
+			if ( z > m_zPointLimit && currentPoint != lastPoint ){ // most recent addition: currentPoint != lastPoint
 				m_polygon << currentPoint;
 			}
 /*
