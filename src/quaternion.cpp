@@ -245,5 +245,5 @@ void Quaternion::rotateAroundAxis(const matrix &m) {
 	y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];
 	z =  m[0][2] * v[Q_X] + m[1][2] * v[Q_Y] + m[2][2] * v[Q_Z];
 
-	v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z; v[Q_W] = 1;
+	v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z; v[Q_W] = 1.0f;
 }
