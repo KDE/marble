@@ -102,11 +102,11 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 
 //	Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
 	Quaternion qpos;
-	int step = 1;
-	int remain = size();
+//	int step = 1;
+//	int remain = size();
 
-	for ( itPoint = itStartPoint; itPoint < itEndPoint; itPoint+=step ){
-		remain -= step;
+	for ( itPoint = itStartPoint; itPoint < itEndPoint; itPoint++ ){
+//		remain -= step;
 		if ( (*itPoint).getDetail() >= detail){
 // Calculate polygon nodes
 			qpos = (*itPoint).getQuatPoint();

@@ -8,7 +8,7 @@ class GeoPoint {
 private:	
 	int m_Detail, m_Lat, m_Lng;
 	Quaternion m_q;
-	Quaternion m_mulq;
+//	Quaternion m_mulq;
 public:
 	GeoPoint(){}
 	GeoPoint(int, int);
@@ -20,7 +20,7 @@ public:
 	int getLat() const { return m_Lat; }
 	int getLng() const { return m_Lng; }
 	void geoCoordinates( float& lng, float& lat ){ m_q.getSpherical( lng, lat ); }
-	void setMul( float radius ){ m_mulq = m_q; m_mulq.scalar( radius ); }
+//	void setMul( float radius ){ m_mulq = m_q; m_mulq.scalar( radius ); }
 
 	const Quaternion &getQuatPoint() const { return m_q; }
 
