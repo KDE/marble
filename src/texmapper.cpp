@@ -138,11 +138,14 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 		int ncount = 0;
 		for (x = xleft; x < xright; x++){
 			// Prepare for interpolation
+
 			if ((x >= xipleft) && (x <= xipright)){
 
 //				decrease pole distortion due to linear approximation ( x-axis )
-				int northpolex = imgrx + (int)( radius * qpolepos.v[Q_X] ); 
-				if ( poleyenv == true &&  northpolex > xipleft + ncount * n  && northpolex  < xipleft + ( ncount + 1 ) * n ){
+				int northpolex = imgrx + (int)( radius * qpolepos.v[Q_X] );
+
+				int leftinterval = xipleft + ncount * n;
+				if ( poleyenv == true &&  northpolex > leftinterval  && northpolex  < leftinterval + n && x  < leftinterval + n){
 					interpolate = false;
 				}
 				else{
