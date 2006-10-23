@@ -66,7 +66,7 @@ if (QTONLY)
   qt4_automoc(${marble_SRCS})
 else (QTONLY)
   kde4_add_ui_files(marble_SRCS ${marble_UI})
-  kde4_automoc(marble ${marble_SRCS})
+  kde4_automoc(${marble_SRCS})
 endif (QTONLY)
 
 #kde4_add_library (marble SHARED ${marble_SRCS})
