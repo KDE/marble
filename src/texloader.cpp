@@ -103,17 +103,8 @@ void TextureLoader::setMap( const QString& fileprefix ){
 	tilh = tile->height;
 	delete tile;
 
-	texpixw = (int)(21600.0f / (float)(m_texlevel) / (float)(tilw));
-	texpixh = (int)(21600.0f / (float)(m_texlevel) / (float)(tilh));
+	setTexLevel(1);
 
-	rad2pixw = (21600.0f / M_PI / (float)(texpixw));
-	rad2pixh = (21600.0f / M_PI / (float)(texpixh));
-
-	maxfullalpha = (int)(43200.0f / (float)(texpixw));
-	maxhalfalpha = (float)(21600.0f / (float)(texpixw));
-	maxquatalpha = (int)(10800.0f / (float)(texpixw));
-	maxquatbeta = 10800.0f / (float)(texpixh);
-	maxhalfbeta = 2.0f * maxquatbeta;
 }
 
 void TextureLoader::resetTilehash(){
@@ -198,44 +189,42 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
 	avglat = lat-m_prevlat;
 	avglat *= m_ninv;
-	avglng = lng - m_prevlng;
-	float curAvgLat = m_prevlat;
+	avglng = lng + m_prevlng;
 
 	if (fabs(avglng) > M_PI){
 
 		avglng = TWOPI - fabs(avglng);
 		avglng *= m_ninv;
 
-		if (m_prevlng > lng){
-			float curAvgLng = m_prevlng;
-			for (int j=1; j < m_n; j++){
-				curAvgLat += avglat;
+		if (-m_prevlng > lng){
+			float curAvgLng = -m_prevlng;
+			for (int j=1-m_n; j < 0; j++){
+				m_prevlat += avglat;
 				curAvgLng += avglng;
 				if (curAvgLng >= M_PI) curAvgLng -= TWOPI;
-				getPixelValue( -curAvgLng, curAvgLat, line[x-m_n+j]);
+				getPixelValue( -curAvgLng, m_prevlat, line[x+j]);
 			}
 		}
 
-		if (m_prevlng < lng){
+		if (-m_prevlng < lng){
 			float curAvgLng = lng + m_n*avglng;
-			for (int j=1; j < m_n; j++){
-				curAvgLat += avglat;
+			for (int j=1-m_n; j < 0; j++){
+				m_prevlat += avglat;
 				curAvgLng -= avglng;
 				float evallng = curAvgLng;
 				if (curAvgLng >= M_PI) evallng -= TWOPI;
-				getPixelValue( -evallng, curAvgLat, line[x-m_n+j]);
+				getPixelValue( -evallng, m_prevlat, line[x+j]);
 			}
 		}
 	}
 
 	else {
 
-		float curAvgLng = m_prevlng;
 		avglng *= m_ninv;
-		for (int j=1; j < m_n; j++) {
-			curAvgLat += avglat;
-			curAvgLng += avglng;
-			getPixelValue( -curAvgLng, curAvgLat, line[x-m_n+j]);
+		for (int j=1-m_n; j < 0; j++) {
+			m_prevlat += avglat;
+			m_prevlng -= avglng;
+			getPixelValue( m_prevlng, m_prevlat, line[x + j]);
 		}
 	}	
 
@@ -243,15 +232,16 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 
 void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line, const int& x){
 	m_prevlat = radlat;
-	m_prevlng = radlng;
+	m_prevlng = -radlng;
 	getPixelValue(-radlng, radlat, line[x]);
 }
 
 inline void TextureLoader::flush(){
 // Remove all tiles from tilehash
-	foreach(TileContainer* tile, tilehash)
-		delete tile;
-	tilehash.clear();	
+	QHash <int, TileContainer*>::const_iterator it;
+	for( it = tilehash.begin(); it != tilehash.constEnd(); it++ ) 
+		delete (*it);
+	tilehash.clear();
 }
 
 

@@ -21,14 +21,17 @@
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 
-	m_font = QFont("Sans Serif",8);
+	m_font_regular = QFont("Sans Serif",8, 50, false );
+	m_font_regular_italics = QFont("Sans Serif",8, 50, true );
+	m_font_regular_underline = QFont("Sans Serif",8, 50, false );
+	m_font_regular_underline.setUnderline( true );
+	
+	m_fontheight = QFontMetrics(m_font_regular).height();
+	m_fontascent = QFontMetrics(m_font_regular).ascent();
+
 	m_labelcolor = QColor( 0, 0, 0, 255 );
 
-//	m_font.setStyleStrategy(QFont::NoAntialias);
-	m_fontheight = QFontMetrics(m_font).height();
-	m_fontascent = QFontMetrics(m_font).ascent();
 	m_citysymbol 
-
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_white.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_yellow.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_orange.png"))
@@ -84,7 +87,7 @@ void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAb
 	painter->drawPixmap(x-4, y-4, icon.pixmap(12,12));
 
 	painter->setPen(QColor(Qt::black));	
-	painter->setFont(m_font);
+	painter->setFont(m_font_regular);
 	painter->drawText(x+8, y+8, nametag);
 
 }
@@ -100,9 +103,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	painter->setPen(QColor(Qt::black));	
 
 	QPainter textpainter;
+
+	QFont font;
 	int fontwidth = 0;
 
 	QPixmap textpixmap;
+
 
 //	QPen outlinepen( QColor( 255,255,255,160 ) );
 //	outlinepen.setWidth( 1 );
@@ -144,26 +150,23 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			// Don't process placemarks if they are outside the screen area
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
 
-				// Draw placemark symbol
+				// Specify font properties
 		
 				if ( textpixmap.isNull() == true ){	
-					m_font.setWeight( 50 );
 
-					if ( mark->role() == 'R' ){ 
-						m_font.setItalic( true );
-//					m_font.setWeight( 63 );
+					if ( mark->role() == 'N' ){ 
+						font = m_font_regular;
+					} else if ( mark->role() == 'R' ){ 
+						font = m_font_regular_italics;
+					} else if ( mark->role() == 'B' || mark->role() == 'C' ) {
+						font = m_font_regular_underline;
+					} else {
+						font = m_font_regular;
 					}
-					else {
-						m_font.setItalic( false );
-					}
-					if ( mark->role() == 'B' || mark->role() == 'C' ) 
-						m_font.setUnderline( true );
-					else
-						m_font.setUnderline( false );
-					if ( mark->symbol() > 13 )
-						m_font.setWeight( 75 );
 
-					fontwidth = QFontMetrics(m_font).width(mark->name());
+					if ( mark->symbol() > 13 ) font.setWeight( 75 );
+
+					fontwidth = QFontMetrics(font).width(mark->name());
 				}
 				else{
 					fontwidth = ( mark->textRect() ).width();
@@ -182,7 +185,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 						overlap = false;
 
-						QRect textRect = QRect( xpos, ypos, fontwidth, m_fontheight ); 
+						QRect textRect( xpos, ypos, fontwidth, m_fontheight ); 
 
 						for ( QVector<PlaceMark*>::const_iterator beforeit = visibleplacemarks.constBegin(); beforeit != visibleplacemarks.constEnd(); beforeit++ ){ // STL iterators
 							if ( textRect.intersects( (*beforeit) -> textRect()) ){
@@ -215,7 +218,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 							textpainter.begin( &textpixmap );
 
-							textpainter.setFont(m_font);
+							textpainter.setFont(font);
 							textpainter.setPen(m_labelcolor);	
 							textpainter.drawText( 0, m_fontascent, mark->name() );
 
@@ -231,7 +234,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 							textpainter.begin( &textimage );
 
-							textpainter.setFont(m_font);
+							textpainter.setFont(font);
 							textpainter.setPen(m_labelcolor);	
 							textpainter.drawText( 0, m_fontascent, mark->name() );
 
@@ -251,7 +254,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 				else {
 					if ( mark->symbol() == 0 )
 						mark->setSymbolPos( QPoint( x-4, y-4 ) );
-//						painter->drawPixmap( x-4, y-4 , m_citysymbol[mark->symbol()]);
 				}
 			}
 			else{

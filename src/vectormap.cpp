@@ -98,33 +98,33 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 }
 
 void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, GeoPoint::Vector::ConstIterator  itEndPoint, const int detail){
-	GeoPoint::Vector::ConstIterator itPoint;
+	GeoPoint::Vector::const_iterator itPoint;
 
 //	Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
 	Quaternion qpos;
 //	int step = 1;
 //	int remain = size();
 
-	for ( itPoint = itStartPoint; itPoint < itEndPoint; itPoint++ ){
+	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
 //		remain -= step;
-		if ( (*itPoint).getDetail() >= detail){
+		if ( itPoint->getDetail() >= detail){
 // Calculate polygon nodes
-			qpos = (*itPoint).getQuatPoint();
+			qpos = itPoint->getQuatPoint();
 			qpos.rotateAroundAxis(m_rotMatrix);
 			currentPoint = QPoint((int)(imgrx+ m_radius*qpos.v[Q_X])+1,(int)(imgry+ m_radius*qpos.v[Q_Y])+1);
-
+			
 // Take care of horizon crossings if horizon is visible
 			lastvisible = currentlyvisible;			
 
-			const float z = qpos.v[Q_Z];
-			currentlyvisible = (z >= m_zPointLimit) ? true : false;
+
+			currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
 			if (itPoint == itStartPoint){
 				initCrossHorizon();
 			}
 			if (currentlyvisible != lastvisible) manageCrossHorizon();
 // Take care of screencrossing crossings if horizon is visible
 // Filter Points which aren't on the visible Hemisphere
-			if ( z > m_zPointLimit && currentPoint != lastPoint ){ // most recent addition: currentPoint != lastPoint
+			if ( currentlyvisible == true && currentPoint != lastPoint ){ // most recent addition: currentPoint != lastPoint
 				m_polygon << currentPoint;
 			}
 /*
@@ -141,7 +141,7 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 	}
 
 // In case of horizon crossings make sure that we always get a polygon closed correctly 
-	if ((firsthorizon == true)){
+	if ( firsthorizon == true ){
 		horizonb = firstHorizonPoint;
 		if (m_polygon.getClosed())
 			createArc();
@@ -167,9 +167,9 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 //	QTime *timer2 = new QTime();
 //	timer2->restart();
 
-	GeoPolygon::Vector::ConstIterator itEndPolygon = end();
+	GeoPolygon::Vector::const_iterator itEndPolygon = end();
 
-	for ( GeoPolygon::Vector::Iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
+	for ( GeoPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
 		if (itPolygon->getClosed() == true)  
@@ -197,9 +197,9 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 //	QTime *timer2 = new QTime();
 //	timer2->restart();
 
-	GeoPolygon::Vector::ConstIterator itEndPolygon = end();
+	GeoPolygon::Vector::const_iterator itEndPolygon = end();
 
-	for ( GeoPolygon::Vector::Iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
+	for ( GeoPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
 		if (itPolygon->getClosed() == true)  

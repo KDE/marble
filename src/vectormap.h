@@ -39,15 +39,10 @@ private:
 	matrix m_rotMatrix;
 
 	GeoPolygon m_polygon;
-	void initCrossHorizon();
+	inline void initCrossHorizon();
 	void manageCrossHorizon();
 	const QPoint horizonPoint();
 	void createArc();
-
-	void initCrossFrame();
-	void manageCrossFrame();
-	const QPoint framePoint();
-	void createBorder();
 
 	int imgrx, imgry, imgradius;
 	int imgwidth, imgheight;

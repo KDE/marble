@@ -19,8 +19,8 @@ public:
 	void coordinate( float& lng, float& lat );
 	void setCoordinate( float lng, float lat );
 
-	const QPoint symbolPos(){ return m_sympos; }
-	void setSymbolPos( QPoint sympos ){ m_sympos = sympos; }
+	const QPoint& symbolPos(){ return m_sympos; }
+	void setSymbolPos( const QPoint& sympos ){ m_sympos = sympos; }
 
 	const QChar role() const { return m_role; }
 	void setRole( QChar role ){ m_role = role; }
@@ -33,10 +33,10 @@ public:
 
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
-	const QPixmap textPixmap() const { return m_textPixmap; }
-	const QRect textRect() const { return m_rect; }
-	void setTextPixmap( QPixmap textPixmap ){ m_textPixmap = textPixmap; }
-	void setTextRect( QRect textRect ){ m_rect = textRect;}
+	const QPixmap& textPixmap() const { return m_textPixmap; }
+	const QRect& textRect() const { return m_rect; }
+	void setTextPixmap( QPixmap& textPixmap ){ m_textPixmap = textPixmap; }
+	void setTextRect( const QRect& textRect ){ m_rect = textRect;}
 	void clearTextPixmap(){ if ( m_textPixmap.isNull() == false ) { m_textPixmap = QPixmap(); } }
 
 private:

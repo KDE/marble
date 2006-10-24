@@ -40,7 +40,9 @@ public slots:
 
 
 private:
-	QFont m_font;
+
+	QFont m_font_regular, m_font_regular_italics, m_font_regular_underline;
+
 	QColor m_labelcolor;
 	int m_fontheight, m_fontascent;
 	QVector<QPixmap> m_citysymbol;
