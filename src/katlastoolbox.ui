@@ -159,6 +159,9 @@
                <height>16</height>
               </size>
              </property>
+             <property name="layoutMode" >
+              <enum>QListView::Batched</enum>
+             </property>
              <property name="viewMode" >
               <enum>QListView::ListMode</enum>
              </property>
@@ -330,8 +333,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>255</width>
-        <height>486</height>
+        <width>110</width>
+        <height>110</height>
        </rect>
       </property>
       <attribute name="label" >

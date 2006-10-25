@@ -23,13 +23,6 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 	katlasview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding));
 
 	katlasview->setMinimumZoom( toolbox->minimumZoom() );
-//	QStringListModel* placemarks = new QStringListModel();
-
-//	QAbstractListModel* placemarks = 0;
-//	katlasview->getPlaceMarks(placemarks);
-	toolbox -> setLocations(katlasview->getPlaceMarkModel());
-
-//	toolbox -> setLocations(placemarks);
 
 	QVBoxLayout *vlayout = new QVBoxLayout(this);
 
@@ -38,6 +31,8 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 	hlayout->addWidget(toolbox);
 	hlayout->addWidget(katlasview);
 	vlayout->addLayout(hlayout);
+
+	toolbox -> setLocations(katlasview->getPlaceMarkModel());
 
 	connect(toolbox, SIGNAL(goHome()), katlasview, SLOT(goHome()));
 	connect(toolbox, SIGNAL(zoomChanged(int)), katlasview, SLOT(zoomView(int)));
