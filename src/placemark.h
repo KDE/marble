@@ -31,6 +31,9 @@ public:
 	const int population() const { return m_population; }
 	void setPopulation( int population ){ m_population = population; }
 
+	const bool selected() const { return m_selected; }
+	void setSelected( bool selected ){ m_selected = selected; }
+
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
 	const QPixmap& textPixmap() const { return m_textPixmap; }
@@ -45,6 +48,7 @@ private:
 	QPixmap m_textPixmap;
 	QRect m_rect;
 	int m_population;
+	bool m_selected;
 	int m_symbol;
 	QChar m_role;
 };

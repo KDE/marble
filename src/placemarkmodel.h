@@ -12,21 +12,34 @@
 #ifndef PLACEMARKMODEL_H
 #define PLACEMARKMODEL_H
 
-#include <QStandardItemModel>
+#include <QAbstractListModel>
+#include "placecontainer.h"
+
 /**
 @author Torsten Rahn
 */
 
-class PlaceMarkModel : public QStandardItemModel {
+inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 ){ return mark1->name() < mark2->name(); }
+
+class PlaceMarkModel : public QAbstractListModel {
 
 Q_OBJECT
 
 public:
 	PlaceMarkModel(QObject *parent = 0);
+	~PlaceMarkModel();
+	
+	int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-	void load(QString);
+	QVariant data(const QModelIndex &index, int role) const;
+	QVariant headerData(int section, Qt::Orientation orientation,
+
+	int role = Qt::DisplayRole) const;	
+	void setContainer( PlaceContainer* );
 private:
-
+	QVector<PlaceMark*> m_placemarkindex;
+	QVector<QPixmap> m_citysymbol;
 };
 
 #endif // PLACEMARKMODEL_H

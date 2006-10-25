@@ -19,6 +19,7 @@
 const float deg2rad = M_PI/180.0f;
 
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {
+	m_selected = false;
 	m_symbol = 0;
 	m_textPixmap = QPixmap();
 

@@ -1,8 +1,5 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
- <class>KAtlasToolBox</class>
+ <class>katlasToolBox</class>
  <widget class="QWidget" name="katlasToolBox" >
   <property name="geometry" >
    <rect>
@@ -56,7 +53,7 @@
       </size>
      </property>
      <property name="currentIndex" >
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="toolBoxTab1" >
       <property name="geometry" >
@@ -360,21 +357,16 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <customwidgets>
-  <customwidget>
-   <class>KAtlasThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>katlasthemeselectview.h</header>
-   <container>0</container>
-   <pixmap></pixmap>
-  </customwidget>
   <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
    <header>searchlistview.h</header>
-   <container>0</container>
-   <pixmap></pixmap>
+  </customwidget>
+  <customwidget>
+   <class>KAtlasThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>katlasthemeselectview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

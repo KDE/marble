@@ -25,6 +25,7 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 	katlasview->setMinimumZoom( toolbox->minimumZoom() );
 //	QStringListModel* placemarks = new QStringListModel();
 
+//	QAbstractListModel* placemarks = 0;
 //	katlasview->getPlaceMarks(placemarks);
 	toolbox -> setLocations(katlasview->getPlaceMarkModel());
 

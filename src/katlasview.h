@@ -20,7 +20,7 @@ public:
 
 	const QRegion getActiveRegion();
 	bool getGlobeSphericals(int, int, float&, float&);
-	QAbstractItemModel* getPlaceMarkModel(){ return globe->getPlaceMarkModel(); };
+	QAbstractListModel* getPlaceMarkModel(){ return globe->getPlaceMarkModel(); };
 
 	float getMoveStep();
 	void setMinimumZoom( int zoom ){ minimumzoom = zoom; }

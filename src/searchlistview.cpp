@@ -23,11 +23,10 @@ SearchListView::SearchListView(QWidget* parent):QListView(parent){
 void SearchListView::selectItem(QString text){
 
 	QModelIndexList resultlist;
-	resultlist = model()->match(model()->index(0,0),Qt::EditRole,text,1,Qt::MatchStartsWith);
+	resultlist = model()->match(model()->index(0,0),Qt::DisplayRole,text,1,Qt::MatchStartsWith);
 
 	if (resultlist.size() > 0){ 
 		setCurrentIndex(resultlist[0]);
-		qDebug() << "Model entry: " << text << " " << ( resultlist[0].data(Qt::EditRole) ).toString();
 	}
 	else qDebug("noitem!");
 }

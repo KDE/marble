@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	KAtlasControl katlascontrol(0);
 	katlascontrol.show();
+// katlascontrol.addPlaceMarkFile( "../data/placemarks/stdplacemarks.kml" );
 	for ( int i = 1; i < argc; ++i ) {
 		if ( QFile::exists( app.arguments().at( i ) ) == true )
 			katlascontrol.addPlaceMarkFile( argv[i] );

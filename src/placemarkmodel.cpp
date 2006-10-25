@@ -1,4 +1,6 @@
 #include "placemarkmodel.h"
+
+#include <cmath>
 #include "katlasdirs.h"
 #include <QFile>
 #include <QTextStream>
@@ -11,132 +13,89 @@
 #include "placemarkmodel.moc"
 #endif
 
-PlaceMarkModel::PlaceMarkModel(QObject* obj) : QStandardItemModel(obj){
-	QModelIndex parent;
-//	parent = index(0, 0, parent);
-	insertColumns(0, 8, parent);
+PlaceMarkModel::PlaceMarkModel(QObject *parent) : QAbstractListModel(parent){
+	m_citysymbol 
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_white.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_yellow.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_orange.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_red.png"))
 
-        setHeaderData(0, Qt::Horizontal, tr("Place"));
-        setHeaderData(1, Qt::Horizontal, tr("State"));
-        setHeaderData(2, Qt::Horizontal, tr("Country"));
-        setHeaderData(3, Qt::Horizontal, tr("Role"));
-        setHeaderData(4, Qt::Horizontal, tr("Lat"));
-        setHeaderData(5, Qt::Horizontal, tr("Lon"));
-        setHeaderData(6, Qt::Horizontal, tr("Population"));
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_white.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_yellow.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_orange.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_red.png"))
 
-//	load(KAtlasDirs::path("placemarks/cities.txt"));
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_white.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_yellow.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_orange.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_red.png"))
+
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_white.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_yellow.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"));
+
 }
 
-void PlaceMarkModel::load(QString filename){
-	QTime timer;
-	timer.start();
+PlaceMarkModel::~PlaceMarkModel(){
+}
 
-	QFile file( filename );
-        file.open( QIODevice::ReadOnly );
-        QTextStream stream( &file );  // read the data serialized from the file
-	stream.setCodec("UTF-8");
+int PlaceMarkModel::rowCount(const QModelIndex &parent) const {
+	return m_placemarkindex.size();
+}
 
-	QString rawline;
-	QString name, state, country, role, popstring, latstring, lngstring; 
-	float population, lat, lng;
+int PlaceMarkModel::columnCount(const QModelIndex &parent) const {
+	return 6;
+}
 
-	QIcon* city_1_red = new QIcon(KAtlasDirs::path("bitmaps/city_1_red.png"));
-	QIcon* city_1_orange = new QIcon(KAtlasDirs::path("bitmaps/city_1_orange.png"));
-	QIcon* city_1_yellow = new QIcon(KAtlasDirs::path("bitmaps/city_1_yellow.png"));
-	QIcon* city_1_white = new QIcon(KAtlasDirs::path("bitmaps/city_1_white.png"));
+QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const {
+	if (!index.isValid())
+	return QVariant();
 
-	QIcon* city_2_red = new QIcon(KAtlasDirs::path("bitmaps/city_2_red.png"));
-	QIcon* city_2_orange = new QIcon(KAtlasDirs::path("bitmaps/city_2_orange.png"));
-	QIcon* city_2_yellow = new QIcon(KAtlasDirs::path("bitmaps/city_2_yellow.png"));
-	QIcon* city_2_white = new QIcon(KAtlasDirs::path("bitmaps/city_2_white.png"));
+	if (index.row() >= m_placemarkindex.size())
+		return QVariant();
 
-	QIcon* city_3_red = new QIcon(KAtlasDirs::path("bitmaps/city_3_red.png"));
-	QIcon* city_3_orange = new QIcon(KAtlasDirs::path("bitmaps/city_3_orange.png"));
-	QIcon* city_3_yellow = new QIcon(KAtlasDirs::path("bitmaps/city_3_yellow.png"));
-	QIcon* city_3_white = new QIcon(KAtlasDirs::path("bitmaps/city_3_white.png"));
-
-	QIcon* city_4_red = new QIcon(KAtlasDirs::path("bitmaps/city_4_red.png"));
-	QIcon* city_4_orange = new QIcon(KAtlasDirs::path("bitmaps/city_4_orange.png"));
-	QIcon* city_4_yellow = new QIcon(KAtlasDirs::path("bitmaps/city_4_yellow.png"));
-	QIcon* city_4_white = new QIcon(KAtlasDirs::path("bitmaps/city_4_white.png"));
-
-	QIcon* placeicon = 0;
-
-	QStringList splitline;
-	int row = 0;
-
-	while(!stream.atEnd()){
-
-		rawline=stream.readLine();
-		splitline = rawline.split("\t");
-
-		name = splitline[0];
-
-//		state = splitline[1];
-//		country = splitline[2];
-//		role = splitline[3];
-		popstring = splitline[4];
-		latstring = splitline[5];
-		lngstring = splitline[6];
-
-		population = 1000*popstring.toFloat();
-
-		placeicon=city_1_red;
-		if(population < 10000000) placeicon=city_1_red;
-
-
-		if(population < 2500) placeicon=city_4_white;
-		else if(population < 5000) placeicon=city_4_yellow;
-		else if(population < 7500) placeicon=city_4_orange;
-		else if(population < 10000) placeicon=city_4_red;
-		else if(population < 25000) placeicon=city_3_white;
-		else if(population < 50000) placeicon=city_3_yellow;
-		else if(population < 75000) placeicon=city_3_orange;
-		else if(population < 100000) placeicon=city_3_red;
-		else if(population < 250000) placeicon=city_2_white;
-		else if(population < 500000) placeicon=city_2_yellow;
-		else if(population < 750000) placeicon=city_2_orange;
-		else if(population < 1000000) placeicon=city_2_red;
-		else if(population < 2500000) placeicon=city_1_white;
-		else if(population < 5000000) placeicon=city_1_yellow;
-		else if(population < 7500000) placeicon=city_1_orange;
-
-		lng = lngstring.left(lngstring.size()-2).toFloat();
-		if (lngstring.contains("E")) lng=-lng;
-
-		lat = latstring.left(latstring.size()-2).toFloat();
-		if (latstring.contains("S")) lat=-lat;
-
-		insertRow(row);
-/*
-                QStandardItem *item = new QStandardItem();
-		item->setData(name, Qt::EditRole);
-		item->setData(*placeicon, Qt::DecorationRole );
-                setItem(row, 0, item);
-                item = new QStandardItem();
-		item->setData(lat);
-                setItem(row, 4, item);
-                item = new QStandardItem();
-		item->setData(lng);
-                setItem(row, 5, item);
-*/
-
-		setData(index(row, 0), name, Qt::EditRole);
-		setData(index(row, 0), *placeicon, Qt::DecorationRole );
-
-//		setData(index(row, 1, QModelIndex()), state);
-//		setData(index(row, 2, QModelIndex()), country);
-//		setData(index(row, 3, QModelIndex()), role);
-		setData(index(row, 4), lat);
-		setData(index(row, 5), lng);
-//		setData(index(row, 6, QModelIndex()), population);
-
-		row++;
-//		PlaceMark *city = new PlaceMark(name,lat,lng);
-//		append( city );
-
+	if (role == Qt::DisplayRole){
+		float lng, lat;
+		switch ( index.column() ){
+		case 4:
+			m_placemarkindex.at(index.row())->coordinate( lng, lat );
+			return -lat*180.0/M_PI;
+			break;
+		case 5:
+			m_placemarkindex.at(index.row())->coordinate( lng, lat );
+			return lng*180.0/M_PI;
+			break;
+		default:
+			return m_placemarkindex.at(index.row())->name();
+			break;
+		}
 	}
+	if (role == Qt::DecorationRole){
+		return m_citysymbol.at(m_placemarkindex.at(index.row())->symbol());
+	}
+	else
+		return QVariant();
+}
 
-	file.close();
-	qDebug() << "Elapsed:" << QString::number( timer.elapsed() );
+QVariant PlaceMarkModel::headerData(int section, Qt::Orientation orientation,
+                                      int role) const
+{
+	if (role != Qt::DisplayRole)
+		return QVariant();
+
+	if (orientation == Qt::Horizontal)
+		return QString("Column %1").arg(section);
+	else
+		return QString("Row %1").arg(section);
+}
+
+void PlaceMarkModel::setContainer(PlaceContainer* container){
+
+	PlaceContainer::const_iterator it;
+
+	for ( it=container->constBegin(); it != container->constEnd(); it++ ){ // STL iterators
+		m_placemarkindex << *it;
+	}
+	qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
 }

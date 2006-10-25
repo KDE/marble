@@ -20,7 +20,7 @@
 
 class QStringListModel;
 
-class KAtlasToolBox : public QWidget, private Ui::KAtlasToolBox {
+class KAtlasToolBox : public QWidget, private Ui::katlasToolBox {
 
 Q_OBJECT
 

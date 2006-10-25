@@ -102,13 +102,17 @@ void KAtlasView::centerOn(const float& phi, const float& theta){
 void KAtlasView::centerOn(const QModelIndex& index){
 	int row = index.row();
 //	qDebug() << row;
-	QAbstractItemModel* model = globe->getPlaceMarkModel();
+
+	QAbstractListModel* model = globe->getPlaceMarkModel();
+	if (model == 0) qDebug("model null");
+
 	QModelIndex mlat = model->index(row,4,QModelIndex());
 	float lat = (float)(model->data(mlat,Qt::DisplayRole).toDouble());
 	QModelIndex mlng = model->index(row,5,QModelIndex());
 	float lng = (float)(model->data(mlng,Qt::DisplayRole).toDouble());
 
-	centerOn(lat, lng);
+	centerOn(lat,lng);
+
 	globe->setCenterOn(row);
 	repaint();
 }

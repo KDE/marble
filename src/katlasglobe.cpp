@@ -56,14 +56,14 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
 
 	placemarkmanager = new PlaceMarkManager();
-	m_placemarkmodel = new PlaceMarkModel();
+	m_placemarkmodel = new PlaceMarkModel( this );
 
-	QSortFilterProxyModel* sortmodel = new QSortFilterProxyModel( this );
-	sortmodel->setSourceModel( m_placemarkmodel );
+//	QSortFilterProxyModel* sortmodel = new QSortFilterProxyModel( this );
+//	sortmodel->setSourceModel( m_placemarkmodel );
 
 //	m_placemarkmodel -> sort( 0, Qt::AscendingOrder );
-	sortmodel -> sort( 0, Qt::AscendingOrder );
-	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
+//	sortmodel -> sort( 0, Qt::AscendingOrder );
+//	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
 
 }
 
@@ -155,7 +155,7 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 	}
 	
 // this one paints the placemark that was searched for
-	if (m_centered == true) m_placemarkpainter->paintPlaceMark(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_placemarkmodel, m_centeredItem);
+//	if (m_centered == true) m_placemarkpainter->paintPlaceMark(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_placemarkmodel, m_centeredItem);
 
 	m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);
 //	qDebug() << "Placemarks: " << timer->elapsed();
@@ -255,6 +255,6 @@ void KAtlasGlobe::addPlaceMarkFile( QString filename ){
 	reader.parse( source );
 
 	m_placecontainer->sort();
-
+	m_placemarkmodel->setContainer( m_placecontainer );
 	qDebug() << "Number of placemarks: " << m_placecontainer->size();
 }

@@ -12,6 +12,7 @@
 #ifndef KATLASGLOBE_H
 #define KATLASGLOBE_H
 
+#include <QAbstractListModel>
 #include <QObject>
 #include <QPainter>
 #include <QImage>
@@ -54,7 +55,7 @@ public:
 
 	void rotateBy(const Quaternion&);
 	void rotateBy(const float&, const float&);
-	QAbstractItemModel* getPlaceMarkModel(){ return m_placemarkmodel; };
+	QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
 
 	void setCenterOn(int row){ m_centeredItem = row; m_centered = true; }
 
@@ -80,7 +81,7 @@ private:
 	VectorComposer* veccomposer;
 	PlaceMarkManager* placemarkmanager;
 //	PlaceComposer* placecomposer;
-	QAbstractItemModel* m_placemarkmodel;
+	PlaceMarkModel* m_placemarkmodel;
 	PlaceMarkPainter* m_placemarkpainter;
 	PlaceContainer* m_placecontainer;
 
