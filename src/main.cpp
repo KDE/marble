@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			}
 */
 			qDebug( "Timedemo finished in %ims", t.elapsed() );
-			qDebug() <<  QString("= %1 fps").arg(100000.0/(float)(t.elapsed()));
+			qDebug() <<  QString("= %1 fps").arg(200*1000/(float)(t.elapsed()));
 			return 0;
 		}			 
 	}

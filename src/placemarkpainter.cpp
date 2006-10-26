@@ -98,7 +98,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	int x = 0; int y = 0; 
 
 	Quaternion invRotAxis = rotAxis.inverse();
-	Quaternion* qpos = new Quaternion();
+	Quaternion qpos;
 
 	painter->setPen(QColor(Qt::black));	
 
@@ -136,16 +136,16 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		if ( m_weightfilter[mark->symbol()] > radius && mark->symbol() != 0 ) continue; 
 
-		*qpos = mark->getQuatPoint();
+		qpos = mark->getQuatPoint();
 
-		qpos->rotateAroundAxis(invRotAxis);
+		qpos.rotateAroundAxis(invRotAxis);
 
 		textpixmap = mark->textPixmap();
 
-		if ( qpos->v[Q_Z] > 0 ){
+		if ( qpos.v[Q_Z] > 0 ){
 
-			x = (int)(imgrx + radius*qpos->v[Q_X]);
-			y = (int)(imgry + radius*qpos->v[Q_Y]);
+			x = (int)(imgrx + radius*qpos.v[Q_X]);
+			y = (int)(imgry + radius*qpos.v[Q_Y]);
 
 			// Don't process placemarks if they are outside the screen area
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){

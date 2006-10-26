@@ -117,8 +117,8 @@ void KAtlasGlobe::resize(){
 }
 
 void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
-//	QTime *timer = new QTime();
-//	timer->restart();
+	QTime *timer = new QTime();
+	timer->restart();
 	if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ){
 
 // Workaround
@@ -147,6 +147,8 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 	}
 
 	painter->drawImage(dirty, *m_canvasimg, dirty); // paint Map on Widget
+//		qDebug() << "Paint on Widget: " << timer->elapsed();
+//		timer->restart();
 
 	if ( m_maptheme->vectorlayer().enabled == true ){
 		veccomposer->paintVectorMap(painter, m_radius, m_rotAxis); // Add further Vectors

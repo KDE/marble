@@ -186,6 +186,8 @@ const QRegion KAtlasView::getActiveRegion(){
 
 void KAtlasView::paintEvent(QPaintEvent *evt)
 {
+//	QTime *timer = new QTime();
+//	timer->restart();
 //	Debugging Active Region
 //	painter.setClipRegion(activeRegion);
 
@@ -216,6 +218,8 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 		pixmapPainter.drawImage(rect, canvasimg, rect);
 	}
 */
+//		qDebug() << "PaintEvent: " << timer->elapsed();
+//		timer->restart();
 }
 
 void KAtlasView::goHome(){
