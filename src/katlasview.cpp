@@ -101,7 +101,6 @@ void KAtlasView::centerOn(const float& phi, const float& theta){
 
 void KAtlasView::centerOn(const QModelIndex& index){
 	int row = index.row();
-//	qDebug() << row;
 
 	QAbstractListModel* model = globe->getPlaceMarkModel();
 	if (model == 0) qDebug("model null");
@@ -114,6 +113,8 @@ void KAtlasView::centerOn(const QModelIndex& index){
 	centerOn(lat,lng);
 
 	globe->setCenterOn(row);
+
+	m_crosshair.setEnabled( true );
 	repaint();
 }
 
@@ -195,7 +196,8 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 //	{
 		int radius = globe->getRadius();
 		bool clip = (radius > canvasimg.width()/2 || radius > canvasimg.height()/2) ? true : false;
-		ClipPainter painter( this, clip);
+		ClipPainter painter( this, clip); 
+//		QPainter painter(this);
 
 		QRect dirty = evt->rect();
 		globe->paintGlobe(&painter,dirty);
@@ -208,6 +210,9 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 
 		painter.drawPixmap( canvasimg.width()-60, 10,
 		m_windrose.drawWindRosePixmap( canvasimg.width(), canvasimg.height(), globe->northPoleY() ) );
+
+		m_crosshair.paintCrossHair( &painter, canvasimg.width(), canvasimg.height() );
+
 //	}
 /*
 	else

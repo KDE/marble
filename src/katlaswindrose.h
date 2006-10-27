@@ -1,9 +1,9 @@
 //
 // C++ Interface: gpmapscale
 //
-// Description: KAtlasMapScale 
+// Description: KAtlasWindRose 
 
-// KAtlasMapScale resembles the scale in terms of value and visualisation
+// KAtlasWindRose paints a windrose on a pixmap
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2006
 //
@@ -29,13 +29,7 @@ Q_OBJECT
 public:
 	KAtlasWindRose(QObject *parent = 0);
 
-//	void setFont(QFont font){ m_font = font; }
-
 	QPixmap& drawWindRosePixmap(int, int, int );
-
-public slots:
-
-//	void setScaleBarWidth(int scalebarwidth){ m_scalebarwidth = scalebarwidth; }
 
 protected:
 

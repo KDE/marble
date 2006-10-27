@@ -37,11 +37,8 @@ public:
 
 	int scaleBarWidth()const{ return m_scalebarwidth; }
 
-//	void setFont(QFont font){ m_font = font; }
-
 	void paintScaleBar(QPainter*, int, int);
 	QPixmap& drawScaleBarPixmap(int, int);
-//	QPicture scaleBar(int radius, int width);
 
 public slots:
 

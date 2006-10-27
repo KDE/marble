@@ -116,9 +116,9 @@ void KAtlasGlobe::resize(){
 	m_justModified = true;
 }
 
-void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
-	QTime *timer = new QTime();
-	timer->restart();
+void KAtlasGlobe::paintGlobe(QPainter* painter, QRect dirty){
+//	QTime *timer = new QTime();
+//	timer->restart();
 	if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ){
 
 // Workaround
@@ -156,12 +156,12 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 //		timer->restart();
 	}
 	
-// this one paints the placemark that was searched for
-//	if (m_centered == true) m_placemarkpainter->paintPlaceMark(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_placemarkmodel, m_centeredItem);
-
-	m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);
-//	qDebug() << "Placemarks: " << timer->elapsed();
 //	timer->restart();
+	if ( m_placecontainer->size() > 0 ){
+		m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);
+	}
+//	qDebug() << "Placemarks: " << timer->elapsed();
+
 	m_rotAxisUpdated = m_rotAxis;
 	m_radiusUpdated = m_radius;
 	m_justModified = false;

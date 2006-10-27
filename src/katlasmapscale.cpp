@@ -18,8 +18,6 @@ KAtlasMapScale::KAtlasMapScale(QObject* parent) : QObject(parent) {
 	m_fontheight = QFontMetrics(m_font).ascent();
 	m_leftmargin = QFontMetrics(m_font).boundingRect("0").width()/2;
 	m_rightmargin = QFontMetrics(m_font).boundingRect("0000").width()/2;
-//	QFontMetrics fontmetrics = QFontMetrics(m_font);
-//	m_fontheight
 
 	m_invscale = m_radius = 0;
 	m_scalebarkm = 0.0;
@@ -85,8 +83,6 @@ void KAtlasMapScale::paintScaleBar(QPainter* painter, int radius, int width){
 			painter->drawText(m_leftmargin + j*m_pixelinterval-QFontMetrics(m_font).width(intervalstr)/2,m_fontheight,intervalstr);
 
 	}
-
-//	return m_pic;
 }
 
 void KAtlasMapScale::calcScaleBar(){

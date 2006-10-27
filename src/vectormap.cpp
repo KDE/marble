@@ -159,6 +159,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 	bool clip = (m_radius > imgrx || m_radius > imgry) ? true : false;
 
 	ClipPainter painter(origimg, clip);
+//	QPainter painter(origimg);
 	if (antialiasing == true) painter.setRenderHint(QPainter::Antialiasing);
 
 	painter.setPen(m_pen);
@@ -183,7 +184,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 }
 
 
-void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
+void VectorMap::paintMap(QPainter * painter, bool antialiasing){
 
 //	bool clip = (m_radius > imgrx || m_radius > imgry) ? true : false;
 

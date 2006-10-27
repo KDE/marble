@@ -29,6 +29,8 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	m_fontheight = QFontMetrics(m_font_regular).height();
 	m_fontascent = QFontMetrics(m_font_regular).ascent();
 
+	m_labelareaheight = 2 * m_fontheight;
+
 	m_labelcolor = QColor( 0, 0, 0, 255 );
 
 	m_citysymbol 
@@ -97,6 +99,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	int imgwidth = 2 * imgrx; int imgheight = 2 * imgry;
 	int x = 0; int y = 0; 
 
+	int secnumber = imgheight / m_labelareaheight + 1;
+
 	Quaternion invRotAxis = rotAxis.inverse();
 	Quaternion qpos;
 
@@ -109,7 +113,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 	QPixmap textpixmap;
 
-
+	QVector < QVector < PlaceMark* > > m_rowsection;
+	for ( int i = 0; i < secnumber; i++) m_rowsection.append( QVector<PlaceMark*>( ) );
+//	m_rowsection.clear();
+//	qDebug() << QString("Vectorsize: %1 ").arg( m_rowsection.size());
 //	QPen outlinepen( QColor( 255,255,255,160 ) );
 //	outlinepen.setWidth( 1 );
 //	QBrush outlinebrush( QColor( 255,255,255,160 ) );
@@ -124,7 +131,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 //	qDebug() << QString("Radius: %1").arg(radius); 
 
-	QVector<PlaceMark*> visibleplacemarks;
+	PlaceContainer visibleplacemarks;
 	visibleplacemarks.clear();
 
 	PlaceContainer::const_iterator it;
@@ -134,7 +141,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		PlaceMark* mark  = *it; // no cast
 
-		if ( m_weightfilter[mark->symbol()] > radius && mark->symbol() != 0 ) continue; 
+		if ( m_weightfilter.at(mark->symbol()) > radius && mark->symbol() != 0 ) continue; 
 
 		qpos = mark->getQuatPoint();
 
@@ -149,6 +156,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 			// Don't process placemarks if they are outside the screen area
 			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
+
+				// Choose Section
+				const QVector<PlaceMark*> currentsec = m_rowsection.at( y / m_labelareaheight ); 
 
 				// Specify font properties
 		
@@ -176,18 +186,20 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 				bool overlap = true;
 				int xpos = x + 2;
+				int ypos = 0;
 
 				while ( xpos >= x - fontwidth - 2 && overlap == true ) { 
 
-					int ypos = y;
-
+					ypos = y; 
+	
 					while ( ypos >= y - m_fontheight && overlap == true) { 
 
 						overlap = false;
 
 						QRect textRect( xpos, ypos, fontwidth, m_fontheight ); 
 
-						for ( QVector<PlaceMark*>::const_iterator beforeit = visibleplacemarks.constBegin(); beforeit != visibleplacemarks.constEnd(); beforeit++ ){ // STL iterators
+
+						for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin(); beforeit != currentsec.constEnd(); beforeit++ ){ // STL iterators
 							if ( textRect.intersects( (*beforeit) -> textRect()) ){
 								overlap = true;
 								break;
@@ -249,6 +261,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					// Paint the label onto the map
 
 					mark->setSymbolPos( QPoint( x-4, y-4 ) );
+
+					int idx = y / m_labelareaheight;
+					if ( idx - 1 >= 0 )  m_rowsection[ idx - 1 ].append( mark );
+					m_rowsection[ idx ].append( mark );
+					if ( idx + 1 < secnumber )  m_rowsection[ idx + 1 ].append( mark );
+
 					visibleplacemarks.append(mark);					
 				}
 				else {
@@ -264,12 +282,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			mark->clearTextPixmap();
 		}
 	}
+//	qDebug() << QString("Size: %1, Rows: %2").arg(visibleplacemarks.size()).arg( secnumber );
+	PlaceContainer::const_iterator visit = visibleplacemarks.constEnd();
 
-	QVector<PlaceMark*>::const_iterator visit = visibleplacemarks.constEnd();
 	while (visit != visibleplacemarks.constBegin()) {
 		--visit;
 		painter->drawPixmap( (*visit) -> textRect(), (*visit) -> textPixmap() );
-		painter->drawPixmap( (*visit) -> symbolPos(), m_citysymbol[ (*visit) -> symbol() ] );
+		painter->drawPixmap( (*visit) -> symbolPos(), m_citysymbol.at( (*visit) -> symbol() ) );
 	}
 }
 

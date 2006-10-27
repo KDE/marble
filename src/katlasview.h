@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QImage>
 #include "katlasglobe.h"
+#include "katlascrosshair.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
 
@@ -69,6 +70,7 @@ private:
 	TextureColorizer* sealegend;
 	QImage canvasimg;
 
+	KAtlasCrossHair m_crosshair;
 	KAtlasMapScale m_mapscale;
 	KAtlasWindRose m_windrose;
 

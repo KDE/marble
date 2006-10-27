@@ -75,7 +75,7 @@ void VectorComposer::drawTextureMap(QPaintDevice * origimg, const int& radius, Q
 }
 
 
-void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Quaternion& rotAxis){
+void VectorComposer::paintVectorMap(QPainter* painter, const int& radius, Quaternion& rotAxis){
 
 // Rivers
 	vectormap -> setzBoundingBoxLimit(-1.0); 

@@ -17,6 +17,7 @@
 #include <QPixmap>
 #include <QRect>
 #include <QVector>
+#include "placemark.h"
 #include "quaternion.h"
 
 /**
@@ -45,8 +46,10 @@ private:
 
 	QColor m_labelcolor;
 	int m_fontheight, m_fontascent;
-	QVector<QPixmap> m_citysymbol;
-	QVector<int> m_weightfilter;
+	int m_labelareaheight;
+
+	QVector < QPixmap > m_citysymbol;
+	QVector < int > m_weightfilter;
 	QPixmap m_empty;
 	float m_widthscale;
 

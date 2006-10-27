@@ -111,7 +111,7 @@ void TextureLoader::resetTilehash(){
 
 	QHash<int, TileContainer*>::const_iterator it = tilehash.constBegin();
 	while (it != tilehash.constEnd()) {
-		tilehash[it.key()]->used=false;
+		tilehash.value(it.key())->used=false;
 		++it;
 	}
 
@@ -128,7 +128,7 @@ void TextureLoader::cleanupTilehash(){
 		it.next();
 		if ((it.value())->used == false){
 //			qDebug("Removing " + QString::number(it.key()).toLatin1());
-			delete tilehash[it.key()];
+			delete tilehash.value(it.key());
 			tilehash.remove(it.key());	
 		}
 	}

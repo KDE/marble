@@ -12,14 +12,12 @@
 #include "katlaswindrose.moc"
 #endif
 
-const double earthdiameter = 6378.0;
-
 KAtlasWindRose::KAtlasWindRose(QObject* parent) : QObject(parent) {
 	m_width = 0;
 
 	m_font = QFont("Sans Serif",8 );
 	m_font.setStyleStrategy(QFont::ForceOutline);
-//	m_font.setBold( true );
+
 	m_fontheight = QFontMetrics(m_font).ascent();
 	m_fontwidth = QFontMetrics(m_font).boundingRect("N").width();
 	m_svgobj = new QSvgRenderer( KAtlasDirs::path("svg/windrose.svg"), this );
