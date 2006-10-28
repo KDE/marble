@@ -209,7 +209,7 @@ void Quaternion::getSpherical(float &alpha, float &beta) {
 	beta = -asin(v[Q_Y]);
 
 	if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005f) 
-		alpha = atan2(v[Q_X], v[Q_Z]);
+		alpha = -atan2(v[Q_X], v[Q_Z]);
 	else
 		alpha = 0.0f;
 }

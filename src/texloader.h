@@ -38,7 +38,7 @@ struct TileContainer{
 class TextureLoader {
 public:
 	TextureLoader( const QString& );
-	virtual ~TextureLoader(){};
+	virtual ~TextureLoader(){}
 
 	void setMap( const QString& );
 	void resetTilehash();

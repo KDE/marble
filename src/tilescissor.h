@@ -1,7 +1,7 @@
 //
 // C++ Interface: tilescissor
 //
-// Description: Some quick and dirty substitutes for (trigonometric) 
+// Description: Some class to tile the base map
 // functions
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2004

@@ -10,6 +10,7 @@
 #ifndef PLACEMARKMANAGER_H
 #define PLACEMARKMANAGER_H
 
+#include "placecontainer.h"
 #include "katlasdirs.h"
 
 /**
@@ -22,6 +23,17 @@ public:
 	~PlaceMarkManager(){};
 
 	void queryStatus();
+
+	PlaceContainer* getPlaceContainer(){ m_placecontainer->sort(); return m_placecontainer; }
+
+	void loadKml( QString );
+
+protected:
+	PlaceContainer* m_placecontainer;
+
+	void importKml( QString, PlaceContainer*);
+	void saveFile( QString, PlaceContainer*);
+	void loadFile( QString, PlaceContainer*);
 };
 
 #endif // PLACEMARKMANAGER_H

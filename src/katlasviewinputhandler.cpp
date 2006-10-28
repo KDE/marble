@@ -138,7 +138,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 					}
 
 					m_globe->rotateTo(180/pi*(float)(-m_leftpressedb) + 90*deltay/radius, 
-						180/pi*(float)(m_leftpresseda) + 90*direction*deltax/radius);
+						-180/pi*(float)(m_leftpresseda) + 90*direction*deltax/radius);
 
 					m_gpview->repaint();
 				}

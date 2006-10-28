@@ -19,7 +19,7 @@ public:
 	void coordinate( float& lng, float& lat );
 	void setCoordinate( float lng, float lat );
 
-	const QPoint& symbolPos(){ return m_sympos; }
+	const QPoint& symbolPos() const { return m_sympos; }
 	void setSymbolPos( const QPoint& sympos ){ m_sympos = sympos; }
 
 	const QChar role() const { return m_role; }

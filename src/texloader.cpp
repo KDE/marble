@@ -232,8 +232,8 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 
 void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line, const int& x){
 	m_prevlat = radlat;
-	m_prevlng = -radlng;
-	getPixelValue(-radlng, radlat, line[x]);
+	m_prevlng = radlng;
+	getPixelValue(radlng, radlat, line[x]);
 }
 
 inline void TextureLoader::flush(){

@@ -56,14 +56,10 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
 
 	placemarkmanager = new PlaceMarkManager();
+	m_placecontainer = placemarkmanager->getPlaceContainer();
+
 	m_placemarkmodel = new PlaceMarkModel( this );
-
-//	QSortFilterProxyModel* sortmodel = new QSortFilterProxyModel( this );
-//	sortmodel->setSourceModel( m_placemarkmodel );
-
-//	m_placemarkmodel -> sort( 0, Qt::AscendingOrder );
-//	sortmodel -> sort( 0, Qt::AscendingOrder );
-//	m_placemarkmodel = ( QAbstractItemModel* )sortmodel;
+	m_placemarkmodel->setContainer( m_placecontainer );
 
 }
 
@@ -245,18 +241,9 @@ bool KAtlasGlobe::screenCoordinates( const float lng, const float lat, int& x, i
 
 void KAtlasGlobe::addPlaceMarkFile( QString filename ){ 
 
-	KAtlasXmlHandler handler( m_placecontainer );
+	placemarkmanager->loadKml( filename );
 
-	QFile file( filename );
+	m_placecontainer = placemarkmanager->getPlaceContainer();
 
-	QXmlInputSource source( &file );
-
-	QXmlSimpleReader reader;
-	reader.setContentHandler( &handler );
-
-	reader.parse( source );
-
-	m_placecontainer->sort();
-	m_placemarkmodel->setContainer( m_placecontainer );
-	qDebug() << "Number of placemarks: " << m_placecontainer->size();
+	m_placemarkmodel->setContainer( m_placecontainer );	
 }

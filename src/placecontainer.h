@@ -16,6 +16,9 @@ public:
 	void setName( QString name ){ m_name = name; }
 	QString name() const {return m_name; }
 	inline void clearTextPixmaps() { foreach ( PlaceMark* mark, *this ) mark->clearTextPixmap(); }
+
+	inline void deleteAll() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) delete mark; } }
+
 	inline void sort() { qStableSort( begin(), end(), popLessThan ); }
 protected:	
 	QString m_name;

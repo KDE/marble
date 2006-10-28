@@ -64,7 +64,7 @@ QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const {
 			break;
 		case 5:
 			m_placemarkindex.at(index.row())->coordinate( lng, lat );
-			return lng*180.0/M_PI;
+			return -lng*180.0/M_PI;
 			break;
 		default:
 			return m_placemarkindex.at(index.row())->name();

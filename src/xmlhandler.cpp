@@ -1,7 +1,10 @@
 #include "xmlhandler.h"
 
+#include <cmath>
 #include "placecontainer.h"
 #include "placemark.h"
+
+const float deg2rad = M_PI/180.0f;
 
 KAtlasXmlHandler::KAtlasXmlHandler( bool ondisc ):m_ondisc(ondisc){
 	m_placecontainer = new PlaceContainer("placecontainer");
@@ -139,7 +142,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inPoint && nameLower == "coordinates"){
 		QStringList splitline = m_currentText.split(",");
-		m_placemark->setCoordinate( splitline[0].toFloat(), splitline[1].toFloat() );
+		m_placemark->setCoordinate( deg2rad * splitline[0].toFloat(), - deg2rad * splitline[1].toFloat() );
 		m_coordsset = true;
 //		qDebug() << splitline[0];
 	}

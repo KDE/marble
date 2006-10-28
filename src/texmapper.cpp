@@ -173,7 +173,7 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 
 			//Approx for n-1 out of n pixels within the boundary of xipleft to xipright
 			if (interpolate) {
-				texldr->getPixelValueApprox(radalpha,radbeta,line,x);
+				texldr->getPixelValueApprox(-radalpha,radbeta,line,x);
 #ifdef INTERLACE
 				for (int j=0; j < n; j++) linefast[x-n+j]=line[x-n+j];	
 #endif

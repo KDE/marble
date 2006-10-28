@@ -77,21 +77,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	 << 0;
 
 	m_useworkaround = testbug();
-}
-
-void PlaceMarkPainter::paintPlaceMark(QPainter* painter, int x, int y, const QAbstractItemModel* model, int row){
-
-	QModelIndex mpic = model->index(row,0,QModelIndex());
-	QIcon icon = (model->data(mpic, Qt::DecorationRole)).value<QIcon>();
-	QModelIndex mnametag = model->index(row,0,QModelIndex());
-	QString nametag = model->data(mnametag, Qt::DisplayRole).toString();
-
-	painter->drawPixmap(x-4, y-4, icon.pixmap(12,12));
-
-	painter->setPen(QColor(Qt::black));	
-	painter->setFont(m_font_regular);
-	painter->drawText(x+8, y+8, nametag);
-
+//	m_useworkaround = true;
 }
 
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry, int radius, const PlaceContainer* placecontainer, Quaternion rotAxis ){

@@ -33,11 +33,10 @@ typedef union {
 class TextureColorizer {
 public:
 	TextureColorizer(QString, QString);
-	virtual ~TextureColorizer(){};
+	virtual ~TextureColorizer(){}
 	void colorize(QImage*, const QImage*, const int&);
 private:
 	static const uint texturepalette[][512];
-//	GpFifo gpfifo;
 };
 
 #endif

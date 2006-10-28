@@ -16,8 +16,6 @@
 
 #include <QDebug>
 
-const float deg2rad = M_PI/180.0f;
-
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {
 	m_selected = false;
 	m_symbol = 0;
@@ -35,7 +33,7 @@ void PlaceMark::coordinate( float& lng, float& lat ){
 }
 
 void PlaceMark::setCoordinate( float lng, float lat ){
-	m_coordinate = GeoPoint( deg2rad * lng, -deg2rad * lat );
+	m_coordinate = GeoPoint( lng, lat );
 
 }
 

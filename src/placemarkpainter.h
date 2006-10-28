@@ -34,7 +34,6 @@ Q_OBJECT
 
 public:
 	PlaceMarkPainter(QObject *parent = 0);
-	void paintPlaceMark(QPainter*, int, int, const QAbstractItemModel*, int);
 	void paintPlaceFolder(QPainter*, int, int, int, const PlaceContainer*, Quaternion );
 	void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
 public slots:
