@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 			QTime t;
 			t.start();
 
-			for ( int j = 0; j < 10; ++j ) {
+			for ( int j = 0; j < 100; ++j ) {
 				for ( int k = 0; k < 10; ++k ) {
 					katlascontrol.moveRight();
 				}
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			}
 */
 			qDebug( "Timedemo finished in %ims", t.elapsed() );
-			qDebug() <<  QString("= %1 fps").arg(200*1000/(float)(t.elapsed()));
+			qDebug() <<  QString("= %1 fps").arg(2000*1000/(float)(t.elapsed()));
 			return 0;
 		}			 
 	}

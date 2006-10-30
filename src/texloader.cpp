@@ -148,8 +148,11 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	int lng = (int)(maxhalfalpha + radlng * rad2pixw);
 	int lat = (int)(maxquatbeta + radlat * rad2pixh);
 
-	if ( lng >= maxfullalpha ) lng = (int)(radlng * rad2pixw); // necessary to prevent crash if radalpha = -pi
-	if ( lat >= maxhalfbeta ) lat = (int)(radlat * rad2pixh + maxquatbeta); // necessary to prevent crash
+	if ( lng >= maxfullalpha ) lng = maxfullalpha-1; // necessary to prevent crash if radalpha = -pi
+	if ( lat >= maxhalfbeta ) lat = maxhalfbeta-1; // necessary to prevent crash
+
+//	if ( lng >= maxfullalpha ) lng = (int)(radlng * rad2pixw); // necessary to prevent crash if radalpha = -pi
+//	if ( lat >= maxhalfbeta ) lat = (int)(radlat * rad2pixh - maxquatbeta); // necessary to prevent crash
 
 // Calculate the position on the respective Tile
 
@@ -184,7 +187,7 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	else
 		pixelvalue = tile->jumpTable32[posy][posx];
 }
-
+/*
 // Interpolate skipped points
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
 	avglat = lat-m_prevlat;
@@ -224,6 +227,51 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 		for (int j=1-m_n; j < 0; j++) {
 			m_prevlat += avglat;
 			m_prevlng -= avglng;
+			getPixelValue( m_prevlng, m_prevlat, line[x + j]);
+		}
+	}	
+
+}
+*/
+
+// Interpolate skipped points
+void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
+	avglat = lat-m_prevlat;
+	avglat *= m_ninv;
+	avglng = lng-m_prevlng;
+
+	if (fabs(avglng) > M_PI){
+
+		avglng = TWOPI - fabs(avglng);
+		avglng *= m_ninv;
+
+		if (m_prevlng < lng){
+			for (int j=1-m_n; j < 0; j++){
+				m_prevlat += avglat;
+				m_prevlng -= avglng;
+				if (m_prevlng <= -M_PI) m_prevlng += TWOPI;
+				getPixelValue( m_prevlng, m_prevlat, line[x+j]);
+			}
+		}
+		// if (m_prevlng > lng)
+		else { 
+			float curAvgLng = lng - m_n*avglng;
+			for (int j=1-m_n; j < 0; j++){
+				m_prevlat += avglat;
+				curAvgLng += avglng;
+				float evallng = curAvgLng;
+				if (curAvgLng <= -M_PI) evallng += TWOPI;
+				getPixelValue( evallng, m_prevlat, line[x+j]);
+			}
+		}
+	}
+
+	else {
+
+		avglng *= m_ninv;
+		for (int j=1-m_n; j < 0; j++) {
+			m_prevlat += avglat;
+			m_prevlng += avglng;
 			getPixelValue( m_prevlng, m_prevlat, line[x + j]);
 		}
 	}	
