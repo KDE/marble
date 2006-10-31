@@ -7,7 +7,6 @@
 #include <QPainter>
 #include <QPoint>
 #include <QVectorIterator>
-#include <QX11Info>
 #include "placecontainer.h"
 #include "placemark.h"
 #include "katlasdirs.h"

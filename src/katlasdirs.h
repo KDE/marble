@@ -22,7 +22,7 @@ class KAtlasDirs
     static QString systemDir() 
 	{ 
           return QDir( qApp->applicationDirPath() 
-#ifdef Q_OS_UNIX
+#if defined(Q_OS_MACX) || defined(Q_OS_DARWIN) || defined(Q_OS_UNIX)
 	+ QLatin1String("/../data")
 #endif
 	  ).canonicalPath();
