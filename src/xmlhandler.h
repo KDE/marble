@@ -9,7 +9,7 @@ class PlaceMark;
 
 class KAtlasXmlHandler : public QXmlDefaultHandler {
 public:
-	KAtlasXmlHandler( bool ondisc = false );
+	KAtlasXmlHandler();
 	KAtlasXmlHandler( PlaceContainer* );
 
 	bool startDocument();
@@ -23,8 +23,6 @@ public:
 private:
 	PlaceContainer* m_placecontainer;
 	PlaceMark* m_placemark;
-
-	bool m_ondisc;
 
 	bool m_inKml;
 	bool m_inPlacemark;

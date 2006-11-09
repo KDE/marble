@@ -41,7 +41,7 @@ public slots:
 
 private:
 
-	QFont m_font_regular, m_font_regular_italics, m_font_regular_underline;
+	QFont m_font_regular, m_font_regular_italics, m_font_regular_underline, m_font_mountain;
 
 	QColor m_labelcolor;
 	int m_fontheight, m_fontascent;

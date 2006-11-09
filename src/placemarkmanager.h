@@ -22,7 +22,7 @@ public:
 	PlaceMarkManager();
 	~PlaceMarkManager(){};
 
-	void queryStatus();
+	void addPlaceMarkFile( QString );
 
 	PlaceContainer* getPlaceContainer(){ m_placecontainer->sort(); return m_placecontainer; }
 

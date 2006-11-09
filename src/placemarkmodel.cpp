@@ -33,8 +33,12 @@ PlaceMarkModel::PlaceMarkModel(QObject *parent) : QAbstractListModel(parent){
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_white.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_yellow.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"));
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"))
 
+	 << QPixmap(KAtlasDirs::path("bitmaps/pole_1.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/pole_2.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/mountain_1.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/volcano_1.png"));
 }
 
 PlaceMarkModel::~PlaceMarkModel(){

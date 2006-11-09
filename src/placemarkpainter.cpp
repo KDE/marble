@@ -20,6 +20,8 @@
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 
+	m_font_mountain = QFont("Sans Serif",7, 50, false );
+
 	m_font_regular = QFont("Sans Serif",8, 50, false );
 	m_font_regular_italics = QFont("Sans Serif",8, 50, true );
 	m_font_regular_underline = QFont("Sans Serif",8, 50, false );
@@ -51,7 +53,12 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_white.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_yellow.png"))
 	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"));
+	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"))
+
+	 << QPixmap(KAtlasDirs::path("bitmaps/pole_1.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/pole_2.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/mountain_1.png"))
+	 << QPixmap(KAtlasDirs::path("bitmaps/volcano_1.png"));
 
 	m_weightfilter
 
@@ -126,7 +133,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		PlaceMark* mark  = *it; // no cast
 
-		if ( m_weightfilter.at(mark->symbol()) > radius && mark->symbol() != 0 ) continue; 
+		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 ) continue; 
 
 		qpos = mark->getQuatPoint();
 
@@ -160,6 +167,15 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					}
 
 					if ( mark->symbol() > 13 ) font.setWeight( 75 );
+
+					if ( mark -> role() == 'P' ) 
+						font = m_font_regular;
+					if ( mark -> role() == 'M' ) 
+						font = m_font_regular;
+					if ( mark -> role() == 'H' ) 
+						font = m_font_mountain;
+					if ( mark -> role() == 'V' ) 
+						font = m_font_regular;
 
 					fontwidth = QFontMetrics(font).width(mark->name());
 				}

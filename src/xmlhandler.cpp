@@ -6,15 +6,13 @@
 
 const float deg2rad = M_PI/180.0f;
 
-KAtlasXmlHandler::KAtlasXmlHandler( bool ondisc ):m_ondisc(ondisc){
+KAtlasXmlHandler::KAtlasXmlHandler(){
 	m_placecontainer = new PlaceContainer("placecontainer");
 	m_placemark = 0;
 	m_coordsset = false;
 }
 
 KAtlasXmlHandler::KAtlasXmlHandler( PlaceContainer* placecontainer ){
-	m_ondisc = false;
-
 	m_placecontainer = placecontainer;
 	m_placemark = 0;
 	m_coordsset = false;
@@ -89,12 +87,15 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 	}
 
 	if ( m_inKml && nameLower == "placemark"){
-		if (m_ondisc == false)
-			if (m_coordsset == true ) m_placecontainer->append( m_placemark );
-		else {
-			qDebug( "Saving ..." );
-		}
-//		qDebug() << m_rootfolder->size();
+
+		if ( m_placemark->role() == 'P' ) m_placemark->setSymbol(16);
+		else if ( m_placemark->role() == 'M' ) m_placemark->setSymbol(17);
+		else if ( m_placemark->role() == 'H' ) m_placemark->setSymbol(18);
+		else if ( m_placemark->role() == 'V' ) m_placemark->setSymbol(19);
+		else m_placemark->setSymbol( m_placemark->popidx() );
+
+		if (m_coordsset == true ) m_placecontainer->append( m_placemark );
+
 		m_inPlacemark = false;
 	}
 
@@ -111,25 +112,25 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 		int population = m_currentText.toInt();
 		m_placemark->setPopulation( population );
 
-		int symbol = 15;
+		int popidx = 15;
 
-		if(population < 2500) symbol=1;
-		else if(population < 5000) symbol=2;
-		else if(population < 7500) symbol=3;
-		else if(population < 10000) symbol=4;
-		else if(population < 25000) symbol=5;
-		else if(population < 50000) symbol=6;
-		else if(population < 75000) symbol=7;
-		else if(population < 100000) symbol=8;
-		else if(population < 250000) symbol=9;
-		else if(population < 500000) symbol=10;
-		else if(population < 750000) symbol=11;
-		else if(population < 1000000) symbol=12;
-		else if(population < 2500000) symbol=13;
-		else if(population < 5000000) symbol=14;
-//		else if(population < 7500000) symbol=15;
+		if(population < 2500) popidx=1;
+		else if(population < 5000) popidx=2;
+		else if(population < 7500) popidx=3;
+		else if(population < 10000) popidx=4;
+		else if(population < 25000) popidx=5;
+		else if(population < 50000) popidx=6;
+		else if(population < 75000) popidx=7;
+		else if(population < 100000) popidx=8;
+		else if(population < 250000) popidx=9;
+		else if(population < 500000) popidx=10;
+		else if(population < 750000) popidx=11;
+		else if(population < 1000000) popidx=12;
+		else if(population < 2500000) popidx=13;
+		else if(population < 5000000) popidx=14;
+//		else if(population < 7500000) popidx=15;
 
-		m_placemark->setSymbol( symbol );
+		m_placemark->setPopidx( popidx );
 	}
 
 	if ( m_inKml && nameLower == "point"){

@@ -6,6 +6,9 @@
 #include <QChar>
 #include <QPixmap>
 #include <QRect>
+
+#include <QVector>
+
 #include "geopoint.h"
 #include "placemarkstorage.h"
 
@@ -27,6 +30,9 @@ public:
 
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
+
+	const int popidx() const { return m_popidx; }
+	void setPopidx( int popidx ){ m_popidx = popidx; }
 
 	const int population() const { return m_population; }
 	void setPopulation( int population ){ m_population = population; }
@@ -50,7 +56,9 @@ private:
 	int m_population;
 	bool m_selected;
 	int m_symbol;
+	int m_popidx;
 	QChar m_role;
+
 };
 
 #endif // PLACEMARK_H
