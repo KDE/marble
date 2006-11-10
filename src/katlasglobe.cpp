@@ -247,3 +247,8 @@ void KAtlasGlobe::addPlaceMarkFile( QString filename ){
 
 	m_placemarkmodel->setContainer( m_placecontainer );	
 }
+
+QVector< PlaceMark* > KAtlasGlobe::whichFeatureAt( const QPoint& curpos ){
+//	QVector<PlaceMark*> ret;
+	return m_placemarkpainter->whichPlaceMarkAt( curpos );
+}

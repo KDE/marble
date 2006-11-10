@@ -17,6 +17,7 @@
 #include <QEvent>
 #include <QPixmap>
 #include <QCursor>
+#include <QTime>
 #include "katlasglobe.h"
 
 /**
@@ -25,11 +26,17 @@
 class KAtlasView;
 
 class KAtlasViewInputHandler  : public QObject {
+
+    Q_OBJECT
+
 public:
 	KAtlasViewInputHandler(KAtlasView*, KAtlasGlobe*);
 	virtual ~KAtlasViewInputHandler(){};
 
-private:
+signals:
+	void lmbRequest( int, int );
+
+protected:
 	QPixmap curpmtl, curpmtc, curpmtr, curpmcr, curpmcl, curpmbl, curpmbc, curpmbr;
 	QCursor arrowcur[3][3];
 	KAtlasView* m_gpview;
@@ -39,8 +46,9 @@ private:
 	bool m_leftpressed, m_midpressed;
 	int m_leftpressedx, m_leftpressedy, m_midpressedy;
 	float m_leftpresseda, m_leftpressedb;
-protected:
+
 	bool eventFilter( QObject *, QEvent * );
+	QTime m_dragtimer;
 };
 
 #endif // KATLASVIEWINPUTHANDLER

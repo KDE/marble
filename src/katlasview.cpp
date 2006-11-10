@@ -9,6 +9,7 @@
 
 #include "clippainter.h"
 #include "katlasviewinputhandler.h"
+#include "katlasviewpopupmenu.h"
 #include "quaternion.h"
 #include "texcolorizer.h"
 
@@ -36,6 +37,9 @@ KAtlasView::KAtlasView(QWidget *parent)
 	inputhandler = new KAtlasViewInputHandler(this, globe);
 	installEventFilter(inputhandler);
 	setMouseTracking(true);
+
+	m_popupmenu = new KAtlasViewPopupMenu(this, globe);
+	connect( inputhandler, SIGNAL( lmbRequest( int, int ) ), m_popupmenu, SLOT( showLmbMenu( int, int ) ) );	
 
 	canvasimg = QImage(parent->width(),parent->height(),QImage::Format_ARGB32_Premultiplied);
 	globe->setCanvasImage( &canvasimg );

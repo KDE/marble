@@ -9,6 +9,7 @@
 #include "katlaswindrose.h"
 
 class KAtlasViewInputHandler;
+class KAtlasViewPopupMenu;
 class TextureColorizer;
 class QAbstractItemModel;
 
@@ -67,6 +68,7 @@ private:
 
 	KAtlasGlobe* globe;
 	KAtlasViewInputHandler* inputhandler;
+	KAtlasViewPopupMenu* m_popupmenu;
 	TextureColorizer* sealegend;
 	QImage canvasimg;
 

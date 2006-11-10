@@ -19,8 +19,8 @@ public:
 	PlaceMark();
 	PlaceMark( QString );
 
-	void coordinate( float& lng, float& lat );
-	void setCoordinate( float lng, float lat );
+	void coordinate( float& lat, float& lng );
+	void setCoordinate( float lat, float lng );
 
 	const QPoint& symbolPos() const { return m_sympos; }
 	void setSymbolPos( const QPoint& sympos ){ m_sympos = sympos; }

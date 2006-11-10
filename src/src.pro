@@ -6,14 +6,18 @@ TEMPLATE = app
 INCLUDEPATH += .
 # Input
 HEADERS += polygon.h \
-	   katlascontrol.h katlasview.h katlasviewinputhandler.h texcolorizer.h texloader.h texmapper.h quaternion.h \
+	   katlascontrol.h katlasview.h katlasviewinputhandler.h katlasviewpopupmenu.h \
+	   texcolorizer.h texloader.h texmapper.h quaternion.h \
            katlasglobe.h katlastoolbox.h pntmap.h vectorcomposer.h vectormap.h clippainter.h placemarkmanager.h \
 	   geopoint.h placecontainer.h placemarkstorage.h placefolder.h placemark.h searchlistview.h \
 	   maptheme.h katlasmapscale.h placemarkmodel.h placemarkpainter.h tilescissor.h \
-	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h xmlhandler.h
+	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h xmlhandler.h \
+	   placemarkinfodialog.h
+
 SOURCES += katlascontrol.cpp \
            katlasview.cpp \
            katlasviewinputhandler.cpp \
+           katlasviewpopupmenu.cpp \
            main.cpp \
            texcolorizer.cpp \
            texloader.cpp \
@@ -38,6 +42,7 @@ SOURCES += katlascontrol.cpp \
 	   maptheme.cpp \
 	   tilescissor.cpp \
 	   katlastilecreatordialog.cpp \
+	   placemarkinfodialog.cpp \
 	   katlasthemeselectview.cpp \
 	   katlaswindrose.cpp \
 	   katlascrosshair.cpp \
@@ -47,7 +52,7 @@ RESOURCES = marble.qrc
 
 DESTDIR = ../bin
 TARGET = marble
-FORMS = katlastoolbox.ui katlastilecreatordialog.ui
+FORMS = katlastoolbox.ui katlastilecreatordialog.ui placemarkinfodialog.ui
 OPTIONS = release
 QMAKE_CXX_FLAGS_RELEASE += -O2 -msse
 

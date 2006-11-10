@@ -7,7 +7,6 @@
 #include <QPainter>
 #include <QPoint>
 #include <QVectorIterator>
-#include "placecontainer.h"
 #include "placemark.h"
 #include "katlasdirs.h"
 
@@ -123,8 +122,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 //	qDebug() << QString("Radius: %1").arg(radius); 
 
-	PlaceContainer visibleplacemarks;
-	visibleplacemarks.clear();
+	m_visibleplacemarks.clear();
 
 	PlaceContainer::const_iterator it;
 
@@ -268,7 +266,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					m_rowsection[ idx ].append( mark );
 					if ( idx + 1 < secnumber )  m_rowsection[ idx + 1 ].append( mark );
 
-					visibleplacemarks.append(mark);					
+					m_visibleplacemarks.append(mark);					
 				}
 				else {
 					if ( mark->symbol() == 0 )
@@ -283,10 +281,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 			mark->clearTextPixmap();
 		}
 	}
-//	qDebug() << QString("Size: %1, Rows: %2").arg(visibleplacemarks.size()).arg( secnumber );
-	PlaceContainer::const_iterator visit = visibleplacemarks.constEnd();
+//	qDebug() << QString("Size: %1, Rows: %2").arg(m_visibleplacemarks.size()).arg( secnumber );
+	PlaceContainer::const_iterator visit = m_visibleplacemarks.constEnd();
 
-	while (visit != visibleplacemarks.constBegin()) {
+	while (visit != m_visibleplacemarks.constBegin()) {
 		--visit;
 		painter->drawPixmap( (*visit) -> textRect(), (*visit) -> textPixmap() );
 		painter->drawPixmap( (*visit) -> symbolPos(), m_citysymbol.at( (*visit) -> symbol() ) );
@@ -320,4 +318,21 @@ bool PlaceMarkPainter::testbug(){
 		}
 
 	return true;
+}
+
+QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ){
+
+	QVector<PlaceMark*> ret;
+
+	PlaceContainer::const_iterator it;
+
+	for ( it=m_visibleplacemarks.constBegin(); it != m_visibleplacemarks.constEnd(); it++ ){ // STL iterators
+		PlaceMark* mark  = *it; // no cast
+
+		if ( mark->textRect().contains( curpos ) ){
+			ret.append( mark );
+		}
+	}
+
+	return ret;
 }

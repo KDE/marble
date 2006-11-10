@@ -17,6 +17,7 @@
 #include <QPixmap>
 #include <QRect>
 #include <QVector>
+#include "placecontainer.h"
 #include "placemark.h"
 #include "quaternion.h"
 
@@ -36,12 +37,16 @@ public:
 	PlaceMarkPainter(QObject *parent = 0);
 	void paintPlaceFolder(QPainter*, int, int, int, const PlaceContainer*, Quaternion );
 	void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
+	QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
+
 public slots:
 
 
-private:
+protected:
 
 	QFont m_font_regular, m_font_regular_italics, m_font_regular_underline, m_font_mountain;
+
+	PlaceContainer m_visibleplacemarks;
 
 	QColor m_labelcolor;
 	int m_fontheight, m_fontascent;

@@ -86,6 +86,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 				if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton){
 
+					m_dragtimer.restart();					
+
 					m_leftpressed = true;
 					m_midpressed = false;
 					m_leftpressedx = event->x();
@@ -111,6 +113,9 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 				}
 
 				if ( e->type() == QEvent::MouseButtonRelease && event->button() == Qt::LeftButton){
+
+					if( m_dragtimer.elapsed() <= 220 ) emit lmbRequest( m_leftpressedx, m_leftpressedy );
+
 					m_leftpressed = false;
 				}
 

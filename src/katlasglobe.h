@@ -29,6 +29,7 @@
 #include "placecomposer.h"
 #include "quaternion.h"
 
+class PlaceMark;
 class PlaceMarkManager;
 
 /**
@@ -70,6 +71,8 @@ public:
 	bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_rotAxis == m_rotAxisUpdated ); }
 
 	void addPlaceMarkFile( QString filename );
+
+	QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
 private:
 	QWidget* m_parent;

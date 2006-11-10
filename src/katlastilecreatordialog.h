@@ -1,11 +1,11 @@
 //
-// C++ Interface: texcolorizer
+// C++ Interface: katlastilecreatordialog
 //
-// Description: TextureColorizer 
+// Description: KAtlasTileCreatorDialog 
 
-// The TextureColorizer maps the Elevationvalues to Legend Colors.
+// The KAtlasTileCreatorDialog displays the progress of the tile creation.
 //
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2004
+// Author: Torsten Rahn <tackat@kde.org>, (C) 2006
 //
 // Copyright: See COPYING file that comes with this distribution
 
