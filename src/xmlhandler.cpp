@@ -106,6 +106,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inPlacemark && nameLower == "description"){
 //		qDebug() << m_currentText;
+		m_placemark->setDescription( m_currentText );
 	}
 
 	if ( m_inPlacemark && nameLower == "pop"){

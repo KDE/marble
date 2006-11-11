@@ -28,6 +28,9 @@ public:
 	const QChar role() const { return m_role; }
 	void setRole( QChar role ){ m_role = role; }
 
+	const QString description() const { return m_description; }
+	void setDescription( QString description ){ m_description = description; }
+
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
 
@@ -57,8 +60,9 @@ private:
 	bool m_selected;
 	int m_symbol;
 	int m_popidx;
-	QChar m_role;
 
+	QChar m_role;
+	QString m_description;
 };
 
 #endif // PLACEMARK_H

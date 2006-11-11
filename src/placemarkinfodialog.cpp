@@ -40,7 +40,7 @@ void PlaceMarkInfoDialog::showContent(){
 			rolestring = "Mountain";
 			break;
 		case 'V':
-			rolestring = "Volcanoe";
+			rolestring = "Volcano";
 			break;
 		default:
 		case 'N':
@@ -48,6 +48,10 @@ void PlaceMarkInfoDialog::showContent(){
 			break;
 	}
 	role_val_lbl->setText( rolestring );
+
+	QString description = m_mark->description();
+	if ( !description.isEmpty() )
+		description_val_browser->setPlainText( description );
 
 	float lng, lat;
 	m_mark->coordinate( lat, lng );

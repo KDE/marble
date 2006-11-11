@@ -100,7 +100,6 @@ int main(int argc, char *argv[])
 
 				targetstream << "    <Placemark> \n";
 				targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
-				targetstream << "        <description>" << escapeXml( name ) << "</description> \n";
 				targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
 				targetstream << "        <country>" << escapeXml( country ) << "</country> \n";
 				targetstream << "        <role>" << escapeXml( role ) << "</role> \n";

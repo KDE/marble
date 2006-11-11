@@ -26,23 +26,22 @@ void PlaceMarkManager::addPlaceMarkFile( QString filepath ){
 	}
 	else return;
 
-	if ( !QFile::exists( defaultcachename ) ){
+	if ( QFile::exists( defaultcachename ) ){
+		qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
+		bool loadok = loadFile( defaultcachename, m_placecontainer );
+		if ( loadok == true) return;
+	}
 
-		qDebug("No Default Placemark Cache File!");
+	qDebug("No Default Placemark Cache File!");
 
-		if ( QFile::exists( defaultsrcname ) ){
-			PlaceContainer* importcontainer = new PlaceContainer();
-			importKml( defaultsrcname, importcontainer );
-			saveFile( defaulthomecache, importcontainer );
-			*m_placecontainer << *importcontainer;
-		}
-		else {
-			qDebug() << "No Default Placemark Source File!";
-		}
+	if ( QFile::exists( defaultsrcname ) ){
+		PlaceContainer* importcontainer = new PlaceContainer();
+		importKml( defaultsrcname, importcontainer );
+		saveFile( defaulthomecache, importcontainer );
+		*m_placecontainer << *importcontainer;
 	}
 	else {
-		qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
-		loadFile( defaultcachename, m_placecontainer );
+		qDebug() << "No Default Placemark Source File!";
 	}
 }
 
@@ -93,7 +92,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 	// Write a header with a "magic number" and a version
 //	out << (quint32)0xA0B0C0D0;
 	out << (quint32)0x31415926;
-	out << (qint32)002;
+	out << (qint32)003;
 
 	out.setVersion(QDataStream::Qt_4_0);
 
@@ -106,6 +105,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 		(*it) -> coordinate(lng, lat);
 		out << lng << lat;
 		out << QString( (*it) -> role() );
+		out << QString( (*it) -> description() );
 		out << (qint32)(*it) -> popidx();
 		out << (qint32)(*it) -> symbol();
 		out << (qint32)(*it) -> population();
@@ -113,7 +113,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 
 }
 
-void PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontainer ){ 
+bool PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontainer ){ 
 	QFile file( filename );
 	file.open(QIODevice::ReadOnly);
 	QDataStream in(&file);
@@ -123,14 +123,14 @@ void PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontaine
 	in >> magic;
 	if (magic != 0x31415926) {
 		qDebug( "Bad file format!" );
-		return;
+		return false;
 	}
 	// Read the version
 	qint32 version;
 	in >> version;
-	if (version < 002) {
+	if (version < 003) {
 		qDebug( "Bad file - too old!" );
-		return;
+		return false;
 	} 
 /*
 	if (version > 002) {
@@ -157,6 +157,8 @@ void PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontaine
 		mark -> setCoordinate(lng, lat);
 		in >> tmpstr;
 		mark -> setRole( tmpstr.at(0) );
+		in >> tmpstr;
+		mark -> setDescription( tmpstr );
 		in >> a;
 		mark -> setPopidx( a );
 		in >> a;
@@ -166,4 +168,6 @@ void PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontaine
 
 		placecontainer -> append( mark );
 	}
+
+	return true;
 }

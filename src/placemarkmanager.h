@@ -33,7 +33,7 @@ protected:
 
 	void importKml( QString, PlaceContainer*);
 	void saveFile( QString, PlaceContainer*);
-	void loadFile( QString, PlaceContainer*);
+	bool loadFile( QString, PlaceContainer*);
 };
 
 #endif // PLACEMARKMANAGER_H

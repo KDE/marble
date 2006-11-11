@@ -173,7 +173,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					if ( mark -> role() == 'H' ) 
 						font = m_font_mountain;
 					if ( mark -> role() == 'V' ) 
-						font = m_font_regular;
+						font = m_font_mountain;
 
 					fontwidth = QFontMetrics(font).width(mark->name());
 				}
