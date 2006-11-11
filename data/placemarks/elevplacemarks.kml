@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+<Document>
+    <SimpleField> 
+        <name>pop</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>elev</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>state</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>country</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>role</name> 
+        <type>string</type> 
+    </SimpleField> 
+
+    <Placemark> 
+        <name>Aconcagua</name> 
+        <description>Highest peak in the Americas</description> 
+        <Country>
+	     <CountryNameCode>CL</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>6960000</pop> 
+        <Point>
+            <coordinates>-70.0,-32.65</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mount Elbrus</name> 
+        <description>Highest peak in Europe</description> 
+        <Country>
+	     <CountryNameCode>RU</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>5642000</pop> 
+        <Point>
+            <coordinates>42.4364,43.3519</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Kilimanjaro</name> 
+        <description>Highest peak in Africa</description> 
+        <Country>
+	     <CountryNameCode>KE</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>5895000</pop> 
+        <Point>
+            <coordinates>39.95,-3.4</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mont Blanc</name> 
+        <description>Highest Mountain in Western Europe</description> 
+        <Country>
+	     <CountryNameCode>FR</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>4807000</pop> 
+        <Point>
+            <coordinates>6.6833,45.35</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mount Everest</name> 
+        <description>Highest point on earth</description> 
+        <Country>
+	     <CountryNameCode>NP</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>8850000</pop> 
+        <Point>
+            <coordinates>86.9333,27.9833</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mount Kosciuszko</name> 
+        <description>Highest mountain in mainland Australia</description> 
+        <Country>
+	     <CountryNameCode>AU</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>2229000</pop> 
+        <Point>
+            <coordinates>148.2667,-36.45</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mount McKinley</name> 
+        <description>Highest mountain in North America</description> 
+        <Country>
+	     <CountryNameCode>US</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>6194000</pop> 
+        <Point>
+            <coordinates>-151.0074,63.0695</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Puncak Jaya</name> 
+        <description>Highest mountain on the greater Australian continent</description> 
+        <Country>
+	     <CountryNameCode>ID</CountryNameCode>
+        </Country> 
+        <role>H</role> 
+        <pop>5030000</pop> 
+        <Point>
+            <coordinates>137.1833,-4.0833</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Vinson Massif</name> 
+        <description>Highest mountain of Antarctica</description> 
+        <role>H</role> 
+        <pop>4897000</pop> 
+        <Point>
+            <coordinates>-85.6333,-78.5333</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mauna Kea</name> 
+        <description>Largest volcano on Earth</description> 
+        <Country>
+	     <CountryNameCode>US</CountryNameCode>
+        </Country> 
+        <role>V</role> 
+        <pop>4205000</pop> 
+        <Point>
+            <coordinates>-155.47,19.82</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mauna Loa</name> 
+        <description>Largest active volcano on Earth</description> 
+        <Country>
+	     <CountryNameCode>US</CountryNameCode>
+        </Country> 
+        <role>V</role> 
+        <pop>4170000</pop> 
+        <Point>
+            <coordinates>-155.608,19.475</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Mount Etna</name> 
+        <description>Largest and most active volcano in Europe</description> 
+        <Country>
+	     <CountryNameCode>IT</CountryNameCode>
+        </Country> 
+        <role>V</role> 
+        <pop>3323000</pop> 
+        <Point>
+            <coordinates>15.0,37.75</coordinates> 
+        </Point> 
+    </Placemark> 
+</Document>
+</kml> 

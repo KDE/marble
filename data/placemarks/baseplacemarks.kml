@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+<Document>
+    <SimpleField> 
+        <name>pop</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>state</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>country</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>role</name> 
+        <type>string</type> 
+    </SimpleField> 
+
+    <Placemark> 
+        <name>North Pole</name> 
+        <description>Geographic North Pole</description> 
+        <role>P</role> 
+        <pop>100000000</pop> 
+        <Point>
+            <coordinates>0.0,90.00</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>South Pole</name> 
+        <description>Geographic South Pole</description> 
+        <role>P</role> 
+        <pop>100000000</pop> 
+        <Point>
+            <coordinates>0.0,-90.00</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>North Magnetic Pole</name> 
+        <description>The physical magnetic south pole in 2005</description> 
+        <role>M</role> 
+        <pop>1000000</pop> 
+        <Point>
+            <coordinates>-118.32,83.21</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>South Magnetic Pole</name> 
+        <description>The physical magnetic north pole in 2005</description> 
+        <role>M</role> 
+        <pop>1000000</pop> 
+        <Point>
+            <coordinates>137.86,-64.53</coordinates> 
+        </Point> 
+    </Placemark> 
+</Document>
+</kml> 
