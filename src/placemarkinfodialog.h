@@ -31,7 +31,8 @@ public slots:
 
 protected:
 	PlaceMark* m_mark;
-	void showContent();	
+	void showContent();
+	const QPixmap flag( const QString& ); 
 };
 
 #endif // PLACEMARKINFODIALOG_H

@@ -31,6 +31,9 @@ public:
 	const QString description() const { return m_description; }
 	void setDescription( QString description ){ m_description = description; }
 
+	const QString countryCode() const { return m_countrycode; }
+	void setCountryCode( QString countrycode ){ m_countrycode = countrycode; }
+
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
 
@@ -63,6 +66,7 @@ private:
 
 	QChar m_role;
 	QString m_description;
+	QString m_countrycode;
 };
 
 #endif // PLACEMARK_H

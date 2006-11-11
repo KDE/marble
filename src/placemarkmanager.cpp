@@ -92,7 +92,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 	// Write a header with a "magic number" and a version
 //	out << (quint32)0xA0B0C0D0;
 	out << (quint32)0x31415926;
-	out << (qint32)003;
+	out << (qint32)004;
 
 	out.setVersion(QDataStream::Qt_4_0);
 
@@ -106,6 +106,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 		out << lng << lat;
 		out << QString( (*it) -> role() );
 		out << QString( (*it) -> description() );
+		out << QString( (*it) -> countryCode() );
 		out << (qint32)(*it) -> popidx();
 		out << (qint32)(*it) -> symbol();
 		out << (qint32)(*it) -> population();
@@ -128,7 +129,7 @@ bool PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontaine
 	// Read the version
 	qint32 version;
 	in >> version;
-	if (version < 003) {
+	if (version < 004) {
 		qDebug( "Bad file - too old!" );
 		return false;
 	} 
@@ -159,6 +160,8 @@ bool PlaceMarkManager::loadFile( QString filename, PlaceContainer* placecontaine
 		mark -> setRole( tmpstr.at(0) );
 		in >> tmpstr;
 		mark -> setDescription( tmpstr );
+		in >> tmpstr;
+		mark -> setCountryCode( tmpstr );
 		in >> a;
 		mark -> setPopidx( a );
 		in >> a;

@@ -1,6 +1,12 @@
 #include "placemarkinfodialog.h"
 #include "placemark.h"
 #include <QLabel>
+
+#include <QFile>
+#include <QPainter>
+#include <QSvgRenderer>
+
+#include "katlasdirs.h"
 #include <cmath>
 
 #ifdef KDEBUILD
@@ -47,8 +53,10 @@ void PlaceMarkInfoDialog::showContent(){
 			rolestring = "City";
 			break;
 	}
+
 	role_val_lbl->setText( rolestring );
 
+	flag_val_lbl->setPixmap( flag( m_mark->countryCode() ) );
 	QString description = m_mark->description();
 	if ( !description.isEmpty() )
 		description_val_browser->setPlainText( description );
@@ -74,7 +82,7 @@ void PlaceMarkInfoDialog::showContent(){
 	QString coordstring = QString("%1\xb0 %2\' %3\" %4\n%5\xb0 %6\' %7\" %8").arg(lngdeg).arg(lngmin).arg(lngsec).arg(nsstring).arg(latdeg).arg(latmin).arg(latsec).arg(westring);
 	coordinates_val_lbl->setText( coordstring );
 
-	country_val_lbl->setText( "-" );
+	country_val_lbl->setText( m_mark->countryCode() );
 
 	if ( m_mark->role() == 'H' || m_mark->role() == 'V'){
 		population_val_lbl->setVisible( false );
@@ -93,3 +101,22 @@ void PlaceMarkInfoDialog::showContent(){
 		elevation_val_lbl->setText( "-" );
 	}
 }
+
+const QPixmap PlaceMarkInfoDialog::flag( const QString& countrycode ){
+	QPixmap pixmap( flag_val_lbl->size() );
+
+	QString filename = KAtlasDirs::path( QString("flags/flag_%1.svg").arg( countrycode.toLower() ) );
+
+	if ( QFile::exists( filename ) ){
+		QSvgRenderer svgobj( filename, this );
+
+		QPainter painter( &pixmap );
+		painter.setRenderHint(QPainter::Antialiasing, true);
+		QRect viewport( pixmap.rect() ); 
+
+		painter.setViewport( viewport );
+		svgobj.render(&painter); 
+		return pixmap;
+	}
+	else return QPixmap();
+} 

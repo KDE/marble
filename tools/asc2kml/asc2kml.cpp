@@ -44,7 +44,8 @@ int main(int argc, char *argv[])
 //			QTextStream targetstream( new QString() );
 
 			targetstream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
-				<< "<kml xmlns=\"http://earth.google.com/kml/2.0\"> \n";
+				<< "<kml xmlns=\"http://earth.google.com/kml/2.0\"> \n"
+				<< "<Document> \n";
 
 			targetstream << "    <SimpleField> \n"
 				<< "        <name>pop</name> \n"
@@ -57,7 +58,7 @@ int main(int argc, char *argv[])
 				<< "    </SimpleField> \n";
 
 			targetstream << "    <SimpleField> \n"
-				<< "        <name>country</name> \n"
+				<< "        <name>CountryNameCode</name> \n"
 				<< "        <type>string</type> \n"
 				<< "    </SimpleField> \n";
 
@@ -101,7 +102,9 @@ int main(int argc, char *argv[])
 				targetstream << "    <Placemark> \n";
 				targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
 				targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
-				targetstream << "        <country>" << escapeXml( country ) << "</country> \n";
+				targetstream << "        <Country>\n"
+						<< "	     <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n"
+					     << "        </Country> \n";
 				targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
 				targetstream << "        <pop>" 
 					<< escapeXml( QString::number( population ) ) << "</pop> \n";
@@ -115,7 +118,8 @@ int main(int argc, char *argv[])
 				targetstream << "    </Placemark> \n";
 			}
 
-			targetstream << "</kml> \n";
+			targetstream << "</Document> \n"
+				<< "</kml> \n";
 			qDebug("Putting");
 
 //			gzputs( gzDoc, targetstream.readAll().toUtf8() );
