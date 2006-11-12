@@ -19,8 +19,8 @@ public:
 	PlaceMark();
 	PlaceMark( QString );
 
-	void coordinate( float& lat, float& lng );
-	void setCoordinate( float lat, float lng );
+	void coordinate( float& lng, float& lat );
+	void setCoordinate( float lng, float lat );
 
 	const QPoint& symbolPos() const { return m_sympos; }
 	void setSymbolPos( const QPoint& sympos ){ m_sympos = sympos; }
@@ -37,6 +37,9 @@ public:
 	const int symbol() const { return m_symbol; }
 	void setSymbol( int symbol ){ m_symbol = symbol; }
 
+	const QPixmap symbolPixmap() const;
+//	void setSymbol( int symbol ){ m_symbol = symbol; }
+
 	const int popidx() const { return m_popidx; }
 	void setPopidx( int popidx ){ m_popidx = popidx; }
 
@@ -48,16 +51,17 @@ public:
 
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
-	const QPixmap& textPixmap() const { return m_textPixmap; }
+	const QPixmap& textPixmap() const { return m_labelPixmap; }
 	const QRect& textRect() const { return m_rect; }
-	void setTextPixmap( QPixmap& textPixmap ){ m_textPixmap = textPixmap; }
+	void setTextPixmap( QPixmap& labelPixmap ){ m_labelPixmap = labelPixmap; }
 	void setTextRect( const QRect& textRect ){ m_rect = textRect;}
-	void clearTextPixmap(){ if ( m_textPixmap.isNull() == false ) { m_textPixmap = QPixmap(); } }
+	void clearTextPixmap(){ if ( m_labelPixmap.isNull() == false ) { m_labelPixmap = QPixmap(); } }
 
-private:
+protected:
 	GeoPoint m_coordinate;
 	QPoint m_sympos;
-	QPixmap m_textPixmap;
+	QPixmap m_symbolPixmap;
+	QPixmap m_labelPixmap;
 	QRect m_rect;
 	int m_population;
 	bool m_selected;

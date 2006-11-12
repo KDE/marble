@@ -122,25 +122,9 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 		int population = m_currentText.toInt();
 		m_placemark->setPopulation( population );
 
-		int popidx = 15;
-
-		if(population < 2500) popidx=1;
-		else if(population < 5000) popidx=2;
-		else if(population < 7500) popidx=3;
-		else if(population < 10000) popidx=4;
-		else if(population < 25000) popidx=5;
-		else if(population < 50000) popidx=6;
-		else if(population < 75000) popidx=7;
-		else if(population < 100000) popidx=8;
-		else if(population < 250000) popidx=9;
-		else if(population < 500000) popidx=10;
-		else if(population < 750000) popidx=11;
-		else if(population < 1000000) popidx=12;
-		else if(population < 2500000) popidx=13;
-		else if(population < 5000000) popidx=14;
 //		else if(population < 7500000) popidx=15;
 
-		m_placemark->setPopidx( popidx );
+		m_placemark->setPopidx( popIdx( population ) );
 	}
 
 	if ( m_inKml && nameLower == "point"){
@@ -153,9 +137,16 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 
 	if ( m_inPoint && nameLower == "coordinates"){
 		QStringList splitline = m_currentText.split(",");
+
 		m_placemark->setCoordinate( deg2rad * splitline[0].toFloat(), - deg2rad * splitline[1].toFloat() );
+
+		if ( splitline.size() == 3 ){
+			int elevation = splitline[2].toInt();
+			m_placemark->setPopulation( elevation*1000 );
+			m_placemark->setPopidx( popIdx( elevation*1000 ) );
+		}
 		m_coordsset = true;
-//		qDebug() << splitline[0];
+
 	}
 
 	return true;
@@ -167,3 +158,24 @@ bool KAtlasXmlHandler::stopDocument(){
 	return true;
 }
 
+int KAtlasXmlHandler::popIdx( int population ){
+
+	int popidx = 15;
+
+	if(population < 2500) popidx=1;
+	else if(population < 5000) popidx=2;
+	else if(population < 7500) popidx=3;
+	else if(population < 10000) popidx=4;
+	else if(population < 25000) popidx=5;
+	else if(population < 50000) popidx=6;
+	else if(population < 75000) popidx=7;
+	else if(population < 100000) popidx=8;
+	else if(population < 250000) popidx=9;
+	else if(population < 500000) popidx=10;
+	else if(population < 750000) popidx=11;
+	else if(population < 1000000) popidx=12;
+	else if(population < 2500000) popidx=13;
+	else if(population < 5000000) popidx=14;
+
+	return popidx;
+}

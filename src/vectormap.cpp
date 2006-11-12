@@ -286,10 +286,13 @@ void VectorMap::createArc(){
 	
 		int itx, ity;
 //	qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((float)(m_rlimit));
+		float arcradius = sqrt((float)(m_rlimit));
 
 		for (int it=1; it < abs(diff); it++){
-			itx = (int)(imgrx + (int)sqrt((float)(m_rlimit)) * cos( M_PI/180.0 * (float)(alpha + sgndiff * it) ) + 1);
-			ity = (int)(imgry + (int)sqrt((float)(m_rlimit)) * sin( M_PI/180.0 * (float)(alpha + sgndiff * it) ) + 1);
+			float angle = M_PI/180.0 * (float)(alpha + sgndiff * it);
+
+			itx = (int)(imgrx +  arcradius * cos( angle ) + 1);
+			ity = (int)(imgry +  arcradius * sin( angle ) + 1);
 //		qDebug() << " ity: " << ity;
 			m_polygon.append(QPoint(itx,ity));		
 		}

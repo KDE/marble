@@ -125,11 +125,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	m_visibleplacemarks.clear();
 
 	PlaceContainer::const_iterator it;
+	PlaceMark* mark  = 0; 
 
 	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL iterators
 
 
-		PlaceMark* mark  = *it; // no cast
+		mark  = *it; // no cast
 
 		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 ) continue; 
 
@@ -154,11 +155,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 		
 				if ( textpixmap.isNull() == true ){	
 
-					if ( mark->role() == 'N' ){ 
+					QChar role = mark->role();
+
+					if ( role == 'N' ){ 
 						font = m_font_regular;
-					} else if ( mark->role() == 'R' ){ 
+					} else if ( role == 'R' ){ 
 						font = m_font_regular_italics;
-					} else if ( mark->role() == 'B' || mark->role() == 'C' ) {
+					} else if ( role == 'B' || mark->role() == 'C' ) {
 						font = m_font_regular_underline;
 					} else {
 						font = m_font_regular;
@@ -166,13 +169,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 					if ( mark->symbol() > 13 ) font.setWeight( 75 );
 
-					if ( mark -> role() == 'P' ) 
+					if ( role == 'P' ) 
 						font = m_font_regular;
-					if ( mark -> role() == 'M' ) 
+					if ( role == 'M' ) 
 						font = m_font_regular;
-					if ( mark -> role() == 'H' ) 
+					if ( role == 'H' ) 
 						font = m_font_mountain;
-					if ( mark -> role() == 'V' ) 
+					if ( role == 'V' ) 
 						font = m_font_mountain;
 
 					fontwidth = QFontMetrics(font).width(mark->name());
@@ -286,8 +289,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 	while (visit != m_visibleplacemarks.constBegin()) {
 		--visit;
-		painter->drawPixmap( (*visit) -> textRect(), (*visit) -> textPixmap() );
-		painter->drawPixmap( (*visit) -> symbolPos(), m_citysymbol.at( (*visit) -> symbol() ) );
+		mark = *visit;
+		painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
+		painter->drawPixmap( mark -> symbolPos(), m_citysymbol.at( mark -> symbol() ) );
 	}
 }
 

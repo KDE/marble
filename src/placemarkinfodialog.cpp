@@ -62,24 +62,24 @@ void PlaceMarkInfoDialog::showContent(){
 		description_val_browser->setPlainText( description );
 
 	float lng, lat;
-	m_mark->coordinate( lat, lng );
+	m_mark->coordinate( lng, lat );
 
-	QString nsstring = ( lng < 0 ) ? "N" : "S";  
-	QString westring = ( lat < 0 ) ? "W" : "E";  
+	QString nsstring = ( lat < 0 ) ? "N" : "S";  
+	QString westring = ( lng < 0 ) ? "W" : "E";  
 
-	lng = fabs( lng * 360.0 / (2.0 * M_PI) );
+	lng = fabs( lng * 180.0 / M_PI );
 
 	int lngdeg = (int)lng;
 	int lngmin = (int) ( 60 * (lng - lngdeg) );
 	int lngsec = (int) ( 3600 * (lng - lngdeg - ((float)(lngmin) / 60) ) );
 
-	lat = fabs( lat * 360.0 / (2.0 * M_PI) );
+	lat = fabs( lat * 180.0 / M_PI );
 
 	int latdeg = (int)lat;
 	int latmin = (int) ( 60 * (lat - latdeg) );
 	int latsec = (int) ( 3600 * (lat - latdeg - ((float)(latmin) / 60) ) );
 
-	QString coordstring = QString("%1\xb0 %2\' %3\" %4\n%5\xb0 %6\' %7\" %8").arg(lngdeg).arg(lngmin).arg(lngsec).arg(nsstring).arg(latdeg).arg(latmin).arg(latsec).arg(westring);
+	QString coordstring = QString("%1\xb0 %2\' %3\" %4\n%5\xb0 %6\' %7\" %8").arg(latdeg).arg(latmin).arg(latsec).arg(nsstring).arg(lngdeg).arg(lngmin).arg(lngsec).arg(westring);
 	coordinates_val_lbl->setText( coordstring );
 
 	country_val_lbl->setText( m_mark->countryCode() );
@@ -112,10 +112,10 @@ const QPixmap PlaceMarkInfoDialog::flag( const QString& countrycode ){
 
 		QPainter painter( &pixmap );
 		painter.setRenderHint(QPainter::Antialiasing, true);
-		QRect viewport( pixmap.rect() ); 
+		QRect viewport( pixmap.rect() );
 
 		painter.setViewport( viewport );
-		svgobj.render(&painter); 
+		svgobj.render(&painter);
 		return pixmap;
 	}
 	else return QPixmap();

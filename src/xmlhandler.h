@@ -20,7 +20,7 @@ public:
 
 	bool characters( const QString& str );
 
-private:
+protected:
 	PlaceContainer* m_placecontainer;
 	PlaceMark* m_placemark;
 
@@ -30,6 +30,7 @@ private:
 	bool m_coordsset;
 
 	QString m_currentText;
+	inline int popIdx( int population );
 };
 
 #endif // GPXMLHANDLER_H

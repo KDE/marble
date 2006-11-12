@@ -19,13 +19,15 @@
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {
 	m_selected = false;
 	m_symbol = 0;
-	m_textPixmap = QPixmap();
+	m_symbolPixmap = QPixmap();
+	m_labelPixmap = QPixmap();
 
 }
 
 PlaceMark::PlaceMark( QString name ) : PlaceMarkStorage(name), m_coordinate() {
 	m_symbol = 0;
-	m_textPixmap = QPixmap();
+	m_symbolPixmap = QPixmap();
+	m_labelPixmap = QPixmap();
 }
 
 void PlaceMark::coordinate( float& lng, float& lat ){
@@ -37,3 +39,6 @@ void PlaceMark::setCoordinate( float lng, float lat ){
 
 }
 
+const QPixmap PlaceMark::symbolPixmap()const{
+	return m_symbolPixmap;
+}

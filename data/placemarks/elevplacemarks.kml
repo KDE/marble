@@ -29,9 +29,8 @@
 	     <CountryNameCode>CL</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>6960000</pop> 
         <Point>
-            <coordinates>-70.0,-32.65</coordinates> 
+            <coordinates>-70.0,-32.65,6960</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -41,9 +40,8 @@
 	     <CountryNameCode>RU</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>5642000</pop> 
         <Point>
-            <coordinates>42.4364,43.3519</coordinates> 
+            <coordinates>42.4364,43.3519,5642</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -53,9 +51,8 @@
 	     <CountryNameCode>KE</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>5895000</pop> 
         <Point>
-            <coordinates>39.95,-3.4</coordinates> 
+            <coordinates>39.95,-3.4,5895</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -65,9 +62,8 @@
 	     <CountryNameCode>FR</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>4807000</pop> 
         <Point>
-            <coordinates>6.6833,45.35</coordinates> 
+            <coordinates>6.6833,45.35,4807</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -77,9 +73,8 @@
 	     <CountryNameCode>NP</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>8850000</pop> 
         <Point>
-            <coordinates>86.9333,27.9833</coordinates> 
+            <coordinates>86.9333,27.9833,8850</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -89,9 +84,8 @@
 	     <CountryNameCode>AU</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>2229000</pop> 
         <Point>
-            <coordinates>148.2667,-36.45</coordinates> 
+            <coordinates>148.2667,-36.45,2229</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -101,9 +95,8 @@
 	     <CountryNameCode>US</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>6194000</pop> 
         <Point>
-            <coordinates>-151.0074,63.0695</coordinates> 
+            <coordinates>-151.0074,63.0695,6194</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -113,18 +106,16 @@
 	     <CountryNameCode>ID</CountryNameCode>
         </Country> 
         <role>H</role> 
-        <pop>5030000</pop> 
         <Point>
-            <coordinates>137.1833,-4.0833</coordinates> 
+            <coordinates>137.1833,-4.0833,5030</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Vinson Massif</name> 
         <description>Highest mountain of Antarctica</description> 
         <role>H</role> 
-        <pop>4897000</pop> 
         <Point>
-            <coordinates>-85.6333,-78.5333</coordinates> 
+            <coordinates>-85.6333,-78.5333,4897</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -134,9 +125,8 @@
 	     <CountryNameCode>US</CountryNameCode>
         </Country> 
         <role>V</role> 
-        <pop>4205000</pop> 
         <Point>
-            <coordinates>-155.47,19.82</coordinates> 
+            <coordinates>-155.47,19.82,4205</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -146,9 +136,8 @@
 	     <CountryNameCode>US</CountryNameCode>
         </Country> 
         <role>V</role> 
-        <pop>4170000</pop> 
         <Point>
-            <coordinates>-155.608,19.475</coordinates> 
+            <coordinates>-155.608,19.475,4170</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
@@ -158,9 +147,8 @@
 	     <CountryNameCode>IT</CountryNameCode>
         </Country> 
         <role>V</role> 
-        <pop>3323000</pop> 
         <Point>
-            <coordinates>15.0,37.75</coordinates> 
+            <coordinates>15.0,37.75,3323</coordinates> 
         </Point> 
     </Placemark> 
 </Document>
