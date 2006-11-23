@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="2800" height="1400" id="Flag of São Tomé and Príncipe">
+<rect width="2800" height="1400" fill="#12ad2b" id="green background" />
+<rect width="2800" height="600" y="400" fill="#ffce00" id="yellow strip" />
+<polygon points="0,0 0,1400 700,700" fill="#d21034" id="red triangle" />
+<polygon id="left star" transform="translate(1400,700) scale(200)" fill="black" points="0,-1 
+       0.587785252292473129168705954639072768597652,0.809016994374947424102293417182819058860155
+       -0.951056516295153572116439333379382143405699,-0.309016994374947424102293417182819058860155
+       0.951056516295153572116439333379382143405699,-0.309016994374947424102293417182819058860155
+       -0.587785252292473129168705954639072768597652,0.809016994374947424102293417182819058860155" />
+<use id="right star" xlink:href="#left star" x="700" />
+</svg>

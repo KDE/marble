@@ -1,56 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
-[
- <!ATTLIST svg
-  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
-]>
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="708.661" id="svg378" version="1" width="1062.99" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
-        <dc:title> ghana</dc:title>
-        <dc:description></dc:description>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>africa</rdf:li>
-            <rdf:li>sign</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
-            <dc:title> Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title> Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date></dc:date>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg:svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   x="0.0000000"
+   y="0.0000000"
+   width="450.00000"
+   height="300.00000"
+   id="svg4017"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docname="Flag_of_Ghana.svg"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\Fritz\Eigene Dateien\Maria\Schule\Italien">
+  <sodipodi:namedview
+     inkscape:window-height="540"
+     inkscape:window-width="830"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.2433333"
+     inkscape:cx="225"
+     inkscape:cy="141.57139"
+     inkscape:window-x="132"
+     inkscape:window-y="174"
+     inkscape:current-layer="svg4017" />
+  <svg:defs
+     id="defs4019" />
+  <svg:metadata
+     id="metadata4020">
+    <RDF
+       id="RDF4021">
+      <Work
+         about=""
+         id="Work4022">
+        <format
+           id="format4023">image/svg+xml</format>
+        <type
+           id="type4025"
+           resource="http://purl.org/dc/dcmitype/StillImage" />
+      </Work>
+    </RDF>
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
         <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
-        <dc:language>en</dc:language>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
       </cc:Work>
-      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
-      </cc:License>
     </rdf:RDF>
-  </metadata>
-  <defs id="defs380"/>
-  <rect height="708.661" id="rect171" style="font-size:12;fill:#fff41e;fill-rule:evenodd;stroke-width:1pt;" width="1062.99" x="0" y="0"/>
-  <rect height="236.22" id="rect256" style="font-size:12;fill:#1f7848;fill-rule:evenodd;stroke-width:1pt;" transform="translate(0,0.000281206)" width="1062.99" x="0" y="472.441"/>
-  <rect height="236.22" id="rect255" style="font-size:12;fill:#e80006;fill-rule:evenodd;stroke-width:1pt;" width="1062.99" x="0" y="0"/>
-  <path d="M 266.186 534.45 L 255.778 527.018 L 245.421 534.523 L 249.273 522.327 L 238.935 514.796 L 251.725 514.691 L 255.692 502.532 L 259.744 514.663 L 272.534 514.679 L 262.249 522.281 L 266.186 534.45 z " id="path349" style="font-size:12;fill-rule:evenodd;stroke-width:0.112872;" transform="matrix(7.43227,0,0,7.43227,-1369.98,-3499.11)"/>
-</svg>
+  </svg:metadata>
+  <svg:rect
+     width="450"
+     height="100"
+     x="0"
+     y="199.99997"
+     style="fill:#006b3f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="rect4026" />
+  <svg:rect
+     width="450"
+     height="100"
+     x="2.8891475e-007"
+     y="100"
+     style="fill:#fcd116;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="rect4648" />
+  <svg:rect
+     width="450"
+     height="100"
+     x="-3.9118544e-007"
+     y="-7.7975019e-006"
+     style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="rect5270" />
+  <svg:path
+     d="M 232.76875,576.23585 L 257.87093,576.23585 L 265.62500,552.36218 L 273.37907,576.23585 L 298.48125,576.23585 L 278.17609,590.98851 L 285.93016,614.86218 L 265.62500,600.10953 L 245.31984,614.86218 L 253.07391,590.98851 L 232.76875,576.23585 z "
+     style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     id="path2203"
+     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" />
+</svg:svg>

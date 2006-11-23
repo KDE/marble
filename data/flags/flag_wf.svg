@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg 
+	height="1000" 
+	width="1500" 
+	version="1.1" 
+	xmlns="http://www.w3.org/2000/svg" 
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>Flag of Wallis and Futuna</desc>
+	<rect 
+		fill="#ce1126" 
+		height="1000" 
+		width="1500" />
+	<rect 
+		fill="#002654" 
+		height="400" 
+		width="200" />
+	<rect 
+		fill="white" 
+		height="400" 
+		width="200" 
+		x="200" />
+	<polyline 
+		fill="none" 
+		points="0,400 600,400 600,0" 
+		stroke="white" 
+		stroke-width="10" />
+	<defs>
+		<polygon 
+			fill="white" 
+			id="triangle" 
+			points="0,-40 120,-160 -120,-160" />
+	</defs>
+	<use 
+		transform="translate(1050,500)" 
+		xlink:href="#triangle" />
+	<use 
+		transform="translate(1050,500) rotate(90)" 
+		xlink:href="#triangle" />
+	<use 
+		transform="translate(1050,500) rotate(180)" 
+		xlink:href="#triangle" />
+	<use 
+		transform="translate(1050,500) rotate(270)" 
+		xlink:href="#triangle" />
+</svg>

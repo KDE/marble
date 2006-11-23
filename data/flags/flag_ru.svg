@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Notepad -->
+<!-- (PD) December 16, 2005 - _Crotalus horridus_  -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="450"
+   height="300"
+   id="Russian Federation Flag">
+  <rect
+     style="fill:#FFFFFF"
+     x="0"
+     y="0"
+     width="450"
+     height="100"
+     id="White Stripe" />
+  <rect
+     style="fill:#0000FF"
+     x="0"
+     y="100"
+     width="450"
+     height="100"
+     id="Blue Stripe" />
+  <rect
+     style="fill:#FF0000"
+     x="0"
+     y="200"
+     width="450"
+     height="100"
+     id="Red Stripe" />
+</svg>

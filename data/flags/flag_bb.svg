@@ -1,55 +1,134 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="140mm" id="svg797" sodipodi:docbase="/home/yemu/clipart/new new" sodipodi:docname="/home/yemu/clipart/new new/barbados.svg" sodipodi:version="0.33pre" width="210mm" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="500"
+   id="svg797"
+   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg"
+   sodipodi:docname="Flag_of_Barbados.svg"
+   sodipodi:version="0.32"
+   width="750"
+   inkscape:version="0.43"
+   version="1.0">
+  <defs
+     id="defs799" />
+  <sodipodi:namedview
+     id="base"
+     showgrid="true"
+     snaptogrid="true"
+     gridspacingx="15px"
+     gridspacingy="15px"
+     gridtolerance="3px"
+     inkscape:grid-points="true"
+     inkscape:zoom="0.74599964"
+     inkscape:cx="375.00018"
+     inkscape:cy="250.00012"
+     inkscape:window-width="756"
+     inkscape:window-height="540"
+     inkscape:window-x="82"
+     inkscape:window-y="304"
+     inkscape:current-layer="svg797"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata8437">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
         <dc:title>Barbados</dc:title>
-        <dc:description></dc:description>
+        <dc:description />
         <dc:subject>
           <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>flags</rdf:li>
             <rdf:li>caribbean</rdf:li>
-            <rdf:li>america</rdf:li>
-            <rdf:li>flag</rdf:li>
             <rdf:li>sign</rdf:li>
+            <rdf:li>signs_and_symbols</rdf:li>
+            <rdf:li />
+            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>america</rdf:li>
           </rdf:Bag>
         </dc:subject>
         <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
             <dc:title>Cezary Biele</dc:title>
           </cc:Agent>
         </dc:publisher>
         <dc:creator>
-          <cc:Agent>
+          <cc:Agent
+             rdf:about="">
             <dc:title>Cezary Biele</dc:title>
           </cc:Agent>
         </dc:creator>
         <dc:rights>
-          <cc:Agent>
+          <cc:Agent
+             rdf:about="">
             <dc:title>Cezary Biele</dc:title>
           </cc:Agent>
         </dc:rights>
-        <dc:date></dc:date>
+        <dc:date />
         <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain">
+          <dc:date />
+        </cc:license>
         <dc:language>en</dc:language>
       </cc:Work>
-      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
       </cc:License>
     </rdf:RDF>
   </metadata>
-  <defs id="defs799"/>
-  <sodipodi:namedview id="base" showgrid="true" snaptogrid="true"/>
-  <rect height="496.062988" id="rect807" style="font-size:12;fill:#00009d;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="248.031494" x="0" y="-0.00001526"/>
-  <rect height="496.062988" id="rect808" style="font-size:12;fill:#00009d;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="248.031494" x="496.062988" y="-0.00001526"/>
-  <rect height="496.062988" id="rect809" style="font-size:12;fill:#ffd400;fill-rule:evenodd;stroke-width:1pt;" width="248.031494" x="248.031494" y="-0.00001526"/>
-  <path d="M 372.321 349.218 C 380.283 349.774 375.884 348.857 383.846 349.413 C 384.031 333.674 384.216 317.935 384.401 302.196 C 394.585 302.196 404.77 302.196 414.954 302.196 C 414.773 245.805 436.677 198.276 462.814 157.989 C 464.385 155.968 463.358 155.099 461.615 155.546 C 441.889 158.627 421.595 168.983 407.693 183.359 C 406.071 185.35 407.926 185.66 408.843 185.542 C 416.456 183.26 414.956 191.786 414.404 195.207 C 406.601 220.136 399.791 244.291 397.291 272.976 C 397.288 274.971 396.974 276.422 396.028 276.518 C 392.51 276.703 389.069 276.653 385.512 276.643 C 384.215 276.655 383.932 275.222 383.846 273.866 C 384.031 244.98 383.774 216.095 383.959 187.209 C 384.048 185.303 390.95 177.565 392.073 177.535 C 395.608 177.444 397.098 177.531 401.051 177.464 C 402.081 177.456 402.302 174.284 401.124 174.13 C 398.717 174.13 394.251 173.91 391.844 173.91 C 390.704 173.954 374.554 161.637 374.517 159.106 C 374.332 155.218 374.441 151.403 374.256 147.515 C 374.468 146.558 369.747 146.338 369.812 147.588 C 369.812 150.921 369.812 155.064 369.812 158.397 C 369.003 163.547 372.136 333.479 372.321 349.218 z " id="path803" sodipodi:nodetypes="ccccccccccccccscccccccc" style="fill:#000000;fill-rule:evenodd;stroke:none;stroke-opacity:1;stroke-width:1pt;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;"/>
-  <path d="M 371.905 349.218 C 363.943 349.774 368.342 348.857 360.38 349.413 C 360.195 333.674 360.01 317.935 359.825 302.196 C 349.641 302.196 339.456 302.196 329.272 302.196 C 329.453 245.805 307.549 198.276 281.412 157.989 C 279.841 155.968 280.868 155.099 282.611 155.546 C 302.337 158.627 322.631 168.983 336.533 183.359 C 338.155 185.35 336.3 185.66 335.383 185.542 C 327.77 183.26 329.27 191.786 329.822 195.207 C 337.625 220.136 344.435 244.291 346.935 272.976 C 346.938 274.971 347.252 276.422 348.198 276.518 C 351.716 276.703 355.157 276.653 358.714 276.643 C 360.011 276.655 360.294 275.222 360.38 273.866 C 360.195 244.98 360.452 216.095 360.267 187.209 C 360.178 185.303 353.276 177.565 352.153 177.535 C 348.618 177.444 347.128 177.531 343.175 177.464 C 342.145 177.456 341.924 174.284 343.102 174.13 C 345.509 174.13 349.975 173.91 352.382 173.91 C 353.522 173.954 369.672 161.637 369.709 159.106 C 369.894 155.218 369.785 151.403 369.97 147.515 C 369.758 146.558 374.479 146.338 374.414 147.588 C 374.414 150.921 374.414 155.064 374.414 158.397 C 375.223 163.547 372.09 333.479 371.905 349.218 z " id="path806" sodipodi:nodetypes="ccccccccccccccscccccccc" style="fill:#000000;fill-rule:evenodd;stroke:none;stroke-opacity:1;stroke-width:1pt;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;"/>
+  <rect
+     height="500.00024"
+     id="rect807"
+     style="font-size:12px;fill:#00267f;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="250.00012"
+     x="0"
+     y="-0.00024021922" />
+  <rect
+     height="500.00024"
+     id="rect808"
+     style="font-size:12px;fill:#00267f;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     width="250.00012"
+     x="500.00024"
+     y="-0.00024021922" />
+  <rect
+     height="500.00024"
+     id="rect809"
+     style="font-size:12px;fill:#ffc726;fill-rule:evenodd;stroke-width:1pt"
+     width="250.00012"
+     x="250.00012"
+     y="-0.00024021922" />
+  <g
+     id="g8472">
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccccccccccccc"
+       id="path806"
+       d="M 375,371.12873 L 362.16594,371.12873 C 361.97947,355.26481 362.35241,321.25802 362.16594,305.3941 C 351.90111,305.3941 327.07864,311.44172 316.81381,311.44172 C 316.99625,254.60315 294.9184,206.69691 268.57395,166.09015 C 266.99048,164.05311 268.02563,163.17721 269.78246,163.62776 C 289.66503,166.73322 310.1201,177.17141 324.13244,191.66151 C 325.76732,193.66832 315.44806,189.46622 314.52378,189.34728 C 306.85036,187.04717 316.8118,200.1554 317.36818,203.60355 C 325.23311,228.73041 332.09716,253.07713 334.617,281.9898 C 334.62003,284.00064 334.93652,285.46316 335.89003,285.55992 L 362.16594,281.65416 L 362.16594,188.48651 C 356.00453,188.32356 346.37577,189.94903 340.87478,191.76735 C 358.60263,174.08507 366.87332,151.03389 375,128.87106 C 375,134.43064 375,371.12873 375,371.12873 z " />
+    <use
+       height="496.06299"
+       width="744.09448"
+       transform="matrix(-1,0,0,1,750,1.140581e-16)"
+       id="use8450"
+       xlink:href="#path806"
+       y="0"
+       x="0" />
+  </g>
 </svg>

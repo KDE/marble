@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svg1" x="0" y="0" width="700" height="600">
+  <!--
+  This image is Public Domain by its author.
+  The flag of Niger has the unusual 7:6 proportions, not the classic 2:3 proportion.
+  The three bands have exactly the same size. For exact and complete coverage of the image, it is used as background.
+  The central filled circle is at least 50% of the median band in diameter. 85% is used for better rendering at small sizes.
+  For reference colors, see Flags of the world that define Pantone colors. For Pantone color conversion,
+  please use ONLY the sRGB color profile (at reference gamma = 2.2 on CRT screen, without gamma correction by software or
+  by the graphics display driver, as defined in IEC 61966-2.1, and with slope limit of 1/32, this limit affecting only
+  the indices 1 to 14 in the 8-bit colorimetric component space 0 to 255):
+  * The "burnt orange" color in the top band and circle is Pantone(166), i.e. RGB(224,82,6) = #E05206 on sRGB CRT screen, or
+    CMYK(0,65%,100%,0) for process coated print, BUT NOT light orange #FF7000 which is somewhere between Pantone(130C) and
+    Pantone(151), and is even lighter than X11 orange! See http://www.seoconsultants.com/css/colors/conversion/100/
+  * The central white band is plain D65 reference white = RGB(255,255,255) = #FFFFFF.
+  * The green color in the bottom band is Pantone(361), i.e. RGB(13,176,43) = #0DB02B on sRGB CRT screen, or
+    CMYK(76%,0,91%,0) for process coated print, BUT NOT grass green #36A100 which too burnt and more like Pantone(369)!
+    See http://www.seoconsultants.com/css/colors/conversion/300/
+  -->
+  <g id="g1" style="stroke:none;fill-opacity:1;fill-rule:evenodd;">
+    <rect id="r0" fill="#FFFFFF" x="0" y="0" width="700" height="600"/>
+    <rect id="r2" fill="#E05206" x="0" y="0" width="700" height="200"/>
+    <circle id="c0" fill="#E05206" cx="350" cy="300" r="85"/>
+    <rect id="r1" fill="#0DB02B" x="0" y="400" width="700" height="200"/>
+  </g>
+</svg>

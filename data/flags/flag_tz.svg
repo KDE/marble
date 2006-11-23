@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/TR/2003/REC-SVG11-20030114/DTD/svg11.dtd">
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="600"
+   height="400"
+   viewBox="0 0 144 96">
+
+<path	id="green_triangle"
+	d="M 0 0 h 144 L 0 96 z"
+	fill="#1eb53a"/>
+	
+<path	id="blue_triangle"
+	d="M 0 96 h 144 L 144 0 z"
+	fill="#00a3dd"/>
+	
+<line	id="yellow_stripes"
+	x1="0"
+	y1="96"
+	x2="144"
+	y2="0"
+	stroke="#fcd116"
+	stroke-width="38"/>
+	
+<line	id="black_stripe"
+	x1="0"
+	y1="96"
+	x2="144"
+	y2="0"
+	stroke="black"
+	stroke-width="26"/>
+
+</svg>

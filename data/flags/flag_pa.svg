@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="450" height="300" viewBox="0 0 36 24">
+<desc>Flag of Panama</desc>
+<defs>
+<g id="star" transform="scale(3)">
+   <g id="c">
+	<path id="t" d="M0,0 v1 h0.5 z" transform="translate(0,-1) rotate(18)"/>
+	<use xlink:href="#t" transform="scale(-1,1)"/>
+   </g>
+	<use xlink:href="#c" transform="rotate(72)"/>
+	<use xlink:href="#c" transform="rotate(-72)"/>
+	<use xlink:href="#c" transform="rotate(144)"/>
+	<use xlink:href="#c" transform="rotate(-144)"/>
+</g>
+</defs>
+	<path fill="#fff" d="M 0,0 h36 v24 h-36 z" />
+   <g fill="#0067c6">
+	<use xlink:href="#star" x="9" y="6" />
+	<path d="M 0,12 h18 v12 h-18 z" />
+   </g>
+   <g fill="#d21034">
+	<path d="M 18,0 h18 v12 h-18 z" />
+	<use xlink:href="#star" x="27" y="18" />
+   </g>
+</svg>

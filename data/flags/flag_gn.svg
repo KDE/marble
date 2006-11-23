@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
 "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><!-- /Creative Commons Public Domain --><!--
-
---><svg height="666" id="svg676" sodipodi:docbase="/home/daniel/tmp" sodipodi:docname="/home/daniel/tmp/guinea_flag.svg" sodipodi:version="0.33pre" width="999" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
-        <dc:title>Guinea</dc:title>
-        <dc:description></dc:description>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>africa</rdf:li>
-            <rdf:li>sign</rdf:li>
-            <rdf:li>=signs</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date></dc:date>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
-        <dc:language>en</dc:language>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   x="0.0000000"
+   y="0.0000000"
+   width="450.00000"
+   height="300.00000"
+   id="svg5304">
+  <defs
+     id="defs5306" />
+  <metadata
+     id="metadata5307">
+    <rdf:RDF
+       id="RDF5308">
+      <cc:Work
+         rdf:about=""
+         id="Work5309">
+        <dc:format
+           id="format5310">image/svg+xml</dc:format>
+        <dc:type
+           id="type5312"
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
       </cc:Work>
-      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
-      </cc:License>
     </rdf:RDF>
   </metadata>
-  <defs id="defs678"/>
-  <sodipodi:namedview id="base"/>
-  <g id="g683" transform="scale(8.325)">
-    <rect height="80.000000" id="rect679" style="font-size:12;fill:#ff0000;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="40.000000" x="0.000000" y="0.000000"/>
-    <rect height="80" id="rect680" style="font-size:12;fill:#ffff00;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="40" x="40" y="0"/>
-    <rect height="80" id="rect681" style="font-size:12;fill:#009900;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="40" x="80" y="0"/>
+  <g
+     transform="matrix(1.200000,0.000000,0.000000,1.200000,-150.0000,-512.8346)"
+     id="g2837">
+    <rect
+       width="375.00000"
+       height="250.00000"
+       x="125.00000"
+       y="427.36218"
+       style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+       id="rect5313" />
+    <rect
+       width="250.00000"
+       height="250.00000"
+       x="250.00000"
+       y="427.36218"
+       style="fill:#fcd116;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+       id="rect5936" />
+    <rect
+       width="125.00000"
+       height="250.00000"
+       x="375.00000"
+       y="427.36218"
+       style="fill:#009460;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+       id="rect6558" />
   </g>
 </svg>

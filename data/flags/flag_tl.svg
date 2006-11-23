@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   x="0.00000000"
+   y="0.00000000"
+   width="1200"
+   height="600"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docname="Flag_of_East_Timor.svg"
+   sodipodi:docbase="D:\Kuvat\Wikipedia">
+  <metadata
+     id="metadata1346">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="968"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     inkscape:zoom="0.99083333"
+     inkscape:cx="600"
+     inkscape:cy="300"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4" />
+  <g
+     id="g1361"
+     transform="matrix(100,0,0,99.99983,0,-29399.95)">
+    <rect
+       id="rect1306"
+       style="fill:#dc241f;fill-opacity:1;fill-rule:evenodd"
+       y="294"
+       x="0"
+       height="6.0000105"
+       width="11.999999" />
+    <path
+       id="path5705"
+       style="fill:#ffc726;fill-opacity:1;fill-rule:evenodd"
+       d="M 0.0024906664,294 L 5.9999994,297.00187 L 0,300.00001 L 0.0024906664,294 z " />
+    <path
+       d="M 0.0016604444,294 L 4,297.00187 L 0,300.00001 L 0.0016604444,294 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd"
+       id="path1306" />
+    <path
+       d="M 2.3566678,296.39654 L 1.9062747,296.99627 L 2.3633332,297.59141 L 1.6254578,297.36865 L 1.172587,297.96668 L 1.166948,297.22928 L 0.43,297.00375 L 1.1643903,296.77077 L 1.1618022,296.03335 L 1.6213193,296.62676 L 2.3566678,296.39654 z "
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd"
+       id="path2035" />
+  </g>
+</svg>

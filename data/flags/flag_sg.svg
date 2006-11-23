@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="4320"
+   height="2880"
+   id="svg1399">
+  <defs
+     id="defs1413" />
+  <rect
+     width="4320"
+     height="1440"
+     x="0"
+     y="0"
+     style="fill:#ce1126"
+     id="red stripe" />
+  <rect
+     width="4320"
+     height="1440"
+     x="0"
+     y="1440"
+     style="fill:#ffffff"
+     id="white stripe" />
+  <circle
+     cx="880"
+     cy="720"
+     r="530"
+     style="fill:#ffffff"
+     id="circle1403" />
+  <circle
+     cx="1210"
+     cy="720"
+     r="580"
+     style="fill:#ce1126"
+     id="circle1405" />
+  <use
+     transform="translate(-294.9999,220.7)"
+     id="use1417"
+     x="0"
+     y="0"
+     width="4320"
+     height="2880"
+     xlink:href="#path1432" />
+  <path
+     d="M 1307.8112,508.92434 L 1228.4269,447.27953 L 1149.5943,509.7 L 1180.9061,411.38672 L 1100,351.96269 L 1198.736,352.84654 L 1227.5658,253.7 L 1257.2763,352.55954 L 1356.0002,350.70763 L 1275.6262,410.92234 L 1307.8112,508.92434 z "
+     style="fill:#ffffff"
+     id="path1432" />
+  <use
+     transform="translate(295,220.7)"
+     id="use1419"
+     x="0"
+     y="0"
+     width="4320"
+     height="2880"
+     xlink:href="#path1432" />
+  <use
+     transform="translate(-183.7,567.7)"
+     id="use1421"
+     x="0"
+     y="0"
+     width="4320"
+     height="2880"
+     xlink:href="#path1432" />
+  <use
+     transform="translate(185,567.7)"
+     id="use1423"
+     x="0"
+     y="0"
+     width="4320"
+     height="2880"
+     xlink:href="#path1432" />
+</svg>

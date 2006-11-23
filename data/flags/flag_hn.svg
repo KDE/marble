@@ -1,59 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="140mm" id="svg378" sodipodi:docbase="/home/cschalle/sodipodi-flags/nations/" sodipodi:docname="/home/cschalle/sodipodi-flags/nations/honduras.svg" sodipodi:version="0.32" version="1" width="271mm" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" y="0">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
-        <dc:title>Honduras</dc:title>
-        <dc:description></dc:description>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
-            <rdf:li>latin_america</rdf:li>
-            <rdf:li>america</rdf:li>
-            <rdf:li>south_america</rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>sign</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
-            <dc:title>Cezary Biele and Christian Schaller</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Cezary Biele and Christian Schaller</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title>Cezary Biele and Christian Schaller</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date></dc:date>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
-        <dc:language>en</dc:language>
-      </cc:Work>
-      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview gridoriginx="0mm" gridoriginy="-8mm" gridspacingx="1mm" gridspacingy="1mm" id="base" showgrid="true"/>
-  <defs id="defs380"/>
-  <rect height="208.932434" id="rect649" style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="959.783389" x="-0.000000" y="136.960342"/>
-  <rect height="107.958336" id="rect148" style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(-1.546849,0.000000,0.000000,-1.546849,4.190893e-4,-233.7145)" width="618.063362" x="-619.343940" y="-472.524338"/>
-  <rect height="104.977776" id="rect585" style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(-1.546849,0.000000,0.000000,-1.546849,4.190893e-4,-233.7145)" width="620.857059" x="-620.856326" y="-257.751450"/>
-  <polygon id="polygon671" points="591.041,433.161 533.774,391.476 476.501,433.151 498.449,365.806 441.115,324.214 511.946,324.278 533.785,256.897 555.613,324.281 626.445,324.23 569.104,365.812 591.041,433.161 " style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.333374,-1.622405e-3,-3.629845e-3,0.316060,304.5722,139.6546)"/>
-  <polygon id="polygon637" points="591.041,433.161 533.774,391.476 476.501,433.151 498.449,365.806 441.115,324.214 511.946,324.278 533.785,256.897 555.613,324.281 626.445,324.23 569.104,365.812 591.041,433.161 " style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.333374,-1.622405e-3,-3.629845e-3,0.316060,442.6630,175.2028)"/>
-  <polygon id="polygon638" points="591.041,433.161 533.774,391.476 476.501,433.151 498.449,365.806 441.115,324.214 511.946,324.278 533.785,256.897 555.613,324.281 626.445,324.23 569.104,365.812 591.041,433.161 " style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.333374,-1.622405e-3,-3.629845e-3,0.316060,442.6630,101.3721)"/>
-  <polygon id="polygon639" points="591.041,433.161 533.774,391.476 476.501,433.151 498.449,365.806 441.115,324.214 511.946,324.278 533.785,256.897 555.613,324.281 626.445,324.23 569.104,365.812 591.041,433.161 " style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.333374,-1.622405e-3,-3.629845e-3,0.316060,137.7696,175.2028)"/>
-  <polygon id="polygon640" points="591.041,433.161 533.774,391.476 476.501,433.151 498.449,365.806 441.115,324.214 511.946,324.278 533.785,256.897 555.613,324.281 626.445,324.23 569.104,365.812 591.041,433.161 " style="font-size:12;fill:#087bce;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.333374,-1.622405e-3,-3.629845e-3,0.316060,137.7695,101.3721)"/>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="1000"
+   height="500"
+ viewBox="0 0 72 36"  id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     id="layer1">
+    <rect
+       width="72"
+       height="36"
+       x="0"
+       y="0"
+       style="fill:#0047ba"
+       id="rect1872" />
+    <rect
+       width="72"
+       height="12"
+       x="0"
+       y="12"
+       style="fill:white"
+       id="rect1874" />
+    <path
+       d="M 36,16 L 36.449028,17.381966 L 37.902113,17.381966 L 36.726543,18.236068 L 37.17557,19.618034 L 36,18.763932 L 34.824429,19.618034 L 35.273457,18.236068 L 34.097887,17.381966 L 35.550972,17.381966 L 36,16 z "
+       style="opacity:1;fill:#0047ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1888" />
+    <path
+       d="M 26,13 L 26.449028,14.381966 L 27.902113,14.381966 L 26.726543,15.236068 L 27.17557,16.618034 L 26,15.763932 L 24.824429,16.618034 L 25.273457,15.236068 L 24.097887,14.381966 L 25.550972,14.381966 L 26,13 z "
+       style="opacity:1;fill:#0047ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1891" />
+    <path
+       d="M 26,19 L 26.449028,20.381966 L 27.902113,20.381966 L 26.726543,21.236068 L 27.17557,22.618034 L 26,21.763932 L 24.824429,22.618034 L 25.273457,21.236068 L 24.097887,20.381966 L 25.550972,20.381966 L 26,19 z "
+       style="opacity:1;fill:#0047ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1893" />
+    <path
+       d="M 46,13 L 46.449028,14.381966 L 47.902113,14.381966 L 46.726543,15.236068 L 47.17557,16.618034 L 46,15.763932 L 44.824429,16.618034 L 45.273457,15.236068 L 44.097887,14.381966 L 45.550972,14.381966 L 46,13 z "
+       style="opacity:1;fill:#0047ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1895" />
+    <path
+       d="M 46,19 L 46.449028,20.381966 L 47.902113,20.381966 L 46.726543,21.236068 L 47.17557,22.618034 L 46,21.763932 L 44.824429,22.618034 L 45.273457,21.236068 L 44.097887,20.381966 L 45.550972,20.381966 L 46,19 z "
+       style="opacity:1;fill:#0047ba;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1897" />
+  </g>
 </svg>

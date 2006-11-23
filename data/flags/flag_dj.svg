@@ -1,47 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="708.661" id="svg378" sodipodi:docbase="/home/skrut" sodipodi:docname="/home/skrut/djibouti.svg" sodipodi:version="0.32" version="1" width="1062.99" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" y="0">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
-        <dc:title></dc:title>
-        <dc:description></dc:description>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>africa</rdf:li>
-            <rdf:li>sign</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
-            <dc:title></dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title></dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title></dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date></dc:date>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="400"
+   viewBox="0 0 15 10"
+   id="svg6735"
+   sodipodi:version="0.32"
+   inkscape:version="0.44"
+   sodipodi:docname="Flag_of_Djibouti.svg"
+   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+  <metadata
+     id="metadata6770">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
         <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource=""/>
-        <dc:language>en</dc:language>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <sodipodi:namedview id="base"/>
-  <defs id="defs380"/>
-  <rect height="708.661011" id="rect149" style="font-size:12;fill:#00cc00;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="1062.989990" x="0.000000" y="-0.000062"/>
-  <rect height="354.331" id="rect280" style="font-size:12;fill:#6699ff;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" width="1062.99" x="0" y="0"/>
-  <path d="M 0 0 L 609.958 353.876 L 0 707.296 L 0 0 z " id="path279" style="font-size:12;fill:#fffefe;fill-rule:evenodd;stroke-width:1pt;fill-opacity:1;" transform="matrix(0.868473,0.000000,0.000000,1.000000,0.000000,-3.051758e-5)"/>
-  <path d="M 266.186 534.45 L 255.778 527.018 L 245.421 534.523 L 249.273 522.327 L 238.935 514.796 L 251.725 514.691 L 255.692 502.532 L 259.744 514.663 L 272.534 514.679 L 262.249 522.281 L 266.186 534.45 z " id="path205" style="font-size:12;fill:#ff0000;fill-rule:evenodd;stroke-width:0.112872;fill-opacity:1;" transform="matrix(4.098708,0.000000,0.000000,4.132022,-869.8373,-1804.100)"/>
+  <defs
+     id="defs6768" />
+  <sodipodi:namedview
+     inkscape:window-height="573"
+     inkscape:window-width="853"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="0.9425"
+     inkscape:cx="300"
+     inkscape:cy="200"
+     inkscape:window-x="64"
+     inkscape:window-y="42"
+     inkscape:current-layer="svg6735" />
+  <rect
+     width="15"
+     height="5"
+     fill="#6ab2e7"
+     id="blue_stripe" />
+  <rect
+     width="15"
+     height="5"
+     y="5"
+     fill="#12ad2b"
+     id="green_stripe" />
+  <comment
+     id="comment6752">the star is in the center of gravity of the triangle, so the x-pos is irrational (5 / sin30 * sin60)</comment>
+  <path
+     style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 0,0 L 0,5 L 0,10 L 4.330127,7.5 L 8.660254,5 L 4.330127,2.5 L 0,0 z "
+     id="path6904"
+     sodipodi:nodetypes="ccccccc" />
+  <path
+     sodipodi:type="star"
+     style="opacity:1;fill:red;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path6929"
+     sodipodi:sides="5"
+     sodipodi:cx="2.8867514"
+     sodipodi:cy="5"
+     sodipodi:r1="1"
+     sodipodi:r2="0.38196602"
+     sodipodi:arg1="-1.5707963"
+     sodipodi:arg2="-0.94247777"
+     inkscape:flatsided="false"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="M 2.8867514,4 L 3.1112654,4.690983 L 3.8378079,4.690983 L 3.2500227,5.118034 L 3.4745366,5.809017 L 2.8867514,5.381966 L 2.2989661,5.809017 L 2.5234801,5.118034 L 1.9356949,4.690983 L 2.6622374,4.690983 L 2.8867514,4 z " />
 </svg>

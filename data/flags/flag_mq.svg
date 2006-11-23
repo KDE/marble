@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="750"
+   height="500"
+   viewBox="0 0 75 50"
+   id="svg2">
+  <defs
+     id="defs17" />
+  <rect
+     width="75"
+     height="50"
+     x="0"
+     y="0"
+     style="fill:#21428e;fill-opacity:1;stroke:none;stroke-width:0.375;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect2049" />
+  <path
+     d="M 62.3,11.9 C 59.9,13 58,14.6 58,15.4 C 58,16.3 59.411791,16.31817 57.640524,16.88575 C 55.869257,17.45333 51.340651,18.34959 48.084651,18.15186 C 47.009953,18.15642 44.426501,17.45414 43.677627,17.54814 C 42.928754,17.64213 47.067628,19.33111 45.467628,18.93111 C 43.267628,18.33111 42.006232,18.11037 43.706232,19.21037 C 45.006232,20.01037 47.874279,20.0473 51.974279,19.5473 C 53.624279,19.3473 57.767144,18.35344 59.289396,18.22682 C 60.341373,18.13932 60.260372,18.95 60.910372,19 C 66.310372,19.3 75.9,19.1 80.1,18.5 C 83.6,18 84.9,18.2 85.9,19.4 C 87.9,21.7 85.8,23.7 80.1,24.9 C 73.1,26.4 70.2,27.7 67.5,30.6 C 61,37.6 68.6,45.5 82.8,46.6 C 91.1,47.3 96.5,48.9 95.2,50.2 C 94.7,50.7 89.2,51.5 82.9,52 C 69.2,53.1 63.1,55 57.9,60 C 55,62.8 54,64.5 54,66.8 C 54,70 54,70 48.7,70 C 45.9,70 42,69.6 40.2,69 C 37.4,68.3 37,68.3 38,69.5 C 40,71.9 45.7,74 50.4,74 C 54,74 56,74.7 59.2,77 C 65.6,81.7 72.9,83.5 85,83.4 C 100.9,83.3 110,79.1 110,72 C 110,66.7 104,63.6 91.5,62.5 C 85.2,61.9 72.8,62.9 67.4,64.5 C 66.4,64.8 67.5,64.1 69.9,62.9 C 72.8,61.5 77.6,60.5 84.1,59.9 C 98.5,58.7 105,55.5 105,49.5 C 105,43.7 98.6,40.4 84.9,39.1 C 71.4,37.9 70.4,35.5 81.8,32 C 89.9,29.6 94,26 94,21.1 C 94,13.6 89.9,11.1 76.2,10.4 C 67.9,10 65.9,10.2 62.3,11.9 z M 69.5,14 C 69.2,14.5 68.4,15 67.9,15 C 67.3,15 67.2,14.5 67.5,14 C 67.8,13.4 68.6,13 69.1,13 C 69.7,13 69.8,13.4 69.5,14 z M 98.4,70 C 100.3,70.7 101,71.4 100.4,72 C 98.7,73.7 87.7,75.2 81,74.7 C 73.6,74 65.6,71.6 68,70.6 C 74.7,68 92.3,67.7 98.4,70 z "
+     transform="matrix(0.230008,0,0,0.230335,-2.59174e-2,-9.549116e-2)"
+     style="fill:white;fill-opacity:1;stroke:none"
+     id="path8" />
+  <rect
+     width="75"
+     height="7.25"
+     x="0"
+     y="21.375"
+     style="opacity:1;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect17550" />
+  <rect
+     width="7.25"
+     height="50"
+     x="33.875"
+     y="0"
+     style="opacity:1;fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.25;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="rect17552" />
+  <use
+     transform="translate(41.125,0)"
+     id="use17562"
+     x="0"
+     y="0"
+     width="75"
+     height="50"
+     xlink:href="#path8" />
+  <use
+     transform="translate(41.125,28.625)"
+     id="use17564"
+     x="0"
+     y="0"
+     width="75"
+     height="50"
+     xlink:href="#path8" />
+  <use
+     transform="translate(0,28.625)"
+     id="use17566"
+     x="0"
+     y="0"
+     width="75"
+     height="50"
+     xlink:href="#path8" />
+</svg>

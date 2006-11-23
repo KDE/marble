@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+xmlns:svg="http://www.w3.org/2000/svg"
+xmlns="http://www.w3.org/2000/svg"
+version="1.0"
+width="900"
+height="600"
+viewBox="0 0 45 30">
+
+<clipPath id="around">
+<rect width="45" height="30"/>
+</clipPath>
+<clipPath id="t">
+<path d="M0,0 L22.5,15 L0,30"/>
+</clipPath>
+
+<g clip-path="url(#around)">
+<rect id="red_stripe" width="45" height="30" fill="#E23D28"/>
+<rect id="horizontal_white_stripe" width="45" fill="#FFF" height="20" y="10"/>
+<rect id="blue_stripe" width="45" height="10" y="20" fill="#0C1C8C"/>
+
+<path id="diagonal_white_stripes" d="M0,0 L22.5,15 L0,30" stroke="#FFF" stroke-width="10" fill="none"/>
+<path id="black_triangle_with_yellow_fimbration" d="M0,0 L22.5,15 L0,30" fill="#000" stroke="#FCB514" stroke-width="10" clip-path="url(#t)"/>
+<path id="diagonal_green_stripes" d="M0,0 L22.5,15 L0,30" stroke="#007C59" stroke-width="6" fill="none"/>
+
+<rect id="right_green_stripe" width="22.5" height="6" x="22.5" y="12" fill="#007C59"/>
+</g>
+</svg>

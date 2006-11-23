@@ -1,102 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
-<!-- /Creative Commons Public Domain -->
-<!--
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg>
+<svg version="1.1" baseProfile="full" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" zoomAndPan="magnify"
+   id="Union Jack"
+   viewBox="-15 -7.5 30 15"
+   width="1200" height="600">
 
+  <defs>
+    <clipPath id="border">
+      <rect x="-15" y="-7.5" width="30" height="15"/>
+    </clipPath>
+  </defs>
 
--->
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="500"
-   id="svg1"
-   sodipodi:docname="flag_gb.svg"
-   sodipodi:version="0.32"
-   width="1000"
-   inkscape:version="0.43"
-   sodipodi:docbase="/home/tackat/kdesvn/marble/data/flags">
-  <metadata
-     id="metadata1950">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:title>Clipart by Daniel McRae - United Kingdom</dc:title>
-        <dc:description />
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li>unitedkingdom</rdf:li>
-            <rdf:li />
-            <rdf:li>europe</rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>sign</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent
-             rdf:about="http://www.openclipart.org">
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title>Daniel McRae</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date />
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" />
-        <dc:language>en</dc:language>
-      </cc:Work>
-      <cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" />
-        <cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" />
-        <cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs3" />
-  <sodipodi:namedview
-     id="base"
-     inkscape:zoom="0.655"
-     inkscape:cx="500"
-     inkscape:cy="159.77776"
-     inkscape:window-width="749"
-     inkscape:window-height="540"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:current-layer="svg1" />
-  <rect
-     y="0"
-     x="0"
-     width="1000.0002"
-     style="font-size:12px;fill:#000066;stroke-width:1pt"
-     id="rect124"
-     height="500.00009" />
-  <path
-     style="font-size:12px;fill:#ffffff;stroke-width:1pt"
-     d="M 0 0 L 0 55.90625 L 221.5 166.65625 L 0 166.65625 L 0 333.34375 L 221.5 333.34375 L 0 444.09375 L 0 500 L 111.8125 500 L 416.65625 347.5625 L 416.65625 500 L 583.34375 500 L 583.34375 347.5625 L 888.1875 500 L 1000 500 L 1000 444.09375 L 778.5 333.34375 L 1000 333.34375 L 1000 166.65625 L 778.5 166.65625 L 1000 55.90625 L 1000 0 L 888.1875 0 L 583.34375 152.4375 L 583.34375 0 L 416.65625 0 L 416.65625 152.4375 L 111.8125 0 L 0 0 z "
-     id="path146" />
-  <path
-     style="font-size:12px;fill:#cc0000;stroke-width:1pt"
-     d="M 0 0 L 0 37.28125 L 258.8125 166.65625 L 333.34375 166.65625 L 0 0 z M 450 0 L 450 200 L 0 200 L 0 300 L 450 300 L 450 500 L 550 500 L 550 300 L 1000 300 L 1000 200 L 550 200 L 550 0 L 450 0 z M 925.46875 0 L 592.125 166.65625 L 666.65625 166.65625 L 1000 0 L 925.46875 0 z M 333.34375 333.34375 L 0 500 L 74.53125 500 L 407.875 333.34375 L 333.34375 333.34375 z M 666.65625 333.34375 L 1000 500 L 1000 462.71875 L 741.1875 333.34375 L 666.65625 333.34375 z "
-     id="path141" />
+  <g clip-path="url(#border)">
+    <circle r="20" fill="#00247D"/>
+    <path d="M -20,-10 L 20,10 M -20,10 L 20,-10" stroke-width="3" stroke="white" id="diags_white"/>
+    <path d="M -20,-10 L 20,10 M -20,10 L 20,-10" stroke-width="2" stroke="#CF142B" id="diags_red"/>
+    <path stroke="none" fill="white" d="M 0,0 l 20,10 h -3 l -20,-10 M 0,0 l 20,-10 h 3 l -20,10 M 0,0 l -20,10 h -3 l 20,-10 M 0,0 l -20,-10 h 3 l 20,10" id="eraser_white"/>
+<comment>I think the above two lines give the simplest way to make the diagonals</comment>
+    <path d="M -20,0 H 20 M 0,-10 V 10" stroke-width="5" stroke="white" id="cross_white"/>
+    <path d="M -20,0 H 20 M 0,-10 V 10" stroke-width="3" stroke="#CF142B" id="cross_red"/>
+  </g>
 </svg>

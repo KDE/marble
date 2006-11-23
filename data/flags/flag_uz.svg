@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="1000"
+	height="500"
+	viewBox="0 0 500 250">
+<rect width="500" height="80"		fill="#0099b5" id="blue_stripe" />
+<rect width="500" height="5" y="80"	fill="#ce1126" id="upper_red_stripe" />
+<rect width="500" height="80" y="85"	fill="#ffffff" id="white_stripe" />
+<rect width="500" height="5" y="165"	fill="#ce1126" id="lower_red_stripe" />
+<rect width="500" height="80" y="170"	fill="#1eb53a" id="green_stripe" />
+
+<defs>
+<g id="star" fill="white" transform="scale(1)">
+  <g id="cone">
+    <polygon id="triangle" points="0,0 0,1 .5,1" transform="translate(0,-1) rotate(18)"/>
+    <use xlink:href="#triangle" transform="scale(-1,1)"/>
+  </g>
+  <use xlink:href="#cone" transform="rotate(72)"/>
+  <use xlink:href="#cone" transform="rotate(-72)"/>
+  <use xlink:href="#cone" transform="rotate(144)"/>
+  <use xlink:href="#cone" transform="rotate(-144)"/>
+</g>
+</defs>
+
+<circle cx="70" cy="40" r="30" fill="#ffffff"/>
+<circle cx="83.5" cy="40" r="25" fill="#0099b5"/>
+
+<g id="stars" transform="translate(10)">
+<g id="upper_row_of_three_stars">
+<use xlink:href="#star" transform="translate(136,16) scale(6)"/>
+<use xlink:href="#star" transform="translate(160,16) scale(6)"/>
+<use xlink:href="#star" transform="translate(184,16) scale(6)"/>
+</g>
+<g id="middle_row_of_four_stars">
+<use xlink:href="#star" transform="translate(112,40) scale(6)"/>
+<use xlink:href="#upper_row_of_three_stars" transform="translate(0,24)"/>
+</g>
+<g id="lower_row_of_five_stars">
+<use xlink:href="#star" transform="translate(88,64) scale(6)"/>
+<use xlink:href="#middle_row_of_four_stars" transform="translate(0,24)"/>
+</g>
+</g>
+
+</svg>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   x="0.0000000"
+   y="0.0000000"
+   width="600.00000"
+   height="300.00000"
+   id="svg1">
+  <defs
+     id="defs3" />
+  <rect
+     width="60.000000"
+     height="30.000000"
+     x="125.00000"
+     y="647.36218"
+     transform="matrix(10.00000,0.000000,0.000000,10.00000,-1250.000,-6473.622)"
+     style="fill:#002b7f;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+     id="rect908" />
+  <path
+     d="M 140.00000,673.61218 L 139.35295,671.02699 L 137.50000,672.94230 L 138.23223,670.37995 L 135.66987,671.11218 L 137.58519,669.25923 L 135.00000,668.61218 L 137.58519,667.96513 L 135.66987,666.11218 L 138.23223,666.84441 L 137.50000,664.28206 L 139.35295,666.19737 L 140.00000,663.61218 L 140.64705,666.19737 L 142.50000,664.28206 L 141.76777,666.84441 L 144.33013,666.11218 L 142.41481,667.96513 L 145.00000,668.61218 L 142.41481,669.25923 L 144.33013,671.11218 L 141.76777,670.37995 L 142.50000,672.94230 L 140.64705,671.02699 L 140.00000,673.61218 z "
+     transform="matrix(10.00000,0.000000,0.000000,10.00000,-1250.000,-6473.622)"
+     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+     id="path1530" />
+  <rect
+     width="60.000000"
+     height="2.5000000"
+     x="125.00000"
+     y="661.11218"
+     transform="matrix(10.00000,0.000000,0.000000,10.00000,-1250.000,-6473.622)"
+     style="fill:#ffc61e;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+     id="rect2773" />
+</svg>

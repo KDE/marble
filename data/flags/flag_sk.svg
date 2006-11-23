@@ -1,59 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
-[
- <!ATTLIST svg
-  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
-]>
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") --><svg height="708.661" id="svg378" version="1" width="1062.99" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0">
-  <metadata>
-    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-      <cc:Work rdf:about="">
-        <dc:title> slovakia</dc:title>
-        <dc:description></dc:description>
-        <dc:subject>
-          <rdf:Bag>
-            <rdf:li></rdf:li>
-            <rdf:li>europe</rdf:li>
-            <rdf:li>united_nations_member</rdf:li>
-            <rdf:li>flag</rdf:li>
-            <rdf:li>sign</rdf:li>
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher>
-          <cc:Agent rdf:about="http://www.openclipart.org">
-            <dc:title> Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator>
-          <cc:Agent>
-            <dc:title>Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights>
-          <cc:Agent>
-            <dc:title> Lauris Kaplinski</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date></dc:date>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-        <cc:license rdf:resource="http://web.resource.org/cc/PublicDomain"/>
-        <dc:language>en</dc:language>
-      </cc:Work>
-      <cc:License rdf:about="http://web.resource.org/cc/PublicDomain">
-        <cc:permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/Distribution"/>
-        <cc:permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <defs id="defs380"/>
-  <rect height="708.661" id="rect171" style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;" width="1062.99" x="0" y="0"/>
-  <rect height="472.441" id="rect403" style="font-size:12;fill:#01017e;fill-rule:evenodd;stroke-width:1pt;" width="1062.99" x="0" y="236.22"/>
-  <rect height="236.22" id="rect135" style="font-size:12;fill:#fe0101;fill-rule:evenodd;stroke-width:1pt;" width="1062.99" x="0" y="472.441"/>
-  <path d="M 185.105 160.833 L 185.105 359.548 C 198.715 437.129 234.784 516.071 356.599 556.222 C 477.734 516.071 516.524 440.531 530.815 358.187 L 530.815 160.833 L 185.105 160.833 z " id="path150" style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"/>
-  <path d="M 198.715 176.485 L 198.715 350.021 C 210.964 413.31 234.784 499.738 356.599 539.889 C 477.734 499.738 505.636 413.31 516.524 350.021 L 516.524 176.485 L 198.715 176.485 z " id="path140" style="font-size:12;fill:#fe0101;fill-rule:evenodd;stroke-width:1pt;"/>
-  <path d="M 375.654 281.287 L 375.654 309.189 L 431.458 309.189 C 438.94 309.189 445.976 305.559 453.235 303.744 L 453.235 356.145 C 453.235 356.145 453.235 356.145 453.235 356.145 C 445.749 354.557 438.43 351.382 430.777 351.382 L 376.335 351.382 L 376.335 415.352 L 338.905 413.991 L 338.905 351.382 L 285.824 351.382 C 277.846 351.382 270.399 355.465 262.686 357.506 L 262.686 301.703 C 269.945 303.971 276.858 308.508 284.463 308.508 L 338.905 308.508 L 338.905 280.606 L 298.754 280.606 C 291.718 280.606 285.597 285.597 279.018 288.092 L 279.018 235.011 C 286.504 238.187 293.344 244.538 301.476 244.538 L 339.586 244.538 L 339.586 220.719 C 339.586 209.594 333.234 199.396 330.058 188.734 L 383.82 188.734 C 381.098 199.623 375.654 210.176 375.654 221.4 L 375.654 244.538 L 411.722 244.538 C 421.133 244.538 429.87 239.548 438.944 237.053 L 438.944 289.454 C 430.777 286.732 423.052 281.287 414.444 281.287 L 375.654 281.287 z " id="path153" style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"/>
-  <path d="M 306.92 422.838 C 274.934 406.845 244.38 415.776 229.764 441.382 C 252.477 484.766 295.691 519.813 356.599 539.889 C 417.167 519.813 461.231 484.766 485.39 443.424 C 466.57 407.521 430.777 412.289 407.639 423.519 C 391.306 383.367 324.614 385.409 306.92 422.838 z " id="path152" style="font-size:12;fill:#01017e;fill-rule:evenodd;stroke-width:1pt;"/>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="900"
+   height="600"
+   viewBox="0 0 450 300">
+    <rect
+       width="450"
+       height="300"
+       fill="#fff"/>
+    <rect
+       width="450"
+       height="200"
+       y="100"
+       fill="#0038a8"/>
+    <rect
+       width="450"
+       height="100"
+       y="200"
+       fill="#ce1126"/>
+    <path
+       d="M 77.80214,70.519375 C 71.75774,70.977285 73.463095,78.307065 72.713075,82.46923 C 70.581035,111.15021 67.63598,140.75688 76.39564,168.69063 C 83.30531,191.23482 99.81871,209.83941 119.82913,221.838 C 124.75435,224.57723 129.55176,228.01768 134.99952,229.50002 C 140.70281,227.90093 145.74124,224.31012 150.887,221.39337 C 170.58257,209.40799 186.77278,190.9538 193.6034,168.69063 C 202.49837,140.28969 199.33114,110.20194 197.17536,81.05622 C 196.86141,77.045825 197.46604,70.08556 191.54167,70.519375 C 153.62849,70.519375 115.71532,70.519375 77.80214,70.519375 z "
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path19697" />
+    <g
+       transform="matrix(0.5,0,0,0.5,-4.952244e-5,150.0002)"
+       id="g1376">
+      <g
+         id="g1388">
+        <path
+           d="M 270.00013,-150.00033 L 270.00013,149.98108 C 131.27111,82.770984 146.4401,-28.549958 155.59324,-150.00033 L 270.00013,-150.00033 z M 270.00013,-150.00033 L 270.00013,149.98108 C 408.72916,82.770984 393.56016,-28.549958 384.40702,-150.00033 L 270.00013,-150.00033 z "
+           style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           id="path919" />
+        <g
+           id="g1366">
+          <path
+             d="M 286.19947,-67.713266 C 300.79888,-67.713266 315.67885,-65.05409 329.99774,-62.219101 C 325.75976,-76.125053 325.75976,-84.622415 329.99774,-98.528367 C 315.67885,-95.693378 300.79888,-93.034202 286.19947,-93.034202 L 253.80076,-93.034202 C 239.20135,-93.034202 224.32138,-95.693378 210.00249,-98.528367 C 214.24047,-84.622415 214.24047,-76.125053 210.00249,-62.219101 C 224.32138,-65.05409 239.20135,-67.713266 253.80076,-67.713266 L 286.19947,-67.713266 z "
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             id="path3412" />
+          <path
+             d="M 298.79901,-13.082153 C 313.39842,-13.082153 328.27839,-10.422978 342.59728,-7.5879882 C 338.35928,-21.49394 338.35928,-29.991302 342.59728,-43.897254 C 328.27839,-41.062265 313.39842,-38.403089 298.79901,-38.403089 L 241.20127,-38.403089 C 226.60186,-38.403089 211.7219,-41.062265 197.40301,-43.897254 C 201.64099,-29.991302 201.64099,-21.49394 197.40301,-7.5879882 C 211.7219,-10.422978 226.60186,-13.082153 241.20127,-13.082153 L 298.79901,-13.082153 z "
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             id="path5897" />
+          <path
+             d="M 251.75613,-138.50378 C 254.60434,-124.25132 257.27591,-109.44045 257.27591,-94.908773 L 257.27591,90.87762 L 282.71491,90.87762 L 282.71491,-94.908773 C 282.71491,-109.44043 285.38648,-124.25134 288.23469,-138.50378 C 274.2639,-134.28545 265.72692,-134.28546 251.75613,-138.50378 z "
+             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             id="path10868" />
+          <g
+             transform="matrix(1.919924,0,0,1.911014,-89.99034,-1145.429)"
+             style="fill:#0038a8;fill-opacity:1"
+             id="g16515">
+            <path
+               d="M 157.5,623.34375 C 148.93543,623.34375 142,630.27919 142,638.84375 C 142,639.49669 142.10906,640.11818 142.1875,640.75 C 145.17278,645.1791 148.66482,649.42813 152.6875,653.53125 C 154.21295,654.03309 155.80728,654.375 157.5,654.375 C 166.06457,654.375 173.03125,647.40831 173.03125,638.84375 C 173.03125,630.27919 166.06457,623.34375 157.5,623.34375 z "
+               style="fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               id="path13976" />
+            <path
+               d="M 187.5,614.1875 C 176.61185,614.1875 167.78125,623.04937 167.78125,633.9375 C 167.78125,644.82564 176.61186,653.65622 187.5,653.65625 C 198.38815,653.65625 207.21874,644.82564 207.21875,633.9375 C 207.21875,623.04936 198.38815,614.18747 187.5,614.1875 z "
+               style="fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               id="path15884" />
+            <path
+               d="M 217.5,623.34375 C 208.93543,623.34375 202,630.27919 202,638.84375 C 202,647.40831 208.93544,654.375 217.5,654.375 C 219.19272,654.375 220.78705,654.03309 222.3125,653.53125 C 226.34603,649.41706 229.85303,645.16064 232.84375,640.71875 C 232.9197,640.09681 233.03125,639.48609 233.03125,638.84375 C 233.03125,630.27919 226.06458,623.34375 217.5,623.34375 z "
+               style="fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               id="path15882" />
+            <path
+               d="M 144.625,644.125 C 154.09998,656.84337 167.7248,668.24983 187.5,677.875 C 207.27521,668.24983 220.90002,656.84337 230.375,644.125 L 144.625,644.125 z "
+               style="fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               id="path15876" />
+          </g>
+        </g>
+      </g>
+    </g>
 </svg>

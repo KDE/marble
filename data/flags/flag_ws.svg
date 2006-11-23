@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="864"
+   height="432"
+   id="svg1353"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docname="Flag_of_Samoa.svg"
+   sodipodi:docbase="D:\Kuvat\Wikipedia">
+  <metadata
+     id="metadata1360">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs1358" />
+  <sodipodi:namedview
+     inkscape:window-height="968"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="2.1769723"
+     inkscape:cx="296.76982"
+     inkscape:cy="293.08561"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg1353" />
+  <rect
+     style="fill:#D21034;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="red area"
+     width="864"
+     height="432"
+     x="0"
+     y="0" />
+  <rect
+     style="fill:#003580;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="blue quarter"
+     width="432"
+     height="216"
+     x="0"
+     y="0" />
+  <polygon
+     transform="matrix(31.54387,0,0,31.54387,216,181.4805)"
+     points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "
+     id="polygon1441"
+     style="fill:#ffffff" />
+  <polygon
+     transform="matrix(25.23509,0,0,25.23509,150,88.23538)"
+     points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "
+     id="polygon1449"
+     style="fill:#ffffff" />
+  <polygon
+     transform="matrix(23.6579,0,0,23.6579,283.5,77.65836)"
+     points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "
+     id="polygon1451"
+     style="fill:#ffffff" />
+  <polygon
+     transform="matrix(25.23509,0,0,25.23509,216,34.23538)"
+     points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "
+     id="polygon1453"
+     style="fill:#ffffff" />
+  <polygon
+     transform="matrix(15.77193,0,0,15.77193,249,125.2402)"
+     points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "
+     id="polygon1455"
+     style="fill:#ffffff" />
+</svg>

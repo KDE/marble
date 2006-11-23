@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg 
+	height="300" 
+	width="450" 
+	version="1.1" 
+	xmlns="http://www.w3.org/2000/svg">
+	<desc>flag of Yemen</desc>
+<!--
+	from http://commons.wikimedia.org/wiki/Image:Flag_of_Yemen.svg
+	this file is in the public domain
+-->
+	<rect 
+		fill="#ef2b2d" 
+		height="100" 
+		width="450" />
+	<rect 
+		fill="#ffffff" 
+		height="100" 
+		width="450" 
+		y="100" />
+	<rect 
+		fill="#000000" 
+		height="100" 
+		width="450" 
+		y="200" />
+</svg>

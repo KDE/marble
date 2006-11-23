@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="750"
+   height="500"
+   id="svg7885">
+  <defs
+     id="defs7887" />
+  <g
+     id="layer1">
+    <rect
+       width="750"
+       height="500"
+       ry="0"
+       x="0"
+       y="0"
+       style="fill:#c11020;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
+       id="rect1318" />
+    <rect
+       width="300"
+       height="175"
+       x="0"
+       y="0"
+       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
+       id="rect4093" />
+    <path
+       d="M 341.21875,58.375 L 359.21875,76.34375 L 359.21875,76.375 L 359.21875,90.5625 L 359.21875,234.21875 L 215.5625,234.21875 L 201.375,234.21875 L 201.34375,234.21875 L 183.375,216.21875 L 183.375,234.21875 L 183.375,250 L 183.375,265.78125 L 183.375,283.78125 L 201.34375,265.78125 L 201.375,265.78125 L 215.5625,265.78125 L 359.21875,265.78125 L 359.21875,409.4375 L 359.21875,423.625 L 359.21875,423.65625 L 341.21875,441.625 L 359.21875,441.625 L 375,441.625 L 390.78125,441.625 L 408.78125,441.625 L 390.78125,423.65625 L 390.78125,423.625 L 390.78125,409.4375 L 390.78125,265.78125 L 534.4375,265.78125 L 548.625,265.78125 L 548.65625,265.78125 L 566.625,283.78125 L 566.625,265.78125 L 566.625,250 L 566.625,234.21875 L 566.625,216.21875 L 548.65625,234.21875 L 548.625,234.21875 L 534.4375,234.21875 L 390.78125,234.21875 L 390.78125,90.5625 L 390.78125,76.375 L 390.78125,76.34375 L 408.78125,58.375 L 390.78125,58.375 L 375,58.375 L 359.21875,58.375 L 341.21875,58.375 z "
+       style="fill:#ffd605;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
+       id="path3341" />
+    <use
+       transform="translate(450,0)"
+       style="stroke:none"
+       id="use10501"
+       x="0"
+       y="0"
+       width="750"
+       height="500"
+       xlink:href="#rect4093" />
+    <use
+       transform="translate(0,325)"
+       style="stroke:none"
+       id="use10503"
+       x="0"
+       y="0"
+       width="750"
+       height="500"
+       xlink:href="#rect4093" />
+    <use
+       transform="translate(450,325)"
+       style="stroke:none"
+       id="use10505"
+       x="0"
+       y="0"
+       width="750"
+       height="500"
+       xlink:href="#rect4093" />
+  </g>
+</svg>
