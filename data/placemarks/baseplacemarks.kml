@@ -30,7 +30,10 @@
     <Placemark> 
         <name>South Pole</name> 
         <description>Geographic South Pole</description> 
-        <role>P</role> 
+         <Country>
+	     <CountryNameCode>AQ</CountryNameCode>
+        </Country> 
+       <role>P</role> 
         <pop>100000000</pop> 
         <Point>
             <coordinates>0.0,-90.00</coordinates> 
@@ -48,6 +51,9 @@
     <Placemark> 
         <name>South Magnetic Pole</name> 
         <description>The physical magnetic north pole in 2005</description> 
+         <Country>
+	     <CountryNameCode>AQ</CountryNameCode>
+        </Country> 
         <role>M</role> 
         <pop>1000000</pop> 
         <Point>

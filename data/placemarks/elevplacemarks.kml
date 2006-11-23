@@ -113,6 +113,9 @@
     <Placemark> 
         <name>Vinson Massif</name> 
         <description>Highest mountain of Antarctica</description> 
+         <Country>
+	     <CountryNameCode>AQ</CountryNameCode>
+        </Country> 
         <role>H</role> 
         <Point>
             <coordinates>-85.6333,-78.5333,4897</coordinates> 
