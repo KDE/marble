@@ -19,6 +19,7 @@ public:
 	PlaceMark();
 	PlaceMark( QString );
 
+	GeoPoint coordinate() const { return m_coordinate; } 
 	void coordinate( float& lng, float& lat );
 	void setCoordinate( float lng, float lat );
 

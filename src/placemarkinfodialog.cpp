@@ -3,6 +3,7 @@
 #include <QLabel>
 
 #include <QFile>
+#include <QLocale>
 #include <QPainter>
 #include <QSvgRenderer>
 
@@ -61,10 +62,7 @@ void PlaceMarkInfoDialog::showContent(){
 	if ( !description.isEmpty() )
 		description_val_browser->setPlainText( description );
 
-	float lng, lat;
-	m_mark->coordinate( lng, lat );
-
-	coordinates_val_lbl->setText( GeoPoint( lng, lat ).toString() );
+	coordinates_val_lbl->setText( m_mark->coordinate().toString() );
 
 	country_val_lbl->setText( m_mark->countryCode() );
 
@@ -72,7 +70,7 @@ void PlaceMarkInfoDialog::showContent(){
 		population_val_lbl->setVisible( false );
 		population_lbl->setVisible( false );
 
-		elevation_val_lbl->setText( QString("%1 m").arg( m_mark->population() / 1000 ) );
+		elevation_val_lbl->setText( QString("%1 m").arg( QLocale::system().toString( m_mark->population() / 1000 ) ) );
 	}
 	else if (m_mark->role() == 'P' || m_mark->role() == 'M'){
 		population_val_lbl->setVisible( false );
@@ -81,7 +79,7 @@ void PlaceMarkInfoDialog::showContent(){
 		elevation_lbl->setVisible( false );
 	}
 	else{
-		population_val_lbl->setText( QString::number( m_mark->population() ) );
+		population_val_lbl->setText( QLocale::system().toString( m_mark->population() ) );
 		elevation_val_lbl->setText( "-" );
 	}
 }
@@ -93,11 +91,9 @@ const QPixmap PlaceMarkInfoDialog::flag( const QString& countrycode ){
 
 	if ( QFile::exists( filename ) ){
 		QSvgRenderer svgobj( filename, this );
-
 		QPainter painter( &pixmap );
 		painter.setRenderHint(QPainter::Antialiasing, true);
 		QRect viewport( pixmap.rect() );
-
 		painter.setViewport( viewport );
 		svgobj.render(&painter);
 		return pixmap;
