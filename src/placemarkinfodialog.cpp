@@ -64,23 +64,7 @@ void PlaceMarkInfoDialog::showContent(){
 	float lng, lat;
 	m_mark->coordinate( lng, lat );
 
-	QString nsstring = ( lat < 0 ) ? "N" : "S";  
-	QString westring = ( lng < 0 ) ? "W" : "E";  
-
-	lng = fabs( lng * 180.0 / M_PI );
-
-	int lngdeg = (int)lng;
-	int lngmin = (int) ( 60 * (lng - lngdeg) );
-	int lngsec = (int) ( 3600 * (lng - lngdeg - ((float)(lngmin) / 60) ) );
-
-	lat = fabs( lat * 180.0 / M_PI );
-
-	int latdeg = (int)lat;
-	int latmin = (int) ( 60 * (lat - latdeg) );
-	int latsec = (int) ( 3600 * (lat - latdeg - ((float)(latmin) / 60) ) );
-
-	QString coordstring = QString("%1\xb0 %2\' %3\" %4\n%5\xb0 %6\' %7\" %8").arg(latdeg).arg(latmin).arg(latsec).arg(nsstring).arg(lngdeg).arg(lngmin).arg(lngsec).arg(westring);
-	coordinates_val_lbl->setText( coordstring );
+	coordinates_val_lbl->setText( GeoPoint( lng, lat ).toString() );
 
 	country_val_lbl->setText( m_mark->countryCode() );
 

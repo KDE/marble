@@ -6,9 +6,10 @@
 
 class GeoPoint {
 private:	
-	int m_Detail, m_Lat, m_Lng;
 	Quaternion m_q;
-//	Quaternion m_mulq;
+	int m_Detail;
+	int m_Lat, m_Lng; // the use of these is deprecated
+
 public:
 	GeoPoint(){}
 	GeoPoint(int, int);
@@ -23,6 +24,7 @@ public:
 //	void setMul( float radius ){ m_mulq = m_q; m_mulq.scalar( radius ); }
 
 	const Quaternion &getQuatPoint() const { return m_q; }
+	QString toString();
 
 	// Type definitions
 	typedef QVector<GeoPoint> Vector;

@@ -290,7 +290,6 @@ void VectorMap::createArc(){
 
 		for (int it=1; it < abs(diff); it++){
 			float angle = M_PI/180.0 * (float)(alpha + sgndiff * it);
-
 			itx = (int)(imgrx +  arcradius * cos( angle ) + 1);
 			ity = (int)(imgry +  arcradius * sin( angle ) + 1);
 //		qDebug() << " ity: " << ity;

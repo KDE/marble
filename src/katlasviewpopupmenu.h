@@ -43,6 +43,7 @@ protected:
 
 	QMenu* m_lmbMenu;
 	QAction* m_earthaction;	
+	QAction* m_posaction;	
 
 	void createActions();
 };

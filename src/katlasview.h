@@ -21,7 +21,7 @@ public:
 	KAtlasView(QWidget *parent = 0);
 
 	const QRegion getActiveRegion();
-	bool getGlobeSphericals(int, int, float&, float&);
+	bool getGlobeSphericals(int x, int y, float& alpha, float& beta);
 	QAbstractListModel* getPlaceMarkModel(){ return globe->getPlaceMarkModel(); };
 
 	float getMoveStep();

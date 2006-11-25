@@ -18,6 +18,8 @@ void KAtlasViewPopupMenu::createActions(){
 //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
 	m_earthaction = new QAction(tr("&Earth"), this);
 	m_earthaction->setData( 0 );
+	m_posaction = new QAction(tr("0 N 0 W"), this);
+	m_posaction->setFont( QFont("Sans Serif",7, 50, false ) );
 }
 
 void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
@@ -37,6 +39,14 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
 		actionidx++;
 	}
 	m_lmbMenu->addAction( m_earthaction );
+	m_lmbMenu->addSeparator();
+
+	float lat,lng;
+
+	m_gpview->getGlobeSphericals(xpos, ypos, lng, lat);
+
+	m_posaction->setText( GeoPoint( lng, lat ).toString() );
+	m_lmbMenu->addAction( m_posaction );
 
 	m_lmbMenu->popup( m_gpview->mapToGlobal( curpos ) );
 }
