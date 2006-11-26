@@ -35,6 +35,7 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
 	for ( it=m_featurelist.constBegin(); it != m_featurelist.constEnd(); it++ ){ // STL iterators
 		QAction* action = new QAction( (*it)->name(), m_lmbMenu );
 		action->setData( actionidx );
+		action->setIcon( (*it)->symbolPixmap() );
 		m_lmbMenu->addAction( action );
 		actionidx++;
 	}

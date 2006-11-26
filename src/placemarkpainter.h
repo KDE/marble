@@ -52,7 +52,7 @@ protected:
 	int m_fontheight, m_fontascent;
 	int m_labelareaheight;
 
-	QVector < QPixmap > m_citysymbol;
+//	QVector < QPixmap > m_citysymbol;
 	QVector < int > m_weightfilter;
 	QPixmap m_empty;
 	float m_widthscale;

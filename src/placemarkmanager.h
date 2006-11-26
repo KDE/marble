@@ -31,9 +31,9 @@ public:
 protected:
 	PlaceContainer* m_placecontainer;
 
-	void importKml( QString, PlaceContainer*);
-	void saveFile( QString, PlaceContainer*);
-	bool loadFile( QString, PlaceContainer*);
+	void importKml( QString, PlaceContainer* );
+	void saveFile( QString, PlaceContainer* );
+	bool loadFile( QString, PlaceContainer* );
 };
 
 #endif // PLACEMARKMANAGER_H

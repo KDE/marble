@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include <QDataStream>
+#include <QDateTime>
 #include <QXmlInputSource>
 #include <QXmlSimpleReader>
 #include "xmlhandler.h"
@@ -28,11 +29,27 @@ void PlaceMarkManager::addPlaceMarkFile( QString filepath ){
 
 	if ( QFile::exists( defaultcachename ) ){
 		qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
-		bool loadok = loadFile( defaultcachename, m_placecontainer );
-		if ( loadok == true) return;
+
+		bool cacheoutdated = false;
+		QDateTime sourceLastModified, cacheLastModified;
+
+		if ( QFile::exists( defaultsrcname ) ){
+			sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
+			cacheLastModified = QFileInfo( defaultcachename ).lastModified();
+
+			if ( cacheLastModified < sourceLastModified )
+				cacheoutdated = true;
+		}
+			
+		bool loadok = false; 
+
+		if ( cacheoutdated == false )
+			loadok = loadFile( defaultcachename, m_placecontainer );
+
+		if ( loadok == true ) return;
 	}
 
-	qDebug("No Default Placemark Cache File!");
+	qDebug("No recent Default Placemark Cache File available!");
 
 	if ( QFile::exists( defaultsrcname ) ){
 		PlaceContainer* importcontainer = new PlaceContainer();

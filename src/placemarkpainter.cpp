@@ -33,32 +33,6 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 
 	m_labelcolor = QColor( 0, 0, 0, 255 );
 
-	m_citysymbol 
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/pole_1.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/pole_2.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/mountain_1.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/volcano_1.png"));
-
 	m_weightfilter
 
 	 << 9999
@@ -291,7 +265,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 		--visit;
 		mark = *visit;
 		painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
-		painter->drawPixmap( mark -> symbolPos(), m_citysymbol.at( mark -> symbol() ) );
+		painter->drawPixmap( mark -> symbolPos(), mark -> symbolPixmap()  );
 	}
 }
 
