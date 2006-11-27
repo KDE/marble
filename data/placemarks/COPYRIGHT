@@ -1,20 +1,22 @@
 
-The data in the cities.txt file consists of data provided in 
+The data in the cities.txt file consists of data that was available in 
 
 http://www.world-gazetteer.com/st/popdata.zip
 
-It's reduced down to all entries which provide lat/long data and which describe places with > 15.000 habitants with simplified names. 
+and is now available in a more recent version at:
 
-Copyright information on:
+http://www.world-gazetteer.com/dataen.zip
 
-http://www.world-gazetteer.com/home.htm
+It's reduced down to all entries which provide lat/long data and which describe places with > 15.000 habitants with simplified names. License from
 
-all data � 2004 by Stefan Helders 
+http://bevoelkerungsstatistik.de/wg.php?x=&men=ipge&lng=de&dat=32&srt=npan&col=aohdq#copyright
 
-This project is regarded as a free data provider. Some requests let me precise the copyright information. If you use its data/images the only thing I ask you is to promote this site. If you would like to republish the data presented here, please do not change the data and use a copyright note as described as follows:
+Informationen zum Copyright
+alle Daten © 2005 by Stefan Helders
+Dieses Projekt soll als frei verfügbarer Datenlieferant dienen. Einige Anfragen veranlassen mich dazu, die Informationen zum Copyright zu präzisieren. Wer die Daten oder Grafiken auf seiner eigenen Website oder in einem Buch benutzen will, sollte nach Möglichkeit folgenden Hinweis unter den Daten oder im Quellennachweis verwenden: © by Stefan Helders www.world-gazetteer.com
 
-� by Stefan Helders www.world-gazetteer.com
+Translation:
+Copyright information
+all data © 2005 by Stefan Helders
+This project is meant to be a freely available data provider. Some requests make me specify the copyright information more precisely. If you want to use the data or pictures on your own website or in a book, please add a note as follows if possible: © by Stefan Helders www.world-gazetteer.com
 
-If you would like to create a map based on the population figures of this project, please use the following line:
-
-based on population data � by Stefan Helders www.world-gazetteer.com

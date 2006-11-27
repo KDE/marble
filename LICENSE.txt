@@ -1,3 +1,7 @@
+Marble is licensed under the terms of the GNU LGPL Version 2.1 
+(not implicitely including later versions).
+
+
 		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999
 
