@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if [ -z $1 ]; then
+	echo "need 'qmake' or 'qmake-qt4' as parameter!"
+	exit 1
+fi
+
 cd src
 touch `grep .moc *.cpp | perl -p -i -e 's/.*include "//' | perl -p -i -e 's/"//'`
 $1 src.pro -unix -o Makefile
