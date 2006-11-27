@@ -26,7 +26,6 @@
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 #include "placemarkpainter.h"
-#include "placecomposer.h"
 #include "quaternion.h"
 
 class PlaceMark;
@@ -59,8 +58,6 @@ public:
 	void rotateBy(const float&, const float&);
 	QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
 
-	void setCenterOn(int row){ m_centeredItem = row; m_centered = true; }
-
 	void setMapTheme( const QString& );
 
 	int northPoleY();
@@ -73,8 +70,9 @@ public:
 	void addPlaceMarkFile( QString filename );
 
 	QVector< PlaceMark* > whichFeatureAt( const QPoint& );
+	PlaceContainer* placeContainer(){ return m_placecontainer ; }
 
-private:
+protected:
 	QWidget* m_parent;
 	QImage* m_canvasimg;
 	QImage* m_coastimg;
@@ -94,7 +92,6 @@ private:
 
 	bool m_justModified;
 	bool m_centered;
-	int m_centeredItem;
 };
 
 #endif // KATLASGLOBE_H

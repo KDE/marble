@@ -65,6 +65,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	int x = 0; int y = 0; 
 
 	int secnumber = imgheight / m_labelareaheight + 1;
+/*
+				if ( mark->name().contains( "London" ) ){
+					qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
+					invrotAxis.display();
+				}
+*/
+//	rotAxis.display();
 
 	Quaternion invRotAxis = rotAxis.inverse();
 	Quaternion qpos;
@@ -80,8 +87,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 	QVector < QVector < PlaceMark* > > m_rowsection;
 	for ( int i = 0; i < secnumber; i++) m_rowsection.append( QVector<PlaceMark*>( ) );
-//	m_rowsection.clear();
-//	qDebug() << QString("Vectorsize: %1 ").arg( m_rowsection.size());
+
 //	QPen outlinepen( QColor( 255,255,255,160 ) );
 //	outlinepen.setWidth( 1 );
 //	QBrush outlinebrush( QColor( 255,255,255,160 ) );
@@ -90,11 +96,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 //	stroker.setWidth( 1 );
 
 //	QBrush shapebrush( QColor( 0,0,0,255) );
-
-
 //	const QPointF baseline( 0.0f , (float)(m_fontascent) );
-
-//	qDebug() << QString("Radius: %1").arg(radius); 
 
 	m_visibleplacemarks.clear();
 
@@ -106,7 +108,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		mark  = *it; // no cast
 
-		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 ) continue; 
+		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 && mark-> selected() == false ) continue; 
 
 		qpos = mark->getQuatPoint();
 
@@ -161,10 +163,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 				// Find out whether the area around the placemark is covered already
 
 				bool overlap = true;
-				int xpos = x + 2;
+				int symbolwidth = mark->symbolSize().width();
+
+				int xpos = symbolwidth/2 + x + 1;
 				int ypos = 0;
 
-				while ( xpos >= x - fontwidth - 2 && overlap == true ) { 
+				while ( xpos >= x - fontwidth - symbolwidth - 1 && overlap == true ) { 
 
 					ypos = y; 
 	
@@ -188,13 +192,16 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						ypos -= m_fontheight; 
 					}
 
-					xpos -= ( fontwidth + 4 );
+					xpos -= ( symbolwidth + fontwidth + 2 );
 				}
 
 				// Paint the label
 				if ( overlap == false) {
 					if ( textpixmap.isNull() == true ){					
 						// Draw the text on the label
+
+						// Due to some XOrg bug this requires a
+						// workaround via QImage in some cases
 /*
 						QPainterPath shapepath;
 						shapepath.addText( baseline, m_font, mark->name() );
@@ -234,20 +241,18 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 						mark->setTextPixmap( textpixmap );
 					}
-					// Paint the label onto the map
+					// Finally save the label position on the map
 
-					mark->setSymbolPos( QPoint( x-4, y-4 ) );
+					mark->setSymbolPos( QPoint( x - mark->symbolSize().width()/2, y - mark->symbolSize().height()/2) );
 
+					// Add the current placemark to the matching row and it's
+					// direct neighbors
 					int idx = y / m_labelareaheight;
 					if ( idx - 1 >= 0 )  m_rowsection[ idx - 1 ].append( mark );
 					m_rowsection[ idx ].append( mark );
 					if ( idx + 1 < secnumber )  m_rowsection[ idx + 1 ].append( mark );
 
 					m_visibleplacemarks.append(mark);					
-				}
-				else {
-					if ( mark->symbol() == 0 )
-						mark->setSymbolPos( QPoint( x-4, y-4 ) );
 				}
 			}
 			else{
@@ -304,10 +309,10 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ){
 
 	PlaceContainer::const_iterator it;
 
-	for ( it=m_visibleplacemarks.constBegin(); it != m_visibleplacemarks.constEnd(); it++ ){ // STL iterators
+	for ( it = m_visibleplacemarks.constBegin(); it != m_visibleplacemarks.constEnd(); it++ ){ // STL iterators
 		PlaceMark* mark  = *it; // no cast
 
-		if ( mark->textRect().contains( curpos ) ){
+		if ( mark->textRect().contains( curpos ) || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ){
 			ret.append( mark );
 		}
 	}

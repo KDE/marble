@@ -1,5 +1,4 @@
 #include <QDebug>
-#include <QSortFilterProxyModel>
 #include <QTime>
 #include <QTimer>
 #include <QXmlInputSource>
@@ -23,7 +22,6 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	m_placemarkpainter = 0;
 	m_placecontainer = 0;
 	m_radius = 2000;
-	m_centeredItem = 0;
 
 	m_centered = false;
 	m_justModified = false;
@@ -174,12 +172,10 @@ void KAtlasGlobe::zoom(const int& radius){
 
 void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi){
 	m_rotAxis.createFromEuler((float)(phi)/rad2int,(float)(theta)/rad2int,(float)(psi)/rad2int);
-//	m_rotAxis.display();
 }
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
 	m_rotAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0, (theta + 180.0) * M_PI / 180.0, 0.0);
-//	m_rotAxis.display();
 	m_centered = false;
 }
 
@@ -187,7 +183,6 @@ void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
 
 void KAtlasGlobe::rotateBy(const Quaternion& incRot){
 	m_rotAxis = incRot * m_rotAxis;
-//	m_rotAxis.display();
 	m_centered = false;
 }
 
@@ -205,7 +200,6 @@ int KAtlasGlobe::northPoleY(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
 	Quaternion qpolepos = northpole.getQuatPoint();
 	Quaternion invRotAxis = m_rotAxis.inverse();
-//	invRotAxis.display();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
 
@@ -216,7 +210,6 @@ int KAtlasGlobe::northPoleZ(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
 	Quaternion qpolepos = northpole.getQuatPoint();
 	Quaternion invRotAxis = m_rotAxis.inverse();
-//	invRotAxis.display();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
 
@@ -249,6 +242,5 @@ void KAtlasGlobe::addPlaceMarkFile( QString filename ){
 }
 
 QVector< PlaceMark* > KAtlasGlobe::whichFeatureAt( const QPoint& curpos ){
-//	QVector<PlaceMark*> ret;
 	return m_placemarkpainter->whichPlaceMarkAt( curpos );
 }

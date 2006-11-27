@@ -20,8 +20,12 @@
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {
 	m_selected = false;
 	m_symbol = 0;
+	m_population = 0;
+	m_popidx = 0;
 	m_symbolPixmap = QPixmap();
 	m_labelPixmap = QPixmap();
+	m_rect = QRect();
+	m_selected = false;
 
 }
 
@@ -39,6 +43,39 @@ void PlaceMark::setCoordinate( float lng, float lat ){
 	m_coordinate = GeoPoint( lng, lat );
 
 }
+
+const QSize PlaceMark::symbolSize() const{
+
+	static QSize placesize[20] = {
+		 QSize(5,5),
+		 QSize(5,5),
+		 QSize(5,5),
+		 QSize(5,5),
+
+		 QSize(5,5),
+		 QSize(5,5),
+		 QSize(5,5),
+		 QSize(5,5),
+
+		 QSize(8,8),
+		 QSize(8,8),
+		 QSize(8,8),
+		 QSize(8,8),
+
+		 QSize(8,8),
+		 QSize(8,8),
+		 QSize(8,8),
+		 QSize(8,8),
+
+		 QSize(5,5),
+		 QSize(6,6),
+		 QSize(6,6),
+		 QSize(6,6),
+	};
+
+	return placesize[m_symbol];
+}
+
 
 const QPixmap PlaceMark::symbolPixmap() const{
 

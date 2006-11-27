@@ -14,7 +14,7 @@ signals:
 
 public slots:
 	void selectItem(QString);
-	void activate(){ emit activated(currentIndex()); }
+	void activate(){ if (selectedIndexes().size() > 0) emit activated(currentIndex()); }
 };
 
 #endif // SEARCHLISTVIEW_H

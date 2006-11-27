@@ -104,19 +104,22 @@ void KAtlasView::centerOn(const float& phi, const float& theta){
 }
 
 void KAtlasView::centerOn(const QModelIndex& index){
-	int row = index.row();
 
-	QAbstractListModel* model = globe->getPlaceMarkModel();
+	PlaceMarkModel* model = (PlaceMarkModel*)globe->getPlaceMarkModel();
 	if (model == 0) qDebug("model null");
 
-	QModelIndex mlat = model->index(row,4,QModelIndex());
-	float lat = (float)(model->data(mlat,Qt::DisplayRole).toDouble());
-	QModelIndex mlng = model->index(row,5,QModelIndex());
-	float lng = (float)(model->data(mlng,Qt::DisplayRole).toDouble());
+	PlaceMark* mark = model->placeMark( index );
 
-	centerOn(lat,lng);
+	globe->placeContainer()->clearSelected();
 
-	globe->setCenterOn(row);
+	if (mark != 0){
+		float lng, lat;
+		mark->coordinate(lng, lat);
+		centerOn(-lat*180.0/M_PI, -lng*180.0/M_PI);
+		mark->setSelected(true);
+	}
+
+	globe->placeContainer()->sort();
 
 	m_crosshair.setEnabled( true );
 	repaint();

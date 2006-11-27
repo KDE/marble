@@ -14,31 +14,6 @@
 #endif
 
 PlaceMarkModel::PlaceMarkModel(QObject *parent) : QAbstractListModel(parent){
-	m_citysymbol 
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_4_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_3_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_2_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_white.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_yellow.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_orange.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/city_1_red.png"))
-
-	 << QPixmap(KAtlasDirs::path("bitmaps/pole_1.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/pole_2.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/mountain_1.png"))
-	 << QPixmap(KAtlasDirs::path("bitmaps/volcano_1.png"));
 }
 
 PlaceMarkModel::~PlaceMarkModel(){
@@ -49,7 +24,17 @@ int PlaceMarkModel::rowCount(const QModelIndex &parent) const {
 }
 
 int PlaceMarkModel::columnCount(const QModelIndex &parent) const {
-	return 6;
+	return 1;
+}
+
+PlaceMark* PlaceMarkModel::placeMark(const QModelIndex &index) const {
+	if (!index.isValid())
+		return 0;
+
+	if (index.row() >= m_placemarkindex.size())
+		return 0;
+
+	return m_placemarkindex.at(index.row());
 }
 
 QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const {
@@ -60,23 +45,10 @@ QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const {
 		return QVariant();
 
 	if (role == Qt::DisplayRole){
-		float lng, lat;
-		switch ( index.column() ){
-		case 4:
-			m_placemarkindex.at(index.row())->coordinate( lng, lat );
-			return -lat*180.0/M_PI;
-			break;
-		case 5:
-			m_placemarkindex.at(index.row())->coordinate( lng, lat );
-			return -lng*180.0/M_PI;
-			break;
-		default:
-			return m_placemarkindex.at(index.row())->name();
-			break;
-		}
+		return m_placemarkindex.at(index.row())->name();
 	}
 	if (role == Qt::DecorationRole){
-		return m_citysymbol.at(m_placemarkindex.at(index.row())->symbol());
+		return m_placemarkindex.at(index.row())->symbolPixmap();
 	}
 	else
 		return QVariant();

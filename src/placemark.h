@@ -39,6 +39,7 @@ public:
 	void setSymbol( int symbol ){ m_symbol = symbol; }
 
 	const QPixmap symbolPixmap() const;
+	const QSize symbolSize() const;
 //	void setSymbol( int symbol ){ m_symbol = symbol; }
 
 	const int popidx() const { return m_popidx; }

@@ -21,6 +21,12 @@ SearchListView::SearchListView(QWidget* parent):QListView(parent){
 }
 
 void SearchListView::selectItem(QString text){
+	if (text == ""){
+		clearSelection();
+		scrollToTop();
+		emit activated(QModelIndex());
+		return;
+	}
 
 	QModelIndexList resultlist;
 	resultlist = model()->match(model()->index(0,0),Qt::DisplayRole,text,1,Qt::MatchStartsWith);

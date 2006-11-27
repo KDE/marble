@@ -32,6 +32,8 @@ public:
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
+	PlaceMark* placeMark(const QModelIndex &index) const;
+
 	QVariant data(const QModelIndex &index, int role) const;
 	QVariant headerData(int section, Qt::Orientation orientation,
 
@@ -39,7 +41,6 @@ public:
 	void setContainer( PlaceContainer* );
 private:
 	QVector<PlaceMark*> m_placemarkindex;
-	QVector<QPixmap> m_citysymbol;
 };
 
 #endif // PLACEMARKMODEL_H
