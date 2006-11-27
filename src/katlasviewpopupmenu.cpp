@@ -39,12 +39,19 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
 		m_lmbMenu->addAction( action );
 		actionidx++;
 	}
+
+	// Not implemented yet ;-)
+	m_earthaction->setEnabled( false );
+
 	m_lmbMenu->addAction( m_earthaction );
 	m_lmbMenu->addSeparator();
 
 	float lat,lng;
 
 	m_gpview->getGlobeSphericals(xpos, ypos, lng, lat);
+
+	// Any idea what this could do on activation?
+	m_posaction->setEnabled( false );
 
 	m_posaction->setText( GeoPoint( lng, lat ).toString() );
 	m_lmbMenu->addAction( m_posaction );

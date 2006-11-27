@@ -117,11 +117,13 @@ void KAtlasView::centerOn(const QModelIndex& index){
 		mark->coordinate(lng, lat);
 		centerOn(-lat*180.0/M_PI, -lng*180.0/M_PI);
 		mark->setSelected(true);
+		m_crosshair.setEnabled( true );
 	}
+	else 
+		m_crosshair.setEnabled( false );
 
 	globe->placeContainer()->sort();
 
-	m_crosshair.setEnabled( true );
 	repaint();
 }
 
