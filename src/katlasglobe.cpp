@@ -1,7 +1,6 @@
 #include <QDebug>
 #include <QTime>
 #include <QTimer>
-#include <QXmlInputSource>
 #include <QXmlSimpleReader>
 #include <cmath>
 #include "katlasglobe.h"
