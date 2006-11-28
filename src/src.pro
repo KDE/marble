@@ -12,7 +12,7 @@ HEADERS += polygon.h \
 	   geopoint.h placecontainer.h placemarkstorage.h placefolder.h placemark.h searchlistview.h \
 	   maptheme.h katlasmapscale.h placemarkmodel.h placemarkpainter.h tilescissor.h \
 	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h xmlhandler.h \
-	   placemarkinfodialog.h
+	   placemarkinfodialog.h katlasflag.h
 
 SOURCES += katlascontrol.cpp \
            katlasview.cpp \
@@ -46,7 +46,8 @@ SOURCES += katlascontrol.cpp \
 	   katlasthemeselectview.cpp \
 	   katlaswindrose.cpp \
 	   katlascrosshair.cpp \
-	   xmlhandler.cpp
+	   xmlhandler.cpp \
+	   katlasflag.cpp
 
 RESOURCES = marble.qrc
 

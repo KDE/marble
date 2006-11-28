@@ -116,7 +116,7 @@ void KAtlasView::centerOn(const QModelIndex& index){
 		float lng, lat;
 		mark->coordinate(lng, lat);
 		centerOn(-lat*180.0/M_PI, -lng*180.0/M_PI);
-		mark->setSelected(true);
+		mark->setSelected(1);
 		m_crosshair.setEnabled( true );
 	}
 	else 

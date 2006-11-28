@@ -18,14 +18,13 @@
 
 
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {
-	m_selected = false;
 	m_symbol = 0;
 	m_population = 0;
 	m_popidx = 0;
 	m_symbolPixmap = QPixmap();
 	m_labelPixmap = QPixmap();
 	m_rect = QRect();
-	m_selected = false;
+	m_selected = 0; // 0: not selected 1: centered 2:hover
 
 }
 

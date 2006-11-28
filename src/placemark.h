@@ -48,8 +48,8 @@ public:
 	const int population() const { return m_population; }
 	void setPopulation( int population ){ m_population = population; }
 
-	const bool selected() const { return m_selected; }
-	void setSelected( bool selected ){ m_selected = selected; }
+	const int selected() const { return m_selected; }
+	void setSelected( int selected ){ m_selected = selected; }
 
 	const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
 
@@ -66,7 +66,7 @@ protected:
 	QPixmap m_labelPixmap;
 	QRect m_rect;
 	int m_population;
-	bool m_selected;
+	int m_selected;
 	int m_symbol;
 	int m_popidx;
 

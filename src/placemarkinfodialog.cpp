@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QLocale>
 #include <QPainter>
-#include <QSvgRenderer>
+#include <QTimer>
 
 #include "katlasdirs.h"
 #include <cmath>
@@ -57,7 +57,9 @@ void PlaceMarkInfoDialog::showContent(){
 
 	role_val_lbl->setText( rolestring );
 
-	flag_val_lbl->setPixmap( flag( m_mark->countryCode() ) );
+	m_flagcreator = new KAtlasFlag( this );
+	requestFlag( m_mark->countryCode() );
+
 	QString description = m_mark->description();
 	if ( !description.isEmpty() )
 		description_val_browser->setPlainText( description );
@@ -79,24 +81,22 @@ void PlaceMarkInfoDialog::showContent(){
 		elevation_lbl->setVisible( false );
 	}
 	else{
-		population_val_lbl->setText( QLocale::system().toString( m_mark->population() ) );
+		population_val_lbl->setText( QString("%1 inh.").arg(QLocale::system().toString( m_mark->population() ) ) );
 		elevation_val_lbl->setText( "-" );
 	}
 }
 
-const QPixmap PlaceMarkInfoDialog::flag( const QString& countrycode ){
-	QPixmap pixmap( flag_val_lbl->size() );
+void PlaceMarkInfoDialog::requestFlag( const QString& countrycode ){
 
 	QString filename = KAtlasDirs::path( QString("flags/flag_%1.svg").arg( countrycode.toLower() ) );
+	m_flagcreator->setFlag( filename, flag_val_lbl->size() );
 
 	if ( QFile::exists( filename ) ){
-		QSvgRenderer svgobj( filename, this );
-		QPainter painter( &pixmap );
-		painter.setRenderHint(QPainter::Antialiasing, true);
-		QRect viewport( pixmap.rect() );
-		painter.setViewport( viewport );
-		svgobj.render(&painter);
-		return pixmap;
+		connect( m_flagcreator, SIGNAL( flagDone() ), this, SLOT( setFlagLabel() ) );
+		QTimer::singleShot(100, m_flagcreator, SLOT(slotDrawFlag()));	
 	}
-	else return QPixmap();
 } 
+
+void PlaceMarkInfoDialog::setFlagLabel(){
+	flag_val_lbl->setPixmap( m_flagcreator->flag() );
+}

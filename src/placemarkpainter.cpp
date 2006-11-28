@@ -108,7 +108,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		mark  = *it; // no cast
 
-		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 && mark-> selected() == false ) continue; 
+		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 && mark-> selected() == 0 ) continue; 
 
 		qpos = mark->getQuatPoint();
 

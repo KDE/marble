@@ -8,16 +8,16 @@
 
 inline bool popLessThan( PlaceMark* mark1, PlaceMark* mark2 ){ 
 
-	if ( mark1->selected() == mark2->selected() )
-		return mark1->population() > mark2->population();
-	if ( mark1->selected() == true )
-		return true; 
-	return false; 	
+	return  mark1->selected() == mark2->selected() ? mark1->population() > mark2->population() :
+	mark1->selected() == 1 ? true : false;
 
+	/* 
+	 *  If compared items don't differ in terms of being selected
+	 *  compare them based on population numbers.
+	 *  If compared items do differ in terms of being selected
+	 *  then let that be the final criteria.
+	 */
 }
-
-
-inline bool selectedThan( PlaceMark* mark1, PlaceMark* mark2 ){ return mark1->population() > mark2->population(); }
 
 class PlaceContainer : public QVector<PlaceMark*> {
 public:
@@ -30,7 +30,7 @@ public:
 
 	inline void deleteAll() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) delete mark; } }
 
-	inline void clearSelected() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) mark->setSelected( false ); } }
+	inline void clearSelected() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) mark->setSelected( 0 ); } }
 
 	inline void sort() { qStableSort( begin(), end(), popLessThan ); }
 protected:	

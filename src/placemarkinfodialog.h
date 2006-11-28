@@ -14,6 +14,7 @@
 
 #include "ui_placemarkinfodialog.h"
 
+#include "katlasflag.h"
 /**
 @author Torsten Rahn
 */
@@ -28,11 +29,13 @@ public:
 	PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
 
 public slots:
+	void setFlagLabel();
 
 protected:
+	KAtlasFlag* m_flagcreator;
 	PlaceMark* m_mark;
 	void showContent();
-	const QPixmap flag( const QString& ); 
+	void requestFlag( const QString& ); 
 };
 
 #endif // PLACEMARKINFODIALOG_H
