@@ -143,7 +143,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&, const QString
 		if ( splitline.size() == 3 ){
 			int elevation = splitline[2].toInt();
 			m_placemark->setPopulation( elevation*1000 );
-			m_placemark->setPopidx( popIdx( elevation*1000 ) );
+			m_placemark->setPopidx( popIdx( abs(elevation*1000) ) );
 		}
 		m_coordsset = true;
 

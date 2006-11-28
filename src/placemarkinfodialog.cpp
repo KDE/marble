@@ -44,7 +44,9 @@ void PlaceMarkInfoDialog::showContent(){
 			rolestring = "Location";
 			break;
 		case 'H':
-			rolestring = "Mountain";
+			if ( m_mark->population() > 0)
+				rolestring = "Mountain";
+			else rolestring = "Elevation extreme";
 			break;
 		case 'V':
 			rolestring = "Volcano";
