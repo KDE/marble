@@ -26,12 +26,15 @@ void KAtlasFlag::slotDrawFlag(){
 
 	QString keystring = QString( m_filename ).replace( "flags/", "" );
 	if (!QPixmapCache::find( keystring, m_pixmap ) ) {
-		m_pixmap = QPixmap( m_size );
-		m_pixmap.fill(Qt::transparent);
 		QSvgRenderer svgobj( m_filename, this );
+		QSize flagsize = svgobj.viewBox().size();
+		flagsize.scale(m_size, Qt::KeepAspectRatio);
+
+		m_pixmap = QPixmap( flagsize );
+		m_pixmap.fill(Qt::transparent);
 		QPainter painter( &m_pixmap );
 		painter.setRenderHint(QPainter::Antialiasing, true);
-		QRect viewport( m_pixmap.rect() );
+		QRect viewport( QPoint( 0, 0), flagsize );
 		painter.setViewport( viewport );
 		svgobj.render(&painter);
      		QPixmapCache::insert(keystring, m_pixmap);
