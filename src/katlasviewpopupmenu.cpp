@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QMenu>
 
+#include "katlasviewpopupmenu.moc"
 #include "katlasviewpopupmenu.h"
 #include "katlasview.h"
 #include "katlasglobe.h"

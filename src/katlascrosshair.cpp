@@ -1,5 +1,5 @@
 #include "katlascrosshair.h"
-
+#include "katlascrosshair.moc"
 #include <QDebug>
 
 KAtlasCrossHair::KAtlasCrossHair(QObject* parent) : QObject(parent) {

@@ -10,7 +10,7 @@
 #include <QDebug>
 
 #ifdef KDEBUILD
-#include "katlaswindrose.moc"
+#include "katlasflag.moc"
 #endif
 
 KAtlasFlag::KAtlasFlag( QObject* parent ) : QObject(parent) {

@@ -55,11 +55,15 @@ set(marble_SRCS
            katlastilecreatordialog.cpp
            katlasthemeselectview.cpp
            katlaswindrose.cpp
+	   katlasviewpopupmenu.cpp
+	   katlascrosshair.cpp
            xmlhandler.cpp
+	   placemarkinfodialog.cpp
+	   katlasflag.cpp
 )
 
 set (marble_UI katlastilecreatordialog.ui
-	   katlastoolbox.ui)
+	   katlastoolbox.ui placemarkinfodialog.ui)
 
 if (QTONLY)
   qt4_wrap_ui(marble_SRCS ${marble_UI})

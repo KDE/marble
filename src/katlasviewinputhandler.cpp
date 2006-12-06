@@ -1,5 +1,6 @@
 #include <QDebug>
 #include "katlasviewinputhandler.h"
+#include "katlasviewinputhandler.moc"
 #include "katlasview.h"
 #include "quaternion.h"
 #include "katlasdirs.h"
