@@ -115,7 +115,11 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 				if ( e->type() == QEvent::MouseButtonRelease && event->button() == Qt::LeftButton){
 
-					if( m_dragtimer.elapsed() <= 250 || m_leftpressedx == event->x() && m_leftpressedy == event->y() ) emit lmbRequest( m_leftpressedx, m_leftpressedy );
+					// show menu if mouse cursor position remains unchanged
+					// the click takes less than 250 ms
+
+					if( m_dragtimer.elapsed() <= 250 || m_leftpressedx == event->x() && m_leftpressedy == event->y() )
+						emit lmbRequest( m_leftpressedx, m_leftpressedy );
 
 					m_leftpressed = false;
 				}
