@@ -17,6 +17,8 @@
 #include <QDebug>
 
 
+static const int maxlabels = 100;
+
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
 
 	m_font_mountain = QFont("Sans Serif",7, 50, false );
@@ -102,6 +104,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 	PlaceContainer::const_iterator it;
 	PlaceMark* mark  = 0; 
+
+	int labelnum = 0;
 
 	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL iterators
 
@@ -252,7 +256,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					m_rowsection[ idx ].append( mark );
 					if ( idx + 1 < secnumber )  m_rowsection[ idx + 1 ].append( mark );
 
-					m_visibleplacemarks.append(mark);					
+					m_visibleplacemarks.append(mark);
+					labelnum ++;
+					if ( labelnum >= maxlabels ) break;				
 				}
 			}
 			else{

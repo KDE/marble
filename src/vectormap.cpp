@@ -76,8 +76,9 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 		boundary = (*itPolyLine)->getBoundary();
 //		int i = 0;
 
-			foreach (corner, boundary){
-				qbound = corner.getQuatPoint();
+//			foreach (corner, boundary){
+			for (int i = 0; i < 5; ++i){
+				qbound = boundary[i].getQuatPoint();
 				qbound.rotateAroundAxis(m_rotMatrix); 
 
 				if (qbound.v[Q_Z] > m_zBoundingBoxLimit){
