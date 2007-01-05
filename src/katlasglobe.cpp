@@ -109,50 +109,50 @@ void KAtlasGlobe::resize(){
 }
 
 void KAtlasGlobe::paintGlobe(QPainter* painter, QRect dirty){
-//	QTime *timer = new QTime();
-//	timer->restart();
+//	QTime timer;
+//	timer.restart();
 	if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ){
 
 // Workaround
 //	m_rotAxis.display();
 		texmapper->mapTexture(m_canvasimg, m_radius, m_rotAxis);
 
-//	qDebug() << "Texture-Mapping:" << timer->elapsed();
-//	timer->restart();
+//	qDebug() << "Texture-Mapping:" << timer.elapsed();
+//	timer.restart();
 
 		if ( m_maptheme->bitmaplayer().dem == "true" ){
 			*m_coastimg = QImage(m_canvasimg->width(),m_canvasimg->height(),QImage::Format_ARGB32_Premultiplied);
 
-//		qDebug() << "Scale & Fill: " << timer->elapsed();
-//		timer->restart();
+//		qDebug() << "Scale & Fill: " << timer.elapsed();
+//		timer.restart();
 
 			veccomposer->drawTextureMap(m_coastimg, m_radius, m_rotAxis); // Create VectorMap
 
-//		qDebug() << "Vectors: " << timer->elapsed();
-//		timer->restart();
+//		qDebug() << "Vectors: " << timer.elapsed();
+//		timer.restart();
 
 			texcolorizer->colorize(m_canvasimg, m_coastimg, m_radius); // Recolorize the heightmap using the VectorMap
 
-//		qDebug() << "Colorizing: " << timer->elapsed();
-//		timer->restart();
+//		qDebug() << "Colorizing: " << timer.elapsed();
+//		timer.restart();
 		}
 	}
 
 	painter->drawImage(dirty, *m_canvasimg, dirty); // paint Map on Widget
-//		qDebug() << "Paint on Widget: " << timer->elapsed();
-//		timer->restart();
+//		qDebug() << "Paint on Widget: " << timer.elapsed();
+//		timer.restart();
 
 	if ( m_maptheme->vectorlayer().enabled == true ){
 		veccomposer->paintVectorMap(painter, m_radius, m_rotAxis); // Add further Vectors
-//		qDebug() << "2. Vectors: " << timer->elapsed();
-//		timer->restart();
+//		qDebug() << "2. Vectors: " << timer.elapsed();
+//		timer.restart();
 	}
 	
-//	timer->restart();
+//	timer.restart();
 	if ( m_placecontainer->size() > 0 ){
 		m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);
 	}
-//	qDebug() << "Placemarks: " << timer->elapsed();
+//	qDebug() << "Placemarks: " << timer.elapsed();
 
 	m_rotAxisUpdated = m_rotAxis;
 	m_radiusUpdated = m_radius;
