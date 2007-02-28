@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Exec=marble
+Name=Marble
+GenericName=generic 3D world map
+Icon=package_network
+Terminal=false;
+Categories=QT;KDE;Utility;X-KDE-More;Education;Science;

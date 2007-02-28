@@ -156,14 +156,19 @@ QStringList MapTheme::findMapThemes( const QString& path ){
 
 	QDir localdirs = QDir( KAtlasDirs::localDir() + "/" + path );
 	QDir sysdirs = QDir( KAtlasDirs::systemDir() + "/" + path );
+	QDir unixdirs = QDir( KAtlasDirs::unixDir() + "/" + path );
 
 	QStringList localmappaths = localdirs.entryList( QStringList( "*" ),
                                     QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
 	QStringList sysmappaths = sysdirs.entryList( QStringList( "*" ),
                                     QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+	QStringList unixmappaths = unixdirs.entryList( QStringList( "*" ),
+                                    QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+	
 
 	QStringList localmapdirs;
 	QStringList sysmapdirs;
+	QStringList unixmapdirs;
 
 	for (int i = 0; i < localmappaths.size(); ++i){
 //		qDebug() << "Map dirs: "  << KAtlasDirs::localDir() + "/maps/" + localmappaths.at(i);
@@ -175,6 +180,11 @@ QStringList MapTheme::findMapThemes( const QString& path ){
 		sysmapdirs << KAtlasDirs::systemDir() + "/maps/" + sysmappaths.at(i);
 	}
 
+	for (int i = 0; i < unixmappaths.size(); ++i){
+//		qDebug() << "Map dirs: " << KAtlasDirs::unixDir() + "/maps/" + unixmappaths.at(i);
+		unixmapdirs << KAtlasDirs::unixDir() + "/maps/" + unixmappaths.at(i);
+	}
+        
         QStringList mapfiles;
 	QStringList tmp;
 	QString themedir, themedirname;
@@ -202,6 +212,25 @@ QStringList MapTheme::findMapThemes( const QString& path ){
 	QStringListIterator j( sysmapdirs );
 	while (j.hasNext()){
 		themedir = j.next();
+//		qDebug() << themedir;
+		themedirname = QDir( themedir ).dirName();
+
+		tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
+                                    QDir::Files | QDir::NoSymLinks );
+		if (!tmp.isEmpty()){
+			QStringListIterator l( tmp );
+			while (l.hasNext()){
+				themexml = l.next();
+//				qDebug() << themedirname + "/" + themexml;
+				mapfiles << themedirname + "/" + themexml;
+			}
+		}
+//		else qDebug("Empty *.dgml list!");
+	}
+
+	QStringListIterator k( unixmapdirs );
+	while (k.hasNext()){
+		themedir = k.next();
 //		qDebug() << themedir;
 		themedirname = QDir( themedir ).dirName();
 

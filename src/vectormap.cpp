@@ -220,7 +220,7 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 void VectorMap::initCrossHorizon(){
 //	qDebug("Initializing scheduled new PolyLine");
 	lastvisible = currentlyvisible;
-	lastPoint = currentPoint;
+	lastPoint = QPoint( currentPoint.x() + 1, currentPoint.y() + 1 );
 	horizonpair = false;
 	firsthorizon = false;
 }

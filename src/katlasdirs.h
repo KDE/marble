@@ -12,8 +12,11 @@ class KAtlasDirs
 	{ 
 		QString fullpath = systemDir() + "/" + path;	// system path
 		QString localpath = localDir() + "/" + path;	// local path
+		QString unixpath = unixDir() + "/" + path;	// unix path
 	
-		if( QFile::exists( localpath ) )
+		if( QFile::exists( unixpath ) )
+			fullpath = unixpath;
+		else if( QFile::exists( localpath ) )
 			fullpath = localpath;
 
         	return QDir(fullpath).canonicalPath(); 
@@ -31,6 +34,11 @@ class KAtlasDirs
     static QString localDir() 
 	{ 
 		return QString( QDir::homePath() + "/.katlas/data");	// local path
+	}
+
+    static QString unixDir()
+        {
+		return QString("/usr/share/marble/data");	// unix system path
 	}
 
 };
