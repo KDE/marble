@@ -6,16 +6,10 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="750"
    height="500"
-   id="svg548"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_the_Democratic_Republic_of_the_Congo.svg"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+   id="svg548">
   <metadata
      id="metadata1567">
     <rdf:RDF>
@@ -28,10 +22,6 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="540"
-     inkscape:window-width="756"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
@@ -41,14 +31,7 @@
      gridoriginy="0px"
      gridtolerance="10px"
      gridspacingx="25px"
-     gridspacingy="25px"
-     inkscape:grid-points="true"
-     inkscape:zoom="0.746"
-     inkscape:cx="374.99998"
-     inkscape:cy="249.99998"
-     inkscape:window-x="44"
-     inkscape:window-y="60"
-     inkscape:current-layer="svg548" />
+     gridspacingy="25px" />
   <defs
      id="defs550" />
   <rect
@@ -63,24 +46,16 @@
      d="M 703.125 0 L 0 375 L 0 500 L 0.03125 500 L 46.875 500 L 750 125 L 750 0 L 703.125 0 z "
      id="path1574" />
   <path
-     d="M 750,0 L 0,400 L 0,499.99951 L 0.031495818,499.99951 L 0.062991636,500 L 750,100 L 750,0 z "
+     d="M 750,0 L 0,400 L 0,499.99951 L 0.031,499.9 L 0.062991636,500 L 750,100 L 750,0 z "
      style="font-size:12px;fill:#ce1021;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
-     id="path1333"
-     sodipodi:nodetypes="ccccccc" />
+     id="path1333" />
   <path
-     sodipodi:type="star"
      style="opacity:1;color:#000000;fill:#f7d618;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
      id="path1317"
-     sodipodi:sides="5"
-     sodipodi:cx="335.12064"
-     sodipodi:cy="100"
      sodipodi:r1="75"
      sodipodi:r2="28.65"
      sodipodi:arg1="-1.5707963"
      sodipodi:arg2="-0.9424778"
-     inkscape:flatsided="false"
-     inkscape:rounded="0"
-     inkscape:randomized="0"
-     d="M 335.12064,25 L 351.96068,76.821663 L 406.44988,76.823727 L 362.3684,108.85334 L 379.20453,160.67628 L 335.12064,128.65 L 291.03674,160.67627 L 307.87287,108.85334 L 263.7914,76.823724 L 318.28059,76.821663 L 335.12064,25 z "
+     d="M 335.12064,25 L 351.9,76.82 L 406.4,76.82 L 362.3,108.8 L 379.2,160.6 L 335.1,128.6 L 291.0,160.6 L 307.8,108.8 L 263.7,76.82 L 318.2,76.82 L 335.12064,25 z "
      transform="matrix(1.25854,0,0,1.25854,-303.8947,-7.311083)" />
 </svg>

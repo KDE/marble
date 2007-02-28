@@ -45,6 +45,8 @@ protected:
 	int httpGetId;
 	bool httpRequestAborted;
 	QMap <int, QString> m_pFileIdMap;
+
+	QString m_cachePath;
 };
 
 #endif // HTTPFETCHFILE_H

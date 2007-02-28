@@ -1,5 +1,7 @@
 #include "tinywebbrowser.h"
 #include "httpfetchfile.h"
+#include "katlasdirs.h"
+
 #include <QFileInfo>
 #include <QUrl>
 #include <QDebug>
@@ -9,6 +11,10 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent ) : QTextBrowser( parent ) {
 	connect( m_pFetchFile, SIGNAL( downloadDone( QString, bool ) ), this, SLOT( slotDownloadFinished( QString, bool ) ) );
 	connect( m_pFetchFile, SIGNAL( statusMessage( QString ) ),
 		SIGNAL( statusMessage( QString) ) );		
+
+	QStringList searchPaths;
+	searchPaths << KAtlasDirs::localDir() + "/cache/" << KAtlasDirs::systemDir() + "/cache/";
+	setSearchPaths( searchPaths );
 }
 
 QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name ){
@@ -18,15 +24,16 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name ){
 		m_pFetchFile->downloadFile( name );
 	}
 */
-	if ( type == QTextDocument::ImageResource && m_urlList.contains(name))
+	if ( type == QTextDocument::ImageResource )
+// && m_urlList.contains(name))
 	{
 		QPixmap emptyPixmap(1,1);
 		emptyPixmap.fill(Qt::transparent);
-		m_urlList.append(name);
+//		m_urlList.append(name);
 		return emptyPixmap;
 	}
 
-	m_urlList.append(name);
+//	m_urlList.append(name);
 	return QTextBrowser::loadResource( type, name );
 }
 

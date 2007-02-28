@@ -6,16 +6,10 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="1200"
    height="600"
    id="svg2"
-   sodipodi:version="0.32"
-   inkscape:version="0.44.1"
-   version="1.0"
-   sodipodi:docbase="C:\Documents and Settings\guillermo\Mis documentos\Mis imágenes\Nueva carpeta"
-   sodipodi:docname="Flag of Arab Palestina.svg">
+   version="1.0">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -23,19 +17,8 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="249.17533"
-     inkscape:cy="270.02062"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
      width="1200px"
-     height="600px"
-     inkscape:window-width="1024"
-     inkscape:window-height="708"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4" />
+     height="600px" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -48,8 +31,6 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Capa 1"
-     inkscape:groupmode="layer"
      id="layer1">
     <rect
        style="opacity:1;fill:#408040;fill-opacity:1;stroke:none;stroke-opacity:1"
@@ -75,7 +56,6 @@
     <path
        style="fill:#c33;fill-opacity:1;stroke:none;stroke-opacity:1"
        d="M 0,0 L 300,300 L 0,600 L 0,0 z "
-       id="rect3649"
-       sodipodi:nodetypes="cccc" />
+       id="rect3649" />
   </g>
 </svg>

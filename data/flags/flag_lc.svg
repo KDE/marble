@@ -5,33 +5,17 @@
    xmlns:cc="http://web.resource.org/cc/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    x="0.0000000"
    y="0.0000000"
    width="600"
    height="300"
-   id="svg1"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_Saint_Lucia.svg"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+   id="svg1">
   <sodipodi:namedview
-     inkscape:window-height="540"
-     inkscape:window-width="756"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="1.1083334"
-     inkscape:cx="299.9999"
-     inkscape:cy="150.00027"
-     inkscape:window-x="29"
-     inkscape:window-y="178"
-     inkscape:current-layer="svg1" />
+     id="base" />
   <svg:defs
      id="defs3" />
   <svg:metadata
@@ -71,12 +55,12 @@
      id="path1530"
      transform="matrix(3.333333,0,0,3.333333,-416.6667,-1957.874)" />
   <svg:path
-     d="M 189.04375,669.44343 L 240.95625,669.44343 L 215,605.28093 L 189.04375,669.44343 z "
+     d="M 189.0,669.4 L 240.9,669.4 L 215,605.28093 L 189.0,669.4 z "
      style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path2152"
      transform="matrix(3.333333,0,0,3.333333,-416.6667,-1957.874)" />
   <svg:path
-     d="M 199.99991,274.10388 L 399.99989,274.10388 L 299.9999,150.52056 L 199.99991,274.10388 z "
+     d="M 199.9,274.1 L 399.9,274.1 L 299.9,150.5 L 199.9,274.1 z "
      style="fill:#fcd116;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path2774" />
 </svg:svg>

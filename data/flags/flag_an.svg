@@ -6,16 +6,10 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="750"
    height="500"
-   id="svg722"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_the_Netherlands_Antilles.svg"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+   id="svg722">
   <metadata
      id="metadata2769">
     <rdf:RDF>
@@ -28,20 +22,10 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="540"
-     inkscape:window-width="756"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="0.746"
-     inkscape:cx="375"
-     inkscape:cy="250"
-     inkscape:window-x="22"
-     inkscape:window-y="31"
-     inkscape:current-layer="svg722" />
+     id="base" />
   <defs
      id="defs724" />
   <rect
@@ -71,21 +55,21 @@
     <path
        id="path2860"
        style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt"
-       d="M 387.82473,215.27791 L 374.87777,204.86125 L 361.99899,214.86124 L 367.1101,199.44458 L 354.16668,189.02792 L 369.71882,189.02792 L 375.16918,173.61126 L 380.1191,189.02792 L 395.83333,189.02792 L 383.37355,199.44458 L 387.82473,215.27791 z " />
+       d="M 387.8,215.2 L 374.8,204.8 L 361.9,214.8 L 367.1,199.4 L 354.1,189.0 L 369.7,189.0 L 375.1,173.6 L 380.1,189.0 L 395.8,189.0 L 383.3,199.4 L 387.8,215.2 z " />
     <path
-       d="M 346.15807,326.38891 L 333.21111,315.97225 L 320.33233,325.97224 L 325.44344,310.55558 L 312.50002,300.13892 L 328.05216,300.13892 L 333.50252,284.72226 L 338.45244,300.13892 L 354.16667,300.13892 L 341.70689,310.55558 L 346.15807,326.38891 z "
+       d="M 346.1,326.3 L 333.2,315.9 L 320.3,325.9 L 325.4,310.5 L 312.5,300.1 L 328.0,300.1 L 333.5,284.7 L 338.4,300.1 L 354.1,300.1 L 341.7,310.5 L 346.1,326.3 z "
        style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt"
        id="path2864" />
     <path
        id="path2876"
        style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt"
-       d="M 403.84193,326.38891 L 416.78889,315.97225 L 429.66767,325.97224 L 424.55656,310.55558 L 437.49998,300.13892 L 421.94784,300.13892 L 416.49748,284.72226 L 411.54756,300.13892 L 395.83333,300.13892 L 408.29311,310.55558 L 403.84193,326.38891 z " />
+       d="M 403.8,326.3 L 416.7,315.9 L 429.6,325.9 L 424.5,310.5 L 437.4,300.1 L 421.9,300.1 L 416.4,284.7 L 411.5,300.1 L 395.8,300.1 L 408.2,310.5 L 403.8,326.3 z " />
     <path
        id="path2892"
        style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt"
-       d="M 498.93575,256.94459 L 485.98879,246.52793 L 473.11001,256.52792 L 478.22112,241.11126 L 465.2777,230.6946 L 480.82984,230.6946 L 486.2802,215.27794 L 491.23012,230.6946 L 506.94435,230.6946 L 494.48457,241.11126 L 498.93575,256.94459 z " />
+       d="M 498.9,256.9 L 485.9,246.5 L 473.1,256.5 L 478.2,241.1 L 465.2,230.6 L 480.8,230.6 L 486.2,215.2 L 491.2,230.6 L 506.9,230.6 L 494.4,241.1 L 498.9,256.9 z " />
     <path
-       d="M 251.0643,256.94459 L 264.01126,246.52793 L 276.89004,256.52792 L 271.77893,241.11126 L 284.72235,230.6946 L 269.17021,230.6946 L 263.71985,215.27794 L 258.76993,230.6946 L 243.0557,230.6946 L 255.51548,241.11126 L 251.0643,256.94459 z "
+       d="M 251.0,256.9 L 264.0,246.5 L 276.8,256.5 L 271.7,241.1 L 284.7,230.6 L 269.1,230.6 L 263.7,215.2 L 258.7,230.6 L 243.0,230.6 L 255.5,241.1 L 251.0,256.9 z "
        style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt"
        id="path2896" />
   </g>

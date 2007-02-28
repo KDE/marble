@@ -12,15 +12,9 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    height="300"
    id="svg607"
-   sodipodi:docbase="C:\Documents and Settings\empresa\Escritorio"
-   sodipodi:docname="Flag_of_Western_Sahara.svg"
-   sodipodi:version="0.32"
    width="600"
-   inkscape:version="0.43"
    version="1.0">
   <metadata
      id="metadata3">
@@ -76,16 +70,7 @@
      id="defs609" />
   <sodipodi:namedview
      id="base"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:zoom="0.21100066"
-     inkscape:cx="370.01662"
-     inkscape:cy="-688.85039"
-     inkscape:window-width="1280"
-     inkscape:window-height="934"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
-     inkscape:current-layer="svg607" />
+     showguides="true" />
   <rect
      height="100"
      id="rect611"
@@ -108,9 +93,8 @@
      x="9.2675782e-006"
      y="99.999916" />
   <path
-     d="M 0.0094381205,-1.4210855e-014 L 200,150.3619 L 0,300 L 0.00093989582,1.53617 L 0.0094381205,-1.4210855e-014 z "
+     d="M 0.0094381205,-1.4210855e-014 L 200,150.3619 L 0,300 L 0.000,1.536 L 0.0094381205,-1.4210855e-014 z "
      id="path615"
-     sodipodi:nodetypes="ccccc"
      style="fill:#cc0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <g
      id="g1507"
@@ -118,20 +102,12 @@
     <circle
        transform="translate(0,350)"
        style="fill:#cc0000;fill-opacity:1"
-       sodipodi:ry="60"
-       sodipodi:rx="60"
-       sodipodi:cy="120"
-       sodipodi:cx="120"
        cx="120"
        cy="120"
        r="60"
        id="circle1456" />
     <circle
        transform="translate(0,350)"
-       sodipodi:ry="48"
-       sodipodi:rx="48"
-       sodipodi:cy="120"
-       sodipodi:cx="135"
        cx="135"
        cy="120"
        r="48"

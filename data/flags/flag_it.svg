@@ -5,17 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="1500"
    height="1000"
    viewBox="0 0 3 2"
-   id="svg277"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_Italy.svg"
-   sodipodi:docbase="/files/home/paulatto">
+   id="svg277">
   <metadata
      id="metadata288">
     <rdf:RDF>
@@ -30,20 +24,10 @@
   <defs
      id="defs286" />
   <sodipodi:namedview
-     inkscape:window-height="543"
-     inkscape:window-width="855"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="0.374"
-     inkscape:cx="750"
-     inkscape:cy="500"
-     inkscape:window-x="817"
-     inkscape:window-y="476"
-     inkscape:current-layer="svg277" />
+     id="base" />
   <rect
      width="1"
      height="2"

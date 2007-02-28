@@ -7,15 +7,9 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    height="500"
    id="svg797"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg"
-   sodipodi:docname="Flag_of_Barbados.svg"
-   sodipodi:version="0.32"
    width="750"
-   inkscape:version="0.43"
    version="1.0">
   <defs
      id="defs799" />
@@ -26,17 +20,7 @@
      gridspacingx="15px"
      gridspacingy="15px"
      gridtolerance="3px"
-     inkscape:grid-points="true"
-     inkscape:zoom="0.74599964"
-     inkscape:cx="375.00018"
-     inkscape:cy="250.00012"
-     inkscape:window-width="756"
-     inkscape:window-height="540"
-     inkscape:window-x="82"
-     inkscape:window-y="304"
-     inkscape:current-layer="svg797"
-     showguides="true"
-     inkscape:guide-bbox="true" />
+     showguides="true" />
   <metadata
      id="metadata8437">
     <rdf:RDF>
@@ -119,9 +103,8 @@
      id="g8472">
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       sodipodi:nodetypes="cccccccccccccccc"
        id="path806"
-       d="M 375,371.12873 L 362.16594,371.12873 C 361.97947,355.26481 362.35241,321.25802 362.16594,305.3941 C 351.90111,305.3941 327.07864,311.44172 316.81381,311.44172 C 316.99625,254.60315 294.9184,206.69691 268.57395,166.09015 C 266.99048,164.05311 268.02563,163.17721 269.78246,163.62776 C 289.66503,166.73322 310.1201,177.17141 324.13244,191.66151 C 325.76732,193.66832 315.44806,189.46622 314.52378,189.34728 C 306.85036,187.04717 316.8118,200.1554 317.36818,203.60355 C 325.23311,228.73041 332.09716,253.07713 334.617,281.9898 C 334.62003,284.00064 334.93652,285.46316 335.89003,285.55992 L 362.16594,281.65416 L 362.16594,188.48651 C 356.00453,188.32356 346.37577,189.94903 340.87478,191.76735 C 358.60263,174.08507 366.87332,151.03389 375,128.87106 C 375,134.43064 375,371.12873 375,371.12873 z " />
+       d="M 375,371.12873 L 362.1,371.1 C 361.9,355.2 362.3,321.2 362.1,305.3 C 351.9,305.3 327.0,311.4 316.8,311.4 C 316.9,254.6 294.9,206.6 268.5,166.0 C 266.9,164.0 268.0,163.1 269.7,163.6 C 289.6,166.7 310.1,177.1 324.1,191.6 C 325.7,193.6 315.4,189.4 314.5,189.3 C 306.8,187.0 316.8,200.1 317.3,203.6 C 325.2,228.7 332.0,253.0 334.6,281.9 C 334.6,284.0 334.9,285.4 335.8,285.5 L 362.1,281.6 L 362.1,188.4 C 356.0,188.3 346.3,189.9 340.8,191.7 C 358.6,174.0 366.8,151.0 375,128.87106 C 375,134.43064 375,371.12873 375,371.12873 z " />
     <use
        height="496.06299"
        width="744.09448"

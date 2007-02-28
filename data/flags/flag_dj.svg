@@ -5,16 +5,10 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="600"
    height="400"
    viewBox="0 0 15 10"
-   id="svg6735"
-   sodipodi:version="0.32"
-   inkscape:version="0.44"
-   sodipodi:docname="Flag_of_Djibouti.svg"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+   id="svg6735">
   <metadata
      id="metadata6770">
     <rdf:RDF>
@@ -29,23 +23,13 @@
   <defs
      id="defs6768" />
   <sodipodi:namedview
-     inkscape:window-height="573"
-     inkscape:window-width="853"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      guidetolerance="10.0"
      gridtolerance="10.0"
      objecttolerance="10.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="0.9425"
-     inkscape:cx="300"
-     inkscape:cy="200"
-     inkscape:window-x="64"
-     inkscape:window-y="42"
-     inkscape:current-layer="svg6735" />
+     id="base" />
   <rect
      width="15"
      height="5"
@@ -62,21 +46,13 @@
   <path
      style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="M 0,0 L 0,5 L 0,10 L 4.330127,7.5 L 8.660254,5 L 4.330127,2.5 L 0,0 z "
-     id="path6904"
-     sodipodi:nodetypes="ccccccc" />
+     id="path6904" />
   <path
-     sodipodi:type="star"
      style="opacity:1;fill:red;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      id="path6929"
-     sodipodi:sides="5"
-     sodipodi:cx="2.8867514"
-     sodipodi:cy="5"
      sodipodi:r1="1"
      sodipodi:r2="0.38196602"
      sodipodi:arg1="-1.5707963"
      sodipodi:arg2="-0.94247777"
-     inkscape:flatsided="false"
-     inkscape:rounded="0"
-     inkscape:randomized="0"
-     d="M 2.8867514,4 L 3.1112654,4.690983 L 3.8378079,4.690983 L 3.2500227,5.118034 L 3.4745366,5.809017 L 2.8867514,5.381966 L 2.2989661,5.809017 L 2.5234801,5.118034 L 1.9356949,4.690983 L 2.6622374,4.690983 L 2.8867514,4 z " />
+     d="M 2.8867514,4 L 3.111,4.690 L 3.837,4.690 L 3.250,5.118 L 3.474,5.809 L 2.886,5.381 L 2.298,5.809 L 2.523,5.118 L 1.935,4.690 L 2.662,4.690 L 2.8867514,4 z " />
 </svg>

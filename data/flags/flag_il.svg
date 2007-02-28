@@ -7,16 +7,10 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="440"
    height="320"
-   id="svg1872"
-   sodipodi:version="0.32"
-   inkscape:version="0.44"
-   sodipodi:docname="flag_il.svg"
-   sodipodi:docbase="/home/tackat/marble/data/flags">
+   id="svg1872">
   <metadata
      id="metadata1880">
     <rdf:RDF>
@@ -29,23 +23,13 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="579"
-     inkscape:window-width="849"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      guidetolerance="10.0"
      gridtolerance="10.0"
      objecttolerance="10.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="2.3625"
-     inkscape:cx="224.84016"
-     inkscape:cy="142.62231"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:current-layer="svg1872" />
+     id="base" />
   <defs
      id="defs1884" />
   <rect

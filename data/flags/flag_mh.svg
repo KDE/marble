@@ -21,22 +21,22 @@
        x="125.00000"
        y="552.36218"
        transform="matrix(2.400000,0.000000,0.000000,2.400000,-300.0000,-1325.669)"
-       style="fill:#003893;fill-opacity:1.0000000;stroke:none;stroke-width:1.2500000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
+       style="fill:#003893;fill-opacity:1.0000000;stroke:none;stroke-width:1.250;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
        id="rect1061" />
     <path
-       d="M 170.63751,636.74966 L 169.03856,610.14486 L 163.45528,624.80410 L 165.94964,609.31718 L 156.76251,622.03186 L 163.18018,607.71824 L 151.01530,617.62187 L 160.91893,605.45699 L 146.60531,611.87466 L 159.31999,602.68753 L 143.83307,605.18189 L 158.49231,599.59861 L 131.88751,597.99966 L 158.49231,596.40071 L 143.83307,590.81743 L 159.31999,593.31179 L 146.60531,584.12466 L 160.91893,590.54233 L 151.01530,578.37745 L 163.18018,588.28108 L 156.76251,573.96746 L 165.94964,586.68214 L 163.45528,571.19522 L 169.03856,585.85446 L 170.63751,559.24966 L 172.23646,585.85446 L 177.81974,571.19522 L 175.32538,586.68214 L 184.51251,573.96746 L 178.09484,588.28108 L 190.25972,578.37745 L 180.35609,590.54233 L 194.66971,584.12466 L 181.95503,593.31179 L 197.44195,590.81743 L 182.78271,596.40071 L 209.38751,597.99966 L 182.78271,599.59861 L 197.44195,605.18189 L 181.95503,602.68753 L 194.66971,611.87466 L 180.35609,605.45699 L 190.25972,617.62187 L 178.09484,607.71824 L 184.51251,622.03186 L 175.32538,609.31718 L 177.81974,624.80410 L 172.23646,610.14486 L 170.63751,636.74966 z "
+       d="M 170.6,636.7 L 169.0,610.1 L 163.4,624.8 L 165.9,609.3 L 156.7,622.0 L 163.1,607.7 L 151.0,617.6 L 160.9,605.4 L 146.6,611.8 L 159.3,602.6 L 143.8,605.1 L 158.4,599.5 L 131.8,597.9 L 158.4,596.4 L 143.8,590.8 L 159.3,593.3 L 146.6,584.1 L 160.9,590.5 L 151.0,578.3 L 163.1,588.2 L 156.7,573.9 L 165.9,586.6 L 163.4,571.1 L 169.0,585.8 L 170.6,559.2 L 172.2,585.8 L 177.8,571.1 L 175.3,586.6 L 184.5,573.9 L 178.0,588.2 L 190.2,578.3 L 180.3,590.5 L 194.6,584.1 L 181.9,593.3 L 197.4,590.8 L 182.7,596.4 L 209.3,597.9 L 182.7,599.5 L 197.4,605.1 L 181.9,602.6 L 194.6,611.8 L 180.3,605.4 L 190.2,617.6 L 178.0,607.7 L 184.5,622.0 L 175.3,609.3 L 177.8,624.8 L 172.2,610.1 L 170.6,636.7 z "
        transform="matrix(2.400000,0.000000,0.000000,2.400000,-300.0000,-1325.669)"
-       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.25000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
        id="path1683" />
     <path
-       d="M 125.00000,675.36218 L 362.50000,603.36218 L 362.50000,554.36218 L 125.00000,671.36218 L 125.00000,675.36218 z "
+       d="M 125.0,675.3 L 362.5,603.3 L 362.5,554.3 L 125.0,671.3 L 125.0,675.3 z "
        transform="matrix(2.400000,0.000000,0.000000,2.400000,-300.0000,-1325.669)"
-       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.25000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
        id="path2926" />
     <path
-       d="M 125.00000,673.36218 L 362.50000,578.86218 L 362.50000,554.36218 L 125.00000,671.36218 L 125.00000,673.36218 z "
+       d="M 125.0,673.3 L 362.5,578.8 L 362.5,554.3 L 125.0,671.3 L 125.0,673.3 z "
        transform="matrix(2.400000,0.000000,0.000000,2.400000,-300.0000,-1325.669)"
-       style="fill:#dd7500;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.25000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
+       style="fill:#dd7500;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
        id="path5411" />
   </g>
 </svg>

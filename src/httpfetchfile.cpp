@@ -1,4 +1,5 @@
 #include "httpfetchfile.h"
+#include "katlasdirs.h"
 
 #include <QDebug>
 #include <QFile>
@@ -7,6 +8,11 @@
 
 HttpFetchFile::HttpFetchFile( QObject *parent ) : QObject( parent ) {
 	m_pHttp = new QHttp(this);
+	m_cachePath = KAtlasDirs::localDir() + "/cache/";
+
+	if ( QDir( m_cachePath ).exists() == false ) 
+		( QDir::root() ).mkpath( m_cachePath );
+	// What if we don't succeed in creating the path?
 
 	connect(m_pHttp, SIGNAL(requestFinished(int, bool)),
 		this, SLOT(httpRequestFinished(int, bool)));
@@ -24,10 +30,10 @@ void HttpFetchFile::downloadFile( QUrl url ){
 		return;
 	}
 
-	m_pFile = new QFile(fileName);
+	m_pFile = new QFile( m_cachePath + fileName);
 	if (!m_pFile->open(QIODevice::WriteOnly)) {
 		emit statusMessage( tr("Unable to save the file %1: %2.")
-			.arg(fileName).arg(m_pFile->errorString()) );
+			.arg( m_cachePath + fileName).arg(m_pFile->errorString()) );
 		delete m_pFile;
 		m_pFile = 0;
 		return;

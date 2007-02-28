@@ -6,18 +6,12 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    x="0.0000000"
    y="0.0000000"
    width="600"
    height="400"
-   id="svg1120"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_South_Korea.svg"
-   sodipodi:docbase="C:\Documents and Settings\David Nelson\Archives\Svg">
+   id="svg1120">
   <metadata
      id="metadata2749">
     <rdf:RDF>
@@ -30,20 +24,10 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="540"
-     inkscape:window-width="756"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="0.93250023"
-     inkscape:cx="299.99993"
-     inkscape:cy="199.99995"
-     inkscape:window-x="132"
-     inkscape:window-y="176"
-     inkscape:current-layer="svg1120" />
+     id="base" />
   <defs
      id="defs1122" />
   <g
@@ -61,22 +45,22 @@
        id="path2995"
        style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="matrix(1.555194,0,0,1.371026,-700.7462,-528.0137)"
-       d="M 555.13486,464.18599 C 569.91128,439.05533 599.84824,432.26731 622.00598,449.02337 C 644.16373,465.77943 650.15416,499.73636 635.38699,524.87401 L 595.26093,494.53 L 555.13486,464.18599 z " />
+       d="M 555.1,464.1 C 569.9,439.0 599.8,432.2 622.0,449.0 C 644.1,465.7 650.1,499.7 635.3,524.8 L 595.2,494.5 L 555.1,464.1 z " />
     <path
        id="path3617"
        style="fill:#003f87;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="matrix(1.327363,0,0,1.353221,-446.1803,-511.4161)"
-       d="M 552.66123,519.51503 C 535.35413,544.99055 500.2679,551.87728 474.29951,534.89587 C 448.33112,517.91446 441.31715,483.49731 458.63448,458.02848 L 505.64786,488.77176 L 552.66123,519.51503 z " />
+       d="M 552.6,519.5 C 535.3,544.9 500.2,551.8 474.2,534.8 C 448.3,517.9 441.3,483.4 458.6,458.0 L 505.6,488.7 L 552.6,519.5 z " />
     <path
        id="path4239"
        style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="matrix(1.184069,0,0,1.096822,-339.7228,-453.0846)"
-       d="M 482.25491,530.87909 C 482.25931,549.7649 468.07867,565.07739 450.58444,565.07739 C 433.09021,565.07739 418.90957,549.7649 418.91397,530.87909 C 418.90957,511.99328 433.09021,496.68079 450.58444,496.68079 C 468.07867,496.68079 482.25931,511.99328 482.25491,530.87909 z " />
+       d="M 482.2,530.8 C 482.2,549.7 468.0,565.0 450.5,565.0 C 433.0,565.0 418.9,549.7 418.9,530.8 C 418.9,511.9 433.0,496.6 450.5,496.6 C 468.0,496.6 482.2,511.9 482.2,530.8 z " />
     <path
        id="path4861"
        style="fill:#003f87;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="matrix(1.211605,0,0,1.021549,-478.1027,-385.8523)"
-       d="M 637.00837,544.91486 C 637.00837,565.18866 623.15127,581.62382 606.05768,581.62382 C 588.96409,581.62382 575.10699,565.18866 575.10699,544.91486 C 575.10699,524.64106 588.96409,508.2059 606.05768,508.2059 C 623.15127,508.2059 637.00837,524.64106 637.00837,544.91486 z " />
+       d="M 637.0,544.9 C 637.0,565.1 623.1,581.6 606.0,581.6 C 588.9,581.6 575.1,565.1 575.1,544.9 C 575.1,524.6 588.9,508.2 606.0,508.2 C 623.1,508.2 637.0,524.6 637.0,544.9 z " />
     <g
        id="g6728"
        transform="matrix(0.665672,-0.998461,0.998512,0.665639,-940.1941,229.5558)">

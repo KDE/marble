@@ -5,33 +5,17 @@
    xmlns:cc="http://web.resource.org/cc/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    x="0.0000000"
    y="0.0000000"
    width="450.00000"
    height="300.00000"
-   id="svg4017"
-   sodipodi:version="0.32"
-   inkscape:version="0.43"
-   sodipodi:docname="Flag_of_Ghana.svg"
-   sodipodi:docbase="C:\Dokumente und Einstellungen\Fritz\Eigene Dateien\Maria\Schule\Italien">
+   id="svg4017">
   <sodipodi:namedview
-     inkscape:window-height="540"
-     inkscape:window-width="830"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="1.2433333"
-     inkscape:cx="225"
-     inkscape:cy="141.57139"
-     inkscape:window-x="132"
-     inkscape:window-y="174"
-     inkscape:current-layer="svg4017" />
+     id="base" />
   <svg:defs
      id="defs4019" />
   <svg:metadata
@@ -79,8 +63,8 @@
      style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="rect5270" />
   <svg:path
-     d="M 232.76875,576.23585 L 257.87093,576.23585 L 265.62500,552.36218 L 273.37907,576.23585 L 298.48125,576.23585 L 278.17609,590.98851 L 285.93016,614.86218 L 265.62500,600.10953 L 245.31984,614.86218 L 253.07391,590.98851 L 232.76875,576.23585 z "
-     style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
+     d="M 232.7,576.2 L 257.8,576.2 L 265.6,552.3 L 273.3,576.2 L 298.4,576.2 L 278.1,590.9 L 285.9,614.8 L 265.6,600.1 L 245.3,614.8 L 253.0,590.9 L 232.7,576.2 z "
+     style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
      id="path2203"
      transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" />
 </svg:svg>
