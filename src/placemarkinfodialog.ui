@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
-    <height>489</height>
+    <width>447</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -20,7 +20,7 @@
     <number>6</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget" >
+    <widget class="QTabWidget" name="m_pTabWidget" >
      <property name="currentIndex" >
       <number>0</number>
      </property>
@@ -281,18 +281,88 @@ p, li { white-space: pre-wrap; }
       <attribute name="title" >
        <string>Wikipedia</string>
       </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QToolButton" name="m_pBackButton" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>Back</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="marble.qrc" >:/icons/back.png</iconset>
+           </property>
+           <property name="toolButtonStyle" >
+            <enum>Qt::ToolButtonTextBesideIcon</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="m_pForwardButton" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="marble.qrc" >:/icons/forward.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="TinyWebBrowser" name="m_pWikipediaBrowser" />
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line" >
+    <widget class="QLabel" name="m_pStatusLabel" >
+     <property name="text" >
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="m_pLine" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox" >
+    <widget class="QDialogButtonBox" name="m_pButtonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
      </property>
@@ -303,17 +373,24 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TinyWebBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>tinywebbrowser.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>m_pButtonBox</sender>
    <signal>accepted()</signal>
    <receiver>PlaceMarkInfoDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>479</y>
     </hint>
     <hint type="destinationlabel" >
      <x>157</x>
@@ -322,18 +399,82 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>m_pButtonBox</sender>
    <signal>rejected()</signal>
    <receiver>PlaceMarkInfoDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>479</y>
     </hint>
     <hint type="destinationlabel" >
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pBackButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_pWikipediaBrowser</receiver>
+   <slot>backward()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>54</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>55</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pForwardButton</sender>
+   <signal>clicked()</signal>
+   <receiver>m_pWikipediaBrowser</receiver>
+   <slot>forward()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>110</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>106</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pWikipediaBrowser</sender>
+   <signal>backwardAvailable(bool)</signal>
+   <receiver>m_pBackButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>39</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>32</x>
+     <y>54</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_pWikipediaBrowser</sender>
+   <signal>forwardAvailable(bool)</signal>
+   <receiver>m_pForwardButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>135</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>118</x>
+     <y>62</y>
     </hint>
    </hints>
   </connection>

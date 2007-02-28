@@ -12,10 +12,10 @@ public:
 	ClipPainter();
 	ClipPainter(QPaintDevice*, bool);
 	~ClipPainter(){};
-	void drawPolygon ( const QPolygon &, Qt::FillRule fillRule = Qt::OddEvenFill );
-	void drawPolyline ( const QPolygon & );
+	void drawPolygon ( const QPolygonF &, Qt::FillRule fillRule = Qt::OddEvenFill );
+	void drawPolyline ( const QPolygonF & );
 private:
-	void drawPolyobject ( const QPolygon & );
+	void drawPolyobject ( const QPolygonF & );
 
 	bool m_clip;
 	int left, right, top, bottom;
@@ -26,8 +26,8 @@ private:
 	void manageOffScreen();
 	const QPoint borderPoint();
 
-	QPoint currentPoint, lastPoint; 
-	QPolygon m_clipped;
+	QPointF currentPoint, lastPoint; 
+	QPolygonF m_clipped;
 
 };
 

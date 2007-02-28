@@ -17,6 +17,7 @@ const float rad2int = 21600.0 / M_PI;
 KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 
 	texmapper = 0;
+
 	m_placemarkpainter = 0;
 	m_placecontainer = 0;
 	m_radius = 2000;
@@ -49,6 +50,8 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	setMapTheme( selectedmap );
 
 	veccomposer = new VectorComposer();
+	gridmap = new GridMap();
+
 	texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
 
 	placemarkmanager = new PlaceMarkManager();
@@ -104,13 +107,15 @@ void KAtlasGlobe::resize(){
 	
 	texmapper->resizeMap(m_canvasimg);
 	veccomposer->resizeMap(m_coastimg);
+	gridmap->resizeMap(m_coastimg);
 
 	m_justModified = true;
 }
 
-void KAtlasGlobe::paintGlobe(QPainter* painter, QRect dirty){
+void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 //	QTime timer;
 //	timer.restart();
+
 	if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ){
 
 // Workaround
@@ -147,6 +152,22 @@ void KAtlasGlobe::paintGlobe(QPainter* painter, QRect dirty){
 //		qDebug() << "2. Vectors: " << timer.elapsed();
 //		timer.restart();
 	}
+
+//	if ( m_maptheme->vectorlayer().enabled == true ){
+	QPen gridpen( QColor( 255, 255, 255, 128 ) );
+
+	gridmap->createGrid(m_radius,m_rotAxis);
+
+	gridmap->setPen( gridpen );
+	gridmap->paintGridMap(painter, true);
+
+	gridmap->createTropics(m_radius,m_rotAxis);
+
+	gridpen.setStyle( Qt::DotLine );
+	gridmap->setPen( gridpen );
+	gridmap->paintGridMap(painter, true);
+
+//	}
 	
 //	timer.restart();
 	if ( m_placecontainer->size() > 0 ){

@@ -6,6 +6,8 @@
 #include <QLocale>
 #include <QPainter>
 #include <QTimer>
+#include <QTextBrowser>
+// #include <QStatusBar>
 
 #include "katlasdirs.h"
 #include <cmath>
@@ -16,8 +18,22 @@
 
 
 PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent) : QDialog(parent), m_mark(mark) {
-
+	
 	setupUi(this);
+
+	setWindowTitle( tr("Data Sheet: %1").arg( mark->name() ) );
+
+/*
+	QLayout * layout = this->layout();
+	m_pStatusBar = new QStatusBar( this );
+	layout->addWidget( m_pStatusBar );
+	layout->setSpacing( 2 );
+	layout->setMargin( 2 );
+*/
+	connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
+		this, SLOT( showMessage( QString) ) );
+	connect( this, SIGNAL( source( QUrl ) ), m_pWikipediaBrowser, SLOT( setSource( QUrl ) ) );
+
 	showContent();
 }
 
@@ -86,6 +102,9 @@ void PlaceMarkInfoDialog::showContent(){
 		population_val_lbl->setText( QString("%1 inh.").arg(QLocale::system().toString( m_mark->population() ) ) );
 		elevation_val_lbl->setText( "-" );
 	}
+
+	emit source( QUrl( "http://en.wikipedia.org/wiki/" + m_mark->name() ) );
+//	m_pTextBrowser->setSource(QUrl("/usr/share/qt3/doc/html/index.html"));
 }
 
 void PlaceMarkInfoDialog::requestFlag( const QString& countrycode ){

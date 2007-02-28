@@ -205,17 +205,17 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 //	{
 		int radius = globe->getRadius();
 		bool clip = (radius > canvasimg.width()/2 || radius > canvasimg.height()/2) ? true : false;
+
 		ClipPainter painter( this, clip); 
 //		QPainter painter(this);
+//		painter.setClipRect(10, 10, canvasimg.width() - 1 , canvasimg.height()-1 );
+//		painter.setClipping( true );
 
 		QRect dirty = evt->rect();
 		globe->paintGlobe(&painter,dirty);
 	
-//		painter.translate(10,canvasimg->height()-40);
 		painter.drawPixmap(10, canvasimg.height()-40,
 		m_mapscale.drawScaleBarPixmap( globe->getRadius(),canvasimg.width()/2 - 20));
-
-//		painter.translate(canvasimg->width()-100,40);
 
 		painter.drawPixmap( canvasimg.width()-60, 10,
 		m_windrose.drawWindRosePixmap( canvasimg.width(), canvasimg.height(), globe->northPoleY() ) );

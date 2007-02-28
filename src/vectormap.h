@@ -21,7 +21,7 @@ public:
 	VectorMap();
 	~VectorMap();
 	void createFromPntMap(const PntMap*, const int&, Quaternion&);
-	void paintMap(QPainter *, bool );
+	void paintMap(ClipPainter *, bool );
 	void drawMap(QPaintDevice *, bool );
 	void resizeMap(const QPaintDevice *);
 

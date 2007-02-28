@@ -19,10 +19,11 @@
 #include <QPixmap>
 #include "placecontainer.h"
 #include "placemarkmodel.h"
-#include <QPainter>
-// #include "clippainter.h"
+// #include <QPainter>
+#include "clippainter.h"
 #include "maptheme.h"
 #include "texmapper.h"
+#include "gridmap.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 #include "placemarkpainter.h"
@@ -41,7 +42,7 @@ public:
 	virtual ~KAtlasGlobe(){};
 	void setCanvasImage(QImage*);
 
-	void paintGlobe(QPainter*, QRect);
+	void paintGlobe(ClipPainter*, QRect);
 
 	void resize();
 
@@ -81,6 +82,7 @@ protected:
 	TextureColorizer* texcolorizer;
 	TextureMapper* texmapper;
 	VectorComposer* veccomposer;
+	GridMap* gridmap;
 	PlaceMarkManager* placemarkmanager;
 //	PlaceComposer* placecomposer;
 	PlaceMarkModel* m_placemarkmodel;

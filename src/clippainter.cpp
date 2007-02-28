@@ -14,14 +14,14 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){
 //	pengreen.setColor(QColor( 0, 255, 0, 255));
 }
 
-void ClipPainter::drawPolygon ( const QPolygon & pa, Qt::FillRule fillRule ){
+void ClipPainter::drawPolygon ( const QPolygonF & pa, Qt::FillRule fillRule ){
 
 //	m_clip = false;
 
 	if (m_clip == true){	
 		drawPolyobject( pa );
 		if (m_clipped.size() > 2){
-//			qDebug() << m_clipped.size();
+//			qDebug() << "Size: " << m_clipped.size();
 			QPainter::drawPolygon ( m_clipped , fillRule );
 //			qDebug() << "done";
 		}
@@ -30,14 +30,14 @@ void ClipPainter::drawPolygon ( const QPolygon & pa, Qt::FillRule fillRule ){
 		QPainter::drawPolygon ( pa , fillRule );
 }
 
-void ClipPainter::drawPolyline ( const QPolygon & pa ){
+void ClipPainter::drawPolyline ( const QPolygonF & pa ){
 
 //	m_clip = false;
 
 	if (m_clip == true){	
 		drawPolyobject( pa );
 		if (m_clipped.size() > 1){
-//			qDebug() << m_clipped.size();
+//			qDebug() << "Size: " << m_clipped.size();
 			QPainter::drawPolyline ( m_clipped );
 //			qDebug() << "done";
 		}
@@ -46,7 +46,7 @@ void ClipPainter::drawPolyline ( const QPolygon & pa ){
 		QPainter::drawPolyline ( pa );
 }
 
-void ClipPainter::drawPolyobject ( const QPolygon & pa ){
+void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
 
 /* If we think of the image borders as (infinetly long) parallels then the on-
  * and offscreen are divided into 9 sections. Each of these sections is 
@@ -58,9 +58,9 @@ void ClipPainter::drawPolyobject ( const QPolygon & pa ){
  */
 	m_clipped.clear();
 
-	QVector<QPoint>::const_iterator itPoint;
-	const QVector<QPoint>::const_iterator itStartPoint = pa.begin();
-	const QVector<QPoint>::const_iterator itEndPoint = pa.end();
+	QVector<QPointF>::const_iterator itPoint;
+	const QVector<QPointF>::const_iterator itStartPoint = pa.begin();
+	const QVector<QPointF>::const_iterator itEndPoint = pa.end();
 
 	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
 

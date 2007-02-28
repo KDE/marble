@@ -21,7 +21,6 @@ public:
 	int getLat() const { return m_Lat; }
 	int getLng() const { return m_Lng; }
 	void geoCoordinates( float& lng, float& lat ){ m_q.getSpherical( lng, lat ); }
-//	void setMul( float radius ){ m_mulq = m_q; m_mulq.scalar( radius ); }
 
 	const Quaternion &getQuatPoint() const { return m_q; }
 	QString toString();

@@ -15,6 +15,9 @@
 #include "ui_placemarkinfodialog.h"
 
 #include "katlasflag.h"
+
+#include <QStatusBar>
+#include <QUrl>
 /**
 @author Torsten Rahn
 */
@@ -28,14 +31,25 @@ Q_OBJECT
 public:
 	PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
 
+signals:
+
+	void source( QUrl );
+
 public slots:
 	void setFlagLabel();
+	void showMessage( QString text ){
+		QFont statusFont = QStatusBar().font();
+		statusFont.setPointSize( 0.9 * statusFont.pointSize() );
+		m_pStatusLabel->setFont( statusFont );
+		m_pStatusLabel->setText( text );
+	}
 
 protected:
 	KAtlasFlag* m_flagcreator;
 	PlaceMark* m_mark;
 	void showContent();
-	void requestFlag( const QString& ); 
+	void requestFlag( const QString& );
+//	QStatusBar * m_pStatusBar;
 };
 
 #endif // PLACEMARKINFODIALOG_H

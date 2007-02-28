@@ -36,7 +36,6 @@ VectorMap::~VectorMap(){
 
 
 void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quaternion& rotAxis){
-	// Political Borders	
 
 //	QTime *timer = new QTime();
 //	timer->restart();
@@ -45,10 +44,13 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 
 	m_radius = radius-1;
 
+	// zlimit: describes the lowest z value of the sphere that is visible as an excerpt
+	// on the screen
 	float zlimit = (imgradius < m_radius*m_radius) ? sqrt(1-(float)imgradius/(float)(m_radius*m_radius)):0.0;
 
 //	qDebug() << "zlimit: " << zlimit;
 
+	// set 
 	m_zBoundingBoxLimit = ((m_zBoundingBoxLimit >= 0 && zlimit < m_zBoundingBoxLimit) || m_zBoundingBoxLimit < 0) ? zlimit : m_zBoundingBoxLimit;
 	m_zPointLimit = ((m_zPointLimit >= 0 && zlimit < m_zPointLimit) || m_zPointLimit < 0) ? zlimit : m_zPointLimit;
 
@@ -185,7 +187,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 }
 
 
-void VectorMap::paintMap(QPainter * painter, bool antialiasing){
+void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 
 //	bool clip = (m_radius > imgrx || m_radius > imgry) ? true : false;
 

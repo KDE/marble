@@ -32,7 +32,7 @@ public:
 	virtual ~VectorComposer(){};
 
 	void drawTextureMap(QPaintDevice*, const int&, Quaternion&);
-	void paintVectorMap(QPainter*, const int&, Quaternion&);
+	void paintVectorMap(ClipPainter*, const int&, Quaternion&);
 	void resizeMap(const QPaintDevice *);
 
 private:

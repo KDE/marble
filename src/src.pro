@@ -11,8 +11,9 @@ HEADERS += polygon.h \
            katlasglobe.h katlastoolbox.h pntmap.h vectorcomposer.h vectormap.h clippainter.h placemarkmanager.h \
 	   geopoint.h placecontainer.h placemarkstorage.h placefolder.h placemark.h searchlistview.h \
 	   maptheme.h katlasmapscale.h placemarkmodel.h placemarkpainter.h tilescissor.h \
-	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h xmlhandler.h \
-	   placemarkinfodialog.h katlasflag.h
+	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h \
+	   xmlhandler.h placemarkinfodialog.h katlasflag.h tinywebbrowser.h httpfetchfile.h \
+	   gridmap.h
 
 SOURCES += katlascontrol.cpp \
            katlasview.cpp \
@@ -47,7 +48,10 @@ SOURCES += katlascontrol.cpp \
 	   katlaswindrose.cpp \
 	   katlascrosshair.cpp \
 	   xmlhandler.cpp \
-	   katlasflag.cpp
+	   katlasflag.cpp \
+	   tinywebbrowser.cpp \
+	   httpfetchfile.cpp \
+	   gridmap.cpp
 
 RESOURCES = marble.qrc
 
@@ -59,7 +63,7 @@ QMAKE_CXX_FLAGS_RELEASE += -O2 -msse
 
 DEFINES -=KDEBUILD
 
-QT += xml svg
+QT += xml svg network
 
 win32 {
     OBJECTS_DIR=.objwin\

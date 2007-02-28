@@ -4,7 +4,7 @@
 #include <QVector>
 #include <QPolygon>
 
-class GeoPolygon : public QPolygon {
+class GeoPolygon : public QPolygonF {
 public:
 	GeoPolygon() : m_closePolyline(false) { }
 	GeoPolygon(bool closePolyline) : m_closePolyline(closePolyline) { }
