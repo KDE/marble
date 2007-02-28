@@ -68,7 +68,7 @@ set(marble_SRCS
 set (marble_UI katlastilecreatordialog.ui
 	   katlastoolbox.ui placemarkinfodialog.ui)
 
-qt4_add_resources(marble_UI marble.qrc)
+qt4_add_resources(marble_SRCS marble.qrc)
 
 if (QTONLY)
   qt4_wrap_ui(marble_SRCS ${marble_UI})
@@ -96,30 +96,34 @@ install (TARGETS marble DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
 #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 
 install (FILES
-../data/bitmaps/city_1_yellow.png
-../data/bitmaps/cursor_tl.xpm
-../data/bitmaps/cursor_bc.xpm
-../data/bitmaps/cursor_tr.xpm
-../data/bitmaps/cursor_bl.xpm
-../data/bitmaps/cursor_cl.xpm
-../data/bitmaps/cursor_br.xpm
-../data/bitmaps/cursor_cr.xpm
-../data/bitmaps/city_1_red.png
-../data/bitmaps/city_2_red.png
 ../data/bitmaps/city_1_orange.png
-../data/bitmaps/cursor_tc.xpm
-../data/bitmaps/city_3_red.png
-../data/bitmaps/city_2_yellow.png
-../data/bitmaps/city_2_orange.png
-../data/bitmaps/city_4_red.png
-../data/bitmaps/city_3_yellow.png
-../data/bitmaps/city_3_orange.png
-../data/bitmaps/city_4_yellow.png
-../data/bitmaps/city_4_orange.png
+../data/bitmaps/city_1_red.png
 ../data/bitmaps/city_1_white.png
+../data/bitmaps/city_1_yellow.png
+../data/bitmaps/city_2_orange.png
+../data/bitmaps/city_2_red.png
 ../data/bitmaps/city_2_white.png
+../data/bitmaps/city_2_yellow.png
+../data/bitmaps/city_3_orange.png
+../data/bitmaps/city_3_red.png
 ../data/bitmaps/city_3_white.png
+../data/bitmaps/city_3_yellow.png
+../data/bitmaps/city_4_orange.png
+../data/bitmaps/city_4_red.png
 ../data/bitmaps/city_4_white.png
+../data/bitmaps/city_4_yellow.png
+../data/bitmaps/cursor_bc.xpm
+../data/bitmaps/cursor_bl.xpm
+../data/bitmaps/cursor_br.xpm
+../data/bitmaps/cursor_cl.xpm
+../data/bitmaps/cursor_cr.xpm
+../data/bitmaps/cursor_tc.xpm
+../data/bitmaps/cursor_tl.xpm
+../data/bitmaps/cursor_tr.xpm
+../data/bitmaps/mountain_1.png
+../data/bitmaps/pole_1.png
+../data/bitmaps/pole_2.png
+../data/bitmaps/volcano_1.png
 DESTINATION ${CMAKE_INSTALL_PREFIX}/data/bitmaps)
 
 install (FILES 
@@ -432,3 +436,4 @@ DESTINATION ${CMAKE_INSTALL_PREFIX}/data)
 
 
 install (FILES  DESTINATION ${INCLUDE_INSTALL_DIR} )
+install( FILES marble.desktop  DESTINATION ${XDG_APPS_DIR})
