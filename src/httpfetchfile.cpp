@@ -96,3 +96,4 @@ void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeade
 		return;
 	}
 }
+#include "httpfetchfile.moc"

@@ -46,3 +46,4 @@ void TinyWebBrowser::slotDownloadFinished( QString filename, bool error ){
 //		m_urlList.removeAll();
 	}
 }
+#include "tinywebbrowser.moc"
