@@ -1,0 +1,255 @@
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Log of /trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg</title>
+<link rel="stylesheet" href="/docroot/styles.css" type="text/css" />
+<style type="text/css">
+.cp-doNotDisplay { display: none; }
+@media aural, braille, handheld, tty { .cp-doNotDisplay { display: inline; speak: normal; }}
+.cp-edit { text-align: right; }
+@media print, embossed { .cp-edit { display: none; }}
+.vc_header_sort a:link { color: #ffffff; }
+.vc_header_sort a:visited { color: #ffffff; }
+.vc_header_sort a:active { color: #ffffff; }
+.vc_header {
+background-color: #73A5DE;
+}
+.vc_header_sort {
+background-color: #0069BD;
+border-bottom: 1px solid #000000;
+color: #ffffff;
+}
+.vc_row_odd {
+background-color:#BDCEEE;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link rel="meta" href="http://www.kde.org/labels.rdf" type="application/rdf+xml" title="ICRA labels" />
+<meta name="trademark" content="KDE e.V." />
+<meta name="description" content="KDE Source Cross Reference" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta name="robots" content="all" />
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection" />
+<link rel="shortcut icon" href="/docroot/images/favicon.ico" />
+<link rel="icon" href="/docroot/images/favicon.ico" />
+<link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="/docroot/kde.css" />
+<link rel="stylesheet" media="print, embossed" type="text/css" href="/docroot/print.css" />
+<link rel="stylesheet" media="screen, aural, handheld, tty, braille" type="text/css" title="Flat" href="/docroot/flat.css" />
+</head>
+<body id="cp-site-wwwkdeorg">
+<ul class="cp-doNotDisplay">
+<li><a href="#cp-content" accesskey="2">Skip to content</a></li>
+<li><a href="#cp-menu" accesskey="5">Skip to link menu</a></li>
+</ul>
+<div id="container">
+<div id="header">
+<div id="header_top"><div><div>
+<img alt ="" src="/docroot/top-kde.jpg"/>
+The KDE Source Repository </div></div></div>
+<div id="header_bottom">
+<div id="location">
+<ul>
+<li><a href="http://kde.org" accesskey="1">KDE Homepage</a> / <a href="/" >KDE Source Repository Homepage</a></li>
+</ul>
+</div>
+<div id="menu">
+<ul><li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul> </div>
+</div>
+</div>
+<!-- End page header -->
+<div id="body_wrapper">
+<div id="body">
+<!-- begin main content -->
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+<a name="cp-content" />
+
+<p style="margin:0;">
+
+<a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/"><img src="/docroot/images/back_small.png" width="16" height="16" alt="Parent Directory" /> Parent Directory</a>
+
+
+
+
+</p>
+
+<hr />
+<table class="auto">
+
+
+
+<tr>
+<td>Links to HEAD:</td>
+<td>
+(<a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?view=markup">view</a>)
+(<a href="/*checkout*/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg">download</a>)
+(<a href="/*checkout*/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?content-type=text%2Fplain">as text</a>)
+(<a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?view=annotate">annotate</a>)
+</td>
+</tr>
+
+
+
+<tr>
+<td>Sticky Revision:</td>
+<td><form method="get" action="/" style="display: inline">
+<input type="hidden" name="orig_pathtype" value="FILE" /><input type="hidden" name="orig_view" value="log" /><input type="hidden" name="orig_path" value="trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg" /><input type="hidden" name="view" value="redirect_pathrev" />
+
+<input type="text" name="pathrev" value="" size="6"/>
+
+<input type="submit" value="Set" />
+</form>
+
+</td>
+</tr>
+</table>
+ 
+
+
+
+
+
+
+
+
+
+
+<div>
+<hr />
+
+<a name="rev638309"></a>
+
+
+Revision <a href="/?view=rev&amp;revision=638309"><strong>638309</strong></a> -
+
+(<a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?revision=638309&amp;view=markup">view</a>)
+
+(<a href="/*checkout*/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?revision=638309">download</a>)
+(<a href="/*checkout*/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?revision=638309&amp;content-type=text%2Fplain">as text</a>)
+(<a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?annotate=638309">annotate</a>)
+
+
+
+- <a href="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg?r1=638309&amp;view=log">[select for diffs]</a>
+
+
+
+
+<br />
+
+Added
+
+<em>Thu Mar  1 14:26:44 2007 UTC</em> (5 hours, 15 minutes ago) by <em>pinheiro</em>
+
+
+
+
+
+
+
+<br />File length: 51061 byte(s)
+
+
+
+
+
+
+
+
+
+
+<pre class="vc_log"></pre>
+</div>
+
+ 
+
+
+
+
+
+ <hr />
+<p><a name="diff"></a>
+This form allows you to request diffs between any two revisions of this file.
+For each of the two "sides" of the diff,
+
+enter a numeric revision.
+
+</p>
+<form method="get" action="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg" name="diff_select">
+<table cellpadding="2" cellspacing="0" class="auto">
+<tr>
+<td>&nbsp;</td>
+<td>
+<input type="hidden" name="view" value="diff" />
+Diffs between
+
+<input type="text" size="12" name="r1"
+value="638309" />
+
+and
+
+<input type="text" size="12" name="r2" value="638309" />
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+Type of Diff should be a
+<select name="diff_format" onchange="submit()">
+<option value="h" selected="selected">Colored Diff</option>
+<option value="l" >Long Colored Diff</option>
+<option value="u" >Unidiff</option>
+<option value="c" >Context Diff</option>
+<option value="s" >Side by Side</option>
+</select>
+<input type="submit" value=" Get Diffs " />
+</td>
+</tr>
+</table>
+</form>
+
+
+<form method="get" action="/trunk/playground/artwork/Oxygen/theme/svg/apps/marble.svg">
+<div>
+<hr />
+<a name="logsort"></a>
+<input type="hidden" name="view" value="log" />
+Sort log by:
+<select name="logsort" onchange="submit()">
+<option value="cvs" >Not sorted</option>
+<option value="date" >Commit date</option>
+<option value="rev" selected="selected">Revision</option>
+</select>
+<input type="submit" value=" Sort " />
+</div>
+</form>
+
+
+</div>
+</div>
+</div>
+<div class="clearer"></div>
+</div>
+<div class="clearer"></div>
+</div>
+<div id="end_body"></div>
+<div id="footer"><div id="footer_text">
+Maintained by the <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;sysadmin&#64;kde&#46;or&#x67;">KDE sysadmins</a><br />
+KDE<sup>&#174;</sup> and <a href="http://kde.org/media/images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+<a href="http://www.kde.org/contact/impressum.php">Legal</a>
+</div></div>
+</div>
+</body>
+</html>
+
+
