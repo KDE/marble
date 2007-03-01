@@ -18,15 +18,16 @@ private:
 	void drawPolyobject ( const QPolygonF & );
 
 	bool m_clip;
-	int left, right, top, bottom;
+	float left, right, top, bottom;
 	int imgwidth, imgheight;
 	int currentpos, currentxpos, currentypos;
 	int lastpos;
 
 	void manageOffScreen();
-	const QPoint borderPoint();
+	const QPointF borderPoint();
 
-	QPointF currentPoint, lastPoint; 
+	QPointF m_lastBorderPoint;
+	QPointF m_currentPoint, m_lastPoint; 
 	QPolygonF m_clipped;
 
 };

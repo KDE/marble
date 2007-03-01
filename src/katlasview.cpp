@@ -60,12 +60,12 @@ void KAtlasView::zoomView(int zoom){
 
 	emit zoomChanged(zoom);
 
-	zoom = fromLogScale(zoom);
+	int radius = fromLogScale(zoom);
 
-//	if ( zoom < minimumzoom ) zoom = minimumzoom;
+	if ( radius == globe->getRadius() )
+		return;
 	
-	globe->zoom(zoom);
-
+	globe->setRadius(radius);
 	repaint();
 
 	setActiveRegion();

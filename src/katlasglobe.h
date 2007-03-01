@@ -46,7 +46,7 @@ public:
 
 	void resize();
 
-	void zoom(const int&);
+	void setRadius(const int&);
 	int getRadius(){ return m_radius; };
 	Quaternion getRotAxis(){ return m_rotAxis; };
 

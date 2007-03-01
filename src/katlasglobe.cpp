@@ -184,7 +184,7 @@ void KAtlasGlobe::setCanvasImage(QImage* canvasimg){
 	m_canvasimg = canvasimg;
 }
 
-void KAtlasGlobe::zoom(const int& radius){
+void KAtlasGlobe::setRadius(const int& radius){
 	*m_canvasimg = QImage(m_canvasimg->width(),m_canvasimg->height(),QImage::Format_ARGB32_Premultiplied);;
 	m_radius = radius;
 }

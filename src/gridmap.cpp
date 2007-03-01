@@ -16,19 +16,18 @@ const float axialtilt = M_PI / 180.0f * ( 23.0f +  26.0f / 60.0f + 21.0f / 3600.
 
 GridMap::GridMap(){
 
-//	qDebug() << " axialtilt: " << axialtilt;
 	imgrx = 0; imgry = 0; imgradius = 0;
 	imgwidth = 0; imgheight = 0;
 
-// Initialising booleans for horizoncrossing
+//	Initialising booleans for horizoncrossing
+
 	lastvisible = false;
 	currentlyvisible = false;
-	firsthorizon = false;
 
 	m_radius = 0; m_rlimit = 0;
 
 	m_pen = QPen(QColor( 255, 255, 255, 128));
-	m_precision = 30;
+	m_precision = 10;
 }
 
 GridMap::~GridMap(){
@@ -40,8 +39,8 @@ void GridMap::createTropics(const int& radius, Quaternion& rotAxis){
 	rotAxis.inverse().toMatrix( m_rotMatrix );
 	
 	if ( m_radius >  800 ){
-		createCircle( M_PI / 2.0f - axialtilt , Latitude );
-		createCircle( axialtilt - M_PI / 2.0f , Latitude );
+		createCircle( PI_HALF - axialtilt , Latitude );
+		createCircle( axialtilt - PI_HALF , Latitude );
 		createCircle( axialtilt , Latitude );
 		createCircle( -axialtilt , Latitude );
 	}
@@ -51,6 +50,10 @@ void GridMap::createGrid(const int& radius, Quaternion& rotAxis){
 	clear();
 	m_radius = radius-1;
 	rotAxis.inverse().toMatrix( m_rotMatrix );
+
+//	FIXME:	- Higher precision after optimization 
+//		  ( will keep grid lines from vanishing at high zoom levels ) 
+
 //	if ( m_radius > 6400 ) { m_precision = 30; createCircles( 64, 48 ); return; } else 
 	if ( m_radius > 3200 ) { m_precision = 40; createCircles( 32, 24 ); return; }	
 	else if ( m_radius > 1600 ) { m_precision = 30; createCircles( 16, 12 ); return; }	
@@ -63,8 +66,8 @@ void GridMap::createGrid(const int& radius, Quaternion& rotAxis){
 
 void GridMap::createCircles( int lngNum, int latNum ){
 
-// latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
-// lngNum: number of longitude circles between lng = 0 deg and lng < 90 deg
+//	latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
+//	lngNum: number of longitude circles between lng = 0 deg and lng < 90 deg
 
 	if ( latNum != 0 ){
 
@@ -92,7 +95,7 @@ void GridMap::createCircles( int lngNum, int latNum ){
 
 void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 
-// cutoff: the amount of each quarter circle that is cut off at the pole in rad
+//	cutoff: the amount of each quarter circle that is cut off at the pole in rad
 
 	const float cutcoeff = 1 - cutoff / PI_HALF;
 	const float quartSteps = (float) m_precision;	// curve precision
@@ -123,10 +126,10 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 
 			currentPoint = QPointF((float)(imgrx+ m_radius*qpos.v[Q_X])+1,(float)(imgry+ m_radius*qpos.v[Q_Y])+1);
 			
-// Take care of horizon crossings if horizon is visible
+//	Take care of horizon crossings if horizon is visible
 			lastvisible = currentlyvisible;
 
-// Take care of horizon crossings if horizon is visible
+//	Take care of horizon crossings if horizon is visible
 			currentlyvisible = (qpos.v[Q_Z] >= 0) ? true : false;
 
 			if ( j == 0 ) initCrossHorizon();
@@ -137,8 +140,8 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 				m_polygon.clear();
 			}
 
-// Take care of screencrossing crossings if horizon is visible
-// Filter Points which aren't on the visible Hemisphere
+//	Take care of screencrossing crossings if horizon is visible
+//	Filter Points which aren't on the visible Hemisphere
 			if ( currentlyvisible == true && currentPoint != lastPoint ){ // most recent addition: currentPoint != lastPoint
 //			qDebug("accepted");
 				m_polygon << currentPoint;

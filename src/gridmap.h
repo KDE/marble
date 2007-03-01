@@ -2,9 +2,6 @@
 #define GRIDMAP_H
 
 #include <QPen>
-#include <QBrush>
-#include <QImage>
-#include <QPixmap>
 
 #include "clippainter.h"
 #include "geopoint.h"
@@ -50,16 +47,13 @@ private:
 	QPointF currentPoint, lastPoint; 
 
 	QPen m_pen;
-	QBrush m_brush;
-// Dealing with the horizon
-	bool firsthorizon;
-	bool lastvisible, currentlyvisible, horizonpair;
-	QPoint horizona, horizonb;
+
+//	Dealing with the horizon
+	bool lastvisible, currentlyvisible;
 	
 	int m_precision;
 	int m_radius;
 	int m_rlimit;
-
 };
 
 #endif // GRIDMAP_H

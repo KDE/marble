@@ -5,6 +5,7 @@
 #include <QFileInfo>
 #include <QUrl>
 #include <QDebug>
+#include <QTextFrame>
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent ) : QTextBrowser( parent ) {
 	m_pFetchFile = new HttpFetchFile(this);
@@ -24,6 +25,10 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name ){
 		m_pFetchFile->downloadFile( name );
 	}
 */
+//	if ( type == QTextDocument::HtmlResource )
+//	{
+//	}
+
 	if ( type == QTextDocument::ImageResource )
 // && m_urlList.contains(name))
 	{
@@ -45,7 +50,11 @@ void TinyWebBrowser::setSource( QUrl url )
 
 void TinyWebBrowser::slotDownloadFinished( QString filename, bool error ){
 	if ( filename == m_source )
+	{
 		QTextBrowser::setSource( filename );
+		QTextFrameFormat* format = &( document()->rootFrame()->frameFormat() );
+		format->setMargin(12);
+	}
 	else
 	{
 		qDebug("Reload");
