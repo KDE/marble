@@ -22,6 +22,10 @@ data/bitmaps/city_1_white.png
 data/bitmaps/city_2_white.png
 data/bitmaps/city_3_white.png
 data/bitmaps/city_4_white.png
+data/bitmaps/mountain_1.png
+data/bitmaps/pole_1.png
+data/bitmaps/pole_2.png
+data/bitmaps/volcano_1.png
 data/svg/windrose.svg
 data/maps/citylights/citylights.jpg
 data/maps/citylights/citylights.dgml
