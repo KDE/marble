@@ -148,13 +148,15 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	int lng = (int)(maxhalfalpha + radlng * rad2pixw);
 	int lat = (int)(maxquatbeta + radlat * rad2pixh);
 
-	if ( lng >= maxfullalpha ) lng = maxfullalpha-1; // necessary to prevent crash if radalpha = -pi
-	if ( lat >= maxhalfbeta ) lat = maxhalfbeta-1; // necessary to prevent crash
+	// necessary to prevent crash if TextureMapper::radalpha = -pi
+	if ( lng >= maxfullalpha ) lng = maxfullalpha-1;
+	// necessary to prevent crash 
+	if ( lat >= maxhalfbeta ) lat = maxhalfbeta-1; 
 
 //	if ( lng >= maxfullalpha ) lng = (int)(radlng * rad2pixw); // necessary to prevent crash if radalpha = -pi
 //	if ( lat >= maxhalfbeta ) lat = (int)(radlat * rad2pixh - maxquatbeta); // necessary to prevent crash
 
-// Calculate the position on the respective Tile
+//	Calculate the position on the respective Tile
 
 	bool newtile = false;
 
@@ -187,52 +189,6 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	else
 		pixelvalue = tile->jumpTable32[posy][posx];
 }
-/*
-// Interpolate skipped points
-void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
-	avglat = lat-m_prevlat;
-	avglat *= m_ninv;
-	avglng = lng + m_prevlng;
-
-	if (fabs(avglng) > M_PI){
-
-		avglng = TWOPI - fabs(avglng);
-		avglng *= m_ninv;
-
-		if (-m_prevlng > lng){
-			float curAvgLng = -m_prevlng;
-			for (int j=1-m_n; j < 0; j++){
-				m_prevlat += avglat;
-				curAvgLng += avglng;
-				if (curAvgLng >= M_PI) curAvgLng -= TWOPI;
-				getPixelValue( -curAvgLng, m_prevlat, line[x+j]);
-			}
-		}
-
-		if (-m_prevlng < lng){
-			float curAvgLng = lng + m_n*avglng;
-			for (int j=1-m_n; j < 0; j++){
-				m_prevlat += avglat;
-				curAvgLng -= avglng;
-				float evallng = curAvgLng;
-				if (curAvgLng >= M_PI) evallng -= TWOPI;
-				getPixelValue( -evallng, m_prevlat, line[x+j]);
-			}
-		}
-	}
-
-	else {
-
-		avglng *= m_ninv;
-		for (int j=1-m_n; j < 0; j++) {
-			m_prevlat += avglat;
-			m_prevlng -= avglng;
-			getPixelValue( m_prevlng, m_prevlat, line[x + j]);
-		}
-	}	
-
-}
-*/
 
 // Interpolate skipped points
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
@@ -333,6 +289,6 @@ void TextureLoader::setTexLevel(const int texlevel){
 		maxhalfalpha = (float)(21600.0f / (float)(texpixw));
 		maxquatalpha = (int)(10800.0f / (float)(texpixw));
 		maxquatbeta = (float)(10800.0f / (float)(texpixh));
-		maxhalfbeta = 2.0f * maxquatbeta;
+		maxhalfbeta = (int) ( 2.0f * maxquatbeta);
 	}
 }

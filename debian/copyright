@@ -1,0 +1,44 @@
+This package was debianized by Steffen Joeris <steffen.joeris@skolelinux.de> on
+Mon, 27 Nov 2006 17:21:51 +0100.
+
+It was downloaded from svn://anonsvn.kde.org/home/kde/trunk/playground/base/marble
+
+Upstream Author: Torsten Rahn <rahn@kde.org>
+
+
+License:
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public License, 
+version 2 as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANDABILITY of FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Lesser General Public License for details.
+
+On Debian GNU/Linux systems, the complete text of the GNU Lesser
+General Public License can be found in /usr/share/common-licenses/LGPL.
+
+
+The Debian packaging is (C) 2006, Steffen Joeris <steffen.joeris@skolelinux.de> 
+and is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
+
+The data files for the marble package are placed under the public 
+domain. These files can be found in the source directory under data/ .
+
+The data placemarks files have the following copyright notice:
+
+all data © 2004 by Stefan Helders
+
+This project is regarded as a free data provider. Some requests let me precise the copyright information. If you use its data/images the only thing I ask you is to promote this site. If you would like to republish the data presented here, please do not change the data and use a copyright note as described as follows:
+
+© by Stefan Helders www.world-gazetteer.com
+
+If you would like to create a map based on the population figures of this project, please use the following line:
+
+based on population data © by Stefan Helders www.world-gazetteer.com
+
+
+The "please do not change the data and ..." sentence means basically just that the data should be right, but generally
+the source is freely modifyable and distributable.

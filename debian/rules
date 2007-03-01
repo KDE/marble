@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/simple-patchsys.mk
+
+MAKE = make
+
+build:
+	-./buildqmake qmake-qt4
+	$(MAKE)
+
+clean::
+	-./cleanqmake
+	-rm -rf .qmake.internal.cache
+	-rm -rf src/.objunx
+	-rm -rf bin/marble
+
+common-install-prehook-indep::
+	if [ -d $(CURDIR)/debian/marble/data ] ; then rm -rf $(CURDIR)/debian/marble/data ; fi
+	echo "Installing data files"
+	for i in `cat debian/data-files` ; do \
+		install -m 644 $$i $(CURDIR)/debian/marble-data/usr/share/marble/$$i ; \
+	done
+
+common-install-prehook-arch::
+	echo "Installing marble binary"
+	install bin/marble $(CURDIR)/debian/marble/usr/bin/marble

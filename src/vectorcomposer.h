@@ -47,6 +47,8 @@ private:
 	VectorMap* vectormap;
 	QPen m_areapen, m_riverpen, m_borderpen;
 	QBrush m_areabrush, m_lakebrush;
+
+	QVector<qreal> m_dashes;
 };
 
 #endif // VECTORMAP_H

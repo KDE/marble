@@ -63,8 +63,8 @@ protected:
 	float avglng, avglat;
 	int texpixw, texpixh;
 	float rad2pixw, rad2pixh;
-	int maxfullalpha, maxquatalpha;
-	float maxhalfalpha, maxhalfbeta, maxquatbeta;
+	int maxfullalpha, maxquatalpha, maxhalfbeta;
+	float maxhalfalpha, maxquatbeta;
 
 	int tilx, tily;
 	int tilxw, tilyh;

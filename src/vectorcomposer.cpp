@@ -92,7 +92,8 @@ void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Qua
 	vectormap -> setzPointLimit(-1.0); 
 
 	vectormap -> createFromPntMap(pborder,radius,rotAxis);
-	QPen borderpen(QColor(242,187,136));
+//	QPen borderpen(QColor(242,187,136));
+	QPen borderpen(QColor(242,155,104));
 	borderpen.setStyle(Qt::DashLine);
 
 	vectormap -> setPen(borderpen);
@@ -105,7 +106,8 @@ void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Qua
 	vectormap -> setzPointLimit(-1.0); 
 
 	vectormap -> createFromPntMap(pusa,radius,rotAxis);
-	QPen statepen(QColor(242,187,136));
+//	QPen statepen(QColor(242,187,136));
+	QPen statepen(QColor(242,155,104));
 	statepen.setStyle(Qt::DotLine);
 	vectormap -> setPen(statepen);
 	vectormap -> setBrush(Qt::NoBrush);
