@@ -114,7 +114,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 //					 cos(x) ~= 1-x^2
 
 					bendradius = bendReliefx * relief;
-					bump *= 1.0f - bendradius * bendradius;
+					bump *= qRound( 1.0f - bendradius * bendradius );
 
 					bump &= 0x0f;
 				}

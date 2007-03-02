@@ -39,7 +39,7 @@ public slots:
 	void setFlagLabel();
 	void showMessage( QString text ){
 		QFont statusFont = QStatusBar().font();
-		statusFont.setPointSize( 0.9 * statusFont.pointSize() );
+		statusFont.setPointSize( qRound( 0.9 * statusFont.pointSize() ) );
 		m_pStatusLabel->setFont( statusFont );
 		m_pStatusLabel->setText( text );
 	}
