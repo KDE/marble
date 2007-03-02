@@ -48,12 +48,13 @@ void TinyWebBrowser::setSource( QUrl url )
 	m_pFetchFile->downloadFile( url );
 }
 
-void TinyWebBrowser::slotDownloadFinished( QString filename, bool error ){
+void TinyWebBrowser::slotDownloadFinished( QString filename, bool ){
 	if ( filename == m_source )
 	{
 		QTextBrowser::setSource( filename );
-		QTextFrameFormat* format = &( document()->rootFrame()->frameFormat() );
-		format->setMargin(12);
+		QTextFrameFormat format = document()->rootFrame()->frameFormat();
+		format.setMargin(12);
+		document()->rootFrame()->setFrameFormat( format );
 	}
 	else
 	{
