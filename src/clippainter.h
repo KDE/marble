@@ -1,7 +1,7 @@
 #ifndef CLIPPAINTER_H
 #define CLIPPAINTER_H
 
-#include <QPainter>
+#include <QtGui/QPainter>
 
 /**
 @author Torsten Rahn

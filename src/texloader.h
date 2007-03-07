@@ -14,8 +14,8 @@
 #define TEXLOADER_H
 
 #include <QHash>
-#include <QImage>
-#include <QString>
+#include <QtGui/QImage>
+#include <QtCore/QString>
 
 /**
 @author Torsten Rahn

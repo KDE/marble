@@ -12,8 +12,8 @@
 #ifndef KATLASFLAG_H
 #define KATLASFLAG_H
 
-#include <QObject>
-#include <QPixmap>
+#include <QtCore/QObject>
+#include <QtGui/QPixmap>
 
 /**
 @author Torsten Rahn

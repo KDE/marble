@@ -1,13 +1,13 @@
 #include "placemarkinfodialog.h"
 #include "placemark.h"
-#include <QLabel>
+#include <QtGui/QLabel>
 
-#include <QFile>
-#include <QLocale>
-#include <QPainter>
-#include <QTimer>
-#include <QTextBrowser>
-// #include <QStatusBar>
+#include <QtCore/QFile>
+#include <QtCore/QLocale>
+#include <QtGui/QPainter>
+#include <QtCore/QTimer>
+#include <QtGui/QTextBrowser>
+// #include <QtGui/QStatusBar>
 
 #include "katlasdirs.h"
 #include <cmath>

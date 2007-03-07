@@ -9,7 +9,7 @@
 //
 //
 #include <cmath>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "geopoint.h"
 

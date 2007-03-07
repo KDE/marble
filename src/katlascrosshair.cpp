@@ -1,6 +1,6 @@
 #include "katlascrosshair.h"
 #include "katlascrosshair.moc"
-#include <QDebug>
+#include <QtCore/QDebug>
 
 KAtlasCrossHair::KAtlasCrossHair(QObject* parent) : QObject(parent) {
 	m_enabled = false;

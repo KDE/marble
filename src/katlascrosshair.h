@@ -12,8 +12,8 @@
 #ifndef KATLASCROSSHAIR_H
 #define KATLASCROSSHAIR_H
 
-#include <QObject>
-#include <QPainter>
+#include <QtCore/QObject>
+#include <QtGui/QPainter>
 
 /**
 @author Torsten Rahn

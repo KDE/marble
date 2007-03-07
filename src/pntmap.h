@@ -12,13 +12,13 @@
 #ifndef PNTMAP_H
 #define PNTMAP_H
 
-#include <QObject>
-#include <QVector>
+#include <QtCore/QObject>
+#include <QtCore/QVector>
 
 #include "geopoint.h"
 #include "quaternion.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 /*
 	GeoPoint defines the nodes in a polyLine 

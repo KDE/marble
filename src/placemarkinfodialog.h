@@ -16,8 +16,8 @@
 
 #include "katlasflag.h"
 
-#include <QStatusBar>
-#include <QUrl>
+#include <QtGui/QStatusBar>
+#include <QtCore/QUrl>
 /**
 @author Torsten Rahn
 */

@@ -12,10 +12,10 @@
 #ifndef TEXCOLORIZER_H
 #define TEXCOLORIZER_H
 
-#include <QString>
-#include <QImage>
-#include <QList>
-#include <QVector>
+#include <QtCore/QString>
+#include <QtGui/QImage>
+#include <QtCore/QList>
+#include <QtCore/QVector>
 
 /**
 @author Torsten Rahn

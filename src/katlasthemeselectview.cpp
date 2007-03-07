@@ -5,7 +5,7 @@
 #endif
 
 
-#include <QResizeEvent>
+#include <QtGui/QResizeEvent>
 
 KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
     : QListView(parent)

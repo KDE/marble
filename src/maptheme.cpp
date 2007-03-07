@@ -1,11 +1,11 @@
 #include "maptheme.h"
-#include <QDebug>
-#include <QDir>
-#include <QDomDocument>
-#include <QFile>
-#include <QIcon>
-#include <QStringList>
-#include <QStandardItemModel>
+#include <QtCore/QDebug>
+#include <QtCore/QDir>
+#include <QtXml/QDomDocument>
+#include <QtCore/QFile>
+#include <QtGui/QIcon>
+#include <QtCore/QStringList>
+#include <QtGui/QStandardItemModel>
 
 #include "katlasdirs.h"
 #ifdef KDEBUILD

@@ -1,13 +1,13 @@
 #include "katlasflag.h"
 
-#include <QColor>
-#include <QPainter>
+#include <QtGui/QColor>
+#include <QtGui/QPainter>
 #include <QPainterPath>
 #include <QPixmapCache>
-#include <QSvgRenderer>
+#include <QtSvg/QSvgRenderer>
 #include "katlasdirs.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #ifdef KDEBUILD
 #include "katlasflag.moc"

@@ -1,7 +1,7 @@
 #include "vectorcomposer.h"
 
-#include <QColor>
-#include <QDebug>
+#include <QtGui/QColor>
+#include <QtCore/QDebug>
 #include <cmath>
 
 #include "clippainter.h"

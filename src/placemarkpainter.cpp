@@ -1,12 +1,12 @@
 #include "placemarkpainter.h"
 
-#include <QAbstractItemModel>
-#include <QDebug>
-#include <QIcon>
-#include <QList>
-#include <QPainter>
-#include <QPoint>
-#include <QVectorIterator>
+#include <QtCore/QAbstractItemModel>
+#include <QtCore/QDebug>
+#include <QtGui/QIcon>
+#include <QtCore/QList>
+#include <QtGui/QPainter>
+#include <QtCore/QPoint>
+#include <QtCore/QVectorIterator>
 #include "placemark.h"
 #include "katlasdirs.h"
 
@@ -14,7 +14,7 @@
 #include "placemarkpainter.moc"
 #endif
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 static const int maxlabels = 100;

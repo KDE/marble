@@ -2,14 +2,14 @@
 
 #include <cmath>
 
-#include <QApplication>
-#include <QDebug>
-#include <QImage>
-#include <QImageReader>
-#include <QPainter>
-#include <QRect>
-#include <QSize>
-#include <QVector>
+#include <QtGui/QApplication>
+#include <QtCore/QDebug>
+#include <QtGui/QImage>
+#include <QtGui/QImageReader>
+#include <QtGui/QPainter>
+#include <QtCore/QRect>
+#include <QtCore/QSize>
+#include <QtCore/QVector>
 
 #include "katlasdirs.h"
 #ifdef KDEBUILD

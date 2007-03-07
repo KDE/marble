@@ -1,6 +1,6 @@
-#include <QApplication>
-#include <QFile>
-#include <QTime>
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
+#include <QtCore/QTime>
 #include "katlascontrol.h"
 
 int main(int argc, char *argv[])

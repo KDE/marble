@@ -1,8 +1,8 @@
 #ifndef POLYGON_H
 #define POLYGON_H
 
-#include <QVector>
-#include <QPolygon>
+#include <QtCore/QVector>
+#include <QtGui/QPolygon>
 
 class GeoPolygon : public QPolygonF {
 public:

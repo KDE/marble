@@ -12,14 +12,14 @@
 #ifndef KATLASGLOBE_H
 #define KATLASGLOBE_H
 
-#include <QAbstractListModel>
-#include <QObject>
-#include <QPainter>
-#include <QImage>
-#include <QPixmap>
+#include <QtCore/QAbstractListModel>
+#include <QtCore/QObject>
+#include <QtGui/QPainter>
+#include <QtGui/QImage>
+#include <QtGui/QPixmap>
 #include "placecontainer.h"
 #include "placemarkmodel.h"
-// #include <QPainter>
+// #include <QtGui/QPainter>
 #include "clippainter.h"
 #include "maptheme.h"
 #include "texmapper.h"

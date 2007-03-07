@@ -12,11 +12,11 @@
 #ifndef HTTPFETCHFILE_H
 #define HTTPFETCHFILE_H
 
-#include <QFile>
-#include <QObject>
-#include <QUrl>
-#include <QHttp>
-#include <QHttpResponseHeader>
+#include <QtCore/QFile>
+#include <QtCore/QObject>
+#include <QtCore/QUrl>
+#include <QtNetwork/QHttp>
+#include <QtNetwork/QHttpResponseHeader>
 
 /**
 @author Torsten Rahn

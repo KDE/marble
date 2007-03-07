@@ -1,5 +1,5 @@
-#include <QDebug>
-#include <QMenu>
+#include <QtCore/QDebug>
+#include <QtGui/QMenu>
 
 #include "katlasviewpopupmenu.moc"
 #include "katlasviewpopupmenu.h"

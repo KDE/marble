@@ -12,8 +12,8 @@
 #ifndef KATLASVIEWPOPUPMENU_H
 #define KATLASVIEWPOPUPMENU_H
 
-#include <QAction>
-#include <QObject>
+#include <QtGui/QAction>
+#include <QtCore/QObject>
 
 /**
 @author Torsten Rahn

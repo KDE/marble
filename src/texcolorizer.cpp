@@ -1,14 +1,14 @@
 #include "texcolorizer.h"
 
-#include <QColor>
-#include <QString>
-#include <QPainter>
-#include <QGradient>
-#include <QFile>
+#include <QtGui/QColor>
+#include <QtCore/QString>
+#include <QtGui/QPainter>
+#include <QtGui/QGradient>
+#include <QtCore/QFile>
 
 #include <cmath>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 #include "texturepalette.cpp"

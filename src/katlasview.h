@@ -1,8 +1,8 @@
 #ifndef KATLASVIEW_H
 #define KATLASVIEW_H
 
-#include <QWidget>
-#include <QImage>
+#include <QtGui/QWidget>
+#include <QtGui/QImage>
 #include "katlasglobe.h"
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"

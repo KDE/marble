@@ -12,10 +12,10 @@
 #ifndef KATLASMAPSCALE_H
 #define KATLASMAPSCALE_H
 
-#include <QObject>
-#include <QPixmap>
-#include <QFont>
-#include <QFontMetrics>
+#include <QtCore/QObject>
+#include <QtGui/QPixmap>
+#include <QtGui/QFont>
+#include <QtGui/QFontMetrics>
 
 /**
 @author Torsten Rahn

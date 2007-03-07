@@ -1,7 +1,7 @@
 #ifndef SEARCHLISTVIEW_H
 #define SEARCHLISTVIEW_H
 
-#include <QListView>
+#include <QtGui/QListView>
 
 class SearchListView : public QListView {
 	Q_OBJECT

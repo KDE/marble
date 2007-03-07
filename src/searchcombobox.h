@@ -1,7 +1,7 @@
 #ifndef SEARCHCOMBOBOX_H
 #define SEARCHCOMBOBOX_H
 
-#include <QComboBox>
+#include <QtGui/QComboBox>
 
 class SearchComboBox : public QComboBox {
 	Q_OBJECT

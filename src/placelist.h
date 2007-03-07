@@ -2,7 +2,7 @@
 #define PLACELIST_H
 
 #include "placemark.h"
-#include <QDebug>
+#include <QtCore/QDebug>
 
 class PlaceList : public QVector<PlaceMark*> {
 private:	

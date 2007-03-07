@@ -1,11 +1,11 @@
 #include "texloader.h"
-#include <QTime>
-#include <QVector>
+#include <QtCore/QTime>
+#include <QtCore/QVector>
 #include <cmath>
 
 #include "katlasdirs.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 const float TWOPI = 2 * M_PI;
 

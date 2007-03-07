@@ -1,9 +1,9 @@
 #include "vectormap.h"
 
-#include <QColor>
-#include <QVector>
-#include <QTime>
-#include <QDebug>
+#include <QtGui/QColor>
+#include <QtCore/QVector>
+#include <QtCore/QTime>
+#include <QtCore/QDebug>
 
 #include <cmath>
 #include <stdlib.h>

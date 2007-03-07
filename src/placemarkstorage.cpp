@@ -8,7 +8,7 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "placemarkstorage.h"
 

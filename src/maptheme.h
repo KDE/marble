@@ -1,8 +1,8 @@
 #ifndef MAPTHEME_H
 #define MAPTHEME_H
 
-#include <QObject>
-#include <QColor>
+#include <QtCore/QObject>
+#include <QtGui/QColor>
 
 class QStandardItemModel;
 

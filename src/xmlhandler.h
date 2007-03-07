@@ -1,8 +1,8 @@
 #ifndef GPXMLHANDLER_H
 #define GPXMLHANDlER_H
 
-#include <QXmlDefaultHandler>
-#include <QDebug>
+#include <QtXml/QXmlDefaultHandler>
+#include <QtCore/QDebug>
 
 class PlaceContainer;
 class PlaceMark;

@@ -1,6 +1,6 @@
-#include <QDebug>
-#include <QTime>
-#include <QTimer>
+#include <QtCore/QDebug>
+#include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <cmath>
 #include "katlasglobe.h"
 #include "pntmap.h"

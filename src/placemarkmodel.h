@@ -12,7 +12,7 @@
 #ifndef PLACEMARKMODEL_H
 #define PLACEMARKMODEL_H
 
-#include <QAbstractListModel>
+#include <QtCore/QAbstractListModel>
 #include "placecontainer.h"
 
 /**

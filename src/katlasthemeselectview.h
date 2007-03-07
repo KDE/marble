@@ -12,9 +12,9 @@
 #ifndef KATLASTHEMESELECTVIEW_H
 #define KATLASTHEMESELECTVIEW_H
 
-#include <QDebug>
-#include <QStandardItemModel>
-#include <QListView>
+#include <QtCore/QDebug>
+#include <QtGui/QStandardItemModel>
+#include <QtGui/QListView>
 /**
 @author Torsten Rahn
 */

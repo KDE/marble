@@ -1,4 +1,4 @@
-#include <QDebug>
+#include <QtCore/QDebug>
 #include "clippainter.h"
 
 ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){ 

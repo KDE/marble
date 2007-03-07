@@ -1,10 +1,10 @@
 #ifndef VECTORMAP_H
 #define VECTORMAP_H
 
-#include <QPen>
+#include <QtGui/QPen>
 #include <QBrush>
-#include <QImage>
-#include <QPixmap>
+#include <QtGui/QImage>
+#include <QtGui/QPixmap>
 
 #include "geopoint.h"
 #include "polygon.h"

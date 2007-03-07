@@ -1,4 +1,4 @@
-#include <QDebug>
+#include <QtCore/QDebug>
 #include "katlasviewinputhandler.h"
 #include "katlasviewinputhandler.moc"
 #include "katlasview.h"

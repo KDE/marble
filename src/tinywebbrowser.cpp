@@ -2,10 +2,10 @@
 #include "httpfetchfile.h"
 #include "katlasdirs.h"
 
-#include <QFileInfo>
-#include <QUrl>
-#include <QDebug>
-#include <QTextFrame>
+#include <QtCore/QFileInfo>
+#include <QtCore/QUrl>
+#include <QtCore/QDebug>
+#include <QtGui/QTextFrame>
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent ) : QTextBrowser( parent ) {
 	m_pFetchFile = new HttpFetchFile(this);

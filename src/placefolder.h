@@ -3,8 +3,8 @@
 
 #include "placemarkstorage.h"
 #include "placemark.h"
-#include <QDebug>
-#include <QVector>
+#include <QtCore/QDebug>
+#include <QtCore/QVector>
 
 class PlaceFolder : public QVector<PlaceMark*> {
 

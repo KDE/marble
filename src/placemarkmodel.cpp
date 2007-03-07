@@ -2,12 +2,12 @@
 
 #include <cmath>
 #include "katlasdirs.h"
-#include <QFile>
-#include <QTextStream>
-#include <QModelIndex>
-#include <QIcon>
-#include <QDebug>
-#include <QTime>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QModelIndex>
+#include <QtGui/QIcon>
+#include <QtCore/QDebug>
+#include <QtCore/QTime>
 
 #ifdef KDEBUILD
 #include "placemarkmodel.moc"

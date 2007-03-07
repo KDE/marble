@@ -12,11 +12,11 @@
 #ifndef PLACEMARKPAINTER_H
 #define PLACEMARKPAINTER_H
 
-#include <QFont>
+#include <QtGui/QFont>
 #include <QPainterPath>
-#include <QPixmap>
-#include <QRect>
-#include <QVector>
+#include <QtGui/QPixmap>
+#include <QtCore/QRect>
+#include <QtCore/QVector>
 #include "placecontainer.h"
 #include "placemark.h"
 #include "quaternion.h"

@@ -12,7 +12,7 @@
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
-#include <QTextBrowser>
+#include <QtGui/QTextBrowser>
 
 /**
 @author Torsten Rahn

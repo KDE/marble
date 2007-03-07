@@ -11,8 +11,8 @@
 #ifndef TILESCISSOR_H
 #define TILESCISSOR_H
 
-#include <QObject>
-#include <QString>
+#include <QtCore/QObject>
+#include <QtCore/QString>
 
 /**
 @author Torsten Rahn

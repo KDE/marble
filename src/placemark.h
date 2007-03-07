@@ -2,12 +2,12 @@
 #define PLACEMARK_H
 
 // #include "geopoint.h"
-// #include <QDebug>
+// #include <QtCore/QDebug>
 #include <QChar>
-#include <QPixmap>
-#include <QRect>
+#include <QtGui/QPixmap>
+#include <QtCore/QRect>
 
-#include <QVector>
+#include <QtCore/QVector>
 
 #include "geopoint.h"
 #include "placemarkstorage.h"

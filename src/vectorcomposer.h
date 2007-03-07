@@ -13,9 +13,9 @@
 #define VECTORCOMPOSER_H
 
 #include <QBrush>
-#include <QImage>
-#include <QPen>
-#include <QPixmap>
+#include <QtGui/QImage>
+#include <QtGui/QPen>
+#include <QtGui/QPixmap>
 #include "quaternion.h"
 
 /**

@@ -1,7 +1,7 @@
 #include "katlascontrol.h"
 
-#include <QLayout>
-#include <QStringListModel>
+#include <QtGui/QLayout>
+#include <QtGui/QStringListModel>
 
 #include "katlastoolbox.h"
 #ifdef KDEBUILD

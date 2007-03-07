@@ -1,15 +1,15 @@
 #include "texmapper.h"
 
 #include <iostream>
-#include <QTime>
-#include <QColor>
+#include <QtCore/QTime>
+#include <QtGui/QColor>
 #include <cmath>
 
 #include "pntmap.h"
 #include "katlasdirs.h"
 #include "texloader.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 // #define INTERLACE
 

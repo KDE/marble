@@ -1,10 +1,10 @@
 #include "katlastoolbox.h"
 
 #include <QtAlgorithms>
-#include <QStringListModel>
+#include <QtGui/QStringListModel>
 #include "maptheme.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent) {
 

@@ -1,9 +1,9 @@
 #ifndef PLACEMARKSTORAGE_H
 #define PLACEMARKSTORAGE_H
 
-#include <QObject>
+#include <QtCore/QObject>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 class PlaceMarkStorage {
 

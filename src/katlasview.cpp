@@ -1,11 +1,11 @@
 #include "katlasview.h"
 
 #include <cmath>
-#include <QAbstractItemModel>
-#include <QSizePolicy>
-#include <QTime>
-#include <QSizePolicy>
-#include <QRegion>
+#include <QtCore/QAbstractItemModel>
+#include <QtGui/QSizePolicy>
+#include <QtCore/QTime>
+#include <QtGui/QSizePolicy>
+#include <QtGui/QRegion>
 
 #include "clippainter.h"
 #include "katlasviewinputhandler.h"

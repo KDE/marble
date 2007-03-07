@@ -1,7 +1,7 @@
 #ifndef GEOPOINT_H
 #define GEOPOINT_H
 
-#include <QVector>
+#include <QtCore/QVector>
 #include "quaternion.h"
 
 class GeoPoint {

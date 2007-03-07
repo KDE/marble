@@ -14,10 +14,10 @@
 #include <cmath>
 #include <unistd.h>
 
-#include <QFile>
-#include <QDataStream> 
-#include <QDebug>
-#include <QTime>
+#include <QtCore/QFile>
+#include <QtCore/QDataStream> 
+#include <QtCore/QDebug>
+#include <QtCore/QTime>
 
 #ifdef Q_OS_UNIX
 # include <sys/types.h>

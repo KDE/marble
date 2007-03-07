@@ -1,6 +1,6 @@
-#include <QPainter>
-#include <QColor>
-#include <QDebug>
+#include <QtGui/QPainter>
+#include <QtGui/QColor>
+#include <QtCore/QDebug>
 #include "katlasmapscale.h"
 
 #ifdef KDEBUILD

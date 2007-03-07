@@ -1,12 +1,12 @@
 #include "katlaswindrose.h"
 
-#include <QColor>
-#include <QPainter>
+#include <QtGui/QColor>
+#include <QtGui/QPainter>
 #include <QPainterPath>
-#include <QSvgRenderer>
+#include <QtSvg/QSvgRenderer>
 #include "katlasdirs.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #ifdef KDEBUILD
 #include "katlaswindrose.moc"

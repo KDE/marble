@@ -12,12 +12,12 @@
 #ifndef KATLASVIEWINPUTHANDLER_H
 #define KATLASVIEWINPUTHANDLER_H
 
-#include <QObject>
-#include <QKeyEvent>
-#include <QEvent>
-#include <QPixmap>
-#include <QCursor>
-#include <QTime>
+#include <QtCore/QObject>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QEvent>
+#include <QtGui/QPixmap>
+#include <QtGui/QCursor>
+#include <QtCore/QTime>
 #include "katlasglobe.h"
 
 /**

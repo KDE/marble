@@ -8,9 +8,9 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <QDebug>
-#include <QLineEdit>
-#include <QAbstractItemView>
+#include <QtCore/QDebug>
+#include <QtGui/QLineEdit>
+#include <QtGui/QAbstractItemView>
 #include "searchcombobox.h"
 
 #ifdef KDEBUILD

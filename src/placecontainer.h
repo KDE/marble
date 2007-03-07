@@ -2,9 +2,9 @@
 #define PLACECONTAINER_H
 
 #include "placemark.h"
-#include <QVector>
+#include <QtCore/QVector>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 inline bool popLessThan( PlaceMark* mark1, PlaceMark* mark2 ){ 
 

@@ -1,10 +1,10 @@
 #include "httpfetchfile.h"
 #include "katlasdirs.h"
 
-#include <QDebug>
-#include <QFile>
-#include <QFileInfo>
-#include <QMessageBox>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtGui/QMessageBox>
 
 HttpFetchFile::HttpFetchFile( QObject *parent ) : QObject( parent ) {
 	m_pHttp = new QHttp(this);

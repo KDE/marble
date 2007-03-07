@@ -1,9 +1,9 @@
 #ifndef KATLASDIRS_H
 #define KATLASDIRS_H
 
-#include <QApplication>
-#include <QFile>
-#include <QDir>
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
+#include <QtCore/QDir>
 
 class KAtlasDirs
 {

@@ -8,8 +8,8 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <QDebug>
-#include <QStandardItemModel>
+#include <QtCore/QDebug>
+#include <QtGui/QStandardItemModel>
 #include "searchlistview.h"
 #ifdef KDEBUILD
 #include "searchlistview.moc"

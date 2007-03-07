@@ -1,6 +1,6 @@
 #include "katlastilecreatordialog.h"
-#include <QDebug>
-#include <QTimer>
+#include <QtCore/QDebug>
+#include <QtCore/QTimer>
 #include "tilescissor.h"
 
 #ifdef KDEBUILD

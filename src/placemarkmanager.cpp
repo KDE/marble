@@ -1,11 +1,11 @@
 #include "placemarkmanager.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
-#include <QDataStream>
-#include <QDateTime>
-#include <QXmlInputSource>
-#include <QXmlSimpleReader>
+#include <QtCore/QDataStream>
+#include <QtCore/QDateTime>
+#include <QtXml/QXmlInputSource>
+#include <QtXml/QXmlSimpleReader>
 #include "xmlhandler.h"
 
 PlaceMarkManager::PlaceMarkManager(){

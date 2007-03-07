@@ -12,7 +12,7 @@
 #ifndef TEXMAPPER_H
 #define TEXMAPPER_H
 
-#include <QImage>
+#include <QtGui/QImage>
 
 #include "quaternion.h"
 

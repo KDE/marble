@@ -12,9 +12,9 @@
 #ifndef KATLASWINDROSE_H
 #define KATLASWINDROSE_H
 
-#include <QObject>
-#include <QPixmap>
-#include <QFont>
+#include <QtCore/QObject>
+#include <QtGui/QPixmap>
+#include <QtGui/QFont>
 
 /**
 @author Torsten Rahn

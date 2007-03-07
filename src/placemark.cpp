@@ -14,7 +14,7 @@
 #include "geopoint.h"
 #include "katlasdirs.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 PlaceMark::PlaceMark() : PlaceMarkStorage(), m_coordinate() {

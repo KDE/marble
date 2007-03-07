@@ -1,7 +1,7 @@
 #ifndef GRIDMAP_H
 #define GRIDMAP_H
 
-#include <QPen>
+#include <QtGui/QPen>
 
 #include "clippainter.h"
 #include "geopoint.h"
