@@ -434,6 +434,8 @@ install ( FILES
 ../data/landcolors.leg
 DESTINATION ${CMAKE_INSTALL_PREFIX}/data)
 
-
-install (FILES  DESTINATION ${INCLUDE_INSTALL_DIR} )
+if (NOT QTONLY)
 install( FILES marble.desktop  DESTINATION ${XDG_APPS_DIR})
+else (NOT QTONLY)
+install( FILES marble.desktop  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+endif (NOT QTONLY)
