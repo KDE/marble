@@ -12,9 +12,6 @@
 #include <QtCore/QVector>
 
 #include "katlasdirs.h"
-#ifdef KDEBUILD
-#include "tilescissor.moc"
-#endif
 
 TileScissor::TileScissor(const QString& prefix, const QString& installmap, const QString& dem):m_prefix(prefix), m_installmap(installmap),m_dem(dem){
 	/* NOOP */
@@ -254,3 +251,5 @@ void TileScissor::createTiles() {
 	QApplication::processEvents(); 
 
 }
+
+#include "tilescissor.moc"

@@ -12,11 +12,6 @@
 #include "katlasdirs.h"
 #include <cmath>
 
-#ifdef KDEBUILD
-#include "placemarkinfodialog.moc"
-#endif
-
-
 PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent) : QDialog(parent), m_mark(mark) {
 	
 	setupUi(this);
@@ -121,3 +116,5 @@ void PlaceMarkInfoDialog::requestFlag( const QString& countrycode ){
 void PlaceMarkInfoDialog::setFlagLabel(){
 	flag_val_lbl->setPixmap( m_flagcreator->flag() );
 }
+
+#include "placemarkinfodialog.moc"

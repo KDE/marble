@@ -2,16 +2,12 @@
 
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
-#include <QPoint>
+#include <QtCore/QPoint>
 
 #include "quaternion.h"
 #include "clippainter.h"
 
-#ifdef KDEBUILD
-#include "measuretool.moc"
-#endif
-
-#include <QDebug>
+#include <QtCore/QDebug>
 
 MeasureTool::MeasureTool(QObject* parent) : QObject(parent) {
 
@@ -132,3 +128,5 @@ bool MeasureTool::testbug(){
 
 	return true;
 }
+
+#include "measuretool.moc"

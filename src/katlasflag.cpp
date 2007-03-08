@@ -9,10 +9,6 @@
 
 #include <QtCore/QDebug>
 
-#ifdef KDEBUILD
-#include "katlasflag.moc"
-#endif
-
 KAtlasFlag::KAtlasFlag( QObject* parent ) : QObject(parent) {
 	QPixmapCache::setCacheLimit ( 384 );
 }
@@ -41,3 +37,5 @@ void KAtlasFlag::slotDrawFlag(){
 	}
 	emit flagDone();
 }
+
+#include "katlasflag.moc"

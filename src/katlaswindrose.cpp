@@ -8,10 +8,6 @@
 
 #include <QtCore/QDebug>
 
-#ifdef KDEBUILD
-#include "katlaswindrose.moc"
-#endif
-
 KAtlasWindRose::KAtlasWindRose(QObject* parent) : QObject(parent) {
 	m_width = 0;
 
@@ -78,3 +74,5 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, i
 	return m_pixmap;
 
 }
+
+#include "katlaswindrose.moc"

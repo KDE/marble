@@ -15,10 +15,6 @@
 
 #include "measuretool.h"
 
-#ifdef KDEBUILD
-#include "katlasview.moc"
-#endif
-
 KAtlasView::KAtlasView(QWidget *parent)
     : QWidget(parent)
 {
@@ -272,3 +268,4 @@ int KAtlasView::toLogScale(int zoom){
 	return zoom;
 }
 
+#include "katlasview.moc"

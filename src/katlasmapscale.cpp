@@ -3,10 +3,6 @@
 #include <QtCore/QDebug>
 #include "katlasmapscale.h"
 
-#ifdef KDEBUILD
-#include "katlasmapscale.moc"
-#endif
-
 const double earthdiameter = 6378.0;
 
 KAtlasMapScale::KAtlasMapScale(QObject* parent) : QObject(parent) {
@@ -109,3 +105,5 @@ void KAtlasMapScale::calcScaleBar(){
 	m_pixelinterval = (int)(m_scalebarwidth*(double)(bestmagvalue)/(double)(magvalue)/m_bestdivisor);
 	m_valueinterval = (int)(bestmagvalue*magnitude/m_bestdivisor);
 }
+
+#include "katlasmapscale.moc"

@@ -9,10 +9,6 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 
-#ifdef KDEBUILD
-#include "placemarkmodel.moc"
-#endif
-
 PlaceMarkModel::PlaceMarkModel(QObject *parent) : QAbstractListModel(parent){
 }
 
@@ -75,3 +71,5 @@ void PlaceMarkModel::setContainer(PlaceContainer* container){
 	}
 	qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
 }
+
+#include "placemarkmodel.moc"

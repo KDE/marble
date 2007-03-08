@@ -19,7 +19,7 @@ if (QTONLY)
   add_definitions (${QT_DEFINITIONS} -msse)
   include_directories (${CMAKE_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${QT_INCLUDE_DIR})
 else (QTONLY)
-  add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -msse -DKDEBUILD)
+  add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -msse)
   include_directories (${CMAKE_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 endif (QTONLY)
 
@@ -63,6 +63,7 @@ set(marble_SRCS
            gridmap.cpp
            tinywebbrowser.cpp
            httpfetchfile.cpp
+           measuretool.cpp
 )
 
 set (marble_UI katlastilecreatordialog.ui

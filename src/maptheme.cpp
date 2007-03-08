@@ -8,9 +8,6 @@
 #include <QtGui/QStandardItemModel>
 
 #include "katlasdirs.h"
-#ifdef KDEBUILD
-#include "maptheme.moc"
-#endif
 
 MapTheme::MapTheme(QObject *parent)
     : QObject(parent)
@@ -291,3 +288,5 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist ){
 
 	return mapthememodel;
 }
+
+#include "maptheme.moc"

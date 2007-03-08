@@ -1,10 +1,5 @@
 #include "katlasthemeselectview.h"
 
-#ifdef KDEBUILD
-#include "katlasthemeselectview.moc"
-#endif
-
-
 #include <QtGui/QResizeEvent>
 
 KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
@@ -35,3 +30,5 @@ void KAtlasThemeSelectView::resizeEvent(QResizeEvent* event)
     size.setWidth(event->size().width());
     setGridSize(size);
 }
+
+#include "katlasthemeselectview.moc"

@@ -10,12 +10,7 @@
 #include "placemark.h"
 #include "katlasdirs.h"
 
-#ifdef KDEBUILD
-#include "placemarkpainter.moc"
-#endif
-
 #include <QtCore/QDebug>
-
 
 static const int maxlabels = 100;
 
@@ -325,3 +320,5 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ){
 
 	return ret;
 }
+
+#include "placemarkpainter.moc"

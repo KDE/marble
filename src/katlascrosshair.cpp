@@ -1,5 +1,4 @@
 #include "katlascrosshair.h"
-#include "katlascrosshair.moc"
 #include <QtCore/QDebug>
 
 KAtlasCrossHair::KAtlasCrossHair(QObject* parent) : QObject(parent) {
@@ -18,3 +17,5 @@ void KAtlasCrossHair::paintCrossHair( QPainter* painter, int width, int height){
 		painter->drawLine( centerx, centery - halfsize, centerx, centery + halfsize );
 	}	
 }
+
+#include "katlascrosshair.moc"

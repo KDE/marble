@@ -3,11 +3,6 @@
 #include <QtCore/QTimer>
 #include "tilescissor.h"
 
-#ifdef KDEBUILD
-#include "katlastilecreatordialog.moc"
-#endif
-
-
 KAtlasTileCreatorDialog::KAtlasTileCreatorDialog(QWidget *parent) : QDialog(parent) {
 
 	setupUi(this);
@@ -23,3 +18,5 @@ void KAtlasTileCreatorDialog::setSummary( const QString& name, const QString& de
 	QString summary = "<B>" + name + "</B><BR>" + description; 
 	descriptionLabel->setText( summary );
 }
+
+#include "katlastilecreatordialog.moc"
