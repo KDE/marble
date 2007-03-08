@@ -26,7 +26,7 @@ class KAtlasDirs
 	{ 
           return QDir( qApp->applicationDirPath() 
 #if defined(Q_OS_MACX) || defined(Q_OS_DARWIN) || defined(Q_OS_UNIX)
-	+ QLatin1String("/../data")
+	+ QLatin1String("/../share/apps/marble/data")
 #endif
 	  ).canonicalPath();
         }
