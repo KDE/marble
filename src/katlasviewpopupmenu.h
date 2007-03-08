@@ -33,7 +33,14 @@ public:
 
 public slots:
 	void showLmbMenu( int, int );
+	void showRmbMenu( int, int );
 	void showFeatureInfo( QAction* );
+
+signals:
+	void addMeasurePoint( float, float );
+
+protected slots:
+	void slotAddMeasurePoint( QAction* );
 
 protected:
 	KAtlasView* m_gpview;
@@ -42,8 +49,12 @@ protected:
 	QVector<PlaceMark*> m_featurelist;	
 
 	QMenu* m_lmbMenu;
+	QMenu* m_rmbMenu;
 	QAction* m_earthaction;	
 	QAction* m_posaction;	
+
+	QAction* m_pAddMeasurePointAction;	
+	QAction* m_pRemoveMeasurePointsAction;	
 
 	void createActions();
 };

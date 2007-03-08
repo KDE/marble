@@ -13,6 +13,8 @@
 #include "quaternion.h"
 #include "texcolorizer.h"
 
+#include "measuretool.h"
+
 #ifdef KDEBUILD
 #include "katlasview.moc"
 #endif
@@ -20,10 +22,10 @@
 KAtlasView::KAtlasView(QWidget *parent)
     : QWidget(parent)
 {
-
+	setMinimumSize(200, 300);
 	setFocusPolicy(Qt::WheelFocus);
         setFocus(Qt::OtherFocusReason);
-	globe = new KAtlasGlobe( this );
+	m_pGlobe = new KAtlasGlobe( this );
 
 	QPalette p = palette();
 	p.setColor(QPalette::Window,Qt::black);
@@ -34,15 +36,20 @@ KAtlasView::KAtlasView(QWidget *parent)
 
 //	setAttribute(Qt::WA_NoSystemBackground);
 
-	inputhandler = new KAtlasViewInputHandler(this, globe);
+	m_pCanvasImage = new QImage(parent->width(),parent->height(),QImage::Format_ARGB32_Premultiplied);
+	m_pGlobe->setCanvasImage( m_pCanvasImage );
+
+	inputhandler = new KAtlasViewInputHandler(this, m_pGlobe);
 	installEventFilter(inputhandler);
 	setMouseTracking(true);
 
-	m_popupmenu = new KAtlasViewPopupMenu(this, globe);
+	m_popupmenu = new KAtlasViewPopupMenu(this, m_pGlobe);
 	connect( inputhandler, SIGNAL( lmbRequest( int, int ) ), m_popupmenu, SLOT( showLmbMenu( int, int ) ) );	
+	connect( inputhandler, SIGNAL( rmbRequest( int, int ) ), m_popupmenu, SLOT( showRmbMenu( int, int ) ) );	
 
-	canvasimg = QImage(parent->width(),parent->height(),QImage::Format_ARGB32_Premultiplied);
-	globe->setCanvasImage( &canvasimg );
+	m_pMeasureTool = new MeasureTool( this );
+
+	connect( m_popupmenu, SIGNAL( addMeasurePoint( float, float ) ), m_pMeasureTool, SLOT( addMeasurePoint( float, float ) ) );	
 
 	m_logzoom = 0;
 	m_zoomStep = 40;
@@ -62,10 +69,10 @@ void KAtlasView::zoomView(int zoom){
 
 	int radius = fromLogScale(zoom);
 
-	if ( radius == globe->getRadius() )
+	if ( radius == m_pGlobe->getRadius() )
 		return;
 	
-	globe->setRadius(radius);
+	m_pGlobe->setRadius(radius);
 	repaint();
 
 	setActiveRegion();
@@ -74,7 +81,7 @@ void KAtlasView::zoomView(int zoom){
 void KAtlasView::zoomViewBy(int zoomstep){
 	// prevent infinite loops
 
-	int zoom = globe->getRadius();
+	int zoom = m_pGlobe->getRadius();
 	int tryZoom = toLogScale(zoom) + zoomstep;
 //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
 	if ( tryZoom >= minimumzoom ) {
@@ -92,25 +99,25 @@ void KAtlasView::zoomOut(){
 }
 
 void KAtlasView::rotateBy(const float& phi, const float& theta){
-	globe->rotateBy(phi, theta);
+	m_pGlobe->rotateBy(phi, theta);
 
 	repaint();
 }
 
 void KAtlasView::centerOn(const float& phi, const float& theta){
-	globe->rotateTo(phi, theta);
+	m_pGlobe->rotateTo(phi, theta);
 
 	repaint();
 }
 
 void KAtlasView::centerOn(const QModelIndex& index){
 
-	PlaceMarkModel* model = (PlaceMarkModel*)globe->getPlaceMarkModel();
+	PlaceMarkModel* model = (PlaceMarkModel*)m_pGlobe->getPlaceMarkModel();
 	if (model == 0) qDebug("model null");
 
 	PlaceMark* mark = model->placeMark( index );
 
-	globe->placeContainer()->clearSelected();
+	m_pGlobe->placeContainer()->clearSelected();
 
 	if (mark != 0){
 		float lng, lat;
@@ -122,7 +129,7 @@ void KAtlasView::centerOn(const QModelIndex& index){
 	else 
 		m_crosshair.setEnabled( false );
 
-	globe->placeContainer()->sort();
+	m_pGlobe->placeContainer()->sort();
 
 	repaint();
 }
@@ -146,15 +153,16 @@ void KAtlasView::moveDown(){
 void KAtlasView::resizeEvent (QResizeEvent*){
 //	Redefine the area where the mousepointer becomes a navigationarrow
 	setActiveRegion();
-	canvasimg = QImage(width(),height(),QImage::Format_ARGB32_Premultiplied);
-	globe->resize();
+	if ( m_pCanvasImage != 0 ) delete m_pCanvasImage;
+	m_pCanvasImage = new QImage(width(),height(),QImage::Format_ARGB32_Premultiplied);
+	m_pGlobe->resize();
 
 	repaint();
 }
 
 bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta){
 
-	int radius = globe->getRadius(); 
+	int radius = m_pGlobe->getRadius(); 
 	int imgrx = width() >> 1;
 	int imgry = height() >> 1;
 
@@ -170,7 +178,7 @@ bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta){
 		float qz = (qr2z > 0.0) ? sqrt(qr2z) : 0.0;	
 
 		Quaternion qpos(0,qx,qy,qz);
-		qpos.rotateAroundAxis(globe->getRotAxis());
+		qpos.rotateAroundAxis(m_pGlobe->getPlanetAxis());
 		qpos.getSpherical( alpha, beta );
 
 		return true;
@@ -181,7 +189,7 @@ bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta){
 }
 
 void KAtlasView::setActiveRegion(){
-	int zoom = globe->getRadius(); 
+	int zoom = m_pGlobe->getRadius(); 
 
 	activeRegion = QRegion(25,25,width()-50,height()-50, QRegion::Rectangle);
 
@@ -201,26 +209,28 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 //	Debugging Active Region
 //	painter.setClipRegion(activeRegion);
 
-//	if(globe->needsUpdate() || canvasimg.isNull() || canvasimg.size() != size())
+//	if(m_pGlobe->needsUpdate() || m_pCanvasImage->isNull() || m_pCanvasImage->size() != size())
 //	{
-		int radius = globe->getRadius();
-		bool clip = (radius > canvasimg.width()/2 || radius > canvasimg.height()/2) ? true : false;
+		int radius = m_pGlobe->getRadius();
+		bool clip = (radius > m_pCanvasImage->width()/2 || radius > m_pCanvasImage->height()/2) ? true : false;
 
 		ClipPainter painter( this, clip); 
 //		QPainter painter(this);
-//		painter.setClipRect(10, 10, canvasimg.width() - 1 , canvasimg.height()-1 );
+//		painter.setClipRect(10, 10, m_pCanvasImage->width() - 1 , m_pCanvasImage->height()-1 );
 //		painter.setClipping( true );
 
 		QRect dirty = evt->rect();
-		globe->paintGlobe(&painter,dirty);
+		m_pGlobe->paintGlobe(&painter,dirty);
 	
-		painter.drawPixmap(10, canvasimg.height()-40,
-		m_mapscale.drawScaleBarPixmap( globe->getRadius(),canvasimg.width()/2 - 20));
+		painter.drawPixmap(10, m_pCanvasImage->height()-40,
+		m_mapscale.drawScaleBarPixmap( m_pGlobe->getRadius(),m_pCanvasImage-> width()/2 - 20));
 
-		painter.drawPixmap( canvasimg.width()-60, 10,
-		m_windrose.drawWindRosePixmap( canvasimg.width(), canvasimg.height(), globe->northPoleY() ) );
+		painter.drawPixmap( m_pCanvasImage->width()-60, 10,
+		m_windrose.drawWindRosePixmap( m_pCanvasImage->width(), m_pCanvasImage->height(), m_pGlobe->northPoleY() ) );
 
-		m_crosshair.paintCrossHair( &painter, canvasimg.width(), canvasimg.height() );
+		m_crosshair.paintCrossHair( &painter, m_pCanvasImage->width(), m_pCanvasImage->height() );
+
+		m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width()/2, m_pCanvasImage->height()/2, radius, m_pGlobe->getPlanetAxis() );
 
 //	}
 /*
@@ -229,25 +239,25 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 		// Draw cached pixmap to widget
 		QPainter pixmapPainter(this);
 		QRect rect(0, 0, width(), height());
-		pixmapPainter.drawImage(rect, canvasimg, rect);
+		pixmapPainter.drawImage(rect, m_pCanvasImage, rect);
 	}
 */
 //		qDebug() << "PaintEvent: " << timer.elapsed();
 }
 
 void KAtlasView::goHome(){
-//	globe->rotateTo(0, 0);
-	globe->rotateTo(54.8, -9.4);
+//	m_pGlobe->rotateTo(0, 0);
+	m_pGlobe->rotateTo(54.8, -9.4);
 	zoomView(1050); // default 1050
 
 	update(); // not obsolete in case the zoomlevel stays unaltered
 }
 
 float KAtlasView::getMoveStep(){
-	if ( globe->getRadius() < sqrt(width()*width() + height()*height()))
+	if ( m_pGlobe->getRadius() < sqrt(width()*width() + height()*height()))
 		return 0.1;
 	else
-		return atan((float)width()/(float)(2 * globe->getRadius())) * 0.2;
+		return atan((float)width()/(float)(2 * m_pGlobe->getRadius())) * 0.2;
 }
 
 int KAtlasView::fromLogScale(int zoom){

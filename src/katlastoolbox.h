@@ -44,7 +44,8 @@ signals:
 	void selectMapTheme( const QString& );
 public slots:
 	void changeZoom(int);
-private:
+protected:
+	void resizeEvent ( QResizeEvent * );
 	int minimumzoom;
 };
 

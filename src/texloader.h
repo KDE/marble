@@ -13,7 +13,7 @@
 #ifndef TEXLOADER_H
 #define TEXLOADER_H
 
-#include <QHash>
+#include <QtCore/QHash>
 #include <QtGui/QImage>
 #include <QtCore/QString>
 

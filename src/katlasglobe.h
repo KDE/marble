@@ -48,7 +48,7 @@ public:
 
 	void setRadius(const int&);
 	int getRadius(){ return m_radius; };
-	Quaternion getRotAxis(){ return m_rotAxis; };
+	Quaternion getPlanetAxis(){ return m_pPlanetAxis; };
 
 	void rotateTo(const uint&, const uint&, const uint&);
 
@@ -66,7 +66,7 @@ public:
 
 	bool screenCoordinates( const float lng, const float lat, int& x, int& y );
 
-	bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_rotAxis == m_rotAxisUpdated ); }
+	bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_pPlanetAxis == m_pPlanetAxisUpdated ); }
 
 	void addPlaceMarkFile( QString filename );
 
@@ -89,7 +89,7 @@ protected:
 	PlaceMarkPainter* m_placemarkpainter;
 	PlaceContainer* m_placecontainer;
 
-	Quaternion m_rotAxis, m_rotAxisUpdated;
+	Quaternion m_pPlanetAxis, m_pPlanetAxisUpdated;
 	int m_radius, m_radiusUpdated;
 
 	bool m_justModified;

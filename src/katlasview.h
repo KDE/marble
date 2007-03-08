@@ -12,6 +12,7 @@ class KAtlasViewInputHandler;
 class KAtlasViewPopupMenu;
 class TextureColorizer;
 class QAbstractItemModel;
+class MeasureTool;
 
 class KAtlasView : public QWidget
 {
@@ -22,12 +23,14 @@ public:
 
 	const QRegion getActiveRegion();
 	bool getGlobeSphericals(int x, int y, float& alpha, float& beta);
-	QAbstractListModel* getPlaceMarkModel(){ return globe->getPlaceMarkModel(); };
+	QAbstractListModel* getPlaceMarkModel(){ return m_pGlobe->getPlaceMarkModel(); };
 
 	float getMoveStep();
 	void setMinimumZoom( int zoom ){ minimumzoom = zoom; }
 
-	void addPlaceMarkFile( QString filename ){ globe->addPlaceMarkFile( filename ); }
+	void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
+
+	KAtlasGlobe* globe() const { return m_pGlobe; }
 
 public slots:
 	void zoomView(int);
@@ -49,7 +52,7 @@ public slots:
 
 	void setMapTheme( const QString& maptheme )
 	{
-		globe->setMapTheme( maptheme );
+		m_pGlobe->setMapTheme( maptheme );
 		
 		// Force update...
    		m_cachedSize = QSize();
@@ -66,15 +69,18 @@ private:
 	
 	int minimumzoom;	
 
-	KAtlasGlobe* globe;
+	KAtlasGlobe* m_pGlobe;
+
 	KAtlasViewInputHandler* inputhandler;
 	KAtlasViewPopupMenu* m_popupmenu;
+
 	TextureColorizer* sealegend;
-	QImage canvasimg;
+	QImage* m_pCanvasImage;
 
 	KAtlasCrossHair m_crosshair;
 	KAtlasMapScale m_mapscale;
 	KAtlasWindRose m_windrose;
+	MeasureTool* m_pMeasureTool;
 
 	QRegion activeRegion;
 	void setActiveRegion();

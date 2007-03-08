@@ -2,7 +2,7 @@
 
 #include <QtGui/QColor>
 #include <QtGui/QPainter>
-#include <QPainterPath>
+#include <QtGui/QPainterPath>
 #include <QtSvg/QSvgRenderer>
 #include "katlasdirs.h"
 

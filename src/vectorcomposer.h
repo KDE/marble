@@ -12,7 +12,7 @@
 #ifndef VECTORCOMPOSER_H
 #define VECTORCOMPOSER_H
 
-#include <QBrush>
+#include <QtGui/QBrush>
 #include <QtGui/QImage>
 #include <QtGui/QPen>
 #include <QtGui/QPixmap>

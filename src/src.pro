@@ -13,7 +13,7 @@ HEADERS += polygon.h \
 	   maptheme.h katlasmapscale.h placemarkmodel.h placemarkpainter.h tilescissor.h \
 	   katlastilecreatordialog.h katlasthemeselectview.h katlaswindrose.h katlascrosshair.h \
 	   xmlhandler.h placemarkinfodialog.h katlasflag.h tinywebbrowser.h httpfetchfile.h \
-	   gridmap.h
+	   gridmap.h measuretool.h
 
 SOURCES += katlascontrol.cpp \
            katlasview.cpp \
@@ -51,7 +51,8 @@ SOURCES += katlascontrol.cpp \
 	   katlasflag.cpp \
 	   tinywebbrowser.cpp \
 	   httpfetchfile.cpp \
-	   gridmap.cpp
+	   gridmap.cpp \
+	   measuretool.cpp
 
 RESOURCES = marble.qrc
 

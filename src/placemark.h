@@ -3,7 +3,7 @@
 
 // #include "geopoint.h"
 // #include <QtCore/QDebug>
-#include <QChar>
+#include <QtCore/QChar>
 #include <QtGui/QPixmap>
 #include <QtCore/QRect>
 

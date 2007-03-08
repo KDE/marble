@@ -13,7 +13,7 @@
 #define PLACEMARKPAINTER_H
 
 #include <QtGui/QFont>
-#include <QPainterPath>
+#include <QtGui/QPainterPath>
 #include <QtGui/QPixmap>
 #include <QtCore/QRect>
 #include <QtCore/QVector>

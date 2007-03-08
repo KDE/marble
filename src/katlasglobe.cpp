@@ -18,6 +18,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 
 	texmapper = 0;
 
+
 	m_placemarkpainter = 0;
 	m_placecontainer = 0;
 	m_radius = 2000;
@@ -25,7 +26,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	m_centered = false;
 	m_justModified = false;
 
-	m_rotAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
+	m_pPlanetAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
 
 	m_coastimg = new QImage(10,10,QImage::Format_ARGB32_Premultiplied);
 	m_maptheme = new MapTheme();
@@ -93,7 +94,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 	m_placecontainer ->clearTextPixmaps();
 
 	if ( m_placemarkpainter == 0)
-		m_placemarkpainter = new PlaceMarkPainter();
+		m_placemarkpainter = new PlaceMarkPainter( this );
 
 	m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
 
@@ -104,6 +105,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 
 void KAtlasGlobe::resize(){
 	*m_coastimg = QImage(m_canvasimg->width(),m_canvasimg->height(),QImage::Format_ARGB32_Premultiplied);
+	m_canvasimg->fill(Qt::transparent);
 	
 	texmapper->resizeMap(m_canvasimg);
 	veccomposer->resizeMap(m_coastimg);
@@ -119,19 +121,19 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 	if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ){
 
 // Workaround
-//	m_rotAxis.display();
-		texmapper->mapTexture(m_canvasimg, m_radius, m_rotAxis);
+//		m_pPlanetAxis.display();
+		texmapper->mapTexture(m_canvasimg, m_radius, m_pPlanetAxis);
 
-//	qDebug() << "Texture-Mapping:" << timer.elapsed();
-//	timer.restart();
+//		qDebug() << "Texture-Mapping:" << timer.elapsed();
+//		timer.restart();
 
 		if ( m_maptheme->bitmaplayer().dem == "true" ){
-			*m_coastimg = QImage(m_canvasimg->width(),m_canvasimg->height(),QImage::Format_ARGB32_Premultiplied);
+			m_coastimg->fill(Qt::transparent);
 
 //		qDebug() << "Scale & Fill: " << timer.elapsed();
 //		timer.restart();
 
-			veccomposer->drawTextureMap(m_coastimg, m_radius, m_rotAxis); // Create VectorMap
+			veccomposer->drawTextureMap(m_coastimg, m_radius, m_pPlanetAxis); // Create VectorMap
 
 //		qDebug() << "Vectors: " << timer.elapsed();
 //		timer.restart();
@@ -148,7 +150,7 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 //		timer.restart();
 
 	if ( m_maptheme->vectorlayer().enabled == true ){
-		veccomposer->paintVectorMap(painter, m_radius, m_rotAxis); // Add further Vectors
+		veccomposer->paintVectorMap(painter, m_radius, m_pPlanetAxis); // Add further Vectors
 //		qDebug() << "2. Vectors: " << timer.elapsed();
 //		timer.restart();
 	}
@@ -156,12 +158,12 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 //	if ( m_maptheme->vectorlayer().enabled == true ){
 	QPen gridpen( QColor( 255, 255, 255, 128 ) );
 
-	gridmap->createGrid(m_radius,m_rotAxis);
+	gridmap->createGrid(m_radius,m_pPlanetAxis);
 
 	gridmap->setPen( gridpen );
 	gridmap->paintGridMap(painter, true);
 
-	gridmap->createTropics(m_radius,m_rotAxis);
+	gridmap->createTropics(m_radius,m_pPlanetAxis);
 
 	gridpen.setStyle( Qt::DotLine );
 	gridmap->setPen( gridpen );
@@ -171,11 +173,11 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty){
 	
 //	timer.restart();
 	if ( m_placecontainer->size() > 0 ){
-		m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_rotAxis);
+		m_placemarkpainter->paintPlaceFolder(painter, m_canvasimg->width()/2, m_canvasimg->height()/2, m_radius, m_placecontainer, m_pPlanetAxis);
 	}
 //	qDebug() << "Placemarks: " << timer.elapsed();
 
-	m_rotAxisUpdated = m_rotAxis;
+	m_pPlanetAxisUpdated = m_pPlanetAxis;
 	m_radiusUpdated = m_radius;
 	m_justModified = false;
 }
@@ -185,32 +187,39 @@ void KAtlasGlobe::setCanvasImage(QImage* canvasimg){
 }
 
 void KAtlasGlobe::setRadius(const int& radius){
-	*m_canvasimg = QImage(m_canvasimg->width(),m_canvasimg->height(),QImage::Format_ARGB32_Premultiplied);;
+
+	// Clear canvas if the globe is visible as a whole or if the globe does shrink
+	int imgrx = ( m_canvasimg->width() ) >> 1;
+	int imgry = ( m_canvasimg->height() ) >> 1;
+	if ( radius*radius < imgrx*imgrx + imgry*imgry &&  radius < m_radius ){
+		m_canvasimg->fill(Qt::transparent);
+	}
+
 	m_radius = radius;
 }
 
 void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi){
-	m_rotAxis.createFromEuler((float)(phi)/rad2int,(float)(theta)/rad2int,(float)(psi)/rad2int);
+	m_pPlanetAxis.createFromEuler((float)(phi)/rad2int,(float)(theta)/rad2int,(float)(psi)/rad2int);
 }
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
-	m_rotAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0, (theta + 180.0) * M_PI / 180.0, 0.0);
+	m_pPlanetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0, (theta + 180.0) * M_PI / 180.0, 0.0);
 	m_centered = false;
 }
 
 
 
 void KAtlasGlobe::rotateBy(const Quaternion& incRot){
-	m_rotAxis = incRot * m_rotAxis;
+	m_pPlanetAxis = incRot * m_pPlanetAxis;
 	m_centered = false;
 }
 
 void KAtlasGlobe::rotateBy(const float& phi, const float& theta){
 	Quaternion rotPhi(1.0, phi, 0.0, 0.0);
 	Quaternion rotTheta(1.0, 0.0, theta, 0.0);
-	m_rotAxis = rotTheta * m_rotAxis;
-	m_rotAxis *= rotPhi;
-	m_rotAxis.normalize();
+	m_pPlanetAxis = rotTheta * m_pPlanetAxis;
+	m_pPlanetAxis *= rotPhi;
+	m_pPlanetAxis.normalize();
 
 	m_centered = false;
 }
@@ -218,7 +227,7 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta){
 int KAtlasGlobe::northPoleY(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
 	Quaternion qpolepos = northpole.getQuatPoint();
-	Quaternion invRotAxis = m_rotAxis.inverse();
+	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
 
@@ -228,7 +237,7 @@ int KAtlasGlobe::northPoleY(){
 int KAtlasGlobe::northPoleZ(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
 	Quaternion qpolepos = northpole.getQuatPoint();
-	Quaternion invRotAxis = m_rotAxis.inverse();
+	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
 
@@ -238,7 +247,7 @@ int KAtlasGlobe::northPoleZ(){
 bool KAtlasGlobe::screenCoordinates( const float lng, const float lat, int& x, int& y ){
 	
 	Quaternion qpos = GeoPoint( lng, lat ).getQuatPoint();
-	Quaternion invRotAxis = m_rotAxis.inverse();
+	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpos.rotateAroundAxis(invRotAxis);
 

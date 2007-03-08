@@ -34,7 +34,9 @@ public:
 	virtual ~KAtlasViewInputHandler(){};
 
 signals:
+	// Mouse button menus
 	void lmbRequest( int, int );
+	void rmbRequest( int, int );
 
 protected:
 	QPixmap curpmtl, curpmtc, curpmtr, curpmcr, curpmcl, curpmbl, curpmbc, curpmbr;

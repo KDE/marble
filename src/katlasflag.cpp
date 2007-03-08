@@ -2,8 +2,8 @@
 
 #include <QtGui/QColor>
 #include <QtGui/QPainter>
-#include <QPainterPath>
-#include <QPixmapCache>
+#include <QtGui/QPainterPath>
+#include <QtGui/QPixmapCache>
 #include <QtSvg/QSvgRenderer>
 #include "katlasdirs.h"
 

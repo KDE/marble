@@ -2,7 +2,7 @@
 #define VECTORMAP_H
 
 #include <QtGui/QPen>
-#include <QBrush>
+#include <QtGui/QBrush>
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 

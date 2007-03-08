@@ -10,17 +10,30 @@
 
 KAtlasViewPopupMenu::KAtlasViewPopupMenu(KAtlasView *gpview, KAtlasGlobe *globe):m_gpview(gpview),m_globe(globe){
 	m_lmbMenu = new QMenu( m_gpview );
+	m_rmbMenu = new QMenu( m_gpview );
 
 	connect( m_lmbMenu, SIGNAL(  triggered ( QAction* ) ), this, SLOT( showFeatureInfo( QAction* ) ) );
+	connect( m_rmbMenu, SIGNAL( triggered( QAction* ) ), SLOT( slotAddMeasurePoint( QAction* ) ) );
 	createActions();
 }
 
 void KAtlasViewPopupMenu::createActions(){
+
+//	Property actions (Left mouse button)
+
 //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
 	m_earthaction = new QAction(tr("&Earth"), this);
 	m_earthaction->setData( 0 );
 	m_posaction = new QAction(tr("0 N 0 W"), this);
 	m_posaction->setFont( QFont("Sans Serif",7, 50, false ) );
+
+//	Tool actions (Right mouse button)
+
+	m_pAddMeasurePointAction = new QAction(tr("&Add Measure Point"), this);	
+	m_rmbMenu->addAction( m_pAddMeasurePointAction );
+	m_pRemoveMeasurePointsAction = new QAction(tr("&Remove Measure Points"), this);
+	m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
+
 }
 
 void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
@@ -60,6 +73,14 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
 	m_lmbMenu->popup( m_gpview->mapToGlobal( curpos ) );
 }
 
+
+void KAtlasViewPopupMenu::showRmbMenu( int xpos, int ypos ){
+
+	QPoint curpos = QPoint( xpos, ypos );
+	m_pAddMeasurePointAction->setData( curpos );
+	m_rmbMenu->popup( m_gpview->mapToGlobal( curpos ) );
+}
+
 void KAtlasViewPopupMenu::showFeatureInfo( QAction* action ){
 	int actionidx = action->data().toInt();
 	PlaceMark* mark = 0;
@@ -71,3 +92,14 @@ void KAtlasViewPopupMenu::showFeatureInfo( QAction* action ){
 	}
 
 }
+
+void KAtlasViewPopupMenu::slotAddMeasurePoint( QAction* action ){
+	QPoint p = action->data().toPoint();
+
+	float lng, lat;
+
+	m_gpview->getGlobeSphericals( p.x(), p.y(), lng, lat);
+
+	emit addMeasurePoint( lng, lat );
+}
+

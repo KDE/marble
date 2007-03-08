@@ -1,6 +1,6 @@
 #include "katlastoolbox.h"
 
-#include <QtAlgorithms>
+#include <QtCore/QtAlgorithms>
 #include <QtGui/QStringListModel>
 #include "maptheme.h"
 
@@ -45,3 +45,17 @@ void KAtlasToolBox::changeZoom(int zoom){
 		zoomSlider->setValue(zoom);
 		zoomSlider->setMinimum( minimumzoom );
 }
+
+void KAtlasToolBox::resizeEvent ( QResizeEvent * ){
+	if ( height() < 480 ){
+		if ( zoomSlider->isHidden() == false ){
+			zoomSlider->hide();
+			m_pSpacerFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+		}
+	} else {
+		if ( zoomSlider->isHidden() == true ){
+			zoomSlider->show();
+			m_pSpacerFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+		}
+	}
+} 
