@@ -38,9 +38,10 @@ public slots:
 
 signals:
 	void addMeasurePoint( float, float );
+	void removeMeasurePoints();
 
 protected slots:
-	void slotAddMeasurePoint( QAction* );
+	void slotAddMeasurePoint();
 
 protected:
 	KAtlasView* m_gpview;

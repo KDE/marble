@@ -13,7 +13,6 @@ KAtlasViewPopupMenu::KAtlasViewPopupMenu(KAtlasView *gpview, KAtlasGlobe *globe)
 	m_rmbMenu = new QMenu( m_gpview );
 
 	connect( m_lmbMenu, SIGNAL(  triggered ( QAction* ) ), this, SLOT( showFeatureInfo( QAction* ) ) );
-	connect( m_rmbMenu, SIGNAL( triggered( QAction* ) ), SLOT( slotAddMeasurePoint( QAction* ) ) );
 	createActions();
 }
 
@@ -33,6 +32,9 @@ void KAtlasViewPopupMenu::createActions(){
 	m_rmbMenu->addAction( m_pAddMeasurePointAction );
 	m_pRemoveMeasurePointsAction = new QAction(tr("&Remove Measure Points"), this);
 	m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
+
+	connect( m_pAddMeasurePointAction, SIGNAL( triggered() ), SLOT( slotAddMeasurePoint() ) );
+	connect( m_pRemoveMeasurePointsAction, SIGNAL( triggered() ), SIGNAL( removeMeasurePoints() ) );
 
 }
 
@@ -93,8 +95,8 @@ void KAtlasViewPopupMenu::showFeatureInfo( QAction* action ){
 
 }
 
-void KAtlasViewPopupMenu::slotAddMeasurePoint( QAction* action ){
-	QPoint p = action->data().toPoint();
+void KAtlasViewPopupMenu::slotAddMeasurePoint(){
+	QPoint p = m_pAddMeasurePointAction->data().toPoint();
 
 	float lng, lat;
 
@@ -102,4 +104,3 @@ void KAtlasViewPopupMenu::slotAddMeasurePoint( QAction* action ){
 
 	emit addMeasurePoint( lng, lat );
 }
-

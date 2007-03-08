@@ -50,6 +50,7 @@ KAtlasView::KAtlasView(QWidget *parent)
 	m_pMeasureTool = new MeasureTool( this );
 
 	connect( m_popupmenu, SIGNAL( addMeasurePoint( float, float ) ), m_pMeasureTool, SLOT( addMeasurePoint( float, float ) ) );	
+	connect( m_popupmenu, SIGNAL( removeMeasurePoints() ), m_pMeasureTool, SLOT( removeMeasurePoints( ) ) );	
 
 	m_logzoom = 0;
 	m_zoomStep = 40;
@@ -230,7 +231,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 
 		m_crosshair.paintCrossHair( &painter, m_pCanvasImage->width(), m_pCanvasImage->height() );
 
-		m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width()/2, m_pCanvasImage->height()/2, radius, m_pGlobe->getPlanetAxis() );
+		m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width()/2, m_pCanvasImage->height()/2, radius, m_pGlobe->getPlanetAxis(), true );
 
 //	}
 /*
