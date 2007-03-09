@@ -1,10 +1,10 @@
 
 if (QTONLY)
   add_definitions (${QT_DEFINITIONS} -msse)
-  include_directories (${CMAKE_CURRENT_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${QT_INCLUDE_DIR})
+  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
 else (QTONLY)
   add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -msse)
-  include_directories (${CMAKE_CURRENT_BUILD_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
 endif (QTONLY)
 
 link_directories (${QT_LIBRARY_DIR})
