@@ -298,32 +298,17 @@ maps/bluemarble/bluemarble-preview.png
 DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/maps/bluemarble)
 
 install (FILES
-vectorsource/glaciers.svg
-vectorsource/islands.svg
-vectorsource/lakes.svg
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/vectorsource)
-
-install (FILES
 mwdbii/PDIFFBORDER.PNT
 mwdbii/PUSA48.PNT
 mwdbii/PGLACIER.PNT
-mwdbii/PISLAND.PNT.orig
 mwdbii/RIVER.PNT
 mwdbii/PCANPROV.PNT
-mwdbii/PUSA48.DIFF.PNT
 mwdbii/PCOAST.PNT
 mwdbii/PISLAND.PNT
-mwdbii/PLAKE.PNT.orig
-mwdbii/Pntinfo.txt
 mwdbii/PLAKE.PNT
 mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
-mwdbii/GOODEIHS.BAS
-mwdbii/PBORDER.TXT
-mwdbii/MWDBPOLY.TXT
-mwdbii/contents.txt
-mwdbii/GLOBAL.TXT
 DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/mwdbii)
 
 install (FILES
@@ -331,9 +316,4 @@ placemarks/baseplacemarks.cache
 placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
 DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/placemarks)
-
-install ( FILES
-seacolors.leg
-landcolors.leg
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
 
