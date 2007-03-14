@@ -43,14 +43,14 @@ public:
 	void setMap( const QString& );
 	void resetTilehash();
 	void cleanupTilehash();
-	void prePixelValueApprox(const float&, const float&, QRgb*, const int&);
-	void getPixelValueApprox(const float&, const float&, QRgb*, const int&);
+	void prePixelValueApprox(const float&, const float&, QRgb*);
+	void getPixelValueApprox(const float&, const float&, QRgb*);
 	void setN( const int n );
 
 	void flush();
 	void setTexLevel( const int texlevel );
 protected:
-	void getPixelValue(const float&, const float&, QRgb&);
+	void getPixelValue(const float&, const float&, QRgb*);
 	inline void loadTile();
 
 	TileContainer* tile;

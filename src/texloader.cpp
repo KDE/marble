@@ -138,7 +138,7 @@ void TextureLoader::setN(const int n){
 	m_n = n; m_ninv = 1.0f/(float)(n);
 }
 
-inline void TextureLoader::getPixelValue(const float& radlng, const float& radlat, QRgb& pixelvalue){
+inline void TextureLoader::getPixelValue(const float& radlng, const float& radlat, QRgb* line){
 
 // The origin is in the upper left corner
 // lng: 360 = 43200
@@ -185,13 +185,13 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	}
 
 	if (tile->depth == 8)
-		pixelvalue = tile->jumpTable8[posy][posx];
+		*line = tile->jumpTable8[posy][posx];
 	else
-		pixelvalue = tile->jumpTable32[posy][posx];
+		*line = tile->jumpTable32[posy][posx];
 }
 
 // Interpolate skipped points
-void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line, const int& x){
+void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line){
 	avglat = lat-m_prevlat;
 	avglat *= m_ninv;
 	avglng = lng-m_prevlng;
@@ -202,22 +202,24 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 		avglng *= m_ninv;
 
 		if (m_prevlng < lng){
-			for (int j=1-m_n; j < 0; j++){
+			for (int j=1; j < m_n; j++){
 				m_prevlat += avglat;
 				m_prevlng -= avglng;
 				if (m_prevlng <= -M_PI) m_prevlng += TWOPI;
-				getPixelValue( m_prevlng, m_prevlat, line[x+j]);
+				getPixelValue( m_prevlng, m_prevlat, line);
+				line++;
 			}
 		}
 		// if (m_prevlng > lng)
 		else { 
 			float curAvgLng = lng - m_n*avglng;
-			for (int j=1-m_n; j < 0; j++){
+			for (int j=1; j < m_n; j++){
 				m_prevlat += avglat;
 				curAvgLng += avglng;
 				float evallng = curAvgLng;
 				if (curAvgLng <= -M_PI) evallng += TWOPI;
-				getPixelValue( evallng, m_prevlat, line[x+j]);
+				getPixelValue( evallng, m_prevlat, line);
+				line++;
 			}
 		}
 	}
@@ -225,19 +227,20 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 	else {
 
 		avglng *= m_ninv;
-		for (int j=1-m_n; j < 0; j++) {
+		for (int j=1; j < m_n; j++) {
 			m_prevlat += avglat;
 			m_prevlng += avglng;
-			getPixelValue( m_prevlng, m_prevlat, line[x + j]);
+			getPixelValue( m_prevlng, m_prevlat, line);
+			line++;
 		}
 	}	
 
 }
 
-void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line, const int& x){
+void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line){
 	m_prevlat = radlat;
 	m_prevlng = radlng;
-	getPixelValue(radlng, radlat, line[x]);
+	getPixelValue(radlng, radlat, line);
 }
 
 inline void TextureLoader::flush(){

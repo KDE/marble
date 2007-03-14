@@ -9,6 +9,8 @@
 
 #include <QtCore/QDebug>
 
+#include <cmath>
+
 MeasureTool::MeasureTool(QObject* parent) : QObject(parent) {
 
 	m_totalDistance = 0;
@@ -26,12 +28,11 @@ MeasureTool::MeasureTool(QObject* parent) : QObject(parent) {
 void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry, int radius, Quaternion rotAxis, bool antialiasing ){
 	if ( m_pMeasurePointList.isEmpty() ) return;
 
-	if ( m_pMeasurePointList.size() > 1 ) paintTotalDistanceLabel( painter, imgrx, imgry, 10.0f );
-
 	int imgwidth = 2 * imgrx; int imgheight = 2 * imgry;
 	int x = 0; int y = 0; int lastx = 0; int lasty = 0; 
 
 	Quaternion invRotAxis = rotAxis.inverse();
+
 	Quaternion qpos;
 
 	painter->setPen(QColor(Qt::white));	
@@ -39,6 +40,13 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 	QVector<GeoPoint*>::const_iterator it;
 
 	QPolygonF distancePath;
+//	QPolygonF distancePathShadow;
+
+	m_totalDistance = 0.0f;
+
+	float lng, lat;
+	float prevlng, prevlat;
+	prevlng = 0.0f; prevlat = 0.0f;
 
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
 		qpos = (*it)->getQuatPoint();
@@ -49,12 +57,22 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 			y = (int)(imgry + radius*qpos.v[Q_Y]);	
 
 			distancePath << QPointF(x,y);
+//			distancePathShadow << QPointF(x,y+1);
 		}
+
+		(*it)->geoCoordinates(lng, lat);
+
+		if ( it!= m_pMeasurePointList.constBegin()){
+			m_totalDistance += acos(sin(prevlng)*sin(lng)+cos(prevlng)*cos(lng)*cos(prevlat-lat)) * 6371221.0f;
+		}
+		prevlng = lng; prevlat = lat;
 	}
 
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
 	painter->setPen(QColor(Qt::red));	
 	painter->drawPolyline(distancePath);
+//	painter->setPen(QColor(Qt::white));	
+//	painter->drawPolyline(distancePathShadow);
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, false);
 
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
@@ -72,6 +90,8 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 			}
 		}
 	}
+
+	if ( m_pMeasurePointList.size() > 1 ) paintTotalDistanceLabel( painter, imgrx, imgry, m_totalDistance );
 }
 
 void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter, int imgrx, int imgry, float totalDistance ){
@@ -83,13 +103,14 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter, int imgrx, int
 	else	
 		distanceValueString = QString("%1 m").arg(totalDistance);		
 
-	QString distanceString = QString("Distance: %1").arg(distanceValueString);
+	QString distanceString = QString("Total Distance: %1").arg(distanceValueString);
 
 	painter->setPen(QColor(Qt::black));
 	painter->setBrush(QColor(192,192,192,192));
 
- 	painter->drawRect(5,5, 40, 10);
-	painter->drawText( 10,10, distanceString );
+ 	painter->drawRect(10,5, 10 + QFontMetrics(m_font_regular).boundingRect( distanceString ).width()  + 5, 10 + m_fontascent + 2);
+	painter->setFont(m_font_regular);
+	painter->drawText( 15,10 + m_fontascent, distanceString );
 }
 
 void MeasureTool::paintMark( ClipPainter* painter, int x, int y ){

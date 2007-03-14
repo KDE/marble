@@ -26,7 +26,7 @@ TextureMapper::TextureMapper( const QString& path ){
 	x = 0; y = 0; z = 0;
 	rx = 0;
 
- 	qr = 0.0; qx = 0.0; qy = 0.0; qz = 0.0;
+ 	qr = 0.0f; qx = 0.0f; qy = 0.0f; qz = 0.0f;
 
 	imgheight = 0; imgwidth = 0;
 	imgrx = 0; imgry = 0;
@@ -108,18 +108,20 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 #endif
 		// Evaluate coordinates for the 3D position vector of the current pixel
 		qy = radiusf * (float)(y - imgry);
-		qr = 1.0 - qy*qy;
+		qr = 1.0f - qy*qy;
 
 		// rx is the radius component in x direction
-		rx = (int)sqrt((float)(radius2 - (y - imgry)*(y - imgry)));
+		rx = (int)sqrtf((float)(radius2 - (y - imgry)*(y - imgry)));
 
-		line = (QRgb*)(origimg->scanLine( y ));
-#ifdef INTERLACE
-		linefast = (QRgb*)(origimg->scanLine( y + 1 ));
-#endif		
 		// Calculate the actual x-range of the map within the current scanline
 		const int xleft = (imgrx-rx > 0) ? imgrx - rx : 0; 
 		const int xright = (imgrx-rx > 0) ? xleft + rx + rx : imgwidth;
+
+		line = (QRgb*)(origimg->scanLine( y )) + xleft;
+#ifdef INTERLACE
+		linefast = (QRgb*)(origimg->scanLine( y + 1 )) + xleft;
+#endif		
+
 		int xipleft = 1;
 		int xipright = (int)(imgwidth * ninv) * n; 
 
@@ -161,7 +163,7 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 			qx = (float)(x - imgrx) * radiusf;
 
 			float qr2z = qr - qx*qx;
-			qz = (qr2z > 0.0) ? sqrt(qr2z) : 0.0;	
+			qz = (qr2z > 0.0f) ? sqrtf(qr2z) : 0.0f;	
 
 			// Create Quaternion from vector coordinates and rotate it around globe axis
 			qpos->set(0,qx,qy,qz);
@@ -173,15 +175,17 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 
 			//Approx for n-1 out of n pixels within the boundary of xipleft to xipright
 			if (interpolate) {
-				texldr->getPixelValueApprox(radalpha,radbeta,line,x);
+				texldr->getPixelValueApprox(radalpha,radbeta,line);
 #ifdef INTERLACE
-				for (int j=0; j < n; j++) linefast[x-n+j]=line[x-n+j];	
+				for (int j=0; j < n-1; j++){ linefast[j]=line[j]; }; linefast +=(n-1);
 #endif
+				line +=(n-1);
 			}
-			texldr->prePixelValueApprox(radalpha,radbeta,line,x);
+			texldr->prePixelValueApprox(radalpha,radbeta,line);
 #ifdef INTERLACE
-			linefast[x]=line[x];
+			*linefast=*line; linefast++;
 #endif
+			line++;
 		}
 	}
 	delete qpos;	

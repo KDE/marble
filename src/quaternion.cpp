@@ -19,10 +19,10 @@ Quaternion::Quaternion(float w, float x, float y, float z) {
 Quaternion::Quaternion(float alpha, float beta) {
 	v[Q_W] = 0.0f;
 
-	const float cosBeta = cos(beta);
-	v[Q_X] = -cosBeta * sin(alpha);
-	v[Q_Y] = -sin(beta);
-	v[Q_Z] = cosBeta * cos(alpha);
+	const float cosBeta = cosf(beta);
+	v[Q_X] = -cosBeta * sinf(alpha);
+	v[Q_Y] = -sinf(beta);
+	v[Q_Z] = cosBeta * cosf(alpha);
 }
 
 void Quaternion::set(float w, float x, float y, float z) {
@@ -30,7 +30,7 @@ void Quaternion::set(float w, float x, float y, float z) {
 }
 
 void Quaternion::normalize() {
-	scalar(1.0f / sqrt(quatNorm));
+	scalar(1.0f / sqrtf(quatNorm));
 }
 
 void Quaternion::scalar(float mult) {
@@ -206,10 +206,10 @@ void Quaternion::getSpherical(float &alpha, float &beta) {
 		if(v[Q_Y] < -1.0f) v[Q_Y] = -1.0f;
 	}
 
-	beta = -asin(v[Q_Y]);
+	beta = -asinf(v[Q_Y]);
 
 	if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005f) 
-		alpha = -atan2(v[Q_X], v[Q_Z]);
+		alpha = -atan2f(v[Q_X], v[Q_Z]);
 	else
 		alpha = 0.0f;
 }

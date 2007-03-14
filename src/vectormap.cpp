@@ -46,7 +46,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 
 	// zlimit: describes the lowest z value of the sphere that is visible as an excerpt
 	// on the screen
-	float zlimit = (imgradius < m_radius*m_radius) ? sqrt(1-(float)imgradius/(float)(m_radius*m_radius)):0.0;
+	float zlimit = (imgradius < m_radius*m_radius) ? sqrtf(1-(float)imgradius/(float)(m_radius*m_radius)):0.0;
 
 //	qDebug() << "zlimit: " << zlimit;
 
@@ -261,7 +261,7 @@ const QPoint VectorMap::horizonPoint(){
 	xa = currentPoint.x() - (imgrx +1) ;
 // move the currentPoint along the y-axis to match the horizon
 //	ya = sqrt( (m_radius +1) * ( m_radius +1) - xa*xa);
-	ya = (m_rlimit > xa*xa) ? sqrt((float)(m_rlimit) - (float)(xa*xa)) : 0;
+	ya = (m_rlimit > xa*xa) ? sqrtf((float)(m_rlimit) - (float)(xa*xa)) : 0;
 //	qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
 	if ((currentPoint.y() - (imgry + 1)) < 0) ya = -ya; 
 
@@ -272,8 +272,8 @@ void VectorMap::createArc(){
 
 	m_polygon.append(horizona);
 
-	int beta = (int)(180.0/M_PI* atan2(horizonb.y()-imgry-1,horizonb.x()-imgrx-1));
-	int alpha = (int)(180.0/M_PI* atan2(horizona.y()-imgry-1,horizona.x()-imgrx-1));
+	int beta = (int)(180.0/M_PI* atan2f(horizonb.y()-imgry-1,horizonb.x()-imgrx-1));
+	int alpha = (int)(180.0/M_PI* atan2f(horizona.y()-imgry-1,horizona.x()-imgrx-1));
 
 	int diff = beta - alpha;
 
@@ -289,12 +289,12 @@ void VectorMap::createArc(){
 	
 		int itx, ity;
 //	qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((float)(m_rlimit));
-		float arcradius = sqrt((float)(m_rlimit));
+		float arcradius = sqrtf((float)(m_rlimit));
 
 		for (int it=1; it < abs(diff); it++){
 			float angle = M_PI/180.0 * (float)(alpha + sgndiff * it);
-			itx = (int)(imgrx +  arcradius * cos( angle ) + 1);
-			ity = (int)(imgry +  arcradius * sin( angle ) + 1);
+			itx = (int)(imgrx +  arcradius * cosf( angle ) + 1);
+			ity = (int)(imgry +  arcradius * sinf( angle ) + 1);
 //		qDebug() << " ity: " << ity;
 			m_polygon.append(QPoint(itx,ity));		
 		}

@@ -252,9 +252,9 @@ void KAtlasView::goHome(){
 
 float KAtlasView::getMoveStep(){
 	if ( m_pGlobe->getRadius() < sqrt(width()*width() + height()*height()))
-		return 0.1;
+		return 0.1f;
 	else
-		return atan((float)width()/(float)(2 * m_pGlobe->getRadius())) * 0.2;
+		return atanf((float)width()/(float)(2 * m_pGlobe->getRadius())) * 0.2f;
 }
 
 int KAtlasView::fromLogScale(int zoom){
@@ -264,7 +264,7 @@ int KAtlasView::fromLogScale(int zoom){
 }
 
 int KAtlasView::toLogScale(int zoom){
-	zoom = (int)(200*log((float)zoom));
+	zoom = (int)(200.0f*logf((float)zoom));
 	return zoom;
 }
 

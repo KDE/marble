@@ -71,7 +71,7 @@ void GridMap::createCircles( int lngNum, int latNum ){
 
 	if ( latNum != 0 ){
 
-		createCircle( 0.0f , Latitude );
+		createCircle( 0.0f , Latitude );	// equator
 
 		for ( int i = 1; i < latNum; ++i ){
 			createCircle( + (float)(i) * PI_HALF / (float)(latNum)  , Latitude );
