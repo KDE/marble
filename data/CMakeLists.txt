@@ -300,6 +300,7 @@ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/maps/bluemarble)
 install (FILES
 mwdbii/PDIFFBORDER.PNT
 mwdbii/PUSA48.PNT
+mwdbii/PUSA48.DIFF.PNT
 mwdbii/PGLACIER.PNT
 mwdbii/RIVER.PNT
 mwdbii/PCANPROV.PNT
