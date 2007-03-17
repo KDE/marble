@@ -1,14 +1,16 @@
 #include <QtCore/QDebug>
 #include "clippainter.h"
 
+// #define MARBLE_DEBUG
+
 ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){ 
 	imgwidth = pd -> width(); imgheight = pd -> height();
 	currentxpos = currentypos = 0;
 
-	left = -1.0f; right = imgwidth;
-	top = -1.0f; bottom = imgheight;	
+	left = -1.0f; right = (float)imgwidth;
+	top = -1.0f; bottom = (float)imgheight;	
 
-
+//	m_debugNodeCount = 0;
 	m_clip = clip;
 //	penblue.setColor(QColor( 0, 0, 255, 255));
 //	pengreen.setColor(QColor( 0, 255, 0, 255));
@@ -52,6 +54,7 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
  *	345 <- keynumber "4" represents the onscreen section
  *	678
  */
+//	qDebug() << "ClipPainter enabled." ;
 	m_clipped.clear();
 
 	QVector<QPointF>::const_iterator itPoint;
@@ -91,7 +94,12 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
 		}
 
 // if the current point is onscreen just add it to our final polygon
-		if (currentpos == 4) m_clipped << m_currentPoint;
+		if (currentpos == 4) {
+			m_clipped << m_currentPoint;
+#ifdef MARBLE_DEBUG
+			m_debugNodeCount++;
+#endif
+		}
 
 		m_lastPoint = m_currentPoint;
 	}

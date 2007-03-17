@@ -11,6 +11,8 @@
 #include "clippainter.h"
 #include "pntmap.h"
 
+// #define VECMAP_DEBUG 
+
 const float rad2int = 21600.0 / M_PI;
 
 VectorMap::VectorMap(){
@@ -29,6 +31,8 @@ VectorMap::VectorMap(){
 	m_radius = 0; m_rlimit = 0;
 
 	m_brush = QBrush(QColor( 0, 0, 0));
+
+//	m_debugNodeCount = 0;
 }
 
 VectorMap::~VectorMap(){
@@ -112,6 +116,9 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 //		remain -= step;
 		if ( itPoint->getDetail() >= detail){
 // Calculate polygon nodes
+#ifdef VECMAP_DEBUG
+			m_debugNodeCount++;
+#endif
 			qpos = itPoint->getQuatPoint();
 			qpos.rotateAroundAxis(m_rotMatrix);
 			currentPoint = QPoint((int)(imgrx+ m_radius*qpos.v[Q_X])+1,(int)(imgry+ m_radius*qpos.v[Q_Y])+1);

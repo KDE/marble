@@ -14,6 +14,10 @@ public:
 	~ClipPainter(){};
 	void drawPolygon ( const QPolygonF &, Qt::FillRule fillRule = Qt::OddEvenFill );
 	void drawPolyline ( const QPolygonF & );
+
+//	void clearNodeCount(){ m_debugNodeCount = 0; }
+//	int nodeCount(){ return m_debugNodeCount; }
+
 private:
 	void drawPolyobject ( const QPolygonF & );
 
@@ -22,6 +26,8 @@ private:
 	int imgwidth, imgheight;
 	int currentpos, currentxpos, currentypos;
 	int lastpos;
+
+//	int m_debugNodeCount;
 
 	void manageOffScreen();
 	const QPointF borderPoint();

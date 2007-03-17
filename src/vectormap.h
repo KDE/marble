@@ -29,6 +29,10 @@ public:
 	void setBrush ( const QBrush & b ){m_brush = b;}
 	void setzBoundingBoxLimit ( const float zBoundingBoxLimit ) { m_zBoundingBoxLimit = zBoundingBoxLimit; }
 	void setzPointLimit ( const float zPointLimit ) { m_zPointLimit = zPointLimit; }
+
+//	void clearNodeCount(){ m_debugNodeCount = 0; }
+//	int nodeCount(){ return m_debugNodeCount; }
+
 private:
 	GeoPoint::Vector boundary;
 	void createPolyLine(GeoPoint::Vector::ConstIterator, GeoPoint::Vector::ConstIterator, const int);
@@ -37,6 +41,8 @@ private:
 	float m_zPointLimit;	
 //	Quaternion m_invRotAxis;
 	matrix m_rotMatrix;
+
+//	int m_debugNodeCount;
 
 	GeoPolygon m_polygon;
 	inline void initCrossHorizon();

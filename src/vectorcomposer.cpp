@@ -45,6 +45,7 @@ VectorComposer::VectorComposer(){
 // void VectorComposer::drawMap(QImage* origimg, const int& radius, Quaternion& rotAxis){
 void VectorComposer::drawTextureMap(QPaintDevice * origimg, const int& radius, Quaternion& rotAxis){
 
+//	vectormap -> clearNodeCount();
 
 // Coastlines
 	vectormap -> setzBoundingBoxLimit(0.4); 
@@ -71,11 +72,13 @@ void VectorComposer::drawTextureMap(QPaintDevice * origimg, const int& radius, Q
 	vectormap -> createFromPntMap(pglacier,radius,rotAxis);
 	vectormap -> setBrush(m_lakebrush);
 	vectormap -> drawMap(origimg, false);
-
+//	qDebug() << "TextureMap calculated nodes: " << vectormap->nodeCount();
 }
 
 
 void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Quaternion& rotAxis){
+
+//	vectormap -> clearNodeCount();
 
 // Rivers
 	vectormap -> setzBoundingBoxLimit(-1.0); 
@@ -132,7 +135,7 @@ void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Qua
 	vectormap -> setBrush(QColor(Qt::white));
 	vectormap -> drawMap(origimg);
 */
-
+//	qDebug() << "VectorMap calculated nodes: " << vectormap->nodeCount();
 }
 
 

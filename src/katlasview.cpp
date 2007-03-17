@@ -215,7 +215,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 //		QPainter painter(this);
 //		painter.setClipRect(10, 10, m_pCanvasImage->width() - 1 , m_pCanvasImage->height()-1 );
 //		painter.setClipping( true );
-
+//		painter.clearNodeCount();
 		QRect dirty = evt->rect();
 		m_pGlobe->paintGlobe(&painter,dirty);
 	
@@ -228,7 +228,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 		m_crosshair.paintCrossHair( &painter, m_pCanvasImage->width(), m_pCanvasImage->height() );
 
 		m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width()/2, m_pCanvasImage->height()/2, radius, m_pGlobe->getPlanetAxis(), true );
-
+//		qDebug() << "Nodes: " << painter.nodeCount();
 //	}
 /*
 	else

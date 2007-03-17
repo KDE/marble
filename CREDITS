@@ -9,6 +9,8 @@ Credits for various inspiration go to:
 	Frerich Raabe -- lots of FreeBSD fixes and optimizations
 	Joseph Wenninger -- adding initial cmake support
 	Fredrik Höglund -- testing and bugfixes
+	Carlos Licea -- for improvements on the scale bar code
+
 	Torsten Rahn -- for being myself and for being the original author and maintainer
 
 And special thanks to Rainer Endres for working on worldwide.kde.org and testing.

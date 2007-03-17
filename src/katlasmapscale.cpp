@@ -66,18 +66,25 @@ void KAtlasMapScale::paintScaleBar(QPainter* painter, int radius, int width){
 	painter->setBrush(QColor(Qt::black));
 
 	QString intervalstr;
-
+	int lastStringEnds=0;
+	int currentStringBegin=0;
+ 
 	for (int j = 0; j <= m_bestdivisor; j += 2){
 		if (j < m_bestdivisor)
 			painter->drawRect(m_leftmargin+j*m_pixelinterval,m_fontheight+3,m_pixelinterval-1,m_scalebarheight);
 
 		intervalstr.setNum(j*m_valueinterval);
 
-		if (j == 0) 
+		if (j == 0) {
 			painter->drawText(0, m_fontheight, "0 " + m_unit);
-		else
-			painter->drawText(m_leftmargin + j*m_pixelinterval-QFontMetrics(m_font).width(intervalstr)/2,m_fontheight,intervalstr);
-
+			lastStringEnds=QFontMetrics(m_font).width("0 " + m_unit);
+			continue;
+		}
+		currentStringBegin=m_leftmargin + j*m_pixelinterval-QFontMetrics(m_font).width(intervalstr)/2;
+		if(lastStringEnds < currentStringBegin) {
+			painter->drawText(currentStringBegin,m_fontheight,intervalstr);
+			lastStringEnds=currentStringBegin+QFontMetrics(m_font).width(intervalstr);
+		}
 	}
 }
 
