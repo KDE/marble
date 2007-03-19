@@ -1,4 +1,0 @@
-#!/bin/sh
-cd src
-grep .moc *.cpp | grep -v "moc_" | perl -p -i -e 's/.*include "//' | perl -p -i -e 's/"//' | xargs rm
-cd ..

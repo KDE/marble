@@ -63,7 +63,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 		(*it)->geoCoordinates(lng, lat);
 
 		if ( it!= m_pMeasurePointList.constBegin()){
-			m_totalDistance += acos(sin(prevlng)*sin(lng)+cos(prevlng)*cos(lng)*cos(prevlat-lat)) * 6371221.0f;
+			m_totalDistance += acos(sin(prevlat)*sin(lat)+cos(prevlat)*cos(lat)*cos(prevlng-lng)) * 6371221.0f;
 		}
 		prevlng = lng; prevlat = lat;
 	}
