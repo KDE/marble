@@ -55,6 +55,7 @@ public:
 	void display() const;
 
 	virtual void rotateAroundAxis(const Quaternion &q);
+	void slerp(const Quaternion q1, const Quaternion q2, float t);
 
 	void getSpherical(float &alpha, float &beta);
 

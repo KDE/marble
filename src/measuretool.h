@@ -44,7 +44,9 @@ protected:
 
 	QColor m_linecolor;
 
-	QVector < GeoPoint* > m_pMeasurePointList;
+	QVector<GeoPoint*> m_pMeasurePointList;
+
+	QPen m_pen;
 
 	QPixmap m_empty;
 
@@ -52,6 +54,7 @@ protected:
 	bool m_useworkaround;
 
 	void paintMark( ClipPainter* painter, int x, int y );
+	void createDistancePath( ClipPainter* painter, Quaternion, Quaternion, int imgrx, int imgry, int radius, bool antialiasing );
 };
 
 #endif // MEASURETOOL_H

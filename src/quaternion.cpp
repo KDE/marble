@@ -119,6 +119,31 @@ void Quaternion::rotateAroundAxis(const Quaternion &q) {
 
 }
 
+void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
+{
+	float p1, p2;
+
+	float cosAlpha = q1.v[Q_X]*q2.v[Q_X] + q1.v[Q_Y]*q2.v[Q_Y] + q1.v[Q_Z]*q2.v[Q_Z] + q1.v[Q_W]*q2.v[Q_W];
+	float alpha    = acosf(cosAlpha);
+	float sinAlpha = sinf(alpha);
+
+	if( sinAlpha > 0.0f )
+	{
+		p1 = sinf( (1.0f-t)*alpha ) / sinAlpha;
+		p2 = sinf( t*alpha ) / sinAlpha;
+	} else  {
+		// both Quaternions are equal
+		p1 = 1.0f;
+		p2 = 0.0f;
+	}
+
+	v[Q_X] = p1*q1.v[Q_X] + p2*q2.v[Q_X];
+	v[Q_Y] = p1*q1.v[Q_Y] + p2*q2.v[Q_Y];
+	v[Q_Z] = p1*q1.v[Q_Z] + p2*q2.v[Q_Z];
+	v[Q_W] = p1*q1.v[Q_W] + p2*q2.v[Q_W];
+}
+
+
 void QuaternionSSE::rotateAroundAxis(const Quaternion &q) {
 
 	Quaternion::rotateAroundAxis(q);

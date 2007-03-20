@@ -23,6 +23,10 @@ MeasureTool::MeasureTool(QObject* parent) : QObject(parent) {
 	m_linecolor = QColor( 255, 255, 255, 255 );
 
 	m_useworkaround = testbug();
+
+	m_pen.setColor( QColor(Qt::red) );
+	m_pen.setWidthF( 2.0f );
+
 }
 
 void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry, int radius, Quaternion rotAxis, bool antialiasing ){
@@ -34,12 +38,16 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 	Quaternion invRotAxis = rotAxis.inverse();
 
 	Quaternion qpos;
+	Quaternion prevqpos;
 
-	painter->setPen(QColor(Qt::white));	
+	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
+	painter->setPen( m_pen );	
+//	painter->setPen(QColor(Qt::white));	
+//	painter->drawPolyline(distancePathShadow);
 
 	QVector<GeoPoint*>::const_iterator it;
 
-	QPolygonF distancePath;
+	QPolygonF measurePoints;
 //	QPolygonF distancePathShadow;
 
 	m_totalDistance = 0.0f;
@@ -47,6 +55,8 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 	float lng, lat;
 	float prevlng, prevlat;
 	prevlng = 0.0f; prevlat = 0.0f;
+
+	QVector<QPolygonF> distancePaths;
 
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
 		qpos = (*it)->getQuatPoint();
@@ -56,7 +66,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 			x = (int)(imgrx + radius*qpos.v[Q_X]);
 			y = (int)(imgry + radius*qpos.v[Q_Y]);	
 
-			distancePath << QPointF(x,y);
+			measurePoints << QPointF(x,y);
 //			distancePathShadow << QPointF(x,y+1);
 		}
 
@@ -64,17 +74,23 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 
 		if ( it!= m_pMeasurePointList.constBegin()){
 			m_totalDistance += acos(sin(prevlat)*sin(lat)+cos(prevlat)*cos(lat)*cos(prevlng-lng)) * 6371221.0f;
+
+			createDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
 		}
+
+		prevqpos = qpos;
 		prevlng = lng; prevlat = lat;
 	}
 
+	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, false);
+/*
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
 	painter->setPen(QColor(Qt::red));	
-	painter->drawPolyline(distancePath);
+	painter->drawPolyline(measurePoints);
 //	painter->setPen(QColor(Qt::white));	
 //	painter->drawPolyline(distancePathShadow);
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, false);
-
+*/
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
 		qpos = (*it)->getQuatPoint();
 		qpos.rotateAroundAxis(invRotAxis);
@@ -119,6 +135,32 @@ void MeasureTool::paintMark( ClipPainter* painter, int x, int y ){
 	painter->setPen(QColor(Qt::white));
 	painter->drawLine( x - halfsize, y, x + halfsize , y );
 	painter->drawLine( x, y - halfsize, x, y + halfsize );
+}
+
+void MeasureTool::createDistancePath( ClipPainter* painter, Quaternion prevqpos, Quaternion qpos, int imgrx, int imgry, int radius, bool antialiasing ){
+	
+	float t = 0.0f;
+	Quaternion itpos;
+
+	float x, y;
+	QPolygonF distancePath;
+
+	for ( int i = 0; i < 21; ++i){
+		t = (float)(i)/20.0f;
+
+		itpos.slerp( prevqpos, qpos, t );
+
+		if ( itpos.v[Q_Z] > 0 ){
+
+			x = (float)(imgrx) + (float)(radius)*itpos.v[Q_X];
+			y = (float)(imgry) + (float)(radius)*itpos.v[Q_Y];
+
+//			paintMark( painter, x, y );
+			distancePath << QPointF( x, y );
+		}
+	}
+
+	painter->drawPolyline(distancePath);
 }
 
 bool MeasureTool::testbug(){
