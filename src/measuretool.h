@@ -54,7 +54,7 @@ protected:
 	bool m_useworkaround;
 
 	void paintMark( ClipPainter* painter, int x, int y );
-	void createDistancePath( ClipPainter* painter, Quaternion, Quaternion, int imgrx, int imgry, int radius, bool antialiasing );
+	void drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, int imgrx, int imgry, int radius, bool antialiasing );
 };
 
 #endif // MEASURETOOL_H

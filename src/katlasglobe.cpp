@@ -23,7 +23,6 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	m_placecontainer = 0;
 	m_radius = 2000;
 
-	m_centered = false;
 	m_justModified = false;
 
 	m_pPlanetAxis = Quaternion(1.0, 0.0, 0.0, 0.0);
@@ -204,14 +203,12 @@ void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi){
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta){
 	m_pPlanetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0, (theta + 180.0) * M_PI / 180.0, 0.0);
-	m_centered = false;
 }
 
 
 
 void KAtlasGlobe::rotateBy(const Quaternion& incRot){
 	m_pPlanetAxis = incRot * m_pPlanetAxis;
-	m_centered = false;
 }
 
 void KAtlasGlobe::rotateBy(const float& phi, const float& theta){
@@ -220,8 +217,6 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta){
 	m_pPlanetAxis = rotTheta * m_pPlanetAxis;
 	m_pPlanetAxis *= rotPhi;
 	m_pPlanetAxis.normalize();
-
-	m_centered = false;
 }
 
 int KAtlasGlobe::northPoleY(){

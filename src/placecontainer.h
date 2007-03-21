@@ -30,7 +30,11 @@ public:
 
 	inline void deleteAll() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) delete mark; } }
 
-	inline void clearSelected() { foreach ( PlaceMark* mark, *this ){ if ( mark != 0 ) mark->setSelected( 0 ); } }
+	inline void clearSelected() {
+		foreach ( PlaceMark* mark, *this ){
+			if ( mark != 0 ) mark->setSelected( 0 ); 
+		} 
+	}
 
 	inline void sort() { qStableSort( begin(), end(), popLessThan ); }
 protected:	

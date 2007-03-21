@@ -126,6 +126,7 @@ void KAtlasView::centerOn(const QModelIndex& index){
 	else 
 		m_crosshair.setEnabled( false );
 
+	m_pGlobe->placeContainer()->clearTextPixmaps();
 	m_pGlobe->placeContainer()->sort();
 
 	repaint();

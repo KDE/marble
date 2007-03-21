@@ -28,11 +28,10 @@ struct TileContainer{
 	QImage* rawtile;
 
 	bool used;
-	int width;
-	int height;
+	int depth;
+
 	uchar **jumpTable8;
 	uint **jumpTable32;
-	int depth;
 };
 
 class TextureLoader {
@@ -41,14 +40,16 @@ public:
 	virtual ~TextureLoader(){}
 
 	void setMap( const QString& );
+	void setTexLevel( const int texlevel );
+
 	void resetTilehash();
 	void cleanupTilehash();
+	void flush();
+
+	void setN( const int n );
 	void prePixelValueApprox(const float&, const float&, QRgb*);
 	void getPixelValueApprox(const float&, const float&, QRgb*);
-	void setN( const int n );
 
-	void flush();
-	void setTexLevel( const int texlevel );
 protected:
 	void getPixelValue(const float&, const float&, QRgb*);
 	inline void loadTile();

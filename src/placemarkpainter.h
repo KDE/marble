@@ -57,6 +57,8 @@ protected:
 	QPixmap m_empty;
 	float m_widthscale;
 
+	inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, float outlineWidth);
+
 	bool testbug(); 
 	bool m_useworkaround;
 };

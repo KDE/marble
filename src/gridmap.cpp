@@ -64,7 +64,7 @@ void GridMap::createGrid(const int& radius, Quaternion& rotAxis){
 	createCircles( 2, 1 );	
 }
 
-void GridMap::createCircles( int lngNum, int latNum ){
+void GridMap::createCircles( const int lngNum, const int latNum ){
 
 //	latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
 //	lngNum: number of longitude circles between lng = 0 deg and lng < 90 deg

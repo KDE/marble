@@ -59,9 +59,6 @@ TileContainer::TileContainer(const QString& filename){
 		qDebug() << QString("Color depth %1 of a tile could not be retrieved. Exiting.").arg(depth);
 		exit(-1);
 	}
-
-	width=rawtile->width();
-	height=rawtile->height();
 }
 
 TileContainer::~TileContainer(){
@@ -77,7 +74,6 @@ TileContainer::~TileContainer(){
 		exit(-1);
 	}
 	delete rawtile;
-//	qDebug("Delete Tile");
 }
 
 TextureLoader::TextureLoader( const QString& fileprefix ){
@@ -87,6 +83,7 @@ TextureLoader::TextureLoader( const QString& fileprefix ){
 }
 
 void TextureLoader::setMap( const QString& fileprefix ){
+//	Initialize map theme.
 	m_fileprefix = fileprefix;
 
 	m_texlevel = 1;
@@ -99,12 +96,13 @@ void TextureLoader::setMap( const QString& fileprefix ){
 	tily=65535;
 
 	tile = new TileContainer( KAtlasDirs::path( QString("%1%2_0x0.jpg").arg(m_fileprefix).arg(m_texlevel) ) );
-	tilw = tile->width;
-	tilh = tile->height;
+
+//	We assume that all tiles have the same size. TODO: check to be safe
+	tilw = tile->rawtile->width();
+	tilh = tile->rawtile->height();
 	delete tile;
 
 	setTexLevel(1);
-
 }
 
 void TextureLoader::resetTilehash(){
@@ -122,6 +120,8 @@ void TextureLoader::resetTilehash(){
 }
 
 void TextureLoader::cleanupTilehash(){
+//	Make sure that tiles which haven't been used during the last
+//	rendering of the map at all get removed from the tile hash.
 
 	QHashIterator<int, TileContainer*> it(tilehash);
 	while (it.hasNext()) {
@@ -135,16 +135,17 @@ void TextureLoader::cleanupTilehash(){
 }
 
 void TextureLoader::setN(const int n){
+//	Define the number of points to be skipped for interpolation 
 	m_n = n; m_ninv = 1.0f/(float)(n);
 }
 
 inline void TextureLoader::getPixelValue(const float& radlng, const float& radlat, QRgb* line){
 
-// The origin is in the upper left corner
-// lng: 360 = 43200
-// lat: 180 = 21600
+//	The origin (0, 0) is in the upper left corner
+//	lng: 360 deg = 43200 pixel
+//	lat: 180 deg = 21600 pixel
 
-// Convert rad to pixel...
+//	Convert rad to pixel...
 	int lng = (int)(maxhalfalpha + radlng * rad2pixw);
 	int lat = (int)(maxquatbeta + radlat * rad2pixh);
 
@@ -153,11 +154,7 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 	// necessary to prevent crash 
 	if ( lat >= maxhalfbeta ) lat = maxhalfbeta-1; 
 
-//	if ( lng >= maxfullalpha ) lng = (int)(radlng * rad2pixw); // necessary to prevent crash if radalpha = -pi
-//	if ( lat >= maxhalfbeta ) lat = (int)(radlat * rad2pixh - maxquatbeta); // necessary to prevent crash
-
-//	Calculate the position on the respective Tile
-
+//	Calculate the pixel position on the respective Tile
 	bool newtile = false;
 
 	posx = lng - tilxw; // the position on the tile measured from the left tile border 
@@ -170,7 +167,7 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 		posx = lng - tilxw;
 	}
 
-// Scanline optimization for posy
+//	Scanline optimization for posy
 	if (lat != m_oldlat){
 		posy = lat - tilyh;
 
@@ -190,8 +187,10 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 		*line = tile->jumpTable32[posy][posx];
 }
 
-// Interpolate skipped points
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line){
+//	This method executes the interpolation for skipped pixels in a scanline.
+//	We rather might move this into TextureMapper.
+
 	avglat = lat-m_prevlat;
 	avglat *= m_ninv;
 	avglng = lng-m_prevlng;
@@ -238,13 +237,16 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 }
 
 void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line){
+//	This method prepares the interpolation for skipped pixels in a scanline.
+//	We rather might move this into TextureMapper.
+
 	m_prevlat = radlat;
 	m_prevlng = radlng;
 	getPixelValue(radlng, radlat, line);
 }
 
 inline void TextureLoader::flush(){
-// Remove all tiles from tilehash
+//	Remove all tiles from tilehash
 	QHash <int, TileContainer*>::const_iterator it;
 	for( it = tilehash.begin(); it != tilehash.constEnd(); it++ ) 
 		delete (*it);
@@ -253,14 +255,14 @@ inline void TextureLoader::flush(){
 
 
 inline void TextureLoader::loadTile(){
-// Choosing the correct tile via Lng/Lat into 
+//	Choosing the correct tile via Lng/Lat info 
 	tilxw = tilx * tilw;
 	tilyh = tily * tilh;
 
 	tilekey =  (tilx << 8) + tily;
 //	tilekey =  (tilx *100) + tily;
 
-	// If tile hasn't been loaded into the tilehash yet, then do so
+	// If the tile hasn't been loaded into the tilehash yet, then do so
 	if (!tilehash.contains( tilekey )){	
 		m_filename = KAtlasDirs::path( QString("%1%2_%3x%4.jpg").arg(m_fileprefix).arg(m_texlevel).arg(tilx).arg(tily) );
 		tile = new TileContainer(m_filename);

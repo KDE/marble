@@ -75,7 +75,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 		if ( it!= m_pMeasurePointList.constBegin()){
 			m_totalDistance += acos(sin(prevlat)*sin(lat)+cos(prevlat)*cos(lat)*cos(prevlng-lng)) * 6371221.0f;
 
-			createDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+			drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
 		}
 
 		prevqpos = qpos;
@@ -137,7 +137,7 @@ void MeasureTool::paintMark( ClipPainter* painter, int x, int y ){
 	painter->drawLine( x, y - halfsize, x, y + halfsize );
 }
 
-void MeasureTool::createDistancePath( ClipPainter* painter, Quaternion prevqpos, Quaternion qpos, int imgrx, int imgry, int radius, bool antialiasing ){
+void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos, Quaternion qpos, int imgrx, int imgry, int radius, bool antialiasing ){
 	
 	float t = 0.0f;
 	Quaternion itpos;

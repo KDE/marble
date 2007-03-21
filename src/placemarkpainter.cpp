@@ -78,22 +78,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 	QPainter textpainter;
 
 	QFont font;
+
+	const float outlineWidth = 2.5f;
 	int fontwidth = 0;
 
 	QPixmap textpixmap;
 
 	QVector < QVector < PlaceMark* > > m_rowsection;
 	for ( int i = 0; i < secnumber; i++) m_rowsection.append( QVector<PlaceMark*>( ) );
-
-//	QPen outlinepen( QColor( 255,255,255,160 ) );
-//	outlinepen.setWidth( 1 );
-//	QBrush outlinebrush( QColor( 255,255,255,160 ) );
-
-//	QPainterPathStroker stroker;
-//	stroker.setWidth( 1 );
-
-//	QBrush shapebrush( QColor( 0,0,0,255) );
-//	const QPointF baseline( 0.0f , (float)(m_fontascent) );
 
 	m_visibleplacemarks.clear();
 
@@ -142,7 +134,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 						font = m_font_regular;
 					}
 
-					if ( mark->symbol() > 13 ) font.setWeight( 75 );
+					if ( mark->symbol() > 13 || mark->selected() != 0 ) font.setWeight( 75 );
 
 					if ( role == 'P' ) 
 						font = m_font_regular;
@@ -153,7 +145,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 					if ( role == 'V' ) 
 						font = m_font_mountain;
 
-					fontwidth = QFontMetrics(font).width(mark->name());
+					fontwidth = QFontMetrics(font).width(mark->name()) + (int)(outlineWidth);
 				}
 				else{
 					fontwidth = ( mark->textRect() ).width();
@@ -201,24 +193,21 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 						// Due to some XOrg bug this requires a
 						// workaround via QImage in some cases
-/*
-						QPainterPath shapepath;
-						shapepath.addText( baseline, m_font, mark->name() );
-						QPainterPath outlinepath = stroker.createStroke(shapepath);
-*/
+
 						if ( !m_useworkaround ) {
 							textpixmap = QPixmap( fontwidth, m_fontheight );
 							textpixmap.fill(Qt::transparent);
 
 							textpainter.begin( &textpixmap );
 
-							textpainter.setFont(font);
-							textpainter.setPen(m_labelcolor);	
-							textpainter.drawText( 0, m_fontascent, mark->name() );
-
-//							textpainter.setRenderHint(QPainter::Antialiasing, true);
-//							textpainter.fillPath( outlinepath, outlinebrush );
-//							textpainter.fillPath( shapepath, shapebrush );
+							if ( mark->selected() == 0 ) {
+								textpainter.setFont(font);
+								textpainter.setPen(m_labelcolor);	
+								textpainter.drawText( 0, m_fontascent, mark->name() );
+							}
+							else {
+								drawLabelText(textpainter, mark, font, outlineWidth);
+							}
 
 							textpainter.end();
 						}
@@ -228,9 +217,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 							textpainter.begin( &textimage );
 
-							textpainter.setFont(font);
-							textpainter.setPen(m_labelcolor);	
-							textpainter.drawText( 0, m_fontascent, mark->name() );
+							if ( mark->selected() == 0 ) {
+								textpainter.setFont(font);
+								textpainter.setPen(m_labelcolor);	
+								textpainter.drawText( 0, m_fontascent, mark->name() );
+							}
+							else {
+								drawLabelText(textpainter, mark, font, outlineWidth);
+							}
 
 							textpainter.end();
 							
@@ -273,6 +267,24 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 		painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
 		painter->drawPixmap( mark -> symbolPos(), mark -> symbolPixmap()  );
 	}
+}
+inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, PlaceMark* mark, QFont font, float outlineWidth){
+
+	QPen outlinepen( Qt::white );
+	outlinepen.setWidthF( outlineWidth );
+	QBrush outlinebrush( Qt::black );
+
+	QPainterPath outlinepath;
+	const QPointF baseline( outlineWidth/2.0f , m_fontascent );
+	outlinepath.addText( baseline, font, mark->name() );
+	textpainter.setRenderHint(QPainter::Antialiasing, true );
+	textpainter.setPen(outlinepen);
+	textpainter.setBrush(outlinebrush);
+	textpainter.drawPath( outlinepath );
+	textpainter.setPen( Qt::NoPen );
+	textpainter.drawPath( outlinepath );
+	textpainter.setRenderHint(QPainter::Antialiasing, false );
+
 }
 
 bool PlaceMarkPainter::testbug(){
