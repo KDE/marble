@@ -128,7 +128,7 @@ void PntMap::load(const QString &filename){
 		}
 		++count;
 	}
-	munmap(0,filelength);
+	munmap(src,filelength);
 	close(fd);
 //	qDebug(QString("Opened %1 with %2 Polylines and %3 Points").arg(filename).arg(this->count()).arg(count).toLatin1());
 // MMAP End
