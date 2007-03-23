@@ -19,7 +19,7 @@
  
 ;    3. This notice may not be removed or altered from any source distribution.
  
-!define setup "globepedia-setup.exe"
+!define setup "marble-setup.exe"
  
 ; change this to wherever the files to be packaged reside
 !define srcdir "."
