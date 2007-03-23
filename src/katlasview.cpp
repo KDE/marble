@@ -153,6 +153,7 @@ void KAtlasView::resizeEvent (QResizeEvent*){
 	setActiveRegion();
 	if ( m_pCanvasImage != 0 ) delete m_pCanvasImage;
 	m_pCanvasImage = new QImage(width(),height(),QImage::Format_ARGB32_Premultiplied);
+	m_pGlobe->setCanvasImage( m_pCanvasImage );
 	m_pGlobe->resize();
 
 	repaint();
