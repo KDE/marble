@@ -20,19 +20,9 @@ enum
 	Q_W = 3,
 };
 
-typedef int xmmint[4] __attribute__ ((aligned (16)));
-typedef float xmmfloat[4] __attribute__ ((aligned (16)));
+typedef float xmmfloat[4];
 
 typedef xmmfloat matrix[3];
-
-static const xmmfloat fsgn_pmpp = { 1.0f, -1.0f, 1.0f, 1.0f };
-static const xmmfloat fsgn_ppmp = { 1.0f, 1.0f, -1.0f, 1.0f };
-static const xmmfloat fsgn_pppm = { 1.0f, 1.0f, 1.0f, -1.0f };
-
-static const xmmint sgn_pmpp = { 0, 1 << 31, 0, 0 };
-static const xmmint sgn_ppmp = { 0, 0, 1 << 31, 0 };
-static const xmmint sgn_pppm = { 0, 0, 0, 1 << 31 };
-
 
 class Quaternion {
 public:

@@ -1,9 +1,9 @@
 
 if (QTONLY)
-  add_definitions (${QT_DEFINITIONS} -O2 -msse)
+  add_definitions (${QT_DEFINITIONS} -O2)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
 else (QTONLY)
-  add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2 -msse)
+  add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
 endif (QTONLY)
 
