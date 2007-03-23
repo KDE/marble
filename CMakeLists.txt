@@ -1,6 +1,6 @@
 project(marble)
 
-option(QTONLY  "Build Qt only")
+option(QTONLY  "Build Qt only" ON)
 
 find_package(Qt4 REQUIRED)
 
