@@ -1,3 +1,10 @@
+marble (0.3-1) experimental; urgency=low
+
+  * New version number. This version includes the following changes:
+    a measure tool, a coordinate grid and very basic wikipedia integration
+
+ -- Torsten Rahn <rahn@kde.org>  Fri, 23 Mar 2007 09:50:00 +0100
+
 marble (0.2-3) experimental; urgency=low
 
   * Cleanup (Sorted out which files shouldn't get installed) & new version
