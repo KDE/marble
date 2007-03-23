@@ -8,7 +8,7 @@ CMAKE = cmake -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/marble-data -DQTONLY=ON .
 
 MAKE = make
 
-DATA_FILES = data/bitmaps data/flags data/maps data/mwdbii data/placemarks data/svg data/vectorsource
+DATA_FILES = data/bitmaps data/flags data/maps data/mwdbii data/placemarks data/svg
 
 common-configure-arch::
 	$(CMAKE)
@@ -26,6 +26,10 @@ clean::
 common-install-prehook-indep::
 	for i in $(DATA_FILES) ; do cp -r $$i $(CURDIR)/debian/marble-data/usr/share/marble/data ; done
 	rm -f $(CURDIR)/debian/marble-data/usr/share/marble/data/flags/downloadflags.py
+	rm -f $(CURDIR)/debian/marble-data/usr/share/marble/data/flags/svgcleaner.sh
+	rm -f $(CURDIR)/debian/marble-data/usr/share/marble/data/mwdbii/PISLAND.PNT.orig
+	rm -f $(CURDIR)/debian/marble-data/usr/share/marble/data/mwdbii/PLAKE.PNT.orig
+	rm -f $(CURDIR)/debian/marble-data/usr/share/marble/data/mwdbii/GOODEIHS.BAS
 
 common-install-prehook-arch::
 	install -m 755 $(CURDIR)/src/marble $(CURDIR)/debian/marble/usr/bin/marble
