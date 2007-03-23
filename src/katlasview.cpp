@@ -15,6 +15,10 @@
 
 #include "measuretool.h"
 
+#ifdef Q_CC_MSVC
+  static double sqrt(int a) { return sqrt((double)a); }
+#endif
+
 KAtlasView::KAtlasView(QWidget *parent)
     : QWidget(parent)
 {
