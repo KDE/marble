@@ -1,3 +1,30 @@
+marble (0.2+svn641206-2) experimental; urgency=low
+
+  * Include without_msse.patch to make sure that the new build system
+    does not use -msse as a compiler option (Closes: #403223)
+
+ -- Steffen Joeris <white@debian.org>  Mon, 19 Mar 2007 22:39:04 +1100
+
+marble (0.2+svn641206-1) experimental; urgency=low
+
+  * New upstream release
+  * Remove debian patches as they are now included by upstream
+  * Use cmake for the build system
+   - Add cmake as build-depends
+   - Adjust debian/rules
+   - Manually install the data files into the marble-data package
+  * Change my maintainer address
+
+ -- Steffen Joeris <white@debian.org>  Sun, 18 Mar 2007 19:02:51 +1100
+
+marble (0.2-2) experimental; urgency=low
+
+  * Remove -msse compiler option for optimized building on i386
+    architecture with Pentium III and higher to make sure the package
+    does not FTBFS on other architectures (Closes: #403223)
+
+ -- Steffen Joeris <steffen.joeris@skolelinux.de>  Thu, 21 Dec 2006 22:25:41 +0100
+
 marble (0.2-1) experimental; urgency=low
 
   * Initial release (Closes: #400616)

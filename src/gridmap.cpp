@@ -138,6 +138,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 				m_polygon << horizonPoint();
 				append(m_polygon);
 				m_polygon.clear();
+				if ( lastvisible == true ) break;
 			}
 
 //	Take care of screencrossing crossings if horizon is visible

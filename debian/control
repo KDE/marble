@@ -1,8 +1,8 @@
 Source: marble
-Section: kde
+Section: misc
 Priority: optional
-Maintainer: Steffen Joeris <steffen.joeris@skolelinux.de>
-Build-Depends: debhelper (>= 5), cdbs, libqt4-dev
+Maintainer: Steffen Joeris <white@debian.org>
+Build-Depends: debhelper (>= 5), cdbs, libqt4-dev, cmake
 Standards-Version: 3.7.2
 
 Package: marble
@@ -11,7 +11,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, marble-data
 Description: generic geographical map widget
  Marble is meant to be a generic geographical map widget. It shows the 
  earth as a sphere but doesn't make use of any hardware acceleration 
- (NO OpenGL). So although it might look similar to professional 
+ (No OpenGL). So although it might look similar to professional 
  applications like Google Earth or Nasa World Wind it's rather meant to
  be a small light weight multi purpose widget for KDE.
 
