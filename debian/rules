@@ -29,5 +29,5 @@ common-install-prehook-indep::
 
 common-install-prehook-arch::
 	install -m 755 $(CURDIR)/src/marble $(CURDIR)/debian/marble/usr/bin/marble
-	install -m 644 $(CURDIR)/debian/marble.desktop $(CURDIR)/debian/marble/usr/share/applications/kde/marble.desktop
+	install -m 644 $(CURDIR)/src/marble.desktop $(CURDIR)/debian/marble/usr/share/applications/kde/marble.desktop
 	install -m 644 $(CURDIR)/debian/globe.xpm $(CURDIR)/debian/marble/usr/share/pixmaps/globe.xpm
