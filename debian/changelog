@@ -1,3 +1,9 @@
+marble (0.2-3) experimental; urgency=low
+
+  * Cleanup (Sorted out which files shouldn't get installed) & new version
+
+ -- Torsten Rahn <rahn@kde.org>  Fri, 23 Mar 2007 09:50:00 +0100
+
 marble (0.2+svn641206-2) experimental; urgency=low
 
   * Include without_msse.patch to make sure that the new build system
