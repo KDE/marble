@@ -264,7 +264,7 @@ float KAtlasView::getMoveStep(){
 }
 
 int KAtlasView::fromLogScale(int zoom){
-	zoom = (int) pow(M_E, ((float)zoom/200));
+	zoom = (int) pow(M_E, ((float)zoom/200.));
 //	zoom = (int) pow(2, ((float)zoom/200));
 	return zoom;
 }
