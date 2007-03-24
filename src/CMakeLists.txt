@@ -59,6 +59,46 @@ set(marble_SRCS
            measuretool.cpp
 )
 
+set(marble_HDRS
+           katlascontrol.h
+           katlasview.h
+           katlasviewinputhandler.h
+           texcolorizer.h
+           texloader.h
+           texmapper.h
+           quaternion.h
+           katlasglobe.h
+           katlastoolbox.h
+           pntmap.h
+           vectorcomposer.h
+           vectormap.h
+           clippainter.h
+           geopoint.h
+           placemarkmanager.h
+           placecontainer.h
+           placemarkstorage.h
+           placefolder.h
+           placemark.h
+           searchlistview.h
+           katlasmapscale.h
+           placemarkmodel.h
+           placemarkpainter.h
+           maptheme.h
+           tilescissor.h
+           katlastilecreatordialog.h
+           katlasthemeselectview.h
+           katlaswindrose.h
+           katlasviewpopupmenu.h
+           katlascrosshair.h
+           xmlhandler.h
+           placemarkinfodialog.h
+           katlasflag.h
+           gridmap.h
+           tinywebbrowser.h
+           httpfetchfile.h
+           measuretool.h
+)
+
 set (marble_UI katlastilecreatordialog.ui
 	   katlastoolbox.ui placemarkinfodialog.ui)
 
@@ -74,9 +114,9 @@ endif (QTONLY)
 
 #kde4_add_library (marble SHARED ${marble_SRCS})
 if (QTONLY)
-  add_executable (marble ${marble_SRCS})
+  add_executable (marble ${marble_SRCS} ${marble_HDRS})
 else (QTONLY)
-  kde4_add_executable (marble ${marble_SRCS})
+  kde4_add_executable (marble ${marble_SRCS} ${marble_HDRS})
 endif (QTONLY)
 
 if (QTONLY)
