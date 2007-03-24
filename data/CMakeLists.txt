@@ -1,3 +1,11 @@
+
+if(WIN32)
+  set(data_dir ${CMAKE_INSTALL_PREFIX}/data)
+else(WIN32)
+  set(data_dir ${data_dir})
+endif(WIN32)
+
+
 install (FILES
 bitmaps/city_1_orange.png
 bitmaps/city_1_red.png
@@ -27,11 +35,11 @@ bitmaps/mountain_1.png
 bitmaps/pole_1.png
 bitmaps/pole_2.png
 bitmaps/volcano_1.png
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/bitmaps)
+DESTINATION ${data_dir}/bitmaps)
 
 install (FILES 
 svg/windrose.svg
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/svg)
+DESTINATION ${data_dir}/svg)
 
 install (FILES 
 flags/flag_ad.svg
@@ -277,25 +285,25 @@ flags/flag_yt.svg
 flags/flag_za.svg
 flags/flag_zm.svg
 flags/flag_zw.svg
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/flags)
+DESTINATION ${data_dir}/flags)
 
 install (FILES
 maps/citylights/citylights.jpg
 maps/citylights/citylights.dgml
 maps/citylights/citylights-preview.png
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/maps/citylights)
+DESTINATION ${data_dir}/maps/citylights)
 
 install (FILES
 maps/etopo2/etopo.jpg
 maps/etopo2/etopo2.dgml
 maps/etopo2/etopo-preview.png
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/maps/etopo2)
+DESTINATION ${data_dir}/maps/etopo2)
 
 install (FILES
 maps/bluemarble/bluemarble.jpg
 maps/bluemarble/bluemarble.dgml
 maps/bluemarble/bluemarble-preview.png
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/maps/bluemarble)
+DESTINATION ${data_dir}/maps/bluemarble)
 
 install (FILES
 mwdbii/PDIFFBORDER.PNT
@@ -310,11 +318,11 @@ mwdbii/PLAKE.PNT
 mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/mwdbii)
+DESTINATION ${data_dir}/mwdbii)
 
 install (FILES
 placemarks/baseplacemarks.cache
 placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
-DESTINATION ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data/placemarks)
+DESTINATION ${data_dir}/placemarks)
 

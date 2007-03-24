@@ -60,6 +60,7 @@ set(marble_SRCS
 )
 
 set(marble_HDRS
+           katlasdirs.h
            katlascontrol.h
            katlasview.h
            katlasviewinputhandler.h
@@ -125,13 +126,17 @@ else (QTONLY)
 	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY})
 endif (QTONLY)
 
-#set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
-install (TARGETS marble DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
-#install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
+if(WIN32)
+    install (TARGETS marble DESTINATION ${CMAKE_INSTALL_PREFIX} )
+else(WIN32)
+    #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
+    install (TARGETS marble DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
+    #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 
-if (NOT QTONLY)
-install( FILES marble.desktop  DESTINATION ${XDG_APPS_DIR})
-else (NOT QTONLY)
-install( FILES marble.desktop  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
-endif (NOT QTONLY)
+    if (NOT QTONLY)
+    install( FILES marble.desktop  DESTINATION ${XDG_APPS_DIR})
+    else (NOT QTONLY)
+    install( FILES marble.desktop  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
+    endif (NOT QTONLY)
+endif(WIN32)
 
