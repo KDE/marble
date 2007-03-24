@@ -10,7 +10,11 @@ KAtlasMapScale::KAtlasMapScale(QObject* parent) : QObject(parent) {
 	m_scalebarwidth=250;
 	m_scalebarheight=5;
 
+#ifdef Q_OS_MACX
+	m_font = QFont("Sans Serif",10);
+#else
 	m_font = QFont("Sans Serif",8);
+#endif
 	m_fontheight = QFontMetrics(m_font).ascent();
 	m_leftmargin = QFontMetrics(m_font).boundingRect("0").width()/2;
 	m_rightmargin = QFontMetrics(m_font).boundingRect("0000").width()/2;
@@ -113,4 +117,6 @@ void KAtlasMapScale::calcScaleBar(){
 	m_valueinterval = (int)(bestmagvalue*magnitude/m_bestdivisor);
 }
 
+#ifndef Q_OS_MACX
 #include "katlasmapscale.moc"
+#endif

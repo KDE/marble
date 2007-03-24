@@ -19,4 +19,6 @@ void KAtlasTileCreatorDialog::setSummary( const QString& name, const QString& de
 	descriptionLabel->setText( summary );
 }
 
+#ifndef Q_OS_MACX
 #include "katlastilecreatordialog.moc"
+#endif

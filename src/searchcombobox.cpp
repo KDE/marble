@@ -38,4 +38,6 @@ void SearchComboBox::showListView(QString text){
 
 }
 
+#ifndef Q_OS_MACX
 #include "searchcombobox.moc"
+#endif

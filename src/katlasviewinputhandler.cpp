@@ -1,6 +1,10 @@
 #include <QtCore/QDebug>
 #include "katlasviewinputhandler.h"
+
+#ifndef Q_OS_MACX
 #include "katlasviewinputhandler.moc"
+#endif
+
 #include "katlasview.h"
 #include "quaternion.h"
 #include "katlasdirs.h"

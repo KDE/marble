@@ -33,4 +33,6 @@ void SearchListView::selectItem(QString text){
 	else qDebug("noitem!");
 }
 
+#ifndef Q_OS_MACX
 #include "searchlistview.moc"
+#endif

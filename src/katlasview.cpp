@@ -274,4 +274,6 @@ int KAtlasView::toLogScale(int zoom){
 	return zoom;
 }
 
+#ifndef Q_OS_MACX
 #include "katlasview.moc"
+#endif

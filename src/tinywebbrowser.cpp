@@ -63,4 +63,7 @@ void TinyWebBrowser::slotDownloadFinished( QString filename, bool ){
 //		m_urlList.removeAll();
 	}
 }
+
+#ifndef Q_OS_MACX
 #include "tinywebbrowser.moc"
+#endif

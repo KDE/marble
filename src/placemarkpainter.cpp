@@ -10,19 +10,25 @@
 #include "placemark.h"
 #include "katlasdirs.h"
 
-#include <QtCore/QDebug>
-
 static const int maxlabels = 100;
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
+#ifdef Q_OS_MACX
+	m_font_mountain = QFont("Sans Serif",9, 50, false );
 
+	m_font_regular = QFont("Sans Serif",10, 50, false );
+	m_font_regular_italics = QFont("Sans Serif",10, 50, true );
+	m_font_regular_underline = QFont("Sans Serif",10, 50, false );
+#else
 	m_font_mountain = QFont("Sans Serif",7, 50, false );
 
 	m_font_regular = QFont("Sans Serif",8, 50, false );
 	m_font_regular_italics = QFont("Sans Serif",8, 50, true );
 	m_font_regular_underline = QFont("Sans Serif",8, 50, false );
+#endif
+
 	m_font_regular_underline.setUnderline( true );
-	
+
 	m_fontheight = QFontMetrics(m_font_regular).height();
 	m_fontascent = QFontMetrics(m_font_regular).ascent();
 
@@ -202,7 +208,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 							if ( mark->selected() == 0 ) {
 								textpainter.setFont(font);
-								textpainter.setPen(m_labelcolor);	
+								textpainter.setPen(m_labelcolor);
 								textpainter.drawText( 0, m_fontascent, mark->name() );
 							}
 							else {
@@ -219,7 +225,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 							if ( mark->selected() == 0 ) {
 								textpainter.setFont(font);
-								textpainter.setPen(m_labelcolor);	
+								textpainter.setPen(m_labelcolor);
 								textpainter.drawText( 0, m_fontascent, mark->name() );
 							}
 							else {
@@ -284,7 +290,6 @@ inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, PlaceMark* ma
 	textpainter.setPen( Qt::NoPen );
 	textpainter.drawPath( outlinepath );
 	textpainter.setRenderHint(QPainter::Antialiasing, false );
-
 }
 
 bool PlaceMarkPainter::testbug(){
@@ -333,4 +338,6 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ){
 	return ret;
 }
 
+#ifndef Q_OS_MACX
 #include "placemarkpainter.moc"
+#endif

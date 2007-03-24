@@ -117,4 +117,6 @@ void PlaceMarkInfoDialog::setFlagLabel(){
 	flag_val_lbl->setPixmap( m_flagcreator->flag() );
 }
 
+#ifndef Q_OS_MACX
 #include "placemarkinfodialog.moc"
+#endif

@@ -1,7 +1,10 @@
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
+#ifndef Q_OS_MACX
 #include "katlasviewpopupmenu.moc"
+#endif
+
 #include "katlasviewpopupmenu.h"
 #include "katlasview.h"
 #include "katlasglobe.h"

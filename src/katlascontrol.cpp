@@ -75,5 +75,7 @@ void KAtlasControl::moveDown()
 	katlasview->moveDown();
 }
 
+#ifndef Q_OS_MACX
 #include "katlastoolbox.moc"
 #include "katlascontrol.moc"
+#endif

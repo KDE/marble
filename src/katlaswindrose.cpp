@@ -11,7 +11,12 @@
 KAtlasWindRose::KAtlasWindRose(QObject* parent) : QObject(parent) {
 	m_width = 0;
 
+#ifdef Q_OS_MACX
+	m_font = QFont("Sans Serif",10 );
+#else
 	m_font = QFont("Sans Serif",8 );
+#endif
+
 	m_font.setStyleStrategy(QFont::ForceOutline);
 
 	m_fontheight = QFontMetrics(m_font).ascent();
@@ -75,4 +80,6 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, i
 
 }
 
+#ifndef Q_OS_MACX
 #include "katlaswindrose.moc"
+#endif

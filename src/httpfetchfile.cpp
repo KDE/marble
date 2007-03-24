@@ -103,4 +103,6 @@ void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeade
 	}
 }
 
+#ifndef Q_OS_MACX
 #include "httpfetchfile.moc"
+#endif

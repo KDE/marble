@@ -31,4 +31,6 @@ void KAtlasThemeSelectView::resizeEvent(QResizeEvent* event)
     setGridSize(size);
 }
 
+#ifndef Q_OS_MACX
 #include "katlasthemeselectview.moc"
+#endif

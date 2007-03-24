@@ -72,4 +72,6 @@ void PlaceMarkModel::setContainer(PlaceContainer* container){
 	qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
 }
 
+#ifndef Q_OS_MACX
 #include "placemarkmodel.moc"
+#endif
