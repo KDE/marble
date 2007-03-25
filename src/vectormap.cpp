@@ -87,7 +87,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 				qbound = boundary[i].getQuatPoint();
 				qbound.rotateAroundAxis(m_rotMatrix); 
 
-				if (qbound.v[Q_Z] > 0){
+				if (qbound.v[Q_Z] > m_zBoundingBoxLimit){
 					m_polygon.clear();
 					m_polygon.reserve((*itPolyLine)->size());
 					m_polygon.setClosed((*itPolyLine)->getClosed());

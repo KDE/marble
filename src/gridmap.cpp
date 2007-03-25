@@ -125,7 +125,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 			qpos.rotateAroundAxis(m_rotMatrix);
 
 			currentPoint = QPointF((float)(imgrx+ m_radius*qpos.v[Q_X])+1,(float)(imgry+ m_radius*qpos.v[Q_Y])+1);
-			
+//			qDebug() << "Radius: " << m_radius << "QPointF(" << (float)(imgrx+ m_radius*qpos.v[Q_X])+1 << ", " << (float)(imgry+ m_radius*qpos.v[Q_Y])+1 << ")";			
 //	Take care of horizon crossings if horizon is visible
 			lastvisible = currentlyvisible;
 
@@ -136,9 +136,13 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 
 			if (currentlyvisible != lastvisible) {
 				m_polygon << horizonPoint();
-				append(m_polygon);
+
+				if (m_polygon.size() >= 2) {
+					append(m_polygon);
+				}
+
 				m_polygon.clear();
-				if ( lastvisible == true ) break;
+//				if ( lastvisible == true ) break;
 			}
 
 //	Take care of screencrossing crossings if horizon is visible
@@ -158,6 +162,8 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 }
 
 void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing){
+
+	if ( size() == 0 ) return;
 
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
 
@@ -182,11 +188,14 @@ void GridMap::initCrossHorizon(){
 
 const QPointF GridMap::horizonPoint(){
 //	qDebug("Interpolating");
-	float xa, ya;
+	float xa = 0;
+	float ya = 0;
 
 	xa = currentPoint.x() - (imgrx +1) ;
 // move the currentPoint along the y-axis to match the horizon
-	ya = sqrt( (m_radius +1) * ( m_radius +1) - xa*xa);
+	float radicant = (float)(m_radius +1) * (float)( m_radius +1) - xa*xa;
+	if ( radicant > 0 ) ya = sqrt( radicant );
+//	qDebug() << "xa:" << xa << "ya:" << ya;
 //	ya = (m_rlimit > xa*xa) ? sqrt((float)(m_rlimit) - (float)(xa*xa)) : 0;
 //	qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
 	if ((currentPoint.y() - (imgry + 1)) < 0) ya = -ya; 

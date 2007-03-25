@@ -1,6 +1,8 @@
 #include <QtCore/QDebug>
 #include "clippainter.h"
 
+#include <cmath>
+
 // #define MARBLE_DEBUG
 
 ClipPainter::ClipPainter(QPaintDevice * pd, bool clip):QPainter(pd){ 
@@ -64,7 +66,7 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
 	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
 
 		m_currentPoint = (*itPoint);
-
+//		qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPoint.y()" << m_currentPoint.y();
 // figure out the section of the current point 
 		currentxpos = 1;
 		if (m_currentPoint.x() < left) currentxpos = 0;
@@ -116,7 +118,10 @@ void ClipPainter::manageOffScreen(){
 	float ya = 0;
 
 	// Calculating the slope
-	float m = (m_currentPoint.y()-m_lastPoint.y())/(m_currentPoint.x()-m_lastPoint.x());
+	float divisor = m_currentPoint.x() - m_lastPoint.x();
+	if ( fabs( divisor ) < 0.000000001 ) divisor = 0.000000001;
+
+	float m = (m_currentPoint.y()-m_lastPoint.y())/divisor;
 
 	switch (currentpos){
 		case 0:
