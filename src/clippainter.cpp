@@ -119,7 +119,7 @@ void ClipPainter::manageOffScreen(){
 
 	// Calculating the slope
 	float divisor = m_currentPoint.x() - m_lastPoint.x();
-	if ( fabs( divisor ) < 0.000000001 ) divisor = 0.000000001;
+	if ( fabs( divisor ) < 0.000001 ) divisor = 0.000001;
 
 	float m = (m_currentPoint.y()-m_lastPoint.y())/divisor;
 
