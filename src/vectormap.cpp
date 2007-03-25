@@ -87,7 +87,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 				qbound = boundary[i].getQuatPoint();
 				qbound.rotateAroundAxis(m_rotMatrix); 
 
-				if (qbound.v[Q_Z] > m_zBoundingBoxLimit){
+				if (qbound.v[Q_Z] > 0){
 					m_polygon.clear();
 					m_polygon.reserve((*itPolyLine)->size());
 					m_polygon.setClosed((*itPolyLine)->getClosed());
@@ -121,13 +121,14 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 #endif
 			qpos = itPoint->getQuatPoint();
 			qpos.rotateAroundAxis(m_rotMatrix);
-			currentPoint = QPoint((int)(imgrx+ m_radius*qpos.v[Q_X])+1,(int)(imgry+ m_radius*qpos.v[Q_Y])+1);
+			currentPoint = QPointF(imgrx+ m_radius*qpos.v[Q_X]+1,imgry+ m_radius*qpos.v[Q_Y]+1);
 			
 // Take care of horizon crossings if horizon is visible
 			lastvisible = currentlyvisible;			
 
-
-			currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
+// Less accurate:
+//			currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
+			currentlyvisible = (qpos.v[Q_Z] >= 0) ? true : false;
 			if (itPoint == itStartPoint){
 				initCrossHorizon();
 			}
@@ -227,7 +228,7 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 void VectorMap::initCrossHorizon(){
 //	qDebug("Initializing scheduled new PolyLine");
 	lastvisible = currentlyvisible;
-	lastPoint = QPoint( currentPoint.x() + 1, currentPoint.y() + 1 );
+	lastPoint = QPointF( currentPoint.x() + 1, currentPoint.y() + 1 );
 	horizonpair = false;
 	firsthorizon = false;
 }
@@ -261,7 +262,7 @@ void VectorMap::manageCrossHorizon(){
 	
 }
 
-const QPoint VectorMap::horizonPoint(){
+const QPointF VectorMap::horizonPoint(){
 //	qDebug("Interpolating");
 	float xa, ya;
 
@@ -272,7 +273,7 @@ const QPoint VectorMap::horizonPoint(){
 //	qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
 	if ((currentPoint.y() - (imgry + 1)) < 0) ya = -ya; 
 
-	return QPoint(imgrx + (int)xa + 1, imgry + (int)ya + 1); 
+	return QPointF(imgrx + xa + 1, imgry + ya + 1); 
 }
 
 void VectorMap::createArc(){

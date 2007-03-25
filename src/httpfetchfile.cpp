@@ -47,13 +47,13 @@ void HttpFetchFile::downloadFile( QUrl url ){
 	httpGetId = m_pHttp->get( url.path(), m_pFile );
 	m_pFileIdMap.insert( httpGetId, fileName );
 
-	emit statusMessage( tr("Downloading data from Wikipedia ... ") );
+	emit statusMessage( tr("Downloading data from Wikipedia.") );
 
 };
 
 void HttpFetchFile::cancelDownload()
 {
-	emit statusMessage( tr("Download cancelled ... ") );
+	emit statusMessage( tr("Download cancelled.") );
 	httpRequestAborted = true;
 	m_pHttp->abort();
 }
@@ -81,7 +81,7 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 		emit statusMessage( tr("Download failed: %1.")
 			.arg(m_pHttp->errorString() ) );
 	} else {
-		emit statusMessage( tr("Download from Wikipedia finished ... ") );
+		emit statusMessage( tr("Download from Wikipedia finished.") );
 	}
 
 	emit downloadDone( m_pFileIdMap[requestId], error );

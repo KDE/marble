@@ -151,7 +151,9 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 			lastPoint = currentPoint;
 		}
 
-		append(m_polygon);
+		if (m_polygon.size() >= 2) {
+			append(m_polygon);
+		}
 	}
 }
 

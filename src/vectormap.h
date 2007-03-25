@@ -47,20 +47,20 @@ private:
 	GeoPolygon m_polygon;
 	inline void initCrossHorizon();
 	void manageCrossHorizon();
-	const QPoint horizonPoint();
+	const QPointF horizonPoint();
 	void createArc();
 
 	int imgrx, imgry, imgradius;
 	int imgwidth, imgheight;
 
-	QPoint currentPoint, lastPoint; 
+	QPointF currentPoint, lastPoint; 
 
 	QPen m_pen;
 	QBrush m_brush;
 // Dealing with the horizon
 	bool firsthorizon;
 	bool lastvisible, currentlyvisible, horizonpair;
-	QPoint firstHorizonPoint, horizona, horizonb;
+	QPointF firstHorizonPoint, horizona, horizonb;
 	
 	int m_radius;
 	int m_rlimit;
