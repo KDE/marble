@@ -78,7 +78,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 		
 		else if (( e->type() == QEvent::MouseMove )||( e->type() == QEvent::MouseButtonPress )||( e->type() == QEvent::MouseButtonRelease)){
 
-			QMouseEvent* event = dynamic_cast<QMouseEvent*>(e);			
+			QMouseEvent* event = static_cast<QMouseEvent*>(e);			
 			QRegion activeRegion = m_gpview->getActiveRegion();
 
 			dirx = 0; diry = 0;
@@ -192,7 +192,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 		else {
 			if ( e->type() == QEvent::Wheel ){
-				QWheelEvent* wheelevt = dynamic_cast<QWheelEvent*>(e);
+				QWheelEvent* wheelevt = static_cast<QWheelEvent*>(e);
 				m_gpview->zoomViewBy((int)(-wheelevt->delta()/3));
 				return TRUE;
 			}
