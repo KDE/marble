@@ -97,7 +97,7 @@ void VectorComposer::paintVectorMap(ClipPainter* painter, const int& radius, Qua
 	vectormap -> createFromPntMap(pborder,radius,rotAxis);
 //	QPen borderpen(QColor(242,187,136));
 	QPen borderpen(QColor(242,155,104));
-	borderpen.setStyle(Qt::DashLine);
+//	borderpen.setStyle(Qt::DashLine);
 
 	vectormap -> setPen(borderpen);
 	vectormap -> setBrush(Qt::NoBrush);
