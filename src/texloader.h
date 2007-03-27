@@ -50,6 +50,8 @@ public:
 	void prePixelValueApprox(const float&, const float&, QRgb*);
 	void getPixelValueApprox(const float&, const float&, QRgb*);
 
+	const int depth() const { return m_depth; }
+
 protected:
 	void getPixelValue(const float&, const float&, QRgb*);
 	inline void loadTile();
@@ -57,22 +59,28 @@ protected:
 	TileContainer* tile;
 	QString m_fileprefix, m_filename;
 	QHash <int, TileContainer*> tilehash;
-	int m_oldlat;
+
 	float m_prevlat, m_prevlng;
 	int m_n; float m_ninv;
 
 	float avglng, avglat;
 	int texpixw, texpixh;
 	float rad2pixw, rad2pixh;
+
+	int normfullalpha, normhalfbeta;
+	float normhalfalpha, normquatbeta;
+
 	int maxfullalpha, maxquatalpha, maxhalfbeta;
 	float maxhalfalpha, maxquatbeta;
 
+	int m_tilxw, m_tilyh;
+
 	int tilx, tily;
-	int tilxw, tilyh;
-	int tilw, tilh;
+	int m_tilw, m_tilh;
 	int posx, posy;
 
 	int m_texlevel, m_oldtexlevel, tilekey;
+	int m_depth;
 };
 
 #endif

@@ -79,7 +79,7 @@ TileContainer::~TileContainer(){
 TextureLoader::TextureLoader( const QString& fileprefix ){
 
 	setMap( fileprefix );
-
+	m_depth = -1;
 }
 
 void TextureLoader::setMap( const QString& fileprefix ){
@@ -89,8 +89,6 @@ void TextureLoader::setMap( const QString& fileprefix ){
 	m_texlevel = 1;
 
 	m_oldtexlevel = 0;
-
-	m_oldlat=65535;
 	
 	tilx=65535;
 	tily=65535;
@@ -98,8 +96,8 @@ void TextureLoader::setMap( const QString& fileprefix ){
 	tile = new TileContainer( KAtlasDirs::path( QString("%1%2_0x0.jpg").arg(m_fileprefix).arg(m_texlevel) ) );
 
 //	We assume that all tiles have the same size. TODO: check to be safe
-	tilw = tile->rawtile->width();
-	tilh = tile->rawtile->height();
+	m_tilw = tile->rawtile->width();
+	m_tilh = tile->rawtile->height();
 	delete tile;
 
 	setTexLevel(1);
@@ -115,8 +113,13 @@ void TextureLoader::resetTilehash(){
 
 	tilx = 65535;
 	tily = 65535;
-	tilxw = 65535;
-	tilyh = 65535;
+	m_tilxw = 65535;
+	m_tilyh = 65535;
+
+	normhalfalpha = maxhalfalpha - m_tilxw;
+	normquatbeta = maxquatbeta - m_tilyh;
+	normfullalpha = maxfullalpha - m_tilxw;
+	normhalfbeta = maxhalfbeta - m_tilyh;
 }
 
 void TextureLoader::cleanupTilehash(){
@@ -146,45 +149,45 @@ inline void TextureLoader::getPixelValue(const float& radlng, const float& radla
 //	lat: 180 deg = 21600 pixel
 
 //	Convert rad to pixel...
-	int lng = (int)(maxhalfalpha + radlng * rad2pixw);
-	int lat = (int)(maxquatbeta + radlat * rad2pixh);
+	posx = (int)(normhalfalpha + radlng * rad2pixw);
+	posy = (int)(normquatbeta + radlat * rad2pixh);
 
-	// necessary to prevent crash if TextureMapper::radalpha = -pi
-	if ( lng >= maxfullalpha ) lng = maxfullalpha-1;
-	// necessary to prevent crash 
-	if ( lat >= maxhalfbeta ) lat = maxhalfbeta-1; 
+	// necessary to prevent e.g. crash if TextureMapper::radalpha = -pi
+	if ( posx > normfullalpha ) posx = normfullalpha;
+	if ( posy > normhalfbeta ) posy = normhalfbeta;
 
-//	Calculate the pixel position on the respective Tile
-	bool newtile = false;
-
-	posx = lng - tilxw; // the position on the tile measured from the left tile border 
-
-	if ( posx >= tilw || posx < 0 ) {
-		tilx = lng / tilw; // Counts the tiles left from the current tile ("tileposition") 
-		tily = lat / tilh; // Counts the tiles on the top from the current tile
+//	qDebug() << "posx:" << posx << "posy:" << posy;
+	if ( posx >= m_tilw || posx < 0 ) {
+		int lng = posx + m_tilxw;
+		int lat = posy + m_tilyh;
+		tilx = lng / m_tilw; // Counts the tiles left from the current tile ("tileposition") 
+		tily = lat / m_tilh; // Counts the tiles on the top from the current tile
+//		qDebug() << "tilx:" << tilx << "tily:" << tily;
 		loadTile();
-		newtile = true;
-		posx = lng - tilxw;
+		posx = lng - m_tilxw;
+		posy = lat - m_tilyh;
+	}
+	else	if ( posy >= m_tilh || posy < 0 ) {
+		int lat = posy + m_tilyh;
+		tily = lat / m_tilh;
+		loadTile();
+		posy = lat - m_tilyh;
 	}
 
-//	Scanline optimization for posy
-	if (lat != m_oldlat){
-		posy = lat - tilyh;
-
-		if ( newtile == false && (posy >= tilh || posy < 0) ) {
-//			tilx = lng / tilw;
-			tily = lat / tilh;
-			loadTile();
-			posy = lat - tilyh;
-		}
-
-		m_oldlat = lat;
-	}
-
-	if (tile->depth == 8)
+	switch ( depth() ) {
+	case 8:
 		*line = tile->jumpTable8[posy][posx];
-	else
+		break;
+	case 32:
 		*line = tile->jumpTable32[posy][posx];
+		break;
+	default:
+		if (tile->depth == 8)
+			*line = tile->jumpTable8[posy][posx];
+		else
+			*line = tile->jumpTable32[posy][posx];
+		break;
+	}
 }
 
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line){
@@ -256,8 +259,13 @@ inline void TextureLoader::flush(){
 
 inline void TextureLoader::loadTile(){
 //	Choosing the correct tile via Lng/Lat info 
-	tilxw = tilx * tilw;
-	tilyh = tily * tilh;
+	m_tilxw = tilx * m_tilw;
+	m_tilyh = tily * m_tilh;
+
+	normhalfalpha = maxhalfalpha - m_tilxw;
+	normquatbeta = maxquatbeta - m_tilyh;
+	normfullalpha = maxfullalpha - m_tilxw;
+	normhalfbeta = maxhalfbeta - m_tilyh;
 
 	tilekey =  (tilx << 8) + tily;
 //	tilekey =  (tilx *100) + tily;
@@ -266,6 +274,8 @@ inline void TextureLoader::loadTile(){
 	if (!tilehash.contains( tilekey )){	
 		m_filename = KAtlasDirs::path( QString("%1%2_%3x%4.jpg").arg(m_fileprefix).arg(m_texlevel).arg(tilx).arg(tily) );
 		tile = new TileContainer(m_filename);
+		if ( m_depth == -1 ) m_depth = tile->depth;
+		if ( m_depth != tile->depth ) m_depth = 0;
 		tilehash[tilekey]=tile;
 	}
 	// otherwise pick the correct one from the hash
@@ -284,16 +294,22 @@ void TextureLoader::setTexLevel(const int texlevel){
 		flush();
 		m_oldtexlevel=m_texlevel;
 
-		texpixw = (int)(21600.0f / (float)(m_texlevel) / (float)(tilw));
-		texpixh = (int)(21600.0f / (float)(m_texlevel) / (float)(tilh));	
+		texpixw = (int)(21600.0f / (float)(m_texlevel) / (float)(m_tilw));
+		texpixh = (int)(21600.0f / (float)(m_texlevel) / (float)(m_tilh));	
 
 		rad2pixw = (21600.0f / M_PI / (float)(texpixw));
 		rad2pixh = (21600.0f / M_PI / (float)(texpixh));
 
-		maxfullalpha = (int)(43200.0f / (float)(texpixw));
+
+		maxfullalpha = (int)(43200.0f / (float)(texpixw)) - 1;
 		maxhalfalpha = (float)(21600.0f / (float)(texpixw));
 		maxquatalpha = (int)(10800.0f / (float)(texpixw));
 		maxquatbeta = (float)(10800.0f / (float)(texpixh));
-		maxhalfbeta = (int) ( 2.0f * maxquatbeta);
+		maxhalfbeta = (int) ( 2.0f * maxquatbeta) - 1;
+
+		normhalfalpha = maxhalfalpha - m_tilxw;
+		normquatbeta = maxquatbeta - m_tilyh;
+		normfullalpha = maxfullalpha - m_tilxw;
+		normhalfbeta = maxhalfbeta - m_tilyh;
 	}
 }
