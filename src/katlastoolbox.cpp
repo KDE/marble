@@ -1,3 +1,23 @@
+/* This file is part of the KDE project
+ * Copyright (C) 2004 Torsten Rahn <tackat@kde.org>
+ * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+
 #include "katlastoolbox.h"
 
 #include <QtCore/QtAlgorithms>
@@ -5,8 +25,9 @@
 #include "maptheme.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QTimer>
 
-KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent) {
+KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent), m_searchTriggered(false) {
 
 	setupUi(this);
 	minimumzoom = 950;
@@ -26,8 +47,7 @@ KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent) {
 	connect(moveUpButton, SIGNAL(clicked()), this, SIGNAL(moveUp())); 
 	connect(moveDownButton, SIGNAL(clicked()), this, SIGNAL(moveDown())); 
 
-	connect(searchLineEdit, SIGNAL(textChanged(QString)), locationListView, SLOT(selectItem(QString)));
-	connect(searchLineEdit, SIGNAL(textChanged(const QString&)), locationListView, SLOT(activate()));
+    connect(searchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(searchLineChanged(const QString&)));
 
 	connect(locationListView, SIGNAL(centerOn(const QModelIndex&)), this, SIGNAL(centerOn(const QModelIndex&)));
 
@@ -59,3 +79,19 @@ void KAtlasToolBox::resizeEvent ( QResizeEvent * ){
 		}
 	}
 } 
+
+void KAtlasToolBox::searchLineChanged(const QString &search) {
+    m_searchTerm = search;
+    if(m_searchTriggered) return;
+    m_searchTriggered = true;
+    QTimer::singleShot(0, this, SLOT(search()));
+
+}
+
+void KAtlasToolBox::search() {
+    m_searchTriggered = false;
+    int currentSelected = locationListView->currentIndex().row();
+    locationListView->selectItem(m_searchTerm);
+    if(currentSelected != locationListView->currentIndex().row())
+        locationListView->activate();
+}
