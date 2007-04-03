@@ -5,75 +5,81 @@
 
 #include "katlastoolbox.h"
 
+
 KAtlasControl::KAtlasControl(QWidget *parent)
    : QWidget(parent)
 {
-	setWindowTitle(tr("Marble - Desktop Globe"));
-//	resize(640, 640);
-	resize(680, 640);
+    setWindowTitle(tr("Marble - Desktop Globe"));
+    //	resize(640, 640);
+    resize(680, 640);
 
-	toolbox = new KAtlasToolBox(this);
-	toolbox -> setFixedWidth(185);
+    m_toolbox = new KAtlasToolBox(this);
+    m_toolbox->setFixedWidth(185);
 
-	katlasview=new KAtlasView(this);
-	katlasview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding));
+    m_katlasview = new KAtlasView(this);
+    m_katlasview->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
+					      QSizePolicy::MinimumExpanding ) );
 
-	katlasview->setMinimumZoom( toolbox->minimumZoom() );
+    m_katlasview->setMinimumZoom( m_toolbox->minimumZoom() );
 
-	QVBoxLayout *vlayout = new QVBoxLayout(this);
+    QVBoxLayout *vlayout = new QVBoxLayout(this);
 
-	QHBoxLayout *hlayout = new QHBoxLayout();	
+    QHBoxLayout *hlayout = new QHBoxLayout();	
 
-	hlayout->addWidget(toolbox);
-	hlayout->addWidget(katlasview);
-	vlayout->addLayout(hlayout);
+    hlayout->addWidget(m_toolbox);
+    hlayout->addWidget(m_katlasview);
+    vlayout->addLayout(hlayout);
 
-	toolbox -> setLocations(katlasview->getPlaceMarkModel());
+    m_toolbox->setLocations( m_katlasview->getPlaceMarkModel() );
 
-	connect(toolbox, SIGNAL(goHome()), katlasview, SLOT(goHome()));
-	connect(toolbox, SIGNAL(zoomChanged(int)), katlasview, SLOT(zoomView(int)));
-	connect(toolbox, SIGNAL(zoomIn()), katlasview, SLOT(zoomIn()));
-	connect(toolbox, SIGNAL(zoomOut()), katlasview, SLOT(zoomOut()));
+    connect(m_toolbox, SIGNAL(goHome()),         m_katlasview, SLOT(goHome()));
+    connect(m_toolbox, SIGNAL(zoomChanged(int)), m_katlasview, SLOT(zoomView(int)));
+    connect(m_toolbox, SIGNAL(zoomIn()),  m_katlasview, SLOT(zoomIn()));
+    connect(m_toolbox, SIGNAL(zoomOut()), m_katlasview, SLOT(zoomOut()));
 
-	connect(toolbox, SIGNAL(moveLeft()), katlasview, SLOT(moveLeft()));
-	connect(toolbox, SIGNAL(moveRight()), katlasview, SLOT(moveRight()));
-	connect(toolbox, SIGNAL(moveUp()), katlasview, SLOT(moveUp()));
-	connect(toolbox, SIGNAL(moveDown()), katlasview, SLOT(moveDown()));
+    connect(m_toolbox, SIGNAL(moveLeft()),  m_katlasview, SLOT(moveLeft()));
+    connect(m_toolbox, SIGNAL(moveRight()), m_katlasview, SLOT(moveRight()));
+    connect(m_toolbox, SIGNAL(moveUp()),    m_katlasview, SLOT(moveUp()));
+    connect(m_toolbox, SIGNAL(moveDown()),  m_katlasview, SLOT(moveDown()));
 
-	connect(katlasview, SIGNAL(zoomChanged(int)), toolbox, SLOT(changeZoom(int)));
-	connect(toolbox, SIGNAL(centerOn(const QModelIndex&)), katlasview, SLOT(centerOn(const QModelIndex&)));
-	connect(toolbox, SIGNAL(selectMapTheme(const QString&)), katlasview, SLOT(setMapTheme(const QString&)));
+    connect(m_katlasview, SIGNAL(zoomChanged(int)), 
+	    m_toolbox,    SLOT(changeZoom(int)));
+    connect(m_toolbox,    SIGNAL(centerOn(const QModelIndex&)),
+	    m_katlasview, SLOT(centerOn(const QModelIndex&)));
+    connect(m_toolbox,    SIGNAL(selectMapTheme(const QString&)),
+	    m_katlasview, SLOT(setMapTheme(const QString&)));
 }
 
 void KAtlasControl::zoomIn()
 {
-	katlasview->zoomIn();
+    m_katlasview->zoomIn();
 }
 
 void KAtlasControl::zoomOut()
 {
-	katlasview->zoomOut();
+    m_katlasview->zoomOut();
 }
 
 void KAtlasControl::moveLeft()
 {
-	katlasview->moveLeft();
+    m_katlasview->moveLeft();
 }
 
 void KAtlasControl::moveRight()
 {
-	katlasview->moveRight();
+    m_katlasview->moveRight();
 }
 
 void KAtlasControl::moveUp()
 {
-	katlasview->moveUp();
+    m_katlasview->moveUp();
 }
 
 void KAtlasControl::moveDown()
 {
-	katlasview->moveDown();
+    m_katlasview->moveDown();
 }
+
 
 #ifndef Q_OS_MACX
 #include "katlastoolbox.moc"

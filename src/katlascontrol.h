@@ -24,22 +24,22 @@ class KAtlasControl : public QWidget
 {
     Q_OBJECT
 
-public:
-	KAtlasControl(QWidget *);
-	virtual ~KAtlasControl(){};
+ public:
+    KAtlasControl(QWidget *);
+    virtual ~KAtlasControl(){};
 
-	void zoomIn();
-	void zoomOut();
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+    void zoomIn();
+    void zoomOut();
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
 
-	void addPlaceMarkFile( QString filename ){ katlasview->addPlaceMarkFile( filename ); }
+    void addPlaceMarkFile( QString filename ){ m_katlasview->addPlaceMarkFile( filename ); }
 
-private:
-	KAtlasView* katlasview;
-	KAtlasToolBox* toolbox;
+ private:
+    KAtlasView     *m_katlasview;
+    KAtlasToolBox  *m_toolbox;
 };
 
 #endif // KATLASCONTROL_H
