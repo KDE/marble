@@ -102,6 +102,7 @@ set(marble_HDRS
            httpfetchfile.h
            measuretool.h
 	   katlasaboutdialog.h
+	   ScreenPolygon.h
 )
 
 set (marble_UI katlastilecreatordialog.ui
