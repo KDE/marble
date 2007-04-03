@@ -3,6 +3,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
+
 #include "katlasglobe.h"
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
@@ -14,81 +15,91 @@ class TextureColorizer;
 class QAbstractItemModel;
 class MeasureTool;
 
+// This is the main widget where the map is painted.
+
 class KAtlasView : public QWidget
 {
     Q_OBJECT
 
-public:
-	KAtlasView(QWidget *parent = 0);
+ public:
+    KAtlasView(QWidget *parent = 0);
 
-	const QRegion getActiveRegion();
-	bool getGlobeSphericals(int x, int y, float& alpha, float& beta);
-	QAbstractListModel* getPlaceMarkModel(){ return m_pGlobe->getPlaceMarkModel(); };
+    // The model this view shows.
+    KAtlasGlobe* globe() const { return m_pGlobe; }
 
-	float getMoveStep();
-	void setMinimumZoom( int zoom ){ minimumzoom = zoom; }
+    const QRegion getActiveRegion();
+    bool getGlobeSphericals(int x, int y, float& alpha, float& beta);
+    QAbstractListModel* getPlaceMarkModel(){ return m_pGlobe->getPlaceMarkModel(); };
 
-	void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
+    float getMoveStep();
+    void setMinimumZoom( int zoom ){ minimumzoom = zoom; }
 
-	KAtlasGlobe* globe() const { return m_pGlobe; }
+    void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
 
-public slots:
-	void zoomView(int);
+ public slots:
+    void zoomView(int);
 
-	void zoomViewBy(int);
-	void zoomIn();
-	void zoomOut();
+    void zoomViewBy(int);
+    void zoomIn();
+    void zoomOut();
 
-	void rotateBy(const float&, const float&);
-	void centerOn(const float&, const float&);
-	void centerOn(const QModelIndex&);
+    void rotateBy(const float&, const float&);
+    void centerOn(const float&, const float&);
+    void centerOn(const QModelIndex&);
 
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
 
-	void goHome();
+    void goHome();
 
-	void setMapTheme( const QString& maptheme )
-	{
-		m_pGlobe->setMapTheme( maptheme );
+    void setMapTheme( const QString& maptheme )
+    {
+	m_pGlobe->setMapTheme( maptheme );
 		
-		// Force update...
-	}
+	// Force update...
+    }
 
-signals:
-	void zoomChanged(int);
+ signals:
+    void zoomChanged(int);
 
-private:
-	int toLogScale(int);
-	int fromLogScale(int);
-	int m_logzoom;
-	int m_zoomStep;
+ protected:
+    void paintEvent(QPaintEvent *event);
+    void resizeEvent (QResizeEvent*);
+
+ private:
+    int toLogScale(int);
+    int fromLogScale(int);
+
+ private:
+    // The model we are showing.
+    KAtlasGlobe  *m_pGlobe;
+
+    int m_logzoom;
 	
-	int minimumzoom;	
+    int m_zoomStep;
+    int minimumzoom;	
 
-	KAtlasGlobe* m_pGlobe;
 
-	KAtlasViewInputHandler* inputhandler;
-	KAtlasViewPopupMenu* m_popupmenu;
+    KAtlasViewInputHandler* inputhandler;
+    KAtlasViewPopupMenu* m_popupmenu;
 
-	TextureColorizer* sealegend;
-	QImage* m_pCanvasImage;
+    TextureColorizer* sealegend;
+    QImage* m_pCanvasImage;
 
-	KAtlasCrossHair m_crosshair;
-	KAtlasMapScale m_mapscale;
-	KAtlasWindRose m_windrose;
-	MeasureTool* m_pMeasureTool;
+    // Parts of the image
+    KAtlasCrossHair  m_crosshair;
+    KAtlasMapScale   m_mapscale; // Shown in the lower left
+    KAtlasWindRose   m_windrose; // Shown in the upper right
 
-	QRegion activeRegion;
-	void setActiveRegion();
+    // Tools
+    MeasureTool* m_pMeasureTool;
 
-	QPixmap m_cachedPixmap;
+    QRegion activeRegion;
+    void setActiveRegion();
 
-protected:
-	void paintEvent(QPaintEvent *event);
-	void resizeEvent (QResizeEvent*);
+    QPixmap m_cachedPixmap;
 };
 
 #endif // KATLASVIEW_H
