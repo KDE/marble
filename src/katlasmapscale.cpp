@@ -95,22 +95,36 @@ void KAtlasMapScale::paintScaleBar(QPainter* painter, int radius, int width){
 void KAtlasMapScale::calcScaleBar(){
 
 	double magnitude = 1;
+
+	// first we calculate the exact length of the whole area that is possibly 
+	// available scale bar available to the scalebar in kilometers
 	int magvalue = (int)( m_scalebarkm );
 
-	while (magvalue >= 100) { magvalue /= 10; magnitude*=10; }
+	// we calculate the two most significant digits of the km-scalebar-length
+	// and store them in magvalue 
+	while (magvalue >= 100) { magvalue /= 10; magnitude *= 10; }
 
 	m_bestdivisor = 4;
 	int bestmagvalue = 1;
 
 	for (int i = 0; i < magvalue; i++){
+		// We try to find the lowest divisor between 4 and 8 that
+		// divides magvalue without remainder. 
 		for (int j = 4; j < 9; j++){
 			if ((magvalue-i)%j == 0){
+				// We store the very first result we find
+				// and store m_bestdivisor and bestmagvalue
+				// as a final result
 				m_bestdivisor = j;
 				bestmagvalue = magvalue - i;
+				// Stop all for loops and end search
 				i = magvalue; 
 				j = 9;
 			}
 		}
+		// If magvalue doesn't divide through values between 4 and 8
+		// (e.g. because it's a prime number) try again with 
+		// magvalue decreased by i.
 	}
 
 	m_pixelinterval = (int)(m_scalebarwidth*(double)(bestmagvalue)/(double)(magvalue)/m_bestdivisor);

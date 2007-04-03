@@ -55,7 +55,6 @@ public slots:
 		m_pGlobe->setMapTheme( maptheme );
 		
 		// Force update...
-   		m_cachedSize = QSize();
 	}
 
 signals:
@@ -85,7 +84,6 @@ private:
 	QRegion activeRegion;
 	void setActiveRegion();
 
-	QSize m_cachedSize;
 	QPixmap m_cachedPixmap;
 
 protected:

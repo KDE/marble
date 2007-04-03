@@ -13,7 +13,6 @@
 
 // #define VECMAP_DEBUG 
 
-const float rad2int = 21600.0 / M_PI;
 
 VectorMap::VectorMap(){
 

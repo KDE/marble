@@ -5,6 +5,7 @@
 #include "katlasviewpopupmenu.moc"
 #endif
 
+#include "katlasaboutdialog.h"
 #include "katlasviewpopupmenu.h"
 #include "katlasview.h"
 #include "katlasglobe.h"
@@ -36,8 +37,14 @@ void KAtlasViewPopupMenu::createActions(){
 	m_pRemoveMeasurePointsAction = new QAction(tr("&Remove Measure Points"), this);
 	m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
 
+	m_rmbMenu->addSeparator();
+
+	m_pAboutDialogAction = new QAction(tr("&About"), this);
+	m_rmbMenu->addAction( m_pAboutDialogAction );
+
 	connect( m_pAddMeasurePointAction, SIGNAL( triggered() ), SLOT( slotAddMeasurePoint() ) );
 	connect( m_pRemoveMeasurePointsAction, SIGNAL( triggered() ), SIGNAL( removeMeasurePoints() ) );
+	connect( m_pAboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
 
 }
 
@@ -107,3 +114,14 @@ void KAtlasViewPopupMenu::slotAddMeasurePoint(){
 
 	emit addMeasurePoint( lng, lat );
 }
+
+void KAtlasViewPopupMenu::slotAboutDialog(){
+
+	KAtlasAboutDialog dlg(m_gpview);
+	dlg.exec();
+
+}
+
+#ifndef Q_OS_MACX
+#include "katlasaboutdialog.moc"
+#endif

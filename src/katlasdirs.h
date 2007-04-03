@@ -37,7 +37,7 @@ class KAtlasDirs
 
     static QString localDir() 
 	{ 
-		return QString( QDir::homePath() + "/.katlas/data");	// local path
+		return QString( QDir::homePath() + "/.marble/data");	// local path
 	}
 
     static QString unixDir()

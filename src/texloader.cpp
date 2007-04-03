@@ -1,113 +1,48 @@
 #include "texloader.h"
+
 #include <QtCore/QTime>
 #include <QtCore/QVector>
 #include <cmath>
 
 #include "katlasdirs.h"
+#include "texturetile.h"
 
 #include <QtCore/QDebug>
 
 const float TWOPI = 2 * M_PI;
 
-static uint **jumpTableFromQImage32( QImage &img )
-{
-	const int height = img.height();
-	const int bpl = img.bytesPerLine()/4;
-	uint *data = (QRgb*)(img.scanLine(0));
-	uint **jumpTable = new uint*[height];
-	for ( int y = 0; y < height; ++y ) {
-		jumpTable[ y ] = data;
-		data += bpl;
-	}
-	return jumpTable;
-}
+TextureLoader::TextureLoader( const QString& theme ){
 
-static uchar **jumpTableFromQImage8( QImage &img )
-{
-	const int height = img.height();
-	const int bpl = img.bytesPerLine();
-	uchar *data = img.bits();
-	uchar **jumpTable = new uchar*[height];
-	for ( int y = 0; y < height; ++y ) {
-		jumpTable[ y ] = data;
-		data += bpl;
-	}
-	return jumpTable;
-}
-
-
-TileContainer::TileContainer(const QString& filename){
-
-	used=true;
-	rawtile=new QImage(filename);
-	if ( rawtile->isNull() ){
-		qDebug() << QString( "Bitmap tile " + filename + " could not be found. Please run texissor." ); 
-		exit(-1);
-	}
-	depth = rawtile->depth();
-
-	switch ( depth ) {
-	case 32:
-//		qDebug("32");
-		jumpTable32=jumpTableFromQImage32(*rawtile);
-		break;
-	case 8:
-//		qDebug("8");
-		jumpTable8=jumpTableFromQImage8(*rawtile);
-		break;
-	default:
-		qDebug() << QString("Color depth %1 of a tile could not be retrieved. Exiting.").arg(depth);
-		exit(-1);
-	}
-}
-
-TileContainer::~TileContainer(){
-	switch ( depth ) {
-	case 32:
-		delete [] jumpTable32;
-		break;
-	case 8:
-		delete [] jumpTable8;
-		break;
-	default:
-		qDebug("Color depth of a tile could not be retrieved. Exiting.");
-		exit(-1);
-	}
-	delete rawtile;
-}
-
-TextureLoader::TextureLoader( const QString& fileprefix ){
-
-	setMap( fileprefix );
+	setMap( theme );
 	m_depth = -1;
 }
 
-void TextureLoader::setMap( const QString& fileprefix ){
+void TextureLoader::setMap( const QString& theme ){
 //	Initialize map theme.
-	m_fileprefix = fileprefix;
+	m_theme = theme;
 
-	m_texlevel = 1;
+	m_texlevel = 0;
 
-	m_oldtexlevel = 0;
+	m_oldtexlevel = -1;
 	
 	tilx=65535;
 	tily=65535;
 
-	tile = new TileContainer( KAtlasDirs::path( QString("%1%2_0x0.jpg").arg(m_fileprefix).arg(m_texlevel) ) );
+	m_tile = new TextureTile( 0, 0, m_texlevel, m_theme );
 
 //	We assume that all tiles have the same size. TODO: check to be safe
-	m_tilw = tile->rawtile->width();
-	m_tilh = tile->rawtile->height();
-	delete tile;
+	m_tilw = m_tile->rawtile()->width();
+	m_tilh = m_tile->rawtile()->height();
+	delete m_tile;
 
-	setTexLevel(1);
+	setTexLevel(0);
 }
 
 void TextureLoader::resetTilehash(){
 
-	QHash<int, TileContainer*>::const_iterator it = tilehash.constBegin();
-	while (it != tilehash.constEnd()) {
-		tilehash.value(it.key())->used=false;
+	QHash<int, TextureTile*>::const_iterator it = m_tilehash.constBegin();
+	while (it != m_tilehash.constEnd()) {
+		m_tilehash.value(it.key())->setUsed( false );
 		++it;
 	}
 
@@ -126,13 +61,13 @@ void TextureLoader::cleanupTilehash(){
 //	Make sure that tiles which haven't been used during the last
 //	rendering of the map at all get removed from the tile hash.
 
-	QHashIterator<int, TileContainer*> it(tilehash);
+	QHashIterator<int, TextureTile*> it(m_tilehash);
 	while (it.hasNext()) {
 		it.next();
-		if ((it.value())->used == false){
+		if ((it.value())->used() == false){
 //			qDebug("Removing " + QString::number(it.key()).toLatin1());
-			delete tilehash.value(it.key());
-			tilehash.remove(it.key());	
+			delete m_tilehash.value(it.key());
+			m_tilehash.remove(it.key());	
 		}
 	}
 }
@@ -144,71 +79,64 @@ void TextureLoader::setN(const int n){
 
 inline void TextureLoader::getPixelValue(const float& radlng, const float& radlat, QRgb* line){
 
-//	The origin (0, 0) is in the upper left corner
-//	lng: 360 deg = 43200 pixel
-//	lat: 180 deg = 21600 pixel
-
-//	Convert rad to pixel...
+//	Convert lng and lat measured in radiant 
+//	to pixel position on the current m_tile ...
 	posx = (int)(normhalfalpha + radlng * rad2pixw);
 	posy = (int)(normquatbeta + radlat * rad2pixh);
 
-	// necessary to prevent e.g. crash if TextureMapper::radalpha = -pi
-	if ( posx > normfullalpha ) posx = normfullalpha;
-	if ( posy > normhalfbeta ) posy = normhalfbeta;
-
-//	qDebug() << "posx:" << posx << "posy:" << posy;
 	if ( posx >= m_tilw || posx < 0 ) {
+		// necessary to prevent e.g. crash if TextureMapper::radalpha = -pi
+		if ( posx > normfullalpha ) posx = normfullalpha;
+		if ( posy > normhalfbeta  ) posy = normhalfbeta;
+
+//		The origin (0, 0) is in the upper left corner
+//		lng: 360 deg = 43200 pixel
+//		lat: 180 deg = 21600 pixel
 		int lng = posx + m_tilxw;
 		int lat = posy + m_tilyh;
-		tilx = lng / m_tilw; // Counts the tiles left from the current tile ("tileposition") 
-		tily = lat / m_tilh; // Counts the tiles on the top from the current tile
-//		qDebug() << "tilx:" << tilx << "tily:" << tily;
+
+		tilx = lng / m_tilw; // Counts the m_tiles left from the current m_tile ("m_tileposition") 
+		tily = lat / m_tilh; // Counts the m_tiles on the top from the current m_tile
+
 		loadTile();
+
 		posx = lng - m_tilxw;
 		posy = lat - m_tilyh;
 	}
-	else	if ( posy >= m_tilh || posy < 0 ) {
-		int lat = posy + m_tilyh;
-		tily = lat / m_tilh;
-		loadTile();
-		posy = lat - m_tilyh;
+	else {
+		if ( posy >= m_tilh || posy < 0 ) {
+
+			if ( posy > normhalfbeta ) posy = normhalfbeta;
+			int lat = posy + m_tilyh;
+			tily = lat / m_tilh;
+			loadTile();
+			posy = lat - m_tilyh;
+		}
 	}
 
-	switch ( depth() ) {
-	case 8:
-		*line = tile->jumpTable8[posy][posx];
-		break;
-	case 32:
-		*line = tile->jumpTable32[posy][posx];
-		break;
-	default:
-		if (tile->depth == 8)
-			*line = tile->jumpTable8[posy][posx];
-		else
-			*line = tile->jumpTable32[posy][posx];
-		break;
-	}
+	if (m_tile->depth() == 8)
+		*line = m_tile->jumpTable8[posy][posx];
+	else
+		*line = m_tile->jumpTable32[posy][posx];
 }
 
 void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb* line){
 //	This method executes the interpolation for skipped pixels in a scanline.
-//	We rather might move this into TextureMapper.
+//	We rather might want to move this into TextureMapper.
 
-	avglat = lat-m_prevlat;
-	avglat *= m_ninv;
-	avglng = lng-m_prevlng;
+	float avglat = ( lat-m_prevlat ) * m_ninv;
+	float avglng = lng-m_prevlng;
 
 	if (fabs(avglng) > M_PI){
 
-		avglng = TWOPI - fabs(avglng);
-		avglng *= m_ninv;
+		avglng = ( TWOPI - fabs(avglng) ) * m_ninv;
 
 		if (m_prevlng < lng){
 			for (int j=1; j < m_n; j++){
 				m_prevlat += avglat;
 				m_prevlng -= avglng;
 				if (m_prevlng <= -M_PI) m_prevlng += TWOPI;
-				getPixelValue( m_prevlng, m_prevlat, line);
+				getPixelValue( m_prevlng, m_prevlat, line );
 				line++;
 			}
 		}
@@ -236,7 +164,6 @@ void TextureLoader::getPixelValueApprox(const float& lng, const float& lat, QRgb
 			line++;
 		}
 	}	
-
 }
 
 void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat, QRgb* line){
@@ -249,16 +176,16 @@ void TextureLoader::prePixelValueApprox(const float& radlng, const float& radlat
 }
 
 inline void TextureLoader::flush(){
-//	Remove all tiles from tilehash
-	QHash <int, TileContainer*>::const_iterator it;
-	for( it = tilehash.begin(); it != tilehash.constEnd(); it++ ) 
+//	Remove all m_tiles from m_tilehash
+	QHash <int, TextureTile*>::const_iterator it;
+	for( it = m_tilehash.begin(); it != m_tilehash.constEnd(); it++ ) 
 		delete (*it);
-	tilehash.clear();
+	m_tilehash.clear();
 }
 
 
 inline void TextureLoader::loadTile(){
-//	Choosing the correct tile via Lng/Lat info 
+//	Choosing the correct m_tile via Lng/Lat info 
 	m_tilxw = tilx * m_tilw;
 	m_tilyh = tily * m_tilh;
 
@@ -267,44 +194,41 @@ inline void TextureLoader::loadTile(){
 	normfullalpha = maxfullalpha - m_tilxw;
 	normhalfbeta = maxhalfbeta - m_tilyh;
 
-	tilekey =  (tilx << 8) + tily;
-//	tilekey =  (tilx *100) + tily;
+	m_tilekey =  (tilx *1000) + tily;
 
-	// If the tile hasn't been loaded into the tilehash yet, then do so
-	if (!tilehash.contains( tilekey )){	
-		m_filename = KAtlasDirs::path( QString("%1%2_%3x%4.jpg").arg(m_fileprefix).arg(m_texlevel).arg(tilx).arg(tily) );
-		tile = new TileContainer(m_filename);
-		if ( m_depth == -1 ) m_depth = tile->depth;
-		if ( m_depth != tile->depth ) m_depth = 0;
-		tilehash[tilekey]=tile;
+	// If the m_tile hasn't been loaded into the m_tilehash yet, then do so
+	if (!m_tilehash.contains( m_tilekey )){	
+		m_tile = new TextureTile(tilx, tily, m_texlevel, m_theme);
+		m_tilehash[m_tilekey] = m_tile;
 	}
 	// otherwise pick the correct one from the hash
 	else {
-		tile=tilehash.value(tilekey);
-		if (!tile->used){
-			tile->used=true;
-			tilehash[tilekey]=tile;
+		m_tile=m_tilehash.value(m_tilekey);
+		if (!m_tile->used()){
+			m_tile->setUsed(true);
+			m_tilehash[m_tilekey]=m_tile;
 		}
 	}
 }
 
 void TextureLoader::setTexLevel(const int texlevel){
+
 	m_texlevel=texlevel;
 	if ( m_texlevel != m_oldtexlevel){
 		flush();
 		m_oldtexlevel=m_texlevel;
 
-		texpixw = (int)(21600.0f / (float)(m_texlevel) / (float)(m_tilw));
-		texpixh = (int)(21600.0f / (float)(m_texlevel) / (float)(m_tilh));	
+		texpixw = (int)(4320000.0f / (float)( TextureLoader::levelToColumn( m_texlevel ) ) / (float)(m_tilw));
+		texpixh = (int)(2160000.0f / (float)( TextureLoader::levelToRow( m_texlevel ) ) / (float)(m_tilh));
 
-		rad2pixw = (21600.0f / M_PI / (float)(texpixw));
-		rad2pixh = (21600.0f / M_PI / (float)(texpixh));
+		rad2pixw = (2160000.0f / M_PI / (float)(texpixw));
+		rad2pixh = (2160000.0f / M_PI / (float)(texpixh));
 
 
-		maxfullalpha = (int)(43200.0f / (float)(texpixw)) - 1;
-		maxhalfalpha = (float)(21600.0f / (float)(texpixw));
-		maxquatalpha = (int)(10800.0f / (float)(texpixw));
-		maxquatbeta = (float)(10800.0f / (float)(texpixh));
+		maxfullalpha = (int)(4320000.0f / (float)(texpixw)) - 1;
+		maxhalfalpha = (float)(2160000.0f / (float)(texpixw));
+		maxquatalpha = (int)(1080000.0f / (float)(texpixw));
+		maxquatbeta = (float)(1080000.0f / (float)(texpixh));
 		maxhalfbeta = (int) ( 2.0f * maxquatbeta) - 1;
 
 		normhalfalpha = maxhalfalpha - m_tilxw;
@@ -312,4 +236,96 @@ void TextureLoader::setTexLevel(const int texlevel){
 		normfullalpha = maxfullalpha - m_tilxw;
 		normhalfbeta = maxhalfbeta - m_tilyh;
 	}
+}
+
+int TextureLoader::levelToRow( int level ){
+	return (int)pow( 2.0, (double)( level ) );
+}
+
+int TextureLoader::levelToColumn( int level ){
+	return (int)pow( 2.0, (double)( level + 1 ) );
+}
+
+int TextureLoader::rowToLevel( int row ){
+	return (int)( log( row ) / log( 2 ) );
+}
+
+int TextureLoader::columnToLevel( int column ){
+	return (int)( log( column / 2 ) / log( 2 ) );
+}
+
+int TextureLoader::maxCompleteTileLevel( QString theme ){
+
+	bool noerr = true; 
+
+	int tilelevel = -1;
+	int trylevel = 0;
+
+//	if ( m_bitmaplayer.type.toLower() == "bitmap" ){
+	while ( noerr == true ){
+		int nmaxit = TextureLoader::levelToRow( trylevel );
+		for ( int n=0; n < nmaxit; n++) {
+			int mmaxit = TextureLoader::levelToColumn( trylevel );
+			for ( int m=0; m < mmaxit; m++){
+				QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg").arg(theme).arg( trylevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
+//				qDebug() << tilepath;
+				noerr = QFile::exists( tilepath );
+				if ( noerr == false ) break; 
+			}
+			if ( noerr == false ) break; 
+		}	
+
+		if ( noerr == true) tilelevel = trylevel;
+		trylevel++;
+	}
+
+	if ( tilelevel == -1 ){
+		qDebug("No Tiles Found!");
+	}
+
+	qDebug() << "Detected maximum complete tile level: " << tilelevel;
+
+	return tilelevel;
+}
+
+int TextureLoader::maxPartialTileLevel( QString theme ){
+
+	QString tilepath = KAtlasDirs::path( QString("maps/earth/%1").arg(theme) );
+	QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
+
+	int maxtilelevel = -1;
+
+	QString str;
+	bool ok = true;
+
+	QStringList::const_iterator constIterator;
+	for (constIterator = leveldirs.constBegin(); constIterator != leveldirs.constEnd();
+		++constIterator){
+		int value = (*constIterator).toInt( &ok, 10 );
+//		qDebug() << "Value: " << value  << "Ok: " << ok;
+		if ( ok && value > maxtilelevel ) maxtilelevel = value;
+	}
+
+	qDebug() << "Detected maximum tile level that contains data: " << maxtilelevel;
+
+	return maxtilelevel;
+}
+
+bool TextureLoader::baseTilesAvailable( QString theme ){
+
+	bool noerr = true; 
+
+	int n = 0;
+
+	for ( int m = 0; m < 2; ++m ){
+		QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
+
+		noerr = QFile::exists( tilepath );
+
+		if ( noerr == false ) break; 
+	}
+
+//	qDebug() << "Mandatory most basic tile level is fully available: " << noerr;
+
+	return noerr;
 }

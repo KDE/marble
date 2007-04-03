@@ -24,6 +24,7 @@ set(marble_SRCS
            katlasviewinputhandler.cpp
            main.cpp
            texcolorizer.cpp
+	   texturetile.cpp
            texloader.cpp
            texmapper.cpp
            quaternion.cpp
@@ -57,6 +58,7 @@ set(marble_SRCS
            tinywebbrowser.cpp
            httpfetchfile.cpp
            measuretool.cpp
+	   katlasaboutdialog.cpp
 )
 
 set(marble_HDRS
@@ -65,6 +67,7 @@ set(marble_HDRS
            katlasview.h
            katlasviewinputhandler.h
            texcolorizer.h
+	   texturetile.h
            texloader.h
            texmapper.h
            quaternion.h
@@ -98,10 +101,11 @@ set(marble_HDRS
            tinywebbrowser.h
            httpfetchfile.h
            measuretool.h
+	   katlasaboutdialog.h
 )
 
 set (marble_UI katlastilecreatordialog.ui
-	   katlastoolbox.ui placemarkinfodialog.ui)
+	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui)
 
 qt4_add_resources(marble_SRCS marble.qrc)
 

@@ -39,6 +39,9 @@ DESTINATION ${data_dir}/bitmaps)
 
 install (FILES 
 svg/windrose.svg
+svg/marble-logo.svg
+svg/marble-logo.png
+svg/marble-logo-72dpi.png
 DESTINATION ${data_dir}/svg)
 
 install (FILES 
@@ -288,22 +291,22 @@ flags/flag_zw.svg
 DESTINATION ${data_dir}/flags)
 
 install (FILES
-maps/citylights/citylights.jpg
-maps/citylights/citylights.dgml
-maps/citylights/citylights-preview.png
-DESTINATION ${data_dir}/maps/citylights)
+maps/earth/citylights/citylights.jpg
+maps/earth/citylights/citylights.dgml
+maps/earth/citylights/citylights-preview.png
+DESTINATION ${data_dir}/maps/earth/citylights)
 
 install (FILES
-maps/etopo2/etopo.jpg
-maps/etopo2/etopo2.dgml
-maps/etopo2/etopo-preview.png
-DESTINATION ${data_dir}/maps/etopo2)
+maps/earth/etopo2/etopo.jpg
+maps/earth/etopo2/etopo2.dgml
+maps/earth/etopo2/etopo-preview.png
+DESTINATION ${data_dir}/maps/earth/etopo2)
 
 install (FILES
-maps/bluemarble/bluemarble.jpg
-maps/bluemarble/bluemarble.dgml
-maps/bluemarble/bluemarble-preview.png
-DESTINATION ${data_dir}/maps/bluemarble)
+maps/earth/bluemarble/bluemarble.jpg
+maps/earth/bluemarble/bluemarble.dgml
+maps/earth/bluemarble/bluemarble-preview.png
+DESTINATION ${data_dir}/maps/earth/bluemarble)
 
 install (FILES
 mwdbii/PDIFFBORDER.PNT

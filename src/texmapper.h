@@ -25,7 +25,7 @@ class TextureLoader;
 class TextureMapper {
 public:
 	TextureMapper( const QString& path );
-	virtual ~TextureMapper(){}
+	virtual ~TextureMapper();
 
 	void setMap( const QString& path );
 	void setMaxTileLevel( int level ){ m_maxtilelevel = level; }

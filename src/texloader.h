@@ -21,18 +21,7 @@
 @author Torsten Rahn
 */
 
-struct TileContainer{
-	TileContainer(const QString&);
-	virtual ~TileContainer();
-
-	QImage* rawtile;
-
-	bool used;
-	int depth;
-
-	uchar **jumpTable8;
-	uint **jumpTable32;
-};
+class TextureTile;
 
 class TextureLoader {
 public:
@@ -46,41 +35,56 @@ public:
 	void cleanupTilehash();
 	void flush();
 
+	static int levelToRow( int level );
+	static int levelToColumn( int level );
+	static int rowToLevel( int row );
+	static int columnToLevel( int column );
+
+	// highest level in which all tiles are available
+	static int maxCompleteTileLevel( QString theme );
+
+	// highest level in which some tiles are available
+	static int maxPartialTileLevel( QString theme );
+
+	// the mandatory most basic tile level is fully available
+	static bool baseTilesAvailable( QString theme );
+
+//	TODO: These should be moved into TextureMapper:
+
 	void setN( const int n );
 	void prePixelValueApprox(const float&, const float&, QRgb*);
 	void getPixelValueApprox(const float&, const float&, QRgb*);
-
+	int m_depth;
 	const int depth() const { return m_depth; }
 
 protected:
-	void getPixelValue(const float&, const float&, QRgb*);
 	inline void loadTile();
 
-	TileContainer* tile;
-	QString m_fileprefix, m_filename;
-	QHash <int, TileContainer*> tilehash;
+	TextureTile* m_tile;
+	QString m_theme, m_filename;
+	QHash <int, TextureTile*> m_tilehash;
 
-	float m_prevlat, m_prevlng;
-	int m_n; float m_ninv;
-
-	float avglng, avglat;
 	int texpixw, texpixh;
 	float rad2pixw, rad2pixh;
-
-	int normfullalpha, normhalfbeta;
-	float normhalfalpha, normquatbeta;
-
-	int maxfullalpha, maxquatalpha, maxhalfbeta;
-	float maxhalfalpha, maxquatbeta;
 
 	int m_tilxw, m_tilyh;
 
 	int tilx, tily;
 	int m_tilw, m_tilh;
-	int posx, posy;
 
-	int m_texlevel, m_oldtexlevel, tilekey;
-	int m_depth;
+	int m_texlevel, m_oldtexlevel, m_tilekey;
+
+
+//	TODO: These should be moved into TextureMapper:
+
+	void getPixelValue(const float&, const float&, QRgb*);
+	float m_prevlat, m_prevlng;
+	int m_n; float m_ninv;
+	int maxfullalpha, maxquatalpha, maxhalfbeta;
+	float maxhalfalpha, maxquatbeta;
+	int normfullalpha, normhalfbeta;
+	float normhalfalpha, normquatbeta;
+	int posx, posy;
 };
 
-#endif
+#endif // 

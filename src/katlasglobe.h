@@ -39,7 +39,7 @@ class PlaceMarkManager;
 class KAtlasGlobe  : public QObject {
 public:
 	KAtlasGlobe( QWidget* parent=0 );
-	virtual ~KAtlasGlobe(){};
+	virtual ~KAtlasGlobe();
 	void setCanvasImage(QImage*);
 
 	void paintGlobe(ClipPainter*, QRect);

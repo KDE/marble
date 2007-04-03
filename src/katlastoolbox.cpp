@@ -51,7 +51,7 @@ KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent), m_searchTrigger
 
 	connect(locationListView, SIGNAL(centerOn(const QModelIndex&)), this, SIGNAL(centerOn(const QModelIndex&)));
 
-	QStringList mapthemedirs = MapTheme::findMapThemes( "maps" );
+	QStringList mapthemedirs = MapTheme::findMapThemes( "maps/earth" );
 
 	QStandardItemModel* mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
 	katlasThemeSelectView->setModel( mapthememodel );

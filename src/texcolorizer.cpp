@@ -34,9 +34,9 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 	emboss.buffer = 0;
 
 	float bendradius = 0;
-	const float bendRelief = M_PI * 0.5 / ( (float)(radius) * sqrtf(2.0f) );
-	const float bendReliefx = 0.41 * bendRelief;
-	const float bendReliefm = 0.941246 * bendRelief / bendReliefx;
+	const float bendRelief = M_PI * 0.5f / ( (float)(radius) * sqrtf(2.0f) );
+	const float bendReliefx = 0.41f * bendRelief;
+	const float bendReliefm = 0.941246f * bendRelief / bendReliefx;
 
 	if ( radius*radius > imgradius ){
 		for (int y = 0; y < imgheight; y++){

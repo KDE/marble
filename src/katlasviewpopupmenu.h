@@ -42,6 +42,7 @@ signals:
 
 protected slots:
 	void slotAddMeasurePoint();
+	void slotAboutDialog();
 
 protected:
 	KAtlasView* m_gpview;
@@ -56,6 +57,7 @@ protected:
 
 	QAction* m_pAddMeasurePointAction;	
 	QAction* m_pRemoveMeasurePointsAction;	
+	QAction* m_pAboutDialogAction;	
 
 	void createActions();
 };

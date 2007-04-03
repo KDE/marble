@@ -5,6 +5,7 @@
 #include "katlasglobe.h"
 #include "pntmap.h"
 #include "texcolorizer.h"
+#include "texloader.h"
 #include "tilescissor.h"
 #include "katlasdirs.h"
 #include "katlastilecreatordialog.h"
@@ -31,7 +32,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	m_maptheme = new MapTheme();
 
 
-	QStringList m_mapthemedirs = MapTheme::findMapThemes( "maps" );
+	QStringList m_mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
 	QString selectedmap;
 
 	if ( m_mapthemedirs.count() == 0 ) {
@@ -42,11 +43,10 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 	if ( m_mapthemedirs.count() >= 1 ){
 		QStringList tmp = m_mapthemedirs.filter("etopo2.dgml");
 		if ( tmp.count() >= 1 )
-			selectedmap = "maps/" + tmp[0];
+			selectedmap = tmp[0];
 		else
-			selectedmap = "maps/" + m_mapthemedirs[0];
+			selectedmap = m_mapthemedirs[0];
 	}
-	
 	setMapTheme( selectedmap );
 
 	veccomposer = new VectorComposer();
@@ -62,10 +62,15 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent ):m_parent(parent){
 
 }
 
+KAtlasGlobe::~KAtlasGlobe(){
+	delete texmapper;
+}
+
 void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 
-	m_maptheme->open( KAtlasDirs::path( selectedmap) );
-	if ( m_maptheme->maxTileLevel() < 1 ){
+	m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1").arg( selectedmap ) ) );
+
+	if ( !TextureLoader::baseTilesAvailable( m_maptheme->tilePrefix() ) ){
 		qDebug("Base tiles not available. Creating Tiles ... ");
 
 		KAtlasTileCreatorDialog tilecreatordlg( m_parent );
@@ -78,14 +83,13 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 
 		tilecreatordlg.exec();
 	}
-	m_maptheme->detectMaxTileLevel();
 
 	if ( texmapper == 0 )
-		texmapper = new TextureMapper( "maps/" + m_maptheme->tilePrefix() + "_" );
+		texmapper = new TextureMapper( "maps/earth/" + m_maptheme->tilePrefix() );
 	else
-		texmapper->setMap( "maps/" + m_maptheme->tilePrefix() + "_" );
+		texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
 
-	texmapper->setMaxTileLevel( m_maptheme->maxTileLevel() );
+	texmapper->setMaxTileLevel( TextureLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
 
 	if ( m_placecontainer == 0)
 		m_placecontainer = new PlaceContainer("placecontainer");
@@ -109,6 +113,15 @@ void KAtlasGlobe::resize(){
 	texmapper->resizeMap(m_canvasimg);
 	veccomposer->resizeMap(m_coastimg);
 	gridmap->resizeMap(m_coastimg);
+
+	QRadialGradient grad1(QPointF(m_canvasimg->width()/2, m_canvasimg->height()/2), 1.05*m_radius );
+	grad1.setColorAt(0.91, QColor(255,255,255,255));
+	grad1.setColorAt(1.0, QColor(255,255,255,0));
+	QBrush brush1(grad1);
+	QPainter painter(m_canvasimg);
+	painter.setBrush(brush1);
+	painter.setRenderHint(QPainter::Antialiasing,true);
+	painter.drawEllipse( m_canvasimg->width()/2 - (int)( (float)(m_radius) * 1.05 ), m_canvasimg->height()/2 - (int)( (float)(m_radius) * 1.05 ), (int)( 2.1 * (float)(m_radius) ), (int)( 2.1 * (float)(m_radius) ) );
 
 	m_justModified = true;
 }
@@ -190,8 +203,18 @@ void KAtlasGlobe::setRadius(const int& radius){
 	// Clear canvas if the globe is visible as a whole or if the globe does shrink
 	int imgrx = ( m_canvasimg->width() ) >> 1;
 	int imgry = ( m_canvasimg->height() ) >> 1;
-	if ( radius*radius < imgrx*imgrx + imgry*imgry &&  radius < m_radius ){
+//	if ( radius*radius < imgrx*imgrx + imgry*imgry &&  radius < m_radius ){
+	if ( radius*radius < imgrx*imgrx + imgry*imgry &&  radius != m_radius ){
 		m_canvasimg->fill(Qt::transparent);
+
+		QRadialGradient grad1(QPointF(m_canvasimg->width()/2, m_canvasimg->height()/2), 1.05*radius );
+		grad1.setColorAt(0.91, QColor(255,255,255,255));
+		grad1.setColorAt(1.0, QColor(255,255,255,0));
+		QBrush brush1(grad1);
+		QPainter painter(m_canvasimg);
+		painter.setBrush(brush1);
+		painter.setRenderHint(QPainter::Antialiasing,true);
+		painter.drawEllipse( m_canvasimg->width()/2 - (int)( (float)(radius) * 1.05 ), m_canvasimg->height()/2 - (int)( (float)(radius) * 1.05 ), (int)( 2.1 * (float)(radius) ), (int)( 2.1 * (float)(radius) ) );
 	}
 
 	m_radius = radius;

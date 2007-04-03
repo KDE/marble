@@ -25,13 +25,12 @@ public:
 	QString prefix() const { return m_prefix; }
 	QString icon() const { return m_icon; }
 	QColor labelColor() const { return m_labelcolor; }
-	QString tilePrefix() const { return ( m_prefix + "/" + m_installmap.left( m_installmap.length()-4 ) ); }
+	QString tilePrefix() const { return ( m_prefix ); }
 	QString description() const { return m_description; }
 	QString installMap() const { return m_installmap; }
 	DgmlLayer bitmaplayer() const { return m_bitmaplayer; }
 	DgmlLayer vectorlayer() const { return m_vectorlayer; }
 
-	void detectMaxTileLevel();
 	int maxTileLevel() const { return m_maxtilelevel; }
 
 	static QStringList findMapThemes( const QString& );

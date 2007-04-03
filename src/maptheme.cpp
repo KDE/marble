@@ -8,6 +8,7 @@
 #include <QtGui/QStandardItemModel>
 
 #include "katlasdirs.h"
+#include "texloader.h"
 
 MapTheme::MapTheme(QObject *parent)
     : QObject(parent)
@@ -111,42 +112,9 @@ int MapTheme::open( QString path ){
 		element = element.nextSiblingElement();
 	}
 
-	detectMaxTileLevel();
+//	detectMaxTileLevel();
 
 	return 0;
-}
-
-void MapTheme::detectMaxTileLevel(){
-
-	bool noerr = true; 
-
-	int tilelevel = -1;
-	int trylevel = 1;
-
-	if ( m_bitmaplayer.type.toLower() == "bitmap" ){
-		while ( noerr == true ){
-			for ( int n=0; n < 2*trylevel; n++) {
-				for ( int m=0; m < trylevel; m++){
-					QString tilepath = KAtlasDirs::path( "maps/" + tilePrefix()
-						+ QString("_%1_%2x%3.jpg").arg(trylevel).arg(n).arg(m) );
-//					qDebug() << tilepath;
-					noerr = QFile::exists( tilepath );
-					if ( noerr == false ) break; 
-				}
-				if ( noerr == false ) break; 
-			}	
-
-			if ( noerr == true) tilelevel = trylevel;
-			trylevel *= 2;
-		}
-
-		if ( tilelevel == -1 ){
-			qDebug("No Tiles Found!");
-		}
-	}
-
-	m_maxtilelevel = tilelevel;
-
 }
 
 QStringList MapTheme::findMapThemes( const QString& path ){
@@ -169,17 +137,17 @@ QStringList MapTheme::findMapThemes( const QString& path ){
 
 	for (int i = 0; i < localmappaths.size(); ++i){
 //		qDebug() << "Map dirs: "  << KAtlasDirs::localDir() + "/maps/" + localmappaths.at(i);
-		localmapdirs << KAtlasDirs::localDir() + "/maps/" + localmappaths.at(i);
+		localmapdirs << KAtlasDirs::localDir() + "/maps/earth/" + localmappaths.at(i);
 	}
 
 	for (int i = 0; i < sysmappaths.size(); ++i){
 //		qDebug() << "Map dirs: " << KAtlasDirs::systemDir() + "/maps/" + sysmappaths.at(i);
-		sysmapdirs << KAtlasDirs::systemDir() + "/maps/" + sysmappaths.at(i);
+		sysmapdirs << KAtlasDirs::systemDir() + "/maps/earth/" + sysmappaths.at(i);
 	}
 
 	for (int i = 0; i < unixmappaths.size(); ++i){
 //		qDebug() << "Map dirs: " << KAtlasDirs::unixDir() + "/maps/" + unixmappaths.at(i);
-		unixmapdirs << KAtlasDirs::unixDir() + "/maps/" + unixmappaths.at(i);
+		unixmapdirs << KAtlasDirs::unixDir() + "/maps/earth/" + unixmappaths.at(i);
 	}
         
         QStringList mapfiles;
@@ -276,12 +244,12 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist ){
 
 	int row = 0;
 	while (it.hasNext()){
-		QString currentmaptheme = "maps/" + it.next();
-		maptheme->open( KAtlasDirs::path( currentmaptheme ) );
+		QString currentmaptheme = it.next();
+		maptheme->open( KAtlasDirs::path( "maps/earth/" + currentmaptheme ) );
 
 		mapthememodel->insertRows(row, 1, QModelIndex());
 		mapthememodel->setData( mapthememodel->index(row, 0, QModelIndex()), maptheme->name(), Qt::DisplayRole );
-		mapthememodel->setData( mapthememodel->index(row, 0, QModelIndex()), QIcon( KAtlasDirs::path( "maps/" +  maptheme->prefix() + "/" + maptheme->icon() ) ), Qt::DecorationRole );
+		mapthememodel->setData( mapthememodel->index(row, 0, QModelIndex()), QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + "/" + maptheme->icon() ) ), Qt::DecorationRole );
 		mapthememodel->setData( mapthememodel->index(row, 1, QModelIndex()), maptheme->description(), Qt::ToolTipRole);
 		mapthememodel->setData( mapthememodel->index(row, 2, QModelIndex()), currentmaptheme );
 	}

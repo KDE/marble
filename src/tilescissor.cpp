@@ -1,7 +1,5 @@
 #include "tilescissor.h"
 
-#include <cmath>
-
 #include <QtGui/QApplication>
 #include <QtCore/QDebug>
 #include <QtGui/QImage>
@@ -12,6 +10,7 @@
 #include <QtCore/QVector>
 
 #include "katlasdirs.h"
+#include "texloader.h"
 
 TileScissor::TileScissor(const QString& prefix, const QString& installmap, const QString& dem):m_prefix(prefix), m_installmap(installmap),m_dem(dem){
 	/* NOOP */
@@ -21,11 +20,10 @@ void TileScissor::createTiles() {
 
 	QApplication::processEvents(); 
 
-	QString srcpath = KAtlasDirs::path( "maps/" + m_prefix + "/" + m_installmap );
-	QString destpath = KAtlasDirs::localDir() + "/maps/" + m_prefix + "/" 
-		+ m_installmap.left( m_installmap.length()-4 );
+	QString srcpath = KAtlasDirs::path( "maps/earth/" + m_prefix + "/" + m_installmap );
+	QString destpath = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + "/";
 
-	qDebug() << "creating tiles from: " << srcpath;
+	qDebug() << "Creating tiles from: " << srcpath;
 	QImageReader testimg( srcpath );
 
 	QVector<QRgb> legpal;
@@ -43,59 +41,66 @@ void TileScissor::createTiles() {
 */	
 	bool smooth = ( (imgw%675)%2 > 0 || (imgh%675)%2 > 0 ) ? true : false;
 
-	int maxtilelevel = 0;
+	int maxtilelevel = -1;
 	int stdimgw = 0;
 	int stdimgh = 0;
 
 	int count = 0;
 	while ( stdimgw < imgw ){
-		maxtilelevel = (int)pow(2, (double)count);
-		stdimgw = 2 * 675 * maxtilelevel;
+		maxtilelevel = count;
+		stdimgw = 2 * 675 * TextureLoader::levelToRow( maxtilelevel );
 		count++;
 	}
 	stdimgh = stdimgw / 2;
-//	qDebug() << "MAXTILELEVEL=" << maxtilelevel;
+	qDebug() << "Maximum tile level: " << maxtilelevel;
 
 
-	if ( QDir( KAtlasDirs::localDir() + "/maps/" + m_prefix ).exists() == false ) 
-		( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/maps/" + m_prefix );
+	if ( QDir( KAtlasDirs::localDir() + "/maps/earth/" + m_prefix ).exists() == false ) 
+		( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/maps/earth/" + m_prefix );
 
-	int tilelevel = 1;
+	int tilelevel = 0;
 
 	QSize stdsize = QSize( 675,675 );
 
 	// Counting total amount of tiles to be generated for progressbar
 	int maxcount = 0;
+
 	while ( tilelevel <= maxtilelevel ) {
-		for ( int n=0; n < 2*tilelevel; n++) 
-			for ( int m=0; m < tilelevel; m++)
+		int mmaxit = TextureLoader::levelToColumn( tilelevel );
+		for ( int m=0; m < mmaxit; m++) { 
+			int nmaxit = TextureLoader::levelToRow( tilelevel );
+			for ( int n=0; n < nmaxit; n++)
 				maxcount++;
-		tilelevel *= 2;	
+		}
+		tilelevel++;	
 	}
+
+	qDebug() << maxcount << " tiles to be created in total.";
+
+	int mmax = TextureLoader::levelToColumn( maxtilelevel );
+	int nmax = TextureLoader::levelToRow( maxtilelevel );
 
 	// Loading each row at highest spatial resolution and croping tiles
 	int completed = 0;
 	count = 0; // reset, so that it counts the percentage correctly
 	QString tilename;
-	
-	for ( int m=0; m < maxtilelevel; m++){
+
+	// Creating directory structure for the highest level
+
+	QString dirname( KAtlasDirs::localDir() + QString("/maps/earth/%1/%2").arg(m_prefix).arg(maxtilelevel) );
+	if ( QDir( dirname ).exists() == false ) 
+		( QDir::root() ).mkpath( dirname );
+	for ( int n=0; n < nmax; n++) {
+		QString dirname( KAtlasDirs::localDir() + QString("/maps/earth/%1/%2/%3").arg(m_prefix).arg(maxtilelevel).arg( n, 4, 10, QChar('0') ) );
+		if ( QDir( dirname ).exists() == false ) 
+			( QDir::root() ).mkpath( dirname );
+	}
+
+	for ( int n=0; n < nmax; n++){
 		QApplication::processEvents(); 
 
-		QRect rowsrc( 0, (int)((float)(m*imgh)/(float)(maxtilelevel)), imgw, 	(int)((float)(imgh)/(float)(maxtilelevel)) );
-/*
-		// Unfortunately this code is out of order due to Qt 4.x regressions
-		QImageReader img( srcpath );
-		img.setClipRect( rowsrc );
+		QRect rowsrc( 0, (int)((float)(n*imgh)/(float)(nmax)), imgw, 	(int)((float)(imgh)/(float)(nmax)) );
 
-		if ( smooth == true ){
-			QSize destsize( stdimgw, 675 );
-			img.setScaledSize( destsize );
-			QRect destrow(  QPoint( 0, 0 ), destsize );
-			img.setScaledClipRect( destrow );
-		}
-		QImage row = img.read();
-		if ( row.isNull() ) qDebug() << "Read-Error: " << img.errorString();
-*/
 		QImage img( srcpath );
 
 		QImage row = img.copy( rowsrc );
@@ -107,19 +112,19 @@ void TileScissor::createTiles() {
 
 		if ( row.isNull() ) qDebug() << "Read-Error! Null QImage!";
 
-		for ( int n=0; n < 2*maxtilelevel; n++) {
+		for ( int m=0; m < mmax; m++) {
 			QApplication::processEvents(); 
 
-			QImage tile = row.copy( n*imgw/(2*maxtilelevel), 0, 675, 675 );
+			QImage tile = row.copy( m*imgw/mmax, 0, 675, 675 );
 
-			tilename = destpath + QString("_%1_%2x%3.jpg").arg(maxtilelevel).arg(n).arg(m);
+			tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( maxtilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
 
 			if ( m_dem == "true" ){
 				tile=tile.convertToFormat(QImage::Format_Indexed8, legpal, Qt::ThresholdDither);
 			}
 
 			bool noerr = tile.save( tilename, "jpg", 100);
-			if ( noerr == false ) qDebug( "Error while writing Tile" );
+			if ( noerr == false ) qDebug() << "Error while writing Tile: " << tilename;
 
 			completed = (int) ( 90 * (float)(count) / (float)(maxcount) );	
 			count++;
@@ -128,24 +133,34 @@ void TileScissor::createTiles() {
 		}
 	}
 
-	tilelevel = maxtilelevel / 2;
+	qDebug() << "Tilelevel: " << maxtilelevel << " successfully created.";
+
+	tilelevel = maxtilelevel - 1;
 
 	// Now that we have the tiles at the highest resolution lets build them together four by four
 
-	while( tilelevel >= 1 ) {
-		for ( int m=0; m < tilelevel; m++){
-			for ( int n=0; n < 2*tilelevel; n++) {
+	while( tilelevel >= 0 ) {
 
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(2*tilelevel).arg(2*n).arg(2*m);
+		int nmaxit =  TextureLoader::levelToRow( tilelevel );;
+		for ( int n=0; n < nmaxit; n++) {
+			QString dirname( KAtlasDirs::localDir() + QString("/maps/earth/%1/%2/%3").arg(m_prefix).arg(tilelevel).arg( n, 4, 10, QChar('0') ) );
+//			qDebug() << "dirname: " << dirname;
+			if ( QDir( dirname ).exists() == false ) 
+				( QDir::root() ).mkpath( dirname );
+
+			int mmaxit = TextureLoader::levelToColumn( tilelevel );;
+			for ( int m=0; m < mmaxit; m++){
+
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
 				QImage img_topleft( tilename );
 				
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(2*tilelevel).arg(2*n+1).arg(2*m);
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
 				QImage img_topright( tilename );
 
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(2*tilelevel).arg(2*n).arg(2*m+1);
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
 				QImage img_bottomleft( tilename );
 				
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(2*tilelevel).arg(2*n+1).arg(2*m+1);
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
 				QImage img_bottomright( tilename );
 
 				QImage tile = img_topleft;
@@ -208,9 +223,9 @@ void TileScissor::createTiles() {
 					}
 				}
 
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(tilelevel).arg(n).arg(m);
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
 				bool noerr = tile.save( tilename, "jpg", 100 );
-				if ( noerr == false ) qDebug( "Error while writing Tile" );
+				if ( noerr == false ) qDebug() << "Error while writing Tile: " << tilename;;
 
 				completed = (int) ( 90 * (float)(count) / (float)(maxcount) );	
 				count++;
@@ -219,31 +234,35 @@ void TileScissor::createTiles() {
 				QApplication::processEvents(); 
 			}
 		}
-		tilelevel /= 2;
-	}
+		qDebug() << "Tilelevel: " << tilelevel << " successfully created.";
 
+		tilelevel--;
+	}
+	qDebug() << "Tile creation completed.";
 	// Applying correct JPEG compression
 	int microcount = 0;
 	int microcompleted = 0;
 
-	tilelevel = 1;
+	tilelevel = 0;
 	while ( tilelevel <= maxtilelevel ) {
-		for ( int m=0; m < tilelevel; m++){
-			for ( int n=0; n < 2*tilelevel; n++){ 
+		int nmaxit =  TextureLoader::levelToRow( tilelevel );
+		for ( int n=0; n < nmaxit; n++){
+			int mmaxit =  TextureLoader::levelToColumn( tilelevel );
+			for ( int m=0; m < mmaxit; m++){ 
 				microcount++;
 
-				tilename = destpath + QString("_%1_%2x%3.jpg").arg(tilelevel).arg(n).arg(m);
+				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
 				QImage tile( tilename );
 
 				bool noerr = tile.save( tilename, "jpg", 85 );
-				if ( noerr == false ) qDebug( "Error while writing Tile" );	
+				if ( noerr == false ) qDebug() << "Error while writing Tile: " << tilename;	
 
 				microcompleted = (int) ( 100 * (float)(microcount) / (float)(maxcount) );	
 				emit progress( 90 + (int)( 0.1*(float)microcompleted ) );
 				QApplication::processEvents(); 
 			}
 		}
-		tilelevel *= 2;	
+		tilelevel++;	
 	}
 
 	completed = 100;

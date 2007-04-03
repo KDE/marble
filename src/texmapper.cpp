@@ -13,11 +13,11 @@
 
 // #define INTERLACE
 
-	const float rad2int = 21600.0 / M_PI;
+	const float rad2int = 2160000.0f / M_PI;
 
 TextureMapper::TextureMapper( const QString& path ){
 
-	m_maxtilelevel = 1;
+	m_maxtilelevel = 0;
 
 	texldr = new TextureLoader( path );
 
@@ -35,19 +35,29 @@ TextureMapper::TextureMapper( const QString& path ){
 	alpha = 0; beta = 0;
 }
 
+TextureMapper::~TextureMapper(){
+	delete texldr;
+}
+
 void TextureMapper::setMap( const QString& path ){
+
 	texldr->setMap(path);
+
 }
 
 void TextureMapper::selectTexLevel(const int& radius){
-	int texlevel=m_maxtilelevel;
 
-	if ( radius < 200 ) texlevel = 1;
-	else if ( radius < 675 ) texlevel = 2;
-	else if ( radius < 1350 ) texlevel = 4;
+
+	float linearlevel = (float) radius / 335.0f;
+	int texlevel = 0;
+	if (linearlevel > 0.0f )
+		texlevel = (int)( logf( linearlevel ) / logf( 2.0f ) ) + 1;
 
 	if ( texlevel > m_maxtilelevel ) texlevel = m_maxtilelevel;
+
 	texldr->setTexLevel(texlevel);
+
+//	qDebug() << "Texture Level was set to: " << texlevel;
 }
 
 void TextureMapper::resizeMap(const QImage* origimg){
