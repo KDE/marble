@@ -179,9 +179,9 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 //	QTime *timer2 = new QTime();
 //	timer2->restart();
 
-	GeoPolygon::Vector::const_iterator itEndPolygon = end();
+	ScreenPolygon::Vector::const_iterator itEndPolygon = end();
 
-	for ( GeoPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
+	for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
 		if (itPolygon->getClosed() == true)  
@@ -209,9 +209,9 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 //	QTime *timer2 = new QTime();
 //	timer2->restart();
 
-	GeoPolygon::Vector::const_iterator itEndPolygon = end();
+	ScreenPolygon::Vector::const_iterator itEndPolygon = end();
 
-	for ( GeoPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
+	for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
 		if (itPolygon->getClosed() == true)  

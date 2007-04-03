@@ -16,7 +16,7 @@
 class PntMap;
 class ClipPainter;
 
-class VectorMap : public GeoPolygon::Vector {
+class VectorMap : public ScreenPolygon::Vector {
 public:
 	VectorMap();
 	~VectorMap();
@@ -44,7 +44,7 @@ private:
 
 //	int m_debugNodeCount;
 
-	GeoPolygon m_polygon;
+	ScreenPolygon m_polygon;
 	inline void initCrossHorizon();
 	void manageCrossHorizon();
 	const QPointF horizonPoint();

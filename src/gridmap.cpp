@@ -169,9 +169,9 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing){
 
 	painter->setPen(m_pen);
 
-	GeoPolygon::Vector::const_iterator itEndPolygon = end();
+	ScreenPolygon::Vector::const_iterator itEndPolygon = end();
 
-	for ( GeoPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
+	for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 		painter->drawPolyline(*itPolygon);
         }

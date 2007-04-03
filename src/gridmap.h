@@ -13,7 +13,7 @@
 */
 class ClipPainter;
 
-class GridMap : public GeoPolygon::Vector {
+class GridMap : public ScreenPolygon::Vector {
 public:
 	GridMap();
 	~GridMap();
@@ -35,7 +35,7 @@ private:
 
 	matrix m_rotMatrix;
 
-	GeoPolygon m_polygon;
+	ScreenPolygon m_polygon;
 
 	inline void initCrossHorizon();
 
