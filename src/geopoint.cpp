@@ -15,16 +15,24 @@
 
 const float rad2int = 21600.0 / M_PI;
 
-GeoPoint::GeoPoint(int detail, int lng, int lat):m_Detail(detail), m_Lat(lat), m_Lng(lng){
-	m_q = Quaternion((float)(lng) / rad2int * 2, (float)(lat) / rad2int * 2);
+GeoPoint::GeoPoint(int detail, int _lon, int _lat)
+  : m_Detail(detail),
+    m_lat(_lat),
+    m_lon(_lon)
+{
+    m_q = Quaternion( (float)(_lon) / rad2int * 2,
+		      (float)(_lat) / rad2int * 2 );
 }
 
-GeoPoint::GeoPoint(int lng, int lat){
-	m_q = Quaternion((float)(lng) / rad2int * 2, (float)(lat) / rad2int * 2);
+GeoPoint::GeoPoint(int _lon, int _lat)
+{
+    m_q = Quaternion( (float)(_lon) / rad2int * 2,
+		      (float)(_lat) / rad2int * 2);
 }
 
-GeoPoint::GeoPoint( float lng, float lat ){
-	m_q = Quaternion( lng, lat );
+GeoPoint::GeoPoint( float _lon, float _lat )
+{
+    m_q = Quaternion( _lon, _lat );
 }
 
 QString GeoPoint::toString(){

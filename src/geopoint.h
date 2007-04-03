@@ -5,11 +5,6 @@
 #include "quaternion.h"
 
 class GeoPoint {
-private:	
-	Quaternion m_q;
-	int m_Detail;
-	int m_Lat, m_Lng; // the use of these is deprecated
-
 public:
 	GeoPoint(){}
 	GeoPoint(int, int);
@@ -17,16 +12,23 @@ public:
 	GeoPoint(int, int, int);
 	~GeoPoint(){}
 	
-	int getDetail() const { return m_Detail; }
-	int getLat() const { return m_Lat; }
-	int getLng() const { return m_Lng; }
-	void geoCoordinates( float& lng, float& lat ){ m_q.getSpherical( lng, lat ); }
+	int getDetail()  const { return m_Detail; }
+	int lat()        const { return m_lat; }
+	int lon()        const { return m_lon; }
+	void geoCoordinates( float& lon, float& lat ) { m_q.getSpherical( lon, lat ); }
 
 	const Quaternion &getQuatPoint() const { return m_q; }
 	QString toString();
 
 	// Type definitions
 	typedef QVector<GeoPoint> Vector;
+
+private:	
+	Quaternion  m_q;
+	int         m_Detail;
+
+	int         m_lat; // the use of these is deprecated
+	int         m_lon;
 };
 
 #endif // GEOPOINT_H

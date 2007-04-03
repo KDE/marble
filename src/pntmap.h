@@ -40,11 +40,11 @@ public:
 	GeoPoint::Vector getBoundary() const { return m_boundary; } 
 
 	void displayBoundary(){
-		qDebug() << "Boundary:" << m_boundary.at(0).getLng() << ", " << m_boundary.at(0).getLat() << " Size: " << m_boundary.size();
-		qDebug() << "Boundary:" << m_boundary.at(1).getLng() << ", " << m_boundary.at(1).getLat();
-		qDebug() << "Boundary:" << m_boundary.at(2).getLng() << ", " << m_boundary.at(2).getLat();
-		qDebug() << "Boundary:" << m_boundary.at(3).getLng() << ", " << m_boundary.at(3).getLat();
-		qDebug() << "Boundary:" << m_boundary.at(4).getLng() << ", " << m_boundary.at(4).getLat();
+		qDebug() << "Boundary:" << m_boundary.at(0).lon() << ", " << m_boundary.at(0).lat() << " Size: " << m_boundary.size();
+		qDebug() << "Boundary:" << m_boundary.at(1).lon() << ", " << m_boundary.at(1).lat();
+		qDebug() << "Boundary:" << m_boundary.at(2).lon() << ", " << m_boundary.at(2).lat();
+		qDebug() << "Boundary:" << m_boundary.at(3).lon() << ", " << m_boundary.at(3).lat();
+		qDebug() << "Boundary:" << m_boundary.at(4).lon() << ", " << m_boundary.at(4).lat();
 //		qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
 	}
 
