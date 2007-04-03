@@ -27,7 +27,7 @@ GeoPoint::GeoPoint(int detail, int _lon, int _lat)
 GeoPoint::GeoPoint(int _lon, int _lat)
 {
     m_q = Quaternion( (float)(_lon) / rad2int * 2,
-		      (float)(_lat) / rad2int * 2);
+		      (float)(_lat) / rad2int * 2 );
 }
 
 GeoPoint::GeoPoint( float _lon, float _lat )
@@ -35,25 +35,28 @@ GeoPoint::GeoPoint( float _lon, float _lat )
     m_q = Quaternion( _lon, _lat );
 }
 
-QString GeoPoint::toString(){
-	float lat, lng;
-	geoCoordinates( lng, lat );
+QString GeoPoint::toString()
+{
+    float lat, lon;
+    geoCoordinates( lon, lat );
 
-	QString nsstring = ( lat < 0 ) ? "N" : "S";  
-	QString westring = ( lng < 0 ) ? "W" : "E";  
+    QString nsstring = ( lat < 0 ) ? "N" : "S";  
+    QString westring = ( lon < 0 ) ? "W" : "E";  
 
-	lng = fabs( lng * 180.0 / M_PI );
+    lon = fabs( lon * 180.0 / M_PI );
 
-	int lngdeg = (int) lng;
-	int lngmin = (int) ( 60 * (lng - lngdeg) );
-	int lngsec = (int) ( 3600 * (lng - lngdeg - ((float)(lngmin) / 60) ) );
+    int londeg = (int) lon;
+    int lonmin = (int) ( 60 * (lon - londeg) );
+    int lonsec = (int) ( 3600 * (lon - londeg - ((float)(lonmin) / 60) ) );
 
-	lat = fabs( lat * 180.0 / M_PI );
+    lat = fabs( lat * 180.0 / M_PI );
 
-	int latdeg = (int) lat;
-	int latmin = (int) ( 60 * (lat - latdeg) );
-	int latsec = (int) ( 3600 * (lat - latdeg - ((float)(latmin) / 60) ) );
+    int latdeg = (int) lat;
+    int latmin = (int) ( 60 * (lat - latdeg) );
+    int latsec = (int) ( 3600 * (lat - latdeg - ((float)(latmin) / 60) ) );
 
-	return QString("%1\xb0 %2\' %3\" %4, %5\xb0 %6\' %7\" %8").arg(latdeg).arg(latmin).arg(latsec).arg(nsstring).arg(lngdeg).arg(lngmin).arg(lngsec).arg(westring);
+    return QString("%1\xb0 %2\' %3\" %4, %5\xb0 %6\' %7\" %8")
+	.arg(latdeg).arg(latmin).arg(latsec).arg(nsstring)
+	.arg(londeg).arg(lonmin).arg(lonsec).arg(westring);
 
 }
