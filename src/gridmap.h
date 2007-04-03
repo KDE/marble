@@ -5,7 +5,7 @@
 
 #include "clippainter.h"
 #include "geopoint.h"
-#include "polygon.h"
+#include "ScreenPolygon.h"
 #include "quaternion.h"
 
 /**
