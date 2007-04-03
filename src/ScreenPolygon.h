@@ -1,24 +1,27 @@
-#ifndef POLYGON_H
-#define POLYGON_H
+#ifndef SCREENPOLYGON_H
+#define SCREENPOLYGON_H
+
 
 #include <QtCore/QVector>
 #include <QtGui/QPolygon>
 
 
-class ScreenPolygon : public QPolygonF {
-public:
-	ScreenPolygon() : m_closePolyline(false) { }
-	ScreenPolygon(bool closePolyline) : m_closePolyline(closePolyline) { }
-	~ScreenPolygon() { }
+class ScreenPolygon : public QPolygonF 
+{
+ public:
+    ScreenPolygon() : m_closed( false ) { }
+    ScreenPolygon( bool closed ) : m_closed( closed ) { }
+    ~ScreenPolygon() { }
 
-	bool getClosed() const { return m_closePolyline; }
-	void setClosed(bool closePolyline) { m_closePolyline = closePolyline; }
+    bool closed() const { return m_closed; }
+    void setClosed( bool closed ) { m_closed = closed; }
 
-	// Type definitions
-	typedef QVector<ScreenPolygon> Vector;
+    // Type definitions
+    typedef QVector<ScreenPolygon> Vector;
 
-protected:
-	bool m_closePolyline : 1;	
+ protected:
+    // true if the polygon is closed
+    bool  m_closed;
 };
 
-#endif // POLYGON_H
+#endif // SCREENPOLYGON_H

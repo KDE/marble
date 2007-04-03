@@ -154,7 +154,7 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 // In case of horizon crossings make sure that we always get a polygon closed correctly 
 	if ( firsthorizon == true ){
 		horizonb = firstHorizonPoint;
-		if (m_polygon.getClosed())
+		if (m_polygon.closed())
 			createArc();
 		firsthorizon = false;
 	}
@@ -184,7 +184,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing){
 	for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
-		if (itPolygon->getClosed() == true)  
+		if (itPolygon->closed() == true)  
   	        	painter.drawPolygon(*itPolygon);
 		else
   	        	painter.drawPolyline(*itPolygon);
@@ -214,7 +214,7 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing){
 	for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); itPolygon != itEndPolygon; ++itPolygon )
         {
 
-		if (itPolygon->getClosed() == true)  
+		if (itPolygon->closed() == true)  
   	        	painter->drawPolygon(*itPolygon);
 		else
   	        	painter->drawPolyline(*itPolygon);
