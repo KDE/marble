@@ -4,8 +4,8 @@
 #include <QtCore/QDebug>
 #include <cmath>
 
+#include "GeoPolygon.h"
 #include "clippainter.h"
-#include "pntmap.h"
 #include "vectormap.h"
 #include "katlasdirs.h"
 

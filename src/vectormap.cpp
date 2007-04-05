@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "clippainter.h"
-#include "pntmap.h"
+#include "GeoPolygon.h"
 
 // #define VECMAP_DEBUG 
 
@@ -66,8 +66,8 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 
 	rotAxis.inverse().toMatrix( m_rotMatrix );
 
-	PntPolyLine::PtrVector::Iterator itPolyLine;
-	PntPolyLine::PtrVector::ConstIterator itEndPolyLine = pntmap->constEnd();
+	GeoPolygon::PtrVector::Iterator itPolyLine;
+	GeoPolygon::PtrVector::ConstIterator itEndPolyLine = pntmap->constEnd();
 
 //	const int detail = 0;
 	const int detail = getDetailLevel();

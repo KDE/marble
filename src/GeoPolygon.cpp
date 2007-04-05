@@ -19,6 +19,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 
+#include "GeoPolygon.h"
+
 #ifdef Q_OS_UNIX
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -26,9 +28,7 @@
 #endif
 
 
-#include "pntmap.h"
-
-PntPolyLine::PntPolyLine(){
+GeoPolygon::GeoPolygon(){
 	m_Crossed = false;
 	m_closed = false;
 
@@ -36,10 +36,10 @@ PntPolyLine::PntPolyLine(){
 	m_x0 = m_y0 = m_x1 = m_y1 = 0;
 }
 
-PntPolyLine::~PntPolyLine(){
+GeoPolygon::~GeoPolygon(){
 }
 
-void PntPolyLine::setBoundary(int x0, int y0, int x1, int y1){
+void GeoPolygon::setBoundary(int x0, int y0, int x1, int y1){
 	m_x0 = x0; m_y0 = y0; m_x1 = x1; m_y1 = y1;
 
 	m_boundary.clear();
@@ -110,7 +110,7 @@ void PntMap::load(const QString &filename){
 		if (header > 5){
 			
 //			qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
-			PntPolyLine *polyline = new PntPolyLine();
+			GeoPolygon *polyline = new GeoPolygon();
 			append( polyline );
 
 			polyline->setNum(header);
@@ -144,7 +144,7 @@ void PntMap::load(const QString &filename){
 	short header, lat, lng;
 
 // Iterator that points to current PolyLine in PntMap
-//	QList<PntPolyLine*>::iterator it = begin();
+//	QList<GeoPolygon*>::iterator it = begin();
 //	int count = 0;
 
 	while(!stream.atEnd()){	
@@ -155,7 +155,7 @@ void PntMap::load(const QString &filename){
 		if (header > 5){
 			
 //			qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
-			PntPolyLine *polyline = new PntPolyLine();
+			GeoPolygon *polyline = new GeoPolygon();
 			append( polyline );
 
 			polyline->setNum(header);
@@ -191,8 +191,8 @@ void PntMap::load(const QString &filename){
 		
 	float x = 0.0, lastx = 0.0;
 
-	PntPolyLine::PtrVector::Iterator itPolyLine;
-	PntPolyLine::PtrVector::ConstIterator itEndPolyLine = end();
+	GeoPolygon::PtrVector::Iterator itPolyLine;
+	GeoPolygon::PtrVector::ConstIterator itEndPolyLine = end();
 	GeoPoint::Vector::ConstIterator itPoint;
 
 	for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ){

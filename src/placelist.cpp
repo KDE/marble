@@ -17,7 +17,7 @@ void PlaceList::load(QString filename){
 //	short header, lat, lng;
 
 // Iterator that points to current PolyLine in PntMap
-//	QList<PntPolyLine*>::iterator it = begin();
+//	QList<GeoPolygon*>::iterator it = begin();
 //	int count = 0;
 	QString rawline;
 	QString name, state, country, capital, popstring, latstring, lngstring; 

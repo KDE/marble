@@ -1,9 +1,11 @@
+#include <cmath>
+
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <cmath>
+
+#include "GeoPolygon.h"
 #include "katlasglobe.h"
-#include "pntmap.h"
 #include "texcolorizer.h"
 #include "texloader.h"
 #include "tilescissor.h"

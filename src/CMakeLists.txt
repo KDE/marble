@@ -19,6 +19,7 @@ endif(MSVC)
 link_directories (${QT_LIBRARY_DIR})
 
 set(marble_SRCS
+           GeoPolygon.cpp
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
@@ -30,7 +31,6 @@ set(marble_SRCS
            quaternion.cpp
            katlasglobe.cpp
            katlastoolbox.cpp
-           pntmap.cpp
            vectorcomposer.cpp
            vectormap.cpp
            clippainter.cpp
@@ -62,6 +62,10 @@ set(marble_SRCS
 )
 
 set(marble_HDRS
+           geopoint.h
+	   GeoPolygon.h
+	   ScreenPolygon.h
+
            katlasdirs.h
            katlascontrol.h
            katlasview.h
@@ -73,11 +77,9 @@ set(marble_HDRS
            quaternion.h
            katlasglobe.h
            katlastoolbox.h
-           pntmap.h
            vectorcomposer.h
            vectormap.h
            clippainter.h
-           geopoint.h
            placemarkmanager.h
            placecontainer.h
            placemarkstorage.h
@@ -102,7 +104,6 @@ set(marble_HDRS
            httpfetchfile.h
            measuretool.h
 	   katlasaboutdialog.h
-	   ScreenPolygon.h
 )
 
 set (marble_UI katlastilecreatordialog.ui

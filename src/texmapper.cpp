@@ -5,7 +5,8 @@
 #include <QtGui/QColor>
 #include <cmath>
 
-#include "pntmap.h"
+#include "geopoint.h"
+#include "GeoPolygon.h"
 #include "katlasdirs.h"
 #include "texloader.h"
 
