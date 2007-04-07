@@ -15,7 +15,7 @@ SOURCES +=  katlascontrol.cpp katlasview.cpp katlasviewinputhandler.cpp main.cpp
 HEADERS +=  clippainter.h fastmath.h geopoint.h gridmap.h httpfetchfile.h katlascontrol.h katlascrosshair.h \
 			katlasdirs.h katlasflag.h katlasglobe.h katlasmapscale.h katlasthemeselectview.h katlastilecreatordialog.h \
 			katlastoolbox.h katlasview.h katlasviewinputhandler.h katlasviewpopupmenu.h katlaswindrose.h maptheme.h \
-			measuretool.h placecontainer.h placefolder.h placelist.h placemark.h placemarkinfodialog.h placemarkmanager.h \
+			measuretool.h placecontainer.h placefolder.h placemark.h placemarkinfodialog.h placemarkmanager.h \
 			placemarkmodel.h placemarkpainter.h placemarkstorage.h pntmap.h ScreenPolygon.h quaternion.h searchlistview.h \
 			texcolorizer.h texloader.h texmapper.h tilescissor.h tinywebbrowser.h vectorcomposer.h \
 			vectormap.h xmlhandler.h
