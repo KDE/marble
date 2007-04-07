@@ -1,0 +1,105 @@
+Basic classes
+-------------
+
+Quaternion	A simple implementation of the mathematical concept
+		quaternion. 
+
+GeoPoint	A point on the earth, (lon, lat)
+GeoPolygon	A path or polygon on the earth, consisting of a vector
+		of GeoPoints
+PntMap		A collection of GeoPolygons ( QVector<GeoPolygon *> )
+		FIXME: Rename and move from GeoPolygon.h into own file.
+
+ScreenPolygon	A path or polygon on the screen. Uses screen
+		coordinates.  Uses floats due to antialiasing.
+VectorMap	A Vector of ScreenPolygons.
+		Rename   FIXME
+GridMap		I think this is the grid of lat-lon lines on the map.
+		Another Vector of ScreenPolygons. Perhaps it should
+		inherit or contain a VectorMap.
+
+PlaceMark	A point on earth with some additional data. Can be
+		selected and manipulated. Has a name. Today mostly
+		used for cities of different size.
+		At this point somewhat arbitrary in its choice of
+		properties.  Contains (among others):
+		 - Coordinate (GeoPoint)
+		 - Role (QChar) -- city, capital, etc
+		 - Population (int)
+		 - Description (QString)
+		 - Countrycode (QString)
+		 - View stuff (selected, labelstring, boundingbox, etc)
+
+PlaceMarkStorage Contains a name and a bool 'visible' 
+		 Not used.  FIXME.
+
+PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
+PlaceList	Redundant - exactly like PlaceContainer
+		Not used.   FIXME
+
+
+Model / View
+------------
+
+KAtlasGlobe	The main model.  Contains (among others):
+		 - MapTheme
+		 - GridMap
+		 - PlaceMarkManager
+		 - PlaceMarkModel
+KAtlasView	The view of a KAtlasGlobe.
+
+
+Widgets
+-------
+KAtlasControl	The main window.  Contains a KAtlasView and a
+		KAtlasToolbox. 
+
+
+Unsorted
+--------
+
+class ClipPainter;
+class HttpFetchFile;
+class KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog {
+class KAtlasCrossHair : public QObject {
+class KAtlasDirs
+class KAtlasFlag : public QObject {
+class KAtlasMapScale : public QObject {
+class KAtlasThemeSelectView : public QListView {
+class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDialog {
+class KAtlasTileCreatorDialog: public Ui_KAtlasTileCreatorDialog {};
+class KAtlasToolBox;
+class KAtlasViewInputHandler;
+class KAtlasViewPopupMenu;
+class KAtlasWindRose : public QObject {
+class KAtlasXmlHandler : public QXmlDefaultHandler {
+class MapTheme : public QObject
+class MeasureTool : public QObject {
+class MeasureTool;
+class PlaceFolder : public QVector<PlaceMark*> {
+class PlaceMarkInfoDialog: public Ui_PlaceMarkInfoDialog {};
+class PlaceMarkManager;
+class PlaceMarkModel : public QAbstractListModel {
+class PlaceMarkPainter : public QObject {
+class QAbstractItemModel;
+class QMenu;
+class QPainter;
+class QStandardItemModel;
+class QStringListModel;
+class QSvgRenderer;
+class QuaternionSSE : public Quaternion {
+class SearchComboBox : public QComboBox {
+class SearchListView : public QListView {
+class TextureColorizer;
+class TextureLoader;
+class TextureMapper {
+class TextureTile;
+class TileScissor : public QObject {
+class TinyWebBrowser : public QTextBrowser {
+class Ui_KAtlasTileCreatorDialog
+class Ui_PlaceMarkInfoDialog
+class Ui_katlasAboutDialog
+class Ui_katlasToolBox
+class VectorComposer {
+class katlasAboutDialog: public Ui_katlasAboutDialog {};
+class katlasToolBox: public Ui_katlasToolBox {};
