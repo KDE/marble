@@ -34,8 +34,6 @@ PlaceMarkStorage Contains a name and a bool 'visible'
 		 Not used.  FIXME.
 
 PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
-PlaceList	Redundant - exactly like PlaceContainer
-		Not used.   FIXME
 
 
 Model / View
