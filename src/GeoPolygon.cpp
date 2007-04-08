@@ -27,6 +27,7 @@
 # include <sys/mman.h> /* mmap() is defined in this header */
 #endif
 
+const float ARCMINUTE = 10800;
 
 GeoPolygon::GeoPolygon(){
 	m_Crossed = false;
@@ -44,10 +45,10 @@ void GeoPolygon::setBoundary(int x0, int y0, int x1, int y1){
 
 	m_boundary.clear();
 	if (getDateLine()) {
-		int xcenter = (x0 + (21600+x1))/2;
+		int xcenter = (int)( ( x0 + ( 2 * ARCMINUTE + x1) ) / 2 );
 
-		if (xcenter > 10800) xcenter -= 21600;
-		if (xcenter < -10800) xcenter += 21600;
+		if (xcenter > ARCMINUTE) xcenter -= (int)( 2 * ARCMINUTE );
+		if (xcenter < -ARCMINUTE) xcenter += (int)( 2 * ARCMINUTE );
 
 		m_boundary.append(GeoPoint( 1, xcenter, (y0 + y1)/2 ));
 	}
@@ -97,15 +98,15 @@ void PntMap::load(const QString &filename){
 		lat = src[i+1];
 		lng = src[i+2];	
 
-// Transforming Range of Coordinates to lat [0,10800] , lng [0,21600] 
+// Transforming Range of Coordinates to lat [0,ARCMINUTE] , lng [0,2 * ARCMINUTE] 
 						
 		lat = -lat;
 
 /*
-      90 00N =   -5400
-      90 00S =   5400
-     180 00W =  -10800
-     180 00E =   10800
+      90 00N =   -ARCMINUTE / 2
+      90 00S =   ARCMINUTE / 2
+     180 00W =  -ARCMINUTE
+     180 00E =   ARCMINUTE
 */
 		if (header > 5){
 			
@@ -149,7 +150,7 @@ void PntMap::load(const QString &filename){
 
 	while(!stream.atEnd()){	
 	        stream >> header >> lat >> lng;		
-// Transforming Range of Coordinates to lat [0,10800] , lng [0,21600] 
+// Transforming Range of Coordinates to lat [0,ARCMINUTE] , lng [0,2 * ARCMINUTE] 
 						
 		lat = -lat;
 		if (header > 5){
@@ -202,10 +203,10 @@ void PntMap::load(const QString &filename){
 		for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
 			float  lon, lat;
 			(*itPoint).geoCoordinates(lon, lat);
-			x = (int)( 10800.0f * lon / M_PI );
+			x = (int)( ARCMINUTE * lon / M_PI );
 
 			 if (lastx != 0)
-			 	if ((x/lastx < 0.0) && ((abs((int)x)+abs((int)lastx)) > 10800.0)) {
+			 	if ((x/lastx < 0.0) && ((abs((int)x)+abs((int)lastx)) > ARCMINUTE)) {
 			 		(*itPolyLine)->setDateLine(true);
 //					qDebug() << "DateLine: " << lastx << x;
 					itPoint = itEndPoint-1;
@@ -236,8 +237,8 @@ void PntMap::load(const QString &filename){
 	
 	for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ){
 		
-		float x0 = 10800.0, x1 = -10800.0;
-		float y0 = 5400.0, y1 = -5400.0;		
+		float x0 = ARCMINUTE, x1 = -ARCMINUTE;
+		float y0 = ARCMINUTE / 2.0, y1 = -ARCMINUTE / 2.0;		
 		GeoPoint::Vector::ConstIterator itEndPoint = (*itPolyLine)->end();
 
 		if ((*itPolyLine)->getDateLine()){ 
@@ -246,12 +247,12 @@ void PntMap::load(const QString &filename){
 
 				float  lon, lat;
 				(*itPoint).geoCoordinates(lon, lat);
-				x = (int)( 10800.0f * lon / M_PI );
+				x = (int)( ARCMINUTE * lon / M_PI );
 
-				if ((x < x0) && (x > -5400)) x0 = x;
-				if ((x > x1) && (x < -5400)) x1 = x;
+				if ((x < x0) && (x > -ARCMINUTE / 2)) x0 = x;
+				if ((x > x1) && (x < -ARCMINUTE / 2)) x1 = x;
 				
-				y = (int)( 10800.0f * lat / M_PI );
+				y = (int)( ARCMINUTE * lat / M_PI );
 
 				if (y < y0) y0 = y;
 				if (y > y1) y1 = y;
@@ -266,12 +267,12 @@ void PntMap::load(const QString &filename){
 
 				float  lon, lat;
 				(*itPoint).geoCoordinates(lon, lat);
-				x = (int)( 10800.0f * lon / M_PI );
+				x = (int)( ARCMINUTE * lon / M_PI );
 
 				if (x < x0) x0 = x;
 				if (x > x1) x1 = x;
 				
-				y = (int)( 10800.0f * lat / M_PI );
+				y = (int)( ARCMINUTE * lat / M_PI );
 
 				if (y < y0) y0 = y;
 				if (y > y1) y1 = y;
