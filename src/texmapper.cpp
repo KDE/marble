@@ -8,7 +8,7 @@
 #include "GeoPolygon.h"
 #include "katlasdirs.h"
 #include "texturetile.h"
-#include "texloader.h"
+#include "TileLoader.h"
 #include "texmapper.h"
 
 
@@ -23,7 +23,7 @@ TextureMapper::TextureMapper( const QString& path ){
 
 	m_maxtilelevel = 0;
 
-	texldr = new TextureLoader( path );
+	texldr = new TileLoader( path );
 
 	line = 0;
 
@@ -67,8 +67,8 @@ void TextureMapper::selectTileLevel(const int& radius){
 		m_tileLevel = tileLevel;
 	}
 
-	int texpixw = (int)(4320000.0f / (float)( TextureLoader::levelToColumn( tileLevel ) ) / (float)(texldr->tileWidth()));
-	int texpixh = (int)(2160000.0f / (float)( TextureLoader::levelToRow( tileLevel ) ) / (float)(texldr->tileHeight()));
+	int texpixw = (int)(4320000.0f / (float)( TileLoader::levelToColumn( tileLevel ) ) / (float)(texldr->tileWidth()));
+	int texpixh = (int)(2160000.0f / (float)( TileLoader::levelToRow( tileLevel ) ) / (float)(texldr->tileHeight()));
 
 	m_rad2pixw = (2160000.0f / M_PI / (float)(texpixw));
 	m_rad2pixh = (2160000.0f / M_PI / (float)(texpixh));

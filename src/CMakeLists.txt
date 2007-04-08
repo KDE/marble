@@ -28,7 +28,7 @@ set(marble_SRCS
            main.cpp
            texcolorizer.cpp
 	   texturetile.cpp
-           texloader.cpp
+           TileLoader.cpp
            texmapper.cpp
            katlasglobe.cpp
            katlastoolbox.cpp
@@ -73,7 +73,7 @@ set(marble_HDRS
            katlasviewinputhandler.h
            texcolorizer.h
 	   texturetile.h
-           texloader.h
+           TileLoader.h
            texmapper.h
            katlasglobe.h
            katlastoolbox.h

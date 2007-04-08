@@ -8,7 +8,7 @@
 #include <QtGui/QStandardItemModel>
 
 #include "katlasdirs.h"
-#include "texloader.h"
+#include "TileLoader.h"
 
 MapTheme::MapTheme(QObject *parent)
     : QObject(parent)

@@ -1,7 +1,7 @@
 //
-// C++ Interface: texloader
+// C++ Interface: TileLoader
 //
-// Description: TextureLoader provides elevation data from a specified file
+// Description: TileLoader provides elevation data from a specified file
 // (given as a QString) according to the 
 // respective input of latitude and longitude. It loads those tiles
 // necessary for the given texlevellevel and flushes the tiles on request.
@@ -10,8 +10,8 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
-#ifndef TEXLOADER_H
-#define TEXLOADER_H
+#ifndef TILELOADER_H
+#define TILELOADER_H
 
 #include <QtCore/QHash>
 #include <QtGui/QImage>
@@ -23,10 +23,10 @@
 
 class TextureTile;
 
-class TextureLoader {
+class TileLoader {
 public:
-	TextureLoader( const QString& );
-	virtual ~TextureLoader(){}
+	TileLoader( const QString& );
+	virtual ~TileLoader(){}
 
 	TextureTile* loadTile( int tilx, int tily, int tileLevel );
 

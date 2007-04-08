@@ -7,7 +7,7 @@
 #include "GeoPolygon.h"
 #include "katlasglobe.h"
 #include "texcolorizer.h"
-#include "texloader.h"
+#include "TileLoader.h"
 #include "tilescissor.h"
 #include "katlasdirs.h"
 #include "katlastilecreatordialog.h"
@@ -72,7 +72,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 
 	m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1").arg( selectedmap ) ) );
 
-	if ( !TextureLoader::baseTilesAvailable( m_maptheme->tilePrefix() ) ){
+	if ( !TileLoader::baseTilesAvailable( m_maptheme->tilePrefix() ) ){
 		qDebug("Base tiles not available. Creating Tiles ... ");
 
 		KAtlasTileCreatorDialog tilecreatordlg( m_parent );
@@ -91,7 +91,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap ){
 	else
 		texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
 
-	texmapper->setMaxTileLevel( TextureLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
+	texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
 
 	if ( m_placecontainer == 0)
 		m_placecontainer = new PlaceContainer("placecontainer");

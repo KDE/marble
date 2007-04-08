@@ -10,7 +10,7 @@
 #include <QtCore/QVector>
 
 #include "katlasdirs.h"
-#include "texloader.h"
+#include "TileLoader.h"
 
 TileScissor::TileScissor(const QString& prefix, const QString& installmap, const QString& dem):m_prefix(prefix), m_installmap(installmap),m_dem(dem){
 	/* NOOP */
@@ -48,7 +48,7 @@ void TileScissor::createTiles() {
 	int count = 0;
 	while ( stdimgw < imgw ){
 		maxtilelevel = count;
-		stdimgw = 2 * 675 * TextureLoader::levelToRow( maxtilelevel );
+		stdimgw = 2 * 675 * TileLoader::levelToRow( maxtilelevel );
 		count++;
 	}
 	stdimgh = stdimgw / 2;
@@ -66,9 +66,9 @@ void TileScissor::createTiles() {
 	int maxcount = 0;
 
 	while ( tilelevel <= maxtilelevel ) {
-		int mmaxit = TextureLoader::levelToColumn( tilelevel );
+		int mmaxit = TileLoader::levelToColumn( tilelevel );
 		for ( int m=0; m < mmaxit; m++) { 
-			int nmaxit = TextureLoader::levelToRow( tilelevel );
+			int nmaxit = TileLoader::levelToRow( tilelevel );
 			for ( int n=0; n < nmaxit; n++)
 				maxcount++;
 		}
@@ -77,8 +77,8 @@ void TileScissor::createTiles() {
 
 	qDebug() << maxcount << " tiles to be created in total.";
 
-	int mmax = TextureLoader::levelToColumn( maxtilelevel );
-	int nmax = TextureLoader::levelToRow( maxtilelevel );
+	int mmax = TileLoader::levelToColumn( maxtilelevel );
+	int nmax = TileLoader::levelToRow( maxtilelevel );
 
 	// Loading each row at highest spatial resolution and croping tiles
 	int completed = 0;
@@ -141,14 +141,14 @@ void TileScissor::createTiles() {
 
 	while( tilelevel >= 0 ) {
 
-		int nmaxit =  TextureLoader::levelToRow( tilelevel );;
+		int nmaxit =  TileLoader::levelToRow( tilelevel );;
 		for ( int n=0; n < nmaxit; n++) {
 			QString dirname( KAtlasDirs::localDir() + QString("/maps/earth/%1/%2/%3").arg(m_prefix).arg(tilelevel).arg( n, 4, 10, QChar('0') ) );
 //			qDebug() << "dirname: " << dirname;
 			if ( QDir( dirname ).exists() == false ) 
 				( QDir::root() ).mkpath( dirname );
 
-			int mmaxit = TextureLoader::levelToColumn( tilelevel );;
+			int mmaxit = TileLoader::levelToColumn( tilelevel );;
 			for ( int m=0; m < mmaxit; m++){
 
 				tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
@@ -245,9 +245,9 @@ void TileScissor::createTiles() {
 
 	tilelevel = 0;
 	while ( tilelevel <= maxtilelevel ) {
-		int nmaxit =  TextureLoader::levelToRow( tilelevel );
+		int nmaxit =  TileLoader::levelToRow( tilelevel );
 		for ( int n=0; n < nmaxit; n++){
-			int mmaxit =  TextureLoader::levelToColumn( tilelevel );
+			int mmaxit =  TileLoader::levelToColumn( tilelevel );
 			for ( int m=0; m < mmaxit; m++){ 
 				microcount++;
 

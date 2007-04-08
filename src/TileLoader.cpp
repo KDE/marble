@@ -1,4 +1,4 @@
-#include "texloader.h"
+#include "TileLoader.h"
 
 #include <QtCore/QTime>
 #include <QtCore/QVector>
@@ -9,12 +9,12 @@
 
 #include <QtCore/QDebug>
 
-TextureLoader::TextureLoader( const QString& theme ){
+TileLoader::TileLoader( const QString& theme ){
 
 	setMap( theme );
 }
 
-void TextureLoader::setMap( const QString& theme ){
+void TileLoader::setMap( const QString& theme ){
 //	Initialize map theme.
 	m_theme = theme;
 
@@ -27,7 +27,7 @@ void TextureLoader::setMap( const QString& theme ){
 	delete m_tile;
 }
 
-void TextureLoader::resetTilehash(){
+void TileLoader::resetTilehash(){
 
 	QHash<int, TextureTile*>::const_iterator it = m_tilehash.constBegin();
 	while (it != m_tilehash.constEnd()) {
@@ -36,7 +36,7 @@ void TextureLoader::resetTilehash(){
 	}
 }
 
-void TextureLoader::cleanupTilehash(){
+void TileLoader::cleanupTilehash(){
 //	Make sure that tiles which haven't been used during the last
 //	rendering of the map at all get removed from the tile hash.
 
@@ -51,7 +51,7 @@ void TextureLoader::cleanupTilehash(){
 	}
 }
 
-void TextureLoader::flush(){
+void TileLoader::flush(){
 //	Remove all m_tiles from m_tilehash
 	QHash <int, TextureTile*>::const_iterator it;
 	for( it = m_tilehash.begin(); it != m_tilehash.constEnd(); it++ ) 
@@ -60,7 +60,7 @@ void TextureLoader::flush(){
 }
 
 
-TextureTile* TextureLoader::loadTile( int tilx, int tily, int tileLevel ){
+TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel ){
 //	Choosing the correct m_tile via Lng/Lat info 
 
 	m_tilekey =  (tilx *1000) + tily;
@@ -82,23 +82,23 @@ TextureTile* TextureLoader::loadTile( int tilx, int tily, int tileLevel ){
 	return m_tile;
 }
 
-int TextureLoader::levelToRow( int level ){
+int TileLoader::levelToRow( int level ){
 	return (int)pow( 2.0, (double)( level ) );
 }
 
-int TextureLoader::levelToColumn( int level ){
+int TileLoader::levelToColumn( int level ){
 	return (int)pow( 2.0, (double)( level + 1 ) );
 }
 
-int TextureLoader::rowToLevel( int row ){
+int TileLoader::rowToLevel( int row ){
 	return (int)( log( row ) / log( 2 ) );
 }
 
-int TextureLoader::columnToLevel( int column ){
+int TileLoader::columnToLevel( int column ){
 	return (int)( log( column / 2 ) / log( 2 ) );
 }
 
-int TextureLoader::maxCompleteTileLevel( QString theme ){
+int TileLoader::maxCompleteTileLevel( QString theme ){
 
 	bool noerr = true; 
 
@@ -107,9 +107,9 @@ int TextureLoader::maxCompleteTileLevel( QString theme ){
 
 //	if ( m_bitmaplayer.type.toLower() == "bitmap" ){
 	while ( noerr == true ){
-		int nmaxit = TextureLoader::levelToRow( trylevel );
+		int nmaxit = TileLoader::levelToRow( trylevel );
 		for ( int n=0; n < nmaxit; n++) {
-			int mmaxit = TextureLoader::levelToColumn( trylevel );
+			int mmaxit = TileLoader::levelToColumn( trylevel );
 			for ( int m=0; m < mmaxit; m++){
 				QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg").arg(theme).arg( trylevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
 //				qDebug() << tilepath;
@@ -132,7 +132,7 @@ int TextureLoader::maxCompleteTileLevel( QString theme ){
 	return tilelevel;
 }
 
-int TextureLoader::maxPartialTileLevel( QString theme ){
+int TileLoader::maxPartialTileLevel( QString theme ){
 
 	QString tilepath = KAtlasDirs::path( QString("maps/earth/%1").arg(theme) );
 	QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
@@ -155,7 +155,7 @@ int TextureLoader::maxPartialTileLevel( QString theme ){
 	return maxtilelevel;
 }
 
-bool TextureLoader::baseTilesAvailable( QString theme ){
+bool TileLoader::baseTilesAvailable( QString theme ){
 
 	bool noerr = true; 
 

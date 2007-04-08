@@ -3,7 +3,7 @@
 #include <QtCore/QDebug>
 
 #include "katlasdirs.h"
-#include "texloader.h"
+#include "TileLoader.h"
 
 static uint **jumpTableFromQImage32( QImage &img )
 {
@@ -49,10 +49,10 @@ void TextureTile::loadTile( int x, int y, int level, const QString& theme, bool 
 
 	for ( int i = level; i > -1; --i ) {
 
-		float origx1 = (float)(x) / (float)( TextureLoader::levelToRow( level ) );
-		float origy1 = (float)(y) / (float)( TextureLoader::levelToColumn( level ) );
-		float testx1 = origx1 * (float)( TextureLoader::levelToRow( i ) ) ;
-		float testy1 = origy1 * (float)( TextureLoader::levelToColumn( i ) );
+		float origx1 = (float)(x) / (float)( TileLoader::levelToRow( level ) );
+		float origy1 = (float)(y) / (float)( TileLoader::levelToColumn( level ) );
+		float testx1 = origx1 * (float)( TileLoader::levelToRow( i ) ) ;
+		float testy1 = origy1 * (float)( TileLoader::levelToColumn( i ) );
 
 		QString relfilename = QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg(i).arg( (int)(testy1), 4, 10, QChar('0') ).arg( (int)(testx1), 4, 10, QChar('0') );
 
@@ -64,10 +64,10 @@ void TextureTile::loadTile( int x, int y, int level, const QString& theme, bool 
 
 				if ( level != i ){	
 					QSize tilesize = m_rawtile->size();
-					float origx2 = (float)(x + 1) / (float)( TextureLoader::levelToRow( level ) );
-					float origy2 = (float)(y + 1) / (float)( TextureLoader::levelToColumn( level ) );
-					float testx2 = origx2 * (float)( TextureLoader::levelToRow( i ) );
-					float testy2 = origy2 * (float)( TextureLoader::levelToColumn( i ) );
+					float origx2 = (float)(x + 1) / (float)( TileLoader::levelToRow( level ) );
+					float origy2 = (float)(y + 1) / (float)( TileLoader::levelToColumn( level ) );
+					float testx2 = origx2 * (float)( TileLoader::levelToRow( i ) );
+					float testy2 = origy2 * (float)( TileLoader::levelToColumn( i ) );
 	
 					QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * m_rawtile->width() ), (int)( ( testy1 - (int)(testy1) ) * m_rawtile->height() ) );
 					QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * m_rawtile->width() ) - 1, (int)( ( testy2 - (int)(testy1) ) * m_rawtile->height() ) - 1 );

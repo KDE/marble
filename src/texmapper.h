@@ -21,7 +21,7 @@
 */
 
 class TextureTile;
-class TextureLoader;
+class TileLoader;
 
 class TextureMapper {
 public:
@@ -41,7 +41,7 @@ protected:
 
 	int m_posx, m_posy;
 
-	TextureLoader* texldr;
+	TileLoader* texldr;
 	QRgb* line;
 	QRgb* linefast;
 
