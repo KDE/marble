@@ -10,12 +10,14 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef __MARBLE__TILELOADER_H
 #define __MARBLE__TILELOADER_H
 
+
 #include <QtCore/QHash>
-#include <QtGui/QImage>
 #include <QtCore/QString>
+#include <QtGui/QImage>
 
 /**
 @author Torsten Rahn
@@ -24,44 +26,45 @@
 class TextureTile;
 
 class TileLoader {
-public:
-	TileLoader( const QString& theme );
-	virtual ~TileLoader(){}
+ public:
+    TileLoader( const QString& theme );
+    virtual ~TileLoader(){}
 
-	TextureTile* loadTile( int tilx, int tily, int tileLevel );
+    TextureTile* loadTile( int tilx, int tily, int tileLevel );
 
-	void setMap( const QString& );
+    void setMap( const QString& );
 
-	void resetTilehash();
-	void cleanupTilehash();
-	void flush();
+    void resetTilehash();
+    void cleanupTilehash();
+    void flush();
 
-	const int tileWidth() const { return m_tileWidth; }
-	const int tileHeight() const { return m_tileHeight; }
+    const int tileWidth() const { return m_tileWidth; }
+    const int tileHeight() const { return m_tileHeight; }
 
-	static int levelToRow( int level );
-	static int levelToColumn( int level );
-	static int rowToLevel( int row );
-	static int columnToLevel( int column );
+    static int levelToRow( int level );
+    static int levelToColumn( int level );
+    static int rowToLevel( int row );
+    static int columnToLevel( int column );
 
-	// highest level in which all tiles are available
-	static int maxCompleteTileLevel( const QString& theme );
+    // highest level in which all tiles are available
+    static int maxCompleteTileLevel( const QString& theme );
 
-	// highest level in which some tiles are available
-	static int maxPartialTileLevel( const QString& theme );
+    // highest level in which some tiles are available
+    static int maxPartialTileLevel( const QString& theme );
 
-	// the mandatory most basic tile level is fully available
-	static bool baseTilesAvailable( const QString& theme );
+    // the mandatory most basic tile level is fully available
+    static bool baseTilesAvailable( const QString& theme );
 
-protected:
+ protected:
 
-	TextureTile* m_tile;
-	QString m_theme;
+    TextureTile  *m_tile;
+    QString       m_theme;
 
-	QHash <int, TextureTile*> m_tileHash;
-	int m_tileId;
+    QHash <int, TextureTile*> m_tileHash;
+    int m_tileId;
 
-	int m_tileWidth, m_tileHeight;
+    int m_tileWidth;
+    int m_tileHeight;
 
 };
 
