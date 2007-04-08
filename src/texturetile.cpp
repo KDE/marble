@@ -41,6 +41,7 @@ static uchar **jumpTableFromQImage8( QImage &img )
 TextureTile::TextureTile( int x, int y, int level, const QString& theme )
     : QObject()
 {
+    m_rawtile = 0;
     loadTile( x, y, level, theme, false );
 }
 
@@ -69,6 +70,8 @@ void TextureTile::loadTile( int x, int y, int level,
 
 	absfilename = KAtlasDirs::path( relfilename );
 	if ( QFile::exists( absfilename ) ) {
+        if ( m_rawtile != 0 )
+            delete m_rawtile;
 	    m_rawtile = new QImage( absfilename );
 	    // qDebug() << absfilename;
 	    if ( !m_rawtile->isNull() ) {
@@ -83,8 +86,9 @@ void TextureTile::loadTile( int x, int y, int level,
 		    QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * m_rawtile->width() ), (int)( ( testy1 - (int)(testy1) ) * m_rawtile->height() ) );
 		    QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * m_rawtile->width() ) - 1, (int)( ( testy2 - (int)(testy1) ) * m_rawtile->height() ) - 1 );
 				
-		    //					qDebug() << "x1: " << topleft.x() << "y1: " << topleft.y() << "x2: " << bottomright.x() << "y2: " << bottomright.y();  
-		    // FIXME: Memory leaks??
+		    // This should not create any memory leaks as 'copy' and 'scaled' 
+            // return a value (on the stack) which gets deep copied always into
+            // the same place for m_rawtile on the heap:
 		    *m_rawtile = m_rawtile->copy( QRect( topleft, bottomright ) );
 		    *m_rawtile = m_rawtile->scaled( tilesize ); // TODO: use correct size
 		}
