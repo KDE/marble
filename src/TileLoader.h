@@ -10,8 +10,8 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
-#ifndef TILELOADER_H
-#define TILELOADER_H
+#ifndef __MARBLE__TILELOADER_H
+#define __MARBLE__TILELOADER_H
 
 #include <QtCore/QHash>
 #include <QtGui/QImage>
@@ -25,7 +25,7 @@ class TextureTile;
 
 class TileLoader {
 public:
-	TileLoader( const QString& );
+	TileLoader( const QString& theme );
 	virtual ~TileLoader(){}
 
 	TextureTile* loadTile( int tilx, int tily, int tileLevel );
@@ -45,23 +45,24 @@ public:
 	static int columnToLevel( int column );
 
 	// highest level in which all tiles are available
-	static int maxCompleteTileLevel( QString theme );
+	static int maxCompleteTileLevel( const QString& theme );
 
 	// highest level in which some tiles are available
-	static int maxPartialTileLevel( QString theme );
+	static int maxPartialTileLevel( const QString& theme );
 
 	// the mandatory most basic tile level is fully available
-	static bool baseTilesAvailable( QString theme );
+	static bool baseTilesAvailable( const QString& theme );
 
 protected:
 
 	TextureTile* m_tile;
-	QString m_theme, m_filename;
-	QHash <int, TextureTile*> m_tilehash;
+	QString m_theme;
+
+	QHash <int, TextureTile*> m_tileHash;
+	int m_tileId;
 
 	int m_tileWidth, m_tileHeight;
 
-	int m_tilekey;
 };
 
-#endif // 
+#endif // __MARBLE__TILELOADER_H

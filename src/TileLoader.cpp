@@ -29,9 +29,9 @@ void TileLoader::setMap( const QString& theme ){
 
 void TileLoader::resetTilehash(){
 
-	QHash<int, TextureTile*>::const_iterator it = m_tilehash.constBegin();
-	while (it != m_tilehash.constEnd()) {
-		m_tilehash.value(it.key())->setUsed( false );
+	QHash<int, TextureTile*>::const_iterator it = m_tileHash.constBegin();
+	while (it != m_tileHash.constEnd()) {
+		m_tileHash.value(it.key())->setUsed( false );
 		++it;
 	}
 }
@@ -40,42 +40,42 @@ void TileLoader::cleanupTilehash(){
 //	Make sure that tiles which haven't been used during the last
 //	rendering of the map at all get removed from the tile hash.
 
-	QHashIterator<int, TextureTile*> it(m_tilehash);
+	QHashIterator<int, TextureTile*> it(m_tileHash);
 	while (it.hasNext()) {
 		it.next();
 		if ((it.value())->used() == false){
 //			qDebug("Removing " + QString::number(it.key()).toLatin1());
-			delete m_tilehash.value(it.key());
-			m_tilehash.remove(it.key());	
+			delete m_tileHash.value(it.key());
+			m_tileHash.remove(it.key());	
 		}
 	}
 }
 
 void TileLoader::flush(){
-//	Remove all m_tiles from m_tilehash
+//	Remove all m_tiles from m_tileHash
 	QHash <int, TextureTile*>::const_iterator it;
-	for( it = m_tilehash.begin(); it != m_tilehash.constEnd(); it++ ) 
+	for( it = m_tileHash.begin(); it != m_tileHash.constEnd(); it++ ) 
 		delete (*it);
-	m_tilehash.clear();
+	m_tileHash.clear();
 }
 
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel ){
 //	Choosing the correct m_tile via Lng/Lat info 
 
-	m_tilekey =  (tilx *1000) + tily;
+	m_tileId =  (tilx *1000) + tily;
 
-	// If the m_tile hasn't been loaded into the m_tilehash yet, then do so
-	if (!m_tilehash.contains( m_tilekey )){	
+	// If the m_tile hasn't been loaded into the m_tileHash yet, then do so
+	if (!m_tileHash.contains( m_tileId )){	
 		m_tile = new TextureTile(tilx, tily, tileLevel, m_theme);
-		m_tilehash[m_tilekey] = m_tile;
+		m_tileHash[m_tileId] = m_tile;
 	}
 	// otherwise pick the correct one from the hash
 	else {
-		m_tile=m_tilehash.value(m_tilekey);
+		m_tile=m_tileHash.value(m_tileId);
 		if (!m_tile->used()){
 			m_tile->setUsed(true);
-			m_tilehash[m_tilekey]=m_tile;
+			m_tileHash[m_tileId]=m_tile;
 		}
 	}
 
@@ -98,7 +98,7 @@ int TileLoader::columnToLevel( int column ){
 	return (int)( log( column / 2 ) / log( 2 ) );
 }
 
-int TileLoader::maxCompleteTileLevel( QString theme ){
+int TileLoader::maxCompleteTileLevel( const QString& theme ){
 
 	bool noerr = true; 
 
@@ -132,7 +132,7 @@ int TileLoader::maxCompleteTileLevel( QString theme ){
 	return tilelevel;
 }
 
-int TileLoader::maxPartialTileLevel( QString theme ){
+int TileLoader::maxPartialTileLevel( const QString& theme ){
 
 	QString tilepath = KAtlasDirs::path( QString("maps/earth/%1").arg(theme) );
 	QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
@@ -155,7 +155,7 @@ int TileLoader::maxPartialTileLevel( QString theme ){
 	return maxtilelevel;
 }
 
-bool TileLoader::baseTilesAvailable( QString theme ){
+bool TileLoader::baseTilesAvailable( const QString& theme ){
 
 	bool noerr = true; 
 

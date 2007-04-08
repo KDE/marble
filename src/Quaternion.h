@@ -9,8 +9,8 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
-#ifndef QUATERNION_H
-#define QUATERNION_H
+#ifndef __MARBLE__QUATERNION_H
+#define __MARBLE__QUATERNION_H
 
 enum
 {
@@ -62,9 +62,4 @@ class Quaternion {
     xmmfloat    v;
 };
 
-class QuaternionSSE : public Quaternion {
- public:
-    void rotateAroundAxis(const Quaternion &q);
-};
-
-#endif
+#endif // __MARBLE__QUATERNION_H
