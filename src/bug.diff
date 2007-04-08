@@ -1,0 +1,72 @@
+Index: GeoPoint.h
+===================================================================
+--- GeoPoint.h	(revision 651640)
++++ GeoPoint.h	(working copy)
+@@ -13,7 +13,7 @@
+ 	~GeoPoint(){}
+ 	
+ 	int detail()  const { return m_detail; }
+-	int lat()     const { return m_lat; }
++	//int lat()     const { return m_lat; }
+ 	int lon()     const { return m_lon; }
+ #if 0
+ 	void geoCoordinates( float& lon, float& lat ) const {
+@@ -23,7 +23,7 @@
+ 	    q.getSpherical( lon, lat ); 
+ 	}
+ #else
+-	void geoCoordinates( float& lon, float& lat ) {
++	void geoCoordinates( float& lon, float& lat ) const {
+ 	    m_q.getSpherical( lon, lat ); 
+ 	}
+ #endif
+Index: GeoPolygon.cpp
+===================================================================
+--- GeoPolygon.cpp	(revision 651640)
++++ GeoPolygon.cpp	(working copy)
+@@ -240,12 +240,21 @@
+ 		if ((*itPolyLine)->getDateLine()){ 
+ 					
+ 			for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
+-
++#if 1
++				float  lon, lat;
++				(*itPoint).geoCoordinates(lon, lat);
++				x = lon;
++#else
+ 				x = (*itPoint).lon();	
++#endif
+ 				if ((x < x0) && (x > -5400)) x0 = x;
+ 				if ((x > x1) && (x < -5400)) x1 = x;
+ 				
++#if 1
++				y = lat;
++#else
+ 				y = (*itPoint).lat();
++#endif
+ 				if (y < y0) y0 = y;
+ 				if (y > y1) y1 = y;
+ 			}
+@@ -256,12 +265,21 @@
+ 		else {			
+ 					
+ 			for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
+-
++#if 1
++				float  lon, lat;
++				(*itPoint).geoCoordinates(lon, lat);
++				x = lon;
++#else
+ 				x = (*itPoint).lon();
++#endif
+ 				if (x < x0) x0 = x;
+ 				if (x > x1) x1 = x;
+ 				
++#if 1
++				y = lat;
++#else
+ 				y = (*itPoint).lat();
++#endif
+ 				if (y < y0) y0 = y;
+ 				if (y > y1) y1 = y;
+ 			}
