@@ -19,9 +19,7 @@
 const float rad2int = 21600.0 / M_PI;
 
 GeoPoint::GeoPoint(int _detail, int _lon, int _lat)
-  : m_detail(_detail),
-    m_lat(_lat),
-    m_lon(_lon)
+  : m_detail(_detail)
 {
     m_q = Quaternion( (float)(_lon) / rad2int * 2,
 		      (float)(_lat) / rad2int * 2 );

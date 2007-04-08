@@ -200,7 +200,10 @@ void PntMap::load(const QString &filename){
 		GeoPoint::Vector::Iterator itEndPoint = (*itPolyLine)->end();
 
 		for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
-			 x = (*itPoint).lon();
+			float  lon, lat;
+			(*itPoint).geoCoordinates(lon, lat);
+			x = (int)( 10800.0f * lon / M_PI );
+
 			 if (lastx != 0)
 			 	if ((x/lastx < 0.0) && ((abs((int)x)+abs((int)lastx)) > 10800.0)) {
 			 		(*itPolyLine)->setDateLine(true);
@@ -241,11 +244,15 @@ void PntMap::load(const QString &filename){
 					
 			for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
 
-				x = (*itPoint).lon();	
+				float  lon, lat;
+				(*itPoint).geoCoordinates(lon, lat);
+				x = (int)( 10800.0f * lon / M_PI );
+
 				if ((x < x0) && (x > -5400)) x0 = x;
 				if ((x > x1) && (x < -5400)) x1 = x;
 				
-				y = (*itPoint).lat();
+				y = (int)( 10800.0f * lat / M_PI );
+
 				if (y < y0) y0 = y;
 				if (y > y1) y1 = y;
 			}
@@ -257,11 +264,15 @@ void PntMap::load(const QString &filename){
 					
 			for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
 
-				x = (*itPoint).lon();
+				float  lon, lat;
+				(*itPoint).geoCoordinates(lon, lat);
+				x = (int)( 10800.0f * lon / M_PI );
+
 				if (x < x0) x0 = x;
 				if (x > x1) x1 = x;
 				
-				y = (*itPoint).lat();
+				y = (int)( 10800.0f * lat / M_PI );
+
 				if (y < y0) y0 = y;
 				if (y > y1) y1 = y;
 			}
