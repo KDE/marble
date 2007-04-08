@@ -104,7 +104,7 @@ void TextureMapper::mapTexture(QImage* origimg, const int& radius, Quaternion& r
 
 //	calculate north pole position to decrease pole distortion later on
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
-	Quaternion qpolepos = northpole.getQuatPoint();
+	Quaternion qpolepos = northpole.quaternion();
 	Quaternion invRotAxis = rotAxis;
 	invRotAxis = invRotAxis.inverse();
 

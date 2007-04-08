@@ -107,7 +107,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry,
 
 		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 && mark-> selected() == 0 ) continue; 
 
-		qpos = mark->getQuatPoint();
+		qpos = mark->quaternion();
 
 		qpos.rotateAroundAxis(invRotAxis);
 

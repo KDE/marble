@@ -15,9 +15,19 @@ public:
 	int detail()  const { return m_detail; }
 	int lat()     const { return m_lat; }
 	int lon()     const { return m_lon; }
-	void geoCoordinates( float& lon, float& lat ) { m_q.getSpherical( lon, lat ); }
-
-	const Quaternion &getQuatPoint() const { return m_q; }
+#if 0
+	void geoCoordinates( float& lon, float& lat ) const {
+	    // FIXME: This copy is only necessary because
+	    //        q.getSpherical() is not a const method.
+	    Quaternion  q = m_q;
+	    q.getSpherical( lon, lat ); 
+	}
+#else
+	void geoCoordinates( float& lon, float& lat ) {
+	    m_q.getSpherical( lon, lat ); 
+	}
+#endif
+	const Quaternion &quaternion() const { return m_q; }
 	QString toString();
 
 	// Type definitions

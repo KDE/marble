@@ -52,7 +52,7 @@ class PlaceMark : public PlaceMarkStorage
     const int selected() const { return m_selected; }
     void setSelected( int selected ){ m_selected = selected; }
 
-    const Quaternion& getQuatPoint() const { return m_coordinate.getQuatPoint(); }	
+    const Quaternion& quaternion() const { return m_coordinate.quaternion(); }	
 
     const QPixmap& textPixmap() const { return m_labelPixmap; }
     const QRect& textRect() const { return m_rect; }

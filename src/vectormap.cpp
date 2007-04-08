@@ -83,7 +83,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 
 //			foreach (corner, boundary){
 			for (int i = 0; i < 5; ++i){
-				qbound = boundary[i].getQuatPoint();
+				qbound = boundary[i].quaternion();
 				qbound.rotateAroundAxis(m_rotMatrix); 
 
 				if (qbound.v[Q_Z] > m_zBoundingBoxLimit){
@@ -119,7 +119,7 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 #ifdef VECMAP_DEBUG
 			m_debugNodeCount++;
 #endif
-			qpos = itPoint->getQuatPoint();
+			qpos = itPoint->quaternion();
 			qpos.rotateAroundAxis(m_rotMatrix);
 			currentPoint = QPointF(imgrx+ m_radius*qpos.v[Q_X]+1,imgry+ m_radius*qpos.v[Q_Y]+1);
 			

@@ -8,10 +8,13 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
 #include <cmath>
+
 #include <QtCore/QDebug>
 
 #include "GeoPoint.h"
+
 
 const float rad2int = 21600.0 / M_PI;
 
@@ -34,6 +37,7 @@ GeoPoint::GeoPoint( float _lon, float _lat )
 {
     m_q = Quaternion( _lon, _lat );
 }
+
 
 QString GeoPoint::toString()
 {
@@ -58,5 +62,4 @@ QString GeoPoint::toString()
     return QString("%1\xb0 %2\' %3\" %4, %5\xb0 %6\' %7\" %8")
 	.arg(latdeg).arg(latmin).arg(latsec).arg(nsstring)
 	.arg(londeg).arg(lonmin).arg(lonsec).arg(westring);
-
 }

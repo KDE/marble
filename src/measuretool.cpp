@@ -63,7 +63,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 	QVector<QPolygonF> distancePaths;
 
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
-		qpos = (*it)->getQuatPoint();
+		qpos = (*it)->quaternion();
 		qpos.rotateAroundAxis(invRotAxis);
 
 		if ( qpos.v[Q_Z] > 0 ){
@@ -96,7 +96,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter, int imgrx, int imgry,
 	if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, false);
 */
 	for ( it= m_pMeasurePointList.constBegin(); it != m_pMeasurePointList.constEnd(); it++ ){ // STL iterators
-		qpos = (*it)->getQuatPoint();
+		qpos = (*it)->quaternion();
 		qpos.rotateAroundAxis(invRotAxis);
 
 		if ( qpos.v[Q_Z] > 0 ){

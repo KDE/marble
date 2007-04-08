@@ -246,7 +246,7 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta){
 
 int KAtlasGlobe::northPoleY(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
-	Quaternion qpolepos = northpole.getQuatPoint();
+	Quaternion qpolepos = northpole.quaternion();
 	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
@@ -256,7 +256,7 @@ int KAtlasGlobe::northPoleY(){
 
 int KAtlasGlobe::northPoleZ(){
 	GeoPoint northpole( 0.0f, (float)( -M_PI*0.5 ) );
-	Quaternion qpolepos = northpole.getQuatPoint();
+	Quaternion qpolepos = northpole.quaternion();
 	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpolepos.rotateAroundAxis(invRotAxis);
@@ -266,7 +266,7 @@ int KAtlasGlobe::northPoleZ(){
 
 bool KAtlasGlobe::screenCoordinates( const float lng, const float lat, int& x, int& y ){
 	
-	Quaternion qpos = GeoPoint( lng, lat ).getQuatPoint();
+	Quaternion qpos = GeoPoint( lng, lat ).quaternion();
 	Quaternion invRotAxis = m_pPlanetAxis.inverse();
 
 	qpos.rotateAroundAxis(invRotAxis);

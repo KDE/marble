@@ -121,7 +121,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff ){
 			float lng = ( dim == Longitude ) ? val : dimVal;
 
 			GeoPoint geoit( lng, -lat );
-			Quaternion qpos = geoit.getQuatPoint();
+			Quaternion qpos = geoit.quaternion();
 			qpos.rotateAroundAxis(m_rotMatrix);
 
 			currentPoint = QPointF((float)(imgrx+ m_radius*qpos.v[Q_X])+1,(float)(imgry+ m_radius*qpos.v[Q_Y])+1);

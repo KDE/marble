@@ -144,12 +144,28 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
 }
 
 void Quaternion::getSpherical(float &alpha, float &beta) {
+#if 0
+	// FIXME:
+	//
+	// This should work, but it doesn't.  But, why should a simple
+	// request to get spherical coordinates from the quaternion
+	// lead to a change of the quaternion itself?  I suspect there
+	// is a subtle bug in here somewhere.  Perhaps this cutoff
+	// should be done already when the quaternion is created.
+	float  y = v[Q_Y];
+	if ( y > 1.0f )
+		y = 1.0f;
+	else if ( y < -1.0f )
+		y = -1.0f;
+	beta = -asinf( y );
+#else
 	if(fabs(v[Q_Y]) > 1.0f) {
 		if(v[Q_Y] > 1.0f) v[Q_Y] = 1.0f;
 		if(v[Q_Y] < -1.0f) v[Q_Y] = -1.0f;
 	}
 
 	beta = -asinf(v[Q_Y]);
+#endif
 
 	if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005f) 
 		alpha = -atan2f(v[Q_X], v[Q_Z]);
