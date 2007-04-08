@@ -1,5 +1,4 @@
 #include <cmath>
-#include <stdlib.h>
 
 #include <QtCore/QString>
 #include <QtCore/QDebug>
