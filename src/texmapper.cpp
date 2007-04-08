@@ -1,14 +1,15 @@
-#include "texmapper.h"
-
+#include <cmath>
 #include <iostream>
+
 #include <QtCore/QTime>
 #include <QtGui/QColor>
-#include <cmath>
 
-#include "geopoint.h"
+#include "GeoPoint.h"
 #include "GeoPolygon.h"
 #include "katlasdirs.h"
 #include "texloader.h"
+#include "texmapper.h"
+
 
 #include <QtCore/QDebug>
 

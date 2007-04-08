@@ -14,9 +14,10 @@
 
 #include <QtGui/QFont>
 #include <QtCore/QVector>
-#include "clippainter.h"
-#include "geopoint.h"
+
+#include "GeoPoint.h"
 #include "placemark.h"
+#include "clippainter.h"
 
 /**
 @author Torsten Rahn

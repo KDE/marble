@@ -15,8 +15,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
-#include "geopoint.h"
 #include "quaternion.h"
+#include "GeoPoint.h"
 
 #include <QtCore/QDebug>
 

@@ -11,7 +11,8 @@
 #include "placemark.h"
 
 #include <cmath>
-#include "geopoint.h"
+
+#include "GeoPoint.h"
 #include "katlasdirs.h"
 
 #include <QtCore/QDebug>

@@ -11,12 +11,12 @@
 #include <cmath>
 #include <QtCore/QDebug>
 
-#include "geopoint.h"
+#include "GeoPoint.h"
 
 const float rad2int = 21600.0 / M_PI;
 
-GeoPoint::GeoPoint(int detail, int _lon, int _lat)
-  : m_Detail(detail),
+GeoPoint::GeoPoint(int _detail, int _lon, int _lat)
+  : m_detail(_detail),
     m_lat(_lat),
     m_lon(_lon)
 {

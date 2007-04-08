@@ -9,7 +9,7 @@
 
 #include <QtCore/QVector>
 
-#include "geopoint.h"
+#include "GeoPoint.h"
 #include "placemarkstorage.h"
 
 class PlaceMark : public PlaceMarkStorage

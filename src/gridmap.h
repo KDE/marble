@@ -3,10 +3,11 @@
 
 #include <QtGui/QPen>
 
-#include "clippainter.h"
-#include "geopoint.h"
-#include "ScreenPolygon.h"
 #include "quaternion.h"
+#include "GeoPoint.h"
+#include "ScreenPolygon.h"
+#include "clippainter.h"
+
 
 /**
 @author Torsten Rahn

@@ -6,7 +6,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 
-#include "geopoint.h"
+#include "GeoPoint.h"
 #include "ScreenPolygon.h"
 #include "quaternion.h"
 

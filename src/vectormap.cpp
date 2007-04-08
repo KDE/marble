@@ -114,7 +114,7 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 
 	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
 //		remain -= step;
-		if ( itPoint->getDetail() >= detail){
+		if ( itPoint->detail() >= detail){
 // Calculate polygon nodes
 #ifdef VECMAP_DEBUG
 			m_debugNodeCount++;
