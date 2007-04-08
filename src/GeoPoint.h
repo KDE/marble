@@ -7,29 +7,29 @@
 
 
 class GeoPoint {
-public:
-	GeoPoint(){}
-	GeoPoint(int, int);
-	GeoPoint(float, float);
-	GeoPoint(int, int, int);
-	~GeoPoint(){}
+ public:
+    GeoPoint(){}
+    GeoPoint(int, int);
+    GeoPoint(float, float);
+    GeoPoint(int, int, int);
+    ~GeoPoint(){}
 	
-	int detail()  const { return m_detail; }
+    int detail()  const { return m_detail; }
 
-	void geoCoordinates( float& lon, float& lat ) const {
-	    m_q.getSpherical( lon, lat ); 
-	}
+    void geoCoordinates( float& lon, float& lat ) const {
+	m_q.getSpherical( lon, lat ); 
+    }
 
-	const Quaternion &quaternion() const { return m_q; }
-	QString toString();
+    const Quaternion &quaternion() const { return m_q; }
+    QString toString();
 
-	// Type definitions
-	typedef QVector<GeoPoint> Vector;
+    // Type definitions
+    typedef QVector<GeoPoint> Vector;
 
-private:	
-	Quaternion  m_q;
-	int         m_detail;
-
+ private:	
+    Quaternion  m_q;
+    int         m_detail;
 };
+
 
 #endif // GEOPOINT_H
