@@ -28,12 +28,16 @@ public:
 	TextureLoader( const QString& );
 	virtual ~TextureLoader(){}
 
+	TextureTile* loadTile( int tilx, int tily, int tileLevel );
+
 	void setMap( const QString& );
-	void setTexLevel( const int texlevel );
 
 	void resetTilehash();
 	void cleanupTilehash();
 	void flush();
+
+	const int tileWidth() const { return m_tileWidth; }
+	const int tileHeight() const { return m_tileHeight; }
 
 	static int levelToRow( int level );
 	static int levelToColumn( int level );
@@ -49,42 +53,15 @@ public:
 	// the mandatory most basic tile level is fully available
 	static bool baseTilesAvailable( QString theme );
 
-//	TODO: These should be moved into TextureMapper:
-
-	void setN( const int n );
-	void prePixelValueApprox(const float&, const float&, QRgb*);
-	void getPixelValueApprox(const float&, const float&, QRgb*);
-	int m_depth;
-	const int depth() const { return m_depth; }
-
 protected:
-	inline void loadTile();
 
 	TextureTile* m_tile;
 	QString m_theme, m_filename;
 	QHash <int, TextureTile*> m_tilehash;
 
-	int texpixw, texpixh;
-	float rad2pixw, rad2pixh;
+	int m_tileWidth, m_tileHeight;
 
-	int m_tilxw, m_tilyh;
-
-	int tilx, tily;
-	int m_tilw, m_tilh;
-
-	int m_texlevel, m_oldtexlevel, m_tilekey;
-
-
-//	TODO: These should be moved into TextureMapper:
-
-	void getPixelValue(const float&, const float&, QRgb*);
-	float m_prevlat, m_prevlng;
-	int m_n; float m_ninv;
-	int maxfullalpha, maxquatalpha, maxhalfbeta;
-	float maxhalfalpha, maxquatbeta;
-	int normfullalpha, normhalfbeta;
-	float normhalfalpha, normquatbeta;
-	int posx, posy;
+	int m_tilekey;
 };
 
 #endif // 

@@ -20,6 +20,7 @@
 @author Torsten Rahn
 */
 
+class TextureTile;
 class TextureLoader;
 
 class TextureMapper {
@@ -31,27 +32,46 @@ public:
 	void setMaxTileLevel( int level ){ m_maxtilelevel = level; }
 	void resizeMap(const QImage*);
 	void mapTexture(QImage*, const int&, Quaternion&);
-	void selectTexLevel(const int&);
+	void selectTileLevel(const int&);
 
-private:
+protected:
+	void prePixelValueApprox(const float&, const float&, QRgb*);
+	void getPixelValueApprox(const float&, const float&, QRgb*);
+	void getPixelValue(const float&, const float&, QRgb*);
+
+	int m_posx, m_posy;
+
 	TextureLoader* texldr;
 	QRgb* line;
 	QRgb* linefast;
 
 	int m_maxtilelevel;
 	bool interpolate;
-	int n;
-	float ninv;
 	int nopt;
 
 	int x,y,z;
 	int rx;
 	float qr, qx, qy, qz;
+	float radalpha, radbeta;
 
 	int imgrx, imgry, imgradius;
 	int imgwidth, imgheight;
-	int alpha, beta;
-	float radalpha, radbeta;
+
+	float m_prevlat, m_prevlng;
+	int m_n; float m_ninv;
+
+	int m_tilxw, m_tilyh;
+
+	int maxfullalpha, maxquatalpha, maxhalfbeta;
+	float maxhalfalpha, maxquatbeta;
+	int normfullalpha, normhalfbeta;
+	float normhalfalpha, normquatbeta;
+
+	float m_rad2pixw, m_rad2pixh;
+
+	TextureTile* m_tile;
+
+	int m_tileLevel;
 };
 
 #endif
