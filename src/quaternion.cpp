@@ -143,8 +143,8 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
 	v[Q_W] = p1*q1.v[Q_W] + p2*q2.v[Q_W];
 }
 
-void Quaternion::getSpherical(float &alpha, float &beta) {
-#if 0
+void Quaternion::getSpherical(float &alpha, float &beta) const {
+#if 1
 	// FIXME:
 	//
 	// This should work, but it doesn't.  But, why should a simple

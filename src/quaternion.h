@@ -47,7 +47,7 @@ public:
 	virtual void rotateAroundAxis(const Quaternion &q);
 	void slerp(const Quaternion q1, const Quaternion q2, float t);
 
-	void getSpherical(float &alpha, float &beta); // Geo: lon, lat
+	void getSpherical(float &alpha, float &beta) const; // Geo: lon, lat
 
 	void scalar(float mult);
 
