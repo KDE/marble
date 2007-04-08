@@ -81,10 +81,7 @@ class PlaceMarkModel : public QAbstractListModel {
 class PlaceMarkPainter : public QObject {
 class QAbstractItemModel;
 class QMenu;
-class QPainter;
 class QStandardItemModel;
-class QStringListModel;
-class QSvgRenderer;
 class QuaternionSSE : public Quaternion {
 class SearchComboBox : public QComboBox {
 class SearchListView : public QListView {
@@ -94,10 +91,6 @@ class TextureMapper {
 class TextureTile;
 class TileScissor : public QObject {
 class TinyWebBrowser : public QTextBrowser {
-class Ui_KAtlasTileCreatorDialog
-class Ui_PlaceMarkInfoDialog
-class Ui_katlasAboutDialog
-class Ui_katlasToolBox
 class VectorComposer {
 class katlasAboutDialog: public Ui_katlasAboutDialog {};
 class katlasToolBox: public Ui_katlasToolBox {};

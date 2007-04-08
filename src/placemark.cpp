@@ -8,19 +8,19 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include "placemark.h"
 
 #include <cmath>
 
 #include "GeoPoint.h"
+#include "placemark.h"
 #include "katlasdirs.h"
 
 #include <QtCore/QDebug>
 
 
 PlaceMark::PlaceMark()
-    : PlaceMarkStorage(),
-      m_coordinate() 
+  : m_coordinate(),
+    m_name()
 {
     m_symbol       = 0;
     m_population   = 0;
@@ -34,9 +34,9 @@ PlaceMark::PlaceMark()
     m_selected     = 0; // 0: not selected 1: centered 2:hover
 }
 
-PlaceMark::PlaceMark( QString name )
-    : PlaceMarkStorage(name),
-      m_coordinate()
+PlaceMark::PlaceMark( QString _name )
+  : m_coordinate(),
+    m_name( _name )
 {
     m_symbol       = 0;
     m_symbolPixmap = QPixmap();

@@ -1,10 +1,11 @@
 #ifndef PLACEFOLDER_H
 #define PLACEFOLDER_H
 
-#include "placemarkstorage.h"
-#include "placemark.h"
 #include <QtCore/QDebug>
 #include <QtCore/QVector>
+
+#include "placemark.h"
+
 
 class PlaceFolder : public QVector<PlaceMark*> {
 

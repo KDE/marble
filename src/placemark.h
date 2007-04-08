@@ -10,9 +10,8 @@
 #include <QtCore/QVector>
 
 #include "GeoPoint.h"
-#include "placemarkstorage.h"
 
-class PlaceMark : public PlaceMarkStorage
+class PlaceMark
 {
 
 
@@ -23,6 +22,9 @@ class PlaceMark : public PlaceMarkStorage
     GeoPoint coordinate() const { return m_coordinate; } 
     void coordinate( float &lon, float &lat );
     void setCoordinate( float lon, float lat );
+
+    QString name() const {return m_name; }
+    void setName( QString name ){ m_name = name; }
 
     const QPoint& symbolPos() const { return m_sympos; }
     void setSymbolPos( const QPoint& sympos ){ m_sympos = sympos; }
@@ -49,6 +51,9 @@ class PlaceMark : public PlaceMarkStorage
     const int population() const { return m_population; }
     void setPopulation( int population ){ m_population = population; }
 
+    bool visible() const {return m_visible; }
+    void setVisible( bool visible ){ m_visible = visible; }
+
     const int selected() const { return m_selected; }
     void setSelected( int selected ){ m_selected = selected; }
 
@@ -62,12 +67,14 @@ class PlaceMark : public PlaceMarkStorage
 
  protected:
     GeoPoint  m_coordinate;
+    QString   m_name;
 
     // View stuff
     QPoint m_sympos;
     QPixmap m_symbolPixmap;
     QPixmap m_labelPixmap;
-    QRect m_rect;		// bounding box of label
+    QRect   m_rect;		// bounding box of label
+    bool    m_visible;
 
     // Basic data
     int m_population;

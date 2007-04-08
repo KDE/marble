@@ -37,7 +37,6 @@ set(marble_SRCS
            clippainter.cpp
            placemarkmanager.cpp
            placecontainer.cpp
-           placemarkstorage.cpp
            placefolder.cpp
            placemark.cpp
            searchlistview.cpp
@@ -82,7 +81,6 @@ set(marble_HDRS
            clippainter.h
            placemarkmanager.h
            placecontainer.h
-           placemarkstorage.h
            placefolder.h
            placemark.h
            searchlistview.h
