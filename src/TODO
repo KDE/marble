@@ -1,0 +1,15 @@
+Misc
+ * Create a file that describes the coding standards			----
+
+Cleaning:
+ * Make all files follow the coding standards				----
+ * One class per file							----
+ * Filename == Classname (CamelCasing)					----
+
+Widget
+ * Create MarbleWidget with a view and a model				----
+
+Make Marble a KDE program
+ * KApplication
+ * AboutData
+ * KConfig XT
