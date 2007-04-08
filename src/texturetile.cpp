@@ -68,7 +68,7 @@ void TextureTile::loadTile( int x, int y, int level,
 	QString relfilename = QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg(i).arg( (int)(testy1), 4, 10, QChar('0') ).arg( (int)(testx1), 4, 10, QChar('0') );
 
 	absfilename = KAtlasDirs::path( relfilename );
-	if ( QFile::exists( absfilename ) ){
+	if ( QFile::exists( absfilename ) ) {
 	    m_rawtile = new QImage( absfilename );
 	    // qDebug() << absfilename;
 	    if ( !m_rawtile->isNull() ) {
@@ -84,6 +84,7 @@ void TextureTile::loadTile( int x, int y, int level,
 		    QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * m_rawtile->width() ) - 1, (int)( ( testy2 - (int)(testy1) ) * m_rawtile->height() ) - 1 );
 				
 		    //					qDebug() << "x1: " << topleft.x() << "y1: " << topleft.y() << "x2: " << bottomright.x() << "y2: " << bottomright.y();  
+		    // FIXME: Memory leaks??
 		    *m_rawtile = m_rawtile->copy( QRect( topleft, bottomright ) );
 		    *m_rawtile = m_rawtile->scaled( tilesize ); // TODO: use correct size
 		}
