@@ -14,7 +14,7 @@
 
 #include <QtGui/QImage>
 
-#include "quaternion.h"
+#include "Quaternion.h"
 
 /**
 @author Torsten Rahn

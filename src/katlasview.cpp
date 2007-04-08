@@ -7,7 +7,7 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 
-#include "quaternion.h"
+#include "Quaternion.h"
 #include "texcolorizer.h"
 #include "clippainter.h"
 #include "katlasviewinputhandler.h"

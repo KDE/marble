@@ -2,7 +2,9 @@
 #define GEOPOINT_H
 
 #include <QtCore/QVector>
-#include "quaternion.h"
+
+#include "Quaternion.h"
+
 
 class GeoPoint {
 public:

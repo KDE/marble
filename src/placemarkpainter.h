@@ -17,9 +17,10 @@
 #include <QtGui/QPixmap>
 #include <QtCore/QRect>
 #include <QtCore/QVector>
+
+#include "Quaternion.h"
 #include "placecontainer.h"
 #include "placemark.h"
-#include "quaternion.h"
 
 /**
 @author Torsten Rahn

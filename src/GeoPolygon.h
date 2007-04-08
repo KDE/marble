@@ -15,7 +15,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
-#include "quaternion.h"
+#include "Quaternion.h"
 #include "GeoPoint.h"
 
 #include <QtCore/QDebug>
@@ -47,7 +47,6 @@ class GeoPolygon : public GeoPoint::Vector
 	float       lon;
 	float       lat;
 
-#if 0
 	m_boundary.at(0).geoCoordinates(lon, lat);
 	qDebug() << "Boundary:" << lon << ", " << lat << " Size: " << m_boundary.size();
 	m_boundary.at(1).geoCoordinates(lon, lat);
@@ -57,7 +56,6 @@ class GeoPolygon : public GeoPoint::Vector
 	m_boundary.at(3).geoCoordinates(lon, lat);
 	qDebug() << "Boundary:" << lon << ", " << lat;
 	m_boundary.at(4).geoCoordinates(lon, lat);
-#endif
 	qDebug() << "Boundary:" << lon << ", " << lat;
 	//		qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
     }

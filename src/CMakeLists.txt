@@ -19,6 +19,7 @@ endif(MSVC)
 link_directories (${QT_LIBRARY_DIR})
 
 set(marble_SRCS
+           Quaternion.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
            katlascontrol.cpp
@@ -29,7 +30,6 @@ set(marble_SRCS
 	   texturetile.cpp
            texloader.cpp
            texmapper.cpp
-           quaternion.cpp
            katlasglobe.cpp
            katlastoolbox.cpp
            vectorcomposer.cpp
@@ -62,6 +62,7 @@ set(marble_SRCS
 )
 
 set(marble_HDRS
+           Quaternion.h
            GeoPoint.h
 	   GeoPolygon.h
 	   ScreenPolygon.h
@@ -74,7 +75,6 @@ set(marble_HDRS
 	   texturetile.h
            texloader.h
            texmapper.h
-           quaternion.h
            katlasglobe.h
            katlastoolbox.h
            vectorcomposer.h

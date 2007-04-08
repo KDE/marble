@@ -5,8 +5,8 @@
 #include "katlasviewinputhandler.moc"
 #endif
 
+#include "Quaternion.h"
 #include "katlasview.h"
-#include "quaternion.h"
 #include "katlasdirs.h"
 
 const float pi = 3.14159f ;

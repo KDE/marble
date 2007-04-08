@@ -17,9 +17,10 @@
 #include <QtGui/QPainter>
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
+
+#include "Quaternion.h"
 #include "placecontainer.h"
 #include "placemarkmodel.h"
-// #include <QtGui/QPainter>
 #include "clippainter.h"
 #include "maptheme.h"
 #include "texmapper.h"
@@ -27,7 +28,6 @@
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 #include "placemarkpainter.h"
-#include "quaternion.h"
 
 class PlaceMark;
 class PlaceMarkManager;

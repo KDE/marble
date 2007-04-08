@@ -14,7 +14,7 @@ ScreenPolygon	A path or polygon on the screen. Uses screen
 		coordinates.  Uses floats due to antialiasing.
 VectorMap	A Vector of ScreenPolygons.
 		Rename   FIXME
-GridMap		I think this is the grid of lat-lon lines on the map.
+GridMap		The grid of lat-lon lines on the map.
 		Another Vector of ScreenPolygons. Perhaps it should
 		inherit or contain a VectorMap.
 

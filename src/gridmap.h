@@ -3,7 +3,7 @@
 
 #include <QtGui/QPen>
 
-#include "quaternion.h"
+#include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"
 #include "clippainter.h"
@@ -29,18 +29,20 @@ public:
 	void setPen ( const QPen & p ){m_pen = p;}
 
 	enum SphereDim {Longitude, Latitude};
+
 private:
 	void createCircles( int lngNum, int latNum );
 
 	void createCircle( float, SphereDim, float cutcoeff = 0.0f );
 
-	matrix m_rotMatrix;
-
-	ScreenPolygon m_polygon;
-
 	inline void initCrossHorizon();
 
 	const QPointF horizonPoint();
+
+private:
+	matrix m_rotMatrix;
+
+	ScreenPolygon m_polygon;
 
 	int imgrx, imgry, imgradius;
 	int imgwidth, imgheight;
