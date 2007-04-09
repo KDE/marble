@@ -137,7 +137,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 				}
 
 				if (m_leftpressed == true){
-					float radius = (float)(m_globe->getRadius());
+					float radius = (float)(m_globe->radius());
 					float deltax = (float)(event->x()-m_leftpressedx);
 					float deltay = (float)(event->y()-m_leftpressedy);
 

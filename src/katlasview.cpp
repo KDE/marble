@@ -78,7 +78,7 @@ void KAtlasView::zoomView(int zoom)
 
     int radius = fromLogScale(zoom);
 
-    if ( radius == m_pGlobe->getRadius() )
+    if ( radius == m_pGlobe->radius() )
 	return;
 	
     m_pGlobe->setRadius(radius);
@@ -92,7 +92,7 @@ void KAtlasView::zoomViewBy(int zoomstep)
 {
     // Prevent infinite loops
 
-    int zoom = m_pGlobe->getRadius();
+    int zoom = m_pGlobe->radius();
     int tryZoom = toLogScale(zoom) + zoomstep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
     if ( tryZoom >= minimumzoom ) {
@@ -193,7 +193,7 @@ void KAtlasView::resizeEvent (QResizeEvent*)
 bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta)
 {
 
-    int radius = m_pGlobe->getRadius(); 
+    int radius = m_pGlobe->radius(); 
     int imgrx  = width() >> 1;
     int imgry  = height() >> 1;
 
@@ -221,7 +221,7 @@ bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta)
 
 void KAtlasView::setActiveRegion()
 {
-    int zoom = m_pGlobe->getRadius(); 
+    int zoom = m_pGlobe->radius(); 
 
     activeRegion = QRegion(25,25,width()-50,height()-50, QRegion::Rectangle);
 
@@ -247,7 +247,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
     //	if(m_pGlobe->needsUpdate() || m_pCanvasImage->isNull() || m_pCanvasImage->size() != size())
     //	{
 
-    int radius = m_pGlobe->getRadius();
+    int radius = m_pGlobe->radius();
     bool clip = ( radius > m_pCanvasImage->width()/2
 		  || radius > m_pCanvasImage->height()/2 ) ? true : false;
 
@@ -262,7 +262,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 	
     // Draw the scale.
     painter.drawPixmap(10, m_pCanvasImage->height()-40,
-		       m_mapscale.drawScaleBarPixmap( m_pGlobe->getRadius(),
+		       m_mapscale.drawScaleBarPixmap( m_pGlobe->radius(),
 						      m_pCanvasImage-> width()/2 - 20));
 
     // Draw the wind rose.
@@ -304,10 +304,10 @@ void KAtlasView::goHome()
 
 float KAtlasView::getMoveStep()
 {
-    if ( m_pGlobe->getRadius() < sqrt(width()*width() + height()*height()))
+    if ( m_pGlobe->radius() < sqrt(width()*width() + height()*height()))
 	return 0.1f;
     else
-	return atanf((float)width()/(float)(2 * m_pGlobe->getRadius())) * 0.2f;
+	return atanf((float)width()/(float)(2 * m_pGlobe->radius())) * 0.2f;
 }
 
 int KAtlasView::fromLogScale(int zoom)

@@ -17,6 +17,7 @@ GeoPolygon.h            GeoPolygon.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
+katlasglobe.h           katlasglobe.cpp
 
 DOING
 
@@ -27,18 +28,14 @@ gridmap.h               gridmap.cpp
 httpfetchfile.h         httpfetchfile.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlascontrol.h         katlascontrol.cpp
-katlascrosshair.h       katlascrosshair.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
-katlasglobe.h           katlasglobe.cpp
-katlasmapscale.h        katlasmapscale.cpp
 katlasthemeselectview.h katlasthemeselectview.cpp
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
 katlastoolbox.h         katlastoolbox.cpp
 katlasview.h            katlasview.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
-katlaswindrose.h        katlaswindrose.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
 placecontainer.h        placecontainer.cpp
@@ -58,6 +55,11 @@ searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
 placemarkinfodialog.h   placemarkinfodialog.cpp
+
+Items on the widget (QObjects):
+katlascrosshair.h       katlascrosshair.cpp
+katlaswindrose.h        katlaswindrose.cpp
+katlasmapscale.h        katlasmapscale.cpp
 
 Special:
 texturepalette.cpp

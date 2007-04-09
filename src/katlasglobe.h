@@ -36,64 +36,74 @@ class PlaceMarkManager;
 @author Torsten Rahn
 */
 
-class KAtlasGlobe  : public QObject {
-public:
-	KAtlasGlobe( QWidget* parent=0 );
-	virtual ~KAtlasGlobe();
-	void setCanvasImage(QImage*);
+class KAtlasGlobe  : public QObject
+{
+ public:
+    KAtlasGlobe( QWidget* parent=0 );
+    virtual ~KAtlasGlobe();
 
-	void paintGlobe(ClipPainter*, QRect);
+    void  setCanvasImage(QImage*);
 
-	void resize();
+    void  paintGlobe(ClipPainter*, QRect);
 
-	void setRadius(const int&);
-	int getRadius(){ return m_radius; };
-	Quaternion getPlanetAxis(){ return m_pPlanetAxis; };
+    void  resize();
 
-	void rotateTo(const uint&, const uint&, const uint&);
+    int   radius(){ return m_radius; };
+    void  setRadius(const int&);
 
-// This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
-	void rotateTo(const float&, const float&);
+    Quaternion  getPlanetAxis(){ return m_pPlanetAxis; };
 
-	void rotateBy(const Quaternion&);
-	void rotateBy(const float&, const float&);
-	QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
 
-	void setMapTheme( const QString& );
+    // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
+    void  rotateTo(const float&, const float&);
+    void  rotateTo(const uint&, const uint&, const uint&);
 
-	int northPoleY();
-	int northPoleZ();
+    void rotateBy(const Quaternion&);
+    void rotateBy(const float&, const float&);
 
-	bool screenCoordinates( const float lng, const float lat, int& x, int& y );
+    QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
 
-	bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_pPlanetAxis == m_pPlanetAxisUpdated ); }
+    void setMapTheme( const QString& );
 
-	void addPlaceMarkFile( QString filename );
+    int northPoleY();
+    int northPoleZ();
 
-	QVector< PlaceMark* > whichFeatureAt( const QPoint& );
-	PlaceContainer* placeContainer(){ return m_placecontainer ; }
+    bool screenCoordinates( const float lng, const float lat, int& x, int& y );
 
-protected:
-	QWidget* m_parent;
-	QImage* m_canvasimg;
-	QImage* m_coastimg;
+    bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_pPlanetAxis == m_pPlanetAxisUpdated ); }
 
-	MapTheme* m_maptheme;
-	TextureColorizer* texcolorizer;
-	TextureMapper* texmapper;
-	VectorComposer* veccomposer;
-	GridMap* gridmap;
-	PlaceMarkManager* placemarkmanager;
-//	PlaceComposer* placecomposer;
-	PlaceMarkModel* m_placemarkmodel;
-	PlaceMarkPainter* m_placemarkpainter;
-	PlaceContainer* m_placecontainer;
+    void addPlaceMarkFile( QString filename );
 
-	Quaternion m_pPlanetAxis, m_pPlanetAxisUpdated;
-	int m_radius, m_radiusUpdated;
+    QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
-	bool m_justModified;
-	bool m_centered;
+    PlaceContainer* placeContainer(){ return m_placecontainer ; }
+
+ protected:
+    QWidget  *m_parent;
+    QImage   *m_canvasimg;
+    QImage   *m_coastimg;
+
+    // View and paint stuff
+    MapTheme          *m_maptheme;
+    TextureColorizer  *texcolorizer;
+    TextureMapper     *texmapper;
+    VectorComposer    *veccomposer;
+    GridMap           *gridmap;
+
+    PlaceMarkManager  *placemarkmanager;
+    //	PlaceComposer* placecomposer;
+    PlaceMarkModel    *m_placemarkmodel;
+    PlaceMarkPainter  *m_placemarkpainter;
+    PlaceContainer    *m_placecontainer;
+
+    Quaternion         m_pPlanetAxis;
+    Quaternion         m_pPlanetAxisUpdated;
+    int                m_radius;
+    int                m_radiusUpdated;
+
+    bool  m_justModified;
+    bool  m_centered;
 };
+
 
 #endif // KATLASGLOBE_H
