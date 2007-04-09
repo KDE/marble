@@ -38,7 +38,6 @@ set(marble_SRCS
            clippainter.cpp
            placemarkmanager.cpp
            placecontainer.cpp
-           placefolder.cpp
            placemark.cpp
            searchlistview.cpp
            katlasmapscale.cpp
@@ -82,7 +81,6 @@ set(marble_HDRS
            clippainter.h
            placemarkmanager.h
            placecontainer.h
-           placefolder.h
            placemark.h
            searchlistview.h
            katlasmapscale.h
