@@ -29,35 +29,32 @@ public:
 	virtual ~TextureMapper();
 
 	void setMap( const QString& path );
-	void setMaxTileLevel( int level ){ m_maxtilelevel = level; }
+	void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
 	void resizeMap(const QImage*);
 	void mapTexture(QImage*, const int&, Quaternion&);
-	void selectTileLevel(const int&);
+	void selectTileLevel(const int& radius);
 
 protected:
-	void prePixelValueApprox(const float&, const float&, QRgb*);
 	void getPixelValueApprox(const float&, const float&, QRgb*);
 	void getPixelValue(const float&, const float&, QRgb*);
 
 	int m_posx, m_posy;
 
-	TileLoader* texldr;
+	TileLoader* m_tileLoader;
 	QRgb* line;
 	QRgb* linefast;
 
-	int m_maxtilelevel;
+	int m_maxTileLevel;
 	bool interpolate;
 	int nopt;
 
 	int x,y,z;
-	int rx;
+
 	float qr, qx, qy, qz;
-	float radalpha, radbeta;
 
-	int imgrx, imgry, imgradius;
-	int imgwidth, imgheight;
+	int m_imageRadius, m_imageHalfWidth, m_imageHalfHeight;
 
-	float m_prevlat, m_prevlng;
+	float m_prevLat, m_prevLng;
 	int m_n; float m_ninv;
 
 	int m_tilxw, m_tilyh;
