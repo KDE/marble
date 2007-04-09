@@ -30,7 +30,7 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     hlayout->addWidget(m_katlasview);
     vlayout->addLayout(hlayout);
 
-    m_toolbox->setLocations( m_katlasview->getPlaceMarkModel() );
+    m_toolbox->setLocations( m_katlasview->placeMarkModel() );
 
     connect(m_toolbox, SIGNAL(goHome()),         m_katlasview, SLOT(goHome()));
     connect(m_toolbox, SIGNAL(zoomChanged(int)), m_katlasview, SLOT(zoomView(int)));

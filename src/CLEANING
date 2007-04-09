@@ -17,7 +17,9 @@ GeoPolygon.h            GeoPolygon.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
+Model/View:
 katlasglobe.h           katlasglobe.cpp
+katlasview.h            katlasview.cpp
 
 DOING
 
@@ -33,7 +35,6 @@ katlasflag.h            katlasflag.cpp
 katlasthemeselectview.h katlasthemeselectview.cpp
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
 katlastoolbox.h         katlastoolbox.cpp
-katlasview.h            katlasview.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
