@@ -1,5 +1,5 @@
 //
-// C++ Interface: texmapper
+// C++ Interface: TextureMapper
 //
 // Description: TextureMapper 
 
@@ -9,8 +9,9 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
-#ifndef TEXMAPPER_H
-#define TEXMAPPER_H
+
+#ifndef TEXTUREMAPPER_H
+#define TEXTUREMAPPER_H
 
 #include <QtGui/QImage>
 
@@ -23,52 +24,72 @@
 class TextureTile;
 class TileLoader;
 
-class TextureMapper {
-public:
-	TextureMapper( const QString& path );
-	virtual ~TextureMapper();
+class TextureMapper
+{
+ public:
+    TextureMapper( const QString& path );
+    virtual ~TextureMapper();
 
-	void setMap( const QString& path );
-	void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
-	void resizeMap(const QImage*);
-	void mapTexture(QImage*, const int&, Quaternion&);
-	void selectTileLevel(const int& radius);
+    void setMap( const QString& path );
+    void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
+    void resizeMap(const QImage*);
+    void mapTexture(QImage*, const int&, Quaternion&);
+    void selectTileLevel(const int& radius);
 
-protected:
-	void getPixelValueApprox(const float&, const float&, QRgb*);
-	void getPixelValue(const float&, const float&, QRgb*);
+ protected:
+    void getPixelValueApprox(const float&, const float&, QRgb*);
+    void getPixelValue(const float&, const float&, QRgb*);
 
-	int m_posx, m_posy;
+    int   m_posx;
+    int   m_posy;
 
-	TileLoader* m_tileLoader;
-	QRgb* line;
-	QRgb* linefast;
+    TileLoader  *m_tileLoader;
+    QRgb        *line;
+    QRgb        *linefast;
 
-	int m_maxTileLevel;
-	bool interpolate;
-	int nopt;
+    int          m_maxTileLevel;
+    bool         interpolate;
+    int          nopt;
 
-	int x,y,z;
+    int  x;
+    int  y;
+    int  z;
 
-	float qr, qx, qy, qz;
+    float  qr;
+    float  qx;
+    float  qy;
+    float  qz;
 
-	int m_imageRadius, m_imageHalfWidth, m_imageHalfHeight;
+    int    m_imageRadius;
+    int    m_imageHalfWidth;
+    int    m_imageHalfHeight;
 
-	float m_prevLat, m_prevLng;
-	int m_n; float m_ninv;
+    float  m_prevLat;
+    float  m_prevLng;
 
-	int m_tilxw, m_tilyh;
+    int    m_n;
+    float  m_ninv;
 
-	int maxfullalpha, maxquatalpha, maxhalfbeta;
-	float maxhalfalpha, maxquatbeta;
-	int normfullalpha, normhalfbeta;
-	float normhalfalpha, normquatbeta;
+    int    m_tilxw;
+    int    m_tilyh;
 
-	float m_rad2pixw, m_rad2pixh;
+    int    maxfullalpha;
+    int    maxquatalpha;
+    int    maxhalfbeta;
+    float  maxhalfalpha;
+    float  maxquatbeta;
+    int    normfullalpha;
+    int    normhalfbeta;
+    float  normhalfalpha;
+    float  normquatbeta;
 
-	TextureTile* m_tile;
+    float  m_rad2pixw;
+    float  m_rad2pixh;
 
-	int m_tileLevel;
+    TextureTile  *m_tile;
+
+    int    m_tileLevel;
 };
+
 
 #endif
