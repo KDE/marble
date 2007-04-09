@@ -1,3 +1,25 @@
+This file describes what we need to do before certain milestones.
+
+Mark those tasks that you want to perform with your name:
+ INGE	Inge Wallin
+ TACK	Tackat (Torsten Rahn)
+
+
+Before Version 0.4 (mid april)
+----------------------------------------------------------------
+
+Features
+ * Add Downloadmanager class for tiles and Wikipedia articles		TACK
+ * Fix image downloading for Wikipedia					TACK
+
+
+Before the SoC projects start
+----------------------------------------------------------------
+
+
+Before KDE 4.0
+----------------------------------------------------------------
+
 Misc
  * Create a file that describes the coding standards			----
 
@@ -7,18 +29,22 @@ Cleaning:
  * Filename == Classname (CamelCasing)					----
 
 Widget:
- * Create MarbleWidget with a view (currently: KAtlasView) and a model (currently: KAtlasGlobe)
- * Make it possible to paint on a QGraphicsView, a QPixmap and QSvgRendrerer in addition to painting on the KAtlasView widget. Offer accessor method for the Pixmap, so it can be used to export the image, print it and copy it.
+ * Create MarbleWidget with a view (currently: KAtlasView) and a	----
+    model (currently: KAtlasGlobe)
+ * Make it possible to paint on different device types   in addition	----
+   to painting on the KAtlasView widget
+    - QGraphicsView							--
+    - QPixmap 								--
+    - QSvgRendrerer							--
+   Offer accessor method for the Pixmap, so it can be used to export 
+   the image, print it and copy it.
 
-Add a KDE frontend that includes the MarbleWidget a as a reference application:
+Make it a KDE4 application as a real member of kdeedu.
  * KApplication
  * AboutData
  * KConfig XT
  * Translation
 
-Add a simple alternative Qt4 frontend
+Add a simple alternative Qt4 frontend					----
 
-Feature TODO's for Version 0.4:
- * Add Downloadmanager class for tiles and Wikipedia articles
- * Fix image downloading for Wikipedia
  
