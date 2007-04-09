@@ -18,7 +18,7 @@ GridMap		The grid of lat-lon lines on the map.
 		Another Vector of ScreenPolygons. Perhaps it should
 		inherit or contain a VectorMap.
 
-PlaceMark	A point on earth with some additional data. Can be
+PlaceMark	A point on the earth with some additional data. Can be
 		selected and manipulated. Has a name. Today mostly
 		used for cities of different size.
 		At this point somewhat arbitrary in its choice of
