@@ -2,6 +2,7 @@ Name changes for classes
 PntPolyLine	->	GeoPolygon
 GeoPolygon	->	ScreenPolygon
 TextureLoader	->	TileLoader
+TileContainer	->	TextureTile
 
 DONE
 FastMath.h		FastMath.cpp
@@ -55,8 +56,6 @@ measuretool.cpp
 measuretool.h
 placecontainer.cpp
 placecontainer.h
-placefolder.cpp
-placefolder.h
 placelist.cpp
 placelist.h
 placemark.cpp
@@ -69,8 +68,6 @@ placemarkmodel.cpp
 placemarkmodel.h
 placemarkpainter.cpp
 placemarkpainter.h
-pntmap.cpp
-pntmap.h
 qrc_marble.cpp
 searchcombobox.cpp
 searchcombobox.h
