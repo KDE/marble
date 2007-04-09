@@ -43,10 +43,17 @@ GPS support
  * Show 'You are here' using the GPS.					----
 
 KML support
- * ...
+ * One overall aim: make Digikam KML output and plasma weather applet 
+   work together with Marble. 
 
 2D View
- * ...
+ * create an additional class FlatTextureMapper that will work 
+   scanline based like SphereTextureMapper (using getPixelValue).
+ * Modify the input handler to take the flat projection into account.
+ * Adjust the vector mapping backend as well as the PlaceMark 
+   placing backend.
+ * Create a new class for Texturemapping that doesn't work scanlinebased 
+   anymore but uses the tiles as a whole on a kind of ScrollView.
 
 
 Before KDE 4.0
