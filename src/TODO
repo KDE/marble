@@ -33,13 +33,14 @@ Vector backend
  * Better scalability
 
 
-After the Google Summer of Code projects (0.6)
+Integration of Google Summer of Code projects (0.6)
 ----------------------------------------------------------------
 
 GPS support
  * Read GPX files							----
  * Show waypoints							----
  * Show tracks								----
+ * Show 'You are here' using the GPS.					----
 
 KML support
  * ...
