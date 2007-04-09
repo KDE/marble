@@ -1,11 +1,12 @@
 #include "TileLoader.h"
 
-#include <QtCore/QTime>
-#include <QtCore/QVector>
 #include <cmath>
 
+#include <QtCore/QTime>
+#include <QtCore/QVector>
+
 #include "katlasdirs.h"
-#include "texturetile.h"
+#include "TextureTile.h"
 
 #include <QtCore/QDebug>
 

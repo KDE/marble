@@ -1,4 +1,4 @@
-#include "texturetile.h"
+#include "TextureTile.h"
 
 #include <QtCore/QDebug>
 
@@ -167,5 +167,5 @@ void TextureTile::slotLoadTile( const QString& path )
 
 
 #ifndef Q_OS_MACX
-#include "texturetile.moc"
+#include "TextureTile.moc"
 #endif

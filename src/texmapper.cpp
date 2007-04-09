@@ -7,7 +7,7 @@
 #include "GeoPoint.h"
 #include "GeoPolygon.h"
 #include "katlasdirs.h"
-#include "texturetile.h"
+#include "TextureTile.h"
 #include "TileLoader.h"
 #include "texmapper.h"
 
@@ -296,47 +296,50 @@ inline void TextureMapper::prePixelValueApprox(const float& radlng, const float&
 	getPixelValue(radlng, radlat, line);
 }
 
-inline void TextureMapper::getPixelValue(const float& radlng, const float& radlat, QRgb* line){
+inline void TextureMapper::getPixelValue(const float& radlng, 
+					 const float& radlat, QRgb* line)
+{
+    // Convert lng and lat measured in radiant to pixel position on
+    // the current m_tile ...
+    m_posx = (int)(normhalfalpha + radlng * m_rad2pixw);
+    m_posy = (int)(normquatbeta + radlat * m_rad2pixh);
 
-//	Convert lng and lat measured in radiant 
-//	to pixel position on the current m_tile ...
-	m_posx = (int)(normhalfalpha + radlng * m_rad2pixw);
-	m_posy = (int)(normquatbeta + radlat * m_rad2pixh);
+    // qDebug() << "Width: " << texldr->tileWidth() << " Height: " << texldr->tileHeight();
 
-//	qDebug() << "Width: " << texldr->tileWidth() << " Height: " << texldr->tileHeight();
+    if ( m_posx >= texldr->tileWidth() 
+	 || m_posx < 0
+	 || m_posy >= texldr->tileHeight()
+	 || m_posy < 0 )
+    {
+	// necessary to prevent e.g. crash if TextureMapper::radalpha = -pi
+	if ( m_posx > normfullalpha ) m_posx = normfullalpha;
+	if ( m_posy > normhalfbeta  ) m_posy = normhalfbeta;
 
-	if ( m_posx >= texldr->tileWidth() || m_posx < 0 || m_posy >= texldr->tileHeight() || m_posy < 0 )
-	{
-		// necessary to prevent e.g. crash if TextureMapper::radalpha = -pi
-		if ( m_posx > normfullalpha ) m_posx = normfullalpha;
-		if ( m_posy > normhalfbeta  ) m_posy = normhalfbeta;
+	// The origin (0, 0) is in the upper left corner
+	// lng: 360 deg = 43200 pixel
+	// lat: 180 deg = 21600 pixel
+	int lng = m_posx + m_tilxw;
+	int lat = m_posy + m_tilyh;
 
-//		The origin (0, 0) is in the upper left corner
-//		lng: 360 deg = 43200 pixel
-//		lat: 180 deg = 21600 pixel
-		int lng = m_posx + m_tilxw;
-		int lat = m_posy + m_tilyh;
+	int tilx = lng / texldr->tileWidth(); // Counts the m_tiles left from the current m_tile ("m_tileposition") 
+	int tily = lat / texldr->tileHeight(); // Counts the m_tiles on the top from the current m_tile
 
-		int tilx = lng / texldr->tileWidth(); // Counts the m_tiles left from the current m_tile ("m_tileposition") 
-		int tily = lat / texldr->tileHeight(); // Counts the m_tiles on the top from the current m_tile
+	m_tilxw = tilx * texldr->tileWidth();
+	m_tilyh = tily * texldr->tileHeight();
 
-		m_tilxw = tilx * texldr->tileWidth();
-		m_tilyh = tily * texldr->tileHeight();
+	normhalfalpha = maxhalfalpha - m_tilxw;
+	normquatbeta = maxquatbeta - m_tilyh;
+	normfullalpha = maxfullalpha - m_tilxw;
+	normhalfbeta = maxhalfbeta - m_tilyh;
 
-		normhalfalpha = maxhalfalpha - m_tilxw;
-		normquatbeta = maxquatbeta - m_tilyh;
-		normfullalpha = maxfullalpha - m_tilxw;
-		normhalfbeta = maxhalfbeta - m_tilyh;
+	m_tile = texldr->loadTile( tilx, tily, m_tileLevel );
 
-		m_tile = texldr->loadTile( tilx, tily, m_tileLevel );
+	m_posx = lng - m_tilxw;
+	m_posy = lat - m_tilyh;
+    }
 
-		m_posx = lng - m_tilxw;
-		m_posy = lat - m_tilyh;
-	}
-
-	if (m_tile->depth() == 8)
-		*line = m_tile->jumpTable8[m_posy][m_posx];
-	else
-		*line = m_tile->jumpTable32[m_posy][m_posx];
+    if (m_tile->depth() == 8)
+	*line = m_tile->jumpTable8[m_posy][m_posx];
+    else
+	*line = m_tile->jumpTable32[m_posy][m_posx];
 }
-
