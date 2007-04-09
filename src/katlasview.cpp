@@ -2,7 +2,6 @@
 
 #include <cmath>
 #include <QtCore/QAbstractItemModel>
-#include <QtGui/QSizePolicy>
 #include <QtCore/QTime>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
