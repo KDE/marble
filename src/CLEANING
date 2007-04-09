@@ -6,6 +6,8 @@ TileContainer	->	TextureTile
 
 
 DONE
+main.cpp
+
 FastMath.h		FastMath.cpp
 Quaternion.h		Quaternion.cpp
 ScreenPolygon.h
@@ -17,6 +19,7 @@ TextureMapper.h		TextureMapper.cpp
 
 
 DOING
+
 
 TODO
 clippainter.h           clippainter.cpp
@@ -36,19 +39,15 @@ katlasview.h            katlasview.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 katlaswindrose.h        katlaswindrose.cpp
-main.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
 placecontainer.h        placecontainer.cpp
 placemark.h             placemark.cpp
-placemarkinfodialog.h   placemarkinfodialog.cpp
 placemarkmanager.h      placemarkmanager.cpp
 placemarkmodel.h        placemarkmodel.cpp
 placemarkpainter.h      placemarkpainter.cpp
-qrc_marble.cpp
 texcolorizer.h          texcolorizer.cpp
 TileLoader.h            TileLoader.cpp
-texturepalette.cpp
 tilescissor.h           tilescissor.cpp
 vectorcomposer.h        vectorcomposer.cpp
 vectormap.h             vectormap.cpp
@@ -58,3 +57,7 @@ Widgets:
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
+placemarkinfodialog.h   placemarkinfodialog.cpp
+
+Special:
+texturepalette.cpp
