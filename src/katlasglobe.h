@@ -38,6 +38,8 @@ class PlaceMarkManager;
 
 class KAtlasGlobe  : public QObject
 {
+    Q_OBJECT
+
  public:
     KAtlasGlobe( QWidget* parent=0 );
     virtual ~KAtlasGlobe();
@@ -77,6 +79,9 @@ class KAtlasGlobe  : public QObject
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
     PlaceContainer* placeContainer(){ return m_placecontainer ; }
+
+ signals:
+    void themeChanged();
 
  protected:
     QWidget  *m_parent;

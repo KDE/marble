@@ -25,12 +25,11 @@ Cleaning:
  * One class per file							----
  * Filename == Classname (CamelCasing)					----
 
-
 Widget:
- * Separate the view from the globe (model)				----
-    - Let the view parameters be in the view instead of in the globe	--
-    - Don't open any dialogs from the globe, do it from the controller.	--
-    - Let the view know about the globe, but not the other way.		--
+ * Separate the view from the globe (model)				INGE
+    - Let the view parameters be in the view instead of in the globe	inge
+    - Don't open any dialogs from the globe, do it from the controller.	inge
+    - Let the view know about the globe, but not the other way.		done
  * Create MarbleWidget with a view (currently: KAtlasView) and a	----
     model (currently: KAtlasGlobe)
 

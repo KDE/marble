@@ -28,7 +28,9 @@ KAtlasView::KAtlasView(QWidget *parent)
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
     //FIXME(ModelView): Provide this to the constructor
+
     m_pGlobe = new KAtlasGlobe( this );
+    connect( m_pGlobe, SIGNAL(themeChanged()), this, SLOT(update()) );
 
     // Set background: black.
     QPalette p = palette();

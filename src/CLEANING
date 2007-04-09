@@ -35,7 +35,6 @@ katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
 katlasthemeselectview.h katlasthemeselectview.cpp
-katlastilecreatordialog.h       katlastilecreatordialog.cpp
 katlastoolbox.h         katlastoolbox.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
@@ -57,7 +56,10 @@ Widgets:
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
+
+Dialogs:
 placemarkinfodialog.h   placemarkinfodialog.cpp
+katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 Items on the widget (QObjects):
 katlascrosshair.h       katlascrosshair.cpp

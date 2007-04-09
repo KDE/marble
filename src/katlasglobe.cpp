@@ -107,7 +107,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
 
     m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
 
-    m_parent->update();
+    emit themeChanged();
 
     m_justModified = true;
 }
@@ -314,3 +314,7 @@ QVector< PlaceMark* > KAtlasGlobe::whichFeatureAt( const QPoint& curpos )
 {
     return m_placemarkpainter->whichPlaceMarkAt( curpos );
 }
+
+#ifndef Q_OS_MACX
+#include "katlasglobe.moc"
+#endif
