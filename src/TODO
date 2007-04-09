@@ -13,15 +13,11 @@ Features
  * Fix image downloading for Wikipedia					TACK
 
 
-Before the SoC projects start
-----------------------------------------------------------------
-
-
-Before KDE 4.0
+Before the SoC projects start (0.5)
 ----------------------------------------------------------------
 
 Misc
- * Create a file that describes the coding standards			----
+ * Create a file that describes the coding standards			INGE
 
 Cleaning:
  * Make all files follow the coding standards				----
@@ -31,7 +27,13 @@ Cleaning:
 Widget:
  * Create MarbleWidget with a view (currently: KAtlasView) and a	----
     model (currently: KAtlasGlobe)
- * Make it possible to paint on different device types   in addition	----
+
+
+Before KDE 4.0
+----------------------------------------------------------------
+
+Widget:
+ * Make it possible to paint on different device types in addition	----
    to painting on the KAtlasView widget
     - QGraphicsView							--
     - QPixmap 								--
