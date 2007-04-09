@@ -13,6 +13,7 @@ GeoPoint.h		GeoPoint.cpp
 TextureTile.h		TextureTile.cpp
 
 DOING
+texmapper.h             texmapper.cpp
 
 
 TODO
@@ -77,8 +78,6 @@ texcolorizer.cpp
 texcolorizer.h
 TileLoader.cpp
 TileLoader.h
-texmapper.cpp
-texmapper.h
 texturepalette.cpp
 tilescissor.cpp
 tilescissor.h

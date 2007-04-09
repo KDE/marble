@@ -51,9 +51,9 @@ class TextureMapper
     bool         interpolate;
     int          nopt;
 
-    int  x;
-    int  y;
-    int  z;
+    int    x;
+    int    y;
+    int    z;
 
     float  qr;
     float  qx;
