@@ -1,0 +1,95 @@
+Name changes for classes
+PntPolyLine	->	GeoPolygon
+GeoPolygon	->	ScreenPolygon
+TextureLoader	->	TileLoader
+
+DONE
+FastMath.h		FastMath.cpp
+Quaternion.h		Quaternion.cpp
+ScreenPolygon.h
+GeoPoint.h		GeoPoint.cpp
+
+TextureTile.h		TextureTile.cpp
+
+DOING
+
+
+TODO
+clippainter.cpp
+clippainter.h
+gridmap.cpp
+gridmap.h
+httpfetchfile.cpp
+httpfetchfile.h
+katlasaboutdialog.cpp
+katlasaboutdialog.h
+katlascontrol.cpp
+katlascontrol.h
+katlascrosshair.cpp
+katlascrosshair.h
+katlasdirs.h
+katlasflag.cpp
+katlasflag.h
+katlasglobe.cpp
+katlasglobe.h
+katlasmapscale.cpp
+katlasmapscale.h
+katlasthemeselectview.cpp
+katlasthemeselectview.h
+katlastilecreatordialog.cpp
+katlastilecreatordialog.h
+katlastoolbox.cpp
+katlastoolbox.h
+katlasview.cpp
+katlasview.h
+katlasviewinputhandler.cpp
+katlasviewinputhandler.h
+katlasviewpopupmenu.cpp
+katlasviewpopupmenu.h
+katlaswindrose.cpp
+katlaswindrose.h
+main.cpp
+maptheme.cpp
+maptheme.h
+measuretool.cpp
+measuretool.h
+placecontainer.cpp
+placecontainer.h
+placefolder.cpp
+placefolder.h
+placelist.cpp
+placelist.h
+placemark.cpp
+placemark.h
+placemarkinfodialog.cpp
+placemarkinfodialog.h
+placemarkmanager.cpp
+placemarkmanager.h
+placemarkmodel.cpp
+placemarkmodel.h
+placemarkpainter.cpp
+placemarkpainter.h
+pntmap.cpp
+pntmap.h
+qrc_marble.cpp
+searchcombobox.cpp
+searchcombobox.h
+searchlistview.cpp
+searchlistview.h
+texcolorizer.cpp
+texcolorizer.h
+TileLoader.cpp
+TileLoader.h
+texmapper.cpp
+texmapper.h
+texturepalette.cpp
+tilescissor.cpp
+tilescissor.h
+tinywebbrowser.cpp
+tinywebbrowser.h
+vectorcomposer.cpp
+vectorcomposer.h
+vectormap.cpp
+vectormap.h
+xmlhandler.cpp
+xmlhandler.h
