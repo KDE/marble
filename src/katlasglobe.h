@@ -23,7 +23,7 @@
 #include "placemarkmodel.h"
 #include "clippainter.h"
 #include "maptheme.h"
-#include "texmapper.h"
+#include "TextureMapper.h"
 #include "gridmap.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"

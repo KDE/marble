@@ -23,6 +23,7 @@ set(marble_SRCS
            GeoPoint.cpp
            GeoPolygon.cpp
 	   TextureTile.cpp
+           TextureMapper.cpp
 
            katlascontrol.cpp
            katlasview.cpp
@@ -30,7 +31,6 @@ set(marble_SRCS
            main.cpp
            texcolorizer.cpp
            TileLoader.cpp
-           texmapper.cpp
            katlasglobe.cpp
            katlastoolbox.cpp
            vectorcomposer.cpp
@@ -66,6 +66,7 @@ set(marble_HDRS
 	   GeoPolygon.h
 	   ScreenPolygon.h
 	   TextureTile.h
+           TextureMapper.h
 
            katlasdirs.h
            katlascontrol.h
@@ -73,7 +74,6 @@ set(marble_HDRS
            katlasviewinputhandler.h
            texcolorizer.h
            TileLoader.h
-           texmapper.h
            katlasglobe.h
            katlastoolbox.h
            vectorcomposer.h

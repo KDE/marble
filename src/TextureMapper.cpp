@@ -10,7 +10,7 @@
 #include "katlasdirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
-#include "texmapper.h"
+#include "TextureMapper.h"
 
 
 // #define INTERLACE

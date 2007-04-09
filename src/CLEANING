@@ -11,9 +11,9 @@ ScreenPolygon.h
 GeoPoint.h		GeoPoint.cpp
 
 TextureTile.h		TextureTile.cpp
+TextureMapper.h		TextureMapper.cpp
 
 DOING
-texmapper.h             texmapper.cpp
 
 
 TODO
