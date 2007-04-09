@@ -11,24 +11,24 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 {
     setWindowTitle(tr("Marble - Desktop Globe"));
     //	resize(640, 640);
-    resize(680, 640);
+    resize( 680, 640 );
 
-    m_toolbox = new KAtlasToolBox(this);
-    m_toolbox->setFixedWidth(185);
+    m_toolbox = new KAtlasToolBox( this );
+    m_toolbox->setFixedWidth( 185 );
 
-    m_katlasview = new KAtlasView(this);
+    m_katlasview = new KAtlasView( this );
     m_katlasview->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
 					      QSizePolicy::MinimumExpanding ) );
 
     m_katlasview->setMinimumZoom( m_toolbox->minimumZoom() );
 
-    QVBoxLayout *vlayout = new QVBoxLayout(this);
+    QVBoxLayout *vlayout = new QVBoxLayout( this );
 
     QHBoxLayout *hlayout = new QHBoxLayout();	
 
-    hlayout->addWidget(m_toolbox);
-    hlayout->addWidget(m_katlasview);
-    vlayout->addLayout(hlayout);
+    hlayout->addWidget( m_toolbox );
+    hlayout->addWidget( m_katlasview );
+    vlayout->addLayout( hlayout );
 
     m_toolbox->setLocations( m_katlasview->placeMarkModel() );
 
@@ -49,6 +49,7 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     connect(m_toolbox,    SIGNAL(selectMapTheme(const QString&)),
 	    m_katlasview, SLOT(setMapTheme(const QString&)));
 }
+
 
 void KAtlasControl::zoomIn()
 {

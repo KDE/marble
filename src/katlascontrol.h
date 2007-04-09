@@ -1,7 +1,7 @@
 //
-// C++ Interface: texcolorizer
+// C++ Interface: 
 //
-// Description: GlobePediaControl 
+// Description: KAtlasControl
 
 // Testapplication with controls
 //
@@ -12,7 +12,9 @@
 #ifndef KATLASCONTROL_H
 #define KATLASCONTROL_H
 
+
 #include "katlasview.h"
+
 
 /**
 @author Torsten Rahn
@@ -41,5 +43,6 @@ class KAtlasControl : public QWidget
     KAtlasView     *m_katlasview;
     KAtlasToolBox  *m_toolbox;
 };
+
 
 #endif // KATLASCONTROL_H

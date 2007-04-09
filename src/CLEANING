@@ -21,6 +21,9 @@ Model/View:
 katlasglobe.h           katlasglobe.cpp
 katlasview.h            katlasview.cpp
 
+Widgets:
+katlascontrol.h         katlascontrol.cpp
+
 DOING
 
 
@@ -29,7 +32,6 @@ clippainter.h           clippainter.cpp
 gridmap.h               gridmap.cpp
 httpfetchfile.h         httpfetchfile.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
-katlascontrol.h         katlascontrol.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
 katlasthemeselectview.h katlasthemeselectview.cpp
