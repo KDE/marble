@@ -96,7 +96,6 @@ class KAtlasGlobe  : public QObject
     GridMap           *gridmap;
 
     PlaceMarkManager  *placemarkmanager;
-    //	PlaceComposer* placecomposer;
     PlaceMarkModel    *m_placemarkmodel;
     PlaceMarkPainter  *m_placemarkpainter;
     PlaceContainer    *m_placecontainer;
