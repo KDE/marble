@@ -46,7 +46,10 @@ Make it a KDE4 application as a real member of kdeedu.
  * AboutData
  * KConfig XT
  * Translation
+ * Docs
+ * KDEPrint support
+ * DBus Support
 
-Add a simple alternative Qt4 frontend					----
+Add a simple alternative Qt4 frontend					TACK
 
  
