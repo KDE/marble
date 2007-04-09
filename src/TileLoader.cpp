@@ -17,6 +17,8 @@ TileLoader::TileLoader( const QString& theme ){
 
 void TileLoader::setMap( const QString& theme ){
 //	Initialize map theme.
+        flush();
+
 	m_theme = theme;
 
 	m_tile = new TextureTile( 0, 0, 0, m_theme );
