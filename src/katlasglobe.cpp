@@ -14,7 +14,7 @@
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
 
-const float rad2int = 21600.0 / M_PI;
+const float RAD2INT = 21600.0 / M_PI;
 
 
 KAtlasGlobe::KAtlasGlobe( QWidget* parent )
@@ -236,9 +236,9 @@ void KAtlasGlobe::setRadius(const int& radius)
 
 void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi)
 {
-    m_pPlanetAxis.createFromEuler( (float)(phi)   / rad2int,
-                                   (float)(theta) / rad2int,
-                                   (float)(psi)   / rad2int );
+    m_pPlanetAxis.createFromEuler( (float)(phi)   / RAD2INT,
+                                   (float)(theta) / RAD2INT,
+                                   (float)(psi)   / RAD2INT );
 }
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta)
@@ -265,24 +265,23 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta)
 
 int KAtlasGlobe::northPoleY()
 {
-    GeoPoint    northpole( 0.0f, (float)( -M_PI*0.5 ) );
-    Quaternion  qpolepos   = northpole.quaternion();
-    Quaternion  invRotAxis = m_pPlanetAxis.inverse();
+    
+    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
+    Quaternion  invPlanetAxis = m_pPlanetAxis.inverse();
 
-    qpolepos.rotateAroundAxis(invRotAxis);
+    northPole.rotateAroundAxis(invPlanetAxis);
 
-    return (int)( m_radius * qpolepos.v[Q_Y] );
+    return (int)( m_radius * northPole.v[Q_Y] );
 }
 
 int KAtlasGlobe::northPoleZ()
 {
-    GeoPoint    northpole( 0.0f, (float)( -M_PI*0.5 ) );
-    Quaternion  qpolepos   = northpole.quaternion();
-    Quaternion  invRotAxis = m_pPlanetAxis.inverse();
+    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
+    Quaternion  invPlanetAxis = m_pPlanetAxis.inverse();
 
-    qpolepos.rotateAroundAxis( invRotAxis );
+    northPole.rotateAroundAxis(invPlanetAxis);
 
-    return (int)( m_radius * qpolepos.v[Q_Z] );
+    return (int)( m_radius * northPole.v[Q_Z] );
 }
 
 bool KAtlasGlobe::screenCoordinates( const float lng, const float lat, 
