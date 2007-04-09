@@ -30,14 +30,14 @@ class GeoPolygon : public GeoPoint::Vector
     GeoPolygon();
     ~GeoPolygon();
 
-    int getNum() const { return m_Num; }
+    int  getNum() const { return m_num; }
     bool getClosed() const { return m_closed; }
     void setClosed(bool closed){ m_closed = closed; }
 
-    void setNum(int num){ m_Num = num; }
+    void setNum(int num){ m_num = num; }
 
-    bool getDateLine() const { return m_Crossed; }
-    void setDateLine(bool crossed){ m_Crossed = crossed; }
+    bool getDateLine() const { return m_crossed; }
+    void setDateLine(bool crossed){ m_crossed = crossed; }
 
     void setBoundary(int, int, int, int);
     GeoPoint::Vector getBoundary() const { return m_boundary; } 
@@ -64,14 +64,18 @@ class GeoPolygon : public GeoPoint::Vector
     typedef QVector<GeoPolygon *> PtrVector;
 
  private:	
-    bool m_Crossed;
-    bool m_closed;
+    bool  m_crossed;
+    bool  m_closed;
 
-    GeoPoint::Vector m_boundary;
+    GeoPoint::Vector  m_boundary;
 
-    int m_x0, m_y0, m_x1, m_y1;
-    int m_Num;
+    int   m_x0;
+    int   m_y0;
+    int   m_x1;
+    int   m_y1;
+    int   m_num;
 };
+
 
 
 class PntMap : public GeoPolygon::PtrVector
