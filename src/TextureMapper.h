@@ -44,12 +44,15 @@ class TextureMapper
     int   m_posy;
 
     TileLoader  *m_tileLoader;
-    QRgb        *line;
-    QRgb        *linefast;
+    QRgb        *scanLine;
+    QRgb        *fastScanLine;
 
     int          m_maxTileLevel;
     bool         interpolate;
     int          nopt;
+
+    int    m_n;
+    float  m_ninv;
 
     int    x;
     int    y;
@@ -66,9 +69,6 @@ class TextureMapper
 
     float  m_prevLat;
     float  m_prevLng;
-
-    int    m_n;
-    float  m_ninv;
 
     int    m_tilxw;
     int    m_tilyh;

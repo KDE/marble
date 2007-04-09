@@ -23,7 +23,7 @@ TextureMapper::TextureMapper( const QString& path )
 
     m_tileLoader = new TileLoader( path );
 
-    line = 0;
+    scanLine = 0;
 
     x = 0;
     y = 0;
@@ -98,8 +98,8 @@ void TextureMapper::selectTileLevel(const int& radius)
 
 void TextureMapper::resizeMap(const QImage* canvasImage)
 {
-    m_imageHalfWidth  = canvasImage -> width() >> 1;
-    m_imageHalfHeight = canvasImage -> height() >> 1;
+    m_imageHalfWidth  = canvasImage -> width() / 2;
+    m_imageHalfHeight = canvasImage -> height() / 2;
     m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
                           + m_imageHalfHeight * m_imageHalfHeight );
 
@@ -118,7 +118,7 @@ void TextureMapper::resizeMap(const QImage* canvasImage)
 
 
 void TextureMapper::mapTexture(QImage* canvasImage, const int& radius, 
-                               Quaternion& rotAxis)
+                               Quaternion& planetAxis)
 {
     // Scanline based algorithm to texture map a sphere
 
@@ -149,20 +149,18 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     const int ytop = ( m_imageHalfHeight-radius < 0 ) ? 0 : m_imageHalfHeight-radius;
     const int ybottom = (ytop == 0) ? 2 * m_imageHalfHeight : ytop + radius + radius;
 
-    // Quaternion* qpos = ( FastMath::haveSSE() == true )? new QuaternionSSE() : new Quaternion();
     Quaternion  *qpos = new Quaternion();
 
     // Calculate north pole position to decrease pole distortion later on
-    GeoPoint    northpole( 0.0f, (float)( -M_PI * 0.5 ) );
-    Quaternion  qpolepos = northpole.quaternion();
+    Quaternion  northPole = GeoPoint( 0.0f, (float)( -M_PI * 0.5 ) ).quaternion();
 
-    Quaternion  invRotAxis = rotAxis;
-    invRotAxis = invRotAxis.inverse();
+    Quaternion  inversePlanetAxis = planetAxis;
+    inversePlanetAxis = inversePlanetAxis.inverse();
 
-    qpolepos.rotateAroundAxis(invRotAxis);
+    northPole.rotateAroundAxis(inversePlanetAxis);
 
-    matrix  rotMatrix;
-    rotAxis.toMatrix( rotMatrix );
+    matrix  planetAxisMatrix;
+    planetAxis.toMatrix( planetAxisMatrix );
 
 #ifndef INTERLACE
     for (y = ytop; y < ybottom; y++) {
@@ -182,9 +180,9 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
         const int xleft  = (m_imageHalfWidth-rx > 0) ? m_imageHalfWidth - rx : 0; 
         const int xright = (m_imageHalfWidth-rx > 0) ? xleft + rx + rx : 2 * m_imageHalfWidth;
 
-        line = (QRgb*)(canvasImage->scanLine( y )) + xleft;
+        scanLine = (QRgb*)(canvasImage->scanLine( y )) + xleft;
 #ifdef INTERLACE
-        linefast = (QRgb*)(canvasImage->scanLine( y + 1 )) + xleft;
+        fastScanLine = (QRgb*)(canvasImage->scanLine( y + 1 )) + xleft;
 #endif		
 
         int  xipleft  = 1;
@@ -197,8 +195,8 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 
         // Decrease pole distortion due to linear approximation ( y-axis )
         bool poleyenv = false;
-        int northpoley = m_imageHalfHeight + (int)( radius * qpolepos.v[Q_Y] );
-        if ( qpolepos.v[Q_Z] > 0
+        int northpoley = m_imageHalfHeight + (int)( radius * northPole.v[Q_Y] );
+        if ( northPole.v[Q_Z] > 0
              &&  northpoley - m_n/2 <= y
              && northpoley + m_n/2 >= y ) 
         {
@@ -213,7 +211,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             if ( x >= xipleft && x <= xipright ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
-                int northpolex = m_imageHalfWidth + (int)( radius * qpolepos.v[Q_X] );
+                int northpolex = m_imageHalfWidth + (int)( radius * northPole.v[Q_X] );
 
                 int  leftinterval = xipleft + ncount * m_n;
                 if ( poleyenv == true
@@ -241,7 +239,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
             qpos->set(0,qx,qy,qz);
-            qpos->rotateAroundAxis( rotMatrix );	
+            qpos->rotateAroundAxis( planetAxisMatrix );	
 
             qpos->getSpherical(lng, lat);
 
@@ -250,25 +248,25 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             // Approx for m_n-1 out of n pixels within the boundary of
             // xipleft to xipright
             if ( interpolate ) {
-                getPixelValueApprox(lng,lat,line);
+                getPixelValueApprox(lng,lat,scanLine);
 #ifdef INTERLACE
                 for ( int j = 0; j < m_n - 1; j++ ) {
-                    linefast[j]=line[j];
+                    fastScanLine[j]=scanLine[j];
                 }
-                linefast += ( m_n - 1 );
+                fastScanLine += ( m_n - 1 );
 #endif
-                line += ( m_n - 1 );
+                scanLine += ( m_n - 1 );
             }
 
-            getPixelValue(lng, lat, line);
+            getPixelValue(lng, lat, scanLine);
  
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
  #ifdef INTERLACE
-            *linefast=*line;
-            linefast++;
+            *fastScanLine=*scanLine;
+            fastScanLine++;
 #endif
-            line++;
+            scanLine++;
         }
     }
 
@@ -282,7 +280,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 // This method executes the interpolation for skipped pixels in a scanline. 
 
 void TextureMapper::getPixelValueApprox(const float& lng, const float& lat, 
-                                        QRgb *line)
+                                        QRgb *scanLine)
 {
 
     float avgLat = ( lat - m_prevLat ) * m_ninv;
@@ -298,8 +296,8 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
                 m_prevLng -= avgLng;
                 if ( m_prevLng <= -M_PI ) 
                     m_prevLng += TWOPI;
-                getPixelValue( m_prevLng, m_prevLat, line );
-                line++;
+                getPixelValue( m_prevLng, m_prevLat, scanLine );
+                scanLine++;
             }
         }
 
@@ -313,8 +311,8 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
                 float  evalLng = curAvgLng;
                 if ( curAvgLng <= -M_PI )
                     evalLng += TWOPI;
-                getPixelValue( evalLng, m_prevLat, line);
-                line++;
+                getPixelValue( evalLng, m_prevLat, scanLine);
+                scanLine++;
             }
         }
     }
@@ -324,19 +322,19 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
         for (int j=1; j < m_n; j++) {
             m_prevLat += avgLat;
             m_prevLng += avgLng;
-            getPixelValue( m_prevLng, m_prevLat, line);
-            line++;
+            getPixelValue( m_prevLng, m_prevLat, scanLine);
+            scanLine++;
         }
     }	
 }
 
-inline void TextureMapper::getPixelValue(const float& radlng, 
-					 const float& radlat, QRgb* line)
+inline void TextureMapper::getPixelValue(const float& lng, 
+					 const float& lat, QRgb* scanLine)
 {
     // Convert lng and lat measured in radiant to pixel position on
     // the current m_tile ...
-    m_posx = (int)( normhalfalpha + radlng * m_rad2pixw );
-    m_posy = (int)( normquatbeta  + radlat * m_rad2pixh );
+    m_posx = (int)( normhalfalpha + lng * m_rad2pixw );
+    m_posy = (int)( normquatbeta  + lat * m_rad2pixh );
 
     if ( m_posx >= m_tileLoader->tileWidth() 
 	 || m_posx < 0
@@ -371,7 +369,7 @@ inline void TextureMapper::getPixelValue(const float& radlng,
     }
 
     if (m_tile->depth() == 8)
-	*line = m_tile->jumpTable8[m_posy][m_posx];
+	*scanLine = m_tile->jumpTable8[m_posy][m_posx];
     else
-	*line = m_tile->jumpTable32[m_posy][m_posx];
+	*scanLine = m_tile->jumpTable32[m_posy][m_posx];
 }
