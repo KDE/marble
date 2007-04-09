@@ -28,6 +28,24 @@ Widget:
  * Create MarbleWidget with a view (currently: KAtlasView) and a	----
     model (currently: KAtlasGlobe)
 
+Vector backend
+ * Better scalability
+
+
+After the Google Summer of Code projects (0.6)
+----------------------------------------------------------------
+
+GPS support
+ * Read GPX files							----
+ * Show waypoints							----
+ * Show tracks								----
+
+KML support
+ * ...
+
+2D View
+ * ...
+
 
 Before KDE 4.0
 ----------------------------------------------------------------
@@ -53,3 +71,6 @@ Make it a KDE4 application as a real member of kdeedu.
 Add a simple alternative Qt4 frontend					TACK
 
  
+Before KDE 4.1
+----------------------------------------------------------------
+
