@@ -82,7 +82,7 @@ void Quaternion::createFromEuler(float pitch, float yaw, float roll)
 void Quaternion::display() const
 {
     QString quatdisplay = QString("Quaternion: w= %1, x= %2, y= %3, z= %4, |q|= %5" )
-	.arg(v[Q_W]).arg(v[Q_X]).arg(v[Q_Y]).arg(v[Q_Z]).arg(quatNorm);
+        .arg(v[Q_W]).arg(v[Q_X]).arg(v[Q_Y]).arg(v[Q_Z]).arg(quatNorm);
 
     qDebug(quatdisplay.toLatin1());
 }
@@ -103,9 +103,9 @@ bool Quaternion::operator==(const Quaternion &q) const
 {
 
     return ( v[Q_W] == q.v[Q_W]
-	     && v[Q_X] == q.v[Q_X]
-	     && v[Q_Y] == q.v[Q_Y]
-	     && v[Q_Z] == q.v[Q_Z] );
+         && v[Q_X] == q.v[Q_X]
+         && v[Q_Y] == q.v[Q_Y]
+         && v[Q_Z] == q.v[Q_Z] );
 }
 
 Quaternion Quaternion::operator*(const Quaternion &q) const
@@ -144,12 +144,12 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
     float sinAlpha = sinf(alpha);
 
     if( sinAlpha > 0.0f ) {
-	p1 = sinf( (1.0f-t)*alpha ) / sinAlpha;
-	p2 = sinf( t*alpha ) / sinAlpha;
+        p1 = sinf( (1.0f-t)*alpha ) / sinAlpha;
+        p2 = sinf( t*alpha ) / sinAlpha;
     } else {
-	// both Quaternions are equal
-	p1 = 1.0f;
-	p2 = 0.0f;
+        // both Quaternions are equal
+        p1 = 1.0f;
+        p2 = 0.0f;
     }
 
     v[Q_X] = p1*q1.v[Q_X] + p2*q2.v[Q_X];
@@ -162,15 +162,15 @@ void Quaternion::getSpherical(float &alpha, float &beta) const
 {
     float  y = v[Q_Y];
     if ( y > 1.0f )
-	y = 1.0f;
+        y = 1.0f;
     else if ( y < -1.0f )
-	y = -1.0f;
+        y = -1.0f;
     beta = -asinf( y );
 
     if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005f) 
-	alpha = -atan2f(v[Q_X], v[Q_Z]);
+        alpha = -atan2f(v[Q_X], v[Q_Z]);
     else
-	alpha = 0.0f;
+        alpha = 0.0f;
 }
 
 void Quaternion::toMatrix(matrix &m)
@@ -206,5 +206,5 @@ void Quaternion::rotateAroundAxis(const matrix &m)
     y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];
     z =  m[0][2] * v[Q_X] + m[1][2] * v[Q_Y] + m[2][2] * v[Q_Z];
 
-    set( 1.0f, x, y, z );
+    v[Q_W] = 1.0f; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
 }

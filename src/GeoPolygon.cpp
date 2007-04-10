@@ -194,7 +194,8 @@ void PntMap::load(const QString &filename)
             polyline->setNum(header);
 
             // Find out whether the Polyline is a river or a closed polygon
-            if ( ( header >= 7000 && header < 8000 ) )
+            if ( ( header >= 7000 && header < 8000 )
+                 || ( header >= 9000 && header < 20000 ) )
                 polyline->setClosed( false );
             else 
                 polyline->setClosed( true );

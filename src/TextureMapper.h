@@ -40,8 +40,10 @@ class TextureMapper
     void getPixelValueApprox(const float&, const float&, QRgb*);
     void getPixelValue(const float&, const float&, QRgb*);
 
-    int   m_posx;
-    int   m_posy;
+    void tileLevelInit( int tileLevel );
+
+    int   m_posX;
+    int   m_posY;
 
     TileLoader  *m_tileLoader;
     QRgb        *scanLine;
@@ -62,29 +64,30 @@ class TextureMapper
     float  qx;
     float  qy;
     float  qz;
-
     int    m_imageRadius;
+
     int    m_imageHalfWidth;
     int    m_imageHalfHeight;
 
     float  m_prevLat;
     float  m_prevLng;
 
-    int    m_tilxw;
-    int    m_tilyh;
+    int    m_tilePosX;
+    int    m_tilePosY;
 
-    int    maxfullalpha;
-    int    maxquatalpha;
-    int    maxhalfbeta;
-    float  maxhalfalpha;
-    float  maxquatbeta;
-    int    normfullalpha;
-    int    normhalfbeta;
-    float  normhalfalpha;
-    float  normquatbeta;
+    int    m_fullRangeLng;
+    int    m_quatRangeLng;
+    int    m_halfRangeLat;
+    float  m_halfRangeLng;
+    float  m_quatRangeLat;
 
-    float  m_rad2pixw;
-    float  m_rad2pixh;
+    int    m_fullNormLng;
+    int    m_halfNormLat;
+    float  m_halfNormLng;
+    float  m_quatNormLat;
+
+    float  m_rad2PixelX;
+    float  m_rad2PixelY;
 
     TextureTile  *m_tile;
 
