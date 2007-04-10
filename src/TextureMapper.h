@@ -10,10 +10,8 @@
 // Copyright: See COPYING file that comes with this distribution
 
 
-#ifndef TEXTUREMAPPER_H
-#define TEXTUREMAPPER_H
-
-#include <QtGui/QImage>
+#ifndef __MARBLE__TEXTUREMAPPER_H
+#define __MARBLE__TEXTUREMAPPER_H
 
 #include "Quaternion.h"
 
@@ -21,6 +19,7 @@
 @author Torsten Rahn
 */
 
+class QImage;
 class TextureTile;
 class TileLoader;
 
@@ -51,7 +50,7 @@ class TextureMapper
 
     int          m_maxTileLevel;
     bool         interpolate;
-    int          nopt;
+    int          nBest;
 
     int    m_n;
     float  m_ninv;
@@ -64,10 +63,10 @@ class TextureMapper
     float  qx;
     float  qy;
     float  qz;
-    int    m_imageRadius;
 
     int    m_imageHalfWidth;
     int    m_imageHalfHeight;
+    int    m_imageRadius;
 
     float  m_prevLat;
     float  m_prevLng;
@@ -76,7 +75,6 @@ class TextureMapper
     int    m_tilePosY;
 
     int    m_fullRangeLng;
-    int    m_quatRangeLng;
     int    m_halfRangeLat;
     float  m_halfRangeLng;
     float  m_quatRangeLat;
@@ -95,4 +93,4 @@ class TextureMapper
 };
 
 
-#endif
+#endif // __MARBLE__TEXTUREMAPPER_H
