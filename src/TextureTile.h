@@ -14,7 +14,6 @@
 
 
 #include <QtCore/QObject>
-#include <QtCore/QHash>
 #include <QtGui/QImage>
 #include <QtCore/QString>
 

@@ -2,9 +2,6 @@
 
 #include <cmath>
 
-#include <QtCore/QTime>
-#include <QtCore/QVector>
-
 #include "katlasdirs.h"
 #include "TextureTile.h"
 

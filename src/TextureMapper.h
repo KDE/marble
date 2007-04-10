@@ -3,7 +3,8 @@
 //
 // Description: TextureMapper 
 
-// The TextureMapper maps the Elevationvalues onto the respective projection.
+// The TextureMapper maps the textures of the tiles 
+// onto the respective projection.
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2005
 //

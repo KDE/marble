@@ -17,7 +17,7 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QString>
-#include <QtGui/QImage>
+
 
 /**
 @author Torsten Rahn
