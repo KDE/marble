@@ -7,6 +7,13 @@
 
 #include <QtCore/QDebug>
 
+#ifdef Q_CC_MSVC
+double log(int i)
+{
+    return log((double)i);
+}
+#endif
+
 TileLoader::TileLoader( const QString& theme ){
 
 	setMap( theme );
