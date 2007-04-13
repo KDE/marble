@@ -22,4 +22,3 @@ endif (NOT QTONLY)
 
 add_subdirectory(src)
 add_subdirectory(data)
-install (FILES marble-intro.pdf DESTINATION . )
