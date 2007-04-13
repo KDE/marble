@@ -103,6 +103,11 @@ set(marble_HDRS
 	   katlasaboutdialog.h
 )
 
+# cmake does not support this for mingw - see bugtracker
+if(MSVC)
+  set(marble_SRCS ${marble_SRCS} marble.rc)
+endif(MSVC)
+
 set (marble_UI katlastilecreatordialog.ui
 	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui)
 
