@@ -126,7 +126,7 @@ void TextureTile::loadTile( int x, int y, int level,
 	}
     }
 	
-    if ( m_rawtile->isNull() ){
+    if ( !m_rawtile || m_rawtile->isNull() ){
 	qDebug() << "An essential tile is missing. Please rerun the application.";
 	exit(-1);
     }

@@ -6,6 +6,7 @@
 
 
 #if STATIC_BUILD
+ #include <QtCore/QtPlugin>
  Q_IMPORT_PLUGIN(qjpeg)
  Q_IMPORT_PLUGIN(qsvg)
 #endif
