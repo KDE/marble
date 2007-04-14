@@ -1,6 +1,7 @@
 #ifndef GRIDMAP_H
 #define GRIDMAP_H
 
+
 #include <QtGui/QPen>
 
 #include "Quaternion.h"
@@ -14,49 +15,57 @@
 */
 class ClipPainter;
 
-class GridMap : public ScreenPolygon::Vector {
-public:
-	GridMap();
-	~GridMap();
 
-	void createTropics( const int&, Quaternion& );
-	void createGrid( const int&, Quaternion& );
+class GridMap : public ScreenPolygon::Vector
+{
+ public:
+    GridMap();
+    ~GridMap();
 
-	void paintGridMap(ClipPainter *, bool );
+    void createTropics( const int&, Quaternion& );
+    void createGrid( const int&, Quaternion& );
 
-	void resizeMap(const QPaintDevice *);
+    void paintGridMap(ClipPainter *, bool );
 
-	void setPen ( const QPen & p ){m_pen = p;}
+    void resizeMap(const QPaintDevice *);
 
-	enum SphereDim {Longitude, Latitude};
+    void setPen ( const QPen & p )  { m_pen = p; }
 
-private:
-	void createCircles( int lngNum, int latNum );
+    enum SphereDim { Longitude, Latitude };
 
-	void createCircle( float, SphereDim, float cutcoeff = 0.0f );
+ private:
+    void createCircles( int lngNum, int latNum );
 
-	inline void initCrossHorizon();
+    void createCircle( float, SphereDim, float cutcoeff = 0.0f );
 
-	const QPointF horizonPoint();
+    inline void initCrossHorizon();
 
-private:
-	matrix m_rotMatrix;
+    const QPointF horizonPoint();
 
-	ScreenPolygon m_polygon;
+ private:
+    matrix m_rotMatrix;
 
-	int imgrx, imgry, imgradius;
-	int imgwidth, imgheight;
+    ScreenPolygon m_polygon;
 
-	QPointF currentPoint, lastPoint; 
+    int      imgrx;
+    int      imgry;
+    int      imgradius;
 
-	QPen m_pen;
+    int      imgwidth;
+    int      imgheight;
 
-//	Dealing with the horizon
-	bool lastvisible, currentlyvisible;
+    QPointF  currentPoint;
+    QPointF  lastPoint; 
+
+    QPen     m_pen;
+
+    //	Dealing with the horizon
+    bool     lastvisible;
+    bool     currentlyvisible;
 	
-	int m_precision;
-	int m_radius;
-	int m_rlimit;
+    int      m_precision;
+    int      m_radius;          // The radius of the earth in pixels.
+    int      m_rlimit;
 };
 
 #endif // GRIDMAP_H
