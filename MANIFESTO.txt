@@ -1,7 +1,7 @@
 
 MARBLE - MANIFESTO 
 
-Principles and intentions for the Marble Project
+Principles and intentions of the Marble Project
 
 
 v.0.3.2, April 12th, 2007
