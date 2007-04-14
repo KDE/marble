@@ -7,68 +7,185 @@ Principles and intentions of the Marble Project
 v.0.3.2, April 12th, 2007
 
 
-Virtual Globes have existed since decades already and have been subject of numerous papers in scientific research. Although many of them had been available for personal computers they only recently gained the awareness of public interest: Google Earth suddenly allowed people to spot their houses' roofs free of charge from high above and enabled them in combination with Google Maps to show their Google Search Queries referenced on a geographical map. Almost instantly Google Earth had become the "industry leader" among virtual globes that others had to measure up with [1].
+Virtual Globes have existed since decades already and have been
+subject of numerous papers in scientific research.  Although many of
+them had been available for personal computers they only recently
+gained the awareness of public interest: Google Earth suddenly allowed
+people to spot their houses' roofs free of charge from high above and
+enabled them in combination with Google Maps to show their Google
+Search Queries referenced on a geographical map.  Almost instantly
+Google Earth had become the "industry leader" among virtual globes
+that others had to measure up to [1].
+
 
 Why Marble?
+===========
 
-Today there exist numerous virtual globes and the market has embraced strong contenders such as Google Earth/Maps, MS Virtual Earth 3D and NASA WorldWind [2]. A new virtual globe project must be able to offer strong selling points and has got to focus on those without compromises. Otherwise it simply won't gain public relevance.
+Today there exist numerous virtual globes and the market has embraced
+strong contenders such as Google Earth/Maps, MS Virtual Earth 3D and
+NASA WorldWind [2]. A new virtual globe project must be able to offer
+strong selling points and has got to focus on those without
+compromises. Otherwise it simply won't gain public relevance.
 
-"Where?" is a pretty basic question that computer users have got to ask and answer quite often - no matter what they are working on. The free desktop has been advancing since years already. And while there's a pretty large amount of free software GIS ("Geographical Information System") applications available [3] they are mostly targeted at advanced users who deal with geo data during their daytime jobs or as a matter of enthusiasm. 
-However most people out there aren't cartographers and don't want to be. These people expect a simple and clean task-oriented interface that adheres to the map layout standards that decades of cartography have developed to improve ease of use of maps.
+"Where?" is a pretty basic question that computer users have got to
+ask and answer quite often - no matter what they are working on.  The
+free desktop has been advancing since years already.  And while
+there's a pretty large amount of free software GIS ("Geographical
+Information System") applications available [3] they are mostly
+targeted at advanced users who deal with geo data during their daytime
+jobs or as a matter of enthusiasm.  However most people out there
+aren't cartographers and don't want to be.  These people expect a
+simple and clean task-oriented interface that adheres to the map
+layout standards that decades of cartography have developed to improve
+ease of use of maps.
 
-So for casual users there is still a fast, flexible, visually pleasing and easy to use map component missing.
-For developers marble offers a light-weight and fast cross plattform map component that can be used online as well as offline with meaningful results that don't require proprietary webservices.
+So for casual users there is still missing a fast, flexible, visually
+pleasing and easy to use map component.  For developers, marble offers
+a light-weight, fast, cross plattform map component that can be used
+online as well as offline with meaningful results and that don't
+require proprietary webservices.
 
-Marble is meant to become for "geo browsers" what KHTML/WebKit has become for web browsers already.
+Marble is meant to become for "geo browsers" what KHTML/WebKit is for
+web browsers already.
 
-From an average user's point of view a map component such as "Marble" should meet the following requirements:
+From an average user's point of view a map component such as "Marble"
+should meet the following requirements:
 
-1.) FAST: To allow instant access and usage as a widget the Marble Widget should start up instantly and be ready for use within 2-3 seconds. So "application" startup time should always be kept as low as possible. 
+1.  FAST: 
 
-Technically this means that the Marble Widget needs to be heavily optimized for start up times and should have a minimal number of dependencies (as an increasing amount of libraries will slow down the application's launch).
+    To allow instant access and usage as a widget the Marble Widget
+    should start up instantly and be ready for use within 2-3
+    seconds.  So "application" startup time should always be kept as
+    low as possible.
 
-Most other virtual globes have startup times of 15-30 secs ... that's just an eternity to wait for if you just want to look up something.
+    Technically this means that the Marble Widget needs to be heavily
+    optimized for start up times and should have a minimal number of
+    dependencies (as an increasing amount of libraries will slow down
+    the application's launch).
 
-
-2.) VISUALLY APPEALING: The maps drawn by Marble Widget should adhere to visual cartographic standards and should look appealing. Usually people prefer the 3D globe view as it looks more natural due to minimal distortion and as it looks more "advanced". It should be possible to easily print the maps and to embed them into documents without getting a pixel mess that is hard to decipher.
-
-Most other virtual globes don't offer good printing support and the graphical representation most of the time is just limited to satellite views that are often labeled pretty badly. Web based solutions (such as Google Maps) are quite static in their appearance and are limited in terms of possible modification. 
-
-
-3.) EASE OF USE: Another very important aspect is usability: The feature set should cover the use cases of the primary target user only. 3D flights are pretty exciting for users that want to be entertained. However most users don't need them, don't have the time to experiment with them or don't even discover that feature. So focussing on the top-bottom view exclusively ("2.5D") makes sense for Marble.
-
-Maps should be easy to read. In a lot of cases this will mean that the flat projection ("equirectangular projection" / "plate carrée") is more convenient (e.g. in a timezone chooser dialog).
-
-I personally consider Google Earth's interface too complex for most users we are aiming for. Google Maps on the other hand seems too simple to me and has a slight annoyance factor due to its web based nature.
-
-
-4.) MINIMAL HARDWARE/SOFTWARE REQUIREMENTS: The Marble Widget should work at usable speed out of the box on all possible hardware the desktop environment is running on. It should always show exactly the same output independent of the hardware. During installation modifications to the system should stay as low as possible. 
-
-This is an important point as people will simply neglect a solution if it's too painful to install or results in other unnecessary challenges during configuration. Unfortunately many (if not most) computer systems out there don't offer decent 3D hardware acceleration for graphics. So the solution we are aiming for should not depend on 3D hardware acceleration (although we certainly might want to offer solutions such as an OpenGL backend as an option).
-Also the amount of software needed to install the map component should stay as low as possible ( see 1.) ).
-
-
-5.) OFFLINE USAGE: The Marble Widget should offer a minimal data set that is specifically edited and compiled for offline usage. This is especially useful in countries where internet access is restricted or expensive.
-Online usage should cover incremental downloading of texture tiles, vector data (e.g. OpenStreetMap) and wikipedia articles.
-
-For all information that goes beyond map labels ("Marble Almanac") we have started cooperation with the Wikipedia Offline Reader Project.
-
-
-6.) FREE SOFTWARE & OPEN STANDARDS: The Marble Widget is free software and should use a small set of open standards for communication with other applications at runtime and to save data to the storage medium. The open KML file format [4] used by Google Earth is probably the most popular file format these days to geo reference data. Through "feeding" KML streams to the map component, applications are offered a simple "programming" interface to control the map's appearance and behaviour.
-All Information displayed on the map widget should be covered by free licenses (using sources such as NASA, OpenStreetMap).
-
-Many other virtual globes are proprietary and are using commercial geo data that is considered "non-free" (as it isn't freely redistributable).
+    Most other virtual globes have startup times of 15-30 secs.
+    That's just an eternity to wait for if you just want to look up
+    something.
 
 
-MARBLE UNIVERSE
+2.  VISUALLY APPEALING: 
 
-Apart from the Marble Widget (which is implemented using the Qt4.2 library only) there are other planned  member components of the Marble universe:
+    The maps drawn by Marble Widget should adhere to visual
+    cartographic standards and should look appealing.  Usually people
+    prefer the 3D globe view as it looks more natural, mostly becuase
+    of minimal distortion and because it looks more "advanced". It
+    should be possible to easily print the maps and to embed them into
+    documents without getting a pixel mess that is hard to decipher.
 
-"Marble Desktop Globe": KDE 4 application for KDE-EDU: This "reference" application is meant to show off much of Marble's full potential. At the current point of time it's the next logical step as educational applications don't need to cover the data in full detail to be useful. Once it reaches maturity the Marble backend could be moved into a more central place ( e.g. kdelibs/base ).
+    Most other virtual globes don't offer good printing support and
+    the graphical representation most of the time is just limited to
+    satellite views that are often labeled pretty badly. Web based
+    solutions (such as Google Maps) are quite static in their
+    appearance and are limited in terms of possible modification.
 
-"Marble Widget": Can be used in different applications (like KStars, KControl, DigiKam, KGeography, Kopete, Addressbook, Risk-Game, KWorldClock, Traceroute, Plasma Weather Applet ... ). Depending on the use case it can have different appearances ( "normal" widget, selection dialog, developer mode ).
 
-"Marble Framework": A framework of geo services for the desktop. Should cover a "position provider" backend ( like GPS, hostip.info, track turtle ) and information services ( "Marble Almanac" ).
+3.  EASE OF USE: 
+
+    Another very important aspect is usability: The feature set should
+    cover the use cases of the primary target user only.  3D flights
+    are pretty exciting for users that want to be entertained.
+    However most users don't need them, don't have the time to
+    experiment with them or don't even discover that feature.  So
+    focusing on the top-bottom view exclusively ("2.5D") makes sense
+    for Marble.
+
+    Maps should be easy to read.  In a lot of cases this will mean
+    that the flat projection ("equirectangular projection" / "plate
+    carrée") is more convenient (e.g. in a timezone chooser dialog).
+
+    I personally consider Google Earth's interface too complex for
+    most users we are aiming for.  Google Maps on the other hand seems
+    too simple to me and also has a slight annoyance factor due to its
+    web based nature.
+
+
+4.  MINIMAL HARDWARE/SOFTWARE REQUIREMENTS:
+
+    The Marble Widget should work at usable speed out of the box on
+    all possible hardware the desktop environment is running on.  It
+    should always show exactly the same output independent of the
+    hardware.  During installation modifications to the system should
+    stay as low as possible.
+
+    This is an important point as people will simply neglect a
+    solution if it's too painful to install or results in other
+    unnecessary challenges during configuration.  Unfortunately many,
+    if not most, computer systems out there don't offer decent 3D
+    hardware acceleration for graphics.  So the solution we are aiming
+    for should not depend on 3D hardware acceleration, although we
+    certainly might want to offer solutions such as an OpenGL backend
+    as an option.  Also the amount of software needed to install the
+    map component should stay as low as possible (see 1.) ).
+
+
+5.  OFFLINE USAGE: 
+
+    The Marble Widget should offer a minimal data set that is
+    specifically edited and compiled for offline usage.  This is
+    especially useful in countries where internet access is restricted
+    or expensive.  Online usage should cover incremental downloading
+    of texture tiles, vector data (e.g. OpenStreetMap) and wikipedia
+    articles.
+
+    For all information that goes beyond map labels ("Marble Almanac")
+    we have started cooperation with the Wikipedia Offline Reader
+    Project.
+
+
+6.  FREE SOFTWARE & OPEN STANDARDS: 
+
+    The Marble Widget is free software and should use a small set of
+    open standards for communication with other applications at
+    runtime and to save data to the storage medium.  The open KML file
+    format[4] used by Google Earth is probably the most popular file
+    format these days to geo reference data.  Through "feeding" KML
+    streams to the map component, applications are offered a simple
+    "programming" interface to control the map's appearance and
+    behaviour.  All Information displayed on the map widget should be
+    covered by free licenses using sources such as NASA or
+    OpenStreetMap.
+
+    Many other virtual globes are proprietary and are using commercial
+    geo data that is considered "non-free" (as it isn't freely
+    redistributable).
+
+
+The Marble Universe
+===================
+
+Apart from the Marble Widget (which is implemented using the Qt4.2
+library only) there are other planned member components of the Marble
+universe:
+
+1. "Marble Desktop Globe": 
+
+    KDE 4 application for KDE-EDU: This "reference" application is
+    meant to show off much of Marble's full potential.  At the current
+    point of time it's the next logical step as educational
+    applications don't need to cover the data in full detail to be
+    useful.  Once it reaches maturity the Marble backend could be
+    moved into a more central place, e.g. kdelibs/base.
+
+2. "Marble Widget":
+
+    Can be used in different applications like KStars, KControl,
+    DigiKam, KGeography, Kopete, Addressbook, Risk-Game, KWorldClock,
+    Traceroute, Plasma Weather Applet, and so on. Depending on the use case
+    it can have different appearances:
+     - "normal" widget
+     - selection dialog
+     - developer mode
+
+3. "Marble Framework":
+
+    A framework of geo services for the desktop. This should cover a
+    "position provider" backend like GPS, hostip.info, track turtle,
+    and information services ( "Marble Almanac" ).
 
 
 Torsten Rahn
@@ -76,10 +193,15 @@ Torsten Rahn
 
 References:
 
-[1] as an interesting read see the discussion section at http://www.earthslot.org/vgconference/VGconference_results.php
+[1] as an interesting read see the discussion section at
+    http://www.earthslot.org/vgconference/VGconference_results.php
 
-[2] for a nice introduction into virtual globes and a non-comprehensive list of them see the article at Wikipedia http://en.wikipedia.org/wiki/Virtual_Globe 
+[2] for a nice introduction into virtual globes and a
+    non-comprehensive list of them see the article at Wikipedia
+    http://en.wikipedia.org/wiki/Virtual_Globe
 
-[3] www.freegis.org provides a nice software overview on Free Geographic Information Systems
+[3] www.freegis.org provides a nice software overview on Free
+    Geographic Information Systems
 
-[4] KML 2.1 Reference available at: http://earth.google.com/kml/kml_tags_21.html
+[4] KML 2.1 Reference available at:
+    http://earth.google.com/kml/kml_tags_21.html
