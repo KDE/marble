@@ -72,7 +72,7 @@ should meet the following requirements:
 
     The maps drawn by Marble Widget should adhere to visual
     cartographic standards and should look appealing.  Usually people
-    prefer the 3D globe view as it looks more natural, mostly becuase
+    prefer the 3D globe view as it looks more natural, mostly because
     of minimal distortion and because it looks more "advanced". It
     should be possible to easily print the maps and to embed them into
     documents without getting a pixel mess that is hard to decipher.

@@ -87,5 +87,12 @@ Add a simple alternative Qt4 frontend					TACK
 Before KDE 4.1
 ----------------------------------------------------------------
  * Support to display Timezones
+ * Evaluate the implementation of tile specifications like 
+
+   http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation
+   http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification
+
+   for practical relevance and implement those bits into our client that 
+   make sense for us to have.
 
 
