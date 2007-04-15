@@ -22,13 +22,13 @@ set(marble_SRCS
            Quaternion.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
-	   TextureTile.cpp
+	       TextureTile.cpp
            TextureMapper.cpp
-
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
            main.cpp
+           kdemainwindow.cpp
            texcolorizer.cpp
            TileLoader.cpp
            katlasglobe.cpp
@@ -57,21 +57,21 @@ set(marble_SRCS
            tinywebbrowser.cpp
            httpfetchfile.cpp
            measuretool.cpp
-	   katlasaboutdialog.cpp
+	       katlasaboutdialog.cpp
 )
 
 set(marble_HDRS
            Quaternion.h
            GeoPoint.h
-	   GeoPolygon.h
-	   ScreenPolygon.h
-	   TextureTile.h
+           GeoPolygon.h
+           ScreenPolygon.h
+           TextureTile.h
            TextureMapper.h
-
            katlasdirs.h
            katlascontrol.h
            katlasview.h
            katlasviewinputhandler.h
+           kdemainwindow.h
            texcolorizer.h
            TileLoader.h
            katlasglobe.h
@@ -100,7 +100,7 @@ set(marble_HDRS
            tinywebbrowser.h
            httpfetchfile.h
            measuretool.h
-	   katlasaboutdialog.h
+           katlasaboutdialog.h
 )
 
 # cmake does not support this for mingw - see bugtracker
