@@ -19,6 +19,8 @@
 
 #include "katlasaboutdialog.h"
 
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
 #include "katlasdirs.h"
@@ -29,5 +31,14 @@ KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent) : QDialog(parent) {
 
 	m_pMarbleLogoLabel->setPixmap( QPixmap( KAtlasDirs::path("svg/marble-logo-72dpi.png") ) );
 	m_pMarbleAboutBrowser->setHtml( "<br>(c)2007, The Marble Project<br><br><a href=http://edu.kde.org/marble>http://edu.kde.org/marble</a>");
+	QString filename = KAtlasDirs::path( "LICENSE.txt" );
+	if( !filename.isEmpty() ) {
+		QFile f( filename );
+		if( f.open( QIODevice::ReadOnly ) ) {
+			QTextStream ts( &f );
+			m_pMarbleLicenseBrowser->setText( ts.readAll() );
+		}
+		f.close();
+	}
 }
 

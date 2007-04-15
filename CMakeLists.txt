@@ -22,3 +22,11 @@ endif (NOT QTONLY)
 
 add_subdirectory(src)
 add_subdirectory(data)
+
+if(WIN32)
+  set(data_dir data)
+else(WIN32)
+  set(data_dir share/apps/marble/data)
+endif(WIN32)
+
+install(FILES LICENSE.txt DESTINATION ${data_dir})
