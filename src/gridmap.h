@@ -47,21 +47,18 @@ class GridMap : public ScreenPolygon::Vector
 
     ScreenPolygon m_polygon;
 
-    int      imgrx;
-    int      imgry;
-    int      imgradius;
+    int      m_imageHalfWidth;
+    int      m_imageHalfHeight;
+    int      m_imageRadius;
 
-    int      imgwidth;
-    int      imgheight;
-
-    QPointF  currentPoint;
-    QPointF  lastPoint; 
+    QPointF  m_currentPoint;
+    QPointF  m_lastPoint; 
 
     QPen     m_pen;
 
     //	Dealing with the horizon
-    bool     lastvisible;
-    bool     currentlyvisible;
+    bool     m_lastVisible;
+    bool     m_currentlyVisible;
 	
     int      m_precision;
     int      m_radius;          // The radius of the earth in pixels.

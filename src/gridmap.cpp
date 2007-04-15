@@ -10,26 +10,24 @@
 
 #include "clippainter.h"
 
-
-const float  PI_HALF   = M_PI / 2;
-const float  rad2int   = 21600.0 / M_PI;
-const float  axialtilt = M_PI / 180.0f * ( 23.0f
+    // Except for the equator the major circles of latitude are defined via 
+    // the earth's axial tilt, which currently measures about 23°26'21".
+ 
+const float  AXIALTILT = M_PI / 180.0f * ( 23.0f
                                            + 26.0f / 60.0f
                                            + 21.0f / 3600.0f );
+const float  PIHALF   = M_PI / 2;
 
 
 GridMap::GridMap()
 {
-    imgrx = 0;
-    imgry = 0;
-    imgradius = 0;
-
-    imgwidth  = 0;
-    imgheight = 0;
+    m_imageHalfWidth = 0;
+    m_imageHalfHeight = 0;
+    m_imageRadius = 0;
 
     //	Initialising booleans for horizoncrossing
-    lastvisible      = false;
-    currentlyvisible = false;
+    m_lastVisible      = false;
+    m_currentlyVisible = false;
 
     m_radius = 0; 
     m_rlimit = 0;
@@ -49,13 +47,13 @@ void GridMap::createTropics(const int& radius, Quaternion& rotAxis)
     m_radius = radius - 1;
     rotAxis.inverse().toMatrix( m_rotMatrix );
 	
-    // Turn on the tropics if we've zoomed in far enough (radius > 800
+    // Turn on the major circles of latitude if we've zoomed in far enough (radius > 800
     // pixels)
     if ( m_radius >  800 ) {
-        createCircle( PI_HALF - axialtilt , Latitude );
-        createCircle( axialtilt - PI_HALF , Latitude );
-        createCircle( axialtilt , Latitude );
-        createCircle( -axialtilt , Latitude );
+        createCircle( PIHALF - AXIALTILT , Latitude );      // Arctic Circle
+        createCircle( AXIALTILT - PIHALF , Latitude );      // Antarctic Circle
+        createCircle( AXIALTILT , Latitude );               // Tropic of Cancer 
+        createCircle( -AXIALTILT , Latitude );              // Tropic of Capricorn
     }
 }
 
@@ -109,36 +107,45 @@ void GridMap::createCircles( const int lngNum, const int latNum )
 
     if ( latNum != 0 ) {
 
-        createCircle( 0.0f , Latitude );	// equator
+        // Equator:
+        createCircle( 0.0f , Latitude );
 
+        // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (float)(i) * PI_HALF / (float)(latNum), Latitude );
-            createCircle( - (float)(i) * PI_HALF / (float)(latNum), Latitude );
+            createCircle( + (float)(i) * PIHALF / (float)(latNum), Latitude );
+            createCircle( - (float)(i) * PIHALF / (float)(latNum), Latitude );
         } 
     } 
 
     if ( lngNum == 0 )
         return;
 
-    createCircle( + 0,       Longitude );
-    createCircle( + PI_HALF, Longitude );	
+    // Universal prime meridian and its orthogonal great circle:
+    createCircle( + 0,      Longitude );
+    createCircle( + PIHALF, Longitude );	
 
     for ( int i = 1; i < lngNum; ++i ) {
-        float cutoff = PI_HALF / (float)(latNum);
-        createCircle( + (float)(i) * PI_HALF / (float)(lngNum), Longitude, cutoff );
-        createCircle( + (float)(i) * PI_HALF / (float)(lngNum) + PI_HALF, Longitude, cutoff );	
+        float cutOff = PIHALF / (float)(latNum);
+        createCircle( + (float)(i) * PIHALF / (float)(lngNum), Longitude, cutOff );
+        createCircle( + (float)(i) * PIHALF / (float)(lngNum) + PIHALF, Longitude, cutOff );	
     }
 }
 
 
-void GridMap::createCircle( float val, SphereDim dim, float cutoff )
+void GridMap::createCircle( float val, SphereDim dim, float cutOff )
 {
 
     // cutoff: the amount of each quarter circle that is cut off at
     // the pole in radians
 
-    const float cutcoeff   = 1 - cutoff / PI_HALF;
-    const float quartSteps = (float) m_precision;	// curve precision
+    const float cutCoeff   = 1 - cutOff / PIHALF;
+
+    // We draw each circle in quarters ( or parts of those ).
+    // This is especially convenient for the great longitude circles which 
+    // are being cut off close to the poles.
+    // quartSteps: the number of nodes in a "quarter" of a circle.
+
+    const float quartSteps = (float) m_precision;
 
     float coeff  = 1.0f;
     float offset = 0.0f;
@@ -151,12 +158,12 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff )
             coeff = - 1.0f;
         offset = ( i % 2 ) ? 1.0f : 0.0f;
 
-        const int steps = (int) ( cutcoeff * quartSteps );
+        const int steps = (int) ( cutCoeff * quartSteps );
 
         for ( int j = 0; j < steps + 1; j++ ) {
 
-            float itval  = (j != steps) ? (float)(j) / quartSteps : cutcoeff;
-            float dimVal = coeff * ( PI_HALF * fabs( offset - itval ) + offset * PI_HALF );
+            float itval  = (j != steps) ? (float)(j) / quartSteps : cutCoeff;
+            float dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
 
             float lat = ( dim == Latitude ) ? val : dimVal;
             float lng = ( dim == Longitude ) ? val : dimVal;
@@ -165,20 +172,20 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff )
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
 
-            currentPoint = QPointF((float)(imgrx + m_radius * qpos.v[Q_X]) +1,
-                                   (float)(imgry + m_radius * qpos.v[Q_Y]) +1);
+            m_currentPoint = QPointF((float)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) +1,
+                                   (float)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) +1);
             //qDebug() << "Radius: " << m_radius
-            //         << "QPointF(" << (float)(imgrx+ m_radius*qpos.v[Q_X])+1
-            //        << ", " << (float)(imgry+ m_radius*qpos.v[Q_Y])+1 << ")";
+            //         << "QPointF(" << (float)(m_imageHalfWidth+ m_radius*qpos.v[Q_X])+1
+            //        << ", " << (float)(m_imageHalfHeight+ m_radius*qpos.v[Q_Y])+1 << ")";
 
             // Take care of horizon crossings if horizon is visible
-            lastvisible = currentlyvisible;
-            currentlyvisible = (qpos.v[Q_Z] >= 0) ? true : false;
+            m_lastVisible = m_currentlyVisible;
+            m_currentlyVisible = (qpos.v[Q_Z] >= 0) ? true : false;
 
             if ( j == 0 )
                 initCrossHorizon();
 
-            if (currentlyvisible != lastvisible) {
+            if (m_currentlyVisible != m_lastVisible) {
                 m_polygon << horizonPoint();
 
                 if (m_polygon.size() >= 2) {
@@ -187,20 +194,20 @@ void GridMap::createCircle( float val, SphereDim dim, float cutoff )
 
                 m_polygon.clear();
 
-                if ( lastvisible == true )
+                if ( m_lastVisible == true )
                     break;
             }
 
             //	Take care of screencrossing crossings if horizon is
             //	visible Filter Points which aren't on the visible
             //	hemisphere
-            if ( currentlyvisible == true && currentPoint != lastPoint ) {
-                // most recent addition: currentPoint != lastPoint
+            if ( m_currentlyVisible == true && m_currentPoint != m_lastPoint ) {
+                // most recent addition: m_currentPoint != m_lastPoint
                 //			qDebug("accepted");
-                m_polygon << currentPoint;
+                m_polygon << m_currentPoint;
             }
 
-            lastPoint = currentPoint;
+            m_lastPoint = m_currentPoint;
         }
 
         if (m_polygon.size() >= 2) {
@@ -237,10 +244,10 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
 
 void GridMap::initCrossHorizon()
 {
-    lastvisible = currentlyvisible;
+    m_lastVisible = m_currentlyVisible;
 
-    // Initially lastPoint MUST NOT equal currentPoint
-    lastPoint = QPointF( currentPoint.x() + 1.0f, currentPoint.y() + 1.0f );
+    // Initially m_lastPoint MUST NOT equal m_currentPoint
+    m_lastPoint = QPointF( m_currentPoint.x() + 1.0f, m_currentPoint.y() + 1.0f );
 }
 
 
@@ -250,9 +257,9 @@ const QPointF GridMap::horizonPoint()
     float  xa = 0;
     float  ya = 0;
 
-    xa = currentPoint.x() - (imgrx +1) ;
+    xa = m_currentPoint.x() - (m_imageHalfWidth +1) ;
 
-    // Move the currentPoint along the y-axis to match the horizon.
+    // Move the m_currentPoint along the y-axis to match the horizon.
     float  radicant = (float)(m_radius +1) * (float)( m_radius +1) - xa*xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
@@ -260,20 +267,17 @@ const QPointF GridMap::horizonPoint()
     // qDebug() << "xa:" << xa << "ya:" << ya;
     // ya = (m_rlimit > xa*xa) ? sqrt((float)(m_rlimit) - (float)(xa*xa)) : 0;
     // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
-    if ( (currentPoint.y() - (imgry + 1)) < 0 )
+    if ( (m_currentPoint.y() - (m_imageHalfHeight + 1)) < 0 )
         ya = -ya; 
 
-    return QPointF((float)imgrx + xa + 1, (float)imgry + ya + 1); 
+    return QPointF((float)m_imageHalfWidth + xa + 1, (float)m_imageHalfHeight + ya + 1); 
 }
 
 
 
-void GridMap::resizeMap(const QPaintDevice * origimg)
+void GridMap::resizeMap(const QPaintDevice * imageCanvas)
 {
-    imgwidth = origimg -> width();
-
-    imgheight = origimg -> height();
-    imgrx = (imgwidth >> 1);
-    imgry = (imgheight >> 1);
-    imgradius = imgrx * imgrx + imgry * imgry;
+    m_imageHalfWidth = imageCanvas -> width() / 2;
+    m_imageHalfHeight = imageCanvas -> height() / 2;
+    m_imageRadius = m_imageHalfWidth * m_imageHalfWidth + m_imageHalfHeight * m_imageHalfHeight;
 }
