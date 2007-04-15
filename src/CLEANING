@@ -24,6 +24,10 @@ katlasview.h            katlasview.cpp          # check #include
 Widgets:
 katlascontrol.h         katlascontrol.cpp 	# check #include
 
+Dialogs:
+katlastilecreatordialog.h       katlastilecreatordialog.cpp
+
+
 DOING
 gridmap.h               gridmap.cpp
 
@@ -59,7 +63,6 @@ tinywebbrowser.h        tinywebbrowser.cpp
 
 Dialogs:
 placemarkinfodialog.h   placemarkinfodialog.cpp
-katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 Items on the widget (QObjects):
 katlascrosshair.h       katlascrosshair.cpp

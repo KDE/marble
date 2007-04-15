@@ -12,6 +12,7 @@
 #include "clippainter.h"
 #include "katlasviewinputhandler.h"
 #include "katlasviewpopupmenu.h"
+#include "katlastilecreatordialog.h"
 
 #include "measuretool.h"
 
@@ -30,6 +31,11 @@ KAtlasView::KAtlasView(QWidget *parent)
     //FIXME(ModelView): Provide this to the constructor
 
     m_pGlobe = new KAtlasGlobe( this );
+    connect( m_pGlobe, SIGNAL( creatingTilesStart( QString, QString ) ),
+             this,     SLOT( creatingTilesStart( QString, QString ) ) );
+    connect( m_pGlobe, SIGNAL( creatingTilesProgress( int ) ),
+             this,     SLOT( creatingTilesProgress( int ) ) );
+
     connect( m_pGlobe, SIGNAL(themeChanged()), this, SLOT(update()) );
 
     // Set background: black.
@@ -304,6 +310,32 @@ void KAtlasView::goHome()
     zoomView( 1050 ); // default 1050
 
     update(); // not obsolete in case the zoomlevel stays unaltered
+}
+
+
+// This slot will called when the Globe starts to create the tiles.
+
+void KAtlasView::creatingTilesStart( QString name, QString description )
+{
+    qDebug("KAtlasView::creatingTilesStart called... ");
+
+    m_tileCreatorDlg = new KAtlasTileCreatorDialog( this );
+
+    m_tileCreatorDlg->setSummary( name, description );
+
+    // The process itself is started by a timer, so an exec() is ok here.
+    m_tileCreatorDlg->exec();
+}
+
+// This slot will be called during the tile creation progress.  When
+// the progress goes to 100, the dialog should be closed.
+
+void KAtlasView::creatingTilesProgress( int progress )
+{
+    m_tileCreatorDlg->setProgress( progress );
+
+    if ( progress == 100 )
+        delete m_tileCreatorDlg;
 }
 
 

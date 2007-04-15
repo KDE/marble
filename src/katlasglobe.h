@@ -81,6 +81,9 @@ class KAtlasGlobe  : public QObject
     PlaceContainer* placeContainer(){ return m_placecontainer ; }
 
  signals:
+    void creatingTilesStart( QString name, QString description );
+    void creatingTilesProgress( int progress );
+
     void themeChanged();
 
  protected:

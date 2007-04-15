@@ -73,21 +73,33 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
     m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
                                         .arg( selectedmap ) ) );
 
+    // If the tiles aren't already there, put up a progress dialog
+    // while creating them.
     if ( !TileLoader::baseTilesAvailable( m_maptheme->tilePrefix() ) ) {
         qDebug("Base tiles not available. Creating Tiles ... ");
 
+#if 1
         KAtlasTileCreatorDialog tilecreatordlg( m_parent );
-        tilecreatordlg.setSummary( m_maptheme->name(), m_maptheme->description() );
+        tilecreatordlg.setSummary( m_maptheme->name(), 
+                                   m_maptheme->description() );
+#endif
 
         TileScissor tilecreator( m_maptheme->prefix(),
                                  m_maptheme->installMap(), 
                                  m_maptheme->bitmaplayer().dem);
-        QObject::connect( &tilecreator,    SIGNAL( progress( int ) ),
-                          &tilecreatordlg, SLOT( setProgress( int ) ) );
-
         QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
+#if 1
+        connect( &tilecreator,    SIGNAL( progress( int ) ),
+                 &tilecreatordlg, SLOT( setProgress( int ) ) );
 
         tilecreatordlg.exec();
+#else
+
+        connect( &tilecreator,    SIGNAL( progress( int ) ),
+                 this,            SIGNAL( creatingTilesProgress( int ) ) );
+        emit creatingTilesStart( m_maptheme->name(), 
+                                 m_maptheme->description() );
+#endif
     }
 
     if ( texmapper == 0 )

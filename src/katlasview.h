@@ -15,7 +15,7 @@ class KAtlasViewPopupMenu;
 class TextureColorizer;
 class QAbstractItemModel;
 class MeasureTool;
-
+class KAtlasTileCreatorDialog;
 
 // This is the main widget where the map is painted.
 
@@ -66,6 +66,9 @@ class KAtlasView : public QWidget
 	// FIXME: Force update...
     }
 
+    void creatingTilesStart( QString name, QString description );
+    void creatingTilesProgress( int progress );
+
  signals:
     void  zoomChanged(int);
 
@@ -106,6 +109,9 @@ class KAtlasView : public QWidget
     QRegion       activeRegion;
 
     QPixmap       m_cachedPixmap;
+
+    // The progress dialog for the tile creator.
+    KAtlasTileCreatorDialog  *m_tileCreatorDlg;
 };
 
 
