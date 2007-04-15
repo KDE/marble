@@ -22,13 +22,13 @@ set(marble_SRCS
            Quaternion.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
-	       TextureTile.cpp
+	   TextureTile.cpp
            TextureMapper.cpp
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
            main.cpp
-           kdemainwindow.cpp
+           KdeMainWindow.cpp
            texcolorizer.cpp
            TileLoader.cpp
            katlasglobe.cpp
@@ -57,7 +57,7 @@ set(marble_SRCS
            tinywebbrowser.cpp
            httpfetchfile.cpp
            measuretool.cpp
-	       katlasaboutdialog.cpp
+	   katlasaboutdialog.cpp
 )
 
 set(marble_HDRS
@@ -71,7 +71,7 @@ set(marble_HDRS
            katlascontrol.h
            katlasview.h
            katlasviewinputhandler.h
-           kdemainwindow.h
+           KdeMainWindow.h
            texcolorizer.h
            TileLoader.h
            katlasglobe.h
