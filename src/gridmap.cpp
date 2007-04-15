@@ -149,7 +149,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutOff )
     float coeff  = 1.0f;
     float offset = 0.0f;
 
-    for ( int i = 0; i < 4; i++ ) {
+    for ( int i = 0; i < 4; ++i ) {
 
         m_polygon.clear();
 
@@ -159,7 +159,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutOff )
 
         const int steps = (int) ( cutCoeff * quartSteps );
 
-        for ( int j = 0; j < steps + 1; j++ ) {
+        for ( int j = 0; j < steps + 1; ++j ) {
 
             float itval  = (j != steps) ? (float)(j) / quartSteps : cutCoeff;
             float dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
@@ -273,7 +273,7 @@ const QPointF GridMap::horizonPoint()
 
 void GridMap::resizeMap(const QPaintDevice * imageCanvas)
 {
-    m_imageHalfWidth = imageCanvas -> width() / 2;
+    m_imageHalfWidth  = imageCanvas -> width() / 2;
     m_imageHalfHeight = imageCanvas -> height() / 2;
-    m_imageRadius = m_imageHalfWidth * m_imageHalfWidth + m_imageHalfHeight * m_imageHalfHeight;
+    m_imageRadius     = m_imageHalfWidth * m_imageHalfWidth + m_imageHalfHeight * m_imageHalfHeight;
 }

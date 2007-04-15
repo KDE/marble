@@ -39,7 +39,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 	const float bendReliefm = 0.941246f * bendRelief / bendReliefx;
 
 	if ( radius*radius > imgradius ){
-		for (int y = 0; y < imgheight; y++){
+		for (int y = 0; y < imgheight; ++y){
 
 			QRgb* data = (QRgb*)(origimg->scanLine( y ));
 			const QRgb* coastdata = (QRgb*)(coastimg->scanLine( y ));
@@ -78,7 +78,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const i
 		const int ytop = (imgry-radius < 0) ? 0 : imgry-radius;
 		const int ybottom = (ytop == 0) ? imgheight : ytop + radius + radius;
 
-		for (int y = ytop; y < ybottom; y++){
+		for (int y = ytop; y < ybottom; ++y){
 
 
 			const int dy = imgry - y;

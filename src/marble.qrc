@@ -10,12 +10,12 @@
         <file>../data/bitmaps/cursor_tr.xpm</file>
     </qresource>
     <qresource>
-        <file>icons/back.png</file>
-        <file>icons/down.png</file>
-        <file>icons/forward.png</file>
-        <file>icons/gohome.png</file>
-        <file>icons/up.png</file>
-        <file>icons/viewmag+.png</file>
-        <file>icons/viewmag-.png</file>
+        <file>icons/arrow-left.png</file>
+        <file>icons/arrow-down.png</file>
+        <file>icons/arrow-right.png</file>
+        <file>icons/go-home.png</file>
+        <file>icons/arrow-up.png</file>
+        <file>icons/zoom-in.png</file>
+        <file>icons/zoom-out.png</file>
     </qresource>
 </RCC>

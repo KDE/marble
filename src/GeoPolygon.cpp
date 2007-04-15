@@ -238,7 +238,7 @@ void PntMap::load(const QString &filename)
 
         for ( itPoint = (*itPolyLine)->begin(); 
               itPoint != itEndPoint;
-              itPoint++ )
+              ++itPoint )
         {
             float  lon;
             float  lat;
@@ -264,7 +264,7 @@ void PntMap::load(const QString &filename)
 
         const QVector<GeoPoint*>::const_iterator itEndPoint = (*itPolyLine)->end();
 
-        for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; itPoint++ ){
+        for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; ++itPoint ){
             (*itPoint)->setMul(6.0f);
         }	
     }
@@ -285,7 +285,7 @@ void PntMap::load(const QString &filename)
 					
             for ( itPoint = (*itPolyLine)->begin();
                   itPoint != itEndPoint;
-                  itPoint++ )
+                  ++itPoint )
             {
                 float  lon;
                 float  lat;
@@ -309,7 +309,7 @@ void PntMap::load(const QString &filename)
         else {			
             for ( itPoint = (*itPolyLine)->begin();
                   itPoint != itEndPoint;
-                  itPoint++ )
+                  ++itPoint )
             {
                 float  lon;
                 float  lat;

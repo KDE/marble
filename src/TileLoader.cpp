@@ -61,7 +61,7 @@ void TileLoader::cleanupTilehash(){
 void TileLoader::flush(){
 //	Remove all m_tiles from m_tileHash
 	QHash <int, TextureTile*>::const_iterator it;
-	for( it = m_tileHash.begin(); it != m_tileHash.constEnd(); it++ ) 
+	for( it = m_tileHash.begin(); it != m_tileHash.constEnd(); ++it ) 
 		delete (*it);
 	m_tileHash.clear();
 }
@@ -115,9 +115,9 @@ int TileLoader::maxCompleteTileLevel( const QString& theme ){
 //	if ( m_bitmaplayer.type.toLower() == "bitmap" ){
 	while ( noerr == true ){
 		int nmaxit = TileLoader::levelToRow( trylevel );
-		for ( int n=0; n < nmaxit; n++) {
+		for ( int n=0; n < nmaxit; ++n) {
 			int mmaxit = TileLoader::levelToColumn( trylevel );
-			for ( int m=0; m < mmaxit; m++){
+			for ( int m=0; m < mmaxit; ++m){
 				QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg").arg(theme).arg( trylevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
 //				qDebug() << tilepath;
 				noerr = QFile::exists( tilepath );
@@ -127,7 +127,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme ){
 		}	
 
 		if ( noerr == true) tilelevel = trylevel;
-		trylevel++;
+		++trylevel;
 	}
 
 	if ( tilelevel == -1 ){

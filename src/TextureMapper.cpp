@@ -121,7 +121,7 @@ void TextureMapper::resizeMap(const QImage* canvasImage)
     nBest = 2;
 
     int  nEvalMin = 2 * m_imageHalfWidth;
-    for ( int it = 1; it < 32; it++ ) {
+    for ( int it = 1; it < 32; ++it ) {
         int nEval = 2 * m_imageHalfWidth / it + 2 * m_imageHalfWidth % it;
         if ( nEval < nEvalMin ) {
             nEvalMin = nEval;
@@ -179,7 +179,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     planetAxis.toMatrix( planetAxisMatrix );
 
 #ifndef INTERLACE
-    for (y = yTop; y < yBottom; y++) {
+    for (y = yTop; y < yBottom; ++y) {
 #else
     for (y = yTop; y < yBottom -1; y+=2) {
 #endif
@@ -221,7 +221,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 
         int ncount = 0;
 
-        for ( x = xLeft; x < xRight; x++ ) {
+        for ( x = xLeft; x < xRight; ++x ) {
             // Prepare for interpolation
 
             if ( x >= xIpLeft && x <= xIpRight ) {
@@ -240,7 +240,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
                 else {
                     x += m_n - 1;
                     interpolate = true;
-                    ncount++;
+                    ++ncount;
                 } 
             }
             else 
@@ -266,7 +266,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             if ( interpolate ) {
                 getPixelValueApprox(lng,lat,scanLine);
 #ifdef INTERLACE
-                for ( int j = 0; j < m_n - 1; j++ ) {
+                for ( int j = 0; j < m_n - 1; ++j ) {
                     fastScanLine[j]=scanLine[j];
                 }
                 fastScanLine += ( m_n - 1 );
@@ -282,9 +282,9 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             m_prevLng = lng;
 #ifdef INTERLACE
             *fastScanLine=*scanLine;
-            fastScanLine++;
+            ++fastScanLine;
 #endif
-            scanLine++;
+            ++scanLine;
         }
     }
 
@@ -316,11 +316,11 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
     if ( fabs(stepLng) < M_PI ) {
         stepLng *= m_ninv;
 
-        for (int j=1; j < m_n; j++) {
+        for (int j=1; j < m_n; ++j) {
             m_prevLat += stepLat;
             m_prevLng += stepLng;
             getPixelValue( m_prevLng, m_prevLat, scanLine);
-            scanLine++;
+            ++scanLine;
         }
     }
 
@@ -334,13 +334,13 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
         // from east to west and vice versa: from west to east.
 
         if ( m_prevLng < lng ) {
-            for ( int j = 1; j < m_n; j++ ) {
+            for ( int j = 1; j < m_n; ++j ) {
                 m_prevLat += stepLat;
                 m_prevLng -= stepLng;
                 if ( m_prevLng <= -M_PI ) 
                     m_prevLng += TWOPI;
                 getPixelValue( m_prevLng, m_prevLat, scanLine );
-                scanLine++;
+                ++scanLine;
             }
         }
 
@@ -348,14 +348,14 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
         else { 
             float curStepLng = lng - m_n*stepLng;
 
-            for ( int j = 1; j < m_n; j++ ) {
+            for ( int j = 1; j < m_n; ++j ) {
                 m_prevLat += stepLat;
                 curStepLng += stepLng;
                 float  evalLng = curStepLng;
                 if ( curStepLng <= -M_PI )
                     evalLng += TWOPI;
                 getPixelValue( evalLng, m_prevLat, scanLine);
-                scanLine++;
+                ++scanLine;
             }
         }
     }

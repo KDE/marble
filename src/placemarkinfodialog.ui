@@ -338,7 +338,7 @@ p, li { white-space: pre-wrap; }
             <string>Back</string>
            </property>
            <property name="icon" >
-            <iconset resource="marble.qrc" >:/icons/back.png</iconset>
+            <iconset resource="marble.qrc" >:/icons/arrow-left.png</iconset>
            </property>
            <property name="toolButtonStyle" >
             <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -354,7 +354,7 @@ p, li { white-space: pre-wrap; }
             <string>...</string>
            </property>
            <property name="icon" >
-            <iconset resource="marble.qrc" >:/icons/forward.png</iconset>
+            <iconset resource="marble.qrc" >:/icons/arrow-right.png</iconset>
            </property>
           </widget>
          </item>

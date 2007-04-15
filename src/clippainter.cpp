@@ -63,7 +63,7 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
 	const QVector<QPointF>::const_iterator itStartPoint = pa.begin();
 	const QVector<QPointF>::const_iterator itEndPoint = pa.end();
 
-	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
+	for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ){
 
 		m_currentPoint = (*itPoint);
 //		qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPoint.y()" << m_currentPoint.y();
@@ -99,7 +99,7 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa ){
 		if (currentpos == 4) {
 			m_clipped << m_currentPoint;
 #ifdef MARBLE_DEBUG
-			m_debugNodeCount++;
+			++m_debugNodeCount;
 #endif
 		}
 

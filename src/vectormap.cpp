@@ -98,7 +98,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, Quater
 				} 
 //				else
 //					qDebug() << i << " Visible: NOT";
-//				i++;
+//				++i;
 			}
 	}
 //	qDebug() << "Time in PolyLine-Construction:" << timer->elapsed();
@@ -112,12 +112,12 @@ void VectorMap::createPolyLine(GeoPoint::Vector::ConstIterator itStartPoint, Geo
 //	int step = 1;
 //	int remain = size();
 
-	for ( itPoint = itStartPoint; itPoint != itEndPoint; itPoint++ ){
+	for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ){
 //		remain -= step;
 		if ( itPoint->detail() >= detail){
 // Calculate polygon nodes
 #ifdef VECMAP_DEBUG
-			m_debugNodeCount++;
+			++m_debugNodeCount;
 #endif
 			qpos = itPoint->quaternion();
 			qpos.rotateAroundAxis(m_rotMatrix);
@@ -299,7 +299,7 @@ void VectorMap::createArc(){
 //	qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((float)(m_rlimit));
 		float arcradius = sqrtf((float)(m_rlimit));
 
-		for (int it=1; it < abs(diff); it++){
+		for (int it=1; it < abs(diff); ++it){
 			float angle = M_PI/180.0 * (float)(alpha + sgndiff * it);
 			itx = (int)(imgrx +  arcradius * cosf( angle ) + 1);
 			ity = (int)(imgry +  arcradius * sinf( angle ) + 1);

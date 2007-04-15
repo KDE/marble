@@ -199,7 +199,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/back.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/arrow-left.png</iconset>
              </property>
             </widget>
            </item>
@@ -209,7 +209,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/viewmag-.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/zoom-out.png</iconset>
              </property>
             </widget>
            </item>
@@ -219,7 +219,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/up.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/arrow-up.png</iconset>
              </property>
             </widget>
            </item>
@@ -229,7 +229,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/gohome.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/go-home.png</iconset>
              </property>
             </widget>
            </item>
@@ -239,7 +239,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/down.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/arrow-down.png</iconset>
              </property>
             </widget>
            </item>
@@ -249,7 +249,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/viewmag+.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/zoom-in.png</iconset>
              </property>
             </widget>
            </item>
@@ -316,7 +316,7 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="marble.qrc" >:/icons/forward.png</iconset>
+              <iconset resource="marble.qrc" >:/icons/arrow-right.png</iconset>
              </property>
             </widget>
            </item>
