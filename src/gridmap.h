@@ -25,9 +25,9 @@ class GridMap : public ScreenPolygon::Vector
     void createTropics( const int&, Quaternion& );
     void createGrid( const int&, Quaternion& );
 
-    void paintGridMap(ClipPainter *, bool );
+    void paintGridMap(ClipPainter * painter, bool );
 
-    void resizeMap(const QPaintDevice *);
+    void resizeMap(const QPaintDevice * imageCanvas);
 
     void setPen ( const QPen & p )  { m_pen = p; }
 
@@ -36,14 +36,14 @@ class GridMap : public ScreenPolygon::Vector
  private:
     void createCircles( int lngNum, int latNum );
 
-    void createCircle( float, SphereDim, float cutcoeff = 0.0f );
+    void createCircle( float, SphereDim, float cutCoeff = 0.0f );
 
     inline void initCrossHorizon();
 
     const QPointF horizonPoint();
 
  private:
-    matrix m_rotMatrix;
+    matrix m_planetAxisMatrix;
 
     ScreenPolygon m_polygon;
 
@@ -60,9 +60,8 @@ class GridMap : public ScreenPolygon::Vector
     bool     m_lastVisible;
     bool     m_currentlyVisible;
 	
-    int      m_precision;
+    int      m_precision;       // Number of nodes on a quarter circle
     int      m_radius;          // The radius of the earth in pixels.
-    int      m_rlimit;
 };
 
 #endif // GRIDMAP_H

@@ -30,7 +30,6 @@ GridMap::GridMap()
     m_currentlyVisible = false;
 
     m_radius = 0; 
-    m_rlimit = 0;
 
     m_pen = QPen(QColor( 255, 255, 255, 128));
     m_precision = 10;
@@ -41,11 +40,11 @@ GridMap::~GridMap()
 }
 
 
-void GridMap::createTropics(const int& radius, Quaternion& rotAxis)
+void GridMap::createTropics(const int& radius, Quaternion& planetAxis)
 {
     clear();
     m_radius = radius - 1;
-    rotAxis.inverse().toMatrix( m_rotMatrix );
+    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 	
     // Turn on the major circles of latitude if we've zoomed in far enough (radius > 800
     // pixels)
@@ -58,12 +57,12 @@ void GridMap::createTropics(const int& radius, Quaternion& rotAxis)
 }
 
 
-void GridMap::createGrid(const int& radius, Quaternion& rotAxis)
+void GridMap::createGrid(const int& radius, Quaternion& planetAxis)
 {
     clear();
 
     m_radius = radius - 1;
-    rotAxis.inverse().toMatrix( m_rotMatrix );
+    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 
     //	FIXME:	- Higher precision after optimization 
     //		  ( will keep grid lines from vanishing at high zoom levels ) 
@@ -170,7 +169,7 @@ void GridMap::createCircle( float val, SphereDim dim, float cutOff )
 
             GeoPoint    geoit( lng, -lat );
             Quaternion  qpos = geoit.quaternion();
-            qpos.rotateAroundAxis(m_rotMatrix);
+            qpos.rotateAroundAxis(m_planetAxisMatrix);
 
             m_currentPoint = QPointF((float)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) +1,
                                    (float)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) +1);
@@ -264,9 +263,6 @@ const QPointF GridMap::horizonPoint()
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
-    // qDebug() << "xa:" << xa << "ya:" << ya;
-    // ya = (m_rlimit > xa*xa) ? sqrt((float)(m_rlimit) - (float)(xa*xa)) : 0;
-    // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
     if ( (m_currentPoint.y() - (m_imageHalfHeight + 1)) < 0 )
         ya = -ya; 
 
