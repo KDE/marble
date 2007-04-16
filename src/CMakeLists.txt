@@ -27,7 +27,8 @@ set(marble_SRCS
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
-           main.cpp
+           qtmain.cpp
+           QtMainWindow.cpp
            #KdeMainWindow.cpp
            texcolorizer.cpp
            TileLoader.cpp
@@ -71,6 +72,7 @@ set(marble_HDRS
            katlascontrol.h
            katlasview.h
            katlasviewinputhandler.h
+           QtMainWindow.h
            #KdeMainWindow.h
            texcolorizer.h
            TileLoader.h

@@ -1,15 +1,40 @@
+/**
+ * This file is part of the Marble Desktop Globe.
+ *
+ * Copyright (C) 2005 Torsten Rahn (rahn@kde.org)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+
+#include "TextureMapper.h"
+
 #include <cmath>
 
 #include <QtCore/QDebug>
-#include <QtGui/QColor>
 
 #include "GeoPoint.h"
 #include "GeoPolygon.h"
 #include "katlasdirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
-#include "TextureMapper.h"
 
+// Defining INTERLACE will make sure that for two subsequent scanlines
+// every second scanline will be a deep copy of the first scanline.
+// This results in a more coarse resolution and in a speedup for the 
+// texture mapping of approx. 25%.
 
 // #define INTERLACE
 
@@ -64,11 +89,14 @@ void TextureMapper::setMap( const QString& path )
 
 void TextureMapper::selectTileLevel(const int& radius)
 {
-    float  linearlevel = (float)( radius / 335.0f );
+    // As our tile resolution doubles with each level we calculate
+    // the tile level from tilesize and the globe radius via log(2)
+
+    float  linearLevel = 2.0f * (float)( radius ) / (float) ( m_tileLoader->tileWidth() );
     int    tileLevel   = 0;
 
-    if (linearlevel > 0.0f )
-        tileLevel = (int)( logf( linearlevel ) / logf( 2.0f ) ) + 1;
+    if (linearLevel > 0.0f )
+        tileLevel = (int)( logf( linearLevel ) / logf( 2.0f ) ) + 1;
 
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
@@ -80,7 +108,7 @@ void TextureMapper::selectTileLevel(const int& radius)
         tileLevelInit( tileLevel );
     }
 
-    //        qDebug() << "Texture Level was set to: " << tileLevel;
+    // qDebug() << "Texture Level was set to: " << tileLevel;
 }
 
 
@@ -294,13 +322,13 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 }
 
 
-// This method interpolates color values for skipped pixels in a scanline.
+    // This method interpolates color values for skipped pixels in a scanline.
  
-// While moving along the scanline we don't move from pixel to pixel but
-// leave out m_n pixels each time and calculate the exact position and 
-// color value for the new pixel. The pixel values in between get 
-// approximated through linear interpolation across the direct connecting 
-// line on the original tiles directly.
+    // While moving along the scanline we don't move from pixel to pixel but
+    // leave out m_n pixels each time and calculate the exact position and 
+    // color value for the new pixel. The pixel values in between get 
+    // approximated through linear interpolation across the direct connecting 
+    // line on the original tiles directly.
 
 void TextureMapper::getPixelValueApprox(const float& lng, const float& lat, 
                                         QRgb *scanLine)
@@ -330,8 +358,8 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
     else {
         stepLng = ( TWOPI - fabs(stepLng) ) * m_ninv;
 
-        // We need to distinguish two cases: crossing the dateline 
-        // from east to west and vice versa: from west to east.
+        // We need to distinguish two cases:  
+        // crossing the dateline from east to west ...
 
         if ( m_prevLng < lng ) {
             for ( int j = 1; j < m_n; ++j ) {
@@ -344,7 +372,8 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
             }
         }
 
-        // if (m_prevLng > lng)
+        // ... and vice versa: from west to east.
+
         else { 
             float curStepLng = lng - m_n*stepLng;
 
@@ -379,48 +408,52 @@ inline void TextureMapper::getPixelValue(const float& lng,
     if ( m_posX  >= m_tileLoader->tileWidth() 
          || m_posX < 0
          || m_posY >= m_tileLoader->tileHeight()
-         || m_posY < 0 )
-    {
-        // necessary to prevent e.g. crash if lng = -pi
-
-        if ( m_posX > m_fullNormLng ) m_posX = m_fullNormLng;
-        if ( m_posY > m_halfNormLat  ) m_posY = m_halfNormLat;
-
-        // The origin (0, 0) is in the upper left corner
-        // lng: 360 deg = 4320000 pixel
-        // lat: 180 deg = 2160000 pixel
-
-        int lng = m_posX  + m_tilePosX;
-        int lat = m_posY + m_tilePosY;
-
-        // tileCol counts the tile columns left from the current tile.
-        // tileRow counts the tile rows on the top from the current tile.
-
-        int tileCol = lng / m_tileLoader->tileWidth();
-        int tileRow = lat / m_tileLoader->tileHeight();
-
-        m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
-
-        // Recalculate some convenience variables for the new tile:
-        // m_tilePosX/Y stores the position of the tiles in pixels
-
-        m_tilePosX = tileCol * m_tileLoader->tileWidth();
-        m_tilePosY = tileRow * m_tileLoader->tileHeight();
-
-        m_fullNormLng = m_fullRangeLng - m_tilePosX;
-        m_halfNormLng = m_halfRangeLng - m_tilePosX;
-        m_halfNormLat = m_halfRangeLat - m_tilePosY;
-        m_quatNormLat = m_quatRangeLat - m_tilePosY;
-
-        m_posX = lng - m_tilePosX;
-        m_posY = lat - m_tilePosY;
-    }
+         || m_posY < 0 ) nextTile();
 
     // Now retrieve the color value of the requested pixel on the tile.
-    // This needs to be done differently for grayscale and color images.
+    // This needs to be done differently for grayscale ( uchar, 1 byte ).
+    // and color ( uint, 4 bytes ) images.
 
     if (m_tile->depth() == 8)
         *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
     else
         *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
 }
+
+void TextureMapper::nextTile()
+{
+    // necessary to prevent e.g. crash if lng = -pi
+
+    if ( m_posX > m_fullNormLng ) m_posX = m_fullNormLng;
+    if ( m_posY > m_halfNormLat  ) m_posY = m_halfNormLat;
+
+    // The origin (0, 0) is in the upper left corner
+    // lng: 360 deg = 4320000 pixel
+    // lat: 180 deg = 2160000 pixel
+
+    int lng = m_posX + m_tilePosX;
+    int lat = m_posY + m_tilePosY;
+
+    // tileCol counts the tile columns left from the current tile.
+    // tileRow counts the tile rows on the top from the current tile.
+
+    int tileCol = lng / m_tileLoader->tileWidth();
+    int tileRow = lat / m_tileLoader->tileHeight();
+
+    m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
+
+    // Recalculate some convenience variables for the new tile:
+    // m_tilePosX/Y stores the position of the tiles in pixels
+
+    m_tilePosX = tileCol * m_tileLoader->tileWidth();
+    m_tilePosY = tileRow * m_tileLoader->tileHeight();
+
+    m_fullNormLng = m_fullRangeLng - m_tilePosX;
+    m_halfNormLng = m_halfRangeLng - m_tilePosX;
+    m_halfNormLat = m_halfRangeLat - m_tilePosY;
+    m_quatNormLat = m_quatRangeLat - m_tilePosY;
+
+    m_posX = lng - m_tilePosX;
+    m_posY = lat - m_tilePosY;
+}
+

@@ -1,29 +1,44 @@
-//
-// C++ Interface: TileLoader
-//
-// Description: TileLoader provides elevation data from a specified file
-// (given as a QString) according to the 
-// respective input of latitude and longitude. It loads those tiles
-// necessary for the given texlevellevel and flushes the tiles on request.
-//
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2004
-//
-// Copyright: See COPYING file that comes with this distribution
-
+/**
+ * This file is part of the Marble Desktop Globe.
+ *
+ * Copyright (C) 2005 Torsten Rahn (rahn@kde.org)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
 
 #ifndef __MARBLE__TILELOADER_H
 #define __MARBLE__TILELOADER_H
 
-
 #include <QtCore/QHash>
 #include <QtCore/QString>
 
+class TextureTile;
 
 /**
-@author Torsten Rahn
-*/
-
-class TextureTile;
+ * @short Tile loading from a quad tree
+ *
+ * This class loads tiles into memory. For faster access
+ * we keep the tileIDs and their respective pointers to 
+ * the tiles in a hashtable.
+ * The class also contains convenience methods to remove entries 
+ * from the hashtable and to return more detailed properties
+ * about each tile level and their tiles.
+ *
+ * @author Torsten Rahn rahn @ kde.org
+ */
 
 class TileLoader {
  public:

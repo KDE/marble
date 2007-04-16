@@ -1,3 +1,24 @@
+/**
+ * This file is part of the Marble Desktop Globe.
+ *
+ * Copyright (C) 2005 Torsten Rahn (rahn@kde.org)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
+
 #include "TileLoader.h"
 
 #include <cmath>
@@ -59,7 +80,7 @@ void TileLoader::cleanupTilehash(){
 }
 
 void TileLoader::flush(){
-//	Remove all m_tiles from m_tileHash
+//	Remove all tiles from m_tileHash
 	QHash <int, TextureTile*>::const_iterator it;
 	for( it = m_tileHash.begin(); it != m_tileHash.constEnd(); ++it ) 
 		delete (*it);
@@ -68,11 +89,11 @@ void TileLoader::flush(){
 
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel ){
-//	Choosing the correct m_tile via Lng/Lat info 
+//	Choosing the correct tile via Lng/Lat info 
 
 	m_tileId =  (tilx *1000) + tily;
 
-	// If the m_tile hasn't been loaded into the m_tileHash yet, then do so
+	// If the tile hasn't been loaded into the m_tileHash yet, then do so
 	if (!m_tileHash.contains( m_tileId )){	
 		m_tile = new TextureTile(tilx, tily, tileLevel, m_theme);
 		m_tileHash[m_tileId] = m_tile;

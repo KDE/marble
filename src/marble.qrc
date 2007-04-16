@@ -17,5 +17,6 @@
         <file>icons/arrow-up.png</file>
         <file>icons/zoom-in.png</file>
         <file>icons/zoom-out.png</file>
+        <file>icons/application-exit.png</file>
     </qresource>
 </RCC>

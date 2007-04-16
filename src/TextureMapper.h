@@ -1,28 +1,44 @@
-//
-// C++ Interface: TextureMapper
-//
-// Description: TextureMapper 
-
-// The TextureMapper maps the textures of the tiles 
-// onto the respective projection.
-//
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2005
-//
-// Copyright: See COPYING file that comes with this distribution
-
+/**
+ * This file is part of the Marble Desktop Globe.
+ *
+ * Copyright (C) 2005 Torsten Rahn (rahn@kde.org)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; see the file COPYING.LIB.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
+ */
 
 #ifndef __MARBLE__TEXTUREMAPPER_H
 #define __MARBLE__TEXTUREMAPPER_H
 
-#include "Quaternion.h"
+#include <QtGui/QColor>
+#include <QtCore/QString>
 
-/**
-@author Torsten Rahn
-*/
+#include "Quaternion.h"
 
 class QImage;
 class TextureTile;
 class TileLoader;
+
+/**
+ * @short Texture mapping onto a sphere
+ *
+ * This class provides a fast way to map textures onto a sphere
+ * without making use of hardware acceleration. 
+ *
+ * @author Torsten Rahn rahn @ kde.org
+ */
 
 class TextureMapper
 {
@@ -32,13 +48,14 @@ class TextureMapper
 
     void setMap( const QString& path );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
-    void resizeMap(const QImage*);
-    void mapTexture(QImage*, const int&, Quaternion&);
+    void resizeMap(const QImage* canvasImage);
+    void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis);
     void selectTileLevel(const int& radius);
 
  protected:
-    void getPixelValueApprox(const float&, const float&, QRgb*);
-    void getPixelValue(const float&, const float&, QRgb*);
+    void getPixelValueApprox(const float& lng, const float& lat, QRgb* scanLine);
+    void getPixelValue(const float& lng, const float& lat, QRgb* scanLine);
+    void nextTile();
 
     void tileLevelInit( int tileLevel );
 

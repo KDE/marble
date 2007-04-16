@@ -347,12 +347,12 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>255</width>
-        <height>486</height>
+        <width>336</width>
+        <height>529</height>
        </rect>
       </property>
       <attribute name="label" >
-       <string>Topics</string>
+       <string>Map View</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="margin" >
@@ -376,14 +376,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KAtlasThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>katlasthemeselectview.h</header>
-  </customwidget>
-  <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
    <header>searchlistview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KAtlasThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>katlasthemeselectview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
