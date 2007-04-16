@@ -95,10 +95,12 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
         tilecreatordlg.exec();
 #else
 
-        connect( &tilecreator,    SIGNAL( progress( int ) ),
-                 this,            SIGNAL( creatingTilesProgress( int ) ) );
+        connect( &tilecreator, SIGNAL( progress( int ) ),
+                 this,         SIGNAL( creatingTilesProgress( int ) ) );
+        qDebug("Before emitting creatingTilesStart() ... ");
         emit creatingTilesStart( m_maptheme->name(), 
                                  m_maptheme->description() );
+        qDebug("After emitting creatingTilesStart() ... ");
 #endif
     }
 

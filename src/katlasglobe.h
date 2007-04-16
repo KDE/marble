@@ -19,12 +19,12 @@
 #include <QtGui/QPixmap>
 
 #include "Quaternion.h"
+#include "GridMap.h"
 #include "placecontainer.h"
 #include "placemarkmodel.h"
 #include "clippainter.h"
 #include "maptheme.h"
 #include "TextureMapper.h"
-#include "gridmap.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 #include "placemarkpainter.h"

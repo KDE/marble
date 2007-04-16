@@ -24,6 +24,7 @@ set(marble_SRCS
            GeoPolygon.cpp
 	   TextureTile.cpp
            TextureMapper.cpp
+           GridMap.cpp
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
@@ -54,7 +55,6 @@ set(marble_SRCS
            xmlhandler.cpp
            placemarkinfodialog.cpp
            katlasflag.cpp
-           gridmap.cpp
            tinywebbrowser.cpp
            httpfetchfile.cpp
            measuretool.cpp
@@ -68,6 +68,7 @@ set(marble_HDRS
            ScreenPolygon.h
            TextureTile.h
            TextureMapper.h
+           GridMap.h
            katlasdirs.h
            katlascontrol.h
            katlasview.h
@@ -98,7 +99,6 @@ set(marble_HDRS
            xmlhandler.h
            placemarkinfodialog.h
            katlasflag.h
-           gridmap.h
            tinywebbrowser.h
            httpfetchfile.h
            measuretool.h

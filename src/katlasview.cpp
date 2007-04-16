@@ -325,6 +325,7 @@ void KAtlasView::creatingTilesStart( QString name, QString description )
 
     // The process itself is started by a timer, so an exec() is ok here.
     m_tileCreatorDlg->exec();
+    qDebug("KAtlasView::creatingTilesStart exits... ");
 }
 
 // This slot will be called during the tile creation progress.  When

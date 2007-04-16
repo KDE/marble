@@ -1,4 +1,4 @@
-#include "gridmap.h"
+#include "GridMap.h"
 
 #include <QtCore/QVector>
 #include <QtCore/QTime>
