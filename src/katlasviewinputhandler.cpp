@@ -193,7 +193,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 		else {
 			if ( e->type() == QEvent::Wheel ){
 				QWheelEvent* wheelevt = static_cast<QWheelEvent*>(e);
-				m_gpview->zoomViewBy((int)(-wheelevt->delta()/3));
+				m_gpview->zoomViewBy((int)(wheelevt->delta()/3));
 				return TRUE;
 			}
 			else
