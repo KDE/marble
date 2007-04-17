@@ -19,6 +19,7 @@
 @author Torsten Rahn
 */
 
+
 inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 ){ return mark1->name() < mark2->name(); }
 
 class PlaceMarkModel : public QAbstractListModel {
@@ -36,8 +37,11 @@ public:
 
 	QVariant data(const QModelIndex &index, int role) const;
 	QVariant headerData(int section, Qt::Orientation orientation,
+    int role = Qt::DisplayRole) const;  
 
-	int role = Qt::DisplayRole) const;	
+    virtual QModelIndexList match ( const QModelIndex & start, int role, 
+    const QVariant & value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
+
 	void setContainer( PlaceContainer* );
 private:
 	QVector<PlaceMark*> m_placemarkindex;

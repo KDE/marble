@@ -290,6 +290,19 @@ inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, PlaceMark* ma
 	textpainter.setPen( Qt::NoPen );
 	textpainter.drawPath( outlinepath );
 	textpainter.setRenderHint(QPainter::Antialiasing, false );
+
+/*
+    // Debug stuff:
+    QString str = mark->name();
+    qDebug() << str;
+    QChar *data = str.data();
+    int len = str.length();
+    while (len != 0) {
+        qDebug() << data->unicode();
+        ++data;
+        --len;
+    }
+*/
 }
 
 bool PlaceMarkPainter::testbug(){

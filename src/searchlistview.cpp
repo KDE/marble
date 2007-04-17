@@ -25,10 +25,13 @@ void SearchListView::selectItem(QString text){
 	}
 
 	QModelIndexList resultlist;
+
 	resultlist = model()->match(model()->index(0,0),Qt::DisplayRole,text,1,Qt::MatchStartsWith);
 
-	if (resultlist.size() > 0){ 
+	if (resultlist.size() > 0){
+        scrollToBottom(); 
 		setCurrentIndex(resultlist[0]);
+        scrollTo(resultlist[0]);
 	}
 	else qDebug("noitem!");
 }

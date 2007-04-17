@@ -107,7 +107,7 @@ void PntMap::load(const QString &filename)
 
     int  filelength = statbuf.st_size;
 	
-    if ( ( src = (short*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0) )
+    if ( ( src = (short*) mmap (0, 2*filelength, PROT_READ, MAP_SHARED, fd, 0) )
          == (short*) (caddr_t) -1 )
         qDebug() << "mmap error for input";
 		
@@ -116,7 +116,9 @@ void PntMap::load(const QString &filename)
     short  lng;
     int    count = 0;
 
-    for ( int i = 0; i < (filelength >> 1); i += 3 ) {
+    const int halfFileLength = filelength / 2;
+
+    for ( int i = 0; i < halfFileLength; i += 3 ) {
         header = src[i];
         lat = src[i+1];
         lng = src[i+2];	
