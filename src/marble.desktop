@@ -3,6 +3,7 @@ Type=Application
 Encoding=UTF-8
 Exec=marble
 Name=Marble
+Name[br]=Marbrenn
 Name[el]=Μάρμαρο
 Name[nl]=Marmer
 Name[sv]=Marmor
