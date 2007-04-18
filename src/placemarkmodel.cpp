@@ -132,6 +132,10 @@ namespace GeoString {
         QString result = accentString;
         const int csize = sizeof(QChar);
 
+        // TODO: instead of doing an infinite amount of replacing, 
+        //       check whether each's letter is below 0x007b and
+        //       only if it's  
+
         for ( int i = 1; i < sizeof(similar_a)/csize; ++i )
             result.replace( similar_a[i], similar_a[0] );
 
@@ -155,19 +159,19 @@ namespace GeoString {
 
         for ( int i = 1; i < sizeof(similar_I)/csize; ++i )
             result.replace( similar_I[i], similar_I[0] );
-
+/*
         for ( int i = 1; i < sizeof(similar_n)/csize; ++i )
             result.replace( similar_n[i], similar_n[0] );
 
         for ( int i = 1; i < sizeof(similar_N)/csize; ++i )
             result.replace( similar_N[i], similar_N[0] );
-
+*/
         for ( int i = 1; i < sizeof(similar_o)/csize; ++i )
             result.replace( similar_o[i], similar_o[0] );
 
         for ( int i = 1; i < sizeof(similar_O)/csize; ++i )
             result.replace( similar_O[i], similar_O[0] );
-
+/*
         for ( int i = 1; i < sizeof(similar_s)/csize; ++i )
             result.replace( similar_s[i], similar_s[0] );
 
@@ -179,19 +183,19 @@ namespace GeoString {
 
         for ( int i = 1; i < sizeof(similar_T)/csize; ++i )
             result.replace( similar_T[i], similar_T[0] );
-
+*/
         for ( int i = 1; i < sizeof(similar_u)/csize; ++i )
             result.replace( similar_u[i], similar_u[0] );
 
         for ( int i = 1; i < sizeof(similar_U)/csize; ++i )
             result.replace( similar_U[i], similar_U[0] );
-
+/*
         for ( int i = 1; i < sizeof(similar_y)/csize; ++i )
             result.replace( similar_y[i], similar_y[0] );
 
         for ( int i = 1; i < sizeof(similar_Y)/csize; ++i )
             result.replace( similar_Y[i], similar_Y[0] );
-
+*/
         return result;
     }
 }

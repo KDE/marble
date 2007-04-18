@@ -2,9 +2,6 @@
 
 #include <QtGui/QColor>
 #include <QtCore/QString>
-#include <QtGui/QPainter>
-#include <QtGui/QGradient>
-#include <QtCore/QFile>
 
 #include <cmath>
 
