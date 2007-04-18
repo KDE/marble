@@ -49,7 +49,7 @@ void HttpFetchFile::downloadFile( QUrl url ){
 
 	emit statusMessage( tr("Downloading data from Wikipedia.") );
 
-};
+}
 
 void HttpFetchFile::cancelDownload()
 {
