@@ -14,6 +14,8 @@ ScreenPolygon.h                                 # check #include
 GeoPoint.h		GeoPoint.cpp            # check #include
 GeoPolygon.h            GeoPolygon.cpp          # check #include
 
+GridMap.h               GridMap.cpp
+vectormap.h             vectormap.cpp
 TextureTile.h		TextureTile.cpp         # check #include
 TextureMapper.h		TextureMapper.cpp       # check #include
 
@@ -29,7 +31,6 @@ katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 
 DOING
-gridmap.h               gridmap.cpp
 
 
 TODO
@@ -53,7 +54,6 @@ texcolorizer.h          texcolorizer.cpp
 TileLoader.h            TileLoader.cpp
 tilescissor.h           tilescissor.cpp
 vectorcomposer.h        vectorcomposer.cpp
-vectormap.h             vectormap.cpp
 xmlhandler.h            xmlhandler.cpp
 
 Widgets:

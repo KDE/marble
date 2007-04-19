@@ -16,56 +16,78 @@
 class PntMap;
 class ClipPainter;
 
-class VectorMap : public ScreenPolygon::Vector {
-public:
-	VectorMap();
-	~VectorMap();
-	void createFromPntMap(const PntMap*, const int&, Quaternion&);
-	void paintMap(ClipPainter *, bool );
-	void drawMap(QPaintDevice *, bool );
-	void resizeMap(const QPaintDevice *);
+class VectorMap : public ScreenPolygon::Vector
+{
+ public:
+    VectorMap();
+    ~VectorMap();
+    void createFromPntMap(const PntMap*, const int&, Quaternion&);
 
-	void setPen ( const QPen & p ){m_pen = p;}
-	void setBrush ( const QBrush & b ){m_brush = b;}
-	void setzBoundingBoxLimit ( const float zBoundingBoxLimit ) { m_zBoundingBoxLimit = zBoundingBoxLimit; }
-	void setzPointLimit ( const float zPointLimit ) { m_zPointLimit = zPointLimit; }
+    void paintMap(ClipPainter *, bool );
+    void drawMap(QPaintDevice *, bool );
 
-//	void clearNodeCount(){ m_debugNodeCount = 0; }
-//	int nodeCount(){ return m_debugNodeCount; }
+    void resizeMap(const QPaintDevice *);
 
-private:
-	GeoPoint::Vector boundary;
-	void createPolyLine(GeoPoint::Vector::ConstIterator, GeoPoint::Vector::ConstIterator, const int);
-	float m_zlimit, m_plimit;
-	float m_zBoundingBoxLimit;	
-	float m_zPointLimit;	
-//	Quaternion m_invRotAxis;
-	matrix m_rotMatrix;
+    void setPen ( const QPen & p )     { m_pen   = p; }
+    void setBrush ( const QBrush & b ) { m_brush = b; }
+    void setzBoundingBoxLimit ( const float zBoundingBoxLimit ) {
+        m_zBoundingBoxLimit = zBoundingBoxLimit; }
+    void setzPointLimit ( const float zPointLimit ) {
+        m_zPointLimit = zPointLimit; }
 
-//	int m_debugNodeCount;
+    //	void clearNodeCount(){ m_debugNodeCount = 0; }
+    //	int nodeCount(){ return m_debugNodeCount; }
 
-	ScreenPolygon m_polygon;
-	inline void initCrossHorizon();
-	void manageCrossHorizon();
-	const QPointF horizonPoint();
-	void createArc();
+ private:
+    void createPolyLine( GeoPoint::Vector::ConstIterator, 
+                         GeoPoint::Vector::ConstIterator, const int);
 
-	int imgrx, imgry, imgradius;
-	int imgwidth, imgheight;
+    inline void    initCrossHorizon();
+    void           manageCrossHorizon();
+    const QPointF  horizonPoint();
+    void           createArc();
 
-	QPointF currentPoint, lastPoint; 
+    int            getDetailLevel() const;
 
-	QPen m_pen;
-	QBrush m_brush;
-// Dealing with the horizon
-	bool firsthorizon;
-	bool lastvisible, currentlyvisible, horizonpair;
-	QPointF firstHorizonPoint, horizona, horizonb;
+ private:
+    GeoPoint::Vector  boundary;
+
+    float             m_zlimit;
+    float             m_plimit;
+    float             m_zBoundingBoxLimit;	
+    float             m_zPointLimit;	
+
+    //	Quaternion m_invRotAxis;
+    matrix            m_rotMatrix;
+
+    //	int m_debugNodeCount;
+
+    ScreenPolygon     m_polygon;
+
+    int               imgrx;
+    int               imgry;
+    int               imgradius;
+    int               imgwidth;
+    int               imgheight;
+
+    QPointF           currentPoint;
+    QPointF           lastPoint; 
+
+    QPen              m_pen;
+    QBrush            m_brush;
+
+    // Dealing with the horizon
+    bool              firsthorizon;
+    bool              lastvisible;
+    bool              currentlyvisible;
+    bool              horizonpair;
+    QPointF           firstHorizonPoint;
+    QPointF           horizona;
+    QPointF           horizonb;
 	
-	int m_radius;
-	int m_rlimit;
-
-	int getDetailLevel() const;
+    int               m_radius;
+    int               m_rlimit;
 };
+
 
 #endif // VECTORMAP_H
