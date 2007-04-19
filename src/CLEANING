@@ -16,6 +16,7 @@ GeoPolygon.h            GeoPolygon.cpp
 
 GridMap.h               GridMap.cpp
 vectormap.h             vectormap.cpp
+clippainter.h           clippainter.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
@@ -34,7 +35,6 @@ DOING
 
 
 TODO
-clippainter.h           clippainter.cpp
 httpfetchfile.h         httpfetchfile.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h

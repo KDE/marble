@@ -1,41 +1,57 @@
 #ifndef CLIPPAINTER_H
 #define CLIPPAINTER_H
 
+
 #include <QtGui/QPainter>
+
 
 /**
 @author Torsten Rahn
 */
 
-class ClipPainter : public QPainter {
-public:
-	ClipPainter();
-	ClipPainter(QPaintDevice*, bool);
-	~ClipPainter(){};
-	void drawPolygon ( const QPolygonF &, Qt::FillRule fillRule = Qt::OddEvenFill );
-	void drawPolyline ( const QPolygonF & );
+class ClipPainter : public QPainter 
+{
+ public:
+    ClipPainter();
+    ClipPainter(QPaintDevice*, bool);
+    ~ClipPainter(){};
 
-//	void clearNodeCount(){ m_debugNodeCount = 0; }
-//	int nodeCount(){ return m_debugNodeCount; }
+    void drawPolygon( const QPolygonF &, 
+                      Qt::FillRule fillRule = Qt::OddEvenFill );
+    void drawPolyline( const QPolygonF & );
 
-private:
-	void drawPolyobject ( const QPolygonF & );
+    //	void clearNodeCount(){ m_debugNodeCount = 0; }
+    //	int nodeCount(){ return m_debugNodeCount; }
 
-	bool m_clip;
-	float left, right, top, bottom;
-	int imgwidth, imgheight;
-	int currentpos, currentxpos, currentypos;
-	int lastpos;
+ private:
+    void drawPolyobject ( const QPolygonF & );
 
-//	int m_debugNodeCount;
+    void manageOffScreen();
+    const QPointF borderPoint();
 
-	void manageOffScreen();
-	const QPointF borderPoint();
+ private:
+    bool   m_clip;
 
-	QPointF m_lastBorderPoint;
-	QPointF m_currentPoint, m_lastPoint; 
-	QPolygonF m_clipped;
+    float  left;
+    float  right;
+    float  top;
+    float  bottom;
 
+    int    imgwidth;
+    int    imgheight;
+
+    int    currentpos;
+    int    currentxpos;
+    int    currentypos;
+    int    lastpos;
+
+    //	int m_debugNodeCount;
+
+    QPointF    m_lastBorderPoint;
+    QPointF    m_currentPoint;
+    QPointF    m_lastPoint; 
+
+    QPolygonF  m_clipped;
 };
 
 #endif // CLIPPAINTER_H
