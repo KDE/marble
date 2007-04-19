@@ -1,9 +1,9 @@
+#include "Quaternion.h"
+
 #include <cmath>
 
 #include <QtCore/QString>
 #include <QtCore/QDebug>
-
-#include "Quaternion.h"
 
 
 #define quatNorm (v[Q_W] * v[Q_W] + v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z])

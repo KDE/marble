@@ -19,6 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
+
 #include "TextureMapper.h"
 
 #include <cmath>
@@ -30,6 +31,7 @@
 #include "katlasdirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
+
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
 // every second scanline will be a deep copy of the first scanline.

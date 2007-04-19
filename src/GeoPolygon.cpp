@@ -9,6 +9,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
+
+#include "GeoPolygon.h"
+
 #include <stdlib.h>
 #include <fcntl.h>
 #include <cmath>
@@ -23,8 +27,6 @@
 # include <sys/stat.h>
 # include <sys/mman.h> /* mmap() is defined in this header */
 #endif
-
-#include "GeoPolygon.h"
 
 
 const float ARCMINUTE = 10800;

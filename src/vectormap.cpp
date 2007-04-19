@@ -61,7 +61,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
                      ? sqrtf(1 - (float)imgradius / (float)(m_radius * m_radius))
                      : 0.0 );
 
-    //	qDebug() << "zlimit: " << zlimit;
+    // qDebug() << "zlimit: " << zlimit;
 
     m_zBoundingBoxLimit = ( ( m_zBoundingBoxLimit >= 0
                               && zlimit < m_zBoundingBoxLimit )
@@ -74,7 +74,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     m_rlimit = (int)( (float)(m_radius * m_radius)
                       * (1.0 - m_zPointLimit * m_zPointLimit ) );
 
-    //	Quaternion qbound = ( FastMath::haveSSE() == true )? QuaternionSSE() : Quaternion();
+    // Quaternion qbound = ( FastMath::haveSSE() == true )? QuaternionSSE() : Quaternion();
 
     Quaternion  qbound;
 

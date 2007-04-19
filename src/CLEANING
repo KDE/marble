@@ -6,25 +6,25 @@ TileContainer	->	TextureTile
 
 
 DONE
-main.cpp			                # check #include
+main.cpp
 
-FastMath.h		FastMath.cpp            # check #include
-Quaternion.h		Quaternion.cpp          # check #include
-ScreenPolygon.h                                 # check #include
-GeoPoint.h		GeoPoint.cpp            # check #include
-GeoPolygon.h            GeoPolygon.cpp          # check #include
+FastMath.h		FastMath.cpp
+Quaternion.h		Quaternion.cpp
+ScreenPolygon.h
+GeoPoint.h		GeoPoint.cpp
+GeoPolygon.h            GeoPolygon.cpp
 
 GridMap.h               GridMap.cpp
 vectormap.h             vectormap.cpp
-TextureTile.h		TextureTile.cpp         # check #include
-TextureMapper.h		TextureMapper.cpp       # check #include
+TextureTile.h		TextureTile.cpp
+TextureMapper.h		TextureMapper.cpp
 
 Model/View:
-katlasglobe.h           katlasglobe.cpp         # check #include
-katlasview.h            katlasview.cpp          # check #include
+katlasglobe.h           katlasglobe.cpp
+katlasview.h            katlasview.cpp
 
 Widgets:
-katlascontrol.h         katlascontrol.cpp 	# check #include
+katlascontrol.h         katlascontrol.cpp
 
 Dialogs:
 katlastilecreatordialog.h       katlastilecreatordialog.cpp

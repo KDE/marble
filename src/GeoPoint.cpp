@@ -9,11 +9,12 @@
 //
 //
 
+
+#include "GeoPoint.h"
+
 #include <cmath>
 
 #include <QtCore/QDebug>
-
-#include "GeoPoint.h"
 
 
 const float rad2int = 21600.0 / M_PI;

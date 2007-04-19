@@ -1,3 +1,5 @@
+#include "katlasglobe.h"
+
 #include <cmath>
 
 #include <QtCore/QDebug>
@@ -5,7 +7,6 @@
 #include <QtCore/QTimer>
 
 #include "GeoPolygon.h"
-#include "katlasglobe.h"
 #include "texcolorizer.h"
 #include "TileLoader.h"
 #include "tilescissor.h"
