@@ -75,12 +75,12 @@ class TileLoader {
     TextureTile  *m_tile;
     QString       m_theme;
 
-    QHash <int, TextureTile*> m_tileHash;
-    int m_tileId;
+    QHash <int, TextureTile*>  m_tileHash;
+    int           m_tileId;
 
-    int m_tileWidth;
-    int m_tileHeight;
-
+    int           m_tileWidth;
+    int           m_tileHeight;
 };
+
 
 #endif // __MARBLE__TILELOADER_H

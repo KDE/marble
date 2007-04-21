@@ -17,6 +17,7 @@ GeoPolygon.h            GeoPolygon.cpp
 GridMap.h               GridMap.cpp
 vectormap.h             vectormap.cpp
 clippainter.h           clippainter.cpp
+TileLoader.h            TileLoader.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
@@ -51,7 +52,6 @@ placemarkmanager.h      placemarkmanager.cpp
 placemarkmodel.h        placemarkmodel.cpp
 placemarkpainter.h      placemarkpainter.cpp
 texcolorizer.h          texcolorizer.cpp
-TileLoader.h            TileLoader.cpp
 tilescissor.h           tilescissor.cpp
 vectorcomposer.h        vectorcomposer.cpp
 xmlhandler.h            xmlhandler.cpp
