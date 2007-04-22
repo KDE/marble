@@ -33,6 +33,7 @@ katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 
 DOING
+vectorcomposer.h        vectorcomposer.cpp
 
 
 TODO
@@ -53,7 +54,6 @@ placemarkmodel.h        placemarkmodel.cpp
 placemarkpainter.h      placemarkpainter.cpp
 texcolorizer.h          texcolorizer.cpp
 tilescissor.h           tilescissor.cpp
-vectorcomposer.h        vectorcomposer.cpp
 xmlhandler.h            xmlhandler.cpp
 
 Widgets:

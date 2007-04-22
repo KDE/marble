@@ -3,7 +3,8 @@
 //
 // Description: VectorComposer 
 
-// The VectorComposer maps the data stored as polylines onto the respective projection.
+// The VectorComposer maps the data stored as polylines onto the
+// respective projection.
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2005
 //
@@ -12,6 +13,7 @@
 #ifndef VECTORCOMPOSER_H
 #define VECTORCOMPOSER_H
 
+
 #include <QtGui/QBrush>
 #include <QtGui/QImage>
 #include <QtGui/QPen>
@@ -19,37 +21,47 @@
 
 #include "Quaternion.h"
 
+
 /**
 @author Torsten Rahn
 */
+
 
 class ClipPainter;
 class PntMap;
 class VectorMap;
 
-class VectorComposer {
-public:
-	VectorComposer();
-	virtual ~VectorComposer(){};
 
-	void drawTextureMap(QPaintDevice*, const int&, Quaternion&);
-	void paintVectorMap(ClipPainter*, const int&, Quaternion&);
-	void resizeMap(const QPaintDevice *);
+class VectorComposer
+{
+ public:
+    VectorComposer();
+    virtual ~VectorComposer(){};
 
-private:
-	PntMap* pcoast;
-	PntMap* pisland;
-	PntMap* plake;
-	PntMap* pglacier;
-	PntMap* priver;
-	PntMap* pborder;
-	PntMap* pusa;
+    void drawTextureMap(QPaintDevice*, const int&, Quaternion&);
+    void paintVectorMap(ClipPainter*, const int&, Quaternion&);
+    void resizeMap(const QPaintDevice *);
 
-	VectorMap* vectormap;
-	QPen m_areapen, m_riverpen, m_borderpen;
-	QBrush m_areabrush, m_lakebrush;
+ private:
+    PntMap *pcoast;
 
-	QVector<qreal> m_dashes;
+    PntMap *pisland;
+    PntMap *plake;
+    PntMap *pglacier;
+    PntMap *priver;
+
+    PntMap *pborder;            // The country borders
+    PntMap *pusa;               // The states of the USA
+
+    VectorMap  *vectormap;
+
+    QPen        m_areapen;
+    QPen        m_riverpen;
+    QPen        m_borderpen;
+    QBrush      m_areabrush;
+    QBrush      m_lakebrush;
+
+    QVector<qreal> m_dashes;
 };
 
-#endif // VECTORMAP_H
+#endif // VECTORCOMPOSER_H

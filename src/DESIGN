@@ -36,10 +36,12 @@ viewed as separate layers:
    The main class of the tiles layer is the TextureMapper, which maps
    a tiled texture onto the projected sphere.
 
- - Vectors that represent different kinds of borders, political or
-   geographical or features.  Geographical borders can be coastlines
-   or lakes, but also rivers.  Political borders are mostly countries,
-   but also the states of the USA.
+ - Vectors that represent different kinds of borders -- geographical
+   or political -- or features.  Geographical borders can be
+   coastlines, islands or lakes, but also rivers.  Political borders
+   are mostly countries, but also the states of the USA.  Special
+   features include the grid of lines that show the latitude and
+   longitude as well as the tropics and arctics.
 
    The main classes of the vectors are the GeoPolygon and the PntMap,
    which contain the actual vectors, but also a bounding box.
@@ -137,6 +139,12 @@ KAtlasGlobe	The main model.  Contains (among others):
 		 - GridMap
 		 - PlaceMarkManager
 		 - PlaceMarkModel
+
+VectorComposer	Contains coastlines, islands, lakes, glaciers, rivers
+                as well as borders for the countries and the US
+                States.  These are all stored in PntMaps, one for each
+                type.  FIXME: Change Name.
+
 KAtlasView	The view of a KAtlasGlobe.
 
 
