@@ -49,6 +49,8 @@ protected:
 	int m_leftpressedx, m_leftpressedy, m_midpressedy;
 	float m_leftpresseda, m_leftpressedb;
 
+    int m_dragThreshold;
+
 	bool eventFilter( QObject *, QEvent * );
 	QTime m_dragtimer;
 };

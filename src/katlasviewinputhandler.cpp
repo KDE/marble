@@ -34,6 +34,8 @@ KAtlasViewInputHandler::KAtlasViewInputHandler(KAtlasView *gpview, KAtlasGlobe *
 
 	m_leftpressed = false;
 	m_midpressed = false;
+
+    m_dragThreshold = 3;
 }
 
 bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
@@ -88,6 +90,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 					qDebug("check");					
 				}
 
+                // regarding mouse button presses:
 
 				if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton){
 
@@ -95,6 +98,12 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 					m_leftpressed = true;
 					m_midpressed = false;
+
+                    // On the single event of a mouse button press these 
+                    // values get stored, to enable us to e.g. calculate the 
+                    // distance of a mouse drag while the mouse button is 
+                    // still down. 
+
 					m_leftpressedx = event->x();
 					m_leftpressedy = event->y();
 
@@ -118,6 +127,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 					emit rmbRequest( event->x(), event->y() );
 				}
 
+                // regarding mouse button releases:
+
 				if ( e->type() == QEvent::MouseButtonRelease && event->button() == Qt::LeftButton){
 
 					// show menu if mouse cursor position remains unchanged
@@ -136,10 +147,15 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 				if ( e->type() == QEvent::MouseButtonRelease && event->button() == Qt::RightButton){
 				}
 
+                // regarding all kinds of mouse moves:
+
 				if (m_leftpressed == true){
 					float radius = (float)(m_globe->radius());
-					float deltax = (float)(event->x()-m_leftpressedx);
-					float deltay = (float)(event->y()-m_leftpressedy);
+					int deltax = event->x() - m_leftpressedx;
+				 	int deltay = event->y() - m_leftpressedy;
+
+                    if (abs(deltax) <= m_dragThreshold && abs(deltay) <= m_dragThreshold)
+                        return true; 
 
 					float direction = 1;
 
