@@ -1,5 +1,9 @@
+22.04.07 - ingwa
+	 First draft of the DESIGN file with headings, but lots of missing
+	 contents.
 
-22.04.07 - introducing m_dragThreshold in KAtlasInputHandler to get rid 
-           of extra repaints. murad/tackat
+22.04.07 - murad/tackat
+	 introducing m_dragThreshold in KAtlasInputHandler to get rid of
+	 extra repaints.
 
 

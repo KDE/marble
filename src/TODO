@@ -12,6 +12,9 @@ Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
  * Fix image downloading for Wikipedia					TACK
 
+Cleaning
+ * Make the ChangeLog file follow the GNU format.                       INGE
+
 
 Before the SoC projects start (0.5)
 ----------------------------------------------------------------

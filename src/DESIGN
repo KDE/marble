@@ -1,3 +1,99 @@
+This file describes the design and structure of Marble
+
+1. The main structure
+=====================
+
+Marble, the application, consists two main widgets: 
+  - a KAtlasView that contains the view of the world, and
+  - a KAtlasToolbox that controls it.
+
+The KAtlasView is a view for the model represented by the KAtlasGlobe
+class, which contains all the data necessary for manipulating and
+displaying the map.
+
+FIXME: Currently the view creates the model, but this will be changed
+       very soon.  The model/view separation is not perfect, so we are
+       working on it.  In the future, the main program will create the
+       model and then create the view and controller with a pointer to
+       the model as a parameter.  This will allow the model to have
+       several views with separate sizes, orientations and even
+       projections (flat and spherical, for instance).
+
+
+2. The World Model
+==================
+
+The model of the world consists of 3 different parts, which can be
+viewed as separate layers:
+
+ - A pixel based area that is split up into tiles.  These tiles are
+   produced from different data sources, either from satellite scans
+   or from photographs.  The tiles are stored in several different
+   resolutions that are used in different zoom levels.  The tiles are
+   automatically generated the first time that the application is
+   started, and are stored into $HOME/.marble/data/maps.
+
+   The main class of the tiles layer is the TextureMapper, which maps
+   a tiled texture onto the projected sphere.
+
+ - Vectors that represent different kinds of borders, political or
+   geographical or features.  Geographical borders can be coastlines
+   or lakes, but also rivers.  Political borders are mostly countries,
+   but also the states of the USA.
+
+   The main classes of the vectors are the GeoPolygon and the PntMap,
+   which contain the actual vectors, but also a bounding box.
+
+ - Points of interest.  These are mostly cities, but also some
+   mountains. 
+
+   The main class of the points is the PlaceMark with a somewhat
+   arbitrary selection of properties. Another important class is the
+   PlaceContainer which collects a number of PlaceMarks into a
+   container, just like the name suggests.
+
+
+2.1 The Tile System
+-------------------
+
+FIXME: To be written...
+
+
+2.2 The Vector System
+---------------------
+
+FIXME: To be written...
+
+FIXME: Explain the differences between the GeoPolygon and the
+       ScreenPolygon, and how they interact.  Also the PntMap and the
+       VectorMap.
+
+
+2.3 Placemarks
+--------------
+
+FIXME: To be written...
+
+
+3. The Painting Process
+=======================
+
+FIXME: To be written...
+
+
+4. The Basic Building Blocks
+============================
+
+Quaternions
+GeoPoint, GeoPolygon, PntMap
+ScreenPolygon, VectorMap
+
+
+5. Class Overview
+=================
+
+Here follows now a list of classes, their roles and how they interact.
+
 Basic classes
 -------------
 
@@ -29,9 +125,6 @@ PlaceMark	A point on the earth with some additional data. Can be
 		 - Description (QString)
 		 - Countrycode (QString)
 		 - View stuff (selected, labelstring, boundingbox, etc)
-
-PlaceMarkStorage Contains a name and a bool 'visible' 
-		 Not used.  FIXME.
 
 PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
 
