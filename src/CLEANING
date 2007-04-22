@@ -6,6 +6,7 @@ TileContainer	->	TextureTile
 
 
 DONE
+====
 main.cpp
 
 FastMath.h		FastMath.cpp
@@ -14,29 +15,38 @@ ScreenPolygon.h
 GeoPoint.h		GeoPoint.cpp
 GeoPolygon.h            GeoPolygon.cpp
 
-GridMap.h               GridMap.cpp
-vectormap.h             vectormap.cpp
-clippainter.h           clippainter.cpp
 TileLoader.h            TileLoader.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
+vectormap.h             vectormap.cpp
+vectorcomposer.h        vectorcomposer.cpp
+GridMap.h               GridMap.cpp
+clippainter.h           clippainter.cpp
+
+placecontainer.h        placecontainer.cpp
+
 Model/View:
+-----------
 katlasglobe.h           katlasglobe.cpp
 katlasview.h            katlasview.cpp
 
 Widgets:
+--------
 katlascontrol.h         katlascontrol.cpp
 
 Dialogs:
+--------
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 
 DOING
-vectorcomposer.h        vectorcomposer.cpp
+=====
 
 
 TODO
+====
+
 httpfetchfile.h         httpfetchfile.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
@@ -47,7 +57,6 @@ katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
-placecontainer.h        placecontainer.cpp
 placemark.h             placemark.cpp
 placemarkmanager.h      placemarkmanager.cpp
 placemarkmodel.h        placemarkmodel.cpp

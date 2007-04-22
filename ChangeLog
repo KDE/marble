@@ -1,5 +1,7 @@
 22.04.07 - ingwa
-	Cleaned vectorcomposer.{h,
+	Cleaned placecontainer.{h,cpp}
+	Cleaned vectorcomposer.{h,cpp}
+	
 22.04.07 - ingwa
 	First draft of the DESIGN file with headings, but lots of missing
 	contents.
