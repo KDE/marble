@@ -1,4 +1,5 @@
 22.04.07 - ingwa
+	Cleaned placemark.{h,cpp}
 	Cleaned placecontainer.{h,cpp}
 	Cleaned vectorcomposer.{h,cpp}
 	

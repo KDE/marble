@@ -24,6 +24,7 @@ vectorcomposer.h        vectorcomposer.cpp
 GridMap.h               GridMap.cpp
 clippainter.h           clippainter.cpp
 
+placemark.h             placemark.cpp
 placecontainer.h        placecontainer.cpp
 
 Model/View:
@@ -57,7 +58,6 @@ katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
-placemark.h             placemark.cpp
 placemarkmanager.h      placemarkmanager.cpp
 placemarkmodel.h        placemarkmodel.cpp
 placemarkpainter.h      placemarkpainter.cpp
