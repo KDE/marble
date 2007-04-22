@@ -1,9 +1,11 @@
 22.04.07 - ingwa
-	 First draft of the DESIGN file with headings, but lots of missing
-	 contents.
+	Cleaned vectorcomposer.{h,
+22.04.07 - ingwa
+	First draft of the DESIGN file with headings, but lots of missing
+	contents.
 
 22.04.07 - murad/tackat
-	 introducing m_dragThreshold in KAtlasInputHandler to get rid of
-	 extra repaints.
+	Introducing m_dragThreshold in KAtlasInputHandler to get rid of
+	extra repaints.
 
 
