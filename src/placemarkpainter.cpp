@@ -2,354 +2,391 @@
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QDebug>
-#include <QtGui/QIcon>
 #include <QtCore/QList>
-#include <QtGui/QPainter>
 #include <QtCore/QPoint>
 #include <QtCore/QVectorIterator>
+#include <QtGui/QIcon>
+#include <QtGui/QPainter>
+
 #include "placemark.h"
 #include "katlasdirs.h"
 
-static const int maxlabels = 100;
 
-PlaceMarkPainter::PlaceMarkPainter(QObject* parent) : QObject(parent) {
+static const int  maxlabels = 100;
+
+PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
+    : QObject(parent)
+{
 #ifdef Q_OS_MACX
-	m_font_mountain = QFont("Sans Serif",9, 50, false );
+    m_font_mountain = QFont( "Sans Serif",9, 50, false );
 
-	m_font_regular = QFont("Sans Serif",10, 50, false );
-	m_font_regular_italics = QFont("Sans Serif",10, 50, true );
-	m_font_regular_underline = QFont("Sans Serif",10, 50, false );
+    m_font_regular           = QFont( "Sans Serif", 10, 50, false );
+    m_font_regular_italics   = QFont( "Sans Serif", 10, 50, true );
+    m_font_regular_underline = QFont( "Sans Serif", 10, 50, false );
 #else
-	m_font_mountain = QFont("Sans Serif",7, 50, false );
+    m_font_mountain          = QFont( "Sans Serif",  7, 50, false );
 
-	m_font_regular = QFont("Sans Serif",8, 50, false );
-	m_font_regular_italics = QFont("Sans Serif",8, 50, true );
-	m_font_regular_underline = QFont("Sans Serif",8, 50, false );
+    m_font_regular           = QFont( "Sans Serif",  8, 50, false );
+    m_font_regular_italics   = QFont( "Sans Serif",  8, 50, true );
+    m_font_regular_underline = QFont( "Sans Serif",  8, 50, false );
 #endif
 
-	m_font_regular_underline.setUnderline( true );
+    m_font_regular_underline.setUnderline( true );
 
-	m_fontheight = QFontMetrics(m_font_regular).height();
-	m_fontascent = QFontMetrics(m_font_regular).ascent();
+    m_fontheight = QFontMetrics( m_font_regular ).height();
+    m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
-	m_labelareaheight = 2 * m_fontheight;
+    m_labelareaheight = 2 * m_fontheight;
 
-	m_labelcolor = QColor( 0, 0, 0, 255 );
+    m_labelcolor = QColor( 0, 0, 0, 255 );
 
-	m_weightfilter
+    m_weightfilter
+        << 9999
+        << 4200
+        << 3900
+        << 3600
 
-	 << 9999
-	 << 4200
-	 << 3900
-	 << 3600
+        << 3300
+        << 3000
+        << 2700
+        << 2400
 
-	 << 3300
-	 << 3000
-	 << 2700
-	 << 2400
+        << 2100
+        << 1800
+        << 1500
+        << 1200
 
-	 << 2100
-	 << 1800
-	 << 1500
-	 << 1200
+        << 900
+        << 400
+        << 200
+        << 0;
 
-	 << 900
-	 << 400
-	 << 200
-	 << 0;
-
-	m_useworkaround = testbug();
-//	m_useworkaround = true;
+    m_useworkaround = testbug();
+    // m_useworkaround = true;
 }
 
-void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, int imgrx, int imgry, int radius, const PlaceContainer* placecontainer, Quaternion rotAxis ){
+void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
+                                        int imgrx, int imgry,
+                                        int radius,
+                                        const PlaceContainer* placecontainer,
+                                        Quaternion rotAxis )
+{
+    int  imgwidth  = 2 * imgrx;
+    int  imgheight = 2 * imgry;
+    int  x = 0;
+    int  y = 0; 
 
-	int imgwidth = 2 * imgrx; int imgheight = 2 * imgry;
-	int x = 0; int y = 0; 
+    int  secnumber = imgheight / m_labelareaheight + 1;
+#if 0
+      if ( mark->name().contains( "London" ) ){
+      qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
+      invrotAxis.display();
+      }
+#endif
+    // rotAxis.display();
 
-	int secnumber = imgheight / m_labelareaheight + 1;
-/*
-				if ( mark->name().contains( "London" ) ){
-					qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
-					invrotAxis.display();
-				}
-*/
-//	rotAxis.display();
+    Quaternion  invRotAxis = rotAxis.inverse();
+    Quaternion  qpos;
 
-	Quaternion invRotAxis = rotAxis.inverse();
-	Quaternion qpos;
+    painter->setPen(QColor(Qt::black));	
 
-	painter->setPen(QColor(Qt::black));	
+    QPainter    textpainter;
 
-	QPainter textpainter;
+    QFont       font;
 
-	QFont font;
+    const float outlineWidth = 2.5f;
+    int         fontwidth = 0;
 
-	const float outlineWidth = 2.5f;
-	int fontwidth = 0;
+    QPixmap     textpixmap;
 
-	QPixmap textpixmap;
+    QVector< QVector< PlaceMark* > >  m_rowsection;
+    for ( int i = 0; i < secnumber; i++)
+        m_rowsection.append( QVector<PlaceMark*>( ) );
 
-	QVector < QVector < PlaceMark* > > m_rowsection;
-	for ( int i = 0; i < secnumber; i++) m_rowsection.append( QVector<PlaceMark*>( ) );
+    m_visibleplacemarks.clear();
 
-	m_visibleplacemarks.clear();
+    PlaceContainer::const_iterator  it;
+    PlaceMark  *mark = 0; 
+    int         labelnum = 0;
 
-	PlaceContainer::const_iterator it;
-	PlaceMark* mark  = 0; 
+    for ( it=placecontainer->constBegin();
+          it != placecontainer->constEnd();
+          it++ ) 
+    {
+        mark  = *it; // no cast
 
-	int labelnum = 0;
+        if ( m_weightfilter.at( mark->popidx() ) > radius
+             && mark->symbol() != 0
+             && mark-> selected() == 0 )
+            continue;
 
-	for ( it=placecontainer->constBegin(); it != placecontainer->constEnd(); it++ ){ // STL iterators
+        qpos = mark->quaternion();
 
+        qpos.rotateAroundAxis(invRotAxis);
 
-		mark  = *it; // no cast
+        textpixmap = mark->textPixmap();
 
-		if ( m_weightfilter.at(mark->popidx()) > radius && mark->symbol() != 0 && mark-> selected() == 0 ) continue; 
+        if ( qpos.v[Q_Z] > 0 ) {
 
-		qpos = mark->quaternion();
+            x = (int)(imgrx + radius * qpos.v[Q_X]);
+            y = (int)(imgry + radius * qpos.v[Q_Y]);
 
-		qpos.rotateAroundAxis(invRotAxis);
+            // Don't process placemarks if they are outside the screen area
+            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
 
-		textpixmap = mark->textPixmap();
+                // Choose Section
+                const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
 
-		if ( qpos.v[Q_Z] > 0 ){
-
-			x = (int)(imgrx + radius*qpos.v[Q_X]);
-			y = (int)(imgry + radius*qpos.v[Q_Y]);
-
-			// Don't process placemarks if they are outside the screen area
-			if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ){
-
-				// Choose Section
-				const QVector<PlaceMark*> currentsec = m_rowsection.at( y / m_labelareaheight ); 
-
-				// Specify font properties
+                // Specify font properties
 		
-				if ( textpixmap.isNull() == true ){	
+                if ( textpixmap.isNull() == true ) {
 
-					QChar role = mark->role();
+                    QChar  role = mark->role();
 
-					if ( role == 'N' ){ 
-						font = m_font_regular;
-					} else if ( role == 'R' ){ 
-						font = m_font_regular_italics;
-					} else if ( role == 'B' || mark->role() == 'C' ) {
-						font = m_font_regular_underline;
-					} else {
-						font = m_font_regular;
-					}
+                    if ( role == 'N' ) { 
+                        font = m_font_regular;
+                    } else if ( role == 'R' ) {
+                        font = m_font_regular_italics;
+                    } else if ( role == 'B' || mark->role() == 'C' ) {
+                        font = m_font_regular_underline;
+                    } else {
+                        font = m_font_regular;
+                    }
 
-					if ( mark->symbol() > 13 || mark->selected() != 0 ) font.setWeight( 75 );
+                    if ( mark->symbol() > 13 || mark->selected() != 0 )
+                        font.setWeight( 75 );
 
-					if ( role == 'P' ) 
-						font = m_font_regular;
-					if ( role == 'M' ) 
-						font = m_font_regular;
-					if ( role == 'H' ) 
-						font = m_font_mountain;
-					if ( role == 'V' ) 
-						font = m_font_mountain;
+                    if ( role == 'P' ) 
+                        font = m_font_regular;
+                    if ( role == 'M' ) 
+                        font = m_font_regular;
+                    if ( role == 'H' ) 
+                        font = m_font_mountain;
+                    if ( role == 'V' ) 
+                        font = m_font_mountain;
 
-					fontwidth = QFontMetrics(font).width(mark->name()) + (int)(outlineWidth);
-				}
-				else{
-					fontwidth = ( mark->textRect() ).width();
-				}
+                    fontwidth = ( QFontMetrics( font ).width( mark->name() )
+                                  + (int)( outlineWidth ) );
+                }
+                else{
+                    fontwidth = ( mark->textRect() ).width();
+                }
 
-				// Find out whether the area around the placemark is covered already
+                // Find out whether the area around the placemark is
+                // covered already.
 
-				bool overlap = true;
-				int symbolwidth = mark->symbolSize().width();
+                bool  overlap     = true;
+                int   symbolwidth = mark->symbolSize().width();
 
-				int xpos = symbolwidth/2 + x + 1;
-				int ypos = 0;
+                int  xpos = symbolwidth / 2 + x + 1;
+                int  ypos = 0;
 
-				while ( xpos >= x - fontwidth - symbolwidth - 1 && overlap == true ) { 
-
-					ypos = y; 
+                while ( xpos >= x - fontwidth - symbolwidth - 1
+                        && overlap == true )
+                {
+                    ypos = y; 
 	
-					while ( ypos >= y - m_fontheight && overlap == true) { 
+                    while ( ypos >= y - m_fontheight && overlap == true) { 
 
-						overlap = false;
+                        overlap = false;
 
-						QRect textRect( xpos, ypos, fontwidth, m_fontheight ); 
+                        QRect  textRect( xpos, ypos, fontwidth, m_fontheight );
 
 
-						for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin(); beforeit != currentsec.constEnd(); beforeit++ ){ // STL iterators
-							if ( textRect.intersects( (*beforeit) -> textRect()) ){
-								overlap = true;
-								break;
-							}
-						}
+                        for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+                              beforeit != currentsec.constEnd();
+                              beforeit++ )
+                        {
+                            if ( textRect.intersects( (*beforeit)->textRect()) ) {
+                                overlap = true;
+                                break;
+                            }
+                        }
 					
-						if ( overlap == false ){
-							mark->setTextRect( textRect );				
-						}
-						ypos -= m_fontheight; 
-					}
+                        if ( overlap == false ) {
+                            mark->setTextRect( textRect );
+                        }
+                        ypos -= m_fontheight; 
+                    }
 
-					xpos -= ( symbolwidth + fontwidth + 2 );
-				}
+                    xpos -= ( symbolwidth + fontwidth + 2 );
+                }
 
-				// Paint the label
-				if ( overlap == false) {
-					if ( textpixmap.isNull() == true ){					
-						// Draw the text on the label
+                // Paint the label
+                if ( overlap == false) {
+                    if ( textpixmap.isNull() == true ) {
+                        // Draw the text on the label.
 
-						// Due to some XOrg bug this requires a
-						// workaround via QImage in some cases
+                        // Due to some XOrg bug this requires a
+                        // workaround via QImage in some cases.
 
-						if ( !m_useworkaround ) {
-							textpixmap = QPixmap( fontwidth, m_fontheight );
-							textpixmap.fill(Qt::transparent);
+                        if ( !m_useworkaround ) {
+                            textpixmap = QPixmap( fontwidth, m_fontheight );
+                            textpixmap.fill(Qt::transparent);
 
-							textpainter.begin( &textpixmap );
+                            textpainter.begin( &textpixmap );
 
-							if ( mark->selected() == 0 ) {
-								textpainter.setFont(font);
-								textpainter.setPen(m_labelcolor);
-								textpainter.drawText( 0, m_fontascent, mark->name() );
-							}
-							else {
-								drawLabelText(textpainter, mark, font, outlineWidth);
-							}
+                            if ( mark->selected() == 0 ) {
+                                textpainter.setFont(font);
+                                textpainter.setPen(m_labelcolor);
+                                textpainter.drawText( 0, m_fontascent, mark->name() );
+                            }
+                            else {
+                                drawLabelText(textpainter, mark, font, outlineWidth);
+                            }
 
-							textpainter.end();
-						}
-						else {
-							QImage textimage( fontwidth, m_fontheight, QImage::Format_ARGB32_Premultiplied );
-							textimage.fill( 0 );
+                            textpainter.end();
+                        }
+                        else {
+                            QImage textimage( fontwidth, m_fontheight, QImage::Format_ARGB32_Premultiplied );
+                            textimage.fill( 0 );
 
-							textpainter.begin( &textimage );
+                            textpainter.begin( &textimage );
 
-							if ( mark->selected() == 0 ) {
-								textpainter.setFont(font);
-								textpainter.setPen(m_labelcolor);
-								textpainter.drawText( 0, m_fontascent, mark->name() );
-							}
-							else {
-								drawLabelText(textpainter, mark, font, outlineWidth);
-							}
+                            if ( mark->selected() == 0 ) {
+                                textpainter.setFont(font);
+                                textpainter.setPen(m_labelcolor);
+                                textpainter.drawText( 0, m_fontascent, mark->name() );
+                            }
+                            else {
+                                drawLabelText(textpainter, mark, font, outlineWidth);
+                            }
 
-							textpainter.end();
-							
-							textpixmap = QPixmap::fromImage( textimage );
-						}
+                            textpainter.end();
+
+                            textpixmap = QPixmap::fromImage( textimage );
+                        }
 
 
-						mark->setTextPixmap( textpixmap );
-					}
-					// Finally save the label position on the map
+                        mark->setTextPixmap( textpixmap );
+                    }
 
-					mark->setSymbolPos( QPoint( x - mark->symbolSize().width()/2, y - mark->symbolSize().height()/2) );
+                    // Finally save the label position on the map.
+                    mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
+                                                y - mark->symbolSize().height() / 2) );
 
-					// Add the current placemark to the matching row and it's
-					// direct neighbors
-					int idx = y / m_labelareaheight;
-					if ( idx - 1 >= 0 )  m_rowsection[ idx - 1 ].append( mark );
-					m_rowsection[ idx ].append( mark );
-					if ( idx + 1 < secnumber )  m_rowsection[ idx + 1 ].append( mark );
+                    // Add the current placemark to the matching row and it's
+                    // direct neighbors.
+                    int idx = y / m_labelareaheight;
+                    if ( idx - 1 >= 0 )
+                        m_rowsection[ idx - 1 ].append( mark );
+                    m_rowsection[ idx ].append( mark );
+                    if ( idx + 1 < secnumber )
+                        m_rowsection[ idx + 1 ].append( mark );
 
-					m_visibleplacemarks.append(mark);
-					labelnum ++;
-					if ( labelnum >= maxlabels ) break;				
-				}
-			}
-			else{
-				mark->clearTextPixmap();
-			}
-		}
-		else {
-			mark->clearTextPixmap();
-		}
-	}
-//	qDebug() << QString("Size: %1, Rows: %2").arg(m_visibleplacemarks.size()).arg( secnumber );
-	PlaceContainer::const_iterator visit = m_visibleplacemarks.constEnd();
+                    m_visibleplacemarks.append(mark);
+                    labelnum ++;
+                    if ( labelnum >= maxlabels )
+                        break;				
+                }
+            }
+            else{
+                mark->clearTextPixmap();
+            }
+        }
+        else {
+            mark->clearTextPixmap();
+        }
+    }
 
-	while (visit != m_visibleplacemarks.constBegin()) {
-		--visit;
-		mark = *visit;
-		painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
-		painter->drawPixmap( mark -> symbolPos(), mark -> symbolPixmap()  );
-	}
+    // qDebug() << QString("Size: %1, Rows: %2").arg(m_visibleplacemarks.size()).arg( secnumber );
+    PlaceContainer::const_iterator  visit = m_visibleplacemarks.constEnd();
+
+    while ( visit != m_visibleplacemarks.constBegin() ) {
+        --visit;
+        mark = *visit;
+        painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
+        painter->drawPixmap( mark -> symbolPos(), mark -> symbolPixmap() );
+    }
 }
-inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, PlaceMark* mark, QFont font, float outlineWidth){
 
-	QPen outlinepen( Qt::white );
-	outlinepen.setWidthF( outlineWidth );
-	QBrush outlinebrush( Qt::black );
 
-	QPainterPath outlinepath;
-	const QPointF baseline( outlineWidth/2.0f , m_fontascent );
-	outlinepath.addText( baseline, font, mark->name() );
-	textpainter.setRenderHint(QPainter::Antialiasing, true );
-	textpainter.setPen(outlinepen);
-	textpainter.setBrush(outlinebrush);
-	textpainter.drawPath( outlinepath );
-	textpainter.setPen( Qt::NoPen );
-	textpainter.drawPath( outlinepath );
-	textpainter.setRenderHint(QPainter::Antialiasing, false );
+inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, 
+                                            PlaceMark* mark, QFont font,
+                                            float outlineWidth)
+{
 
-/*
+    QPen    outlinepen( Qt::white );
+    outlinepen.setWidthF( outlineWidth );
+    QBrush  outlinebrush( Qt::black );
+
+    QPainterPath   outlinepath;
+    const QPointF  baseline( outlineWidth / 2.0f, m_fontascent );
+    outlinepath.addText( baseline, font, mark->name() );
+    textpainter.setRenderHint( QPainter::Antialiasing, true );
+    textpainter.setPen( outlinepen );
+    textpainter.setBrush( outlinebrush );
+    textpainter.drawPath( outlinepath );
+    textpainter.setPen( Qt::NoPen );
+    textpainter.drawPath( outlinepath );
+    textpainter.setRenderHint( QPainter::Antialiasing, false );
+
+#if 0
     // Debug stuff:
     QString str = mark->name();
     qDebug() << str;
     QChar *data = str.data();
     int len = str.length();
     while (len != 0) {
-        qDebug() << data->unicode();
-        ++data;
-        --len;
+    qDebug() << data->unicode();
+    ++data;
+    --len;
     }
-*/
+#endif
 }
 
-bool PlaceMarkPainter::testbug(){
+bool PlaceMarkPainter::testbug()
+{
+    QString  testchar( "K" );
+    QFont    font( "Sans Serif", 10 );
 
-	QString testchar("K");
-	QFont font("Sans Serif",10);
+    int fontheight = QFontMetrics( font ).height();
+    int fontwidth  = QFontMetrics( font ).width(testchar);
+    int fontascent = QFontMetrics( font ).ascent();
 
-	int fontheight = QFontMetrics(font).height();
-	int fontwidth = QFontMetrics(font).width(testchar);
-	int fontascent = QFontMetrics(font).ascent();
+    QPixmap  pixmap( fontwidth, fontheight );
+    pixmap.fill( Qt::transparent );
 
-	QPixmap pixmap ( fontwidth, fontheight );
-	pixmap.fill(Qt::transparent);
+    QPainter textpainter;
+    textpainter.begin( &pixmap );
+    textpainter.setPen( QColor( 0, 0, 0, 255 ) );
+    textpainter.setFont( font );
+    textpainter.drawText( 0, fontascent, testchar );
+    textpainter.end();
 
-	QPainter textpainter;
-	textpainter.begin(&pixmap);
-		textpainter.setPen( QColor(0,0,0,255) );
-		textpainter.setFont( font );
-		textpainter.drawText( 0, fontascent, testchar );
-	textpainter.end();
+    QImage image = pixmap.toImage();
 
-	QImage image = pixmap.toImage();
+    for ( int x = 0; x < fontwidth; x++ )
+        for ( int y = 0; y < fontheight; y++ ) {
+            if ( qAlpha( image.pixel( x,y ) ) > 0 )
+                return false;
+        }
 
-	for (int x = 0; x < fontwidth; x++)
-		for (int y = 0; y < fontheight; y++){
-			if ( qAlpha( image.pixel( x,y ) ) > 0 ) return false;
-		}
-
-	return true;
+    return true;
 }
 
-QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ){
 
-	QVector<PlaceMark*> ret;
+QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
+{
+    QVector<PlaceMark*>             ret;
 
-	PlaceContainer::const_iterator it;
+    PlaceContainer::const_iterator  it;
 
-	for ( it = m_visibleplacemarks.constBegin(); it != m_visibleplacemarks.constEnd(); it++ ){ // STL iterators
-		PlaceMark* mark  = *it; // no cast
+    for ( it = m_visibleplacemarks.constBegin();
+          it != m_visibleplacemarks.constEnd();
+          it++ )
+    {
+        PlaceMark  *mark = *it; // no cast
 
-		if ( mark->textRect().contains( curpos ) || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ){
-			ret.append( mark );
-		}
-	}
+        if ( mark->textRect().contains( curpos )
+             || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ) {
+            ret.append( mark );
+        }
+    }
 
-	return ret;
+    return ret;
 }
+
 
 #ifndef Q_OS_MACX
 #include "placemarkpainter.moc"
