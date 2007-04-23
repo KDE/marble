@@ -26,6 +26,7 @@ clippainter.h           clippainter.cpp
 
 placemark.h             placemark.cpp
 placecontainer.h        placecontainer.cpp
+placemarkpainter.h      placemarkpainter.cpp
 placemarkmanager.h      placemarkmanager.cpp
 
 Model/View:
@@ -60,7 +61,6 @@ katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
 placemarkmodel.h        placemarkmodel.cpp
-placemarkpainter.h      placemarkpainter.cpp
 texcolorizer.h          texcolorizer.cpp
 tilescissor.h           tilescissor.cpp
 xmlhandler.h            xmlhandler.cpp

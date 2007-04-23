@@ -1,4 +1,5 @@
 23.04.07 - ingwa
+	Cleaned placemarkpainter.{h,cpp}
 	Cleaned placemarkmanager.{h,cpp}
 	
 22.04.07 - ingwa
@@ -13,5 +14,3 @@
 22.04.07 - murad/tackat
 	Introducing m_dragThreshold in KAtlasInputHandler to get rid of
 	extra repaints.
-
-

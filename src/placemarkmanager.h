@@ -36,11 +36,12 @@ class PlaceMarkManager
     void loadKml( QString );
 
  protected:
-    PlaceContainer  *m_placecontainer;
-
     void importKml( QString, PlaceContainer* );
     void saveFile( QString, PlaceContainer* );
     bool loadFile( QString, PlaceContainer* );
+
+ protected:
+    PlaceContainer  *m_placecontainer;
 };
 
 #endif // PLACEMARKMANAGER_H
