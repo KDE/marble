@@ -7,33 +7,40 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef PLACEMARKMANAGER_H
 #define PLACEMARKMANAGER_H
 
+
 #include "placecontainer.h"
 #include "katlasdirs.h"
+
 
 /**
 @author Torsten Rahn
 */
 
-class PlaceMarkManager {
-public:
-	PlaceMarkManager();
-	~PlaceMarkManager(){};
+class PlaceMarkManager
+{
+ public:
+    PlaceMarkManager();
+    ~PlaceMarkManager(){};
 
-	void addPlaceMarkFile( QString );
+    void addPlaceMarkFile( QString );
 
-	PlaceContainer* getPlaceContainer(){ m_placecontainer->sort(); return m_placecontainer; }
+    PlaceContainer* getPlaceContainer() {
+        m_placecontainer->sort();
+        return m_placecontainer;
+    }
 
-	void loadKml( QString );
+    void loadKml( QString );
 
-protected:
-	PlaceContainer* m_placecontainer;
+ protected:
+    PlaceContainer  *m_placecontainer;
 
-	void importKml( QString, PlaceContainer* );
-	void saveFile( QString, PlaceContainer* );
-	bool loadFile( QString, PlaceContainer* );
+    void importKml( QString, PlaceContainer* );
+    void saveFile( QString, PlaceContainer* );
+    bool loadFile( QString, PlaceContainer* );
 };
 
 #endif // PLACEMARKMANAGER_H

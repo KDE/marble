@@ -1,3 +1,6 @@
+23.04.07 - ingwa
+	Cleaned placemarkmanager.{h,cpp}
+	
 22.04.07 - ingwa
 	Cleaned placemark.{h,cpp}
 	Cleaned placecontainer.{h,cpp}
