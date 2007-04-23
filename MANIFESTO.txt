@@ -33,7 +33,7 @@ free desktop has been advancing since years already.  And while
 there's a pretty large amount of free software GIS ("Geographical
 Information System") applications available [3] they are mostly
 targeted at advanced users who deal with geo data during their daytime
-jobs or as a matter of enthusiasm.  However most people out there
+jobs or as a matter of enthusiasm.  However, most people out there
 aren't cartographers and don't want to be.  These people expect a
 simple and clean task-oriented interface that adheres to the map
 layout standards that decades of cartography have developed to improve
@@ -41,7 +41,7 @@ ease of use of maps.
 
 So for casual users there is still missing a fast, flexible, visually
 pleasing and easy to use map component.  For developers, marble offers
-a light-weight, fast, cross plattform map component that can be used
+a light-weight, fast, cross platform map component that can be used
 online as well as offline with meaningful results and that don't
 require proprietary webservices.
 
