@@ -9,10 +9,13 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef PLACEMARKMODEL_H
 #define PLACEMARKMODEL_H
 
+
 #include <QtCore/QAbstractListModel>
+
 #include "placecontainer.h"
 
 /**
@@ -20,31 +23,38 @@
 */
 
 
-inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 ){ return mark1->name() < mark2->name(); }
+inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
+{
+    return mark1->name() < mark2->name();
+}
 
-class PlaceMarkModel : public QAbstractListModel {
 
-Q_OBJECT
+class PlaceMarkModel : public QAbstractListModel
+{
+    Q_OBJECT
 
-public:
-	PlaceMarkModel(QObject *parent = 0);
-	~PlaceMarkModel();
+ public:
+    PlaceMarkModel(QObject *parent = 0);
+    ~PlaceMarkModel();
 	
-	int rowCount(const QModelIndex &parent = QModelIndex()) const;
-	int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    int  rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int  columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-	PlaceMark* placeMark(const QModelIndex &index) const;
+    PlaceMark* placeMark(const QModelIndex &index) const;
 
-	QVariant data(const QModelIndex &index, int role) const;
-	QVariant headerData(int section, Qt::Orientation orientation,
-    int role = Qt::DisplayRole) const;  
+    QVariant data(const QModelIndex &index, int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation,
+                        int role = Qt::DisplayRole) const;  
 
     virtual QModelIndexList match ( const QModelIndex & start, int role, 
-    const QVariant & value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
+                                    const QVariant & value, int hits = 1,
+                                    Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
-	void setContainer( PlaceContainer* );
-private:
-	QVector<PlaceMark*> m_placemarkindex;
+    void setContainer( PlaceContainer* );
+
+ private:
+    QVector<PlaceMark*> m_placemarkindex;
 };
+
 
 #endif // PLACEMARKMODEL_H

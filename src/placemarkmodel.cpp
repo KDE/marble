@@ -1,17 +1,20 @@
 #include "placemarkmodel.h"
 
 #include <cmath>
-#include "katlasdirs.h"
+
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtCore/QModelIndex>
-#include <QtGui/QIcon>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
-
+#include <QtGui/QIcon>
 #include <QtGui/QMessageBox>
 
-namespace GeoString {
+#include "katlasdirs.h"
+
+
+namespace GeoString
+{
 
     static const QChar similar_a[] = {
         // a, à, á, â, ã, ä, å, æ
@@ -127,10 +130,10 @@ namespace GeoString {
         0x0176, 0x0178                                                 // Table 1
     };
 
-    QString deaccent( const QString& accentString ){
-
-        QString result = accentString;
-        const int csize = sizeof(QChar);
+    QString deaccent( const QString& accentString )
+    {
+        QString    result = accentString;
+        const int  csize  = sizeof(QChar);
 
         // TODO: instead of doing an infinite amount of replacing, 
         //       check whether each's letter is below 0x007b and
@@ -159,19 +162,19 @@ namespace GeoString {
 
         for ( int i = 1; i < sizeof(similar_I)/csize; ++i )
             result.replace( similar_I[i], similar_I[0] );
-/*
-        for ( int i = 1; i < sizeof(similar_n)/csize; ++i )
-            result.replace( similar_n[i], similar_n[0] );
+        /*
+          for ( int i = 1; i < sizeof(similar_n)/csize; ++i )
+          result.replace( similar_n[i], similar_n[0] );
 
-        for ( int i = 1; i < sizeof(similar_N)/csize; ++i )
-            result.replace( similar_N[i], similar_N[0] );
-*/
+          for ( int i = 1; i < sizeof(similar_N)/csize; ++i )
+          result.replace( similar_N[i], similar_N[0] );
+        */
         for ( int i = 1; i < sizeof(similar_o)/csize; ++i )
             result.replace( similar_o[i], similar_o[0] );
 
         for ( int i = 1; i < sizeof(similar_O)/csize; ++i )
             result.replace( similar_O[i], similar_O[0] );
-/*
+#if 0
         for ( int i = 1; i < sizeof(similar_s)/csize; ++i )
             result.replace( similar_s[i], similar_s[0] );
 
@@ -183,110 +186,117 @@ namespace GeoString {
 
         for ( int i = 1; i < sizeof(similar_T)/csize; ++i )
             result.replace( similar_T[i], similar_T[0] );
-*/
+#endif
         for ( int i = 1; i < sizeof(similar_u)/csize; ++i )
             result.replace( similar_u[i], similar_u[0] );
 
         for ( int i = 1; i < sizeof(similar_U)/csize; ++i )
             result.replace( similar_U[i], similar_U[0] );
-/*
+#if 0
         for ( int i = 1; i < sizeof(similar_y)/csize; ++i )
             result.replace( similar_y[i], similar_y[0] );
 
         for ( int i = 1; i < sizeof(similar_Y)/csize; ++i )
             result.replace( similar_Y[i], similar_Y[0] );
-*/
+#endif
         return result;
     }
 }
 
-PlaceMarkModel::PlaceMarkModel(QObject *parent) : QAbstractListModel(parent){
+
+PlaceMarkModel::PlaceMarkModel(QObject *parent)
+    : QAbstractListModel(parent)
+{
 }
 
 PlaceMarkModel::~PlaceMarkModel(){
 }
 
-int PlaceMarkModel::rowCount(const QModelIndex &parent) const {
-	return m_placemarkindex.size();
+
+int PlaceMarkModel::rowCount(const QModelIndex &parent) const
+{
+    return m_placemarkindex.size();
 }
 
-int PlaceMarkModel::columnCount(const QModelIndex &parent) const {
-	return 1;
+int PlaceMarkModel::columnCount(const QModelIndex &parent) const
+{
+    return 1;
 }
 
-PlaceMark* PlaceMarkModel::placeMark(const QModelIndex &index) const {
-	if (!index.isValid())
-		return 0;
+PlaceMark* PlaceMarkModel::placeMark(const QModelIndex &index) const
+{
+    if ( !index.isValid() )
+        return 0;
 
-	if (index.row() >= m_placemarkindex.size())
-		return 0;
+    if ( index.row() >= m_placemarkindex.size() )
+        return 0;
 
-	return m_placemarkindex.at(index.row());
+    return m_placemarkindex.at( index.row() );
 }
 
-QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const {
-	if (!index.isValid())
+QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const
+{
+    if ( !index.isValid() )
 	return QVariant();
 
-	if (index.row() >= m_placemarkindex.size())
-		return QVariant();
+    if ( index.row() >= m_placemarkindex.size() )
+        return QVariant();
 
-	if (role == Qt::DisplayRole){
-		return m_placemarkindex.at(index.row())->name();
-	}
-	if (role == Qt::DecorationRole){
-		return m_placemarkindex.at(index.row())->symbolPixmap();
-	}
-	else
-		return QVariant();
+    if ( role == Qt::DisplayRole ) {
+        return m_placemarkindex.at( index.row() )->name();
+    }
+    if ( role == Qt::DecorationRole ) {
+        return m_placemarkindex.at( index.row() )->symbolPixmap();
+    }
+    else
+        return QVariant();
 }
 
 QVariant PlaceMarkModel::headerData(int section, Qt::Orientation orientation,
-                                      int role) const
+                                    int role) const
 {
-	if (role != Qt::DisplayRole)
-		return QVariant();
+    if ( role != Qt::DisplayRole )
+        return QVariant();
 
-	if (orientation == Qt::Horizontal)
-		return QString("Column %1").arg(section);
-	else
-		return QString("Row %1").arg(section);
+    if ( orientation == Qt::Horizontal )
+        return QString( "Column %1" ).arg( section );
+    else
+        return QString( "Row %1" ).arg( section );
 }
 
-void PlaceMarkModel::setContainer(PlaceContainer* container){
+void PlaceMarkModel::setContainer(PlaceContainer* container)
+{
+    PlaceContainer::const_iterator  it;
 
-	PlaceContainer::const_iterator it;
-
-	for ( it=container->constBegin(); it != container->constEnd(); it++ ){ // STL iterators
-		m_placemarkindex << *it;
-	}
-	qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
+    for ( it=container->constBegin(); it != container->constEnd(); it++ ) {
+        m_placemarkindex << *it;
+    }
+    qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
 }
 
-QModelIndexList PlaceMarkModel::match ( const QModelIndex & start, int role, 
-    const QVariant & value, int hits, Qt::MatchFlags flags ) const
+QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role, 
+                                       const QVariant & value, int hits,
+                                       Qt::MatchFlags flags ) const
 {
     QList<QModelIndex> results;
 
-    int count = 0;
-    QString listName;
-    QString queryString;
-    QString simplifiedListName;
-    int row = start.row();
+    int      count = 0;
+    QString  listName;
+    QString  queryString;
+    QString  simplifiedListName;
+    int      row = start.row();
 
-    while ( row < rowCount() && count != hits )
-    {
-        if ( flags & Qt::MatchStartsWith )
-        {
-            listName = data(index( row, 0 ), role).toString();
+    while ( row < rowCount() && count != hits ) {
+        if ( flags & Qt::MatchStartsWith ) {
+            listName    = data(index( row, 0 ), role).toString();
             queryString = value.toString();
             simplifiedListName = GeoString::deaccent(listName);
 
             if ( listName.startsWith( queryString ) 
-                || listName.remove(QChar('\''), Qt::CaseSensitive).startsWith( queryString )
-                || listName.replace(QChar('-'), QChar(' ')).startsWith( queryString )
-                || GeoString::deaccent(simplifiedListName).startsWith( queryString )
-            )
+                 || listName.remove( QChar('\''), Qt::CaseSensitive ).startsWith( queryString )
+                 || listName.replace( QChar('-'), QChar(' ') ).startsWith( queryString )
+                 || GeoString::deaccent( simplifiedListName ).startsWith( queryString )
+                 )
             {
                 results << index( row, 0 );
 
@@ -299,6 +309,7 @@ QModelIndexList PlaceMarkModel::match ( const QModelIndex & start, int role,
 
     return results;
 }
+
 
 #ifndef Q_OS_MACX
 #include "placemarkmodel.moc"

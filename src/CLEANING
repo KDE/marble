@@ -45,6 +45,7 @@ katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 DOING
 =====
+placemarkmodel.h        placemarkmodel.cpp
 
 
 TODO
@@ -60,7 +61,6 @@ katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
-placemarkmodel.h        placemarkmodel.cpp
 texcolorizer.h          texcolorizer.cpp
 tilescissor.h           tilescissor.cpp
 xmlhandler.h            xmlhandler.cpp
