@@ -125,8 +125,8 @@ void GridMap::createCircles( const int lngNum, const int latNum )
 
     for ( int i = 1; i < lngNum; ++i ) {
         float cutOff = PIHALF / (float)(latNum);
-        createCircle( + (float)(i) * PIHALF / (float)(lngNum), Longitude, cutOff );
-        createCircle( + (float)(i) * PIHALF / (float)(lngNum) + PIHALF, Longitude, cutOff );	
+        createCircle( i * PIHALF / lngNum,          Longitude, cutOff );
+        createCircle( i * PIHALF / lngNum + PIHALF, Longitude, cutOff );	
     }
 }
 
@@ -197,10 +197,9 @@ void GridMap::createCircle( float val, SphereDim dim, float cutOff )
                     break;
             }
 
-            //	Take care of screencrossing crossings if horizon is
-            //	visible Filter Points which aren't on the visible
-            //	hemisphere
-            if ( m_currentlyVisible == true && m_currentPoint != m_lastPoint ) {
+            // Take care of screencrossing crossings if horizon is visible.
+            // Filter points which aren't on the visible hemisphere.
+            if ( m_currentlyVisible && m_currentPoint != m_lastPoint ) {
                 // most recent addition: m_currentPoint != m_lastPoint
                 //			qDebug("accepted");
                 m_polygon << m_currentPoint;
@@ -246,7 +245,8 @@ void GridMap::initCrossHorizon()
     m_lastVisible = m_currentlyVisible;
 
     // Initially m_lastPoint MUST NOT equal m_currentPoint
-    m_lastPoint = QPointF( m_currentPoint.x() + 1.0f, m_currentPoint.y() + 1.0f );
+    m_lastPoint = QPointF( m_currentPoint.x() + 1.0f, 
+                           m_currentPoint.y() + 1.0f );
 }
 
 
@@ -263,10 +263,11 @@ const QPointF GridMap::horizonPoint()
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
-    if ( (m_currentPoint.y() - (m_imageHalfHeight + 1)) < 0 )
+    if ( ( m_currentPoint.y() - ( m_imageHalfHeight + 1 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF((float)m_imageHalfWidth + xa + 1, (float)m_imageHalfHeight + ya + 1); 
+    return QPointF( (float)m_imageHalfWidth  + xa + 1,
+                    (float)m_imageHalfHeight + ya + 1 );
 }
 
 
@@ -275,5 +276,6 @@ void GridMap::resizeMap(const QPaintDevice * imageCanvas)
 {
     m_imageHalfWidth  = imageCanvas -> width() / 2;
     m_imageHalfHeight = imageCanvas -> height() / 2;
-    m_imageRadius     = m_imageHalfWidth * m_imageHalfWidth + m_imageHalfHeight * m_imageHalfHeight;
+    m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
+                          + m_imageHalfHeight * m_imageHalfHeight );
 }

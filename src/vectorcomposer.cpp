@@ -55,7 +55,6 @@ VectorComposer::VectorComposer()
 void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius, 
                                     Quaternion& rotAxis)
 {
-
     //	vectormap -> clearNodeCount();
 
     // Coastlines

@@ -137,6 +137,7 @@ Model / View
 KAtlasGlobe	The main model.  Contains (among others):
 		 - MapTheme
 		 - GridMap
+                 - VectorComposer
 		 - PlaceMarkManager
 		 - PlaceMarkModel
 
@@ -173,7 +174,6 @@ class KAtlasViewPopupMenu;
 class KAtlasWindRose : public QObject {
 class KAtlasXmlHandler : public QXmlDefaultHandler {
 class MapTheme : public QObject
-class MeasureTool : public QObject {
 class MeasureTool;
 class PlaceFolder : public QVector<PlaceMark*> {
 class PlaceMarkInfoDialog: public Ui_PlaceMarkInfoDialog {};
@@ -183,7 +183,6 @@ class PlaceMarkPainter : public QObject {
 class QAbstractItemModel;
 class QMenu;
 class QStandardItemModel;
-class QuaternionSSE : public Quaternion {
 class SearchComboBox : public QComboBox {
 class SearchListView : public QListView {
 class TextureColorizer;
@@ -192,6 +191,10 @@ class TextureMapper {
 class TextureTile;
 class TileScissor : public QObject {
 class TinyWebBrowser : public QTextBrowser {
-class VectorComposer {
 class katlasAboutDialog: public Ui_katlasAboutDialog {};
 class katlasToolBox: public Ui_katlasToolBox {};
+
+Never mind
+----------
+
+class QuaternionSSE

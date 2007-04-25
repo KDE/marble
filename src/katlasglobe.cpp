@@ -88,6 +88,9 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
         TileScissor tilecreator( m_maptheme->prefix(),
                                  m_maptheme->installMap(), 
                                  m_maptheme->bitmaplayer().dem);
+
+        // This timer is necessary, because if we remove it, the GUI
+        // never gets shown before the work starts.
         QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
 #if 1
         connect( &tilecreator,    SIGNAL( progress( int ) ),
@@ -175,18 +178,18 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty)
     }
 
     // Paint Map on Widget
-    painter->drawImage(dirty, *m_canvasimg, dirty); 
+    painter->drawImage( dirty, *m_canvasimg, dirty ); 
 
     if ( m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
-        veccomposer->paintVectorMap(painter, m_radius, m_pPlanetAxis);
+        veccomposer->paintVectorMap( painter, m_radius, m_pPlanetAxis );
     }
 
     // if ( m_maptheme->vectorlayer().enabled == true ){
     QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    gridmap->createGrid(m_radius,m_pPlanetAxis);
+    gridmap->createGrid( m_radius, m_pPlanetAxis );
 
     gridmap->setPen( gridpen );
     gridmap->paintGridMap( painter, true );

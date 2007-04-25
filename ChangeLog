@@ -1,4 +1,9 @@
+25.04.07 - ingwa
+	Lots of small cleaning
+	Cleaned placemarkmodel.{h,cpp}
+
 23.04.07 - ingwa
+	Fixed typo in MANIFESTO.txt
 	Cleaned placemarkpainter.{h,cpp}
 	Cleaned placemarkmanager.{h,cpp}
 	
