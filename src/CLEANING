@@ -16,6 +16,7 @@ GeoPoint.h		GeoPoint.cpp
 GeoPolygon.h            GeoPolygon.cpp
 
 TileLoader.h            TileLoader.cpp
+tilescissor.h           tilescissor.cpp
 TextureTile.h		TextureTile.cpp
 TextureMapper.h		TextureMapper.cpp
 
@@ -28,6 +29,7 @@ placemark.h             placemark.cpp
 placecontainer.h        placecontainer.cpp
 placemarkpainter.h      placemarkpainter.cpp
 placemarkmanager.h      placemarkmanager.cpp
+placemarkmodel.h        placemarkmodel.cpp
 
 Model/View:
 -----------
@@ -45,7 +47,6 @@ katlastilecreatordialog.h       katlastilecreatordialog.cpp
 
 DOING
 =====
-placemarkmodel.h        placemarkmodel.cpp
 
 
 TODO
@@ -62,7 +63,6 @@ katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
 texcolorizer.h          texcolorizer.cpp
-tilescissor.h           tilescissor.cpp
 xmlhandler.h            xmlhandler.cpp
 
 Widgets:

@@ -8,29 +8,39 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef TILESCISSOR_H
 #define TILESCISSOR_H
 
+
 #include <QtCore/QObject>
 #include <QtCore/QString>
+
 
 /**
 @author Torsten Rahn
 */
 
-class TileScissor : public QObject {
-	Q_OBJECT
-public: 
-	TileScissor( const QString& prefix, const QString& installmap, const QString& dem );
 
-signals:
-	void progress( int value );
-public slots:
-	void createTiles();
+class TileScissor : public QObject
+{
+    Q_OBJECT
 
-private:
-	QString m_prefix, m_installmap, m_dem;
+ public: 
+    TileScissor( const QString& prefix, const QString& installmap, 
+                 const QString& dem );
 
+ signals:
+    void  progress( int value );
+
+ public slots:
+    void  createTiles();
+
+ private:
+    QString  m_prefix;
+    QString  m_installmap;
+    QString  m_dem;
 };
+
 
 #endif
