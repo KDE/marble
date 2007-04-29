@@ -9,53 +9,68 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef MEASURETOOL_H
 #define MEASURETOOL_H
 
-#include <QtGui/QFont>
+
 #include <QtCore/QVector>
+#include <QtGui/QFont>
+
 
 #include "GeoPoint.h"
 #include "placemark.h"
 #include "clippainter.h"
 
+
 /**
 @author Torsten Rahn
 */
 
-class MeasureTool : public QObject {
 
-Q_OBJECT
+class MeasureTool : public QObject
+{
+    Q_OBJECT
 
-public:
-	MeasureTool(QObject *parent = 0);
-	void paintMeasurePoints(ClipPainter*, int, int, int, Quaternion, bool );
-	void setLineColor(QColor linecolor){ m_linecolor = linecolor;}
-	void paintTotalDistanceLabel(ClipPainter*, int, int, float );
+ public:
+    MeasureTool( QObject *parent = 0 );
 
-public slots:
-	void addMeasurePoint( float lng, float lat ){ m_pMeasurePointList << new GeoPoint( lng, lat );}
-	void removeMeasurePoints(){ m_pMeasurePointList.clear(); }
+    void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool );
+    void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
+    void  paintTotalDistanceLabel( ClipPainter*, int, int, float );
 
-protected:
-	float m_totalDistance;
+ public slots:
+    void addMeasurePoint( float lng, float lat ) {
+        m_pMeasurePointList << new GeoPoint( lng, lat );
+    }
+    void removeMeasurePoints() {
+        m_pMeasurePointList.clear();
+    }
 
-	QFont m_font_regular;
-	int m_fontheight, m_fontascent;
+ protected:
+    bool  testbug(); 
+    void  paintMark( ClipPainter* painter, int x, int y );
+    void  drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
+                            int imgrx, int imgry, int radius, 
+                            bool antialiasing );
 
-	QColor m_linecolor;
+ protected:
+    float   m_totalDistance;
 
-	QVector<GeoPoint*> m_pMeasurePointList;
+    QFont   m_font_regular;
+    int     m_fontheight;
+    int     m_fontascent;
 
-	QPen m_pen;
+    QColor  m_linecolor;
 
-	QPixmap m_empty;
+    QVector<GeoPoint*>  m_pMeasurePointList;
 
-	bool testbug(); 
-	bool m_useworkaround;
+    QPen    m_pen;
 
-	void paintMark( ClipPainter* painter, int x, int y );
-	void drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, int imgrx, int imgry, int radius, bool antialiasing );
+    QPixmap m_empty;
+
+    bool    m_useworkaround;
 };
+
 
 #endif // MEASURETOOL_H

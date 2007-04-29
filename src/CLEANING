@@ -51,6 +51,7 @@ Items on the widget (QObjects):
 katlascrosshair.h       katlascrosshair.cpp
 katlaswindrose.h        katlaswindrose.cpp
 katlasmapscale.h        katlasmapscale.cpp
+measuretool.h           measuretool.cpp
 
 
 DOING
@@ -68,7 +69,6 @@ katlasthemeselectview.h katlasthemeselectview.cpp
 katlastoolbox.h         katlastoolbox.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
-measuretool.h           measuretool.cpp
 texcolorizer.h          texcolorizer.cpp
 xmlhandler.h            xmlhandler.cpp
 
