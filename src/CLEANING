@@ -15,6 +15,7 @@ ScreenPolygon.h
 GeoPoint.h		GeoPoint.cpp
 GeoPolygon.h            GeoPolygon.cpp
 
+maptheme.h              maptheme.cpp
 TileLoader.h            TileLoader.cpp
 tilescissor.h           tilescissor.cpp
 TextureTile.h		TextureTile.cpp
@@ -60,7 +61,6 @@ katlasthemeselectview.h katlasthemeselectview.cpp
 katlastoolbox.h         katlastoolbox.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
-maptheme.h              maptheme.cpp
 measuretool.h           measuretool.cpp
 texcolorizer.h          texcolorizer.cpp
 xmlhandler.h            xmlhandler.cpp
