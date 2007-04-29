@@ -44,6 +44,7 @@ katlascontrol.h         katlascontrol.cpp
 Dialogs:
 --------
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
+placemarkinfodialog.h   placemarkinfodialog.cpp
 
 
 DOING
@@ -69,9 +70,6 @@ Widgets:
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
-
-Dialogs:
-placemarkinfodialog.h   placemarkinfodialog.cpp
 
 Items on the widget (QObjects):
 katlascrosshair.h       katlascrosshair.cpp
