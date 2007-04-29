@@ -37,14 +37,18 @@ Model/View:
 katlasglobe.h           katlasglobe.cpp
 katlasview.h            katlasview.cpp
 
-Widgets:
---------
-katlascontrol.h         katlascontrol.cpp
-
 Dialogs:
 --------
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
 placemarkinfodialog.h   placemarkinfodialog.cpp
+
+Widgets:
+--------
+katlascontrol.h         katlascontrol.cpp
+
+Items on the widget (QObjects):
+-------------------------------
+katlascrosshair.h       katlascrosshair.cpp
 
 
 DOING
@@ -70,9 +74,9 @@ Widgets:
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
+KdeMainWindow.h         KdeMainWindow.cpp
 
 Items on the widget (QObjects):
-katlascrosshair.h       katlascrosshair.cpp
 katlaswindrose.h        katlaswindrose.cpp
 katlasmapscale.h        katlasmapscale.cpp
 
