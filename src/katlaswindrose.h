@@ -1,5 +1,5 @@
 //
-// C++ Interface: gpmapscale
+// C++ Interface: katlaswindrose
 //
 // Description: KAtlasWindRose 
 
@@ -9,12 +9,15 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef KATLASWINDROSE_H
 #define KATLASWINDROSE_H
+
 
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
 #include <QtGui/QFont>
+
 
 /**
 @author Torsten Rahn
@@ -22,24 +25,26 @@
 
 class QSvgRenderer;
 
-class KAtlasWindRose : public QObject {
+class KAtlasWindRose : public QObject
+{
+    Q_OBJECT
 
-Q_OBJECT
+ public:
+    KAtlasWindRose( QObject *parent = 0 );
 
-public:
-	KAtlasWindRose(QObject *parent = 0);
+    QPixmap  &drawWindRosePixmap( int, int, int );
 
-	QPixmap& drawWindRosePixmap(int, int, int );
+ protected:
 
-protected:
+    QSvgRenderer  *m_svgobj;
+    QPixmap        m_pixmap;
+    int            m_width;
 
-	QSvgRenderer* m_svgobj;
-	QPixmap m_pixmap;
-	int m_width;
-
-	QFont m_font;
-	int m_fontwidth, m_fontheight;
-	int m_polarity;
+    QFont          m_font;
+    int            m_fontwidth;
+    int            m_fontheight;
+    int            m_polarity;
 };
+
 
 #endif // KATLASWINDROSE_H
