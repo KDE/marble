@@ -50,6 +50,7 @@ Items on the widget (QObjects):
 -------------------------------
 katlascrosshair.h       katlascrosshair.cpp
 katlaswindrose.h        katlaswindrose.cpp
+katlasmapscale.h        katlasmapscale.cpp
 
 
 DOING
@@ -77,8 +78,6 @@ searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
 KdeMainWindow.h         KdeMainWindow.cpp
 
-Items on the widget (QObjects):
-katlasmapscale.h        katlasmapscale.cpp
 
 Special: TexturePalette
 This class must be cleaned by modifying marble/tools/palettegen 

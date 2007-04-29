@@ -9,53 +9,68 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef KATLASMAPSCALE_H
 #define KATLASMAPSCALE_H
+
 
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 
+
 /**
 @author Torsten Rahn
 */
 
-class KAtlasMapScale : public QObject {
 
-Q_OBJECT
+class KAtlasMapScale : public QObject
+{
+    Q_OBJECT
 
-public:
-	KAtlasMapScale(QObject *parent = 0);
+ public:
+    KAtlasMapScale(QObject *parent = 0);
 
-	void setInvScale(int invscale){ m_invscale = invscale; }
-	int invScale()const{ return m_invscale; }
+    int   invScale() const            { return m_invscale; }
+    void  setInvScale( int invscale ) { m_invscale = invscale; }
 
+    int   scaleBarHeight() const      { return m_scalebarheight; }
+    void  setScaleBarHeight( int scalebarheight ) {
+        m_scalebarheight = scalebarheight;
+    }
 
-	void setScaleBarHeight(int scalebarheight){ m_scalebarheight = scalebarheight; }
-	int scaleBarHeight()const{ return m_scalebarheight; }
+    int scaleBarWidth()const{ return m_scalebarwidth; }
 
-	int scaleBarWidth()const{ return m_scalebarwidth; }
+    void      paintScaleBar( QPainter*, int, int );
+    QPixmap&  drawScaleBarPixmap( int, int );
 
-	void paintScaleBar(QPainter*, int, int);
-	QPixmap& drawScaleBarPixmap(int, int);
+ public slots:
+    void setScaleBarWidth( int scalebarwidth ) {
+        m_scalebarwidth = scalebarwidth;
+    }
 
-public slots:
+ private:
+    void calcScaleBar();
 
-	void setScaleBarWidth(int scalebarwidth){ m_scalebarwidth = scalebarwidth; }
+ private:
+    QPixmap  m_pixmap;
+    int      m_invscale;
+    int      m_radius;
+    int      m_scalebarwidth;
+    int      m_scalebarheight;
+    double   m_scalebarkm;
 
-private:
-	void calcScaleBar();
-	QPixmap m_pixmap;
-	int m_invscale, m_radius;
-	int m_scalebarwidth, m_scalebarheight;
-	double m_scalebarkm;
+    QFont    m_font;
+    int      m_leftmargin;
+    int      m_rightmargin;
+    int      m_fontheight;
+    int      m_bestdivisor;
+    int      m_pixelinterval;
+    int      m_valueinterval;
 
-	QFont m_font;
-	int m_leftmargin, m_rightmargin, m_fontheight;
-	int m_bestdivisor, m_pixelinterval, m_valueinterval;
-
-	QString m_unit;
+    QString  m_unit;
 };
+
 
 #endif // KATLASMAPSCALE_H
