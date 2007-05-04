@@ -2,12 +2,12 @@
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} -O2 -msse)
+    add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2 -msse) 
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
   endif(NOT WIN32)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
 endif (QTONLY)
@@ -28,8 +28,6 @@ set(marble_SRCS
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
-           qtmain.cpp
-           QtMainWindow.cpp
            #KdeMainWindow.cpp
            texcolorizer.cpp
            TileLoader.cpp
@@ -105,6 +103,15 @@ set(marble_HDRS
            katlasaboutdialog.h
 )
 
+if (QTONLY)
+  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp)
+  set(marble_HDRS ${marble_HDRS} QtMainWindow.h)
+else (QTONLY)
+  set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp)
+  set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
+endif (QTONLY)
+
+
 # cmake does not support this for mingw - see bugtracker
 if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.rc)
@@ -133,7 +140,7 @@ endif (QTONLY)
 if (QTONLY)
 	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY})
 else (QTONLY)
-	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${QT_QTMAIN_LIBRARY})
+	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${QT_QTMAIN_LIBRARY})
 endif (QTONLY)
 if(WIN32)
   target_link_libraries(marble ws2_32 imm32 winmm)

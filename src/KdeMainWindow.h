@@ -11,6 +11,9 @@ class MainWindow : public KMainWindow
 
     private:
         KAtlasControl *m_katlascontrol;
+	void setupActions();
+
+        void createStatusBar();
 };
  
 #endif
