@@ -35,20 +35,20 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent )
     m_maptheme = new MapTheme();
 
 
-    QStringList  m_mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
+    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
     QString      selectedmap;
 
-    if ( m_mapthemedirs.count() == 0 ) {
+    if ( mapthemedirs.count() == 0 ) {
         qDebug() << "Couldn't find any maps! Exiting ...";
         exit(-1);
     }
 
-    if ( m_mapthemedirs.count() >= 1 ) {
-        QStringList  tmp = m_mapthemedirs.filter( "etopo2.dgml" );
+    if ( mapthemedirs.count() >= 1 ) {
+        QStringList  tmp = mapthemedirs.filter( "etopo2.dgml" );
         if ( tmp.count() >= 1 )
             selectedmap = tmp[0];
         else
-            selectedmap = m_mapthemedirs[0];
+            selectedmap = mapthemedirs[0];
     }
     setMapTheme( selectedmap );
 
