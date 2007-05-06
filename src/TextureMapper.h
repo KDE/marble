@@ -22,14 +22,17 @@
 #ifndef __MARBLE__TEXTUREMAPPER_H
 #define __MARBLE__TEXTUREMAPPER_H
 
-#include <QtGui/QColor>
+
 #include <QtCore/QString>
+#include <QtGui/QColor>
 
 #include "Quaternion.h"
+
 
 class QImage;
 class TextureTile;
 class TileLoader;
+
 
 /**
  * @short Texture mapping onto a sphere
@@ -53,34 +56,35 @@ class TextureMapper
     void selectTileLevel(const int& radius);
 
  protected:
-    void getPixelValueApprox(const float& lng, const float& lat, QRgb* scanLine);
-    void getPixelValue(const float& lng, const float& lat, QRgb* scanLine);
+    void pixelValueApprox(const float& lng, const float& lat, 
+                          QRgb* scanLine);
+    void pixelValue(const float& lng, const float& lat, QRgb* scanLine);
     void nextTile();
 
     void tileLevelInit( int tileLevel );
 
-    int   m_posX;
-    int   m_posY;
+    int          m_posX;
+    int          m_posY;
 
     TileLoader  *m_tileLoader;
-    QRgb        *scanLine;
-    QRgb        *fastScanLine;
+    QRgb        *m_scanLine;
+    QRgb        *m_fastScanLine;
 
     int          m_maxTileLevel;
-    bool         interpolate;
-    int          nBest;
+    bool         m_interpolate;
+    int          m_nBest;
 
     int    m_n;
     float  m_ninv;
 
-    int    x;
-    int    y;
-    int    z;
+    int    m_x;
+    int    m_y;
+    int    m_z;
 
-    float  qr;
-    float  qx;
-    float  qy;
-    float  qz;
+    float  m_qr;
+    float  m_qx;
+    float  m_qy;
+    float  m_qz;
 
     int    m_imageHalfWidth;
     int    m_imageHalfHeight;
@@ -106,8 +110,7 @@ class TextureMapper
     float  m_rad2PixelY;
 
     TextureTile  *m_tile;
-
-    int    m_tileLevel;
+    int           m_tileLevel;
 };
 
 

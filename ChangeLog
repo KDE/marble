@@ -1,5 +1,7 @@
 06.05.07 - ingwa
-	Cleaning: Make KAtlasGlobe use m_ for all members.
+	Cleaning: TextureMapper: use m_ for all members + getFoo() -> foo()
+	Cleaning: KAtlasView:    use m_ for all members + getFoo() -> foo()
+	Cleaning: KAtlasGlobe:   use m_ for all members.
 	
 05.05.07 - tackat
 	Added the KDE interface

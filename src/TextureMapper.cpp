@@ -44,33 +44,49 @@ const float TWOPI = 2 * M_PI;
 
 TextureMapper::TextureMapper( const QString& path )
 {
-    m_posX = 0; m_posY = 0;
+    m_posX = 0;
+    m_posY = 0;
 
-    m_tileLoader = new TileLoader( path );
-    scanLine = 0;
-    fastScanLine = 0;
+    m_tileLoader   = new TileLoader( path );
+    m_scanLine     = 0;
+    m_fastScanLine = 0;
 
     m_maxTileLevel = 0;
-    interpolate = false;
-    nBest = 0;
+    m_interpolate  = false;
+    m_nBest = 0;
 
-    m_n = 0; m_ninv = 0.0f;
+    m_n = 0;
+    m_ninv = 0.0f;
 
-    x = 0; y = 0; z = 0;
-    qr = 0.0f; qx = 0.0f; qy = 0.0f; qz = 0.0f;
+    m_x = 0;
+    m_y = 0;
+    m_z = 0;
+    m_qr = 0.0f; 
+    m_qx = 0.0f;
+    m_qy = 0.0f;
+    m_qz = 0.0f;
 
-    m_imageHalfWidth = 0; m_imageHalfHeight = 0; m_imageRadius = 0;
+    m_imageHalfWidth  = 0;
+    m_imageHalfHeight = 0;
+    m_imageRadius     = 0;
 
-    m_prevLat = 0.0f; m_prevLng = 0.0f;
+    m_prevLat = 0.0f; 
+    m_prevLng = 0.0f;
 
-    m_tilePosX = 0; m_tilePosY = 0;
+    m_tilePosX = 0;
+    m_tilePosY = 0;
 
-    m_fullRangeLng = 0; m_halfRangeLat = 0;
-    m_halfRangeLng = 0.0f; m_quatRangeLat = 0.0f;
-    m_fullNormLng = 0; m_halfNormLat = 0;
-    m_halfNormLng = 0.0f; m_quatNormLat = 0.0f;
+    m_fullRangeLng = 0;
+    m_halfRangeLat = 0;
+    m_halfRangeLng = 0.0f;
+    m_quatRangeLat = 0.0f;
+    m_fullNormLng = 0;
+    m_halfNormLat = 0;
+    m_halfNormLng = 0.0f;
+    m_quatNormLat = 0.0f;
 
-    m_rad2PixelX = 0.0f; m_rad2PixelY = 0.0f;
+    m_rad2PixelX = 0.0f;
+    m_rad2PixelY = 0.0f;
 
     m_tile = 0;
     m_tileLevel = 0;
@@ -148,14 +164,14 @@ void TextureMapper::resizeMap(const QImage* canvasImage)
 
     // Find the optimal m_n for the current image canvas width
 
-    nBest = 2;
+    m_nBest = 2;
 
     int  nEvalMin = 2 * m_imageHalfWidth;
     for ( int it = 1; it < 32; ++it ) {
         int nEval = 2 * m_imageHalfWidth / it + 2 * m_imageHalfWidth % it;
         if ( nEval < nEvalMin ) {
             nEvalMin = nEval;
-            nBest = it; 
+            m_nBest = it; 
         }
     }
     //        qDebug("Optimized n = " + QString::number(nBest).toLatin1());
@@ -187,7 +203,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     selectTileLevel(radius);
 
     // Evaluate the degree of interpolation
-    m_n    = ( m_imageRadius < radius2 ) ? nBest : 8;
+    m_n    = ( m_imageRadius < radius2 ) ? m_nBest : 8;
     m_ninv = 1.0f / (float)(m_n);
 
     // Calculate the actual y-range of the map on the screen 
@@ -209,26 +225,28 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     planetAxis.toMatrix( planetAxisMatrix );
 
 #ifndef INTERLACE
-    for (y = yTop; y < yBottom; ++y) {
+    for ( m_y = yTop; m_y < yBottom; ++m_y ) {
 #else
-    for (y = yTop; y < yBottom -1; y+=2) {
+    for ( m_y = yTop; m_y < yBottom -1; m_y+=2 ) {
 #endif
         // Evaluate coordinates for the 3D position vector of the current pixel
-        qy = radiusf * (float)(y - m_imageHalfHeight);
-        qr = 1.0f - qy * qy;
+        m_qy = radiusf * (float)( m_y - m_imageHalfHeight );
+        m_qr = 1.0f - m_qy * m_qy;
 
         // rx is the radius component in x direction
         int rx = (int)sqrtf( (float)( radius2 
-                                      - ( ( y - m_imageHalfHeight )
-                                          * (y - m_imageHalfHeight) ) ) );
+                                      - ( ( m_y - m_imageHalfHeight )
+                                          * ( m_y - m_imageHalfHeight ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline
-        const int xLeft  = (m_imageHalfWidth-rx > 0) ? m_imageHalfWidth - rx : 0; 
-        const int xRight = (m_imageHalfWidth-rx > 0) ? xLeft + rx + rx : 2 * m_imageHalfWidth;
+        const int xLeft  = ( ( m_imageHalfWidth-rx > 0 )
+                             ? m_imageHalfWidth - rx : 0 ); 
+        const int xRight = ( ( m_imageHalfWidth-rx > 0 )
+                             ? xLeft + rx + rx : 2 * m_imageHalfWidth );
 
-        scanLine = (QRgb*)(canvasImage->scanLine( y )) + xLeft;
+        m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
 #ifdef INTERLACE
-        fastScanLine = (QRgb*)(canvasImage->scanLine( y + 1 )) + xLeft;
+        m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
 #endif
 
         int  xIpLeft  = 1;
@@ -243,18 +261,18 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
         bool crossingPoleArea = false;
         int northPoleY = m_imageHalfHeight + (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
-             && northPoleY - m_n/2 <= y
-             && northPoleY + m_n/2 >= y ) 
+             && northPoleY - m_n / 2 <= m_y
+             && northPoleY + m_n / 2 >= m_y ) 
         {
             crossingPoleArea = true;
         }
 
         int ncount = 0;
 
-        for ( x = xLeft; x < xRight; ++x ) {
+        for ( m_x = xLeft; m_x < xRight; ++m_x ) {
             // Prepare for interpolation
 
-            if ( x >= xIpLeft && x <= xIpRight ) {
+            if ( m_x >= xIpLeft && m_x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
                 int northPoleX = m_imageHalfWidth + (int)( radius * northPole.v[Q_X] );
@@ -263,28 +281,28 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
                 if ( crossingPoleArea == true
                      && northPoleX > leftInterval
                      && northPoleX < leftInterval + m_n
-                     && x < leftInterval + m_n )
+                     && m_x < leftInterval + m_n )
                 {
-                    interpolate = false;
+                    m_interpolate = false;
                 }
                 else {
-                    x += m_n - 1;
-                    interpolate = true;
+                    m_x += m_n - 1;
+                    m_interpolate = true;
                     ++ncount;
                 } 
             }
             else 
-                interpolate = false;
+                m_interpolate = false;
 
             // Evaluate more coordinates for the 3D position vector of the current pixel
-            qx = (float)(x - m_imageHalfWidth) * radiusf;
+            m_qx = (float)( m_x - m_imageHalfWidth ) * radiusf;
 
-            float qr2z = qr - qx*qx;
-            qz = (qr2z > 0.0f) ? sqrtf(qr2z) : 0.0f;        
+            float qr2z = m_qr - m_qx * m_qx;
+            m_qz = ( qr2z > 0.0f ) ? sqrtf( qr2z ) : 0.0f;        
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
-            qpos->set(0,qx,qy,qz);
+            qpos->set( 0, m_qx, m_qy, m_qz );
             qpos->rotateAroundAxis( planetAxisMatrix );        
 
             qpos->getSpherical(lng, lat);
@@ -293,28 +311,28 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 
             // Approx for m_n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
-            if ( interpolate ) {
-                getPixelValueApprox(lng,lat,scanLine);
+            if ( m_interpolate ) {
+                pixelValueApprox( lng, lat, m_scanLine );
 #ifdef INTERLACE
                 for ( int j = 0; j < m_n - 1; ++j ) {
                     fastScanLine[j]=scanLine[j];
                 }
-                fastScanLine += ( m_n - 1 );
+                m_fastScanLine += ( m_n - 1 );
 #endif
-                scanLine += ( m_n - 1 );
+                m_scanLine += ( m_n - 1 );
             }
 
             // You can temporarily comment out this line and run Marble
             // to understand the interpolation:
-            getPixelValue(lng, lat, scanLine);
+            pixelValue( lng, lat, m_scanLine );
  
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
 #ifdef INTERLACE
-            *fastScanLine=*scanLine;
-            ++fastScanLine;
+            *m_fastScanLine = *m_scanLine;
+            ++m_fastScanLine;
 #endif
-            ++scanLine;
+            ++m_scanLine;
         }
     }
 
@@ -324,16 +342,16 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 }
 
 
-    // This method interpolates color values for skipped pixels in a scanline.
+// This method interpolates color values for skipped pixels in a scanline.
  
-    // While moving along the scanline we don't move from pixel to pixel but
-    // leave out m_n pixels each time and calculate the exact position and 
-    // color value for the new pixel. The pixel values in between get 
-    // approximated through linear interpolation across the direct connecting 
-    // line on the original tiles directly.
+// While moving along the scanline we don't move from pixel to pixel but
+// leave out m_n pixels each time and calculate the exact position and 
+// color value for the new pixel. The pixel values in between get 
+// approximated through linear interpolation across the direct connecting 
+// line on the original tiles directly.
 
-void TextureMapper::getPixelValueApprox(const float& lng, const float& lat, 
-                                        QRgb *scanLine)
+void TextureMapper::pixelValueApprox(const float& lng, const float& lat, 
+                                     QRgb *scanLine)
 {
     // stepLng/Lat: Distance between two subsequent approximated positions
 
@@ -349,7 +367,7 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
         for (int j=1; j < m_n; ++j) {
             m_prevLat += stepLat;
             m_prevLng += stepLng;
-            getPixelValue( m_prevLng, m_prevLat, scanLine);
+            pixelValue( m_prevLng, m_prevLat, scanLine);
             ++scanLine;
         }
     }
@@ -369,7 +387,7 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
                 m_prevLng -= stepLng;
                 if ( m_prevLng <= -M_PI ) 
                     m_prevLng += TWOPI;
-                getPixelValue( m_prevLng, m_prevLat, scanLine );
+                pixelValue( m_prevLng, m_prevLat, scanLine );
                 ++scanLine;
             }
         }
@@ -385,7 +403,7 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
                 float  evalLng = curStepLng;
                 if ( curStepLng <= -M_PI )
                     evalLng += TWOPI;
-                getPixelValue( evalLng, m_prevLat, scanLine);
+                pixelValue( evalLng, m_prevLat, scanLine);
                 ++scanLine;
             }
         }
@@ -393,8 +411,8 @@ void TextureMapper::getPixelValueApprox(const float& lng, const float& lat,
 }
 
 
-inline void TextureMapper::getPixelValue(const float& lng, 
-                                         const float& lat, QRgb* scanLine)
+inline void TextureMapper::pixelValue(const float& lng, 
+                                      const float& lat, QRgb* scanLine)
 {
     // Convert the lng and lat coordinates of the position on the scanline
     // measured in radiant to the pixel position of the requested 

@@ -70,6 +70,9 @@ KAtlasGlobe::~KAtlasGlobe()
 }
 
 
+// Set a particular theme for the map, and load the top 3 tile levels.
+// If these tiles aren't already created, then create them here and now. 
+
 void KAtlasGlobe::setMapTheme( const QString& selectedmap )
 {
 
