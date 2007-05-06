@@ -12,6 +12,7 @@
 #ifndef KATLASGLOBE_H
 #define KATLASGLOBE_H
 
+
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
@@ -29,12 +30,14 @@
 #include "texcolorizer.h"
 #include "placemarkpainter.h"
 
+
 class PlaceMark;
 class PlaceMarkManager;
 
 /**
 @author Torsten Rahn
 */
+
 
 class KAtlasGlobe  : public QObject
 {
@@ -53,7 +56,7 @@ class KAtlasGlobe  : public QObject
     int   radius(){ return m_radius; };
     void  setRadius(const int&);
 
-    Quaternion  getPlanetAxis(){ return m_pPlanetAxis; };
+    Quaternion  getPlanetAxis(){ return m_planetAxis; };
 
 
     // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
@@ -72,7 +75,7 @@ class KAtlasGlobe  : public QObject
 
     bool screenCoordinates( const float lng, const float lat, int& x, int& y );
 
-    bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_pPlanetAxis == m_pPlanetAxisUpdated ); }
+    bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_planetAxis == m_planetAxisUpdated ); }
 
     void addPlaceMarkFile( QString filename );
 
@@ -93,18 +96,19 @@ class KAtlasGlobe  : public QObject
 
     // View and paint stuff
     MapTheme          *m_maptheme;
-    TextureColorizer  *texcolorizer;
-    TextureMapper     *texmapper;
-    VectorComposer    *veccomposer;
-    GridMap           *gridmap;
+    TextureColorizer  *m_texcolorizer;
+    TextureMapper     *m_texmapper;
+    VectorComposer    *m_veccomposer;
+    GridMap           *m_gridmap;
 
-    PlaceMarkManager  *placemarkmanager;
+    // Places on the map
+    PlaceMarkManager  *m_placemarkmanager;
     PlaceMarkModel    *m_placemarkmodel;
     PlaceMarkPainter  *m_placemarkpainter;
     PlaceContainer    *m_placecontainer;
 
-    Quaternion         m_pPlanetAxis;
-    Quaternion         m_pPlanetAxisUpdated;
+    Quaternion         m_planetAxis;
+    Quaternion         m_planetAxisUpdated;
     int                m_radius;
     int                m_radiusUpdated;
 

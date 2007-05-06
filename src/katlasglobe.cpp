@@ -21,7 +21,7 @@ const float RAD2INT = 21600.0 / M_PI;
 KAtlasGlobe::KAtlasGlobe( QWidget* parent )
     : m_parent(parent)
 {
-    texmapper = 0;
+    m_texmapper = 0;
 
     m_placemarkpainter = 0;
     m_placecontainer   = 0;
@@ -29,7 +29,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent )
 
     m_justModified = false;
 
-    m_pPlanetAxis  = Quaternion( 1.0, 0.0, 0.0, 0.0 );
+    m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
 
     m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
     m_maptheme = new MapTheme();
@@ -52,19 +52,21 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent )
     }
     setMapTheme( selectedmap );
 
-    veccomposer  = new VectorComposer();
-    gridmap      = new GridMap();
-    texcolorizer = new TextureColorizer(KAtlasDirs::path("seacolors.leg"), KAtlasDirs::path("landcolors.leg"));
+    m_veccomposer  = new VectorComposer();
+    m_gridmap      = new GridMap();
+    m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
+                                           KAtlasDirs::path( "landcolors.leg" ) );
 
-    placemarkmanager = new PlaceMarkManager();
-    m_placecontainer = placemarkmanager->getPlaceContainer();
+    m_placemarkmanager = new PlaceMarkManager();
+    m_placecontainer   = m_placemarkmanager->getPlaceContainer();
 
-    m_placemarkmodel = new PlaceMarkModel( this );
+    m_placemarkmodel   = new PlaceMarkModel( this );
     m_placemarkmodel->setContainer( m_placecontainer );
 }
 
-KAtlasGlobe::~KAtlasGlobe(){
-	delete texmapper;
+KAtlasGlobe::~KAtlasGlobe()
+{
+    delete m_texmapper;
 }
 
 
@@ -108,12 +110,13 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
 #endif
     }
 
-    if ( texmapper == 0 )
-        texmapper = new TextureMapper( "maps/earth/" + m_maptheme->tilePrefix() );
+    if ( m_texmapper == 0 )
+        m_texmapper = new TextureMapper( "maps/earth/"
+                                         + m_maptheme->tilePrefix() );
     else
-        texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
+        m_texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
 
-    texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
+    m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
 
     if ( m_placecontainer == 0)
         m_placecontainer = new PlaceContainer("placecontainer");
@@ -137,9 +140,9 @@ void KAtlasGlobe::resize()
                           QImage::Format_ARGB32_Premultiplied );
     m_canvasimg->fill( Qt::transparent );
 
-    texmapper->resizeMap(m_canvasimg);
-    veccomposer->resizeMap(m_coastimg);
-    gridmap->resizeMap(m_coastimg);
+    m_texmapper->resizeMap( m_canvasimg );
+    m_veccomposer->resizeMap( m_coastimg );
+    m_gridmap->resizeMap( m_coastimg );
 
     QRadialGradient  grad1( QPointF( m_canvasimg->width()  / 2,
                                      m_canvasimg->height() / 2 ),
@@ -164,16 +167,17 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty)
 {
     if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ) {
 
-        texmapper->mapTexture(m_canvasimg, m_radius, m_pPlanetAxis);
+        m_texmapper->mapTexture( m_canvasimg, m_radius, m_planetAxis );
 
         if ( m_maptheme->bitmaplayer().dem == "true" ){
             m_coastimg->fill(Qt::transparent);
 
             // Create VectorMap
-            veccomposer->drawTextureMap( m_coastimg, m_radius, m_pPlanetAxis );
+            m_veccomposer->drawTextureMap( m_coastimg, m_radius, 
+                                           m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
-            texcolorizer->colorize( m_canvasimg, m_coastimg, m_radius );
+            m_texcolorizer->colorize( m_canvasimg, m_coastimg, m_radius );
         }
     }
 
@@ -183,22 +187,22 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty)
     if ( m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
-        veccomposer->paintVectorMap( painter, m_radius, m_pPlanetAxis );
+        m_veccomposer->paintVectorMap( painter, m_radius, m_planetAxis );
     }
 
     // if ( m_maptheme->vectorlayer().enabled == true ){
     QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    gridmap->createGrid( m_radius, m_pPlanetAxis );
+    m_gridmap->createGrid( m_radius, m_planetAxis );
 
-    gridmap->setPen( gridpen );
-    gridmap->paintGridMap( painter, true );
+    m_gridmap->setPen( gridpen );
+    m_gridmap->paintGridMap( painter, true );
 
-    gridmap->createTropics( m_radius, m_pPlanetAxis );
+    m_gridmap->createTropics( m_radius, m_planetAxis );
 
     gridpen.setStyle( Qt::DotLine );
-    gridmap->setPen( gridpen );
-    gridmap->paintGridMap( painter, true );
+    m_gridmap->setPen( gridpen );
+    m_gridmap->paintGridMap( painter, true );
 
     //	}
 	
@@ -207,12 +211,12 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty)
                                               m_canvasimg->width() / 2,
                                               m_canvasimg->height()/ 2,
                                               m_radius, m_placecontainer,
-                                              m_pPlanetAxis );
+                                              m_planetAxis );
     }
 
-    m_pPlanetAxisUpdated = m_pPlanetAxis;
-    m_radiusUpdated      = m_radius;
-    m_justModified       = false;
+    m_planetAxisUpdated = m_planetAxis;
+    m_radiusUpdated     = m_radius;
+    m_justModified      = false;
 }
 
 
@@ -254,21 +258,21 @@ void KAtlasGlobe::setRadius(const int& radius)
 
 void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi)
 {
-    m_pPlanetAxis.createFromEuler( (float)(phi)   / RAD2INT,
-                                   (float)(theta) / RAD2INT,
-                                   (float)(psi)   / RAD2INT );
+    m_planetAxis.createFromEuler( (float)(phi)   / RAD2INT,
+                                  (float)(theta) / RAD2INT,
+                                  (float)(psi)   / RAD2INT );
 }
 
 void KAtlasGlobe::rotateTo(const float& phi, const float& theta)
 {
-    m_pPlanetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
-                                   (theta + 180.0) * M_PI / 180.0, 0.0 );
+    m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
+                                  (theta + 180.0) * M_PI / 180.0, 0.0 );
 }
 
 
 void KAtlasGlobe::rotateBy(const Quaternion& incRot)
 {
-    m_pPlanetAxis = incRot * m_pPlanetAxis;
+    m_planetAxis = incRot * m_planetAxis;
 }
 
 void KAtlasGlobe::rotateBy(const float& phi, const float& theta)
@@ -276,16 +280,16 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta)
     Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
 
-    m_pPlanetAxis = rotTheta * m_pPlanetAxis;
-    m_pPlanetAxis *= rotPhi;
-    m_pPlanetAxis.normalize();
+    m_planetAxis = rotTheta * m_planetAxis;
+    m_planetAxis *= rotPhi;
+    m_planetAxis.normalize();
 }
 
 int KAtlasGlobe::northPoleY()
 {
     
     Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
-    Quaternion  invPlanetAxis = m_pPlanetAxis.inverse();
+    Quaternion  invPlanetAxis = m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
 
@@ -295,7 +299,7 @@ int KAtlasGlobe::northPoleY()
 int KAtlasGlobe::northPoleZ()
 {
     Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
-    Quaternion  invPlanetAxis = m_pPlanetAxis.inverse();
+    Quaternion  invPlanetAxis = m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
 
@@ -306,7 +310,7 @@ bool KAtlasGlobe::screenCoordinates( const float lng, const float lat,
                                      int& x, int& y )
 {
     Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
-    Quaternion  invRotAxis = m_pPlanetAxis.inverse();
+    Quaternion  invRotAxis = m_planetAxis.inverse();
 
     qpos.rotateAroundAxis(invRotAxis);
 
@@ -321,9 +325,9 @@ bool KAtlasGlobe::screenCoordinates( const float lng, const float lat,
 
 void KAtlasGlobe::addPlaceMarkFile( QString filename )
 {
-    placemarkmanager->loadKml( filename );
+    m_placemarkmanager->loadKml( filename );
 
-    m_placecontainer = placemarkmanager->getPlaceContainer();
+    m_placecontainer = m_placemarkmanager->getPlaceContainer();
 
     m_placemarkmodel->setContainer( m_placecontainer );	
 }

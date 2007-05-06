@@ -1,5 +1,8 @@
+06.05.07 - ingwa
+	Cleaning: Make KAtlasGlobe use m_ for all members.	
+	
 05.05.07 - tackat
-    Added the KDE interface
+	Added the KDE interface
 
 29.04.07 - ingwa
 	Cleaned measuretool.{h,cpp}
