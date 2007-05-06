@@ -11,6 +11,8 @@ Before Version 0.4 (mid april)
 Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
  * Fix image downloading for Wikipedia					TACK
+ * Add "Export Map" to save a screenshot as an image file
+ * Add "Print" to print a screenshot
 
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       INGE
