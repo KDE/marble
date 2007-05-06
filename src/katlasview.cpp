@@ -51,15 +51,15 @@ KAtlasView::KAtlasView(QWidget *parent)
 				 QImage::Format_ARGB32_Premultiplied );
     m_pGlobe->setCanvasImage( m_pCanvasImage );
 
-    inputhandler = new KAtlasViewInputHandler( this, m_pGlobe );
-    installEventFilter( inputhandler );
+    m_inputhandler = new KAtlasViewInputHandler( this, m_pGlobe );
+    installEventFilter( m_inputhandler );
     setMouseTracking( true );
 
     m_popupmenu = new KAtlasViewPopupMenu( this, m_pGlobe );
-    connect( inputhandler, SIGNAL( lmbRequest( int, int ) ),
-	     m_popupmenu,  SLOT( showLmbMenu( int, int ) ) );	
-    connect( inputhandler, SIGNAL( rmbRequest( int, int ) ),
-	     m_popupmenu,  SLOT( showRmbMenu( int, int ) ) );	
+    connect( m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
+	     m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
+    connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
+	     m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
 
     m_pMeasureTool = new MeasureTool( this );
 
@@ -71,7 +71,7 @@ KAtlasView::KAtlasView(QWidget *parent)
     m_logzoom  = 0;
     m_zoomStep = 40;
     goHome();
-    minimumzoom = 50;
+    m_minimumzoom = 50;
 }
 
 
@@ -104,7 +104,7 @@ void KAtlasView::zoomViewBy(int zoomstep)
     int zoom = m_pGlobe->radius();
     int tryZoom = toLogScale(zoom) + zoomstep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
-    if ( tryZoom >= minimumzoom ) {
+    if ( tryZoom >= m_minimumzoom ) {
 	zoom = tryZoom;
 	zoomView(zoom);
     }
@@ -166,23 +166,23 @@ void KAtlasView::centerOn(const QModelIndex& index)
 
 void KAtlasView::moveLeft()
 {
-    rotateBy( 0, getMoveStep() );
+    rotateBy( 0, moveStep() );
 }
 
 void KAtlasView::moveRight()
 {
-    rotateBy( 0, -getMoveStep() );
+    rotateBy( 0, -moveStep() );
 }
 
 
 void KAtlasView::moveUp()
 {
-    rotateBy( getMoveStep(), 0 );
+    rotateBy( moveStep(), 0 );
 }
 
 void KAtlasView::moveDown()
 {
-    rotateBy( -getMoveStep(), 0 );
+    rotateBy( -moveStep(), 0 );
 }
 
 void KAtlasView::resizeEvent (QResizeEvent*)
@@ -201,7 +201,7 @@ void KAtlasView::resizeEvent (QResizeEvent*)
 }
 
 
-bool KAtlasView::getGlobeSphericals(int x, int y, float& alpha, float& beta)
+bool KAtlasView::globeSphericals(int x, int y, float& alpha, float& beta)
 {
 
     int radius = m_pGlobe->radius(); 
@@ -234,18 +234,18 @@ void KAtlasView::setActiveRegion()
 {
     int zoom = m_pGlobe->radius(); 
 
-    activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
-                            QRegion::Rectangle );
+    m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
+                              QRegion::Rectangle );
 
     if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
-				 2 * zoom, 2 * zoom, QRegion::Ellipse );
+	m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
+                                   2 * zoom, 2 * zoom, QRegion::Ellipse );
     }
 }
 
-const QRegion KAtlasView::getActiveRegion()
+const QRegion KAtlasView::activeRegion()
 {
-    return activeRegion;
+    return m_activeRegion;
 }
 
 
@@ -340,12 +340,13 @@ void KAtlasView::creatingTilesProgress( int progress )
 }
 
 
-float KAtlasView::getMoveStep()
+float KAtlasView::moveStep()
 {
     if ( m_pGlobe->radius() < sqrt( width() * width() + height() * height() ) )
 	return 0.1f;
     else
-	return atanf((float)width() / (float)(2 * m_pGlobe->radius())) * 0.2f;
+	return atanf( (float)width() 
+                      / (float)( 2 * m_pGlobe->radius() ) ) * 0.2f;
 }
 
 int KAtlasView::fromLogScale(int zoom)

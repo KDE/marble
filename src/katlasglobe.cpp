@@ -232,7 +232,7 @@ void KAtlasGlobe::setRadius(const int& radius)
     int  imgrx = ( m_canvasimg->width() ) >> 1;
     int  imgry = ( m_canvasimg->height() ) >> 1;
 
-    if ( radius*radius < imgrx * imgrx + imgry * imgry
+    if ( radius * radius < imgrx * imgrx + imgry * imgry
          && radius != m_radius )
     {
         m_canvasimg->fill( Qt::transparent );

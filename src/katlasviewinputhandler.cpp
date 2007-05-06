@@ -72,7 +72,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 			}
 
 			if ((dirx != 0) || (diry != 0)) {
-				m_globe->rotateBy(-(m_gpview->getMoveStep())*(float)(diry), -(m_gpview->getMoveStep())*(float)(dirx));
+				m_globe->rotateBy(-(m_gpview->moveStep())*(float)(diry), -(m_gpview->moveStep())*(float)(dirx));
 				m_gpview->repaint();
 			}
 			return TRUE;
@@ -81,7 +81,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 		else if (( e->type() == QEvent::MouseMove )||( e->type() == QEvent::MouseButtonPress )||( e->type() == QEvent::MouseButtonRelease)){
 
 			QMouseEvent* event = static_cast<QMouseEvent*>(e);			
-			QRegion activeRegion = m_gpview->getActiveRegion();
+			QRegion activeRegion = m_gpview->activeRegion();
 
 			dirx = 0; diry = 0;
 
@@ -109,7 +109,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 					// 	m_leftpresseda: screen center latitude  during mouse press
 					// 	m_leftpressedb: screen center longitude during mouse press
-					m_gpview->getGlobeSphericals(m_gpview->width() / 2, m_gpview->height() / 2, m_leftpresseda, m_leftpressedb);
+					m_gpview->globeSphericals(m_gpview->width() / 2, m_gpview->height() / 2, m_leftpresseda, m_leftpressedb);
 
 					if (m_globe->northPoleY() > 0){
 						m_leftpressedb = pi - m_leftpressedb;
@@ -197,7 +197,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 
 				if ((event->button() == Qt::LeftButton) && ( e->type() == QEvent::MouseButtonPress )){
 
-					m_globe->rotateBy(-(m_gpview->getMoveStep())*(float)(diry), -(m_gpview->getMoveStep())*(float)(dirx));
+					m_globe->rotateBy(-(m_gpview->moveStep())*(float)(diry), -(m_gpview->moveStep())*(float)(dirx));
 					m_gpview->repaint();
 				}				
 			}				

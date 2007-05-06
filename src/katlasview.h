@@ -1,6 +1,7 @@
 #ifndef KATLASVIEW_H
 #define KATLASVIEW_H
 
+
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
 
@@ -29,15 +30,17 @@ class KAtlasView : public QWidget
     // The model this view shows.
     KAtlasGlobe* globe() const { return m_pGlobe; }
 
-    const QRegion  getActiveRegion();
+    const QRegion  activeRegion();
 
-    bool                getGlobeSphericals( int x, int y, 
-                                            float& alpha, float& beta );
-    QAbstractListModel *placeMarkModel(){ return m_pGlobe->getPlaceMarkModel(); };
+    bool                globeSphericals( int x, int y, 
+                                         float& alpha, float& beta );
+    QAbstractListModel *placeMarkModel(){
+        return m_pGlobe->getPlaceMarkModel();
+    }
 
-    float  getMoveStep();
+    float  moveStep();
 
-    void   setMinimumZoom( int zoom ){ minimumzoom = zoom; }
+    void   setMinimumZoom( int zoom ){ m_minimumzoom = zoom; }
 
     void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
 
@@ -89,13 +92,13 @@ class KAtlasView : public QWidget
     int           m_logzoom;
 	
     int           m_zoomStep;
-    int           minimumzoom;	
+    int           m_minimumzoom;	
 
 
-    KAtlasViewInputHandler  *inputhandler;
+    KAtlasViewInputHandler  *m_inputhandler;
     KAtlasViewPopupMenu     *m_popupmenu;
 
-    TextureColorizer        *sealegend;
+    TextureColorizer        *m_sealegend;
     QImage                  *m_pCanvasImage;
 
     // Parts of the image
@@ -106,7 +109,7 @@ class KAtlasView : public QWidget
     // Tools
     MeasureTool  *m_pMeasureTool;
 
-    QRegion       activeRegion;
+    QRegion       m_activeRegion;
 
     QPixmap       m_cachedPixmap;
 

@@ -74,7 +74,7 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos ){
 
 	float lat,lng;
 
-	m_gpview->getGlobeSphericals(xpos, ypos, lng, lat);
+	m_gpview->globeSphericals(xpos, ypos, lng, lat);
 
 	// Any idea what this could do on activation?
 	m_posaction->setEnabled( false );
@@ -110,7 +110,7 @@ void KAtlasViewPopupMenu::slotAddMeasurePoint(){
 
 	float lng, lat;
 
-	m_gpview->getGlobeSphericals( p.x(), p.y(), lng, lat);
+	m_gpview->globeSphericals( p.x(), p.y(), lng, lat);
 
 	emit addMeasurePoint( lng, lat );
 }
