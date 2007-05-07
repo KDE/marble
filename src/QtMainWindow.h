@@ -20,12 +20,24 @@ class MainWindow : public QMainWindow
         void createMenus();
         void createStatusBar();
 
+
         KAtlasControl *m_katlascontrol;
 
         QMenu *fileMenu;
         QMenu *helpMenu;
+
+        QAction *exportMapAct;
+        QAction *printAct;
         QAction *quitAct;
+        QAction *copyMapAct;
+        QAction *aboutMarbleAct;
         QAction *aboutQtAct;
+
+    private slots:
+        void exportMapScreenShot();
+        void printMapScreenShot();
+        void copyMap();
+        void aboutMarble();
 };
  
 #endif

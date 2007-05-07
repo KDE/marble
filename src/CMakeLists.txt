@@ -22,13 +22,12 @@ set(marble_SRCS
            Quaternion.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
-	   TextureTile.cpp
+            TextureTile.cpp
            TextureMapper.cpp
            GridMap.cpp
            katlascontrol.cpp
            katlasview.cpp
            katlasviewinputhandler.cpp
-           #KdeMainWindow.cpp
            texcolorizer.cpp
            TileLoader.cpp
            katlasglobe.cpp
@@ -72,7 +71,6 @@ set(marble_HDRS
            katlasview.h
            katlasviewinputhandler.h
            QtMainWindow.h
-           #KdeMainWindow.h
            texcolorizer.h
            TileLoader.h
            katlasglobe.h

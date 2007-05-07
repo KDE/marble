@@ -4,6 +4,7 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
+#include <QtGui/QPixmap>
 
 #include "katlasglobe.h"
 #include "katlascrosshair.h"
@@ -43,6 +44,8 @@ class KAtlasView : public QWidget
     void   setMinimumZoom( int zoom ){ m_minimumzoom = zoom; }
 
     void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
+
+    QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
 
  public slots:
     void  zoomView(int);

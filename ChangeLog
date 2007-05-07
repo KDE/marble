@@ -1,3 +1,6 @@
+07.05.07 - tackat
+    Added Copy, Export Map and Printing to the Qt interface.
+
 06.05.07 - ingwa
 	Cleaning: TextureMapper: use m_ for all members + getFoo() -> foo()
 	Cleaning: KAtlasView:    use m_ for all members + getFoo() -> foo()

@@ -15,6 +15,7 @@
 
 #include "katlasview.h"
 
+#include <QtGui/QPixmap>
 
 /**
 @author Torsten Rahn
@@ -38,6 +39,8 @@ class KAtlasControl : public QWidget
     void moveDown();
 
     void addPlaceMarkFile( QString filename ){ m_katlasview->addPlaceMarkFile( filename ); }
+
+    QPixmap mapScreenShot(){ return m_katlasview->mapScreenShot(); }
 
  private:
     KAtlasView     *m_katlasview;
