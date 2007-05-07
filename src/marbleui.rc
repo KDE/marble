@@ -8,9 +8,4 @@
     </Menu>
   </MenuBar>
 
-  <ToolBar name="mainToolBar" >
-    <text>Main Toolbar</text>
-    <Action name="copyMap" />
-  </ToolBar>  
-
 </kpartgui>
