@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <ToolBar name="mainToolBar" >
-    <text>Main Toolbar</text>
-    <Action name="copyMap" />
-  </ToolBar>  
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="marble" version="1">
+
   <MenuBar>
     <Menu name="edit" >
       <text>&amp;Edit</text>
       <Action name="copyMap" />
     </Menu>
   </MenuBar>
-</kcfg>
+
+  <ToolBar name="mainToolBar" >
+    <text>Main Toolbar</text>
+    <Action name="copyMap" />
+  </ToolBar>  
+
+</kpartgui>
