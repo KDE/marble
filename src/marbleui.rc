@@ -6,11 +6,8 @@
   <ToolBar name="mainToolBar" >
     <text>Main Toolbar</text>
     <Action name="copyMap" />
-  </ToolBar>  <MenuBar>
+  </ToolBar>  
   <MenuBar>
-    <Menu name="file" >
-      <text>&amp;File</text>
-    </Menu>
     <Menu name="edit" >
       <text>&amp;Edit</text>
       <Action name="copyMap" />
