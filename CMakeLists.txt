@@ -1,6 +1,6 @@
 project(marble)
 
-option(QTONLY  "Build Qt only" ON)
+option(QTONLY  "Build Qt only" OFF)
 option(STATIC_BUILD "Link to static Qt libs (win32 only)" OFF)
 if(STATIC_BUILD)
     add_definitions(-DSTATIC_BUILD=1)

@@ -7,7 +7,7 @@
 #include <KStandardAction>
 #include <KStatusBar>
  
-MainWindow::MainWindow(QWidget *parent) : KMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
 {
     m_katlascontrol = new KAtlasControl(0);
     setCentralWidget(m_katlascontrol);
