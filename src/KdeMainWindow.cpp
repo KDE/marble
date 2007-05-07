@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) : KXmlGuiWindow(parent)
 
 void MainWindow::setupActions()
 {
-    m_copyMapAction = actionCollection()->addAction( "copyMap" );
+    m_copyMapAction = (KAction*)actionCollection()->addAction( "copyMap" );
     m_copyMapAction->setText(i18n("&Copy Map"));
     m_copyMapAction->setIcon(KIcon("edit-copy"));
     m_copyMapAction->setShortcut(Qt::CTRL+Qt::Key_C);

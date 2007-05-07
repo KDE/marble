@@ -19,7 +19,7 @@ class MainWindow : public KXmlGuiWindow
 
         void createStatusBar();
 
-        QAction *m_copyMapAction;
+        KAction *m_copyMapAction;
 
     private slots:
         void copyMap();
