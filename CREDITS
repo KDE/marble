@@ -1,8 +1,15 @@
+Main authors:
+
+	Torsten Rahn <rahn@kde.org> -- Original Author and Maintainer
+	Inge Wallin <inge@lysator.liu.se> -- Co-Author and Co-Maintainer
+
 Credits for various inspiration go to:
 
+	Inge Wallin -- for doing a great job at cleaning up the code and for helping to prepare Marble for GSoC Mentorship
+	Christian Ehrlicher -- for packaging the Windows Version
 	Daniel Molkentin -- For various suggestions and the initial Windows Nullsoft installer support and for initial hosting in his SVN repository 
 	Stefan Jordan -- suggestion for using quaternions
-	Nikolaus Zimmermann -- lots of fixes and optimizations
+	Nikolaus Zimmermann -- lots of fixes and optimizations, Mac OSX packaging
 	Matthias Welwarsky (for a Windows app compile)
 	Josef Spillner -- for help with FIFO-bump mapping optimizations
 	Martin Konold -- optimiziation suggestions in TexColorizer
@@ -10,6 +17,7 @@ Credits for various inspiration go to:
 	Joseph Wenninger -- adding initial cmake support
 	Fredrik Höglund -- testing and bugfixes
 	Carlos Licea -- for improvements on the scale bar code
+	Thomas Zander -- for various fixes and bugreports
 
 	Torsten Rahn -- for being myself and for being the original author and maintainer
 
