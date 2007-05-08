@@ -1,5 +1,8 @@
 
-07.05.07
+08.05.07 - tackat
+    - Marble got a docbook-handbook now. 
+
+07.05.07 - tackat
     - Make KMarble compile again (KMainWindow -> KXmlGuiWindow)
     - Default to QTONLY = OFF
 
