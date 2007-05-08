@@ -111,7 +111,7 @@
             Depending on the map's resolution zooming in will provide you with more detail. Smaller cities will appear and using the topographic map you might notice that coastlines are provided as vector graphics.
          </para>
          <para>
-            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <shortcut><keycap>Pos1</keycap></shortcut> button on your keyboard).
+            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <shortcut><keycap>Home</keycap></shortcut> button on your keyboard).
          </para>
 	 </chapter>
 
