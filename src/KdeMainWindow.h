@@ -19,9 +19,13 @@ class MainWindow : public KXmlGuiWindow
 
         void createStatusBar();
 
+        KAction *m_exportMapAction;
+        KAction *m_printMapAction;
         KAction *m_copyMapAction;
 
     private slots:
+        void exportMapScreenShot();
+        void printMapScreenShot();
         void copyMap();
 };
  

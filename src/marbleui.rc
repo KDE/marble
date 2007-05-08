@@ -2,6 +2,11 @@
 <kpartgui name="marble" version="1">
 
   <MenuBar>
+    <Menu name="file" >
+      <text>&amp;File</text>
+      <Action name="exportMap" />
+      <Action name="printMap" />
+    </Menu>
     <Menu name="edit" >
       <text>&amp;Edit</text>
       <Action name="copyMap" />
