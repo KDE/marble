@@ -1,3 +1,34 @@
+# FIXME: The original QT4_ADD_RESOURCES should be extended to support this filetype too
+#
+# QT4_ADD_RESOURCE2(outfiles inputfile ... )
+# TODO  perhaps consider adding support for compression and root options to rcc
+
+if (MINGW)
+MACRO (QT4_ADD_RESOURCES2 outfiles )
+
+FOREACH (it ${ARGN})
+  GET_FILENAME_COMPONENT(outfilename ${it} NAME_WE)
+  GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
+  GET_FILENAME_COMPONENT(rc_path ${infile} PATH)
+  SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfilename}_res.o)
+  #  parse file for dependencies
+  FILE(READ "${infile}" _RC_FILE_CONTENTS)
+  STRING(REGEX MATCHALL "<file>[^<]*" _RC_FILES "${_RC_FILE_CONTENTS}")
+  SET(_RC_DEPENDS)
+  FOREACH(_RC_FILE ${_RC_FILES})
+    STRING(REGEX REPLACE "^<file>" "" _RC_FILE "${_RC_FILE}")
+    SET(_RC_DEPENDS ${_RC_DEPENDS} "${rc_path}/${_RC_FILE}")
+  ENDFOREACH(_RC_FILE)
+  ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
+    COMMAND windres
+    ARGS -i ${infile} -o ${outfile} --include-dir=${CMAKE_CURRENT_SOURCE_DIR}
+    MAIN_DEPENDENCY ${infile}
+    DEPENDS ${_RC_DEPENDS})
+  SET(${outfiles} ${${outfiles}} ${outfile})
+ENDFOREACH (it)
+
+ENDMACRO (QT4_ADD_RESOURCES2)
+ENDIF(MINGW)
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
@@ -109,11 +140,13 @@ else (QTONLY)
   set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
 endif (QTONLY)
 
-
-# cmake does not support this for mingw - see bugtracker
 if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.rc)
 endif(MSVC)
+
+if(MINGW)
+   QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
+endif(MINGW)
 
 set (marble_UI katlastilecreatordialog.ui
 	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui)

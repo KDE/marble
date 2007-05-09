@@ -10,9 +10,7 @@
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy>
-    <hsizetype>5</hsizetype>
-    <vsizetype>5</vsizetype>
+   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -30,18 +28,25 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>0</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
    </property>
    <item>
     <widget class="QToolBox" name="toolBox" >
      <property name="sizePolicy" >
-      <sizepolicy>
-       <hsizetype>5</hsizetype>
-       <vsizetype>5</vsizetype>
+      <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -51,6 +56,9 @@
        <width>150</width>
        <height>410</height>
       </size>
+     </property>
+     <property name="whatsThis" >
+      <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
       <number>0</number>
@@ -68,18 +76,39 @@
        <string>Navigation</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
+       <property name="leftMargin" >
+        <number>9</number>
+       </property>
+       <property name="topMargin" >
+        <number>9</number>
+       </property>
+       <property name="rightMargin" >
+        <number>9</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>9</number>
+       </property>
        <item>
         <layout class="QGridLayout" >
-         <property name="margin" >
+         <property name="leftMargin" >
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <property name="horizontalSpacing" >
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing" >
           <number>6</number>
          </property>
          <item row="5" column="0" >
@@ -102,21 +131,23 @@
          <item row="2" column="0" >
           <widget class="QLineEdit" name="searchLineEdit" >
            <property name="sizePolicy" >
-            <sizepolicy>
-             <hsizetype>5</hsizetype>
-             <vsizetype>0</vsizetype>
+            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="toolTip" >
+            <string>Search line</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Here you can enter the name of the location you are searching for.</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0" >
           <widget class="SearchListView" name="locationListView" >
            <property name="sizePolicy" >
-            <sizepolicy>
-             <hsizetype>5</hsizetype>
-             <vsizetype>0</vsizetype>
+            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -135,6 +166,12 @@
            </property>
            <property name="focusPolicy" >
             <enum>Qt::WheelFocus</enum>
+           </property>
+           <property name="toolTip" >
+            <string>Location Browser</string>
+           </property>
+           <property name="whatsThis" >
+            <string>Double Click an entry of this list to get it displayed on the map.</string>
            </property>
            <property name="horizontalScrollBarPolicy" >
             <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -163,10 +200,19 @@
        </item>
        <item>
         <layout class="QHBoxLayout" >
-         <property name="margin" >
+         <property name="spacing" >
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
           <number>0</number>
          </property>
          <item>
@@ -187,34 +233,70 @@
          </item>
          <item>
           <layout class="QGridLayout" >
-           <property name="margin" >
+           <property name="leftMargin" >
             <number>0</number>
            </property>
-           <property name="spacing" >
+           <property name="topMargin" >
+            <number>0</number>
+           </property>
+           <property name="rightMargin" >
+            <number>0</number>
+           </property>
+           <property name="bottomMargin" >
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing" >
+            <number>6</number>
+           </property>
+           <property name="verticalSpacing" >
             <number>6</number>
            </property>
            <item row="1" column="0" >
             <widget class="QToolButton" name="moveLeftButton" >
+             <property name="toolTip" >
+              <string>Left</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Rotates the earth counterclockwise around its axis.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
               <iconset resource="marble.qrc" >:/icons/arrow-left.png</iconset>
              </property>
+             <property name="shortcut" >
+              <string>Left</string>
+             </property>
             </widget>
            </item>
            <item row="5" column="1" >
             <widget class="QToolButton" name="zoomOutButton" >
+             <property name="toolTip" >
+              <string>Zoom Out</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Zoom out by pressing this button to see less details.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
               <iconset resource="marble.qrc" >:/icons/zoom-out.png</iconset>
              </property>
+             <property name="shortcut" >
+              <string>-</string>
+             </property>
             </widget>
            </item>
            <item row="0" column="1" >
             <widget class="QToolButton" name="moveUpButton" >
+             <property name="toolTip" >
+              <string>Up</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Tilts the earth's axis towards the user.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
@@ -225,16 +307,31 @@
            </item>
            <item row="1" column="1" >
             <widget class="QToolButton" name="goHomeButton" >
+             <property name="toolTip" >
+              <string>Reset View</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Click this button to restore the original zoom level and view angle.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
               <iconset resource="marble.qrc" >:/icons/go-home.png</iconset>
              </property>
+             <property name="shortcut" >
+              <string>Home</string>
+             </property>
             </widget>
            </item>
            <item row="2" column="1" >
             <widget class="QToolButton" name="moveDownButton" >
+             <property name="toolTip" >
+              <string>Down</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Tilts the earth's axis away from the user.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
@@ -245,23 +342,36 @@
            </item>
            <item row="3" column="1" >
             <widget class="QToolButton" name="zoomInButton" >
+             <property name="toolTip" >
+              <string>Zoom In</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Zoom in by pressing this button to see more details.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
               <iconset resource="marble.qrc" >:/icons/zoom-in.png</iconset>
              </property>
+             <property name="shortcut" >
+              <string>+</string>
+             </property>
             </widget>
            </item>
            <item row="4" column="1" >
             <widget class="QSlider" name="zoomSlider" >
              <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>1</hsizetype>
-               <vsizetype>7</vsizetype>
+              <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip" >
+              <string>Zoom Slider</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Use this slider to adjust the zoom level of the map.</string>
              </property>
              <property name="minimum" >
               <number>1000</number>
@@ -289,9 +399,7 @@
            <item row="6" column="1" >
             <widget class="QFrame" name="m_pSpacerFrame" >
              <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>5</hsizetype>
-               <vsizetype>0</vsizetype>
+              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -312,11 +420,20 @@
            </item>
            <item row="1" column="2" >
             <widget class="QToolButton" name="moveRightButton" >
+             <property name="toolTip" >
+              <string>Right</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Rotates the earth clockwise around its axis.</string>
+             </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
               <iconset resource="marble.qrc" >:/icons/arrow-right.png</iconset>
+             </property>
+             <property name="shortcut" >
+              <string>Right</string>
              </property>
             </widget>
            </item>
@@ -347,22 +464,37 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>336</width>
-        <height>529</height>
+        <width>110</width>
+        <height>110</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Map View</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>8</number>
-       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
+       <property name="leftMargin" >
+        <number>8</number>
+       </property>
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
+       </property>
        <item>
         <widget class="KAtlasThemeSelectView" name="katlasThemeSelectView" >
+         <property name="toolTip" >
+          <string>Map View Browser</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Here you can choose the preferred map view from different topics.</string>
+         </property>
          <property name="autoFillBackground" >
           <bool>true</bool>
          </property>
