@@ -11,8 +11,8 @@ Before Version 0.4 (mid april)
 Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
  * Fix image downloading for Wikipedia					TACK
- * Add "Export Map" to save a screenshot as an image file               ----
- * Add "Print" to print a screenshot                                    ----
+ * Add "Export Map" to save a screenshot as an image file               done
+ * Add "Print" to print a screenshot                                    done
 
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       INGE
@@ -78,15 +78,15 @@ Widget:
    the image, print it and copy it.
 
 Make it a KDE4 application as a real member of kdeedu.
- * KApplication
- * AboutData
- * KConfig XT
- * Translation
- * Docs
- * KDEPrint support
- * DBus Support
+ * KApplication								done
+ * AboutData								done
+ * KConfig XT								TACK
+ * Translation								TACK
+ * Docs									done
+ * KDEPrint support							TACK
+ * DBus Support								TACK
 
-Add a simple alternative Qt4 frontend					TACK
+Add a simple alternative Qt4 frontend					done
 
  
 Before KDE 4.1

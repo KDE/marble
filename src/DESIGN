@@ -13,12 +13,14 @@ displaying the map.
 
 FIXME: Currently the view creates the model, but this will be changed
        very soon.  The model/view separation is not perfect, so we are
-       working on it.  In the future, the main program will create the
-       model and then create the view and controller with a pointer to
-       the model as a parameter.  This will allow the model to have
-       several views with separate sizes, orientations and even
-       projections (flat and spherical, for instance).
-
+       working on it.  In the future, the main program will be able to
+       create the model and then create the view and controller with 
+       a pointer to the model as a parameter.  This will allow the 
+       model to have several views with separate sizes, orientations 
+       and even projections (flat and spherical, for instance).
+       A convenience class "MarbleWidget" will be provided to 
+       accomplish this out of the box (currently this class is 
+       named "KAtlasControl").
 
 2. The World Model
 ==================
@@ -26,12 +28,16 @@ FIXME: Currently the view creates the model, but this will be changed
 The model of the world consists of 3 different parts, which can be
 viewed as separate layers:
 
- - A pixel based area that is split up into tiles.  These tiles are
-   produced from different data sources, either from satellite scans
-   or from photographs.  The tiles are stored in several different
-   resolutions that are used in different zoom levels.  The tiles are
-   automatically generated the first time that the application is
-   started, and are stored into $HOME/.marble/data/maps.
+ - A pixel based area that is split up into tiles.  Depending on the
+   topic these tiles are produced from different data sources, either
+   from satellite scans or from photographs.
+   The tiles are stored in several different resolutions that are used
+   in different zoom levels. The tiles are automatically generated 
+   the first time that the application is started, and are stored into 
+   $HOME/.marble/data/maps. For packaging purposes or to offer the 
+   same data to multiple users you can move these tiles into the 
+   system directory where marble gets installed (e.g. 
+   /usr/share/apps/marble/data/maps).
 
    The main class of the tiles layer is the TextureMapper, which maps
    a tiled texture onto the projected sphere.
@@ -44,19 +50,34 @@ viewed as separate layers:
    longitude as well as the tropics and arctics.
 
    The main classes of the vectors are the GeoPolygon and the PntMap,
-   which contain the actual vectors, but also a bounding box.
+   which contain the actual vectors, but also a bounding box
+   that specifies which area is being covered by each polygon.
 
- - Points of interest.  These are mostly cities, but also some
-   mountains. 
+ - Points of interest.  Right now these are mostly cities, but also 
+   some mountains. 
 
    The main class of the points is the PlaceMark with a somewhat
    arbitrary selection of properties. Another important class is the
    PlaceContainer which collects a number of PlaceMarks into a
    container, just like the name suggests.
 
+   There's a special case that should be pointed out -- especially since
+   it happens with Marble's default map:
+   The Topographical Atlas View provides a special map in terms of 
+   composition: While for the other map views the 3 layers are painted 
+   in simple bottom top order the Topographical Atlas View "merges" the 
+   Texture (which contains the digital elevation data) and a Vector 
+   Layer to create a recolorized bumpmapped layer via the 
+   TextureColorizer class.
+   All map views and their use of layers get specified in a 
+   *.dgml-XML file. The source format for the placemark layer is 
+   Google Earth's KML file format which gets parsed and cached into 
+   a temporary binary file for faster follow-up reading.
+
 
 2.1 The Tile System
 -------------------
+
 
 FIXME: To be written...
 
@@ -65,6 +86,8 @@ FIXME: To be written...
 ---------------------
 
 FIXME: To be written...
+
+FIXME: Explain the way nodes get filtered e.g. by ClipPainter.
 
 FIXME: Explain the differences between the GeoPolygon and the
        ScreenPolygon, and how they interact.  Also the PntMap and the
@@ -76,6 +99,8 @@ FIXME: Explain the differences between the GeoPolygon and the
 
 FIXME: To be written...
 
+FIXME: Explain how PlaceMark labels are placed so they don't cover each 
+other.
 
 3. The Painting Process
 =======================
@@ -141,7 +166,8 @@ KAtlasGlobe	The main model.  Contains (among others):
 		 - PlaceMarkManager
 		 - PlaceMarkModel
 
-VectorComposer	Contains coastlines, islands, lakes, glaciers, rivers
+VectorComposer	Manages the different vector sub-layers which consist 
+                of coastlines, islands, lakes, glaciers, rivers
                 as well as borders for the countries and the US
                 States.  These are all stored in PntMaps, one for each
                 type.  FIXME: Change Name.
@@ -193,8 +219,3 @@ class TileScissor : public QObject {
 class TinyWebBrowser : public QTextBrowser {
 class katlasAboutDialog: public Ui_katlasAboutDialog {};
 class katlasToolBox: public Ui_katlasToolBox {};
-
-Never mind
-----------
-
-class QuaternionSSE
