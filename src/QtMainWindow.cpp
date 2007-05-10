@@ -1,6 +1,7 @@
 #include "QtMainWindow.h"
 
 #include <QtGui/QAction>
+#include <QtGui/QWhatsThis>
 #include <QtGui/QApplication>
 #include <QtGui/QIcon>
 #include <QtGui/QMenuBar>
@@ -51,6 +52,11 @@ void MainWindow::createActions()
      copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
+     whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
+     whatsThisAct->setShortcut(tr("Shift+F1"));
+     whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
+     connect(whatsThisAct, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
+
      aboutMarbleAct = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Desktop Globe"), this);
      aboutMarbleAct->setStatusTip(tr("Show the application's About Box"));
      connect(aboutMarbleAct, SIGNAL(triggered()), this, SLOT(aboutMarble()));
@@ -72,6 +78,8 @@ void MainWindow::createMenus()
     fileMenu->addAction(copyMapAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
+    helpMenu->addAction(whatsThisAct);
+    helpMenu->addSeparator();
     helpMenu->addAction(aboutMarbleAct);
     helpMenu->addAction(aboutQtAct);
 }
@@ -136,6 +144,11 @@ void MainWindow::copyMap()
     QClipboard *clipboard = QApplication::clipboard();
 
     clipboard->setPixmap( mapPixmap );
+}
+
+void MainWindow::enterWhatsThis()
+{
+    QWhatsThis::enterWhatsThisMode();
 }
 
 void MainWindow::aboutMarble()

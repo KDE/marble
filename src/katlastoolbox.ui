@@ -5,12 +5,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>336</width>
-    <height>591</height>
+    <width>361</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+   <sizepolicy>
+    <hsizetype>5</hsizetype>
+    <vsizetype>5</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -28,29 +30,14 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>0</number>
-   </property>
    <item>
     <widget class="QToolBox" name="toolBox" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="minimumSize" >
       <size>
        <width>150</width>
@@ -68,47 +55,26 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>336</width>
-        <height>529</height>
+        <width>361</width>
+        <height>502</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Navigation</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
        <item>
         <layout class="QGridLayout" >
-         <property name="leftMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <property name="horizontalSpacing" >
-          <number>6</number>
-         </property>
-         <property name="verticalSpacing" >
+         <property name="spacing" >
           <number>6</number>
          </property>
          <item row="5" column="0" >
@@ -131,7 +97,9 @@
          <item row="2" column="0" >
           <widget class="QLineEdit" name="searchLineEdit" >
            <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <sizepolicy>
+             <hsizetype>5</hsizetype>
+             <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -147,7 +115,9 @@
          <item row="3" column="0" >
           <widget class="SearchListView" name="locationListView" >
            <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <sizepolicy>
+             <hsizetype>5</hsizetype>
+             <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -200,19 +170,10 @@
        </item>
        <item>
         <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
          <property name="spacing" >
-          <number>0</number>
-         </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
           <number>0</number>
          </property>
          <item>
@@ -233,22 +194,10 @@
          </item>
          <item>
           <layout class="QGridLayout" >
-           <property name="leftMargin" >
+           <property name="margin" >
             <number>0</number>
            </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
-           <property name="horizontalSpacing" >
-            <number>6</number>
-           </property>
-           <property name="verticalSpacing" >
+           <property name="spacing" >
             <number>6</number>
            </property>
            <item row="1" column="0" >
@@ -362,7 +311,9 @@
            <item row="4" column="1" >
             <widget class="QSlider" name="zoomSlider" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
+              <sizepolicy>
+               <hsizetype>0</hsizetype>
+               <vsizetype>3</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -399,7 +350,9 @@
            <item row="6" column="1" >
             <widget class="QFrame" name="m_pSpacerFrame" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <sizepolicy>
+               <hsizetype>0</hsizetype>
+               <vsizetype>0</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -464,28 +417,19 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>110</width>
-        <height>110</height>
+        <width>361</width>
+        <height>505</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Map View</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
-       </property>
-       <property name="leftMargin" >
-        <number>8</number>
-       </property>
-       <property name="topMargin" >
-        <number>8</number>
-       </property>
-       <property name="rightMargin" >
-        <number>8</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>8</number>
        </property>
        <item>
         <widget class="KAtlasThemeSelectView" name="katlasThemeSelectView" >
@@ -508,28 +452,16 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>SearchListView</class>
-   <extends>QListView</extends>
-   <header>searchlistview.h</header>
-  </customwidget>
-  <customwidget>
    <class>KAtlasThemeSelectView</class>
    <extends>QListView</extends>
    <header>katlasthemeselectview.h</header>
   </customwidget>
+  <customwidget>
+   <class>SearchListView</class>
+   <extends>QListView</extends>
+   <header>searchlistview.h</header>
+  </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>searchLineEdit</tabstop>
-  <tabstop>locationListView</tabstop>
-  <tabstop>moveUpButton</tabstop>
-  <tabstop>moveLeftButton</tabstop>
-  <tabstop>goHomeButton</tabstop>
-  <tabstop>moveRightButton</tabstop>
-  <tabstop>moveDownButton</tabstop>
-  <tabstop>zoomInButton</tabstop>
-  <tabstop>zoomSlider</tabstop>
-  <tabstop>zoomOutButton</tabstop>
- </tabstops>
  <resources>
   <include location="marble.qrc" />
  </resources>

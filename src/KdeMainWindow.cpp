@@ -72,8 +72,8 @@ void MainWindow::exportMapScreenShot()
         bool success = mapPixmap.save( fileName );
         if ( success == false )
         {
-            QMessageBox::warning(this, tr("Marble"),
-                   tr( "An error occured while trying to save the file.\n" ),
+            QMessageBox::warning(this, i18n("Marble"),
+                   i18n( "An error occured while trying to save the file.\n" ),
                    QMessageBox::Ok);
         }
     }

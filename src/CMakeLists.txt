@@ -53,7 +53,7 @@ set(marble_SRCS
            Quaternion.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
-            TextureTile.cpp
+           TextureTile.cpp
            TextureMapper.cpp
            GridMap.cpp
            katlascontrol.cpp
@@ -84,6 +84,7 @@ set(marble_SRCS
            placemarkinfodialog.cpp
            katlasflag.cpp
            tinywebbrowser.cpp
+           HttpDownloadManager.cpp
            httpfetchfile.cpp
            measuretool.cpp
 	   katlasaboutdialog.cpp
@@ -127,6 +128,7 @@ set(marble_HDRS
            placemarkinfodialog.h
            katlasflag.h
            tinywebbrowser.h
+           HttpDownloadManager.h
            httpfetchfile.h
            measuretool.h
            katlasaboutdialog.h

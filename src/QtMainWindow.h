@@ -30,6 +30,7 @@ class MainWindow : public QMainWindow
         QAction *printAct;
         QAction *quitAct;
         QAction *copyMapAct;
+        QAction *whatsThisAct;
         QAction *aboutMarbleAct;
         QAction *aboutQtAct;
 
@@ -37,6 +38,7 @@ class MainWindow : public QMainWindow
         void exportMapScreenShot();
         void printMapScreenShot();
         void copyMap();
+        void enterWhatsThis();
         void aboutMarble();
 };
  
