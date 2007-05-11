@@ -84,7 +84,7 @@ set(marble_SRCS
            placemarkinfodialog.cpp
            katlasflag.cpp
            tinywebbrowser.cpp
-           HttpDownloadManager.cpp
+	   #HttpDownloadManager.cpp
            httpfetchfile.cpp
            measuretool.cpp
 	   katlasaboutdialog.cpp
@@ -128,7 +128,7 @@ set(marble_HDRS
            placemarkinfodialog.h
            katlasflag.h
            tinywebbrowser.h
-           HttpDownloadManager.h
+	   #HttpDownloadManager.h
            httpfetchfile.h
            measuretool.h
            katlasaboutdialog.h
