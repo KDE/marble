@@ -72,7 +72,7 @@ class KAtlasView : public QWidget
 	// FIXME: Force update...
     }
 
-    void creatingTilesStart( QString name, QString description );
+    void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
 
  signals:

@@ -31,8 +31,8 @@ KAtlasView::KAtlasView(QWidget *parent)
     //FIXME(ModelView): Provide this to the constructor
 
     m_pGlobe = new KAtlasGlobe( this );
-    connect( m_pGlobe, SIGNAL( creatingTilesStart( QString, QString ) ),
-             this,     SLOT( creatingTilesStart( QString, QString ) ) );
+    connect( m_pGlobe, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
+             this,     SLOT( creatingTilesStart( const QString&, const QString& ) ) );
     connect( m_pGlobe, SIGNAL( creatingTilesProgress( int ) ),
              this,     SLOT( creatingTilesProgress( int ) ) );
 
@@ -189,8 +189,7 @@ void KAtlasView::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    if ( m_pCanvasImage != 0 ) 
-	delete m_pCanvasImage;
+    delete m_pCanvasImage;
 
     m_pCanvasImage = new QImage( width(), height(),
 				 QImage::Format_ARGB32_Premultiplied );
@@ -315,7 +314,7 @@ void KAtlasView::goHome()
 
 // This slot will called when the Globe starts to create the tiles.
 
-void KAtlasView::creatingTilesStart( QString name, QString description )
+void KAtlasView::creatingTilesStart( const QString &name, const QString &description )
 {
     qDebug("KAtlasView::creatingTilesStart called... ");
 
