@@ -1,3 +1,6 @@
+11.05.07 - ingwa
+	Cleaned searchcombobox.{h,cpp}
+	Cleaned searchlistview.{h,cpp}
 09.05.07 - tackat
     - Updated marble.desktop file 
     - Changes in DESIGN and TODO

@@ -45,6 +45,8 @@ placemarkinfodialog.h   placemarkinfodialog.cpp
 Widgets:
 --------
 katlascontrol.h         katlascontrol.cpp
+searchcombobox.h        searchcombobox.cpp
+searchlistview.h        searchlistview.cpp
 
 Items on the widget (QObjects):
 -------------------------------
@@ -73,8 +75,6 @@ texcolorizer.h          texcolorizer.cpp
 xmlhandler.h            xmlhandler.cpp
 
 Widgets:
-searchcombobox.h        searchcombobox.cpp
-searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
 KdeMainWindow.h         KdeMainWindow.cpp
 
