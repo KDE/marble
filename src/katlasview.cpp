@@ -22,15 +22,19 @@
 #endif
 
 
-KAtlasView::KAtlasView(QWidget *parent)
+KAtlasView::KAtlasView(KAtlasGlobe *globe, QWidget *parent)
     : QWidget(parent)
 {
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
-    //FIXME(ModelView): Provide this to the constructor
 
+#if 0
+    //FIXME(ModelView): Provide this to the constructor
     m_pGlobe = new KAtlasGlobe( this );
+#else
+    m_pGlobe = globe;
+#endif
     connect( m_pGlobe, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,     SLOT( creatingTilesStart( const QString&, const QString& ) ) );
     connect( m_pGlobe, SIGNAL( creatingTilesProgress( int ) ),

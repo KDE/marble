@@ -16,10 +16,11 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     m_toolbox = new KAtlasToolBox( this );
     m_toolbox->setFixedWidth( 185 );
 
-    m_katlasview = new KAtlasView( this );
+    // Create the Model (Globe) and one view.
+    m_globe = new KAtlasGlobe( this );
+    m_katlasview = new KAtlasView( m_globe, this );
     m_katlasview->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
 					      QSizePolicy::MinimumExpanding ) );
-
     m_katlasview->setMinimumZoom( m_toolbox->minimumZoom() );
 
     QVBoxLayout *vlayout = new QVBoxLayout( this );

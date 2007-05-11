@@ -1,6 +1,7 @@
 11.05.07 - ingwa
-	Cleaned searchcombobox.{h,cpp}
-	Cleaned searchlistview.{h,cpp}
+	- Create the model in KAtlasControl instead of in the view.
+	- Cleaned searchcombobox.{h,cpp}
+	- Cleaned searchlistview.{h,cpp}
 09.05.07 - tackat
     - Updated marble.desktop file 
     - Changes in DESIGN and TODO

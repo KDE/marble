@@ -43,6 +43,7 @@ class KAtlasControl : public QWidget
     QPixmap mapScreenShot(){ return m_katlasview->mapScreenShot(); }
 
  private:
+    KAtlasGlobe    *m_globe;
     KAtlasView     *m_katlasview;
     KAtlasToolBox  *m_toolbox;
 };
