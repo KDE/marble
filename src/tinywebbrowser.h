@@ -9,10 +9,13 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
+
 #include <QtGui/QTextBrowser>
+
 
 /**
 @author Torsten Rahn
@@ -20,25 +23,30 @@
 
 class HttpFetchFile;
 
-class TinyWebBrowser : public QTextBrowser {
 
-Q_OBJECT
+class TinyWebBrowser : public QTextBrowser
+{
 
-public:
-	TinyWebBrowser( QWidget* parent );
+    Q_OBJECT
 
-public slots:
-	void setSource( QUrl url );
-	void slotDownloadFinished( QString, bool );
+ public:
+    TinyWebBrowser( QWidget* parent );
 
-signals:
-	void statusMessage( QString );
+ public slots:
+    void setSource( QUrl url );
+    void slotDownloadFinished( QString, bool );
 
-protected:
-	HttpFetchFile * m_pFetchFile;
-	virtual QVariant loadResource ( int type, const QUrl & name );
-	QString m_source;
-	QList<QUrl> m_urlList;
+ signals:
+    void statusMessage( QString );
+
+ protected:
+    virtual QVariant loadResource ( int type, const QUrl & name );
+
+ private:
+    HttpFetchFile  *m_fetchFile;
+    QString         m_source;
+    QList<QUrl>     m_urlList;
 };
+
 
 #endif // TINYWEBBROWSER_H

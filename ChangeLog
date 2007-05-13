@@ -1,4 +1,7 @@
 11.05.07 - ingwa
+	- Cleaned tinywebbrowser.{h,cpp}
+
+11.05.07 - ingwa
 	- Create the model in KAtlasControl instead of in the view.
 	- Cleaned searchcombobox.{h,cpp}
 	- Cleaned searchlistview.{h,cpp}
