@@ -2,31 +2,35 @@
 #define MAINWINDOW_H
  
 #include <KXmlGuiWindow>
-
 #include <KAction>
+
 #include "katlascontrol.h"
  
 class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
-    public:
-        MainWindow(QWidget *parent=0);
+ public:
+    MainWindow(QWidget *parent=0);
 
-    private:
-        KAtlasControl *m_katlascontrol;
-	void setupActions();
+ private:
+    void  setupActions();
+    void  createStatusBar();
 
-        void createStatusBar();
+ private slots:
+    void  exportMapScreenShot();
+    void  printMapScreenShot();
+    void  copyMap();
 
-        KAction *m_exportMapAction;
-        KAction *m_printMapAction;
-        KAction *m_copyMapAction;
+ private:
+    // All the functionality is provided by this widget.
+    KAtlasControl  *m_katlascontrol;
 
-    private slots:
-        void exportMapScreenShot();
-        void printMapScreenShot();
-        void copyMap();
+    // Actions for the GUI.
+    KAction        *m_exportMapAction;
+    KAction        *m_printMapAction;
+    KAction        *m_copyMapAction;
 };
+
  
 #endif

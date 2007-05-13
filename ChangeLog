@@ -1,4 +1,5 @@
 11.05.07 - ingwa
+	- Cleaned KdeMainWindow.{h,cpp}
 	- Cleaned tinywebbrowser.{h,cpp}
 
 11.05.07 - ingwa

@@ -42,8 +42,9 @@ Dialogs:
 katlastilecreatordialog.h       katlastilecreatordialog.cpp
 placemarkinfodialog.h   placemarkinfodialog.cpp
 
-Widgets:
---------
+Widgets and Windows:
+--------------------
+KdeMainWindow.h         KdeMainWindow.cpp
 katlascontrol.h         katlascontrol.cpp
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
@@ -74,9 +75,6 @@ katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 texcolorizer.h          texcolorizer.cpp
 xmlhandler.h            xmlhandler.cpp
-
-Widgets:
-KdeMainWindow.h         KdeMainWindow.cpp
 
 
 Special: TexturePalette
