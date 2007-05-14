@@ -29,15 +29,21 @@ Q_OBJECT
 public:
 	HttpFetchFile( QObject* parent = 0 );
 
+    void setServerUrl( const QString& serverUrl ){ m_serverUrl = serverUrl; }
+    void setTargetDir( const QString& targetDir ){ m_targetDir = targetDir; }
+
 public slots:
-	void downloadFile( QUrl );
+	void downloadFile( const QUrl& );
 	void cancelDownload();
-	void httpRequestFinished(int requestId, bool error);
-	void checkResponseHeader(const QHttpResponseHeader &responseHeader);
 
 signals:
 	void downloadDone( QString, bool );
 	void statusMessage( QString );
+
+private slots:
+    // process feedback from m_Http
+    void httpRequestFinished(int requestId, bool error);
+    void checkResponseHeader(const QHttpResponseHeader &responseHeader);
 
 protected:
 	QHttp * m_pHttp;
@@ -46,7 +52,8 @@ protected:
 	bool httpRequestAborted;
 	QMap <int, QString> m_pFileIdMap;
 
-	QString m_cachePath;
+    QString m_serverUrl;
+	QString m_targetDir;
 };
 
 #endif // HTTPFETCHFILE_H

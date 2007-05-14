@@ -1,5 +1,5 @@
-#include <QtCore/QDebug>
 #include "katlasviewinputhandler.h"
+#include <QtCore/QDebug>
 
 #ifndef Q_OS_MACX
 #include "katlasviewinputhandler.moc"
@@ -75,7 +75,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 				m_globe->rotateBy(-(m_gpview->moveStep())*(float)(diry), -(m_gpview->moveStep())*(float)(dirx));
 				m_gpview->repaint();
 			}
-			return TRUE;
+			return true;
 		} 
 		
 		else if (( e->type() == QEvent::MouseMove )||( e->type() == QEvent::MouseButtonPress )||( e->type() == QEvent::MouseButtonRelease)){
@@ -210,9 +210,9 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 			if ( e->type() == QEvent::Wheel ){
 				QWheelEvent* wheelevt = static_cast<QWheelEvent*>(e);
 				m_gpview->zoomViewBy((int)(wheelevt->delta()/3));
-				return TRUE;
+				return true;
 			}
 			else
-				return FALSE;
+				return false;
 		}
 }

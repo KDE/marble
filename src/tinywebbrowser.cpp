@@ -53,14 +53,14 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name )
 }
 
 
-void TinyWebBrowser::setSource( QUrl url )
+void TinyWebBrowser::setSource( const QUrl& url )
 {
     m_source = QFileInfo( url.path() ).fileName();
     m_fetchFile->downloadFile( url );
 }
 
 
-void TinyWebBrowser::slotDownloadFinished( QString filename, bool )
+void TinyWebBrowser::slotDownloadFinished( const QString& filename, bool )
 {
     if ( filename == m_source )	{
         QTextBrowser::setSource( filename );

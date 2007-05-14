@@ -3,7 +3,7 @@
 //
 // Description: KAtlasMapScale 
 
-// KAtlasMapScale resembles the scale in terms of value and visualisation
+// KAtlasMapScale resembles the scale in terms of value and visualization
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2006
 //

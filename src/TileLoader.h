@@ -22,10 +22,13 @@
 #ifndef __MARBLE__TILELOADER_H
 #define __MARBLE__TILELOADER_H
 
+#include <QtCore/QDebug>
 #include <QtCore/QHash>
+#include <QtCore/QObject>
 #include <QtCore/QString>
 
 class TextureTile;
+class HttpDownloadManager;
 
 /**
  * @short Tile loading from a quad tree
@@ -40,7 +43,8 @@ class TextureTile;
  * @author Torsten Rahn rahn @ kde.org
  */
 
-class TileLoader {
+class TileLoader : public QObject {
+    Q_OBJECT
  public:
     TileLoader( const QString& theme );
     virtual ~TileLoader(){}
@@ -73,6 +77,8 @@ class TileLoader {
  protected:
 
     TextureTile  *m_tile;
+    HttpDownloadManager *m_downloadManager;
+
     QString       m_theme;
 
     QHash <int, TextureTile*>  m_tileHash;
@@ -80,6 +86,9 @@ class TileLoader {
 
     int           m_tileWidth;
     int           m_tileHeight;
+
+public slots:
+    void message( const QString& test ){ qDebug() << "test"; }
 };
 
 

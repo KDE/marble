@@ -26,19 +26,19 @@ class PlaceMarkManager
     PlaceMarkManager();
     ~PlaceMarkManager(){};
 
-    void addPlaceMarkFile( QString );
+    void addPlaceMarkFile( const QString& );
 
     PlaceContainer* getPlaceContainer() {
         m_placecontainer->sort();
         return m_placecontainer;
     }
 
-    void loadKml( QString );
+    void loadKml( const QString& );
 
  protected:
-    void importKml( QString, PlaceContainer* );
-    void saveFile( QString, PlaceContainer* );
-    bool loadFile( QString, PlaceContainer* );
+    void importKml( const QString&, PlaceContainer* );
+    void saveFile( const QString&, PlaceContainer* );
+    bool loadFile( const QString&, PlaceContainer* );
 
  protected:
     PlaceContainer  *m_placecontainer;

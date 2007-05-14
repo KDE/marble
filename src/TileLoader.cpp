@@ -24,11 +24,12 @@
 
 #include <cmath>
 
+#include "HttpDownloadManager.h"
 #include "katlasdirs.h"
 #include "TextureTile.h"
 
 #include <QtCore/QDebug>
-
+#include <QtCore/QObject>
 
 #ifdef Q_CC_MSVC
 double log(int i)
@@ -41,6 +42,7 @@ double log(int i)
 TileLoader::TileLoader( const QString& theme )
 {
     setMap( theme );
+    m_downloadManager = new HttpDownloadManager();
 }
 
 
@@ -51,7 +53,8 @@ void TileLoader::setMap( const QString& theme )
 
     m_theme = theme;
 
-    m_tile = new TextureTile( 0, 0, 0, m_theme );
+    m_tile = new TextureTile();
+    m_tile->loadTile( 0, 0, 0, m_theme, false );
 
     // We assume that all tiles have the same size. TODO: check to be safe
     m_tileWidth  = m_tile->rawtile()->width();
@@ -103,9 +106,11 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
     if ( !m_tileHash.contains( m_tileId ) ) {
-        m_tile = new TextureTile( tilx, tily, tileLevel, m_theme );
+        m_tile = new TextureTile();
         m_tileHash[m_tileId] = m_tile;
-    }
+        connect( m_tile, SIGNAL( downloadTile( QString ) ), m_downloadManager, SLOT( addJob( QString ) ) );
+        m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
+    } 
 
     // ...otherwise pick the correct one from the hash
     else {
@@ -226,3 +231,8 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
     return noerr;
 }
+
+
+#ifndef Q_OS_MACX
+#include "TileLoader.moc"
+#endif

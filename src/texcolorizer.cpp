@@ -10,7 +10,7 @@
 
 #include "texturepalette.cpp"
 
-TextureColorizer::TextureColorizer(QString seafile, QString landfile){
+TextureColorizer::TextureColorizer(const QString& seafile, const QString& landfile){
 }
 
 void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, const int& radius){

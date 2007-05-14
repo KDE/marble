@@ -35,7 +35,7 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     Q_OBJECT
 
  public:
-    PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
+    explicit PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
 
  signals:
     void source( QUrl );

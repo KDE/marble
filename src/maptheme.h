@@ -24,7 +24,7 @@ class MapTheme : public QObject
 
 public:
     MapTheme(QObject *parent = 0);
-    int open( QString path );
+    int open( const QString& path );
 
     QString name()          const { return m_name;        }
     QString prefix()        const { return m_prefix;      }

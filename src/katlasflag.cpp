@@ -13,7 +13,7 @@ KAtlasFlag::KAtlasFlag( QObject* parent ) : QObject(parent) {
 	QPixmapCache::setCacheLimit ( 384 );
 }
 
-void KAtlasFlag::setFlag( QString filename, QSize size ){
+void KAtlasFlag::setFlag( const QString& filename, const QSize& size ){
 	m_filename = filename;
 	m_size = size;
 }

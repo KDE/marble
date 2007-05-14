@@ -13,7 +13,7 @@ class SearchComboBox : public QComboBox
     SearchComboBox(QWidget*);
 
  public slots:
-    void showListView(QString);
+    void showListView(const QString&);
 };
 
 

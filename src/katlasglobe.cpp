@@ -119,7 +119,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
     else
         m_texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
 
-    m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) );
+    m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) + 1 );
 
     if ( m_placecontainer == 0)
         m_placecontainer = new PlaceContainer("placecontainer");
@@ -166,7 +166,7 @@ void KAtlasGlobe::resize()
 }
 
 
-void KAtlasGlobe::paintGlobe(ClipPainter* painter, QRect dirty)
+void KAtlasGlobe::paintGlobe(ClipPainter* painter, const QRect& dirty)
 {
     if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ) {
 
@@ -326,7 +326,7 @@ bool KAtlasGlobe::screenCoordinates( const float lng, const float lat,
         return false;
 }
 
-void KAtlasGlobe::addPlaceMarkFile( QString filename )
+void KAtlasGlobe::addPlaceMarkFile( const QString& filename )
 {
     m_placemarkmanager->loadKml( filename );
 

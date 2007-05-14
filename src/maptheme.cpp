@@ -18,7 +18,7 @@ MapTheme::MapTheme(QObject *parent)
 }
 
 
-int MapTheme::open( QString path )
+int MapTheme::open( const QString& path )
 {
     QDomDocument  doc( "DeskGlobeML" );
     QFile         file( path );
@@ -80,7 +80,7 @@ int MapTheme::open( QString path )
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
-                            m_labelcolor.setNamedColor( "#" + labelStyleSibling.text() );
+                            m_labelcolor.setNamedColor( '#' + labelStyleSibling.text() );
                             // qDebug() << "#" + labelStyleSibling.text();
                         }
                         labelStyleSibling = labelStyleSibling.nextSiblingElement();
@@ -96,7 +96,7 @@ int MapTheme::open( QString path )
                         m_bitmaplayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_bitmaplayer.type    = mapStyleSibling.attribute( "type", "" );
                         m_bitmaplayer.dem     = mapStyleSibling.attribute( "dem", "" );
-                        if ( m_bitmaplayer.dem == "" )
+                        if ( m_bitmaplayer.dem.isEmpty() )
                             m_bitmaplayer.dem = "false";
                     }
 
@@ -124,9 +124,9 @@ int MapTheme::open( QString path )
 
 QStringList MapTheme::findMapThemes( const QString& path )
 {
-    QDir  localdirs = QDir( KAtlasDirs::localDir() + "/" + path );
-    QDir  sysdirs   = QDir( KAtlasDirs::systemDir() + "/" + path );
-    QDir  unixdirs  = QDir( KAtlasDirs::unixDir() + "/" + path );
+    QDir  localdirs = QDir( KAtlasDirs::localDir() + '/' + path );
+    QDir  sysdirs   = QDir( KAtlasDirs::systemDir() + '/' + path );
+    QDir  unixdirs  = QDir( KAtlasDirs::unixDir() + '/' + path );
 
     QStringList  localmappaths = localdirs.entryList( QStringList( "*" ),
                                                       QDir::AllDirs
@@ -170,7 +170,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
 
     QStringListIterator  i( localmapdirs );
     while ( i.hasNext() ) {
-        themedir = i.next() + "/";
+        themedir = i.next() + '/';
         themedirname = QDir( themedir ).dirName();
         // qDebug() << themedir;
 
@@ -181,7 +181,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
             while ( k.hasNext() ) {
                 themexml = k.next();
                 // qDebug() << themedirname + "/" + themexml;
-                mapfiles << themedirname + "/" + themexml;
+                mapfiles << themedirname + '/' + themexml;
             }
         }
         // else qDebug("Empty *.dgml list!");
@@ -200,7 +200,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
             while ( l.hasNext() ) {
                 themexml = l.next();
                 // qDebug() << themedirname + "/" + themexml;
-                mapfiles << themedirname + "/" + themexml;
+                mapfiles << themedirname + '/' + themexml;
             }
         }
         // else qDebug("Empty *.dgml list!");
@@ -219,7 +219,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
             while ( l.hasNext() ) {
                 themexml = l.next();
                 // qDebug() << themedirname + "/" + themexml;
-                mapfiles << themedirname + "/" + themexml;
+                mapfiles << themedirname + '/' + themexml;
             }
         }
         // else qDebug("Empty *.dgml list!");
@@ -264,7 +264,7 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 maptheme->name(), Qt::DisplayRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + "/" + maptheme->icon() ) ), 
+                                QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
                                 maptheme->description(), Qt::ToolTipRole);

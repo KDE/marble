@@ -23,9 +23,9 @@ SearchListView::SearchListView(QWidget* parent)
 }
 
 
-void SearchListView::selectItem(QString text)
+void SearchListView::selectItem(const QString& text)
 {
-    if ( text == "" ) {
+    if ( text.isEmpty() ) {
         clearSelection();
         scrollToTop();
         emit activated(QModelIndex());

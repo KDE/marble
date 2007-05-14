@@ -16,7 +16,7 @@ class SearchListView : public QListView
     void centerOn(const QModelIndex&);
 
  public slots:
-    void  selectItem(QString);
+    void  selectItem(const QString&);
     void  activate() {
         if ( selectedIndexes().size() > 0 )
             emit activated( currentIndex() );

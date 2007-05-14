@@ -4,7 +4,6 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QPoint>
-#include <QtCore/QDebug>
 #include <QtGui/QPainter>
 
 #include "Quaternion.h"

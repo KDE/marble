@@ -13,7 +13,7 @@ class PlaceMark
 {
  public:
     PlaceMark();
-    PlaceMark( QString );
+    PlaceMark( const QString& );
 
     GeoPoint  coordinate() const { return m_coordinate; } 
     void      coordinate( float &lon, float &lat );

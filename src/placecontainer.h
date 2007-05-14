@@ -28,9 +28,9 @@ class PlaceContainer : public QVector<PlaceMark*>
 {
  public:
     PlaceContainer();
-    PlaceContainer( QString name );
+    PlaceContainer( const QString& name );
 
-    void setName( QString name ) { m_name = name; }
+    void setName( const QString& name ) { m_name = name; }
     QString name() const         { return m_name; }
 
     inline void clearTextPixmaps()

@@ -1,3 +1,7 @@
+15.05.07 - tackat
+	- Made changes according to Krazy check
+	- added incomplete HttpDownloadManager
+
 11.05.07 - ingwa
 	- Cleaned KdeMainWindow.{h,cpp}
 	- Cleaned tinywebbrowser.{h,cpp}

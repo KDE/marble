@@ -36,7 +36,7 @@ PlaceMark::PlaceMark()
     m_selected     = 0; // 0: not selected 1: centered 2:hover
 }
 
-PlaceMark::PlaceMark( QString _name )
+PlaceMark::PlaceMark( const QString& _name )
   : m_coordinate(),
     m_name( _name )
 {

@@ -27,7 +27,7 @@ public:
 	KAtlasFlag( QObject *parent = 0 );
 
 	QPixmap& flag(){ return m_pixmap; }
-	void setFlag( QString filename, QSize size );
+	void setFlag( const QString& filename, const QSize& size );
 
 public slots:
 	void slotDrawFlag();

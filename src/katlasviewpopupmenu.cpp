@@ -1,3 +1,5 @@
+#include "katlasviewpopupmenu.h"
+
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
@@ -6,7 +8,6 @@
 #endif
 
 #include "katlasaboutdialog.h"
-#include "katlasviewpopupmenu.h"
 #include "katlasview.h"
 #include "katlasglobe.h"
 #include "placemark.h"

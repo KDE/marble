@@ -19,14 +19,14 @@ PlaceMarkManager::PlaceMarkManager()
 }
 
 
-void PlaceMarkManager::addPlaceMarkFile( QString filepath )
+void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
 
     QString  defaultcachename;
     QString  defaultsrcname;
     QString  defaulthomecache;
 
-    if ( !filepath.contains( "\\" && !filepath.contains( "/" ) ) ) {
+    if ( !filepath.contains( "\\" && !filepath.contains( '/' ) ) ) {
         defaultcachename = KAtlasDirs::path( "placemarks/" + filepath + ".cache" );
         defaultsrcname   = KAtlasDirs::path( "placemarks/" + filepath + ".kml");
         defaulthomecache = KAtlasDirs::localDir() + "/placemarks/" + filepath + ".cache";
@@ -74,7 +74,7 @@ void PlaceMarkManager::addPlaceMarkFile( QString filepath )
 }
 
 
-void PlaceMarkManager::loadKml( QString filename )
+void PlaceMarkManager::loadKml( const QString& filename )
 {
     // This still is buggy and needs a lot of work as does the concept
     // as a whole ...
@@ -87,7 +87,7 @@ void PlaceMarkManager::loadKml( QString filename )
     importKml( filename, m_placecontainer );
 }
 
-void PlaceMarkManager::importKml( QString filename, PlaceContainer* placecontainer )
+void PlaceMarkManager::importKml( const QString& filename, PlaceContainer* placecontainer )
 {
 
     KAtlasXmlHandler handler( placecontainer );
@@ -111,7 +111,7 @@ void PlaceMarkManager::importKml( QString filename, PlaceContainer* placecontain
     reader.parse( source );
 }
 
-void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontainer )
+void PlaceMarkManager::saveFile( const QString& filename, PlaceContainer* placecontainer )
 {
     if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false ) 
         ( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/placemarks/" );
@@ -150,7 +150,7 @@ void PlaceMarkManager::saveFile( QString filename, PlaceContainer* placecontaine
 }
 
 
-bool PlaceMarkManager::loadFile( QString filename, 
+bool PlaceMarkManager::loadFile( const QString& filename, 
                                  PlaceContainer* placecontainer )
 {
     QFile  file( filename );

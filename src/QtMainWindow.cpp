@@ -103,7 +103,7 @@ void MainWindow::exportMapScreenShot()
         if ( success == false )
         {
             QMessageBox::warning(this, tr("Marble"),
-                   tr( "An error occured while trying to save the file.\n" ),
+                   tr( "An error occurred while trying to save the file.\n" ),
                    QMessageBox::Ok);
         }
     }

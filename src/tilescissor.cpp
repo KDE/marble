@@ -28,8 +28,8 @@ void TileScissor::createTiles()
 
     QApplication::processEvents(); 
 
-    QString srcpath = KAtlasDirs::path( "maps/earth/" + m_prefix + "/" + m_installmap );
-    QString destpath = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + "/";
+    QString srcpath = KAtlasDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
+    QString destpath = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + '/';
 
     qDebug() << "Creating tiles from: " << srcpath;
     QImageReader testimg( srcpath );

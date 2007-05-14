@@ -32,7 +32,7 @@ typedef union {
 
 class TextureColorizer {
 public:
-	TextureColorizer(QString, QString);
+	TextureColorizer(const QString&, const QString&);
 	virtual ~TextureColorizer(){}
 	void colorize(QImage*, const QImage*, const int&);
 private:

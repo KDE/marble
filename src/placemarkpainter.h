@@ -1,9 +1,9 @@
 //
-// C++ Interface: gpmapscale
+// C++ Interface: placemarkpainter
 //
-// Description: KAtlasMapScale 
+// Description: PlaceMarkPainter
 
-// KAtlasMapScale resembles the scale in terms of value and visualisation
+// PlaceMarkPainter is responsible for drawing the PlaceMarks on the map
 //
 // Author: Torsten Rahn <tackat@kde.org>, (C) 2006
 //

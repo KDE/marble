@@ -49,7 +49,7 @@ class KAtlasGlobe  : public QObject
 
     void  setCanvasImage(QImage*);
 
-    void  paintGlobe(ClipPainter*, QRect);
+    void  paintGlobe(ClipPainter*, const QRect&);
 
     void  resize();
 
@@ -77,7 +77,7 @@ class KAtlasGlobe  : public QObject
 
     bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_planetAxis == m_planetAxisUpdated ); }
 
-    void addPlaceMarkFile( QString filename );
+    void addPlaceMarkFile( const QString& filename );
 
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 

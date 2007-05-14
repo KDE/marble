@@ -24,7 +24,7 @@ SearchComboBox::SearchComboBox(QWidget* parent)
     // connect(this, SIGNAL(editTextChanged(QString)), SLOT(showListView(QString)));
 }
 
-void SearchComboBox::showListView(QString text)
+void SearchComboBox::showListView(const QString& text)
 {
     QAbstractItemView  *listview = view();
     listview->show();

@@ -8,10 +8,10 @@
 
 HttpFetchFile::HttpFetchFile( QObject *parent ) : QObject( parent ) {
 	m_pHttp = new QHttp(this);
-	m_cachePath = KAtlasDirs::localDir() + "/cache/";
+	m_targetDir = KAtlasDirs::localDir() + "/cache/";
 
-	if ( QDir( m_cachePath ).exists() == false ) 
-		( QDir::root() ).mkpath( m_cachePath );
+	if ( QDir( m_targetDir ).exists() == false ) 
+		( QDir::root() ).mkpath( m_targetDir );
 	// What if we don't succeed in creating the path?
 
 	connect(m_pHttp, SIGNAL(requestFinished(int, bool)),
@@ -20,7 +20,7 @@ HttpFetchFile::HttpFetchFile( QObject *parent ) : QObject( parent ) {
 		this, SLOT(checkResponseHeader(const QHttpResponseHeader &)));
 }
 
-void HttpFetchFile::downloadFile( QUrl url ){
+void HttpFetchFile::downloadFile( const QUrl& url ){
 
 	QString fileName = QFileInfo(url.path()).fileName();
 
@@ -30,10 +30,10 @@ void HttpFetchFile::downloadFile( QUrl url ){
 		return;
 	}
 
-	m_pFile = new QFile( m_cachePath + fileName);
+	m_pFile = new QFile( m_targetDir + fileName);
 	if (!m_pFile->open(QIODevice::WriteOnly)) {
 		emit statusMessage( tr("Unable to save the file %1: %2.")
-			.arg( m_cachePath + fileName).arg(m_pFile->errorString()) );
+			.arg( m_targetDir + fileName).arg(m_pFile->errorString()) );
 		delete m_pFile;
 		m_pFile = 0;
 		return;

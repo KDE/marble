@@ -29,9 +29,12 @@ class TextureTile : public QObject {
     Q_OBJECT
 
  public:
-    TextureTile( int x, int y, int level, const QString& theme );
+    TextureTile();
 
     virtual ~TextureTile();
+
+    void loadTile( int x, int y, int level, 
+           const QString& theme, bool requestRepaint = true );
 
     const int  depth() const        { return m_depth; }
 
@@ -44,15 +47,11 @@ class TextureTile : public QObject {
     uint   **jumpTable32;
 
  signals:
-    void downloadTile( const QString& filename );
+    void downloadTile( QString );
     void tileUpdate();
 
  public slots:
     void slotLoadTile( const QString& path );
-
- protected:
-    void loadTile( int x, int y, int level, 
-		   const QString& theme, bool requestRepaint = true );
 
  protected:
     QImage  *m_rawtile;

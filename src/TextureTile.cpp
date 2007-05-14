@@ -38,11 +38,10 @@ static uchar **jumpTableFromQImage8( QImage &img )
 }
 
 
-TextureTile::TextureTile( int x, int y, int level, const QString& theme )
+TextureTile::TextureTile()
     : QObject()
 {
     m_rawtile = 0;
-    loadTile( x, y, level, theme, false );
 }
 
 
@@ -122,6 +121,7 @@ void TextureTile::loadTile( int x, int y, int level,
 	    }
 	}
 	else {
+        qDebug() << "emit downloadTile(" << relfilename << ");";
 	    emit downloadTile( relfilename );
 	}
     }

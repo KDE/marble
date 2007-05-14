@@ -26,7 +26,7 @@ class KAtlasView : public QWidget
     Q_OBJECT
 
  public:
-    KAtlasView(KAtlasGlobe *globe, QWidget *parent = 0);
+    explicit KAtlasView(KAtlasGlobe *globe, QWidget *parent = 0);
 
     // The model this view shows.
     KAtlasGlobe* globe() const { return m_pGlobe; }

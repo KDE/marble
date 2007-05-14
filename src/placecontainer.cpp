@@ -7,7 +7,7 @@ PlaceContainer::PlaceContainer()
 }
 
 
-PlaceContainer::PlaceContainer( QString name )
+PlaceContainer::PlaceContainer( const QString& name )
     : m_name(name)
 {
     clear();
