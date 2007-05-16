@@ -1,5 +1,5 @@
 #ifndef GPXMLHANDLER_H
-#define GPXMLHANDlER_H
+#define GPXMLHANDLER_H
 
 #include <QtXml/QXmlDefaultHandler>
 #include <QtCore/QDebug>
