@@ -11,10 +11,6 @@
 #include "katlasdirs.h"
 
 
-const float  eps     = .00001f ;
-const float  rad2int = 21600.0 / M_PI;
-
-
 VectorComposer::VectorComposer()
 {
 
