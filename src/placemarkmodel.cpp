@@ -139,64 +139,64 @@ namespace GeoString
         //       check whether each's letter is below 0x007b and
         //       only if it's  
 
-        for ( int i = 1; i < sizeof(similar_a)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_a)/csize; ++i )
             result.replace( similar_a[i], similar_a[0] );
 
-        for ( int i = 1; i < sizeof(similar_A)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_A)/csize; ++i )
             result.replace( similar_A[i], similar_A[0] );
 
-        for ( int i = 1; i < sizeof(similar_c)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_c)/csize; ++i )
             result.replace( similar_c[i], similar_c[0] );
 
-        for ( int i = 1; i < sizeof(similar_C)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_C)/csize; ++i )
             result.replace( similar_C[i], similar_C[0] );
 
-        for ( int i = 1; i < sizeof(similar_e)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_e)/csize; ++i )
             result.replace( similar_e[i], similar_e[0] );
 
-        for ( int i = 1; i < sizeof(similar_E)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_E)/csize; ++i )
             result.replace( similar_E[i], similar_E[0] );
 
-        for ( int i = 1; i < sizeof(similar_i)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_i)/csize; ++i )
             result.replace( similar_i[i], similar_i[0] );
 
-        for ( int i = 1; i < sizeof(similar_I)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_I)/csize; ++i )
             result.replace( similar_I[i], similar_I[0] );
-        /*
-          for ( int i = 1; i < sizeof(similar_n)/csize; ++i )
-          result.replace( similar_n[i], similar_n[0] );
+#if 0
+        for ( uint i = 1; i < sizeof(similar_n)/csize; ++i )
+            result.replace( similar_n[i], similar_n[0] );
 
-          for ( int i = 1; i < sizeof(similar_N)/csize; ++i )
-          result.replace( similar_N[i], similar_N[0] );
-        */
-        for ( int i = 1; i < sizeof(similar_o)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_N)/csize; ++i )
+            result.replace( similar_N[i], similar_N[0] );
+#endif
+        for ( uint i = 1; i < sizeof(similar_o)/csize; ++i )
             result.replace( similar_o[i], similar_o[0] );
 
-        for ( int i = 1; i < sizeof(similar_O)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_O)/csize; ++i )
             result.replace( similar_O[i], similar_O[0] );
 #if 0
-        for ( int i = 1; i < sizeof(similar_s)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_s)/csize; ++i )
             result.replace( similar_s[i], similar_s[0] );
 
-        for ( int i = 1; i < sizeof(similar_S)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_S)/csize; ++i )
             result.replace( similar_S[i], similar_S[0] );
 
-        for ( int i = 1; i < sizeof(similar_t)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_t)/csize; ++i )
             result.replace( similar_t[i], similar_t[0] );
 
-        for ( int i = 1; i < sizeof(similar_T)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_T)/csize; ++i )
             result.replace( similar_T[i], similar_T[0] );
 #endif
-        for ( int i = 1; i < sizeof(similar_u)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_u)/csize; ++i )
             result.replace( similar_u[i], similar_u[0] );
 
-        for ( int i = 1; i < sizeof(similar_U)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_U)/csize; ++i )
             result.replace( similar_U[i], similar_U[0] );
 #if 0
-        for ( int i = 1; i < sizeof(similar_y)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_y)/csize; ++i )
             result.replace( similar_y[i], similar_y[0] );
 
-        for ( int i = 1; i < sizeof(similar_Y)/csize; ++i )
+        for ( uint i = 1; i < sizeof(similar_Y)/csize; ++i )
             result.replace( similar_Y[i], similar_Y[0] );
 #endif
         return result;
@@ -215,11 +215,15 @@ PlaceMarkModel::~PlaceMarkModel(){
 
 int PlaceMarkModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED( parent );
+
     return m_placemarkindex.size();
 }
 
 int PlaceMarkModel::columnCount(const QModelIndex &parent) const
 {
+    Q_UNUSED( parent );
+
     return 1;
 }
 

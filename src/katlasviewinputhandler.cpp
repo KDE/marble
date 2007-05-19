@@ -40,6 +40,8 @@ KAtlasViewInputHandler::KAtlasViewInputHandler(KAtlasView *gpview, KAtlasGlobe *
 
 bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e ){
 		
+    Q_UNUSED( o );
+
 //	if ( o == gpview ){
 		if ( e->type() == QEvent::KeyPress ) {
 			QKeyEvent *k = (QKeyEvent *)e;

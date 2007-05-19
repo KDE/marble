@@ -37,6 +37,9 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
     int  width    = 52;
     int  polarity = 0;
 
+    Q_UNUSED( canvaswidth );
+    Q_UNUSED( canvasheight );
+
     if ( northpoley != 0 ) 
         polarity = northpoley / abs(northpoley);
     else

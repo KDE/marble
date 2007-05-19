@@ -33,6 +33,8 @@ bool KAtlasXmlHandler::startDocument(){
 
 bool KAtlasXmlHandler::startElement( const QString&, const QString&, const QString &name, const QXmlAttributes& attrs ){
 
+    Q_UNUSED( attrs );
+
 	QString nameLower = name.toLower();
 
 	if ( nameLower == "kml" ){

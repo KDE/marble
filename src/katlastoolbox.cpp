@@ -21,77 +21,100 @@
 #include "katlastoolbox.h"
 
 #include <QtCore/QtAlgorithms>
-#include <QtGui/QStringListModel>
-#include "maptheme.h"
-
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
+#include <QtGui/QStringListModel>
 
-KAtlasToolBox::KAtlasToolBox(QWidget *parent) : QWidget(parent), m_searchTriggered(false) {
+#include "maptheme.h"
 
-	setupUi(this);
-	minimumzoom = 950;
 
-	setFocusPolicy(Qt::NoFocus);
+KAtlasToolBox::KAtlasToolBox(QWidget *parent)
+    : QWidget( parent ),
+      m_searchTriggered( false )
+{
+    setupUi( this );
+ 
+    m_minimumzoom = 950;
 
-	toolBoxTab1->setBackgroundRole(QPalette::Window);
-	toolBoxTab2->setBackgroundRole(QPalette::Window);
+    setFocusPolicy( Qt::NoFocus );
 
-	connect(goHomeButton, SIGNAL(clicked()), this, SIGNAL(goHome())); 
-	connect(zoomSlider, SIGNAL(valueChanged(int)), this, SIGNAL(zoomChanged(int))); 
-	connect(zoomInButton, SIGNAL(clicked()), this, SIGNAL(zoomIn())); 
-	connect(zoomOutButton, SIGNAL(clicked()), this, SIGNAL(zoomOut())); 
+    toolBoxTab1->setBackgroundRole( QPalette::Window );
+    toolBoxTab2->setBackgroundRole( QPalette::Window );
 
-	connect(moveLeftButton, SIGNAL(clicked()), this, SIGNAL(moveLeft())); 
-	connect(moveRightButton, SIGNAL(clicked()), this, SIGNAL(moveRight())); 
-	connect(moveUpButton, SIGNAL(clicked()), this, SIGNAL(moveUp())); 
-	connect(moveDownButton, SIGNAL(clicked()), this, SIGNAL(moveDown())); 
+    connect( goHomeButton, SIGNAL( clicked() ), 
+             this,         SIGNAL( goHome() ) ); 
+    connect( zoomSlider,   SIGNAL( valueChanged( int ) ),
+             this,         SIGNAL( zoomChanged( int ) ) ); 
+    connect( zoomInButton,  SIGNAL( clicked() ),
+             this,          SIGNAL( zoomIn() ) ); 
+    connect( zoomOutButton, SIGNAL( clicked() ),
+             this,          SIGNAL( zoomOut() ) ); 
 
-    connect(searchLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(searchLineChanged(const QString&)));
+    connect( moveLeftButton,  SIGNAL( clicked() ),
+             this,            SIGNAL( moveLeft() ) ); 
+    connect( moveRightButton, SIGNAL( clicked() ),
+             this,            SIGNAL( moveRight() ) ); 
+    connect( moveUpButton,    SIGNAL( clicked() ),
+             this,            SIGNAL( moveUp() ) ); 
+    connect( moveDownButton,  SIGNAL( clicked() ),
+             this,            SIGNAL (moveDown() ) ); 
 
-	connect(locationListView, SIGNAL(centerOn(const QModelIndex&)), this, SIGNAL(centerOn(const QModelIndex&)));
+    connect(searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
+            this,             SLOT( searchLineChanged( const QString& ) ) );
 
-	QStringList mapthemedirs = MapTheme::findMapThemes( "maps/earth" );
+    connect( locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
+             this,             SIGNAL( centerOn( const QModelIndex& ) ) );
 
-	QStandardItemModel* mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-	katlasThemeSelectView->setModel( mapthememodel );
+    QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
+    QStandardItemModel  *mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
+    katlasThemeSelectView->setModel( mapthememodel );
 
-	connect(katlasThemeSelectView, SIGNAL(selectMapTheme( const QString& )), this, SIGNAL(selectMapTheme( const QString& )));
+    connect( katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
+             this,                  SIGNAL( selectMapTheme( const QString& ) ) );
 }
 
-void KAtlasToolBox::changeZoom(int zoom){
-// No infinite loops here
-//	if (zoomSlider->value() != zoom)
-		zoomSlider->setValue(zoom);
-		zoomSlider->setMinimum( minimumzoom );
+
+void KAtlasToolBox::changeZoom(int zoom)
+{
+    // No infinite loops here
+    // if (zoomSlider->value() != zoom)
+    zoomSlider->setValue( zoom );
+    zoomSlider->setMinimum( m_minimumzoom );
 }
 
-void KAtlasToolBox::resizeEvent ( QResizeEvent * ){
-	if ( height() < 480 ){
-		if ( zoomSlider->isHidden() == false ){
-			zoomSlider->hide();
-			m_pSpacerFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-		}
-	} else {
-		if ( zoomSlider->isHidden() == true ){
-			zoomSlider->show();
-			m_pSpacerFrame->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-		}
-	}
+
+void KAtlasToolBox::resizeEvent ( QResizeEvent * )
+{
+    if ( height() < 480 ) {
+        if ( !zoomSlider->isHidden() ) {
+            zoomSlider->hide();
+            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                           QSizePolicy::Expanding );
+        }
+    } else {
+        if ( zoomSlider->isHidden() == true ) {
+            zoomSlider->show();
+            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                           QSizePolicy::Fixed );
+        }
+    }
 } 
 
-void KAtlasToolBox::searchLineChanged(const QString &search) {
+void KAtlasToolBox::searchLineChanged(const QString &search)
+{
     m_searchTerm = search;
-    if(m_searchTriggered) return;
+    if ( m_searchTriggered )
+        return;
     m_searchTriggered = true;
-    QTimer::singleShot(0, this, SLOT(search()));
-
+    QTimer::singleShot( 0, this, SLOT( search() ) );
 }
 
-void KAtlasToolBox::search() {
+
+void KAtlasToolBox::search()
+{
     m_searchTriggered = false;
-    int currentSelected = locationListView->currentIndex().row();
-    locationListView->selectItem(m_searchTerm);
-    if(currentSelected != locationListView->currentIndex().row())
+    int  currentSelected = locationListView->currentIndex().row();
+    locationListView->selectItem( m_searchTerm );
+    if ( currentSelected != locationListView->currentIndex().row() )
         locationListView->activate();
 }

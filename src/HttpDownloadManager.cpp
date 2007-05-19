@@ -41,6 +41,7 @@ void HttpDownloadManager::addJob( QString relativeUrl)
 
 void HttpDownloadManager::removeJob(HttpJob* job)
 {
+    Q_UNUSED( job );
 //    m_activatedJobList
 //    removeAll( job );
 }

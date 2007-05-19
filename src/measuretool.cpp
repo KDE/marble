@@ -44,8 +44,8 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
     int  imgheight = 2 * imgry;
     int  x = 0;
     int  y = 0;
-    int  lastx = 0;
-    int  lasty = 0; 
+    //int  lastx = 0;
+    //int  lasty = 0; 
 
     Quaternion  invRotAxis = rotAxis.inverse();
     Quaternion  qpos;
@@ -142,6 +142,9 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter,
                                            int imgrx, int imgry, 
                                            float totalDistance )
 {
+    Q_UNUSED( imgrx );
+    Q_UNUSED( imgry );
+
     // if ( totalDistance == m_totalDistance)
     QString  distanceValueString;
 
@@ -181,6 +184,8 @@ void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
     float       x;
     float       y;
     QPolygonF   distancePath;
+
+    Q_UNUSED( antialiasing );
 
     for ( int i = 0; i < 21; ++i ) {
         t = (float)(i) / 20.0f;

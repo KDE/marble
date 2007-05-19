@@ -1,5 +1,12 @@
 2007-05-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Cleanup
+	* src/TileLoader.cpp,   src/HttpDownloadManager.cpp
+	src/katlastoolbox.cpp,  src/measuretool.cpp,
+	src/texcolorizer.cpp,   src/katlaswindrose.cpp,
+	src/katlastoolbox.h,    src/xmlhandler.cpp,
+	src/placemarkmodel.cpp, src/katlasviewinputhandler.cpp: Remove warnings
+
 	Fix a bug
 	* src/TileLoader.h (message): Print the variable test instead of
 	"test".

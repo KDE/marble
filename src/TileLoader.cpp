@@ -215,7 +215,6 @@ int TileLoader::maxPartialTileLevel( const QString& theme )
 bool TileLoader::baseTilesAvailable( const QString& theme )
 {
     bool  noerr = true; 
-    int   n = 0;
 
     // Check whether the two tiles from the lowest texture level are available
     for ( int m = 0; m < 2; ++m ) {
