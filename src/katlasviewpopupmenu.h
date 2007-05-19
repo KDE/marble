@@ -9,57 +9,65 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef KATLASVIEWPOPUPMENU_H
 #define KATLASVIEWPOPUPMENU_H
 
-#include <QtGui/QAction>
+
 #include <QtCore/QObject>
+#include <QtGui/QAction>
+
 
 /**
 @author Torsten Rahn
 */
+
+class QMenu;
+
+class PlaceMark;
 class KAtlasView;
 class KAtlasGlobe;
-class QMenu;
-class PlaceMark;
 
-class KAtlasViewPopupMenu  : public QObject {
 
+class KAtlasViewPopupMenu  : public QObject 
+{
     Q_OBJECT
 
-public:
-	KAtlasViewPopupMenu(KAtlasView*, KAtlasGlobe*);
-	virtual ~KAtlasViewPopupMenu(){};
+ public:
+    KAtlasViewPopupMenu(KAtlasView*, KAtlasGlobe*);
+    virtual ~KAtlasViewPopupMenu(){};
 
-public slots:
-	void showLmbMenu( int, int );
-	void showRmbMenu( int, int );
-	void showFeatureInfo( QAction* );
+ public slots:
+    void  showLmbMenu( int, int );
+    void  showRmbMenu( int, int );
+    void  showFeatureInfo( QAction* );
 
-signals:
-	void addMeasurePoint( float, float );
-	void removeMeasurePoints();
+ signals:
+    void  addMeasurePoint( float, float );
+    void  removeMeasurePoints();
 
-protected slots:
-	void slotAddMeasurePoint();
-	void slotAboutDialog();
+ protected slots:
+    void  slotAddMeasurePoint();
+    void  slotAboutDialog();
 
-protected:
-	KAtlasView* m_gpview;
-	KAtlasGlobe* m_globe;
+ private:
+    void createActions();
 
-	QVector<PlaceMark*> m_featurelist;	
+ private:
+    KAtlasGlobe  *m_globe;
+    KAtlasView   *m_view;
 
-	QMenu* m_lmbMenu;
-	QMenu* m_rmbMenu;
-	QAction* m_earthaction;	
-	QAction* m_posaction;	
+    QVector<PlaceMark*>  m_featurelist;	
 
-	QAction* m_pAddMeasurePointAction;	
-	QAction* m_pRemoveMeasurePointsAction;	
-	QAction* m_pAboutDialogAction;	
+    QMenu    *m_lmbMenu;
+    QMenu    *m_rmbMenu;
+    QAction  *m_earthaction;	
+    QAction  *m_posaction;
 
-	void createActions();
+    QAction  *m_pAddMeasurePointAction;	
+    QAction  *m_pRemoveMeasurePointsAction;	
+    QAction  *m_pAboutDialogAction;	
+
 };
 
 #endif // KATLASVIEWPOPUPMENU_H

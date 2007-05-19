@@ -62,6 +62,7 @@ measuretool.h           measuretool.cpp
 Other
 -----
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
+katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 
 
 DOING
@@ -76,7 +77,6 @@ HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
-katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 texcolorizer.h          texcolorizer.cpp
 xmlhandler.h            xmlhandler.cpp
 
