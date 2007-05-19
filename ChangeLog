@@ -1,6 +1,9 @@
 2007-05-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* src/katlasviewinputhandler.cpp (*): Clean
+	
+	Cleanup
 	* src/TileLoader.cpp,   src/HttpDownloadManager.cpp
 	src/katlastoolbox.cpp,  src/measuretool.cpp,
 	src/texcolorizer.cpp,   src/katlaswindrose.cpp,

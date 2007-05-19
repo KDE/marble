@@ -9,50 +9,70 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef KATLASVIEWINPUTHANDLER_H
 #define KATLASVIEWINPUTHANDLER_H
 
 #include <QtCore/QObject>
-#include <QtGui/QKeyEvent>
 #include <QtCore/QEvent>
+#include <QtCore/QTime>
+#include <QtGui/QKeyEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
-#include <QtCore/QTime>
+
 #include "katlasglobe.h"
+
 
 /**
 @author Torsten Rahn
 */
 class KAtlasView;
 
-class KAtlasViewInputHandler  : public QObject {
-
+class KAtlasViewInputHandler  : public QObject
+{
     Q_OBJECT
 
-public:
-	KAtlasViewInputHandler(KAtlasView*, KAtlasGlobe*);
-	virtual ~KAtlasViewInputHandler(){};
+ public:
+    KAtlasViewInputHandler(KAtlasView*, KAtlasGlobe*);
+    virtual ~KAtlasViewInputHandler(){};
 
-signals:
-	// Mouse button menus
-	void lmbRequest( int, int );
-	void rmbRequest( int, int );
+ signals:
+    // Mouse button menus
+    void lmbRequest( int, int );
+    void rmbRequest( int, int );
 
-protected:
-	QPixmap curpmtl, curpmtc, curpmtr, curpmcr, curpmcl, curpmbl, curpmbc, curpmbr;
-	QCursor arrowcur[3][3];
-	KAtlasView* m_gpview;
-	KAtlasGlobe* m_globe;
-	int dirx, diry;
+ protected:
+    bool eventFilter( QObject *, QEvent * );
 
-	bool m_leftpressed, m_midpressed;
-	int m_leftpressedx, m_leftpressedy, m_midpressedy;
-	float m_leftpresseda, m_leftpressedb;
+ private:
+    KAtlasView   *m_gpview;
+    KAtlasGlobe  *m_globe;
 
-    int m_dragThreshold;
+    QPixmap  curpmtl;
+    QPixmap  curpmtc;
+    QPixmap  curpmtr;
+    QPixmap  curpmcr;
+    QPixmap  curpmcl;
+    QPixmap  curpmbl;
+    QPixmap  curpmbc;
+    QPixmap  curpmbr;
 
-	bool eventFilter( QObject *, QEvent * );
-	QTime m_dragtimer;
+    QCursor  arrowcur[3][3];
+
+    int      dirx;
+    int      diry;
+
+    bool     m_leftpressed;
+    bool     m_midpressed;
+    int      m_leftpressedx;
+    int      m_leftpressedy;
+    int      m_midpressedy;
+    float    m_leftpresseda;
+    float    m_leftpressedb;
+
+    int      m_dragThreshold;
+    QTime    m_dragtimer;
 };
+
 
 #endif // KATLASVIEWINPUTHANDLER
