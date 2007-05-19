@@ -1,5 +1,11 @@
-19.05.07 - ingwa
-	- Cleaned katlasthemeselectview.{h,cpp}
+2007-05-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix a bug
+	* src/TileLoader.h (message): Print the variable test instead of
+	"test".
+
+	Cleanup
+	* src/katlasthemeselectview.{h,cpp}: Clean
 	
 15.05.07 - tackat
 	- Made changes according to Krazy check
