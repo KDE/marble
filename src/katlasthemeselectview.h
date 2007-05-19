@@ -12,36 +12,31 @@
 #ifndef KATLASTHEMESELECTVIEW_H
 #define KATLASTHEMESELECTVIEW_H
 
+
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QListView>
+
 /**
 @author Torsten Rahn
 */
 
-class KAtlasThemeSelectView : public QListView {
+class KAtlasThemeSelectView : public QListView
+{
+    Q_OBJECT
 
-Q_OBJECT
+ public:
+    KAtlasThemeSelectView(QWidget *parent = 0);
+    // void setModel( QAbstractItemModel * model );
 
-public:
-	KAtlasThemeSelectView(QWidget *parent = 0);
-//	void setModel( QAbstractItemModel * model );
+ protected:
+    void resizeEvent(QResizeEvent* event);
 
-protected:
-	void resizeEvent(QResizeEvent* event);
+ private slots:
+    void selectedMapTheme( QModelIndex index );
 
-private slots:
-	void selectedMapTheme( QModelIndex index ){ 
-		const QAbstractItemModel* model = index.model();
-		QModelIndex colindex = model->index( index.row(),2,QModelIndex());
-
-		QString currentmaptheme = (model->data(colindex)).toString();
-		emit selectMapTheme( currentmaptheme ); 
-//		qDebug() << currentmaptheme;
-	}
-
-signals:
-	void selectMapTheme( const QString& );
+ signals:
+    void selectMapTheme( const QString& );
 };
 
 #endif // KATLASTHEMESELECTVIEW_H

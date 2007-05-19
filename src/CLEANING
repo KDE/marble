@@ -46,9 +46,11 @@ Widgets and Windows:
 --------------------
 KdeMainWindow.h         KdeMainWindow.cpp
 katlascontrol.h         katlascontrol.cpp
+katlastoolbox.h         katlastoolbox.cpp
 searchcombobox.h        searchcombobox.cpp
 searchlistview.h        searchlistview.cpp
 tinywebbrowser.h        tinywebbrowser.cpp
+katlasthemeselectview.h katlasthemeselectview.cpp
 
 Items on the widget (QObjects):
 -------------------------------
@@ -66,11 +68,10 @@ TODO
 ====
 
 httpfetchfile.h         httpfetchfile.cpp
+HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
-katlasthemeselectview.h katlasthemeselectview.cpp
-katlastoolbox.h         katlastoolbox.cpp
 katlasviewinputhandler.h        katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 texcolorizer.h          texcolorizer.cpp
