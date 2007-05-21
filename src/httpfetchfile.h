@@ -9,6 +9,7 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef HTTPFETCHFILE_H
 #define HTTPFETCHFILE_H
 
@@ -18,42 +19,46 @@
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
+
 /**
 @author Torsten Rahn
 */
 
-class HttpFetchFile : public QObject {
 
-Q_OBJECT
+class HttpFetchFile : public QObject
+{
+    Q_OBJECT
 
-public:
-	HttpFetchFile( QObject* parent = 0 );
+ public:
+    HttpFetchFile( QObject* parent = 0 );
 
     void setServerUrl( const QString& serverUrl ){ m_serverUrl = serverUrl; }
     void setTargetDir( const QString& targetDir ){ m_targetDir = targetDir; }
 
-public slots:
-	void downloadFile( const QUrl& );
-	void cancelDownload();
+ public slots:
+    void downloadFile( const QUrl& );
+    void cancelDownload();
 
-signals:
-	void downloadDone( QString, bool );
-	void statusMessage( QString );
+ signals:
+    void downloadDone( QString, bool );
+    void statusMessage( QString );
 
-private slots:
+ private slots:
     // process feedback from m_Http
     void httpRequestFinished(int requestId, bool error);
     void checkResponseHeader(const QHttpResponseHeader &responseHeader);
 
-protected:
-	QHttp * m_pHttp;
-	QFile * m_pFile;
-	int httpGetId;
-	bool httpRequestAborted;
-	QMap <int, QString> m_pFileIdMap;
+ private:
+    QHttp   *m_pHttp;
+    QFile   *m_pFile;
+    int      m_httpGetId;
+    bool     m_httpRequestAborted;
 
-    QString m_serverUrl;
-	QString m_targetDir;
+    QMap <int, QString>  m_pFileIdMap;
+
+    QString  m_serverUrl;
+    QString  m_targetDir;
 };
+
 
 #endif // HTTPFETCHFILE_H

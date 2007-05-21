@@ -66,6 +66,8 @@ Other
 katlasviewinputhandler.h katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 xmlhandler.h            xmlhandler.cpp
+httpfetchfile.h         httpfetchfile.cpp
+
 
 DOING
 =====
@@ -74,7 +76,6 @@ DOING
 TODO
 ====
 
-httpfetchfile.h         httpfetchfile.cpp
 HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
