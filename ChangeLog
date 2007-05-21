@@ -1,7 +1,12 @@
+2007-05-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleanup
+	* src/xmlhandler.cpp (Clean): 
+
 2007-05-20  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
-	* src/katlasviewpopupmenu.cpp (showLmbMenu): Clean
+	* src/katlasviewpopupmenu.cpp (): Clean
 
 2007-05-19  Inge Wallin  <inge@lysator.liu.se>
 

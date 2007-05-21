@@ -1,36 +1,45 @@
 #ifndef GPXMLHANDLER_H
 #define GPXMLHANDLER_H
 
-#include <QtXml/QXmlDefaultHandler>
+
 #include <QtCore/QDebug>
+#include <QtXml/QXmlDefaultHandler>
 
-class PlaceContainer;
+
 class PlaceMark;
+class PlaceContainer;
 
-class KAtlasXmlHandler : public QXmlDefaultHandler {
-public:
-	KAtlasXmlHandler();
-	KAtlasXmlHandler( PlaceContainer* );
 
-	bool startDocument();
-	bool stopDocument();
+class KAtlasXmlHandler : public QXmlDefaultHandler
+{
+ public:
+    KAtlasXmlHandler();
+    KAtlasXmlHandler( PlaceContainer* );
 
-	bool startElement( const QString&, const QString&, const QString &name, const QXmlAttributes& attrs );
-	bool endElement( const QString&, const QString&, const QString &name );
+    bool startDocument();
+    bool stopDocument();
 
-	bool characters( const QString& str );
+    bool startElement( const QString&, const QString&, const QString &name, 
+                       const QXmlAttributes& attrs );
+    bool endElement( const QString&, const QString&, const QString &name );
 
-protected:
-	PlaceContainer* m_placecontainer;
-	PlaceMark* m_placemark;
+    bool characters( const QString& str );
 
-	bool m_inKml;
-	bool m_inPlacemark;
-	bool m_inPoint;
-	bool m_coordsset;
+ protected:
+    inline int popIdx( int population );
 
-	QString m_currentText;
-	inline int popIdx( int population );
+ private:
+    PlaceContainer  *m_placecontainer;
+    PlaceMark       *m_placemark;
+
+    QString          m_currentText;
+
+    // State machine?
+    bool             m_inKml;
+    bool             m_inPlacemark;
+    bool             m_inPoint;
+
+    bool             m_coordsset;
 };
 
 #endif // GPXMLHANDLER_H

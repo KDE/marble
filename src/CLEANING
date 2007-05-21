@@ -61,12 +61,13 @@ measuretool.h           measuretool.cpp
 
 Other
 -----
-katlasviewinputhandler.h        katlasviewinputhandler.cpp
+katlasviewinputhandler.h katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
-
+xmlhandler.h            xmlhandler.cpp
 
 DOING
 =====
+
 
 
 TODO
@@ -78,7 +79,6 @@ katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
 texcolorizer.h          texcolorizer.cpp
-xmlhandler.h            xmlhandler.cpp
 
 
 Special: TexturePalette
