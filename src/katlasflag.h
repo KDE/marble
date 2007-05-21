@@ -9,36 +9,42 @@
 //
 // Copyright: See COPYING file that comes with this distribution
 
+
 #ifndef KATLASFLAG_H
 #define KATLASFLAG_H
 
+
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
+
 
 /**
 @author Torsten Rahn
 */
 
-class KAtlasFlag : public QObject {
 
-Q_OBJECT
+class KAtlasFlag : public QObject
+{
 
-public:
-	KAtlasFlag( QObject *parent = 0 );
+    Q_OBJECT
 
-	QPixmap& flag(){ return m_pixmap; }
-	void setFlag( const QString& filename, const QSize& size );
+ public:
+    KAtlasFlag( QObject *parent = 0 );
 
-public slots:
-	void slotDrawFlag();
+    QPixmap& flag(){ return m_pixmap; }
+    void setFlag( const QString& filename, const QSize& size );
 
-signals:
-	void flagDone();
+ public slots:
+    void slotDrawFlag();
 
-protected:
-	QString m_filename;
-	QSize m_size;
-	QPixmap m_pixmap;
+ signals:
+    void flagDone();
+
+ private:
+    QString  m_filename;
+    QSize    m_size;
+    QPixmap  m_pixmap;
 };
+
 
 #endif // KATLASFLAG_H

@@ -1,6 +1,7 @@
 2007-05-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* src/katlasflag.{h,cpp}: Clean
 	* src/katlasdirs.h: Clean
 	* src/katlasaboutdialog.{h,cpp}: Clean
 	* src/HttpDownloadManager.{h,cpp}: Clean

@@ -70,6 +70,7 @@ xmlhandler.h            xmlhandler.cpp
 httpfetchfile.h         httpfetchfile.cpp
 HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasdirs.h
+katlasflag.h            katlasflag.cpp
 
 
 DOING
@@ -78,8 +79,6 @@ DOING
 
 TODO
 ====
-
-katlasflag.h            katlasflag.cpp
 
 
 Special: TexturePalette
