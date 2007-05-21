@@ -45,6 +45,7 @@ placemarkinfodialog.h   placemarkinfodialog.cpp
 Widgets and Windows:
 --------------------
 KdeMainWindow.h         KdeMainWindow.cpp
+katlasaboutdialog.h     katlasaboutdialog.cpp
 katlascontrol.h         katlascontrol.cpp
 katlastoolbox.h         katlastoolbox.cpp
 searchcombobox.h        searchcombobox.cpp
@@ -67,17 +68,16 @@ katlasviewinputhandler.h katlasviewinputhandler.cpp
 katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 xmlhandler.h            xmlhandler.cpp
 httpfetchfile.h         httpfetchfile.cpp
+HttpDownloadManager.h   HttpDownloadManager.cpp
 
 
 DOING
 =====
-HttpDownloadManager.h   HttpDownloadManager.cpp
 
 
 TODO
 ====
 
-katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
 
