@@ -58,6 +58,8 @@ katlascrosshair.h       katlascrosshair.cpp
 katlaswindrose.h        katlaswindrose.cpp
 katlasmapscale.h        katlasmapscale.cpp
 measuretool.h           measuretool.cpp
+texcolorizer.h          texcolorizer.cpp
+
 
 Other
 -----
@@ -69,7 +71,6 @@ DOING
 =====
 
 
-
 TODO
 ====
 
@@ -78,7 +79,6 @@ HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp
-texcolorizer.h          texcolorizer.cpp
 
 
 Special: TexturePalette
