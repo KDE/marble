@@ -26,8 +26,7 @@ Misc
  * Create a file that describes the coding standards			INGE
 
 Cleaning:
- * Make all files follow the coding standards (See CLEANING)		----
- * One class per file							----
+ * Make all files follow the coding standards (See CLEANING)		DONE
  * Filename == Classname (CamelCasing)					----
 
 Widget:
