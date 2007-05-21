@@ -71,12 +71,12 @@ httpfetchfile.h         httpfetchfile.cpp
 
 DOING
 =====
+HttpDownloadManager.h   HttpDownloadManager.cpp
 
 
 TODO
 ====
 
-HttpDownloadManager.h   HttpDownloadManager.cpp
 katlasaboutdialog.h     katlasaboutdialog.cpp
 katlasdirs.h
 katlasflag.h            katlasflag.cpp

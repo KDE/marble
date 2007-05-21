@@ -1,6 +1,7 @@
 2007-05-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* src/HttpDownloadManager.{h,cpp} (): Clean
 	* src/httpfetchfile.{h,cpp} (): Clean
 	* src/texcolorizer.{h,cpp} (): Clean
 	* src/xmlhandler.{h,cpp} (): Clean
