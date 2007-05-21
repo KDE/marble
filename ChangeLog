@@ -1,11 +1,12 @@
 2007-05-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
-	* src/katlasaboutdialog.{h,cpp} (): Clean
-	* src/HttpDownloadManager.{h,cpp} (): Clean
-	* src/httpfetchfile.{h,cpp} (): Clean
-	* src/texcolorizer.{h,cpp} (): Clean
-	* src/xmlhandler.{h,cpp} (): Clean
+	* src/katlasdirs.h: Clean
+	* src/katlasaboutdialog.{h,cpp}: Clean
+	* src/HttpDownloadManager.{h,cpp}: Clean
+	* src/httpfetchfile.{h,cpp}: Clean
+	* src/texcolorizer.{h,cpp}: Clean
+	* src/xmlhandler.{h,cpp}: Clean
 
 2007-05-20  Inge Wallin  <inge@lysator.liu.se>
 

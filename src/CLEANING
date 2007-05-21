@@ -69,6 +69,7 @@ katlasviewpopupmenu.h   katlasviewpopupmenu.cpp
 xmlhandler.h            xmlhandler.cpp
 httpfetchfile.h         httpfetchfile.cpp
 HttpDownloadManager.h   HttpDownloadManager.cpp
+katlasdirs.h
 
 
 DOING
@@ -78,7 +79,6 @@ DOING
 TODO
 ====
 
-katlasdirs.h
 katlasflag.h            katlasflag.cpp
 
 
