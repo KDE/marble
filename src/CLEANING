@@ -73,6 +73,11 @@ katlasdirs.h
 katlasflag.h            katlasflag.cpp
 
 
+Tools
+-----
+tools/asc2kml/asc2kml.cpp
+
+
 DOING
 =====
 
@@ -85,4 +90,3 @@ tools/svg2pnt/svgxmlhandler.cpp
 tools/svg2pnt/svg2pnt.cpp
 tools/svg2pnt/svgxmlhandler.h
 tools/palettegen/palettegen.cpp
-tools/asc2kml/asc2kml.cpp
