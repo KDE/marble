@@ -151,7 +151,8 @@ if(MINGW)
 endif(MINGW)
 
 set (marble_UI katlastilecreatordialog.ui
-	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui)
+	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui
+           marblecontrol.ui)
 
 qt4_add_resources(marble_SRCS marble.qrc)
 

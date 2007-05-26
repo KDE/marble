@@ -26,7 +26,7 @@
 
 class QStringListModel;
 
-class MarbleControl : private Ui::marbleControl
+class MarbleControl : public QWidget, private Ui::marbleControl
 {
     Q_OBJECT
 
