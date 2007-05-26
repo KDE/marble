@@ -1,5 +1,13 @@
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename katlasview.{h,cpp} into MarbleWidget
+	* src/katlasview.cpp -> src/MarbleWidget.cpp: 
+	src/katlasview.h   -> src/MarbleWidget.h
+	src/katlascontrol.h,          src/katlascontrol.cpp,
+	src/katlasviewinputhandler.h, src/katlasviewinputhandler.cpp,
+	src/katlasviewpopupmenu.h,    src/katlasviewpopupmenu.cpp: Use new name
+	src/CMakeLists.txt: Use new filenames
+
 	Create MarbleControl widget
 	* src/marblecontrol.ui:  new file
 	* src/marblecontrol.h:   new file

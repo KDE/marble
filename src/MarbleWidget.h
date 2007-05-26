@@ -10,8 +10,8 @@
 //
 
 
-#ifndef KATLASVIEW_H
-#define KATLASVIEW_H
+#ifndef MARBLEWIDGET_H
+#define MARBLEWIDGET_H
 
 
 #include <QtGui/QWidget>
@@ -31,14 +31,15 @@ class QAbstractItemModel;
 class MeasureTool;
 class KAtlasTileCreatorDialog;
 
+
 // This is the main widget where the map is painted.
 
-class KAtlasView : public QWidget
+class MarbleWidget : public QWidget
 {
     Q_OBJECT
 
  public:
-    explicit KAtlasView(KAtlasGlobe *globe, QWidget *parent = 0);
+    explicit MarbleWidget(KAtlasGlobe *globe, QWidget *parent = 0);
 
     // The model this view shows.
     KAtlasGlobe* globe() const { return m_pGlobe; }
@@ -133,4 +134,4 @@ class KAtlasView : public QWidget
 };
 
 
-#endif // KATLASVIEW_H
+#endif // MARBLEWIDGET_H

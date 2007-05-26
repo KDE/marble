@@ -18,7 +18,7 @@
 #define KATLASCONTROL_H
 
 
-#include "katlasview.h"
+#include "MarbleWidget.h"
 
 #include <QtGui/QPixmap>
 
@@ -43,13 +43,13 @@ class KAtlasControl : public QWidget
     void moveUp();
     void moveDown();
 
-    void addPlaceMarkFile( QString filename ){ m_katlasview->addPlaceMarkFile( filename ); }
+    void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
 
-    QPixmap mapScreenShot(){ return m_katlasview->mapScreenShot(); }
+    QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
 
  private:
     KAtlasGlobe    *m_globe;
-    KAtlasView     *m_katlasview;
+    MarbleWidget   *m_marbleWidget;
     KAtlasToolBox  *m_toolbox;
 };
 

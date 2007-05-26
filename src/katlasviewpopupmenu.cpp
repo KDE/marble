@@ -19,12 +19,12 @@
 #endif
 
 #include "katlasaboutdialog.h"
-#include "katlasview.h"
+#include "MarbleWidget.h"
 #include "katlasglobe.h"
 #include "placemark.h"
 #include "placemarkinfodialog.h"
 
-KAtlasViewPopupMenu::KAtlasViewPopupMenu(KAtlasView *view, KAtlasGlobe *globe)
+KAtlasViewPopupMenu::KAtlasViewPopupMenu(MarbleWidget *view, KAtlasGlobe *globe)
     : m_globe(globe),
       m_view(view) 
 {

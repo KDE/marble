@@ -30,14 +30,14 @@
 /**
 @author Torsten Rahn
 */
-class KAtlasView;
+class MarbleWidget;
 
 class KAtlasViewInputHandler  : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasViewInputHandler(KAtlasView*, KAtlasGlobe*);
+    KAtlasViewInputHandler(MarbleWidget*, KAtlasGlobe*);
     virtual ~KAtlasViewInputHandler(){};
 
  signals:
@@ -49,8 +49,8 @@ class KAtlasViewInputHandler  : public QObject
     bool eventFilter( QObject *, QEvent * );
 
  private:
-    KAtlasView   *m_gpview;
-    KAtlasGlobe  *m_globe;
+    MarbleWidget  *m_gpview;
+    KAtlasGlobe   *m_globe;
 
     QPixmap  curpmtl;
     QPixmap  curpmtc;

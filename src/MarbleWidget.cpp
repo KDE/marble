@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasview.h"
+#include "MarbleWidget.h"
 
 #include <cmath>
 
@@ -33,7 +33,7 @@
 #endif
 
 
-KAtlasView::KAtlasView(KAtlasGlobe *globe, QWidget *parent)
+MarbleWidget::MarbleWidget(KAtlasGlobe *globe, QWidget *parent)
     : QWidget(parent)
 {
     setMinimumSize( 200, 300 );
@@ -90,7 +90,7 @@ KAtlasView::KAtlasView(KAtlasGlobe *globe, QWidget *parent)
 }
 
 
-void KAtlasView::zoomView(int zoom)
+void MarbleWidget::zoomView(int zoom)
 {
     // Prevent infinite loops.
     if ( zoom  == m_logzoom )
@@ -112,7 +112,7 @@ void KAtlasView::zoomView(int zoom)
 }
 
 
-void KAtlasView::zoomViewBy(int zoomstep)
+void MarbleWidget::zoomViewBy(int zoomstep)
 {
     // Prevent infinite loops
 
@@ -126,31 +126,31 @@ void KAtlasView::zoomViewBy(int zoomstep)
 }
 
 
-void KAtlasView::zoomIn()
+void MarbleWidget::zoomIn()
 {
     zoomViewBy( m_zoomStep );
 }
 
-void KAtlasView::zoomOut()
+void MarbleWidget::zoomOut()
 {
     zoomViewBy( -m_zoomStep );
 }
 
-void KAtlasView::rotateBy(const float& phi, const float& theta)
+void MarbleWidget::rotateBy(const float& phi, const float& theta)
 {
     m_pGlobe->rotateBy( phi, theta );
 
     repaint();
 }
 
-void KAtlasView::centerOn(const float& phi, const float& theta)
+void MarbleWidget::centerOn(const float& phi, const float& theta)
 {
     m_pGlobe->rotateTo( phi, theta );
 
     repaint();
 }
 
-void KAtlasView::centerOn(const QModelIndex& index)
+void MarbleWidget::centerOn(const QModelIndex& index)
 {
 
     PlaceMarkModel* model = (PlaceMarkModel*) m_pGlobe->getPlaceMarkModel();
@@ -179,28 +179,28 @@ void KAtlasView::centerOn(const QModelIndex& index)
 }
 
 
-void KAtlasView::moveLeft()
+void MarbleWidget::moveLeft()
 {
     rotateBy( 0, moveStep() );
 }
 
-void KAtlasView::moveRight()
+void MarbleWidget::moveRight()
 {
     rotateBy( 0, -moveStep() );
 }
 
 
-void KAtlasView::moveUp()
+void MarbleWidget::moveUp()
 {
     rotateBy( moveStep(), 0 );
 }
 
-void KAtlasView::moveDown()
+void MarbleWidget::moveDown()
 {
     rotateBy( -moveStep(), 0 );
 }
 
-void KAtlasView::resizeEvent (QResizeEvent*)
+void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
@@ -215,7 +215,7 @@ void KAtlasView::resizeEvent (QResizeEvent*)
 }
 
 
-bool KAtlasView::globeSphericals(int x, int y, float& alpha, float& beta)
+bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 {
 
     int radius = m_pGlobe->radius(); 
@@ -244,7 +244,7 @@ bool KAtlasView::globeSphericals(int x, int y, float& alpha, float& beta)
     }
 }
 
-void KAtlasView::setActiveRegion()
+void MarbleWidget::setActiveRegion()
 {
     int zoom = m_pGlobe->radius(); 
 
@@ -257,13 +257,13 @@ void KAtlasView::setActiveRegion()
     }
 }
 
-const QRegion KAtlasView::activeRegion()
+const QRegion MarbleWidget::activeRegion()
 {
     return m_activeRegion;
 }
 
 
-void KAtlasView::paintEvent(QPaintEvent *evt)
+void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
     //	Debugging Active Region
     //	painter.setClipRegion(activeRegion);
@@ -317,7 +317,7 @@ void KAtlasView::paintEvent(QPaintEvent *evt)
 }
 
 
-void KAtlasView::goHome()
+void MarbleWidget::goHome()
 {
     // m_pGlobe->rotateTo(0, 0);
     m_pGlobe->rotateTo( 54.8, -9.4 );
@@ -329,9 +329,9 @@ void KAtlasView::goHome()
 
 // This slot will called when the Globe starts to create the tiles.
 
-void KAtlasView::creatingTilesStart( const QString &name, const QString &description )
+void MarbleWidget::creatingTilesStart( const QString &name, const QString &description )
 {
-    qDebug("KAtlasView::creatingTilesStart called... ");
+    qDebug("MarbleWidget::creatingTilesStart called... ");
 
     m_tileCreatorDlg = new KAtlasTileCreatorDialog( this );
 
@@ -339,13 +339,13 @@ void KAtlasView::creatingTilesStart( const QString &name, const QString &descrip
 
     // The process itself is started by a timer, so an exec() is ok here.
     m_tileCreatorDlg->exec();
-    qDebug("KAtlasView::creatingTilesStart exits... ");
+    qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
 // This slot will be called during the tile creation progress.  When
 // the progress goes to 100, the dialog should be closed.
 
-void KAtlasView::creatingTilesProgress( int progress )
+void MarbleWidget::creatingTilesProgress( int progress )
 {
     m_tileCreatorDlg->setProgress( progress );
 
@@ -354,7 +354,7 @@ void KAtlasView::creatingTilesProgress( int progress )
 }
 
 
-float KAtlasView::moveStep()
+float MarbleWidget::moveStep()
 {
     if ( m_pGlobe->radius() < sqrt( width() * width() + height() * height() ) )
 	return 0.1f;
@@ -363,19 +363,19 @@ float KAtlasView::moveStep()
                       / (float)( 2 * m_pGlobe->radius() ) ) * 0.2f;
 }
 
-int KAtlasView::fromLogScale(int zoom)
+int MarbleWidget::fromLogScale(int zoom)
 {
     zoom = (int) pow(M_E, ((float)zoom / 200.));
     // zoom = (int) pow(2, ((float)zoom/200));
     return zoom;
 }
 
-int KAtlasView::toLogScale(int zoom)
+int MarbleWidget::toLogScale(int zoom)
 {
     zoom = (int)(200.0f * logf( (float)zoom ) );
     return zoom;
 }
 
 #ifndef Q_OS_MACX
-#include "katlasview.moc"
+#include "MarbleWidget.moc"
 #endif

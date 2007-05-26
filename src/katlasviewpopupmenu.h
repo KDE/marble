@@ -29,7 +29,7 @@
 class QMenu;
 
 class PlaceMark;
-class KAtlasView;
+class MarbleWidget;
 class KAtlasGlobe;
 
 
@@ -38,7 +38,7 @@ class KAtlasViewPopupMenu  : public QObject
     Q_OBJECT
 
  public:
-    KAtlasViewPopupMenu(KAtlasView*, KAtlasGlobe*);
+    KAtlasViewPopupMenu(MarbleWidget*, KAtlasGlobe*);
     virtual ~KAtlasViewPopupMenu(){};
 
  public slots:
@@ -58,8 +58,8 @@ class KAtlasViewPopupMenu  : public QObject
     void createActions();
 
  private:
-    KAtlasGlobe  *m_globe;
-    KAtlasView   *m_view;
+    KAtlasGlobe    *m_globe;
+    MarbleWidget   *m_view;
 
     QVector<PlaceMark*>  m_featurelist;	
 

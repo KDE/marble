@@ -19,14 +19,14 @@
 
 #include "Quaternion.h"
 #include "katlasdirs.h"
-#include "katlasview.h"
+#include "MarbleWidget.h"
 
 
 const float pi = 3.14159f ;
 
 
-KAtlasViewInputHandler::KAtlasViewInputHandler(KAtlasView  *gpview,
-                                               KAtlasGlobe *globe)
+KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *gpview,
+                                               KAtlasGlobe  *globe)
     : m_gpview( gpview ),
       m_globe( globe )
 {

@@ -9,8 +9,13 @@ Before end of May (Qt Centre contest)
 ----------------------------------------------------------------
 
 Rename
- * KAtlasView    -> MarbleWidget
- * KAtlasToolbox -> MarbleControl
+ * KAtlasView    -> MarbleWidget                                        DONE
+
+New file
+ * MarbleControl: like katlascontrol, but only zoom and pan             INGE
+   - UI file                                                            done
+   - C++ file                                                           --
+   - testcode                                                           --
 
 Documentation
  * Coding standards                                                     INGE

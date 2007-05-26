@@ -57,7 +57,7 @@ set(marble_SRCS
            TextureMapper.cpp
            GridMap.cpp
            katlascontrol.cpp
-           katlasview.cpp
+           MarbleWidget.cpp
            katlasviewinputhandler.cpp
            texcolorizer.cpp
            TileLoader.cpp
@@ -100,7 +100,7 @@ set(marble_HDRS
            GridMap.h
            katlasdirs.h
            katlascontrol.h
-           katlasview.h
+           MarbleWidget.h
            katlasviewinputhandler.h
            QtMainWindow.h
            texcolorizer.h
