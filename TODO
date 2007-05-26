@@ -13,6 +13,7 @@ Rename
  * KAtlasToolbox -> MarbleControl
 
 Documentation
+ * Coding standards                                                     INGE
  * APIDOX: Class and method docs for at least:                          INGE
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
