@@ -1,6 +1,7 @@
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* tools/texissor/texissor.cpp: Clean
 	* tools/palettegen/palettegen.cpp: Clean
 	* tools/asc2kml/asc2kml.cpp: Clean
 
