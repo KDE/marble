@@ -27,8 +27,8 @@ Cleaning
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
  * Krazy code checks                                                    INGE
-   - Licenses                                                           --
-   - Copyright                                                          --
+   - Licenses                                                           done
+   - Copyright                                                          done
 
 Integration with Qt designer
  * control files for the following widgets                              TACK

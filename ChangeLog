@@ -1,5 +1,10 @@
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Create MarbleControl widget
+	* src/marblecontrol.ui:  new file
+	* src/marblecontrol.h:   new file
+	* src/marblecontrol.cpp: new file
+
 	Cleanup
 	* tools/svg2pnt/svg2pnt.cpp: Clean
 	* tools/svg2pnt/svgxmlhandler.cpp: Clean
