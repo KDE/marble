@@ -4,10 +4,10 @@ This file describes the design and structure of Marble
 =====================
 
 Marble, the application, consists two main widgets: 
-  - a KAtlasView that contains the view of the world, and
+  - a MarbleWidget that contains the view of the world, and
   - a KAtlasToolbox that controls it.
 
-The KAtlasView is a view for the model represented by the KAtlasGlobe
+The MarbleWidget is a view for the model represented by the KAtlasGlobe
 class, which contains all the data necessary for manipulating and
 displaying the map.
 
@@ -172,12 +172,12 @@ VectorComposer	Manages the different vector sub-layers which consist
                 States.  These are all stored in PntMaps, one for each
                 type.  FIXME: Change Name.
 
-KAtlasView	The view of a KAtlasGlobe.
+MarbleWidget	The view of a KAtlasGlobe.
 
 
 Widgets
 -------
-KAtlasControl	The main window.  Contains a KAtlasView and a
+KAtlasControl	The main window.  Contains a MarbleWidget and a
 		KAtlasToolbox. 
 
 
