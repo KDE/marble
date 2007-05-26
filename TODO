@@ -21,6 +21,7 @@ Internationalization?
  * Anything needed here?                                                TACK
 
 Cleaning
+ * Code cleaning in tools/*                                             INGE
  * d-pointerify the external classes                                    INGE
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
@@ -33,6 +34,9 @@ Integration with Qt designer
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
  
+Features
+ * See below?                                                           TACK
+
 
 Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
