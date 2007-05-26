@@ -74,3 +74,8 @@ void MarbleControl::resizeEvent ( QResizeEvent * )
         }
     }
 } 
+
+
+#ifndef Q_OS_MACX
+#include "marblecontrol.moc"
+#endif

@@ -33,9 +33,6 @@ class MarbleControl : public QWidget, private Ui::marbleControl
  public:
     MarbleControl(QWidget *parent = 0);
  
-   void setLocations(QAbstractItemModel* locations) {
-       locationListView->setModel( locations );
-   }
    int minimumZoom() const { return m_minimumzoom; }
 	
  signals:
@@ -48,18 +45,16 @@ class MarbleControl : public QWidget, private Ui::marbleControl
     void moveRight();
     void moveUp();
     void moveDown();
-    void centerOn(const QModelIndex&);
-
-    void selectMapTheme( const QString& );
+    //void centerOn(const QModelIndex&);
 
  public slots:
     void changeZoom(int);
 
  protected:
     void resizeEvent ( QResizeEvent * );
-    int  m_minimumzoom;
 
  private:
+    int  m_minimumzoom;
 };
 
 #endif // MARBLECONTROL_H
