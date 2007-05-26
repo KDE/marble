@@ -5,14 +5,43 @@ Mark those tasks that you want to perform with your name:
  TACK	Tackat (Torsten Rahn)
 
 
-Before Version 0.4 (mid april)
+Before end of May (Qt Centre contest)
+----------------------------------------------------------------
+
+Rename
+ * KAtlasView    -> MarbleWidget
+ * KAtlasToolbox -> MarbleControl
+
+Documentation
+ * APIDOX: Class and method docs for at least:                          INGE
+   - MarbleWidget                                                       --
+   - MarbleControl                                                      --
+
+Internationalization?
+ * Anything needed here?                                                TACK
+
+Cleaning
+ * d-pointerify the external classes                                    INGE
+   - MarbleWidget                                                       --
+   - MarbleControl                                                      --
+ * Krazy code checks                                                    INGE
+   - Licenses                                                           --
+   - Copyright                                                          --
+
+Integration with Qt designer
+ * control files for the following widgets                              TACK
+   - MarbleWidget                                                       --
+   - MarbleControl                                                      --
+ 
+
+Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
 
 Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
  * Fix image downloading for Wikipedia					TACK
- * Add "Export Map" to save a screenshot as an image file               done
- * Add "Print" to print a screenshot                                    done
+ * Add "Export Map" to save a screenshot as an image file               DONE
+ * Add "Print" to print a screenshot                                    DONE
 
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       INGE
