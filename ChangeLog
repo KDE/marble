@@ -1,8 +1,17 @@
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* tools/palettegen/palettegen.cpp: Clean
 	* tools/asc2kml/asc2kml.cpp: Clean
 
+	Krazy codechecks
+	* tools/*/*.{h,cpp}: Add license and copyright status
+
+2007-05-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy codechecks
+	* src/*.{h,cpp}: Add license and copyright status
+	
 2007-05-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
