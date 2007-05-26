@@ -1,13 +1,18 @@
 //
-// C++ Interface: 
+// This file is part of the Marble Desktop Globe.
 //
-// Description: KAtlasControl
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+//
 
+//
 // Testapplication with controls
 //
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2005
-//
-// Copyright: See COPYING file that comes with this distribution
+
 
 #ifndef KATLASCONTROL_H
 #define KATLASCONTROL_H

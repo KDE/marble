@@ -1,12 +1,18 @@
 //
-// C++ Interface: TextureTile
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2007      Torsten Rahn <tackat@kde.org>"
+// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+//
+
 //
 // Description: TextureTile contains a single image quadtile 
 // and jumptables for faster access to the pixel data
 //
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
 
 
 #ifndef __MARBLE__TEXTURETILE_H

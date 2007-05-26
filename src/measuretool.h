@@ -1,13 +1,17 @@
 //
-// C++ Interface: measuretool
+// This file is part of the Marble Desktop Globe.
 //
-// Description: MeasureTool 
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+//
 
+//
 // MeasureTool enables Marble to set and display measure points
 //
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
 
 
 #ifndef MEASURETOOL_H

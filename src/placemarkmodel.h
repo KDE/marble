@@ -1,13 +1,17 @@
 //
-// C++ Interface: gpmapscale
+// This file is part of the Marble Desktop Globe.
 //
-// Description: PlaceMarkModel 
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+//
 
+//
 // PlaceMarkMode resembles the model for Placemarks
 //
-// Author: Torsten Rahn <tackat@kde.org>, (C) 2006
-//
-// Copyright: See COPYING file that comes with this distribution
 
 
 #ifndef PLACEMARKMODEL_H
