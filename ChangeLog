@@ -1,6 +1,7 @@
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
+	* tools/svg2pnt/svg2pnt.cpp: Clean
 	* tools/svg2pnt/svgxmlhandler.cpp: Clean
 	* tools/texissor/texissor.cpp: Clean
 	* tools/palettegen/palettegen.cpp: Clean
