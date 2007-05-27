@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>361</width>
+    <width>185</width>
     <height>564</height>
    </rect>
   </property>
@@ -16,6 +16,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>185</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="maximumSize" >
    <size>
@@ -55,8 +61,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>361</width>
-        <height>502</height>
+        <width>169</width>
+        <height>492</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -412,13 +418,41 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="legendTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>405</width>
+        <height>489</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Legend</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="legendBrowser" >
+         <property name="horizontalScrollBarPolicy" >
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="toolBoxTab2" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>361</width>
-        <height>505</height>
+        <width>405</width>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -433,6 +467,14 @@
        </property>
        <item>
         <widget class="KAtlasThemeSelectView" name="katlasThemeSelectView" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="toolTip" >
           <string>Map View Browser</string>
          </property>

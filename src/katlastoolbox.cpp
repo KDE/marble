@@ -26,7 +26,9 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QStringListModel>
+#include <QtGui/QTextFrame>
 
+#include "katlasdirs.h"
 #include "maptheme.h"
 
 
@@ -73,6 +75,12 @@ KAtlasToolBox::KAtlasToolBox(QWidget *parent)
 
     connect( katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                  SIGNAL( selectMapTheme( const QString& ) ) );
+
+    legendBrowser->setSource( KAtlasDirs::path( "legend.html" ) );
+    QTextFrameFormat  format = legendBrowser->document()->rootFrame()->frameFormat();
+    format.setMargin(6);
+    legendBrowser->document()->rootFrame()->setFrameFormat( format );
+
 }
 
 

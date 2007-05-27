@@ -127,7 +127,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         mark  = *it; // no cast
 
         if ( m_weightfilter.at( mark->popidx() ) > radius
-             && mark->symbol() != 0
+//             && mark->symbol() != 0
              && mark-> selected() == 0 )
             continue;
 
@@ -153,6 +153,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 if ( textpixmap.isNull() == true ) {
 
                     QChar  role = mark->role();
+
+                    // C: Admin. center of _C_ountry
+                    // R: Admin. center of _R_egion
+                    // B: Admin. center of country and region ("_B_oth")
+                    // N: _N_one
 
                     if ( role == 'N' ) { 
                         font = m_font_regular;

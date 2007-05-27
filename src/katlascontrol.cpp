@@ -41,6 +41,7 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     hlayout->addWidget( m_toolbox );
     hlayout->addWidget( m_marbleWidget );
     vlayout->addLayout( hlayout );
+    vlayout->setMargin(0);
 
     m_toolbox->setLocations( m_marbleWidget->placeMarkModel() );
 

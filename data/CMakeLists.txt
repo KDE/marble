@@ -7,6 +7,10 @@ endif(WIN32)
 
 
 install (FILES
+legend.html
+DESTINATION ${data_dir})
+
+install (FILES
 bitmaps/city_1_orange.png
 bitmaps/city_1_red.png
 bitmaps/city_1_white.png
@@ -35,6 +39,10 @@ bitmaps/mountain_1.png
 bitmaps/pole_1.png
 bitmaps/pole_2.png
 bitmaps/volcano_1.png
+bitmaps/border_1.png
+bitmaps/border_2.png
+bitmaps/river.png
+bitmaps/lake.png
 DESTINATION ${data_dir}/bitmaps)
 
 install (FILES 
@@ -325,7 +333,7 @@ DESTINATION ${data_dir}/mwdbii)
 
 install (FILES
 placemarks/baseplacemarks.cache
-placemarks/cityplacemarks.cache
+#placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
 DESTINATION ${data_dir}/placemarks)
 
