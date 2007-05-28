@@ -12,7 +12,7 @@
 #include "KdeMainWindow.h"
 
 #include <QClipboard>
-#include <QtGui/QMessageBox>
+//#include <QtGui/QMessageBox>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QPainter>
@@ -23,6 +23,7 @@
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KStatusBar>
+#include <KMessageBox>
 #include <KFileDialog>
 
 
@@ -93,9 +94,9 @@ void MainWindow::exportMapScreenShot()
     if ( !fileName.isEmpty() ) {
         bool  success = mapPixmap.save( fileName );
         if ( !success ) {
-            QMessageBox::warning( this, i18n( "Marble" ),
-                                  i18n( "An error occurred while trying to save the file.\n" ),
-                                 QMessageBox::Ok );
+            KMessageBox::error( this, i18n( "Marble" ),
+                                i18n( "An error occurred while trying to save the file.\n" ),
+                                KMessageBox::Notify );
         }
     }
 }
