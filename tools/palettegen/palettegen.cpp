@@ -10,7 +10,13 @@
 //
 
 
-#include <QtGui>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QStringList>
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
+#include <QtGui/QApplication>
+
 
 int main(int argc, char *argv[])
 {

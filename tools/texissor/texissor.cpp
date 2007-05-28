@@ -10,8 +10,10 @@
 //
 
 
-#include <QtGui>
-#include <QVector>
+#include <QtCore/QVector>
+#include <QtCore/QDebug>
+#include <QtGui/QImage>
+#include <QtGui/QApplication>
 
 
 #define ENABLEGUI

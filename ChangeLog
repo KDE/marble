@@ -1,3 +1,9 @@
+2007-05-28  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issues:
+	* tools/palettegen/palettegen.cpp: 
+	* tools/texissor/texissor.cpp: Fix includes
+
 2007-05-27  Torsten Rahn  <rahn@kde.org>
 
     * Added Legend (breaks placemarks)
