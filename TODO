@@ -10,11 +10,14 @@ Before end of May (Qt Centre contest)
 
 Rename
  * KAtlasView    -> MarbleWidget                                        DONE
+ * KAtlasGlobe   -> MarbleModel                                         ----
+ * KAtlasToolBox -> MarbleToolBox                                       ----
+ * more...
 
 New file
  * MarbleControl: like katlascontrol, but only zoom and pan             INGE
    - UI file                                                            done
-   - C++ file                                                           --
+   - C++ file                                                           done
    - testcode                                                           --
 
 Documentation
@@ -31,9 +34,7 @@ Cleaning
  * d-pointerify the external classes                                    INGE
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
- * Krazy code checks                                                    INGE
-   - Licenses                                                           done
-   - Copyright                                                          done
+ * Krazy code checks                                                    DONE
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
