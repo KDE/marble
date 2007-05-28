@@ -109,7 +109,8 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     if ( !m_tileHash.contains( m_tileId ) ) {
         m_tile = new TextureTile();
         m_tileHash[m_tileId] = m_tile;
-        connect( m_tile, SIGNAL( downloadTile( QString ) ), m_downloadManager, SLOT( addJob( QString ) ) );
+        connect( m_tile,            SIGNAL( downloadTile( QString & ) ), 
+                 m_downloadManager, SLOT( addJob( QString & ) ) );
         m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
     } 
 

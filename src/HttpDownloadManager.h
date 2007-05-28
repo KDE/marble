@@ -83,7 +83,7 @@ public:
 private slots:
 
     // void addJob( const QString& ServerUrl, const QString& SourceUrl, const QString& TargetDir, Priority priority);
-    void addJob( QString relativeUrl );
+    void addJob( QString &relativeUrl );
 
     void removeJob(HttpJob*);
     void activateJobs();

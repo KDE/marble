@@ -34,7 +34,7 @@ HttpDownloadManager::~HttpDownloadManager()
 
 
 // void HttpDownloadManager::addJob(const QString& ServerUrl, const QString& SourceUrl, const QString& TargetDir, Priority priority)
-void HttpDownloadManager::addJob( QString relativeUrl)
+void HttpDownloadManager::addJob( QString &relativeUrl )
 {
     qDebug() << "Accepting Job: " << relativeUrl;
 

@@ -1,6 +1,13 @@
 2007-05-28  Inge Wallin  <inge@lysator.liu.se>
 
-	Fix Krazy issues:
+	Fix Krazy issue: inappropriate pass-by-value function args
+	* src/TextureTile.h (signal downloadTile): Pass QString parameter
+	by reference
+	* src/HttpDownloadManager.cpp (addJob): Pass QString parameter by
+	reference.
+	* src/TileLoader.cpp (loadTile): Connect with parameter QString &
+
+	Fix Krazy issue: Proper include directives
 	* tools/palettegen/palettegen.cpp: 
 	* tools/texissor/texissor.cpp: Fix includes
 
