@@ -104,7 +104,7 @@ void MainWindow::exportMapScreenShot()
 {
     QPixmap mapPixmap = m_katlascontrol->mapScreenShot();
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export Map"),
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export Map"), // krazy:exclude=qclasses
                             QDir::homePath(),
                             tr("Images (*.jpg *.png)"));
 
@@ -113,7 +113,7 @@ void MainWindow::exportMapScreenShot()
         bool success = mapPixmap.save( fileName );
         if ( success == false )
         {
-            QMessageBox::warning(this, tr("Marble"),
+            QMessageBox::warning(this, tr("Marble"), // krazy:exclude=qclasses
                    tr( "An error occurred while trying to save the file.\n" ),
                    QMessageBox::Ok);
         }

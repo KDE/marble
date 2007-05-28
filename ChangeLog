@@ -1,6 +1,8 @@
 2007-05-28  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue: Check for Qt classes that should not be used
+	* src/QtMainWindow.cpp (exportMapScreenShot): Suppress false
+	positives for krazy tests
 	* src/KdeMainWindow.cpp (exportMapScreenShot): Use KMessageBox
 	instead of QMessageBox.
 
