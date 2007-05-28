@@ -1,5 +1,11 @@
 2007-05-28  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix Krazy issue: missing tags: copyright
+	* tools/palettegen/palettegen.cpp (main): Generate header with
+	Copyright and license
+	* src/texturepalette.cpp: Regenerate this file with the above
+	mentioned header.
+
 	Fix Krazy issue: inappropriate pass-by-value function args
 	* src/TextureTile.h (signal downloadTile): Pass QString parameter
 	by reference
