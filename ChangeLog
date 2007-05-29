@@ -1,3 +1,11 @@
+2007-05-29  Torsten Rahn  <rahn@kde.org>
+
+Some fixes:
+
+    * Changed zPointLimit to avoid "Green Pacific" bug
+    * Changed xmlhandler to change placemark symbols according to legend
+    * Added resulting cityplacemarks.cache file
+
 2007-05-28  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue: Check for Qt classes that should not be used
