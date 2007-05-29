@@ -333,7 +333,7 @@ DESTINATION ${data_dir}/mwdbii)
 
 install (FILES
 placemarks/baseplacemarks.cache
-#placemarks/cityplacemarks.cache
+placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
 DESTINATION ${data_dir}/placemarks)
 

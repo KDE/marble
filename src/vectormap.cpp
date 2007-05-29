@@ -81,6 +81,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     m_zPointLimit = ( ( m_zPointLimit >= 0 && zlimit < m_zPointLimit )
                       || m_zPointLimit < 0 )
                      ? zlimit : m_zPointLimit;
+//    m_zPointLimit = 0;
 
     m_rlimit = (int)( (float)(m_radius * m_radius)
                       * (1.0 - m_zPointLimit * m_zPointLimit ) );

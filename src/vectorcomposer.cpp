@@ -66,7 +66,7 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
 
     // Coastlines
     vectormap -> setzBoundingBoxLimit( 0.4 ); 
-    vectormap -> setzPointLimit( 0.6 ); 
+    vectormap -> setzPointLimit( 0 ); // 0.6 results in green pacific
 
     vectormap -> createFromPntMap( pcoast, radius, rotAxis );
     vectormap -> setPen( m_areapen );
