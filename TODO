@@ -12,6 +12,7 @@ Rename
  * KAtlasView    -> MarbleWidget                                        DONE
  * KAtlasGlobe   -> MarbleModel                                         ----
  * KAtlasToolBox -> MarbleToolBox                                       ----
+ * ???           -> MarbleLocator                                       ----
  * more...
 
 New file
@@ -25,12 +26,13 @@ Documentation
  * APIDOX: Class and method docs for at least:                          INGE
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
+   - MarbleToolBox                                                      --
 
 Internationalization?
  * Anything needed here?                                                TACK
 
 Cleaning
- * Code cleaning in tools/*                                             INGE
+ * Code cleaning in tools/*                                             DONE
  * d-pointerify the external classes                                    INGE
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
@@ -39,6 +41,7 @@ Cleaning
 Integration with Qt designer
  * control files for the following widgets                              TACK
    - MarbleWidget                                                       --
+   - MarbleToolBox                                                      --
    - MarbleControl                                                      --
  
 Features
