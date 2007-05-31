@@ -31,22 +31,36 @@ Create a build directory parallel to the source directory.  Suppose
 that the source directory is named 'marble'. Then create a new
 directory called 'marble-build'.
 
+
 1.2 Configure the build tree
 
 Go into the build directory and type
 
   cmake -DQTONLY=ON ../marble
 
+
 1.3 Build marble
+
+Also in the build directory, type:
 
   make
 
+
 1.4 Install marble
+
+Finally, also from the build directory, type:
 
   make install
 
+Due to a bug in the cmake files, you now have to move the installed
+data:
 
-2. Build Marble as a Qt only application.
+  mkdir -p /usr/local/share/apps/marble
+  cp -a /marble/data /usr/local/share/apps/marble
+  rm -r /marble
+
+
+2. Build Marble as a KDE application.
 
 2.1 Create a build directory
 
