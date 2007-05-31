@@ -2,7 +2,7 @@
 if(WIN32)
   set(data_dir data)
 else(WIN32)
-  set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
+  set(data_dir ${DATA_INSTALL_PREFIX}/marble/data)
 endif(WIN32)
 
 
