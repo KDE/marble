@@ -11,7 +11,7 @@ SOURCES += Quaternion.cpp GeoPoint.cpp GeoPolygon.cpp TextureTile.cpp TextureMap
            tilescissor.cpp katlastilecreatordialog.cpp katlasthemeselectview.cpp katlaswindrose.cpp \
            katlasviewpopupmenu.cpp katlascrosshair.cpp xmlhandler.cpp placemarkinfodialog.cpp \
            katlasflag.cpp tinywebbrowser.cpp HttpDownloadManager.cpp httpfetchfile.cpp \
-           measuretool.cpp katlasaboutdialog.cpp
+           measuretool.cpp katlasaboutdialog.cpp QtMainWindow.cpp main.cpp
 
 HEADERS += Quaternion.h GeoPoint.h GeoPolygon.h ScreenPolygon.h TextureTile.h TextureMapper.h \
            GridMap.h katlasdirs.h katlascontrol.h MarbleWidget.h marblecontrol.h katlasviewinputhandler.h \
