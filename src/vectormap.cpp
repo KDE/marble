@@ -68,25 +68,23 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
-    float zlimit = ( ( imgradius < m_radius * m_radius )
-                     ? sqrtf(1 - (float)imgradius / (float)(m_radius * m_radius))
+    double zlimit = ( ( imgradius < m_radius * m_radius )
+                     ? sqrt(1 - (double)imgradius / (double)(m_radius * m_radius))
                      : 0.0 );
-
+//    zlimit = 0.0;
     // qDebug() << "zlimit: " << zlimit;
 
-    m_zBoundingBoxLimit = ( ( m_zBoundingBoxLimit >= 0
+    m_zBoundingBoxLimit = ( ( m_zBoundingBoxLimit >= 0.0
                               && zlimit < m_zBoundingBoxLimit )
-                            || m_zBoundingBoxLimit < 0 )
+                            || m_zBoundingBoxLimit < 0.0 )
                      ? zlimit : m_zBoundingBoxLimit;
-    m_zPointLimit = ( ( m_zPointLimit >= 0 && zlimit < m_zPointLimit )
-                      || m_zPointLimit < 0 )
+    m_zPointLimit = ( ( m_zPointLimit >= 0.0 && zlimit < m_zPointLimit )
+                      || m_zPointLimit < 0.0 )
                      ? zlimit : m_zPointLimit;
-//    m_zPointLimit = 0;
+//    m_zPointLimit = 0.0;
 
-    m_rlimit = (int)( (float)(m_radius * m_radius)
+    m_rlimit = (int)( (double)(m_radius * m_radius)
                       * (1.0 - m_zPointLimit * m_zPointLimit ) );
-
-    // Quaternion qbound = ( FastMath::haveSSE() == true )? QuaternionSSE() : Quaternion();
 
     Quaternion  qbound;
 
@@ -304,15 +302,15 @@ void VectorMap::manageCrossHorizon()
 const QPointF VectorMap::horizonPoint()
 {
     // qDebug("Interpolating");
-    float  xa;
-    float  ya;
+    double  xa;
+    double  ya;
 
     xa = currentPoint.x() - ( imgrx + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
     //	ya = sqrt( (m_radius +1) * ( m_radius +1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
-        ? sqrtf( (float)(m_rlimit) - (float)( xa * xa ) ) : 0;
+        ? sqrt( (double)(m_rlimit) - (double)( xa * xa ) ) : 0;
     // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
     if ( ( currentPoint.y() - ( imgry + 1 ) ) < 0 )
         ya = -ya; 
@@ -324,42 +322,44 @@ const QPointF VectorMap::horizonPoint()
 void VectorMap::createArc()
 {
 
-    m_polygon.append( horizona );
-
-    int  beta  = (int)( 180.0 / M_PI * atan2f( horizonb.y() - imgry - 1,
+    float  beta  = (float)( 180.0f / M_PI * atan2f( horizonb.y() - imgry - 1,
                                                horizonb.x() - imgrx - 1 ) );
-    int  alpha = (int)( 180.0 / M_PI * atan2f( horizona.y() - imgry - 1,
+    float  alpha = (float)( 180.0f / M_PI * atan2f( horizona.y() - imgry - 1,
                                                horizona.x() - imgrx - 1 ) );
 
-    int diff = beta - alpha;
+    float diff = beta - alpha;
 
-    if ( diff != 0 ) {
-        int sgndiff = diff / abs(diff);
+    if ( diff != 0.0f && diff != 180.0f && diff != -180.0f ) {
 
-        if (abs(diff) > 180)
-            diff = - sgndiff * (360 - abs(diff));
+        m_polygon.append( horizona );
+
+        float sgndiff = diff / fabs(diff);
+
+        if (fabs(diff) > 180.0f)
+            diff = - sgndiff * (360.0f - fabs(diff));
 
         // Reassigning sgndiff this way seems dull
-        sgndiff = diff / abs(diff);
+        sgndiff = diff / fabs(diff);
         // qDebug() << "SGN: " << sgndiff;
 
         // qDebug () << " beta: " << beta << " alpha " << alpha << " diff: " << diff;
 	
         int  itx;
         int  ity;
-        // qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((float)(m_rlimit));
-        float  arcradius = sqrtf( (float)( m_rlimit ) );
+        // qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((double)(m_rlimit));
+        double  arcradius = sqrt( (double)( m_rlimit ) );
 
-        for ( int it = 1; it < abs(diff); ++it ) {
-            float angle = M_PI/180.0 * (float)( alpha + sgndiff * it );
-            itx = (int)( imgrx +  arcradius * cosf( angle ) + 1 );
-            ity = (int)( imgry +  arcradius * sinf( angle ) + 1 );
+        for ( int it = 1; it < fabs(diff); ++it ) {
+            double angle = M_PI/180.0f * (double)( alpha + (sgndiff * it) );
+            itx = (int)( imgrx +  arcradius * cos( angle ) + 1 );
+            ity = (int)( imgry +  arcradius * sin( angle ) + 1 );
             // qDebug() << " ity: " << ity;
             m_polygon.append( QPoint( itx, ity ) );		
         }
-    }
 
-    m_polygon.append( horizonb );
+        m_polygon.append( horizonb );
+    }
+ 
 }
 
 

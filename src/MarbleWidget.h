@@ -108,8 +108,8 @@ class MarbleWidget : public QWidget
     int           m_logzoom;
 	
     int           m_zoomStep;
-    int           m_minimumzoom;	
-
+    int           m_minimumzoom;    
+    int           m_maximumzoom;
 
     KAtlasViewInputHandler  *m_inputhandler;
     KAtlasViewPopupMenu     *m_popupmenu;

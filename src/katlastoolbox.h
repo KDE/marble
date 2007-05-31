@@ -66,6 +66,7 @@ class KAtlasToolBox : public QWidget, private Ui::katlasToolBox
  protected:
     void resizeEvent ( QResizeEvent * );
     int  m_minimumzoom;
+    int  m_maximumzoom;
 
  private:
     QString  m_searchTerm;

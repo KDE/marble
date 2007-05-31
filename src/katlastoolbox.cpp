@@ -39,6 +39,8 @@ KAtlasToolBox::KAtlasToolBox(QWidget *parent)
     setupUi( this );
  
     m_minimumzoom = 950;
+    m_maximumzoom = 2200;
+
 
     setFocusPolicy( Qt::NoFocus );
 
@@ -90,6 +92,7 @@ void KAtlasToolBox::changeZoom(int zoom)
     // if (zoomSlider->value() != zoom)
     zoomSlider->setValue( zoom );
     zoomSlider->setMinimum( m_minimumzoom );
+    zoomSlider->setMaximum( m_maximumzoom );
 }
 
 

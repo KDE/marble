@@ -86,7 +86,9 @@ MarbleWidget::MarbleWidget(KAtlasGlobe *globe, QWidget *parent)
     m_logzoom  = 0;
     m_zoomStep = 40;
     goHome();
-    m_minimumzoom = 50;
+
+    m_minimumzoom = 950;
+    m_maximumzoom = 2200;
 }
 
 
@@ -119,7 +121,7 @@ void MarbleWidget::zoomViewBy(int zoomstep)
     int zoom = m_pGlobe->radius();
     int tryZoom = toLogScale(zoom) + zoomstep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
-    if ( tryZoom >= m_minimumzoom ) {
+    if ( tryZoom >= m_minimumzoom && tryZoom <= m_maximumzoom ) {
 	zoom = tryZoom;
 	zoomView(zoom);
     }
