@@ -1,0 +1,73 @@
+         This file describes how to build and install Marble
+
+
+NOTE: This file describes how to build Marble as a stand-alone
+      application.  If you are building Marble as part of the KDE-EDU
+      module, then you should instead read the file INSTALL in the top
+      level directory of this module and ignore this one.  This is
+      most likely ../INSTALL.
+
+
+Prerequisites for building Marble are:
+ - Qt 4.2 or newer
+ - cmake version 2.4 or newer
+ - (optional): kdelibs from the KDE subversion repositories.
+    We have found that revision 670142 works fine. Note that kdelibs
+    is under heavy development, and some revisions might not work.
+
+
+You can build and install Marble in two different ways:
+
+1. As a Qt-only application.
+2. As a KDE application, using kdelibs and KDE based classes.
+
+Choose one of them and read below for how to do it.
+
+1. Build Marble as a Qt only application.
+
+1.1 Create a build directory
+
+Create a build directory parallel to the source directory.  Suppose
+that the source directory is named 'marble'. Then create a new
+directory called 'marble-build'.
+
+1.2 Configure the build tree
+
+Go into the build directory and type
+
+  cmake -DQTONLY=ON ../marble
+
+1.3 Build marble
+
+  make
+
+1.4 Install marble
+
+  make install
+
+
+2. Build Marble as a Qt only application.
+
+2.1 Create a build directory
+
+This is the same step as for a Qt-only build:
+
+Create a build directory parallel to the source directory.  Suppose
+that the source directory is named 'marble'. Then create a new
+directory called 'marble-build'.
+
+2.2 Configure the build tree
+
+Go into the build directory and type
+
+  cmake ../marble
+
+From now on the steps are the same as for a Qt-only build.
+
+2.3 Build marble
+
+  make
+
+2.4 Install marble
+
+  make install
