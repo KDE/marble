@@ -10,7 +10,7 @@
 //
 
 //
-// PlaceMarkMode resembles the model for Placemarks
+// PlaceMarkModel resembles the model for Placemarks
 //
 
 

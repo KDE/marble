@@ -21,11 +21,44 @@
 
 #include "ui_MarbleControlBox.h"
 
-/**
-@author Torsten Rahn
-*/
+
+/** @file
+ * This file contains the header for MarbleControlBox.
+ * 
+ * @author Torsten Rahn <tackat@kde.org>
+ * @author Inge Wallin  <inge@lysator.liu.se>
+ */
+
 
 class QStringListModel;
+
+/** 
+ * @short A widget class that contains all sorts of controls for a
+ * MarbleWidget.
+ *
+ * This widget lets the user control an instance of MarbleWidget.  The
+ * widget contains a ToolBox with 3 pages: a <b>Navigation</b> page
+ * with a search tool for cities and other names, a <b>Legend</b> page
+ * with a legend for the symbols on the map, and a <b>Map View</b>
+ * page with a choice of themes / datasets.
+ *
+ * The <b>Navigation</b> pane lets the user navigate around the globe by
+ * using buttons for panning and a slider for zooming.  There is also
+ * a "home" button that lets the user go back to a predefined point at
+ * the earth, not unlike the home page in a web browser.  In addition
+ * there is a search tool that lets the user search for names of
+ * points of interest (cities, mountains, glaciers, etc).
+ *
+ * The <b>Legend</b> page does not contain any controls, but displays
+ * a legend of the symbols that are displayed on the globe.
+ *
+ * The <b>Map View</b> page gives the user a choice of different
+ * datasets to display, which can also be thought of as different
+ * visual themes. The default datasets are a standard Atlas view, a
+ * Night view, and a Sattelite view.
+ *
+ * @see MarbleWidget
+ */
 
 class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
 {
@@ -65,11 +98,11 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
 
  protected:
     void resizeEvent ( QResizeEvent * );
-    int  m_minimumzoom;
 
  private:
     QString  m_searchTerm;
     bool     m_searchTriggered;
+    int      m_minimumzoom;
 };
 
 #endif // MARBLECONTROLBOX_H

@@ -18,6 +18,14 @@
 #define KATLASGLOBE_H
 
 
+/** @file
+ * This file contains the headers for KAtlasGlobe.
+ * 
+ * @author Torsten Rahn <tackat@kde.org>
+ * @author Inge Wallin  <inge@lysator.liu.se>
+ */
+
+
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
@@ -39,10 +47,33 @@
 class PlaceMark;
 class PlaceMarkManager;
 
-/**
-@author Torsten Rahn
-*/
 
+/** 
+ * @short The data model (not based on QAbstractModel) for a MarbleWidget.
+ *
+ * This class provides a data storage and indexer that can be
+ * displayed in a MarbleWidget.  It contains 3 different datatypes:
+ * <b>tiles</b> which provide the background, <b>vectors</b> which
+ * provide things like country borders and coastlines and
+ * <b>placemarks</b> which can show points of interest, such as
+ * cities, mountain tops or the poles.
+ *
+ * The <b>tiles</b> provide the background of the image and can be for
+ * instance height and depth fields, magnetic strength, topographic
+ * data or anything else that is area based.
+ *
+ * The <b>vectors</b> provide things like country borders and
+ * coastlines.  They are stored in separate files and can be added or
+ * removed at anytime.
+ *
+ * The <b>placemarks</b> contain points of interest, such as cities,
+ * mountain tops or the poles. These are sorted by size (for cities)
+ * and category (capitals, other important cities, less important
+ * cities, etc) and are displayed with different color or shape like
+ * square or round.
+ *
+ * @see MarbleWidget
+ */
 
 class KAtlasGlobe  : public QObject
 {

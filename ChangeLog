@@ -1,6 +1,13 @@
 2007-05-31  Inge Wallin  <inge@lysator.liu.se>
 
-	Rename KAtlasControl into MarbleControlBox
+	Add APIDOX:
+	* src/MarbleWidget.h (class MarbleWidget): Add class docs and some
+	method docs.
+	* src/MarbleControlBox.h (class MarbleControlBox): Add class docs
+	and some method docs.
+	* src/katlasglobe.h (class KAtlasGlobe): Add class docs.
+
+	Rename KAtlasToolBox into MarbleControlBox
 	* src/katlastoolbox.ui  -> src/MarbleControlBox.ui
 	* src/katlastoolbox.h   -> src/MarbleControlBox.h
 	* src/katlastoolbox.cpp -> src/MarbleControlBox.cpp

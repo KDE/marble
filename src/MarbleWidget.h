@@ -13,6 +13,12 @@
 #ifndef MARBLEWIDGET_H
 #define MARBLEWIDGET_H
 
+/** @file
+ * This file contains the headers for MarbleWidget.
+ * 
+ * @author Torsten Rahn <tackat@kde.org>
+ * @author Inge Wallin  <inge@lysator.liu.se>
+ */
 
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
@@ -32,22 +38,69 @@ class MeasureTool;
 class KAtlasTileCreatorDialog;
 
 
-// This is the main widget where the map is painted.
+/** 
+ * @short A widget class that displays a view of the earth.
+ *
+ * This widget displays a view of the earth or any other globe,
+ * depending on which dataset is used.  The user can navigate on the
+ * earth using either a control widget, e.g. the MarbleControlBox or
+ * the mouse.  Only some aspects of the widget can be controlled by
+ * the mouse.
+ *
+ * By clicking on the globe and moving the mouse, the position can be
+ * moved.  The user can also zoom by using the scroll wheel of the
+ * mouse in the widget.
+ *
+ * The user can control all aspects of it by using a MarbleControlBox
+ * widget.
+ *
+ * To work, it needs to be provided with a data model, which is
+ * contained in a KAtlasGlobe class.  This data model contains 3
+ * separate datatypes: <b>tiles</b> which provide the background,
+ * <b>vectors</b> which provide things like country borders and
+ * coastlines and <b>placemarks</b> which can show points of interest,
+ * such as cities, mountain tops or the poles.
+ *
+ * @see MarbleControlBox
+ * @see KAtlasGlobe
+ */
 
 class MarbleWidget : public QWidget
 {
     Q_OBJECT
 
  public:
+    /**
+     * @brief Construct a new MarbleWidget.
+     * @param globe  the data model for the widget.
+     * @param parent the parent widget
+     */
     explicit MarbleWidget(KAtlasGlobe *globe, QWidget *parent = 0);
 
-    // The model this view shows.
-    KAtlasGlobe* globe() const { return m_pGlobe; }
+    /**
+     * @brief The model this view shows.
+     */
+    KAtlasGlobe   *globe() const { return m_pGlobe; }
 
+    /**
+     * @brief Return the active region.
+     */
     const QRegion  activeRegion();
 
-    bool                globeSphericals( int x, int y, 
-                                         float& alpha, float& beta );
+    /**
+     * @brief Get the earth coordinates corresponding to a pixel in the widget.
+     * @param x      the x coordinate of the pixel
+     * @param y      the y coordinate of the pixel
+     * @param alpha  the alpha angle is returned through this parameter
+     * @param beta   the beta angle is returned through this parameter
+     * @return @c true  if the pixel (x, y) is within the globe
+     *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
+     */
+    bool            globeSphericals( int x, int y, 
+                                     float& alpha, float& beta );
+    /**
+     * @brief returns the model for all the placemarks on the globe.
+     */
     QAbstractListModel *placeMarkModel(){
         return m_pGlobe->getPlaceMarkModel();
     }
