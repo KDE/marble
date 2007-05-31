@@ -2,7 +2,7 @@
 if(WIN32)
   set(data_dir data)
 else(WIN32)
-  set(data_dir ${DATA_INSTALL_PREFIX}/marble/data)
+  set(data_dir ${DATA_INSTALL_DIR}/marble/data)
 endif(WIN32)
 
 
