@@ -1,6 +1,25 @@
 2007-05-31  Inge Wallin  <inge@lysator.liu.se>
 
-	Add APIDOX:
+	Remove worthless APIDOX
+	src/httpfetchfile.h		src/katlaswindrose.h
+	src/placemarkinfodialog.h	src/katlascontrol.h
+	src/placemarkmodel.h		src/katlasviewpopupmenu.h
+	src/katlasmapscale.h		src/katlasviewinputhandler.h
+	src/measuretool.h		src/vectormap.h
+	src/placemarkpainter.h		src/TileLoader.h
+	src/tinywebbrowser.h		src/texcolorizer.h
+	src/katlasaboutdialog.h		src/placemarkmanager.h
+	src/HttpDownloadManager.h	src/marblecontrol.h
+	src/TextureMapper.h		src/katlasflag.h
+	src/vectorcomposer.h		src/GridMap.h
+	src/katlastilecreatordialog.h	src/katlasthemeselectview.h
+	src/katlascrosshair.h		src/tilescissor.h
+	src/FastMath.h			src/clippainter.h
+	src/TextureTile.h:
+	Remove apidox only consisting of @author so that the resulting
+	output only contains actual information.
+	
+	Add APIDOX
 	* src/MarbleWidget.h (class MarbleWidget): Add class docs and some
 	method docs.
 	* src/MarbleControlBox.h (class MarbleControlBox): Add class docs

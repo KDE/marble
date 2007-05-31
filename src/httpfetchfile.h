@@ -24,11 +24,6 @@
 #include <QtNetwork/QHttpResponseHeader>
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class HttpFetchFile : public QObject
 {
     Q_OBJECT

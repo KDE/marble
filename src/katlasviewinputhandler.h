@@ -27,10 +27,8 @@
 #include "katlasglobe.h"
 
 
-/**
-@author Torsten Rahn
-*/
 class MarbleWidget;
+
 
 class KAtlasViewInputHandler  : public QObject
 {

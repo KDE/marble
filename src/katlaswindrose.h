@@ -23,10 +23,6 @@
 #include <QtGui/QFont>
 
 
-/**
-@author Torsten Rahn
-*/
-
 class QSvgRenderer;
 
 class KAtlasWindRose : public QObject

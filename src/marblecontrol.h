@@ -20,11 +20,9 @@
 
 #include "ui_marblecontrol.h"
 
-/**
-@author Inge Wallin
-*/
 
 class QStringListModel;
+
 
 class MarbleControl : public QWidget, private Ui::marbleControl
 {

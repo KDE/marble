@@ -24,13 +24,6 @@
 #include <QtCore/QString>
 
 
-/**
- *@author Torsten Rahn
- *
- * This class contains a Tile with a texture in it.  It is used for
- * drawing the map.
- */
-
 class TextureTile : public QObject {
     Q_OBJECT
 

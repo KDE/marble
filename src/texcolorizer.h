@@ -24,11 +24,6 @@
 #include <QtGui/QImage>
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 typedef struct
 {
     uchar  x1;

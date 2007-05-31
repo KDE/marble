@@ -18,10 +18,6 @@
 #include "katlasdirs.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
 class PlaceMarkManager
 {
  public:

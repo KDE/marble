@@ -22,10 +22,6 @@
 #include <QtGui/QPainter>
 
 
-/**
-@author Torsten Rahn
-*/
-
 class KAtlasCrossHair : public QObject
 {
     Q_OBJECT

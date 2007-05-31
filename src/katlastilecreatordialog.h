@@ -21,10 +21,6 @@
 #include "ui_katlastilecreatordialog.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
 class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDialog
 {
 

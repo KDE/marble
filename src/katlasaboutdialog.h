@@ -21,10 +21,6 @@
 #include "ui_katlasaboutdialog.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
 
 class KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog
 {

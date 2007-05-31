@@ -22,10 +22,6 @@
 #include <QtGui/QAction>
 
 
-/**
-@author Torsten Rahn
-*/
-
 class QMenu;
 
 class PlaceMark;

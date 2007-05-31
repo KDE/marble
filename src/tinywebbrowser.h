@@ -23,10 +23,6 @@
 #include <QtGui/QTextBrowser>
 
 
-/**
-@author Torsten Rahn
-*/
-
 class HttpFetchFile;
 
 

@@ -22,9 +22,6 @@
 #include "clippainter.h"
 
 
-/**
-@author Torsten Rahn
-*/
 class ClipPainter;
 
 

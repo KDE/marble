@@ -17,9 +17,6 @@
 #ifndef FASTMATH_H
 #define FASTMATH_H
 
-/**
-@author Torsten Rahn
-*/
 
 namespace FastMath {
     //	extern int ACos[32768];

@@ -30,11 +30,6 @@
 #include "Quaternion.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class ClipPainter;
 class PntMap;
 class VectorMap;

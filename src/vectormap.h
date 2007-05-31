@@ -23,11 +23,9 @@
 #include "ScreenPolygon.h"
 
 
-/**
-@author Torsten Rahn
-*/
 class PntMap;
 class ClipPainter;
+
 
 class VectorMap : public ScreenPolygon::Vector
 {

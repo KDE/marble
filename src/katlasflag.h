@@ -22,11 +22,6 @@
 #include <QtGui/QPixmap>
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class KAtlasFlag : public QObject
 {
 

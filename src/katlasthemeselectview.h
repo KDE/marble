@@ -22,9 +22,6 @@
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QListView>
 
-/**
-@author Torsten Rahn
-*/
 
 class KAtlasThemeSelectView : public QListView
 {

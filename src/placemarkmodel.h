@@ -22,10 +22,6 @@
 
 #include "placecontainer.h"
 
-/**
-@author Torsten Rahn
-*/
-
 
 inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
 {

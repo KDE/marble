@@ -31,7 +31,7 @@
 class TextureTile;
 class HttpDownloadManager;
 
-/**
+/*
  * @short Tile loading from a quad tree
  *
  * This class loads tiles into memory. For faster access
@@ -41,7 +41,7 @@ class HttpDownloadManager;
  * from the hashtable and to return more detailed properties
  * about each tile level and their tiles.
  *
- * @author Torsten Rahn rahn @ kde.org
+ * @author Torsten Rahn <rahn@kde.org>
  */
 
 class TileLoader : public QObject {

@@ -22,11 +22,6 @@
 #include "katlasflag.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class PlaceMark;
 
 class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog

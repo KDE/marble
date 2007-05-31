@@ -21,15 +21,9 @@
 #include <QtCore/QVector>
 #include <QtGui/QFont>
 
-
 #include "GeoPoint.h"
 #include "placemark.h"
 #include "clippainter.h"
-
-
-/**
-@author Torsten Rahn
-*/
 
 
 class MeasureTool : public QObject

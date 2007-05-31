@@ -49,14 +49,14 @@ struct HttpJob
 class HttpFetchFile;
 
 
-/**
- *@author Torsten Rahn
+/*
+ * @Short This class manages scheduled downloads. 
+
+ * The downloadmanager offers a maximum number of active jobs and a
+ * limit for pending jobs.  it also takes care that the job queue
+ * won't be polluted by jobs that timed out already.
  *
- * This class manages scheduled downloads. The downloadmanager offers
- * a maximum number of active jobs and a limit for pending jobs.
- * it also takes care that the job queue won't be polluted by 
- * jobs that timed out already.
- *
+ * @author Torsten Rahn
  */
 
 class HttpDownloadManager : public QObject 

@@ -24,11 +24,6 @@
 #include <QtGui/QFontMetrics>
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class KAtlasMapScale : public QObject
 {
     Q_OBJECT

@@ -17,9 +17,6 @@
 #include <QtGui/QPainter>
 
 
-/**
-@author Torsten Rahn
-*/
 
 class ClipPainter : public QPainter 
 {

@@ -18,11 +18,6 @@
 #include <QtCore/QString>
 
 
-/**
-@author Torsten Rahn
-*/
-
-
 class TileScissor : public QObject
 {
     Q_OBJECT

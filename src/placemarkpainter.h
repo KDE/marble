@@ -29,10 +29,6 @@
 #include "placecontainer.h"
 
 
-/**
-@author Torsten Rahn
-*/
-
 class QAbstractItemModel;
 class QPainter;
 class PlaceContainer;

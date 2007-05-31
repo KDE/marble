@@ -22,11 +22,9 @@
 
 #include <QtGui/QPixmap>
 
-/**
-@author Torsten Rahn
-*/
 
 class MarbleControlBox;
+
 
 class KAtlasControl : public QWidget
 {
