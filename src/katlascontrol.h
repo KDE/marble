@@ -26,7 +26,7 @@
 @author Torsten Rahn
 */
 
-class KAtlasToolBox;
+class MarbleControlBox;
 
 class KAtlasControl : public QWidget
 {
@@ -48,9 +48,9 @@ class KAtlasControl : public QWidget
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
 
  private:
-    KAtlasGlobe    *m_globe;
-    MarbleWidget   *m_marbleWidget;
-    KAtlasToolBox  *m_toolbox;
+    KAtlasGlobe       *m_globe;
+    MarbleWidget      *m_marbleWidget;
+    MarbleControlBox  *m_control;
 };
 
 

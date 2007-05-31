@@ -14,7 +14,7 @@
 #include <QtGui/QLayout>
 #include <QtGui/QStringListModel>
 
-#include "katlastoolbox.h"
+#include "MarbleControlBox.h"
 
 
 KAtlasControl::KAtlasControl(QWidget *parent)
@@ -24,42 +24,42 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     //	resize(640, 640);
     resize( 680, 640 );
 
-    m_toolbox = new KAtlasToolBox( this );
-    m_toolbox->setFixedWidth( 185 );
+    m_control = new MarbleControlBox( this );
+    m_control->setFixedWidth( 185 );
 
     // Create the Model (Globe) and one view.
     m_globe = new KAtlasGlobe( this );
     m_marbleWidget = new MarbleWidget( m_globe, this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
-    m_marbleWidget->setMinimumZoom( m_toolbox->minimumZoom() );
+    m_marbleWidget->setMinimumZoom( m_control->minimumZoom() );
 
     QVBoxLayout *vlayout = new QVBoxLayout( this );
 
     QHBoxLayout *hlayout = new QHBoxLayout();	
 
-    hlayout->addWidget( m_toolbox );
+    hlayout->addWidget( m_control );
     hlayout->addWidget( m_marbleWidget );
     vlayout->addLayout( hlayout );
     vlayout->setMargin(0);
 
-    m_toolbox->setLocations( m_marbleWidget->placeMarkModel() );
+    m_control->setLocations( m_marbleWidget->placeMarkModel() );
 
-    connect(m_toolbox, SIGNAL(goHome()),         m_marbleWidget, SLOT(goHome()));
-    connect(m_toolbox, SIGNAL(zoomChanged(int)), m_marbleWidget, SLOT(zoomView(int)));
-    connect(m_toolbox, SIGNAL(zoomIn()),  m_marbleWidget, SLOT(zoomIn()));
-    connect(m_toolbox, SIGNAL(zoomOut()), m_marbleWidget, SLOT(zoomOut()));
+    connect(m_control, SIGNAL(goHome()),         m_marbleWidget, SLOT(goHome()));
+    connect(m_control, SIGNAL(zoomChanged(int)), m_marbleWidget, SLOT(zoomView(int)));
+    connect(m_control, SIGNAL(zoomIn()),  m_marbleWidget, SLOT(zoomIn()));
+    connect(m_control, SIGNAL(zoomOut()), m_marbleWidget, SLOT(zoomOut()));
 
-    connect(m_toolbox, SIGNAL(moveLeft()),  m_marbleWidget, SLOT(moveLeft()));
-    connect(m_toolbox, SIGNAL(moveRight()), m_marbleWidget, SLOT(moveRight()));
-    connect(m_toolbox, SIGNAL(moveUp()),    m_marbleWidget, SLOT(moveUp()));
-    connect(m_toolbox, SIGNAL(moveDown()),  m_marbleWidget, SLOT(moveDown()));
+    connect(m_control, SIGNAL(moveLeft()),  m_marbleWidget, SLOT(moveLeft()));
+    connect(m_control, SIGNAL(moveRight()), m_marbleWidget, SLOT(moveRight()));
+    connect(m_control, SIGNAL(moveUp()),    m_marbleWidget, SLOT(moveUp()));
+    connect(m_control, SIGNAL(moveDown()),  m_marbleWidget, SLOT(moveDown()));
 
     connect(m_marbleWidget, SIGNAL(zoomChanged(int)), 
-	    m_toolbox,      SLOT(changeZoom(int)));
-    connect(m_toolbox,      SIGNAL(centerOn(const QModelIndex&)),
+	    m_control,      SLOT(changeZoom(int)));
+    connect(m_control,      SIGNAL(centerOn(const QModelIndex&)),
 	    m_marbleWidget, SLOT(centerOn(const QModelIndex&)));
-    connect(m_toolbox,      SIGNAL(selectMapTheme(const QString&)),
+    connect(m_control,      SIGNAL(selectMapTheme(const QString&)),
 	    m_marbleWidget, SLOT(setMapTheme(const QString&)));
 }
 
@@ -96,6 +96,5 @@ void KAtlasControl::moveDown()
 
 
 #ifndef Q_OS_MACX
-#include "katlastoolbox.moc"
 #include "katlascontrol.moc"
 #endif

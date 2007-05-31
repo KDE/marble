@@ -1,3 +1,14 @@
+2007-05-31  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename KAtlasControl into MarbleControlBox
+	* src/katlastoolbox.ui  -> src/MarbleControlBox.ui
+	* src/katlastoolbox.h   -> src/MarbleControlBox.h
+	* src/katlastoolbox.cpp -> src/MarbleControlBox.cpp
+	* src/CmakeLists.txt: use new name
+	* src/marbleosx.pro:  use new name
+	* src/katlascontrol.cpp: Use new class name
+	* src/DESIGN: Update documentation
+
 2007-05-29  Torsten Rahn  <rahn@kde.org>
 
 Some fixes:

@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "katlastoolbox.h"
+#include "MarbleControlBox.h"
 
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
@@ -32,15 +32,13 @@
 #include "maptheme.h"
 
 
-KAtlasToolBox::KAtlasToolBox(QWidget *parent)
+MarbleControlBox::MarbleControlBox(QWidget *parent)
     : QWidget( parent ),
       m_searchTriggered( false )
 {
     setupUi( this );
  
     m_minimumzoom = 950;
-    m_maximumzoom = 2200;
-
 
     setFocusPolicy( Qt::NoFocus );
 
@@ -86,17 +84,16 @@ KAtlasToolBox::KAtlasToolBox(QWidget *parent)
 }
 
 
-void KAtlasToolBox::changeZoom(int zoom)
+void MarbleControlBox::changeZoom(int zoom)
 {
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
     zoomSlider->setValue( zoom );
     zoomSlider->setMinimum( m_minimumzoom );
-    zoomSlider->setMaximum( m_maximumzoom );
 }
 
 
-void KAtlasToolBox::resizeEvent ( QResizeEvent * )
+void MarbleControlBox::resizeEvent ( QResizeEvent * )
 {
     if ( height() < 480 ) {
         if ( !zoomSlider->isHidden() ) {
@@ -113,7 +110,7 @@ void KAtlasToolBox::resizeEvent ( QResizeEvent * )
     }
 } 
 
-void KAtlasToolBox::searchLineChanged(const QString &search)
+void MarbleControlBox::searchLineChanged(const QString &search)
 {
     m_searchTerm = search;
     if ( m_searchTriggered )
@@ -123,7 +120,7 @@ void KAtlasToolBox::searchLineChanged(const QString &search)
 }
 
 
-void KAtlasToolBox::search()
+void MarbleControlBox::search()
 {
     m_searchTriggered = false;
     int  currentSelected = locationListView->currentIndex().row();
@@ -131,3 +128,8 @@ void KAtlasToolBox::search()
     if ( currentSelected != locationListView->currentIndex().row() )
         locationListView->activate();
 }
+
+
+#ifndef Q_OS_MACX
+#include "MarbleControlBox.moc"
+#endif

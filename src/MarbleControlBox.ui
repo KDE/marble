@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>katlasToolBox</class>
- <widget class="QWidget" name="katlasToolBox" >
+ <class>MarbleControlBox</class>
+ <widget class="QWidget" name="MarbleControlBox" >
   <property name="geometry" >
    <rect>
     <x>0</x>

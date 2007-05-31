@@ -58,12 +58,12 @@ set(marble_SRCS
            GridMap.cpp
            katlascontrol.cpp
            MarbleWidget.cpp
+           MarbleControlBox.cpp
            marblecontrol.cpp
            katlasviewinputhandler.cpp
            texcolorizer.cpp
            TileLoader.cpp
            katlasglobe.cpp
-           katlastoolbox.cpp
            vectorcomposer.cpp
            vectormap.cpp
            clippainter.cpp
@@ -102,13 +102,13 @@ set(marble_HDRS
            katlasdirs.h
            katlascontrol.h
            MarbleWidget.h
+           MarbleControlBox.h
            marblecontrol.h
            katlasviewinputhandler.h
            QtMainWindow.h
            texcolorizer.h
            TileLoader.h
            katlasglobe.h
-           katlastoolbox.h
            vectorcomposer.h
            vectormap.h
            clippainter.h
@@ -154,7 +154,7 @@ if(MINGW)
 endif(MINGW)
 
 set (marble_UI katlastilecreatordialog.ui
-	   katlastoolbox.ui placemarkinfodialog.ui katlasaboutdialog.ui
+	   MarbleControlBox.ui placemarkinfodialog.ui katlasaboutdialog.ui
            marblecontrol.ui)
 
 qt4_add_resources(marble_SRCS marble.qrc)

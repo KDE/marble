@@ -15,11 +15,11 @@
 //
 
 
-#ifndef KATLASTOOLBOX_H
-#define KATLASTOOLBOX_H
+#ifndef MARBLECONTROLBOX_H
+#define MARBLECONTROLBOX_H
 
 
-#include "ui_katlastoolbox.h"
+#include "ui_MarbleControlBox.h"
 
 /**
 @author Torsten Rahn
@@ -27,12 +27,12 @@
 
 class QStringListModel;
 
-class KAtlasToolBox : public QWidget, private Ui::katlasToolBox
+class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
 {
     Q_OBJECT
 
  public:
-    KAtlasToolBox(QWidget *parent = 0);
+    MarbleControlBox(QWidget *parent = 0);
  
    void setLocations(QAbstractItemModel* locations) {
        locationListView->setModel( locations );
@@ -66,11 +66,10 @@ class KAtlasToolBox : public QWidget, private Ui::katlasToolBox
  protected:
     void resizeEvent ( QResizeEvent * );
     int  m_minimumzoom;
-    int  m_maximumzoom;
 
  private:
     QString  m_searchTerm;
     bool     m_searchTriggered;
 };
 
-#endif // KATLASTOOLBOX_H
+#endif // MARBLECONTROLBOX_H

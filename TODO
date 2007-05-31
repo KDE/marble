@@ -11,7 +11,7 @@ Before end of May (Qt Centre contest)
 Rename
  * KAtlasView    -> MarbleWidget                                        DONE
  * KAtlasGlobe   -> MarbleModel                                         ----
- * KAtlasToolBox -> MarbleToolBox                                       ----
+ * KAtlasToolBox -> MarbleToolBox (or MarbleControlBox?)                ----
  * ???           -> MarbleLocator                                       ----
  * more...
 

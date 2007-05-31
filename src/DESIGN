@@ -4,8 +4,8 @@ This file describes the design and structure of Marble
 =====================
 
 Marble, the application, consists two main widgets: 
-  - a MarbleWidget that contains the view of the world, and
-  - a KAtlasToolbox that controls it.
+  - a MarbleWidget      that contains the view of the world, and
+  - a MarbleControlBox  that controls it.
 
 The MarbleWidget is a view for the model represented by the KAtlasGlobe
 class, which contains all the data necessary for manipulating and
@@ -178,7 +178,7 @@ MarbleWidget	The view of a KAtlasGlobe.
 Widgets
 -------
 KAtlasControl	The main window.  Contains a MarbleWidget and a
-		KAtlasToolbox. 
+		MarbleControlBox.
 
 
 Unsorted
@@ -194,7 +194,6 @@ class KAtlasMapScale : public QObject {
 class KAtlasThemeSelectView : public QListView {
 class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDialog {
 class KAtlasTileCreatorDialog: public Ui_KAtlasTileCreatorDialog {};
-class KAtlasToolBox;
 class KAtlasViewInputHandler;
 class KAtlasViewPopupMenu;
 class KAtlasWindRose : public QObject {
@@ -218,4 +217,3 @@ class TextureTile;
 class TileScissor : public QObject {
 class TinyWebBrowser : public QTextBrowser {
 class katlasAboutDialog: public Ui_katlasAboutDialog {};
-class katlasToolBox: public Ui_katlasToolBox {};
