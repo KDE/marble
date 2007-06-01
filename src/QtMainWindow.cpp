@@ -27,7 +27,7 @@
 
 #include <QtGui/QClipboard>
 
-#include "katlasaboutdialog.h"
+#include <marble/katlasaboutdialog.h>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {

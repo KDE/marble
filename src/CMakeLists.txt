@@ -1,34 +1,5 @@
-# FIXME: The original QT4_ADD_RESOURCES should be extended to support this filetype too
-#
-# QT4_ADD_RESOURCE2(outfiles inputfile ... )
-# TODO  perhaps consider adding support for compression and root options to rcc
 
-if (MINGW)
-MACRO (QT4_ADD_RESOURCES2 outfiles )
-
-FOREACH (it ${ARGN})
-  GET_FILENAME_COMPONENT(outfilename ${it} NAME_WE)
-  GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
-  GET_FILENAME_COMPONENT(rc_path ${infile} PATH)
-  SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${outfilename}_res.o)
-  #  parse file for dependencies
-  FILE(READ "${infile}" _RC_FILE_CONTENTS)
-  STRING(REGEX MATCHALL "<file>[^<]*" _RC_FILES "${_RC_FILE_CONTENTS}")
-  SET(_RC_DEPENDS)
-  FOREACH(_RC_FILE ${_RC_FILES})
-    STRING(REGEX REPLACE "^<file>" "" _RC_FILE "${_RC_FILE}")
-    SET(_RC_DEPENDS ${_RC_DEPENDS} "${rc_path}/${_RC_FILE}")
-  ENDFOREACH(_RC_FILE)
-  ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
-    COMMAND windres
-    ARGS -i ${infile} -o ${outfile} --include-dir=${CMAKE_CURRENT_SOURCE_DIR}
-    MAIN_DEPENDENCY ${infile}
-    DEPENDS ${_RC_DEPENDS})
-  SET(${outfiles} ${${outfiles}} ${outfile})
-ENDFOREACH (it)
-
-ENDMACRO (QT4_ADD_RESOURCES2)
-ENDIF(MINGW)
+add_subdirectory( lib )
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
@@ -47,94 +18,14 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
-link_directories (${QT_LIBRARY_DIR})
-
 set(marble_SRCS
-           Quaternion.cpp
-           GeoPoint.cpp
-           GeoPolygon.cpp
-           TextureTile.cpp
-           TextureMapper.cpp
-           GridMap.cpp
            katlascontrol.cpp
-           MarbleWidget.cpp
            MarbleControlBox.cpp
-           marblecontrol.cpp
-           katlasviewinputhandler.cpp
-           texcolorizer.cpp
-           TileLoader.cpp
-           katlasglobe.cpp
-           vectorcomposer.cpp
-           vectormap.cpp
-           clippainter.cpp
-           placemarkmanager.cpp
-           placecontainer.cpp
-           placemark.cpp
-           searchlistview.cpp
-           katlasmapscale.cpp
-           placemarkmodel.cpp
-           placemarkpainter.cpp
-           maptheme.cpp
-           tilescissor.cpp
-           katlastilecreatordialog.cpp
-           katlasthemeselectview.cpp
-           katlaswindrose.cpp
-           katlasviewpopupmenu.cpp
-           katlascrosshair.cpp
-           xmlhandler.cpp
-           placemarkinfodialog.cpp
-           katlasflag.cpp
-           tinywebbrowser.cpp
-	       HttpDownloadManager.cpp
-           httpfetchfile.cpp
-           measuretool.cpp
-	   katlasaboutdialog.cpp
 )
 
 set(marble_HDRS
-           Quaternion.h
-           GeoPoint.h
-           GeoPolygon.h
-           ScreenPolygon.h
-           TextureTile.h
-           TextureMapper.h
-           GridMap.h
-           katlasdirs.h
            katlascontrol.h
-           MarbleWidget.h
            MarbleControlBox.h
-           marblecontrol.h
-           katlasviewinputhandler.h
-           QtMainWindow.h
-           texcolorizer.h
-           TileLoader.h
-           katlasglobe.h
-           vectorcomposer.h
-           vectormap.h
-           clippainter.h
-           placemarkmanager.h
-           placecontainer.h
-           placemark.h
-           searchlistview.h
-           katlasmapscale.h
-           placemarkmodel.h
-           placemarkpainter.h
-           maptheme.h
-           tilescissor.h
-           katlastilecreatordialog.h
-           katlasthemeselectview.h
-           katlaswindrose.h
-           katlasviewpopupmenu.h
-           katlascrosshair.h
-           xmlhandler.h
-           placemarkinfodialog.h
-           katlasflag.h
-           tinywebbrowser.h
-	       HttpDownloadManager.h
-           httpfetchfile.h
-           measuretool.h
-           katlasaboutdialog.h
-#           MarbleViewAdaptor.h
 )
 
 if (QTONLY)
@@ -153,11 +44,9 @@ if(MINGW)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
 endif(MINGW)
 
-set (marble_UI katlastilecreatordialog.ui
-	   MarbleControlBox.ui placemarkinfodialog.ui katlasaboutdialog.ui
-           marblecontrol.ui)
+set ( marble_UI MarbleControlBox.ui )
 
-qt4_add_resources(marble_SRCS marble.qrc)
+#qt4_add_resources(marble_SRCS lib/marble.qrc)
 
 if (QTONLY)
   qt4_wrap_ui(marble_SRCS ${marble_UI})
@@ -175,9 +64,9 @@ else (QTONLY)
 endif (QTONLY)
 
 if (QTONLY)
-	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY})
+    target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
 else (QTONLY)
-	target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
+    target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
 endif (QTONLY)
 if(WIN32)
   target_link_libraries(marble ws2_32 imm32 winmm)

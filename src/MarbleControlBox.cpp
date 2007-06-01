@@ -28,8 +28,8 @@
 #include <QtGui/QStringListModel>
 #include <QtGui/QTextFrame>
 
-#include "katlasdirs.h"
-#include "maptheme.h"
+#include <marble/katlasdirs.h>
+#include <marble/maptheme.h>
 
 
 MarbleControlBox::MarbleControlBox(QWidget *parent)

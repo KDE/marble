@@ -23,6 +23,7 @@
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
+#include <QtDesigner/QDesignerExportWidget>
 
 #include "katlasglobe.h"
 #include "katlascrosshair.h"
@@ -65,7 +66,7 @@ class KAtlasTileCreatorDialog;
  * @see KAtlasGlobe
  */
 
-class MarbleWidget : public QWidget
+class QDESIGNER_WIDGET_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
 

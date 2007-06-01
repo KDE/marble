@@ -496,12 +496,12 @@
   <customwidget>
    <class>KAtlasThemeSelectView</class>
    <extends>QListView</extends>
-   <header>katlasthemeselectview.h</header>
+   <header>marble/katlasthemeselectview.h</header>
   </customwidget>
   <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
-   <header>searchlistview.h</header>
+   <header>marble/searchlistview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
