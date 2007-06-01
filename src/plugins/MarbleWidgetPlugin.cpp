@@ -8,8 +8,8 @@
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "katlasglobe.h"
-#include "MarbleWidget.h"
+#include "../lib/katlasglobe.h"
+#include "../lib/MarbleWidget.h"
 #include "MarbleWidgetPlugin.h"
 
 #include <QtPlugin>
