@@ -27,7 +27,7 @@
 
 #include <QtGui/QClipboard>
 
-#include <marble/katlasaboutdialog.h>
+// #include <marble/katlasaboutdialog.h>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -164,8 +164,8 @@ void MainWindow::enterWhatsThis()
 
 void MainWindow::aboutMarble()
 {
-    KAtlasAboutDialog dlg(this);
-    dlg.exec();
+//    KAtlasAboutDialog dlg(this);
+//    dlg.exec();
 }
 
 #ifndef Q_OS_MACX
