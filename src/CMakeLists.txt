@@ -78,11 +78,6 @@ if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)
 
-# install the XML GUI file
-if( NOT QTONLY )
-    install( FILES marbleui.rc  DESTINATION  ${DATA_INSTALL_DIR}/marble )
-endif( NOT QTONLY )
-
 if(WIN32)
     install (TARGETS marble DESTINATION "")
 else(WIN32)

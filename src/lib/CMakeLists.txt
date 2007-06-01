@@ -59,7 +59,7 @@ set(marblewidget_SRCS
            vectormap.cpp
            xmlhandler.cpp
 )
-MESSAGE( STATUS ${marblewidget_SRCS} )
+#MESSAGE( STATUS ${marblewidget_SRCS} )
 
 #if (QTONLY)
 #  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp)
@@ -94,18 +94,20 @@ endif (QTONLY)
 #  kde4_add_executable (marble ${marble_SRCS} ${marble_HDRS})
 #endif (QTONLY)
 
+# why this??
 ADD_DEFINITIONS(${QT_DEFINITIONS})
 ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 ADD_DEFINITIONS(-DQT_DLL)
 
-ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
 
 # link with release version of Qt libs
 
 if (QTONLY)
+    ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
     TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY})
 else (QTONLY)
+    KDE4_ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
     TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
 endif (QTONLY)
 if(WIN32)
