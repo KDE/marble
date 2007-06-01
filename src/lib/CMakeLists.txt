@@ -82,7 +82,7 @@ set (marblewidget_UI katlastilecreatordialog.ui placemarkinfodialog.ui katlasabo
 )
 MESSAGE( STATUS ${marble_UI} )
 
-qt4_add_resources(marblewidget_SRCS marble.qrc)
+qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 
 if (QTONLY)
   qt4_wrap_ui(SOURCES_UI_HDRS ${marblewidget_UI})

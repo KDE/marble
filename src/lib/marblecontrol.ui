@@ -34,7 +34,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/arrow-up.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/arrow-up.png</iconset>
       </property>
      </widget>
     </item>
@@ -50,7 +50,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/arrow-left.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/arrow-left.png</iconset>
       </property>
       <property name="shortcut" >
        <string>Left</string>
@@ -69,7 +69,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/go-home.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/go-home.png</iconset>
       </property>
       <property name="shortcut" >
        <string>Home</string>
@@ -88,7 +88,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/arrow-right.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/arrow-right.png</iconset>
       </property>
       <property name="shortcut" >
        <string>Right</string>
@@ -107,7 +107,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/arrow-down.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/arrow-down.png</iconset>
       </property>
      </widget>
     </item>
@@ -123,7 +123,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/zoom-in.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/zoom-in.png</iconset>
       </property>
       <property name="shortcut" >
        <string>+</string>
@@ -179,7 +179,7 @@
        <string>...</string>
       </property>
       <property name="icon" >
-       <iconset resource="marble.qrc" >:/icons/zoom-out.png</iconset>
+       <iconset resource="libmarble.qrc" >:/icons/zoom-out.png</iconset>
       </property>
       <property name="shortcut" >
        <string>-</string>

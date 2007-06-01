@@ -46,7 +46,7 @@ endif(MINGW)
 
 set ( marble_UI MarbleControlBox.ui )
 
-#qt4_add_resources(marble_SRCS lib/marble.qrc)
+qt4_add_resources(marble_SRCS marble.qrc)
 
 if (QTONLY)
   qt4_wrap_ui(marble_SRCS ${marble_UI})
