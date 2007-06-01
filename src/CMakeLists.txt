@@ -1,4 +1,9 @@
 
+# before add_subdirectory() !
+if(MSVC)
+  add_definitions(-D_USE_MATH_DEFINES=1)
+endif(MSVC)
+
 add_subdirectory( lib )
 
 if (QTONLY)
@@ -13,10 +18,6 @@ else (QTONLY)
   endif(NOT WIN32)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
 endif (QTONLY)
-
-if(MSVC)
-  add_definitions(-D_USE_MATH_DEFINES=1)
-endif(MSVC)
 
 set(marble_SRCS
            katlascontrol.cpp
@@ -78,9 +79,9 @@ if(STATIC_BUILD)
     target_link_libraries(marble ${QT_PLUGINS_DIR}/imageformats/qsvg.lib)
 endif(STATIC_BUILD)
 
-if(WIN32)
+if(WIN32 AND QTONLY)
     install (TARGETS marble DESTINATION "")
-else(WIN32)
+else(WIN32 AND QTONLY)
     #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
     if( NOT QTONLY)
       install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
@@ -94,5 +95,5 @@ else(WIN32)
     else (NOT QTONLY)
       install( FILES marble.desktop  DESTINATION share/applications)
     endif (NOT QTONLY)
-endif(WIN32)
+endif(WIN32 AND QTONLY)
 

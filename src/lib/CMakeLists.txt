@@ -120,7 +120,11 @@ set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
 )
 
-install(TARGETS marblewidget DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+if(WIN32 AND QTONLY)
+  install(TARGETS marblewidget DESTINATION "")
+else(WIN32 AND QTONLY)
+  install(TARGETS marblewidget DESTINATION lib)
+endif(WIN32 AND QTONLY)
 
 ########### install files ###############
 
