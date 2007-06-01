@@ -17,6 +17,7 @@
 #ifndef KATLASGLOBE_H
 #define KATLASGLOBE_H
 
+#include "marble_export.h"
 
 /** @file
  * This file contains the headers for KAtlasGlobe.
@@ -75,7 +76,7 @@ class PlaceMarkManager;
  * @see MarbleWidget
  */
 
-class KAtlasGlobe  : public QObject
+class MARBLE_EXPORT KAtlasGlobe  : public QObject
 {
     Q_OBJECT
 

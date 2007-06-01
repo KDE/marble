@@ -29,7 +29,9 @@
 
 
 #ifdef Q_CC_MSVC
-  static double sqrt(int a) { return sqrt((double)a); }
+# ifndef KDEWIN_MATH_H
+   static long double sqrt(int a) { return sqrt((long double)a); }
+# endif
 #endif
 
 

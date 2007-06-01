@@ -179,9 +179,9 @@ QStringList MapTheme::findMapThemes( const QString& path )
     QString      themedirname;
     QString      themexml;
 
-    QStringListIterator  i( localmapdirs );
-    while ( i.hasNext() ) {
-        themedir = i.next() + '/';
+    QStringListIterator  it( localmapdirs );
+    while ( it.hasNext() ) {
+        themedir = it.next() + '/';
         themedirname = QDir( themedir ).dirName();
         // qDebug() << themedir;
 

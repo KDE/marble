@@ -33,10 +33,9 @@
 #include <QtCore/QObject>
 
 #ifdef Q_CC_MSVC
-double log(int i)
-{
-    return log((double)i);
-}
+# ifndef KDEWIN_MATH_H
+   long double log(int i) { return log((long double)i); }
+# endif
 #endif
 
 

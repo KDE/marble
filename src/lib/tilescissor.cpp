@@ -46,8 +46,8 @@ void TileScissor::createTiles()
     QImageReader testimg( srcpath );
 
     QVector<QRgb> legpal;
-    for ( int count = 0; count <= 255; count++) {
-        legpal.insert(count, qRgb(count, count, count));
+    for ( int cnt = 0; cnt <= 255; cnt++) {
+        legpal.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
     int  imgw = testimg.size().width();
