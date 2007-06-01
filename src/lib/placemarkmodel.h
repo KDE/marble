@@ -20,6 +20,7 @@
 
 #include <QtCore/QAbstractListModel>
 
+#include "marble_export.h"
 #include "placecontainer.h"
 
 
@@ -29,7 +30,7 @@ inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
 }
 
 
-class PlaceMarkModel : public QAbstractListModel
+class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
 {
     Q_OBJECT
 

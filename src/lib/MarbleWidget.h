@@ -25,6 +25,7 @@
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
 
+#include "marble_export.h"
 #include "katlasglobe.h"
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
@@ -66,7 +67,7 @@ class KAtlasTileCreatorDialog;
  * @see KAtlasGlobe
  */
 
-class QDESIGNER_WIDGET_EXPORT MarbleWidget : public QWidget
+class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
 

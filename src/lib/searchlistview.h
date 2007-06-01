@@ -16,8 +16,9 @@
 
 #include <QtGui/QListView>
 
+#include "marble_export.h"
 
-class SearchListView : public QListView
+class MARBLE_EXPORT SearchListView : public QListView
 {
     Q_OBJECT
 

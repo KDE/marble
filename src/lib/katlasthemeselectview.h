@@ -22,8 +22,9 @@
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QListView>
 
+#include "marble_export.h"
 
-class KAtlasThemeSelectView : public QListView
+class MARBLE_EXPORT KAtlasThemeSelectView : public QListView
 {
     Q_OBJECT
 

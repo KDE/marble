@@ -17,6 +17,7 @@
 #include <QtCore/QObject>
 #include <QtGui/QColor>
 
+#include "marble_export.h"
 
 class QStandardItemModel;
 
@@ -30,7 +31,7 @@ typedef struct
 } DgmlLayer;
 
 
-class MapTheme : public QObject
+class MARBLE_EXPORT MapTheme : public QObject
 {
     Q_OBJECT
 

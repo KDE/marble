@@ -69,14 +69,6 @@ MESSAGE( STATUS ${marblewidget_SRCS} )
 #  set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
 #endif (QTONLY)
 
-#if(MSVC)
-#  set(marble_SRCS ${marble_SRCS} marble.rc)
-#endif(MSVC)
-
-#if(MINGW)
-#   QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
-#endif(MINGW)
-
 set (marblewidget_UI katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
 #           marblecontrol.ui	   MarbleControlBox.ui 
 )
@@ -121,6 +113,10 @@ if(WIN32)
 endif(WIN32)
 
 # set_target_properties(marblewidget PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+# needed for marble_export.h
+set_target_properties(marblewidget PROPERTIES
+  DEFINE_SYMBOL MAKE_MARBLE_LIB
+)
 
 install(TARGETS marblewidget DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
@@ -168,6 +164,8 @@ install( FILES
            vectorcomposer.h
            vectormap.h
            xmlhandler.h
-           DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble)
+           marble_export.h
+           DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
+)
 
 

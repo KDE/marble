@@ -18,7 +18,7 @@
 #define KATLASCONTROL_H
 
 
-#include <marble/MarbleWidget.h>
+#include <lib/MarbleWidget.h>
 
 #include <QtGui/QPixmap>
 
