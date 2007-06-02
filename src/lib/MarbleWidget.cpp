@@ -35,19 +35,27 @@
 #endif
 
 
+MarbleWidget::MarbleWidget(QWidget *parent)
+    : QWidget(parent)
+{
+    m_model = new MarbleModel( this );
+    construct( parent );
+}
+
+
 MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     : QWidget(parent)
+{
+    m_model = model;
+    construct( parent );
+}
+
+void MarbleWidget::construct(QWidget *parent)
 {
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
 
-#if 0
-    //FIXME(ModelView): Provide this to the constructor
-    m_model = new MarbleModel( this );
-#else
-    m_model = model;
-#endif
     connect( m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
     connect( m_model, SIGNAL( creatingTilesProgress( int ) ),

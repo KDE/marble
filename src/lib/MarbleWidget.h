@@ -74,8 +74,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  public:
     /**
      * @brief Construct a new MarbleWidget.
-     * @param globe  the data model for the widget.
      * @param parent the parent widget
+     *
+     * This constructor should be used when you will only use one
+     * MarbleWidget.  The widget will create its own MarbleModel when 
+     * created.
+     */
+    explicit MarbleWidget(QWidget *parent = 0);
+
+    /**
+     * @brief Construct a new MarbleWidget.
+     * @param model  the data model for the widget.
+     * @param parent the parent widget
+     *
+     * This constructor should be used when you plan to use more than
+     * one MarbleWidget for the same MarbleModel (not yet supported,
+     * but will be soon).
      */
     explicit MarbleWidget(MarbleModel *model, QWidget *parent = 0);
 
@@ -156,6 +170,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  resizeEvent(QResizeEvent*);
 
  private:
+    void  construct(QWidget *parent);
+
     int   toLogScale(int);
     int   fromLogScale(int);
 

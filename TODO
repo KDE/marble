@@ -28,7 +28,8 @@ Cleaning
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
  * Krazy code checks                                                    DONE
- * Make MarbleWidget able to work without a MarbleModel again           INGE
+ * Make MarbleWidget able to work without a MarbleModel again           DONE
+ * Make MarbleControlBox integration MarbleWidget as simple as possible INGE
  * Installation issues                                                  TACK
    - Move MarbleWidget to src/lib/                                      --
    - Only install MarbleWidget.h and MarbleControlBox.h                 --

@@ -30,8 +30,12 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     m_control->setFixedWidth( 185 );
 
     // Create the Model (Globe) and one view.
+#if 0
     m_marbleModel = new MarbleModel( this );
     m_marbleWidget = new MarbleWidget( m_marbleModel, this );
+#else
+    m_marbleWidget = new MarbleWidget( this );
+#endif
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
     m_marbleWidget->setMinimumZoom( m_control->minimumZoom() );

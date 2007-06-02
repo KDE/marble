@@ -26,7 +26,7 @@
 
 
 class MarbleWidget;
-class MarbleModel;
+//class MarbleModel;
 class MarbleControlBox;
 
 
@@ -52,7 +52,7 @@ class KAtlasControl : public QWidget
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
 
  private:
-    MarbleModel       *m_marbleModel;
+    //MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
 };

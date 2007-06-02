@@ -1,5 +1,12 @@
 2007-06-02  Inge Wallin  <inge@lysator.liu.se>
 
+	Make a standalone widget that creates its own model
+	* src/lib/MarbleWidget.cpp (MarbleWidget(parent)): new constructor
+	(construct): New method
+	* src/katlascontrol.cpp (KAtlasControl): Use new constructor for
+	MarbleWidget
+	* src/katlascontrol.h (KAtlasControl::m_marbleModel): removed
+
 	Rename KatlasGlobe -> MarbleModel
 	* src/lib/MarbleModel.h (): renamed from katlasglobe.h
 	* src/lib/MarbleModel.cpp (): renamed from katlasglobe.cpp
