@@ -26,7 +26,6 @@ set(marblewidget_SRCS
            HttpDownloadManager.cpp
            httpfetchfile.cpp
            katlasaboutdialog.cpp
-#           katlascontrol.cpp
            katlascrosshair.cpp
            katlasflag.cpp
            katlasglobe.cpp
@@ -37,7 +36,6 @@ set(marblewidget_SRCS
            katlasviewpopupmenu.cpp
            katlaswindrose.cpp
            maptheme.cpp
-#           marblecontrol.cpp
            MarbleWidget.cpp
            measuretool.cpp
            placecontainer.cpp
@@ -59,40 +57,21 @@ set(marblewidget_SRCS
            vectormap.cpp
            xmlhandler.cpp
 )
-#MESSAGE( STATUS ${marblewidget_SRCS} )
-
-#if (QTONLY)
-#  set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp)
-#  set(marble_HDRS ${marble_HDRS} QtMainWindow.h)
-#else (QTONLY)
-#  set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp)
-#  set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
-#endif (QTONLY)
+MESSAGE( STATUS ${marblewidget_SRCS} )
 
 set (marblewidget_UI katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
-#           marblecontrol.ui	   MarbleControlBox.ui 
 )
 MESSAGE( STATUS ${marble_UI} )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 
 if (QTONLY)
-  qt4_wrap_ui(SOURCES_UI_HDRS ${marblewidget_UI})
+  qt4_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
   qt4_automoc(${marblewidget_SRCS})
 else (QTONLY)
   kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
   kde4_automoc(${marblewidget_SRCS})
 endif (QTONLY)
-
-# qt4_generate_moc(${CMAKE_SOURCE_DIR}/src/MarbleWidgetPlugin.h ${CMAKE_CURRENT_BINARY_DIR}/src/MarbleWidgetPlugin.moc)
-
-
-#kde4_add_library (marble SHARED ${marble_SRCS})
-#if (QTONLY)
-#  add_executable (marble WIN32 ${marble_SRCS} ${marble_HDRS})
-#else (QTONLY)
-#  kde4_add_executable (marble ${marble_SRCS} ${marble_HDRS})
-#endif (QTONLY)
 
 # why this??
 ADD_DEFINITIONS(${QT_DEFINITIONS})
@@ -136,7 +115,6 @@ install( FILES
            HttpDownloadManager.h
            httpfetchfile.h
            katlasaboutdialog.h
-#           katlascontrol.h
            katlascrosshair.h
            katlasdirs.h
            katlasflag.h
@@ -148,7 +126,6 @@ install( FILES
            katlasviewpopupmenu.h
            katlaswindrose.h
            maptheme.h
-           marblecontrol.h
            MarbleWidget.h
            measuretool.h
            placecontainer.h

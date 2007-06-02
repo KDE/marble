@@ -14,22 +14,18 @@
 //
 
 
-#ifndef MARBLECONTROL_H
-#define MARBLECONTROL_H
+#ifndef MARBLENAVIGATOR_H
+#define MARBLENAVIGATOR_H
+
+#include "ui_MarbleNavigator.h"
 
 
-#include "ui_marblecontrol.h"
-
-
-class QStringListModel;
-
-
-class MarbleControl : public QWidget, private Ui::marbleControl
+class MarbleNavigator : public QWidget, private Ui::MarbleNavigator
 {
     Q_OBJECT
 
  public:
-    MarbleControl(QWidget *parent = 0);
+    MarbleNavigator(QWidget *parent = 0);
  
    int minimumZoom() const { return m_minimumzoom; }
 	
@@ -55,4 +51,4 @@ class MarbleControl : public QWidget, private Ui::marbleControl
     int  m_minimumzoom;
 };
 
-#endif // MARBLECONTROL_H
+#endif // MARBLENAVIGATOR_H

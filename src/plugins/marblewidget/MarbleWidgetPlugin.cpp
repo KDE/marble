@@ -8,8 +8,8 @@
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "../lib/katlasglobe.h"
-#include "../lib/MarbleWidget.h"
+#include "../../lib/katlasglobe.h"
+#include "../../lib/MarbleWidget.h"
 #include "MarbleWidgetPlugin.h"
 
 #include <QtPlugin>
@@ -56,7 +56,7 @@ QString MarbleWidgetPlugin::group() const
 
 QIcon MarbleWidgetPlugin::icon() const
 {
-    return QIcon();
+    return QIcon(":/icons/marble.png");
 }
 
 QString MarbleWidgetPlugin::toolTip() const

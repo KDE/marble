@@ -10,17 +10,15 @@
 //
 
 
-#include "marblecontrol.h"
+#include "MarbleNavigator.h"
 
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QStringListModel>
 
-#include "maptheme.h"
 
-
-MarbleControl::MarbleControl(QWidget *parent)
+MarbleNavigator::MarbleNavigator(QWidget *parent)
     : QWidget( parent )
 {
     setupUi( this );
@@ -49,7 +47,7 @@ MarbleControl::MarbleControl(QWidget *parent)
 }
 
 
-void MarbleControl::changeZoom(int zoom)
+void MarbleNavigator::changeZoom(int zoom)
 {
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
@@ -58,9 +56,11 @@ void MarbleControl::changeZoom(int zoom)
 }
 
 
-void MarbleControl::resizeEvent ( QResizeEvent * )
+void MarbleNavigator::resizeEvent ( QResizeEvent * )
 {
-    if ( height() < 480 ) {
+//            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+//                                           QSizePolicy::Fixed );
+    if ( height() < 100 ) {
         if ( !zoomSlider->isHidden() ) {
             zoomSlider->hide();
             m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
@@ -73,9 +73,10 @@ void MarbleControl::resizeEvent ( QResizeEvent * )
                                            QSizePolicy::Fixed );
         }
     }
+
 } 
 
 
 #ifndef Q_OS_MACX
-#include "marblecontrol.moc"
+#include "MarbleNavigator.moc"
 #endif
