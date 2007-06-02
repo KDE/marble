@@ -1,0 +1,8 @@
+/** \file kdeedu/marble/Mainpage.dox
+    \brief The main page of the doxygen generated API Documentation
+*/
+/** @mainpage Marble
+
+Marble is a world widget that can be zoomed, rotated and searched.
+ 
+*/
