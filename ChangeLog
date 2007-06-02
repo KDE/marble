@@ -1,5 +1,11 @@
 2007-06-02  Inge Wallin  <inge@lysator.liu.se>
 
+	Improve integration between MarbleControlBox and MarbleWidget
+	* src/MarbleControlBox.h (m_widget): new member
+	* src/MarbleControlBox.cpp (addMarbleWidget): New method
+	* src/katlascontrol.cpp (KAtlasControl): use addMarbleWidget
+	instead of connecting signals/slots ourselves
+
 	Make a standalone widget that creates its own model
 	* src/lib/MarbleWidget.cpp (MarbleWidget(parent)): new constructor
 	(construct): New method

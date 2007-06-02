@@ -28,12 +28,14 @@
 #include <QtGui/QStringListModel>
 #include <QtGui/QTextFrame>
 
+#include <lib/MarbleWidget.h>
 #include <lib/katlasdirs.h>
 #include <lib/maptheme.h>
 
 
 MarbleControlBox::MarbleControlBox(QWidget *parent)
     : QWidget( parent ),
+      m_widget( 0 ),
       m_searchTriggered( false )
 {
     setupUi( this );
@@ -80,7 +82,34 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     QTextFrameFormat  format = legendBrowser->document()->rootFrame()->frameFormat();
     format.setMargin(6);
     legendBrowser->document()->rootFrame()->setFrameFormat( format );
+}
 
+
+void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
+{
+    m_widget = widget;
+
+    // Make us aware of all the PlaceMarks in the MarbleModel so that
+    // we can search in them.
+    setLocations( m_widget->placeMarkModel() );
+
+    // Connect necessary signals.
+    connect( this, SIGNAL(goHome()),         m_widget, SLOT(goHome()) );
+    connect( this, SIGNAL(zoomChanged(int)), m_widget, SLOT(zoomView(int)) );
+    connect( this, SIGNAL(zoomIn()),         m_widget, SLOT(zoomIn()) );
+    connect( this, SIGNAL(zoomOut()),        m_widget, SLOT(zoomOut()) );
+
+    connect( this, SIGNAL(moveLeft()),  m_widget, SLOT(moveLeft()) );
+    connect( this, SIGNAL(moveRight()), m_widget, SLOT(moveRight()) );
+    connect( this, SIGNAL(moveUp()),    m_widget, SLOT(moveUp()) );
+    connect( this, SIGNAL(moveDown()),  m_widget, SLOT(moveDown()) );
+
+    connect(m_widget, SIGNAL(zoomChanged(int)), 
+	    this,     SLOT(changeZoom(int)));
+    connect(this,     SIGNAL(centerOn(const QModelIndex&)),
+	    m_widget, SLOT(centerOn(const QModelIndex&)));
+    connect(this,     SIGNAL(selectMapTheme(const QString&)),
+	    m_widget, SLOT(setMapTheme(const QString&)));
 }
 
 

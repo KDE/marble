@@ -30,6 +30,7 @@
  */
 
 
+class MarbleWidget;
 class QStringListModel;
 
 /** 
@@ -67,10 +68,13 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
  public:
     MarbleControlBox(QWidget *parent = 0);
  
-   void setLocations(QAbstractItemModel* locations) {
-       locationListView->setModel( locations );
-   }
-   int minimumZoom() const { return m_minimumzoom; }
+    void addMarbleWidget( MarbleWidget *widget );
+
+    void setLocations(QAbstractItemModel* locations) {
+        locationListView->setModel( locations );
+    }
+
+    int minimumZoom() const { return m_minimumzoom; }
 	
  signals:
     void goHome();
@@ -100,9 +104,10 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
     void resizeEvent ( QResizeEvent * );
 
  private:
-    QString  m_searchTerm;
-    bool     m_searchTriggered;
-    int      m_minimumzoom;
+    MarbleWidget  *m_widget;
+    QString        m_searchTerm;
+    bool           m_searchTriggered;
+    int            m_minimumzoom;
 };
 
 #endif // MARBLECONTROLBOX_H

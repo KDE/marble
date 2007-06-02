@@ -29,7 +29,7 @@ Cleaning
    - MarbleControl                                                      --
  * Krazy code checks                                                    DONE
  * Make MarbleWidget able to work without a MarbleModel again           DONE
- * Make MarbleControlBox integration MarbleWidget as simple as possible INGE
+ * Make MarbleControlBox integration MarbleWidget as simple as possible DONE
  * Installation issues                                                  TACK
    - Move MarbleWidget to src/lib/                                      --
    - Only install MarbleWidget.h and MarbleControlBox.h                 --
@@ -47,10 +47,6 @@ Features
 
 Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
-
-Rename
- * ???           -> MarbleLocator                                       ----
- * more...
 
 Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
@@ -77,8 +73,6 @@ Widget:
     - Let the view parameters be in the view instead of in the globe	inge
     - Don't open any dialogs from the globe, do it from the controller.	inge
     - Let the view know about the globe, but not the other way.		done
- * Create MarbleWidget with a view (currently: KAtlasView) and a	----
-    model (currently: KAtlasGlobe)
 
 Vector backend
  * Better scalability
