@@ -148,3 +148,15 @@ kate
 - - 
 
 Somebody who knows kate should add settings here.
+
+
+vim
+- -
+
+If you are a vim user, add the following to your ~/.vimrc file.
+
+:set cindent
+:set tabstop=4
+:set shiftwidth=4
+:set expandtab
+
