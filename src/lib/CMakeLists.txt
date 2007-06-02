@@ -136,7 +136,7 @@ install( FILES
            HttpDownloadManager.h
            httpfetchfile.h
            katlasaboutdialog.h
-           katlascontrol.h
+#           katlascontrol.h
            katlascrosshair.h
            katlasdirs.h
            katlasflag.h
