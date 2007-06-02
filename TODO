@@ -12,8 +12,6 @@ Rename
  * KAtlasView    -> MarbleWidget                                        DONE
  * KAtlasGlobe   -> MarbleModel                                         ----
  * KAtlasToolBox -> MarbleControlBox                                    DONE
- * ???           -> MarbleLocator                                       ----
- * more...
 
 Documentation
  * Coding standards                                                     DONE
@@ -30,6 +28,12 @@ Cleaning
    - MarbleWidget                                                       --
    - MarbleControl                                                      --
  * Krazy code checks                                                    DONE
+ * Make MarbleWidget able to work without a MarbleModel again           INGE
+ * Installation issues                                                  TACK
+   - Move MarbleWidget to src/lib/                                      --
+   - Only install MarbleWidget.h and MarbleControlBox.h                 --
+   - Remove src/lib/katlascontrol.h and .cpp                            --
+
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
@@ -42,6 +46,10 @@ Features
 
 Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
+
+Rename
+ * ???           -> MarbleLocator                                       ----
+ * more...
 
 Features
  * Add Downloadmanager class for tiles and Wikipedia articles		TACK
@@ -58,7 +66,6 @@ Before the SoC projects start (0.5)
 
 Misc
  * Create a file with use cases and personas				TACK
- * Create a file that describes the coding standards			INGE
 
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)		DONE
