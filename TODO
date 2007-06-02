@@ -15,18 +15,11 @@ Rename
  * ???           -> MarbleLocator                                       ----
  * more...
 
-New file
- * MarbleControl: like katlascontrol, but only zoom and pan             INGE
-   - UI file                                                            done
-   - C++ file                                                           done
-   - testcode                                                           --
-
 Documentation
- * Coding standards                                                     INGE
+ * Coding standards                                                     DONE
  * APIDOX: Class and method docs for at least:                          INGE
    - MarbleWidget                                                       --
-   - MarbleControl                                                      --
-   - MarbleToolBox                                                      --
+   - MarbleControlBox                                                   --
 
 Internationalization?
  * Anything needed here?                                                TACK
@@ -41,8 +34,7 @@ Cleaning
 Integration with Qt designer
  * control files for the following widgets                              TACK
    - MarbleWidget                                                       --
-   - MarbleToolBox                                                      --
-   - MarbleControl                                                      --
+   - MarbleControlBox                                                   --
  
 Features
  * See below?                                                           TACK
@@ -58,7 +50,7 @@ Features
  * Add "Print" to print a screenshot                                    DONE
 
 Cleaning
- * Make the ChangeLog file follow the GNU format.                       INGE
+ * Make the ChangeLog file follow the GNU format.                       DONE
 
 
 Before the SoC projects start (0.5)
