@@ -1,0 +1,150 @@
+                     Coding Standards for Marble
+                     ===========================
+
+
+This file contains the coding standards for Marble.  If you want to
+add or change code in Marble, you must follow these standards.
+
+
+Foundation
+----------
+
+The foundation for these standards is the kdelibs coding style.  It is
+described here: http://techbase.kde.org/Policies/Kdelibs_Coding_Style
+I suggest that you start by reading that document, it's not long.
+
+
+Recapitulation
+--------------
+
+Let's recapitulate a few key points from the kdelibs coding
+style. This is not the full standard, but just the most important
+parts. 
+
+ - 4 spaces indentation
+ - no tabs in the source code
+ - opening braces at end of line (except struct, class, functions and
+   namespaces) 
+ - as little abbreviation in variable names as possible
+ - one variable declaration per line
+ - whitespace after control statements
+ - no space after pointer or reference ('*foo', not '* foo')
+ - no longer lines than 100 chars.
+
+That's a very short recapitulation of the above mentioned document.
+The full document contains lots of examples to show how it should be
+done.
+
+
+Extensions
+----------
+
+The style defined above is not complete, so we have added the
+following item:
+
+
+Broken Lines in Expressions
+- - - - - - - - - - - - - -
+
+If an expression is so long that the line has to be broken, the break
+should occur *before* an operation, not *behind* it.
+
+Example
+
+   var = very_long_sub_expression
+         + another_very_long_sub_expression;
+
+If you use emacs, you can make it auto-indent by adding parenthesis to
+the expression like this:
+
+   var = ( very_long_sub_expression
+           + another_very_long_sub_expression );
+
+Another common case for this is logical expressions for if statements:
+
+
+   if ( very_long_sub_expression
+        && another_very_long_sub_expression )
+      doSomething();
+
+see also below for how to handle braces in this case.
+
+
+Exceptions
+----------
+
+The Marble coding style has a couple of exceptions to the foundation.
+
+
+Spaces and Parenthesis
+- - - - - - - - - - - 
+
+Due to historic reasons, the coding style of Marble have one
+exception to the kdelibs style.  That exception is that we use the Qt
+way of using parenthesis, with a space inside both opening and closing
+parenthesis.  For example
+
+Use:
+
+   if ( width > 100 ) {
+      setHeight( 200 );
+   }
+
+
+Do not use:
+
+   if (width > 100) {
+      setHeight(200);
+   }
+
+
+Braces After Multi-line Expressions
+- - - - - - - - - - - - - - - - - -
+
+When an 'if' or 'while' statement has a long logical expression, the
+following braces should be put at the beginning of the next line to
+increase readability.
+
+Use:
+
+   if ( very_long_sub_expression
+        && another_very_long_sub_expression )
+   {
+       doSomething();
+       doSomethingElse();
+   }
+
+Do not use:
+
+   if ( very_long_sub_expression
+        && another_very_long_sub_expression ) {
+       doSomething();
+       doSomethingElse();
+   }
+
+As you can see, it is somewhat difficult to see where the expression
+ends and the action part begins if you just look at the left side.
+
+
+Settings for Your Editor
+------------------------
+
+emacs
+- - - 
+
+If you are an emacs user, you can put the following lines in your
+.emacs.  Then these style guielines will be followed almost
+automatically: 
+
+
+;; Don't use tabs in indentation
+(setq-default indent-tabs-mode nil)
+
+;; Use 4 space indentation
+(setq-default c-basic-offset 4)
+
+
+kate
+- - 
+
+Somebody who knows kate should add settings here.
