@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasglobe.h"
+#include "MarbleModel.h"
 
 #include <cmath>
 
@@ -29,7 +29,7 @@
 const float RAD2INT = 21600.0 / M_PI;
 
 
-KAtlasGlobe::KAtlasGlobe( QWidget* parent )
+MarbleModel::MarbleModel( QWidget* parent )
     : m_parent(parent)
 {
     m_texmapper = 0;
@@ -75,7 +75,7 @@ KAtlasGlobe::KAtlasGlobe( QWidget* parent )
     m_placemarkmodel->setContainer( m_placecontainer );
 }
 
-KAtlasGlobe::~KAtlasGlobe()
+MarbleModel::~MarbleModel()
 {
     delete m_texmapper;
 }
@@ -84,7 +84,7 @@ KAtlasGlobe::~KAtlasGlobe()
 // Set a particular theme for the map, and load the top 3 tile levels.
 // If these tiles aren't already created, then create them here and now. 
 
-void KAtlasGlobe::setMapTheme( const QString& selectedmap )
+void MarbleModel::setMapTheme( const QString& selectedmap )
 {
 
     m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
@@ -148,7 +148,7 @@ void KAtlasGlobe::setMapTheme( const QString& selectedmap )
 }
 
 
-void KAtlasGlobe::resize()
+void MarbleModel::resize()
 {
     *m_coastimg = QImage( m_canvasimg->width(), m_canvasimg->height(),
                           QImage::Format_ARGB32_Premultiplied );
@@ -177,7 +177,7 @@ void KAtlasGlobe::resize()
 }
 
 
-void KAtlasGlobe::paintGlobe(ClipPainter* painter, const QRect& dirty)
+void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
 {
     if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ) {
 
@@ -234,12 +234,12 @@ void KAtlasGlobe::paintGlobe(ClipPainter* painter, const QRect& dirty)
 }
 
 
-void KAtlasGlobe::setCanvasImage(QImage* canvasimg)
+void MarbleModel::setCanvasImage(QImage* canvasimg)
 {
     m_canvasimg = canvasimg;
 }
 
-void KAtlasGlobe::setRadius(const int& radius)
+void MarbleModel::setRadius(const int& radius)
 {
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
@@ -270,26 +270,26 @@ void KAtlasGlobe::setRadius(const int& radius)
 }
 
 
-void KAtlasGlobe::rotateTo(const uint& phi, const uint& theta, const uint& psi)
+void MarbleModel::rotateTo(const uint& phi, const uint& theta, const uint& psi)
 {
     m_planetAxis.createFromEuler( (float)(phi)   / RAD2INT,
                                   (float)(theta) / RAD2INT,
                                   (float)(psi)   / RAD2INT );
 }
 
-void KAtlasGlobe::rotateTo(const float& phi, const float& theta)
+void MarbleModel::rotateTo(const float& phi, const float& theta)
 {
     m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
                                   (theta + 180.0) * M_PI / 180.0, 0.0 );
 }
 
 
-void KAtlasGlobe::rotateBy(const Quaternion& incRot)
+void MarbleModel::rotateBy(const Quaternion& incRot)
 {
     m_planetAxis = incRot * m_planetAxis;
 }
 
-void KAtlasGlobe::rotateBy(const float& phi, const float& theta)
+void MarbleModel::rotateBy(const float& phi, const float& theta)
 {
     Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
@@ -299,7 +299,7 @@ void KAtlasGlobe::rotateBy(const float& phi, const float& theta)
     m_planetAxis.normalize();
 }
 
-int KAtlasGlobe::northPoleY()
+int MarbleModel::northPoleY()
 {
     
     Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
@@ -310,7 +310,7 @@ int KAtlasGlobe::northPoleY()
     return (int)( m_radius * northPole.v[Q_Y] );
 }
 
-int KAtlasGlobe::northPoleZ()
+int MarbleModel::northPoleZ()
 {
     Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
     Quaternion  invPlanetAxis = m_planetAxis.inverse();
@@ -320,7 +320,7 @@ int KAtlasGlobe::northPoleZ()
     return (int)( m_radius * northPole.v[Q_Z] );
 }
 
-bool KAtlasGlobe::screenCoordinates( const float lng, const float lat, 
+bool MarbleModel::screenCoordinates( const float lng, const float lat, 
                                      int& x, int& y )
 {
     Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
@@ -337,7 +337,7 @@ bool KAtlasGlobe::screenCoordinates( const float lng, const float lat,
         return false;
 }
 
-void KAtlasGlobe::addPlaceMarkFile( const QString& filename )
+void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
     m_placemarkmanager->loadKml( filename );
 
@@ -346,11 +346,11 @@ void KAtlasGlobe::addPlaceMarkFile( const QString& filename )
     m_placemarkmodel->setContainer( m_placecontainer );	
 }
 
-QVector< PlaceMark* > KAtlasGlobe::whichFeatureAt( const QPoint& curpos )
+QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
 {
     return m_placemarkpainter->whichPlaceMarkAt( curpos );
 }
 
 #ifndef Q_OS_MACX
-#include "katlasglobe.moc"
+#include "MarbleModel.moc"
 #endif

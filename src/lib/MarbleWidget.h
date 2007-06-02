@@ -26,7 +26,7 @@
 #include <QtDesigner/QDesignerExportWidget>
 
 #include "marble_export.h"
-#include "katlasglobe.h"
+#include "MarbleModel.h"
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
@@ -77,12 +77,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param globe  the data model for the widget.
      * @param parent the parent widget
      */
-    explicit MarbleWidget(KAtlasGlobe *globe, QWidget *parent = 0);
+    explicit MarbleWidget(MarbleModel *model, QWidget *parent = 0);
 
     /**
      * @brief The model this view shows.
      */
-    KAtlasGlobe   *globe() const { return m_pGlobe; }
+    MarbleModel   *model() const { return m_model; }
 
     /**
      * @brief Return the active region.
@@ -109,14 +109,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief returns the model for all the placemarks on the globe.
      */
     QAbstractListModel *placeMarkModel(){
-        return m_pGlobe->getPlaceMarkModel();
+        return m_model->getPlaceMarkModel();
     }
 
     float  moveStep();
 
     void   setMinimumZoom( int zoom ){ m_minimumzoom = zoom; }
 
-    void addPlaceMarkFile( QString filename ){ m_pGlobe->addPlaceMarkFile( filename ); }
+    void addPlaceMarkFile( QString filename ){ m_model->addPlaceMarkFile( filename ); }
 
     QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
 
@@ -140,7 +140,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void  setMapTheme( const QString& maptheme )
     {
-	m_pGlobe->setMapTheme( maptheme );
+	m_model->setMapTheme( maptheme );
 		
 	// FIXME: Force update...
     }
@@ -163,7 +163,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  private:
     // The model we are showing.
-    KAtlasGlobe  *m_pGlobe;
+    MarbleModel  *m_model;
 
     int           m_logzoom;
 	

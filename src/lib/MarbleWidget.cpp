@@ -35,7 +35,7 @@
 #endif
 
 
-MarbleWidget::MarbleWidget(KAtlasGlobe *globe, QWidget *parent)
+MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     : QWidget(parent)
 {
     setMinimumSize( 200, 300 );
@@ -44,16 +44,16 @@ MarbleWidget::MarbleWidget(KAtlasGlobe *globe, QWidget *parent)
 
 #if 0
     //FIXME(ModelView): Provide this to the constructor
-    m_pGlobe = new KAtlasGlobe( this );
+    m_model = new MarbleModel( this );
 #else
-    m_pGlobe = globe;
+    m_model = model;
 #endif
-    connect( m_pGlobe, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
-             this,     SLOT( creatingTilesStart( const QString&, const QString& ) ) );
-    connect( m_pGlobe, SIGNAL( creatingTilesProgress( int ) ),
-             this,     SLOT( creatingTilesProgress( int ) ) );
+    connect( m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
+             this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
+    connect( m_model, SIGNAL( creatingTilesProgress( int ) ),
+             this,    SLOT( creatingTilesProgress( int ) ) );
 
-    connect( m_pGlobe, SIGNAL(themeChanged()), this, SLOT(update()) );
+    connect( m_model, SIGNAL(themeChanged()), this, SLOT(update()) );
 
     // Set background: black.
     QPalette p = palette();
@@ -66,13 +66,13 @@ MarbleWidget::MarbleWidget(KAtlasGlobe *globe, QWidget *parent)
 
     m_pCanvasImage = new QImage( parent->width(), parent->height(),
 				 QImage::Format_ARGB32_Premultiplied );
-    m_pGlobe->setCanvasImage( m_pCanvasImage );
+    m_model->setCanvasImage( m_pCanvasImage );
 
-    m_inputhandler = new KAtlasViewInputHandler( this, m_pGlobe );
+    m_inputhandler = new KAtlasViewInputHandler( this, m_model );
     installEventFilter( m_inputhandler );
     setMouseTracking( true );
 
-    m_popupmenu = new KAtlasViewPopupMenu( this, m_pGlobe );
+    m_popupmenu = new KAtlasViewPopupMenu( this, m_model );
     connect( m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
 	     m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
     connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
@@ -106,10 +106,10 @@ void MarbleWidget::zoomView(int zoom)
 
     int radius = fromLogScale(zoom);
 
-    if ( radius == m_pGlobe->radius() )
+    if ( radius == m_model->radius() )
 	return;
 	
-    m_pGlobe->setRadius(radius);
+    m_model->setRadius(radius);
     repaint();
 
     setActiveRegion();
@@ -120,7 +120,7 @@ void MarbleWidget::zoomViewBy(int zoomstep)
 {
     // Prevent infinite loops
 
-    int zoom = m_pGlobe->radius();
+    int zoom = m_model->radius();
     int tryZoom = toLogScale(zoom) + zoomstep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
     if ( tryZoom >= m_minimumzoom && tryZoom <= m_maximumzoom ) {
@@ -142,14 +142,14 @@ void MarbleWidget::zoomOut()
 
 void MarbleWidget::rotateBy(const float& phi, const float& theta)
 {
-    m_pGlobe->rotateBy( phi, theta );
+    m_model->rotateBy( phi, theta );
 
     repaint();
 }
 
 void MarbleWidget::centerOn(const float& phi, const float& theta)
 {
-    m_pGlobe->rotateTo( phi, theta );
+    m_model->rotateTo( phi, theta );
 
     repaint();
 }
@@ -157,12 +157,12 @@ void MarbleWidget::centerOn(const float& phi, const float& theta)
 void MarbleWidget::centerOn(const QModelIndex& index)
 {
 
-    PlaceMarkModel* model = (PlaceMarkModel*) m_pGlobe->getPlaceMarkModel();
+    PlaceMarkModel* model = (PlaceMarkModel*) m_model->getPlaceMarkModel();
     if (model == 0) qDebug( "model null" );
 
     PlaceMark* mark = model->placeMark( index );
 
-    m_pGlobe->placeContainer()->clearSelected();
+    m_model->placeContainer()->clearSelected();
 
     if ( mark != 0 ){
 	float  lon;
@@ -176,8 +176,8 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     else 
 	m_crosshair.setEnabled( false );
 
-    m_pGlobe->placeContainer()->clearTextPixmaps();
-    m_pGlobe->placeContainer()->sort();
+    m_model->placeContainer()->clearTextPixmaps();
+    m_model->placeContainer()->sort();
 
     repaint();
 }
@@ -212,8 +212,8 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
     m_pCanvasImage = new QImage( width(), height(),
 				 QImage::Format_ARGB32_Premultiplied );
-    m_pGlobe->setCanvasImage( m_pCanvasImage );
-    m_pGlobe->resize();
+    m_model->setCanvasImage( m_pCanvasImage );
+    m_model->resize();
 
     repaint();
 }
@@ -222,7 +222,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 {
 
-    int radius = m_pGlobe->radius(); 
+    int radius = m_model->radius(); 
     int imgrx  = width() >> 1;
     int imgry  = height() >> 1;
 
@@ -238,7 +238,7 @@ bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 	float qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
 	Quaternion  qpos( 0, qx, qy, qz );
-	qpos.rotateAroundAxis( m_pGlobe->getPlanetAxis() );
+	qpos.rotateAroundAxis( m_model->getPlanetAxis() );
 	qpos.getSpherical( alpha, beta );
 
 	return true;
@@ -250,7 +250,7 @@ bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 
 void MarbleWidget::setActiveRegion()
 {
-    int zoom = m_pGlobe->radius(); 
+    int zoom = m_model->radius(); 
 
     m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
                               QRegion::Rectangle );
@@ -272,10 +272,10 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	Debugging Active Region
     //	painter.setClipRegion(activeRegion);
 
-    //	if(m_pGlobe->needsUpdate() || m_pCanvasImage->isNull() || m_pCanvasImage->size() != size())
+    //	if(m_model->needsUpdate() || m_pCanvasImage->isNull() || m_pCanvasImage->size() != size())
     //	{
 
-    int   radius = m_pGlobe->radius();
+    int   radius = m_model->radius();
     bool  clip = ( radius > m_pCanvasImage->width()/2
                    || radius > m_pCanvasImage->height()/2 ) ? true : false;
 
@@ -287,18 +287,18 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     // painter.clearNodeCount();
 
     QRect  dirty = evt->rect();
-    m_pGlobe->paintGlobe(&painter,dirty);
+    m_model->paintGlobe(&painter,dirty);
 	
     // Draw the scale.
     painter.drawPixmap( 10, m_pCanvasImage->height() - 40,
-                        m_mapscale.drawScaleBarPixmap( m_pGlobe->radius(),
+                        m_mapscale.drawScaleBarPixmap( m_model->radius(),
                                                        m_pCanvasImage-> width() / 2 - 20 ) );
 
     // Draw the wind rose.
     painter.drawPixmap( m_pCanvasImage->width() - 60, 10,
 			m_windrose.drawWindRosePixmap( m_pCanvasImage->width(),
 						       m_pCanvasImage->height(),
-                                                       m_pGlobe->northPoleY() ) );
+                                                       m_model->northPoleY() ) );
 
     // Draw the crosshair.
     m_crosshair.paintCrossHair( &painter, 
@@ -307,7 +307,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width() / 2,
 					m_pCanvasImage->height() / 2,
-					radius, m_pGlobe->getPlanetAxis(),
+					radius, m_model->getPlanetAxis(),
                                         true );
 #if 0
       else
@@ -323,8 +323,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
 void MarbleWidget::goHome()
 {
-    // m_pGlobe->rotateTo(0, 0);
-    m_pGlobe->rotateTo( 54.8, -9.4 );
+    // m_model->rotateTo(0, 0);
+    m_model->rotateTo( 54.8, -9.4 );
     zoomView( 1050 ); // default 1050
 
     update(); // not obsolete in case the zoomlevel stays unaltered
@@ -360,11 +360,11 @@ void MarbleWidget::creatingTilesProgress( int progress )
 
 float MarbleWidget::moveStep()
 {
-    if ( m_pGlobe->radius() < sqrt( width() * width() + height() * height() ) )
+    if ( m_model->radius() < sqrt( width() * width() + height() * height() ) )
 	return 0.1f;
     else
 	return atanf( (float)width() 
-                      / (float)( 2 * m_pGlobe->radius() ) ) * 0.2f;
+                      / (float)( 2 * m_model->radius() ) ) * 0.2f;
 }
 
 int MarbleWidget::fromLogScale(int zoom)

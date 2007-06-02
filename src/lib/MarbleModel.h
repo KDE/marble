@@ -10,17 +10,17 @@
 //
 
 //
-// KAtlasGlobe provides a globe in KAtlasView
+// MarbleModel is the data store and index class for the MarbleWidget.
 //
 
 
-#ifndef KATLASGLOBE_H
-#define KATLASGLOBE_H
+#ifndef MARBLEMODEL_H
+#define MARBLEMODEL_H
 
 #include "marble_export.h"
 
 /** @file
- * This file contains the headers for KAtlasGlobe.
+ * This file contains the headers for MarbleModel
  * 
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
@@ -76,13 +76,13 @@ class PlaceMarkManager;
  * @see MarbleWidget
  */
 
-class MARBLE_EXPORT KAtlasGlobe  : public QObject
+class MARBLE_EXPORT MarbleModel  : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasGlobe( QWidget* parent=0 );
-    virtual ~KAtlasGlobe();
+    MarbleModel( QWidget* parent=0 );
+    virtual ~MarbleModel();
 
     void  setCanvasImage(QImage*);
 
@@ -154,4 +154,4 @@ class MARBLE_EXPORT KAtlasGlobe  : public QObject
 };
 
 
-#endif // KATLASGLOBE_H
+#endif // MARBLEMODEL_H

@@ -24,7 +24,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
 
-#include "katlasglobe.h"
+#include "MarbleModel.h"
 
 
 class MarbleWidget;
@@ -35,7 +35,7 @@ class KAtlasViewInputHandler  : public QObject
     Q_OBJECT
 
  public:
-    KAtlasViewInputHandler(MarbleWidget*, KAtlasGlobe*);
+    KAtlasViewInputHandler(MarbleWidget*, MarbleModel*);
     virtual ~KAtlasViewInputHandler(){};
 
  signals:
@@ -48,7 +48,7 @@ class KAtlasViewInputHandler  : public QObject
 
  private:
     MarbleWidget  *m_gpview;
-    KAtlasGlobe   *m_globe;
+    MarbleModel   *m_model;
 
     QPixmap  curpmtl;
     QPixmap  curpmtc;

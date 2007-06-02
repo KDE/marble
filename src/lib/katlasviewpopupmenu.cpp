@@ -20,12 +20,13 @@
 
 #include "katlasaboutdialog.h"
 #include "MarbleWidget.h"
-#include "katlasglobe.h"
+#include "MarbleModel.h"
 #include "placemark.h"
 #include "placemarkinfodialog.h"
 
-KAtlasViewPopupMenu::KAtlasViewPopupMenu(MarbleWidget *view, KAtlasGlobe *globe)
-    : m_globe(globe),
+KAtlasViewPopupMenu::KAtlasViewPopupMenu(MarbleWidget *view, 
+                                         MarbleModel *model)
+    : m_model(model),
       m_view(view) 
 {
     m_lmbMenu = new QMenu( m_view );
@@ -70,7 +71,7 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->clear();
 
     QPoint  curpos = QPoint( xpos, ypos ); 
-    m_featurelist = m_globe-> whichFeatureAt( curpos );
+    m_featurelist = m_model-> whichFeatureAt( curpos );
 
     int  actionidx = 1;
 

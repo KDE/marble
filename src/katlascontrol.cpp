@@ -14,6 +14,8 @@
 #include <QtGui/QLayout>
 #include <QtGui/QStringListModel>
 
+#include <lib/MarbleWidget.h>
+#include <lib/MarbleModel.h>
 #include "MarbleControlBox.h"
 
 
@@ -28,8 +30,8 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     m_control->setFixedWidth( 185 );
 
     // Create the Model (Globe) and one view.
-    m_globe = new KAtlasGlobe( this );
-    m_marbleWidget = new MarbleWidget( m_globe, this );
+    m_marbleModel = new MarbleModel( this );
+    m_marbleWidget = new MarbleWidget( m_marbleModel, this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
     m_marbleWidget->setMinimumZoom( m_control->minimumZoom() );

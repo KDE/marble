@@ -26,9 +26,9 @@ const float pi = 3.14159f ;
 
 
 KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *gpview,
-                                               KAtlasGlobe  *globe)
+                                               MarbleModel  *model)
     : m_gpview( gpview ),
-      m_globe( globe )
+      m_model( model )
 {
     curpmtl.load( KAtlasDirs::path("bitmaps/cursor_tl.xpm") );
     curpmtc.load( KAtlasDirs::path("bitmaps/cursor_tc.xpm") );
@@ -94,7 +94,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_globe->rotateBy( -m_gpview->moveStep() * (float)(diry),
+            m_model->rotateBy( -m_gpview->moveStep() * (float)(diry),
                                -m_gpview->moveStep() * (float)(dirx) );
             m_gpview->repaint();
         }
@@ -138,7 +138,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                                            m_gpview->height() / 2,
                                            m_leftpresseda, m_leftpressedb );
 
-                if ( m_globe->northPoleY() > 0 ) {
+                if ( m_model->northPoleY() > 0 ) {
                     m_leftpressedb = pi - m_leftpressedb;
                     m_leftpresseda = pi + m_leftpresseda;	 
                 }
@@ -182,7 +182,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
             // Regarding all kinds of mouse moves:
             if ( m_leftpressed == true ) {
-                float  radius = (float)(m_globe->radius());
+                float  radius = (float)(m_model->radius());
                 int    deltax = event->x() - m_leftpressedx;
                 int    deltay = event->y() - m_leftpressedy;
 
@@ -191,18 +191,18 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                     return true; 
 
                 float direction = 1;
-                if ( m_globe -> northPoleZ() > 0 ) {	
-                    if ( event->y() < ( m_globe->northPoleY()
+                if ( m_model -> northPoleZ() > 0 ) {	
+                    if ( event->y() < ( m_model->northPoleY()
                                         + m_gpview->height() / 2 ) )
                         direction = -1;
                 }
                 else {
-                    if (event->y() > (-m_globe->northPoleY() 
+                    if (event->y() > (-m_model->northPoleY() 
                                       + m_gpview->height() / 2 ) )
                         direction = -1;
                 }
 
-                m_globe->rotateTo( 180 / pi * (float)(-m_leftpressedb)
+                m_model->rotateTo( 180 / pi * (float)(-m_leftpressedb)
                                    + 90 * deltay / radius, 
                                   -180 / pi * (float)(m_leftpresseda)
                                    + 90 * direction * deltax / radius );
@@ -237,7 +237,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
-                m_globe->rotateBy( -m_gpview->moveStep() * (float)(diry),
+                m_model->rotateBy( -m_gpview->moveStep() * (float)(diry),
                                    -m_gpview->moveStep() * (float)(dirx) );
                 m_gpview->repaint();
             }				

@@ -10,7 +10,7 @@ Before end of May (Qt Centre contest)
 
 Rename
  * KAtlasView    -> MarbleWidget                                        DONE
- * KAtlasGlobe   -> MarbleModel                                         ----
+ * KAtlasGlobe   -> MarbleModel                                         DONE
  * KAtlasToolBox -> MarbleControlBox                                    DONE
 
 Documentation

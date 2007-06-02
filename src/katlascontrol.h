@@ -18,11 +18,15 @@
 #define KATLASCONTROL_H
 
 
-#include <lib/MarbleWidget.h>
 
+#include <QtGui/QWidget>
 #include <QtGui/QPixmap>
 
+#include "lib/MarbleWidget.h"
 
+
+class MarbleWidget;
+class MarbleModel;
 class MarbleControlBox;
 
 
@@ -34,7 +38,7 @@ class KAtlasControl : public QWidget
     KAtlasControl(QWidget *);
     virtual ~KAtlasControl(){};
 
-    MarbleWidget * marbleWidget() const { return m_marbleWidget; }
+    MarbleWidget  *marbleWidget() const { return m_marbleWidget; }
 
     void zoomIn();
     void zoomOut();
@@ -48,7 +52,7 @@ class KAtlasControl : public QWidget
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
 
  private:
-    KAtlasGlobe       *m_globe;
+    MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
 };

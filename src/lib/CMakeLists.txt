@@ -28,7 +28,6 @@ set(marblewidget_SRCS
            katlasaboutdialog.cpp
            katlascrosshair.cpp
            katlasflag.cpp
-           katlasglobe.cpp
            katlasmapscale.cpp
            katlasthemeselectview.cpp
            katlastilecreatordialog.cpp
@@ -36,6 +35,7 @@ set(marblewidget_SRCS
            katlasviewpopupmenu.cpp
            katlaswindrose.cpp
            maptheme.cpp
+           MarbleModel.cpp
            MarbleWidget.cpp
            measuretool.cpp
            placecontainer.cpp
@@ -118,7 +118,6 @@ install( FILES
            katlascrosshair.h
            katlasdirs.h
            katlasflag.h
-           katlasglobe.h
            katlasmapscale.h
            katlasthemeselectview.h
            katlastilecreatordialog.h
@@ -126,6 +125,7 @@ install( FILES
            katlasviewpopupmenu.h
            katlaswindrose.h
            maptheme.h
+           MarbleModel.h
            MarbleWidget.h
            measuretool.h
            placecontainer.h
