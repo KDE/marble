@@ -34,6 +34,8 @@ class KAtlasControl : public QWidget
     KAtlasControl(QWidget *);
     virtual ~KAtlasControl(){};
 
+    MarbleWidget * marbleWidget() const { return m_marbleWidget; }
+
     void zoomIn();
     void zoomOut();
     void moveLeft();

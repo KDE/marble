@@ -13,6 +13,7 @@
 
 #include <QClipboard>
 //#include <QtGui/QMessageBox>
+#include <QtGui/QLabel>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QPainter>
@@ -39,7 +40,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     setupActions();
 
+    // Create the statusbar and populate it with initial data.
     createStatusBar();
+    connect( m_katlascontrol->marbleWidget(), SIGNAL( zoomChanged( int ) ),
+             this,                            SLOT( showZoom( int ) ) );
+    showZoom( m_katlascontrol->marbleWidget()->zoom() );
 }
 
 
@@ -80,8 +85,20 @@ void MainWindow::setupActions()
 
 void MainWindow::createStatusBar()
 {
-    statusBar()->showMessage( i18n( "Ready" ) );
+    // This hides the normal statusbar contents until clearMessage() is called.
+    //statusBar()->showMessage( i18n( "Ready" ) );
+
+    m_zoomLabel = new QLabel();
+    statusBar()->addWidget(m_zoomLabel);
 }
+
+
+void MainWindow::showZoom(int zoom)
+{
+    m_zoomLabel->setText( QString( "Zoom: %1" ).arg( zoom, 4 ) );
+}
+
+
 
 void MainWindow::exportMapScreenShot()
 {

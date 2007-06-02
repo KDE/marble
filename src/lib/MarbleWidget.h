@@ -90,6 +90,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     const QRegion  activeRegion();
 
     /**
+     * @brief Return the current zoom level.
+     */
+    int  zoom() const { return m_logzoom; }
+
+    /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel

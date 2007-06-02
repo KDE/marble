@@ -12,10 +12,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
  
+
 #include <KXmlGuiWindow>
 #include <KAction>
 
 #include "katlascontrol.h"
+
+class QLabel;
+
  
 class MainWindow : public KXmlGuiWindow
 {
@@ -28,6 +32,9 @@ class MainWindow : public KXmlGuiWindow
     void  setupActions();
     void  createStatusBar();
 
+ public slots:
+    void  showZoom(int zoom);
+
  private slots:
     void  exportMapScreenShot();
     void  printMapScreenShot();
@@ -36,6 +43,9 @@ class MainWindow : public KXmlGuiWindow
  private:
     // All the functionality is provided by this widget.
     KAtlasControl  *m_katlascontrol;
+
+    // Zoom label for the statusbar.
+    QLabel         *m_zoomLabel;
 
     // Actions for the GUI.
     KAction        *m_exportMapAction;
