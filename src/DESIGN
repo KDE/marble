@@ -7,7 +7,7 @@ Marble, the application, consists two main widgets:
   - a MarbleWidget      that contains the view of the world, and
   - a MarbleControlBox  that controls it.
 
-The MarbleWidget is a view for the model represented by the KAtlasGlobe
+The MarbleWidget is a view for the model represented by the MarbleModel
 class, which contains all the data necessary for manipulating and
 displaying the map.
 
@@ -159,7 +159,7 @@ PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
 Model / View
 ------------
 
-KAtlasGlobe	The main model.  Contains (among others):
+MarbleModel	The main model.  Contains (among others):
 		 - MapTheme
 		 - GridMap
                  - VectorComposer
@@ -172,7 +172,7 @@ VectorComposer	Manages the different vector sub-layers which consist
                 States.  These are all stored in PntMaps, one for each
                 type.  FIXME: Change Name.
 
-MarbleWidget	The view of a KAtlasGlobe.
+MarbleWidget	The view of a MarbleModel.
 
 
 Widgets

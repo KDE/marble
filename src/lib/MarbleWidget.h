@@ -45,7 +45,7 @@ class KAtlasTileCreatorDialog;
  *
  * This widget displays a view of the earth or any other globe,
  * depending on which dataset is used.  The user can navigate on the
- * earth using either a control widget, e.g. the MarbleControlBox or
+ * earth using either a control widget, e.g. the MarbleControlBox, or
  * the mouse.  Only some aspects of the widget can be controlled by
  * the mouse.
  *
@@ -53,18 +53,16 @@ class KAtlasTileCreatorDialog;
  * moved.  The user can also zoom by using the scroll wheel of the
  * mouse in the widget.
  *
- * The user can control all aspects of it by using a MarbleControlBox
- * widget.
- *
  * To work, it needs to be provided with a data model, which is
- * contained in a KAtlasGlobe class.  This data model contains 3
- * separate datatypes: <b>tiles</b> which provide the background,
- * <b>vectors</b> which provide things like country borders and
- * coastlines and <b>placemarks</b> which can show points of interest,
- * such as cities, mountain tops or the poles.
+ * contained in a MarbleModel class. The widget can also construct its
+ * own model if none is given to the constructor.  This data model
+ * contains 3 separate datatypes: <b>tiles</b> which provide the
+ * background, <b>vectors</b> which provide things like country
+ * borders and coastlines and <b>placemarks</b> which can show points
+ * of interest, such as cities, mountain tops or the poles.
  *
  * @see MarbleControlBox
- * @see KAtlasGlobe
+ * @see MarbleModel
  */
 
 class MARBLE_EXPORT MarbleWidget : public QWidget
