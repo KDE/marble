@@ -44,22 +44,45 @@ class KAtlasTileCreatorDialog;
  * @short A widget class that displays a view of the earth.
  *
  * This widget displays a view of the earth or any other globe,
- * depending on which dataset is used.  The user can navigate on the
- * earth using either a control widget, e.g. the MarbleControlBox, or
+ * depending on which dataset is used.  The user can navigate the
+ * globe using either a control widget, e.g. the MarbleControlBox, or
  * the mouse.  Only some aspects of the widget can be controlled by
  * the mouse.
  *
  * By clicking on the globe and moving the mouse, the position can be
  * moved.  The user can also zoom by using the scroll wheel of the
- * mouse in the widget.
+ * mouse in the widget. The zoom value is not tied to any units, but
+ * is an abstract value without any physical meaning. A value around
+ * 1000 shows the full globe in a normal-sized window. Higher zoom
+ * values gives a more zoomed-in view.
  *
- * To work, it needs to be provided with a data model, which is
- * contained in a MarbleModel class. The widget can also construct its
- * own model if none is given to the constructor.  This data model
- * contains 3 separate datatypes: <b>tiles</b> which provide the
- * background, <b>vectors</b> which provide things like country
- * borders and coastlines and <b>placemarks</b> which can show points
- * of interest, such as cities, mountain tops or the poles.
+ * The MarbleWidget needs to be provided with a data model to
+ * work. This model is contained in the MarbleModel class. The widget
+ * can also construct its own model if none is given to the
+ * constructor.  This data model contains 3 separate datatypes:
+ * <b>tiles</b> which provide the background, <b>vectors</b> which
+ * provide things like country borders and coastlines and
+ * <b>placemarks</b> which can show points of interest, such as
+ * cities, mountain tops or the poles.
+ *
+ * Except for navigating with the mouse, you can also use it to get
+ * information about items on the map. You can either click on a
+ * PlaceMark with the left mouse button or with the right mouse button
+ * anywhere on the map.
+ *
+ * The left mouse button opens up a menu with all the PlaceMarks
+ * within a certain distance from the mouse pointer. When you choose
+ * one item from the menu, Marble will open up a dialog window with
+ * some information about the PlaceMark and also try to connect to
+ * Wikipedia to retreive an article about it. If there is such an
+ * article, you will get a mini-browser window with the article in a tab. 
+ *
+ * The right mouse button controls a distance tool.  The distance tool
+ * is implemented as a menu where you can choose to either create or
+ * remove so called Measure Points. Marble will keep track of the
+ * Measure Points and show the total distance in the upper left of the
+ * widget.  Measure Points are shown on the map as a little white
+ * cross.
  *
  * @see MarbleControlBox
  * @see MarbleModel
@@ -92,7 +115,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     explicit MarbleWidget(MarbleModel *model, QWidget *parent = 0);
 
     /**
-     * @brief The model this view shows.
+     * @brief Return the model that this view shows.
      */
     MarbleModel   *model() const { return m_model; }
 
@@ -124,12 +147,27 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
         return m_model->getPlaceMarkModel();
     }
 
+    /**
+     * @brief  Return how much the map will move if one of the move slots are called.
+     * @return The move step.
+     */
     float  moveStep();
 
+    /**
+     * @brief  Set the minimum value for the zoom.
+     * @param  zoom  The new minimum value.
+     */
     void   setMinimumZoom( int zoom ){ m_minimumzoom = zoom; }
 
+    /**
+     * @brief  Add a PlaceMark file to the model.
+     * @param  filename  the filename of the file containing the PlaceMarks.
+     */
     void addPlaceMarkFile( QString filename ){ m_model->addPlaceMarkFile( filename ); }
 
+    /**
+     * @brief  Return a QPixmap with the current contents of the widget.
+     */
     QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
 
  public slots:
@@ -161,10 +199,21 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesProgress( int progress );
 
  signals:
+
+    /**
+     * @brief Signal that the zoom has changed, and to what.
+     */
     void  zoomChanged(int);
 
  protected:
+    /**
+     * @brief Reimplementation of the paintEvent() function in QWidget.
+     */
     void  paintEvent(QPaintEvent *event);
+
+    /**
+     * @brief Reimplementation of the resizeEvent() function in QWidget.
+     */
     void  resizeEvent(QResizeEvent*);
 
  private:
