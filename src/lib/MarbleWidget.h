@@ -91,6 +91,7 @@ class KAtlasTileCreatorDialog;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
+    Q_PROPERTY(int zoom READ zoom WRITE zoomView)
 
  public:
     /**

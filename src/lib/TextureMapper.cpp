@@ -114,8 +114,10 @@ void TextureMapper::selectTileLevel(const int& radius)
     float  linearLevel = 2.0f * (float)( radius ) / (float) ( m_tileLoader->tileWidth() );
     int    tileLevel   = 0;
 
-    if (linearLevel > 0.0f )
-        tileLevel = (int)( logf( linearLevel ) / logf( 2.0f ) ) + 1;
+    if (linearLevel < 1.0f )
+        linearLevel = 1.0f; // Dirty fix for invalid entry linearLevel
+
+    tileLevel = (int)( logf( linearLevel ) / logf( 2.0f ) ) + 1;
 
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
