@@ -12,8 +12,12 @@ Prerequisites for building Marble are:
  - Qt 4.2 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
-    We have found that revision 670142 works fine. Note that kdelibs
+    We have found that revision 671114 works fine. Note that kdelibs
     is under heavy development, and some revisions might not work.
+
+A checkout of Marble. You can check out Marble using SVN via the command:
+
+svn co svn://anonsvn.kde.org/home/kde/trunk/KDE/kdeedu/marble
 
 
 You can build and install Marble in two different ways:
@@ -52,12 +56,9 @@ Finally, also from the build directory, type:
 
   make install
 
-Due to a bug in the cmake files, you now have to move the installed
-data:
+and start Marble either from the menu or via the command line:
 
-  mkdir -p /usr/local/share/apps/marble
-  cp -a /marble/data /usr/local/share/apps/marble
-  rm -r /marble
+  marble
 
 
 2. Build Marble as a KDE application.
@@ -85,3 +86,19 @@ From now on the steps are the same as for a Qt-only build.
 2.4 Install marble
 
   make install
+
+
+3. Known Issues:
+
+- Due to a bug in the cmake files you might have to move the installed
+data under certain circumstances:
+
+  mkdir -p /usr/local/share/apps/marble
+  cp -a /marble/data /usr/local/share/apps/marble
+  rm -r /marble
+
+- If you don't specify any install path using cmake then Marble will probably install under /usr/local.
+If your distribution doesn't include /usr/local/lib in your LD_LIBRARY_PATH you might need to add that directory via:
+
+  export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
