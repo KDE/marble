@@ -24,16 +24,16 @@ Internationalization?
 
 Cleaning
  * Code cleaning in tools/*                                             DONE
- * d-pointerify the external classes                                    INGE
+ * d-pointerify the public classes                                      INGE
    - MarbleWidget                                                       --
-   - MarbleControl                                                      --
+   - MarbleControlBox                                                   --
  * Krazy code checks                                                    DONE
  * Make MarbleWidget able to work without a MarbleModel again           DONE
  * Make MarbleControlBox integration MarbleWidget as simple as possible DONE
  * Installation issues                                                  TACK
-   - Move MarbleWidget to src/lib/                                      --
+   - Move MarbleControlBox to src/lib/                                  --
    - Only install MarbleWidget.h and MarbleControlBox.h                 --
-   - Remove src/lib/katlascontrol.h and .cpp                            --
+   - Remove src/lib/katlascontrol.h and .cpp                            done
 
 
 Integration with Qt designer
