@@ -5,41 +5,6 @@ Mark those tasks that you want to perform with your name:
  TACK	Tackat (Torsten Rahn)
 
 
-Before end of May (Qt Centre contest)
-----------------------------------------------------------------
-
-Rename
- * KAtlasView    -> MarbleWidget                                        DONE
- * KAtlasGlobe   -> MarbleModel                                         DONE
- * KAtlasToolBox -> MarbleControlBox                                    DONE
-
-Documentation
- * Coding standards                                                     DONE
- * APIDOX: Class and method docs for at least:                          INGE
-   - MarbleWidget                                                       --
-   - MarbleControlBox                                                   --
-
-Internationalization?
- * Anything needed here?                                                TACK
-
-Cleaning
- * Code cleaning in tools/*                                             DONE
- * Krazy code checks                                                    DONE
- * Make MarbleWidget able to work without a MarbleModel again           DONE
- * Make MarbleControlBox integration MarbleWidget as simple as possible DONE
- * Installation issues                                                  DONE
-   - Remove src/lib/katlascontrol.h and .cpp                            done
-
-
-Integration with Qt designer
- * control files for the following widgets                              DONE
-   - MarbleWidget                                                       done
-   - MarbleLocator                                                      done
- 
-Features
- * See below?                                                           TACK
-
-
 Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
 
@@ -59,7 +24,7 @@ Cleaning
    - Move MarbleControlBox to src/lib/                                  --
    - Only install MarbleWidget.h and MarbleControlBox.h                 --
 
-Before the SoC projects start (0.5)
+During the SoC projects (0.5)
 ----------------------------------------------------------------
 
 Misc
@@ -81,6 +46,13 @@ Vector backend
 Integration with Qt designer
  * control files for the following widgets                              TACK
    - MarbleControlBox                                                   --
+
+Documentation
+ * Coding standards                                                     DONE
+ * APIDOX: Class and method docs for at least:                          INGE
+   - MarbleControlBox                                                   --
+   - MarbleModel                                                        --
+
 
 Integration of Google Summer of Code projects (0.6)
 ----------------------------------------------------------------
