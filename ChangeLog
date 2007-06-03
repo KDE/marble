@@ -1,3 +1,9 @@
+2007-06-03  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix compile error
+	* src/plugins/marblewidget/MarbleWidgetPlugin.cpp (createWidget):
+	Use MarbleModel instead of KAtlasGlobe.
+
 2007-06-02  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve integration between MarbleControlBox and MarbleWidget

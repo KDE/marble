@@ -5,7 +5,7 @@ if(MSVC)
 endif(MSVC)
 
 add_subdirectory( lib )
-#add_subdirectory( plugins )
+add_subdirectory( plugins )
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
