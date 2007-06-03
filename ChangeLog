@@ -1,6 +1,10 @@
 2007-06-03  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX
+	* src/lib/MarbleWidget.h: Finish APIDOX.
+	* src/lib/MarbleWidget.cpp: small naming
+
+	APIDOX
 	* src/lib/MarbleWidget.h: Document everything but the slots.
 
 	Fix compile error
