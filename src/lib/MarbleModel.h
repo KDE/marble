@@ -27,6 +27,8 @@
  */
 
 
+#include <cmath>
+
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
@@ -102,6 +104,15 @@ class MARBLE_EXPORT MarbleModel  : public QObject
 
     void rotateBy(const Quaternion&);
     void rotateBy(const float&, const float&);
+
+    float  centerLatitude(){ 
+        return m_planetAxis.pitch()*180.0f/M_PI;
+    }
+
+    float  centerLongitude(){
+        return -m_planetAxis.yaw()*180.0f/M_PI;
+    }
+
 
     QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
 

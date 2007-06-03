@@ -1,0 +1,115 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>374</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <layout class="QGridLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item row="0" column="0" >
+      <widget class="QLCDNumber" name="lcdNumber" >
+       <property name="value" stdset="0" >
+        <double>1050.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" >
+      <widget class="QSlider" name="verticalSlider" >
+       <property name="minimum" >
+        <number>900</number>
+       </property>
+       <property name="maximum" >
+        <number>2000</number>
+       </property>
+       <property name="value" >
+        <number>1050</number>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item rowspan="2" row="0" column="1" >
+      <widget class="MarbleWidget" name="MarbleWidget" >
+       <property name="toolTip" >
+        <string>The Earth</string>
+       </property>
+       <property name="whatsThis" >
+        <string>The Marble widget displays a virtual globe.</string>
+       </property>
+       <property name="zoom" stdset="0" >
+        <number>1050</number>
+       </property>
+       <property name="latitude" stdset="0" >
+        <double>54.799991607666016</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MarbleWidget</class>
+   <extends>QWidget</extends>
+   <header>MarbleWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>zoomView(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>89</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>198</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleWidget</sender>
+   <signal>zoomChanged(int)</signal>
+   <receiver>lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>237</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>91</x>
+     <y>78</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

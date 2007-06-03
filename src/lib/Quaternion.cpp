@@ -89,6 +89,15 @@ void Quaternion::createFromEuler(float pitch, float yaw, float roll)
     v[Q_Z] = cX * cYsZ - sX * sYcZ;
 }
 
+float Quaternion::pitch() const
+{
+    return atanf(2.0f*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+}
+
+float Quaternion::yaw() const
+{
+    return asinf(2.0f*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
+}
 
 void Quaternion::display() const
 {

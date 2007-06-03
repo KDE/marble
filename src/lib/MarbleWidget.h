@@ -93,6 +93,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_OBJECT
     Q_PROPERTY(int zoom READ zoom WRITE zoomView)
 
+    Q_PROPERTY(double latitude READ centerLatitude WRITE setCenterLatitude)
+    Q_PROPERTY(double longitude READ centerLongitude WRITE setCenterLongitude)
+
  public:
     /**
      * @brief Construct a new MarbleWidget.
@@ -129,6 +132,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Return the current zoom level.
      */
     int  zoom() const { return m_logzoom; }
+
+    double  centerLatitude(){ 
+        return (double)m_model->centerLatitude();
+    }
+
+    double  centerLongitude(){
+        return (double)m_model->centerLongitude();
+    }
+
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
@@ -181,6 +193,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  rotateBy(const float&, const float&);
     void  centerOn(const float&, const float&);
     void  centerOn(const QModelIndex&);
+
+    void setCenterLatitude( double lat ){ 
+        float lng = centerLongitude();
+        centerOn( (float)lat, lng );
+    }
+
+    void setCenterLongitude( double lng ){
+        float lat = centerLatitude();
+        centerOn( lat, (float)lng );
+    }
 
     void  moveLeft();
     void  moveRight();

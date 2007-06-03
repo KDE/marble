@@ -50,6 +50,10 @@ class Quaternion {
     Quaternion  inverse() const;
 
     void        createFromEuler(float pitch, float yaw, float roll);
+    float       pitch() const;
+    float       yaw() const;
+
+
     void        display() const;
 
     virtual void rotateAroundAxis(const Quaternion &q);

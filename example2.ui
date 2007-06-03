@@ -1,0 +1,187 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>481</width>
+    <height>424</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="MarbleNavigator" name="MarbleNavigator" >
+     <property name="toolTip" >
+      <string>Navigation Control</string>
+     </property>
+     <property name="whatsThis" >
+      <string>Use this control to navigate.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MarbleWidget" name="MarbleWidget" >
+     <property name="toolTip" >
+      <string>The Earth</string>
+     </property>
+     <property name="whatsThis" >
+      <string>The Marble widget displays a virtual globe.</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MarbleNavigator</class>
+   <extends>QWidget</extends>
+   <header>MarbleNavigator.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MarbleWidget</class>
+   <extends>QWidget</extends>
+   <header>MarbleWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>goHome()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>goHome()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>53</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>198</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>moveDown()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>moveDown()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>52</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>211</x>
+     <y>151</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>moveLeft()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>moveLeft()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>65</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>162</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>moveRight()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>moveRight()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>62</x>
+     <y>64</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>216</x>
+     <y>71</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>moveUp()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>moveUp()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>55</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>218</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>zoomChanged(int)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>zoomView(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>63</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>208</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>zoomIn()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>zoomIn()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>51</x>
+     <y>309</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>169</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MarbleNavigator</sender>
+   <signal>zoomOut()</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>zoomOut()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>55</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>220</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
