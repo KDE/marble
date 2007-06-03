@@ -1,2 +1,2 @@
 #! /bin/sh
-$XGETTEXT `find . -name '*.cc'` -o $podir/marble.pot
+$XGETTEXT `find . -name '*.cpp'` -o $podir/marble.pot
