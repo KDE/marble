@@ -78,6 +78,10 @@ ADD_DEFINITIONS(${QT_DEFINITIONS})
 ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 ADD_DEFINITIONS(-DQT_DLL)
+if(WIN32)
+  # distinguish between debug and release plugin
+  SET(CMAKE_DEBUG_POSTFIX "d")
+endif(WIN32)
 
 
 # link with release version of Qt libs

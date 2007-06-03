@@ -26,6 +26,10 @@ ADD_DEFINITIONS(-DQT_PLUGIN)
 ADD_DEFINITIONS(-DQT_NO_DEBUG)
 ADD_DEFINITIONS(-DQT_SHARED)
 ADD_DEFINITIONS(-DQT_DLL)
+if(WIN32)
+  # distinguish between debug and release plugin
+  SET(CMAKE_DEBUG_POSTFIX "d")
+endif(WIN32)
 
 if (QTONLY)
   qt4_automoc(${marbleplugin_SRCS})
