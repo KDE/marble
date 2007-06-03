@@ -124,12 +124,12 @@ void MarbleWidget::zoomView(int zoom)
 }
 
 
-void MarbleWidget::zoomViewBy(int zoomstep)
+void MarbleWidget::zoomViewBy(int zoomStep)
 {
     // Prevent infinite loops
 
     int zoom = m_model->radius();
-    int tryZoom = toLogScale(zoom) + zoomstep;
+    int tryZoom = toLogScale(zoom) + zoomStep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
     if ( tryZoom >= m_minimumzoom && tryZoom <= m_maximumzoom ) {
 	zoom = tryZoom;
@@ -155,9 +155,9 @@ void MarbleWidget::rotateBy(const float& phi, const float& theta)
     repaint();
 }
 
-void MarbleWidget::centerOn(const float& phi, const float& theta)
+void MarbleWidget::centerOn(const float& lat, const float& lon)
 {
-    m_model->rotateTo( phi, theta );
+    m_model->rotateTo( lat, lon );
 
     repaint();
 }

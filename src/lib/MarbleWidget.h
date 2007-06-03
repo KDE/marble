@@ -184,33 +184,93 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
 
  public slots:
-    void  zoomView(int);
+    /**
+     * @brief  Zoom the view to a certain zoomlevel
+     * @param  zoom  the new zoom level.
+     */
+    void  zoomView(int zoom);
 
-    void  zoomViewBy(int);
+    /**
+     * @brief  Zoom the view by a certain step
+     * @param  zoomStep  the difference between the old zoom and the new
+     */
+    void  zoomViewBy(int zoomStep);
+
+    /**
+     * @brief  Zoom in by the zoomStep.
+     */
     void  zoomIn();
+    /**
+     * @brief  Zoom out by the zoomStep.
+     */
     void  zoomOut();
 
-    void  rotateBy(const float&, const float&);
-    void  centerOn(const float&, const float&);
+    /**
+     * @brief  Rotate the view by the two angles phi and theta.
+     * @description This function rotates the view by two angles, phi
+     * and theta.  If we start on (0, 0), the result will be the exact
+     * equivalent of (lat, lon), otherwise the resulting angle will be
+     * the sum of the previous position and the two offsets.
+     * @param  phi    an angle loosely equivalent to the latitude
+     * @param  theta  an angle loosely equivalent to the longitude
+     */
+    void  rotateBy(const float &phi, const float &theta);
+    /**
+     * @brief  Center the view on a point
+     * @param  lat    an angle parallel to the latitude lines
+     * @param  lon  an angle parallel to the longitude lines
+     */
+    void  centerOn(const float &lat, const float &lon);
+    /**
+     * @brief  Center the view on a point
+     * @param  lat    an angle parallel to the latitude lines
+     * @param  lon  an angle parallel to the longitude lines
+     */
     void  centerOn(const QModelIndex&);
 
+    /**
+     * @brief  Set the latitude for the centerPoint
+     * @param  lat  the new value for the latitude
+     */
     void setCenterLatitude( double lat ){ 
         float lng = centerLongitude();
         centerOn( (float)lat, lng );
     }
-
+    /**
+     * @brief  Set the longitude for the centerPoint
+     * @param  lng  the new value for the longitude
+     */
     void setCenterLongitude( double lng ){
         float lat = centerLatitude();
         centerOn( lat, (float)lng );
     }
 
+    /**
+     * @brief  Move left by the moveStep.
+     */
     void  moveLeft();
+    /**
+     * @brief  Move right by the moveStep.
+     */
     void  moveRight();
+    /**
+     * @brief  Move up by the moveStep.
+     */
     void  moveUp();
+    /**
+     * @brief  Move down by the moveStep.
+     */
     void  moveDown();
 
+    /**
+     * @brief Center the view on the default start point with the default zoom.
+     */
     void  goHome();
 
+    /**
+     * @brief Set a new map theme
+     * @param maptheme  The name of the new maptheme.
+     */
     void  setMapTheme( const QString& maptheme )
     {
 	m_model->setMapTheme( maptheme );
@@ -218,7 +278,17 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 	// FIXME: Force update...
     }
 
+    /**
+     * @brief A signal that is sent when the model starts to create new tiles.
+     * @param name  the name of the created theme.
+     * @param description  a descriptive text that can be shown in a dialog.
+     */
     void creatingTilesStart( const QString& name, const QString& description );
+
+    /**
+     * @brief A signal that is sent while the model is creating new tiles.
+     * @param  progress  the percentage done
+     */
     void creatingTilesProgress( int progress );
 
  signals:
