@@ -8,7 +8,7 @@
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "../../lib/katlasglobe.h"
+#include "../../lib/MarbleModel.h"
 #include "../../lib/MarbleWidget.h"
 #include "MarbleWidgetPlugin.h"
 
@@ -40,8 +40,8 @@ bool MarbleWidgetPlugin::isInitialized() const
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
     // Create the Model (Globe) and one view.
-    KAtlasGlobe *globe = new KAtlasGlobe( parent );
-    return new MarbleWidget( globe, parent );
+    //MarbleModel *model = new MarbleModel( parent );
+    return new MarbleWidget( parent );
 }
 
 QString MarbleWidgetPlugin::name() const
