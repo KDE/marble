@@ -78,7 +78,7 @@ class PlaceMarkManager;
  * @see MarbleWidget
  */
 
-class MARBLE_EXPORT MarbleModel  : public QObject
+class MARBLE_EXPORT MarbleModel : public QObject
 {
     Q_OBJECT
 

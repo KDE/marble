@@ -243,12 +243,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
-     * @description This function rotates the view by two angles, phi
-     * and theta.  If we start on (0, 0), the result will be the exact
-     * equivalent of (lat, lon), otherwise the resulting angle will be
-     * the sum of the previous position and the two offsets.
      * @param  phi    an angle loosely equivalent to the latitude
      * @param  theta  an angle loosely equivalent to the longitude
+     *
+     * This function rotates the view by two angles, phi and theta.
+     * If we start on (0, 0), the result will be the exact equivalent
+     * of (lat, lon), otherwise the resulting angle will be the sum of
+     * the previous position and the two offsets.
      */
     void  rotateBy(const float &phi, const float &theta);
     /**
@@ -351,15 +352,32 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     }
 
     /**
-     * @brief A signal that is sent when the model starts to create new tiles.
+     * @brief A slot that is called when the model starts to create new tiles.
      * @param name  the name of the created theme.
      * @param description  a descriptive text that can be shown in a dialog.
+     * @see    creatingTilesProgress
+     *
+     * This function is connected to the models signal with the same
+     * name.  When the model needs to create a cache of tiles in
+     * several different resolutions, it will emit creatingTilesStart
+     * once with a name of the theme and a descriptive text.  The
+     * widget can then pop up a dialog to explain why there is a
+     * delay.  The model will then call creatingTilesProgress several
+     * times until the parameter reaches 100 (100%), after which the
+     * creation process is finished.  After this there will be no more
+     * calls to creatingTilesProgress, and the poup dialog can then be
+     * closed.
      */
     void creatingTilesStart( const QString& name, const QString& description );
 
     /**
-     * @brief A signal that is sent while the model is creating new tiles.
+     * @brief A slot that is called while the model is creating new tiles.
      * @param  progress  the percentage done
+     * @see    creatingTilesStart
+     *
+     * This function is connected to the models' signal with the same
+     * name. See creatingTilesStart for a description of how it is
+     * used.
      */
     void creatingTilesProgress( int progress );
 
