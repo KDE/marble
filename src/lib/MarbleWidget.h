@@ -73,7 +73,7 @@ class KAtlasTileCreatorDialog;
  * within a certain distance from the mouse pointer. When you choose
  * one item from the menu, Marble will open up a dialog window with
  * some information about the PlaceMark and also try to connect to
- * Wikipedia to retreive an article about it. If there is such an
+ * Wikipedia to retrieve an article about it. If there is such an
  * article, you will get a mini-browser window with the article in a tab. 
  *
  * The right mouse button controls a distance tool.  The distance tool
