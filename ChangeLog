@@ -1,5 +1,10 @@
 2007-06-04    <ingwa@dhcp-254-139.lkpg.cendio.se>
 
+	Krazy: 12. Check for proper include directives
+	* src/lib/marble_export.h: Fix include
+	* src/plugins/marblewidget/MarbleWidgetPlugin.cpp: Fix include
+	* src/plugins/navigator/MarbleNavigatorPlugin.cpp: Fix include
+
 	Clean up 
 	* src/lib/vectorcomposer.{h,cpp}: use the m_ convention everywhere.
 

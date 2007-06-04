@@ -8,10 +8,12 @@
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleNavigator.h"
 #include "MarbleNavigatorPlugin.h"
 
 #include <QtPlugin>
+
+#include "MarbleNavigator.h"
+
 
 MarbleNavigatorPlugin::MarbleNavigatorPlugin(QObject *parent)
     : QObject(parent)

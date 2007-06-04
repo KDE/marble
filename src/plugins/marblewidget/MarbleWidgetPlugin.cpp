@@ -8,11 +8,13 @@
 // Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "../../lib/MarbleModel.h"
-#include "../../lib/MarbleWidget.h"
 #include "MarbleWidgetPlugin.h"
 
 #include <QtPlugin>
+
+#include "../../lib/MarbleModel.h"
+#include "../../lib/MarbleWidget.h"
+
 
 MarbleWidgetPlugin::MarbleWidgetPlugin(QObject *parent)
     : QObject(parent)
