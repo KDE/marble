@@ -26,9 +26,9 @@
 const float pi = 3.14159f ;
 
 
-KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *gpview,
+KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *marbleWidget,
                                                MarbleModel  *model)
-    : m_gpview( gpview ),
+    : m_marbleWidget( marbleWidget ),
       m_model( model )
 {
     curpmtl.load( KAtlasDirs::path("bitmaps/cursor_tl.xpm") );
@@ -54,6 +54,8 @@ KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *gpview,
     m_midpressed  = false;
 
     m_dragThreshold = 3;
+
+    m_positionSignalConnected = false;
 }
 
 
@@ -62,7 +64,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 		
     Q_UNUSED( o );
 
-    //	if ( o == gpview ){
+    //	if ( o == marbleWidget ){
     if ( e->type() == QEvent::KeyPress ) {
         QKeyEvent  *k = (QKeyEvent *)e;
 
@@ -82,22 +84,22 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             diry = 1;
             break;
         case 0x2b:
-            m_gpview->zoomIn();
+            m_marbleWidget->zoomIn();
             break;
         case 0x2d:
-            m_gpview->zoomOut();
+            m_marbleWidget->zoomOut();
             break;
         case 0x01000010:
-            m_gpview->goHome();
+            m_marbleWidget->goHome();
             break;
         default:
             break;
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_model->rotateBy( -m_gpview->moveStep() * (float)(diry),
-                               -m_gpview->moveStep() * (float)(dirx) );
-            m_gpview->repaint();
+            m_model->rotateBy( -m_marbleWidget->moveStep() * (float)(diry),
+                               -m_marbleWidget->moveStep() * (float)(dirx) );
+            m_marbleWidget->repaint();
         }
 
         return true;
@@ -107,17 +109,21 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
               || e->type() == QEvent::MouseButtonRelease ) {
 
         QMouseEvent  *event        = static_cast<QMouseEvent*>(e);
-        QRegion       activeRegion = m_gpview->activeRegion();
+        QRegion       activeRegion = m_marbleWidget->activeRegion();
 
         dirx = 0; 
         diry = 0;
 
-        // emit the position string
-        float  lat;
-        float  lng;
-        m_gpview->globeSphericals( event->x(), event->y(), lng, lat );
-        QString position = GeoPoint( lng, lat ).toString();
-        emit mouseGeoPosition( position );
+        // emit the position string only if the signal got attached
+        if ( m_positionSignalConnected > 0 )
+        {
+            float  lat;
+            float  lng;
+            m_marbleWidget->globeSphericals( event->x(), event->y(), lng, lat );
+            QString position = GeoPoint( lng, lat ).toString();
+            emit mouseGeoPosition( position );
+        }
+
 
         if ( activeRegion.contains( event->pos() ) ) {
             if ( e->type() == QEvent::MouseButtonDblClick) {
@@ -142,8 +148,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 // m_leftpresseda: screen center latitude  during mouse press
                 // m_leftpressedb: screen center longitude during mouse press
-                m_gpview->globeSphericals( m_gpview->width() / 2,
-                                           m_gpview->height() / 2,
+                m_marbleWidget->globeSphericals( m_marbleWidget->width() / 2,
+                                           m_marbleWidget->height() / 2,
                                            m_leftpresseda, m_leftpressedb );
 
                 if ( m_model->northPoleY() > 0 ) {
@@ -201,12 +207,12 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 float direction = 1;
                 if ( m_model -> northPoleZ() > 0 ) {	
                     if ( event->y() < ( m_model->northPoleY()
-                                        + m_gpview->height() / 2 ) )
+                                        + m_marbleWidget->height() / 2 ) )
                         direction = -1;
                 }
                 else {
                     if (event->y() > (-m_model->northPoleY() 
-                                      + m_gpview->height() / 2 ) )
+                                      + m_marbleWidget->height() / 2 ) )
                         direction = -1;
                 }
 
@@ -215,7 +221,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                                   -180 / pi * (float)(m_leftpresseda)
                                    + 90 * direction * deltax / radius );
 
-                m_gpview->repaint();
+                m_marbleWidget->repaint();
             }
 
 
@@ -223,20 +229,20 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 int  eventy = event->y();
                 int  dy     = m_midpressedy - eventy;
                 m_midpressed = eventy;
-                m_gpview->zoomViewBy( (int)( 2 * dy / 3 ) );
-                m_gpview->repaint();
+                m_marbleWidget->zoomViewBy( (int)( 2 * dy / 3 ) );
+                m_marbleWidget->repaint();
             }
         }
         else {
             m_leftpressed = false;
 
-            dirx = (int)( 3 * event->x() / m_gpview->width() ) - 1;
+            dirx = (int)( 3 * event->x() / m_marbleWidget->width() ) - 1;
             if ( dirx > 1 ) 
                 dirx = 1;
             if ( dirx < -1 )
                 dirx = -1;
 
-            diry = (int)( 3 * event->y() / m_gpview->height() ) - 1;
+            diry = (int)( 3 * event->y() / m_marbleWidget->height() ) - 1;
             if ( diry > 1 ) 
                 diry = 1;
             if ( diry < -1 )
@@ -245,20 +251,20 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
-                m_model->rotateBy( -m_gpview->moveStep() * (float)(diry),
-                                   -m_gpview->moveStep() * (float)(dirx) );
-                m_gpview->repaint();
+                m_model->rotateBy( -m_marbleWidget->moveStep() * (float)(diry),
+                                   -m_marbleWidget->moveStep() * (float)(dirx) );
+                m_marbleWidget->repaint();
             }				
         }				
 
-        m_gpview->setCursor(arrowcur[dirx+1][diry+1]);
+        m_marbleWidget->setCursor(arrowcur[dirx+1][diry+1]);
 
         return true;
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
             QWheelEvent  *wheelevt = static_cast<QWheelEvent*>(e);
-            m_gpview->zoomViewBy((int)(wheelevt->delta()/3));
+            m_marbleWidget->zoomViewBy((int)(wheelevt->delta()/3));
 
             return true;
         }

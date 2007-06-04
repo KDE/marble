@@ -232,6 +232,17 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     repaint();
 }
 
+void MarbleWidget::connectNotify ( const char * signal )
+{
+    if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
+        m_inputhandler->setPositionSignalConnected(true);
+}
+
+void MarbleWidget::disconnectNotify ( const char * signal )
+{
+    if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
+        m_inputhandler->setPositionSignalConnected(false);
+}
 
 bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 {

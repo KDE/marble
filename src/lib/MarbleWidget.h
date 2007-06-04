@@ -367,7 +367,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Signal that the zoom has changed, and to what.
      */
-    void  zoomChanged(int);
+    void  zoomChanged( int );
 
     void  mouseGeoPosition( QString ); 
 
@@ -375,15 +375,18 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
-    void  paintEvent(QPaintEvent *event);
+    void  paintEvent( QPaintEvent *event );
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    void  resizeEvent(QResizeEvent*);
+    void  resizeEvent( QResizeEvent* );
+
+    void  connectNotify ( const char * signal );
+    void  disconnectNotify ( const char * signal );
 
  private:
-    void  construct(QWidget *parent);
+    void  construct( QWidget *parent );
 
     int   toLogScale(int);
     int   fromLogScale(int);

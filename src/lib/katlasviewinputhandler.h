@@ -38,6 +38,8 @@ class KAtlasViewInputHandler  : public QObject
     KAtlasViewInputHandler(MarbleWidget*, MarbleModel*);
     virtual ~KAtlasViewInputHandler(){};
 
+    void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
+
  signals:
     // Mouse button menus
     void lmbRequest( int, int );
@@ -49,7 +51,7 @@ class KAtlasViewInputHandler  : public QObject
     bool eventFilter( QObject *, QEvent * );
 
  private:
-    MarbleWidget  *m_gpview;
+    MarbleWidget  *m_marbleWidget;
     MarbleModel   *m_model;
 
     QPixmap  curpmtl;
@@ -76,6 +78,8 @@ class KAtlasViewInputHandler  : public QObject
 
     int      m_dragThreshold;
     QTime    m_dragtimer;
+
+    bool m_positionSignalConnected;
 };
 
 
