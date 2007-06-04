@@ -1,4 +1,16 @@
+2007-06-04  Inge Wallin  <inge@lysator.liu.se>
+
+	Improve apidox
+	* src/lib/MarbleModel.h (): Improve apidox
+	* src/lib/MarbleWidget.h (): Improve apidox
+
+2007-06-04  Osterfeld
+
+	Remove #ifndef Q_OS_MACX surrounding #include .moc
+	* Almost all files: Remove surrounding #nfndef
+	
 2007-06-04  Torsten Rahn  <rahn@kde.org>
+
 	* Adding more options for the Qt-Designer plugin
 	  (later on to be integrated with the Legend in Marble).
 
