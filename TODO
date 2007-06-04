@@ -1,16 +1,16 @@
 This file describes what we need to do before certain milestones.
 
 Mark those tasks that you want to perform with your name:
- INGE	Inge Wallin
- TACK	Tackat (Torsten Rahn)
+ INGE   Inge Wallin
+ TACK   Tackat (Torsten Rahn)
 
 
 Before Version 0.4 (mid april) (now: same as above?)
 ----------------------------------------------------------------
 
 Features
- * Add Downloadmanager class for tiles and Wikipedia articles		TACK
- * Fix image downloading for Wikipedia					TACK
+ * Add Downloadmanager class for tiles and Wikipedia articles           TACK
+ * Fix image downloading for Wikipedia                                  TACK
  * Add "Export Map" to save a screenshot as an image file               DONE
  * Add "Print" to print a screenshot                                    DONE
 
@@ -28,28 +28,30 @@ During the SoC projects (0.5)
 ----------------------------------------------------------------
 
 Misc
- * Create a file with use cases and personas				TACK
+ * Create a file with use cases and personas                            TACK
 
 Cleaning:
- * Make all files follow the coding standards (See CLEANING)		DONE
- * Filename == Classname (CamelCasing)					----
+ * Make all files follow the coding standards (See CLEANING)            DONE
+ * Filename == Classname (CamelCasing)                                  ----
 
 Widget:
- * Separate the view from the globe (model)				INGE
-    - Let the view parameters be in the view instead of in the globe	inge
-    - Don't open any dialogs from the globe, do it from the controller.	inge
-    - Let the view know about the globe, but not the other way.		done
+ * Separate the view from the globe (model)                             INGE
+    - Let the view parameters be in the view instead of in the globe    inge
+    - Don't open any dialogs from the globe, do it from the controller. inge
+    - Let the view know about the globe, but not the other way.         done
 
 Vector backend
  * Better scalability
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
+   - MarbleLocator (search field for placemarks)                        --
    - MarbleControlBox                                                   --
 
 Documentation
  * Coding standards                                                     DONE
  * APIDOX: Class and method docs for at least:                          INGE
+   - MarbleWidget                                                       done
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
 
@@ -58,12 +60,12 @@ Integration of Google Summer of Code projects (0.6)
 ----------------------------------------------------------------
 
 GPS support
- * Read GPX files							----
- * Show waypoints							----
- * Show tracks								----
- * Show 'You are here' using the GPS.					----
+ * Read GPX files                                                       ----
+ * Show waypoints                                                       ----
+ * Show tracks                                                          ----
+ * Show 'You are here' using the GPS.                                   ----
 
-KML support
+KML support (Murad Tagirov)
  * One overall aim: make Digikam KML output and plasma weather applet 
    work together with Marble. 
 
@@ -81,24 +83,24 @@ Before KDE 4.0
 ----------------------------------------------------------------
 
 Widget:
- * Make it possible to paint on different device types in addition	----
+ * Make it possible to paint on different device types in addition      ----
    to painting on the KAtlasView widget
-    - QGraphicsView							--
-    - QPixmap 								--
-    - QSvgRendrerer							--
+    - QGraphicsView                                                     --
+    - QPixmap                                                           --
+    - QSvgRendrerer                                                     --
    Offer accessor method for the Pixmap, so it can be used to export 
    the image, print it and copy it.
 
 Make it a KDE4 application as a real member of kdeedu.
- * KApplication								done
- * AboutData								done
- * KConfig XT								TACK
- * Translation								TACK
- * Docs									done
- * KDEPrint support							TACK
- * DBus Support								TACK
+ * KApplication                                                         Done
+ * AboutData                                                            Done
+ * KConfig XT                                                           TACK
+ * Translation                                                          TACK
+ * User docs                                                            DONE
+ * KDEPrint support                                                     TACK
+ * DBus Support                                                         TACK
 
-Add a simple alternative Qt4 frontend					done
+Add a simple alternative Qt4 frontend                                   DONE
 
  
 Before KDE 4.1
