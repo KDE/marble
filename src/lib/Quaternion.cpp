@@ -22,7 +22,8 @@
 
 Quaternion::Quaternion()
 {
-    set( 1.0f, 0.0f, 0.0f, 0.0f );
+//    like in libeigen we keep the quaternion uninitialized
+//    set( 1.0f, 0.0f, 0.0f, 0.0f );
 }
 
 Quaternion::Quaternion(float w, float x, float y, float z) 

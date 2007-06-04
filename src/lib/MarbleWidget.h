@@ -95,6 +95,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(double latitude READ centerLatitude WRITE setCenterLatitude)
     Q_PROPERTY(double longitude READ centerLongitude WRITE setCenterLongitude)
 
+    Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar)
+    Q_PROPERTY(bool showWindRose READ showWindRose WRITE setShowWindRose)
+    Q_PROPERTY(bool showGrid READ showGrid WRITE setShowGrid)
+    Q_PROPERTY(bool showPlaces READ showPlaces WRITE setShowPlaces)
+
  public:
     /**
      * @brief Construct a new MarbleWidget.
@@ -181,6 +186,38 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return a QPixmap with the current contents of the widget.
      */
     QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
+
+    /**
+     * @brief  Return whether the scale bar is visible.
+     * @return The scale bar visibility.
+     */
+    bool  showScaleBar(){ 
+        return m_showScaleBar;
+    }
+
+    /**
+     * @brief  Return whether the scale bar is visible.
+     * @return The scale bar visibility.
+     */
+    bool  showWindRose(){ 
+        return m_showWindRose;
+    }
+
+    /**
+     * @brief  Return whether the coordinate grid is visible.
+     * @return The coordinate grid visibility.
+     */
+    bool  showGrid(){ 
+        return m_model->showGrid();
+    }
+
+    /**
+     * @brief  Return whether the place marks are visible.
+     * @return The place mark visibility.
+     */
+    bool  showPlaces(){ 
+        return m_model->showPlaceMarks();
+    }
 
  public slots:
     /**
@@ -278,6 +315,42 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     }
 
     /**
+     * @brief  Set whether the scale bar overlay is visible
+     * @param  visible  visibility of the scale bar
+     */
+    void setShowScaleBar( bool visible ){ 
+        m_showScaleBar = visible;
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the wind rose overlay is visible
+     * @param  visible  visibility of the wind rose
+     */
+    void setShowWindRose( bool visible ){ 
+        m_showWindRose = visible;
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the coordinate grid overlay is visible
+     * @param  visible  visibility of the coordinate grid
+     */
+    void setShowGrid( bool visible ){ 
+        m_model->setShowGrid( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the place mark overlay is visible
+     * @param  visible  visibility of the place marks
+     */
+    void setShowPlaces( bool visible ){ 
+        m_model->setShowPlaceMarks( visible );
+        repaint();
+    }
+
+    /**
      * @brief A signal that is sent when the model starts to create new tiles.
      * @param name  the name of the created theme.
      * @param description  a descriptive text that can be shown in a dialog.
@@ -291,11 +364,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesProgress( int progress );
 
  signals:
-
     /**
      * @brief Signal that the zoom has changed, and to what.
      */
     void  zoomChanged(int);
+
+    void  mouseGeoPosition( QString ); 
 
  protected:
     /**
@@ -346,6 +420,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     // The progress dialog for the tile creator.
     KAtlasTileCreatorDialog  *m_tileCreatorDlg;
+
+    bool          m_showScaleBar;
+    bool          m_showWindRose;
 };
 
 

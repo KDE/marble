@@ -23,13 +23,13 @@
 
 
 #include "katlasaboutdialog.h"
+#include "ui_katlasaboutdialog.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
 #include "katlasdirs.h"
-
 
 KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
     : QDialog( parent )

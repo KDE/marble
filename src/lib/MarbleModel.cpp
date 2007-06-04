@@ -40,6 +40,9 @@ MarbleModel::MarbleModel( QWidget* parent )
 
     m_justModified = false;
 
+    m_showGrid = true;
+    m_showPlaceMarks = true;
+
     m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
 
     m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
@@ -207,20 +210,23 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
     // if ( m_maptheme->vectorlayer().enabled == true ){
     QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    m_gridmap->createGrid( m_radius, m_planetAxis );
+    if ( m_showGrid == true )
+    {
+        m_gridmap->createGrid( m_radius, m_planetAxis );
 
-    m_gridmap->setPen( gridpen );
-    m_gridmap->paintGridMap( painter, true );
+        m_gridmap->setPen( gridpen );
+        m_gridmap->paintGridMap( painter, true );
 
-    m_gridmap->createTropics( m_radius, m_planetAxis );
+        m_gridmap->createTropics( m_radius, m_planetAxis );
 
-    gridpen.setStyle( Qt::DotLine );
-    m_gridmap->setPen( gridpen );
-    m_gridmap->paintGridMap( painter, true );
+        gridpen.setStyle( Qt::DotLine );
+        m_gridmap->setPen( gridpen );
+        m_gridmap->paintGridMap( painter, true );
+    }
 
     //	}
 	
-    if ( m_placecontainer->size() > 0 ) {
+    if ( m_showPlaceMarks == true && m_placecontainer->size() > 0 ) {
         m_placemarkpainter->paintPlaceFolder( painter, 
                                               m_canvasimg->width() / 2,
                                               m_canvasimg->height()/ 2,

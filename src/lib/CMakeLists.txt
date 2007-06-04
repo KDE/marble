@@ -14,6 +14,18 @@ if (QTONLY)
   set(GENERIC_LIB_SOVERSION "5")
 endif (QTONLY)
 
+if (QTONLY)
+  # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
+  if(NOT WIN32)
+    add_definitions (${QT_DEFINITIONS} -O2)
+  endif(NOT WIN32)
+  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
+else (QTONLY)
+  if(NOT WIN32)
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
+  endif(NOT WIN32)
+  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
+endif (QTONLY)
 
 # link_directories (${QT_LIBRARY_DIR})
 ########### next target ###############

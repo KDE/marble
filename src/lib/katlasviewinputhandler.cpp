@@ -17,6 +17,7 @@
 #include "katlasviewinputhandler.moc"
 #endif
 
+#include "GeoPoint.h"
 #include "Quaternion.h"
 #include "katlasdirs.h"
 #include "MarbleWidget.h"
@@ -110,6 +111,13 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
         dirx = 0; 
         diry = 0;
+
+        // emit the position string
+        float  lat;
+        float  lng;
+        m_gpview->globeSphericals( event->x(), event->y(), lng, lat );
+        QString position = GeoPoint( lng, lat ).toString();
+        emit mouseGeoPosition( position );
 
         if ( activeRegion.contains( event->pos() ) ) {
             if ( e->type() == QEvent::MouseButtonDblClick) {

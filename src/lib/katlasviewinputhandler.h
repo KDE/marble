@@ -43,6 +43,8 @@ class KAtlasViewInputHandler  : public QObject
     void lmbRequest( int, int );
     void rmbRequest( int, int );
 
+    void mouseGeoPosition( QString );
+
  protected:
     bool eventFilter( QObject *, QEvent * );
 

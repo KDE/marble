@@ -86,6 +86,9 @@ void MarbleWidget::construct(QWidget *parent)
     connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
 	     m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
 
+    connect( m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
+         this, SIGNAL( mouseGeoPosition( QString ) ) ); 
+
     m_pMeasureTool = new MeasureTool( this );
 
     connect( m_popupmenu,    SIGNAL( addMeasurePoint( float, float ) ),
@@ -99,6 +102,9 @@ void MarbleWidget::construct(QWidget *parent)
 
     m_minimumzoom = 950;
     m_maximumzoom = 2200;
+
+    m_showScaleBar = true;
+    m_showWindRose = true;
 }
 
 
@@ -298,13 +304,15 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     m_model->paintGlobe(&painter,dirty);
 	
     // Draw the scale.
-    painter.drawPixmap( 10, m_pCanvasImage->height() - 40,
-                        m_mapscale.drawScaleBarPixmap( m_model->radius(),
+    if ( m_showScaleBar == true )
+        painter.drawPixmap( 10, m_pCanvasImage->height() - 40,
+                            m_mapscale.drawScaleBarPixmap( m_model->radius(),
                                                        m_pCanvasImage-> width() / 2 - 20 ) );
 
     // Draw the wind rose.
-    painter.drawPixmap( m_pCanvasImage->width() - 60, 10,
-			m_windrose.drawWindRosePixmap( m_pCanvasImage->width(),
+    if ( m_showWindRose == true )
+        painter.drawPixmap( m_pCanvasImage->width() - 60, 10,
+    			m_windrose.drawWindRosePixmap( m_pCanvasImage->width(),
 						       m_pCanvasImage->height(),
                                                        m_model->northPoleY() ) );
 

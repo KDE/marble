@@ -131,6 +131,38 @@ class MARBLE_EXPORT MarbleModel  : public QObject
 
     PlaceContainer* placeContainer(){ return m_placecontainer ; }
 
+    /**
+     * @brief  Return whether the coordinate grid is visible.
+     * @return The coordinate grid visibility.
+     */
+    bool  showGrid(){ 
+        return m_showGrid;
+    }
+
+    /**
+     * @brief  Set whether the coordinate grid overlay is visible
+     * @param  visible  visibility of the coordinate grid
+     */
+    void setShowGrid( bool visible ){ 
+        m_showGrid = visible;
+    }
+
+    /**
+     * @brief  Return whether the place marks are visible.
+     * @return The place mark visibility.
+     */
+    bool  showPlaceMarks(){ 
+        return m_showPlaceMarks;
+    }
+
+    /**
+     * @brief  Set whether the place mark overlay is visible
+     * @param  visible  visibility of the place marks
+     */
+    void setShowPlaceMarks( bool visible ){ 
+        m_showPlaceMarks = visible;
+    }
+
  signals:
     void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
@@ -162,6 +194,10 @@ class MARBLE_EXPORT MarbleModel  : public QObject
 
     bool  m_justModified;
     bool  m_centered;
+
+    bool          m_showGrid;
+    bool          m_showPlaceMarks;
+
 };
 
 
