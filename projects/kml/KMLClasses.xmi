@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmlns:UML="http://schema.omg.org/spec/UML/1.3" verified="false" timestamp="2007-05-28T20:40:38" xmi.version="1.2" >
+ <XMI.header>
+  <XMI.documentation>
+   <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
+   <XMI.exporterVersion>1.5.4</XMI.exporterVersion>
+   <XMI.exporterEncoding>UnicodeUTF8</XMI.exporterEncoding>
+  </XMI.documentation>
+  <XMI.metamodel xmi.name="UML" href="UML.xml" xmi.version="1.3" />
+ </XMI.header>
+ <XMI.content>
+  <UML:Model isSpecification="false" isLeaf="false" isRoot="false" xmi.id="m1" isAbstract="false" name="UML Model" >
+   <UML:Namespace.ownedElement>
+    <UML:Stereotype isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="3" isRoot="false" isAbstract="false" name="datatype" />
+    <UML:Stereotype isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="52" isRoot="false" isAbstract="false" name=" " />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2" isRoot="false" isAbstract="false" name="int" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="4" isRoot="false" isAbstract="false" name="char" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="5" isRoot="false" isAbstract="false" name="bool" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="6" isRoot="false" isAbstract="false" name="float" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="7" isRoot="false" isAbstract="false" name="double" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="8" isRoot="false" isAbstract="false" name="short" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="9" isRoot="false" isAbstract="false" name="long" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="10" isRoot="false" isAbstract="false" name="unsigned int" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="11" isRoot="false" isAbstract="false" name="unsigned short" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="12" isRoot="false" isAbstract="false" name="unsigned long" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="13" isRoot="false" isAbstract="false" name="string" />
+    <UML:DataType stereotype="3" isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="22" isRoot="false" isAbstract="false" name="PlaceContainer*" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="14" isRoot="false" isAbstract="false" name="KMLDocument" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2244" />
+      <UML:Generalization xmi.idref="3030" />
+     </UML:GeneralizableElement.generalization>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="15" isRoot="false" isAbstract="false" name="PlaceMark" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="142" type="19" name="m_name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="155" type="74" name="m_sympos" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="160" type="161" name="m_role" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="174" type="19" name="m_description" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="183" type="19" name="m_countrycode" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="192" type="2" name="m_symbol" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="209" type="2" name="m_popidx" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="214" type="2" name="m_population" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="229" type="5" name="m_visible" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="234" type="5" name="m_selected" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="252" type="253" name="m_labelPixmap" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="262" type="263" name="m_rect" />
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="102" isRoot="false" isAbstract="false" isQuery="false" name="coordinate" />
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="111" isRoot="false" isAbstract="false" isQuery="false" name="coordinate" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="112" value="" type="6" name="lon" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="115" value="" type="6" name="lat" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="126" isRoot="false" isAbstract="false" isQuery="false" name="setCoordinate" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="127" value="" type="6" name="lon" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="130" value="" type="6" name="lat" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="197" isRoot="false" isAbstract="false" isQuery="false" name="symbolPixmap" />
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="204" isRoot="false" isAbstract="false" isQuery="false" name="symbolSize" />
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="243" isRoot="false" isAbstract="false" isQuery="false" name="quanternion" />
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="272" isRoot="false" isAbstract="false" isQuery="false" name="clearTextPixmap" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="16" isRoot="false" isAbstract="false" name="PlaceMarkManager" >
+     <UML:Classifier.feature>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="18" isRoot="false" isAbstract="false" isQuery="false" name="addPlaceMarkFile" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="20" value="" type="19" name="filename" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="21" isRoot="false" isAbstract="false" isQuery="false" name="getPlaceContainer" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter kind="return" xmi.id="3232" type="22" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="27" isRoot="false" isAbstract="false" isQuery="false" name="loadKml" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="28" value="" type="19" name="filename" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="17" isRoot="false" isAbstract="false" name="PlaceMarkPainer" >
+     <UML:Classifier.feature>
+      <UML:Operation stereotype="52" isSpecification="false" isLeaf="false" visibility="public" xmi.id="33" isRoot="false" isAbstract="false" isQuery="false" name="paintPlaceFolder" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="36" value="" type="34" name="painer" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="38" value="" type="2" name="imgrx" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="40" value="" type="2" name="imgry" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="42" value="" type="2" name="radius" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="46" value="" type="44" name="placecontainer" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="50" value="" type="48" name="Quanternion" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="64" isRoot="false" isAbstract="false" isQuery="false" name="setLabelColor" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="67" value="" type="65" name="color" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="73" isRoot="false" isAbstract="false" isQuery="false" name="whichPlaceMarkAt" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter kind="return" xmi.id="3233" type="44" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="76" value="" type="74" name="point" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="19" isRoot="false" isAbstract="false" name="QString" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="34" isRoot="false" isAbstract="false" name="QPainter" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="44" isRoot="false" isAbstract="false" name="PlaceContainer" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="48" isRoot="false" isAbstract="false" name="rotAxis" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="65" isRoot="false" isAbstract="false" name="QColor" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="74" isRoot="false" isAbstract="false" name="QPoint" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="161" isRoot="false" isAbstract="false" name="QChar" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="253" isRoot="false" isAbstract="false" name="QPixmap" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="263" isRoot="false" isAbstract="false" name="QRect" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="333" isRoot="false" isAbstract="false" name="KMLPlaceMark" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2378" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="342" type="19" name="m_name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="347" type="5" name="m_visibility" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="352" type="5" name="m_open" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="361" type="19" name="m_address" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="370" type="19" name="m_phonenumber" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="379" type="19" name="m_snippet" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="396" type="19" name="m_description" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="401" type="19" name="m_styleurl" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="426" isRoot="false" isAbstract="false" name="KMLStyle" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2855" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="716" type="2" name="m_id" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="719" type="19" name="m_name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="723" type="515" name="m_iconstyle" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="736" type="441" name="m_labelstyle" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="441" isRoot="false" isAbstract="false" name="KMLLabelStyle" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="584" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="482" initialValue="1" type="6" name="m_scale" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="515" isRoot="false" isAbstract="false" name="KMLIconStyle" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="621" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="638" type="6" name="m_scale" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="655" type="6" name="m_heading" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="664" type="665" name="m_icon" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="543" isRoot="false" isAbstract="false" name="KMLColorStyle" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="protected" xmi.id="552" type="65" name="m_color" />
+      <UML:Attribute isSpecification="false" visibility="protected" xmi.id="560" type="2" name="m_alpha" />
+      <UML:Attribute isSpecification="false" visibility="protected" xmi.id="563" type="2" name="m_colormode" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="665" isRoot="false" isAbstract="false" name="QIcon" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="1081" isRoot="false" isAbstract="false" name="StylesFactory" >
+     <UML:Classifier.feature>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="1099" isRoot="false" isAbstract="false" isQuery="false" name="registerStyle" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="1100" value="" type="426" name="style" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="1111" isRoot="false" isAbstract="false" isQuery="false" name="getStyleById" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter kind="return" xmi.id="3234" type="426" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="1112" value="" type="2" name="styleId" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+      <UML:Operation isSpecification="false" isLeaf="false" visibility="public" xmi.id="1170" isRoot="false" isAbstract="false" isQuery="false" name="getStyleByRole" >
+       <UML:BehavioralFeature.parameter>
+        <UML:Parameter kind="return" xmi.id="3235" type="426" />
+        <UML:Parameter isSpecification="false" visibility="private" xmi.id="1171" value="" type="161" name="role" />
+       </UML:BehavioralFeature.parameter>
+      </UML:Operation>
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="1491" isRoot="false" isAbstract="false" name="KMLFolder" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2288" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1559" type="19" name="m_name" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1564" type="5" name="m_visibility" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1569" type="19" name="m_description" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1574" type="1575" name="m_region" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="1575" isRoot="false" isAbstract="false" name="KMLRegion" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2083" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1897" type="1705" name="m_latLonAltBox" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1907" type="1650" name="m_lod" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="1650" isRoot="false" isAbstract="false" name="KMLLod" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1668" type="6" name="m_minLodPixels" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1674" type="6" name="m_maxLodPixels" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1679" type="6" name="m_minFadeExtent" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1684" type="6" name="m_maxFadeExtent" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="1705" isRoot="false" isAbstract="false" name="KMLLatLonAltBox" >
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1833" type="6" name="m_north" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1838" type="6" name="m_south" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1843" type="6" name="m_east" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1848" type="6" name="m_west" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1854" type="6" name="m_minAltitude" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1859" type="6" name="m_maxAltitude" />
+      <UML:Attribute isSpecification="false" visibility="private" xmi.id="1864" type="2" name="m_altitudeMode" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2045" isRoot="false" isAbstract="false" name="KMLObject" />
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2106" isRoot="false" isAbstract="false" name="KMLContainer" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2216" />
+     </UML:GeneralizableElement.generalization>
+     <UML:Classifier.feature>
+      <UML:Attribute isSpecification="false" visibility="protected" xmi.id="2948" type="1575" name="region" />
+     </UML:Classifier.feature>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2177" isRoot="false" isAbstract="false" name="KMLFeature" >
+     <UML:GeneralizableElement.generalization>
+      <UML:Generalization xmi.idref="2315" />
+     </UML:GeneralizableElement.generalization>
+    </UML:Class>
+    <UML:Class isSpecification="false" isLeaf="false" visibility="public" namespace="m1" xmi.id="2837" isRoot="false" isAbstract="false" name="StyleSelector" />
+    <UML:Generalization isSpecification="false" child="441" visibility="public" namespace="m1" xmi.id="584" parent="543" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="515" visibility="public" namespace="m1" xmi.id="621" parent="543" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="1575" visibility="public" namespace="m1" xmi.id="2083" parent="2045" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="2106" visibility="public" namespace="m1" xmi.id="2216" parent="2177" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="14" visibility="public" namespace="m1" xmi.id="2244" parent="2106" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="1491" visibility="public" namespace="m1" xmi.id="2288" parent="2106" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="2177" visibility="public" namespace="m1" xmi.id="2315" parent="2045" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="333" visibility="public" namespace="m1" xmi.id="2378" parent="2177" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="426" visibility="public" namespace="m1" xmi.id="2855" parent="2837" discriminator="" name="" />
+    <UML:Generalization isSpecification="false" child="14" visibility="public" namespace="m1" xmi.id="3030" parent="2045" discriminator="" name="" />
+   </UML:Namespace.ownedElement>
+  </UML:Model>
+ </XMI.content>
+ <XMI.extensions xmi.extender="umbrello" >
+  <docsettings viewid="520" documentation="" uniqueid="3235" />
+  <diagrams>
+   <diagram snapgrid="0" showattsig="1" fillcolor="#ffffc0" linewidth="0" zoom="100" showgrid="0" showopsig="1" usefillcolor="1" snapx="10" canvaswidth="987" snapy="10" showatts="1" xmi.id="520" documentation="" type="402" showops="1" showpackage="0" name="KMLClasses" localid="900000" showstereotype="0" showscope="1" snapcsgrid="0" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="#ff0000" canvasheight="849" >
+    <widgets>
+     <classwidget usesdiagramfillcolour="0" width="125" showattsigs="601" usesdiagramusefillcolour="0" x="342" y="34" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="67" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="515" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="186" showattsigs="601" usesdiagramusefillcolour="0" x="26" y="28" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="77" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="543" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="112" showattsigs="601" usesdiagramusefillcolour="0" x="63" y="206" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="82" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="441" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="161" showattsigs="601" usesdiagramusefillcolour="0" x="349" y="207" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="82" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="426" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="283" showattsigs="601" usesdiagramusefillcolour="0" x="23" y="399" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="83" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="1081" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="167" showattsigs="601" usesdiagramusefillcolour="0" x="368" y="400" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="85" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="1491" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="184" showattsigs="601" usesdiagramusefillcolour="0" x="707" y="418" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="52" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="1575" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="183" showattsigs="601" usesdiagramusefillcolour="0" x="739" y="94" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="98" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="1650" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="0" width="121" showattsigs="601" usesdiagramusefillcolour="0" x="603" y="208" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="127" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="1705" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="1" width="148" showattsigs="601" usesdiagramusefillcolour="1" x="730" y="708" showopsigs="601" linewidth="none" fillcolour="none" height="51" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="2045" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="144" showattsigs="601" usesdiagramusefillcolour="1" x="20" y="662" showopsigs="601" linewidth="none" fillcolour="none" height="142" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="333" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="78" showattsigs="601" usesdiagramusefillcolour="1" x="432" y="719" showopsigs="601" linewidth="none" fillcolour="none" height="29" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="2177" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="0" width="114" showattsigs="601" usesdiagramusefillcolour="0" x="413" y="586" showopsigs="601" linewidth="none" fillcolour="#ffffc0" height="37" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="2106" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="#ff0000" />
+     <classwidget usesdiagramfillcolour="1" width="92" showattsigs="601" usesdiagramusefillcolour="1" x="686" y="590" showopsigs="601" linewidth="none" fillcolour="none" height="29" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="14" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="none" />
+     <classwidget usesdiagramfillcolour="1" width="87" showattsigs="601" usesdiagramusefillcolour="1" x="591" y="74" showopsigs="601" linewidth="none" fillcolour="none" height="29" usefillcolor="1" showpubliconly="0" showattributes="1" isinstance="0" xmi.id="2837" showoperations="1" showpackage="0" showscope="1" font="Tahoma,8,-1,5,75,0,0,0,0,0" linecolor="none" />
+    </widgets>
+    <messages/>
+    <associations>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="543" widgetaid="441" xmi.id="584" linecolor="none" >
+      <linepath>
+       <startpoint startx="119" starty="206" />
+       <endpoint endx="119" endy="105" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="543" widgetaid="515" xmi.id="621" linecolor="none" >
+      <linepath>
+       <startpoint startx="342" starty="67" />
+       <endpoint endx="212" endy="66" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="1" visibilityB="200" totalcountb="2" indexb="1" linewidth="none" widgetbid="515" widgetaid="426" xmi.id="723" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="402" starty="207" />
+       <endpoint endx="404" endy="101" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="72" usesdiagramusefillcolour="1" x="337" y="111" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3217" showstereotype="1" text="m_iconstyle" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" visibilityB="200" totalcountb="2" indexb="1" linewidth="none" widgetbid="441" widgetaid="426" xmi.id="736" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="349" starty="248" />
+       <endpoint endx="175" endy="247" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="81" usesdiagramusefillcolour="1" x="177" y="250" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3218" showstereotype="1" text="m_labelstyl4e" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" visibilityB="200" totalcountb="2" indexb="1" linewidth="none" widgetbid="1575" widgetaid="1491" xmi.id="1574" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="535" starty="442" />
+       <endpoint endx="707" endy="444" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="60" usesdiagramusefillcolour="1" x="644" y="423" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3219" showstereotype="1" text="m_region" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="1" visibilityB="200" totalcountb="2" indexb="1" linewidth="none" widgetbid="1705" widgetaid="1575" xmi.id="1897" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="768" starty="418" />
+       <endpoint endx="663" endy="335" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="90" usesdiagramusefillcolour="1" x="665" y="337" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3220" showstereotype="1" text="m_latLonAltBox" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="2" visibilityB="200" totalcountb="2" indexb="1" linewidth="none" widgetbid="1650" widgetaid="1575" xmi.id="1907" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="829" starty="418" />
+       <endpoint endx="830" endy="192" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="44" usesdiagramusefillcolour="1" x="788" y="194" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3221" text="m_lod" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="2" totalcountb="3" indexb="2" linewidth="none" widgetbid="2045" widgetaid="1575" xmi.id="2083" linecolor="none" >
+      <linepath>
+       <startpoint startx="829" starty="470" />
+       <endpoint endx="828" endy="708" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="2177" widgetaid="2106" xmi.id="2216" linecolor="none" >
+      <linepath>
+       <startpoint startx="470" starty="623" />
+       <endpoint endx="471" endy="719" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="2106" widgetaid="14" xmi.id="2244" linecolor="none" >
+      <linepath>
+       <startpoint startx="686" starty="604" />
+       <endpoint endx="527" endy="604" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="3" indexb="1" linewidth="none" widgetbid="2106" widgetaid="1491" xmi.id="2288" linecolor="none" >
+      <linepath>
+       <startpoint startx="451" starty="485" />
+       <endpoint endx="451" endy="586" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="2045" widgetaid="2177" xmi.id="2315" linecolor="none" >
+      <linepath>
+       <startpoint startx="510" starty="733" />
+       <endpoint endx="730" endy="733" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="2" indexb="1" linewidth="none" widgetbid="2177" widgetaid="333" xmi.id="2378" linecolor="none" >
+      <linepath>
+       <startpoint startx="164" starty="733" />
+       <endpoint endx="432" endy="733" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="2" totalcountb="2" indexb="1" linewidth="none" widgetbid="2837" widgetaid="426" xmi.id="2855" linecolor="none" >
+      <linepath>
+       <startpoint startx="456" starty="207" />
+       <endpoint endx="634" endy="103" />
+      </linepath>
+     </assocwidget>
+     <assocwidget totalcounta="3" indexa="2" visibilityB="200" totalcountb="3" indexb="1" linewidth="none" widgetbid="1575" widgetaid="2106" xmi.id="2948" type="510" changeabilityA="900" changeabilityB="900" linecolor="none" visibilityA="200" >
+      <linepath>
+       <startpoint startx="489" starty="586" />
+       <endpoint endx="768" endy="470" />
+      </linepath>
+      <floatingtext usesdiagramfillcolour="1" width="46" usesdiagramusefillcolour="1" x="745" y="499" linewidth="none" posttext="" role="710" fillcolour="none" height="19" usefillcolor="1" pretext="+" isinstance="0" xmi.id="3222" text="region" font="Tahoma,8,-1,5,50,0,0,0,0,0" linecolor="none" />
+     </assocwidget>
+     <assocwidget totalcounta="2" indexa="1" totalcountb="3" indexb="1" linewidth="none" widgetbid="2045" widgetaid="14" xmi.id="3030" linecolor="none" >
+      <linepath>
+       <startpoint startx="732" starty="619" />
+       <endpoint endx="779" endy="708" />
+      </linepath>
+     </assocwidget>
+    </associations>
+   </diagram>
+  </diagrams>
+  <listview>
+   <listitem open="1" type="800" label="Views" >
+    <listitem open="1" type="801" label="Logical View" >
+     <listitem open="0" type="813" id="543" >
+      <listitem open="0" type="814" id="552" />
+      <listitem open="0" type="814" id="560" />
+      <listitem open="0" type="814" id="563" />
+     </listitem>
+     <listitem open="0" type="813" id="2106" >
+      <listitem open="0" type="814" id="2948" />
+     </listitem>
+     <listitem open="1" type="813" id="14" />
+     <listitem open="1" type="813" id="2177" />
+     <listitem open="0" type="813" id="1491" >
+      <listitem open="0" type="814" id="1559" />
+      <listitem open="0" type="814" id="1564" />
+      <listitem open="0" type="814" id="1569" />
+      <listitem open="0" type="814" id="1574" />
+     </listitem>
+     <listitem open="0" type="813" id="515" >
+      <listitem open="0" type="814" id="638" />
+      <listitem open="0" type="814" id="655" />
+      <listitem open="0" type="814" id="664" />
+     </listitem>
+     <listitem open="0" type="813" id="441" >
+      <listitem open="0" type="814" id="482" />
+     </listitem>
+     <listitem open="0" type="813" id="1705" >
+      <listitem open="0" type="814" id="1833" />
+      <listitem open="0" type="814" id="1838" />
+      <listitem open="0" type="814" id="1843" />
+      <listitem open="0" type="814" id="1848" />
+      <listitem open="0" type="814" id="1854" />
+      <listitem open="0" type="814" id="1859" />
+      <listitem open="0" type="814" id="1864" />
+     </listitem>
+     <listitem open="0" type="813" id="1650" >
+      <listitem open="0" type="814" id="1668" />
+      <listitem open="0" type="814" id="1674" />
+      <listitem open="0" type="814" id="1679" />
+      <listitem open="0" type="814" id="1684" />
+     </listitem>
+     <listitem open="1" type="813" id="2045" />
+     <listitem open="0" type="813" id="333" >
+      <listitem open="0" type="814" id="342" />
+      <listitem open="0" type="814" id="347" />
+      <listitem open="0" type="814" id="352" />
+      <listitem open="0" type="814" id="361" />
+      <listitem open="0" type="814" id="370" />
+      <listitem open="0" type="814" id="379" />
+      <listitem open="0" type="814" id="396" />
+      <listitem open="0" type="814" id="401" />
+     </listitem>
+     <listitem open="0" type="813" id="1575" >
+      <listitem open="0" type="814" id="1897" />
+      <listitem open="0" type="814" id="1907" />
+     </listitem>
+     <listitem open="0" type="813" id="426" >
+      <listitem open="0" type="814" id="716" />
+      <listitem open="0" type="814" id="719" />
+      <listitem open="0" type="814" id="723" />
+      <listitem open="0" type="814" id="736" />
+     </listitem>
+     <listitem open="1" type="813" id="44" />
+     <listitem open="0" type="813" id="15" >
+      <listitem open="0" type="814" id="142" />
+      <listitem open="0" type="814" id="155" />
+      <listitem open="0" type="814" id="160" />
+      <listitem open="0" type="814" id="174" />
+      <listitem open="0" type="814" id="183" />
+      <listitem open="0" type="814" id="192" />
+      <listitem open="0" type="814" id="209" />
+      <listitem open="0" type="814" id="214" />
+      <listitem open="0" type="814" id="229" />
+      <listitem open="0" type="814" id="234" />
+      <listitem open="0" type="814" id="252" />
+      <listitem open="0" type="814" id="262" />
+      <listitem open="0" type="815" id="102" />
+      <listitem open="0" type="815" id="111" />
+      <listitem open="0" type="815" id="126" />
+      <listitem open="0" type="815" id="197" />
+      <listitem open="0" type="815" id="204" />
+      <listitem open="0" type="815" id="243" />
+      <listitem open="0" type="815" id="272" />
+     </listitem>
+     <listitem open="0" type="813" id="16" >
+      <listitem open="0" type="815" id="18" />
+      <listitem open="0" type="815" id="21" />
+      <listitem open="0" type="815" id="27" />
+     </listitem>
+     <listitem open="0" type="813" id="17" >
+      <listitem open="0" type="815" id="33" />
+      <listitem open="0" type="815" id="64" />
+      <listitem open="0" type="815" id="73" />
+     </listitem>
+     <listitem open="1" type="813" id="161" />
+     <listitem open="1" type="813" id="65" />
+     <listitem open="1" type="813" id="665" />
+     <listitem open="1" type="813" id="34" />
+     <listitem open="1" type="813" id="253" />
+     <listitem open="1" type="813" id="74" />
+     <listitem open="1" type="813" id="263" />
+     <listitem open="1" type="813" id="19" />
+     <listitem open="1" type="813" id="2837" />
+     <listitem open="0" type="813" id="1081" >
+      <listitem open="0" type="815" id="1099" />
+      <listitem open="0" type="815" id="1111" />
+      <listitem open="0" type="815" id="1170" />
+     </listitem>
+     <listitem open="1" type="813" id="48" />
+     <listitem open="0" type="830" label="Datatypes" >
+      <listitem open="1" type="829" id="22" />
+      <listitem open="1" type="829" id="5" />
+      <listitem open="1" type="829" id="4" />
+      <listitem open="1" type="829" id="7" />
+      <listitem open="1" type="829" id="6" />
+      <listitem open="1" type="829" id="2" />
+      <listitem open="1" type="829" id="9" />
+      <listitem open="1" type="829" id="8" />
+      <listitem open="1" type="829" id="13" />
+      <listitem open="1" type="829" id="10" />
+      <listitem open="1" type="829" id="12" />
+      <listitem open="1" type="829" id="11" />
+     </listitem>
+    </listitem>
+    <listitem open="1" type="802" label="Use Case View" />
+    <listitem open="1" type="821" label="Component View" />
+    <listitem open="1" type="827" label="Deployment View" />
+    <listitem open="1" type="836" label="Entity Relationship Model" />
+   </listitem>
+  </listview>
+  <codegeneration>
+   <codegenerator language="C++" />
+  </codegeneration>
+ </XMI.extensions>
+</XMI>
