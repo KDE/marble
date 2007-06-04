@@ -27,6 +27,8 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 {
     Q_UNUSED( seafile );
     Q_UNUSED( landfile );
+
+    m_showRelief = true;
 }
 
 void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, 
@@ -52,6 +54,8 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
     const float  bendReliefx = 0.41f * bendRelief;
     const float  bendReliefm = 0.941246f * bendRelief / bendReliefx;
 
+    const bool showRelief = m_showRelief;
+
     if ( radius * radius > imgradius ) {
         for (int y = 0; y < imgheight; ++y) {
 
@@ -68,7 +72,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
 
-                if ( emboss.gpuint.x1 > grey )
+                if ( showRelief == true && emboss.gpuint.x1 > grey )
                     bump = ( emboss.gpuint.x1 - grey ) & 0x0f;
                 else
                     bump = 0;
@@ -107,6 +111,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
             const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
 
             float  relief = imgrx - xleft + bendReliefm * dy ;
+ 
             for ( int x = xleft;
                   x < xright;
                   ++x, ++data, ++coastdata, relief-=1.0f )
@@ -118,7 +123,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
 
-                if ( emboss.gpuint.x1 > grey ) {
+                if ( showRelief == true && emboss.gpuint.x1 > grey ) {
                     bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
 
                     // Apply "spherical" bumpmapping 

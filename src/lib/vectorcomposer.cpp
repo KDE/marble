@@ -54,6 +54,12 @@ VectorComposer::VectorComposer()
     m_lakebrush = QBrush( QColor( 0, 0, 0 ) );
     m_borderpen.setStyle( Qt::SolidLine );
     m_borderpen.setColor( QColor( 0, 255, 0 ) );
+
+    m_showIceLayer = true;
+    m_showBorders = true;
+    m_showRivers = true;
+    m_showLakes = true;
+
 }
 
 
@@ -80,11 +86,17 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
     m_vectorMap -> setBrush( m_areabrush );
     m_vectorMap -> drawMap( origimg, false );
 
-    // Glaciers
-    m_vectorMap -> setzBoundingBoxLimit( 0.8 );
-    m_vectorMap -> setzPointLimit( 0.9 );
-    m_vectorMap -> createFromPntMap( m_glaciers, radius, rotAxis );
-    m_vectorMap -> setBrush( m_lakebrush );
+    if ( m_showIceLayer == true )
+    {
+        // Glaciers
+         m_vectorMap -> setzBoundingBoxLimit( 0.8 );
+         m_vectorMap -> setzPointLimit( 0.9 );
+         m_vectorMap -> createFromPntMap( m_glaciers, radius, rotAxis );
+         m_vectorMap -> setBrush( m_lakebrush );
+
+         m_vectorMap -> drawMap( origimg, false );
+    }
+    //	qDebug() << "TextureMap calculated nodes: " << vectormap->nodeCount();
 
     m_vectorMap -> drawMap( origimg, false );
     //	qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
@@ -94,66 +106,63 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
 void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius, 
                                     Quaternion& rotAxis)
 {
-
     // m_vectorMap -> clearNodeCount();
 
-    // Rivers
-    m_vectorMap -> setzBoundingBoxLimit( -1.0 );
-    m_vectorMap -> setzPointLimit( -1.0 );
-    m_vectorMap -> createFromPntMap( m_rivers, radius, rotAxis );
+    if ( m_showRivers == true )
+    {
+        // Rivers
+         m_vectorMap -> setzBoundingBoxLimit( -1.0 );
+         m_vectorMap -> setzPointLimit( -1.0 );
+         m_vectorMap -> createFromPntMap( m_rivers, radius, rotAxis );
 
-    m_vectorMap -> setPen( QColor( 99, 123, 255 ) );
-    m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> setPen( QColor( 99, 123, 255 ) );
+         m_vectorMap -> paintMap( painter, false );
+    }
 
-    // Countries
-    m_vectorMap -> setzBoundingBoxLimit( -1.0 );
-    m_vectorMap -> setzPointLimit( -1.0 );
+    if ( m_showBorders == true )
+    {
+        // Countries
+         m_vectorMap -> setzBoundingBoxLimit( -1.0 );
+         m_vectorMap -> setzPointLimit( -1.0 );
+         m_vectorMap -> createFromPntMap( m_countries, radius, rotAxis );
+        // QPen borderpen(QColor(242,187,136));
 
-    m_vectorMap -> createFromPntMap( m_countries, radius, rotAxis );
-    // QPen borderpen(QColor(242,187,136));
+        QPen  borderpen( QColor( 242, 155, 104 ) );
+        // borderpen.setStyle(Qt::DashLine);
 
-    QPen  borderpen( QColor( 242, 155, 104 ) );
-    // borderpen.setStyle(Qt::DashLine);
+         m_vectorMap -> setPen( borderpen );
+         m_vectorMap -> setBrush( Qt::NoBrush );
+         m_vectorMap -> paintMap( painter, false );
 
-    m_vectorMap -> setPen( borderpen );
-    m_vectorMap -> setBrush( Qt::NoBrush );
-    m_vectorMap -> paintMap( painter, false );
+        // US-States
+         m_vectorMap -> setzBoundingBoxLimit( -1.0 );
+         m_vectorMap -> setzPointLimit( -1.0 );
+         m_vectorMap -> createFromPntMap( m_usaStates, radius, rotAxis );
 
-    // US-States
-    m_vectorMap -> setzBoundingBoxLimit( -1.0 );
-    m_vectorMap -> setzPointLimit( -1.0 );
+        // QPen statepen(QColor(242,187,136));
+        QPen  statepen( QColor( 242, 155, 104 ) );
+        statepen.setStyle( Qt::DotLine );
+         m_vectorMap -> setPen( statepen );
+         m_vectorMap -> setBrush( Qt::NoBrush );
+         m_vectorMap -> paintMap( painter, false );
+    }
 
-    m_vectorMap -> createFromPntMap( m_usaStates, radius, rotAxis );
-    // QPen statepen(QColor(242,187,136));
-    QPen  statepen( QColor( 242, 155, 104 ) );
-    statepen.setStyle( Qt::DotLine );
-    m_vectorMap -> setPen( statepen );
-    m_vectorMap -> setBrush( Qt::NoBrush );
-    m_vectorMap -> paintMap( painter, false );
+    if ( m_showLakes == true )
+    {
+        // Lakes
+         m_vectorMap -> setzBoundingBoxLimit( 0.95 );
+         m_vectorMap -> setzPointLimit( 0.98 ); 
 
-    // Lakes
-    m_vectorMap -> setzBoundingBoxLimit( 0.95 );
-    m_vectorMap -> setzPointLimit( 0.98 ); 
+         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
+         m_vectorMap -> setPen( m_areapen );
+         m_vectorMap -> setBrush( QBrush( QColor( 214, 226, 255 ) ) );
+         m_vectorMap -> paintMap( painter, false );
+    }
 
-    m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
-    m_vectorMap -> setPen( m_areapen );
-    m_vectorMap -> setBrush( QBrush( QColor( 214, 226, 255 ) ) );
-    m_vectorMap -> paintMap( painter, false );
-
-#if 0
-    // Glaciers
-    m_vectorMap -> setzBoundingBoxLimit(0.8); 
-    m_vectorMap -> setzPointLimit(0.9); 
-
-    m_vectorMap -> createFromPntMap(m_glaciers,radius,rotAxis);
-    m_vectorMap -> setBrush(QColor(Qt::white));
-    m_vectorMap -> drawMap(origimg);
-#endif
     // qDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
 
-// void VectorComposer::resizeMap(const QImage* origimg){
 void VectorComposer::resizeMap(const QPaintDevice* origimg)
 {
     m_vectorMap->resizeMap( origimg );

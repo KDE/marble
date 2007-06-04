@@ -41,6 +41,8 @@ KAtlasMapScale::KAtlasMapScale( QObject* parent )
     m_bestdivisor   = 0;
     m_pixelinterval = 0;
     m_valueinterval = 0;
+
+    m_transparency = 192;
 }
 
 
@@ -57,11 +59,11 @@ QPixmap& KAtlasMapScale::drawScaleBarPixmap( int radius, int width )
     QPainter painter( &m_pixmap );
 	
     painter.setPen( QColor( Qt::black ) );
-    painter.setBrush( QColor( 192, 192, 192, 192 ) );
+    painter.setBrush( QColor( 192, 192, 192, m_transparency ));
+    painter.setRenderHint( QPainter::Antialiasing, false );
 
-    painter.translate( 0.5, 0.5 );
-    painter.drawRect( 0, 0, m_pixmap.width() - 1, m_pixmap.height() - 1 );
-    painter.translate( 4.5, 4.5 );
+    painter.drawRect( 1, 0, m_pixmap.width() - 2, m_pixmap.height() - 1 );
+    painter.translate( 5, 5 );
 
     paintScaleBar( &painter, radius, width );	
     return m_pixmap;

@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>524</width>
-    <height>544</height>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -57,16 +57,6 @@
      <property name="spacing" >
       <number>6</number>
      </property>
-     <item row="0" column="1" >
-      <widget class="QCheckBox" name="checkBox_3" >
-       <property name="text" >
-        <string>Show scale bar</string>
-       </property>
-       <property name="checked" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0" >
       <widget class="QCheckBox" name="checkBox" >
        <property name="text" >
@@ -78,6 +68,16 @@
       </widget>
      </item>
      <item row="1" column="0" >
+      <widget class="QCheckBox" name="checkBox_9" >
+       <property name="text" >
+        <string>Show borders</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" >
       <widget class="QCheckBox" name="checkBox_2" >
        <property name="text" >
         <string>Show grid</string>
@@ -87,10 +87,70 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1" >
+     <item row="3" column="2" >
+      <widget class="QCheckBox" name="checkBox_10" >
+       <property name="text" >
+        <string>Quick and Dirty</string>
+       </property>
+       <property name="checked" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2" >
       <widget class="QCheckBox" name="checkBox_4" >
        <property name="text" >
         <string>Show wind rose</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" >
+      <widget class="QCheckBox" name="checkBox_7" >
+       <property name="text" >
+        <string>Show ice / snow</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2" >
+      <widget class="QCheckBox" name="checkBox_6" >
+       <property name="text" >
+        <string>Show elevation model</string>
+       </property>
+       <property name="checked" >
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1" >
+      <widget class="QCheckBox" name="checkBox_8" >
+       <property name="text" >
+        <string>Show rivers / lakes</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" >
+      <widget class="QCheckBox" name="checkBox_5" >
+       <property name="text" >
+        <string>Show relief</string>
+       </property>
+       <property name="checked" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2" >
+      <widget class="QCheckBox" name="checkBox_3" >
+       <property name="text" >
+        <string>Show scale bar</string>
        </property>
        <property name="checked" >
         <bool>true</bool>
@@ -117,7 +177,7 @@
      <item>
       <widget class="QLabel" name="label_2" >
        <property name="text" >
-        <string>     </string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -140,14 +200,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MarbleNavigator</class>
-   <extends>QWidget</extends>
-   <header>MarbleNavigator.h</header>
-  </customwidget>
-  <customwidget>
    <class>MarbleWidget</class>
    <extends>QWidget</extends>
    <header>MarbleWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MarbleNavigator</class>
+   <extends>QWidget</extends>
+   <header>MarbleNavigator.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -287,8 +347,8 @@
    <slot>setShowPlaces(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>80</x>
-     <y>477</y>
+     <x>101</x>
+     <y>414</y>
     </hint>
     <hint type="destinationlabel" >
      <x>219</x>
@@ -304,7 +364,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
-     <y>477</y>
+     <y>414</y>
     </hint>
     <hint type="destinationlabel" >
      <x>284</x>
@@ -319,8 +379,8 @@
    <slot>setShowGrid(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>121</x>
-     <y>505</y>
+     <x>129</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel" >
      <x>169</x>
@@ -336,7 +396,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
-     <y>505</y>
+     <y>442</y>
     </hint>
     <hint type="destinationlabel" >
      <x>323</x>
@@ -355,8 +415,120 @@
      <y>217</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>148</x>
-     <y>526</y>
+     <x>107</x>
+     <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_5</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowRelief(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>343</x>
+     <y>414</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>381</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_6</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowElevationModel(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>513</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>513</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_9</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowBorders(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>99</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>197</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_7</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowIceLayer(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>343</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>412</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_8</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowLakes(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>343</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>451</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_8</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setShowRivers(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>337</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>481</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_10</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MarbleWidget</receiver>
+   <slot>setQuickDirty(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>398</x>
+     <y>485</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>345</x>
+     <y>337</y>
     </hint>
    </hints>
   </connection>

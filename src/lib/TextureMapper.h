@@ -57,6 +57,9 @@ class TextureMapper
     void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis);
     void selectTileLevel(const int& radius);
 
+    bool interlaced() const { return m_interlaced; }
+    void setInterlaced( bool enabled ) { m_interlaced = enabled; }
+
  protected:
     void pixelValueApprox(const float& lng, const float& lat, 
                           QRgb* scanLine);
@@ -113,6 +116,8 @@ class TextureMapper
 
     TextureTile  *m_tile;
     int           m_tileLevel;
+
+    bool    m_interlaced;
 };
 
 

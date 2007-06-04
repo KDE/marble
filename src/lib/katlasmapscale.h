@@ -44,6 +44,9 @@ class KAtlasMapScale : public QObject
     void      paintScaleBar( QPainter*, int, int );
     QPixmap&  drawScaleBarPixmap( int, int );
 
+    int transparency() const { return m_transparency; }
+    void setTransparency( int transparency ) { m_transparency = transparency; m_scalebarwidth = -1; }
+
  public slots:
     void setScaleBarWidth( int scalebarwidth ) {
         m_scalebarwidth = scalebarwidth;
@@ -69,6 +72,8 @@ class KAtlasMapScale : public QObject
     int      m_valueinterval;
 
     QString  m_unit;
+
+    int m_transparency;
 };
 
 

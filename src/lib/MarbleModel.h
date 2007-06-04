@@ -124,18 +124,26 @@ class MARBLE_EXPORT MarbleModel : public QObject
     bool screenCoordinates( const float lng, const float lat, int& x, int& y );
 
     bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_planetAxis == m_planetAxisUpdated ); }
+    void setNeedsUpdate() { m_justModified = true; }
 
     void addPlaceMarkFile( const QString& filename );
 
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
-    PlaceContainer* placeContainer(){ return m_placecontainer ; }
+    PlaceContainer* placeContainer(){ return m_placecontainer; }
+
+    VectorComposer* vectorComposer(){ return m_veccomposer; }
+
+    TextureColorizer* textureColorizer(){ return m_texcolorizer; }
+
+    TextureMapper* textureMapper(){ return m_texmapper; }
 
     /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
-    bool  showGrid(){ 
+    bool  showGrid() const
+    {
         return m_showGrid;
     }
 
@@ -143,7 +151,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
-    void setShowGrid( bool visible ){ 
+    void setShowGrid( bool visible )
+    { 
         m_showGrid = visible;
     }
 
@@ -151,7 +160,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Return whether the place marks are visible.
      * @return The place mark visibility.
      */
-    bool  showPlaceMarks(){ 
+    bool  showPlaceMarks() const
+    { 
         return m_showPlaceMarks;
     }
 
@@ -159,8 +169,27 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Set whether the place mark overlay is visible
      * @param  visible  visibility of the place marks
      */
-    void setShowPlaceMarks( bool visible ){ 
+    void setShowPlaceMarks( bool visible )
+    { 
         m_showPlaceMarks = visible;
+    }
+
+    /**
+     * @brief  Return whether the elevation model is visible.
+     * @return The elevation model visibility.
+     */
+    bool  showElevationModel() const
+    { 
+        return m_showElevationModel;
+    }
+
+    /**
+     * @brief  Set whether the elevation model is visible
+     * @param  visible  visibility of the elevation model
+     */
+    void setShowElevationModel( bool visible )
+    { 
+        m_showElevationModel = visible;
     }
 
  signals:
@@ -197,6 +226,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     bool          m_showGrid;
     bool          m_showPlaceMarks;
+    bool          m_showElevationModel;
 
 };
 

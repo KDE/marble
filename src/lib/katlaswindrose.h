@@ -34,6 +34,9 @@ class KAtlasWindRose : public QObject
 
     QPixmap  &drawWindRosePixmap( int, int, int );
 
+    int transparency() const { return m_transparency; }
+    void setTransparency( int transparency ) { m_transparency = transparency; m_width = -1; }
+
  protected:
 
     QSvgRenderer  *m_svgobj;
@@ -44,6 +47,8 @@ class KAtlasWindRose : public QObject
     int            m_fontwidth;
     int            m_fontheight;
     int            m_polarity;
+
+    int m_transparency;
 };
 
 

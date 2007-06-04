@@ -42,6 +42,7 @@ MarbleModel::MarbleModel( QWidget* parent )
 
     m_showGrid = true;
     m_showPlaceMarks = true;
+    m_showElevationModel = false;
 
     m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
 
@@ -186,7 +187,7 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
 
         m_texmapper->mapTexture( m_canvasimg, m_radius, m_planetAxis );
 
-        if ( m_maptheme->bitmaplayer().dem == "true" ){
+        if ( m_showElevationModel == false && m_maptheme->bitmaplayer().dem == "true" ){
             m_coastimg->fill(Qt::transparent);
 
             // Create VectorMap

@@ -53,7 +53,7 @@ class KAtlasTileCreatorDialog;
  * mouse in the widget. The zoom value is not tied to any units, but
  * is an abstract value without any physical meaning. A value around
  * 1000 shows the full globe in a normal-sized window. Higher zoom
- * values gives a more zoomed-in view.
+ * values give a more zoomed-in view.
  *
  * The MarbleWidget needs to be provided with a data model to
  * work. This model is contained in the MarbleModel class. The widget
@@ -99,6 +99,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showWindRose READ showWindRose WRITE setShowWindRose)
     Q_PROPERTY(bool showGrid READ showGrid WRITE setShowGrid)
     Q_PROPERTY(bool showPlaces READ showPlaces WRITE setShowPlaces)
+
+    Q_PROPERTY(bool showRelief READ showRelief WRITE setShowRelief)
+    Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
+
+    Q_PROPERTY(bool showIceLayer READ showIceLayer WRITE setShowIceLayer)
+    Q_PROPERTY(bool showBorders READ showBorders WRITE setShowBorders)
+    Q_PROPERTY(bool showRivers READ showRivers WRITE setShowRivers)
+    Q_PROPERTY(bool showLakes READ showLakes WRITE setShowLakes)
+
+    Q_PROPERTY(bool quickDirty READ quickDirty WRITE setQuickDirty)
 
  public:
     /**
@@ -191,7 +201,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
-    bool  showScaleBar(){ 
+    bool  showScaleBar() const
+    { 
         return m_showScaleBar;
     }
 
@@ -199,7 +210,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
-    bool  showWindRose(){ 
+    bool  showWindRose() const
+    { 
         return m_showWindRose;
     }
 
@@ -207,7 +219,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
-    bool  showGrid(){ 
+    bool  showGrid() const
+    { 
         return m_model->showGrid();
     }
 
@@ -215,8 +228,72 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return whether the place marks are visible.
      * @return The place mark visibility.
      */
-    bool  showPlaces(){ 
+    bool  showPlaces() const
+    { 
         return m_model->showPlaceMarks();
+    }
+
+    /**
+     * @brief  Return whether the relief is visible.
+     * @return The relief visibility.
+     */
+    bool  showRelief() const
+    { 
+        return m_model->textureColorizer()->showRelief();
+    }
+
+    /**
+     * @brief  Return whether the elevation model is visible.
+     * @return The elevation model visibility.
+     */
+    bool  showElevationModel() const
+    { 
+        return m_model->showElevationModel();
+    }
+
+    /**
+     * @brief  Return whether the ice layer is visible.
+     * @return The ice layer visibility.
+     */
+    bool  showIceLayer() const
+    { 
+        return m_model->vectorComposer()->showIceLayer();
+    }
+
+    /**
+     * @brief  Return whether the borders are visible.
+     * @return The border visibility.
+     */
+    bool  showBorders() const
+    { 
+        return m_model->vectorComposer()->showBorders();
+    }
+
+    /**
+     * @brief  Return whether the rivers are visible.
+     * @return The rivers' visibility.
+     */
+    bool  showRivers() const
+    { 
+        return m_model->vectorComposer()->showRivers();
+    }
+
+    /**
+     * @brief  Return whether the lakes are visible.
+     * @return The lakes' visibility.
+     */
+    bool  showLakes() const
+    { 
+        return m_model->vectorComposer()->showLakes();
+    }
+
+    /**
+     * @brief  Return whether quick and dirty rendering is enabled.
+     * @return Quick and dirty rendering
+     */
+    bool  quickDirty() const
+    { 
+        return m_model->textureMapper()->interlaced();
     }
 
  public slots:
@@ -310,9 +387,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  setMapTheme( const QString& maptheme )
     {
-	m_model->setMapTheme( maptheme );
+    	m_model->setMapTheme( maptheme );
 		
-	// FIXME: Force update...
+    	// FIXME: Force update...
     }
 
     /**
@@ -348,6 +425,78 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setShowPlaces( bool visible ){ 
         m_model->setShowPlaceMarks( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the relief is visible
+     * @param  visible  visibility of the relief
+     */
+    void setShowRelief( bool visible ){ 
+        m_model->textureColorizer()->setShowRelief( visible );
+        m_model->setNeedsUpdate();
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the elevation model is visible
+     * @param  visible  visibility of the elevation model
+     */
+    void setShowElevationModel( bool visible ){ 
+        m_model->setShowElevationModel( visible );
+        m_model->setNeedsUpdate();
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the ice layer is visible
+     * @param  visible  visibility of the ice layer
+     */
+    void setShowIceLayer( bool visible ){ 
+        m_model->vectorComposer()->setShowIceLayer( visible );
+        m_model->setNeedsUpdate();
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the borders visible
+     * @param  visible  visibility of the borders
+     */
+    void setShowBorders( bool visible ){ 
+        m_model->vectorComposer()->setShowBorders( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the rivers are visible
+     * @param  visible  visibility of the rivers
+     */
+    void setShowRivers( bool visible ){ 
+        m_model->vectorComposer()->setShowRivers( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the lakes are visible
+     * @param  visible  visibility of the lakes
+     */
+    void setShowLakes( bool visible ){ 
+        m_model->vectorComposer()->setShowLakes( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether for rendering quick and dirty algorithms should be used 
+     * @param  enabled  Enable quick and dirty rendering
+     */
+    void setQuickDirty( bool enabled ){
+        // Interlace texture mapping 
+        m_model->textureMapper()->setInterlaced( enabled );
+        m_model->setNeedsUpdate();
+
+        int transparency = enabled ? 255 : 192;
+        m_windrose.setTransparency( transparency );
+        m_mapscale.setTransparency( transparency );
         repaint();
     }
 

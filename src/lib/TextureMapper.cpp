@@ -91,6 +91,8 @@ TextureMapper::TextureMapper( const QString& path )
 
     m_tile = 0;
     m_tileLevel = 0;
+
+    m_interlaced = false;
 }
 
 
@@ -227,11 +229,10 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     matrix  planetAxisMatrix;
     planetAxis.toMatrix( planetAxisMatrix );
 
-#ifndef INTERLACE
-    for ( m_y = yTop; m_y < yBottom; ++m_y ) {
-#else
-    for ( m_y = yTop; m_y < yBottom -1; m_y+=2 ) {
-#endif
+    const int skip = ( m_interlaced == true ) ? 1 : 0;
+
+    for ( m_y = yTop; m_y < yBottom - skip ; m_y+=( 1 + skip ) ) {
+
         // Evaluate coordinates for the 3D position vector of the current pixel
         m_qy = radiusf * (float)( m_y - m_imageHalfHeight );
         m_qr = 1.0f - m_qy * m_qy;
@@ -248,9 +249,11 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
                              ? xLeft + rx + rx : 2 * m_imageHalfWidth );
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
-#ifdef INTERLACE
-        m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
-#endif
+
+        if ( m_interlaced == true )
+        {
+            m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
+        }
 
         int  xIpLeft  = 1;
         int  xIpRight = (int)(2 * m_imageHalfWidth * m_ninv) * m_n; 
@@ -316,12 +319,15 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             // xIpLeft to xIpRight
             if ( m_interpolate ) {
                 pixelValueApprox( lng, lat, m_scanLine );
-#ifdef INTERLACE
-                for ( int j = 0; j < m_n - 1; ++j ) {
-                    fastScanLine[j]=scanLine[j];
+
+                if ( m_interlaced == true )
+                {
+                    for ( int j = 0; j < m_n - 1; ++j ) {
+                        m_fastScanLine[j] = m_scanLine[j];
+                    }
+                    m_fastScanLine += ( m_n - 1 );
                 }
-                m_fastScanLine += ( m_n - 1 );
-#endif
+
                 m_scanLine += ( m_n - 1 );
             }
 
@@ -331,10 +337,13 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
  
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
-#ifdef INTERLACE
-            *m_fastScanLine = *m_scanLine;
-            ++m_fastScanLine;
-#endif
+
+            if ( m_interlaced == true )
+            {
+               *m_fastScanLine = *m_scanLine;
+               ++m_fastScanLine;
+            }
+
             ++m_scanLine;
         }
     }

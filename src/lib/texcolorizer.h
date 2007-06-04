@@ -46,8 +46,26 @@ class TextureColorizer
     virtual ~TextureColorizer(){}
     void colorize(QImage*, const QImage*, const int&);
 
+    /**
+     * @brief  Return whether the coordinate grid is visible.
+     * @return The coordinate grid visibility.
+     */
+    bool  showRelief() const
+    { 
+        return m_showRelief;
+    }
+
+    /**
+     * @brief  Set whether the coordinate grid overlay is visible
+     * @param  visible  visibility of the coordinate grid
+     */
+    void setShowRelief( bool visible ){ 
+        m_showRelief = visible;
+    }
+
  private:
     static const uint  texturepalette[][512];
+    bool m_showRelief;
 };
 
 

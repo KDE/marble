@@ -39,6 +39,8 @@ KAtlasWindRose::KAtlasWindRose(QObject* parent)
                                  this );
 
     m_polarity = 1;
+
+    m_transparency = 192;
 }
 
 
@@ -68,7 +70,9 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
 
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( Qt::black );
-    painter.setBrush( QColor( 192, 192, 192, 192 ));
+
+    painter.setBrush( QColor( 192, 192, 192, m_transparency ));
+
 
     QString dirstr = tr( "N" );
     if ( polarity == 1 ) 
