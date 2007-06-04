@@ -1,8 +1,20 @@
+2007-06-04    <ingwa@dhcp-254-139.lkpg.cendio.se>
+
+	Clean up 
+	* src/lib/vectorcomposer.{h,cpp}: use the m_ convention everywhere.
+
 2007-06-04  Murad Tagirov  <tmurad@gmail.com>
     Updated class diagram
     Added folder for KML objects relates classes
     Added base classes for KML: KMLObject, KMLObject
 
+Murad, this should look like:
+
+	Add initial KML classes
+	* src/lib/kml: new subdirectory
+	* src/lib/kml/KMLObject.{h,cpp}: new file
+	* src/lib/kml/KMLFeature.{h,cpp}: new file
+	
 2007-06-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve apidox

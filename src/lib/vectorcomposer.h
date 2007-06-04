@@ -41,27 +41,27 @@ class VectorComposer
     VectorComposer();
     virtual ~VectorComposer(){};
 
-    void drawTextureMap(QPaintDevice*, const int&, Quaternion&);
-    void paintVectorMap(ClipPainter*, const int&, Quaternion&);
-    void resizeMap(const QPaintDevice *);
+    void  drawTextureMap(QPaintDevice*, const int&, Quaternion&);
+    void  paintVectorMap(ClipPainter*, const int&, Quaternion&);
+    void  resizeMap(const QPaintDevice *);
 
  private:
-    PntMap *pcoast;
+    VectorMap  *m_vectorMap;
 
-    PntMap *pisland;
-    PntMap *plake;
-    PntMap *pglacier;
-    PntMap *priver;
+    PntMap     *m_coastLines;
 
-    PntMap *pborder;            // The country borders
-    PntMap *pusa;               // The states of the USA
+    PntMap     *m_islands;
+    PntMap     *m_lakes;
+    PntMap     *m_glaciers;
+    PntMap     *m_rivers;
 
-    VectorMap  *vectormap;
+    PntMap     *m_countries;    // The country borders
+    PntMap     *m_usaStates;    // The states of the USA
 
     QPen        m_areapen;
+    QBrush      m_areabrush;
     QPen        m_riverpen;
     QPen        m_borderpen;
-    QBrush      m_areabrush;
     QBrush      m_lakebrush;
 
     QVector<qreal> m_dashes;

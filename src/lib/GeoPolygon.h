@@ -78,6 +78,11 @@ class GeoPolygon : public GeoPoint::Vector
 };
 
 
+/*
+ * A PntMap is a collection of GeoPolygons, i.e. a complete map of vectors.
+ *
+ * FIXME: Rename it (into GeoPolygonMap?)
+ */
 
 class PntMap : public GeoPolygon::PtrVector
 {
