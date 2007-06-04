@@ -69,11 +69,11 @@ set(marblewidget_SRCS
            vectormap.cpp
            xmlhandler.cpp
 )
-MESSAGE( STATUS ${marblewidget_SRCS} )
+MESSAGE( STATUS "${marblewidget_SRCS}" )
 
 set (marblewidget_UI katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
 )
-MESSAGE( STATUS ${marble_UI} )
+MESSAGE( STATUS "${marble_UI}" )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 
