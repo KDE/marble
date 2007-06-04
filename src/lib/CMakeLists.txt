@@ -22,7 +22,7 @@ if (QTONLY)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2)
   endif(NOT WIN32)
   include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
 endif (QTONLY)
@@ -68,6 +68,8 @@ set(marblewidget_SRCS
            vectorcomposer.cpp
            vectormap.cpp
            xmlhandler.cpp
+           kml/KMLObject.cpp
+           kml/KMLFeature.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 

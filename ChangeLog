@@ -1,3 +1,8 @@
+2007-06-04  Murad Tagirov  <tmurad@gmail.com>
+    Updated class diagram
+    Added folder for KML objects relates classes
+    Added base classes for KML: KMLObject, KMLObject
+
 2007-06-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve apidox
@@ -8,7 +13,7 @@
 
 	Remove #ifndef Q_OS_MACX surrounding #include .moc
 	* Almost all files: Remove surrounding #nfndef
-	
+
 2007-06-04  Torsten Rahn  <rahn@kde.org>
 
 	* Adding more options for the Qt-Designer plugin
@@ -56,7 +61,7 @@
 	(MainWindow): Show initial zoom level
 	* src/katlascontrol.h (marbleWidget): New method
 	* src/lib/MarbleWidget.h (zoom): New method.
-	
+
 2007-05-31  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove worthless APIDOX
@@ -77,7 +82,7 @@
 	src/TextureTile.h:
 	Remove apidox only consisting of @author so that the resulting
 	output only contains actual information.
-	
+
 	Add APIDOX
 	* src/MarbleWidget.h (class MarbleWidget): Add class docs and some
 	method docs.
@@ -125,7 +130,7 @@ Some fixes:
 	* src/TileLoader.cpp (loadTile): Connect with parameter QString &
 
 	Fix Krazy issue: Proper include directives
-	* tools/palettegen/palettegen.cpp: 
+	* tools/palettegen/palettegen.cpp:
 	* tools/texissor/texissor.cpp: Fix includes
 
 2007-05-27  Torsten Rahn  <rahn@kde.org>
@@ -136,7 +141,7 @@ Some fixes:
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename katlasview.{h,cpp} into MarbleWidget
-	* src/katlasview.cpp -> src/MarbleWidget.cpp: 
+	* src/katlasview.cpp -> src/MarbleWidget.cpp:
 	src/katlasview.h   -> src/MarbleWidget.h
 	src/katlascontrol.h,          src/katlascontrol.cpp,
 	src/katlasviewinputhandler.h, src/katlasviewinputhandler.cpp,
@@ -162,7 +167,7 @@ Some fixes:
 
 	Krazy codechecks
 	* src/*.{h,cpp}: Add license and copyright status
-	
+
 2007-05-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
@@ -183,7 +188,7 @@ Some fixes:
 
 	Cleanup
 	* src/katlasviewinputhandler.cpp (*): Clean
-	
+
 	Cleanup
 	* src/TileLoader.cpp,   src/HttpDownloadManager.cpp
 	src/katlastoolbox.cpp,  src/measuretool.cpp,
@@ -197,7 +202,7 @@ Some fixes:
 
 	Cleanup
 	* src/katlasthemeselectview.{h,cpp}: Clean
-	
+
 15.05.07 - tackat
 	- Made changes according to Krazy check
 	- added incomplete HttpDownloadManager
@@ -212,15 +217,15 @@ Some fixes:
 	- Cleaned searchcombobox.{h,cpp}
 	- Cleaned searchlistview.{h,cpp}
 09.05.07 - tackat
-    - Updated marble.desktop file 
+    - Updated marble.desktop file
     - Changes in DESIGN and TODO
 
 09.05.07 - tackat
-    - Marble got Tooltips and WhatsThis now. 
+    - Marble got Tooltips and WhatsThis now.
     - Applied patch by Ralf Habacker for improved icon support in Windows
 
 08.05.07 - tackat
-    - Marble got a docbook-handbook now. 
+    - Marble got a docbook-handbook now.
 
 07.05.07 - tackat
     - Make KMarble compile again (KMainWindow -> KXmlGuiWindow)
@@ -233,7 +238,7 @@ Some fixes:
 	Cleaning: TextureMapper: use m_ for all members + getFoo() -> foo()
 	Cleaning: KAtlasView:    use m_ for all members + getFoo() -> foo()
 	Cleaning: KAtlasGlobe:   use m_ for all members.
-	
+
 05.05.07 - tackat
 	Added the KDE interface
 
@@ -247,7 +252,7 @@ Some fixes:
 
 26.04.07 - ingwa
 	Cleaned tilescissor.{h,cpp}
-	
+
 25.04.07 - ingwa
 	Lots of small cleaning
 	Cleaned placemarkmodel.{h,cpp}
@@ -256,12 +261,12 @@ Some fixes:
 	Fixed typo in MANIFESTO.txt
 	Cleaned placemarkpainter.{h,cpp}
 	Cleaned placemarkmanager.{h,cpp}
-	
+
 22.04.07 - ingwa
 	Cleaned placemark.{h,cpp}
 	Cleaned placecontainer.{h,cpp}
 	Cleaned vectorcomposer.{h,cpp}
-	
+
 22.04.07 - ingwa
 	First draft of the DESIGN file with headings, but lots of missing
 	contents.
