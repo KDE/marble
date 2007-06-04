@@ -101,6 +101,4 @@ QString MarbleWidgetPlugin::includeFile() const
 
 Q_EXPORT_PLUGIN2(MarbleWidgetPlugin, MarbleWidgetPlugin)
 
-#ifndef Q_OS_MACX
 #include "MarbleWidgetPlugin.moc"
-#endif

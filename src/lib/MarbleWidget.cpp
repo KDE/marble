@@ -407,6 +407,4 @@ int MarbleWidget::toLogScale(int zoom)
     return zoom;
 }
 
-#ifndef Q_OS_MACX
 #include "MarbleWidget.moc"
-#endif

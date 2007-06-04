@@ -154,6 +154,4 @@ void MainWindow::copyMap()
 }
 
 
-#ifndef Q_OS_MACX
 #include "KdeMainWindow.moc"
-#endif

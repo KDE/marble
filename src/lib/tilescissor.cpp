@@ -305,6 +305,4 @@ void TileScissor::createTiles()
 }
 
 
-#ifndef Q_OS_MACX
 #include "tilescissor.moc"
-#endif

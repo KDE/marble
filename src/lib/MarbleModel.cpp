@@ -357,6 +357,4 @@ QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
     return m_placemarkpainter->whichPlaceMarkAt( curpos );
 }
 
-#ifndef Q_OS_MACX
 #include "MarbleModel.moc"
-#endif

@@ -233,6 +233,4 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 }
 
 
-#ifndef Q_OS_MACX
 #include "TileLoader.moc"
-#endif

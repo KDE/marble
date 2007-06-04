@@ -104,6 +104,4 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlaswindrose.moc"
-#endif

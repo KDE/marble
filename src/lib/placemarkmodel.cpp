@@ -326,6 +326,4 @@ QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role,
 }
 
 
-#ifndef Q_OS_MACX
 #include "placemarkmodel.moc"
-#endif

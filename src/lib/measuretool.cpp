@@ -247,6 +247,4 @@ bool MeasureTool::testbug()
 }
 
 
-#ifndef Q_OS_MACX
 #include "measuretool.moc"
-#endif

@@ -84,6 +84,4 @@ void KAtlasControl::moveDown()
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlascontrol.moc"
-#endif

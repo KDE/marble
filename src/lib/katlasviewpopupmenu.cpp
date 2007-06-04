@@ -14,10 +14,6 @@
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
-#ifndef Q_OS_MACX
-#include "katlasviewpopupmenu.moc"
-#endif
-
 #include "katlasaboutdialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -147,6 +143,5 @@ void KAtlasViewPopupMenu::slotAboutDialog()
 }
 
 
-#ifndef Q_OS_MACX
-#include "katlasaboutdialog.moc"
-#endif
+#include "katlasviewpopupmenu.moc"
+

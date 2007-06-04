@@ -13,9 +13,6 @@
 
 #include <QtCore/QDebug>
 
-#ifndef Q_OS_MACX
-#include "katlasviewinputhandler.moc"
-#endif
 
 #include "GeoPoint.h"
 #include "Quaternion.h"
@@ -272,3 +269,6 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             return false;
     }
 }
+
+#include "katlasviewinputhandler.moc"
+

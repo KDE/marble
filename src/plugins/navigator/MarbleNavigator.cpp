@@ -77,6 +77,4 @@ void MarbleNavigator::resizeEvent ( QResizeEvent * )
 } 
 
 
-#ifndef Q_OS_MACX
 #include "MarbleNavigator.moc"
-#endif

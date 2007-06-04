@@ -49,3 +49,5 @@ KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
     }
 }
 
+#include "katlasaboutdialog.moc"
+

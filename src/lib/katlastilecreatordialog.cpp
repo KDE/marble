@@ -39,6 +39,4 @@ void KAtlasTileCreatorDialog::setSummary( const QString& name,
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlastilecreatordialog.moc"
-#endif

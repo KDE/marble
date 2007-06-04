@@ -170,6 +170,4 @@ void KAtlasMapScale::calcScaleBar()
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlasmapscale.moc"
-#endif

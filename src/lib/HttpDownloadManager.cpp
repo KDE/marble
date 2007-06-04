@@ -74,7 +74,4 @@ void HttpDownloadManager::activateJobs()
     }
 }
 
-
-#ifndef Q_OS_MACX
 #include "HttpDownloadManager.moc"
-#endif

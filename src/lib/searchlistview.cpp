@@ -48,6 +48,4 @@ void SearchListView::selectItem(const QString& text)
 }
 
 
-#ifndef Q_OS_MACX
 #include "searchlistview.moc"
-#endif

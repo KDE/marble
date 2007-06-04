@@ -168,6 +168,4 @@ void MainWindow::aboutMarble()
 //    dlg.exec();
 }
 
-#ifndef Q_OS_MACX
 #include "QtMainWindow.moc"
-#endif

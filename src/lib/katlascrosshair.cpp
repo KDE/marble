@@ -38,6 +38,4 @@ void KAtlasCrossHair::paintCrossHair( QPainter* painter, int width, int height)
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlascrosshair.moc"
-#endif

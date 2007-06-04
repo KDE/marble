@@ -59,6 +59,4 @@ void KAtlasFlag::slotDrawFlag()
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlasflag.moc"
-#endif

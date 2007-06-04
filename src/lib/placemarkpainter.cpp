@@ -404,6 +404,4 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
 }
 
 
-#ifndef Q_OS_MACX
 #include "placemarkpainter.moc"
-#endif

@@ -177,6 +177,4 @@ void TextureTile::slotLoadTile( const QString& path )
 }
 
 
-#ifndef Q_OS_MACX
 #include "TextureTile.moc"
-#endif

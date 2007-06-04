@@ -159,6 +159,4 @@ void MarbleControlBox::search()
 }
 
 
-#ifndef Q_OS_MACX
 #include "MarbleControlBox.moc"
-#endif

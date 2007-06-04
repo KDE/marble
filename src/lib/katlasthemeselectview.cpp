@@ -61,6 +61,4 @@ void KAtlasThemeSelectView::selectedMapTheme( QModelIndex index )
 }
 
 
-#ifndef Q_OS_MACX
 #include "katlasthemeselectview.moc"
-#endif

@@ -287,6 +287,4 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
 }
 
 
-#ifndef Q_OS_MACX
 #include "maptheme.moc"
-#endif
