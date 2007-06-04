@@ -29,7 +29,6 @@
 #include "placecontainer.h"
 
 
-class QAbstractItemModel;
 class QPainter;
 class PlaceContainer;
 

@@ -35,7 +35,6 @@
 class KAtlasViewInputHandler;
 class KAtlasViewPopupMenu;
 class TextureColorizer;
-class QAbstractItemModel;
 class MeasureTool;
 class KAtlasTileCreatorDialog;
 

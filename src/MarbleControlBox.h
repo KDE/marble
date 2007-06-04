@@ -31,7 +31,6 @@
 
 
 class MarbleWidget;
-class QStringListModel;
 
 /** 
  * @short A widget class that contains all sorts of controls for a
