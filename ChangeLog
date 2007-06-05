@@ -1,3 +1,8 @@
+2007-06-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy: 17: Check for inappropriate pass-by-value function args
+	* src/lib/kml/KMLFeature.{h,cpp}: Pass QStrings by reference
+
 2007-06-05  Torsten Rahn  <rahn@kde.org>
 
     * Adding more options for the Qt-Designer plugin
@@ -6,7 +11,7 @@
         - quick and dirty rendering
         - updated examples2.ui to reflect those changes 
 
-2007-06-04    <ingwa@dhcp-254-139.lkpg.cendio.se>
+2007-06-04  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
 	Krazy: 12. Check for proper include directives
 	* src/lib/marble_export.h: Fix include

@@ -9,16 +9,16 @@ class KMLFeature : public KMLObject
 {
  public:
     QString name() const;
-    void setName( QString value );
+    void setName( QString &value );
 
     QString address() const;
-    void setAddress( QString value);
+    void setAddress( QString &value);
 
     QString phoneNumber() const;
-    void setPhoneNumber( QString value);
+    void setPhoneNumber( QString &value);
 
     QString description() const;
-    void setDescription( QString value);
+    void setDescription( QString &value);
 
  protected:
     KMLFeature();
