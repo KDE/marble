@@ -39,7 +39,8 @@ QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
         QString checkBoxName = name.toString().section(":", 1, -1);
         if ( !m_checkBoxMap.contains( checkBoxName ) )
         {
-            m_checkBoxMap[ checkBoxName ] = false;
+            return QTextBrowser::loadResource( type, QUrl("./bitmaps/checkbox_disabled.png") );
+//            m_checkBoxMap[ checkBoxName ] = false;
         }
         if ( m_checkBoxMap.value( checkBoxName ) == true )
         {
@@ -61,8 +62,11 @@ void LegendBrowser::toggleCheckBoxStatus( QUrl link )
     if ( link.toString().startsWith( "checkbox:", Qt::CaseInsensitive ) )
     {
         QString checkBoxName = link.toString().section(":", 1, -1);
-        m_checkBoxMap[ checkBoxName ] = ( m_checkBoxMap.value( checkBoxName ) == true ) ? false : true;
-        sendSignals( checkBoxName, m_checkBoxMap.value( checkBoxName ) );
+        if ( m_checkBoxMap.contains( checkBoxName ) )
+        {
+            m_checkBoxMap[ checkBoxName ] = ( m_checkBoxMap.value( checkBoxName ) == true ) ? false : true;
+            sendSignals( checkBoxName, m_checkBoxMap.value( checkBoxName ) );
+        }
     }
 
     setSource( KAtlasDirs::path( "legend.html" ) );
