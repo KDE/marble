@@ -12,9 +12,13 @@ endif(WIN32)
 
 install (FILES
 legend.html
+legend.css
 DESTINATION ${data_dir})
 
 install (FILES
+bitmaps/checkbox_checked.png
+bitmaps/checkbox_empty.png
+bitmaps/checkbox_disabled.png
 bitmaps/city_1_orange.png
 bitmaps/city_1_red.png
 bitmaps/city_1_white.png

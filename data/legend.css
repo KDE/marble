@@ -1,0 +1,17 @@
+a:link
+{
+  color: #004faf;
+  text-decoration: none
+}
+
+a:visited
+{
+  color: #672967;
+  text-decoration: none
+}
+
+body
+{
+  background: #ffffff;
+  color: black
+}

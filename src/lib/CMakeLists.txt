@@ -46,6 +46,7 @@ set(marblewidget_SRCS
            katlasviewinputhandler.cpp
            katlasviewpopupmenu.cpp
            katlaswindrose.cpp
+           LegendBrowser.cpp
            maptheme.cpp
            MarbleModel.cpp
            MarbleWidget.cpp
@@ -142,6 +143,7 @@ install( FILES
            katlasviewinputhandler.h
            katlasviewpopupmenu.h
            katlaswindrose.h
+           LegendBrowser.h
            maptheme.h
            MarbleModel.h
            MarbleWidget.h

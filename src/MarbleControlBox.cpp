@@ -77,11 +77,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     connect( katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                  SIGNAL( selectMapTheme( const QString& ) ) );
-
-    legendBrowser->setSource( KAtlasDirs::path( "legend.html" ) );
-    QTextFrameFormat  format = legendBrowser->document()->rootFrame()->frameFormat();
-    format.setMargin(6);
-    legendBrowser->document()->rootFrame()->setFrameFormat( format );
 }
 
 
@@ -92,6 +87,12 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search in them.
     setLocations( m_widget->placeMarkModel() );
+
+    // Initialize the LegendBrowser
+
+    legendBrowser->setCheckedLocations( m_widget->showPlaces() );
+    legendBrowser->setCheckedBorders( m_widget->showBorders() );
+    legendBrowser->setCheckedWaterBodies( m_widget->showLakes() && m_widget->showRivers() );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         m_widget, SLOT(goHome()) );
@@ -110,6 +111,15 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 	    m_widget, SLOT(centerOn(const QModelIndex&)));
     connect(this,     SIGNAL(selectMapTheme(const QString&)),
 	    m_widget, SLOT(setMapTheme(const QString&)));
+
+    connect( legendBrowser, SIGNAL( toggledLocations( bool ) ),
+             m_widget, SLOT( setShowPlaces( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledBorders( bool ) ),
+             m_widget, SLOT( setShowBorders( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             m_widget, SLOT( setShowRivers( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             m_widget, SLOT( setShowLakes( bool ) ) );
 }
 
 

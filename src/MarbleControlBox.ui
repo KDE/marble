@@ -423,8 +423,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>112</height>
+        <width>185</width>
+        <height>471</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -438,7 +438,7 @@
         <number>6</number>
        </property>
        <item>
-        <widget class="QTextBrowser" name="legendBrowser" >
+        <widget class="LegendBrowser" name="legendBrowser" >
          <property name="horizontalScrollBarPolicy" >
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
@@ -494,14 +494,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KAtlasThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>lib/katlasthemeselectview.h</header>
-  </customwidget>
-  <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
    <header>lib/searchlistview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LegendBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>lib/LegendBrowser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KAtlasThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>lib/katlasthemeselectview.h</header>
   </customwidget>
  </customwidgets>
  <resources>
