@@ -16,6 +16,10 @@ Features
 
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       DONE
+ * No inline functions in the public classes                            INGE
+   - MarbleWidget                                                       --
+   - MarbleModel                                                        --
+   - MarbleControlBox                                                   --
  * d-pointerify the public classes                                      INGE
    - MarbleWidget                                                       --
    - MarbleControlBox                                                   --
@@ -23,6 +27,7 @@ Cleaning
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --
    - Only install MarbleWidget.h and MarbleControlBox.h                 --
+
 
 During the SoC projects (0.5)
 ----------------------------------------------------------------
@@ -92,8 +97,8 @@ Widget:
    the image, print it and copy it.
 
 Make it a KDE4 application as a real member of kdeedu.
- * KApplication                                                         Done
- * AboutData                                                            Done
+ * KApplication                                                         DONE
+ * AboutData                                                            DONE
  * KConfig XT                                                           TACK
  * Translation                                                          TACK
  * User docs                                                            DONE
