@@ -47,7 +47,7 @@ class KAtlasMapScale : public QObject
     int transparency() const { return m_transparency; }
     void setTransparency( int transparency ) { m_transparency = transparency; m_scalebarwidth = -1; }
 
- public slots:
+ public Q_SLOTS:
     void setScaleBarWidth( int scalebarwidth ) {
         m_scalebarwidth = scalebarwidth;
     }

@@ -45,11 +45,11 @@ class TextureTile : public QObject {
     uchar  **jumpTable8;
     uint   **jumpTable32;
 
- signals:
+ Q_SIGNALS:
     void downloadTile( QString & );
     void tileUpdate();
 
- public slots:
+ public Q_SLOTS:
     void slotLoadTile( const QString& path );
 
  protected:

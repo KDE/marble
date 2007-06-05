@@ -26,10 +26,10 @@ class TileScissor : public QObject
     TileScissor( const QString& prefix, const QString& installmap, 
                  const QString& dem );
 
- signals:
+ Q_SIGNALS:
     void  progress( int value );
 
- public slots:
+ public Q_SLOTS:
     void  createTiles();
 
  private:

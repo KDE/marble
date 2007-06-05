@@ -29,7 +29,7 @@ class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDia
  public:
     KAtlasTileCreatorDialog( QWidget *parent = 0 );
 
- public slots:
+ public Q_SLOTS:
     void setProgress( int progress );
     void setSummary( const QString& name, const QString& description );
 };

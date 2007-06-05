@@ -34,11 +34,11 @@ class TinyWebBrowser : public QTextBrowser
  public:
     TinyWebBrowser( QWidget* parent );
 
- public slots:
+ public Q_SLOTS:
     void setSource( const QUrl& url );
     void slotDownloadFinished( const QString&, bool );
 
- signals:
+ Q_SIGNALS:
     void statusMessage( QString );
 
  protected:

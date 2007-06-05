@@ -88,7 +88,7 @@ class TileLoader : public QObject {
     int           m_tileWidth;
     int           m_tileHeight;
 
-public slots:
+public Q_SLOTS:
     void message( const QString& test ){ qDebug() << test; }
 };
 

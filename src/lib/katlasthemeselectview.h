@@ -35,10 +35,10 @@ class MARBLE_EXPORT KAtlasThemeSelectView : public QListView
  protected:
     void resizeEvent(QResizeEvent* event);
 
- private slots:
+ private Q_SLOTS:
     void selectedMapTheme( QModelIndex index );
 
- signals:
+ Q_SIGNALS:
     void selectMapTheme( const QString& );
 };
 

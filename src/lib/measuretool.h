@@ -37,7 +37,7 @@ class MeasureTool : public QObject
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
     void  paintTotalDistanceLabel( ClipPainter*, int, int, float );
 
- public slots:
+ public Q_SLOTS:
     void addMeasurePoint( float lng, float lat ) {
         m_pMeasurePointList << new GeoPoint( lng, lat );
     }

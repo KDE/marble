@@ -25,10 +25,10 @@ class MARBLE_EXPORT SearchListView : public QListView
  public:
     SearchListView(QWidget*);
 
- signals:
+ Q_SIGNALS:
     void centerOn(const QModelIndex&);
 
- public slots:
+ public Q_SLOTS:
     void  selectItem(const QString&);
     void  activate() {
         if ( selectedIndexes().size() > 0 )

@@ -192,7 +192,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
         m_showElevationModel = visible;
     }
 
- signals:
+ Q_SIGNALS:
     void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
 

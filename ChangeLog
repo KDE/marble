@@ -1,5 +1,9 @@
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy 21: Check for signals: and slots:
+	* src/lib/*.h: switch Q_SIGNALS: for signals: and Q_SLOTS: for slots:
+	(This fixes 31 issues in one swoop!)
+	
 	Make it build again
 	* src/lib/LegendBrowser.h (LegendBrowser): Export the class, since
 	it's part of a library.

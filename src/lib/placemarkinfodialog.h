@@ -32,10 +32,10 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
  public:
     explicit PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
 
- signals:
+ Q_SIGNALS:
     void source( QUrl );
 
- public slots:
+ public Q_SLOTS:
     void setFlagLabel();
     void showMessage( QString text )
     {

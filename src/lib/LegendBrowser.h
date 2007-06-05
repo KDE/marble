@@ -32,17 +32,17 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
  public:
     LegendBrowser( QWidget* parent );
 
- public slots:
+ public Q_SLOTS:
     void setCheckedLocations( bool checked ){ m_checkBoxMap[ "locations" ] = checked; }
     void setCheckedBorders( bool checked ){ m_checkBoxMap[ "borders" ] = checked; }
     void setCheckedWaterBodies( bool checked ){ m_checkBoxMap[ "waterbodies" ] = checked; }
 
- signals:
+ Q_SIGNALS:
     void toggledLocations( bool );
     void toggledBorders( bool );
     void toggledWaterBodies( bool );
 
- private slots:
+ private Q_SLOTS:
     void toggleCheckBoxStatus( QUrl );
 
  protected:

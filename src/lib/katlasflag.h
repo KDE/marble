@@ -33,10 +33,10 @@ class KAtlasFlag : public QObject
     QPixmap& flag(){ return m_pixmap; }
     void setFlag( const QString& filename, const QSize& size );
 
- public slots:
+ public Q_SLOTS:
     void slotDrawFlag();
 
- signals:
+ Q_SIGNALS:
     void flagDone();
 
  private:

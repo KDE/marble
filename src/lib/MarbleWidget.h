@@ -296,7 +296,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
         return m_model->textureMapper()->interlaced();
     }
 
- public slots:
+ public Q_SLOTS:
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
@@ -530,7 +530,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void creatingTilesProgress( int progress );
 
- signals:
+ Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.
      */

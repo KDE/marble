@@ -40,7 +40,7 @@ class KAtlasViewInputHandler  : public QObject
 
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
 
- signals:
+ Q_SIGNALS:
     // Mouse button menus
     void lmbRequest( int, int );
     void rmbRequest( int, int );

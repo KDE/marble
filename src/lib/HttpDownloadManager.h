@@ -80,7 +80,7 @@ public:
         m_activatedJobsLimit = activatedJobsLimit;
     };
 
-private slots:
+private Q_SLOTS:
 
     // void addJob( const QString& ServerUrl, const QString& SourceUrl, const QString& TargetDir, Priority priority);
     void addJob( QString &relativeUrl );

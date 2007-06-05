@@ -34,15 +34,15 @@ class HttpFetchFile : public QObject
     void setServerUrl( const QString& serverUrl ){ m_serverUrl = serverUrl; }
     void setTargetDir( const QString& targetDir ){ m_targetDir = targetDir; }
 
- public slots:
+ public Q_SLOTS:
     void downloadFile( const QUrl& );
     void cancelDownload();
 
- signals:
+ Q_SIGNALS:
     void downloadDone( QString, bool );
     void statusMessage( QString );
 
- private slots:
+ private Q_SLOTS:
     // process feedback from m_Http
     void httpRequestFinished(int requestId, bool error);
     void checkResponseHeader(const QHttpResponseHeader &responseHeader);

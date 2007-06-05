@@ -24,7 +24,7 @@ class SearchComboBox : public QComboBox
  public:
     SearchComboBox(QWidget*);
 
- public slots:
+ public Q_SLOTS:
     void showListView(const QString&);
 };
 

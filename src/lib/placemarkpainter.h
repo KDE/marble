@@ -43,7 +43,7 @@ class PlaceMarkPainter : public QObject
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
 
- public slots:
+ public Q_SLOTS:
 
  protected:
     inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 

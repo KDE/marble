@@ -37,16 +37,16 @@ class KAtlasViewPopupMenu  : public QObject
     KAtlasViewPopupMenu(MarbleWidget*, MarbleModel*);
     virtual ~KAtlasViewPopupMenu(){};
 
- public slots:
+ public Q_SLOTS:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
     void  showFeatureInfo( QAction* );
 
- signals:
+ Q_SIGNALS:
     void  addMeasurePoint( float, float );
     void  removeMeasurePoints();
 
- protected slots:
+ protected Q_SLOTS:
     void  slotAddMeasurePoint();
     void  slotAboutDialog();
 
