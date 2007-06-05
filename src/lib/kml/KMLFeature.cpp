@@ -21,7 +21,7 @@ QString KMLFeature::name() const
     return m_name;
 }
 
-void KMLFeature::setName( QString &value )
+void KMLFeature::setName( const QString &value )
 {
     m_name = value;
 }
@@ -31,7 +31,7 @@ QString KMLFeature::address() const
     return m_address;
 }
 
-void KMLFeature::setAddress( QString &value)
+void KMLFeature::setAddress( const QString &value)
 {
     m_address = value;
 }
@@ -41,7 +41,7 @@ QString KMLFeature::phoneNumber() const
     return m_phoneNumber;
 }
 
-void KMLFeature::setPhoneNumber( QString &value)
+void KMLFeature::setPhoneNumber( const QString &value)
 {
     m_phoneNumber = value;
 }
@@ -51,7 +51,7 @@ QString KMLFeature::description() const
     return m_description;
 }
 
-void KMLFeature::setDescription( QString &value)
+void KMLFeature::setDescription( const QString &value)
 {
     m_description = value;
 }
