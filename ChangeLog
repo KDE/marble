@@ -1,3 +1,9 @@
+2007-06-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Make it build again
+	* src/lib/LegendBrowser.h (LegendBrowser): Export the class, since
+	it's part of a library.
+
 2007-06-05  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/LegendBrowser.{h,cpp}: Adding new Legend Browser 

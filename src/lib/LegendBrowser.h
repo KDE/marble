@@ -22,8 +22,9 @@
 
 #include <QtGui/QTextBrowser>
 
+#include "marble_export.h"
 
-class LegendBrowser : public QTextBrowser
+class MARBLE_EXPORT LegendBrowser : public QTextBrowser
 {
 
     Q_OBJECT
