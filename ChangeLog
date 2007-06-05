@@ -1,5 +1,10 @@
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy:  4: Check for an acceptable copyright
+	Krazy: 14: Check for an acceptable license
+	* src/lib/kml/KMLObject.{h,cpp}:  Add header w/ copyright and license
+	* src/lib/kml/KMLFeature.{h,cpp}: Add header w/ copyright and license
+	
 	Krazy: 17: Check for inappropriate pass-by-value function args
 	* src/lib/kml/KMLFeature.{h,cpp}: Pass QStrings by reference
 
