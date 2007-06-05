@@ -91,8 +91,15 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Initialize the LegendBrowser
 
     legendBrowser->setCheckedLocations( m_widget->showPlaces() );
+    legendBrowser->setCheckedCities( m_widget->showCities() );
+    legendBrowser->setCheckedTerrain( m_widget->showTerrain() );
     legendBrowser->setCheckedBorders( m_widget->showBorders() );
     legendBrowser->setCheckedWaterBodies( m_widget->showLakes() && m_widget->showRivers() );
+    legendBrowser->setCheckedGrid( m_widget->showGrid() );
+    legendBrowser->setCheckedIceLayer( m_widget->showIceLayer() );
+    legendBrowser->setCheckedRelief( m_widget->showRelief() );
+    legendBrowser->setCheckedWindRose( m_widget->showWindRose() );
+    legendBrowser->setCheckedScaleBar( m_widget->showScaleBar() );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         m_widget, SLOT(goHome()) );
@@ -114,12 +121,26 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( legendBrowser, SIGNAL( toggledLocations( bool ) ),
              m_widget, SLOT( setShowPlaces( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledCities( bool ) ),
+             m_widget, SLOT( setShowCities( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledTerrain( bool ) ),
+             m_widget, SLOT( setShowTerrain( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledBorders( bool ) ),
              m_widget, SLOT( setShowBorders( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
              m_widget, SLOT( setShowRivers( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
              m_widget, SLOT( setShowLakes( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledGrid( bool ) ),
+             m_widget, SLOT( setShowGrid( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledIceLayer( bool ) ),
+             m_widget, SLOT( setShowIceLayer( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledRelief( bool ) ),
+             m_widget, SLOT( setShowRelief( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledWindRose( bool ) ),
+             m_widget, SLOT( setShowWindRose( bool ) ) );
+    connect( legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
+             m_widget, SLOT( setShowScaleBar( bool ) ) );
 }
 
 

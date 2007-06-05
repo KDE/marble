@@ -72,6 +72,9 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
         << 200
         << 0;
 
+    m_showCities = true;
+    m_showTerrain = true;
+
     m_useworkaround = testbug();
     // m_useworkaround = true;
 }
@@ -129,6 +132,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         if ( m_weightfilter.at( mark->popidx() ) > radius
 //             && mark->symbol() != 0
              && mark-> selected() == 0 )
+            continue;
+
+        if ( m_showTerrain == false && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
+            continue;
+
+        if ( m_showCities == false && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
             continue;
 
         qpos = mark->quaternion();

@@ -43,6 +43,40 @@ class PlaceMarkPainter : public QObject
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
 
+    /**
+     * @brief  Return whether the cities are visible.
+     * @return The city placemark visibility.
+     */
+    bool  showCities() const
+    { 
+        return m_showCities;
+    }
+
+    /**
+     * @brief  Return whether the terrain placemarks are visible.
+     * @return The terrain placemark visibility.
+     */
+    bool  showTerrain() const
+    { 
+        return m_showTerrain;
+    }
+
+    /**
+     * @brief  Set whether the cities are visible
+     * @param  visible  visibility of the city placemarks
+     */
+    void setShowCities( bool visible ){ 
+        m_showCities = visible;
+    }
+
+    /**
+     * @brief  Set whether the terrain placemarks are visible
+     * @param  visible  visibility of the terrain placemarks
+     */
+    void setShowTerrain( bool visible ){ 
+        m_showTerrain = visible;
+    }
+
  public Q_SLOTS:
 
  protected:
@@ -68,6 +102,9 @@ class PlaceMarkPainter : public QObject
     QVector< int >        m_weightfilter;
     QPixmap  m_empty;
     float    m_widthscale;
+
+    bool     m_showCities;
+    bool     m_showTerrain;
 
     bool     m_useworkaround;
 };

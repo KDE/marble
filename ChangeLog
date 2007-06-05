@@ -1,3 +1,15 @@
+2007-06-05  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/LegendBrowser.{h,cpp}: More changes in the 
+    LegendBrowser to avoid flicker and several 
+    additional attributes which are now supported.
+
+    small TODOs: Make LegendBrowser a Designer Plugin
+    and further improve its HTML ... 
+
+    * src/lib/placemarkpainter.{h,cpp}: made cities and 
+    terrain accessible from MarbleWidget.
+
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy 21: Check for signals: and slots:

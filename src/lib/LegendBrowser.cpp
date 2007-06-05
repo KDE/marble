@@ -15,6 +15,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtGui/QTextFrame>
+#include <QtGui/QScrollBar>
 
 #include "katlasdirs.h"
 
@@ -68,11 +69,15 @@ void LegendBrowser::toggleCheckBoxStatus( QUrl link )
             sendSignals( checkBoxName, m_checkBoxMap.value( checkBoxName ) );
         }
     }
-
+    setUpdatesEnabled( false );
+    int scrollPosition = verticalScrollBar()->sliderPosition();
     setSource( KAtlasDirs::path( "legend.html" ) );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );
+    verticalScrollBar()->setSliderPosition( scrollPosition );
+    setUpdatesEnabled( true );
+    repaint();
 }
 
 void LegendBrowser::sendSignals( QString name, bool checked )
@@ -80,11 +85,32 @@ void LegendBrowser::sendSignals( QString name, bool checked )
     if ( name == "locations"){
         emit toggledLocations( checked );
     }
+    if ( name == "cities"){
+        emit toggledCities( checked );
+    }
+    if ( name == "terrain"){
+        emit toggledTerrain( checked );
+    }
     if ( name == "borders"){
         emit toggledBorders( checked );
     }
     if ( name == "waterbodies"){
         emit toggledWaterBodies( checked );
+    }
+    if ( name == "grid"){
+        emit toggledGrid( checked );
+    }
+    if ( name == "ice"){
+        emit toggledIceLayer( checked );
+    }
+    if ( name == "relief"){
+        emit toggledRelief( checked );
+    }
+    if ( name == "windrose"){
+        emit toggledWindRose( checked );
+    }
+    if ( name == "scalebar"){
+        emit toggledScaleBar( checked );
     }
 }
 

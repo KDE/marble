@@ -46,6 +46,7 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 
     hlayout->addWidget( m_control );
     hlayout->addWidget( m_marbleWidget );
+    hlayout->setSpacing(0);
     vlayout->addLayout( hlayout );
     vlayout->setMargin(0);
 

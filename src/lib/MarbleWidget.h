@@ -99,6 +99,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showWindRose READ showWindRose WRITE setShowWindRose)
     Q_PROPERTY(bool showGrid READ showGrid WRITE setShowGrid)
     Q_PROPERTY(bool showPlaces READ showPlaces WRITE setShowPlaces)
+    Q_PROPERTY(bool showCities READ showCities WRITE setShowCities)
+    Q_PROPERTY(bool showTerrain READ showTerrain WRITE setShowTerrain)
 
     Q_PROPERTY(bool showRelief READ showRelief WRITE setShowRelief)
     Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
@@ -231,6 +233,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  showPlaces() const
     { 
         return m_model->showPlaceMarks();
+    }
+
+    /**
+     * @brief  Return whether the city place marks are visible.
+     * @return The city place mark visibility.
+     */
+    bool  showCities() const
+    { 
+        return m_model->placeMarkPainter()->showCities();
+    }
+
+    /**
+     * @brief  Return whether the terrain place marks are visible.
+     * @return The terrain place mark visibility.
+     */
+    bool  showTerrain() const
+    { 
+        return m_model->placeMarkPainter()->showTerrain();
     }
 
     /**
@@ -425,6 +445,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setShowPlaces( bool visible ){ 
         m_model->setShowPlaceMarks( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the city place mark overlay is visible
+     * @param  visible  visibility of the city place marks
+     */
+    void setShowCities( bool visible ){ 
+        m_model->placeMarkPainter()->setShowCities( visible );
+        repaint();
+    }
+
+    /**
+     * @brief  Set whether the terrain place mark overlay is visible
+     * @param  visible  visibility of the terrain place marks
+     */
+    void setShowTerrain( bool visible ){ 
+        m_model->placeMarkPainter()->setShowTerrain( visible );
         repaint();
     }
 

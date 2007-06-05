@@ -138,6 +138,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     TextureMapper* textureMapper(){ return m_texmapper; }
 
+    PlaceMarkPainter* placeMarkPainter(){ return m_placemarkpainter; }
+
     /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
