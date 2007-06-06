@@ -27,7 +27,7 @@
 
 #include <QtGui/QClipboard>
 
-// #include "lib/katlasaboutdialog.h"
+#include "lib/katlasaboutdialog.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
