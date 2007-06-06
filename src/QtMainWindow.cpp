@@ -164,8 +164,8 @@ void MainWindow::enterWhatsThis()
 
 void MainWindow::aboutMarble()
 {
-//    KAtlasAboutDialog dlg(this);
-//    dlg.exec();
+    KAtlasAboutDialog dlg(this);
+    dlg.exec();
 }
 
 #include "QtMainWindow.moc"
