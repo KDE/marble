@@ -11,7 +11,7 @@
 #ifndef MARBLE_EXPORT_H
 #define MARBLE_EXPORT_H
 
-#include "QtCore/qglobal.h"
+#include <QtCore/QtGlobal>
 
 #ifndef MARBLE_EXPORT
 # ifdef MAKE_MARBLE_LIB

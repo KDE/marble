@@ -1,5 +1,8 @@
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy 12: Check for proper include directives
+	* src/lib/marble_export.h: Use <QtCore/QtGlobal> instead of "..."
+
 	Introduce d-pointer in MarbleModel
 	* src/lib/MarbleModel.cpp (d): new member
 	* src/lib/MarbleModel.cpp (MarbleModelPrivate): new class
