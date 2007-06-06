@@ -1,3 +1,6 @@
+2007-06-06  Murad Tagirov  <tmurad@gmail.com>
+    Added KMLDocument
+
 2007-06-06  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix copyright statements
@@ -20,19 +23,19 @@
 	* src/lib/MarbleModel.cpp (d): new member
 	* src/lib/MarbleModel.cpp (MarbleModelPrivate): new class
 	(rest of MarbleModel.cpp): use d-> everywhere
-	This also fixes a lot of Krazy 13.issues: 
+	This also fixes a lot of Krazy 13.issues:
 	  inline functions in public classes.
-	
+
 2007-06-05  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/LegendBrowser.{h,cpp}: More changes in the 
-    LegendBrowser to avoid flicker and several 
+    * src/lib/LegendBrowser.{h,cpp}: More changes in the
+    LegendBrowser to avoid flicker and several
     additional attributes which are now supported.
 
     small TODOs: Make LegendBrowser a Designer Plugin
-    and further improve its HTML ... 
+    and further improve its HTML ...
 
-    * src/lib/placemarkpainter.{h,cpp}: made cities and 
+    * src/lib/placemarkpainter.{h,cpp}: made cities and
     terrain accessible from MarbleWidget.
 
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
@@ -40,18 +43,18 @@
 	Krazy 21: Check for signals: and slots:
 	* src/lib/*.h: switch Q_SIGNALS: for signals: and Q_SLOTS: for slots:
 	(This fixes 31 issues in one swoop!)
-	
+
 	Make it build again
 	* src/lib/LegendBrowser.h (LegendBrowser): Export the class, since
 	it's part of a library.
 
 2007-06-05  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/LegendBrowser.{h,cpp}: Adding new Legend Browser 
+	* src/lib/LegendBrowser.{h,cpp}: Adding new Legend Browser
 	class that supports checkboxes.
-	
-	Works partially. I'm about to finish this now and 
-	will add settings saving for the Qt and KDE frontend 
+
+	Works partially. I'm about to finish this now and
+	will add settings saving for the Qt and KDE frontend
 	right after.
 
 2007-06-05  Inge Wallin  <inge@lysator.liu.se>
@@ -63,7 +66,7 @@
 	Krazy: 14: Check for an acceptable license
 	* src/lib/kml/KMLObject.{h,cpp}:  Add header w/ copyright and license
 	* src/lib/kml/KMLFeature.{h,cpp}: Add header w/ copyright and license
-	
+
 	Krazy: 17: Check for inappropriate pass-by-value function args
 	* src/lib/kml/KMLFeature.{h,cpp}: Pass QStrings by reference
 
@@ -73,7 +76,7 @@
       (later on to be integrated with the Legend in Marble):
         - show relief, ice, rivers, lakes, borders, elevation model
         - quick and dirty rendering
-        - updated examples2.ui to reflect those changes 
+        - updated examples2.ui to reflect those changes
 
 2007-06-04  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
@@ -82,7 +85,7 @@
 	* src/plugins/marblewidget/MarbleWidgetPlugin.cpp: Fix include
 	* src/plugins/navigator/MarbleNavigatorPlugin.cpp: Fix include
 
-	Clean up 
+	Clean up
 	* src/lib/vectorcomposer.{h,cpp}: use the m_ convention everywhere.
 
 2007-06-04  Murad Tagirov  <tmurad@gmail.com>
@@ -96,7 +99,7 @@ Murad, this should look like:
 	* src/lib/kml: new subdirectory
 	* src/lib/kml/KMLObject.{h,cpp}: new file
 	* src/lib/kml/KMLFeature.{h,cpp}: new file
-	
+
 2007-06-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve apidox
