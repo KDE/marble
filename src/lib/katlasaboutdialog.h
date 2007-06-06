@@ -17,12 +17,11 @@
 #ifndef KATLASABOUTDIALOG_H
 #define KATLASABOUTDIALOG_H
 
+#include "marble_export.h"
 
 #include "ui_katlasaboutdialog.h"
 
-
-
-class KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog
+class MARBLE_EXPORT KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog
 {
 
     Q_OBJECT
