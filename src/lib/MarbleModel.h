@@ -27,8 +27,6 @@
  */
 
 
-#include <cmath>
-
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
@@ -49,7 +47,7 @@
 
 class PlaceMark;
 class PlaceMarkManager;
-
+class MarbleModelPrivate;
 
 /** 
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -92,10 +90,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void  resize();
 
-    int   radius(){ return m_radius; };
+    int   radius() const;
     void  setRadius(const int&);
 
-    Quaternion  getPlanetAxis(){ return m_planetAxis; };
+    Quaternion  getPlanetAxis() const;
 
 
     // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
@@ -105,16 +103,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void rotateBy(const Quaternion&);
     void rotateBy(const float&, const float&);
 
-    float  centerLatitude(){ 
-        return m_planetAxis.pitch()*180.0f/M_PI;
-    }
+    float  centerLatitude()  const;
+    float  centerLongitude() const;
 
-    float  centerLongitude(){
-        return -m_planetAxis.yaw()*180.0f/M_PI;
-    }
-
-
-    QAbstractListModel* getPlaceMarkModel(){ return m_placemarkmodel; };
+    QAbstractListModel* getPlaceMarkModel() const;
 
     void setMapTheme( const QString& );
 
@@ -123,76 +115,54 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     bool screenCoordinates( const float lng, const float lat, int& x, int& y );
 
-    bool needsUpdate() const { return !( m_radius == m_radiusUpdated && m_planetAxis == m_planetAxisUpdated ); }
-    void setNeedsUpdate() { m_justModified = true; }
+    bool needsUpdate() const;
+    void setNeedsUpdate();
 
     void addPlaceMarkFile( const QString& filename );
 
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
-    PlaceContainer* placeContainer(){ return m_placecontainer; }
-
-    VectorComposer* vectorComposer(){ return m_veccomposer; }
-
-    TextureColorizer* textureColorizer(){ return m_texcolorizer; }
-
-    TextureMapper* textureMapper(){ return m_texmapper; }
-
-    PlaceMarkPainter* placeMarkPainter(){ return m_placemarkpainter; }
+    PlaceContainer    *placeContainer()   const;
+    VectorComposer    *vectorComposer()   const;
+    TextureColorizer  *textureColorizer() const;
+    TextureMapper     *textureMapper()    const;
+    PlaceMarkPainter  *placeMarkPainter() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
-    bool  showGrid() const
-    {
-        return m_showGrid;
-    }
+    bool  showGrid() const;
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
-    void setShowGrid( bool visible )
-    { 
-        m_showGrid = visible;
-    }
+    void setShowGrid( bool visible );
 
     /**
      * @brief  Return whether the place marks are visible.
      * @return The place mark visibility.
      */
-    bool  showPlaceMarks() const
-    { 
-        return m_showPlaceMarks;
-    }
+    bool  showPlaceMarks() const;
 
     /**
      * @brief  Set whether the place mark overlay is visible
      * @param  visible  visibility of the place marks
      */
-    void setShowPlaceMarks( bool visible )
-    { 
-        m_showPlaceMarks = visible;
-    }
+    void setShowPlaceMarks( bool visible );
 
     /**
      * @brief  Return whether the elevation model is visible.
      * @return The elevation model visibility.
      */
-    bool  showElevationModel() const
-    { 
-        return m_showElevationModel;
-    }
+    bool  showElevationModel() const;
 
     /**
      * @brief  Set whether the elevation model is visible
      * @param  visible  visibility of the elevation model
      */
-    void setShowElevationModel( bool visible )
-    { 
-        m_showElevationModel = visible;
-    }
+    void setShowElevationModel( bool visible );
 
  Q_SIGNALS:
     void creatingTilesStart( const QString& name, const QString& description );
@@ -200,36 +170,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void themeChanged();
 
- protected:
-    QWidget  *m_parent;
-    QImage   *m_canvasimg;
-    QImage   *m_coastimg;
-
-    // View and paint stuff
-    MapTheme          *m_maptheme;
-    TextureColorizer  *m_texcolorizer;
-    TextureMapper     *m_texmapper;
-    VectorComposer    *m_veccomposer;
-    GridMap           *m_gridmap;
-
-    // Places on the map
-    PlaceMarkManager  *m_placemarkmanager;
-    PlaceMarkModel    *m_placemarkmodel;
-    PlaceMarkPainter  *m_placemarkpainter;
-    PlaceContainer    *m_placecontainer;
-
-    Quaternion         m_planetAxis;
-    Quaternion         m_planetAxisUpdated;
-    int                m_radius;
-    int                m_radiusUpdated;
-
-    bool  m_justModified;
-    bool  m_centered;
-
-    bool          m_showGrid;
-    bool          m_showPlaceMarks;
-    bool          m_showElevationModel;
-
+ private:
+    MarbleModelPrivate  * const d; 
 };
 
 

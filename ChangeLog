@@ -1,3 +1,12 @@
+2007-06-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Introduce d-pointer in MarbleModel
+	* src/lib/MarbleModel.cpp (d): new member
+	* src/lib/MarbleModel.cpp (MarbleModelPrivate): new class
+	(rest of MarbleModel.cpp): use d-> everywhere
+	This also fixes a lot of Krazy 13.issues: 
+	  inline functions in public classes.
+	
 2007-06-05  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/LegendBrowser.{h,cpp}: More changes in the 

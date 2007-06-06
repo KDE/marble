@@ -18,10 +18,11 @@ Cleaning
  * Make the ChangeLog file follow the GNU format.                       DONE
  * No inline functions in the public classes                            INGE
    - MarbleWidget                                                       --
-   - MarbleModel                                                        --
+   - MarbleModel                                                        done
    - MarbleControlBox                                                   --
  * d-pointerify the public classes                                      INGE
    - MarbleWidget                                                       --
+   - MarbleModel                                                        done
    - MarbleControlBox                                                   --
 
  * Installation issues                                                  TACK

@@ -29,25 +29,62 @@
 const float RAD2INT = 21600.0 / M_PI;
 
 
-MarbleModel::MarbleModel( QWidget* parent )
-    : m_parent(parent)
+class MarbleModelPrivate
 {
-    m_texmapper = 0;
+ public:
+    QWidget  *m_parent;
+    QImage   *m_canvasimg;
+    QImage   *m_coastimg;
 
-    m_placemarkpainter = 0;
-    m_placecontainer   = 0;
-    m_radius           = 2000;
+    // View and paint stuff
+    MapTheme          *m_maptheme;
+    TextureColorizer  *m_texcolorizer;
+    TextureMapper     *m_texmapper;
+    VectorComposer    *m_veccomposer;
+    GridMap           *m_gridmap;
 
-    m_justModified = false;
+    // Places on the map
+    PlaceMarkManager  *m_placemarkmanager;
+    PlaceMarkModel    *m_placemarkmodel;
+    PlaceMarkPainter  *m_placemarkpainter;
+    PlaceContainer    *m_placecontainer;
 
-    m_showGrid = true;
-    m_showPlaceMarks = true;
-    m_showElevationModel = false;
+    Quaternion         m_planetAxis;
+    Quaternion         m_planetAxisUpdated;
+    int                m_radius;
+    int                m_radiusUpdated;
 
-    m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
+    bool  m_justModified;
+    bool  m_centered;
 
-    m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
-    m_maptheme = new MapTheme();
+    bool          m_showGrid;
+    bool          m_showPlaceMarks;
+    bool          m_showElevationModel;
+};
+
+
+
+MarbleModel::MarbleModel( QWidget* parent )
+    : d( new MarbleModelPrivate )
+{
+    d->m_parent = parent;
+
+    d->m_texmapper = 0;
+
+    d->m_placemarkpainter = 0;
+    d->m_placecontainer   = 0;
+    d->m_radius           = 2000;
+
+    d->m_justModified = false;
+
+    d->m_showGrid = true;
+    d->m_showPlaceMarks = true;
+    d->m_showElevationModel = false;
+
+    d->m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
+
+    d->m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
+    d->m_maptheme = new MapTheme();
 
 
     QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
@@ -67,21 +104,53 @@ MarbleModel::MarbleModel( QWidget* parent )
     }
     setMapTheme( selectedmap );
 
-    m_veccomposer  = new VectorComposer();
-    m_gridmap      = new GridMap();
-    m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
+    d->m_veccomposer  = new VectorComposer();
+    d->m_gridmap      = new GridMap();
+    d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
                                            KAtlasDirs::path( "landcolors.leg" ) );
 
-    m_placemarkmanager = new PlaceMarkManager();
-    m_placecontainer   = m_placemarkmanager->getPlaceContainer();
+    d->m_placemarkmanager = new PlaceMarkManager();
+    d->m_placecontainer   = d->m_placemarkmanager->getPlaceContainer();
 
-    m_placemarkmodel   = new PlaceMarkModel( this );
-    m_placemarkmodel->setContainer( m_placecontainer );
+    d->m_placemarkmodel   = new PlaceMarkModel( this );
+    d->m_placemarkmodel->setContainer( d->m_placecontainer );
 }
 
 MarbleModel::~MarbleModel()
 {
-    delete m_texmapper;
+    delete d->m_texmapper;
+    delete d;
+}
+
+
+bool MarbleModel::showGrid() const
+{
+    return d->m_showGrid;
+}
+
+void MarbleModel::setShowGrid( bool visible )
+{ 
+    d->m_showGrid = visible;
+}
+
+bool MarbleModel::showPlaceMarks() const
+{ 
+    return d->m_showPlaceMarks;
+}
+
+void MarbleModel::setShowPlaceMarks( bool visible )
+{ 
+    d->m_showPlaceMarks = visible;
+}
+
+bool MarbleModel::showElevationModel() const
+{ 
+    return d->m_showElevationModel;
+}
+
+void MarbleModel::setShowElevationModel( bool visible )
+{ 
+    d->m_showElevationModel = visible;
 }
 
 
@@ -91,23 +160,23 @@ MarbleModel::~MarbleModel()
 void MarbleModel::setMapTheme( const QString& selectedmap )
 {
 
-    m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
+    d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
                                         .arg( selectedmap ) ) );
 
     // If the tiles aren't already there, put up a progress dialog
     // while creating them.
-    if ( !TileLoader::baseTilesAvailable( m_maptheme->tilePrefix() ) ) {
+    if ( !TileLoader::baseTilesAvailable( d->m_maptheme->tilePrefix() ) ) {
         qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
-        KAtlasTileCreatorDialog tilecreatordlg( m_parent );
-        tilecreatordlg.setSummary( m_maptheme->name(), 
-                                   m_maptheme->description() );
+        KAtlasTileCreatorDialog tilecreatordlg( d->m_parent );
+        tilecreatordlg.setSummary( d->m_maptheme->name(), 
+                                   d->m_maptheme->description() );
 #endif
 
-        TileScissor tilecreator( m_maptheme->prefix(),
-                                 m_maptheme->installMap(), 
-                                 m_maptheme->bitmaplayer().dem);
+        TileScissor tilecreator( d->m_maptheme->prefix(),
+                                 d->m_maptheme->installMap(), 
+                                 d->m_maptheme->bitmaplayer().dem);
 
         // This timer is necessary, because if we remove it, the GUI
         // never gets shown before the work starts.
@@ -122,178 +191,190 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
         connect( &tilecreator, SIGNAL( progress( int ) ),
                  this,         SIGNAL( creatingTilesProgress( int ) ) );
         qDebug("Before emitting creatingTilesStart() ... ");
-        emit creatingTilesStart( m_maptheme->name(), 
-                                 m_maptheme->description() );
+        emit creatingTilesStart( d->m_maptheme->name(), 
+                                 d->m_maptheme->description() );
         qDebug("After emitting creatingTilesStart() ... ");
 #endif
     }
 
-    if ( m_texmapper == 0 )
-        m_texmapper = new TextureMapper( "maps/earth/"
-                                         + m_maptheme->tilePrefix() );
+    if ( d->m_texmapper == 0 )
+        d->m_texmapper = new TextureMapper( "maps/earth/"
+                                         + d->m_maptheme->tilePrefix() );
     else
-        m_texmapper->setMap( "maps/earth/" + m_maptheme->tilePrefix() );
+        d->m_texmapper->setMap( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
-    m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( m_maptheme->tilePrefix() ) + 1 );
+    d->m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( d->m_maptheme->tilePrefix() ) + 1 );
 
-    if ( m_placecontainer == 0)
-        m_placecontainer = new PlaceContainer("placecontainer");
+    if ( d->m_placecontainer == 0)
+        d->m_placecontainer = new PlaceContainer("placecontainer");
 
-    m_placecontainer ->clearTextPixmaps();
+    d->m_placecontainer ->clearTextPixmaps();
 
-    if ( m_placemarkpainter == 0)
-        m_placemarkpainter = new PlaceMarkPainter( this );
+    if ( d->m_placemarkpainter == 0)
+        d->m_placemarkpainter = new PlaceMarkPainter( this );
 
-    m_placemarkpainter->setLabelColor( m_maptheme->labelColor() );
+    d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
     emit themeChanged();
 
-    m_justModified = true;
+    d->m_justModified = true;
 }
 
 
 void MarbleModel::resize()
 {
-    *m_coastimg = QImage( m_canvasimg->width(), m_canvasimg->height(),
+    *d->m_coastimg = QImage( d->m_canvasimg->width(), d->m_canvasimg->height(),
                           QImage::Format_ARGB32_Premultiplied );
-    m_canvasimg->fill( Qt::transparent );
+    d->m_canvasimg->fill( Qt::transparent );
 
-    m_texmapper->resizeMap( m_canvasimg );
-    m_veccomposer->resizeMap( m_coastimg );
-    m_gridmap->resizeMap( m_coastimg );
+    d->m_texmapper->resizeMap( d->m_canvasimg );
+    d->m_veccomposer->resizeMap( d->m_coastimg );
+    d->m_gridmap->resizeMap( d->m_coastimg );
 
-    QRadialGradient  grad1( QPointF( m_canvasimg->width()  / 2,
-                                     m_canvasimg->height() / 2 ),
-                            1.05 * m_radius );
+    QRadialGradient  grad1( QPointF( d->m_canvasimg->width()  / 2,
+                                     d->m_canvasimg->height() / 2 ),
+                            1.05 * d->m_radius );
     grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
     grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
-    QPainter  painter( m_canvasimg );
+    QPainter  painter( d->m_canvasimg );
     painter.setBrush( brush1 );
     painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.drawEllipse( m_canvasimg->width() / 2 - (int)( (float)(m_radius) * 1.05 ),
-                         m_canvasimg->height() / 2 - (int)( (float)(m_radius) * 1.05 ),
-                         (int)( 2.1 * (float)(m_radius) ), 
-                         (int)( 2.1 * (float)(m_radius) ) );
+    painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (float)(d->m_radius) * 1.05 ),
+                         d->m_canvasimg->height() / 2 - (int)( (float)(d->m_radius) * 1.05 ),
+                         (int)( 2.1 * (float)(d->m_radius) ), 
+                         (int)( 2.1 * (float)(d->m_radius) ) );
 
-    m_justModified = true;
+    d->m_justModified = true;
 }
 
 
 void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
 {
-    if ( needsUpdate() || m_canvasimg->isNull() || m_justModified == true ) {
+    if ( needsUpdate() || d->m_canvasimg->isNull() || d->m_justModified == true ) {
 
-        m_texmapper->mapTexture( m_canvasimg, m_radius, m_planetAxis );
+        d->m_texmapper->mapTexture( d->m_canvasimg, d->m_radius, d->m_planetAxis );
 
-        if ( m_showElevationModel == false && m_maptheme->bitmaplayer().dem == "true" ){
-            m_coastimg->fill(Qt::transparent);
+        if ( d->m_showElevationModel == false && d->m_maptheme->bitmaplayer().dem == "true" ){
+            d->m_coastimg->fill(Qt::transparent);
 
             // Create VectorMap
-            m_veccomposer->drawTextureMap( m_coastimg, m_radius, 
-                                           m_planetAxis );
+            d->m_veccomposer->drawTextureMap( d->m_coastimg, d->m_radius, 
+                                           d->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
-            m_texcolorizer->colorize( m_canvasimg, m_coastimg, m_radius );
+            d->m_texcolorizer->colorize( d->m_canvasimg, d->m_coastimg, d->m_radius );
         }
     }
 
     // Paint Map on Widget
-    painter->drawImage( dirty, *m_canvasimg, dirty ); 
+    painter->drawImage( dirty, *d->m_canvasimg, dirty ); 
 
-    if ( m_maptheme->vectorlayer().enabled == true ) {
+    if ( d->m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
-        m_veccomposer->paintVectorMap( painter, m_radius, m_planetAxis );
+        d->m_veccomposer->paintVectorMap( painter, d->m_radius, d->m_planetAxis );
     }
 
-    // if ( m_maptheme->vectorlayer().enabled == true ){
+    // if ( d->m_maptheme->vectorlayer().enabled == true ){
     QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    if ( m_showGrid == true )
+    if ( d->m_showGrid == true )
     {
-        m_gridmap->createGrid( m_radius, m_planetAxis );
+        d->m_gridmap->createGrid( d->m_radius, d->m_planetAxis );
 
-        m_gridmap->setPen( gridpen );
-        m_gridmap->paintGridMap( painter, true );
+        d->m_gridmap->setPen( gridpen );
+        d->m_gridmap->paintGridMap( painter, true );
 
-        m_gridmap->createTropics( m_radius, m_planetAxis );
+        d->m_gridmap->createTropics( d->m_radius, d->m_planetAxis );
 
         gridpen.setStyle( Qt::DotLine );
-        m_gridmap->setPen( gridpen );
-        m_gridmap->paintGridMap( painter, true );
+        d->m_gridmap->setPen( gridpen );
+        d->m_gridmap->paintGridMap( painter, true );
     }
 
     //	}
 	
-    if ( m_showPlaceMarks == true && m_placecontainer->size() > 0 ) {
-        m_placemarkpainter->paintPlaceFolder( painter, 
-                                              m_canvasimg->width() / 2,
-                                              m_canvasimg->height()/ 2,
-                                              m_radius, m_placecontainer,
-                                              m_planetAxis );
+    if ( d->m_showPlaceMarks == true && d->m_placecontainer->size() > 0 ) {
+        d->m_placemarkpainter->paintPlaceFolder( painter, 
+                                              d->m_canvasimg->width() / 2,
+                                              d->m_canvasimg->height()/ 2,
+                                              d->m_radius, d->m_placecontainer,
+                                              d->m_planetAxis );
     }
 
-    m_planetAxisUpdated = m_planetAxis;
-    m_radiusUpdated     = m_radius;
-    m_justModified      = false;
+    d->m_planetAxisUpdated = d->m_planetAxis;
+    d->m_radiusUpdated     = d->m_radius;
+    d->m_justModified      = false;
 }
 
 
 void MarbleModel::setCanvasImage(QImage* canvasimg)
 {
-    m_canvasimg = canvasimg;
+    d->m_canvasimg = canvasimg;
+}
+
+
+int MarbleModel::radius() const
+{
+    return d->m_radius; 
 }
 
 void MarbleModel::setRadius(const int& radius)
 {
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = ( m_canvasimg->width() ) >> 1;
-    int  imgry = ( m_canvasimg->height() ) >> 1;
+    int  imgrx = ( d->m_canvasimg->width() ) >> 1;
+    int  imgry = ( d->m_canvasimg->height() ) >> 1;
 
     if ( radius * radius < imgrx * imgrx + imgry * imgry
-         && radius != m_radius )
+         && radius != d->m_radius )
     {
-        m_canvasimg->fill( Qt::transparent );
+        d->m_canvasimg->fill( Qt::transparent );
 
-        QRadialGradient grad1( QPointF( m_canvasimg->width() / 2,
-                                        m_canvasimg->height() / 2 ),
+        QRadialGradient grad1( QPointF( d->m_canvasimg->width() / 2,
+                                        d->m_canvasimg->height() / 2 ),
                                1.05 * radius );
         grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
         grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
         QBrush    brush1( grad1 );
-        QPainter  painter( m_canvasimg );
+        QPainter  painter( d->m_canvasimg );
         painter.setBrush( brush1 );
         painter.setRenderHint( QPainter::Antialiasing, true );
-        painter.drawEllipse( m_canvasimg->width() / 2 - (int)( (float)(radius) * 1.05 ),
-                             m_canvasimg->height() / 2 - (int)( (float)(radius) * 1.05 ),
+        painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (float)(radius) * 1.05 ),
+                             d->m_canvasimg->height() / 2 - (int)( (float)(radius) * 1.05 ),
                              (int)( 2.1 * (float)(radius) ), 
                              (int)( 2.1 * (float)(radius) ) );
     }
 
-    m_radius = radius;
+    d->m_radius = radius;
+}
+
+
+Quaternion MarbleModel::getPlanetAxis() const
+{
+    return d->m_planetAxis;
 }
 
 
 void MarbleModel::rotateTo(const uint& phi, const uint& theta, const uint& psi)
 {
-    m_planetAxis.createFromEuler( (float)(phi)   / RAD2INT,
+    d->m_planetAxis.createFromEuler( (float)(phi)   / RAD2INT,
                                   (float)(theta) / RAD2INT,
                                   (float)(psi)   / RAD2INT );
 }
 
 void MarbleModel::rotateTo(const float& phi, const float& theta)
 {
-    m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
-                                  (theta + 180.0) * M_PI / 180.0, 0.0 );
+    d->m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
+                                     (theta + 180.0) * M_PI / 180.0, 0.0 );
 }
 
 
 void MarbleModel::rotateBy(const Quaternion& incRot)
 {
-    m_planetAxis = incRot * m_planetAxis;
+    d->m_planetAxis = incRot * d->m_planetAxis;
 }
 
 void MarbleModel::rotateBy(const float& phi, const float& theta)
@@ -301,42 +382,96 @@ void MarbleModel::rotateBy(const float& phi, const float& theta)
     Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
 
-    m_planetAxis = rotTheta * m_planetAxis;
-    m_planetAxis *= rotPhi;
-    m_planetAxis.normalize();
+    d->m_planetAxis = rotTheta * d->m_planetAxis;
+    d->m_planetAxis *= rotPhi;
+    d->m_planetAxis.normalize();
 }
+
+float MarbleModel::centerLatitude() const
+{ 
+    return d->m_planetAxis.pitch() * 180.0f / M_PI;
+}
+
+float MarbleModel::centerLongitude() const
+{
+    return - d->m_planetAxis.yaw() * 180.0f / M_PI;
+}
+
+
+QAbstractListModel *MarbleModel::getPlaceMarkModel() const
+{
+    return d->m_placemarkmodel;
+}
+
+
+bool MarbleModel::needsUpdate() const
+{
+    return !( d->m_radius == d->m_radiusUpdated
+              && d->m_planetAxis == d->m_planetAxisUpdated ); 
+}
+
+void MarbleModel::setNeedsUpdate()
+{
+    d->m_justModified = true;
+}
+
 
 int MarbleModel::northPoleY()
 {
     
-    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
-    Quaternion  invPlanetAxis = m_planetAxis.inverse();
+    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
 
-    return (int)( m_radius * northPole.v[Q_Y] );
+    return (int)( d->m_radius * northPole.v[Q_Y] );
 }
 
 int MarbleModel::northPoleZ()
 {
-    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI*0.5 ) ).quaternion();
-    Quaternion  invPlanetAxis = m_planetAxis.inverse();
+    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
 
-    return (int)( m_radius * northPole.v[Q_Z] );
+    return (int)( d->m_radius * northPole.v[Q_Z] );
+}
+
+PlaceContainer    *MarbleModel::placeContainer()   const
+{
+    return d->m_placecontainer;
+}
+
+VectorComposer    *MarbleModel::vectorComposer()   const
+{
+    return d->m_veccomposer;
+}
+
+TextureColorizer  *MarbleModel::textureColorizer() const
+{
+    return d->m_texcolorizer;
+}
+
+TextureMapper     *MarbleModel::textureMapper()    const
+{
+    return d->m_texmapper;
+}
+
+PlaceMarkPainter  *MarbleModel::placeMarkPainter() const 
+{
+    return d->m_placemarkpainter;
 }
 
 bool MarbleModel::screenCoordinates( const float lng, const float lat, 
                                      int& x, int& y )
 {
     Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
-    Quaternion  invRotAxis = m_planetAxis.inverse();
+    Quaternion  invRotAxis = d->m_planetAxis.inverse();
 
     qpos.rotateAroundAxis(invRotAxis);
 
-    x = (int)(  m_radius * qpos.v[Q_X] );
-    y = (int)( -m_radius * qpos.v[Q_Y] );
+    x = (int)(  d->m_radius * qpos.v[Q_X] );
+    y = (int)( -d->m_radius * qpos.v[Q_Y] );
 
     if ( qpos.v[Q_Z] >= 0.0 )
         return true;
@@ -346,16 +481,16 @@ bool MarbleModel::screenCoordinates( const float lng, const float lat,
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
-    m_placemarkmanager->loadKml( filename );
+    d->m_placemarkmanager->loadKml( filename );
 
-    m_placecontainer = m_placemarkmanager->getPlaceContainer();
+    d->m_placecontainer = d->m_placemarkmanager->getPlaceContainer();
 
-    m_placemarkmodel->setContainer( m_placecontainer );	
+    d->m_placemarkmodel->setContainer( d->m_placecontainer );	
 }
 
 QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
 {
-    return m_placemarkpainter->whichPlaceMarkAt( curpos );
+    return d->m_placemarkpainter->whichPlaceMarkAt( curpos );
 }
 
 #include "MarbleModel.moc"
