@@ -48,4 +48,11 @@ void SearchListView::selectItem(const QString& text)
 }
 
 
+void SearchListView::activate()
+{
+    if ( selectedIndexes().size() > 0 )
+        emit activated( currentIndex() );
+}
+
+
 #include "searchlistview.moc"

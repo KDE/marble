@@ -1,4 +1,10 @@
-2007-06-05  Inge Wallin  <inge@lysator.liu.se>
+2007-06-06  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy 13: Check for inlince methods in public classes
+	* src/lib/MarbleWidget.{h,cpp}: make all functions non-inline
+
+	Krazy 13: Check for inlince methods in public classes
+	* src/lib/searchlistview.cpp (activate): Make non-inline.
 
 	Krazy 12: Check for proper include directives
 	* src/lib/marble_export.h: Use <QtCore/QtGlobal> instead of "..."

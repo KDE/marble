@@ -137,7 +137,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the model that this view shows.
      */
-    MarbleModel   *model() const { return m_model; }
+    MarbleModel  *model() const;
 
     /**
      * @brief Return the active region.
@@ -147,15 +147,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the current zoom level.
      */
-    int  zoom() const { return m_logzoom; }
+    int  zoom() const;
 
-    double  centerLatitude(){ 
-        return (double)m_model->centerLatitude();
-    }
-
-    double  centerLongitude(){
-        return (double)m_model->centerLongitude();
-    }
+    double  centerLatitude();
+    double  centerLongitude();
 
 
     /**
@@ -172,9 +167,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief returns the model for all the placemarks on the globe.
      */
-    QAbstractListModel *placeMarkModel(){
-        return m_model->getPlaceMarkModel();
-    }
+    QAbstractListModel *placeMarkModel();
 
     /**
      * @brief  Return how much the map will move if one of the move slots are called.
@@ -186,135 +179,96 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the minimum value for the zoom.
      * @param  zoom  The new minimum value.
      */
-    void   setMinimumZoom( int zoom ){ m_minimumzoom = zoom; }
+    void   setMinimumZoom( int zoom );
 
     /**
      * @brief  Add a PlaceMark file to the model.
      * @param  filename  the filename of the file containing the PlaceMarks.
      */
-    void addPlaceMarkFile( QString filename ){ m_model->addPlaceMarkFile( filename ); }
+    void addPlaceMarkFile( QString filename );
 
     /**
      * @brief  Return a QPixmap with the current contents of the widget.
      */
-    QPixmap mapScreenShot(){ return QPixmap::grabWidget( this ); }
+    QPixmap mapScreenShot();
 
     /**
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
-    bool  showScaleBar() const
-    { 
-        return m_showScaleBar;
-    }
+    bool  showScaleBar() const;
 
     /**
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
-    bool  showWindRose() const
-    { 
-        return m_showWindRose;
-    }
+    bool  showWindRose() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
-    bool  showGrid() const
-    { 
-        return m_model->showGrid();
-    }
+    bool  showGrid() const;
 
     /**
      * @brief  Return whether the place marks are visible.
      * @return The place mark visibility.
      */
-    bool  showPlaces() const
-    { 
-        return m_model->showPlaceMarks();
-    }
+    bool  showPlaces() const;
 
     /**
      * @brief  Return whether the city place marks are visible.
      * @return The city place mark visibility.
      */
-    bool  showCities() const
-    { 
-        return m_model->placeMarkPainter()->showCities();
-    }
+    bool  showCities() const;
 
     /**
      * @brief  Return whether the terrain place marks are visible.
      * @return The terrain place mark visibility.
      */
-    bool  showTerrain() const
-    { 
-        return m_model->placeMarkPainter()->showTerrain();
-    }
+    bool  showTerrain() const;
 
     /**
      * @brief  Return whether the relief is visible.
      * @return The relief visibility.
      */
-    bool  showRelief() const
-    { 
-        return m_model->textureColorizer()->showRelief();
-    }
+    bool  showRelief() const;
 
     /**
      * @brief  Return whether the elevation model is visible.
      * @return The elevation model visibility.
      */
-    bool  showElevationModel() const
-    { 
-        return m_model->showElevationModel();
-    }
+    bool  showElevationModel() const;
 
     /**
      * @brief  Return whether the ice layer is visible.
      * @return The ice layer visibility.
      */
-    bool  showIceLayer() const
-    { 
-        return m_model->vectorComposer()->showIceLayer();
-    }
+    bool  showIceLayer() const;
 
     /**
      * @brief  Return whether the borders are visible.
      * @return The border visibility.
      */
-    bool  showBorders() const
-    { 
-        return m_model->vectorComposer()->showBorders();
-    }
+    bool  showBorders() const;
 
     /**
      * @brief  Return whether the rivers are visible.
      * @return The rivers' visibility.
      */
-    bool  showRivers() const
-    { 
-        return m_model->vectorComposer()->showRivers();
-    }
+    bool  showRivers() const;
 
     /**
      * @brief  Return whether the lakes are visible.
      * @return The lakes' visibility.
      */
-    bool  showLakes() const
-    { 
-        return m_model->vectorComposer()->showLakes();
-    }
+    bool  showLakes() const;
 
     /**
      * @brief  Return whether quick and dirty rendering is enabled.
      * @return Quick and dirty rendering
      */
-    bool  quickDirty() const
-    { 
-        return m_model->textureMapper()->interlaced();
-    }
+    bool  quickDirty() const;
 
  public Q_SLOTS:
     /**
@@ -366,18 +320,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the latitude for the centerPoint
      * @param  lat  the new value for the latitude
      */
-    void setCenterLatitude( double lat ){ 
-        float lng = centerLongitude();
-        centerOn( (float)lat, lng );
-    }
+    void setCenterLatitude( double lat );
+
     /**
      * @brief  Set the longitude for the centerPoint
      * @param  lng  the new value for the longitude
      */
-    void setCenterLongitude( double lng ){
-        float lat = centerLatitude();
-        centerOn( lat, (float)lng );
-    }
+        void setCenterLongitude( double lng );
 
     /**
      * @brief  Move left by the moveStep.
@@ -405,138 +354,85 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set a new map theme
      * @param maptheme  The name of the new maptheme.
      */
-    void  setMapTheme( const QString& maptheme )
-    {
-    	m_model->setMapTheme( maptheme );
-		
-    	// FIXME: Force update...
-    }
+    void  setMapTheme( const QString& maptheme );
 
     /**
      * @brief  Set whether the scale bar overlay is visible
      * @param  visible  visibility of the scale bar
      */
-    void setShowScaleBar( bool visible ){ 
-        m_showScaleBar = visible;
-        repaint();
-    }
+    void setShowScaleBar( bool visible );
 
     /**
      * @brief  Set whether the wind rose overlay is visible
      * @param  visible  visibility of the wind rose
      */
-    void setShowWindRose( bool visible ){ 
-        m_showWindRose = visible;
-        repaint();
-    }
+    void setShowWindRose( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
-    void setShowGrid( bool visible ){ 
-        m_model->setShowGrid( visible );
-        repaint();
-    }
+    void setShowGrid( bool visible );
 
     /**
      * @brief  Set whether the place mark overlay is visible
      * @param  visible  visibility of the place marks
      */
-    void setShowPlaces( bool visible ){ 
-        m_model->setShowPlaceMarks( visible );
-        repaint();
-    }
+    void setShowPlaces( bool visible );
 
     /**
      * @brief  Set whether the city place mark overlay is visible
      * @param  visible  visibility of the city place marks
      */
-    void setShowCities( bool visible ){ 
-        m_model->placeMarkPainter()->setShowCities( visible );
-        repaint();
-    }
+    void setShowCities( bool visible );
 
     /**
      * @brief  Set whether the terrain place mark overlay is visible
      * @param  visible  visibility of the terrain place marks
      */
-    void setShowTerrain( bool visible ){ 
-        m_model->placeMarkPainter()->setShowTerrain( visible );
-        repaint();
-    }
+    void setShowTerrain( bool visible );
 
     /**
      * @brief  Set whether the relief is visible
      * @param  visible  visibility of the relief
      */
-    void setShowRelief( bool visible ){ 
-        m_model->textureColorizer()->setShowRelief( visible );
-        m_model->setNeedsUpdate();
-        repaint();
-    }
+    void setShowRelief( bool visible );
 
     /**
      * @brief  Set whether the elevation model is visible
      * @param  visible  visibility of the elevation model
      */
-    void setShowElevationModel( bool visible ){ 
-        m_model->setShowElevationModel( visible );
-        m_model->setNeedsUpdate();
-        repaint();
-    }
+    void setShowElevationModel( bool visible );
 
     /**
      * @brief  Set whether the ice layer is visible
      * @param  visible  visibility of the ice layer
      */
-    void setShowIceLayer( bool visible ){ 
-        m_model->vectorComposer()->setShowIceLayer( visible );
-        m_model->setNeedsUpdate();
-        repaint();
-    }
+    void setShowIceLayer( bool visible );
 
     /**
      * @brief  Set whether the borders visible
      * @param  visible  visibility of the borders
      */
-    void setShowBorders( bool visible ){ 
-        m_model->vectorComposer()->setShowBorders( visible );
-        repaint();
-    }
+    void setShowBorders( bool visible );
 
     /**
      * @brief  Set whether the rivers are visible
      * @param  visible  visibility of the rivers
      */
-    void setShowRivers( bool visible ){ 
-        m_model->vectorComposer()->setShowRivers( visible );
-        repaint();
-    }
+    void setShowRivers( bool visible );
 
     /**
      * @brief  Set whether the lakes are visible
      * @param  visible  visibility of the lakes
      */
-    void setShowLakes( bool visible ){ 
-        m_model->vectorComposer()->setShowLakes( visible );
-        repaint();
-    }
+    void setShowLakes( bool visible );
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used 
      * @param  enabled  Enable quick and dirty rendering
      */
-    void setQuickDirty( bool enabled ){
-        // Interlace texture mapping 
-        m_model->textureMapper()->setInterlaced( enabled );
-        m_model->setNeedsUpdate();
-
-        int transparency = enabled ? 255 : 192;
-        m_windrose.setTransparency( transparency );
-        m_mapscale.setTransparency( transparency );
-        repaint();
-    }
+    void setQuickDirty( bool enabled );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.

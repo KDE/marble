@@ -30,10 +30,7 @@ class MARBLE_EXPORT SearchListView : public QListView
 
  public Q_SLOTS:
     void  selectItem(const QString&);
-    void  activate() {
-        if ( selectedIndexes().size() > 0 )
-            emit activated( currentIndex() );
-    }
+    void  activate();
 };
 
 #endif // SEARCHLISTVIEW_H

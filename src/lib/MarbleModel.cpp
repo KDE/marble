@@ -107,7 +107,7 @@ MarbleModel::MarbleModel( QWidget* parent )
     d->m_veccomposer  = new VectorComposer();
     d->m_gridmap      = new GridMap();
     d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
-                                           KAtlasDirs::path( "landcolors.leg" ) );
+                                              KAtlasDirs::path( "landcolors.leg" ) );
 
     d->m_placemarkmanager = new PlaceMarkManager();
     d->m_placecontainer   = d->m_placemarkmanager->getPlaceContainer();

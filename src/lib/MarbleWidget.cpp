@@ -107,6 +107,116 @@ void MarbleWidget::construct(QWidget *parent)
     m_showWindRose = true;
 }
 
+MarbleModel *MarbleWidget::model() const
+{
+    return m_model;
+}
+
+
+QAbstractListModel *MarbleWidget::placeMarkModel()
+{
+    return m_model->getPlaceMarkModel();
+}
+
+float MarbleWidget::moveStep()
+{
+    if ( m_model->radius() < sqrt( width() * width() + height() * height() ) )
+	return 0.1f;
+    else
+	return atanf( (float)width() 
+                      / (float)( 2 * m_model->radius() ) ) * 0.2f;
+}
+
+int MarbleWidget::zoom() const
+{
+    return m_logzoom; 
+}
+
+double MarbleWidget::centerLatitude()
+{ 
+    return (double)m_model->centerLatitude();
+}
+
+double MarbleWidget::centerLongitude()
+{
+    return (double)m_model->centerLongitude();
+}
+
+void MarbleWidget::setMinimumZoom( int zoom )
+{
+    m_minimumzoom = zoom; 
+}
+
+QPixmap MarbleWidget::mapScreenShot()
+{
+    return QPixmap::grabWidget( this ); 
+}
+
+bool MarbleWidget::showScaleBar() const
+{ 
+    return m_showScaleBar;
+}
+
+bool MarbleWidget::showWindRose() const
+{ 
+    return m_showWindRose;
+}
+
+bool MarbleWidget::showGrid() const
+{
+    return m_model->showGrid();
+}
+
+bool MarbleWidget::showPlaces() const
+{ 
+    return m_model->showPlaceMarks();
+}
+
+bool MarbleWidget::showCities() const
+{ 
+    return m_model->placeMarkPainter()->showCities();
+}
+
+bool MarbleWidget::showTerrain() const
+{ 
+    return m_model->placeMarkPainter()->showTerrain();
+}
+
+bool MarbleWidget::showRelief() const
+{ 
+    return m_model->textureColorizer()->showRelief();
+}
+
+bool MarbleWidget::showElevationModel() const
+{ 
+    return m_model->showElevationModel();
+}
+
+bool MarbleWidget::showIceLayer() const
+{ 
+    return m_model->vectorComposer()->showIceLayer();
+}
+
+bool MarbleWidget::showBorders() const
+{ 
+    return m_model->vectorComposer()->showBorders();
+}
+
+bool MarbleWidget::showRivers() const
+{ 
+    return m_model->vectorComposer()->showRivers();
+}
+
+bool MarbleWidget::showLakes() const
+{ 
+    return m_model->vectorComposer()->showLakes();
+}
+
+bool  MarbleWidget::quickDirty() const
+{ 
+    return m_model->textureMapper()->interlaced();
+}
+
 
 void MarbleWidget::zoomView(int zoom)
 {
@@ -194,6 +304,19 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     m_model->placeContainer()->sort();
 
     repaint();
+}
+
+
+void MarbleWidget::setCenterLatitude( double lat )
+{ 
+    float lng = centerLongitude();
+    centerOn( (float)lat, lng );
+}
+
+void MarbleWidget::setCenterLongitude( double lng )
+{
+    float lat = centerLatitude();
+    centerOn( lat, (float)lng );
 }
 
 
@@ -358,6 +481,100 @@ void MarbleWidget::goHome()
 }
 
 
+void MarbleWidget::setMapTheme( const QString& maptheme )
+{
+    m_model->setMapTheme( maptheme );
+    repaint();
+}
+
+void MarbleWidget::setShowScaleBar( bool visible )
+{ 
+    m_showScaleBar = visible;
+    repaint();
+}
+
+void MarbleWidget::setShowWindRose( bool visible )
+{ 
+    m_showWindRose = visible;
+    repaint();
+}
+
+void MarbleWidget::setShowGrid( bool visible )
+{ 
+    m_model->setShowGrid( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowPlaces( bool visible )
+{ 
+    m_model->setShowPlaceMarks( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowCities( bool visible )
+{ 
+    m_model->placeMarkPainter()->setShowCities( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowTerrain( bool visible )
+{ 
+    m_model->placeMarkPainter()->setShowTerrain( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowRelief( bool visible )
+{ 
+    m_model->textureColorizer()->setShowRelief( visible );
+    m_model->setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::setShowElevationModel( bool visible )
+{ 
+    m_model->setShowElevationModel( visible );
+    m_model->setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::setShowIceLayer( bool visible )
+{ 
+    m_model->vectorComposer()->setShowIceLayer( visible );
+    m_model->setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::setShowBorders( bool visible )
+{ 
+    m_model->vectorComposer()->setShowBorders( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowRivers( bool visible )
+{ 
+    m_model->vectorComposer()->setShowRivers( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowLakes( bool visible )
+{
+    m_model->vectorComposer()->setShowLakes( visible );
+    repaint();
+}
+
+void MarbleWidget::setQuickDirty( bool enabled )
+{
+    // Interlace texture mapping 
+    m_model->textureMapper()->setInterlaced( enabled );
+    m_model->setNeedsUpdate();
+
+    int transparency = enabled ? 255 : 192;
+    m_windrose.setTransparency( transparency );
+    m_mapscale.setTransparency( transparency );
+    repaint();
+}
+
+
 // This slot will called when the Globe starts to create the tiles.
 
 void MarbleWidget::creatingTilesStart( const QString &name, const QString &description )
@@ -384,15 +601,6 @@ void MarbleWidget::creatingTilesProgress( int progress )
         delete m_tileCreatorDlg;
 }
 
-
-float MarbleWidget::moveStep()
-{
-    if ( m_model->radius() < sqrt( width() * width() + height() * height() ) )
-	return 0.1f;
-    else
-	return atanf( (float)width() 
-                      / (float)( 2 * m_model->radius() ) ) * 0.2f;
-}
 
 int MarbleWidget::fromLogScale(int zoom)
 {

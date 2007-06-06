@@ -44,7 +44,6 @@ class GridMap : public ScreenPolygon::Vector
 
  private:
     void createCircles( int lngNum, int latNum );
-
     void createCircle( float, SphereDim, float cutCoeff = 0.0f );
 
     inline void initCrossHorizon();
@@ -52,7 +51,7 @@ class GridMap : public ScreenPolygon::Vector
     const QPointF horizonPoint();
 
  private:
-    matrix m_planetAxisMatrix;
+    matrix   m_planetAxisMatrix;
 
     ScreenPolygon m_polygon;
 
