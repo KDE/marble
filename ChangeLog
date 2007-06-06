@@ -1,6 +1,10 @@
 2007-06-06  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy 13: Check for inlince methods in public classes
+	* src/MarbleControlBox.cpp (setLocations): Make non-inline
+	(minimumZoom): Make non-inline
+
+	Krazy 13: Check for inlince methods in public classes
 	* src/lib/MarbleWidget.{h,cpp}: make all functions non-inline
 
 	Krazy 13: Check for inlince methods in public classes

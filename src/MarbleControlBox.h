@@ -69,11 +69,9 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
  
     void addMarbleWidget( MarbleWidget *widget );
 
-    void setLocations(QAbstractItemModel* locations) {
-        locationListView->setModel( locations );
-    }
+    void setLocations(QAbstractItemModel* locations);
 
-    int minimumZoom() const { return m_minimumzoom; }
+    int minimumZoom() const;
 	
  signals:
     void goHome();

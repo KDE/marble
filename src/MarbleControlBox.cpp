@@ -85,16 +85,16 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     m_widget = widget;
 
     // Make us aware of all the PlaceMarks in the MarbleModel so that
-    // we can search in them.
+    // we can search them.
     setLocations( m_widget->placeMarkModel() );
 
     // Initialize the LegendBrowser
-
     legendBrowser->setCheckedLocations( m_widget->showPlaces() );
     legendBrowser->setCheckedCities( m_widget->showCities() );
     legendBrowser->setCheckedTerrain( m_widget->showTerrain() );
     legendBrowser->setCheckedBorders( m_widget->showBorders() );
-    legendBrowser->setCheckedWaterBodies( m_widget->showLakes() && m_widget->showRivers() );
+    legendBrowser->setCheckedWaterBodies( m_widget->showLakes()
+                                          && m_widget->showRivers() );
     legendBrowser->setCheckedGrid( m_widget->showGrid() );
     legendBrowser->setCheckedIceLayer( m_widget->showIceLayer() );
     legendBrowser->setCheckedRelief( m_widget->showRelief() );
@@ -141,6 +141,17 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              m_widget, SLOT( setShowWindRose( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              m_widget, SLOT( setShowScaleBar( bool ) ) );
+}
+
+
+void MarbleControlBox::setLocations(QAbstractItemModel* locations)
+{
+    locationListView->setModel( locations );
+}
+
+int MarbleControlBox::minimumZoom() const
+{
+    return m_minimumzoom;
 }
 
 
