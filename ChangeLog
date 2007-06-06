@@ -1,5 +1,8 @@
 2007-06-06  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix copyright statements
+	* src/lib/kml/*.{h,cpp}: Set the correct email for Murad Tagirov
+
 	Krazy 13: Check for inlince methods in public classes
 	* src/MarbleControlBox.cpp (setLocations): Make non-inline
 	(minimumZoom): Make non-inline

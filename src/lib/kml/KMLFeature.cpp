@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Murad Tagirov <x@y>
+// Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
 
