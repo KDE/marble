@@ -120,7 +120,8 @@ void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeade
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( responseHeader.reasonPhrase() ) );
         m_httpRequestAborted = true;
-        m_pHttp->abort();
+        m_pHttp->clearPendingRequests();
+//        m_pHttp->abort();
         return;
     }
 }
