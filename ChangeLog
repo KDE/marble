@@ -1,3 +1,8 @@
+2007-06-07  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+
+	Krazy 4: Check for an acceptable copyright
+	* src/lib/kml/KMLDocument.cpp: Add header with copyright.
+
 2007-06-06  Murad Tagirov  <tmurad@gmail.com>
     Added KMLDocument
 
