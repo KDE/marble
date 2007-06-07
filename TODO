@@ -32,7 +32,6 @@ Cleaning
 
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --
-   - Only install MarbleWidget.h and MarbleControlBox.h                 --
 
 
 During the SoC projects (0.5)
@@ -44,6 +43,8 @@ Misc
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE
  * Filename == Classname (CamelCasing)                                  ----
+ * Specially prioritized
+   - MapTheme
 
 Widget:
  * Separate the view from the globe (model)                             INGE
@@ -59,6 +60,9 @@ Integration with Qt designer
    - MarbleLocator (search field for placemarks)                        --
    - MarbleControlBox                                                   --
    - MarbleLegend                                                       --
+
+ * Installation issues                                                  TACK
+   - Only install MarbleWidget.h and MarbleControlBox.h                 --
 
 Documentation
  * Coding standards                                                     DONE
