@@ -1,0 +1,58 @@
+Project Guide:
+
+As requested this is the guide on the way that i see the project turning out. This is also for
+my own benefit so please excuse me if I'm repeating things that you already know about.
+
+The main focus of this project is to modify Marble so that it can get new data during runtime,
+this data being information on a GPS Placemark.
+
+A GPS Placemark would be an object that will provide GPS coordinates from whatever means it
+can. There can be any number of GPS Placemarks in the system and they will have to be contained
+within a “Positioning service” object which will be in charge of:
+	1.  Drawing the current position of all the GPS Placemarks that the system is tracking
+	    while they update in real time. Drawing this data will require making Trackmarks of
+	    where the current GPS Placemark has previously been and will also require drawing vector
+	    paths between these Trackmarks.  
+    2.  Adding the data from the GPS Placemark to a GPX file,	if the user has previously requested it.  
+    3.  Keeping the GPS Placemark that is tagged	as “me” to the center of the screen unless the 
+        user specifically requests that it	does not happen. i.e. this is the default behavior.
+
+Marble should also be able to show previously recorded GPX data, so a method of showing this
+data that is not being updated in real time will also need to be developed. This can be a method
+not unlike the way Marble will soon be able to show KML data, so this part of the project will
+need to be done while in close contact with Murad and will need to be discussed at a later date.
+
+GPS Placemarks will need to be updated with coordinates at a set interval of time. The methods
+for obtaining these coordinates will be:
+	1.  Evaluating position from an ip address 
+    2.  Taking coordinates from a GPS device 
+    3.  Finding the position of the Mobile Phone Cell that a connected GPRS or 3G device is “sitting
+	    on” 
+    4.  Allowing a user to input their current position manually.
+
+I propose that there should be a distinction between all of the above methods by identifying
+the GPS Placemark with a different icon for each method of tracking. This will allow users that
+are viewing broadcasted GPS Placemarks to know how their coordinates were calculated.
+
+Using the “positioning service” mentioned above it should be possible to track a number of
+GPS Placemarks which may be connected to the system from the internet via a live feed. This may
+be implemented by creating a GPS Placemark object in the local system using coordinates from the
+live feed or alternatively it could be done by displaying a single GPX file that would update in
+real time over the live feed.  The user should be able to keep any of these GPS Placemarks in
+the center of the screen in the same way that it is done for the GPS Placemark that is labeled
+“me”. For this reason it would be necessary to make a distinction between all “other”
+GPS Placemarks and the one labeled “me”, i propose this is done my using separate colours.
+
+All of the options necessary for handling GPS will be made available in a side tab similar to
+Navigation and Map View. It will contain all tools necessary to:
+	1.  Select a method to track your own GPS Placemark, including none.  
+    2.  Load any number of “other” GPS Placemarks from live feeds.	
+    3.  Select a GPS Placemark to follow with the view. This should also correspond with a click of
+        the Placemark in the view.
+	4.  Load a saved GPX file to the viewer.
+
+An interesting idea for a starting point for this Project may be to create a set of GPS Placemarks
+within the “positioning service” that are generating random GPS coordinates. This will
+allow for testing the “positioning service” before attempting to connect it to live GPS feeds.
+
+
