@@ -1,5 +1,10 @@
 2007-06-07  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
+	Introduce d-pointer in MarbleWidget
+	* src/lib/MarbleWidget.cpp (d): new member
+	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): new class
+	(rest of MarbleWidget.cpp): use d-> everywhere
+	
 	Krazy 4: Check for an acceptable copyright
 	* src/lib/kml/KMLDocument.cpp: Add header with copyright.
 

@@ -35,18 +35,59 @@
 #endif
 
 
-MarbleWidget::MarbleWidget(QWidget *parent)
-    : QWidget(parent)
+class MarbleWidgetPrivate
 {
-    m_model = new MarbleModel( this );
+ public:
+
+    // The model we are showing.
+    MarbleModel     *m_model;
+
+    int              m_logzoom;
+	
+    int              m_zoomStep;
+    int              m_minimumzoom;    
+    int              m_maximumzoom;
+
+    KAtlasViewInputHandler  *m_inputhandler;
+    KAtlasViewPopupMenu     *m_popupmenu;
+
+    TextureColorizer        *m_sealegend;
+    QImage                  *m_pCanvasImage;
+
+    // Parts of the image
+    KAtlasCrossHair  m_crosshair;
+    KAtlasMapScale   m_mapscale; // Shown in the lower left
+    KAtlasWindRose   m_windrose; // Shown in the upper right
+
+    // Tools
+    MeasureTool     *m_pMeasureTool;
+
+    QRegion          m_activeRegion;
+    QPixmap          m_cachedPixmap;
+
+    // The progress dialog for the tile creator.
+    KAtlasTileCreatorDialog  *m_tileCreatorDlg;
+
+    bool             m_showScaleBar;
+    bool             m_showWindRose;
+};
+
+
+
+MarbleWidget::MarbleWidget(QWidget *parent)
+    : QWidget(parent),
+      d( new MarbleWidgetPrivate )
+{
+    d->m_model = new MarbleModel( this );
     construct( parent );
 }
 
 
 MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      d( new MarbleWidgetPrivate )
 {
-    m_model = model;
+    d->m_model = model;
     construct( parent );
 }
 
@@ -56,12 +97,12 @@ void MarbleWidget::construct(QWidget *parent)
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
 
-    connect( m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
+    connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
-    connect( m_model, SIGNAL( creatingTilesProgress( int ) ),
+    connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
              this,    SLOT( creatingTilesProgress( int ) ) );
 
-    connect( m_model, SIGNAL(themeChanged()), this, SLOT(update()) );
+    connect( d->m_model, SIGNAL(themeChanged()), this, SLOT(update()) );
 
     // Set background: black.
     QPalette p = palette();
@@ -72,79 +113,79 @@ void MarbleWidget::construct(QWidget *parent)
 
     //	setAttribute(Qt::WA_NoSystemBackground);
 
-    m_pCanvasImage = new QImage( parent->width(), parent->height(),
+    d->m_pCanvasImage = new QImage( parent->width(), parent->height(),
 				 QImage::Format_ARGB32_Premultiplied );
-    m_model->setCanvasImage( m_pCanvasImage );
+    d->m_model->setCanvasImage( d->m_pCanvasImage );
 
-    m_inputhandler = new KAtlasViewInputHandler( this, m_model );
-    installEventFilter( m_inputhandler );
+    d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
+    installEventFilter( d->m_inputhandler );
     setMouseTracking( true );
 
-    m_popupmenu = new KAtlasViewPopupMenu( this, m_model );
-    connect( m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-	     m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
-    connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-	     m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
+    d->m_popupmenu = new KAtlasViewPopupMenu( this, d->m_model );
+    connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
+	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
+    connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
+	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
 
-    connect( m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
+    connect( d->m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
          this, SIGNAL( mouseGeoPosition( QString ) ) ); 
 
-    m_pMeasureTool = new MeasureTool( this );
+    d->m_pMeasureTool = new MeasureTool( this );
 
-    connect( m_popupmenu,    SIGNAL( addMeasurePoint( float, float ) ),
-	     m_pMeasureTool, SLOT( addMeasurePoint( float, float ) ) );	
-    connect( m_popupmenu,    SIGNAL( removeMeasurePoints() ),
-	     m_pMeasureTool, SLOT( removeMeasurePoints( ) ) );	
+    connect( d->m_popupmenu,    SIGNAL( addMeasurePoint( float, float ) ),
+	     d->m_pMeasureTool, SLOT( addMeasurePoint( float, float ) ) );	
+    connect( d->m_popupmenu,    SIGNAL( removeMeasurePoints() ),
+	     d->m_pMeasureTool, SLOT( removeMeasurePoints( ) ) );	
 
-    m_logzoom  = 0;
-    m_zoomStep = 40;
+    d->m_logzoom  = 0;
+    d->m_zoomStep = 40;
     goHome();
 
-    m_minimumzoom = 950;
-    m_maximumzoom = 2200;
+    d->m_minimumzoom = 950;
+    d->m_maximumzoom = 2200;
 
-    m_showScaleBar = true;
-    m_showWindRose = true;
+    d->m_showScaleBar = true;
+    d->m_showWindRose = true;
 }
 
 MarbleModel *MarbleWidget::model() const
 {
-    return m_model;
+    return d->m_model;
 }
 
 
 QAbstractListModel *MarbleWidget::placeMarkModel()
 {
-    return m_model->getPlaceMarkModel();
+    return d->m_model->getPlaceMarkModel();
 }
 
 float MarbleWidget::moveStep()
 {
-    if ( m_model->radius() < sqrt( width() * width() + height() * height() ) )
+    if ( d->m_model->radius() < sqrt( width() * width() + height() * height() ) )
 	return 0.1f;
     else
 	return atanf( (float)width() 
-                      / (float)( 2 * m_model->radius() ) ) * 0.2f;
+                      / (float)( 2 * d->m_model->radius() ) ) * 0.2f;
 }
 
 int MarbleWidget::zoom() const
 {
-    return m_logzoom; 
+    return d->m_logzoom; 
 }
 
 double MarbleWidget::centerLatitude()
 { 
-    return (double)m_model->centerLatitude();
+    return (double)d->m_model->centerLatitude();
 }
 
 double MarbleWidget::centerLongitude()
 {
-    return (double)m_model->centerLongitude();
+    return (double)d->m_model->centerLongitude();
 }
 
 void MarbleWidget::setMinimumZoom( int zoom )
 {
-    m_minimumzoom = zoom; 
+    d->m_minimumzoom = zoom; 
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -154,86 +195,86 @@ QPixmap MarbleWidget::mapScreenShot()
 
 bool MarbleWidget::showScaleBar() const
 { 
-    return m_showScaleBar;
+    return d->m_showScaleBar;
 }
 
 bool MarbleWidget::showWindRose() const
 { 
-    return m_showWindRose;
+    return d->m_showWindRose;
 }
 
 bool MarbleWidget::showGrid() const
 {
-    return m_model->showGrid();
+    return d->m_model->showGrid();
 }
 
 bool MarbleWidget::showPlaces() const
 { 
-    return m_model->showPlaceMarks();
+    return d->m_model->showPlaceMarks();
 }
 
 bool MarbleWidget::showCities() const
 { 
-    return m_model->placeMarkPainter()->showCities();
+    return d->m_model->placeMarkPainter()->showCities();
 }
 
 bool MarbleWidget::showTerrain() const
 { 
-    return m_model->placeMarkPainter()->showTerrain();
+    return d->m_model->placeMarkPainter()->showTerrain();
 }
 
 bool MarbleWidget::showRelief() const
 { 
-    return m_model->textureColorizer()->showRelief();
+    return d->m_model->textureColorizer()->showRelief();
 }
 
 bool MarbleWidget::showElevationModel() const
 { 
-    return m_model->showElevationModel();
+    return d->m_model->showElevationModel();
 }
 
 bool MarbleWidget::showIceLayer() const
 { 
-    return m_model->vectorComposer()->showIceLayer();
+    return d->m_model->vectorComposer()->showIceLayer();
 }
 
 bool MarbleWidget::showBorders() const
 { 
-    return m_model->vectorComposer()->showBorders();
+    return d->m_model->vectorComposer()->showBorders();
 }
 
 bool MarbleWidget::showRivers() const
 { 
-    return m_model->vectorComposer()->showRivers();
+    return d->m_model->vectorComposer()->showRivers();
 }
 
 bool MarbleWidget::showLakes() const
 { 
-    return m_model->vectorComposer()->showLakes();
+    return d->m_model->vectorComposer()->showLakes();
 }
 
 bool  MarbleWidget::quickDirty() const
 { 
-    return m_model->textureMapper()->interlaced();
+    return d->m_model->textureMapper()->interlaced();
 }
 
 
 void MarbleWidget::zoomView(int zoom)
 {
     // Prevent infinite loops.
-    if ( zoom  == m_logzoom )
+    if ( zoom  == d->m_logzoom )
 	return;
 
-    m_logzoom = zoom;
+    d->m_logzoom = zoom;
 
     emit zoomChanged(zoom);
 
     int radius = fromLogScale(zoom);
 
-    if ( radius == m_model->radius() )
+    if ( radius == d->m_model->radius() )
 	return;
 	
-    m_model->setRadius(radius);
+    d->m_model->setRadius(radius);
     repaint();
 
     setActiveRegion();
@@ -244,10 +285,10 @@ void MarbleWidget::zoomViewBy(int zoomStep)
 {
     // Prevent infinite loops
 
-    int zoom = m_model->radius();
+    int zoom = d->m_model->radius();
     int tryZoom = toLogScale(zoom) + zoomStep;
     //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
-    if ( tryZoom >= m_minimumzoom && tryZoom <= m_maximumzoom ) {
+    if ( tryZoom >= d->m_minimumzoom && tryZoom <= d->m_maximumzoom ) {
 	zoom = tryZoom;
 	zoomView(zoom);
     }
@@ -256,24 +297,24 @@ void MarbleWidget::zoomViewBy(int zoomStep)
 
 void MarbleWidget::zoomIn()
 {
-    zoomViewBy( m_zoomStep );
+    zoomViewBy( d->m_zoomStep );
 }
 
 void MarbleWidget::zoomOut()
 {
-    zoomViewBy( -m_zoomStep );
+    zoomViewBy( -d->m_zoomStep );
 }
 
 void MarbleWidget::rotateBy(const float& phi, const float& theta)
 {
-    m_model->rotateBy( phi, theta );
+    d->m_model->rotateBy( phi, theta );
 
     repaint();
 }
 
 void MarbleWidget::centerOn(const float& lat, const float& lon)
 {
-    m_model->rotateTo( lat, lon );
+    d->m_model->rotateTo( lat, lon );
 
     repaint();
 }
@@ -281,12 +322,12 @@ void MarbleWidget::centerOn(const float& lat, const float& lon)
 void MarbleWidget::centerOn(const QModelIndex& index)
 {
 
-    PlaceMarkModel* model = (PlaceMarkModel*) m_model->getPlaceMarkModel();
+    PlaceMarkModel* model = (PlaceMarkModel*) d->m_model->getPlaceMarkModel();
     if (model == 0) qDebug( "model null" );
 
     PlaceMark* mark = model->placeMark( index );
 
-    m_model->placeContainer()->clearSelected();
+    d->m_model->placeContainer()->clearSelected();
 
     if ( mark != 0 ){
 	float  lon;
@@ -295,13 +336,13 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 	mark->coordinate( lon, lat );
 	centerOn( -lat * 180.0 / M_PI, -lon * 180.0 / M_PI );
 	mark->setSelected( 1 );
-	m_crosshair.setEnabled( true );
+	d->m_crosshair.setEnabled( true );
     }
     else 
-	m_crosshair.setEnabled( false );
+	d->m_crosshair.setEnabled( false );
 
-    m_model->placeContainer()->clearTextPixmaps();
-    m_model->placeContainer()->sort();
+    d->m_model->placeContainer()->clearTextPixmaps();
+    d->m_model->placeContainer()->sort();
 
     repaint();
 }
@@ -345,12 +386,12 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    delete m_pCanvasImage;
+    delete d->m_pCanvasImage;
 
-    m_pCanvasImage = new QImage( width(), height(),
+    d->m_pCanvasImage = new QImage( width(), height(),
 				 QImage::Format_ARGB32_Premultiplied );
-    m_model->setCanvasImage( m_pCanvasImage );
-    m_model->resize();
+    d->m_model->setCanvasImage( d->m_pCanvasImage );
+    d->m_model->resize();
 
     repaint();
 }
@@ -358,19 +399,19 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 void MarbleWidget::connectNotify ( const char * signal )
 {
     if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
-        m_inputhandler->setPositionSignalConnected(true);
+        d->m_inputhandler->setPositionSignalConnected(true);
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
     if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
-        m_inputhandler->setPositionSignalConnected(false);
+        d->m_inputhandler->setPositionSignalConnected(false);
 }
 
 bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 {
 
-    int radius = m_model->radius(); 
+    int radius = d->m_model->radius(); 
     int imgrx  = width() >> 1;
     int imgry  = height() >> 1;
 
@@ -386,7 +427,7 @@ bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 	float qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
 	Quaternion  qpos( 0, qx, qy, qz );
-	qpos.rotateAroundAxis( m_model->getPlanetAxis() );
+	qpos.rotateAroundAxis( d->m_model->getPlanetAxis() );
 	qpos.getSpherical( alpha, beta );
 
 	return true;
@@ -398,20 +439,20 @@ bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
 
 void MarbleWidget::setActiveRegion()
 {
-    int zoom = m_model->radius(); 
+    int zoom = d->m_model->radius(); 
 
-    m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
+    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
                               QRegion::Rectangle );
 
     if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
+	d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
                                    2 * zoom, 2 * zoom, QRegion::Ellipse );
     }
 }
 
 const QRegion MarbleWidget::activeRegion()
 {
-    return m_activeRegion;
+    return d->m_activeRegion;
 }
 
 
@@ -420,44 +461,44 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	Debugging Active Region
     //	painter.setClipRegion(activeRegion);
 
-    //	if(m_model->needsUpdate() || m_pCanvasImage->isNull() || m_pCanvasImage->size() != size())
+    //	if(d->m_model->needsUpdate() || d->m_pCanvasImage->isNull() || d->m_pCanvasImage->size() != size())
     //	{
 
-    int   radius = m_model->radius();
-    bool  clip = ( radius > m_pCanvasImage->width()/2
-                   || radius > m_pCanvasImage->height()/2 ) ? true : false;
+    int   radius = d->m_model->radius();
+    bool  clip = ( radius > d->m_pCanvasImage->width()/2
+                   || radius > d->m_pCanvasImage->height()/2 ) ? true : false;
 
     // Paint the globe itself.
     ClipPainter painter( this, clip); 
     // QPainter painter(this);
-    // painter.setClipRect(10, 10, m_pCanvasImage->width() - 1 , m_pCanvasImage->height()-1 );
+    // painter.setClipRect(10, 10, d->m_pCanvasImage->width() - 1 , d->m_pCanvasImage->height()-1 );
     // painter.setClipping( true );
     // painter.clearNodeCount();
 
     QRect  dirty = evt->rect();
-    m_model->paintGlobe(&painter,dirty);
+    d->m_model->paintGlobe(&painter,dirty);
 	
     // Draw the scale.
-    if ( m_showScaleBar == true )
-        painter.drawPixmap( 10, m_pCanvasImage->height() - 40,
-                            m_mapscale.drawScaleBarPixmap( m_model->radius(),
-                                                       m_pCanvasImage-> width() / 2 - 20 ) );
+    if ( d->m_showScaleBar == true )
+        painter.drawPixmap( 10, d->m_pCanvasImage->height() - 40,
+                            d->m_mapscale.drawScaleBarPixmap( d->m_model->radius(),
+                                                       d->m_pCanvasImage-> width() / 2 - 20 ) );
 
     // Draw the wind rose.
-    if ( m_showWindRose == true )
-        painter.drawPixmap( m_pCanvasImage->width() - 60, 10,
-    			m_windrose.drawWindRosePixmap( m_pCanvasImage->width(),
-						       m_pCanvasImage->height(),
-                                                       m_model->northPoleY() ) );
+    if ( d->m_showWindRose == true )
+        painter.drawPixmap( d->m_pCanvasImage->width() - 60, 10,
+    			d->m_windrose.drawWindRosePixmap( d->m_pCanvasImage->width(),
+						       d->m_pCanvasImage->height(),
+                                                       d->m_model->northPoleY() ) );
 
     // Draw the crosshair.
-    m_crosshair.paintCrossHair( &painter, 
-				m_pCanvasImage->width(),
-                                m_pCanvasImage->height() );
+    d->m_crosshair.paintCrossHair( &painter, 
+				d->m_pCanvasImage->width(),
+                                d->m_pCanvasImage->height() );
 
-    m_pMeasureTool->paintMeasurePoints( &painter, m_pCanvasImage->width() / 2,
-					m_pCanvasImage->height() / 2,
-					radius, m_model->getPlanetAxis(),
+    d->m_pMeasureTool->paintMeasurePoints( &painter, d->m_pCanvasImage->width() / 2,
+					d->m_pCanvasImage->height() / 2,
+					radius, d->m_model->getPlanetAxis(),
                                         true );
 #if 0
       else
@@ -465,7 +506,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
       // Draw cached pixmap to widget
       QPainter pixmapPainter(this);
       QRect rect(0, 0, width(), height());
-      pixmapPainter.drawImage(rect, m_pCanvasImage, rect);
+      pixmapPainter.drawImage(rect, d->m_pCanvasImage, rect);
       }
 #endif
 }
@@ -473,8 +514,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
 void MarbleWidget::goHome()
 {
-    // m_model->rotateTo(0, 0);
-    m_model->rotateTo( 54.8, -9.4 );
+    // d->m_model->rotateTo(0, 0);
+    d->m_model->rotateTo( 54.8, -9.4 );
     zoomView( 1050 ); // default 1050
 
     update(); // not obsolete in case the zoomlevel stays unaltered
@@ -483,94 +524,94 @@ void MarbleWidget::goHome()
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    m_model->setMapTheme( maptheme );
+    d->m_model->setMapTheme( maptheme );
     repaint();
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
 { 
-    m_showScaleBar = visible;
+    d->m_showScaleBar = visible;
     repaint();
 }
 
 void MarbleWidget::setShowWindRose( bool visible )
 { 
-    m_showWindRose = visible;
+    d->m_showWindRose = visible;
     repaint();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 { 
-    m_model->setShowGrid( visible );
+    d->m_model->setShowGrid( visible );
     repaint();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 { 
-    m_model->setShowPlaceMarks( visible );
+    d->m_model->setShowPlaceMarks( visible );
     repaint();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 { 
-    m_model->placeMarkPainter()->setShowCities( visible );
+    d->m_model->placeMarkPainter()->setShowCities( visible );
     repaint();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 { 
-    m_model->placeMarkPainter()->setShowTerrain( visible );
+    d->m_model->placeMarkPainter()->setShowTerrain( visible );
     repaint();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 { 
-    m_model->textureColorizer()->setShowRelief( visible );
-    m_model->setNeedsUpdate();
+    d->m_model->textureColorizer()->setShowRelief( visible );
+    d->m_model->setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowElevationModel( bool visible )
 { 
-    m_model->setShowElevationModel( visible );
-    m_model->setNeedsUpdate();
+    d->m_model->setShowElevationModel( visible );
+    d->m_model->setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 { 
-    m_model->vectorComposer()->setShowIceLayer( visible );
-    m_model->setNeedsUpdate();
+    d->m_model->vectorComposer()->setShowIceLayer( visible );
+    d->m_model->setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 { 
-    m_model->vectorComposer()->setShowBorders( visible );
+    d->m_model->vectorComposer()->setShowBorders( visible );
     repaint();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 { 
-    m_model->vectorComposer()->setShowRivers( visible );
+    d->m_model->vectorComposer()->setShowRivers( visible );
     repaint();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
-    m_model->vectorComposer()->setShowLakes( visible );
+    d->m_model->vectorComposer()->setShowLakes( visible );
     repaint();
 }
 
 void MarbleWidget::setQuickDirty( bool enabled )
 {
     // Interlace texture mapping 
-    m_model->textureMapper()->setInterlaced( enabled );
-    m_model->setNeedsUpdate();
+    d->m_model->textureMapper()->setInterlaced( enabled );
+    d->m_model->setNeedsUpdate();
 
     int transparency = enabled ? 255 : 192;
-    m_windrose.setTransparency( transparency );
-    m_mapscale.setTransparency( transparency );
+    d->m_windrose.setTransparency( transparency );
+    d->m_mapscale.setTransparency( transparency );
     repaint();
 }
 
@@ -581,12 +622,12 @@ void MarbleWidget::creatingTilesStart( const QString &name, const QString &descr
 {
     qDebug("MarbleWidget::creatingTilesStart called... ");
 
-    m_tileCreatorDlg = new KAtlasTileCreatorDialog( this );
+    d->m_tileCreatorDlg = new KAtlasTileCreatorDialog( this );
 
-    m_tileCreatorDlg->setSummary( name, description );
+    d->m_tileCreatorDlg->setSummary( name, description );
 
     // The process itself is started by a timer, so an exec() is ok here.
-    m_tileCreatorDlg->exec();
+    d->m_tileCreatorDlg->exec();
     qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
@@ -595,10 +636,10 @@ void MarbleWidget::creatingTilesStart( const QString &name, const QString &descr
 
 void MarbleWidget::creatingTilesProgress( int progress )
 {
-    m_tileCreatorDlg->setProgress( progress );
+    d->m_tileCreatorDlg->setProgress( progress );
 
     if ( progress == 100 )
-        delete m_tileCreatorDlg;
+        delete d->m_tileCreatorDlg;
 }
 
 

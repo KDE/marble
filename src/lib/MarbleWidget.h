@@ -13,12 +13,14 @@
 #ifndef MARBLEWIDGET_H
 #define MARBLEWIDGET_H
 
+
 /** @file
  * This file contains the headers for MarbleWidget.
  * 
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
+
 
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
@@ -37,6 +39,7 @@ class KAtlasViewPopupMenu;
 class TextureColorizer;
 class MeasureTool;
 class KAtlasTileCreatorDialog;
+class MarbleWidgetPrivate;
 
 
 /** 
@@ -495,38 +498,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setActiveRegion();
 
  private:
-    // The model we are showing.
-    MarbleModel  *m_model;
-
-    int           m_logzoom;
-	
-    int           m_zoomStep;
-    int           m_minimumzoom;    
-    int           m_maximumzoom;
-
-    KAtlasViewInputHandler  *m_inputhandler;
-    KAtlasViewPopupMenu     *m_popupmenu;
-
-    TextureColorizer        *m_sealegend;
-    QImage                  *m_pCanvasImage;
-
-    // Parts of the image
-    KAtlasCrossHair  m_crosshair;
-    KAtlasMapScale   m_mapscale; // Shown in the lower left
-    KAtlasWindRose   m_windrose; // Shown in the upper right
-
-    // Tools
-    MeasureTool  *m_pMeasureTool;
-
-    QRegion       m_activeRegion;
-
-    QPixmap       m_cachedPixmap;
-
-    // The progress dialog for the tile creator.
-    KAtlasTileCreatorDialog  *m_tileCreatorDlg;
-
-    bool          m_showScaleBar;
-    bool          m_showWindRose;
+    MarbleWidgetPrivate  * const d; 
 };
 
 
