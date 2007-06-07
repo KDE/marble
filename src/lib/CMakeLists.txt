@@ -122,7 +122,7 @@ set_target_properties(marblewidget PROPERTIES
 if(WIN32 AND QTONLY)
   install(TARGETS marblewidget DESTINATION "")
 else(WIN32 AND QTONLY)
-  install(TARGETS marblewidget DESTINATION lib)
+  install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
 endif(WIN32 AND QTONLY)
 
 ########### install files ###############
