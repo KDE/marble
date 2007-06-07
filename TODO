@@ -6,7 +6,8 @@ Mark those tasks that you want to perform with your name:
  CARU   Carlos Licea
  MURA   Murad Tagirov
 
-Before Version 0.4 (Monday June, 11th) (now: same as above?)
+
+Before Version 0.4 (Monday June, 11th)
 ----------------------------------------------------------------
 
 Hard requirements for the release:
@@ -26,7 +27,7 @@ Cleaning
    - MarbleModel                                                        done
    - MarbleControlBox                                                   done
  * d-pointerify the public classes                                      INGE
-   - MarbleWidget                                                       --
+   - MarbleWidget                                                       done
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
 
