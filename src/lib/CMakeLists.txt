@@ -119,11 +119,16 @@ set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
 )
 
+# chopse the correct target install library path 
 if(WIN32 AND QTONLY)
   install(TARGETS marblewidget DESTINATION "")
-else(WIN32 AND QTONLY)
-  install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
 endif(WIN32 AND QTONLY)
+
+if(QTONLY)
+  install(TARGETS marblewidget DESTINATION lib)
+else(QTONLY)
+  install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
+endif(QTONLY)
 
 ########### install files ###############
 
