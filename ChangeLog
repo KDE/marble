@@ -13,7 +13,9 @@
 	* src/lib/kml/KMLDocument.cpp: Add header with copyright.
 
 2007-06-06  Murad Tagirov  <tmurad@gmail.com>
-    Added KMLDocument
+
+	Added KMLDocument
+	* src/lib/kml/KMLDocument.{h,cpp}: new files
 
 2007-06-06  Inge Wallin  <inge@lysator.liu.se>
 
