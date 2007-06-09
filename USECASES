@@ -89,10 +89,20 @@ Features:       ?
 
 5. GPS station
 
+The user wants to track his movements in real time using an interface
+with a gps device or wants to display gps data from live feeds or from 
+previous gps sessions. 
+
 Importance:     ?
 Priority:       ?
-Features:       ?
-
+Features:       Tracking of current position on the view
+                Saving gps data from current session
+                Loading old gps data into the view
+                Downloading all information for sections of a map (so 
+                        that the data is available in advance for a 
+                        trip)
+                Loggin into live gps feeds 
+                Displaying more than one gps device
 
 6. Flight planning
 
