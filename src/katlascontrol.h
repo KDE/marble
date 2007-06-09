@@ -25,6 +25,7 @@
 #include "lib/MarbleWidget.h"
 
 
+class QSplitter;
 class MarbleWidget;
 //class MarbleModel;
 class MarbleControlBox;
@@ -55,6 +56,7 @@ class KAtlasControl : public QWidget
     //MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
+    QSplitter         *m_splitter;
 };
 
 

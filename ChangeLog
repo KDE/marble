@@ -1,3 +1,7 @@
+2007-06-09  Torsten Rahn  <rahn@kde.org>
+
+	* src/katlascontrol.{h,cpp}: Introduce QSplitter
+
 2007-06-07  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
 	Introduce d-pointer in MarbleWidget

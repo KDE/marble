@@ -12,6 +12,7 @@
 #include "katlascontrol.h"
 
 #include <QtGui/QLayout>
+#include <QtGui/QSplitter>
 #include <QtGui/QStringListModel>
 
 #include <lib/MarbleWidget.h>
@@ -27,15 +28,11 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     resize( 680, 640 );
 
     m_control = new MarbleControlBox( this );
-    m_control->setFixedWidth( 185 );
+//    m_control->setFixedWidth( 185 );
+    m_splitter = new QSplitter (this);
 
-#if 0
-    // Create the Model (Globe) and one view.
-    m_marbleModel = new MarbleModel( this );
-    m_marbleWidget = new MarbleWidget( m_marbleModel, this );
-#else
     m_marbleWidget = new MarbleWidget( this );
-#endif
+
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
     m_marbleWidget->setMinimumZoom( m_control->minimumZoom() );
@@ -44,10 +41,13 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 
     QHBoxLayout *hlayout = new QHBoxLayout();	
 
-    hlayout->addWidget( m_control );
-    hlayout->addWidget( m_marbleWidget );
-    hlayout->setSpacing(0);
-    vlayout->addLayout( hlayout );
+    m_splitter->addWidget( m_control );
+    m_splitter->addWidget( m_marbleWidget );
+    m_splitter->setSizes( QList<int>() << 180 << width()-180 );
+    m_splitter->setStretchFactor(m_splitter->indexOf(m_control), 0);
+    m_splitter->setStretchFactor(m_splitter->indexOf(m_marbleWidget), 1);
+
+    vlayout->addWidget( m_splitter );
     vlayout->setMargin(0);
 
     m_control->addMarbleWidget( m_marbleWidget );
