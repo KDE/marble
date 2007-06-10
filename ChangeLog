@@ -1,3 +1,9 @@
+2007-06-10  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+
+	Minor cleaning while learning the code
+	* src/lib/vectormap.cpp, placemark.h, placemarkpainter.cpp,
+	vectorcomposer.cpp, MarbleModel.cpp: minor comments and cleaning
+
 2007-06-09  Torsten Rahn  <rahn@kde.org>
 
 	* src/katlascontrol.{h,cpp}: Introduce QSplitter

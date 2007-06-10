@@ -119,25 +119,30 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     m_visibleplacemarks.clear();
 
-    PlaceContainer::const_iterator  it;
     PlaceMark  *mark = 0; 
     int         labelnum = 0;
 
-    for ( it=placecontainer->constBegin();
+    PlaceContainer::const_iterator  it;
+    for ( it = placecontainer->constBegin();
           it != placecontainer->constEnd();
           it++ ) 
     {
         mark  = *it; // no cast
 
+        // Skip the places that are too small.
         if ( m_weightfilter.at( mark->popidx() ) > radius
 //             && mark->symbol() != 0
-             && mark-> selected() == 0 )
+             && mark->selected() == 0 )
             continue;
 
-        if ( m_showTerrain == false && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
+        // Skip terrain marks if we're not showing terrain.
+        if ( m_showTerrain == false
+             && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
             continue;
 
-        if ( m_showCities == false && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
+        // Skip city marks if we're not showing cities.
+        if ( m_showCities == false
+             && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
             continue;
 
         qpos = mark->quaternion();
@@ -158,8 +163,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
 
                 // Specify font properties
-		
-                if ( textpixmap.isNull() == true ) {
+                if ( textpixmap.isNull() ) {
 
                     QChar  role = mark->role();
 
@@ -263,7 +267,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                             textpainter.end();
                         }
                         else {
-                            QImage textimage( fontwidth, m_fontheight, QImage::Format_ARGB32_Premultiplied );
+                            QImage textimage( fontwidth, m_fontheight,
+                                              QImage::Format_ARGB32_Premultiplied );
                             textimage.fill( 0 );
 
                             textpainter.begin( &textimage );
@@ -281,7 +286,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
                             textpixmap = QPixmap::fromImage( textimage );
                         }
-
 
                         mark->setTextPixmap( textpixmap );
                     }
@@ -320,8 +324,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     while ( visit != m_visibleplacemarks.constBegin() ) {
         --visit;
         mark = *visit;
-        painter->drawPixmap( mark -> textRect(), mark -> textPixmap() );
-        painter->drawPixmap( mark -> symbolPos(), mark -> symbolPixmap() );
+        painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
+        painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
     }
 }
 
@@ -330,7 +334,6 @@ inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter,
                                             PlaceMark* mark, QFont font,
                                             float outlineWidth)
 {
-
     QPen    outlinepen( Qt::white );
     outlinepen.setWidthF( outlineWidth );
     QBrush  outlinebrush( Qt::black );

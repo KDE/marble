@@ -31,11 +31,13 @@ class PlaceMark
     void      coordinate( float &lon, float &lat );
     void      setCoordinate( float lon, float lat );
 
+    const Quaternion& quaternion() const { return m_coordinate.quaternion(); }
+
     QString name() const         { return m_name; }
     void setName( QString name ) { m_name = name; }
 
-    const QPoint& symbolPos() const           { return m_sympos;   }
-    void setSymbolPos( const QPoint& sympos ) { m_sympos = sympos; }
+    const QPoint& symbolPos() const           { return m_symbolPos;   }
+    void setSymbolPos( const QPoint& sympos ) { m_symbolPos = sympos; }
 
     const QChar role() const   { return m_role; }
     void setRole( QChar role ) { m_role = role; }
@@ -64,8 +66,6 @@ class PlaceMark
     const int selected() const                 { return m_selected;     }
     void setSelected( int selected )           { m_selected = selected; }
 
-    const Quaternion& quaternion() const { return m_coordinate.quaternion(); }
-
     const QPixmap& textPixmap()    const       { return m_labelPixmap;        }
     void setTextPixmap( QPixmap& labelPixmap ) { m_labelPixmap = labelPixmap; }
 
@@ -79,11 +79,11 @@ class PlaceMark
     }
 
  protected:
-    GeoPoint  m_coordinate;
+    GeoPoint  m_coordinate;     // The geographic location
     QString   m_name;
 
     // View stuff
-    QPoint    m_sympos;
+    QPoint    m_symbolPos;
     QPixmap   m_symbolPixmap;
     QPixmap   m_labelPixmap;
     QRect     m_rect;		// bounding box of label

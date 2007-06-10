@@ -253,7 +253,6 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
             painter->drawPolygon( *itPolygon );
         else
             painter->drawPolyline( *itPolygon );
-
     }
 
     // painter.drawEllipse(imgrx-m_radius,imgry-m_radius,2*m_radius,2*m_radius+1);
@@ -323,9 +322,9 @@ void VectorMap::createArc()
 {
 
     float  beta  = (float)( 180.0f / M_PI * atan2f( horizonb.y() - imgry - 1,
-                                               horizonb.x() - imgrx - 1 ) );
+                                                    horizonb.x() - imgrx - 1 ) );
     float  alpha = (float)( 180.0f / M_PI * atan2f( horizona.y() - imgry - 1,
-                                               horizona.x() - imgrx - 1 ) );
+                                                    horizona.x() - imgrx - 1 ) );
 
     float diff = beta - alpha;
 

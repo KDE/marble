@@ -86,8 +86,7 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
     m_vectorMap -> setBrush( m_areabrush );
     m_vectorMap -> drawMap( origimg, false );
 
-    if ( m_showIceLayer == true )
-    {
+    if ( m_showIceLayer == true ) {
         // Glaciers
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
@@ -96,10 +95,10 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
 
          m_vectorMap -> drawMap( origimg, false );
     }
-    //	qDebug() << "TextureMap calculated nodes: " << vectormap->nodeCount();
+    // qDebug() << "TextureMap calculated nodes: " << vectormap->nodeCount();
 
     m_vectorMap -> drawMap( origimg, false );
-    //	qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
+    // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
 
@@ -108,8 +107,7 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
 {
     // m_vectorMap -> clearNodeCount();
 
-    if ( m_showRivers == true )
-    {
+    if ( m_showRivers == true ) {
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
@@ -119,18 +117,16 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
          m_vectorMap -> paintMap( painter, false );
     }
 
-    if ( m_showBorders == true )
-    {
+    if ( m_showBorders == true ) {
         // Countries
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
          m_vectorMap -> createFromPntMap( m_countries, radius, rotAxis );
         // QPen borderpen(QColor(242,187,136));
 
-        QPen  borderpen( QColor( 242, 155, 104 ) );
+        QPen  borderPen( QColor( 242, 155, 104 ) );
         // borderpen.setStyle(Qt::DashLine);
-
-         m_vectorMap -> setPen( borderpen );
+         m_vectorMap -> setPen( borderPen );
          m_vectorMap -> setBrush( Qt::NoBrush );
          m_vectorMap -> paintMap( painter, false );
 
@@ -147,8 +143,7 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
          m_vectorMap -> paintMap( painter, false );
     }
 
-    if ( m_showLakes == true )
-    {
+    if ( m_showLakes == true ) {
         // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 

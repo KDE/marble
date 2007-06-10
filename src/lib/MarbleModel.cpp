@@ -252,11 +252,13 @@ void MarbleModel::resize()
 
 void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
 {
-    if ( needsUpdate() || d->m_canvasimg->isNull() || d->m_justModified == true ) {
+    if ( needsUpdate() || d->m_canvasimg->isNull() || d->m_justModified ) {
 
         d->m_texmapper->mapTexture( d->m_canvasimg, d->m_radius, d->m_planetAxis );
 
-        if ( d->m_showElevationModel == false && d->m_maptheme->bitmaplayer().dem == "true" ){
+        if ( d->m_showElevationModel == false
+             && d->m_maptheme->bitmaplayer().dem == "true" )
+        {
             d->m_coastimg->fill(Qt::transparent);
 
             // Create VectorMap
@@ -271,6 +273,7 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
     // Paint Map on Widget
     painter->drawImage( dirty, *d->m_canvasimg, dirty ); 
 
+    // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
@@ -280,8 +283,7 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
     // if ( d->m_maptheme->vectorlayer().enabled == true ){
     QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    if ( d->m_showGrid == true )
-    {
+    if ( d->m_showGrid == true ) {
         d->m_gridmap->createGrid( d->m_radius, d->m_planetAxis );
 
         d->m_gridmap->setPen( gridpen );
@@ -293,9 +295,9 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
     }
-
     //	}
-	
+
+    // Paint the PlaceMark layer
     if ( d->m_showPlaceMarks == true && d->m_placecontainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
                                               d->m_canvasimg->width() / 2,
