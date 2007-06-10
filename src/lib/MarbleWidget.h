@@ -314,10 +314,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  centerOn(const float &lat, const float &lon);
     /**
      * @brief  Center the view on a point
-     * @param  lat    an angle parallel to the latitude lines
-     * @param  lon  an angle parallel to the longitude lines
+     * @param  index  an index for a QModel, indicating a city
      */
-    void  centerOn(const QModelIndex&);
+    void  centerOn(const QModelIndex& index);
 
     /**
      * @brief  Set the latitude for the centerPoint

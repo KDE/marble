@@ -1,5 +1,8 @@
 2007-06-10  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
+	Krazy fix for apidox
+	* src/lib/MarbleWidget.h (MarbleWidget): Fix apidox: unknown parameter
+
 	Clean up
 	* src/lib/clippainter.{h,cpp}: use the m_ convention everywhere.
 
