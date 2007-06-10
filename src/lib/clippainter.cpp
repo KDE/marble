@@ -21,15 +21,15 @@
 ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
     : QPainter(pd)
 {
-    imgwidth    = pd -> width(); 
-    imgheight   = pd -> height();
-    currentxpos = 0;
-    currentypos = 0;
+    m_imgwidth    = pd -> width(); 
+    m_imgheight   = pd -> height();
+    m_currentxpos = 0;
+    m_currentypos = 0;
 
-    left   = -1.0f; 
-    right  = (float)imgwidth;
-    top    = -1.0f; 
-    bottom = (float)imgheight;	
+    m_left   = -1.0f; 
+    m_right  = (float)m_imgwidth;
+    m_top    = -1.0f; 
+    m_bottom = (float)m_imgheight;	
 
     // m_debugNodeCount = 0;
     m_clip = clip;
@@ -94,39 +94,39 @@ void ClipPainter::drawPolyobject ( const QPolygonF & pa )
         // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
 
         // Figure out the section of the current point.
-        currentxpos = 1;
-        if ( m_currentPoint.x() < left )
-            currentxpos = 0;
-        if ( m_currentPoint.x() > right ) 
-            currentxpos = 2;
+        m_currentxpos = 1;
+        if ( m_currentPoint.x() < m_left )
+            m_currentxpos = 0;
+        if ( m_currentPoint.x() > m_right ) 
+            m_currentxpos = 2;
 							
-        currentypos = 3;
-        if ( m_currentPoint.y() < top ) 
-            currentypos = 0;
-        if ( m_currentPoint.y() > bottom ) 
-            currentypos = 6;
+        m_currentypos = 3;
+        if ( m_currentPoint.y() < m_top ) 
+            m_currentypos = 0;
+        if ( m_currentPoint.y() > m_bottom ) 
+            m_currentypos = 6;
 
-        currentpos = currentypos + currentxpos;
+        m_currentpos = m_currentypos + m_currentxpos;
 
         // Initialize a few remaining variables.
         if ( itPoint == itStartPoint ) {
-            lastpos = currentpos;
+            m_lastpos = m_currentpos;
         }
 
         // If the current point reaches a new section, take care of clipping.
-        if ( currentpos != lastpos ) {
-            if ( currentpos == 4 || lastpos == 4 ) {
+        if ( m_currentpos != m_lastpos ) {
+            if ( m_currentpos == 4 || m_lastpos == 4 ) {
                 m_lastBorderPoint = borderPoint();
                 m_clipped << m_lastBorderPoint;
             }
             else
                 manageOffScreen();		
 
-            lastpos = currentpos;	
+            m_lastpos = m_currentpos;
         }
 
         // If the current point is onscreen, just add it to our final polygon.
-        if ( currentpos == 4 ) {
+        if ( m_currentpos == 4 ) {
             m_clipped << m_currentPoint;
 #ifdef MARBLE_DEBUG
             ++m_debugNodeCount;
@@ -156,123 +156,135 @@ void ClipPainter::manageOffScreen()
 
     float  m = ( m_currentPoint.y() - m_lastPoint.y() ) / divisor;
 
-    switch ( currentpos ) {
+    switch ( m_currentpos ) {
     case 0:
-        m_clipped << QPointF(left,top);
+        m_clipped << QPointF( m_left, m_top );
         break;
     case 1:
-        if ( lastpos == 3 ) { // case checked
-            xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-            ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa < left && ya < top )
-                m_clipped << QPointF( left, top );
+        if ( m_lastpos == 3 ) { // case checked
+            xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+            ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa < m_left && ya < m_top )
+                m_clipped << QPointF( m_left, m_top );
             else {
-                if ( m_lastBorderPoint.x() == left )
-                    m_clipped << QPointF( left, ya ) << QPointF( xa, top );
+                if ( m_lastBorderPoint.x() == m_left )
+                    m_clipped << QPointF( m_left, ya ) << QPointF( xa, m_top );
                 else
-                    m_clipped << QPointF( xa, top ) << QPointF( left, ya );
+                    m_clipped << QPointF( xa, m_top ) << QPointF( m_left, ya );
             }
         }
-        if ( lastpos == 5 ) { // case checked
-            xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-            ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa > right && ya < top )
-                m_clipped << QPointF( right, top );
+        if ( m_lastpos == 5 ) { // case checked
+            xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+            ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa > m_right && ya < m_top )
+                m_clipped << QPointF( m_right, m_top );
             else {
-                if ( m_lastBorderPoint.x() == right )
-                    m_clipped << QPointF( right, ya ) << QPointF( xa, top );
+                if ( m_lastBorderPoint.x() == m_right )
+                    m_clipped << QPointF( m_right, ya )
+                              << QPointF( xa, m_top );
                 else
-                    m_clipped << QPointF( xa, top ) << QPointF( right, ya );
+                    m_clipped << QPointF( xa, m_top )
+                              << QPointF( m_right, ya );
             }
         }
         break;
     case 2:
-        m_clipped << QPointF( right, top );
+        m_clipped << QPointF( m_right, m_top );
         break;
     case 3:
-        if ( lastpos == 1 ) {
-            xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-            ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa < left && ya < top )
-                m_clipped << QPointF( left, top );
+        if ( m_lastpos == 1 ) {
+            xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+            ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa < m_left && ya < m_top )
+                m_clipped << QPointF( m_left, m_top );
             else {
-                if ( m_lastBorderPoint.x() == left )
-                    m_clipped << QPointF( left, ya ) << QPointF( xa, top );
+                if ( m_lastBorderPoint.x() == m_left )
+                    m_clipped << QPointF( m_left, ya ) << QPointF( xa, m_top );
                 else
-                    m_clipped << QPointF( xa, top ) << QPointF( left, ya );
+                    m_clipped << QPointF( xa, m_top ) << QPointF( m_left, ya );
             }
         }
-        if ( lastpos == 7 ) {
-            xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-            ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa < left && ya > bottom )
-                m_clipped << QPointF( left, bottom );
+        if ( m_lastpos == 7 ) {
+            xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+            ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa < m_left && ya > m_bottom )
+                m_clipped << QPointF( m_left, m_bottom );
             else {
-                if ( m_lastBorderPoint.x() == left )
-                    m_clipped << QPointF( left, ya ) << QPointF( xa, bottom );
+                if ( m_lastBorderPoint.x() == m_left )
+                    m_clipped << QPointF( m_left, ya ) 
+                              << QPointF( xa, m_bottom );
                 else
-                    m_clipped << QPointF( xa, bottom ) << QPointF( left, ya );
+                    m_clipped << QPointF( xa, m_bottom ) 
+                              << QPointF( m_left, ya );
             }
         }
         break;
 				
     case 5:
-        if ( lastpos == 1 ) { // case checked
-            xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-            ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa > right && ya < top )
-                m_clipped << QPointF( right, top );
+        if ( m_lastpos == 1 ) { // case checked
+            xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+            ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa > m_right && ya < m_top )
+                m_clipped << QPointF( m_right, m_top );
             else {
-                if ( m_lastBorderPoint.x() == right )
-                    m_clipped << QPointF( right, ya ) << QPointF( xa, top );
+                if ( m_lastBorderPoint.x() == m_right )
+                    m_clipped << QPointF( m_right, ya )
+                              << QPointF( xa, m_top );
                 else
-                    m_clipped << QPointF( xa, top ) << QPointF( right, ya );
+                    m_clipped << QPointF( xa, m_top )
+                              << QPointF( m_right, ya );
             }
         }
-        if ( lastpos == 7 ) {
-            xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-            ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa > right && ya > bottom )
-                m_clipped << QPointF( right, bottom );
+        if ( m_lastpos == 7 ) {
+            xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+            ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa > m_right && ya > m_bottom )
+                m_clipped << QPointF( m_right, m_bottom );
             else {
-                if ( m_lastBorderPoint.x() == right )
-                    m_clipped << QPointF( right, ya ) << QPointF( xa, bottom );
+                if ( m_lastBorderPoint.x() == m_right )
+                    m_clipped << QPointF( m_right, ya )
+                              << QPointF( xa, m_bottom );
                 else
-                    m_clipped << QPointF( xa, bottom ) << QPointF( right, ya );
+                    m_clipped << QPointF( xa, m_bottom )
+                              << QPointF( m_right, ya );
             }
         }
         break;
     case 6:
-        m_clipped << QPointF( left, bottom );
+        m_clipped << QPointF( m_left, m_bottom );
         break;
     case 7:
-        if ( lastpos == 3 ) {
-            xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-            ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa < left && ya > bottom )
-                m_clipped << QPointF( left, bottom );
+        if ( m_lastpos == 3 ) {
+            xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+            ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa < m_left && ya > m_bottom )
+                m_clipped << QPointF( m_left, m_bottom );
             else {
-                if ( m_lastBorderPoint.x() == left )
-                    m_clipped << QPointF( left, ya ) << QPointF( xa, bottom );
+                if ( m_lastBorderPoint.x() == m_left )
+                    m_clipped << QPointF( m_left, ya ) 
+                              << QPointF( xa, m_bottom );
                 else
-                    m_clipped << QPointF( xa, bottom ) << QPointF( left, ya );
+                    m_clipped << QPointF( xa, m_bottom )
+                              << QPointF( m_left, ya );
             }
         }
-        if ( lastpos == 5 ) {
-            xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-            ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-            if ( xa > right && ya > bottom )
-                m_clipped << QPointF( right, bottom );
+        if ( m_lastpos == 5 ) {
+            xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+            ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+            if ( xa > m_right && ya > m_bottom )
+                m_clipped << QPointF( m_right, m_bottom );
             else {
-                if ( m_lastBorderPoint.x() == right )
-                    m_clipped << QPointF( right, ya ) << QPointF( xa, bottom );
+                if ( m_lastBorderPoint.x() == m_right )
+                    m_clipped << QPointF( m_right, ya )
+                              << QPointF( xa, m_bottom );
                 else
-                    m_clipped << QPointF( xa, bottom ) << QPointF( right, ya );
+                    m_clipped << QPointF( xa, m_bottom )
+                              << QPointF( m_right, ya );
             }
         }
         break;
     case 8:
-        m_clipped << QPointF( right, bottom );
+        m_clipped << QPointF( m_right, m_bottom );
         break;
     default:
         break;				
@@ -291,49 +303,49 @@ const QPointF ClipPainter::borderPoint()
     float m = ( m_currentPoint.y() - m_lastPoint.y() ) 
         / ( m_currentPoint.x() - m_lastPoint.x() );
 
-    int offscreenpos = (currentpos == 4) ? lastpos : currentpos;
+    int offscreenpos = (m_currentpos == 4) ? m_lastpos : m_currentpos;
 
     // "Rise over run" for all possible situations .
     switch ( offscreenpos ) {
     case 0: // topleft
-        xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-        ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-        xa = ( xa < left ) ? left : xa; 
-        ya = ( ya < top ) ? top : ya; 
+        xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+        ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = ( xa < m_left ) ? m_left : xa; 
+        ya = ( ya < m_top ) ? m_top : ya; 
         break;
     case 1: // top
-        xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-        ya = top;
+        xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+        ya = m_top;
         break;
     case 2: // topright
-        xa = m_lastPoint.x() + ( top - m_lastPoint.y() ) / m;
-        ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-        xa = ( xa > right ) ? right : xa; 
-        ya = ( ya < top ) ? top : ya; 
+        xa = m_lastPoint.x() + ( m_top - m_lastPoint.y() ) / m;
+        ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = ( xa > m_right ) ? m_right : xa; 
+        ya = ( ya < m_top ) ? m_top : ya; 
         break;
     case 3: // left
-        xa = left;
-        ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = m_left;
+        ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
         break;
     case 5: // right
-        xa = right;
-        ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = m_right;
+        ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
         break;
     case 6: // bottomleft
-        xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-        ya = m * ( left - m_lastPoint.x() ) + m_lastPoint.y();
-        xa = ( xa < left ) ? left : xa; 
-        ya = ( ya > bottom ) ? bottom : ya; 
+        xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+        ya = m * ( m_left - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = ( xa < m_left ) ? m_left : xa; 
+        ya = ( ya > m_bottom ) ? m_bottom : ya; 
         break;
     case 7: // bottom
-        xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-        ya = bottom;
+        xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+        ya = m_bottom;
         break;
     case 8: // bottomright
-        xa = m_lastPoint.x() + ( bottom - m_lastPoint.y() ) / m;
-        ya = m * ( right - m_lastPoint.x() ) + m_lastPoint.y();
-        xa = ( xa > right ) ? right : xa; 
-        ya = ( ya > bottom ) ? bottom : ya; 
+        xa = m_lastPoint.x() + ( m_bottom - m_lastPoint.y() ) / m;
+        ya = m * ( m_right - m_lastPoint.x() ) + m_lastPoint.y();
+        xa = ( xa > m_right ) ? m_right : xa; 
+        ya = ( ya > m_bottom ) ? m_bottom : ya; 
         break;
     default:
         break;			

@@ -41,18 +41,18 @@ class ClipPainter : public QPainter
  private:
     bool   m_clip;
 
-    float  left;
-    float  right;
-    float  top;
-    float  bottom;
+    float  m_left;
+    float  m_right;
+    float  m_top;
+    float  m_bottom;
 
-    int    imgwidth;
-    int    imgheight;
+    int    m_imgwidth;
+    int    m_imgheight;
 
-    int    currentpos;
-    int    currentxpos;
-    int    currentypos;
-    int    lastpos;
+    int    m_currentpos;
+    int    m_currentxpos;
+    int    m_currentypos;
+    int    m_lastpos;
 
     //	int m_debugNodeCount;
 
