@@ -3,7 +3,7 @@ This file describes the design and structure of Marble
 1. The main structure
 =====================
 
-Marble, the application, consists two main widgets: 
+Marble, the application, currently consists two main widgets: 
   - a MarbleWidget      that contains the view of the world, and
   - a MarbleControlBox  that controls it.
 
@@ -11,16 +11,14 @@ The MarbleWidget is a view for the model represented by the MarbleModel
 class, which contains all the data necessary for manipulating and
 displaying the map.
 
-FIXME: Currently the view creates the model, but this will be changed
-       very soon.  The model/view separation is not perfect, so we are
+FIXME: Currently the view creates the model, but this will be changed.
+       The model/view separation is not perfect, so we are
        working on it.  In the future, the main program will be able to
        create the model and then create the view and controller with 
        a pointer to the model as a parameter.  This will allow the 
        model to have several views with separate sizes, orientations 
        and even projections (flat and spherical, for instance).
-       A convenience class "MarbleWidget" will be provided to 
-       accomplish this out of the box (currently this class is 
-       named "KAtlasControl").
+
 
 2. The World Model
 ==================
@@ -61,7 +59,7 @@ viewed as separate layers:
    PlaceContainer which collects a number of PlaceMarks into a
    container, just like the name suggests.
 
-   There's a special case that should be pointed out -- especially since
+   There is a special case that should be pointed out -- especially since
    it happens with Marble's default map:
    The Topographical Atlas View provides a special map in terms of 
    composition: While for the other map views the 3 layers are painted 
@@ -69,6 +67,7 @@ viewed as separate layers:
    Texture (which contains the digital elevation data) and a Vector 
    Layer to create a recolorized bumpmapped layer via the 
    TextureColorizer class.
+
    All map views and their use of layers get specified in a 
    *.dgml-XML file. The source format for the placemark layer is 
    Google Earth's KML file format which gets parsed and cached into 
