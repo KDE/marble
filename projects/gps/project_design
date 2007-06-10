@@ -17,11 +17,14 @@ service” object which will be in charge of:
      system is tracking while they update in real time. Drawing this
      data will require making Trackmarks of where the current GPS
      Placemark has previously been and will also require drawing
-     vector paths between these Trackmarks.  2.Adding the data from
-     the GPS Placemark to a GPX file, if the user has previously
-     requested it.  3.Keeping the GPS Placemark that is tagged as “me”
-     to the center of the screen unless the user specifically requests
-     that it does not happen. i.e. this is the default behavior.
+     vector paths between these Trackmarks. 
+
+  2. Adding the data from the GPS Placemark to a GPX file, if the
+     user has previously requested it.  
+
+  3. Keeping the GPS Placemark that is tagged as “me” to the center
+     of the screen unless the user specifically requests that it does
+     not happen. i.e. this is the default behavior.
 
 Marble should also be able to show previously recorded GPX data, so a
 method of showing this data that is not being updated in real time
