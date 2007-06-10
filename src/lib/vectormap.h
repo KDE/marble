@@ -75,26 +75,26 @@ class VectorMap : public ScreenPolygon::Vector
 
     ScreenPolygon     m_polygon;
 
-    int               imgrx;
-    int               imgry;
-    int               imgradius;
-    int               imgwidth;
-    int               imgheight;
+    int               m_imgrx;
+    int               m_imgry;
+    int               m_imgradius;
+    int               m_imgwidth;
+    int               m_imgheight;
 
-    QPointF           currentPoint;
-    QPointF           lastPoint; 
+    QPointF           m_currentPoint;
+    QPointF           m_lastPoint; 
 
     QPen              m_pen;
     QBrush            m_brush;
 
     // Dealing with the horizon
-    bool              firsthorizon;
-    bool              lastvisible;
-    bool              currentlyvisible;
-    bool              horizonpair;
-    QPointF           firstHorizonPoint;
-    QPointF           horizona;
-    QPointF           horizonb;
+    bool              m_firsthorizon;
+    bool              m_lastvisible;
+    bool              m_currentlyvisible;
+    bool              m_horizonpair;
+    QPointF           m_firstHorizonPoint;
+    QPointF           m_horizona;
+    QPointF           m_horizonb;
 	
     int               m_radius;
     int               m_rlimit;

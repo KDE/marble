@@ -1,5 +1,8 @@
 2007-06-10  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
+	Clean up
+	* src/lib/vectormap.{h,cpp}: use the m_ convention everywhere.
+
 	Minor cleaning while learning the code
 	* src/lib/vectormap.cpp, placemark.h, placemarkpainter.cpp,
 	vectorcomposer.cpp, MarbleModel.cpp: minor comments and cleaning

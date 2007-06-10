@@ -34,17 +34,17 @@ VectorMap::VectorMap()
     m_zBoundingBoxLimit = 0.0f; 
     m_zPointLimit = 0.0f; 
 
-    imgrx = 0; 
-    imgry = 0; 
-    imgradius = 0;
-    imgwidth  = 0; 
-    imgheight = 0;
+    m_imgrx = 0; 
+    m_imgry = 0; 
+    m_imgradius = 0;
+    m_imgwidth  = 0; 
+    m_imgheight = 0;
 
     // Initialising booleans for horizoncrossing
-    horizonpair = false;
-    lastvisible = false;
-    currentlyvisible = false;
-    firsthorizon = false;
+    m_horizonpair = false;
+    m_lastvisible = false;
+    m_currentlyvisible = false;
+    m_firsthorizon = false;
 
     m_radius = 0;
     m_rlimit = 0;
@@ -68,8 +68,8 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
-    double zlimit = ( ( imgradius < m_radius * m_radius )
-                     ? sqrt(1 - (double)imgradius / (double)(m_radius * m_radius))
+    double zlimit = ( ( m_imgradius < m_radius * m_radius )
+                     ? sqrt(1 - (double)m_imgradius / (double)(m_radius * m_radius))
                      : 0.0 );
 //    zlimit = 0.0;
     // qDebug() << "zlimit: " << zlimit;
@@ -149,26 +149,26 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #endif
             qpos = itPoint->quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
-            currentPoint = QPointF( imgrx + m_radius * qpos.v[Q_X] + 1,
-                                    imgry + m_radius * qpos.v[Q_Y] + 1 );
+            m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1,
+                                      m_imgry + m_radius * qpos.v[Q_Y] + 1 );
 			
             // Take care of horizon crossings if horizon is visible
-            lastvisible = currentlyvisible;			
+            m_lastvisible = m_currentlyvisible;			
 
             // Less accurate:
             // currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
-            currentlyvisible = ( qpos.v[Q_Z] >= 0 ) ? true : false;
+            m_currentlyvisible = ( qpos.v[Q_Z] >= 0 ) ? true : false;
             if ( itPoint == itStartPoint ) {
                 initCrossHorizon();
             }
-            if ( currentlyvisible != lastvisible )
+            if ( m_currentlyvisible != m_lastvisible )
                 manageCrossHorizon();
 
             // Take care of screencrossing crossings if horizon is visible.
             // Filter Points which aren't on the visible Hemisphere.
-            if ( currentlyvisible && currentPoint != lastPoint ) {
+            if ( m_currentlyvisible && m_currentPoint != m_lastPoint ) {
                 // most recent addition: currentPoint != lastPoint
-                m_polygon << currentPoint;
+                m_polygon << m_currentPoint;
             }
 #if 0
             else {
@@ -180,18 +180,18 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             }
 #endif
 
-            lastPoint = currentPoint;
+            m_lastPoint = m_currentPoint;
         }
     }
 
     // In case of horizon crossings, make sure that we always get a
     // polygon closed correctly.
-    if ( firsthorizon ) {
-        horizonb = firstHorizonPoint;
+    if ( m_firsthorizon ) {
+        m_horizonb = m_firstHorizonPoint;
         if (m_polygon.closed())
             createArc();
 
-        firsthorizon = false;
+        m_firsthorizon = false;
     }
 		
     // Avoid polygons degenerated to Points and Lines.
@@ -204,7 +204,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
 {
 
-    bool clip = (m_radius > imgrx || m_radius > imgry) ? true : false;
+    bool clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
 
     ClipPainter  painter(origimg, clip);
     //	QPainter painter(origimg);
@@ -262,10 +262,10 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
 void VectorMap::initCrossHorizon()
 {
     // qDebug("Initializing scheduled new PolyLine");
-    lastvisible  = currentlyvisible;
-    lastPoint    = QPointF( currentPoint.x() + 1, currentPoint.y() + 1 );
-    horizonpair  = false;
-    firsthorizon = false;
+    m_lastvisible  = m_currentlyvisible;
+    m_lastPoint    = QPointF( m_currentPoint.x() + 1, m_currentPoint.y() + 1 );
+    m_horizonpair  = false;
+    m_firsthorizon = false;
 }
 
 
@@ -275,25 +275,25 @@ void VectorMap::manageCrossHorizon()
     // if (currentlyvisible == false) qDebug("Leaving visible hemisphere");
     // else qDebug("Entering visible hemisphere");
 
-    if ( horizonpair == false ) {
+    if ( m_horizonpair == false ) {
         // qDebug("Point A");
 
-        if ( currentlyvisible == false ) {
-            horizona    = horizonPoint();
-            horizonpair = true;
+        if ( m_currentlyvisible == false ) {
+            m_horizona    = horizonPoint();
+            m_horizonpair = true;
         }
         else {
             // qDebug("Orphaned");
-            firstHorizonPoint = horizonPoint();
-            firsthorizon      = true;
+            m_firstHorizonPoint = horizonPoint();
+            m_firsthorizon      = true;
         }
     }
     else {
         // qDebug("Point B");
-        horizonb = horizonPoint();
+        m_horizonb = horizonPoint();
 
         createArc();
-        horizonpair = false;
+        m_horizonpair = false;
     }
 }
 
@@ -304,33 +304,35 @@ const QPointF VectorMap::horizonPoint()
     double  xa;
     double  ya;
 
-    xa = currentPoint.x() - ( imgrx + 1 );
+    xa = m_currentPoint.x() - ( m_imgrx + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
     //	ya = sqrt( (m_radius +1) * ( m_radius +1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
         ? sqrt( (double)(m_rlimit) - (double)( xa * xa ) ) : 0;
     // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
-    if ( ( currentPoint.y() - ( imgry + 1 ) ) < 0 )
+    if ( ( m_currentPoint.y() - ( m_imgry + 1 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( imgrx + xa + 1, imgry + ya + 1 );
+    return QPointF( m_imgrx + xa + 1, m_imgry + ya + 1 );
 }
 
 
 void VectorMap::createArc()
 {
 
-    float  beta  = (float)( 180.0f / M_PI * atan2f( horizonb.y() - imgry - 1,
-                                                    horizonb.x() - imgrx - 1 ) );
-    float  alpha = (float)( 180.0f / M_PI * atan2f( horizona.y() - imgry - 1,
-                                                    horizona.x() - imgrx - 1 ) );
+    float  beta  = (float)( 180.0f / M_PI 
+                            * atan2f( m_horizonb.y() - m_imgry - 1,
+                                      m_horizonb.x() - m_imgrx - 1 ) );
+    float  alpha = (float)( 180.0f / M_PI
+                            * atan2f( m_horizona.y() - m_imgry - 1,
+                                      m_horizona.x() - m_imgrx - 1 ) );
 
     float diff = beta - alpha;
 
     if ( diff != 0.0f && diff != 180.0f && diff != -180.0f ) {
 
-        m_polygon.append( horizona );
+        m_polygon.append( m_horizona );
 
         float sgndiff = diff / fabs(diff);
 
@@ -350,26 +352,25 @@ void VectorMap::createArc()
 
         for ( int it = 1; it < fabs(diff); ++it ) {
             double angle = M_PI/180.0f * (double)( alpha + (sgndiff * it) );
-            itx = (int)( imgrx +  arcradius * cos( angle ) + 1 );
-            ity = (int)( imgry +  arcradius * sin( angle ) + 1 );
+            itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
+            ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
             // qDebug() << " ity: " << ity;
             m_polygon.append( QPoint( itx, ity ) );		
         }
 
-        m_polygon.append( horizonb );
+        m_polygon.append( m_horizonb );
     }
- 
 }
 
 
 void VectorMap::resizeMap(const QPaintDevice * origimg)
 {
-    imgwidth  = origimg -> width();
-    imgheight = origimg -> height();
+    m_imgwidth  = origimg -> width();
+    m_imgheight = origimg -> height();
     // qDebug() << "width:" << imgwidth;
-    imgrx = (imgwidth  >> 1);
-    imgry = (imgheight >> 1);
-    imgradius = imgrx * imgrx + imgry * imgry;
+    m_imgrx = ( m_imgwidth  >> 1);
+    m_imgry = ( m_imgheight >> 1);
+    m_imgradius = m_imgrx * m_imgrx + m_imgry * m_imgry;
 }
 
 
