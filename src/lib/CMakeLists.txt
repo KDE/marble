@@ -31,6 +31,7 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
+           AbstractLayer.cpp
            clippainter.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
@@ -133,6 +134,7 @@ endif(QTONLY)
 ########### install files ###############
 
 install( FILES
+           AbstractLayer.h
            clippainter.h
            GeoPoint.h
            GeoPolygon.h
