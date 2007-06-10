@@ -36,9 +36,26 @@ class AbstractLayer: public QObject
          * \param xOut where the x value of the point will be stored
          * \param yOut where the y value of the point will be sotred
          * \param radius FIXME: add roll of the radius in this comment
+         * \return boolean value as to whether the point is visable on 
+         * screen
          * */
         bool getPixelPosFromGeoPoint(float _long, float _lat, QSize screenSize,
-                Quaternion invRotAxis, int radius, int &xOut,
-                int &yOut);
+                Quaternion invRotAxis, int radius, int &xOut, int &yOut);
+
+         /**
+          * Method to simplify the retreval of the screen pixel position
+          * from a Quaternion
+          * \param position the position of the point we want to find
+          * \param invRotAxis inversion of the Quaternion status of the
+          * globe
+          * \param screenSize size of the screen
+          * \param xOut where the x value of the point will be stored
+          * \param yOut where the y value of the point will be sotred
+          * \param radius FIXME: add roll of the radius in this comment
+          * \return boolean value as to whether the point is visable on 
+          * screen
+          **/ 
+        bool getPixelPosFromGeoPoint(Quaternion position, QSize screenSize,
+                Quaternion invRotAxis, int radius, int &xOut, int &yOut);
     };
 #endif //ABSTRACTLAYER_H

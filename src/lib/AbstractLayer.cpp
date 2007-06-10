@@ -36,3 +36,21 @@ bool AbstractLayer::getPixelPosFromGeoPoint(float _long, float _lat, QSize scree
     }
 }
 
+bool AbstractLayer::getPixelPosFromGeoPoint(Quaternion position, QSize screenSize,
+        Quaternion invRotAxis, int radius, int &xOut, int &yOut)
+{
+    Quaternion qpos=position; //temp
+    qpos.rotateAroundAxis(invRotAxis);
+
+    if(qpos.v[Q_Z]>0){
+        xOut = (int)( ( screenSize.width()/2 )
+                + ( radius * qpos.v[Q_X] ) );
+        yOut = (int)( ( screenSize.height()/2 )
+                + ( radius * qpos.v[Q_Y] ) );
+        
+        return true;
+    }else{
+        return false;
+    }
+}
+
