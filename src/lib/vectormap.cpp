@@ -102,10 +102,10 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-        boundary = (*itPolyLine)->getBoundary();
+        m_boundary = (*itPolyLine)->getBoundary();
 
         for ( int i = 0; i < 5; ++i ) {
-            qbound = boundary[i].quaternion();
+            qbound = m_boundary[i].quaternion();
             qbound.rotateAroundAxis(m_rotMatrix); 
 
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {

@@ -61,7 +61,7 @@ class VectorMap : public ScreenPolygon::Vector
     int            getDetailLevel() const;
 
  private:
-    GeoPoint::Vector  boundary;
+    GeoPoint::Vector  m_boundary;
 
     float             m_zlimit;
     float             m_plimit;
