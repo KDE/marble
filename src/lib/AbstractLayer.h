@@ -10,25 +10,33 @@
 // Copyright 2007      Thomas Zander <zander@kde.org>"
 //
 
+#ifndef ABSTRACTLAYER_H
+#define ABSTRACTLAYER_H
+
+
 /**
- * This Class is to represent the base class for each of the levels in the rendering
- * of the Marble display. It will be the base class of PlacemarkPainter and 
- * FIXME: list the other two rendering layers here
+ * This Class is to represent the base class for each of the levels
+ * in the rendering of the Marble display. It will be the base class
+ * of PlacemarkPainter and FIXME: list the other two rendering layers
  * */
-class AbstractLayer{
+class AbstractLayer: public QObject
+{
     ///an empty constructor, so far
-    AbstrctLayer();
+    AbstrctLayer(QObject * parent=0);
     
     /**
-     * Method to simplify the retreval of the screen pixel position from a longditude
-     * and latitude
+     * Method to simplify the retreval of the screen pixel position 
+     * from a longditude and latitude
      * \param _long the longitude of the point we want to find
      * \param _lat the latitude of the point we want to find 
-     * \param rotAxis the Quaternion that represents the angle and rotation of the globe
+     * \param invRotAxis inversion of the Quaternion status of the
+     * globe
      * \param screenWidth the width in pixels of the current view
      * \param screenHeight the height in pixels of the current view
-     * \param radius FIXME: add the roll of the radius in this comment
+     * \param radius FIXME: add roll of the radius in this comment
      * */
-    getPixelPosFromGeoPoint(float _long, float _lat, Quaternion rotAxis, int screenWidth,
-         screenHeight,  float radius);
+    getPixelPosFromGeoPoint(float _long, float _lat, 
+            Quaternion invRotAxis, int screenWidth, screenHeight, 
+            float radius);
 }
+#endif //ABSTRACTLAYER_H
