@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>"
 //
 
 #include <QtCore/QSize>
