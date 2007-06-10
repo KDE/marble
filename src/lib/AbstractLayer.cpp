@@ -18,11 +18,13 @@ AbstractLayer::AbstractLayer(QObject *parent) : QObject(parent){
     //no layer common things have been so far identified
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint(float _long, float _lat, QSize screenSize, 
-        Quaternion invRotAxis, int radius, int &xOut,
-        int &yOut)
+bool AbstractLayer::getPixelPosFromGeoPoint(float _lon, float _lat, 
+                                            QSize screenSize, 
+                                            Quaternion invRotAxis, 
+                                            int radius, int &xOut,
+                                            int &yOut)
 {
-    Quaternion qpos(_long,_lat); //temp
+    Quaternion qpos(_lon,_lat); //temp
     qpos.rotateAroundAxis(invRotAxis);
 
     if(qpos.v[Q_Z]>0){
@@ -36,8 +38,11 @@ bool AbstractLayer::getPixelPosFromGeoPoint(float _long, float _lat, QSize scree
     }
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint(Quaternion position, QSize screenSize,
-        Quaternion invRotAxis, int radius, int &xOut, int &yOut)
+bool AbstractLayer::getPixelPosFromGeoPoint(Quaternion position, 
+                                            QSize screenSize, 
+                                            Quaternion invRotAxis,
+                                            int radius, int &xOut, 
+                                            int &yOut)
 {
     Quaternion qpos=position; //temp
     qpos.rotateAroundAxis(invRotAxis);

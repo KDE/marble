@@ -39,8 +39,11 @@ class AbstractLayer: public QObject
          * \return boolean value as to whether the point is visable on 
          * screen
          * */
-        bool getPixelPosFromGeoPoint(float _long, float _lat, QSize screenSize,
-                Quaternion invRotAxis, int radius, int &xOut, int &yOut);
+        bool getPixelPosFromGeoPoint(float _lon, float _lat, 
+                                     QSize screenSize, 
+                                     Quaternion invRotAxis, 
+                                     int radius, int &xOut, 
+                                     int &yOut);
 
          /**
           * Method to simplify the retreval of the screen pixel position
@@ -55,7 +58,10 @@ class AbstractLayer: public QObject
           * \return boolean value as to whether the point is visable on 
           * screen
           **/ 
-        bool getPixelPosFromGeoPoint(Quaternion position, QSize screenSize,
-                Quaternion invRotAxis, int radius, int &xOut, int &yOut);
-    };
+        bool getPixelPosFromGeoPoint(Quaternion position, 
+                                     QSize screenSize, 
+                                     Quaternion invRotAxis, 
+                                     int radius, int &xOut, 
+                                     int &yOut);
+};
 #endif //ABSTRACTLAYER_H
