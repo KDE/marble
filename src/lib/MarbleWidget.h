@@ -176,7 +176,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
      */
-    float  moveStep();
+    double  moveStep();
 
     /**
      * @brief  Set the minimum value for the zoom.
@@ -305,13 +305,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lat, lon), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void  rotateBy(const float &phi, const float &theta);
+    void  rotateBy(const double &phi, const double &theta);
     /**
      * @brief  Center the view on a point
      * @param  lat    an angle parallel to the latitude lines
      * @param  lon  an angle parallel to the longitude lines
      */
-    void  centerOn(const float &lat, const float &lon);
+    void  centerOn(const double &lat, const double &lon);
     /**
      * @brief  Center the view on a point
      * @param  index  an index for a QModel, indicating a city

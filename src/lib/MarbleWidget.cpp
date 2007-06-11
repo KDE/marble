@@ -159,13 +159,13 @@ QAbstractListModel *MarbleWidget::placeMarkModel()
     return d->m_model->getPlaceMarkModel();
 }
 
-float MarbleWidget::moveStep()
+double MarbleWidget::moveStep()
 {
     if ( d->m_model->radius() < sqrt( width() * width() + height() * height() ) )
-	return 0.1f;
+	return 0.1;
     else
-	return atanf( (float)width() 
-                      / (float)( 2 * d->m_model->radius() ) ) * 0.2f;
+	return atan( (double)width() 
+		     / (double)( 2 * d->m_model->radius() ) ) * 0.2;
 }
 
 int MarbleWidget::zoom() const
@@ -305,14 +305,14 @@ void MarbleWidget::zoomOut()
     zoomViewBy( -d->m_zoomStep );
 }
 
-void MarbleWidget::rotateBy(const float& phi, const float& theta)
+void MarbleWidget::rotateBy(const double& phi, const double& theta)
 {
     d->m_model->rotateBy( phi, theta );
 
     repaint();
 }
 
-void MarbleWidget::centerOn(const float& lat, const float& lon)
+void MarbleWidget::centerOn(const double& lat, const double& lon)
 {
     d->m_model->rotateTo( lat, lon );
 
@@ -350,14 +350,14 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
 void MarbleWidget::setCenterLatitude( double lat )
 { 
-    float lng = centerLongitude();
-    centerOn( (float)lat, lng );
+    double lng = centerLongitude();
+    centerOn( (double)lat, lng );
 }
 
 void MarbleWidget::setCenterLongitude( double lng )
 {
-    float lat = centerLatitude();
-    centerOn( lat, (float)lng );
+    double lat = centerLatitude();
+    centerOn( lat, (double)lng );
 }
 
 
@@ -415,16 +415,16 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
     int imgrx  = width() >> 1;
     int imgry  = height() >> 1;
 
-    const float  radiusf = 1.0 / (float)(radius);
+    const double  radiusf = 1.0 / (double)(radius);
 
     if ( radius > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
 
-	float qy = radiusf * (float)(y - imgry);
-	float qr = 1.0 - qy * qy;
-	float qx = (float)(x - imgrx) * radiusf;
+	double qy = radiusf * (double)(y - imgry);
+	double qr = 1.0 - qy * qy;
+	double qx = (double)(x - imgrx) * radiusf;
 
-	float qr2z = qr - qx * qx;
-	float qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
+	double qr2z = qr - qx * qx;
+	double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
 	Quaternion  qpos( 0, qx, qy, qz );
 	qpos.rotateAroundAxis( d->m_model->getPlanetAxis() );
@@ -461,7 +461,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	Debugging Active Region
     //	painter.setClipRegion(activeRegion);
 
-    //	if(d->m_model->needsUpdate() || d->m_pCanvasImage->isNull() || d->m_pCanvasImage->size() != size())
+    //	if (d->m_model->needsUpdate() || d->m_pCanvasImage->isNull() || d->m_pCanvasImage->size() != size())
     //	{
 
     int   radius = d->m_model->radius();
@@ -645,14 +645,14 @@ void MarbleWidget::creatingTilesProgress( int progress )
 
 int MarbleWidget::fromLogScale(int zoom)
 {
-    zoom = (int) pow(M_E, ((float)zoom / 200.));
-    // zoom = (int) pow(2, ((float)zoom/200));
+    zoom = (int) pow( M_E, ( (double)zoom / 200.0 ) );
+    // zoom = (int) pow(2.0, ((double)zoom/200));
     return zoom;
 }
 
 int MarbleWidget::toLogScale(int zoom)
 {
-    zoom = (int)(200.0f * logf( (float)zoom ) );
+    zoom = (int)(200.0 * log( (double)zoom ) );
     return zoom;
 }
 

@@ -97,14 +97,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
 
     // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
-    void  rotateTo(const float&, const float&);
+    void  rotateTo(const double&, const double&);
     void  rotateTo(const uint&, const uint&, const uint&);
 
     void rotateBy(const Quaternion&);
-    void rotateBy(const float&, const float&);
+    void rotateBy(const double&, const double&);
 
-    float  centerLatitude()  const;
-    float  centerLongitude() const;
+    double  centerLatitude()  const;
+    double  centerLongitude() const;
 
     QAbstractListModel* getPlaceMarkModel() const;
 
@@ -113,7 +113,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     int northPoleY();
     int northPoleZ();
 
-    bool screenCoordinates( const float lng, const float lat, int& x, int& y );
+    bool screenCoordinates( const double lng, const double lat, int& x, int& y );
 
     bool needsUpdate() const;
     void setNeedsUpdate();

@@ -26,7 +26,7 @@
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
 
-const float RAD2INT = 21600.0 / M_PI;
+const double RAD2INT = 21600.0 / M_PI;
 
 
 class MarbleModelPrivate
@@ -241,10 +241,10 @@ void MarbleModel::resize()
     QPainter  painter( d->m_canvasimg );
     painter.setBrush( brush1 );
     painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (float)(d->m_radius) * 1.05 ),
-                         d->m_canvasimg->height() / 2 - (int)( (float)(d->m_radius) * 1.05 ),
-                         (int)( 2.1 * (float)(d->m_radius) ), 
-                         (int)( 2.1 * (float)(d->m_radius) ) );
+    painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
+                         d->m_canvasimg->height() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
+                         (int)( 2.1 * (double)(d->m_radius) ), 
+                         (int)( 2.1 * (double)(d->m_radius) ) );
 
     d->m_justModified = true;
 }
@@ -344,10 +344,10 @@ void MarbleModel::setRadius(const int& radius)
         QPainter  painter( d->m_canvasimg );
         painter.setBrush( brush1 );
         painter.setRenderHint( QPainter::Antialiasing, true );
-        painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (float)(radius) * 1.05 ),
-                             d->m_canvasimg->height() / 2 - (int)( (float)(radius) * 1.05 ),
-                             (int)( 2.1 * (float)(radius) ), 
-                             (int)( 2.1 * (float)(radius) ) );
+        painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (double)(radius) * 1.05 ),
+                             d->m_canvasimg->height() / 2 - (int)( (double)(radius) * 1.05 ),
+                             (int)( 2.1 * (double)(radius) ), 
+                             (int)( 2.1 * (double)(radius) ) );
     }
 
     d->m_radius = radius;
@@ -362,12 +362,12 @@ Quaternion MarbleModel::getPlanetAxis() const
 
 void MarbleModel::rotateTo(const uint& phi, const uint& theta, const uint& psi)
 {
-    d->m_planetAxis.createFromEuler( (float)(phi)   / RAD2INT,
-                                  (float)(theta) / RAD2INT,
-                                  (float)(psi)   / RAD2INT );
+    d->m_planetAxis.createFromEuler( (double)(phi)   / RAD2INT,
+				     (double)(theta) / RAD2INT,
+				     (double)(psi)   / RAD2INT );
 }
 
-void MarbleModel::rotateTo(const float& phi, const float& theta)
+void MarbleModel::rotateTo(const double& phi, const double& theta)
 {
     d->m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
                                      (theta + 180.0) * M_PI / 180.0, 0.0 );
@@ -379,7 +379,7 @@ void MarbleModel::rotateBy(const Quaternion& incRot)
     d->m_planetAxis = incRot * d->m_planetAxis;
 }
 
-void MarbleModel::rotateBy(const float& phi, const float& theta)
+void MarbleModel::rotateBy(const double& phi, const double& theta)
 {
     Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
@@ -389,14 +389,14 @@ void MarbleModel::rotateBy(const float& phi, const float& theta)
     d->m_planetAxis.normalize();
 }
 
-float MarbleModel::centerLatitude() const
+double MarbleModel::centerLatitude() const
 { 
-    return d->m_planetAxis.pitch() * 180.0f / M_PI;
+    return d->m_planetAxis.pitch() * 180.0 / M_PI;
 }
 
-float MarbleModel::centerLongitude() const
+double MarbleModel::centerLongitude() const
 {
-    return - d->m_planetAxis.yaw() * 180.0f / M_PI;
+    return - d->m_planetAxis.yaw() * 180.0 / M_PI;
 }
 
 
@@ -421,7 +421,7 @@ void MarbleModel::setNeedsUpdate()
 int MarbleModel::northPoleY()
 {
     
-    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  northPole   = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
@@ -431,7 +431,7 @@ int MarbleModel::northPoleY()
 
 int MarbleModel::northPoleZ()
 {
-    Quaternion  northPole   = GeoPoint( 0.0f, (float)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  northPole   = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
@@ -464,7 +464,7 @@ PlaceMarkPainter  *MarbleModel::placeMarkPainter() const
     return d->m_placemarkpainter;
 }
 
-bool MarbleModel::screenCoordinates( const float lng, const float lat, 
+bool MarbleModel::screenCoordinates( const double lng, const double lat, 
                                      int& x, int& y )
 {
     Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
