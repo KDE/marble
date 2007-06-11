@@ -1,3 +1,8 @@
+2007-06-11  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/tilescissor.{h,cpp}: code changes to introduce
+	an additional standalone command line tool to create tiles.
+
 2007-06-10  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
 	Krazy fix for apidox
