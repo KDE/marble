@@ -75,8 +75,8 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
 
     m_totalDistance = 0.0f;
 
-    float  lng;
-    float  lat;
+    double  lng;
+    double  lat;
     float  prevlng;
     float  prevlat;
     prevlng = 0.0f;

@@ -189,8 +189,8 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     // Scanline based algorithm to texture map a sphere
 
     // Initialize needed variables:
-    float lng = 0.0f;
-    float lat = 0.0f;
+    double  lng = 0.0;
+    double  lat = 0.0;
 
     const int   radius2 = radius * radius;
     const float radiusf = 1.0f / (float)(radius);

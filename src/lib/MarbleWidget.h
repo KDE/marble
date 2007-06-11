@@ -166,7 +166,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     bool            globeSphericals( int x, int y, 
-                                     float& alpha, float& beta );
+                                     double& alpha, double& beta );
     /**
      * @brief returns the model for all the placemarks on the globe.
      */

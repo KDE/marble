@@ -25,15 +25,15 @@ enum
 };
 
 
-typedef float     xmmfloat[4];
+typedef double    xmmfloat[4];
 typedef xmmfloat  matrix[3];
 
 
 class Quaternion {
  public:
     Quaternion();
-    Quaternion(float w, float x, float y, float z);
-    Quaternion(float alpha, float beta);
+    Quaternion(double w, double x, double y, double z);
+    Quaternion(double alpha, double beta);
     virtual ~Quaternion(){ }
 
     // Operators
@@ -41,7 +41,7 @@ class Quaternion {
     bool        operator==(const Quaternion &q) const;
     void        operator*=(const Quaternion &q);
 
-    void        set(float w, float x, float y, float z) {
+    void        set(double w, double x, double y, double z) {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
     }
 
@@ -49,19 +49,19 @@ class Quaternion {
 
     Quaternion  inverse() const;
 
-    void        createFromEuler(float pitch, float yaw, float roll);
-    float       pitch() const;
-    float       yaw() const;
+    void        createFromEuler(double pitch, double yaw, double roll);
+    double      pitch() const;
+    double      yaw() const;
 
 
     void        display() const;
 
     virtual void rotateAroundAxis(const Quaternion &q);
-    void        slerp(const Quaternion q1, const Quaternion q2, float t);
+    void        slerp(const Quaternion q1, const Quaternion q2, double t);
 
-    void        getSpherical(float &alpha, float &beta) const; // Geo: lon, lat
+    void        getSpherical(double &alpha, double &beta) const; // Geo: lon, lat
 
-    void        scalar(float mult);
+    void        scalar(double mult);
 
     void        toMatrix(matrix &m);
     void        rotateAroundAxis(const matrix &m);

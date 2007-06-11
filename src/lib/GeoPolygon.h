@@ -45,8 +45,8 @@ class GeoPolygon : public GeoPoint::Vector
 
     void displayBoundary(){
 	Quaternion  q;
-	float       lon;
-	float       lat;
+	double      lon;
+	double      lat;
 
 	m_boundary.at(0).geoCoordinates(lon, lat);
 	qDebug() << "Boundary:" << lon << ", " << lat << " Size: " << m_boundary.size();

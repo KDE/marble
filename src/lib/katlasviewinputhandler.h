@@ -73,8 +73,8 @@ class KAtlasViewInputHandler  : public QObject
     int      m_leftpressedx;
     int      m_leftpressedy;
     int      m_midpressedy;
-    float    m_leftpresseda;
-    float    m_leftpressedb;
+    double   m_leftpresseda;
+    double   m_leftpressedb;
 
     int      m_dragThreshold;
     QTime    m_dragtimer;

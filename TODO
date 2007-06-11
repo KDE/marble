@@ -30,6 +30,7 @@ Cleaning
    - MarbleWidget                                                       done
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
+ * float -> double							INGE
 
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --

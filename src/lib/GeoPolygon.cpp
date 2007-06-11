@@ -28,7 +28,7 @@
 #endif
 
 
-const float ARCMINUTE = 10800;
+const double ARCMINUTE = 10800;
 
 GeoPolygon::GeoPolygon()
 {
@@ -228,8 +228,8 @@ void PntMap::load(const QString &filename)
     //
     // FIXME: Break this out into its own function.
 		
-    float  x     = 0.0;
-    float  lastx = 0.0;
+    double  x     = 0.0;
+    double  lastx = 0.0;
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
@@ -243,8 +243,8 @@ void PntMap::load(const QString &filename)
               itPoint != itEndPoint;
               ++itPoint )
         {
-            float  lon;
-            float  lat;
+            double  lon;
+            double  lat;
             (*itPoint).geoCoordinates(lon, lat);
             x = (int)( ARCMINUTE * lon / M_PI );
 
@@ -274,14 +274,14 @@ void PntMap::load(const QString &filename)
 #endif
 
     // Now we calculate the boundaries
-    float y = 0;
+    double y = 0;
 	
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
-        float  x0 = ARCMINUTE;
-        float  x1 = -ARCMINUTE;
-        float  y0 = ARCMINUTE / 2.0;
-        float  y1 = -ARCMINUTE / 2.0;		
+        double  x0 = ARCMINUTE;
+        double  x1 = -ARCMINUTE;
+        double  y0 = ARCMINUTE / 2.0;
+        double  y1 = -ARCMINUTE / 2.0;		
         GeoPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
 
         if ( (*itPolyLine)->getDateLine() ) { 
@@ -290,8 +290,8 @@ void PntMap::load(const QString &filename)
                   itPoint != itEndPoint;
                   ++itPoint )
             {
-                float  lon;
-                float  lat;
+                double  lon;
+                double  lat;
 
                 (*itPoint).geoCoordinates( lon, lat );
                 x = (int)( ARCMINUTE * lon / M_PI );
@@ -314,8 +314,8 @@ void PntMap::load(const QString &filename)
                   itPoint != itEndPoint;
                   ++itPoint )
             {
-                float  lon;
-                float  lat;
+                double  lon;
+                double  lat;
                 (*itPoint).geoCoordinates( lon, lat );
                 x = (int)( ARCMINUTE * lon / M_PI );
 

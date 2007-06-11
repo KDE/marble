@@ -28,8 +28,8 @@ class PlaceMark
     PlaceMark( const QString& );
 
     GeoPoint  coordinate() const { return m_coordinate; } 
-    void      coordinate( float &lon, float &lat );
-    void      setCoordinate( float lon, float lat );
+    void      coordinate( double &lon, double &lat );
+    void      setCoordinate( double lon, double lat );
 
     const Quaternion& quaternion() const { return m_coordinate.quaternion(); }
 

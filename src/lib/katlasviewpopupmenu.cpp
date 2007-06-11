@@ -88,8 +88,8 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->addAction( m_earthaction );
     m_lmbMenu->addSeparator();
 
-    float  lat;
-    float  lng;
+    double  lat;
+    double  lng;
 
     m_view->globeSphericals( xpos, ypos, lng, lat );
 
@@ -128,8 +128,8 @@ void KAtlasViewPopupMenu::slotAddMeasurePoint()
 {
     QPoint  p = m_pAddMeasurePointAction->data().toPoint();
 
-    float   lat;
-    float   lng;
+    double  lat;
+    double  lng;
 
     m_view->globeSphericals( p.x(), p.y(), lng, lat);
 

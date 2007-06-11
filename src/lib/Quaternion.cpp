@@ -23,19 +23,19 @@
 Quaternion::Quaternion()
 {
 //    like in libeigen we keep the quaternion uninitialized
-//    set( 1.0f, 0.0f, 0.0f, 0.0f );
+//    set( 1.0, 0.0, 0.0, 0.0 );
 }
 
-Quaternion::Quaternion(float w, float x, float y, float z) 
+Quaternion::Quaternion(double w, double x, double y, double z) 
 {
     set( w, x, y, z );
 }
 
-Quaternion::Quaternion(float alpha, float beta)
+Quaternion::Quaternion(double alpha, double beta)
 {
-    v[Q_W] = 0.0f;
+    v[Q_W] = 0.0;
 
-    const float  cosBeta = cosf(beta);
+    const double  cosBeta = cosf(beta);
     v[Q_X] = -cosBeta * sinf(alpha);
     v[Q_Y] = -sinf(beta);
     v[Q_Z] = cosBeta * cosf(alpha);
@@ -44,10 +44,10 @@ Quaternion::Quaternion(float alpha, float beta)
 
 void Quaternion::normalize() 
 {
-    scalar( 1.0f / sqrtf(quatNorm) );
+    scalar( 1.0 / sqrtf(quatNorm) );
 }
 
-void Quaternion::scalar(float mult)
+void Quaternion::scalar(double mult)
 {
     v[Q_W] *= mult;
     v[Q_X] *= mult;
@@ -63,13 +63,13 @@ Quaternion Quaternion::inverse() const
     return inverse;
 }
 
-void Quaternion::createFromEuler(float pitch, float yaw, float roll)
+void Quaternion::createFromEuler(double pitch, double yaw, double roll)
 {
-    float cX, cY, cZ, sX, sY, sZ, cYcZ, sYsZ, sYcZ, cYsZ;
+    double cX, cY, cZ, sX, sY, sZ, cYcZ, sYsZ, sYcZ, cYsZ;
 
-    pitch *= 0.5f;
-    yaw   *= 0.5f;
-    roll  *= 0.5f;
+    pitch *= 0.5;
+    yaw   *= 0.5;
+    roll  *= 0.5;
 
     cX = cosf(pitch);
     cY = cosf(yaw);
@@ -90,14 +90,14 @@ void Quaternion::createFromEuler(float pitch, float yaw, float roll)
     v[Q_Z] = cX * cYsZ - sX * sYcZ;
 }
 
-float Quaternion::pitch() const
+double Quaternion::pitch() const
 {
-    return atanf(2.0f*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+    return atanf(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
 }
 
-float Quaternion::yaw() const
+double Quaternion::yaw() const
 {
-    return asinf(2.0f*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
+    return asinf(2.0*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
 }
 
 void Quaternion::display() const
@@ -110,7 +110,7 @@ void Quaternion::display() const
 
 void Quaternion::operator*=(const Quaternion &q)
 {
-    float x, y, z, w;
+    double x, y, z, w;
 
     w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
     x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
@@ -131,7 +131,7 @@ bool Quaternion::operator==(const Quaternion &q) const
 
 Quaternion Quaternion::operator*(const Quaternion &q) const
 {
-    float  w, x, y, z;
+    double  w, x, y, z;
 
     w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
     x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
@@ -142,7 +142,7 @@ Quaternion Quaternion::operator*(const Quaternion &q) const
 
 void Quaternion::rotateAroundAxis(const Quaternion &q)
 {
-    float w, x, y, z;
+    double w, x, y, z;
 
     w = + v[Q_X] * q.v[Q_X] + v[Q_Y] * q.v[Q_Y] + v[Q_Z] * q.v[Q_Z];
     x = + v[Q_X] * q.v[Q_W] - v[Q_Y] * q.v[Q_Z] + v[Q_Z] * q.v[Q_Y];
@@ -155,22 +155,22 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
     v[Q_Z] = q.v[Q_W] * z + q.v[Q_X] * y - q.v[Q_Y] * x + q.v[Q_Z] * w;
 }
 
-void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
+void Quaternion::slerp(const Quaternion q1, const Quaternion q2, double t)
 {
-    float p1, p2;
+    double p1, p2;
 
-    float cosAlpha = ( q1.v[Q_X]*q2.v[Q_X] + q1.v[Q_Y]*q2.v[Q_Y]
+    double cosAlpha = ( q1.v[Q_X]*q2.v[Q_X] + q1.v[Q_Y]*q2.v[Q_Y]
 		       + q1.v[Q_Z]*q2.v[Q_Z] + q1.v[Q_W]*q2.v[Q_W] );
-    float alpha    = acosf(cosAlpha);
-    float sinAlpha = sinf(alpha);
+    double alpha    = acosf(cosAlpha);
+    double sinAlpha = sinf(alpha);
 
-    if( sinAlpha > 0.0f ) {
-        p1 = sinf( (1.0f-t)*alpha ) / sinAlpha;
+    if( sinAlpha > 0.0 ) {
+        p1 = sinf( (1.0-t)*alpha ) / sinAlpha;
         p2 = sinf( t*alpha ) / sinAlpha;
     } else {
         // both Quaternions are equal
-        p1 = 1.0f;
-        p2 = 0.0f;
+        p1 = 1.0;
+        p2 = 0.0;
     }
 
     v[Q_X] = p1*q1.v[Q_X] + p2*q2.v[Q_X];
@@ -179,53 +179,53 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, float t)
     v[Q_W] = p1*q1.v[Q_W] + p2*q2.v[Q_W];
 }
 
-void Quaternion::getSpherical(float &alpha, float &beta) const 
+void Quaternion::getSpherical(double &alpha, double &beta) const 
 {
-    float  y = v[Q_Y];
-    if ( y > 1.0f )
-        y = 1.0f;
-    else if ( y < -1.0f )
-        y = -1.0f;
+    double  y = v[Q_Y];
+    if ( y > 1.0 )
+        y = 1.0;
+    else if ( y < -1.0 )
+        y = -1.0;
     beta = -asinf( y );
 
-    if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005f) 
-        alpha = -atan2f(v[Q_X], v[Q_Z]);
+    if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005) 
+        alpha = -atan2(v[Q_X], v[Q_Z]);
     else
-        alpha = 0.0f;
+        alpha = 0.0;
 }
 
 void Quaternion::toMatrix(matrix &m)
 {
 
-    float xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
-    float yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
-    float zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
+    double xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
+    double yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
+    double zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
 
-    m[0][0] = 1.0f - 2.0f * (yy + zz);
-    m[0][1] = 2.0f * (xy + zw);
-    m[0][2] = 2.0f * (xz - yw);
-    m[0][3] = 0.0f;
+    m[0][0] = 1.0 - 2.0 * (yy + zz);
+    m[0][1] = 2.0 * (xy + zw);
+    m[0][2] = 2.0 * (xz - yw);
+    m[0][3] = 0.0;
 
-    float xx = v[Q_X] * v[Q_X], xw = v[Q_X] * v[Q_W], yz = v[Q_Y] * v[Q_Z];
+    double xx = v[Q_X] * v[Q_X], xw = v[Q_X] * v[Q_W], yz = v[Q_Y] * v[Q_Z];
 
-    m[1][0] = 2.0f * (xy - zw);
-    m[1][1] = 1.0f - 2.0f * (xx + zz);
-    m[1][2] = 2.0f * (yz + xw);
-    m[1][3] = 0.0f;
+    m[1][0] = 2.0 * (xy - zw);
+    m[1][1] = 1.0 - 2.0 * (xx + zz);
+    m[1][2] = 2.0 * (yz + xw);
+    m[1][3] = 0.0;
 
-    m[2][0] = 2.0f * (xz + yw);
-    m[2][1] = 2.0f * (yz - xw);
-    m[2][2] = 1.0f - 2.0f * (xx + yy);
-    m[2][3] = 0.0f;
+    m[2][0] = 2.0 * (xz + yw);
+    m[2][1] = 2.0 * (yz - xw);
+    m[2][2] = 1.0 - 2.0 * (xx + yy);
+    m[2][3] = 0.0;
 }
 
 void Quaternion::rotateAroundAxis(const matrix &m)
 {
-    float x, y, z;
+    double x, y, z;
 
     x =  m[0][0] * v[Q_X] + m[1][0] * v[Q_Y] + m[2][0] * v[Q_Z];
     y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];
     z =  m[0][2] * v[Q_X] + m[1][2] * v[Q_Y] + m[2][2] * v[Q_Z];
 
-    v[Q_W] = 1.0f; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
+    v[Q_W] = 1.0; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
 }

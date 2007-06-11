@@ -1,9 +1,21 @@
+2007-06-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Change float to double to increase precision.  	
+	* src/lib/Quaternion.{h,cpp}: float -> double
+	* src/lib/GeoPoint.{h,cpp}:   float -> double
+	* src/lib/GeoPolygon.{h,cpp}: float -> double
+	* src/lib/MarbleWidget.{h,cpp},  src/lib/TextureMapper.cpp
+	src/lib/katlasviewinputhandler.{h,cpp},
+	src/lib/katlasviewpopupmenu.cpp, src/lib/measuretool.cpp,
+	src/lib/placemark.{h,cpp},       src/lib/placemarkmanager.cpp
+	src/main.cpp: Just change the floats that needed to be changed.	
+	
 2007-06-11  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/tilescissor.{h,cpp}: code changes to introduce
 	an additional standalone command line tool to create tiles.
 
-2007-06-10  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+2007-06-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy fix for apidox
 	* src/lib/MarbleWidget.h (MarbleWidget): Fix apidox: unknown parameter

@@ -114,8 +114,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
         // emit the position string only if the signal got attached
         if ( m_positionSignalConnected > 0 )
         {
-            float  lat;
-            float  lng;
+            double  lat;
+            double  lng;
             m_marbleWidget->globeSphericals( event->x(), event->y(), lng, lat );
             QString position = GeoPoint( lng, lat ).toString();
             emit mouseGeoPosition( position );
@@ -146,8 +146,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 // m_leftpresseda: screen center latitude  during mouse press
                 // m_leftpressedb: screen center longitude during mouse press
                 m_marbleWidget->globeSphericals( m_marbleWidget->width() / 2,
-                                           m_marbleWidget->height() / 2,
-                                           m_leftpresseda, m_leftpressedb );
+						 m_marbleWidget->height() / 2,
+						 m_leftpresseda, m_leftpressedb );
 
                 if ( m_model->northPoleY() > 0 ) {
                     m_leftpressedb = pi - m_leftpressedb;

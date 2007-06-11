@@ -47,12 +47,12 @@ PlaceMark::PlaceMark( const QString& _name )
 }
 
 
-void PlaceMark::coordinate( float& lon, float& lat )
+void PlaceMark::coordinate( double& lon, double& lat )
 {
     m_coordinate.geoCoordinates( lon, lat );
 }
 
-void PlaceMark::setCoordinate( float lon, float lat )
+void PlaceMark::setCoordinate( double lon, double lat )
 {
     m_coordinate = GeoPoint( lon, lat );
 }

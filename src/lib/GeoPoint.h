@@ -22,13 +22,13 @@ class GeoPoint {
  public:
     GeoPoint(){}
     GeoPoint(int, int);
-    GeoPoint(float, float);
+    GeoPoint(double, double);
     GeoPoint(int, int, int);
     ~GeoPoint(){}
 	
     int detail()  const { return m_detail; }
 
-    void geoCoordinates( float& lon, float& lat ) const {
+    void geoCoordinates( double& lon, double& lat ) const {
 	m_q.getSpherical( lon, lat ); 
     }
 

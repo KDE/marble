@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
             }
 #endif
 	    qDebug( "Timedemo finished in %ims", t.elapsed() );
-	    qDebug() <<  QString("= %1 fps").arg(2000*1000/(float)(t.elapsed()));
+	    qDebug() <<  QString("= %1 fps").arg(2000*1000/(double)(t.elapsed()));
 	    return 0;
 	}
 	else if ( QFile::exists( app.arguments().at( i ) ) )

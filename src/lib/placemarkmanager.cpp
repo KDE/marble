@@ -138,8 +138,8 @@ void PlaceMarkManager::saveFile( const QString& filename, PlaceContainer* placec
 
     out.setVersion(QDataStream::Qt_4_0);
 
-    float  lng;
-    float  lat;
+    double  lng;
+    double  lat;
 
     PlaceContainer::const_iterator  it;
 

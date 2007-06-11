@@ -330,8 +330,8 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     d->m_model->placeContainer()->clearSelected();
 
     if ( mark != 0 ){
-	float  lon;
-        float  lat;
+	double  lon;
+        double  lat;
 
 	mark->coordinate( lon, lat );
 	centerOn( -lat * 180.0 / M_PI, -lon * 180.0 / M_PI );
@@ -408,7 +408,7 @@ void MarbleWidget::disconnectNotify ( const char * signal )
         d->m_inputhandler->setPositionSignalConnected(false);
 }
 
-bool MarbleWidget::globeSphericals(int x, int y, float& alpha, float& beta)
+bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 {
 
     int radius = d->m_model->radius(); 
