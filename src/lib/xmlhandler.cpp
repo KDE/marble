@@ -17,7 +17,7 @@
 #include "placemark.h"
 
 
-const float deg2rad = M_PI/180.0f;
+const double deg2rad = M_PI/180.0;
 
 
 KAtlasXmlHandler::KAtlasXmlHandler()

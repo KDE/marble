@@ -19,7 +19,7 @@ AbstractLayer::AbstractLayer(QObject *parent) : QObject(parent){
     //no layer common things have been so far identified
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint(float _lon, float _lat, 
+bool AbstractLayer::getPixelPosFromGeoPoint(double _lon, double _lat, 
                                             QSize screenSize, 
                                             Quaternion invRotAxis, 
                                             int radius, int &xOut,

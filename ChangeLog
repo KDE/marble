@@ -1,5 +1,14 @@
 2007-06-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Finish the float to double changes
+	* src/lib/AbstractLayer.{h,cpp}: float -> double
+	* src/lib/Quaternion.cpp:        float -> double
+	* src/lib/GeoPolygon.cpp:        float -> double
+	* src/lib/katlaswindrose.cpp:    float -> double
+	* src/lib/xmlhandler.cpp:        float -> double
+	* src/lib/TextureMapper.cpp:     float -> double
+
+
 	More float to double changes, the measure tool
 	* src/lib/measuretool.{h,cpp}:   float -> double
 	* src/lib/katlasviewpopupmenu.h: float -> double

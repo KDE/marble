@@ -120,7 +120,7 @@ void TextureMapper::selectTileLevel(const int& radius)
     if (linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
-    tileLevel = (int)( logf( linearLevel ) / logf( 2.0 ) ) + 1;
+    tileLevel = (int)( log( linearLevel ) / log( 2.0 ) ) + 1;
 
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
@@ -239,9 +239,9 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
         m_qr = 1.0 - m_qy * m_qy;
 
         // rx is the radius component in x direction
-        int rx = (int)sqrtf( (double)( radius2 
-				       - ( ( m_y - m_imageHalfHeight )
-					   * ( m_y - m_imageHalfHeight ) ) ) );
+        int rx = (int)sqrt( (double)( radius2 
+				      - ( ( m_y - m_imageHalfHeight )
+					  * ( m_y - m_imageHalfHeight ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline
         const int xLeft  = ( ( m_imageHalfWidth-rx > 0 )
@@ -305,7 +305,7 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
             m_qx = (double)( m_x - m_imageHalfWidth ) * radiusf;
 
             double qr2z = m_qr - m_qx * m_qx;
-            m_qz = ( qr2z > 0.0 ) ? sqrtf( qr2z ) : 0.0;        
+            m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;        
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis

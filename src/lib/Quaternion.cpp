@@ -35,16 +35,16 @@ Quaternion::Quaternion(double alpha, double beta)
 {
     v[Q_W] = 0.0;
 
-    const double  cosBeta = cosf(beta);
-    v[Q_X] = -cosBeta * sinf(alpha);
-    v[Q_Y] = -sinf(beta);
-    v[Q_Z] = cosBeta * cosf(alpha);
+    const double  cosBeta = cos(beta);
+    v[Q_X] = -cosBeta * sin(alpha);
+    v[Q_Y] = -sin(beta);
+    v[Q_Z] = cosBeta * cos(alpha);
 }
 
 
 void Quaternion::normalize() 
 {
-    scalar( 1.0 / sqrtf(quatNorm) );
+    scalar( 1.0 / sqrt(quatNorm) );
 }
 
 void Quaternion::scalar(double mult)
@@ -71,13 +71,13 @@ void Quaternion::createFromEuler(double pitch, double yaw, double roll)
     yaw   *= 0.5;
     roll  *= 0.5;
 
-    cX = cosf(pitch);
-    cY = cosf(yaw);
-    cZ = cosf(roll);
+    cX = cos(pitch);
+    cY = cos(yaw);
+    cZ = cos(roll);
 
-    sX = sinf(pitch);
-    sY = sinf(yaw);
-    sZ = sinf(roll);
+    sX = sin(pitch);
+    sY = sin(yaw);
+    sZ = sin(roll);
 
     cYcZ = cY * cZ;
     sYsZ = sY * sZ;
@@ -92,12 +92,12 @@ void Quaternion::createFromEuler(double pitch, double yaw, double roll)
 
 double Quaternion::pitch() const
 {
-    return atanf(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+    return atan(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
 }
 
 double Quaternion::yaw() const
 {
-    return asinf(2.0*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
+    return asin(2.0*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
 }
 
 void Quaternion::display() const
@@ -161,12 +161,12 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, double t)
 
     double cosAlpha = ( q1.v[Q_X]*q2.v[Q_X] + q1.v[Q_Y]*q2.v[Q_Y]
 		       + q1.v[Q_Z]*q2.v[Q_Z] + q1.v[Q_W]*q2.v[Q_W] );
-    double alpha    = acosf(cosAlpha);
-    double sinAlpha = sinf(alpha);
+    double alpha    = acos(cosAlpha);
+    double sinAlpha = sin(alpha);
 
     if( sinAlpha > 0.0 ) {
-        p1 = sinf( (1.0-t)*alpha ) / sinAlpha;
-        p2 = sinf( t*alpha ) / sinAlpha;
+        p1 = sin( (1.0-t)*alpha ) / sinAlpha;
+        p2 = sin( t*alpha ) / sinAlpha;
     } else {
         // both Quaternions are equal
         p1 = 1.0;
@@ -186,7 +186,7 @@ void Quaternion::getSpherical(double &alpha, double &beta) const
         y = 1.0;
     else if ( y < -1.0 )
         y = -1.0;
-    beta = -asinf( y );
+    beta = -asin( y );
 
     if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005) 
         alpha = -atan2(v[Q_X], v[Q_Z]);

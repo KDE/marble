@@ -90,8 +90,8 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
     QBrush outlinebrush( Qt::black );
 
     QPainterPath   outlinepath;
-    const QPointF  baseline( 0.5f * (float)( m_width - m_fontwidth ),
-                             (float)(m_fontheight) + 2.0f );
+    const QPointF  baseline( 0.5 * (double)( m_width - m_fontwidth ),
+                             (double)(m_fontheight) + 2.0 );
     outlinepath.addText( baseline, m_font, dirstr );
 
     painter.setPen( outlinepen );

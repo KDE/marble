@@ -39,7 +39,7 @@ class AbstractLayer: public QObject
          * \return boolean value as to whether the point is visible on 
          * screen
          **/
-        bool getPixelPosFromGeoPoint(float _lon, float _lat, 
+        bool getPixelPosFromGeoPoint(double _lon, double _lat, 
                                      QSize screenSize, 
                                      Quaternion invRotAxis, 
                                      int radius, int &xOut, 
