@@ -40,7 +40,7 @@ MeasureTool::MeasureTool(QObject* parent)
     m_useworkaround = testbug();
 
     m_pen.setColor( QColor( Qt::red ) );
-    m_pen.setWidthF( 2.0f );
+    m_pen.setWidthF( 2.0 );
 }
 
 
@@ -73,14 +73,14 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
     QPolygonF  measurePoints;
     // QPolygonF distancePathShadow;
 
-    m_totalDistance = 0.0f;
+    m_totalDistance = 0.0;
 
     double  lng;
     double  lat;
-    float  prevlng;
-    float  prevlat;
-    prevlng = 0.0f;
-    prevlat = 0.0f;
+    double  prevlng;
+    double  prevlat;
+    prevlng = 0.0;
+    prevlat = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -103,7 +103,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
             m_totalDistance += acos( sin( prevlat ) * sin( lat )
-                                     + cos( prevlat ) * cos( lat ) * cos( prevlng - lng ) ) * 6371221.0f;
+                                     + cos( prevlat ) * cos( lat ) * cos( prevlng - lng ) ) * 6371221.0;
 
             drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
         }
@@ -151,7 +151,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
 
 void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter, 
                                            int imgrx, int imgry, 
-                                           float totalDistance )
+                                           double totalDistance )
 {
     Q_UNUSED( imgrx );
     Q_UNUSED( imgry );
@@ -160,7 +160,7 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter,
     QString  distanceValueString;
 
     if ( totalDistance >= 1000.0 )
-        distanceValueString = QString("%1 km").arg(totalDistance/1000.0f);
+        distanceValueString = QString("%1 km").arg(totalDistance/1000.0);
     else	
         distanceValueString = QString("%1 m").arg(totalDistance);
 
@@ -189,23 +189,23 @@ void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
                                     Quaternion qpos, int imgrx, int imgry, 
                                     int radius, bool antialiasing )
 {
-    float       t = 0.0f;
+    double      t = 0.0;
     Quaternion  itpos;
 
-    float       x;
-    float       y;
+    double      x;
+    double      y;
     QPolygonF   distancePath;
 
     Q_UNUSED( antialiasing );
 
     for ( int i = 0; i < 21; ++i ) {
-        t = (float)(i) / 20.0f;
+        t = (double)(i) / 20.0;
 
         itpos.slerp( prevqpos, qpos, t );
 
         if ( itpos.v[Q_Z] > 0 ) {
-            x = (float)(imgrx) + (float)(radius) * itpos.v[Q_X];
-            y = (float)(imgry) + (float)(radius) * itpos.v[Q_Y];
+            x = (double)(imgrx) + (double)(radius) * itpos.v[Q_X];
+            y = (double)(imgry) + (double)(radius) * itpos.v[Q_Y];
 
             // paintMark( painter, x, y );
             distancePath << QPointF( x, y );

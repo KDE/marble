@@ -35,10 +35,10 @@ class MeasureTool : public QObject
 
     void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool );
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
-    void  paintTotalDistanceLabel( ClipPainter*, int, int, float );
+    void  paintTotalDistanceLabel( ClipPainter*, int, int, double );
 
  public Q_SLOTS:
-    void addMeasurePoint( float lng, float lat ) {
+    void addMeasurePoint( double lng, double lat ) {
         m_pMeasurePointList << new GeoPoint( lng, lat );
     }
     void removeMeasurePoints() {
@@ -53,7 +53,7 @@ class MeasureTool : public QObject
                             bool antialiasing );
 
  protected:
-    float   m_totalDistance;
+    double  m_totalDistance;
 
     QFont   m_font_regular;
     int     m_fontheight;

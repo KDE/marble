@@ -11,16 +11,15 @@
 
 #include "katlasviewinputhandler.h"
 
-#include <QtCore/QDebug>
+#include <cmath>
 
+#include <QtCore/QDebug>
 
 #include "GeoPoint.h"
 #include "Quaternion.h"
 #include "katlasdirs.h"
 #include "MarbleWidget.h"
 
-
-const float pi = 3.14159f ;
 
 
 KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *marbleWidget,
@@ -94,8 +93,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_model->rotateBy( -m_marbleWidget->moveStep() * (float)(diry),
-                               -m_marbleWidget->moveStep() * (float)(dirx) );
+            m_model->rotateBy( -m_marbleWidget->moveStep() * (double)(diry),
+                               -m_marbleWidget->moveStep() * (double)(dirx) );
             m_marbleWidget->repaint();
         }
 
@@ -150,8 +149,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 						 m_leftpresseda, m_leftpressedb );
 
                 if ( m_model->northPoleY() > 0 ) {
-                    m_leftpressedb = pi - m_leftpressedb;
-                    m_leftpresseda = pi + m_leftpresseda;	 
+                    m_leftpressedb = M_PI - m_leftpressedb;
+                    m_leftpresseda = M_PI + m_leftpresseda;	 
                 }
             }
 
@@ -173,9 +172,9 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 // Show menu if mouse cursor position remains unchanged
                 // the click takes less than 250 ms
-                if( m_dragtimer.elapsed() <= 250
-                    || ( m_leftpressedx == event->x()
-                         && m_leftpressedy == event->y() ) ) {
+                if ( m_dragtimer.elapsed() <= 250
+		     || ( m_leftpressedx == event->x()
+			  && m_leftpressedy == event->y() ) ) {
                     emit lmbRequest( m_leftpressedx, m_leftpressedy );
                 }
 
@@ -193,7 +192,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
             // Regarding all kinds of mouse moves:
             if ( m_leftpressed == true ) {
-                float  radius = (float)(m_model->radius());
+                double  radius = (double)(m_model->radius());
                 int    deltax = event->x() - m_leftpressedx;
                 int    deltay = event->y() - m_leftpressedy;
 
@@ -201,7 +200,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                     && abs(deltay) <= m_dragThreshold)
                     return true; 
 
-                float direction = 1;
+                double direction = 1;
                 if ( m_model -> northPoleZ() > 0 ) {	
                     if ( event->y() < ( m_model->northPoleY()
                                         + m_marbleWidget->height() / 2 ) )
@@ -213,9 +212,9 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                         direction = -1;
                 }
 
-                m_model->rotateTo( 180 / pi * (float)(-m_leftpressedb)
+                m_model->rotateTo( 180 / M_PI * (double)(-m_leftpressedb)
                                    + 90 * deltay / radius, 
-                                  -180 / pi * (float)(m_leftpresseda)
+                                  -180 / M_PI * (double)(m_leftpresseda)
                                    + 90 * direction * deltax / radius );
 
                 m_marbleWidget->repaint();
@@ -248,8 +247,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
-                m_model->rotateBy( -m_marbleWidget->moveStep() * (float)(diry),
-                                   -m_marbleWidget->moveStep() * (float)(dirx) );
+                m_model->rotateBy( -m_marbleWidget->moveStep() * (double)(diry),
+                                   -m_marbleWidget->moveStep() * (double)(dirx) );
                 m_marbleWidget->repaint();
             }				
         }				

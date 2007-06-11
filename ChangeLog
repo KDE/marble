@@ -1,5 +1,11 @@
 2007-06-11  Inge Wallin  <inge@lysator.liu.se>
 
+	More float to double changes, the measure tool
+	* src/lib/measuretool.{h,cpp}:   float -> double
+	* src/lib/katlasviewpopupmenu.h: float -> double
+	* src/lib/katlasviewinputhandler.cpp: float -> double
+	* src/lib/MarbleWidget.h:        float -> double in connect()
+
 	More float to double changes, the placemark layer
 	* src/lib/placemarkpainter.{h,cpp}: float -> double
 

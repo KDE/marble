@@ -132,8 +132,8 @@ void MarbleWidget::construct(QWidget *parent)
 
     d->m_pMeasureTool = new MeasureTool( this );
 
-    connect( d->m_popupmenu,    SIGNAL( addMeasurePoint( float, float ) ),
-	     d->m_pMeasureTool, SLOT( addMeasurePoint( float, float ) ) );	
+    connect( d->m_popupmenu,    SIGNAL( addMeasurePoint( double, double ) ),
+	     d->m_pMeasureTool, SLOT( addMeasurePoint( double, double ) ) );
     connect( d->m_popupmenu,    SIGNAL( removeMeasurePoints() ),
 	     d->m_pMeasureTool, SLOT( removeMeasurePoints( ) ) );	
 

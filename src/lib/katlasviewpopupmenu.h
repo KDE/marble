@@ -43,7 +43,7 @@ class KAtlasViewPopupMenu  : public QObject
     void  showFeatureInfo( QAction* );
 
  Q_SIGNALS:
-    void  addMeasurePoint( float, float );
+    void  addMeasurePoint( double, double );
     void  removeMeasurePoints();
 
  protected Q_SLOTS:
