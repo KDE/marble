@@ -1,8 +1,12 @@
 2007-06-11  Inge Wallin  <inge@lysator.liu.se>
 
 	More float to double changes, taking it step by step.
-	* src/lib/MarbleModel.{h,cpp}: float -> double
-	* src/lib/MarbleWidget.{h,cpp}:   float -> double
+	* src/lib/GridMap.{h,cpp}:       float -> double
+	* src/lib/TextureMapper.{h,cpp}: float -> double
+
+	More float to double changes, taking it step by step.
+	* src/lib/MarbleModel.{h,cpp}:   float -> double
+	* src/lib/MarbleWidget.{h,cpp}:  float -> double
 
 	Change float to double to increase precision.
 	* src/lib/Quaternion.{h,cpp}: float -> double

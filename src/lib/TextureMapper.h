@@ -61,9 +61,9 @@ class TextureMapper
     void setInterlaced( bool enabled ) { m_interlaced = enabled; }
 
  protected:
-    void pixelValueApprox(const float& lng, const float& lat, 
+    void pixelValueApprox(const double& lng, const double& lat, 
                           QRgb* scanLine);
-    void pixelValue(const float& lng, const float& lat, QRgb* scanLine);
+    void pixelValue(const double& lng, const double& lat, QRgb* scanLine);
     void nextTile();
 
     void tileLevelInit( int tileLevel );
@@ -79,40 +79,40 @@ class TextureMapper
     bool         m_interpolate;
     int          m_nBest;
 
-    int    m_n;
-    float  m_ninv;
+    int     m_n;
+    double  m_ninv;
 
-    int    m_x;
-    int    m_y;
-    int    m_z;
+    int     m_x;
+    int     m_y;
+    int     m_z;
 
-    float  m_qr;
-    float  m_qx;
-    float  m_qy;
-    float  m_qz;
+    double  m_qr;
+    double  m_qx;
+    double  m_qy;
+    double  m_qz;
 
-    int    m_imageHalfWidth;
-    int    m_imageHalfHeight;
-    int    m_imageRadius;
+    int     m_imageHalfWidth;
+    int     m_imageHalfHeight;
+    int     m_imageRadius;
 
-    float  m_prevLat;
-    float  m_prevLng;
+    double  m_prevLat;
+    double  m_prevLng;
 
-    int    m_tilePosX;
-    int    m_tilePosY;
+    int     m_tilePosX;
+    int     m_tilePosY;
 
-    int    m_fullRangeLng;
-    int    m_halfRangeLat;
-    float  m_halfRangeLng;
-    float  m_quatRangeLat;
+    int     m_fullRangeLng;
+    int     m_halfRangeLat;
+    double  m_halfRangeLng;
+    double  m_quatRangeLat;
 
-    int    m_fullNormLng;
-    int    m_halfNormLat;
-    float  m_halfNormLng;
-    float  m_quatNormLat;
+    int     m_fullNormLng;
+    int     m_halfNormLat;
+    double  m_halfNormLng;
+    double  m_quatNormLat;
 
-    float  m_rad2PixelX;
-    float  m_rad2PixelY;
+    double  m_rad2PixelX;
+    double  m_rad2PixelY;
 
     TextureTile  *m_tile;
     int           m_tileLevel;

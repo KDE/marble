@@ -44,7 +44,7 @@ class GridMap : public ScreenPolygon::Vector
 
  private:
     void createCircles( int lngNum, int latNum );
-    void createCircle( float, SphereDim, float cutCoeff = 0.0f );
+    void createCircle( double, SphereDim, double cutCoeff = 0.0 );
 
     inline void initCrossHorizon();
 

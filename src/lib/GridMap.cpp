@@ -24,10 +24,10 @@
     // Except for the equator the major circles of latitude are defined via 
     // the earth's axial tilt, which currently measures about 23°26'21".
  
-const float  AXIALTILT = M_PI / 180.0f * ( 23.0f
-                                           + 26.0f / 60.0f
-                                           + 21.0f / 3600.0f );
-const float  PIHALF   = M_PI / 2;
+const double  AXIALTILT = M_PI / 180.0 * ( 23.0
+                                           + 26.0 / 60.0
+                                           + 21.0 / 3600.0 );
+const double  PIHALF    = M_PI / 2;
 
 
 GridMap::GridMap()
@@ -118,12 +118,12 @@ void GridMap::createCircles( const int lngNum, const int latNum )
     if ( latNum != 0 ) {
 
         // Equator:
-        createCircle( 0.0f , Latitude );
+        createCircle( 0.0 , Latitude );
 
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (float)(i) * PIHALF / (float)(latNum), Latitude );
-            createCircle( - (float)(i) * PIHALF / (float)(latNum), Latitude );
+            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude );
+            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude );
         } 
     } 
 
@@ -135,58 +135,58 @@ void GridMap::createCircles( const int lngNum, const int latNum )
     createCircle( + PIHALF, Longitude );	
 
     for ( int i = 1; i < lngNum; ++i ) {
-        float cutOff = PIHALF / (float)(latNum);
+        double cutOff = PIHALF / (double)(latNum);
         createCircle( i * PIHALF / lngNum,          Longitude, cutOff );
         createCircle( i * PIHALF / lngNum + PIHALF, Longitude, cutOff );	
     }
 }
 
 
-void GridMap::createCircle( float val, SphereDim dim, float cutOff )
+void GridMap::createCircle( double val, SphereDim dim, double cutOff )
 {
 
     // cutoff: the amount of each quarter circle that is cut off at
     // the pole in radians
 
-    const float cutCoeff   = 1 - cutOff / PIHALF;
+    const double cutCoeff   = 1 - cutOff / PIHALF;
 
     // We draw each circle in quarters ( or parts of those ).
     // This is especially convenient for the great longitude circles which 
     // are being cut off close to the poles.
     // quartSteps: the number of nodes in a "quarter" of a circle.
 
-    const float quartSteps = (float) m_precision;
+    const double quartSteps = (double) m_precision;
 
-    float coeff  = 1.0f;
-    float offset = 0.0f;
+    double coeff  = 1.0;
+    double offset = 0.0;
 
     for ( int i = 0; i < 4; ++i ) {
 
         m_polygon.clear();
 
         if ( i > 1 ) 
-            coeff = - 1.0f;
-        offset = ( i % 2 ) ? 1.0f : 0.0f;
+            coeff = - 1.0;
+        offset = ( i % 2 ) ? 1.0 : 0.0;
 
         const int steps = (int) ( cutCoeff * quartSteps );
 
         for ( int j = 0; j < steps + 1; ++j ) {
 
-            float itval  = (j != steps) ? (float)(j) / quartSteps : cutCoeff;
-            float dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
+            double itval  = (j != steps) ? (double)(j) / quartSteps : cutCoeff;
+            double dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
 
-            float lat = ( dim == Latitude ) ? val : dimVal;
-            float lng = ( dim == Longitude ) ? val : dimVal;
+            double lat = ( dim == Latitude ) ? val : dimVal;
+            double lng = ( dim == Longitude ) ? val : dimVal;
 
             GeoPoint    geoit( lng, -lat );
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF((float)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) +1,
-                                   (float)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) +1);
+            m_currentPoint = QPointF((double)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) +1,
+                                   (double)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) +1);
             //qDebug() << "Radius: " << m_radius
-            //         << "QPointF(" << (float)(m_imageHalfWidth+ m_radius*qpos.v[Q_X])+1
-            //        << ", " << (float)(m_imageHalfHeight+ m_radius*qpos.v[Q_Y])+1 << ")";
+            //         << "QPointF(" << (double)(m_imageHalfWidth+ m_radius*qpos.v[Q_X])+1
+            //        << ", " << (double)(m_imageHalfHeight+ m_radius*qpos.v[Q_Y])+1 << ")";
 
             // Take care of horizon crossings if horizon is visible
             m_lastVisible = m_currentlyVisible;
@@ -256,29 +256,29 @@ void GridMap::initCrossHorizon()
     m_lastVisible = m_currentlyVisible;
 
     // Initially m_lastPoint MUST NOT equal m_currentPoint
-    m_lastPoint = QPointF( m_currentPoint.x() + 1.0f, 
-                           m_currentPoint.y() + 1.0f );
+    m_lastPoint = QPointF( m_currentPoint.x() + 1.0, 
+                           m_currentPoint.y() + 1.0 );
 }
 
 
 const QPointF GridMap::horizonPoint()
 {
     // qDebug("Interpolating");
-    float  xa = 0;
-    float  ya = 0;
+    double  xa = 0;
+    double  ya = 0;
 
     xa = m_currentPoint.x() - (m_imageHalfWidth +1) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
-    float  radicant = (float)(m_radius +1) * (float)( m_radius +1) - xa*xa;
+    double  radicant = (double)(m_radius +1) * (double)( m_radius +1) - xa*xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
     if ( ( m_currentPoint.y() - ( m_imageHalfHeight + 1 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (float)m_imageHalfWidth  + xa + 1,
-                    (float)m_imageHalfHeight + ya + 1 );
+    return QPointF( (double)m_imageHalfWidth  + xa + 1,
+                    (double)m_imageHalfHeight + ya + 1 );
 }
 
 
