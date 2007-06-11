@@ -49,6 +49,7 @@ if (QTONLY)
 
   install(TARGETS MarbleNavigatorPlugin DESTINATION ${QT_PLUGINS_DIR}/designer)
 else (QTONLY)
+  INCLUDE_DIRECTORIES( ${KDE4_INCLUDES} )
   kde4_add_ui_files(marblenavigator_SRCS ${marblenavigator_UI})
   kde4_automoc(${marblenavigator_SRCS})
   kde4_add_library(MarbleNavigatorPlugin SHARED ${marblenavigator_SRCS})
