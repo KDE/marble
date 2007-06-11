@@ -4,6 +4,7 @@ Encoding=UTF-8
 Exec=marble
 Name=Marble
 GenericName=Desktop Globe
+GenericName[es]=Planetario para el escritorio
 Icon=marble
 Terminal=false
 Categories=Qt;KDE;Utility;X-KDE-More;Education;Science;
