@@ -15,7 +15,7 @@
 
 #include "Quaternion.h"
 /**
- * This Class is to represent the base class for each of the levels
+ * This class is to represent the base class for each of the levels
  * in the rendering of the Marble display. It will be the base class
  * of PlacemarkPainter and FIXME: list the other two rendering layers
  * */
@@ -26,7 +26,7 @@ class AbstractLayer: public QObject
         AbstractLayer(QObject * parent=0);
     
         /**
-         * Method to simplify the retreval of the screen pixel position 
+         * Method to simplify the retrieval of the screen pixel position 
          * from a longditude and latitude
          * \param _long the longitude of the point we want to find
          * \param _lat the latitude of the point we want to find 
@@ -34,11 +34,11 @@ class AbstractLayer: public QObject
          * globe
          * \param screenSize size of the screen
          * \param xOut where the x value of the point will be stored
-         * \param yOut where the y value of the point will be sotred
+         * \param yOut where the y value of the point will be stored
          * \param radius FIXME: add roll of the radius in this comment
-         * \return boolean value as to whether the point is visable on 
+         * \return boolean value as to whether the point is visible on 
          * screen
-         * */
+         **/
         bool getPixelPosFromGeoPoint(float _lon, float _lat, 
                                      QSize screenSize, 
                                      Quaternion invRotAxis, 

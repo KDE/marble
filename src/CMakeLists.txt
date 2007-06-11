@@ -4,6 +4,7 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
+add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
 

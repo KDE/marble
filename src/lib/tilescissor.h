@@ -24,7 +24,7 @@ class TileScissor : public QObject
 
  public: 
     TileScissor( const QString& prefix, const QString& installmap, 
-                 const QString& dem );
+                 const QString& dem, const QString& targetDir=QString() );
 
  Q_SIGNALS:
     void  progress( int value );
@@ -36,6 +36,7 @@ class TileScissor : public QObject
     QString  m_prefix;
     QString  m_installmap;
     QString  m_dem;
+    QString  m_targetDir;
 };
 
 

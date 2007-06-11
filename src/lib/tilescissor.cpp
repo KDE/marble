@@ -25,10 +25,11 @@
 
 
 TileScissor::TileScissor(const QString& prefix, const QString& installmap,
-                         const QString& dem) 
+                         const QString& dem, const QString& targetDir) 
     : m_prefix(prefix),
       m_installmap(installmap),
-      m_dem(dem)
+      m_dem(dem),
+      m_targetDir(targetDir)
 {
     /* NOOP */
 }
@@ -39,15 +40,18 @@ void TileScissor::createTiles()
 
     QApplication::processEvents(); 
 
-    QString srcpath = KAtlasDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
-    QString destpath = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + '/';
+    QString m_sourceDir = KAtlasDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
+    if ( m_targetDir.isNull() )
+        m_targetDir = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + '/';
+    if ( !m_targetDir.endsWith('/') )
+        m_targetDir += '/';
 
-    qDebug() << "Creating tiles from: " << srcpath;
-    QImageReader testimg( srcpath );
+    qDebug() << "Creating tiles from: " << m_sourceDir;
+    QImageReader testimg( m_sourceDir );
 
-    QVector<QRgb> legpal;
+    QVector<QRgb> grayScalePalette;
     for ( int cnt = 0; cnt <= 255; cnt++) {
-        legpal.insert(cnt, qRgb(cnt, cnt, cnt));
+        grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
     int  imgw = testimg.size().width();
@@ -75,8 +79,8 @@ void TileScissor::createTiles()
     qDebug() << "Maximum tile level: " << maxtilelevel;
 
 
-    if ( QDir( KAtlasDirs::localDir() + "/maps/earth/" + m_prefix ).exists() == false ) 
-        ( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/maps/earth/" + m_prefix );
+    if ( QDir( m_targetDir ).exists() == false ) 
+        ( QDir::root() ).mkpath( m_targetDir );
 
     int tilelevel = 0;
 
@@ -106,14 +110,14 @@ void TileScissor::createTiles()
     QString tilename;
 
     // Creating directory structure for the highest level
-    QString dirname( KAtlasDirs::localDir()
-                     + QString("/maps/earth/%1/%2").arg(m_prefix).arg(maxtilelevel) );
+    QString dirname( m_targetDir
+                     + QString("%1").arg(maxtilelevel) );
     if ( !QDir( dirname ).exists() ) 
         ( QDir::root() ).mkpath( dirname );
 
     for ( int n = 0; n < nmax; n++ ) {
-        QString dirname( KAtlasDirs::localDir()
-                         + QString("/maps/earth/%1/%2/%3").arg(m_prefix).arg(maxtilelevel).arg( n, 4, 10, QChar('0') ) );
+        QString dirname( m_targetDir
+                         + QString("%1/%2").arg(maxtilelevel).arg( n, 4, 10, QChar('0') ) );
         if ( !QDir( dirname ).exists() ) 
             ( QDir::root() ).mkpath( dirname );
     }
@@ -124,7 +128,7 @@ void TileScissor::createTiles()
         QRect   rowsrc( 0, (int)( (float)( n * imgh ) / (float)(nmax)),
                         imgw, (int)((float)(imgh) / (float)(nmax) ) );
 
-        QImage  img( srcpath );
+        QImage  img( m_sourceDir );
 
         QImage  row = img.copy( rowsrc );
         QSize   destsize( stdimgw, 675 );
@@ -143,11 +147,11 @@ void TileScissor::createTiles()
 
             QImage tile = row.copy( m * imgw / mmax, 0, 675, 675 );
 
-            tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( maxtilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+            tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( maxtilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
 
             if ( m_dem == "true" ) {
                 tile = tile.convertToFormat(QImage::Format_Indexed8, 
-                                            legpal, Qt::ThresholdDither);
+                                            grayScalePalette, Qt::ThresholdDither);
             }
 
             bool  noerr = tile.save( tilename, "jpg", 100 );
@@ -172,8 +176,8 @@ void TileScissor::createTiles()
         int nmaxit =  TileLoader::levelToRow( tilelevel );;
 
         for ( int n = 0; n < nmaxit; n++ ) {
-            QString  dirname( KAtlasDirs::localDir()
-                              + QString("/maps/earth/%1/%2/%3").arg(m_prefix).arg(tilelevel).arg( n, 4, 10, QChar('0') ) );
+            QString  dirname( m_targetDir
+                              + QString("%1/%2").arg(tilelevel).arg( n, 4, 10, QChar('0') ) );
 
             // qDebug() << "dirname: " << dirname;
             if ( !QDir( dirname ).exists() ) 
@@ -182,22 +186,23 @@ void TileScissor::createTiles()
             int  mmaxit = TileLoader::levelToColumn( tilelevel );;
             for ( int m = 0; m < mmaxit; m++ ) {
 
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
                 QImage  img_topleft( tilename );
 				
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
                 QImage  img_topright( tilename );
 
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
                 QImage  img_bottomleft( tilename );
 				
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
                 QImage  img_bottomright( tilename );
 
                 QImage  tile = img_topleft;
-                tile.setColorTable( legpal );
 
                 if ( tile.depth() == 8 ) {				
+
+                    tile.setColorTable( grayScalePalette );
                     uchar* destline;
 
                     for ( int y = 0; y < 338; ++y ) {
@@ -254,7 +259,7 @@ void TileScissor::createTiles()
                     }
                 }
 
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
                 bool noerr = tile.save( tilename, "jpg", 100 );
                 if ( noerr == false ) 
                     qDebug() << "Error while writing Tile: " << tilename;;
@@ -284,7 +289,7 @@ void TileScissor::createTiles()
             for ( int m = 0; m < mmaxit; m++) { 
                 microcount++;
 
-                tilename = destpath + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
                 QImage tile( tilename );
 
                 bool noerr = tile.save( tilename, "jpg", 85 );
