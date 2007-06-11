@@ -81,7 +81,7 @@ class PlaceMarkPainter : public QObject
 
  protected:
     inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 
-                              float outlineWidth);
+                              double outlineWidth);
     bool testbug(); 
 
  protected:
@@ -101,7 +101,7 @@ class PlaceMarkPainter : public QObject
     // QVector< QPixmap > m_citysymbol;
     QVector< int >        m_weightfilter;
     QPixmap  m_empty;
-    float    m_widthscale;
+    double   m_widthscale;
 
     bool     m_showCities;
     bool     m_showTerrain;

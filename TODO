@@ -30,7 +30,9 @@ Cleaning
    - MarbleWidget                                                       done
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
- * float -> double							INGE
+ * float -> double                                                      INGE
+   - placemarkmanager: When I do this file, all the placemarks disappear --
+   - All the others                                                     --
 
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --

@@ -108,8 +108,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     QFont       font;
 
-    const float outlineWidth = 2.5f;
-    int         fontwidth = 0;
+    const double outlineWidth = 2.5;
+    int          fontwidth = 0;
 
     QPixmap     textpixmap;
 
@@ -332,14 +332,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
 inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, 
                                             PlaceMark* mark, QFont font,
-                                            float outlineWidth)
+                                            double outlineWidth)
 {
     QPen    outlinepen( Qt::white );
     outlinepen.setWidthF( outlineWidth );
     QBrush  outlinebrush( Qt::black );
 
     QPainterPath   outlinepath;
-    const QPointF  baseline( outlineWidth / 2.0f, m_fontascent );
+    const QPointF  baseline( outlineWidth / 2.0, m_fontascent );
     outlinepath.addText( baseline, font, mark->name() );
     textpainter.setRenderHint( QPainter::Antialiasing, true );
     textpainter.setPen( outlinepen );
