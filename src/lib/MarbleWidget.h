@@ -308,7 +308,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  rotateBy(const double &phi, const double &theta);
     /**
      * @brief  Center the view on a point
-     * @param  lat    an angle parallel to the latitude lines
+     * @param  lat  an angle parallel to the latitude lines
      * @param  lon  an angle parallel to the longitude lines
      */
     void  centerOn(const double &lat, const double &lon);

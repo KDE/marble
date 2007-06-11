@@ -175,12 +175,12 @@ int MarbleWidget::zoom() const
 
 double MarbleWidget::centerLatitude()
 { 
-    return (double)d->m_model->centerLatitude();
+    return d->m_model->centerLatitude();
 }
 
 double MarbleWidget::centerLongitude()
 {
-    return (double)d->m_model->centerLongitude();
+    return d->m_model->centerLongitude();
 }
 
 void MarbleWidget::setMinimumZoom( int zoom )
@@ -350,14 +350,12 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
 void MarbleWidget::setCenterLatitude( double lat )
 { 
-    double lng = centerLongitude();
-    centerOn( (double)lat, lng );
+    centerOn( lat, centerLongitude() );
 }
 
 void MarbleWidget::setCenterLongitude( double lng )
 {
-    double lat = centerLatitude();
-    centerOn( lat, (double)lng );
+    centerOn( centerLatitude(), lng );
 }
 
 
