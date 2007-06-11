@@ -26,10 +26,10 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
     m_currentxpos = 0;
     m_currentypos = 0;
 
-    m_left   = -1.0f; 
-    m_right  = (float)m_imgwidth;
-    m_top    = -1.0f; 
-    m_bottom = (float)m_imgheight;	
+    m_left   = -1.0; 
+    m_right  = (double)m_imgwidth;
+    m_top    = -1.0; 
+    m_bottom = (double)m_imgheight;	
 
     // m_debugNodeCount = 0;
     m_clip = clip;
@@ -146,15 +146,15 @@ void ClipPainter::manageOffScreen()
     // FIXME:	- bugs related to vertical and horizontal lines in corners  
     //		- borderpoint order
 
-    float  xa = 0;
-    float  ya = 0;
+    double  xa = 0;
+    double  ya = 0;
 
     // Calculating the slope
-    float  divisor = m_currentPoint.x() - m_lastPoint.x();
+    double  divisor = m_currentPoint.x() - m_lastPoint.x();
     if ( fabs( divisor ) < 0.000001 )
         divisor = 0.000001;
 
-    float  m = ( m_currentPoint.y() - m_lastPoint.y() ) / divisor;
+    double  m = ( m_currentPoint.y() - m_lastPoint.y() ) / divisor;
 
     switch ( m_currentpos ) {
     case 0:
@@ -296,11 +296,11 @@ const QPointF ClipPainter::borderPoint()
 {
     //	Interpolate border points (linear interpolation)
 
-    float  xa = 0;
-    float  ya = 0;
+    double  xa = 0;
+    double  ya = 0;
 
     // Calculating the slope.
-    float m = ( m_currentPoint.y() - m_lastPoint.y() ) 
+    double m = ( m_currentPoint.y() - m_lastPoint.y() ) 
         / ( m_currentPoint.x() - m_lastPoint.x() );
 
     int offscreenpos = (m_currentpos == 4) ? m_lastpos : m_currentpos;

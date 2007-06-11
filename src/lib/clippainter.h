@@ -39,20 +39,20 @@ class ClipPainter : public QPainter
     const QPointF borderPoint();
 
  private:
-    bool   m_clip;
+    bool    m_clip;
 
-    float  m_left;
-    float  m_right;
-    float  m_top;
-    float  m_bottom;
+    double  m_left;
+    double  m_right;
+    double  m_top;
+    double  m_bottom;
 
-    int    m_imgwidth;
-    int    m_imgheight;
+    int     m_imgwidth;
+    int     m_imgheight;
 
-    int    m_currentpos;
-    int    m_currentxpos;
-    int    m_currentypos;
-    int    m_lastpos;
+    int     m_currentpos;
+    int     m_currentxpos;
+    int     m_currentypos;
+    int     m_lastpos;
 
     //	int m_debugNodeCount;
 

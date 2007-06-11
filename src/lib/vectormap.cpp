@@ -29,10 +29,10 @@
 VectorMap::VectorMap()
 {
 
-    m_zlimit = 0.0f; 
-    m_plimit = 0.0f;
-    m_zBoundingBoxLimit = 0.0f; 
-    m_zPointLimit = 0.0f; 
+    m_zlimit = 0.0; 
+    m_plimit = 0.0;
+    m_zBoundingBoxLimit = 0.0; 
+    m_zPointLimit = 0.0;
 
     m_imgrx = 0; 
     m_imgry = 0; 
@@ -321,23 +321,23 @@ const QPointF VectorMap::horizonPoint()
 void VectorMap::createArc()
 {
 
-    float  beta  = (float)( 180.0f / M_PI 
-                            * atan2f( m_horizonb.y() - m_imgry - 1,
-                                      m_horizonb.x() - m_imgrx - 1 ) );
-    float  alpha = (float)( 180.0f / M_PI
-                            * atan2f( m_horizona.y() - m_imgry - 1,
-                                      m_horizona.x() - m_imgrx - 1 ) );
+    double  beta  = (double)( 180.0 / M_PI 
+			      * atan2( m_horizonb.y() - m_imgry - 1,
+				       m_horizonb.x() - m_imgrx - 1 ) );
+    double  alpha = (double)( 180.0 / M_PI
+			      * atan2( m_horizona.y() - m_imgry - 1,
+				       m_horizona.x() - m_imgrx - 1 ) );
 
-    float diff = beta - alpha;
+    double diff = beta - alpha;
 
-    if ( diff != 0.0f && diff != 180.0f && diff != -180.0f ) {
+    if ( diff != 0.0 && diff != 180.0 && diff != -180.0 ) {
 
         m_polygon.append( m_horizona );
 
-        float sgndiff = diff / fabs(diff);
+        double sgndiff = diff / fabs(diff);
 
-        if (fabs(diff) > 180.0f)
-            diff = - sgndiff * (360.0f - fabs(diff));
+        if (fabs(diff) > 180.0)
+            diff = - sgndiff * (360.0 - fabs(diff));
 
         // Reassigning sgndiff this way seems dull
         sgndiff = diff / fabs(diff);
@@ -351,7 +351,7 @@ void VectorMap::createArc()
         double  arcradius = sqrt( (double)( m_rlimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
-            double angle = M_PI/180.0f * (double)( alpha + (sgndiff * it) );
+            double angle = M_PI/180.0 * (double)( alpha + (sgndiff * it) );
             itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
             ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
             // qDebug() << " ity: " << ity;

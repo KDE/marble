@@ -41,9 +41,9 @@ class VectorMap : public ScreenPolygon::Vector
 
     void setPen ( const QPen & p )     { m_pen   = p; }
     void setBrush ( const QBrush & b ) { m_brush = b; }
-    void setzBoundingBoxLimit ( const float zBoundingBoxLimit ) {
+    void setzBoundingBoxLimit ( const double zBoundingBoxLimit ) {
         m_zBoundingBoxLimit = zBoundingBoxLimit; }
-    void setzPointLimit ( const float zPointLimit ) {
+    void setzPointLimit ( const double zPointLimit ) {
         m_zPointLimit = zPointLimit; }
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
@@ -63,10 +63,10 @@ class VectorMap : public ScreenPolygon::Vector
  private:
     GeoPoint::Vector  m_boundary;
 
-    float             m_zlimit;
-    float             m_plimit;
-    float             m_zBoundingBoxLimit;	
-    float             m_zPointLimit;	
+    double            m_zlimit;
+    double            m_plimit;
+    double            m_zBoundingBoxLimit;	
+    double            m_zPointLimit;	
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;

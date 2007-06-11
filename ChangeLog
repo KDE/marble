@@ -1,6 +1,10 @@
 2007-06-11  Inge Wallin  <inge@lysator.liu.se>
 
-	More float to double changes, taking it step by step.
+	More float to double changes, this time the vector layer
+	* src/lib/vectormap.{h,cpp}:     float -> double
+	* src/lib/clippainter.{h,cpp}:   float -> double
+	
+	More float to double changes - the rest of the tile layer
 	* src/lib/tilescissor.cpp:       float -> double
 	* src/lib/texcolorizer.cpp:      float -> double
 	* src/lib/TextureTile.cpp:       float -> double
