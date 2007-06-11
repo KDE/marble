@@ -89,10 +89,10 @@ void TextureTile::loadTile( int x, int y, int level,
 
     for ( int i = level; i > -1; --i ) {
 
-	float origx1 = (float)(x) / (float)( TileLoader::levelToRow( level ) );
-	float origy1 = (float)(y) / (float)( TileLoader::levelToColumn( level ) );
-	float testx1 = origx1 * (float)( TileLoader::levelToRow( i ) ) ;
-	float testy1 = origy1 * (float)( TileLoader::levelToColumn( i ) );
+	double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
+	double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
+	double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
+	double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
 
 	QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
 	    .arg(theme).arg(i)
@@ -110,10 +110,10 @@ void TextureTile::loadTile( int x, int y, int level,
 
 		if ( level != i ) { 
 		    QSize tilesize = m_rawtile->size();
-		    float origx2 = (float)(x + 1) / (float)( TileLoader::levelToRow( level ) );
-		    float origy2 = (float)(y + 1) / (float)( TileLoader::levelToColumn( level ) );
-		    float testx2 = origx2 * (float)( TileLoader::levelToRow( i ) );
-		    float testy2 = origy2 * (float)( TileLoader::levelToColumn( i ) );
+		    double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
+		    double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
+		    double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
+		    double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
 	
 		    QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * m_rawtile->width() ),
 				    (int)( ( testy1 - (int)(testy1) ) * m_rawtile->height() ) );

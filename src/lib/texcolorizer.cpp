@@ -49,10 +49,10 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
     GpFifo  emboss;
     emboss.buffer = 0;
 
-    float  bendradius = 0;
-    const float  bendRelief  = M_PI * 0.5f / ( (float)(radius) * sqrtf(2.0f) );
-    const float  bendReliefx = 0.41f * bendRelief;
-    const float  bendReliefm = 0.941246f * bendRelief / bendReliefx;
+    double  bendradius = 0;
+    const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
+    const double  bendReliefx = 0.41 * bendRelief;
+    const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
     const bool showRelief = m_showRelief;
 
@@ -98,7 +98,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
         for ( int y = ytop; y < ybottom; ++y ) {
 
             const int  dy = imgry - y;
-            int  rx = (int)sqrtf( (float)( radius * radius - dy * dy ) );
+            int  rx = (int)sqrt( (double)( radius * radius - dy * dy ) );
             int  xleft  = 0; 
             int  xright = imgwidth;
 
@@ -110,11 +110,11 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
             QRgb       *data      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
             const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
 
-            float  relief = imgrx - xleft + bendReliefm * dy ;
+            double  relief = imgrx - xleft + bendReliefm * dy ;
  
             for ( int x = xleft;
                   x < xright;
-                  ++x, ++data, ++coastdata, relief-=1.0f )
+                  ++x, ++data, ++coastdata, relief -= 1.0 )
             {
                 // Cheap Embosss / Bumpmapping
 
@@ -134,7 +134,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                     // cos(x) ~= 1-x^2
 
                     bendradius = bendReliefx * relief;
-                    bump *= qRound( 1.0f - bendradius * bendradius );
+                    bump *= qRound( 1.0 - bendradius * bendradius );
 
                     bump &= 0x0f;
                 }

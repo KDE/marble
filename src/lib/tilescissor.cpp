@@ -125,8 +125,8 @@ void TileScissor::createTiles()
     for ( int n = 0; n < nmax; n++ ) {
         QApplication::processEvents(); 
 
-        QRect   rowsrc( 0, (int)( (float)( n * imgh ) / (float)(nmax)),
-                        imgw, (int)((float)(imgh) / (float)(nmax) ) );
+        QRect   rowsrc( 0, (int)( (double)( n * imgh ) / (double)(nmax)),
+                        imgw, (int)((double)(imgh) / (double)(nmax) ) );
 
         QImage  img( m_sourceDir );
 
@@ -158,7 +158,7 @@ void TileScissor::createTiles()
             if ( noerr == false )
                 qDebug() << "Error while writing Tile: " << tilename;
 
-            completed = (int) ( 90 * (float)(count) / (float)(maxcount) );	
+            completed = (int) ( 90 * (double)(count) / (double)(maxcount) );	
             count++;
 						
             emit progress( completed );
@@ -264,7 +264,7 @@ void TileScissor::createTiles()
                 if ( noerr == false ) 
                     qDebug() << "Error while writing Tile: " << tilename;;
 
-                completed = (int) ( 90 * (float)(count) / (float)(maxcount) );	
+                completed = (int) ( 90 * (double)(count) / (double)(maxcount) );	
                 count++;
 						
                 emit progress( completed );
@@ -296,8 +296,8 @@ void TileScissor::createTiles()
                 if ( noerr == false )
                     qDebug() << "Error while writing Tile: " << tilename; 
 
-                microcompleted = (int) ( 100 * (float)(microcount) / (float)(maxcount) );	
-                emit progress( 90 + (int)( 0.1 * (float)microcompleted ) );
+                microcompleted = (int) ( 100 * (double)(microcount) / (double)(maxcount) );	
+                emit progress( 90 + (int)( 0.1 * (double)microcompleted ) );
                 QApplication::processEvents(); 
             }
         }
