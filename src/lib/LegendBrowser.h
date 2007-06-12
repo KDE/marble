@@ -63,7 +63,7 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
     QVariant loadResource ( int type, const QUrl & name );
     void sendSignals( QString name, bool checked );
 
-    QMap<QString, int> m_checkBoxMap;
+    QMap<QString, bool> m_checkBoxMap;
 };
 
 

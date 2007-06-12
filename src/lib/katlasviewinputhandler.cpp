@@ -111,7 +111,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
         diry = 0;
 
         // emit the position string only if the signal got attached
-        if ( m_positionSignalConnected > 0 )
+        if ( m_positionSignalConnected )
         {
             double  lat;
             double  lng;
