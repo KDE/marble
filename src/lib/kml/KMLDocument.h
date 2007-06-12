@@ -12,22 +12,12 @@
 #ifndef KMLDOCUMENT_H
 #define KMLDOCUMENT_H
 
-#include "KMLFeature.h"
+#include "KMLFolder.h"
 
-class PlaceMark;
-class PlaceContainer;
-
-class KMLDocument : public KMLFeature
+class KMLDocument : public KMLFolder
 {
  public:
     KMLDocument();
-
-    void addPlaceMark( PlaceMark* placemark );
-    PlaceContainer& getPlaceContainer() const;
-
- private:
-    // Use PlaceContainer instead of QVector <KMLPlaceMark*>
-    PlaceContainer* m_placecontainer;
 };
 
 #endif // KMLDOCUMENT_H

@@ -70,9 +70,10 @@ set(marblewidget_SRCS
            vectorcomposer.cpp
            vectormap.cpp
            xmlhandler.cpp
-           kml/KMLObject.cpp
            kml/KMLFeature.cpp
+           kml/KMLFolder.cpp
            kml/KMLDocument.cpp
+           kml/KMLObject.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 
@@ -120,7 +121,7 @@ set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
 )
 
-# chopse the correct target install library path 
+# chopse the correct target install library path
 if(WIN32 AND QTONLY)
   install(TARGETS marblewidget DESTINATION "")
 endif(WIN32 AND QTONLY)

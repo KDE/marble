@@ -1,6 +1,11 @@
+2007-06-12  Murad Tagirov  <tmurad@gmail.com>
+    Added KMLFolder. KMLDocument now inherited from KMLFolder
+    which is used to store objects inherited from KMLFeature
+    (placemarks, features, etc.)
+
 2007-06-11  Torsten Rahn  <rahn@kde.org>
 
-	Adding more islands for canarian islands, mauritius, 
+	Adding more islands for canarian islands, mauritius,
 	Netherlands and Denmark.
 	* marble/data/mwdbii/PISLAND.PNT
 
@@ -27,7 +32,7 @@
 	More float to double changes, this time the vector layer
 	* src/lib/vectormap.{h,cpp}:     float -> double
 	* src/lib/clippainter.{h,cpp}:   float -> double
-	
+
 	More float to double changes - the rest of the tile layer
 	* src/lib/tilescissor.cpp:       float -> double
 	* src/lib/texcolorizer.cpp:      float -> double
@@ -49,8 +54,8 @@
 	src/lib/katlasviewinputhandler.{h,cpp},
 	src/lib/katlasviewpopupmenu.cpp, src/lib/measuretool.cpp,
 	src/lib/placemark.{h,cpp},       src/lib/placemarkmanager.cpp
-	src/main.cpp: Just change the floats that needed to be changed.	
-	
+	src/main.cpp: Just change the floats that needed to be changed.
+
 2007-06-11  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/tilescissor.{h,cpp}: code changes to introduce
@@ -81,7 +86,7 @@
 	* src/lib/MarbleWidget.cpp (d): new member
 	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): new class
 	(rest of MarbleWidget.cpp): use d-> everywhere
-	
+
 	Krazy 4: Check for an acceptable copyright
 	* src/lib/kml/KMLDocument.cpp: Add header with copyright.
 
