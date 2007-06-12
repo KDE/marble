@@ -21,9 +21,9 @@ SVGXmlHandler::SVGXmlHandler(const QString& targetfile)
     m_targetfile  = targetfile;
 }
 
-bool SVGXmlHandler::startElement(const QString &namespace,
-                                 const QString &localName,
-                                 const QString &qName,
+bool SVGXmlHandler::startElement(const QString& nspace,
+                                 const QString& localName,
+                                 const QString& qName,
                                  const QXmlAttributes &atts)
 {
     qDebug();

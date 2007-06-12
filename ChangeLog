@@ -1,3 +1,9 @@
+2007-06-11  Torsten Rahn  <rahn@kde.org>
+
+	Adding more islands for canarian islands, mauritius, 
+	Netherlands and Denmark.
+	* marble/data/mwdbii/PISLAND.PNT
+
 2007-06-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Finish the float to double changes
