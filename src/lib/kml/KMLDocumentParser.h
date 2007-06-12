@@ -8,20 +8,20 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
+#ifndef KMLDOCUMENTPARSER_H
+#define KMLDOCUMENTPARSER_H
 
-#ifndef KMLDOCUMENT_H
-#define KMLDOCUMENT_H
+#include <QtXml/QXmlDefaultHandler>
 
-#include "KMLFolder.h"
+class KMLDocument;
 
-class QIODevice;
-
-class KMLDocument : public KMLFolder
+class KMLDocumentParser : public QXmlDefaultHandler
 {
  public:
-    KMLDocument();
+    KMLDocumentParser( KMLDocument& document );
 
-    void load( QIODevice& source );
+ private:
+    KMLDocument& m_document;
 };
 
-#endif // KMLDOCUMENT_H
+#endif // KMLDOCUMENTPARSER_H

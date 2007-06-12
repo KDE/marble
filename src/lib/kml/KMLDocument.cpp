@@ -10,8 +10,34 @@
 
 
 #include "KMLDocument.h"
+
+#include <QtXml/QXmlInputSource>
+#include <QtXml/QXmlSimpleReader>
+
+#include "KMLDocumentParser.h"
 #include "placecontainer.h"
 
 KMLDocument::KMLDocument()
 {
+}
+
+void KMLDocument::load( QIODevice& source )
+{
+    /*
+     * 1. create KMLParser
+     * 2. create QXMLSimpleReader
+     * 3. start to parsing input stream
+     */
+
+    KMLDocumentParser parser( *this );
+    QXmlInputSource xmlDocumentSource( &source );
+
+    QXmlSimpleReader reader;
+    reader.setContentHandler( &parser );
+    reader.setErrorHandler( &parser );
+    bool result = reader.parse( &xmlDocumentSource );
+
+    if ( ! result ) {
+        qDebug("KMLDocument::load( QIODevice& ). Error while parsing xml source");
+    }
 }

@@ -2,6 +2,15 @@
     Added KMLFolder. KMLDocument now inherited from KMLFolder
     which is used to store objects inherited from KMLFeature
     (placemarks, features, etc.)
+    * src/lib/kml/KMLFolder{h,cpp}
+
+    Updated CODING page. Added kate instructions.
+    * CODING
+
+    Added KMLDocumentParser. Initially trying to implement
+    parsing of placemark objects without support of folders.
+    Parsing logic is almost same as in KAtlasXmlHandler.
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
 
 2007-06-11  Torsten Rahn  <rahn@kde.org>
 

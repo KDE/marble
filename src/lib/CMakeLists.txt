@@ -73,6 +73,7 @@ set(marblewidget_SRCS
            kml/KMLFeature.cpp
            kml/KMLFolder.cpp
            kml/KMLDocument.cpp
+           kml/KMLDocumentParser.cpp
            kml/KMLObject.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
