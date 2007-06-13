@@ -52,6 +52,7 @@ class Quaternion {
     void        createFromEuler(double pitch, double yaw, double roll);
     double      pitch() const;
     double      yaw() const;
+    double      roll() const;
 
 
     void        display() const;

@@ -92,12 +92,19 @@ void Quaternion::createFromEuler(double pitch, double yaw, double roll)
 
 double Quaternion::pitch() const
 {
-    return atan(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+    return atan2(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z]),(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+//    return atan(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
 }
 
 double Quaternion::yaw() const
 {
     return asin(2.0*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
+}
+
+double Quaternion::roll() const
+{
+    return atan2(2.0*(v[Q_W]*v[Q_Z]+v[Q_X]*v[Q_Y]),(1-2*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z])));
+//    return atan2(2.0*(v[Q_W]*v[Q_Z]+v[Q_X]*v[Q_Y])/(1-2*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z])));
 }
 
 void Quaternion::display() const
