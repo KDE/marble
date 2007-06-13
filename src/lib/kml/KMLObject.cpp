@@ -11,10 +11,31 @@
 
 #include "KMLObject.h"
 
+#include <QtGlobal>
+
+namespace
+{
+    // This variable used to cound number of allocated
+    // kml objects. Debug only
+    int refCount = 0;
+}
+
 KMLObject::KMLObject()
   : m_id(0),
     m_targetId(0)
 {
+    #ifdef KML_DEBUG
+        ++refCount;
+        qDebug("KMLObject count: %d", refCount);
+    #endif
+}
+
+KMLObject::~KMLObject()
+{
+    #ifdef KML_DEBUG
+        --refCount;
+        qDebug("KMLObject count: %d", refCount);
+    #endif
 }
 
 int KMLObject::id() const

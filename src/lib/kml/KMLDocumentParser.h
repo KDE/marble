@@ -11,17 +11,34 @@
 #ifndef KMLDOCUMENTPARSER_H
 #define KMLDOCUMENTPARSER_H
 
+#include <QtCore/QStack>
 #include <QtXml/QXmlDefaultHandler>
 
 class KMLDocument;
+class KMLObjectParser;
 
 class KMLDocumentParser : public QXmlDefaultHandler
 {
  public:
     KMLDocumentParser( KMLDocument& document );
 
+    void switchCurrentParser( KMLObjectParser* parser );
+
+    /*
+     * QXmlDefaultHandler virtual methods
+     */
+    virtual bool startDocument();
+
+    virtual bool startElement( const QString& namespaceURI,
+                               const QString& localName,
+                               const QString& name,
+                               const QXmlAttributes& atts );
+
  private:
     KMLDocument& m_document;
+    KMLObjectParser* m_currentParser;
+
+    QStack <KMLObjectParser*> m_parserStack;
 };
 
 #endif // KMLDOCUMENTPARSER_H

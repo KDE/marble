@@ -70,10 +70,12 @@ set(marblewidget_SRCS
            vectormap.cpp
            xmlhandler.cpp
            kml/KMLFeature.cpp
+           kml/KMLFeatureParser.cpp
            kml/KMLFolder.cpp
            kml/KMLDocument.cpp
            kml/KMLDocumentParser.cpp
            kml/KMLObject.cpp
+           kml/KMLObjectParser.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 

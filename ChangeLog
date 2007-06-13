@@ -1,3 +1,14 @@
+2007-06-13  Murad Tagirov  <tmurad@gmail.com>
+    Added some logic for parsing kml documents.
+    * src/lib/kml/KMLObjectParser.{h,cpp}
+    * src/lib/kml/KMLFeatureParser.{h,cpp}
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
+
+    Added KML_DEBUG to CMakeList to debug count of kml objects.
+    If KML_DEBUG is ON then KMLObject count number of instances
+    this could help to avoid memory leaks in feature
+    * src/lib/kml/KMLObject.cpp
+
 2007-06-12  Murad Tagirov  <tmurad@gmail.com>
     Added KMLFolder. KMLDocument now inherited from KMLFolder
     which is used to store objects inherited from KMLFeature

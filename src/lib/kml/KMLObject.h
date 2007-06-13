@@ -15,6 +15,8 @@
 class KMLObject
 {
  public:
+    virtual ~KMLObject();
+
     int id() const;
     void setId( int value );
 
