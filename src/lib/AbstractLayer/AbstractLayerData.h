@@ -18,16 +18,16 @@ class AbstractLayerData
     //!destructor
     ~AbstractData();
     /*!
-     * draw is intended to either provide the details nessary for the
+     * draw is intended to either provide the details necessary for the
      * view to draw, or given a pointer to the view it may draw itself
      */
     virtual void draw()=0;
     //!accessors
-    GeoPoint getPositon()const {return position} 
-    void setPosition(const Geopoint& posIn){position = posIn}
+    GeoPoint getPosition()const {return m_position} 
+    void setPosition(const Geopoint& posIn){m_position = posIn}
     
  private:
     //!the position of the Data item
-    GeoPoint position;
+    GeoPoint m_position;
     //insert generic (if any) view variables here
 }

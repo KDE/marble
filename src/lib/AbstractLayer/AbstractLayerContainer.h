@@ -12,9 +12,9 @@
 /*!
  * Abstract LayerContainer is designed to resemble PlaceContainer
  * and be a base class for all Layer Containers. The container 
- * itself will only represent visable data and will contain a 
+ * itself will only represent visible data and will contain a 
  * reference to a binary file that represents all of the layer 
- * data. Each time the view changes the visable data will be altered
+ * data. Each time the view changes the visible data will be altered
  * by a thread that will monitor and deal with this process. 
  */
 class AbstractLayerContainer:QVector<AbstractData*>
@@ -30,7 +30,7 @@ class AbstractLayerContainer:QVector<AbstractData*>
  private:
     /*!
      * data is intended to be a binary swap file to minimise memory 
-     * footprint. this can be implemented at a later stage as an 
+     * footprint. This can be implemented at a later stage as an 
      * optimisation
      */
     QVector<AbstractLayerData*> data;
