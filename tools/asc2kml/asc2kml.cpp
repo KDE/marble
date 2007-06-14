@@ -13,7 +13,6 @@
 // #include <zlib.h>
 
 #include <QFile>
-#include <QStringList>
 #include <QApplication>
 #include <QDebug>
 
