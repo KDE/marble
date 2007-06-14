@@ -9,34 +9,35 @@ Diversion - Abstract Layer
 ----------------
 
 As a diversion to my main project goals i have been trying to
-identify what is nessary to develop an Abstract Layer. This is
+identify what is necessary to develop an Abstract Layer. This is
 intended to be a framework from which a new Marble Layer can be
 created easily. 
 
 So far i have identified 2 main elements of a layer that would be
 common to any instance of a layer, which are:
-    1. Layer Data. This referes to an object that a layer is
+    1. Layer Data. This refers to an object that a layer is
        comprised of, for example a PlacemarkLayer will be comprised
        of Placemarks.
     2. Layer Container. This is to contain each Layer Item and to
-       deal with any memory managment nessary for dealing with a lot
-       of Layer Data objects. An indea for this memory managment
+       deal with any memory management necessary for dealing with a
+lot
+       of Layer Data objects. An idea for this memory management
        would be to have a binary file that represented all of the
-       data and a QVector for visable data, hence significantly
+       data and a QVector for visible data, hence significantly
        reducing the memory footprint.
 
-Each Data Object must contain any information nessary to draw itself
+Each Data Object must contain any information necessary to draw itself
 on a display.
 
 Loading Available Data Objects can be done by a Thread to prevent
 slow down of the system. A bitvector may be a good means to represent
-which Data Objects are visable, leaving it so that the bit vector is
-the only thing that is altered leaving the memory managment to run in
+which Data Objects are visible, leaving it so that the bit vector is
+the only thing that is altered leaving the memory management to run in
 the background.
 
-Any Instance of either of these classes must inheret from them and
+Any Instance of either of these classes must inherit from them and
 implement any pure abstract methods. For example a Placemark would
-inheret from an AbstractLayerData.
+inherited from an AbstractLayerData.
 
 --------------------
 Main Project - GPS
@@ -44,7 +45,7 @@ Main Project - GPS
 
 The main focus of this project is to modify Marble so that it can get
 new data during runtime, this data being information on a GPS
-Placemark. This will first reqire creating a GPS layer from the
+Placemark. This will first require creating a GPS layer from the
 previously mentioned Abstract layer classes.
 
 A GPS Data Object would be an object that will provide GPS coordinates
@@ -52,8 +53,8 @@ from whatever means it can. There can be any number of GPS Data
 Objects in the system and they will have to be contained within a
 GPS Object Container object which will be in charge of:
 
-    1.  Sorting out wich data objects are visable (As available in
-        the AbstractLayerContainer) and updating the special "i'm
+    1.  Sorting out which data objects are visible (As available in
+        the AbstractLayerContainer) and updating the special "I'm
         here GPS Data Object (specific to GPS Layer Container). This
         position will be added to a trackmark (and optionally a GPX
         file) whenever it is updated.
@@ -114,4 +115,5 @@ tools necessary to:
 
 The Starting point of this project will be to set up the Entire GPS
 Layer and Load a GPX file into the viewer. Then the next step would
-be to set up the methods for capuring live data for the current user. 
+be to set up the methods for capturing live data for the current
+user. 
