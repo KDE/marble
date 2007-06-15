@@ -29,9 +29,9 @@ class AbstractLayerContainer:QVector<AbstractData*>
     
  private:
     /*!
-     * data is intended to be a binary swap file to minimise memory 
+     * data is intended to be a binary swap file to minimize memory 
      * footprint. This can be implemented at a later stage as an 
-     * optimisation
+     * optimization
      */
     QVector<AbstractLayerData*> data;
     //! taken from placecontainer, 
