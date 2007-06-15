@@ -23,16 +23,14 @@ Features
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       DONE
  * No inline functions in the public classes                            DONE
-   - MarbleWidget                                                       done
-   - MarbleModel                                                        done
-   - MarbleControlBox                                                   done
  * d-pointerify the public classes                                      INGE
    - MarbleWidget                                                       done
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
  * float -> double                                                      INGE
    - placemarkmanager: When I do this file, all the placemarks disappear --
-   - All the others                                                     --
+   - All the others                                                     done
+   - Update the placemark file version (currently 004)			--
 
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --
@@ -82,7 +80,7 @@ OpenStreetMap support for tiles@home
 Integration of Google Summer of Code projects (0.6)
 ----------------------------------------------------------------
 
-GPS support
+GPS support (Andrew 
  * Read GPX files                                                       ----
  * Show waypoints                                                       ----
  * Show tracks                                                          ----
@@ -136,5 +134,4 @@ Before KDE 4.1
 
    for practical relevance and implement those bits into our client that 
    make sense for us to have.
-
 
