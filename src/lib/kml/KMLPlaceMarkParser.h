@@ -18,7 +18,7 @@
 class KMLPlaceMarkParser : public KMLFeatureParser
 {
  public:
-    KMLPlaceMarkParser();
+    KMLPlaceMarkParser(KMLObject& object);
 };
 
 #endif // KMLPLACEMARKPARSER_H

@@ -9,27 +9,32 @@
 //
 
 
-#ifndef KMLFEATUREPARSER_H
-#define KMLFEATUREPARSER_H
+#ifndef KMLCONTAINERPARSER_H
+#define KMLCONTAINERPARSER_H
 
-#include "KMLObjectParser.h"
+#include "KMLFeatureParser.h"
 
-class KMLFeatureParser : public KMLObjectParser
+class KMLContainerParser : public KMLFeatureParser
 {
  public:
+    virtual ~KMLContainerParser();
+
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,
-                               const QString &name,
+                               const QString& name,
                                const QXmlAttributes& atts );
 
     virtual bool endElement( const QString& namespaceURI,
                              const QString& localName,
-                             const QString &name );
+                             const QString& qName );
 
-    virtual bool characters( const QString& str );
+    virtual bool characters( const QString& ch );
 
  protected:
-    KMLFeatureParser( KMLObject& object );
+    KMLContainerParser( KMLObject& object );
+
+ private:
+    KMLObjectParser* m_currentParser;
 };
 
-#endif // KMLFEATUREPARSER_H
+#endif // KMLCONTAINERPARSER_H

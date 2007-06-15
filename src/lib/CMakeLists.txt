@@ -69,6 +69,8 @@ set(marblewidget_SRCS
            vectorcomposer.cpp
            vectormap.cpp
            xmlhandler.cpp
+           kml/KMLContainer.cpp
+           kml/KMLContainerParser.cpp
            kml/KMLFeature.cpp
            kml/KMLFeatureParser.cpp
            kml/KMLFolder.cpp

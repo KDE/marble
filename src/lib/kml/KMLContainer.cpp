@@ -9,12 +9,21 @@
 //
 
 
-#include "KMLPlaceMarkParser.h"
-
+#include "KMLContainer.h"
 #include "KMLPlaceMark.h"
 
-KMLPlaceMarkParser::KMLPlaceMarkParser( KMLObject& object )
-  : KMLFeatureParser( object )
+KMLContainer::KMLContainer()
 {
-    qDebug("KMLPlaceMarkParser::KMLPlaceMarkParser()");
+}
+
+KMLContainer::~KMLContainer()
+{
+    foreach ( KMLPlaceMark* placemark, m_placemarkVector ) {
+        delete placemark;
+    }
+}
+
+void KMLContainer::addPlaceMark( KMLPlaceMark* placemark )
+{
+    m_placemarkVector.append( placemark );
 }

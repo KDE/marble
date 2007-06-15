@@ -10,6 +10,7 @@
 
 #include "KMLDocumentParser.h"
 
+#include <QtCore/QDebug>
 #include "KMLPlaceMarkParser.h"
 
 namespace
@@ -17,9 +18,8 @@ namespace
     const QString PLACEMARK_TAG = "placemark";
 }
 
-KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
-  : m_document( document ),
-    m_currentParser( 0 )
+KMLDocumentParser::KMLDocumentParser( KMLObject& document )
+  : KMLContainerParser( document )
 {
 }
 
@@ -39,28 +39,17 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
                                       const QString& name,
                                       const QXmlAttributes& atts)
 {
-    bool result = false;
+    /*
+     * Document specific fields will parse will in a feature
+     * i.e. list of StyleSelector, Schema objects
+     */
+    bool result = KMLContainerParser::startElement( namespaceUri, localName, name, atts);
 
-    if ( m_currentParser != 0 ) {
-        result = m_currentParser->startElement( namespaceUri, localName, name, atts );
-
-        if ( result ) {
-            return result;
-        }
+    if ( ! result ) {
+        qDebug("KMLDocumentParser::startElement(). Unsupported tag");
+        qDebug() << localName;
     }
 
-    QString elementName = name.toLower();
-
-    if ( elementName == PLACEMARK_TAG ) {
-        //TODO: Use factory method to get parser object
-        switchCurrentParser( new KMLPlaceMarkParser ());
-        bool result = m_currentParser->startElement( namespaceUri, localName, name, atts );
-    }
-    else {
-        qDebug("KMLDocumentParser::startElement(). Unsupported start tag");
-    }
-
-    qDebug("KMLDocumentParser::startElement(). Result: %d", result);
     return true;
 }
 
@@ -68,33 +57,7 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
                                     const QString& localName,
                                     const QString& qName )
 {
-    bool result = false;
-
-    if ( m_currentParser != 0 ) {
-        result = m_currentParser->endElement( namespaceUri, localName, qName );
-
-        if ( result ) {
-            return result;
-        }
-        else {
-            /* TODO:
-             * If parser completely parsed it's object then get object first
-             */
-
-             /*
-              * Current parser completed it's job
-              * Remove current parser and pop from stack
-              * if another parser is availebl
-              */
-             delete m_currentParser;
-             m_currentParser = 0;
-
-             if ( m_parserStack.count() > 0 ) {
-                m_currentParser = m_parserStack.pop();
-                result = m_currentParser->endElement( namespaceUri, localName, qName );
-             }
-        }
-    }
+    bool result = KMLContainerParser::endElement( namespaceUri, localName, qName );
 
     qDebug("KMLDocumentParser::endElement(). Result: %d", result);
     return true;
@@ -102,24 +65,8 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
 
 bool KMLDocumentParser::characters( const QString& ch )
 {
-    bool result = false;
+    bool result = KMLContainerParser::characters( ch );
 
-    if ( m_currentParser != 0 ) {
-        result = m_currentParser->characters (ch);
-    }
-
-    if ( ! result ) {
-        qDebug("KMLDocumentParser::characters. Current parser is NULL");
-    }
-
+    qDebug("KMLDocumentParser::characters. Result: %d", result);
     return true;
-}
-
-void KMLDocumentParser::switchCurrentParser( KMLObjectParser* parser )
-{
-    if ( m_currentParser != 0 ) {
-        m_parserStack.push( m_currentParser );
-    }
-
-    m_currentParser = parser;
 }

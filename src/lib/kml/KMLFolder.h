@@ -21,13 +21,6 @@ class KMLFolder : public KMLFeature
  public:
     KMLFolder();
     ~KMLFolder();
-
-    void addPlaceMark( PlaceMark* placemark );
-    PlaceContainer& getPlaceContainer() const;
-
- private:
-    // Use PlaceContainer instead of QVector <KMLPlaceMark*>
-    PlaceContainer* m_placecontainer;
 };
 
 #endif // KMLFOLDER_H

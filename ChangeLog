@@ -1,3 +1,22 @@
+2007-06-15  Murad Tagirov  <tmurad@gmail.com>
+    Introduced KMLContainer, KMLContainerParser classes.
+    This classes are base classes for KMLDocument and
+    KMLFolder objects.
+    * src/lib/kml/KMLContainer.{h,cpp}
+    * src/lib/kml/KMLContainerParser.{h,cpp}
+
+    Parsing of document, container, feature works. If more general
+    object (instance of KMLDocument for example) does not support
+    tags it just translates it to it's child objects. This allow to
+    split parsing to small simpler classes.
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
+    * src/lib/kml/KMLContainerParser.{h,cpp}
+    * src/lib/kml/KMLFeatureParser.{h,cpp}
+    * src/lib/kml/KMLObjectParser.{h,cpp}
+
+    Added documentation some of classses in class diagram
+    * projects/kml/KMLClasses.xmi
+
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 
     Finish the float to double changes

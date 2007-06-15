@@ -15,21 +15,8 @@
 
 KMLFolder::KMLFolder()
 {
-    m_placecontainer = new PlaceContainer();
 }
 
 KMLFolder::~KMLFolder()
 {
-    m_placecontainer->deleteAll();
-    delete m_placecontainer;
-}
-
-void KMLFolder::addPlaceMark( PlaceMark* placemark )
-{
-    m_placecontainer->append( placemark );
-}
-
-PlaceContainer& KMLFolder::getPlaceContainer() const
-{
-    return *m_placecontainer;
 }

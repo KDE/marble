@@ -12,11 +12,11 @@
 #include "KMLObjectParser.h"
 #include "KMLObject.h"
 
-KMLObjectParser::~KMLObjectParser()
+KMLObjectParser::KMLObjectParser( KMLObject& object )
+  : m_object( object )
 {
-    delete m_object;
 }
 
-KMLObjectParser::KMLObjectParser()
+KMLObjectParser::~KMLObjectParser()
 {
 }

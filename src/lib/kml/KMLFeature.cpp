@@ -16,6 +16,10 @@ KMLFeature::KMLFeature()
 {
 }
 
+KMLFeature::~KMLFeature()
+{
+}
+
 QString KMLFeature::name() const
 {
     return m_name;

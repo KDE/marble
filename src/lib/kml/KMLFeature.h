@@ -19,6 +19,8 @@
 class KMLFeature : public KMLObject
 {
  public:
+    virtual ~KMLFeature();
+
     QString name() const;
     void setName( const QString &value );
 

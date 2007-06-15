@@ -11,7 +11,8 @@
 
 #include "KMLFeatureParser.h"
 
-KMLFeatureParser::KMLFeatureParser()
+KMLFeatureParser::KMLFeatureParser( KMLObject& object )
+  : KMLObjectParser( object )
 {
 }
 
@@ -21,7 +22,7 @@ bool KMLFeatureParser::startElement( const QString& namespaceURI,
                             const QXmlAttributes& atts )
 {
     //TODO
-    return true;
+    return false;
 }
 
 bool KMLFeatureParser::endElement( const QString& namespaceURI,
