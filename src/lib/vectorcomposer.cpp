@@ -150,7 +150,7 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
 
          m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
          m_vectorMap -> setPen( m_areapen );
-         m_vectorMap -> setBrush( QBrush( QColor( 214, 226, 255 ) ) );
+         m_vectorMap -> setBrush( QBrush( QColor( 208, 223, 241 ) ) );
          m_vectorMap -> paintMap( painter, false );
     }
 

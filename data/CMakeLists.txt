@@ -313,10 +313,10 @@ maps/earth/citylights/citylights-preview.png
 DESTINATION ${data_dir}/maps/earth/citylights)
 
 install (FILES
-maps/earth/etopo2/etopo.jpg
-maps/earth/etopo2/etopo2.dgml
-maps/earth/etopo2/etopo-preview.png
-DESTINATION ${data_dir}/maps/earth/etopo2)
+maps/earth/srtm/srtm.jpg
+maps/earth/srtm/srtm.dgml
+maps/earth/srtm/srtm-preview.png
+DESTINATION ${data_dir}/maps/earth/srtm)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg

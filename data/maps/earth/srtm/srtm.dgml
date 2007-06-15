@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
+	<MapStyle>
+		<name>Atlas</name>
+
+		<prefix>srtm</prefix>
+		<icon>srtm-preview.png</icon>
+
+		<description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
+		
+		<layer type="bitmap" name="srtm" dem="true"/>
+
+		<installmap>srtm.jpg</installmap>
+
+		<layer type="vector" name="mwdbii"/>
+
+		<LabelStyle>
+			<color>000000</color>
+		</LabelStyle>
+
+	</MapStyle>
+</DeskGlobeML>

@@ -21,7 +21,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication  app(argc, argv);
-    QFile             data( "../src/gptexturepalette.cpp" );
+    QFile             data( "../../src/lib/texturepalette.cpp" );
 
     if ( !data.open( QFile::WriteOnly | QFile::Truncate ) ) {
         app.exit();
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     QImage  *gradimg = new QImage( 256, 10, QImage::Format_RGB32 );
 
     QStringList  filelist;
-    filelist << "../data/seacolors.leg" << "../data/landcolors.leg";
+    filelist << "../../data/seacolors.leg" << "../../data/landcolors.leg";
     QString  filename;
 
     QPainter  painter(gradimg);

@@ -96,7 +96,7 @@ MarbleModel::MarbleModel( QWidget* parent )
     }
 
     if ( mapthemedirs.count() >= 1 ) {
-        QStringList  tmp = mapthemedirs.filter( "etopo2.dgml" );
+        QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
         if ( tmp.count() >= 1 )
             selectedmap = tmp[0];
         else
