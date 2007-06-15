@@ -32,6 +32,7 @@ bool KMLDocumentParser::startDocument()
 bool KMLDocumentParser::endDocument()
 {
     qDebug("Reached end of document");
+    return true;
 }
 
 bool KMLDocumentParser::startElement( const QString& namespaceUri,
