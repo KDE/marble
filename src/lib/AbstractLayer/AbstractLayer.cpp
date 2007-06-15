@@ -10,12 +10,18 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>"
 //
 
+
+#include "AbstractLayer.h"
+
 #include <QtCore/QSize>
 #include <QtCore/QObject>
-#include "AbstractLayer.h"
+
 #include "Quaternion.h"
 
-AbstractLayer::AbstractLayer(QObject *parent) : QObject(parent){
+
+AbstractLayer::AbstractLayer(QObject *parent) 
+    : QObject(parent)
+{
     //no layer common things have been so far identified
 }
 

@@ -1,4 +1,8 @@
-2007-06-15  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+2007-06-15  Inge Wallin  <ingwa@cendio.se>
+
+	Fix Krazy issue 12: Check for proper include directives.
+	* src/lib/AbstractLayer.cpp:               Fix include
+	* src/lib/AbstractLayer/AbstractLayer.cpp: Fix include
 
 	Fix Krazy issue 09: Check that files end with a newline.
 	* src/lib/AbstractLayer/AbstractLayerData.h: Add a newline.
