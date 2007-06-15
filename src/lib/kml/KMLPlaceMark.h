@@ -9,14 +9,15 @@
 //
 
 
-#include "KMLObjectParser.h"
-#include "KMLObject.h"
+#ifndef KMLPLACEMARK_H
+#define KMLPLACEMARK_H
 
-KMLObjectParser::~KMLObjectParser()
-{
-    delete m_object;
-}
+#include "KMLFeature.h"
 
-KMLObjectParser::KMLObjectParser()
+class KMLPlaceMark : public KMLFeature
 {
-}
+ public:
+    KMLPlaceMark();
+};
+
+#endif // KMLPLACEMARK_H

@@ -1,3 +1,11 @@
+2007-06-15  Murad Tagirov  <tmurad@gmail.com>
+    Added KML_GSOC variable to check parsing
+    * CMakeList.txt
+
+    Basic logic of parsing kml document is done
+    * src/lib/kml/KMLPlaceMark{h,cpp}
+    * src/lib/kml/KMLPlaceMarkParser{h,cpp}
+
 2007-06-13  Murad Tagirov  <tmurad@gmail.com>
     Added some logic for parsing kml documents.
     * src/lib/kml/KMLObjectParser.{h,cpp}

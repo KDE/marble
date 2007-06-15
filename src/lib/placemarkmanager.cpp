@@ -18,15 +18,32 @@
 #include <QtXml/QXmlSimpleReader>
 
 #include "xmlhandler.h"
+#include "kml/KMLDocument.h"
 
 
 PlaceMarkManager::PlaceMarkManager()
 {
-    m_placecontainer = new PlaceContainer(); 
+    m_placecontainer = new PlaceContainer();
 
     addPlaceMarkFile( "cityplacemarks" );
     addPlaceMarkFile( "baseplacemarks" );
     addPlaceMarkFile( "elevplacemarks" );
+
+#ifdef KML_GSOC
+    /*
+     * Sample code to test parsing of kml document
+     */
+    QString defaultSrcName = KAtlasDirs::path( "placemarks/baseplacemarks.kml" );
+
+    if ( QFile::exists( defaultSrcName ) ) {
+        QFile sourceFile( defaultSrcName );
+
+        if ( sourceFile.open( QIODevice::ReadOnly ) ) {
+            KMLDocument document;
+            document.load( sourceFile );
+        }
+    }
+#endif
 }
 
 
@@ -42,7 +59,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
         defaultsrcname   = KAtlasDirs::path( "placemarks/" + filepath + ".kml");
         defaulthomecache = KAtlasDirs::localDir() + "/placemarks/" + filepath + ".cache";
     }
-    else 
+    else
         return;
 
     if ( QFile::exists( defaultcachename ) ) {
@@ -59,8 +76,8 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
             if ( cacheLastModified < sourceLastModified )
                 cacheoutdated = true;
         }
-			
-        bool  loadok = false; 
+
+        bool  loadok = false;
 
         if ( cacheoutdated == false )
             loadok = loadFile( defaultcachename, m_placecontainer );
@@ -124,9 +141,9 @@ void PlaceMarkManager::importKml( const QString& filename, PlaceContainer* place
 
 void PlaceMarkManager::saveFile( const QString& filename, PlaceContainer* placecontainer )
 {
-    if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false ) 
+    if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false )
         ( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/placemarks/" );
-	
+
     QFile  file( filename );
     file.open(QIODevice::WriteOnly);
     QDataStream  out(&file);
@@ -143,7 +160,7 @@ void PlaceMarkManager::saveFile( const QString& filename, PlaceContainer* placec
 
     PlaceContainer::const_iterator  it;
 
-    for ( it=placecontainer->constBegin(); 
+    for ( it=placecontainer->constBegin();
           it != placecontainer->constEnd();
           it++ )
     {
@@ -161,7 +178,7 @@ void PlaceMarkManager::saveFile( const QString& filename, PlaceContainer* placec
 }
 
 
-bool PlaceMarkManager::loadFile( const QString& filename, 
+bool PlaceMarkManager::loadFile( const QString& filename,
                                  PlaceContainer* placecontainer )
 {
     QFile  file( filename );
@@ -181,12 +198,12 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     if (version < 004) {
         qDebug( "Bad file - too old!" );
         return false;
-    } 
+    }
     /*
       if (version > 002) {
       qDebug( "Bad file - too new!" );
       return;
-      } 
+      }
     */
 
     in.setVersion(QDataStream::Qt_4_0);
@@ -201,7 +218,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 
     while ( !in.atEnd() ) {
         mark = new PlaceMark();
-		
+
         in >> tmpstr;
         mark -> setName( tmpstr );
         in >> lng >> lat;

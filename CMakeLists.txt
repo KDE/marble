@@ -6,10 +6,10 @@ if(STATIC_BUILD)
     add_definitions(-DSTATIC_BUILD=1)
 endif(STATIC_BUILD)
 
-option(KML_DEBUG "Debug KML objects" OFF)
-if(KML_DEBUG)
-    add_definitions(-DKML_DEBUG=1)
-endif(KML_DEBUG)
+# Variables to test new kml implementation
+# Will removed in feature after success
+#add_definitions(-DKML_DEBUG)
+#add_definitions(-DKML_GSOC)
 
 find_package(Qt4 REQUIRED)
 

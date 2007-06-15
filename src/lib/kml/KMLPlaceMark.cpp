@@ -9,14 +9,8 @@
 //
 
 
-#include "KMLObjectParser.h"
-#include "KMLObject.h"
+#include "KMLPlaceMark.h"
 
-KMLObjectParser::~KMLObjectParser()
-{
-    delete m_object;
-}
-
-KMLObjectParser::KMLObjectParser()
+KMLPlaceMark::KMLPlaceMark()
 {
 }
