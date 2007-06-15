@@ -131,6 +131,9 @@ should meet the following requirements:
     or expensive.  Online usage should cover incremental downloading
     of texture tiles, vector data (e.g. OpenStreetMap) and wikipedia
     articles.
+    Concerning offline geographical data Marble intends to deliver the 
+    "biggest bang for the byte" and provide as much high quality 
+    information per byte as possible.
 
     For all information that goes beyond map labels ("Marble Almanac")
     we have started cooperation with the Wikipedia Offline Reader
