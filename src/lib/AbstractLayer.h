@@ -21,6 +21,8 @@
  * */
 class AbstractLayer: public QObject
 {
+    Q_OBJECT
+
     public:
         ///an empty constructor, so far
         AbstractLayer(QObject * parent=0);

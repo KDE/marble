@@ -14,6 +14,8 @@
 #define ABSTRACTLAYER_H
 
 #include "Quaternion.h"
+
+
 /*!
  * This class is to represent the base class for each of the levels
  * in the rendering of the Marble display. It will be the base class
@@ -21,6 +23,8 @@
  * */
 class AbstractLayer: public QObject
 {
+    Q_OBJECT
+
     public:
         //!an empty constructor, so far
         AbstractLayer(QObject * parent=0);

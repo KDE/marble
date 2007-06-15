@@ -1,5 +1,9 @@
 2007-06-15  Inge Wallin  <ingwa@cendio.se>
 
+	Fix Krazy issue 20: Check for Q_OBJECT
+	* src/lib/AbstractLayer.h (class AbstractLayer): Add Q_OBJECT
+	* src/lib/AbstractLayer/AbstractLayer.h (class AbstractLayer): Add Q_OBJECT
+
 	Fix Krazy issue 12: Check for proper include directives.
 	* src/lib/AbstractLayer.cpp:               Fix include
 	* src/lib/AbstractLayer/AbstractLayer.cpp: Fix include
