@@ -48,7 +48,7 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
 
     if ( ! result ) {
         qDebug("KMLDocumentParser::startElement(). Unsupported tag");
-        qDebug() << localName;
+        qDebug() << name;
     }
 
     return true;
