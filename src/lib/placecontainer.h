@@ -73,7 +73,7 @@ class PlaceContainer : public QVector<PlaceMark*>
     }
 
  private:	
-    QString m_name;
+    QString  m_name;
 };
 
 #endif // PLACECONTAINER_H

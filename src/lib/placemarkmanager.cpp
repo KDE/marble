@@ -169,7 +169,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
 
     PlaceContainer::const_iterator  it;
 
-    for ( it=placecontainer->constBegin();
+    for ( it = placecontainer->constBegin();
           it != placecontainer->constEnd();
           it++ )
     {
@@ -195,14 +195,15 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     QDataStream in(&file);
 
     // Read and check the header
-    quint32 magic;
+    quint32  magic;
     in >> magic;
     if (magic != 0x31415926) {
         qDebug( "Bad file format!" );
         return false;
     }
+
     // Read the version
-    qint32 version;
+    qint32  version;
     in >> version;
     if (version < 005) {
         qDebug( "Bad file - too old!" );
@@ -217,14 +218,13 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 
     in.setVersion(QDataStream::Qt_4_0);
 
-    // Read the data
-    double    lng;
-    double    lat;
+    // Read the data itself
+    double   lng;
+    double   lat;
     QString  tmpstr;
     qint32   a;
 
     PlaceMark  *mark;
-
     while ( !in.atEnd() ) {
         mark = new PlaceMark();
 
