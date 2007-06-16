@@ -14,7 +14,7 @@
 
 #include "KMLFeature.h"
 
-#include "lib/GeoPoint.h"
+#include "GeoPoint.h"
 
 class KMLPlaceMark : public KMLFeature
 {

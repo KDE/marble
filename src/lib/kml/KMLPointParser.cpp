@@ -11,7 +11,7 @@
 
 #include "KMLPointParser.h"
 
-#include "lib/GeoPoint.h"
+#include "GeoPoint.h"
 #include "KMLPlaceMark.h"
 
 namespace
