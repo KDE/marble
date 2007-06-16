@@ -80,6 +80,7 @@ set(marblewidget_SRCS
            kml/KMLObjectParser.cpp
            kml/KMLPlaceMark.cpp
            kml/KMLPlaceMarkParser.cpp
+           kml/KMLPointParser.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 

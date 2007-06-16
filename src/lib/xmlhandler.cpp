@@ -17,9 +17,6 @@
 #include "placemark.h"
 
 
-const double deg2rad = M_PI/180.0;
-
-
 KAtlasXmlHandler::KAtlasXmlHandler()
 {
     m_placecontainer = new PlaceContainer("placecontainer" );
@@ -42,7 +39,7 @@ bool KAtlasXmlHandler::startDocument()
     m_inPlacemark = false;
     m_inPoint     = false;
 
-    qDebug("Starting KML-Import" ); 
+    qDebug("Starting KML-Import" );
 
     return true;
 }
@@ -66,7 +63,7 @@ bool KAtlasXmlHandler::startElement( const QString&, const QString&,
         m_coordsset = false;
         m_placemark = new PlaceMark();
         m_placemark->setSymbol( 0 );
-    } 
+    }
 
     if ( m_inPlacemark && nameLower == "name" ) {
         m_currentText="";
@@ -86,7 +83,7 @@ bool KAtlasXmlHandler::startElement( const QString&, const QString&,
 
     if ( m_inPlacemark && nameLower == "point" ) {
         m_inPoint = true;
-    } 
+    }
 
     if ( m_inPlacemark && nameLower == "role" ) {
         m_currentText="";
@@ -108,7 +105,7 @@ bool KAtlasXmlHandler::characters( const QString& str )
 }
 
 
-bool KAtlasXmlHandler::endElement( const QString&, const QString&, 
+bool KAtlasXmlHandler::endElement( const QString&, const QString&,
                                    const QString &name )
 {
     QString nameLower = name.toLower();
@@ -127,7 +124,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
         else if ( m_placemark->role() == 'R' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 + 2);
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 + 3 );
 
-        if ( m_coordsset == true ) 
+        if ( m_coordsset == true )
             m_placecontainer->append( m_placemark );
 
         m_inPlacemark = false;
@@ -168,7 +165,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
     if ( m_inPoint && nameLower == "coordinates" ) {
         QStringList splitline = m_currentText.split( "," );
 
-        m_placemark->setCoordinate( deg2rad * splitline[0].toFloat(), 
+        m_placemark->setCoordinate( deg2rad * splitline[0].toFloat(),
                                     -deg2rad * splitline[1].toFloat() );
 
         if ( splitline.size() == 3 ) {
@@ -185,8 +182,8 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
 
 
 bool KAtlasXmlHandler::stopDocument()
-{ 
-    qDebug() << "Placemarks: " << m_placecontainer->size(); 
+{
+    qDebug() << "Placemarks: " << m_placecontainer->size();
 
     return true;
 }

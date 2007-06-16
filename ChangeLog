@@ -1,13 +1,38 @@
+2007-06016  Murad Tagirov  <tmurad@gmail.com>
+
+    Created KMLPointParser which parses coordinates
+    tag and sets parsed lon and lat to KMLPlaceMark.
+    * src/lib/kml/KMLPointParser.{h,cpp} new file
+    * src/lib/kml/KMLPlaceMark.{h,cpp}
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+
+    Moved "deg2rad" constant from xmlhandler to GeoPoint.
+    * src/lib/xmlhandler.cpp
+    * src/lib/GeoPoint.cpp
+
+    Added "m_parsed" field to parser classes to avoid
+    parsing of incorrect tag sequences.
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
+    * src/lib/kml/KMLFeatureParser.{h,cpp}
+
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 22: Check for spelling errors
 	* src/lib/kml/KMLPlaceMarkParser.cpp: appers -> appears
 
 2007-06-16  Murad Tagirov  <tmurad@gmail.com>
-	
-	Implemented parsing of KMLFeature fields
-	(name, description, address, phone number)
-	* src/lib/kml/KMLFeatue.{h,cpp}
+
+    Implemented parsing of KMLFeature fields
+    (name, description, address, phone number)
+    * src/lib/kml/KMLFeature.{h,cpp}
+
+    Added protected field m_object to KMLObjectParser
+    as this field is common for all parsers
+    * src/lib/kml/KMLObjectParser.{h,cpp}
+    * src/lib/kml/KMLFeatureParser.{h,cpp}
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+    * src/lib/kml/KMLContainerParser.{h,cpp}
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
 
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 

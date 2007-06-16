@@ -11,17 +11,20 @@
 
 #include "KMLPlaceMarkParser.h"
 
-#include "KMLPlaceMark.h"
 #include "KMLContainer.h"
+#include "KMLPlaceMark.h"
+#include "KMLPointParser.h"
 
 namespace
 {
     const QString PLACEMARK_TAG = "placemark";
+    const QString POINT_TAG = "point";
 }
 
 KMLPlaceMarkParser::KMLPlaceMarkParser( KMLContainer& container )
   : KMLFeatureParser( container ),
-    m_placemark( new KMLPlaceMark() )
+    m_placemark( new KMLPlaceMark() ),
+    m_currentParser( 0 )
 {
 }
 
@@ -41,7 +44,14 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
         return false;
     }
 
-    bool result = KMLFeatureParser::startElement( namespaceURI, localName, name, atts );
+    bool result = false;
+
+    if ( m_currentParser != 0 ) {
+        result = m_currentParser->startElement( namespaceURI, localName, name, atts );
+    }
+    else {
+        result = KMLFeatureParser::startElement( namespaceURI, localName, name, atts );
+    }
 
     if ( ! result ) {
         QString lowerName = name.toLower();
@@ -52,6 +62,17 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
          */
         if ( lowerName == PLACEMARK_TAG ) {
             result = true;
+        }
+        else if ( lowerName == POINT_TAG ) {
+            if ( m_currentParser != 0 ) {
+                delete m_currentParser;
+                m_currentParser = 0;
+            }
+
+            if ( m_placemark != 0 ) {
+                m_currentParser = new KMLPointParser( *m_placemark );
+                result = m_currentParser->startElement( namespaceURI, localName, name, atts );
+            }
         }
     }
 
@@ -66,7 +87,14 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
         return false;
     }
 
-    bool result = KMLFeatureParser::endElement( namespaceURI, localName, qName );
+    bool result = false;
+
+    if ( m_currentParser != 0 ) {
+        result = m_currentParser->endElement( namespaceURI, localName, qName );
+    }
+    else {
+        result = KMLFeatureParser::endElement( namespaceURI, localName, qName );
+    }
 
     if ( ! result ) {
         /*
@@ -93,5 +121,15 @@ bool KMLPlaceMarkParser::characters( const QString& ch )
         return false;
     }
 
-    return KMLFeatureParser::characters( ch );
+    bool result = false;
+
+    if ( m_currentParser != 0 ) {
+        result = m_currentParser->characters( ch );
+    }
+    else
+    {
+        result = KMLFeatureParser::characters( ch );
+    }
+
+    return result;
 }

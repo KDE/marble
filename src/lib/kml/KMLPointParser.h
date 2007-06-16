@@ -9,21 +9,17 @@
 //
 
 
-#ifndef KMLPLACEMARKPARSER_H
-#define KMLPLACEMARKPARSER_H
+#ifndef KMLPOINTPARSER_H
+#define KMLPOINTPARSER_H
 
-#include "KMLFeatureParser.h"
 #include "KMLObjectParser.h"
 
-class KMLContainer;
-class KMLObjectParser;
 class KMLPlaceMark;
 
-class KMLPlaceMarkParser : public KMLFeatureParser
+class KMLPointParser : public KMLObjectParser
 {
  public:
-    KMLPlaceMarkParser( KMLContainer& container );
-    virtual ~KMLPlaceMarkParser();
+    KMLPointParser( KMLPlaceMark& placemark );
 
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,
@@ -37,8 +33,11 @@ class KMLPlaceMarkParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  private:
-    KMLPlaceMark*       m_placemark;
-    KMLObjectParser*    m_currentParser;
+    bool        m_parsed;
+    bool        m_waitCoordinates;
+
+    double      m_lon;
+    double      m_lat;
 };
 
-#endif // KMLPLACEMARKPARSER_H
+#endif

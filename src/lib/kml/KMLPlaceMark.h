@@ -14,11 +14,20 @@
 
 #include "KMLFeature.h"
 
+#include "lib/GeoPoint.h"
+
 class KMLPlaceMark : public KMLFeature
 {
  public:
     KMLPlaceMark();
     virtual ~KMLPlaceMark();
+
+    void setCoordinate( double lon, double lat );
+
+    QString toString() const;
+
+ private:
+    GeoPoint    m_coordinate;
 };
 
 #endif // KMLPLACEMARK_H

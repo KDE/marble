@@ -17,11 +17,13 @@
 
 namespace
 {
+    const QString DOCUMENT_TAG = "document";
     const QString PLACEMARK_TAG = "placemark";
 }
 
 KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
-  : KMLContainerParser( document )
+  : KMLContainerParser( document ),
+    m_parsed( false )
 {
 }
 
@@ -42,11 +44,22 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
                                       const QString& name,
                                       const QXmlAttributes& atts)
 {
+    if ( m_parsed ) {
+        return false;
+    }
     /*
      * Document specific fields will parse will in a feature
      * i.e. list of StyleSelector, Schema objects
      */
     bool result = KMLContainerParser::startElement( namespaceUri, localName, name, atts);
+
+    QString lowerName = name.toLower();
+
+    if ( ! result ) {
+        if ( lowerName == DOCUMENT_TAG ) {
+            result = true;
+        }
+    }
 
     if ( ! result ) {
         qDebug("KMLDocumentParser::startElement(). Unsupported tag");
@@ -60,7 +73,20 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
                                     const QString& localName,
                                     const QString& qName )
 {
+    if ( m_parsed ) {
+        return false;
+    }
+
     bool result = KMLContainerParser::endElement( namespaceUri, localName, qName );
+
+    if ( ! result ) {
+        QString lowerName = qName.toLower();
+
+        if ( lowerName == DOCUMENT_TAG ) {
+            m_parsed = true;
+            result = true;
+        }
+    }
 
     qDebug("KMLDocumentParser::endElement(). Result: %d", result);
     return true;
@@ -68,8 +94,11 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
 
 bool KMLDocumentParser::characters( const QString& ch )
 {
-    bool result = KMLContainerParser::characters( ch );
+    if ( m_parsed ) {
+        return false;
+    }
 
+    bool result = KMLContainerParser::characters( ch );
     qDebug("KMLDocumentParser::characters. Result: %d", result);
     return true;
 }

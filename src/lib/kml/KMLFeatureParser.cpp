@@ -106,15 +106,19 @@ bool KMLFeatureParser::characters( const QString& str )
     switch ( m_phase ) {
     case WAIT_NAME:
         feature.setName( str );
+        result = true;
         break;
     case WAIT_DESCRIPTION:
         feature.setDescription( str );
+        result = true;
         break;
     case WAIT_ADDRESS:
         feature.setAddress( str );
+        result = true;
         break;
     case WAIT_PHONE_NUMBER:
         feature.setPhoneNumber( str );
+        result = true;
         break;
     default:
         break;

@@ -36,6 +36,9 @@ class KMLDocumentParser : public KMLContainerParser
                              const QString& qName );
 
     virtual bool characters( const QString& ch );
+
+ private:
+    bool    m_parsed;
 };
 
 #endif // KMLDOCUMENTPARSER_H

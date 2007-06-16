@@ -15,8 +15,10 @@
 
 #include <QtCore/QVector>
 
+#include <cmath>
 #include "Quaternion.h"
 
+const double deg2rad = M_PI/180.0;
 
 class GeoPoint {
  public:
@@ -25,11 +27,11 @@ class GeoPoint {
     GeoPoint(double, double);
     GeoPoint(int, int, int);
     ~GeoPoint(){}
-	
+
     int detail()  const { return m_detail; }
 
     void geoCoordinates( double& lon, double& lat ) const {
-	m_q.getSpherical( lon, lat ); 
+	m_q.getSpherical( lon, lat );
     }
 
     const Quaternion &quaternion() const { return m_q; }
@@ -38,7 +40,7 @@ class GeoPoint {
     // Type definitions
     typedef QVector<GeoPoint> Vector;
 
- private:	
+ private:
     Quaternion  m_q;
     int         m_detail;
 };
