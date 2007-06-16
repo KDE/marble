@@ -292,7 +292,7 @@ void TileScissor::createTiles()
                 tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
                 QImage tile( tilename );
 
-                bool noerr = tile.save( tilename, "jpg", 90 );
+                bool noerr = tile.save( tilename, "jpg", 85 );
                 if ( noerr == false )
                     qDebug() << "Error while writing Tile: " << tilename; 
 

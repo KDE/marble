@@ -1,5 +1,12 @@
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 
+    - Added a section in the Legend to explain
+      color values. FIXME: This should 
+      be dynamically created for each map in the
+      future.
+
+2007-06-15  Torsten Rahn  <rahn@kde.org>
+
     - Removed ETOPO2 digital elevation model and
       replaced it by the much more recent 
       (and usually more detailed) Shuttle Radar 
