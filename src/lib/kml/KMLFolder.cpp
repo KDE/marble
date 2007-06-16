@@ -11,7 +11,9 @@
 
 
 #include "KMLFolder.h"
-#include "placecontainer.h"
+
+#include "PlaceMarkContainer.h"
+
 
 KMLFolder::KMLFolder()
 {

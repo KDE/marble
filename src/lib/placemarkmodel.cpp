@@ -279,9 +279,9 @@ QVariant PlaceMarkModel::headerData(int section, Qt::Orientation orientation,
         return QString( "Row %1" ).arg( section );
 }
 
-void PlaceMarkModel::setContainer(PlaceContainer* container)
+void PlaceMarkModel::setContainer(PlaceMarkContainer* container)
 {
-    PlaceContainer::const_iterator  it;
+    PlaceMarkContainer::const_iterator  it;
 
     for ( it=container->constBegin(); it != container->constEnd(); it++ ) {
         m_placemarkindex << *it;

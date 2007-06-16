@@ -9,16 +9,16 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
 
 
-PlaceContainer::PlaceContainer()
+PlaceMarkContainer::PlaceMarkContainer()
 {
     clear();
 }
 
 
-PlaceContainer::PlaceContainer( const QString& name )
+PlaceMarkContainer::PlaceMarkContainer( const QString& name )
     : m_name(name)
 {
     clear();

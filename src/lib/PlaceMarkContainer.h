@@ -10,8 +10,8 @@
 //
 
 
-#ifndef PLACECONTAINER_H
-#define PLACECONTAINER_H
+#ifndef PLACEMARKCONTAINER_H
+#define PLACEMARKCONTAINER_H
 
 
 #include <QtCore/QVector>
@@ -36,11 +36,11 @@ inline bool populationLessThan( PlaceMark* mark1, PlaceMark* mark2 )
 }
 
 
-class PlaceContainer : public QVector<PlaceMark*>
+class PlaceMarkContainer : public QVector<PlaceMark*>
 {
  public:
-    PlaceContainer();
-    PlaceContainer( const QString& name );
+    PlaceMarkContainer();
+    PlaceMarkContainer( const QString& name );
 
     void setName( const QString& name ) { m_name = name; }
     QString name() const         { return m_name; }
@@ -76,4 +76,4 @@ class PlaceContainer : public QVector<PlaceMark*>
     QString  m_name;
 };
 
-#endif // PLACECONTAINER_H
+#endif // PLACEMARKCONTAINER_H

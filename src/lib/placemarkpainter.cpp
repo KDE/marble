@@ -82,7 +82,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
                                         int imgrx, int imgry,
                                         int radius,
-                                        const PlaceContainer* placecontainer,
+                                        const PlaceMarkContainer* placeMarkContainer,
                                         Quaternion rotAxis )
 {
     int  imgwidth  = 2 * imgrx;
@@ -122,9 +122,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     PlaceMark  *mark = 0; 
     int         labelnum = 0;
 
-    PlaceContainer::const_iterator  it;
-    for ( it = placecontainer->constBegin();
-          it != placecontainer->constEnd();
+    PlaceMarkContainer::const_iterator  it;
+    for ( it = placeMarkContainer->constBegin();
+          it != placeMarkContainer->constEnd();
           it++ ) 
     {
         mark  = *it; // no cast
@@ -319,7 +319,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     }
 
     // qDebug() << QString("Size: %1, Rows: %2").arg(m_visibleplacemarks.size()).arg( secnumber );
-    PlaceContainer::const_iterator  visit = m_visibleplacemarks.constEnd();
+    PlaceMarkContainer::const_iterator  visit = m_visibleplacemarks.constEnd();
 
     while ( visit != m_visibleplacemarks.constBegin() ) {
         --visit;
@@ -398,7 +398,7 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
 {
     QVector<PlaceMark*>             ret;
 
-    PlaceContainer::const_iterator  it;
+    PlaceMarkContainer::const_iterator  it;
 
     for ( it = m_visibleplacemarks.constBegin();
           it != m_visibleplacemarks.constEnd();

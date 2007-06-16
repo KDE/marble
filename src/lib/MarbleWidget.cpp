@@ -332,7 +332,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
     PlaceMark* mark = model->placeMark( index );
 
-    d->m_model->placeContainer()->clearSelected();
+    d->m_model->placeMarkContainer()->clearSelected();
 
     if ( mark != 0 ){
 	double  lon;
@@ -346,8 +346,8 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     else 
 	d->m_crosshair.setEnabled( false );
 
-    d->m_model->placeContainer()->clearTextPixmaps();
-    d->m_model->placeContainer()->sort();
+    d->m_model->placeMarkContainer()->clearTextPixmaps();
+    d->m_model->placeMarkContainer()->sort();
 
     repaint();
 }

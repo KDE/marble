@@ -13,21 +13,21 @@
 
 #include <cmath>
 
-#include "placecontainer.h"
 #include "placemark.h"
+#include "PlaceMarkContainer.h"
 
 
 KAtlasXmlHandler::KAtlasXmlHandler()
 {
-    m_placecontainer = new PlaceContainer("placecontainer" );
+    m_placeMarkContainer = new PlaceMarkContainer("placecontainer" );
     m_placemark = 0;
     m_coordsset = false;
 }
 
 
-KAtlasXmlHandler::KAtlasXmlHandler( PlaceContainer* placecontainer )
+KAtlasXmlHandler::KAtlasXmlHandler( PlaceMarkContainer* placeMarkContainer )
 {
-    m_placecontainer = placecontainer;
+    m_placeMarkContainer = placeMarkContainer;
     m_placemark = 0;
     m_coordsset = false;
 }
@@ -125,7 +125,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 + 3 );
 
         if ( m_coordsset == true )
-            m_placecontainer->append( m_placemark );
+            m_placeMarkContainer->append( m_placemark );
 
         m_inPlacemark = false;
     }
@@ -183,7 +183,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
 
 bool KAtlasXmlHandler::stopDocument()
 {
-    qDebug() << "Placemarks: " << m_placecontainer->size();
+    qDebug() << "Placemarks: " << m_placeMarkContainer->size();
 
     return true;
 }

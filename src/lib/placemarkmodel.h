@@ -21,7 +21,7 @@
 #include <QtCore/QAbstractListModel>
 
 #include "marble_export.h"
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
 
 
 inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
@@ -51,7 +51,7 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
                                     const QVariant & value, int hits = 1,
                                     Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
-    void setContainer( PlaceContainer* );
+    void setContainer( PlaceMarkContainer* );
 
  private:
     QVector<PlaceMark*> m_placemarkindex;

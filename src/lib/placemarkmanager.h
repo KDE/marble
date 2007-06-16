@@ -14,7 +14,7 @@
 #define PLACEMARKMANAGER_H
 
 
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
 #include "katlasdirs.h"
 
 
@@ -26,20 +26,20 @@ class PlaceMarkManager
 
     void addPlaceMarkFile( const QString& );
 
-    PlaceContainer* getPlaceContainer() {
-        m_placecontainer->sort();
-        return m_placecontainer;
+    PlaceMarkContainer* getPlaceMarkContainer() {
+        m_placeMarkContainer->sort();
+        return m_placeMarkContainer;
     }
 
     void loadKml( const QString& );
 
  protected:
-    void importKml( const QString&, PlaceContainer* );
-    void saveFile( const QString&, PlaceContainer* );
-    bool loadFile( const QString&, PlaceContainer* );
+    void importKml( const QString&, PlaceMarkContainer* );
+    void saveFile( const QString&, PlaceMarkContainer* );
+    bool loadFile( const QString&, PlaceMarkContainer* );
 
  protected:
-    PlaceContainer  *m_placecontainer;
+    PlaceMarkContainer  *m_placeMarkContainer;
 };
 
 #endif // PLACEMARKMANAGER_H

@@ -15,7 +15,8 @@
 #include <QtXml/QXmlSimpleReader>
 
 #include "KMLDocumentParser.h"
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
+
 
 KMLDocument::KMLDocument()
 {

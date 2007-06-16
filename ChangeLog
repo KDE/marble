@@ -1,3 +1,19 @@
+2007-06-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Change name of class PlaceContainer into PlaceMarkContainer.
+	* src/lib/placecontainer.h:   new name: PlaceMarkContainer.h
+	* src/lib/placecontainer.cpp: new name: PlaceMarkContainer.cpp
+	* src/lib/CMakeLists.txt: reflect the name change
+	* src/lib/MarbleModel.h,       src/lib/MarbleModel.cpp,
+	* src/lib/MarbleWidget.cpp,
+	* src/lib/kml/KMLDocument.cpp,
+	* src/lib/kml/KMLFolder.cpp,
+	* src/lib/placemarkmanager.h,  src/lib/placemarkmanager.cpp,
+	* src/lib/placemarkmodel.h,    src/lib/placemarkmodel.cpp,
+	* src/lib/placemarkpainter.h,  src/lib/placemarkpainter.cpp,
+	* src/lib/xmlhandler.h,        src/lib/xmlhandler.cpp:
+	  Use the new names.
+
 2007-06-16  Murad Tagirov  <tmurad@gmail.com>
 
     Created KMLPointParser which parses coordinates

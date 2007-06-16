@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
 #include "placemarkmanager.h"
 
 #include <QtCore/QDebug>
@@ -23,7 +24,7 @@
 
 PlaceMarkManager::PlaceMarkManager()
 {
-    m_placecontainer = new PlaceContainer();
+    m_placeMarkContainer = new PlaceMarkContainer();
 
     addPlaceMarkFile( "cityplacemarks" );
     addPlaceMarkFile( "baseplacemarks" );
@@ -80,7 +81,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
         bool  loadok = false;
 
         if ( cacheoutdated == false )
-            loadok = loadFile( defaultcachename, m_placecontainer );
+            loadok = loadFile( defaultcachename, m_placeMarkContainer );
 
         if ( loadok == true )
             return;
@@ -89,7 +90,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     qDebug( "No recent Default Placemark Cache File available!" );
 
     if ( QFile::exists( defaultsrcname ) ) {
-        PlaceContainer  *importcontainer = new PlaceContainer();
+        PlaceMarkContainer  *importcontainer = new PlaceMarkContainer();
 
         // Read the KML file.
         importKml( defaultsrcname, importcontainer );
@@ -97,8 +98,8 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
         // Save the contents in the efficient cache format.
         saveFile( defaulthomecache, importcontainer );
 
-        // ...and finally add it to the PlaceContainer
-        *m_placecontainer << *importcontainer;
+        // ...and finally add it to the PlaceMarkContainer
+        *m_placeMarkContainer << *importcontainer;
     }
     else {
         qDebug() << "No Default Placemark Source File!";
@@ -111,20 +112,20 @@ void PlaceMarkManager::loadKml( const QString& filename )
     // This still is buggy and needs a lot of work as does the concept
     // as a whole ...
 
-    // PlaceContainer* tmp = m_placecontainer;
-    m_placecontainer -> clear();
+    // PlaceMarkContainer* tmp = m_placeMarkContainer;
+    m_placeMarkContainer -> clear();
     // tmp -> deleteAll();
     // delete tmp;
 
-    importKml( filename, m_placecontainer );
+    importKml( filename, m_placeMarkContainer );
 }
 
 
 void PlaceMarkManager::importKml( const QString& filename, 
-                                  PlaceContainer* placecontainer )
+                                  PlaceMarkContainer* placeMarkContainer )
 {
 
-    KAtlasXmlHandler handler( placecontainer );
+    KAtlasXmlHandler handler( placeMarkContainer );
 
     QFile file( filename );
 
@@ -148,7 +149,7 @@ void PlaceMarkManager::importKml( const QString& filename,
 
 
 void PlaceMarkManager::saveFile( const QString& filename, 
-                                 PlaceContainer* placecontainer )
+                                 PlaceMarkContainer* placeMarkContainer )
 {
     if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false )
         ( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/placemarks/" );
@@ -167,10 +168,10 @@ void PlaceMarkManager::saveFile( const QString& filename,
     double  lng;
     double  lat;
 
-    PlaceContainer::const_iterator  it;
+    PlaceMarkContainer::const_iterator  it;
 
-    for ( it = placecontainer->constBegin();
-          it != placecontainer->constEnd();
+    for ( it = placeMarkContainer->constBegin();
+          it != placeMarkContainer->constEnd();
           it++ )
     {
         out << (*it) -> name();
@@ -188,7 +189,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
 
 
 bool PlaceMarkManager::loadFile( const QString& filename,
-                                 PlaceContainer* placecontainer )
+                                 PlaceMarkContainer* placeMarkContainer )
 {
     QFile  file( filename );
     file.open(QIODevice::ReadOnly);
@@ -245,7 +246,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         in >> a;
         mark -> setPopulation( a );
 
-        placecontainer -> append( mark );
+        placeMarkContainer -> append( mark );
     }
 
     return true;

@@ -19,14 +19,14 @@
 
 
 class PlaceMark;
-class PlaceContainer;
+class PlaceMarkContainer;
 
 
 class KAtlasXmlHandler : public QXmlDefaultHandler
 {
  public:
     KAtlasXmlHandler();
-    KAtlasXmlHandler( PlaceContainer* );
+    KAtlasXmlHandler( PlaceMarkContainer* );
 
     bool startDocument();
     bool stopDocument();
@@ -41,17 +41,17 @@ class KAtlasXmlHandler : public QXmlDefaultHandler
     inline int popIdx( int population );
 
  private:
-    PlaceContainer  *m_placecontainer;
-    PlaceMark       *m_placemark;
+    PlaceMarkContainer  *m_placeMarkContainer;
+    PlaceMark           *m_placemark;
 
-    QString          m_currentText;
+    QString              m_currentText;
 
     // State machine?
-    bool             m_inKml;
-    bool             m_inPlacemark;
-    bool             m_inPoint;
+    bool                 m_inKml;
+    bool                 m_inPlacemark;
+    bool                 m_inPoint;
 
-    bool             m_coordsset;
+    bool                 m_coordsset;
 };
 
 #endif // GPXMLHANDLER_H

@@ -35,14 +35,14 @@
 
 #include "Quaternion.h"
 #include "GridMap.h"
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
+#include "placemarkpainter.h"
 #include "placemarkmodel.h"
 #include "clippainter.h"
 #include "maptheme.h"
 #include "TextureMapper.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
-#include "placemarkpainter.h"
 
 
 class PlaceMark;
@@ -122,11 +122,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );
 
-    PlaceContainer    *placeContainer()   const;
-    VectorComposer    *vectorComposer()   const;
-    TextureColorizer  *textureColorizer() const;
-    TextureMapper     *textureMapper()    const;
-    PlaceMarkPainter  *placeMarkPainter() const;
+    PlaceMarkContainer *placeMarkContainer() const;
+    PlaceMarkPainter   *placeMarkPainter()   const;
+    VectorComposer     *vectorComposer()     const;
+    TextureColorizer   *textureColorizer()   const;
+    TextureMapper      *textureMapper()      const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.

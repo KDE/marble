@@ -37,25 +37,25 @@ class MarbleModelPrivate
     QImage   *m_coastimg;
 
     // View and paint stuff
-    MapTheme          *m_maptheme;
-    TextureColorizer  *m_texcolorizer;
-    TextureMapper     *m_texmapper;
-    VectorComposer    *m_veccomposer;
-    GridMap           *m_gridmap;
+    MapTheme            *m_maptheme;
+    TextureColorizer    *m_texcolorizer;
+    TextureMapper       *m_texmapper;
+    VectorComposer      *m_veccomposer;
+    GridMap             *m_gridmap;
 
     // Places on the map
-    PlaceMarkManager  *m_placemarkmanager;
-    PlaceMarkModel    *m_placemarkmodel;
-    PlaceMarkPainter  *m_placemarkpainter;
-    PlaceContainer    *m_placecontainer;
+    PlaceMarkManager    *m_placemarkmanager;
+    PlaceMarkContainer  *m_placeMarkContainer;
+    PlaceMarkModel      *m_placemarkmodel;
+    PlaceMarkPainter    *m_placemarkpainter;
 
-    Quaternion         m_planetAxis;
-    Quaternion         m_planetAxisUpdated;
-    int                m_radius;
-    int                m_radiusUpdated;
+    Quaternion           m_planetAxis;
+    Quaternion           m_planetAxisUpdated;
+    int                  m_radius;
+    int                  m_radiusUpdated;
 
-    bool  m_justModified;
-    bool  m_centered;
+    bool          m_justModified;
+    bool          m_centered;
 
     bool          m_showGrid;
     bool          m_showPlaceMarks;
@@ -71,9 +71,9 @@ MarbleModel::MarbleModel( QWidget* parent )
 
     d->m_texmapper = 0;
 
-    d->m_placemarkpainter = 0;
-    d->m_placecontainer   = 0;
-    d->m_radius           = 2000;
+    d->m_placemarkpainter   = 0;
+    d->m_placeMarkContainer = 0;
+    d->m_radius             = 2000;
 
     d->m_justModified = false;
 
@@ -109,11 +109,11 @@ MarbleModel::MarbleModel( QWidget* parent )
     d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
                                               KAtlasDirs::path( "landcolors.leg" ) );
 
-    d->m_placemarkmanager = new PlaceMarkManager();
-    d->m_placecontainer   = d->m_placemarkmanager->getPlaceContainer();
+    d->m_placemarkmanager   = new PlaceMarkManager();
+    d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
     d->m_placemarkmodel   = new PlaceMarkModel( this );
-    d->m_placemarkmodel->setContainer( d->m_placecontainer );
+    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 }
 
 MarbleModel::~MarbleModel()
@@ -205,10 +205,10 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     d->m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( d->m_maptheme->tilePrefix() ) + 1 );
 
-    if ( d->m_placecontainer == 0)
-        d->m_placecontainer = new PlaceContainer("placecontainer");
+    if ( d->m_placeMarkContainer == 0)
+        d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
 
-    d->m_placecontainer ->clearTextPixmaps();
+    d->m_placeMarkContainer ->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
@@ -298,11 +298,11 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
     //	}
 
     // Paint the PlaceMark layer
-    if ( d->m_showPlaceMarks == true && d->m_placecontainer->size() > 0 ) {
+    if ( d->m_showPlaceMarks == true && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
                                               d->m_canvasimg->width() / 2,
                                               d->m_canvasimg->height()/ 2,
-                                              d->m_radius, d->m_placecontainer,
+                                              d->m_radius, d->m_placeMarkContainer,
                                               d->m_planetAxis );
     }
 
@@ -439,9 +439,9 @@ int MarbleModel::northPoleZ()
     return (int)( d->m_radius * northPole.v[Q_Z] );
 }
 
-PlaceContainer    *MarbleModel::placeContainer()   const
+PlaceMarkContainer *MarbleModel::placeMarkContainer()   const
 {
-    return d->m_placecontainer;
+    return d->m_placeMarkContainer;
 }
 
 VectorComposer    *MarbleModel::vectorComposer()   const
@@ -485,9 +485,9 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
     d->m_placemarkmanager->loadKml( filename );
 
-    d->m_placecontainer = d->m_placemarkmanager->getPlaceContainer();
+    d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
-    d->m_placemarkmodel->setContainer( d->m_placecontainer );	
+    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );	
 }
 
 QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )

@@ -26,11 +26,11 @@
 
 #include "Quaternion.h"
 #include "placemark.h"
-#include "placecontainer.h"
+#include "PlaceMarkContainer.h"
 
 
 class QPainter;
-class PlaceContainer;
+class PlaceMarkContainer;
 
 class PlaceMarkPainter : public QObject
 {
@@ -38,7 +38,7 @@ class PlaceMarkPainter : public QObject
 
  public:
     PlaceMarkPainter(QObject *parent = 0);
-    void paintPlaceFolder(QPainter*, int, int, int, const PlaceContainer*, 
+    void paintPlaceFolder(QPainter*, int, int, int, const PlaceMarkContainer*, 
                           Quaternion );
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
@@ -91,7 +91,7 @@ class PlaceMarkPainter : public QObject
     QFont  m_font_regular_underline;
     QFont  m_font_mountain;
 
-    PlaceContainer  m_visibleplacemarks;
+    PlaceMarkContainer  m_visibleplacemarks;
 
     QColor  m_labelcolor;
     int     m_fontheight;

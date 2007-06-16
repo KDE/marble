@@ -51,12 +51,12 @@ set(marblewidget_SRCS
            MarbleModel.cpp
            MarbleWidget.cpp
            measuretool.cpp
-           placecontainer.cpp
            placemark.cpp
-           placemarkinfodialog.cpp
+           PlaceMarkContainer.cpp
            placemarkmanager.cpp
-           placemarkmodel.cpp
            placemarkpainter.cpp
+           placemarkmodel.cpp
+           placemarkinfodialog.cpp
            Quaternion.cpp
            searchcombobox.cpp
            searchlistview.cpp
@@ -163,12 +163,12 @@ install( FILES
            MarbleModel.h
            MarbleWidget.h
            measuretool.h
-           placecontainer.h
            placemark.h
-           placemarkinfodialog.h
+           PlaceMarkContainer.h
            placemarkmanager.h
-           placemarkmodel.h
            placemarkpainter.h
+           placemarkmodel.h
+           placemarkinfodialog.h
            Quaternion.h
            ScreenPolygon.h
            searchcombobox.h
