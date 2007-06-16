@@ -48,7 +48,7 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
 
         /*
          * Iterate over tags which current parser supports
-         * TODO: check if this tag appers first time or not
+         * TODO: check if this tag appears first time or not
          */
         if ( lowerName == PLACEMARK_TAG ) {
             result = true;
@@ -71,7 +71,7 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
     if ( ! result ) {
         /*
          * Check this is our end tag
-         * TODO: check if this tag appers first time or not
+         * TODO: check if this tag appears first time or not
          */
         QString lowerName = qName.toLower();
 

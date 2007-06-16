@@ -1,7 +1,13 @@
+2007-06-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 22: Check for spelling errors
+	* src/lib/kml/KMLPlaceMarkParser.cpp: appers -> appears
+
 2007-06-16  Murad Tagirov  <tmurad@gmail.com>
-    Implemented parsing of KMLFeature fields
-    (name, description, address, phone number)
-    * src/lib/kml/KMLFeatue.{h,cpp}
+	
+	Implemented parsing of KMLFeature fields
+	(name, description, address, phone number)
+	* src/lib/kml/KMLFeatue.{h,cpp}
 
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 
@@ -36,10 +42,11 @@
     * data/CMakeLists.txt: install SRTM instead of ETOPO2
 
 2007-06-15  Murad Tagirov  <tmurad@gmail.com>
-    Added support for start, end tags in KMLPlaceMarkParser.
-    KMLPlaceMarks only added if they completely parsed in other
-    case they just deleting with parser.
-    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+
+	Added support for start, end tags in KMLPlaceMarkParser.
+	KMLPlaceMarks only added if they completely parsed in other
+	case they just deleting with parser.
+	* src/lib/kml/KMLPlaceMarkParser.{h,cpp}
 
 2007-06-15  Inge Wallin  <ingwa@cendio.se>
 
