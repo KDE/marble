@@ -15,6 +15,10 @@
     * src/lib/kml/KMLDocumentParser.{h,cpp}
     * src/lib/kml/KMLFeatureParser.{h,cpp}
 
+    Updated class diagram to show relations between
+    parser classes. Added documentation for some classes
+    * projects/kml/KMLClasses.xmi
+
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 22: Check for spelling errors
