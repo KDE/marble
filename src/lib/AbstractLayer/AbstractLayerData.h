@@ -16,15 +16,16 @@ class AbstractLayerData
     //!constructor
     AbstractData();
     //!destructor
-    ~AbstractData();
-    /*!
+    virtual ~AbstractData();
+    /*!\brief allow for drawing this Layer Data object
+     * 
      * draw is intended to either provide the details necessary for the
      * view to draw, or given a pointer to the view it may draw itself
      */
     virtual void draw()=0;
-    //!accessors
-    GeoPoint getPosition()const {return m_position} 
-    void setPosition(const Geopoint& posIn){m_position = posIn}
+    //!accessor
+    GeoPoint position() const { return m_position } 
+    void setPosition( const Geopoint& posIn ) { m_position = posIn }
     
  private:
     //!the position of the Data item
