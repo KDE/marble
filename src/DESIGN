@@ -52,26 +52,25 @@ viewed as separate layers:
    that specifies which area is being covered by each polygon.
 
  - Points of interest.  Right now these are mostly cities, but also 
-   some mountains. 
+   some mountains and sea deeps.
 
    The main class of the points is the PlaceMark with a somewhat
-   arbitrary selection of properties. Another important class is the
+   arbitrary selection of properties.  Another important class is the
    PlaceContainer which collects a number of PlaceMarks into a
    container, just like the name suggests.
 
-   There is a special case that should be pointed out -- especially since
-   it happens with Marble's default map:
-   The Topographical Atlas View provides a special map in terms of 
-   composition: While for the other map views the 3 layers are painted 
-   in simple bottom top order the Topographical Atlas View "merges" the 
-   Texture (which contains the digital elevation data) and a Vector 
-   Layer to create a recolorized bumpmapped layer via the 
-   TextureColorizer class.
+For most maps, these 3 layers are just painted on top of each other in
+simple bottom top order.  However, the Topographical Atlas View (the
+default view!)  provides a special map in terms of composition:
 
-   All map views and their use of layers get specified in a 
-   *.dgml-XML file. The source format for the placemark layer is 
-   Google Earth's KML file format which gets parsed and cached into 
-   a temporary binary file for faster follow-up reading.
+   The Topographical Atlas View "merges" the Texture (which contains
+   the digital elevation data) and a Vector Layer to create a
+   recolorized bumpmapped layer via the TextureColorizer class.
+
+All map views and their use of layers get specified in a *.dgml-XML
+file.  The source format for the placemark layer is Google Earth's KML
+file format which gets parsed and cached into a temporary binary file
+(.cache) for faster follow-up reading.
 
 
 2.1 The Tile System
