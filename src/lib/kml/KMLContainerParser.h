@@ -14,6 +14,8 @@
 
 #include "KMLFeatureParser.h"
 
+class KMLContainer;
+
 class KMLContainerParser : public KMLFeatureParser
 {
  public:
@@ -31,7 +33,7 @@ class KMLContainerParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  protected:
-    KMLContainerParser( KMLObject& object );
+    KMLContainerParser( KMLContainer& container );
 
  private:
     KMLObjectParser* m_currentParser;

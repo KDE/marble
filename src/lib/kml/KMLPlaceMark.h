@@ -18,6 +18,7 @@ class KMLPlaceMark : public KMLFeature
 {
  public:
     KMLPlaceMark();
+    virtual ~KMLPlaceMark();
 };
 
 #endif // KMLPLACEMARK_H

@@ -11,12 +11,9 @@
 #ifndef KMLFOLDER_H
 #define KMLFOLDER_H
 
-#include "KMLFeature.h"
+#include "KMLContainer.h"
 
-class PlaceMark;
-class PlaceContainer;
-
-class KMLFolder : public KMLFeature
+class KMLFolder : public KMLContainer
 {
  public:
     KMLFolder();

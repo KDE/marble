@@ -18,6 +18,8 @@ KMLContainer::KMLContainer()
 
 KMLContainer::~KMLContainer()
 {
+    qDebug("KMLContainer::~KMLContainer(). Object count: %d", m_placemarkVector.count());
+
     foreach ( KMLPlaceMark* placemark, m_placemarkVector ) {
         delete placemark;
     }

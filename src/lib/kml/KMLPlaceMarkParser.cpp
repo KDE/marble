@@ -19,12 +19,10 @@ namespace
     const QString PLACEMARK_TAG = "placemark";
 }
 
-KMLPlaceMarkParser::KMLPlaceMarkParser( KMLObject& object )
-  : KMLFeatureParser( object ),
-    m_placemark( new KMLPlaceMark() ),
-    m_parsed( false )
+KMLPlaceMarkParser::KMLPlaceMarkParser( KMLContainer& container )
+  : KMLFeatureParser( container ),
+    m_placemark( new KMLPlaceMark() )
 {
-    qDebug("KMLPlaceMarkParser::KMLPlaceMarkParser()");
 }
 
 KMLPlaceMarkParser::~KMLPlaceMarkParser()
@@ -39,6 +37,10 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
                             const QString& name,
                             const QXmlAttributes& atts )
 {
+    if ( m_parsed ) {
+        return false;
+    }
+
     bool result = KMLFeatureParser::startElement( namespaceURI, localName, name, atts );
 
     if ( ! result ) {
@@ -60,6 +62,10 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
                             const QString& localName,
                             const QString& qName )
 {
+    if ( m_parsed ) {
+        return false;
+    }
+
     bool result = KMLFeatureParser::endElement( namespaceURI, localName, qName );
 
     if ( ! result ) {
@@ -70,7 +76,7 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
         QString lowerName = qName.toLower();
 
         if ( lowerName == PLACEMARK_TAG ) {
-            KMLContainer& container = (KMLContainer&) m_object;
+            KMLContainer&  container = (KMLContainer&) m_object;
             container.addPlaceMark( m_placemark );
             m_parsed = true;
 
@@ -83,5 +89,9 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
 
 bool KMLPlaceMarkParser::characters( const QString& ch )
 {
+    if ( m_parsed ) {
+        return false;
+    }
+
     return KMLFeatureParser::characters( ch );
 }

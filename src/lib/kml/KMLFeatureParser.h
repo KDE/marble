@@ -14,6 +14,8 @@
 
 #include "KMLObjectParser.h"
 
+class KMLFeature;
+
 class KMLFeatureParser : public KMLObjectParser
 {
  public:
@@ -29,7 +31,19 @@ class KMLFeatureParser : public KMLObjectParser
     virtual bool characters( const QString& str );
 
  protected:
-    KMLFeatureParser( KMLObject& object );
+    KMLFeatureParser( KMLFeature& feature );
+
+ private:
+    enum
+    {
+        IDLE,
+        WAIT_NAME,
+        WAIT_DESCRIPTION,
+        WAIT_ADDRESS,
+        WAIT_PHONE_NUMBER
+    };
+
+    int m_phase;
 };
 
 #endif // KMLFEATUREPARSER_H

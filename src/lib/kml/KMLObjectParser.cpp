@@ -13,7 +13,8 @@
 #include "KMLObject.h"
 
 KMLObjectParser::KMLObjectParser( KMLObject& object )
-  : m_object( object )
+  : m_object( object ),
+    m_parsed( false )
 {
 }
 

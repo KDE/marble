@@ -11,6 +11,8 @@
 #include "KMLDocumentParser.h"
 
 #include <QtCore/QDebug>
+
+#include "KMLDocument.h"
 #include "KMLPlaceMarkParser.h"
 
 namespace
@@ -18,7 +20,7 @@ namespace
     const QString PLACEMARK_TAG = "placemark";
 }
 
-KMLDocumentParser::KMLDocumentParser( KMLObject& document )
+KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
   : KMLContainerParser( document )
 {
 }

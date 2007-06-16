@@ -14,3 +14,7 @@
 KMLPlaceMark::KMLPlaceMark()
 {
 }
+
+KMLPlaceMark::~KMLPlaceMark()
+{
+}

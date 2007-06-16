@@ -14,12 +14,11 @@
 #include "KMLContainerParser.h"
 
 class KMLDocument;
-class KMLObjectParser;
 
 class KMLDocumentParser : public KMLContainerParser
 {
  public:
-    KMLDocumentParser( KMLObject& document );
+    KMLDocumentParser( KMLDocument& document );
 
     /*
      * QXmlDefaultHandler virtual methods

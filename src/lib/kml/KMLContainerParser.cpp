@@ -10,6 +10,8 @@
 
 
 #include "KMLContainerParser.h"
+
+#include "KMLContainer.h"
 #include "KMLPlaceMarkParser.h"
 
 namespace
@@ -17,8 +19,8 @@ namespace
     const QString PLACEMARK_START_TAG = "placemark";
 }
 
-KMLContainerParser::KMLContainerParser( KMLObject& object )
-  : KMLFeatureParser( object ),
+KMLContainerParser::KMLContainerParser( KMLContainer& container )
+  : KMLFeatureParser( container ),
     m_currentParser(0)
 {
 }
@@ -36,16 +38,6 @@ bool KMLContainerParser::startElement( const QString& namespaceURI,
 
     if ( m_currentParser != 0 ) {
         result = m_currentParser->startElement( namespaceURI, localName, name, atts );
-
-        if ( ! result ) {
-            /*
-             * Current parser does not support this tag
-             * reached end of current parser
-             * should delete it
-             */
-            delete m_currentParser;
-            m_currentParser = 0;
-        }
     }
     else {
         result = KMLFeatureParser::startElement( namespaceURI, localName, name, atts );
@@ -61,7 +53,12 @@ bool KMLContainerParser::startElement( const QString& namespaceURI,
         QString nameLower = name.toLower();
 
         if ( nameLower == PLACEMARK_START_TAG ) {
-            m_currentParser = new KMLPlaceMarkParser( m_object );
+            if ( m_currentParser != 0 ) {
+                delete m_currentParser;
+                m_currentParser = 0;
+            }
+
+            m_currentParser = new KMLPlaceMarkParser( (KMLContainer&) m_object );
             result = m_currentParser->startElement( namespaceURI, localName, name, atts );
         }
     }

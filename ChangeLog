@@ -1,20 +1,25 @@
+2007-06-16  Murad Tagirov  <tmurad@gmail.com>
+    Implemented parsing of KMLFeature fields
+    (name, description, address, phone number)
+    * src/lib/kml/KMLFeatue.{h,cpp}
+
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 
     - Added a section in the Legend to explain
-      color values. FIXME: This should 
+      color values. FIXME: This should
       be dynamically created for each map in the
       future.
 
 2007-06-15  Torsten Rahn  <rahn@kde.org>
 
     - Removed ETOPO2 digital elevation model and
-      replaced it by the much more recent 
-      (and usually more detailed) Shuttle Radar 
+      replaced it by the much more recent
+      (and usually more detailed) Shuttle Radar
       Topography Mission (SRTM) data.
       Resolution of the full dataset would be 1-3".
       For offline mode we are using a 21600x10800
-      image. 
-    - Changed the colorpalette to something more 
+      image.
+    - Changed the colorpalette to something more
       subtil and professional looking.
 
     * src/lib/vectorcomposer.cpp: change color for lakes

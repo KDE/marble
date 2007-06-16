@@ -22,9 +22,10 @@ class KMLObjectParser : public QXmlDefaultHandler
     virtual ~KMLObjectParser();
 
  protected:
-    KMLObjectParser( KMLObject& object );
+    KMLObjectParser( KMLObject& m_object );
 
-    KMLObject& m_object;
+    KMLObject&  m_object;
+    bool        m_parsed;
 };
 
 #endif // KMLOBJECTPARSER_H
