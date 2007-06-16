@@ -40,7 +40,7 @@ layout standards that decades of cartography have developed to improve
 ease of use of maps.
 
 So for casual users there is still missing a fast, flexible, visually
-pleasing and easy to use map component.  For developers, marble offers
+pleasing and easy to use map component.  For developers, Marble offers
 a light-weight, fast, cross platform map component that can be used
 online as well as offline with meaningful results and that don't
 require proprietary webservices.
