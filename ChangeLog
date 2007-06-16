@@ -1,5 +1,10 @@
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Simplify and clean the code in preparation for other changes.
+	* src/lib/placemarkpainter.cpp (paintPlaceFolder): Simplify the
+	code a lot, and in particular use pre-increments for iterators,
+	which makes it a lot faster.
+
 	Change name of class PlaceContainer into PlaceMarkContainer.
 	* src/lib/placecontainer.h:   new name: PlaceMarkContainer.h
 	* src/lib/placecontainer.cpp: new name: PlaceMarkContainer.cpp
@@ -111,6 +116,7 @@
 	* src/lib/AbstractLayer/AbstractLayerData.h: Add a newline.
 
 2007-06-15  Murad Tagirov  <tmurad@gmail.com>
+
     Introduced KMLContainer, KMLContainerParser classes.
     This classes are base classes for KMLDocument and
     KMLFolder objects.

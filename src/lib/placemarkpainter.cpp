@@ -113,9 +113,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     QPixmap     textpixmap;
 
-    QVector< QVector< PlaceMark* > >  m_rowsection;
+    QVector< QVector< PlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
-        m_rowsection.append( QVector<PlaceMark*>( ) );
+        rowsection.append( QVector<PlaceMark*>( ) );
 
     m_visibleplacemarks.clear();
 
@@ -125,13 +125,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     PlaceMarkContainer::const_iterator  it;
     for ( it = placeMarkContainer->constBegin();
           it != placeMarkContainer->constEnd();
-          it++ ) 
+          ++it ) 
     {
         mark  = *it; // no cast
 
         // Skip the places that are too small.
         if ( m_weightfilter.at( mark->popidx() ) > radius
-//             && mark->symbol() != 0
+             //             && mark->symbol() != 0
              && mark->selected() == 0 )
             continue;
 
@@ -151,170 +151,170 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
         textpixmap = mark->textPixmap();
 
-        if ( qpos.v[Q_Z] > 0 ) {
-
-            x = (int)(imgrx + radius * qpos.v[Q_X]);
-            y = (int)(imgry + radius * qpos.v[Q_Y]);
-
-            // Don't process placemarks if they are outside the screen area
-            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-
-                // Choose Section
-                const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
-
-                // Specify font properties
-                if ( textpixmap.isNull() ) {
-
-                    QChar  role = mark->role();
-
-                    // C: Admin. center of _C_ountry
-                    // R: Admin. center of _R_egion
-                    // B: Admin. center of country and region ("_B_oth")
-                    // N: _N_one
-
-                    if ( role == 'N' ) { 
-                        font = m_font_regular;
-                    } else if ( role == 'R' ) {
-                        font = m_font_regular_italics;
-                    } else if ( role == 'B' || mark->role() == 'C' ) {
-                        font = m_font_regular_underline;
-                    } else {
-                        font = m_font_regular;
-                    }
-
-                    if ( mark->symbol() > 13 || mark->selected() != 0 )
-                        font.setWeight( 75 );
-
-                    if ( role == 'P' ) 
-                        font = m_font_regular;
-                    if ( role == 'M' ) 
-                        font = m_font_regular;
-                    if ( role == 'H' ) 
-                        font = m_font_mountain;
-                    if ( role == 'V' ) 
-                        font = m_font_mountain;
-
-                    fontwidth = ( QFontMetrics( font ).width( mark->name() )
-                                  + (int)( outlineWidth ) );
-                }
-                else{
-                    fontwidth = ( mark->textRect() ).width();
-                }
-
-                // Find out whether the area around the placemark is
-                // covered already.
-
-                bool  overlap     = true;
-                int   symbolwidth = mark->symbolSize().width();
-
-                int  xpos = symbolwidth / 2 + x + 1;
-                int  ypos = 0;
-
-                while ( xpos >= x - fontwidth - symbolwidth - 1
-                        && overlap == true )
-                {
-                    ypos = y; 
-	
-                    while ( ypos >= y - m_fontheight && overlap == true) { 
-
-                        overlap = false;
-
-                        QRect  textRect( xpos, ypos, fontwidth, m_fontheight );
-
-
-                        for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin();
-                              beforeit != currentsec.constEnd();
-                              beforeit++ )
-                        {
-                            if ( textRect.intersects( (*beforeit)->textRect()) ) {
-                                overlap = true;
-                                break;
-                            }
-                        }
-					
-                        if ( overlap == false ) {
-                            mark->setTextRect( textRect );
-                        }
-                        ypos -= m_fontheight; 
-                    }
-
-                    xpos -= ( symbolwidth + fontwidth + 2 );
-                }
-
-                // Paint the label
-                if ( overlap == false) {
-                    if ( textpixmap.isNull() == true ) {
-                        // Draw the text on the label.
-
-                        // Due to some XOrg bug this requires a
-                        // workaround via QImage in some cases.
-
-                        if ( !m_useworkaround ) {
-                            textpixmap = QPixmap( fontwidth, m_fontheight );
-                            textpixmap.fill(Qt::transparent);
-
-                            textpainter.begin( &textpixmap );
-
-                            if ( mark->selected() == 0 ) {
-                                textpainter.setFont(font);
-                                textpainter.setPen(m_labelcolor);
-                                textpainter.drawText( 0, m_fontascent, mark->name() );
-                            }
-                            else {
-                                drawLabelText(textpainter, mark, font, outlineWidth);
-                            }
-
-                            textpainter.end();
-                        }
-                        else {
-                            QImage textimage( fontwidth, m_fontheight,
-                                              QImage::Format_ARGB32_Premultiplied );
-                            textimage.fill( 0 );
-
-                            textpainter.begin( &textimage );
-
-                            if ( mark->selected() == 0 ) {
-                                textpainter.setFont(font);
-                                textpainter.setPen(m_labelcolor);
-                                textpainter.drawText( 0, m_fontascent, mark->name() );
-                            }
-                            else {
-                                drawLabelText(textpainter, mark, font, outlineWidth);
-                            }
-
-                            textpainter.end();
-
-                            textpixmap = QPixmap::fromImage( textimage );
-                        }
-
-                        mark->setTextPixmap( textpixmap );
-                    }
-
-                    // Finally save the label position on the map.
-                    mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
-                                                y - mark->symbolSize().height() / 2) );
-
-                    // Add the current placemark to the matching row and it's
-                    // direct neighbors.
-                    int idx = y / m_labelareaheight;
-                    if ( idx - 1 >= 0 )
-                        m_rowsection[ idx - 1 ].append( mark );
-                    m_rowsection[ idx ].append( mark );
-                    if ( idx + 1 < secnumber )
-                        m_rowsection[ idx + 1 ].append( mark );
-
-                    m_visibleplacemarks.append(mark);
-                    labelnum ++;
-                    if ( labelnum >= maxlabels )
-                        break;				
-                }
-            }
-            else{
-                mark->clearTextPixmap();
-            }
-        }
-        else {
+        // Skip the place if it's on the other side of the globe.
+        if ( qpos.v[Q_Z] < 0 ) {
             mark->clearTextPixmap();
+            continue;
+        }
+
+        x = (int)(imgrx + radius * qpos.v[Q_X]);
+        y = (int)(imgry + radius * qpos.v[Q_Y]);
+
+        // Don't process placemarks if they are outside the screen area
+        //if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) 
+        if ( x <= 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
+            mark->clearTextPixmap();
+            continue;
+        }
+
+        // Choose Section
+        const QVector<PlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
+
+        // Specify font properties
+        if ( textpixmap.isNull() ) {
+
+            QChar  role = mark->role();
+
+            // C: Admin. center of _C_ountry
+            // R: Admin. center of _R_egion
+            // B: Admin. center of country and region ("_B_oth")
+            // N: _N_one
+
+            if ( role == 'N' ) { 
+                font = m_font_regular;
+            } else if ( role == 'R' ) {
+                font = m_font_regular_italics;
+            } else if ( role == 'B' || mark->role() == 'C' ) {
+                font = m_font_regular_underline;
+            } else {
+                font = m_font_regular;
+            }
+
+            if ( mark->symbol() > 13 || mark->selected() != 0 )
+                font.setWeight( 75 );
+
+            if ( role == 'P' ) 
+                font = m_font_regular;
+            if ( role == 'M' ) 
+                font = m_font_regular;
+            if ( role == 'H' ) 
+                font = m_font_mountain;
+            if ( role == 'V' ) 
+                font = m_font_mountain;
+
+            fontwidth = ( QFontMetrics( font ).width( mark->name() )
+                          + (int)( outlineWidth ) );
+        }
+        else{
+            fontwidth = ( mark->textRect() ).width();
+        }
+
+        // Find out whether the area around the placemark is
+        // covered already.
+
+        bool  overlap     = true;
+        int   symbolwidth = mark->symbolSize().width();
+
+        int  xpos = symbolwidth / 2 + x + 1;
+        int  ypos = 0;
+
+        while ( xpos >= x - fontwidth - symbolwidth - 1
+                && overlap == true )
+        {
+            ypos = y; 
+	
+            while ( ypos >= y - m_fontheight && overlap == true) { 
+
+                overlap = false;
+
+                QRect  textRect( xpos, ypos, fontwidth, m_fontheight );
+
+
+                for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+                      beforeit != currentsec.constEnd();
+                      ++beforeit )
+                {
+                    if ( textRect.intersects( (*beforeit)->textRect()) ) {
+                        overlap = true;
+                        break;
+                    }
+                }
+					
+                if ( overlap == false ) {
+                    mark->setTextRect( textRect );
+                }
+                ypos -= m_fontheight; 
+            }
+
+            xpos -= ( symbolwidth + fontwidth + 2 );
+        }
+
+        // Paint the label
+        if ( overlap == false) {
+            if ( textpixmap.isNull() == true ) {
+                // Draw the text on the label.
+
+                // Due to some XOrg bug this requires a
+                // workaround via QImage in some cases.
+
+                if ( !m_useworkaround ) {
+                    textpixmap = QPixmap( fontwidth, m_fontheight );
+                    textpixmap.fill( Qt::transparent );
+
+                    textpainter.begin( &textpixmap );
+
+                    if ( mark->selected() == 0 ) {
+                        textpainter.setFont(font);
+                        textpainter.setPen(m_labelcolor);
+                        textpainter.drawText( 0, m_fontascent, mark->name() );
+                    }
+                    else {
+                        drawLabelText(textpainter, mark, font, outlineWidth);
+                    }
+
+                    textpainter.end();
+                }
+                else {
+                    QImage textimage( fontwidth, m_fontheight,
+                                      QImage::Format_ARGB32_Premultiplied );
+                    textimage.fill( 0 );
+
+                    textpainter.begin( &textimage );
+
+                    if ( mark->selected() == 0 ) {
+                        textpainter.setFont(font);
+                        textpainter.setPen(m_labelcolor);
+                        textpainter.drawText( 0, m_fontascent, mark->name() );
+                    }
+                    else {
+                        drawLabelText(textpainter, mark, font, outlineWidth);
+                    }
+
+                    textpainter.end();
+
+                    textpixmap = QPixmap::fromImage( textimage );
+                }
+
+                mark->setTextPixmap( textpixmap );
+            }
+
+            // Finally save the label position on the map.
+            mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
+                                        y - mark->symbolSize().height() / 2) );
+
+            // Add the current placemark to the matching row and it's
+            // direct neighbors.
+            int idx = y / m_labelareaheight;
+            if ( idx - 1 >= 0 )
+                rowsection[ idx - 1 ].append( mark );
+            rowsection[ idx ].append( mark );
+            if ( idx + 1 < secnumber )
+                rowsection[ idx + 1 ].append( mark );
+
+            m_visibleplacemarks.append(mark);
+            labelnum ++;
+            if ( labelnum >= maxlabels )
+                break;				
         }
     }
 
