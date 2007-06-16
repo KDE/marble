@@ -188,6 +188,11 @@ void MarbleWidget::setMinimumZoom( int zoom )
     d->m_minimumzoom = zoom; 
 }
 
+void MarbleWidget::addPlaceMarkFile( QString filename )
+{
+    d->m_model->addPlaceMarkFile( filename ); 
+}
+
 QPixmap MarbleWidget::mapScreenShot()
 {
     return QPixmap::grabWidget( this ); 
