@@ -27,11 +27,7 @@ Cleaning
    - MarbleWidget                                                       done
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
- * float -> double                                                      INGE
-   - placemarkmanager: When I do this file, all the placemarks disappear --
-   - All the others                                                     done
-   - Update the placemark file version (currently 004)			--
-
+ * float -> double                                                      DONE
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --
 
@@ -105,7 +101,7 @@ Before KDE 4.0
 
 Widget:
  * Make it possible to paint on different device types in addition      ----
-   to painting on the KAtlasView widget
+   to painting on the MarbleWidget
     - QGraphicsView                                                     --
     - QPixmap                                                           --
     - QSvgRendrerer                                                     --
