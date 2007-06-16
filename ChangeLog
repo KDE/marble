@@ -1,4 +1,4 @@
-2007-06016  Murad Tagirov  <tmurad@gmail.com>
+2007-06-16  Murad Tagirov  <tmurad@gmail.com>
 
     Created KMLPointParser which parses coordinates
     tag and sets parsed lon and lat to KMLPlaceMark.
