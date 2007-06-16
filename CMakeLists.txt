@@ -23,6 +23,9 @@ if (NOT QTONLY)
   find_package(KDE4 REQUIRED)
   include (KDE4Defaults)
   include (MacroLibrary)
+else(NOT QTONLY)
+  # add a flag to be able to distinguish between qt and kde mode in the sources
+  add_definitions(-DQTONLY)
 endif (NOT QTONLY)
 
 add_subdirectory(src)

@@ -44,7 +44,11 @@ class KAtlasDirs
 #elif defined(Q_OS_UNIX)
                      + QLatin1String( "/../share/apps/marble/data" )
 #elif defined(Q_OS_WIN)
+ #if defined(QTONLY)
                      + QLatin1String( "/data" )
+ #else
+                     + QLatin1String( "/../share/apps/marble/data" )
+ #endif
 #endif
                      ).canonicalPath();
     }
