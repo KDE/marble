@@ -1,3 +1,9 @@
+2007-06-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Name change to improve readability
+	* src/lib/placemark.h (class PlaceMark): m_rect -> m_textRect
+	* src/lib/placemark.cpp (PlaceMark): Use new name
+
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify and clean the code in preparation for other changes.

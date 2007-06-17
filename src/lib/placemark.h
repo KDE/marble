@@ -69,8 +69,8 @@ class PlaceMark
     const QPixmap& textPixmap()    const       { return m_labelPixmap;        }
     void setTextPixmap( QPixmap& labelPixmap ) { m_labelPixmap = labelPixmap; }
 
-    const QRect& textRect() const             { return m_rect;    }
-    void setTextRect( const QRect& textRect ) { m_rect = textRect;}
+    const QRect& textRect() const             { return m_textRect;    }
+    void setTextRect( const QRect& textRect ) { m_textRect = textRect;}
 
     void clearTextPixmap()
     {
@@ -83,10 +83,10 @@ class PlaceMark
     QString   m_name;
 
     // View stuff
-    QPoint    m_symbolPos;
     QPixmap   m_symbolPixmap;
+    QPoint    m_symbolPos;
     QPixmap   m_labelPixmap;
-    QRect     m_rect;		// bounding box of label
+    QRect     m_textRect;       // bounding box of label
     bool      m_visible;
 
     // Basic data

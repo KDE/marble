@@ -33,7 +33,7 @@ PlaceMark::PlaceMark()
 
     // Bounding box for the label
     // FIXME: Should be moved to the view.
-    m_rect         = QRect();
+    m_textRect     = QRect();
     m_selected     = 0; // 0: not selected 1: centered 2:hover
 }
 
