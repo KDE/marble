@@ -231,8 +231,9 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     planetAxis.toMatrix( planetAxisMatrix );
 
     const int skip = ( m_interlaced == true ) ? 2 : 1;
+    const int yEnd = yBottom - skip + 2;
 
-    for ( m_y = yTop; m_y < yBottom - skip ; m_y+=skip ) {
+    for ( m_y = yTop; m_y < yEnd ; m_y+=skip ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
         m_qy = radiusf * (double)( m_y - m_imageHalfHeight );
