@@ -24,7 +24,12 @@ class GeoPoint {
  public:
     GeoPoint(){}
     GeoPoint(int, int);
-    GeoPoint(double, double);
+    /*!\brief create a geopoint from longitude and latitude
+     * 
+     * \param _long longitude
+     * \param _lat latitude
+     */
+    GeoPoint(double _long, double _lat);
     GeoPoint(int, int, int);
     ~GeoPoint(){}
 
