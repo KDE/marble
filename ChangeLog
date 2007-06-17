@@ -1,5 +1,9 @@
 2007-06-17  Inge Wallin  <inge@lysator.liu.se>
 
+	Start of a simple system to only store pixmaps and other UI data
+	for visible placemarks.
+	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): New class
+
 	Name change to improve readability
 	* src/lib/placemark.h (class PlaceMark): m_rect -> m_textRect
 	* src/lib/placemark.cpp (PlaceMark): Use new name

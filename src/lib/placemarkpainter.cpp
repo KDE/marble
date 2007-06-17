@@ -23,6 +23,69 @@
 #include "katlasdirs.h"
 
 
+// ================================================================
+//                     class VisiblePlaceMark
+
+
+class VisiblePlaceMark
+{
+ public:
+    VisiblePlaceMark();
+    ~VisiblePlaceMark();
+
+    PlaceMark *placeMark() const                { return m_placeMark; }
+
+    const QPixmap  symbolPixmap() const { return m_placeMark->symbolPixmap();};
+    const QSize    symbolSize()   const { return m_placeMark->symbolSize();  };
+
+    const QPoint& symbolPos() const             { return m_symbolPos;   }
+    void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }
+
+    const QPixmap& labelPixmap() const          { return m_labelPixmap;       }
+    void setLabelPixmap( QPixmap& labelPixmap ) { m_labelPixmap = labelPixmap;}
+
+    void clearLabelPixmap() {
+        if ( m_labelPixmap.isNull() == false )
+            m_labelPixmap = QPixmap(); 
+    }
+
+    const QRect& labelRect() const              { return m_labelRect;    }
+    void setLabelRect( const QRect& labelRect ) { m_labelRect = labelRect;}
+
+ private:
+    PlaceMark  *m_placeMark;
+
+    // View stuff
+    QPixmap     m_symbolPixmap;
+    QPoint      m_symbolPos;
+    QPixmap     m_labelPixmap;
+    QRect       m_labelRect;    // bounding box of label
+};
+
+
+VisiblePlaceMark::VisiblePlaceMark()
+    : m_symbolPixmap(),
+      m_symbolPos(),
+      m_labelPixmap(),
+      m_labelRect()
+{
+    m_symbolPixmap = QPixmap();
+    m_labelPixmap  = QPixmap();
+
+    // Bounding box for the label
+    m_labelRect    = QRect();
+}
+
+
+VisiblePlaceMark::~VisiblePlaceMark()
+{
+}
+
+
+// ================================================================
+//                     class PlaceMarkPainter
+
+
 static const int  maxlabels = 100;
 
 PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
