@@ -33,6 +33,11 @@ class Quaternion {
  public:
     Quaternion();
     Quaternion(double w, double x, double y, double z);
+    /*!\brief used to generate Quaternion from longitude and latitude
+     * 
+     * \param alpha longitude
+     * \param beta latitude
+     */
     Quaternion(double alpha, double beta);
     virtual ~Quaternion(){ }
 
