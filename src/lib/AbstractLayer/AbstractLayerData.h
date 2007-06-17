@@ -14,9 +14,9 @@ class AbstractLayerData
 {
  public:
     //!constructor
-    AbstractData();
+    AbstractLayerData();
     //!destructor
-    virtual ~AbstractData();
+    virtual ~AbstractLayerData();
     /*!\brief allow for drawing this Layer Data object
      * 
      * draw is intended to either provide the details necessary for the
