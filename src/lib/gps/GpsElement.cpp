@@ -36,7 +36,7 @@ void GpsElement::setSource(const QString &source){
 }
 
 void GpsElement::addLink(const QString &link){
-    if( m_link = 0 ){
+    if( m_link == 0 ){
         m_link = new QVector<QUrl>;
     }
     m_link -> append( QUrl ( link ) );

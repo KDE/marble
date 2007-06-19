@@ -1,3 +1,18 @@
+2007-06-19  Andrew Manson   <g.real.ate@gmail.com>
+
+    Incuded the nessary classes for all GPS Data Structures available
+    in the GPX schema.
+    * src/lib/gps/GpsElement.[cpp,h] : Added
+    * src/lib/gps/Route.[cpp,h] : Added
+    * src/lib/gps/Track.[cpp,h] : Added
+    * src/lib/gps/Waypoint.[cpp,h] : Added
+    * src/lib/gps/WaypointContainer.[cpp,h] : Added
+    
+    Added Implementations of nessary AbstractLayer classes that are
+    extended by the GPS Classes.
+    * src/lib/AbstractLayer/AbstractLayerContainer.cpp : Added
+    * src/lib/AbstractLayer/AbstractLayerData.cpp : Added
+    
 2007-06-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of a simple system to only store pixmaps and other UI data
