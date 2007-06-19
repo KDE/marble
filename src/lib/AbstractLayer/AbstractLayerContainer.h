@@ -7,8 +7,15 @@
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
+#ifndef ABSTRACTLAYERCONTAINER_H
+#define ABSTRACTLAYERCONTAINER_H
 
 #include <QVector>
+#include <QString>
+#include <QBitArray>
+#include "AbstractLayerData.h"
+
+
 /*!
  * \brief Abstract LayerContainer is designed to resemble
  * PlaceContainer and be a base class for all Layer Containers.
@@ -18,36 +25,75 @@
  * layer data. Each time the view changes the visible data will be
  * altered by a thread that will monitor and deal with this process.
  */
-class AbstractLayerContainer:QVector<AbstractData*>
+class AbstractLayerContainer:QVector<AbstractLayerData*>
 {
  public:
-    //!constructor
-    AbstractLayerContainer();
+    /*!\brief simple constructor with optional starting size.
+     * 
+     * \param size the amount of Data objects this container will have
+     * at first.
+     */
+    AbstractLayerContainer( int size =0);
+    
+    /*!\brief simple constructor with optional starting size and name
+     *        for the container.
+     * 
+     * \param size the amount of Data objects this container will have
+     * at first.
+     * \param name the name of the Container
+     */
+    AbstractLayerContainer( const QString &name, int size =0);
+    
     //!destructor
     ~AbstractLayerContainer();
+    
     /*! \brief draw is intended to deal with drawing all visable
      *         Data Objects in this layer.
      *
      * This method simplafies the interface for drawing the entire
      * layer but can also deal with specific layer drawing needs.
      */
-    virtual void draw() =0;
+    virtual void draw()=0;
+    
     //! \brief m_name accessor
-    QString name() const { return m_name}
+    QString name() const { return *m_name;}
+    
  protected:
-    /*! \brief Method to process what Data Objects are in memory.
+    /*! \brief Method to process what Data Objects need to be in
+     *         memory.
      *
      * intended to be implemented by each subclass of
-     * AbstractLayerContainer.
+     * AbstractLayerContainer with specific needs.
      */
-    virtual void processVisable();
+    virtual void processVisible();
+    
+    /*! \brief brings data from file into memory
+     * 
+     * This method reads the Bit Array to find out which items need
+     * to be in memory and processes this information.
+     */
+    void manageMemory();
+    
  private:
     /*! \brief data is intended to be a binary swap file to minimize
      * memory footprint.
      * 
      * This can be implemented at a later stage as an optimization
      */
-    QVector<AbstractLayerData*> data;
-    //! taken from placecontainer, 
-    QString m_name;
+    QVector<AbstractLayerData*> *m_data;
+    
+    /*! \brief a representation of which items in m_data should be in
+     *         memory.
+     * 
+     * This is intended to be the only read/write accessable part of
+     * this container. processVisable() will deal with updating this
+     * and the actuall memory swapping will be done elswere.
+     */
+    QBitArray *m_visible;
+    
+    //! taken from placecontainer.
+    QString *m_name;
 };
+
+#endif //ABSTRACTLAYERCONTAINER_H
+

@@ -81,6 +81,13 @@ set(marblewidget_SRCS
            kml/KMLPlaceMark.cpp
            kml/KMLPlaceMarkParser.cpp
            kml/KMLPointParser.cpp
+           gps/GpsElement.cpp
+           gps/Waypoint.cpp
+           gps/Route.cpp
+           gps/Track.cpp
+           gps/WaypointContainer.cpp
+           AbstractLayer/AbstractLayerContainer.cpp
+           AbstractLayer/AbstractLayerData.cpp
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 

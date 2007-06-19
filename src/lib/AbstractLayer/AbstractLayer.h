@@ -14,6 +14,9 @@
 #define ABSTRACTLAYER_H
 
 #include "Quaternion.h"
+#include "AbstractLayerContainer.h"
+#include <QtCore/QObject>
+#include <QtCore/QSize>
 
 
 /*! \brief This class is to represent the base class for each of the
@@ -74,6 +77,7 @@ class AbstractLayer: public QObject
          * AbstractLayerData container with all the nessary data for
          * this layer.
          */
-        AbstractLayerContainer layerData;
+        AbstractLayerContainer *layerData;
 };
 #endif //ABSTRACTLAYER_H
+
