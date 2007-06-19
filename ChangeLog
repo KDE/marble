@@ -1,3 +1,9 @@
+2007-06-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix linking issue with AbstractLayer and Q_OBJECT
+	* src/lib/CMakeLists.txt: Include AbstractLayer/AbstractLayer.cpp
+	* src/lib/AbstractLayer/AbstractLayer.cpp: Include moc file.
+
 2007-06-19  Andrew Manson   <g.real.ate@gmail.com>
 
     Incuded the nessary classes for all GPS Data Structures available

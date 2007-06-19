@@ -66,3 +66,5 @@ bool AbstractLayer::getPixelPosFromGeoPoint( Quaternion position,
     }
 }
 
+
+#include "AbstractLayer.moc"
