@@ -19,49 +19,49 @@
 #include "Quaternion.h"
 
 
-AbstractLayer::AbstractLayer(QObject *parent) 
-    : QObject(parent)
+AbstractLayer::AbstractLayer( QObject *parent ) 
+    : QObject( parent )
 {
     //no layer common things have been so far identified
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint(double _lon, double _lat, 
+bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
                                             QSize screenSize, 
                                             Quaternion invRotAxis, 
                                             int radius, int &xOut,
-                                            int &yOut)
+                                            int &yOut )
 {
     Quaternion qpos(_lon,_lat); //temp
     qpos.rotateAroundAxis(invRotAxis);
 
-    if(qpos.v[Q_Z]>0){
+    if ( qpos.v[Q_Z]>0 ) {
         xOut = (int)( ( screenSize.width()/2 ) 
                 + ( radius * qpos.v[Q_X] ) );
         yOut = (int)( ( screenSize.height()/2 ) 
                 + ( radius * qpos.v[Q_Y] ) );
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint(Quaternion position, 
+bool AbstractLayer::getPixelPosFromGeoPoint( Quaternion position,
                                             QSize screenSize, 
                                             Quaternion invRotAxis,
                                             int radius, int &xOut, 
-                                            int &yOut)
+                                            int &yOut )
 {
-    Quaternion qpos=position; //temp
-    qpos.rotateAroundAxis(invRotAxis);
+    Quaternion qpos = position; //temp
+    qpos.rotateAroundAxis( invRotAxis );
 
-    if(qpos.v[Q_Z]>0){
+    if( qpos.v[Q_Z]>0 ){
         xOut = (int)( ( screenSize.width()/2 )
                 + ( radius * qpos.v[Q_X] ) );
         yOut = (int)( ( screenSize.height()/2 )
                 + ( radius * qpos.v[Q_Y] ) );
         
         return true;
-    }else{
+    } else {
         return false;
     }
 }

@@ -10,7 +10,8 @@
 
 #include "AbstractLayerContainer.h"
 
-AbstractLayerContainer::AbstractLayerContainer( int size ){
+AbstractLayerContainer::AbstractLayerContainer( int size )
+{
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
     
@@ -18,22 +19,24 @@ AbstractLayerContainer::AbstractLayerContainer( int size ){
 }
 
 AbstractLayerContainer::AbstractLayerContainer(const QString &name,
-                                               int size ){
+                                               int size )
+{
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
     
     *m_name = name;
 }
-AbstractLayerContainer::~AbstractLayerContainer(){
-
+AbstractLayerContainer::~AbstractLayerContainer()
+{
 }
 
-void AbstractLayerContainer::processVisible(){
+void AbstractLayerContainer::processVisible()
+{
     QVector<AbstractLayerData*>::const_iterator i = m_data -> begin();
     int temp;
     
-    for( ; i < m_data -> end() ; ++i ){
-        if ( (*i) -> visible() ){
+    for ( ; i < m_data -> end() ; ++i ) {
+        if ( (*i) -> visible() ) {
             //iterator safety
             temp = m_data -> indexOf ( *i );
             m_visible -> setBit ( temp, true );
@@ -41,11 +44,12 @@ void AbstractLayerContainer::processVisible(){
     }
 }
 
-void AbstractLayerContainer::manageMemory(){
-    for( int i = 0 ; i < m_visible -> size () ; ++i ){
-        if ( m_visible -> testBit( i ) ){
-            if ( ! ( this -> contains ( m_data -> at( i ) ) ) ){
-                this -> append( m_data -> at( i ));
+void AbstractLayerContainer::manageMemory()
+{
+    for ( int i = 0 ; i < m_visible -> size () ; ++i ) {
+        if ( m_visible -> testBit( i ) ) {
+            if ( ! ( this -> contains ( m_data -> at( i ) ) ) ) {
+                this -> append( m_data -> at( i ) );
             }
         }
     }

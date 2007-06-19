@@ -10,6 +10,6 @@
 
 #include "WaypointContainer.h"
 
-void WaypointContainer::processVisable(){
-    //
+void WaypointContainer::processVisable()
+{
 }

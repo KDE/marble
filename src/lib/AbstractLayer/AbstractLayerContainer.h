@@ -33,7 +33,7 @@ class AbstractLayerContainer:QVector<AbstractLayerData*>
      * \param size the amount of Data objects this container will have
      * at first.
      */
-    AbstractLayerContainer( int size =0);
+    AbstractLayerContainer( int size =0 );
     
     /*!\brief simple constructor with optional starting size and name
      *        for the container.
@@ -42,7 +42,7 @@ class AbstractLayerContainer:QVector<AbstractLayerData*>
      * at first.
      * \param name the name of the Container
      */
-    AbstractLayerContainer( const QString &name, int size =0);
+    AbstractLayerContainer( const QString &name, int size =0 );
     
     //!destructor
     ~AbstractLayerContainer();
@@ -53,10 +53,10 @@ class AbstractLayerContainer:QVector<AbstractLayerData*>
      * This method simplafies the interface for drawing the entire
      * layer but can also deal with specific layer drawing needs.
      */
-    virtual void draw()=0;
+    virtual void draw() = 0;
     
     //! \brief m_name accessor
-    QString name() const { return *m_name;}
+    QString name() const { return *m_name; }
     
  protected:
     /*! \brief Method to process what Data Objects need to be in

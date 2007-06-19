@@ -10,15 +10,18 @@
 
 #include "AbstractLayerData.h"
 
-AbstractLayerData::AbstractLayerData( GeoPoint position ){
+AbstractLayerData::AbstractLayerData( GeoPoint position )
+{
     m_position = new GeoPoint;
     *m_position = position;
 }
 
-AbstractLayerData::AbstractLayerData( double lat, double lon){
+AbstractLayerData::AbstractLayerData( double lat, double lon)
+{
     m_position = new GeoPoint( lon, lat );
 }
 
-AbstractLayerData::~AbstractLayerData(){
+AbstractLayerData::~AbstractLayerData()
+{
     delete m_position;
 }

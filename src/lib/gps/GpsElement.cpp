@@ -10,7 +10,8 @@
 
 #include "GpsElement.h"
 
-GpsElement::~GpsElement(){
+GpsElement::~GpsElement()
+{
     delete m_name;
     delete m_gpsComment;
     delete m_description;
@@ -19,30 +20,36 @@ GpsElement::~GpsElement(){
     delete m_number;
 }
 
-void GpsElement::setName( const QString &name ){
+void GpsElement::setName( const QString &name )
+{
     m_name = new QString( name );
 }
 
-void GpsElement::setGpsComment( const QString &comment ){
+void GpsElement::setGpsComment( const QString &comment )
+{
     m_gpsComment = new QString( comment );
 }
 
-void GpsElement::setDescription( const QString &description ){
+void GpsElement::setDescription( const QString &description )
+{
     m_description = new QString( description );
 }
 
-void GpsElement::setSource(const QString &source){
+void GpsElement::setSource( const QString &source )
+{
     m_source = new QString( source );
 }
 
-void GpsElement::addLink(const QString &link){
-    if( m_link == 0 ){
+void GpsElement::addLink( const QString &link )
+{
+    if ( m_link == 0 ) {
         m_link = new QVector<QUrl>;
     }
     m_link -> append( QUrl ( link ) );
 }
 
-void GpsElement::setNumber(int number){
+void GpsElement::setNumber( int number )
+{
     m_number = new int;
     *m_number = number;
 }

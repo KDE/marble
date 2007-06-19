@@ -24,7 +24,8 @@ Waypoint::Waypoint( GeoPoint position ):
                     m_fix(0), m_satalites(0), m_hdop(0), m_vdop(0),
                     m_pdop(0), m_ageOfGpsData(0), m_dgpsid(0){}
 
-Waypoint::~Waypoint(){
+Waypoint::~Waypoint()
+{
     delete m_lat;
     delete m_lon;
     delete m_elevation;
@@ -42,74 +43,89 @@ Waypoint::~Waypoint(){
     delete m_dgpsid;
 }
 
-void Waypoint::setLat( const double &lat ){
+void Waypoint::setLat( const double &lat )
+{
     m_lat = new double;
     *m_lat = lat;
 }
 
-void Waypoint::setLon( const double &lon ){
+void Waypoint::setLon( const double &lon )
+{
     m_lon = new double;
     *m_lon = lon;
 }
 
-void Waypoint::setElevation( const double &elevation ){
+void Waypoint::setElevation( const double &elevation )
+{
     m_elevation = new double;
     *m_elevation = elevation;
 }
 
-void Waypoint::setTime( const QTime &time ){
+void Waypoint::setTime( const QTime &time )
+{
     m_time = new QTime();
     *m_time = time;
 }
 
-void Waypoint::setMagVariation( const double &magVar ){
+void Waypoint::setMagVariation( const double &magVar )
+{
     m_magVariation = new double;
     *m_magVariation = magVar;
 }
 
-void Waypoint::setGeoIdHeight( const double &geoHeightId ){
+void Waypoint::setGeoIdHeight( const double &geoHeightId )
+{
     m_geoIdHeight = new double;
     *m_geoIdHeight = geoHeightId;
 }
 
-void Waypoint::setGpsSymbol( const QString &gpsSymbol ){
+void Waypoint::setGpsSymbol( const QString &gpsSymbol )
+{
     m_gpsSymbol = new QString( gpsSymbol );
 }
 
-void Waypoint::setType( const QString &type ){
+void Waypoint::setType( const QString &type )
+{
     m_type = new QString( type );
 }
 
-void Waypoint::setFix( const QString &fix ){
+void Waypoint::setFix( const QString &fix )
+{
     m_fix = new QString( fix );
 }
 
-void Waypoint::setSatalites( const int &satalites ){
+void Waypoint::setSatalites( const int &satalites )
+{
     m_satalites = new int;
     *m_satalites = satalites;
 }
 
-void Waypoint::setHdop( const double &hdop ){
+void Waypoint::setHdop( const double &hdop )
+{
     m_hdop = new double;
     *m_hdop = hdop;
 }
 
-void Waypoint::setVdop( const double &vdop ){
+void Waypoint::setVdop( const double &vdop )
+{
     m_vdop = new double;
     *m_vdop = vdop;
 }
 
-void Waypoint::setPdop( const double &pdop ){
+void Waypoint::setPdop( const double &pdop )
+{
     m_pdop = new double;
     *m_pdop = pdop;
 }
 
-void Waypoint::setAgeOfGpsData( const double &age ){
+void Waypoint::setAgeOfGpsData( const double &age )
+{
     m_ageOfGpsData = new double;
     *m_ageOfGpsData = age;
 }
 
-void Waypoint::setDgpsid( const int &gpsdid ){
+void Waypoint::setDgpsid( const int &gpsdid )
+{
     m_dgpsid = new int;
     *m_dgpsid = gpsdid;
 }

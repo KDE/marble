@@ -29,7 +29,7 @@ class AbstractLayerData
      * draw is intended to either provide the details necessary for the
      * view to draw, or given a pointer to the view it may draw itself
      */
-    virtual void draw()=0;
+    virtual void draw() = 0;
     
     /*! \brief check if this is visable on screen
      * 

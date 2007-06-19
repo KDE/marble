@@ -27,13 +27,13 @@ class GpsElement
                   m_source(0), m_link(0), m_number(0){}
     ~GpsElement();
 
-    void setName(const QString &name);
-    void setGpsComment(const QString &comment);
-    void setDescription(const QString &Description);
-    void setSource(const QString &source);
+    void setName( const QString &name );
+    void setGpsComment( const QString &comment );
+    void setDescription( const QString &Description );
+    void setSource( const QString &source );
     //!add a previously verified link
-    void addLink(const QString &link);
-    void setNumber(int number);
+    void addLink( const QString &link );
+    void setNumber( int number );
  private:
     QString *m_name;
     QString *m_gpsComment;
