@@ -35,7 +35,7 @@ class KAtlasViewPopupMenu  : public QObject
 
  public:
     KAtlasViewPopupMenu(MarbleWidget*, MarbleModel*);
-    virtual ~KAtlasViewPopupMenu(){};
+    virtual ~KAtlasViewPopupMenu(){}
 
  public Q_SLOTS:
     void  showLmbMenu( int, int );

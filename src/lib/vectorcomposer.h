@@ -39,7 +39,7 @@ class VectorComposer
 {
  public:
     VectorComposer();
-    virtual ~VectorComposer(){};
+    virtual ~VectorComposer(){}
 
     void  drawTextureMap(QPaintDevice*, const int&, Quaternion&);
     void  paintVectorMap(ClipPainter*, const int&, Quaternion&);

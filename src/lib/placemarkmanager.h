@@ -22,7 +22,7 @@ class PlaceMarkManager
 {
  public:
     PlaceMarkManager();
-    ~PlaceMarkManager(){};
+    ~PlaceMarkManager(){}
 
     void addPlaceMarkFile( const QString& );
 

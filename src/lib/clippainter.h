@@ -23,7 +23,7 @@ class ClipPainter : public QPainter
  public:
     ClipPainter();
     ClipPainter(QPaintDevice*, bool);
-    ~ClipPainter(){};
+    ~ClipPainter(){}
 
     void drawPolygon( const QPolygonF &, 
                       Qt::FillRule fillRule = Qt::OddEvenFill );

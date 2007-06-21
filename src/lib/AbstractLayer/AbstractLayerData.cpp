@@ -25,3 +25,4 @@ AbstractLayerData::~AbstractLayerData()
 {
     delete m_position;
 }
+

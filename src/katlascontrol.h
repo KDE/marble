@@ -37,7 +37,7 @@ class KAtlasControl : public QWidget
 
  public:
     KAtlasControl(QWidget *);
-    virtual ~KAtlasControl(){};
+    virtual ~KAtlasControl(){}
 
     MarbleWidget  *marbleWidget() const { return m_marbleWidget; }
 

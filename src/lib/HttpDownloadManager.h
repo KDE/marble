@@ -73,12 +73,12 @@ public:
     void setJobQueueLimit(int jobQueueLimit)
     {
         m_jobQueueLimit = jobQueueLimit;
-    };
+    }
 
     void setActivatedJobsLimit(int activatedJobsLimit)
     {
         m_activatedJobsLimit = activatedJobsLimit;
-    };
+    }
 
 private Q_SLOTS:
 

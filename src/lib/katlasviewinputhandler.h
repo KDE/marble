@@ -36,7 +36,7 @@ class KAtlasViewInputHandler  : public QObject
 
  public:
     KAtlasViewInputHandler(MarbleWidget*, MarbleModel*);
-    virtual ~KAtlasViewInputHandler(){};
+    virtual ~KAtlasViewInputHandler(){}
 
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
 
