@@ -235,6 +235,11 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
 
     for ( m_y = yTop; m_y < yEnd ; m_y+=skip ) {
 
+        if(m_y == canvasImage->height()){
+            /*FIXME: this is a simple off by one fix, should fix the 
+             * cause not the symptom*/ 
+            continue;
+        }
         // Evaluate coordinates for the 3D position vector of the current pixel
         m_qy = radiusf * (double)( m_y - m_imageHalfHeight );
         m_qr = 1.0 - m_qy * m_qy;
