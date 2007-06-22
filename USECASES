@@ -11,8 +11,9 @@ We also give an importance score (1-5) to each usecase, where the figures
 have the following meaning:
 
   5 - Common task needed by many people. This will be implemented soon.
-  4 - Good usecase, will be implemented at some point not too far away
-  3 - Probably a good usecase, but not urgent
+  4 - Common task or needed by many people but not both;
+      This will be implemented at some point not too far away.
+  3 - Somewhat common task used by a number of people.  not really urgent
   2 - Uncommon task or needed by few people
   1 - Not useful or very niche; unimportant.
 
@@ -51,19 +52,22 @@ world.
 
 Importance:     5
 Priority:       5
-Features:       Wikipedia integration
-                Download of new tiles.
-                more tiles in greater resolution (Data)
-                Bookmarks
-                Names of areas like countries, states and municipalities
-                Better vector layer
-                Borders (Data)
+Features:       - Wikipedia integration
+                - Download of new tiles.
+                - More tiles in greater resolution (Data)
+                - Bookmarks
+                - Names of areas like countries, states and municipalities
+                - Better vector layer
+                - Borders (Data)
 
 
 2. Timezone chooser
 
 The user chooses a timezone, e.g. when he installs the computer or
 travels. 
+
+Importance:     4
+Priority:       3
 
 
 3. Weather Applet
@@ -74,17 +78,18 @@ This is mainly work on the Widget, not the application.
 
 Importance:     4
 Priority:       3
-Features:       Improved handling of Layers
-                Let the application draw a layer
+Features:       - Improved handling of Layers
+                - Let the application draw a layer
 
 
 4. Night/day applet
 
 Shows where on the world it is light or dark.  See also xearth.
 
-Importance:     ?
-Priority:       ?
-Features:       ?
+Importance:     3
+Priority:       3
+Features:       - Layer effects (ligth/dark in this case)
+                - Plugins?
 
 
 5. GPS station
@@ -93,16 +98,15 @@ The user wants to track his movements in real time using an interface
 with a gps device or wants to display gps data from live feeds or from 
 previous gps sessions. 
 
-Importance:     ?
-Priority:       ?
-Features:       Tracking of current position on the view
-                Saving gps data from current session
-                Loading old gps data into the view
-                Downloading all information for sections of a map (so 
-                        that the data is available in advance for a 
-                        trip)
-                Loggin into live gps feeds 
-                Displaying more than one gps device
+Importance:     3-4
+Priority:       4 (due to Andrew Manson's Summer of Code project)
+Features:       - Tracking of current position on the view
+                - Saving gps data from current session
+                - Loading old gps data into the view
+                - Downloading all information for sections of a map (so 
+                  that the data is available in advance for a trip)
+                - Loggin into live gps feeds 
+                - Displaying more than one gps device
 
 6. Flight planning
 
@@ -135,3 +139,6 @@ people might want to use Wikipedia in their own language instead of
 just the English one.  
 
 Subfeatures:    
+
+
+FIXME: Much more here.
