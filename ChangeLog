@@ -1,7 +1,26 @@
+2007-06-22  Inge Wallin  <inge@lysator.liu.se>
+
+	Optimize memory usage by only save labels for those PlaceMarks
+	that are actually visible.
+	* src/lib/placemark.h (class PlaceMark): Remove members
+	m_symbolPixmap, m_symbolPos, m_labelPixmap, m_textRect, m_visible
+	and their accessor functions.
+	* src/lib/placemark.cpp: (PlaceMark): Remove initialization of
+	removed members.
+	* src/lib/placemark.h: (PlaceMarkContainer::clearTextPixmaps):
+	Remove 
+	* src/lib/placemarkpainter.h (class PlaceMarkPainter): New members
+	m_visiblePlacemarks, m_visiblePlacemarksPool
+	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): New class
+	(paintPlaceFolder): Use the VisiblePlacemarks in painting
+	* src/lib/MarbleModel.cpp (setMapTheme): Don't call clearTextPixmaps
+	* src/lib/MarbleWidget.cpp (centerOn): Don't call clearTextPixmaps
+
 2007-06-21  Andrew Manson   <g.real.ate@gmail.com>
-    Fixed a simple off by one error in TextureMapper.cpp. The issue
-    was with the implementation of interlasing, or in fact when the 
-    display stopped using that method to draw.
+
+	Fixed a simple off by one error in TextureMapper.cpp. The issue
+	was with the implementation of interlacing, or in fact when the
+	display stopped using that method to draw.
 
 2007-06-19  Inge Wallin  <inge@lysator.liu.se>
 

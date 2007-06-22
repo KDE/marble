@@ -208,7 +208,8 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
 
-    d->m_placeMarkContainer ->clearTextPixmaps();
+    // FIXME: remove
+    //d->m_placeMarkContainer ->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );

@@ -36,9 +36,6 @@ class PlaceMark
     QString name() const         { return m_name; }
     void setName( QString name ) { m_name = name; }
 
-    const QPoint& symbolPos() const           { return m_symbolPos;   }
-    void setSymbolPos( const QPoint& sympos ) { m_symbolPos = sympos; }
-
     const QChar role() const   { return m_role; }
     void setRole( QChar role ) { m_role = role; }
 
@@ -60,40 +57,18 @@ class PlaceMark
     const int population() const               { return m_population;       }
     void setPopulation( int population )       { m_population = population; }
 
-    bool visible() const                       {return m_visible;     }
-    void setVisible( bool visible )            { m_visible = visible; }
-
     const int selected() const                 { return m_selected;     }
     void setSelected( int selected )           { m_selected = selected; }
-
-    const QPixmap& textPixmap()    const       { return m_labelPixmap;        }
-    void setTextPixmap( QPixmap& labelPixmap ) { m_labelPixmap = labelPixmap; }
-
-    const QRect& textRect() const             { return m_textRect;    }
-    void setTextRect( const QRect& textRect ) { m_textRect = textRect;}
-
-    void clearTextPixmap()
-    {
-        if ( m_labelPixmap.isNull() == false )
-            m_labelPixmap = QPixmap(); 
-    }
 
  protected:
     GeoPoint  m_coordinate;     // The geographic location
     QString   m_name;
 
-    // View stuff
-    QPixmap   m_symbolPixmap;
-    QPoint    m_symbolPos;
-    QPixmap   m_labelPixmap;
-    QRect     m_textRect;       // bounding box of label
-    bool      m_visible;
-
     // Basic data
     int       m_population;
 
     // View stuff
-    int       m_selected;
+    int       m_selected;	// FIXME: Move to VisiblePlaceMark or the view
     int       m_symbol;
     int       m_popidx;
 

@@ -31,6 +31,8 @@
 
 class QPainter;
 class PlaceMarkContainer;
+class VisiblePlaceMark;
+
 
 class PlaceMarkPainter : public QObject
 {
@@ -47,35 +49,25 @@ class PlaceMarkPainter : public QObject
      * @brief  Return whether the cities are visible.
      * @return The city placemark visibility.
      */
-    bool  showCities() const
-    { 
-        return m_showCities;
-    }
-
-    /**
-     * @brief  Return whether the terrain placemarks are visible.
-     * @return The terrain placemark visibility.
-     */
-    bool  showTerrain() const
-    { 
-        return m_showTerrain;
-    }
+    bool  showCities() const  { return m_showCities; }
 
     /**
      * @brief  Set whether the cities are visible
      * @param  visible  visibility of the city placemarks
      */
-    void setShowCities( bool visible ){ 
-        m_showCities = visible;
-    }
+    void setShowCities( bool visible )  { m_showCities = visible; }
+
+    /**
+     * @brief  Return whether the terrain placemarks are visible.
+     * @return The terrain placemark visibility.
+     */
+    bool  showTerrain() const { return m_showTerrain; }
 
     /**
      * @brief  Set whether the terrain placemarks are visible
      * @param  visible  visibility of the terrain placemarks
      */
-    void setShowTerrain( bool visible ){ 
-        m_showTerrain = visible;
-    }
+    void setShowTerrain( bool visible ) { m_showTerrain = visible; }
 
  public Q_SLOTS:
 
@@ -91,7 +83,9 @@ class PlaceMarkPainter : public QObject
     QFont  m_font_regular_underline;
     QFont  m_font_mountain;
 
-    PlaceMarkContainer  m_visibleplacemarks;
+    // All the visible placemarks.  FIXME: Move to the view.
+    QVector<VisiblePlaceMark*>  m_visiblePlacemarks;
+    QVector<VisiblePlaceMark*>  m_visiblePlacemarksPool;
 
     QColor  m_labelcolor;
     int     m_fontheight;

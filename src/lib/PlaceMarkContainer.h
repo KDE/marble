@@ -45,12 +45,6 @@ class PlaceMarkContainer : public QVector<PlaceMark*>
     void setName( const QString& name ) { m_name = name; }
     QString name() const         { return m_name; }
 
-    inline void clearTextPixmaps()
-    {
-        foreach ( PlaceMark* mark, *this )
-            mark->clearTextPixmap();
-    }
-
     inline void deleteAll()
     {
         foreach ( PlaceMark* mark, *this ) {

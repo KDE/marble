@@ -28,12 +28,12 @@ PlaceMark::PlaceMark()
     m_symbol       = 0;
     m_population   = 0;
     m_popidx       = 0;
-    m_symbolPixmap = QPixmap();
-    m_labelPixmap  = QPixmap();
+    //m_symbolPixmap = QPixmap();
+    //m_labelPixmap  = QPixmap();
 
     // Bounding box for the label
     // FIXME: Should be moved to the view.
-    m_textRect     = QRect();
+    //m_textRect     = QRect();
     m_selected     = 0; // 0: not selected 1: centered 2:hover
 }
 
@@ -42,8 +42,7 @@ PlaceMark::PlaceMark( const QString& _name )
     m_name( _name )
 {
     m_symbol       = 0;
-    m_symbolPixmap = QPixmap();
-    m_labelPixmap  = QPixmap();
+    //m_labelPixmap  = QPixmap();
 }
 
 
