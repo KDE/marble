@@ -13,7 +13,6 @@ Before Version 0.4 (Monday June, 11th)
 Hard requirements for the release:
  * Add Downloadmanager class for tiles and Wikipedia articles           TACK
  * Fix image downloading for Wikipedia                                  TACK
- * Creating tiles during build and fix designer plugin dirs             --
  * Settings saving                                                      --
 
 Features
@@ -30,6 +29,7 @@ Cleaning
  * float -> double                                                      DONE
  * Installation issues                                                  TACK
    - Move MarbleControlBox to src/lib/                                  --
+   - Creating tiles during build and fix designer plugin dirs           --
 
 
 During the SoC projects (0.5)

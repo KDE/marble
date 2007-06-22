@@ -329,7 +329,19 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the longitude for the centerPoint
      * @param  lng  the new value for the longitude
      */
-        void setCenterLongitude( double lng );
+    void setCenterLongitude( double lng );
+
+    /**
+     * @brief  Set the home point
+     * @param  lon  the longitude of the new home point.
+     * @param  lat  the latitude of the new home point.
+     */
+    void  setHome(const double &lon, const double &lat, int zoom = 1050);
+    /**
+     * @brief  Set the home point
+     * @param  homePoint  The new home point.
+     */
+    void  setHome(const GeoPoint& _homePoint, int zoom = 1050);
 
     /**
      * @brief  Move left by the moveStep.

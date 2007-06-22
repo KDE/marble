@@ -1,3 +1,11 @@
+2007-06-23  Inge Wallin  <inge@lysator.liu.se>
+
+	Add support for setting the home point and zoom (not working yet)
+	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): new
+	methods: m_homePoint and m_homeZoom
+	* src/lib/MarbleWidget.{h,cpp} (setHome): New method
+	* src/lib/MarbleModel.{h,cpp} (rotateTo): new method
+
 2007-06-22  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning

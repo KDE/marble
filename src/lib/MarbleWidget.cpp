@@ -43,6 +43,7 @@ class MarbleWidgetPrivate
     MarbleModel     *m_model;
 
     GeoPoint         m_homePoint;
+    int              m_homeZoom;
 
     int              m_logzoom;
 	
@@ -101,7 +102,7 @@ void MarbleWidget::construct(QWidget *parent)
     setFocus( Qt::OtherFocusReason );
 
     // Some point that tackat defined. :-) 
-    setHomePoint( 54.8, -9.4 );
+    setHome( 54.8, -9.4, 1050 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
@@ -370,6 +371,20 @@ void MarbleWidget::setCenterLongitude( double lng )
     centerOn( centerLatitude(), lng );
 }
 
+
+void MarbleWidget::setHome( const double &lon, const double &lat, int zoom)
+{
+    d->m_homePoint = GeoPoint( lon, lat );
+    d->m_homeZoom = zoom;
+}
+
+void MarbleWidget::setHome(const GeoPoint& _homePoint, int zoom)
+{
+    d->m_homePoint = _homePoint;
+    d->m_homeZoom = zoom;
+}
+
+
 void MarbleWidget::moveLeft()
 {
     rotateBy( 0, moveStep() );
@@ -525,8 +540,12 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 void MarbleWidget::goHome()
 {
     // d->m_model->rotateTo(0, 0);
+#if 1
     d->m_model->rotateTo( 54.8, -9.4 );
-    zoomView( 1050 ); // default 1050
+#else
+    d->m_model->rotateTo( d->m_homePoint.quaternion() );
+#endif
+    zoomView( d->m_homeZoom ); // default 1050
 
     update(); // not obsolete in case the zoomlevel stays unaltered
 }

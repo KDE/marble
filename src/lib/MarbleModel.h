@@ -99,6 +99,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
     void  rotateTo(const double&, const double&);
     void  rotateTo(const uint&, const uint&, const uint&);
+    void  rotateTo(const Quaternion&);
 
     void rotateBy(const Quaternion&);
     void rotateBy(const double&, const double&);

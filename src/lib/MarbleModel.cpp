@@ -374,6 +374,11 @@ void MarbleModel::rotateTo(const double& phi, const double& theta)
                                      (theta + 180.0) * M_PI / 180.0, 0.0 );
 }
 
+void MarbleModel::rotateTo(const Quaternion& quat)
+{
+    d->m_planetAxis = quat;
+}
+
 
 void MarbleModel::rotateBy(const Quaternion& incRot)
 {
