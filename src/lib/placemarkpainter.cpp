@@ -34,7 +34,8 @@ class VisiblePlaceMark
     VisiblePlaceMark( PlaceMark *mark );
     ~VisiblePlaceMark();
 
-    PlaceMark *placeMark() const                { return m_placeMark; }
+    PlaceMark *placeMark() const                { return m_placeMark;  }
+    void setPlaceMark( PlaceMark *_mark )       { m_placeMark = _mark; }
 
     const QPixmap  symbolPixmap() const { return m_placeMark->symbolPixmap();};
     const QSize    symbolSize()   const { return m_placeMark->symbolSize();  };
@@ -302,6 +303,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	else {
 	    visibleMark = m_visiblePlacemarksPool.last();
 	    m_visiblePlacemarksPool.pop_back();
+            visibleMark->setPlaceMark( mark );
 	}
 
         // Find out whether the area around the placemark is

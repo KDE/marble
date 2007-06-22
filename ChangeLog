@@ -1,5 +1,9 @@
 2007-06-22  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix a bug where wrong PlaceMark was reused.
+	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): new method
+	(paintPlaceFolder): Set PlaceMark when a VisiblePlaceMark is reused.
+
 	Optimize memory usage by only save labels for those PlaceMarks
 	that are actually visible.
 	* src/lib/placemark.h (class PlaceMark): Remove members
