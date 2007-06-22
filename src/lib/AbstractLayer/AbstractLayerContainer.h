@@ -42,7 +42,7 @@ class AbstractLayerContainer:QVector<AbstractLayerData*>
      * at first.
      * \param name the name of the Container
      */
-    AbstractLayerContainer( const QString &name, int size =0 );
+    explicit AbstractLayerContainer( const QString &name, int size =0 );
     
     //!destructor
     ~AbstractLayerContainer();
