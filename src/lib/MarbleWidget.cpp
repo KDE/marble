@@ -42,6 +42,8 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleModel     *m_model;
 
+    GeoPoint         m_homePoint;
+
     int              m_logzoom;
 	
     int              m_zoomStep;
@@ -54,22 +56,23 @@ class MarbleWidgetPrivate
     TextureColorizer        *m_sealegend;
     QImage                  *m_pCanvasImage;
 
-    // Parts of the image
+    // Parameters for the widgets appearance.
+    bool             m_showScaleBar;
+    bool             m_showWindRose;
+
+    // Parts of the image in the Widget
     KAtlasCrossHair  m_crosshair;
     KAtlasMapScale   m_mapscale; // Shown in the lower left
     KAtlasWindRose   m_windrose; // Shown in the upper right
 
     // Tools
-    MeasureTool     *m_pMeasureTool;
+    MeasureTool     *m_measureTool;
 
     QRegion          m_activeRegion;
-    QPixmap          m_cachedPixmap;
 
     // The progress dialog for the tile creator.
     KAtlasTileCreatorDialog  *m_tileCreatorDlg;
 
-    bool             m_showScaleBar;
-    bool             m_showWindRose;
 };
 
 
@@ -96,6 +99,9 @@ void MarbleWidget::construct(QWidget *parent)
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
+
+    // Some point that tackat defined. :-) 
+    setHomePoint( 54.8, -9.4 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
@@ -130,12 +136,12 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
          this, SIGNAL( mouseGeoPosition( QString ) ) ); 
 
-    d->m_pMeasureTool = new MeasureTool( this );
+    d->m_measureTool = new MeasureTool( this );
 
-    connect( d->m_popupmenu,    SIGNAL( addMeasurePoint( double, double ) ),
-	     d->m_pMeasureTool, SLOT( addMeasurePoint( double, double ) ) );
-    connect( d->m_popupmenu,    SIGNAL( removeMeasurePoints() ),
-	     d->m_pMeasureTool, SLOT( removeMeasurePoints( ) ) );	
+    connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
+	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
+    connect( d->m_popupmenu,   SIGNAL( removeMeasurePoints() ),
+	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );	
 
     d->m_logzoom  = 0;
     d->m_zoomStep = 40;
@@ -364,7 +370,6 @@ void MarbleWidget::setCenterLongitude( double lng )
     centerOn( centerLatitude(), lng );
 }
 
-
 void MarbleWidget::moveLeft()
 {
     rotateBy( 0, moveStep() );
@@ -446,11 +451,11 @@ void MarbleWidget::setActiveRegion()
     int zoom = d->m_model->radius(); 
 
     d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
-                              QRegion::Rectangle );
+                                 QRegion::Rectangle );
 
     if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
 	d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
-                                   2 * zoom, 2 * zoom, QRegion::Ellipse );
+                                      2 * zoom, 2 * zoom, QRegion::Ellipse );
     }
 }
 
@@ -500,10 +505,11 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 				d->m_pCanvasImage->width(),
                                 d->m_pCanvasImage->height() );
 
-    d->m_pMeasureTool->paintMeasurePoints( &painter, d->m_pCanvasImage->width() / 2,
-					d->m_pCanvasImage->height() / 2,
-					radius, d->m_model->getPlanetAxis(),
-                                        true );
+    d->m_measureTool->paintMeasurePoints( &painter, 
+                                          d->m_pCanvasImage->width() / 2,
+                                          d->m_pCanvasImage->height() / 2,
+                                          radius, d->m_model->getPlanetAxis(),
+                                          true );
 #if 0
       else
       {

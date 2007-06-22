@@ -93,27 +93,28 @@ class MarbleWidgetPrivate;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
+
     Q_PROPERTY(int zoom READ zoom WRITE zoomView)
 
-    Q_PROPERTY(double latitude READ centerLatitude WRITE setCenterLatitude)
-    Q_PROPERTY(double longitude READ centerLongitude WRITE setCenterLongitude)
+    Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
+    Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
 
-    Q_PROPERTY(bool showScaleBar READ showScaleBar WRITE setShowScaleBar)
-    Q_PROPERTY(bool showWindRose READ showWindRose WRITE setShowWindRose)
-    Q_PROPERTY(bool showGrid READ showGrid WRITE setShowGrid)
-    Q_PROPERTY(bool showPlaces READ showPlaces WRITE setShowPlaces)
-    Q_PROPERTY(bool showCities READ showCities WRITE setShowCities)
-    Q_PROPERTY(bool showTerrain READ showTerrain WRITE setShowTerrain)
+    Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
+    Q_PROPERTY(bool showWindRose READ showWindRose    WRITE setShowWindRose)
+    Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
+    Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
+    Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
+    Q_PROPERTY(bool showTerrain  READ showTerrain     WRITE setShowTerrain)
 
-    Q_PROPERTY(bool showRelief READ showRelief WRITE setShowRelief)
+    Q_PROPERTY(bool showRelief   READ showRelief      WRITE setShowRelief)
     Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
 
-    Q_PROPERTY(bool showIceLayer READ showIceLayer WRITE setShowIceLayer)
-    Q_PROPERTY(bool showBorders READ showBorders WRITE setShowBorders)
-    Q_PROPERTY(bool showRivers READ showRivers WRITE setShowRivers)
-    Q_PROPERTY(bool showLakes READ showLakes WRITE setShowLakes)
+    Q_PROPERTY(bool showIceLayer READ showIceLayer    WRITE setShowIceLayer)
+    Q_PROPERTY(bool showBorders  READ showBorders     WRITE setShowBorders)
+    Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
+    Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
-    Q_PROPERTY(bool quickDirty READ quickDirty WRITE setQuickDirty)
+    Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
 
  public:
     /**
