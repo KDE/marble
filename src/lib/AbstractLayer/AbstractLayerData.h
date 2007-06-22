@@ -8,10 +8,13 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
+
 #ifndef ABSTRACTLAYERDATA_H
 #define ABSTRACTLAYERDATA_H
 
+
 #include "GeoPoint.h"
+
 
 class AbstractLayerData
 {
@@ -31,10 +34,10 @@ class AbstractLayerData
      */
     virtual void draw() = 0;
     
-    /*! \brief check if this is visable on screen
+    /*! \brief check if this is visible on screen
      * 
      */
-    virtual bool visible() const =0;
+    virtual bool visible() const = 0;
     
     //!accessor
     GeoPoint position() const { return *m_position; } 

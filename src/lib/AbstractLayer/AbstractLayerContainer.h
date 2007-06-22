@@ -18,14 +18,14 @@
 
 /*!
  * \brief Abstract LayerContainer is designed to resemble
- * PlaceContainer and be a base class for all Layer Containers.
+ * PlaceMarkContainer and be a base class for all Layer Containers.
  *
  * The container itself will only represent visible data and will
  * contain a reference to a binary file that represents all of the
  * layer data. Each time the view changes the visible data will be
  * altered by a thread that will monitor and deal with this process.
  */
-class AbstractLayerContainer:QVector<AbstractLayerData*>
+class AbstractLayerContainer : QVector<AbstractLayerData*>
 {
  public:
     /*!\brief simple constructor with optional starting size.
