@@ -93,6 +93,7 @@ class TextureMapper
 
     int     m_imageHalfWidth;
     int     m_imageHalfHeight;
+    int     m_imageHeight;
     int     m_imageRadius;
 
     double  m_prevLat;

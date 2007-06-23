@@ -69,6 +69,7 @@ TextureMapper::TextureMapper( const QString& path )
 
     m_imageHalfWidth  = 0;
     m_imageHalfHeight = 0;
+    m_imageHeight = 0;
     m_imageRadius     = 0;
 
     m_prevLat = 0.0; 
@@ -164,7 +165,9 @@ void TextureMapper::tileLevelInit( int tileLevel )
 void TextureMapper::resizeMap(const QImage* canvasImage)
 {
     m_imageHalfWidth  = canvasImage -> width() / 2;
-    m_imageHalfHeight = canvasImage -> height() / 2;
+    m_imageHeight = canvasImage -> height();
+    m_imageHalfHeight = m_imageHeight / 2;
+
     m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
                           + m_imageHalfHeight * m_imageHalfHeight );
 
@@ -212,10 +215,6 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     m_n    = ( m_imageRadius < radius2 ) ? m_nBest : 8;
     m_ninv = 1.0 / (double)(m_n);
 
-    // Calculate the actual y-range of the map on the screen 
-    const int yTop = ( m_imageHalfHeight-radius < 0 ) ? 0 : m_imageHalfHeight-radius;
-    const int yBottom = (yTop == 0) ? 2 * m_imageHalfHeight : yTop + radius + radius;
-
     Quaternion  *qpos = new Quaternion();
 
     // Calculate north pole position to decrease pole distortion later on
@@ -231,15 +230,20 @@ void TextureMapper::mapTexture(QImage* canvasImage, const int& radius,
     planetAxis.toMatrix( planetAxisMatrix );
 
     const int skip = ( m_interlaced == true ) ? 2 : 1;
-    const int yEnd = yBottom - skip + 2;
 
-    for ( m_y = yTop; m_y < yEnd ; m_y+=skip ) {
+    // Calculate the actual y-range of the map on the screen 
+    const int yTop = ( m_imageHalfHeight-radius < 0 ) ? 0 : m_imageHalfHeight-radius;
+    const int yBottom = (yTop == 0) ? m_imageHeight - skip + 1: yTop + radius + radius - skip + 1;
 
-        if(m_y == canvasImage->height()){
+    for ( m_y = yTop; m_y < yBottom ; m_y+=skip ) {
+
+        /* Should be fixed kind of properly now ... */
+        // if(m_y == canvasImage->height()){
             /*FIXME: this is a simple off by one fix, should fix the 
              * cause not the symptom*/ 
-            continue;
-        }
+        //    continue;
+        // }
+
         // Evaluate coordinates for the 3D position vector of the current pixel
         m_qy = radiusf * (double)( m_y - m_imageHalfHeight );
         m_qr = 1.0 - m_qy * m_qy;
