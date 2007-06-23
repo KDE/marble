@@ -204,12 +204,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // Loop through ALL PlaceMarks and get those that are visible.
     // All the visible ones are collected into a QVector of
     // VisiblePlaceMarks.
-    PlaceMarkContainer::const_iterator  it;
-    for ( it = placeMarkContainer->constBegin();
-          it != placeMarkContainer->constEnd();
-          ++it ) 
+    PlaceMarkContainer::const_iterator  it2;
+    for ( it2 = placeMarkContainer->constBegin();
+          it2 != placeMarkContainer->constEnd();
+          ++it2 ) 
     {
-        mark  = *it; // no cast
+        mark  = *it2; // no cast
 
         // Skip the places that are too small and not selected.
         if ( m_weightfilter.at( mark->popidx() ) > radius
