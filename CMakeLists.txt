@@ -11,7 +11,9 @@ endif(STATIC_BUILD)
 #add_definitions(-DKML_DEBUG)
 #add_definitions(-DKML_GSOC)
 
-find_package(Qt4 REQUIRED)
+if(QTONLY)
+  find_package(Qt4 REQUIRED)
+endif(QTONLY)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_CURRENT_SOURCE_DIR})

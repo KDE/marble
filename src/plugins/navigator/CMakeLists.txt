@@ -2,7 +2,11 @@
 PROJECT( MarbleNavigatorPlugin )
 cmake_minimum_required(VERSION 2.4.0)
 
-FIND_PACKAGE(Qt4 REQUIRED)
+option(QTONLY  "Build Qt only" OFF)
+
+if(QTONLY)
+  find_package(Qt4 REQUIRED)
+endif(QTONLY)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/plugins/navigator
