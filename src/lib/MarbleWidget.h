@@ -189,7 +189,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Add a PlaceMark file to the model.
      * @param  filename  the filename of the file containing the PlaceMarks.
      */
-    void addPlaceMarkFile( QString filename );
+    void addPlaceMarkFile( const QString &filename );
 
     /**
      * @brief  Return a QPixmap with the current contents of the widget.

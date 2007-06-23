@@ -57,11 +57,11 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
     void toggledScaleBar( bool );
 
  private Q_SLOTS:
-    void toggleCheckBoxStatus( QUrl );
+    void toggleCheckBoxStatus( const QUrl &);
 
  protected:
     QVariant loadResource ( int type, const QUrl & name );
-    void sendSignals( QString name, bool checked );
+    void sendSignals( const QString &name, bool checked );
 
     QMap<QString, bool> m_checkBoxMap;
 };

@@ -26,7 +26,7 @@ AbstractLayer::AbstractLayer( QObject *parent )
 }
 
 bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
-                                            QSize screenSize, 
+                                            const  QSize &screenSize, 
                                             Quaternion invRotAxis, 
                                             int radius, int &xOut,
                                             int &yOut )
@@ -46,7 +46,7 @@ bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
 }
 
 bool AbstractLayer::getPixelPosFromGeoPoint( Quaternion position,
-                                            QSize screenSize, 
+                                            const QSize &screenSize, 
                                             Quaternion invRotAxis,
                                             int radius, int &xOut, 
                                             int &yOut )

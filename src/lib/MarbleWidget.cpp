@@ -195,7 +195,7 @@ void MarbleWidget::setMinimumZoom( int zoom )
     d->m_minimumzoom = zoom; 
 }
 
-void MarbleWidget::addPlaceMarkFile( QString filename )
+void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
     d->m_model->addPlaceMarkFile( filename ); 
 }

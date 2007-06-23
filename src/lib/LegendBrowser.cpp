@@ -58,7 +58,7 @@ QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
     }
 }
 
-void LegendBrowser::toggleCheckBoxStatus( QUrl link )
+void LegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 {
     if ( link.toString().startsWith( "checkbox:", Qt::CaseInsensitive ) )
     {
@@ -80,7 +80,7 @@ void LegendBrowser::toggleCheckBoxStatus( QUrl link )
     repaint();
 }
 
-void LegendBrowser::sendSignals( QString name, bool checked )
+void LegendBrowser::sendSignals( const QString &name, bool checked )
 {
     if ( name == "locations"){
         emit toggledLocations( checked );
