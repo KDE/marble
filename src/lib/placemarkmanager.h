@@ -39,6 +39,7 @@ class PlaceMarkManager
     bool loadFile( const QString&, PlaceMarkContainer* );
 
  protected:
+    // Eventually there will be more than one container.
     PlaceMarkContainer  *m_placeMarkContainer;
 };
 

@@ -161,7 +161,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 {
 
     d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
-                                        .arg( selectedmap ) ) );
+                                           .arg( selectedmap ) ) );
 
     // If the tiles aren't already there, put up a progress dialog
     // while creating them.
@@ -199,7 +199,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     if ( d->m_texmapper == 0 )
         d->m_texmapper = new TextureMapper( "maps/earth/"
-                                         + d->m_maptheme->tilePrefix() );
+                                            + d->m_maptheme->tilePrefix() );
     else
         d->m_texmapper->setMap( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
@@ -207,9 +207,6 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
-
-    // FIXME: remove
-    //d->m_placeMarkContainer ->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
@@ -251,28 +248,30 @@ void MarbleModel::resize()
 }
 
 
-void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
+void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
 {
     if ( needsUpdate() || d->m_canvasimg->isNull() || d->m_justModified ) {
 
-        d->m_texmapper->mapTexture( d->m_canvasimg, d->m_radius, d->m_planetAxis );
+        d->m_texmapper->mapTexture( d->m_canvasimg, d->m_radius,
+                                    d->m_planetAxis );
 
         if ( d->m_showElevationModel == false
              && d->m_maptheme->bitmaplayer().dem == "true" )
         {
-            d->m_coastimg->fill(Qt::transparent);
+            d->m_coastimg->fill( Qt::transparent );
 
             // Create VectorMap
             d->m_veccomposer->drawTextureMap( d->m_coastimg, d->m_radius, 
-                                           d->m_planetAxis );
+                                              d->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
-            d->m_texcolorizer->colorize( d->m_canvasimg, d->m_coastimg, d->m_radius );
+            d->m_texcolorizer->colorize( d->m_canvasimg, d->m_coastimg,
+                                         d->m_radius );
         }
     }
 
-    // Paint Map on Widget
-    painter->drawImage( dirty, *d->m_canvasimg, dirty ); 
+    // Paint the map on the Widget
+    painter->drawImage( dirtyRect, *d->m_canvasimg, dirtyRect ); 
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
@@ -281,30 +280,30 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirty)
         d->m_veccomposer->paintVectorMap( painter, d->m_radius, d->m_planetAxis );
     }
 
-    // if ( d->m_maptheme->vectorlayer().enabled == true ){
-    QPen  gridpen( QColor( 255, 255, 255, 128 ) );
+    // Paint the grid around the earth.
+    if ( d->m_showGrid ) {
+        QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
-    if ( d->m_showGrid == true ) {
+        // Create and paint a grid
         d->m_gridmap->createGrid( d->m_radius, d->m_planetAxis );
-
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
 
+        // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( d->m_radius, d->m_planetAxis );
-
         gridpen.setStyle( Qt::DotLine );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
     }
-    //	}
 
     // Paint the PlaceMark layer
-    if ( d->m_showPlaceMarks == true && d->m_placeMarkContainer->size() > 0 ) {
+    if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
-                                              d->m_canvasimg->width() / 2,
-                                              d->m_canvasimg->height()/ 2,
-                                              d->m_radius, d->m_placeMarkContainer,
-                                              d->m_planetAxis );
+                                                 d->m_canvasimg->width() / 2,
+                                                 d->m_canvasimg->height()/ 2,
+                                                 d->m_radius,
+                                                 d->m_placeMarkContainer,
+                                                 d->m_planetAxis );
     }
 
     d->m_planetAxisUpdated = d->m_planetAxis;

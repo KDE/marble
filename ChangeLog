@@ -1,3 +1,9 @@
+2007-06-24  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleaning while learning the code
+	* src/lib/placamarkmanager.h: Comment
+	* src/lib/MarbleModel.cpp: Comments and cleaning
+
 2007-06-23  Inge Wallin  <inge@lysator.liu.se>
 
 	Add support for setting the home point and zoom (not working yet)
