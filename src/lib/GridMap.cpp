@@ -11,18 +11,18 @@
 
 #include "GridMap.h"
 
+#include <cmath>
+#include <stdlib.h>
+
 #include <QtCore/QVector>
 #include <QtCore/QTime>
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
-#include <cmath>
-#include <stdlib.h>
-
 #include "clippainter.h"
 
-    // Except for the equator the major circles of latitude are defined via 
-    // the earth's axial tilt, which currently measures about 23°26'21".
+// Except for the equator the major circles of latitude are defined via 
+// the earth's axial tilt, which currently measures about 23°26'21".
  
 const double  AXIALTILT = M_PI / 180.0 * ( 23.0
                                            + 26.0 / 60.0
@@ -57,13 +57,13 @@ void GridMap::createTropics(const int& radius, Quaternion& planetAxis)
     m_radius = radius - 1;
     planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 	
-    // Turn on the major circles of latitude if we've zoomed in far enough (radius > 800
-    // pixels)
-    if ( m_radius >  800 ) {
-        createCircle( PIHALF - AXIALTILT , Latitude );      // Arctic Circle
-        createCircle( AXIALTILT - PIHALF , Latitude );      // Antarctic Circle
-        createCircle( AXIALTILT , Latitude );               // Tropic of Cancer 
-        createCircle( -AXIALTILT , Latitude );              // Tropic of Capricorn
+    // Turn on the major circles of latitude if we've zoomed in far
+    // enough (radius > 400 pixels)
+    if ( m_radius >  400 ) {
+        createCircle( PIHALF - AXIALTILT , Latitude ); // Arctic Circle
+        createCircle( AXIALTILT - PIHALF , Latitude ); // Antarctic Circle
+        createCircle( AXIALTILT , Latitude );          // Tropic of Cancer 
+        createCircle( -AXIALTILT , Latitude );         // Tropic of Capricorn
     }
 }
 
@@ -182,8 +182,8 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF((double)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) +1,
-                                   (double)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) +1);
+            m_currentPoint = QPointF( (double)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) + 1,
+                                      (double)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) + 1 );
             //qDebug() << "Radius: " << m_radius
             //         << "QPointF(" << (double)(m_imageHalfWidth+ m_radius*qpos.v[Q_X])+1
             //        << ", " << (double)(m_imageHalfHeight+ m_radius*qpos.v[Q_Y])+1 << ")";

@@ -1,3 +1,10 @@
+2007-06-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleaning in preparation for a bugfix
+	* src/lib/GridMap.cpp:  Cleaning 
+	 (createTropics): Show the tropics/polar circles already at radius=400
+	* src/lib/MarbleWidget.cpp (centerOn): Remove superfluous code
+
 2007-06-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning while learning the code
