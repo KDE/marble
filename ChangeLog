@@ -1,5 +1,13 @@
 2007-06-25  Inge Wallin  <inge@lysator.liu.se>
 
+	Split out the check for visibility of a PlaceMark
+	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder): take
+	width/height as parameters instead of the same/2.
+	(paintPlaceFolder): call isVisible.
+	(isVisible): New method
+	* src/lib/MarbleModel.cpp (paintGlobe): Use new call signature for
+	paintPlaceFolder
+
 	Cleaning in preparation for a bugfix
 	* src/lib/GridMap.cpp:  Cleaning 
 	 (createTropics): Show the tropics/polar circles already at radius=400

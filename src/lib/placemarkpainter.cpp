@@ -145,13 +145,12 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 }
 
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
-                                        int imgrx, int imgry,
+                                        int imgwidth,
+                                        int imgheight,
                                         int radius,
                                         const PlaceMarkContainer* placeMarkContainer,
                                         Quaternion rotAxis )
 {
-    int  imgwidth  = 2 * imgrx;
-    int  imgheight = 2 * imgry;
     int  x = 0;
     int  y = 0; 
 
@@ -163,9 +162,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
       }
 #endif
     // rotAxis.display();
-
-    Quaternion  invRotAxis = rotAxis.inverse();
-    Quaternion  qpos;
 
     painter->setPen(QColor(Qt::black));	
 
@@ -201,9 +197,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     VisiblePlaceMark  *visibleMark = 0; 
     int                labelnum = 0;
 
-    // Loop through ALL PlaceMarks and get those that are visible.
-    // All the visible ones are collected into a QVector of
-    // VisiblePlaceMarks.
+    // Loop through ALL PlaceMarks and collect those that are visible.
+    // All the visible ones are put into m_visiblePlacemarks, a
+    // QVector of VisiblePlaceMarks.
     PlaceMarkContainer::const_iterator  it2;
     for ( it2 = placeMarkContainer->constBegin();
           it2 != placeMarkContainer->constEnd();
@@ -211,41 +207,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     {
         mark  = *it2; // no cast
 
-        // Skip the places that are too small and not selected.
-        if ( m_weightfilter.at( mark->popidx() ) > radius
-             //             && mark->symbol() != 0
-             && mark->selected() == 0 )
+        if ( !isVisible( mark, radius, rotAxis, imgwidth, imgheight,
+                         x, y ) )
             continue;
 
-        // Skip terrain marks if we're not showing terrain.
-        if ( m_showTerrain == false
-             && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
-            continue;
-
-        // Skip city marks if we're not showing cities.
-        if ( m_showCities == false
-             && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
-            continue;
-
-        qpos = mark->quaternion();
-
-        qpos.rotateAroundAxis(invRotAxis);
+        // Ok, the placemark is visible. Now take care of fixing a label.
 
 	// FIXME: optimize away this one
 	textpixmap = QPixmap();
-
-        // Skip the place if it's on the other side of the globe.
-        if ( qpos.v[Q_Z] < 0 ) {
-            continue;
-        }
-
-        x = (int)(imgrx + radius * qpos.v[Q_X]);
-        y = (int)(imgry + radius * qpos.v[Q_Y]);
-
-        // Don't process placemarks if they are outside the screen area
-        if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
-            continue;
-        }
 
         // Choose Section
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
@@ -433,6 +402,43 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         painter->drawPixmap( visibleMark->symbolPos(),
                              visibleMark->symbolPixmap() );
     }
+}
+
+
+bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
+                                  Quaternion &rotAxis,
+                                  int imgwidth, int imgheight,
+                                  int &x, int &y )
+{
+    // Skip the places that are too small and not selected.
+    if ( m_weightfilter.at( mark->popidx() ) > radius
+         && mark->selected() == 0 )
+        return false;
+
+    // Skip terrain marks if we're not showing terrain.
+    if ( !m_showTerrain && ( 16 <= mark->symbol() && mark->symbol() <= 19 ) )
+        return false;
+
+    // Skip city marks if we're not showing cities.
+    if ( !m_showCities && ( 0 <= mark->symbol() && mark->symbol() < 16 ) )
+        return false;
+
+    Quaternion  qpos       = mark->quaternion();
+    Quaternion  invRotAxis = rotAxis.inverse();
+    qpos.rotateAroundAxis( invRotAxis );
+
+    // Skip the place if it's on the other side of the globe.
+    if ( qpos.v[Q_Z] < 0 )
+        return false;
+
+    // Don't process placemarks if they are outside the screen area
+    x = (int)(imgwidth / 2  + radius * qpos.v[Q_X]);
+    y = (int)(imgheight / 2 + radius * qpos.v[Q_Y]);
+    if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
+        return false;
+    }
+
+    return true;
 }
 
 

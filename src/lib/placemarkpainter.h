@@ -40,7 +40,8 @@ class PlaceMarkPainter : public QObject
 
  public:
     PlaceMarkPainter(QObject *parent = 0);
-    void paintPlaceFolder(QPainter*, int, int, int, const PlaceMarkContainer*, 
+    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight, int radius,
+                          const PlaceMarkContainer*, 
                           Quaternion );
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
@@ -71,7 +72,11 @@ class PlaceMarkPainter : public QObject
 
  public Q_SLOTS:
 
- protected:
+ private:
+    bool   isVisible( PlaceMark *mark, int radius, 
+                      Quaternion &rotAxis,
+                      int imgwidth, int imgheight,
+                      int &x, int &y  );
     inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 
                               double outlineWidth);
     bool testbug(); 

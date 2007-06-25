@@ -299,8 +299,8 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
     // Paint the PlaceMark layer
     if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
-                                                 d->m_canvasimg->width() / 2,
-                                                 d->m_canvasimg->height()/ 2,
+                                                 d->m_canvasimg->width(),
+                                                 d->m_canvasimg->height(),
                                                  d->m_radius,
                                                  d->m_placeMarkContainer,
                                                  d->m_planetAxis );
