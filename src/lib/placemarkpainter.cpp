@@ -392,7 +392,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             if ( numLabels >= maxlabels )
                 break;				
 #endif
-        }else {
+        } else {
             it = m_visiblePlacemarks.begin();
             while ( it != m_visiblePlacemarks.constEnd() ) {
                 if ( (*it)->placeMark() == mark ) {
@@ -404,7 +404,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                
             }
         }
-        
     }
 
     // Finally, actually paint the placemarks that are visible and

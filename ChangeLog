@@ -1,5 +1,9 @@
 2007-06-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Break out search for label space.
+	* src/lib/placemarkpainter.{h,cpp} (roomForLabel): new function
+	* src/lib/placemarkpainter.cpp (paintPlaceFolder): call roomForLabel
+
 	* src/lib/placemarkpainter.h
 	(PlaceMarkPainter::m_visiblePlaceMarks): use QList instead of QVector
 	* src/lib/placemarkpainter.cpp (paintPlaceFolder): Almost make the
