@@ -190,29 +190,22 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( !isVisible( (*it)->placeMark(), radius, rotAxis, 
-			 imgwidth, imgheight, 
-			 x, y ) )
+	if ( isVisible( (*it)->placeMark(), radius, rotAxis, 
+			imgwidth, imgheight, 
+			x, y ) )
 	    ++it;
 	else {
 	    m_visiblePlacemarksPool.append( *it );
 	    it = m_visiblePlacemarks.erase( it );
 	}
     }
-#if 0
-    // Move all visible placemarks to the pool for later use.
-    for ( QList<VisiblePlaceMark*>::const_iterator it = m_visiblePlacemarks.constBegin();
-	  it != m_visiblePlacemarks.constEnd();
-	  ++it )
-    {
-	m_visiblePlacemarksPool.append( *it );
-    }
-    m_visiblePlacemarks.clear();
-#endif
 
     PlaceMark         *mark = 0; 
     VisiblePlaceMark  *visibleMark = 0; 
     int                numLabels = m_visiblePlacemarks.size();
+
+    //qDebug() << "-----------------------------------------------------------";
+    //qDebug() << "numLabels = " << numLabels;
 
     // Loop through ALL PlaceMarks and collect those that are visible.
     // All the visible ones are put into m_visiblePlacemarks, a
@@ -226,36 +219,51 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
 	// If the PlaceMark is not visible, go to next PlaceMark.
         if ( !isVisible( mark, radius, rotAxis, imgwidth, imgheight,
-                         x, y ) )
+                         x, y ) ) {
+	    //qDebug() << mark->name() << ": Not visible";
             continue;
+	}
 
-	// If the PlaceMark is already marked as visible, go to next Placemark
+	// Check if the PlaceMark already is marked as visible.
 	bool  found = false;
 	it = m_visiblePlacemarks.begin();
 	while ( it != m_visiblePlacemarks.constEnd() ) {
 	    if ( (*it)->placeMark() == mark ) {
 		found = true;
+
 		visibleMark = *it;
 		textpixmap = (*it)->labelPixmap();
+
 		break;
 	    }
 
 	    ++it;
 	}
 
-	if ( !found )
+	// Get a new VisiblePlaceMark if we didn't find a previous one.
+	if ( !found ) {
+	    // Get a VisiblePlaceMark from the pool, or generate a new one
+	    // if it's empty.
+	    if ( m_visiblePlacemarksPool.isEmpty() ) {
+		visibleMark = new VisiblePlaceMark( mark );
+	    }
+	    else {
+		visibleMark = m_visiblePlacemarksPool.last();
+		m_visiblePlacemarksPool.pop_back();
+		visibleMark->setPlaceMark( mark );
+	    }
+
 	    textpixmap = QPixmap();
+	}
+
 
         // Ok, the placemark is visible. Now take care of fixing a label.
 
-	// FIXME: optimize away this one
-
         // Choose Section
+	//qDebug() << mark->name() << ": " << y;
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
 
-        // Specify font properties
-	// FIXME: The 1 is because the textwidth isn't saved in the
-	//        mark any more.  See also the FIXME below.
+        // Specify font properties, especially get the textwidth.
         if ( textpixmap.isNull() ) {
 
             QChar  role = mark->role();
@@ -293,20 +301,6 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         else {
             textwidth = ( visibleMark->labelRect() ).width();
         }
-
-	// Get a new VisiblePlaceMark if we didn't find a previous one.
-	if ( !found ) {
-	    // Get a VisiblePlaceMark from the pool, or generate a new one
-	    // if it's empty.
-	    if ( m_visiblePlacemarksPool.isEmpty() ) {
-		visibleMark = new VisiblePlaceMark( mark );
-	    }
-	    else {
-		visibleMark = m_visiblePlacemarksPool.last();
-		m_visiblePlacemarksPool.pop_back();
-		visibleMark->setPlaceMark( mark );
-	    }
-	}
 
         // Find out whether the area around the placemark is
         // covered already.
@@ -415,7 +409,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    // there is no room for any more.
 	    //
 	    // FIXME: Find a better way to reduce clutter.
-            m_visiblePlacemarks.append( visibleMark );
+	    if (!found)
+		m_visiblePlacemarks.append( visibleMark );
             numLabels ++;
             if ( numLabels >= maxlabels )
                 break;				
