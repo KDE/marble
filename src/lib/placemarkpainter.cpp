@@ -202,10 +202,15 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     PlaceMark         *mark = 0; 
     VisiblePlaceMark  *visibleMark = 0; 
+#if 0
     int                numLabels = m_visiblePlacemarks.size();
+#else
+    int                numLabels = 0;
+#endif
 
-    //qDebug() << "-----------------------------------------------------------";
-    //qDebug() << "numLabels = " << numLabels;
+
+    qDebug() << "-----------------------------------------------------------";
+    qDebug() << "numLabels = " << numLabels;
 
     // Loop through ALL PlaceMarks and collect those that are visible.
     // All the visible ones are put into m_visiblePlacemarks, a
@@ -225,12 +230,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	}
 
 	// Check if the PlaceMark already is marked as visible.
-	bool  found = false;
+	bool  found;
+
+	found = false;
 	it = m_visiblePlacemarks.begin();
 	while ( it != m_visiblePlacemarks.constEnd() ) {
 	    if ( (*it)->placeMark() == mark ) {
 		found = true;
-
+		qDebug() << "Found: " << (*it)->placeMark()->name();
 		visibleMark = *it;
 		textpixmap = (*it)->labelPixmap();
 
@@ -240,7 +247,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    ++it;
 	}
 
-	// Get a new VisiblePlaceMark if we didn't find a previous one.
+	// Get a new VisiblePlaceMark if we didn't find a previous
+	// one. Either get it from the pool, or generate a new one.
 	if ( !found ) {
 	    // Get a VisiblePlaceMark from the pool, or generate a new one
 	    // if it's empty.
@@ -260,7 +268,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         // Ok, the placemark is visible. Now take care of fixing a label.
 
         // Choose Section
-	//qDebug() << mark->name() << ": " << y;
+	qDebug() << mark->name() << ": y=" << y;
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
 
         // Specify font properties, especially get the textwidth.
@@ -343,7 +351,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         }
 
         // Calculate a position for the label if we can find an area
-        // for it, and generate the pixmal for it..
+        // for it, and generate the pixmap for it.
         if ( !overlap ) {
             if ( textpixmap.isNull() ) {
                 // Draw the text on the label.
@@ -409,11 +417,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    // there is no room for any more.
 	    //
 	    // FIXME: Find a better way to reduce clutter.
-	    if (!found)
+	    if (!found) {
 		m_visiblePlacemarks.append( visibleMark );
-            numLabels ++;
+		numLabels ++;
+	    }
+#if 0
             if ( numLabels >= maxlabels )
                 break;				
+#endif
         }
     }
 
