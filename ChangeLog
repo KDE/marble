@@ -1,3 +1,10 @@
+2007-06-26  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/placemarkpainter.h
+	(PlaceMarkPainter::m_visiblePlaceMarks): use QList instead of QVector
+	* src/lib/placemarkpainter.cpp (paintPlaceFolder): Almost make the
+	QPixmap cache work.
+
 2007-06-25  Inge Wallin  <inge@lysator.liu.se>
 
 	Split out the check for visibility of a PlaceMark

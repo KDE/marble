@@ -166,14 +166,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     painter->setPen(QColor(Qt::black));	
 
     QPainter    textpainter;
-
     QFont       font;
+    QPixmap     textpixmap;
 
     const double outlineWidth = 2.5;
     int          textwidth = 0;
 
-    QPixmap     textpixmap;
-
+    // This is for the layout of placemark labels.
+    //
     // Introduce a QVector of QVectors.  Each QVector contains a
     // pointer to the VisiblePlaceMarks that have their names visible
     // on that row.  A "row" is not a pixel row, but a row of names
@@ -184,18 +184,35 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     for ( int i = 0; i < secnumber; i++)
         rowsection.append( QVector<VisiblePlaceMark*>( ) );
 
+    // Check for the visible PlaceMarks from last paint operation that
+    // are still visible and remove those that aren't.  The
+    // VisiblePlaceMarks that belong to PlaceMarks that were visible
+    // but aren't any more, are collected into a pool for later reuse.
+    QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
+    while ( it != m_visiblePlacemarks.constEnd() ) {
+	if ( !isVisible( (*it)->placeMark(), radius, rotAxis, 
+			 imgwidth, imgheight, 
+			 x, y ) )
+	    ++it;
+	else {
+	    m_visiblePlacemarksPool.append( *it );
+	    it = m_visiblePlacemarks.erase( it );
+	}
+    }
+#if 0
     // Move all visible placemarks to the pool for later use.
-    for ( QVector<VisiblePlaceMark*>::const_iterator it = m_visiblePlacemarks.constBegin();
+    for ( QList<VisiblePlaceMark*>::const_iterator it = m_visiblePlacemarks.constBegin();
 	  it != m_visiblePlacemarks.constEnd();
 	  ++it )
     {
 	m_visiblePlacemarksPool.append( *it );
     }
     m_visiblePlacemarks.clear();
+#endif
 
     PlaceMark         *mark = 0; 
     VisiblePlaceMark  *visibleMark = 0; 
-    int                labelnum = 0;
+    int                numLabels = m_visiblePlacemarks.size();
 
     // Loop through ALL PlaceMarks and collect those that are visible.
     // All the visible ones are put into m_visiblePlacemarks, a
@@ -207,14 +224,31 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     {
         mark  = *it2; // no cast
 
+	// If the PlaceMark is not visible, go to next PlaceMark.
         if ( !isVisible( mark, radius, rotAxis, imgwidth, imgheight,
                          x, y ) )
             continue;
 
+	// If the PlaceMark is already marked as visible, go to next Placemark
+	bool  found = false;
+	it = m_visiblePlacemarks.begin();
+	while ( it != m_visiblePlacemarks.constEnd() ) {
+	    if ( (*it)->placeMark() == mark ) {
+		found = true;
+		visibleMark = *it;
+		textpixmap = (*it)->labelPixmap();
+		break;
+	    }
+
+	    ++it;
+	}
+
+	if ( !found )
+	    textpixmap = QPixmap();
+
         // Ok, the placemark is visible. Now take care of fixing a label.
 
 	// FIXME: optimize away this one
-	textpixmap = QPixmap();
 
         // Choose Section
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
@@ -222,7 +256,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         // Specify font properties
 	// FIXME: The 1 is because the textwidth isn't saved in the
 	//        mark any more.  See also the FIXME below.
-        if ( 1 || textpixmap.isNull() ) {
+        if ( textpixmap.isNull() ) {
 
             QChar  role = mark->role();
 
@@ -257,22 +291,21 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                           + (int)( outlineWidth ) );
         }
         else {
-            // FIXME: Find a way to know which VisiblePlaceMark that
-            //        corresponds to this one (see the '1 &&' above).
-#if 0
-            textwidth = ( mark->textRect() ).width();
-#endif
+            textwidth = ( visibleMark->labelRect() ).width();
         }
 
-	// Get a VisiblePlaceMark from the pool, or generate a new one
-	// if it's empty.
-	if ( m_visiblePlacemarksPool.isEmpty() ) {
-	    visibleMark = new VisiblePlaceMark( mark );
-	}
-	else {
-	    visibleMark = m_visiblePlacemarksPool.last();
-	    m_visiblePlacemarksPool.pop_back();
-            visibleMark->setPlaceMark( mark );
+	// Get a new VisiblePlaceMark if we didn't find a previous one.
+	if ( !found ) {
+	    // Get a VisiblePlaceMark from the pool, or generate a new one
+	    // if it's empty.
+	    if ( m_visiblePlacemarksPool.isEmpty() ) {
+		visibleMark = new VisiblePlaceMark( mark );
+	    }
+	    else {
+		visibleMark = m_visiblePlacemarksPool.last();
+		m_visiblePlacemarksPool.pop_back();
+		visibleMark->setPlaceMark( mark );
+	    }
 	}
 
         // Find out whether the area around the placemark is
@@ -383,15 +416,15 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    //
 	    // FIXME: Find a better way to reduce clutter.
             m_visiblePlacemarks.append( visibleMark );
-            labelnum ++;
-            if ( labelnum >= maxlabels )
+            numLabels ++;
+            if ( numLabels >= maxlabels )
                 break;				
         }
     }
 
     // Finally, actually paint the placemarks that are visible and
     // their labels.
-    QVector<VisiblePlaceMark*>::const_iterator  visit = m_visiblePlacemarks.constEnd();
+    QList<VisiblePlaceMark*>::const_iterator  visit = m_visiblePlacemarks.constEnd();
 
     while ( visit != m_visiblePlacemarks.constBegin() ) {
         --visit;
@@ -510,23 +543,7 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
 {
     QVector<PlaceMark*>             ret;
 
-#if 0
-    PlaceMarkContainer::const_iterator  it;
-
-    for ( it = m_visibleplacemarks.constBegin();
-          it != m_visibleplacemarks.constEnd();
-          it++ )
-    {
-        PlaceMark  *mark = *it; // no cast
-
-        if ( mark->textRect().contains( curpos )
-             || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ) {
-            ret.append( mark );
-        }
-    }
-#else
-    QVector<VisiblePlaceMark*>::const_iterator  it;
-
+    QList<VisiblePlaceMark*>::const_iterator  it;
     for ( it = m_visiblePlacemarks.constBegin();
           it != m_visiblePlacemarks.constEnd();
           it++ )
@@ -538,7 +555,7 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
             ret.append( mark->placeMark() );
         }
     }
-#endif
+
     return ret;
 }
 
