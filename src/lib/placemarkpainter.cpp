@@ -144,6 +144,262 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
     // m_useworkaround = true;
 }
 
+
+#if 1
+
+void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
+                                        int imgwidth, int imgheight,
+                                        int radius,
+                                        const PlaceMarkContainer* placecontainer,
+                                        Quaternion rotAxis )
+{
+    //int  imgwidth  = 2 * imgrx;
+    //int  imgheight = 2 * imgry;
+    int  x = 0;
+    int  y = 0; 
+
+    int  secnumber = imgheight / m_labelareaheight + 1;
+#if 0
+      if ( mark->name().contains( "London" ) ){
+      qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
+      invrotAxis.display();
+      }
+#endif
+    // rotAxis.display();
+
+    Quaternion  invRotAxis = rotAxis.inverse();
+    Quaternion  qpos;
+
+    painter->setPen(QColor(Qt::black));	
+
+    QPainter    textpainter;
+
+    QFont       font;
+
+    const double outlineWidth = 2.5;
+    int          fontwidth = 0;
+
+    QPixmap     textpixmap;
+
+    QVector< QVector< PlaceMark* > >  m_rowsection;
+    for ( int i = 0; i < secnumber; i++)
+        m_rowsection.append( QVector<PlaceMark*>( ) );
+
+    m_visiblePlacemarks.clear();
+
+    PlaceMark  *mark = 0; 
+    int         labelnum = 0;
+
+    PlaceMarkContainer::const_iterator  it;
+    for ( it = placecontainer->constBegin();
+          it != placecontainer->constEnd();
+          it++ ) 
+    {
+        mark  = *it; // no cast
+
+        // Skip the places that are too small.
+        if ( m_weightfilter.at( mark->popidx() ) > radius
+//             && mark->symbol() != 0
+             && mark->selected() == 0 )
+            continue;
+
+        // Skip terrain marks if we're not showing terrain.
+        if ( m_showTerrain == false
+             && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
+            continue;
+
+        // Skip city marks if we're not showing cities.
+        if ( m_showCities == false
+             && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
+            continue;
+
+        qpos = mark->quaternion();
+
+        qpos.rotateAroundAxis(invRotAxis);
+
+        textpixmap = mark->textPixmap();
+
+        if ( qpos.v[Q_Z] > 0 ) {
+
+            x = (int)(imgwidth/2 + radius * qpos.v[Q_X]);
+            y = (int)(imgheight/2 + radius * qpos.v[Q_Y]);
+
+            // Don't process placemarks if they are outside the screen area
+            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
+
+                // Choose Section
+                const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
+
+                // Specify font properties
+                if ( textpixmap.isNull() ) {
+
+                    QChar  role = mark->role();
+
+                    // C: Admin. center of _C_ountry
+                    // R: Admin. center of _R_egion
+                    // B: Admin. center of country and region ("_B_oth")
+                    // N: _N_one
+
+                    if ( role == 'N' ) { 
+                        font = m_font_regular;
+                    } else if ( role == 'R' ) {
+                        font = m_font_regular_italics;
+                    } else if ( role == 'B' || mark->role() == 'C' ) {
+                        font = m_font_regular_underline;
+                    } else {
+                        font = m_font_regular;
+                    }
+
+                    if ( mark->symbol() > 13 || mark->selected() != 0 )
+                        font.setWeight( 75 );
+
+                    if ( role == 'P' ) 
+                        font = m_font_regular;
+                    if ( role == 'M' ) 
+                        font = m_font_regular;
+                    if ( role == 'H' ) 
+                        font = m_font_mountain;
+                    if ( role == 'V' ) 
+                        font = m_font_mountain;
+
+                    fontwidth = ( QFontMetrics( font ).width( mark->name() )
+                                  + (int)( outlineWidth ) );
+                }
+                else{
+                    fontwidth = ( mark->textRect() ).width();
+                }
+
+                // Find out whether the area around the placemark is
+                // covered already.
+
+                bool  overlap     = true;
+                int   symbolwidth = mark->symbolSize().width();
+
+                int  xpos = symbolwidth / 2 + x + 1;
+                int  ypos = 0;
+
+                while ( xpos >= x - fontwidth - symbolwidth - 1
+                        && overlap == true )
+                {
+                    ypos = y; 
+	
+                    while ( ypos >= y - m_fontheight && overlap == true) { 
+
+                        overlap = false;
+
+                        QRect  textRect( xpos, ypos, fontwidth, m_fontheight );
+
+
+                        for ( QVector<PlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+                              beforeit != currentsec.constEnd();
+                              beforeit++ )
+                        {
+                            if ( textRect.intersects( (*beforeit)->textRect()) ) {
+                                overlap = true;
+                                break;
+                            }
+                        }
+					
+                        if ( overlap == false ) {
+                            mark->setTextRect( textRect );
+                        }
+                        ypos -= m_fontheight; 
+                    }
+
+                    xpos -= ( symbolwidth + fontwidth + 2 );
+                }
+
+                // Paint the label
+                if ( overlap == false) {
+                    if ( textpixmap.isNull() == true ) {
+                        // Draw the text on the label.
+
+                        // Due to some XOrg bug this requires a
+                        // workaround via QImage in some cases.
+
+                        if ( !m_useworkaround ) {
+                            textpixmap = QPixmap( fontwidth, m_fontheight );
+                            textpixmap.fill(Qt::transparent);
+
+                            textpainter.begin( &textpixmap );
+
+                            if ( mark->selected() == 0 ) {
+                                textpainter.setFont(font);
+                                textpainter.setPen(m_labelcolor);
+                                textpainter.drawText( 0, m_fontascent, mark->name() );
+                            }
+                            else {
+                                drawLabelText(textpainter, mark, font, outlineWidth);
+                            }
+
+                            textpainter.end();
+                        }
+                        else {
+                            QImage textimage( fontwidth, m_fontheight,
+                                              QImage::Format_ARGB32_Premultiplied );
+                            textimage.fill( 0 );
+
+                            textpainter.begin( &textimage );
+
+                            if ( mark->selected() == 0 ) {
+                                textpainter.setFont(font);
+                                textpainter.setPen(m_labelcolor);
+                                textpainter.drawText( 0, m_fontascent, mark->name() );
+                            }
+                            else {
+                                drawLabelText(textpainter, mark, font, outlineWidth);
+                            }
+
+                            textpainter.end();
+
+                            textpixmap = QPixmap::fromImage( textimage );
+                        }
+
+                        mark->setTextPixmap( textpixmap );
+                    }
+
+                    // Finally save the label position on the map.
+                    mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
+                                                y - mark->symbolSize().height() / 2) );
+
+                    // Add the current placemark to the matching row and it's
+                    // direct neighbors.
+                    int idx = y / m_labelareaheight;
+                    if ( idx - 1 >= 0 )
+                        m_rowsection[ idx - 1 ].append( mark );
+                    m_rowsection[ idx ].append( mark );
+                    if ( idx + 1 < secnumber )
+                        m_rowsection[ idx + 1 ].append( mark );
+
+                    m_visiblePlacemarks.append(mark);
+                    labelnum ++;
+                    if ( labelnum >= maxlabels )
+                        break;				
+                }
+            }
+            else{
+                mark->clearTextPixmap();
+            }
+        }
+        else {
+            mark->clearTextPixmap();
+        }
+    }
+
+    // qDebug() << QString("Size: %1, Rows: %2").arg(m_visiblePlacemarks.size()).arg( secnumber );
+    PlaceMarkContainer::const_iterator  visit = m_visiblePlacemarks.constEnd();
+
+    while ( visit != m_visiblePlacemarks.constBegin() ) {
+        --visit;
+        mark = *visit;
+        painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
+        painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+    }
+}
+
+
+#else
+
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
                                         int imgwidth,
                                         int imgheight,
@@ -424,6 +680,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     }
 }
 
+#endif
+
 
 bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
                                   Quaternion &rotAxis,
@@ -576,6 +834,7 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
 {
     QVector<PlaceMark*>             ret;
 
+#if 0
     QList<VisiblePlaceMark*>::const_iterator  it;
     for ( it = m_visiblePlacemarks.constBegin();
           it != m_visiblePlacemarks.constEnd();
@@ -588,7 +847,20 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
             ret.append( mark->placeMark() );
         }
     }
+#else
+    QVector<PlaceMark*>::const_iterator  it;
+    for ( it = m_visiblePlacemarks.constBegin();
+          it != m_visiblePlacemarks.constEnd();
+          it++ )
+    {
+        PlaceMark  *mark = *it; // no cast
 
+        if ( mark->textRect().contains( curpos )
+             || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ) {
+            ret.append( mark );
+        }
+    }
+#endif
     return ret;
 }
 

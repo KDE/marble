@@ -60,6 +60,20 @@ class PlaceMark
     const int selected() const                 { return m_selected;     }
     void setSelected( int selected )           { m_selected = selected; }
 
+
+    const QRect& textRect() const              { return m_textRect;    }
+    void setTextRect( const QRect& textRect ) { m_textRect = textRect;}
+    QRect  m_textRect;
+    const QPixmap& textPixmap() const          { return m_textPixmap;       }
+    void setTextPixmap( QPixmap& textPixmap ) { m_textPixmap = textPixmap;}
+    QPixmap m_textPixmap;
+    void clearTextPixmap() {
+        if ( !m_textPixmap.isNull() ) m_textPixmap = QPixmap(); 
+    }
+const QPoint& symbolPos() const             { return m_symbolPos;   }
+    void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }
+    QPoint      m_symbolPos;	// position of the placemark's symbol
+
  protected:
     GeoPoint  m_coordinate;     // The geographic location
     QString   m_name;

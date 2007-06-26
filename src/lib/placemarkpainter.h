@@ -94,7 +94,11 @@ class PlaceMarkPainter : public QObject
     QFont  m_font_mountain;
 
     // All the visible placemarks.  FIXME: Move to the view.
+#if 0
     QList<VisiblePlaceMark*>    m_visiblePlacemarks;
+#else
+    QVector<PlaceMark*>    m_visiblePlacemarks;
+#endif
     QVector<VisiblePlaceMark*>  m_visiblePlacemarksPool;
 
     QColor  m_labelcolor;
