@@ -312,43 +312,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
         // Find out whether the area around the placemark is
         // covered already.
-
-        bool  overlap     = true;
-        int   symbolwidth = mark->symbolSize().width();
-
-        int  xpos = symbolwidth / 2 + x + 1;
-        int  ypos = 0;
-
-        while ( xpos >= x - textwidth - symbolwidth - 1
-                && overlap == true )
-        {
-            ypos = y; 
-	
-            while ( ypos >= y - m_fontheight && overlap == true) { 
-
-                overlap = false;
-
-                QRect  textRect( xpos, ypos, textwidth, m_fontheight );
-
-		// Find a position for the label somewhere around the symbol.
-                for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
-                      beforeit != currentsec.constEnd();
-                      ++beforeit )
-                {
-                    if ( textRect.intersects( (*beforeit)->labelRect()) ) {
-                        overlap = true;
-                        break;
-                    }
-                }
-
-                if ( overlap == false ) {
-                    visibleMark->setLabelRect( textRect );
-                }
-                ypos -= m_fontheight; 
-            }
-
-            xpos -= ( symbolwidth + textwidth + 2 );
-        }
+        bool  overlap = !roomForLabel( currentsec,
+                                       mark, visibleMark,
+                                       textwidth, x, y );
 
         // Calculate a position for the label if we can find an area
         // for it, and generate the pixmap for it.
@@ -478,6 +444,51 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
     }
 
     return true;
+}
+
+
+bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
+                                     PlaceMark *mark,
+                                     VisiblePlaceMark *visibleMark,
+                                     int textwidth,
+                                     int x, int y )
+{
+    bool  overlap     = true;
+    int   symbolwidth = mark->symbolSize().width();
+    
+    int  xpos = symbolwidth / 2 + x + 1;
+    int  ypos = 0;
+    while ( xpos >= x - textwidth - symbolwidth - 1 && overlap ) {
+        ypos = y; 
+	
+        while ( ypos >= y - m_fontheight && overlap == true) { 
+
+            overlap = false;
+
+            QRect  textRect( xpos, ypos, textwidth, m_fontheight );
+
+            // Find a position for the label somewhere around the symbol.
+            for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+                  beforeit != currentsec.constEnd();
+                  ++beforeit )
+                {
+                    if ( textRect.intersects( (*beforeit)->labelRect()) ) {
+                        overlap = true;
+                        break;
+                    }
+                }
+
+            if ( !overlap ) {
+                // FIXME: Should thi really be here?
+                visibleMark->setLabelRect( textRect );
+            }
+            ypos -= m_fontheight; 
+        }
+
+        xpos -= ( symbolwidth + textwidth + 2 );
+    }
+
+    return !overlap;
 }
 
 
