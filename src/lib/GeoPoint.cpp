@@ -32,9 +32,15 @@ GeoPoint::GeoPoint(int _lon, int _lat)
 		      (double)(_lat) / rad2int * 2 );
 }
 
-GeoPoint::GeoPoint( double _lon, double _lat )
+GeoPoint::GeoPoint( double _lon, double _lat, GeoPoint::Unit unit)
 {
-    m_q = Quaternion( _lon, _lat );
+    switch(unit){
+    case( GeoPoint::Radian ):
+        m_q = Quaternion( _lon, _lat );
+        break;
+    case( GeoPoint::Degree ):
+        m_q = Quaternion( _lon * deg2rad , _lat * -deg2rad  );
+    }
 }
 
 

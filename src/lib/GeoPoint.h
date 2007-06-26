@@ -20,17 +20,25 @@
 
 const double deg2rad = M_PI/180.0;
 
+
 class GeoPoint {
  public:
+    /**
+     * @brief enum used constructor to specify the units used
+     */
+    enum Unit{Radian, Degree};
+    
     GeoPoint(){}
     GeoPoint(int, int);
-    /*!\brief create a geopoint from longitude and latitude
-     * 
-     * \param _long longitude in radian
-     * \param _lat latitude in radian
+    /**
+     * @brief create a geopoint from longitude and latitude
+     * @param _lon longitude
+     * @param _lat latitude
+     * @param _unit units that lat and lon are in
      * (north pole at -pi/2, southpole at pi/2)
      */
-    GeoPoint(double _long, double _lat);
+    GeoPoint(double _lat, double _lon, 
+             GeoPoint::Unit _unit = GeoPoint::Radian);
     GeoPoint(int, int, int);
     ~GeoPoint(){}
 
