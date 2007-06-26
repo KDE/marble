@@ -190,7 +190,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( isVisible( (*it)->placeMark(), radius, rotAxis, 
+	if ( 0 && isVisible( (*it)->placeMark(), radius, rotAxis, 
 			imgwidth, imgheight, 
 			x, y ) )
 	    ++it;
@@ -209,8 +209,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #endif
 
 
-    qDebug() << "-----------------------------------------------------------";
-    qDebug() << "numLabels = " << numLabels;
+    //qDebug() << "-----------------------------------------------------------";
+    //qDebug() << "numLabels = " << numLabels;
 
     // Loop through ALL PlaceMarks and collect those that are visible.
     // All the visible ones are put into m_visiblePlacemarks, a
@@ -269,7 +269,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         // label if necessary.
 
         // Choose Section
-	qDebug() << mark->name() << ": y=" << y << (found ? " (found) " : "");
+	//qDebug() << mark->name() << ": y=" << y << (found ? " (found) " : "");
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
 
         // Specify font properties, especially get the textwidth.
