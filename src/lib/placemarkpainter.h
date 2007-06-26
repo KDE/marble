@@ -78,8 +78,8 @@ class PlaceMarkPainter : public QObject
                       int imgwidth, int imgheight,
                       int &x, int &y  );
     bool   roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
-                         PlaceMark *mark,
                          VisiblePlaceMark *visibleMark,
+                         PlaceMark *mark,
                          int textwidth,
                          int x, int y );
     inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 

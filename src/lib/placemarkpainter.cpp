@@ -237,7 +237,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	while ( it != m_visiblePlacemarks.constEnd() ) {
 	    if ( (*it)->placeMark() == mark ) {
 		found = true;
-		qDebug() << "Found: " << (*it)->placeMark()->name();
+
 		visibleMark = *it;
 		textpixmap = (*it)->labelPixmap();
 
@@ -265,10 +265,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	}
 
 
-        // Ok, the placemark is visible. Now take care of fixing a label.
+        // Ok, the placemark is visible. Now take care of fixing a
+        // label if necessary.
 
         // Choose Section
-	qDebug() << mark->name() << ": y=" << y;
+	qDebug() << mark->name() << ": y=" << y << (found ? " (found) " : "");
         const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
 
         // Specify font properties, especially get the textwidth.
@@ -311,9 +312,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         }
 
         // Find out whether the area around the placemark is
-        // covered already.
+        // covered already. It also 
         bool  overlap = !roomForLabel( currentsec,
-                                       mark, visibleMark,
+                                       visibleMark, mark,
                                        textwidth, x, y );
 
         // Calculate a position for the label if we can find an area
@@ -366,7 +367,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 visibleMark->setLabelPixmap( textpixmap );
             }
 
-            // Finally save the label position on the map.
+            // Finally save the symbol position on the map.
             visibleMark->setSymbolPos( x - mark->symbolSize().width()  / 2,
 				       y - mark->symbolSize().height() / 2 );
 
@@ -448,39 +449,40 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
 
 
 bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
-                                     PlaceMark *mark,
                                      VisiblePlaceMark *visibleMark,
+                                     PlaceMark *mark,
                                      int textwidth,
                                      int x, int y )
 {
-    bool  overlap     = true;
+    bool  isRoom     = false;
     int   symbolwidth = mark->symbolSize().width();
     
     int  xpos = symbolwidth / 2 + x + 1;
     int  ypos = 0;
-    while ( xpos >= x - textwidth - symbolwidth - 1 && overlap ) {
+    while ( xpos >= x - textwidth - symbolwidth - 1 && !isRoom ) {
         ypos = y; 
 	
-        while ( ypos >= y - m_fontheight && overlap == true) { 
+        while ( ypos >= y - m_fontheight && !isRoom) { 
 
-            overlap = false;
+            isRoom = true;
 
             QRect  textRect( xpos, ypos, textwidth, m_fontheight );
 
-            // Find a position for the label somewhere around the symbol.
+            // Check if there is another label or symbol that overlaps.
             for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
                   beforeit != currentsec.constEnd();
                   ++beforeit )
-                {
-                    if ( textRect.intersects( (*beforeit)->labelRect()) ) {
-                        overlap = true;
-                        break;
-                    }
+            {
+                if ( textRect.intersects( (*beforeit)->labelRect()) ) {
+                    isRoom = false;
+                    break;
                 }
+            }
 
-            if ( !overlap ) {
-                // FIXME: Should thi really be here?
+            if ( isRoom ) {
+                // FIXME: Should this really be here?
                 visibleMark->setLabelRect( textRect );
+                return true;
             }
             ypos -= m_fontheight; 
         }
@@ -488,7 +490,7 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
         xpos -= ( symbolwidth + textwidth + 2 );
     }
 
-    return !overlap;
+    return isRoom;
 }
 
 
