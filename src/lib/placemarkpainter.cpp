@@ -190,7 +190,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( 0 && isVisible( (*it)->placeMark(), radius, rotAxis, 
+	if ( isVisible( (*it)->placeMark(), radius, rotAxis, 
 			imgwidth, imgheight, 
 			x, y ) )
 	    ++it;
@@ -392,7 +392,19 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             if ( numLabels >= maxlabels )
                 break;				
 #endif
+        }else {
+            it = m_visiblePlacemarks.begin();
+            while ( it != m_visiblePlacemarks.constEnd() ) {
+                if ( (*it)->placeMark() == mark ) {
+                    m_visiblePlacemarksPool.append( *it );
+                    it = m_visiblePlacemarks.erase( it );
+                } else {
+                    it++;
+                }
+               
+            }
         }
+        
     }
 
     // Finally, actually paint the placemarks that are visible and
