@@ -10,9 +10,9 @@
 #ifndef ABSTRACTLAYERCONTAINER_H
 #define ABSTRACTLAYERCONTAINER_H
 
-#include <QVector>
-#include <QString>
-#include <QBitArray>
+#include <QtCore/QVector>
+#include <QtCore/QString>
+#include <QtCore/QBitArray>
 #include "AbstractLayerData.h"
 
 
