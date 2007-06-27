@@ -53,6 +53,12 @@ class PlaceMarkContainer : public QVector<PlaceMark*>
         }
     }
 
+    inline void clearTextPixmaps()
+    {
+        foreach ( PlaceMark* mark, *this )
+            mark->clearTextPixmap();
+    }
+
     inline void clearSelected()
     {
         foreach ( PlaceMark* mark, *this ) {
