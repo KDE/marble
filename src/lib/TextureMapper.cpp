@@ -43,16 +43,20 @@
 
 const double TWOPI = 2 * M_PI;
 
-TextureMapper::TextureMapper( const QString& path )
+TextureMapper::TextureMapper( const QString& theme, QObject *parent )
+    : QObject( parent )
 {
     m_posX = 0;
     m_posY = 0;
 
-    m_tileLoader   = new TileLoader( path );
+    m_tileLoader   = new TileLoader( theme );
+    connect( m_tileLoader,      SIGNAL( tileUpdateAvailable() ), 
+             this,              SLOT( notifyMapChanged() ) );
+
     m_scanLine     = 0;
     m_fastScanLine = 0;
 
-    m_maxTileLevel = 0;
+    detectMaxTileLevel();
     m_interpolate  = false;
     m_nBest = 0;
 
@@ -103,9 +107,10 @@ TextureMapper::~TextureMapper()
 }
 
 
-void TextureMapper::setMap( const QString& path )
+void TextureMapper::setMapTheme( const QString& theme )
 {
-    m_tileLoader->setMap(path);
+    m_tileLoader->setMapTheme(theme);
+    detectMaxTileLevel();
 }
 
 
@@ -139,6 +144,8 @@ void TextureMapper::selectTileLevel(const int& radius)
 
 void TextureMapper::tileLevelInit( int tileLevel )
 {
+    qDebug() << "Tile Level: " << tileLevel;
+
     int ResolutionX = (int)( 4320000.0
 			     / (double)( TileLoader::levelToColumn( tileLevel ) )
 			     / (double)( m_tileLoader->tileWidth() ) );
@@ -500,3 +507,17 @@ void TextureMapper::nextTile()
     m_posY = lat - m_tilePosY;
 }
 
+void TextureMapper::notifyMapChanged()
+{
+    detectMaxTileLevel();
+    qDebug() << "MAPCHANGED";
+    emit mapChanged();
+}
+
+void TextureMapper::detectMaxTileLevel()
+{
+    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->mapTheme() ) + 1 ;
+    qDebug() << "MaxTileLevel: " << m_maxTileLevel;
+}
+
+#include "TextureMapper.moc"

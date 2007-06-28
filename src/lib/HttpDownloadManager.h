@@ -19,35 +19,13 @@
 
 
 #include <QtCore/QString>
+#include <QtCore/QUrl>
 #include <QtCore/QDir>
 #include <QtCore/QQueue>
 #include <QtCore/QList>
+#include <QtCore/QDebug>
 
-
-enum  Priority { NoPriority, Low, Medium, High };
-enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Killed };
-
-
-struct HttpJob
-{
-    HttpJob()
-    {
-        status   = NoStatus;
-        priority = NoPriority;
-    }
-    virtual ~HttpJob(){ /* NONE */ }
-
-    QString  ServerUrl;
-    QString  SourceUrl;
-    QDir     TargetDir;
-
-    Priority priority;
-    Status   status;
-};
-
-
-class HttpFetchFile;
-
+#include "httpfetchfile.h"
 
 /*
  * @Short This class manages scheduled downloads. 
@@ -63,12 +41,23 @@ class HttpDownloadManager : public QObject
 {
     Q_OBJECT
 public:
-    HttpDownloadManager();
+    HttpDownloadManager( const QUrl& serverUrl );
     virtual ~HttpDownloadManager();
 
     // void addJob(HttpJob*){};
     // void killJob(HttpJob*){};
     // void killAllJobs(){};
+
+    void setTargetDir(const QString& targetDir)
+    {
+        m_targetDir = targetDir;
+        m_fetchFile -> setTargetDir( m_targetDir );
+    }
+
+    void setServerUrl(const QUrl& serverUrl)
+    {
+        m_serverUrl = serverUrl;
+    }
 
     void setJobQueueLimit(int jobQueueLimit)
     {
@@ -80,15 +69,24 @@ public:
         m_activatedJobsLimit = activatedJobsLimit;
     }
 
-private Q_SLOTS:
-
-    // void addJob( const QString& ServerUrl, const QString& SourceUrl, const QString& TargetDir, Priority priority);
-    void addJob( QString &relativeUrl );
+ public Q_SLOTS:
+    void addJob( const QString& relativeUrlString, int id );
 
     void removeJob(HttpJob*);
+
+    void reportResult( HttpJob*, bool );
+
+ Q_SIGNALS:
+    void downloadComplete( QString, int id );
+    void statusMessage( QString );
+
+private Q_SLOTS:
+
     void activateJobs();
 
 private:
+    bool              m_downloadEnabled;
+
     QQueue<HttpJob*>  m_jobQueue;
     QList<HttpJob*>   m_activatedJobList;
 
@@ -96,6 +94,9 @@ private:
 
     int               m_activatedJobsLimit;
     int               m_jobQueueLimit;
+
+    QString           m_targetDir;
+    QUrl              m_serverUrl;
 
     // QTimer* timer; // the timer needs to be set for each item in the activatedJobsList
 };

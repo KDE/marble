@@ -118,6 +118,7 @@ MarbleModel::MarbleModel( QWidget* parent )
 
 MarbleModel::~MarbleModel()
 {
+    delete d->m_placeMarkContainer;
     delete d->m_texmapper;
     delete d;
 }
@@ -165,7 +166,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     // If the tiles aren't already there, put up a progress dialog
     // while creating them.
-    if ( !TileLoader::baseTilesAvailable( d->m_maptheme->tilePrefix() ) ) {
+    if ( !TileLoader::baseTilesAvailable( "maps/earth/" + d->m_maptheme->tilePrefix() ) ) {
         qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
@@ -199,11 +200,12 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     if ( d->m_texmapper == 0 )
         d->m_texmapper = new TextureMapper( "maps/earth/"
-                                            + d->m_maptheme->tilePrefix() );
+                                            + d->m_maptheme->tilePrefix(), this );
     else
-        d->m_texmapper->setMap( "maps/earth/" + d->m_maptheme->tilePrefix() );
+        d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
-    d->m_texmapper->setMaxTileLevel( TileLoader::maxPartialTileLevel( d->m_maptheme->tilePrefix() ) + 1 );
+    connect( d->m_texmapper,      SIGNAL( mapChanged() ), 
+             this,              SLOT( notifyModelChanged() ) );
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
@@ -215,9 +217,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
-    emit themeChanged();
-
-    d->m_justModified = true;
+    notifyModelChanged();
 }
 
 
@@ -500,6 +500,13 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
 {
     return d->m_placemarkpainter->whichPlaceMarkAt( curpos );
+}
+
+void MarbleModel::notifyModelChanged()
+{
+    d->m_justModified = true;
+
+    emit modelChanged();
 }
 
 #include "MarbleModel.moc"

@@ -23,7 +23,7 @@
 #include <QtGui/QTextBrowser>
 
 
-class HttpFetchFile;
+class HttpDownloadManager;
 
 
 class TinyWebBrowser : public QTextBrowser
@@ -35,8 +35,8 @@ class TinyWebBrowser : public QTextBrowser
     TinyWebBrowser( QWidget* parent );
 
  public Q_SLOTS:
-    void setSource( const QUrl& url );
-    void slotDownloadFinished( const QString&, bool );
+    void setSource( const QString& relativeUrl );
+    void slotDownloadFinished( const QString&, int );
 
  Q_SIGNALS:
     void statusMessage( QString );
@@ -45,7 +45,7 @@ class TinyWebBrowser : public QTextBrowser
     virtual QVariant loadResource ( int type, const QUrl & name );
 
  private:
-    HttpFetchFile  *m_fetchFile;
+    HttpDownloadManager *m_downloadManager;
     QString         m_source;
     QList<QUrl>     m_urlList;
 };

@@ -41,24 +41,30 @@
 
 TileLoader::TileLoader( const QString& theme )
 {
-    setMap( theme );
-    m_downloadManager = new HttpDownloadManager();
+    setMapTheme( theme );
+    m_downloadManager = new HttpDownloadManager( QUrl("http://edu.kde.org/marble/") );
+    connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
+        this, SLOT( reloadTile( QString, int ) ) );
 }
 
+TileLoader::~TileLoader()
+{
+    cleanupTilehash();
+}
 
-void TileLoader::setMap( const QString& theme )
+void TileLoader::setMapTheme( const QString& theme )
 {
     // Initialize map theme.
     flush();
 
     m_theme = theme;
 
-    m_tile = new TextureTile();
+    m_tile = new TextureTile( 0 );
     m_tile->loadTile( 0, 0, 0, m_theme, false );
 
     // We assume that all tiles have the same size. TODO: check to be safe
-    m_tileWidth  = m_tile->rawtile()->width();
-    m_tileHeight = m_tile->rawtile()->height();
+    m_tileWidth  = m_tile->rawtile().width();
+    m_tileHeight = m_tile->rawtile().height();
 
     delete m_tile;
 }
@@ -102,23 +108,25 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
     // Choosing the correct tile via Lng/Lat info 
 
-    m_tileId = ( tilx * 1000 ) + tily;
+    int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
 
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
-    if ( !m_tileHash.contains( m_tileId ) ) {
-        m_tile = new TextureTile();
-        m_tileHash[m_tileId] = m_tile;
-        connect( m_tile,            SIGNAL( downloadTile( QString & ) ), 
-                 m_downloadManager, SLOT( addJob( QString & ) ) );
+    if ( !m_tileHash.contains( tileId ) ) {
+        m_tile = new TextureTile( tileId );
+        m_tileHash[tileId] = m_tile;
+        connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
+                 m_downloadManager, SLOT( addJob( const QString&, int ) ) );
+        connect( m_tile,            SIGNAL( tileUpdateDone() ), 
+                 this,              SIGNAL( tileUpdateAvailable() ) );
         m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
     } 
 
     // ...otherwise pick the correct one from the hash
     else {
-        m_tile = m_tileHash.value( m_tileId );
+        m_tile = m_tileHash.value( tileId );
         if ( !m_tile->used() ) {
             m_tile->setUsed( true );
-            m_tileHash[m_tileId] = m_tile;
+            m_tileHash[tileId] = m_tile;
         }
     }
 
@@ -160,7 +168,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
             int mmaxit = TileLoader::levelToColumn( trylevel );
 
             for ( int m = 0; m < mmaxit; ++m ) {
-                QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg")
+                QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg")
                                                      .arg(theme).arg( trylevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
@@ -188,7 +196,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 
 int TileLoader::maxPartialTileLevel( const QString& theme )
 {
-    QString     tilepath = KAtlasDirs::path( QString("maps/earth/%1").arg(theme) );
+    QString     tilepath = KAtlasDirs::path( QString("%1").arg(theme) );
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     int      maxtilelevel = -1;
@@ -219,7 +227,7 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
     // Check whether the two tiles from the lowest texture level are available
     for ( int m = 0; m < 2; ++m ) {
-        QString tilepath = KAtlasDirs::path( QString("maps/earth/%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
+        QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
 
         noerr = QFile::exists( tilepath );
 
@@ -232,5 +240,16 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
     return noerr;
 }
 
+void TileLoader::reloadTile( QString relativeUrlString, int id )
+{
+    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
+    if ( m_tileHash.contains(id) )
+    {
+        int level =  id / 100000000;
+        int y = ( id - level * 100000000 ) / 10000;
+        int x = id - ( level * 100000000 + y * 10000 );
+        (m_tileHash[id]) -> slotReLoadTile( x, y, level, m_theme );
+    }
+}
 
 #include "TileLoader.moc"

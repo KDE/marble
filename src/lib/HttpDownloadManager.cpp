@@ -14,16 +14,24 @@
 #include <QtCore/QDebug>
 
 #include "httpfetchfile.h"
+#include "katlasdirs.h"
 
-
-HttpDownloadManager::HttpDownloadManager() 
-    : m_activatedJobsLimit(5)
+HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl ) 
+    : m_serverUrl(serverUrl)
+    , m_activatedJobsLimit(5)
     , m_jobQueueLimit(1000)
 {
+    m_downloadEnabled = true; //disabled for now
+
     m_jobQueue.clear();
     m_activatedJobList.clear();
 
     m_fetchFile = new HttpFetchFile(this);
+
+    setTargetDir( KAtlasDirs::localDir() + '/' );
+
+    connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, bool ) ), this, SLOT( reportResult( HttpJob*, bool ) ) );
+    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ), this, SIGNAL( statusMessage( QString ) ) );
 }
 
 
@@ -34,17 +42,21 @@ HttpDownloadManager::~HttpDownloadManager()
 
 
 // void HttpDownloadManager::addJob(const QString& ServerUrl, const QString& SourceUrl, const QString& TargetDir, Priority priority)
-void HttpDownloadManager::addJob( QString &relativeUrl )
+void HttpDownloadManager::addJob( const QString& relativeUrlString, int id )
 {
-    qDebug() << "Accepting Job: " << relativeUrl;
+    if ( !m_downloadEnabled )
+        return;
+
+    qDebug() << "Accepting Job: " << relativeUrlString;
 
     HttpJob  *job = new HttpJob();
-    job->SourceUrl = relativeUrl;
+    job->initiatorId = id;
+    job->relativeUrlString = relativeUrlString;
     // job->SourceUrl = SourceUrl;
     // job->TargetDir = TargetDir;
     // job->priority  = priority;
 
-    if ( !m_jobQueue.contains( job ) ) {
+    if ( !m_jobQueue.contains( job ) && !m_activatedJobList.contains(job) ) {
         m_jobQueue.enqueue( job );
         job->status = Pending;
         activateJobs();
@@ -54,9 +66,15 @@ void HttpDownloadManager::addJob( QString &relativeUrl )
 
 void HttpDownloadManager::removeJob(HttpJob* job)
 {
-    Q_UNUSED( job );
-    // m_activatedJobList
-    // removeAll( job );
+    int pos = m_activatedJobList.indexOf( job );
+
+    if ( pos > 0 )
+    {
+        m_activatedJobList.removeAt( pos );
+        delete job;
+    }
+
+    activateJobs();
 }
 
 
@@ -66,12 +84,23 @@ void HttpDownloadManager::activateJobs()
             && m_activatedJobList.count() < m_activatedJobsLimit )
     {
         HttpJob  *job = m_jobQueue.dequeue();
-        qDebug() << "On activatedJobList: " << job->SourceUrl;
 
+        qDebug() << "On activatedJobList: " << m_serverUrl.path() + job->relativeUrlString;
         m_activatedJobList.push_back( job );
+        job->serverUrl = m_serverUrl;
+        job->targetDirString = m_targetDir;
         job->status = Activated;
-        m_fetchFile->downloadFile( job->SourceUrl );
+        m_fetchFile->executeJob( job );
     }
+}
+
+void HttpDownloadManager::reportResult( HttpJob* job, bool err )
+{
+    emit downloadComplete( job->relativeUrlString, job->initiatorId );
+
+    removeJob( job );
+
+    qDebug() << "Download Complete!";
 }
 
 #include "HttpDownloadManager.moc"

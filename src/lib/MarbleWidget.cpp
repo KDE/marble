@@ -109,7 +109,7 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
              this,    SLOT( creatingTilesProgress( int ) ) );
 
-    connect( d->m_model, SIGNAL(themeChanged()), this, SLOT(update()) );
+    connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(update()) );
 
     // Set background: black.
     QPalette p = palette();

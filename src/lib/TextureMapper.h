@@ -45,13 +45,15 @@ class TileLoader;
  * @author Torsten Rahn <rahn@kde.org>
  */
 
-class TextureMapper
+class TextureMapper: public QObject
 {
+    Q_OBJECT
+
  public:
-    TextureMapper( const QString& path );
+    TextureMapper( const QString& path, QObject * parent=0 );
     virtual ~TextureMapper();
 
-    void setMap( const QString& path );
+    void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
     void resizeMap(const QImage* canvasImage);
     void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis);
@@ -67,6 +69,8 @@ class TextureMapper
     void nextTile();
 
     void tileLevelInit( int tileLevel );
+
+    void detectMaxTileLevel();
 
     int          m_posX;
     int          m_posY;
@@ -119,7 +123,12 @@ class TextureMapper
     int           m_tileLevel;
 
     bool    m_interlaced;
-};
 
+ Q_SIGNALS:
+    void mapChanged();
+
+private Q_SLOTS:
+    void notifyMapChanged();
+};
 
 #endif // __MARBLE__TEXTUREMAPPER_H

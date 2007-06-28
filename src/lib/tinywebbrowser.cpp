@@ -17,18 +17,24 @@
 #include <QtCore/QDebug>
 #include <QtGui/QTextFrame>
 
-#include "httpfetchfile.h"
+#include "HttpDownloadManager.h"
 #include "katlasdirs.h"
 
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
-    m_fetchFile = new HttpFetchFile(this);
-    connect( m_fetchFile, SIGNAL( downloadDone( QString, bool ) ),
-             this,        SLOT( slotDownloadFinished( QString, bool ) ) );
-    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ),
-             SIGNAL( statusMessage( QString) ) );		
+    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/wiki/") );
+    m_downloadManager->setTargetDir( KAtlasDirs::localDir() + "/cache/" );
+
+    connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
+        this, SLOT( slotDownloadFinished( QString, int ) ) );
+    connect( m_downloadManager, SIGNAL( statusMessage( QString ) ), 
+        this, SIGNAL( statusMessage( QString ) ) );
+//    connect( m_downloadManager, SIGNAL( downloadDone( QString, bool ) ),
+//             this,        SLOT( slotDownloadFinished( QString, bool ) ) );
+//    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ),
+//             SIGNAL( statusMessage( QString) ) );		
 
     QStringList  searchPaths;
     searchPaths << KAtlasDirs::localDir() + "/cache/"
@@ -65,14 +71,14 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name )
 }
 
 
-void TinyWebBrowser::setSource( const QUrl& url )
+void TinyWebBrowser::setSource( const QString& relativeUrl )
 {
-    m_source = QFileInfo( url.path() ).fileName();
-    m_fetchFile->downloadFile( url );
+    m_source = QFileInfo( relativeUrl ).fileName();
+    m_downloadManager->addJob( relativeUrl, /* id= */ 0 );
 }
 
 
-void TinyWebBrowser::slotDownloadFinished( const QString& filename, bool )
+void TinyWebBrowser::slotDownloadFinished( const QString& filename, int )
 {
     if ( filename == m_source )	{
         QTextBrowser::setSource( filename );

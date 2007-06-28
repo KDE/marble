@@ -33,7 +33,7 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     explicit PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
 
  Q_SIGNALS:
-    void source( QUrl );
+    void source( QString );
 
  public Q_SLOTS:
     void setFlagLabel();

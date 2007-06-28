@@ -28,35 +28,36 @@ class TextureTile : public QObject {
     Q_OBJECT
 
  public:
-    TextureTile();
+    TextureTile( int id );
 
     virtual ~TextureTile();
 
     void loadTile( int x, int y, int level, 
-           const QString& theme, bool requestRepaint = true );
+           const QString& theme, bool requestTileUpdate = true );
 
     const int  depth() const        { return m_depth; }
 
     const bool used() const         { return m_used; }
     void       setUsed( bool used ) { m_used = used; }
 
-    QImage    *rawtile()            { return m_rawtile; }
+    const QImage&     rawtile()            { return m_rawtile; }
  
     uchar  **jumpTable8;
     uint   **jumpTable32;
 
  Q_SIGNALS:
-    void downloadTile( QString & );
-    void tileUpdate();
+    void downloadTile( const QString& relativeUrlString, int id );
+    void tileUpdateDone();
 
  public Q_SLOTS:
-    void slotLoadTile( const QString& path );
+    void slotReLoadTile( int x, int y, int level, const QString& theme );
 
  protected:
-    QImage  *m_rawtile;
+    int      m_id;
+
+    QImage   m_rawtile;
 
     int      m_depth;
-
     bool     m_used;
 };
 

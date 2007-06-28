@@ -23,55 +23,67 @@ HttpFetchFile::HttpFetchFile( QObject *parent )
     : QObject( parent )
 {
     m_pHttp     = new QHttp(this);
-    m_targetDir = KAtlasDirs::localDir() + "/cache/";
+    m_targetDirString = KAtlasDirs::localDir() + "/cache/";
 
-    if ( QDir( m_targetDir ).exists() == false ) 
-        ( QDir::root() ).mkpath( m_targetDir );
+    if ( QDir( m_targetDirString ).exists() == false ) 
+        ( QDir::root() ).mkpath( m_targetDirString );
     // What if we don't succeed in creating the path?
 
     connect( m_pHttp, SIGNAL( requestFinished( int, bool ) ),
              this,    SLOT( httpRequestFinished( int, bool ) ) );
-    connect(m_pHttp, SIGNAL(responseHeaderReceived( const QHttpResponseHeader & ) ),
-            this,    SLOT( checkResponseHeader( const QHttpResponseHeader & ) ) );
+//    connect(m_pHttp, SIGNAL(responseHeaderReceived( const QHttpResponseHeader & ) ),
+//            this,    SLOT( checkResponseHeader( const QHttpResponseHeader & ) ) );
 }
 
-
-void HttpFetchFile::downloadFile( const QUrl& url )
+void HttpFetchFile::executeJob( HttpJob* job )
 {
-    QString fileName = QFileInfo(url.path()).fileName();
 
-    if ( QFile::exists( fileName ) ) {
+    QString localFileUrlString = job->targetDirString + job->relativeUrlString;
+
+    if ( QFile::exists( localFileUrlString ) ) {
         qDebug( "File already exists" );
-        emit downloadDone( fileName, false );
+        emit jobDone( job, false );
 
         return;
     }
 
-    m_pFile = new QFile( m_targetDir + fileName );
-    if ( !m_pFile->open( QIODevice::WriteOnly ) ) {
+    QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
+    qDebug() << "Download to: " << localFileUrlString << " in: " << localFilePath;
+
+    if ( !QDir( localFilePath ).exists() )
+        ( QDir::root() ).mkpath( localFilePath );
+
+    QFile* jobTargetFile = new QFile( localFileUrlString + ".tmp" );
+    job->targetFile = jobTargetFile;
+
+    if ( !jobTargetFile->open( QIODevice::WriteOnly ) ) {
         emit statusMessage( tr( "Unable to save the file %1: %2." )
-                            .arg( m_targetDir + fileName ).arg( m_pFile->errorString() ) );
-        delete m_pFile;
-        m_pFile = 0;
+                            .arg( localFileUrlString ).arg( jobTargetFile->errorString() ) );
+        delete jobTargetFile;
+        jobTargetFile = 0;
 
         return;
     }
 
-    m_pHttp->setHost( url.host(), url.port() != -1 ? url.port() : 80 );
-    if ( !url.userName().isEmpty() )
-        m_pHttp->setUser( url.userName(), url.password() );
+    QUrl sourceUrl = QUrl( (job->serverUrl).toString() + job->relativeUrlString ); 
+
+    m_pHttp->setHost( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
+    if ( !sourceUrl.userName().isEmpty() )
+        m_pHttp->setUser( sourceUrl.userName(), sourceUrl.password() );
 
     m_httpRequestAborted = false;
-    m_httpGetId = m_pHttp->get( url.path(), m_pFile );
-    m_pFileIdMap.insert( m_httpGetId, fileName );
 
-    emit statusMessage( tr("Downloading data from Wikipedia.") );
+    int httpGetId = m_pHttp->get( sourceUrl.path(), jobTargetFile );
+    qDebug() << " job id: " << httpGetId;
+    m_pFileIdMap.insert( httpGetId, job );
+
+    emit statusMessage( tr("Downloading data ...") );
 }
 
-
-void HttpFetchFile::cancelDownload()
+void HttpFetchFile::cancelJob( HttpJob* job )
 {
     emit statusMessage( tr( "Download cancelled." ) );
+    job->status = Aborted;
     m_httpRequestAborted = true;
     m_pHttp->abort();
 }
@@ -79,40 +91,48 @@ void HttpFetchFile::cancelDownload()
 
 void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 {
-    if ( m_httpRequestAborted ) {
-        if ( m_pFile ) {
-            m_pFile->close();
-            m_pFile->remove();
 
-            delete m_pFile;
-            m_pFile = 0;
+    if ( !m_pFileIdMap.contains( requestId ) )
+        return;
+
+    HttpJob* job = m_pFileIdMap[requestId];
+
+    QFile* jobTargetFile = job->targetFile;
+
+    if ( job->status == Aborted ) {
+        if ( jobTargetFile ) {
+            jobTargetFile->close();
+            jobTargetFile->remove();
+
+            delete jobTargetFile;
+            jobTargetFile = 0;
         }
         m_pFileIdMap.remove( requestId );
 
         return;
     }
 
-    if ( requestId != m_httpGetId )
-        return;
-
-    m_pFile->close();
+    jobTargetFile->close();
 
     if ( error ) {
-        m_pFile->remove();
+        jobTargetFile->remove();
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_pHttp->errorString() ) );
     } else {
-        emit statusMessage( tr( "Download from Wikipedia finished." ) );
+        QString localFileUrlString = job->targetDirString + job->relativeUrlString;
+        jobTargetFile->rename( localFileUrlString );
+        emit statusMessage( tr( "Download finished." ) );
     }
 
-    emit downloadDone( m_pFileIdMap[requestId], error );
+    emit jobDone( m_pFileIdMap[requestId], error );
     m_pFileIdMap.remove( requestId );
 	
-    delete m_pFile;
-    m_pFile = 0;
+    delete jobTargetFile;
+    jobTargetFile = 0;
+
 }
 
-
+/*
 void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeader)
 {
     if (responseHeader.statusCode() != 200) {
@@ -125,5 +145,5 @@ void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeade
         return;
     }
 }
-
+*/
 #include "httpfetchfile.moc"

@@ -41,8 +41,8 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
 
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
              this,                SLOT( showMessage( QString) ) );
-    connect( this,                SIGNAL( source( QUrl ) ),
-             m_pWikipediaBrowser, SLOT( setSource( QUrl ) ) );
+    connect( this,                SIGNAL( source( QString ) ),
+             m_pWikipediaBrowser, SLOT( setSource( QString ) ) );
 
     showContent();
 }
@@ -114,8 +114,7 @@ void PlaceMarkInfoDialog::showContent()
         elevation_val_lbl->setText( "-" );
     }
 
-    emit source( QUrl( "http://en.wikipedia.org/wiki/" + m_mark->name() ) );
-    // m_pTextBrowser->setSource(QUrl("/usr/share/qt3/doc/html/index.html"));
+    emit source( m_mark->name() );
 }
 
 

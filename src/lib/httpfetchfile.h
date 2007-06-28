@@ -23,6 +23,31 @@
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
+enum  Priority { NoPriority, Low, Medium, High };
+enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
+
+
+struct HttpJob
+{
+    HttpJob()
+    {
+        status   = NoStatus;
+        priority = NoPriority;
+    }
+    virtual ~HttpJob(){ /* NONE */ }
+
+    QString  relativeUrlString;
+
+    QUrl     serverUrl;
+
+    QString  targetDirString;
+    QFile*   targetFile;
+
+    int      initiatorId;
+    Priority priority;
+    Status   status;
+};
+
 
 class HttpFetchFile : public QObject
 {
@@ -31,32 +56,36 @@ class HttpFetchFile : public QObject
  public:
     HttpFetchFile( QObject* parent = 0 );
 
-    void setServerUrl( const QString& serverUrl ){ m_serverUrl = serverUrl; }
-    void setTargetDir( const QString& targetDir ){ m_targetDir = targetDir; }
+    void setServerUrl( const QUrl& serverUrl ){ m_serverUrl = serverUrl; }
+    void setTargetDir( const QString& targetDirString ){ m_targetDirString = targetDirString; }
 
  public Q_SLOTS:
+    void executeJob( HttpJob* job );
+/*
+    void downloadUrl( const QUrl& serverUrl, const QString& relativeUrlString );
     void downloadFile( const QUrl& );
-    void cancelDownload();
+*/
+    void cancelJob( HttpJob* job );
 
  Q_SIGNALS:
-    void downloadDone( QString, bool );
+    void jobDone( HttpJob*, bool );
+//    void downloadDone( QString, bool );
     void statusMessage( QString );
 
  private Q_SLOTS:
     // process feedback from m_Http
     void httpRequestFinished(int requestId, bool error);
-    void checkResponseHeader(const QHttpResponseHeader &responseHeader);
+//    void checkResponseHeader(const QHttpResponseHeader &responseHeader);
 
  private:
     QHttp   *m_pHttp;
     QFile   *m_pFile;
-    int      m_httpGetId;
     bool     m_httpRequestAborted;
 
-    QMap <int, QString>  m_pFileIdMap;
+    QMap <int, HttpJob*>  m_pFileIdMap;
 
-    QString  m_serverUrl;
-    QString  m_targetDir;
+    QUrl  m_serverUrl;
+    QString  m_targetDirString;
 };
 
 

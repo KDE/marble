@@ -169,7 +169,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
 
-    void themeChanged();
+    void modelChanged();
+
+ private Q_SLOTS:
+    void notifyModelChanged();
 
  private:
     MarbleModelPrivate  * const d; 

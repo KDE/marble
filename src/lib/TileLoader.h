@@ -48,14 +48,16 @@ class TileLoader : public QObject {
     Q_OBJECT
  public:
     TileLoader( const QString& theme );
-    virtual ~TileLoader(){}
+    virtual ~TileLoader();
 
     TextureTile* loadTile( int tilx, int tily, int tileLevel );
 
-    void setMap( const QString& );
+    void setMapTheme( const QString& );
+    const QString mapTheme() const { return m_theme; }
 
     void resetTilehash();
     void cleanupTilehash();
+
     void flush();
 
     const int tileWidth() const { return m_tileWidth; }
@@ -83,12 +85,17 @@ class TileLoader : public QObject {
     QString       m_theme;
 
     QHash <int, TextureTile*>  m_tileHash;
-    int           m_tileId;
 
     int           m_tileWidth;
     int           m_tileHeight;
 
+ Q_SIGNALS:
+    void tileUpdateAvailable();
+
 public Q_SLOTS:
+
+    void reloadTile( QString relativeUrlString, int id );
+
     void message( const QString& test ){ qDebug() << test; }
 };
 
