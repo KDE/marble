@@ -13,7 +13,7 @@
 #define ABSTRACTLAYERDATA_H
 
 
-#include "GeoPoint.h"
+#include "../GeoPoint.h"
 
 
 class AbstractLayerData

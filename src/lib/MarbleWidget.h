@@ -12,6 +12,7 @@
 
 #ifndef MARBLEWIDGET_H
 #define MARBLEWIDGET_H
+#
 
 
 /** @file

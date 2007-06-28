@@ -13,7 +13,7 @@
 #ifndef ABSTRACTLAYER_H
 #define ABSTRACTLAYER_H
 
-#include "Quaternion.h"
+#include "../Quaternion.h"
 #include "AbstractLayerContainer.h"
 #include <QtCore/QObject>
 #include <QtCore/QSize>

@@ -26,7 +26,6 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
@@ -40,7 +39,8 @@
 #include "placemarkmodel.h"
 #include "clippainter.h"
 #include "maptheme.h"
-#include "TextureMapper.h"
+#include "GlobeScanlineTextureMapper.h"
+#include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 
@@ -127,7 +127,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
     PlaceMarkPainter   *placeMarkPainter()   const;
     VectorComposer     *vectorComposer()     const;
     TextureColorizer   *textureColorizer()   const;
-    TextureMapper      *textureMapper()      const;
+#ifndef FLAT_PROJ
+    GlobeScanlineTextureMapper
+#else
+    FlatScanlineTextureMapper
+#endif
+        *textureMapper()      const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.

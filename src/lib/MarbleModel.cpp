@@ -39,11 +39,16 @@ class MarbleModelPrivate
     // View and paint stuff
     MapTheme            *m_maptheme;
     TextureColorizer    *m_texcolorizer;
-    TextureMapper       *m_texmapper;
+#ifndef FLAT_PROJ
+    GlobeScanlineTextureMapper
+#else
+    FlatScanlineTextureMapper
+#endif
+        *m_texmapper;
     VectorComposer      *m_veccomposer;
     GridMap             *m_gridmap;
 
-    // Places on the map
+    // Pl_modelaces on the map
     PlaceMarkManager    *m_placemarkmanager;
     PlaceMarkContainer  *m_placeMarkContainer;
     PlaceMarkModel      *m_placemarkmodel;
@@ -197,10 +202,15 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
         qDebug("After emitting creatingTilesStart() ... ");
 #endif
     }
-
+#ifndef FLAT_PROJ
     if ( d->m_texmapper == 0 )
-        d->m_texmapper = new TextureMapper( "maps/earth/"
+        d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
                                             + d->m_maptheme->tilePrefix(), this );
+#else
+    if ( d->m_texmapper == 0 )
+        d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+                                            + d->m_maptheme->tilePrefix() );
+#endif
     else
         d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
@@ -209,8 +219,6 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
-
-    d->m_placeMarkContainer ->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
@@ -406,7 +414,6 @@ double MarbleModel::centerLongitude() const
     return - d->m_planetAxis.yaw() * 180.0 / M_PI;
 }
 
-
 QAbstractListModel *MarbleModel::getPlaceMarkModel() const
 {
     return d->m_placemarkmodel;
@@ -460,8 +467,12 @@ TextureColorizer  *MarbleModel::textureColorizer() const
 {
     return d->m_texcolorizer;
 }
-
-TextureMapper     *MarbleModel::textureMapper()    const
+#ifndef FLAT_PROJ
+GlobeScanlineTextureMapper
+#else
+FlatScanlineTextureMapper
+#endif
+    *MarbleModel::textureMapper()    const
 {
     return d->m_texmapper;
 }

@@ -267,7 +267,11 @@ bool MarbleWidget::showLakes() const
 
 bool  MarbleWidget::quickDirty() const
 { 
-    return d->m_model->textureMapper()->interlaced();
+#ifndef FLAT_PROJ
+    //return d->m_model->textureMapper()->interlaced();
+#else
+    return false;
+#endif
 }
 
 
@@ -353,7 +357,6 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     else 
 	d->m_crosshair.setEnabled( false );
 
-    d->m_model->placeMarkContainer()->clearTextPixmaps();
     d->m_model->placeMarkContainer()->sort();
 
     repaint();
@@ -633,6 +636,7 @@ void MarbleWidget::setShowLakes( bool visible )
 
 void MarbleWidget::setQuickDirty( bool enabled )
 {
+#ifndef FLAT_PROJ
     // Interlace texture mapping 
     d->m_model->textureMapper()->setInterlaced( enabled );
     d->m_model->setNeedsUpdate();
@@ -641,6 +645,7 @@ void MarbleWidget::setQuickDirty( bool enabled )
     d->m_windrose.setTransparency( transparency );
     d->m_mapscale.setTransparency( transparency );
     repaint();
+#endif
 }
 
 

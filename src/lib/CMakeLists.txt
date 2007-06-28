@@ -61,7 +61,9 @@ set(marblewidget_SRCS
            searchcombobox.cpp
            searchlistview.cpp
            texcolorizer.cpp
-           TextureMapper.cpp
+           FlatScanlineTextureMapper.cpp
+           GlobeScanlineTextureMapper.cpp
+           AbstractScanlineTextureMapper.cpp
            TextureTile.cpp
            TileLoader.cpp
            tilescissor.cpp
@@ -182,7 +184,9 @@ install( FILES
            searchcombobox.h
            searchlistview.h
            texcolorizer.h
-           TextureMapper.h
+           FlatScanlineTextureMapper.h
+           GlobeScanlineTextureMapper.h
+           AbstractScanlineTextureMapper.h
            TextureTile.h
            TileLoader.h
            tilescissor.h

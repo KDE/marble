@@ -16,8 +16,6 @@
 #include <QtCore/QSize>
 #include <QtCore/QObject>
 
-#include "Quaternion.h"
-
 
 AbstractLayer::AbstractLayer( QObject *parent ) 
     : QObject( parent )
