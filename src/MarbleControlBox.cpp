@@ -47,6 +47,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     toolBoxTab1->setBackgroundRole( QPalette::Window );
     toolBoxTab2->setBackgroundRole( QPalette::Window );
 
+    setupGpsOption();
+
     connect( goHomeButton, SIGNAL( clicked() ), 
              this,         SIGNAL( goHome() ) ); 
     connect( zoomSlider,   SIGNAL( valueChanged( int ) ),
@@ -77,6 +79,27 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     connect( katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                  SIGNAL( selectMapTheme( const QString& ) ) );
+}
+
+void MarbleControlBox::setupGpsOption()
+{
+    m_gpsDrawBox -> setEnabled( true );
+    m_gpsGoButton -> setEnabled( false );
+    
+    QButtonGroup *latGroup = new QButtonGroup( this );
+    QButtonGroup *lonGroup = new QButtonGroup( this );
+    
+    latGroup -> addButton( m_eRadio );
+    latGroup -> addButton( m_wRadio );
+    
+    lonGroup -> addButton( m_nRadio );
+    lonGroup -> addButton( m_sRadio );
+    
+    m_eRadio -> setChecked( true );
+    m_nRadio -> setChecked( true );
+    
+    connect( m_gpsDrawBox, SIGNAL( clicked( bool ) ),
+             this, SLOT( disableGpsInput( bool ) ) );
 }
 
 
@@ -141,6 +164,18 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              m_widget, SLOT( setShowWindRose( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              m_widget, SLOT( setShowScaleBar( bool ) ) );
+    
+    //connect GPS Option signals
+    connect( this, SIGNAL( gpsInputDisabled( bool ) ),
+             m_widget, SLOT( setShowGps( bool ) ) );
+    connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
+             m_widget, SLOT( changeGpsPosition( double, double ) ) );
+    connect( m_widget, SIGNAL( gpsClickPos( double, double, 
+                                            GeoPoint::Unit ) ),
+             this, SLOT( recieveGpsCoordinates ( double, double,
+                                                 GeoPoint::Unit) ) );
+    connect( m_widget, SIGNAL( timeout() ), 
+             this, SIGNAL( updateGps() ) );
 }
 
 
@@ -161,6 +196,68 @@ void MarbleControlBox::changeZoom(int zoom)
     // if (zoomSlider->value() != zoom)
     zoomSlider->setValue( zoom );
     zoomSlider->setMinimum( m_minimumzoom );
+}
+
+void MarbleControlBox::disableGpsInput( bool in )
+{
+    m_latSpin->setEnabled( !in );
+    m_lonSpin->setEnabled( !in );
+    
+    m_eRadio->setEnabled( !in );
+    m_wRadio->setEnabled( !in );
+    m_nRadio->setEnabled( !in );
+    m_sRadio->setEnabled( !in );
+    
+    double t_lat = m_latSpin->value();
+    double t_lon = m_lonSpin->value();
+    
+    if( m_wRadio->isChecked() ){
+        t_lon *= -1;
+    }
+    
+    if( m_sRadio->isChecked() ){
+        t_lat *= -1;
+    }
+    
+    
+    emit gpsPositionChanged( t_lat, t_lon );
+    emit gpsInputDisabled( in );
+}
+
+void MarbleControlBox::recieveGpsCoordinates( double x, double y, 
+                                              GeoPoint::Unit unit){
+    if( m_catchGps->isChecked() ){
+        switch(unit){
+        case GeoPoint::Degree:
+            m_latSpin->setValue( x );
+            m_lonSpin->setValue( y );
+            emit gpsPositionChanged( x, y );
+            break;
+        case GeoPoint::Radian:
+            double rad2deg = 180.0/M_PI;
+            double t_lat=0,t_lon=0;
+            t_lat = y * -rad2deg;
+            t_lon = x * rad2deg;
+            
+            if( t_lat < 0 ){
+                m_latSpin->setValue( -t_lat );
+                m_sRadio->setChecked( true );
+            } else {
+                m_latSpin->setValue( t_lat );
+                m_nRadio->setChecked( true );
+            }
+            
+            if( t_lon < 0 ){
+                m_lonSpin->setValue( -t_lon );
+                m_wRadio->setChecked( true );
+            } else {
+                m_lonSpin->setValue( t_lon );
+                m_eRadio->setChecked( true );
+            }
+            
+            emit gpsPositionChanged( t_lat, t_lon );
+        }
+    }
 }
 
 

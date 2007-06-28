@@ -44,6 +44,9 @@ class KAtlasViewInputHandler  : public QObject
     // Mouse button menus
     void lmbRequest( int, int );
     void rmbRequest( int, int );
+    
+    //Gps coordinates
+    void gpsCoordinates( int, int );
 
     void mouseGeoPosition( QString );
 

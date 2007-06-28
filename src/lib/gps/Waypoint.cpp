@@ -9,12 +9,15 @@
 //
 
 #include "Waypoint.h"
+#include "katlasdirs.h"
+#include <QPixmap>
 
 Waypoint::Waypoint( double lat, double lon ):
-                    AbstractLayerData( lat, lon ), GpsElement(),
-                    m_elevation(0), m_time(0), m_magVariation(0),
-                    m_geoIdHeight(0), m_gpsSymbol(0), m_type(0),
-                    m_fix(0), m_satalites(0), m_hdop(0), m_vdop(0),
+                    AbstractLayerData( lat, lon ),
+                    GpsElement(), m_elevation(0), m_time(0),
+                    m_magVariation(0), m_geoIdHeight(0),
+                    m_gpsSymbol(0), m_type(0), m_fix(0),
+                    m_satalites(0), m_hdop(0), m_vdop(0),
                     m_pdop(0), m_ageOfGpsData(0), m_dgpsid(0){}
 
 Waypoint::Waypoint( GeoPoint position ):
@@ -41,6 +44,12 @@ Waypoint::~Waypoint()
     delete m_pdop;
     delete m_ageOfGpsData;
     delete m_dgpsid;
+}
+
+QPixmap Waypoint::symbolPixmap()
+{
+    QPixmap temp( KAtlasDirs::path( "bitmaps/gpsHere.png" ));
+    return temp;
 }
 
 void Waypoint::setLat( const double &lat )

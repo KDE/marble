@@ -1,3 +1,26 @@
+2007-06-28  Andrew Manson   <g.real.ate@gmail.com>
+    
+    Added a new tab to MarbleControlBox, Gps Option, and setup method
+    in MarbleControlBox.h/cpp. Also connected nessary signals for 
+    using GpsOption.
+    *src/MarbleControlBox.{h,cpp} (setupGpsOption) : New Method
+    
+    Added accessors and setters in MarbleWidget for showing the
+    Gps Layer
+    *src/lib/MarbleWidget.{h,cpp} (showGps, setShowGps) : New Methods
+    
+    Fixed the constructor of AbstractLayer to include
+    AbstractContainer and fixed the look. Also included bool value in 
+    Layer to mark if it is visible. 
+    *src/lib/AbstractLayer/AbstractLayer.{h,cpp} (m_showLayer):New 
+    
+    Added nessary variables to MarbleModelPrivate for the gps layer
+    * src/lib/MarbleModel.cpp (m_gpsLayer, m_showGps) : New Variables
+   
+    Added new file to take care of gps layer with a Waypoint to
+    represent current position.
+    * src/lib/gps/GpsLayer: new
+    
 2007-06-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Temporarily bring back the old paintPlaceFolder due to problems

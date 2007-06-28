@@ -47,6 +47,7 @@
 
 class PlaceMark;
 class PlaceMarkManager;
+class GpsLayer;
 class MarbleModelPrivate;
 
 /** 
@@ -133,6 +134,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     FlatScanlineTextureMapper
 #endif
         *textureMapper()      const;
+    GpsLayer           *gpsLayer()           const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
@@ -169,18 +171,32 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param  visible  visibility of the elevation model
      */
     void setShowElevationModel( bool visible );
+    
+    /**
+     * @brief Return whether the Gps Data is visible.
+     * @return The Gps Data visibility.
+     */
+    bool showGps() const;
+    
+    /**
+     * @brief Set whether the Gps Data is visible.
+     * @param visible visibility of the Gps Data.
+     */
+    void setShowGps( bool visible );
 
  Q_SIGNALS:
     void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
 
     void modelChanged();
+    void timeout();
 
  private Q_SLOTS:
     void notifyModelChanged();
 
  private:
     MarbleModelPrivate  * const d; 
+    QTimer *m_timer;
 };
 
 

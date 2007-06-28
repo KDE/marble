@@ -20,6 +20,7 @@
 
 
 #include "ui_MarbleControlBox.h"
+#include "lib/GeoPoint.h"
 
 
 /** @file
@@ -86,9 +87,16 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
     void centerOn(const QModelIndex&);
 
     void selectMapTheme( const QString& );
+    
+    void gpsInputDisabled( bool );
+    void gpsPositionChanged( double lat, double lon);
+    void updateGps();
+   
 
  public slots:
     void changeZoom(int);
+    void disableGpsInput( bool );
+    void recieveGpsCoordinates( double, double, GeoPoint::Unit );
 
  private slots:
     /// called whenever the user types something new in the search box
@@ -105,6 +113,8 @@ class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
     QString        m_searchTerm;
     bool           m_searchTriggered;
     int            m_minimumzoom;
+    
+    void setupGpsOption();
 };
 
 #endif // MARBLECONTROLBOX_H

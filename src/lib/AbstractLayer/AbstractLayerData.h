@@ -15,12 +15,14 @@
 
 #include "../GeoPoint.h"
 
+class QPixmap;
+
 
 class AbstractLayerData
 {
  public:
     //!make a Data Object from GeoPoint
-    AbstractLayerData( GeoPoint position );
+    AbstractLayerData( const GeoPoint &position );
     //!make a Data object from latitude and londitude
     AbstractLayerData( double lat, double lon);
     
@@ -32,21 +34,32 @@ class AbstractLayerData
      * draw is intended to either provide the details necessary for the
      * view to draw, or given a pointer to the view it may draw itself
      */
-    virtual void draw() = 0;
+   // virtual void draw() = 0;
     
-    /*! \brief check if this is visible on screen
-     * 
+    virtual QPixmap symbolPixmap() = 0;
+    
+    /**
+     * @brief check if this Layer Data is visible on screen
+     * @return the visibliliy of this Data
      */
-    virtual bool visible() const = 0;
+    bool visible() const;
+    /**
+     * @brief set whether this Layer Data is visible
+     * @param visible the visiblity of this Data
+     */
+    void setVisible( bool visible );
     
     //!accessor
     GeoPoint position() const { return *m_position; } 
    
-    void setPosition( const GeoPoint &posIn ) { *m_position = posIn; }
+    void setPosition( const GeoPoint &posIn );
+    void setPosition( const double &lat, const double &lon);
     
  private:
     //!the position of the Data item
     GeoPoint *m_position;
+    
+    bool m_visible;
     
     //insert generic (if any) view variables here
 };

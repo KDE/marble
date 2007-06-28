@@ -25,6 +25,7 @@
 #include "katlastilecreatordialog.h"
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
+#include "gps/GpsLayer.h"
 
 const double RAD2INT = 21600.0 / M_PI;
 
@@ -53,6 +54,9 @@ class MarbleModelPrivate
     PlaceMarkContainer  *m_placeMarkContainer;
     PlaceMarkModel      *m_placemarkmodel;
     PlaceMarkPainter    *m_placemarkpainter;
+    
+    //Gps Stuff
+    GpsLayer            *m_gpsLayer;
 
     Quaternion           m_planetAxis;
     Quaternion           m_planetAxisUpdated;
@@ -72,6 +76,12 @@ class MarbleModelPrivate
 MarbleModel::MarbleModel( QWidget* parent )
     : d( new MarbleModelPrivate )
 {
+    m_timer = new QTimer( this );
+    m_timer->start( 1000 );
+    
+    connect( m_timer, SIGNAL( timeout() ), 
+             this, SIGNAL( timeout() ) );
+    
     d->m_parent = parent;
 
     d->m_texmapper = 0;
@@ -121,6 +131,8 @@ MarbleModel::MarbleModel( QWidget* parent )
 
     d->m_placemarkmodel   = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
+    
+    d->m_gpsLayer = new GpsLayer();
 }
 
 MarbleModel::~MarbleModel()
@@ -159,6 +171,16 @@ bool MarbleModel::showElevationModel() const
 void MarbleModel::setShowElevationModel( bool visible )
 { 
     d->m_showElevationModel = visible;
+}
+
+bool MarbleModel::showGps() const
+{
+    return d->m_gpsLayer->showLayer();
+}
+
+void MarbleModel::setShowGps( bool visible )
+{
+    d->m_gpsLayer->setShowLayer( visible );
 }
 
 
@@ -318,6 +340,12 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
                                                  d->m_radius,
                                                  d->m_placeMarkContainer,
                                                  d->m_planetAxis );
+    }
+    
+    // Paint the Gps Layer
+    if ( d->m_gpsLayer->showLayer() == true ) {
+        d->m_gpsLayer->paint( painter, d->m_canvasimg->size(),
+                              d->m_radius, d->m_planetAxis );
     }
 
     d->m_planetAxisUpdated = d->m_planetAxis;
@@ -484,6 +512,11 @@ FlatScanlineTextureMapper
 PlaceMarkPainter  *MarbleModel::placeMarkPainter() const 
 {
     return d->m_placemarkpainter;
+}
+
+GpsLayer          *MarbleModel::gpsLayer()         const
+{
+    return d->m_gpsLayer;
 }
 
 bool MarbleModel::screenCoordinates( const double lng, const double lat, 

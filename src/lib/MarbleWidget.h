@@ -41,6 +41,7 @@ class TextureColorizer;
 class MeasureTool;
 class KAtlasTileCreatorDialog;
 class MarbleWidgetPrivate;
+class GpsLayer;
 
 
 /** 
@@ -268,6 +269,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The lakes' visibility.
      */
     bool  showLakes() const;
+    
+    /**
+     * @brief Return whether Gps Data is visible.
+     * @return The Gps Data's visibility.
+     */
+    bool  showGps() const;
 
     /**
      * @brief  Return whether quick and dirty rendering is enabled.
@@ -443,6 +450,29 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the lakes
      */
     void setShowLakes( bool visible );
+    
+    /**
+     * @brief Set whether Gps Data is visible
+     * @param visible  visibility of the Gps Data
+     */
+    void setShowGps( bool visible );
+    
+    /**
+     * @brief Set the current Gps position
+     * @param lat the new latitude value
+     * @param lon the new longitude value
+     */
+    void changeGpsPosition( double lat, double lon);
+    
+     /**
+     * @brief used to notify about the position of the mouse click
+      */
+    void gpsCoordinatesClick( int, int );
+    
+    /**
+     * @brief updates the gps tracking point by polling
+     */
+    void updateGps();
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used 
@@ -486,7 +516,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  zoomChanged( int );
 
-    void  mouseGeoPosition( QString ); 
+    void  mouseGeoPosition( QString );
+    
+    void gpsClickPos( double, double, GeoPoint::Unit );
 
  protected:
     /**

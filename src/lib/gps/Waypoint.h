@@ -15,6 +15,8 @@
 #include <QtCore/QTime>
 #include <QtCore/QString>
 
+class QPixmap;
+
 /*! \brief representaion of a GPS Waypoint.
  * 
  * A Waypoint is a point of interest, or named feature on a map.
@@ -26,6 +28,10 @@ class Waypoint : public AbstractLayerData, public GpsElement
     Waypoint( GeoPoint position );
     
     ~Waypoint();
+    
+    virtual QPixmap symbolPixmap();
+    //virtual void draw();
+    
     void setLat( const double &lat );
     void setLon( const double &lon );
     void setElevation( const double &elevation );

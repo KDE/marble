@@ -169,6 +169,10 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             // Regarding mouse button releases:
             if ( e->type() == QEvent::MouseButtonRelease
                  && event->button() == Qt::LeftButton) {
+                
+                //emit current gps coordinates to be be interpreted 
+                //as requested
+                emit gpsCoordinates( m_leftpressedx, m_leftpressedy );
 
                 // Show menu if mouse cursor position remains unchanged
                 // the click takes less than 250 ms

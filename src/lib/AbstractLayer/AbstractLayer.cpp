@@ -15,53 +15,73 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QObject>
+#include <QPoint>
 
+#include "clippainter.h"
 
-AbstractLayer::AbstractLayer( QObject *parent ) 
+AbstractLayer::AbstractLayer( QObject *parent,
+                              AbstractLayerContainer *container) 
     : QObject( parent )
 {
-    //no layer common things have been so far identified
+    m_layerContainer = container;
+    m_showLayer = false;
 }
 
 bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
                                             const  QSize &screenSize, 
                                             Quaternion invRotAxis, 
-                                            int radius, int &xOut,
-                                            int &yOut )
+                                            int radius, 
+                                            QPoint *point)
 {
     Quaternion qpos(_lon,_lat); //temp
     qpos.rotateAroundAxis(invRotAxis);
 
     if ( qpos.v[Q_Z]>0 ) {
-        xOut = (int)( ( screenSize.width()/2 ) 
-                + ( radius * qpos.v[Q_X] ) );
-        yOut = (int)( ( screenSize.height()/2 ) 
-                + ( radius * qpos.v[Q_Y] ) );
+        point->setX( (int)( ( screenSize.width()/2 ) 
+                + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( (int)( ( screenSize.height()/2 ) 
+                + ( radius * qpos.v[Q_Y] ) ) );
         return true;
     } else {
         return false;
     }
 }
 
-bool AbstractLayer::getPixelPosFromGeoPoint( Quaternion position,
+bool AbstractLayer::getPixelPosFromGeoPoint( GeoPoint position,
                                             const QSize &screenSize, 
                                             Quaternion invRotAxis,
-                                            int radius, int &xOut, 
-                                            int &yOut )
+                                            int radius, 
+                                            QPoint *point)
 {
-    Quaternion qpos = position; //temp
+    Quaternion qpos = position.quaternion(); //temp
     qpos.rotateAroundAxis( invRotAxis );
 
     if( qpos.v[Q_Z]>0 ){
-        xOut = (int)( ( screenSize.width()/2 )
-                + ( radius * qpos.v[Q_X] ) );
-        yOut = (int)( ( screenSize.height()/2 )
-                + ( radius * qpos.v[Q_Y] ) );
+        point->setX( (int)( ( screenSize.width()/2 )
+                + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( (int)( ( screenSize.height()/2 )
+                + ( radius * qpos.v[Q_Y] ) ) );
         
         return true;
     } else {
         return false;
     }
+}
+
+bool AbstractLayer::showLayer() const 
+{
+    return m_showLayer;
+}
+
+void AbstractLayer::setShowLayer( bool visible ) 
+{
+    m_showLayer = visible;
+}
+
+void AbstractLayer::paint(ClipPainter *p, const QSize& s,double d,
+                          Quaternion q)
+{
+    //nothing
 }
 
 

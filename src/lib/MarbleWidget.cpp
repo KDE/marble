@@ -24,6 +24,7 @@
 #include "katlasviewinputhandler.h"
 #include "katlasviewpopupmenu.h"
 #include "katlastilecreatordialog.h"
+#include "gps/GpsLayer.h"
 
 #include "measuretool.h"
 
@@ -133,6 +134,8 @@ void MarbleWidget::construct(QWidget *parent)
 	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
     connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
 	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
+    connect( d->m_inputhandler, SIGNAL( gpsCoordinates( int, int) ),
+             this, SLOT( gpsCoordinatesClick( int, int ) ) );
 
     connect( d->m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
          this, SIGNAL( mouseGeoPosition( QString ) ) ); 
@@ -143,6 +146,9 @@ void MarbleWidget::construct(QWidget *parent)
 	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
     connect( d->m_popupmenu,   SIGNAL( removeMeasurePoints() ),
 	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );	
+    
+    connect( d->m_model, SIGNAL( timeout() ),
+             this, SLOT( updateGps() ) );
 
     d->m_logzoom  = 0;
     d->m_zoomStep = 40;
@@ -263,6 +269,11 @@ bool MarbleWidget::showRivers() const
 bool MarbleWidget::showLakes() const
 { 
     return d->m_model->vectorComposer()->showLakes();
+}
+
+bool MarbleWidget::showGps() const
+{
+    return d->m_model->gpsLayer()->showLayer();
 }
 
 bool  MarbleWidget::quickDirty() const
@@ -634,6 +645,36 @@ void MarbleWidget::setShowRivers( bool visible )
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->m_model->vectorComposer()->setShowLakes( visible );
+    repaint();
+}
+
+void MarbleWidget::setShowGps( bool visible )
+{
+    d->m_model->gpsLayer()->setShowLayer( visible );
+    repaint();
+}
+
+void MarbleWidget::changeGpsPosition( double lat, double lon)
+{
+    d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
+    repaint();
+}
+
+void MarbleWidget::gpsCoordinatesClick( int x, int y)
+{
+    bool valid = false;
+    double alphaResult=0,betaResult=0;
+    
+    valid = globeSphericals( x, y, alphaResult, betaResult );
+    
+    if (valid){
+        emit gpsClickPos( alphaResult, betaResult, GeoPoint::Radian);
+    }
+}
+
+void MarbleWidget::updateGps()
+{
+    d->m_model->gpsLayer()->updateGps();
     repaint();
 }
 

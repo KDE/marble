@@ -18,6 +18,9 @@
 #include <QtCore/QObject>
 #include <QtCore/QSize>
 
+class ClipPainter;
+class QPoint;
+
 
 /*! \brief This class is to represent the base class for each of the
  * levels in the rendering of the Marble display.
@@ -28,57 +31,80 @@ class AbstractLayer: public QObject
 {
     Q_OBJECT
 
-    public:
-        //!an empty constructor, so far.
-        AbstractLayer(QObject * parent=0);
+ public:
+    ///an empty constructor, so far.
+    AbstractLayer( QObject * parent=0, 
+                  AbstractLayerContainer * container=0 );
+    
+    /** \brief get screen pixel position
+     * 
+     * Method to simplify the retrieval of the screen pixel position 
+     * from a longditude and latitude.
+     * \param _long the longitude of the point we want to find
+     * \param _lat the latitude of the point we want to find 
+     * \param invRotAxis inversion of the Quaternion status of the
+     * globe
+     * \param screenSize size of the screen
+     * \param xOut where the x value of the point will be stored
+     * \param yOut where the y value of the point will be stored
+     * \param radius FIXME: add roll of the radius in this comment
+     * \return boolean value as to whether the point is visible on 
+     * screen
+     **/
+    bool getPixelPosFromGeoPoint(double _lon, double _lat, 
+                                 const QSize &screenSize, 
+                                 Quaternion invRotAxis, 
+                                 int radius,
+                                 QPoint *position);
 
-        /*! \brief get screen pixel position
-         * 
-         * Method to simplify the retrieval of the screen pixel position 
-         * from a longditude and latitude.
-         * \param _long the longitude of the point we want to find
-         * \param _lat the latitude of the point we want to find 
-         * \param invRotAxis inversion of the Quaternion status of the
-         * globe
-         * \param screenSize size of the screen
-         * \param xOut where the x value of the point will be stored
-         * \param yOut where the y value of the point will be stored
-         * \param radius FIXME: add roll of the radius in this comment
-         * \return boolean value as to whether the point is visible on 
-         * screen
-         **/
-        bool getPixelPosFromGeoPoint(double _lon, double _lat, 
-                                     const QSize &screenSize, 
-                                     Quaternion invRotAxis, 
-                                     int radius,
-                                     int &xOut, int &yOut);
+     /**
+      *@brief get screen pixel position. 
+      * Method to simplify the retreval of the screen pixel position
+      * from a Quaternion.
+      * @param position the position of the point we want to find
+      * @param invRotAxis inversion of the Quaternion status of the
+      * globe
+      * @param screenSize size of the screen
+      * @param xOut where the x value of the point will be stored
+      * @param yOut where the y value of the point will be sotred
+      * @param radius FIXME: add roll of the radius in this comment
+      * @return boolean value as to whether the point is visable on 
+      * screen
+      **/ 
+    bool getPixelPosFromGeoPoint(GeoPoint position, 
+                                 const QSize &screenSize, 
+                                 Quaternion invRotAxis, 
+                                 int radius,
+                                 QPoint *position);
+    
+    /**
+     * @brief method to paint layer
+     */
+    virtual void paint(ClipPainter*, const QSize& ,double, 
+                       Quaternion);
+    
+    /**
+     * @brief  Return whether the Layer is visible.
+     * @return The Layer visibility.
+     */
+    bool  showLayer() const;
+    
+    /**
+     * @brief  Set whether the Layer is visible
+     * @param  visible  visibility of the Layer
+     */
+    void setShowLayer( bool visible );
 
-         /*!\brief get screen pixel position
-          * 
-          * Method to simplify the retreval of the screen pixel position
-          * from a Quaternion.
-          * \param position the position of the point we want to find
-          * \param invRotAxis inversion of the Quaternion status of the
-          * globe
-          * \param screenSize size of the screen
-          * \param xOut where the x value of the point will be stored
-          * \param yOut where the y value of the point will be sotred
-          * \param radius FIXME: add roll of the radius in this comment
-          * \return boolean value as to whether the point is visable on 
-          * screen
-          **/ 
-        bool getPixelPosFromGeoPoint(Quaternion position, 
-                                     const QSize &screenSize, 
-                                     Quaternion invRotAxis, 
-                                     int radius,
-                                     int &xOut, int &yOut);
+    
 
-    private:
-        /*!
-         * AbstractLayerData container with all the nessary data for
-         * this layer.
-         */
-        AbstractLayerContainer *layerData;
+ private:
+    /**
+     * AbstractLayerContainer with all the nessary data for
+     * this layer.
+     */
+    AbstractLayerContainer *m_layerContainer;
+    
+    bool m_showLayer;
 };
 #endif //ABSTRACTLAYER_H
 
