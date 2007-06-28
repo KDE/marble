@@ -268,6 +268,8 @@ bool MarbleWidget::showLakes() const
 bool  MarbleWidget::quickDirty() const
 { 
 #ifndef FLAT_PROJ
+    // FIXME: This makes a warning:
+    //        "Control reaches the end of non-void function"!
     //return d->m_model->textureMapper()->interlaced();
 #else
     return false;

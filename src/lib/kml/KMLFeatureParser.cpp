@@ -60,9 +60,9 @@ bool KMLFeatureParser::startElement( const QString& namespaceURI,
     return result;
 }
 
-bool KMLFeatureParser::endElement( const QString& namespaceURI,
-                            const QString& localName,
-                            const QString &name )
+bool KMLFeatureParser::endElement( const QString &namespaceURI,
+				   const QString &localName,
+				   const QString &name )
 {
     bool result = false;
 

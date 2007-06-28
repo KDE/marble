@@ -15,7 +15,7 @@
 
 namespace
 {
-    // This variable used to cound number of allocated
+    // This variable used to count number of allocated
     // kml objects. Debug only
     int refCount = 0;
 }

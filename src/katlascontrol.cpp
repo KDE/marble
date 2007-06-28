@@ -39,8 +39,6 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 
     QVBoxLayout *vlayout = new QVBoxLayout( this );
 
-    QHBoxLayout *hlayout = new QHBoxLayout();	
-
     m_splitter->addWidget( m_control );
     m_splitter->addWidget( m_marbleWidget );
     m_splitter->setSizes( QList<int>() << 180 << width()-180 );

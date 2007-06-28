@@ -45,7 +45,7 @@ class AbstractLayerContainer : QVector<AbstractLayerData*>
     explicit AbstractLayerContainer( const QString &name, int size =0 );
     
     //!destructor
-    ~AbstractLayerContainer();
+    virtual ~AbstractLayerContainer();
     
     /*! \brief draw is intended to deal with drawing all visable
      *         Data Objects in this layer.

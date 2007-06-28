@@ -17,9 +17,9 @@
 #include "katlasdirs.h"
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl ) 
-    : m_serverUrl(serverUrl)
-    , m_activatedJobsLimit(5)
+    : m_activatedJobsLimit(5)
     , m_jobQueueLimit(1000)
+    , m_serverUrl(serverUrl)
 {
     m_downloadEnabled = true; //disabled for now
 

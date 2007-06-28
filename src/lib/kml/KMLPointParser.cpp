@@ -59,8 +59,8 @@ bool KMLPointParser::startElement( const QString& namespaceURI,
 }
 
 bool KMLPointParser::endElement( const QString& namespaceURI,
-                            const QString& localName,
-                            const QString& qName )
+				 const QString& localName,
+				 const QString& qName )
 {
     if ( m_parsed ) {
         /*

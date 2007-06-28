@@ -52,8 +52,8 @@ static uchar **jumpTableFromQImage8( QImage &img )
 TextureTile::TextureTile( int id )
     : QObject(),
       m_id(id),
-      m_used(false),
-      m_depth(0)
+      m_depth(0),
+      m_used(false)
 {
       m_rawtile = QImage();
       m_rawtile.setText( "testKey", "testText" );
