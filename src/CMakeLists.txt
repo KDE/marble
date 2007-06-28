@@ -24,11 +24,13 @@ endif (QTONLY)
 set(marble_SRCS
            katlascontrol.cpp
            MarbleControlBox.cpp
+           MarbleTest.cpp
 )
 
 set(marble_HDRS
            katlascontrol.h
            MarbleControlBox.h
+           MarbleTest.h
 )
 
 if (QTONLY)

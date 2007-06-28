@@ -13,8 +13,12 @@
 #include <KLocale>
 #include <KAboutData>
 #include <KCmdLineArgs>
+
+#include <QtCore/QFile>
  
 #include "KdeMainWindow.h"
+
+#include "MarbleTest.h"
 
 #if STATIC_BUILD
  #include <QtCore/QtPlugin>
@@ -36,8 +40,23 @@ int main (int argc, char *argv[])
     KApplication app;
 
     MainWindow *window = new MainWindow();
+    MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
+
     window->resize(680, 640);
     window->show();
+
+    // This should be reimplemented properly using KDE classes
+    for ( int i = 1; i < argc; ++i ) {
+        if ( strcmp( argv[ i ], "--timedemo" ) == 0 )
+        {
+            marbleTest->timeDemo();
+            return 0;
+        }
+        else if ( QFile::exists( app.arguments().at( i ) ) )
+            ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
+    }
+
+    delete marbleTest;
 
     return app.exec();
 }

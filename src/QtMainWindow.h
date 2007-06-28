@@ -19,6 +19,9 @@
 
 class QAction;
 class QMenu;
+
+class KAtlasControl;
+class MarbleWidget;
  
 class MainWindow : public QMainWindow
 {
@@ -26,6 +29,9 @@ class MainWindow : public QMainWindow
 
     public:
         MainWindow(QWidget *parent=0);
+
+        KAtlasControl* marbleControl(){ return m_katlascontrol; }
+        MarbleWidget* marbleWidget(){ return m_katlascontrol->marbleWidget(); }
 
     private:
         void createActions();

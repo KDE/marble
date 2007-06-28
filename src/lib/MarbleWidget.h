@@ -520,6 +520,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     
     void gpsClickPos( double, double, GeoPoint::Unit );
 
+    void timeout(); // we need a better name here!
+
  protected:
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.

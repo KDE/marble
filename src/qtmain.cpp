@@ -10,8 +10,11 @@
 //
 
 #include <QtGui/QApplication>
+#include <QtCore/QFile>
 
 #include "QtMainWindow.h"
+
+#include "MarbleTest.h"
 
 #if STATIC_BUILD
  #include <QtCore/QtPlugin>
@@ -26,8 +29,22 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     MainWindow *window = new MainWindow();
+    MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
+
     window->resize(680, 640);
     window->show();
+
+    for ( int i = 1; i < argc; ++i ) {
+        if ( strcmp( argv[ i ], "--timedemo" ) == 0 )
+        {
+            marbleTest->timeDemo();
+            return 0;
+        }
+        else if ( QFile::exists( app.arguments().at( i ) ) )
+            ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
+    }
+
+    delete marbleTest;
 
     return app.exec();
 }

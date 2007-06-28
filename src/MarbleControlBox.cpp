@@ -174,6 +174,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
                                             GeoPoint::Unit ) ),
              this, SLOT( recieveGpsCoordinates ( double, double,
                                                  GeoPoint::Unit) ) );
+
     connect( m_widget, SIGNAL( timeout() ), 
              this, SIGNAL( updateGps() ) );
 }
