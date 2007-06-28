@@ -12,7 +12,7 @@
 //
 // MarbleModel is the data store and index class for the MarbleWidget.
 //
-
+// #define FLAT_PROJ
 
 #ifndef MARBLEMODEL_H
 #define MARBLEMODEL_H
