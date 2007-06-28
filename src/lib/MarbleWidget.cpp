@@ -357,6 +357,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     else 
 	d->m_crosshair.setEnabled( false );
 
+    d->m_model->placeMarkContainer()->clearTextPixmaps();
     d->m_model->placeMarkContainer()->sort();
 
     repaint();

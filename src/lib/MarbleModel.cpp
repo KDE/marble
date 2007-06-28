@@ -48,7 +48,7 @@ class MarbleModelPrivate
     VectorComposer      *m_veccomposer;
     GridMap             *m_gridmap;
 
-    // Pl_modelaces on the map
+    // Places on the map
     PlaceMarkManager    *m_placemarkmanager;
     PlaceMarkContainer  *m_placeMarkContainer;
     PlaceMarkModel      *m_placemarkmodel;
@@ -116,6 +116,8 @@ MarbleModel::MarbleModel( QWidget* parent )
 
     d->m_placemarkmanager   = new PlaceMarkManager();
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
+
+    d->m_placeMarkContainer ->clearTextPixmaps();
 
     d->m_placemarkmodel   = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
@@ -219,6 +221,8 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
+
+    placeMarkContainer()->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
