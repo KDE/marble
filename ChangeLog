@@ -1,30 +1,35 @@
+2007-08-01  Murad Tagirov  <tmurad@gmail.com>
+
+    Initial commit of kml-tasks file which is a list of tasks to be done
+    * projects/kml/kml-tasks: new
+
 2007-07-01  Inge Wallin  <inge@lysator.liu.se>
 
-	* src/DESIGN: Improve documentation	
+	* src/DESIGN: Improve documentation
 
 2007-06-28  Andrew Manson   <g.real.ate@gmail.com>
-    
+
     Added a new tab to MarbleControlBox, Gps Option, and setup method
-    in MarbleControlBox.h/cpp. Also connected nessary signals for 
+    in MarbleControlBox.h/cpp. Also connected nessary signals for
     using GpsOption.
     *src/MarbleControlBox.{h,cpp} (setupGpsOption) : New Method
-    
+
     Added accessors and setters in MarbleWidget for showing the
     Gps Layer
     *src/lib/MarbleWidget.{h,cpp} (showGps, setShowGps) : New Methods
-    
+
     Fixed the constructor of AbstractLayer to include
-    AbstractContainer and fixed the look. Also included bool value in 
-    Layer to mark if it is visible. 
-    *src/lib/AbstractLayer/AbstractLayer.{h,cpp} (m_showLayer):New 
-    
+    AbstractContainer and fixed the look. Also included bool value in
+    Layer to mark if it is visible.
+    *src/lib/AbstractLayer/AbstractLayer.{h,cpp} (m_showLayer):New
+
     Added nessary variables to MarbleModelPrivate for the gps layer
     * src/lib/MarbleModel.cpp (m_gpsLayer, m_showGps) : New Variables
-   
+
     Added new file to take care of gps layer with a Waypoint to
     represent current position.
     * src/lib/gps/GpsLayer: new
-    
+
 2007-06-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Temporarily bring back the old paintPlaceFolder due to problems
@@ -55,7 +60,7 @@
 	paintPlaceFolder
 
 	Cleaning in preparation for a bugfix
-	* src/lib/GridMap.cpp:  Cleaning 
+	* src/lib/GridMap.cpp:  Cleaning
 	 (createTropics): Show the tropics/polar circles already at radius=400
 	* src/lib/MarbleWidget.cpp (centerOn): Remove superfluous code
 
@@ -90,7 +95,7 @@
 	* src/lib/placemark.cpp: (PlaceMark): Remove initialization of
 	removed members.
 	* src/lib/placemark.h: (PlaceMarkContainer::clearTextPixmaps):
-	Remove 
+	Remove
 	* src/lib/placemarkpainter.h (class PlaceMarkPainter): New members
 	m_visiblePlacemarks, m_visiblePlacemarksPool
 	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): New class
@@ -119,12 +124,12 @@
     * src/lib/gps/Track.[cpp,h] : Added
     * src/lib/gps/Waypoint.[cpp,h] : Added
     * src/lib/gps/WaypointContainer.[cpp,h] : Added
-    
+
     Added Implementations of nessary AbstractLayer classes that are
     extended by the GPS Classes.
     * src/lib/AbstractLayer/AbstractLayerContainer.cpp : Added
     * src/lib/AbstractLayer/AbstractLayerData.cpp : Added
-    
+
 2007-06-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of a simple system to only store pixmaps and other UI data

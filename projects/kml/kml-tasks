@@ -1,0 +1,16 @@
+- Parsing of kml document from QIODevice
+
+- Integration of KMLDocument with PlaceMarkPainter for initial support of kml placemarks
+
+- Apply KMLFolder object to act as a layer
+
+- Initial support of KML style objects (icon style, label style)
+
+- Integration with Digikam. This includes test of kml output of Digikam on Marble
+
+- Sort placemarks while parsing them from input kml stream. This will speed up drawing of placemarks.
+
+- Serialization of in memory kml document structure to disk cache. Introduce options like:
+    * memory cache size
+    * disk cache size
+this will allow to store a big kml documents and efficient memory usage.
