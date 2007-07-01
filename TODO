@@ -68,6 +68,7 @@ Documentation
    - MarbleWidget                                                       done
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
+   - MarbleNavigator                                                    --
 
 OpenStreetMap support for tiles@home
     - we'd like to get the tiles loaded and displayed                   TACK
