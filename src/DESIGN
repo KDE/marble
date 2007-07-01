@@ -11,13 +11,51 @@ The MarbleWidget is a view for the model represented by the MarbleModel
 class, which contains all the data necessary for manipulating and
 displaying the map.
 
-FIXME: Currently the view creates the model, but this will be changed.
-       The model/view separation is not perfect, so we are
-       working on it.  In the future, the main program will be able to
-       create the model and then create the view and controller with 
-       a pointer to the model as a parameter.  This will allow the 
-       model to have several views with separate sizes, orientations 
-       and even projections (flat and spherical, for instance).
+
+1.1  Library
+------------
+
+The MarbleWidget is a very complex widget with lots of helper classes.
+MarbleWidget is contained in a library with just a few exported
+classes.  Here we will present the exported classes of the library:
+
+ - MarbleWidget
+ - MarbleModel
+ - (MarbleControlBox)
+
+These classes comprise the main interface to the Marble library.
+For historical reasons, MarbleControlBox is currently not inside the
+library, but will be moved as soon as possible - definitely before the
+next release. 
+
+
+ - PlaceMarkModel
+ - KAtlasThemeSelectView
+ - LegendBrowser
+ - SearchListView
+ - (MarbleNavigator)
+
+These are mainly parts of the more complex MarbleControlBox.  The
+individual controls inside MarbleControlBox can be used by themselves
+if you want to create a simpler user interface.  
+
+NOTE: MarbleNavigator is currently not part of the library, but it
+      will be moved there before the next release.
+
+
+ - MapTheme
+
+This class contains a set of colors, an icon some other misc data that
+will control the appearence of the map.  By defining a new MapTheme,
+you can give a new appearance of an already existing map.
+
+
+ - KAtlasAboutDialog (to be renamed into MarbleAboutDialog)
+
+This is a special utility class which displays some information about
+Marble, shows the authors and will also show the license in the
+future.
+
 
 
 2. The World Model
@@ -27,14 +65,14 @@ The model of the world consists of 3 different parts, which can be
 viewed as separate layers:
 
  - A pixel based area that is split up into tiles.  Depending on the
-   topic these tiles are produced from different data sources, either
-   from satellite scans or from photographs.
-   The tiles are stored in several different resolutions that are used
-   in different zoom levels. The tiles are automatically generated 
-   the first time that the application is started, and are stored into 
-   $HOME/.marble/data/maps. For packaging purposes or to offer the 
-   same data to multiple users you can move these tiles into the 
-   system directory where marble gets installed (e.g. 
+   dataset, these tiles are produced from different data sources,
+   either from satellite scans or from photographs.  The tiles are
+   stored in several different resolutions that are used in different
+   zoom levels.  The tiles are automatically generated the first time
+   that the application is started, and are stored into
+   $HOME/.marble/data/maps.  For packaging purposes or to offer the
+   same data to multiple users you can move these tiles into the
+   system directory where marble gets installed (e.g.
    /usr/share/apps/marble/data/maps).
 
    The main class of the tiles layer is the TextureMapper, which maps
@@ -51,13 +89,18 @@ viewed as separate layers:
    which contain the actual vectors, but also a bounding box
    that specifies which area is being covered by each polygon.
 
- - Points of interest.  Right now these are mostly cities, but also 
-   some mountains and sea deeps.
+ - Points of interest, represented by the PlaceMark class.  Right now
+   these are mostly cities, but also some mountains and sea deeps.
 
-   The main class of the points is the PlaceMark with a somewhat
-   arbitrary selection of properties.  Another important class is the
-   PlaceContainer which collects a number of PlaceMarks into a
-   container, just like the name suggests.
+   The PlaceMark has a somewhat arbitrary selection of properties
+   which comes from the Google Earth KML format.  This will be
+   restructured in future versions.  Another important class is the
+   PlaceMarkContainer which collects a number of PlaceMarks into a
+   container, just like the name suggests.  A third level is provided
+   by the PlaceMarkManager class which manages several
+   PlaceMarkContainers (currently just one) and also imports and
+   exports it to/from files in various file formats.
+
 
 For most maps, these 3 layers are just painted on top of each other in
 simple bottom top order.  However, the Topographical Atlas View (the
@@ -67,8 +110,8 @@ default view!)  provides a special map in terms of composition:
    the digital elevation data) and a Vector Layer to create a
    recolorized bumpmapped layer via the TextureColorizer class.
 
-All map views and their use of layers get specified in a *.dgml-XML
-file.  The source format for the placemark layer is Google Earth's KML
+All map views and their use of layers get specified in a *.dgml XML
+file.  The source format for the PlaceMark layer is Google Earth's KML
 file format which gets parsed and cached into a temporary binary file
 (.cache) for faster follow-up reading.
 
@@ -100,27 +143,38 @@ FIXME: To be written...
 FIXME: Explain how PlaceMark labels are placed so they don't cover each 
 other.
 
+
 3. The Painting Process
 =======================
 
 FIXME: To be written...
 
 
-4. The Basic Building Blocks
-============================
+4. Library
+==========
 
-Quaternions
+This section describes the library in more detail than the overvew
+above, including the internal classes that are not exported to the
+external applications.  This section is for developers that want to
+develop Marble itself, and not just use the classes in his/her own
+application.
+
+
+4.1 The Basic Building Blocks
+-----------------------------
+
+Quaternion
 GeoPoint, GeoPolygon, PntMap
 ScreenPolygon, VectorMap
 
 
-5. Class Overview
-=================
+4.2. Class Overview
+-------------------
 
 Here follows now a list of classes, their roles and how they interact.
 
 Basic classes
--------------
+- - - - - - -
 
 Quaternion	A simple implementation of the mathematical concept
 		quaternion. 
@@ -155,7 +209,7 @@ PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
 
 
 Model / View
-------------
+- - - - - - -
 
 MarbleModel	The main model.  Contains (among others):
 		 - MapTheme
