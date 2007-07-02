@@ -19,12 +19,18 @@ if (QTONLY)
   if(NOT WIN32)
     add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
-  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${QT_INCLUDE_DIR})
+
+  include_directories(
+    ${QT_INCLUDE_DIR}
+  )
 else (QTONLY)
   if(NOT WIN32)
     add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2)
   endif(NOT WIN32)
-  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
+
+  include_directories(
+    ${KDE4_INCLUDES}
+  )
 endif (QTONLY)
 
 # link_directories (${QT_LIBRARY_DIR})
@@ -50,6 +56,7 @@ set(marblewidget_SRCS
            maptheme.cpp
            MarbleModel.cpp
            MarbleWidget.cpp
+           MarbleControlBox.cpp
            measuretool.cpp
            placemark.cpp
            PlaceMarkContainer.cpp
@@ -95,7 +102,7 @@ set(marblewidget_SRCS
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 
-set (marblewidget_UI katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
+set (marblewidget_UI  MarbleControlBox.ui katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
 )
 MESSAGE( STATUS "${marble_UI}" )
 
@@ -173,6 +180,7 @@ install( FILES
            maptheme.h
            MarbleModel.h
            MarbleWidget.h
+           MarbleControlBox.h
            measuretool.h
            placemark.h
            PlaceMarkContainer.h

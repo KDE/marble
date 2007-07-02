@@ -1,7 +1,16 @@
+2007-07-02  Inge Wallin  <inge@lysator.liu.se>
+
+	Move MarbleControlBox into the library where it belongs.
+	* src/MarbleControlBox.{h,cpp}: Move to src/lib
+	* src/MarbleControlBox.ui: Move to src/lib and fix includes
+	* src/katlascontrol.cpp: Fix includes
+	* src/CMakeLists.txt: Fix include directories
+	* src/lib/CMakeLists.txt: Fix include directories
+	
 2007-08-01  Murad Tagirov  <tmurad@gmail.com>
 
-    Initial commit of kml-tasks file which is a list of tasks to be done
-    * projects/kml/kml-tasks: new
+	Initial commit of kml-tasks file which is a list of tasks to be done
+	* projects/kml/kml-tasks: new
 
 2007-07-01  Inge Wallin  <inge@lysator.liu.se>
 

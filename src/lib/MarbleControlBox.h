@@ -19,8 +19,11 @@
 #define MARBLECONTROLBOX_H
 
 
+#include "marble_export.h"
+
 #include "ui_MarbleControlBox.h"
-#include "lib/GeoPoint.h"
+
+#include "GeoPoint.h"
 
 
 /** @file
@@ -61,7 +64,7 @@ class MarbleWidget;
  * @see MarbleWidget
  */
 
-class MarbleControlBox : public QWidget, private Ui::MarbleControlBox
+class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControlBox
 {
     Q_OBJECT
 

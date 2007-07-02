@@ -13,23 +13,36 @@ if (QTONLY)
   if(NOT WIN32)
     add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
-  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${CMAKE_BINARY_DIR}/src/lib ${QT_INCLUDE_DIR})
+
+  include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/lib
+    ${CMAKE_CURRENT_BINARY_DIR}/src
+    ${CMAKE_CURRENT_BINARY_DIR}/src/lib
+    ${QT_INCLUDE_DIR}
+  )
 else (QTONLY)
   if(NOT WIN32)
     add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
   endif(NOT WIN32)
-  include_directories (${CMAKE_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/src ${KDE4_INCLUDES})
+
+  include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/lib
+    ${KDE4_INCLUDES}
+  )
+
 endif (QTONLY)
 
 set(marble_SRCS
            katlascontrol.cpp
-           MarbleControlBox.cpp
            MarbleTest.cpp
 )
 
 set(marble_HDRS
            katlascontrol.h
-           MarbleControlBox.h
            MarbleTest.h
 )
 
@@ -49,7 +62,7 @@ if(MINGW)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
 endif(MINGW)
 
-set ( marble_UI MarbleControlBox.ui )
+set ( marble_UI ${CMAKE_SOURCE_DIR}/marble/src/lib/MarbleControlBox.ui )
 
 qt4_add_resources(marble_SRCS marble.qrc)
 

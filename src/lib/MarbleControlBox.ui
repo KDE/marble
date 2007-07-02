@@ -858,17 +858,17 @@
   <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
-   <header>lib/searchlistview.h</header>
+   <header>searchlistview.h</header>
   </customwidget>
   <customwidget>
    <class>LegendBrowser</class>
    <extends>QTextBrowser</extends>
-   <header>lib/LegendBrowser.h</header>
+   <header>LegendBrowser.h</header>
   </customwidget>
   <customwidget>
    <class>KAtlasThemeSelectView</class>
    <extends>QListView</extends>
-   <header>lib/katlasthemeselectview.h</header>
+   <header>katlasthemeselectview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

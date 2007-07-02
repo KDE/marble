@@ -15,8 +15,8 @@
 #include <QtGui/QSplitter>
 #include <QtGui/QStringListModel>
 
-#include <lib/MarbleWidget.h>
-#include <lib/MarbleModel.h>
+#include <MarbleWidget.h>
+#include <MarbleModel.h>
 #include "MarbleControlBox.h"
 
 
