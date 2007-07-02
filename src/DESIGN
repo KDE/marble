@@ -21,12 +21,9 @@ classes.  Here we will present the exported classes of the library:
 
  - MarbleWidget
  - MarbleModel
- - (MarbleControlBox)
+ - MarbleControlBox
 
 These classes comprise the main interface to the Marble library.
-For historical reasons, MarbleControlBox is currently not inside the
-library, but will be moved as soon as possible - definitely before the
-next release. 
 
 
  - PlaceMarkModel
