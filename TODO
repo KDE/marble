@@ -27,8 +27,9 @@ Cleaning
    - MarbleModel                                                        done
    - MarbleControlBox                                                   --
  * float -> double                                                      DONE
+ * Move files into the library                                          INGE
+   - Move MarbleControlBox to src/lib/                                  done
  * Installation issues                                                  TACK
-   - Move MarbleControlBox to src/lib/                                  --
    - Creating tiles during build and fix designer plugin dirs           --
 
 
@@ -60,7 +61,7 @@ Integration with Qt designer
    - MarbleLegend                                                       --
 
  * Installation issues                                                  TACK
-   - Only install MarbleWidget.h and MarbleControlBox.h                 --
+   - Only install the public include files                              --
 
 Documentation
  * Coding standards                                                     DONE
