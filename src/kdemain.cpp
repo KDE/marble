@@ -28,11 +28,11 @@
  
 int main (int argc, char *argv[])
 {
-    KAboutData aboutData( "marble", 
-        "Marble Desktop Globe", "0.3.5", I18N_NOOP("A World Atlas."),
-        KAboutData::License_LGPL, I18N_NOOP("(c) 2007") );
-    aboutData.addAuthor("Torsten Rahn", "Original author and maintainer", "rahn@kde.org");
-    aboutData.addAuthor("Inge Wallin", "co-maintainer", "inge@lysator.liu.se");
+    KAboutData aboutData( "marble", 0, 
+        ki18n("Marble Desktop Globe"), "0.3.5", ki18n("A World Atlas."),
+        KAboutData::License_LGPL, ki18n("(c) 2007") );
+    aboutData.addAuthor(ki18n("Torsten Rahn"), ki18n("Original author and maintainer"), "rahn@kde.org");
+    aboutData.addAuthor(ki18n("Inge Wallin"), ki18n("co-maintainer"), "inge@lysator.liu.se");
     aboutData.setHomepage("http://edu.kde.org/marble");
 
     KCmdLineArgs::init( argc, argv, &aboutData );
