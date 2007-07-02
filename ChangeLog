@@ -1,5 +1,10 @@
 2007-07-02  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix the compile for QTONLY.
+	* CMakeLists.txt: Apply fixes for QTONLY that were done previously
+	for KDE
+	* src/CMakeLists.txt: Separate the QTONLY and KDE cases
+
 	Move MarbleControlBox into the library where it belongs.
 	* src/MarbleControlBox.{h,cpp}: Move to src/lib
 	* src/MarbleControlBox.ui: Move to src/lib and fix includes

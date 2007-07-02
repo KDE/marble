@@ -20,15 +20,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_CURRENT_SOURCE_D
 
 include(DistTarget)
 
-if (NOT QTONLY)
+if (QTONLY)
+  # add a flag to be able to distinguish between qt and kde mode in the sources
+  add_definitions(-DQTONLY)
+else(QTONLY)
   # search packages used by KDE
   find_package(KDE4 REQUIRED)
   include (KDE4Defaults)
   include (MacroLibrary)
-else(NOT QTONLY)
-  # add a flag to be able to distinguish between qt and kde mode in the sources
-  add_definitions(-DQTONLY)
-endif (NOT QTONLY)
+endif (QTONLY)
 
 add_subdirectory(src)
 add_subdirectory(data)

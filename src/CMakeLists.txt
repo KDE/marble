@@ -15,10 +15,10 @@ if (QTONLY)
   endif(NOT WIN32)
 
   include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/lib
-    ${CMAKE_CURRENT_BINARY_DIR}/src
-    ${CMAKE_CURRENT_BINARY_DIR}/src/lib
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/lib
     ${QT_INCLUDE_DIR}
   )
 else (QTONLY)
@@ -62,7 +62,11 @@ if(MINGW)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
 endif(MINGW)
 
-set ( marble_UI ${CMAKE_SOURCE_DIR}/marble/src/lib/MarbleControlBox.ui )
+if (QTONLY)
+  set ( marble_UI ${CMAKE_SOURCE_DIR}/src/lib/MarbleControlBox.ui )
+else (QTONLY)
+  set ( marble_UI ${CMAKE_SOURCE_DIR}/marble/src/lib/MarbleControlBox.ui )
+endif (QTONLY)
 
 qt4_add_resources(marble_SRCS marble.qrc)
 
