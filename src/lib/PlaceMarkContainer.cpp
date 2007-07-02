@@ -14,12 +14,10 @@
 
 PlaceMarkContainer::PlaceMarkContainer()
 {
-    clear();
 }
 
 
 PlaceMarkContainer::PlaceMarkContainer( const QString& name )
     : m_name(name)
 {
-    clear();
 }

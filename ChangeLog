@@ -1,3 +1,12 @@
+2007-07-02 Murad Tagirov  <tmurad@gmail.com>
+
+    Removed calling of "clear" method in constructor of PlaceMarkContainer.
+    * src/lib/PlaceMarkContainer.cpp
+
+    Updated kml class diagram to show how to integrate KMLDocument with
+    current PlaceMarkPainter class. Should discuss with Marble people.
+    * projects/kml/KMLClasses.xmi
+
 2007-07-02  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix the compile for QTONLY.
@@ -11,8 +20,8 @@
 	* src/katlascontrol.cpp: Fix includes
 	* src/CMakeLists.txt: Fix include directories
 	* src/lib/CMakeLists.txt: Fix include directories
-	
-2007-08-01  Murad Tagirov  <tmurad@gmail.com>
+
+2007-07-01  Murad Tagirov  <tmurad@gmail.com>
 
 	Initial commit of kml-tasks file which is a list of tasks to be done
 	* projects/kml/kml-tasks: new
