@@ -6,6 +6,7 @@ Name=Marble
 GenericName=Desktop Globe
 GenericName[es]=Planetario para el escritorio
 GenericName[sv]=Skrivbordsjordglob
+GenericName[uk]=Настільний планетарій
 GenericName[zh_TW]=桌面星象儀
 Icon=marble
 Terminal=false
