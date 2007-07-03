@@ -279,9 +279,7 @@ bool MarbleWidget::showGps() const
 bool  MarbleWidget::quickDirty() const
 { 
 #ifndef FLAT_PROJ
-    // FIXME: This makes a warning:
-    //        "Control reaches the end of non-void function"!
-    //return d->m_model->textureMapper()->interlaced();
+    return d->m_model->textureMapper()->interlaced();
 #else
     return false;
 #endif
@@ -483,11 +481,20 @@ void MarbleWidget::setActiveRegion()
 
     d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
                                  QRegion::Rectangle );
-
+#ifndef FLAT_PROJ
     if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
 	d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
                                       2 * zoom, 2 * zoom, QRegion::Ellipse );
     }
+#else
+    double centerLat = d->m_model->getPlanetAxis().pitch();
+    int yCenterOffset =  (int)((float)(2*zoom / M_PI) * centerLat);
+    int yTop = height()/2 - zoom + yCenterOffset;
+
+    if ( 2*zoom < height() ) {
+	d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
+    }
+#endif
 }
 
 const QRegion MarbleWidget::activeRegion()
@@ -541,6 +548,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                                           d->m_pCanvasImage->height() / 2,
                                           radius, d->m_model->getPlanetAxis(),
                                           true );
+    setActiveRegion();
 #if 0
       else
       {

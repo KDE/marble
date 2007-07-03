@@ -16,7 +16,7 @@
 
 #ifndef MARBLEMODEL_H
 #define MARBLEMODEL_H
-
+#define FLAT_PROJ
 #include "marble_export.h"
 
 /** @file

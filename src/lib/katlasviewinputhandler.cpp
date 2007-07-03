@@ -247,15 +247,28 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 diry = 1;
             if ( diry < -1 )
                 diry = -1;
-
+#ifdef FLAT_PROJ
+            //Dirty hack to make properly behavior for the arrow
+            int radius = m_marbleWidget->model()->radius();
+            double centerLat = m_marbleWidget->model()->getPlanetAxis().pitch();
+            int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);
+            int yTop =  m_marbleWidget->height()/2 - radius + yCenterOffset;
+            int yBottom = yTop + 2*radius;
+            yTop = (yTop > 0)? yTop : 0;
+            if ( dirx == 0 && event->y() < yTop)
+                 diry=-1;
+            if ( dirx == 0 && event->y() > yBottom )
+                diry=1;
+#endif
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
                 m_model->rotateBy( -m_marbleWidget->moveStep() * (double)(diry),
                                    -m_marbleWidget->moveStep() * (double)(dirx) );
                 m_marbleWidget->repaint();
+
             }				
-        }				
+        }
 
         m_marbleWidget->setCursor(arrowcur[dirx+1][diry+1]);
 
