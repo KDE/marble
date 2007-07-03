@@ -11822,7 +11822,7 @@ Kuanhsi	Hsinchu Hsien	tw	N	34,1	24.79°N	121.17°E
 Mirnyj	Saha	ru	N	34,1	62.52°N	113.95°E
 Amnat Charoen	Amnat Charoen	th	R	34,1	15.86°N	104.63°E
 Salvatierra	Guanajuato	mx	N	34,1	20.22°N	100.88°W
-Vilafranca del Penedès	Barcelona	es	N	34,1	41.35°N	1.68°W
+Vilafranca del Penedès	Barcelona	es	N	34,1	41.35°N	1.68°E
 Hohoe	Volta	gh	N	34,1	7.15°N	0.47°E
 Bridlington	England	gb	N	34,1	54.10°N	0.21°W
 Mansfield	Texas	us	N	34	32.57°N	97.12°W
@@ -18521,7 +18521,7 @@ Kochang	Chollabuk	kr	N	19,9	35.43°N	126.69°E
 Puchheim	Bayern	de	N	19,9	48.15°N	11.35°E
 Gallup	New Mexico	us	N	19,9	35.52°N	108.74°W
 Bensonville	Montserrado	lr	N	19,9	6.45°N	10.60°W
-Olesa de Montserrat	Barcelona	es	N	19,9	41.55°N	1.90°W
+Olesa de Montserrat	Barcelona	es	N	19,9	41.55°N	1.90°E
 Bû Qâdir	ash-Shalif	dz	N	19,9	36.07°N	1.12°E
 Tianguistenco	México	mx	N	19,8	19.18°N	99.47°W
 South Saint Paul	Minnesota	us	N	19,8	44.89°N	93.04°W
