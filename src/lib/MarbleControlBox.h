@@ -35,6 +35,7 @@
 
 
 class MarbleWidget;
+class MarbleControlBoxPrivate;
 
 /** 
  * @short A widget class that contains all sorts of controls for a
@@ -108,16 +109,14 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
 
+ private:
+    void setupGpsOption();
+
  protected:
     void resizeEvent ( QResizeEvent * );
 
  private:
-    MarbleWidget  *m_widget;
-    QString        m_searchTerm;
-    bool           m_searchTriggered;
-    int            m_minimumzoom;
-    
-    void setupGpsOption();
+    MarbleControlBoxPrivate  * const d;
 };
 
 #endif // MARBLECONTROLBOX_H

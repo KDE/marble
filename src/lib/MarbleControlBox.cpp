@@ -33,15 +33,32 @@
 #include <maptheme.h>
 
 
+class MarbleControlBoxPrivate
+{
+ public:
+
+    MarbleWidget  *m_widget;
+    QString        m_searchTerm;
+    bool           m_searchTriggered;
+    int            m_minimumzoom;
+};
+
+
+// ================================================================
+
+
 MarbleControlBox::MarbleControlBox(QWidget *parent)
     : QWidget( parent ),
-      m_widget( 0 ),
-      m_searchTriggered( false )
+      d( new MarbleControlBoxPrivate )
 {
+    d->m_widget = 0;
+    d->m_searchTerm = QString();
+    d->m_searchTriggered = false;
+    // FIXME: Get this from the widget?
+    d->m_minimumzoom = 950;
+
     setupUi( this );
  
-    m_minimumzoom = 950;
-
     setFocusPolicy( Qt::NoFocus );
 
     toolBoxTab1->setBackgroundRole( QPalette::Window );
@@ -105,78 +122,78 @@ void MarbleControlBox::setupGpsOption()
 
 void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
-    m_widget = widget;
+    d->m_widget = widget;
 
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
-    setLocations( m_widget->placeMarkModel() );
+    setLocations( d->m_widget->placeMarkModel() );
 
     // Initialize the LegendBrowser
-    legendBrowser->setCheckedLocations( m_widget->showPlaces() );
-    legendBrowser->setCheckedCities( m_widget->showCities() );
-    legendBrowser->setCheckedTerrain( m_widget->showTerrain() );
-    legendBrowser->setCheckedBorders( m_widget->showBorders() );
-    legendBrowser->setCheckedWaterBodies( m_widget->showLakes()
-                                          && m_widget->showRivers() );
-    legendBrowser->setCheckedGrid( m_widget->showGrid() );
-    legendBrowser->setCheckedIceLayer( m_widget->showIceLayer() );
-    legendBrowser->setCheckedRelief( m_widget->showRelief() );
-    legendBrowser->setCheckedWindRose( m_widget->showWindRose() );
-    legendBrowser->setCheckedScaleBar( m_widget->showScaleBar() );
+    legendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
+    legendBrowser->setCheckedCities( d->m_widget->showCities() );
+    legendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
+    legendBrowser->setCheckedBorders( d->m_widget->showBorders() );
+    legendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
+                                          && d->m_widget->showRivers() );
+    legendBrowser->setCheckedGrid( d->m_widget->showGrid() );
+    legendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
+    legendBrowser->setCheckedRelief( d->m_widget->showRelief() );
+    legendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
+    legendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
 
     // Connect necessary signals.
-    connect( this, SIGNAL(goHome()),         m_widget, SLOT(goHome()) );
-    connect( this, SIGNAL(zoomChanged(int)), m_widget, SLOT(zoomView(int)) );
-    connect( this, SIGNAL(zoomIn()),         m_widget, SLOT(zoomIn()) );
-    connect( this, SIGNAL(zoomOut()),        m_widget, SLOT(zoomOut()) );
+    connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
+    connect( this, SIGNAL(zoomChanged(int)), d->m_widget, SLOT(zoomView(int)) );
+    connect( this, SIGNAL(zoomIn()),         d->m_widget, SLOT(zoomIn()) );
+    connect( this, SIGNAL(zoomOut()),        d->m_widget, SLOT(zoomOut()) );
 
-    connect( this, SIGNAL(moveLeft()),  m_widget, SLOT(moveLeft()) );
-    connect( this, SIGNAL(moveRight()), m_widget, SLOT(moveRight()) );
-    connect( this, SIGNAL(moveUp()),    m_widget, SLOT(moveUp()) );
-    connect( this, SIGNAL(moveDown()),  m_widget, SLOT(moveDown()) );
+    connect( this, SIGNAL(moveLeft()),  d->m_widget, SLOT(moveLeft()) );
+    connect( this, SIGNAL(moveRight()), d->m_widget, SLOT(moveRight()) );
+    connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
+    connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
 
-    connect(m_widget, SIGNAL(zoomChanged(int)), 
+    connect(d->m_widget, SIGNAL(zoomChanged(int)), 
 	    this,     SLOT(changeZoom(int)));
     connect(this,     SIGNAL(centerOn(const QModelIndex&)),
-	    m_widget, SLOT(centerOn(const QModelIndex&)));
+	    d->m_widget, SLOT(centerOn(const QModelIndex&)));
     connect(this,     SIGNAL(selectMapTheme(const QString&)),
-	    m_widget, SLOT(setMapTheme(const QString&)));
+	    d->m_widget, SLOT(setMapTheme(const QString&)));
 
     connect( legendBrowser, SIGNAL( toggledLocations( bool ) ),
-             m_widget, SLOT( setShowPlaces( bool ) ) );
+             d->m_widget, SLOT( setShowPlaces( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledCities( bool ) ),
-             m_widget, SLOT( setShowCities( bool ) ) );
+             d->m_widget, SLOT( setShowCities( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledTerrain( bool ) ),
-             m_widget, SLOT( setShowTerrain( bool ) ) );
+             d->m_widget, SLOT( setShowTerrain( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledBorders( bool ) ),
-             m_widget, SLOT( setShowBorders( bool ) ) );
+             d->m_widget, SLOT( setShowBorders( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             m_widget, SLOT( setShowRivers( bool ) ) );
+             d->m_widget, SLOT( setShowRivers( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             m_widget, SLOT( setShowLakes( bool ) ) );
+             d->m_widget, SLOT( setShowLakes( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledGrid( bool ) ),
-             m_widget, SLOT( setShowGrid( bool ) ) );
+             d->m_widget, SLOT( setShowGrid( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledIceLayer( bool ) ),
-             m_widget, SLOT( setShowIceLayer( bool ) ) );
+             d->m_widget, SLOT( setShowIceLayer( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledRelief( bool ) ),
-             m_widget, SLOT( setShowRelief( bool ) ) );
+             d->m_widget, SLOT( setShowRelief( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledWindRose( bool ) ),
-             m_widget, SLOT( setShowWindRose( bool ) ) );
+             d->m_widget, SLOT( setShowWindRose( bool ) ) );
     connect( legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
-             m_widget, SLOT( setShowScaleBar( bool ) ) );
+             d->m_widget, SLOT( setShowScaleBar( bool ) ) );
     
     //connect GPS Option signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
-             m_widget, SLOT( setShowGps( bool ) ) );
+             d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
-             m_widget, SLOT( changeGpsPosition( double, double ) ) );
-    connect( m_widget, SIGNAL( gpsClickPos( double, double, 
+             d->m_widget, SLOT( changeGpsPosition( double, double ) ) );
+    connect( d->m_widget, SIGNAL( gpsClickPos( double, double, 
                                             GeoPoint::Unit ) ),
              this, SLOT( recieveGpsCoordinates ( double, double,
                                                  GeoPoint::Unit) ) );
 
-    connect( m_widget, SIGNAL( timeout() ), 
-             this, SIGNAL( updateGps() ) );
+    connect( d->m_widget, SIGNAL( timeout() ), 
+             this,        SIGNAL( updateGps() ) );
 }
 
 
@@ -187,7 +204,7 @@ void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 
 int MarbleControlBox::minimumZoom() const
 {
-    return m_minimumzoom;
+    return d->m_minimumzoom;
 }
 
 
@@ -196,7 +213,7 @@ void MarbleControlBox::changeZoom(int zoom)
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
     zoomSlider->setValue( zoom );
-    zoomSlider->setMinimum( m_minimumzoom );
+    zoomSlider->setMinimum( d->m_minimumzoom );
 }
 
 void MarbleControlBox::disableGpsInput( bool in )
@@ -281,19 +298,19 @@ void MarbleControlBox::resizeEvent ( QResizeEvent * )
 
 void MarbleControlBox::searchLineChanged(const QString &search)
 {
-    m_searchTerm = search;
-    if ( m_searchTriggered )
+    d->m_searchTerm = search;
+    if ( d->m_searchTriggered )
         return;
-    m_searchTriggered = true;
+    d->m_searchTriggered = true;
     QTimer::singleShot( 0, this, SLOT( search() ) );
 }
 
 
 void MarbleControlBox::search()
 {
-    m_searchTriggered = false;
+    d->m_searchTriggered = false;
     int  currentSelected = locationListView->currentIndex().row();
-    locationListView->selectItem( m_searchTerm );
+    locationListView->selectItem( d->m_searchTerm );
     if ( currentSelected != locationListView->currentIndex().row() )
         locationListView->activate();
 }

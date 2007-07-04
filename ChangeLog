@@ -1,3 +1,7 @@
+2007-07-04  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleControlBox.{h,cpp}: Use d-pointer
+
 2007-07-02 Murad Tagirov  <tmurad@gmail.com>
 
     Removed calling of "clear" method in constructor of PlaceMarkContainer.
