@@ -94,6 +94,8 @@ if(MINGW)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
 endif(MINGW)
 
+# FIXME: Check why this is different in QTONLY and KDE.
+#        Maybe use CMAKE_CURRENT_SOURCE_DIR instead?
 if (QTONLY)
   set ( marble_UI ${CMAKE_SOURCE_DIR}/src/lib/MarbleControlBox.ui )
 else (QTONLY)
