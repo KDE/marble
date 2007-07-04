@@ -11,7 +11,7 @@ Before Version 0.4 (Monday June, 11th)
 ----------------------------------------------------------------
 
 Hard requirements for the release:
- * Add Downloadmanager class for tiles and Wikipedia articles           TACK
+ * Add Downloadmanager class for tiles and Wikipedia articles           DONE
  * Fix image downloading for Wikipedia                                  TACK
  * Settings saving                                                      --
 
@@ -22,10 +22,7 @@ Features
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       DONE
  * No inline functions in the public classes                            DONE
- * d-pointerify the public classes                                      INGE
-   - MarbleWidget                                                       done
-   - MarbleModel                                                        done
-   - MarbleControlBox                                                   --
+ * d-pointerify the public classes                                      DONE
  * float -> double                                                      DONE
  * Move files into the library                                          INGE
    - Move MarbleControlBox to src/lib/                                  done
@@ -38,6 +35,13 @@ During the SoC projects (0.5)
 
 Misc
  * Create a file with use cases and personas                            TACK
+ * d-pointerify the rest of the public classes                          INGE
+ - PlaceMarkModel                                                       --
+ - KAtlasThemeSelectView                                                --
+ - LegendBrowser                                                        --
+ - SearchListView                                                       --
+ - (MarbleNavigator)                                                    --
+ - MapTheme                                                             --
 
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE
