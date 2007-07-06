@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 void MainWindow::createActions()
  {
-     openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open File"), this );
+     openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
      openAct->setShortcut( tr( "Ctrl+O" ) );
      openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( openAct, SIGNAL( triggered() ), 
