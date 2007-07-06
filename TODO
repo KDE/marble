@@ -24,7 +24,7 @@ Cleaning
  * No inline functions in the public classes                            DONE
  * d-pointerify the public classes                                      DONE
  * float -> double                                                      DONE
- * Move files into the library                                          INGE
+ * Move files into the library                                          DONE
    - Move MarbleControlBox to src/lib/                                  done
  * Installation issues                                                  TACK
    - Creating tiles during build and fix designer plugin dirs           --
@@ -36,12 +36,12 @@ During the SoC projects (0.5)
 Misc
  * Create a file with use cases and personas                            TACK
  * d-pointerify the rest of the public classes                          INGE
- - PlaceMarkModel                                                       --
- - KAtlasThemeSelectView                                                --
- - LegendBrowser                                                        --
- - SearchListView                                                       --
- - (MarbleNavigator)                                                    --
- - MapTheme                                                             --
+   - PlaceMarkModel                                                       --
+   - KAtlasThemeSelectView                                                --
+   - LegendBrowser                                                        --
+   - SearchListView                                                       --
+   - (MarbleNavigator)                                                    --
+   - MapTheme                                                             --
 
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE
