@@ -48,7 +48,7 @@ Waypoint::~Waypoint()
 
 QPixmap Waypoint::symbolPixmap()
 {
-    QPixmap temp( KAtlasDirs::path( "bitmaps/gpsHere.png" ));
+    QPixmap temp( KAtlasDirs::path( "bitmaps/waypoint.png" ));
     return temp;
 }
 

@@ -68,6 +68,7 @@ bitmaps/bathymetry_-4000.png
 bitmaps/bathymetry_-6500.png
 bitmaps/bathymetry_-11000.png
 bitmaps/gpsHere.png
+bitmaps/waypoint.png
 DESTINATION ${data_dir}/bitmaps)
 
 install (FILES 

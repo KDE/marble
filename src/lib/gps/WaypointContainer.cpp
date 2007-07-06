@@ -10,6 +10,14 @@
 
 #include "WaypointContainer.h"
 
+WaypointContainer::WaypointContainer()
+{
+}
+
 void WaypointContainer::processVisable()
+{
+}
+
+void WaypointContainer::draw()
 {
 }

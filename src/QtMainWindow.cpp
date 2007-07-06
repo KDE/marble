@@ -75,6 +75,12 @@ void MainWindow::createActions()
      aboutQtAct = new QAction(tr("About &Qt"), this);
      aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
      connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+     
+     openAct = new QAction( tr( "&Open File"), this );
+     openAct->setShortcut( tr( "Ctrl+O" ) );
+     openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
+     connect( openAct, SIGNAL( triggered() ), 
+              this, SLOT( openFile() ) );
 }
 
 void MainWindow::createMenus()
@@ -82,6 +88,7 @@ void MainWindow::createMenus()
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(exportMapAct);
     fileMenu->addAction(printAct);
+    fileMenu->addAction(openAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
 
@@ -166,6 +173,14 @@ void MainWindow::aboutMarble()
 {
     KAtlasAboutDialog dlg(this);
     dlg.exec();
+}
+
+void MainWindow::openFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open File"), tr("Gpx Files (*.gpx)"));
+    
+    m_katlascontrol->marbleWidget()->openGpxFile( fileName );
 }
 
 #include "QtMainWindow.moc"

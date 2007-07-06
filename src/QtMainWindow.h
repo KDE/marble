@@ -51,6 +51,7 @@ class MainWindow : public QMainWindow
         QAction *whatsThisAct;
         QAction *aboutMarbleAct;
         QAction *aboutQtAct;
+        QAction *openAct;
 
     private slots:
         void exportMapScreenShot();
@@ -58,6 +59,7 @@ class MainWindow : public QMainWindow
         void copyMap();
         void enterWhatsThis();
         void aboutMarble();
+        void openFile();
 };
  
 #endif

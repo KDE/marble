@@ -344,7 +344,7 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
     
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
-        d->m_gpsLayer->paint( painter, d->m_canvasimg->size(),
+        d->m_gpsLayer->paintLayer( painter, d->m_canvasimg->size(),
                               d->m_radius, d->m_planetAxis );
     }
 

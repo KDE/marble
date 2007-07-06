@@ -12,12 +12,13 @@
 
 #include "AbstractLayer/AbstractLayerContainer.h"
 
-class WaypointContainer : AbstractLayerContainer
+class WaypointContainer : public AbstractLayerContainer
 {
  public:
     WaypointContainer();
     WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
     virtual ~WaypointContainer() {};
+    virtual void draw();
 
  protected:
     virtual void processVisable();

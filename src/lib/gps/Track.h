@@ -35,6 +35,12 @@ class Track : public AbstractLayerData, public GpsElement
     //!empty constructor
     Track();
     virtual ~Track();
+    
+    /**
+     * @brief add a Track Segment to this track
+     * @param trackSeg WaypointContainer to be coppied into this Track
+     */
+    void addTrackSeg(WaypointContainer trackSeg);
 
  private:
     //!collection of Track Segments

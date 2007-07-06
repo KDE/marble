@@ -83,10 +83,25 @@ void AbstractLayer::setVisible( bool visible )
 }
 
 
-void AbstractLayer::paint( ClipPainter *p, const QSize& s, double d,
-                           Quaternion q )
+QPoint *AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
+                           double radius, Quaternion rotAxis, 
+                           QPoint *previous, AbstractLayerData *point)
+
 {
-    //nothing
+    //should be pure virtual
+}
+
+void AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
+                           double radius, Quaternion rotAxis, 
+                           AbstractLayerData *point )
+{
+    //should be pure virtual
+}
+
+void AbstractLayer::paintLayer( ClipPainter*, const QSize& screenSize,
+                                double radius, Quaternion rotAxis)
+{
+    //should be pure virtual
 }
 
 

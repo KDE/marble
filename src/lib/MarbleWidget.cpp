@@ -686,6 +686,11 @@ void MarbleWidget::updateGps()
     repaint();
 }
 
+void MarbleWidget::openGpxFile(QString file)
+{
+    d->m_model->gpsLayer()->loadGpx( file );
+}
+
 void MarbleWidget::setQuickDirty( bool enabled )
 {
 #ifndef FLAT_PROJ

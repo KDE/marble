@@ -24,6 +24,11 @@ class QPixmap;
 class Waypoint : public AbstractLayerData, public GpsElement 
 {
  public:
+    /**
+     * @brief Waypoint constructor from latitude and longitude
+     * @param lat double representation of latitude
+     * @param lon double representation of longitude
+     */
     Waypoint( double lat, double lon );
     Waypoint( GeoPoint position );
     

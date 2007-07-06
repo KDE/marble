@@ -12,9 +12,15 @@
 #define GPSLAYER_H
 
 #include "AbstractLayer/AbstractLayer.h"
-//#include "gpsd/libgpsmm.h"
+#include "config-libgps.h"
 
+#ifdef HAVE_LIBGPS
+#include <libgpsmm.h>
+#endif
+
+class WaypointContainer;
 class Waypoint;
+
 
 class GpsLayer : public AbstractLayer
 {
@@ -22,19 +28,34 @@ class GpsLayer : public AbstractLayer
  public:
     GpsLayer( QObject *parent =0 );
     ~GpsLayer();
-    virtual void paint(ClipPainter*, const QSize& ,double,
-                       Quaternion);
+    virtual void paintLayer( ClipPainter *painter, 
+                            const QSize &canvasSize, double radius,
+                            Quaternion rotAxis );
+    virtual QPoint * paint( ClipPainter *painter, 
+                            const QSize &canvasSize, 
+                            double radius, Quaternion invRotAxis, 
+                            AbstractLayerData *point, 
+                            QPoint *previous);
+    virtual void paint(ClipPainter *painter, 
+                       const QSize &canvasSize, 
+                       double radius, Quaternion invRotAxis, 
+                       AbstractLayerData *point);
     void changeCurrentPosition( double lat, double lon );
+    
+    void loadGpx(const QString &fileName);
  public slots:
     void updateGps();
 
     
  private:
-    Waypoint *m_currentPosition;
-    Waypoint *m_gpsTracking;
-  //  gpsmm *m_gpsd;
-    //struct gps_data_t *m_gpsdData;
+    Waypoint            *m_currentPosition;
+    Waypoint            *m_gpsTracking;
+    WaypointContainer   *m_waypoints;
     
+#ifdef HAVE_LIBGPS
+    gpsmm               *m_gpsd;
+    struct gps_data_t   *m_gpsdData;
+#endif
 };
 
 #endif

@@ -2,6 +2,7 @@
 PROJECT(marblewidget)
 cmake_minimum_required(VERSION 2.4.0)
 
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
@@ -96,6 +97,7 @@ set(marblewidget_SRCS
            gps/Track.cpp
            gps/WaypointContainer.cpp
            gps/GpsLayer.cpp
+           gps/GpxSax.cpp
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
@@ -136,9 +138,25 @@ else (QTONLY)
     KDE4_ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
     TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
 endif (QTONLY)
+
+set(HAVE_LIBGPS 0)
+
 if(WIN32)
   TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
+else(WIN32)
+  FIND_PACKAGE(libgps)
+  
+  if(libgps_FOUND)
+     set(HAVE_LIBGPS 1)
+     INCLUDE_DIRECTORIES(${libgps_INCLUDES})
+     TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
+  endif(libgps_FOUND)
+  
+  
 endif(WIN32)
+
+configure_file(config-libgps.h.cmake
+${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
 
 # set_target_properties(marblewidget PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 # needed for marble_export.h

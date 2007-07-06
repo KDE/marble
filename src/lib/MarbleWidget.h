@@ -473,6 +473,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief updates the gps tracking point by polling
      */
     void updateGps();
+    
+    /**
+     * @brief Opens a gpx file for viewing on the Marble Widget
+     */
+    void openGpxFile( QString );
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used 

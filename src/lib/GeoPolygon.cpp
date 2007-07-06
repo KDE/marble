@@ -28,7 +28,7 @@
 #endif
 
 
-const double ARCMINUTE = 10800;
+const double ARCMINUTE = 10800; // distance of 180deg in arcminutes
 
 GeoPolygon::GeoPolygon()
 {

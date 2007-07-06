@@ -34,6 +34,12 @@ class QPoint;
 class AbstractLayer: public QObject
 {
     Q_OBJECT
+ public slots:
+    /**
+     * @brief method to paint the whole Layer
+     */
+    virtual void paintLayer(ClipPainter*, const QSize& screenSize,
+                            double radius, Quaternion rotAxis);
 
  public:
     ///an empty constructor, so far.
@@ -83,12 +89,6 @@ class AbstractLayer: public QObject
                                  QPoint *position);
     
     /**
-     * @brief method to paint layer
-     */
-    virtual void paint(ClipPainter*, const QSize& ,double, 
-                       Quaternion);
-    
-    /**
      * @brief  Return whether the Layer is visible.
      * @return The Layer visibility.
      */
@@ -99,6 +99,23 @@ class AbstractLayer: public QObject
      * @param  visible  visibility of the Layer
      */
     void setVisible( bool visible );
+    
+    /**
+     * @brief method to paint an AbstractLayerData 
+     * this method takes the previously painted point and does not
+     * draw the new one if it is the same.
+     */
+    virtual QPoint * paint(ClipPainter*, const QSize& screenSize,
+                       double radius, Quaternion rotAxis, 
+                       QPoint *previous, AbstractLayerData *point);
+    /**
+     * @brief method to paint an AbstractLayerData 
+     * this method is the un-optimised version that does not check if 
+     * the previousd Abstract Layer Data has already been drawn.
+     */
+    virtual void paint( ClipPainter*, const QSize& screenSize,
+                       double radius, Quaternion rotAxis, 
+                       AbstractLayerData *point );
 
     
 

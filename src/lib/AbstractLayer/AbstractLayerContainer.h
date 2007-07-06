@@ -25,7 +25,7 @@
  * layer data. Each time the view changes the visible data will be
  * altered by a thread that will monitor and deal with this process.
  */
-class AbstractLayerContainer : QVector<AbstractLayerData*>
+class AbstractLayerContainer : public QVector<AbstractLayerData*>
 {
  public:
     /*!\brief simple constructor with optional starting size.
