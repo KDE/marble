@@ -50,4 +50,5 @@ bool GpxSax::endElement( const QString &namespaceURI,
                          const QString &localName,
                          const QString &qName )
 {
+    return true;
 }
