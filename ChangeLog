@@ -1,5 +1,9 @@
 2007-07-06  Torsten Rahn  <rahn@kde.org>
 
+- Fixes for Andrew's File Open Dialog.
+
+2007-07-06  Torsten Rahn  <rahn@kde.org>
+
 * src/lib/placemarkmodel.cpp:
 
 - Patch by Benoit Sigoure aka Tsuna.

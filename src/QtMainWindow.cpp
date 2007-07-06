@@ -43,6 +43,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 void MainWindow::createActions()
  {
+     openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open File"), this );
+     openAct->setShortcut( tr( "Ctrl+O" ) );
+     openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
+     connect( openAct, SIGNAL( triggered() ), 
+              this, SLOT( openFile() ) );
+
      exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
      exportMapAct->setShortcut(tr("Ctrl+S"));
      exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
@@ -76,19 +82,14 @@ void MainWindow::createActions()
      aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
      connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
      
-     openAct = new QAction( tr( "&Open File"), this );
-     openAct->setShortcut( tr( "Ctrl+O" ) );
-     openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
-     connect( openAct, SIGNAL( triggered() ), 
-              this, SLOT( openFile() ) );
 }
 
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(openAct);
     fileMenu->addAction(exportMapAct);
     fileMenu->addAction(printAct);
-    fileMenu->addAction(openAct);
     fileMenu->addSeparator();
     fileMenu->addAction(quitAct);
 
@@ -178,7 +179,7 @@ void MainWindow::aboutMarble()
 void MainWindow::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open File"), tr("Gpx Files (*.gpx)"));
+            tr("Open File"), QString(), tr("GPS Data (*.gpx)"));
     
     m_katlascontrol->marbleWidget()->openGpxFile( fileName );
 }
