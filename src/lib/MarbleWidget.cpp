@@ -273,7 +273,7 @@ bool MarbleWidget::showLakes() const
 
 bool MarbleWidget::showGps() const
 {
-    return d->m_model->gpsLayer()->showLayer();
+    return d->m_model->gpsLayer()->visible();
 }
 
 bool  MarbleWidget::quickDirty() const
@@ -658,7 +658,7 @@ void MarbleWidget::setShowLakes( bool visible )
 
 void MarbleWidget::setShowGps( bool visible )
 {
-    d->m_model->gpsLayer()->setShowLayer( visible );
+    d->m_model->gpsLayer()->setVisible( visible );
     repaint();
 }
 

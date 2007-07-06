@@ -10,13 +10,17 @@
 // Copyright 2007      Andrew Manson <g.real.ate@gmail.com>"
 //
 
+
 #ifndef ABSTRACTLAYER_H
 #define ABSTRACTLAYER_H
 
-#include "../Quaternion.h"
-#include "AbstractLayerContainer.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QSize>
+
+#include "Quaternion.h"
+#include "AbstractLayerContainer.h"
+
 
 class ClipPainter;
 class QPoint;
@@ -25,7 +29,7 @@ class QPoint;
 /*! \brief This class is to represent the base class for each of the
  * levels in the rendering of the Marble display.
  * 
- * It will contain all info nessary to draw a layer.
+ * It will contain all information nessary to draw a layer.
  * */
 class AbstractLayer: public QObject
 {
@@ -36,20 +40,21 @@ class AbstractLayer: public QObject
     AbstractLayer( QObject * parent=0, 
                   AbstractLayerContainer * container=0 );
     
-    /** \brief get screen pixel position
+    /** \brief get screen pixel position from a geographical position
      * 
      * Method to simplify the retrieval of the screen pixel position 
      * from a longditude and latitude.
-     * \param _long the longitude of the point we want to find
+     * \param _lon the longitude of the point we want to find
      * \param _lat the latitude of the point we want to find 
-     * \param invRotAxis inversion of the Quaternion status of the
-     * globe
+     * \param invRotAxis inversion of the Quaternion status of the globe
      * \param screenSize size of the screen
      * \param xOut where the x value of the point will be stored
      * \param yOut where the y value of the point will be stored
      * \param radius FIXME: add roll of the radius in this comment
-     * \return boolean value as to whether the point is visible on 
-     * screen
+     * @return @c true if the pixel is visible on the screen
+     *         @c false if the pixel is outside the screen
+     *
+     * 
      **/
     bool getPixelPosFromGeoPoint(double _lon, double _lat, 
                                  const QSize &screenSize, 
@@ -87,13 +92,13 @@ class AbstractLayer: public QObject
      * @brief  Return whether the Layer is visible.
      * @return The Layer visibility.
      */
-    bool  showLayer() const;
+    bool  visible() const;
     
     /**
      * @brief  Set whether the Layer is visible
      * @param  visible  visibility of the Layer
      */
-    void setShowLayer( bool visible );
+    void setVisible( bool visible );
 
     
 
@@ -104,7 +109,7 @@ class AbstractLayer: public QObject
      */
     AbstractLayerContainer *m_layerContainer;
     
-    bool m_showLayer;
+    bool m_visible;
 };
 #endif //ABSTRACTLAYER_H
 

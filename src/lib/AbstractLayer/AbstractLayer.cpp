@@ -15,52 +15,55 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QObject>
-#include <QPoint>
+#include <QtCore/QPoint>
 
 #include "clippainter.h"
+
 
 AbstractLayer::AbstractLayer( QObject *parent,
                               AbstractLayerContainer *container) 
     : QObject( parent )
 {
     m_layerContainer = container;
-    m_showLayer = false;
+    m_visible        = false;
 }
 
+
 bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
-                                            const  QSize &screenSize, 
-                                            Quaternion invRotAxis, 
-                                            int radius, 
-                                            QPoint *point)
+                                             const QSize &screenSize, 
+                                             Quaternion invRotAxis, 
+                                             int radius, 
+                                             QPoint *point)
 {
-    Quaternion qpos(_lon,_lat); //temp
+    Quaternion  qpos( _lon, _lat ); //temp
     qpos.rotateAroundAxis(invRotAxis);
 
-    if ( qpos.v[Q_Z]>0 ) {
-        point->setX( (int)( ( screenSize.width()/2 ) 
-                + ( radius * qpos.v[Q_X] ) ) );
-        point->setY( (int)( ( screenSize.height()/2 ) 
-                + ( radius * qpos.v[Q_Y] ) ) );
+    if ( qpos.v[Q_Z] > 0 ) {
+        point->setX( (int)( ( screenSize.width() / 2 ) 
+                            + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( (int)( ( screenSize.height() / 2 ) 
+                            + ( radius * qpos.v[Q_Y] ) ) );
         return true;
     } else {
         return false;
     }
 }
 
+
 bool AbstractLayer::getPixelPosFromGeoPoint( GeoPoint position,
-                                            const QSize &screenSize, 
-                                            Quaternion invRotAxis,
-                                            int radius, 
-                                            QPoint *point)
+                                             const QSize &screenSize, 
+                                             Quaternion invRotAxis,
+                                             int radius, 
+                                             QPoint *point)
 {
-    Quaternion qpos = position.quaternion(); //temp
+    Quaternion  qpos = position.quaternion(); //temp
     qpos.rotateAroundAxis( invRotAxis );
 
-    if( qpos.v[Q_Z]>0 ){
-        point->setX( (int)( ( screenSize.width()/2 )
-                + ( radius * qpos.v[Q_X] ) ) );
-        point->setY( (int)( ( screenSize.height()/2 )
-                + ( radius * qpos.v[Q_Y] ) ) );
+    if ( qpos.v[Q_Z] > 0 ){
+        point->setX( (int)( ( screenSize.width() / 2 )
+                            + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( (int)( ( screenSize.height() / 2 )
+                            + ( radius * qpos.v[Q_Y] ) ) );
         
         return true;
     } else {
@@ -68,18 +71,20 @@ bool AbstractLayer::getPixelPosFromGeoPoint( GeoPoint position,
     }
 }
 
-bool AbstractLayer::showLayer() const 
+
+bool AbstractLayer::visible() const 
 {
-    return m_showLayer;
+    return m_visible;
 }
 
-void AbstractLayer::setShowLayer( bool visible ) 
+void AbstractLayer::setVisible( bool visible ) 
 {
-    m_showLayer = visible;
+    m_visible = visible;
 }
 
-void AbstractLayer::paint(ClipPainter *p, const QSize& s,double d,
-                          Quaternion q)
+
+void AbstractLayer::paint( ClipPainter *p, const QSize& s, double d,
+                           Quaternion q )
 {
     //nothing
 }

@@ -175,12 +175,12 @@ void MarbleModel::setShowElevationModel( bool visible )
 
 bool MarbleModel::showGps() const
 {
-    return d->m_gpsLayer->showLayer();
+    return d->m_gpsLayer->visible();
 }
 
 void MarbleModel::setShowGps( bool visible )
 {
-    d->m_gpsLayer->setShowLayer( visible );
+    d->m_gpsLayer->setVisible( visible );
 }
 
 
@@ -343,7 +343,7 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
     }
     
     // Paint the Gps Layer
-    if ( d->m_gpsLayer->showLayer() == true ) {
+    if ( d->m_gpsLayer->visible() ) {
         d->m_gpsLayer->paint( painter, d->m_canvasimg->size(),
                               d->m_radius, d->m_planetAxis );
     }
