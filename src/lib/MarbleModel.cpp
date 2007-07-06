@@ -33,7 +33,7 @@ const double RAD2INT = 21600.0 / M_PI;
 class MarbleModelPrivate
 {
  public:
-    QWidget  *m_parent;
+    QWidget  *m_view;
     QImage   *m_canvasimg;
     QImage   *m_coastimg;
 
@@ -73,7 +73,7 @@ class MarbleModelPrivate
 
 
 
-MarbleModel::MarbleModel( QWidget* parent )
+MarbleModel::MarbleModel( QWidget* view )
     : d( new MarbleModelPrivate )
 {
     m_timer = new QTimer( this );
@@ -82,7 +82,7 @@ MarbleModel::MarbleModel( QWidget* parent )
     connect( m_timer, SIGNAL( timeout() ), 
              this, SIGNAL( timeout() ) );
     
-    d->m_parent = parent;
+    d->m_view = view;
 
     d->m_texmapper = 0;
 
@@ -199,7 +199,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
         qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
-        KAtlasTileCreatorDialog tilecreatordlg( d->m_parent );
+        KAtlasTileCreatorDialog tilecreatordlg( d->m_view );
         tilecreatordlg.setSummary( d->m_maptheme->name(), 
                                    d->m_maptheme->description() );
 #endif

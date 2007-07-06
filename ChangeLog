@@ -1,3 +1,7 @@
+2007-07-06  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleModel.{h,cpp} (MarbleModel): Clean up, and Apidox.
+
 2007-07-04  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleControlBox.{h,cpp}: Use d-pointer

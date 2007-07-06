@@ -12,12 +12,10 @@
 //
 // MarbleModel is the data store and index class for the MarbleWidget.
 //
-//#define FLAT_PROJ
 
 #ifndef MARBLEMODEL_H
 #define MARBLEMODEL_H
-// #define FLAT_PROJ
-#include "marble_export.h"
+
 
 /** @file
  * This file contains the headers for MarbleModel
@@ -25,6 +23,9 @@
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
+
+// #define FLAT_PROJ
+#include "marble_export.h"
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QObject>
@@ -82,7 +83,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_OBJECT
 
  public:
-    MarbleModel( QWidget* parent=0 );
+    /**
+     * @brief  Construct a new MarbleModel.
+     * @param view  The widget that is the view for this Model. 
+     */
+    MarbleModel( QWidget* view=0 );
     virtual ~MarbleModel();
 
     void  setCanvasImage(QImage*);
