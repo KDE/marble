@@ -1,3 +1,9 @@
+2007-07-07  Torsten Rahn  <rahn@kde.org>
+
+- Fix the bug that lets the wrong texture be used at high zooms.
+  The fix only works until zoomlevel 12. For zoom level 13
+  the bug will reappear: It happens due to values exceeding their maximum range.
+
 2007-07-06  Torsten Rahn  <rahn@kde.org>
 
 - Fixes for Andrew's File Open Dialog.

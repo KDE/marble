@@ -105,20 +105,20 @@ void AbstractScanlineTextureMapper::selectTileLevel(const int& radius)
 
 void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 {
-    int ResolutionX = (int)( 4320000.0
+    int ResolutionX = (int)( 1728000000.0
 			     / (double)( TileLoader::levelToColumn( tileLevel ) )
 			     / (double)( m_tileLoader->tileWidth() ) );
-    int ResolutionY = (int)( 2160000.0
+    int ResolutionY = (int)( 864000000.0
 			     / (double)( TileLoader::levelToRow( tileLevel ) )
 			     / (double)( m_tileLoader->tileHeight() ) );
 
-    m_rad2PixelX = ( 2160000.0 / M_PI / (double)(ResolutionX) );
-    m_rad2PixelY = ( 2160000.0 / M_PI / (double)(ResolutionY) );
+    m_rad2PixelX = ( 864000000.0 / M_PI / (double)(ResolutionX) );
+    m_rad2PixelY = ( 864000000.0 / M_PI / (double)(ResolutionY) );
 
 
-    m_fullRangeLng = (int)   ( 4320000.0 / (double)(ResolutionX) ) - 1;
-    m_halfRangeLng = (double)( 2160000.0 / (double)(ResolutionX) );
-    m_quatRangeLat = (double)( 1080000.0 / (double)(ResolutionY) );
+    m_fullRangeLng = (int)   ( 1728000000.0 / (double)(ResolutionX) ) - 1;
+    m_halfRangeLng = (double)( 864000000.0 / (double)(ResolutionX) );
+    m_quatRangeLat = (double)( 432000000.0 / (double)(ResolutionY) );
     m_halfRangeLat = (int)   ( 2.0 * m_quatRangeLat ) - 1;
 
     m_fullNormLng = m_fullRangeLng - m_tilePosX;
