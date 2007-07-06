@@ -18,7 +18,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QSize>
 
-#include "Quaternion.h"
+#include "../Quaternion.h"
 #include "AbstractLayerContainer.h"
 
 
