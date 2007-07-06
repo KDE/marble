@@ -1,3 +1,16 @@
+2007-07-06  Torsten Rahn  <rahn@kde.org>
+
+* src/lib/placemarkmodel.cpp:
+
+- Patch by Benoit Sigoure aka Tsuna.
+
+Fixes Marble's previous habit not to recognize placemark
+names if they are typed in lower case.
+
+This has recently been an issue that was frequently complained about.
+
+Thanks Benoit!
+
 2007-07-06  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleModel.{h,cpp} (MarbleModel): Clean up, and Apidox.

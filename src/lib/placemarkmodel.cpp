@@ -307,7 +307,7 @@ QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role,
             queryString = value.toString();
             simplifiedListName = GeoString::deaccent(listName);
 
-            if ( listName.startsWith( queryString ) 
+            if ( listName.startsWith( queryString, Qt::CaseInsensitive ) 
                  || listName.remove( QChar('\''), Qt::CaseSensitive ).startsWith( queryString )
                  || listName.replace( QChar('-'), QChar(' ') ).startsWith( queryString )
                  || GeoString::deaccent( simplifiedListName ).startsWith( queryString )
