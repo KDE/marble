@@ -8,7 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
-
+//#define FLAT_PROJ
 #include "placemarkpainter.h"
 
 #include <QtCore/QAbstractItemModel>
@@ -151,7 +151,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         int radius,
                                         const PlaceMarkContainer* placecontainer,
-                                        Quaternion rotAxis )
+                                        Quaternion planetAxis )
 {
     //int  imgwidth  = 2 * imgrx;
     //int  imgheight = 2 * imgry;
@@ -162,12 +162,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #if 0
       if ( mark->name().contains( "London" ) ){
       qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
-      invrotAxis.display();
+      invplanetAxis.display();
       }
 #endif
-    // rotAxis.display();
+    // planetAxis.display();
 
-    Quaternion  invRotAxis = rotAxis.inverse();
+    Quaternion  invplanetAxis = planetAxis.inverse();
     Quaternion  qpos;
 
     painter->setPen(QColor(Qt::black));	
@@ -189,7 +189,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     PlaceMark  *mark = 0; 
     int         labelnum = 0;
-
+#ifdef FLAT_PROJ
+    float const centerLat=planetAxis.pitch();
+    float const centerLng=-planetAxis.yaw();
+#endif
     PlaceMarkContainer::const_iterator  it;
     for ( it = placecontainer->constBegin();
           it != placecontainer->constEnd();
@@ -214,15 +217,27 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             continue;
 
         qpos = mark->quaternion();
-
-        qpos.rotateAroundAxis(invRotAxis);
-
         textpixmap = mark->textPixmap();
+
+#ifndef FLAT_PROJ
+        qpos.rotateAroundAxis(invplanetAxis);
 
         if ( qpos.v[Q_Z] > 0 ) {
 
             x = (int)(imgwidth/2 + radius * qpos.v[Q_X]);
             y = (int)(imgheight/2 + radius * qpos.v[Q_Y]);
+
+#else
+        if( true ) {
+            double xyFactor = (float)(2*radius)/M_PI;
+
+            double degX;
+            double degY;
+            qpos.getSpherical(degX,degY);
+
+            x = (int)(imgwidth/2 + xyFactor * (degX + centerLng));
+            y = (int)(imgheight/2 + xyFactor * (degY + centerLat));
+#endif
 
             // Don't process placemarks if they are outside the screen area
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
@@ -405,7 +420,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgheight,
                                         int radius,
                                         const PlaceMarkContainer* placeMarkContainer,
-                                        Quaternion rotAxis )
+                                        Quaternion planetAxis )
 {
     int  x = 0;
     int  y = 0; 
@@ -414,10 +429,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #if 0
       if ( mark->name().contains( "London" ) ){
       qDebug() << "London" << " y: " << QString::number( y ) << " qpos.v[Q_Y]: " << QString::number( qpos.v[Q_Y] );
-      invrotAxis.display();
+      invplanetAxis.display();
       }
 #endif
-    // rotAxis.display();
+    // planetAxis.display();
 
     painter->setPen(QColor(Qt::black));	
 
@@ -446,7 +461,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( 0 && isVisible( (*it)->placeMark(), radius, rotAxis, 
+	if ( 0 && isVisible( (*it)->placeMark(), radius, planetAxis, 
 			imgwidth, imgheight, 
 			x, y ) )
 	    ++it;
@@ -479,7 +494,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         mark  = *it2; // no cast
 
 	// If the PlaceMark is not visible, go to next PlaceMark.
-        if ( !isVisible( mark, radius, rotAxis, imgwidth, imgheight,
+        if ( !isVisible( mark, radius, planetAxis, imgwidth, imgheight,
                          x, y ) ) {
 	    //qDebug() << mark->name() << ": Not visible";
             continue;
@@ -684,7 +699,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
 
 bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
-                                  Quaternion &rotAxis,
+                                  Quaternion &planetAxis,
                                   int imgwidth, int imgheight,
                                   int &x, int &y )
 {
@@ -702,8 +717,8 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
         return false;
 
     Quaternion  qpos       = mark->quaternion();
-    Quaternion  invRotAxis = rotAxis.inverse();
-    qpos.rotateAroundAxis( invRotAxis );
+    Quaternion  invplanetAxis = planetAxis.inverse();
+    qpos.rotateAroundAxis( invplanetAxis );
 
     // Skip the place if it's on the other side of the globe.
     if ( qpos.v[Q_Z] < 0 )
