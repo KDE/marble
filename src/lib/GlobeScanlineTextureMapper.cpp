@@ -18,8 +18,6 @@
 
 // #define INTERLACE
 
-const double TWOPI = 2 * M_PI;
-
 GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) : AbstractScanlineTextureMapper(path,parent)
 {
     m_fastScanLine = 0;

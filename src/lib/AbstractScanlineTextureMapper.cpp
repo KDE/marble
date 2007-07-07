@@ -18,8 +18,6 @@
 
 
 
-const float TWOPI = 2 * M_PI;
-
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& path, QObject * parent )
     :AbstractLayer(parent)
 {

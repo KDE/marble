@@ -8,6 +8,10 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
+#ifndef GPXSAX_H
+#define GPXSAX_H
+
+
 #include <QtXml/QXmlDefaultHandler>
 
 class QXmlAttributes;
@@ -31,3 +35,5 @@ class GpxSax : public QXmlDefaultHandler
     double              m_tempLat;
     double              m_tempLon;
 };
+#endif
+
