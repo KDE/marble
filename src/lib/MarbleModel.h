@@ -201,7 +201,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  private:
     MarbleModelPrivate  * const d; 
-    QTimer *m_timer;
 };
 
 

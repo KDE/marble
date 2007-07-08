@@ -215,8 +215,19 @@ namespace GeoString
 }
 
 
+class PlaceMarkModelPrivate
+{
+ public:
+    QVector<PlaceMark*>  m_placemarkindex;
+};
+
+
+// ================================================================
+
+
 PlaceMarkModel::PlaceMarkModel(QObject *parent)
-    : QAbstractListModel(parent)
+    : QAbstractListModel(parent),
+      d( new PlaceMarkModelPrivate )
 {
 }
 
@@ -228,7 +239,7 @@ int PlaceMarkModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED( parent );
 
-    return m_placemarkindex.size();
+    return d->m_placemarkindex.size();
 }
 
 int PlaceMarkModel::columnCount(const QModelIndex &parent) const
@@ -243,10 +254,10 @@ PlaceMark* PlaceMarkModel::placeMark(const QModelIndex &index) const
     if ( !index.isValid() )
         return 0;
 
-    if ( index.row() >= m_placemarkindex.size() )
+    if ( index.row() >= d->m_placemarkindex.size() )
         return 0;
 
-    return m_placemarkindex.at( index.row() );
+    return d->m_placemarkindex.at( index.row() );
 }
 
 QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const
@@ -254,14 +265,14 @@ QVariant PlaceMarkModel::data(const QModelIndex &index, int role) const
     if ( !index.isValid() )
 	return QVariant();
 
-    if ( index.row() >= m_placemarkindex.size() )
+    if ( index.row() >= d->m_placemarkindex.size() )
         return QVariant();
 
     if ( role == Qt::DisplayRole ) {
-        return m_placemarkindex.at( index.row() )->name();
+        return d->m_placemarkindex.at( index.row() )->name();
     }
     if ( role == Qt::DecorationRole ) {
-        return m_placemarkindex.at( index.row() )->symbolPixmap();
+        return d->m_placemarkindex.at( index.row() )->symbolPixmap();
     }
     else
         return QVariant();
@@ -284,9 +295,10 @@ void PlaceMarkModel::setContainer(PlaceMarkContainer* container)
     PlaceMarkContainer::const_iterator  it;
 
     for ( it=container->constBegin(); it != container->constEnd(); it++ ) {
-        m_placemarkindex << *it;
+        d->m_placemarkindex << *it;
     }
-    qStableSort( m_placemarkindex.begin(), m_placemarkindex.end(), nameSort );
+    qStableSort( d->m_placemarkindex.begin(), d->m_placemarkindex.end(), 
+                 nameSort );
 }
 
 QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role, 

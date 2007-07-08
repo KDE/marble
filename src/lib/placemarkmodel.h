@@ -30,6 +30,8 @@ inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
 }
 
 
+class PlaceMarkModelPrivate; 
+
 class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -54,7 +56,7 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
     void setContainer( PlaceMarkContainer* );
 
  private:
-    QVector<PlaceMark*> m_placemarkindex;
+    PlaceMarkModelPrivate  * const d;
 };
 
 

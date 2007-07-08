@@ -36,12 +36,12 @@ During the SoC projects (0.5)
 Misc
  * Create a file with use cases and personas                            TACK
  * d-pointerify the rest of the public classes                          INGE
-   - PlaceMarkModel                                                       --
-   - KAtlasThemeSelectView                                                --
-   - LegendBrowser                                                        --
-   - SearchListView                                                       --
-   - (MarbleNavigator)                                                    --
-   - MapTheme                                                             --
+   - PlaceMarkModel                                                     done
+   - (KAtlasThemeSelectView): Doesn't have any private members          done
+   - LegendBrowser                                                      done
+   - (SearchListView) does not have any private members                 done
+   - MarbleNavigator                                                    --
+   - MapTheme                                                           --
 
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE

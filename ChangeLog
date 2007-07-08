@@ -1,3 +1,19 @@
+2007-07-07  Inge Wallin  <inge@lysator.liu.se>
+
+	d-pointer'ify LegendBrowser
+	* src/lib/LegendBrowser.{h,cpp}: Use d-pointer
+
+	Remove inline functions in LegendBrowser
+	* src/lib/LegendBrowser.{h,cpp}: Move all the slots into the cpp
+	file, since we don't want exported classes with inline member
+	functions.
+
+	Fix d-pointer for MarbleModel
+	* src/lib/MarbleModel.cpp: Move m_timer to MarbleModelPrivate
+	
+	d-pointer'ify PlaceMarkModel
+	* src/lib/placemarkmodel.{h,cpp}: Use d-pointer
+
 2007-07-07  Torsten Rahn  <rahn@kde.org>
 
 - Fix the bug that lets the wrong texture be used at high zooms.
@@ -23,10 +39,20 @@ Thanks Benoit!
 
 2007-07-06  Inge Wallin  <inge@lysator.liu.se>
 
+	Clean the AbstractLayer class
+	* src/lib/AbstractLayer/AbstractLayer.{h,cpp}: general cleaning
+	(showLayer): renamed into visible.
+	(setShowLayer): renamed into setVisible.
+	* src/lib/MarbleModel.cpp: use new names
+	* src/lib/MarbleWidget.cpp: Use new names
+	* src/lib/FlatScanlineTextureMapper.h: Use new names
+
+	Cleaning and Apidox
 	* src/lib/MarbleModel.{h,cpp} (MarbleModel): Clean up, and Apidox.
 
 2007-07-04  Inge Wallin  <inge@lysator.liu.se>
 
+	d-pointer'ify MarbleControlBox
 	* src/lib/MarbleControlBox.{h,cpp}: Use d-pointer
 
 2007-07-02 Murad Tagirov  <tmurad@gmail.com>

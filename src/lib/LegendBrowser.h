@@ -12,8 +12,6 @@
 //
 // The Legend Browser displays the legend
 //
-// Author: Torsten Rahn
-//
 
 
 #ifndef LEGENDBROWSER_H
@@ -24,25 +22,27 @@
 
 #include "marble_export.h"
 
+
+class LegendBrowserPrivate;
+
 class MARBLE_EXPORT LegendBrowser : public QTextBrowser
 {
-
     Q_OBJECT
 
  public:
     LegendBrowser( QWidget* parent );
 
  public Q_SLOTS:
-    void setCheckedLocations( bool checked ){ m_checkBoxMap[ "locations" ] = checked; }
-    void setCheckedCities( bool checked ){ m_checkBoxMap[ "cities" ] = checked; }
-    void setCheckedTerrain( bool checked ){ m_checkBoxMap[ "terrain" ] = checked; }
-    void setCheckedBorders( bool checked ){ m_checkBoxMap[ "borders" ] = checked; }
-    void setCheckedWaterBodies( bool checked ){ m_checkBoxMap[ "waterbodies" ] = checked; }
-    void setCheckedIceLayer( bool checked ){ m_checkBoxMap[ "ice" ] = checked; }
-    void setCheckedGrid( bool checked ){ m_checkBoxMap[ "grid" ] = checked; }
-    void setCheckedRelief( bool checked ){ m_checkBoxMap[ "relief" ] = checked; }
-    void setCheckedWindRose( bool checked ){ m_checkBoxMap[ "windrose" ] = checked; }
-    void setCheckedScaleBar( bool checked ){ m_checkBoxMap[ "scalebar" ] = checked; }
+    void setCheckedLocations( bool checked );
+    void setCheckedCities( bool checked );
+    void setCheckedTerrain( bool checked );
+    void setCheckedBorders( bool checked );
+    void setCheckedWaterBodies( bool checked );
+    void setCheckedIceLayer( bool checked );
+    void setCheckedGrid( bool checked );
+    void setCheckedRelief( bool checked );
+    void setCheckedWindRose( bool checked );
+    void setCheckedScaleBar( bool checked );
 
  Q_SIGNALS:
     void toggledLocations( bool );
@@ -63,7 +63,8 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
     QVariant loadResource ( int type, const QUrl & name );
     void sendSignals( const QString &name, bool checked );
 
-    QMap<QString, bool> m_checkBoxMap;
+ private:
+    LegendBrowserPrivate  * const d; 
 };
 
 

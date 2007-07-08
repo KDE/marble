@@ -19,8 +19,20 @@
 
 #include "katlasdirs.h"
 
+
+class LegendBrowserPrivate
+{
+ public:
+    QMap<QString, bool>  m_checkBoxMap;
+};
+
+
+// ================================================================
+
+
 LegendBrowser::LegendBrowser( QWidget *parent )
-    : QTextBrowser( parent )
+    : QTextBrowser( parent ),
+      d( new LegendBrowserPrivate )
 {
     setSource( KAtlasDirs::path( "legend.html" ) );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
@@ -38,12 +50,12 @@ QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
     if ( type == QTextDocument::ImageResource && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
     {
         QString checkBoxName = name.toString().section(":", 1, -1);
-        if ( !m_checkBoxMap.contains( checkBoxName ) )
+        if ( !d->m_checkBoxMap.contains( checkBoxName ) )
         {
             return QTextBrowser::loadResource( type, QUrl("./bitmaps/checkbox_disabled.png") );
-//            m_checkBoxMap[ checkBoxName ] = false;
+//            d->m_checkBoxMap[ checkBoxName ] = false;
         }
-        if ( m_checkBoxMap.value( checkBoxName ) == true )
+        if ( d->m_checkBoxMap.value( checkBoxName ) == true )
         {
             return QTextBrowser::loadResource( type, QUrl("./bitmaps/checkbox_checked.png") );
         }
@@ -63,10 +75,10 @@ void LegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     if ( link.toString().startsWith( "checkbox:", Qt::CaseInsensitive ) )
     {
         QString checkBoxName = link.toString().section(":", 1, -1);
-        if ( m_checkBoxMap.contains( checkBoxName ) )
+        if ( d->m_checkBoxMap.contains( checkBoxName ) )
         {
-            m_checkBoxMap[ checkBoxName ] = ( m_checkBoxMap.value( checkBoxName ) == true ) ? false : true;
-            sendSignals( checkBoxName, m_checkBoxMap.value( checkBoxName ) );
+            d->m_checkBoxMap[ checkBoxName ] = ( d->m_checkBoxMap.value( checkBoxName ) == true ) ? false : true;
+            sendSignals( checkBoxName, d->m_checkBoxMap.value( checkBoxName ) );
         }
     }
     setUpdatesEnabled( false );
@@ -113,5 +125,62 @@ void LegendBrowser::sendSignals( const QString &name, bool checked )
         emit toggledScaleBar( checked );
     }
 }
+
+
+// ----------------------------------------------------------------
+//  Lots of slots
+
+
+void LegendBrowser::setCheckedLocations( bool checked )
+{
+    d->m_checkBoxMap[ "locations" ] = checked;
+}
+
+void LegendBrowser::setCheckedCities( bool checked )
+{
+    d->m_checkBoxMap[ "cities" ] = checked;
+}
+
+void LegendBrowser::setCheckedTerrain( bool checked )
+{
+    d->m_checkBoxMap[ "terrain" ] = checked;
+}
+
+void LegendBrowser::setCheckedBorders( bool checked )
+{
+    d->m_checkBoxMap[ "borders" ] = checked;
+}
+
+void LegendBrowser::setCheckedWaterBodies( bool checked )
+{
+    d->m_checkBoxMap[ "waterbodies" ] = checked;
+}
+
+void LegendBrowser::setCheckedIceLayer( bool checked )
+{
+    d->m_checkBoxMap[ "ice" ] = checked;
+}
+
+void LegendBrowser::setCheckedGrid( bool checked )
+{
+    d->m_checkBoxMap[ "grid" ] = checked;
+}
+
+void LegendBrowser::setCheckedRelief( bool checked )
+{
+    d->m_checkBoxMap[ "relief" ] = checked;
+}
+
+void LegendBrowser::setCheckedWindRose( bool checked )
+{
+    d->m_checkBoxMap[ "windrose" ] = checked;
+}
+
+void LegendBrowser::setCheckedScaleBar( bool checked )
+{
+    d->m_checkBoxMap[ "scalebar" ] = checked;
+}
+
+
 
 #include "LegendBrowser.moc"

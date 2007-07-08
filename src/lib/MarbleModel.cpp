@@ -69,6 +69,8 @@ class MarbleModelPrivate
     bool          m_showGrid;
     bool          m_showPlaceMarks;
     bool          m_showElevationModel;
+
+    QTimer       *m_timer;
 };
 
 
@@ -76,11 +78,11 @@ class MarbleModelPrivate
 MarbleModel::MarbleModel( QWidget* view )
     : d( new MarbleModelPrivate )
 {
-    m_timer = new QTimer( this );
-    m_timer->start( 1000 );
+    d->m_timer = new QTimer( this );
+    d->m_timer->start( 1000 );
     
-    connect( m_timer, SIGNAL( timeout() ), 
-             this, SIGNAL( timeout() ) );
+    connect( d->m_timer, SIGNAL( timeout() ), 
+             this,       SIGNAL( timeout() ) );
     
     d->m_view = view;
 
