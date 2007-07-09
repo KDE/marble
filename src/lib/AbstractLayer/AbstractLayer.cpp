@@ -89,6 +89,7 @@ QPoint *AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
 
 {
     //should be pure virtual
+    return 0;
 }
 
 void AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
