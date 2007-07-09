@@ -29,6 +29,7 @@ class MainWindow : public KXmlGuiWindow
 
  public:
     MainWindow(QWidget *parent=0);
+
     KAtlasControl* marbleControl(){ return m_katlascontrol; }
     MarbleWidget* marbleWidget(){ return m_katlascontrol->marbleWidget(); }
 

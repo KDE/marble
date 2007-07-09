@@ -47,6 +47,7 @@ bitmaps/mountain_1.png
 bitmaps/pole_1.png
 bitmaps/pole_2.png
 bitmaps/volcano_1.png
+bitmaps/airport.png
 bitmaps/border_1.png
 bitmaps/border_2.png
 bitmaps/river.png

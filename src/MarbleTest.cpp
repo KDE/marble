@@ -23,11 +23,14 @@ MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
 
 void MarbleTest::timeDemo()
 {
+    m_marbleWidget->zoomView( 1500 );
+//    m_marbleWidget->resize( 800, 600 );
+
     qDebug() << "Starting Performance Test";
     QTime t;
     t.start();
 
-    for ( int j = 0; j < 100; ++j ) {
+    for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
         }
@@ -37,5 +40,5 @@ void MarbleTest::timeDemo()
     }
 
     qDebug( "Timedemo finished in %ims", t.elapsed() );
-    qDebug() <<  QString("= %1 fps").arg(2000*1000/(double)(t.elapsed()));
+    qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
 }

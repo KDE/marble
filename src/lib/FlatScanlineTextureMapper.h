@@ -10,7 +10,7 @@
 class FlatScanlineTextureMapper : public AbstractScanlineTextureMapper {
  public:
     FlatScanlineTextureMapper(const QString& path, QObject * parent = 0);
-    void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis);
+    void mapTexture(QImage* canvasImage, int, const Quaternion& planetAxis);
     
  private:
     float  m_oldCenterLng;

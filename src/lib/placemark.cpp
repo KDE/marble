@@ -60,7 +60,7 @@ void PlaceMark::setCoordinate( double lon, double lat )
 const QSize PlaceMark::symbolSize() const
 {
 
-    static QSize placesize[20] = {
+    static QSize placesize[21] = {
 	QSize(5,5),
 	QSize(5,5),
 	QSize(5,5),
@@ -85,6 +85,8 @@ const QSize PlaceMark::symbolSize() const
 	QSize(6,6),
 	QSize(6,6),
 	QSize(6,6),
+
+    QSize(12,12)
     };
 
     return placesize[m_symbol];
@@ -94,7 +96,7 @@ const QSize PlaceMark::symbolSize() const
 const QPixmap PlaceMark::symbolPixmap() const
 {
 
-    static QPixmap placesymbol[20] = {
+    static QPixmap placesymbol[21] = {
 	QPixmap( KAtlasDirs::path( "bitmaps/city_4_white.png" ) ),
 	QPixmap( KAtlasDirs::path( "bitmaps/city_4_yellow.png" ) ),
 	QPixmap( KAtlasDirs::path( "bitmaps/city_4_orange.png" ) ),
@@ -118,7 +120,9 @@ const QPixmap PlaceMark::symbolPixmap() const
 	QPixmap( KAtlasDirs::path( "bitmaps/pole_1.png" ) ),
 	QPixmap( KAtlasDirs::path( "bitmaps/pole_2.png" ) ),
 	QPixmap( KAtlasDirs::path( "bitmaps/mountain_1.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/volcano_1.png" ) )
+	QPixmap( KAtlasDirs::path( "bitmaps/volcano_1.png" ) ),
+
+    QPixmap( KAtlasDirs::path( "bitmaps/airport.png" ) )
     };
 
     return placesymbol[m_symbol];

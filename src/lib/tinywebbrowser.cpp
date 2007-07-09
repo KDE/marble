@@ -24,7 +24,7 @@
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
-    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/wiki/") );
+    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/") );
     m_downloadManager->setTargetDir( KAtlasDirs::localDir() + "/cache/" );
 
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
@@ -43,45 +43,48 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
 }
 
 
-QVariant TinyWebBrowser::loadResource ( int type, const QUrl & name )
+QVariant TinyWebBrowser::loadResource ( int type, const QUrl & relativeUrl )
 {
-#if 0
-    if ( type != QTextDocument::HtmlResource && !m_urlList.contains(name) ) {
-        qDebug() << QString("Scheduling %1 for download.")
-            .arg(QFileInfo(name.path()).fileName());
-        m_fetchFile->downloadFile( name );
-    }
-#endif
-    // if ( type == QTextDocument::HtmlResource )
-    // {
-    // }
+    QString relativeUrlString = relativeUrl.toString();
 
-    if ( type == QTextDocument::ImageResource ) {
-        // && m_urlList.contains(name))
-	//{
+    if (relativeUrlString.startsWith( '/' ) )
+        relativeUrlString = relativeUrlString.section( '/', 1, -1 );
+
+    qDebug() << "loadResource: " << relativeUrlString;
+
+    if ( type != QTextDocument::HtmlResource && !m_urlList.contains(relativeUrlString) ) {
+        qDebug() << QString("Scheduling %1 for download.")
+            .arg(relativeUrlString);
+        m_downloadManager->addJob( relativeUrlString, /* id= */ 0 );
+    }
+
+    if ( type == QTextDocument::ImageResource && !m_urlList.contains( relativeUrlString ) )
+    {
         QPixmap  emptyPixmap(1,1);
         emptyPixmap.fill( Qt::transparent );
-        // m_urlList.append(name);
 
         return emptyPixmap;
     }
 
-    // m_urlList.append(name);
-    return QTextBrowser::loadResource( type, name );
+    return QTextBrowser::loadResource( type, QUrl( relativeUrlString ) );
 }
 
 
-void TinyWebBrowser::setSource( const QString& relativeUrl )
+void TinyWebBrowser::setSource( const QString& relativeUrlString )
 {
-    m_source = QFileInfo( relativeUrl ).fileName();
-    m_downloadManager->addJob( relativeUrl, /* id= */ 0 );
+    m_source = relativeUrlString;
+    m_downloadManager->addJob( relativeUrlString, /* id= */ 0 );
 }
 
 
-void TinyWebBrowser::slotDownloadFinished( const QString& filename, int )
+void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, int )
 {
-    if ( filename == m_source )	{
-        QTextBrowser::setSource( filename );
+    qDebug() << "downloadFinished" << relativeUrlString;
+//    if ( !m_urlList.contains( relativeUrlString ) )
+//        m_urlList.append( relativeUrlString );
+
+    if ( relativeUrlString == m_source )	{
+        QTextBrowser::setSource( relativeUrlString );
 
         QTextFrameFormat  format = document()->rootFrame()->frameFormat();
         format.setMargin(12);
@@ -89,7 +92,7 @@ void TinyWebBrowser::slotDownloadFinished( const QString& filename, int )
     }
     else {
         qDebug( "Reload" );
-        // reload();
+//        QTextBrowser::setSource( m_source );
         // m_urlList.removeAll();
     }
 }

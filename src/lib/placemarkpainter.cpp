@@ -208,7 +208,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
         // Skip terrain marks if we're not showing terrain.
         if ( m_showTerrain == false
-             && ( mark->symbol() >= 16 && mark->symbol() <= 19 ) )
+             && ( mark->symbol() >= 16 && mark->symbol() <= 20 ) )
             continue;
 
         // Skip city marks if we're not showing cities.

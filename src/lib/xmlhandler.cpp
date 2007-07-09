@@ -120,6 +120,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
         else if ( m_placemark->role() == 'M' ) m_placemark->setSymbol(17);
         else if ( m_placemark->role() == 'H' ) m_placemark->setSymbol(18);
         else if ( m_placemark->role() == 'V' ) m_placemark->setSymbol(19);
+        else if ( m_placemark->role() == 'F' ) m_placemark->setSymbol(20);
         else if ( m_placemark->role() == 'N' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 );
         else if ( m_placemark->role() == 'R' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 + 2);
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setSymbol( ( m_placemark->popidx() -1 ) / 4 * 4 + 3 );

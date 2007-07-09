@@ -17,6 +17,7 @@
 #ifndef HTTPFETCHFILE_H
 #define HTTPFETCHFILE_H
 
+#include <QtGlobal>
 #include <QtCore/QFile>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
@@ -43,7 +44,7 @@ struct HttpJob
     QString  targetDirString;
     QFile*   targetFile;
 
-    int      initiatorId;
+    qint64   initiatorId;
     Priority priority;
     Status   status;
 };

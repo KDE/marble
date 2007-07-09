@@ -28,10 +28,10 @@ class KAtlasDirs
         QString  localpath = localDir() + "/" + path;	// local path
         QString  unixpath  = unixDir() + "/" + path;	// unix path
 	
-        if ( QFile::exists( unixpath ) )
-            fullpath = unixpath;
-        else if ( QFile::exists( localpath ) )
+        if ( QFile::exists( localpath ) )
             fullpath = localpath;
+        else if ( QFile::exists( unixpath ) )
+            fullpath = unixpath;
 
         return QDir( fullpath ).canonicalPath(); 
     }
@@ -60,7 +60,7 @@ class KAtlasDirs
 
     static QString unixDir()
     {
-        return QString( "/usr/share/marble/data" );	// unix system path
+        return QString( "/usr/local/share/apps/marble/data" );	// unix system path
     }
 };
 

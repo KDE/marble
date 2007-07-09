@@ -69,7 +69,7 @@ class Quaternion {
 
     void        scalar(double mult);
 
-    void        toMatrix(matrix &m);
+    void        toMatrix(matrix &m) const;
     void        rotateAroundAxis(const matrix &m);
 
     // TODO: Better add accessors...

@@ -114,7 +114,7 @@ void PlaceMarkInfoDialog::showContent()
         elevation_val_lbl->setText( "-" );
     }
 
-    emit source( m_mark->name() );
+    emit source( QString("wiki/%1").arg( m_mark->name() ) );
 }
 
 

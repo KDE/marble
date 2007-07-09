@@ -201,7 +201,7 @@ void Quaternion::getSpherical(double &alpha, double &beta) const
         alpha = 0.0;
 }
 
-void Quaternion::toMatrix(matrix &m)
+void Quaternion::toMatrix(matrix &m) const
 {
 
     double xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];

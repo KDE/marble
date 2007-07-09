@@ -162,6 +162,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
         int ncount = 0;
 
+        int  leftInterval = xIpLeft + ncount * m_n;
+
         for ( m_x = xLeft; m_x < xRight; ++m_x ) {
             // Prepare for interpolation
 
@@ -170,7 +172,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                 // Decrease pole distortion due to linear approximation ( x-axis )
                 int northPoleX = m_imageHalfWidth + (int)( radius * northPole.v[Q_X] );
 
-                int  leftInterval = xIpLeft + ncount * m_n;
                 if ( crossingPoleArea == true
                      && northPoleX > leftInterval
                      && northPoleX < leftInterval + m_n
@@ -248,6 +249,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 // color value for the new pixel. The pixel values in between get 
 // approximated through linear interpolation across the direct connecting 
 // line on the original tiles directly.
+// This method will do by far most of the calculations for the 
+// texturemapping, so we move towards integer math to improve speed.
 
 void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const double& lat,                                     QRgb *scanLine)
 {
@@ -259,19 +262,73 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
     // As long as the distance is smaller than 180 deg we can assume that 
     // we didn't cross the dateline.
 
-    if ( fabs(stepLng) < M_PI ) {
-        stepLng *= m_ninv;
+    if ( fabs(stepLng) < M_PI ) 
+    {
+        const int itStepLng = (int)( stepLng * m_ninv * m_rad2PixelX * 128.0 );
+        const int itStepLat = (int)( stepLat * m_rad2PixelY * 128.0 );
 
-        for (int j=1; j < m_n; ++j) {
-            m_prevLat += stepLat;
-            m_prevLng += stepLng;
-            pixelValue( m_prevLng, m_prevLat, scanLine);
-            ++scanLine;
+        m_prevLng *= m_rad2PixelX;
+        m_prevLat *= m_rad2PixelY;
+
+        // To improve speed we unroll 
+        // AbstractScanlineTextureMapper::pixelValue(...) here and 
+        // calculate the performance critical issues via integers
+
+        int itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128.0 );
+        int itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
+
+        if (m_tile->depth() == 8)
+        {
+            for (int j=1; j < m_n; ++j) 
+            {
+                m_posX = ( itLng + itStepLng * j ) >> 7;
+                m_posY = ( itLat + itStepLat * j ) >> 7;
+
+                if (  m_posX >= m_tileLoader->tileWidth() 
+                   || m_posX < 0
+                   || m_posY >= m_tileLoader->tileHeight()
+                   || m_posY < 0 )
+                {
+                    nextTile();
+                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128 );
+                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128 );
+                    m_posX = ( itLng + itStepLng * j ) >> 7;
+                    m_posY = ( itLat + itStepLat * j ) >> 7;
+                }
+
+                *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
+                ++scanLine;
+            }
+        }
+        else
+        {
+            for (int j=1; j < m_n; ++j) 
+            {
+                m_posX = ( itLng + itStepLng * j ) >> 7;
+                m_posY = ( itLat + itStepLat * j ) >> 7;
+
+                if (  m_posX >= m_tileLoader->tileWidth() 
+                   || m_posX < 0
+                   || m_posY >= m_tileLoader->tileHeight()
+                   || m_posY < 0 )
+                {
+                    nextTile();
+                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128 );
+                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128 );
+                    m_posX = ( itLng + itStepLng * j ) >> 7;
+                    m_posY = ( itLat + itStepLat * j ) >> 7;
+                }
+
+                *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
+                ++scanLine;
+            }
         }
     }
 
     // For the case where we cross the dateline between (lon, lat) and 
-    // (prevlon, prevlat) we need a more sophisticated calculation:
+    // (prevlon, prevlat) we need a more sophisticated calculation.
+    // However as this will happen rather rarely, we use 
+    // pixelValue(...) directly to make the code more readable.
 
     else {
         stepLng = ( TWOPI - fabs(stepLng) ) * m_ninv;

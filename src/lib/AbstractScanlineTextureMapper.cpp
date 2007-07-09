@@ -73,7 +73,7 @@ void AbstractScanlineTextureMapper::setMapTheme( const QString& theme )
 }
 
 
-void AbstractScanlineTextureMapper::selectTileLevel(const int& radius)
+void AbstractScanlineTextureMapper::selectTileLevel(int radius)
 {
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
@@ -170,11 +170,11 @@ void AbstractScanlineTextureMapper::nextTile()
     // necessary to prevent e.g. crash if lng = -pi
 
     if ( m_posX > m_fullNormLng ) m_posX = m_fullNormLng;
-    if ( m_posY > m_halfNormLat  ) m_posY = m_halfNormLat;
+    if ( m_posY > m_halfNormLat ) m_posY = m_halfNormLat;
 
     // The origin (0, 0) is in the upper left corner
-    // lng: 360 deg = 4320000 pixel
-    // lat: 180 deg = 2160000 pixel
+    // lng: 360 deg = 1728000000 pixel
+    // lat: 180 deg = 864000000 pixel
 
     int lng = m_posX + m_tilePosX;
     int lat = m_posY + m_tilePosY;

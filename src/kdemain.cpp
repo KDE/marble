@@ -49,6 +49,7 @@ int main (int argc, char *argv[])
     for ( int i = 1; i < argc; ++i ) {
         if ( strcmp( argv[ i ], "--timedemo" ) == 0 )
         {
+            window->resize(900, 640);
             marbleTest->timeDemo();
             return 0;
         }
