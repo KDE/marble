@@ -61,7 +61,7 @@ class PlaceMark
     void setSelected( int selected )           { m_selected = selected; }
 
 
-    const QRect& textRect() const              { return m_textRect;    }
+    QRect& textRect()              { return m_textRect;    }
     void setTextRect( const QRect& textRect ) { m_textRect = textRect;}
     QRect  m_textRect;
     const QPixmap& textPixmap() const          { return m_textPixmap;       }
@@ -70,7 +70,7 @@ class PlaceMark
     void clearTextPixmap() {
         if ( !m_textPixmap.isNull() ) m_textPixmap = QPixmap(); 
     }
-const QPoint& symbolPos() const             { return m_symbolPos;   }
+    QPoint& symbolPos()              { return m_symbolPos;   }
     void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }
     QPoint      m_symbolPos;	// position of the placemark's symbol
 

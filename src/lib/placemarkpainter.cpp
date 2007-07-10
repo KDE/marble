@@ -228,7 +228,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             y = (int)(imgheight/2 + radius * qpos.v[Q_Y]);
 
 #else
-        if( true ) {
+        if( true )
+        {
             double xyFactor = (float)(2*radius)/M_PI;
 
             double degX;
@@ -407,8 +408,30 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     while ( visit != m_visiblePlacemarks.constBegin() ) {
         --visit;
         mark = *visit;
+        int tempSymbol = mark->symbolPos().x();
+        int tempText = mark->textRect().left();
+
         painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
         painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+#ifdef FLAT_PROJ
+        for(int i = tempSymbol - 4*radius; i>=0 ; i-= 4*radius) {
+            mark->textRect().moveLeft(i - tempSymbol + tempText );
+            mark->symbolPos().setX( mark->symbolPos().x() - 4*radius);
+            painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
+            painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+        }
+
+        mark->symbolPos().setX(tempSymbol);
+
+        for(int i = tempSymbol + 4*radius; i<=imgwidth ; i+= 4*radius) {
+            mark->textRect().moveLeft(i - tempSymbol + tempText );
+            mark->symbolPos().setX( mark->symbolPos().x() + 4*radius);
+            painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
+            painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+        }
+        mark->textRect().moveLeft(tempSymbol);
+        mark->symbolPos().setX(tempText);
+#endif
     }
 }
 

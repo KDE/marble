@@ -17,8 +17,8 @@ FlatScanlineTextureMapper::FlatScanlineTextureMapper(const QString& path, QObjec
     m_oldYPaintedTop = 0;
 }
 
-void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, int radius,
-                               const Quaternion& planetAxis)
+void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radius, 
+                                Quaternion& planetAxis)
 {
    // Initialize needed variables:
     double lng = 0.0;
