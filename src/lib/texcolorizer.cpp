@@ -36,8 +36,8 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
 {
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
-    const int  imgrx     = imgwidth >> 1;
-    const int  imgry     = imgheight >> 1;
+    const int  imgrx     = imgwidth / 2;
+    const int  imgry     = imgheight / 2;
     const int  imgradius = imgrx * imgrx + imgry * imgry;
 
     const uint  landoffscreen = qRgb(255,0,0);
@@ -78,14 +78,14 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                     bump = 0;
 
                 if ( *coastdata == landoffscreen )
-                    *data = TextureColorizer::texturepalette[bump][grey + 0x100];	
+                    *data = texturepalette[bump][grey + 0x100];	
                 else {
 
                     // if (*coastdata == riveroffscreen) {
                     // *data = rivercolor;
                     // }
                     // else {
-                    *data = TextureColorizer::texturepalette[bump][grey];
+                    *data = texturepalette[bump][grey];
                     // }
                 }	
             }
@@ -143,13 +143,13 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
 
 
                 if ( *coastdata == landoffscreen )
-                    *data=TextureColorizer::texturepalette[bump][grey + 0x100];	
+                    *data = texturepalette[bump][grey + 0x100];	
                 else {
                     // if (*coastdata == riveroffscreen) {
                     // *data = rivercolor;
                     // }
                     // else {
-                    *data = TextureColorizer::texturepalette[bump][grey];
+                    *data = texturepalette[bump][grey];
                     // }
                 }
             }

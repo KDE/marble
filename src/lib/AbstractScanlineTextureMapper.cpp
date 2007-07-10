@@ -34,7 +34,9 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
 
     m_imageHalfWidth  = 0;
     m_imageHalfHeight = 0;
+    m_imageWidth  = 0;
     m_imageHeight = 0;
+
     m_imageRadius     = 0;
 
     m_prevLat = 0.0; 
@@ -131,7 +133,8 @@ void AbstractScanlineTextureMapper::resizeMap(const QImage* canvasImage)
     m_imageHalfWidth  = canvasImage -> width() / 2;
     m_imageHalfHeight = canvasImage -> height() / 2;
     m_imageHeight = canvasImage -> height();
-    m_imageWidth = canvasImage -> width();
+    m_imageWidth  = canvasImage -> width();
+
     m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
                           + m_imageHalfHeight * m_imageHalfHeight );
 }

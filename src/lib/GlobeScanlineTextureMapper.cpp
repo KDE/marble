@@ -52,15 +52,15 @@ void GlobeScanlineTextureMapper::resizeMap(const QImage* canvasImage)
     // Find the optimal m_n for the current image canvas width
     m_nBest = 2;
 
-    int  nEvalMin = 2 * m_imageHalfWidth;
-    for ( int it = 1; it < 32; ++it ) {
-        int nEval = 2 * m_imageHalfWidth / it + 2 * m_imageHalfWidth % it;
+    int  nEvalMin = ( m_imageWidth - 1 );
+    for ( int it = 1; it < 48; ++it ) {
+        int nEval = ( m_imageWidth - 1 ) / it + ( m_imageWidth - 1 ) % it;
         if ( nEval < nEvalMin ) {
             nEvalMin = nEval;
             m_nBest = it; 
         }
     }
-    //        qDebug("Optimized n = " + QString::number(nBest).toLatin1());
+            qDebug() << QString( "Optimized n = %1, remainder: %2" ).arg(m_nBest).arg( ( m_imageWidth ) % m_nBest );
 }
 
 
@@ -128,22 +128,23 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
         int rx = (int)sqrt( (double)( radius2 
                       - ( ( m_y - m_imageHalfHeight )
                       * ( m_y - m_imageHalfHeight ) ) ) );
-
+// #1
         // Calculate the actual x-range of the map within the current scanline
         const int xLeft  = ( ( m_imageHalfWidth-rx > 0 )
                              ? m_imageHalfWidth - rx : 0 ); 
         const int xRight = ( ( m_imageHalfWidth-rx > 0 )
-                             ? xLeft + rx + rx : 2 * m_imageHalfWidth );
+                             ? xLeft + rx + rx : canvasImage -> width() );
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
-
+// #1
         if ( m_interlaced == true )
         {
             m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
         }
-
+// #2
         int  xIpLeft  = 1;
-        int  xIpRight = (int)(2 * m_imageHalfWidth * m_ninv) * m_n; 
+        int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
+// #2
 
         if (m_imageHalfWidth-rx > 0) {
             xIpLeft  = m_n * (int)( xLeft  / m_n + 1 );
@@ -154,38 +155,43 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
         bool crossingPoleArea = false;
         int northPoleY = m_imageHalfHeight + (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
-             && northPoleY - m_n / 2 <= m_y
-             && northPoleY + m_n / 2 >= m_y ) 
+             && northPoleY - ( m_n * 0.75 ) <= m_y
+             && northPoleY + ( m_n * 0.75 ) >= m_y ) 
         {
             crossingPoleArea = true;
         }
 
         int ncount = 0;
 
-        int  leftInterval = xIpLeft + ncount * m_n;
 
+// #3
         for ( m_x = xLeft; m_x < xRight; ++m_x ) {
             // Prepare for interpolation
 
-            if ( m_x >= xIpLeft && m_x <= xIpRight ) {
+            int  leftInterval = xIpLeft + ncount * m_n;
 
+            if ( m_x >= xIpLeft && m_x <= xIpRight ) {
+// #3
                 // Decrease pole distortion due to linear approximation ( x-axis )
                 int northPoleX = m_imageHalfWidth + (int)( radius * northPole.v[Q_X] );
 
+//                qDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea == true
-                     && northPoleX > leftInterval
-                     && northPoleX < leftInterval + m_n
-                     && m_x < leftInterval + m_n )
+                     && northPoleX >= leftInterval + m_n
+                     && northPoleX < leftInterval + 2*m_n
+                     && m_x < leftInterval + 3 * m_n )
                 {
                     m_interpolate = false;
                 }
                 else {
+// #4
                     m_x += m_n - 1;
+// #4
                     m_interpolate = true;
                     ++ncount;
                 } 
             }
-            else 
+            else
                 m_interpolate = false;
 
             // Evaluate more coordinates for the 3D position vector of the current pixel
@@ -215,14 +221,15 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                     }
                     m_fastScanLine += ( m_n - 1 );
                 }
-
+// #5
                 m_scanLine += ( m_n - 1 );
+// #5
             }
 
             // You can temporarily comment out this line and run Marble
             // to understand the interpolation:
             pixelValue( lng, lat, m_scanLine );
- 
+
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
 
@@ -231,8 +238,9 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                *m_fastScanLine = *m_scanLine;
                ++m_fastScanLine;
             }
-
+// #6
             ++m_scanLine;
+// #6
         }
     }
 
