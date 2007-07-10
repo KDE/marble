@@ -33,7 +33,7 @@ const double RAD2INT = 21600.0 / M_PI;
 class MarbleModelPrivate
 {
  public:
-    QImage   *m_canvasimg;
+    //QImage   *m_canvasimg;
     QImage   *m_coastimg;
 
     // View and paint stuff
@@ -188,7 +188,6 @@ void MarbleModel::setShowGps( bool visible )
 
 void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
-
     d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
                                            .arg( selectedMap ) ) );
 
@@ -254,28 +253,27 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 }
 
 
-void MarbleModel::resize()
+void MarbleModel::resize( QImage *canvasImage)
 {
-    *d->m_coastimg = QImage( d->m_canvasimg->width(), d->m_canvasimg->height(),
-                          QImage::Format_ARGB32_Premultiplied );
-    d->m_canvasimg->fill( Qt::transparent );
+    *d->m_coastimg = QImage( canvasImage->width(), canvasImage->height(),
+                             QImage::Format_ARGB32_Premultiplied );
 
-    d->m_texmapper->resizeMap( d->m_canvasimg );
+    d->m_texmapper->resizeMap( canvasImage );
     d->m_veccomposer->resizeMap( d->m_coastimg );
     d->m_gridmap->resizeMap( d->m_coastimg );
 
-    QRadialGradient  grad1( QPointF( d->m_canvasimg->width()  / 2,
-                                     d->m_canvasimg->height() / 2 ),
+    QRadialGradient  grad1( QPointF( canvasImage->width()  / 2,
+                                     canvasImage->height() / 2 ),
                             1.05 * d->m_radius );
     grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
     grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
-    QPainter  painter( d->m_canvasimg );
+    QPainter  painter( canvasImage );
     painter.setBrush( brush1 );
     painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
-                         d->m_canvasimg->height() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
+    painter.drawEllipse( canvasImage->width() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
+                         canvasImage->height() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
                          (int)( 2.1 * (double)(d->m_radius) ), 
                          (int)( 2.1 * (double)(d->m_radius) ) );
 
@@ -283,11 +281,12 @@ void MarbleModel::resize()
 }
 
 
-void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
+void MarbleModel::paintGlobe( ClipPainter* painter, QImage *canvasImage,
+                              const QRect& dirtyRect )
 {
-    if ( needsUpdate() || d->m_canvasimg->isNull() || d->m_justModified ) {
+    if ( needsUpdate() || canvasImage->isNull() || d->m_justModified ) {
 
-        d->m_texmapper->mapTexture( d->m_canvasimg, d->m_radius,
+        d->m_texmapper->mapTexture( canvasImage, d->m_radius,
                                     d->m_planetAxis );
 
         if ( d->m_showElevationModel == false
@@ -300,13 +299,13 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
                                               d->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
-            d->m_texcolorizer->colorize( d->m_canvasimg, d->m_coastimg,
+            d->m_texcolorizer->colorize( canvasImage, d->m_coastimg,
                                          d->m_radius );
         }
     }
 
     // Paint the map on the Widget
-    painter->drawImage( dirtyRect, *d->m_canvasimg, dirtyRect ); 
+    painter->drawImage( dirtyRect, *canvasImage, dirtyRect ); 
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
@@ -334,8 +333,8 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
     // Paint the PlaceMark layer
     if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
-                                                 d->m_canvasimg->width(),
-                                                 d->m_canvasimg->height(),
+                                                 canvasImage->width(),
+                                                 canvasImage->height(),
                                                  d->m_radius,
                                                  d->m_placeMarkContainer,
                                                  d->m_planetAxis );
@@ -343,8 +342,8 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
     
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
-        d->m_gpsLayer->paintLayer( painter, d->m_canvasimg->size(),
-                              d->m_radius, d->m_planetAxis );
+        d->m_gpsLayer->paintLayer( painter, canvasImage->size(),
+                                   d->m_radius, d->m_planetAxis );
     }
 
     d->m_planetAxisUpdated = d->m_planetAxis;
@@ -353,40 +352,34 @@ void MarbleModel::paintGlobe(ClipPainter* painter, const QRect& dirtyRect)
 }
 
 
-void MarbleModel::setCanvasImage(QImage* canvasimg)
-{
-    d->m_canvasimg = canvasimg;
-}
-
-
 int MarbleModel::radius() const
 {
     return d->m_radius; 
 }
 
-void MarbleModel::setRadius(const int& radius)
+void MarbleModel::setRadius(const int& radius, QImage *canvasImage)
 {
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = ( d->m_canvasimg->width() ) >> 1;
-    int  imgry = ( d->m_canvasimg->height() ) >> 1;
+    int  imgrx = ( canvasImage->width() ) >> 1;
+    int  imgry = ( canvasImage->height() ) >> 1;
 
     if ( radius * radius < imgrx * imgrx + imgry * imgry
          && radius != d->m_radius )
     {
-        d->m_canvasimg->fill( Qt::transparent );
+        canvasImage->fill( Qt::transparent );
 
-        QRadialGradient grad1( QPointF( d->m_canvasimg->width() / 2,
-                                        d->m_canvasimg->height() / 2 ),
+        QRadialGradient grad1( QPointF( canvasImage->width() / 2,
+                                        canvasImage->height() / 2 ),
                                1.05 * radius );
         grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
         grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
         QBrush    brush1( grad1 );
-        QPainter  painter( d->m_canvasimg );
+        QPainter  painter( canvasImage );
         painter.setBrush( brush1 );
         painter.setRenderHint( QPainter::Antialiasing, true );
-        painter.drawEllipse( d->m_canvasimg->width() / 2 - (int)( (double)(radius) * 1.05 ),
-                             d->m_canvasimg->height() / 2 - (int)( (double)(radius) * 1.05 ),
+        painter.drawEllipse( canvasImage->width() / 2 - (int)( (double)(radius) * 1.05 ),
+                             canvasImage->height() / 2 - (int)( (double)(radius) * 1.05 ),
                              (int)( 2.1 * (double)(radius) ), 
                              (int)( 2.1 * (double)(radius) ) );
     }

@@ -90,14 +90,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
-    void  setCanvasImage(QImage*);
+    void  paintGlobe(ClipPainter*, QImage *canvasImage, const QRect&);
 
-    void  paintGlobe(ClipPainter*, const QRect&);
-
-    void  resize();
+    void  resize( QImage *canvasImage );
 
     int   radius() const;
-    void  setRadius(const int&);
+    void  setRadius(const int&, QImage *canvasImage);
 
     Quaternion  getPlanetAxis() const;
 

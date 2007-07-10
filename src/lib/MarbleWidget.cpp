@@ -43,8 +43,8 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleModel     *m_model;
 
-    QImage          *m_canvasimg;
-    QImage          *m_coastimg;
+    QImage          *m_canvasImage;
+    //QImage          *m_coastimg;
 
     GeoPoint         m_homePoint;
     int              m_homeZoom;
@@ -59,7 +59,6 @@ class MarbleWidgetPrivate
     KAtlasViewPopupMenu     *m_popupmenu;
 
     TextureColorizer        *m_sealegend;
-    QImage                  *m_pCanvasImage;
 
     // Parameters for the widgets appearance.
     bool             m_showScaleBar;
@@ -124,9 +123,9 @@ void MarbleWidget::construct(QWidget *parent)
 
     //	setAttribute(Qt::WA_NoSystemBackground);
 
-    d->m_pCanvasImage = new QImage( parent->width(), parent->height(),
-				 QImage::Format_ARGB32_Premultiplied );
-    d->m_model->setCanvasImage( d->m_pCanvasImage );
+    d->m_canvasImage = new QImage( parent->width(), parent->height(),
+                                   QImage::Format_ARGB32_Premultiplied );
+    //d->m_model->setCanvasImage( d->m_pCanvasImage );
 
     d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
     installEventFilter( d->m_inputhandler );
@@ -304,7 +303,7 @@ void MarbleWidget::zoomView(int zoom)
     if ( radius == d->m_model->radius() )
 	return;
 	
-    d->m_model->setRadius(radius);
+    d->m_model->setRadius( radius, d->m_canvasImage );
     repaint();
 
     setActiveRegion();
@@ -427,12 +426,14 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    delete d->m_pCanvasImage;
+    delete d->m_canvasImage;
 
-    d->m_pCanvasImage = new QImage( width(), height(),
-				 QImage::Format_ARGB32_Premultiplied );
-    d->m_model->setCanvasImage( d->m_pCanvasImage );
-    d->m_model->resize();
+    d->m_canvasImage = new QImage( width(), height(),
+                                   QImage::Format_ARGB32_Premultiplied );
+    d->m_canvasImage->fill( Qt::transparent );
+
+    // FIXME: Eventually remove.
+    d->m_model->resize( d->m_canvasImage );
 
     repaint();
 }
@@ -515,52 +516,40 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	{
 
     int   radius = d->m_model->radius();
-    bool  clip = ( radius > d->m_pCanvasImage->width()/2
-                   || radius > d->m_pCanvasImage->height()/2 ) ? true : false;
+    bool  doClip = ( radius > d->m_canvasImage->width()/2
+                     || radius > d->m_canvasImage->height()/2 ) ? true : false;
 
-    // Paint the globe itself.
-    ClipPainter painter( this, clip); 
-    // QPainter painter(this);
-    // painter.setClipRect(10, 10, d->m_pCanvasImage->width() - 1 , d->m_pCanvasImage->height()-1 );
-    // painter.setClipping( true );
-    // painter.clearNodeCount();
+    // Create a painter that will do the painting.
+    ClipPainter painter( this, doClip); 
 
-    QRect  dirty = evt->rect();
-    d->m_model->paintGlobe(&painter,dirty);
+    // 1. Paint the globe itself.
+    QRect  dirtyRect = evt->rect();
+    d->m_model->paintGlobe(&painter, d->m_canvasImage, dirtyRect);
 	
-    // Draw the scale.
+    // 2. Paint the scale.
     if ( d->m_showScaleBar == true )
-        painter.drawPixmap( 10, d->m_pCanvasImage->height() - 40,
+        painter.drawPixmap( 10, d->m_canvasImage->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( d->m_model->radius(),
-                                                       d->m_pCanvasImage-> width() / 2 - 20 ) );
+                                                       d->m_canvasImage-> width() / 2 - 20 ) );
 
-    // Draw the wind rose.
+    // 3. Paint the wind rose.
     if ( d->m_showWindRose == true )
-        painter.drawPixmap( d->m_pCanvasImage->width() - 60, 10,
-    			d->m_windrose.drawWindRosePixmap( d->m_pCanvasImage->width(),
-						       d->m_pCanvasImage->height(),
+        painter.drawPixmap( d->m_canvasImage->width() - 60, 10,
+    			d->m_windrose.drawWindRosePixmap( d->m_canvasImage->width(),
+						       d->m_canvasImage->height(),
                                                        d->m_model->northPoleY() ) );
 
-    // Draw the crosshair.
+    // 4. Paint the crosshair.
     d->m_crosshair.paintCrossHair( &painter, 
-				d->m_pCanvasImage->width(),
-                                d->m_pCanvasImage->height() );
+                                   d->m_canvasImage->width(),
+                                   d->m_canvasImage->height() );
 
     d->m_measureTool->paintMeasurePoints( &painter, 
-                                          d->m_pCanvasImage->width() / 2,
-                                          d->m_pCanvasImage->height() / 2,
+                                          d->m_canvasImage->width() / 2,
+                                          d->m_canvasImage->height() / 2,
                                           radius, d->m_model->getPlanetAxis(),
                                           true );
     setActiveRegion();
-#if 0
-      else
-      {
-      // Draw cached pixmap to widget
-      QPainter pixmapPainter(this);
-      QRect rect(0, 0, width(), height());
-      pixmapPainter.drawImage(rect, d->m_pCanvasImage, rect);
-      }
-#endif
 }
 
 

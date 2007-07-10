@@ -1,5 +1,20 @@
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove m_canvasimg from MarbleModelPrivate.
+	* src/lib/MarbleModel.{h,cpp} (paintGlobe): Add parameter canvasImage
+	(setRadius): Add parameter canvasImage
+	(resize):  Add parameter canvasImage
+	(setCanvasImage): removed
+	* src/lib/MarbleWidget.cpp: Follow new call signatures
+
+	Remove m_view from MarbleModelPrivate so that the Model no longer
+	keeps track of the View.
+	* src/lib/MarbleModel.{h,cpp} (setMapTheme): Add a parent
+	parameter
+	(class MarbleModelPrivate): remove m_view.
+	* src/lib/MarbleWidget.cpp (setMapTheme): Use new call convenction.
+
+	Improve parameter parsing in KDE version.
 	* src/kdemain.cpp (main): Use KDE classes to parse command line
 
 2007-07-10  Torsten Rahn  <rahn@kde.org>
