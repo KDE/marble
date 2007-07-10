@@ -58,6 +58,7 @@ set(marblewidget_SRCS
            MarbleModel.cpp
            MarbleWidget.cpp
            MarbleControlBox.cpp
+           ViewParams.cpp
            measuretool.cpp
            placemark.cpp
            PlaceMarkContainer.cpp
@@ -198,6 +199,7 @@ install( FILES
            MarbleModel.h
            MarbleWidget.h
            MarbleControlBox.h
+           ViewParams.h
            measuretool.h
            placemark.h
            PlaceMarkContainer.h

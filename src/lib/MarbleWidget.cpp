@@ -19,6 +19,7 @@
 #include <QtGui/QRegion>
 
 #include "Quaternion.h"
+#include "ViewParams.h"
 #include "texcolorizer.h"
 #include "clippainter.h"
 #include "katlasviewinputhandler.h"
@@ -43,7 +44,7 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleModel     *m_model;
 
-    QImage          *m_canvasImage;
+    ViewParams       viewParams;
     //QImage          *m_coastimg;
 
     GeoPoint         m_homePoint;
@@ -123,8 +124,9 @@ void MarbleWidget::construct(QWidget *parent)
 
     //	setAttribute(Qt::WA_NoSystemBackground);
 
-    d->m_canvasImage = new QImage( parent->width(), parent->height(),
-                                   QImage::Format_ARGB32_Premultiplied );
+    d->viewParams.m_canvasImage = new QImage( parent->width(), 
+                                              parent->height(),
+                                         QImage::Format_ARGB32_Premultiplied );
 
     d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
     installEventFilter( d->m_inputhandler );
@@ -304,20 +306,20 @@ void MarbleWidget::zoomView(int zoom)
 	
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = d->m_canvasImage->width() / 2;
-    int  imgry = d->m_canvasImage->height() / 2;
+    int  imgrx = d->viewParams.m_canvasImage->width() / 2;
+    int  imgry = d->viewParams.m_canvasImage->height() / 2;
 
     if ( radius * radius < imgrx * imgrx + imgry * imgry
          && radius != d->m_model->radius() )
     {
-        d->m_canvasImage->fill( Qt::transparent );
+        d->viewParams.m_canvasImage->fill( Qt::transparent );
 
         // Recalculate the atmosphere effect and paint it to canvasImage.
         QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius );
         grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
         grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
         QBrush    brush1( grad1 );
-        QPainter  painter( d->m_canvasImage );
+        QPainter  painter( d->viewParams.m_canvasImage );
         painter.setBrush( brush1 );
         painter.setRenderHint( QPainter::Antialiasing, true );
         painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
@@ -450,14 +452,14 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    delete d->m_canvasImage;
+    delete d->viewParams.m_canvasImage;
 
-    d->m_canvasImage = new QImage( width(), height(),
+    d->viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
-    d->m_canvasImage->fill( Qt::transparent );
+    d->viewParams.m_canvasImage->fill( Qt::transparent );
 
     // FIXME: Eventually remove.
-    d->m_model->resize( d->m_canvasImage );
+    d->m_model->resize( d->viewParams.m_canvasImage );
 
     repaint();
 }
@@ -540,37 +542,37 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	{
 
     int   radius = d->m_model->radius();
-    bool  doClip = ( radius > d->m_canvasImage->width()/2
-                     || radius > d->m_canvasImage->height()/2 ) ? true : false;
+    bool  doClip = ( radius > d->viewParams.m_canvasImage->width()/2
+                     || radius > d->viewParams.m_canvasImage->height()/2 ) ? true : false;
 
     // Create a painter that will do the painting.
     ClipPainter painter( this, doClip); 
 
     // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
-    d->m_model->paintGlobe(&painter, d->m_canvasImage, dirtyRect);
+    d->m_model->paintGlobe(&painter, &d->viewParams, dirtyRect);
 	
     // 2. Paint the scale.
     if ( d->m_showScaleBar == true )
-        painter.drawPixmap( 10, d->m_canvasImage->height() - 40,
+        painter.drawPixmap( 10, d->viewParams.m_canvasImage->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( d->m_model->radius(),
-                                                       d->m_canvasImage-> width() / 2 - 20 ) );
+                                                       d->viewParams.m_canvasImage-> width() / 2 - 20 ) );
 
     // 3. Paint the wind rose.
     if ( d->m_showWindRose == true )
-        painter.drawPixmap( d->m_canvasImage->width() - 60, 10,
-    			d->m_windrose.drawWindRosePixmap( d->m_canvasImage->width(),
-						       d->m_canvasImage->height(),
+        painter.drawPixmap( d->viewParams.m_canvasImage->width() - 60, 10,
+    			d->m_windrose.drawWindRosePixmap( d->viewParams.m_canvasImage->width(),
+						       d->viewParams.m_canvasImage->height(),
                                                        d->m_model->northPoleY() ) );
 
     // 4. Paint the crosshair.
     d->m_crosshair.paintCrossHair( &painter, 
-                                   d->m_canvasImage->width(),
-                                   d->m_canvasImage->height() );
+                                   d->viewParams.m_canvasImage->width(),
+                                   d->viewParams.m_canvasImage->height() );
 
     d->m_measureTool->paintMeasurePoints( &painter, 
-                                          d->m_canvasImage->width() / 2,
-                                          d->m_canvasImage->height() / 2,
+                                          d->viewParams.m_canvasImage->width() / 2,
+                                          d->viewParams.m_canvasImage->height() / 2,
                                           radius, d->m_model->getPlanetAxis(),
                                           true );
     setActiveRegion();

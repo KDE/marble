@@ -18,6 +18,7 @@
 #include <QtCore/QTimer>
 
 #include "GeoPolygon.h"
+#include "ViewParams.h"
 #include "texcolorizer.h"
 #include "TileLoader.h"
 #include "tilescissor.h"
@@ -33,7 +34,6 @@ const double RAD2INT = 21600.0 / M_PI;
 class MarbleModelPrivate
 {
  public:
-    //QImage   *m_canvasimg;
     QImage   *m_coastimg;
 
     // View and paint stuff
@@ -262,6 +262,8 @@ void MarbleModel::resize( QImage *canvasImage)
     d->m_veccomposer->resizeMap( d->m_coastimg );
     d->m_gridmap->resizeMap( d->m_coastimg );
 
+    // FIXME: This is already in MarbleWidget and should be isolated
+    //        into its own function drawAtmosphere().
     QRadialGradient  grad1( QPointF( canvasImage->width()  / 2,
                                      canvasImage->height() / 2 ),
                             1.05 * d->m_radius );
@@ -281,12 +283,12 @@ void MarbleModel::resize( QImage *canvasImage)
 }
 
 
-void MarbleModel::paintGlobe( ClipPainter* painter, QImage *canvasImage,
+void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
                               const QRect& dirtyRect )
 {
-    if ( needsUpdate() || canvasImage->isNull() || d->m_justModified ) {
+    if ( needsUpdate() || viewParams->m_canvasImage->isNull() || d->m_justModified ) {
 
-        d->m_texmapper->mapTexture( canvasImage, d->m_radius,
+        d->m_texmapper->mapTexture( viewParams->m_canvasImage, d->m_radius,
                                     d->m_planetAxis );
 
         if ( d->m_showElevationModel == false
@@ -299,13 +301,14 @@ void MarbleModel::paintGlobe( ClipPainter* painter, QImage *canvasImage,
                                               d->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
-            d->m_texcolorizer->colorize( canvasImage, d->m_coastimg,
+            d->m_texcolorizer->colorize( viewParams->m_canvasImage,
+                                         d->m_coastimg,
                                          d->m_radius );
         }
     }
 
     // Paint the map on the Widget
-    painter->drawImage( dirtyRect, *canvasImage, dirtyRect ); 
+    painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect ); 
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
@@ -333,8 +336,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter, QImage *canvasImage,
     // Paint the PlaceMark layer
     if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter, 
-                                                 canvasImage->width(),
-                                                 canvasImage->height(),
+                                                 viewParams->m_canvasImage->width(),
+                                                 viewParams->m_canvasImage->height(),
                                                  d->m_radius,
                                                  d->m_placeMarkContainer,
                                                  d->m_planetAxis );
@@ -342,7 +345,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, QImage *canvasImage,
     
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
-        d->m_gpsLayer->paintLayer( painter, canvasImage->size(),
+        d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
                                    d->m_radius, d->m_planetAxis );
     }
 

@@ -50,6 +50,8 @@ class PlaceMark;
 class PlaceMarkManager;
 class GpsLayer;
 class MarbleModelPrivate;
+class ViewParams;
+
 
 /** 
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -90,7 +92,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
-    void  paintGlobe(ClipPainter*, QImage *canvasImage, const QRect&);
+    void  paintGlobe(ClipPainter*, ViewParams *viewParams, const QRect&);
 
     void  resize( QImage *canvasImage );
 
