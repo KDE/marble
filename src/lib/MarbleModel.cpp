@@ -33,7 +33,6 @@ const double RAD2INT = 21600.0 / M_PI;
 class MarbleModelPrivate
 {
  public:
-    QWidget  *m_view;
     QImage   *m_canvasimg;
     QImage   *m_coastimg;
 
@@ -41,11 +40,11 @@ class MarbleModelPrivate
     MapTheme            *m_maptheme;
     TextureColorizer    *m_texcolorizer;
 #ifndef FLAT_PROJ
-    GlobeScanlineTextureMapper
+    GlobeScanlineTextureMapper  *m_texmapper;
 #else
-    FlatScanlineTextureMapper
+    FlatScanlineTextureMapper   *m_texmapper;
 #endif
-        *m_texmapper;
+
     VectorComposer      *m_veccomposer;
     GridMap             *m_gridmap;
 
@@ -75,7 +74,7 @@ class MarbleModelPrivate
 
 
 
-MarbleModel::MarbleModel( QWidget* view )
+MarbleModel::MarbleModel( QWidget *parent )
     : d( new MarbleModelPrivate )
 {
     d->m_timer = new QTimer( this );
@@ -84,8 +83,6 @@ MarbleModel::MarbleModel( QWidget* view )
     connect( d->m_timer, SIGNAL( timeout() ), 
              this,       SIGNAL( timeout() ) );
     
-    d->m_view = view;
-
     d->m_texmapper = 0;
 
     d->m_placemarkpainter   = 0;
@@ -119,7 +116,7 @@ MarbleModel::MarbleModel( QWidget* view )
         else
             selectedmap = mapthemedirs[0];
     }
-    setMapTheme( selectedmap );
+    setMapTheme( selectedmap, parent );
 
     d->m_veccomposer  = new VectorComposer();
     d->m_gridmap      = new GridMap();
@@ -189,11 +186,11 @@ void MarbleModel::setShowGps( bool visible )
 // Set a particular theme for the map, and load the top 3 tile levels.
 // If these tiles aren't already created, then create them here and now. 
 
-void MarbleModel::setMapTheme( const QString& selectedmap )
+void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
 
     d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
-                                           .arg( selectedmap ) ) );
+                                           .arg( selectedMap ) ) );
 
     // If the tiles aren't already there, put up a progress dialog
     // while creating them.
@@ -201,7 +198,7 @@ void MarbleModel::setMapTheme( const QString& selectedmap )
         qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
-        KAtlasTileCreatorDialog tilecreatordlg( d->m_view );
+        KAtlasTileCreatorDialog tilecreatordlg( parent );
         tilecreatordlg.setSummary( d->m_maptheme->name(), 
                                    d->m_maptheme->description() );
 #endif

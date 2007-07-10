@@ -43,6 +43,9 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleModel     *m_model;
 
+    QImage          *m_canvasimg;
+    QImage          *m_coastimg;
+
     GeoPoint         m_homePoint;
     int              m_homeZoom;
 
@@ -577,7 +580,7 @@ void MarbleWidget::goHome()
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    d->m_model->setMapTheme( maptheme );
+    d->m_model->setMapTheme( maptheme, this );
     repaint();
 }
 

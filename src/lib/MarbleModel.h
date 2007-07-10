@@ -87,7 +87,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Construct a new MarbleModel.
      * @param view  The widget that is the view for this Model. 
      */
-    MarbleModel( QWidget* view=0 );
+    MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
     void  setCanvasImage(QImage*);
@@ -115,7 +115,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QAbstractListModel* getPlaceMarkModel() const;
 
-    void setMapTheme( const QString& );
+    void setMapTheme( const QString &selectedMap, QWidget *parent );
 
     int northPoleY();
     int northPoleZ();
