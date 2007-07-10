@@ -115,7 +115,6 @@ if (QTONLY)
   qt4_automoc(${marblewidget_SRCS})
 else (QTONLY)
   kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
-  kde4_automoc(${marblewidget_SRCS})
 endif (QTONLY)
 
 # why this??
