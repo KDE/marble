@@ -20,7 +20,6 @@
 #include <QtGui/QColor>
 
 #include "clippainter.h"
-
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
  
@@ -74,6 +73,9 @@ void GridMap::createGrid(const int& radius, Quaternion& planetAxis)
 
     m_radius = radius - 1;
     planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+#ifdef FLAT_PROJ
+    m_planetAxis = planetAxis;
+#endif
 
     //	FIXME:	- Higher precision after optimization 
     //		  ( will keep grid lines from vanishing at high zoom levels ) 
@@ -144,7 +146,7 @@ void GridMap::createCircles( const int lngNum, const int latNum )
 
 void GridMap::createCircle( double val, SphereDim dim, double cutOff )
 {
-
+#ifndef FLAT_PROJ
     // cutoff: the amount of each quarter circle that is cut off at
     // the pole in radians
 
@@ -223,6 +225,31 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
             append(m_polygon);
         }
     }
+#else
+    float const centerLat=m_planetAxis.pitch();
+    float const centerLng=-m_planetAxis.yaw();
+    double xyFactor = (float)(2*m_radius)/M_PI;
+    m_polygon.clear();
+
+    if(dim == Latitude)
+    {
+        QPointF beginPoint(0.0f,m_imageHalfHeight + (centerLat + val)*xyFactor );
+        QPointF endPoint( m_imageHalfWidth*2, m_imageHalfHeight + (centerLat + val)*xyFactor );
+        m_polygon<<beginPoint<<endPoint;
+    }
+    else
+    {
+        float begin = m_imageHalfHeight - m_radius + centerLat*xyFactor;
+        float end = begin + 2*m_radius;
+        begin = (begin >= 0)? begin : 0;
+        end = (end <= m_imageHalfHeight*2)? end : m_imageHalfHeight*2;
+
+        QPointF beginPoint( m_imageHalfWidth + (centerLng + val)*xyFactor,begin);
+        QPointF endPoint(m_imageHalfWidth + (centerLng + val)*xyFactor,end);
+        m_polygon<<beginPoint<<endPoint;
+    }
+    append(m_polygon);
+#endif
 }
 
 

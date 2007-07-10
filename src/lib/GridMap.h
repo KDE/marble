@@ -12,6 +12,7 @@
 
 #ifndef GRIDMAP_H
 #define GRIDMAP_H
+//#define FLAT_PROJ
 
 
 #include <QtGui/QPen>
@@ -52,7 +53,9 @@ class GridMap : public ScreenPolygon::Vector
 
  private:
     matrix   m_planetAxisMatrix;
-
+#ifdef FLAT_PROJ
+    Quaternion m_planetAxis;
+#endif
     ScreenPolygon m_polygon;
 
     int      m_imageHalfWidth;
