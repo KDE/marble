@@ -54,6 +54,9 @@ Widget:
     - Let the view parameters be in the view instead of in the globe    inge
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
+ * Introduce the class ViewParams that controls the painting            INGE        - Position, Zoom, width/height                                      --
+    - show... crosshair/mapscale/windrose                               --
+    - show... terrain/cities/...                                        --
 
 Vector backend
  * Better scalability
