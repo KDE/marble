@@ -262,23 +262,6 @@ void MarbleModel::resize( QImage *canvasImage)
     d->m_veccomposer->resizeMap( d->m_coastimg );
     d->m_gridmap->resizeMap( d->m_coastimg );
 
-    // FIXME: This is already in MarbleWidget and should be isolated
-    //        into its own function drawAtmosphere().
-    QRadialGradient  grad1( QPointF( canvasImage->width()  / 2,
-                                     canvasImage->height() / 2 ),
-                            1.05 * d->m_radius );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
-
-    QBrush    brush1( grad1 );
-    QPainter  painter( canvasImage );
-    painter.setBrush( brush1 );
-    painter.setRenderHint( QPainter::Antialiasing, true );
-    painter.drawEllipse( canvasImage->width() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
-                         canvasImage->height() / 2 - (int)( (double)(d->m_radius) * 1.05 ),
-                         (int)( 2.1 * (double)(d->m_radius) ), 
-                         (int)( 2.1 * (double)(d->m_radius) ) );
-
     d->m_justModified = true;
 }
 

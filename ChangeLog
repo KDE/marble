@@ -1,5 +1,11 @@
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Break out drawing of the atmosphere effect into its own function
+	* src/lib/MarbleWidget.{h,cpp} (drawAtmosphere): New function
+	(zoomView): Call drawAtmosphere()
+	(resizeEvent): Call drawAtmosphere()
+	* src/lib/MarbleModel.cpp (resize): Remove draw atmosphere
+
 	Introduce the ViewParams class and move one item into it.
 	* src/lib/ViewParams.{h,cpp}: new files.
 	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Add

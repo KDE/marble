@@ -43,7 +43,7 @@ class MARBLE_EXPORT ViewParams
     //int         m_radius;       // Zoom level (pixels / earth radius)
 
     // Cached data that will make painting faster.
-    QImage  *m_canvasImage;
+    QImage  *m_canvasImage;     // Base image with space and atmosphere
 };
 
 

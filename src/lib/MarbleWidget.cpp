@@ -45,7 +45,6 @@ class MarbleWidgetPrivate
     MarbleModel     *m_model;
 
     ViewParams       viewParams;
-    //QImage          *m_coastimg;
 
     GeoPoint         m_homePoint;
     int              m_homeZoom;
@@ -313,22 +312,10 @@ void MarbleWidget::zoomView(int zoom)
          && radius != d->m_model->radius() )
     {
         d->viewParams.m_canvasImage->fill( Qt::transparent );
-
-        // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius );
-        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-        grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
-        QBrush    brush1( grad1 );
-        QPainter  painter( d->viewParams.m_canvasImage );
-        painter.setBrush( brush1 );
-        painter.setRenderHint( QPainter::Antialiasing, true );
-        painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
-                             imgry - (int)( (double)(radius) * 1.05 ),
-                             (int)( 2.1 * (double)(radius) ), 
-                             (int)( 2.1 * (double)(radius) ) );
     }
 
     d->m_model->setRadius( radius );
+    drawAtmosphere();
 
     repaint();
 
@@ -457,6 +444,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     d->viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
     d->viewParams.m_canvasImage->fill( Qt::transparent );
+    drawAtmosphere();
 
     // FIXME: Eventually remove.
     d->m_model->resize( d->viewParams.m_canvasImage );
@@ -504,6 +492,29 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 	return false;
     }
 }
+
+
+void MarbleWidget::drawAtmosphere()
+{
+    int  imgrx  = width() / 2;
+    int  imgry  = height() / 2;
+    int  radius = d->m_model->radius();
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius );
+    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+    grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
+
+    QBrush    brush1( grad1 );
+    QPainter  painter( d->viewParams.m_canvasImage );
+    painter.setBrush( brush1 );
+    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
+                         imgry - (int)( (double)(radius) * 1.05 ),
+                         (int)( 2.1 * (double)(radius) ), 
+                         (int)( 2.1 * (double)(radius) ) );
+}
+
 
 void MarbleWidget::setActiveRegion()
 {
