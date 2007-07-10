@@ -125,7 +125,6 @@ void MarbleWidget::construct(QWidget *parent)
 
     d->m_canvasImage = new QImage( parent->width(), parent->height(),
                                    QImage::Format_ARGB32_Premultiplied );
-    //d->m_model->setCanvasImage( d->m_pCanvasImage );
 
     d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
     installEventFilter( d->m_inputhandler );
@@ -303,7 +302,32 @@ void MarbleWidget::zoomView(int zoom)
     if ( radius == d->m_model->radius() )
 	return;
 	
-    d->m_model->setRadius( radius, d->m_canvasImage );
+    // Clear canvas if the globe is visible as a whole or if the globe
+    // does shrink.
+    int  imgrx = d->m_canvasImage->width() / 2;
+    int  imgry = d->m_canvasImage->height() / 2;
+
+    if ( radius * radius < imgrx * imgrx + imgry * imgry
+         && radius != d->m_model->radius() )
+    {
+        d->m_canvasImage->fill( Qt::transparent );
+
+        // Recalculate the atmosphere effect and paint it to canvasImage.
+        QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius );
+        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+        grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
+        QBrush    brush1( grad1 );
+        QPainter  painter( d->m_canvasImage );
+        painter.setBrush( brush1 );
+        painter.setRenderHint( QPainter::Antialiasing, true );
+        painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
+                             imgry - (int)( (double)(radius) * 1.05 ),
+                             (int)( 2.1 * (double)(radius) ), 
+                             (int)( 2.1 * (double)(radius) ) );
+    }
+
+    d->m_model->setRadius( radius );
+
     repaint();
 
     setActiveRegion();

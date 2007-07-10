@@ -95,7 +95,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void  resize( QImage *canvasImage );
 
     int   radius() const;
-    void  setRadius(const int&, QImage *canvasImage);
+    void  setRadius(const int radius);
 
     Quaternion  getPlanetAxis() const;
 

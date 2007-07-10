@@ -1,5 +1,10 @@
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Move initialization of the basic image from MarbleModel to
+	MarbleWidget
+	* src/lib/MarbleModel.cpp (setRadius): Remove most contents
+	* src/lib/MarbleWidget.cpp (zoomView): Add the contents from above
+
 	Krazy fix: Use proper include directives
 	* src/lib/httpfetchfile.h: Fix include
 

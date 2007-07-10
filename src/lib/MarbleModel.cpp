@@ -357,33 +357,8 @@ int MarbleModel::radius() const
     return d->m_radius; 
 }
 
-void MarbleModel::setRadius(const int& radius, QImage *canvasImage)
+void MarbleModel::setRadius(const int radius)
 {
-    // Clear canvas if the globe is visible as a whole or if the globe
-    // does shrink.
-    int  imgrx = ( canvasImage->width() ) >> 1;
-    int  imgry = ( canvasImage->height() ) >> 1;
-
-    if ( radius * radius < imgrx * imgrx + imgry * imgry
-         && radius != d->m_radius )
-    {
-        canvasImage->fill( Qt::transparent );
-
-        QRadialGradient grad1( QPointF( canvasImage->width() / 2,
-                                        canvasImage->height() / 2 ),
-                               1.05 * radius );
-        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-        grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
-        QBrush    brush1( grad1 );
-        QPainter  painter( canvasImage );
-        painter.setBrush( brush1 );
-        painter.setRenderHint( QPainter::Antialiasing, true );
-        painter.drawEllipse( canvasImage->width() / 2 - (int)( (double)(radius) * 1.05 ),
-                             canvasImage->height() / 2 - (int)( (double)(radius) * 1.05 ),
-                             (int)( 2.1 * (double)(radius) ), 
-                             (int)( 2.1 * (double)(radius) ) );
-    }
-
     d->m_radius = radius;
 }
 
