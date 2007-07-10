@@ -16,7 +16,7 @@ class AbstractScanlineTextureMapper : public AbstractLayer
     Q_OBJECT
 
 public:
-    AbstractScanlineTextureMapper( const QString& path, QObject * parent=0 );
+    explicit AbstractScanlineTextureMapper( const QString& path, QObject * parent=0 );
     virtual ~AbstractScanlineTextureMapper();
     virtual void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis) =0;
 

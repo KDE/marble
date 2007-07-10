@@ -26,7 +26,7 @@ class TileLoader;
 class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
-    GlobeScanlineTextureMapper( const QString& path, QObject * parent =0 );
+    explicit GlobeScanlineTextureMapper( const QString& path, QObject * parent =0 );
     virtual ~GlobeScanlineTextureMapper();
 
     bool interlaced() const { return m_interlaced; }
