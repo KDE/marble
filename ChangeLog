@@ -1,3 +1,8 @@
+2007-07-10  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/kdemain.cpp (main): Use KDE classes to parse command line
+	options and arguments.
+
 2007-07-07  Inge Wallin  <inge@lysator.liu.se>
 
 	d-pointer'ify LegendBrowser

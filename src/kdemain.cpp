@@ -37,6 +37,12 @@ int main (int argc, char *argv[])
 
     KCmdLineArgs::init( argc, argv, &aboutData );
 
+    
+    KCmdLineOptions  options;
+    options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
+    KCmdLineArgs::addCmdLineOptions( options );
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
     KApplication app;
 
     MainWindow *window = new MainWindow();
@@ -45,16 +51,20 @@ int main (int argc, char *argv[])
     window->resize(680, 640);
     window->show();
 
-    // This should be reimplemented properly using KDE classes
-    for ( int i = 1; i < argc; ++i ) {
-        if ( strcmp( argv[ i ], "--timedemo" ) == 0 )
-        {
-            window->resize(900, 640);
-            marbleTest->timeDemo();
-            return 0;
-        }
-        else if ( QFile::exists( app.arguments().at( i ) ) )
-            ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
+    if ( args->isSet( "timedemo" ) ) {
+        window->resize(900, 640);
+        marbleTest->timeDemo();
+        return 0;
+    }
+
+    // Read the files that are given on the command line.
+    // FIXME: What should the '1' below really be?
+    // Command line arguments, i.e. files to open
+    for (int i = 0; i < args->count(); i++) {
+
+        // FIXME: Use openUrl( args->url(i)) instead?
+        if ( QFile::exists( args->arg( i ) ) )
+            ( window->marbleControl() )->addPlaceMarkFile( args->arg( i ) );
     }
 
     delete marbleTest;
