@@ -17,7 +17,7 @@
 #ifndef HTTPFETCHFILE_H
 #define HTTPFETCHFILE_H
 
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtCore/QFile>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>

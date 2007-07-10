@@ -1,5 +1,13 @@
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy fix: Use proper include directives
+	* src/lib/httpfetchfile.h: Fix include
+
+	Krazy fixes: Add 'explicit' to constructors:
+	* src/lib/AbstractScanlineTextureMapper.h,
+	src/lib/FlatScanlineTextureMapper.h,
+	src/lib/GlobeScanlineTextureMapper.h: Add explict keyword
+
 	Remove m_canvasimg from MarbleModelPrivate.
 	* src/lib/MarbleModel.{h,cpp} (paintGlobe): Add parameter canvasImage
 	(setRadius): Add parameter canvasImage
