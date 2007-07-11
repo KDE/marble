@@ -5,8 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2007      Carlos Licea     <carlos _licea@hotmail.com>
 //
+
 
 #ifndef GPSLAYER_H
 #define GPSLAYER_H

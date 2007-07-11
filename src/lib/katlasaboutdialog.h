@@ -23,7 +23,6 @@
 
 class MARBLE_EXPORT KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog
 {
-
     Q_OBJECT
 
  public:
