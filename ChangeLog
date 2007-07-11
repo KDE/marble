@@ -10,6 +10,9 @@
     Use "Schema" tag to compliant to kml reference
     * tools/asc2kml/asc2kml.cpp
 
+    Updated kml diagram after talk with Inge Wallin
+    * projects/kml/KMLClasses.xmi
+
 2007-07-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issues 4 and 15: copyright and license
