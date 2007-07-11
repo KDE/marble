@@ -1,3 +1,8 @@
+2007-07-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 4: Acceptable copyright.
+	* src/lib/gps/Track.cpp (addTrackSeg): Fix Krazy issue and cleaning
+
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Break out drawing of the atmosphere effect into its own function
