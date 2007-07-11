@@ -30,28 +30,26 @@ PlaceMarkManager::PlaceMarkManager()
     addPlaceMarkFile( "baseplacemarks" );
     addPlaceMarkFile( "elevplacemarks" );
     addPlaceMarkFile( "airportplacemarks" );
+}
 
+
+void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
+{
 #ifdef KML_GSOC
     /*
      * Sample code to test parsing of kml document
      */
-    QString defaultSrcName = KAtlasDirs::path( "placemarks/baseplacemarks.kml" );
 
-    if ( QFile::exists( defaultSrcName ) ) {
-        QFile sourceFile( defaultSrcName );
+    if ( QFile::exists( filepath ) ) {
+        QFile sourceFile( filepath );
 
         if ( sourceFile.open( QIODevice::ReadOnly ) ) {
             KMLDocument document;
             document.load( sourceFile );
         }
     }
-#endif
-}
 
-
-void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
-{
-
+#else
     QString  defaultcachename;
     QString  defaultsrcname;
     QString  defaulthomecache;
@@ -105,6 +103,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     else {
         qDebug() << "No Default Placemark Source File!";
     }
+#endif
 }
 
 
@@ -122,7 +121,7 @@ void PlaceMarkManager::loadKml( const QString& filename )
 }
 
 
-void PlaceMarkManager::importKml( const QString& filename, 
+void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
 {
 
@@ -136,7 +135,7 @@ void PlaceMarkManager::importKml( const QString& filename,
     QByteArray   compByteArray;
     dataIn >> compByteArray;
     QByteArray   xmlByteArray = qUncompress( compByteArray );
-    QString      xmlString    = QString::fromUtf8( xmlByteArray.data(), 
+    QString      xmlString    = QString::fromUtf8( xmlByteArray.data(),
                                                    xmlByteArray.size() );
     QXmlInputSource  source;
     source.setData(xmlString);
@@ -149,7 +148,7 @@ void PlaceMarkManager::importKml( const QString& filename,
 }
 
 
-void PlaceMarkManager::saveFile( const QString& filename, 
+void PlaceMarkManager::saveFile( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )
 {
     if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false )

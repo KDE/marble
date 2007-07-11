@@ -1,3 +1,11 @@
+2007-07-11  Murad Tagirov  <tmurad@gmail.com>
+
+    Added support to open kml files from dialog
+    * src/QtMainWindow.cpp
+
+    Use ifdef in addPlaceMarkFile method to apply new kml parsing
+    * src/lib/placemarkmanager.cpp
+
 2007-07-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 22: Check for signals and slots
@@ -22,8 +30,8 @@
 	* src/lib/FlatScanlineTextureMapper.cpp
 	* src/lib/GlobeScanlineTextureMapper.h
 	* src/lib/GlobeScanlineTextureMapper.cpp
-	* src/lib/gps/GpsLayer.h: Fix license and copyright 
-	
+	* src/lib/gps/GpsLayer.h: Fix license and copyright
+
 	Fix Krazy issue 4: Acceptable copyright.
 	* src/lib/gps/Track.cpp (addTrackSeg): Fix Krazy issue and cleaning
 

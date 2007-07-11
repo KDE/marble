@@ -46,19 +46,19 @@ void MainWindow::createActions()
      openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
      openAct->setShortcut( tr( "Ctrl+O" ) );
      openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
-     connect( openAct, SIGNAL( triggered() ), 
+     connect( openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
 
      exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
      exportMapAct->setShortcut(tr("Ctrl+S"));
      exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
      connect(exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
- 
+
      printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
      printAct->setShortcut(tr("Ctrl+P"));
      printAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
- 
+
      quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
      quitAct->setShortcut(tr("Ctrl+Q"));
      quitAct->setStatusTip(tr("Quit the Application"));
@@ -81,7 +81,7 @@ void MainWindow::createActions()
      aboutQtAct = new QAction(tr("About &Qt"), this);
      aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
      connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-     
+
 }
 
 void MainWindow::createMenus()
@@ -179,9 +179,18 @@ void MainWindow::aboutMarble()
 void MainWindow::openFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open File"), QString(), tr("GPS Data (*.gpx)"));
-    
-    m_katlascontrol->marbleWidget()->openGpxFile( fileName );
+            tr("Open File"), QString(), tr("GPS Data (*.gpx);;KML (*.kml)"));
+
+    if ( ! fileName.isNull() ) {
+        QString extension = fileName.section( '.', -1 );
+
+        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
+            m_katlascontrol->marbleWidget()->openGpxFile( fileName );
+        }
+        else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
+            m_katlascontrol->marbleWidget()->addPlaceMarkFile( fileName );
+        }
+    }
 }
 
 #include "QtMainWindow.moc"

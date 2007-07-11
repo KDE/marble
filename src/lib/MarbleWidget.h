@@ -17,7 +17,7 @@
 
 /** @file
  * This file contains the headers for MarbleWidget.
- * 
+ *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
@@ -44,7 +44,7 @@ class MarbleWidgetPrivate;
 class GpsLayer;
 
 
-/** 
+/**
  * @short A widget class that displays a view of the earth.
  *
  * This widget displays a view of the earth or any other globe,
@@ -79,7 +79,7 @@ class GpsLayer;
  * one item from the menu, Marble will open up a dialog window with
  * some information about the PlaceMark and also try to connect to
  * Wikipedia to retrieve an article about it. If there is such an
- * article, you will get a mini-browser window with the article in a tab. 
+ * article, you will get a mini-browser window with the article in a tab.
  *
  * The right mouse button controls a distance tool.  The distance tool
  * is implemented as a menu where you can choose to either create or
@@ -124,7 +124,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param parent the parent widget
      *
      * This constructor should be used when you will only use one
-     * MarbleWidget.  The widget will create its own MarbleModel when 
+     * MarbleWidget.  The widget will create its own MarbleModel when
      * created.
      */
     explicit MarbleWidget(QWidget *parent = 0);
@@ -168,7 +168,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool            globeSphericals( int x, int y, 
+    bool            globeSphericals( int x, int y,
                                      double& alpha, double& beta );
     /**
      * @brief returns the model for all the placemarks on the globe.
@@ -269,7 +269,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The lakes' visibility.
      */
     bool  showLakes() const;
-    
+
     /**
      * @brief Return whether Gps Data is visible.
      * @return The Gps Data's visibility.
@@ -450,37 +450,37 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the lakes
      */
     void setShowLakes( bool visible );
-    
+
     /**
      * @brief Set whether Gps Data is visible
      * @param visible  visibility of the Gps Data
      */
     void setShowGps( bool visible );
-    
+
     /**
      * @brief Set the current Gps position
      * @param lat the new latitude value
      * @param lon the new longitude value
      */
     void changeGpsPosition( double lat, double lon);
-    
+
      /**
      * @brief used to notify about the position of the mouse click
       */
     void gpsCoordinatesClick( int, int );
-    
+
     /**
      * @brief updates the gps tracking point by polling
      */
     void updateGps();
-    
+
     /**
      * @brief Opens a gpx file for viewing on the Marble Widget
      */
     void openGpxFile( QString );
 
     /**
-     * @brief  Set whether for rendering quick and dirty algorithms should be used 
+     * @brief  Set whether for rendering quick and dirty algorithms should be used
      * @param  enabled  Enable quick and dirty rendering
      */
     void setQuickDirty( bool enabled );
@@ -522,7 +522,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  zoomChanged( int );
 
     void  mouseGeoPosition( QString );
-    
+
     void gpsClickPos( double, double, GeoPoint::Unit );
 
     void timeout(); // we need a better name here!
@@ -552,7 +552,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setActiveRegion();
 
  private:
-    MarbleWidgetPrivate  * const d; 
+    MarbleWidgetPrivate  * const d;
 };
 
 
