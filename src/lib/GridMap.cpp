@@ -55,7 +55,7 @@ void GridMap::createTropics(const int& radius, Quaternion& planetAxis)
     clear();
     m_radius = radius - 1;
     planetAxis.inverse().toMatrix( m_planetAxisMatrix );
-	
+
     // Turn on the major circles of latitude if we've zoomed in far
     // enough (radius > 400 pixels)
     if ( m_radius >  400 ) {
@@ -66,6 +66,16 @@ void GridMap::createTropics(const int& radius, Quaternion& planetAxis)
     }
 }
 
+void GridMap::createEquator(const int& radius, Quaternion& planetAxis) 
+{
+    clear();
+    m_radius = radius - 1;
+    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+#ifdef FLAT_PROJ
+    m_planetAxis = planetAxis;
+#endif
+    createCircle( 0.0 , Latitude );
+}
 
 void GridMap::createGrid(const int& radius, Quaternion& planetAxis)
 {
@@ -119,9 +129,6 @@ void GridMap::createCircles( const int lngNum, const int latNum )
 
     if ( latNum != 0 ) {
 
-        // Equator:
-        createCircle( 0.0 , Latitude );
-
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
             createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude );
@@ -132,7 +139,7 @@ void GridMap::createCircles( const int lngNum, const int latNum )
     if ( lngNum == 0 )
         return;
 #ifndef FLAT_PROJ
-    // Universal prime meridian
+    // Universal prime meridian and its orthogonal great circle:
     createCircle( + 0,      Longitude );
     createCircle( + PIHALF, Longitude );	
 
@@ -142,7 +149,7 @@ void GridMap::createCircles( const int lngNum, const int latNum )
         createCircle( i * PIHALF / lngNum + PIHALF, Longitude, cutOff );	
     }
 #else
-    // Universal prime meridian and its orthogonal great circle:
+    // Universal prime meridian
     createCircle( + 0,      Longitude );
 
     for ( int i = 1; i <= lngNum; ++i ) {

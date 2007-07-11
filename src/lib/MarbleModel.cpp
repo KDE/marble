@@ -312,6 +312,13 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
         // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( d->m_radius, d->m_planetAxis );
         gridpen.setStyle( Qt::DotLine );
+        gridpen.setWidthF( 1.5f );
+        d->m_gridmap->setPen( gridpen );
+        d->m_gridmap->paintGridMap( painter, true );
+        
+        // Create Equator
+        d->m_gridmap->createEquator( d->m_radius, d->m_planetAxis );
+        gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
     }

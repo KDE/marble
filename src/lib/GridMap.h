@@ -33,6 +33,7 @@ class GridMap : public ScreenPolygon::Vector
     ~GridMap();
 
     void createTropics( const int&, Quaternion& );
+    void createEquator (const int&, Quaternion& );
     void createGrid( const int&, Quaternion& );
 
     void paintGridMap(ClipPainter * painter, bool );
