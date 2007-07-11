@@ -42,6 +42,8 @@ Misc
    - (SearchListView) does not have any private members                 done
    - MarbleNavigator                                                    --
    - MapTheme                                                           --
+   - KAtlasAboutDialog                                                  --
+   - ViewParams                                                         --
 
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE
