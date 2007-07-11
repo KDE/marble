@@ -73,7 +73,7 @@ void TileLoader::resetTilehash()
 {
     QHash<int, TextureTile*>::const_iterator it = m_tileHash.constBegin();
     while ( it != m_tileHash.constEnd() ) {
-        m_tileHash.value(it.key())->setUsed( false );
+        it.value()->setUsed( false );
         ++it;
     }
 }
@@ -86,9 +86,9 @@ void TileLoader::cleanupTilehash()
     QHashIterator<int, TextureTile*> it(m_tileHash);
     while (it.hasNext()) {
         it.next();
-        if ((it.value())->used() == false){
-            // qDebug("Removing " + QString::number(it.key()).toLatin1());
-            delete m_tileHash.value(it.key());
+        if ( it.value()->used() == false ){
+//            qDebug("Removing " + QString::number(it.key()).toLatin1());
+            delete it.value();
             m_tileHash.remove(it.key());	
         }
     }
@@ -126,7 +126,6 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
         m_tile = m_tileHash.value( tileId );
         if ( !m_tile->used() ) {
             m_tile->setUsed( true );
-            m_tileHash[tileId] = m_tile;
         }
     }
 

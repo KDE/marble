@@ -308,8 +308,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
                    || m_posY < 0 )
                 {
                     nextTile();
-                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128 );
+                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
                     m_posX = ( itLng + itStepLng * j ) >> 7;
                     m_posY = ( itLat + itStepLat * j ) >> 7;
                 }
@@ -331,8 +331,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
                    || m_posY < 0 )
                 {
                     nextTile();
-                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128 );
+                    itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
                     m_posX = ( itLng + itStepLng * j ) >> 7;
                     m_posY = ( itLat + itStepLat * j ) >> 7;
                 }

@@ -204,15 +204,17 @@ void AbstractScanlineTextureMapper::nextTile()
     // Recalculate some convenience variables for the new tile:
     // m_tilePosX/Y stores the position of the tiles in pixels
 
+
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
-    m_tilePosY = tileRow * m_tileLoader->tileHeight();
 
     m_fullNormLng = m_fullRangeLng - m_tilePosX;
     m_halfNormLng = m_halfRangeLng - m_tilePosX;
+    m_posX = lng - m_tilePosX;
+
+    m_tilePosY = tileRow * m_tileLoader->tileHeight();
+
     m_halfNormLat = m_halfRangeLat - m_tilePosY;
     m_quatNormLat = m_quatRangeLat - m_tilePosY;
-
-    m_posX = lng - m_tilePosX;
     m_posY = lat - m_tilePosY;
 }
 

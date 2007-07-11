@@ -541,7 +541,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    ++it;
 	}
 
-	// Get a new VisiblePlaceMark if we didn't find a previous
+	// Get a new VisiblePlaceMark if we didn't find a vious
 	// one. Either get it from the pool, or generate a new one.
 	if ( !found ) {
 	    // Get a VisiblePlaceMark from the pool, or generate a new one
@@ -639,7 +639,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 }
                 else {
                     QImage textimage( textwidth, m_fontheight,
-                                      QImage::Format_ARGB32_Premultiplied );
+                                      QImage::Format_ARGB32_multiplied );
                     textimage.fill( 0 );
 
                     textpainter.begin( &textimage );

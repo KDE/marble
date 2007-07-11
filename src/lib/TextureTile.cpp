@@ -136,12 +136,6 @@ void TextureTile::loadTile( int x, int y, int level,
 //            qDebug() << "Finished scaling up the Temporary Tile.";
 		}
 
-        QImage testtile = temptile;
-
-        QString rawtext = m_rawtile.text();
-        QString temptext = temptile.text();
-
-
         m_rawtile = temptile;
 
 		break;

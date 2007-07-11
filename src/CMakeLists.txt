@@ -43,7 +43,7 @@ ENDIF(MINGW)
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} -O2 -msse)
+    add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
 
   include_directories(
@@ -55,7 +55,7 @@ if (QTONLY)
   )
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2 -msse) 
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
   endif(NOT WIN32)
 
   include_directories(
@@ -112,12 +112,14 @@ else (QTONLY)
 endif (QTONLY)
 
 if (QTONLY)
-    if (APPLE)
-        add_executable (marble MACOSX_BUNDLE ${marble_SRCS})
-    endif (APPLE)
-
     if (WIN32)
         add_executable (marble WIN32 ${marble_SRCS} ${marble_HDRS})
+    else (WIN32)
+        if (APPLE)
+            add_executable (marble MACOSX_BUNDLE ${marble_SRCS})
+        else (APPLE)
+            add_executable (marble ${marble_SRCS} ${marble_HDRS})
+        endif (APPLE)
     endif (WIN32)
 else (QTONLY)
   kde4_add_executable (marble ${marble_SRCS} ${marble_HDRS})

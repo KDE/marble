@@ -1,3 +1,8 @@
+2007-07-11  Torsten Rahn  <rahn@kde.org>
+
+- Fixed tiny build problem introduced by WildFox.
+- Various tiny cleanups
+
 2007-07-11  Murad Tagirov  <tmurad@gmail.com>
 
     Added support to open kml files from dialog
