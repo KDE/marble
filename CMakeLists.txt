@@ -23,6 +23,13 @@ include(DistTarget)
 if (QTONLY)
   # add a flag to be able to distinguish between qt and kde mode in the sources
   add_definitions(-DQTONLY)
+
+  # Eventually workaround FindQt4.cmake bug not finding QtDesigner includes
+  if(APPLE)
+    if (NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
+        set ( QT_QTDESIGNER_INCLUDE_DIR ${QT_LIBRARY_DIR}/QtDesigner.framework/Headers )
+    endif(NOT DEFINED ${QT_QTDESIGNER_INCLUDE_DIR})
+  endif(APPLE)
 else(QTONLY)
   # search packages used by KDE
   find_package(KDE4 REQUIRED)
