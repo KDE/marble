@@ -1,3 +1,9 @@
+2007-07-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 22: Check for signals and slots
+	* src/lib/MarbleControlBox.h (MarbleControlBox): Use Q_SLOTS and
+	Q_SIGNALS instead slots and signals
+
 2007-07-11  Murad Tagirov  <tmurad@gmail.com>
 
     Use QCoreApplication instead of QApplication

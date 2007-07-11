@@ -78,7 +78,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
 
     int minimumZoom() const;
 	
- signals:
+ Q_SIGNALS:
     void goHome();
     void zoomIn();
     void zoomOut();
@@ -96,13 +96,12 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
     void gpsPositionChanged( double lat, double lon);
     void updateGps();
    
-
- public slots:
+ public Q_SLOTS:
     void changeZoom(int);
     void disableGpsInput( bool );
     void recieveGpsCoordinates( double, double, GeoPoint::Unit );
 
- private slots:
+ private Q_SLOTS:
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);
 
