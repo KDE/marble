@@ -12,9 +12,10 @@
 
 // #include <zlib.h>
 
-#include <QFile>
-#include <QApplication>
-#include <QDebug>
+#include <QtCore/QCoreApplication>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
 
 
 QString escapeXml( const QString &str )
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
     QString  sourcefilename;
     QString  targetfilename;
 
-    QApplication  app( argc, argv );
+    QCoreApplication  app( argc, argv );
 
     for ( int i = 1; i < argc; ++i ) {
         if ( strcmp( argv[ i ], "-o" ) != 0 )
@@ -67,25 +68,12 @@ int main(int argc, char *argv[])
                      << "<kml xmlns=\"http://earth.google.com/kml/2.0\"> \n"
                      << "<Document> \n";
 
-        targetstream << "    <SimpleField> \n"
-                     << "        <name>pop</name> \n"
-                     << "        <type>int</type> \n"
-                     << "    </SimpleField> \n";
-
-        targetstream << "    <SimpleField> \n"
-                     << "        <name>state</name> \n"
-                     << "        <type>string</type> \n"
-                     << "    </SimpleField> \n";
-
-        targetstream << "    <SimpleField> \n"
-                     << "        <name>CountryNameCode</name> \n"
-                     << "        <type>string</type> \n"
-                     << "    </SimpleField> \n";
-
-        targetstream << "    <SimpleField> \n"
-                     << "        <name>role</name> \n"
-                     << "        <type>string</type> \n"
-                     << "    </SimpleField> \n";
+        targetstream << "    <Schema name=\"MarblePlaceMark\" parent=\"PlaceMark\"> \n";
+        targetstream << "       <SimpleField name=\"pop\" type=\"int\"></SimpleField> \n";
+        targetstream << "       <SimpleField name=\"state\" type=\"string\"></SimpleField> \n";
+        targetstream << "       <SimpleField name=\"CountryNameCode\" type=\"string\"></SimpleField> \n";
+        targetstream << "       <SimpleField name=\"role\" type=\"string\"></SimpleField> \n";
+        targetstream << "    </Schema> \n";
 
         targetstream << "\n";
 
@@ -96,7 +84,7 @@ int main(int argc, char *argv[])
         QString  role;
         QString  popstring;
         QString  latstring;
-        QString  lngstring; 
+        QString  lngstring;
         float    lat;
         float    lng;
         int          population;
@@ -126,23 +114,23 @@ int main(int argc, char *argv[])
             if ( latstring.contains( "S" ) )
                 lat=-lat;
 
-            targetstream << "    <Placemark> \n";
+            targetstream << "    <MarblePlacemark> \n";
             targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
             targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
             targetstream << "        <Country>\n"
-                         << "	     <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n"
+                         << "            <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n"
                          << "        </Country> \n";
             targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
-            targetstream << "        <pop>" 
+            targetstream << "        <pop>"
                          << escapeXml( QString::number( population ) ) << "</pop> \n";
             targetstream << "        <Point>\n"
-                         << "            <coordinates>" 
+                         << "            <coordinates>"
                          << escapeXml( QString::number( lng ) )
                          << ","
                          << escapeXml( QString::number( lat ) )
                          << "</coordinates> \n"
                          << "        </Point> \n";
-            targetstream << "    </Placemark> \n";
+            targetstream << "    </MarblePlacemark> \n";
         }
 
         targetstream << "</Document> \n"
@@ -151,7 +139,7 @@ int main(int argc, char *argv[])
 
         // gzputs( gzDoc, targetstream.readAll().toUtf8() );
         // gzclose( gzDoc );
-			
+
         sourcefile.close();
         targetfile.close();
 

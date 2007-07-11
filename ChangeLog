@@ -1,3 +1,9 @@
+2007-07-11  Murad Tagirov  <tmurad@gmail.com>
+
+    Use QCoreApplication instead of QApplication
+    Use "Schema" tag to compliant to kml reference
+    * tools/asc2kml/asc2kml.cpp
+
 2007-07-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 4: Acceptable copyright.
@@ -16,7 +22,7 @@
 	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Add
 	m_viewParams and delete m_canvasImage
 	* src/lib/MarbleModel.{h,cpp}: Use ViewParams where applicable.
-	
+
 	Move initialization of the basic image from MarbleModel to
 	MarbleWidget
 	* src/lib/MarbleModel.cpp (setRadius): Remove most contents
@@ -50,21 +56,21 @@
 2007-07-10  Torsten Rahn  <rahn@kde.org>
 
 - Fixed disabled accurate pole texture mapping.
-- Fixed miscalculated interpolation borders (will speed up Marble in 
+- Fixed miscalculated interpolation borders (will speed up Marble in
 quite some cases)
 
 2007-07-09  Torsten Rahn  <rahn@kde.org>
 
-- "I don't like to give away pizzas for nothing ;-)"-performance patches 
+- "I don't like to give away pizzas for nothing ;-)"-performance patches
   for mapTexture()
- 
+
   Results in almost 20% better overall performance.
 
 - Better testcase for MarbleTest
 
-- Adding airports ( not done yet ) 
+- Adding airports ( not done yet )
 
-- Small patches by Benoit Sigoure 
+- Small patches by Benoit Sigoure
   (which result in maybe 1% improved performance here)
 
 - initial changes to tinywebbrowser to get image loading
@@ -82,7 +88,7 @@ quite some cases)
 
 	Fix d-pointer for MarbleModel
 	* src/lib/MarbleModel.cpp: Move m_timer to MarbleModelPrivate
-	
+
 	d-pointer'ify PlaceMarkModel
 	* src/lib/placemarkmodel.{h,cpp}: Use d-pointer
 
