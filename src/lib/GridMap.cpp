@@ -131,8 +131,8 @@ void GridMap::createCircles( const int lngNum, const int latNum )
 
     if ( lngNum == 0 )
         return;
-
-    // Universal prime meridian and its orthogonal great circle:
+#ifndef FLAT_PROJ
+    // Universal prime meridian
     createCircle( + 0,      Longitude );
     createCircle( + PIHALF, Longitude );	
 
@@ -141,6 +141,16 @@ void GridMap::createCircles( const int lngNum, const int latNum )
         createCircle( i * PIHALF / lngNum,          Longitude, cutOff );
         createCircle( i * PIHALF / lngNum + PIHALF, Longitude, cutOff );	
     }
+#else
+    // Universal prime meridian and its orthogonal great circle:
+    createCircle( + 0,      Longitude );
+
+    for ( int i = 1; i <= lngNum; ++i ) {
+        double cutOff = PIHALF / (double)(latNum);
+        createCircle( i * M_PI / lngNum,          Longitude, cutOff );
+        createCircle( i * M_PI / lngNum + M_PI, Longitude, cutOff );	
+    }
+#endif
 }
 
 
@@ -236,19 +246,25 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
         QPointF beginPoint(0.0f,m_imageHalfHeight + (centerLat + val)*xyFactor );
         QPointF endPoint( m_imageHalfWidth*2, m_imageHalfHeight + (centerLat + val)*xyFactor );
         m_polygon<<beginPoint<<endPoint;
+        append(m_polygon);
     }
     else
     {
-        float begin = m_imageHalfHeight - m_radius + centerLat*xyFactor;
-        float end = begin + 2*m_radius;
-        begin = (begin >= 0)? begin : 0;
-        end = (end <= m_imageHalfHeight*2)? end : m_imageHalfHeight*2;
-
-        QPointF beginPoint( m_imageHalfWidth + (centerLng + val)*xyFactor,begin);
-        QPointF endPoint(m_imageHalfWidth + (centerLng + val)*xyFactor,end);
-        m_polygon<<beginPoint<<endPoint;
+        float beginY = m_imageHalfHeight - m_radius + centerLat*xyFactor;
+        float endY = beginY + 2*m_radius;
+        if ( beginY < 0 ) beginY = 0;
+        if ( endY > 2*m_imageHalfHeight ) endY = 2*m_imageHalfHeight ;
+        float x = m_imageHalfWidth + (centerLng + val)*xyFactor;
+        while( x > 4*m_radius ) x-=4*m_radius;
+        while( x < m_imageHalfWidth*2 ) {
+            QPointF beginPoint( x , beginY );
+            QPointF endPoint( x , endY );
+            m_polygon<<beginPoint<<endPoint;
+            x+=4*m_radius;
+            append(m_polygon);
+            m_polygon.clear();
+        }
     }
-    append(m_polygon);
 #endif
 }
 
