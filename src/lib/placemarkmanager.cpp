@@ -19,10 +19,10 @@
 #include <QtXml/QXmlSimpleReader>
 
 #include "xmlhandler.h"
-#include "kml/KMLDocument.h"
 
 
 PlaceMarkManager::PlaceMarkManager()
+  : m_kmldocument( new KMLDocument() )
 {
     m_placeMarkContainer = new PlaceMarkContainer();
 
@@ -37,18 +37,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
 #ifdef KML_GSOC
     /*
-     * Sample code to test parsing of kml document
+     * Simply call loadKml, should use cache in feature
      */
-
-    if ( QFile::exists( filepath ) ) {
-        QFile sourceFile( filepath );
-
-        if ( sourceFile.open( QIODevice::ReadOnly ) ) {
-            KMLDocument document;
-            document.load( sourceFile );
-        }
-    }
-
+    loadKml( filepath );
 #else
     QString  defaultcachename;
     QString  defaultsrcname;
@@ -109,6 +100,18 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 
 void PlaceMarkManager::loadKml( const QString& filename )
 {
+#ifdef KML_GSOC
+    if ( QFile::exists( filename ) ) {
+        QFile sourceFile( filename );
+
+        if ( sourceFile.open( QIODevice::ReadOnly ) ) {
+            delete m_kmldocument;
+
+            m_kmldocument = new KMLDocument();
+            m_kmldocument->load( sourceFile );
+        }
+    }
+#else
     // This still is buggy and needs a lot of work as does the concept
     // as a whole ...
 
@@ -118,6 +121,7 @@ void PlaceMarkManager::loadKml( const QString& filename )
     // delete tmp;
 
     importKml( filename, m_placeMarkContainer );
+#endif
 }
 
 

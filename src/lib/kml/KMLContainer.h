@@ -28,7 +28,7 @@ class KMLContainer : public KMLFeature
  protected:
     KMLContainer();
 
- private:
+ protected:
      QVector <KMLPlaceMark*> m_placemarkVector;
 };
 

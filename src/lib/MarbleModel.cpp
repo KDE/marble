@@ -53,7 +53,7 @@ class MarbleModelPrivate
     PlaceMarkContainer  *m_placeMarkContainer;
     PlaceMarkModel      *m_placemarkmodel;
     PlaceMarkPainter    *m_placemarkpainter;
-    
+
     //Gps Stuff
     GpsLayer            *m_gpsLayer;
 
@@ -79,10 +79,10 @@ MarbleModel::MarbleModel( QWidget *parent )
 {
     d->m_timer = new QTimer( this );
     d->m_timer->start( 1000 );
-    
-    connect( d->m_timer, SIGNAL( timeout() ), 
+
+    connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
-    
+
     d->m_texmapper = 0;
 
     d->m_placemarkpainter   = 0;
@@ -120,7 +120,7 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_veccomposer  = new VectorComposer();
     d->m_gridmap      = new GridMap();
-    d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ), 
+    d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ),
                                               KAtlasDirs::path( "landcolors.leg" ) );
 
     d->m_placemarkmanager   = new PlaceMarkManager();
@@ -130,7 +130,7 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_placemarkmodel   = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
-    
+
     d->m_gpsLayer = new GpsLayer();
 }
 
@@ -148,27 +148,27 @@ bool MarbleModel::showGrid() const
 }
 
 void MarbleModel::setShowGrid( bool visible )
-{ 
+{
     d->m_showGrid = visible;
 }
 
 bool MarbleModel::showPlaceMarks() const
-{ 
+{
     return d->m_showPlaceMarks;
 }
 
 void MarbleModel::setShowPlaceMarks( bool visible )
-{ 
+{
     d->m_showPlaceMarks = visible;
 }
 
 bool MarbleModel::showElevationModel() const
-{ 
+{
     return d->m_showElevationModel;
 }
 
 void MarbleModel::setShowElevationModel( bool visible )
-{ 
+{
     d->m_showElevationModel = visible;
 }
 
@@ -184,7 +184,7 @@ void MarbleModel::setShowGps( bool visible )
 
 
 // Set a particular theme for the map, and load the top 3 tile levels.
-// If these tiles aren't already created, then create them here and now. 
+// If these tiles aren't already created, then create them here and now.
 
 void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
@@ -198,12 +198,12 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
 #if 1
         KAtlasTileCreatorDialog tilecreatordlg( parent );
-        tilecreatordlg.setSummary( d->m_maptheme->name(), 
+        tilecreatordlg.setSummary( d->m_maptheme->name(),
                                    d->m_maptheme->description() );
 #endif
 
         TileScissor tilecreator( d->m_maptheme->prefix(),
-                                 d->m_maptheme->installMap(), 
+                                 d->m_maptheme->installMap(),
                                  d->m_maptheme->bitmaplayer().dem);
 
         // This timer is necessary, because if we remove it, the GUI
@@ -219,7 +219,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
         connect( &tilecreator, SIGNAL( progress( int ) ),
                  this,         SIGNAL( creatingTilesProgress( int ) ) );
         qDebug("Before emitting creatingTilesStart() ... ");
-        emit creatingTilesStart( d->m_maptheme->name(), 
+        emit creatingTilesStart( d->m_maptheme->name(),
                                  d->m_maptheme->description() );
         qDebug("After emitting creatingTilesStart() ... ");
 #endif
@@ -236,7 +236,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
     else
         d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
-    connect( d->m_texmapper,      SIGNAL( mapChanged() ), 
+    connect( d->m_texmapper,      SIGNAL( mapChanged() ),
              this,              SLOT( notifyModelChanged() ) );
 
     if ( d->m_placeMarkContainer == 0)
@@ -280,7 +280,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
             d->m_coastimg->fill( Qt::transparent );
 
             // Create VectorMap
-            d->m_veccomposer->drawTextureMap( d->m_coastimg, d->m_radius, 
+            d->m_veccomposer->drawTextureMap( d->m_coastimg, d->m_radius,
                                               d->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
@@ -291,7 +291,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     }
 
     // Paint the map on the Widget
-    painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect ); 
+    painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
@@ -315,7 +315,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
         gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
-        
+
         // Create Equator
         d->m_gridmap->createEquator( d->m_radius, d->m_planetAxis );
         gridpen.setWidthF( 2.0f );
@@ -324,15 +324,26 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     }
 
     // Paint the PlaceMark layer
+#ifndef KML_GSOC
     if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
-        d->m_placemarkpainter->paintPlaceFolder( painter, 
+        d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
                                                  d->m_radius,
                                                  d->m_placeMarkContainer,
                                                  d->m_planetAxis );
     }
-    
+#else
+    if ( d->m_showPlaceMarks ) {
+        d->m_placemarkpainter->paintPlaceFolder( painter,
+                                                 viewParams->m_canvasImage->width(),
+                                                 viewParams->m_canvasImage->height(),
+                                                 d->m_radius,
+                                                 d->m_placemarkmanager->getPlaceMarkContainer(),
+                                                 d->m_planetAxis );
+    }
+#endif
+
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
         d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
@@ -347,7 +358,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
 
 int MarbleModel::radius() const
 {
-    return d->m_radius; 
+    return d->m_radius;
 }
 
 void MarbleModel::setRadius(const int radius)
@@ -397,7 +408,7 @@ void MarbleModel::rotateBy(const double& phi, const double& theta)
 }
 
 double MarbleModel::centerLatitude() const
-{ 
+{
     return d->m_planetAxis.pitch() * 180.0 / M_PI;
 }
 
@@ -415,7 +426,7 @@ QAbstractListModel *MarbleModel::getPlaceMarkModel() const
 bool MarbleModel::needsUpdate() const
 {
     return !( d->m_radius == d->m_radiusUpdated
-              && d->m_planetAxis == d->m_planetAxisUpdated ); 
+              && d->m_planetAxis == d->m_planetAxisUpdated );
 }
 
 void MarbleModel::setNeedsUpdate()
@@ -426,7 +437,7 @@ void MarbleModel::setNeedsUpdate()
 
 int MarbleModel::northPoleY()
 {
-    
+
     Quaternion  northPole   = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
 
@@ -469,7 +480,7 @@ FlatScanlineTextureMapper
     return d->m_texmapper;
 }
 
-PlaceMarkPainter  *MarbleModel::placeMarkPainter() const 
+PlaceMarkPainter  *MarbleModel::placeMarkPainter() const
 {
     return d->m_placemarkpainter;
 }
@@ -479,7 +490,7 @@ GpsLayer          *MarbleModel::gpsLayer()         const
     return d->m_gpsLayer;
 }
 
-bool MarbleModel::screenCoordinates( const double lng, const double lat, 
+bool MarbleModel::screenCoordinates( const double lng, const double lat,
                                      int& x, int& y )
 {
     Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
@@ -492,7 +503,7 @@ bool MarbleModel::screenCoordinates( const double lng, const double lat,
 
     if ( qpos.v[Q_Z] >= 0.0 )
         return true;
-    else 
+    else
         return false;
 }
 
@@ -502,7 +513,7 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
-    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );	
+    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 }
 
 QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )

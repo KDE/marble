@@ -16,7 +16,9 @@
 
 #include "PlaceMarkContainer.h"
 #include "katlasdirs.h"
+#include "kml/KMLDocument.h"
 
+class KMLDocument;
 
 class PlaceMarkManager
 {
@@ -27,8 +29,12 @@ class PlaceMarkManager
     void addPlaceMarkFile( const QString& );
 
     PlaceMarkContainer* getPlaceMarkContainer() {
+#ifndef KML_GSOC
         m_placeMarkContainer->sort();
         return m_placeMarkContainer;
+#else
+        return &m_kmldocument->activePlaceMarkContainer();
+#endif
     }
 
     void loadKml( const QString& );
@@ -41,6 +47,9 @@ class PlaceMarkManager
  protected:
     // Eventually there will be more than one container.
     PlaceMarkContainer  *m_placeMarkContainer;
+
+ private:
+    KMLDocument* m_kmldocument;
 };
 
 #endif // PLACEMARKMANAGER_H

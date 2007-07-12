@@ -13,6 +13,7 @@
 #define KMLDOCUMENT_H
 
 #include "KMLFolder.h"
+#include "PlaceMarkContainer.h"
 
 class QIODevice;
 
@@ -22,6 +23,14 @@ class KMLDocument : public KMLFolder
     KMLDocument();
 
     void load( QIODevice& source );
+
+    /*
+     * Will move this method to KMLDocumentModel in a next step
+     */
+    PlaceMarkContainer& activePlaceMarkContainer();
+
+ private:
+     PlaceMarkContainer m_activePlaceMarkContainer;
 };
 
 #endif // KMLDOCUMENT_H

@@ -14,3 +14,7 @@
     * memory cache size
     * disk cache size
 this will allow to store a big kml documents and efficient memory usage.
+
+- Show list view on the left that indicates opened kml/gpx files. List view should only
+  appear if there are more than one opened file.
+

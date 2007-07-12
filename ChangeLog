@@ -1,3 +1,16 @@
+2007-07-12  Murad Tagirov  <tmurad@gmail.com>
+    Inherit KMLPlaceMark from Placemark to not touch
+    placemarks painting at this step
+    * src/lib/kml/KMLPlaceMark.h
+
+    Added method to KMLDocument to obtain active PlaceMarkContainer.
+    PlaceMarkManager uses this to get placemarks which are on a screen
+    * src/lib/kml/KMLDocument.{h,cpp}
+    * src/lib/placemarkmanager.{h,cpp}
+
+    Updated kml-tasks after talk on IRC with Torsten
+    * projects/kml/kml-tasks
+
 2007-07-11  Torsten Rahn  <rahn@kde.org>
 
 - Fixed tiny build problem introduced by WildFox.
