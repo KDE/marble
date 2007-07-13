@@ -227,6 +227,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             x = (int)(imgwidth/2 + radius * qpos.v[Q_X]);
             y = (int)(imgheight/2 + radius * qpos.v[Q_Y]);
 
+            // Don't process placemarks if they are outside the screen area
+            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
+
+
 #else
         if( true )
         {
@@ -238,11 +242,10 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
             x = (int)(imgwidth/2 + xyFactor * (degX + centerLng));
             y = (int)(imgheight/2 + xyFactor * (degY + centerLat));
-#endif
 
             // Don't process placemarks if they are outside the screen area
-            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-
+            if ( ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) || ( x+4*radius < imgwidth || x-4*radius >= 0 ) ) {
+#endif
                 // Choose Section
                 const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
 
@@ -416,21 +419,17 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #ifdef FLAT_PROJ
         for(int i = tempSymbol - 4*radius; i>=0 ; i-= 4*radius) {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
-            mark->symbolPos().setX( mark->symbolPos().x() - 4*radius);
+            mark->symbolPos().setX( i );
             painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
             painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
         }
 
-        mark->symbolPos().setX(tempSymbol);
-
-        for(int i = tempSymbol + 4*radius; i<=imgwidth ; i+= 4*radius) {
+        for(int i = tempSymbol; i<=imgwidth ; i+= 4*radius) {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
-            mark->symbolPos().setX( mark->symbolPos().x() + 4*radius);
+            mark->symbolPos().setX( i );
             painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
             painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
         }
-        mark->textRect().moveLeft(tempSymbol);
-        mark->symbolPos().setX(tempText);
 #endif
     }
 }
