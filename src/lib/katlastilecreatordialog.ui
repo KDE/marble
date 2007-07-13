@@ -16,17 +16,26 @@
    </size>
   </property>
   <property name="windowTitle" >
-   <string>Map Initialization</string>
+   <string>Creating Map</string>
   </property>
   <property name="windowIcon" >
    <iconset/>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
    </property>
    <item>
     <widget class="QLabel" name="descriptionLabel" >
@@ -519,7 +528,7 @@
    <item>
     <widget class="QLabel" name="messageLabel" >
      <property name="text" >
-      <string>Marble needs to initialize this map. This is a one-time procedure and might take a few seconds.</string>
+      <string>Marble needs to create this map. This only needs to be done once and may take a few seconds.</string>
      </property>
      <property name="wordWrap" >
       <bool>true</bool>
@@ -538,11 +547,20 @@
    </item>
    <item>
     <layout class="QHBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
      </property>
      <item>
       <spacer>
