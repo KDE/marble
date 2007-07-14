@@ -37,8 +37,8 @@ class VisiblePlaceMark
     PlaceMark *placeMark() const                { return m_placeMark;  }
     void setPlaceMark( PlaceMark *_mark )       { m_placeMark = _mark; }
 
-    const QPixmap  symbolPixmap() const { return m_placeMark->symbolPixmap();};
-    const QSize    symbolSize()   const { return m_placeMark->symbolSize();  };
+    const QPixmap  symbolPixmap() const { return m_placeMark->symbolPixmap();}
+    const QSize    symbolSize()   const { return m_placeMark->symbolSize();  }
 
     const QPoint& symbolPos() const             { return m_symbolPos;   }
     void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }

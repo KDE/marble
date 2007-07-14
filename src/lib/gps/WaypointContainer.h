@@ -17,7 +17,7 @@ class WaypointContainer : public AbstractLayerContainer
  public:
     WaypointContainer();
     WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
-    virtual ~WaypointContainer() {};
+    virtual ~WaypointContainer() {}
     virtual void draw();
 
  protected:
