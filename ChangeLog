@@ -1,3 +1,12 @@
+2007-07-12  Andrew Manson   <g.real.ate@gmail.com>
+    Cleaned up the comments for all of the AbstractLayer classes and
+    formalised the api more.
+    
+    AbstractLayer now contains a Vector of AbstractLayerContainers 
+    and a simple implementation to call each of their draw() methods
+    when the AbstractLayer draw() method is called.
+    * src/lib/AbstractLayer/AbstractLayer.{h,cpp}
+    
 2007-07-12  Murad Tagirov  <tmurad@gmail.com>
     Inherit KMLPlaceMark from Placemark to not touch
     placemarks painting at this step
