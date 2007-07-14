@@ -21,7 +21,7 @@
 #include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"
-
+// #define FLAT_PROJ
 
 class PntMap;
 class ClipPainter;
@@ -70,7 +70,9 @@ class VectorMap : public ScreenPolygon::Vector
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;
-
+#ifdef FLAT_PROJ
+    Quaternion m_planetAxis;
+#endif
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;

@@ -244,7 +244,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             y = (int)(imgheight/2 + xyFactor * (degY + centerLat));
 
             // Don't process placemarks if they are outside the screen area
-            if ( ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) || ( x+4*radius < imgwidth || x-4*radius >= 0 ) ) {
+             if ( ( x >= 0 && x < imgwidth || x+4*radius < imgwidth || x-4*radius >= 0 )  && y >= 0 && y < imgheight ) {
 #endif
                 // Choose Section
                 const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 

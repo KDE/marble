@@ -89,7 +89,9 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     Quaternion  qbound;
 
     rotAxis.inverse().toMatrix( m_rotMatrix );
-
+#ifdef FLAT_PROJ
+    m_planetAxis = rotAxis;
+#endif
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -106,9 +108,12 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
         for ( int i = 0; i < 5; ++i ) {
             qbound = m_boundary[i].quaternion();
+#ifndef FLAT_PROJ
             qbound.rotateAroundAxis(m_rotMatrix); 
-
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {
+#else
+            if( true ) {
+#endif
                 // if (qbound.v[Q_Z] > 0){
                 m_polygon.clear();
                 m_polygon.reserve( (*itPolyLine)->size() );
@@ -138,7 +143,10 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     Quaternion qpos;
     //	int step = 1;
     //	int remain = size();
-
+#ifdef FLAT_PROJ
+    float const centerLat=m_planetAxis.pitch();
+    float const centerLng=-m_planetAxis.yaw();
+#endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() >= detail ) {
@@ -147,6 +155,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #ifdef VECMAP_DEBUG
             ++m_debugNodeCount;
 #endif
+#ifndef FLAT_PROJ
             qpos = itPoint->quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
             m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1,
@@ -193,7 +202,19 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 
         m_firsthorizon = false;
     }
-		
+#else
+            double xyFactor = (float)(2*m_radius)/M_PI;
+            double degX;
+            double degY;
+            qpos = itPoint->quaternion();
+            qpos.getSpherical(degX,degY);
+            double x = m_imgwidth/2 + xyFactor * (degX + centerLng);
+            double y = m_imgheight/2 + xyFactor * (degY + centerLat);
+            m_currentPoint = QPointF( x, y );
+            m_polygon<<m_currentPoint;
+        }
+    }
+#endif	
     // Avoid polygons degenerated to Points and Lines.
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
