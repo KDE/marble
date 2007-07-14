@@ -147,6 +147,7 @@ class AbstractLayer: public QObject
      */
     bool m_visible;
     
+ protected:
     /**
      * @brief a collection of all containers that hold the data for
      *        this layer
