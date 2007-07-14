@@ -11,6 +11,7 @@
 
 #include "MarbleTest.h"
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 
@@ -34,9 +35,11 @@ void MarbleTest::timeDemo()
     for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
+            QCoreApplication::flush();
         }
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveLeft();
+            QCoreApplication::flush();
         }
     }
 
