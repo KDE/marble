@@ -9,6 +9,7 @@
 //
 
 #include "AbstractLayerContainer.h"
+#include "clippainter.h"
 
 AbstractLayerContainer::AbstractLayerContainer( int size )
 {
@@ -24,10 +25,31 @@ AbstractLayerContainer::AbstractLayerContainer(const QString &name,
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
     
-    *m_name = name;
+    m_name = new QString ( name );
 }
+
 AbstractLayerContainer::~AbstractLayerContainer()
 {
+    delete m_visible;
+    delete m_data;
+    delete m_name;
+}
+
+void AbstractLayerContainer::draw(ClipPainter *painter, 
+                                  const QSize &canvasSize, 
+                                  double radius, 
+                                  Quaternion invRotAxis)
+{
+    const_iterator it;
+    
+    for( it = constBegin(); it < constEnd(); ++it ) {
+        (*it)->draw( painter, canvasSize, radius, invRotAxis);
+    }
+}
+
+QString AbstractLayerContainer::name() const
+{
+    return *m_name; 
 }
 
 void AbstractLayerContainer::processVisible()
@@ -42,6 +64,13 @@ void AbstractLayerContainer::processVisible()
             m_visible -> setBit ( temp, true );
         }
     }
+}
+
+double AbstractLayerContainer::distance ( const QPoint &a, 
+                                          const QPoint &b )
+{
+    return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
+            + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
 }
 
 void AbstractLayerContainer::manageMemory()

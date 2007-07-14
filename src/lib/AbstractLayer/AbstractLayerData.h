@@ -16,52 +16,126 @@
 #include "../GeoPoint.h"
 
 class QPixmap;
+class QPainter;
+class QPoint;
+class QSize;
+class ClipPainter;
 
 
 class AbstractLayerData
 {
  public:
-    //!make a Data Object from GeoPoint
+    /**
+     * @brief make a Data Object from GeoPoint
+     * @param position the position that the intended
+     *                 AbstractLayerData will be at.
+     */
     AbstractLayerData( const GeoPoint &position );
-    //!make a Data object from latitude and londitude
+    
+    /**
+     * @brief make a Data object from latitude and londitude
+     * @param lat longitude of the object
+     * @param lon latitude of the object
+     */
     AbstractLayerData( double lat, double lon);
     
-    //!destructor
+    /**
+     * @brief destructor
+     */
     virtual ~AbstractLayerData();
     
-    /*!\brief allow for drawing this Layer Data object
+    /**
+     * @brief allow for drawing this Layer Data object
      * 
-     * draw is intended to either provide the details necessary for the
-     * view to draw, or given a pointer to the view it may draw itself
+     * Draw is a pure virtual function that deals with drawing this
+     * @c AbstractLayerData from a @c QPoint. in this case the
+     * calculations of where to draw are done elsewhere
+     * @param painter used to draw the AbstractLayerData object
+     * @param point where to paint on the screen 
      */
-   // virtual void draw() = 0;
+    virtual void draw ( ClipPainter *painter, const QPoint &point )=0;
     
-    virtual QPixmap symbolPixmap() = 0;
+    /**
+     * @brief calculate where to draw this object and draw it
+     * 
+     * This is a convience method that allows for the calculations of
+     * where to draw this AbstractLayerObject on screen to be done
+     * localy. The other @c draw() method is intended to do the actual
+     * drawing and can be called from within this one. 
+     * @param painter used to draw the AbstractLayerData object
+     * @param canvasSize the size of the Marble Widget screen
+     * @param radius the radius of the globe, measure of zoom level
+     * @param invRotAxis Quaternion representation of the rotation of
+     *                   the globe, previously inverted.
+     */
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis)=0;
     
     /**
      * @brief check if this Layer Data is visible on screen
      * @return the visibliliy of this Data
      */
     bool visible() const;
+    
     /**
      * @brief set whether this Layer Data is visible
      * @param visible the visiblity of this Data
      */
     void setVisible( bool visible );
     
-    //!accessor
-    GeoPoint position() const { return *m_position; } 
+    /**
+     * @brief m_position getter
+     * @return GeoPoint representation of the position of this Object
+     */
+    GeoPoint position() const ;
    
+    /**
+     * @brief m_position setter
+     * @param posIn the new GeoPoint
+     * 
+     * coppies the Geopoint posIn
+     */
     void setPosition( const GeoPoint &posIn );
+    
+    /**
+     * @brief m_position setter
+     * @param lat the latitude of the new position
+     * @param lon the longitde of the new position
+     * 
+     * convience method to set the position from latitude and
+     * longitude
+     */
     void setPosition( const double &lat, const double &lon);
     
+    /**
+     * @brief get the position on screen
+     * 
+     * get the pixel position on screen of this @c AbstractLayerData
+     * @param screenSize the size of the Widget Canvas
+     * @param invRotAxis Quaternion representation of the rotation of
+     *                   the glove, previously inverted
+     * @param radius the current radius of the globe, measuer of zoom
+     *               level
+     * @param [out]position the QPoint that will be updated with the 
+     *                      position on screen 
+     * @return @c true if the position is on the visable side of the
+     *                 globe
+     *         @c false if the position is on the other side of the 
+     *                  globe
+     */
+    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
+                                 int radius, QPoint *position);
  private:
-    //!the position of the Data item
+    /**
+     * @brief position of the AbstractLayerData
+     */
     GeoPoint *m_position;
     
+    /**
+     * @brief visability of the AbstractLayerData
+     */
     bool m_visible;
-    
-    //insert generic (if any) view variables here
 };
 
 #endif //ABSTRACTLAYERDATA_H

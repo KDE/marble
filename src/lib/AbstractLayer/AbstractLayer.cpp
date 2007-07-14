@@ -20,12 +20,16 @@
 #include "clippainter.h"
 
 
-AbstractLayer::AbstractLayer( QObject *parent,
-                              AbstractLayerContainer *container) 
+AbstractLayer::AbstractLayer( QObject *parent ) 
     : QObject( parent )
 {
-    m_layerContainer = container;
-    m_visible        = false;
+    m_visible       = false;
+    m_containers    = new QVector<AbstractLayerContainer *>();
+}
+
+AbstractLayer::~AbstractLayer()
+{
+    delete m_containers;
 }
 
 
@@ -83,26 +87,31 @@ void AbstractLayer::setVisible( bool visible )
 }
 
 
-QPoint *AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
-                           double radius, Quaternion rotAxis, 
-                           QPoint *previous, AbstractLayerData *point)
+void AbstractLayer::paint( ClipPainter* painter, 
+                              const QSize& screenSize,
+                              double radius, Quaternion rotAxis)
 
 {
-    //should be pure virtual
-    return 0;
-}
-
-void AbstractLayer::paint( ClipPainter*, const QSize& screenSize,
-                           double radius, Quaternion rotAxis, 
-                           AbstractLayerData *point )
-{
-    //should be pure virtual
+    Quaternion invRotAxis = rotAxis.inverse();
+    QVector<AbstractLayerContainer *>::const_iterator it;
+    
+    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
+        if ( (*it) != 0 ) {
+            (*it)->draw( painter, screenSize, radius, invRotAxis );
+        }
+    }
 }
 
 void AbstractLayer::paintLayer( ClipPainter*, const QSize& screenSize,
                                 double radius, Quaternion rotAxis)
 {
     //should be pure virtual
+}
+
+double AbstractLayer::distance ( const QPoint &a, const QPoint &b )
+{
+    return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
+            + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
 }
 
 

@@ -10,6 +10,11 @@
 
 #include "AbstractLayerData.h"
 
+#include <QtCore/QSize>
+#include <QtCore/QPoint>
+
+#include "clippainter.h"
+
 AbstractLayerData::AbstractLayerData( const GeoPoint &position ):
                     m_visible(true)
 {
@@ -27,6 +32,16 @@ AbstractLayerData::~AbstractLayerData()
 {
     delete m_position;
 }
+/*
+void AbstractLayerData::draw ( ClipPainter *, const QPoint & ){}
+
+
+void AbstractLayerData::draw(ClipPainter *painter, 
+                             const QSize &canvasSize, double radius,
+                             Quaternion invRotAxis)
+{
+    
+}*/
 
 bool AbstractLayerData::visible() const
 {
@@ -37,6 +52,11 @@ void AbstractLayerData::setVisible( bool visible )
 {
     m_visible = visible;
 }
+
+GeoPoint AbstractLayerData::position() const
+{
+    return *m_position; 
+} 
 
 void AbstractLayerData::setPosition( const GeoPoint &position )
 {
@@ -50,5 +70,24 @@ void AbstractLayerData::setPosition( const double &lat,
     int detail = m_position->detail();
     delete m_position;
     m_position = new GeoPoint( lon, lat, GeoPoint::Degree);
+}
+
+bool AbstractLayerData::getPixelPos( const QSize &screenSize,
+                                     Quaternion invRotAxis, 
+                                     int radius, QPoint *point)
+{
+    Quaternion  qpos = m_position->quaternion(); 
+    qpos.rotateAroundAxis( invRotAxis );
+
+    if ( qpos.v[Q_Z] > 0 ){
+        point->setX( (int)( ( screenSize.width() / 2 )
+                + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( (int)( ( screenSize.height() / 2 )
+                + ( radius * qpos.v[Q_Y] ) ) );
+        
+        return true;
+    } else {
+        return false;
+    }
 }
 
