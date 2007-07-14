@@ -64,6 +64,7 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     double  m_qy;
     double  m_qz;
 
+    Quaternion m_qpos;
     bool    m_interlaced;
 };
 

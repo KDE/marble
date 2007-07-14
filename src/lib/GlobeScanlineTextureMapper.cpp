@@ -101,8 +101,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
     m_n    = ( m_imageRadius < radius2 ) ? m_nBest : 8;
     m_ninv = 1.0 / (double)(m_n);
 
-    Quaternion  *qpos = new Quaternion();
-
     // Calculate north pole position to decrease pole distortion later on
     Quaternion  northPole = GeoPoint( 0.0, (double)( -M_PI * 0.5 ) ).quaternion();
 
@@ -212,12 +210,12 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
-            qpos->set( 0, m_qx, m_qy, m_qz );
-            qpos->rotateAroundAxis( planetAxisMatrix );        
+            m_qpos.set( 0, m_qx, m_qy, m_qz );
+            m_qpos.rotateAroundAxis( planetAxisMatrix );        
 
-            qpos->getSpherical(lng, lat);
+            m_qpos.getSpherical(lng, lat);
 
-            // if (lat < 0) qpos->display(); 
+            // if (lat < 0) m_qpos->display(); 
 
             // Approx for m_n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
@@ -254,7 +252,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
         }
     }
 
-    delete qpos;
 
     m_tileLoader->cleanupTilehash();
 }
