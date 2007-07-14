@@ -86,7 +86,7 @@ class AbstractLayer: public QObject
                                  const QSize &screenSize, 
                                  Quaternion invRotAxis, 
                                  int radius,
-                                 QPoint *position);
+                                 QPoint *pos2);
     
     /**
      * @brief  Return whether the Layer is visible.
