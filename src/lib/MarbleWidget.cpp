@@ -157,7 +157,7 @@ void MarbleWidget::construct(QWidget *parent)
     goHome();
 
     d->m_minimumzoom = 950;
-    d->m_maximumzoom = 3000;
+    d->m_maximumzoom = 2200;
 
     d->m_showScaleBar = true;
     d->m_showWindRose = true;
