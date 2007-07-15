@@ -121,7 +121,7 @@ void MarbleWidget::construct(QWidget *parent)
     setBackgroundRole( QPalette::Window );
     setAutoFillBackground( true );
 
-    //	setAttribute(Qt::WA_NoSystemBackground);
+//    setAttribute(Qt::WA_NoSystemBackground);
 
     d->viewParams.m_canvasImage = new QImage( parent->width(), 
                                               parent->height(),
@@ -157,7 +157,7 @@ void MarbleWidget::construct(QWidget *parent)
     goHome();
 
     d->m_minimumzoom = 950;
-    d->m_maximumzoom = 2200;
+    d->m_maximumzoom = 3000;
 
     d->m_showScaleBar = true;
     d->m_showWindRose = true;
@@ -311,7 +311,12 @@ void MarbleWidget::zoomView(int zoom)
     if ( radius * radius < imgrx * imgrx + imgry * imgry
          && radius != d->m_model->radius() )
     {
-        d->viewParams.m_canvasImage->fill( Qt::transparent );
+      setAttribute(Qt::WA_NoSystemBackground, false);
+      d->viewParams.m_canvasImage->fill( Qt::transparent );
+    }
+    else
+    {
+        setAttribute(Qt::WA_NoSystemBackground, true);
     }
 
     d->m_model->setRadius( radius );
@@ -600,7 +605,7 @@ void MarbleWidget::goHome()
 #endif
     zoomView( d->m_homeZoom ); // default 1050
 
-    update(); // not obsolete in case the zoomlevel stays unaltered
+    repaint(); // not obsolete in case the zoomlevel stays unaltered
 }
 
 
