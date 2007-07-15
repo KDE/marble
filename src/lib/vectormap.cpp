@@ -98,7 +98,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     //	const int detail = 0;
     const int  detail = getDetailLevel();
     GeoPoint   corner;
-
+#ifndef FLAT_PROJ
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
@@ -108,12 +108,9 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
         for ( int i = 0; i < 5; ++i ) {
             qbound = m_boundary[i].quaternion();
-#ifndef FLAT_PROJ
+
             qbound.rotateAroundAxis(m_rotMatrix); 
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {
-#else
-            if( true ) {
-#endif
                 // if (qbound.v[Q_Z] > 0){
                 m_polygon.clear();
                 m_polygon.reserve( (*itPolyLine)->size() );
@@ -130,6 +127,42 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             // ++i;
         }
     }
+#else
+    float const centerLat=m_planetAxis.pitch();
+    float const centerLng=-m_planetAxis.yaw();
+    double xyFactor = (float)(2*m_radius)/M_PI;
+    double degX;
+    double degY;
+    double x;
+    double y;
+    QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
+          itPolyLine < itEndPolyLine;
+          ++itPolyLine )
+    {
+        // This sorts out polygons by bounding box which aren't visible at all.
+        m_boundary = (*itPolyLine)->getBoundary();
+        m_polygon.clear();
+        for ( int i = 0; i < 4; ++i )
+        {
+            qbound = m_boundary[i].quaternion();
+            qbound.getSpherical(degX,degY);
+            x = m_imgwidth/2 + xyFactor * (degX + centerLng);
+            y = m_imgheight/2 + xyFactor * (degY + centerLat);
+            m_polygon<<QPointF( x, y );
+        }
+            if(visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() ) )
+            {
+                m_polygon.clear();
+                m_polygon.reserve( (*itPolyLine)->size() );
+                m_polygon.setClosed( (*itPolyLine)->getClosed() );
+
+                createPolyLine( (*itPolyLine)->constBegin(),
+                                (*itPolyLine)->constEnd(), detail );
+            }
+    }
+#endif
+
 }
 
 
@@ -179,7 +212,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
                 // most recent addition: currentPoint != lastPoint
                 m_polygon << m_currentPoint;
             }
-#if 0
+    #if 0
             else {
                 // Speed burst on invisible hemisphere
                 step = 1;
@@ -187,7 +220,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
                 if ( z < -0.4) step = 30;
                 if ( step > remain ) step = 1; 
             }
-#endif
+    #endif
 
             m_lastPoint = m_currentPoint;
         }
@@ -209,14 +242,18 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
             double x = m_imgwidth/2 + xyFactor * (degX + centerLng);
+            if( x > m_imgwidth ) x = m_imgwidth;
+            if( x < 0 ) x = 0;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
+            if( y > m_imgheight ) y = m_imgheight;
+            if( y < 0 ) y = 0;
             m_currentPoint = QPointF( x, y );
             m_polygon<<m_currentPoint;
         }
     }
 #endif	
     // Avoid polygons degenerated to Points and Lines.
-    if ( m_polygon.size() >= 2 ) {
+    if ( m_polygon.size() > 2 ) {
         append(m_polygon);
     }
 }

@@ -12,7 +12,7 @@
 
 #ifndef GRIDMAP_H
 #define GRIDMAP_H
-//#define FLAT_PROJ
+// #define FLAT_PROJ
 
 
 #include <QtGui/QPen>
