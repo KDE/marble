@@ -76,7 +76,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      * easier, such as not drawing an @c AbstractLayerData if it is 
      * too close to another
      */
-    double distance ( const QPoint &a, const QPoint &a );
+    double distance ( const QPoint &a, const QPoint &b );
     
  protected:
     /** 

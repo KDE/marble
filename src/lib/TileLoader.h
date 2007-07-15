@@ -60,8 +60,8 @@ class TileLoader : public QObject {
 
     void flush();
 
-    const int tileWidth() const { return m_tileWidth; }
-    const int tileHeight() const { return m_tileHeight; }
+    int tileWidth() const { return m_tileWidth; }
+    int tileHeight() const { return m_tileHeight; }
 
     static int levelToRow( int level );
     static int levelToColumn( int level );

@@ -35,9 +35,9 @@ class TextureTile : public QObject {
     void loadTile( int x, int y, int level, 
            const QString& theme, bool requestTileUpdate = true );
 
-    const int  depth() const        { return m_depth; }
+    int  depth() const        { return m_depth; }
 
-    const bool used() const         { return m_used; }
+    bool used() const         { return m_used; }
     void       setUsed( bool used ) { m_used = used; }
 
     const QImage&     rawtile()            { return m_rawtile; }
