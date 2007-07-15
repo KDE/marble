@@ -253,7 +253,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     }
 #endif	
     // Avoid polygons degenerated to Points and Lines.
-    if ( m_polygon.size() > 2 ) {
+    if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
 }

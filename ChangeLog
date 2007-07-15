@@ -1,3 +1,7 @@
+2007-07-15  Torsten Rahn  <rahn@kde.org>
+
+- Making Marble compile again.
+
 2007-07-12  Andrew Manson   <g.real.ate@gmail.com>
     Cleaned up the comments for all of the AbstractLayer classes and
     formalised the api more.

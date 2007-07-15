@@ -33,8 +33,15 @@ class Waypoint : public AbstractLayerData, public GpsElement
     Waypoint( GeoPoint position );
     
     ~Waypoint();
+
+    void draw ( ClipPainter *painter, const QPoint &point ){}
+
+    void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis){}
+
     
-    virtual QPixmap symbolPixmap();
+    QPixmap symbolPixmap();
     //virtual void draw();
     
     void setLat( const double &lat );

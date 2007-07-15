@@ -72,6 +72,9 @@ class AbstractLayerData
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis)=0;
     
+    virtual QPixmap symbolPixmap()=0;
+
+
     /**
      * @brief check if this Layer Data is visible on screen
      * @return the visibliliy of this Data
