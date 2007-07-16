@@ -179,6 +179,11 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #ifdef FLAT_PROJ
     float const centerLat=m_planetAxis.pitch();
     float const centerLng=-m_planetAxis.yaw();
+    double lastLong=0;
+    double PiRestriction = 5 * M_PI / 6;
+    bool flag = false;
+    int lastSign =1;
+    ScreenPolygon otherPolygon;
 #endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -245,17 +250,30 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             if( x > m_imgwidth ) x = m_imgwidth;
             if( x < 0 ) x = 0;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
-            if( y > m_imgheight ) y = m_imgheight;
-            if( y < 0 ) y = 0;
             m_currentPoint = QPointF( x, y );
-            m_polygon<<m_currentPoint;
+            int sign = (int) (degX / fabs(degX) );
+            if( sign != lastSign && fabs(degX) > PiRestriction ) {
+                flag = !flag;
+            }
+            if( !flag )
+                m_polygon<<m_currentPoint;
+            else
+                otherPolygon<<m_currentPoint;
+
+            lastSign = sign;
         }
     }
 #endif	
     // Avoid polygons degenerated to Points and Lines.
+
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
+#ifdef FLAT_PROJ
+    if( otherPolygon.size() >=2 ) {
+        append(otherPolygon);
+    }
+#endif
 }
 
 
