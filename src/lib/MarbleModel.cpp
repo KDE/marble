@@ -286,7 +286,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
             // Recolorize the heightmap using the VectorMap
             d->m_texcolorizer->colorize( viewParams->m_canvasImage,
                                          d->m_coastimg,
-                                         d->m_radius );
+                                         d->m_radius,
+                                         d->m_planetAxis );
         }
     }
 

@@ -22,7 +22,8 @@
 #include <QtCore/QList>
 #include <QtCore/QVector>
 #include <QtGui/QImage>
-
+#include "Quaternion.h"
+// #define FLAT_PROJ
 
 typedef struct
 {
@@ -44,7 +45,7 @@ class TextureColorizer
  public:
     TextureColorizer(const QString&, const QString&);
     virtual ~TextureColorizer(){}
-    void colorize(QImage*, const QImage*, const int&);
+    void colorize(QImage*, const QImage*, const int&, Quaternion);
 
     /**
      * @brief  Return whether the coordinate grid is visible.

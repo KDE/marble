@@ -130,16 +130,18 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 #else
     float const centerLat=m_planetAxis.pitch();
     float const centerLng=-m_planetAxis.yaw();
-    double xyFactor = (float)(2*m_radius)/M_PI;
+    double xyFactor = (float)(2*radius)/M_PI;
     double degX;
     double degY;
     double x;
     double y;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    int offset=0;
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
     {
+        offset = 0;
         // This sorts out polygons by bounding box which aren't visible at all.
         m_boundary = (*itPolyLine)->getBoundary();
         m_polygon.clear();
@@ -151,24 +153,36 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_polygon<<QPointF( x, y );
         }
-            if(visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() ) )
-            {
+        while( visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() ) ) {
+            offset-=4*radius;
+            m_polygon.translate(-4*radius,0);
+        }
+        offset+=4*radius;
+        m_polygon.translate(4*radius,0);
+        while( visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() )) {
                 m_polygon.clear();
                 m_polygon.reserve( (*itPolyLine)->size() );
                 m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
                 createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail );
-            }
+                                (*itPolyLine)->constEnd(), detail, offset );
+                offset+=4*radius;
+                m_polygon.translate(4*radius,0);
+        }
     }
 #endif
 
 }
 
-
+#ifndef FLAT_PROJ
 void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail)
+#else
+void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoPoint::Vector::ConstIterator  itEndPoint,
+                                const int detail, const int offset )
+#endif
 {
     GeoPoint::Vector::const_iterator  itPoint;
 
@@ -179,7 +193,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #ifdef FLAT_PROJ
     float const centerLat=m_planetAxis.pitch();
     float const centerLng=-m_planetAxis.yaw();
-    double lastLong=0;
     double PiRestriction = 5 * M_PI / 6;
     bool flag = false;
     int lastSign =1;
@@ -246,7 +259,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             double degY;
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
-            double x = m_imgwidth/2 + xyFactor * (degX + centerLng);
+            double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + offset;
             if( x > m_imgwidth ) x = m_imgwidth;
             if( x < 0 ) x = 0;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
@@ -269,11 +282,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
-#ifdef FLAT_PROJ
-    if( otherPolygon.size() >=2 ) {
-        append(otherPolygon);
-    }
-#endif
 }
 
 

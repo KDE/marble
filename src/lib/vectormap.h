@@ -50,8 +50,13 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
+#ifndef FLAT_PROJ
     void createPolyLine( GeoPoint::Vector::ConstIterator, 
                          GeoPoint::Vector::ConstIterator, const int);
+#else
+    void createPolyLine( GeoPoint::Vector::ConstIterator, 
+                         GeoPoint::Vector::ConstIterator, const int, const int);
+#endif
 
     inline void    initCrossHorizon();
     void           manageCrossHorizon();

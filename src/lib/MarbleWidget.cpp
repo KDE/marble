@@ -537,9 +537,7 @@ void MarbleWidget::setActiveRegion()
     int yCenterOffset =  (int)((float)(2*zoom / M_PI) * centerLat);
     int yTop = height()/2 - zoom + yCenterOffset;
 
-    if ( 2*zoom < height() ) {
-	d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
-    }
+    d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
 #endif
 }
 
