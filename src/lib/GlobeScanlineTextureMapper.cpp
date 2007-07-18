@@ -210,7 +210,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
-            m_qpos.set( 0, m_qx, m_qy, m_qz );
+            m_qpos.set( 0.0, m_qx, m_qy, m_qz );
             m_qpos.rotateAroundAxis( planetAxisMatrix );        
 
             m_qpos.getSpherical(lng, lat);
@@ -221,7 +221,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             // xIpLeft to xIpRight
             if ( m_interpolate ) {
                 pixelValueApprox( lng, lat, m_scanLine );
-
+/*
                 if ( m_interlaced == true )
                 {
                     for ( int j = 0; j < m_n - 1; ++j ) {
@@ -230,8 +230,10 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                     m_fastScanLine += ( m_n - 1 );
                 }
 // #5
+*/
                 m_scanLine += ( m_n - 1 );
 // #5
+
             }
 
             // You can temporarily comment out this line and run Marble
@@ -240,12 +242,13 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
-
+/*
             if ( m_interlaced == true )
             {
                *m_fastScanLine = *m_scanLine;
                ++m_fastScanLine;
             }
+*/
 // #6
             ++m_scanLine;
 // #6
@@ -271,7 +274,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
 {
     // stepLng/Lat: Distance between two subsequent approximated positions
 
-    double stepLat = ( lat - m_prevLat ) * m_ninv;
+    double stepLat = lat - m_prevLat;
     double stepLng = lng - m_prevLng;
 
     // As long as the distance is smaller than 180 deg we can assume that 
@@ -280,7 +283,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
     if ( fabs(stepLng) < M_PI ) 
     {
         const int itStepLng = (int)( stepLng * m_ninv * m_rad2PixelX * 128.0 );
-        const int itStepLat = (int)( stepLat * m_rad2PixelY * 128.0 );
+        const int itStepLat = (int)( stepLat * m_ninv * m_rad2PixelY * 128.0 );
 
         m_prevLng *= m_rad2PixelX;
         m_prevLat *= m_rad2PixelY;
@@ -347,7 +350,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
 
     else {
         stepLng = ( TWOPI - fabs(stepLng) ) * m_ninv;
-
+        stepLat = stepLat * m_ninv;
         // We need to distinguish two cases:  
         // crossing the dateline from east to west ...
 

@@ -61,8 +61,16 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
  
     setFocusPolicy( Qt::NoFocus );
 
-    toolBoxTab1->setBackgroundRole( QPalette::Window );
-    toolBoxTab2->setBackgroundRole( QPalette::Window );
+    NavigationTab->setBackgroundRole( QPalette::Window );
+    LegendTab->setBackgroundRole( QPalette::Window );
+    MapViewTab->setBackgroundRole( QPalette::Window );
+    CurrentLocationTab->setBackgroundRole( QPalette::Window );
+
+    toolBox->setCurrentIndex(3);
+    m_currentLocationWidget = toolBox->currentWidget();
+    m_currentLocationWidget->hide(); // Current location tab is hidden by default
+    toolBox->removeItem( 3 ); 
+    toolBox->setCurrentIndex(0);
 
     setupGpsOption();
 
@@ -102,18 +110,9 @@ void MarbleControlBox::setupGpsOption()
 {
     m_gpsDrawBox -> setEnabled( true );
     m_gpsGoButton -> setEnabled( false );
-    
-    QButtonGroup *latGroup = new QButtonGroup( this );
-    QButtonGroup *lonGroup = new QButtonGroup( this );
-    
-    latGroup -> addButton( m_eRadio );
-    latGroup -> addButton( m_wRadio );
-    
-    lonGroup -> addButton( m_nRadio );
-    lonGroup -> addButton( m_sRadio );
-    
-    m_eRadio -> setChecked( true );
-    m_nRadio -> setChecked( true );
+
+    m_latComboBox->setCurrentIndex( 0 );
+    m_lonComboBox->setCurrentIndex( 0 );
     
     connect( m_gpsDrawBox, SIGNAL( clicked( bool ) ),
              this, SLOT( disableGpsInput( bool ) ) );
@@ -218,25 +217,22 @@ void MarbleControlBox::changeZoom(int zoom)
 
 void MarbleControlBox::disableGpsInput( bool in )
 {
-    m_latSpin->setEnabled( !in );
-    m_lonSpin->setEnabled( !in );
-    
-    m_eRadio->setEnabled( !in );
-    m_wRadio->setEnabled( !in );
-    m_nRadio->setEnabled( !in );
-    m_sRadio->setEnabled( !in );
-    
-    double t_lat = m_latSpin->value();
-    double t_lon = m_lonSpin->value();
-    
-    if( m_wRadio->isChecked() ){
+    m_latSpinBox->setEnabled( !in );
+    m_lonSpinBox->setEnabled( !in );
+
+    m_latComboBox->setEnabled( !in );
+    m_lonComboBox->setEnabled( !in );
+
+    double t_lat = m_latSpinBox->value();
+    double t_lon = m_lonSpinBox->value();
+
+    if( m_lonComboBox->currentIndex() == 1 ){
         t_lon *= -1;
     }
     
-    if( m_sRadio->isChecked() ){
+    if( m_latComboBox->currentIndex() == 1 ){
         t_lat *= -1;
     }
-    
     
     emit gpsPositionChanged( t_lat, t_lon );
     emit gpsInputDisabled( in );
@@ -247,8 +243,8 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
     if( m_catchGps->isChecked() ){
         switch(unit){
         case GeoPoint::Degree:
-            m_latSpin->setValue( x );
-            m_lonSpin->setValue( y );
+            m_latSpinBox->setValue( x );
+            m_lonSpinBox->setValue( y );
             emit gpsPositionChanged( x, y );
             break;
         case GeoPoint::Radian:
@@ -258,19 +254,19 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
             t_lon = x * rad2deg;
             
             if( t_lat < 0 ){
-                m_latSpin->setValue( -t_lat );
-                m_sRadio->setChecked( true );
+                m_latSpinBox->setValue( -t_lat );
+                m_latComboBox->setCurrentIndex( 1 );
             } else {
-                m_latSpin->setValue( t_lat );
-                m_nRadio->setChecked( true );
+                m_latSpinBox->setValue( t_lat );
+                m_latComboBox->setCurrentIndex( 0 );
             }
             
             if( t_lon < 0 ){
-                m_lonSpin->setValue( -t_lon );
-                m_wRadio->setChecked( true );
+                m_lonSpinBox->setValue( -t_lon );
+                m_lonComboBox->setCurrentIndex( 1 );
             } else {
-                m_lonSpin->setValue( t_lon );
-                m_eRadio->setChecked( true );
+                m_lonSpinBox->setValue( t_lon );
+                m_lonComboBox->setCurrentIndex( 0 );
             }
             
             emit gpsPositionChanged( t_lat, t_lon );

@@ -13,6 +13,9 @@
 
 #include <cmath>
 
+#include <QtCore/QCoreApplication>
+#include <QtCore/QLocale>
+#include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
 #include <QtGui/QSizePolicy>
@@ -161,6 +164,11 @@ void MarbleWidget::construct(QWidget *parent)
 
     d->m_showScaleBar = true;
     d->m_showWindRose = true;
+
+    QString locale = QLocale::system().name();
+    QTranslator translator;
+    translator.load(QString("marblewidget_") + locale);
+    QCoreApplication::installTranslator(&translator);
 }
 
 MarbleModel *MarbleWidget::model() const
@@ -511,9 +519,11 @@ void MarbleWidget::drawAtmosphere()
     grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
+    QPen    pen1( Qt::NoPen );
     QPainter  painter( d->viewParams.m_canvasImage );
     painter.setBrush( brush1 );
-    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
     painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
                          imgry - (int)( (double)(radius) * 1.05 ),
                          (int)( 2.1 * (double)(radius) ), 

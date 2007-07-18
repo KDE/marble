@@ -116,6 +116,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
 
  private:
     MarbleControlBoxPrivate  * const d;
+    QWidget * m_currentLocationWidget;
 };
 
 #endif // MARBLECONTROLBOX_H

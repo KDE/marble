@@ -1,3 +1,12 @@
+2007-07-18  Torsten Rahn  <rahn@kde.org>
+
+- Redo for the GPS tab (Now called "Current Location")
+- Disabling that widget as it's meant to be offered just for a
+particular use case where Marble is meant to provide a dialog
+
+Sorry Andrew - I needed these changes immediately 
+for a presentation yesterday.
+
 2007-07-15  Torsten Rahn  <rahn@kde.org>
 
 - Making Marble compile again.

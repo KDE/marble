@@ -29,7 +29,7 @@ PlaceMarkManager::PlaceMarkManager()
     addPlaceMarkFile( "cityplacemarks" );
     addPlaceMarkFile( "baseplacemarks" );
     addPlaceMarkFile( "elevplacemarks" );
-    addPlaceMarkFile( "airportplacemarks" );
+//    addPlaceMarkFile( "airportplacemarks" );
 }
 
 

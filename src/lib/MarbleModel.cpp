@@ -269,6 +269,7 @@ void MarbleModel::resize( QImage *canvasImage)
 void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
                               const QRect& dirtyRect )
 {
+
     if ( needsUpdate() || viewParams->m_canvasImage->isNull() || d->m_justModified ) {
 
         d->m_texmapper->mapTexture( viewParams->m_canvasImage, d->m_radius,
@@ -292,7 +293,12 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     }
 
     // Paint the map on the Widget
+//    QTime t;
+//    t.start();
+
     painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+
+//    qDebug( "Painted in %ims", t.elapsed() );
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {

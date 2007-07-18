@@ -29,7 +29,14 @@ void MarbleTest::timeDemo()
 
     qDebug() << "Starting Performance Test";
     QTime t;
-
+/*
+    m_marbleWidget->setShowGrid( false );
+    m_marbleWidget->setShowPlaces( false );
+    m_marbleWidget->setShowPlaces( false );
+    m_marbleWidget->setShowBorders( false );
+    m_marbleWidget->setShowRivers( false );
+    m_marbleWidget->setShowLakes( false );
+*/
     t.start();
 
     for ( int j = 0; j < 10; ++j ) {

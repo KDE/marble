@@ -54,10 +54,10 @@ class PlaceMark
     const int popidx() const                   { return m_popidx;   }
     void setPopidx( int popidx )               { m_popidx = popidx; }
 
-    const int population() const               { return m_population;       }
+    inline const int population() const               { return m_population;       }
     void setPopulation( int population )       { m_population = population; }
 
-    const int selected() const                 { return m_selected;     }
+    inline const int selected() const                 { return m_selected;     }
     void setSelected( int selected )           { m_selected = selected; }
 
 
