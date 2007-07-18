@@ -1550,7 +1550,7 @@ Greensboro	North Carolina	us	N	232,6	36.08°N	79.83°W
 Berbera	Woqôyi Galbêd	so	N	232,5	10.44°N	45.00°E
 Hialeah	Florida	us	N	232,4	25.86°N	80.30°W
 Bogorâ	Bogorâ	bd	R	232,3	24.84°N	89.37°E
-Koshice	Koshický	sk	R	232,3	48.73°N	21.26°E
+Košice	Košický	sk	R	232,3	48.73°N	21.26°E
 Karsi	Kaskadar	uz	R	232,2	38.87°N	65.80°E
 Gravataí	Rio Grande do Sul	br	N	232,1	29.95°S	50.99°W
 Jessor	Jessor	bd	R	231,9	23.17°N	89.21°E
@@ -4347,7 +4347,7 @@ Lawton	Oklahoma	us	N	92,1	34.60°N	98.42°W
 Châkdaha	Bangla	in	N	92,1	22.48°N	88.35°E
 Swâbi	North-West Frontier	pk	N	92,1	34.13°N	72.47°E
 Trindade	Goiás	br	N	92,1	16.65°S	49.50°W
-Preshov	Preshovský	sk	R	92,1	48.99°N	21.24°E
+Prešov	Prešovský	sk	R	92,1	48.99°N	21.24°E
 Jiading	Shanghai	cn	N	92,1	31.40°N	121.24°E
 Nanding	Shandong	cn	N	92,1	36.75°N	118.03°E
 Crawley	England	gb	N	92,1	51.13°N	0.20°W
@@ -4792,7 +4792,7 @@ Baijiantan	Xinjiang	cn	N	84,4	45.64°N	85.18°E
 Ozjorsk	Cheljabinsk	ru	N	84,4	55.77°N	60.70°E
 Hücayli	Korakalpogiston	uz	N	84,4	42.41°N	59.43°E
 Bitola	Bitola	mk	R	84,4	41.04°N	21.34°E
-Zhilina	Zhilinský	sk	R	84,4	49.22°N	18.74°E
+Žilina	Žilinský	sk	R	84,4	49.22°N	18.74°E
 Sekondi	Western	gh	R	84,4	4.94°N	1.72°W
 Malé	Malé	mv	B	84,3	4.17°N	73.50°E
 Chîchâwatni	Punjab	pk	N	84,3	30.53°N	72.68°E
@@ -7149,7 +7149,7 @@ Jablah	al-Lâdhiqîyah	sy	N	59,5	35.37°N	35.94°E
 Pryluky	Chernihivs'ka	ua	N	59,5	50.60°N	32.38°E
 Uyovu	Shinyanga	tz	N	59,5	3.28°S	31.53°E
 Drancy	Seine-Saint-Denis	fr	N	59,5	48.94°N	2.46°E
-Martin	Zhilinský	sk	N	59,5	49.07°N	18.91°E
+Martin	Žilinský	sk	N	59,5	49.07°N	18.91°E
 Hastings	Hawke's Bay	nz	N	59,5	39.64°S	176.84°E
 Sodegaura	Chiba	jp	N	59,5	35.42°N	139.94°E
 Najin	Hamgyeongbukto	kp	N	59,5	42.25°N	130.30°E
@@ -7437,7 +7437,7 @@ Sanlúcar de Barrameda	Cádiz	es	N	57	36.78°N	6.36°W
 Ardesen	Rize	tr	N	57	41.20°N	40.99°E
 Vidin	Vidin	bg	R	57	44.01°N	22.87°E
 Eger	Heves	hu	R	57	47.90°N	20.38°E
-Trenchín	Trenchianský	sk	R	57	48.90°N	18.05°E
+Trenčín	Trenčianský	sk	R	57	48.90°N	18.05°E
 Eskilstuna	Södermanland	se	N	57	59.37°N	16.51°E
 Cerignola	Puglia	it	N	57	41.27°N	15.88°E
 Kimpo	Kyeonggi	kr	N	57	37.64°N	126.70°E
@@ -7492,7 +7492,7 @@ Chibuto	Gaza	mz	N	56,6	24.68°S	33.53°E
 Kasese	Western	ug	N	56,6	0.22°N	30.01°E
 Linares	Jaén	es	N	56,6	38.10°N	3.63°W
 Fethiye	Mugla	tr	N	56,6	36.62°N	29.11°E
-Poprad	Preshovský	sk	N	56,6	49.06°N	20.30°E
+Poprad	Prešovský	sk	N	56,6	49.06°N	20.30°E
 Manfredonia	Puglia	it	N	56,6	41.63°N	15.90°E
 Wels	Oberösterreich	at	N	56,6	48.17°N	14.03°E
 Ôsakasayama	Ôsaka	jp	N	56,6	34.50°N	135.56°E
@@ -8035,7 +8035,7 @@ Parsippany-Troy Hills Township	New Jersey	us	N	52,5	40.86°N	74.42°W
 Debre Birhan	Amhara	et	N	52,5	9.68°N	39.53°E
 Bozüyük	Bilecik	tr	N	52,5	39.92°N	30.03°E
 Cergy	Val-d'Oise	fr	N	52,5	49.04°N	2.07°E
-Prievidza	Trenchianský	sk	N	52,5	48.78°N	18.62°E
+Prievidza	Trenčianský	sk	N	52,5	48.78°N	18.62°E
 Greifswald	Mecklenburg-Vorpommern	de	N	52,5	54.09°N	13.39°E
 Val d'Or	Pulau Pinang	my	N	52,5	5.25°N	100.50°E
 Littlehampton	England	gb	N	52,5	50.82°N	0.54°W
@@ -9715,7 +9715,7 @@ Douai	Nord	fr	N	42,3	50.37°N	3.08°E
 Milas	Mugla	tr	N	42,3	37.32°N	27.77°E
 Great Sankey	England	gb	N	42,3	53.39°N	2.65°W
 Vincennes	Val-de-Marne	fr	N	42,3	48.85°N	2.44°E
-Povazhská Bystrica	Trenchianský	sk	N	42,3	49.12°N	18.44°E
+Považská Bystrica	Trenčianský	sk	N	42,3	49.12°N	18.44°E
 Inongo	Bandundu	cd	N	42,3	1.94°S	18.28°E
 Gladstone	Queensland	au	N	42,3	23.85°S	151.25°E
 Iwanuma	Miyagi	jp	N	42,3	38.11°N	140.87°E
@@ -10369,7 +10369,7 @@ Kandalaksha	Murmansk	ru	N	39,3	67.15°N	32.42°E
 Esikhawini	KwaZulu Natal	za	N	39,3	28.88°S	31.90°E
 Nevers	Nièvre	fr	R	39,3	47.00°N	3.15°E
 Vryburg	North West	za	N	39,3	26.96°S	24.73°E
-Spishská Nová Ves	Preshovský	sk	N	39,3	48.95°N	20.56°E
+Spišská Nová Ves	Prešovský	sk	N	39,3	48.95°N	20.56°E
 Sremska Mitrovica	Vojvodina	rs	N	39,3	44.98°N	19.61°E
 Hasaki	Ibaraki	jp	N	39,3	35.77°N	140.81°E
 Steyr	Oberösterreich	at	N	39,3	48.04°N	14.41°E
@@ -10423,7 +10423,7 @@ Nanuque	Minas Gerais	br	N	39,1	17.84°S	40.35°W
 Vaulx-en-Velin	Rhône	fr	N	39,1	45.79°N	4.91°E
 Yalvaç	Isparta	tr	N	39,1	38.31°N	31.15°E
 Dalkeith	Scotland	gb	N	39,1	55.89°N	3.06°W
-Michalovce	Koshický	sk	N	39,1	48.76°N	21.91°E
+Michalovce	Košický	sk	N	39,1	48.76°N	21.91°E
 Jesi	Marche	it	N	39,1	43.52°N	13.24°E
 Pandaan	Jawa Timur	id	N	39,1	7.65°S	112.68°E
 Sukaraja	Jawa Tengah	id	N	39,1	7.46°S	109.29°E
@@ -11786,7 +11786,7 @@ Tâzah-al-Ulîyah	Taza-Al Hoceima-Taounate	ma	N	34,2	34.03°N	4.20°W
 Quixeramobim	Ceará	br	N	34,2	5.19°S	39.30°W
 Likino-Duljovo	Moskovskaja Oblast	ru	N	34,2	55.70°N	38.96°E
 Kahama	Shinyanga	tz	N	34,2	3.82°S	32.58°E
-Humenné	Preshovský	sk	N	34,2	48.93°N	21.91°E
+Humenné	Prešovský	sk	N	34,2	48.93°N	21.91°E
 Takahagi	Ibaraki	jp	N	34,2	36.71°N	140.71°E
 Adrano	Sicilia	it	N	34,2	37.67°N	14.83°E
 Namerikawa	Toyama	jp	N	34,2	36.77°N	137.34°E
@@ -12129,7 +12129,7 @@ Maassluis	Zuid-Holland	nl	N	33,1	51.92°N	4.26°E
 Mek'î	Oromia	et	N	33,1	8.15°N	38.82°E
 Âgaro	Oromia	et	N	33,1	7.85°N	36.65°E
 Bariadi	Shinyanga	tz	N	33,1	2.80°S	33.98°E
-Bardejov	Preshovský	sk	N	33,1	49.29°N	21.27°E
+Bardejov	Prešovský	sk	N	33,1	49.29°N	21.27°E
 Arucas	Las Palmas	es	N	33,1	28.11°N	15.53°W
 Melton	Victoria	au	N	33,1	37.69°S	144.57°E
 Nirasaki	Yamanashi	jp	N	33,1	35.71°N	138.47°E
@@ -12332,7 +12332,7 @@ Betioky	Toliary	mg	N	32,5	23.72°S	44.37°E
 Itapecuru Mirim	Maranhão	br	N	32,5	3.40°S	44.36°W
 Binche	Hainaut	be	N	32,5	50.40°N	4.17°E
 Conceição do Coité	Bahia	br	N	32,5	11.56°S	39.27°W
-Liptovský Mikulásh	Zhilinský	sk	N	32,5	49.08°N	19.61°E
+Liptovský Mikuláš	Žilinský	sk	N	32,5	49.08°N	19.61°E
 Ilawa	Warminsko-Mazurskie	pl	N	32,5	53.59°N	19.56°E
 Bodø	Nordland	no	R	32,5	67.29°N	14.37°E
 Ôiso	Kanagawa	jp	N	32,5	35.30°N	139.32°E
@@ -12998,7 +12998,7 @@ Luków	Lubelskie	pl	N	30,6	51.94°N	22.39°E
 Skellefteå	Västerbotten	se	N	30,6	64.76°N	20.99°E
 al-GhulîŽah	Ghardâyah	dz	N	30,6	30.57°N	2.88°E
 Kutu	Bandundu	cd	N	30,6	2.72°S	18.14°E
-Piesht'any	Trnavský	sk	N	30,6	48.60°N	17.82°E
+Piešťany	Trnavský	sk	N	30,6	48.60°N	17.82°E
 Motala	Östergötland	se	N	30,6	58.54°N	15.04°E
 Iyo	Ehime	jp	N	30,6	33.76°N	132.69°E
 Ôtake	Hiroshima	jp	N	30,6	34.21°N	132.22°E
@@ -13218,7 +13218,7 @@ Mûshâ	Asyût	eg	N	30	27.12°N	31.23°E
 al-Wâhât-al-Bahrîyah	al-Jîzah	eg	N	30	28.65°N	29.01°E
 Çan	Çanakkale	tr	N	30	40.05°N	27.06°E
 Malakoff	Hauts-de-Seine	fr	N	30	48.82°N	2.30°E
-Ruzhomberok	Zhilinský	sk	N	30	49.08°N	19.31°E
+Ružomberok	Žilinský	sk	N	30	49.08°N	19.31°E
 Dubrovnik	Dubrovnik-Neretva	hr	R	30	42.66°N	18.07°E
 Oshakati	Oshana	na	R	30	17.78°S	15.69°E
 Bibai	Hokkaido	jp	N	30	43.33°N	141.86°E
@@ -13851,7 +13851,7 @@ Selçuk	Izmir	tr	N	28,5	37.96°N	27.35°E
 Réthimnon	Rethímni	gr	R	28,5	35.36°N	24.47°E
 Wilmslow	England	gb	N	28,5	53.34°N	2.23°W
 Libenge	Équateur	cd	N	28,5	3.66°N	18.62°E
-Topol'chany	Trenchianský	sk	N	28,5	48.57°N	18.16°E
+Topoľčany	Trenčianský	sk	N	28,5	48.57°N	18.16°E
 Mbaiki	Lobaye	cf	R	28,5	3.87°N	18.00°E
 Kayar	Thiès	sn	N	28,5	14.93°N	17.13°W
 Warrnambool	Victoria	au	N	28,5	38.38°S	142.47°E
@@ -14036,7 +14036,7 @@ Ras Gharib	al-Bahr-al-Ahmar	eg	N	28	28.37°N	33.07°E
 ar-Radîsîyat-al-Bahrîyah	Qinâ	eg	N	28	24.95°N	32.88°E
 Caransebes	Caras-Severin	ro	N	28	45.41°N	22.22°E
 Maghull-Lydiate	England	gb	N	28	53.52°N	2.94°W
-Luchenec	Banskobystrický	sk	N	28	48.34°N	19.66°E
+Lučenec	Banskobystrický	sk	N	28	48.34°N	19.66°E
 Ceres	Western Cape	za	N	28	33.36°S	19.30°E
 Galatina	Puglia	it	N	28	40.18°N	18.16°E
 Sovetskaja Gavan	Habarovsk	ru	N	28	48.97°N	140.28°E
@@ -14588,7 +14588,7 @@ Fleetwood	England	gb	N	26,7	53.93°N	3.02°W
 Bronkhorstspruit	Gauteng	za	N	26,7	25.80°S	28.74°E
 Valmiera	Valmieras	lv	R	26,7	57.55°N	25.42°E
 Bilgoraj	Lubelskie	pl	N	26,7	50.54°N	22.73°E
-Chadca	Zhilinský	sk	N	26,7	49.44°N	18.78°E
+Čadca	Žilinský	sk	N	26,7	49.44°N	18.78°E
 Doboj	Republika Srpska	ba	N	26,7	44.73°N	18.09°E
 Terlizzi	Puglia	it	N	26,7	41.14°N	16.53°E
 Papeete	Îles du Vent	pf	B	26,7	17.52°S	149.56°W
@@ -15027,7 +15027,7 @@ Villiers-sur-Marne	Val-de-Marne	fr	N	25,8	48.84°N	2.55°E
 Villemomble	Seine-Saint-Denis	fr	N	25,8	48.89°N	2.50°E
 Charenton-le-Pont	Val-de-Marne	fr	N	25,8	48.82°N	2.41°E
 Cheský Teshín	Moravskoslezský	cz	N	25,8	49.75°N	18.62°E
-Dubnica	Trenchianský	sk	N	25,8	48.97°N	18.18°E
+Dubnica	Trenčianský	sk	N	25,8	48.97°N	18.18°E
 Vallentuna	Stockholm	se	N	25,8	59.54°N	18.08°E
 Krnov	Moravskoslezský	cz	N	25,8	50.09°N	17.68°E
 Jarocin	Wielkopolskie	pl	N	25,8	51.98°N	17.50°E
@@ -15625,7 +15625,7 @@ Sevlievo	Gabrovo	bg	N	24,6	43.03°N	25.10°E
 Néa Filadelfia	Attikí	gr	N	24,6	38.03°N	23.73°E
 Farnworth	England	gb	N	24,6	53.55°N	2.41°W
 La Garenne-Colombes	Hauts-de-Seine	fr	N	24,6	48.91°N	2.24°E
-Partizánske	Trenchianský	sk	N	24,6	48.64°N	18.40°E
+Partizánske	Trenčianský	sk	N	24,6	48.64°N	18.40°E
 Tsumeb	Oshikoto	na	R	24,6	19.24°S	17.71°E
 Mimata	Miyazaki	jp	N	24,6	31.74°N	131.11°E
 Setaka	Fukuoka	jp	N	24,6	33.15°N	130.46°E
@@ -15827,7 +15827,7 @@ Shotton-Hawarden	Wales	gb	N	24,2	53.19°N	3.03°W
 Victoria Falls	Matabeleland North	zw	N	24,2	17.93°S	25.84°E
 Dáfni	Attikí	gr	N	24,2	38.01°N	23.63°E
 Inca	Balears	es	N	24,2	39.72°N	2.91°E
-Shal'a	Nitrianský	sk	N	24,2	48.15°N	17.88°E
+Šaľa	Nitrianský	sk	N	24,2	48.15°N	17.88°E
 Maryborough	Queensland	au	N	24,2	25.54°S	152.72°E
 Sunbury	Victoria	au	N	24,2	37.57°S	144.71°E
 Isshiki	Aichi	jp	N	24,2	34.82°N	137.03°E
@@ -16637,7 +16637,7 @@ Doka	al-Qadârif	sd	N	22,8	13.52°N	35.77°E
 Nkhotakota	Nkhotakota	mw	R	22,8	12.91°S	34.30°E
 Marjina Horka	Minskaja Voblasts'	by	N	22,8	53.51°N	28.15°E
 Grajewo	Podlaskie	pl	N	22,8	53.65°N	22.44°E
-Vranov	Koshický	sk	N	22,8	48.89°N	21.69°E
+Vranov	Košický	sk	N	22,8	48.89°N	21.69°E
 Gjirokastër	Gjirokastër	al	R	22,8	40.08°N	20.15°E
 Villeneuve-la-Garenne	Hauts-de-Seine	fr	N	22,8	48.93°N	2.30°E
 Brezno	Banskobystrický	sk	N	22,8	48.81°N	19.64°E
@@ -16924,7 +16924,7 @@ al-Fikrîyah	al-Minyâ	eg	N	22,3	27.93°N	30.81°E
 Ago-Are	n.a.	ng	N	22,3	8.50°N	3.41°E
 Lanester	Morbihan	fr	N	22,3	47.77°N	3.35°W
 Hajnówka	Podlaskie	pl	N	22,3	52.73°N	23.58°E
-Trebishov	Koshický	sk	N	22,3	48.64°N	21.73°E
+Trebišov	Košický	sk	N	22,3	48.64°N	21.73°E
 Mladenovac	Central Serbia	rs	N	22,3	44.43°N	20.70°E
 Stalybridge	England	gb	N	22,3	53.49°N	2.07°W
 Copertino	Puglia	it	N	22,3	40.27°N	18.03°E
@@ -17639,10 +17639,10 @@ Kayunga	Central	ug	N	21,2	0.71°N	32.89°E
 Adjumani	Northern	ug	N	21,2	3.38°N	31.79°E
 Lydenburg	Mpumalanga	za	N	21,2	25.09°S	30.45°E
 Kaarina	Varsinais-Suomi	fi	N	21,2	60.42°N	22.42°E
-Snina	Preshovský	sk	N	21,2	48.99°N	22.15°E
+Snina	Prešovský	sk	N	21,2	48.99°N	22.15°E
 Piteå	Norrbotten	se	N	21,2	65.32°N	21.51°E
 Boo	Stockholm	se	N	21,2	59.31°N	18.14°E
-Nové Mesto	Trenchianský	sk	N	21,2	48.75°N	17.83°E
+Nové Mesto	Trenčianský	sk	N	21,2	48.75°N	17.83°E
 Senica	Trnavský	sk	N	21,2	48.68°N	17.37°E
 Yanagawa	Fukushima	jp	N	21,2	37.86°N	140.60°E
 Kahoku	Yamagata	jp	N	21,2	38.42°N	140.28°E
@@ -17694,7 +17694,7 @@ Mpophomeni	KwaZulu Natal	za	N	21,1	29.56°S	30.20°E
 Moulins	Allier	fr	R	21,1	46.57°N	3.33°E
 Birin	Jilfah	dz	N	21,1	35.62°N	3.21°E
 Ekuphumleni	Eastern Cape	za	N	21,1	32.07°S	26.79°E
-Kezhmarok	Preshovský	sk	N	21,1	49.14°N	20.42°E
+Kežmarok	Prešovský	sk	N	21,1	49.14°N	20.42°E
 Banî Tamû	Blîdah	dz	N	21,1	36.53°N	2.83°E
 Torcy	Seine-et-Marne	fr	N	21,1	48.83°N	2.66°E
 Hazebrouck	Nord	fr	N	21,1	50.73°N	2.53°E
@@ -17964,7 +17964,7 @@ Le Mée-sur-Seine	Seine-et-Marne	fr	N	20,7	48.53°N	2.63°E
 Montgeron	Essonne	fr	N	20,7	48.70°N	2.44°E
 Étampes	Essonne	fr	N	20,7	48.44°N	2.16°E
 Maisons-Laffitte	Yvelines	fr	N	20,7	48.95°N	2.14°E
-Bánovce	Trenchianský	sk	N	20,7	48.72°N	18.25°E
+Bánovce	Trenčianský	sk	N	20,7	48.72°N	18.25°E
 Pozhega	Pozhega-Slavonija	hr	R	20,7	45.34°N	17.68°E
 Gostyn	Wielkopolskie	pl	N	20,7	51.88°N	17.00°E
 Västervik	Kalmar	se	N	20,7	57.76°N	16.63°E
@@ -18505,7 +18505,7 @@ Mobayi-Mbongo	Équateur	cd	N	19,9	4.30°N	21.18°E
 Árta	Árta	gr	R	19,9	39.16°N	20.99°E
 Orly	Val-de-Marne	fr	N	19,9	48.74°N	2.39°E
 Sceaux	Hauts-de-Seine	fr	N	19,9	48.78°N	2.28°E
-Dolný Kubín	Zhilinský	sk	N	19,9	49.22°N	19.30°E
+Dolný Kubín	Žilinský	sk	N	19,9	49.22°N	19.30°E
 Shizukuishi	Iwate	jp	N	19,9	39.69°N	140.98°E
 Miharu	Fukushima	jp	N	19,9	37.43°N	140.48°E
 Shisui	Chiba	jp	N	19,9	35.74°N	140.27°E
@@ -18719,7 +18719,7 @@ Ljepjel'	Vicebsk	by	N	19,6	54.89°N	28.69°E
 al-Jawf	al-Kufrah	ly	R	19,6	24.20°N	23.29°E
 Krasnystaw	Lubelskie	pl	N	19,6	50.99°N	23.18°E
 Priboj	Central Serbia	rs	N	19,6	43.59°N	19.54°E
-Zhiar	Banskobystrický	sk	N	19,6	48.59°N	18.86°E
+Žiar	Banskobystrický	sk	N	19,6	48.59°N	18.86°E
 Naklo nad Notecia	Kujawsko-Pomorskie	pl	N	19,6	53.14°N	17.60°E
 Enköping	Uppsala	se	N	19,6	59.65°N	17.09°E
 Katoomba-Wentworth Falls	New South Wales	au	N	19,6	33.71°S	150.32°E
@@ -18928,7 +18928,7 @@ Ostashkov	Tver	ru	N	19,3	57.16°N	33.10°E
 Tielt	West-Vlaanderen	be	N	19,3	51.00°N	3.33°E
 Pietarsaari	Pohjanmaa	fi	N	19,3	63.68°N	22.70°E
 Deblin	Lubelskie	pl	N	19,3	51.57°N	21.83°E
-Rozhnava	Koshický	sk	N	19,3	48.67°N	20.54°E
+Rožnava	Košický	sk	N	19,3	48.67°N	20.54°E
 Les Lilas	Seine-Saint-Denis	fr	N	19,3	48.89°N	2.40°E
 Deuil-la-Barre	Val-d'Oise	fr	N	19,3	48.97°N	2.31°E
 Saint-Michel-sur-Orge	Essonne	fr	N	19,3	48.64°N	2.30°E
@@ -19294,7 +19294,7 @@ Kozienice	Mazowieckie	pl	N	18,8	51.59°N	21.55°E
 Stara Pazova	Vojvodina	rs	N	18,8	44.99°N	20.16°E
 Csongrád	Csongrád	hu	N	18,8	46.72°N	20.14°E
 Cormeilles-en-Parisis	Val-d'Oise	fr	N	18,8	48.97°N	2.19°E
-Púchov	Trenchianský	sk	N	18,8	49.12°N	18.32°E
+Púchov	Trenčianský	sk	N	18,8	49.12°N	18.32°E
 Levin	Manawatu-Wanganui	nz	N	18,8	40.62°S	175.28°E
 Miedzyrzecz	Lubuskie	pl	N	18,8	52.45°N	15.57°E
 Grumo Nevano	Campania	it	N	18,8	40.94°N	14.26°E
@@ -19906,7 +19906,7 @@ Sipoo	Uusimaa	fi	N	18	60.37°N	25.26°E
 Salonta	Bihor	ro	N	18	46.80°N	21.65°E
 Uusikaupunki	Varsinais-Suomi	fi	N	18	60.80°N	21.41°E
 Kuçovë	Kuçovë	al	R	18	40.81°N	19.93°E
-Handlová	Trenchianský	sk	N	18	48.73°N	18.76°E
+Handlová	Trenčianský	sk	N	18	48.73°N	18.76°E
 Oborniki	Wielkopolskie	pl	N	18	52.65°N	16.81°E
 Yumbi	Équateur	cd	N	18	1.89°S	16.56°E
 Svitavy	Pardubický	cz	N	18	49.76°N	16.47°E
@@ -20381,7 +20381,7 @@ Kobylka	Mazowieckie	pl	N	17,4	52.34°N	21.20°E
 Neuilly-Plaisance	Seine-Saint-Denis	fr	N	17,4	48.86°N	2.51°E
 Konstantynów Lódzki	Lódzkie	pl	N	17,4	51.75°N	19.32°E
 Härnösand	Västernorrland	se	R	17,4	62.64°N	17.93°E
-Sered'	Trnavský	sk	N	17,4	48.30°N	17.74°E
+Sereď	Trnavský	sk	N	17,4	48.30°N	17.74°E
 Castellaneta	Puglia	it	N	17,4	40.64°N	16.92°E
 Orta Nova	Puglia	it	N	17,4	41.29°N	15.76°E
 Marumori	Miyagi	jp	N	17,4	37.92°N	140.77°E
@@ -21063,7 +21063,7 @@ Saint Peter Port	Saint Peter Port	xu	B	16,6	49.47°N	2.55°W
 Joinville-le-Pont	Val-de-Marne	fr	N	16,6	48.82°N	2.46°E
 Lezhë	Lezhë	al	R	16,6	41.79°N	19.65°E
 Rypin	Kujawsko-Pomorskie	pl	N	16,6	53.07°N	19.41°E
-Kysucké Nové Mesto	Zhilinský	sk	N	16,6	49.30°N	18.78°E
+Kysucké Nové Mesto	Žilinský	sk	N	16,6	49.30°N	18.78°E
 Laï	Tandjilé	td	R	16,6	9.39°N	16.30°E
 Zlotoryja	Dolnoslaskie	pl	N	16,6	51.12°N	15.91°E
 Pelhrimov	Vysochina	cz	N	16,6	49.44°N	15.22°E
@@ -21422,7 +21422,7 @@ Filingué	Tillabéry	ne	N	16,2	14.35°N	3.33°E
 Somerset East	Eastern Cape	za	N	16,2	32.72°S	25.58°E
 Tshofa	Kasai-Oriental	cd	N	16,2	5.23°S	25.25°E
 Koropíon	Attikí	gr	N	16,2	37.90°N	23.88°E
-Stará L'ubovna	Preshovský	sk	N	16,2	49.30°N	20.69°E
+Stará Ľubovňa	Prešovský	sk	N	16,2	49.30°N	20.69°E
 Shârif	Jilfah	dz	N	16,2	34.62°N	2.80°E
 Le Plessis-Trévise	Val-de-Marne	fr	N	16,2	48.81°N	2.57°E
 Parets del Vallès	Barcelona	es	N	16,2	41.59°N	2.23°E
