@@ -153,6 +153,9 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_polygon<<QPointF( x, y );
         }
+        qbound = m_boundary[0].quaternion();
+        qbound.getSpherical(degX,degY);
+        m_correctSign = degX / fabs(degX);
         while( visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() ) ) {
             offset-=4*radius;
             m_polygon.translate(-4*radius,0);
@@ -194,9 +197,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     float const centerLat=m_planetAxis.pitch();
     float const centerLng=-m_planetAxis.yaw();
     double PiRestriction = 5 * M_PI / 6;
-    bool flag = false;
-    int lastSign =1;
-    ScreenPolygon otherPolygon;
 #endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -260,20 +260,26 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
             double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + offset;
-            if( x > m_imgwidth ) x = m_imgwidth;
-            if( x < 0 ) x = 0;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_currentPoint = QPointF( x, y );
             int sign = (int) (degX / fabs(degX) );
-            if( sign != lastSign && fabs(degX) > PiRestriction ) {
-                flag = !flag;
+            if( sign != m_correctSign && fabs(degX) > PiRestriction ) {
+                if(sign == -1){
+                    correct+=4*( m_radius + 1 );
+                }
+                if(sign == 1){
+                    correct-=4*( m_radius + 1 );
+                }
             }
-            if( !flag )
-                m_polygon<<m_currentPoint;
-            else
-                otherPolygon<<m_currentPoint;
+            if( x > m_imgwidth ) x = m_imgwidth;
+            if( x < 0 ) x = 0;
 
-            lastSign = sign;
+            if( correct == 0 )
+                m_polygon<<m_currentPoint;
+            else {
+                m_currentPoint.setX( m_currentPoint.rx() + correct );
+                m_polygon<<m_currentPoint;
+            }
         }
     }
 #endif	

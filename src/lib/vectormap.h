@@ -77,6 +77,7 @@ class VectorMap : public ScreenPolygon::Vector
     matrix            m_rotMatrix;
 #ifdef FLAT_PROJ
     Quaternion m_planetAxis;
+    int m_correctSign;
 #endif
     //	int m_debugNodeCount;
 
