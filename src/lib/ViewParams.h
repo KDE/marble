@@ -23,6 +23,8 @@
 
 #include "marble_export.h"
 
+#include "Quaternion.h"
+
 
 class QImage;
 
@@ -39,8 +41,10 @@ class MARBLE_EXPORT ViewParams
 
  public:
     // Parameters that determine the painting
-    //Quaternion  m_planetAxis;   // Position, coded in a quaternion
-    //int         m_radius;       // Zoom level (pixels / earth radius)
+    int         m_radius;       // Zoom level (pixels / earth radius)
+    int         m_radiusUpdated;
+    Quaternion  m_planetAxis;   // Position, coded in a quaternion
+    Quaternion  m_planetAxisUpdated;
 
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere

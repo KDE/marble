@@ -1,3 +1,13 @@
+2007-07-19  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/ViewParams.h (ViewParams): New members: m_radius,
+	m_radiusUpdated, m_planetAxis, m_planetAxisUpdated.
+	* src/lib/ViewParams.cpp (ViewParams): Initialize new members
+	* src/lib/Marble{Model,Widget}.{h,cpp}: Move lots of methods from
+	MarbleModel to MarbleWidget.
+	(paintGlobe): New parameter redrawBackground
+	* src/lib/katlasviewinputhandler.{h,cpp}: adapt to changes above.
+	
 2007-07-18  Torsten Rahn  <rahn@kde.org>
 
 - Redo for the GPS tab (Now called "Current Location")

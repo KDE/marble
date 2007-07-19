@@ -54,7 +54,7 @@ class KAtlasViewInputHandler  : public QObject
     bool eventFilter( QObject *, QEvent * );
 
  private:
-    MarbleWidget  *m_marbleWidget;
+    MarbleWidget  *m_widget;
     MarbleModel   *m_model;
 
     QPixmap  curpmtl;

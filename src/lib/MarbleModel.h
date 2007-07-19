@@ -92,38 +92,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
-    void  paintGlobe(ClipPainter*, ViewParams *viewParams, const QRect&);
+    void  paintGlobe(ClipPainter*, ViewParams *viewParams, 
+                     bool redrawBackground, const QRect&);
 
     void  resize( QImage *canvasImage );
-
-    int   radius() const;
-    void  setRadius(const int radius);
-
-    Quaternion  getPlanetAxis() const;
-
-
-    // This method provides a way to center on lat = +90(N) - -90(S) and lng = +180(W) - -180(E) 
-    void  rotateTo(const double&, const double&);
-    void  rotateTo(const uint&, const uint&, const uint&);
-    void  rotateTo(const Quaternion&);
-
-    void rotateBy(const Quaternion&);
-    void rotateBy(const double&, const double&);
-
-    double  centerLatitude()  const;
-    double  centerLongitude() const;
 
     QAbstractListModel* getPlaceMarkModel() const;
 
     void setMapTheme( const QString &selectedMap, QWidget *parent );
-
-    int northPoleY();
-    int northPoleZ();
-
-    bool screenCoordinates( const double lng, const double lat, int& x, int& y );
-
-    bool needsUpdate() const;
-    void setNeedsUpdate();
 
     void addPlaceMarkFile( const QString& filename );
 

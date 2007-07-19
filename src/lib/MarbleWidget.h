@@ -149,14 +149,33 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     const QRegion  activeRegion();
 
+    // TODO: Apidox
+    int         radius() const;
+    void        setRadius(const int radius);
+    Quaternion  planetAxis() const;
+
     /**
      * @brief Return the current zoom level.
      */
     int  zoom() const;
 
-    double  centerLatitude();
-    double  centerLongitude();
+    // FIXME: Apidox
+    bool needsUpdate() const;
+    void setNeedsUpdate();
 
+    int northPoleY();
+    int northPoleZ();
+    bool screenCoordinates( const double lng, const double lat, int& x, int& y );
+    // This method provides a way to center on lat = +90(N) - -90(S)
+    // and lng = +180(W) - -180(E)
+    // FIXME: Apidox
+    void  rotateTo(const double&, const double&);
+    void  rotateTo(const uint&, const uint&, const uint&);
+    void  rotateTo(const Quaternion&);
+    void  rotateBy(const Quaternion& incRot);
+
+    double  centerLatitude()  const;
+    double  centerLongitude() const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
@@ -314,6 +333,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * the previous position and the two offsets.
      */
     void  rotateBy(const double &phi, const double &theta);
+
     /**
      * @brief  Center the view on a point
      * @param  lat  an angle parallel to the latitude lines

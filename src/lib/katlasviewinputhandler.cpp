@@ -24,7 +24,7 @@
 
 KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *marbleWidget,
                                                MarbleModel  *model)
-    : m_marbleWidget( marbleWidget ),
+    : m_widget( marbleWidget ),
       m_model( model )
 {
     curpmtl.load( KAtlasDirs::path("bitmaps/cursor_tl.xpm") );
@@ -80,22 +80,22 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             diry = 1;
             break;
         case 0x2b:
-            m_marbleWidget->zoomIn();
+            m_widget->zoomIn();
             break;
         case 0x2d:
-            m_marbleWidget->zoomOut();
+            m_widget->zoomOut();
             break;
         case 0x01000010:
-            m_marbleWidget->goHome();
+            m_widget->goHome();
             break;
         default:
             break;
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_model->rotateBy( -m_marbleWidget->moveStep() * (double)(diry),
-                               -m_marbleWidget->moveStep() * (double)(dirx) );
-            m_marbleWidget->repaint();
+            m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
+                                -m_widget->moveStep() * (double)(dirx) );
+            m_widget->repaint();
         }
 
         return true;
@@ -105,7 +105,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
               || e->type() == QEvent::MouseButtonRelease ) {
 
         QMouseEvent  *event        = static_cast<QMouseEvent*>(e);
-        QRegion       activeRegion = m_marbleWidget->activeRegion();
+        QRegion       activeRegion = m_widget->activeRegion();
 
         dirx = 0; 
         diry = 0;
@@ -115,7 +115,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
         {
             double  lat;
             double  lng;
-            m_marbleWidget->globeSphericals( event->x(), event->y(), lng, lat );
+            m_widget->globeSphericals( event->x(), event->y(), lng, lat );
             QString position = GeoPoint( lng, lat ).toString();
             emit mouseGeoPosition( position );
         }
@@ -144,11 +144,11 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 // m_leftpresseda: screen center latitude  during mouse press
                 // m_leftpressedb: screen center longitude during mouse press
-                m_marbleWidget->globeSphericals( m_marbleWidget->width() / 2,
-						 m_marbleWidget->height() / 2,
-						 m_leftpresseda, m_leftpressedb );
+                m_widget->globeSphericals( m_widget->width() / 2,
+                                           m_widget->height() / 2,
+                                           m_leftpresseda, m_leftpressedb );
 
-                if ( m_model->northPoleY() > 0 ) {
+                if ( m_widget->northPoleY() > 0 ) {
                     m_leftpressedb = M_PI - m_leftpressedb;
                     m_leftpresseda = M_PI + m_leftpresseda;	 
                 }
@@ -196,7 +196,7 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
 
             // Regarding all kinds of mouse moves:
             if ( m_leftpressed == true ) {
-                double  radius = (double)(m_model->radius());
+                double  radius = (double)(m_widget->radius());
                 int    deltax = event->x() - m_leftpressedx;
                 int    deltay = event->y() - m_leftpressedy;
 
@@ -205,23 +205,23 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                     return true; 
 
                 double direction = 1;
-                if ( m_model -> northPoleZ() > 0 ) {	
-                    if ( event->y() < ( m_model->northPoleY()
-                                        + m_marbleWidget->height() / 2 ) )
+                if ( m_widget->northPoleZ() > 0 ) {	
+                    if ( event->y() < ( m_widget->northPoleY()
+                                        + m_widget->height() / 2 ) )
                         direction = -1;
                 }
                 else {
-                    if (event->y() > (-m_model->northPoleY() 
-                                      + m_marbleWidget->height() / 2 ) )
+                    if (event->y() > ( -m_widget->northPoleY() 
+                                       + m_widget->height() / 2 ) )
                         direction = -1;
                 }
 
-                m_model->rotateTo( 180 / M_PI * (double)(-m_leftpressedb)
-                                   + 90 * deltay / radius, 
-                                  -180 / M_PI * (double)(m_leftpresseda)
-                                   + 90 * direction * deltax / radius );
+                m_widget->rotateTo( 180 / M_PI * (double)(-m_leftpressedb)
+                                    + 90 * deltay / radius, 
+                                    -180 / M_PI * (double)(m_leftpresseda)
+                                    + 90 * direction * deltax / radius );
 
-                m_marbleWidget->repaint();
+                m_widget->repaint();
             }
 
 
@@ -229,32 +229,32 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 int  eventy = event->y();
                 int  dy     = m_midpressedy - eventy;
                 m_midpressed = eventy;
-                m_marbleWidget->zoomViewBy( (int)( 2 * dy / 3 ) );
-                m_marbleWidget->repaint();
+                m_widget->zoomViewBy( (int)( 2 * dy / 3 ) );
+                m_widget->repaint();
             }
         }
         else {
             m_leftpressed = false;
 
-            dirx = (int)( 3 * event->x() / m_marbleWidget->width() ) - 1;
+            dirx = (int)( 3 * event->x() / m_widget->width() ) - 1;
             if ( dirx > 1 ) 
                 dirx = 1;
             if ( dirx < -1 )
                 dirx = -1;
 
-            diry = (int)( 3 * event->y() / m_marbleWidget->height() ) - 1;
+            diry = (int)( 3 * event->y() / m_widget->height() ) - 1;
             if ( diry > 1 ) 
                 diry = 1;
             if ( diry < -1 )
                 diry = -1;
 #ifdef FLAT_PROJ
             //Dirty hack to make properly behavior for the arrow
-            int radius = m_marbleWidget->model()->radius();
-            double centerLat = m_marbleWidget->model()->getPlanetAxis().pitch();
-            int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);
-            int yTop =  m_marbleWidget->height()/2 - radius + yCenterOffset;
-            int yBottom = yTop + 2*radius;
-            yTop = (yTop > 0)? yTop : 0;
+            int     radius        = m_widget->model()->radius();
+            double  centerLat     = m_widget->model()->getPlanetAxis().pitch();
+            int     yCenterOffset = (int)((float)(2*radius / M_PI) * centerLat);
+            int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
+            int     yBottom       = yTop + 2*radius;
+            yTop = ( yTop > 0 ) ? yTop : 0;
             if ( dirx == 0 && event->y() < yTop)
                  diry=-1;
             if ( dirx == 0 && event->y() > yBottom )
@@ -263,21 +263,21 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
-                m_model->rotateBy( -m_marbleWidget->moveStep() * (double)(diry),
-                                   -m_marbleWidget->moveStep() * (double)(dirx) );
-                m_marbleWidget->repaint();
+                m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
+                                    -m_widget->moveStep() * (double)(dirx) );
+                m_widget->repaint();
 
             }				
         }
 
-        m_marbleWidget->setCursor(arrowcur[dirx+1][diry+1]);
+        m_widget->setCursor(arrowcur[dirx+1][diry+1]);
 
         return true;
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
             QWheelEvent  *wheelevt = static_cast<QWheelEvent*>(e);
-            m_marbleWidget->zoomViewBy((int)(wheelevt->delta()/3));
+            m_widget->zoomViewBy((int)(wheelevt->delta()/3));
 
             return true;
         }

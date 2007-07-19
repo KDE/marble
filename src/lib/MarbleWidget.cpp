@@ -40,6 +40,11 @@
 #endif
 
 
+// Radians to minutes (21600 = 180 * 60)
+// FIXME: Move to a common define file.
+const double RAD2INT = 21600.0 / M_PI;
+
+
 class MarbleWidgetPrivate
 {
  public:
@@ -47,7 +52,8 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleModel     *m_model;
 
-    ViewParams       viewParams;
+    ViewParams       m_viewParams;
+    bool             m_justModified; // FIXME: Rename to isDirty
 
     GeoPoint         m_homePoint;
     int              m_homeZoom;
@@ -126,9 +132,11 @@ void MarbleWidget::construct(QWidget *parent)
 
 //    setAttribute(Qt::WA_NoSystemBackground);
 
-    d->viewParams.m_canvasImage = new QImage( parent->width(), 
-                                              parent->height(),
+    d->m_viewParams.m_canvasImage = new QImage( parent->width(), 
+                                                parent->height(),
                                          QImage::Format_ARGB32_Premultiplied );
+    d->m_justModified = false;
+
 
     d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
     installEventFilter( d->m_inputhandler );
@@ -177,6 +185,36 @@ MarbleModel *MarbleWidget::model() const
 }
 
 
+Quaternion MarbleWidget::planetAxis() const
+{
+    return d->m_viewParams.m_planetAxis;
+}
+
+
+int MarbleWidget::radius() const
+{
+    return d->m_viewParams.m_radius;
+}
+
+void MarbleWidget::setRadius(const int radius)
+{
+    d->m_viewParams.m_radius = radius;
+}
+
+
+bool MarbleWidget::needsUpdate() const
+{
+    return ( d->m_justModified
+             || d->m_viewParams.m_radius != d->m_viewParams.m_radiusUpdated
+             || !( d->m_viewParams.m_planetAxis == d->m_viewParams.m_planetAxisUpdated ) );
+}
+
+void MarbleWidget::setNeedsUpdate()
+{
+    d->m_justModified = true;
+}
+
+
 QAbstractListModel *MarbleWidget::placeMarkModel()
 {
     return d->m_model->getPlaceMarkModel();
@@ -184,11 +222,11 @@ QAbstractListModel *MarbleWidget::placeMarkModel()
 
 double MarbleWidget::moveStep()
 {
-    if ( d->m_model->radius() < sqrt( width() * width() + height() * height() ) )
+    if ( radius() < sqrt( width() * width() + height() * height() ) )
 	return 0.1;
     else
 	return atan( (double)width() 
-		     / (double)( 2 * d->m_model->radius() ) ) * 0.2;
+		     / (double)( 2 * radius() ) ) * 0.2;
 }
 
 int MarbleWidget::zoom() const
@@ -196,14 +234,14 @@ int MarbleWidget::zoom() const
     return d->m_logzoom; 
 }
 
-double MarbleWidget::centerLatitude()
-{ 
-    return d->m_model->centerLatitude();
+double MarbleWidget::centerLatitude() const
+{
+    return d->m_viewParams.m_planetAxis.pitch() * 180.0 / M_PI;
 }
 
-double MarbleWidget::centerLongitude()
+double MarbleWidget::centerLongitude() const
 {
-    return d->m_model->centerLongitude();
+    return - d->m_viewParams.m_planetAxis.yaw() * 180.0 / M_PI;
 }
 
 void MarbleWidget::setMinimumZoom( int zoom )
@@ -306,28 +344,28 @@ void MarbleWidget::zoomView(int zoom)
 
     emit zoomChanged(zoom);
 
-    int radius = fromLogScale(zoom);
+    int newRadius = fromLogScale(zoom);
 
-    if ( radius == d->m_model->radius() )
+    if ( newRadius == radius() )
 	return;
-	
+ 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = d->viewParams.m_canvasImage->width() / 2;
-    int  imgry = d->viewParams.m_canvasImage->height() / 2;
+    int  imgrx = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imgry = d->m_viewParams.m_canvasImage->height() / 2;
 
-    if ( radius * radius < imgrx * imgrx + imgry * imgry
-         && radius != d->m_model->radius() )
+    if ( newRadius * newRadius < imgrx * imgrx + imgry * imgry
+         && newRadius != radius() )
     {
-      setAttribute(Qt::WA_NoSystemBackground, false);
-      d->viewParams.m_canvasImage->fill( Qt::transparent );
+        setAttribute(Qt::WA_NoSystemBackground, false);
+        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
     }
     else
     {
         setAttribute(Qt::WA_NoSystemBackground, true);
     }
 
-    d->m_model->setRadius( radius );
+    setRadius( newRadius );
     drawAtmosphere();
 
     repaint();
@@ -340,9 +378,10 @@ void MarbleWidget::zoomViewBy(int zoomStep)
 {
     // Prevent infinite loops
 
-    int zoom = d->m_model->radius();
+    int zoom    = radius();
     int tryZoom = toLogScale(zoom) + zoomStep;
-    //	qDebug() << QString::number(tryZoom) << " " << QString::number(minimumzoom);
+    // qDebug() << QString::number(tryZoom) << " "
+    //         << QString::number(minimumzoom);
     if ( tryZoom >= d->m_minimumzoom && tryZoom <= d->m_maximumzoom ) {
 	zoom = tryZoom;
 	zoomView(zoom);
@@ -360,16 +399,39 @@ void MarbleWidget::zoomOut()
     zoomViewBy( -d->m_zoomStep );
 }
 
-void MarbleWidget::rotateBy(const double& phi, const double& theta)
+void MarbleWidget::rotateTo(const Quaternion& quat)
 {
-    d->m_model->rotateBy( phi, theta );
+    d->m_viewParams.m_planetAxis = quat;
 
     repaint();
 }
 
+
+void MarbleWidget::rotateBy(const Quaternion& incRot)
+{
+    d->m_viewParams.m_planetAxis = incRot * d->m_viewParams.m_planetAxis;
+
+    repaint();
+}
+
+void MarbleWidget::rotateBy(const double& phi, const double& theta)
+{
+    Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
+    Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
+
+    d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
+    d->m_viewParams.m_planetAxis *= rotPhi;
+    d->m_viewParams.m_planetAxis.normalize();
+
+    repaint();
+}
+
+
 void MarbleWidget::centerOn(const double& lat, const double& lon)
 {
-    d->m_model->rotateTo( lat, lon );
+    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
+                                                  (lon + 180.0) * M_PI / 180.0,
+                                                  0.0 );
 
     repaint();
 }
@@ -452,15 +514,16 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    delete d->viewParams.m_canvasImage;
+    delete d->m_viewParams.m_canvasImage;
 
-    d->viewParams.m_canvasImage = new QImage( width(), height(),
+    d->m_viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
-    d->viewParams.m_canvasImage->fill( Qt::transparent );
+    d->m_viewParams.m_canvasImage->fill( Qt::transparent );
     drawAtmosphere();
 
     // FIXME: Eventually remove.
-    d->m_model->resize( d->viewParams.m_canvasImage );
+    d->m_model->resize( d->m_viewParams.m_canvasImage );
+    d->m_justModified = true;
 
     repaint();
 }
@@ -477,16 +540,53 @@ void MarbleWidget::disconnectNotify ( const char * signal )
         d->m_inputhandler->setPositionSignalConnected(false);
 }
 
+int MarbleWidget::northPoleY()
+{
+    Quaternion  northPole     = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
+
+    northPole.rotateAroundAxis(invPlanetAxis);
+
+    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Y] );
+}
+
+int MarbleWidget::northPoleZ()
+{
+    Quaternion  northPole     = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
+
+    northPole.rotateAroundAxis(invPlanetAxis);
+
+    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Z] );
+}
+
+bool MarbleWidget::screenCoordinates( const double lng, const double lat,
+                                      int& x, int& y )
+{
+    Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
+    Quaternion  invRotAxis = d->m_viewParams.m_planetAxis.inverse();
+
+    qpos.rotateAroundAxis(invRotAxis);
+
+    x = (int)(  d->m_viewParams.m_radius * qpos.v[Q_X] );
+    y = (int)( -d->m_viewParams.m_radius * qpos.v[Q_Y] );
+
+    if ( qpos.v[Q_Z] >= 0.0 )
+        return true;
+    else
+        return false;
+}
+
+
 bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 {
 
-    int radius = d->m_model->radius(); 
     int imgrx  = width() >> 1;
     int imgry  = height() >> 1;
 
-    const double  radiusf = 1.0 / (double)(radius);
+    const double  radiusf = 1.0 / (double)(radius());
 
-    if ( radius > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
+    if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
 
 	double qy = radiusf * (double)(y - imgry);
 	double qr = 1.0 - qy * qy;
@@ -496,7 +596,7 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 	double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
 	Quaternion  qpos( 0, qx, qy, qz );
-	qpos.rotateAroundAxis( d->m_model->getPlanetAxis() );
+	qpos.rotateAroundAxis( planetAxis() );
 	qpos.getSpherical( alpha, beta );
 
 	return true;
@@ -507,33 +607,46 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 }
 
 
+void MarbleWidget::rotateTo(const uint& phi, const uint& theta, const uint& psi)
+{
+    d->m_viewParams.m_planetAxis.createFromEuler( (double)(phi)   / RAD2INT,
+                                                  (double)(theta) / RAD2INT,
+                                                  (double)(psi)   / RAD2INT );
+}
+
+void MarbleWidget::rotateTo(const double& lat, const double& lon)
+{
+    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
+                                                  (lon + 180.0) * M_PI / 180.0, 0.0 );
+}
+
+
 void MarbleWidget::drawAtmosphere()
 {
     int  imgrx  = width() / 2;
     int  imgry  = height() / 2;
-    int  radius = d->m_model->radius();
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius );
+    QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius() );
     grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
     grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
     QPen    pen1( Qt::NoPen );
-    QPainter  painter( d->viewParams.m_canvasImage );
+    QPainter  painter( d->m_viewParams.m_canvasImage );
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imgrx - (int)( (double)(radius) * 1.05 ),
-                         imgry - (int)( (double)(radius) * 1.05 ),
-                         (int)( 2.1 * (double)(radius) ), 
-                         (int)( 2.1 * (double)(radius) ) );
+    painter.drawEllipse( imgrx - (int)( (double)(radius()) * 1.05 ),
+                         imgry - (int)( (double)(radius()) * 1.05 ),
+                         (int)( 2.1 * (double)(radius()) ), 
+                         (int)( 2.1 * (double)(radius()) ) );
 }
 
 
 void MarbleWidget::setActiveRegion()
 {
-    int zoom = d->m_model->radius(); 
+    int zoom = radius(); 
 
     d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
                                  QRegion::Rectangle );
@@ -562,42 +675,48 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     //	Debugging Active Region
     //	painter.setClipRegion(activeRegion);
 
-    //	if (d->m_model->needsUpdate() || d->m_pCanvasImage->isNull() || d->m_pCanvasImage->size() != size())
-    //	{
+    //	if ( d->m_model->needsUpdate()
+    //       || d->m_viewParams.m_pCanvasImage->isNull()
+    //       || d->m_viewParams.m_pCanvasImage->size() != size()) {
 
-    int   radius = d->m_model->radius();
-    bool  doClip = ( radius > d->viewParams.m_canvasImage->width()/2
-                     || radius > d->viewParams.m_canvasImage->height()/2 ) ? true : false;
+    bool  doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
+                     || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
 
     // Create a painter that will do the painting.
     ClipPainter painter( this, doClip); 
 
     // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
-    d->m_model->paintGlobe(&painter, &d->viewParams, dirtyRect);
-	
+    d->m_model->paintGlobe( &painter, &d->m_viewParams, 
+                            needsUpdate() 
+                            || d->m_viewParams.m_canvasImage->isNull(),
+                            dirtyRect );
+    d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.m_planetAxis;
+    d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
+    d->m_justModified                   = false;
+
     // 2. Paint the scale.
     if ( d->m_showScaleBar == true )
-        painter.drawPixmap( 10, d->viewParams.m_canvasImage->height() - 40,
-                            d->m_mapscale.drawScaleBarPixmap( d->m_model->radius(),
-                                                       d->viewParams.m_canvasImage-> width() / 2 - 20 ) );
+        painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,
+                            d->m_mapscale.drawScaleBarPixmap( radius(),
+                                                              d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
 
     // 3. Paint the wind rose.
     if ( d->m_showWindRose == true )
-        painter.drawPixmap( d->viewParams.m_canvasImage->width() - 60, 10,
-    			d->m_windrose.drawWindRosePixmap( d->viewParams.m_canvasImage->width(),
-						       d->viewParams.m_canvasImage->height(),
-                                                       d->m_model->northPoleY() ) );
+        painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
+                            d->m_windrose.drawWindRosePixmap( d->m_viewParams.m_canvasImage->width(),
+                                                              d->m_viewParams.m_canvasImage->height(),
+                                                              northPoleY() ) );
 
     // 4. Paint the crosshair.
     d->m_crosshair.paintCrossHair( &painter, 
-                                   d->viewParams.m_canvasImage->width(),
-                                   d->viewParams.m_canvasImage->height() );
+                                   d->m_viewParams.m_canvasImage->width(),
+                                   d->m_viewParams.m_canvasImage->height() );
 
     d->m_measureTool->paintMeasurePoints( &painter, 
-                                          d->viewParams.m_canvasImage->width() / 2,
-                                          d->viewParams.m_canvasImage->height() / 2,
-                                          radius, d->m_model->getPlanetAxis(),
+                                          d->m_viewParams.m_canvasImage->width() / 2,
+                                          d->m_viewParams.m_canvasImage->height() / 2,
+                                          radius(), planetAxis(),
                                           true );
     setActiveRegion();
 }
@@ -607,9 +726,9 @@ void MarbleWidget::goHome()
 {
     // d->m_model->rotateTo(0, 0);
 #if 1
-    d->m_model->rotateTo( 54.8, -9.4 );
+    rotateTo( 54.8, -9.4 );
 #else
-    d->m_model->rotateTo( d->m_homePoint.quaternion() );
+    rotateTo( d->m_homePoint.quaternion() );
 #endif
     zoomView( d->m_homeZoom ); // default 1050
 
@@ -662,21 +781,21 @@ void MarbleWidget::setShowTerrain( bool visible )
 void MarbleWidget::setShowRelief( bool visible )
 { 
     d->m_model->textureColorizer()->setShowRelief( visible );
-    d->m_model->setNeedsUpdate();
+    setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowElevationModel( bool visible )
 { 
     d->m_model->setShowElevationModel( visible );
-    d->m_model->setNeedsUpdate();
+    setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 { 
     d->m_model->vectorComposer()->setShowIceLayer( visible );
-    d->m_model->setNeedsUpdate();
+    setNeedsUpdate();
     repaint();
 }
 
@@ -738,7 +857,7 @@ void MarbleWidget::setQuickDirty( bool enabled )
 #ifndef FLAT_PROJ
     // Interlace texture mapping 
     d->m_model->textureMapper()->setInterlaced( enabled );
-    d->m_model->setNeedsUpdate();
+    setNeedsUpdate();
 
     int transparency = enabled ? 255 : 192;
     d->m_windrose.setTransparency( transparency );

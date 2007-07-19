@@ -8,10 +8,11 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
 #include "ViewParams.h"
 
 ViewParams::ViewParams( )
 {
-    //m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
-    //m_radius     = 2000;
+    m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
+    m_radius     = 2000;
 }

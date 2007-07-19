@@ -57,13 +57,13 @@ class MarbleModelPrivate
     //Gps Stuff
     GpsLayer            *m_gpsLayer;
 
-    Quaternion           m_planetAxis;
-    Quaternion           m_planetAxisUpdated;
-    int                  m_radius;
-    int                  m_radiusUpdated;
+    // View parameters
+    //Quaternion           m_planetAxis;
+    //Quaternion           m_planetAxisUpdated;
+    //int                  m_radius;
+    //int                  m_radiusUpdated;
 
-    bool          m_justModified;
-    bool          m_centered;
+    //bool          m_justModified;
 
     bool          m_showGrid;
     bool          m_showPlaceMarks;
@@ -87,15 +87,10 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_placemarkpainter   = 0;
     d->m_placeMarkContainer = 0;
-    d->m_radius             = 2000;
-
-    d->m_justModified = false;
 
     d->m_showGrid = true;
     d->m_showPlaceMarks = true;
     d->m_showElevationModel = false;
-
-    d->m_planetAxis   = Quaternion( 1.0, 0.0, 0.0, 0.0 );
 
     d->m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
     d->m_maptheme = new MapTheme();
@@ -236,8 +231,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
     else
         d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
-    connect( d->m_texmapper,      SIGNAL( mapChanged() ),
-             this,              SLOT( notifyModelChanged() ) );
+    connect( d->m_texmapper, SIGNAL( mapChanged() ),
+             this,           SLOT( notifyModelChanged() ) );
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
@@ -261,19 +256,18 @@ void MarbleModel::resize( QImage *canvasImage)
     d->m_texmapper->resizeMap( canvasImage );
     d->m_veccomposer->resizeMap( d->m_coastimg );
     d->m_gridmap->resizeMap( d->m_coastimg );
-
-    d->m_justModified = true;
 }
 
 
 void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
+                              bool redrawBackground,
                               const QRect& dirtyRect )
 {
+    if ( redrawBackground ) {
 
-    if ( needsUpdate() || viewParams->m_canvasImage->isNull() || d->m_justModified ) {
-
-        d->m_texmapper->mapTexture( viewParams->m_canvasImage, d->m_radius,
-                                    d->m_planetAxis );
+        d->m_texmapper->mapTexture( viewParams->m_canvasImage, 
+                                    viewParams->m_radius,
+                                    viewParams->m_planetAxis );
 
         if ( d->m_showElevationModel == false
              && d->m_maptheme->bitmaplayer().dem == "true" )
@@ -281,14 +275,15 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
             d->m_coastimg->fill( Qt::transparent );
 
             // Create VectorMap
-            d->m_veccomposer->drawTextureMap( d->m_coastimg, d->m_radius,
-                                              d->m_planetAxis );
+            d->m_veccomposer->drawTextureMap( d->m_coastimg,
+                                              viewParams->m_radius,
+                                              viewParams->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
             d->m_texcolorizer->colorize( viewParams->m_canvasImage,
                                          d->m_coastimg,
-                                         d->m_radius,
-                                         d->m_planetAxis );
+                                         viewParams->m_radius,
+                                         viewParams->m_planetAxis );
         }
     }
 
@@ -304,7 +299,9 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
-        d->m_veccomposer->paintVectorMap( painter, d->m_radius, d->m_planetAxis );
+        d->m_veccomposer->paintVectorMap( painter, 
+                                          viewParams->m_radius,
+                                          viewParams->m_planetAxis );
     }
 
     // Paint the grid around the earth.
@@ -312,19 +309,22 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
         QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
         // Create and paint a grid
-        d->m_gridmap->createGrid( d->m_radius, d->m_planetAxis );
+        d->m_gridmap->createGrid( viewParams->m_radius,
+                                  viewParams->m_planetAxis );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
 
         // Create and paint the tropics and polar circles
-        d->m_gridmap->createTropics( d->m_radius, d->m_planetAxis );
+        d->m_gridmap->createTropics( viewParams->m_radius, 
+                                     viewParams->m_planetAxis );
         gridpen.setStyle( Qt::DotLine );
         gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
 
         // Create Equator
-        d->m_gridmap->createEquator( d->m_radius, d->m_planetAxis );
+        d->m_gridmap->createEquator( viewParams->m_radius, 
+                                     viewParams->m_planetAxis );
         gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
@@ -336,9 +336,9 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
-                                                 d->m_radius,
+                                                 viewParams->m_radius,
                                                  d->m_placeMarkContainer,
-                                                 d->m_planetAxis );
+                                                 viewParams->m_planetAxis );
     }
 #else
     if ( d->m_showPlaceMarks ) {
@@ -354,114 +354,17 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
         d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
-                                   d->m_radius, d->m_planetAxis );
+                                   viewParams->m_radius, 
+                                   viewParams->m_planetAxis );
     }
-
-    d->m_planetAxisUpdated = d->m_planetAxis;
-    d->m_radiusUpdated     = d->m_radius;
-    d->m_justModified      = false;
 }
 
-
-int MarbleModel::radius() const
-{
-    return d->m_radius;
-}
-
-void MarbleModel::setRadius(const int radius)
-{
-    d->m_radius = radius;
-}
-
-
-Quaternion MarbleModel::getPlanetAxis() const
-{
-    return d->m_planetAxis;
-}
-
-
-void MarbleModel::rotateTo(const uint& phi, const uint& theta, const uint& psi)
-{
-    d->m_planetAxis.createFromEuler( (double)(phi)   / RAD2INT,
-				     (double)(theta) / RAD2INT,
-				     (double)(psi)   / RAD2INT );
-}
-
-void MarbleModel::rotateTo(const double& phi, const double& theta)
-{
-    d->m_planetAxis.createFromEuler( (phi + 180.0) * M_PI / 180.0,
-                                     (theta + 180.0) * M_PI / 180.0, 0.0 );
-}
-
-void MarbleModel::rotateTo(const Quaternion& quat)
-{
-    d->m_planetAxis = quat;
-}
-
-
-void MarbleModel::rotateBy(const Quaternion& incRot)
-{
-    d->m_planetAxis = incRot * d->m_planetAxis;
-}
-
-void MarbleModel::rotateBy(const double& phi, const double& theta)
-{
-    Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
-
-    d->m_planetAxis = rotTheta * d->m_planetAxis;
-    d->m_planetAxis *= rotPhi;
-    d->m_planetAxis.normalize();
-}
-
-double MarbleModel::centerLatitude() const
-{
-    return d->m_planetAxis.pitch() * 180.0 / M_PI;
-}
-
-double MarbleModel::centerLongitude() const
-{
-    return - d->m_planetAxis.yaw() * 180.0 / M_PI;
-}
 
 QAbstractListModel *MarbleModel::getPlaceMarkModel() const
 {
     return d->m_placemarkmodel;
 }
 
-
-bool MarbleModel::needsUpdate() const
-{
-    return !( d->m_radius == d->m_radiusUpdated
-              && d->m_planetAxis == d->m_planetAxisUpdated );
-}
-
-void MarbleModel::setNeedsUpdate()
-{
-    d->m_justModified = true;
-}
-
-
-int MarbleModel::northPoleY()
-{
-
-    Quaternion  northPole   = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
-
-    northPole.rotateAroundAxis(invPlanetAxis);
-
-    return (int)( d->m_radius * northPole.v[Q_Y] );
-}
-
-int MarbleModel::northPoleZ()
-{
-    Quaternion  northPole   = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_planetAxis.inverse();
-
-    northPole.rotateAroundAxis(invPlanetAxis);
-
-    return (int)( d->m_radius * northPole.v[Q_Z] );
-}
 
 PlaceMarkContainer *MarbleModel::placeMarkContainer()   const
 {
@@ -487,31 +390,14 @@ FlatScanlineTextureMapper
     return d->m_texmapper;
 }
 
-PlaceMarkPainter  *MarbleModel::placeMarkPainter() const
+PlaceMarkPainter *MarbleModel::placeMarkPainter() const
 {
     return d->m_placemarkpainter;
 }
 
-GpsLayer          *MarbleModel::gpsLayer()         const
+GpsLayer *MarbleModel::gpsLayer()         const
 {
     return d->m_gpsLayer;
-}
-
-bool MarbleModel::screenCoordinates( const double lng, const double lat,
-                                     int& x, int& y )
-{
-    Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
-    Quaternion  invRotAxis = d->m_planetAxis.inverse();
-
-    qpos.rotateAroundAxis(invRotAxis);
-
-    x = (int)(  d->m_radius * qpos.v[Q_X] );
-    y = (int)( -d->m_radius * qpos.v[Q_Y] );
-
-    if ( qpos.v[Q_Z] >= 0.0 )
-        return true;
-    else
-        return false;
 }
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )
@@ -530,9 +416,8 @@ QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
 
 void MarbleModel::notifyModelChanged()
 {
-    d->m_justModified = true;
-
     emit modelChanged();
 }
+
 
 #include "MarbleModel.moc"
