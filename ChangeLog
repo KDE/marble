@@ -1,3 +1,7 @@
+2007-07-19  Torsten Rahn  <rahn@kde.org>
+
+- Adding a GUI item to change the projection. Disabled for now.
+
 2007-07-19  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/ViewParams.h (ViewParams): New members: m_radius,
