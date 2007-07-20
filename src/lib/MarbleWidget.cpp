@@ -847,9 +847,9 @@ void MarbleWidget::updateGps()
     repaint();
 }
 
-void MarbleWidget::openGpxFile(QString file)
+void MarbleWidget::openGpxFile(QString &filename)
 {
-    d->m_model->gpsLayer()->loadGpx( file );
+    d->m_model->gpsLayer()->loadGpx( filename );
 }
 
 void MarbleWidget::setQuickDirty( bool enabled )

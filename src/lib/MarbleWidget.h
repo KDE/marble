@@ -496,7 +496,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Opens a gpx file for viewing on the Marble Widget
      */
-    void openGpxFile( QString );
+    void openGpxFile( QString &filename );
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used
