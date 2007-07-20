@@ -1,5 +1,18 @@
 2007-07-20  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove warnings
+	* src/lib/gps/GpxSax.cpp: Remove most warnings
+	* src/lib/AbstractLayer/AbstractLayer.cpp
+	* src/lib/AbstractLayer/AbstractLayerData.cpp
+	* src/lib/placemarkpainter.cpp
+	* src/lib/kml/KMLObject.cpp
+	* src/lib/kml/KMLPointParser.cpp
+	* src/lib/kml/KMLFeatureParser.cpp
+	* src/lib/HttpDownloadManager.cpp
+	* src/lib/TextureTile.cpp
+	* src/lib/texcolorizer.cpp
+	Remove all warnings, 
+
 	Fix Krazy issue 18: Inappropriate pass-by-value.
 	* src/lib/MarbleWidget.cpp (openGpxFile): Take QString& instead of
 	QString.

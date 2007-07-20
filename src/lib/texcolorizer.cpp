@@ -34,6 +34,8 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, 
                                 const int& radius, Quaternion planetAxis)
 {
+    // FIXME: Why isn't it used?
+    Q_UNUSED( planetAxis );
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();

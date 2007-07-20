@@ -105,7 +105,12 @@ void AbstractLayer::paint( ClipPainter* painter,
 void AbstractLayer::paintLayer( ClipPainter*, const QSize& screenSize,
                                 double radius, Quaternion rotAxis)
 {
-    //should be pure virtual
+    // FIXME: should be pure virtual
+
+    Q_UNUSED( screenSize );
+    Q_UNUSED( radius );
+    Q_UNUSED( rotAxis );
+
 }
 
 double AbstractLayer::distance ( const QPoint &a, const QPoint &b )

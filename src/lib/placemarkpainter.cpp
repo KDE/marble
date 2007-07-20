@@ -411,8 +411,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     while ( visit != m_visiblePlacemarks.constBegin() ) {
         --visit;
         mark = *visit;
-        int tempSymbol = mark->symbolPos().x();
-        int tempText = mark->textRect().left();
+        //int tempSymbol = mark->symbolPos().x();
+        //int tempText = mark->textRect().left();
 
         painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
         painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );

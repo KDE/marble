@@ -96,6 +96,9 @@ void HttpDownloadManager::activateJobs()
 
 void HttpDownloadManager::reportResult( HttpJob* job, bool err )
 {
+    // FIXME: Actually use err?
+    Q_UNUSED( err );
+
     emit downloadComplete( job->relativeUrlString, job->initiatorId );
 
     removeJob( job );

@@ -32,6 +32,10 @@ bool KMLFeatureParser::startElement( const QString& namespaceURI,
                             const QString &name,
                             const QXmlAttributes& atts )
 {
+    Q_UNUSED( namespaceURI );
+    Q_UNUSED( localName );
+    Q_UNUSED( atts );
+
     bool result = false;
 
     QString lowerName = name.toLower();
@@ -64,6 +68,9 @@ bool KMLFeatureParser::endElement( const QString &namespaceURI,
 				   const QString &localName,
 				   const QString &name )
 {
+    Q_UNUSED( namespaceURI );
+    Q_UNUSED( localName );
+
     bool result = false;
 
     QString lowerName = name.toLower();

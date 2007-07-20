@@ -31,6 +31,9 @@ bool GpxSax::startElement( const QString &namespaceURI,
                            const QString &qName,
                            const QXmlAttributes &attributes)
 {
+    Q_UNUSED( namespaceURI );
+    Q_UNUSED( localName );
+
     qDebug("startElement");
     if(qName == "wpt"){
         m_tempLat = (attributes.value("lat")).toDouble();
@@ -50,5 +53,9 @@ bool GpxSax::endElement( const QString &namespaceURI,
                          const QString &localName,
                          const QString &qName )
 {
+    Q_UNUSED( namespaceURI );
+    Q_UNUSED( localName );
+    Q_UNUSED( qName );
+
     return true;
 }

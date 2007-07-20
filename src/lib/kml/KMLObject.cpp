@@ -13,12 +13,14 @@
 
 #include <QtGlobal>
 
+#ifdef KML_DEBUG
 namespace
 {
     // This variable used to count number of allocated
     // kml objects. Debug only
     int refCount = 0;
 }
+#endif
 
 KMLObject::KMLObject()
   : m_id(0),

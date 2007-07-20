@@ -67,7 +67,7 @@ void AbstractLayerData::setPosition( const GeoPoint &position )
 void AbstractLayerData::setPosition( const double &lat,
                                      const double &lon )
 {
-    int detail = m_position->detail();
+    //int detail = m_position->detail();
     delete m_position;
     m_position = new GeoPoint( lon, lat, GeoPoint::Degree);
 }
