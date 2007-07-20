@@ -44,9 +44,9 @@ class AbstractLayer: public QObject
      * layer a simple function call.
      * @param painter pointer to the painter that will paint this
      *                layer
-     * @param screenSize used to calculate the pixel positon
+     * @param screenSize used to calculate the pixel position
      * @param radius globe radius, used as a measure of zoom level
-     * @param rotAxis Quaternion that represents the current rotation
+     * @param rotAxis quaternion that represents the current rotation
      *                of the globe
      */
     virtual void paintLayer(ClipPainter* painter, 
@@ -152,8 +152,8 @@ class AbstractLayer: public QObject
      * @brief a collection of all containers that hold the data for
      *        this layer
      * 
-     * To draw a layer you should be able to itterate throught this
-     * collection and call each Container's @c draw() function
+     * To draw a layer you should be able to iterate through this
+     * collection and call each container's @c draw() function
      */
     QVector<AbstractLayerContainer *> *m_containers;
 };

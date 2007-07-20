@@ -1,5 +1,9 @@
 2007-07-20  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix Krazy issue 23: Spelling errors.
+	* src/lib/AbstractLayer/AbstractLayer.h (class AbstractLayer): Fix
+	spelling mistakes
+
 	Remove warnings
 	* src/lib/gps/GpxSax.cpp: Remove most warnings
 	* src/lib/AbstractLayer/AbstractLayer.cpp
