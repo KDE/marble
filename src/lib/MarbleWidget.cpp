@@ -29,6 +29,7 @@
 #include "katlasviewpopupmenu.h"
 #include "katlastilecreatordialog.h"
 #include "gps/GpsLayer.h"
+#include "utils.h"
 
 #include "measuretool.h"
 
@@ -39,10 +40,6 @@
 # endif
 #endif
 
-
-// Radians to minutes (21600 = 180 * 60)
-// FIXME: Move to a common define file.
-const double RAD2INT = 21600.0 / M_PI;
 
 
 class MarbleWidgetPrivate

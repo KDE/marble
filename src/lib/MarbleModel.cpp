@@ -27,9 +27,7 @@
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
 #include "gps/GpsLayer.h"
-
-const double RAD2INT = 21600.0 / M_PI;
-
+#include "utils.h"
 
 class MarbleModelPrivate
 {

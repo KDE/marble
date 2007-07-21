@@ -17,8 +17,8 @@
 
 namespace
 {
-    const QString PLACEMARK_TAG = "placemark";
-    const QString POINT_TAG = "point";
+    const QString PLACEMARKPARSER_TAG = "placemark";
+    const QString POINTPARSER_TAG = "point";
 }
 
 KMLPlaceMarkParser::KMLPlaceMarkParser( KMLContainer& container )
@@ -60,10 +60,10 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
          * Iterate over tags which current parser supports
          * TODO: check if this tag appears first time or not
          */
-        if ( lowerName == PLACEMARK_TAG ) {
+        if ( lowerName == PLACEMARKPARSER_TAG ) {
             result = true;
         }
-        else if ( lowerName == POINT_TAG ) {
+        else if ( lowerName == POINTPARSER_TAG ) {
             if ( m_currentParser != 0 ) {
                 delete m_currentParser;
                 m_currentParser = 0;
@@ -103,7 +103,7 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
          */
         QString lowerName = qName.toLower();
 
-        if ( lowerName == PLACEMARK_TAG ) {
+        if ( lowerName == PLACEMARKPARSER_TAG ) {
             KMLContainer&  container = (KMLContainer&) m_object;
             container.addPlaceMark( m_placemark );
             m_parsed = true;
