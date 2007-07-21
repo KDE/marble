@@ -249,8 +249,8 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
                 diry = -1;
 #ifdef FLAT_PROJ
             //Dirty hack to make properly behavior for the arrow
-            int     radius        = m_widget->model()->radius();
-            double  centerLat     = m_widget->model()->getPlanetAxis().pitch();
+            int     radius        = m_widget->radius();
+            double  centerLat     = m_widget->planetAxis().pitch();
             int     yCenterOffset = (int)((float)(2*radius / M_PI) * centerLat);
             int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
             int     yBottom       = yTop + 2*radius;

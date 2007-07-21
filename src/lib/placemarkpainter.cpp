@@ -417,6 +417,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
         painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
 #ifdef FLAT_PROJ
+        int tempSymbol = mark->symbolPos().x();
+        int tempText = mark->textRect().x();
         for(int i = tempSymbol - 4*radius; i>=0 ; i-= 4*radius) {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
             mark->symbolPos().setX( i );

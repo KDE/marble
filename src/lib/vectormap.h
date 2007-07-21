@@ -50,13 +50,8 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-#ifndef FLAT_PROJ
     void createPolyLine( GeoPoint::Vector::ConstIterator, 
                          GeoPoint::Vector::ConstIterator, const int);
-#else
-    void createPolyLine( GeoPoint::Vector::ConstIterator, 
-                         GeoPoint::Vector::ConstIterator, const int, const int);
-#endif
 
     inline void    initCrossHorizon();
     void           manageCrossHorizon();
@@ -77,7 +72,10 @@ class VectorMap : public ScreenPolygon::Vector
     matrix            m_rotMatrix;
 #ifdef FLAT_PROJ
     Quaternion m_planetAxis;
-    int m_correctSign;
+    int m_lastSign;
+    int m_offset;
+    int m_lastX;
+    int m_lastY;
 #endif
     //	int m_debugNodeCount;
 

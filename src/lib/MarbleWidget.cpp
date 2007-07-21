@@ -656,7 +656,7 @@ void MarbleWidget::setActiveRegion()
                                       2 * zoom, 2 * zoom, QRegion::Ellipse );
     }
 #else
-    double centerLat = d->m_model->getPlanetAxis().pitch();
+    double centerLat = planetAxis().pitch();
     int yCenterOffset =  (int)((float)(2*zoom / M_PI) * centerLat);
     int yTop = height()/2 - zoom + yCenterOffset;
 

@@ -135,6 +135,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     double degY;
     double x;
     double y;
+    ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     int offset=0;
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
@@ -144,48 +145,40 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
         offset = 0;
         // This sorts out polygons by bounding box which aren't visible at all.
         m_boundary = (*itPolyLine)->getBoundary();
-        m_polygon.clear();
+        boundingPolygon.clear();
         for ( int i = 0; i < 4; ++i )
         {
             qbound = m_boundary[i].quaternion();
             qbound.getSpherical(degX,degY);
             x = m_imgwidth/2 + xyFactor * (degX + centerLng);
             y = m_imgheight/2 + xyFactor * (degY + centerLat);
-            m_polygon<<QPointF( x, y );
+            boundingPolygon<<QPointF( x, y );
         }
-        qbound = m_boundary[0].quaternion();
-        qbound.getSpherical(degX,degY);
-        m_correctSign = degX / fabs(degX);
-        while( visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() ) ) {
-            offset-=4*radius;
-            m_polygon.translate(-4*radius,0);
+        m_offset = 0;
+        while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() ) ) {
+            m_offset-=4*radius;
+            boundingPolygon.translate(-4*radius,0);
         }
-        offset+=4*radius;
-        m_polygon.translate(4*radius,0);
-        while( visibleArea.intersects( (const QRectF&) m_polygon.boundingRect() )) {
+        m_offset+=4*radius;
+        boundingPolygon.translate(4*radius,0);
+        while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() )) {
                 m_polygon.clear();
                 m_polygon.reserve( (*itPolyLine)->size() );
                 m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
                 createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail, offset );
-                offset+=4*radius;
-                m_polygon.translate(4*radius,0);
+                                (*itPolyLine)->constEnd(), detail);
+                m_offset+=4*radius;
+                boundingPolygon.translate(4*radius,0);
         }
     }
 #endif
 
 }
 
-#ifndef FLAT_PROJ
 void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail)
-#else
-void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoPoint::Vector::ConstIterator  itEndPoint,
-                                const int detail, const int offset )
-#endif
 {
     GeoPoint::Vector::const_iterator  itPoint;
 
@@ -196,7 +189,10 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #ifdef FLAT_PROJ
     float const centerLat=m_planetAxis.pitch();
     float const centerLng=-m_planetAxis.yaw();
-    double PiRestriction = 5 * M_PI / 6;
+    double xyFactor = (float)(2*m_radius)/M_PI;
+    ScreenPolygon otherPolygon;
+    otherPolygon.setClosed ( m_polygon.closed() );
+    bool flag = false;
 #endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -259,27 +255,31 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             double degY;
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
-            double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + offset;
+            double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + m_offset;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_currentPoint = QPointF( x, y );
-            int sign = (int) (degX / fabs(degX) );
-            if( sign != m_correctSign && fabs(degX) > PiRestriction ) {
-                if(sign == -1){
-                    correct+=4*( m_radius + 1 );
-                }
-                if(sign == 1){
-                    correct-=4*( m_radius + 1 );
-                }
+            int currentSign = ( degX > 0 )? 1 : -1 ;
+            if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
+                flag = !flag;
+//                 QPointF dateline;
+//                 if(m_lastSign < 0)
+//                     dateline = QPointF( m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset ,  m_lastY );
+//                 else
+//                     dateline= QPointF( m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset , m_lastY );
+// 
+//                 if( flag )
+//                     m_polygon<<dateline;
+//                 else
+//                     otherPolygon<<dateline;
             }
-            if( x > m_imgwidth ) x = m_imgwidth;
-            if( x < 0 ) x = 0;
+            if( !flag )
+                m_polygon<<m_currentPoint;
+            else
+                otherPolygon<<m_currentPoint;
 
-            if( correct == 0 )
-                m_polygon<<m_currentPoint;
-            else {
-                m_currentPoint.setX( m_currentPoint.rx() + correct );
-                m_polygon<<m_currentPoint;
-            }
+            m_lastX = (int) degX;
+            m_lastY = (int) degY;
+            m_lastSign = currentSign;
         }
     }
 #endif	
@@ -288,6 +288,11 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
+#ifdef FLAT_PROJ
+    if( otherPolygon.size() >=2 ) {
+        append(otherPolygon);
+    }
+#endif
 }
 
 
