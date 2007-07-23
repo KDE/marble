@@ -152,7 +152,7 @@ else(WIN32 AND QTONLY)
     #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 
     if (NOT QTONLY)
-      install( FILES marble.desktop  DESTINATION ${XDG_APPS_DIR})
+      install( FILES marble.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
     else (NOT QTONLY)
       install( FILES marble.desktop  DESTINATION share/applications)
     endif (NOT QTONLY)
