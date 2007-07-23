@@ -1,3 +1,7 @@
+2007-07-23  Murad Tagirov  <tmurad@gmail.com>
+    Fixed compilation of code ifdefed with KML_GSOC
+    * src/lib/MarbleModel.cpp
+
 2007-07-23  Inge Wallin  <inge@lysator.liu.se>
 
 	Move the image caches to ViewParams (same commit as the next entry)
@@ -11,10 +15,10 @@
 	a QImage*
 	* src/lib/MarbleModel.cpp (resize): Take width,height parameters
 	and use them for all calls.
-	* src/lib/AbstractScanlineTextureMapper.cpp (resizeMap): 
-	* src/lib/GlobeScanlineTextureMapper.cpp (resizeMap): 
-	* src/lib/GridMap.cpp (resizeMap): 
-	* src/lib/vectorcomposer.cpp (resizeMap): 
+	* src/lib/AbstractScanlineTextureMapper.cpp (resizeMap):
+	* src/lib/GlobeScanlineTextureMapper.cpp (resizeMap):
+	* src/lib/GridMap.cpp (resizeMap):
+	* src/lib/vectorcomposer.cpp (resizeMap):
 	* src/lib/vectormap.cpp (resizeMap): Take width,height parameters
 	instead of a QImage*.
 
@@ -43,7 +47,7 @@
 	* src/lib/HttpDownloadManager.cpp
 	* src/lib/TextureTile.cpp
 	* src/lib/texcolorizer.cpp
-	Remove all warnings, 
+	Remove all warnings,
 
 	Fix Krazy issue 18: Inappropriate pass-by-value.
 	* src/lib/MarbleWidget.cpp (openGpxFile): Take QString& instead of
@@ -63,14 +67,14 @@
 	MarbleModel to MarbleWidget.
 	(paintGlobe): New parameter redrawBackground
 	* src/lib/katlasviewinputhandler.{h,cpp}: adapt to changes above.
-	
+
 2007-07-18  Torsten Rahn  <rahn@kde.org>
 
 - Redo for the GPS tab (Now called "Current Location")
 - Disabling that widget as it's meant to be offered just for a
 particular use case where Marble is meant to provide a dialog
 
-Sorry Andrew - I needed these changes immediately 
+Sorry Andrew - I needed these changes immediately
 for a presentation yesterday.
 
 2007-07-15  Torsten Rahn  <rahn@kde.org>
@@ -80,12 +84,12 @@ for a presentation yesterday.
 2007-07-12  Andrew Manson   <g.real.ate@gmail.com>
     Cleaned up the comments for all of the AbstractLayer classes and
     formalised the api more.
-    
-    AbstractLayer now contains a Vector of AbstractLayerContainers 
+
+    AbstractLayer now contains a Vector of AbstractLayerContainers
     and a simple implementation to call each of their draw() methods
     when the AbstractLayer draw() method is called.
     * src/lib/AbstractLayer/AbstractLayer.{h,cpp}
-    
+
 2007-07-12  Murad Tagirov  <tmurad@gmail.com>
     Inherit KMLPlaceMark from Placemark to not touch
     placemarks painting at this step

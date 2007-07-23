@@ -215,11 +215,11 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     if ( redrawBackground ) {
 
-        d->m_texmapper->mapTexture( viewParams->m_canvasImage, 
+        d->m_texmapper->mapTexture( viewParams->m_canvasImage,
                                     viewParams->m_radius,
                                     viewParams->m_planetAxis );
 
-        if ( !viewParams->m_showElevationModel 
+        if ( !viewParams->m_showElevationModel
              && d->m_maptheme->bitmaplayer().dem == "true" )
         {
             viewParams->m_coastImage->fill( Qt::transparent );
@@ -249,7 +249,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
 
         // Add further Vectors
-        d->m_veccomposer->paintVectorMap( painter, 
+        d->m_veccomposer->paintVectorMap( painter,
                                           viewParams->m_radius,
                                           viewParams->m_planetAxis );
     }
@@ -265,7 +265,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_gridmap->paintGridMap( painter, true );
 
         // Create and paint the tropics and polar circles
-        d->m_gridmap->createTropics( viewParams->m_radius, 
+        d->m_gridmap->createTropics( viewParams->m_radius,
                                      viewParams->m_planetAxis );
         gridpen.setStyle( Qt::DotLine );
         gridpen.setWidthF( 1.5f );
@@ -273,7 +273,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_gridmap->paintGridMap( painter, true );
 
         // Create Equator
-        d->m_gridmap->createEquator( viewParams->m_radius, 
+        d->m_gridmap->createEquator( viewParams->m_radius,
                                      viewParams->m_planetAxis );
         gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
@@ -291,20 +291,20 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                                                  viewParams->m_planetAxis );
     }
 #else
-    if ( d->m_showPlaceMarks ) {
+    if ( viewParams->m_showPlaceMarks ) {
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
-                                                 d->m_radius,
+                                                 viewParams->m_radius,
                                                  d->m_placemarkmanager->getPlaceMarkContainer(),
-                                                 d->m_planetAxis );
+                                                 viewParams->m_planetAxis );
     }
 #endif
 
     // Paint the Gps Layer
     if ( d->m_gpsLayer->visible() ) {
         d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
-                                   viewParams->m_radius, 
+                                   viewParams->m_radius,
                                    viewParams->m_planetAxis );
     }
 }
