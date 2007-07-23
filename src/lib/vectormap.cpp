@@ -462,9 +462,10 @@ void VectorMap::resizeMap( int width, int height )
 {
     m_imgwidth  = width;
     m_imgheight = height;
-    // qDebug() << "width:" << imgwidth;
-    m_imgrx = ( m_imgwidth  >> 1);
-    m_imgry = ( m_imgheight >> 1);
+
+    m_imgrx = ( m_imgwidth  / 2 );
+    m_imgry = ( m_imgheight / 2 );
+
     m_imgradius = m_imgrx * m_imgrx + m_imgry * m_imgry;
 }
 

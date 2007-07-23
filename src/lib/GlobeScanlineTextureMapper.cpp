@@ -70,7 +70,7 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
             m_nBest = it; 
         }
     }
-            qDebug() << QString( "Optimized n = %1, remainder: %2" ).arg(m_nBest).arg( ( m_imageWidth ) % m_nBest );
+//            qDebug() << QString( "Optimized n = %1, remainder: %2" ).arg(m_nBest).arg( ( m_imageWidth ) % m_nBest );
 }
 
 
