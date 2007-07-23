@@ -522,7 +522,6 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     d->m_viewParams.m_coastImage = new QImage( width(), height(), 
                                                QImage::Format_ARGB32_Premultiplied );
     d->m_justModified = true;
-
     repaint();
 }
 
@@ -741,6 +740,7 @@ void MarbleWidget::goHome()
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
     d->m_model->setMapTheme( maptheme, this );
+    setNeedsUpdate();
     repaint();
 }
 
