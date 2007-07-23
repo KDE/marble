@@ -59,12 +59,14 @@ Widget:
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
  * Introduce the class ViewParams that controls the painting            INGE
-    - Position, Zoom, width/height                                      --
-    - show... crosshair/mapscale/windrose                               --
-    - show... terrain/cities/...                                        --
+    - Position, Zoom                                                    done
+    - width, height                                                     inge
+    - show... crosshair/mapscale/windrose                               inge
+    - show... terrain/cities/...                                        inge
+    - mapTheme                                                          inge
 
 Vector backend
- * Better scalability
+ * Better scalability                                                   ----
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
@@ -90,7 +92,7 @@ OpenStreetMap support for tiles@home
 Integration of Google Summer of Code projects (0.6)
 ----------------------------------------------------------------
 
-GPS support (Andrew 
+GPS support (Andrew Manson)
  * Read GPX files                                                       ----
  * Show waypoints                                                       ----
  * Show tracks                                                          ----
@@ -100,14 +102,14 @@ KML support (Murad Tagirov)
  * One overall aim: make Digikam KML output and plasma weather applet 
    work together with Marble. 
 
-2D View
- * create an additional class FlatTextureMapper that will work 
+2D View (Carlos Licea)
+ * create an additional class FlatTextureMapper that will work          ----
    scanline based like SphereTextureMapper (using getPixelValue).
- * Modify the input handler to take the flat projection into account.
- * Adjust the vector mapping backend as well as the PlaceMark 
+ * Modify the input handler to take the flat projection into account.   ----
+ * Adjust the vector mapping backend as well as the PlaceMark           ----
    placing backend.
- * Create a new class for Texturemapping that doesn't work scanlinebased 
-   anymore but uses the tiles as a whole on a kind of ScrollView.
+ * Create a new class for Texturemapping that doesn't work scanline     ---- 
+   based anymore but uses the tiles as a whole on a kind of ScrollView.
 
 
 Before KDE 4.0
@@ -119,7 +121,7 @@ Widget:
     - QGraphicsView                                                     --
     - QPixmap                                                           --
     - QSvgRendrerer                                                     --
-   Offer accessor method for the Pixmap, so it can be used to export 
+ * Offer accessor method for the Pixmap, so it can be used to export    ----
    the image, print it and copy it.
 
 Make it a KDE4 application as a real member of kdeedu.
@@ -131,7 +133,8 @@ Make it a KDE4 application as a real member of kdeedu.
  * KDEPrint support                                                     TACK
  * DBus Support                                                         TACK
 
-Add a simple alternative Qt4 frontend                                   DONE
+Features
+ * Areas, e.g. countries or districts                                   ----
 
  
 Before KDE 4.1
