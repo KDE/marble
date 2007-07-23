@@ -458,10 +458,10 @@ void VectorMap::createArc()
 }
 
 
-void VectorMap::resizeMap(const QPaintDevice * origimg)
+void VectorMap::resizeMap( int width, int height )
 {
-    m_imgwidth  = origimg -> width();
-    m_imgheight = origimg -> height();
+    m_imgwidth  = width;
+    m_imgheight = height;
     // qDebug() << "width:" << imgwidth;
     m_imgrx = ( m_imgwidth  >> 1);
     m_imgry = ( m_imgheight >> 1);

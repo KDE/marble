@@ -139,12 +139,13 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 }
 
 
-void AbstractScanlineTextureMapper::resizeMap(const QImage* canvasImage)
+void AbstractScanlineTextureMapper::resizeMap(int width, int height)
 {
-    m_imageHalfWidth  = canvasImage -> width() / 2;
-    m_imageHalfHeight = canvasImage -> height() / 2;
-    m_imageHeight = canvasImage -> height();
-    m_imageWidth  = canvasImage -> width();
+    m_imageHeight     = height;
+    m_imageWidth      = width;
+    // FIXME: These should be removed.  A memory access is much slower than a divide by 2.
+    m_imageHalfWidth  = width / 2;
+    m_imageHalfHeight = height / 2;
 
     m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
                           + m_imageHalfHeight * m_imageHalfHeight );

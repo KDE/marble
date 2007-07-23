@@ -38,7 +38,7 @@ class GridMap : public ScreenPolygon::Vector
 
     void paintGridMap(ClipPainter * painter, bool );
 
-    void resizeMap(const QPaintDevice * imageCanvas);
+    void resizeMap( int width, int height );
 
     void setPen ( const QPen & p )  { m_pen = p; }
 

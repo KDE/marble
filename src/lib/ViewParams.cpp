@@ -11,6 +11,9 @@
 
 #include "ViewParams.h"
 
+#include <QImage>
+
+
 ViewParams::ViewParams( )
 {
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
@@ -20,4 +23,7 @@ ViewParams::ViewParams( )
     m_showGrid           = true;
     m_showPlaceMarks     = true;
     m_showElevationModel = false;
+
+    // Just to have something.
+    m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
 }

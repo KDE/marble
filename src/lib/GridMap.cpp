@@ -333,10 +333,10 @@ const QPointF GridMap::horizonPoint()
 
 
 
-void GridMap::resizeMap(const QPaintDevice * imageCanvas)
+void GridMap::resizeMap( int width, int height )
 {
-    m_imageHalfWidth  = imageCanvas -> width() / 2;
-    m_imageHalfHeight = imageCanvas -> height() / 2;
+    m_imageHalfWidth  = width / 2;
+    m_imageHalfHeight = height / 2;
     m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
                           + m_imageHalfHeight * m_imageHalfHeight );
 }

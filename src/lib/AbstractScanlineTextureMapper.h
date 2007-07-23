@@ -33,7 +33,7 @@ public:
 
     void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
-    void resizeMap(const QImage* canvasImage);
+    void resizeMap( int width, int height );
     void selectTileLevel(int radius);
 
  protected:

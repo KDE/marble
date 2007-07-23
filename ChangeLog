@@ -1,5 +1,23 @@
 2007-07-23  Inge Wallin  <inge@lysator.liu.se>
 
+	Move the image caches to ViewParams (same commit as the next entry)
+	* src/lib/ViewParams.h (ViewParams): m_coastImage: New member
+	* src/lib/ViewParams.cpp (ViewParams): Initialize new member
+	* src/lib/MarbleWidget.cpp: Use new call conventions everyhere
+	* src/lib/MarbleModel.{h,cpp} (paintGlobe): new parameters:
+	width,height
+
+	Make the resize functions take width, height parameters instead of
+	a QImage*
+	* src/lib/MarbleModel.cpp (resize): Take width,height parameters
+	and use them for all calls.
+	* src/lib/AbstractScanlineTextureMapper.cpp (resizeMap): 
+	* src/lib/GlobeScanlineTextureMapper.cpp (resizeMap): 
+	* src/lib/GridMap.cpp (resizeMap): 
+	* src/lib/vectorcomposer.cpp (resizeMap): 
+	* src/lib/vectormap.cpp (resizeMap): Take width,height parameters
+	instead of a QImage*.
+
 	Move some more view parameters to ViewParams
 	* src/lib/ViewParams.h (ViewParams): Added members m_showGrid,
 	m_showPlaceMarks, m_showElevationModel

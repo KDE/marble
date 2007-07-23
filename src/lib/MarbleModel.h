@@ -92,10 +92,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
-    void  paintGlobe(ClipPainter*, ViewParams *viewParams, 
+    void  paintGlobe(ClipPainter*, int width, int height,
+                     ViewParams *viewParams, 
                      bool redrawBackground, const QRect&);
 
-    void  resize( QImage *canvasImage );
+    void  resize( int width, int height );
 
     QAbstractListModel* getPlaceMarkModel() const;
 

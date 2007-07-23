@@ -37,7 +37,7 @@ class VectorMap : public ScreenPolygon::Vector
     void paintMap(ClipPainter *, bool );
     void drawMap(QPaintDevice *, bool );
 
-    void resizeMap(const QPaintDevice *);
+    void resizeMap( int width, int height );
 
     void setPen ( const QPen & p )     { m_pen   = p; }
     void setBrush ( const QBrush & b ) { m_brush = b; }

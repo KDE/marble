@@ -95,7 +95,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(int zoom READ zoom WRITE zoomView)
+    Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
     Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
     Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)

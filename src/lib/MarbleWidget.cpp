@@ -511,15 +511,16 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
-    delete d->m_viewParams.m_canvasImage;
 
+    delete d->m_viewParams.m_canvasImage;
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
     d->m_viewParams.m_canvasImage->fill( Qt::transparent );
     drawAtmosphere();
 
-    // FIXME: Eventually remove.
-    d->m_model->resize( d->m_viewParams.m_canvasImage );
+    delete d->m_viewParams.m_coastImage;
+    d->m_viewParams.m_coastImage = new QImage( width(), height(), 
+                                               QImage::Format_ARGB32_Premultiplied );
     d->m_justModified = true;
 
     repaint();
@@ -684,7 +685,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
-    d->m_model->paintGlobe( &painter, &d->m_viewParams, 
+    d->m_model->paintGlobe( &painter, 
+                            width(), height(), &d->m_viewParams, 
                             needsUpdate() 
                             || d->m_viewParams.m_canvasImage->isNull(),
                             dirtyRect );
@@ -710,11 +712,14 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                                    d->m_viewParams.m_canvasImage->width(),
                                    d->m_viewParams.m_canvasImage->height() );
 
+    // 5. Paint measure points if there are any.
     d->m_measureTool->paintMeasurePoints( &painter, 
                                           d->m_viewParams.m_canvasImage->width() / 2,
                                           d->m_viewParams.m_canvasImage->height() / 2,
                                           radius(), planetAxis(),
                                           true );
+
+    // Set the region of the image where the user can drag it.
     setActiveRegion();
 }
 

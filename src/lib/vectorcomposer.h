@@ -43,7 +43,7 @@ class VectorComposer
 
     void  drawTextureMap(QPaintDevice*, const int&, Quaternion&);
     void  paintVectorMap(ClipPainter*, const int&, Quaternion&);
-    void  resizeMap(const QPaintDevice *);
+    void  resizeMap( int width, int height );
 
     /**
      * @brief  Return whether the ice layer is visible.

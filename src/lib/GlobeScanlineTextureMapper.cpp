@@ -55,9 +55,9 @@ GlobeScanlineTextureMapper::~GlobeScanlineTextureMapper()
     delete m_tileLoader;
 }
 
-void GlobeScanlineTextureMapper::resizeMap(const QImage* canvasImage)
+void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 {
-    AbstractScanlineTextureMapper::resizeMap(canvasImage);
+    AbstractScanlineTextureMapper::resizeMap( width, height );
 
     // Find the optimal m_n for the current image canvas width
     m_nBest = 2;

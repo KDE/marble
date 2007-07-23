@@ -64,7 +64,7 @@ Widget:
     - show... crosshair/mapscale/windrose                               inge
     - show... terrain/cities/...                                        inge
     - mapTheme                                                          inge
-    - caches (coastimg, ...)                                            inge
+    - caches (coastimg, ...)                                            done
 
 Vector backend
  * Better scalability                                                   ----

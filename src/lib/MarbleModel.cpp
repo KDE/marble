@@ -32,8 +32,6 @@
 class MarbleModelPrivate
 {
  public:
-    QImage   *m_coastimg;
-
     // View and paint stuff
     MapTheme            *m_maptheme;
     TextureColorizer    *m_texcolorizer;
@@ -74,7 +72,6 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkpainter   = 0;
     d->m_placeMarkContainer = 0;
 
-    d->m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
     d->m_maptheme = new MapTheme();
 
 
@@ -200,40 +197,41 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 }
 
 
-void MarbleModel::resize( QImage *canvasImage)
+void MarbleModel::resize( int width, int height )
 {
-    *d->m_coastimg = QImage( canvasImage->width(), canvasImage->height(),
-                             QImage::Format_ARGB32_Premultiplied );
-
-    d->m_texmapper->resizeMap( canvasImage );
-    d->m_veccomposer->resizeMap( d->m_coastimg );
-    d->m_gridmap->resizeMap( d->m_coastimg );
+    d->m_texmapper->resizeMap( width, height );
+    d->m_veccomposer->resizeMap( width, height );
+    d->m_gridmap->resizeMap( width, height );
 }
 
 
-void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
+void MarbleModel::paintGlobe( ClipPainter* painter,
+                              int width, int height,
+                              ViewParams *viewParams,
                               bool redrawBackground,
                               const QRect& dirtyRect )
 {
+    resize( width, height );
+
     if ( redrawBackground ) {
 
         d->m_texmapper->mapTexture( viewParams->m_canvasImage, 
                                     viewParams->m_radius,
                                     viewParams->m_planetAxis );
 
-        if ( viewParams->m_showElevationModel == false
+        if ( !viewParams->m_showElevationModel 
              && d->m_maptheme->bitmaplayer().dem == "true" )
         {
-            d->m_coastimg->fill( Qt::transparent );
+            viewParams->m_coastImage->fill( Qt::transparent );
 
             // Create VectorMap
-            d->m_veccomposer->drawTextureMap( d->m_coastimg,
+            d->m_veccomposer->drawTextureMap( viewParams->m_coastImage,
                                               viewParams->m_radius,
                                               viewParams->m_planetAxis );
 
             // Recolorize the heightmap using the VectorMap
             d->m_texcolorizer->colorize( viewParams->m_canvasImage,
-                                         d->m_coastimg,
+                                         viewParams->m_coastImage,
                                          viewParams->m_radius,
                                          viewParams->m_planetAxis );
         }

@@ -158,8 +158,8 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
 }
 
 
-void VectorComposer::resizeMap(const QPaintDevice* origimg)
+void VectorComposer::resizeMap( int width, int height )
 {
-    m_vectorMap->resizeMap( origimg );
+    m_vectorMap->resizeMap( width, height );
 }
 
