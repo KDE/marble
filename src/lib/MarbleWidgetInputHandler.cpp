@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "MarbleWidgetinputhandler.h"
+#include "MarbleWidgetInputHandler.h"
 
 #include <cmath>
 
