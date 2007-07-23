@@ -10,12 +10,12 @@
 //
 
 //
-// The KAtlasViewPopupMenu handles context menus.
+// The MarbleWidgetPopupMenu handles context menus.
 //
 
 
-#ifndef KATLASVIEWPOPUPMENU_H
-#define KATLASVIEWPOPUPMENU_H
+#ifndef MARBLEWIDGETPOPUPMENU_H
+#define MARBLEWIDGETPOPUPMENU_H
 
 
 #include <QtCore/QObject>
@@ -29,13 +29,13 @@ class MarbleWidget;
 class MarbleModel;
 
 
-class KAtlasViewPopupMenu  : public QObject 
+class MarbleWidgetPopupMenu  : public QObject 
 {
     Q_OBJECT
 
  public:
-    KAtlasViewPopupMenu(MarbleWidget*, MarbleModel*);
-    virtual ~KAtlasViewPopupMenu(){}
+    MarbleWidgetPopupMenu(MarbleWidget*, MarbleModel*);
+    virtual ~MarbleWidgetPopupMenu(){}
 
  public Q_SLOTS:
     void  showLmbMenu( int, int );
@@ -70,4 +70,4 @@ class KAtlasViewPopupMenu  : public QObject
 
 };
 
-#endif // KATLASVIEWPOPUPMENU_H
+#endif // MARBLEWIDGETPOPUPMENU_H

@@ -24,9 +24,9 @@
 #include "Quaternion.h"
 #include "ViewParams.h"
 #include "texcolorizer.h"
-#include "clippainter.h"
-#include "katlasviewinputhandler.h"
-#include "katlasviewpopupmenu.h"
+#include "ClipPainter.h"
+#include "MarbleWidgetInputHandler.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "katlastilecreatordialog.h"
 #include "gps/GpsLayer.h"
 #include "utils.h"
@@ -61,8 +61,8 @@ class MarbleWidgetPrivate
     int              m_minimumzoom;    
     int              m_maximumzoom;
 
-    KAtlasViewInputHandler  *m_inputhandler;
-    KAtlasViewPopupMenu     *m_popupmenu;
+    MarbleWidgetInputHandler  *m_inputhandler;
+    MarbleWidgetPopupMenu     *m_popupmenu;
 
     TextureColorizer        *m_sealegend;
 
@@ -135,11 +135,11 @@ void MarbleWidget::construct(QWidget *parent)
     d->m_justModified = false;
 
 
-    d->m_inputhandler = new KAtlasViewInputHandler( this, d->m_model );
+    d->m_inputhandler = new MarbleWidgetInputHandler( this, d->m_model );
     installEventFilter( d->m_inputhandler );
     setMouseTracking( true );
 
-    d->m_popupmenu = new KAtlasViewPopupMenu( this, d->m_model );
+    d->m_popupmenu = new MarbleWidgetPopupMenu( this, d->m_model );
     connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
 	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
     connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),

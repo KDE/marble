@@ -10,7 +10,7 @@
 
 #include "GpsLayer.h"
 #include "Waypoint.h"
-#include "clippainter.h"
+#include "ClipPainter.h"
 #include "WaypointContainer.h"
 #include "GpxSax.h"
 

@@ -34,8 +34,8 @@
 #include "katlaswindrose.h"
 
 
-class KAtlasViewInputHandler;
-class KAtlasViewPopupMenu;
+class MarbleWidgetInputHandler;
+class MarbleWidgetPopupMenu;
 class TextureColorizer;
 class MeasureTool;
 class KAtlasTileCreatorDialog;

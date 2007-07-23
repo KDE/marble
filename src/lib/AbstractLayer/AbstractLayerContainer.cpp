@@ -9,7 +9,7 @@
 //
 
 #include "AbstractLayerContainer.h"
-#include "clippainter.h"
+#include "ClipPainter.h"
 
 AbstractLayerContainer::AbstractLayerContainer( int size )
 {

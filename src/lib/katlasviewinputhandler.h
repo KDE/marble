@@ -10,12 +10,12 @@
 //
 
 //
-// The KAtlasViewInputHandler handles mouse and keyboard input.
+// The MarbleWidgetInputHandler handles mouse and keyboard input.
 //
 
 
-#ifndef KATLASVIEWINPUTHANDLER_H
-#define KATLASVIEWINPUTHANDLER_H
+#ifndef MARBLEWIDGETINPUTHANDLER_H
+#define MARBLEWIDGETINPUTHANDLER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QEvent>
@@ -30,13 +30,13 @@
 class MarbleWidget;
 
 
-class KAtlasViewInputHandler  : public QObject
+class MarbleWidgetInputHandler  : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasViewInputHandler(MarbleWidget*, MarbleModel*);
-    virtual ~KAtlasViewInputHandler(){}
+    MarbleWidgetInputHandler(MarbleWidget*, MarbleModel*);
+    virtual ~MarbleWidgetInputHandler(){}
 
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
 
@@ -86,4 +86,4 @@ class KAtlasViewInputHandler  : public QObject
 };
 
 
-#endif // KATLASVIEWINPUTHANDLER
+#endif // MARBLEWIDGETINPUTHANDLER

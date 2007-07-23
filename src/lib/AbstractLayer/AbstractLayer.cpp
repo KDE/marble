@@ -17,7 +17,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 
-#include "clippainter.h"
+#include "ClipPainter.h"
 
 
 AbstractLayer::AbstractLayer( QObject *parent ) 

@@ -19,7 +19,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
-#include "clippainter.h"
+#include "ClipPainter.h"
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
  

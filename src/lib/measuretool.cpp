@@ -18,7 +18,6 @@
 #include <QtGui/QPainter>
 
 #include "Quaternion.h"
-#include "clippainter.h"
 
 
 MeasureTool::MeasureTool(QObject* parent)

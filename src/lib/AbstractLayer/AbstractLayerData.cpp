@@ -13,7 +13,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QPoint>
 
-#include "clippainter.h"
+#include "ClipPainter.h"
 
 AbstractLayerData::AbstractLayerData( const GeoPoint &position ):
                     m_visible(true)

@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasviewinputhandler.h"
+#include "MarbleWidgetinputhandler.h"
 
 #include <cmath>
 
@@ -22,7 +22,7 @@
 
 
 
-KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *marbleWidget,
+MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
                                                MarbleModel  *model)
     : m_widget( marbleWidget ),
       m_model( model )
@@ -55,7 +55,7 @@ KAtlasViewInputHandler::KAtlasViewInputHandler(MarbleWidget *marbleWidget,
 }
 
 
-bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
+bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 {
 		
     Q_UNUSED( o );
@@ -286,5 +286,5 @@ bool KAtlasViewInputHandler::eventFilter( QObject* o, QEvent* e )
     }
 }
 
-#include "katlasviewinputhandler.moc"
+#include "MarbleWidgetInputHandler.moc"
 

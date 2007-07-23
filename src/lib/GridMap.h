@@ -20,7 +20,6 @@
 #include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"
-#include "clippainter.h"
 
 
 class ClipPainter;

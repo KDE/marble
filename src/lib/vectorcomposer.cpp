@@ -17,7 +17,7 @@
 #include <QtCore/QDebug>
 
 #include "GeoPolygon.h"
-#include "clippainter.h"
+#include "ClipPainter.h"
 #include "vectormap.h"
 #include "katlasdirs.h"
 

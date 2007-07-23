@@ -23,7 +23,7 @@
 
 #include "GeoPoint.h"
 #include "placemark.h"
-#include "clippainter.h"
+#include "ClipPainter.h"
 
 
 class MeasureTool : public QObject

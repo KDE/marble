@@ -38,7 +38,7 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
-           clippainter.cpp
+           ClipPainter.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
            GridMap.cpp
@@ -50,8 +50,8 @@ set(marblewidget_SRCS
            katlasmapscale.cpp
            katlasthemeselectview.cpp
            katlastilecreatordialog.cpp
-           katlasviewinputhandler.cpp
-           katlasviewpopupmenu.cpp
+           MarbleWidgetInputHandler.cpp
+           MarbleWidgetPopupMenu.cpp
            katlaswindrose.cpp
            LegendBrowser.cpp
            maptheme.cpp
@@ -178,7 +178,7 @@ endif(QTONLY)
 ########### install files ###############
 
 install( FILES
-           clippainter.h
+           ClipPainter.h
            GeoPoint.h
            GeoPolygon.h
            GridMap.h
@@ -191,8 +191,8 @@ install( FILES
            katlasmapscale.h
            katlasthemeselectview.h
            katlastilecreatordialog.h
-           katlasviewinputhandler.h
-           katlasviewpopupmenu.h
+           MarbleWidgetInputHandler.h
+           MarbleWidgetPopupMenu.h
            katlaswindrose.h
            LegendBrowser.h
            maptheme.h

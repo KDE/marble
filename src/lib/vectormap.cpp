@@ -19,7 +19,7 @@
 #include <cmath>
 #include <stdlib.h>
 
-#include "clippainter.h"
+#include "ClipPainter.h"
 #include "GeoPolygon.h"
 
 

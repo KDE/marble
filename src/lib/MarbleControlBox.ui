@@ -54,7 +54,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
@@ -219,9 +219,6 @@
              </property>
              <property name="icon" >
               <iconset resource="../marble.qrc" >:/icons/arrow-left.png</iconset>
-             </property>
-             <property name="shortcut" >
-              <string>Left</string>
              </property>
             </widget>
            </item>
@@ -391,9 +388,6 @@
              <property name="icon" >
               <iconset resource="../marble.qrc" >:/icons/arrow-right.png</iconset>
              </property>
-             <property name="shortcut" >
-              <string>Right</string>
-             </property>
             </widget>
            </item>
           </layout>
@@ -423,8 +417,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>227</width>
-        <height>452</height>
+        <width>112</width>
+        <height>112</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -451,8 +445,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>227</width>
-        <height>452</height>
+        <width>112</width>
+        <height>202</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -907,6 +901,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>SearchListView</class>
+   <extends>QListView</extends>
+   <header>searchlistview.h</header>
+  </customwidget>
+  <customwidget>
    <class>LegendBrowser</class>
    <extends>QTextBrowser</extends>
    <header>LegendBrowser.h</header>
@@ -915,11 +914,6 @@
    <class>KAtlasThemeSelectView</class>
    <extends>QListView</extends>
    <header>katlasthemeselectview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>SearchListView</class>
-   <extends>QListView</extends>
-   <header>searchlistview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

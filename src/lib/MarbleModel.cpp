@@ -17,6 +17,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 
+#include "ClipPainter.h"
 #include "GeoPolygon.h"
 #include "ViewParams.h"
 #include "texcolorizer.h"

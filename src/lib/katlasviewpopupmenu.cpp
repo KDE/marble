@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasviewpopupmenu.h"
+#include "MarbleWidgetPopupMenu.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
@@ -20,7 +20,7 @@
 #include "placemark.h"
 #include "placemarkinfodialog.h"
 
-KAtlasViewPopupMenu::KAtlasViewPopupMenu(MarbleWidget *view, 
+MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *view, 
                                          MarbleModel *model)
     : m_model(model),
       m_view(view) 
@@ -33,7 +33,7 @@ KAtlasViewPopupMenu::KAtlasViewPopupMenu(MarbleWidget *view,
     createActions();
 }
 
-void KAtlasViewPopupMenu::createActions()
+void MarbleWidgetPopupMenu::createActions()
 {
     //	Property actions (Left mouse button)
     //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
@@ -62,7 +62,7 @@ void KAtlasViewPopupMenu::createActions()
 }
 
 
-void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos )
+void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
     m_lmbMenu->clear();
 
@@ -102,7 +102,7 @@ void KAtlasViewPopupMenu::showLmbMenu( int xpos, int ypos )
 }
 
 
-void KAtlasViewPopupMenu::showRmbMenu( int xpos, int ypos )
+void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     QPoint curpos = QPoint( xpos, ypos );
     m_pAddMeasurePointAction->setData( curpos );
@@ -110,7 +110,7 @@ void KAtlasViewPopupMenu::showRmbMenu( int xpos, int ypos )
 }
 
 
-void KAtlasViewPopupMenu::showFeatureInfo( QAction* action )
+void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
 {
     int         actionidx = action->data().toInt();
     PlaceMark  *mark      = 0;
@@ -124,7 +124,7 @@ void KAtlasViewPopupMenu::showFeatureInfo( QAction* action )
 }
 
 
-void KAtlasViewPopupMenu::slotAddMeasurePoint()
+void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 {
     QPoint  p = m_pAddMeasurePointAction->data().toPoint();
 
@@ -136,12 +136,12 @@ void KAtlasViewPopupMenu::slotAddMeasurePoint()
     emit addMeasurePoint( lng, lat );
 }
 
-void KAtlasViewPopupMenu::slotAboutDialog()
+void MarbleWidgetPopupMenu::slotAboutDialog()
 {
     KAtlasAboutDialog dlg( m_view );
     dlg.exec();
 }
 
 
-#include "katlasviewpopupmenu.moc"
+#include "MarbleWidgetPopupMenu.moc"
 

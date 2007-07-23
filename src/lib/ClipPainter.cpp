@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "clippainter.h"
+#include "ClipPainter.h"
 
 #include <cmath>
 

@@ -38,14 +38,13 @@
 #include "PlaceMarkContainer.h"
 #include "placemarkpainter.h"
 #include "placemarkmodel.h"
-#include "clippainter.h"
 #include "maptheme.h"
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
 
-
+class ClipPainter;
 class PlaceMark;
 class PlaceMarkManager;
 class GpsLayer;
