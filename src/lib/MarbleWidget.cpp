@@ -268,12 +268,12 @@ bool MarbleWidget::showWindRose() const
 
 bool MarbleWidget::showGrid() const
 {
-    return d->m_model->showGrid();
+    return d->m_viewParams.m_showGrid;
 }
 
 bool MarbleWidget::showPlaces() const
 { 
-    return d->m_model->showPlaceMarks();
+    return d->m_viewParams.m_showPlaceMarks;
 }
 
 bool MarbleWidget::showCities() const
@@ -293,7 +293,7 @@ bool MarbleWidget::showRelief() const
 
 bool MarbleWidget::showElevationModel() const
 { 
-    return d->m_model->showElevationModel();
+    return d->m_viewParams.m_showElevationModel;
 }
 
 bool MarbleWidget::showIceLayer() const
@@ -753,13 +753,13 @@ void MarbleWidget::setShowWindRose( bool visible )
 
 void MarbleWidget::setShowGrid( bool visible )
 { 
-    d->m_model->setShowGrid( visible );
+    d->m_viewParams.m_showGrid = visible;
     repaint();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 { 
-    d->m_model->setShowPlaceMarks( visible );
+    d->m_viewParams.m_showPlaceMarks = visible;
     repaint();
 }
 
@@ -784,7 +784,7 @@ void MarbleWidget::setShowRelief( bool visible )
 
 void MarbleWidget::setShowElevationModel( bool visible )
 { 
-    d->m_model->setShowElevationModel( visible );
+    d->m_viewParams.m_showElevationModel = visible;
     setNeedsUpdate();
     repaint();
 }

@@ -55,18 +55,6 @@ class MarbleModelPrivate
     //Gps Stuff
     GpsLayer            *m_gpsLayer;
 
-    // View parameters
-    //Quaternion           m_planetAxis;
-    //Quaternion           m_planetAxisUpdated;
-    //int                  m_radius;
-    //int                  m_radiusUpdated;
-
-    //bool          m_justModified;
-
-    bool          m_showGrid;
-    bool          m_showPlaceMarks;
-    bool          m_showElevationModel;
-
     QTimer       *m_timer;
 };
 
@@ -85,10 +73,6 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_placemarkpainter   = 0;
     d->m_placeMarkContainer = 0;
-
-    d->m_showGrid = true;
-    d->m_showPlaceMarks = true;
-    d->m_showElevationModel = false;
 
     d->m_coastimg = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
     d->m_maptheme = new MapTheme();
@@ -134,36 +118,6 @@ MarbleModel::~MarbleModel()
     delete d;
 }
 
-
-bool MarbleModel::showGrid() const
-{
-    return d->m_showGrid;
-}
-
-void MarbleModel::setShowGrid( bool visible )
-{
-    d->m_showGrid = visible;
-}
-
-bool MarbleModel::showPlaceMarks() const
-{
-    return d->m_showPlaceMarks;
-}
-
-void MarbleModel::setShowPlaceMarks( bool visible )
-{
-    d->m_showPlaceMarks = visible;
-}
-
-bool MarbleModel::showElevationModel() const
-{
-    return d->m_showElevationModel;
-}
-
-void MarbleModel::setShowElevationModel( bool visible )
-{
-    d->m_showElevationModel = visible;
-}
 
 bool MarbleModel::showGps() const
 {
@@ -267,7 +221,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
                                     viewParams->m_radius,
                                     viewParams->m_planetAxis );
 
-        if ( d->m_showElevationModel == false
+        if ( viewParams->m_showElevationModel == false
              && d->m_maptheme->bitmaplayer().dem == "true" )
         {
             d->m_coastimg->fill( Qt::transparent );
@@ -303,7 +257,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
     }
 
     // Paint the grid around the earth.
-    if ( d->m_showGrid ) {
+    if ( viewParams->m_showGrid ) {
         QPen  gridpen( QColor( 255, 255, 255, 128 ) );
 
         // Create and paint a grid
@@ -330,7 +284,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter, ViewParams *viewParams,
 
     // Paint the PlaceMark layer
 #ifndef KML_GSOC
-    if ( d->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
+    if ( viewParams->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),

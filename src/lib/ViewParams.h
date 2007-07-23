@@ -46,6 +46,11 @@ class MARBLE_EXPORT ViewParams
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;
 
+    // Show/don't show options
+    bool        m_showGrid;
+    bool        m_showPlaceMarks;
+    bool        m_showElevationModel;
+
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere
 };

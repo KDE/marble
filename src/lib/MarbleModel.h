@@ -118,42 +118,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     GpsLayer           *gpsLayer()           const;
 
     /**
-     * @brief  Return whether the coordinate grid is visible.
-     * @return The coordinate grid visibility.
-     */
-    bool  showGrid() const;
-
-    /**
-     * @brief  Set whether the coordinate grid overlay is visible
-     * @param  visible  visibility of the coordinate grid
-     */
-    void setShowGrid( bool visible );
-
-    /**
-     * @brief  Return whether the place marks are visible.
-     * @return The place mark visibility.
-     */
-    bool  showPlaceMarks() const;
-
-    /**
-     * @brief  Set whether the place mark overlay is visible
-     * @param  visible  visibility of the place marks
-     */
-    void setShowPlaceMarks( bool visible );
-
-    /**
-     * @brief  Return whether the elevation model is visible.
-     * @return The elevation model visibility.
-     */
-    bool  showElevationModel() const;
-
-    /**
-     * @brief  Set whether the elevation model is visible
-     * @param  visible  visibility of the elevation model
-     */
-    void setShowElevationModel( bool visible );
-    
-    /**
      * @brief Return whether the Gps Data is visible.
      * @return The Gps Data visibility.
      */
