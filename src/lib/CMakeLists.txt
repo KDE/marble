@@ -43,7 +43,7 @@ set(marblewidget_SRCS
            GeoPolygon.cpp
            GridMap.cpp
            HttpDownloadManager.cpp
-           httpfetchfile.cpp
+           HttpFetchFile.cpp
            katlasaboutdialog.cpp
            katlascrosshair.cpp
            katlasflag.cpp
@@ -183,7 +183,7 @@ install( FILES
            GeoPolygon.h
            GridMap.h
            HttpDownloadManager.h
-           httpfetchfile.h
+           HttpFetchFile.h
            katlasaboutdialog.h
            katlascrosshair.h
            katlasdirs.h

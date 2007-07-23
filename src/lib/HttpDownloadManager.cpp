@@ -13,7 +13,7 @@
 
 #include <QtCore/QDebug>
 
-#include "httpfetchfile.h"
+#include "HttpFetchFile.h"
 #include "katlasdirs.h"
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl ) 

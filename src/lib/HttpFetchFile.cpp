@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "httpfetchfile.h"
+#include "HttpFetchFile.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
@@ -146,4 +146,4 @@ void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeade
     }
 }
 */
-#include "httpfetchfile.moc"
+#include "HttpFetchFile.moc"

@@ -25,7 +25,7 @@
 #include <QtCore/QList>
 #include <QtCore/QDebug>
 
-#include "httpfetchfile.h"
+#include "HttpFetchFile.h"
 
 /*
  * @Short This class manages scheduled downloads. 
