@@ -16,6 +16,8 @@
 #include "katlasdirs.h"
 #include "TileLoader.h"
 
+const int tileDigits = 6;
+
 
 static uint **jumpTableFromQImage32( QImage &img )
 {
@@ -101,8 +103,8 @@ void TextureTile::loadTile( int x, int y, int level,
 
 	QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
 	    .arg(theme).arg(i)
-	    .arg( (int)(testy1), 4, 10, QChar('0') )
-	    .arg( (int)(testx1), 4, 10, QChar('0') );
+	    .arg( (int)(testy1), tileDigits, 10, QChar('0') )
+	    .arg( (int)(testx1), tileDigits, 10, QChar('0') );
 
 	absfilename = KAtlasDirs::path( relfilename );
 

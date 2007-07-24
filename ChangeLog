@@ -1,3 +1,8 @@
+2007-07-24  Torsten Rahn  <rahn@kde.org>
+	- 6 digits column and row coordinates for tiles
+	- adjusting the BlueMarble and CityLights theme appearance 
+	  to the uploaded tiles
+
 2007-07-23  Murad Tagirov  <tmurad@gmail.com>
     Fixed compilation of code ifdefed with KML_GSOC
     * src/lib/MarbleModel.cpp

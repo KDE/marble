@@ -23,6 +23,7 @@
 #include "katlasdirs.h"
 #include "TileLoader.h"
 
+const int tileDigits = 6;
 
 TileScissor::TileScissor(const QString& prefix, const QString& installmap,
                          const QString& dem, const QString& targetDir) 
@@ -117,7 +118,7 @@ void TileScissor::createTiles()
 
     for ( int n = 0; n < nmax; n++ ) {
         QString dirname( m_targetDir
-                         + QString("%1/%2").arg(maxtilelevel).arg( n, 4, 10, QChar('0') ) );
+                         + QString("%1/%2").arg(maxtilelevel).arg( n, tileDigits, 10, QChar('0') ) );
         if ( !QDir( dirname ).exists() ) 
             ( QDir::root() ).mkpath( dirname );
     }
@@ -147,7 +148,7 @@ void TileScissor::createTiles()
 
             QImage tile = row.copy( m * imgw / mmax, 0, 675, 675 );
 
-            tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( maxtilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+            tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( maxtilelevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
 
             if ( m_dem == "true" ) {
                 tile = tile.convertToFormat(QImage::Format_Indexed8, 
@@ -177,7 +178,7 @@ void TileScissor::createTiles()
 
         for ( int n = 0; n < nmaxit; n++ ) {
             QString  dirname( m_targetDir
-                              + QString("%1/%2").arg(tilelevel).arg( n, 4, 10, QChar('0') ) );
+                              + QString("%1/%2").arg(tilelevel).arg( n, tileDigits, 10, QChar('0') ) );
 
             // qDebug() << "dirname: " << dirname;
             if ( !QDir( dirname ).exists() ) 
@@ -186,16 +187,16 @@ void TileScissor::createTiles()
             int  mmaxit = TileLoader::levelToColumn( tilelevel );;
             for ( int m = 0; m < mmaxit; m++ ) {
 
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, tileDigits, 10, QChar('0') ).arg( 2*m, tileDigits, 10, QChar('0') );
                 QImage  img_topleft( tilename );
 				
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n, tileDigits, 10, QChar('0') ).arg( 2*m+1, tileDigits, 10, QChar('0') );
                 QImage  img_topright( tilename );
 
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, tileDigits, 10, QChar('0') ).arg( 2*m, tileDigits, 10, QChar('0') );
                 QImage  img_bottomleft( tilename );
 				
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, 4, 10, QChar('0') ).arg( 2*m+1, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel + 1 ).arg( 2*n+1, tileDigits, 10, QChar('0') ).arg( 2*m+1, tileDigits, 10, QChar('0') );
                 QImage  img_bottomright( tilename );
 
                 QImage  tile = img_topleft;
@@ -259,7 +260,7 @@ void TileScissor::createTiles()
                     }
                 }
 
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
                 bool noerr = tile.save( tilename, "jpg", 100 );
                 if ( noerr == false ) 
                     qDebug() << "Error while writing Tile: " << tilename;;
@@ -289,7 +290,7 @@ void TileScissor::createTiles()
             for ( int m = 0; m < mmaxit; m++) { 
                 microcount++;
 
-                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') );
+                tilename = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tilelevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
                 QImage tile( tilename );
 
                 bool noerr = tile.save( tilename, "jpg", 85 );

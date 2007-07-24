@@ -38,6 +38,8 @@
 # endif
 #endif
 
+const int tileDigits = 6;
+
 
 TileLoader::TileLoader( const QString& theme )
 {
@@ -168,7 +170,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 
             for ( int m = 0; m < mmaxit; ++m ) {
                 QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg")
-                                                     .arg(theme).arg( trylevel ).arg( n, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
+                                                     .arg(theme).arg( trylevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') ) );
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
                 if ( noerr == false )
@@ -226,7 +228,7 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
     // Check whether the two tiles from the lowest texture level are available
     for ( int m = 0; m < 2; ++m ) {
-        QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, 4, 10, QChar('0') ).arg( m, 4, 10, QChar('0') ) );
+        QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') ) );
 
         noerr = QFile::exists( tilepath );
 
