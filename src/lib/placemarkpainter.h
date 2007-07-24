@@ -32,6 +32,7 @@
 class QPainter;
 class PlaceMarkContainer;
 class VisiblePlaceMark;
+class ViewParams;
 
 
 class PlaceMarkPainter : public QObject
@@ -40,35 +41,12 @@ class PlaceMarkPainter : public QObject
 
  public:
     PlaceMarkPainter(QObject *parent = 0);
-    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight, int radius,
+    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight, 
+                          ViewParams *viewParams,
                           const PlaceMarkContainer*, 
                           Quaternion );
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
-
-    /**
-     * @brief  Return whether the cities are visible.
-     * @return The city placemark visibility.
-     */
-    bool  showCities() const  { return m_showCities; }
-
-    /**
-     * @brief  Set whether the cities are visible
-     * @param  visible  visibility of the city placemarks
-     */
-    void setShowCities( bool visible )  { m_showCities = visible; }
-
-    /**
-     * @brief  Return whether the terrain placemarks are visible.
-     * @return The terrain placemark visibility.
-     */
-    bool  showTerrain() const { return m_showTerrain; }
-
-    /**
-     * @brief  Set whether the terrain placemarks are visible
-     * @param  visible  visibility of the terrain placemarks
-     */
-    void setShowTerrain( bool visible ) { m_showTerrain = visible; }
 
  public Q_SLOTS:
 
@@ -76,6 +54,7 @@ class PlaceMarkPainter : public QObject
     bool   isVisible( PlaceMark *mark, int radius, 
                       Quaternion &rotAxis,
                       int imgwidth, int imgheight,
+                      ViewParams *viewParams,
                       int &x, int &y  );
     bool   roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
                          VisiblePlaceMark *visibleMark,
@@ -110,9 +89,6 @@ class PlaceMarkPainter : public QObject
     QVector< int >        m_weightfilter;
     QPixmap  m_empty;
     double   m_widthscale;
-
-    bool     m_showCities;
-    bool     m_showTerrain;
 
     bool     m_useworkaround;
 };

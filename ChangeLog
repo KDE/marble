@@ -1,16 +1,34 @@
+2007-07-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Continue the separation of Model/View by moving more stuff to
+	ViewParams:	
+	* src/lib/placemarkpainter.h (m_showCities, m_showTerrain): Move
+	to ViewParams.
+	(showCities,showTerrain,setShowCities,setShowTerrain): remove
+	* src/lib/ViewParams.h (m_showCities, m_showTerrain): new members
+	* src/lib/ViewParams.cpp (m_showCities, m_showTerrain): initialize
+	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder,isVisible):
+	Take parameter ViewParams*
+	* src/lib/MarbleModel.cpp (paintGlobe): Use new call signature for
+	PlaceMarkPainter::paintPlaceFolder
+	* src/lib/MarbleWidget.cpp (showTerrain): Use new call signature
+	for all of the above.
+
 2007-07-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix krazy issue 4: Check for an acceptable copyright.
 	* src/lib/utils.h: Fix Copyright.
 
 2007-07-24  Torsten Rahn  <rahn@kde.org>
+
 	- 6 digits column and row coordinates for tiles
 	- adjusting the BlueMarble and CityLights theme appearance 
 	  to the uploaded tiles
 
 2007-07-23  Murad Tagirov  <tmurad@gmail.com>
-    Fixed compilation of code ifdefed with KML_GSOC
-    * src/lib/MarbleModel.cpp
+
+	Fixed compilation of code ifdefed with KML_GSOC
+	* src/lib/MarbleModel.cpp
 
 2007-07-23  Inge Wallin  <inge@lysator.liu.se>
 

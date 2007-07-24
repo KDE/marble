@@ -22,6 +22,7 @@
 
 #include "placemark.h"
 #include "katlasdirs.h"
+#include "ViewParams.h"
 
 
 // ================================================================
@@ -136,9 +137,6 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
         << 200
         << 0;
 
-    m_showCities = true;
-    m_showTerrain = true;
-
     m_useworkaround = testbug();
     qDebug() << "Use workaround: " << ( m_useworkaround ? "1" : "0" );
     // m_useworkaround = true;
@@ -149,7 +147,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
                                         int imgwidth, int imgheight,
-                                        int radius,
+                                        ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
                                         Quaternion planetAxis )
 {
@@ -201,18 +199,18 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         mark  = *it; // no cast
 
         // Skip the places that are too small.
-        if ( m_weightfilter.at( mark->popidx() ) > radius
+        if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
 //             && mark->symbol() != 0
              && mark->selected() == 0 )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
-        if ( m_showTerrain == false
+        if ( !viewParams->m_showTerrain
              && ( mark->symbol() >= 16 && mark->symbol() <= 20 ) )
             continue;
 
         // Skip city marks if we're not showing cities.
-        if ( m_showCities == false
+        if ( !viewParams->m_showCities
              && ( mark->symbol() >= 0 && mark->symbol() < 16 ) )
             continue;
 
@@ -224,8 +222,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
         if ( qpos.v[Q_Z] > 0 ) {
 
-            x = (int)(imgwidth/2 + radius * qpos.v[Q_X]);
-            y = (int)(imgheight/2 + radius * qpos.v[Q_Y]);
+            x = (int)(imgwidth  / 2 + viewParams->m_radius * qpos.v[Q_X]);
+            y = (int)(imgheight / 2 + viewParams->m_radius * qpos.v[Q_Y]);
 
             // Don't process placemarks if they are outside the screen area
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
@@ -234,7 +232,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #else
         if( true )
         {
-            double xyFactor = (float)(2*radius)/M_PI;
+            double xyFactor = (float)(2 * viewParams->m_radius) / M_PI;
 
             double degX;
             double degY;
@@ -244,7 +242,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             y = (int)(imgheight/2 + xyFactor * (degY + centerLat));
 
             // Don't process placemarks if they are outside the screen area
-             if ( ( x >= 0 && x < imgwidth || x+4*radius < imgwidth || x-4*radius >= 0 )  && y >= 0 && y < imgheight ) {
+             if ( ( x >= 0 && x < imgwidth || x+4*viewParams->m_radius < imgwidth || x-4*viewParams->m_radius >= 0 )  && y >= 0 && y < imgheight ) {
 #endif
                 // Choose Section
                 const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
@@ -419,14 +417,14 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #ifdef FLAT_PROJ
         int tempSymbol = mark->symbolPos().x();
         int tempText = mark->textRect().x();
-        for(int i = tempSymbol - 4*radius; i>=0 ; i-= 4*radius) {
+        for(int i = tempSymbol - 4*viewParams->m_radius; i>=0 ; i-= 4*viewParams->m_radius) {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
             mark->symbolPos().setX( i );
             painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
             painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
         }
 
-        for(int i = tempSymbol; i<=imgwidth ; i+= 4*radius) {
+        for(int i = tempSymbol; i<=imgwidth ; i+= 4*viewParams->m_radius) {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
             mark->symbolPos().setX( i );
             painter->drawPixmap( mark->textRect(),  mark->textPixmap() );
@@ -725,6 +723,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
                                   Quaternion &planetAxis,
                                   int imgwidth, int imgheight,
+                                  ViewParams *viewParams,
                                   int &x, int &y )
 {
     // Skip the places that are too small and not selected.
@@ -733,11 +732,13 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
         return false;
 
     // Skip terrain marks if we're not showing terrain.
-    if ( !m_showTerrain && ( 16 <= mark->symbol() && mark->symbol() <= 19 ) )
+    if ( !viewParams->m_showTerrain
+         && ( 16 <= mark->symbol() && mark->symbol() <= 19 ) )
         return false;
 
     // Skip city marks if we're not showing cities.
-    if ( !m_showCities && ( 0 <= mark->symbol() && mark->symbol() < 16 ) )
+    if ( !viewParams->m_showCities
+         && ( 0 <= mark->symbol() && mark->symbol() < 16 ) )
         return false;
 
     Quaternion  qpos       = mark->quaternion();

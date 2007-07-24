@@ -278,12 +278,12 @@ bool MarbleWidget::showPlaces() const
 
 bool MarbleWidget::showCities() const
 { 
-    return d->m_model->placeMarkPainter()->showCities();
+    return d->m_viewParams.m_showCities;
 }
 
 bool MarbleWidget::showTerrain() const
 { 
-    return d->m_model->placeMarkPainter()->showTerrain();
+    return d->m_viewParams.m_showTerrain;
 }
 
 bool MarbleWidget::showRelief() const
@@ -770,13 +770,13 @@ void MarbleWidget::setShowPlaces( bool visible )
 
 void MarbleWidget::setShowCities( bool visible )
 { 
-    d->m_model->placeMarkPainter()->setShowCities( visible );
+    d->m_viewParams.m_showCities = visible;
     repaint();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 { 
-    d->m_model->placeMarkPainter()->setShowTerrain( visible );
+    d->m_viewParams.m_showTerrain = visible;
     repaint();
 }
 

@@ -24,6 +24,9 @@ ViewParams::ViewParams( )
     m_showPlaceMarks     = true;
     m_showElevationModel = false;
 
+    m_showCities         = true;
+    m_showTerrain        = true;
+
     // Just to have something.
     m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
 }

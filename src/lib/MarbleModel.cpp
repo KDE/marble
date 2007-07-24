@@ -287,7 +287,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
-                                                 viewParams->m_radius,
+                                                 viewParams,
                                                  d->m_placeMarkContainer,
                                                  viewParams->m_planetAxis );
     }
@@ -296,7 +296,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
-                                                 viewParams->m_radius,
+                                                 viewParams,
                                                  d->m_placemarkmanager->getPlaceMarkContainer(),
                                                  viewParams->m_planetAxis );
     }

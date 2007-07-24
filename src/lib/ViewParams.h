@@ -51,6 +51,9 @@ class MARBLE_EXPORT ViewParams
     bool        m_showPlaceMarks;
     bool        m_showElevationModel;
 
+    bool        m_showCities;   // About placemarks
+    bool        m_showTerrain;
+
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere
     QImage  *m_coastImage;      // A slightly higher level image.
