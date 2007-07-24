@@ -74,7 +74,7 @@ void HttpFetchFile::executeJob( HttpJob* job )
     m_httpRequestAborted = false;
 
     int httpGetId = m_pHttp->get( sourceUrl.path(), jobTargetFile );
-    qDebug() << " job id: " << httpGetId;
+    qDebug() << " job id: " << httpGetId << " source: " << sourceUrl.toString();
     m_pFileIdMap.insert( httpGetId, job );
 
     emit statusMessage( tr("Downloading data ...") );

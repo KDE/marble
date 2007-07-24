@@ -44,7 +44,7 @@ const int tileDigits = 6;
 TileLoader::TileLoader( const QString& theme )
 {
     setMapTheme( theme );
-    m_downloadManager = new HttpDownloadManager( QUrl("http://edu.kde.org/marble/") );
+    m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/") );
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
         this, SLOT( reloadTile( QString, int ) ) );
 }
