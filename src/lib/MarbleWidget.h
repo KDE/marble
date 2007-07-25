@@ -536,6 +536,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void creatingTilesProgress( int progress );
 
+    void updateChangedMap();
+
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.

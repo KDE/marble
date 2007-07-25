@@ -169,7 +169,10 @@ void TextureTile::loadTile( int x, int y, int level,
     }
 
     if ( requestTileUpdate )
-	emit tileUpdateDone();
+    {
+        qDebug() << "TileUpdate available";
+    	emit tileUpdateDone();
+    }
 }
 
 

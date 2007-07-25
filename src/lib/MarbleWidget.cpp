@@ -123,7 +123,7 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
              this,    SLOT( creatingTilesProgress( int ) ) );
 
-    connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(update()) );
+    connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
 
     // Set background: black.
     QPalette p = palette();
@@ -900,6 +900,11 @@ void MarbleWidget::creatingTilesProgress( int progress )
         delete d->m_tileCreatorDlg;
 }
 
+void MarbleWidget::updateChangedMap()
+{
+    setNeedsUpdate();
+    update();
+}
 
 int MarbleWidget::fromLogScale(int zoom)
 {
