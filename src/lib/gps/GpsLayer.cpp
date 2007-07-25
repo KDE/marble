@@ -13,6 +13,10 @@
 #include "ClipPainter.h"
 #include "WaypointContainer.h"
 #include "GpxSax.h"
+#include "TrackContainer.h"
+#include "TrackPoint.h"
+#include "Track.h"
+#include "TrackSegment.h"
 
 #include <QtGui/QPixmap>
 #include <QtCore/QString>
@@ -26,10 +30,17 @@
 GpsLayer::GpsLayer( QObject *parent ) : AbstractLayer( parent )
 {
     m_currentPosition = new Waypoint( 0,0 );
-    m_gpsTracking = new Waypoint( 0,0 );
+    
     m_waypoints = new WaypointContainer();
+    m_tracks = new TrackContainer();
     
 #ifdef HAVE_LIBGPS
+    m_gpsTracking = new TrackPoint( 0,0 );
+    m_gpsPrevious = new TrackPoint( 0,0 );
+    
+    m_gpsTrack = new Track();
+    m_gpsTrackSeg = 0;
+    
     m_gpsd = new gpsmm();
     m_gpsdData = m_gpsd -> open( "127.0.0.1", "2947" );
 #endif
@@ -47,6 +58,24 @@ void GpsLayer::updateGps(){
         m_gpsdData =m_gpsd->query( "p" );
         m_gpsTracking-> setPosition( m_gpsdData->fix.latitude, 
                                  m_gpsdData->fix.longitude );
+       
+            if (m_gpsTrackSeg ==0 ){
+                m_gpsTrackSeg = new TrackSegment();
+            }
+            if ( !((m_gpsTracking->position().quaternion()) 
+                     ==
+ (m_gpsPrevious->position().quaternion()))){
+                m_gpsTrackSeg->append( m_gpsPrevious );
+             }
+            m_gpsPrevious = new TrackPoint( m_gpsdData->fix.latitude, 
+                                          m_gpsdData->fix.longitude);
+            
+        
+    } else {
+        if (m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() >0)) {
+            m_gpsTrack->append( m_gpsTrackSeg );
+            m_gpsTrackSeg = 0;
+        } 
     }
 #endif
 }
@@ -55,91 +84,53 @@ void GpsLayer::paintLayer(ClipPainter *painter,
                           const QSize &canvasSize, double radius,
                           Quaternion rotAxis)
 {
-   // painter->setRenderHint(QPainter::Antialiasing, true);
+    
     Quaternion invRotAxis = rotAxis.inverse();
 
-    paint( painter, canvasSize, radius, invRotAxis, 
-           m_currentPosition );
+    m_currentPosition->draw( painter, canvasSize, 
+                             radius, invRotAxis );
 #ifdef HAVE_LIBGPS
-    if( m_gpsd!=0 ) {
-        paint( painter, canvasSize, radius, invRotAxis, 
-               m_gpsTracking );
+    if( m_gpsd != 0 ) {
+        paintCurrentPosition( painter, canvasSize, radius,
+                              invRotAxis, m_gpsTracking );
+    }
+    
+    if ( m_gpsTrack !=0 ) {
+        m_gpsTrack ->draw( painter, canvasSize, radius, invRotAxis );
+    }
+    
+    if ( m_gpsTrackSeg !=0 ) {
+        m_gpsTrackSeg->draw( painter, canvasSize, radius, 
+                             invRotAxis);
     }
 #endif
     QPoint *previous=0;
     
-    QTime t;
-    t.start();
+    
 
-    WaypointContainer::const_iterator it;
-    for( it = m_waypoints->begin(); it < m_waypoints->constEnd();
-         it++ )
-    {
-        previous = paint( painter, canvasSize, radius, invRotAxis, 
-              (*it) , previous);
+    m_waypoints->draw(painter, canvasSize, radius, invRotAxis );
+    
+    if ( m_tracks != 0 ) {
+        m_tracks->draw(painter, canvasSize, radius, invRotAxis);
     }
     
     delete previous;
-    qDebug("Time elapsed: %d ms", t.elapsed());
 }
 
-QPoint * GpsLayer::paint( ClipPainter *painter,
+void GpsLayer::paintCurrentPosition( ClipPainter *painter,
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis, 
-                      AbstractLayerData *point, 
-                      QPoint *previous )
+                      AbstractLayerData *point )
 {
     QPoint position;
     bool draw = false;
     
-    draw = getPixelPosFromGeoPoint( point->position(),
-                                    canvasSize, invRotAxis, 
-                                    (int)radius, &position );
+    draw = point->getPixelPos( canvasSize, invRotAxis, (int)radius,
+                               &position );
    
-    if ( previous == 0 ) {
-        painter->drawPixmap( position ,
-                            point->symbolPixmap() );
-        previous = new QPoint(position);
-        *previous = position;
-        return previous;
-    }
-
-   // qDebug() << ( pow( ( position.x() - previous->x() ), 2) 
-     //       + pow( ( position.y() - previous->y() ), 2 ) );
-    if ( (( position.x() - previous->x() ) 
-           * ( position.x() - previous->x() )) 
-         
-        + (( position.y() - previous->y() ) 
-                * ( position.y() - previous->y() ))  
-        < 25.0 )
-    {
-        draw = false;
-    }
-
     if ( draw ) {
-     //   painter->drawPixmap( position ,
-     //                        point->symbolPixmap() );
-        painter->drawEllipse( position.x(), position.y(), 3, 3 );
-        *previous= position;
-    }
-    return previous;
-}
-
-void GpsLayer::paint(ClipPainter *painter, 
-                     const QSize &canvasSize, 
-                     double radius, Quaternion invRotAxis, 
-                     AbstractLayerData *point)
-{
-    QPoint position;
-    bool draw = false;
-    
-    draw = getPixelPosFromGeoPoint( point->position(),
-                                    canvasSize, invRotAxis, 
-                                    (int)radius, &position );
-
-    if ( draw ) {
-        painter->drawPixmap( position ,
-                point->symbolPixmap() );
+        painter->drawEllipse( position.x() -5, position.y() -5,
+                              10, 10);
     }
 }
 
@@ -150,19 +141,15 @@ void GpsLayer::changeCurrentPosition( double lat, double lon )
 
 void GpsLayer::loadGpx( const QString &fileName )
 {
-    qDebug("trying to parse at least");
     QFile gpxFile( fileName );
     QXmlInputSource gpxInput( &gpxFile );
     
-    if(gpxFile.exists()){
-        qDebug("its ther!!!!!!!!!!!!!!");
-    }
-    
     QXmlSimpleReader gpxReader;
-    GpxSax gpxSaxHandler( m_waypoints );
+    GpxSax gpxSaxHandler( m_waypoints, m_tracks );
     
     gpxReader.setContentHandler( &gpxSaxHandler );
+    gpxReader.setErrorHandler( &gpxSaxHandler );
     
-    gpxReader.parse( gpxInput );
+    gpxReader.parse( &gpxInput );
 }
 

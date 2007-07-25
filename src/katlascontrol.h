@@ -47,6 +47,11 @@ class KAtlasControl : public QWidget
     void moveRight();
     void moveUp();
     void moveDown();
+    
+    void setNavigationTabShown( bool );
+    void setLegendTabShown( bool );
+    void setMapViewTabShown( bool );
+    void setCurrentLocationTabShown( bool );
 
     void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
 

@@ -24,6 +24,12 @@ class MarbleTest {
     virtual ~MarbleTest(){ }
 
     void timeDemo();
+    
+    /**
+     * @brief load a gpx file and test the for average time, max time,
+     *        min time and total time
+     */
+    void gpsDemo();
 
  private:
     MarbleWidget      *m_marbleWidget;

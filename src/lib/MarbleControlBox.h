@@ -18,7 +18,6 @@
 #ifndef MARBLECONTROLBOX_H
 #define MARBLECONTROLBOX_H
 
-
 #include "marble_export.h"
 
 #include "ui_MarbleControlBox.h"
@@ -100,6 +99,11 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
     void changeZoom(int);
     void disableGpsInput( bool );
     void recieveGpsCoordinates( double, double, GeoPoint::Unit );
+    
+    void setNavigationTabShown( bool );
+    void setLegendTabShown( bool );
+    void setMapViewTabShown( bool );
+    void setCurrentLocationTabShown( bool );
 
  private Q_SLOTS:
     /// called whenever the user types something new in the search box
@@ -110,13 +114,18 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
 
  private:
     void setupGpsOption();
+    void setWidgetTabShown( QWidget * widget, int insertIndex, 
+                            bool show, QString text );
 
  protected:
     void resizeEvent ( QResizeEvent * );
 
  private:
     MarbleControlBoxPrivate  * const d;
-    QWidget * m_currentLocationWidget;
+    QWidget *m_navigationWidget;
+    QWidget *m_ledgendWidget;
+    QWidget *m_mapViewWidget;
+    QWidget *m_currentLocationWidget;
 };
 
 #endif // MARBLECONTROLBOX_H

@@ -9,8 +9,42 @@
 //
 
 #include "Route.h"
+#include "ClipPainter.h"
 
-Route::~Route()
+#include <QtCore/QPoint>
+
+Route::Route() : AbstractLayerData( 0 , 0 ), AbstractLayerContainer(),
+                 GpsElement()
 {
-    delete data;
+}
+
+void Route::draw( ClipPainter *painter, const QSize &canvasSize,
+                  double radius, Quaternion invRotAxis )
+{
+    //temparory item to keep track of previous point
+    AbstractLayerData *first=0;
+    
+    //record the posisions of the points
+    QPoint firstPos;
+    QPoint secondPos;
+    
+    const_iterator it;
+    
+    //initialise first to the begining of the vector
+    first = *(begin());
+    
+    for ( it = constBegin(); it < constEnd(); it++){
+        first->getPixelPos( canvasSize, invRotAxis, (int)radius, 
+                                &firstPos );
+        
+        (*it)->getPixelPos( canvasSize, invRotAxis, (int)radius, 
+                                 &secondPos );
+        
+        if ( distance( firstPos, secondPos ) > 25 ) {
+            first->draw( painter, firstPos );
+            (*it)->draw( painter, secondPos );
+            
+            painter->drawLine( firstPos, secondPos );
+        }
+    }
 }

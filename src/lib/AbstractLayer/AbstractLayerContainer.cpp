@@ -11,6 +11,8 @@
 #include "AbstractLayerContainer.h"
 #include "ClipPainter.h"
 
+#include <QtCore/QPointF>
+
 AbstractLayerContainer::AbstractLayerContainer( int size )
 {
     m_data = new QVector<AbstractLayerData*>( size );
@@ -42,7 +44,7 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
 {
     const_iterator it;
     
-    for( it = constBegin(); it < constEnd(); ++it ) {
+    for( it = constBegin() ; it < constEnd() ; ++it ) {
         (*it)->draw( painter, canvasSize, radius, invRotAxis);
     }
 }
@@ -68,6 +70,13 @@ void AbstractLayerContainer::processVisible()
 
 double AbstractLayerContainer::distance ( const QPoint &a, 
                                           const QPoint &b )
+{
+    return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
+            + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
+}
+
+double AbstractLayerContainer::distance ( const QPointF &a, 
+                                          const QPointF &b )
 {
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );

@@ -43,6 +43,15 @@ int main(int argc, char *argv[])
             marbleTest->timeDemo();
             return 0;
         }
+        else if( strcmp( argv[ i ], "--gpsdemo" ) == 0 ) {
+            window->resize( 900, 640 );
+            marbleTest->gpsDemo();
+            return 0;
+        }
+        else if( strcmp( argv[ i ], "--enableCurrentLocation" ) ==0 )
+        {
+            window->marbleControl()->setCurrentLocationTabShown(true);
+        }
         else if ( QFile::exists( app.arguments().at( i ) ) )
             ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
     }

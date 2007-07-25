@@ -4,15 +4,15 @@
 #
 # Copyright (c) 2006, Andrew Manson, <g.real.ate@gmail.com>
 #
-MESSAGE(STATUS "were in it!!!!!!!!!")
 
 FIND_PATH(libgps_INCLUDES libgpsmm.h /usr/include)
 
 
 FIND_LIBRARY(libgps_LIBRARIES gps /usr/lib)
 
-message(STATUS "includes: ${libgps_INCLUDES} lib:
-${libgps_LIBRARIES}")
+IF( NOT libgps_LIBRARIES)
+    MESSAGE(STATUS "Not building with Gpsd Support")
+ENDIF( NOT libgps_LIBRARIES)
 
 IF (libgps_LIBRARIES AND libgps_INCLUDES)
    SET(libgps_FOUND TRUE)

@@ -12,21 +12,29 @@
 
 #include "AbstractLayer/AbstractLayerContainer.h"
 #include "GpsElement.h"
-#include "WaypointContainer.h"
 
-/*!\brief representation a GPS Route.
+/**
+ * @brief representation a GPS Route.
  * 
  * A GPS Route is an ordered list of waypoints representing a series
  * of turn points leading to a destination.
  */
-class Route : public AbstractLayerContainer, public GpsElement
+class Route : public AbstractLayerContainer, public GpsElement, 
+              public AbstractLayerData
 {
  public:
+    /**
+     * @brief empty constructor
+     */
     Route();
-    ~Route();
- private:
-    //!collection of waypoints
-    WaypointContainer *data;
+    
+    /**
+     * @brief draw each of the Waypoints in the route. 
+     * @see AbstractLayerContainer::draw()
+     */
+    virtual void draw( ClipPainter *painter,
+                       const QSize &canvasSize, double radius,
+                       Quaternion invRotAxis );
 };
 
 #endif //ROUTE_H

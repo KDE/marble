@@ -14,7 +14,8 @@
 #include <QUrl>
 #include <QVector>
 
-/*! \brief common details of every gps element
+/**
+ * @brief common details of every gps element
  *
  * This class is just to keep all of the common parts of the gps data
  * together.
@@ -22,22 +23,104 @@
 class GpsElement
 {
  public:
-    //!default constructor, set all pointers to 0
-    GpsElement(): m_name(0), m_gpsComment(0), m_description(0),
-                  m_source(0), m_link(0), m_number(0){}
+    /**
+     * @brief constructor, set all pointers to 0;
+     */
+    GpsElement();
+    
+    /**
+     * @brief destructor, delete all pointers
+     */
     ~GpsElement();
 
+    /**
+     * @brief m_name setter
+     */
     void setName( const QString &name );
+    
+    /**
+     * @brief m_name getter
+     * @return the name of this gps element or an empty string if one
+     *         has not been provided
+     */
+    QString name();
+    
+    /**
+     * @brief m_gpsComment setter
+     */
     void setGpsComment( const QString &comment );
-    void setDescription( const QString &Description );
+    
+    /**
+     * @brief m_gpsComment getter
+     * @return a comment about this gps data or an empty string if one
+     *         has not been provided
+     */
+    QString gpsComment();
+    
+    /**
+     * @brief m_discription setter
+     */
+    void setDescription( const QString &description );
+    
+    /**
+     * @brief m_discription getter
+     * @return description about this particular gps data element or 
+     *         an empty string if that information has not been 
+     *         provided
+     */
+    QString description();
+    
+    /**
+     * @brief m_source setter
+     */
     void setSource( const QString &source );
-    //!add a previously verified link
+    
+    /**
+     * @brief m_source getter
+     * @return a string representation of the source of this data or 
+     *         an empty string if that information is not known
+     */
+    QString source();
+    
+    /**
+     * @brief add a previously verified link to m_links
+     */
     void addLink( const QString &link );
+    
+    /**
+     * @brief get all links
+     * @return a vector containing all links or an empty vector
+     */
+    QVector<QUrl> links();
+    
+    /**
+     * @brief m_number setter
+     */
     void setNumber( int number );
+    
+    /**
+     * @brief m_gpsComment setter
+     * @return the number of this gps element or -1 if one has not
+     *         been provided
+     */
+    int number();
+    
  private:
+    /**
+     * @brief name used to identify this gps element.
+     */
     QString *m_name;
+    
+    /**
+     * @brief comment added to this element
+     */
     QString *m_gpsComment;
+    
+    /**
+     * @brief description about this gps element
+     */
     QString *m_description;
+    
     /*!\brief source of the GPS data
      * 
      * Quoted from the GPX schema:
@@ -45,9 +128,21 @@ class GpsElement
      * and accuracy of data.
      */
     QString *m_source;
-    //!link to external info about the track
-    QVector<QUrl> *m_link;
-    //!not aplicable for waypoint
+    
+    /**
+     * @brief collection of links to external information about this
+     *        element. 
+     * 
+     * A Vector of valid links to external information
+     */
+    QVector<QUrl> *m_links;
+    
+    /**
+     * @brief the number of the gps element
+     * 
+     * this referes to the number of this gps element in a sequence
+     * of elements. this does not apply to waypoints
+     */
     int *m_number;
 };
 

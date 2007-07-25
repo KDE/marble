@@ -127,6 +127,16 @@ void MarbleModel::setShowGps( bool visible )
     d->m_gpsLayer->setVisible( visible );
 }
 
+void MarbleModel::startPolling( int time )
+{
+    d->m_timer->start( time );
+}
+
+void MarbleModel::stopPolling()
+{
+    d->m_timer->stop();
+}
+
 
 // Set a particular theme for the map, and load the top 3 tile levels.
 // If these tiles aren't already created, then create them here and now.

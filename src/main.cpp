@@ -60,7 +60,11 @@ int main(int argc, char *argv[])
 	    qDebug( "Timedemo finished in %ims", t.elapsed() );
 	    qDebug() <<  QString("= %1 fps").arg(2000*1000/(double)(t.elapsed()));
 	    return 0;
-	}
+	} else if ( strcmp( argv[ i ], "--gpsdemo" ) == 0 ){
+        qDebug( "Running gpsdemo, stand by..." );
+        Qtime t;
+        t.start();
+    }
 	else if ( QFile::exists( app.arguments().at( i ) ) )
 	    katlascontrol.addPlaceMarkFile( argv[i] );
     }

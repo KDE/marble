@@ -16,6 +16,7 @@
 #include "AbstractLayerData.h"
 
 class ClipPainter;
+class QPointF;
 
 
 /*!
@@ -75,9 +76,20 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      * This is just a convience method to make certain optimisations 
      * easier, such as not drawing an @c AbstractLayerData if it is 
      * too close to another
+     * @return the square of the distance between the points, if the 
+     *         actual distance is needed get the square root.
      */
     double distance ( const QPoint &a, const QPoint &b );
     
+    /**
+     * @brief get the distance between 2 points
+     * 
+     * Overloaded method to work with @c QPointF objects and allow for
+     * floating point Points. 
+     * @return the square of the distance between the points, if the 
+     *         actual distance is needed get the square root.
+     */
+    double distance ( const QPointF &a, const QPointF &a );
  protected:
     /** 
      * @brief Method to process what Data Objects need to be in

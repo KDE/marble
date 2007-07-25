@@ -10,19 +10,26 @@
 
 
 #include "Track.h"
+#include <QDebug>
 
 
-Track::Track() : AbstractLayerData(0,0)
-{
-    m_trackSegs = new QVector<WaypointContainer>();
-}
-
-Track::~Track()
+Track::Track() : AbstractLayerData(0,0), AbstractLayerContainer(),
+                 GpsElement()
 {
 }
 
-
-void Track::addTrackSeg( WaypointContainer trackSeg )
+void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
+                 double radius, Quaternion invRotAxis)
 {
-    m_trackSegs->append( trackSeg );
+    const_iterator it;
+    for( it = this->begin(); it < this->constEnd();
+         it++ )
+    {
+        ( *it ) -> draw( painter, canvasSize, radius, invRotAxis );
+    }
+}
+
+void Track::draw( ClipPainter*, const QPoint&)
+{
+    //a track does not have a single point drawing implementation
 }

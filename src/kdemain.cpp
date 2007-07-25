@@ -56,6 +56,16 @@ int main (int argc, char *argv[])
         marbleTest->timeDemo();
         return 0;
     }
+    
+    if ( args->isSet( "gpsDemo" ) ) {
+        window->resize( 900, 640 );
+        marbleTest->gpsDemo();
+        return 0;
+    }
+    
+    if ( args->isSet( "enableCurrentLocation" ) ) {
+        window->marbleControl()->setCurrentLocationTabShown(true);
+    }
 
     // Read the files that are given on the command line.
     // FIXME: What should the '1' below really be?

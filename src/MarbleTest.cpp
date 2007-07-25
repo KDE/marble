@@ -10,10 +10,12 @@
 //
 
 #include "MarbleTest.h"
+#include "GeoPoint.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
+#include <QtGui/QFileDialog>
 
 #include <lib/MarbleWidget.h>
 
@@ -77,4 +79,90 @@ void MarbleTest::timeDemo()
     qDebug( "Timedemo finished in %ims", t.elapsed() );
     qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
 */
+}
+
+void MarbleTest::gpsDemo(){
+    //
+    //set up for the test
+    //
+    qDebug("stopping polling now");
+    
+    m_marbleWidget->model()->stopPolling();
+    m_marbleWidget->rotateTo( 58.3723, -15.2325 );
+    
+    m_marbleWidget->setShowGps( true );
+    
+    //get the gpx file
+    QString fileName = QFileDialog::getOpenFileName(m_marbleWidget,
+            "Open File", QString(), 
+            "GPS Data (*.gpx);;KML (*.kml)");
+    
+    if ( ! fileName.isNull() ) {
+        QString extension = fileName.section( '.', -1 );
+
+        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
+            m_marbleWidget->openGpxFile( fileName );
+        }
+    }
+   
+    QTime t;
+    QTime totalTime;
+    
+    QVector<int> movingStats;
+    QVector<int> staticStats;
+    int temp=0;
+    int totalMoving =0;
+    int totalStatic =0;
+    
+    //
+    //Start the test
+    //
+    totalTime.start();
+    for( int i = 0; i< 5 ; i++) {
+        
+        m_marbleWidget->zoomViewBy( 400 );
+        totalMoving =0;
+        totalStatic =0;
+        m_marbleWidget->rotateTo( 58.3723, -15.2325 );
+    
+        for( int i = 0; i< 5 ;i++ ){
+            if( i%2) {
+                m_marbleWidget->moveLeft();
+            } else {
+                m_marbleWidget->moveRight();
+            }
+            t.start();
+            m_marbleWidget->updateGps();
+            temp = t.elapsed();
+//             qDebug("time elapsed moving %d",temp);
+            totalMoving += temp;
+            
+            
+        }
+        
+        for( int i = 0; i< 10 ;i++ ){
+            t.start();
+            m_marbleWidget->updateGps();
+            temp=t.elapsed();
+//             qDebug("time elapsed static %d",t.elapsed());
+            totalStatic+=temp;
+        }
+        
+//         qDebug ( "average of moving is %d at %d zoom", 
+//                  (totalMoving/10), m_marbleWidget->zoom() );
+//         qDebug( "average of static is %d at %d zoom", 
+//                 (totalStatic/10) , m_marbleWidget->zoom() );
+        movingStats.append( totalMoving/10 );
+        staticStats.append( totalStatic/10 );
+        
+    }
+    qDebug("total test time: %d", totalTime.elapsed());
+    
+    qDebug("full moving stats: ") ;
+    qDebug() << movingStats;
+    
+    qDebug("full static stats: ");
+    qDebug() << staticStats;
+    
+    
 }

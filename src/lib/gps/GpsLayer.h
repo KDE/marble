@@ -21,6 +21,10 @@
 
 class WaypointContainer;
 class Waypoint;
+class TrackContainer;
+class TrackPoint;
+class Track;
+class TrackSegment;
 
 
 class GpsLayer : public AbstractLayer
@@ -32,15 +36,11 @@ class GpsLayer : public AbstractLayer
     virtual void paintLayer( ClipPainter *painter, 
                             const QSize &canvasSize, double radius,
                             Quaternion rotAxis );
-    virtual QPoint * paint( ClipPainter *painter, 
+    virtual void paintCurrentPosition( ClipPainter *painter, 
                             const QSize &canvasSize, 
                             double radius, Quaternion invRotAxis, 
-                            AbstractLayerData *point, 
-                            QPoint *previous);
-    virtual void paint(ClipPainter *painter, 
-                       const QSize &canvasSize, 
-                       double radius, Quaternion invRotAxis, 
-                       AbstractLayerData *point);
+                            AbstractLayerData *point );
+    
     void changeCurrentPosition( double lat, double lon );
     
     void loadGpx(const QString &fileName);
@@ -50,12 +50,16 @@ class GpsLayer : public AbstractLayer
     
  private:
     Waypoint            *m_currentPosition;
-    Waypoint            *m_gpsTracking;
     WaypointContainer   *m_waypoints;
+    TrackContainer      *m_tracks;
     
 #ifdef HAVE_LIBGPS
     gpsmm               *m_gpsd;
     struct gps_data_t   *m_gpsdData;
+    TrackPoint          *m_gpsTracking;
+    TrackPoint          *m_gpsPrevious;
+    Track               *m_gpsTrack;
+    TrackSegment        *m_gpsTrackSeg;
 #endif
 };
 

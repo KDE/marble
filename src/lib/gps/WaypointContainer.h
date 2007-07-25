@@ -11,6 +11,8 @@
 #define WAYPOINTCONTAINER_H
 
 #include "AbstractLayer/AbstractLayerContainer.h"
+#include "ClipPainter.h"
+
 
 class WaypointContainer : public AbstractLayerContainer
 {
@@ -18,7 +20,8 @@ class WaypointContainer : public AbstractLayerContainer
     WaypointContainer();
     WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
     virtual ~WaypointContainer() {}
-    virtual void draw();
+    virtual void draw( ClipPainter *painter, const QSize &canvasSize,
+                       double radius, Quaternion invRotAxis);
 
  protected:
     virtual void processVisable();

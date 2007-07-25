@@ -99,6 +99,9 @@ set(marblewidget_SRCS
            gps/WaypointContainer.cpp
            gps/GpsLayer.cpp
            gps/GpxSax.cpp
+           gps/TrackSegment.cpp
+           gps/TrackPoint.cpp
+           gps/TrackContainer.cpp
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp

@@ -82,5 +82,25 @@ void KAtlasControl::moveDown()
     m_marbleWidget->moveDown();
 }
 
+void KAtlasControl::setNavigationTabShown( bool show )
+{
+    m_control->setNavigationTabShown( show );
+}
+
+void KAtlasControl::setLegendTabShown( bool show )
+{
+    m_control->setLegendTabShown( show );
+}
+
+void KAtlasControl::setMapViewTabShown( bool show )
+{
+    m_control->setMapViewTabShown( show );
+}
+
+void KAtlasControl::setCurrentLocationTabShown( bool show )
+{
+    m_control->setCurrentLocationTabShown( show );
+}
+
 
 #include "katlascontrol.moc"

@@ -128,6 +128,20 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param visible visibility of the Gps Data.
      */
     void setShowGps( bool visible );
+    
+    /**
+     * @brief Start the model's timer polling
+     * 
+     * this is default behaviour so does not need to be started unless
+     * it was previously stopped
+     * @param time the amount of milliseconds between each poll
+     */
+    void startPolling( int time = 1000 );
+    
+    /**
+     * @brief stop the model from polling
+     */
+    void stopPolling();
 
  Q_SIGNALS:
     void creatingTilesStart( const QString& name, const QString& description );

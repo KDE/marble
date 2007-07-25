@@ -72,7 +72,9 @@ class AbstractLayerData
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis)=0;
     
+    /*
     virtual QPixmap symbolPixmap()=0;
+    */
 
 
     /**

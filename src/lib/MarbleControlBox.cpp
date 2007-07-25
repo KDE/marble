@@ -66,11 +66,26 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     MapViewTab->setBackgroundRole( QPalette::Window );
     CurrentLocationTab->setBackgroundRole( QPalette::Window );
 
-    toolBox->setCurrentIndex(3);
+    //  set all of the Side Widget Variables  //
+    toolBox->setCurrentIndex( 0 );
+    m_navigationWidget = toolBox->currentWidget();
+    
+    toolBox->setCurrentIndex( 1 );
+    m_ledgendWidget = toolBox->currentWidget();
+    
+    toolBox->setCurrentIndex( 2 );
+    m_mapViewWidget = toolBox->currentWidget();
+    
+    toolBox->setCurrentIndex( 3 );
     m_currentLocationWidget = toolBox->currentWidget();
-    m_currentLocationWidget->hide(); // Current location tab is hidden by default
-    toolBox->removeItem( 3 ); 
+    
+//  m_currentLocationWidget->hide(); // Current location tab is hidden
+                                    //by default
+ //   toolBox->removeItem( 3 ); 
     toolBox->setCurrentIndex(0);
+    
+    //default
+    setCurrentLocationTabShown( false );
 
     setupGpsOption();
 
@@ -195,6 +210,33 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              this,        SIGNAL( updateGps() ) );
 }
 
+void MarbleControlBox::setWidgetTabShown( QWidget * widget,
+                                          int insertIndex, bool show,
+                                          QString text )
+{
+    int index = toolBox->indexOf( widget );
+    qDebug() << text << index;
+
+    if( show ) {
+        if ( !(index >= 0) ){
+            if ( insertIndex < toolBox->count() ) {
+                toolBox->insertItem( insertIndex,
+                                     widget, 
+                                     text );
+            } else { 
+                qDebug() << "here";
+                toolBox->insertItem( 3 ,widget, text );
+            }
+            widget->show();
+        }
+    } else {
+        if ( index >= 0 ) {
+            widget->hide();
+            toolBox->removeItem( index );
+        }
+    }
+}
+
 
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
@@ -272,6 +314,27 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
             emit gpsPositionChanged( t_lat, t_lon );
         }
     }
+}
+
+void MarbleControlBox::setNavigationTabShown( bool show )
+{
+    setWidgetTabShown( m_navigationWidget, 0, show, "Navigation" );
+}
+
+void MarbleControlBox::setLegendTabShown( bool show )
+{
+    setWidgetTabShown( m_ledgendWidget, 1, show, "Ledgend" );
+}
+
+void MarbleControlBox::setMapViewTabShown( bool show )
+{
+    setWidgetTabShown( m_mapViewWidget, 2, show, "Map View" );
+}
+
+void MarbleControlBox::setCurrentLocationTabShown( bool show )
+{
+    setWidgetTabShown( m_currentLocationWidget, 3, show, 
+                       "Current Location" );
 }
 
 

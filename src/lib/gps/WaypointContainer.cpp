@@ -18,6 +18,22 @@ void WaypointContainer::processVisable()
 {
 }
 
-void WaypointContainer::draw()
+void WaypointContainer::draw( ClipPainter *painter, 
+                             const QSize &canvasSize, double radius,
+                             Quaternion invRotAxis )
 {
+    const_iterator it;
+    bool draw;
+    QPoint position;
+    
+    for( it = this->begin(); it < this->constEnd();
+         it++ )
+    {
+        draw = (*it)->getPixelPos( canvasSize, invRotAxis,
+                                   (int)radius, &position );
+
+        if ( draw ) {
+            ( *it ) -> draw( painter, position );
+        }
+    }
 }

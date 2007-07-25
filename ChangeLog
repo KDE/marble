@@ -1,3 +1,53 @@
+2007-07-25  Andrew Manson   <g.real.ate@gmail.com>
+
+    Added a Test to Marble test that returns a set of averages at 
+    different zoom levels for drawing a large gpx file
+    * src/MarbleTest. {cpp,h} : Added the test
+    
+    Added teh catch for the command line argument "--gpsdemo" that 
+    initiates the Gps test
+    * src/kdemain.cpp:
+    * src/qtmain.cpp:
+    
+    Added accessors to katlascontrol for enableing/disableing the
+    tabs in MarbleControlBox
+    * src/katlascontrol.{cpp,h}:
+    
+    Added new Class as a representation of a gps Route (untested)
+    * src/lib/gps/Route.(cpp,h):
+    
+    Added getters for all member variables and repaired all the Api
+    Comments to follow the style of other files
+    * src/lib/gps/GpsElement.h : comments + getters
+    * src/lib/gps/GpsElement.cpp: comments + getters
+    * src/lib/gps/Track.h: comments
+    
+    Made GpsDataElements follow more object oriented aproach layed 
+    down by AbstractLayerData by implementing draw(). Cleaned up Api
+    comments.
+    * src/lib/gps/Track.{h,cpp}: following OO Aproach 
+    * src/lib/gps/Waypoint.{h,cpp}: comments, OO Aproach
+    
+    Repaired problems with Gpx file loading and applied a true 
+    representation of a tracksegment
+    * src/lib/gps/GpxSax.cpp:
+    
+    made TrackSegment follow Object Oriented Aproach and draw a red 
+    triangle after every 5 trackpoints
+    * src/lib/gps/TrackSegment.{cpp,h}:
+    
+    Added a convience method to AbstractLayer to finde the square of
+    the distance between 2 QPoints
+    * src/lib/AbstractLayer/AbstractLayerContainer.{h,cpp}:
+    
+    Added a method to MarbleModel to stop the polling and start it 
+    again at a specified speed ( currently used to stop polling while
+    doing gps test) 
+    * src/lib/MarbleModel.{h,cpp}:
+    
+    added functionality to add and remove tabs to MarbleControlBox
+    * src/lib/MarbleControlBox.{cpp,h}:
+    
 2007-07-25  Torsten Rahn  <rahn@kde.org>
 
 	- Making Marble aware of 404's, so tiles only get saved if they get 

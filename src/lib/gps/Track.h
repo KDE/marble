@@ -10,11 +10,11 @@
 #ifndef TRACK_H
 #define TRACK_H
 
-#include "AbstractLayer/AbstractLayerData.h"
+#include "AbstractLayer/AbstractLayerContainer.h"
 #include "GpsElement.h"
-#include "WaypointContainer.h"
 
-/*! \brief representation of a GPS Track
+/** 
+ * @brief representation of a GPS Track
  * 
  * A GPS track is an ordered list of points describing a path. These
  * points usually represent where someone has previously traveled
@@ -29,22 +29,19 @@
  * reception was lost, or the GPS receiver was turned off, start a new
  * Track Segment for each continuous span of track data.
  */
-class Track : public AbstractLayerData, public GpsElement
+class Track : public AbstractLayerData, public GpsElement, 
+              public AbstractLayerContainer
 {
  public:
-    //!empty constructor
-    Track();
-    virtual ~Track();
-    
     /**
-     * @brief add a Track Segment to this track
-     * @param trackSeg WaypointContainer to be coppied into this Track
+     * @brief empty constructor
      */
-    void addTrackSeg(WaypointContainer trackSeg);
-
- private:
-    //!collection of Track Segments
-    QVector<WaypointContainer> *m_trackSegs;
+    Track();
+    
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis);
+    virtual void draw( ClipPainter*, const QPoint& );
 };
 
 #endif //TRACK_H
