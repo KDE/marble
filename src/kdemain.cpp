@@ -40,6 +40,7 @@ int main (int argc, char *argv[])
     
     KCmdLineOptions  options;
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
+    options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -57,7 +58,7 @@ int main (int argc, char *argv[])
         return 0;
     }
     
-    if ( args->isSet( "gpsDemo" ) ) {
+    if ( args->isSet( "gpsdemo" ) ) {
         window->resize( 900, 640 );
         marbleTest->gpsDemo();
         return 0;
