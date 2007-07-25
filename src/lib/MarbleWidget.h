@@ -139,6 +139,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     explicit MarbleWidget(MarbleModel *model, QWidget *parent = 0);
 
+    virtual ~MarbleWidget();
+
     /**
      * @brief Return the model that this view shows.
      */

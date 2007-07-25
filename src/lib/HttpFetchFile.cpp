@@ -15,6 +15,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtGui/QMessageBox>
+#include <QtCore/QTemporaryFile>
 
 #include "katlasdirs.h"
 
@@ -35,6 +36,24 @@ HttpFetchFile::HttpFetchFile( QObject *parent )
 //            this,    SLOT( checkResponseHeader( const QHttpResponseHeader & ) ) );
 }
 
+HttpFetchFile::~HttpFetchFile()
+{
+    qDebug() << "Deleting Temporary Files ...";
+    m_pHttp->disconnect();
+
+    QFile* jobTargetFile;
+    QMap<int, HttpJob*>::const_iterator i = m_pFileIdMap.constBegin();
+    while (i != m_pFileIdMap.constEnd()) {
+        qDebug() << "Deleting";
+        HttpJob* job = i.value();
+        jobTargetFile = job->targetFile;
+        jobTargetFile->remove();
+        ++i;
+    }
+
+    qDebug() << "Done.";
+}
+
 void HttpFetchFile::executeJob( HttpJob* job )
 {
 
@@ -47,16 +66,11 @@ void HttpFetchFile::executeJob( HttpJob* job )
         return;
     }
 
-    QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
-    qDebug() << "Download to: " << localFileUrlString << " in: " << localFilePath;
+    QTemporaryFile* jobTargetFile = new QTemporaryFile(  QDir::tempPath() + "marble-tile.XXXXXX" );
+    jobTargetFile->setAutoRemove( false );
+    job->targetFile = (QFile*) jobTargetFile;
 
-    if ( !QDir( localFilePath ).exists() )
-        ( QDir::root() ).mkpath( localFilePath );
-
-    QFile* jobTargetFile = new QFile( localFileUrlString + ".tmp" );
-    job->targetFile = jobTargetFile;
-
-    if ( !jobTargetFile->open( QIODevice::WriteOnly ) ) {
+    if ( !jobTargetFile->open() ) {
         emit statusMessage( tr( "Unable to save the file %1: %2." )
                             .arg( localFileUrlString ).arg( jobTargetFile->errorString() ) );
         delete jobTargetFile;
@@ -71,8 +85,6 @@ void HttpFetchFile::executeJob( HttpJob* job )
     if ( !sourceUrl.userName().isEmpty() )
         m_pHttp->setUser( sourceUrl.userName(), sourceUrl.password() );
 
-    m_httpRequestAborted = false;
-
     int httpGetId = m_pHttp->get( sourceUrl.path(), jobTargetFile );
     qDebug() << " job id: " << httpGetId << " source: " << sourceUrl.toString();
     m_pFileIdMap.insert( httpGetId, job );
@@ -84,7 +96,6 @@ void HttpFetchFile::cancelJob( HttpJob* job )
 {
     emit statusMessage( tr( "Download cancelled." ) );
     job->status = Aborted;
-    m_httpRequestAborted = true;
     m_pHttp->abort();
 }
 
@@ -100,27 +111,29 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
     QFile* jobTargetFile = job->targetFile;
 
     if ( job->status == Aborted ) {
-        if ( jobTargetFile ) {
-            jobTargetFile->close();
-            jobTargetFile->remove();
-
-            delete jobTargetFile;
-            jobTargetFile = 0;
-        }
-        m_pFileIdMap.remove( requestId );
-
-        return;
+        qDebug() << "Job aborted! The The Temporary file will be REMOVED!";
+        jobTargetFile->remove();
     }
 
-    jobTargetFile->close();
-
     if ( error ) {
+        qDebug() << "An error occured! The Temporary file will be REMOVED!";
         jobTargetFile->remove();
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_pHttp->errorString() ) );
     } else {
+
+        jobTargetFile->close();
+
         QString localFileUrlString = job->targetDirString + job->relativeUrlString;
+
+        QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
+        qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFilePath;
+
+        if ( !QDir( localFilePath ).exists() )
+            ( QDir::root() ).mkpath( localFilePath );
+
         jobTargetFile->rename( localFileUrlString );
+
         emit statusMessage( tr( "Download finished." ) );
     }
 

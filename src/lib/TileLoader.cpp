@@ -52,6 +52,8 @@ TileLoader::TileLoader( const QString& theme )
 TileLoader::~TileLoader()
 {
     cleanupTilehash();
+    m_downloadManager->disconnect();
+    delete m_downloadManager;
 }
 
 void TileLoader::setMapTheme( const QString& theme )

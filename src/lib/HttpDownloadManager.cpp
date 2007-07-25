@@ -37,6 +37,9 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl )
 
 HttpDownloadManager::~HttpDownloadManager()
 {
+    qDebug() << "Deleting HttpDownloadManager";
+//    m_fetchFile->disconnect();
+//    delete m_fetchFile;
     /* NOOP */
 }
 

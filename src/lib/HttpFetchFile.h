@@ -56,21 +56,16 @@ class HttpFetchFile : public QObject
 
  public:
     HttpFetchFile( QObject* parent = 0 );
+    ~HttpFetchFile();
 
-    void setServerUrl( const QUrl& serverUrl ){ m_serverUrl = serverUrl; }
     void setTargetDir( const QString& targetDirString ){ m_targetDirString = targetDirString; }
 
  public Q_SLOTS:
     void executeJob( HttpJob* job );
-/*
-    void downloadUrl( const QUrl& serverUrl, const QString& relativeUrlString );
-    void downloadFile( const QUrl& );
-*/
     void cancelJob( HttpJob* job );
 
  Q_SIGNALS:
     void jobDone( HttpJob*, bool );
-//    void downloadDone( QString, bool );
     void statusMessage( QString );
 
  private Q_SLOTS:
@@ -80,13 +75,8 @@ class HttpFetchFile : public QObject
 
  private:
     QHttp   *m_pHttp;
-    QFile   *m_pFile;
-    bool     m_httpRequestAborted;
-
     QMap <int, HttpJob*>  m_pFileIdMap;
-
-    QUrl  m_serverUrl;
-    QString  m_targetDirString;
+    QString m_targetDirString;
 };
 
 

@@ -104,6 +104,11 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     construct( parent );
 }
 
+MarbleWidget::~MarbleWidget()
+{
+    delete d->m_model;
+}
+
 void MarbleWidget::construct(QWidget *parent)
 {
     setMinimumSize( 200, 300 );

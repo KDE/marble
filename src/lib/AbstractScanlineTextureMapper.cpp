@@ -75,7 +75,8 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
 
 AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 {
-    delete m_tileLoader;
+      m_tileLoader->disconnect();
+      delete m_tileLoader;
 }
 
 

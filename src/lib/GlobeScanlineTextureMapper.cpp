@@ -52,7 +52,8 @@ GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QOb
 
 GlobeScanlineTextureMapper::~GlobeScanlineTextureMapper()
 {
-    delete m_tileLoader;
+//    m_tileLoader->disconnect();
+//     delete m_tileLoader;
 }
 
 void GlobeScanlineTextureMapper::resizeMap(int width, int height)
