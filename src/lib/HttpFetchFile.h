@@ -62,16 +62,15 @@ class HttpFetchFile : public QObject
 
  public Q_SLOTS:
     void executeJob( HttpJob* job );
-    void cancelJob( HttpJob* job );
+//    void cancelJob( HttpJob* job );
 
  Q_SIGNALS:
-    void jobDone( HttpJob*, bool );
+    void jobDone( HttpJob*, int );
     void statusMessage( QString );
 
  private Q_SLOTS:
     // process feedback from m_Http
     void httpRequestFinished(int requestId, bool error);
-//    void checkResponseHeader(const QHttpResponseHeader &responseHeader);
 
  private:
     QHttp   *m_pHttp;

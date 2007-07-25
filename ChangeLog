@@ -1,3 +1,9 @@
+2007-07-25  Torsten Rahn  <rahn@kde.org>
+
+	- Making Marble aware of 404's, so tiles only get saved if they get 
+	  downloaded successfully.
+	- Make sure to black list URL's which don't work so we don't create a DOS attack ;-)
+
 2007-07-25  Inge Wallin  <inge@lysator.liu.se>
 
 	Continue the separation of Model/View by moving more stuff to

@@ -32,8 +32,6 @@ HttpFetchFile::HttpFetchFile( QObject *parent )
 
     connect( m_pHttp, SIGNAL( requestFinished( int, bool ) ),
              this,    SLOT( httpRequestFinished( int, bool ) ) );
-//    connect(m_pHttp, SIGNAL(responseHeaderReceived( const QHttpResponseHeader & ) ),
-//            this,    SLOT( checkResponseHeader( const QHttpResponseHeader & ) ) );
 }
 
 HttpFetchFile::~HttpFetchFile()
@@ -61,7 +59,7 @@ void HttpFetchFile::executeJob( HttpJob* job )
 
     if ( QFile::exists( localFileUrlString ) ) {
         qDebug( "File already exists" );
-        emit jobDone( job, false );
+        emit jobDone( job, 0 );
 
         return;
     }
@@ -92,50 +90,54 @@ void HttpFetchFile::executeJob( HttpJob* job )
     emit statusMessage( tr("Downloading data ...") );
 }
 
-void HttpFetchFile::cancelJob( HttpJob* job )
-{
-    emit statusMessage( tr( "Download cancelled." ) );
-    job->status = Aborted;
-    m_pHttp->abort();
-}
-
-
 void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 {
 
     if ( !m_pFileIdMap.contains( requestId ) )
         return;
 
+    QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
+
     HttpJob* job = m_pFileIdMap[requestId];
 
     QFile* jobTargetFile = job->targetFile;
 
-    if ( job->status == Aborted ) {
-        qDebug() << "Job aborted! The The Temporary file will be REMOVED!";
+    if (responseHeader.statusCode() != 200) {
+        qDebug() << QString( " response: %1" ).arg( responseHeader.statusCode() );
         jobTargetFile->remove();
+        emit statusMessage( tr( "Download failed: %1." )
+                            .arg( responseHeader.reasonPhrase() ) );
+        emit jobDone( m_pFileIdMap[requestId], 1 );
+
+        m_pFileIdMap.remove( requestId );
+        return;
     }
 
-    if ( error ) {
+    if ( error != 0 ) {
         qDebug() << "An error occured! The Temporary file will be REMOVED!";
         jobTargetFile->remove();
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_pHttp->errorString() ) );
-    } else {
+        emit jobDone( m_pFileIdMap[requestId], error );
 
-        jobTargetFile->close();
+        m_pFileIdMap.remove( requestId );
+        return;
 
-        QString localFileUrlString = job->targetDirString + job->relativeUrlString;
-
-        QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
-        qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFilePath;
-
-        if ( !QDir( localFilePath ).exists() )
-            ( QDir::root() ).mkpath( localFilePath );
-
-        jobTargetFile->rename( localFileUrlString );
-
-        emit statusMessage( tr( "Download finished." ) );
     }
+
+    jobTargetFile->close();
+
+    QString localFileUrlString = job->targetDirString + job->relativeUrlString;
+
+    QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
+    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFilePath;
+
+    if ( !QDir( localFilePath ).exists() )
+        ( QDir::root() ).mkpath( localFilePath );
+
+    jobTargetFile->rename( localFileUrlString );
+
+    emit statusMessage( tr( "Download finished." ) );
 
     emit jobDone( m_pFileIdMap[requestId], error );
     m_pFileIdMap.remove( requestId );
@@ -145,18 +147,4 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 
 }
 
-/*
-void HttpFetchFile::checkResponseHeader(const QHttpResponseHeader &responseHeader)
-{
-    if (responseHeader.statusCode() != 200) {
-        qDebug() << QString( " response: %1" ).arg( responseHeader.statusCode() );
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( responseHeader.reasonPhrase() ) );
-        m_httpRequestAborted = true;
-        m_pHttp->clearPendingRequests();
-//        m_pHttp->abort();
-        return;
-    }
-}
-*/
 #include "HttpFetchFile.moc"

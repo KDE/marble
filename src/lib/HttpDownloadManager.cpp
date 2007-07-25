@@ -25,12 +25,13 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl )
 
     m_jobQueue.clear();
     m_activatedJobList.clear();
+    m_jobBlackList.clear();
 
     m_fetchFile = new HttpFetchFile(this);
 
     setTargetDir( KAtlasDirs::localDir() + '/' );
 
-    connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, bool ) ), this, SLOT( reportResult( HttpJob*, bool ) ) );
+    connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ), this, SLOT( reportResult( HttpJob*, int ) ) );
     connect( m_fetchFile, SIGNAL( statusMessage( QString ) ), this, SIGNAL( statusMessage( QString ) ) );
 }
 
@@ -59,13 +60,55 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, int id )
     // job->TargetDir = TargetDir;
     // job->priority  = priority;
 
-    if ( !m_jobQueue.contains( job ) && !m_activatedJobList.contains(job) ) {
+    if ( acceptJob( job ) ) {
+//    if ( !m_jobQueue.contains( job ) && !m_activatedJobList.contains(job) ) {
         m_jobQueue.enqueue( job );
         job->status = Pending;
         activateJobs();
     }
+    else
+    {
+        qDebug() << "The download was not activated.";
+    }
 }
 
+bool HttpDownloadManager::acceptJob( HttpJob  *job )
+{
+    QList<HttpJob*>::iterator i;
+
+    // We update the initiatorId as the previous initiator 
+    // likely doesn't exist anymore
+
+    for (i = m_jobQueue.begin(); i != m_jobQueue.end(); ++i)
+    {
+        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        {
+            qDebug() << "Download rejected: It's in the queue already.";
+            (*i)->initiatorId = job->initiatorId;
+            return false;
+        }
+    }
+    for (i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i)
+    {
+        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        {
+            qDebug() << "Download rejected: It's being downloaded already.";
+            (*i)->initiatorId = job->initiatorId;
+            return false;
+        }
+    }
+    for (i = m_jobBlackList.begin(); i != m_jobBlackList.end(); ++i)
+    {
+        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        {
+            qDebug() << "Download rejected: Blacklisted.";
+            (*i)->initiatorId = job->initiatorId;
+            return false;
+        }
+    }
+
+    return true;
+}
 
 void HttpDownloadManager::removeJob(HttpJob* job)
 {
@@ -97,16 +140,29 @@ void HttpDownloadManager::activateJobs()
     }
 }
 
-void HttpDownloadManager::reportResult( HttpJob* job, bool err )
+void HttpDownloadManager::reportResult( HttpJob* job, int err )
 {
-    // FIXME: Actually use err?
-    Q_UNUSED( err );
 
-    emit downloadComplete( job->relativeUrlString, job->initiatorId );
+    if ( err != 0 )
+    {
+        int pos = m_activatedJobList.indexOf( job );
 
-    removeJob( job );
+        if ( pos > 0 )
+        {
+            m_activatedJobList.removeAt( pos );
+        }
+        m_jobBlackList.push_back( job );
+        qDebug() << QString( "Download Blacklisted. Number of blacklist items: %1" ).arg( m_jobBlackList.size() );
+    }
+    else 
+    {
+        emit downloadComplete( job->relativeUrlString, job->initiatorId );
 
-    qDebug() << "Download Complete!";
+        removeJob( job );
+
+        qDebug() << "Download Complete!";
+    }
+
 }
 
 #include "HttpDownloadManager.moc"

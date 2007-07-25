@@ -74,7 +74,7 @@ public:
 
     void removeJob(HttpJob*);
 
-    void reportResult( HttpJob*, bool );
+    void reportResult( HttpJob*, int );
 
  Q_SIGNALS:
     void downloadComplete( QString, int id );
@@ -85,10 +85,13 @@ private Q_SLOTS:
     void activateJobs();
 
 private:
+    // Check whether the job gets processed already or whether it got blacklisted
+    bool              acceptJob( HttpJob  *job );
     bool              m_downloadEnabled;
 
     QQueue<HttpJob*>  m_jobQueue;
     QList<HttpJob*>   m_activatedJobList;
+    QList<HttpJob*>   m_jobBlackList;
 
     HttpFetchFile    *m_fetchFile;
 
