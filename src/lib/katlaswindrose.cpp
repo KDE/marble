@@ -78,7 +78,7 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
     if ( polarity == 1 ) 
         dirstr = tr( "S" );
     if ( polarity == 0 )
-        dirstr = tr( "" );
+        dirstr = "";
 
     m_fontwidth = QFontMetrics( m_font ).boundingRect( dirstr ).width();
 

@@ -156,14 +156,12 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter,
     Q_UNUSED( imgry );
 
     // if ( totalDistance == m_totalDistance)
-    QString  distanceValueString;
+    QString  distanceString;
 
     if ( totalDistance >= 1000.0 )
-        distanceValueString = QString("%1 km").arg(totalDistance/1000.0);
+        distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
     else	
-        distanceValueString = QString("%1 m").arg(totalDistance);
-
-    QString  distanceString = QString( "Total Distance: %1" ).arg( distanceValueString );
+        distanceString = tr("Total Distance: %1 m").arg( totalDistance );
 
     painter->setPen( QColor( Qt::black ) );
     painter->setBrush( QColor( 192, 192, 192, 192 ) );

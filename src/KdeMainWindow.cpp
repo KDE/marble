@@ -95,7 +95,7 @@ void MainWindow::createStatusBar()
 
 void MainWindow::showZoom(int zoom)
 {
-    m_zoomLabel->setText( QString( "Zoom: %1" ).arg( zoom, 4 ) );
+  m_zoomLabel->setText( i18n( "Zoom: %1", QString("%1").arg ( zoom, 4 ) ) );
 }
 
 

@@ -56,32 +56,32 @@ void PlaceMarkInfoDialog::showContent()
     QString  rolestring;
     switch ( m_mark->role().toLatin1() ) {
     case 'C':
-        rolestring = "Capital";
+        rolestring = tr("Capital");
         break;
     case 'B':
-        rolestring = "Capital";
+        rolestring = tr("Capital");
         break;
     case 'R':
-        rolestring = "Regional Capital";
+        rolestring = tr("Regional Capital");
         break;
     case 'P':
-        rolestring = "Location";
+        rolestring = tr("Location");
         break;
     case 'M':
-        rolestring = "Location";
+        rolestring = tr("Location");
         break;
     case 'H':
         if ( m_mark->population() > 0 )
-            rolestring = "Mountain";
+            rolestring = tr("Mountain");
         else
-            rolestring = "Elevation extreme";
+            rolestring = tr("Elevation extreme");
         break;
     case 'V':
-        rolestring = "Volcano";
+        rolestring = tr("Volcano");
         break;
     default:
     case 'N':
-        rolestring = "City";
+        rolestring = tr("City");
         break;
     }
 
@@ -101,7 +101,7 @@ void PlaceMarkInfoDialog::showContent()
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
 
-        elevation_val_lbl->setText( QString("%1 m").arg( QLocale::system().toString( m_mark->population() / 1000 ) ) );
+        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( m_mark->population() / 1000 ) ) );
     }
     else if (m_mark->role() == 'P' || m_mark->role() == 'M') {
         population_val_lbl->setVisible( false );
@@ -110,8 +110,8 @@ void PlaceMarkInfoDialog::showContent()
         elevation_lbl->setVisible( false );
     }
     else{
-        population_val_lbl->setText( QString("%1 inh.").arg(QLocale::system().toString( m_mark->population() ) ) );
-        elevation_val_lbl->setText( "-" );
+        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( m_mark->population() ) ) );
+        elevation_val_lbl->setText( tr("-") );
     }
 
     emit source( QString("wiki/%1").arg( m_mark->name() ) );

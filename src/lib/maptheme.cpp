@@ -273,12 +273,12 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
 
         mapthememodel->insertRows(row, 1, QModelIndex());
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                maptheme->name(), Qt::DisplayRole );
+                                tr( maptheme->name().toUtf8() ), Qt::DisplayRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
-                                maptheme->description(), Qt::ToolTipRole);
+                                tr( maptheme->description().toUtf8() ), Qt::ToolTipRole);
         mapthememodel->setData( mapthememodel->index( row, 2, QModelIndex() ),
                                 currentmaptheme );
     }

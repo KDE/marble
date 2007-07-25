@@ -62,6 +62,7 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
  protected:
     QVariant loadResource ( int type, const QUrl & name );
     void sendSignals( const QString &name, bool checked );
+    void readHtml( const QUrl & name );
 
  private:
     LegendBrowserPrivate  * const d; 

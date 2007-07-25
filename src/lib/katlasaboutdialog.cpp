@@ -37,7 +37,7 @@ KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
     setupUi( this );
 
     m_pMarbleLogoLabel->setPixmap( QPixmap( KAtlasDirs::path("svg/marble-logo-72dpi.png") ) );
-    m_pMarbleAboutBrowser->setHtml( "<br>(c)2007, The Marble Project<br><br><a href=http://edu.kde.org/marble>http://edu.kde.org/marble</a>");
+    m_pMarbleAboutBrowser->setHtml( tr("<br>(c)2007, The Marble Project<br><br><a href=http://edu.kde.org/marble>http://edu.kde.org/marble</a>") );
     QString filename = KAtlasDirs::path( "LICENSE.txt" );
     if( !filename.isEmpty() ) {
         QFile  f( filename );

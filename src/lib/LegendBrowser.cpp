@@ -16,6 +16,8 @@
 #include <QtCore/QDebug>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
+#include <QString>
+#include <QRegExp>
 
 #include "katlasdirs.h"
 
@@ -24,6 +26,7 @@ class LegendBrowserPrivate
 {
  public:
     QMap<QString, bool>  m_checkBoxMap;
+    QString m_html;
 };
 
 
@@ -34,7 +37,8 @@ LegendBrowser::LegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new LegendBrowserPrivate )
 {
-    setSource( KAtlasDirs::path( "legend.html" ) );
+    readHtml( KAtlasDirs::path( "legend.html" ) );
+    setHtml( d->m_html );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );
@@ -42,6 +46,36 @@ LegendBrowser::LegendBrowser( QWidget *parent )
     setTextInteractionFlags( Qt::LinksAccessibleByMouse | Qt::LinksAccessibleByKeyboard );
 
     connect ( this, SIGNAL( anchorClicked( QUrl ) ), this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
+}
+
+void LegendBrowser::readHtml( const QUrl & name )
+{
+    QString html;
+
+    QFile data( name.toLocalFile() );
+    if ( data.open( QFile::ReadOnly ) )
+    {
+        QTextStream in( &data );
+        html = in.readAll();
+        data.close();
+    }
+
+    QStringList paths = searchPaths();
+    paths.append( QFileInfo(data).absolutePath() );
+    setSearchPaths( paths );
+
+    // must match string extraction in Messages.sh
+    QString s = html.remove( 0, html.indexOf( "<body>" ) );
+    QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>" );
+    rx.setMinimal( true );
+    s.replace( rx, "\n" );
+    s.replace( QRegExp( "\\s*\n\\s*" ), "\n" );
+    QStringList words = s.split( "\n", QString::SkipEmptyParts );
+
+    for (QStringList::const_iterator i = words.constBegin(); i != words.constEnd(); ++i)
+        html.replace( *i, tr( (*i).toUtf8() ) );
+
+    d->m_html = html;
 }
 
 QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
@@ -83,7 +117,7 @@ void LegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     }
     setUpdatesEnabled( false );
     int scrollPosition = verticalScrollBar()->sliderPosition();
-    setSource( KAtlasDirs::path( "legend.html" ) );
+    setHtml( d->m_html );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );

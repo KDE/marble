@@ -7,7 +7,7 @@
 		<prefix>bluemarble</prefix>
 		<icon>bluemarble-preview.png</icon>
 
-		<description>Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA’s Earth Observatory </description>
+		<description>Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory </description>
 		
 		<layer type="bitmap" name="bluemarble"/>
 

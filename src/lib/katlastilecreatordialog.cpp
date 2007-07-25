@@ -34,7 +34,7 @@ void KAtlasTileCreatorDialog::setProgress( int progress )
 void KAtlasTileCreatorDialog::setSummary( const QString& name, 
                                           const QString& description )
 { 
-    QString  summary = "<B>" + name + "</B><BR>" + description; 
+    QString summary = "<B>" + tr( name.toUtf8() ) + "</B><BR>" + tr( description.toUtf8() );
     descriptionLabel->setText( summary );
 }
 
