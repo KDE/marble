@@ -118,6 +118,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     if ( !m_tileHash.contains( tileId ) ) {
         m_tile = new TextureTile( tileId );
         m_tileHash[tileId] = m_tile;
+
         connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
                  m_downloadManager, SLOT( addJob( const QString&, int ) ) );
         connect( m_tile,            SIGNAL( tileUpdateDone() ), 
@@ -246,12 +247,17 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 void TileLoader::reloadTile( QString relativeUrlString, int id )
 {
     qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
+
     if ( m_tileHash.contains(id) )
     {
         int level =  id / 100000000;
         int y = ( id - level * 100000000 ) / 10000;
         int x = id - ( level * 100000000 + y * 10000 );
         (m_tileHash[id]) -> slotReLoadTile( x, y, level, m_theme );
+    }
+    else
+    {
+         qDebug() << "No such ID";
     }
 }
 

@@ -42,24 +42,22 @@ HttpFetchFile::~HttpFetchFile()
     QFile* jobTargetFile;
     QMap<int, HttpJob*>::const_iterator i = m_pFileIdMap.constBegin();
     while (i != m_pFileIdMap.constEnd()) {
-        qDebug() << "Deleting";
+        qDebug() << "Deleting Item";
         HttpJob* job = i.value();
         jobTargetFile = job->targetFile;
         jobTargetFile->remove();
         ++i;
     }
-
     qDebug() << "Done.";
 }
 
 void HttpFetchFile::executeJob( HttpJob* job )
 {
-
     QString localFileUrlString = job->targetDirString + job->relativeUrlString;
 
     if ( QFile::exists( localFileUrlString ) ) {
         qDebug( "File already exists" );
-        emit jobDone( job, 0 );
+        emit jobDone( job, 1 );
 
         return;
     }
@@ -92,7 +90,6 @@ void HttpFetchFile::executeJob( HttpJob* job )
 
 void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 {
-
     if ( !m_pFileIdMap.contains( requestId ) )
         return;
 
@@ -139,7 +136,7 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 
     emit statusMessage( tr( "Download finished." ) );
 
-    emit jobDone( m_pFileIdMap[requestId], error );
+    emit jobDone( m_pFileIdMap[requestId], 0 );
     m_pFileIdMap.remove( requestId );
 	
     delete jobTargetFile;

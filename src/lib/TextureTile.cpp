@@ -83,7 +83,7 @@ void TextureTile::loadTile( int x, int y, int level,
 			    const QString& theme, bool requestTileUpdate )
 {
 //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-//    m_used = true;
+    m_used = true; // Needed to avoid frequent deletion of tiles
 
     QString  absfilename;
 
@@ -113,10 +113,12 @@ void TextureTile::loadTile( int x, int y, int level,
 
 	    QImage temptile( absfilename );
 
-	    if ( !temptile.isNull() ) {
+	    if ( !temptile.isNull() ) 
+        {
 //            qDebug() << "Image has been successfully loaded.";
 
-	       	if ( level != i ) { 
+	       	if ( level != i )
+            { 
 //            qDebug() << "About to start cropping an existing image.";
 		    QSize tilesize = temptile.size();
 		    double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
@@ -136,11 +138,11 @@ void TextureTile::loadTile( int x, int y, int level,
 		    temptile = temptile.copy( QRect( topleft, bottomright ) );
 		    temptile = temptile.scaled( tilesize ); // TODO: use correct size
 //            qDebug() << "Finished scaling up the Temporary Tile.";
-		}
+		    }
 
-        m_rawtile = temptile;
+            m_rawtile = temptile;
 
-		break;
+		    break;
 	    }
 	}
 	else {
@@ -148,7 +150,7 @@ void TextureTile::loadTile( int x, int y, int level,
 	    emit downloadTile( relfilename, m_id );
 	}
     }
-	
+
     if ( m_rawtile.isNull() ){
 	qDebug() << "An essential tile is missing. Please rerun the application.";
 	exit(-1);
@@ -170,7 +172,7 @@ void TextureTile::loadTile( int x, int y, int level,
 
     if ( requestTileUpdate )
     {
-        qDebug() << "TileUpdate available";
+//        qDebug() << "TileUpdate available";
     	emit tileUpdateDone();
     }
 }

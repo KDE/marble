@@ -142,7 +142,6 @@ void HttpDownloadManager::activateJobs()
 
 void HttpDownloadManager::reportResult( HttpJob* job, int err )
 {
-
     if ( err != 0 )
     {
         int pos = m_activatedJobList.indexOf( job );
@@ -152,12 +151,12 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
             m_activatedJobList.removeAt( pos );
         }
         m_jobBlackList.push_back( job );
-        qDebug() << QString( "Download Blacklisted. Number of blacklist items: %1" ).arg( m_jobBlackList.size() );
+
+        qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->relativeUrlString ).arg( m_jobBlackList.size() );
     }
     else 
     {
         emit downloadComplete( job->relativeUrlString, job->initiatorId );
-
         removeJob( job );
 
         qDebug() << "Download Complete!";
