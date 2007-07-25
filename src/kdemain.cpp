@@ -29,7 +29,7 @@
 int main (int argc, char *argv[])
 {
     KAboutData aboutData( "marble", 0, 
-        ki18n("Marble Desktop Globe"), "0.3.5", ki18n("A World Atlas."),
+        ki18n("Marble Desktop Globe"), "0.3.8", ki18n("A World Atlas."),
         KAboutData::License_LGPL, ki18n("(c) 2007") );
     aboutData.addAuthor(ki18n("Torsten Rahn"), ki18n("Original author and maintainer"), "rahn@kde.org");
     aboutData.addAuthor(ki18n("Inge Wallin"), ki18n("co-maintainer"), "inge@lysator.liu.se");
