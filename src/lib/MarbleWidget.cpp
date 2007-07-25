@@ -520,7 +520,22 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     delete d->m_viewParams.m_canvasImage;
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
-    d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+
+    // Clear canvas if the globe is visible as a whole or if the globe
+    // does shrink.
+    int  imgrx = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imgry = d->m_viewParams.m_canvasImage->height() / 2;
+
+    if ( radius() < imgrx * imgrx + imgry * imgry )
+    {
+        setAttribute(Qt::WA_NoSystemBackground, false);
+        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+    }
+    else
+    {
+        setAttribute(Qt::WA_NoSystemBackground, true);
+    }
+
     drawAtmosphere();
 
     delete d->m_viewParams.m_coastImage;
