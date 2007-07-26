@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
     KCmdLineOptions  options;
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
-    options.add( "enableCurrentLocation", ki18n("foo bar"));
+    options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
