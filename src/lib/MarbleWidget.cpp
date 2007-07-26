@@ -493,12 +493,28 @@ void MarbleWidget::setHome(const GeoPoint& _homePoint, int zoom)
 
 void MarbleWidget::moveLeft()
 {
-    rotateBy( 0, moveStep() );
+    int polarity = 0;
+
+    if ( northPoleY() != 0 ) 
+        polarity = northPoleY() / abs(northPoleY());
+
+    if ( polarity < 0 )
+        rotateBy( 0, +moveStep() );
+    else
+        rotateBy( 0, -moveStep() );
 }
 
 void MarbleWidget::moveRight()
 {
-    rotateBy( 0, -moveStep() );
+    int polarity = 0;
+
+    if ( northPoleY() != 0 ) 
+        polarity = northPoleY() / abs(northPoleY());
+
+    if ( polarity < 0 )
+        rotateBy( 0, -moveStep() );
+    else
+        rotateBy( 0, +moveStep() );
 }
 
 
