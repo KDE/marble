@@ -99,7 +99,7 @@ void TrackSegment::drawArrow( ClipPainter *painter,
             << arrowBase - ((unitVector2) *4);
     //save current brush
     QBrush temp = painter->brush();
-    painter->setBrush( QBrush( Qt::red ) );
+    painter->setBrush( QBrush( QColor( 232, 87, 82 ) ) );
     
     painter->drawPolygon( arrow );
     
