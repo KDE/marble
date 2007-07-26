@@ -60,6 +60,11 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 		
     Q_UNUSED( o );
 
+    int polarity = 0;
+
+    if ( m_widget->northPoleY() != 0 ) 
+        polarity = m_widget->northPoleY() / abs(m_widget->northPoleY());
+
     //	if ( o == marbleWidget ){
     if ( e->type() == QEvent::KeyPress ) {
         QKeyEvent  *k = (QKeyEvent *)e;
@@ -68,13 +73,19 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         diry = 0;
         switch ( k->key() ) {
         case 0x01000012: 
-            dirx = -1;
+            if ( polarity < 0 )
+                dirx = -1;
+            else
+                dirx = 1;
             break;
         case 0x01000013: 
             diry = -1;
             break;
         case 0x01000014: 
-            dirx = 1;
+            if ( polarity < 0 )
+                dirx = 1;
+            else
+                dirx = -1;
             break;
         case 0x01000015: 
             diry = 1;
@@ -237,6 +248,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             m_leftpressed = false;
 
             dirx = (int)( 3 * event->x() / m_widget->width() ) - 1;
+
             if ( dirx > 1 ) 
                 dirx = 1;
             if ( dirx < -1 )
@@ -263,8 +275,13 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
-                m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
-                                    -m_widget->moveStep() * (double)(dirx) );
+                if ( polarity < 0 )
+                    m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
+                                        -m_widget->moveStep() * (double)(+dirx) );
+                else
+                    m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
+                                        -m_widget->moveStep() * (double)(-dirx) );
+
                 m_widget->repaint();
 
             }				
