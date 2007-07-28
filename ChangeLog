@@ -1,3 +1,13 @@
+2007-07-28  Torsten Rahn  <rahn@kde.org>
+
+	- Added a TileCache. This makes moving back and forth a 
+	  smoother experience.
+	- Start to measure in --timedemo only as soon as all needed 
+	  tiles got cached already.
+	- TODO: Preload tiles which will likely need to get loaded.
+	  This would make Marble feel snappier as the preloaded tiles
+	  could be loaded in the background. 
+
 2007-07-25  Andrew Manson   <g.real.ate@gmail.com>
 
     Added a Test to Marble test that returns a set of averages at 

@@ -49,7 +49,7 @@ TileLoader::TileLoader( const QString& theme )
         this, SLOT( reloadTile( QString, int ) ) );
 
     m_tileCache.clear();
-    m_tileCache.setCacheLimit( 20000 );
+    m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
 }
 
 TileLoader::~TileLoader()
@@ -131,7 +131,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
         }
         else
         {
-            qDebug() << "load Tile from Disk: " << tileId;
+//            qDebug() << "load Tile from Disk: " << tileId;
             m_tile = new TextureTile( tileId );
             m_tileHash[tileId] = m_tile;
 

@@ -58,7 +58,8 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 {
     AbstractScanlineTextureMapper::resizeMap( width, height );
 
-    // Find the optimal m_n for the current image canvas width
+    // Find the optimal interpolation interval m_n for the 
+    // current image canvas width
     m_nBest = 2;
 
     int  nEvalMin = ( m_imageWidth - 1 );
@@ -304,10 +305,6 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lng, const doubl
                     nextTile();
                     itLng = (int)( ( m_prevLng + m_halfNormLng ) * 128.0 );
                     itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
-/*                    sumLng = itLng + itStepLng * j;
-                    sumLat = itLat + itStepLat * j;
-                    m_posX = sumLng >> 7;
-                    m_posY = sumLat >> 7;*/
                     m_posX = ( itLng + itStepLng * j ) >> 7;
                     m_posY = ( itLat + itStepLat * j ) >> 7;
                 }
