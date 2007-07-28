@@ -4,6 +4,7 @@ Encoding=UTF-8
 Exec=marble
 Name=Marble
 GenericName=Desktop Globe
+GenericName[bg]=Планетариум за работния плот
 GenericName[el]=Υδρόγειος επιφάνειας εργασίας
 GenericName[es]=Planetario para el escritorio
 GenericName[fa]=کره رومیزی
