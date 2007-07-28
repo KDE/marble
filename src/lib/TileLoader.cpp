@@ -47,6 +47,9 @@ TileLoader::TileLoader( const QString& theme )
     m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/") );
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
         this, SLOT( reloadTile( QString, int ) ) );
+
+    m_tileCache.clear();
+    m_tileCache.setCacheLimit( 20000 );
 }
 
 TileLoader::~TileLoader()
@@ -60,6 +63,7 @@ void TileLoader::setMapTheme( const QString& theme )
 {
     // Initialize map theme.
     flush();
+    m_tileCache.clear();
 
     m_theme = theme;
 
@@ -91,9 +95,9 @@ void TileLoader::cleanupTilehash()
     while (it.hasNext()) {
         it.next();
         if ( it.value()->used() == false ){
-//            qDebug("Removing " + QString::number(it.key()).toLatin1());
-            delete it.value();
-            m_tileHash.remove(it.key());	
+
+              m_tileCache.insert( it.value()->id(), it.value() );
+              m_tileHash.remove( it.key() );    
         }
     }
 }
@@ -101,9 +105,14 @@ void TileLoader::cleanupTilehash()
 void TileLoader::flush()
 {
     // Remove all tiles from m_tileHash
-    QHash <int, TextureTile*>::const_iterator  it;
-    for( it = m_tileHash.begin(); it != m_tileHash.constEnd(); ++it ) 
-        delete (*it);
+    QHashIterator<int, TextureTile*> it(m_tileHash);
+    while (it.hasNext()) {
+        it.next();
+
+        m_tileCache.insert( it.key(), it.value() );
+        m_tileHash.remove( it.key() );
+    }
+
     m_tileHash.clear();
 }
 
@@ -113,17 +122,25 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     // Choosing the correct tile via Lng/Lat info 
 
     int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
-
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
     if ( !m_tileHash.contains( tileId ) ) {
-        m_tile = new TextureTile( tileId );
-        m_tileHash[tileId] = m_tile;
+        if ( m_tileCache.contains( tileId ) )
+        {
+            m_tile = m_tileCache.take( tileId );
+            m_tileHash[tileId] = m_tile;
+        }
+        else
+        {
+            qDebug() << "load Tile from Disk: " << tileId;
+            m_tile = new TextureTile( tileId );
+            m_tileHash[tileId] = m_tile;
 
-        connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
-                 m_downloadManager, SLOT( addJob( const QString&, int ) ) );
-        connect( m_tile,            SIGNAL( tileUpdateDone() ), 
+            connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
+                     m_downloadManager, SLOT( addJob( const QString&, int ) ) );
+            connect( m_tile,            SIGNAL( tileUpdateDone() ), 
                  this,              SIGNAL( tileUpdateAvailable() ) );
-        m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
+            m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
+        }
     } 
 
     // ...otherwise pick the correct one from the hash
@@ -253,7 +270,7 @@ void TileLoader::reloadTile( QString relativeUrlString, int id )
         int level =  id / 100000000;
         int y = ( id - level * 100000000 ) / 10000;
         int x = id - ( level * 100000000 + y * 10000 );
-        (m_tileHash[id]) -> slotReLoadTile( x, y, level, m_theme );
+        (m_tileHash[id]) -> reloadTile( x, y, level, m_theme );
     }
     else
     {

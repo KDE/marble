@@ -29,7 +29,6 @@ void MarbleTest::timeDemo()
     m_marbleWidget->zoomView( 1500 );
 //    m_marbleWidget->resize( 800, 600 );
 
-    qDebug() << "Starting Performance Test";
     QTime t;
 /*
     m_marbleWidget->setShowGrid( false );
@@ -39,6 +38,17 @@ void MarbleTest::timeDemo()
     m_marbleWidget->setShowRivers( false );
     m_marbleWidget->setShowLakes( false );
 */
+        for ( int k = 0; k < 10; ++k ) {
+            m_marbleWidget->moveRight();
+            QCoreApplication::flush();
+        }
+        for ( int k = 0; k < 10; ++k ) {
+            m_marbleWidget->moveLeft();
+            QCoreApplication::flush();
+        }
+
+    qDebug() << "Starting Performance Test";
+
     t.start();
 
     for ( int j = 0; j < 10; ++j ) {

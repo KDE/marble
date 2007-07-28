@@ -28,6 +28,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include "TileCache.h"
+
 class TextureTile;
 class HttpDownloadManager;
 
@@ -88,6 +90,8 @@ class TileLoader : public QObject {
 
     int           m_tileWidth;
     int           m_tileHeight;
+
+    TileCache     m_tileCache;
 
  Q_SIGNALS:
     void tileUpdateAvailable();

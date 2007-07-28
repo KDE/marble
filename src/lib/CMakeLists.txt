@@ -18,7 +18,7 @@ endif (QTONLY)
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} -O2 )
+    add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
 
   include_directories(
@@ -26,7 +26,7 @@ if (QTONLY)
   )
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2 )
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2)
   endif(NOT WIN32)
 
   include_directories(
@@ -74,6 +74,7 @@ set(marblewidget_SRCS
            GlobeScanlineTextureMapper.cpp
            AbstractScanlineTextureMapper.cpp
            TextureTile.cpp
+           TileCache.cpp
            TileLoader.cpp
            tilescissor.cpp
            tinywebbrowser.cpp
@@ -219,6 +220,7 @@ install( FILES
            GlobeScanlineTextureMapper.h
            AbstractScanlineTextureMapper.h
            TextureTile.h
+           TileCache.h
            TileLoader.h
            tilescissor.h
            tinywebbrowser.h

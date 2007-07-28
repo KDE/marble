@@ -32,13 +32,13 @@ class TextureTile : public QObject {
 
     virtual ~TextureTile();
 
-    void loadTile( int x, int y, int level, 
-           const QString& theme, bool requestTileUpdate = true );
-
+    int  id() const           { return m_id; }
     int  depth() const        { return m_depth; }
 
     bool used() const         { return m_used; }
     void       setUsed( bool used ) { m_used = used; }
+
+    int numBytes() const          { return m_rawtile.numBytes(); }
 
     const QImage&     rawtile()            { return m_rawtile; }
  
@@ -50,7 +50,10 @@ class TextureTile : public QObject {
     void tileUpdateDone();
 
  public Q_SLOTS:
-    void slotReLoadTile( int x, int y, int level, const QString& theme );
+    void   loadTile( int x, int y, int level, 
+           const QString& theme, bool requestTileUpdate = true );
+    void reloadTile( int x, int y, int level, 
+           const QString& theme );
 
  protected:
     int      m_id;

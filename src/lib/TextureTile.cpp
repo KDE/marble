@@ -75,6 +75,7 @@ TextureTile::~TextureTile()
 	exit(-1);
     }
 
+//    qDebug() << "Tile deleted: " << m_id;
 //    delete m_rawtile;
 }
 
@@ -178,7 +179,7 @@ void TextureTile::loadTile( int x, int y, int level,
 }
 
 
-void TextureTile::slotReLoadTile( int x, int y, int level, const QString& theme )
+void TextureTile::reloadTile( int x, int y, int level, const QString& theme )
 {
 //    qDebug() << "slotLoadTile variables: |" << theme << "|" << level << "|" << x << "|" << y;
 
