@@ -30,6 +30,8 @@ VectorComposer::VectorComposer()
 
     m_islands = new PntMap();
     m_islands->load( KAtlasDirs::path( "mwdbii/PISLAND.PNT" ) );
+    m_lakeislands = new PntMap();
+    m_lakeislands->load( KAtlasDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
     m_lakes = new PntMap();
     m_lakes->load( KAtlasDirs::path( "mwdbii/PLAKE.PNT" ) );
     m_glaciers = new PntMap();
@@ -50,7 +52,8 @@ VectorComposer::VectorComposer()
     m_textureLandPen = QPen( Qt::NoPen );
 
     m_textureLandBrush = QBrush( QColor( 255, 0, 0 ) );
-    m_textureLakeBrush = QBrush( QColor( 0, 0, 0 ) );
+    m_textureLakeBrush = QBrush( QColor( 0, 255, 0 ) );
+    m_textureGlacierBrush = QBrush( QColor( 0, 0, 0 ) );
     m_textureBorderPen.setStyle( Qt::SolidLine );
     m_textureBorderPen.setColor( QColor( 0, 255, 0 ) );
 
@@ -91,12 +94,26 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
     m_vectorMap -> setBrush( m_textureLandBrush );
     m_vectorMap -> drawMap( origimg, false );
 
+    if ( m_showLakes == true ) {
+         // Lakes
+         m_vectorMap -> setzBoundingBoxLimit( 0.95 );
+         m_vectorMap -> setzPointLimit( 0.98 ); 
+
+         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
+         m_vectorMap -> setBrush( m_textureLakeBrush );
+         m_vectorMap -> drawMap( origimg, false );
+
+         m_vectorMap -> createFromPntMap( m_lakeislands, radius, rotAxis );
+         m_vectorMap -> setBrush( m_textureLandBrush );
+         m_vectorMap -> drawMap( origimg, false );
+    }
+
     if ( m_showIceLayer == true ) {
         // Glaciers
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
          m_vectorMap -> createFromPntMap( m_glaciers, radius, rotAxis );
-         m_vectorMap -> setBrush( m_textureLakeBrush );
+         m_vectorMap -> setBrush( m_textureGlacierBrush );
 
          m_vectorMap -> drawMap( origimg, false );
     }
@@ -128,6 +145,21 @@ void VectorComposer::paintBaseVectorMap(ClipPainter *painter, const int& radius,
     m_vectorMap -> setPen( m_landPen );
     m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, false );
+
+    if ( m_showLakes == true ) {
+         // Lakes
+         m_vectorMap -> setzBoundingBoxLimit( 0.95 );
+         m_vectorMap -> setzPointLimit( 0.98 ); 
+
+         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
+         m_vectorMap -> setPen( m_lakePen );
+         m_vectorMap -> setBrush( m_lakeBrush );
+         m_vectorMap -> paintMap( painter, false );
+
+         m_vectorMap -> createFromPntMap( m_lakeislands, radius, rotAxis );
+         m_vectorMap -> setBrush( m_landBrush );
+         m_vectorMap -> paintMap( painter, false );
+    }
 }
 
 void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius, 
@@ -163,17 +195,6 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
 
          m_vectorMap -> setPen( m_statePen );
          m_vectorMap -> setBrush( m_stateBrush );
-         m_vectorMap -> paintMap( painter, false );
-    }
-
-    if ( m_showLakes == true ) {
-         // Lakes
-         m_vectorMap -> setzBoundingBoxLimit( 0.95 );
-         m_vectorMap -> setzPointLimit( 0.98 ); 
-
-         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis );
-         m_vectorMap -> setPen( m_lakePen );
-         m_vectorMap -> setBrush( m_lakeBrush );
          m_vectorMap -> paintMap( painter, false );
     }
 

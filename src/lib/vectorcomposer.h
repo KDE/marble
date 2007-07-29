@@ -175,6 +175,7 @@ class VectorComposer
     PntMap     *m_coastLines;
 
     PntMap     *m_islands;
+    PntMap     *m_lakeislands;
     PntMap     *m_lakes;
     PntMap     *m_glaciers;
     PntMap     *m_rivers;
@@ -203,6 +204,7 @@ class VectorComposer
     QPen        m_textureLandPen;
     QBrush      m_textureLandBrush;
     QPen        m_textureBorderPen;
+    QBrush      m_textureGlacierBrush;
     QBrush      m_textureLakeBrush;
 
     bool        m_showIceLayer;

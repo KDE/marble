@@ -357,6 +357,7 @@ mwdbii/RIVER.PNT
 mwdbii/PCANPROV.PNT
 mwdbii/PCOAST.PNT
 mwdbii/PISLAND.PNT
+mwdbii/PLAKEISLAND.PNT
 mwdbii/PLAKE.PNT
 mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT

@@ -45,7 +45,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
 
     const uint  landoffscreen = qRgb(255,0,0);
     // const uint seaoffscreen = qRgb(0,0,0);
-    // const uint glacieroffscreen = qRgb(0,255,0);
+    const uint lakeoffscreen = qRgb(0,255,0);
     // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 0;
@@ -81,16 +81,14 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                     bump = 0;
 
                 if ( *coastdata == landoffscreen )
-                    *data = texturepalette[bump][grey + 0x100];	
+                    *data = texturepalette[bump][grey + 0x100]; 
                 else {
-
-                    // if (*coastdata == riveroffscreen) {
-                    // *data = rivercolor;
-                    // }
-                    // else {
-                    *data = texturepalette[bump][grey];
-                    // }
-                }	
+                    if (*coastdata == lakeoffscreen)
+                    *data = texturepalette[bump][0x055];
+                    else {
+                        *data = texturepalette[bump][grey];
+                    }
+                }
             }
         }
     }
@@ -148,12 +146,11 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
                 if ( *coastdata == landoffscreen )
                     *data = texturepalette[bump][grey + 0x100];	
                 else {
-                    // if (*coastdata == riveroffscreen) {
-                    // *data = rivercolor;
-                    // }
-                    // else {
-                    *data = texturepalette[bump][grey];
-                    // }
+                    if (*coastdata == lakeoffscreen)
+                    *data = texturepalette[bump][0x055];
+                    else {
+                        *data = texturepalette[bump][grey];
+                    }
                 }
             }
         }
@@ -202,14 +199,13 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
 
 
                 if ( *coastdata == landoffscreen )
-                    *data = texturepalette[bump][grey + 0x100];	
+                    *data = texturepalette[bump][grey + 0x100]; 
                 else {
-                    // if (*coastdata == riveroffscreen) {
-                    // *data = rivercolor;
-                    // }
-                    // else {
-                    *data = texturepalette[bump][grey];
-                    // }
+                    if (*coastdata == lakeoffscreen)
+                    *data = texturepalette[bump][0x055];
+                    else {
+                        *data = texturepalette[bump][grey];
+                    }
                 }
         }
     }

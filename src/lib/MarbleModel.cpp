@@ -148,7 +148,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
     if ( d->m_maptheme->bitmaplayer().enabled == true )
     {
-        qDebug() << "Enabled";
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
         if ( !TileLoader::baseTilesAvailable( "maps/earth/" + d->m_maptheme->tilePrefix() ) ) {

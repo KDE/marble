@@ -852,6 +852,7 @@ void MarbleWidget::setShowRivers( bool visible )
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->m_model->vectorComposer()->setShowLakes( visible );
+    setNeedsUpdate();
     repaint();
 }
 
