@@ -111,11 +111,12 @@ MarbleModel::MarbleModel( QWidget *parent )
 
 MarbleModel::~MarbleModel()
 {
+#ifndef KML_GSOC
     delete d->m_placeMarkContainer;
+#endif
     delete d->m_texmapper;
     delete d;
 }
-
 
 bool MarbleModel::showGps() const
 {

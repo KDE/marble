@@ -30,7 +30,7 @@ class KMLPlaceMark
     QString toString() const;
 
  private:
-    GeoPoint    m_coordinate;
+//    GeoPoint    m_coordinate; // PlaceMark class already has this field as protected
 };
 
 #endif // KMLPLACEMARK_H

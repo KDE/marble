@@ -52,7 +52,7 @@ class VisiblePlaceMark
 
     void clearLabelPixmap() {
         if ( m_labelPixmap.isNull() == false )
-            m_labelPixmap = QPixmap(); 
+            m_labelPixmap = QPixmap();
     }
 
     const QRect& labelRect() const              { return m_labelRect;    }
@@ -145,7 +145,7 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 
 #if 1
 
-void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
+void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
@@ -154,7 +154,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     //int  imgwidth  = 2 * imgrx;
     //int  imgheight = 2 * imgry;
     int  x = 0;
-    int  y = 0; 
+    int  y = 0;
 
     int  secnumber = imgheight / m_labelareaheight + 1;
 #if 0
@@ -168,7 +168,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     Quaternion  invplanetAxis = planetAxis.inverse();
     Quaternion  qpos;
 
-    painter->setPen(QColor(Qt::black));	
+    painter->setPen(QColor(Qt::black));
 
     QPainter    textpainter;
 
@@ -185,7 +185,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
     m_visiblePlacemarks.clear();
 
-    PlaceMark  *mark = 0; 
+    PlaceMark  *mark = 0;
     int         labelnum = 0;
 #ifdef FLAT_PROJ
     float const centerLat=planetAxis.pitch();
@@ -194,15 +194,17 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     PlaceMarkContainer::const_iterator  it;
     for ( it = placecontainer->constBegin();
           it != placecontainer->constEnd();
-          it++ ) 
+          it++ )
     {
         mark  = *it; // no cast
 
+#ifndef KML_GSOC
         // Skip the places that are too small.
         if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
 //             && mark->symbol() != 0
              && mark->selected() == 0 )
             continue;
+#endif
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
@@ -245,7 +247,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
              if ( ( x >= 0 && x < imgwidth || x+4*viewParams->m_radius < imgwidth || x-4*viewParams->m_radius >= 0 )  && y >= 0 && y < imgheight ) {
 #endif
                 // Choose Section
-                const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight ); 
+                const QVector<PlaceMark*>  currentsec = m_rowsection.at( y / m_labelareaheight );
 
                 // Specify font properties
                 if ( textpixmap.isNull() ) {
@@ -257,7 +259,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                     // B: Admin. center of country and region ("_B_oth")
                     // N: _N_one
 
-                    if ( role == 'N' ) { 
+                    if ( role == 'N' ) {
                         font = m_font_regular;
                     } else if ( role == 'R' ) {
                         font = m_font_regular_italics;
@@ -270,13 +272,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                     if ( mark->symbol() > 13 || mark->selected() != 0 )
                         font.setWeight( 75 );
 
-                    if ( role == 'P' ) 
+                    if ( role == 'P' )
                         font = m_font_regular;
-                    if ( role == 'M' ) 
+                    if ( role == 'M' )
                         font = m_font_regular;
-                    if ( role == 'H' ) 
+                    if ( role == 'H' )
                         font = m_font_mountain;
-                    if ( role == 'V' ) 
+                    if ( role == 'V' )
                         font = m_font_mountain;
 
                     fontwidth = ( QFontMetrics( font ).width( mark->name() )
@@ -298,9 +300,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 while ( xpos >= x - fontwidth - symbolwidth - 1
                         && overlap == true )
                 {
-                    ypos = y; 
-	
-                    while ( ypos >= y - m_fontheight && overlap == true) { 
+                    ypos = y;
+
+                    while ( ypos >= y - m_fontheight && overlap == true) {
 
                         overlap = false;
 
@@ -316,11 +318,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                 break;
                             }
                         }
-					
+
                         if ( overlap == false ) {
                             mark->setTextRect( textRect );
                         }
-                        ypos -= m_fontheight; 
+                        ypos -= m_fontheight;
                     }
 
                     xpos -= ( symbolwidth + fontwidth + 2 );
@@ -391,7 +393,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                     m_visiblePlacemarks.append(mark);
                     labelnum ++;
                     if ( labelnum >= maxlabels )
-                        break;				
+                        break;
                 }
             }
             else{
@@ -437,7 +439,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
 #else
 
-void PlaceMarkPainter::paintPlaceFolder(QPainter* painter, 
+void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth,
                                         int imgheight,
                                         int radius,
@@ -445,7 +447,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         Quaternion planetAxis )
 {
     int  x = 0;
-    int  y = 0; 
+    int  y = 0;
 
     int  secnumber = imgheight / m_labelareaheight + 1;
 #if 0
@@ -456,7 +458,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #endif
     // planetAxis.display();
 
-    painter->setPen(QColor(Qt::black));	
+    painter->setPen(QColor(Qt::black));
 
     QPainter    textpainter;
     QFont       font;
@@ -483,8 +485,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( 0 && isVisible( (*it)->placeMark(), radius, planetAxis, 
-			imgwidth, imgheight, 
+	if ( 0 && isVisible( (*it)->placeMark(), radius, planetAxis,
+			imgwidth, imgheight,
 			x, y ) )
 	    ++it;
 	else {
@@ -493,8 +495,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	}
     }
 
-    PlaceMark         *mark = 0; 
-    VisiblePlaceMark  *visibleMark = 0; 
+    PlaceMark         *mark = 0;
+    VisiblePlaceMark  *visibleMark = 0;
 #if 0
     int                numLabels = m_visiblePlacemarks.size();
 #else
@@ -511,7 +513,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     PlaceMarkContainer::const_iterator  it2;
     for ( it2 = placeMarkContainer->constBegin();
           it2 != placeMarkContainer->constEnd();
-          ++it2 ) 
+          ++it2 )
     {
         mark  = *it2; // no cast
 
@@ -563,7 +565,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 
         // Choose Section
 	//qDebug() << mark->name() << ": y=" << y << (found ? " (found) " : "");
-        const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight ); 
+        const QVector<VisiblePlaceMark*>  currentsec = rowsection.at( y / m_labelareaheight );
 
         // Specify font properties, especially get the textwidth.
         if ( textpixmap.isNull() ) {
@@ -575,7 +577,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             // B: Admin. center of country and region ("_B_oth")
             // N: _N_one
 
-            if ( role == 'N' ) { 
+            if ( role == 'N' ) {
                 font = m_font_regular;
             } else if ( role == 'R' ) {
                 font = m_font_regular_italics;
@@ -588,13 +590,13 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             if ( mark->symbol() > 13 || mark->selected() != 0 )
                 font.setWeight( 75 );
 
-            if ( role == 'P' ) 
+            if ( role == 'P' )
                 font = m_font_regular;
-            if ( role == 'M' ) 
+            if ( role == 'M' )
                 font = m_font_regular;
-            if ( role == 'H' ) 
+            if ( role == 'H' )
                 font = m_font_mountain;
-            if ( role == 'V' ) 
+            if ( role == 'V' )
                 font = m_font_mountain;
 
             textwidth = ( QFontMetrics( font ).width( mark->name() )
@@ -605,7 +607,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         }
 
         // Find out whether the area around the placemark is
-        // covered already. It also 
+        // covered already. It also
         bool  overlap = !roomForLabel( currentsec,
                                        visibleMark, mark,
                                        textwidth, x, y );
@@ -683,7 +685,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 	    }
 #if 0
             if ( numLabels >= maxlabels )
-                break;				
+                break;
 #endif
         }
 #if 0
@@ -696,7 +698,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 } else {
                     it++;
                 }
-               
+
             }
         }
 #endif
@@ -768,13 +770,13 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
 {
     bool  isRoom     = false;
     int   symbolwidth = mark->symbolSize().width();
-    
+
     int  xpos = symbolwidth / 2 + x + 1;
     int  ypos = 0;
     while ( xpos >= x - textwidth - symbolwidth - 1 && !isRoom ) {
-        ypos = y; 
-	
-        while ( ypos >= y - m_fontheight && !isRoom) { 
+        ypos = y;
+
+        while ( ypos >= y - m_fontheight && !isRoom) {
 
             isRoom = true;
 
@@ -796,7 +798,7 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
                 visibleMark->setLabelRect( textRect );
                 return true;
             }
-            ypos -= m_fontheight; 
+            ypos -= m_fontheight;
         }
 
         xpos -= ( symbolwidth + textwidth + 2 );
@@ -806,7 +808,7 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
 }
 
 
-inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter, 
+inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter,
                                             PlaceMark* mark, QFont font,
                                             double outlineWidth)
 {
