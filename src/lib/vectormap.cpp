@@ -299,8 +299,7 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 {
     m_radius = radius;
 
-    if ( antialiasing )
-        painter->setRenderHint( QPainter::Antialiasing );
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
@@ -322,8 +321,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
 
     ClipPainter  painter(origimg, clip);
     //	QPainter painter(origimg);
-    if ( antialiasing == true )
-        painter.setRenderHint( QPainter::Antialiasing );
+    painter.setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter.setPen(m_pen);
     painter.setBrush(m_brush);
@@ -351,8 +349,7 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
 
     // ClipPainter painter(origimg, clip);
     // QPainter painter(origimg);
-    if ( antialiasing )
-        painter->setRenderHint( QPainter::Antialiasing );
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
