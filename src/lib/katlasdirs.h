@@ -24,14 +24,15 @@ class KAtlasDirs
  public:
     static QString path( const QString& path ) 
     { 
-        QString  fullpath  = systemDir() + "/" + path;	// system path
+        QString  systempath  = systemDir() + "/" + path;	// system path
         QString  localpath = localDir() + "/" + path;	// local path
         QString  unixpath  = unixDir() + "/" + path;	// unix path
 	
+        QString fullpath = unixpath;
         if ( QFile::exists( localpath ) )
             fullpath = localpath;
-        else if ( QFile::exists( unixpath ) )
-            fullpath = unixpath;
+        else if ( QFile::exists( systempath ) )
+            fullpath = systempath;
 
         return QDir( fullpath ).canonicalPath(); 
     }

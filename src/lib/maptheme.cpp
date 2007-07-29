@@ -58,7 +58,9 @@ int MapTheme::open( const QString& path )
     m_oceanColor = QColor( 0, 0, 0, 255 );
     m_landColor = QColor( 0, 0, 0, 255 );
     m_countryBorderColor = QColor( 0, 0, 0, 255 );
+    m_stateBorderColor = QColor( 0, 0, 0, 255 );
     m_lakeColor = QColor( 0, 0, 0, 255 );
+    m_riverColor = QColor( 0, 0, 0, 255 );
 
     m_bitmaplayer.enabled = false;
     m_bitmaplayer.name = "";
