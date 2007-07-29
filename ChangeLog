@@ -1,3 +1,9 @@
+2007-07-29  Torsten Rahn  <rahn@kde.org>
+
+	- Added the "Plain Map". Extended configuration abilities
+	  for the different maps via the .dgml file.
+	  This will make Danny Allen slightly more happy.
+
 2007-07-28  Torsten Rahn  <rahn@kde.org>
 
 	- Added a TileCache. This makes moving back and forth a 

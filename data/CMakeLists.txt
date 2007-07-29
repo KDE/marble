@@ -344,6 +344,11 @@ maps/earth/bluemarble/bluemarble-preview.png
 DESTINATION ${data_dir}/maps/earth/bluemarble)
 
 install (FILES
+maps/earth/plain/plain.dgml
+maps/earth/plain/plain-preview.png
+DESTINATION ${data_dir}/maps/earth/plain)
+
+install (FILES
 mwdbii/PDIFFBORDER.PNT
 mwdbii/PUSA48.PNT
 mwdbii/PUSA48.DIFF.PNT

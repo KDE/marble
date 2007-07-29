@@ -69,6 +69,7 @@ MarbleModel::MarbleModel( QWidget *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_texmapper = 0;
+    d->m_veccomposer = 0;
 
     d->m_placemarkpainter   = 0;
     d->m_placeMarkContainer = 0;
@@ -93,7 +94,6 @@ MarbleModel::MarbleModel( QWidget *parent )
     }
     setMapTheme( selectedmap, parent );
 
-    d->m_veccomposer  = new VectorComposer();
     d->m_gridmap      = new GridMap();
     d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ),
                                               KAtlasDirs::path( "landcolors.leg" ) );
@@ -146,53 +146,66 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
     d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
                                            .arg( selectedMap ) ) );
 
-    // If the tiles aren't already there, put up a progress dialog
-    // while creating them.
-    if ( !TileLoader::baseTilesAvailable( "maps/earth/" + d->m_maptheme->tilePrefix() ) ) {
-        qDebug("Base tiles not available. Creating Tiles ... ");
+    if ( d->m_maptheme->bitmaplayer().enabled == true )
+    {
+        qDebug() << "Enabled";
+        // If the tiles aren't already there, put up a progress dialog
+        // while creating them.
+        if ( !TileLoader::baseTilesAvailable( "maps/earth/" + d->m_maptheme->tilePrefix() ) ) {
+            qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
-        KAtlasTileCreatorDialog tilecreatordlg( parent );
-        tilecreatordlg.setSummary( d->m_maptheme->name(),
+            KAtlasTileCreatorDialog tilecreatordlg( parent );
+            tilecreatordlg.setSummary( d->m_maptheme->name(),
                                    d->m_maptheme->description() );
 #endif
 
-        TileScissor tilecreator( d->m_maptheme->prefix(),
+            TileScissor tilecreator( d->m_maptheme->prefix(),
                                  d->m_maptheme->installMap(),
                                  d->m_maptheme->bitmaplayer().dem);
 
-        // This timer is necessary, because if we remove it, the GUI
-        // never gets shown before the work starts.
-        QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
+            // This timer is necessary, because if we remove it, the GUI
+            // never gets shown before the work starts.
+            QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
 #if 1
-        connect( &tilecreator,    SIGNAL( progress( int ) ),
-                 &tilecreatordlg, SLOT( setProgress( int ) ) );
+            connect( &tilecreator,    SIGNAL( progress( int ) ),
+                     &tilecreatordlg, SLOT( setProgress( int ) ) );
 
-        tilecreatordlg.exec();
+            tilecreatordlg.exec();
 #else
 
-        connect( &tilecreator, SIGNAL( progress( int ) ),
-                 this,         SIGNAL( creatingTilesProgress( int ) ) );
-        qDebug("Before emitting creatingTilesStart() ... ");
-        emit creatingTilesStart( d->m_maptheme->name(),
+            connect( &tilecreator, SIGNAL( progress( int ) ),
+                     this,         SIGNAL( creatingTilesProgress( int ) ) );
+            qDebug("Before emitting creatingTilesStart() ... ");
+            emit creatingTilesStart( d->m_maptheme->name(),
                                  d->m_maptheme->description() );
-        qDebug("After emitting creatingTilesStart() ... ");
+            qDebug("After emitting creatingTilesStart() ... ");
 #endif
-    }
+        }
 #ifndef FLAT_PROJ
-    if ( d->m_texmapper == 0 )
-        d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
+        if ( d->m_texmapper == 0 )
+            d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
                                             + d->m_maptheme->tilePrefix(), this );
 #else
-    if ( d->m_texmapper == 0 )
-        d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+        if ( d->m_texmapper == 0 )
+            d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
                                             + d->m_maptheme->tilePrefix() );
 #endif
-    else
-        d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
+        else
+            d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
 
-    connect( d->m_texmapper, SIGNAL( mapChanged() ),
-             this,           SLOT( notifyModelChanged() ) );
+        connect( d->m_texmapper, SIGNAL( mapChanged() ),
+            this,           SLOT( notifyModelChanged() ) );
+    }
+
+    if ( d->m_veccomposer == 0)
+        d->m_veccomposer  = new VectorComposer();
+    d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );
+    d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
+    d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
+    d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
+    d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
+    d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
 
     if ( d->m_placeMarkContainer == 0)
         d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
@@ -201,7 +214,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
-
     d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
     notifyModelChanged();
@@ -210,7 +222,11 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
 void MarbleModel::resize( int width, int height )
 {
-    d->m_texmapper->resizeMap( width, height );
+    if ( d->m_maptheme->bitmaplayer().enabled == true )
+    {
+        d->m_texmapper->resizeMap( width, height );
+    }
+
     d->m_veccomposer->resizeMap( width, height );
     d->m_gridmap->resizeMap( width, height );
 }
@@ -226,39 +242,50 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     if ( redrawBackground ) {
 
-        d->m_texmapper->mapTexture( viewParams->m_canvasImage,
-                                    viewParams->m_radius,
-                                    viewParams->m_planetAxis );
-
-        if ( !viewParams->m_showElevationModel
-             && d->m_maptheme->bitmaplayer().dem == "true" )
+        if ( d->m_maptheme->bitmaplayer().enabled == true )
         {
-            viewParams->m_coastImage->fill( Qt::transparent );
-
-            // Create VectorMap
-            d->m_veccomposer->drawTextureMap( viewParams->m_coastImage,
-                                              viewParams->m_radius,
-                                              viewParams->m_planetAxis );
-
-            // Recolorize the heightmap using the VectorMap
-            d->m_texcolorizer->colorize( viewParams->m_canvasImage,
-                                         viewParams->m_coastImage,
+            d->m_texmapper->mapTexture( viewParams->m_canvasImage,
                                          viewParams->m_radius,
                                          viewParams->m_planetAxis );
+
+            if ( !viewParams->m_showElevationModel
+                && d->m_maptheme->bitmaplayer().dem == "true" )
+            {
+                viewParams->m_coastImage->fill( Qt::transparent );
+
+                // Create VectorMap
+                d->m_veccomposer->drawTextureMap( viewParams->m_coastImage,
+                                                  viewParams->m_radius,
+                                                  viewParams->m_planetAxis );
+
+                // Recolorize the heightmap using the VectorMap
+                d->m_texcolorizer->colorize( viewParams->m_canvasImage,
+                                             viewParams->m_coastImage,
+                                             viewParams->m_radius,
+                                             viewParams->m_planetAxis );
+            }
         }
     }
-
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
 
-    painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+    if ( d->m_maptheme->bitmaplayer().enabled == true )
+    {
+        painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+    }
 
 //    qDebug( "Painted in %ims", t.elapsed() );
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled == true ) {
 
+        if ( d->m_maptheme->bitmaplayer().enabled == false )
+        {
+            d->m_veccomposer->paintBaseVectorMap( painter,
+                                              viewParams->m_radius,
+                                              viewParams->m_planetAxis );
+        }
         // Add further Vectors
         d->m_veccomposer->paintVectorMap( painter,
                                           viewParams->m_radius,

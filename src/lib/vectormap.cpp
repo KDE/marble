@@ -295,6 +295,25 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #endif
 }
 
+void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
+{
+    m_radius = radius;
+
+    if ( antialiasing )
+        painter->setRenderHint( QPainter::Antialiasing );
+
+    painter->setPen( m_pen );
+    painter->setBrush( m_brush );
+
+    if ( m_imgradius < m_radius * m_radius )
+    {
+        painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
+    }
+    else
+    {
+        painter->drawEllipse( m_imgrx - m_radius, m_imgry - m_radius, 2*m_radius, 2*m_radius );
+    }
+}
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
 {

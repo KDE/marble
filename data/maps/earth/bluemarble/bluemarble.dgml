@@ -14,7 +14,7 @@
 		<installmap>bluemarble.jpg</installmap>
 
 		<LabelStyle>
-			<color>ffffff</color>
+			<color>#ffffff</color>
 		</LabelStyle>
 
 	</MapStyle>

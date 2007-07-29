@@ -31,6 +31,7 @@ MapTheme::MapTheme(QObject *parent)
 
 int MapTheme::open( const QString& path )
 {
+    qDebug() << "Path: " << path;
     QDomDocument  doc( "DeskGlobeML" );
     QFile         file( path );
 
@@ -52,6 +53,20 @@ int MapTheme::open( const QString& path )
         return -3;
     }
 
+    m_labelColor = QColor( 0, 0, 0, 255 );
+
+    m_oceanColor = QColor( 0, 0, 0, 255 );
+    m_landColor = QColor( 0, 0, 0, 255 );
+    m_countryBorderColor = QColor( 0, 0, 0, 255 );
+    m_lakeColor = QColor( 0, 0, 0, 255 );
+
+    m_bitmaplayer.enabled = false;
+    m_bitmaplayer.name = "";
+    m_bitmaplayer.dem = "false";
+
+    m_vectorlayer.enabled = false;
+    m_vectorlayer.name = "";
+
     element = element.firstChildElement();
     while ( !element.isNull() ) {
 
@@ -63,7 +78,7 @@ int MapTheme::open( const QString& path )
 
                 if ( mapStyleSibling.tagName().toLower() == "name" ) {
                     m_name = mapStyleSibling.text();
-                    // qDebug() << m_name;
+                    qDebug() << "Parsed Name: " << m_name;
                 }
 
                 if ( mapStyleSibling.tagName().toLower() == "prefix" ) {
@@ -86,38 +101,92 @@ int MapTheme::open( const QString& path )
                     // qDebug() << m_installmap;
                 }
 
-                m_labelcolor = QColor( 0, 0, 0, 255 );
                 if ( mapStyleSibling.tagName().toLower() == "labelstyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
-                            m_labelcolor.setNamedColor( '#' + labelStyleSibling.text() );
-                            // qDebug() << "#" + labelStyleSibling.text();
+                            m_labelColor.setNamedColor( labelStyleSibling.text() );
                         }
                         labelStyleSibling = labelStyleSibling.nextSiblingElement();
                     }
                 }
 
-                m_labelcolor.setAlpha(255);
+                if ( mapStyleSibling.tagName().toLower() == "oceanstyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "color" ) {
+                            m_oceanColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
+                if ( mapStyleSibling.tagName().toLower() == "landstyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "color" ) {
+                            m_landColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
+                if ( mapStyleSibling.tagName().toLower() == "countrystyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "border-color" ) {
+                            m_countryBorderColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
+                if ( mapStyleSibling.tagName().toLower() == "statestyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "border-color" ) {
+                            m_stateBorderColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
+                if ( mapStyleSibling.tagName().toLower() == "lakestyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "color" ) {
+                            m_lakeColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
+                if ( mapStyleSibling.tagName().toLower() == "riverstyle" ) {
+                    QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
+                    while ( !labelStyleSibling.isNull() ) {
+                        if ( labelStyleSibling.tagName().toLower() == "color" ) {
+                            m_riverColor.setNamedColor( labelStyleSibling.text() );
+                        }
+                        labelStyleSibling = labelStyleSibling.nextSiblingElement();
+                    }
+                }
+
                 if ( mapStyleSibling.tagName().toLower() == "layer" ) {
 
-                    m_bitmaplayer.enabled = false;
-                    if ( mapStyleSibling.attribute( "type", "" ) == "bitmap" ) {
+                    if ( mapStyleSibling.attribute( "type", "" ) == "bitmap" )
+                    {
                         m_bitmaplayer.enabled = true;
                         m_bitmaplayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_bitmaplayer.type    = mapStyleSibling.attribute( "type", "" );
                         m_bitmaplayer.dem     = mapStyleSibling.attribute( "dem", "" );
-                        if ( m_bitmaplayer.dem.isEmpty() )
-                            m_bitmaplayer.dem = "false";
                     }
 
-                    m_vectorlayer.enabled = false;
-                    if ( mapStyleSibling.attribute( "type", "" ) == "vector" ) {
+                    if ( mapStyleSibling.attribute( "type", "" ) == "vector" )
+                    {
                         m_vectorlayer.enabled = true;
                         m_vectorlayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_vectorlayer.type    = mapStyleSibling.attribute( "type", "" );
                     }					
-                    // qDebug() << m_layer.name << " " << m_layer.type;
                 }
 
                 mapStyleSibling = mapStyleSibling.nextSiblingElement();
@@ -126,8 +195,6 @@ int MapTheme::open( const QString& path )
 
         element = element.nextSiblingElement();
     }
-
-    // detectMaxTileLevel();
 
     return 0;
 }

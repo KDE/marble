@@ -14,8 +14,24 @@
 
 		<layer type="vector" name="mwdbii"/>
 
+        <CountryStyle>
+            <border-color>#f29b68</border-color>
+        </CountryStyle>
+
+        <StateStyle>
+            <border-color>#f29b68</border-color>
+        </StateStyle>
+
+        <LakeStyle>
+            <color>#d0dff1</color>
+        </LakeStyle>
+
+        <RiverStyle>
+            <color>#637bff</color>
+        </RiverStyle>
+
 		<LabelStyle>
-			<color>000000</color>
+			<color>#000000</color>
 		</LabelStyle>
 
 	</MapStyle>

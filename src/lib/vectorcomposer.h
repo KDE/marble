@@ -42,8 +42,64 @@ class VectorComposer
     virtual ~VectorComposer(){}
 
     void  drawTextureMap(QPaintDevice*, const int&, Quaternion&);
+    void  paintBaseVectorMap(ClipPainter*, const int&, Quaternion&);
     void  paintVectorMap(ClipPainter*, const int&, Quaternion&);
     void  resizeMap( int width, int height );
+
+    /**
+     * @brief  Set color of the oceans
+     * @param  color  ocean color
+     */
+    void setOceanColor( const QColor& color ){ 
+        m_oceanBrush = QBrush( color );
+        m_oceanPen = QPen( Qt::NoPen );
+    }
+
+    /**
+     * @brief  Set color of the land
+     * @param  color  land color
+     */
+    void setLandColor( const QColor& color ){ 
+        m_landBrush = QBrush( color );
+        m_landPen = QPen( Qt::NoPen );
+    }
+
+    /**
+     * @brief  Set color of the lakes
+     * @param  color  lake color
+     */
+    void setLakeColor( const QColor& color ){ 
+        m_lakeBrush = QBrush( color );
+        m_lakePen = QPen( Qt::NoPen );
+    }
+
+    /**
+     * @brief  Set color of the rivers
+     * @param  color  river color
+     */
+    void setRiverColor( const QColor& color ){ 
+        m_riverBrush = QBrush( Qt::NoBrush );
+        m_riverPen = QPen( color );
+    }
+
+    /**
+     * @brief  Set color of the country borders
+     * @param  color  country border color
+     */
+    void setCountryBorderColor( const QColor& color ){ 
+        m_countryBrush = QBrush( Qt::NoBrush );
+        m_countryPen = QPen( color );
+    }
+
+    /**
+     * @brief  Set color of the state borders
+     * @param  color  state border color
+     */
+    void setStateBorderColor( const QColor& color ){ 
+        m_stateBrush = QBrush( Qt::NoBrush );
+        m_statePen = QPen( color );
+        m_statePen.setStyle( Qt::DotLine );
+    }
 
     /**
      * @brief  Return whether the ice layer is visible.
@@ -126,11 +182,28 @@ class VectorComposer
     PntMap     *m_countries;    // The country borders
     PntMap     *m_usaStates;    // The states of the USA
 
-    QPen        m_areapen;
-    QBrush      m_areabrush;
-    QPen        m_riverpen;
-    QPen        m_borderpen;
-    QBrush      m_lakebrush;
+    QPen        m_oceanPen;
+    QBrush      m_oceanBrush;
+
+    QPen        m_landPen;
+    QBrush      m_landBrush;
+
+    QPen        m_lakePen;
+    QBrush      m_lakeBrush;
+
+    QPen        m_countryPen;
+    QBrush      m_countryBrush;
+
+    QPen        m_statePen;
+    QBrush      m_stateBrush;
+
+    QPen        m_riverPen;
+    QBrush      m_riverBrush;
+
+    QPen        m_textureLandPen;
+    QBrush      m_textureLandBrush;
+    QPen        m_textureBorderPen;
+    QBrush      m_textureLakeBrush;
 
     bool        m_showIceLayer;
     bool        m_showBorders;

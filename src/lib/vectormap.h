@@ -34,6 +34,7 @@ class VectorMap : public ScreenPolygon::Vector
     ~VectorMap();
     void createFromPntMap(const PntMap*, const int&, Quaternion&);
 
+    void paintBase(ClipPainter *, int radius, bool );
     void paintMap(ClipPainter *, bool );
     void drawMap(QPaintDevice *, bool );
 
@@ -41,6 +42,7 @@ class VectorMap : public ScreenPolygon::Vector
 
     void setPen ( const QPen & p )     { m_pen   = p; }
     void setBrush ( const QBrush & b ) { m_brush = b; }
+
     void setzBoundingBoxLimit ( const double zBoundingBoxLimit ) {
         m_zBoundingBoxLimit = zBoundingBoxLimit; }
     void setzPointLimit ( const double zPointLimit ) {

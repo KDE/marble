@@ -31,6 +31,7 @@ void MarbleTest::timeDemo()
 
     QTime t;
 /*
+    m_marbleWidget->setMapTheme( "plain/plain.dgml" );
     m_marbleWidget->setShowGrid( false );
     m_marbleWidget->setShowPlaces( false );
     m_marbleWidget->setShowPlaces( false );
@@ -38,6 +39,7 @@ void MarbleTest::timeDemo()
     m_marbleWidget->setShowRivers( false );
     m_marbleWidget->setShowLakes( false );
 */
+
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
             QCoreApplication::flush();
@@ -64,31 +66,7 @@ void MarbleTest::timeDemo()
 
     qDebug( "Timedemo finished in %ims", t.elapsed() );
     qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
-/*
-    m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
-    m_marbleWidget->setShowScaleBar( false );
-    m_marbleWidget->setShowWindRose( false );
-    m_marbleWidget->setShowGrid( false );
-    m_marbleWidget->setShowPlaces( false );
-    m_marbleWidget->setShowPlaces( false );
-    m_marbleWidget->setShowBorders( false );
-    m_marbleWidget->setShowRivers( false );
-    m_marbleWidget->setShowLakes( false );
 
-    t.restart();
-
-    for ( int j = 0; j < 10; ++j ) {
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveRight();
-        }
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveLeft();
-        }
-    }
-
-    qDebug( "Timedemo finished in %ims", t.elapsed() );
-    qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
-*/
 }
 
 void MarbleTest::gpsDemo(){

@@ -42,7 +42,15 @@ public:
     QString name()          const { return m_name;        }
     QString prefix()        const { return m_prefix;      }
     QString icon()          const { return m_icon;        }
-    QColor labelColor()     const { return m_labelcolor;  }
+    QColor labelColor()     const { return m_labelColor;  }
+
+    QColor oceanColor()     const { return m_oceanColor;  }
+    QColor landColor()     const { return m_landColor;  }
+    QColor countryBorderColor()     const { return m_countryBorderColor;  }
+    QColor stateBorderColor()     const { return m_stateBorderColor;  }
+    QColor lakeColor()     const { return m_lakeColor;  }
+    QColor riverColor()     const { return m_riverColor;  }
+
     QString tilePrefix()    const { return m_prefix;      }
     QString description()   const { return m_description; }
     QString installMap()    const { return m_installmap;  }
@@ -58,7 +66,15 @@ private:
     QString    m_name;
     QString    m_prefix;
     QString    m_icon;
-    QColor     m_labelcolor;
+    QColor     m_labelColor;
+
+    QColor     m_oceanColor;
+    QColor     m_landColor;
+    QColor     m_countryBorderColor;
+    QColor     m_stateBorderColor;
+    QColor     m_lakeColor;
+    QColor     m_riverColor;
+
     QString    m_tileprefix;
     QString    m_description;
     QString    m_installmap;

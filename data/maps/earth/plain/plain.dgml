@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
+	<MapStyle>
+		<name>Plain Map</name>
+
+		<prefix>plain</prefix>
+		<icon>plain-preview.png</icon>
+
+		<description>A plain map. It uses vector lines to mark coastlines and country borders etc. .</description>
+		
+		<layer type="vector" name="mwdbii"/>
+
+        <OceanStyle>
+            <color>#99b3cc</color>
+        </OceanStyle>
+
+        <LandStyle>
+            <color>#f2efe9</color>
+        </LandStyle>
+
+        <CountryStyle>
+            <border-color>#cccbca</border-color>
+        </CountryStyle>
+
+        <StateStyle>
+            <border-color>#cccbca</border-color>
+        </StateStyle>
+
+        <LakeStyle>
+            <color>#99b3cc</color>
+        </LakeStyle>
+
+        <RiverStyle>
+            <color>#99b3cc</color>
+        </RiverStyle>
+
+		<LabelStyle>
+			<color>#000000</color>
+		</LabelStyle>
+
+	</MapStyle>
+</DeskGlobeML>
