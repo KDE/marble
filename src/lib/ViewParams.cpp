@@ -24,6 +24,8 @@ ViewParams::ViewParams( )
     m_showPlaceMarks     = true;
     m_showElevationModel = false;
 
+    m_showRelief         = true;
+
     m_showCities         = true;
     m_showTerrain        = true;
 

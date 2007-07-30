@@ -11,13 +11,13 @@
 
 #include "texcolorizer.h"
 
-#include <QtCore/QString>
-#include <QtGui/QColor>
-
 #include <cmath>
 
+#include <QtCore/QString>
 #include <QtCore/QDebug>
+#include <QtGui/QColor>
 
+#include "ViewParams.h"
 
 #include "texturepalette.cpp"
 
@@ -27,15 +27,13 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 {
     Q_UNUSED( seafile );
     Q_UNUSED( landfile );
-
-    m_showRelief = true;
 }
 
-void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg, 
-                                const int& radius, Quaternion planetAxis)
+void TextureColorizer::colorize(ViewParams *viewParams)
 {
-    // FIXME: Why isn't it used?
-    Q_UNUSED( planetAxis );
+          QImage  *origimg  = viewParams->m_canvasImage;
+    const QImage  *coastimg = viewParams->m_coastImage;
+    const int      radius   = viewParams->m_radius;
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
@@ -57,7 +55,7 @@ void TextureColorizer::colorize(QImage* origimg, const QImage* coastimg,
     const double  bendReliefx = 0.41 * bendRelief;
     const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
-    const bool showRelief = m_showRelief;
+    const bool showRelief = viewParams->m_showRelief;
 #ifndef FLAT_PROJ
     if ( radius * radius > imgradius ) {
         for (int y = 0; y < imgheight; ++y) {

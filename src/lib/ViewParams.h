@@ -51,6 +51,8 @@ class MARBLE_EXPORT ViewParams
     bool        m_showPlaceMarks;
     bool        m_showElevationModel;
 
+    bool        m_showRelief;   // for texcolorizer.
+
     bool        m_showCities;   // About placemarks
     bool        m_showTerrain;
 

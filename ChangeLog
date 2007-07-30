@@ -1,3 +1,18 @@
+2007-07-30  Inge Wallin  <inge@lysator.liu.se>
+
+	Move relief on/off parameter to ViewParams
+	* src/lib/ViewParams.h: new member: m_showRelief
+	* src/lib/ViewParams.cpp (constructor): initialize m_showRelief
+	* src/lib/texcolorizer.h (class TextureColorizer): Change
+	signature to only take a ViewParams*
+	* src/lib/texcolorizer.cpp (colorize): 
+	  - take a ViewParams* as parameter only
+	  - Get showRelief from the view params
+	* src/lib/MarbleModel.cpp (paintGlobe): Call
+	TexColorizer::colorize according to new signature.
+	* src/lib/MarbleWidget.cpp (showRelief): Get data from viewparams.
+	(setShowRelief): set data in viewparams 
+
 2007-07-29  Murad Tagirov  <tmurad@gmail.com>
 
     Temporary disabled weightfilter if KML_GSOC is defined
@@ -14,6 +29,7 @@
 
 	- getting KDE.NL out of the water and fixing Ingwa's
 	  most recent complaint.
+	  -- which was depth in lakes.
 
 2007-07-29  Torsten Rahn  <rahn@kde.org>
 

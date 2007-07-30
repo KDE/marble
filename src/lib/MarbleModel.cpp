@@ -245,8 +245,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         if ( d->m_maptheme->bitmaplayer().enabled == true )
         {
             d->m_texmapper->mapTexture( viewParams->m_canvasImage,
-                                         viewParams->m_radius,
-                                         viewParams->m_planetAxis );
+                                        viewParams->m_radius,
+                                        viewParams->m_planetAxis );
 
             if ( !viewParams->m_showElevationModel
                 && d->m_maptheme->bitmaplayer().dem == "true" )
@@ -259,10 +259,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                                                   viewParams->m_planetAxis );
 
                 // Recolorize the heightmap using the VectorMap
-                d->m_texcolorizer->colorize( viewParams->m_canvasImage,
-                                             viewParams->m_coastImage,
-                                             viewParams->m_radius,
-                                             viewParams->m_planetAxis );
+                d->m_texcolorizer->colorize( viewParams );
             }
         }
     }

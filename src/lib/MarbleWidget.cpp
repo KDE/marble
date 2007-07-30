@@ -293,7 +293,7 @@ bool MarbleWidget::showTerrain() const
 
 bool MarbleWidget::showRelief() const
 { 
-    return d->m_model->textureColorizer()->showRelief();
+    return d->m_viewParams.m_showRelief;
 }
 
 bool MarbleWidget::showElevationModel() const
@@ -818,7 +818,9 @@ void MarbleWidget::setShowTerrain( bool visible )
 
 void MarbleWidget::setShowRelief( bool visible )
 { 
-    d->m_model->textureColorizer()->setShowRelief( visible );
+    d->m_viewParams.m_showRelief = visible;
+
+    // FIXME: Both aren't needed, are they?
     setNeedsUpdate();
     repaint();
 }

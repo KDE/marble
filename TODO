@@ -63,6 +63,9 @@ Widget:
     - width, height                                                     inge
     - show... crosshair/mapscale/windrose                               n/a?
     - show... terrain/cities/...                                        done
+    - show... relief (texturecolorizer)                                 done
+    - show... ice/borders/rivers/lakes    (vectorcomposer)              inge
+    - interlaced                                                        inge
     - mapTheme                                                          inge
     - caches (coastimg, ...)                                            done
 

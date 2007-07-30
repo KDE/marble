@@ -25,6 +25,8 @@
 #include "Quaternion.h"
 // #define FLAT_PROJ
 
+class ViewParams;
+
 typedef struct
 {
     uchar  x1;
@@ -40,33 +42,17 @@ typedef union
     GpUint  gpuint;
 } GpFifo;
 
+
 class TextureColorizer
 {
  public:
     TextureColorizer(const QString&, const QString&);
     virtual ~TextureColorizer(){}
-    void colorize(QImage*, const QImage*, const int&, Quaternion);
 
-    /**
-     * @brief  Return whether the coordinate grid is visible.
-     * @return The coordinate grid visibility.
-     */
-    bool  showRelief() const
-    { 
-        return m_showRelief;
-    }
-
-    /**
-     * @brief  Set whether the coordinate grid overlay is visible
-     * @param  visible  visibility of the coordinate grid
-     */
-    void setShowRelief( bool visible ){ 
-        m_showRelief = visible;
-    }
+    void colorize(ViewParams *viewParams);
 
  private:
     static const uint  texturepalette[][512];
-    bool m_showRelief;
 };
 
 
