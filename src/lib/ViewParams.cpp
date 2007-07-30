@@ -26,6 +26,11 @@ ViewParams::ViewParams( )
 
     m_showRelief         = true;
 
+    m_showIceLayer       = true;
+    m_showBorders        = true;
+    m_showRivers         = true;
+    m_showLakes          = true;
+
     m_showCities         = true;
     m_showTerrain        = true;
 

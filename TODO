@@ -64,7 +64,7 @@ Widget:
     - show... crosshair/mapscale/windrose                               n/a?
     - show... terrain/cities/...                                        done
     - show... relief (texturecolorizer)                                 done
-    - show... ice/borders/rivers/lakes    (vectorcomposer)              inge
+    - show... ice/borders/rivers/lakes    (vectorcomposer)              done
     - interlaced                                                        inge
     - mapTheme                                                          inge
     - caches (coastimg, ...)                                            done

@@ -19,6 +19,7 @@
 #include "GeoPolygon.h"
 #include "ClipPainter.h"
 #include "vectormap.h"
+#include "ViewParams.h"
 #include "katlasdirs.h"
 
 
@@ -62,18 +63,15 @@ VectorComposer::VectorComposer()
 
     m_landBrush = QBrush( QColor( 242, 239, 233 ) );
     m_landPen = QPen( Qt::NoPen );
-
-    m_showIceLayer = true;
-    m_showBorders = true;
-    m_showRivers = true;
-    m_showLakes = true;
-
 }
 
 
-void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius, 
-                                    Quaternion& rotAxis)
+void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
+    QPaintDevice  *origimg = viewParams->m_coastImage;
+    const int      radius  = viewParams->m_radius;
+    Quaternion     rotAxis = viewParams->m_planetAxis;
+
     //	m_vectorMap -> clearNodeCount();
 
     // Coastlines
@@ -94,7 +92,7 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
     m_vectorMap -> setBrush( m_textureLandBrush );
     m_vectorMap -> drawMap( origimg, false );
 
-    if ( m_showLakes == true ) {
+    if ( viewParams->m_showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -108,7 +106,7 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
          m_vectorMap -> drawMap( origimg, false );
     }
 
-    if ( m_showIceLayer == true ) {
+    if ( viewParams->m_showIceLayer ) {
         // Glaciers
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
@@ -121,9 +119,12 @@ void VectorComposer::drawTextureMap(QPaintDevice *origimg, const int& radius,
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
-void VectorComposer::paintBaseVectorMap(ClipPainter *painter, const int& radius, 
-                                    Quaternion& rotAxis)
+void VectorComposer::paintBaseVectorMap( ClipPainter *painter, 
+                                         ViewParams *viewParams )
 {
+    const int   radius  = viewParams->m_radius;
+    Quaternion  rotAxis = viewParams->m_planetAxis;
+
     m_vectorMap -> setPen( m_oceanPen );
     m_vectorMap -> setBrush( m_oceanBrush );
     m_vectorMap -> paintBase( painter, radius, true );
@@ -146,7 +147,7 @@ void VectorComposer::paintBaseVectorMap(ClipPainter *painter, const int& radius,
     m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, false );
 
-    if ( m_showLakes == true ) {
+    if ( viewParams->m_showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -162,12 +163,15 @@ void VectorComposer::paintBaseVectorMap(ClipPainter *painter, const int& radius,
     }
 }
 
-void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius, 
-                                    Quaternion& rotAxis)
+void VectorComposer::paintVectorMap( ClipPainter *painter,
+                                     ViewParams *viewParams )
 {
     // m_vectorMap -> clearNodeCount();
 
-    if ( m_showRivers == true ) {
+    const int   radius  = viewParams->m_radius;
+    Quaternion  rotAxis = viewParams->m_planetAxis;
+
+    if ( viewParams->m_showRivers ) {
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
@@ -178,7 +182,7 @@ void VectorComposer::paintVectorMap(ClipPainter *painter, const int& radius,
          m_vectorMap -> paintMap( painter, false );
     }
 
-    if ( m_showBorders == true ) {
+    if ( viewParams->m_showBorders ) {
         // Countries
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );

@@ -53,6 +53,11 @@ class MARBLE_EXPORT ViewParams
 
     bool        m_showRelief;   // for texcolorizer.
 
+    bool        m_showIceLayer; // for vectorcomposer
+    bool        m_showBorders;
+    bool        m_showRivers;
+    bool        m_showLakes;
+
     bool        m_showCities;   // About placemarks
     bool        m_showTerrain;
 

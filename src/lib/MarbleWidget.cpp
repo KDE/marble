@@ -303,22 +303,22 @@ bool MarbleWidget::showElevationModel() const
 
 bool MarbleWidget::showIceLayer() const
 { 
-    return d->m_model->vectorComposer()->showIceLayer();
+    return d->m_viewParams.m_showIceLayer;
 }
 
 bool MarbleWidget::showBorders() const
 { 
-    return d->m_model->vectorComposer()->showBorders();
+    return d->m_viewParams.m_showBorders;
 }
 
 bool MarbleWidget::showRivers() const
 { 
-    return d->m_model->vectorComposer()->showRivers();
+    return d->m_viewParams.m_showRivers;
 }
 
 bool MarbleWidget::showLakes() const
 { 
-    return d->m_model->vectorComposer()->showLakes();
+    return d->m_viewParams.m_showLakes;
 }
 
 bool MarbleWidget::showGps() const
@@ -834,26 +834,26 @@ void MarbleWidget::setShowElevationModel( bool visible )
 
 void MarbleWidget::setShowIceLayer( bool visible )
 { 
-    d->m_model->vectorComposer()->setShowIceLayer( visible );
+    d->m_viewParams.m_showIceLayer = visible;
     setNeedsUpdate();
     repaint();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 { 
-    d->m_model->vectorComposer()->setShowBorders( visible );
+    d->m_viewParams.m_showBorders = visible;
     repaint();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 { 
-    d->m_model->vectorComposer()->setShowRivers( visible );
+    d->m_viewParams.m_showRivers =  visible;
     repaint();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
-    d->m_model->vectorComposer()->setShowLakes( visible );
+    d->m_viewParams.m_showLakes = visible;
     setNeedsUpdate();
     repaint();
 }

@@ -254,9 +254,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                 viewParams->m_coastImage->fill( Qt::transparent );
 
                 // Create VectorMap
-                d->m_veccomposer->drawTextureMap( viewParams->m_coastImage,
-                                                  viewParams->m_radius,
-                                                  viewParams->m_planetAxis );
+                d->m_veccomposer->drawTextureMap( viewParams );
 
                 // Recolorize the heightmap using the VectorMap
                 d->m_texcolorizer->colorize( viewParams );
@@ -267,26 +265,20 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 //    QTime t;
 //    t.start();
 
-    if ( d->m_maptheme->bitmaplayer().enabled == true )
-    {
+    if ( d->m_maptheme->bitmaplayer().enabled == true ) {
         painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
     }
 
 //    qDebug( "Painted in %ims", t.elapsed() );
 
     // Paint the vector layer.
-    if ( d->m_maptheme->vectorlayer().enabled == true ) {
+    if ( d->m_maptheme->vectorlayer().enabled ) {
 
-        if ( d->m_maptheme->bitmaplayer().enabled == false )
-        {
-            d->m_veccomposer->paintBaseVectorMap( painter,
-                                              viewParams->m_radius,
-                                              viewParams->m_planetAxis );
+        if ( d->m_maptheme->bitmaplayer().enabled == false ) {
+            d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
         }
         // Add further Vectors
-        d->m_veccomposer->paintVectorMap( painter,
-                                          viewParams->m_radius,
-                                          viewParams->m_planetAxis );
+        d->m_veccomposer->paintVectorMap( painter, viewParams );
     }
 
     // Paint the grid around the earth.

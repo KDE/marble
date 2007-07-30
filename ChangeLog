@@ -1,3 +1,18 @@
+2007-07-31  Inge Wallin  <inge@lysator.liu.se>
+
+	Move vector on/off parameters to ViewParams
+	* src/lib/ViewParams.h: new members: m_showIcelayer,
+	m_showBorders, m_showRivers, m_showLakes
+	* src/lib/ViewParams.cpp (constructor): initialize the new members
+	* src/lib/vectorcomposer.h (class VectorComposer): 
+	(drawTexturemap): Change signature to only take a ViewParams*
+	(paintBaseTexturemap): Change signature to take a ViewParams*
+	(paintTexturemap): Change signature to take a ViewParams*
+	* src/lib/vectorcomposer.cpp: 
+	* src/lib/MarbleModel.cpp (paintGlobe): Call
+	VectorComposer methods according to new signatures.
+	* src/lib/MarbleWidget.cpp: Use new members in Viewparams
+
 2007-07-30  Inge Wallin  <inge@lysator.liu.se>
 
 	Move relief on/off parameter to ViewParams
