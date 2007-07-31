@@ -89,7 +89,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      * @return the square of the distance between the points, if the 
      *         actual distance is needed get the square root.
      */
-    double distance ( const QPointF &a, const QPointF &a );
+    double distance ( const QPointF &a, const QPointF &b );
  protected:
     /** 
      * @brief Method to process what Data Objects need to be in
