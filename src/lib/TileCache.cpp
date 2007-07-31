@@ -30,6 +30,7 @@ bool TileCache::insert( int key, TextureTile* tile )
 //             << m_cache.totalCost() / 1024 << " kB";
     m_cache.insert( key, tile, tile->numBytes() );
 
+#warning: is this correct?
     return true;
 }
 

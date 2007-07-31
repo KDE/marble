@@ -1,5 +1,8 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Add a warning for tackat to look at.
+	* src/lib/TileCache.cpp (insert): Add warning.
+
 	Krazy issue 13: Proper include directives.
 	* src/lib/TileCache.cpp: Guard
 	* src/lib/gps/TrackContainer.h: Guard
