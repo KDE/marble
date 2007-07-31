@@ -1,5 +1,8 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Make kdemain and qtmain more alike.
+	* src/kdemain.cpp (main): Add same setAttribute as in qtmain.cpp
+
 	More krazy issue 14: inline methods in public classes
 	* src/lib/placemarkpainter.h (drawLabelText): not inline
 	* src/lib/placemark.h (population): not inline

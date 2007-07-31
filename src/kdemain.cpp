@@ -48,6 +48,8 @@ int main (int argc, char *argv[])
     KApplication app;
 
     MainWindow *window = new MainWindow();
+    window->setAttribute( Qt::WA_DeleteOnClose, true );
+
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
 
     window->resize(680, 640);
