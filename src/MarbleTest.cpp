@@ -30,10 +30,11 @@ void MarbleTest::timeDemo()
 //    m_marbleWidget->resize( 800, 600 );
 
     QTime t;
+    //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
+    //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
+
 /*
-    m_marbleWidget->setMapTheme( "plain/plain.dgml" );
     m_marbleWidget->setShowGrid( false );
-    m_marbleWidget->setShowPlaces( false );
     m_marbleWidget->setShowPlaces( false );
     m_marbleWidget->setShowBorders( false );
     m_marbleWidget->setShowRivers( false );

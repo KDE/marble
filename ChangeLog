@@ -1,5 +1,8 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Make it easier to change test setup.
+	* src/MarbleTest.cpp (timeDemo): More logical setup
+
 	Fix krazy issue 14: inline methods in public classes
 	* src/lib/GridMap.{h,cpp} (initCrossHorizon): Remove function and
 	put in the code, since it was only used once..
