@@ -9,8 +9,10 @@
 //
 
 
-#include <QtCore/QDebug>
 #include "TileCache.h"
+
+#include <QtCore/QDebug>
+
 
 bool TileCache::find( int key, TextureTile* tile )
 {
@@ -27,6 +29,7 @@ bool TileCache::insert( int key, TextureTile* tile )
 //    qDebug() << "Tile " << tile->id() << " cached. Cache size: " 
 //             << m_cache.totalCost() / 1024 << " kB";
     m_cache.insert( key, tile, tile->numBytes() );
+
     return true;
 }
 

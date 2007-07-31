@@ -8,6 +8,11 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
+
+#ifndef TRACKCONTAINER_H
+#define TRACKCONTAINER_H
+
+
 #include "AbstractLayer/AbstractLayerContainer.h"
 
 /**
@@ -21,3 +26,6 @@ class TrackContainer : public AbstractLayerContainer
      */
     TrackContainer();
 };
+
+
+#endif

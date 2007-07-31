@@ -1,5 +1,10 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issue 13: Proper include directives.
+	* src/lib/TileCache.cpp: Guard
+	* src/lib/gps/TrackContainer.h: Guard
+	* src/lib/gps/TrackPoint.h: Guard
+	
 	Coding standards.
 	* src/lib/MarbleWidgetInputHandler.cpp: Fix indentation according
 	to coding standards.

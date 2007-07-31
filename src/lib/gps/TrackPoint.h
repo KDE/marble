@@ -8,6 +8,11 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
+
+#ifndef TRACKPOINT_H
+#define TRACKPOINT_H
+
+
 #include "Waypoint.h"
 
 class ClipPainter;
@@ -32,3 +37,6 @@ class TrackPoint : public Waypoint
      */
     virtual void draw ( ClipPainter *, const QPoint & );
 };
+
+
+#endif
