@@ -115,7 +115,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
  private:
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
-                            bool show, QString text );
+                            bool show, QString &text );
 
  protected:
     void resizeEvent ( QResizeEvent * );

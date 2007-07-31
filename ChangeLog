@@ -1,5 +1,14 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Translate headers of MarbleControlBox tabs, and fix Krazy issue
+	18: inappropriate pass-by-value function args.
+	* src/lib/MarbleControlBox.{h,cpp} (setWidgetTabShown): Parameter
+	QString& instead of QString
+	(setNavigationTabShown),
+	(setLegendTabShown),
+	(setMapViewTabShown),
+	(setCurrentLocationTabShown): Translate header of tabs
+	
 	Add a warning for tackat to look at.
 	* src/lib/TileCache.cpp (insert): Add warning.
 

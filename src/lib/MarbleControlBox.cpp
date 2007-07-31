@@ -212,7 +212,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,
                                           int insertIndex, bool show,
-                                          QString text )
+                                          QString &text )
 {
     int index = toolBox->indexOf( widget );
     qDebug() << text << index;
@@ -318,23 +318,26 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
 
 void MarbleControlBox::setNavigationTabShown( bool show )
 {
-    setWidgetTabShown( m_navigationWidget, 0, show, "Navigation" );
+    QString  title = tr( "Navigation" );
+    setWidgetTabShown( m_navigationWidget, 0, show, title);
 }
 
 void MarbleControlBox::setLegendTabShown( bool show )
 {
-    setWidgetTabShown( m_ledgendWidget, 1, show, "Ledgend" );
+    QString  title = tr( "Legend" );
+    setWidgetTabShown( m_ledgendWidget, 1, show, title );
 }
 
 void MarbleControlBox::setMapViewTabShown( bool show )
 {
-    setWidgetTabShown( m_mapViewWidget, 2, show, "Map View" );
+    QString  title = tr( "Map View" );
+    setWidgetTabShown( m_mapViewWidget, 2, show, title );
 }
 
 void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
-    setWidgetTabShown( m_currentLocationWidget, 3, show, 
-                       "Current Location" );
+    QString  title = tr( "Current Location" );
+    setWidgetTabShown( m_currentLocationWidget, 3, show, title );
 }
 
 
