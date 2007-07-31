@@ -30,7 +30,7 @@ void Route::draw( ClipPainter *painter, const QSize &canvasSize,
     
     const_iterator it;
     
-    //initialise first to the begining of the vector
+    // Initialise first to the beginning of the vector.
     first = *(begin());
     
     for ( it = constBegin(); it < constEnd(); it++){

@@ -1,5 +1,9 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix krazy issue 23: spelling errors.
+	* src/lib/HttpFetchFile.cpp (httpRequestFinished): Fix spelling
+	* src/lib/gps/Route.cpp (draw): Fix spelling
+
 	Translate headers of MarbleControlBox tabs, and fix Krazy issue
 	18: inappropriate pass-by-value function args.
 	* src/lib/MarbleControlBox.{h,cpp} (setWidgetTabShown): Parameter

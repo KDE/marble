@@ -111,7 +111,7 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
     }
 
     if ( error != 0 ) {
-        qDebug() << "An error occured! The Temporary file will be REMOVED!";
+        qDebug() << "An error occurred! The Temporary file will be REMOVED!";
         jobTargetFile->remove();
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_pHttp->errorString() ) );
