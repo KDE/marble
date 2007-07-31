@@ -1,5 +1,8 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Cleaning, according to the TODO file.
+	* src/lib/maptheme.cpp: Clean (not many changes, really)
+
 	Fix krazy issue 23: spelling errors.
 	* src/lib/HttpFetchFile.cpp (httpRequestFinished): Fix spelling
 	* src/lib/gps/Route.cpp (draw): Fix spelling

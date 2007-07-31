@@ -48,8 +48,6 @@ Misc
 Cleaning:
  * Make all files follow the coding standards (See CLEANING)            DONE
  * Filename == Classname (CamelCasing)                                  ----
- * Specially prioritized                                                ----
-   - MapTheme                                                           --
 
 Widget:
  * Separate the view from the globe (model)                             INGE

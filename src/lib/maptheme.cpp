@@ -56,18 +56,18 @@ int MapTheme::open( const QString& path )
     m_labelColor = QColor( 0, 0, 0, 255 );
 
     m_oceanColor = QColor( 0, 0, 0, 255 );
-    m_landColor = QColor( 0, 0, 0, 255 );
+    m_landColor  = QColor( 0, 0, 0, 255 );
     m_countryBorderColor = QColor( 0, 0, 0, 255 );
-    m_stateBorderColor = QColor( 0, 0, 0, 255 );
-    m_lakeColor = QColor( 0, 0, 0, 255 );
+    m_stateBorderColor   = QColor( 0, 0, 0, 255 );
+    m_lakeColor  = QColor( 0, 0, 0, 255 );
     m_riverColor = QColor( 0, 0, 0, 255 );
 
     m_bitmaplayer.enabled = false;
-    m_bitmaplayer.name = "";
-    m_bitmaplayer.dem = "false";
+    m_bitmaplayer.name    = "";
+    m_bitmaplayer.dem     = "false";
 
     m_vectorlayer.enabled = false;
-    m_vectorlayer.name = "";
+    m_vectorlayer.name    = "";
 
     element = element.firstChildElement();
     while ( !element.isNull() ) {
@@ -340,14 +340,16 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         QString currentmaptheme = it.next();
         maptheme->open( KAtlasDirs::path( "maps/earth/" + currentmaptheme ) );
 
-        mapthememodel->insertRows(row, 1, QModelIndex());
+        mapthememodel->insertRows( row, 1, QModelIndex() );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                tr( maptheme->name().toUtf8() ), Qt::DisplayRole );
+                                tr( maptheme->name().toUtf8() ), 
+                                Qt::DisplayRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
-                                tr( maptheme->description().toUtf8() ), Qt::ToolTipRole);
+                                tr( maptheme->description().toUtf8() ), 
+                                Qt::ToolTipRole);
         mapthememodel->setData( mapthememodel->index( row, 2, QModelIndex() ),
                                 currentmaptheme );
     }

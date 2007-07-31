@@ -45,19 +45,20 @@ public:
     QColor labelColor()     const { return m_labelColor;  }
 
     QColor oceanColor()     const { return m_oceanColor;  }
-    QColor landColor()     const { return m_landColor;  }
-    QColor countryBorderColor()     const { return m_countryBorderColor;  }
-    QColor stateBorderColor()     const { return m_stateBorderColor;  }
-    QColor lakeColor()     const { return m_lakeColor;  }
+    QColor landColor()      const { return m_landColor;   }
+    QColor countryBorderColor() const { return m_countryBorderColor; }
+    QColor stateBorderColor()   const { return m_stateBorderColor;   }
+    QColor lakeColor()      const { return m_lakeColor;   }
     QColor riverColor()     const { return m_riverColor;  }
 
     QString tilePrefix()    const { return m_prefix;      }
     QString description()   const { return m_description; }
     QString installMap()    const { return m_installmap;  }
+
     DgmlLayer bitmaplayer() const { return m_bitmaplayer; }
     DgmlLayer vectorlayer() const { return m_vectorlayer; }
 
-    int maxTileLevel() const { return m_maxtilelevel; }
+    int maxTileLevel()      const { return m_maxtilelevel;}
 
     static QStringList findMapThemes( const QString& );
     static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
