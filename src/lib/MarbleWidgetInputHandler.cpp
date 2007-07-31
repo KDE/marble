@@ -23,7 +23,7 @@
 
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
-                                               MarbleModel  *model)
+                                                   MarbleModel  *model)
     : m_widget( marbleWidget ),
       m_model( model )
 {
@@ -57,7 +57,6 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
 
 bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 {
-		
     Q_UNUSED( o );
 
     int polarity = 0;
@@ -263,9 +262,9 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             //Dirty hack to make properly behavior for the arrow
             int     radius        = m_widget->radius();
             double  centerLat     = m_widget->planetAxis().pitch();
-            int     yCenterOffset = (int)((float)(2*radius / M_PI) * centerLat);
+            int     yCenterOffset = (int)((float)(2 * radius / M_PI) * centerLat);
             int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
-            int     yBottom       = yTop + 2*radius;
+            int     yBottom       = yTop + 2 * radius;
             yTop = ( yTop > 0 ) ? yTop : 0;
             if ( dirx == 0 && event->y() < yTop)
                  diry=-1;
@@ -283,7 +282,6 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                                         -m_widget->moveStep() * (double)(-dirx) );
 
                 m_widget->repaint();
-
             }				
         }
 
@@ -302,6 +300,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             return false;
     }
 }
+
 
 #include "MarbleWidgetInputHandler.moc"
 

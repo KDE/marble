@@ -1,6 +1,10 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
-	Move vector on/off parameters to ViewParams
+	Coding standards.
+	* src/lib/MarbleWidgetInputHandler.cpp: Fix indentation according
+	to coding standards.
+
+	Move vector on/off parameters to ViewParams:
 	* src/lib/ViewParams.h: new members: m_showIcelayer,
 	m_showBorders, m_showRivers, m_showLakes
 	* src/lib/ViewParams.cpp (constructor): initialize the new members

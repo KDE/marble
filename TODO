@@ -28,8 +28,6 @@ Cleaning
    - Move MarbleControlBox to src/lib/                                  done
  * Installation issues                                                  TACK
    - Creating tiles during build and fix designer plugin dirs           --
- * Indentation
-   - katlasviewinputhandler
 
 
 During the SoC projects (0.5)

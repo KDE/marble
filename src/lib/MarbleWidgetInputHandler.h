@@ -82,7 +82,7 @@ class MarbleWidgetInputHandler  : public QObject
     int      m_dragThreshold;
     QTime    m_dragtimer;
 
-    bool m_positionSignalConnected;
+    bool     m_positionSignalConnected;
 };
 
 
