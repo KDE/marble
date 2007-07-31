@@ -28,10 +28,7 @@ bool TileCache::insert( int key, TextureTile* tile )
 {
 //    qDebug() << "Tile " << tile->id() << " cached. Cache size: " 
 //             << m_cache.totalCost() / 1024 << " kB";
-    m_cache.insert( key, tile, tile->numBytes() );
-
-#warning: is this correct?
-    return true;
+    return m_cache.insert( key, tile, tile->numBytes() );
 }
 
 bool TileCache::contains( int key )

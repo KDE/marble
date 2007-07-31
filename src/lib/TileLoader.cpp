@@ -96,8 +96,10 @@ void TileLoader::cleanupTilehash()
         it.next();
         if ( it.value()->used() == false ){
 
-              m_tileCache.insert( it.value()->id(), it.value() );
-              m_tileHash.remove( it.key() );    
+            bool inCache = m_tileCache.insert( it.key(), it.value() );
+            m_tileHash.remove( it.key() );
+            if ( inCache == false )
+                delete it.value();
         }
     }
 }
@@ -109,8 +111,10 @@ void TileLoader::flush()
     while (it.hasNext()) {
         it.next();
 
-        m_tileCache.insert( it.key(), it.value() );
+        bool inCache = m_tileCache.insert( it.key(), it.value() );
         m_tileHash.remove( it.key() );
+        if ( inCache == false )
+            delete it.value();
     }
 
     m_tileHash.clear();

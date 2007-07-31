@@ -193,7 +193,8 @@ void Quaternion::getSpherical(double &alpha, double &beta) const
         y = 1.0;
     else if ( y < -1.0 )
         y = -1.0;
-    beta = -asin( y );
+
+        beta = -asin( y );
 
     if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005) 
         alpha = -atan2(v[Q_X], v[Q_Z]);
