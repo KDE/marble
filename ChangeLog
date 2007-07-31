@@ -1,5 +1,11 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix krazy issue 14: inline methods in public classes
+	* src/lib/GridMap.{h,cpp} (initCrossHorizon): Remove function and
+	put in the code, since it was only used once..
+	* src/lib/vectormap.{h,cpp} (initCrossHorizon): Remove function
+	and put in the code, since it was only used once..
+
 	Cleaning, according to the TODO file.
 	* src/lib/maptheme.cpp: Clean (not many changes, really)
 

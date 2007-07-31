@@ -211,8 +211,15 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
             m_lastVisible = m_currentlyVisible;
             m_currentlyVisible = (qpos.v[Q_Z] >= 0) ? true : false;
 
-            if ( j == 0 )
-                initCrossHorizon();
+            // Initialize crossing of the horizon.
+            if ( j == 0 ) {
+
+                m_lastVisible = m_currentlyVisible;
+
+                // Initially m_lastPoint MUST NOT equal m_currentPoint
+                m_lastPoint = QPointF( m_currentPoint.x() + 1.0, 
+                                       m_currentPoint.y() + 1.0 );
+            }
 
             if (m_currentlyVisible != m_lastVisible) {
                 m_polygon << horizonPoint();
@@ -298,16 +305,6 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
 
     if (antialiasing == true)
         painter->setRenderHint(QPainter::Antialiasing, false);
-}
-
-
-void GridMap::initCrossHorizon()
-{
-    m_lastVisible = m_currentlyVisible;
-
-    // Initially m_lastPoint MUST NOT equal m_currentPoint
-    m_lastPoint = QPointF( m_currentPoint.x() + 1.0, 
-                           m_currentPoint.y() + 1.0 );
 }
 
 

@@ -55,7 +55,6 @@ class VectorMap : public ScreenPolygon::Vector
     void createPolyLine( GeoPoint::Vector::ConstIterator, 
                          GeoPoint::Vector::ConstIterator, const int);
 
-    inline void    initCrossHorizon();
     void           manageCrossHorizon();
     const QPointF  horizonPoint();
     void           createArc();

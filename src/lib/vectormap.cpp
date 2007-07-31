@@ -215,7 +215,12 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             // currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
             m_currentlyvisible = ( qpos.v[Q_Z] >= 0 ) ? true : false;
             if ( itPoint == itStartPoint ) {
-                initCrossHorizon();
+                // qDebug("Initializing scheduled new PolyLine");
+                m_lastvisible  = m_currentlyvisible;
+                m_lastPoint    = QPointF( m_currentPoint.x() + 1.0, 
+                                          m_currentPoint.y() + 1.0 );
+                m_horizonpair  = false;
+                m_firsthorizon = false;
             }
             if ( m_currentlyvisible != m_lastvisible )
                 manageCrossHorizon();
@@ -367,16 +372,6 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
     }
 
     // painter.drawEllipse(imgrx-m_radius,imgry-m_radius,2*m_radius,2*m_radius+1);
-}
-
-
-void VectorMap::initCrossHorizon()
-{
-    // qDebug("Initializing scheduled new PolyLine");
-    m_lastvisible  = m_currentlyvisible;
-    m_lastPoint    = QPointF( m_currentPoint.x() + 1, m_currentPoint.y() + 1 );
-    m_horizonpair  = false;
-    m_firsthorizon = false;
 }
 
 
