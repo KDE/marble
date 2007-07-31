@@ -38,7 +38,7 @@ class KAtlasXmlHandler : public QXmlDefaultHandler
     bool characters( const QString& str );
 
  protected:
-    inline int popIdx( int population );
+    int popIdx( int population );
 
  private:
     PlaceMarkContainer  *m_placeMarkContainer;

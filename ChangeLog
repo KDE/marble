@@ -1,5 +1,11 @@
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
+	More krazy issue 14: inline methods in public classes
+	* src/lib/placemarkpainter.h (drawLabelText): not inline
+	* src/lib/placemark.h (population): not inline
+	* src/lib/xmlhandler.h (popidx): not inline
+	(seleced): not inline
+
 	Make it easier to change test setup.
 	* src/MarbleTest.cpp (timeDemo): More logical setup
 

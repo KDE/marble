@@ -61,8 +61,8 @@ class PlaceMarkPainter : public QObject
                          PlaceMark *mark,
                          int textwidth,
                          int x, int y );
-    inline void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 
-                              double outlineWidth);
+    void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font, 
+                       double outlineWidth);
     bool testbug(); 
 
  protected:
