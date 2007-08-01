@@ -1,3 +1,8 @@
+2007-08-01  Murad Tagirov  <tmurad@gmail.com>
+
+    Added methods to support kml subfolders
+    * src/lib/kml/KMLFolder.{h,cpp}
+
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
 	Make kdemain and qtmain more alike.
@@ -33,7 +38,7 @@
 	(setLegendTabShown),
 	(setMapViewTabShown),
 	(setCurrentLocationTabShown): Translate header of tabs
-	
+
 	Add a warning for tackat to look at.
 	* src/lib/TileCache.cpp (insert): Add warning.
 
@@ -41,7 +46,7 @@
 	* src/lib/TileCache.cpp: Guard
 	* src/lib/gps/TrackContainer.h: Guard
 	* src/lib/gps/TrackPoint.h: Guard
-	
+
 	Coding standards.
 	* src/lib/MarbleWidgetInputHandler.cpp: Fix indentation according
 	to coding standards.
@@ -50,11 +55,11 @@
 	* src/lib/ViewParams.h: new members: m_showIcelayer,
 	m_showBorders, m_showRivers, m_showLakes
 	* src/lib/ViewParams.cpp (constructor): initialize the new members
-	* src/lib/vectorcomposer.h (class VectorComposer): 
+	* src/lib/vectorcomposer.h (class VectorComposer):
 	(drawTexturemap): Change signature to only take a ViewParams*
 	(paintBaseTexturemap): Change signature to take a ViewParams*
 	(paintTexturemap): Change signature to take a ViewParams*
-	* src/lib/vectorcomposer.cpp: 
+	* src/lib/vectorcomposer.cpp:
 	* src/lib/MarbleModel.cpp (paintGlobe): Call
 	VectorComposer methods according to new signatures.
 	* src/lib/MarbleWidget.cpp: Use new members in Viewparams
@@ -66,13 +71,13 @@
 	* src/lib/ViewParams.cpp (constructor): initialize m_showRelief
 	* src/lib/texcolorizer.h (class TextureColorizer): Change
 	signature to only take a ViewParams*
-	* src/lib/texcolorizer.cpp (colorize): 
+	* src/lib/texcolorizer.cpp (colorize):
 	  - take a ViewParams* as parameter only
 	  - Get showRelief from the view params
 	* src/lib/MarbleModel.cpp (paintGlobe): Call
 	TexColorizer::colorize according to new signature.
 	* src/lib/MarbleWidget.cpp (showRelief): Get data from viewparams.
-	(setShowRelief): set data in viewparams 
+	(setShowRelief): set data in viewparams
 
 2007-07-29  Murad Tagirov  <tmurad@gmail.com>
 

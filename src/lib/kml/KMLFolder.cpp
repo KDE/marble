@@ -21,4 +21,14 @@ KMLFolder::KMLFolder()
 
 KMLFolder::~KMLFolder()
 {
+    qDebug("KMLFolder::~KMLFolder(). Subfolders count: %d", m_folderVector.count());
+
+    foreach ( KMLFolder* folder, m_folderVector ) {
+        delete folder;
+    }
+}
+
+void KMLFolder::addFolder( KMLFolder* folder )
+{
+    m_folderVector.append( folder );
 }

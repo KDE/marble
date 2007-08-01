@@ -11,6 +11,7 @@
 #ifndef KMLFOLDER_H
 #define KMLFOLDER_H
 
+#include <QtCore/QVector>
 #include "KMLContainer.h"
 
 class KMLFolder : public KMLContainer
@@ -18,6 +19,11 @@ class KMLFolder : public KMLContainer
  public:
     KMLFolder();
     ~KMLFolder();
+
+    void addFolder( KMLFolder* folder );
+
+ protected:
+    QVector <KMLFolder*> m_folderVector;
 };
 
 #endif // KMLFOLDER_H
