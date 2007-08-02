@@ -1,3 +1,7 @@
+2007-08-02  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleModel.cpp: General cleaning.
+
 2007-08-01  Murad Tagirov  <tmurad@gmail.com>
 
     Added methods to support kml subfolders

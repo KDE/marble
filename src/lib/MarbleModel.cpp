@@ -42,7 +42,7 @@ class MarbleModelPrivate
     FlatScanlineTextureMapper   *m_texmapper;
 #endif
 
-    VectorComposer      *m_veccomposer;
+    VectorComposer      *m_veccomposer; // FIXME: Make not a pointer.
     GridMap             *m_gridmap;
 
     // Places on the map
@@ -69,7 +69,7 @@ MarbleModel::MarbleModel( QWidget *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_texmapper = 0;
-    d->m_veccomposer = 0;
+    d->m_veccomposer = new VectorComposer();
 
     d->m_placemarkpainter   = 0;
     d->m_placeMarkContainer = 0;
@@ -80,11 +80,14 @@ MarbleModel::MarbleModel( QWidget *parent )
     QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
     QString      selectedmap;
 
+    // We need at least one maptheme to run Marble.
     if ( mapthemedirs.count() == 0 ) {
         qDebug() << "Couldn't find any maps! Exiting ...";
         exit(-1);
     }
 
+    // If any map directories were found, try to find the default map:
+    // srtm.  If we can find that, just grab the first one.
     if ( mapthemedirs.count() >= 1 ) {
         QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
         if ( tmp.count() >= 1 )
@@ -101,9 +104,9 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkmanager   = new PlaceMarkManager();
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
-    d->m_placeMarkContainer ->clearTextPixmaps();
+    d->m_placeMarkContainer->clearTextPixmaps();
 
-    d->m_placemarkmodel   = new PlaceMarkModel( this );
+    d->m_placemarkmodel = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 
     d->m_gpsLayer = new GpsLayer();
@@ -144,25 +147,30 @@ void MarbleModel::stopPolling()
 
 void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
+    // Read the maptheme into d->m_maptheme.
     d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
                                            .arg( selectedMap ) ) );
 
-    if ( d->m_maptheme->bitmaplayer().enabled == true )
-    {
+    // If this layer is a bitmaplayer, check if the cached tiles for
+    // it are already generated, and if not, do so.
+    if ( d->m_maptheme->bitmaplayer().enabled ) {
+
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
-        if ( !TileLoader::baseTilesAvailable( "maps/earth/" + d->m_maptheme->tilePrefix() ) ) {
+        if ( !TileLoader::baseTilesAvailable( "maps/earth/"
+                                              + d->m_maptheme->tilePrefix() ) )
+        {
             qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
             KAtlasTileCreatorDialog tilecreatordlg( parent );
             tilecreatordlg.setSummary( d->m_maptheme->name(),
-                                   d->m_maptheme->description() );
+                                       d->m_maptheme->description() );
 #endif
 
             TileScissor tilecreator( d->m_maptheme->prefix(),
-                                 d->m_maptheme->installMap(),
-                                 d->m_maptheme->bitmaplayer().dem);
+                                     d->m_maptheme->installMap(),
+                                     d->m_maptheme->bitmaplayer().dem );
 
             // This timer is necessary, because if we remove it, the GUI
             // never gets shown before the work starts.
@@ -192,14 +200,14 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
                                             + d->m_maptheme->tilePrefix() );
 #endif
         else
-            d->m_texmapper->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
+            d->m_texmapper->setMapTheme( "maps/earth/"
+                                         + d->m_maptheme->tilePrefix() );
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
             this,           SLOT( notifyModelChanged() ) );
     }
 
-    if ( d->m_veccomposer == 0)
-        d->m_veccomposer  = new VectorComposer();
+    // Set all the colors for the vector layers
     d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );
     d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
     d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
@@ -222,8 +230,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
 void MarbleModel::resize( int width, int height )
 {
-    if ( d->m_maptheme->bitmaplayer().enabled == true )
-    {
+    if ( d->m_maptheme->bitmaplayer().enabled == true ) {
         d->m_texmapper->resizeMap( width, height );
     }
 
@@ -242,8 +249,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     if ( redrawBackground ) {
 
-        if ( d->m_maptheme->bitmaplayer().enabled == true )
-        {
+        if ( d->m_maptheme->bitmaplayer().enabled == true ) {
+
             d->m_texmapper->mapTexture( viewParams->m_canvasImage,
                                         viewParams->m_radius,
                                         viewParams->m_planetAxis );
