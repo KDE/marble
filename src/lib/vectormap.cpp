@@ -63,9 +63,11 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
                                  Quaternion& rotAxis)
 {
     clear();
-
+#ifndef FLAT_PROJ
     m_radius = radius - 1;
-
+#else
+    m_radius = radius;
+#endif
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
     double zlimit = ( ( m_imgradius < m_radius * m_radius )
@@ -137,12 +139,11 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     double y;
     ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
-    int offset=0;
+
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
     {
-        offset = 0;
         // This sorts out polygons by bounding box which aren't visible at all.
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
@@ -155,12 +156,12 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             boundingPolygon<<QPointF( x, y );
         }
         m_offset = 0;
-        while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() ) ) {
-            m_offset-=4*radius;
-            boundingPolygon.translate(-4*radius,0);
-        }
+        do {
+            m_offset-=4*m_radius;
+            boundingPolygon.translate(-4*m_radius,0);
+        } while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() ) );
         m_offset+=4*radius;
-        boundingPolygon.translate(4*radius,0);
+        boundingPolygon.translate(4*m_radius,0);
         while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() )) {
                 m_polygon.clear();
                 m_polygon.reserve( (*itPolyLine)->size() );
@@ -168,8 +169,8 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
                 createPolyLine( (*itPolyLine)->constBegin(),
                                 (*itPolyLine)->constEnd(), detail);
-                m_offset+=4*radius;
-                boundingPolygon.translate(4*radius,0);
+                m_offset+=4*m_radius;
+                boundingPolygon.translate(4*m_radius,0);
         }
     }
 #endif
@@ -192,7 +193,12 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     double xyFactor = (float)(2*m_radius)/M_PI;
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
-    bool flag = false;
+    bool CrossedDateline = false;
+    bool firstPoint = true;
+    int firstSign;
+    double firstX;
+    double degX;
+    double degY;
 #endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -255,29 +261,39 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
         m_firsthorizon = false;
     }
 #else
-            double xyFactor = (float)(2*m_radius)/M_PI;
-            double degX;
-            double degY;
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
             double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + m_offset;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_currentPoint = QPointF( x, y );
             int currentSign = ( degX > 0 )? 1 : -1 ;
-            if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
-                flag = !flag;
-//                 QPointF dateline;
-//                 if(m_lastSign < 0)
-//                     dateline = QPointF( m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset ,  m_lastY );
-//                 else
-//                     dateline= QPointF( m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset , m_lastY );
-// 
-//                 if( flag )
-//                     m_polygon<<dateline;
-//                 else
-//                     otherPolygon<<dateline;
+            if( firstPoint ) {
+                firstPoint = false;
+                firstSign = currentSign;
+                m_lastSign = currentSign;
+                firstX = x;
             }
-            if( !flag )
+            if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
+                //If the "jump" ocurrs in the Anctartica's latitudes
+                if ( degY > M_PI / 3 ) {
+                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLng) + m_offset, y );
+                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLng) + m_offset
+                            , m_imgheight/2 + xyFactor * (centerLat + M_PI / 2 ) );
+                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLng) + m_offset
+                            , m_imgheight/2 + xyFactor * (centerLat + M_PI / 2 ));
+                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLng) + m_offset, y);
+                }
+//                 if( !CrossedDateline ) {
+//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset, m_lastY );
+//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset, m_lastY );
+//                 }
+//                 else {
+//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset, m_lastY );
+//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset, m_lastY );
+//                 }
+                CrossedDateline = !CrossedDateline;
+            }
+            if( !CrossedDateline )
                 m_polygon<<m_currentPoint;
             else
                 otherPolygon<<m_currentPoint;
@@ -287,9 +303,9 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             m_lastSign = currentSign;
         }
     }
-#endif	
-    // Avoid polygons degenerated to Points and Lines.
 
+#endif
+    // Avoid polygons degenerated to Points and Lines.
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
@@ -321,9 +337,11 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
 {
-
+#ifndef FLAT_PROJ
     bool clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
-
+#else
+    bool clip = false;
+#endif
     ClipPainter  painter(origimg, clip);
     //	QPainter painter(origimg);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );

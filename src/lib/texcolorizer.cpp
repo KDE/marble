@@ -154,7 +154,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         }
     }
 #else
-        int yCenterOffset =  (int)((float)(2*radius / M_PI) * planetAxis.pitch());
+        int yCenterOffset =  (int)((float)(2*radius / M_PI) * viewParams->m_planetAxis.pitch());
         const int ytop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
         const int ybottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
         const int xleft = 0;
