@@ -38,7 +38,6 @@
 #include "PlaceMarkContainer.h"
 #include "placemarkpainter.h"
 #include "placemarkmodel.h"
-#include "maptheme.h"
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"

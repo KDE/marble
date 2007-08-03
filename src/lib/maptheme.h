@@ -31,7 +31,7 @@ typedef struct
 } DgmlLayer;
 
 
-class MARBLE_EXPORT MapTheme : public QObject
+class MapTheme : public QObject
 {
     Q_OBJECT
 

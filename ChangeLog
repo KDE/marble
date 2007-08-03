@@ -1,5 +1,11 @@
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
+	Reduce visibility of internal classes.
+	* src/lib/ViewParams.h (class ViewParams): Don't export this class
+	* src/lib/MarbleModel.{h,cpp}: Move #include of maptheme.h from .h
+	to .cpp
+	* src/lib/maptheme.h (class ViewParams): Don't export this class
+	
  	Remove storage of half of image width/height
 	* src/lib/GridMap.cpp: Remove storage of half of image width/heigh.
 

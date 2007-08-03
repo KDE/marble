@@ -11,7 +11,6 @@
 
 #ifndef VIEWPARAMS_H
 #define VIEWPARAMS_H
-#
 
 
 /** @file
@@ -34,7 +33,7 @@ class QImage;
  *
  */
 
-class MARBLE_EXPORT ViewParams
+class ViewParams
 {
  public:
     ViewParams( );

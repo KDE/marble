@@ -23,6 +23,7 @@
 #include "texcolorizer.h"
 #include "TileLoader.h"
 #include "tilescissor.h"
+#include "maptheme.h"
 #include "katlasdirs.h"
 #include "katlastilecreatordialog.h"
 #include "placemarkmanager.h"
