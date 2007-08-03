@@ -46,8 +46,11 @@ Misc
    - ViewParams                                                         --
 
 Cleaning:
- * Make all files follow the coding standards (See CLEANING)            DONE
  * Filename == Classname (CamelCasing)                                  ----
+ * Lon/lat everywhere instead of lng/lat                                ----
+ * Never store half image width/height as members.                      ----
+    - GridMap                                                           --
+    - *ScanlineTextureMapper                                            --
 
 Widget:
  * Separate the view from the globe (model)                             INGE
@@ -61,9 +64,10 @@ Widget:
     - show... terrain/cities/...                                        done
     - show... relief (texturecolorizer)                                 done
     - show... ice/borders/rivers/lakes    (vectorcomposer)              done
-    - interlaced                                                        inge
-    - mapTheme                                                          inge
+    - interlaced (rename to quickAndDirty?)                             inge
     - caches (coastimg, ...)                                            done
+   Note: these will NOT be done.
+    - mapTheme (this is tricky and will have to wait)                   --
 
 Vector backend
  * Better scalability                                                   ----
