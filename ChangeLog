@@ -1,6 +1,9 @@
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
-	Cleaning and remove storage of half if image width/height
+ 	Remove storage of half of image width/height
+	* src/lib/GridMap.cpp: Remove storage of half of image width/heigh.
+
+	Cleaning and remove storage of half of image width/height
 	* src/lib/AbstractScanlineTextureMapper.{h,cpp}, 
 	* src/lib/FlatScanlineTextureMapper.cpp,
 	* src/lib/GlobeScanlineTextureMapper.cpp: Cleaning

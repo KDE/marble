@@ -31,8 +31,8 @@ const double  PIHALF    = M_PI / 2;
 
 GridMap::GridMap()
 {
-    m_imageHalfWidth = 0;
-    m_imageHalfHeight = 0;
+    m_imageWidth  = 0;
+    m_imageHeight = 0;
     m_imageRadius = 0;
 
     //	Initialising booleans for horizoncrossing
@@ -201,13 +201,13 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF( (double)(m_imageHalfWidth + m_radius * qpos.v[Q_X]) + 1,
-                                      (double)(m_imageHalfHeight + m_radius * qpos.v[Q_Y]) + 1 );
+            m_currentPoint = QPointF( (double)(m_imageWidth / 2 + m_radius * qpos.v[Q_X]) + 1,
+                                      (double)(m_imageHeight / 2 + m_radius * qpos.v[Q_Y]) + 1 );
             //qDebug() << "Radius: " << m_radius
-            //         << "QPointF(" << (double)(m_imageHalfWidth+ m_radius*qpos.v[Q_X])+1
-            //        << ", " << (double)(m_imageHalfHeight+ m_radius*qpos.v[Q_Y])+1 << ")";
+            //         << "QPointF(" << (double)(m_imageWidth / 2 + m_radius*qpos.v[Q_X])+1
+            //        << ", " << (double)(m_imageHeight / 2 + m_radius*qpos.v[Q_Y])+1 << ")";
 
-            // Take care of horizon crossings if horizon is visible
+            // Take care of horizon crossings if horizon is visible.
             m_lastVisible = m_currentlyVisible;
             m_currentlyVisible = (qpos.v[Q_Z] >= 0) ? true : false;
 
@@ -250,27 +250,29 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
         }
     }
 #else
-    float const centerLat=m_planetAxis.pitch();
-    float const centerLng=-m_planetAxis.yaw();
-    double xyFactor = (float)(2*m_radius)/M_PI;
+    float const  centerLat =  m_planetAxis.pitch();
+    float const  centerLng = -m_planetAxis.yaw();
+    double       xyFactor  = (float)( 2 * m_radius ) / M_PI;
     m_polygon.clear();
 
-    if(dim == Latitude)
-    {
-        QPointF beginPoint(0.0f,m_imageHalfHeight + (centerLat + val)*xyFactor );
-        QPointF endPoint( m_imageHalfWidth*2, m_imageHalfHeight + (centerLat + val)*xyFactor );
-        m_polygon<<beginPoint<<endPoint;
-        append(m_polygon);
+    if ( dim == Latitude ) {
+        QPointF beginPoint( 0.0f, m_imageHeight / 2 + ( centerLat + val ) * xyFactor );
+        QPointF endPoint( m_imageWidth, m_imageHeight / 2 + ( centerLat + val ) * xyFactor );
+        m_polygon << beginPoint << endPoint;
+        append( m_polygon );
     }
-    else
-    {
-        float beginY = m_imageHalfHeight - m_radius + centerLat*xyFactor;
-        float endY = beginY + 2*m_radius;
-        if ( beginY < 0 ) beginY = 0;
-        if ( endY > 2*m_imageHalfHeight ) endY = 2*m_imageHalfHeight ;
-        float x = m_imageHalfWidth + (centerLng + val)*xyFactor;
-        while( x > 4*m_radius ) x-=4*m_radius;
-        while( x < m_imageHalfWidth*2 ) {
+    else {
+        float beginY = m_imageHeight / 2 - m_radius + centerLat * xyFactor;
+        float endY   = beginY + 2 * m_radius;
+        if ( beginY < 0 ) 
+            beginY = 0;
+        if ( endY > m_imageHeight )
+            endY = m_imageHeight ;
+
+        float x = m_imageWidth / 2 + ( centerLng + val ) * nxyFactor;
+        while ( x > 4 * m_radius ) 
+            x -= 4 * m_radius;
+        while ( x < m_imageWidth ) {
             QPointF beginPoint( x , beginY );
             QPointF endPoint( x , endY );
             m_polygon<<beginPoint<<endPoint;
@@ -285,7 +287,6 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
 
 void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
 {
-
     if ( size() == 0 )
         return;
 
@@ -303,8 +304,8 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
         painter->drawPolyline(*itPolygon);
     }
 
-    if (antialiasing == true)
-        painter->setRenderHint(QPainter::Antialiasing, false);
+    if (antialiasing)
+        painter->setRenderHint( QPainter::Antialiasing, false );
 }
 
 
@@ -314,26 +315,26 @@ const QPointF GridMap::horizonPoint()
     double  xa = 0;
     double  ya = 0;
 
-    xa = m_currentPoint.x() - (m_imageHalfWidth +1) ;
+    xa = m_currentPoint.x() - ( m_imageWidth / 2 + 1 ) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
     double  radicant = (double)(m_radius +1) * (double)( m_radius +1) - xa*xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
-    if ( ( m_currentPoint.y() - ( m_imageHalfHeight + 1 ) ) < 0 )
+    if ( ( m_currentPoint.y() - ( m_imageHeight / 2 + 1 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (double)m_imageHalfWidth  + xa + 1,
-                    (double)m_imageHalfHeight + ya + 1 );
+    return QPointF( (double)m_imageWidth / 2  + xa + 1,
+                    (double)m_imageHeight / 2 + ya + 1 );
 }
 
 
 
 void GridMap::resizeMap( int width, int height )
 {
-    m_imageHalfWidth  = width / 2;
-    m_imageHalfHeight = height / 2;
-    m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
-                          + m_imageHalfHeight * m_imageHalfHeight );
+    m_imageWidth  = width;
+    m_imageHeight = height;
+    m_imageRadius     = ( m_imageWidth * m_imageWidth / 4
+                          + m_imageHeight * m_imageHeight / 4 );
 }

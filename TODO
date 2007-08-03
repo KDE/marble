@@ -48,8 +48,8 @@ Misc
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
  * Lon/lat everywhere instead of lng/lat                                ----
- * Never store half image width/height as members.                      INGE
-    - GridMap                                                           inge
+ * Never store half image width/height as members.                      DONE
+    - GridMap                                                           done
     - *ScanlineTextureMapper                                            done
 
 Widget:

@@ -56,8 +56,8 @@ class GridMap : public ScreenPolygon::Vector
 #endif
     ScreenPolygon m_polygon;
 
-    int      m_imageHalfWidth;
-    int      m_imageHalfHeight;
+    int      m_imageWidth;
+    int      m_imageHeight;
     int      m_imageRadius;
 
     QPointF  m_currentPoint;
