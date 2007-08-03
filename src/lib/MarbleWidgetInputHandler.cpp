@@ -15,6 +15,7 @@
 
 #include <QtCore/QDebug>
 
+#include "utils.h"
 #include "GeoPoint.h"
 #include "Quaternion.h"
 #include "katlasdirs.h"

@@ -11,14 +11,15 @@
 
 #include "vectormap.h"
 
-#include <QtGui/QColor>
-#include <QtCore/QVector>
-#include <QtCore/QTime>
-#include <QtCore/QDebug>
-
 #include <cmath>
 #include <stdlib.h>
 
+#include <QtCore/QVector>
+#include <QtCore/QTime>
+#include <QtCore/QDebug>
+#include <QtGui/QColor>
+
+#include "utils.h"
 #include "ClipPainter.h"
 #include "GeoPolygon.h"
 

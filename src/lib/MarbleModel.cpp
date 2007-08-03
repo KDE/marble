@@ -17,6 +17,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 
+#include "utils.h"
 #include "ClipPainter.h"
 #include "GeoPolygon.h"
 #include "ViewParams.h"
@@ -29,7 +30,7 @@
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
 #include "gps/GpsLayer.h"
-#include "utils.h"
+
 
 class MarbleModelPrivate
 {

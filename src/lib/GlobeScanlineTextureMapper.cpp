@@ -194,7 +194,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                     m_interpolate = false;
                 }
                 else {
-
                     m_x += m_n - 1;
 
                     m_interpolate = true;

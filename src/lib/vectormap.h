@@ -18,10 +18,11 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 
+#include "utils.h"
 #include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"
-// #define FLAT_PROJ
+
 
 class PntMap;
 class ClipPainter;

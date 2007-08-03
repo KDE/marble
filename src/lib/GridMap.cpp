@@ -19,7 +19,10 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
+#include "utils.h"
 #include "ClipPainter.h"
+
+
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
  
@@ -269,7 +272,7 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
         if ( endY > m_imageHeight )
             endY = m_imageHeight ;
 
-        float x = m_imageWidth / 2 + ( centerLon + val ) * nxyFactor;
+        float x = m_imageWidth / 2 + ( centerLon + val ) * xyFactor;
         while ( x > 4 * m_radius ) 
             x -= 4 * m_radius;
         while ( x < m_imageWidth ) {

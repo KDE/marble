@@ -40,8 +40,8 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     explicit GlobeScanlineTextureMapper( const QString& path, QObject * parent =0 );
     virtual ~GlobeScanlineTextureMapper();
 
-    bool interlaced() const { return m_interlaced; }
     void resizeMap(int width, int height);
+    bool interlaced() const { return m_interlaced; }
     void setInterlaced( bool enabled ) { m_interlaced = enabled; }
     void mapTexture(QImage* canvasImage, const int& radius, Quaternion& planetAxis);
 

@@ -13,6 +13,15 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+
+#include <math.h>
+
+
+// Define FLAT_PROJ here to get flat projection.
+//
+//#define FLAT_PROJ
+
+
 const double RAD2INT = 21600.0 / M_PI;
 
 #endif

@@ -24,7 +24,7 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-// #define FLAT_PROJ
+
 #include "marble_export.h"
 
 #include <QtCore/QAbstractListModel>
@@ -33,6 +33,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 
+#include "utils.h"
 #include "Quaternion.h"
 #include "GridMap.h"
 #include "PlaceMarkContainer.h"

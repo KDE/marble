@@ -22,8 +22,9 @@
 #include <QtCore/QList>
 #include <QtCore/QVector>
 #include <QtGui/QImage>
+
 #include "Quaternion.h"
-// #define FLAT_PROJ
+
 
 class ViewParams;
 

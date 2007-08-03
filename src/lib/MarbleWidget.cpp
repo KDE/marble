@@ -21,6 +21,7 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 
+#include "utils.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
 #include "texcolorizer.h"

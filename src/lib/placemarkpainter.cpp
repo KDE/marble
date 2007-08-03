@@ -7,8 +7,8 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-//
-// #define FLAT_PROJ
+
+
 #include "placemarkpainter.h"
 
 #include <QtCore/QAbstractItemModel>
@@ -20,6 +20,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QPainter>
 
+#include "utils.h"
 #include "placemark.h"
 #include "katlasdirs.h"
 #include "ViewParams.h"

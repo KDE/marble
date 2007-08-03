@@ -12,11 +12,11 @@
 
 #ifndef GRIDMAP_H
 #define GRIDMAP_H
-// #define FLAT_PROJ
 
 
 #include <QtGui/QPen>
 
+#include "utils.h"
 #include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"

@@ -1,3 +1,24 @@
+2007-08-04  Inge Wallin  <inge@lysator.liu.se>
+
+	Make it possible to choose between Flat projection and globe
+	projection in one place only (utils.h).	
+	* src/lib/vectormap.cpp,
+	* src/lib/utils.h,
+	* src/lib/MarbleWidget.cpp,
+	* src/lib/placemarkpainter.cpp,
+	* src/lib/MarbleModel.h,
+	* src/lib/GlobeScanlineTextureMapper.h,
+	* src/lib/vectormap.h,
+	* src/lib/AbstractScanlineTextureMapper.h,
+	* src/lib/MarbleModel.cpp,
+	* src/lib/GlobeScanlineTextureMapper.cpp,
+	* src/lib/texcolorizer.h,
+	* src/lib/GridMap.h,
+	* src/lib/texcolorizer.cpp,
+	* src/lib/GridMap.cpp,
+	* src/lib/MarbleWidgetInputHandler.cpp:
+	Include utils.h and remove all other defines of FLAT_PROJ
+
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
 	Finish change lng -> lon according to the coding standards in the

@@ -17,8 +17,8 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
+#include "utils.h"
 #include "ViewParams.h"
-
 #include "texturepalette.cpp"
 
 
