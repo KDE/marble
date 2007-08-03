@@ -126,6 +126,20 @@ As you can see, it is somewhat difficult to spot where the expression
 ends and the action part begins if you just look at the left side.
 
 
+Special considerations for Marble
+---------------------------------
+
+Some things are only applicable for Marble.
+
+Abbreviations
+- - - - - - -
+
+Use the following abbreviations in variable names and comments:
+
+lon     longitude (not lng)
+lat     latitude
+
+
 Settings for Your Editor
 ------------------------
 
