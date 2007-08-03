@@ -130,9 +130,9 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
         }
     }
 #else
-    float const centerLat=m_planetAxis.pitch();
-    float const centerLng=-m_planetAxis.yaw();
-    double xyFactor = (float)(2*radius)/M_PI;
+    float const centerLat =  m_planetAxis.pitch();
+    float const centerLon = -m_planetAxis.yaw();
+    double xyFactor = (float)( 2 * radius ) / M_PI;
     double degX;
     double degY;
     double x;
@@ -151,8 +151,8 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
         {
             qbound = m_boundary[i].quaternion();
             qbound.getSpherical(degX,degY);
-            x = m_imgwidth/2 + xyFactor * (degX + centerLng);
-            y = m_imgheight/2 + xyFactor * (degY + centerLat);
+            x = m_imgwidth / 2  + xyFactor * (degX + centerLon);
+            y = m_imgheight / 2 + xyFactor * (degY + centerLat);
             boundingPolygon<<QPointF( x, y );
         }
         m_offset = 0;
@@ -188,8 +188,8 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     //	int step = 1;
     //	int remain = size();
 #ifdef FLAT_PROJ
-    float const centerLat=m_planetAxis.pitch();
-    float const centerLng=-m_planetAxis.yaw();
+    float const centerLat = m_planetAxis.pitch();
+    float const centerLon = -m_planetAxis.yaw();
     double xyFactor = (float)(2*m_radius)/M_PI;
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
@@ -263,7 +263,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #else
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
-            double x = m_imgwidth/2 + xyFactor * (degX + centerLng) + m_offset;
+            double x = m_imgwidth/2 + xyFactor * (degX + centerLon) + m_offset;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_currentPoint = QPointF( x, y );
             int currentSign = ( degX > 0 )? 1 : -1 ;
@@ -276,20 +276,20 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
                 if ( degY > M_PI / 3 ) {
-                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLng) + m_offset, y );
-                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLng) + m_offset
+                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLon) + m_offset, y );
+                       m_polygon<<QPointF( m_imgwidth/2 + xyFactor * ( m_lastSign*M_PI + centerLon) + m_offset
                             , m_imgheight/2 + xyFactor * (centerLat + M_PI / 2 ) );
-                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLng) + m_offset
+                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLon) + m_offset
                             , m_imgheight/2 + xyFactor * (centerLat + M_PI / 2 ));
-                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLng) + m_offset, y);
+                       m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLon) + m_offset, y);
                 }
 //                 if( !CrossedDateline ) {
-//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset, m_lastY );
-//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset, m_lastY );
+//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
+//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
 //                 }
 //                 else {
-//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLng) + m_offset, m_lastY );
-//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLng) + m_offset, m_lastY );
+//                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
+//                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
 //                 }
                 CrossedDateline = !CrossedDateline;
             }

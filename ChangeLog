@@ -1,6 +1,16 @@
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
-	Change lng-> lon according to the coding standards.
+	Finish change lng -> lon according to the coding standards in the
+	library.
+	* src/lib/GeoPolygon.cpp,
+	* src/lib/MarbleWidgetInputHandler.cpp,
+	* src/lib/MarbleWidgetPopupMenu.cpp,
+	* src/lib/placemarkmanager.cpp,
+	* src/lib/placemarkpainter.cpp,
+	* src/lib/vectormap.cpp:
+	Change all lng -> lon
+
+	Change lng -> lon according to the coding standards.
 	* src/lib/AbstractScanlineTextureMapper.cpp,
 	* src/lib/AbstractScanlineTextureMapper.h,
 	* src/lib/FlatScanlineTextureMapper.cpp,

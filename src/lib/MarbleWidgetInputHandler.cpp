@@ -124,9 +124,9 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( m_positionSignalConnected )
         {
             double  lat;
-            double  lng;
-            m_widget->globeSphericals( event->x(), event->y(), lng, lat );
-            QString position = GeoPoint( lng, lat ).toString();
+            double  lon;
+            m_widget->globeSphericals( event->x(), event->y(), lon, lat );
+            QString position = GeoPoint( lon, lat ).toString();
             emit mouseGeoPosition( position );
         }
 

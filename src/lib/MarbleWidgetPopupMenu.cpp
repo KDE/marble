@@ -89,13 +89,13 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->addSeparator();
 
     double  lat;
-    double  lng;
+    double  lon;
 
-    m_view->globeSphericals( xpos, ypos, lng, lat );
+    m_view->globeSphericals( xpos, ypos, lon, lat );
 
     // Any idea what this could do on activation?
     m_posaction->setEnabled( false );
-    m_posaction->setText( GeoPoint( lng, lat ).toString() );
+    m_posaction->setText( GeoPoint( lon, lat ).toString() );
     m_lmbMenu->addAction( m_posaction );
 
     m_lmbMenu->popup( m_view->mapToGlobal( curpos ) );
@@ -129,11 +129,11 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
     QPoint  p = m_pAddMeasurePointAction->data().toPoint();
 
     double  lat;
-    double  lng;
+    double  lon;
 
-    m_view->globeSphericals( p.x(), p.y(), lng, lat);
+    m_view->globeSphericals( p.x(), p.y(), lon, lat);
 
-    emit addMeasurePoint( lng, lat );
+    emit addMeasurePoint( lon, lat );
 }
 
 void MarbleWidgetPopupMenu::slotAboutDialog()

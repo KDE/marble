@@ -188,8 +188,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     PlaceMark  *mark = 0;
     int         labelnum = 0;
 #ifdef FLAT_PROJ
-    float const centerLat=planetAxis.pitch();
-    float const centerLng=-planetAxis.yaw();
+    float const centerLat =  planetAxis.pitch();
+    float const centerLon = -planetAxis.yaw();
 #endif
     PlaceMarkContainer::const_iterator  it;
     for ( it = placecontainer->constBegin();
@@ -240,8 +240,8 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
             double degY;
             qpos.getSpherical(degX,degY);
 
-            x = (int)(imgwidth/2 + xyFactor * (degX + centerLng));
-            y = (int)(imgheight/2 + xyFactor * (degY + centerLat));
+            x = (int)(imgwidth  / 2 + xyFactor * (degX + centerLon));
+            y = (int)(imgheight / 2 + xyFactor * (degY + centerLat));
 
             // Don't process placemarks if they are outside the screen area
              if ( ( x >= 0 && x < imgwidth || x+4*viewParams->m_radius < imgwidth || x-4*viewParams->m_radius >= 0 )  && y >= 0 && y < imgheight ) {

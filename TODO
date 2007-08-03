@@ -47,9 +47,9 @@ Misc
 
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
- * Lon/lat everywhere instead of lng/lat                                ----
+ * Lon/lat everywhere instead of lng/lat                                INGE
     - in src/                                                           --
-    - in src/lib                                                        --
+    - in src/lib                                                        done
     - in src/plugins                                                    --
     - in src/tilecreator                                                --
 Widget:

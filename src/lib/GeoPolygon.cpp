@@ -114,7 +114,7 @@ void PntMap::load(const QString &filename)
 		
     short  header;
     short  lat;
-    short  lng;
+    short  lon;
     int    count = 0;
 
     const int halfFileLength = filelength / 2;
@@ -122,10 +122,10 @@ void PntMap::load(const QString &filename)
     for ( int i = 0; i < halfFileLength; i += 3 ) {
         header = src[i];
         lat = src[i+1];
-        lng = src[i+2];	
+        lon = src[i+2];	
 
         // Transforming Range of Coordinates to lat [0,ARCMINUTE] ,
-        // lng [0,2 * ARCMINUTE]
+        // lon [0,2 * ARCMINUTE]
 						
         lat = -lat;
 
@@ -137,7 +137,7 @@ void PntMap::load(const QString &filename)
         //
         if ( header > 5 ) {
 			
-            // qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
+            // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
 
             GeoPolygon  *polyline = new GeoPolygon();
             append( polyline );
@@ -151,11 +151,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoPoint( 5, (int)(lng), (int)(lat) ) );
+            polyline->append( GeoPoint( 5, (int)(lon), (int)(lat) ) );
         }
         else {
-            // qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
-            last()->append( GeoPoint( (int)(header), (int)(lng), (int)(lat) ) ); 
+            // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
+            last()->append( GeoPoint( (int)(header), (int)(lon), (int)(lat) ) ); 
         }
         ++count;
     }
@@ -177,20 +177,20 @@ void PntMap::load(const QString &filename)
 
     short  header;
     short  lat;
-    short  lng;
+    short  lon;
 
     // Iterator that points to current PolyLine in PntMap
     //	QList<GeoPolygon*>::iterator it = begin();
     //	int count = 0;
 
     while( !stream.atEnd() ){	
-        stream >> header >> lat >> lng;		
-        // Transforming Range of Coordinates to lat [0,ARCMINUTE] , lng [0,2 * ARCMINUTE] 
+        stream >> header >> lat >> lon;		
+        // Transforming Range of Coordinates to lat [0,ARCMINUTE] , lon [0,2 * ARCMINUTE] 
 						
         lat = -lat;
         if ( header > 5 ) {
 			
-            // qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
+            // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
             GeoPolygon  *polyline = new GeoPolygon();
             append( polyline );
 
@@ -203,11 +203,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoPoint( 5, (int)(lng), (int)(lat) ) );
+            polyline->append( GeoPoint( 5, (int)(lon), (int)(lat) ) );
         }
         else {
-            // qDebug(QString("header: %1 lat: %2 lng: %3").arg(header).arg(lat).arg(lng).toLatin1());
-            last()->append( GeoPoint( (int)(header), (int)(lng), (int)(lat) ) );
+            // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
+            last()->append( GeoPoint( (int)(header), (int)(lon), (int)(lat) ) );
         }
         ++count;
     }
