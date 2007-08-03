@@ -1,5 +1,21 @@
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
+	Change lng-> lon according to the coding standards.
+	* src/lib/AbstractScanlineTextureMapper.cpp,
+	* src/lib/AbstractScanlineTextureMapper.h,
+	* src/lib/FlatScanlineTextureMapper.cpp,
+	* src/lib/FlatScanlineTextureMapper.h,
+	* src/lib/GlobeScanlineTextureMapper.cpp,
+	* src/lib/GlobeScanlineTextureMapper.h,
+	* src/lib/GridMap.cpp,
+	* src/lib/GridMap.h,
+	* src/lib/MarbleWidget.cpp,
+	* src/lib/MarbleWidget.h,
+	* src/lib/measuretool.cpp,
+	* src/lib/measuretool.h,
+	* src/lib/TileLoader.cpp:
+	Change all lng -> lon
+
 	Reduce visibility of internal classes.
 	* src/lib/ViewParams.h (class ViewParams): Don't export this class
 	* src/lib/MarbleModel.{h,cpp}: Move #include of maptheme.h from .h

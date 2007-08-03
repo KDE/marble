@@ -123,26 +123,24 @@ void TileLoader::flush()
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
-    // Choosing the correct tile via Lng/Lat info 
+    // Choosing the correct tile via Lon/Lat info 
 
     int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
     if ( !m_tileHash.contains( tileId ) ) {
-        if ( m_tileCache.contains( tileId ) )
-        {
+        if ( m_tileCache.contains( tileId ) ) {
             m_tile = m_tileCache.take( tileId );
             m_tileHash[tileId] = m_tile;
         }
-        else
-        {
-//            qDebug() << "load Tile from Disk: " << tileId;
+        else {
+            // qDebug() << "load Tile from Disk: " << tileId;
             m_tile = new TextureTile( tileId );
             m_tileHash[tileId] = m_tile;
 
             connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
                      m_downloadManager, SLOT( addJob( const QString&, int ) ) );
             connect( m_tile,            SIGNAL( tileUpdateDone() ), 
-                 this,              SIGNAL( tileUpdateAvailable() ) );
+                     this,              SIGNAL( tileUpdateAvailable() ) );
             m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
         }
     } 

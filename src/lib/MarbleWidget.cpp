@@ -472,9 +472,9 @@ void MarbleWidget::setCenterLatitude( double lat )
     centerOn( lat, centerLongitude() );
 }
 
-void MarbleWidget::setCenterLongitude( double lng )
+void MarbleWidget::setCenterLongitude( double lon )
 {
-    centerOn( centerLatitude(), lng );
+    centerOn( centerLatitude(), lon );
 }
 
 
@@ -593,10 +593,10 @@ int MarbleWidget::northPoleZ()
     return (int)( d->m_viewParams.m_radius * northPole.v[Q_Z] );
 }
 
-bool MarbleWidget::screenCoordinates( const double lng, const double lat,
+bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
-    Quaternion  qpos       = GeoPoint( lng, lat ).quaternion();
+    Quaternion  qpos       = GeoPoint( lon, lat ).quaternion();
     Quaternion  invRotAxis = d->m_viewParams.m_planetAxis.inverse();
 
     qpos.rotateAroundAxis(invRotAxis);

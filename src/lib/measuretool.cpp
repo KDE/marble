@@ -74,12 +74,10 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
 
     m_totalDistance = 0.0;
 
-    double  lng;
+    double  lon;
     double  lat;
-    double  prevlng;
-    double  prevlat;
-    prevlng = 0.0;
-    prevlat = 0.0;
+    double  prevlon = 0.0;
+    double  prevlat = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -98,17 +96,17 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
             // distancePathShadow << QPointF(x,y+1);
         }
 
-        (*it)->geoCoordinates( lng, lat );
+        (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
             m_totalDistance += acos( sin( prevlat ) * sin( lat )
-                                     + cos( prevlat ) * cos( lat ) * cos( prevlng - lng ) ) * 6371221.0;
+                                     + cos( prevlat ) * cos( lat ) * cos( prevlon - lon ) ) * 6371221.0;
 
             drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
         }
 
         prevqpos = qpos;
-        prevlng  = lng; 
+        prevlon  = lon; 
         prevlat  = lat;
     }
 

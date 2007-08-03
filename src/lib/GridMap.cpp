@@ -121,11 +121,11 @@ void GridMap::createGrid(const int& radius, Quaternion& planetAxis)
 }
 
 
-void GridMap::createCircles( const int lngNum, const int latNum )
+void GridMap::createCircles( const int lonNum, const int latNum )
 {
 
     // latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
-    // lngNum: number of longitude circles between lng = 0 deg and lng < 90 deg
+    // lonNum: number of longitude circles between lon = 0 deg and lon < 90 deg
 
     if ( latNum != 0 ) {
 
@@ -136,26 +136,26 @@ void GridMap::createCircles( const int lngNum, const int latNum )
         } 
     } 
 
-    if ( lngNum == 0 )
+    if ( lonNum == 0 )
         return;
 #ifndef FLAT_PROJ
     // Universal prime meridian and its orthogonal great circle:
     createCircle( + 0,      Longitude );
     createCircle( + PIHALF, Longitude );	
 
-    for ( int i = 1; i < lngNum; ++i ) {
+    for ( int i = 1; i < lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * PIHALF / lngNum,          Longitude, cutOff );
-        createCircle( i * PIHALF / lngNum + PIHALF, Longitude, cutOff );	
+        createCircle( i * PIHALF / lonNum,          Longitude, cutOff );
+        createCircle( i * PIHALF / lonNum + PIHALF, Longitude, cutOff );	
     }
 #else
     // Universal prime meridian
     createCircle( + 0,      Longitude );
 
-    for ( int i = 1; i <= lngNum; ++i ) {
+    for ( int i = 1; i <= lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * M_PI / lngNum,          Longitude, cutOff );
-        createCircle( i * M_PI / lngNum + M_PI, Longitude, cutOff );	
+        createCircle( i * M_PI / lonNum,          Longitude, cutOff );
+        createCircle( i * M_PI / lonNum + M_PI, Longitude, cutOff );	
     }
 #endif
 }
@@ -194,10 +194,10 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
             double itval  = (j != steps) ? (double)(j) / quartSteps : cutCoeff;
             double dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
 
-            double lat = ( dim == Latitude ) ? val : dimVal;
-            double lng = ( dim == Longitude ) ? val : dimVal;
+            double lat = ( dim == Latitude )  ? val : dimVal;
+            double lon = ( dim == Longitude ) ? val : dimVal;
 
-            GeoPoint    geoit( lng, -lat );
+            GeoPoint    geoit( lon, -lat );
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
@@ -251,7 +251,7 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
     }
 #else
     float const  centerLat =  m_planetAxis.pitch();
-    float const  centerLng = -m_planetAxis.yaw();
+    float const  centerLon = -m_planetAxis.yaw();
     double       xyFactor  = (float)( 2 * m_radius ) / M_PI;
     m_polygon.clear();
 
@@ -269,7 +269,7 @@ void GridMap::createCircle( double val, SphereDim dim, double cutOff )
         if ( endY > m_imageHeight )
             endY = m_imageHeight ;
 
-        float x = m_imageWidth / 2 + ( centerLng + val ) * nxyFactor;
+        float x = m_imageWidth / 2 + ( centerLon + val ) * nxyFactor;
         while ( x > 4 * m_radius ) 
             x -= 4 * m_radius;
         while ( x < m_imageWidth ) {

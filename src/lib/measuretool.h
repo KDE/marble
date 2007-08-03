@@ -38,8 +38,8 @@ class MeasureTool : public QObject
     void  paintTotalDistanceLabel( ClipPainter*, int, int, double );
 
  public Q_SLOTS:
-    void addMeasurePoint( double lng, double lat ) {
-        m_pMeasurePointList << new GeoPoint( lng, lat );
+    void addMeasurePoint( double lon, double lat ) {
+        m_pMeasurePointList << new GeoPoint( lon, lat );
     }
     void removeMeasurePoints() {
         m_pMeasurePointList.clear();

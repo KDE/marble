@@ -42,7 +42,7 @@ public:
     void selectTileLevel(int radius);
 
  protected:
-    void pixelValue(const double& lng, const double& lat, QRgb* scanLine);
+    void pixelValue(const double& lon, const double& lat, QRgb* scanLine);
     void nextTile();
     void detectMaxTileLevel();
 
@@ -61,19 +61,19 @@ public:
     int    m_imageRadius;
 
     double  m_prevLat;
-    double  m_prevLng;
+    double  m_prevLon;
 
     int    m_tilePosX;
     int    m_tilePosY;
 
-    int    m_fullRangeLng;
+    int    m_fullRangeLon;
     int    m_halfRangeLat;
-    double  m_halfRangeLng;
+    double  m_halfRangeLon;
     double  m_quatRangeLat;
 
-    int    m_fullNormLng;
+    int    m_fullNormLon;
     int    m_halfNormLat;
-    double  m_halfNormLng;
+    double  m_halfNormLon;
     double  m_quatNormLat;
 
     double  m_rad2PixelX;

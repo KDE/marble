@@ -46,7 +46,9 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     void mapTexture(QImage* canvasImage, const int& radius, Quaternion& planetAxis);
 
  protected:
-    void pixelValueApprox(const double& lng, const double& lat, QRgb *scanLine);
+    void pixelValueApprox(const double& lon, const double& lat,
+                          QRgb *scanLine);
+
     QRgb        *m_fastScanLine;
 
     bool         m_interpolate;

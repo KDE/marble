@@ -167,9 +167,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     int northPoleY();
     int northPoleZ();
-    bool screenCoordinates( const double lng, const double lat, int& x, int& y );
+    bool screenCoordinates( const double lon, const double lat, 
+                            int& x, int& y );
     // This method provides a way to center on lat = +90(N) - -90(S)
-    // and lng = +180(W) - -180(E)
+    // and lon = +180(W) - -180(E)
     // FIXME: Apidox
     void  rotateTo(const double&, const double&);
     void  rotateTo(const uint&, const uint&, const uint&);
@@ -356,9 +357,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Set the longitude for the centerPoint
-     * @param  lng  the new value for the longitude
+     * @param  lon  the new value for the longitude
      */
-    void setCenterLongitude( double lng );
+    void setCenterLongitude( double lon );
 
     /**
      * @brief  Set the home point
