@@ -28,7 +28,8 @@
 
 // #define INTERLACE
 
-GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) : AbstractScanlineTextureMapper(path,parent)
+GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) 
+    : AbstractScanlineTextureMapper(path,parent)
 {
     m_fastScanLine = 0;
 
@@ -54,6 +55,7 @@ GlobeScanlineTextureMapper::~GlobeScanlineTextureMapper()
 {
 }
 
+
 void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 {
     AbstractScanlineTextureMapper::resizeMap( width, height );
@@ -62,7 +64,7 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
     // current image canvas width
     m_nBest = 2;
 
-    int  nEvalMin = ( m_imageWidth - 1 );
+    int  nEvalMin = m_imageWidth - 1;
     for ( int it = 1; it < 48; ++it ) {
         int nEval = ( m_imageWidth - 1 ) / it + ( m_imageWidth - 1 ) % it;
         if ( nEval < nEvalMin ) {
@@ -70,7 +72,8 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
             m_nBest = it; 
         }
     }
-//            qDebug() << QString( "Optimized n = %1, remainder: %2" ).arg(m_nBest).arg( ( m_imageWidth ) % m_nBest );
+    // qDebug() << QString( "Optimized n = %1, remainder: %2" )
+    //.arg(m_nBest).arg( ( m_imageWidth ) % m_nBest );
 }
 
 
@@ -116,7 +119,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
     const int skip = ( m_interlaced == true ) ? 2 : 1;
 
     // Calculate the actual y-range of the map on the screen 
-    const int yTop = ( m_imageHalfHeight-radius < 0 ) ? 0 : m_imageHalfHeight-radius;
+    const int yTop = ( ( m_imageHeight / 2 - radius < 0 )
+                       ? 0 : m_imageHeight / 2 - radius );
     const int yBottom = (yTop == 0) ? m_imageHeight - skip + 1: yTop + radius + radius - skip + 1;
 
     for ( m_y = yTop; m_y < yBottom ; m_y+=skip ) {
@@ -129,18 +133,18 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
         // }
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        m_qy = radiusf * (double)( m_y - m_imageHalfHeight );
+        m_qy = radiusf * (double)( m_y - m_imageHeight / 2 );
         m_qr = 1.0 - m_qy * m_qy;
 
         // rx is the radius component in x direction
         int rx = (int)sqrt( (double)( radius2 
-                      - ( ( m_y - m_imageHalfHeight )
-                      * ( m_y - m_imageHalfHeight ) ) ) );
+                      - ( ( m_y - m_imageHeight / 2 )
+                      * ( m_y - m_imageHeight / 2 ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline
-        const int xLeft  = ( ( m_imageHalfWidth-rx > 0 )
-                             ? m_imageHalfWidth - rx : 0 ); 
-        const int xRight = ( ( m_imageHalfWidth-rx > 0 )
+        const int xLeft  = ( ( m_imageWidth / 2 - rx > 0 )
+                             ? m_imageWidth / 2 - rx : 0 ); 
+        const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
                              ? xLeft + rx + rx : canvasImage -> width() );
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
@@ -153,14 +157,14 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
         int  xIpLeft  = 1;
         int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
 
-        if (m_imageHalfWidth-rx > 0) {
+        if (m_imageWidth / 2 - rx > 0) {
             xIpLeft  = m_n * (int)( xLeft  / m_n + 1 );
             xIpRight = m_n * (int)( xRight / m_n - 1 );
         }
 
         // Decrease pole distortion due to linear approximation ( y-axis )
         bool crossingPoleArea = false;
-        int northPoleY = m_imageHalfHeight + (int)( radius * northPole.v[Q_Y] );
+        int northPoleY = m_imageHeight / 2 + (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
              && northPoleY - ( m_n * 0.75 ) <= m_y
              && northPoleY + ( m_n * 0.75 ) >= m_y ) 
@@ -179,7 +183,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             if ( m_x >= xIpLeft && m_x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
-                int northPoleX = m_imageHalfWidth + (int)( radius * northPole.v[Q_X] );
+                int northPoleX = m_imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
 
 //                qDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea == true
@@ -201,7 +205,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                 m_interpolate = false;
 
             // Evaluate more coordinates for the 3D position vector of the current pixel
-            m_qx = (double)( m_x - m_imageHalfWidth ) * radiusf;
+            m_qx = (double)( m_x - m_imageWidth / 2 ) * radiusf;
 
             double qr2z = m_qr - m_qx * m_qx;
             m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;        
@@ -220,8 +224,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             if ( m_interpolate ) {
                 pixelValueApprox( lng, lat, m_scanLine );
 
-                if ( m_interlaced == true )
-                {
+                if ( m_interlaced ) {
                     for ( int j = 0; j < m_n - 1; ++j ) {
                         m_fastScanLine[j] = m_scanLine[j];
                     }
@@ -229,7 +232,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
                 }
 
                 m_scanLine += ( m_n - 1 );
-
             }
 
             // You can temporarily comment out this line and run Marble
@@ -239,17 +241,14 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             m_prevLat = lat; // preparing for interpolation
             m_prevLng = lng;
 
-            if ( m_interlaced == true )
-            {
+            if ( m_interlaced == true ) {
                *m_fastScanLine = *m_scanLine;
                ++m_fastScanLine;
             }
 
             ++m_scanLine;
-
         }
     }
-
 
     m_tileLoader->cleanupTilehash();
 }

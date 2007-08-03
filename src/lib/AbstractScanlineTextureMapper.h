@@ -12,15 +12,18 @@
 #ifndef ABSTRACTSCANLINETEXTUREMAPPER_H
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
+
 #include <QtCore/QString>
 #include <QtGui/QColor>
 
 #include "Quaternion.h"
 #include "AbstractLayer/AbstractLayer.h"
 
+
 class QImage;
 class TextureTile;
 class TileLoader;
+
 
 class AbstractScanlineTextureMapper : public AbstractLayer
 {
@@ -29,7 +32,9 @@ class AbstractScanlineTextureMapper : public AbstractLayer
 public:
     explicit AbstractScanlineTextureMapper( const QString& path, QObject * parent=0 );
     ~AbstractScanlineTextureMapper();
-    virtual void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis) =0;
+
+    virtual void mapTexture(QImage* canvasImage, const int&, 
+                            Quaternion& planetAxis) = 0;
 
     void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
@@ -51,8 +56,6 @@ public:
 
     int          m_maxTileLevel;
 
-    int    m_imageHalfWidth;
-    int    m_imageHalfHeight;
     int    m_imageHeight;
     int    m_imageWidth;
     int    m_imageRadius;

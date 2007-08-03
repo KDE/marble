@@ -1,3 +1,10 @@
+2007-08-03  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleaning and remove storage of half if image width/height
+	* src/lib/AbstractScanlineTextureMapper.{h,cpp}, 
+	* src/lib/FlatScanlineTextureMapper.cpp,
+	* src/lib/GlobeScanlineTextureMapper.cpp: Cleaning
+
 2007-08-02  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleModel.cpp: General cleaning.

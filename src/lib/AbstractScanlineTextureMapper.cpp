@@ -38,17 +38,15 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
     m_tileLoader   = new TileLoader( path );
     m_scanLine     = 0;
 
-    connect( m_tileLoader,      SIGNAL( tileUpdateAvailable() ), 
-             this,              SLOT( notifyMapChanged() ) );
+    connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
+             this,         SLOT( notifyMapChanged() ) );
 
     detectMaxTileLevel();
 
-    m_imageHalfWidth  = 0;
-    m_imageHalfHeight = 0;
     m_imageWidth  = 0;
     m_imageHeight = 0;
 
-    m_imageRadius     = 0;
+    m_imageRadius = 0;
 
     m_prevLat = 0.0; 
     m_prevLng = 0.0;
@@ -60,15 +58,15 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
     m_halfRangeLat = 0;
     m_halfRangeLng = 0.0;
     m_quatRangeLat = 0.0;
-    m_fullNormLng = 0;
-    m_halfNormLat = 0;
-    m_halfNormLng = 0.0;
-    m_quatNormLat = 0.0;
+    m_fullNormLng  = 0;
+    m_halfNormLat  = 0;
+    m_halfNormLng  = 0.0;
+    m_quatNormLat  = 0.0;
 
     m_rad2PixelX = 0.0;
     m_rad2PixelY = 0.0;
 
-    m_tile = 0;
+    m_tile      = 0;
     m_tileLevel = 0;
 }
 
@@ -142,18 +140,16 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 
 void AbstractScanlineTextureMapper::resizeMap(int width, int height)
 {
-    m_imageHeight     = height;
-    m_imageWidth      = width;
-    // FIXME: These should be removed.  A memory access is much slower than a divide by 2.
-    m_imageHalfWidth  = width / 2;
-    m_imageHalfHeight = height / 2;
+    m_imageHeight = height;
+    m_imageWidth  = width;
 
-    m_imageRadius     = ( m_imageHalfWidth * m_imageHalfWidth
-                          + m_imageHalfHeight * m_imageHalfHeight );
+    m_imageRadius = ( m_imageWidth * m_imageWidth / 4
+                      + m_imageHeight * m_imageHeight / 4 );
 }
 
 void AbstractScanlineTextureMapper::pixelValue(const double& lng, 
-                                      const double& lat, QRgb* scanLine)
+                                               const double& lat, 
+                                               QRgb* scanLine)
 {
     // Convert the lng and lat coordinates of the position on the scanline
     // measured in radiant to the pixel position of the requested 

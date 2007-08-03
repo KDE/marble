@@ -66,8 +66,8 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
     //and what actually can be painted
-    yPaintedTop = yTop = m_imageHalfHeight - radius + yCenterOffset;
-    yPaintedBottom = yBottom = m_imageHalfHeight + radius + yCenterOffset;
+    yPaintedTop    = yTop    = m_imageHeight / 2 - radius + yCenterOffset;
+    yPaintedBottom = yBottom = m_imageHeight / 2 + radius + yCenterOffset;
 
     if(yPaintedTop < 0) yPaintedTop = 0;
     if(yPaintedTop > m_imageHeight) yPaintedTop = m_imageHeight;
@@ -76,59 +76,55 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
 
     //Calculate x-range
     xPaintedLeft = 0;
-    xLeft = m_imageHalfWidth - 2*radius;
+    xLeft = m_imageWidth / 2 - 2 * radius;
     xPaintedRight = m_imageWidth;
-    xRight = m_imageHalfWidth + 2*radius;
+    xRight = m_imageWidth / 2 + 2 * radius;
 
-    if(xPaintedLeft < 0) xPaintedLeft = 0;
-    if(xPaintedLeft > m_imageWidth) xPaintedLeft = m_imageWidth;
-    if(xPaintedRight < 0) xPaintedRight = 0;
-    if(xPaintedRight > m_imageWidth) xPaintedRight = m_imageWidth;
+    if (xPaintedLeft < 0)             xPaintedLeft  = 0;
+    if (xPaintedLeft > m_imageWidth)  xPaintedLeft  = m_imageWidth;
+    if (xPaintedRight < 0)            xPaintedRight = 0;
+    if (xPaintedRight > m_imageWidth) xPaintedRight = m_imageWidth;
 
-    //Calculate how many degrees are being represented per pixel
-    float xfactor = 2*M_PI/(float)(xRight - xLeft);
-    float yfactor = M_PI/(float)(yBottom-yTop);
+    // Calculate how many degrees are being represented per pixel.
+    float xfactor = 2 * M_PI / (float)(xRight - xLeft);
+    float yfactor = M_PI / (float)(yBottom-yTop);
 
-    float leftLng = - centerLng - (xfactor * m_imageHalfWidth);
+    float leftLng = - centerLng - ( xfactor * m_imageWidth / 2 );
     while(leftLng < -M_PI) leftLng += 2*M_PI;
-    while(leftLng > M_PI) leftLng -= 2*M_PI;
+    while(leftLng > M_PI)  leftLng -= 2*M_PI;
 
     //Paint the map
-    for(int y=yPaintedTop;y<yPaintedBottom;++y)
-    {
+    for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
         lat = -M_PI/2 + (y - yTop )* yfactor;
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lng = leftLng;
-        for(int x=xPaintedLeft;x<xPaintedRight;++x)
-        {
+        for ( int x = xPaintedLeft; x < xPaintedRight; ++x ) {
             lng += xfactor;
-            if(lng < -M_PI) lng += 2*M_PI;
-            if(lng > M_PI) lng -= 2*M_PI;
+            if ( lng < -M_PI ) lng += 2 * M_PI;
+            if ( lng > M_PI )  lng -= 2 * M_PI;
             pixelValue( lng, lat, m_scanLine + x );
         }
     }
 
-    //remove unused lines
+    // Remove unused lines
     int clearStart = 0;
-    int clearStop = yTop;
+    int clearStop  = yTop;
 
-    if (yPaintedTop - m_oldYPaintedTop <= 0)
-    {
+    if ( yPaintedTop - m_oldYPaintedTop <= 0 ) {
         clearStart=yPaintedBottom;
         clearStop=m_imageHeight;
     }
 
-    for(int y=clearStart;y<clearStop;++y)
-    {
+    for ( int y = clearStart; y < clearStop; ++y ) {
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
-        for(int x=0;x<=m_imageWidth;++x)
-        {
-            *(m_scanLine +x) = 0;
+        for ( int x = 0; x <= m_imageWidth; ++x ) {
+            *(m_scanLine + x) = 0;
         }
     }
     m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();
 }
+
 
 #include "FlatScanlineTextureMapper.moc"
