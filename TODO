@@ -48,10 +48,10 @@ Misc
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
  * Lon/lat everywhere instead of lng/lat                                ----
- * Never store half image width/height as members.                      DONE
-    - GridMap                                                           done
-    - *ScanlineTextureMapper                                            done
-
+    - in src/                                                           --
+    - in src/lib                                                        --
+    - in src/plugins                                                    --
+    - in src/tilecreator                                                --
 Widget:
  * Separate the view from the globe (model)                             INGE
     - Let the view parameters be in the view instead of in the globe    inge
