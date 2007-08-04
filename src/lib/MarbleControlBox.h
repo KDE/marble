@@ -123,10 +123,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
  private:
     MarbleControlBoxPrivate  * const d;
-    QWidget *m_navigationWidget;
-    QWidget *m_legendWidget;
-    QWidget *m_mapViewWidget;
-    QWidget *m_currentLocationWidget;
 };
+
 
 #endif // MARBLECONTROLBOX_H

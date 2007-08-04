@@ -1,3 +1,9 @@
+2007-08-04  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 8: public classes with private members
+	* src/lib/MarbleControlBox.{h,cpp}: d-pointerify the private
+	members that point to the tabs in the widget.
+
 2007-08-04  Murad Tagirov  <tmurad@gmail.com>
 
     Added basic support of kml folders. MarbleModel iterates over list
@@ -12,7 +18,6 @@
     Inherit KMLFeature -> PlaceMark, not KMLPlaceMark -> PlaceMark
     * src/lib/kml/KMLFeature.{h,cpp}
     * src/lib/kml/KMLPlaceMark.h
-
 
 2007-08-04  Murad Tagirov  <tmurad@gmail.com>
 

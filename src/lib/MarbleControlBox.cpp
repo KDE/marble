@@ -45,6 +45,10 @@ class MarbleControlBoxPrivate
     int            m_minimumzoom;
 
     Ui::MarbleControlBox  uiWidget;
+    QWidget              *m_navigationWidget;
+    QWidget              *m_legendWidget;
+    QWidget              *m_mapViewWidget;
+    QWidget              *m_currentLocationWidget;
 };
 
 
@@ -72,18 +76,18 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     //  set all of the Side Widget Variables  //
     d->uiWidget.toolBox->setCurrentIndex( 0 );
-    m_navigationWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_navigationWidget = d->uiWidget.toolBox->currentWidget();
     
     d->uiWidget.toolBox->setCurrentIndex( 1 );
-    m_legendWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_legendWidget = d->uiWidget.toolBox->currentWidget();
     
     d->uiWidget.toolBox->setCurrentIndex( 2 );
-    m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
     
     d->uiWidget.toolBox->setCurrentIndex( 3 );
-    m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
     
-//  m_currentLocationWidget->hide(); // Current location tab is hidden
+//  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
  //   toolBox->removeItem( 3 ); 
     d->uiWidget.toolBox->setCurrentIndex(0);
@@ -323,25 +327,25 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
 void MarbleControlBox::setNavigationTabShown( bool show )
 {
     QString  title = tr( "Navigation" );
-    setWidgetTabShown( m_navigationWidget, 0, show, title);
+    setWidgetTabShown( d->m_navigationWidget, 0, show, title);
 }
 
 void MarbleControlBox::setLegendTabShown( bool show )
 {
     QString  title = tr( "Legend" );
-    setWidgetTabShown( m_legendWidget, 1, show, title );
+    setWidgetTabShown( d->m_legendWidget, 1, show, title );
 }
 
 void MarbleControlBox::setMapViewTabShown( bool show )
 {
     QString  title = tr( "Map View" );
-    setWidgetTabShown( m_mapViewWidget, 2, show, title );
+    setWidgetTabShown( d->m_mapViewWidget, 2, show, title );
 }
 
 void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
     QString  title = tr( "Current Location" );
-    setWidgetTabShown( m_currentLocationWidget, 3, show, title );
+    setWidgetTabShown( d->m_currentLocationWidget, 3, show, title );
 }
 
 
