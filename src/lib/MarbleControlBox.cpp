@@ -28,6 +28,8 @@
 #include <QtGui/QStringListModel>
 #include <QtGui/QTextFrame>
 
+#include "ui_MarbleControlBox.h"
+
 #include <MarbleWidget.h>
 #include <katlasdirs.h>
 #include <maptheme.h>
@@ -41,6 +43,8 @@ class MarbleControlBoxPrivate
     QString        m_searchTerm;
     bool           m_searchTriggered;
     int            m_minimumzoom;
+
+    Ui::MarbleControlBox  uiWidget;
 };
 
 
@@ -57,80 +61,80 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     // FIXME: Get this from the widget?
     d->m_minimumzoom = 950;
 
-    setupUi( this );
+    d->uiWidget.setupUi( this );
  
     setFocusPolicy( Qt::NoFocus );
 
-    NavigationTab->setBackgroundRole( QPalette::Window );
-    LegendTab->setBackgroundRole( QPalette::Window );
-    MapViewTab->setBackgroundRole( QPalette::Window );
-    CurrentLocationTab->setBackgroundRole( QPalette::Window );
+    d->uiWidget.NavigationTab->setBackgroundRole( QPalette::Window );
+    d->uiWidget.LegendTab->setBackgroundRole( QPalette::Window );
+    d->uiWidget.MapViewTab->setBackgroundRole( QPalette::Window );
+    d->uiWidget.CurrentLocationTab->setBackgroundRole( QPalette::Window );
 
     //  set all of the Side Widget Variables  //
-    toolBox->setCurrentIndex( 0 );
-    m_navigationWidget = toolBox->currentWidget();
+    d->uiWidget.toolBox->setCurrentIndex( 0 );
+    m_navigationWidget = d->uiWidget.toolBox->currentWidget();
     
-    toolBox->setCurrentIndex( 1 );
-    m_ledgendWidget = toolBox->currentWidget();
+    d->uiWidget.toolBox->setCurrentIndex( 1 );
+    m_legendWidget = d->uiWidget.toolBox->currentWidget();
     
-    toolBox->setCurrentIndex( 2 );
-    m_mapViewWidget = toolBox->currentWidget();
+    d->uiWidget.toolBox->setCurrentIndex( 2 );
+    m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
     
-    toolBox->setCurrentIndex( 3 );
-    m_currentLocationWidget = toolBox->currentWidget();
+    d->uiWidget.toolBox->setCurrentIndex( 3 );
+    m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
     
 //  m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
  //   toolBox->removeItem( 3 ); 
-    toolBox->setCurrentIndex(0);
+    d->uiWidget.toolBox->setCurrentIndex(0);
     
     //default
     setCurrentLocationTabShown( false );
 
     setupGpsOption();
 
-    connect( goHomeButton, SIGNAL( clicked() ), 
-             this,         SIGNAL( goHome() ) ); 
-    connect( zoomSlider,   SIGNAL( valueChanged( int ) ),
-             this,         SIGNAL( zoomChanged( int ) ) ); 
-    connect( zoomInButton,  SIGNAL( clicked() ),
-             this,          SIGNAL( zoomIn() ) ); 
-    connect( zoomOutButton, SIGNAL( clicked() ),
-             this,          SIGNAL( zoomOut() ) ); 
+    connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ), 
+             this,                      SIGNAL( goHome() ) ); 
+    connect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
+             this,                      SIGNAL( zoomChanged( int ) ) ); 
+    connect( d->uiWidget.zoomInButton,  SIGNAL( clicked() ),
+             this,                      SIGNAL( zoomIn() ) ); 
+    connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
+             this,                      SIGNAL( zoomOut() ) ); 
 
-    connect( moveLeftButton,  SIGNAL( clicked() ),
-             this,            SIGNAL( moveLeft() ) ); 
-    connect( moveRightButton, SIGNAL( clicked() ),
-             this,            SIGNAL( moveRight() ) ); 
-    connect( moveUpButton,    SIGNAL( clicked() ),
-             this,            SIGNAL( moveUp() ) ); 
-    connect( moveDownButton,  SIGNAL( clicked() ),
-             this,            SIGNAL (moveDown() ) ); 
+    connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
+             this,                        SIGNAL( moveLeft() ) ); 
+    connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
+             this,                        SIGNAL( moveRight() ) ); 
+    connect( d->uiWidget.moveUpButton,    SIGNAL( clicked() ),
+             this,                        SIGNAL( moveUp() ) ); 
+    connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
+             this,                        SIGNAL (moveDown() ) ); 
 
-    connect(searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
-            this,             SLOT( searchLineChanged( const QString& ) ) );
+    connect(d->uiWidget.searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
+            this,                         SLOT( searchLineChanged( const QString& ) ) );
 
-    connect( locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
-             this,             SIGNAL( centerOn( const QModelIndex& ) ) );
+    connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
+             this,                         SIGNAL( centerOn( const QModelIndex& ) ) );
 
     QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
     QStandardItemModel  *mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    katlasThemeSelectView->setModel( mapthememodel );
+    d->uiWidget.katlasThemeSelectView->setModel( mapthememodel );
 
-    connect( katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
-             this,                  SIGNAL( selectMapTheme( const QString& ) ) );
+    connect( d->uiWidget.katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
+             this,                              SIGNAL( selectMapTheme( const QString& ) ) );
 }
 
 void MarbleControlBox::setupGpsOption()
 {
-    m_gpsDrawBox -> setEnabled( true );
-    m_gpsGoButton -> setEnabled( false );
+    d->uiWidget.m_gpsDrawBox -> setEnabled( true );
+    d->uiWidget.m_gpsGoButton -> setEnabled( false );
 
-    m_latComboBox->setCurrentIndex( 0 );
-    m_lonComboBox->setCurrentIndex( 0 );
+    d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
+    d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
     
-    connect( m_gpsDrawBox, SIGNAL( clicked( bool ) ),
-             this, SLOT( disableGpsInput( bool ) ) );
+    connect( d->uiWidget.m_gpsDrawBox, SIGNAL( clicked( bool ) ),
+             this,                     SLOT( disableGpsInput( bool ) ) );
 }
 
 
@@ -143,17 +147,17 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     setLocations( d->m_widget->placeMarkModel() );
 
     // Initialize the LegendBrowser
-    legendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
-    legendBrowser->setCheckedCities( d->m_widget->showCities() );
-    legendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
-    legendBrowser->setCheckedBorders( d->m_widget->showBorders() );
-    legendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
-                                          && d->m_widget->showRivers() );
-    legendBrowser->setCheckedGrid( d->m_widget->showGrid() );
-    legendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
-    legendBrowser->setCheckedRelief( d->m_widget->showRelief() );
-    legendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
-    legendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
+    d->uiWidget.legendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
+    d->uiWidget.legendBrowser->setCheckedCities( d->m_widget->showCities() );
+    d->uiWidget.legendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
+    d->uiWidget.legendBrowser->setCheckedBorders( d->m_widget->showBorders() );
+    d->uiWidget.legendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
+                                                      && d->m_widget->showRivers() );
+    d->uiWidget.legendBrowser->setCheckedGrid( d->m_widget->showGrid() );
+    d->uiWidget.legendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
+    d->uiWidget.legendBrowser->setCheckedRelief( d->m_widget->showRelief() );
+    d->uiWidget.legendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
+    d->uiWidget.legendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
@@ -173,28 +177,28 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect(this,     SIGNAL(selectMapTheme(const QString&)),
 	    d->m_widget, SLOT(setMapTheme(const QString&)));
 
-    connect( legendBrowser, SIGNAL( toggledLocations( bool ) ),
-             d->m_widget, SLOT( setShowPlaces( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledCities( bool ) ),
-             d->m_widget, SLOT( setShowCities( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledTerrain( bool ) ),
-             d->m_widget, SLOT( setShowTerrain( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledBorders( bool ) ),
-             d->m_widget, SLOT( setShowBorders( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget, SLOT( setShowRivers( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget, SLOT( setShowLakes( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledGrid( bool ) ),
-             d->m_widget, SLOT( setShowGrid( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledIceLayer( bool ) ),
-             d->m_widget, SLOT( setShowIceLayer( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledRelief( bool ) ),
-             d->m_widget, SLOT( setShowRelief( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledWindRose( bool ) ),
-             d->m_widget, SLOT( setShowWindRose( bool ) ) );
-    connect( legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
-             d->m_widget, SLOT( setShowScaleBar( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledLocations( bool ) ),
+             d->m_widget,               SLOT( setShowPlaces( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledCities( bool ) ),
+             d->m_widget,               SLOT( setShowCities( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledTerrain( bool ) ),
+             d->m_widget,               SLOT( setShowTerrain( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledBorders( bool ) ),
+             d->m_widget,               SLOT( setShowBorders( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             d->m_widget,               SLOT( setShowRivers( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             d->m_widget,               SLOT( setShowLakes( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledGrid( bool ) ),
+             d->m_widget,               SLOT( setShowGrid( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledIceLayer( bool ) ),
+             d->m_widget,               SLOT( setShowIceLayer( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledRelief( bool ) ),
+             d->m_widget,               SLOT( setShowRelief( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWindRose( bool ) ),
+             d->m_widget,               SLOT( setShowWindRose( bool ) ) );
+    connect( d->uiWidget.legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
+             d->m_widget,               SLOT( setShowScaleBar( bool ) ) );
     
     //connect GPS Option signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
@@ -214,25 +218,25 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
                                           int insertIndex, bool show,
                                           QString &text )
 {
-    int index = toolBox->indexOf( widget );
+    int index = d->uiWidget.toolBox->indexOf( widget );
     qDebug() << text << index;
 
     if( show ) {
         if ( !(index >= 0) ){
-            if ( insertIndex < toolBox->count() ) {
-                toolBox->insertItem( insertIndex,
-                                     widget, 
-                                     text );
+            if ( insertIndex < d->uiWidget.toolBox->count() ) {
+                d->uiWidget.toolBox->insertItem( insertIndex,
+                                                 widget, 
+                                                 text );
             } else { 
                 qDebug() << "here";
-                toolBox->insertItem( 3 ,widget, text );
+                d->uiWidget.toolBox->insertItem( 3 ,widget, text );
             }
             widget->show();
         }
     } else {
         if ( index >= 0 ) {
             widget->hide();
-            toolBox->removeItem( index );
+            d->uiWidget.toolBox->removeItem( index );
         }
     }
 }
@@ -240,7 +244,7 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
-    locationListView->setModel( locations );
+    d->uiWidget.locationListView->setModel( locations );
 }
 
 int MarbleControlBox::minimumZoom() const
@@ -253,26 +257,26 @@ void MarbleControlBox::changeZoom(int zoom)
 {
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
-    zoomSlider->setValue( zoom );
-    zoomSlider->setMinimum( d->m_minimumzoom );
+    d->uiWidget.zoomSlider->setValue( zoom );
+    d->uiWidget.zoomSlider->setMinimum( d->m_minimumzoom );
 }
 
 void MarbleControlBox::disableGpsInput( bool in )
 {
-    m_latSpinBox->setEnabled( !in );
-    m_lonSpinBox->setEnabled( !in );
+    d->uiWidget.m_latSpinBox->setEnabled( !in );
+    d->uiWidget.m_lonSpinBox->setEnabled( !in );
 
-    m_latComboBox->setEnabled( !in );
-    m_lonComboBox->setEnabled( !in );
+    d->uiWidget.m_latComboBox->setEnabled( !in );
+    d->uiWidget.m_lonComboBox->setEnabled( !in );
 
-    double t_lat = m_latSpinBox->value();
-    double t_lon = m_lonSpinBox->value();
+    double t_lat = d->uiWidget.m_latSpinBox->value();
+    double t_lon = d->uiWidget.m_lonSpinBox->value();
 
-    if( m_lonComboBox->currentIndex() == 1 ){
+    if( d->uiWidget.m_lonComboBox->currentIndex() == 1 ){
         t_lon *= -1;
     }
     
-    if( m_latComboBox->currentIndex() == 1 ){
+    if( d->uiWidget.m_latComboBox->currentIndex() == 1 ){
         t_lat *= -1;
     }
     
@@ -282,11 +286,11 @@ void MarbleControlBox::disableGpsInput( bool in )
 
 void MarbleControlBox::recieveGpsCoordinates( double x, double y, 
                                               GeoPoint::Unit unit){
-    if( m_catchGps->isChecked() ){
+    if( d->uiWidget.m_catchGps->isChecked() ){
         switch(unit){
         case GeoPoint::Degree:
-            m_latSpinBox->setValue( x );
-            m_lonSpinBox->setValue( y );
+            d->uiWidget.m_latSpinBox->setValue( x );
+            d->uiWidget.m_lonSpinBox->setValue( y );
             emit gpsPositionChanged( x, y );
             break;
         case GeoPoint::Radian:
@@ -296,19 +300,19 @@ void MarbleControlBox::recieveGpsCoordinates( double x, double y,
             t_lon = x * rad2deg;
             
             if( t_lat < 0 ){
-                m_latSpinBox->setValue( -t_lat );
-                m_latComboBox->setCurrentIndex( 1 );
+                d->uiWidget.m_latSpinBox->setValue( -t_lat );
+                d->uiWidget.m_latComboBox->setCurrentIndex( 1 );
             } else {
-                m_latSpinBox->setValue( t_lat );
-                m_latComboBox->setCurrentIndex( 0 );
+                d->uiWidget.m_latSpinBox->setValue( t_lat );
+                d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
             }
             
             if( t_lon < 0 ){
-                m_lonSpinBox->setValue( -t_lon );
-                m_lonComboBox->setCurrentIndex( 1 );
+                d->uiWidget.m_lonSpinBox->setValue( -t_lon );
+                d->uiWidget.m_lonComboBox->setCurrentIndex( 1 );
             } else {
-                m_lonSpinBox->setValue( t_lon );
-                m_lonComboBox->setCurrentIndex( 0 );
+                d->uiWidget.m_lonSpinBox->setValue( t_lon );
+                d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
             }
             
             emit gpsPositionChanged( t_lat, t_lon );
@@ -325,7 +329,7 @@ void MarbleControlBox::setNavigationTabShown( bool show )
 void MarbleControlBox::setLegendTabShown( bool show )
 {
     QString  title = tr( "Legend" );
-    setWidgetTabShown( m_ledgendWidget, 1, show, title );
+    setWidgetTabShown( m_legendWidget, 1, show, title );
 }
 
 void MarbleControlBox::setMapViewTabShown( bool show )
@@ -344,16 +348,16 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
 void MarbleControlBox::resizeEvent ( QResizeEvent * )
 {
     if ( height() < 480 ) {
-        if ( !zoomSlider->isHidden() ) {
-            zoomSlider->hide();
-            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
-                                           QSizePolicy::Expanding );
+        if ( !d->uiWidget.zoomSlider->isHidden() ) {
+            d->uiWidget.zoomSlider->hide();
+            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                                       QSizePolicy::Expanding );
         }
     } else {
-        if ( zoomSlider->isHidden() == true ) {
-            zoomSlider->show();
-            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
-                                           QSizePolicy::Fixed );
+        if ( d->uiWidget.zoomSlider->isHidden() == true ) {
+            d->uiWidget.zoomSlider->show();
+            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                                       QSizePolicy::Fixed );
         }
     }
 } 
@@ -371,10 +375,10 @@ void MarbleControlBox::searchLineChanged(const QString &search)
 void MarbleControlBox::search()
 {
     d->m_searchTriggered = false;
-    int  currentSelected = locationListView->currentIndex().row();
-    locationListView->selectItem( d->m_searchTerm );
-    if ( currentSelected != locationListView->currentIndex().row() )
-        locationListView->activate();
+    int  currentSelected = d->uiWidget.locationListView->currentIndex().row();
+    d->uiWidget.locationListView->selectItem( d->m_searchTerm );
+    if ( currentSelected != d->uiWidget.locationListView->currentIndex().row() )
+        d->uiWidget.locationListView->activate();
 }
 
 

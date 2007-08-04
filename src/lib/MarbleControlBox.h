@@ -20,7 +20,8 @@
 
 #include "marble_export.h"
 
-#include "ui_MarbleControlBox.h"
+#include <QtCore/QAbstractItemModel>
+#include <QtGui/QWidget>
 
 #include "GeoPoint.h"
 
@@ -64,7 +65,7 @@ class MarbleControlBoxPrivate;
  * @see MarbleWidget
  */
 
-class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControlBox
+class MARBLE_EXPORT MarbleControlBox : public QWidget
 {
     Q_OBJECT
 
@@ -123,7 +124,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget, private Ui::MarbleControl
  private:
     MarbleControlBoxPrivate  * const d;
     QWidget *m_navigationWidget;
-    QWidget *m_ledgendWidget;
+    QWidget *m_legendWidget;
     QWidget *m_mapViewWidget;
     QWidget *m_currentLocationWidget;
 };

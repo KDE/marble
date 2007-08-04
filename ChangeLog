@@ -13,6 +13,14 @@
 
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
+	Move UI file include from the .h file to the cpp to make it easier
+	to use for external applications.
+	* src/lib/MarbleControlBox.h: Don't inherit from
+	Ui::MarbleControlBox
+	* src/lib/MarbleControlBox.cpp: let Ui::MarbleControlBox be a part
+	of MarbleControlBoxPrivate
+	(all): add 'd->uiWidget.' to all uses of previous members.
+	
 	Make it possible to choose between Flat projection and globe
 	projection in one place only (utils.h).
 	* src/lib/vectormap.cpp,
