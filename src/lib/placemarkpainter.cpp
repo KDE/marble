@@ -443,7 +443,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth,
                                         int imgheight,
-                                        int radius,
+                                        ViewParams* viewParams,
                                         const PlaceMarkContainer* placeMarkContainer,
                                         Quaternion planetAxis )
 {
@@ -486,8 +486,9 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     // but aren't any more, are collected into a pool for later reuse.
     QList<VisiblePlaceMark*>::iterator  it = m_visiblePlacemarks.begin();
     while ( it != m_visiblePlacemarks.constEnd() ) {
-	if ( 0 && isVisible( (*it)->placeMark(), radius, planetAxis,
+	if ( 0 && isVisible( (*it)->placeMark(), viewParams->m_radius, planetAxis,
 			imgwidth, imgheight,
+            viewParams,
 			x, y ) )
 	    ++it;
 	else {
@@ -519,7 +520,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         mark  = *it2; // no cast
 
 	// If the PlaceMark is not visible, go to next PlaceMark.
-        if ( !isVisible( mark, radius, planetAxis, imgwidth, imgheight,
+        if ( !isVisible( mark, viewParams->m_radius, planetAxis, imgwidth, imgheight, viewParams,
                          x, y ) ) {
 	    //qDebug() << mark->name() << ": Not visible";
             continue;
@@ -641,7 +642,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 }
                 else {
                     QImage textimage( textwidth, m_fontheight,
-                                      QImage::Format_ARGB32_multiplied );
+                                      QImage::Format_ARGB32_Premultiplied );
                     textimage.fill( 0 );
 
                     textpainter.begin( &textimage );

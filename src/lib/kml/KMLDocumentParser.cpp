@@ -70,15 +70,6 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
         }
     }
 
-    /*
-    if ( ! result ) {
-        qDebug("KMLDocumentParser::startElement(). Unsupported tag");
-        qDebug() << name;
-    }
-    */
-    qDebug("KMLDocumentParser::startElement(). Level: %d. Tag:", m_level);
-    qDebug() << name;
-
     return true;
 }
 
@@ -109,7 +100,6 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
         }
     }
 
-    qDebug("KMLDocumentParser::endElement(). Result: %d. Level: %d", result, m_level);
     return true;
 }
 
@@ -120,6 +110,6 @@ bool KMLDocumentParser::characters( const QString& ch )
     }
 
     bool result = KMLContainerParser::characters( ch );
-    qDebug("KMLDocumentParser::characters. Result: %d. Level: %d", result, m_level);
+
     return true;
 }

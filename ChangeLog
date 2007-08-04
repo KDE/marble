@@ -11,6 +11,9 @@
     * src/lib/kml/KMLDocument.cpp
     * src/lib/kml/KMLObjectParser.{h,cpp}
 
+    Make PlaceMarkPainter's part which paint using VisiblePlaceMark comile again
+    * src/lib/placemarkpainter.{h,cpp}
+
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Move UI file include from the .h file to the cpp to make it easier
@@ -20,7 +23,7 @@
 	* src/lib/MarbleControlBox.cpp: let Ui::MarbleControlBox be a part
 	of MarbleControlBoxPrivate
 	(all): add 'd->uiWidget.' to all uses of previous members.
-	
+
 	Make it possible to choose between Flat projection and globe
 	projection in one place only (utils.h).
 	* src/lib/vectormap.cpp,
