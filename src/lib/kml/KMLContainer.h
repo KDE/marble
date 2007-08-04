@@ -12,9 +12,10 @@
 #ifndef KMLCONTAINER_H
 #define KMLCONTAINER_H
 
-#include "KMLFeature.h"
-
 #include <QtCore/QVector>
+
+#include "KMLFeature.h"
+#include "PlaceMarkContainer.h"
 
 class KMLPlaceMark;
 
@@ -25,11 +26,19 @@ class KMLContainer : public KMLFeature
 
     void addPlaceMark( KMLPlaceMark* placemark );
 
+    /*
+     * Will move this method to KMLDocumentModel in a next step
+     */
+    PlaceMarkContainer& activePlaceMarkContainer();
+
  protected:
     KMLContainer();
 
  protected:
      QVector <KMLPlaceMark*> m_placemarkVector;
+
+ private:
+     PlaceMarkContainer m_activePlaceMarkContainer;
 };
 
 #endif // KMLCONTAINER_H

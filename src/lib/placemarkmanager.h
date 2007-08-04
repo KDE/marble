@@ -29,15 +29,15 @@ class PlaceMarkManager
     void addPlaceMarkFile( const QString& );
 
     PlaceMarkContainer* getPlaceMarkContainer() {
-#ifndef KML_GSOC
         m_placeMarkContainer->sort();
         return m_placeMarkContainer;
-#else
-        return &m_kmldocument->activePlaceMarkContainer();
-#endif
     }
 
     void loadKml( const QString& );
+
+#ifdef KML_GSOC
+    const QList < KMLFolder* >& getFolderList() const;
+#endif
 
  protected:
     void importKml( const QString&, PlaceMarkContainer* );
@@ -48,8 +48,11 @@ class PlaceMarkManager
     // Eventually there will be more than one container.
     PlaceMarkContainer  *m_placeMarkContainer;
 
+#ifdef KML_GSOC
  private:
-    KMLDocument* m_kmldocument;
+    QList < KMLDocument* > m_documentList;
+#endif
+
 };
 
 #endif // PLACEMARKMANAGER_H

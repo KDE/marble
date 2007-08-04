@@ -22,7 +22,6 @@
 
 
 PlaceMarkManager::PlaceMarkManager()
-  : m_kmldocument( new KMLDocument() )
 {
     m_placeMarkContainer = new PlaceMarkContainer();
 
@@ -105,12 +104,11 @@ void PlaceMarkManager::loadKml( const QString& filename )
         QFile sourceFile( filename );
 
         if ( sourceFile.open( QIODevice::ReadOnly ) ) {
-            delete m_kmldocument;
+            KMLDocument* document = new KMLDocument();
+            document->load( sourceFile );
 
-            m_kmldocument = new KMLDocument();
-            m_kmldocument->load( sourceFile );
-
-            qDebug("KML document loaded. Name: %s", m_kmldocument->name().toAscii().data());
+            m_documentList.append( document );
+            qDebug("KML document loaded. Name: %s", document->name().toAscii().data());
         }
     }
 #else
@@ -125,6 +123,14 @@ void PlaceMarkManager::loadKml( const QString& filename )
     importKml( filename, m_placeMarkContainer );
 #endif
 }
+
+
+#ifdef KML_GSOC
+const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
+{
+    return ( QList < KMLFolder*>& ) m_documentList;
+}
+#endif
 
 
 void PlaceMarkManager::importKml( const QString& filename,

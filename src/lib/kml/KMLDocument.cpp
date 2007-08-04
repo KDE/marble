@@ -16,8 +16,6 @@
 
 #include "KMLDocumentParser.h"
 #include "KMLPlaceMark.h"
-#include "PlaceMarkContainer.h"
-
 
 KMLDocument::KMLDocument()
 {
@@ -44,26 +42,4 @@ void KMLDocument::load( QIODevice& source )
     if ( ! result ) {
         qDebug("KMLDocument::load( QIODevice& ). Error while parsing xml source");
     }
-}
-
-PlaceMarkContainer& KMLDocument::activePlaceMarkContainer()
-{
-    /*
-     * TODO: include only placemarks which is included
-     * in a screen area
-     */
-
-    m_activePlaceMarkContainer.clear ();
-
-    QVector < KMLPlaceMark* >::const_iterator  it;
-    for ( it = m_placemarkVector.constBegin();
-          it != m_placemarkVector.constEnd();
-          it++ )
-    {
-        KMLPlaceMark* kmlPlaceMark = *it;
-        m_activePlaceMarkContainer.append( kmlPlaceMark );
-    }
-
-    qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
 }

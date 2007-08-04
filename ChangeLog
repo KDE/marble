@@ -1,5 +1,16 @@
 2007-08-04  Murad Tagirov  <tmurad@gmail.com>
 
+    Added basic support of kml folders. MarbleModel iterates over list
+    of kml folders and displays placemarks from each folder. This
+    list of folders will be displayed in MarbleControlBox, so user
+    will be able to enable/disable desired folder
+    * src/lib/placemarkmanager.{h,cpp}
+    * src/lib/kml/KMLDocument.{h,cpp}
+    * src/lib/kml/KMLContainer.{h,cpp}
+    * src/lib/MarbleModel.cpp
+
+2007-08-04  Murad Tagirov  <tmurad@gmail.com>
+
     Refactored KMLContainer parsing. Ignore whitespaces while parsing.
     Added counter for current tag level to avoid parsing of wrong data.
     * src/lib/placemarkmanager.cpp

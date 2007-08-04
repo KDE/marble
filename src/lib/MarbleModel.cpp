@@ -327,13 +327,27 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                                                  viewParams->m_planetAxis );
     }
 #else
+    /*
+     * Iterate over our KMLFolders and show placemarks from each folderList
+     * This folder list also will be displayed in MarbleControlBox
+     * So user could enable/disable each folder
+     */
     if ( viewParams->m_showPlaceMarks ) {
-        d->m_placemarkpainter->paintPlaceFolder( painter,
-                                                 viewParams->m_canvasImage->width(),
-                                                 viewParams->m_canvasImage->height(),
-                                                 viewParams,
-                                                 d->m_placemarkmanager->getPlaceMarkContainer(),
-                                                 viewParams->m_planetAxis );
+        const QList < KMLFolder* >& folderList = d->m_placemarkmanager->getFolderList();
+
+        for ( QList<KMLFolder*>::const_iterator iterator = folderList.constBegin();
+            iterator != folderList.constEnd();
+            ++iterator )
+        {
+            KMLFolder& folder = *( *iterator );
+
+            d->m_placemarkpainter->paintPlaceFolder( painter,
+                                                     viewParams->m_canvasImage->width(),
+                                                     viewParams->m_canvasImage->height(),
+                                                     viewParams,
+                                                     &folder.activePlaceMarkContainer(),
+                                                     viewParams->m_planetAxis );
+        }
     }
 #endif
 
