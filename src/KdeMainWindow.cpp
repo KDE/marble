@@ -111,7 +111,7 @@ void MainWindow::exportMapScreenShot()
     if ( !fileName.isEmpty() ) {
         bool  success = mapPixmap.save( fileName );
         if ( !success ) {
-            KMessageBox::error( this, i18n( "Marble" ),
+            KMessageBox::error( this, i18nc( "Appname", "Marble" ),
                                 i18n( "An error occurred while trying to save the file.\n" ),
                                 KMessageBox::Notify );
         }
