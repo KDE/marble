@@ -1,3 +1,5 @@
+- Apply "Level of details (LOR)" while parsing kml placemarks
+
 - Parsing of kml document from QIODevice
 
 - Integration of KMLDocument with PlaceMarkPainter for initial support of kml placemarks
@@ -8,7 +10,7 @@
 
 - Integration with Digikam. This includes test of kml output of Digikam on Marble
 
-- Sort placemarks while parsing them from input kml stream. This will speed up drawing of placemarks.
+- Sort placemarks while parsing them from input kml stream. This will speed up drawing of placemarks. (Regionator)
 
 - Serialization of in memory kml document structure to disk cache. Introduce options like:
     * memory cache size
