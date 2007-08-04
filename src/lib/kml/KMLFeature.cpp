@@ -27,6 +27,7 @@ QString KMLFeature::name() const
 
 void KMLFeature::setName( const QString &value )
 {
+    PlaceMark::setName( value ); //FIXME
     m_name = value;
 }
 

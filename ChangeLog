@@ -9,6 +9,11 @@
     * src/lib/kml/KMLContainer.{h,cpp}
     * src/lib/MarbleModel.cpp
 
+    Inherit KMLFeature -> PlaceMark, not KMLPlaceMark -> PlaceMark
+    * src/lib/kml/KMLFeature.{h,cpp}
+    * src/lib/kml/KMLPlaceMark.h
+
+
 2007-08-04  Murad Tagirov  <tmurad@gmail.com>
 
     Refactored KMLContainer parsing. Ignore whitespaces while parsing.

@@ -13,10 +13,13 @@
 #define KMLFEATURE_H
 
 #include "KMLObject.h"
+#include "placemark.h"
 
 #include <QtCore/QString>
 
-class KMLFeature : public KMLObject
+class KMLFeature
+  : public KMLObject,
+    public PlaceMark
 {
  public:
     virtual ~KMLFeature();

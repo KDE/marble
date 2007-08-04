@@ -13,13 +13,11 @@
 #define KMLPLACEMARK_H
 
 #include "KMLFeature.h"
-#include "placemark.h"
 
 #include "GeoPoint.h"
 
 class KMLPlaceMark
-  : public KMLFeature,
-    public PlaceMark
+  : public KMLFeature
 {
  public:
     KMLPlaceMark();
