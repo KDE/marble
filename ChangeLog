@@ -1,5 +1,11 @@
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix Krazy isue 14: inline methods in public classes.
+	* src/lib/placemarkmodel.{h,cpp}: Move all inline methods to .cpp
+	file
+	* src/lib/PlaceMarkContainer.{h,cpp}: Move all inline methods to
+	.cpp file
+
 	Fix Krazy isue 12: validity of i18n calls.
 	* src/KdeMainWindow.cpp (exportMapScreenShot): Add a context to
 	the i18n call.

@@ -21,16 +21,12 @@
 #include <QtCore/QAbstractListModel>
 
 #include "marble_export.h"
-#include "PlaceMarkContainer.h"
 
 
-inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
-{
-    return mark1->name() < mark2->name();
-}
-
-
+class PlaceMark;
+class PlaceMarkContainer;
 class PlaceMarkModelPrivate; 
+
 
 class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
 {

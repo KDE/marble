@@ -22,6 +22,7 @@
 #include <QtGui/QMessageBox>
 
 #include "katlasdirs.h"
+#include "PlaceMarkContainer.h"
 
 
 namespace GeoString
@@ -288,6 +289,12 @@ QVariant PlaceMarkModel::headerData(int section, Qt::Orientation orientation,
         return QString( "Column %1" ).arg( section );
     else
         return QString( "Row %1" ).arg( section );
+}
+
+
+inline bool nameSort( PlaceMark* mark1, PlaceMark* mark2 )
+{
+    return mark1->name() < mark2->name();
 }
 
 void PlaceMarkModel::setContainer(PlaceMarkContainer* container)
