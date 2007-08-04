@@ -1,7 +1,20 @@
+2007-08-04  Murad Tagirov  <tmurad@gmail.com>
+
+    Refactored KMLContainer parsing. Ignore whitespaces while parsing.
+    Added counter for current tag level to avoid parsing of wrong data.
+    * src/lib/placemarkmanager.cpp
+    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/kml/KMLContainerParser.{h,cpp}
+    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/kml/KMLFeatureParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+    * src/lib/kml/KMLDocument.cpp
+    * src/lib/kml/KMLObjectParser.{h,cpp}
+
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Make it possible to choose between Flat projection and globe
-	projection in one place only (utils.h).	
+	projection in one place only (utils.h).
 	* src/lib/vectormap.cpp,
 	* src/lib/utils.h,
 	* src/lib/MarbleWidget.cpp,
@@ -52,12 +65,12 @@
 	* src/lib/MarbleModel.{h,cpp}: Move #include of maptheme.h from .h
 	to .cpp
 	* src/lib/maptheme.h (class ViewParams): Don't export this class
-	
+
  	Remove storage of half of image width/height
 	* src/lib/GridMap.cpp: Remove storage of half of image width/heigh.
 
 	Cleaning and remove storage of half of image width/height
-	* src/lib/AbstractScanlineTextureMapper.{h,cpp}, 
+	* src/lib/AbstractScanlineTextureMapper.{h,cpp},
 	* src/lib/FlatScanlineTextureMapper.cpp,
 	* src/lib/GlobeScanlineTextureMapper.cpp: Cleaning
 

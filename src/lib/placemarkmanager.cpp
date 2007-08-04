@@ -109,6 +109,8 @@ void PlaceMarkManager::loadKml( const QString& filename )
 
             m_kmldocument = new KMLDocument();
             m_kmldocument->load( sourceFile );
+
+            qDebug("KML document loaded. Name: %s", m_kmldocument->name().toAscii().data());
         }
     }
 #else

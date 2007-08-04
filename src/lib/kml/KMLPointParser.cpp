@@ -39,10 +39,6 @@ bool KMLPointParser::startElement( const QString& namespaceURI,
     Q_UNUSED( atts );
 
     if ( m_parsed ) {
-        /*
-         * We already parsed start/stop
-         * tags for this element
-         */
         return false;
     }
 
@@ -59,21 +55,21 @@ bool KMLPointParser::startElement( const QString& namespaceURI,
         }
     }
 
+    m_level++;
+
     return result;
 }
 
 bool KMLPointParser::endElement( const QString& namespaceURI,
-				 const QString& localName,
-				 const QString& qName )
+                 const QString& localName,
+                 const QString& qName )
 {
+    m_level--;
+
     Q_UNUSED( namespaceURI );
     Q_UNUSED( localName );
 
     if ( m_parsed ) {
-        /*
-         * We already parsed start/stop
-         * tags for this element
-         */
         return false;
     }
 

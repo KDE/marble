@@ -37,6 +37,8 @@ void KMLDocument::load( QIODevice& source )
     QXmlSimpleReader reader;
     reader.setContentHandler( &parser );
     reader.setErrorHandler( &parser );
+    reader.setFeature( "http://trolltech.com/xml/features/report-whitespace-only-CharData", false );
+
     bool result = reader.parse( &xmlDocumentSource );
 
     if ( ! result ) {

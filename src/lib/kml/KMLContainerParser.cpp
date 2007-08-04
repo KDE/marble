@@ -12,6 +12,7 @@
 #include "KMLContainerParser.h"
 
 #include "KMLContainer.h"
+#include "KMLPlaceMark.h"
 #include "KMLPlaceMarkParser.h"
 
 namespace
@@ -21,7 +22,8 @@ namespace
 
 KMLContainerParser::KMLContainerParser( KMLContainer& container )
   : KMLFeatureParser( container ),
-    m_currentParser(0)
+    m_currentParser(0),
+    m_currentPlaceMark (0)
 {
 }
 
@@ -56,9 +58,14 @@ bool KMLContainerParser::startElement( const QString& namespaceURI,
             if ( m_currentParser != 0 ) {
                 delete m_currentParser;
                 m_currentParser = 0;
+
+                delete m_currentPlaceMark;
+                m_currentPlaceMark = 0;
             }
 
-            m_currentParser = new KMLPlaceMarkParser( (KMLContainer&) m_object );
+            m_currentPlaceMark = new KMLPlaceMark();
+            m_currentParser = new KMLPlaceMarkParser( *m_currentPlaceMark );
+
             result = m_currentParser->startElement( namespaceURI, localName, name, atts );
         }
     }
@@ -74,6 +81,17 @@ bool KMLContainerParser::endElement( const QString& namespaceURI,
 
     if ( m_currentParser != 0 ) {
         result = m_currentParser->endElement( namespaceURI, localName, qName );
+
+        if ( result ) {
+            if ( m_currentParser->isParsed() ) {
+                delete m_currentParser;
+                m_currentParser = 0;
+
+                KMLContainer& container = (KMLContainer&) m_object;
+                container.addPlaceMark( m_currentPlaceMark );
+                m_currentPlaceMark = 0;
+            }
+        }
     }
     else {
         result = KMLFeatureParser::endElement( namespaceURI, localName, qName );

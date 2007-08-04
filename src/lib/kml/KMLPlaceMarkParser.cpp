@@ -11,7 +11,6 @@
 
 #include "KMLPlaceMarkParser.h"
 
-#include "KMLContainer.h"
 #include "KMLPlaceMark.h"
 #include "KMLPointParser.h"
 
@@ -21,18 +20,14 @@ namespace
     const QString POINTPARSER_TAG = "point";
 }
 
-KMLPlaceMarkParser::KMLPlaceMarkParser( KMLContainer& container )
-  : KMLFeatureParser( container ),
-    m_placemark( new KMLPlaceMark() ),
+KMLPlaceMarkParser::KMLPlaceMarkParser( KMLPlaceMark& placemark )
+  : KMLFeatureParser( placemark ),
     m_currentParser( 0 )
 {
 }
 
 KMLPlaceMarkParser::~KMLPlaceMarkParser()
 {
-    if ( ! m_parsed ) {
-        delete m_placemark;
-    }
 }
 
 bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
@@ -40,6 +35,8 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
                             const QString& name,
                             const QXmlAttributes& atts )
 {
+    m_level++;
+
     if ( m_parsed ) {
         return false;
     }
@@ -69,10 +66,8 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
                 m_currentParser = 0;
             }
 
-            if ( m_placemark != 0 ) {
-                m_currentParser = new KMLPointParser( *m_placemark );
-                result = m_currentParser->startElement( namespaceURI, localName, name, atts );
-            }
+            m_currentParser = new KMLPointParser( (KMLPlaceMark&) m_object );
+            result = m_currentParser->startElement( namespaceURI, localName, name, atts );
         }
     }
 
@@ -83,6 +78,8 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
                             const QString& localName,
                             const QString& qName )
 {
+    m_level--;
+
     if ( m_parsed ) {
         return false;
     }
@@ -104,10 +101,7 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
         QString lowerName = qName.toLower();
 
         if ( lowerName == PLACEMARKPARSER_TAG ) {
-            KMLContainer&  container = (KMLContainer&) m_object;
-            container.addPlaceMark( m_placemark );
             m_parsed = true;
-
             result = true;
         }
     }

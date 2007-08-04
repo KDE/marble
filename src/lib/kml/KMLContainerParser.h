@@ -15,6 +15,7 @@
 #include "KMLFeatureParser.h"
 
 class KMLContainer;
+class KMLPlaceMark;
 
 class KMLContainerParser : public KMLFeatureParser
 {
@@ -36,7 +37,8 @@ class KMLContainerParser : public KMLFeatureParser
     KMLContainerParser( KMLContainer& container );
 
  private:
-    KMLObjectParser* m_currentParser;
+    KMLObjectParser*      m_currentParser;
+    KMLPlaceMark*         m_currentPlaceMark;
 };
 
 #endif // KMLCONTAINERPARSER_H

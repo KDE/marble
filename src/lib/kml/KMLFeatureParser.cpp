@@ -15,6 +15,8 @@
 
 namespace
 {
+    const int KML_FEATURE_LEVEL = 2;
+
     const QString NAME_TAG = "name";
     const QString DESCRIPTION_TAG = "description";
     const QString ADDRESS_TAG = "address";
@@ -38,27 +40,29 @@ bool KMLFeatureParser::startElement( const QString& namespaceURI,
 
     bool result = false;
 
-    QString lowerName = name.toLower();
+    if ( m_level == KML_FEATURE_LEVEL ) {
+        QString lowerName = name.toLower();
 
-    /*
-     * Iterate over fields which supported by
-     * parser of this kml class
-     */
-    if ( lowerName == NAME_TAG ) {
-        m_phase = WAIT_NAME;
-        result = true;
-    }
-    else if ( lowerName == DESCRIPTION_TAG ) {
-        m_phase = WAIT_DESCRIPTION;
-        result = true;
-    }
-    else if ( lowerName == ADDRESS_TAG ) {
-        m_phase = WAIT_ADDRESS;
-        result = true;
-    }
-    else if ( lowerName == PHONE_NUMBER_TAG ) {
-        m_phase = WAIT_PHONE_NUMBER;
-        result = true;
+        /*
+        * Iterate over fields which supported by
+        * parser of this kml class
+        */
+        if ( lowerName == NAME_TAG ) {
+            m_phase = WAIT_NAME;
+            result = true;
+        }
+        else if ( lowerName == DESCRIPTION_TAG ) {
+            m_phase = WAIT_DESCRIPTION;
+            result = true;
+        }
+        else if ( lowerName == ADDRESS_TAG ) {
+            m_phase = WAIT_ADDRESS;
+            result = true;
+        }
+        else if ( lowerName == PHONE_NUMBER_TAG ) {
+            m_phase = WAIT_PHONE_NUMBER;
+            result = true;
+        }
     }
 
     return result;
@@ -73,32 +77,34 @@ bool KMLFeatureParser::endElement( const QString &namespaceURI,
 
     bool result = false;
 
-    QString lowerName = name.toLower();
+    if ( m_level == KML_FEATURE_LEVEL ) {
+        QString lowerName = name.toLower();
 
-    switch ( m_phase ) {
-    case WAIT_NAME:
-        if ( lowerName == NAME_TAG ) {
-            m_phase = IDLE;
-            result = true;
+        switch ( m_phase ) {
+        case WAIT_NAME:
+            if ( lowerName == NAME_TAG ) {
+                m_phase = IDLE;
+                result = true;
+            }
+            break;
+        case WAIT_DESCRIPTION:
+            if ( lowerName == DESCRIPTION_TAG ) {
+                m_phase = IDLE;
+                result = true;
+            }
+        case WAIT_ADDRESS:
+            if ( lowerName == ADDRESS_TAG ) {
+                m_phase = IDLE;
+                result = true;
+            }
+        case WAIT_PHONE_NUMBER:
+            if ( lowerName == PHONE_NUMBER_TAG ) {
+                m_phase = IDLE;
+                result = true;
+            }
+        default:
+            break;
         }
-        break;
-    case WAIT_DESCRIPTION:
-        if ( lowerName == DESCRIPTION_TAG ) {
-            m_phase = IDLE;
-            result = true;
-        }
-    case WAIT_ADDRESS:
-        if ( lowerName == ADDRESS_TAG ) {
-            m_phase = IDLE;
-            result = true;
-        }
-    case WAIT_PHONE_NUMBER:
-        if ( lowerName == PHONE_NUMBER_TAG ) {
-            m_phase = IDLE;
-            result = true;
-        }
-    default:
-        break;
     }
 
     return result;
@@ -108,27 +114,29 @@ bool KMLFeatureParser::characters( const QString& str )
 {
     bool result = false;
 
-    KMLFeature& feature = (KMLFeature&) m_object;
+    if ( m_level == KML_FEATURE_LEVEL ) {
+        KMLFeature& feature = (KMLFeature&) m_object;
 
-    switch ( m_phase ) {
-    case WAIT_NAME:
-        feature.setName( str );
-        result = true;
-        break;
-    case WAIT_DESCRIPTION:
-        feature.setDescription( str );
-        result = true;
-        break;
-    case WAIT_ADDRESS:
-        feature.setAddress( str );
-        result = true;
-        break;
-    case WAIT_PHONE_NUMBER:
-        feature.setPhoneNumber( str );
-        result = true;
-        break;
-    default:
-        break;
+        switch ( m_phase ) {
+        case WAIT_NAME:
+            feature.setName( str );
+            result = true;
+            break;
+        case WAIT_DESCRIPTION:
+            feature.setDescription( str );
+            result = true;
+            break;
+        case WAIT_ADDRESS:
+            feature.setAddress( str );
+            result = true;
+            break;
+        case WAIT_PHONE_NUMBER:
+            feature.setPhoneNumber( str );
+            result = true;
+            break;
+        default:
+            break;
+        }
     }
 
     return result;

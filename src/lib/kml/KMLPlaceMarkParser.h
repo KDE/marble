@@ -15,14 +15,13 @@
 #include "KMLFeatureParser.h"
 #include "KMLObjectParser.h"
 
-class KMLContainer;
 class KMLObjectParser;
 class KMLPlaceMark;
 
 class KMLPlaceMarkParser : public KMLFeatureParser
 {
  public:
-    KMLPlaceMarkParser( KMLContainer& container );
+    KMLPlaceMarkParser( KMLPlaceMark& placemark );
     virtual ~KMLPlaceMarkParser();
 
     virtual bool startElement( const QString& namespaceURI,
@@ -37,7 +36,6 @@ class KMLPlaceMarkParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  private:
-    KMLPlaceMark*       m_placemark;
     KMLObjectParser*    m_currentParser;
 };
 

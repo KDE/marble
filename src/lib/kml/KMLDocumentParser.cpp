@@ -18,7 +18,7 @@
 namespace
 {
     const QString DOCUMENT_TAG = "document";
-    const QString PLACEMARK_TAG = "placemark";
+    const QString KML_TAG = "kml";
 }
 
 KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
@@ -44,9 +44,12 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
                                       const QString& name,
                                       const QXmlAttributes& atts)
 {
+    m_level++;
+
     if ( m_parsed ) {
         return false;
     }
+
     /*
      * Document specific fields will parse will in a feature
      * i.e. list of StyleSelector, Schema objects
@@ -56,15 +59,25 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
     QString lowerName = name.toLower();
 
     if ( ! result ) {
-        if ( lowerName == DOCUMENT_TAG ) {
+        if ( lowerName == KML_TAG ) {
+            result = true;
+
+            // should remove this hack
+            m_level--;
+        }
+        else if ( lowerName == DOCUMENT_TAG ) {
             result = true;
         }
     }
 
+    /*
     if ( ! result ) {
         qDebug("KMLDocumentParser::startElement(). Unsupported tag");
         qDebug() << name;
     }
+    */
+    qDebug("KMLDocumentParser::startElement(). Level: %d. Tag:", m_level);
+    qDebug() << name;
 
     return true;
 }
@@ -73,6 +86,8 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
                                     const QString& localName,
                                     const QString& qName )
 {
+    m_level--;
+
     if ( m_parsed ) {
         return false;
     }
@@ -82,13 +97,19 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
     if ( ! result ) {
         QString lowerName = qName.toLower();
 
+        if ( lowerName == KML_TAG ) {
+            result = true;
+
+            // should remove this hack
+            m_level++;
+        }
         if ( lowerName == DOCUMENT_TAG ) {
             m_parsed = true;
             result = true;
         }
     }
 
-    qDebug("KMLDocumentParser::endElement(). Result: %d", result);
+    qDebug("KMLDocumentParser::endElement(). Result: %d. Level: %d", result, m_level);
     return true;
 }
 
@@ -99,6 +120,6 @@ bool KMLDocumentParser::characters( const QString& ch )
     }
 
     bool result = KMLContainerParser::characters( ch );
-    qDebug("KMLDocumentParser::characters. Result: %d", result);
+    qDebug("KMLDocumentParser::characters. Result: %d. Level: %d", result, m_level);
     return true;
 }

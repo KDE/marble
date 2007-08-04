@@ -149,14 +149,14 @@ if(WIN32)
   TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
 else(WIN32)
   FIND_PACKAGE(libgps)
-  
+
   if(libgps_FOUND)
      set(HAVE_LIBGPS 1)
      INCLUDE_DIRECTORIES(${libgps_INCLUDES})
      TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
   endif(libgps_FOUND)
-  
-  
+
+
 endif(WIN32)
 
 configure_file(config-libgps.h.cmake
