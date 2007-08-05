@@ -16,8 +16,8 @@
 
 namespace
 {
-    const QString PLACEMARKPARSER_TAG = "placemark";
-    const QString POINTPARSER_TAG = "point";
+    const QString PLACEMARKPARSER_TAG   = "placemark";
+    const QString POINTPARSER_TAG       = "point";
 }
 
 KMLPlaceMarkParser::KMLPlaceMarkParser( KMLPlaceMark& placemark )

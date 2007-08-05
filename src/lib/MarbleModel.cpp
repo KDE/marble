@@ -345,11 +345,14 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
              * Show only placemarks which are visible
              */
             if ( folder.isVisible() ) {
+
+                PlaceMarkContainer& container = folder.activePlaceMarkContainer( *viewParams );
+
                 d->m_placemarkpainter->paintPlaceFolder( painter,
                                                         viewParams->m_canvasImage->width(),
                                                         viewParams->m_canvasImage->height(),
                                                         viewParams,
-                                                        &folder.activePlaceMarkContainer(),
+                                                        &container,
                                                         viewParams->m_planetAxis,
                                                         firstTime );
 

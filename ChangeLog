@@ -1,3 +1,11 @@
+2007-08-05  Murad Tagirov  <tmurad@gmail.com>
+
+    KMLContainer now returns PlaceMarkContainer which
+    contains only placemarks that are inside visible area
+    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLContainer.{h,cpp}
+    * src/lib/MarbleModel.cpp
+
 2007-08-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Some trivil cleaning that I did while looking through the code to

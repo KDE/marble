@@ -18,6 +18,7 @@
 #include "PlaceMarkContainer.h"
 
 class KMLPlaceMark;
+class ViewParams;
 
 class KMLContainer : public KMLFeature
 {
@@ -29,13 +30,13 @@ class KMLContainer : public KMLFeature
     /*
      * Will move this method to KMLDocumentModel in a next step
      */
-    PlaceMarkContainer& activePlaceMarkContainer();
+    PlaceMarkContainer& activePlaceMarkContainer( const ViewParams& viewParams );
 
  protected:
     KMLContainer();
 
  protected:
-     QVector <KMLPlaceMark*> m_placemarkVector;
+     QVector < KMLPlaceMark* > m_placemarkVector;
 
  private:
      PlaceMarkContainer m_activePlaceMarkContainer;
