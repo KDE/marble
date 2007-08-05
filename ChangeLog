@@ -1,3 +1,14 @@
+2007-08-05  Torsten Rahn  <rahn@kde.org>
+
+    Starting to add "View" menu entry to Marble:
+    - Show Navigation Panel, Full Screen, Status Bar
+    Currently only available for the Qt4 version.
+    TODO for tonight:
+    - Add QSetting to save QMainWindow settings 
+    - Port the changes to the KDE version of Marble
+    * src/katlascontrol.{h,cpp}
+    * src/QtMainWindow.{h,cpp}
+
 2007-08-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Compile!

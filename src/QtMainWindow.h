@@ -41,22 +41,27 @@ class MainWindow : public QMainWindow
 
         KAtlasControl *m_katlascontrol;
 
-        QMenu *fileMenu;
-        QMenu *helpMenu;
+        QMenu *m_fileMenu;
+        QMenu *m_helpMenu;
 
-        QAction *exportMapAct;
-        QAction *printAct;
-        QAction *quitAct;
-        QAction *copyMapAct;
-        QAction *whatsThisAct;
-        QAction *aboutMarbleAct;
-        QAction *aboutQtAct;
-        QAction *openAct;
+        QAction *m_exportMapAct;
+        QAction *m_printAct;
+        QAction *m_quitAct;
+        QAction *m_copyMapAct;
+        QAction *m_sideBarAct;
+        QAction *m_fullScreenAct;
+        QAction *m_statusBarAct;
+        QAction *m_whatsThisAct;
+        QAction *m_aboutMarbleAct;
+        QAction *m_aboutQtAct;
+        QAction *m_openAct;
 
     private slots:
         void exportMapScreenShot();
         void printMapScreenShot();
         void copyMap();
+        void showFullScreen( bool );
+        void showStatusBar( bool );
         void enterWhatsThis();
         void aboutMarble();
         void openFile();

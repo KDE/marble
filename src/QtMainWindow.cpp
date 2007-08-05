@@ -43,69 +43,94 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 void MainWindow::createActions()
  {
-     openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
-     openAct->setShortcut( tr( "Ctrl+O" ) );
-     openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
-     connect( openAct, SIGNAL( triggered() ),
+     m_openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
+     m_openAct->setShortcut( tr( "Ctrl+O" ) );
+     m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
+     connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
 
-     exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
-     exportMapAct->setShortcut(tr("Ctrl+S"));
-     exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
-     connect(exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
+     m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
+     m_exportMapAct->setShortcut(tr("Ctrl+S"));
+     m_exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
+     connect(m_exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
 
-     printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
-     printAct->setShortcut(tr("Ctrl+P"));
-     printAct->setStatusTip(tr("Print a screenshot of the map"));
-     connect(printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
+     m_printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
+     m_printAct->setShortcut(tr("Ctrl+P"));
+     m_printAct->setStatusTip(tr("Print a screenshot of the map"));
+     connect(m_printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
 
-     quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
-     quitAct->setShortcut(tr("Ctrl+Q"));
-     quitAct->setStatusTip(tr("Quit the Application"));
-     connect(quitAct, SIGNAL(triggered()), qApp, SLOT(quit()));
+     m_quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
+     m_quitAct->setShortcut(tr("Ctrl+Q"));
+     m_quitAct->setStatusTip(tr("Quit the Application"));
+     connect(m_quitAct, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-     copyMapAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("&Copy Map"), this);
-     copyMapAct->setShortcut(tr("Ctrl+C"));
-     copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
-     connect(copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
+     m_copyMapAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("&Copy Map"), this);
+     m_copyMapAct->setShortcut(tr("Ctrl+C"));
+     m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
+     connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
-     whatsThisAct->setShortcut(tr("Shift+F1"));
-     whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
-     connect(whatsThisAct, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
+     m_sideBarAct = new QAction( tr("Show &Navigation Panel"), this);
+     m_sideBarAct->setShortcut(tr("F9"));
+     m_sideBarAct->setCheckable( true );
+     m_sideBarAct->setChecked( true );
+     m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
+     connect(m_sideBarAct, SIGNAL(triggered( bool )), m_katlascontrol, SLOT( setSideBarShown( bool )));
 
-     aboutMarbleAct = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Desktop Globe"), this);
-     aboutMarbleAct->setStatusTip(tr("Show the application's About Box"));
-     connect(aboutMarbleAct, SIGNAL(triggered()), this, SLOT(aboutMarble()));
+     m_fullScreenAct = new QAction( tr("&Full Screen Mode"), this);
+     m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
+     m_fullScreenAct->setCheckable( true );
+     m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
+     connect(m_fullScreenAct, SIGNAL(triggered( bool )), this, SLOT( showFullScreen( bool )));
 
-     aboutQtAct = new QAction(tr("About &Qt"), this);
-     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
-     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+     m_statusBarAct = new QAction( tr("&Status Bar"), this);
+     m_statusBarAct->setCheckable( true );
+     m_statusBarAct->setStatusTip(tr("Show Status Bar"));
+     connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
+
+     m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
+     m_whatsThisAct->setShortcut(tr("Shift+F1"));
+     m_whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
+     connect(m_whatsThisAct, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
+
+     m_aboutMarbleAct = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Desktop Globe"), this);
+     m_aboutMarbleAct->setStatusTip(tr("Show the application's About Box"));
+     connect(m_aboutMarbleAct, SIGNAL(triggered()), this, SLOT(aboutMarble()));
+
+     m_aboutQtAct = new QAction(tr("About &Qt"), this);
+     m_aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+     connect(m_aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
 }
 
 void MainWindow::createMenus()
 {
-    fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(exportMapAct);
-    fileMenu->addAction(printAct);
-    fileMenu->addSeparator();
-    fileMenu->addAction(quitAct);
+    m_fileMenu = menuBar()->addMenu(tr("&File"));
+    m_fileMenu->addAction(m_openAct);
+    m_fileMenu->addAction(m_exportMapAct);
+    m_fileMenu->addAction(m_printAct);
+    m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_quitAct);
 
-    fileMenu = menuBar()->addMenu(tr("&Edit"));
-    fileMenu->addAction(copyMapAct);
+    m_fileMenu = menuBar()->addMenu(tr("&Edit"));
+    m_fileMenu->addAction(m_copyMapAct);
 
-    helpMenu = menuBar()->addMenu(tr("&Help"));
-    helpMenu->addAction(whatsThisAct);
-    helpMenu->addSeparator();
-    helpMenu->addAction(aboutMarbleAct);
-    helpMenu->addAction(aboutQtAct);
+    m_fileMenu = menuBar()->addMenu(tr("&View"));
+    m_fileMenu->addAction(m_fullScreenAct);
+    m_fileMenu->addAction(m_sideBarAct);
+    m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_statusBarAct);
+
+    m_helpMenu = menuBar()->addMenu(tr("&Help"));
+    m_helpMenu->addAction(m_whatsThisAct);
+    m_helpMenu->addSeparator();
+    m_helpMenu->addAction(m_aboutMarbleAct);
+    m_helpMenu->addAction(m_aboutQtAct);
 }
 
 void MainWindow::createStatusBar()
 {
     statusBar()->showMessage(tr("Ready"));
+    statusBar()->hide();
 }
 
 void MainWindow::exportMapScreenShot()
@@ -163,6 +188,32 @@ void MainWindow::copyMap()
     QClipboard *clipboard = QApplication::clipboard();
 
     clipboard->setPixmap( mapPixmap );
+}
+
+void MainWindow::showFullScreen( bool isChecked )
+{
+    if ( isChecked )
+    {
+//        menuBar()->hide();
+        QWidget::showFullScreen();
+    }
+    else
+    {
+//        menuBar()->show();
+        showNormal();
+    }
+}
+
+void MainWindow::showStatusBar( bool isChecked )
+{
+    if ( isChecked )
+    {
+        statusBar()->show();
+    }
+    else
+    {
+        statusBar()->hide();
+    }
 }
 
 void MainWindow::enterWhatsThis()

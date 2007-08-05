@@ -82,6 +82,11 @@ void KAtlasControl::moveDown()
     m_marbleWidget->moveDown();
 }
 
+void KAtlasControl::setSideBarShown( bool show )
+{
+    m_control->setVisible( show );
+}
+
 void KAtlasControl::setNavigationTabShown( bool show )
 {
     m_control->setNavigationTabShown( show );
@@ -101,6 +106,5 @@ void KAtlasControl::setCurrentLocationTabShown( bool show )
 {
     m_control->setCurrentLocationTabShown( show );
 }
-
 
 #include "katlascontrol.moc"

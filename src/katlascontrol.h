@@ -47,15 +47,18 @@ class KAtlasControl : public QWidget
     void moveRight();
     void moveUp();
     void moveDown();
-    
-    void setNavigationTabShown( bool );
-    void setLegendTabShown( bool );
-    void setMapViewTabShown( bool );
-    void setCurrentLocationTabShown( bool );
+
 
     void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
 
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
+
+ public slots:
+    void setSideBarShown( bool );    
+    void setNavigationTabShown( bool );
+    void setLegendTabShown( bool );
+    void setMapViewTabShown( bool );
+    void setCurrentLocationTabShown( bool );
 
  private:
     //MarbleModel       *m_marbleModel;
