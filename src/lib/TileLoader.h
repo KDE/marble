@@ -81,7 +81,6 @@ class TileLoader : public QObject {
 
  protected:
 
-    TextureTile  *m_tile;
     HttpDownloadManager *m_downloadManager;
 
     QString       m_theme;

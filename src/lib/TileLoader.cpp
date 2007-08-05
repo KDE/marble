@@ -67,14 +67,14 @@ void TileLoader::setMapTheme( const QString& theme )
 
     m_theme = theme;
 
-    m_tile = new TextureTile( 0 );
-    m_tile->loadTile( 0, 0, 0, m_theme, false );
+    TextureTile *tile = new TextureTile( 0 );
+    tile->loadTile( 0, 0, 0, m_theme, false );
 
     // We assume that all tiles have the same size. TODO: check to be safe
-    m_tileWidth  = m_tile->rawtile().width();
-    m_tileHeight = m_tile->rawtile().height();
+    m_tileWidth  = tile->rawtile().width();
+    m_tileHeight = tile->rawtile().height();
 
-    delete m_tile;
+    delete tile;
 }
 
 void TileLoader::resetTilehash()
@@ -124,36 +124,37 @@ void TileLoader::flush()
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
     // Choosing the correct tile via Lon/Lat info 
-
+    TextureTile* tile = 0;
     int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
+
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
     if ( !m_tileHash.contains( tileId ) ) {
         if ( m_tileCache.contains( tileId ) ) {
-            m_tile = m_tileCache.take( tileId );
-            m_tileHash[tileId] = m_tile;
+            tile = m_tileCache.take( tileId );
+            m_tileHash[tileId] = tile;
         }
         else {
             // qDebug() << "load Tile from Disk: " << tileId;
-            m_tile = new TextureTile( tileId );
-            m_tileHash[tileId] = m_tile;
+            tile = new TextureTile( tileId );
+            m_tileHash[tileId] = tile;
 
-            connect( m_tile,            SIGNAL( downloadTile( const QString&, int ) ), 
+            connect( tile,            SIGNAL( downloadTile( const QString&, int ) ), 
                      m_downloadManager, SLOT( addJob( const QString&, int ) ) );
-            connect( m_tile,            SIGNAL( tileUpdateDone() ), 
+            connect( tile,            SIGNAL( tileUpdateDone() ), 
                      this,              SIGNAL( tileUpdateAvailable() ) );
-            m_tile->loadTile( tilx, tily, tileLevel, m_theme, false );
+            tile->loadTile( tilx, tily, tileLevel, m_theme, false );
         }
     } 
 
     // ...otherwise pick the correct one from the hash
     else {
-        m_tile = m_tileHash.value( tileId );
-        if ( !m_tile->used() ) {
-            m_tile->setUsed( true );
+        tile = m_tileHash.value( tileId );
+        if ( !tile->used() ) {
+            tile->setUsed( true );
         }
     }
 
-    return m_tile;
+    return tile;
 }
 
 int TileLoader::levelToRow( int level )
