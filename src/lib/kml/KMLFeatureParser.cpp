@@ -86,34 +86,38 @@ bool KMLFeatureParser::endElement( const QString &namespaceURI,
         QString lowerName = name.toLower();
 
         switch ( m_phase ) {
-        case WAIT_NAME:
-            if ( lowerName == NAME_TAG ) {
-                m_phase = IDLE;
-                result = true;
-            }
-            break;
-        case WAIT_DESCRIPTION:
-            if ( lowerName == DESCRIPTION_TAG ) {
-                m_phase = IDLE;
-                result = true;
-            }
-        case WAIT_ADDRESS:
-            if ( lowerName == ADDRESS_TAG ) {
-                m_phase = IDLE;
-                result = true;
-            }
-        case WAIT_PHONE_NUMBER:
-            if ( lowerName == PHONE_NUMBER_TAG ) {
-                m_phase = IDLE;
-                result = true;
-            }
-        case WAIT_VISIBILITY:
-            if ( lowerName == VISIBILITY_TAG ) {
-                m_phase = IDLE;
-                result = true;
-            }
-        default:
-            break;
+            case WAIT_NAME:
+                if ( lowerName == NAME_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            case WAIT_DESCRIPTION:
+                if ( lowerName == DESCRIPTION_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            case WAIT_ADDRESS:
+                if ( lowerName == ADDRESS_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            case WAIT_PHONE_NUMBER:
+                if ( lowerName == PHONE_NUMBER_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            case WAIT_VISIBILITY:
+                if ( lowerName == VISIBILITY_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -129,29 +133,29 @@ bool KMLFeatureParser::characters( const QString& str )
         KMLFeature& feature = (KMLFeature&) m_object;
 
         switch ( m_phase ) {
-        case WAIT_NAME:
-            feature.setName( str );
-            result = true;
-            break;
-        case WAIT_DESCRIPTION:
-            feature.setDescription( str );
-            result = true;
-            break;
-        case WAIT_ADDRESS:
-            feature.setAddress( str );
-            result = true;
-            break;
-        case WAIT_PHONE_NUMBER:
-            feature.setPhoneNumber( str );
-            result = true;
-            break;
-        case WAIT_VISIBILITY:
-            feature.setVisible( str.toInt() == 1 );
-            result = true;
-            break;
-        default:
-            break;
-        }
+            case WAIT_NAME:
+                feature.setName( str );
+                result = true;
+                break;
+            case WAIT_DESCRIPTION:
+                feature.setDescription( str );
+                result = true;
+                break;
+            case WAIT_ADDRESS:
+                feature.setAddress( str );
+                result = true;
+                break;
+            case WAIT_PHONE_NUMBER:
+                feature.setPhoneNumber( str );
+                result = true;
+                break;
+            case WAIT_VISIBILITY:
+                feature.setVisible( str.toInt() == 1 );
+                result = true;
+                break;
+            default:
+                break;
+            }
     }
 
     return result;

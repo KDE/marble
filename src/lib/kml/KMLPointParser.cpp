@@ -42,6 +42,8 @@ bool KMLPointParser::startElement( const QString& namespaceURI,
         return false;
     }
 
+    m_level++;
+
     bool result = false;
     QString lowerName = name.toLower();
 
@@ -55,8 +57,6 @@ bool KMLPointParser::startElement( const QString& namespaceURI,
         }
     }
 
-    m_level++;
-
     return result;
 }
 
@@ -64,8 +64,6 @@ bool KMLPointParser::endElement( const QString& namespaceURI,
                  const QString& localName,
                  const QString& qName )
 {
-    m_level--;
-
     Q_UNUSED( namespaceURI );
     Q_UNUSED( localName );
 
@@ -89,6 +87,8 @@ bool KMLPointParser::endElement( const QString& namespaceURI,
             result = true;
         }
     }
+
+    m_level--;
 
     return result;
 }

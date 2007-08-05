@@ -12,7 +12,8 @@
 #include "KMLFeature.h"
 
 
-KMLFeature::KMLFeature()
+KMLFeature::KMLFeature() :
+    m_visible( true )
 {
 }
 

@@ -1,10 +1,19 @@
+2007-08-06  Murad Tagirov  <tmurad@gmail.com
+
+    Parse Marble's placemark specific fields
+    "role" and "pop". Should use schema instead in feature
+    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/kml/KMLFeature.{h,cpp}
+    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+
 2007-08-05  Torsten Rahn  <rahn@kde.org>
 
     Starting to add "View" menu entry to Marble:
     - Show Navigation Panel, Full Screen, Status Bar
     Currently only available for the Qt4 version.
     TODO for tonight:
-    - Add QSetting to save QMainWindow settings 
+    - Add QSetting to save QMainWindow settings
     - Port the changes to the KDE version of Marble
     * src/katlascontrol.{h,cpp}
     * src/QtMainWindow.{h,cpp}
@@ -60,7 +69,7 @@
     * src/lib/MarbleModel.{h,cpp}
 
 2007-08-05  Torsten Rahn <rahn@kde.org>
-	
+
 	- Applied patch from "Prashanth Udupa" <prashanth.udupa@gmail.com>
 	Thanks for the patch and for the awesome blog entry at:
 	http://prashanthudupa.livejournal.com/

@@ -18,11 +18,19 @@ namespace
 {
     const QString PLACEMARKPARSER_TAG   = "placemark";
     const QString POINTPARSER_TAG       = "point";
+
+    /*
+     * TODO: This is Marble's placemarks specific field. Should
+     * use "schema" in next step
+     */
+    const QString POP_TAG               = "pop";
+    const QString ROLE_TAG              = "role";
 }
 
 KMLPlaceMarkParser::KMLPlaceMarkParser( KMLPlaceMark& placemark )
   : KMLFeatureParser( placemark ),
-    m_currentParser( 0 )
+    m_currentParser( 0 ),
+    m_phase( IDLE )
 {
 }
 
@@ -35,11 +43,11 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
                             const QString& name,
                             const QXmlAttributes& atts )
 {
-    m_level++;
-
     if ( m_parsed ) {
         return false;
     }
+
+    m_level++;
 
     bool result = false;
 
@@ -69,6 +77,14 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
             m_currentParser = new KMLPointParser( (KMLPlaceMark&) m_object );
             result = m_currentParser->startElement( namespaceURI, localName, name, atts );
         }
+        else if ( lowerName == POP_TAG ) {
+            m_phase = WAIT_POP;
+            result = true;
+        }
+        else if ( lowerName == ROLE_TAG ) {
+            m_phase = WAIT_ROLE;
+            result = true;
+        }
     }
 
     return result;
@@ -78,8 +94,6 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
                             const QString& localName,
                             const QString& qName )
 {
-    m_level--;
-
     if ( m_parsed ) {
         return false;
     }
@@ -100,16 +114,35 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
          */
         QString lowerName = qName.toLower();
 
-        if ( lowerName == PLACEMARKPARSER_TAG ) {
-            m_parsed = true;
-            result = true;
+        switch ( m_phase ) {
+            case IDLE:
+                if ( lowerName == PLACEMARKPARSER_TAG ) {
+                    m_parsed = true;
+                    result = true;
+                }
+                break;
+            case WAIT_POP:
+                if ( lowerName == POP_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
+            case WAIT_ROLE:
+                if ( lowerName == ROLE_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+            default:
+                break;
         }
     }
+
+    m_level--;
 
     return result;
 }
 
-bool KMLPlaceMarkParser::characters( const QString& ch )
+bool KMLPlaceMarkParser::characters( const QString& str )
 {
     if ( m_parsed ) {
         return false;
@@ -118,11 +151,30 @@ bool KMLPlaceMarkParser::characters( const QString& ch )
     bool result = false;
 
     if ( m_currentParser != 0 ) {
-        result = m_currentParser->characters( ch );
+        result = m_currentParser->characters( str );
     }
     else
     {
-        result = KMLFeatureParser::characters( ch );
+        result = KMLFeatureParser::characters( str );
+    }
+
+    if ( ! result ) {
+
+        KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
+
+        switch ( m_phase ) {
+            case WAIT_POP:
+                placemark.setPopulation( str.toInt() );
+                result = true;
+                break;
+            case WAIT_ROLE:
+                qDebug("Set tole: %s", str.toAscii().data());
+                placemark.setRole( str.at(0) );
+                result = true;
+                break;
+            default:
+                break;
+        }
     }
 
     return result;

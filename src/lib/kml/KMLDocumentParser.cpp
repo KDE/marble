@@ -44,11 +44,11 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
                                       const QString& name,
                                       const QXmlAttributes& atts)
 {
-    m_level++;
-
     if ( m_parsed ) {
         return false;
     }
+
+    m_level++;
 
     /*
      * Document specific fields will parse will in a feature
@@ -70,6 +70,8 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
         }
     }
 
+//    qDebug("Start - %s. Result: %d", lowerName.toAscii().data(), result);
+
     return true;
 }
 
@@ -77,8 +79,6 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
                                     const QString& localName,
                                     const QString& qName )
 {
-    m_level--;
-
     if ( m_parsed ) {
         return false;
     }
@@ -99,6 +99,10 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
             result = true;
         }
     }
+
+    m_level--;
+
+//    qDebug("Stop - %s. Result: %d", qName.toAscii().data(), result);
 
     return true;
 }

@@ -36,7 +36,16 @@ class KMLPlaceMarkParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  private:
+    enum
+    {
+        IDLE,
+        WAIT_POP,
+        WAIT_ROLE
+    };
+
     KMLObjectParser*    m_currentParser;
+
+    int                 m_phase;
 };
 
 #endif // KMLPLACEMARKPARSER_H
