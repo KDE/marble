@@ -1,3 +1,8 @@
+2007-08-05  Torsten Rahn <rahn@kde.org>
+	- Applied patch from "Prashanth Udupa" <prashanth.udupa@gmail.com>
+	Thanks for the patch and for the awesome blog entry at:
+	http://prashanthudupa.livejournal.com/
+
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy isue 14: inline methods in public classes.
