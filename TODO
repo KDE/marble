@@ -34,7 +34,8 @@ During the SoC projects (0.5)
 ----------------------------------------------------------------
 
 Misc
- * Create a file with use cases and personas                            TACK
+ * Create a file with use cases and personas                            INGE
+   - Continue with the use cases.                                       --
  * d-pointerify the rest of the public classes                          INGE
    - PlaceMarkModel                                                     done
    - (KAtlasThemeSelectView): Doesn't have any private members          done
