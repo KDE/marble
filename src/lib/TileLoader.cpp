@@ -44,9 +44,11 @@ const int tileDigits = 6;
 TileLoader::TileLoader( const QString& theme )
 {
     setMapTheme( theme );
+
     m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/") );
+
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
-        this, SLOT( reloadTile( QString, int ) ) );
+             this,              SLOT( reloadTile( QString, int ) ) );
 
     m_tileCache.clear();
     m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
@@ -58,6 +60,7 @@ TileLoader::~TileLoader()
     m_downloadManager->disconnect();
     delete m_downloadManager;
 }
+
 
 void TileLoader::setMapTheme( const QString& theme )
 {
@@ -92,9 +95,9 @@ void TileLoader::cleanupTilehash()
     // rendering of the map at all get removed from the tile hash.
 
     QHashIterator<int, TextureTile*> it(m_tileHash);
-    while (it.hasNext()) {
+    while ( it.hasNext() ) {
         it.next();
-        if ( it.value()->used() == false ){
+        if ( it.value()->used() == false ) {
 
             bool inCache = m_tileCache.insert( it.key(), it.value() );
             m_tileHash.remove( it.key() );
@@ -126,6 +129,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     // Choosing the correct tile via Lon/Lat info 
     TextureTile* tile = 0;
     int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
+
 
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
     if ( !m_tileHash.contains( tileId ) ) {
@@ -205,6 +209,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 
         if ( noerr == true)
             tilelevel = trylevel;
+
         ++trylevel;
     }
 
@@ -268,17 +273,17 @@ void TileLoader::reloadTile( QString relativeUrlString, int id )
 {
     qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
 
-    if ( m_tileHash.contains(id) )
-    {
-        int level =  id / 100000000;
-        int y = ( id - level * 100000000 ) / 10000;
-        int x = id - ( level * 100000000 + y * 10000 );
+    if ( m_tileHash.contains(id) ) {
+        int  level =  id / 100000000;
+        int  y     = ( id - level * 100000000 ) / 10000;
+        int  x     = id - ( level * 100000000 + y * 10000 );
+
         (m_tileHash[id]) -> reloadTile( x, y, level, m_theme );
     }
-    else
-    {
+    else {
          qDebug() << "No such ID";
     }
 }
+
 
 #include "TileLoader.moc"

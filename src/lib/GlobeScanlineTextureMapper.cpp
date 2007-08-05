@@ -21,6 +21,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
+
 // Defining INTERLACE will make sure that for two subsequent scanlines
 // every second scanline will be a deep copy of the first scanline.
 // This results in a more coarse resolution and in a speedup for the 
@@ -29,7 +30,7 @@
 // #define INTERLACE
 
 GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) 
-    : AbstractScanlineTextureMapper(path,parent)
+    : AbstractScanlineTextureMapper( path, parent )
 {
     m_fastScanLine = 0;
 
@@ -77,7 +78,9 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 }
 
 
-void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radius, Quaternion& planetAxis)
+void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, 
+                                            const int& radius,
+                                            Quaternion& planetAxis)
 {
     // Scanline based algorithm to texture map a sphere
 
@@ -110,9 +113,9 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
     Quaternion  inversePlanetAxis = planetAxis;
     inversePlanetAxis = inversePlanetAxis.inverse();
 
-    northPole.rotateAroundAxis(inversePlanetAxis);
+    northPole.rotateAroundAxis( inversePlanetAxis );
 
-    // calculate axis matrix to represent the planet's rotation
+    // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
     planetAxis.toMatrix( planetAxisMatrix );
 
@@ -121,9 +124,11 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
     // Calculate the actual y-range of the map on the screen 
     const int yTop = ( ( m_imageHeight / 2 - radius < 0 )
                        ? 0 : m_imageHeight / 2 - radius );
-    const int yBottom = (yTop == 0) ? m_imageHeight - skip + 1: yTop + radius + radius - skip + 1;
+    const int yBottom = ( (yTop == 0)
+                          ? m_imageHeight - skip + 1
+                          : yTop + radius + radius - skip + 1 );
 
-    for ( m_y = yTop; m_y < yBottom ; m_y+=skip ) {
+    for ( m_y = yTop; m_y < yBottom ; m_y += skip ) {
 
         /* Should be fixed kind of properly now ... */
         // if(m_y == canvasImage->height()){
@@ -149,15 +154,14 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
 
-        if ( m_interlaced == true )
-        {
+        if ( m_interlaced == true ) {
             m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
         }
 
         int  xIpLeft  = 1;
         int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
 
-        if (m_imageWidth / 2 - rx > 0) {
+        if ( m_imageWidth / 2 - rx > 0 ) {
             xIpLeft  = m_n * (int)( xLeft  / m_n + 1 );
             xIpRight = m_n * (int)( xRight / m_n - 1 );
         }
@@ -203,7 +207,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             else
                 m_interpolate = false;
 
-            // Evaluate more coordinates for the 3D position vector of the current pixel
+            // Evaluate more coordinates for the 3D position vector of
+            // the current pixel.
             m_qx = (double)( m_x - m_imageWidth / 2 ) * radiusf;
 
             double qr2z = m_qr - m_qx * m_qx;
@@ -215,8 +220,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
             m_qpos.rotateAroundAxis( planetAxisMatrix );        
 
             m_qpos.getSpherical( lon, lat );
-
-            // if (lat < 0) m_qpos->display(); 
 
             // Approx for m_n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
@@ -254,7 +257,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radi
 
 
 // This method interpolates color values for skipped pixels in a scanline.
- 
+// 
 // While moving along the scanline we don't move from pixel to pixel but
 // leave out m_n pixels each time and calculate the exact position and 
 // color value for the new pixel. The pixel values in between get 

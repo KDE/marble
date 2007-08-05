@@ -1,3 +1,20 @@
+2007-08-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Some trivil cleaning that I did while looking through the code to
+	understand it better.
+	* lib/AbstractScanlineTextureMapper.cpp,
+	* lib/MarbleWidget.cpp,
+	* lib/placemarkpainter.cpp,
+	* lib/TileLoader.cpp,
+	* lib/GlobeScanlineTextureMapper.h,
+	* lib/placemarkpainter.h,
+	* lib/TileLoader.h,
+	* lib/GlobeScanlineTextureMapper.cpp,
+	* lib/TextureTile.cpp,
+	* lib/TextureTile.h,
+	* lib/FlatScanlineTextureMapper.cpp:
+	Cleaning
+
 2007-08-05  Murad Tagirov  <tmurad@gmail.com>
 
     Added "m_visible" to KMLFeature class. MarbleModel now
@@ -24,13 +41,13 @@
 
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
-	Fix Krazy isue 14: inline methods in public classes.
+	Fix Krazy issue 14: inline methods in public classes.
 	* src/lib/placemarkmodel.{h,cpp}: Move all inline methods to .cpp
 	file
 	* src/lib/PlaceMarkContainer.{h,cpp}: Move all inline methods to
 	.cpp file
 
-	Fix Krazy isue 12: validity of i18n calls.
+	Fix Krazy issue 12: validity of i18n calls.
 	* src/KdeMainWindow.cpp (exportMapScreenShot): Add a context to
 	the i18n call.
 

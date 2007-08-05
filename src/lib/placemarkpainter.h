@@ -55,10 +55,8 @@ class PlaceMarkPainter : public QObject
                           bool firstTime );
 #endif
 
-    void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
+    void setLabelColor(QColor labelcolor) { m_labelcolor = labelcolor; }
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
-
- public Q_SLOTS:
 
  private:
     bool   isVisible( PlaceMark *mark, int radius,
@@ -71,8 +69,8 @@ class PlaceMarkPainter : public QObject
                          PlaceMark *mark,
                          int textwidth,
                          int x, int y );
-    void drawLabelText(QPainter& textpainter, PlaceMark*, QFont font,
-                       double outlineWidth);
+    void drawLabelText( QPainter& textpainter, PlaceMark*, QFont font,
+                        double outlineWidth );
     bool testbug();
 
  protected:

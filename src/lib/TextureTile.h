@@ -36,11 +36,11 @@ class TextureTile : public QObject {
     int  depth() const        { return m_depth; }
 
     bool used() const         { return m_used; }
-    void       setUsed( bool used ) { m_used = used; }
+    void setUsed( bool used ) { m_used = used; }
 
-    int numBytes() const          { return m_rawtile.numBytes(); }
+    int numBytes() const      { return m_rawtile.numBytes(); }
 
-    const QImage&     rawtile()            { return m_rawtile; }
+    const QImage& rawtile()   { return m_rawtile; }
  
     uchar  **jumpTable8;
     uint   **jumpTable32;
@@ -51,9 +51,9 @@ class TextureTile : public QObject {
 
  public Q_SLOTS:
     void   loadTile( int x, int y, int level, 
-           const QString& theme, bool requestTileUpdate = true );
+                     const QString& theme, bool requestTileUpdate = true );
     void reloadTile( int x, int y, int level, 
-           const QString& theme );
+                     const QString& theme );
 
  protected:
     int      m_id;

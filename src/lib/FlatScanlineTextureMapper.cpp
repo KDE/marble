@@ -21,15 +21,18 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
+
 FlatScanlineTextureMapper::FlatScanlineTextureMapper(const QString& path, QObject * parent )
     : AbstractScanlineTextureMapper( path, parent )
 {
-    m_oldCenterLon = 0.0;
+    m_oldCenterLon   = 0.0;
     m_oldYPaintedTop = 0;
 }
 
-void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radius, 
-                                Quaternion& planetAxis)
+
+void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, 
+                                           const int& radius, 
+                                           Quaternion& planetAxis)
 {
    // Initialize needed variables:
     double lon = 0.0;
@@ -56,11 +59,11 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
     m_tileLoader->resetTilehash();
     selectTileLevel(radius);
 
-    // calculate axis matrix to represent the planet's rotation
+    // Calculate axis matrix to represent the planet's rotation
     matrix  planetAxisMatrix;
     planetAxis.toMatrix( planetAxisMatrix );
 
-    //Calculate traslation of center point
+    // Calculate traslation of center point
     float const centerLat =  planetAxis.pitch();
     float const centerLon = -planetAxis.yaw();
     int yCenterOffset =  (int)((float)( 2 * radius / M_PI) * centerLat );
@@ -70,10 +73,10 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
     yPaintedTop    = yTop    = m_imageHeight / 2 - radius + yCenterOffset;
     yPaintedBottom = yBottom = m_imageHeight / 2 + radius + yCenterOffset;
 
-    if(yPaintedTop < 0) yPaintedTop = 0;
-    if(yPaintedTop > m_imageHeight) yPaintedTop = m_imageHeight;
-    if(yPaintedBottom < 0) yPaintedBottom = 0;
-    if(yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
+    if (yPaintedTop < 0)                yPaintedTop = 0;
+    if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
+    if (yPaintedBottom < 0)             yPaintedBottom = 0;
+    if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
     //Calculate x-range
     xPaintedLeft = 0;
@@ -94,7 +97,8 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon > M_PI )  leftLon -= 2 * M_PI;
 
-    //Paint the map
+    // ----------------------------------------------------------------
+    // The real beef: Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
         lat = -M_PI/2 + (y - yTop )* yfactor;
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
@@ -112,8 +116,8 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, const int& radiu
     int clearStop  = yTop;
 
     if ( yPaintedTop - m_oldYPaintedTop <= 0 ) {
-        clearStart=yPaintedBottom;
-        clearStop=m_imageHeight;
+        clearStart = yPaintedBottom;
+        clearStop  = m_imageHeight;
     }
 
     for ( int y = clearStart; y < clearStop; ++y ) {

@@ -30,7 +30,6 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "katlastilecreatordialog.h"
 #include "gps/GpsLayer.h"
-#include "utils.h"
 
 #include "measuretool.h"
 

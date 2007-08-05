@@ -110,17 +110,15 @@ void TextureTile::loadTile( int x, int y, int level,
 	absfilename = KAtlasDirs::path( relfilename );
 
 	if ( QFile::exists( absfilename ) ) {
-//        qDebug() << "The image filename does exist: " << absfilename ;
+            // qDebug() << "The image filename does exist: " << absfilename ;
 
 	    QImage temptile( absfilename );
 
-	    if ( !temptile.isNull() ) 
-        {
-//            qDebug() << "Image has been successfully loaded.";
+	    if ( !temptile.isNull() ) {
+                // qDebug() << "Image has been successfully loaded.";
 
-	       	if ( level != i )
-            { 
-//            qDebug() << "About to start cropping an existing image.";
+	       	if ( level != i ) { 
+                    // qDebug() << "About to start cropping an existing image.";
 		    QSize tilesize = temptile.size();
 		    double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
 		    double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
@@ -138,21 +136,21 @@ void TextureTile::loadTile( int x, int y, int level,
 		    // same place for m_rawtile on the heap:
 		    temptile = temptile.copy( QRect( topleft, bottomright ) );
 		    temptile = temptile.scaled( tilesize ); // TODO: use correct size
-//            qDebug() << "Finished scaling up the Temporary Tile.";
+                    // qDebug() << "Finished scaling up the Temporary Tile.";
 		    }
 
-            m_rawtile = temptile;
+                m_rawtile = temptile;
 
-		    break;
+                break;
 	    }
 	}
 	else {
-//        qDebug() << "emit downloadTile(" << relfilename << ");";
+            // qDebug() << "emit downloadTile(" << relfilename << ");";
 	    emit downloadTile( relfilename, m_id );
 	}
     }
 
-    if ( m_rawtile.isNull() ){
+    if ( m_rawtile.isNull() ) {
 	qDebug() << "An essential tile is missing. Please rerun the application.";
 	exit(-1);
     }
@@ -171,9 +169,8 @@ void TextureTile::loadTile( int x, int y, int level,
 	exit( -1 );
     }
 
-    if ( requestTileUpdate )
-    {
-//        qDebug() << "TileUpdate available";
+    if ( requestTileUpdate ) {
+        // qDebug() << "TileUpdate available";
     	emit tileUpdateDone();
     }
 }
@@ -181,7 +178,8 @@ void TextureTile::loadTile( int x, int y, int level,
 
 void TextureTile::reloadTile( int x, int y, int level, const QString& theme )
 {
-//    qDebug() << "slotLoadTile variables: |" << theme << "|" << level << "|" << x << "|" << y;
+    // qDebug() << "slotLoadTile variables: |" << theme << "|" 
+    // << level << "|" << x << "|" << y;
 
     loadTile( x, y, level, theme, true );
 }

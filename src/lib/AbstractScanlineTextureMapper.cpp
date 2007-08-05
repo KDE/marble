@@ -92,9 +92,9 @@ void AbstractScanlineTextureMapper::selectTileLevel(int radius)
 
     double  linearLevel = ( 2.0 * (double)( radius )
 			    / (double) ( m_tileLoader->tileWidth() ) );
-    int    tileLevel   = 0;
+    int     tileLevel   = 0;
 
-    if (linearLevel < 1.0 )
+    if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
     tileLevel = (int)( log( linearLevel ) / log( 2.0 ) ) + 1;
@@ -153,7 +153,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
 {
     // Convert the lon and lat coordinates of the position on the scanline
     // measured in radiant to the pixel position of the requested 
-    // coordinate on the current tile:
+    // coordinate on the current tile.
  
     m_posX = (int)( m_halfNormLon + lon * m_rad2PixelX );
     m_posY = (int)( m_quatNormLat + lat * m_rad2PixelY );
@@ -165,13 +165,16 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     if ( m_posX  >= m_tileLoader->tileWidth() 
          || m_posX < 0
          || m_posY >= m_tileLoader->tileHeight()
-         || m_posY < 0 ) nextTile();
+         || m_posY < 0 )
+    {
+        nextTile();
+    }
 
     // Now retrieve the color value of the requested pixel on the tile.
     // This needs to be done differently for grayscale ( uchar, 1 byte ).
     // and color ( uint, 4 bytes ) images.
 
-    if (m_tile->depth() == 8)
+    if ( m_tile->depth() == 8 )
         *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
     else
         *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
@@ -179,8 +182,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
 
 void AbstractScanlineTextureMapper::nextTile()
 {
-    // necessary to prevent e.g. crash if lon = -pi
-
+    // Necessary to prevent e.g. crash if lon = -pi
     if ( m_posX > m_fullNormLon ) m_posX = m_fullNormLon;
     if ( m_posY > m_halfNormLat ) m_posY = m_halfNormLat;
 
@@ -201,7 +203,6 @@ void AbstractScanlineTextureMapper::nextTile()
 
     // Recalculate some convenience variables for the new tile:
     // m_tilePosX/Y stores the position of the tiles in pixels
-
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
 
