@@ -36,14 +36,18 @@ class KMLFeature
     QString description() const;
     void setDescription( const QString &value);
 
+    bool isVisible() const;
+    void setVisible( bool value );
+
  protected:
     KMLFeature();
 
  private:
-    QString m_name;
-    QString m_address;
-    QString m_phoneNumber;
-    QString m_description;
+    QString     m_name;
+    QString     m_address;
+    QString     m_phoneNumber;
+    QString     m_description;
+    bool        m_visible;
 };
 
 #endif // KMLFEATURE_H

@@ -60,3 +60,13 @@ void KMLFeature::setDescription( const QString &value)
 {
     m_description = value;
 }
+
+bool KMLFeature::isVisible() const
+{
+    return m_visible;
+}
+
+void KMLFeature::setVisible( bool value )
+{
+    m_visible = value;
+}

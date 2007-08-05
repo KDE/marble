@@ -17,10 +17,11 @@ namespace
 {
     const int KML_FEATURE_LEVEL = 2;
 
-    const QString NAME_TAG = "name";
-    const QString DESCRIPTION_TAG = "description";
-    const QString ADDRESS_TAG = "address";
-    const QString PHONE_NUMBER_TAG = "phonenumber";
+    const QString NAME_TAG          = "name";
+    const QString DESCRIPTION_TAG   = "description";
+    const QString ADDRESS_TAG       = "address";
+    const QString PHONE_NUMBER_TAG  = "phonenumber";
+    const QString VISIBILITY_TAG    = "visibility";
 }
 
 KMLFeatureParser::KMLFeatureParser( KMLFeature& feature )
@@ -63,6 +64,10 @@ bool KMLFeatureParser::startElement( const QString& namespaceURI,
             m_phase = WAIT_PHONE_NUMBER;
             result = true;
         }
+        else if ( lowerName == VISIBILITY_TAG ) {
+            m_phase = WAIT_VISIBILITY;
+            result = true;
+        }
     }
 
     return result;
@@ -102,6 +107,11 @@ bool KMLFeatureParser::endElement( const QString &namespaceURI,
                 m_phase = IDLE;
                 result = true;
             }
+        case WAIT_VISIBILITY:
+            if ( lowerName == VISIBILITY_TAG ) {
+                m_phase = IDLE;
+                result = true;
+            }
         default:
             break;
         }
@@ -115,6 +125,7 @@ bool KMLFeatureParser::characters( const QString& str )
     bool result = false;
 
     if ( m_level == KML_FEATURE_LEVEL ) {
+
         KMLFeature& feature = (KMLFeature&) m_object;
 
         switch ( m_phase ) {
@@ -132,6 +143,11 @@ bool KMLFeatureParser::characters( const QString& str )
             break;
         case WAIT_PHONE_NUMBER:
             feature.setPhoneNumber( str );
+            result = true;
+            break;
+        case WAIT_VISIBILITY:
+            bool visible = ( ( str.toInt() == 1 ) ? true : false );
+            feature.setVisible( visible );
             result = true;
             break;
         default:

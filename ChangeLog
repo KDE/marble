@@ -1,5 +1,17 @@
 2007-08-05  Murad Tagirov  <tmurad@gmail.com>
 
+    Added "m_visible" to KMLFeature class. MarbleModel now
+    paints only folders which are visible.
+    * src/lib/kml/KMLFeature.{h,cpp}
+    * src/lib/kml/KMLFeatureParser.{h,cpp}
+    * src/lib/MarbleModel.cpp
+
+    Updated class diagram and kml related task list
+    * projects/kml/kml-tasks
+    * projects/kml/KMLClasses.xmi
+
+2007-08-05  Murad Tagirov  <tmurad@gmail.com>
+
     Added new "bool firstTime" parameter to
     PlaceMarkPainter::paintPlaceFolder method.
     * src/lib/placemarkpainter.{h,cpp}

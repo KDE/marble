@@ -116,9 +116,7 @@ MarbleModel::MarbleModel( QWidget *parent )
 
 MarbleModel::~MarbleModel()
 {
-#ifndef KML_GSOC
     delete d->m_placeMarkContainer;
-#endif
     delete d->m_texmapper;
     delete d;
 }
@@ -343,15 +341,20 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         {
             KMLFolder& folder = *( *iterator );
 
-            d->m_placemarkpainter->paintPlaceFolder( painter,
-                                                     viewParams->m_canvasImage->width(),
-                                                     viewParams->m_canvasImage->height(),
-                                                     viewParams,
-                                                     &folder.activePlaceMarkContainer(),
-                                                     viewParams->m_planetAxis,
-                                                     firstTime );
+            /*
+             * Show only placemarks which are visible
+             */
+            if ( folder.isVisible() ) {
+                d->m_placemarkpainter->paintPlaceFolder( painter,
+                                                        viewParams->m_canvasImage->width(),
+                                                        viewParams->m_canvasImage->height(),
+                                                        viewParams,
+                                                        &folder.activePlaceMarkContainer(),
+                                                        viewParams->m_planetAxis,
+                                                        firstTime );
 
-            firstTime = false;
+                firstTime = false;
+            }
         }
     }
 #endif

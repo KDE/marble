@@ -40,7 +40,8 @@ class KMLFeatureParser : public KMLObjectParser
         WAIT_NAME,
         WAIT_DESCRIPTION,
         WAIT_ADDRESS,
-        WAIT_PHONE_NUMBER
+        WAIT_PHONE_NUMBER,
+        WAIT_VISIBILITY
     };
 
     int m_phase;
