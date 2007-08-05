@@ -146,8 +146,7 @@ bool KMLFeatureParser::characters( const QString& str )
             result = true;
             break;
         case WAIT_VISIBILITY:
-            bool visible = ( ( str.toInt() == 1 ) ? true : false );
-            feature.setVisible( visible );
+            feature.setVisible( str.toInt() == 1 );
             result = true;
             break;
         default:

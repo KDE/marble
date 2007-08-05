@@ -1,3 +1,9 @@
+2007-08-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Compile!
+	* src/lib/kml/KMLFeatureParser.cpp (characters): remove a variable.
+	At least gcc 4.1.2 didn't like the previous code.
+
 2007-08-05  Murad Tagirov  <tmurad@gmail.com>
 
     KMLContainer now returns PlaceMarkContainer which
@@ -43,6 +49,7 @@
     * src/lib/MarbleModel.{h,cpp}
 
 2007-08-05  Torsten Rahn <rahn@kde.org>
+	
 	- Applied patch from "Prashanth Udupa" <prashanth.udupa@gmail.com>
 	Thanks for the patch and for the awesome blog entry at:
 	http://prashanthudupa.livejournal.com/
