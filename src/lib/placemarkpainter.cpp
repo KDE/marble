@@ -146,11 +146,20 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 
 #if 1
 
+#ifndef KML_GSOC
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
                                         Quaternion planetAxis )
+#else
+void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
+                                        int imgwidth, int imgheight,
+                                        ViewParams *viewParams,
+                                        const PlaceMarkContainer* placecontainer,
+                                        Quaternion planetAxis,
+                                        bool firstTime )
+#endif
 {
     //int  imgwidth  = 2 * imgrx;
     //int  imgheight = 2 * imgry;
@@ -184,7 +193,12 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     for ( int i = 0; i < secnumber; i++)
         m_rowsection.append( QVector<PlaceMark*>( ) );
 
+#ifndef KML_GSOC
     m_visiblePlacemarks.clear();
+#else
+    if ( firstTime )
+        m_visiblePlacemarks.clear();
+#endif
 
     PlaceMark  *mark = 0;
     int         labelnum = 0;

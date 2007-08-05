@@ -41,10 +41,20 @@ class PlaceMarkPainter : public QObject
 
  public:
     PlaceMarkPainter(QObject *parent = 0);
+
+#ifndef KML_GSOC
     void paintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
                           const PlaceMarkContainer*,
                           Quaternion );
+#else
+    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight,
+                          ViewParams *viewParams,
+                          const PlaceMarkContainer*,
+                          Quaternion,
+                          bool firstTime );
+#endif
+
     void setLabelColor(QColor labelcolor){ m_labelcolor = labelcolor;}
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
 

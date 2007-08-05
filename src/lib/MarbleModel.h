@@ -19,7 +19,7 @@
 
 /** @file
  * This file contains the headers for MarbleModel
- * 
+ *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
@@ -52,7 +52,7 @@ class MarbleModelPrivate;
 class ViewParams;
 
 
-/** 
+/**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
  *
  * This class provides a data storage and indexer that can be
@@ -86,13 +86,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
  public:
     /**
      * @brief  Construct a new MarbleModel.
-     * @param view  The widget that is the view for this Model. 
+     * @param view  The widget that is the view for this Model.
      */
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
     void  paintGlobe(ClipPainter*, int width, int height,
-                     ViewParams *viewParams, 
+                     ViewParams *viewParams,
                      bool redrawBackground, const QRect&);
 
     void  resize( int width, int height );
@@ -122,22 +122,22 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return The Gps Data visibility.
      */
     bool showGps() const;
-    
+
     /**
      * @brief Set whether the Gps Data is visible.
      * @param visible visibility of the Gps Data.
      */
     void setShowGps( bool visible );
-    
+
     /**
      * @brief Start the model's timer polling
-     * 
+     *
      * this is default behaviour so does not need to be started unless
      * it was previously stopped
      * @param time the amount of milliseconds between each poll
      */
     void startPolling( int time = 1000 );
-    
+
     /**
      * @brief stop the model from polling
      */
@@ -154,7 +154,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void notifyModelChanged();
 
  private:
-    MarbleModelPrivate  * const d; 
+    MarbleModelPrivate  * const d;
 };
 
 

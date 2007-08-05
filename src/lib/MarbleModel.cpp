@@ -335,6 +335,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     if ( viewParams->m_showPlaceMarks ) {
         const QList < KMLFolder* >& folderList = d->m_placemarkmanager->getFolderList();
 
+        bool firstTime = true;
+
         for ( QList<KMLFolder*>::const_iterator iterator = folderList.constBegin();
             iterator != folderList.constEnd();
             ++iterator )
@@ -346,7 +348,10 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                                                      viewParams->m_canvasImage->height(),
                                                      viewParams,
                                                      &folder.activePlaceMarkContainer(),
-                                                     viewParams->m_planetAxis );
+                                                     viewParams->m_planetAxis,
+                                                     firstTime );
+
+            firstTime = false;
         }
     }
 #endif

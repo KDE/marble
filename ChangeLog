@@ -1,3 +1,10 @@
+2007-08-05  Murad Tagirov  <tmurad@gmail.com>
+
+    Added new "bool firstTime" parameter to
+    PlaceMarkPainter::paintPlaceFolder method.
+    * src/lib/placemarkpainter.{h,cpp}
+    * src/lib/MarbleModel.{h,cpp}
+
 2007-08-05  Torsten Rahn <rahn@kde.org>
 	- Applied patch from "Prashanth Udupa" <prashanth.udupa@gmail.com>
 	Thanks for the patch and for the awesome blog entry at:
