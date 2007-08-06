@@ -408,8 +408,6 @@ void MarbleWidget::zoomOut()
 void MarbleWidget::rotateTo(const Quaternion& quat)
 {
     d->m_viewParams.m_planetAxis = quat;
-
-    repaint();
 }
 
 
@@ -618,16 +616,16 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 {
 
-    int imgrx  = width() >> 1;
-    int imgry  = height() >> 1;
+    int imgrx  = width() / 2;
+    int imgry  = height() / 2;
 
-    const double  radiusf = 1.0 / (double)(radius());
+    const double  inverseRadius = 1.0 / (double)(radius());
 
     if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
 
-	double qy = radiusf * (double)(y - imgry);
+	double qy = inverseRadius * (double)(y - imgry);
 	double qr = 1.0 - qy * qy;
-	double qx = (double)(x - imgrx) * radiusf;
+	double qx = (double)(x - imgrx) * inverseRadius;
 
 	double qr2z = qr - qx * qx;
 	double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
@@ -644,11 +642,11 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 }
 
 
-void MarbleWidget::rotateTo(const uint& phi, const uint& theta, const uint& psi)
+void MarbleWidget::rotateTo(const double& phi, const double& theta, const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( (double)(phi)   / RAD2INT,
-                                                  (double)(theta) / RAD2INT,
-                                                  (double)(psi)   / RAD2INT );
+    d->m_viewParams.m_planetAxis.createFromEuler( phi   / RAD2INT,
+                                                  theta / RAD2INT,
+                                                  psi   / RAD2INT );
 }
 
 void MarbleWidget::rotateTo(const double& lat, const double& lon)

@@ -169,13 +169,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int northPoleZ();
     bool screenCoordinates( const double lon, const double lat, 
                             int& x, int& y );
-    // This method provides a way to center on lat = +90(N) - -90(S)
-    // and lon = +180(W) - -180(E)
-    // FIXME: Apidox
-    void  rotateTo(const double&, const double&);
-    void  rotateTo(const uint&, const uint&, const uint&);
-    void  rotateTo(const Quaternion&);
-    void  rotateBy(const Quaternion& incRot);
 
     double  centerLatitude()  const;
     double  centerLongitude() const;
@@ -189,8 +182,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool            globeSphericals( int x, int y,
-                                     double& alpha, double& beta );
+    bool globeSphericals( int x, int y,
+                          double& alpha, double& beta );
     /**
      * @brief returns the model for all the placemarks on the globe.
      */
@@ -334,32 +327,82 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * If we start on (0, 0), the result will be the exact equivalent
      * of (lat, lon), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
+     *
+     * This method automatically updates the view
      */
     void  rotateBy(const double &phi, const double &theta);
 
     /**
+     * @brief  Rotate the view by the angle specified by a Quaternion.
+     * @param  incRot a quaternion specifying the rotation
+     *     *
+     * This method automatically updates the view
+     */
+    void  rotateBy(const Quaternion& incRot);
+
+    /**
      * @brief  Center the view on a point
      * @param  lat  an angle parallel to the latitude lines
+     *              +90(N) - -90(S)
      * @param  lon  an angle parallel to the longitude lines
+     *              +180(W) - -180(E)
+     *
+     * This method automatically updates the view
      */
     void  centerOn(const double &lat, const double &lon);
+
     /**
      * @brief  Center the view on a point
      * @param  index  an index for a QModel, indicating a city
+     *
+     * This method automatically updates the view
      */
     void  centerOn(const QModelIndex& index);
 
     /**
      * @brief  Set the latitude for the centerPoint
      * @param  lat  the new value for the latitude
+     *
+     * This method automatically updates the view
      */
     void setCenterLatitude( double lat );
 
     /**
      * @brief  Set the longitude for the centerPoint
      * @param  lon  the new value for the longitude
+     *
+     * This method automatically updates the view
      */
     void setCenterLongitude( double lon );
+
+    /**
+     * @brief  Center the view on a point
+     * @param  lat  an angle parallel to the latitude lines
+     *              +90(N) - -90(S)
+     * @param  lon  an angle parallel to the longitude lines
+     *              +180(W) - -180(E)
+     *
+     * This method does NOT automatically update the view
+     * and is meant to be used during subsequent transformations 
+     */
+    void  rotateTo(const double& lat, const double& lon);
+
+    /**
+     * @brief  Center the view on a point
+     *
+     * This method does NOT automatically update the view
+     * and is meant to be used during subsequent transformations 
+     */
+    void  rotateTo(const double& phi, const double& theta, const double& psi);
+
+    /**
+     * @brief  Center the view on a point
+     * @param  quat a quaternion specifying the rotation
+     *
+     * This method does NOT automatically update the view
+     * and is meant to be used during subsequent transformations 
+     */
+    void  rotateTo(const Quaternion& quat);
 
     /**
      * @brief  Set the home point
@@ -548,6 +591,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  mouseMoveGeoPosition( QString );
 
     void  mouseClickGeoPosition( double lon, double lat, GeoPoint::Unit );
+
+    void  timeout();
 
  protected:
     /**

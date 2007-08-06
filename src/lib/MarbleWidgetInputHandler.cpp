@@ -106,7 +106,6 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( dirx != 0 || diry != 0 ) {
             m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
                                 -m_widget->moveStep() * (double)(dirx) );
-            m_widget->repaint();
         }
 
         return true;
@@ -281,8 +280,6 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                 else
                     m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
                                         -m_widget->moveStep() * (double)(-dirx) );
-
-                m_widget->repaint();
             }				
         }
 
