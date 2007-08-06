@@ -27,6 +27,9 @@ class KMLContainer : public KMLFeature
 
     void addPlaceMark( KMLPlaceMark* placemark );
 
+    virtual void pack( QDataStream& stream ) const;
+    virtual void unpack( QDataStream& stream );
+
     /*
      * Will move this method to KMLDocumentModel in a next step
      */

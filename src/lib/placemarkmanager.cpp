@@ -109,6 +109,17 @@ void PlaceMarkManager::loadKml( const QString& filename )
 
             m_documentList.append( document );
             qDebug("KML document loaded. Name: %s", document->name().toAscii().data());
+
+            /*
+             * FIXME: This is only to test serialization
+             */
+            QFile file("/tmp/kmldocument.cache");
+            file.open( QIODevice::WriteOnly );
+
+            QDataStream stream( &file );
+            document->pack( stream );
+
+            file.close();
         }
     }
 #else

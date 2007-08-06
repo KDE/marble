@@ -71,3 +71,25 @@ void KMLFeature::setVisible( bool value )
 {
     m_visible = value;
 }
+
+void KMLFeature::pack( QDataStream& stream ) const
+{
+    KMLObject::pack( stream );
+
+    stream << m_name;
+    stream << m_address;
+    stream << m_phoneNumber;
+    stream << m_description;
+    stream << m_visible;
+}
+
+void KMLFeature::unpack( QDataStream& stream )
+{
+    KMLObject::unpack( stream );
+
+    stream >> m_name;
+    stream >> m_address;
+    stream >> m_phoneNumber;
+    stream >> m_description;
+    stream >> m_visible;
+}

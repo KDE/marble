@@ -168,7 +168,6 @@ bool KMLPlaceMarkParser::characters( const QString& str )
                 result = true;
                 break;
             case WAIT_ROLE:
-                qDebug("Set tole: %s", str.toAscii().data());
                 placemark.setRole( str.at(0) );
                 result = true;
                 break;

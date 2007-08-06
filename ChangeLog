@@ -1,11 +1,23 @@
+2007-08-06  Murad Tagirov  <tmurad@gmail.com>
+
+    Added initial support of serialization of kml
+    objects to memory stream. In order to serialize any
+    object class must be inherited from Serializable abastract class
+    * src/lib/kml/Serializable.h: new file
+    * src/lib/placemarkmanager.cpp
+    * src/lib/kml/KMLFeature.{h,cpp}
+    * src/lib/kml/KMLObject.{h,cpp}
+    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLContainer.{h,cpp}
+
 2007-08-06  Torsten Rahn  <rahn@kde.org>
 
-    - Cleaned up some "GPS" method names that are not really 
+    - Cleaned up some "GPS" method names that are not really
       limited to GPS usage after question from Prashanth Udupa.
-    - removed "timeout" signal from MarbleWidget as it seems 
+    - removed "timeout" signal from MarbleWidget as it seems
       to have been moved to MarbleModel.
       Andrew: I hope you're fine with these changes - otherwise
-      tell me :-) 
+      tell me :-)
 
     * example2.ui
     * src/MarbleControlBox.{h,cpp}

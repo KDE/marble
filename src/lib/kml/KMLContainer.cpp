@@ -92,26 +92,32 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
     return m_activePlaceMarkContainer;
 }
 
-#if 0
-PlaceMarkContainer& KMLContainer::activePlaceMarkContainer()
+void KMLContainer::pack( QDataStream& stream ) const
 {
-    /*
-     * TODO: include only placemarks which is included
-     * in a screen area
-     */
+    KMLFeature::pack( stream );
 
-    m_activePlaceMarkContainer.clear ();
+    stream << m_placemarkVector.count();
 
-    QVector < KMLPlaceMark* >::const_iterator  it;
-    for ( it = m_placemarkVector.constBegin();
-          it != m_placemarkVector.constEnd();
-          it++ )
+    for ( QVector <KMLPlaceMark*>::const_iterator iterator = m_placemarkVector.constBegin();
+          iterator != m_placemarkVector.end();
+          iterator++ )
     {
-        KMLPlaceMark* kmlPlaceMark = *it;
-        m_activePlaceMarkContainer.append( kmlPlaceMark );
+        const KMLPlaceMark& placemark = * ( *iterator );
+        placemark.pack( stream );
     }
-
-    qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
 }
-#endif
+
+void KMLContainer::unpack( QDataStream& stream )
+{
+    KMLFeature::unpack( stream );
+
+    int count;
+    stream >> count;
+
+    for ( int i = 0; i < count; ++i ) {
+        KMLPlaceMark* placemark = new KMLPlaceMark();
+        placemark->unpack( stream );
+
+        m_placemarkVector.append( placemark );
+    }
+}

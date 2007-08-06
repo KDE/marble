@@ -12,6 +12,7 @@
 #include "KMLObject.h"
 
 #include <QtGlobal>
+#include <QtCore/QDataStream>
 
 #ifdef KML_DEBUG
 namespace
@@ -58,4 +59,16 @@ int KMLObject::targetId() const
 void KMLObject::setTargetId( int value )
 {
     m_targetId = value;
+}
+
+void KMLObject::pack( QDataStream& stream ) const
+{
+    stream << m_id;
+    stream << m_targetId;
+}
+
+void KMLObject::unpack( QDataStream& stream )
+{
+    stream >> m_id;
+    stream >> m_targetId;
 }

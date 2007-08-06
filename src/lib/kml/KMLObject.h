@@ -12,7 +12,9 @@
 #ifndef KMLOBJECT_H
 #define KMLOBJECT_H
 
-class KMLObject
+#include "Serializable.h"
+
+class KMLObject : public Serializable
 {
  public:
     virtual ~KMLObject();
@@ -22,6 +24,9 @@ class KMLObject
 
     int targetId() const;
     void setTargetId( int value );
+
+    virtual void pack( QDataStream& stream ) const;
+    virtual void unpack( QDataStream& steam );
 
  protected:
     KMLObject();

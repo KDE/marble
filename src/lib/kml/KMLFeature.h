@@ -39,6 +39,9 @@ class KMLFeature
     bool isVisible() const;
     void setVisible( bool value );
 
+    virtual void pack( QDataStream& stream ) const;
+    virtual void unpack( QDataStream& stream );
+
  protected:
     KMLFeature();
 
