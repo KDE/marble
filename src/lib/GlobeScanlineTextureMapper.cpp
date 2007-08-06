@@ -46,7 +46,7 @@ GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QOb
     m_qy = 0.0;
     m_qz = 0.0;
 
-    m_interlaced = true;
+    m_interlaced = false;
 }
 
 
