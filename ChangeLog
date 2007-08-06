@@ -1,3 +1,10 @@
+2007-08-06  Torsten Rahn  <rahn@kde.org>
+
+    - Clean up GlobeScanlineTextureMapper class
+    - Use memcpy for interlaced mode
+
+    * src/lib/GlobeScanlineTextureMapper.{h,cpp}
+
 2007-08-06  Murad Tagirov  <tmurad@gmail.com
 
     Parse Marble's placemark specific fields

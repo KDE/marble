@@ -49,17 +49,14 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     void pixelValueApprox(const double& lon, const double& lat,
                           QRgb *scanLine);
 
-    QRgb        *m_fastScanLine;
-
     bool         m_interpolate;
     int          m_nBest;
 
     int     m_n;
-    double  m_ninv;
+    double  m_nInverse;
 
     int     m_x;
     int     m_y;
-    int     m_z;
 
     double  m_qr;
     double  m_qx;

@@ -32,23 +32,21 @@
 GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) 
     : AbstractScanlineTextureMapper( path, parent )
 {
-    m_fastScanLine = 0;
-
     m_interpolate  = false;
     m_nBest = 0;
 
     m_n = 0;
-    m_ninv = 0.0;
+    m_nInverse = 0.0;
 
     m_x = 0;
     m_y = 0;
-    m_z = 0;
+
     m_qr = 0.0; 
     m_qx = 0.0;
     m_qy = 0.0;
     m_qz = 0.0;
 
-    m_interlaced = false;
+    m_interlaced = true;
 }
 
 
@@ -88,8 +86,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     double  lon = 0.0;
     double  lat = 0.0;
 
-    const int     radius2 = radius * radius;
-    const double  radiusf = 1.0 / (double)(radius);
+    const double  inverseRadius = 1.0 / (double)(radius);
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
@@ -104,8 +101,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     selectTileLevel(radius);
 
     // Evaluate the degree of interpolation
-    m_n    = ( m_imageRadius < radius2 ) ? m_nBest : 8;
-    m_ninv = 1.0 / (double)(m_n);
+    m_n    = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
+    m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
     Quaternion  northPole = GeoPoint( 0.0, (double)( -M_PI * 0.5 ) ).quaternion();
@@ -119,30 +116,23 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     matrix  planetAxisMatrix;
     planetAxis.toMatrix( planetAxisMatrix );
 
-    const int skip = ( m_interlaced == true ) ? 2 : 1;
+    int skip = ( m_interlaced == true ) ? 1 : 0;
 
     // Calculate the actual y-range of the map on the screen 
     const int yTop = ( ( m_imageHeight / 2 - radius < 0 )
                        ? 0 : m_imageHeight / 2 - radius );
     const int yBottom = ( (yTop == 0)
-                          ? m_imageHeight - skip + 1
-                          : yTop + radius + radius - skip + 1 );
+                          ? m_imageHeight - skip
+                          : yTop + radius + radius - skip );
 
-    for ( m_y = yTop; m_y < yBottom ; m_y += skip ) {
-
-        /* Should be fixed kind of properly now ... */
-        // if(m_y == canvasImage->height()){
-            /*FIXME: this is a simple off by one fix, should fix the 
-             * cause not the symptom*/ 
-        //    continue;
-        // }
+    for ( m_y = yTop; m_y < yBottom ; ++m_y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        m_qy = radiusf * (double)( m_y - m_imageHeight / 2 );
+        m_qy = inverseRadius * (double)( m_y - m_imageHeight / 2 );
         m_qr = 1.0 - m_qy * m_qy;
 
         // rx is the radius component in x direction
-        int rx = (int)sqrt( (double)( radius2 
+        int rx = (int)sqrt( (double)( radius * radius 
                       - ( ( m_y - m_imageHeight / 2 )
                       * ( m_y - m_imageHeight / 2 ) ) ) );
 
@@ -153,10 +143,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
                              ? xLeft + rx + rx : canvasImage -> width() );
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
-
-        if ( m_interlaced == true ) {
-            m_fastScanLine = (QRgb*)( canvasImage->scanLine( m_y + 1 ) ) + xLeft;
-        }
 
         int  xIpLeft  = 1;
         int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
@@ -179,7 +165,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
         int ncount = 0;
 
 
-        for ( m_x = xLeft; m_x < xRight; ++m_x ) {
+        for ( int m_x = xLeft; m_x < xRight; ++m_x ) {
             // Prepare for interpolation
 
             int  leftInterval = xIpLeft + ncount * m_n;
@@ -209,7 +195,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
 
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
-            m_qx = (double)( m_x - m_imageWidth / 2 ) * radiusf;
+            m_qx = (double)( m_x - m_imageWidth / 2 ) * inverseRadius;
 
             double qr2z = m_qr - m_qx * m_qx;
             m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;        
@@ -226,13 +212,6 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
             if ( m_interpolate ) {
                 pixelValueApprox( lon, lat, m_scanLine );
 
-                if ( m_interlaced ) {
-                    for ( int j = 0; j < m_n - 1; ++j ) {
-                        m_fastScanLine[j] = m_scanLine[j];
-                    }
-                    m_fastScanLine += ( m_n - 1 );
-                }
-
                 m_scanLine += ( m_n - 1 );
             }
 
@@ -243,12 +222,17 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
             m_prevLat = lat; // preparing for interpolation
             m_prevLon = lon;
 
-            if ( m_interlaced == true ) {
-               *m_fastScanLine = *m_scanLine;
-               ++m_fastScanLine;
-            }
-
             ++m_scanLine;
+        }
+
+        if ( m_interlaced == true ) { // copy scanline to improve performance
+
+            int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
+
+            memcpy( canvasImage->scanLine( m_y + 1 ) + xLeft * pixelByteSize, 
+                    canvasImage->scanLine( m_y ) + xLeft * pixelByteSize, 
+                    ( xRight - xLeft ) * pixelByteSize );
+            ++m_y;
         }
     }
 
@@ -279,8 +263,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const int itStepLon = (int)( stepLon * m_ninv * m_rad2PixelX * 128.0 );
-        const int itStepLat = (int)( stepLat * m_ninv * m_rad2PixelY * 128.0 );
+        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelX * 128.0 );
+        const int itStepLat = (int)( stepLat * m_nInverse * m_rad2PixelY * 128.0 );
 
         m_prevLon *= m_rad2PixelX;
         m_prevLat *= m_rad2PixelY;
@@ -342,8 +326,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
     // pixelValue(...) directly to make the code more readable.
 
     else {
-        stepLon = ( TWOPI - fabs(stepLon) ) * m_ninv;
-        stepLat = stepLat * m_ninv;
+        stepLon = ( TWOPI - fabs(stepLon) ) * m_nInverse;
+        stepLat = stepLat * m_nInverse;
         // We need to distinguish two cases:  
         // crossing the dateline from east to west ...
 
