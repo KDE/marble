@@ -153,11 +153,11 @@ void MarbleWidget::construct(QWidget *parent)
 	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
     connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
 	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
-    connect( d->m_inputhandler, SIGNAL( gpsCoordinates( int, int) ),
-             this, SLOT( gpsCoordinatesClick( int, int ) ) );
+    connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
+             this, SLOT( notifyMouseClick( int, int ) ) );
 
-    connect( d->m_inputhandler, SIGNAL( mouseGeoPosition( QString ) ),
-         this, SIGNAL( mouseGeoPosition( QString ) ) ); 
+    connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
+         this, SIGNAL( mouseMoveGeoPosition( QString ) ) ); 
 
     d->m_measureTool = new MeasureTool( this );
 
@@ -567,13 +567,13 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
 void MarbleWidget::connectNotify ( const char * signal )
 {
-    if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
+    if (QLatin1String(signal) == SIGNAL(mouseMoveGeoPosition(QString)))
         d->m_inputhandler->setPositionSignalConnected(true);
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
-    if (QLatin1String(signal) == SIGNAL(mouseGeoPosition(QString)))
+    if (QLatin1String(signal) == SIGNAL(mouseMoveGeoPosition(QString)))
         d->m_inputhandler->setPositionSignalConnected(false);
 }
 
@@ -868,21 +868,21 @@ void MarbleWidget::setShowGps( bool visible )
     repaint();
 }
 
-void MarbleWidget::changeGpsPosition( double lat, double lon)
+void MarbleWidget::changeCurrentPosition( double lat, double lon)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
     repaint();
 }
 
-void MarbleWidget::gpsCoordinatesClick( int x, int y)
+void MarbleWidget::notifyMouseClick( int x, int y)
 {
     bool valid = false;
-    double alphaResult=0,betaResult=0;
+    double lon = 0, lat = 0;
     
-    valid = globeSphericals( x, y, alphaResult, betaResult );
+    valid = globeSphericals( x, y, lon, lat );
     
     if (valid){
-        emit gpsClickPos( alphaResult, betaResult, GeoPoint::Radian);
+        emit mouseClickGeoPosition( lon, lat, GeoPoint::Radian);
     }
 }
 

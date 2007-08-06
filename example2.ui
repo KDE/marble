@@ -403,7 +403,7 @@
   </connection>
   <connection>
    <sender>MarbleWidget</sender>
-   <signal>mouseGeoPosition(QString)</signal>
+   <signal>mouseMoveGeoPosition(QString)</signal>
    <receiver>label_2</receiver>
    <slot>setText(QString)</slot>
    <hints>

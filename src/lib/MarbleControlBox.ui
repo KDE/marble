@@ -51,7 +51,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
@@ -684,7 +684,7 @@
                <number>4</number>
               </property>
               <property name="maximum" >
-               <double>90.000000000000000</double>
+               <double>180.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -898,6 +898,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>KAtlasThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>katlasthemeselectview.h</header>
+  </customwidget>
+  <customwidget>
    <class>SearchListView</class>
    <extends>QListView</extends>
    <header>searchlistview.h</header>
@@ -906,11 +911,6 @@
    <class>LegendBrowser</class>
    <extends>QTextBrowser</extends>
    <header>LegendBrowser.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KAtlasThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>katlasthemeselectview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

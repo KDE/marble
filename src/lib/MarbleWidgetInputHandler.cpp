@@ -128,7 +128,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             double  lon;
             m_widget->globeSphericals( event->x(), event->y(), lon, lat );
             QString position = GeoPoint( lon, lat ).toString();
-            emit mouseGeoPosition( position );
+            emit mouseMoveGeoPosition( position );
         }
 
 
@@ -183,7 +183,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                 
                 //emit current gps coordinates to be be interpreted 
                 //as requested
-                emit gpsCoordinates( m_leftpressedx, m_leftpressedy );
+                emit mouseClickScreenPosition( m_leftpressedx, m_leftpressedy );
 
                 // Show menu if mouse cursor position remains unchanged
                 // the click takes less than 250 ms

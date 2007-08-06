@@ -1,5 +1,19 @@
 2007-08-06  Torsten Rahn  <rahn@kde.org>
 
+    - Cleaned up some "GPS" method names that are not really 
+      limited to GPS usage after question from Prashanth Udupa.
+    - removed "timeout" signal from MarbleWidget as it seems 
+      to have been moved to MarbleModel.
+      Andrew: I hope you're fine with these changes - otherwise
+      tell me :-) 
+
+    * example2.ui
+    * src/MarbleControlBox.{h,cpp}
+    * src/lib/MarbleWidget.{h,cpp}
+    * src/lib/MarbleWidgetInputHandler.{h,cpp}
+
+2007-08-06  Torsten Rahn  <rahn@kde.org>
+
     - Clean up GlobeScanlineTextureMapper class
     - Use memcpy for interlaced mode
 

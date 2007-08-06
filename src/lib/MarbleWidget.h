@@ -484,12 +484,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param lat the new latitude value
      * @param lon the new longitude value
      */
-    void changeGpsPosition( double lat, double lon);
+    void changeCurrentPosition( double lat, double lon);
 
      /**
      * @brief used to notify about the position of the mouse click
       */
-    void gpsCoordinatesClick( int, int );
+    void notifyMouseClick( int, int );
 
     /**
      * @brief updates the gps tracking point by polling
@@ -545,11 +545,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  zoomChanged( int );
 
-    void  mouseGeoPosition( QString );
+    void  mouseMoveGeoPosition( QString );
 
-    void gpsClickPos( double, double, GeoPoint::Unit );
-
-    void timeout(); // we need a better name here!
+    void  mouseClickGeoPosition( double lon, double lat, GeoPoint::Unit );
 
  protected:
     /**

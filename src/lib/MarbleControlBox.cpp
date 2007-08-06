@@ -208,10 +208,10 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
-             d->m_widget, SLOT( changeGpsPosition( double, double ) ) );
-    connect( d->m_widget, SIGNAL( gpsClickPos( double, double, 
+             d->m_widget, SLOT( changeCurrentPosition( double, double ) ) );
+    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( double, double, 
                                             GeoPoint::Unit ) ),
-             this, SLOT( recieveGpsCoordinates ( double, double,
+             this, SLOT( receiveGpsCoordinates ( double, double,
                                                  GeoPoint::Unit) ) );
 
     connect( d->m_widget, SIGNAL( timeout() ), 
@@ -288,7 +288,7 @@ void MarbleControlBox::disableGpsInput( bool in )
     emit gpsInputDisabled( in );
 }
 
-void MarbleControlBox::recieveGpsCoordinates( double x, double y, 
+void MarbleControlBox::receiveGpsCoordinates( double x, double y, 
                                               GeoPoint::Unit unit){
     if( d->uiWidget.m_catchGps->isChecked() ){
         switch(unit){

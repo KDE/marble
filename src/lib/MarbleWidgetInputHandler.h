@@ -46,9 +46,9 @@ class MarbleWidgetInputHandler  : public QObject
     void rmbRequest( int, int );
     
     //Gps coordinates
-    void gpsCoordinates( int, int );
+    void mouseClickScreenPosition( int, int );
 
-    void mouseGeoPosition( QString );
+    void mouseMoveGeoPosition( QString );
 
  protected:
     bool eventFilter( QObject *, QEvent * );
