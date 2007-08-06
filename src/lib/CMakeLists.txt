@@ -162,7 +162,7 @@ endif(WIN32)
 configure_file(config-libgps.h.cmake
 ${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
 
-# set_target_properties(marblewidget PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+set_target_properties(marblewidget PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 # needed for marble_export.h
 set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
