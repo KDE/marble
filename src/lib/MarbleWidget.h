@@ -35,6 +35,7 @@
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
 
+class QStyleOptionGraphicsItem;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
 class TextureColorizer;
@@ -329,6 +330,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  quickDirty() const;
 
  public Q_SLOTS:
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                QWidget *widget);
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.

@@ -20,6 +20,7 @@
 #include <QtCore/QTime>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
+#include <QtGui/QStyleOptionGraphicsItem>
 
 #include <QtDBus/QDBusConnection>
 
@@ -120,7 +121,7 @@ void MarbleWidget::construct(QWidget *parent)
     setFocus( Qt::OtherFocusReason );
 
     // Some point that tackat defined. :-) 
-    setHome( 54.8, -9.4, 1050 );
+    setHome( -9.4, 54.8, 1050 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
              this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
@@ -711,13 +712,6 @@ const QRegion MarbleWidget::activeRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
-    //	Debugging Active Region
-    //	painter.setClipRegion(activeRegion);
-
-    //	if ( d->m_model->needsUpdate()
-    //       || d->m_viewParams.m_pCanvasImage->isNull()
-    //       || d->m_viewParams.m_pCanvasImage->size() != size()) {
-
     bool  doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
                      || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
 
@@ -764,12 +758,17 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     setActiveRegion();
 }
 
+void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                   QWidget *widget)
+{
+
+}
 
 void MarbleWidget::goHome()
 {
     // d->m_model->rotateTo(0, 0);
 #if 1
-    rotateTo( 54.8, -9.4 );
+    rotateTo( -9.4, 54.8 );
 #else
     rotateTo( d->m_homePoint.quaternion() );
 #endif
