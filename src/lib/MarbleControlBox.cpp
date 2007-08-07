@@ -284,7 +284,7 @@ void MarbleControlBox::disableGpsInput( bool in )
         t_lat *= -1;
     }
     
-    emit gpsPositionChanged( t_lat, t_lon );
+    emit gpsPositionChanged( t_lon, t_lat );
     emit gpsInputDisabled( in );
 }
 
@@ -293,9 +293,9 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
     if( d->uiWidget.m_catchGps->isChecked() ){
         switch(unit){
         case GeoPoint::Degree:
-            d->uiWidget.m_latSpinBox->setValue( x );
             d->uiWidget.m_lonSpinBox->setValue( y );
-            emit gpsPositionChanged( x, y );
+            d->uiWidget.m_latSpinBox->setValue( x );
+            emit gpsPositionChanged( y, x );
             break;
         case GeoPoint::Radian:
             double rad2deg = 180.0/M_PI;
@@ -319,7 +319,7 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
                 d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
             }
             
-            emit gpsPositionChanged( t_lat, t_lon );
+            emit gpsPositionChanged( t_lon, t_lat );
         }
     }
 }

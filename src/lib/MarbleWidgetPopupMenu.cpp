@@ -91,7 +91,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     double  lat;
     double  lon;
 
-    m_view->globeSphericals( xpos, ypos, lon, lat );
+    m_view->geoCoordinates( xpos, ypos, lon, lat );
 
     // Any idea what this could do on activation?
     m_posaction->setEnabled( false );
@@ -131,7 +131,7 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
     double  lat;
     double  lon;
 
-    m_view->globeSphericals( p.x(), p.y(), lon, lat);
+    m_view->geoCoordinates( p.x(), p.y(), lon, lat);
 
     emit addMeasurePoint( lon, lat );
 }

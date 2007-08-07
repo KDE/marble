@@ -422,10 +422,10 @@ void MarbleWidget::rotateBy(const Quaternion& incRot)
     repaint();
 }
 
-void MarbleWidget::rotateBy(const double& phi, const double& theta)
+void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 {
-    Quaternion  rotPhi( 1.0, phi, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, theta, 0.0 );
+    Quaternion  rotPhi( 1.0, deltaLat, 0.0, 0.0 );
+    Quaternion  rotTheta( 1.0, 0.0, deltaLon, 0.0 );
 
     d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
     d->m_viewParams.m_planetAxis *= rotPhi;
@@ -435,7 +435,7 @@ void MarbleWidget::rotateBy(const double& phi, const double& theta)
 }
 
 
-void MarbleWidget::centerOn(const double& lat, const double& lon)
+void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
     d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
                                                   (lon + 180.0) * M_PI / 180.0,
@@ -459,7 +459,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
         double  lat;
 
 	mark->coordinate( lon, lat );
-	centerOn( -lat * 180.0 / M_PI, -lon * 180.0 / M_PI );
+	centerOn( -lon * 180.0 / M_PI, -lat * 180.0 / M_PI );
 	mark->setSelected( 1 );
 	d->m_crosshair.setEnabled( true );
     }
@@ -475,12 +475,12 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
 void MarbleWidget::setCenterLatitude( double lat )
 { 
-    centerOn( lat, centerLongitude() );
+    centerOn( centerLongitude(), lat );
 }
 
 void MarbleWidget::setCenterLongitude( double lon )
 {
-    centerOn( centerLatitude(), lon );
+    centerOn( lon, centerLatitude() );
 }
 
 
@@ -505,9 +505,9 @@ void MarbleWidget::moveLeft()
         polarity = northPoleY() / abs(northPoleY());
 
     if ( polarity < 0 )
-        rotateBy( 0, +moveStep() );
+        rotateBy( +moveStep(), 0 );
     else
-        rotateBy( 0, -moveStep() );
+        rotateBy( -moveStep(), 0 );
 }
 
 void MarbleWidget::moveRight()
@@ -518,20 +518,20 @@ void MarbleWidget::moveRight()
         polarity = northPoleY() / abs(northPoleY());
 
     if ( polarity < 0 )
-        rotateBy( 0, -moveStep() );
+        rotateBy( -moveStep(), 0 );
     else
-        rotateBy( 0, +moveStep() );
+        rotateBy( +moveStep(), 0 );
 }
 
 
 void MarbleWidget::moveUp()
 {
-    rotateBy( moveStep(), 0 );
+    rotateBy( 0, moveStep() );
 }
 
 void MarbleWidget::moveDown()
 {
-    rotateBy( -moveStep(), 0 );
+    rotateBy( 0, -moveStep() );
 }
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
@@ -617,7 +617,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 }
 
 
-bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
+bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double& lat)
 {
 
     int imgrx  = width() / 2;
@@ -636,7 +636,7 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 
 	Quaternion  qpos( 0, qx, qy, qz );
 	qpos.rotateAroundAxis( planetAxis() );
-	qpos.getSpherical( alpha, beta );
+	qpos.getSpherical( lon, lat );
 
 	return true;
     }
@@ -646,14 +646,14 @@ bool MarbleWidget::globeSphericals(int x, int y, double& alpha, double& beta)
 }
 
 
-void MarbleWidget::rotateTo(const double& phi, const double& theta, const double& psi)
+void MarbleWidget::rotateTo( const double& lon, const double& lat, const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( phi   / RAD2INT,
-                                                  theta / RAD2INT,
+    d->m_viewParams.m_planetAxis.createFromEuler( lat   / RAD2INT,   // "phi"
+                                                  lon / RAD2INT,     // "theta"
                                                   psi   / RAD2INT );
 }
 
-void MarbleWidget::rotateTo(const double& lat, const double& lon)
+void MarbleWidget::rotateTo(const double& lon, const double& lat)
 {
     d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
                                                   (lon + 180.0) * M_PI / 180.0, 0.0 );
@@ -870,7 +870,7 @@ void MarbleWidget::setShowGps( bool visible )
     repaint();
 }
 
-void MarbleWidget::changeCurrentPosition( double lat, double lon)
+void MarbleWidget::changeCurrentPosition( double lon, double lat)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
     repaint();
@@ -881,7 +881,7 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     bool valid = false;
     double lon = 0, lat = 0;
     
-    valid = globeSphericals( x, y, lon, lat );
+    valid = geoCoordinates( x, y, lon, lat );
     
     if (valid){
         emit mouseClickGeoPosition( lon, lat, GeoPoint::Radian);

@@ -149,43 +149,73 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     MarbleModel  *model() const;
 
     /**
-     * @brief Return the active region.
+     * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
     const QRegion  activeRegion();
 
-    // TODO: Apidox
+    /**
+     * @brief  Return the radius of the globe in pixels.
+     */
     int         radius() const;
+
+    /**
+     * @brief  Set the radius of the globe in pixels.
+     * @param  radius  The new globe radius value in pixels.
+     */
     void        setRadius(const int radius);
-    Quaternion  planetAxis() const;
 
     /**
      * @brief Return the current zoom level.
      */
-    int  zoom() const;
+    int         zoom() const;
+
+    /**
+     * @brief  Set the minimum value for the zoom.
+     * @param  zoom  The new minimum value.
+     */
+    void        setMinimumZoom( int zoom );
 
     // FIXME: Apidox
     bool needsUpdate() const;
     void setNeedsUpdate();
 
-    int northPoleY();
-    int northPoleZ();
+    /**
+     * @brief Get the screen coordinates corresponding to geographical coordinates in the widget.
+     * @param lon    the lon coordinate of the requested pixel position
+     * @param lat    the lat coordinate of the requested pixel position
+     * @param x      the x coordinate of the pixel is returned through this parameter
+     * @param y      the y coordinate of the pixel is returned through this parameter
+     * @return @c true  if the geographical coordinates are visible on the screen
+     *         @c false if the geographical coordinates are not visible on the screen
+     */
     bool screenCoordinates( const double lon, const double lat, 
                             int& x, int& y );
 
-    double  centerLatitude()  const;
-    double  centerLongitude() const;
+    int northPoleY();
+    int northPoleZ();
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
-     * @param alpha  the alpha angle is returned through this parameter
-     * @param beta   the beta angle is returned through this parameter
+     * @param lon    the longitude angle is returned through this parameter
+     * @param lat    the latitude angle is returned through this parameter
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool globeSphericals( int x, int y,
-                          double& alpha, double& beta );
+    bool geoCoordinates( const int x, const int y,
+                          double& lon, double& lat );
+
+    /**
+     * @brief Return the longitude of the center point.
+     */
+    double  centerLongitude() const;
+
+    /**
+     * @brief Return the latitude of the center point.
+     */
+    double  centerLatitude()  const;
+
     /**
      * @brief returns the model for all the placemarks on the globe.
      */
@@ -198,16 +228,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     double  moveStep();
 
     /**
-     * @brief  Set the minimum value for the zoom.
-     * @param  zoom  The new minimum value.
-     */
-    void   setMinimumZoom( int zoom );
-
-    /**
      * @brief  Add a PlaceMark file to the model.
      * @param  filename  the filename of the file containing the PlaceMarks.
      */
     void addPlaceMarkFile( const QString &filename );
+
+    /**
+     * @brief  Return the quaternion that specifies the rotation of the globe.
+     * @return The quaternion that describes the rotation of the globe.
+     */
+    Quaternion  planetAxis() const;
 
     /**
      * @brief  Return a QPixmap with the current contents of the widget.
@@ -312,27 +342,28 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  zoomViewBy(int zoomStep);
 
     /**
-     * @brief  Zoom in by the zoomStep.
+     * @brief  Zoom in by the amount zoomStep.
      */
     void  zoomIn();
     /**
-     * @brief  Zoom out by the zoomStep.
+     * @brief  Zoom out by the amount zoomStep.
      */
     void  zoomOut();
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
-     * @param  phi    an angle loosely equivalent to the latitude
-     * @param  theta  an angle loosely equivalent to the longitude
+     * @param  deltaLon  an angle that specifies the change in terms of longitude
+     * @param  deltaLat  an angle that specifies the change in terms of latitude
      *
-     * This function rotates the view by two angles, phi and theta.
-     * If we start on (0, 0), the result will be the exact equivalent
-     * of (lat, lon), otherwise the resulting angle will be the sum of
+     * This function rotates the view by two angles, 
+     * deltaLon ("theta") and deltaLat ("phi").
+     * If we start at (0, 0), the result will be the exact equivalent
+     * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      *
      * This method automatically updates the view
      */
-    void  rotateBy(const double &phi, const double &theta);
+    void  rotateBy( const double &deltaLon, const double &deltaLat );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
@@ -343,7 +374,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  rotateBy(const Quaternion& incRot);
 
     /**
-     * @brief  Center the view on a point
+     * @brief  Center the view on a geographical point
      * @param  lat  an angle parallel to the latitude lines
      *              +90(N) - -90(S)
      * @param  lon  an angle parallel to the longitude lines
@@ -351,7 +382,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *
      * This method automatically updates the view
      */
-    void  centerOn(const double &lat, const double &lon);
+    void  centerOn(const double &lon, const double &lat);
 
     /**
      * @brief  Center the view on a point
@@ -362,7 +393,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  centerOn(const QModelIndex& index);
 
     /**
-     * @brief  Set the latitude for the centerPoint
+     * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude
      *
      * This method automatically updates the view
@@ -370,7 +401,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setCenterLatitude( double lat );
 
     /**
-     * @brief  Set the longitude for the centerPoint
+     * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude
      *
      * This method automatically updates the view
@@ -387,15 +418,21 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * This method does NOT automatically update the view
      * and is meant to be used during subsequent transformations 
      */
-    void  rotateTo(const double& lat, const double& lon);
+    void  rotateTo(const double& lon, const double& lat);
 
     /**
      * @brief  Center the view on a point
+     * @param  lat  an angle parallel to the latitude lines
+     *              +90(N) - -90(S)
+     * @param  lon  an angle parallel to the longitude lines
+     *              +180(W) - -180(E)
+     * @param  psi  clockwise rotation of the globe
+     *              +180(W) - -180(E)
      *
      * This method does NOT automatically update the view
      * and is meant to be used during subsequent transformations 
      */
-    void  rotateTo(const double& phi, const double& theta, const double& psi);
+    void  rotateTo( const double& lon, const double& lat, const double& psi);
 
     /**
      * @brief  Center the view on a point
@@ -529,12 +566,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param lat the new latitude value
      * @param lon the new longitude value
      */
-    void changeCurrentPosition( double lat, double lon);
+    void changeCurrentPosition( double lon, double lat );
 
      /**
      * @brief used to notify about the position of the mouse click
       */
-    void notifyMouseClick( int, int );
+    void notifyMouseClick( int x, int y );
 
     /**
      * @brief updates the gps tracking point by polling

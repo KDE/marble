@@ -30,23 +30,25 @@ class GeoPoint {
     enum Unit{Radian, Degree};
     
     GeoPoint(){}
-    GeoPoint(int, int);
+    GeoPoint(int _lon, int _lat);
     /**
      * @brief create a geopoint from longitude and latitude
      * @param _lon longitude
      * @param _lat latitude
-     * @param _unit units that lat and lon are in
-     * (north pole at -pi/2, southpole at pi/2)
+     * @param _unit units that lon and lat are in
+     * (default for Radian: north pole at -pi/2, southpole at pi/2)
      */
-    GeoPoint(double _lat, double _lon, 
+    GeoPoint(double _lon, double _lat, 
              GeoPoint::Unit _unit = GeoPoint::Radian);
-    GeoPoint(int, int, int);
+
+    GeoPoint(int _detail, int _lon, int _lat);
+
     ~GeoPoint(){}
 
     int detail()  const { return m_detail; }
 
     void geoCoordinates( double& lon, double& lat ) const {
-	m_q.getSpherical( lon, lat );
+        m_q.getSpherical( lon, lat );
     }
 
     const Quaternion &quaternion() const { return m_q; }

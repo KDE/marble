@@ -10,7 +10,6 @@
 //
 
 #include "MarbleTest.h"
-#include "GeoPoint.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
@@ -77,7 +76,7 @@ void MarbleTest::gpsDemo(){
     qDebug("stopping polling now");
     
     m_marbleWidget->model()->stopPolling();
-    m_marbleWidget->rotateTo( 58.3723, -15.2325 );
+    m_marbleWidget->rotateTo( -15.2325, 58.3723 );
     
     m_marbleWidget->setShowGps( true );
     
@@ -112,7 +111,7 @@ void MarbleTest::gpsDemo(){
         m_marbleWidget->zoomViewBy( 400 );
         totalMoving =0;
         totalStatic =0;
-        m_marbleWidget->rotateTo( 58.3723, -15.2325 );
+        m_marbleWidget->rotateTo( -15.2325, 58.3723 );
     
         for( int i = 0; i< 5 ;i++ ){
             if( i%2) {

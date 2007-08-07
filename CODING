@@ -136,9 +136,12 @@ Abbreviations
 
 Use the following abbreviations in variable names and comments:
 
-lon     longitude (not lng)
+lon     longitude (not lng!)
 lat     latitude
 
+As parameters (and preferably in other places as well) 
+longitude and latitude should appear in lon-lat order
+(not lat-lon!).
 
 Settings for Your Editor
 ------------------------

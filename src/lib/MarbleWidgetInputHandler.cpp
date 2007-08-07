@@ -104,8 +104,8 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
-                                -m_widget->moveStep() * (double)(dirx) );
+            m_widget->rotateBy( -m_widget->moveStep() * (double)(dirx),
+                                -m_widget->moveStep() * (double)(diry) );
         }
 
         return true;
@@ -125,7 +125,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         {
             double  lat;
             double  lon;
-            m_widget->globeSphericals( event->x(), event->y(), lon, lat );
+            m_widget->geoCoordinates( event->x(), event->y(), lon, lat );
             QString position = GeoPoint( lon, lat ).toString();
             emit mouseMoveGeoPosition( position );
         }
@@ -154,7 +154,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 // m_leftpresseda: screen center latitude  during mouse press
                 // m_leftpressedb: screen center longitude during mouse press
-                m_widget->globeSphericals( m_widget->width() / 2,
+                m_widget->geoCoordinates( m_widget->width() / 2,
                                            m_widget->height() / 2,
                                            m_leftpresseda, m_leftpressedb );
 
@@ -226,10 +226,10 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                         direction = -1;
                 }
 
-                m_widget->rotateTo( 180 / M_PI * (double)(-m_leftpressedb)
-                                    + 90 * deltay / radius, 
-                                    -180 / M_PI * (double)(m_leftpresseda)
-                                    + 90 * direction * deltax / radius );
+                m_widget->rotateTo( -180 / M_PI * (double)(m_leftpresseda)
+                                    + 90 * direction * deltax / radius, 
+                                    +180 / M_PI * (double)(-m_leftpressedb)
+                                    + 90 * deltay / radius );
 
                 m_widget->repaint();
             }
@@ -275,11 +275,11 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                  && e->type() == QEvent::MouseButtonPress ) {
 
                 if ( polarity < 0 )
-                    m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
-                                        -m_widget->moveStep() * (double)(+dirx) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (double)(+dirx),
+                                        -m_widget->moveStep() * (double)(+diry) );
                 else
-                    m_widget->rotateBy( -m_widget->moveStep() * (double)(diry),
-                                        -m_widget->moveStep() * (double)(-dirx) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (double)(-dirx),
+                                        -m_widget->moveStep() * (double)(+diry) );
             }				
         }
 

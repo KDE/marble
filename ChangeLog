@@ -1,5 +1,20 @@
 2007-08-07  Torsten Rahn  <rahn@kde.org>
 
+    Please use lon-lat order in Marble (not lat-lon). 
+
+    - Cleaned up the MarbleWidget class: Added API docs,
+      moved all occurences of lat-lon to lon-lat order. 
+
+    * src/lib/MarbleWidget.{h,cpp}
+    * src/lib/MarbleWidgetInputHandler.{h,cpp}
+    * src/lib/MarbleControlBox.cpp
+    * src/MarbleTest.cpp
+    * CODING
+
+    Added lon-lat order to the CODING standards
+
+2007-08-07  Torsten Rahn  <rahn@kde.org>
+
     - Added Settings saving for the GUI to the Qt4 frontend 
 
     * src/QtMainWindow.{h,cpp}
