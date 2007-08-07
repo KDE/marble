@@ -11,6 +11,9 @@
 
 #include "QtMainWindow.h"
 
+#include <QtCore/QSettings>
+#include <QtGui/QCloseEvent>
+
 #include <QtGui/QAction>
 #include <QtGui/QWhatsThis>
 #include <QtGui/QApplication>
@@ -39,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     createActions();
     createMenus();
     createStatusBar();
+
+    readSettings();
 }
 
 void MainWindow::createActions()
@@ -62,7 +67,7 @@ void MainWindow::createActions()
      m_quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
      m_quitAct->setShortcut(tr("Ctrl+Q"));
      m_quitAct->setStatusTip(tr("Quit the Application"));
-     connect(m_quitAct, SIGNAL(triggered()), qApp, SLOT(quit()));
+     connect(m_quitAct, SIGNAL(triggered()), this, SLOT(close()));
 
      m_copyMapAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("&Copy Map"), this);
      m_copyMapAct->setShortcut(tr("Ctrl+C"));
@@ -74,7 +79,7 @@ void MainWindow::createActions()
      m_sideBarAct->setCheckable( true );
      m_sideBarAct->setChecked( true );
      m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
-     connect(m_sideBarAct, SIGNAL(triggered( bool )), m_katlascontrol, SLOT( setSideBarShown( bool )));
+     connect(m_sideBarAct, SIGNAL(triggered( bool )), this, SLOT( showSideBar( bool )));
 
      m_fullScreenAct = new QAction( tr("&Full Screen Mode"), this);
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
@@ -194,14 +199,21 @@ void MainWindow::showFullScreen( bool isChecked )
 {
     if ( isChecked )
     {
-//        menuBar()->hide();
         QWidget::showFullScreen();
     }
     else
     {
-//        menuBar()->show();
         showNormal();
     }
+
+    m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::showSideBar( bool isChecked )
+{
+    m_katlascontrol->setSideBarShown( isChecked );
+
+    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
 void MainWindow::showStatusBar( bool isChecked )
@@ -214,6 +226,8 @@ void MainWindow::showStatusBar( bool isChecked )
     {
         statusBar()->hide();
     }
+
+    m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
 void MainWindow::enterWhatsThis()
@@ -242,6 +256,46 @@ void MainWindow::openFile()
             m_katlascontrol->marbleWidget()->addPlaceMarkFile( fileName );
         }
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    writeSettings();
+    event->accept();
+}
+
+void MainWindow::writeSettings()
+{
+#ifdef Q_WS_MAC
+     QSettings settings("KDE.org", "Marble Desktop Globe");
+#else
+     QSettings settings("KDE", "Marble Desktop Globe");
+#endif
+
+     settings.beginGroup("MainWindow");
+     settings.setValue( "size", size() );
+     settings.setValue( "pos", pos() );
+     settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
+     settings.setValue( "sideBar", m_sideBarAct->isChecked() );
+     settings.setValue( "statusBar", m_statusBarAct->isChecked() );
+     settings.endGroup();
+}
+
+void MainWindow::readSettings()
+{
+#ifdef Q_WS_MAC
+     QSettings settings("KDE.org", "Marble Desktop Globe");
+#else
+     QSettings settings("KDE", "Marble Desktop Globe");
+#endif
+
+     settings.beginGroup("MainWindow");
+     resize(settings.value("size", QSize(400, 400)).toSize());
+     move(settings.value("pos", QPoint(200, 200)).toPoint());
+     showFullScreen(settings.value("fullScreen", false ).toBool());
+     showSideBar(settings.value("sideBar", true ).toBool());
+     showStatusBar(settings.value("statusBar", false ).toBool());
+     settings.endGroup();
 }
 
 #include "QtMainWindow.moc"

@@ -33,10 +33,16 @@ class MainWindow : public QMainWindow
         KAtlasControl* marbleControl(){ return m_katlascontrol; }
         MarbleWidget* marbleWidget(){ return m_katlascontrol->marbleWidget(); }
 
+    protected:
+        void closeEvent(QCloseEvent *event);
+
     private:
         void createActions();
         void createMenus();
         void createStatusBar();
+
+        void  readSettings();
+        void  writeSettings();
 
 
         KAtlasControl *m_katlascontrol;
@@ -61,6 +67,7 @@ class MainWindow : public QMainWindow
         void printMapScreenShot();
         void copyMap();
         void showFullScreen( bool );
+        void showSideBar( bool );
         void showStatusBar( bool );
         void enterWhatsThis();
         void aboutMarble();

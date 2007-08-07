@@ -17,14 +17,14 @@
 
 #include <MarbleWidget.h>
 #include <MarbleModel.h>
-#include "MarbleControlBox.h"
+
 
 
 KAtlasControl::KAtlasControl(QWidget *parent)
    : QWidget(parent)
 {
     setWindowTitle(tr("Marble - Desktop Globe"));
-    //	resize(640, 640);
+
     resize( 680, 640 );
 
     m_control = new MarbleControlBox( this );

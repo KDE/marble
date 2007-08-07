@@ -1,3 +1,9 @@
+2007-08-07  Torsten Rahn  <rahn@kde.org>
+
+    - Added Settings saving for the GUI to the Qt4 frontend 
+
+    * src/QtMainWindow.{h,cpp}
+
 2007-08-06  Murad Tagirov  <tmurad@gmail.com>
 
     Added initial support of serialization of kml

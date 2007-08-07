@@ -22,13 +22,12 @@
 #include <QtGui/QWidget>
 #include <QtGui/QPixmap>
 
+#include "MarbleControlBox.h"
 #include "lib/MarbleWidget.h"
 
 
 class QSplitter;
 class MarbleWidget;
-//class MarbleModel;
-class MarbleControlBox;
 
 
 class KAtlasControl : public QWidget
@@ -48,6 +47,7 @@ class KAtlasControl : public QWidget
     void moveUp();
     void moveDown();
 
+    bool sideBarShown() const { return m_control->isVisible(); }
 
     void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
 

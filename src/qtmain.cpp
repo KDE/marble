@@ -24,8 +24,6 @@
 
 int main(int argc, char *argv[])
 {
-//    Q_INIT_RESOURCE(application);
-
     QApplication app(argc, argv);
 
     MainWindow *window = new MainWindow();
@@ -33,7 +31,6 @@ int main(int argc, char *argv[])
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
 
-    window->resize(680, 640);
     window->show();
 
     for ( int i = 1; i < argc; ++i ) {
