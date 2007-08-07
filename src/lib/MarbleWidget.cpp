@@ -21,6 +21,8 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 
+#include <QtDBus/QDBusConnection>
+
 #include "utils.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
@@ -91,6 +93,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget(parent),
       d( new MarbleWidgetPrivate )
 {
+//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = new MarbleModel( this );
     construct( parent );
 }
@@ -100,6 +103,7 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     : QWidget(parent),
       d( new MarbleWidgetPrivate )
 {
+//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = model;
     construct( parent );
 }

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>227</width>
-    <height>576</height>
+    <width>369</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -37,7 +37,7 @@
     <number>0</number>
    </property>
    <property name="spacing" >
-    <number>0</number>
+    <number>6</number>
    </property>
    <item>
     <widget class="QToolBox" name="toolBox" >
@@ -51,15 +51,15 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>211</width>
-        <height>492</height>
+        <width>353</width>
+        <height>472</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -177,7 +177,7 @@
           <number>0</number>
          </property>
          <property name="spacing" >
-          <number>0</number>
+          <number>6</number>
          </property>
          <item>
           <spacer>
@@ -203,22 +203,6 @@
            <property name="spacing" >
             <number>6</number>
            </property>
-           <item row="1" column="0" >
-            <widget class="QToolButton" name="moveLeftButton" >
-             <property name="toolTip" >
-              <string>Left</string>
-             </property>
-             <property name="whatsThis" >
-              <string>Rotates the earth counterclockwise around its axis.</string>
-             </property>
-             <property name="text" >
-              <string>...</string>
-             </property>
-             <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-left.png</iconset>
-             </property>
-            </widget>
-           </item>
            <item row="5" column="1" >
             <widget class="QToolButton" name="zoomOutButton" >
              <property name="toolTip" >
@@ -235,22 +219,6 @@
              </property>
              <property name="shortcut" >
               <string>-</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1" >
-            <widget class="QToolButton" name="moveUpButton" >
-             <property name="toolTip" >
-              <string>Up</string>
-             </property>
-             <property name="whatsThis" >
-              <string>Tilts the earth's axis towards the user.</string>
-             </property>
-             <property name="text" >
-              <string>...</string>
-             </property>
-             <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-up.png</iconset>
              </property>
             </widget>
            </item>
@@ -273,38 +241,35 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1" >
-            <widget class="QToolButton" name="moveDownButton" >
+           <item row="1" column="2" >
+            <widget class="QToolButton" name="moveRightButton" >
              <property name="toolTip" >
-              <string>Down</string>
+              <string>Right</string>
              </property>
              <property name="whatsThis" >
-              <string>Tilts the earth's axis away from the user.</string>
+              <string>Rotates the earth clockwise around its axis.</string>
              </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-down.png</iconset>
+              <iconset resource="../marble.qrc" >:/icons/arrow-right.png</iconset>
              </property>
             </widget>
            </item>
-           <item row="3" column="1" >
-            <widget class="QToolButton" name="zoomInButton" >
+           <item row="0" column="1" >
+            <widget class="QToolButton" name="moveUpButton" >
              <property name="toolTip" >
-              <string>Zoom In</string>
+              <string>Up</string>
              </property>
              <property name="whatsThis" >
-              <string>Zoom in by pressing this button to see more details.</string>
+              <string>Tilts the earth's axis towards the user.</string>
              </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/zoom-in.png</iconset>
-             </property>
-             <property name="shortcut" >
-              <string>+</string>
+              <iconset resource="../marble.qrc" >:/icons/arrow-up.png</iconset>
              </property>
             </widget>
            </item>
@@ -347,43 +312,54 @@
              </property>
             </widget>
            </item>
-           <item row="6" column="1" >
-            <widget class="QFrame" name="m_pSpacerFrame" >
-             <property name="sizePolicy" >
-              <sizepolicy>
-               <hsizetype>0</hsizetype>
-               <vsizetype>0</vsizetype>
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize" >
-              <size>
-               <width>16</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="frameShape" >
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow" >
-              <enum>QFrame::Plain</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2" >
-            <widget class="QToolButton" name="moveRightButton" >
+           <item row="3" column="1" >
+            <widget class="QToolButton" name="zoomInButton" >
              <property name="toolTip" >
-              <string>Right</string>
+              <string>Zoom In</string>
              </property>
              <property name="whatsThis" >
-              <string>Rotates the earth clockwise around its axis.</string>
+              <string>Zoom in by pressing this button to see more details.</string>
              </property>
              <property name="text" >
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-right.png</iconset>
+              <iconset resource="../marble.qrc" >:/icons/zoom-in.png</iconset>
+             </property>
+             <property name="shortcut" >
+              <string>+</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" >
+            <widget class="QToolButton" name="moveDownButton" >
+             <property name="toolTip" >
+              <string>Down</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Tilts the earth's axis away from the user.</string>
+             </property>
+             <property name="text" >
+              <string>...</string>
+             </property>
+             <property name="icon" >
+              <iconset resource="../marble.qrc" >:/icons/arrow-down.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" >
+            <widget class="QToolButton" name="moveLeftButton" >
+             <property name="toolTip" >
+              <string>Left</string>
+             </property>
+             <property name="whatsThis" >
+              <string>Rotates the earth counterclockwise around its axis.</string>
+             </property>
+             <property name="text" >
+              <string>...</string>
+             </property>
+             <property name="icon" >
+              <iconset resource="../marble.qrc" >:/icons/arrow-left.png</iconset>
              </property>
             </widget>
            </item>
@@ -407,6 +383,36 @@
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QFrame" name="m_pSpacerFrame" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>0</hsizetype>
+           <vsizetype>0</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>16</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Plain</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="LegendTab" >
@@ -414,8 +420,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>112</height>
+        <width>227</width>
+        <height>452</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -442,8 +448,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>202</height>
+        <width>227</width>
+        <height>452</height>
        </rect>
       </property>
       <attribute name="label" >

@@ -27,12 +27,13 @@
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
 
+#include <QtDBus/QtDBus>
+
 #include "marble_export.h"
 #include "MarbleModel.h"
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
-
 
 class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
@@ -94,6 +95,7 @@ class GpsLayer;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
