@@ -85,7 +85,7 @@ void HttpFetchFile::executeJob( HttpJob* job )
     qDebug() << " job id: " << httpGetId << " source: " << sourceUrl.toString();
     m_pFileIdMap.insert( httpGetId, job );
 
-    emit statusMessage( tr("Downloading data ...") );
+    emit statusMessage( tr("Downloading data...") );
 }
 
 void HttpFetchFile::httpRequestFinished(int requestId, bool error)
