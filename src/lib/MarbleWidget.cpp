@@ -22,7 +22,7 @@
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
 
-#include <QtDBus/QDBusConnection>
+//#include <QtDBus/QDBusConnection>
 
 #include "utils.h"
 #include "Quaternion.h"

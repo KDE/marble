@@ -3,7 +3,11 @@ if (QTONLY)
   if(WIN32)
     set(data_dir data)
   else(WIN32)
-    set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
+    if(APPLE)
+      set (data_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/Resources/data)
+    else(APPLE)
+      set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
+    endif(APPLE)
   endif(WIN32)
 else (QTONLY)
   set(data_dir ${DATA_INSTALL_DIR}/marble/data)
@@ -362,6 +366,7 @@ mwdbii/PLAKE.PNT
 mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
+mwdbii/DATELINE.PNT
 DESTINATION ${data_dir}/mwdbii)
 
 install (FILES

@@ -168,16 +168,22 @@ set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
 )
 
-# chopse the correct target install library path
+# choose the correct target install library path
 if(WIN32 AND QTONLY)
   install(TARGETS marblewidget DESTINATION "")
-endif(WIN32 AND QTONLY)
+else(WIN32 AND QTONLY)
+  if(APPLE AND QTONLY)
+    install (TARGETS marblewidget DESTINATION 
+      ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 
-if(QTONLY)
-  install(TARGETS marblewidget DESTINATION lib)
-else(QTONLY)
-  install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
-endif(QTONLY)
+  else(APPLE AND QTONLY)
+    if(QTONLY)
+      install(TARGETS marblewidget DESTINATION lib)
+    else(QTONLY)
+      install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
+    endif(QTONLY)
+  endif(APPLE AND QTONLY)
+endif(WIN32 AND QTONLY)
 
 ########### install files ###############
 

@@ -7,6 +7,9 @@ endif(MSVC)
 add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
+if(APPLE)
+  add_subdirectory( mac )
+endif(APPLE)
 # FIXME: The original QT4_ADD_RESOURCES should be extended to support this filetype too
 #
 # QT4_ADD_RESOURCE2(outfiles inputfile ... )
@@ -105,11 +108,13 @@ endif (QTONLY)
 qt4_add_resources(marble_SRCS marble.qrc)
 
 if (QTONLY)
+  message( ${CMAKE_CURRENT_SOURCE_DIR})
   qt4_wrap_ui(marble_SRCS ${marble_UI})
   qt4_automoc(${marble_SRCS})
 else (QTONLY)
   kde4_add_ui_files(marble_SRCS ${marble_UI})
 endif (QTONLY)
+
 
 if (QTONLY)
     if (WIN32)
@@ -117,6 +122,8 @@ if (QTONLY)
     else (WIN32)
         if (APPLE)
             add_executable (marble MACOSX_BUNDLE ${marble_SRCS})
+            # For Mac OS X, the executable must be at the root of the bundle's executable folder
+            INSTALL(TARGETS marble RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
         else (APPLE)
             add_executable (marble ${marble_SRCS} ${marble_HDRS})
         endif (APPLE)

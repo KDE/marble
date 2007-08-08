@@ -1,3 +1,36 @@
+2007-08-08  Torsten Rahn  <rahn@kde.org>
+
+    - Initial support for the International Dateline
+
+    * src/lib/vectorcomposer.{h,cpp}
+
+    - Big Patch by Tim Sutton of QGIS fame:
+	- lots of cmake changes mostly specific to the Mac 
+	  that remove the need for the BuildOnOSX.sh script  
+	- some minor fixes in the GPS and KML stuff
+
+    * src/plugins/CMakeLists.txt
+    * src/mac/CMakeLists.txt
+    * src/mac/Contents/Resources/CMakeLists.txt
+    * src/mac/Contents/CMakeLists.txt
+    * src/lib/MarbleWidget.cpp
+    * src/lib/gps/Route.cpp
+    * src/lib/gps/Track.cpp
+    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/kml/Serializable.h
+    * src/lib/MarbleWidget.h
+    * src/lib/CMakeLists.txt
+    * src/CMakeLists.txt
+    * cmake_templates/svnscript.cmake.in_cmake
+    * cmake_templates/marblesvnversion.h.in_cmake
+    * cmake_templates/cmake_uninstall.cmake.in
+    * BuildOnOSX.sh
+    * Findlibgps.cmake
+    * data/CMakeLists.txt
+    * CMakeLists.txt
+
+    Hope this doesn't break too much ;-)
+
 2007-08-07  Torsten Rahn  <rahn@kde.org>
 
     Please use lon-lat order in Marble (not lat-lon). 

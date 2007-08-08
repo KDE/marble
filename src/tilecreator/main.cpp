@@ -11,8 +11,8 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
-// #include "../lib/tilescissor.h"
-// #include "../lib/TileLoader.h"
+#include "../lib/tilescissor.h"
+#include "../lib/TileLoader.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,12 +23,12 @@ int main(int argc, char *argv[])
         qDebug() << "Syntax: tilecreator prefix installmap dem targetdir";
         app.exit(-1);
     }
-/*
+
     if ( !TileLoader::baseTilesAvailable( argv [1] ) )
     {
         TileScissor tilecreator( argv [1], argv [2], argv [3], argv [4] );
         tilecreator.createTiles();
     }
-*/
+
     app.exit(0);
 }

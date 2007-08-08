@@ -113,7 +113,11 @@ bool KMLDocumentParser::characters( const QString& ch )
         return false;
     }
 
-    bool result = KMLContainerParser::characters( ch );
+    //Changed by Tim to suport building with -Werror -Wall
+    //since unused vars are errors with above flags
+    //bool result = KMLContainerParser::characters( ch );
+    KMLContainerParser::characters( ch ); 
 
+    //why not return result?
     return true;
 }

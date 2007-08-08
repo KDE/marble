@@ -48,6 +48,9 @@ VectorComposer::VectorComposer()
     m_usaStates = new PntMap();
     m_usaStates->load( KAtlasDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
 
+    m_dateLine = new PntMap();
+    m_dateLine->load( KAtlasDirs::path( "mwdbii/DATELINE.PNT" ) );
+
     m_vectorMap = new VectorMap();
 
     m_textureLandPen = QPen( Qt::NoPen );
@@ -63,7 +66,11 @@ VectorComposer::VectorComposer()
 
     m_landBrush = QBrush( QColor( 242, 239, 233 ) );
     m_landPen = QPen( Qt::NoPen );
-}
+
+    m_dateLinePen.setStyle( Qt::DashLine );
+    m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
+    m_dateLineBrush = QBrush( Qt::NoBrush );
+ }
 
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
@@ -200,6 +207,16 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
          m_vectorMap -> setPen( m_statePen );
          m_vectorMap -> setBrush( m_stateBrush );
          m_vectorMap -> paintMap( painter, false );
+
+        // International Dateline
+         m_vectorMap -> setzBoundingBoxLimit( -1.0 );
+         m_vectorMap -> setzPointLimit( -1.0 );
+         m_vectorMap -> createFromPntMap( m_dateLine, radius, rotAxis );
+
+         m_vectorMap -> setPen( m_dateLinePen );
+         m_vectorMap -> setBrush( m_dateLineBrush );
+         m_vectorMap -> paintMap( painter, false );
+
     }
 
     // qDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();

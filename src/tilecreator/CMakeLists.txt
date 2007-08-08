@@ -13,7 +13,7 @@ set(tilecreator_SRCS
 )
 
 add_executable(tilecreator ${tilecreator_SRCS})
-target_link_libraries (tilecreator ${QT_QTCORE_LIBRARY})
+target_link_libraries (tilecreator ${QT_QTCORE_LIBRARY} marblewidget)
 
-#      install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
+# install (TARGETS tilecreator DESTINATION ${BIN_INSTALL_DIR} )
 

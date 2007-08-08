@@ -27,7 +27,7 @@
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
 
-#include <QtDBus/QtDBus>
+//#include <QtDBus/QtDBus>
 
 #include "marble_export.h"
 #include "MarbleModel.h"

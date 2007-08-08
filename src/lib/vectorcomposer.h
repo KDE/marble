@@ -116,6 +116,8 @@ class VectorComposer
     PntMap     *m_countries;    // The country borders
     PntMap     *m_usaStates;    // The states of the USA
 
+    PntMap     *m_dateLine;
+
     QPen        m_oceanPen;
     QBrush      m_oceanBrush;
 
@@ -139,6 +141,9 @@ class VectorComposer
     QPen        m_textureBorderPen;
     QBrush      m_textureGlacierBrush;
     QBrush      m_textureLakeBrush;
+
+    QPen        m_dateLinePen;
+    QBrush      m_dateLineBrush;
 
     QVector<qreal> m_dashes;
 };

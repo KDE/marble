@@ -13,8 +13,9 @@
 
 #include <QtCore/QPoint>
 
-Route::Route() : AbstractLayerData( 0 , 0 ), AbstractLayerContainer(),
-                 GpsElement()
+Route::Route() :  AbstractLayerContainer(),
+                  GpsElement(),
+                  AbstractLayerData(0,0)
 {
 }
 

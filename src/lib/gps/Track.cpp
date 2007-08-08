@@ -13,8 +13,9 @@
 #include <QDebug>
 
 
-Track::Track() : AbstractLayerData(0,0), AbstractLayerContainer(),
-                 GpsElement()
+Track::Track() :  AbstractLayerData(0,0),
+                  GpsElement(),
+                  AbstractLayerContainer()
 {
 }
 
