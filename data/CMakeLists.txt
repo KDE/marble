@@ -366,7 +366,7 @@ mwdbii/PLAKE.PNT
 mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
-mwdbii/DATELINE.PNT
+# mwdbii/DATELINE.PNT
 DESTINATION ${data_dir}/mwdbii)
 
 install (FILES
