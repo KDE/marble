@@ -1,5 +1,12 @@
 2007-08-08  Torsten Rahn  <rahn@kde.org>
 
+    - Fixing #endif and adding the missing icon for the Mac
+
+    * src/CMakeLists.txt
+    * src/mac/Contents/Resources/Marble.icns
+
+2007-08-08  Torsten Rahn  <rahn@kde.org>
+
     - Initial support for the International Dateline
 
     * src/lib/vectorcomposer.{h,cpp}

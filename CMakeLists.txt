@@ -107,7 +107,7 @@ ADD_CUSTOM_TARGET(svnversion
 # Its good programming practice to build with no warnings....
 if (PEDANTIC)
   ADD_DEFINITIONS( -Wall -Werror )
-end (PEDANTIC)
+endif (PEDANTIC)
 #############################################################
 # Add a compiler def so that we can conditionally compile
 # code in debug mode only (e.g. extra console messages)
@@ -157,7 +157,7 @@ include(DistTarget)
 
 ####################################################
 # Install extra files
-install(FILES LICENSE.txt DESTINATION ${data_dir})
+# install(FILES LICENSE.txt DESTINATION ${data_dir})
 
 ############################################################
 # Uninstall stuff
