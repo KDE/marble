@@ -2,9 +2,8 @@
 
     - Added method to write cache index file.
     PlaceMarkManager will restore already loaded documents
-    based on this index file.
+    based on this index file. Added base methods to pack/unpack kml documents
     * src/lib/placemarkmanager.{h,cpp}
-    * src/lib/placemarkmanager.h
 
     - Added copyright information.
     * src/lib/kml/Serializable.h

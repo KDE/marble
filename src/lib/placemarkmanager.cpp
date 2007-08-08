@@ -116,15 +116,19 @@ void PlaceMarkManager::loadKml( const QString& filename )
                 document->setId( lastLoadedDocument.id() + 1 );
             }
 
-            m_documentList.append( document );
             qDebug("KML document loaded. Name: %s", document->name().toAscii().data());
+            m_documentList.append( document );
+            sourceFile.close();
+
+            /*
+             * Pack document to it's own cache file
+             * and update cache index
+             */
+            cacheDocument( *document );
+            updateCacheIndex();
         }
     }
 
-    /*
-     * Update cache index file
-     */
-    updateCacheIndex();
 #else
     // This still is buggy and needs a lot of work as does the concept
     // as a whole ...
@@ -281,31 +285,70 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 #ifdef KML_GSOC
 void PlaceMarkManager::updateCacheIndex()
 {
-    QString cacheIndexFileName = KAtlasDirs::localDir() + "/placemarks/kmldocument-cache.index";
+    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" ).arg( KAtlasDirs::localDir() );
 
-    QFile file( cacheIndexFileName );
-    file.open( QIODevice::WriteOnly );
-    QDataStream stream( &file );
+    QFile indexFile( cacheIndexFileName );
+    if ( indexFile.open( QIODevice::WriteOnly ) ) {
+        QDataStream stream( &indexFile );
 
-    /*
-     * Put some unique header here
-     */
+        /*
+         * TODO: Put some unique header here
+         */
 
-    for ( QList <KMLDocument*>::const_iterator iterator = m_documentList.constBegin();
-          iterator != m_documentList.constEnd();
-          iterator++ )
-    {
-        const KMLDocument& document = * ( *iterator );
+        for ( QList <KMLDocument*>::const_iterator iterator = m_documentList.constBegin();
+            iterator != m_documentList.constEnd();
+            iterator++ )
+        {
+            const KMLDocument& document = * ( *iterator );
 
-        QString cacheFileName = QString( "%1.%2.cache" ).arg( document.id() ).arg( document.name() );
-        stream << cacheFileName;
+            QString cacheFileName = QString( "%1.%2.cache" ).arg( document.id() ).arg( document.name() );
+            stream << cacheFileName;
+        }
+
+        indexFile.close();
+        qDebug( "Create index cache file: %s", cacheIndexFileName.toAscii().data () );
     }
-
-    file.close();
+    else {
+        qDebug( "Unable to create index file: %s", cacheIndexFileName.toAscii().data() );
+    }
 }
 
 void PlaceMarkManager::cacheDocument( const KMLDocument& document )
 {
-    //TODO
+    QString path = QString( "%1/placemarks/%2.%3.cache" );
+    path = path.arg( KAtlasDirs::localDir() );
+    path = path.arg( document.id() );
+    path = path.arg( document.name() );
+
+    QFile cacheFile( path );
+    if ( cacheFile.open( QIODevice::WriteOnly ) ) {
+        QDataStream stream ( &cacheFile );
+        document.pack( stream );
+        cacheFile.close();
+        qDebug( "Saved kml document to cache: %s", path.toAscii().data());
+    }
+    else {
+        qDebug( "Unable to cache kml document to: %s", path.toAscii().data());
+    }
 }
+
+void PlaceMarkManager::loadDocumentFromCache ( QString path, KMLDocument& document )
+{
+    if ( QFile::exists( path ) ) {
+        QFile cacheFile( path );
+        if ( cacheFile.open( QIODevice::ReadOnly ) ) {
+            QDataStream stream( &cacheFile );
+            document.unpack( stream );
+            cacheFile.close();
+            qDebug( "Loaded document from cache '%s'", path.toAscii().data() );
+        }
+        else {
+            qDebug( "Unable to open cache file: %s", path.toAscii().data() );
+        }
+    }
+    else {
+        qDebug( "Cache file '%s' not exists!", path.toAscii().data() );
+    }
+}
+
 #endif
