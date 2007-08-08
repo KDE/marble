@@ -14,6 +14,7 @@
 #define PLACEMARKMANAGER_H
 
 
+#include <QtCore/QMap>
 #include "PlaceMarkContainer.h"
 #include "katlasdirs.h"
 #include "kml/KMLDocument.h"
@@ -43,6 +44,12 @@ class PlaceMarkManager
     void importKml( const QString&, PlaceMarkContainer* );
     void saveFile( const QString&, PlaceMarkContainer* );
     bool loadFile( const QString&, PlaceMarkContainer* );
+
+#ifdef KML_GSOC
+ private:
+    void updateCacheIndex();
+    void cacheDocument( const KMLDocument& document );
+#endif
 
  protected:
     // Eventually there will be more than one container.

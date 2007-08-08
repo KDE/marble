@@ -104,24 +104,27 @@ void PlaceMarkManager::loadKml( const QString& filename )
         QFile sourceFile( filename );
 
         if ( sourceFile.open( QIODevice::ReadOnly ) ) {
+            /*
+             * Create KMLDocument and set it's name like input filename
+             */
             KMLDocument* document = new KMLDocument();
+            document->setName( QFileInfo( sourceFile ).fileName() );
             document->load( sourceFile );
+
+            if ( ! m_documentList.isEmpty() ) {
+                const KMLDocument& lastLoadedDocument = *m_documentList.last();
+                document->setId( lastLoadedDocument.id() + 1 );
+            }
 
             m_documentList.append( document );
             qDebug("KML document loaded. Name: %s", document->name().toAscii().data());
-
-            /*
-             * FIXME: This is only to test serialization
-             */
-            QFile file("/tmp/kmldocument.cache");
-            file.open( QIODevice::WriteOnly );
-
-            QDataStream stream( &file );
-            document->pack( stream );
-
-            file.close();
         }
     }
+
+    /*
+     * Update cache index file
+     */
+    updateCacheIndex();
 #else
     // This still is buggy and needs a lot of work as does the concept
     // as a whole ...
@@ -274,3 +277,35 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 
     return true;
 }
+
+#ifdef KML_GSOC
+void PlaceMarkManager::updateCacheIndex()
+{
+    QString cacheIndexFileName = KAtlasDirs::localDir() + "/placemarks/kmldocument-cache.index";
+
+    QFile file( cacheIndexFileName );
+    file.open( QIODevice::WriteOnly );
+    QDataStream stream( &file );
+
+    /*
+     * Put some unique header here
+     */
+
+    for ( QList <KMLDocument*>::const_iterator iterator = m_documentList.constBegin();
+          iterator != m_documentList.constEnd();
+          iterator++ )
+    {
+        const KMLDocument& document = * ( *iterator );
+
+        QString cacheFileName = QString( "%1.%2.cache" ).arg( document.id() ).arg( document.name() );
+        stream << cacheFileName;
+    }
+
+    file.close();
+}
+
+void PlaceMarkManager::cacheDocument( const KMLDocument& document )
+{
+    //TODO
+}
+#endif
