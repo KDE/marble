@@ -65,6 +65,8 @@ void TrackSegment::draw(ClipPainter *painter,
             }
         }
     }
+
+    delete previous;
 }
 
 void TrackSegment::draw( ClipPainter*, const QPoint& )
