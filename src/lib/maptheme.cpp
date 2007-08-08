@@ -31,7 +31,7 @@ MapTheme::MapTheme(QObject *parent)
 
 int MapTheme::open( const QString& path )
 {
-    qDebug() << "Path: " << path;
+//    qDebug() << "Path: " << path;
     QDomDocument  doc( "DeskGlobeML" );
     QFile         file( path );
 
@@ -80,7 +80,7 @@ int MapTheme::open( const QString& path )
 
                 if ( mapStyleSibling.tagName().toLower() == "name" ) {
                     m_name = mapStyleSibling.text();
-                    qDebug() << "Parsed Name: " << m_name;
+//                    qDebug() << "Parsed Name: " << m_name;
                 }
 
                 if ( mapStyleSibling.tagName().toLower() == "prefix" ) {
