@@ -332,7 +332,7 @@ void PlaceMarkManager::cacheDocument( const KMLDocument& document )
     }
 }
 
-void PlaceMarkManager::loadDocumentFromCache ( QString path, KMLDocument& document )
+void PlaceMarkManager::loadDocumentFromCache ( QString &path, KMLDocument& document )
 {
     if ( QFile::exists( path ) ) {
         QFile cacheFile( path );

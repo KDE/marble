@@ -1,3 +1,9 @@
+2007-08-10  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 18: check for inappropriate pass-by-value args
+	* src/lib/placemarkmanager.{h,cpp} (loadDocumentFromCache): Take
+	QString& parameter.
+
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
     - renaming katlasdirs.h -> MarbleDirs.h

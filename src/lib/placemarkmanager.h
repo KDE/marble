@@ -49,7 +49,7 @@ class PlaceMarkManager
  private:
     void updateCacheIndex();
     void cacheDocument( const KMLDocument& document );
-    void loadDocumentFromCache ( QString path, KMLDocument& document );
+    void loadDocumentFromCache ( QString &path, KMLDocument& document );
 #endif
 
  protected:
