@@ -196,8 +196,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
     bool firstPoint = true;
-    int firstSign;
-    double firstX;
     double degX;
     double degY;
 #endif
@@ -270,9 +268,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             int currentSign = ( degX > 0 )? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
-                firstSign = currentSign;
                 m_lastSign = currentSign;
-                firstX = x;
             }
             if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
@@ -284,6 +280,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
                             , m_imgheight/2 + xyFactor * (centerLat + M_PI / 2 ));
                        m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -m_lastSign*M_PI + centerLon) + m_offset, y);
                 }
+
 //                 if( !CrossedDateline ) {
 //                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
 //                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
@@ -292,6 +289,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 //                     m_polygon<<QPointF(m_imgwidth/2 + xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
 //                     otherPolygon<<QPointF(m_imgwidth/2 + xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
 //                 }
+
                 CrossedDateline = !CrossedDateline;
             }
             if( !CrossedDateline )

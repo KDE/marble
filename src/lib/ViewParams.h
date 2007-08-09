@@ -39,6 +39,7 @@ class ViewParams
     ViewParams( );
 
  public:
+    enum Projections { Spherical, Equirectangular, Marcator };
     // Parameters that determine the painting
     int         m_radius;       // Zoom level (pixels / earth radius)
     int         m_radiusUpdated;
@@ -59,6 +60,7 @@ class ViewParams
 
     bool        m_showCities;   // About placemarks
     bool        m_showTerrain;
+    Projections m_projection;
 
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere

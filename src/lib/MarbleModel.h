@@ -25,6 +25,7 @@
  */
 
 
+
 #include "marble_export.h"
 
 #include <QtCore/QAbstractListModel>

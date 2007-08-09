@@ -25,7 +25,6 @@
 
 #include "Quaternion.h"
 
-
 class ViewParams;
 
 typedef struct

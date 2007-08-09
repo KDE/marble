@@ -59,18 +59,27 @@ class PlaceMarkPainter : public QObject
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
 
  private:
+    void sphericalPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
+                          ViewParams *viewParams,
+                          const PlaceMarkContainer*,
+                          Quaternion );
+    void rectangularPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
+                          ViewParams *viewParams,
+                          const PlaceMarkContainer*,
+                          Quaternion );
+
     bool   isVisible( PlaceMark *mark, int radius,
-                      Quaternion &rotAxis,
-                      int imgwidth, int imgheight,
-                      ViewParams *viewParams,
-                      int &x, int &y  );
+                          Quaternion &rotAxis,
+                          int imgwidth, int imgheight,
+                          ViewParams *viewParams,
+                          int &x, int &y  );
     bool   roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
-                         VisiblePlaceMark *visibleMark,
-                         PlaceMark *mark,
-                         int textwidth,
-                         int x, int y );
+                          VisiblePlaceMark *visibleMark,
+                          PlaceMark *mark,
+                          int textwidth,
+                          int x, int y );
     void drawLabelText( QPainter& textpainter, PlaceMark*, QFont font,
-                        double outlineWidth );
+                          double outlineWidth );
     bool testbug();
 
  protected:

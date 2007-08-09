@@ -33,6 +33,7 @@ ViewParams::ViewParams( )
 
     m_showCities         = true;
     m_showTerrain        = true;
+    m_projection         = Spherical;
 
     // Just to have something.
     m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
