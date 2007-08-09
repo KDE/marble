@@ -50,6 +50,7 @@ Misc
 
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
+ * Filenames KAtlasFoo -> MarbleFoo                                     ----
 
 Widget:
  * Separate the view from the globe (model)                             INGE
