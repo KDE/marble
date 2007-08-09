@@ -162,11 +162,11 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #endif
 {
     switch( viewParams->m_projection ) {
-        case ViewParams::Spherical:
+        case Spherical:
             sphericalPaintPlaceFolder(    painter, imgwidth, imgheight,
                                           viewParams, placecontainer, planetAxis );
             break;
-        case ViewParams::Equirectangular:
+        case Equirectangular:
             rectangularPaintPlaceFolder(  painter, imgwidth, imgheight,
                                           viewParams, placecontainer, planetAxis );
             break;

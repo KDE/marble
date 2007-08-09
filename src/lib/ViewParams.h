@@ -23,6 +23,7 @@
 #include "marble_export.h"
 
 #include "Quaternion.h"
+#include "global.h"
 
 
 class QImage;
