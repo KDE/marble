@@ -1,5 +1,22 @@
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
+    - Ladies and gentlemen, we introduce the 
+	International Date Line.
+      Cross it from east to the west to enjoy 
+      a peek 24-hours ahead into the future of KDE 4.
+
+     Our IDL includes the Kiribati line.
+
+     More info at: 
+http://en.wikipedia.org/wiki/International_Dateline
+
+     * tools/dateline/dateline.pro
+     * tools/dateline/dateline.cpp
+     * data/mwdbii/DATELINE.PNT
+     * data/CMakeLists.txt
+
+2007-08-09  Torsten Rahn  <rahn@kde.org>
+
     - The guy's name is not Marcator but
 	http://en.wikipedia.org/wiki/Gerardus_Mercator
 	The same is true for the projection.
