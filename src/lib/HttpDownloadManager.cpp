@@ -68,7 +68,8 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, int id )
     }
     else
     {
-        qDebug() << "The download was not activated.";
+        qDebug() << "The download was not activated. Deleting it for now.";
+        delete job;
     }
 }
 

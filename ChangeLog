@@ -8,6 +8,12 @@
 
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
+    - Fixed CID 4021:
+      line 56: HttpJob  *job = new HttpJob();
+      if acceptJob (line 63) returns false, job is leaked
+
+2007-08-09  Torsten Rahn  <rahn@kde.org>
+
     - Introduce support for Radian/Degree in MarbleWidget.
 
     - Patch by Tim Sutton of QGIS fame: Make katlasdirs.h
