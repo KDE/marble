@@ -1,3 +1,16 @@
+2007-08-09  Torsten Rahn  <rahn@kde.org>
+
+    - The guy's name is not Marcator but
+	http://en.wikipedia.org/wiki/Gerardus_Mercator
+	The same is true for the projection.
+
+	Corrected Projections->Projection
+	as it's not ints, bools, etc. either ;-)
+    - Some changes related to the dateline.
+
+    * src/lib/ViewParams.h
+    * src/lib/vectorcomposer.cpp
+
 2007-08-08  Murad Tagirov  <tmurad@gmail.com>
 
     - Added method to write cache index file.
