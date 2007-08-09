@@ -64,17 +64,14 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
                                  Quaternion& rotAxis)
 {
     clear();
-#ifndef FLAT_PROJ
-    m_radius = radius - 1;
-#else
+
     m_radius = radius;
-#endif
+
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
     double zlimit = ( ( m_imgradius < m_radius * m_radius )
                      ? sqrt(1 - (double)m_imgradius / (double)(m_radius * m_radius))
                      : 0.0 );
-//    zlimit = 0.0;
     // qDebug() << "zlimit: " << zlimit;
 
     m_zBoundingBoxLimit = ( ( m_zBoundingBoxLimit >= 0.0
@@ -84,7 +81,6 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     m_zPointLimit = ( ( m_zPointLimit >= 0.0 && zlimit < m_zPointLimit )
                       || m_zPointLimit < 0.0 )
                      ? zlimit : m_zPointLimit;
-//    m_zPointLimit = 0.0;
 
     m_rlimit = (int)( (double)(m_radius * m_radius)
                       * (1.0 - m_zPointLimit * m_zPointLimit ) );
@@ -127,7 +123,6 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             } 
             // else
             //     qDebug() << i << " Visible: NOT";
-            // ++i;
         }
     }
 #else
@@ -148,35 +143,35 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
         // This sorts out polygons by bounding box which aren't visible at all.
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
-        for ( int i = 0; i < 4; ++i )
-        {
+        for ( int i = 0; i < 4; ++i ) {
             qbound = m_boundary[i].quaternion();
             qbound.getSpherical(degX,degY);
             x = m_imgwidth / 2  + xyFactor * (degX + centerLon);
             y = m_imgheight / 2 + xyFactor * (degY + centerLat);
-            boundingPolygon<<QPointF( x, y );
+            boundingPolygon << QPointF( x, y );
         }
+
         m_offset = 0;
         do {
             m_offset-=4*m_radius;
             boundingPolygon.translate(-4*m_radius,0);
         } while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() ) );
-        m_offset+=4*radius;
+        m_offset += 4 * radius;
         boundingPolygon.translate(4*m_radius,0);
         while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() )) {
-                m_polygon.clear();
-                m_polygon.reserve( (*itPolyLine)->size() );
-                m_polygon.setClosed( (*itPolyLine)->getClosed() );
+            m_polygon.clear();
+            m_polygon.reserve( (*itPolyLine)->size() );
+            m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-                createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail);
-                m_offset+=4*m_radius;
-                boundingPolygon.translate(4*m_radius,0);
+            createPolyLine( (*itPolyLine)->constBegin(),
+                            (*itPolyLine)->constEnd(), detail);
+            m_offset += 4 * m_radius;
+            boundingPolygon.translate( 4 * m_radius, 0 );
         }
     }
 #endif
-
 }
+
 
 void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoPoint::Vector::ConstIterator  itEndPoint,
@@ -189,9 +184,9 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     //	int step = 1;
     //	int remain = size();
 #ifdef FLAT_PROJ
-    float const centerLat = m_planetAxis.pitch();
     float const centerLon = -m_planetAxis.yaw();
-    double xyFactor = (float)(2*m_radius)/M_PI;
+    float const centerLat = m_planetAxis.pitch();
+    double xyFactor = (float)( 2 * m_radius ) / M_PI;
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
@@ -265,7 +260,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             double x = m_imgwidth/2 + xyFactor * (degX + centerLon) + m_offset;
             double y = m_imgheight/2 + xyFactor * (degY + centerLat);
             m_currentPoint = QPointF( x, y );
-            int currentSign = ( degX > 0 )? 1 : -1 ;
+            int currentSign = ( degX > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
                 m_lastSign = currentSign;
@@ -292,7 +287,7 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 
                 CrossedDateline = !CrossedDateline;
             }
-            if( !CrossedDateline )
+            if ( !CrossedDateline )
                 m_polygon<<m_currentPoint;
             else
                 otherPolygon<<m_currentPoint;
@@ -304,16 +299,17 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     }
 
 #endif
-    // Avoid polygons degenerated to Points and Lines.
+    // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
 #ifdef FLAT_PROJ
-    if( otherPolygon.size() >=2 ) {
-        append(otherPolygon);
+    if( otherPolygon.size() >= 2 ) {
+        append( otherPolygon );
     }
 #endif
 }
+
 
 void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 {
@@ -324,15 +320,15 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
 
-    if ( m_imgradius < m_radius * m_radius )
-    {
+    if ( m_imgradius < m_radius * m_radius ) {
         painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
     }
-    else
-    {
-        painter->drawEllipse( m_imgrx - m_radius, m_imgry - m_radius, 2*m_radius, 2*m_radius );
+    else {
+        painter->drawEllipse( m_imgrx - m_radius, m_imgry - m_radius, 
+                              2 * m_radius, 2 * m_radius );
     }
 }
+
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
 {
@@ -342,9 +338,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
     bool clip = false;
 #endif
     ClipPainter  painter(origimg, clip);
-    //	QPainter painter(origimg);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
-
     painter.setPen(m_pen);
     painter.setBrush(m_brush);
 
@@ -355,7 +349,7 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
           ++itPolygon )
     {
 
-        if ( itPolygon->closed() == true )  
+        if ( itPolygon->closed() )  
             painter.drawPolygon( *itPolygon );
         else
             painter.drawPolyline( *itPolygon );

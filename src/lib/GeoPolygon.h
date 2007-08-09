@@ -15,11 +15,10 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
+#include <QtCore/QDebug>
 
 #include "Quaternion.h"
 #include "GeoPoint.h"
-
-#include <QtCore/QDebug>
 
 /*
 	GeoPoint defines the nodes in a polyLine 
@@ -58,7 +57,7 @@ class GeoPolygon : public GeoPoint::Vector
 	qDebug() << "Boundary:" << lon << ", " << lat;
 	m_boundary.at(4).geoCoordinates(lon, lat);
 	qDebug() << "Boundary:" << lon << ", " << lat;
-	//		qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
+	// qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
     }
 
     // Type definitions

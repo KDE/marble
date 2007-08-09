@@ -1,3 +1,11 @@
+2007-08-09  Inge Wallin  <inge@lysator.liu.se>
+
+	Start of a unification of the projections.
+	* src/lib/vectormap.cpp (createFromPntMap): Remove a difference
+	between flat and mercator projections
+	* src/lib/vectormap.cpp: Cleaning
+	* src/lib/GeoPolygon.cpp: Cleaning
+
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
     - Introduce support for Radian/Degree in MarbleWidget.
@@ -175,7 +183,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 
 2007-08-05  Inge Wallin  <inge@lysator.liu.se>
 
-	Some trivil cleaning that I did while looking through the code to
+	Some trivial cleaning that I did while looking through the code to
 	understand it better.
 	* lib/AbstractScanlineTextureMapper.cpp,
 	* lib/MarbleWidget.cpp,
