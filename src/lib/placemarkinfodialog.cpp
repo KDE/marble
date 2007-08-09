@@ -20,7 +20,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QTextBrowser>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "placemark.h"
 
 
@@ -120,7 +120,7 @@ void PlaceMarkInfoDialog::showContent()
 
 void PlaceMarkInfoDialog::requestFlag( const QString& countrycode )
 {
-    QString filename = KAtlasDirs::path( QString("flags/flag_%1.svg").arg( countrycode.toLower() ) );
+    QString filename = MarbleDirs::path( QString("flags/flag_%1.svg").arg( countrycode.toLower() ) );
     m_flagcreator->setFlag( filename, flag_val_lbl->size() );
 
     if ( QFile::exists( filename ) ) {

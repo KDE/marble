@@ -18,14 +18,14 @@
 #include <QtGui/QTextFrame>
 
 #include "HttpDownloadManager.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
     m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/") );
-    m_downloadManager->setTargetDir( KAtlasDirs::localDir() + "/cache/" );
+    m_downloadManager->setTargetDir( MarbleDirs::localDir() + "/cache/" );
 
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
         this, SLOT( slotDownloadFinished( QString, int ) ) );
@@ -37,8 +37,8 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
 //             SIGNAL( statusMessage( QString) ) );		
 
     QStringList  searchPaths;
-    searchPaths << KAtlasDirs::localDir() + "/cache/"
-                << KAtlasDirs::systemDir() + "/cache/";
+    searchPaths << MarbleDirs::localDir() + "/cache/"
+                << MarbleDirs::systemDir() + "/cache/";
     setSearchPaths( searchPaths );
 }
 

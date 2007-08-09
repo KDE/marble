@@ -25,7 +25,7 @@
 #include "TileLoader.h"
 #include "tilescissor.h"
 #include "maptheme.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "katlastilecreatordialog.h"
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
@@ -100,8 +100,8 @@ MarbleModel::MarbleModel( QWidget *parent )
     setMapTheme( selectedmap, parent );
 
     d->m_gridmap      = new GridMap();
-    d->m_texcolorizer = new TextureColorizer( KAtlasDirs::path( "seacolors.leg" ),
-                                              KAtlasDirs::path( "landcolors.leg" ) );
+    d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
+                                              MarbleDirs::path( "landcolors.leg" ) );
 
     d->m_placemarkmanager   = new PlaceMarkManager();
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
@@ -148,7 +148,7 @@ void MarbleModel::stopPolling()
 void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
     // Read the maptheme into d->m_maptheme.
-    d->m_maptheme->open( KAtlasDirs::path( QString("maps/earth/%1")
+    d->m_maptheme->open( MarbleDirs::path( QString("maps/earth/%1")
                                            .arg( selectedMap ) ) );
 
     // If this layer is a bitmaplayer, check if the cached tiles for

@@ -17,7 +17,7 @@
 
 #include "GeoPoint.h"
 #include "GeoPolygon.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 

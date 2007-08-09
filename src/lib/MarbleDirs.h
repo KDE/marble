@@ -10,8 +10,8 @@
 //
 
 
-#ifndef KATLASDIRS_H
-#define KATLASDIRS_H
+#ifndef MARBLEDIRS_H
+#define MARBLEDIRS_H
 
 
 #include <QtCore/QFile>
@@ -19,7 +19,7 @@
 #include <QtGui/QApplication>
 
 
-class KAtlasDirs
+class MarbleDirs
 {
  public:
     static QString path( const QString& path ) 
@@ -69,4 +69,4 @@ class KAtlasDirs
 };
 
 
-#endif // KATLASDIRS_H
+#endif // MARBLEDIRS_H

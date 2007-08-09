@@ -19,7 +19,7 @@
 #include <QString>
 #include <QRegExp>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 class LegendBrowserPrivate
@@ -37,7 +37,7 @@ LegendBrowser::LegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new LegendBrowserPrivate )
 {
-    readHtml( KAtlasDirs::path( "legend.html" ) );
+    readHtml( MarbleDirs::path( "legend.html" ) );
     setHtml( d->m_html );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);

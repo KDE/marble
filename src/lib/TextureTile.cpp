@@ -13,7 +13,7 @@
 
 #include <QtCore/QDebug>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "TileLoader.h"
 
 const int tileDigits = 6;
@@ -107,7 +107,7 @@ void TextureTile::loadTile( int x, int y, int level,
 	    .arg( (int)(testy1), tileDigits, 10, QChar('0') )
 	    .arg( (int)(testx1), tileDigits, 10, QChar('0') );
 
-	absfilename = KAtlasDirs::path( relfilename );
+	absfilename = MarbleDirs::path( relfilename );
 
 	if ( QFile::exists( absfilename ) ) {
             // qDebug() << "The image filename does exist: " << absfilename ;

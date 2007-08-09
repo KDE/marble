@@ -14,7 +14,7 @@
 #include <QtCore/QDebug>
 
 #include "HttpFetchFile.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl ) 
     : m_activatedJobsLimit(5)
@@ -29,7 +29,7 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl )
 
     m_fetchFile = new HttpFetchFile(this);
 
-    setTargetDir( KAtlasDirs::localDir() + '/' );
+    setTargetDir( MarbleDirs::localDir() + '/' );
 
     connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ), this, SLOT( reportResult( HttpJob*, int ) ) );
     connect( m_fetchFile, SIGNAL( statusMessage( QString ) ), this, SIGNAL( statusMessage( QString ) ) );

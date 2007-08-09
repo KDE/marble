@@ -16,7 +16,7 @@
 
 #include <QtCore/QMap>
 #include "PlaceMarkContainer.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "kml/KMLDocument.h"
 
 class KMLDocument;

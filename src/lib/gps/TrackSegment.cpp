@@ -11,7 +11,7 @@
 #include "TrackSegment.h"
 #include "AbstractLayer/AbstractLayer.h"
 #include "ClipPainter.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 #include <QtCore/QPoint>
 #include <QtGui/QBrush>

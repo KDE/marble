@@ -17,14 +17,14 @@
 #include <QtGui/QMessageBox>
 #include <QtCore/QTemporaryFile>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 HttpFetchFile::HttpFetchFile( QObject *parent )
     : QObject( parent )
 {
     m_pHttp     = new QHttp(this);
-    m_targetDirString = KAtlasDirs::localDir() + "/cache/";
+    m_targetDirString = MarbleDirs::localDir() + "/cache/";
 
     if ( QDir( m_targetDirString ).exists() == false ) 
         ( QDir::root() ).mkpath( m_targetDirString );

@@ -18,7 +18,7 @@
 #include "global.h"
 #include "GeoPoint.h"
 #include "Quaternion.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
 
@@ -28,14 +28,14 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
     : m_widget( marbleWidget ),
       m_model( model )
 {
-    curpmtl.load( KAtlasDirs::path("bitmaps/cursor_tl.xpm") );
-    curpmtc.load( KAtlasDirs::path("bitmaps/cursor_tc.xpm") );
-    curpmtr.load( KAtlasDirs::path("bitmaps/cursor_tr.xpm") );
-    curpmcr.load( KAtlasDirs::path("bitmaps/cursor_cr.xpm") );
-    curpmcl.load( KAtlasDirs::path("bitmaps/cursor_cl.xpm") );
-    curpmbl.load( KAtlasDirs::path("bitmaps/cursor_bl.xpm") );
-    curpmbc.load( KAtlasDirs::path("bitmaps/cursor_bc.xpm") );
-    curpmbr.load( KAtlasDirs::path("bitmaps/cursor_br.xpm") );
+    curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
+    curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
+    curpmtr.load( MarbleDirs::path("bitmaps/cursor_tr.xpm") );
+    curpmcr.load( MarbleDirs::path("bitmaps/cursor_cr.xpm") );
+    curpmcl.load( MarbleDirs::path("bitmaps/cursor_cl.xpm") );
+    curpmbl.load( MarbleDirs::path("bitmaps/cursor_bl.xpm") );
+    curpmbc.load( MarbleDirs::path("bitmaps/cursor_bc.xpm") );
+    curpmbr.load( MarbleDirs::path("bitmaps/cursor_br.xpm") );
 
     arrowcur [0][0] = QCursor(curpmtl,2,2);
     arrowcur [1][0] = QCursor(curpmtc,10,3);

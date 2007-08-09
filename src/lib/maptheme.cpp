@@ -19,7 +19,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QStandardItemModel>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "TileLoader.h"
 
 
@@ -204,9 +204,9 @@ int MapTheme::open( const QString& path )
 
 QStringList MapTheme::findMapThemes( const QString& path )
 {
-    QDir  localdirs = QDir( KAtlasDirs::localDir() + '/' + path );
-    QDir  sysdirs   = QDir( KAtlasDirs::systemDir() + '/' + path );
-    QDir  unixdirs  = QDir( KAtlasDirs::unixDir() + '/' + path );
+    QDir  localdirs = QDir( MarbleDirs::localDir() + '/' + path );
+    QDir  sysdirs   = QDir( MarbleDirs::systemDir() + '/' + path );
+    QDir  unixdirs  = QDir( MarbleDirs::unixDir() + '/' + path );
 
     QStringList  localmappaths = localdirs.entryList( QStringList( "*" ),
                                                       QDir::AllDirs
@@ -228,18 +228,18 @@ QStringList MapTheme::findMapThemes( const QString& path )
 
     for ( int i = 0; i < localmappaths.size(); ++i ) {
         // qDebug() << "Map dirs: "
-        // << KAtlasDirs::localDir() + "/maps/" + localmappaths.at(i);
-        localmapdirs << KAtlasDirs::localDir() + "/maps/earth/" + localmappaths.at(i);
+        // << MarbleDirs::localDir() + "/maps/" + localmappaths.at(i);
+        localmapdirs << MarbleDirs::localDir() + "/maps/earth/" + localmappaths.at(i);
     }
 
     for ( int i = 0; i < sysmappaths.size(); ++i ) {
-        // qDebug() << "Map dirs: " << KAtlasDirs::systemDir() + "/maps/" + sysmappaths.at(i);
-        sysmapdirs << KAtlasDirs::systemDir() + "/maps/earth/" + sysmappaths.at(i);
+        // qDebug() << "Map dirs: " << MarbleDirs::systemDir() + "/maps/" + sysmappaths.at(i);
+        sysmapdirs << MarbleDirs::systemDir() + "/maps/earth/" + sysmappaths.at(i);
     }
 
     for ( int i = 0; i < unixmappaths.size(); ++i ) {
-        // qDebug() << "Map dirs: " << KAtlasDirs::unixDir() + "/maps/" + unixmappaths.at(i);
-        unixmapdirs << KAtlasDirs::unixDir() + "/maps/earth/" + unixmappaths.at(i);
+        // qDebug() << "Map dirs: " << MarbleDirs::unixDir() + "/maps/" + unixmappaths.at(i);
+        unixmapdirs << MarbleDirs::unixDir() + "/maps/earth/" + unixmappaths.at(i);
     }
         
     QStringList  mapfiles;
@@ -338,14 +338,14 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
     int  row = 0;
     while ( it.hasNext() ) {
         QString currentmaptheme = it.next();
-        maptheme->open( KAtlasDirs::path( "maps/earth/" + currentmaptheme ) );
+        maptheme->open( MarbleDirs::path( "maps/earth/" + currentmaptheme ) );
 
         mapthememodel->insertRows( row, 1, QModelIndex() );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 tr( maptheme->name().toUtf8() ), 
                                 Qt::DisplayRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                QIcon( KAtlasDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
+                                QIcon( MarbleDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
                                 tr( maptheme->description().toUtf8() ), 

@@ -197,7 +197,7 @@ install( FILES
            HttpFetchFile.h
            katlasaboutdialog.h
            katlascrosshair.h
-           katlasdirs.h
+           MarbleDirs.h
            katlasflag.h
            katlasmapscale.h
            katlasthemeselectview.h

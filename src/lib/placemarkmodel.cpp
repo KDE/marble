@@ -21,7 +21,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QMessageBox>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "PlaceMarkContainer.h"
 
 

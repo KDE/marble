@@ -17,7 +17,7 @@
 #include <QtGui/QPainterPath>
 #include <QtSvg/QSvgRenderer>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 KAtlasWindRose::KAtlasWindRose(QObject* parent)
@@ -35,7 +35,7 @@ KAtlasWindRose::KAtlasWindRose(QObject* parent)
 
     m_fontheight = QFontMetrics( m_font ).ascent();
     m_fontwidth = QFontMetrics( m_font ).boundingRect( "N" ).width();
-    m_svgobj = new QSvgRenderer( KAtlasDirs::path( "svg/windrose.svg" ),
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/windrose.svg" ),
                                  this );
 
     m_polarity = 1;

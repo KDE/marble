@@ -20,7 +20,7 @@
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "TileLoader.h"
 
 const int tileDigits = 6;
@@ -41,9 +41,9 @@ void TileScissor::createTiles()
 
     QApplication::processEvents(); 
 
-    QString m_sourceDir = KAtlasDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
+    QString m_sourceDir = MarbleDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
     if ( m_targetDir.isNull() )
-        m_targetDir = KAtlasDirs::localDir() + "/maps/earth/" + m_prefix + '/';
+        m_targetDir = MarbleDirs::localDir() + "/maps/earth/" + m_prefix + '/';
     if ( !m_targetDir.endsWith('/') )
         m_targetDir += '/';
 

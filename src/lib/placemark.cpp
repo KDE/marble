@@ -17,7 +17,7 @@
 #include <QtCore/QDebug>
 
 #include "GeoPoint.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 
@@ -97,32 +97,32 @@ const QPixmap PlaceMark::symbolPixmap() const
 {
 
     static QPixmap placesymbol[21] = {
-	QPixmap( KAtlasDirs::path( "bitmaps/city_4_white.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_4_yellow.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_4_orange.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_4_red.png" ) ),	
+	QPixmap( MarbleDirs::path( "bitmaps/city_4_white.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_4_yellow.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_4_orange.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_4_red.png" ) ),	
 
-	QPixmap( KAtlasDirs::path( "bitmaps/city_3_white.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_3_yellow.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_3_orange.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_3_red.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_3_white.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_3_yellow.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_3_orange.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_3_red.png" ) ),
 
-	QPixmap( KAtlasDirs::path( "bitmaps/city_2_white.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_2_yellow.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_2_orange.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_2_red.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_2_white.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_2_yellow.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_2_orange.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_2_red.png" ) ),
 
-	QPixmap( KAtlasDirs::path( "bitmaps/city_1_white.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_1_yellow.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_1_orange.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/city_1_red.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_1_white.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_1_yellow.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_1_orange.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/city_1_red.png" ) ),
 
-	QPixmap( KAtlasDirs::path( "bitmaps/pole_1.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/pole_2.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/mountain_1.png" ) ),
-	QPixmap( KAtlasDirs::path( "bitmaps/volcano_1.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/pole_2.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/mountain_1.png" ) ),
+	QPixmap( MarbleDirs::path( "bitmaps/volcano_1.png" ) ),
 
-    QPixmap( KAtlasDirs::path( "bitmaps/airport.png" ) )
+    QPixmap( MarbleDirs::path( "bitmaps/airport.png" ) )
     };
 
     return placesymbol[m_symbol];

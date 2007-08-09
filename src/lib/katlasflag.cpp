@@ -18,7 +18,7 @@
 #include <QtGui/QPixmapCache>
 #include <QtSvg/QSvgRenderer>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 KAtlasFlag::KAtlasFlag( QObject* parent )

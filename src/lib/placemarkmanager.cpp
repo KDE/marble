@@ -45,9 +45,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     QString  defaulthomecache;
 
     if ( !filepath.contains( "\\" && !filepath.contains( '/' ) ) ) {
-        defaultcachename = KAtlasDirs::path( "placemarks/" + filepath + ".cache" );
-        defaultsrcname   = KAtlasDirs::path( "placemarks/" + filepath + ".kml");
-        defaulthomecache = KAtlasDirs::localDir() + "/placemarks/" + filepath + ".cache";
+        defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
+        defaultsrcname   = MarbleDirs::path( "placemarks/" + filepath + ".kml");
+        defaulthomecache = MarbleDirs::localDir() + "/placemarks/" + filepath + ".cache";
     }
     else
         return;
@@ -181,8 +181,8 @@ void PlaceMarkManager::importKml( const QString& filename,
 void PlaceMarkManager::saveFile( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )
 {
-    if ( QDir( KAtlasDirs::localDir() + "/placemarks/" ).exists() == false )
-        ( QDir::root() ).mkpath( KAtlasDirs::localDir() + "/placemarks/" );
+    if ( QDir( MarbleDirs::localDir() + "/placemarks/" ).exists() == false )
+        ( QDir::root() ).mkpath( MarbleDirs::localDir() + "/placemarks/" );
 
     QFile  file( filename );
     file.open(QIODevice::WriteOnly);
@@ -285,7 +285,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 #ifdef KML_GSOC
 void PlaceMarkManager::updateCacheIndex()
 {
-    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" ).arg( KAtlasDirs::localDir() );
+    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" ).arg( MarbleDirs::localDir() );
 
     QFile indexFile( cacheIndexFileName );
     if ( indexFile.open( QIODevice::WriteOnly ) ) {
@@ -316,7 +316,7 @@ void PlaceMarkManager::updateCacheIndex()
 void PlaceMarkManager::cacheDocument( const KMLDocument& document )
 {
     QString path = QString( "%1/placemarks/%2.%3.cache" );
-    path = path.arg( KAtlasDirs::localDir() );
+    path = path.arg( MarbleDirs::localDir() );
     path = path.arg( document.id() );
     path = path.arg( document.name() );
 

@@ -1,3 +1,38 @@
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+
+    - renaming katlasdirs.h -> MarbleDirs.h
+
+     * ChangeLog
+     * src/lib/tilescissor.cpp
+     * src/lib/AbstractScanlineTextureMapper.cpp
+     * src/lib/katlasdirs.h
+     * src/lib/gps/Waypoint.cpp
+     * src/lib/gps/TrackSegment.cpp
+     * src/lib/placemarkpainter.cpp
+     * src/lib/TileLoader.cpp
+     * src/lib/katlasaboutdialog.cpp
+     * src/lib/placemarkmanager.{h,cpp}
+     * src/lib/placemarkinfodialog.cpp
+     * src/lib/placemark.cpp
+     * src/lib/LegendBrowser.cpp
+     * src/lib/HttpDownloadManager.cpp
+     * src/lib/vectorcomposer.cpp
+     * src/lib/MarbleControlBox.cpp
+     * src/lib/MarbleModel.cpp
+     * src/lib/HttpFetchFile.cpp
+     * src/lib/GlobeScanlineTextureMapper.cpp
+     * src/lib/maptheme.cpp
+     * src/lib/TextureTile.cpp
+     * src/lib/tinywebbrowser.cpp
+     * src/lib/MarbleDirs.h
+     * src/lib/katlaswindrose.cpp
+     * src/lib/CMakeLists.txt
+     * src/lib/katlasflag.cpp
+     * src/lib/placemarkmodel.cpp
+     * src/lib/MarbleWidgetInputHandler.cpp
+     * src/lib/FlatScanlineTextureMapper.cpp
+     * src/DESIGN
+
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Move definition of enum Projection from class ViewParams to

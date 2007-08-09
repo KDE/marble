@@ -20,36 +20,36 @@
 #include "ClipPainter.h"
 #include "vectormap.h"
 #include "ViewParams.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 
 VectorComposer::VectorComposer()
 {
 
     m_coastLines = new PntMap();
-    m_coastLines->load( KAtlasDirs::path( "mwdbii/PCOAST.PNT" ) );
+    m_coastLines->load( MarbleDirs::path( "mwdbii/PCOAST.PNT" ) );
 
     m_islands = new PntMap();
-    m_islands->load( KAtlasDirs::path( "mwdbii/PISLAND.PNT" ) );
+    m_islands->load( MarbleDirs::path( "mwdbii/PISLAND.PNT" ) );
     m_lakeislands = new PntMap();
-    m_lakeislands->load( KAtlasDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
+    m_lakeislands->load( MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
     m_lakes = new PntMap();
-    m_lakes->load( KAtlasDirs::path( "mwdbii/PLAKE.PNT" ) );
+    m_lakes->load( MarbleDirs::path( "mwdbii/PLAKE.PNT" ) );
     m_glaciers = new PntMap();
-    m_glaciers->load( KAtlasDirs::path( "mwdbii/PGLACIER.PNT" ) );
+    m_glaciers->load( MarbleDirs::path( "mwdbii/PGLACIER.PNT" ) );
     m_rivers = new PntMap();
-    m_rivers->load( KAtlasDirs::path( "mwdbii/RIVER.PNT" ) );
+    m_rivers->load( MarbleDirs::path( "mwdbii/RIVER.PNT" ) );
 
     // The countries.
     m_countries = new PntMap();
-    m_countries->load( KAtlasDirs::path( "mwdbii/PDIFFBORDER.PNT" ) );
+    m_countries->load( MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) );
 
     // The States of the USA.
     m_usaStates = new PntMap();
-    m_usaStates->load( KAtlasDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
+    m_usaStates->load( MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
 
     m_dateLine = new PntMap();
-    m_dateLine->load( KAtlasDirs::path( "mwdbii/DATELINE.PNT" ) );
+    m_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 
     m_vectorMap = new VectorMap();
 

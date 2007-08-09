@@ -31,7 +31,7 @@
 #include "ui_MarbleControlBox.h"
 
 #include <MarbleWidget.h>
-#include <katlasdirs.h>
+#include <MarbleDirs.h>
 #include <maptheme.h>
 
 

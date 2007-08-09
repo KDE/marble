@@ -9,7 +9,7 @@
 //
 
 #include "Waypoint.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "ClipPainter.h"
 
 #include <QtGui/QPixmap>
@@ -75,7 +75,7 @@ void Waypoint::draw( ClipPainter *painter, const QSize &canvasSize,
 /*
 QPixmap Waypoint::symbolPixmap()
 {
-    QPixmap temp( KAtlasDirs::path( "bitmaps/waypoint.png" ));
+    QPixmap temp( MarbleDirs::path( "bitmaps/waypoint.png" ));
     return temp;
 }
 */

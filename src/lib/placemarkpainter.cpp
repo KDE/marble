@@ -22,7 +22,7 @@
 
 #include "global.h"
 #include "placemark.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "ViewParams.h"
 
 

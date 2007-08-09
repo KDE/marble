@@ -29,16 +29,16 @@
 #include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 
 KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
     : QDialog( parent )
 {
     setupUi( this );
 
-    m_pMarbleLogoLabel->setPixmap( QPixmap( KAtlasDirs::path("svg/marble-logo-72dpi.png") ) );
+    m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
     m_pMarbleAboutBrowser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
-    QString filename = KAtlasDirs::path( "LICENSE.txt" );
+    QString filename = MarbleDirs::path( "LICENSE.txt" );
     if( !filename.isEmpty() ) {
         QFile  f( filename );
         if( f.open( QIODevice::ReadOnly ) ) {

@@ -237,7 +237,7 @@ class ClipPainter;
 class HttpFetchFile;
 class KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog {
 class KAtlasCrossHair : public QObject {
-class KAtlasDirs
+class MarbleDirs
 class KAtlasFlag : public QObject {
 class KAtlasMapScale : public QObject {
 class KAtlasThemeSelectView : public QListView {

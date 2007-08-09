@@ -26,7 +26,7 @@
 #include <cmath>
 
 #include "HttpDownloadManager.h"
-#include "katlasdirs.h"
+#include "MarbleDirs.h"
 #include "TextureTile.h"
 
 #include <QtCore/QDebug>
@@ -196,7 +196,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
             int mmaxit = TileLoader::levelToColumn( trylevel );
 
             for ( int m = 0; m < mmaxit; ++m ) {
-                QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg")
+                QString tilepath = MarbleDirs::path( QString("%1/%2/%3/%3_%4.jpg")
                                                      .arg(theme).arg( trylevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') ) );
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
@@ -225,7 +225,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 
 int TileLoader::maxPartialTileLevel( const QString& theme )
 {
-    QString     tilepath = KAtlasDirs::path( QString("%1").arg(theme) );
+    QString     tilepath = MarbleDirs::path( QString("%1").arg(theme) );
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     int      maxtilelevel = -1;
@@ -256,7 +256,7 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
     // Check whether the two tiles from the lowest texture level are available
     for ( int m = 0; m < 2; ++m ) {
-        QString tilepath = KAtlasDirs::path( QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') ) );
+        QString tilepath = MarbleDirs::path( QString("%1/%2/%3/%3_%4.jpg").arg(theme).arg( 0 ).arg( 0, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') ) );
 
         noerr = QFile::exists( tilepath );
 
