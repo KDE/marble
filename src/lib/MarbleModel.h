@@ -113,7 +113,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 #ifndef FLAT_PROJ
     GlobeScanlineTextureMapper  *textureMapper() const;
 #else
-    FlatScanlineTextureMapper   *textureMapper() const;
+    FlatScanlineTextureMapper   *textureMapper() pconst;
 #endif
 
     GpsLayer           *gpsLayer()           const;
