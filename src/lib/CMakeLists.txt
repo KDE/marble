@@ -188,6 +188,7 @@ endif(WIN32 AND QTONLY)
 ########### install files ###############
 
 install( FILES
+           global.h
            ClipPainter.h
            GeoPoint.h
            GeoPolygon.h

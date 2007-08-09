@@ -19,7 +19,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
-#include "utils.h"
+#include "global.h"
 #include "ClipPainter.h"
 
 

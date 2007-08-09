@@ -24,7 +24,7 @@
 
 //#include <QtDBus/QDBusConnection>
 
-#include "utils.h"
+#include "global.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
 #include "texcolorizer.h"

@@ -34,7 +34,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 
-#include "utils.h"
+#include "global.h"
 #include "Quaternion.h"
 #include "GridMap.h"
 #include "PlaceMarkContainer.h"
@@ -111,11 +111,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
     VectorComposer     *vectorComposer()     const;
     TextureColorizer   *textureColorizer()   const;
 #ifndef FLAT_PROJ
-    GlobeScanlineTextureMapper
+    GlobeScanlineTextureMapper  *textureMapper() const;
 #else
-    FlatScanlineTextureMapper
+    FlatScanlineTextureMapper   *textureMapper() const;
 #endif
-        *textureMapper()      const;
+
     GpsLayer           *gpsLayer()           const;
 
     /**

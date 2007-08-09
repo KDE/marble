@@ -1,16 +1,30 @@
 2007-08-09  Inge Wallin  <inge@lysator.liu.se>
 
-	Start of a unification of the projections.
-	* src/lib/vectormap.cpp (createFromPntMap): Remove a difference
-	between flat and mercator projections
-	* src/lib/vectormap.cpp: Cleaning
-	* src/lib/GeoPolygon.cpp: Cleaning
+	Rename utils.h to global.h since it better describes what it is.
+	* src/lib/utils.h: rename to global.h
+	* GridMap.cpp,          GridMap.h,
+	* MarbleModel.cpp,      MarbleModel.h,
+	* MarbleWidget.cpp,
+	* MarbleWidgetInputHandler.cpp,
+	* placemarkpainter.cpp,
+	* texcolorizer.cpp,
+	* vectormap.cpp,        vectormap.h:
+	include global.h instead of utils.h
+	* src/lib/CMakeLists.txt: Add global.h to include files.
 
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
     - Fixed CID 4021:
       line 56: HttpJob  *job = new HttpJob();
       if acceptJob (line 63) returns false, job is leaked
+
+2007-08-09  Inge Wallin  <inge@lysator.liu.se>
+
+	Start of a unification of the projections.
+	* src/lib/vectormap.cpp (createFromPntMap): Remove a difference
+	between flat and mercator projections
+	* src/lib/vectormap.cpp: Cleaning
+	* src/lib/GeoPolygon.cpp: Cleaning
 
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 

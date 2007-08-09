@@ -16,7 +16,7 @@
 
 #include <QtGui/QPen>
 
-#include "utils.h"
+#include "global.h"
 #include "Quaternion.h"
 #include "GeoPoint.h"
 #include "ScreenPolygon.h"

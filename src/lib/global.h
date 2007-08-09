@@ -10,8 +10,8 @@
 //
 
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
 
 #include <math.h>
