@@ -146,29 +146,23 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
 
 #if 1
 
-#ifndef KML_GSOC
-void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
-                                        int imgwidth, int imgheight,
-                                        ViewParams *viewParams,
-                                        const PlaceMarkContainer* placecontainer,
-                                        Quaternion planetAxis )
-#else
 void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
                                         Quaternion planetAxis,
                                         bool firstTime )
-#endif
 {
     switch( viewParams->m_projection ) {
         case Spherical:
             sphericalPaintPlaceFolder(    painter, imgwidth, imgheight,
-                                          viewParams, placecontainer, planetAxis );
+                                          viewParams, placecontainer, 
+                                          planetAxis, firstTime );
             break;
         case Equirectangular:
             rectangularPaintPlaceFolder(  painter, imgwidth, imgheight,
-                                          viewParams, placecontainer, planetAxis );
+                                          viewParams, placecontainer,
+                                          planetAxis, firstTime );
             break;
         default:
             qDebug()<<"Projection not supported";
@@ -180,7 +174,8 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
-                                        Quaternion planetAxis )
+                                        Quaternion planetAxis,
+                                        bool firstTime )
 {
     //int  imgwidth  = 2 * imgrx;
     //int  imgheight = 2 * imgry;
@@ -214,12 +209,8 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     for ( int i = 0; i < secnumber; i++)
         m_rowsection.append( QVector<PlaceMark*>( ) );
 
-#ifndef KML_GSOC
-    m_visiblePlacemarks.clear();
-#else
     if ( firstTime )
         m_visiblePlacemarks.clear();
-#endif
 
     PlaceMark  *mark = 0;
     int         labelnum = 0;
@@ -438,7 +429,8 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                                         int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const PlaceMarkContainer* placecontainer,
-                                        Quaternion planetAxis )
+                                        Quaternion planetAxis,
+                                        bool firstTime )
 {
     //int  imgwidth  = 2 * imgrx;
     //int  imgheight = 2 * imgry;
@@ -478,12 +470,8 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
     for ( int i = 0; i < secnumber; i++)
         m_rowsection.append( QVector<PlaceMark*>( ) );
 
-#ifndef KML_GSOC
-    m_visiblePlacemarks.clear();
-#else
     if ( firstTime )
         m_visiblePlacemarks.clear();
-#endif
 
     PlaceMark  *mark = 0;
     int         labelnum = 0;

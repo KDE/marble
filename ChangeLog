@@ -1,5 +1,12 @@
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Integrate some changes from the KML SoC project.
+	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder): Remove
+	double definition and #ifdef test
+	(sphericalPaintPlaceFolder): Take firstTime parameter
+	(rectangularPaintPlaceFolder): Take firstTime parameter
+	(paintPlaceFolder): Use new call signatures.
+	
 	Fix Krazy issue 18: check for inappropriate pass-by-value args
 	* src/lib/placemarkmanager.{h,cpp} (loadDocumentFromCache): Take
 	QString& parameter.

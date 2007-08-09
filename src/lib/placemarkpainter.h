@@ -42,18 +42,11 @@ class PlaceMarkPainter : public QObject
  public:
     PlaceMarkPainter(QObject *parent = 0);
 
-#ifndef KML_GSOC
-    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight,
-                          ViewParams *viewParams,
-                          const PlaceMarkContainer*,
-                          Quaternion );
-#else
     void paintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
                           const PlaceMarkContainer*,
                           Quaternion,
-                          bool firstTime );
-#endif
+                          bool firstTime = true );
 
     void setLabelColor(QColor labelcolor) { m_labelcolor = labelcolor; }
     QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
@@ -62,11 +55,13 @@ class PlaceMarkPainter : public QObject
     void sphericalPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
                           const PlaceMarkContainer*,
-                          Quaternion );
+                          Quaternion,
+                          bool firstTime );
     void rectangularPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
                           const PlaceMarkContainer*,
-                          Quaternion );
+                          Quaternion,
+                          bool firstTime );
 
     bool   isVisible( PlaceMark *mark, int radius,
                           Quaternion &rotAxis,
