@@ -618,7 +618,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 }
 
 
-bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double& lat)
+bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double& lat, GeoPoint::Unit unit)
 {
 
     int imgrx  = width() / 2;
@@ -628,21 +628,29 @@ bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double&
 
     if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
 
-	double qy = inverseRadius * (double)(y - imgry);
-	double qr = 1.0 - qy * qy;
-	double qx = (double)(x - imgrx) * inverseRadius;
+        double qy = inverseRadius * (double)(y - imgry);
+        double qr = 1.0 - qy * qy;
+        double qx = (double)(x - imgrx) * inverseRadius;
 
-	double qr2z = qr - qx * qx;
-	double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
+        double qr2z = qr - qx * qx;
+        double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
-	Quaternion  qpos( 0, qx, qy, qz );
-	qpos.rotateAroundAxis( planetAxis() );
-	qpos.getSpherical( lon, lat );
+        Quaternion  qpos( 0, qx, qy, qz );
+        qpos.rotateAroundAxis( planetAxis() );
+        qpos.getSpherical( lon, lat );
 
-	return true;
+        if ( unit == GeoPoint::Degree )
+        {
+            double rad2deg = 180.0/M_PI;
+
+            lat *= -rad2deg;
+            lon *= +rad2deg;
+        }
+
+        return true;
     }
     else {
-	return false;
+        return false;
     }
 }
 

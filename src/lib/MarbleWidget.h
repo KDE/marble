@@ -29,6 +29,7 @@
 
 //#include <QtDBus/QtDBus>
 
+#include "GeoPoint.h"
 #include "marble_export.h"
 #include "MarbleModel.h"
 #include "katlascrosshair.h"
@@ -205,7 +206,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     bool geoCoordinates( const int x, const int y,
-                          double& lon, double& lat );
+                          double& lon, double& lat, GeoPoint::Unit = GeoPoint::Radian );
 
     /**
      * @brief Return the longitude of the center point.

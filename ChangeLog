@@ -1,5 +1,12 @@
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
+    - Introduce support for Radian/Degree in MarbleWidget.
+
+    - Patch by Tim Sutton of QGIS fame: Make katlasdirs.h
+	use MARBLE_DATA_PATH / CMAKE_INSTALL_PREFIX
+
+2007-08-09  Torsten Rahn  <rahn@kde.org>
+
     - Ladies and gentlemen, we introduce the 
 	International Date Line.
       Cross it from east to the west to enjoy 

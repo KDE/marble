@@ -24,6 +24,9 @@ class KAtlasDirs
  public:
     static QString path( const QString& path ) 
     { 
+        //MARBLE_DATA_PATH is a compiler define set by cmake
+        QString marbleDataPath(MARBLE_DATA_PATH);
+//        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
         QString  systempath  = systemDir() + "/" + path;	// system path
         QString  localpath = localDir() + "/" + path;	// local path
         QString  unixpath  = unixDir() + "/" + path;	// unix path
