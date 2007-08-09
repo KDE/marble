@@ -17,6 +17,15 @@
 #include <math.h>
 
 
+// This enum is used to choose projection shown in the view.
+
+enum Projection { 
+    Spherical,
+    Equirectangular, 
+    Mercator
+};
+
+
 // Define FLAT_PROJ here to get flat projection.
 //
 //#define FLAT_PROJ

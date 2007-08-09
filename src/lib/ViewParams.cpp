@@ -16,6 +16,8 @@
 
 ViewParams::ViewParams( )
 {
+    m_projection = Spherical;
+
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
     m_radius     = 2000;
 
@@ -33,7 +35,6 @@ ViewParams::ViewParams( )
 
     m_showCities         = true;
     m_showTerrain        = true;
-    m_projection         = Spherical;
 
     // Just to have something.
     m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );

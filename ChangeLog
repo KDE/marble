@@ -1,3 +1,11 @@
+2007-08-10  Inge Wallin  <inge@lysator.liu.se>
+
+	Move definition of enum Projection from class ViewParams to
+	global.h
+	* src/lib/global.h: Add definition of Projection
+	* src/lib/ViewParams.h (ViewParams): Remove definition
+	* src/lib/ViewParams.cpp (ViewParams): Move init of projection
+
 2007-08-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename utils.h to global.h since it better describes what it is.
