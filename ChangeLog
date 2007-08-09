@@ -1,5 +1,11 @@
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Simplify code to make it easier to find common code.
+	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder):
+	Simplify code structure.
+	(rectangularPaintPlaceFolder): Reindent to follow code structure.
+	Also makes it more like sphericalPaintPlaceFolder
+	
 	Integrate some changes from the KML SoC project.
 	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder): Remove
 	double definition and #ifdef test
