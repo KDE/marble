@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "tilescissor.h"
+#include "TileCreator.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QRect>
@@ -26,7 +26,7 @@
 const int tileDigits = 6;
 const int tileSize = 675;
 
-TileScissor::TileScissor(const QString& prefix, const QString& installmap,
+TileCreator::TileCreator(const QString& prefix, const QString& installmap,
                          const QString& dem, const QString& targetDir) 
     : m_prefix(prefix),
       m_installmap(installmap),
@@ -37,7 +37,7 @@ TileScissor::TileScissor(const QString& prefix, const QString& installmap,
 }
 
 
-void TileScissor::createTiles()
+void TileCreator::createTiles()
 {
 
     QApplication::processEvents(); 
@@ -313,4 +313,4 @@ void TileScissor::createTiles()
 }
 
 
-#include "tilescissor.moc"
+#include "TileCreator.moc"

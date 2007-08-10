@@ -76,7 +76,7 @@ set(marblewidget_SRCS
            TextureTile.cpp
            TileCache.cpp
            TileLoader.cpp
-           tilescissor.cpp
+           TileCreator.cpp
            tinywebbrowser.cpp
            vectorcomposer.cpp
            vectormap.cpp
@@ -229,7 +229,7 @@ install( FILES
            TextureTile.h
            TileCache.h
            TileLoader.h
-           tilescissor.h
+           TileCreator.h
            tinywebbrowser.h
            vectorcomposer.h
            vectormap.h

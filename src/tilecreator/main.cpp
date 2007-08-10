@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 /*
     if ( !TileLoader::baseTilesAvailable( argv [1] ) )
     {
-        TileScissor tilecreator( argv [1], argv [2], argv [3], argv [4] );
+        TileCreator tilecreator( argv [1], argv [2], argv [3], argv [4] );
         tilecreator.createTiles();
     }
 */

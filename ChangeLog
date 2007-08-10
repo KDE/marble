@@ -1,5 +1,21 @@
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
+	Renaming TileScissor class and files to 
+	TileCreator.
+
+	* src/lib/tilescissor.cpp
+	* src/lib/TileCreator.cpp
+	* src/lib/MarbleModel.cpp
+	* src/lib/CMakeLists.txt
+	* src/lib/tilescissor.h
+	* src/lib/TileCreator.h
+	* src/lib/katlastilecreatordialog.cpp
+	* src/DESIGN
+	* src/tilecreator/main.cpp
+	* src/lib/tilescissor.cpp
+
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+
 	* src/lib/tilescissor.cpp:
 
 	Fixing another issue reported by Luis Silva:

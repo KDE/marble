@@ -14,7 +14,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
-#include "tilescissor.h"
+#include "TileCreator.h"
 
 
 KAtlasTileCreatorDialog::KAtlasTileCreatorDialog(QWidget *parent) : QDialog(parent) 

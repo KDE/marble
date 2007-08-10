@@ -263,6 +263,6 @@ class TextureColorizer;
 class TextureLoader;
 class TextureMapper {
 class TextureTile;
-class TileScissor : public QObject {
+class TileCreator : public QObject {
 class TinyWebBrowser : public QTextBrowser {
 class katlasAboutDialog: public Ui_katlasAboutDialog {};

@@ -23,7 +23,7 @@
 #include "ViewParams.h"
 #include "texcolorizer.h"
 #include "TileLoader.h"
-#include "tilescissor.h"
+#include "TileCreator.h"
 #include "maptheme.h"
 #include "MarbleDirs.h"
 #include "katlastilecreatordialog.h"
@@ -168,7 +168,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
                                        d->m_maptheme->description() );
 #endif
 
-            TileScissor tilecreator( d->m_maptheme->prefix(),
+            TileCreator tilecreator( d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
 

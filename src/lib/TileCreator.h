@@ -18,12 +18,12 @@
 #include <QtCore/QString>
 
 
-class TileScissor : public QObject
+class TileCreator : public QObject
 {
     Q_OBJECT
 
  public: 
-    TileScissor( const QString& prefix, const QString& installmap, 
+    TileCreator( const QString& prefix, const QString& installmap, 
                  const QString& dem, const QString& targetDir=QString() );
 
  Q_SIGNALS:
