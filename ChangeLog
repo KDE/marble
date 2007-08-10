@@ -1,3 +1,10 @@
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+	Fixing issue reported by Luis Silva by making sure 
+	that the preview images match the expected size:
+
+	" Also the 'map view' tab gets garbled with previews of 
+	sizes other than 136x136. The previews go on top of each other."
+
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify code to make it easier to find common code.

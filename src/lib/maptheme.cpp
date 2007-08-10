@@ -335,6 +335,11 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
     QStringListIterator  it(stringlist);
     MapTheme            *maptheme = new MapTheme();
 
+    // Make sure we don't keep excessively large previews in memory
+    // TODO: Scale the icon down to the default icon size in katlasselectview.
+    //       For now maxIconSize already equals what's expected by the listview.
+    QSize maxIconSize( 136,136 ); 
+
     int  row = 0;
     while ( it.hasNext() ) {
         QString currentmaptheme = it.next();
@@ -344,8 +349,11 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 tr( maptheme->name().toUtf8() ), 
                                 Qt::DisplayRole );
-        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                QIcon( MarbleDirs::path( "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) ), 
+        QIcon mapThemeIcon =  QIcon( QPixmap( MarbleDirs::path( 
+                                    "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) )
+                                    .scaled( maxIconSize, 
+                                    Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ), mapThemeIcon, 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
                                 tr( maptheme->description().toUtf8() ), 
