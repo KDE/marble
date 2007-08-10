@@ -1,3 +1,11 @@
+2007-08-10  Inge Wallin  <inge@lysator.liu.se>
+
+	Simplify: break out some common code into private methods.
+	* src/lib/placemarkpainter.cpp (roomForLabel): new method
+	(labelFontData): new method
+	(sphericalPaintPlaceFolder): use new methods
+	(rectangularPaintPlaceFolder): use new methods
+
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 	Fixing issue reported by Luis Silva by making sure 
 	that the preview images match the expected size:

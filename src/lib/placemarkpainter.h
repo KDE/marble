@@ -63,16 +63,25 @@ class PlaceMarkPainter : public QObject
                           Quaternion,
                           bool firstTime );
 
+    void   labelFontData( PlaceMark *mark, double outlineWidth,
+                          QFont &font, int &fontwidth );
     bool   isVisible( PlaceMark *mark, int radius,
                           Quaternion &rotAxis,
                           int imgwidth, int imgheight,
                           ViewParams *viewParams,
                           int &x, int &y  );
+#if 0
     bool   roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
-                          VisiblePlaceMark *visibleMark,
-                          PlaceMark *mark,
-                          int textwidth,
-                          int x, int y );
+                         VisiblePlaceMark *visibleMark,
+                         PlaceMark *mark,
+                         int textwidth,
+                         int x, int y );
+#else
+    bool   roomForLabel( const QVector<PlaceMark*> &currentsec,
+                         PlaceMark *mark,
+                         int textwidth,
+                         int x, int y );
+#endif
     void drawLabelText( QPainter& textpainter, PlaceMark*, QFont font,
                           double outlineWidth );
     bool testbug();
