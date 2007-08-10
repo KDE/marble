@@ -1,3 +1,17 @@
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/tilescissor.cpp:
+
+	Fixing another issue reported by Luis Silva:
+
+	"The image sizes must really be the correct ones 
+	otherwise the tiling process just puts the same 
+	image on both hemispheres." 
+
+	Cleaning up the TileScissor class a lot while 
+	fixing that issue: Renamed variables to be
+	more suggestive and made code more elegant.
+
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify: break out some common code into private methods.
