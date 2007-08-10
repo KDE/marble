@@ -201,7 +201,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     QFont       font;
 
     const double outlineWidth = 2.5;
-    int          fontWidth = 0;
+    int          textWidth = 0;
 
     QPixmap     textpixmap;
 
@@ -263,16 +263,16 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
             // Specify font properties
             if ( textpixmap.isNull() ) {
                 labelFontData( mark, outlineWidth,
-                               font, fontWidth );
+                               font, textWidth );
             }
             else {
-                fontWidth = ( mark->textRect() ).width();
+                textWidth = ( mark->textRect() ).width();
             }
 
             // Find out whether the area around the placemark is
             // covered already.
             bool  overlap = !roomForLabel( currentsec, mark,
-                                           fontWidth, x, y );
+                                           textWidth, x, y );
 
             // Paint the label
             if ( !overlap) {
@@ -283,7 +283,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                     // workaround via QImage in some cases.
 
                     if ( !m_useworkaround ) {
-                        textpixmap = QPixmap( fontWidth, m_fontheight );
+                        textpixmap = QPixmap( textWidth, m_fontheight );
                         textpixmap.fill(Qt::transparent);
 
                         textpainter.begin( &textpixmap );
@@ -300,7 +300,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                         textpainter.end();
                     }
                     else {
-                        QImage textimage( fontWidth, m_fontheight,
+                        QImage textimage( textWidth, m_fontheight,
                                           QImage::Format_ARGB32_Premultiplied );
                         textimage.fill( 0 );
 
@@ -392,7 +392,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
     QFont       font;
 
     const double outlineWidth = 2.5;
-    int          fontWidth = 0;
+    int          textWidth = 0;
 
     QPixmap     textpixmap;
 
@@ -458,16 +458,16 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
             // Specify font properties
             if ( textpixmap.isNull() ) {
                 labelFontData( mark, outlineWidth,
-                               font, fontWidth );
+                               font, textWidth );
             }
             else {
-                fontWidth = ( mark->textRect() ).width();
+                textWidth = ( mark->textRect() ).width();
             }
 
             // Find out whether the area around the placemark is
             // covered already.
             bool  overlap = !roomForLabel( currentsec, mark,
-                                           fontWidth, x, y );
+                                           textWidth, x, y );
 
             // Paint the label
             if ( !overlap) {
@@ -478,7 +478,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                     // workaround via QImage in some cases.
 
                     if ( !m_useworkaround ) {
-                        textpixmap = QPixmap( fontWidth, m_fontheight );
+                        textpixmap = QPixmap( textWidth, m_fontheight );
                         textpixmap.fill(Qt::transparent);
 
                         textpainter.begin( &textpixmap );
@@ -495,7 +495,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                         textpainter.end();
                     }
                     else {
-                        QImage textimage( fontWidth, m_fontheight,
+                        QImage textimage( textWidth, m_fontheight,
                                           QImage::Format_ARGB32_Premultiplied );
                         textimage.fill( 0 );
 
@@ -710,7 +710,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
         // Specify font properties, especially get the textwidth.
         if ( textpixmap.isNull() ) {
                 labelFontData( mark, outlineWidth,
-                               font, fontWidth );
+                               font, textWidth );
         }
         else {
             textwidth = ( visibleMark->labelRect() ).width();
@@ -872,8 +872,11 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
 }
 
 
+// Set font and textWidth according to the type of the PlaceMark.
+//
+
 void PlaceMarkPainter::labelFontData( PlaceMark *mark, double outlineWidth,
-                                      QFont &font, int &fontWidth )
+                                      QFont &font, int &textWidth )
 {
     QChar  role = mark->role();
 
@@ -904,7 +907,7 @@ void PlaceMarkPainter::labelFontData( PlaceMark *mark, double outlineWidth,
     if ( role == 'V' )
         font = m_font_mountain;
 
-    fontWidth = ( QFontMetrics( font ).width( mark->name() )
+    textWidth = ( QFontMetrics( font ).width( mark->name() )
                   + (int)( outlineWidth ) );
 }
 
