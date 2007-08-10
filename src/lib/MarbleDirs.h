@@ -19,6 +19,11 @@
 #include <QtGui/QApplication>
 
 
+#ifdef Q_OS_MACX
+//for getting app bundle path
+#include <ApplicationServices/ApplicationServices.h>
+#endif
+
 class MarbleDirs
 {
  public:
@@ -27,11 +32,39 @@ class MarbleDirs
         //MARBLE_DATA_PATH is a compiler define set by cmake
         QString marbleDataPath(MARBLE_DATA_PATH);
 //        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
+        QString fullpath;
+#ifdef Q_OS_MACX
+        //
+        // On OSX lets try to find any file first in the bundle
+        // before branching out to home and sys dirs
+        //
+        CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+        CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
+        const char *mypPathPtr = CFStringGetCStringPtr(myMacPath,CFStringGetSystemEncoding());
+        CFRelease(myBundleRef);
+        CFRelease(myMacPath);
+        QString myPath(mypPathPtr);
+        //do some magick so that we can still find data dir if
+        //marble was not built as a bundle
+        if (myPath.contains(".app"))  //its a bundle!
+        {
+          fullpath = myPath + "/Contents/MacOS/resources/data/";
+        }
+        else //must be running from a non .app bundle
+        {
+          fullpath = QApplication::applicationDirPath()+"/../share/data/";
+        }
+        //qDebug("KatlasDirs path calculated as: " + fullpath.toLocal8Bit());
+        fullpath += QDir::separator() + path;
+        if ( QFile::exists( fullpath ) ){
+            return QDir( fullpath ).canonicalPath(); 
+        }
+#endif
         QString  systempath  = systemDir() + "/" + path;	// system path
         QString  localpath = localDir() + "/" + path;	// local path
         QString  unixpath  = unixDir() + "/" + path;	// unix path
 	
-        QString fullpath = unixpath;
+        fullpath = unixpath;
         if ( QFile::exists( localpath ) )
             fullpath = localpath;
         else if ( QFile::exists( systempath ) )

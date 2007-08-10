@@ -33,6 +33,13 @@ int MapTheme::open( const QString& path )
 {
 //    qDebug() << "Path: " << path;
     QDomDocument  doc( "DeskGlobeML" );
+    QFileInfo     fileInfo(path);
+    if ( !fileInfo.isFile() ) {
+        qDebug() << QString("Not a valid maptheme file: ") + path;
+        return -4;
+    }
+      
+    
     QFile         file( path );
 
     if ( !file.open( QIODevice::ReadOnly ) ) {
@@ -42,6 +49,7 @@ int MapTheme::open( const QString& path )
 
     if ( !doc.setContent( &file ) ) {
         qDebug() << QString("Parse error!");
+        qDebug() << "Path: " << path;
         file.close();
         return -2;
     }

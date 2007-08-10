@@ -91,6 +91,7 @@ PntMap::~PntMap()
 
 void PntMap::load(const QString &filename)
 {
+//    qDebug("PntMap::load trying to load: " + filename.toLocal8Bit());
     QTime *timer = new QTime();
     timer->restart();
 

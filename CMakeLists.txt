@@ -38,12 +38,16 @@ set ( CMAKE_MODULE_PATH
      ${CMAKE_CURRENT_SOURCE_DIR}
      ${CMAKE_CURRENT_SOURCE_DIR}/src
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
+     ${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts
      )
 
 ####################################################
 # Enable ctest
 IF (ENABLE_TESTS)
   ENABLE_TESTING()
+  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
+  #where unit test binaries should be installed to and run from
+  SET (MARBLE_TEST_DIR   ${CMAKE_CURRENT_BINARY_DIR}/tests)
 ENDIF (ENABLE_TESTS)
 
 ####################################################
@@ -67,6 +71,10 @@ endif(APPLE)
 # Specific options for if building with Qt or kde4 libs
 if(QTONLY)
   find_package(Qt4 REQUIRED)
+  include( ${QT_USE_FILE} )
+  set( QT_USE_QTXML      TRUE )
+  set( QT_USE_QTNETWORK  TRUE )
+  set( QT_USE_QTTEST     TRUE )
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)
@@ -130,6 +138,10 @@ if(WIN32)
   set(data_dir data)
 else(WIN32)
   if(APPLE)
+    # needed for finding bundle path in e.g. katlasdir.h
+    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
+    MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
+    SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
     if (QTONLY)
       # for Mac OS X, everything is put inside an application bundle
       SET (CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/)
@@ -164,6 +176,9 @@ add_subdirectory(data)
 
 include(DistTarget)
 
+IF (ENABLE_TESTS)
+  add_subdirectory(tests)
+ENDIF (ENABLE_TESTS)
 ####################################################
 # Install extra files
 # install(FILES LICENSE.txt DESTINATION ${data_dir})

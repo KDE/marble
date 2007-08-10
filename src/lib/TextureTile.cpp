@@ -83,96 +83,96 @@ TextureTile::~TextureTile()
 void TextureTile::loadTile( int x, int y, int level, 
 			    const QString& theme, bool requestTileUpdate )
 {
-//    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-    m_used = true; // Needed to avoid frequent deletion of tiles
+  //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
+  m_used = true; // Needed to avoid frequent deletion of tiles
 
-    QString  absfilename;
+  QString  absfilename;
 
-    // qDebug() << "Requested tile level" << level;
+  // qDebug() << "Requested tile level" << level;
 
-    // If the tile level offers the requested tile then load it.
-    // Otherwise cycle from the requested tilelevel down to one where
-    // the requested area is covered.  Then scale the area to create a
-    // replacement for the tile that has been requested.
+  // If the tile level offers the requested tile then load it.
+  // Otherwise cycle from the requested tilelevel down to one where
+  // the requested area is covered.  Then scale the area to create a
+  // replacement for the tile that has been requested.
 
-    for ( int i = level; i > -1; --i ) {
+  for ( int i = level; i > -1; --i ) {
 
-	double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
-	double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
-	double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
-	double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
+    double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
+    double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
+    double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
+    double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
 
-	QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
-	    .arg(theme).arg(i)
-	    .arg( (int)(testy1), tileDigits, 10, QChar('0') )
-	    .arg( (int)(testx1), tileDigits, 10, QChar('0') );
+    QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
+        .arg(theme).arg(i)
+        .arg( (int)(testy1), tileDigits, 10, QChar('0') )
+        .arg( (int)(testx1), tileDigits, 10, QChar('0') );
 
-	absfilename = MarbleDirs::path( relfilename );
+    absfilename = MarbleDirs::path( relfilename );
 
-	if ( QFile::exists( absfilename ) ) {
-            // qDebug() << "The image filename does exist: " << absfilename ;
+    if ( QFile::exists( absfilename ) ) {
+       qDebug() << "The image filename does exist: " << absfilename ;
 
-	    QImage temptile( absfilename );
+      QImage temptile( absfilename );
 
-	    if ( !temptile.isNull() ) {
-                // qDebug() << "Image has been successfully loaded.";
+      if ( !temptile.isNull() ) {
+         qDebug() << "Image has been successfully loaded.";
 
-	       	if ( level != i ) { 
-                    // qDebug() << "About to start cropping an existing image.";
-		    QSize tilesize = temptile.size();
-		    double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
-		    double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
-		    double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
-		    double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
-	
-		    QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
-				    (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
-		    QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
-					(int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
+        if ( level != i ) { 
+           qDebug() << "About to start cropping an existing image.";
+          QSize tilesize = temptile.size();
+          double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
+          double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
+          double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
+          double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
 
-		    // This should not create any memory leaks as
-		    // 'copy' and 'scaled' return a value (on the
-		    // stack) which gets deep copied always into the
-		    // same place for m_rawtile on the heap:
-		    temptile = temptile.copy( QRect( topleft, bottomright ) );
-		    temptile = temptile.scaled( tilesize ); // TODO: use correct size
-                    // qDebug() << "Finished scaling up the Temporary Tile.";
-		    }
+          QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
+                  (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
+          QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
+                  (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
 
-                m_rawtile = temptile;
+          // This should not create any memory leaks as
+          // 'copy' and 'scaled' return a value (on the
+          // stack) which gets deep copied always into the
+          // same place for m_rawtile on the heap:
+          temptile = temptile.copy( QRect( topleft, bottomright ) );
+          temptile = temptile.scaled( tilesize ); // TODO: use correct size
+          qDebug() << "Finished scaling up the Temporary Tile.";
+        }
 
-                break;
-	    }
-	}
-	else {
-            // qDebug() << "emit downloadTile(" << relfilename << ");";
-	    emit downloadTile( relfilename, m_id );
-	}
+        m_rawtile = temptile;
+
+        break;
+      }
     }
-
-    if ( m_rawtile.isNull() ) {
-	qDebug() << "An essential tile is missing. Please rerun the application.";
-	exit(-1);
+    else {
+      qDebug() << "emit downloadTile(" << relfilename << ");";
+      emit downloadTile( relfilename, m_id );
     }
+  }
 
-    m_depth = m_rawtile.depth();
+  if ( m_rawtile.isNull() ) {
+    qDebug() << "An essential tile is missing. Please rerun the application.";
+    exit(-1);
+  }
 
-    switch ( m_depth ) {
-    case 32:
-	jumpTable32 = jumpTableFromQImage32( m_rawtile );
-	break;
-    case 8:
-	jumpTable8 = jumpTableFromQImage8( m_rawtile );
-	break;
-    default:
-	qDebug() << QString("Color m_depth %1 of tile %2 could not be retrieved. Exiting.").arg(m_depth).arg(absfilename);
-	exit( -1 );
-    }
+  m_depth = m_rawtile.depth();
 
-    if ( requestTileUpdate ) {
-        // qDebug() << "TileUpdate available";
-    	emit tileUpdateDone();
-    }
+  switch ( m_depth ) {
+      case 32:
+          jumpTable32 = jumpTableFromQImage32( m_rawtile );
+          break;
+      case 8:
+          jumpTable8 = jumpTableFromQImage8( m_rawtile );
+          break;
+      default:
+          qDebug() << QString("Color m_depth %1 of tile %2 could not be retrieved. Exiting.").arg(m_depth).arg(absfilename);
+          exit( -1 );
+  }
+
+  if ( requestTileUpdate ) {
+    // qDebug() << "TileUpdate available";
+    emit tileUpdateDone();
+  }
 }
 
 

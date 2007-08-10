@@ -70,7 +70,7 @@ VectorComposer::VectorComposer()
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
     m_dateLineBrush = QBrush( Qt::NoBrush );
- }
+}
 
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)

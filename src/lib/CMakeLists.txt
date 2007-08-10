@@ -1,4 +1,3 @@
-
 PROJECT(marblewidget)
 cmake_minimum_required(VERSION 2.4.0)
 
@@ -142,6 +141,11 @@ else (QTONLY)
     KDE4_ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
     TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
 endif (QTONLY)
+
+if (APPLE)
+  #defined in top level makefile
+  TARGET_LINK_LIBRARIES(marblewidget ${MAC_EXTRA_LIBS} )
+endif (APPLE)
 
 set(HAVE_LIBGPS 0)
 

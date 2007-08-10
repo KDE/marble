@@ -44,7 +44,8 @@ ENDIF(MINGW)
 
 
 if (QTONLY)
-  # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
+  # ce: don't know why this is needed here - on win32 
+  # 'O2' is activated by default in release mode
   if(NOT WIN32)
     add_definitions (${QT_DEFINITIONS} -O2)
   endif(NOT WIN32)
@@ -108,7 +109,7 @@ endif (QTONLY)
 qt4_add_resources(marble_SRCS marble.qrc)
 
 if (QTONLY)
-  message( ${CMAKE_CURRENT_SOURCE_DIR})
+  #message( ${CMAKE_CURRENT_SOURCE_DIR})
   qt4_wrap_ui(marble_SRCS ${marble_UI})
   qt4_automoc(${marble_SRCS})
 else (QTONLY)
@@ -133,12 +134,30 @@ else (QTONLY)
 endif (QTONLY)
 
 if (QTONLY)
-    target_link_libraries (marble ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
+    target_link_libraries (
+      marble 
+      ${QT_QTCORE_LIBRARY} 
+      ${QT_QTDBUS_LIBRARY} 
+      ${QT_QTGUI_LIBRARY} 
+      ${QT_QTXML_LIBRARY} 
+      ${QT_QTSVG_LIBRARY} 
+      ${QT_QTNETWORK_LIBRARY} 
+      ${QT_QTMAIN_LIBRARY} 
+      marblewidget)
 else (QTONLY)
-    target_link_libraries (marble ${KDE4_KIO_LIBS} marblewidget)
+    target_link_libraries (
+      marble 
+      ${KDE4_KIO_LIBS} 
+      marblewidget
+      )
 endif (QTONLY)
 if(WIN32)
-  target_link_libraries(marble ws2_32 imm32 winmm)
+  target_link_libraries(
+    marble 
+    ws2_32 
+    imm32 
+    winmm
+    )
 endif(WIN32)
 
 ## this works for win32 only because FindQt4 does not handle this correct
@@ -153,15 +172,11 @@ else(WIN32 AND QTONLY)
     #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
     if( NOT QTONLY)
       install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
+      install( FILES marble.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
     else( NOT QTONLY)
       install (TARGETS marble DESTINATION bin )
+      install( FILES marble.desktop  DESTINATION share/applications)
     endif(NOT QTONLY)
     #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
-
-    if (NOT QTONLY)
-      install( FILES marble.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
-    else (NOT QTONLY)
-      install( FILES marble.desktop  DESTINATION share/applications)
-    endif (NOT QTONLY)
 endif(WIN32 AND QTONLY)
 

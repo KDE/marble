@@ -1,5 +1,25 @@
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
+	Another patch by Tim Sutton of QGis fame.
+	Improves Mac integration, introduces 
+	unit tests and fixes some indentation.
+
+        *  install_mac/1-release-extra.sh
+        *  install_mac/2-release-qt.sh
+        *  src/lib/vectorcomposer.cpp
+        *  src/lib/maptheme.cpp
+        *  src/lib/TextureTile.cpp
+        *  src/lib/GeoPolygon.cpp
+        *  src/lib/MarbleDirs.h
+        *  src/lib/CMakeLists.txt
+        *  src/CMakeLists.txt
+        *  tests/GeoPolygonTest.cpp
+        *  tests/MarbleWidgetTest.cpp
+        *  tests/CMakeLists.txt
+        *  CMakeLists.txt
+
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+
 	Renaming TileScissor class and files to 
 	TileCreator.
 

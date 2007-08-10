@@ -1,0 +1,84 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007      Tim Sutton   <tim@linfiniti.com>
+//
+
+#include <QtGui> //needed because this is a gui test
+#include <QtTest/QtTest>
+#include <QtCore>
+#include <QTime>
+#include <lib/MarbleWidget.h>
+
+class MarbleWidgetTest: public QObject
+{
+  Q_OBJECT;
+  private slots:
+  void timeTest();
+  void initTestCase();// will be called before the first testfunction is executed.
+  void cleanupTestCase();// will be called after the last testfunction was executed.
+  void init(){};// will be called before each testfunction is executed.
+  void cleanup(){};// will be called after every testfunction.
+  private:
+  MarbleWidget *m_marbleWidget;
+};
+
+void MarbleWidgetTest::initTestCase()
+{
+  m_marbleWidget = new MarbleWidget();
+  m_marbleWidget->show();
+}
+void MarbleWidgetTest::cleanupTestCase()
+{
+  delete m_marbleWidget;
+}
+void MarbleWidgetTest::timeTest()
+{
+    m_marbleWidget->zoomView( 1500 );
+//    m_marbleWidget->resize( 800, 600 );
+
+    QTime t;
+    //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
+    //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
+
+/*
+    m_marbleWidget->setShowGrid( false );
+    m_marbleWidget->setShowPlaces( false );
+    m_marbleWidget->setShowBorders( false );
+    m_marbleWidget->setShowRivers( false );
+    m_marbleWidget->setShowLakes( false );
+*/
+
+    t.start();
+
+    for ( int j = 0; j < 10; ++j ) {
+        for ( int k = 0; k < 10; ++k ) {
+            m_marbleWidget->moveRight();
+            QCoreApplication::flush();
+        }
+        for ( int k = 0; k < 10; ++k ) {
+            m_marbleWidget->moveLeft();
+            QCoreApplication::flush();
+        }
+    }
+
+    //required maximum elapsed time for test to pass
+    QVERIFY(t.elapsed() < 10);
+    //required frames per second for test to pass 
+    //redundant with above really but I leave it in
+    //for now...
+    unsigned int fps = 200*1000/(double)(t.elapsed());
+    QVERIFY(fps > 10);
+
+}
+
+QTEST_MAIN(MarbleWidgetTest) 
+#include "moc_marblewidgettest.cxx"
+  
+
