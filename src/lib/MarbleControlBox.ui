@@ -51,7 +51,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
@@ -448,8 +448,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>202</height>
+        <width>369</width>
+        <height>440</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -524,9 +524,6 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
-         </property>
-         <property name="toolTip" >
-          <string>Map View Browser</string>
          </property>
          <property name="whatsThis" >
           <string>Here you can choose the preferred map view from different topics.</string>

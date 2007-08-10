@@ -363,10 +363,10 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
                                     Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ), mapThemeIcon, 
                                 Qt::DecorationRole );
-        mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
-                                tr( maptheme->description().toUtf8() ), 
+        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
+                                QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
                                 Qt::ToolTipRole);
-        mapthememodel->setData( mapthememodel->index( row, 2, QModelIndex() ),
+        mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
                                 currentmaptheme );
     }
 

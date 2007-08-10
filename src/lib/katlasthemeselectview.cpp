@@ -17,7 +17,6 @@
 KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
     : QListView(parent)
 {
-
     setViewMode( QListView::IconMode );
     setFlow( QListView::TopToBottom ); 
     setWrapping( false ); 
@@ -52,7 +51,7 @@ void KAtlasThemeSelectView::selectedMapTheme( QModelIndex index )
 {
     const QAbstractItemModel  *model = index.model();
 
-    QModelIndex  colindex        = model->index( index.row(), 2, 
+    QModelIndex  colindex        = model->index( index.row(), 1, 
                                                  QModelIndex() );
     QString      currentmaptheme = (model->data( colindex )).toString();
     emit selectMapTheme( currentmaptheme ); 

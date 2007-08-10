@@ -1,4 +1,13 @@
 2007-08-10  Torsten Rahn  <rahn@kde.org>
+	
+	Tooltips for Mapthemes ...
+
+        *  src/lib/vectorcomposer.cpp
+        *  src/lib/maptheme.cpp
+        *  src/lib/MarbleControlBox.ui
+        *  src/lib/katlasthemeselectview.cpp
+
+2007-08-10  Torsten Rahn  <rahn@kde.org>
 
 	Putting Findlibgps.cmake back into place 
 	which wasn't meant to get removed.
