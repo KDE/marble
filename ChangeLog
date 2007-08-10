@@ -1,5 +1,12 @@
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
+	Putting Findlibgps.cmake back into place 
+	which wasn't meant to get removed.
+
+        *  Findlibgps.cmake
+
+2007-08-10  Torsten Rahn  <rahn@kde.org>
+
 	Another patch by Tim Sutton of QGis fame.
 	Improves Mac integration, introduces 
 	unit tests and fixes some indentation.
