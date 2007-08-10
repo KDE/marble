@@ -20,11 +20,13 @@ class WaypointContainer;
 class Track;
 class TrackContainer;
 class TrackSegment;
+class GpxFile;
 
 class GpxSax : public QXmlDefaultHandler
 {
  public:
-    GpxSax( WaypointContainer *wptContainer, TrackContainer *track );
+  //GpxSax( WaypointContainer *wptContainer, TrackContainer *track );
+    GpxSax( GpxFile *gpxFile );
     
     bool startElement( const QString &namespaceURI,
                        const QString &localName,
@@ -35,9 +37,12 @@ class GpxSax : public QXmlDefaultHandler
                      const QString &qName );
     bool fatalError(const QXmlParseException &exception);
  private:
-    WaypointContainer   *m_wptContainer;
+//     WaypointContainer   *m_wptContainer;
+//     TrackContainer      *m_trackContainer;
+    GpxFile             *m_gpxFile;
+    
+    
     Track               *m_track;
-    TrackContainer      *m_trackContainer;
     TrackSegment        *m_trackSeg;
     double              m_tempLat;
     double              m_tempLon;

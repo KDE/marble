@@ -10,6 +10,7 @@
 
 
 #include "Track.h"
+#include "BoundingBox.h"
 #include <QDebug>
 
 
@@ -27,6 +28,39 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
          it++ )
     {
         ( *it ) -> draw( painter, canvasSize, radius, invRotAxis );
+    }
+}
+
+void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
+                 double radius, Quaternion invRotAxis, 
+                 BoundingBox box)
+{
+    
+    /*
+    qDebug()<<"test er";
+    if ( box.isValid() ) {
+        if ( box.intersects( *m_boundingBox ) ) {
+            qDebug() << "drawing";
+            draw( painter, canvasSize, radius, invRotAxis );
+        }
+        else {
+            qDebug() << "not Drawing Track";
+            qDebug() << box.string();
+             qDebug() << m_boundingBox->string();
+            return;
+        }
+    }
+    else {
+        qDebug()<<"implementing but not using";
+        //bouding box doesn't work so draw anyway
+        draw( painter, canvasSize, radius, invRotAxis );
+    }*/
+    const_iterator it;
+    for( it = this->begin(); it < this->constEnd();
+         it++ )
+    {
+        ( *it ) -> draw( painter, canvasSize, radius, invRotAxis, 
+                         box );
     }
 }
 

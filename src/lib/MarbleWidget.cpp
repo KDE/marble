@@ -33,6 +33,7 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "katlastilecreatordialog.h"
 #include "gps/GpsLayer.h"
+#include "BoundingBox.h"
 
 #include "measuretool.h"
 
@@ -618,7 +619,10 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 }
 
 
-bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double& lat, GeoPoint::Unit unit)
+
+bool MarbleWidget::geoCoordinates(const int x, const int y, 
+                                  double& lon, double& lat, 
+                                  GeoPoint::Unit unit )
 {
 
     int imgrx  = width() / 2;
@@ -654,10 +658,42 @@ bool MarbleWidget::geoCoordinates(const int x, const int y, double& lon, double&
     }
 }
 
+bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
+{
+    int imgrx  = width() >> 1;
+    int imgry  = height() >> 1;
+
+    const double  radiusf = 1.0 / (double)(radius());
+
+    if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y -
+         imgry)) ) 
+    {
+
+        double qy = radiusf * (double)(y - imgry);
+        double qr = 1.0 - qy * qy;
+        double qx = (double)(x - imgrx) * radiusf;
+
+        double qr2z = qr - qx * qx;
+        double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;  
+
+        Quaternion  qpos( 0, qx, qy, qz );
+        qpos.rotateAroundAxis( planetAxis() );
+        
+        q = qpos;
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
 
 void MarbleWidget::rotateTo( const double& lon, const double& lat, const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( lat   / RAD2INT,   // "phi"
+    d->m_viewParams.m_planetAxis.createFromEuler( lat   / RAD2INT,  
+// "phi"
                                                   lon / RAD2INT,     // "theta"
                                                   psi   / RAD2INT );
 }
@@ -717,6 +753,41 @@ const QRegion MarbleWidget::activeRegion()
     return d->m_activeRegion;
 }
 
+void MarbleWidget::setBoundingBox()
+{
+    QVector<QPointF> points;
+    Quaternion temp;
+    
+    if (globalQuaternion( 0, 0, temp)){
+            points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    if (globalQuaternion( width()/2, 0, temp )) 
+    {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    
+    if (globalQuaternion( width(), 0, temp )) 
+    {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    if (globalQuaternion( 0, height(), temp )) 
+    {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    
+    if (globalQuaternion( width()/2, height(), temp )) 
+    {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    
+    if (globalQuaternion( width(), height(), temp )) 
+    {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    
+    d->m_viewParams.m_boundingBox = BoundingBox( points );
+}
+
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
@@ -764,6 +835,9 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     // Set the region of the image where the user can drag it.
     setActiveRegion();
+    
+    //Set the Bounding Box
+    setBoundingBox();
 }
 
 void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

@@ -52,7 +52,9 @@ class GeoPoint {
     }
 
     const Quaternion &quaternion() const { return m_q; }
+    
     QString toString();
+    bool        operator==(const GeoPoint&);
 
     // Type definitions
     typedef QVector<GeoPoint> Vector;

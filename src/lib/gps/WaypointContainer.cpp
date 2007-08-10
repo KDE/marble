@@ -39,3 +39,5 @@ void WaypointContainer::draw( ClipPainter *painter,
         }
     }
 }
+
+

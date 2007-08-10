@@ -10,6 +10,8 @@
 
 #include "AbstractLayerContainer.h"
 #include "ClipPainter.h"
+#include "BoundingBox.h"
+#include <QDebug>
 
 #include <QtCore/QPointF>
 
@@ -37,15 +39,41 @@ AbstractLayerContainer::~AbstractLayerContainer()
     delete m_name;
 }
 
+void AbstractLayerContainer::draw ( ClipPainter *painter, 
+                                    const QPoint &point )
+{
+    qDebug() << "AbstractLayerContainter::draw( ClipPainter, QPoint)";
+    //this does not apply to An AbstractLayerContainer
+}
+
 void AbstractLayerContainer::draw(ClipPainter *painter, 
                                   const QSize &canvasSize, 
                                   double radius, 
                                   Quaternion invRotAxis)
 {
+    qDebug() << "AbstractLayerContainter::draw( ClipPainter, "
+            << "QSize, double, Quaternion)";
     const_iterator it;
     
     for( it = constBegin() ; it < constEnd() ; ++it ) {
         (*it)->draw( painter, canvasSize, radius, invRotAxis);
+    }
+}
+
+void AbstractLayerContainer::draw(ClipPainter *painter, 
+                                  const QSize &canvasSize, 
+                                  double radius, 
+                                  Quaternion invRotAxis, 
+                                  BoundingBox box)
+{
+    qDebug() << "AbstractLayerContainter::draw( ClipPainter, "
+            << "QSize, double, Quaternion, BoundingBox)";
+    if ( box.isValid() ) {
+        if ( m_boundingBox->intersects( box ) ) {
+            draw( painter, canvasSize, radius, invRotAxis);
+        }
+    } else { 
+        draw( painter, canvasSize, radius, invRotAxis);
     }
 }
 
@@ -82,6 +110,22 @@ double AbstractLayerContainer::distance ( const QPointF &a,
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
 }
 
+void AbstractLayerContainer::createBoundingBox()
+{
+    m_boundingBox = new BoundingBox( geoCoord() );
+}
+
+QVector<QPointF> AbstractLayerContainer::geoCoord()
+{
+    QVector<QPointF> temp;
+    
+    for ( const_iterator it = constBegin() ; it < constEnd(); ++it ) {
+        temp.append( QPointF( (*it)->position().quaternion().v[Q_X],
+                              (*it)->position().quaternion().v[Q_Y]));
+    }
+    return temp;
+}
+
 void AbstractLayerContainer::manageMemory()
 {
     for ( int i = 0 ; i < m_visible -> size () ; ++i ) {
@@ -92,3 +136,5 @@ void AbstractLayerContainer::manageMemory()
         }
     }
 }
+
+

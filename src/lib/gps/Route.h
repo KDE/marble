@@ -35,6 +35,12 @@ class Route : public AbstractLayerContainer, public GpsElement,
     virtual void draw( ClipPainter *painter,
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis );
+   
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis, BoundingBox box);
+    virtual void draw( ClipPainter*, const QPoint& );
+    
 };
 
 #endif //ROUTE_H

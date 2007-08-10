@@ -5,10 +5,10 @@
 # Copyright (c) 2006, Andrew Manson, <g.real.ate@gmail.com>
 #
 
-FIND_PATH(libgps_INCLUDES libgpsmm.h )
+FIND_PATH(libgps_INCLUDES libgpsmm.h /usr/include)
 
 
-FIND_LIBRARY(libgps_LIBRARIES gps)
+FIND_LIBRARY(libgps_LIBRARIES gps /usr/lib)
 
 IF( NOT libgps_LIBRARIES)
     MESSAGE(STATUS "Not building with Gpsd Support")

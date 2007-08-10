@@ -14,17 +14,28 @@
 #include "ClipPainter.h"
 
 
-class WaypointContainer : public AbstractLayerContainer
+class WaypointContainer : public virtual AbstractLayerContainer
 {
  public:
     WaypointContainer();
     WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
     virtual ~WaypointContainer() {}
-    virtual void draw( ClipPainter *painter, const QSize &canvasSize,
-                       double radius, Quaternion invRotAxis);
+    /*
+    virtual void draw ( ClipPainter *painter, const QPoint &point );
+    */
+    
+    virtual void draw( ClipPainter *painter, 
+                       const QSize &canvasSize, double radius,
+                       Quaternion invRotAxis );
+    
+    /*
+    virtual void draw( ClipPainter *painter, 
+                       const QSize &canvasSize, double radius,
+                       Quaternion invRotAxis, BoundingBox box );*/
 
  protected:
     virtual void processVisable();
 };
+
 
 #endif //WAYPOINTCONTAINER_H

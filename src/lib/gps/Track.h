@@ -29,8 +29,10 @@
  * reception was lost, or the GPS receiver was turned off, start a new
  * Track Segment for each continuous span of track data.
  */
-class Track : public AbstractLayerData, public GpsElement, 
-              public AbstractLayerContainer
+class Track : public AbstractLayerContainer, 
+              public AbstractLayerData,
+              public GpsElement
+              
 {
  public:
     /**
@@ -41,6 +43,9 @@ class Track : public AbstractLayerData, public GpsElement,
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis);
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis, BoundingBox box);
     virtual void draw( ClipPainter*, const QPoint& );
 };
 

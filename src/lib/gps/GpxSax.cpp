@@ -15,16 +15,25 @@
 #include "TrackContainer.h"
 #include "TrackSegment.h"
 #include "TrackPoint.h"
+#include "GpxFile.h"
 
 #include <QtXml/QXmlAttributes>
 #include <QString>
 #include <QMessageBox>
-
+/*
 GpxSax::GpxSax(WaypointContainer *wptContainer, 
                TrackContainer *trkContainer)
 {
     m_wptContainer = wptContainer;
     m_trackContainer = trkContainer;
+    
+    m_tempLat = 0.0;
+    m_tempLon = 0.0;
+}*/
+
+GpxSax::GpxSax( GpxFile *gpxFile )
+{
+    m_gpxFile = gpxFile;
     
     m_tempLat = 0.0;
     m_tempLon = 0.0;
@@ -43,7 +52,10 @@ bool GpxSax::startElement( const QString &namespaceURI,
     if(qName == "wpt"){
         m_tempLat = (attributes.value("lat")).toDouble();
         m_tempLon = (attributes.value("lon")).toDouble();
+        /*
         m_wptContainer->append( new Waypoint( m_tempLat, m_tempLon ));
+        */
+        m_gpxFile->addWaypoint( new Waypoint( m_tempLat, m_tempLon ));
     }
     else if ( qName == "trk") {
         m_track = new Track();
@@ -68,11 +80,14 @@ bool GpxSax::endElement( const QString &namespaceURI,
     Q_UNUSED( localName );
     
     if ( qName == "trkseg") {
+        m_trackSeg->createBoundingBox();
         m_track -> append( m_trackSeg );
         m_trackSeg = 0;
     }
     else if ( qName == "trk") {
-        m_trackContainer->append(m_track);
+        m_track->createBoundingBox();
+//         m_trackContainer->append(m_track);
+        m_gpxFile->addTrack( m_track );
         m_track =0;
     }
 

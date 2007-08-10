@@ -7,36 +7,44 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
-#ifndef TRACKCONTAINER_H
-#define TRACKCONTAINER_H
+#ifndef GPXFILE_H
+#define GPXFILE_H
 
+#include "AbstractLayer/AbstractLayerInterface.h"
 
-#include "AbstractLayer/AbstractLayerContainer.h"
+class ClipPainter;
+class QPoint;
+class QSize;
+class Quaternion;
+class BoundingBox;
+class Waypoint;
+class Track;
+class Route;
+class WaypointContainer;
+class TrackContainer;
+class RouteContainer;
 
-/**
- * @brief holds a collection of tracks
- */
-class TrackContainer : public AbstractLayerContainer
+class GpxFile : public AbstractLayerInterface
 {
  public:
-    /**
-     * @brief empty constructor
-     */
- //   TrackContainer();
+    GpxFile();
     
-    
-  //virtual void draw ( ClipPainter *painter, const QPoint &point );*/
-    
+    virtual void draw( ClipPainter *painter, const QPoint &point );
     
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis );
-    
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis, BoundingBox box );
+    void addWaypoint( Waypoint *waypoint );
+    void addTrack( Track *track );
+    void addRoute( Route *route );
+    
+ private:
+    WaypointContainer  *m_waypoints;
+    TrackContainer      *m_tracks;
+    RouteContainer      *m_routes;
 };
 
 #endif
-
-

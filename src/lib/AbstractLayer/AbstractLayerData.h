@@ -14,15 +14,17 @@
 
 
 #include "../GeoPoint.h"
+#include "AbstractLayerInterface.h"
 
 class QPixmap;
 class QPainter;
 class QPoint;
+class QPointF;
 class QSize;
 class ClipPainter;
 
 
-class AbstractLayerData
+class AbstractLayerData : public virtual AbstractLayerInterface
 {
  public:
     /**
@@ -44,6 +46,8 @@ class AbstractLayerData
      */
     virtual ~AbstractLayerData();
     
+    QString toString();
+    
     /**
      * @brief allow for drawing this Layer Data object
      * 
@@ -53,7 +57,8 @@ class AbstractLayerData
      * @param painter used to draw the AbstractLayerData object
      * @param point where to paint on the screen 
      */
-    virtual void draw ( ClipPainter *painter, const QPoint &point )=0;
+    virtual void draw ( ClipPainter *painter, 
+                        const QPoint &point );
     
     /**
      * @brief calculate where to draw this object and draw it
@@ -70,7 +75,11 @@ class AbstractLayerData
      */
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis)=0;
+                      Quaternion invRotAxis);
+    
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis, BoundingBox box);
     
     /*
     virtual QPixmap symbolPixmap()=0;
@@ -131,6 +140,11 @@ class AbstractLayerData
      */
     bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
                                  int radius, QPoint *position);
+    
+    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
+                     int radius, QPointF *position);
+    
+    
  private:
     /**
      * @brief position of the AbstractLayerData

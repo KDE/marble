@@ -1,3 +1,64 @@
+2007-08-10  Andrew Manson   <g.real.ate@gmail.com>
+
+    Added a method to extract the global Quaternion from the Widget
+    for the use in Bounding Box. Code was just Coppied from 
+    MarbleWidget::geoCoordinates. 
+    Added a method MarbleWidget::setBoundingBox that applies the
+    current View's BoundingBox to the bounding box object in 
+    viewParams.
+    * src/lib/MarbleWidget.{h,cpp} : added methods globalQuaternion
+                                     and setBoundingBox
+
+     Added the implementation of a GpxFile so that it may be used for
+    a file model/view implementation. Just meant to seperate the 
+    containers from the model.
+    * src/lib/gps/GpxFile.{h,cpp} : new class
+
+    Added the simple implementation of the RouteContainer just as a 
+    completion of the Gps Collection classes. 
+    * src/lib/gps/RouteContainer.{cpp, h} : new class
+
+    Added implementation of GpxFile to GpxSax
+    * src/lib/gps/GpxSax.{cpp,h} : implemented GpxFile
+
+    Added a constructor to TrackPoint that creates a deep copy of 
+    annother Trackpoint and fixed the drawing of each point.
+    * src/lib/gps/TrackPoint.{h,cpp} : new constructor and better 
+                                       painting.
+
+    Fixed the drawing of current position in GpsLayer and made it draw
+    a directional arrow in the direction of travel.
+    * src/lib/gps/GpsLayer.cpp : better current position drawn
+
+    Implemented BoundingBox checking for TrackSegment
+    * src/lib/gps/TrackSegment.{cpp, h } :bounding box
+
+    Added a class that represents a bounding box and deals with any 
+    functions expected of a bounding box class such as intersection
+    detection. 
+    * src/lib/BoundingBox.{h,cpp} : new class
+
+    Added a default implemetation of paintLayer to AbstractLayer and 
+    added another convience class to measure the istance between two 
+    QPointF. 
+    * src/lib/AbstractLayer/AbstractLayer.{h,cpp} : default 
+                                        implementation of paint and
+                                        new convinence class.
+
+    Added a new interface that aviods the need to subclass 
+    AbstractLayer{data, container} to implement a new layer and 
+    instead making them only a default implementation. 
+    * src/lib/AbstractLayer/AbstractLayerInterface.{h, cpp}: new class
+
+    Added a BoundingBox variable to ViewParams
+    * src/lib/ViewParams.h : BoundingBox
+
+    Added operator==() to GeoPoint that evaluates the lat and long 
+    using GeoPoint::geoCoordinates and compares them 
+    * src/lib/Geopoint.{h,cpp} : operator==()
+
+    
+
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning

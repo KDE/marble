@@ -12,6 +12,7 @@
 #include "AbstractLayer/AbstractLayer.h"
 #include "ClipPainter.h"
 #include "MarbleDirs.h"
+#include "BoundingBox.h"
 
 #include <QtCore/QPoint>
 #include <QtGui/QBrush>
@@ -28,11 +29,11 @@ TrackSegment::TrackSegment()
 {
 }
 
-void TrackSegment::draw(ClipPainter *painter, 
-                        const QSize &canvasSize, double radius,
-                        Quaternion invRotAxis)
+void TrackSegment::draw( ClipPainter *painter, 
+                         const QSize &canvasSize, double radius,
+                         Quaternion invRotAxis )
 {
-    QPoint *previous=0, position, mid,vector, xEnd, yEnd;
+    QPoint *previous=0, position;
     bool draw;
     int count = 0;
     
@@ -42,7 +43,7 @@ void TrackSegment::draw(ClipPainter *painter,
          it++ )
     {
         draw = (*it)->getPixelPos(canvasSize, invRotAxis, (int)radius,
-                                  &position);
+                 &position);
         if( draw ) {
             //if this is the first TrackPoint in this segment
             if ( previous == 0 ) {
@@ -67,6 +68,27 @@ void TrackSegment::draw(ClipPainter *painter,
     }
 
     delete previous;
+}
+
+void TrackSegment::draw(ClipPainter *painter, 
+                        const QSize &canvasSize, double radius,
+                        Quaternion invRotAxis, BoundingBox box)
+{
+    
+    if ( box.isValid() ) {
+        if ( box.intersects( *m_boundingBox ) ) {
+            draw( painter, canvasSize, radius, invRotAxis );
+        }
+        else {
+            
+            return;
+        }
+    }
+    else {
+        //bouding box doesn't work so draw anyway
+        draw( painter, canvasSize, radius, invRotAxis );
+    }
+   
 }
 
 void TrackSegment::draw( ClipPainter*, const QPoint& )

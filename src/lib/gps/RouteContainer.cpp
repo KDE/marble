@@ -8,17 +8,11 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
-#include "TrackContainer.h"
+#include "RouteContainer.h"
 #include "BoundingBox.h"
 
-// #include <QtCore/QPoint>
- #include <QDebug>
-/*
-TrackContainer::TrackContainer() : AbstractLayerContainer()
-{
-}*/
 
-void TrackContainer::draw( ClipPainter *painter, 
+void RouteContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize, double radius,
                            Quaternion invRotAxis, BoundingBox box )
 {
@@ -27,17 +21,5 @@ void TrackContainer::draw( ClipPainter *painter,
     for( it = constBegin() ; it < constEnd() ; ++it ) {
         (*it)->draw( painter, canvasSize, radius, invRotAxis, box);
     }
+
 }
-
-void TrackContainer::draw( ClipPainter *painter, 
-                           const QSize &canvasSize, double radius, 
-                           Quaternion invRotAxis )
-{
-    const_iterator it;
-    
-    for( it = constBegin() ; it < constEnd() ; ++it ) {
-        (*it)->draw( painter, canvasSize, radius, invRotAxis );
-    }
-}
-
-

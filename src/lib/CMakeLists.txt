@@ -80,6 +80,7 @@ set(marblewidget_SRCS
            vectorcomposer.cpp
            vectormap.cpp
            xmlhandler.cpp
+           BoundingBox.cpp
            kml/KMLContainer.cpp
            kml/KMLContainerParser.cpp
            kml/KMLFeature.cpp
@@ -94,14 +95,17 @@ set(marblewidget_SRCS
            kml/KMLPointParser.cpp
            gps/GpsElement.cpp
            gps/Waypoint.cpp
+           gps/TrackPoint.cpp
            gps/Route.cpp
            gps/Track.cpp
+           gps/TrackSegment.cpp
            gps/WaypointContainer.cpp
+           gps/TrackContainer.cpp
+           gps/RouteContainer.cpp
            gps/GpsLayer.cpp
            gps/GpxSax.cpp
-           gps/TrackSegment.cpp
-           gps/TrackPoint.cpp
-           gps/TrackContainer.cpp
+           gps/GpxFile.cpp
+	   AbstractLayer/AbstractLayerInterface.cpp
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
@@ -156,8 +160,12 @@ else(WIN32)
 
   if(libgps_FOUND)
      set(HAVE_LIBGPS 1)
+     message( STATUS "building with gpsd support")
+     
      INCLUDE_DIRECTORIES(${libgps_INCLUDES})
      TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
+  else(libgps_FOUND)
+     message( STATUS "not building with gpsd support")
   endif(libgps_FOUND)
 
 

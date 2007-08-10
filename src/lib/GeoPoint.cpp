@@ -68,3 +68,17 @@ QString GeoPoint::toString()
 	.arg(latdeg).arg(latmin).arg(latsec).arg(nsstring)
 	.arg(londeg).arg(lonmin).arg(lonsec).arg(westring);
 }
+
+bool GeoPoint::operator==( const GeoPoint &test )
+{
+    double lonTest;
+    double latTest;
+    double lonThis;
+    double latThis;
+    
+    geoCoordinates( lonThis, latThis );
+    test.geoCoordinates( lonTest, latTest );
+    
+    return ( lonThis == lonTest 
+             && latTest == latThis );
+}

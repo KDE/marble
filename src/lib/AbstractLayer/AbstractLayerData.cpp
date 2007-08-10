@@ -12,8 +12,10 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QPoint>
+#include <QDebug>
 
 #include "ClipPainter.h"
+#include "BoundingBox.h"
 
 AbstractLayerData::AbstractLayerData( const GeoPoint &position ):
                     m_visible(true)
@@ -32,16 +34,32 @@ AbstractLayerData::~AbstractLayerData()
 {
     delete m_position;
 }
-/*
-void AbstractLayerData::draw ( ClipPainter *, const QPoint & ){}
+
+QString AbstractLayerData::toString()
+{
+    return m_position->toString();
+}
+
+void AbstractLayerData::draw ( ClipPainter *, const QPoint & )
+{
+    qDebug() <<"in AbstractLayerData::draw() for single point";
+}
 
 
 void AbstractLayerData::draw(ClipPainter *painter, 
                              const QSize &canvasSize, double radius,
                              Quaternion invRotAxis)
 {
-    
-}*/
+    qDebug() <<"in AbstractLayerData::draw() without bounding box";
+}
+
+void AbstractLayerData::draw( ClipPainter *painter, 
+                  const QSize &canvasSize, double radius,
+                  Quaternion invRotAxis, BoundingBox box )
+{
+    //does not apply to abstractLayerData
+    qDebug() <<"in AbstractLayerData::draw() with bounding box";
+}
 
 bool AbstractLayerData::visible() const
 {
@@ -76,13 +94,28 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
                                      Quaternion invRotAxis, 
                                      int radius, QPoint *point)
 {
+    QPointF tempPoint;
+    bool    tempBool;
+    
+    tempBool = getPixelPos( screenSize, invRotAxis, radius,
+                            &tempPoint );
+    point -> setX( (int)tempPoint.x() );
+    point -> setY( (int)tempPoint.y() );
+    
+    return tempBool;
+}
+
+bool AbstractLayerData::getPixelPos( const QSize &screenSize,
+                                     Quaternion invRotAxis, 
+                                     int radius, QPointF *point)
+{
     Quaternion  qpos = m_position->quaternion(); 
     qpos.rotateAroundAxis( invRotAxis );
 
     if ( qpos.v[Q_Z] > 0 ){
-        point->setX( (int)( ( screenSize.width() / 2 )
+        point->setX( ( ( screenSize.width() / 2 )
                 + ( radius * qpos.v[Q_X] ) ) );
-        point->setY( (int)( ( screenSize.height() / 2 )
+        point->setY( ( ( screenSize.height() / 2 )
                 + ( radius * qpos.v[Q_Y] ) ) );
         
         return true;
@@ -90,4 +123,3 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
         return false;
     }
 }
-

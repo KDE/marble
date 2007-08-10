@@ -24,6 +24,7 @@
 
 class ClipPainter;
 class QPoint;
+class QRectF;
 
 
 /**
@@ -52,6 +53,23 @@ class AbstractLayer: public QObject
     virtual void paintLayer(ClipPainter* painter, 
                             const QSize& screenSize,
                             double radius, Quaternion rotAxis);
+    
+    /**
+     * @brief method to paint the whole Layer
+     * 
+     * This overloaded method is intended to add the functionality of
+     * having a bounding box implementation. 
+     * @param painter pointer to the painter that will paint this
+     *                layer
+     * @param screenSize used to calculate the pixel position
+     * @param radius globe radius, used as a measure of zoom level
+     * @param rotAxis quaternion that represents the current rotation
+     *                of the globe
+     */
+    virtual void paintLayer(ClipPainter* painter, 
+                            const QSize& screenSize,
+                            double radius, Quaternion rotAxis, 
+                            QRectF bounding );
 
  public:
     /**
@@ -135,6 +153,7 @@ class AbstractLayer: public QObject
      * @brief convenience method to find the distance between 2 points
      */
     double distance ( const QPoint &, const QPoint & );
+    double distance ( const QPointF &, const QPointF & );
 
     
 

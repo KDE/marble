@@ -35,6 +35,7 @@
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
+#include "GeoPoint.h"
 
 class QStyleOptionGraphicsItem;
 class MarbleWidgetInputHandler;
@@ -206,7 +207,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     bool geoCoordinates( const int x, const int y,
-                          double& lon, double& lat, GeoPoint::Unit = GeoPoint::Radian );
+                         double& lon, double& lat,
+                         GeoPoint::Unit=GeoPoint::Radian);
+    
+    bool    globalQuaternion( int x, int y, Quaternion &q);
 
     /**
      * @brief Return the longitude of the center point.
@@ -661,6 +665,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  drawAtmosphere();
 
     void  setActiveRegion();
+    
+    void  setBoundingBox();
 
  private:
     MarbleWidgetPrivate  * const d;

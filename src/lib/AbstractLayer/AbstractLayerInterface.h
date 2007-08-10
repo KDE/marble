@@ -7,36 +7,32 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
-#ifndef TRACKCONTAINER_H
-#define TRACKCONTAINER_H
+#ifndef ABSTRACTLAYERINTERFACE_H
+#define ABSTRACTLAYERINTERFACE_H
 
+class ClipPainter;
+class QPoint;
+class QSize;
+class Quaternion;
+class BoundingBox;
 
-#include "AbstractLayer/AbstractLayerContainer.h"
-
-/**
- * @brief holds a collection of tracks
- */
-class TrackContainer : public AbstractLayerContainer
+class AbstractLayerInterface
 {
- public:
-    /**
-     * @brief empty constructor
-     */
- //   TrackContainer();
-    
-    
-  //virtual void draw ( ClipPainter *painter, const QPoint &point );*/
-    
+  public:
+    virtual void draw ( ClipPainter *painter, const QPoint &point )=0;
     
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis );
+                       Quaternion invRotAxis )=0;
     
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis, BoundingBox box );
+                       Quaternion invRotAxis, BoundingBox box )=0;
+    
+    void setVisible( bool visible );
+ protected:
+    
+    bool m_visible;
 };
 
 #endif
-
-

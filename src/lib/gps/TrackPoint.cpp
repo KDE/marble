@@ -18,8 +18,15 @@ TrackPoint::TrackPoint( double lat, double lon )
 {
 }
 
+TrackPoint::TrackPoint( const TrackPoint & in )
+    :Waypoint ( 0, 0 )
+{
+    setPosition( in.position() );
+}
+
 void TrackPoint::draw( ClipPainter * painter,
                      const QPoint &position)
 {
+     painter->setBrush( Qt::white );
     painter->drawEllipse( position.x()-2, position.y()-2, 3, 3 );
 }

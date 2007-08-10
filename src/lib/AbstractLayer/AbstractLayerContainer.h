@@ -14,9 +14,11 @@
 #include <QtCore/QString>
 #include <QtCore/QBitArray>
 #include "AbstractLayerData.h"
+#include "AbstractLayerInterface.h"
 
 class ClipPainter;
 class QPointF;
+class BoundingBox;
 
 
 /*!
@@ -31,7 +33,8 @@ class QPointF;
  * layer data. Each time the view changes the visible data should be
  * altered by a thread that will monitor and deal with this process.
  */
-class AbstractLayerContainer : public QVector<AbstractLayerData*>
+class AbstractLayerContainer : public QVector<AbstractLayerData*>,
+                               public virtual AbstractLayerInterface
 {
  public:
     /**
@@ -55,6 +58,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      */
     virtual ~AbstractLayerContainer();
     
+    virtual void draw ( ClipPainter *painter, const QPoint &point );
+    
     /**
      * @brief  draw all AbstraceLayerData objects in this container
      * 
@@ -64,6 +69,10 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis);
+    
+    virtual void draw(ClipPainter *painter, 
+                      const QSize &canvasSize, double radius,
+                      Quaternion invRotAxis, BoundingBox box);
     
     /**
      * @brief m_name getter
@@ -90,6 +99,13 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      *         actual distance is needed get the square root.
      */
     double distance ( const QPointF &a, const QPointF &b );
+    
+    /**
+     * @brief creates a bouding box from this Contianer
+     */
+    void createBoundingBox();
+    
+    QVector<QPointF> geoCoord();
  protected:
     /** 
      * @brief Method to process what Data Objects need to be in
@@ -109,6 +125,11 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      * FIXME: make this work with a binary file
      */
     void manageMemory();
+    
+    /**
+     * @brief bounding box to quickly identify if this should be drawn
+     */
+    BoundingBox *m_boundingBox;
     
  private:
     /** 
@@ -136,7 +157,10 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>
      * taken from placecontainer for compatability.
      */
     QString *m_name;
+    
+    
 };
+
 
 #endif //ABSTRACTLAYERCONTAINER_H
 

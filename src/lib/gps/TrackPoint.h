@@ -31,6 +31,7 @@ class TrackPoint : public Waypoint
      * information elements can be entered layer
      */
     TrackPoint( double lat, double lon );
+    TrackPoint( const TrackPoint& );
     
     /**
      * @brief draws a 3 pixel circle for a TrackPoint

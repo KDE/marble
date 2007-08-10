@@ -16,6 +16,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
+#include <QtCore/QRectF>
 
 #include "ClipPainter.h"
 
@@ -102,22 +103,53 @@ void AbstractLayer::paint( ClipPainter* painter,
     }
 }
 
-void AbstractLayer::paintLayer( ClipPainter*, const QSize& screenSize,
+void AbstractLayer::paintLayer( ClipPainter* painter, 
+                                const QSize& screenSize,
                                 double radius, Quaternion rotAxis)
 {
+    Quaternion invRotAxis = rotAxis.inverse();
+    QVector<AbstractLayerContainer *>::const_iterator it;
+    
+    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
+        if ( (*it) != 0 ) {
+            (*it)->draw( painter, screenSize, radius, invRotAxis );
+        }
+    }
     // FIXME: should be pure virtual
 
-    Q_UNUSED( screenSize );
-    Q_UNUSED( radius );
-    Q_UNUSED( rotAxis );
+}
+
+void AbstractLayer::paintLayer( ClipPainter* painter, 
+                                const QSize& screenSize,
+                                double radius, Quaternion rotAxis, 
+                                QRectF bounding )
+{
+    Quaternion invRotAxis = rotAxis.inverse();
+    QVector<AbstractLayerContainer *>::const_iterator it;
+    
+    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
+        if ( (*it) != 0 ) {
+            (*it)->draw( painter, screenSize, radius, invRotAxis );
+        }
+    }
+    // FIXME: should be pure virtual
 
 }
 
 double AbstractLayer::distance ( const QPoint &a, const QPoint &b )
 {
+    return distance( QPointF( a.x(), a.y() ),
+                     QPointF( b.x(), b.y() ) );
+    
+}
+
+double AbstractLayer::distance ( const QPointF &a, const QPointF &b )
+{
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
 }
+
+
 
 
 #include "AbstractLayer.moc"

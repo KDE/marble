@@ -23,6 +23,7 @@
 #include "marble_export.h"
 
 #include "Quaternion.h"
+#include "BoundingBox.h"
 #include "global.h"
 
 
@@ -47,6 +48,7 @@ class ViewParams
     int         m_radiusUpdated;
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;
+    BoundingBox m_boundingBox;  // What the view currently can see
 
     // Show/don't show options
     bool        m_showGrid;

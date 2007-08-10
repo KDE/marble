@@ -366,7 +366,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     if ( d->m_gpsLayer->visible() ) {
         d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
                                    viewParams->m_radius,
-                                   viewParams->m_planetAxis );
+                                   viewParams->m_planetAxis, 
+                                   viewParams->m_boundingBox );
     }
 }
 
