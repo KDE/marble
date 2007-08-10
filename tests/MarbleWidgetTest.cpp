@@ -73,12 +73,12 @@ void MarbleWidgetTest::timeTest()
     //required frames per second for test to pass 
     //redundant with above really but I leave it in
     //for now...
-    unsigned int fps = 200*1000/(double)(t.elapsed());
+    unsigned int fps = (uint)( 200.0*1000.0/(double)(t.elapsed()) );
     QVERIFY(fps > 10);
 
 }
 
 QTEST_MAIN(MarbleWidgetTest) 
-#include "moc_marblewidgettest.cxx"
+#include "moc_MarbleWidgetTest.cxx"
   
 

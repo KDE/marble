@@ -41,7 +41,7 @@ void GeoPolygonTest::pointLoadTest()
 }
 
 QTEST_MAIN(GeoPolygonTest) 
-#include "moc_geopolygontest.cxx"
+#include "moc_GeoPolygonTest.cxx"
   
 
 
