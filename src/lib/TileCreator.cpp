@@ -75,7 +75,6 @@ void TileCreator::createTiles()
 
 
     int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
-    int  stdImageHeight = stdImageWidth / 2;
 
     int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
     qDebug() << "Maximum tile level: " << maxTileLevel;
