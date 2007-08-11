@@ -29,6 +29,7 @@ class AbstractLayerInterface
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis, BoundingBox box )=0;
     
+    bool visible();
     void setVisible( bool visible );
  protected:
     

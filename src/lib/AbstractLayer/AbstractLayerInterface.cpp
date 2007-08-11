@@ -10,6 +10,11 @@
 
 #include "AbstractLayerInterface.h"
 
+bool AbstractLayerInterface::visible()
+{
+    return m_visible;
+}
+
 void AbstractLayerInterface::setVisible( bool visible )
 {
     m_visible = visible;

@@ -1,3 +1,9 @@
+2007-08-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Added getter for symmetry.
+	* src/lib/AbstractLayer/AbstractLayerInterface.cpp (visible): new
+	method.
+
 2007-08-11  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:
