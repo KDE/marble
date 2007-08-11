@@ -1020,8 +1020,16 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 
 void MarbleWidget::updateGps()
 {
-    d->m_model->gpsLayer()->updateGps();
-    repaint();
+    
+    QRegion temp = d->m_model->gpsLayer()->updateGps(  
+                                        size(), radius(), 
+                                        planetAxis() );
+    update(temp);
+    /*
+    d->m_model->gpsLayer()->updateGps(  
+                         size(), radius(), 
+                              planetAxis() );
+    update();*/
 }
 
 void MarbleWidget::openGpxFile(QString &filename)

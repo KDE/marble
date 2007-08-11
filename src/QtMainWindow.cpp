@@ -30,7 +30,7 @@
 
 #include <QtGui/QClipboard>
 
-#include "lib/katlasaboutdialog.h"
+#include "lib/MarbleAboutDialog.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -237,7 +237,7 @@ void MainWindow::enterWhatsThis()
 
 void MainWindow::aboutMarble()
 {
-    KAtlasAboutDialog dlg(this);
+    MarbleAboutDialog dlg(this);
     dlg.exec();
 }
 

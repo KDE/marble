@@ -93,6 +93,7 @@ set(marblewidget_SRCS
            kml/KMLPlaceMark.cpp
            kml/KMLPlaceMarkParser.cpp
            kml/KMLPointParser.cpp
+           gps/GpsTracking.cpp
            gps/GpsElement.cpp
            gps/Waypoint.cpp
            gps/TrackPoint.cpp

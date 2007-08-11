@@ -152,8 +152,8 @@ class AbstractLayer: public QObject
     /**
      * @brief convenience method to find the distance between 2 points
      */
-    double distance ( const QPoint &, const QPoint & );
-    double distance ( const QPointF &, const QPointF & );
+    static double distance ( const QPoint &, const QPoint & );
+    static double distance ( const QPointF &, const QPointF & );
 
     
 

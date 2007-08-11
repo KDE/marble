@@ -27,6 +27,8 @@ class Track;
 class TrackSegment;
 class BoundingBox;
 class GpxFile;
+class QRegion;
+class GpsTracking;
 
 
 class GpsLayer : public AbstractLayer
@@ -39,37 +41,25 @@ class GpsLayer : public AbstractLayer
                             const QSize &canvasSize, double radius,
                             Quaternion rotAxis, BoundingBox box );
     virtual void paintCurrentPosition( ClipPainter *painter, 
-                            const QSize &canvasSize, 
-                            double radius, Quaternion invRotAxis );
+                                       const QSize &canvasSize, 
+                                       double radius,
+                                       Quaternion invRotAxis );
     
     void changeCurrentPosition( double lat, double lon );
     
     void loadGpx(const QString &fileName);
- public slots:
-    void updateGps();
+//  public slots:
+    QRegion updateGps(const QSize &canvasSize, double radius,
+                      Quaternion rotAxis);
 
     
  private:
     Waypoint            *m_currentPosition;
-    /*
-    WaypointContainer   *m_waypoints;
-    TrackContainer      *m_tracks;*/
     
     QVector<GpxFile*>   *m_files;
-    
-//FIXME: Those variables are needed in paintCurrentPosition 
-// otherwise gives a compiling error
-    TrackPoint          *m_gpsCurrentPosition;
-    TrackPoint          *m_gpsPreviousPosition;
-
-#ifdef HAVE_LIBGPS
-    gpsmm               *m_gpsd;
-    struct gps_data_t   *m_gpsdData;
-    
-    TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
-    TrackSegment        *m_gpsTrackSeg;
-#endif
+    GpsTracking         *m_tracking;
+    
 };
 
 #endif

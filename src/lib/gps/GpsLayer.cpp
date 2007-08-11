@@ -19,6 +19,7 @@
 #include "TrackSegment.h"
 #include "BoundingBox.h"
 #include "GpxFile.h"
+#include "GpsTracking.h"
 
 #include <QtGui/QPixmap>
 #include <QtCore/QString>
@@ -27,6 +28,7 @@
 #include <QtXml/QXmlSimpleReader>
 #include <QtCore/QTime>
 #include <QtCore/QDebug>
+#include <QtGui/QRegion>
 #include <cmath>
 
 GpsLayer::GpsLayer( QObject *parent ) : AbstractLayer( parent )
@@ -39,69 +41,21 @@ GpsLayer::GpsLayer( QObject *parent ) : AbstractLayer( parent )
     
     m_files = new QVector<GpxFile*>();
     
-#ifdef HAVE_LIBGPS
-    
-    m_gpsCurrentPosition = new TrackPoint( 0,0 );
-    m_gpsPreviousPosition = new TrackPoint( 0,0 );
-    m_gpsTracking           = new TrackPoint( 0,0 );
-    
     m_gpsTrack = new Track();
-    m_gpsTrackSeg = 0;
-    
-    m_gpsd = new gpsmm();
-    m_gpsdData = m_gpsd -> open( "127.0.0.1", "2947" );
-    
-#endif
-    
-    
-    
-   // parseGpx("test.gpx");
+    m_tracking = new GpsTracking( m_gpsTrack );
+
 }
 
 GpsLayer::~GpsLayer()
 {
 }
 
-void GpsLayer::updateGps(){
-#ifdef HAVE_LIBGPS
-    if( m_gpsdData !=0 ){
-        m_gpsdData =m_gpsd->query( "p" );
-        
-        qDebug()<< m_gpsTracking->toString()
-                << m_gpsPreviousPosition->toString();
-        
-        m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
-                                     m_gpsdData->fix.longitude );
-       
-        if (m_gpsTrackSeg == 0 ){
-            m_gpsTrackSeg = new TrackSegment();
-        }
-        
-        qDebug("checking position");
-        //if the current point has moved
-        qDebug()<< m_gpsTracking->toString()
-                << m_gpsPreviousPosition->toString();
-        if ( !( m_gpsPreviousPosition->position()  
-             == m_gpsTracking->position() ) )
-        {
-            qDebug()<<"position changed";
-            m_gpsTrackSeg->append( m_gpsPreviousPosition );
-            qDebug()<< "previous pointer" <<m_gpsPreviousPosition;
-            m_gpsPreviousPosition = m_gpsCurrentPosition;
-            
-            qDebug()<< "previous pointer" <<m_gpsPreviousPosition;
-            m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
-        }
-        qDebug() << m_gpsPreviousPosition << m_gpsTracking;
-            
-        
-    } else {
-        if (m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() >0)) {
-            m_gpsTrack->append( m_gpsTrackSeg );
-            m_gpsTrackSeg = 0;
-        } 
-    }
-#endif
+QRegion GpsLayer::updateGps( const QSize &canvasSize, double radius,
+                             Quaternion rotAxis )
+{
+    return  m_tracking->update( canvasSize, radius, 
+                                rotAxis.inverse() );
+//     return QRegion();
 }
 
 void GpsLayer::paintLayer( ClipPainter *painter, 
@@ -113,30 +67,14 @@ void GpsLayer::paintLayer( ClipPainter *painter,
 
     m_currentPosition->draw( painter, canvasSize, 
                              radius, invRotAxis );
-#ifdef HAVE_LIBGPS
-    if( m_gpsd != 0 ) {
-        paintCurrentPosition( painter, canvasSize, radius, 
-                              invRotAxis );
-    }
-    
-    if ( m_gpsTrack !=0 ) {
-         m_gpsTrack ->draw( painter, canvasSize, radius, invRotAxis);
-    }
-    
-    if ( m_gpsTrackSeg !=0 ) {
-         m_gpsTrackSeg->draw( painter, canvasSize, radius, 
-                              invRotAxis);
-    }
-#endif
-    QPoint *previous=0;
-    
-    
 
-//     m_waypoints->draw(painter, canvasSize, radius, invRotAxis );
-    /*
-    if ( m_tracks != 0 ) {
-        m_tracks->draw(painter, canvasSize, radius, invRotAxis, box);
-    }*/
+    
+    qDebug() << "just before updating in GpsLayer::paintLayer";
+    updateGps( canvasSize, radius, rotAxis );
+    paintCurrentPosition( painter, canvasSize, radius, invRotAxis );
+    
+    
+    QPoint *previous=0;
     
     QVector<GpxFile*>::const_iterator it;
     for( it = m_files->constBegin(); it < m_files->constEnd(); ++it ){
@@ -146,49 +84,12 @@ void GpsLayer::paintLayer( ClipPainter *painter,
     delete previous;
 }
 
-void GpsLayer::paintCurrentPosition( ClipPainter *painter,
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis )
+void GpsLayer::paintCurrentPosition( ClipPainter *painter, 
+                                     const QSize &canvasSize, 
+                                     double radius,
+                                     Quaternion invRotAxis)
 {
-    
-    QPointF position;
-    QPointF previousPosition;
-    
-    bool draw = false;
-    
-    draw = m_gpsCurrentPosition -> getPixelPos( canvasSize,
-                                                invRotAxis,
-                                             (int)radius, &position );
-    
-    draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, 
-                                                 invRotAxis,
-                                                 (int)radius, 
-                                                 &previousPosition );
-    
-    qDebug()<< m_gpsPreviousPosition->toString();
-    qDebug()<< m_gpsCurrentPosition->toString();
-    qDebug("-----");
-    
-    QPointF unitVector = ( position - previousPosition ) 
-                  / ( sqrt( distance( position, previousPosition) ) );
-    //the perpindicular of the unit vector between first and second
-    QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
-    
-    qDebug() << unitVector << QPointF(0.0,0.0);
-    qDebug() << sqrt(distance(unitVector, QPointF(0.0,0.0))) ;
-    
-    QPolygonF arrow;
-    arrow   << position
-            << ( position - ( unitVector * 9 ) + ( unitVector2 * 9 ) )
-            << ( position + ( unitVector * 19.0 ) )
-            << position - ( unitVector * 9 ) - ( unitVector2 * 9 );
-    
-    qDebug() << arrow;
-    if ( draw ) {
-        painter->setPen( Qt::black );
-        painter->setBrush( Qt::white );
-        painter->drawPolygon( arrow, Qt::OddEvenFill );
-    }
+    m_tracking->draw( painter, canvasSize, radius, invRotAxis );
 }
 
 void GpsLayer::changeCurrentPosition( double lat, double lon )

@@ -1,3 +1,21 @@
+2007-08-11  Andrew Manson   <g.real.ate@gmail.com>
+
+    Altered the updateGps() function in MarbleWidget so that it now
+    only updates the region where the the gps marker was and 
+    currenly is
+    * src/lib/MarbleWidget.cpp : updateGps() now uses regions
+
+    Added a new class that represents a GpsTracking Object. It is 
+    designed to remove the need for the Gps Layer to know abount gpsd
+    or any other methods of getting current location.
+    * src/lib/gps/GpsTracking.{ h, cpp } : new class
+
+    Removed anyting that GpsTracking now covers from GpsLayer
+    * src/lib/gps/GpsLayer.{h, cpp} : removed tracking code
+
+    Made convince method distance() static in AbstractLayer
+    * src/lib/AbstractLayer/AbstractLayer.h : static methods
+
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename class KAtlasAboutDialog into MarbleAboutDialog and change
