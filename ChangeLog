@@ -1,5 +1,8 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix some warnings
+	* src/lib/gps/GpsTracking.cpp: Fix warnings
+
 	Move MarbleNavigator from src/plugins/navigator/ to src/lib/
 	* src/lib/MarbleNavigator.h,
 	* src/lib/MarbleNavigator.cpp,
