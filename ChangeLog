@@ -1,5 +1,10 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	d-pointerify MarbleNavigator (also Krazy issue 8).
+	* src/lib/MarbleNavigator.h (MarbleNavigator): Introduce d-pointer
+	* src/lib/MarbleNavigator.cpp (MarbleNavigatorPrivate): new class
+	(MarbleNavigator):use d-pointer where appropriate
+	
 	Fix some warnings
 	* src/lib/gps/GpsTracking.cpp: Fix warnings
 
@@ -13,7 +18,7 @@
 	d-pointerify MarbleAboutDialog (also Krazy issue 8).
 	* src/lib/MarbleAboutDialog.h (MarbleAboutDialog): Introduce d-pointer
 	* src/lib/MarbleAboutDialog.cpp (MarbleAboutDialogPrivate): new class
-		(MarbleAboutDialog):use d-pointer where appropriate
+	(MarbleAboutDialog):use d-pointer where appropriate
 	
 2007-08-11  Andrew Manson   <g.real.ate@gmail.com>
 

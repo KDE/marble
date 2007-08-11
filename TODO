@@ -41,7 +41,7 @@ Misc
    - (KAtlasThemeSelectView): Doesn't have any private members          done
    - LegendBrowser                                                      done
    - (SearchListView) does not have any private members                 done
-   - MarbleNavigator                                                    --
+   - MarbleNavigator                                                    done
    - MapTheme                                                           --
    - MarbleAboutDialog                                                  done
    - ViewParams                                                         --

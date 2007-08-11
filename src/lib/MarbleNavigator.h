@@ -17,17 +17,22 @@
 #ifndef MARBLENAVIGATOR_H
 #define MARBLENAVIGATOR_H
 
-#include "ui_MarbleNavigator.h"
+#include "marble_export.h"
+
+#include <QWidget>
 
 
-class MarbleNavigator : public QWidget, private Ui::MarbleNavigator
+class MarbleNavigatorPrivate;
+
+
+class MARBLE_EXPORT MarbleNavigator : public QWidget
 {
     Q_OBJECT
 
  public:
     MarbleNavigator(QWidget *parent = 0);
  
-   int minimumZoom() const { return m_minimumzoom; }
+    int  minimumZoom() const;
 	
  signals:
     void goHome();
@@ -48,7 +53,7 @@ class MarbleNavigator : public QWidget, private Ui::MarbleNavigator
     void resizeEvent ( QResizeEvent * );
 
  private:
-    int  m_minimumzoom;
+    MarbleNavigatorPrivate  * const d;
 };
 
 #endif // MARBLENAVIGATOR_H

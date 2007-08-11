@@ -17,42 +17,61 @@
 #include <QtCore/QTimer>
 #include <QtGui/QStringListModel>
 
+#include "ui_MarbleNavigator.h"
 
-MarbleNavigator::MarbleNavigator(QWidget *parent)
-    : QWidget( parent )
+
+class MarbleNavigatorPrivate
 {
-    setupUi( this );
+ public:
+    int  m_minimumzoom;
+
+    Ui::MarbleNavigator  uiWidget;
+};
+
+
+MarbleNavigator::MarbleNavigator( QWidget *parent )
+    : QWidget( parent ),
+      d( new MarbleNavigatorPrivate )
+
+{
+    d->uiWidget.setupUi( this );
  
-    m_minimumzoom = 950;
+    d->m_minimumzoom = 950;
 
     setFocusPolicy( Qt::NoFocus );
 
-    connect( goHomeButton, SIGNAL( clicked() ), 
+    connect( d->uiWidget.goHomeButton, SIGNAL( clicked() ), 
              this,         SIGNAL( goHome() ) ); 
-    connect( zoomSlider,   SIGNAL( valueChanged( int ) ),
+    connect( d->uiWidget.zoomSlider,   SIGNAL( valueChanged( int ) ),
              this,         SIGNAL( zoomChanged( int ) ) ); 
-    connect( zoomInButton,  SIGNAL( clicked() ),
+    connect( d->uiWidget.zoomInButton,  SIGNAL( clicked() ),
              this,          SIGNAL( zoomIn() ) ); 
-    connect( zoomOutButton, SIGNAL( clicked() ),
+    connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
              this,          SIGNAL( zoomOut() ) ); 
 
-    connect( moveLeftButton,  SIGNAL( clicked() ),
+    connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
              this,            SIGNAL( moveLeft() ) ); 
-    connect( moveRightButton, SIGNAL( clicked() ),
+    connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
              this,            SIGNAL( moveRight() ) ); 
-    connect( moveUpButton,    SIGNAL( clicked() ),
+    connect( d->uiWidget.moveUpButton,    SIGNAL( clicked() ),
              this,            SIGNAL( moveUp() ) ); 
-    connect( moveDownButton,  SIGNAL( clicked() ),
+    connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
              this,            SIGNAL (moveDown() ) ); 
 }
 
 
-void MarbleNavigator::changeZoom(int zoom)
+int MarbleNavigator::minimumZoom() const
+{
+    return d->m_minimumzoom;
+}
+
+
+void MarbleNavigator::changeZoom( int zoom )
 {
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
-    zoomSlider->setValue( zoom );
-    zoomSlider->setMinimum( m_minimumzoom );
+    d->uiWidget.zoomSlider->setValue( zoom );
+    d->uiWidget.zoomSlider->setMinimum( d->m_minimumzoom );
 }
 
 
@@ -61,19 +80,18 @@ void MarbleNavigator::resizeEvent ( QResizeEvent * )
 //            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
 //                                           QSizePolicy::Fixed );
     if ( height() < 100 ) {
-        if ( !zoomSlider->isHidden() ) {
-            zoomSlider->hide();
-            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
-                                           QSizePolicy::Expanding );
+        if ( !d->uiWidget.zoomSlider->isHidden() ) {
+            d->uiWidget.zoomSlider->hide();
+            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                                       QSizePolicy::Expanding );
         }
     } else {
-        if ( zoomSlider->isHidden() ) {
-            zoomSlider->show();
-            m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
-                                           QSizePolicy::Fixed );
+        if ( d->uiWidget.zoomSlider->isHidden() ) {
+            d->uiWidget.zoomSlider->show();
+            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                                       QSizePolicy::Fixed );
         }
     }
-
 } 
 
 
