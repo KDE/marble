@@ -1,5 +1,13 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename class KAtlasAboutDialog into MarbleAboutDialog and change
+	file names into MarbleAboutDialog.*
+	* src/lib/MarbleAboutDialog.cpp: renamed from katlasaboutdialog.cpp
+	* src/lib/MarbleAboutDialog.h: renamed from katlasaboutdialog.h
+	* src/lib/MarbleAboutDialog.ui: renamed from katlasaboutdialog.ui
+	* src/lib/MarbleWidgetPopupMenu.cpp (slotAboutDialog): Use new name
+	* src/lib/CMakeLists.txt: Name changes as above.
+	
 	Remove warnings
 	src/lib/MarbleWidget.cpp (paint): mark unused with Q_UNUSED()
 	src/lib/global.h (Projection): Disable Mercator

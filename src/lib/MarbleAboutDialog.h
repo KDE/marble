@@ -14,19 +14,21 @@
 //
 
 
-#ifndef KATLASABOUTDIALOG_H
-#define KATLASABOUTDIALOG_H
+#ifndef MARBLEABOUTDIALOG_H
+#define MARBLEABOUTDIALOG_H
+
 
 #include "marble_export.h"
 
-#include "ui_katlasaboutdialog.h"
+#include "ui_MarbleAboutDialog.h"
 
-class MARBLE_EXPORT KAtlasAboutDialog : public QDialog, private Ui::katlasAboutDialog
+
+class MARBLE_EXPORT MarbleAboutDialog : public QDialog, private Ui::MarbleAboutDialog
 {
     Q_OBJECT
 
  public:
-    KAtlasAboutDialog(QWidget *parent = 0);
+    MarbleAboutDialog(QWidget *parent = 0);
 };
 
 

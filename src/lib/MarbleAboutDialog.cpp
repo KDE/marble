@@ -22,8 +22,8 @@
  */
 
 
-#include "katlasaboutdialog.h"
-#include "ui_katlasaboutdialog.h"
+#include "MarbleAboutDialog.h"
+#include "ui_MarbleAboutDialog.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
@@ -31,7 +31,8 @@
 
 #include "MarbleDirs.h"
 
-KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
+
+MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     : QDialog( parent )
 {
     setupUi( this );
@@ -49,5 +50,5 @@ KAtlasAboutDialog::KAtlasAboutDialog(QWidget *parent)
     }
 }
 
-#include "katlasaboutdialog.moc"
+#include "MarbleAboutDialog.moc"
 

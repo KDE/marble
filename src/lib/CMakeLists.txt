@@ -43,7 +43,6 @@ set(marblewidget_SRCS
            GridMap.cpp
            HttpDownloadManager.cpp
            HttpFetchFile.cpp
-           katlasaboutdialog.cpp
            katlascrosshair.cpp
            katlasflag.cpp
            katlasmapscale.cpp
@@ -57,6 +56,7 @@ set(marblewidget_SRCS
            MarbleModel.cpp
            MarbleWidget.cpp
            MarbleControlBox.cpp
+           MarbleAboutDialog.cpp
            ViewParams.cpp
            measuretool.cpp
            placemark.cpp
@@ -112,7 +112,7 @@ set(marblewidget_SRCS
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 
-set (marblewidget_UI  MarbleControlBox.ui katlastilecreatordialog.ui placemarkinfodialog.ui katlasaboutdialog.ui
+set (marblewidget_UI  MarbleControlBox.ui katlastilecreatordialog.ui placemarkinfodialog.ui MarbleAboutDialog.ui
 )
 MESSAGE( STATUS "${marble_UI}" )
 
@@ -207,7 +207,6 @@ install( FILES
            GridMap.h
            HttpDownloadManager.h
            HttpFetchFile.h
-           katlasaboutdialog.h
            katlascrosshair.h
            MarbleDirs.h
            katlasflag.h
@@ -222,6 +221,7 @@ install( FILES
            MarbleModel.h
            MarbleWidget.h
            MarbleControlBox.h
+           MarbleAboutDialog.h
            ViewParams.h
            measuretool.h
            placemark.h

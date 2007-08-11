@@ -14,7 +14,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
-#include "katlasaboutdialog.h"
+#include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "placemark.h"
@@ -158,7 +158,7 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
-    KAtlasAboutDialog dlg( m_widget );
+    MarbleAboutDialog dlg( m_widget );
     dlg.exec();
 }
 
