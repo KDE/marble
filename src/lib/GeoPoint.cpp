@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include "global.h"
 
 #include "GeoPoint.h"
 
@@ -17,19 +18,17 @@
 #include <QtCore/QDebug>
 
 
-const double rad2int = 21600.0 / M_PI;
-
 GeoPoint::GeoPoint(int _detail, int _lon, int _lat)
   : m_detail(_detail)
 {
-    m_q = Quaternion( (double)(_lon) / rad2int * 2,
-		      (double)(_lat) / rad2int * 2 );
+    m_q = Quaternion( (double)(_lon) / RAD2INT * 2,
+		      (double)(_lat) / RAD2INT * 2 );
 }
 
 GeoPoint::GeoPoint(int _lon, int _lat)
 {
-    m_q = Quaternion( (double)(_lon) / rad2int * 2,
-		      (double)(_lat) / rad2int * 2 );
+    m_q = Quaternion( (double)(_lon) / RAD2INT * 2,
+		      (double)(_lat) / RAD2INT * 2 );
 }
 
 GeoPoint::GeoPoint( double _lon, double _lat, GeoPoint::Unit unit)
@@ -39,7 +38,7 @@ GeoPoint::GeoPoint( double _lon, double _lat, GeoPoint::Unit unit)
         m_q = Quaternion( _lon, _lat );
         break;
     case( GeoPoint::Degree ):
-        m_q = Quaternion( _lon * deg2rad , _lat * -deg2rad  );
+        m_q = Quaternion( _lon * DEG2RAD , _lat * -DEG2RAD  );
     }
 }
 
@@ -52,13 +51,13 @@ QString GeoPoint::toString()
     QString nsstring = ( lat < 0 ) ? "N" : "S";  
     QString westring = ( lon < 0 ) ? "W" : "E";  
 
-    lon = fabs( lon * 180.0 / M_PI );
+    lon = fabs( lon * RAD2DEG );
 
     int londeg = (int) lon;
     int lonmin = (int) ( 60 * (lon - londeg) );
     int lonsec = (int) ( 3600 * (lon - londeg - ((double)(lonmin) / 60) ) );
 
-    lat = fabs( lat * 180.0 / M_PI );
+    lat = fabs( lat * RAD2DEG );
 
     int latdeg = (int) lat;
     int latmin = (int) ( 60 * (lat - latdeg) );

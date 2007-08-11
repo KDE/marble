@@ -11,6 +11,7 @@
 
 #include <QtCore/QPointF>
 #include <QDebug>
+
 BoundingBox::BoundingBox()
 {
     m_valid = false;
@@ -18,10 +19,10 @@ BoundingBox::BoundingBox()
 
 BoundingBox::BoundingBox(const QVector<QPointF> &vector )
 {
-    m_topX = -180;
-    m_botX = 180;
-    m_topY = -90;
-    m_botY = 90;
+    m_topX = -180.0;
+    m_bottomX = +180.0;
+    m_topY = -90.0;
+    m_bottomY = +90.0;
     
 //     qDebug()<<vector;
     
@@ -31,11 +32,11 @@ BoundingBox::BoundingBox(const QVector<QPointF> &vector )
 //         qDebug() << "test then";
 //         qDebug()<< m_topX << ( it->x() > m_topX ) <<
 // it->x()<<m_topX;
-        m_topX = ( it->x() > m_topX ) ? it->x() : m_topX;
+        m_topX =    ( it->x() > m_topX )    ? it->x() : m_topX;
 //         qDebug() << m_topX;
-        m_botX = ( it->x() < m_botX ) ? it->x() : m_botX;
-        m_topY = ( it->y() > m_topY ) ? it->y() : m_topY;
-        m_botY = ( it->y() < m_botY ) ? it->y() : m_botY;
+        m_bottomX = ( it->x() < m_bottomX ) ? it->x() : m_bottomX;
+        m_topY =    ( it->y() > m_topY )    ? it->y() : m_topY;
+        m_bottomY = ( it->y() < m_bottomY ) ? it->y() : m_bottomY;
     }
 //     qDebug() << "what" << m_topX;
     
@@ -43,11 +44,11 @@ BoundingBox::BoundingBox(const QVector<QPointF> &vector )
 }
 bool BoundingBox::contains( const QPointF &point )
 {
-    if ( (point.x() < m_botX) || (point.x() > m_topX ) ) {
+    if ( ( point.x() < m_bottomX ) || ( point.x() > m_topX ) ) {
         return false;
     }
     
-    if ( (point.y() < m_botY ) || (point.y() > m_topY ) ) {
+    if ( ( point.y() < m_bottomY ) || ( point.y() > m_topY ) ) {
         return false;
     }
     return true;
@@ -55,15 +56,15 @@ bool BoundingBox::contains( const QPointF &point )
 
 bool BoundingBox::intersects( BoundingBox box ) 
 {
-    if ( contains( QPointF( box.m_botX, box.m_botY ) ) ) {
+    if ( contains( QPointF( box.m_bottomX, box.m_bottomY ) ) ) {
         return true;
     }
     
-    if ( contains ( QPointF( box.m_botX, box.m_topY ) ) ) {
+    if ( contains ( QPointF( box.m_bottomX, box.m_topY ) ) ) {
         return true;
     }
     
-    if ( contains ( QPointF( box.m_topX, box.m_botY ) ) ) {
+    if ( contains ( QPointF( box.m_topX, box.m_bottomY ) ) ) {
         return true;
     }
     
@@ -75,10 +76,10 @@ bool BoundingBox::intersects( BoundingBox box )
 
 bool BoundingBox::isValid()
 {
-    if (m_topX == -180) return false;
-    if (m_botX == 180)return false;
-    if (m_topY == -90)return false;
-    if (m_botY == 90)return false;
+    if (m_topX == -180.0) return false;
+    if (m_bottomX == +180.0) return false;
+    if (m_topY == -90.0) return false;
+    if (m_bottomY == +90.0) return false;
     return true;
 }
 
@@ -86,10 +87,8 @@ QString BoundingBox::string()
 {
     QString temp;
     
-    temp += "TopY"; temp += QString::number(m_topY); temp += ";";
-    temp += "TopX"; temp += QString::number(m_topX); temp += ";";
-    temp += "BotY"; temp += QString::number(m_botY); temp += ";";
-    temp += "BotX"; temp += QString::number(m_botX); temp += ";";
-    
+    temp += QString( "TopY: %1; TopX: %2; BotY: %3; BotX: %4 " )
+            .arg( m_topY ).arg( m_topX ).arg( m_bottomY ).arg( m_bottomX ); 
+
     return temp;
 }

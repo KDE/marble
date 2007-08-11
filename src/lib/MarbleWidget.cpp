@@ -235,9 +235,9 @@ QAbstractListModel *MarbleWidget::placeMarkModel()
 double MarbleWidget::moveStep()
 {
     if ( radius() < sqrt( width() * width() + height() * height() ) )
-	return 0.1;
+	return 180.0 * 0.1;
     else
-	return atan( (double)width() 
+	return 180.0 * atan( (double)width() 
 		     / (double)( 2 * radius() ) ) * 0.2;
 }
 
@@ -248,12 +248,12 @@ int MarbleWidget::zoom() const
 
 double MarbleWidget::centerLatitude() const
 {
-    return d->m_viewParams.m_planetAxis.pitch() * 180.0 / M_PI;
+    return d->m_viewParams.m_planetAxis.pitch() * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
-    return - d->m_viewParams.m_planetAxis.yaw() * 180.0 / M_PI;
+    return - d->m_viewParams.m_planetAxis.yaw() * RAD2DEG;
 }
 
 void MarbleWidget::setMinimumZoom( int zoom )
@@ -426,8 +426,8 @@ void MarbleWidget::rotateBy(const Quaternion& incRot)
 
 void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 {
-    Quaternion  rotPhi( 1.0, deltaLat, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, deltaLon, 0.0 );
+    Quaternion  rotPhi( 1.0, deltaLat * DEG2ONE, 0.0, 0.0 );
+    Quaternion  rotTheta( 1.0, 0.0, deltaLon * DEG2ONE, 0.0 );
 
     d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
     d->m_viewParams.m_planetAxis *= rotPhi;
@@ -439,8 +439,8 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
-                                                  (lon + 180.0) * M_PI / 180.0,
+    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * DEG2RAD,
+                                                  (lon + 180.0) * DEG2RAD,
                                                   0.0 );
 
     repaint();
@@ -461,7 +461,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
         double  lat;
 
 	mark->coordinate( lon, lat );
-	centerOn( -lon * 180.0 / M_PI, -lat * 180.0 / M_PI );
+	centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
 	mark->setSelected( 1 );
 	d->m_crosshair.setEnabled( true );
     }
@@ -645,10 +645,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
 
         if ( unit == GeoPoint::Degree )
         {
-            double rad2deg = 180.0/M_PI;
-
-            lat *= -rad2deg;
-            lon *= +rad2deg;
+            lat *= -RAD2DEG;
+            lon *= +RAD2DEG;
         }
 
         return true;
@@ -660,18 +658,18 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
 
 bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 {
-    int imgrx  = width() >> 1;
-    int imgry  = height() >> 1;
+    int imageHalfWidth  = width() / 2;
+    int imageHalfHeight  = height() / 2;
 
-    const double  radiusf = 1.0 / (double)(radius());
+    const double  inverseRadius = 1.0 / (double)(radius());
 
-    if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y -
-         imgry)) ) 
+    if ( radius() > sqrt((x - imageHalfWidth )*(x - imageHalfWidth ) 
+        + (y - imageHalfHeight)*(y - imageHalfHeight)) ) 
     {
 
-        double qy = radiusf * (double)(y - imgry);
+        double qy = inverseRadius * (double)(y - imageHalfHeight);
         double qr = 1.0 - qy * qy;
-        double qx = (double)(x - imgrx) * radiusf;
+        double qx = (double)(x - imageHalfWidth ) * inverseRadius;
 
         double qr2z = qr - qx * qx;
         double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;  
@@ -692,28 +690,27 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
 void MarbleWidget::rotateTo( const double& lon, const double& lat, const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( lat   / RAD2INT,  
-// "phi"
-                                                  lon / RAD2INT,     // "theta"
-                                                  psi   / RAD2INT );
+    d->m_viewParams.m_planetAxis.createFromEuler( lat * DEG2RAD,   // "phi"
+                                                  lon * DEG2RAD,     // "theta"
+                                                  psi * DEG2RAD );
 }
 
 void MarbleWidget::rotateTo(const double& lon, const double& lat)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * M_PI / 180.0,
-                                                  (lon + 180.0) * M_PI / 180.0, 0.0 );
+    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * DEG2RAD,
+                                                  (lon + 180.0) * DEG2RAD, 0.0 );
 }
 
 
 void MarbleWidget::drawAtmosphere()
 {
-    int  imgrx  = width() / 2;
-    int  imgry  = height() / 2;
+    int  imageHalfWidth  = width() / 2;
+    int  imageHalfHeight  = height() / 2;
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imgrx, imgry ), 1.05 * radius() );
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ), 1.05 * radius() );
     grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.0,  QColor( 255, 255, 255, 0 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
     QPen    pen1( Qt::NoPen );
@@ -721,8 +718,8 @@ void MarbleWidget::drawAtmosphere()
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imgrx - (int)( (double)(radius()) * 1.05 ),
-                         imgry - (int)( (double)(radius()) * 1.05 ),
+    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
+                         imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
                          (int)( 2.1 * (double)(radius()) ), 
                          (int)( 2.1 * (double)(radius()) ) );
 }
@@ -863,6 +860,7 @@ void MarbleWidget::goHome()
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
     d->m_model->setMapTheme( maptheme, this );
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
@@ -906,8 +904,7 @@ void MarbleWidget::setShowTerrain( bool visible )
 void MarbleWidget::setShowRelief( bool visible )
 { 
     d->m_viewParams.m_showRelief = visible;
-
-    // FIXME: Both aren't needed, are they?
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
@@ -915,6 +912,7 @@ void MarbleWidget::setShowRelief( bool visible )
 void MarbleWidget::setShowElevationModel( bool visible )
 { 
     d->m_viewParams.m_showElevationModel = visible;
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
@@ -922,6 +920,7 @@ void MarbleWidget::setShowElevationModel( bool visible )
 void MarbleWidget::setShowIceLayer( bool visible )
 { 
     d->m_viewParams.m_showIceLayer = visible;
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
@@ -941,6 +940,7 @@ void MarbleWidget::setShowRivers( bool visible )
 void MarbleWidget::setShowLakes( bool visible )
 {
     d->m_viewParams.m_showLakes = visible;
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
@@ -985,6 +985,8 @@ void MarbleWidget::setQuickDirty( bool enabled )
 #ifndef FLAT_PROJ
     // Interlace texture mapping 
     d->m_model->textureMapper()->setInterlaced( enabled );
+
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
 
     int transparency = enabled ? 255 : 192;
@@ -1023,6 +1025,7 @@ void MarbleWidget::creatingTilesProgress( int progress )
 
 void MarbleWidget::updateChangedMap()
 {
+    // Update texture map during the repaint that follows:
     setNeedsUpdate();
     update();
 }

@@ -27,9 +27,9 @@ class BoundingBox : public QVector<QPointF>
     bool m_dateLine;
     bool m_valid;
     double m_topX;
-    double m_botX;
+    double m_bottomX;
     double m_topY;
-    double m_botY;
+    double m_bottomY;
 };
 
 #endif //BOUNDINGBOX_H

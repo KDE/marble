@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
 
+
+//    window->marbleWidget()->rotateTo( 0, 0, -90 );
     window->show();
 
     for ( int i = 1; i < argc; ++i ) {

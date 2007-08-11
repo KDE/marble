@@ -1,3 +1,25 @@
+2007-08-11  Torsten Rahn  <rahn@kde.org>
+	
+    * src/lib/MarbleWidget.{h,cpp} : Introducing RAD2DEG and fixing
+      rotate(phi,theta,psi) as well as other methods. 
+
+    * src/lib/BoundingBox.{h,cpp} : some minor coding style fixes.
+
+    * src/lib/global.h : RAD2DEG, DEG2RAD, DEG2ONE, RAD2ONE		
+
+    Adjustments to the usage of RAD2DEG, etc.:		
+    * src/lib/vectormap.cpp
+    * src/lib/GeoPoint.h
+    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/global.h
+    * src/lib/MarbleWidget.h
+    * src/lib/MarbleControlBox.cpp
+    * src/lib/xmlhandler.cpp
+    * src/lib/GridMap.cpp
+    * src/lib/GeoPoint.cpp
+    * src/lib/MarbleWidgetInputHandler.cpp
+    * src/qtmain.cpp
+
 2007-08-10  Andrew Manson   <g.real.ate@gmail.com>
 
     Added a method to extract the global Quaternion from the Widget

@@ -25,12 +25,18 @@ enum Projection {
     Mercator
 };
 
-
 // Define FLAT_PROJ here to get flat projection.
 //
 //#define FLAT_PROJ
 
 
+const double DEG2RAD = M_PI / 180.0;
+const double RAD2DEG = 180.0 / M_PI;
+
+const double DEG2ONE = 1.0 / 180.0;
+const double RAD2ONE = 1.0 / M_PI;
+
+// Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;
 
 #endif

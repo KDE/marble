@@ -26,7 +26,7 @@
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
  
-const double  AXIALTILT = M_PI / 180.0 * ( 23.0
+const double  AXIALTILT = DEG2RAD * ( 23.0
                                            + 26.0 / 60.0
                                            + 21.0 / 3600.0 );
 const double  PIHALF    = M_PI / 2;

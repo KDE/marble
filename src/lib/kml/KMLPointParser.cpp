@@ -8,6 +8,7 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
+#include "global.h"
 
 #include "KMLPointParser.h"
 
@@ -108,8 +109,8 @@ bool KMLPointParser::characters( const QString& str )
     if ( m_waitCoordinates ) {
         QStringList splitline = str.split( "," );
 
-        m_lon = deg2rad * splitline[0].toFloat();
-        m_lat = -deg2rad * splitline[1].toFloat();
+        m_lon = DEG2RAD * splitline[0].toFloat();
+        m_lat = -DEG2RAD * splitline[1].toFloat();
 
         result = true;
     }

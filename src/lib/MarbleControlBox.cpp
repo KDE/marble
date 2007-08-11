@@ -30,6 +30,8 @@
 
 #include "ui_MarbleControlBox.h"
 
+#include <global.h>
+
 #include <MarbleWidget.h>
 #include <MarbleDirs.h>
 #include <maptheme.h>
@@ -298,10 +300,9 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
             emit gpsPositionChanged( y, x );
             break;
         case GeoPoint::Radian:
-            double rad2deg = 180.0/M_PI;
             double t_lat=0,t_lon=0;
-            t_lat = y * -rad2deg;
-            t_lon = x * rad2deg;
+            t_lat = y * -RAD2DEG;
+            t_lon = x * +RAD2DEG;
             
             if( t_lat < 0 ){
                 d->uiWidget.m_latSpinBox->setValue( -t_lat );

@@ -18,8 +18,6 @@
 #include <cmath>
 #include "Quaternion.h"
 
-const double deg2rad = M_PI/180.0;
-const double rad2deg = 180.0/M_PI;
 const double TWOPI = 2 * M_PI;
 
 class GeoPoint {

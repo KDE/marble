@@ -209,7 +209,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
                          GeoPoint::Unit=GeoPoint::Radian);
-    
+
+    // TODO: APIDOCS
     bool    globalQuaternion( int x, int y, Quaternion &q);
 
     /**
@@ -436,7 +437,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lon  an angle parallel to the longitude lines
      *              +180(W) - -180(E)
      * @param  psi  clockwise rotation of the globe
-     *              +180(W) - -180(E)
+     *              -180(anti-clockwise) - +180(clockwise)
      *
      * This method does NOT automatically update the view
      * and is meant to be used during subsequent transformations 

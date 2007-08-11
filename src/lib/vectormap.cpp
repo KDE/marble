@@ -438,10 +438,10 @@ const QPointF VectorMap::horizonPoint()
 void VectorMap::createArc()
 {
 
-    double  beta  = (double)( 180.0 / M_PI 
+    double  beta  = (double)( RAD2DEG 
 			      * atan2( m_horizonb.y() - m_imgry - 1,
 				       m_horizonb.x() - m_imgrx - 1 ) );
-    double  alpha = (double)( 180.0 / M_PI
+    double  alpha = (double)( RAD2DEG
 			      * atan2( m_horizona.y() - m_imgry - 1,
 				       m_horizona.x() - m_imgrx - 1 ) );
 
@@ -468,7 +468,7 @@ void VectorMap::createArc()
         double  arcradius = sqrt( (double)( m_rlimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
-            double angle = M_PI/180.0 * (double)( alpha + (sgndiff * it) );
+            double angle = DEG2RAD * (double)( alpha + (sgndiff * it) );
             itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
             ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
             // qDebug() << " ity: " << ity;

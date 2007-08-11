@@ -9,6 +9,8 @@
 // Copyright 2007     Inge Wallin  <ingwa@kde.org>"
 //
 
+#include "global.h"
+
 #include "xmlhandler.h"
 
 #include <cmath>
@@ -166,8 +168,8 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
     if ( m_inPoint && nameLower == "coordinates" ) {
         QStringList splitline = m_currentText.split( "," );
 
-        m_placemark->setCoordinate( deg2rad * splitline[0].toFloat(),
-                                    -deg2rad * splitline[1].toFloat() );
+        m_placemark->setCoordinate( DEG2RAD * splitline[0].toFloat(),
+                                    -DEG2RAD * splitline[1].toFloat() );
 
         if ( splitline.size() == 3 ) {
             int elevation = splitline[2].toInt();
