@@ -21,8 +21,8 @@
 
 enum Projection { 
     Spherical,
-    Equirectangular, 
-    //Mercator
+    Equirectangular
+    // Mercator
 };
 
 // Define FLAT_PROJ here to get flat projection.
