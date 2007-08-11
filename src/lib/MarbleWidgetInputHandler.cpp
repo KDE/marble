@@ -125,7 +125,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         {
             double  lat;
             double  lon;
-            m_widget->geoCoordinates( event->x(), event->y(), lon, lat );
+            m_widget->geoCoordinates( event->x(), event->y(), lon, lat, GeoPoint::Radian );
             QString position = GeoPoint( lon, lat ).toString();
             emit mouseMoveGeoPosition( position );
         }
@@ -155,8 +155,9 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                 // m_leftpresseda: screen center latitude  during mouse press
                 // m_leftpressedb: screen center longitude during mouse press
                 m_widget->geoCoordinates( m_widget->width() / 2,
-                                           m_widget->height() / 2,
-                                           m_leftpresseda, m_leftpressedb );
+                                          m_widget->height() / 2,
+                                          m_leftpresseda, m_leftpressedb,
+                                          GeoPoint::Radian );
 
                 if ( m_widget->northPoleY() > 0 ) {
                     m_leftpressedb = M_PI - m_leftpressedb;

@@ -35,6 +35,11 @@ That's a very short recapitulation of the above mentioned document.
 The full document contains lots of examples to show how it should be
 done.
 
+Variables
+---------
+
+ - camelCasing for methods and variables (e.g. myMethodName()). Full 
+   upper cased names for constants (e.g. RAD2DEG).
 
 Extensions
 ----------

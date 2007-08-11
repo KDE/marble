@@ -55,7 +55,7 @@ class MarbleWidgetPopupMenu  : public QObject
 
  private:
     MarbleModel    *m_model;
-    MarbleWidget   *m_view;
+    MarbleWidget   *m_widget;
 
     QVector<PlaceMark*>  m_featurelist;	
 

@@ -208,7 +208,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
-                         GeoPoint::Unit=GeoPoint::Radian);
+                         GeoPoint::Unit=GeoPoint::Degree);
 
     // TODO: APIDOCS
     bool    globalQuaternion( int x, int y, Quaternion &q);

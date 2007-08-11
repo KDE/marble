@@ -1,4 +1,24 @@
 2007-08-11  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
+        - Some fixes concerning Carlos' introduction of
+        projections
+        - make all methods accept Degree as a unit by 
+          default ( geoCoordinates RAD->DEG )
+    * src/lib/MarbleWidgetInputHandler.cpp:
+    * src/lib/MarbleWidgetPopupMenu.{cpp,h}:
+        - make all methods accept Degree as a unit by 
+          default ( geoCoordinates RAD->DEG )
+    * src/lib/Quaternion.cpp:
+        - remove DEG2ONE.
+        - fix an inaccuracy due to usage of int instead of double
+    * src/lib/global.h:
+        - remove DEG2ONE.
+    * CODING:
+        - adding a notion on upper/lower case conventions for 
+          variable / method names.
+
+2007-08-11  Torsten Rahn  <rahn@kde.org>
 	
     * src/lib/MarbleWidget.{h,cpp} : Introducing RAD2DEG and fixing
       rotate(phi,theta,psi) as well as other methods. 

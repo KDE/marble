@@ -366,10 +366,10 @@ void MarbleWidget::zoomView(int zoom)
  
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = d->m_viewParams.m_canvasImage->width() / 2;
-    int  imgry = d->m_viewParams.m_canvasImage->height() / 2;
+    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
-    if ( newRadius * newRadius < imgrx * imgrx + imgry * imgry
+    if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
          && newRadius != radius() )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
@@ -429,8 +429,8 @@ void MarbleWidget::rotateBy(const Quaternion& incRot)
 
 void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 {
-    Quaternion  rotPhi( 1.0, deltaLat * DEG2ONE, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, deltaLon * DEG2ONE, 0.0 );
+    Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
+    Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
     d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
     d->m_viewParams.m_planetAxis *= rotPhi;
@@ -461,7 +461,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
     if ( mark != 0 ){
 	double  lon;
-        double  lat;
+    double  lat;
 
 	mark->coordinate( lon, lat );
 	centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
@@ -550,10 +550,10 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imgrx = d->m_viewParams.m_canvasImage->width() / 2;
-    int  imgry = d->m_viewParams.m_canvasImage->height() / 2;
+    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
-    if ( radius() < imgrx * imgrx + imgry * imgry )
+    if ( radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
         d->m_viewParams.m_canvasImage->fill( Qt::transparent );
@@ -627,47 +627,59 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat, 
                                   GeoPoint::Unit unit )
 {
-    if( d->m_viewParams.m_projection == Spherical ) {
-        int imgrx  = width() / 2;
-        int imgry  = height() / 2;
+    bool noerr = false;
 
-        const double  inverseRadius = 1.0 / (double)(radius());
+    switch( d->m_viewParams.m_projection ) {
+        case Spherical:
 
-        if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
+        if( d->m_viewParams.m_projection == Spherical )
+        {
+            int imageHalfWidth  = width() / 2;
+            int imageHalfHeight  = height() / 2;
 
-            double qy = inverseRadius * (double)(y - imgry);
-            double qr = 1.0 - qy * qy;
-            double qx = (double)(x - imgrx) * inverseRadius;
+            const double  inverseRadius = 1.0 / (double)(radius());
 
-            double qr2z = qr - qx * qx;
-            double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
-
-            Quaternion  qpos( 0, qx, qy, qz );
-            qpos.rotateAroundAxis( planetAxis() );
-            qpos.getSpherical( lon, lat );
-
-            if ( unit == GeoPoint::Degree )
+            if ( radius() > sqrt((x - imageHalfWidth)*(x - imageHalfWidth) + (y - imageHalfHeight)*(y - imageHalfHeight)) )
             {
-                lat *= -RAD2DEG;
-                lon *= +RAD2DEG;
+
+                double qy = inverseRadius * (double)(y - imageHalfHeight);
+                double qr = 1.0 - qy * qy;
+                double qx = (double)(x - imageHalfWidth) * inverseRadius;
+
+                double qr2z = qr - qx * qx;
+                double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
+
+                Quaternion  qpos( 0.0, qx, qy, qz );
+                qpos.rotateAroundAxis( planetAxis() );
+                qpos.getSpherical( lon, lat );
+
+                noerr = true;
             }
-            return true;
         }
-        else {
-            return false;
+        break;
+
+        case Equirectangular:
+
+        if ( true ) // FIXME: add criterium whether point is outside the map
+        {
+            float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
+            float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
+
+            int xPixels = x - width() / 2;
+            int yPixels = y - height() / 2;
+
+            double pixel2rad = M_PI / (double)( 2 * radius() );
+            lat = yPixels * pixel2rad + centerLat;
+            lon = xPixels * pixel2rad + centerLon;
+
+            noerr = true;
         }
     }
-    if( d->m_viewParams.m_projection == Equirectangular ) {
-        float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
-        float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
-        int xPixels = x - width()/2;
-        int yPixels = y - height()/2;
-        double pixel2rad = M_PI / (2 * radius());
-        lat = yPixels * pixel2rad + centerLat;
-        lon = xPixels * pixel2rad + centerLon;
-        double rad2deg = 180.0/M_PI;
-        lat *= rad2deg;
-        lon *= rad2deg;
+
+    if ( unit == GeoPoint::Degree )
+    {
+        lat *= -RAD2DEG;
+        lon *= +RAD2DEG;
     }
 }
 
@@ -689,7 +701,7 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
         double qr2z = qr - qx * qx;
         double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;  
 
-        Quaternion  qpos( 0, qx, qy, qz );
+        Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( planetAxis() );
         q = qpos;
 
@@ -752,7 +764,7 @@ void MarbleWidget::setActiveRegion()
     }
 #else
     double centerLat = planetAxis().pitch();
-    int yCenterOffset =  (int)((float)(2*zoom / M_PI) * centerLat);
+    int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
     int yTop = height()/2 - zoom + yCenterOffset;
 
     d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
@@ -976,7 +988,7 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     bool valid = false;
     double lon = 0, lat = 0;
     
-    valid = geoCoordinates( x, y, lon, lat );
+    valid = geoCoordinates( x, y, lon, lat, GeoPoint::Radian );
     
     if (valid){
         emit mouseClickGeoPosition( lon, lat, GeoPoint::Radian);

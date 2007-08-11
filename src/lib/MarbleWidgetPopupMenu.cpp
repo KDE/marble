@@ -23,10 +23,10 @@
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *view, 
                                          MarbleModel *model)
     : m_model(model),
-      m_view(view) 
+      m_widget(view) 
 {
-    m_lmbMenu = new QMenu( m_view );
-    m_rmbMenu = new QMenu( m_view );
+    m_lmbMenu = new QMenu( m_widget );
+    m_rmbMenu = new QMenu( m_widget );
 
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
              this,      SLOT( showFeatureInfo( QAction* ) ) );
@@ -91,14 +91,14 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     double  lat;
     double  lon;
 
-    m_view->geoCoordinates( xpos, ypos, lon, lat );
+    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoPoint::Radian );
 
     // Any idea what this could do on activation?
     m_posaction->setEnabled( false );
     m_posaction->setText( GeoPoint( lon, lat ).toString() );
     m_lmbMenu->addAction( m_posaction );
 
-    m_lmbMenu->popup( m_view->mapToGlobal( curpos ) );
+    m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
 
@@ -106,7 +106,7 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     QPoint curpos = QPoint( xpos, ypos );
     m_pAddMeasurePointAction->setData( curpos );
-    m_rmbMenu->popup( m_view->mapToGlobal( curpos ) );
+    m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
 
@@ -118,7 +118,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     if ( actionidx > 0 ) {
         mark = m_featurelist.at( actionidx -1 );
 
-        PlaceMarkInfoDialog  dialog( mark, m_view );
+        PlaceMarkInfoDialog  dialog( mark, m_widget );
         dialog.exec();
     }
 }
@@ -131,14 +131,14 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
     double  lat;
     double  lon;
 
-    m_view->geoCoordinates( p.x(), p.y(), lon, lat);
+    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoPoint::Radian );
 
     emit addMeasurePoint( lon, lat );
 }
 
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
-    KAtlasAboutDialog dlg( m_view );
+    KAtlasAboutDialog dlg( m_widget );
     dlg.exec();
 }
 
