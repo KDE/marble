@@ -704,6 +704,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
         lat *= -RAD2DEG;
         lon *= +RAD2DEG;
     }
+
+    return noerr;
 }
 
 bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
