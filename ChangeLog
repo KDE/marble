@@ -1,3 +1,13 @@
+2007-08-11  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleWidget.cpp: Cleaning and make the code follow the
+	coding standards.
+
+	Simplify code in preparation for refactorings
+	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder): Code
+	simplifications
+	(rectangularPaintPlaceFolder): Code simplifications
+
 2007-08-11  Torsten Rahn  <rahn@kde.org>
 
     Adding "Set Home Location" to the RMB menu.
@@ -18,10 +28,6 @@
 	- introduce homePoint( double& lon, double& lat )
 
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
-
-	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder): Code
-	simplifications
-	(rectangularPaintPlaceFolder): Code simplifications
 
 	Added getter for symmetry.
 	* src/lib/AbstractLayer/AbstractLayerInterface.cpp (visible): new
