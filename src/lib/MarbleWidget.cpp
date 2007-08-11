@@ -488,10 +488,33 @@ void MarbleWidget::setCenterLongitude( double lon )
     centerOn( lon, centerLatitude() );
 }
 
+Projection MarbleWidget::projection() const
+{ 
+    return d->m_viewParams.m_projection;
+}
 
-void MarbleWidget::setHome( const double &lon, const double &lat, int zoom)
+void MarbleWidget::setProjection( const Projection projection )
 {
-    d->m_homePoint = GeoPoint( lon, lat );
+    d->m_viewParams.m_projection = projection;
+    // Update texture map during the repaint that follows:
+    // setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::home( double &lon, double &lat, int& zoom)
+{
+    double homeLon = 0;
+    double homeLat = 0;
+    d->m_homePoint.geoCoordinates( homeLon, homeLat );
+    lon = homeLon * RAD2DEG;
+    lat = homeLat * RAD2DEG;
+
+    zoom = d->m_homeZoom;
+}
+
+void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
+{
+    d->m_homePoint = GeoPoint( lon, lat, GeoPoint::Degree );
     d->m_homeZoom = zoom;
 }
 
