@@ -18,6 +18,7 @@
 #ifndef MARBLECONTROLBOX_H
 #define MARBLECONTROLBOX_H
 
+
 #include "marble_export.h"
 
 #include <QtCore/QAbstractItemModel>

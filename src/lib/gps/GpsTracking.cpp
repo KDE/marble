@@ -94,7 +94,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
     Q_UNUSED( radius );
     Q_UNUSED( invRotAxis );
 #else
-    if( m_gpsdData != 0 ) {
+    if ( m_gpsdData != 0 ) {
         m_gpsdData =m_gpsd->query( "p" );
         
         m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,

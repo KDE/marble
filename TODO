@@ -38,9 +38,9 @@ Misc
    - Continue with the use cases.                                       --
  * d-pointerify the rest of the public classes                          INGE
    - PlaceMarkModel                                                     done
-   - (KAtlasThemeSelectView): Doesn't have any private members          done
+   - (KAtlasThemeSelectView): Doesn't have any private members          --
    - LegendBrowser                                                      done
-   - (SearchListView) does not have any private members                 done
+   - (SearchListView) does not have any private members                 --
    - MarbleNavigator                                                    done
    - MapTheme                                                           --
    - MarbleAboutDialog                                                  done
