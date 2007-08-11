@@ -1,5 +1,9 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix Krazy issue 13: proper include directives.
+	* src/lib/TileCreator.h (TILECREATOR_H): Renamed from TILESCISSOR_H
+
+	More cleaning
 	* src/lib/MarbleWidget.cpp: Cleaning and make the code follow the
 	coding standards.
 

@@ -10,8 +10,8 @@
 //
 
 
-#ifndef TILESCISSOR_H
-#define TILESCISSOR_H
+#ifndef TILECREATOR_H
+#define TILECREATOR_H
 
 
 #include <QtCore/QObject>
