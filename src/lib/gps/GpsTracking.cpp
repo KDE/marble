@@ -54,16 +54,24 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
             invRotAxis,
             (int)radius, 
              &previousPosition );
+    
+    qDebug() << "positions " << position << previousPosition ;
     if ( !draw ) {
         return;
     }
+    double distance = sqrt( AbstractLayer::distance( position,
+                                                  previousPosition) );
     
-    QPointF unitVector = ( position - previousPosition ) 
-   / ( sqrt( AbstractLayer::distance( position, previousPosition) ) );
+    if (distance == 0) {
+        return;
+    }
+    
+    QPointF unitVector = ( position - previousPosition )
+                                    / distance;
     //the perpindicular of the unit vector between first and second
     QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
     
-    qDebug()<< unitVector << unitVector2;
+    qDebug()<<"unit vectors" << unitVector << unitVector2;
     
     previousDraw = currentDraw;
     
@@ -108,10 +116,13 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
     
     construct( canvasSize, radius, invRotAxis );
     
-    QRegion temp1(currentDraw.boundingRect().toRect());
-    QRegion temp2(previousDraw.boundingRect().toRect());
+    QRect temp1(currentDraw.boundingRect().toRect());
+    QRect temp2(previousDraw.boundingRect().toRect());
     
-    return temp1.united( temp2 );
+    temp1.adjust( -5, -5, 10, 10);
+    temp2.adjust( -5,-5, 10, 10);
+    
+    return QRegion(temp1).united( QRegion(temp2) );
     
 #endif
     return QRegion();
