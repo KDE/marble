@@ -65,7 +65,7 @@ class PlaceMarkPainter : public QObject
 
     void   labelFontData( PlaceMark *mark, double outlineWidth,
                           QFont &font, int &fontwidth );
-    bool   isVisible( PlaceMark *mark, int radius,
+    bool   isVisible( PlaceMark *mark, 
                           Quaternion &rotAxis,
                           int imgwidth, int imgheight,
                           ViewParams *viewParams,
@@ -84,7 +84,7 @@ class PlaceMarkPainter : public QObject
 #endif
     void drawLabelText( QPainter& textpainter, PlaceMark*, QFont font,
                           double outlineWidth );
-    bool testbug();
+    bool testXBug();
 
  protected:
 
@@ -111,7 +111,7 @@ class PlaceMarkPainter : public QObject
     QPixmap  m_empty;
     double   m_widthscale;
 
-    bool     m_useworkaround;
+    bool     m_useXWorkaround;  // Indicates need for an X windows workaround.
 };
 
 

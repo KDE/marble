@@ -1,5 +1,9 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Make the code clearer by naming things better.
+	* src/lib/placemarkpainter.{h,cpp} (testXBug): Renamed from testbug().
+	(m_useXWorkaround): renamed from m_useworkaround
+	
 	Fix Krazy issue 13: proper include directives.
 	* src/lib/TileCreator.h (TILECREATOR_H): Renamed from TILESCISSOR_H
 

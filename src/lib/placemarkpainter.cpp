@@ -138,9 +138,9 @@ PlaceMarkPainter::PlaceMarkPainter(QObject* parent)
         << 200
         << 0;
 
-    m_useworkaround = testbug();
-    qDebug() << "Use workaround: " << ( m_useworkaround ? "1" : "0" );
-    // m_useworkaround = true;
+    m_useXWorkaround = testXBug();
+    qDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
+    // m_useXWorkaround = true;
 }
 
 
@@ -241,7 +241,6 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
 
         qpos = mark->quaternion();
         textpixmap = mark->textPixmap();
-
         qpos.rotateAroundAxis(invplanetAxis);
 
         // Skip placemarks at the other side of the earth.
@@ -289,9 +288,9 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                 // Due to some XOrg bug this requires a workaround via
                 // QImage in some cases.
 
-                if ( !m_useworkaround ) {
+                if ( !m_useXWorkaround ) {
                     textpixmap = QPixmap( textWidth, m_fontheight );
-                    textpixmap.fill(Qt::transparent);
+                    textpixmap.fill( Qt::transparent );
 
                     textpainter.begin( &textpixmap );
 
@@ -487,19 +486,19 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                 // Due to some XOrg bug this requires a workaround via
                 // QImage in some cases.
 
-                if ( !m_useworkaround ) {
+                if ( !m_useXWorkaround ) {
                     textpixmap = QPixmap( textWidth, m_fontheight );
-                    textpixmap.fill(Qt::transparent);
+                    textpixmap.fill( Qt::transparent );
 
                     textpainter.begin( &textpixmap );
 
                     if ( mark->selected() == 0 ) {
-                        textpainter.setFont(font);
-                        textpainter.setPen(m_labelcolor);
+                        textpainter.setFont( font );
+                        textpainter.setPen( m_labelcolor );
                         textpainter.drawText( 0, m_fontascent, mark->name() );
                     }
                     else {
-                        drawLabelText(textpainter, mark, font, outlineWidth);
+                        drawLabelText( textpainter, mark, font, outlineWidth );
                     }
 
                     textpainter.end();
@@ -740,19 +739,19 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
                 // Due to some XOrg bug this requires a
                 // workaround via QImage in some cases.
 
-                if ( !m_useworkaround ) {
+                if ( !m_useXWorkaround ) {
                     textpixmap = QPixmap( textwidth, m_fontheight );
                     textpixmap.fill( Qt::transparent );
 
                     textpainter.begin( &textpixmap );
 
                     if ( mark->selected() == 0 ) {
-                        textpainter.setFont(font);
-                        textpainter.setPen(m_labelcolor);
+                        textpainter.setFont( font );
+                        textpainter.setPen( m_labelcolor );
                         textpainter.drawText( 0, m_fontascent, mark->name() );
                     }
                     else {
-                        drawLabelText(textpainter, mark, font, outlineWidth);
+                        drawLabelText( textpainter, mark, font, outlineWidth );
                     }
 
                     textpainter.end();
@@ -841,19 +840,22 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #endif
 
 
-bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
+bool PlaceMarkPainter::isVisible( PlaceMark *mark, 
                                   Quaternion &planetAxis,
                                   int imgwidth, int imgheight,
                                   ViewParams *viewParams,
                                   int &x, int &y )
 {
+#ifndef KML_GSOC
     // Skip the places that are too small and not selected.
-    if ( m_weightfilter.at( mark->popidx() ) > radius
+    if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
          && mark->selected() == 0 )
         return false;
+#endif
 
     // Skip terrain marks if we're not showing terrain.
     if ( !viewParams->m_showTerrain
+         // FIXME:                        This 19 here v v is a 20 above.
          && ( 16 <= mark->symbol() && mark->symbol() <= 19 ) )
         return false;
 
@@ -862,7 +864,7 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
          && ( 0 <= mark->symbol() && mark->symbol() < 16 ) )
         return false;
 
-    Quaternion  qpos       = mark->quaternion();
+    Quaternion  qpos          = mark->quaternion();
     Quaternion  invplanetAxis = planetAxis.inverse();
     qpos.rotateAroundAxis( invplanetAxis );
 
@@ -871,8 +873,8 @@ bool PlaceMarkPainter::isVisible( PlaceMark *mark, int radius,
         return false;
 
     // Don't process placemarks if they are outside the screen area
-    x = (int)(imgwidth / 2  + radius * qpos.v[Q_X]);
-    y = (int)(imgheight / 2 + radius * qpos.v[Q_Y]);
+    x = (int)(imgwidth  / 2 + viewParams->m_radius * qpos.v[Q_X]);
+    y = (int)(imgheight / 2 + viewParams->m_radius * qpos.v[Q_Y]);
     if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
         return false;
     }
@@ -1048,7 +1050,11 @@ inline void PlaceMarkPainter::drawLabelText(QPainter& textpainter,
 }
 
 
-bool PlaceMarkPainter::testbug()
+// Test if there is a certain bug in the X server.
+// FIXME: Tackat, can you explain here which one?
+//
+
+bool PlaceMarkPainter::testXBug()
 {
     QString  testchar( "K" );
     QFont    font( "Sans Serif", 10 );
@@ -1069,11 +1075,12 @@ bool PlaceMarkPainter::testbug()
 
     QImage image = pixmap.toImage();
 
-    for ( int x = 0; x < fontwidth; x++ )
+    for ( int x = 0; x < fontwidth; x++ ) {
         for ( int y = 0; y < fontheight; y++ ) {
-            if ( qAlpha( image.pixel( x,y ) ) > 0 )
+            if ( qAlpha( image.pixel( x, y ) ) > 0 )
                 return false;
         }
+    }
 
     return true;
 }
