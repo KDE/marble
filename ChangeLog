@@ -1,5 +1,12 @@
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Move MarbleNavigator from src/plugins/navigator/ to src/lib/
+	* src/lib/MarbleNavigator.h,
+	* src/lib/MarbleNavigator.cpp,
+	* src/lib/MarbleNavigator.ui: Moved from src/plugins/navigator
+	* src/lib/CMakeLists.txt,
+	* src/plugins/navigator/CMakeLists.txt: Reflect changes.
+
 	d-pointerify MarbleAboutDialog (also Krazy issue 8).
 	* src/lib/MarbleAboutDialog.h (MarbleAboutDialog): Introduce d-pointer
 	* src/lib/MarbleAboutDialog.cpp (MarbleAboutDialogPrivate): new class

@@ -56,6 +56,7 @@ set(marblewidget_SRCS
            MarbleModel.cpp
            MarbleWidget.cpp
            MarbleControlBox.cpp
+           MarbleNavigator.cpp
            MarbleAboutDialog.cpp
            ViewParams.cpp
            measuretool.cpp
@@ -113,7 +114,12 @@ set(marblewidget_SRCS
 )
 MESSAGE( STATUS "${marblewidget_SRCS}" )
 
-set (marblewidget_UI  MarbleControlBox.ui katlastilecreatordialog.ui placemarkinfodialog.ui MarbleAboutDialog.ui
+set (marblewidget_UI
+    MarbleControlBox.ui
+    MarbleNavigator.ui
+    katlastilecreatordialog.ui
+    placemarkinfodialog.ui
+    MarbleAboutDialog.ui
 )
 MESSAGE( STATUS "${marble_UI}" )
 
@@ -222,6 +228,7 @@ install( FILES
            MarbleModel.h
            MarbleWidget.h
            MarbleControlBox.h
+           MarbleNavigator.h
            MarbleAboutDialog.h
            ViewParams.h
            measuretool.h
