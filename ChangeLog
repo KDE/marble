@@ -6,6 +6,10 @@
 
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder): Code
+	simplifications
+	(rectangularPaintPlaceFolder): Code simplifications
+
 	Added getter for symmetry.
 	* src/lib/AbstractLayer/AbstractLayerInterface.cpp (visible): new
 	method.
