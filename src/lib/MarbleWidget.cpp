@@ -702,7 +702,7 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     if ( unit == GeoPoint::Degree )
     {
         lat *= -RAD2DEG;
-        lon *= +RAD2DEG;
+        lon *= -RAD2DEG; // FIXME: Something is wrong here ...
     }
 
     return noerr;
@@ -897,11 +897,12 @@ void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 void MarbleWidget::goHome()
 {
     // d->m_model->rotateTo(0, 0);
-#if 1
-    rotateTo( -9.4, 54.8 );
-#else
-    rotateTo( d->m_homePoint.quaternion() );
-#endif
+    double homeLon = 0;
+    double homeLat = 0;
+    d->m_homePoint.geoCoordinates( homeLon, homeLat );
+
+    rotateTo( homeLon * RAD2DEG, homeLat * -RAD2DEG );
+
     zoomView( d->m_homeZoom ); // default 1050
 
     repaint(); // not obsolete in case the zoomlevel stays unaltered

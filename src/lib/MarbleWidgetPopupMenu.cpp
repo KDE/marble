@@ -20,10 +20,10 @@
 #include "placemark.h"
 #include "placemarkinfodialog.h"
 
-MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *view, 
+MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
                                          MarbleModel *model)
     : m_model(model),
-      m_widget(view) 
+      m_widget(widget) 
 {
     m_lmbMenu = new QMenu( m_widget );
     m_rmbMenu = new QMenu( m_widget );
@@ -49,10 +49,15 @@ void MarbleWidgetPopupMenu::createActions()
                                                 this);
     m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
     m_rmbMenu->addSeparator();
+    m_pSetHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
+    m_rmbMenu->addAction( m_pSetHomePointAction );
+    m_rmbMenu->addSeparator();
 
     m_pAboutDialogAction = new QAction( tr( "&About" ), this );
     m_rmbMenu->addAction( m_pAboutDialogAction );
 
+    connect( m_pSetHomePointAction,    SIGNAL( triggered() ),
+                                       SLOT( slotSetHomePoint() ) );
     connect( m_pAddMeasurePointAction, SIGNAL( triggered() ),
                                        SLOT( slotAddMeasurePoint() ) );
     connect( m_pRemoveMeasurePointsAction, SIGNAL( triggered() ),
@@ -105,6 +110,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     QPoint curpos = QPoint( xpos, ypos );
+    m_pSetHomePointAction->setData( curpos );
     m_pAddMeasurePointAction->setData( curpos );
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
@@ -123,6 +129,20 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     }
 }
 
+void MarbleWidgetPopupMenu::slotSetHomePoint()
+{
+    QPoint  p = m_pSetHomePointAction->data().toPoint();
+
+    double  lat;
+    double  lon;
+
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoPoint::Degree );
+    if ( valid == true )
+    {
+//        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
+        m_widget->setHome( lon, lat, m_widget->zoom() );
+    }
+}
 
 void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 {

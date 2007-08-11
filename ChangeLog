@@ -1,5 +1,18 @@
 2007-08-11  Torsten Rahn  <rahn@kde.org>
 
+    Adding "Set Home Location" to the RMB menu.
+    (Wanted to have this in before the message string freeze).
+    Something is strange with the sign of the 
+    longitude stored in Radians .... I have to check that.
+
+    TODO: store in configuration file.
+
+    * src/lib/MarbleWidget.cpp
+    * src/lib/MarbleWidgetPopupMenu.h
+    * src/lib/MarbleWidgetPopupMenu.cpp
+
+2007-08-11  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleWidget.{cpp,h}:
         - Introduce setProjection() and projection()
 	- introduce homePoint( double& lon, double& lat )
