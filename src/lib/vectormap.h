@@ -76,8 +76,8 @@ class VectorMap : public ScreenPolygon::Vector
     Quaternion m_planetAxis;
     int m_lastSign;
     int m_offset;
-    int m_lastX;
-    int m_lastY;
+    double m_lastX;
+    double m_lastY;
 #endif
     //	int m_debugNodeCount;
 
@@ -106,6 +106,11 @@ class VectorMap : public ScreenPolygon::Vector
 	
     int               m_radius;
     int               m_rlimit;
+
+    //Needed for the flat projection
+    double m_centerLat;
+    double m_centerLon;
+    double m_xyFactor;
 };
 
 

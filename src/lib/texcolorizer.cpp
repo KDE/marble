@@ -31,7 +31,18 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
-          QImage  *origimg  = viewParams->m_canvasImage;
+    switch( viewParams->m_projection ) {
+        case Spherical:
+            sphericalColorize(viewParams);
+            break;
+        case Equirectangular:
+            rectangularColorize(viewParams);
+    }
+}
+
+void TextureColorizer::sphericalColorize(ViewParams *viewParams)
+{
+    QImage  *origimg  = viewParams->m_canvasImage;
     const QImage  *coastimg = viewParams->m_coastImage;
     const int      radius   = viewParams->m_radius;
 
@@ -56,7 +67,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
     const bool showRelief = viewParams->m_showRelief;
-#ifndef FLAT_PROJ
+
     if ( radius * radius > imgradius ) {
         for (int y = 0; y < imgheight; ++y) {
 
@@ -153,59 +164,87 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             }
         }
     }
-#else
-        int yCenterOffset =  (int)((float)(2*radius / M_PI) * viewParams->m_planetAxis.pitch());
-        const int ytop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
-        const int ybottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
-        const int xleft = 0;
-        const int xright = imgwidth;
-        for ( int y = ytop; y < ybottom; ++y ) {
-            const int dy = imgry - y;
-            QRgb       *data      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
-            const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
+}
 
-            double  relief = imgrx - xleft + bendReliefm * dy ;
- 
-            for ( int x = xleft;
-                  x < xright;
-                  ++x, ++data, ++coastdata, relief -= 1.0 )
-            {
-                // Cheap Embosss / Bumpmapping
+void TextureColorizer::rectangularColorize(ViewParams *viewParams)
+{
+    QImage  *origimg  = viewParams->m_canvasImage;
+    const QImage  *coastimg = viewParams->m_coastImage;
+    const int      radius   = viewParams->m_radius;
 
-                const uchar grey = *data & 0x000000ff; // qBlue(*data);
+    const int  imgheight = origimg->height();
+    const int  imgwidth  = origimg->width();
+    const int  imgrx     = imgwidth / 2;
+    const int  imgry     = imgheight / 2;
+    const int  imgradius = imgrx * imgrx + imgry * imgry;
 
-                emboss.buffer = emboss.buffer >> 8;
-                emboss.gpuint.x4 = grey;	
+    const uint  landoffscreen = qRgb(255,0,0);
+    // const uint seaoffscreen = qRgb(0,0,0);
+    const uint lakeoffscreen = qRgb(0,255,0);
+    // const uint glaciercolor = qRgb(200,200,200);
 
-                if ( showRelief == true && emboss.gpuint.x1 > grey ) {
-                    bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
+    int     bump = 0;
+    GpFifo  emboss;
+    emboss.buffer = 0;
 
-                    // Apply "spherical" bumpmapping 
-                    // bump *= cos( bendRelief * sqrt(((imgrx-x)^2+(imgry-y)^2)));
+    double  bendradius = 0;
+    const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
+    const double  bendReliefx = 0.41 * bendRelief;
+    const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
-                    // very cheap approximation:
-                    // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
-                    // cos(x) ~= 1-x^2
+    const bool showRelief = viewParams->m_showRelief;
+    int yCenterOffset =  (int)((float)(2*radius / M_PI) * viewParams->m_planetAxis.pitch());
+    const int ytop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
+    const int ybottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
+    const int xleft = 0;
+    const int xright = imgwidth;
 
-                    bendradius = bendReliefx * relief;
-                    bump *= qRound( 1.0 - bendradius * bendradius );
+    for ( int y = ytop; y < ybottom; ++y ) {
+        const int dy = imgry - y;
+        QRgb       *data      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
+        const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
 
-                    bump &= 0x0f;
-                }
-                else
-                    bump = 0;
+        double  relief = imgrx - xleft + bendReliefm * dy ;
+
+        for ( int x = xleft;
+                x < xright;
+                ++x, ++data, ++coastdata, relief -= 1.0 )
+        {
+            // Cheap Embosss / Bumpmapping
+
+            const uchar grey = *data & 0x000000ff; // qBlue(*data);
+
+            emboss.buffer = emboss.buffer >> 8;
+            emboss.gpuint.x4 = grey;	
+
+            if ( showRelief == true && emboss.gpuint.x1 > grey ) {
+                bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
+
+                // Apply "spherical" bumpmapping 
+                // bump *= cos( bendRelief * sqrt(((imgrx-x)^2+(imgry-y)^2)));
+
+                // very cheap approximation:
+                // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
+                // cos(x) ~= 1-x^2
+
+                bendradius = bendReliefx * relief;
+                bump *= qRound( 1.0 - bendradius * bendradius );
+
+                bump &= 0x0f;
+            }
+            else
+                bump = 0;
 
 
-                if ( *coastdata == landoffscreen )
-                    *data = texturepalette[bump][grey + 0x100]; 
+            if ( *coastdata == landoffscreen )
+                *data = texturepalette[bump][grey + 0x100]; 
+            else {
+                if (*coastdata == lakeoffscreen)
+                *data = texturepalette[bump][0x055];
                 else {
-                    if (*coastdata == lakeoffscreen)
-                    *data = texturepalette[bump][0x055];
-                    else {
-                        *data = texturepalette[bump][grey];
-                    }
+                    *data = texturepalette[bump][grey];
                 }
+            }
         }
     }
-#endif
 }

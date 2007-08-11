@@ -338,11 +338,14 @@ bool MarbleWidget::showGps() const
 
 bool  MarbleWidget::quickDirty() const
 { 
-#ifndef FLAT_PROJ
-    return d->m_model->textureMapper()->interlaced();
-#else
-    return false;
-#endif
+    switch( d->m_viewParams.m_projection ) {
+        case Spherical:
+            return d->m_model->textureMapper()->interlaced();
+            break;
+        case Equirectangular:
+            return false;
+            break;
+    }
 }
 
 
@@ -624,35 +627,47 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat, 
                                   GeoPoint::Unit unit )
 {
+    if( d->m_viewParams.m_projection == Spherical ) {
+        int imgrx  = width() / 2;
+        int imgry  = height() / 2;
 
-    int imgrx  = width() / 2;
-    int imgry  = height() / 2;
+        const double  inverseRadius = 1.0 / (double)(radius());
 
-    const double  inverseRadius = 1.0 / (double)(radius());
+        if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
 
-    if ( radius() > sqrt((x - imgrx)*(x - imgrx) + (y - imgry)*(y - imgry)) ) {
+            double qy = inverseRadius * (double)(y - imgry);
+            double qr = 1.0 - qy * qy;
+            double qx = (double)(x - imgrx) * inverseRadius;
 
-        double qy = inverseRadius * (double)(y - imgry);
-        double qr = 1.0 - qy * qy;
-        double qx = (double)(x - imgrx) * inverseRadius;
+            double qr2z = qr - qx * qx;
+            double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
 
-        double qr2z = qr - qx * qx;
-        double qz = (qr2z > 0.0) ? sqrt( qr2z ) : 0.0;	
+            Quaternion  qpos( 0, qx, qy, qz );
+            qpos.rotateAroundAxis( planetAxis() );
+            qpos.getSpherical( lon, lat );
 
-        Quaternion  qpos( 0, qx, qy, qz );
-        qpos.rotateAroundAxis( planetAxis() );
-        qpos.getSpherical( lon, lat );
-
-        if ( unit == GeoPoint::Degree )
-        {
-            lat *= -RAD2DEG;
-            lon *= +RAD2DEG;
+            if ( unit == GeoPoint::Degree )
+            {
+                lat *= -RAD2DEG;
+                lon *= +RAD2DEG;
+            }
+            return true;
         }
-
-        return true;
+        else {
+            return false;
+        }
     }
-    else {
-        return false;
+    if( d->m_viewParams.m_projection == Equirectangular ) {
+        float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
+        float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
+        int xPixels = x - width()/2;
+        int yPixels = y - height()/2;
+        double pixel2rad = M_PI / (2 * radius());
+        lat = yPixels * pixel2rad + centerLat;
+        lon = xPixels * pixel2rad + centerLon;
+        double rad2deg = 180.0/M_PI;
+        lat *= rad2deg;
+        lon *= rad2deg;
     }
 }
 
@@ -676,7 +691,6 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
         Quaternion  qpos( 0, qx, qy, qz );
         qpos.rotateAroundAxis( planetAxis() );
-        
         q = qpos;
 
         return true;

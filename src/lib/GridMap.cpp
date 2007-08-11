@@ -155,7 +155,7 @@ void GridMap::createCircles( const int lonNum, const int latNum )
     // Universal prime meridian
     createCircle( + 0,      Longitude );
 
-    for ( int i = 1; i <= lonNum; ++i ) {
+    for ( int i = 0; i <= lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
         createCircle( i * M_PI / lonNum,          Longitude, cutOff );
         createCircle( i * M_PI / lonNum + M_PI, Longitude, cutOff );	

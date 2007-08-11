@@ -57,12 +57,15 @@ class GpsLayer : public AbstractLayer
     
     QVector<GpxFile*>   *m_files;
     
+//FIXME: Those variables are needed in paintCurrentPosition 
+// otherwise gives a compiling error
+    TrackPoint          *m_gpsCurrentPosition;
+    TrackPoint          *m_gpsPreviousPosition;
+
 #ifdef HAVE_LIBGPS
     gpsmm               *m_gpsd;
     struct gps_data_t   *m_gpsdData;
     
-    TrackPoint          *m_gpsCurrentPosition;
-    TrackPoint          *m_gpsPreviousPosition;
     TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
     TrackSegment        *m_gpsTrackSeg;

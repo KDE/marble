@@ -34,6 +34,9 @@ class MeasureTool : public QObject
     MeasureTool( QObject *parent = 0 );
 
     void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool );
+    void  sphericalPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
+    void  rectangularPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
+
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
     void  paintTotalDistanceLabel( ClipPainter*, int, int, double );
 
@@ -52,7 +55,14 @@ class MeasureTool : public QObject
                             int imgrx, int imgry, int radius, 
                             bool antialiasing );
 
- protected:
+    void  sphericalDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
+                            int imgrx, int imgry, int radius, 
+                            bool antialiasing );
+
+    void  rectangularDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
+                            int imgrx, int imgry, int radius, 
+                            bool antialiasing );
+
     double  m_totalDistance;
 
     QFont   m_font_regular;
@@ -68,6 +78,10 @@ class MeasureTool : public QObject
     QPixmap m_empty;
 
     bool    m_useworkaround;
+    //Needed for the flat projection
+    double m_centerLat;
+    double m_centerLon;
+    double m_xyFactor;
 };
 
 

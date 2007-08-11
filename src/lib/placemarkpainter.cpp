@@ -382,7 +382,6 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
 #endif
     // planetAxis.display();
 
-    Quaternion  invplanetAxis = planetAxis.inverse();
     Quaternion  qpos;
 
     painter->setPen(QColor(Qt::black));
@@ -398,7 +397,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
 
     float const centerLat =  planetAxis.pitch();
     float const centerLon = -planetAxis.yaw();
-    double xyFactor = (float)(2 * viewParams->m_radius) / M_PI;
+    double const xyFactor = 2 * viewParams->m_radius / M_PI;
     double degX;
     double degY;
 
