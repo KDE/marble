@@ -176,7 +176,7 @@ void TextureColorizer::rectangularColorize(ViewParams *viewParams)
     const int  imgwidth  = origimg->width();
     const int  imgrx     = imgwidth / 2;
     const int  imgry     = imgheight / 2;
-    const int  imgradius = imgrx * imgrx + imgry * imgry;
+    //const int  imgradius = imgrx * imgrx + imgry * imgry;
 
     const uint  landoffscreen = qRgb(255,0,0);
     // const uint seaoffscreen = qRgb(0,0,0);
