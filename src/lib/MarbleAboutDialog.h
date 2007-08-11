@@ -18,17 +18,24 @@
 #define MARBLEABOUTDIALOG_H
 
 
+#include <QDialog>
+
 #include "marble_export.h"
 
-#include "ui_MarbleAboutDialog.h"
 
 
-class MARBLE_EXPORT MarbleAboutDialog : public QDialog, private Ui::MarbleAboutDialog
+class MarbleAboutDialogPrivate;
+
+
+class MARBLE_EXPORT MarbleAboutDialog : public QDialog
 {
     Q_OBJECT
 
  public:
     MarbleAboutDialog(QWidget *parent = 0);
+
+ private:
+    MarbleAboutDialogPrivate  * const d;
 };
 
 

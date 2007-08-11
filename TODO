@@ -43,7 +43,7 @@ Misc
    - (SearchListView) does not have any private members                 done
    - MarbleNavigator                                                    --
    - MapTheme                                                           --
-   - KAtlasAboutDialog                                                  --
+   - MarbleAboutDialog                                                  done
    - ViewParams                                                         --
  * Make the MarbleWidget library have a version number.  See            ----
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.

@@ -32,23 +32,32 @@
 #include "MarbleDirs.h"
 
 
-MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
-    : QDialog( parent )
+class MarbleAboutDialogPrivate
 {
-    setupUi( this );
+public: 
+    Ui::MarbleAboutDialog  uiWidget;
+};
 
-    m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
-    m_pMarbleAboutBrowser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
+
+MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
+    : QDialog( parent ),
+      d( new MarbleAboutDialogPrivate )
+{
+    d->uiWidget.setupUi( this );
+
+    d->uiWidget.m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
+    d->uiWidget.m_pMarbleAboutBrowser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
     QString filename = MarbleDirs::path( "LICENSE.txt" );
     if( !filename.isEmpty() ) {
         QFile  f( filename );
         if( f.open( QIODevice::ReadOnly ) ) {
             QTextStream ts( &f );
-            m_pMarbleLicenseBrowser->setText( ts.readAll() );
+            d->uiWidget.m_pMarbleLicenseBrowser->setText( ts.readAll() );
         }
         f.close();
     }
 }
+
 
 #include "MarbleAboutDialog.moc"
 
