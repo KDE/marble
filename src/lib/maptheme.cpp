@@ -31,7 +31,6 @@ MapTheme::MapTheme(QObject *parent)
 
 int MapTheme::open( const QString& path )
 {
-//    qDebug() << "Path: " << path;
     QDomDocument  doc( "DeskGlobeML" );
     QFileInfo     fileInfo(path);
     if ( !fileInfo.isFile() ) {
@@ -351,6 +350,7 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
     int  row = 0;
     while ( it.hasNext() ) {
         QString currentmaptheme = it.next();
+
         maptheme->open( MarbleDirs::path( "maps/earth/" + currentmaptheme ) );
 
         mapthememodel->insertRows( row, 1, QModelIndex() );

@@ -509,6 +509,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  goHome();
 
     /**
+     * @brief Get the current map theme
+     * @param maptheme  The name of the new maptheme.
+     */
+    QString mapTheme() const;
+    /**
      * @brief Set a new map theme
      * @param maptheme  The name of the new maptheme.
      */
@@ -657,6 +662,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that the zoom has changed, and to what.
      */
     void  zoomChanged( int );
+
+    void  themeChanged( QString );
 
     void  mouseMoveGeoPosition( QString );
 

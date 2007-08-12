@@ -26,7 +26,8 @@ KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
     setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
     setEditTriggers( QAbstractItemView::NoEditTriggers );
     setIconSize( QSize( 136,136 ) );
-	
+	setSelectionMode( QAbstractItemView::SingleSelection );
+
     connect( this, SIGNAL( pressed( QModelIndex ) ),
                    SLOT( selectedMapTheme( QModelIndex ) ) );
 }

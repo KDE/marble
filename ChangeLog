@@ -1,3 +1,16 @@
+2007-08-13  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleModel.{h,cpp}:
+    * src/lib/maptheme.cpp:
+    * src/lib/katlasthemeselectview.cpp:
+        - Selecting the Maptheme icon in the themeview at startup.
+
+    * src/MarbleTest.cpp:
+    * src/QtMainWindow.cpp:
+    * src/lib/MarbleWidget.{h, cpp}:
+    * src/lib/MarbleControlBox.{ui,h,cpp}:
+        - Saving and retrieving Home Location in settings. 
+
 2007-08-12  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/gps/GpsTracking.{ cpp } : 

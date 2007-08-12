@@ -51,7 +51,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
@@ -225,7 +225,7 @@
            <item row="1" column="1" >
             <widget class="QToolButton" name="goHomeButton" >
              <property name="toolTip" >
-              <string>Reset View</string>
+              <string>Navigate to your 'Home Location'</string>
              </property>
              <property name="whatsThis" >
               <string>Click this button to restore the original zoom level and view angle.</string>

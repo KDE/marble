@@ -37,6 +37,7 @@ class MarbleModelPrivate
  public:
     // View and paint stuff
     MapTheme            *m_maptheme;
+    QString             m_selectedMap;
     TextureColorizer    *m_texcolorizer;
 #ifndef FLAT_PROJ
     GlobeScanlineTextureMapper  *m_texmapper;
@@ -141,9 +142,14 @@ void MarbleModel::stopPolling()
     d->m_timer->stop();
 }
 
+QString MarbleModel::mapTheme() const
+{
+    return d->m_selectedMap;
+}
 
-// Set a particular theme for the map, and load the top 3 tile levels.
-// If these tiles aren't already created, then create them here and now.
+// Set a particular theme for the map and load the appropriate tile level.
+// If the tiles (for the lowest tile level) haven't been created already
+// then create them here and now.
 
 void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
@@ -184,10 +190,9 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 
             connect( &tilecreator, SIGNAL( progress( int ) ),
                      this,         SIGNAL( creatingTilesProgress( int ) ) );
-            qDebug("Before emitting creatingTilesStart() ... ");
+
             emit creatingTilesStart( d->m_maptheme->name(),
                                  d->m_maptheme->description() );
-            qDebug("After emitting creatingTilesStart() ... ");
 #endif
         }
 #ifndef FLAT_PROJ
@@ -224,6 +229,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
         d->m_placemarkpainter = new PlaceMarkPainter( this );
     d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
+    d->m_selectedMap = selectedMap;
+    emit themeChanged( d->m_maptheme->name() );
     notifyModelChanged();
 }
 

@@ -35,6 +35,7 @@
  */
 
 
+class QStandardItemModel;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 
@@ -114,7 +115,9 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
 
+    void selectTheme( QString );
  private:
+    QStandardItemModel *m_mapthememodel;
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );

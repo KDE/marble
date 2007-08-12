@@ -34,6 +34,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+    setUpdatesEnabled( false );
     m_katlascontrol = new KAtlasControl(this);
 
     setWindowTitle( tr("Marble - Desktop Globe") );
@@ -44,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     createStatusBar();
 
     readSettings();
+    setUpdatesEnabled( true );
 }
 
 void MainWindow::createActions()
@@ -279,6 +281,16 @@ void MainWindow::writeSettings()
      settings.setValue( "sideBar", m_sideBarAct->isChecked() );
      settings.setValue( "statusBar", m_statusBarAct->isChecked() );
      settings.endGroup();
+
+     settings.beginGroup("MarbleWidget");
+     double homeLon = 0;
+     double homeLat = 0;
+     int homeZoom = 0;
+     m_katlascontrol->marbleWidget()->home( homeLon, homeLat, homeZoom );
+     settings.setValue( "homeLongitude", homeLon );
+     settings.setValue( "homeLatitude", homeLat );
+     settings.setValue( "homeZoom", homeZoom );
+     settings.endGroup();
 }
 
 void MainWindow::readSettings()
@@ -295,6 +307,15 @@ void MainWindow::readSettings()
      showFullScreen(settings.value("fullScreen", false ).toBool());
      showSideBar(settings.value("sideBar", true ).toBool());
      showStatusBar(settings.value("statusBar", false ).toBool());
+     settings.endGroup();
+
+     settings.beginGroup("MarbleWidget");
+     m_katlascontrol->marbleWidget()->setHome( 
+        settings.value("homeLongitude", -9.4).toDouble(), 
+        settings.value("homeLatitude", 54.8).toDouble(),
+        settings.value("homeZoom", 1050 ).toInt()
+     );
+     m_katlascontrol->marbleWidget()->goHome();
      settings.endGroup();
 }
 

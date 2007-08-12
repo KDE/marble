@@ -129,6 +129,7 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
              this,    SLOT( creatingTilesProgress( int ) ) );
 
+    connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
 
     // Set background: black.
@@ -510,7 +511,7 @@ void MarbleWidget::home( double &lon, double &lat, int& zoom)
 
     d->m_homePoint.geoCoordinates( homeLon, homeLat );
     lon = homeLon * RAD2DEG;
-    lat = homeLat * RAD2DEG;
+    lat = homeLat * -RAD2DEG;
 
     zoom = d->m_homeZoom;
 }
@@ -904,9 +905,16 @@ void MarbleWidget::goHome()
     repaint(); // not obsolete in case the zoomlevel stays unaltered
 }
 
+QString MarbleWidget::mapTheme() const
+{
+    return d->m_model->mapTheme();
+}
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
+    if ( maptheme == d->m_model->mapTheme() )
+        return;
+
     d->m_model->setMapTheme( maptheme, this );
     // Update texture map during the repaint that follows:
     setNeedsUpdate();

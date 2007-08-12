@@ -100,6 +100,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QAbstractListModel* getPlaceMarkModel() const;
 
+    QString mapTheme() const;
+
     void setMapTheme( const QString &selectedMap, QWidget *parent );
 
     void addPlaceMarkFile( const QString& filename );
@@ -148,6 +150,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void creatingTilesStart( const QString& name, const QString& description );
     void creatingTilesProgress( int progress );
 
+    void themeChanged( QString );
     void modelChanged();
     void timeout();
 

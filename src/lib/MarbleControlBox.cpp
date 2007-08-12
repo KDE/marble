@@ -70,13 +70,14 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.setupUi( this );
  
     setFocusPolicy( Qt::NoFocus );
+//    setFocusProxy( d->uiWidget.searchLineEdit );
 
     d->uiWidget.NavigationTab->setBackgroundRole( QPalette::Window );
     d->uiWidget.LegendTab->setBackgroundRole( QPalette::Window );
     d->uiWidget.MapViewTab->setBackgroundRole( QPalette::Window );
     d->uiWidget.CurrentLocationTab->setBackgroundRole( QPalette::Window );
 
-    //  set all of the Side Widget Variables  //
+    //  Iterate through all of the Side Widget values  //
     d->uiWidget.toolBox->setCurrentIndex( 0 );
     d->m_navigationWidget = d->uiWidget.toolBox->currentWidget();
     
@@ -124,8 +125,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                         SIGNAL( centerOn( const QModelIndex& ) ) );
 
     QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
-    QStandardItemModel  *mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.katlasThemeSelectView->setModel( mapthememodel );
+    m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
+    d->uiWidget.katlasThemeSelectView->setModel( m_mapthememodel );
 
     connect( d->uiWidget.katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
@@ -176,6 +177,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
     connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
 
+    connect( d->m_widget, SIGNAL(themeChanged( QString )), this, SLOT( selectTheme( QString )) );
+    selectTheme( d->m_widget->mapTheme() );
+
     connect(d->m_widget, SIGNAL(zoomChanged(int)), 
 	    this,     SLOT(changeZoom(int)));
     connect(this,     SIGNAL(centerOn(const QModelIndex&)),
@@ -183,6 +187,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect(this,     SIGNAL(selectMapTheme(const QString&)),
 	    d->m_widget, SLOT(setMapTheme(const QString&)));
 
+    // connect signals for the Legend
     connect( d->uiWidget.legendBrowser, SIGNAL( toggledLocations( bool ) ),
              d->m_widget,               SLOT( setShowPlaces( bool ) ) );
     connect( d->uiWidget.legendBrowser, SIGNAL( toggledCities( bool ) ),
@@ -225,7 +230,6 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
                                           QString &text )
 {
     int index = d->uiWidget.toolBox->indexOf( widget );
-    qDebug() << text << index;
 
     if( show ) {
         if ( !(index >= 0) ){
@@ -234,7 +238,6 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
                                                  widget, 
                                                  text );
             } else { 
-                qDebug() << "here";
                 d->uiWidget.toolBox->insertItem( 3 ,widget, text );
             }
             widget->show();
@@ -386,5 +389,23 @@ void MarbleControlBox::search()
         d->uiWidget.locationListView->activate();
 }
 
+void MarbleControlBox::selectTheme( QString theme )
+{
+    for ( int row = 0; row < m_mapthememodel->rowCount(); ++row )
+    {
+        QModelIndex itIndexName = m_mapthememodel->index( row, 1, QModelIndex() );
+        QModelIndex itIndex = m_mapthememodel->index( row, 0, QModelIndex() );
+//        qDebug() << "Select Theme: " << theme << " Stored: " << m_mapthememodel->data( itIndexName ).toString();
+        if ( theme == m_mapthememodel->data( itIndexName ).toString() )
+        {
+              if ( itIndexName != d->uiWidget.katlasThemeSelectView->currentIndex() )
+              {
+                d->uiWidget.katlasThemeSelectView->setCurrentIndex( itIndex );
+                d->uiWidget.katlasThemeSelectView->scrollTo( itIndex );
+                break;
+              }
+        }
+    }
+}
 
 #include "MarbleControlBox.moc"
