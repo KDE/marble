@@ -13,6 +13,10 @@
 
 #include <QtGui/QRegion>
 #include <QtGui/QPolygonF>
+#include <QtCore/QObject>
+#include <QtCore/QTemporaryFile>
+
+#include <QtNetwork/QHttp>
 #include "ClipPainter.h"
 #include "Quaternion.h"
 
@@ -31,10 +35,19 @@ class TrackSegment;
 /**
 	@author Andrew Manson <g.real.ate@gmail.com>
 */
-class GpsTracking {
-    enum TrackingMethod { Gps, IP, MobilePhone };
+class GpsTracking : public QObject 
+{
+    Q_OBJECT
+            
+public slots:
+        void    updateIp( );
+    void getData( bool error );
 public:
-    GpsTracking( Track *track, TrackingMethod method= Gps );
+    
+    enum TrackingMethod { Gps, IP, MobilePhone };
+    
+    GpsTracking( Track *track, TrackingMethod method= IP, 
+                 QObject *parent = 0 );
 
     ~GpsTracking();
     
@@ -53,6 +66,7 @@ public:
     QPolygonF           previousDraw;
     
     TrackingMethod      m_trackingMethod;
+    QTemporaryFile gmlFile;
    
     Waypoint            *m_currentPosition;
     TrackPoint          *m_gpsCurrentPosition;
@@ -66,8 +80,18 @@ public:
     TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
     TrackSegment        *m_gpsTrackSeg;
+    
+ 
+    
+private:
+    int                 m_updateDelay;
+    QTemporaryFile      m_tempFile;
+    QString             m_data;
+    
+    QHttp host;
 
 
 };
+
 
 #endif

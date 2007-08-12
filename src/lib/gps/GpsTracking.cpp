@@ -12,13 +12,19 @@
 #include "TrackPoint.h"
 #include "Track.h"
 #include "TrackSegment.h"
+#include "GmlSax.h"
 #include "AbstractLayer/AbstractLayer.h"
+
+#include <QtXml/QXmlInputSource>
+#include <QtXml/QXmlSimpleReader>
 
 #include <QDebug>
 
-GpsTracking::GpsTracking( Track *track, TrackingMethod method)
+GpsTracking::GpsTracking( Track *track, TrackingMethod method, 
+                          QObject *parent ) 
+     :QObject( parent )
 {
-    Q_UNUSED( method );
+    m_trackingMethod = method;
     
     m_gpsCurrentPosition  = new TrackPoint( 0,0 );
     m_gpsPreviousPosition = new TrackPoint( 0,0 );
@@ -26,6 +32,15 @@ GpsTracking::GpsTracking( Track *track, TrackingMethod method)
     
     m_gpsTrack    = track;
     m_gpsTrackSeg = 0;
+    m_updateDelay =0;
+    
+    if (!(gmlFile.open())) {
+        qDebug()<< "now we know!";
+    }
+    
+//      m_tempFile.open();
+    connect( &host, SIGNAL( done(  bool ) ),this, 
+              SLOT( getData( bool )) ) ;
     
 #ifdef HAVE_LIBGPS
     m_gpsd     = new gpsmm();
@@ -86,11 +101,62 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
                               - ( unitVector2 * 9 ) );
 }
 
+void GpsTracking::getData( bool error )
+{
+    if ( !error ) {
+        m_data = QString( host.readAll() );
+        updateIp();
+        
+    }
+}
+
+void GpsTracking::updateIp( )
+{
+    qDebug() << "you bet your ass!" << m_data;
+   
+        
+    
+        
+        
+        
+//         QTextStream out(&gmlFile);
+//         gmlFile.write( host.readAll() );
+//         out << host.readAll();
+//         qDebug() << gmlFile.readAll();
+//         qDebug() << host.readAll();
+//         
+        QXmlInputSource gmlInput/*( &gmlFile )*/;
+        gmlInput.setData( m_data );
+    
+        QXmlSimpleReader gmlReader;
+        GmlSax gmlSaxHandler;
+    
+        gmlReader.setContentHandler( &gmlSaxHandler );
+        gmlReader.setErrorHandler( &gmlSaxHandler );
+    
+        gmlReader.parse( &gmlInput );
+    
+}
+
 QRegion GpsTracking::update(const QSize &canvasSize, double radius,
                             Quaternion invRotAxis) 
 {
-// FIXME: doesn't compile in line 109
-/*
+    switch ( m_trackingMethod ) {
+    case IP:
+        if ( m_updateDelay > 0 ) {
+            --m_updateDelay;
+            return QRegion();
+        }
+        
+        host.setHost( "api.hostip.info" );
+        host.get( "http://api.hostip.info/"/*, &m_tempFile */);
+        m_updateDelay = 15000;
+        
+        
+        return QRegion();
+    }
+
+    
 #ifndef HAVE_LIBGPS
     Q_UNUSED( canvasSize );
     Q_UNUSED( radius );
@@ -106,13 +172,16 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         if (m_gpsTrackSeg == 0 ){
             m_gpsTrackSeg = new TrackSegment();
         }
-        if ( m_gpsPreviousPosition->position() != m_gpsTracking->position() ) {
+        if (!( m_gpsPreviousPosition->position() ==
+                                    m_gpsTracking->position() ) )
+        {
             m_gpsTrackSeg->append( m_gpsPreviousPosition );
             m_gpsPreviousPosition = m_gpsCurrentPosition;
             m_gpsCurrentPosition  = new TrackPoint( *m_gpsTracking );
         }
     } else {
-        if ( m_gpsTrackSeg != 0  && m_gpsTrackSeg->size() > 0 ) {
+
+        if ( m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() > 0 ))  {
             m_gpsTrack->append( m_gpsTrackSeg );
             m_gpsTrackSeg = 0;
         } 
@@ -129,7 +198,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
     return QRegion(temp1).united( QRegion(temp2) );
     
 #endif
-*/
+
     return QRegion();
 
 }
@@ -147,4 +216,6 @@ void GpsTracking::draw( ClipPainter *painter,
     }
 }
 
+
+#include "GpsTracking.moc"
 
