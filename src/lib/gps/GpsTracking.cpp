@@ -89,12 +89,15 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
 QRegion GpsTracking::update(const QSize &canvasSize, double radius,
                             Quaternion invRotAxis) 
 {
+// FIXME: doesn't compile in line 109
+/*
 #ifndef HAVE_LIBGPS
     Q_UNUSED( canvasSize );
     Q_UNUSED( radius );
     Q_UNUSED( invRotAxis );
 #else
-    if ( m_gpsdData != 0 ) {
+
+    if ( m_gpsdData != 0 ){
         m_gpsdData =m_gpsd->query( "p" );
         
         m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
@@ -109,7 +112,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
             m_gpsCurrentPosition  = new TrackPoint( *m_gpsTracking );
         }
     } else {
-        if ( m_gpsTrackSeg != 0  && m_gpsTrackSeg->size() > 0 ) ) {
+        if ( m_gpsTrackSeg != 0  && m_gpsTrackSeg->size() > 0 ) {
             m_gpsTrack->append( m_gpsTrackSeg );
             m_gpsTrackSeg = 0;
         } 
@@ -127,6 +130,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
     
 #endif
     return QRegion();
+*/
 }
 
 void GpsTracking::draw( ClipPainter *painter,

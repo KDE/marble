@@ -1,3 +1,9 @@
+2007-08-12  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/gps/GpsTracking.{ cpp } : 
+	- disabled update method to make Marble compile again.
+	Andrew, please fix your code in line 109. :-)
+
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
 	d-pointerify MarbleNavigator (also Krazy issue 8).
