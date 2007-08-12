@@ -103,6 +103,7 @@ endif(MINGW)
 if (QTONLY)
   set ( marble_UI ${CMAKE_SOURCE_DIR}/src/lib/MarbleControlBox.ui )
 else (QTONLY)
+  message( STATUS "source directory is :  " ${CMAKE_SOURCE_DIR})
   set ( marble_UI ${CMAKE_SOURCE_DIR}/marble/src/lib/MarbleControlBox.ui )
 endif (QTONLY)
 
