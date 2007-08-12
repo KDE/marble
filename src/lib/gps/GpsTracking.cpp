@@ -129,8 +129,9 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
     return QRegion(temp1).united( QRegion(temp2) );
     
 #endif
-    return QRegion();
 */
+    return QRegion();
+
 }
 
 void GpsTracking::draw( ClipPainter *painter,
