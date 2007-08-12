@@ -154,52 +154,59 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         
         
         return QRegion();
-    }
-
-    
+    case Gps:
 #ifndef HAVE_LIBGPS
-    Q_UNUSED( canvasSize );
-    Q_UNUSED( radius );
-    Q_UNUSED( invRotAxis );
+        Q_UNUSED( canvasSize );
+        Q_UNUSED( radius );
+        Q_UNUSED( invRotAxis );
 #else
 
-    if ( m_gpsdData != 0 ){
-        m_gpsdData =m_gpsd->query( "p" );
+        if ( m_gpsdData != 0 ){
+            m_gpsdData =m_gpsd->query( "p" );
         
-        m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
-                                     m_gpsdData->fix.longitude );
+            m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
+                                         m_gpsdData->fix.longitude );
        
-        if (m_gpsTrackSeg == 0 ){
-            m_gpsTrackSeg = new TrackSegment();
-        }
-        if (!( m_gpsPreviousPosition->position() ==
-                                    m_gpsTracking->position() ) )
-        {
-            m_gpsTrackSeg->append( m_gpsPreviousPosition );
-            m_gpsPreviousPosition = m_gpsCurrentPosition;
-            m_gpsCurrentPosition  = new TrackPoint( *m_gpsTracking );
-        }
-    } else {
+            if (m_gpsTrackSeg == 0 ){
+                m_gpsTrackSeg = new TrackSegment();
+            }
+            if (!( m_gpsPreviousPosition->position() ==
+                   m_gpsTracking->position() ) )
+            {
+                m_gpsTrackSeg->append( m_gpsPreviousPosition );
+                m_gpsPreviousPosition = m_gpsCurrentPosition;
+                m_gpsCurrentPosition  = new TrackPoint( *m_gpsTracking
+);
+            }
+        } else {
 
-        if ( m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() > 0 ))  {
-            m_gpsTrack->append( m_gpsTrackSeg );
-            m_gpsTrackSeg = 0;
-        } 
-    }
+            if ( m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() > 0 )) 
+{
+                m_gpsTrack->append( m_gpsTrackSeg );
+                m_gpsTrackSeg = 0;
+            } 
+        }
     
-    construct( canvasSize, radius, invRotAxis );
+        construct( canvasSize, radius, invRotAxis );
     
-    QRect temp1(currentDraw.boundingRect().toRect());
-    QRect temp2(previousDraw.boundingRect().toRect());
+        QRect temp1(currentDraw.boundingRect().toRect());
+        QRect temp2(previousDraw.boundingRect().toRect());
     
-    temp1.adjust( -5, -5, 10, 10);
-    temp2.adjust( -5, -5, 10, 10);
+        temp1.adjust( -5, -5, 10, 10);
+        temp2.adjust( -5, -5, 10, 10);
     
-    return QRegion(temp1).united( QRegion(temp2) );
+        return QRegion(temp1).united( QRegion(temp2) );
     
 #endif
+    
 
+        
+        
+    }
     return QRegion();
+
+    
+
 
 }
 

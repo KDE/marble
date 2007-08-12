@@ -46,9 +46,10 @@ public:
     
     enum TrackingMethod { Gps, IP, MobilePhone };
     
-    GpsTracking( Track *track, TrackingMethod method= IP, 
+    GpsTracking( Track *track, TrackingMethod method= Gps, 
                  QObject *parent = 0 );
 
+    
     ~GpsTracking();
     
     QRegion update(const QSize &canvasSize, double radius,
