@@ -16,6 +16,8 @@
 #include "KdeMainWindow.h"
 #endif
 
+#include <QtGui/QAction>
+
 void MainWindow::showFullScreen( bool isChecked )
 {
     if ( isChecked )
