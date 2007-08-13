@@ -121,11 +121,6 @@ if (PEDANTIC)
 endif (PEDANTIC)
 
 #############################################################
-# Create a compiler flag so we can compile in the data path
-
-ADD_DEFINITIONS(-DMARBLE_DATA_PATH="\\"${MARBLE_DATA_PATH}\\"")
-
-#############################################################
 # Add a compiler def so that we can conditionally compile
 # code in debug mode only (e.g. extra console messages)
 IF (CMAKE_BUILD_TYPE MATCHES Debug)

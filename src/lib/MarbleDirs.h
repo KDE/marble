@@ -24,6 +24,8 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
+#include <config-marble.h>
+
 class MarbleDirs
 {
  public:

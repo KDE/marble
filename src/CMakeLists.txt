@@ -4,6 +4,13 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}/lib
+)
+
 add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
@@ -51,10 +58,6 @@ if (QTONLY)
   endif(NOT WIN32)
 
   include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/lib
-    ${CMAKE_CURRENT_BINARY_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}/lib
     ${QT_INCLUDE_DIR}
   )
 else (QTONLY)
@@ -63,10 +66,6 @@ else (QTONLY)
   endif(NOT WIN32)
 
   include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/lib
-    ${CMAKE_CURRENT_BINARY_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}/lib
     ${KDE4_INCLUDES}
   )
 
@@ -181,3 +180,7 @@ else(WIN32 AND QTONLY)
     #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 endif(WIN32 AND QTONLY)
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/config-marble.h.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/config-marble.h
+)
