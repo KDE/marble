@@ -1,3 +1,8 @@
+2007-08-13  Torsten Rahn  <rahn@kde.org>
+	
+    * src/lib/MarbleControlBox.ui: 
+    Make it compile with Qt 4.2 again.
+
 2007-08-13  Andrew Manson   <g.real.ate@gmail.com>
 
     Added File View Tab to the Marble Control box as a view to the 
