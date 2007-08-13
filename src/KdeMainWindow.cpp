@@ -79,15 +79,10 @@ void MainWindow::setupActions()
              this,            SLOT( copyMap() ) );
     
     // Action: Open a Gpx or a Kml File
-    m_openAct = new KAction( this );
-    actionCollection()->addAction( "openFile", m_openAct );
-    m_openAct->setText( "&Open..." );
-    m_openAct->setIcon( KIcon("document-open") );
-    m_openAct->setShortcut( Qt::CTRL + Qt::Key_O );
+    m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
+    m_openAct->setText( i18n( "&Open Map" ) );
 //     m_openAct->setStatusTip( tr( "Open a file for viewing on
 //             Marble"));
-     connect( m_openAct,     SIGNAL( triggered( bool ) ),
-              this,          SLOT( openFile() ) );
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( quit() ), actionCollection() );
