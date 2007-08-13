@@ -37,6 +37,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             break;
         case Equirectangular:
             rectangularColorize(viewParams);
+            break;
     }
 }
 
@@ -50,6 +51,7 @@ void TextureColorizer::sphericalColorize(ViewParams *viewParams)
     const int  imgwidth  = origimg->width();
     const int  imgrx     = imgwidth / 2;
     const int  imgry     = imgheight / 2;
+    // This variable is not used anywhere..
     const int  imgradius = imgrx * imgrx + imgry * imgry;
 
     const uint  landoffscreen = qRgb(255,0,0);

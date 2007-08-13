@@ -142,6 +142,10 @@ void TextureTile::loadTile( int x, int y, int level,
         m_rawtile = temptile;
 
         break;
+      } // !tempfile.isNull()
+      else {
+         qDebug() << "Image load failed for: " + 
+           absfilename.toLocal8Bit();
       }
     }
     else {

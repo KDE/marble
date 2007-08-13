@@ -1,4 +1,18 @@
 2007-08-13  Torsten Rahn  <rahn@kde.org>
+	
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/gps/Track.cpp:
+    * src/lib/TileCreator.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/TextureTile.cpp:
+    * src/lib/texcolorizer.cpp:
+    * CMakeLists.txt:
+
+        Patch by Tim Sutton of QGIS fame. Introduces 
+	some fixes and more careful coding to 
+	TileCreator, some minor fixes and qDebug statements.
+
+2007-08-13  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleModel.{h,cpp}:
     * src/lib/maptheme.cpp:

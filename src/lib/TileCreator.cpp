@@ -52,12 +52,15 @@ void TileCreator::createTiles()
     QImageReader testImage( m_sourceDir );
 
     QVector<QRgb> grayScalePalette;
-    for ( int cnt = 0; cnt <= 255; cnt++) {
+    for (unsigned int cnt = 0; cnt <= 255; cnt++) {
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
-    int  imageWidth  = testImage.size().width();
-    int  imageHeight = testImage.size().height();
+    unsigned int  imageWidth  = testImage.size().width();
+    unsigned int  imageHeight = testImage.size().height();
+    qDebug("TileCreator::createTiles() image dimensions" + 
+        QString::number(imageWidth).toLocal8Bit() +
+        " x " + QString::number(imageHeight).toLocal8Bit());
 #if 0
       if ( imageWidth > 10800 || imageHeight > 10800 ){
           qDebug("Install map too large!");
@@ -74,17 +77,17 @@ void TileCreator::createTiles()
     if ( needsScaling ) qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
 
-    int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
+    unsigned int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
 
-    int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
+    unsigned int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
     qDebug() << "Maximum tile level: " << maxTileLevel;
 
     if ( QDir( m_targetDir ).exists() == false ) 
         ( QDir::root() ).mkpath( m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
-    int tileLevel = 0;
-    int totalTileCount = 0;
+    unsigned int tileLevel = 0;
+    unsigned int totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
         totalTileCount += TileLoader::levelToRow( tileLevel )
@@ -94,12 +97,12 @@ void TileCreator::createTiles()
 
     qDebug() << totalTileCount << " tiles to be created in total.";
 
-    int mmax = TileLoader::levelToColumn( maxTileLevel );
-    int nmax = TileLoader::levelToRow( maxTileLevel );
+    unsigned int mmax = TileLoader::levelToColumn( maxTileLevel );
+    unsigned int nmax = TileLoader::levelToRow( maxTileLevel );
 
     // Loading each row at highest spatial resolution and croping tiles
-    int percentCompleted = 0;
-    int createdTilesCount = 0;
+    unsigned int percentCompleted = 0;
+    unsigned int createdTilesCount = 0;
     QString tileName;
 
     // Creating directory structure for the highest level
@@ -108,14 +111,14 @@ void TileCreator::createTiles()
     if ( !QDir( dirName ).exists() ) 
         ( QDir::root() ).mkpath( dirName );
 
-    for ( int n = 0; n < nmax; n++ ) {
+    for ( unsigned int n = 0; n < nmax; n++ ) {
         QString dirName( m_targetDir
                          + QString("%1/%2").arg(maxTileLevel).arg( n, tileDigits, 10, QChar('0') ) );
         if ( !QDir( dirName ).exists() ) 
             ( QDir::root() ).mkpath( dirName );
     }
 
-    for ( int n = 0; n < nmax; n++ ) {
+    for ( unsigned int n = 0; n < nmax; n++ ) {
         QApplication::processEvents(); 
 
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
@@ -137,7 +140,7 @@ void TileCreator::createTiles()
         if ( row.isNull() ) 
             qDebug() << "Read-Error! Null QImage!";
 
-        for ( int m = 0; m < mmax; m++ ) {
+        for ( unsigned int m = 0; m < mmax; m++ ) {
             QApplication::processEvents(); 
 
             QImage tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
@@ -169,9 +172,9 @@ void TileCreator::createTiles()
     // them together four by four.
 
     while( tileLevel >= 0 ) {
-        int nmaxit =  TileLoader::levelToRow( tileLevel );;
+        unsigned int nmaxit =  TileLoader::levelToRow( tileLevel );;
 
-        for ( int n = 0; n < nmaxit; n++ ) {
+        for ( unsigned int n = 0; n < nmaxit; n++ ) {
             QString  dirName( m_targetDir
                               + QString("%1/%2").arg(tileLevel).arg( n, tileDigits, 10, QChar('0') ) );
 
@@ -179,8 +182,8 @@ void TileCreator::createTiles()
             if ( !QDir( dirName ).exists() ) 
                 ( QDir::root() ).mkpath( dirName );
 
-            int  mmaxit = TileLoader::levelToColumn( tileLevel );;
-            for ( int m = 0; m < mmaxit; m++ ) {
+            unsigned int  mmaxit = TileLoader::levelToColumn( tileLevel );;
+            for ( unsigned int m = 0; m < mmaxit; m++ ) {
 
                 tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tileLevel + 1 ).arg( 2*n, tileDigits, 10, QChar('0') ).arg( 2*m, tileDigits, 10, QChar('0') );
                 QImage  img_topleft( tileName );
@@ -201,13 +204,13 @@ void TileCreator::createTiles()
                     tile.setColorTable( grayScalePalette );
                     uchar* destLine;
 
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topleft.scanLine( 2 * y );
-                        for ( int x = 0; x < tileSize / 2; ++x )
+                        for ( unsigned int x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2*x ];
                     }
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topright.scanLine( 2 * y );
                         for ( int x = tileSize / 2; x < tileSize; ++x )
@@ -229,13 +232,13 @@ void TileCreator::createTiles()
                 else {
                     QRgb* destLine;
 
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
                         for ( int x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2 * x ];
                     }
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
                         for ( int x = tileSize / 2; x < tileSize; ++x )
@@ -284,10 +287,10 @@ void TileCreator::createTiles()
  
     tileLevel = 0;
     while ( tileLevel <= maxTileLevel ) {
-        int nmaxit =  TileLoader::levelToRow( tileLevel );
-        for ( int n = 0; n < nmaxit; n++) {
-            int mmaxit =  TileLoader::levelToColumn( tileLevel );
-            for ( int m = 0; m < mmaxit; m++) { 
+        unsigned int nmaxit =  TileLoader::levelToRow( tileLevel );
+        for ( unsigned int n = 0; n < nmaxit; n++) {
+            unsigned int mmaxit =  TileLoader::levelToColumn( tileLevel );
+            for ( unsigned int m = 0; m < mmaxit; m++) { 
                 savedTilesCount++;
 
                 tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tileLevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );

@@ -22,7 +22,7 @@ set (MARBLE_DATA_PATH ${CMAKE_INSTALL_PREFIX}/share/marble CACHE STRING "Marble 
 
 
 if(WIN32)
-  OPTION(STATIC_BUILD "Link to static Qt libs (win32 only)?" OFF)
+  set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
 endif(WIN32)
 
 # Variables to test new kml implementation
