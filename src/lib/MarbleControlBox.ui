@@ -5,19 +5,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>319</width>
+    <width>217</width>
     <height>567</height>
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+   <sizepolicy>
+    <hsizetype>0</hsizetype>
+    <vsizetype>0</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize" >
    <size>
-    <width>185</width>
+    <width>150</width>
     <height>0</height>
    </size>
   </property>
@@ -31,6 +33,9 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
    <property name="spacing" >
     <number>6</number>
    </property>
@@ -46,26 +51,35 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>124</width>
-        <height>457</height>
+        <width>201</width>
+        <height>472</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Navigation</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
        <item>
         <layout class="QGridLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
          <item row="5" column="0" >
           <widget class="Line" name="line_2_2" >
            <property name="orientation" >
@@ -86,7 +100,9 @@
          <item row="2" column="0" >
           <widget class="QLineEdit" name="searchLineEdit" >
            <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <sizepolicy>
+             <hsizetype>7</hsizetype>
+             <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -102,7 +118,9 @@
          <item row="3" column="0" >
           <widget class="SearchListView" name="locationListView" >
            <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <sizepolicy>
+             <hsizetype>7</hsizetype>
+             <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -155,6 +173,9 @@
        </item>
        <item>
         <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
          <property name="spacing" >
           <number>6</number>
          </property>
@@ -176,6 +197,12 @@
          </item>
          <item>
           <layout class="QGridLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
            <item row="5" column="1" >
             <widget class="QToolButton" name="zoomOutButton" >
              <property name="toolTip" >
@@ -249,7 +276,9 @@
            <item row="4" column="1" >
             <widget class="QSlider" name="zoomSlider" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="MinimumExpanding" hsizetype="Fixed" >
+              <sizepolicy>
+               <hsizetype>0</hsizetype>
+               <vsizetype>0</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -357,7 +386,9 @@
        <item>
         <widget class="QFrame" name="m_pSpacerFrame" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+          <sizepolicy>
+           <hsizetype>0</hsizetype>
+           <vsizetype>0</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -389,14 +420,17 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>112</height>
+        <width>217</width>
+        <height>412</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Legend</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -414,14 +448,17 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>204</height>
+        <width>217</width>
+        <height>412</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Map View</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
@@ -440,6 +477,14 @@
          <property name="enabled" >
           <bool>false</bool>
          </property>
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>0</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <item>
           <property name="text" >
            <string>Globe</string>
@@ -451,22 +496,6 @@
           </property>
          </item>
         </widget>
-       </item>
-       <item>
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType" >
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <widget class="QLabel" name="mapThemeLabel" >
@@ -481,7 +510,9 @@
        <item>
         <widget class="KAtlasThemeSelectView" name="katlasThemeSelectView" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -504,21 +535,26 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>96</width>
-        <height>34</height>
+        <width>217</width>
+        <height>412</height>
        </rect>
       </property>
       <attribute name="label" >
        <string>Current Location</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
        <item>
         <widget class="QFrame" name="currentLocationFrame" >
          <property name="sizePolicy" >
-          <sizepolicy vsizetype="MinimumExpanding" hsizetype="Preferred" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -530,6 +566,9 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
           <property name="spacing" >
            <number>6</number>
           </property>
@@ -545,6 +584,9 @@
           </item>
           <item>
            <layout class="QHBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
             <property name="spacing" >
              <number>0</number>
             </property>
@@ -567,7 +609,9 @@
             <item>
              <widget class="QComboBox" name="m_latComboBox" >
               <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+               <sizepolicy>
+                <hsizetype>0</hsizetype>
+                <vsizetype>0</vsizetype>
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -617,6 +661,9 @@
           </item>
           <item>
            <layout class="QHBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
             <property name="spacing" >
              <number>0</number>
             </property>
@@ -639,7 +686,9 @@
             <item>
              <widget class="QComboBox" name="m_lonComboBox" >
               <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+               <sizepolicy>
+                <hsizetype>0</hsizetype>
+                <vsizetype>0</vsizetype>
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -686,11 +735,17 @@
           </item>
           <item>
            <layout class="QVBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
             <property name="spacing" >
              <number>6</number>
             </property>
             <item>
              <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
               <property name="spacing" >
                <number>6</number>
               </property>
@@ -718,6 +773,9 @@
             </item>
             <item>
              <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
               <property name="spacing" >
                <number>6</number>
               </property>
@@ -745,6 +803,9 @@
             </item>
             <item>
              <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
               <property name="spacing" >
                <number>6</number>
               </property>
@@ -775,6 +836,9 @@
             </item>
             <item>
              <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
               <property name="spacing" >
                <number>6</number>
               </property>
@@ -828,7 +892,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>319</width>
+        <width>217</width>
         <height>412</height>
        </rect>
       </property>
@@ -836,6 +900,12 @@
        <string>File View</string>
       </attribute>
       <layout class="QVBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
        <item>
         <widget class="QListView" name="m_fileView" />
        </item>
