@@ -44,6 +44,7 @@ class MainWindow : public KXmlGuiWindow
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
+    void openFile();
 
  private:
     // All the functionality is provided by this widget.
@@ -56,6 +57,7 @@ class MainWindow : public KXmlGuiWindow
     KAction        *m_exportMapAction;
     KAction        *m_printMapAction;
     KAction        *m_copyMapAction;
+    KAction        *m_openAct;
 };
 
  

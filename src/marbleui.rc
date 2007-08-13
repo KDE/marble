@@ -1,0 +1,15 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="marble" version="1">
+
+<MenuBar>
+	<Menu name="&amp;file" noMerge="1">
+		<Action name="printMap"/>
+		<Action name="exportMap"/>
+                <Action name="openFile"/>
+	</Menu>
+        <Menu name="&amp;edit" noMerge="1">
+		<Action name="copyMap"/>
+        </Menu>
+</MenuBar>
+
+</kpartgui>

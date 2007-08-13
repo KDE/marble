@@ -245,8 +245,10 @@ void MainWindow::aboutMarble()
 
 void MainWindow::openFile()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open File"), QString(), tr("GPS Data (*.gpx);;KML (*.kml)"));
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                            QString(), 
+                            tr("GPS Data(*.gpx);;KML(*.kml)"));
 
     if ( ! fileName.isNull() ) {
         QString extension = fileName.section( '.', -1 );
@@ -254,8 +256,11 @@ void MainWindow::openFile()
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
             m_katlascontrol->marbleWidget()->openGpxFile( fileName );
         }
-        else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-            m_katlascontrol->marbleWidget()->addPlaceMarkFile( fileName );
+        else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
+                  == 0 ) 
+        {
+            m_katlascontrol->marbleWidget()->addPlaceMarkFile( 
+                                                            fileName);
         }
     }
 }

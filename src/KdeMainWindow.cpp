@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(m_katlascontrol);
 
     setupActions();
+    setXMLFile("marbleui.rc");
 
     // Create the statusbar and populate it with initial data.
     createStatusBar();
@@ -76,6 +77,17 @@ void MainWindow::setupActions()
     m_copyMapAction->setShortcut( Qt::CTRL + Qt::Key_C );
     connect( m_copyMapAction, SIGNAL( triggered( bool ) ),
              this,            SLOT( copyMap() ) );
+    
+    // Action: Open a Gpx or a Kml File
+    m_openAct = new KAction( this );
+    actionCollection()->addAction( "openFile", m_openAct );
+    m_openAct->setText( "&Open..." );
+    m_openAct->setIcon( KIcon("document-open") );
+    m_openAct->setShortcut( Qt::CTRL + Qt::Key_O );
+//     m_openAct->setStatusTip( tr( "Open a file for viewing on
+//             Marble"));
+     connect( m_openAct,     SIGNAL( triggered( bool ) ),
+              this,          SLOT( openFile() ) );
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( quit() ), actionCollection() );
@@ -151,6 +163,32 @@ void MainWindow::copyMap()
     QClipboard  *clipboard = QApplication::clipboard();
 
     clipboard->setPixmap( mapPixmap );
+}
+
+void MainWindow::openFile()
+{
+    QString fileName;
+    fileName = KFileDialog::getOpenFileName( KUrl(),
+                                    QString("*.gpx|GPS Data\n *.kml"),
+                                            this, tr("Open File")
+                                           );/*
+    fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                            QString(), 
+                            tr("GPS Data(*.gpx);;KML(*.kml)"));*/
+
+    if ( ! fileName.isNull() ) {
+        QString extension = fileName.section( '.', -1 );
+
+        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
+            m_katlascontrol->marbleWidget()->openGpxFile( fileName );
+        }
+        else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
+                  == 0 ) 
+        {
+            m_katlascontrol->marbleWidget()->addPlaceMarkFile( 
+                                          fileName);
+        }
+    }
 }
 
 
