@@ -1,3 +1,9 @@
+2007-08-13  Pino Toscano  <pino@kde.org>
+
+    * src/KdeMainWindow:
+    * src/marbleui.rc:
+        - Make the KDE GUI look more like a KDE application.
+
 2007-08-13  Torsten Rahn  <rahn@kde.org>
 	
     * src/lib/MarbleWidget.cpp:
