@@ -1,3 +1,12 @@
+2007-08-13  Torsten Rahn  <rahn@kde.org>
+	
+	- adding window manager application icon
+	- adding What's this icon to the ressource file.
+
+    * src/marble.qrc
+    * src/QtMainWindow.cpp
+    * src/icons/marble.png
+
 2007-08-13  Pino Toscano  <pino@kde.org>
 
     * src/KdeMainWindow:

@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     m_katlascontrol = new KAtlasControl(this);
 
     setWindowTitle( tr("Marble - Desktop Globe") );
+    setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget(m_katlascontrol);
 
     createActions();

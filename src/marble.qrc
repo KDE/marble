@@ -13,5 +13,7 @@
         <file>icons/document-print.png</file>
         <file>icons/edit-copy.png</file>
         <file>icons/marble.png</file>
+	<file>icons/help-contents.png</file>
+	<file>icons/help-whatsthis.png</file>
     </qresource>
 </RCC>
