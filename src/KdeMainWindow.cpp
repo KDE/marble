@@ -12,10 +12,7 @@
 #include "KdeMainWindow.h"
 
 #include <QClipboard>
-//#include <QtGui/QMessageBox>
 #include <QtGui/QLabel>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
 #include <QtGui/QPainter>
 
 #include <KApplication>
@@ -27,9 +24,8 @@
 #include <KMessageBox>
 #include <KFileDialog>
 #include <KToggleFullScreenAction>
+#include <KPrinter>
 
-
-// #include <KPrinter>
 // #include <KPrintDialogPage>
 
 
@@ -97,7 +93,7 @@ void MainWindow::createStatusBar()
     // This hides the normal statusbar contents until clearMessage() is called.
     //statusBar()->showMessage( i18n( "Ready" ) );
 
-    m_zoomLabel = new QLabel();
+    m_zoomLabel = new QLabel( statusBar() );
     statusBar()->addWidget(m_zoomLabel);
 }
 
@@ -120,7 +116,7 @@ void MainWindow::exportMapScreenShot()
     if ( !fileName.isEmpty() ) {
         bool  success = mapPixmap.save( fileName );
         if ( !success ) {
-            KMessageBox::error( this, i18nc( "Appname", "Marble" ),
+            KMessageBox::error( this, i18nc( "Application name", "Marble" ),
                                 i18n( "An error occurred while trying to save the file.\n" ),
                                 KMessageBox::Notify );
         }
@@ -132,14 +128,13 @@ void MainWindow::printMapScreenShot()
 {
     QPixmap       mapPixmap = m_katlascontrol->mapScreenShot();
     QSize         printSize = mapPixmap.size();
-    QPrinter     *printer = new QPrinter();
-    QPrintDialog  printDialog( printer, this );
+    KPrinter      printer;
 
-    if ( printDialog.exec() == QDialog::Accepted ) {
+    if ( printer.setup( this ) ) {
 
-        QRect  mapPageRect = printer->pageRect();
+        QRect  mapPageRect = printer.pageRect();
 
-        printSize.scale( ( printer->pageRect() ).size(), Qt::KeepAspectRatio );
+        printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
 
         QPoint  printTopLeft( mapPageRect.x() + mapPageRect.width() / 2
                               - printSize.width() / 2,
@@ -147,7 +142,7 @@ void MainWindow::printMapScreenShot()
                               - printSize.height() / 2 );
 
         QRect     mapPrintRect( printTopLeft, printSize );
-        QPainter  painter( printer );
+        QPainter  painter( &printer );
 
         painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
     }
@@ -166,8 +161,8 @@ void MainWindow::openFile()
 {
     QString fileName;
     fileName = KFileDialog::getOpenFileName( KUrl(),
-                                    QString("*.gpx|GPS Data\n *.kml"),
-                                            this, tr("Open File")
+                                    i18n("*.gpx|GPS Data\n*.kml"),
+                                            this, i18n("Open File")
                                            );/*
     fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                             QString(), 
