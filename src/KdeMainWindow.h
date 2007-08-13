@@ -44,6 +44,8 @@ class MainWindow : public KXmlGuiWindow
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
+    void  showFullScreen( bool );
+    void  showSideBar( bool );
     void openFile();
 
  private:
@@ -57,6 +59,8 @@ class MainWindow : public KXmlGuiWindow
     KAction        *m_exportMapAction;
     KAction        *m_printMapAction;
     KAction        *m_copyMapAction;
+    KAction        *m_sideBarAct;
+    KAction        *m_fullScreenAct;
     KAction        *m_openAct;
 };
 

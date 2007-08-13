@@ -2,9 +2,14 @@
 <kpartgui name="marble" version="1">
 
 <MenuBar>
-	<Menu name="&amp;file">
+  <Menu name="file">
+    <text>&amp;File</text>
 		<Action name="exportMap"/>
 	</Menu>
+  <Menu name="settings">
+    <text>&amp;Settings</text>
+    <Action name="options_show_sidebar" group="show_merge"/>
+  </Menu>
 </MenuBar>
 
 </kpartgui>

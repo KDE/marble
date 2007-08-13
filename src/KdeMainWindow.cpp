@@ -26,6 +26,7 @@
 #include <KStatusBar>
 #include <KMessageBox>
 #include <KFileDialog>
+#include <KToggleFullScreenAction>
 
 
 // #include <KPrinter>
@@ -75,6 +76,18 @@ void MainWindow::setupActions()
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( quit() ), actionCollection() );
+
+    m_sideBarAct = new KAction( i18n("Show &Navigation Panel"), this );
+    actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
+    m_sideBarAct->setShortcut( Qt::Key_F9 );
+    m_sideBarAct->setCheckable( true );
+    m_sideBarAct->setChecked( true );
+    m_sideBarAct->setStatusTip( i18n( "Show Navigation Panel" ) );
+    connect( m_sideBarAct, SIGNAL( triggered( bool ) ), this, SLOT( showSideBar( bool ) ) );
+
+    m_fullScreenAct = KStandardAction::fullScreen( 0, 0, this, actionCollection() );
+    connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
+
     setupGUI();
 }
 

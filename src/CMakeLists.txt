@@ -74,6 +74,7 @@ endif (QTONLY)
 set(marble_SRCS
            katlascontrol.cpp
            MarbleTest.cpp
+           MainWindowCommon.cpp
 )
 
 set(marble_HDRS

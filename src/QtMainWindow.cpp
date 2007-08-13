@@ -198,27 +198,6 @@ void MainWindow::copyMap()
     clipboard->setPixmap( mapPixmap );
 }
 
-void MainWindow::showFullScreen( bool isChecked )
-{
-    if ( isChecked )
-    {
-        QWidget::showFullScreen();
-    }
-    else
-    {
-        showNormal();
-    }
-
-    m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
-}
-
-void MainWindow::showSideBar( bool isChecked )
-{
-    m_katlascontrol->setSideBarShown( isChecked );
-
-    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
-}
-
 void MainWindow::showStatusBar( bool isChecked )
 {
     if ( isChecked )
