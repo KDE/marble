@@ -180,6 +180,11 @@ else(WIN32 AND QTONLY)
     #install (TARGETS marble DESTINATION ${LIB_INSTALL_DIR} )
 endif(WIN32 AND QTONLY)
 
+# install the XML GUI file
+if( NOT QTONLY )
+    install( FILES marbleui.rc DESTINATION ${DATA_INSTALL_DIR}/marble )
+endif( NOT QTONLY )
+
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/config-marble.h.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/config-marble.h

@@ -259,9 +259,3 @@ install( FILES
            marble_export.h
            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
-
-# install the XML GUI file
-if( NOT QTONLY )
-    install( FILES marbleui.rc  DESTINATION  ${DATA_INSTALL_DIR}/marble )
-endif( NOT QTONLY )
-
