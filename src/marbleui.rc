@@ -3,12 +3,8 @@
 
 <MenuBar>
 	<Menu name="&amp;file">
-		<Action name="printMap"/>
 		<Action name="exportMap"/>
 	</Menu>
-        <Menu name="&amp;edit" noMerge="1">
-		<Action name="copyMap"/>
-        </Menu>
 </MenuBar>
 
 </kpartgui>

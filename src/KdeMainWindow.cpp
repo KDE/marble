@@ -52,13 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setupActions()
 {
     // Action: Print Map
-    m_printMapAction = new KAction( this );
-    actionCollection()->addAction( "printMap", m_printMapAction );
-    m_printMapAction->setText(i18n( "&Print" ) );
-    m_printMapAction->setIcon( KIcon( "document-print" ) );
-    m_printMapAction->setShortcut( Qt::CTRL + Qt::Key_P );
-    connect( m_printMapAction, SIGNAL( triggered( bool ) ), 
-             this,             SLOT( printMapScreenShot() ) );
+    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ), actionCollection() );
 
     // Action: Export Map
     m_exportMapAction = new KAction( this );
@@ -70,13 +64,8 @@ void MainWindow::setupActions()
              this,              SLOT( exportMapScreenShot() ) );
 
     // Action: Copy Map to the Clipboard
-    m_copyMapAction = new KAction( this );
-    actionCollection()->addAction( "copyMap", m_copyMapAction );
+    m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ), actionCollection() );
     m_copyMapAction->setText( i18n( "&Copy Map" ) );
-    m_copyMapAction->setIcon( KIcon( "edit-copy" ) );
-    m_copyMapAction->setShortcut( Qt::CTRL + Qt::Key_C );
-    connect( m_copyMapAction, SIGNAL( triggered( bool ) ),
-             this,            SLOT( copyMap() ) );
     
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
