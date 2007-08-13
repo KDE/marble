@@ -10,6 +10,10 @@
 
 #include "AbstractLayerInterface.h"
 
+AbstractLayerInterface::~AbstractLayerInterface()
+{
+}
+
 bool AbstractLayerInterface::visible() const
 {
     return m_visible;

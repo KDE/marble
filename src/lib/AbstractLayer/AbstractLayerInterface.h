@@ -19,6 +19,8 @@ class BoundingBox;
 class AbstractLayerInterface
 {
   public:
+    virtual ~AbstractLayerInterface();
+
     virtual void draw ( ClipPainter *painter, const QPoint &point )=0;
     
     virtual void draw( ClipPainter *painter, 
