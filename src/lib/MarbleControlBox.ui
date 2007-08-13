@@ -5,21 +5,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>217</width>
-    <height>567</height>
+    <width>236</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="sizePolicy" >
    <sizepolicy>
-    <hsizetype>0</hsizetype>
-    <vsizetype>0</vsizetype>
+    <hsizetype>5</hsizetype>
+    <vsizetype>5</vsizetype>
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize" >
    <size>
-    <width>150</width>
+    <width>185</width>
     <height>0</height>
    </size>
   </property>
@@ -58,7 +58,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>201</width>
+        <width>220</width>
         <height>472</height>
        </rect>
       </property>
@@ -101,7 +101,7 @@
           <widget class="QLineEdit" name="searchLineEdit" >
            <property name="sizePolicy" >
             <sizepolicy>
-             <hsizetype>7</hsizetype>
+             <hsizetype>5</hsizetype>
              <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
@@ -119,7 +119,7 @@
           <widget class="SearchListView" name="locationListView" >
            <property name="sizePolicy" >
             <sizepolicy>
-             <hsizetype>7</hsizetype>
+             <hsizetype>5</hsizetype>
              <vsizetype>0</vsizetype>
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
@@ -278,7 +278,7 @@
              <property name="sizePolicy" >
               <sizepolicy>
                <hsizetype>0</hsizetype>
-               <vsizetype>0</vsizetype>
+               <vsizetype>3</vsizetype>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -420,8 +420,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>217</width>
-        <height>412</height>
+        <width>236</width>
+        <height>409</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -448,8 +448,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>217</width>
-        <height>412</height>
+        <width>251</width>
+        <height>409</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -477,14 +477,6 @@
          <property name="enabled" >
           <bool>false</bool>
          </property>
-         <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>7</hsizetype>
-           <vsizetype>0</vsizetype>
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <item>
           <property name="text" >
            <string>Globe</string>
@@ -496,6 +488,22 @@
           </property>
          </item>
         </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QLabel" name="mapThemeLabel" >
@@ -535,8 +543,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>217</width>
-        <height>412</height>
+        <width>251</width>
+        <height>409</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -553,8 +561,8 @@
         <widget class="QFrame" name="currentLocationFrame" >
          <property name="sizePolicy" >
           <sizepolicy>
-           <hsizetype>7</hsizetype>
-           <vsizetype>7</vsizetype>
+           <hsizetype>5</hsizetype>
+           <vsizetype>3</vsizetype>
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -567,7 +575,7 @@
          </property>
          <layout class="QVBoxLayout" >
           <property name="margin" >
-           <number>9</number>
+           <number>0</number>
           </property>
           <property name="spacing" >
            <number>6</number>
@@ -611,7 +619,7 @@
               <property name="sizePolicy" >
                <sizepolicy>
                 <hsizetype>0</hsizetype>
-                <vsizetype>0</vsizetype>
+                <vsizetype>5</vsizetype>
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -688,7 +696,7 @@
               <property name="sizePolicy" >
                <sizepolicy>
                 <hsizetype>0</hsizetype>
-                <vsizetype>0</vsizetype>
+                <vsizetype>5</vsizetype>
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -888,14 +896,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="m_fileViewTab" >
-      <property name="geometry" >
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>217</width>
-        <height>412</height>
-       </rect>
-      </property>
       <attribute name="label" >
        <string>File View</string>
       </attribute>
