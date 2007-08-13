@@ -37,6 +37,7 @@
 #include "katlaswindrose.h"
 #include "GeoPoint.h"
 
+
 class QStyleOptionGraphicsItem;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
@@ -45,6 +46,7 @@ class MeasureTool;
 class KAtlasTileCreatorDialog;
 class MarbleWidgetPrivate;
 class GpsLayer;
+#include "gps/GpxFileModel.h"
 
 
 /**
@@ -618,6 +620,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Opens a gpx file for viewing on the Marble Widget
      */
     void openGpxFile( QString &filename );
+    
+    GpxFileModel * gpxFileModel();
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used

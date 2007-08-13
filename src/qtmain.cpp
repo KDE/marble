@@ -51,6 +51,10 @@ int main(int argc, char *argv[])
         {
             window->marbleControl()->setCurrentLocationTabShown(true);
         }
+        else if( strcmp( argv[ i ], "--enableFileView" ) ==0 )
+        {
+            window->marbleControl()->setFileViewTabShown(true);
+        }
         else if ( QFile::exists( app.arguments().at( i ) ) )
             ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
     }

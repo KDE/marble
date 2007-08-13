@@ -23,6 +23,7 @@ GpxFile::GpxFile()
     m_waypoints = new WaypointContainer;
     m_routes = new RouteContainer;
     
+    
     setVisible( true );
 }
 
@@ -74,4 +75,20 @@ void GpxFile::addTrack( Track *track )
 void GpxFile::addRoute( Route *route )
 {
     m_routes->append( (AbstractLayerData*)route );
+}
+
+void    GpxFile::setName( const QString &name )
+{
+    m_name = name;
+}
+
+Qt::ItemFlags   GpxFile::flags()
+{
+    return Qt::ItemFlags( Qt::ItemIsSelectable |
+                          Qt::ItemIsUserCheckable);
+}
+
+QString GpxFile::display()
+{
+    return m_name;
 }

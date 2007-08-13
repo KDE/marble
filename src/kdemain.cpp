@@ -48,6 +48,8 @@ int main (int argc, char *argv[])
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
     options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
+    options.add( "enableFileView", 
+                 ki18n( "Enable tab to see gpxFileView") );
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -75,6 +77,10 @@ int main (int argc, char *argv[])
     
     if ( args->isSet( "enableCurrentLocation" ) ) {
         window->marbleControl()->setCurrentLocationTabShown(true);
+    }
+    
+    if ( args->isSet( "enableFileView" ) ) {
+        window->marbleControl()->setFileViewTabShown(true);
     }
 
     // Read the files that are given on the command line.

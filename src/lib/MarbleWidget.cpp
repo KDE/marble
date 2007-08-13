@@ -1047,6 +1047,11 @@ void MarbleWidget::openGpxFile(QString &filename)
     d->m_model->gpsLayer()->loadGpx( filename );
 }
 
+GpxFileModel *MarbleWidget::gpxFileModel()
+{
+    return d->m_model->gpxFileModel();
+}
+
 void MarbleWidget::setQuickDirty( bool enabled )
 {
 #ifndef FLAT_PROJ

@@ -20,6 +20,7 @@
 #include "BoundingBox.h"
 #include "GpxFile.h"
 #include "GpsTracking.h"
+#include "GpxFileModel.h"
 
 #include <QtGui/QPixmap>
 #include <QtCore/QString>
@@ -31,7 +32,8 @@
 #include <QtGui/QRegion>
 #include <cmath>
 
-GpsLayer::GpsLayer( QObject *parent ) : AbstractLayer( parent )
+GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent ) 
+                :AbstractLayer( parent )
 {
     m_currentPosition = new Waypoint( 0,0 );
     
@@ -39,7 +41,8 @@ GpsLayer::GpsLayer( QObject *parent ) : AbstractLayer( parent )
     m_waypoints = new WaypointContainer();
     m_tracks = new TrackContainer();*/
     
-    m_files = new QVector<GpxFile*>();
+//     m_files = new QVector<GpxFile*>();
+    m_fileModel = fileModel;
     
     m_gpsTrack = new Track();
     m_tracking = new GpsTracking( m_gpsTrack );
@@ -77,7 +80,8 @@ void GpsLayer::paintLayer( ClipPainter *painter,
     QPoint *previous=0;
     
     QVector<GpxFile*>::const_iterator it;
-    for( it = m_files->constBegin(); it < m_files->constEnd(); ++it ){
+    for( it = m_fileModel->allFiles()->constBegin(); 
+         it < m_fileModel->allFiles()->constEnd(); ++it ){
         (*it)->draw( painter, canvasSize, radius, invRotAxis, box );
     }
     
@@ -100,7 +104,8 @@ void GpsLayer::changeCurrentPosition( double lat, double lon )
 void GpsLayer::loadGpx( const QString &fileName )
 {
     GpxFile *tempFile = new GpxFile();
-    m_files->append( tempFile );
+//     m_files->append( tempFile );
+   
     
     QFile gpxFile( fileName );
     QXmlInputSource gpxInput( &gpxFile );
@@ -112,5 +117,7 @@ void GpsLayer::loadGpx( const QString &fileName )
     gpxReader.setErrorHandler( &gpxSaxHandler );
     
     gpxReader.parse( &gpxInput );
+    
+    m_fileModel->addFile( tempFile );
 }
 

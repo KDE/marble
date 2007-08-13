@@ -56,6 +56,7 @@ class MarbleModelPrivate
 
     //Gps Stuff
     GpsLayer            *m_gpsLayer;
+    GpxFileModel        *m_gpxFileModel;
 
     QTimer       *m_timer;
 };
@@ -112,7 +113,8 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkmodel = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 
-    d->m_gpsLayer = new GpsLayer();
+    d->m_gpxFileModel = new GpxFileModel;
+    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 }
 
 MarbleModel::~MarbleModel()
@@ -418,6 +420,11 @@ PlaceMarkPainter *MarbleModel::placeMarkPainter() const
 GpsLayer *MarbleModel::gpsLayer()         const
 {
     return d->m_gpsLayer;
+}
+
+GpxFileModel *MarbleModel::gpxFileModel()   const
+{
+    return d->m_gpxFileModel;
 }
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )

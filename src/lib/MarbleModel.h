@@ -44,6 +44,7 @@
 #include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
+#include "gps/GpxFileModel.h"
 
 class ClipPainter;
 class PlaceMark;
@@ -119,6 +120,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 #endif
 
     GpsLayer           *gpsLayer()           const;
+    GpxFileModel       *gpxFileModel()       const;
 
     /**
      * @brief Return whether the Gps Data is visible.

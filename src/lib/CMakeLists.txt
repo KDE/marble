@@ -108,6 +108,7 @@ set(marblewidget_SRCS
            gps/GmlSax.cpp
            gps/GpxSax.cpp
            gps/GpxFile.cpp
+           gps/GpxFileModel.cpp
 	   AbstractLayer/AbstractLayerInterface.cpp
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp

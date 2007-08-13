@@ -29,13 +29,14 @@ class BoundingBox;
 class GpxFile;
 class QRegion;
 class GpsTracking;
+#include "GpxFileModel.h"
 
 
 class GpsLayer : public AbstractLayer
 {
     
  public:
-    GpsLayer( QObject *parent =0 );
+    GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
                             const QSize &canvasSize, double radius,
@@ -52,11 +53,12 @@ class GpsLayer : public AbstractLayer
     QRegion updateGps(const QSize &canvasSize, double radius,
                       Quaternion rotAxis);
 
-    
+    GpxFileModel        *m_fileModel;
  private:
     Waypoint            *m_currentPosition;
     
-    QVector<GpxFile*>   *m_files;
+//     QVector<GpxFile*>   *m_files;
+   
     Track               *m_gpsTrack;
     GpsTracking         *m_tracking;
     

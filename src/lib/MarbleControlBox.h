@@ -107,6 +107,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void setLegendTabShown( bool );
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
+    void setFileViewTabShown( bool );
 
  private Q_SLOTS:
     /// called whenever the user types something new in the search box

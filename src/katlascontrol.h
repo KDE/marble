@@ -59,6 +59,7 @@ class KAtlasControl : public QWidget
     void setLegendTabShown( bool );
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
+    void setFileViewTabShown( bool );
 
  private:
     //MarbleModel       *m_marbleModel;

@@ -12,6 +12,9 @@
 
 #include "AbstractLayer/AbstractLayerInterface.h"
 
+#include <QtCore/Qt>
+#include <QtCore/QString>
+
 class ClipPainter;
 class QPoint;
 class QSize;
@@ -40,11 +43,17 @@ class GpxFile : public AbstractLayerInterface
     void addWaypoint( Waypoint *waypoint );
     void addTrack( Track *track );
     void addRoute( Route *route );
+    void    setName( const QString &name );
+    
+    Qt::ItemFlags   flags();
+    QString         display();
     
  private:
+    QString             m_name;
     WaypointContainer  *m_waypoints;
     TrackContainer      *m_tracks;
     RouteContainer      *m_routes;
 };
 
 #endif
+

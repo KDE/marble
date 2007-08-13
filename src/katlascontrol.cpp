@@ -107,4 +107,9 @@ void KAtlasControl::setCurrentLocationTabShown( bool show )
     m_control->setCurrentLocationTabShown( show );
 }
 
+void KAtlasControl::setFileViewTabShown( bool show )
+{
+    m_control->setFileViewTabShown( show );
+}
+
 #include "katlascontrol.moc"

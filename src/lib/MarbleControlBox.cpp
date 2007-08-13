@@ -51,6 +51,7 @@ class MarbleControlBoxPrivate
     QWidget              *m_legendWidget;
     QWidget              *m_mapViewWidget;
     QWidget              *m_currentLocationWidget;
+    QWidget              *m_fileViewWidget;
 };
 
 
@@ -90,6 +91,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.toolBox->setCurrentIndex( 3 );
     d->m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
     
+    d->uiWidget.toolBox->setCurrentIndex( 4 );
+    d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
+    
 //  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
  //   toolBox->removeItem( 3 ); 
@@ -97,6 +101,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     
     //default
     setCurrentLocationTabShown( false );
+    setFileViewTabShown( false );
 
     setupGpsOption();
 
@@ -152,6 +157,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
+    
+    d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
 
     // Initialize the LegendBrowser
     d->uiWidget.legendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
@@ -351,6 +358,14 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
     QString  title = tr( "Current Location" );
     setWidgetTabShown( d->m_currentLocationWidget, 3, show, title );
 }
+
+void MarbleControlBox::setFileViewTabShown( bool show )
+{
+    QString  title = tr( "File View" );
+    setWidgetTabShown( d->m_fileViewWidget, 4, show, title );
+}
+
+
 
 
 void MarbleControlBox::resizeEvent ( QResizeEvent * )
