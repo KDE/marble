@@ -167,22 +167,22 @@ void MainWindow::printMapScreenShot()
 
     QSize printSize = mapPixmap.size();
 
-    QPrinter* printer = new QPrinter();
+    QPrinter printer;
 
-    QPrintDialog printDialog(printer, this);
+    QPrintDialog printDialog( &printer, this );
 
     if (printDialog.exec() == QDialog::Accepted) {
 
-        QRect mapPageRect = printer->pageRect();
+        QRect mapPageRect = printer.pageRect();
 
-        printSize.scale( ( printer->pageRect() ).size(), Qt::KeepAspectRatio );
+        printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
 
         QPoint printTopLeft( mapPageRect.x() + mapPageRect.width() /2  - printSize.width() /2 ,
                              mapPageRect.y() + mapPageRect.height()/2  - printSize.height()/2 );
 
         QRect mapPrintRect( printTopLeft, printSize );
 
-        QPainter painter( printer );
+        QPainter painter( &printer );
 
         painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
 
