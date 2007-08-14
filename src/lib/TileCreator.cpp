@@ -85,7 +85,7 @@ bool TileCreator::createTiles()
         ( QDir::root() ).mkpath( m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
-    int tileLevel = 0;
+    unsigned int tileLevel = 0;
     unsigned int totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
