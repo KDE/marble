@@ -142,6 +142,11 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
                             Quaternion invRotAxis) 
 {
     switch ( m_trackingMethod ) {
+    case MobilePhone:
+        qDebug("GpsTracking::update - MobilePhone case not handled in " + QString(__FILE__).toLocal8Bit() 
+              + ", line " + QString(__LINE__).toLocal8Bit());
+        exit(1); //force fail
+        break;
     case IP:
         if ( m_updateDelay > 0 ) {
             --m_updateDelay;
@@ -154,6 +159,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         
         
         return QRegion();
+        break;
     case Gps:
 #ifndef HAVE_LIBGPS
         Q_UNUSED( canvasSize );
