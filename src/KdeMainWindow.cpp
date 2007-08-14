@@ -54,7 +54,7 @@ void MainWindow::setupActions()
     // Action: Export Map
     m_exportMapAction = new KAction( this );
     actionCollection()->addAction( "exportMap", m_exportMapAction );
-    m_exportMapAction->setText( i18n( "&Export map" ) );
+    m_exportMapAction->setText( i18n( "&Export Map..." ) );
     m_exportMapAction->setIcon( KIcon( "document-save-as" ) );
     m_exportMapAction->setShortcut( Qt::CTRL + Qt::Key_S );
     connect( m_exportMapAction, SIGNAL(triggered( bool ) ),
@@ -66,7 +66,7 @@ void MainWindow::setupActions()
     
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
-    m_openAct->setText( i18n( "&Open Map" ) );
+    m_openAct->setText( i18n( "&Open Map..." ) );
 //     m_openAct->setStatusTip( tr( "Open a file for viewing on
 //             Marble"));
 
