@@ -62,7 +62,7 @@ bool TileCreator::createTiles()
         QString::number(imageWidth).toLocal8Bit() +
         " x " + QString::number(imageHeight).toLocal8Bit());
 
-    if ( imageWidth > 10800 || imageHeight > 10800 ){
+    if ( imageWidth > 21600 || imageHeight > 10800 ){
         qDebug("Install map too large!");
         return false;
     } 
@@ -85,7 +85,7 @@ bool TileCreator::createTiles()
         ( QDir::root() ).mkpath( m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
-    unsigned int tileLevel = 0;
+    int tileLevel = 0;
     unsigned int totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
