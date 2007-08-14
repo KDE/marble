@@ -1,5 +1,10 @@
 2007-08-13  Torsten Rahn  <rahn@kde.org>
 	
+    * src/lib/TileCreator.{cpp,h}: 
+    Add a return value to createTiles ...
+
+2007-08-13  Torsten Rahn  <rahn@kde.org>
+	
     * src/lib/MarbleControlBox.ui: 
     Make it compile with Qt 4.2 again.
 

@@ -37,7 +37,7 @@ TileCreator::TileCreator(const QString& prefix, const QString& installmap,
 }
 
 
-void TileCreator::createTiles()
+bool TileCreator::createTiles()
 {
 
     QApplication::processEvents(); 
@@ -61,12 +61,11 @@ void TileCreator::createTiles()
     qDebug("TileCreator::createTiles() image dimensions" + 
         QString::number(imageWidth).toLocal8Bit() +
         " x " + QString::number(imageHeight).toLocal8Bit());
-#if 0
-      if ( imageWidth > 10800 || imageHeight > 10800 ){
-          qDebug("Install map too large!");
-          exit(-1);
-      } 
-#endif
+
+    if ( imageWidth > 10800 || imageHeight > 10800 ){
+        qDebug("Install map too large!");
+        return false;
+    } 
 
     // If the image size of the image source doesn't match the expected 
     // geometry we need to smooth-scale the image in advance to match
@@ -138,7 +137,10 @@ void TileCreator::createTiles()
         }
 
         if ( row.isNull() ) 
+        {
             qDebug() << "Read-Error! Null QImage!";
+            return false;
+        }
 
         for ( unsigned int m = 0; m < mmax; m++ ) {
             QApplication::processEvents(); 
@@ -311,7 +313,9 @@ void TileCreator::createTiles()
 
     percentCompleted = 100;
     emit progress( percentCompleted );
-    QApplication::processEvents(); 
+    QApplication::processEvents();
+
+    return true;
 }
 
 

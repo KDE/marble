@@ -30,7 +30,7 @@ class TileCreator : public QObject
     void  progress( int value );
 
  public Q_SLOTS:
-    void  createTiles();
+    bool createTiles();
 
  private:
     QString  m_prefix;
