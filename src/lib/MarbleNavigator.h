@@ -35,7 +35,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
  
     int  minimumZoom() const;
 	
- signals:
+ Q_SIGNALS:
     void goHome();
     void zoomIn();
     void zoomOut();
@@ -47,7 +47,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     void moveDown();
     //void centerOn(const QModelIndex&);
 
- public slots:
+ public Q_SLOTS:
     void changeZoom(int);
 
  protected:
