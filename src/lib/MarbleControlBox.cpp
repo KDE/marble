@@ -52,6 +52,8 @@ class MarbleControlBoxPrivate
     QWidget              *m_mapViewWidget;
     QWidget              *m_currentLocationWidget;
     QWidget              *m_fileViewWidget;
+
+    QStandardItemModel   *m_mapthememodel;
 };
 
 
@@ -130,8 +132,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                         SIGNAL( centerOn( const QModelIndex& ) ) );
 
     QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
-    m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.katlasThemeSelectView->setModel( m_mapthememodel );
+    d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
+    d->uiWidget.katlasThemeSelectView->setModel( d->m_mapthememodel );
 
     connect( d->uiWidget.katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
@@ -406,15 +408,12 @@ void MarbleControlBox::search()
 
 void MarbleControlBox::selectTheme( QString theme )
 {
-    for ( int row = 0; row < m_mapthememodel->rowCount(); ++row )
-    {
-        QModelIndex itIndexName = m_mapthememodel->index( row, 1, QModelIndex() );
-        QModelIndex itIndex = m_mapthememodel->index( row, 0, QModelIndex() );
-//        qDebug() << "Select Theme: " << theme << " Stored: " << m_mapthememodel->data( itIndexName ).toString();
-        if ( theme == m_mapthememodel->data( itIndexName ).toString() )
-        {
-              if ( itIndexName != d->uiWidget.katlasThemeSelectView->currentIndex() )
-              {
+    for ( int row = 0; row < d->m_mapthememodel->rowCount(); ++row ) {
+        QModelIndex itIndexName = d->m_mapthememodel->index( row, 1, QModelIndex() );
+        QModelIndex itIndex = d->m_mapthememodel->index( row, 0, QModelIndex() );
+//        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapthememodel->data( itIndexName ).toString();
+        if ( theme == d->m_mapthememodel->data( itIndexName ).toString() ) {
+              if ( itIndexName != d->uiWidget.katlasThemeSelectView->currentIndex() ) {
                 d->uiWidget.katlasThemeSelectView->setCurrentIndex( itIndex );
                 d->uiWidget.katlasThemeSelectView->scrollTo( itIndex );
                 break;

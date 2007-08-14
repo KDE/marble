@@ -1,3 +1,11 @@
+2007-08-14  Inge Wallin  <inge@lysator.liu.se>
+
+	Maintain binary forward compatibility through d-pointer
+	* src/lib/MarbleControlBox.h: Move private member into private
+	class in cpp file.
+	* src/lib/MarbleControlBox.cpp (class MarbleControlBoxPrivate):
+	m_mapthememodel: new member
+
 2007-08-14  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/GeoPolygon.cpp:

@@ -118,7 +118,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void selectTheme( QString );
  private:
-    QStandardItemModel *m_mapthememodel;
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );
