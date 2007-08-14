@@ -143,8 +143,8 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
 {
     switch ( m_trackingMethod ) {
     case MobilePhone:
-        qDebug("GpsTracking::update - MobilePhone case not handled in " + QString(__FILE__).toLocal8Bit() 
-              + ", line " + QString(__LINE__).toLocal8Bit());
+        qDebug("GpsTracking::update - MobilePhone case not handled in %s, line %d",
+               __FILE__, __LINE__);
         exit(1); //force fail
         break;
     case IP:

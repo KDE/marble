@@ -157,7 +157,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
-    qDebug("Setting map theme to : " + MarbleDirs::path( mapPath ).toLocal8Bit()); 
+    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) ); 
     d->m_maptheme->open( MarbleDirs::path( mapPath ) );
 
     // If this layer is a bitmaplayer, check if the cached tiles for
