@@ -24,7 +24,7 @@
 #include "TileLoader.h"
 
 const int tileDigits = 6;
-const int tileSize = 675;
+const int tileSize   = 675;
 
 TileCreator::TileCreator(const QString& prefix, const QString& installmap,
                          const QString& dem, const QString& targetDir) 
@@ -58,9 +58,8 @@ bool TileCreator::createTiles()
 
     unsigned int  imageWidth  = testImage.size().width();
     unsigned int  imageHeight = testImage.size().height();
-    qDebug("TileCreator::createTiles() image dimensions" + 
-        QString::number(imageWidth).toLocal8Bit() +
-        " x " + QString::number(imageHeight).toLocal8Bit());
+    qDebug() << "TileCreator::createTiles() image dimensions " 
+	     << imageWidth << " x " << imageHeight;
 
     if ( imageWidth > 21600 || imageHeight > 10800 ){
         qDebug("Install map too large!");
@@ -86,7 +85,7 @@ bool TileCreator::createTiles()
 
     // Counting total amount of tiles to be generated for the progressbar
     int tileLevel = 0;
-    unsigned int totalTileCount = 0;
+    int totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
         totalTileCount += TileLoader::levelToRow( tileLevel )
@@ -173,7 +172,7 @@ bool TileCreator::createTiles()
     // Now that we have the tiles at the highest resolution lets build
     // them together four by four.
 
-    while( tileLevel >= 0 ) {
+    while ( tileLevel >= 0 ) {
         unsigned int nmaxit =  TileLoader::levelToRow( tileLevel );;
 
         for ( unsigned int n = 0; n < nmaxit; n++ ) {

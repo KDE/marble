@@ -1,5 +1,7 @@
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/TileCreator.cpp (createTiles): Fix all warnings
+
 	Fix the TileCreator that apparently got destroyed some time ago.
 	* src/lib/TileCreator.cpp (createTiles): Fix infinite loop due to
 	test of unsigned number against >= 0.
