@@ -12,12 +12,15 @@
 #ifndef GPSLAYER_H
 #define GPSLAYER_H
 
+
 #include "AbstractLayer/AbstractLayer.h"
+
 #include "config-libgps.h"
 
 #ifdef HAVE_LIBGPS
 #include <libgpsmm.h>
 #endif
+
 
 class WaypointContainer;
 class Waypoint;
@@ -36,7 +39,7 @@ class GpsLayer : public AbstractLayer
 {
     
  public:
-    GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
+    explicit GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
                             const QSize &canvasSize, double radius,

@@ -39,18 +39,14 @@ class GpsTracking : public QObject
 {
     Q_OBJECT
             
-public slots:
-        void    updateIp( );
-    void getData( bool error );
 public:
     
     enum TrackingMethod { Gps, IP, MobilePhone };
     
-    GpsTracking( Track *track, TrackingMethod method= Gps, 
-                 QObject *parent = 0 );
-
-    
+    explicit GpsTracking( Track *track, TrackingMethod method = Gps, 
+                          QObject *parent = 0 );
     ~GpsTracking();
+
     
     QRegion update(const QSize &canvasSize, double radius,
                    Quaternion invRotAxis);
@@ -63,6 +59,11 @@ public:
                 Quaternion invRotAxis );
     
     
+ public slots:
+    void  updateIp( );
+    void  getData( bool error );
+
+ private:
     QPolygonF           currentDraw;
     QPolygonF           previousDraw;
     
@@ -81,10 +82,7 @@ public:
     TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
     TrackSegment        *m_gpsTrackSeg;
-    
- 
-    
-private:
+
     int                 m_updateDelay;
     QTemporaryFile      m_tempFile;
     QString             m_data;
