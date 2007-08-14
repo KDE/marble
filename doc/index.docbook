@@ -307,7 +307,7 @@
                  </question>
                  <answer>
                      <para>
-                        &marble; aims to be a lightweight fast educational geographical browser that easily runs on any plattform that is supported by Qt. While higher resolution maps would be nice to have they aren't necessary for every user and every use case (just like you don't use a full blown text processor each time you just need a simple editor).
+                        &marble; aims to be a lightweight fast educational geographical browser that easily runs on any plattform that is supported by &Qt;. While higher resolution maps would be nice to have they aren't necessary for every user and every use case (just like you don't use a full blown text processor each time you just need a simple editor).
                         Also notice &marble; is free software and is based on data that can be freely redistributed in the same way that applies to Free Software.
                      </para>
                  </answer>
