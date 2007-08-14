@@ -189,15 +189,6 @@ void MainWindow::printMapScreenShot()
     }
 }
 
-void MainWindow::copyMap()
-{
-    QPixmap mapPixmap = m_katlascontrol->mapScreenShot();
-
-    QClipboard *clipboard = QApplication::clipboard();
-
-    clipboard->setPixmap( mapPixmap );
-}
-
 void MainWindow::showStatusBar( bool isChecked )
 {
     if ( isChecked )

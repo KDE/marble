@@ -17,6 +17,8 @@
 #endif
 
 #include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QClipboard>
 
 void MainWindow::showFullScreen( bool isChecked )
 {
@@ -37,5 +39,13 @@ void MainWindow::showSideBar( bool isChecked )
     m_katlascontrol->setSideBarShown( isChecked );
 
     m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::copyMap()
+{
+    QPixmap      mapPixmap = m_katlascontrol->mapScreenShot();
+    QClipboard  *clipboard = QApplication::clipboard();
+
+    clipboard->setPixmap( mapPixmap );
 }
 
