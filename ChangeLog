@@ -1,5 +1,12 @@
 2007-08-14  Torsten Rahn  <rahn@kde.org>
 
+	* src/lib/GeoPolygon.cpp:
+	Make Marble work with PowerPC.
+	Patch passed on by 
+	Steffen Joeris <steffen.joeris@skolelinux.de>
+
+2007-08-14  Torsten Rahn  <rahn@kde.org>
+
 	* src/lib/MarbleWidget.{cpp,h}:
         Adding method stub to configure MarbleDataDir
 

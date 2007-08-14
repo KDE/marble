@@ -98,7 +98,7 @@ void PntMap::load(const QString &filename)
 #ifdef Q_OS_UNIX
     // MMAP Start
     int          fd;
-    short       *src; 
+    unsigned char* src; 
     struct stat  statbuf;
 
     if ( (fd = open (filename.toLatin1(), O_RDONLY) ) < 0)
@@ -109,8 +109,7 @@ void PntMap::load(const QString &filename)
 
     int  filelength = statbuf.st_size;
 	
-    if ( ( src = (short*) mmap (0, 2*filelength, PROT_READ, MAP_SHARED, fd, 0) )
-         == (short*) (caddr_t) -1 )
+    if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0)) == (unsigned char*) (caddr_t) -1)
         qDebug() << "mmap error for input";
 		
     short  header;
@@ -120,10 +119,10 @@ void PntMap::load(const QString &filename)
 
     const int halfFileLength = filelength / 2;
 
-    for ( int i = 0; i < halfFileLength; i += 3 ) {
-        header = src[i];
-        lat = src[i+1];
-        lon = src[i+2];	
+    for (int i=0; i < filelength; i+=6){
+        header = src[i] | (src[i+1] << 8);
+        lat = src[i+2] | (src[i+3] << 8);
+        lon = src[i+4] | (src[i+5] << 8);   
 
         // Transforming Range of Coordinates to lat [0,ARCMINUTE] ,
         // lon [0,2 * ARCMINUTE]
