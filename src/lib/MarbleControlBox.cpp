@@ -406,7 +406,7 @@ void MarbleControlBox::search()
         d->uiWidget.locationListView->activate();
 }
 
-void MarbleControlBox::selectTheme( QString theme )
+void MarbleControlBox::selectTheme( const QString &theme )
 {
     for ( int row = 0; row < d->m_mapthememodel->rowCount(); ++row ) {
         QModelIndex itIndexName = d->m_mapthememodel->index( row, 1, QModelIndex() );

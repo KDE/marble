@@ -116,7 +116,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
 
-    void selectTheme( QString );
+    void selectTheme( const QString & );
  private:
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
