@@ -352,6 +352,10 @@ bool  MarbleWidget::quickDirty() const
     return false;
 }
 
+QString MarbleWidget::marbleDataDir() const
+{ 
+
+}
 
 void MarbleWidget::zoomView(int zoom)
 {
@@ -1068,6 +1072,10 @@ void MarbleWidget::setQuickDirty( bool enabled )
 #endif
 }
 
+void MarbleWidget::setMarbleDataDir( const QString& dataDir )
+{
+
+}
 
 // This slot will called when the Globe starts to create the tiles.
 

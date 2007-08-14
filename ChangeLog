@@ -1,3 +1,14 @@
+2007-08-14  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/MarbleWidget.{cpp,h}:
+        Adding method stub to configure MarbleDataDir
+
+	* src/lib/TileCreator.{cpp,h}:
+	Adding lots of more qDebugs to catch some 
+	possible errors and safer coding. 
+	Fix for the case where the image is smaller than
+	2 * tileSize x tileSize.
+
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/TileCreator.cpp (createTiles): Fix all warnings

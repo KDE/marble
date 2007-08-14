@@ -337,6 +337,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool  quickDirty() const;
 
+    /**
+     * @brief  Return the directory that contains the Marble data
+     * @return the directory that contains the Marble Data
+     */
+    QString marbleDataDir() const;
+
  public Q_SLOTS:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -628,6 +634,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  enabled  Enable quick and dirty rendering
      */
     void setQuickDirty( bool enabled );
+
+
+    /**
+     * @brief  Set the data directory that contains the Marble data.
+     * @param  dataDir the path that contains the data
+     */
+    void setMarbleDataDir( const QString& dataDir );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.
