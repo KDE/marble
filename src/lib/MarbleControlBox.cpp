@@ -133,9 +133,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
     d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.katlasThemeSelectView->setModel( d->m_mapthememodel );
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapthememodel );
 
-    connect( d->uiWidget.katlasThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
+    connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
 }
 
@@ -413,9 +413,9 @@ void MarbleControlBox::selectTheme( const QString &theme )
         QModelIndex itIndex = d->m_mapthememodel->index( row, 0, QModelIndex() );
 //        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapthememodel->data( itIndexName ).toString();
         if ( theme == d->m_mapthememodel->data( itIndexName ).toString() ) {
-              if ( itIndexName != d->uiWidget.katlasThemeSelectView->currentIndex() ) {
-                d->uiWidget.katlasThemeSelectView->setCurrentIndex( itIndex );
-                d->uiWidget.katlasThemeSelectView->scrollTo( itIndex );
+              if ( itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
+                d->uiWidget.marbleThemeSelectView->setCurrentIndex( itIndex );
+                d->uiWidget.marbleThemeSelectView->scrollTo( itIndex );
                 break;
               }
         }

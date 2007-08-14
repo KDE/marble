@@ -1,5 +1,14 @@
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename katlasthemeselectview into MarbleThemeSelectView:
+	* src/lib/katlasthemeselectview.cpp: rename into
+	MarbleThemeSelectView.cpp:
+	* src/lib/katlasthemeselectview.h: rename into
+	MarbleThemeSelectView.h:
+	* src/lib/MarbleControlBox.ui: refer to new name
+	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/CMakeLists.txt: Reflect name change
+	
 	Krazy issue 22: signals and slots
 	* src/lib/MarbleNavigator.h (MarbleNavigator): Use Q_SIGNALS and
 	Q_SLOTS instead

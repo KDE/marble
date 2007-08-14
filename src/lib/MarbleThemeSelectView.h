@@ -10,12 +10,12 @@
 //
 
 //
-// KAtlasThemeSelectView lets the user choose a map theme
+// MarbleThemeSelectView lets the user choose a map theme
 //
 
 
-#ifndef KATLASTHEMESELECTVIEW_H
-#define KATLASTHEMESELECTVIEW_H
+#ifndef MARBLETHEMESELECTVIEW_H
+#define MARBLETHEMESELECTVIEW_H
 
 
 #include <QtCore/QDebug>
@@ -24,12 +24,12 @@
 
 #include "marble_export.h"
 
-class MARBLE_EXPORT KAtlasThemeSelectView : public QListView
+class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 {
     Q_OBJECT
 
  public:
-    KAtlasThemeSelectView(QWidget *parent = 0);
+    MarbleThemeSelectView(QWidget *parent = 0);
     // void setModel( QAbstractItemModel * model );
 
  protected:

@@ -511,12 +511,12 @@
           <string>&amp;Theme</string>
          </property>
          <property name="buddy" >
-          <cstring>katlasThemeSelectView</cstring>
+          <cstring>marbleThemeSelectView</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="KAtlasThemeSelectView" name="katlasThemeSelectView" >
+        <widget class="MarbleThemeSelectView" name="marbleThemeSelectView" >
          <property name="sizePolicy" >
           <sizepolicy>
            <hsizetype>7</hsizetype>
@@ -917,9 +917,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KAtlasThemeSelectView</class>
+   <class>MarbleThemeSelectView</class>
    <extends>QListView</extends>
-   <header>katlasthemeselectview.h</header>
+   <header>MarbleThemeSelectView.h</header>
   </customwidget>
   <customwidget>
    <class>SearchListView</class>

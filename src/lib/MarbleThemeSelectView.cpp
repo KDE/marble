@@ -9,12 +9,12 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasthemeselectview.h"
+#include "MarbleThemeSelectView.h"
 
 #include <QtGui/QResizeEvent>
 
 
-KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
+MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView(parent)
 {
     setViewMode( QListView::IconMode );
@@ -33,12 +33,12 @@ KAtlasThemeSelectView::KAtlasThemeSelectView(QWidget *parent)
 }
 
 #if 0
-KAtlasThemeSelectView::setModel( QAbstractItemModel * model )
+MarbleThemeSelectView::setModel( QAbstractItemModel * model )
 {
 }
 #endif
 
-void KAtlasThemeSelectView::resizeEvent(QResizeEvent* event)
+void MarbleThemeSelectView::resizeEvent(QResizeEvent* event)
 {
     QListView::resizeEvent(event);
 
@@ -48,7 +48,7 @@ void KAtlasThemeSelectView::resizeEvent(QResizeEvent* event)
 }
 
 
-void KAtlasThemeSelectView::selectedMapTheme( QModelIndex index )
+void MarbleThemeSelectView::selectedMapTheme( QModelIndex index )
 {
     const QAbstractItemModel  *model = index.model();
 
@@ -61,4 +61,4 @@ void KAtlasThemeSelectView::selectedMapTheme( QModelIndex index )
 }
 
 
-#include "katlasthemeselectview.moc"
+#include "MarbleThemeSelectView.moc"

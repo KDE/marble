@@ -37,6 +37,13 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
+           MarbleWidget.cpp
+           MarbleModel.cpp
+           MarbleControlBox.cpp
+           MarbleNavigator.cpp
+           MarbleThemeSelectView.cpp
+           MarbleAboutDialog.cpp
+
            ClipPainter.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
@@ -46,18 +53,12 @@ set(marblewidget_SRCS
            katlascrosshair.cpp
            katlasflag.cpp
            katlasmapscale.cpp
-           katlasthemeselectview.cpp
            katlastilecreatordialog.cpp
            MarbleWidgetInputHandler.cpp
            MarbleWidgetPopupMenu.cpp
            katlaswindrose.cpp
            LegendBrowser.cpp
            maptheme.cpp
-           MarbleModel.cpp
-           MarbleWidget.cpp
-           MarbleControlBox.cpp
-           MarbleNavigator.cpp
-           MarbleAboutDialog.cpp
            ViewParams.cpp
            measuretool.cpp
            placemark.cpp
@@ -209,6 +210,13 @@ endif(WIN32 AND QTONLY)
 ########### install files ###############
 
 install( FILES
+           MarbleWidget.h
+           MarbleModel.h
+           MarbleControlBox.h
+           MarbleNavigator.h
+           MarbleThemeSelectView.h
+           MarbleAboutDialog.h
+
            global.h
            ClipPainter.h
            GeoPoint.h
@@ -220,18 +228,12 @@ install( FILES
            MarbleDirs.h
            katlasflag.h
            katlasmapscale.h
-           katlasthemeselectview.h
            katlastilecreatordialog.h
            MarbleWidgetInputHandler.h
            MarbleWidgetPopupMenu.h
            katlaswindrose.h
            LegendBrowser.h
            maptheme.h
-           MarbleModel.h
-           MarbleWidget.h
-           MarbleControlBox.h
-           MarbleNavigator.h
-           MarbleAboutDialog.h
            ViewParams.h
            measuretool.h
            placemark.h
