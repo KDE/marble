@@ -50,7 +50,13 @@ Misc
 
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
- * Filenames KAtlasFoo -> MarbleFoo                                     ----
+ * Filenames KAtlasFoo -> MarbleFoo                                     INGE
+   - katlasthemeselectview                                              --
+   - katlastilecreatordialog                                            --
+   - katlascrosshair                                                    --
+   - katlaswindrose                                                     --
+   - katlasmapscale                                                     --
+   - katlasflag                                                         --
 
 Widget:
  * Separate the view from the globe (model)                             INGE
