@@ -435,7 +435,7 @@
         <number>6</number>
        </property>
        <item>
-        <widget class="LegendBrowser" name="legendBrowser" >
+        <widget class="MarbleLegendBrowser" name="marbleLegendBrowser" >
          <property name="horizontalScrollBarPolicy" >
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
@@ -927,9 +927,9 @@
    <header>searchlistview.h</header>
   </customwidget>
   <customwidget>
-   <class>LegendBrowser</class>
+   <class>MarbleLegendBrowser</class>
    <extends>QTextBrowser</extends>
-   <header>LegendBrowser.h</header>
+   <header>MarbleLegendBrowser.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -14,8 +14,8 @@
 //
 
 
-#ifndef LEGENDBROWSER_H
-#define LEGENDBROWSER_H
+#ifndef MARBLELEGENDBROWSER_H
+#define MARBLELEGENDBROWSER_H
 
 
 #include <QtGui/QTextBrowser>
@@ -23,14 +23,14 @@
 #include "marble_export.h"
 
 
-class LegendBrowserPrivate;
+class MarbleLegendBrowserPrivate;
 
-class MARBLE_EXPORT LegendBrowser : public QTextBrowser
+class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 {
     Q_OBJECT
 
  public:
-    LegendBrowser( QWidget* parent );
+    MarbleLegendBrowser( QWidget* parent );
 
  public Q_SLOTS:
     void setCheckedLocations( bool checked );
@@ -65,8 +65,8 @@ class MARBLE_EXPORT LegendBrowser : public QTextBrowser
     void readHtml( const QUrl & name );
 
  private:
-    LegendBrowserPrivate  * const d; 
+    MarbleLegendBrowserPrivate  * const d; 
 };
 
 
-#endif // LEGENDBROWSER_H
+#endif // MARBLELEGENDBROWSER_H

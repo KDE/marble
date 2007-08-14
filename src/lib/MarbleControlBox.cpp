@@ -162,18 +162,18 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     
     //d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
 
-    // Initialize the LegendBrowser
-    d->uiWidget.legendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
-    d->uiWidget.legendBrowser->setCheckedCities( d->m_widget->showCities() );
-    d->uiWidget.legendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
-    d->uiWidget.legendBrowser->setCheckedBorders( d->m_widget->showBorders() );
-    d->uiWidget.legendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
+    // Initialize the MarbleLegendBrowser
+    d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
+    d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
+    d->uiWidget.marbleLegendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
+    d->uiWidget.marbleLegendBrowser->setCheckedBorders( d->m_widget->showBorders() );
+    d->uiWidget.marbleLegendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
                                                       && d->m_widget->showRivers() );
-    d->uiWidget.legendBrowser->setCheckedGrid( d->m_widget->showGrid() );
-    d->uiWidget.legendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
-    d->uiWidget.legendBrowser->setCheckedRelief( d->m_widget->showRelief() );
-    d->uiWidget.legendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
-    d->uiWidget.legendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
+    d->uiWidget.marbleLegendBrowser->setCheckedGrid( d->m_widget->showGrid() );
+    d->uiWidget.marbleLegendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
+    d->uiWidget.marbleLegendBrowser->setCheckedRelief( d->m_widget->showRelief() );
+    d->uiWidget.marbleLegendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
+    d->uiWidget.marbleLegendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
@@ -197,28 +197,28 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 	    d->m_widget, SLOT(setMapTheme(const QString&)));
 
     // connect signals for the Legend
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledLocations( bool ) ),
-             d->m_widget,               SLOT( setShowPlaces( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledCities( bool ) ),
-             d->m_widget,               SLOT( setShowCities( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledTerrain( bool ) ),
-             d->m_widget,               SLOT( setShowTerrain( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledBorders( bool ) ),
-             d->m_widget,               SLOT( setShowBorders( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget,               SLOT( setShowRivers( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget,               SLOT( setShowLakes( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledGrid( bool ) ),
-             d->m_widget,               SLOT( setShowGrid( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledIceLayer( bool ) ),
-             d->m_widget,               SLOT( setShowIceLayer( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledRelief( bool ) ),
-             d->m_widget,               SLOT( setShowRelief( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledWindRose( bool ) ),
-             d->m_widget,               SLOT( setShowWindRose( bool ) ) );
-    connect( d->uiWidget.legendBrowser, SIGNAL( toggledScaleBar( bool ) ),
-             d->m_widget,               SLOT( setShowScaleBar( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
+             d->m_widget,                     SLOT( setShowPlaces( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCities( bool ) ),
+             d->m_widget,                     SLOT( setShowCities( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledTerrain( bool ) ),
+             d->m_widget,                     SLOT( setShowTerrain( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledBorders( bool ) ),
+             d->m_widget,                     SLOT( setShowBorders( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             d->m_widget,                     SLOT( setShowRivers( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
+             d->m_widget,                     SLOT( setShowLakes( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledGrid( bool ) ),
+             d->m_widget,                     SLOT( setShowGrid( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledIceLayer( bool ) ),
+             d->m_widget,                     SLOT( setShowIceLayer( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledRelief( bool ) ),
+             d->m_widget,                     SLOT( setShowRelief( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWindRose( bool ) ),
+             d->m_widget,                     SLOT( setShowWindRose( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
+             d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
     
     //connect GPS Option signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),

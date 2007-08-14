@@ -41,8 +41,12 @@ set(marblewidget_SRCS
            MarbleModel.cpp
            MarbleControlBox.cpp
            MarbleNavigator.cpp
+           MarbleLegendBrowser.cpp
            MarbleThemeSelectView.cpp
            MarbleAboutDialog.cpp
+
+           MarbleWidgetInputHandler.cpp
+           MarbleWidgetPopupMenu.cpp
 
            ClipPainter.cpp
            GeoPoint.cpp
@@ -54,10 +58,7 @@ set(marblewidget_SRCS
            katlasflag.cpp
            katlasmapscale.cpp
            katlastilecreatordialog.cpp
-           MarbleWidgetInputHandler.cpp
-           MarbleWidgetPopupMenu.cpp
            katlaswindrose.cpp
-           LegendBrowser.cpp
            maptheme.cpp
            ViewParams.cpp
            measuretool.cpp
@@ -214,8 +215,12 @@ install( FILES
            MarbleModel.h
            MarbleControlBox.h
            MarbleNavigator.h
+           MarbleLegendBrowser.h
            MarbleThemeSelectView.h
            MarbleAboutDialog.h
+
+           MarbleWidgetInputHandler.h
+           MarbleWidgetPopupMenu.h
 
            global.h
            ClipPainter.h
@@ -229,10 +234,7 @@ install( FILES
            katlasflag.h
            katlasmapscale.h
            katlastilecreatordialog.h
-           MarbleWidgetInputHandler.h
-           MarbleWidgetPopupMenu.h
            katlaswindrose.h
-           LegendBrowser.h
            maptheme.h
            ViewParams.h
            measuretool.h

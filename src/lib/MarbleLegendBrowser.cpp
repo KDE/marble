@@ -10,7 +10,7 @@
 //
 
 
-#include "LegendBrowser.h"
+#include "MarbleLegendBrowser.h"
 
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
@@ -22,7 +22,7 @@
 #include "MarbleDirs.h"
 
 
-class LegendBrowserPrivate
+class MarbleLegendBrowserPrivate
 {
  public:
     QMap<QString, bool>  m_checkBoxMap;
@@ -33,9 +33,9 @@ class LegendBrowserPrivate
 // ================================================================
 
 
-LegendBrowser::LegendBrowser( QWidget *parent )
+MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
-      d( new LegendBrowserPrivate )
+      d( new MarbleLegendBrowserPrivate )
 {
     readHtml( MarbleDirs::path( "legend.html" ) );
     setHtml( d->m_html );
@@ -48,7 +48,7 @@ LegendBrowser::LegendBrowser( QWidget *parent )
     connect ( this, SIGNAL( anchorClicked( QUrl ) ), this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
 }
 
-void LegendBrowser::readHtml( const QUrl & name )
+void MarbleLegendBrowser::readHtml( const QUrl & name )
 {
     QString html;
 
@@ -78,7 +78,7 @@ void LegendBrowser::readHtml( const QUrl & name )
     d->m_html = html;
 }
 
-QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
+QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
 {
 
     if ( type == QTextDocument::ImageResource && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
@@ -104,7 +104,7 @@ QVariant LegendBrowser::loadResource ( int type, const QUrl & name )
     }
 }
 
-void LegendBrowser::toggleCheckBoxStatus( const QUrl &link )
+void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 {
     if ( link.toString().startsWith( "checkbox:", Qt::CaseInsensitive ) )
     {
@@ -126,7 +126,7 @@ void LegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     repaint();
 }
 
-void LegendBrowser::sendSignals( const QString &name, bool checked )
+void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
 {
     if ( name == "locations"){
         emit toggledLocations( checked );
@@ -165,56 +165,56 @@ void LegendBrowser::sendSignals( const QString &name, bool checked )
 //  Lots of slots
 
 
-void LegendBrowser::setCheckedLocations( bool checked )
+void MarbleLegendBrowser::setCheckedLocations( bool checked )
 {
     d->m_checkBoxMap[ "locations" ] = checked;
 }
 
-void LegendBrowser::setCheckedCities( bool checked )
+void MarbleLegendBrowser::setCheckedCities( bool checked )
 {
     d->m_checkBoxMap[ "cities" ] = checked;
 }
 
-void LegendBrowser::setCheckedTerrain( bool checked )
+void MarbleLegendBrowser::setCheckedTerrain( bool checked )
 {
     d->m_checkBoxMap[ "terrain" ] = checked;
 }
 
-void LegendBrowser::setCheckedBorders( bool checked )
+void MarbleLegendBrowser::setCheckedBorders( bool checked )
 {
     d->m_checkBoxMap[ "borders" ] = checked;
 }
 
-void LegendBrowser::setCheckedWaterBodies( bool checked )
+void MarbleLegendBrowser::setCheckedWaterBodies( bool checked )
 {
     d->m_checkBoxMap[ "waterbodies" ] = checked;
 }
 
-void LegendBrowser::setCheckedIceLayer( bool checked )
+void MarbleLegendBrowser::setCheckedIceLayer( bool checked )
 {
     d->m_checkBoxMap[ "ice" ] = checked;
 }
 
-void LegendBrowser::setCheckedGrid( bool checked )
+void MarbleLegendBrowser::setCheckedGrid( bool checked )
 {
     d->m_checkBoxMap[ "grid" ] = checked;
 }
 
-void LegendBrowser::setCheckedRelief( bool checked )
+void MarbleLegendBrowser::setCheckedRelief( bool checked )
 {
     d->m_checkBoxMap[ "relief" ] = checked;
 }
 
-void LegendBrowser::setCheckedWindRose( bool checked )
+void MarbleLegendBrowser::setCheckedWindRose( bool checked )
 {
     d->m_checkBoxMap[ "windrose" ] = checked;
 }
 
-void LegendBrowser::setCheckedScaleBar( bool checked )
+void MarbleLegendBrowser::setCheckedScaleBar( bool checked )
 {
     d->m_checkBoxMap[ "scalebar" ] = checked;
 }
 
 
 
-#include "LegendBrowser.moc"
+#include "MarbleLegendBrowser.moc"
