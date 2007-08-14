@@ -78,14 +78,14 @@ bool TileCreator::createTiles()
 
     unsigned int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
 
-    unsigned int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
+    int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
     qDebug() << "Maximum tile level: " << maxTileLevel;
 
     if ( QDir( m_targetDir ).exists() == false ) 
         ( QDir::root() ).mkpath( m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
-    unsigned int tileLevel = 0;
+    int tileLevel = 0;
     unsigned int totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
