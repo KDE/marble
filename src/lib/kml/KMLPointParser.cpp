@@ -8,12 +8,13 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-#include "global.h"
 
 #include "KMLPointParser.h"
 
+#include "global.h"
 #include "GeoPoint.h"
 #include "KMLPlaceMark.h"
+
 
 namespace
 {

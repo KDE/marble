@@ -9,13 +9,14 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "global.h"
 
 #include "GeoPoint.h"
 
 #include <cmath>
 
 #include <QtCore/QDebug>
+
+#include "global.h"
 
 
 GeoPoint::GeoPoint(int _detail, int _lon, int _lat)

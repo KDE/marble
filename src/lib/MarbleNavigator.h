@@ -17,9 +17,10 @@
 #ifndef MARBLENAVIGATOR_H
 #define MARBLENAVIGATOR_H
 
-#include "marble_export.h"
 
-#include <QWidget>
+#include <QtGui/QWidget>
+
+#include "marble_export.h"
 
 
 class MarbleNavigatorPrivate;

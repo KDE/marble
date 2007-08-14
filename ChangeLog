@@ -1,5 +1,13 @@
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issue 13: proper include directives.
+	* src/lib/MarbleAboutDialog.h
+	* src/lib/kml/KMLPointParser.cpp
+	* src/lib/MarbleWidget.h
+	* src/lib/MarbleNavigator.h
+	* src/lib/xmlhandler.cpp
+	* src/lib/GeoPoint.cpp
+
 	Krazy issue 11: Constructors should be declared explicit
 	* src/lib/gps/GpsLayer.h (class GpsLayer),
 	* src/lib/gps/GpsTracking.h (class GpsTracking): do it.

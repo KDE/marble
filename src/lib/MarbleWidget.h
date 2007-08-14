@@ -35,7 +35,6 @@
 #include "katlascrosshair.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
-#include "GeoPoint.h"
 
 
 class QStyleOptionGraphicsItem;

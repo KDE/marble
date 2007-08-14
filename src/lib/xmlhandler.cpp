@@ -9,12 +9,12 @@
 // Copyright 2007     Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "global.h"
 
 #include "xmlhandler.h"
 
 #include <cmath>
 
+#include "global.h"
 #include "placemark.h"
 #include "PlaceMarkContainer.h"
 
