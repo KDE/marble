@@ -35,11 +35,24 @@ That's a very short recapitulation of the above mentioned document.
 The full document contains lots of examples to show how it should be
 done.
 
-Variables
----------
+Class names and Variables
+-------------------------
 
- - camelCasing for methods and variables (e.g. myMethodName()). Full 
-   upper cased names for constants (e.g. RAD2DEG).
+ - Class names should have the ("namespace") prefix "Marble" if
+
+    * they are parts of the Marble library that get exported.
+    * they resemble widgets or similar visually exposed items
+
+   The remaining part of the name should reflect the purpose of the 
+   class and should be camel cased with the first letter being upper 
+   cased.
+
+   All other classes should not have the "Marble" prefix. 
+
+
+ - camelCasing with the first letter being lower cased should be used 
+   for methods and variables (e.g. myMethodName()). Full 
+   upper cased names should be used for constants (e.g. RAD2DEG).
 
 Extensions
 ----------

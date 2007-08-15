@@ -1,3 +1,11 @@
+
+2007-08-13  Torsten Rahn  <rahn@kde.org>
+	
+    * CODING: 
+    Following up to Ingwa's recent work rules were 
+    added when a class should be prefixed "Marble".
+    Fell free to add cases I forgot.
+
 2007-08-15  Tim Sutton   <tim@linfiniti.com>
 
  Added logic to qtmain to search for qjpeg image plugin
