@@ -37,12 +37,13 @@ class KMLContainer : public KMLFeature
 
  protected:
     KMLContainer();
-
- protected:
-     QVector < KMLPlaceMark* > m_placemarkVector;
+    QVector < KMLPlaceMark* > m_placemarkVector;
 
  private:
-     PlaceMarkContainer m_activePlaceMarkContainer;
+    PlaceMarkContainer& sphericalActivePlaceMarkContainer( const ViewParams& viewParams );
+    PlaceMarkContainer& rectangularActivePlaceMarkContainer( const ViewParams& viewParams );
+
+    PlaceMarkContainer m_activePlaceMarkContainer;
 };
 
 #endif // KMLCONTAINER_H

@@ -33,6 +33,18 @@ void KMLContainer::addPlaceMark( KMLPlaceMark* placemark )
 
 PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& viewParams )
 {
+    switch( viewParams.m_projection ) {
+        case Spherical:
+            sphericalActivePlaceMarkContainer(viewParams);
+            break;
+        case Equirectangular:
+            rectangularActivePlaceMarkContainer(viewParams);
+            break;
+    }
+}
+
+PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )
+{
     m_activePlaceMarkContainer.clear ();
 
     int x = 0;
@@ -44,12 +56,6 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
     Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
     Quaternion  qpos;
 
-#ifdef FLAT_PROJ
-    float const centerLat =  viewParams.m_planetAxis.pitch();
-    float const centerLon = -viewParams.m_planetAxis.yaw();
-#endif
-
-
     QVector < KMLPlaceMark* >::const_iterator  it;
     for ( it = m_placemarkVector.constBegin();
           it != m_placemarkVector.constEnd();
@@ -58,7 +64,6 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
         KMLPlaceMark* placemark = *it;
         qpos = placemark->quaternion();
 
-#ifndef FLAT_PROJ
         qpos.rotateAroundAxis(invplanetAxis);
 
         if ( qpos.v[Q_Z] > 0 ) {
@@ -71,7 +76,36 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
                 m_activePlaceMarkContainer.append( placemark );
             }
         }
-#else
+    }
+
+    qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
+    return m_activePlaceMarkContainer;
+}
+
+PlaceMarkContainer& KMLContainer::rectangularActivePlaceMarkContainer( const ViewParams& viewParams )
+{
+    m_activePlaceMarkContainer.clear ();
+
+    int x = 0;
+    int y = 0;
+
+    int imgwidth = viewParams.m_canvasImage->width();
+    int imgheight = viewParams.m_canvasImage->height();
+
+    Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
+    Quaternion  qpos;
+
+    float const centerLat =  viewParams.m_planetAxis.pitch();
+    float const centerLon = -viewParams.m_planetAxis.yaw();
+
+    QVector < KMLPlaceMark* >::const_iterator  it;
+    for ( it = m_placemarkVector.constBegin();
+          it != m_placemarkVector.constEnd();
+          it++ )
+    {
+        KMLPlaceMark* placemark = *it;
+        qpos = placemark->quaternion();
+
         double xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
 
         double degX;
@@ -85,7 +119,6 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
         if ( ( x >= 0 && x < imgwidth || x+4*viewParams.m_radius < imgwidth || x-4*viewParams.m_radius >= 0 )  && y >= 0 && y < imgheight ) {
             m_activePlaceMarkContainer.append( placemark );
         }
-#endif
     }
 
     qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());

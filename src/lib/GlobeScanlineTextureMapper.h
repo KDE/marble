@@ -41,8 +41,6 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     virtual ~GlobeScanlineTextureMapper();
 
     void resizeMap(int width, int height);
-    bool interlaced() const { return m_interlaced; }
-    void setInterlaced( bool enabled ) { m_interlaced = enabled; }
     void mapTexture(QImage* canvasImage, const int& radius, Quaternion& planetAxis);
 
  protected:
@@ -65,7 +63,6 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
 
     Quaternion m_qpos;
 
-    bool    m_interlaced;
 };
 
 

@@ -46,7 +46,7 @@ void MeasureTool::paintMeasurePoints(ClipPainter* painter,
                                      int imgrx, int imgry, int radius, 
                                      Quaternion planetAxis, bool antialiasing )
 {
-    sphericalPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+    rectangularPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
 }
 
 void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter, 
@@ -280,7 +280,7 @@ void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
                                     Quaternion qpos, int imgrx, int imgry, 
                                     int radius, bool antialiasing )
 {
-    sphericalDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+    rectangularDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
 }
 
 void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion prevqpos,

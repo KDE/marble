@@ -68,6 +68,8 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
 
     m_tile      = 0;
     m_tileLevel = 0;
+
+    m_interlaced = false;
 }
 
 

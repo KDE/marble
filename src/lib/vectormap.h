@@ -33,11 +33,11 @@ class VectorMap : public ScreenPolygon::Vector
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap(const PntMap*, const int&, Quaternion&);
+    void createFromPntMap(const PntMap*, const int&, Quaternion&, Projection );
 
     void paintBase(ClipPainter *, int radius, bool );
     void paintMap(ClipPainter *, bool );
-    void drawMap(QPaintDevice *, bool );
+    void drawMap(QPaintDevice *, bool, Projection );
 
     void resizeMap( int width, int height );
 
@@ -53,8 +53,15 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
+    void sphericalCreateFromPntMap(const PntMap*, const int&, Quaternion&);
+    void rectangularCreateFromPntMap(const PntMap*, const int&, Quaternion&);
+
     void createPolyLine( GeoPoint::Vector::ConstIterator, 
-                         GeoPoint::Vector::ConstIterator, const int);
+                         GeoPoint::Vector::ConstIterator, const int, Projection );
+    void sphericalCreatePolyLine( GeoPoint::Vector::ConstIterator, 
+                            GeoPoint::Vector::ConstIterator, const int );
+    void rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator, 
+                            GeoPoint::Vector::ConstIterator, const int );
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();
@@ -72,13 +79,14 @@ class VectorMap : public ScreenPolygon::Vector
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;
-#ifdef FLAT_PROJ
+
+    //Used for flat projection
     Quaternion m_planetAxis;
     int m_lastSign;
     int m_offset;
     double m_lastX;
     double m_lastY;
-#endif
+
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;

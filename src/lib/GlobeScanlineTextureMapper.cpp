@@ -198,12 +198,12 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
             m_qx = (double)( m_x - m_imageWidth / 2 ) * inverseRadius;
 
             double qr2z = m_qr - m_qx * m_qx;
-            m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;        
+            m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
             m_qpos.set( 0.0, m_qx, m_qy, m_qz );
-            m_qpos.rotateAroundAxis( planetAxisMatrix );        
+            m_qpos.rotateAroundAxis( planetAxisMatrix );
 
             m_qpos.getSpherical( lon, lat );
 

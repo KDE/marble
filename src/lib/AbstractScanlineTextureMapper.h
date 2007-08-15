@@ -40,6 +40,8 @@ public:
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
     void resizeMap( int width, int height );
     void selectTileLevel(int radius);
+    bool interlaced() { return m_interlaced; }
+    void setInterlaced( bool enabled ) { m_interlaced = enabled; }
 
  Q_SIGNALS:
     void mapChanged();
@@ -76,6 +78,8 @@ public:
 
     double  m_rad2PixelX;
     double  m_rad2PixelY;
+
+    bool m_interlaced;
 
     // ------------------------
     // Tile stuff

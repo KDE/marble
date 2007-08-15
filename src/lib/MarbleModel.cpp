@@ -39,11 +39,8 @@ class MarbleModelPrivate
     MapTheme            *m_maptheme;
     QString             m_selectedMap;
     TextureColorizer    *m_texcolorizer;
-#ifndef FLAT_PROJ
-    GlobeScanlineTextureMapper  *m_texmapper;
-#else
-    FlatScanlineTextureMapper   *m_texmapper;
-#endif
+
+    AbstractScanlineTextureMapper   *m_texmapper;
 
     VectorComposer      *m_veccomposer; // FIXME: Make not a pointer.
     GridMap             *m_gridmap;
@@ -99,7 +96,7 @@ MarbleModel::MarbleModel( QWidget *parent )
         else
             selectedmap = mapthemedirs[0];
     }
-    setMapTheme( selectedmap, parent );
+    setMapTheme( selectedmap, parent, Spherical );
 
     d->m_gridmap      = new GridMap();
     d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
@@ -153,7 +150,7 @@ QString MarbleModel::mapTheme() const
 // If the tiles (for the lowest tile level) haven't been created already
 // then create them here and now.
 
-void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
+void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Projection currentProjection )
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
@@ -198,15 +195,17 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent )
                                  d->m_maptheme->description() );
 #endif
         }
-#ifndef FLAT_PROJ
         if ( d->m_texmapper == 0 )
-            d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                            + d->m_maptheme->tilePrefix(), this );
-#else
-        if ( d->m_texmapper == 0 )
-            d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                            + d->m_maptheme->tilePrefix() );
-#endif
+            switch( currentProjection ) {
+                case Spherical:
+                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
+                                                + d->m_maptheme->tilePrefix(), this );
+                    break;
+                case Equirectangular:
+                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+                                                + d->m_maptheme->tilePrefix(), this );
+                    break;
+            }
         else
             d->m_texmapper->setMapTheme( "maps/earth/"
                                          + d->m_maptheme->tilePrefix() );
@@ -304,13 +303,15 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
         // Create and paint a grid
         d->m_gridmap->createGrid( viewParams->m_radius,
-                                  viewParams->m_planetAxis );
+                                  viewParams->m_planetAxis,
+                                  viewParams->m_projection );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
 
         // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( viewParams->m_radius,
-                                     viewParams->m_planetAxis );
+                                     viewParams->m_planetAxis,
+                                     viewParams->m_projection );
         gridpen.setStyle( Qt::DotLine );
         gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
@@ -318,7 +319,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
         // Create Equator
         d->m_gridmap->createEquator( viewParams->m_radius,
-                                     viewParams->m_planetAxis );
+                                     viewParams->m_planetAxis,
+                                     viewParams->m_projection );
         gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, true );
@@ -402,12 +404,8 @@ TextureColorizer  *MarbleModel::textureColorizer() const
 {
     return d->m_texcolorizer;
 }
-#ifndef FLAT_PROJ
-GlobeScanlineTextureMapper
-#else
-FlatScanlineTextureMapper
-#endif
-    *MarbleModel::textureMapper()    const
+
+AbstractScanlineTextureMapper    *MarbleModel::textureMapper()    const
 {
     return d->m_texmapper;
 }

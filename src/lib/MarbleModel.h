@@ -103,7 +103,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QString mapTheme() const;
 
-    void setMapTheme( const QString &selectedMap, QWidget *parent );
+    void setMapTheme( const QString &selectedMap, QWidget *parent, Projection currentProjection );
 
     void addPlaceMarkFile( const QString& filename );
 
@@ -113,11 +113,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     PlaceMarkPainter   *placeMarkPainter()   const;
     VectorComposer     *vectorComposer()     const;
     TextureColorizer   *textureColorizer()   const;
-#ifndef FLAT_PROJ
-    GlobeScanlineTextureMapper  *textureMapper() const;
-#else
-    FlatScanlineTextureMapper   *textureMapper() const;
-#endif
+
+    AbstractScanlineTextureMapper  *textureMapper() const;
 
     GpsLayer           *gpsLayer()           const;
     GpxFileModel       *gpxFileModel()       const;

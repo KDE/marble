@@ -479,7 +479,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                                        textWidth, x, y );
 
         // Paint the label
-        if ( !overlap) {
+        if ( !overlap ) {
             if ( textpixmap.isNull() ) {
                 // Draw the text on the label.
 

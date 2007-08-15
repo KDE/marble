@@ -266,7 +266,7 @@ void MarbleWidget::setMinimumZoom( int zoom )
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
     d->m_model->addPlaceMarkFile( filename ); 
-}
+}Equirectangular
 
 QPixmap MarbleWidget::mapScreenShot()
 {
@@ -341,12 +341,12 @@ bool MarbleWidget::showGps() const
 bool  MarbleWidget::quickDirty() const
 { 
     switch( d->m_viewParams.m_projection ) {
-    case Spherical:
-        return d->m_model->textureMapper()->interlaced();
-        break;
-    case Equirectangular:
-        return false;
-        break;
+        case Spherical:
+            return d->m_model->textureMapper()->interlaced();
+            break;
+        case Equirectangular:
+            return false;
+            break;
     }
 
     return false;
@@ -658,17 +658,12 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat, 
                                   GeoPoint::Unit unit )
 {
+    int imageHalfWidth  = width() / 2;
+    int imageHalfHeight  = height() / 2;
+    const double  inverseRadius = 1.0 / (double)(radius());
     bool noerr = false;
-
     switch( d->m_viewParams.m_projection ) {
     case Spherical:
-
-        if ( d->m_viewParams.m_projection == Spherical ) {
-            int imageHalfWidth  = width() / 2;
-            int imageHalfHeight = height() / 2;
-
-            const double  inverseRadius = 1.0 / (double)(radius());
-
             if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
                                   + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
             {
@@ -685,11 +680,9 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
 
                 noerr = true;
             }
-        }
-        break;
+            break;
 
     case Equirectangular:
-
         if ( true ) { // FIXME: add criterium whether point is outside the map
             float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
             float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
@@ -698,12 +691,12 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
             int yPixels = y - height() / 2;
 
             double pixel2rad = M_PI / (double)( 2 * radius() );
-            lon = xPixels * pixel2rad + centerLon;
             lat = yPixels * pixel2rad + centerLat;
+            lon = xPixels * pixel2rad + centerLon;
 
             noerr = true;
-        }
-        break;
+            }
+            break;
 
     }
 
@@ -790,18 +783,21 @@ void MarbleWidget::setActiveRegion()
 
     d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
                                  QRegion::Rectangle );
-#ifndef FLAT_PROJ
-    if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
-                                      2 * zoom, 2 * zoom, QRegion::Ellipse );
-    }
-#else
-    double centerLat = planetAxis().pitch();
-    int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
-    int yTop = height()/2 - zoom + yCenterOffset;
 
-    d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
-#endif
+    switch( d->m_viewParams.m_projection ) {
+        case Spherical:
+            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
+	       d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
+                                       2 * zoom, 2 * zoom, QRegion::Ellipse );
+            }
+            break;
+        case Equirectangular:
+            double centerLat = planetAxis().pitch();
+            int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
+            int yTop = height()/2 - zoom + yCenterOffset;
+            d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
+            break;
+    }
 }
 
 const QRegion MarbleWidget::activeRegion()
@@ -923,7 +919,7 @@ void MarbleWidget::setMapTheme( const QString& maptheme )
     if ( maptheme == d->m_model->mapTheme() )
         return;
 
-    d->m_model->setMapTheme( maptheme, this );
+    d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
@@ -1060,18 +1056,21 @@ GpxFileModel *MarbleWidget::gpxFileModel()
 
 void MarbleWidget::setQuickDirty( bool enabled )
 {
-#ifndef FLAT_PROJ
-    // Interlace texture mapping 
-    d->m_model->textureMapper()->setInterlaced( enabled );
-
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-
-    int  transparency = enabled ? 255 : 192;
-    d->m_windrose.setTransparency( transparency );
-    d->m_mapscale.setTransparency( transparency );
-    repaint();
-#endif
+    int transparency;
+    switch( d->m_viewParams.m_projection ) {
+        case Spherical:
+            // Interlace texture mapping 
+            d->m_model->textureMapper()->setInterlaced( enabled );
+            // Update texture map during the repaint that follows:
+            setNeedsUpdate();
+            transparency = enabled ? 255 : 192;
+            d->m_windrose.setTransparency( transparency );
+            d->m_mapscale.setTransparency( transparency );
+            repaint();
+            break;
+        case Equirectangular:
+            return;
+    }
 }
 
 void MarbleWidget::setMarbleDataDir( const QString& dataDir )

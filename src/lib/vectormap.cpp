@@ -61,6 +61,19 @@ VectorMap::~VectorMap()
 
 
 void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, 
+                                 Quaternion& rotAxis, Projection currentProjection)
+{
+    switch( currentProjection ) {
+        case Spherical:
+            sphericalCreateFromPntMap( pntmap, radius, rotAxis );
+            break;
+        case Equirectangular:
+            rectangularCreateFromPntMap( pntmap, radius, rotAxis );
+            break;
+    }
+}
+
+void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radius, 
                                  Quaternion& rotAxis)
 {
     clear();
@@ -88,16 +101,13 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     Quaternion  qbound;
 
     rotAxis.inverse().toMatrix( m_rotMatrix );
-#ifdef FLAT_PROJ
-    m_planetAxis = rotAxis;
-#endif
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     //	const int detail = 0;
     const int  detail = getDetailLevel();
     GeoPoint   corner;
-#ifndef FLAT_PROJ
+
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
@@ -117,7 +127,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 
                 // qDebug() << i << " Visible: YES";
                 createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail );
+                                (*itPolyLine)->constEnd(), detail, Spherical );
 
                 break; // abort foreach test of current boundary
             } 
@@ -125,7 +135,15 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             //     qDebug() << i << " Visible: NOT";
         }
     }
-#else
+}
+
+void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& radius, 
+                                 Quaternion& rotAxis)
+{
+    clear();
+    m_radius = radius;
+    Quaternion  qbound;
+    m_planetAxis = rotAxis;
     m_centerLat =  m_planetAxis.pitch();
     m_centerLon = -m_planetAxis.yaw();
     m_xyFactor = (float)( 2 * radius ) / M_PI;
@@ -133,8 +151,14 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
     double degY;
     double x;
     double y;
+
+    rotAxis.inverse().toMatrix( m_rotMatrix );
+    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
+
     ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    const int  detail = getDetailLevel();
 
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
@@ -146,8 +170,8 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
         for ( int i = 0; i < 4; ++i ) {
             qbound = m_boundary[i].quaternion();
             qbound.getSpherical(degX,degY);
-            x = m_imgwidth / 2  + m_xyFactor * (degX + centerLon);
-            y = m_imgheight / 2 + m_xyFactor * (degY + centerLat);
+            x = m_imgwidth / 2  + m_xyFactor * (degX + m_centerLon);
+            y = m_imgheight / 2 + m_xyFactor * (degY + m_centerLat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -164,16 +188,28 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
             createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail);
+                            (*itPolyLine)->constEnd(), detail, Equirectangular );
             m_offset += 4 * m_radius;
             boundingPolygon.translate( 4 * m_radius, 0 );
         }
     }
-#endif
 }
 
-
 void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoPoint::Vector::ConstIterator  itEndPoint,
+                                const int detail, Projection currentProjection )
+{
+    switch( currentProjection ) {
+       case Spherical:
+            sphericalCreatePolyLine( itStartPoint, itEndPoint, detail );
+            break;
+        case Equirectangular:
+            rectangularCreatePolyLine( itStartPoint, itEndPoint, detail );
+            break;
+    }
+}
+
+void VectorMap::sphericalCreatePolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail)
 {
@@ -183,14 +219,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     Quaternion qpos;
     //	int step = 1;
     //	int remain = size();
-#ifdef FLAT_PROJ
-    ScreenPolygon otherPolygon;
-    otherPolygon.setClosed ( m_polygon.closed() );
-    bool CrossedDateline = false;
-    bool firstPoint = true;
-    double degX;
-    double degY;
-#endif
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() >= detail ) {
@@ -199,7 +227,6 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 #ifdef VECMAP_DEBUG
             ++m_debugNodeCount;
 #endif
-#ifndef FLAT_PROJ
             qpos = itPoint->quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
             m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1,
@@ -251,11 +278,40 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
 
         m_firsthorizon = false;
     }
-#else
+
+    // Avoid polygons degenerated to Points.
+    if ( m_polygon.size() >= 2 ) {
+        append(m_polygon);
+    }
+}
+
+void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoPoint::Vector::ConstIterator  itEndPoint,
+                                const int detail)
+{
+    GeoPoint::Vector::const_iterator  itPoint;
+
+    Quaternion qpos;
+
+    ScreenPolygon otherPolygon;
+    otherPolygon.setClosed ( m_polygon.closed() );
+    bool CrossedDateline = false;
+    bool firstPoint = true;
+    double degX;
+    double degY;
+
+    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+        // remain -= step;
+        if ( itPoint->detail() >= detail ) {
+
+            // Calculate polygon nodes
+#ifdef VECMAP_DEBUG
+            ++m_debugNodeCount;
+#endif
             qpos = itPoint->quaternion();
             qpos.getSpherical(degX,degY);
-            double x = m_imgwidth/2 + m_xyFactor * (degX + centerLon) + m_offset;
-            double y = m_imgheight/2 + m_xyFactor * (degY + centerLat);
+            double x = m_imgwidth/2 + m_xyFactor * (degX + m_centerLon) + m_offset;
+            double y = m_imgheight/2 + m_xyFactor * (degY + m_centerLat);
             m_currentPoint = QPointF( x, y );
             int currentSign = ( degX > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
@@ -265,12 +321,12 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
             if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
                 if ( degY > M_PI / 3 ) {
-                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + centerLon) + m_offset, y );
-                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + centerLon) + m_offset
-                            , m_imgheight/2 + m_xyFactor * (centerLat + M_PI / 2 ) );
-                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + centerLon) + m_offset
-                            , m_imgheight/2 + m_xyFactor * (centerLat + M_PI / 2 ));
-                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + centerLon) + m_offset, y);
+                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, y );
+                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset
+                            , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ) );
+                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset
+                            , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ));
+                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, y);
                 }
 
 //                 if( !CrossedDateline ) {
@@ -295,22 +351,20 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
         }
     }
 
-#endif
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
         append(m_polygon);
     }
-#ifdef FLAT_PROJ
+
     if( otherPolygon.size() >= 2 ) {
         append( otherPolygon );
     }
-#endif
 }
 
 
 void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 {
-    m_radius = radius;
+    m_radius = radius-1;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -327,13 +381,17 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 }
 
 
-void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing)
+void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
 {
-#ifndef FLAT_PROJ
-    bool clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
-#else
-    bool clip = false;
-#endif
+    bool clip;
+    switch( currentProjection ) {
+        case Spherical:
+            clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
+            break;
+        case Equirectangular:
+            clip = false;
+            break;
+    }
     ClipPainter  painter(origimg, clip);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
     painter.setPen(m_pen);
