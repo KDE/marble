@@ -27,6 +27,13 @@
 
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename LegendBrowser into MarbleLegendBrowser
+	* src/lib/LegendBrowser.cpp: rename into MarbleLegendBrowser.cpp
+	* src/lib/LegendBrowser.h: rename into MarbleLegendBrowser.h
+	* src/lib/MarbleControlBox.ui: refer to new name
+	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+	
 	Rename katlasthemeselectview into MarbleThemeSelectView:
 	* src/lib/katlasthemeselectview.cpp: rename into
 	MarbleThemeSelectView.cpp:

@@ -22,10 +22,9 @@ Features
 Cleaning
  * Make the ChangeLog file follow the GNU format.                       DONE
  * No inline functions in the public classes                            DONE
- * d-pointerify the public classes                                      DONE
+ * d-pointerify the main public classes                                 DONE
  * float -> double                                                      DONE
  * Move files into the library                                          DONE
-   - Move MarbleControlBox to src/lib/                                  done
  * Installation issues                                                  TACK
    - Creating tiles during build and fix designer plugin dirs           --
 
@@ -36,9 +35,9 @@ During the SoC projects (0.5)
 Misc
  * Create a file with use cases and personas                            INGE
    - Continue with the use cases.                                       --
- * Name all public classes MarbleSomething                              ----
+ * Name all public classes MarbleSomething                              INGE
    - SearchListView                                                     --
-   - LegendBrowser                                                      --
+   - LegendBrowser                                                      done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE
    - PlaceMarkModel                                                     done
