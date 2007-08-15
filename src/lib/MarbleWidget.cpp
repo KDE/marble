@@ -266,7 +266,7 @@ void MarbleWidget::setMinimumZoom( int zoom )
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
     d->m_model->addPlaceMarkFile( filename ); 
-}Equirectangular
+}
 
 QPixmap MarbleWidget::mapScreenShot()
 {
