@@ -35,12 +35,16 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
 {
     switch( viewParams.m_projection ) {
         case Spherical:
-            sphericalActivePlaceMarkContainer(viewParams);
+            return sphericalActivePlaceMarkContainer(viewParams);
             break;
         case Equirectangular:
-            rectangularActivePlaceMarkContainer(viewParams);
+            return rectangularActivePlaceMarkContainer(viewParams);
             break;
     }
+    //
+    // Return at least something...
+    //
+    return sphericalActivePlaceMarkContainer(viewParams);
 }
 
 PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )

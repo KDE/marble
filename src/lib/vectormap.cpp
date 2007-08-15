@@ -383,7 +383,7 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
 {
-    bool clip;
+    bool clip=false; //assume false
     switch( currentProjection ) {
         case Spherical:
             clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
