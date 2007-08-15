@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x
+#set -x
 # Copy Qt frameworks to marble bundle
 # and make search paths for them relative to bundle
 
@@ -53,21 +53,17 @@ cd ../
 mkdir -p plugins/imageformats
 cd plugins/imageformats
 LIBJPEG=libjpeg.dylib
-LIBPNG=libpng.dylib
 LIBQJPEG=/Developer/Applications/Qt/plugins/imageformats/libqjpeg.dylib
-LIBQPNG=/Developer/Applications/Qt/plugins/imageformats/libqpng.dylib
 if test ! -f $LIBJPEG; then
 	cp $LIBQJPEG $LIBJPEG
-	cp $LIBQPNG $LIBPNG
 	# Update path to supporting libraries
 	install_name_tool -change QtCore.framework/Versions/4/QtCore \
-		@executable_path/lib/QtCore.framework/Versions/4/QtCore \
+		@executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
 		$LIBJPEG
 	install_name_tool -change QtGui.framework/Versions/4/QtGui \
-		@executable_path/../Framework/QtGui.framework/Versions/4/QtGui \
+		@executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
 		$LIBJPEG
-	install_name_tool -change $LNKJPEG @executable_path/lib/$LIBJPEG $LIBQJPEG
-	install_name_tool -change $LNKPNG @executable_path/lib/$LIBPNG $LIBQJPEG
+	install_name_tool -change $LNKJPEG @executable_path/../plugins/imageformats/$LIBJPEG $LIBJPEG
 fi
 
 cd ../../MacOS

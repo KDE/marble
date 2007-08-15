@@ -117,7 +117,7 @@ void PntMap::load(const QString &filename)
     short  lon;
     int    count = 0;
 
-    const int halfFileLength = filelength / 2;
+    //const int halfFileLength = filelength / 2;
 
     for (int i=0; i < filelength; i+=6){
         header = src[i] | (src[i+1] << 8);

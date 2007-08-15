@@ -355,6 +355,8 @@ bool  MarbleWidget::quickDirty() const
 QString MarbleWidget::marbleDataDir() const
 { 
 
+  return QString("MarbleWidget::marbleDataDir() "
+      "This function not implemented yet....");
 }
 
 void MarbleWidget::zoomView(int zoom)

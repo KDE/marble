@@ -1,3 +1,17 @@
+2007-08-15  Tim Sutton   <tim@linfiniti.com>
+
+ Added logic to qtmain to search for qjpeg image plugin
+ in application bundle.
+ Modified 2-release-qt.sh to install qt image plugins
+ and also tweaked it so Qt frameworks go into
+ @executable_path/../Frameworks/Qt*
+ Fixed compiler warnings in :
+   src/lib/MarbleWidget.cpp
+   src/lib/TileCreator.cpp
+   src/lib/GeoPolygon.cpp
+ The application now runs from the generated OSX
+ bundle but with some issues that need to be resolved.
+
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename katlasthemeselectview into MarbleThemeSelectView:

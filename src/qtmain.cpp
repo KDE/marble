@@ -22,9 +22,43 @@
  Q_IMPORT_PLUGIN(qsvg)
 #endif
 
+#ifdef Q_OS_MACX
+//for getting app bundle path
+#include <ApplicationServices/ApplicationServices.h>
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    // For non static builds on mac and win
+    // we need to be sure we can find the qt image
+    // plugins. In mac be sure to look in the
+    // application bundle...
+#ifdef Q_WS_WIN
+    QApplication::addLibraryPath( QApplication::applicationDirPath() 
+        + QDir::separator() + "plugins" );
+#endif
+#ifdef Q_OS_MACX
+    qDebug("Adding qt image plugins to plugin search path...");
+    CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
+    const char *mypPathPtr = CFStringGetCStringPtr(myMacPath,CFStringGetSystemEncoding());
+    CFRelease(myBundleRef);
+    CFRelease(myMacPath);
+    QString myPath(mypPathPtr);
+    // if we are not in a bundle assume that the app is built
+    // as a non bundle app and that image plugins will be
+    // in system Qt frameworks. If the app is a bundle
+    // lets try to set the qt plugin search path...
+    if (myPath.contains(".app"))
+    {
+      myPath += "/Contents/plugins";
+      QApplication::addLibraryPath( myPath );
+      qDebug("Added " + myPath.toLocal8Bit() +
+          " to plugin search path");
+    }
+#endif
+
 
     MainWindow *window = new MainWindow();
     window->setAttribute( Qt::WA_DeleteOnClose, true );
