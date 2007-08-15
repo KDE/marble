@@ -1,3 +1,7 @@
+2007-08-15 Carlos Licea <>
+    *Integration:
+    Finished the integration of the flat projection.
+
 2007-08-15  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleDirs.h: 
