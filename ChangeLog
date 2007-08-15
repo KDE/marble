@@ -1,5 +1,10 @@
+2007-08-15  Torsten Rahn  <rahn@kde.org>
 
-2007-08-13  Torsten Rahn  <rahn@kde.org>
+    * src/lib/MarbleDirs.h: 
+    Adding some explanations how MarbleDirs is 
+    meant to work.
+
+2007-08-15  Torsten Rahn  <rahn@kde.org>
 	
     * CODING: 
     Following up to Ingwa's recent work rules were 
