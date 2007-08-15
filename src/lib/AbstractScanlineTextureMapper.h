@@ -38,7 +38,7 @@ public:
 
     void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
-    void resizeMap( int width, int height );
+    virtual void resizeMap( int width, int height );
     void selectTileLevel(int radius);
     bool interlaced() { return m_interlaced; }
     void setInterlaced( bool enabled ) { m_interlaced = enabled; }
