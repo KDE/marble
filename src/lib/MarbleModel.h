@@ -44,12 +44,12 @@
 #include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"
 #include "texcolorizer.h"
-#include "gps/GpxFileModel.h"
 
 class ClipPainter;
 class PlaceMark;
 class PlaceMarkManager;
 class GpsLayer;
+class GpxFileModel;
 class MarbleModelPrivate;
 class ViewParams;
 
