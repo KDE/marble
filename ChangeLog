@@ -1,3 +1,9 @@
+2007-08-15  Tim Sutton   <tim@linfiniti.com>
+
+ Final piece of the puzzle to have a working mac bundle:
+       - install data into Contents/Resources now
+       - moved mac path stuff into systemDir()
+
 2007-08-16  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleDirs.h: 
