@@ -69,6 +69,9 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
+    /*
+    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
+             this,  SIGNAL( regionChanged( BoundingBox ) ) );*/
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();

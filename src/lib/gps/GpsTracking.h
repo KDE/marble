@@ -31,6 +31,7 @@ class Waypoint;
 class TrackPoint;
 class Track;
 class TrackSegment;
+class GpxFile;
 
 /**
 	@author Andrew Manson <g.real.ate@gmail.com>
@@ -43,7 +44,8 @@ public:
     
     enum TrackingMethod { Gps, IP, MobilePhone };
     
-    explicit GpsTracking( Track *track, TrackingMethod method = Gps, 
+    explicit GpsTracking( GpxFile *currentGpx,
+                          TrackingMethod method = Gps, 
                           QObject *parent = 0 );
     ~GpsTracking();
 
@@ -64,6 +66,7 @@ public:
     void  getData( bool error );
 
  private:
+    GpxFile             *m_currentGpx;
     QPolygonF           currentDraw;
     QPolygonF           previousDraw;
     

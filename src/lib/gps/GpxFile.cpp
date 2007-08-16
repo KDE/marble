@@ -14,8 +14,34 @@
 #include "TrackContainer.h"
 #include "RouteContainer.h"
 #include "BoundingBox.h"
+#include "GpxSax.h"
 
+#include <QtCore/QFile>
+#include <QtXml/QXmlInputSource>
 #include <QDebug>
+
+GpxFile::GpxFile( const QString &fileName )
+{
+    m_tracks = new TrackContainer;
+    m_waypoints = new WaypointContainer;
+    m_routes = new RouteContainer;
+    
+    m_name = QString (fileName);
+    
+    QFile gpxFile( fileName );
+    QXmlInputSource gpxInput( &gpxFile );
+    
+    QXmlSimpleReader gpxReader;
+    GpxSax gpxSaxHandler( this );
+    
+    gpxReader.setContentHandler( &gpxSaxHandler );
+    gpxReader.setErrorHandler( &gpxSaxHandler );
+    
+    gpxReader.parse( &gpxInput );
+    
+    m_checkState = Qt::Checked;
+    setVisible( true );
+}
 
 GpxFile::GpxFile()
 {
@@ -23,7 +49,7 @@ GpxFile::GpxFile()
     m_waypoints = new WaypointContainer;
     m_routes = new RouteContainer;
     
-    
+    m_checkState = Qt::Checked;
     setVisible( true );
 }
 
@@ -82,13 +108,36 @@ void    GpxFile::setName( const QString &name )
     m_name = name;
 }
 
-Qt::ItemFlags   GpxFile::flags()
+Qt::ItemFlags   GpxFile::flags() const
 {
-    return Qt::ItemFlags( Qt::ItemIsSelectable |
-                          Qt::ItemIsUserCheckable);
+    return Qt::ItemFlags( Qt::ItemIsUserCheckable | 
+                          Qt::ItemIsEnabled | 
+                          Qt::ItemIsSelectable );
 }
 
 QString GpxFile::display()
 {
     return m_name;
+}
+
+Qt::CheckState  GpxFile::checkState()
+{
+    return m_checkState;
+}
+
+void    GpxFile::setCheckState( Qt::CheckState state )
+{
+    m_checkState = state;
+}
+
+void    GpxFile::setCheckState( bool state )
+{
+    setVisible( state );
+    
+    if ( state ) {
+        m_checkState = Qt::Checked;
+        return;
+    }
+    
+    m_checkState = Qt::Unchecked;
 }

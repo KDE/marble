@@ -132,6 +132,8 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
 
+    connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) , 
+             this, SLOT(updateRegion( BoundingBox) ) );
     // Set background: black.
     QPalette p = palette();
     p.setColor( QPalette::Window, Qt::black );
@@ -265,7 +267,7 @@ void MarbleWidget::setMinimumZoom( int zoom )
 
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
-    d->m_model->addPlaceMarkFile( filename ); 
+    d->m_model->addPlaceMarkFile( filename );
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -1099,6 +1101,17 @@ void MarbleWidget::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+    update();
+}
+
+void MarbleWidget::updateRegion( BoundingBox box )
+{
+    //really not sure if this is nessary as its designed for 
+    //placemark based layers
+    setNeedsUpdate();
+    
+    /*TODO: write a method for BoundingBox to cacluate the screen 
+     *region and pass that to update()*/
     update();
 }
 

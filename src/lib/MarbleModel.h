@@ -151,6 +151,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void themeChanged( QString );
     void modelChanged();
+    void regionChanged( BoundingBox );
     void timeout();
 
  private Q_SLOTS:

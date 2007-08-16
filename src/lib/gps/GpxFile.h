@@ -30,6 +30,7 @@ class RouteContainer;
 class GpxFile : public AbstractLayerInterface
 {
  public:
+    GpxFile( const QString &fileName );
     GpxFile();
     
     virtual void draw( ClipPainter *painter, const QPoint &point );
@@ -45,14 +46,19 @@ class GpxFile : public AbstractLayerInterface
     void addRoute( Route *route );
     void    setName( const QString &name );
     
-    Qt::ItemFlags   flags();
+    Qt::ItemFlags   flags() const;
     QString         display();
+    Qt::CheckState  checkState();
+    void            setCheckState( Qt::CheckState state );
+    void            setCheckState( bool state );
+    
     
  private:
     QString             m_name;
     WaypointContainer  *m_waypoints;
     TrackContainer      *m_tracks;
     RouteContainer      *m_routes;
+    Qt::CheckState      m_checkState;
 };
 
 #endif

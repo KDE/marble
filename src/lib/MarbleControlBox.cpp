@@ -160,7 +160,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
     
-    //d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
+    d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
+    d->uiWidget.m_fileView->show();
 
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );

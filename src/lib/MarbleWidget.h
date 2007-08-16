@@ -672,6 +672,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesProgress( int progress );
 
     void updateChangedMap();
+   
+    /**
+     * @brief update part of the map as defined in the BoundingBox
+     */
+    void updateRegion( BoundingBox );
 
  Q_SIGNALS:
     /**

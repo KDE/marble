@@ -62,7 +62,7 @@ class GpsLayer : public AbstractLayer
     
 //     QVector<GpxFile*>   *m_files;
    
-    Track               *m_gpsTrack;
+    GpxFile             *m_currentGpx;
     GpsTracking         *m_tracking;
     
 };

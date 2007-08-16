@@ -13,6 +13,7 @@
 #include "Track.h"
 #include "TrackSegment.h"
 #include "GmlSax.h"
+#include "GpxFile.h"
 #include "AbstractLayer/AbstractLayer.h"
 
 #include <QtXml/QXmlInputSource>
@@ -20,7 +21,7 @@
 
 #include <QDebug>
 
-GpsTracking::GpsTracking( Track *track, TrackingMethod method, 
+GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method, 
                           QObject *parent ) 
      :QObject( parent )
 {
@@ -30,7 +31,8 @@ GpsTracking::GpsTracking( Track *track, TrackingMethod method,
     m_gpsPreviousPosition = new TrackPoint( 0,0 );
     m_gpsTracking         = new TrackPoint( 0,0 );
     
-    m_gpsTrack    = track;
+    m_gpsTrack    = new Track();
+    currentGpx->addTrack( m_gpsTrack );
     m_gpsTrackSeg = 0;
     m_updateDelay =0;
     
@@ -71,8 +73,7 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
             invRotAxis,
             (int)radius, 
              &previousPosition );
-    
-    qDebug() << "positions " << position << previousPosition ;
+   
     if ( !draw ) {
         return;
     }
@@ -87,8 +88,6 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
                                     / distance;
     // The normal of the unit vector between first and second
     QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
-    
-    qDebug() <<"unit vectors" << unitVector << unitVector2;
     
     previousDraw = currentDraw;
     
@@ -112,12 +111,6 @@ void GpsTracking::getData( bool error )
 
 void GpsTracking::updateIp( )
 {
-    qDebug() << "you bet your ass!" << m_data;
-   
-        
-    
-        
-        
         
 //         QTextStream out(&gmlFile);
 //         gmlFile.write( host.readAll() );

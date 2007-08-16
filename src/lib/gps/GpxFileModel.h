@@ -12,6 +12,7 @@
 #define GPXFILEMODEL_H
 
 #include "GpxFile.h"
+#include "BoundingBox.h"
 
 #include <QAbstractItemModel>
 #include <QtCore/QVariant>
@@ -22,15 +23,21 @@
 */
 class GpxFileModel : public QAbstractItemModel
 {
+//      Q_OBJECT
+
+// Q_SIGNALS :
+//     void updateRegion( BoundingBox );
 public:
     GpxFileModel();
 
     ~GpxFileModel();
     
-    Qt::ItemFlags flags( const QModelIndex &item);
+    Qt::ItemFlags flags( const QModelIndex &item) const ;
     
     QVariant data( const QModelIndex &index, 
                    int role = Qt::DisplayRole ) const;
+    bool setData ( const QModelIndex & index, const QVariant & value,
+                   int role );
     QModelIndex index ( int row, int column, 
                         const QModelIndex &parent = QModelIndex() )
                                                                 const;

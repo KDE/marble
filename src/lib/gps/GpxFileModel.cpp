@@ -9,6 +9,8 @@
 //
 
 #include "GpxFileModel.h"
+#include <QtCore/Qt>
+#include <QDebug>
 
 GpxFileModel::GpxFileModel()
  : QAbstractItemModel()
@@ -21,33 +23,58 @@ GpxFileModel::~GpxFileModel()
 {
 }
 
-Qt::ItemFlags flags( const QModelIndex &item )
+Qt::ItemFlags GpxFileModel::flags( const QModelIndex &item ) const
 {
-    return ( ( GpxFile *)item.internalPointer() )->flags() ;
+    return (static_cast<GpxFile*>(item.internalPointer()) ) ->flags()
+;
 }
 
 QVariant GpxFileModel::data( const QModelIndex &index, int role ) 
                                                                 const
-{/*
-    switch ( role ) {
-    case Qt::DisplayRole:
-        return ( ( GpxFile *)index.internalPointer() ) -> display();
-    }*/
-    return QString("test");
+{
+    if ( !index.isValid() ) {
+        return QVariant();
+    }
     
+    if ( role == Qt::DisplayRole ) {
+        
+        return static_cast<GpxFile*> ( index.internalPointer() )
+                                                          ->display();
+    }
+    
+    if ( role == Qt::CheckStateRole ) {
+        return static_cast<GpxFile*>( index.internalPointer() )
+                                                     ->checkState();
+    }
+    
+    return QVariant();
+}
+
+bool GpxFileModel::setData ( const QModelIndex &index, 
+                             const QVariant &value,
+                             int role = Qt::EditRole )
+{
+    if ( role == Qt::CheckStateRole ) {
+        ( static_cast<GpxFile*>( index.internalPointer() ) ) 
+                ->setCheckState( value.toBool() );
+        emit ( dataChanged( index, index ) );
+//         emit ( updateRegion( BoundingBox() ) );
+        return true;
+    }
+    
+    return false;
 }
 
 QModelIndex GpxFileModel::index ( int row, int column, 
                                   const QModelIndex &parent ) const 
 {
-    QModelIndex temp;
-    
-    if ( row <= m_data->size() ) {
-        temp = createIndex ( row, column, m_data->at( row ) );
+    if ( !hasIndex( row, column, parent ) ) {
+        return QModelIndex();
     }
     
-    return temp;
+    return createIndex ( row, column, m_data->at( row ) );
 }
+
 QModelIndex GpxFileModel::parent ( const QModelIndex & index ) const
 {
     return QModelIndex();
@@ -55,7 +82,11 @@ QModelIndex GpxFileModel::parent ( const QModelIndex & index ) const
 
 int GpxFileModel::rowCount ( const QModelIndex & parent ) const
 {
-    return m_data->size();
+    if ( !parent.isValid() ) {
+        return m_data->count();
+    }
+    
+    return 0;
 }
 
 int GpxFileModel::columnCount ( const QModelIndex & parent ) const 
@@ -73,5 +104,7 @@ QVector<GpxFile*> * GpxFileModel::allFiles()
 {
     return m_data;
 }
+
+//  #include "GpxFileModel.moc"
 
 
