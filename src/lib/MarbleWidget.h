@@ -33,8 +33,8 @@
 #include "marble_export.h"
 #include "MarbleModel.h"
 #include "CrossHairFloatItem.h"
+#include "CompassFloatItem.h"
 #include "katlasmapscale.h"
-#include "katlaswindrose.h"
 
 
 class QStyleOptionGraphicsItem;
@@ -107,7 +107,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
 
     Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
-    Q_PROPERTY(bool showWindRose READ showWindRose    WRITE setShowWindRose)
+    Q_PROPERTY(bool showCompass  READ showCompass     WRITE setShowCompass)
     Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
     Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
@@ -259,10 +259,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  showScaleBar() const;
 
     /**
-     * @brief  Return whether the scale bar is visible.
-     * @return The scale bar visibility.
+     * @brief  Return whether the compass bar is visible.
+     * @return The compass visibility.
      */
-    bool  showWindRose() const;
+    bool  showCompass() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
@@ -533,10 +533,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowScaleBar( bool visible );
 
     /**
-     * @brief  Set whether the wind rose overlay is visible
-     * @param  visible  visibility of the wind rose
+     * @brief  Set whether the compass overlay is visible
+     * @param  visible  visibility of the compass
      */
-    void setShowWindRose( bool visible );
+    void setShowCompass( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible

@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlaswindrose.h"
+#include "CompassFloatItem.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -20,7 +20,7 @@
 #include "MarbleDirs.h"
 
 
-KAtlasWindRose::KAtlasWindRose(QObject* parent)
+CompassFloatItem::CompassFloatItem(QObject* parent)
     : QObject(parent)
 {
     m_width = 0;
@@ -34,8 +34,8 @@ KAtlasWindRose::KAtlasWindRose(QObject* parent)
     m_font.setStyleStrategy( QFont::ForceOutline );
 
     m_fontheight = QFontMetrics( m_font ).ascent();
-    m_fontwidth = QFontMetrics( m_font ).boundingRect( "N" ).width();
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/windrose.svg" ),
+    m_fontwidth  = QFontMetrics( m_font ).boundingRect( "N" ).width();
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
                                  this );
 
     m_polarity = 1;
@@ -44,8 +44,8 @@ KAtlasWindRose::KAtlasWindRose(QObject* parent)
 }
 
 
-QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight, 
-                                            int northpoley )
+QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight, 
+                                              int northpoley )
 {
     int  width    = 52;
     int  polarity = 0;
@@ -60,6 +60,7 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
 
     if ( width == m_width && polarity == m_polarity )
         return m_pixmap;
+
     m_width    = width; 
     m_polarity = polarity;
 
@@ -108,4 +109,4 @@ QPixmap& KAtlasWindRose::drawWindRosePixmap(int canvaswidth, int canvasheight,
 }
 
 
-#include "katlaswindrose.moc"
+#include "CompassFloatItem.moc"

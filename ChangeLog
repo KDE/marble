@@ -1,9 +1,18 @@
 2007-08-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename KAtlasWindRose into CompassFloatItem
+	* src/lib/katlaswindrose.cpp: rename into CompassFloatItem.cpp
+	* src/lib/katlaswindrose.h:   rename into CompassFloatItem.h
+	* src/lib/MarbleWidget.{h,cpp}: refer to new name
+	* src/lib/MarbleLegendBrowser.{h,cpp}: refer to new name
+	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+	* data/svg/windrose.svg: rename into compass.svg
+
 	Rename KAtlasCrossHair into CrossHairFloatItem
 	* src/lib/katlascrosshair.cpp: rename into CrossHairFloatItem.cpp
 	* src/lib/katlascrosshair.h:   rename into CrossHairFloatItem.h
-	* src/lib/Marble.{h,cpp}: refer to new name
+	* src/lib/MarbleWidget.{h,cpp}: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 
 2007-08-15  Tim Sutton   <tim@linfiniti.com>

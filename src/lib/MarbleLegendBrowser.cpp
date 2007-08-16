@@ -154,8 +154,8 @@ void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
     if ( name == "relief"){
         emit toggledRelief( checked );
     }
-    if ( name == "windrose"){
-        emit toggledWindRose( checked );
+    if ( name == "compass"){
+        emit toggledCompass( checked );
     }
     if ( name == "scalebar"){
         emit toggledScaleBar( checked );
@@ -207,9 +207,9 @@ void MarbleLegendBrowser::setCheckedRelief( bool checked )
     d->m_checkBoxMap[ "relief" ] = checked;
 }
 
-void MarbleLegendBrowser::setCheckedWindRose( bool checked )
+void MarbleLegendBrowser::setCheckedCompass( bool checked )
 {
-    d->m_checkBoxMap[ "windrose" ] = checked;
+    d->m_checkBoxMap[ "compass" ] = checked;
 }
 
 void MarbleLegendBrowser::setCheckedScaleBar( bool checked )

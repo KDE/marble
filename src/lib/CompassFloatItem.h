@@ -10,12 +10,12 @@
 //
 
 //
-// KAtlasWindRose paints a windrose on a pixmap
+// CompassFloatItem paints a compass on a pixmap
 //
 
 
-#ifndef KATLASWINDROSE_H
-#define KATLASWINDROSE_H
+#ifndef COMPASSFLOATITEM_H
+#define COMPASSFLOATITEM_H
 
 
 #include <QtCore/QObject>
@@ -25,14 +25,14 @@
 
 class QSvgRenderer;
 
-class KAtlasWindRose : public QObject
+class CompassFloatItem : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasWindRose( QObject *parent = 0 );
+    CompassFloatItem( QObject *parent = 0 );
 
-    QPixmap  &drawWindRosePixmap( int, int, int );
+    QPixmap  &drawCompassPixmap( int, int, int );
 
     int transparency() const { return m_transparency; }
     void setTransparency( int transparency ) { m_transparency = transparency; m_width = -1; }
@@ -52,4 +52,4 @@ class KAtlasWindRose : public QObject
 };
 
 
-#endif // KATLASWINDROSE_H
+#endif // COMPASSFLOATITEM_H

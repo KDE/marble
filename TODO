@@ -57,7 +57,7 @@ Cleaning:
    - katlasthemeselectview -> MarbleThemeSelectView                     done
    - katlastilecreatordialog                                            --
    - katlascrosshair       -> CrossHairFloatItem                        done
-   - katlaswindrose        -> CompassFloatItem                          --
+   - katlaswindrose        -> CompassFloatItem                          done
    - katlasmapscale        -> MapScaleFloatItem                         --
    - katlasflag                                                         --
 

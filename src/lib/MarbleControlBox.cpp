@@ -172,7 +172,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->uiWidget.marbleLegendBrowser->setCheckedGrid( d->m_widget->showGrid() );
     d->uiWidget.marbleLegendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
     d->uiWidget.marbleLegendBrowser->setCheckedRelief( d->m_widget->showRelief() );
-    d->uiWidget.marbleLegendBrowser->setCheckedWindRose( d->m_widget->showWindRose() );
+    d->uiWidget.marbleLegendBrowser->setCheckedCompass( d->m_widget->showCompass() );
     d->uiWidget.marbleLegendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
 
     // Connect necessary signals.
@@ -215,8 +215,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget,                     SLOT( setShowIceLayer( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledRelief( bool ) ),
              d->m_widget,                     SLOT( setShowRelief( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWindRose( bool ) ),
-             d->m_widget,                     SLOT( setShowWindRose( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCompass( bool ) ),
+             d->m_widget,                     SLOT( setShowCompass( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
     

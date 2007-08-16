@@ -55,8 +55,8 @@ set(marblewidget_SRCS
            HttpDownloadManager.cpp
            HttpFetchFile.cpp
            CrossHairFloatItem.cpp
+           CompassFloatItem.cpp
            katlasmapscale.cpp
-           katlaswindrose.cpp
            MarbleDirs.cpp
            katlasflag.cpp
            katlastilecreatordialog.cpp
@@ -231,8 +231,8 @@ install( FILES
            HttpDownloadManager.h
            HttpFetchFile.h
            CrossHairFloatItem.h
+           CompassFloatItem.h
            katlasmapscale.h
-           katlaswindrose.h
            MarbleDirs.h
            katlasflag.h
            katlastilecreatordialog.h

@@ -41,7 +41,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void setCheckedIceLayer( bool checked );
     void setCheckedGrid( bool checked );
     void setCheckedRelief( bool checked );
-    void setCheckedWindRose( bool checked );
+    void setCheckedCompass( bool checked );
     void setCheckedScaleBar( bool checked );
 
  Q_SIGNALS:
@@ -53,7 +53,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledIceLayer( bool );
     void toggledGrid( bool );
     void toggledRelief( bool );
-    void toggledWindRose( bool );
+    void toggledCompass( bool );
     void toggledScaleBar( bool );
 
  private Q_SLOTS:

@@ -71,13 +71,13 @@ class MarbleWidgetPrivate
     TextureColorizer        *m_sealegend;
 
     // Parameters for the widgets appearance.
+    bool             m_showCompass;
     bool             m_showScaleBar;
-    bool             m_showWindRose;
 
     // Parts of the image in the Widget
     CrossHairFloatItem  m_crosshair;
+    CompassFloatItem    m_compass;  // Shown in the upper right
     KAtlasMapScale      m_mapscale; // Shown in the lower left
-    KAtlasWindRose      m_windrose; // Shown in the upper right
 
     // Tools
     MeasureTool     *m_measureTool;
@@ -185,7 +185,7 @@ void MarbleWidget::construct(QWidget *parent)
     d->m_maximumzoom = 2200;
 
     d->m_showScaleBar = true;
-    d->m_showWindRose = true;
+    d->m_showCompass  = true;
 
     QString      locale = QLocale::system().name();
     QTranslator  translator;
@@ -278,9 +278,9 @@ bool MarbleWidget::showScaleBar() const
     return d->m_showScaleBar;
 }
 
-bool MarbleWidget::showWindRose() const
+bool MarbleWidget::showCompass() const
 { 
-    return d->m_showWindRose;
+    return d->m_showCompass;
 }
 
 bool MarbleWidget::showGrid() const
@@ -855,18 +855,18 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
     d->m_justModified                   = false;
 
-    // 2. Paint the scale.
+    // 2. Paint the compass
+    if ( d->m_showCompass )
+        painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
+                            d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
+                                                            d->m_viewParams.m_canvasImage->height(),
+                                                            northPoleY() ) );
+
+    // 3. Paint the scale.
     if ( d->m_showScaleBar )
         painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( radius(),
                                                               d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
-
-    // 3. Paint the wind rose.
-    if ( d->m_showWindRose )
-        painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
-                            d->m_windrose.drawWindRosePixmap( d->m_viewParams.m_canvasImage->width(),
-                                                              d->m_viewParams.m_canvasImage->height(),
-                                                              northPoleY() ) );
 
     // 4. Paint the crosshair.
     d->m_crosshair.paint( &painter, 
@@ -931,9 +931,9 @@ void MarbleWidget::setShowScaleBar( bool visible )
     repaint();
 }
 
-void MarbleWidget::setShowWindRose( bool visible )
+void MarbleWidget::setShowCompass( bool visible )
 { 
-    d->m_showWindRose = visible;
+    d->m_showCompass = visible;
     repaint();
 }
 
@@ -1064,7 +1064,7 @@ void MarbleWidget::setQuickDirty( bool enabled )
             // Update texture map during the repaint that follows:
             setNeedsUpdate();
             transparency = enabled ? 255 : 192;
-            d->m_windrose.setTransparency( transparency );
+            d->m_compass.setTransparency( transparency );
             d->m_mapscale.setTransparency( transparency );
             repaint();
             break;
