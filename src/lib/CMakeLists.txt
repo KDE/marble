@@ -54,12 +54,12 @@ set(marblewidget_SRCS
            GridMap.cpp
            HttpDownloadManager.cpp
            HttpFetchFile.cpp
-           katlascrosshair.cpp
+           CrossHairFloatItem.cpp
+           katlasmapscale.cpp
+           katlaswindrose.cpp
            MarbleDirs.cpp
            katlasflag.cpp
-           katlasmapscale.cpp
            katlastilecreatordialog.cpp
-           katlaswindrose.cpp
            maptheme.cpp
            ViewParams.cpp
            measuretool.cpp
@@ -230,12 +230,12 @@ install( FILES
            GridMap.h
            HttpDownloadManager.h
            HttpFetchFile.h
-           katlascrosshair.h
+           CrossHairFloatItem.h
+           katlasmapscale.h
+           katlaswindrose.h
            MarbleDirs.h
            katlasflag.h
-           katlasmapscale.h
            katlastilecreatordialog.h
-           katlaswindrose.h
            maptheme.h
            ViewParams.h
            measuretool.h

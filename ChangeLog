@@ -1,3 +1,11 @@
+2007-08-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename KAtlasCrossHair into CrossHairFloatItem
+	* src/lib/katlascrosshair.cpp: rename into CrossHairFloatItem.cpp
+	* src/lib/katlascrosshair.h:   rename into CrossHairFloatItem.h
+	* src/lib/Marble.{h,cpp}: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+
 2007-08-15  Tim Sutton   <tim@linfiniti.com>
 
  Final piece of the puzzle to have a working mac bundle:

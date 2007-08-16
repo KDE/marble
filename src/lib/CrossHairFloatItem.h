@@ -14,22 +14,22 @@
 //
 
 
-#ifndef KATLASCROSSHAIR_H
-#define KATLASCROSSHAIR_H
+#ifndef CROSSHAIRFLOATITEM_H
+#define CROSSHAIRFLOATITEM_H
 
 
 #include <QtCore/QObject>
 #include <QtGui/QPainter>
 
 
-class KAtlasCrossHair : public QObject
+class CrossHairFloatItem : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasCrossHair(QObject *parent = 0);
+    CrossHairFloatItem(QObject *parent = 0);
 
-    void paintCrossHair( QPainter*, int, int );
+    void paint( QPainter*, int, int );
 
     const bool enabled()            const { return m_enabled; }
     void       setEnabled( bool enabled ) { m_enabled = enabled; }
@@ -39,4 +39,4 @@ class KAtlasCrossHair : public QObject
 };
 
 
-#endif // KATLASCROSSHAIR_H
+#endif // CROSSHAIRFLOATITEM_H

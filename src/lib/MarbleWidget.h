@@ -32,7 +32,7 @@
 #include "GeoPoint.h"
 #include "marble_export.h"
 #include "MarbleModel.h"
-#include "katlascrosshair.h"
+#include "CrossHairFloatItem.h"
 #include "katlasmapscale.h"
 #include "katlaswindrose.h"
 

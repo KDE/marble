@@ -9,19 +9,20 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlascrosshair.h"
+
+#include "CrossHairFloatItem.h"
 
 #include <QtCore/QDebug>
 
 
-KAtlasCrossHair::KAtlasCrossHair(QObject* parent)
+CrossHairFloatItem::CrossHairFloatItem(QObject* parent)
     : QObject(parent)
 {
     m_enabled = false;
 }
 
 
-void KAtlasCrossHair::paintCrossHair( QPainter* painter, int width, int height)
+void CrossHairFloatItem::paint( QPainter* painter, int width, int height)
 {
 
     if ( m_enabled ) { 
@@ -38,4 +39,4 @@ void KAtlasCrossHair::paintCrossHair( QPainter* painter, int width, int height)
 }
 
 
-#include "katlascrosshair.moc"
+#include "CrossHairFloatItem.moc"

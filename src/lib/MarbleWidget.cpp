@@ -75,9 +75,9 @@ class MarbleWidgetPrivate
     bool             m_showWindRose;
 
     // Parts of the image in the Widget
-    KAtlasCrossHair  m_crosshair;
-    KAtlasMapScale   m_mapscale; // Shown in the lower left
-    KAtlasWindRose   m_windrose; // Shown in the upper right
+    CrossHairFloatItem  m_crosshair;
+    KAtlasMapScale      m_mapscale; // Shown in the lower left
+    KAtlasWindRose      m_windrose; // Shown in the upper right
 
     // Tools
     MeasureTool     *m_measureTool;
@@ -869,9 +869,9 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                                                               northPoleY() ) );
 
     // 4. Paint the crosshair.
-    d->m_crosshair.paintCrossHair( &painter, 
-                                   d->m_viewParams.m_canvasImage->width(),
-                                   d->m_viewParams.m_canvasImage->height() );
+    d->m_crosshair.paint( &painter, 
+                          d->m_viewParams.m_canvasImage->width(),
+                          d->m_viewParams.m_canvasImage->height() );
 
     // 5. Paint measure points if there are any.
     d->m_measureTool->paintMeasurePoints( &painter, 

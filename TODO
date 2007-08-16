@@ -40,25 +40,25 @@ Misc
    - LegendBrowser                                                      done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE
-   - PlaceMarkModel                                                     done
    - (KAtlasThemeSelectView): Doesn't have any private members          --
-   - LegendBrowser                                                      done
-   - (SearchListView) does not have any private members                 --
    - MarbleNavigator                                                    done
-   - MapTheme                                                           --
+   - MarbleLegendBrowser                                                done
+   - (SearchListView) does not have any private members                 --
    - MarbleAboutDialog                                                  done
+   - MapTheme                                                           --
+   - PlaceMarkModel                                                     done
    - ViewParams                                                         --
  * Make the MarbleWidget library have a version number.  See            ----
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
 
 Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
- * Filenames KAtlasFoo -> MarbleFoo                                     INGE
+ * Filenames KAtlasFoo -> MarbleFoo or something else                   INGE
    - katlasthemeselectview -> MarbleThemeSelectView                     done
    - katlastilecreatordialog                                            --
-   - katlascrosshair                                                    --
-   - katlaswindrose                                                     --
-   - katlasmapscale                                                     --
+   - katlascrosshair       -> CrossHairFloatItem                        done
+   - katlaswindrose        -> CompassFloatItem                          --
+   - katlasmapscale        -> MapScaleFloatItem                         --
    - katlasflag                                                         --
 
 Widget:
@@ -85,7 +85,7 @@ Integration with Qt designer
  * control files for the following widgets                              TACK
    - MarbleLocator (search field for placemarks)                        --
    - MarbleControlBox                                                   --
-   - MarbleLegend                                                       --
+   - MarbleLegendBrowser                                                --
 
  * Installation issues                                                  TACK
    - Only install the public include files                              --
