@@ -77,7 +77,7 @@ bitmaps/waypoint.png
 DESTINATION ${data_dir}/bitmaps)
 
 install (FILES 
-svg/windrose.svg
+svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
 svg/marble-logo-72dpi.png
