@@ -23,6 +23,7 @@
 
 #include "GeoPoint.h"
 #include "placemark.h"
+#include "global.h"
 #include "ClipPainter.h"
 
 
@@ -33,7 +34,7 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
-    void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool );
+    void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool, Projection );
     void  sphericalPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
     void  rectangularPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
 
@@ -53,7 +54,7 @@ class MeasureTool : public QObject
     void  paintMark( ClipPainter* painter, int x, int y );
     void  drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
                             int imgrx, int imgry, int radius, 
-                            bool antialiasing );
+                            bool antialiasing, Projection );
 
     void  sphericalDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
                             int imgrx, int imgry, int radius, 

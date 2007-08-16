@@ -657,40 +657,39 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     bool noerr = false;
     switch( d->m_viewParams.m_projection ) {
     case Spherical:
-            if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-                                  + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
-            {
-                double qx = inverseRadius * (double)( x - imageHalfWidth );
-                double qy = inverseRadius * (double)( y - imageHalfHeight );
-                double qr = 1.0 - qy * qy;
+        if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
+                                + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
+        {
+            double qx = inverseRadius * (double)( x - imageHalfWidth );
+            double qy = inverseRadius * (double)( y - imageHalfHeight );
+            double qr = 1.0 - qy * qy;
 
-                double qr2z = qr - qx * qx;
-                double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;	
+            double qr2z = qr - qx * qx;
+            double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;	
 
-                Quaternion  qpos( 0.0, qx, qy, qz );
-                qpos.rotateAroundAxis( planetAxis() );
-                qpos.getSpherical( lon, lat );
+            Quaternion  qpos( 0.0, qx, qy, qz );
+            qpos.rotateAroundAxis( planetAxis() );
+            qpos.getSpherical( lon, lat );
 
-                noerr = true;
-            }
-            break;
+            noerr = true;
+        }
+        break;
 
     case Equirectangular:
-        if ( true ) { // FIXME: add criterium whether point is outside the map
+        if ( true ) {//m_activeRegion.contains( QPoint( x, y ) ) ) { // FIXME: add criterium whether point is outside the map
             float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
             float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
 
-            int xPixels = x - width() / 2;
-            int yPixels = y - height() / 2;
+            int xPixels = x - imageHalfWidth;
+            int yPixels = y - imageHalfHeight;
 
             double pixel2rad = M_PI / (double)( 2 * radius() );
             lat = yPixels * pixel2rad + centerLat;
             lon = xPixels * pixel2rad + centerLon;
 
             noerr = true;
-            }
-            break;
-
+        }
+        break;
     }
 
     if ( unit == GeoPoint::Degree ) {
@@ -871,7 +870,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                                           d->m_viewParams.m_canvasImage->width() / 2,
                                           d->m_viewParams.m_canvasImage->height() / 2,
                                           radius(), planetAxis(),
-                                          true );
+                                          true,
+                                          d->m_viewParams.m_projection );
 
     // Set the region of the image where the user can drag it.
     setActiveRegion();

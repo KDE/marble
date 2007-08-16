@@ -42,11 +42,19 @@ MeasureTool::MeasureTool(QObject* parent)
     m_pen.setWidthF( 2.0 );
 }
 
-void MeasureTool::paintMeasurePoints(ClipPainter* painter, 
+void MeasureTool::paintMeasurePoints( ClipPainter* painter, 
                                      int imgrx, int imgry, int radius, 
-                                     Quaternion planetAxis, bool antialiasing )
+                                     Quaternion planetAxis, bool antialiasing, 
+                                     Projection currentProjection )
 {
-    rectangularPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+    switch( currentProjection ) {
+        case Spherical:
+            sphericalPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+            break;
+        case Equirectangular:
+            rectangularPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+            break;
+    }
 }
 
 void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter, 
@@ -108,7 +116,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
             m_totalDistance += acos( sin( prevlat ) * sin( lat )
                                      + cos( prevlat ) * cos( lat ) * cos( prevlon - lon ) ) * 6371221.0;
 
-            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Spherical );
         }
 
         prevqpos = qpos;
@@ -164,7 +172,7 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     int  y = 0;
     m_centerLat =  planetAxis.pitch();
     m_centerLon = -planetAxis.yaw();
-    m_xyFactor = M_PI / 2*radius;
+    m_xyFactor = 2*radius / M_PI;
 
     Quaternion  qpos;
     Quaternion  prevqpos;
@@ -186,8 +194,8 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     double  lat;
     double  prevlon = 0.0;
     double  prevlat = 0.0;
-    double degX = 0.0;
-    double degY = 0.0;
+    double  degX = 0.0;
+    double  degY = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -203,7 +211,7 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
             m_totalDistance += acos( sin( prevlat ) * sin( lat )
                                      + cos( prevlat ) * cos( lat ) * cos( prevlon - lon ) ) * 6371221.0;
 
-            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Equirectangular );
         }
 
         prevqpos = qpos;
@@ -278,9 +286,16 @@ void MeasureTool::paintMark( ClipPainter* painter, int x, int y )
 
 void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
                                     Quaternion qpos, int imgrx, int imgry, 
-                                    int radius, bool antialiasing )
+                                    int radius, bool antialiasing, Projection currentProjection )
 {
-    rectangularDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+    switch( currentProjection ) {
+        case Spherical:
+            sphericalDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            break;
+        case Equirectangular:
+            rectangularDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            break;
+    }
 }
 
 void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion prevqpos,
