@@ -51,9 +51,15 @@
  * QDir::homePath() + "/.marble/data"
  * 
  * systemDir:
- * Initially the systemDir should match the place where cmake installed the 
- * data for marble. It should be possible to change that location using
- * the cmake MARBLE_DATA_PATH option at compile time.
+ * Ideally the systemDir should match the place where cmake installed the 
+ * data for marble. However this doesn't work for all plattforms:
+ * 
+ * - For Linux and Mac Non-bundle deployment the location can be 
+ *   chosen using the cmake MARBLE_DATA_PATH option at compile time.
+ * - For Mac bundle deployment the location inside the bundle gets
+ *   chosen as the default location.
+ * - For Windows a path relative to the application binary can be chosen
+ *   as this should usually work without problems.
  * 
  * To allow kiosk-like setups and for custom setups in general
  * it should be possible to change the place of the systemDir at runtime. 
@@ -63,7 +69,7 @@
  * MarbleDataPath as soon as it gets changed to a valid non-empty path. So 
  * as soon as MarbleDataPath contains a valid path the path specified by 
  * cmake will get ignored.
-
+ *
  * It's the duty of each application that uses the MarbleWidget to retrieve 
  * the value of the MarbleDataPath from the MarbleWidget and to save it 
  * in its settings and restore it on start-up of the application.
