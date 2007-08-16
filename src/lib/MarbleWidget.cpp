@@ -340,16 +340,7 @@ bool MarbleWidget::showGps() const
 
 bool  MarbleWidget::quickDirty() const
 { 
-    switch( d->m_viewParams.m_projection ) {
-        case Spherical:
-            return d->m_model->textureMapper()->interlaced();
-            break;
-        case Equirectangular:
-            return false;
-            break;
-    }
-
-    return false;
+    return d->m_model->textureMapper()->interlaced();
 }
 
 QString MarbleWidget::marbleDataDir() const

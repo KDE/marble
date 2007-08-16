@@ -312,12 +312,15 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
             qpos.getSpherical(degX,degY);
             double x = m_imgwidth/2 + m_xyFactor * (degX + m_centerLon) + m_offset;
             double y = m_imgheight/2 + m_xyFactor * (degY + m_centerLat);
-            m_currentPoint = QPointF( x, y );
             int currentSign = ( degX > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
                 m_lastSign = currentSign;
             }
+            if( fabs(degY) == M_PI/2 )
+                x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
+
+            m_currentPoint = QPointF( x, y );
             if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
                 if ( degY > M_PI / 3 ) {
@@ -328,16 +331,20 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
                             , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ));
                        m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, y);
                 }
-
-//                 if( !CrossedDateline ) {
-//                     m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
-//                     otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
-//                 }
-//                 else {
-//                     m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( M_PI + centerLon) + m_offset, m_lastY );
-//                     otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -M_PI + centerLon) + m_offset, m_lastY );
-//                 }
-
+                else {
+                    if( !CrossedDateline ) {
+                        m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
+                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor);
+                        otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
+                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor );
+                    }
+                    else {
+                        m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
+                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor );
+                        otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
+                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor);
+                    }
+                }
                 CrossedDateline = !CrossedDateline;
             }
             if ( !CrossedDateline )

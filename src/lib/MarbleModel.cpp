@@ -56,6 +56,7 @@ class MarbleModelPrivate
     GpxFileModel        *m_gpxFileModel;
 
     QTimer       *m_timer;
+    Projection  m_lastProjection;
 };
 
 
@@ -112,6 +113,8 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_gpxFileModel = new GpxFileModel;
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
+
+    d->m_lastProjection = Spherical;
 }
 
 MarbleModel::~MarbleModel()
@@ -206,6 +209,19 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
                                                 + d->m_maptheme->tilePrefix(), this );
                     break;
             }
+        else if ( currentProjection != d->m_lastProjection ) {
+            delete d->m_texmapper;
+            switch( currentProjection ) {
+                case Spherical:
+                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
+                                                + d->m_maptheme->tilePrefix(), this );
+                    break;
+                case Equirectangular:
+                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+                                                + d->m_maptheme->tilePrefix(), this );
+                    break;
+            }
+        }
         else
             d->m_texmapper->setMapTheme( "maps/earth/"
                                          + d->m_maptheme->tilePrefix() );
