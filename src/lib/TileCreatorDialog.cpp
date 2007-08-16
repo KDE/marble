@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlastilecreatordialog.h"
+#include "TileCreatorDialog.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
@@ -17,13 +17,13 @@
 #include "TileCreator.h"
 
 
-KAtlasTileCreatorDialog::KAtlasTileCreatorDialog(QWidget *parent) : QDialog(parent) 
+TileCreatorDialog::TileCreatorDialog(QWidget *parent) : QDialog(parent) 
 {
     setupUi(this);
 }
 
 
-void KAtlasTileCreatorDialog::setProgress( int progress )
+void TileCreatorDialog::setProgress( int progress )
 {
     progressBar->setValue( progress );
 
@@ -31,12 +31,12 @@ void KAtlasTileCreatorDialog::setProgress( int progress )
         accept(); 
 }
 
-void KAtlasTileCreatorDialog::setSummary( const QString& name, 
-                                          const QString& description )
+void TileCreatorDialog::setSummary( const QString& name, 
+                                    const QString& description )
 { 
     QString summary = "<B>" + tr( name.toUtf8() ) + "</B><BR>" + tr( description.toUtf8() );
     descriptionLabel->setText( summary );
 }
 
 
-#include "katlastilecreatordialog.moc"
+#include "TileCreatorDialog.moc"

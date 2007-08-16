@@ -55,11 +55,13 @@ Cleaning:
  * Filename == Classname (CamelCasing)                                  ----
  * Filenames KAtlasFoo -> MarbleFoo or something else                   INGE
    - katlasthemeselectview -> MarbleThemeSelectView                     done
-   - katlastilecreatordialog                                            --
+   - katlastilecreatordialog                                            done
    - katlascrosshair       -> CrossHairFloatItem                        done
    - katlaswindrose        -> CompassFloatItem                          done
    - katlasmapscale        -> MapScaleFloatItem                         done
    - katlasflag                                                         --
+   -----------
+   - katlascontrol                                                      --
 
 Widget:
  * Separate the view from the globe (model)                             INGE

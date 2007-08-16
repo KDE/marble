@@ -10,24 +10,24 @@
 //
 
 //
-// The KAtlasTileCreatorDialog displays the progress of the tile creation.
+// The TileCreatorDialog displays the progress of the tile creation.
 //
 
 
-#ifndef KATLASTILECREATORDIALOG_H
-#define KATLASTILECREATORDIALOG_H
+#ifndef TILECREATORDIALOG_H
+#define TILECREATORDIALOG_H
 
 
-#include "ui_katlastilecreatordialog.h"
+#include "ui_TileCreatorDialog.h"
 
 
-class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDialog
+class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
 {
 
     Q_OBJECT
 
  public:
-    KAtlasTileCreatorDialog( QWidget *parent = 0 );
+    TileCreatorDialog( QWidget *parent = 0 );
 
  public Q_SLOTS:
     void setProgress( int progress );
@@ -35,4 +35,4 @@ class KAtlasTileCreatorDialog : public QDialog, private Ui::KAtlasTileCreatorDia
 };
 
 
-#endif // KATLASTILECREATORDIALOG_H
+#endif // TILECREATORDIALOG_H

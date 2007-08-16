@@ -31,7 +31,7 @@
 #include "ClipPainter.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
-#include "katlastilecreatordialog.h"
+#include "TileCreatorDialog.h"
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 
@@ -85,7 +85,7 @@ class MarbleWidgetPrivate
     QRegion          m_activeRegion;
 
     // The progress dialog for the tile creator.
-    KAtlasTileCreatorDialog  *m_tileCreatorDlg;
+    TileCreatorDialog  *m_tileCreatorDlg;
 
 };
 
@@ -1084,7 +1084,7 @@ void MarbleWidget::creatingTilesStart( const QString &name, const QString &descr
 {
     qDebug("MarbleWidget::creatingTilesStart called... ");
 
-    d->m_tileCreatorDlg = new KAtlasTileCreatorDialog( this );
+    d->m_tileCreatorDlg = new TileCreatorDialog( this );
 
     d->m_tileCreatorDlg->setSummary( name, description );
 

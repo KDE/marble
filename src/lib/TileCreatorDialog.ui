@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>KAtlasTileCreatorDialog</class>
- <widget class="QDialog" name="KAtlasTileCreatorDialog" >
+ <class>TileCreatorDialog</class>
+ <widget class="QDialog" name="TileCreatorDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -567,7 +567,7 @@
   <connection>
    <sender>cancelButton</sender>
    <signal>clicked()</signal>
-   <receiver>KAtlasTileCreatorDialog</receiver>
+   <receiver>TileCreatorDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >

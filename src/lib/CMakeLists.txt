@@ -59,7 +59,7 @@ set(marblewidget_SRCS
            MapScaleFloatItem.cpp
            MarbleDirs.cpp
            katlasflag.cpp
-           katlastilecreatordialog.cpp
+           TileCreatorDialog.cpp
            maptheme.cpp
            ViewParams.cpp
            measuretool.cpp
@@ -122,7 +122,7 @@ MESSAGE( STATUS "${marblewidget_SRCS}" )
 set (marblewidget_UI
     MarbleControlBox.ui
     MarbleNavigator.ui
-    katlastilecreatordialog.ui
+    TileCreatorDialog.ui
     placemarkinfodialog.ui
     MarbleAboutDialog.ui
 )
@@ -235,7 +235,7 @@ install( FILES
            MapScaleFloatItem.h
            MarbleDirs.h
            katlasflag.h
-           katlastilecreatordialog.h
+           TileCreatorDialog.h
            maptheme.h
            ViewParams.h
            measuretool.h

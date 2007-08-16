@@ -42,7 +42,7 @@ class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
 class TextureColorizer;
 class MeasureTool;
-class KAtlasTileCreatorDialog;
+class TileCreatorDialog;
 class MarbleWidgetPrivate;
 class GpsLayer;
 #include "gps/GpxFileModel.h"

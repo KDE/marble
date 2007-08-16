@@ -1,5 +1,13 @@
 2007-08-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename KAtlasTileCreatorDialog into TileCreatorDialog 
+	* src/lib/katlastilecreatordialog.cpp: rename into TileCreatorDialog.cpp
+	* src/lib/katlastilecreatordialog.h:   rename into TileCreatorDialog.h
+	* src/lib/katlastilecreatordialog.ui:  rename into TileCreatorDialog.ui
+	* src/lib/MarbleWidget.{h,cpp}: refer to new name
+	* src/lib/MarbleModel.cpp: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+
 	Rename KAtlasMapScale into MapScaleFloatItem
 	* src/lib/katlasmapscale.cpp: rename into MapScaleFloatItem.cpp
 	* src/lib/katlasmapscale.h:   rename into MapScaleFloatItem.h

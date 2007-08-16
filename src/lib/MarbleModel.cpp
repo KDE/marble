@@ -26,7 +26,7 @@
 #include "TileCreator.h"
 #include "maptheme.h"
 #include "MarbleDirs.h"
-#include "katlastilecreatordialog.h"
+#include "TileCreatorDialog.h"
 #include "placemarkmanager.h"
 #include "xmlhandler.h"
 #include "gps/GpsLayer.h"
@@ -169,8 +169,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
             qDebug("Base tiles not available. Creating Tiles ... ");
 
 #if 1
-            KAtlasTileCreatorDialog tilecreatordlg( parent );
-            tilecreatordlg.setSummary( d->m_maptheme->name(),
+            TileCreatorDialog  tileCreatorDlg( parent );
+            tileCreatorDlg.setSummary( d->m_maptheme->name(),
                                        d->m_maptheme->description() );
 #endif
 
@@ -183,9 +183,9 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
             QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
 #if 1
             connect( &tilecreator,    SIGNAL( progress( int ) ),
-                     &tilecreatordlg, SLOT( setProgress( int ) ) );
+                     &tileCreatorDlg, SLOT( setProgress( int ) ) );
 
-            tilecreatordlg.exec();
+            tileCreatorDlg.exec();
 #else
 
             connect( &tilecreator, SIGNAL( progress( int ) ),
