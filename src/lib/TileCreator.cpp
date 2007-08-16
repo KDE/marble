@@ -12,6 +12,7 @@
 #include "TileCreator.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QRect>
 #include <QtCore/QSize>
 #include <QtCore/QVector>

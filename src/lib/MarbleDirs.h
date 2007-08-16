@@ -13,18 +13,9 @@
 #ifndef MARBLEDIRS_H
 #define MARBLEDIRS_H
 
+#include "marble_export.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QDir>
-#include <QtGui/QApplication>
-
-
-#ifdef Q_OS_MACX
-//for getting app bundle path
-#include <ApplicationServices/ApplicationServices.h>
-#endif
-
-#include <config-marble.h>
+#include <QtCore/QString>
 
 /**
  * @short A class that manages data look-up for Marble.
@@ -76,7 +67,7 @@
  * 
  */
 
-class MarbleDirs
+class MARBLE_EXPORT MarbleDirs
 {
  public:
     static QString path( const QString& path );

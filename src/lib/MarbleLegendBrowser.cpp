@@ -14,6 +14,8 @@
 
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
 #include <QString>

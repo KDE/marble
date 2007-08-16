@@ -15,6 +15,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDataStream>
 #include <QtCore/QDateTime>
+#include <QtCore/QDir>
+#include <QtCore/QFileInfo>
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 

@@ -12,6 +12,7 @@
 #include "TextureTile.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
 
 #include "MarbleDirs.h"
 #include "TileLoader.h"

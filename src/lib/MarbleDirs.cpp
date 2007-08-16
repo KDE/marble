@@ -12,6 +12,17 @@
 
 #include "MarbleDirs.h"
 
+#include <QtCore/QFile>
+#include <QtCore/QDir>
+#include <QtGui/QApplication>
+
+#ifdef Q_OS_MACX
+//for getting app bundle path
+#include <ApplicationServices/ApplicationServices.h>
+#endif
+
+#include <config-marble.h>
+
 QString MarbleDirs::path( const QString& path )
 { 
     //MARBLE_DATA_PATH is a compiler define set by cmake
