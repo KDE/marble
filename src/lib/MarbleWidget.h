@@ -34,7 +34,7 @@
 #include "MarbleModel.h"
 #include "CrossHairFloatItem.h"
 #include "CompassFloatItem.h"
-#include "katlasmapscale.h"
+#include "MapScaleFloatItem.h"
 
 
 class QStyleOptionGraphicsItem;

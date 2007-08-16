@@ -77,7 +77,7 @@ class MarbleWidgetPrivate
     // Parts of the image in the Widget
     CrossHairFloatItem  m_crosshair;
     CompassFloatItem    m_compass;  // Shown in the upper right
-    KAtlasMapScale      m_mapscale; // Shown in the lower left
+    MapScaleFloatItem   m_mapscale; // Shown in the lower left
 
     // Tools
     MeasureTool     *m_measureTool;

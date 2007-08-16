@@ -10,12 +10,12 @@
 //
 
 //
-// KAtlasMapScale resembles the scale in terms of value and visualization
+// MapScaleFloatItem resembles the scale in terms of value and visualization
 //
 
 
-#ifndef KATLASMAPSCALE_H
-#define KATLASMAPSCALE_H
+#ifndef MAPSCALEFLOATITEM_H
+#define MAPSCALEFLOATITEM_H
 
 
 #include <QtCore/QObject>
@@ -24,12 +24,12 @@
 #include <QtGui/QFontMetrics>
 
 
-class KAtlasMapScale : public QObject
+class MapScaleFloatItem : public QObject
 {
     Q_OBJECT
 
  public:
-    KAtlasMapScale(QObject *parent = 0);
+    MapScaleFloatItem(QObject *parent = 0);
 
     int   invScale() const            { return m_invscale; }
     void  setInvScale( int invscale ) { m_invscale = invscale; }
@@ -77,4 +77,4 @@ class KAtlasMapScale : public QObject
 };
 
 
-#endif // KATLASMAPSCALE_H
+#endif // MAPSCALEFLOATITEM_H

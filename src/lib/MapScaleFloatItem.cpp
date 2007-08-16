@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasmapscale.h"
+#include "MapScaleFloatItem.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
@@ -19,7 +19,7 @@
 const double earthdiameter = 6378.0; // km
 
 
-KAtlasMapScale::KAtlasMapScale( QObject* parent )
+MapScaleFloatItem::MapScaleFloatItem( QObject* parent )
     : QObject(parent)
 {
     m_unit = "km";
@@ -46,7 +46,7 @@ KAtlasMapScale::KAtlasMapScale( QObject* parent )
 }
 
 
-QPixmap& KAtlasMapScale::drawScaleBarPixmap( int radius, int width )
+QPixmap& MapScaleFloatItem::drawScaleBarPixmap( int radius, int width )
 {
     if ( radius == m_radius
          && m_scalebarwidth == width - m_leftmargin - m_rightmargin )
@@ -70,7 +70,7 @@ QPixmap& KAtlasMapScale::drawScaleBarPixmap( int radius, int width )
 }
 
 
-void KAtlasMapScale::paintScaleBar( QPainter* painter, int radius, int width )
+void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width )
 {
 
     if ( radius == m_radius && width == m_scalebarwidth )
@@ -127,7 +127,7 @@ void KAtlasMapScale::paintScaleBar( QPainter* painter, int radius, int width )
 }
 
 
-void KAtlasMapScale::calcScaleBar()
+void MapScaleFloatItem::calcScaleBar()
 {
     double  magnitude = 1;
 
@@ -172,4 +172,4 @@ void KAtlasMapScale::calcScaleBar()
 }
 
 
-#include "katlasmapscale.moc"
+#include "MapScaleFloatItem.moc"

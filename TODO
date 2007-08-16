@@ -58,7 +58,7 @@ Cleaning:
    - katlastilecreatordialog                                            --
    - katlascrosshair       -> CrossHairFloatItem                        done
    - katlaswindrose        -> CompassFloatItem                          done
-   - katlasmapscale        -> MapScaleFloatItem                         --
+   - katlasmapscale        -> MapScaleFloatItem                         done
    - katlasflag                                                         --
 
 Widget:

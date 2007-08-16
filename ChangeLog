@@ -1,5 +1,11 @@
 2007-08-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename KAtlasMapScale into MapScaleFloatItem
+	* src/lib/katlasmapscale.cpp: rename into MapScaleFloatItem.cpp
+	* src/lib/katlasmapscale.h:   rename into MapScaleFloatItem.h
+	* src/lib/MarbleWidget.{h,cpp}: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+
 	Rename KAtlasWindRose into CompassFloatItem
 	* src/lib/katlaswindrose.cpp: rename into CompassFloatItem.cpp
 	* src/lib/katlaswindrose.h:   rename into CompassFloatItem.h
