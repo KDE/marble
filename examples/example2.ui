@@ -97,7 +97,7 @@
      <item row="1" column="2" >
       <widget class="QCheckBox" name="checkBox_4" >
        <property name="text" >
-        <string>Show wind rose</string>
+        <string>Show compass</string>
        </property>
        <property name="checked" >
         <bool>true</bool>
@@ -389,7 +389,7 @@
    <sender>checkBox_4</sender>
    <signal>toggled(bool)</signal>
    <receiver>MarbleWidget</receiver>
-   <slot>setShowWindRose(bool)</slot>
+   <slot>setShowCompass(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
