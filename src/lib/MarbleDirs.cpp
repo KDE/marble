@@ -16,8 +16,26 @@ QString MarbleDirs::path( const QString& path )
 { 
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString marbleDataPath(MARBLE_DATA_PATH);
-//    qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
-    QString fullpath;
+//        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
+    QString  localpath = localDir() + QDir::separator() + path;	// local path
+    qDebug ("localpath: " + localpath.toLocal8Bit());
+    QString  systempath  = systemDir() + QDir::separator() + path;	// system path
+    qDebug ("systempath: " + systempath.toLocal8Bit());
+
+
+    QString fullpath = systempath;
+    if ( QFile::exists( localpath ) ) {
+        fullpath = localpath;
+    }
+    qDebug ("Using path: " + fullpath.toLocal8Bit());
+
+    return QDir( fullpath ).canonicalPath(); 
+}
+
+
+QString MarbleDirs::systemDir()
+{
+    QString systempath;
 #ifdef Q_OS_MACX
     //
     // On OSX lets try to find any file first in the bundle
@@ -33,32 +51,26 @@ QString MarbleDirs::path( const QString& path )
     //marble was not built as a bundle
     if (myPath.contains(".app"))  //its a bundle!
     {
-      fullpath = myPath + "/Contents/MacOS/resources/data/";
+      systempath = myPath + "/Contents/Resources/data";
     }
     else //must be running from a non .app bundle
     {
-      fullpath = QApplication::applicationDirPath()+"/../share/data/";
+      systempath = QApplication::applicationDirPath()+"/../share/data";
     }
-    //qDebug("KatlasDirs path calculated as: " + fullpath.toLocal8Bit());
-    fullpath += QDir::separator() + path;
-    if ( QFile::exists( fullpath ) ){
-        return QDir( fullpath ).canonicalPath(); 
+    if ( QFile::exists( systempath ) ){ 
+      return systempath;
     }
-#endif
-    QString  systempath  = systemDir() + "/" + path;    // system path
-    QString  localpath = localDir() + "/" + path;   // local path
-
-    fullpath = systempath;
-    if ( QFile::exists( localpath ) )
-        fullpath = localpath;
-
-    return QDir( fullpath ).canonicalPath(); 
-}
+#endif   // mac
 
 
-QString MarbleDirs::systemDir()
-{
-        return QDir( qApp->applicationDirPath() 
+    
+    return QDir( qApp->applicationDirPath() 
+
+// 
+// This stuff was here but never called  as the
+// line above prevents it....why....TS
+// 
+            
 #if defined(Q_OS_MACX)
                      + QLatin1String( "/Resources/data" )
 #elif defined(Q_OS_UNIX)
