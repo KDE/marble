@@ -213,7 +213,6 @@ QStringList MapTheme::findMapThemes( const QString& path )
 {
     QDir  localdirs = QDir( MarbleDirs::localDir() + '/' + path );
     QDir  sysdirs   = QDir( MarbleDirs::systemDir() + '/' + path );
-    QDir  unixdirs  = QDir( MarbleDirs::unixDir() + '/' + path );
 
     QStringList  localmappaths = localdirs.entryList( QStringList( "*" ),
                                                       QDir::AllDirs
@@ -223,10 +222,6 @@ QStringList MapTheme::findMapThemes( const QString& path )
                                                  QDir::AllDirs
                                                  | QDir::NoSymLinks
                                                  | QDir::NoDotAndDotDot );
-    QStringList unixmappaths = unixdirs.entryList( QStringList( "*" ),
-                                                   QDir::AllDirs
-                                                   | QDir::NoSymLinks
-                                                   | QDir::NoDotAndDotDot );
 
 
     QStringList  localmapdirs;
@@ -242,11 +237,6 @@ QStringList MapTheme::findMapThemes( const QString& path )
     for ( int i = 0; i < sysmappaths.size(); ++i ) {
         // qDebug() << "Map dirs: " << MarbleDirs::systemDir() + "/maps/" + sysmappaths.at(i);
         sysmapdirs << MarbleDirs::systemDir() + "/maps/earth/" + sysmappaths.at(i);
-    }
-
-    for ( int i = 0; i < unixmappaths.size(); ++i ) {
-        // qDebug() << "Map dirs: " << MarbleDirs::unixDir() + "/maps/" + unixmappaths.at(i);
-        unixmapdirs << MarbleDirs::unixDir() + "/maps/earth/" + unixmappaths.at(i);
     }
         
     QStringList  mapfiles;

@@ -55,6 +55,7 @@ set(marblewidget_SRCS
            HttpDownloadManager.cpp
            HttpFetchFile.cpp
            katlascrosshair.cpp
+           MarbleDirs.cpp
            katlasflag.cpp
            katlasmapscale.cpp
            katlastilecreatordialog.cpp
