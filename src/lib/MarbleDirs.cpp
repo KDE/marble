@@ -29,16 +29,16 @@ QString MarbleDirs::path( const QString& path )
     QString marbleDataPath(MARBLE_DATA_PATH);
 //        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
     QString  localpath = localDir() + QDir::separator() + path;	// local path
-    qDebug ("localpath: " + localpath.toLocal8Bit());
+    qDebug( "localpath: %s", qPrintable( localpath ) );
     QString  systempath  = systemDir() + QDir::separator() + path;	// system path
-    qDebug ("systempath: " + systempath.toLocal8Bit());
+    qDebug( "systempath: %s", qPrintable( systempath ) );
 
 
     QString fullpath = systempath;
     if ( QFile::exists( localpath ) ) {
         fullpath = localpath;
     }
-    qDebug ("Using path: " + fullpath.toLocal8Bit());
+    qDebug( "Using path: %s", qPrintable( fullpath ) );
 
     return QDir( fullpath ).canonicalPath(); 
 }
