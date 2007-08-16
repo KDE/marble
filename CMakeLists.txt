@@ -14,7 +14,7 @@ if(APPLE OR WIN32) #by default build Qt only version for OSX and win
 else(APPLE OR WIN32)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
 endif(APPLE OR WIN32)
-set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
+set (PEDANTIC TRUE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
 set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
 # @TODO - make os specific versions of below
