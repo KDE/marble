@@ -1,5 +1,9 @@
 2007-08-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Make the compass work again
+	* data/legend.html: Mention compass instead of windrose
+	* data/CMakeLists.txt: install compass.svg instead of windrose.svg
+	
 	Rename KAtlasTileCreatorDialog into TileCreatorDialog 
 	* src/lib/katlastilecreatordialog.cpp: rename into TileCreatorDialog.cpp
 	* src/lib/katlastilecreatordialog.h:   rename into TileCreatorDialog.h
