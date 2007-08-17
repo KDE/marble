@@ -1,5 +1,12 @@
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
+    Adding credits files.
+
+    * data/credits_authors.html
+    * data/credits_data.html
+
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
     Adding Save and Close button for Andrew to 
     the FileView.
 
