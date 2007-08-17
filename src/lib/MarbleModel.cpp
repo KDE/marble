@@ -56,7 +56,7 @@ class MarbleModelPrivate
     GpxFileModel        *m_gpxFileModel;
 
     QTimer       *m_timer;
-    Projection  m_lastProjection;
+    Projection   m_lastProjection;
 };
 
 
@@ -251,6 +251,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
     d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
+    d->m_lastProjection = currentProjection;
     emit themeChanged( d->m_maptheme->name() );
     notifyModelChanged();
 }

@@ -91,7 +91,7 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage,
 
     // Calculate how many degrees are being represented per pixel.
     float xfactor = 2 * M_PI / (float)(xRight - xLeft);
-    float yfactor = M_PI / (float)(yBottom-yTop);
+    float yfactor = M_PI / (float)( yBottom - yTop );
 
     float leftLon = - centerLon - ( xfactor * m_imageWidth / 2 );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;

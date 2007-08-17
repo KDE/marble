@@ -679,22 +679,20 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
         if ( true ) {//m_activeRegion.contains( QPoint( x, y ) ) ) { // FIXME: add criterium whether point is outside the map
             float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
             float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
-
             int xPixels = x - imageHalfWidth;
             int yPixels = y - imageHalfHeight;
 
-            double pixel2rad = M_PI / (double)( 2 * radius() );
-            lat = yPixels * pixel2rad + centerLat;
-            lon = xPixels * pixel2rad + centerLon;
-
+            double pixel2rad = M_PI / (2 * radius());
+            lat = yPixels * pixel2rad - centerLat;
+            lon = xPixels * pixel2rad - centerLon;
             noerr = true;
         }
         break;
     }
 
     if ( unit == GeoPoint::Degree ) {
-        lon *= -RAD2DEG; // FIXME: Something is wrong here ...
-        lat *= -RAD2DEG;
+        lon *= RAD2DEG;
+        lat *= RAD2DEG;
     }
 
     return noerr;
