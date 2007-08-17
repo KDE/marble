@@ -695,8 +695,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     }
 
     if ( unit == GeoPoint::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
+        lon *= -RAD2DEG;
+        lat *= -RAD2DEG;
     }
 
     return noerr;
