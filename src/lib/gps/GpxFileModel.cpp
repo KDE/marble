@@ -58,7 +58,7 @@ bool GpxFileModel::setData ( const QModelIndex &index,
         ( static_cast<GpxFile*>( index.internalPointer() ) ) 
                 ->setCheckState( value.toBool() );
         emit ( dataChanged( index, index ) );
-//         emit ( updateRegion( BoundingBox() ) );
+        emit ( updateRegion( BoundingBox() ) );
         return true;
     }
     
@@ -105,6 +105,6 @@ QVector<GpxFile*> * GpxFileModel::allFiles()
     return m_data;
 }
 
-//  #include "GpxFileModel.moc"
+  #include "GpxFileModel.moc"
 
 

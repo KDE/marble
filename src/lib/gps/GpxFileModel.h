@@ -23,10 +23,9 @@
 */
 class GpxFileModel : public QAbstractItemModel
 {
-//      Q_OBJECT
-
-// Q_SIGNALS :
-//     void updateRegion( BoundingBox );
+     Q_OBJECT
+Q_SIGNALS :
+    void updateRegion( BoundingBox );
 public:
     GpxFileModel();
 

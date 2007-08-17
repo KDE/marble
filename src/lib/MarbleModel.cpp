@@ -59,8 +59,6 @@ class MarbleModelPrivate
     Projection   m_lastProjection;
 };
 
-
-
 MarbleModel::MarbleModel( QWidget *parent )
     : d( new MarbleModelPrivate )
 {
@@ -69,9 +67,8 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
-    /*
-    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
-             this,  SIGNAL( regionChanged( BoundingBox ) ) );*/
+    
+    
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -116,7 +113,10 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_gpxFileModel = new GpxFileModel;
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
-
+    
+    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
+             this,  SIGNAL( regionChanged( BoundingBox ) ) );
+    
     d->m_lastProjection = Spherical;
 }
 
