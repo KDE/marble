@@ -15,7 +15,7 @@
  
 #include <QtGui/QMainWindow>
 
-#include "katlascontrol.h"
+#include "ControlView.h"
 
 class QAction;
 class QMenu;
@@ -30,8 +30,8 @@ class MainWindow : public QMainWindow
     public:
         MainWindow(QWidget *parent=0);
 
-        KAtlasControl* marbleControl(){ return m_katlascontrol; }
-        MarbleWidget* marbleWidget(){ return m_katlascontrol->marbleWidget(); }
+        ControlView* marbleControl(){ return m_controlView; }
+        MarbleWidget* marbleWidget(){ return m_controlView->marbleWidget(); }
 
     protected:
         void closeEvent(QCloseEvent *event);
@@ -45,7 +45,7 @@ class MainWindow : public QMainWindow
         void  writeSettings();
 
 
-        KAtlasControl *m_katlascontrol;
+        ControlView *m_controlView;
 
         QMenu *m_fileMenu;
         QMenu *m_helpMenu;

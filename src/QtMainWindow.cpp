@@ -35,11 +35,11 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     setUpdatesEnabled( false );
-    m_katlascontrol = new KAtlasControl(this);
+    m_controlView = new ControlView(this);
 
     setWindowTitle( tr("Marble - Desktop Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
-    setCentralWidget(m_katlascontrol);
+    setCentralWidget(m_controlView);
 
     createActions();
     createMenus();
@@ -143,7 +143,7 @@ void MainWindow::createStatusBar()
 
 void MainWindow::exportMapScreenShot()
 {
-    QPixmap mapPixmap = m_katlascontrol->mapScreenShot();
+    QPixmap mapPixmap = m_controlView->mapScreenShot();
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export Map"), // krazy:exclude=qclasses
                             QDir::homePath(),
@@ -163,7 +163,7 @@ void MainWindow::exportMapScreenShot()
 
 void MainWindow::printMapScreenShot()
 {
-    QPixmap mapPixmap = m_katlascontrol->mapScreenShot();
+    QPixmap mapPixmap = m_controlView->mapScreenShot();
 
     QSize printSize = mapPixmap.size();
 
@@ -225,12 +225,12 @@ void MainWindow::openFile()
         QString extension = fileName.section( '.', -1 );
 
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_katlascontrol->marbleWidget()->openGpxFile( fileName );
+            m_controlView->marbleWidget()->openGpxFile( fileName );
         }
         else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
                   == 0 ) 
         {
-            m_katlascontrol->marbleWidget()->addPlaceMarkFile( 
+            m_controlView->marbleWidget()->addPlaceMarkFile( 
                                                             fileName);
         }
     }
@@ -262,7 +262,7 @@ void MainWindow::writeSettings()
      double homeLon = 0;
      double homeLat = 0;
      int homeZoom = 0;
-     m_katlascontrol->marbleWidget()->home( homeLon, homeLat, homeZoom );
+     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
      settings.setValue( "homeLongitude", homeLon );
      settings.setValue( "homeLatitude", homeLat );
      settings.setValue( "homeZoom", homeZoom );
@@ -286,12 +286,12 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      settings.beginGroup("MarbleWidget");
-     m_katlascontrol->marbleWidget()->setHome( 
+     m_controlView->marbleWidget()->setHome( 
         settings.value("homeLongitude", -9.4).toDouble(), 
         settings.value("homeLatitude", 54.8).toDouble(),
         settings.value("homeZoom", 1050 ).toInt()
      );
-     m_katlascontrol->marbleWidget()->goHome();
+     m_controlView->marbleWidget()->goHome();
      settings.endGroup();
 }
 
