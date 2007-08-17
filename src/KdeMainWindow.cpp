@@ -94,6 +94,8 @@ void MainWindow::setupActions()
     connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
 
     setupGUI();
+
+    readSettings();
 }
 
 
