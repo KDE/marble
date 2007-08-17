@@ -35,7 +35,7 @@
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 
-#include "measuretool.h"
+#include "MeasureTool.h"
 
 
 #ifdef Q_CC_MSVC

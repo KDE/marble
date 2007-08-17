@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "measuretool.h"
+#include "MeasureTool.h"
 
 #include <cmath>
 
@@ -384,4 +384,4 @@ bool MeasureTool::testbug()
 }
 
 
-#include "measuretool.moc"
+#include "MeasureTool.moc"

@@ -62,7 +62,7 @@ set(marblewidget_SRCS
            TileCreatorDialog.cpp
            maptheme.cpp
            ViewParams.cpp
-           measuretool.cpp
+           MeasureTool.cpp
            placemark.cpp
            PlaceMarkContainer.cpp
            placemarkmanager.cpp
@@ -238,7 +238,7 @@ install( FILES
            TileCreatorDialog.h
            maptheme.h
            ViewParams.h
-           measuretool.h
+           MeasureTool.h
            placemark.h
            PlaceMarkContainer.h
            placemarkmanager.h
