@@ -29,6 +29,7 @@
 #include "ViewParams.h"
 #include "texcolorizer.h"
 #include "ClipPainter.h"
+#include "MarbleDirs.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "TileCreatorDialog.h"
@@ -345,11 +346,10 @@ bool  MarbleWidget::quickDirty() const
     return d->m_model->textureMapper()->interlaced();
 }
 
-QString MarbleWidget::marbleDataDir() const
+QString MarbleWidget::marbleDataPath() const
 { 
 
-  return QString("MarbleWidget::marbleDataDir() "
-      "This function not implemented yet....");
+  return MarbleDirs::marbleDataPath();
 }
 
 void MarbleWidget::zoomView(int zoom)
@@ -1070,9 +1070,9 @@ void MarbleWidget::setQuickDirty( bool enabled )
     }
 }
 
-void MarbleWidget::setMarbleDataDir( const QString& dataDir )
+void MarbleWidget::setMarbleDataPath( const QString& adaptedPath )
 {
-
+    MarbleDirs::setMarbleDataPath( adaptedPath );
 }
 
 // This slot will called when the Globe starts to create the tiles.

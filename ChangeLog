@@ -1,5 +1,13 @@
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
+    exposing runTimeMarbleDataPath to MarbleWidget's 
+    API.
+
+    * src/lib/MarbleWidget.{cpp,h}
+    * src/lib/MarbleDirs.cpp
+
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/measuretool.{cpp,h}
     Renaming to MeasureTool.{cpp,h}
 

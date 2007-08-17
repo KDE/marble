@@ -25,7 +25,7 @@
 
 namespace
 {
-    QString runTimeMarbleDataPath;
+    QString runTimeMarbleDataPath = "";
 }
 
 QString MarbleDirs::path( const QString& relativePath )
@@ -67,14 +67,18 @@ QString MarbleDirs::systemPath()
     {
       systempath = myPath + "/Contents/Resources/data";
     }
+/*
+    // tackat: If I understood tim correctly this should
+    //         now be obsolete, right?
     else //must be running from a non .app bundle
     {
       systempath = QApplication::applicationDirPath()+"/../share/data";
     }
+*/
     if ( QFile::exists( systempath ) ){ 
       return systempath;
     }
-#endif   // mac
+#endif   // mac bundle
 
 // Should this happen before the Mac bundle already?
 if ( !runTimeMarbleDataPath.isEmpty() )
@@ -110,5 +114,10 @@ QString MarbleDirs::marbleDataPath()
 
 void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
 {
+    if ( !QDir::root().exists( adaptedPath ) )
+    {
+        qDebug( "Invalid MarbleDataPath: %s", qPrintable( adaptedPath ) );
+    }
+
     runTimeMarbleDataPath = adaptedPath;
 }

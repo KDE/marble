@@ -340,7 +340,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return the directory that contains the Marble data
      * @return the directory that contains the Marble Data
      */
-    QString marbleDataDir() const;
+    QString marbleDataPath() const;
 
  public Q_SLOTS:
 
@@ -639,7 +639,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the data directory that contains the Marble data.
      * @param  dataDir the path that contains the data
      */
-    void setMarbleDataDir( const QString& dataDir );
+    void setMarbleDataPath( const QString& dataDir );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.
