@@ -33,6 +33,8 @@ class TrackSegment : public AbstractLayerContainer,
                       Quaternion invRotAxis);
     virtual void draw(ClipPainter*, const QPoint&);
     void drawArrow( ClipPainter*,  QPointF,  QPointF );
+    
+    virtual void printToStream( QTextStream & ) const;
 
 };
 

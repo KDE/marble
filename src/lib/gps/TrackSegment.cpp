@@ -131,3 +131,10 @@ void TrackSegment::drawArrow( ClipPainter *painter,
     painter->setBrush( temp );
     
 }
+
+void    TrackSegment::printToStream( QTextStream &out ) const
+{
+    out     << "<trkseg>\n";
+    AbstractLayerContainer::printToStream( out );
+    out     << "</trkseg>\n";
+}

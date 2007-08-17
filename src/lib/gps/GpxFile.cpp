@@ -88,6 +88,15 @@ void GpxFile::draw( ClipPainter *painter,
     m_tracks->draw( painter, canvasSize, radius, invRotAxis, box);
 }
 
+void GpxFile::printToStream( QTextStream &out ) const
+{
+    out << "<gpx version=\"1.1\" creator=\"Marble Desktop Globe\"> \n"
+            <<  (*m_waypoints)
+            <<  (*m_routes)
+            <<  (*m_tracks)
+            << "</gpx> \n";
+}
+
 void GpxFile::addWaypoint( Waypoint *waypoint )
 {
     m_waypoints->append( (AbstractLayerData*)waypoint );
@@ -141,3 +150,4 @@ void    GpxFile::setCheckState( bool state )
     
     m_checkState = Qt::Unchecked;
 }
+

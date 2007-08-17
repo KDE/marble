@@ -69,6 +69,8 @@ class Waypoint : public AbstractLayerData, public GpsElement
      */
     virtual void draw( ClipPainter *painter, const QSize &canvasSize, 
                        double radius, Quaternion invRotAxis );
+    virtual void printToStream( QTextStream & ) const;
+    void printBodyToStream( QTextStream & ) const;
     
     /**
      * @brief m_elevation getter

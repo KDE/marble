@@ -43,6 +43,26 @@ GeoPoint::GeoPoint( double _lon, double _lat, GeoPoint::Unit unit)
     }
 }
 
+void GeoPoint::geoCoordinates( double& lon, double& lat, 
+                               GeoPoint::Unit unit ) const
+{
+    switch ( unit ) 
+    {
+    case Radian:
+        m_q.getSpherical( lon, lat );
+        break;
+    case Degree:
+        double tmpLon;
+        double tmpLat;
+    
+        m_q.getSpherical( tmpLon, tmpLat );
+    
+        lon = tmpLon * RAD2DEG;
+        lat = tmpLat * -RAD2DEG;
+        break;
+        
+    }
+}
 
 QString GeoPoint::toString()
 {

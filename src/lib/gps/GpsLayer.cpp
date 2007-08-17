@@ -93,6 +93,9 @@ void GpsLayer::changeCurrentPosition( double lat, double lon )
 void GpsLayer::loadGpx( const QString &fileName )
 {
     GpxFile *tempFile = new GpxFile( fileName );
+    /*
+    QTextStream test(stderr);
+    test << *tempFile;*/
     
     m_fileModel->addFile( tempFile );
 }

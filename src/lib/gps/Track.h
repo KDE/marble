@@ -47,6 +47,8 @@ class Track : public AbstractLayerContainer,
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis, BoundingBox box);
     virtual void draw( ClipPainter*, const QPoint& );
+    
+    virtual void printToStream( QTextStream& ) const;
 };
 
 #endif //TRACK_H

@@ -37,6 +37,7 @@ class TrackPoint : public Waypoint
      * @brief draws a 3 pixel circle for a TrackPoint
      */
     virtual void draw ( ClipPainter *, const QPoint & );
+    virtual void printToStream( QTextStream & ) const;
 };
 
 

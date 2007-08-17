@@ -30,3 +30,11 @@ void TrackPoint::draw( ClipPainter * painter,
      painter->setBrush( Qt::white );
     painter->drawEllipse( position.x()-2, position.y()-2, 3, 3 );
 }
+
+void TrackPoint::printToStream( QTextStream &out ) const
+{
+    out     << "<trkpt lon=\"" << lon()
+            << "\" lat=\""<< lat() << "\">\n";
+    printBodyToStream( out );
+    out     << "</trkpt>\n";
+}

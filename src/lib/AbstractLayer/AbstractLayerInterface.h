@@ -10,6 +10,8 @@
 #ifndef ABSTRACTLAYERINTERFACE_H
 #define ABSTRACTLAYERINTERFACE_H
 
+#include <QtCore/QTextStream>
+
 class ClipPainter;
 class QPoint;
 class QSize;
@@ -18,6 +20,8 @@ class BoundingBox;
 
 class AbstractLayerInterface
 {
+    friend QTextStream& operator<<( QTextStream&, 
+                                    const AbstractLayerInterface & );
   public:
     virtual ~AbstractLayerInterface();
 
@@ -30,6 +34,8 @@ class AbstractLayerInterface
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis, BoundingBox box )=0;
+    
+    virtual void printToStream( QTextStream& ) const;
     
     bool visible() const;
     void setVisible( bool visible );

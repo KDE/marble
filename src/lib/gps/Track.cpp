@@ -70,3 +70,10 @@ void Track::draw( ClipPainter*, const QPoint&)
 {
     //a track does not have a single point drawing implementation
 }
+
+void Track::printToStream( QTextStream &out ) const
+{
+    out     << "<trk>\n";
+    AbstractLayerContainer::printToStream( out );
+    out     << "</trk>\n";
+}

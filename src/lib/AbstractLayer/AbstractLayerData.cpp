@@ -76,6 +76,26 @@ GeoPoint AbstractLayerData::position() const
     return *m_position; 
 } 
 
+double  AbstractLayerData::lat() const
+{
+    double tmpLat;
+    double tmpLon;
+    
+    m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
+    
+    return tmpLat;
+}
+
+double  AbstractLayerData::lon() const
+{
+    double tmpLat;
+    double tmpLon;
+    
+    m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
+    
+    return tmpLon;
+}
+
 void AbstractLayerData::setPosition( const GeoPoint &position )
 {
     delete m_position;
@@ -122,4 +142,9 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
     } else {
         return false;
     }
+}
+
+void AbstractLayerData::printToStream( QTextStream &out ) const
+{
+    out << "AbstractLayerData";
 }

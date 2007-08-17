@@ -45,10 +45,10 @@ class GeoPoint {
 
     int detail()  const { return m_detail; }
 
-    void geoCoordinates( double& lon, double& lat ) const {
-        m_q.getSpherical( lon, lat );
-    }
-
+    void geoCoordinates( double& lon, double& lat, 
+                         GeoPoint::Unit unit = GeoPoint::Radian )
+                                                                const;
+ 
     const Quaternion &quaternion() const { return m_q; }
     
     QString toString();

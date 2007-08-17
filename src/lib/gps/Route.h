@@ -41,6 +41,8 @@ class Route : public AbstractLayerContainer, public GpsElement,
                       Quaternion invRotAxis, BoundingBox box);
     virtual void draw( ClipPainter*, const QPoint& );
     
+    virtual void printToStream( QTextStream & ) const;
+    
 };
 
 #endif //ROUTE_H

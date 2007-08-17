@@ -16,6 +16,7 @@
 #include "../GeoPoint.h"
 #include "AbstractLayerInterface.h"
 
+
 class QPixmap;
 class QPainter;
 class QPoint;
@@ -103,6 +104,10 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * @return GeoPoint representation of the position of this Object
      */
     GeoPoint position() const ;
+    
+    double lat() const;
+    
+    double lon() const;
    
     /**
      * @brief m_position setter
@@ -144,6 +149,8 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
                      int radius, QPointF *position);
     
+ protected:
+    virtual void printToStream( QTextStream & ) const;
     
  private:
     /**

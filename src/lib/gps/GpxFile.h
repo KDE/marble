@@ -14,6 +14,7 @@
 
 #include <QtCore/Qt>
 #include <QtCore/QString>
+#include <QtCore/QTextStream>
 
 class ClipPainter;
 class QPoint;
@@ -41,6 +42,8 @@ class GpxFile : public AbstractLayerInterface
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis, BoundingBox box );
+    virtual void printToStream( QTextStream & ) const;
+    
     void addWaypoint( Waypoint *waypoint );
     void addTrack( Track *track );
     void addRoute( Route *route );
@@ -51,6 +54,7 @@ class GpxFile : public AbstractLayerInterface
     Qt::CheckState  checkState();
     void            setCheckState( Qt::CheckState state );
     void            setCheckState( bool state );
+    
     
     
  private:

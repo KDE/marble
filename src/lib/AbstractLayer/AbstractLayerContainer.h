@@ -36,6 +36,7 @@ class BoundingBox;
 class AbstractLayerContainer : public QVector<AbstractLayerData*>,
                                public virtual AbstractLayerInterface
 {
+    
  public:
     /**
      * @brief simple constructor with optional starting size.
@@ -116,6 +117,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * implementation is available.
      */
     virtual void processVisible();
+    
+    virtual void printToStream( QTextStream& ) const;
     
     /**
      * @brief brings data from file into memory

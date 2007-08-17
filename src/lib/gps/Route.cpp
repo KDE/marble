@@ -60,3 +60,10 @@ void Route::draw( ClipPainter *painter,
 void Route::draw( ClipPainter*, const QPoint& )
 {
 }
+
+void Route::printToStream( QTextStream &out ) const
+{
+    out     << "<rte>";
+    AbstractLayerContainer::printToStream( out );
+    out     << "</rte>";
+}

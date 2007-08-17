@@ -72,6 +72,23 @@ void Waypoint::draw( ClipPainter *painter, const QSize &canvasSize,
     
 }
 
+void Waypoint::printToStream( QTextStream &out ) const 
+{
+    out     << "<wpt lat=\"" << lat() 
+            << "\" lon=\"" << lon() << "\">\n";
+    printBodyToStream( out );
+    out     << "</wpt>\n";
+}
+
+void Waypoint::printBodyToStream( QTextStream &out ) const
+{
+    if ( m_elevation ) {
+        out << "<ele>" << m_elevation << "</ele>\n";
+    }
+    //TODO:: add rest of body GPX elements here
+
+}
+
 /*
 QPixmap Waypoint::symbolPixmap()
 {

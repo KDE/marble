@@ -23,3 +23,15 @@ void AbstractLayerInterface::setVisible( bool visible )
 {
     m_visible = visible;
 }
+
+void    AbstractLayerInterface::printToStream( QTextStream &out )const
+{
+    out << "AbstractLayerInterface Base Class";
+}
+
+QTextStream&    operator<<( QTextStream& out,
+                            const AbstractLayerInterface &item )
+{
+    item.printToStream( out );
+    return out;
+}

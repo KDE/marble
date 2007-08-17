@@ -96,6 +96,16 @@ void AbstractLayerContainer::processVisible()
     }
 }
 
+void AbstractLayerContainer::printToStream( QTextStream & out) const
+{
+    const_iterator it;
+    
+    for( it = constBegin(); it < constEnd(); ++it )
+    {
+        out << *(*it);
+    }
+}
+
 double AbstractLayerContainer::distance ( const QPoint &a, 
                                           const QPoint &b )
 {
@@ -136,5 +146,7 @@ void AbstractLayerContainer::manageMemory()
         }
     }
 }
+
+
 
 
