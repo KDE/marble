@@ -939,7 +939,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2" >
+          <widget class="QPushButton" name="m_saveButton" >
            <property name="enabled" >
             <bool>false</bool>
            </property>
@@ -949,7 +949,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton" >
+          <widget class="QPushButton" name="m_closeButton" >
            <property name="enabled" >
             <bool>false</bool>
            </property>
