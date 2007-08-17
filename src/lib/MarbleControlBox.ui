@@ -144,7 +144,7 @@
             <string>Location Browser</string>
            </property>
            <property name="whatsThis" >
-            <string>Double Click an entry of this list to get it displayed on the map.</string>
+            <string>Double click an entry of this list to get it displayed on the map.</string>
            </property>
            <property name="horizontalScrollBarPolicy" >
             <enum>Qt::ScrollBarAlwaysOff</enum>

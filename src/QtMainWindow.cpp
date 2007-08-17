@@ -219,7 +219,7 @@ void MainWindow::openFile()
     QString fileName;
     fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                             QString(), 
-                            tr("GPS Data(*.gpx);;KML(*.kml)"));
+                            tr("GPS Data (*.gpx);;KML (*.kml)"));
 
     if ( ! fileName.isNull() ) {
         QString extension = fileName.section( '.', -1 );
