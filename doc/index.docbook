@@ -180,7 +180,7 @@
          </screenshot>
          <para>
             On the first tab of the dialog very basic data is provided, like coordinates and the name and flag of the country the place belongs to. Additionally population numbers for cities get shown as well as the elevation for mountains. 
-            If your computer is connected to the Internet and if you're online &marble; will try to connect to the popular internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
+            If your computer is connected to the Internet and if you're online &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
          </para>
      </chapter>
 
