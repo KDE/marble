@@ -22,12 +22,10 @@
 
 void MainWindow::showFullScreen( bool isChecked )
 {
-    if ( isChecked )
-    {
+    if ( isChecked ) {
         QWidget::showFullScreen();
     }
-    else
-    {
+    else {
         showNormal();
     }
 
@@ -36,14 +34,14 @@ void MainWindow::showFullScreen( bool isChecked )
 
 void MainWindow::showSideBar( bool isChecked )
 {
-    m_katlascontrol->setSideBarShown( isChecked );
+    m_controlView->setSideBarShown( isChecked );
 
     m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
 void MainWindow::copyMap()
 {
-    QPixmap      mapPixmap = m_katlascontrol->mapScreenShot();
+    QPixmap      mapPixmap = m_controlView->mapScreenShot();
     QClipboard  *clipboard = QApplication::clipboard();
 
     clipboard->setPixmap( mapPixmap );

@@ -72,13 +72,13 @@ else (QTONLY)
 endif (QTONLY)
 
 set(marble_SRCS
-           katlascontrol.cpp
+           ControlView.cpp
            MarbleTest.cpp
            MainWindowCommon.cpp
 )
 
 set(marble_HDRS
-           katlascontrol.h
+           ControlView.h
            MarbleTest.h
 )
 

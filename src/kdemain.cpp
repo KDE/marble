@@ -76,11 +76,11 @@ int main (int argc, char *argv[])
     }
     
     if ( args->isSet( "enableCurrentLocation" ) ) {
-        window->marbleControl()->setCurrentLocationTabShown(true);
+        window->controlView()->setCurrentLocationTabShown(true);
     }
     
     if ( args->isSet( "enableFileView" ) ) {
-        window->marbleControl()->setFileViewTabShown(true);
+        window->controlView()->setFileViewTabShown(true);
     }
 
     // Read the files that are given on the command line.
@@ -90,7 +90,7 @@ int main (int argc, char *argv[])
 
         // FIXME: Use openUrl( args->url(i)) instead?
         if ( QFile::exists( args->arg( i ) ) )
-            ( window->marbleControl() )->addPlaceMarkFile( args->arg( i ) );
+            ( window->controlView() )->addPlaceMarkFile( args->arg( i ) );
     }
 
     delete marbleTest;

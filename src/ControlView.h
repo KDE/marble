@@ -14,29 +14,27 @@
 //
 
 
-#ifndef KATLASCONTROL_H
-#define KATLASCONTROL_H
-
+#ifndef CONTROLVIEW_H
+#define CONTROLVIEW_H
 
 
 #include <QtGui/QWidget>
 #include <QtGui/QPixmap>
 
+#include "MarbleWidget.h"
 #include "MarbleControlBox.h"
-#include "lib/MarbleWidget.h"
-
 
 class QSplitter;
-class MarbleWidget;
 
 
-class KAtlasControl : public QWidget
+
+class ControlView : public QWidget
 {
     Q_OBJECT
 
  public:
-    KAtlasControl(QWidget *);
-    virtual ~KAtlasControl(){}
+    ControlView(QWidget *);
+    virtual ~ControlView(){}
 
     MarbleWidget  *marbleWidget() const { return m_marbleWidget; }
 
@@ -69,4 +67,4 @@ class KAtlasControl : public QWidget
 };
 
 
-#endif // KATLASCONTROL_H
+#endif // CONTROLVIEW_H

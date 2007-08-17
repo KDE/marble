@@ -1,3 +1,14 @@
+2007-08-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename KAtlasControl into ControlView:
+	* src/katlascontrol.cpp: rename into ControlView.cpp
+	* src/katlascontrol.h:   rename into ControlView.h
+	* src/KdeMainWindow.{h,cpp}: refer to new name
+	* src/MainWindowCommon.cpp: refer to new name
+	* src/kdemain.cpp: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+	Note: Tackat will have to do the Qt-only version.
+	
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
     exposing runTimeMarbleDataPath to MarbleWidget's 

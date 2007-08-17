@@ -32,17 +32,17 @@
 MainWindow::MainWindow(QWidget *parent)
     : KXmlGuiWindow(parent)
 {
-    m_katlascontrol = new KAtlasControl(this);
-    setCentralWidget(m_katlascontrol);
+    m_controlView = new ControlView(this);
+    setCentralWidget( m_controlView );
 
     setupActions();
     setXMLFile("marbleui.rc");
 
     // Create the statusbar and populate it with initial data.
     createStatusBar();
-    connect( m_katlascontrol->marbleWidget(), SIGNAL( zoomChanged( int ) ),
-             this,                            SLOT( showZoom( int ) ) );
-    showZoom( m_katlascontrol->marbleWidget()->zoom() );
+    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
+             this,                          SLOT( showZoom( int ) ) );
+    showZoom( m_controlView->marbleWidget()->zoom() );
 }
 
 
@@ -107,7 +107,7 @@ void MainWindow::showZoom(int zoom)
 
 void MainWindow::exportMapScreenShot()
 {
-    QPixmap  mapPixmap = m_katlascontrol->mapScreenShot();
+    QPixmap  mapPixmap = m_controlView->mapScreenShot();
 
     QString  fileName = KFileDialog::getSaveFileName( QDir::homePath(),
                                                       i18n( "Images (*.jpg *.png)" ),
@@ -126,7 +126,7 @@ void MainWindow::exportMapScreenShot()
 
 void MainWindow::printMapScreenShot()
 {
-    QPixmap       mapPixmap = m_katlascontrol->mapScreenShot();
+    QPixmap       mapPixmap = m_controlView->mapScreenShot();
     QSize         printSize = mapPixmap.size();
     KPrinter      printer;
 
@@ -163,13 +163,10 @@ void MainWindow::openFile()
         QString extension = fileName.section( '.', -1 );
 
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_katlascontrol->marbleWidget()->openGpxFile( fileName );
+            m_controlView->marbleWidget()->openGpxFile( fileName );
         }
-        else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
-                  == 0 ) 
-        {
-            m_katlascontrol->marbleWidget()->addPlaceMarkFile( 
-                                          fileName);
+        else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
+            m_controlView->marbleWidget()->addPlaceMarkFile( fileName );
         }
     }
 }

@@ -16,11 +16,11 @@
 #include <KXmlGuiWindow>
 #include <KAction>
 
-#include "katlascontrol.h"
+#include "ControlView.h"
 
 class QLabel;
 
-class KAtlasControl;
+class ControlView;
 class MarbleWidget;
  
 class MainWindow : public KXmlGuiWindow
@@ -30,8 +30,8 @@ class MainWindow : public KXmlGuiWindow
  public:
     MainWindow(QWidget *parent=0);
 
-    KAtlasControl* marbleControl(){ return m_katlascontrol; }
-    MarbleWidget* marbleWidget(){ return m_katlascontrol->marbleWidget(); }
+    ControlView  *controlView()  const { return m_controlView; }
+    MarbleWidget *marbleWidget() const { return m_controlView->marbleWidget();}
 
  private:
     void  setupActions();
@@ -50,18 +50,18 @@ class MainWindow : public KXmlGuiWindow
 
  private:
     // All the functionality is provided by this widget.
-    KAtlasControl  *m_katlascontrol;
+    ControlView  *m_controlView;
 
     // Zoom label for the statusbar.
-    QLabel         *m_zoomLabel;
+    QLabel       *m_zoomLabel;
 
     // Actions for the GUI.
-    KAction        *m_exportMapAction;
-    KAction        *m_printMapAction;
-    KAction        *m_copyMapAction;
-    KAction        *m_sideBarAct;
-    KAction        *m_fullScreenAct;
-    KAction        *m_openAct;
+    KAction      *m_exportMapAction;
+    KAction      *m_printMapAction;
+    KAction      *m_copyMapAction;
+    KAction      *m_sideBarAct;
+    KAction      *m_fullScreenAct;
+    KAction      *m_openAct;
 };
 
  

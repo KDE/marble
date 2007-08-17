@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlascontrol.h"
+#include "ControlView.h"
 
 #include <QtGui/QLayout>
 #include <QtGui/QSplitter>
@@ -20,7 +20,7 @@
 
 
 
-KAtlasControl::KAtlasControl(QWidget *parent)
+ControlView::ControlView(QWidget *parent)
    : QWidget(parent)
 {
     setWindowTitle(tr("Marble - Desktop Globe"));
@@ -28,11 +28,9 @@ KAtlasControl::KAtlasControl(QWidget *parent)
     resize( 680, 640 );
 
     m_control = new MarbleControlBox( this );
-//    m_control->setFixedWidth( 185 );
     m_splitter = new QSplitter (this);
 
     m_marbleWidget = new MarbleWidget( this );
-
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
     m_marbleWidget->setMinimumZoom( m_control->minimumZoom() );
@@ -52,64 +50,64 @@ KAtlasControl::KAtlasControl(QWidget *parent)
 }
 
 
-void KAtlasControl::zoomIn()
+void ControlView::zoomIn()
 {
     m_marbleWidget->zoomIn();
 }
 
-void KAtlasControl::zoomOut()
+void ControlView::zoomOut()
 {
     m_marbleWidget->zoomOut();
 }
 
-void KAtlasControl::moveLeft()
+void ControlView::moveLeft()
 {
     m_marbleWidget->moveLeft();
 }
 
-void KAtlasControl::moveRight()
+void ControlView::moveRight()
 {
     m_marbleWidget->moveRight();
 }
 
-void KAtlasControl::moveUp()
+void ControlView::moveUp()
 {
     m_marbleWidget->moveUp();
 }
 
-void KAtlasControl::moveDown()
+void ControlView::moveDown()
 {
     m_marbleWidget->moveDown();
 }
 
-void KAtlasControl::setSideBarShown( bool show )
+void ControlView::setSideBarShown( bool show )
 {
     m_control->setVisible( show );
 }
 
-void KAtlasControl::setNavigationTabShown( bool show )
+void ControlView::setNavigationTabShown( bool show )
 {
     m_control->setNavigationTabShown( show );
 }
 
-void KAtlasControl::setLegendTabShown( bool show )
+void ControlView::setLegendTabShown( bool show )
 {
     m_control->setLegendTabShown( show );
 }
 
-void KAtlasControl::setMapViewTabShown( bool show )
+void ControlView::setMapViewTabShown( bool show )
 {
     m_control->setMapViewTabShown( show );
 }
 
-void KAtlasControl::setCurrentLocationTabShown( bool show )
+void ControlView::setCurrentLocationTabShown( bool show )
 {
     m_control->setCurrentLocationTabShown( show );
 }
 
-void KAtlasControl::setFileViewTabShown( bool show )
+void ControlView::setFileViewTabShown( bool show )
 {
     m_control->setFileViewTabShown( show );
 }
 
-#include "katlascontrol.moc"
+#include "ControlView.moc"
