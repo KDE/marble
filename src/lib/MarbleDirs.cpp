@@ -23,14 +23,19 @@
 
 #include <config-marble.h>
 
-QString MarbleDirs::path( const QString& path )
+namespace
+{
+    QString MarbleDataPath;
+}
+
+QString MarbleDirs::path( const QString& relativePath )
 { 
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString marbleDataPath(MARBLE_DATA_PATH);
 //        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
-    QString  localpath = localDir() + QDir::separator() + path;	// local path
+    QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
     qDebug( "localpath: %s", qPrintable( localpath ) );
-    QString  systempath  = systemDir() + QDir::separator() + path;	// system path
+    QString  systempath  = systemPath() + QDir::separator() + relativePath;	// system path
     qDebug( "systempath: %s", qPrintable( systempath ) );
 
 
@@ -44,7 +49,7 @@ QString MarbleDirs::path( const QString& path )
 }
 
 
-QString MarbleDirs::systemDir()
+QString MarbleDirs::systemPath()
 {
     QString systempath;
 #ifdef Q_OS_MACX
@@ -96,7 +101,17 @@ QString MarbleDirs::systemDir()
                      ).canonicalPath();
 }
 
-QString MarbleDirs::localDir() 
+QString MarbleDirs::localPath() 
 { 
     return QString( QDir::homePath() + "/.marble/data" ); // local path
+}
+
+QString MarbleDirs::marbleDataPath()
+{
+    return MarbleDataPath;
+}
+
+void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
+{
+    MarbleDataPath = adaptedPath;
 }

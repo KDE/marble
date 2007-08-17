@@ -30,22 +30,22 @@
  * 
  * Generally there are two places of which Marble will draw it's data from:
  * 
- * "localDir" and "systemDir".
+ * "localPath" and "systemPath".
  * 
- * look-up of the data should happen in the localDir first.
- * Only if the look-up in the localDir failed then MarbleDirs should 
- * look up the data in the systemDir.
+ * look-up of the data should happen in the localPath first.
+ * Only if the look-up in the localPath failed then MarbleDirs should 
+ * look up the data in the systemPath.
  * 
- * homeDir:
- * The place for homeDir should match space that is fully accessible to 
+ * localPath:
+ * The place for localPath should match space that is fully accessible to 
  * the user. On Unix-like plattforms this matches 
  * QDir::homePath() + "/.marble/data"
  * 
- * systemDir:
- * Ideally the systemDir should match the place where cmake installed the 
+ * systemPath:
+ * Ideally the systemPath should match the place where cmake installed the 
  * data for marble. However this doesn't work for all plattforms:
  * 
- * - For Linux and Mac Non-bundle deployment the location can be 
+ * - For Linux and Mac non-bundle deployment the location can be 
  *   chosen using the cmake MARBLE_DATA_PATH option at compile time.
  * - For Mac bundle deployment the location inside the bundle gets
  *   chosen as the default location.
@@ -53,14 +53,18 @@
  *   as this should usually work without problems.
  * 
  * To allow kiosk-like setups and for custom setups in general
- * it should be possible to change the place of the systemDir at runtime. 
+ * it should be possible to change the place of the systemPath at runtime. 
  * Therefore we introduce a global variable "MarbleDataPath" in the 
  * MarbleDirs.h source code.
- * Initially MarbleDataPath is empty. The systemDir will point to 
+ * Initially MarbleDataPath is empty. The systemPath will point to 
  * MarbleDataPath as soon as it gets changed to a valid non-empty path. So 
  * as soon as MarbleDataPath contains a valid path the path specified by 
  * cmake will get ignored.
  *
+ * ( Possible future extension: if the MarbleDataPath contains several
+ * valid paths seperated by a colon then each of these paths should be
+ * used for look up in the same order as for the KDE kiosk framework. ) 
+ * 
  * It's the duty of each application that uses the MarbleWidget to retrieve 
  * the value of the MarbleDataPath from the MarbleWidget and to save it 
  * in its settings and restore it on start-up of the application.
@@ -70,11 +74,16 @@
 class MARBLE_EXPORT MarbleDirs
 {
  public:
-    static QString path( const QString& path );
+    static QString path( const QString& relativePath );
 
-    static QString systemDir(); 
+    static QString systemPath(); 
 
-    static QString localDir(); 
+    static QString localPath(); 
+
+    static QString marbleDataPath();
+
+    static void setMarbleDataPath( const QString& adaptedPath);
+
 };
 
 

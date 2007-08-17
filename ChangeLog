@@ -1,3 +1,21 @@
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
+    Making naming of the directory paths more consistent
+    with Qt/KDE naming scheme: "Dir" names a QDir,
+    "Path" the QString of the respective directory name.
+
+    systemDir --> systemPath, localDir --> localPath
+
+    * src/lib/TileCreator.cpp
+    * src/lib/placemarkmanager.cpp
+    * src/lib/HttpDownloadManager.cpp
+    * src/lib/HttpFetchFile.cpp
+    * src/lib/maptheme.cpp
+    * src/lib/tinywebbrowser.cpp
+    * src/lib/MarbleDirs.{cpp,h}:
+
+    Introduced MarbleDataPath as a "static global".
+
 2007-08-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Make the compass work again

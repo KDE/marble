@@ -29,7 +29,7 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl )
 
     m_fetchFile = new HttpFetchFile(this);
 
-    setTargetDir( MarbleDirs::localDir() + '/' );
+    setTargetDir( MarbleDirs::localPath() + '/' );
 
     connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ), this, SLOT( reportResult( HttpJob*, int ) ) );
     connect( m_fetchFile, SIGNAL( statusMessage( QString ) ), this, SIGNAL( statusMessage( QString ) ) );

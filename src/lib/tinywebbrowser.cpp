@@ -25,7 +25,7 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
     m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/") );
-    m_downloadManager->setTargetDir( MarbleDirs::localDir() + "/cache/" );
+    m_downloadManager->setTargetDir( MarbleDirs::localPath() + "/cache/" );
 
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
         this, SLOT( slotDownloadFinished( QString, int ) ) );
@@ -37,8 +37,8 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
 //             SIGNAL( statusMessage( QString) ) );		
 
     QStringList  searchPaths;
-    searchPaths << MarbleDirs::localDir() + "/cache/"
-                << MarbleDirs::systemDir() + "/cache/";
+    searchPaths << MarbleDirs::localPath() + "/cache/"
+                << MarbleDirs::systemPath() + "/cache/";
     setSearchPaths( searchPaths );
 }
 

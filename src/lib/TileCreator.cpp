@@ -45,7 +45,7 @@ bool TileCreator::createTiles()
 
     QString m_sourceDir = MarbleDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
     if ( m_targetDir.isNull() )
-        m_targetDir = MarbleDirs::localDir() + "/maps/earth/" + m_prefix + '/';
+        m_targetDir = MarbleDirs::localPath() + "/maps/earth/" + m_prefix + '/';
     if ( !m_targetDir.endsWith('/') )
         m_targetDir += '/';
 

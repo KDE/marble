@@ -25,7 +25,7 @@ HttpFetchFile::HttpFetchFile( QObject *parent )
     : QObject( parent )
 {
     m_pHttp     = new QHttp(this);
-    m_targetDirString = MarbleDirs::localDir() + "/cache/";
+    m_targetDirString = MarbleDirs::localPath() + "/cache/";
 
     if ( QDir( m_targetDirString ).exists() == false ) 
         ( QDir::root() ).mkpath( m_targetDirString );
