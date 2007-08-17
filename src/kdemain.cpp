@@ -60,7 +60,6 @@ int main (int argc, char *argv[])
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
 
-    window->resize(680, 640);
     window->show();
 
     if ( args->isSet( "timedemo" ) ) {

@@ -29,6 +29,7 @@ class MainWindow : public KXmlGuiWindow
 
  public:
     MainWindow(QWidget *parent=0);
+    ~MainWindow();
 
     ControlView  *controlView()  const { return m_controlView; }
     MarbleWidget *marbleWidget() const { return m_controlView->marbleWidget();}
@@ -48,7 +49,14 @@ class MainWindow : public KXmlGuiWindow
     void  showSideBar( bool );
     void openFile();
 
+protected:
+    virtual void saveProperties( KConfigGroup &group );
+    virtual void readProperties( const KConfigGroup &group );
+
  private:
+    void  readSettings();
+    void  writeSettings();
+
     // All the functionality is provided by this widget.
     ControlView  *m_controlView;
 

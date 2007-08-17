@@ -26,6 +26,8 @@
 #include <KToggleFullScreenAction>
 #include <KPrinter>
 
+#include "settings.h"
+
 // #include <KPrintDialogPage>
 
 
@@ -43,6 +45,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
              this,                          SLOT( showZoom( int ) ) );
     showZoom( m_controlView->marbleWidget()->zoom() );
+
+    setAutoSaveSettings();
+}
+
+MainWindow::~MainWindow()
+{
+    writeSettings();
 }
 
 
@@ -71,7 +80,7 @@ void MainWindow::setupActions()
 //             Marble"));
 
     // Standard actions.  So far only Quit.
-    KStandardAction::quit( kapp, SLOT( quit() ), actionCollection() );
+    KStandardAction::quit( kapp, SLOT( closeAllWindows() ), actionCollection() );
 
     m_sideBarAct = new KAction( i18n("Show &Navigation Panel"), this );
     actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
@@ -95,6 +104,42 @@ void MainWindow::createStatusBar()
 
     m_zoomLabel = new QLabel( statusBar() );
     statusBar()->addWidget(m_zoomLabel);
+}
+
+
+void MainWindow::saveProperties( KConfigGroup &group )
+{
+    Q_UNUSED( group )
+}
+
+
+void MainWindow::readProperties( const KConfigGroup &group )
+{
+    Q_UNUSED( group )
+}
+
+
+void MainWindow::writeSettings()
+{
+     double homeLon = 0;
+     double homeLat = 0;
+     int homeZoom = 0;
+     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+     MarbleSettings::setHomeLongitude( homeLon );
+     MarbleSettings::setHomeLatitude( homeLat );
+     MarbleSettings::setHomeZoom( homeZoom );
+     MarbleSettings::self()->writeConfig();
+}
+
+
+void MainWindow::readSettings()
+{
+     m_controlView->marbleWidget()->setHome( 
+        MarbleSettings::homeLongitude(),
+        MarbleSettings::homeLatitude(),
+        MarbleSettings::homeZoom()
+     );
+     m_controlView->marbleWidget()->goHome();
 }
 
 

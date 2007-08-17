@@ -1,3 +1,12 @@
+2007-08-17  Pino Toscano  <pino@kde.org>
+
+    * src/KdeMainWindow.{cpp,h}
+    * src/kdemain.cpp
+    * src/marble.kcfg
+    * src/settings.kcfgc
+    * src/CMakeLists.txt
+    Add KConfigXT settings for the KDE GUI.
+
 2007-08-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename KAtlasControl into ControlView:
