@@ -54,8 +54,7 @@ int main(int argc, char *argv[])
     {
       myPath += "/Contents/plugins";
       QApplication::addLibraryPath( myPath );
-      qDebug("Added " + myPath.toLocal8Bit() +
-          " to plugin search path");
+      qDebug( "Added %s to plugin search path", qPrintable( myPath ) );
     }
 #endif
 
