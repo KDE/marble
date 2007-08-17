@@ -1,3 +1,10 @@
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
+    Adding Save and Close button for Andrew to 
+    the FileView.
+
+    * src/lib/MarbleControlBox.ui
+
 2007-08-17  Pino Toscano  <pino@kde.org>
 
     * src/KdeMainWindow.{cpp,h}

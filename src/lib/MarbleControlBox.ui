@@ -448,7 +448,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>251</width>
+        <width>236</width>
         <height>409</height>
        </rect>
       </property>
@@ -543,7 +543,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>251</width>
+        <width>236</width>
         <height>409</height>
        </rect>
       </property>
@@ -896,6 +896,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="m_fileViewTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>236</width>
+        <height>409</height>
+       </rect>
+      </property>
       <attribute name="label" >
        <string>File View</string>
       </attribute>
@@ -908,6 +916,49 @@
        </property>
        <item>
         <widget class="QListView" name="m_fileView" />
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>&amp;Save</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="text" >
+            <string>&amp;Close</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
