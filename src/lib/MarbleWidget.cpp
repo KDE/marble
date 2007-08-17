@@ -685,6 +685,10 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
             double pixel2rad = M_PI / (2 * radius());
             lat = yPixels * pixel2rad - centerLat;
             lon = xPixels * pixel2rad - centerLon;
+
+            while( lon > M_PI ) lon -= 2*M_PI;
+            while( lon < -M_PI ) lon += 2*M_PI;
+
             noerr = true;
         }
         break;
@@ -745,25 +749,27 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
+    if( d->m_viewParams.m_projection == Spherical ) {
+        int  imageHalfWidth  = width() / 2;
+        int  imageHalfHeight = height() / 2;
 
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ), 
-                           1.05 * radius() );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+        // Recalculate the atmosphere effect and paint it to canvasImage.
+        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ), 
+                            1.05 * radius() );
+        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
 
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-    QPainter  painter( d->m_viewParams.m_canvasImage );
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                         (int)( 2.1 * (double)(radius()) ), 
-                         (int)( 2.1 * (double)(radius()) ) );
+        QBrush    brush1( grad1 );
+        QPen      pen1( Qt::NoPen );
+        QPainter  painter( d->m_viewParams.m_canvasImage );
+        painter.setBrush( brush1 );
+        painter.setPen( pen1 );
+        painter.setRenderHint( QPainter::Antialiasing, false );
+        painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
+                            imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
+                            (int)( 2.1 * (double)(radius()) ), 
+                            (int)( 2.1 * (double)(radius()) ) );
+    }
 }
 
 
@@ -799,29 +805,29 @@ void MarbleWidget::setBoundingBox()
 {
     QVector<QPointF>  points;
     Quaternion        temp;
-    
+
     if ( globalQuaternion( 0, 0, temp) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
     if ( globalQuaternion( width() / 2, 0, temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
-    
+
     if ( globalQuaternion( width(), 0, temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
     if ( globalQuaternion( 0, height(), temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
-    
+
     if ( globalQuaternion( width()/2, height(), temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
-    
+
     if ( globalQuaternion( width(), height(), temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
-    
+
     d->m_viewParams.m_boundingBox = BoundingBox( points );
 }
 
