@@ -18,7 +18,7 @@ set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werr
 set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
 # @TODO - make os specific versions of below
-set (MARBLE_DATA_PATH ${CMAKE_INSTALL_PREFIX}/share/marble CACHE STRING "Marble data directory")
+set (MARBLE_DATA_PATH ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data CACHE STRING "Marble data directory")
 
 
 if(WIN32)

@@ -25,14 +25,11 @@
 
 namespace
 {
-    QString MarbleDataPath;
+    QString runTimeMarbleDataPath;
 }
 
 QString MarbleDirs::path( const QString& relativePath )
 { 
-    //MARBLE_DATA_PATH is a compiler define set by cmake
-    QString marbleDataPath(MARBLE_DATA_PATH);
-//        qDebug(marbleDataPath.toLocal8Bit() + " <-- marble data path");
     QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
     qDebug( "localpath: %s", qPrintable( localpath ) );
     QString  systempath  = systemPath() + QDir::separator() + relativePath;	// system path
@@ -52,6 +49,7 @@ QString MarbleDirs::path( const QString& relativePath )
 QString MarbleDirs::systemPath()
 {
     QString systempath;
+
 #ifdef Q_OS_MACX
     //
     // On OSX lets try to find any file first in the bundle
@@ -78,25 +76,24 @@ QString MarbleDirs::systemPath()
     }
 #endif   // mac
 
+// Should this happen before the Mac bundle already?
+if ( !runTimeMarbleDataPath.isEmpty() )
+    return runTimeMarbleDataPath;
 
-    
-    return QDir( qApp->applicationDirPath() 
+#if !defined(Q_OS_WIN)
+    //MARBLE_DATA_PATH is a compiler define set by cmake
+    QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
+    qDebug(compileTimeMarbleDataPath.toLocal8Bit() + " <-- marble data path");
 
-// 
-// This stuff was here but never called  as the
-// line above prevents it....why....TS
-// 
-            
-#if defined(Q_OS_MACX)
-                     + QLatin1String( "/Resources/data" )
-#elif defined(Q_OS_UNIX)
-                     + QLatin1String( "/../share/apps/marble/data" )
-#elif defined(Q_OS_WIN)
- #if defined(QTONLY)
+    return compileTimeMarbleDataPath;
+#endif
+
+return QDir( qApp->applicationDirPath() 
+
+#if defined(QTONLY)
                      + QLatin1String( "/data" )
- #else
+#else
                      + QLatin1String( "/../share/apps/marble/data" )
- #endif
 #endif
                      ).canonicalPath();
 }
@@ -108,10 +105,10 @@ QString MarbleDirs::localPath()
 
 QString MarbleDirs::marbleDataPath()
 {
-    return MarbleDataPath;
+    return runTimeMarbleDataPath;
 }
 
 void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
 {
-    MarbleDataPath = adaptedPath;
+    runTimeMarbleDataPath = adaptedPath;
 }

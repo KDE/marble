@@ -1,5 +1,21 @@
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleDirs.cpp:
+    Rearranging the code to be more in line with the
+    description in MarbleDirs.h.
+    Renaming the two marbleDataPaths to something more
+    intuitive: compileTimeMarbleDataPath (for the cmake
+    version) and runTimeMarbleDataPath (for the version
+    that gets modified via the settings).
+
+    * CMakeLists.txt:
+    Adjusting the definition of MARBLE_DATA_PATH. -
+    Should rather get defined like data_dir gets 
+    defined in CMakeList.txt in marble/data, 
+    shouldn't it?
+
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
     Making naming of the directory paths more consistent
     with Qt/KDE naming scheme: "Dir" names a QDir,
     "Path" the QString of the respective directory name.
