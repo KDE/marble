@@ -143,14 +143,13 @@ void MainWindow::createStatusBar()
 
 void MainWindow::exportMapScreenShot()
 {
-    QPixmap mapPixmap = m_controlView->mapScreenShot();
-
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export Map"), // krazy:exclude=qclasses
                             QDir::homePath(),
                             tr("Images (*.jpg *.png)"));
 
     if ( !fileName.isEmpty() )
     {
+        QPixmap mapPixmap = m_controlView->mapScreenShot();
         bool success = mapPixmap.save( fileName );
         if ( success == false )
         {

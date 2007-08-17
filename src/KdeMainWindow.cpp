@@ -154,13 +154,12 @@ void MainWindow::showZoom(int zoom)
 
 void MainWindow::exportMapScreenShot()
 {
-    QPixmap  mapPixmap = m_controlView->mapScreenShot();
-
     QString  fileName = KFileDialog::getSaveFileName( QDir::homePath(),
                                                       i18n( "Images (*.jpg *.png)" ),
                                                       this, i18n("Export Map") );
 
     if ( !fileName.isEmpty() ) {
+        QPixmap mapPixmap = m_controlView->mapScreenShot();
         bool  success = mapPixmap.save( fileName );
         if ( !success ) {
             KMessageBox::error( this, i18nc( "Application name", "Marble" ),
