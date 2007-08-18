@@ -1,7 +1,5 @@
 project(marble)
 
-message("******* Original MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}")
-
 ####################################################
 # CMake Settings 
 SET(CMAKE_COLOR_MAKEFILE ON)
@@ -21,10 +19,6 @@ set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
 
 ####################################################
 # Detect default for the user configurable MARBLE_DATA_PATH option
-
-#if (MARBLEDATAPATH STREQUAL "")
-# message("******* Check MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}" )
-#endif (MARBLEDATAPATH STREQUAL "")
 
 if(WIN32)
   set(data_dir data)
@@ -61,8 +55,9 @@ else(WIN32)
   endif(APPLE)
 endif(WIN32)
 
-set (MARBLE_DATA_PATH ${data_dir})
-message("******* Final MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}")
+if (NOT MARBLE_DATA_PATH)
+  set (MARBLE_DATA_PATH ${data_dir})
+endif (NOT MARBLE_DATA_PATH)
 
 if(WIN32)
   set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
