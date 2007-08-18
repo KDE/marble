@@ -1,5 +1,14 @@
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
+    Load files in About Dialog on request.
+
+    * src/lib/MarbleAboutDialog.{cpp,h,ui}
+    * data/credits_data.html
+    * data/credits_authors.html
+    * data/CMakeLists.txt
+
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
     Adding credits files.
 
     * data/credits_authors.html

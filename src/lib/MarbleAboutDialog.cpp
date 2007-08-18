@@ -26,6 +26,7 @@
 #include "ui_MarbleAboutDialog.h"
 
 #include <QtCore/QFile>
+#include <QtGui/QTextFrame>
 #include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
@@ -36,6 +37,10 @@ class MarbleAboutDialogPrivate
 {
 public: 
     Ui::MarbleAboutDialog  uiWidget;
+
+    bool authorsLoaded;
+    bool dataLoaded;
+    bool licenseLoaded;
 };
 
 
@@ -45,19 +50,83 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
 {
     d->uiWidget.setupUi( this );
 
+    d->authorsLoaded = false;
+    d->dataLoaded = false;
+    d->licenseLoaded = false;
+
     d->uiWidget.m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
+
+    connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
+             this, SLOT( loadPageContents( int ) ) );
+
     d->uiWidget.m_pMarbleAboutBrowser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
-    QString filename = MarbleDirs::path( "LICENSE.txt" );
-    if( !filename.isEmpty() ) {
-        QFile  f( filename );
-        if( f.open( QIODevice::ReadOnly ) ) {
-            QTextStream ts( &f );
-            d->uiWidget.m_pMarbleLicenseBrowser->setText( ts.readAll() );
-        }
-        f.close();
-    }
+
 }
 
+void MarbleAboutDialog::loadPageContents( int idx )
+{
+    QTextBrowser* browser = 0;
+
+    if ( idx == 1 && d->authorsLoaded == false )
+    {
+        d->authorsLoaded = true;
+        browser = d->uiWidget.m_pMarbleAuthorsBrowser;
+        QString filename = MarbleDirs::path( "credits_authors.html" );
+        if( !filename.isEmpty() )
+        {
+            QFile  f( filename );
+            if( f.open( QIODevice::ReadOnly ) ) 
+            {
+                QTextStream ts( &f );
+                browser->setHtml( ts.readAll() );
+            }
+            f.close();
+        }
+        QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
+        format.setMargin(12);
+        browser->document()->rootFrame()->setFrameFormat( format );
+    }
+
+    if ( idx == 2 && d->dataLoaded == false )
+    {
+        d->dataLoaded = true;
+        browser = d->uiWidget.m_pMarbleDataBrowser;
+        QString filename = MarbleDirs::path( "credits_data.html" );
+        if( !filename.isEmpty() )
+        {
+            QFile  f( filename );
+            if( f.open( QIODevice::ReadOnly ) ) 
+            {
+                QTextStream ts( &f );
+                browser->setHtml( ts.readAll() );
+            }
+            f.close();
+        }
+        QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
+        format.setMargin(12);
+        browser->document()->rootFrame()->setFrameFormat( format );
+    }
+
+    if ( idx == 3 && d->licenseLoaded == false )
+    {
+        d->licenseLoaded = true;
+        browser = d->uiWidget.m_pMarbleLicenseBrowser;
+        QString filename = MarbleDirs::path( "LICENSE.txt" );
+        if( !filename.isEmpty() )
+        {
+            QFile  f( filename );
+            if( f.open( QIODevice::ReadOnly ) ) 
+            {
+                QTextStream ts( &f );
+                browser->setText( ts.readAll() );
+            }
+            f.close();
+        }
+        QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
+        format.setMargin(12);
+        browser->document()->rootFrame()->setFrameFormat( format );
+    }
+}
 
 #include "MarbleAboutDialog.moc"
 

@@ -15,6 +15,8 @@ endif (QTONLY)
 
 
 install (FILES
+credits_authors.html
+credits_data.html
 legend.html
 legend.css
 DESTINATION ${data_dir})
