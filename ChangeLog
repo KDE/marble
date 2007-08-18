@@ -1,9 +1,9 @@
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename KAtlasFlag into DeferredFlag:
-	* src/katlasflag.cpp: rename into DeferredFlag.cpp
-	* src/katlasflag.h:   rename into DeferredFlag.h
-	* src/placemarkinfodialog.{h,cpp}: refer to new name
+	* src/lib/katlasflag.cpp: rename into DeferredFlag.cpp
+	* src/lib/katlasflag.h:   rename into DeferredFlag.h
+	* src/lib/placemarkinfodialog.{h,cpp}: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 
 2007-09-18  Frederik Schwarzer  <schwarzerf@gmail.com>
