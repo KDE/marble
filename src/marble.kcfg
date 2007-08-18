@@ -14,5 +14,8 @@
   <entry key="homeZoom" type="Int" >
    <default>1050</default>
   </entry>
+  <entry key="marbleDataPath" type="Path" >
+   <default></default>
+  </entry>
  </group>
 </kcfg>
