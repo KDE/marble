@@ -129,7 +129,8 @@ Widget:
     - QPixmap                                                           --
     - QSvgRendrerer                                                     --
  * Offer accessor method for the Pixmap, so it can be used to export    ----
-   the image, print it and copy it.
+   the image, print it and copy it. DONE
+
 
 Make it a KDE4 application as a real member of kdeedu.
  * KApplication                                                         DONE
@@ -137,7 +138,7 @@ Make it a KDE4 application as a real member of kdeedu.
  * KConfig XT                                                           TACK
  * Translation                                                          TACK
  * User docs                                                            DONE
- * KDEPrint support                                                     TACK
+ * KDEPrint support                                                     DONE
  * DBus Support                                                         TACK
 
 Features
