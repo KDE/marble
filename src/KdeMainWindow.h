@@ -54,7 +54,7 @@ protected:
     virtual void readProperties( const KConfigGroup &group );
 
  private:
-    void  readMarbleDataPath();
+    QString  readMarbleDataPath();
     void  readSettings();
     void  writeSettings();
 
