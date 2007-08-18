@@ -391,18 +391,23 @@ void MarbleWidget::zoomView(int zoom)
 }
 
 
-void MarbleWidget::zoomViewBy(int zoomStep)
+void MarbleWidget::zoomViewBy( int zoomStep )
 {
     // Prevent infinite loops
 
     int zoom    = radius();
-    int tryZoom = toLogScale(zoom) + zoomStep;
+    int tryZoom = toLogScale( zoom ) + zoomStep;
     // qDebug() << QString::number(tryZoom) << " "
     //         << QString::number(minimumzoom);
-    if ( tryZoom >= d->m_minimumzoom && tryZoom <= d->m_maximumzoom ) {
-	zoom = tryZoom;
-	zoomView(zoom);
+    if ( tryZoom < d->m_minimumzoom ) {
+        tryZoom = d->m_minimumzoom;
     }
+    else if ( tryZoom > d->m_maximumzoom ) {
+        tryZoom = d->m_maximumzoom;
+    }
+    
+    zoom = tryZoom;
+    zoomView( zoom );
 }
 
 
