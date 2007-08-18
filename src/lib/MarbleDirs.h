@@ -62,7 +62,7 @@
  * cmake will get ignored.
  *
  * ( Possible future extension: if the MarbleDataPath contains several
- * valid paths seperated by a colon then each of these paths should be
+ * valid paths separated by a colon then each of these paths should be
  * used for look up in the same order as for the KDE kiosk framework. ) 
  * 
  * It's the duty of each application that uses the MarbleWidget to retrieve 

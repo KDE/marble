@@ -1,3 +1,8 @@
+2007-08-18  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 23: spelling errors
+	* src/lib/MarbleDirs.h: spelling fixes
+
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
     Changing the INSTALL file to feature
@@ -46,9 +51,10 @@
 	(while I was on the wrong track fixing).
 
 2007-08-18  Andrew Manson   <g.real.ate@gmail.com>
-    Attempted to Correct a small glitch with the drawing of the gps
-    Tracking object.
-    * src/lib/gps/GpsTracking.cpp : altertered drawing procedure
+
+	Attempted to Correct a small glitch with the drawing of the gps
+	Tracking object.
+	* src/lib/gps/GpsTracking.cpp : altertered drawing procedure
     
     Added the implementation of saving and closing a file to the 
     GpxFileModel.
@@ -75,7 +81,6 @@
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
 	Trying to make MARBLE_DATA_PATH work for real.
-
 	* CMakeLists.txt
 	* data/CMakeLists.txt
 

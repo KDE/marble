@@ -35,6 +35,12 @@ Misc
  * Creating tiles during build instead of first run			TACK
  * Fix designer plugin dirs						TACK
  * Fix image downloading for Wikipedia                                  TACK
+ * Make the MarbleWidget library have a version number.  See            ----
+   okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
+
+Code Quality:
+ * Filename == Classname (CamelCasing)                                  ----
+ * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
    - SearchListView                                                     --
    - LegendBrowser                                                      done
@@ -48,12 +54,6 @@ Misc
    - MapTheme                                                           --
    - PlaceMarkModel                                                     done
    - ViewParams                                                         --
- * Make the MarbleWidget library have a version number.  See            ----
-   okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
-
-Cleaning:
- * Filename == Classname (CamelCasing)                                  ----
- * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
 
 Widget:
  * Separate the view from the globe (model)                             INGE
@@ -63,13 +63,13 @@ Widget:
  * Introduce the class ViewParams that controls the painting            INGE
     - Position, Zoom                                                    done
     - width, height                                                     inge
-    - show... crosshair/mapscale/compass                                n/a?
+    - show... crosshair/mapscale/compass                                n/a
     - show... terrain/cities/...                                        done
     - show... relief (texturecolorizer)                                 done
     - show... ice/borders/rivers/lakes    (vectorcomposer)              done
     - interlaced (rename to quickAndDirty?)                             inge
     - caches (coastimg, ...)                                            done
-   Note: these will NOT be done.
+   Note: these will NOT be done:
     - mapTheme (this is tricky and will have to wait)                   --
 
 Vector backend
