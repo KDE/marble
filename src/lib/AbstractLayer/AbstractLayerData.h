@@ -148,6 +148,8 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     
     bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
                      int radius, QPointF *position);
+    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
+                     double radius, QPointF *position);
     
  protected:
     virtual void printToStream( QTextStream & ) const;

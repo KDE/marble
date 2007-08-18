@@ -75,7 +75,7 @@ void TrackSegment::draw(ClipPainter *painter,
                         Quaternion invRotAxis, BoundingBox box)
 {
     
-    if ( box.isValid() ) {
+    if ( box.isValid() && m_boundingBox->isValid() ) {
         if ( box.intersects( *m_boundingBox ) ) {
             draw( painter, canvasSize, radius, invRotAxis );
         }

@@ -41,6 +41,7 @@ GpxFile::GpxFile( const QString &fileName )
     
     m_checkState = Qt::Checked;
     setVisible( true );
+    setActive( false );
 }
 
 GpxFile::GpxFile()
@@ -49,8 +50,11 @@ GpxFile::GpxFile()
     m_waypoints = new WaypointContainer;
     m_routes = new RouteContainer;
     
+    m_name = "GpxFile";
+    
     m_checkState = Qt::Checked;
     setVisible( true );
+    setActive( true );
 }
 
 void GpxFile::draw( ClipPainter *painter, const QPoint &point )
@@ -150,4 +154,15 @@ void    GpxFile::setCheckState( bool state )
     
     m_checkState = Qt::Unchecked;
 }
+
+bool    GpxFile::active() const
+{
+    return m_active;
+}
+
+void    GpxFile::setActive( bool active )
+{
+    m_active = active;
+}
+
 

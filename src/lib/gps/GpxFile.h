@@ -54,10 +54,13 @@ class GpxFile : public AbstractLayerInterface
     Qt::CheckState  checkState();
     void            setCheckState( Qt::CheckState state );
     void            setCheckState( bool state );
+    bool            active() const;
+    void            setActive( bool active );
     
     
     
  private:
+    bool                m_active;
     QString             m_name;
     WaypointContainer  *m_waypoints;
     TrackContainer      *m_tracks;

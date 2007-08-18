@@ -25,7 +25,7 @@ class BoundingBox : public QVector<QPointF>
     QString string();
  private:
     bool m_dateLine;
-    bool m_valid;
+//     bool m_valid;
     double m_topX;
     double m_bottomX;
     double m_topY;

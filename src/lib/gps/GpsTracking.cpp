@@ -60,21 +60,25 @@ GpsTracking::~GpsTracking()
 void GpsTracking::construct( const QSize &canvasSize, double radius,
                              Quaternion invRotAxis )
 {
+#ifdef HAVE_LIBGPS
+    if( !m_gpsd ) {
+        currentDraw.clear();
+        return;
+    }
+#endif
     QPointF position;
     QPointF previousPosition;
     
     bool draw = false;
     
     draw = m_gpsCurrentPosition -> getPixelPos( canvasSize,
-            invRotAxis,
-            (int)radius, &position );
+            invRotAxis, radius, &position );
     
     draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, 
-            invRotAxis,
-            (int)radius, 
-             &previousPosition );
+            invRotAxis, radius, &previousPosition );
    
     if ( !draw ) {
+        currentDraw.clear();
         return;
     }
 
@@ -168,22 +172,23 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
        
             if (m_gpsTrackSeg == 0 ){
                 m_gpsTrackSeg = new TrackSegment();
+                m_gpsTrack->append( m_gpsTrackSeg );
             }
             if (!( m_gpsPreviousPosition->position() ==
                    m_gpsTracking->position() ) )
             {
                 m_gpsTrackSeg->append( m_gpsPreviousPosition );
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
-                m_gpsCurrentPosition  = new TrackPoint( *m_gpsTracking
+                m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking
 );
             }
         } else {
 
-            if ( m_gpsTrackSeg != 0  && (m_gpsTrackSeg->size() > 0 )) 
-{
-                m_gpsTrack->append( m_gpsTrackSeg );
+            if ( m_gpsTrackSeg != 0  
+                 && (m_gpsTrackSeg->count() > 0 ) )
+            {
                 m_gpsTrackSeg = 0;
-            } 
+            }
         }
     
         construct( canvasSize, radius, invRotAxis );
@@ -216,10 +221,10 @@ void GpsTracking::draw( ClipPainter *painter,
     painter->setPen( Qt::black );
     painter->setBrush( Qt::white );
     painter->drawPolygon( currentDraw, Qt::OddEvenFill );
-    
+    /*
     if ( m_gpsTrackSeg != 0) {
        m_gpsTrackSeg->draw( painter, canvasSize, radius, invRotAxis );
-    }
+    }*/
 }
 
 

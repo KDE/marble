@@ -69,6 +69,7 @@ public:
     GpxFile             *m_currentGpx;
     QPolygonF           currentDraw;
     QPolygonF           previousDraw;
+    QPointF             m_previousDistancePosition;
     
     TrackingMethod      m_trackingMethod;
     QTemporaryFile gmlFile;

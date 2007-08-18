@@ -19,6 +19,7 @@ AbstractLayerContainer::AbstractLayerContainer( int size )
 {
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
+    m_boundingBox = new BoundingBox();
     
     m_name = 0;
 }
@@ -28,6 +29,7 @@ AbstractLayerContainer::AbstractLayerContainer(const QString &name,
 {
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
+    m_boundingBox = new BoundingBox();
     
     m_name = new QString ( name );
 }

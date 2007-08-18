@@ -144,6 +144,25 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
     }
 }
 
+bool AbstractLayerData::getPixelPos( const QSize &screenSize,
+                                     Quaternion invRotAxis, 
+                                     double radius, QPointF *point)
+{
+    Quaternion  qpos = m_position->quaternion(); 
+    qpos.rotateAroundAxis( invRotAxis );
+
+    if ( qpos.v[Q_Z] > 0 ){
+        point->setX( ( ( screenSize.width() / 2 )
+                + ( radius * qpos.v[Q_X] ) ) );
+        point->setY( ( ( screenSize.height() / 2 )
+                + ( radius * qpos.v[Q_Y] ) ) );
+        
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void AbstractLayerData::printToStream( QTextStream &out ) const
 {
     out << "AbstractLayerData";

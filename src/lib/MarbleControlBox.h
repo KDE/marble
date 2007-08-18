@@ -102,6 +102,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void changeZoom(int);
     void disableGpsInput( bool );
     void receiveGpsCoordinates( double, double, GeoPoint::Unit );
+    void enableFileViewActions();
     
     void setNavigationTabShown( bool );
     void setLegendTabShown( bool );

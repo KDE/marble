@@ -35,7 +35,8 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
     
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
-    m_tracking = new GpsTracking( m_currentGpx );
+    m_fileModel->addFile( m_currentGpx );
+    m_tracking = new GpsTracking( m_currentGpx ); 
 
 }
 

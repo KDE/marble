@@ -1,3 +1,30 @@
+2007-08-18  Andrew Manson   <g.real.ate@gmail.com>
+    Attempted to Correct a small glitch with the drawing of the gps
+    Tracking object.
+    * src/lib/gps/GpsTracking.cpp : altertered drawing procedure
+    
+    Added the implementation of saving and closing a file to the 
+    GpxFileModel.
+    * src/lib/gps/GpxFileModel.cpp : save and close file
+    
+    Fixed a crash due to null pointer BoundingBox
+    * src/lib/gps/TrackSegment.cpp : 
+    * src/lib/BoundingBox.cpp :
+    * src/lib/AbstractLayer/AbstractLayerContainer.cpp} :
+    
+    Added an implementation for getting pixel position withought need
+    for the "double radius" to "int radius" cast.
+    * src/lib/AbstractLayer/AbstractLayerData.{h,cpp} : double math
+    
+    Added a new slot "enableFileViewActions()" and connected the 
+    relivant signals from the File View selection model. Also
+    connected the button signals to the GpxFileModel save and close
+    implementations.
+    * src/lib/MarbleControlBox.cpp :
+    
+    Added info on how to build marble with debug info.
+    * INSTALL : debug info 
+    
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
 	Trying to make MARBLE_DATA_PATH work for real.

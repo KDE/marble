@@ -14,7 +14,10 @@
 
 BoundingBox::BoundingBox()
 {
-    m_valid = false;
+    m_topX = -180.0;
+    m_bottomX = +180.0;
+    m_topY = -90.0;
+    m_bottomY = +90.0;
 }
 
 BoundingBox::BoundingBox(const QVector<QPointF> &vector )
@@ -40,7 +43,7 @@ BoundingBox::BoundingBox(const QVector<QPointF> &vector )
     }
 //     qDebug() << "what" << m_topX;
     
-    m_valid = isValid();
+//     m_valid = isValid();
 }
 bool BoundingBox::contains( const QPointF &point )
 {

@@ -160,9 +160,18 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
     
+    //set up everything for the FileModel
     d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
-    d->uiWidget.m_fileView->show();
-
+    
+    connect( d->uiWidget.m_fileView->selectionModel(), 
+          SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
+          this,
+          SLOT( enableFileViewActions() ) );
+    connect( d->uiWidget.m_saveButton, SIGNAL( clicked() ) ,
+             widget->gpxFileModel(), SLOT( saveFile() ) );
+    connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
+             widget->gpxFileModel(), SLOT( closeFile() ) );
+    
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
     d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
@@ -221,7 +230,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
     
-    //connect GPS Option signals
+    //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
@@ -336,6 +345,21 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
             emit gpsPositionChanged( t_lon, t_lat );
         }
     }
+}
+
+void MarbleControlBox::enableFileViewActions()
+{
+    bool tmp = d->uiWidget.m_fileView->selectionModel() 
+            ->selectedIndexes().count() ==1;
+    d->uiWidget.m_saveButton->setEnabled( tmp );
+    d->uiWidget.m_closeButton->setEnabled( tmp );
+    
+    if ( tmp ) {
+        QModelIndex tmpIndex = d->uiWidget.m_fileView ->
+                selectionModel() -> currentIndex();
+        d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
+    }
+    
 }
 
 void MarbleControlBox::setNavigationTabShown( bool show )

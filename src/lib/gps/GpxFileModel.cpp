@@ -9,8 +9,18 @@
 //
 
 #include "GpxFileModel.h"
+#include <config-marble.h>
 #include <QtCore/Qt>
+#include <QtCore/QFile>
 #include <QDebug>
+
+#ifdef QTONLY
+    #include <QtGui/QFileDialog>
+#else
+    #include <KFileDialog>
+    #include <KUrl>
+#endif
+
 
 GpxFileModel::GpxFileModel()
  : QAbstractItemModel()
@@ -21,6 +31,46 @@ GpxFileModel::GpxFileModel()
 
 GpxFileModel::~GpxFileModel()
 {
+}
+
+void    GpxFileModel::saveFile()
+{
+    QString fileName;
+#ifdef QTONLY
+    fileName = QFileDialog::getSaveFileName( 0, tr("Save File"),
+            QString(),
+            tr("GpxFile (*.gpx)"));
+#else
+    fileName = KFileDialog::getSaveFileName( KUrl(), 
+                                             tr("GpxFile (*.gpx)"),
+                                             0,
+                                             tr("Save File") );
+#endif
+    
+    QFile file( fileName );
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text) ) {
+        return;
+    }
+
+    QTextStream out(&file);
+    GpxFile* gpxFile =static_cast<GpxFile*>(
+                                  m_selectedIndex.internalPointer() );
+    
+    out << (*gpxFile);
+}
+
+void    GpxFileModel::closeFile()
+{
+    GpxFile* file =static_cast<GpxFile*>(
+                                  m_selectedIndex.internalPointer() );
+    if ( !file->active() ) {
+        int index = m_data->indexOf( file );
+        if ( index >-1 ) {
+            m_data->remove( index );
+            emit( layoutChanged() );
+        }
+        
+    }
 }
 
 Qt::ItemFlags GpxFileModel::flags( const QModelIndex &item ) const
@@ -98,6 +148,11 @@ void GpxFileModel::addFile( GpxFile *file )
 {
     m_data->append( file );
     emit( layoutChanged() );
+}
+
+void    GpxFileModel::setSelectedIndex( const QModelIndex &index )
+{
+    m_selectedIndex = index;
 }
 
 QVector<GpxFile*> * GpxFileModel::allFiles()

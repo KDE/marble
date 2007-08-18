@@ -27,6 +27,9 @@ You can build and install Marble in two different ways:
 
 Choose one of them and read below for how to do it.
 
+NOTE: If you wish to build Marble with debug info include the argument
+      -DCMAKE_BUILD_TYPE=debug in the cmake command below.
+
 1. Build Marble as a Qt only application.
 
 1.1 Create a build directory

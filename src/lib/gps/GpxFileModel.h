@@ -14,7 +14,8 @@
 #include "GpxFile.h"
 #include "BoundingBox.h"
 
-#include <QAbstractItemModel>
+#include <QtCore/QAbstractItemModel>
+#include <QtGui/QItemSelectionModel>
 #include <QtCore/QVariant>
 #include <QtCore/QVector>
 
@@ -26,6 +27,10 @@ class GpxFileModel : public QAbstractItemModel
      Q_OBJECT
 Q_SIGNALS :
     void updateRegion( BoundingBox );
+    void enableActions( bool );
+public Q_SLOTS:
+    void saveFile();
+    void closeFile();
 public:
     GpxFileModel();
 
@@ -45,9 +50,12 @@ public:
     int columnCount ( const QModelIndex & parent = QModelIndex() )
                                                                 const;
     void addFile( GpxFile *file);
+    void setSelectedIndex( const QModelIndex &);
     QVector<GpxFile*>* allFiles();
     private:
-    QVector<GpxFile*>    *m_data;
+    QModelIndex         m_selectedIndex;
+    QVector<GpxFile*>   *m_data;
+    
 
 };
 
