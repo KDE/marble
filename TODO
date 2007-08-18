@@ -12,8 +12,7 @@ Before Version 0.4 (Monday June, 11th)
 
 Hard requirements for the release:
  * Add Downloadmanager class for tiles and Wikipedia articles           DONE
- * Fix image downloading for Wikipedia                                  TACK
- * Settings saving                                                      --
+ * Settings saving                                                      DONE
 
 Features
  * Add "Export Map" to save a screenshot as an image file               DONE
@@ -25,8 +24,6 @@ Cleaning
  * d-pointerify the main public classes                                 DONE
  * float -> double                                                      DONE
  * Move files into the library                                          DONE
- * Installation issues                                                  TACK
-   - Creating tiles during build and fix designer plugin dirs           --
 
 
 During the SoC projects (0.5)
@@ -35,12 +32,15 @@ During the SoC projects (0.5)
 Misc
  * Create a file with use cases and personas                            INGE
    - Continue with the use cases.                                       --
+ * Creating tiles during build instead of first run			TACK
+ * Fix designer plugin dirs						TACK
+ * Fix image downloading for Wikipedia                                  TACK
  * Name all public classes MarbleSomething                              INGE
    - SearchListView                                                     --
    - LegendBrowser                                                      done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE
-   - (KAtlasThemeSelectView): Doesn't have any private members          --
+   - (MarbleThemeSelectView): Doesn't have any private members          --
    - MarbleNavigator                                                    done
    - MarbleLegendBrowser                                                done
    - (SearchListView) does not have any private members                 --
