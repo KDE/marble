@@ -19,7 +19,7 @@
 #include <QtGui/QStatusBar>
 #include <QtCore/QUrl>
 
-#include "katlasflag.h"
+#include "DeferredFlag.h"
 
 
 class PlaceMark;
@@ -50,8 +50,8 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     void requestFlag( const QString& );
 
  protected:
-    KAtlasFlag  *m_flagcreator;
-    PlaceMark   *m_mark;
+    DeferredFlag  *m_flagcreator;
+    PlaceMark     *m_mark;
 };
 
 

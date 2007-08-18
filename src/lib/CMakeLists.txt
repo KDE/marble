@@ -58,7 +58,7 @@ set(marblewidget_SRCS
            CompassFloatItem.cpp
            MapScaleFloatItem.cpp
            MarbleDirs.cpp
-           katlasflag.cpp
+           DeferredFlag.cpp
            TileCreatorDialog.cpp
            maptheme.cpp
            ViewParams.cpp
@@ -234,7 +234,7 @@ install( FILES
            CompassFloatItem.h
            MapScaleFloatItem.h
            MarbleDirs.h
-           katlasflag.h
+           DeferredFlag.h
            TileCreatorDialog.h
            maptheme.h
            ViewParams.h

@@ -10,25 +10,26 @@
 //
 
 //
-// KAtlasFlag paints a flag on a pixmap
+// DeferredFlag paints a flag on a pixmap, and sends a signal when its
+// done so that you can do it asynchronously.
 //
 
 
-#ifndef KATLASFLAG_H
-#define KATLASFLAG_H
+#ifndef DEFERREDFLAG_H
+#define DEFERREDFLAG_H
 
 
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
 
 
-class KAtlasFlag : public QObject
+class DeferredFlag : public QObject
 {
 
     Q_OBJECT
 
  public:
-    KAtlasFlag( QObject *parent = 0 );
+    DeferredFlag( QObject *parent = 0 );
 
     QPixmap& flag(){ return m_pixmap; }
     void setFlag( const QString& filename, const QSize& size );
@@ -46,4 +47,4 @@ class KAtlasFlag : public QObject
 };
 
 
-#endif // KATLASFLAG_H
+#endif // DEFERREDFLAG_H

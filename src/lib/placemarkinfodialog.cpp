@@ -87,7 +87,7 @@ void PlaceMarkInfoDialog::showContent()
 
     role_val_lbl->setText( rolestring );
 
-    m_flagcreator = new KAtlasFlag( this );
+    m_flagcreator = new DeferredFlag( this );
     requestFlag( m_mark->countryCode() );
 
     QString  description = m_mark->description();

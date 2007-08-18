@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "katlasflag.h"
+#include "DeferredFlag.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -21,20 +21,20 @@
 #include "MarbleDirs.h"
 
 
-KAtlasFlag::KAtlasFlag( QObject* parent )
+DeferredFlag::DeferredFlag( QObject* parent )
     : QObject(parent)
 {
     QPixmapCache::setCacheLimit ( 384 );
 }
 
-void KAtlasFlag::setFlag( const QString& filename, const QSize& size )
+void DeferredFlag::setFlag( const QString& filename, const QSize& size )
 {
     m_filename = filename;
     m_size     = size;
 }
 
 
-void KAtlasFlag::slotDrawFlag()
+void DeferredFlag::slotDrawFlag()
 {
     QString  keystring = QString( m_filename ).replace( "flags/", "" );
 
@@ -59,4 +59,4 @@ void KAtlasFlag::slotDrawFlag()
 }
 
 
-#include "katlasflag.moc"
+#include "DeferredFlag.moc"
