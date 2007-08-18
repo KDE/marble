@@ -64,6 +64,8 @@ class ViewParams
 
     bool        m_showCities;   // About placemarks
     bool        m_showTerrain;
+    
+    bool        m_showGps; //for gps layer
 
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere

@@ -1004,7 +1004,7 @@ void MarbleWidget::setShowLakes( bool visible )
 
 void MarbleWidget::setShowGps( bool visible )
 {
-    d->m_model->gpsLayer()->setVisible( visible );
+    d->m_viewParams.m_showGps = visible;
     repaint();
 }
 

@@ -56,26 +56,21 @@ void GpsLayer::paintLayer( ClipPainter *painter,
                           const QSize &canvasSize, double radius,
                           Quaternion rotAxis, BoundingBox box )
 {
-    
     Quaternion invRotAxis = rotAxis.inverse();
-
-    m_currentPosition->draw( painter, canvasSize, 
-                             radius, invRotAxis );
-
     
-    updateGps( canvasSize, radius, rotAxis );
-    paintCurrentPosition( painter, canvasSize, radius, invRotAxis );
-    
-    
-    QPoint *previous=0;
+    if ( visible() ) {
+        m_currentPosition->draw( painter, canvasSize, 
+                                radius, invRotAxis );
+        updateGps( canvasSize, radius, rotAxis );
+        paintCurrentPosition( painter, canvasSize, radius, 
+                              invRotAxis );
+    }
     
     QVector<GpxFile*>::const_iterator it;
     for( it = m_fileModel->allFiles()->constBegin(); 
          it < m_fileModel->allFiles()->constEnd(); ++it ){
         (*it)->draw( painter, canvasSize, radius, invRotAxis, box );
     }
-    
-    delete previous;
 }
 
 void GpsLayer::paintCurrentPosition( ClipPainter *painter, 

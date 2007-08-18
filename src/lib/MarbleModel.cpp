@@ -401,12 +401,12 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 #endif
 
     // Paint the Gps Layer
-    if ( d->m_gpsLayer->visible() ) {
-        d->m_gpsLayer->paintLayer( painter, viewParams->m_canvasImage->size(),
-                                   viewParams->m_radius,
-                                   viewParams->m_planetAxis, 
-                                   viewParams->m_boundingBox );
-    }
+    d->m_gpsLayer->setVisible( viewParams->m_showGps );
+    d->m_gpsLayer->paintLayer( painter,
+                               viewParams->m_canvasImage->size(),
+                               viewParams->m_radius,
+                               viewParams->m_planetAxis, 
+                               viewParams->m_boundingBox );
 }
 
 
