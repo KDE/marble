@@ -304,10 +304,10 @@ void PlaceMarkModel::setContainer(PlaceMarkContainer* container)
     for ( it=container->constBegin(); it != container->constEnd(); it++ ) {
         d->m_placemarkindex << *it;
     }
-    qDebug() << "Sort1 started";
+//    qDebug() << "Sort1 started";
     qStableSort( d->m_placemarkindex.begin(), d->m_placemarkindex.end(), 
                  nameSort );
-    qDebug() << "Sort1 stopped";
+//    qDebug() << "Sort1 stopped";
 }
 
 QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role, 

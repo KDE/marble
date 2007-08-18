@@ -36,8 +36,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent)
     : KXmlGuiWindow(parent)
 {
     QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
-
-    MarbleDirs::setMarbleDataPath( selectedPath );
+    if ( !selectedPath.isEmpty() )
+        MarbleDirs::setMarbleDataPath( selectedPath );
 
     m_controlView = new ControlView( this );
     setCentralWidget( m_controlView );

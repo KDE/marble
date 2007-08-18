@@ -31,16 +31,16 @@ namespace
 QString MarbleDirs::path( const QString& relativePath )
 { 
     QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
-    qDebug( "localpath: %s", qPrintable( localpath ) );
+//    qDebug( "localpath: %s", qPrintable( localpath ) );
     QString  systempath  = systemPath() + QDir::separator() + relativePath;	// system path
-    qDebug( "systempath: %s", qPrintable( systempath ) );
+//    qDebug( "systempath: %s", qPrintable( systempath ) );
 
 
     QString fullpath = systempath;
     if ( QFile::exists( localpath ) ) {
         fullpath = localpath;
     }
-    qDebug( "Using path: %s", qPrintable( fullpath ) );
+//    qDebug( "Using path: %s", qPrintable( fullpath ) );
 
     return QDir( fullpath ).canonicalPath(); 
 }
@@ -87,7 +87,7 @@ if ( !runTimeMarbleDataPath.isEmpty() )
 #if !defined(Q_OS_WIN)
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
-    qDebug( "%s <-- marble data path", qPrintable( compileTimeMarbleDataPath ) );
+//    qDebug( "%s <-- marble data path", qPrintable( compileTimeMarbleDataPath ) );
 
     return compileTimeMarbleDataPath;
 #endif
@@ -116,7 +116,9 @@ void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
 {
     if ( !QDir::root().exists( adaptedPath ) )
     {
-        qDebug( "Invalid MarbleDataPath: %s", qPrintable( adaptedPath ) );
+        qDebug( "WARNING: Invalid MarbleDataPath %s. Using builtin path instead.", 
+                qPrintable( adaptedPath ) );
+        return;
     }
 
     runTimeMarbleDataPath = adaptedPath;

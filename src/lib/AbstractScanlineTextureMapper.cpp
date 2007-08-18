@@ -222,7 +222,7 @@ void AbstractScanlineTextureMapper::nextTile()
 void AbstractScanlineTextureMapper::notifyMapChanged()
 {
     detectMaxTileLevel();
-    qDebug() << "MAPCHANGED";
+//    qDebug() << "MAPCHANGED";
     emit mapChanged();
 }
 

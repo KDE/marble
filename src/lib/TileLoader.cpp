@@ -299,7 +299,7 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
 void TileLoader::reloadTile( QString relativeUrlString, int id )
 {
-    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
+//    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
 
     if ( m_tileHash.contains(id) ) {
         int  level =  id / 100000000;

@@ -38,7 +38,7 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl )
 
 HttpDownloadManager::~HttpDownloadManager()
 {
-    qDebug() << "Deleting HttpDownloadManager";
+//    qDebug() << "Deleting HttpDownloadManager";
 //    m_fetchFile->disconnect();
 //    delete m_fetchFile;
     /* NOOP */
@@ -51,7 +51,7 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, int id )
     if ( !m_downloadEnabled )
         return;
 
-    qDebug() << "Accepting Job: " << relativeUrlString;
+//    qDebug() << "Accepting Job: " << relativeUrlString;
 
     HttpJob  *job = new HttpJob();
     job->initiatorId = id;
@@ -68,7 +68,7 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, int id )
     }
     else
     {
-        qDebug() << "The download was not activated. Deleting it for now.";
+//        qDebug() << "The download was not activated. Deleting it for now.";
         delete job;
     }
 }
@@ -84,7 +84,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     {
         if ( job->relativeUrlString == (*i)->relativeUrlString )
         {
-            qDebug() << "Download rejected: It's in the queue already.";
+//            qDebug() << "Download rejected: It's in the queue already.";
             (*i)->initiatorId = job->initiatorId;
             return false;
         }
@@ -93,7 +93,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     {
         if ( job->relativeUrlString == (*i)->relativeUrlString )
         {
-            qDebug() << "Download rejected: It's being downloaded already.";
+//            qDebug() << "Download rejected: It's being downloaded already.";
             (*i)->initiatorId = job->initiatorId;
             return false;
         }
@@ -102,7 +102,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     {
         if ( job->relativeUrlString == (*i)->relativeUrlString )
         {
-            qDebug() << "Download rejected: Blacklisted.";
+//            qDebug() << "Download rejected: Blacklisted.";
             (*i)->initiatorId = job->initiatorId;
             return false;
         }
@@ -132,7 +132,7 @@ void HttpDownloadManager::activateJobs()
     {
         HttpJob  *job = m_jobQueue.dequeue();
 
-        qDebug() << "On activatedJobList: " << m_serverUrl.path() + job->relativeUrlString;
+//        qDebug() << "On activatedJobList: " << m_serverUrl.path() + job->relativeUrlString;
         m_activatedJobList.push_back( job );
         job->serverUrl = m_serverUrl;
         job->targetDirString = m_targetDir;
@@ -153,14 +153,14 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
         }
         m_jobBlackList.push_back( job );
 
-        qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->relativeUrlString ).arg( m_jobBlackList.size() );
+//        qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->relativeUrlString ).arg( m_jobBlackList.size() );
     }
     else 
     {
         emit downloadComplete( job->relativeUrlString, job->initiatorId );
         removeJob( job );
 
-        qDebug() << "Download Complete!";
+//        qDebug() << "Download Complete!";
     }
 
 }

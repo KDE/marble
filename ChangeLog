@@ -1,5 +1,24 @@
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
+    Removing Debug calls for release and 
+    Bumping up version number to 
+
+    Marble 0.4.0
+
+    * src/KdeMainWindow.cpp
+    * src/kdemain.cpp
+    * src/QtMainWindow.cpp
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/TileLoader.cpp
+    * src/lib/HttpDownloadManager.cpp
+    * src/lib/MarbleAboutDialog.ui
+    * src/lib/MarbleDirs.cpp
+    * src/lib/HttpFetchFile.cpp
+    * src/lib/TextureTile.cpp
+    * src/lib/placemarkmodel.cpp
+
+2007-08-18  Torsten Rahn  <rahn@kde.org>
+
     * src/qtmain.cpp:
     * src/kdemain.cpp:
 	Added --marbleDataPath command line option.

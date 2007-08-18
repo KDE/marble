@@ -30,16 +30,16 @@ int main (int argc, char *argv[])
 {
     KAboutData aboutData( "marble", 0, 
                           ki18n( "Marble Desktop Globe" ),
-                          "0.3.9", 
+                          "0.4.0", 
                           ki18n( "A World Atlas." ),
                           KAboutData::License_LGPL, ki18n( "(c) 2007" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
-                         ki18n( "Original author and maintainer" ),
+                         ki18n( "Original Author, Developer and Maintainer" ),
                          "rahn@kde.org" );
     aboutData.addAuthor( ki18n( "Inge Wallin" ),
-                         ki18n( "co-maintainer" ),
+                         ki18n( "Co-maintainer and Architect" ),
                          "inge@lysator.liu.se" );
 
     KCmdLineArgs::init( argc, argv, &aboutData );

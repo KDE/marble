@@ -38,8 +38,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     setUpdatesEnabled( false );
     
     QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
-
-    MarbleDirs::setMarbleDataPath( selectedPath );
+    if ( !selectedPath.isEmpty() )
+        MarbleDirs::setMarbleDataPath( selectedPath );
 
     m_controlView = new ControlView( this );
 
@@ -272,7 +272,7 @@ void MainWindow::readSettings()
 #endif
 
      settings.beginGroup("MainWindow");
-         resize(settings.value("size", QSize(400, 400)).toSize());
+         resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
          showSideBar(settings.value("sideBar", true ).toBool());
