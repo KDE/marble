@@ -1,25 +1,9 @@
-
-if (QTONLY)
-  if(WIN32)
-    set(data_dir data)
-  else(WIN32)
-    if(APPLE)
-      set (data_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/Resources/data)
-    else(APPLE)
-      set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
-    endif(APPLE)
-  endif(WIN32)
-else (QTONLY)
-  set(data_dir ${DATA_INSTALL_DIR}/marble/data)
-endif (QTONLY)
-
-
 install (FILES
 credits_authors.html
 credits_data.html
 legend.html
 legend.css
-DESTINATION ${data_dir})
+DESTINATION ${MARBLE_DATA_PATH})
 
 install (FILES
 bitmaps/checkbox_checked.png
@@ -76,14 +60,14 @@ bitmaps/bathymetry_-6500.png
 bitmaps/bathymetry_-11000.png
 bitmaps/gpsHere.png
 bitmaps/waypoint.png
-DESTINATION ${data_dir}/bitmaps)
+DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
 
 install (FILES 
 svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
 svg/marble-logo-72dpi.png
-DESTINATION ${data_dir}/svg)
+DESTINATION ${MARBLE_DATA_PATH}/svg)
 
 install (FILES 
 flags/flag_ad.svg
@@ -329,30 +313,30 @@ flags/flag_yt.svg
 flags/flag_za.svg
 flags/flag_zm.svg
 flags/flag_zw.svg
-DESTINATION ${data_dir}/flags)
+DESTINATION ${MARBLE_DATA_PATH}/flags)
 
 install (FILES
 maps/earth/citylights/citylights.jpg
 maps/earth/citylights/citylights.dgml
 maps/earth/citylights/citylights-preview.png
-DESTINATION ${data_dir}/maps/earth/citylights)
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights)
 
 install (FILES
 maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
-DESTINATION ${data_dir}/maps/earth/srtm)
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/srtm)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg
 maps/earth/bluemarble/bluemarble.dgml
 maps/earth/bluemarble/bluemarble-preview.png
-DESTINATION ${data_dir}/maps/earth/bluemarble)
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble)
 
 install (FILES
 maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
-DESTINATION ${data_dir}/maps/earth/plain)
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/plain)
 
 install (FILES
 mwdbii/PDIFFBORDER.PNT
@@ -369,11 +353,11 @@ mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
 mwdbii/DATELINE.PNT
-DESTINATION ${data_dir}/mwdbii)
+DESTINATION ${MARBLE_DATA_PATH}/mwdbii)
 
 install (FILES
 placemarks/baseplacemarks.cache
 placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
-DESTINATION ${data_dir}/placemarks)
+DESTINATION ${MARBLE_DATA_PATH}/placemarks)
 

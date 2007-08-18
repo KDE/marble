@@ -1,5 +1,6 @@
 project(marble)
 
+message("******* Original MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}")
 
 ####################################################
 # CMake Settings 
@@ -17,9 +18,51 @@ endif(APPLE OR WIN32)
 set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
 set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
-# @TODO - make os specific versions of below
-set (MARBLE_DATA_PATH ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data CACHE STRING "Marble data directory")
 
+####################################################
+# Detect default for the user configurable MARBLE_DATA_PATH option
+
+#if (MARBLEDATAPATH STREQUAL "")
+# message("******* Check MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}" )
+#endif (MARBLEDATAPATH STREQUAL "")
+
+if(WIN32)
+  set(data_dir data)
+else(WIN32)
+  if(APPLE)
+    # needed for finding bundle path in e.g. katlasdir.h
+    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
+    MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
+    SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
+    if (QTONLY)
+      # for Mac OS X, everything is put inside an application bundle
+      SET (CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/)
+      # path for library references
+      SET (CMAKE_INSTALL_NAME_DIR @executable_path/lib)
+      #set info.plist properties on mac
+      SET( PROGNAME ${PROJECT_NAME})
+      SET( MACOSX_BUNDLE_ICON_FILE Marble.icns)
+      SET( MACOSX_BUNDLE_SHORT_VERSION_STRING 0.3.0 )
+      SET( MACOSX_BUNDLE_VERSION 0.3.0 )
+      SET( MACOSX_BUNDLE_LONG_VERSION_STRING Version 0.3.0 )
+      #SET( CMAKE_OSX_ARCHITECTURES ppc;i386 ) #Comment out if not universal binary
+      SET( CMAKE_OSX_ARCHITECTURES i386 ) #Comment out if universal binary
+      #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
+      SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
+    else (QTONLY) # KDE4 on Mac...
+      set(data_dir ${DATA_INSTALL_DIR}/marble/data)
+    endif (QTONLY)
+  else(APPLE) # Linux / bsd etc...
+    if (QTONLY)
+      set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
+    else (QTONLY)
+      set(data_dir ${DATA_INSTALL_DIR}/marble/data)
+    endif (QTONLY)
+  endif(APPLE)
+endif(WIN32)
+
+set (MARBLE_DATA_PATH ${data_dir})
+message("******* Final MARBLE_DATA_PATH: ${MARBLE_DATA_PATH}")
 
 if(WIN32)
   set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
@@ -126,43 +169,6 @@ endif (PEDANTIC)
 IF (CMAKE_BUILD_TYPE MATCHES Debug)
   ADD_DEFINITIONS(-DDEBUG)
 ENDIF (CMAKE_BUILD_TYPE MATCHES Debug)
-
-####################################################
-# Install data
-if(WIN32)
-  set(data_dir data)
-else(WIN32)
-  if(APPLE)
-    # needed for finding bundle path in e.g. katlasdir.h
-    FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
-    MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
-    SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
-    if (QTONLY)
-      # for Mac OS X, everything is put inside an application bundle
-      SET (CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/)
-      # path for library references
-      SET (CMAKE_INSTALL_NAME_DIR @executable_path/lib)
-      #set info.plist properties on mac
-      SET( PROGNAME ${PROJECT_NAME})
-      SET( MACOSX_BUNDLE_ICON_FILE Marble.icns)
-      SET( MACOSX_BUNDLE_SHORT_VERSION_STRING 0.3.0 )
-      SET( MACOSX_BUNDLE_VERSION 0.3.0 )
-      SET( MACOSX_BUNDLE_LONG_VERSION_STRING Version 0.3.0 )
-      #SET( CMAKE_OSX_ARCHITECTURES ppc;i386 ) #Comment out if not universal binary
-      SET( CMAKE_OSX_ARCHITECTURES i386 ) #Comment out if universal binary
-      #SET (lib_dir ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
-      SET (data_dir   ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/resources/data)
-    else (QTONLY) # KDE4 on Mac...
-      set(data_dir ${DATA_INSTALL_DIR}/marble/data)
-    endif (QTONLY)
-  elseif(APPLE) # Linux / bsd etc...
-    if (QTONLY)
-      set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
-    else (QTONLY)
-      set(data_dir ${DATA_INSTALL_DIR}/marble/data)
-    endif (QTONLY)
-  endif(APPLE)
-endif(WIN32)
 
 ####################################################
 # Descend into subdirectories

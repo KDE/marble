@@ -1,3 +1,10 @@
+2007-08-17  Torsten Rahn  <rahn@kde.org>
+
+	Trying to make MARBLE_DATA_PATH work for real.
+
+	* CMakeLists.txt
+	* data/CMakeLists.txt
+
 2007-08-17 Carlos Licea <carlos_licea@hotmail.com>
     *MarbleModel: changed m_lastProjection to m_projection,
      also added a projection() which returns m_projection.
