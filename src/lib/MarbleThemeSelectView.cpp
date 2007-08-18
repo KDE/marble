@@ -15,7 +15,8 @@
 
 
 MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
-    : QListView(parent)
+    : QListView( parent ),
+      d( 0 )                    // No private data yet.
 {
     setViewMode( QListView::IconMode );
     setFlow( QListView::TopToBottom ); 

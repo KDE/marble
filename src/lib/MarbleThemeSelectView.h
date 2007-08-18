@@ -24,6 +24,7 @@
 
 #include "marble_export.h"
 
+
 class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 {
     Q_OBJECT
@@ -40,6 +41,10 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 
  Q_SIGNALS:
     void selectMapTheme( const QString& );
+
+ private:
+    class Private;
+    Private  * const d;
 };
 
 #endif // KATLASTHEMESELECTVIEW_H

@@ -1,5 +1,9 @@
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
+	d-pointerify MarbleThemeSelectView
+	* src/lib/MarbleThemeSelectView.cpp (MarbleThemeSelectView): add
+	d-pointer
+
 	Fix Krazy issue 23: spelling errors
 	* src/lib/MarbleDirs.h: spelling fixes
 
