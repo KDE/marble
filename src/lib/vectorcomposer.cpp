@@ -134,7 +134,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
 
     m_vectorMap -> setPen( m_oceanPen );
     m_vectorMap -> setBrush( m_oceanBrush );
-    m_vectorMap -> paintBase( painter, radius, true );
+    m_vectorMap -> paintBase( painter, radius, true, viewParams->m_projection );
 
     // Coastlines
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 

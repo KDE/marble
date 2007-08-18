@@ -35,7 +35,7 @@ class VectorMap : public ScreenPolygon::Vector
     ~VectorMap();
     void createFromPntMap(const PntMap*, const int&, Quaternion&, Projection );
 
-    void paintBase(ClipPainter *, int radius, bool );
+    void paintBase(ClipPainter *, int radius, bool, Projection );
     void paintMap(ClipPainter *, bool );
     void drawMap(QPaintDevice *, bool, Projection );
 
@@ -62,6 +62,9 @@ class VectorMap : public ScreenPolygon::Vector
                             GeoPoint::Vector::ConstIterator, const int );
     void rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator, 
                             GeoPoint::Vector::ConstIterator, const int );
+
+    void sphericalPaintBase(ClipPainter*,int radius, bool);
+    void rectangularPaintBase(ClipPainter*,int radius, bool);
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();

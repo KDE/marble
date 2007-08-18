@@ -369,7 +369,19 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
 }
 
 
-void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
+void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing, Projection currentProjection)
+{
+    switch( currentProjection ) {
+        case Spherical:
+            sphericalPaintBase(painter,radius,antialiasing);
+            break;
+        case Equirectangular:
+            rectangularPaintBase(painter,radius,antialiasing);
+            break;
+    }
+}
+
+void VectorMap::sphericalPaintBase(ClipPainter * painter, int radius, bool antialiasing)
 {
     m_radius = radius-1;
 
@@ -387,6 +399,20 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing)
     }
 }
 
+void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, bool antialiasing)
+{
+    m_radius = radius;
+
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
+
+    painter->setPen( m_pen );
+    painter->setBrush( m_brush );
+
+    int yCenterOffset =  (int)((double)(2*radius) / M_PI * m_centerLat);
+    int yTop = m_imgheight/2 - radius + yCenterOffset;
+
+    painter->drawRect( 0, yTop, m_imgwidth, 2*radius);
+}
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
 {
