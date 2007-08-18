@@ -1,5 +1,14 @@
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
+    Changing the INSTALL file to feature
+    the last working version number 
+    (of Marble 0.4.0 ) and added 
+    a description for adjusting MarbleDataPath
+
+    * INSTALL 
+
+2007-08-18  Torsten Rahn  <rahn@kde.org>
+
     Removing Debug calls for release and 
     Bumping up version number to 
 

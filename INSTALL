@@ -12,8 +12,9 @@ Prerequisites for building Marble are:
  - Qt 4.2 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
-    We have found that revision 671114 works fine. Note that kdelibs
-    is under heavy development, and some revisions might not work.
+    We have found that revision 701563 (Marble v.0.4.0)
+    works fine. Note that kdelibs is under heavy development, 
+    and some revisions might not work.
 
 A checkout of Marble. You can check out Marble using SVN via the command:
 
@@ -90,8 +91,43 @@ From now on the steps are the same as for a Qt-only build.
 
   make install
 
+and start Marble either from the menu or via the command line:
 
-3. Known Issues:
+  marble
+
+
+3 Adjust Marble's search path for the maps and data
+
+There are several ways to adjust the path where Marble is
+drawing it's data from:
+
+3.1 At Compiletime
+
+Use the cmake option -DMARBLE_DATA_PATH to specify the 
+built-in system path that Marble gathers its data from:
+
+Example:
+  cmake -DQTONLY=ON -DMARBLE_DATA_PATH /mnt1/marble/data ~/marble
+
+3.2 "At Runtime"
+
+There are two solutions to adjust the data path for a
+precompiled Marble binary:
+
+a) Enter a key and a value
+
+marbleDataPath="/smb/marble/data"
+
+to the config file "marblerc" or 
+"~/.config/KDE/Marble\ Desktop\ Globe.conf" and (re)start the 
+application.
+
+b) Start Marble using the command line option --marbleDataPath:
+
+marble --marbleDataPath ~/marble/data
+
+
+4. Known Issues:
 
 - Due to a bug in the cmake files you might have to move the installed
 data under certain circumstances:
@@ -105,3 +141,4 @@ If your distribution doesn't include /usr/local/lib in your LD_LIBRARY_PATH you 
 
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
+- The integrated Wikipedia browser doesn't load images
