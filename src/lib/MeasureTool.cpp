@@ -332,25 +332,32 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
                                     Quaternion qpos, int imgrx, int imgry, 
                                     int radius, bool antialiasing )
 {
-     double      x;
-     double      y;
-     double      degX;
-     double      degY;
-     QPolygonF   distancePath;
+    double      x;
+    double      y;
+    double      degX;
+    double      degY;
+    QPolygonF   distancePath;
 
-     Q_UNUSED( antialiasing );
+    Q_UNUSED( antialiasing );
 
-     prevqpos.getSpherical(degX,degY);
-     x = (int)( imgrx + (degX + m_centerLon ) *m_xyFactor );
-     y = (int)( imgry + (degY + m_centerLat ) *m_xyFactor );
-     distancePath << QPointF( x, y );
+    double      t = 0.0;
+    Quaternion  itpos;
 
-     qpos.getSpherical(degX,degY);
-     x = (int)( imgrx + (degX + m_centerLon ) *m_xyFactor );
-     y = (int)( imgry + (degY + m_centerLat ) *m_xyFactor );
-     distancePath << QPointF( x, y );
+    Q_UNUSED( antialiasing );
 
-     painter->drawPolyline( distancePath );
+    for ( int i = 0; i < 21; ++i ) {
+        t = (double)(i) / 20.0;
+
+        itpos.slerp( prevqpos, qpos, t );
+        itpos.getSpherical(degX,degY);
+
+        x = (double)( imgrx + (degX + m_centerLon ) *m_xyFactor );
+        y = (double)( imgry + (degY + m_centerLat ) *m_xyFactor );
+
+        distancePath << QPointF( x, y );
+    }
+
+    painter->drawPolyline( distancePath );
 }
 
 bool MeasureTool::testbug()

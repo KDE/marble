@@ -56,7 +56,7 @@ class MarbleModelPrivate
     GpxFileModel        *m_gpxFileModel;
 
     QTimer       *m_timer;
-    Projection   m_lastProjection;
+    Projection   m_projection;
 };
 
 MarbleModel::MarbleModel( QWidget *parent )
@@ -117,7 +117,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
              this,  SIGNAL( regionChanged( BoundingBox ) ) );
     
-    d->m_lastProjection = Spherical;
+    d->m_projection = Spherical;
 }
 
 MarbleModel::~MarbleModel()
@@ -145,6 +145,11 @@ void MarbleModel::startPolling( int time )
 void MarbleModel::stopPolling()
 {
     d->m_timer->stop();
+}
+
+Projection MarbleModel::projection()
+{ 
+    return d->m_projection;
 }
 
 QString MarbleModel::mapTheme() const
@@ -212,7 +217,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
                                                 + d->m_maptheme->tilePrefix(), this );
                     break;
             }
-        else if ( currentProjection != d->m_lastProjection ) {
+        else if ( currentProjection != d->m_projection ) {
             delete d->m_texmapper;
             switch( currentProjection ) {
                 case Spherical:
@@ -228,6 +233,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
         else
             d->m_texmapper->setMapTheme( "maps/earth/"
                                          + d->m_maptheme->tilePrefix() );
+        d->m_projection = currentProjection;
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
             this,           SLOT( notifyModelChanged() ) );
@@ -251,7 +257,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
     d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
-    d->m_lastProjection = currentProjection;
+    d->m_projection = currentProjection;
     emit themeChanged( d->m_maptheme->name() );
     notifyModelChanged();
 }

@@ -141,7 +141,7 @@ void MarbleWidget::construct(QWidget *parent)
     setPalette( p );
     setBackgroundRole( QPalette::Window );
     setAutoFillBackground( true );
-
+//     setProjection( Equirectangular );
 //    setAttribute(Qt::WA_NoSystemBackground);
 
     // Fixed a potential crash if MarbleWidget constructed as a toplevel widget
@@ -504,7 +504,8 @@ void MarbleWidget::setProjection( const Projection projection )
 {
     d->m_viewParams.m_projection = projection;
     // Update texture map during the repaint that follows:
-    // setNeedsUpdate();
+    setMapTheme( d->m_model->mapTheme() );
+    setNeedsUpdate();
     repaint();
 }
 
@@ -918,7 +919,7 @@ QString MarbleWidget::mapTheme() const
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    if ( maptheme == d->m_model->mapTheme() )
+    if ( maptheme == d->m_model->mapTheme() && d->m_model->projection() == d->m_viewParams.m_projection )
         return;
 
     d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );

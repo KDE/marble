@@ -1,3 +1,11 @@
+2007-08-17 Carlos Licea <carlos_licea@hotmail.com>
+    *MarbleModel: changed m_lastProjection to m_projection,
+     also added a projection() which returns m_projection.
+    *MarbleWidget: corrected setMapTheme so that it changes the 
+     mapTheme if either the theme or the projection have changed.
+    *MeasureTool: changed the rectangularDrawDistancePath so that 
+     the paths are arcs and not lines anymore.
+
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename KAtlasFlag into DeferredFlag:
