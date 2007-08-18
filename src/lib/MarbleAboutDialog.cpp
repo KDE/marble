@@ -59,7 +59,12 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
              this, SLOT( loadPageContents( int ) ) );
 
-    d->uiWidget.m_pMarbleAboutBrowser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
+    QTextBrowser* browser = d->uiWidget.m_pMarbleAboutBrowser;
+    browser->setHtml( tr("<br />(c) 2007, The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
+
+    QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
+    format.setMargin(12);
+    browser->document()->rootFrame()->setFrameFormat( format );
 
 }
 
