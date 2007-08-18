@@ -132,7 +132,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * MarbleWidget.  The widget will create its own MarbleModel when
      * created.
      */
-    explicit MarbleWidget(QWidget *parent = 0);
+    explicit MarbleWidget( QWidget *parent = 0);
 
     /**
      * @brief Construct a new MarbleWidget.
@@ -335,12 +335,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return Quick and dirty rendering
      */
     bool  quickDirty() const;
-
-    /**
-     * @brief  Return the directory that contains the Marble data
-     * @return the directory that contains the Marble Data
-     */
-    QString marbleDataPath() const;
 
  public Q_SLOTS:
 
@@ -633,13 +627,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  enabled  Enable quick and dirty rendering
      */
     void setQuickDirty( bool enabled );
-
-
-    /**
-     * @brief  Set the data directory that contains the Marble data.
-     * @param  dataDir the path that contains the data
-     */
-    void setMarbleDataPath( const QString& dataDir );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.

@@ -26,15 +26,20 @@
 #include <KToggleFullScreenAction>
 #include <KPrinter>
 
+#include <MarbleDirs.h>
 #include "settings.h"
 
 // #include <KPrintDialogPage>
 
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent)
     : KXmlGuiWindow(parent)
 {
-    m_controlView = new ControlView(this);
+    QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
+
+    MarbleDirs::setMarbleDataPath( selectedPath );
+
+    m_controlView = new ControlView( this );
     setCentralWidget( m_controlView );
 
     setupActions();
@@ -120,6 +125,20 @@ void MainWindow::readProperties( const KConfigGroup &group )
     Q_UNUSED( group )
 }
 
+QString MainWindow::readMarbleDataPath()
+{
+     return MarbleSettings::marbleDataPath();
+}
+
+void MainWindow::readSettings()
+{
+     m_controlView->marbleWidget()->setHome( 
+        MarbleSettings::homeLongitude(),
+        MarbleSettings::homeLatitude(),
+        MarbleSettings::homeZoom()
+     );
+     m_controlView->marbleWidget()->goHome();
+}
 
 void MainWindow::writeSettings()
 {
@@ -132,18 +151,6 @@ void MainWindow::writeSettings()
      MarbleSettings::setHomeZoom( homeZoom );
      MarbleSettings::self()->writeConfig();
 }
-
-
-void MainWindow::readSettings()
-{
-     m_controlView->marbleWidget()->setHome( 
-        MarbleSettings::homeLongitude(),
-        MarbleSettings::homeLatitude(),
-        MarbleSettings::homeZoom()
-     );
-     m_controlView->marbleWidget()->goHome();
-}
-
 
 void MainWindow::showZoom(int zoom)
 {

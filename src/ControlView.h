@@ -33,7 +33,7 @@ class ControlView : public QWidget
     Q_OBJECT
 
  public:
-    ControlView(QWidget *);
+    ControlView( QWidget * = 0 );
     virtual ~ControlView(){}
 
     MarbleWidget  *marbleWidget() const { return m_marbleWidget; }

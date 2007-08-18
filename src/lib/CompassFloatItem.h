@@ -37,6 +37,8 @@ class CompassFloatItem : public QObject
     int transparency() const { return m_transparency; }
     void setTransparency( int transparency ) { m_transparency = transparency; m_width = -1; }
 
+    void setSourceFile( const QString& relativePath );
+
  protected:
 
     QSvgRenderer  *m_svgobj;

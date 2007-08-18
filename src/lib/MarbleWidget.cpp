@@ -346,12 +346,6 @@ bool  MarbleWidget::quickDirty() const
     return d->m_model->textureMapper()->interlaced();
 }
 
-QString MarbleWidget::marbleDataPath() const
-{ 
-
-  return MarbleDirs::marbleDataPath();
-}
-
 void MarbleWidget::zoomView(int zoom)
 {
     // Prevent infinite loops.
@@ -1074,11 +1068,6 @@ void MarbleWidget::setQuickDirty( bool enabled )
         case Equirectangular:
             return;
     }
-}
-
-void MarbleWidget::setMarbleDataPath( const QString& adaptedPath )
-{
-    MarbleDirs::setMarbleDataPath( adaptedPath );
 }
 
 // This slot will called when the Globe starts to create the tiles.

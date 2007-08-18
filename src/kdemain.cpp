@@ -56,6 +56,17 @@ int main (int argc, char *argv[])
 
     KApplication app;
 
+    QString marbleDataPath;
+    uint dataPathIndex;
+
+    for ( int i = 1; i < argc - 1; ++i ) {
+        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 )
+        {
+            dataPathIndex = i + 1;
+            marbleDataPath = argv[ dataPathIndex ];
+        }
+    }
+
     MainWindow *window = new MainWindow();
     window->setAttribute( Qt::WA_DeleteOnClose, true );
 
@@ -89,7 +100,7 @@ int main (int argc, char *argv[])
     for (int i = 0; i < args->count(); i++) {
 
         // FIXME: Use openUrl( args->url(i)) instead?
-        if ( QFile::exists( args->arg( i ) ) )
+        if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
             ( window->controlView() )->addPlaceMarkFile( args->arg( i ) );
     }
 

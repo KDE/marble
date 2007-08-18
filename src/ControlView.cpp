@@ -19,8 +19,7 @@
 #include <MarbleModel.h>
 
 
-
-ControlView::ControlView(QWidget *parent)
+ControlView::ControlView( QWidget *parent )
    : QWidget(parent)
 {
     setWindowTitle(tr("Marble - Desktop Globe"));

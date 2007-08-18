@@ -58,8 +58,18 @@ int main(int argc, char *argv[])
     }
 #endif
 
+    QString marbleDataPath;
+    uint dataPathIndex;
 
-    MainWindow *window = new MainWindow();
+    for ( int i = 1; i < argc - 1; ++i ) {
+        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 )
+        {
+            dataPathIndex = i + 1;
+            marbleDataPath = argv[ dataPathIndex ];
+        }
+    }
+
+    MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
@@ -88,7 +98,8 @@ int main(int argc, char *argv[])
         {
             window->marbleControl()->setFileViewTabShown(true);
         }
-        else if ( QFile::exists( app.arguments().at( i ) ) )
+        else if ( QFile::exists( app.arguments().at( i ) ) 
+                && i != dataPathIndex )
             ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
     }
 

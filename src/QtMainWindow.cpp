@@ -30,12 +30,18 @@
 
 #include <QtGui/QClipboard>
 
+#include <MarbleDirs.h>
 #include "lib/MarbleAboutDialog.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent)
 {
     setUpdatesEnabled( false );
-    m_controlView = new ControlView(this);
+    
+    QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
+
+    MarbleDirs::setMarbleDataPath( selectedPath );
+
+    m_controlView = new ControlView( this );
 
     setWindowTitle( tr("Marble - Desktop Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
@@ -241,7 +247,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
-void MainWindow::writeSettings()
+QString MainWindow::readMarbleDataPath()
 {
 #ifdef Q_WS_MAC
      QSettings settings("KDE.org", "Marble Desktop Globe");
@@ -249,23 +255,12 @@ void MainWindow::writeSettings()
      QSettings settings("KDE", "Marble Desktop Globe");
 #endif
 
-     settings.beginGroup("MainWindow");
-     settings.setValue( "size", size() );
-     settings.setValue( "pos", pos() );
-     settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
-     settings.setValue( "sideBar", m_sideBarAct->isChecked() );
-     settings.setValue( "statusBar", m_statusBarAct->isChecked() );
+     settings.beginGroup("MarbleWidget");
+         QString marbleDataPath;
+         marbleDataPath = settings.value("marbleDataPath", "").toString(), 
      settings.endGroup();
 
-     settings.beginGroup("MarbleWidget");
-     double homeLon = 0;
-     double homeLat = 0;
-     int homeZoom = 0;
-     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
-     settings.setValue( "homeLongitude", homeLon );
-     settings.setValue( "homeLatitude", homeLat );
-     settings.setValue( "homeZoom", homeZoom );
-     settings.endGroup();
+     return marbleDataPath;
 }
 
 void MainWindow::readSettings()
@@ -277,20 +272,47 @@ void MainWindow::readSettings()
 #endif
 
      settings.beginGroup("MainWindow");
-     resize(settings.value("size", QSize(400, 400)).toSize());
-     move(settings.value("pos", QPoint(200, 200)).toPoint());
-     showFullScreen(settings.value("fullScreen", false ).toBool());
-     showSideBar(settings.value("sideBar", true ).toBool());
-     showStatusBar(settings.value("statusBar", false ).toBool());
+         resize(settings.value("size", QSize(400, 400)).toSize());
+         move(settings.value("pos", QPoint(200, 200)).toPoint());
+         showFullScreen(settings.value("fullScreen", false ).toBool());
+         showSideBar(settings.value("sideBar", true ).toBool());
+         showStatusBar(settings.value("statusBar", false ).toBool());
      settings.endGroup();
 
      settings.beginGroup("MarbleWidget");
-     m_controlView->marbleWidget()->setHome( 
-        settings.value("homeLongitude", -9.4).toDouble(), 
-        settings.value("homeLatitude", 54.8).toDouble(),
-        settings.value("homeZoom", 1050 ).toInt()
-     );
-     m_controlView->marbleWidget()->goHome();
+         m_controlView->marbleWidget()->setHome( 
+            settings.value("homeLongitude", -9.4).toDouble(), 
+            settings.value("homeLatitude", 54.8).toDouble(),
+            settings.value("homeZoom", 1050 ).toInt()
+         );
+         m_controlView->marbleWidget()->goHome();
+     settings.endGroup();
+}
+
+void MainWindow::writeSettings()
+{
+#ifdef Q_WS_MAC
+     QSettings settings("KDE.org", "Marble Desktop Globe");
+#else
+     QSettings settings("KDE", "Marble Desktop Globe");
+#endif
+
+     settings.beginGroup("MainWindow");
+         settings.setValue( "size", size() );
+         settings.setValue( "pos", pos() );
+         settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
+         settings.setValue( "sideBar", m_sideBarAct->isChecked() );
+         settings.setValue( "statusBar", m_statusBarAct->isChecked() );
+     settings.endGroup();
+
+     settings.beginGroup("MarbleWidget");
+         double homeLon = 0;
+         double homeLat = 0;
+         int homeZoom = 0;
+         m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+         settings.setValue( "homeLongitude", homeLon );
+         settings.setValue( "homeLatitude", homeLat );
+         settings.setValue( "homeZoom", homeZoom );
      settings.endGroup();
 }
 

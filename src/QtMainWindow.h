@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     public:
-        MainWindow(QWidget *parent=0);
+        MainWindow(const QString& marbleDataPath = QString(), QWidget *parent=0);
 
         ControlView* marbleControl(){ return m_controlView; }
         MarbleWidget* marbleWidget(){ return m_controlView->marbleWidget(); }
@@ -41,6 +41,7 @@ class MainWindow : public QMainWindow
         void createMenus();
         void createStatusBar();
 
+        QString  readMarbleDataPath();
         void  readSettings();
         void  writeSettings();
 

@@ -1,3 +1,22 @@
+2007-08-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/qtmain.cpp:
+    * src/kdemain.cpp:
+	Added --marbleDataPath command line option.
+
+    * src/KdeMainWindow.{cpp,h}:
+    * src/QtMainWindow.{cpp,h}:
+	Added ability to read marbleDataPath setting
+	(if present).
+
+    * src/lib/MarbleWidget.{cpp,h}:
+	Removed redundant setters and getters for 
+	MarbleDataPath (d'oh).
+
+    * src/lib/CompassFloatItem.{cpp,h}:
+	Added setSourceFile method 
+	(while I was on the wrong track fixing).
+
 2007-08-18  Andrew Manson   <g.real.ate@gmail.com>
     Attempted to Correct a small glitch with the drawing of the gps
     Tracking object.
@@ -25,14 +44,14 @@
     Added info on how to build marble with debug info.
     * INSTALL : debug info 
     
-2007-08-17  Torsten Rahn  <rahn@kde.org>
+2007-08-18  Torsten Rahn  <rahn@kde.org>
 
 	Trying to make MARBLE_DATA_PATH work for real.
 
 	* CMakeLists.txt
 	* data/CMakeLists.txt
 
-2007-08-17 Carlos Licea <carlos_licea@hotmail.com>
+2007-08-18 Carlos Licea <carlos_licea@hotmail.com>
     *MarbleModel: changed m_lastProjection to m_projection,
      also added a projection() which returns m_projection.
     *MarbleWidget: corrected setMapTheme so that it changes the 
@@ -54,7 +73,7 @@
 	* src/lib/MarbleWidget.cpp (ZoomViewBy): Add new checks for the
 	endpoints of the slider.
 
-2007-08-17  Torsten Rahn  <rahn@kde.org>
+2007-08-18  Torsten Rahn  <rahn@kde.org>
 
     Load files in About Dialog on request.
 

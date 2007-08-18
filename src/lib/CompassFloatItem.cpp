@@ -35,6 +35,7 @@ CompassFloatItem::CompassFloatItem(QObject* parent)
 
     m_fontheight = QFontMetrics( m_font ).ascent();
     m_fontwidth  = QFontMetrics( m_font ).boundingRect( "N" ).width();
+
     m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
                                  this );
 
@@ -43,6 +44,13 @@ CompassFloatItem::CompassFloatItem(QObject* parent)
     m_transparency = 192;
 }
 
+void CompassFloatItem::setSourceFile( const QString& relativePath )
+{
+    delete m_svgobj;
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( relativePath ),
+                                 this );
+    m_width = 0;
+}
 
 QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight, 
                                               int northpoley )

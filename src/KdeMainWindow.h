@@ -28,7 +28,7 @@ class MainWindow : public KXmlGuiWindow
     Q_OBJECT
 
  public:
-    MainWindow(QWidget *parent=0);
+    MainWindow(const QString& marbleDataPath = QString(), QWidget *parent=0);
     ~MainWindow();
 
     ControlView  *controlView()  const { return m_controlView; }
@@ -54,6 +54,7 @@ protected:
     virtual void readProperties( const KConfigGroup &group );
 
  private:
+    void  readMarbleDataPath();
     void  readSettings();
     void  writeSettings();
 
