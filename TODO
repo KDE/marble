@@ -40,16 +40,45 @@ Misc
 
 Code Quality:
  * Filename == Classname (CamelCasing)                                  ----
+   - maptheme.cpp                                                       --
+   - maptheme.h                                                         --
+   - placemark.cpp                                                      --
+   - placemark.h                                                        --
+   - placemarkinfodialog.cpp                                            --
+   - placemarkinfodialog.h                                              --
+   - placemarkinfodialog.ui                                             --
+   - placemarkmanager.cpp                                               --
+   - placemarkmanager.h                                                 --
+   - placemarkmodel.cpp                                                 --
+   - placemarkmodel.h                                                   --
+   - placemarkpainter.cpp                                               --
+   - placemarkpainter.h                                                 --
+   - searchcombobox.cpp                                                 --
+   - searchcombobox.h                                                   --
+   - searchlistview.cpp                                                 --
+   - searchlistview.h                                                   --
+   - texcolorizer.cpp                                                   --
+   - texcolorizer.h                                                     --
+   - texturepalette.cpp                                                 --
+   - tinywebbrowser.cpp                                                 --
+   - tinywebbrowser.h                                                   --
+   - vectorcomposer.cpp                                                 --
+   - vectorcomposer.h                                                   --
+   - vectormap.cpp                                                      --
+   - vectormap.h                                                        --
+   - xmlhandler.cpp                                                     --
+   - xmlhandler.h                                                       --
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
-   - SearchListView                                                     --
-   - LegendBrowser                                                      done
+   - SearchListView  -> MarbleSearchListView                            --
+   - LegendBrowser   -> MarbleLegendBrowser                             done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE
-   - (MarbleThemeSelectView): Doesn't have any private members          --
+   - MarbleDirs                                                         --
+   - (MarbleThemeSelectView): doesn't have any private members          done
    - MarbleNavigator                                                    done
    - MarbleLegendBrowser                                                done
-   - (SearchListView) does not have any private members                 --
+   - (SearchListView)         doesn't have any private members          --
    - MarbleAboutDialog                                                  done
    - MapTheme                                                           --
    - PlaceMarkModel                                                     done
