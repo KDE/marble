@@ -1,3 +1,10 @@
+2007-09-18  Frederik Schwarzer  <schwarzerf@gmail.com>
+
+    Let the zoom slider get to the limits
+    using the buttons.
+
+    * src/lib/MarbleWidget.cpp
+
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
     Load files in About Dialog on request.
