@@ -74,7 +74,7 @@ Code Quality:
    - LegendBrowser   -> MarbleLegendBrowser                             done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE
-   - MarbleDirs                                                         --
+   - MarbleDirs                                                         done
    - (MarbleThemeSelectView): doesn't have any private members          done
    - MarbleNavigator                                                    done
    - MarbleLegendBrowser                                                done
@@ -157,8 +157,8 @@ Widget:
     - QGraphicsView                                                     --
     - QPixmap                                                           --
     - QSvgRendrerer                                                     --
- * Offer accessor method for the Pixmap, so it can be used to export    ----
-   the image, print it and copy it. DONE
+ * Offer accessor method for the Pixmap, so it can be used to export    DONE
+   the image, print it and copy it.
 
 
 Make it a KDE4 application as a real member of kdeedu.

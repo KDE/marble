@@ -28,6 +28,12 @@ namespace
     QString runTimeMarbleDataPath = "";
 }
 
+MarbleDirs::MarbleDirs()
+    : d( 0 )
+{
+}
+
+
 QString MarbleDirs::path( const QString& relativePath )
 { 
     QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
