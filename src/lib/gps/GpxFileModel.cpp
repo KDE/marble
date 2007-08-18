@@ -68,6 +68,7 @@ void    GpxFileModel::closeFile()
         if ( index >-1 ) {
             m_data->remove( index );
             emit( layoutChanged() );
+            emit( updateRegion( BoundingBox() ) );
         }
         
     }
@@ -148,6 +149,7 @@ void GpxFileModel::addFile( GpxFile *file )
 {
     m_data->append( file );
     emit( layoutChanged() );
+    emit( updateRegion( BoundingBox () ) );
 }
 
 void    GpxFileModel::setSelectedIndex( const QModelIndex &index )
