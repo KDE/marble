@@ -10,7 +10,7 @@
 //
 
 
-#include "placemarkmanager.h"
+#include "PlaceMarkManager.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDataStream>

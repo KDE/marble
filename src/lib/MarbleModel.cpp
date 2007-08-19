@@ -27,7 +27,7 @@
 #include "MapTheme.h"
 #include "MarbleDirs.h"
 #include "TileCreatorDialog.h"
-#include "placemarkmanager.h"
+#include "PlaceMarkManager.h"
 #include "xmlhandler.h"
 #include "gps/GpsLayer.h"
 

@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "placemarkmodel.h"
+#include "PlaceMarkModel.h"
 
 #include <cmath>
 
@@ -347,4 +347,4 @@ QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role,
 }
 
 
-#include "placemarkmodel.moc"
+#include "PlaceMarkModel.moc"

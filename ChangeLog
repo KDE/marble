@@ -1,5 +1,19 @@
 2007-08-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Name changes according to the coding standards:
+	 - PlaceMarkModel
+	 - PlaceMarkPainter
+	 - PlaceMarkManager
+	* src/lib/placemarkmanager.cpp: renamed into PlaceMarkManager.cpp
+	* src/lib/placemarkmanager.h:   renamed into PlaceMarkManager.h
+	* src/lib/placemarkmodel.cpp:   renamed into PlaceMarkModel.cpp
+	* src/lib/placemarkmodel.h:     renamed into PlaceMarkModel.h
+	* src/lib/placemarkpainter.cpp: renamed into PlaceMarkPainter.cpp
+	* src/lib/placemarkpainter.h:   renamed into PlaceMarkPainter.h
+	* src/lib/CMakeLists.txt:  Reflect name changes
+	* src/lib/MarbleModel.cpp: use new names
+	* src/lib/MarbleModel.h:   use new names
+
 	Name changes according to the coding standards for MapTheme and
 	PlaceMark.	
 	* src/lib/maptheme.cpp: renamed into MapTheme.cpp

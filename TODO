@@ -21,12 +21,12 @@ Misc
 
 Code Quality:
  * Filename == Classname (CamelCasing)                                  INGE
-   - maptheme.{h,cpp}                                                   --
-   - placemark.{h,cpp}                                                  --
+   - maptheme.{h,cpp}                -> MapTheme                        done
+   - placemark.{h,cpp}               -> PlaceMark                       done
    - placemarkinfodialog.{h,cpp,ui}                                     --
-   - placemarkmanager.{h,cpp}                                           --
-   - placemarkmodel.{h,cpp}                                             --
-   - placemarkpainter.{h,cpp}                                           --
+   - placemarkmanager.{h,cpp}        -> PlaceMarkManager                done
+   - placemarkmodel.{h,cpp}          -> PlaceMarkModel                  done
+   - placemarkpainter.{h,cpp}        -> PlaceMarkPainter                done
    - searchcombobox.{h,cpp}                                             --
    - searchlistview.{h,cpp}          -> MarbleSearchListView            done
    - texcolorizer.{h,cpp}                                               --

@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "placemarkpainter.h"
+#include "PlaceMarkPainter.h"
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QDebug>
@@ -1121,4 +1121,4 @@ QVector<PlaceMark*> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos )
 }
 
 
-#include "placemarkpainter.moc"
+#include "PlaceMarkPainter.moc"
