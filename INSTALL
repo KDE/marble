@@ -12,7 +12,7 @@ Prerequisites for building Marble are:
  - Qt 4.2 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
-    We have found that revision 701563 (Marble v.0.4.0)
+    We have found that revision 701967 (Marble v.0.4.0)
     works fine. Note that kdelibs is under heavy development, 
     and some revisions might not work.
 
