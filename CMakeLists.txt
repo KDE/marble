@@ -177,7 +177,7 @@ IF (ENABLE_TESTS)
 ENDIF (ENABLE_TESTS)
 ####################################################
 # Install extra files
-# install(FILES LICENSE.txt DESTINATION ${data_dir})
+install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_PATH})
 
 ############################################################
 # Uninstall stuff
