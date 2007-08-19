@@ -1,5 +1,10 @@
 2007-08-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issues: make constructors explicit, use Q_SLOTS macro.
+	* src/KdeMainWindow.h (MainWindow): Make explicit and use Q_SLOTS
+	* src/QtMainWindow.h (MainWindow):  Make explicit and use Q_SLOTS
+	* src/lib/MarbleAboutDialog.h: Q_SLOTS
+	
 	Rename SearchListView into MarbleSearchListView
 	* src/lib/searchlistview.cpp: rename into MarbleSearchListView.cpp
 	(MarbleSearchListView): initialize d.

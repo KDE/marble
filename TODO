@@ -40,16 +40,17 @@ Code Quality:
    - SearchListView  -> MarbleSearchListView                            done
    - LegendBrowser   -> MarbleLegendBrowser                             done
    - PlaceMarkModel                                                     --
+   - MapTheme                                                           --
  * d-pointerify the rest of the public classes                          INGE
    - MarbleDirs                                                         done
    - (MarbleThemeSelectView): doesn't have any private members          done
    - MarbleNavigator                                                    done
    - MarbleLegendBrowser                                                done
-   - (SearchListView)         doesn't have any private members          --
+   - (SearchListView)         doesn't have any private members          done
    - MarbleAboutDialog                                                  done
    - MapTheme                                                           --
    - PlaceMarkModel                                                     done
-   - ViewParams                                                         --
+   - ViewParams                                                         n/a
 
 Widget:
  * Separate the view from the globe (model)                             INGE

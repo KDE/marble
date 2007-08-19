@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
  
@@ -18,17 +19,20 @@
 
 #include "ControlView.h"
 
+
 class QLabel;
 
 class ControlView;
 class MarbleWidget;
+
  
 class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
  public:
-    MainWindow(const QString& marbleDataPath = QString(), QWidget *parent=0);
+    explicit MainWindow(const QString& marbleDataPath = QString(), 
+                        QWidget *parent=0);
     ~MainWindow();
 
     ControlView  *controlView()  const { return m_controlView; }
@@ -38,18 +42,18 @@ class MainWindow : public KXmlGuiWindow
     void  setupActions();
     void  createStatusBar();
 
- public slots:
+ public Q_SLOTS:
     void  showZoom(int zoom);
 
- private slots:
+ private Q_SLOTS:
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
     void  showFullScreen( bool );
     void  showSideBar( bool );
-    void openFile();
+    void  openFile();
 
-protected:
+ protected:
     virtual void saveProperties( KConfigGroup &group );
     virtual void readProperties( const KConfigGroup &group );
 
@@ -58,6 +62,7 @@ protected:
     void  readSettings();
     void  writeSettings();
 
+ private:
     // All the functionality is provided by this widget.
     ControlView  *m_controlView;
 

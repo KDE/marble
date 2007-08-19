@@ -34,11 +34,10 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
  public:
     MarbleAboutDialog(QWidget *parent = 0);
 
- private slots:
+ private Q_SLOTS:
     void loadPageContents( int idx );
 
  private:
-
     MarbleAboutDialogPrivate  * const d;
 };
 
