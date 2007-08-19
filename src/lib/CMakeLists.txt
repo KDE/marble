@@ -69,7 +69,7 @@ set(marblewidget_SRCS
            PlaceMarkManager.cpp
            PlaceMarkPainter.cpp
            PlaceMarkModel.cpp
-           placemarkinfodialog.cpp
+           PlaceMarkInfoDialog.cpp
            Quaternion.cpp
            searchcombobox.cpp
            texcolorizer.cpp
@@ -123,7 +123,7 @@ set (marblewidget_UI
     MarbleControlBox.ui
     MarbleNavigator.ui
     TileCreatorDialog.ui
-    placemarkinfodialog.ui
+    PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
 )
 MESSAGE( STATUS "${marble_UI}" )
@@ -245,7 +245,7 @@ install( FILES
            PlaceMarkManager.h
            PlaceMarkPainter.h
            PlaceMarkModel.h
-           placemarkinfodialog.h
+           PlaceMarkInfoDialog.h
            Quaternion.h
            ScreenPolygon.h
            searchcombobox.h

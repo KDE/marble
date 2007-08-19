@@ -1,5 +1,12 @@
 2007-08-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename files according to the coding standards: PlaceMarkInfoDialog
+	* src/lib/placemarkinfodialog.cpp: renamed into PlaceMarkInfoDialog.cpp
+	* src/lib/placemarkinfodialog.h:   renamed into PlaceMarkInfoDialog.h
+	* src/lib/placemarkinfodialog.ui:  renamed into PlaceMarkInfoDialog.ui
+	* src/lib/CMakeLists.txt:  Reflect name changes
+	* src/lib/MarbleWidgetpopupMenu.cpp: use new name
+	
 	Name changes according to the coding standards:
 	 - PlaceMarkModel
 	 - PlaceMarkPainter

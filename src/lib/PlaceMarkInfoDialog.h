@@ -14,7 +14,7 @@
 #define PLACEMARKINFODIALOG_H
 
 
-#include "ui_placemarkinfodialog.h"
+#include "ui_PlaceMarkInfoDialog.h"
 
 #include <QtGui/QStatusBar>
 #include <QtCore/QUrl>

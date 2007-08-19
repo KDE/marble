@@ -9,7 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "placemarkinfodialog.h"
+
+#include "PlaceMarkInfoDialog.h"
 
 #include <cmath>
 
@@ -136,4 +137,4 @@ void PlaceMarkInfoDialog::setFlagLabel()
     flag_val_lbl->setPixmap( m_flagcreator->flag() );
 }
 
-#include "placemarkinfodialog.moc"
+#include "PlaceMarkInfoDialog.moc"
