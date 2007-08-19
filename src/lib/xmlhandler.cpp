@@ -15,7 +15,7 @@
 #include <cmath>
 
 #include "global.h"
-#include "placemark.h"
+#include "PlaceMark.h"
 #include "PlaceMarkContainer.h"
 
 

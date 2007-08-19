@@ -39,16 +39,14 @@ Code Quality:
  * Name all public classes MarbleSomething                              INGE
    - SearchListView  -> MarbleSearchListView                            done
    - LegendBrowser   -> MarbleLegendBrowser                             done
-   - PlaceMarkModel                                                     --
-   - MapTheme                                                           --
+   - PlaceMarkModel (Why is this class public at all?)                  --
  * d-pointerify the rest of the public classes                          INGE
    - MarbleDirs                                                         done
    - (MarbleThemeSelectView): doesn't have any private members          done
    - MarbleNavigator                                                    done
    - MarbleLegendBrowser                                                done
-   - (SearchListView)         doesn't have any private members          done
+   - (MarbleSearchListView)   doesn't have any private members          done
    - MarbleAboutDialog                                                  done
-   - MapTheme                                                           --
    - PlaceMarkModel                                                     done
    - ViewParams                                                         n/a
 
@@ -74,8 +72,8 @@ Vector backend
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
-   - MarbleLocator (search field for placemarks)                        --
    - MarbleControlBox                                                   --
+   - MarbleLocator (search field for placemarks)                        --
    - MarbleLegendBrowser                                                --
 
  * Installation issues                                                  TACK
@@ -88,6 +86,7 @@ Documentation
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
    - MarbleNavigator                                                    --
+
 
 OpenStreetMap support for tiles@home
     - we'd like to get the tiles loaded and displayed                   TACK

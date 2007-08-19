@@ -61,10 +61,10 @@ set(marblewidget_SRCS
            MarbleDirs.cpp
            DeferredFlag.cpp
            TileCreatorDialog.cpp
-           maptheme.cpp
+           MapTheme.cpp
            ViewParams.cpp
            MeasureTool.cpp
-           placemark.cpp
+           PlaceMark.cpp
            PlaceMarkContainer.cpp
            placemarkmanager.cpp
            placemarkpainter.cpp
@@ -237,10 +237,10 @@ install( FILES
            MarbleDirs.h
            DeferredFlag.h
            TileCreatorDialog.h
-           maptheme.h
+           MapTheme.h
            ViewParams.h
            MeasureTool.h
-           placemark.h
+           PlaceMark.h
            PlaceMarkContainer.h
            placemarkmanager.h
            placemarkpainter.h

@@ -17,7 +17,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QDebug>
 
-#include "placemark.h"
+#include "PlaceMark.h"
 
 
 class PlaceMarkContainer : public QVector<PlaceMark*>

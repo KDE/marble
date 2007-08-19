@@ -24,7 +24,7 @@
 #include "texcolorizer.h"
 #include "TileLoader.h"
 #include "TileCreator.h"
-#include "maptheme.h"
+#include "MapTheme.h"
 #include "MarbleDirs.h"
 #include "TileCreatorDialog.h"
 #include "placemarkmanager.h"

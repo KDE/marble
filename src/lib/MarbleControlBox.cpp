@@ -34,7 +34,7 @@
 
 #include <MarbleWidget.h>
 #include <MarbleDirs.h>
-#include <maptheme.h>
+#include <MapTheme.h>
 
 
 class MarbleControlBoxPrivate

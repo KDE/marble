@@ -10,7 +10,7 @@
 //
 
 
-#include "placemark.h"
+#include "PlaceMark.h"
 
 #include <cmath>
 

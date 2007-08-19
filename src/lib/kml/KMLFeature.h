@@ -12,8 +12,9 @@
 #ifndef KMLFEATURE_H
 #define KMLFEATURE_H
 
+
+#include "PlaceMark.h"
 #include "KMLObject.h"
-#include "placemark.h"
 
 #include <QtCore/QString>
 

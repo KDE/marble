@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "maptheme.h"
+#include "MapTheme.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
@@ -364,4 +364,4 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
 }
 
 
-#include "maptheme.moc"
+#include "MapTheme.moc"

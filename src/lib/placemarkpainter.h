@@ -25,7 +25,7 @@
 #include <QtCore/QVector>
 
 #include "Quaternion.h"
-#include "placemark.h"
+#include "PlaceMark.h"
 #include "PlaceMarkContainer.h"
 
 

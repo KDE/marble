@@ -17,7 +17,7 @@
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "placemark.h"
+#include "PlaceMark.h"
 #include "placemarkinfodialog.h"
 
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 

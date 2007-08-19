@@ -21,7 +21,7 @@
 #include <QtGui/QTextBrowser>
 
 #include "MarbleDirs.h"
-#include "placemark.h"
+#include "PlaceMark.h"
 
 
 PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)

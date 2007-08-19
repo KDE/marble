@@ -21,7 +21,7 @@
 #include <QtGui/QPainter>
 
 #include "global.h"
-#include "placemark.h"
+#include "PlaceMark.h"
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 

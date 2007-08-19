@@ -1,5 +1,23 @@
 2007-08-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Name changes according to the coding standards for MapTheme and
+	PlaceMark.	
+	* src/lib/maptheme.cpp: renamed into MapTheme.cpp
+	* src/lib/maptheme.h:   renamed into MapTheme.h
+	* src/lib/placemark.cpp: renamed into PlaceMark.cpp
+	* src/lib/placemark.h:   renamed into PlaceMark.h
+	* src/lib/CMakeLists.txt: Reflect name changes.
+	* src/lib/MarbleControlBox.cpp,
+	* src/lib/MarbleModel.cpp,
+	* src/lib/MarbleWidgetPopupMenu.cpp,
+	* src/lib/MeasureTool.h,
+	* src/lib/PlaceMarkContainer.h,
+	* src/lib/kml/KMLFeature.h,
+	* src/lib/placemarkinfodialog.cpp,
+	* src/lib/placemarkpainter.{h,cpp},
+	* src/lib/xmlhandler.cpp:
+	use new names
+
 	Krazy issues: make constructors explicit, use Q_SLOTS macro.
 	* src/KdeMainWindow.h (MainWindow): Make explicit and use Q_SLOTS
 	* src/QtMainWindow.h (MainWindow):  Make explicit and use Q_SLOTS
@@ -1628,7 +1646,7 @@ quite some cases)
 
 2007-07-06  Torsten Rahn  <rahn@kde.org>
 
-* src/lib/placemarkmodel.cpp:
+* src/lib/<placemarkmodel.cpp:
 
 - Patch by Benoit Sigoure aka Tsuna.
 
