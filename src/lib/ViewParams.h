@@ -42,6 +42,7 @@ class ViewParams
 
  public:
     Projection  m_projection;
+    Projection  m_oldProjection;
 
     // Parameters that determine the painting
     int         m_radius;       // Zoom level (pixels / earth radius)

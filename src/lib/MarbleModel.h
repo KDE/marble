@@ -105,8 +105,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void setMapTheme( const QString &selectedMap, QWidget *parent, Projection currentProjection );
 
-    Projection projection();
-
     void addPlaceMarkFile( const QString& filename );
 
     QVector< PlaceMark* > whichFeatureAt( const QPoint& );

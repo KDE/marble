@@ -147,11 +147,6 @@ void MarbleModel::stopPolling()
     d->m_timer->stop();
 }
 
-Projection MarbleModel::projection()
-{ 
-    return d->m_projection;
-}
-
 QString MarbleModel::mapTheme() const
 {
     return d->m_selectedMap;

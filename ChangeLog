@@ -1,3 +1,7 @@
+2007-08-18  Carlos Licea  <carlos_licea@hotmail.com>
+    Removed the Projection function from MarbleModel.
+    Aded m_lastProjection to MarbleWidget.
+
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
 	d-pointerify MarbleDirs

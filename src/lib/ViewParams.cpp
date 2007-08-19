@@ -17,6 +17,7 @@
 ViewParams::ViewParams( )
 {
     m_projection = Spherical;
+    m_oldProjection = Spherical;
 
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
     m_radius     = 2000;

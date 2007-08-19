@@ -496,6 +496,7 @@ Projection MarbleWidget::projection() const
 
 void MarbleWidget::setProjection( const Projection projection )
 {
+    d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection = projection;
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
@@ -913,7 +914,7 @@ QString MarbleWidget::mapTheme() const
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    if ( maptheme == d->m_model->mapTheme() && d->m_model->projection() == d->m_viewParams.m_projection )
+    if ( maptheme == d->m_model->mapTheme() && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection)
         return;
 
     d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );
