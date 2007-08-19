@@ -9,26 +9,28 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "searchlistview.h"
+
+#include "MarbleSearchListView.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
 
 
-SearchListView::SearchListView(QWidget* parent)
-    : QListView(parent)
+MarbleSearchListView::MarbleSearchListView(QWidget* parent)
+    : QListView( parent ),
+      d( 0 )
 {
-    connect(this, SIGNAL( activated( const QModelIndex& ) ),
-            this, SIGNAL( centerOn ( const QModelIndex& ) ) );
+    connect( this, SIGNAL( activated( const QModelIndex& ) ),
+             this, SIGNAL( centerOn ( const QModelIndex& ) ) );
 }
 
 
-void SearchListView::selectItem(const QString& text)
+void MarbleSearchListView::selectItem(const QString& text)
 {
     if ( text.isEmpty() ) {
         clearSelection();
         scrollToTop();
-        emit activated(QModelIndex());
+        emit activated( QModelIndex() );
         return;
     }
 
@@ -47,11 +49,11 @@ void SearchListView::selectItem(const QString& text)
 }
 
 
-void SearchListView::activate()
+void MarbleSearchListView::activate()
 {
     if ( selectedIndexes().size() > 0 )
         emit activated( currentIndex() );
 }
 
 
-#include "searchlistview.moc"
+#include "MarbleSearchListView.moc"

@@ -28,7 +28,7 @@ Code Quality:
    - placemarkmodel.{h,cpp}                                             --
    - placemarkpainter.{h,cpp}                                           --
    - searchcombobox.{h,cpp}                                             --
-   - searchlistview.{h,cpp}                                             --
+   - searchlistview.{h,cpp}          -> MarbleSearchListView            done
    - texcolorizer.{h,cpp}                                               --
    - texturepalette.cpp                                                 --
    - tinywebbrowser.{h,cpp}                                             --
@@ -37,7 +37,7 @@ Code Quality:
    - xmlhandler.{h,cpp}                                                 --
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
-   - SearchListView  -> MarbleSearchListView                            --
+   - SearchListView  -> MarbleSearchListView                            done
    - LegendBrowser   -> MarbleLegendBrowser                             done
    - PlaceMarkModel                                                     --
  * d-pointerify the rest of the public classes                          INGE

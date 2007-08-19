@@ -10,20 +10,20 @@
 //
 
 
-#ifndef SEARCHLISTVIEW_H
-#define SEARCHLISTVIEW_H
+#ifndef MARBLESEARCHLISTVIEW_H
+#define MARBLESEARCHLISTVIEW_H
 
 
 #include <QtGui/QListView>
 
 #include "marble_export.h"
 
-class MARBLE_EXPORT SearchListView : public QListView
+class MARBLE_EXPORT MarbleSearchListView : public QListView
 {
     Q_OBJECT
 
  public:
-    SearchListView(QWidget*);
+    MarbleSearchListView(QWidget*);
 
  Q_SIGNALS:
     void centerOn(const QModelIndex&);
@@ -31,6 +31,10 @@ class MARBLE_EXPORT SearchListView : public QListView
  public Q_SLOTS:
     void  selectItem(const QString&);
     void  activate();
+
+ private:
+    class Private;
+    Private  * const d;
 };
 
-#endif // SEARCHLISTVIEW_H
+#endif // MARBLESEARCHLISTVIEW_H

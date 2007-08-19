@@ -116,7 +116,7 @@
           </widget>
          </item>
          <item row="3" column="0" >
-          <widget class="SearchListView" name="locationListView" >
+          <widget class="MarbleSearchListView" name="locationListView" >
            <property name="sizePolicy" >
             <sizepolicy>
              <hsizetype>5</hsizetype>
@@ -973,9 +973,9 @@
    <header>MarbleThemeSelectView.h</header>
   </customwidget>
   <customwidget>
-   <class>SearchListView</class>
+   <class>MarbleSearchListView</class>
    <extends>QListView</extends>
-   <header>searchlistview.h</header>
+   <header>MarbleSearchListView.h</header>
   </customwidget>
   <customwidget>
    <class>MarbleLegendBrowser</class>

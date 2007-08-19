@@ -43,6 +43,7 @@ set(marblewidget_SRCS
            MarbleNavigator.cpp
            MarbleLegendBrowser.cpp
            MarbleThemeSelectView.cpp
+           MarbleSearchListView.cpp
            MarbleAboutDialog.cpp
 
            MarbleWidgetInputHandler.cpp
@@ -71,7 +72,6 @@ set(marblewidget_SRCS
            placemarkinfodialog.cpp
            Quaternion.cpp
            searchcombobox.cpp
-           searchlistview.cpp
            texcolorizer.cpp
            FlatScanlineTextureMapper.cpp
            GlobeScanlineTextureMapper.cpp
@@ -218,6 +218,7 @@ install( FILES
            MarbleNavigator.h
            MarbleLegendBrowser.h
            MarbleThemeSelectView.h
+           MarbleSearchListView.h
            MarbleAboutDialog.h
 
            MarbleWidgetInputHandler.h
@@ -248,7 +249,6 @@ install( FILES
            Quaternion.h
            ScreenPolygon.h
            searchcombobox.h
-           searchlistview.h
            texcolorizer.h
            FlatScanlineTextureMapper.h
            GlobeScanlineTextureMapper.h

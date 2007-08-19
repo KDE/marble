@@ -1,3 +1,14 @@
+2007-08-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename SearchListView into MarbleSearchListView
+	* src/lib/searchlistview.cpp: rename into MarbleSearchListView.cpp
+	(MarbleSearchListView): initialize d.
+	* src/lib/searchlistview.h:   rename into MarbleSearchListView.h
+	(d): new member
+	* src/lib/MarbleControlBox.ui: refer to new name
+	* src/lib/CMakeLists.txt: reflect name change
+	Also introduce d-pointer at the same time.
+
 
 ================================================================
 	Marble 0.4.0 released: revision 701563
