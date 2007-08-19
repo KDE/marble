@@ -200,53 +200,35 @@ void TextureColorizer::rectangularColorize(ViewParams *viewParams)
     const int ybottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
     const int xleft = 0;
     const int xright = imgwidth;
+    for (int y = ytop; y < ybottom; ++y) {
 
-    for ( int y = ytop; y < ybottom; ++y ) {
-        const int dy = imgry - y;
-        QRgb       *data      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
-        const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
+    QRgb  *data = (QRgb*)( origimg->scanLine( y ) );
+    const QRgb  *coastdata = (QRgb*)( coastimg->scanLine( y ) );
 
-        double  relief = imgrx - xleft + bendReliefm * dy ;
+    emboss.buffer = 0;
 
-        for ( int x = xleft;
-                x < xright;
-                ++x, ++data, ++coastdata, relief -= 1.0 )
-        {
-            // Cheap Embosss / Bumpmapping
+    for ( int x = 0; x < imgwidth ; ++x, ++data, ++coastdata ) {
 
-            const uchar grey = *data & 0x000000ff; // qBlue(*data);
+        // Cheap Embosss / Bumpmapping
+        const uchar  grey = *data & 0x000000ff; // qBlue(*data);
 
-            emboss.buffer = emboss.buffer >> 8;
-            emboss.gpuint.x4 = grey;	
+        emboss.buffer = emboss.buffer >> 8;
+        emboss.gpuint.x4 = grey;	
 
-            if ( showRelief == true && emboss.gpuint.x1 > grey ) {
-                bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
+        if ( showRelief == true && emboss.gpuint.x1 > grey )
+            bump = ( emboss.gpuint.x1 - grey ) & 0x0f;
+        else
+            bump = 0;
 
-                // Apply "spherical" bumpmapping 
-                // bump *= cos( bendRelief * sqrt(((imgrx-x)^2+(imgry-y)^2)));
-
-                // very cheap approximation:
-                // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
-                // cos(x) ~= 1-x^2
-
-                bendradius = bendReliefx * relief;
-                bump *= qRound( 1.0 - bendradius * bendradius );
-
-                bump &= 0x0f;
-            }
-            else
-                bump = 0;
-
-
-            if ( *coastdata == landoffscreen )
-                *data = texturepalette[bump][grey + 0x100]; 
+        if ( *coastdata == landoffscreen )
+            *data = texturepalette[bump][grey + 0x100]; 
+        else {
+            if (*coastdata == lakeoffscreen)
+            *data = texturepalette[bump][0x055];
             else {
-                if (*coastdata == lakeoffscreen)
-                *data = texturepalette[bump][0x055];
-                else {
-                    *data = texturepalette[bump][grey];
-                }
+                *data = texturepalette[bump][grey];
             }
         }
     }
+}
 }
