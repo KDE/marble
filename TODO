@@ -7,25 +7,6 @@ Mark those tasks that you want to perform with your name:
  MURA   Murad Tagirov
 
 
-Before Version 0.4 (Monday June, 11th)
-----------------------------------------------------------------
-
-Hard requirements for the release:
- * Add Downloadmanager class for tiles and Wikipedia articles           DONE
- * Settings saving                                                      DONE
-
-Features
- * Add "Export Map" to save a screenshot as an image file               DONE
- * Add "Print" to print a screenshot                                    DONE
-
-Cleaning
- * Make the ChangeLog file follow the GNU format.                       DONE
- * No inline functions in the public classes                            DONE
- * d-pointerify the main public classes                                 DONE
- * float -> double                                                      DONE
- * Move files into the library                                          DONE
-
-
 During the SoC projects (0.5)
 ----------------------------------------------------------------
 
@@ -39,35 +20,21 @@ Misc
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
 
 Code Quality:
- * Filename == Classname (CamelCasing)                                  ----
-   - maptheme.cpp                                                       --
-   - maptheme.h                                                         --
-   - placemark.cpp                                                      --
-   - placemark.h                                                        --
-   - placemarkinfodialog.cpp                                            --
-   - placemarkinfodialog.h                                              --
-   - placemarkinfodialog.ui                                             --
-   - placemarkmanager.cpp                                               --
-   - placemarkmanager.h                                                 --
-   - placemarkmodel.cpp                                                 --
-   - placemarkmodel.h                                                   --
-   - placemarkpainter.cpp                                               --
-   - placemarkpainter.h                                                 --
-   - searchcombobox.cpp                                                 --
-   - searchcombobox.h                                                   --
-   - searchlistview.cpp                                                 --
-   - searchlistview.h                                                   --
-   - texcolorizer.cpp                                                   --
-   - texcolorizer.h                                                     --
+ * Filename == Classname (CamelCasing)                                  INGE
+   - maptheme.{h,cpp}                                                   --
+   - placemark.{h,cpp}                                                  --
+   - placemarkinfodialog.{h,cpp,ui}                                     --
+   - placemarkmanager.{h,cpp}                                           --
+   - placemarkmodel.{h,cpp}                                             --
+   - placemarkpainter.{h,cpp}                                           --
+   - searchcombobox.{h,cpp}                                             --
+   - searchlistview.{h,cpp}                                             --
+   - texcolorizer.{h,cpp}                                               --
    - texturepalette.cpp                                                 --
-   - tinywebbrowser.cpp                                                 --
-   - tinywebbrowser.h                                                   --
-   - vectorcomposer.cpp                                                 --
-   - vectorcomposer.h                                                   --
-   - vectormap.cpp                                                      --
-   - vectormap.h                                                        --
-   - xmlhandler.cpp                                                     --
-   - xmlhandler.h                                                       --
+   - tinywebbrowser.{h,cpp}                                             --
+   - vectorcomposer.{h,cpp}                                             --
+   - vectormap.{h,cpp}                                                  --
+   - xmlhandler.{h,cpp}                                                 --
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
    - SearchListView  -> MarbleSearchListView                            --

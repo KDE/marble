@@ -1,6 +1,13 @@
+
+================================================================
+	Marble 0.4.0 released: revision 701563
+================================================================
+
+
 2007-08-18  Carlos Licea  <carlos_licea@hotmail.com>
-    Removed the Projection function from MarbleModel.
-    Aded m_lastProjection to MarbleWidget.
+
+	Removed the Projection function from MarbleModel.
+	Aded m_lastProjection to MarbleWidget.
 
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
@@ -1993,7 +2000,6 @@ Thanks Benoit!
 	* src/lib/katlaswindrose.cpp:    float -> double
 	* src/lib/xmlhandler.cpp:        float -> double
 	* src/lib/TextureMapper.cpp:     float -> double
-
 
 	More float to double changes, the measure tool
 	* src/lib/measuretool.{h,cpp}:   float -> double
