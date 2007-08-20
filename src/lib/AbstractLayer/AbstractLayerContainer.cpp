@@ -54,8 +54,6 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
                                   double radius, 
                                   Quaternion invRotAxis)
 {
-    qDebug() << "AbstractLayerContainter::draw( ClipPainter, "
-            << "QSize, double, Quaternion)";
     const_iterator it;
     
     for( it = constBegin() ; it < constEnd() ; ++it ) {
@@ -69,8 +67,6 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
                                   Quaternion invRotAxis, 
                                   BoundingBox box)
 {
-    qDebug() << "AbstractLayerContainter::draw( ClipPainter, "
-            << "QSize, double, Quaternion, BoundingBox)";
     if ( box.isValid() ) {
         if ( m_boundingBox->intersects( box ) ) {
             draw( painter, canvasSize, radius, invRotAxis);

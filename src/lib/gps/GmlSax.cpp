@@ -75,10 +75,8 @@ bool GmlSax::fatalError(const QXmlParseException &exception)
 bool GmlSax::characters( const QString &str )
 {
     currentText = str;
-    // @TODO can this ever be false? Tim
+    // TODO: can this ever be false? Tim
     return true;
 }
-
-#include "GmlSax.moc"
 
 

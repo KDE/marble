@@ -63,6 +63,13 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      */
     virtual ~AbstractLayerContainer();
     
+    /**
+     * @brief default implementation of @c AbstractLayerInterface 
+     *        function.
+     * 
+     * this method does not apply to AbstractLayerContainer and should
+     * never be called.
+     */
     virtual void draw ( ClipPainter *painter, const QPoint &point );
     
     /**
