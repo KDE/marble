@@ -176,7 +176,7 @@ void TextureColorizer::rectangularColorize(ViewParams *viewParams)
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
-    const int  imgrx     = imgwidth / 2;
+    //const int  imgrx     = imgwidth / 2;
     const int  imgry     = imgheight / 2;
     //const int  imgradius = imgrx * imgrx + imgry * imgry;
 
@@ -189,17 +189,17 @@ void TextureColorizer::rectangularColorize(ViewParams *viewParams)
     GpFifo  emboss;
     emboss.buffer = 0;
 
-    double  bendradius = 0;
-    const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
-    const double  bendReliefx = 0.41 * bendRelief;
-    const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
+    //double  bendradius = 0;
+    //const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
+    //const double  bendReliefx = 0.41 * bendRelief;
+    //const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
     const bool showRelief = viewParams->m_showRelief;
     int yCenterOffset =  (int)((float)(2*radius / M_PI) * viewParams->m_planetAxis.pitch());
     const int ytop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
     const int ybottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
-    const int xleft = 0;
-    const int xright = imgwidth;
+    //const int xleft = 0;
+    //const int xright = imgwidth;
     for (int y = ytop; y < ybottom; ++y) {
 
     QRgb  *data = (QRgb*)( origimg->scanLine( y ) );
