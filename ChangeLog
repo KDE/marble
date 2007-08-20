@@ -1,3 +1,9 @@
+2007-08-20  Murad Tagirov  <tmurad@gmail.com>
+
+    Set placemark symbol like in xmlhandler. Added
+    parsing of CountryNameCode tag
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+
 2007-08-19  Torsten Rahn  <rahn@kde.org>
 
         * CMakeLists.txt: Install License.txt
@@ -10,7 +16,7 @@
 	* src/lib/placemarkinfodialog.ui:  renamed into PlaceMarkInfoDialog.ui
 	* src/lib/CMakeLists.txt:  Reflect name changes
 	* src/lib/MarbleWidgetpopupMenu.cpp: use new name
-	
+
 	Name changes according to the coding standards:
 	 - PlaceMarkModel
 	 - PlaceMarkPainter
@@ -26,7 +32,7 @@
 	* src/lib/MarbleModel.h:   use new names
 
 	Name changes according to the coding standards for MapTheme and
-	PlaceMark.	
+	PlaceMark.
 	* src/lib/maptheme.cpp: renamed into MapTheme.cpp
 	* src/lib/maptheme.h:   renamed into MapTheme.h
 	* src/lib/placemark.cpp: renamed into PlaceMark.cpp
@@ -47,7 +53,7 @@
 	* src/KdeMainWindow.h (MainWindow): Make explicit and use Q_SLOTS
 	* src/QtMainWindow.h (MainWindow):  Make explicit and use Q_SLOTS
 	* src/lib/MarbleAboutDialog.h: Q_SLOTS
-	
+
 	Rename SearchListView into MarbleSearchListView
 	* src/lib/searchlistview.cpp: rename into MarbleSearchListView.cpp
 	(MarbleSearchListView): initialize d.
@@ -83,16 +89,16 @@
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
     Changing the INSTALL file to feature
-    the last working version number 
-    (of Marble 0.4.0 ) and added 
+    the last working version number
+    (of Marble 0.4.0 ) and added
     a description for adjusting MarbleDataPath
 
-    * INSTALL 
+    * INSTALL
 
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
-    Removing Debug calls for release and 
-    Bumping up version number to 
+    Removing Debug calls for release and
+    Bumping up version number to
 
     Marble 0.4.0
 
@@ -120,11 +126,11 @@
 	(if present).
 
     * src/lib/MarbleWidget.{cpp,h}:
-	Removed redundant setters and getters for 
+	Removed redundant setters and getters for
 	MarbleDataPath (d'oh).
 
     * src/lib/CompassFloatItem.{cpp,h}:
-	Added setSourceFile method 
+	Added setSourceFile method
 	(while I was on the wrong track fixing).
 
 2007-08-18  Andrew Manson   <g.real.ate@gmail.com>
@@ -132,29 +138,29 @@
 	Attempted to Correct a small glitch with the drawing of the gps
 	Tracking object.
 	* src/lib/gps/GpsTracking.cpp : altertered drawing procedure
-    
-    Added the implementation of saving and closing a file to the 
+
+    Added the implementation of saving and closing a file to the
     GpxFileModel.
     * src/lib/gps/GpxFileModel.cpp : save and close file
-    
+
     Fixed a crash due to null pointer BoundingBox
-    * src/lib/gps/TrackSegment.cpp : 
+    * src/lib/gps/TrackSegment.cpp :
     * src/lib/BoundingBox.cpp :
     * src/lib/AbstractLayer/AbstractLayerContainer.cpp} :
-    
+
     Added an implementation for getting pixel position withought need
     for the "double radius" to "int radius" cast.
     * src/lib/AbstractLayer/AbstractLayerData.{h,cpp} : double math
-    
-    Added a new slot "enableFileViewActions()" and connected the 
+
+    Added a new slot "enableFileViewActions()" and connected the
     relivant signals from the File View selection model. Also
     connected the button signals to the GpxFileModel save and close
     implementations.
     * src/lib/MarbleControlBox.cpp :
-    
+
     Added info on how to build marble with debug info.
-    * INSTALL : debug info 
-    
+    * INSTALL : debug info
+
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
 	Trying to make MARBLE_DATA_PATH work for real.
@@ -164,9 +170,9 @@
 2007-08-18 Carlos Licea <carlos_licea@hotmail.com>
     *MarbleModel: changed m_lastProjection to m_projection,
      also added a projection() which returns m_projection.
-    *MarbleWidget: corrected setMapTheme so that it changes the 
+    *MarbleWidget: corrected setMapTheme so that it changes the
      mapTheme if either the theme or the projection have changed.
-    *MeasureTool: changed the rectangularDrawDistancePath so that 
+    *MeasureTool: changed the rectangularDrawDistancePath so that
      the paths are arcs and not lines anymore.
 
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
@@ -201,7 +207,7 @@
 
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
-    Adding Save and Close button for Andrew to 
+    Adding Save and Close button for Andrew to
     the FileView.
 
     * src/lib/MarbleControlBox.ui
@@ -225,10 +231,10 @@
 	* src/kdemain.cpp: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 	Note: Tackat will have to do the Qt-only version.
-	
+
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
-    exposing runTimeMarbleDataPath to MarbleWidget's 
+    exposing runTimeMarbleDataPath to MarbleWidget's
     API.
 
     * src/lib/MarbleWidget.{cpp,h}
@@ -251,8 +257,8 @@
 
     * CMakeLists.txt:
     Adjusting the definition of MARBLE_DATA_PATH. -
-    Should rather get defined like data_dir gets 
-    defined in CMakeList.txt in marble/data, 
+    Should rather get defined like data_dir gets
+    defined in CMakeList.txt in marble/data,
     shouldn't it?
 
 2007-08-17  Torsten Rahn  <rahn@kde.org>
@@ -278,8 +284,8 @@
 	Make the compass work again
 	* data/legend.html: Mention compass instead of windrose
 	* data/CMakeLists.txt: install compass.svg instead of windrose.svg
-	
-	Rename KAtlasTileCreatorDialog into TileCreatorDialog 
+
+	Rename KAtlasTileCreatorDialog into TileCreatorDialog
 	* src/lib/katlastilecreatordialog.cpp: rename into TileCreatorDialog.cpp
 	* src/lib/katlastilecreatordialog.h:   rename into TileCreatorDialog.h
 	* src/lib/katlastilecreatordialog.ui:  rename into TileCreatorDialog.ui
@@ -316,13 +322,13 @@
 
 2007-08-16  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleDirs.h: 
+    * src/lib/MarbleDirs.h:
     Adding summary of the discussion with Tim Sutton.
 
 2007-08-15  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/maptheme.cpp: 
-    * src/lib/MarbleDirs.cpp: 
+    * src/lib/maptheme.cpp:
+    * src/lib/MarbleDirs.cpp:
     Making MarbleDirs.h uninlined by adding MarbleDirs.cpp
     as suggested by Pino Toscano.
     Getting rid of unixDir.
@@ -333,14 +339,14 @@
 
 2007-08-15  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleDirs.h: 
-    Adding some explanations how MarbleDirs is 
+    * src/lib/MarbleDirs.h:
+    Adding some explanations how MarbleDirs is
     meant to work.
 
 2007-08-15  Torsten Rahn  <rahn@kde.org>
-	
-    * CODING: 
-    Following up to Ingwa's recent work rules were 
+
+    * CODING:
+    Following up to Ingwa's recent work rules were
     added when a class should be prefixed "Marble".
     Fell free to add cases I forgot.
 
@@ -366,7 +372,7 @@
 	* src/lib/MarbleControlBox.ui: refer to new name
 	* src/lib/MarbleControlBox.cpp: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
-	
+
 	Rename katlasthemeselectview into MarbleThemeSelectView:
 	* src/lib/katlasthemeselectview.cpp: rename into
 	MarbleThemeSelectView.cpp:
@@ -375,7 +381,7 @@
 	* src/lib/MarbleControlBox.ui: refer to new name
 	* src/lib/MarbleControlBox.cpp: refer to new name
 	* src/lib/CMakeLists.txt: Reflect name change
-	
+
 	Krazy issue 22: signals and slots
 	* src/lib/MarbleNavigator.h (MarbleNavigator): Use Q_SIGNALS and
 	Q_SLOTS instead
@@ -405,7 +411,7 @@
 
 	* src/lib/GeoPolygon.cpp:
 	Make Marble work with PowerPC.
-	Patch passed on by 
+	Patch passed on by
 	Steffen Joeris <steffen.joeris@skolelinux.de>
 
 2007-08-14  Torsten Rahn  <rahn@kde.org>
@@ -414,8 +420,8 @@
         Adding method stub to configure MarbleDataDir
 
 	* src/lib/TileCreator.{cpp,h}:
-	Adding lots of more qDebugs to catch some 
-	possible errors and safer coding. 
+	Adding lots of more qDebugs to catch some
+	possible errors and safer coding.
 	Fix for the case where the image is smaller than
 	2 * tileSize x tileSize.
 
@@ -429,41 +435,41 @@
 	(createTiles): fix wrong test of initial tile size.
 
 2007-08-13  Torsten Rahn  <rahn@kde.org>
-	
-    * src/lib/TileCreator.{cpp,h}: 
+
+    * src/lib/TileCreator.{cpp,h}:
     Add a return value to createTiles ...
 
 2007-08-13  Torsten Rahn  <rahn@kde.org>
-	
-    * src/lib/MarbleControlBox.ui: 
+
+    * src/lib/MarbleControlBox.ui:
     Make it compile with Qt 4.2 again.
 
 2007-08-13  Andrew Manson   <g.real.ate@gmail.com>
 
-    Added File View Tab to the Marble Control box as a view to the 
+    Added File View Tab to the Marble Control box as a view to the
     GpxFileModel. The tab is disabled by default and needs command
     line arg --enableFileView to see.
     * src/kdemain.cpp: cmd line arg
     * src/katlascontrol.cpp : new method to enable/disable File view
     * src/lib/MarbleControlBox.ui : new tab
-    
-    Added a GpxFileModel to MarbleModelPrivate and added nessary 
+
+    Added a GpxFileModel to MarbleModelPrivate and added nessary
     accessors.
-    * src/lib/MarbleWidget.cpp : accessor 
+    * src/lib/MarbleWidget.cpp : accessor
     * src/lib/MarbleModel.h : new member variable and accessors
-    
+
     Added nessary ModelItem functions to GpxFile
     * src/lib/gps/GpxFile.cpp : more like a model item
-    
-    Added new Class GpxFileModel 
+
+    Added new Class GpxFileModel
     * src/lib/gps/GpxFileModel.{h,cpp} : new class
-    
+
     Added the use of a GpxFileModel to the GpsLayer
     * src/lib/gps/GpsLayer : used GpxFileModel
-    
-    
+
+
 2007-08-13  Torsten Rahn  <rahn@kde.org>
-	
+
 	- adding window manager application icon
 	- adding What's this icon to the ressource file.
 
@@ -478,7 +484,7 @@
         - Make the KDE GUI look more like a KDE application.
 
 2007-08-13  Torsten Rahn  <rahn@kde.org>
-	
+
     * src/lib/MarbleWidget.cpp:
     * src/lib/gps/Track.cpp:
     * src/lib/TileCreator.cpp:
@@ -487,8 +493,8 @@
     * src/lib/texcolorizer.cpp:
     * CMakeLists.txt:
 
-        Patch by Tim Sutton of QGIS fame. Introduces 
-	some fixes and more careful coding to 
+        Patch by Tim Sutton of QGIS fame. Introduces
+	some fixes and more careful coding to
 	TileCreator, some minor fixes and qDebug statements.
 
 2007-08-13  Torsten Rahn  <rahn@kde.org>
@@ -502,11 +508,11 @@
     * src/QtMainWindow.cpp:
     * src/lib/MarbleWidget.{h, cpp}:
     * src/lib/MarbleControlBox.{ui,h,cpp}:
-        - Saving and retrieving Home Location in settings. 
+        - Saving and retrieving Home Location in settings.
 
 2007-08-12  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/gps/GpsTracking.{ cpp } : 
+    * src/lib/gps/GpsTracking.{ cpp } :
 	- disabled update method to make Marble compile again.
 	Andrew, please fix your code in line 109. :-)
 
@@ -516,7 +522,7 @@
 	* src/lib/MarbleNavigator.h (MarbleNavigator): Introduce d-pointer
 	* src/lib/MarbleNavigator.cpp (MarbleNavigatorPrivate): new class
 	(MarbleNavigator):use d-pointer where appropriate
-	
+
 	Fix some warnings
 	* src/lib/gps/GpsTracking.cpp: Fix warnings
 
@@ -531,15 +537,15 @@
 	* src/lib/MarbleAboutDialog.h (MarbleAboutDialog): Introduce d-pointer
 	* src/lib/MarbleAboutDialog.cpp (MarbleAboutDialogPrivate): new class
 	(MarbleAboutDialog):use d-pointer where appropriate
-	
+
 2007-08-11  Andrew Manson   <g.real.ate@gmail.com>
 
     Altered the updateGps() function in MarbleWidget so that it now
-    only updates the region where the the gps marker was and 
+    only updates the region where the the gps marker was and
     currenly is
     * src/lib/MarbleWidget.cpp : updateGps() now uses regions
 
-    Added a new class that represents a GpsTracking Object. It is 
+    Added a new class that represents a GpsTracking Object. It is
     designed to remove the need for the Gps Layer to know abount gpsd
     or any other methods of getting current location.
     * src/lib/gps/GpsTracking.{ h, cpp } : new class
@@ -559,7 +565,7 @@
 	* src/lib/MarbleAboutDialog.ui: renamed from katlasaboutdialog.ui
 	* src/lib/MarbleWidgetPopupMenu.cpp (slotAboutDialog): Use new name
 	* src/lib/CMakeLists.txt: Name changes as above.
-	
+
 	Remove warnings
 	src/lib/MarbleWidget.cpp (paint): mark unused with Q_UNUSED()
 	src/lib/global.h (Projection): Disable Mercator
@@ -568,7 +574,7 @@
 	Make the code clearer by naming things better.
 	* src/lib/placemarkpainter.{h,cpp} (testXBug): Renamed from testbug().
 	(m_useXWorkaround): renamed from m_useworkaround
-	
+
 	Fix Krazy issue 13: proper include directives.
 	* src/lib/TileCreator.h (TILECREATOR_H): Renamed from TILESCISSOR_H
 
@@ -585,7 +591,7 @@
 
     Adding "Set Home Location" to the RMB menu.
     (Wanted to have this in before the message string freeze).
-    Something is strange with the sign of the 
+    Something is strange with the sign of the
     longitude stored in Radians .... I have to check that.
 
     TODO: store in configuration file.
@@ -611,11 +617,11 @@
     * src/lib/MarbleWidget.{cpp,h}:
         - Some fixes concerning Carlos' introduction of
         projections
-        - make all methods accept Degree as a unit by 
+        - make all methods accept Degree as a unit by
           default ( geoCoordinates RAD->DEG )
     * src/lib/MarbleWidgetInputHandler.cpp:
     * src/lib/MarbleWidgetPopupMenu.{cpp,h}:
-        - make all methods accept Degree as a unit by 
+        - make all methods accept Degree as a unit by
           default ( geoCoordinates RAD->DEG )
     * src/lib/Quaternion.cpp:
         - remove DEG2ONE.
@@ -623,19 +629,19 @@
     * src/lib/global.h:
         - remove DEG2ONE.
     * CODING:
-        - adding a notion on upper/lower case conventions for 
+        - adding a notion on upper/lower case conventions for
           variable / method names.
 
 2007-08-11  Torsten Rahn  <rahn@kde.org>
-	
+
     * src/lib/MarbleWidget.{h,cpp} : Introducing RAD2DEG and fixing
-      rotate(phi,theta,psi) as well as other methods. 
+      rotate(phi,theta,psi) as well as other methods.
 
     * src/lib/BoundingBox.{h,cpp} : some minor coding style fixes.
 
-    * src/lib/global.h : RAD2DEG, DEG2RAD, DEG2ONE, RAD2ONE		
+    * src/lib/global.h : RAD2DEG, DEG2RAD, DEG2ONE, RAD2ONE
 
-    Adjustments to the usage of RAD2DEG, etc.:		
+    Adjustments to the usage of RAD2DEG, etc.:
     * src/lib/vectormap.cpp
     * src/lib/GeoPoint.h
     * src/lib/kml/KMLPointParser.cpp
@@ -651,29 +657,29 @@
 2007-08-10  Andrew Manson   <g.real.ate@gmail.com>
 
     Added a method to extract the global Quaternion from the Widget
-    for the use in Bounding Box. Code was just Coppied from 
-    MarbleWidget::geoCoordinates. 
+    for the use in Bounding Box. Code was just Coppied from
+    MarbleWidget::geoCoordinates.
     Added a method MarbleWidget::setBoundingBox that applies the
-    current View's BoundingBox to the bounding box object in 
+    current View's BoundingBox to the bounding box object in
     viewParams.
     * src/lib/MarbleWidget.{h,cpp} : added methods globalQuaternion
                                      and setBoundingBox
 
      Added the implementation of a GpxFile so that it may be used for
-    a file model/view implementation. Just meant to seperate the 
+    a file model/view implementation. Just meant to seperate the
     containers from the model.
     * src/lib/gps/GpxFile.{h,cpp} : new class
 
-    Added the simple implementation of the RouteContainer just as a 
-    completion of the Gps Collection classes. 
+    Added the simple implementation of the RouteContainer just as a
+    completion of the Gps Collection classes.
     * src/lib/gps/RouteContainer.{cpp, h} : new class
 
     Added implementation of GpxFile to GpxSax
     * src/lib/gps/GpxSax.{cpp,h} : implemented GpxFile
 
-    Added a constructor to TrackPoint that creates a deep copy of 
+    Added a constructor to TrackPoint that creates a deep copy of
     annother Trackpoint and fixed the drawing of each point.
-    * src/lib/gps/TrackPoint.{h,cpp} : new constructor and better 
+    * src/lib/gps/TrackPoint.{h,cpp} : new constructor and better
                                        painting.
 
     Fixed the drawing of current position in GpsLayer and made it draw
@@ -683,31 +689,31 @@
     Implemented BoundingBox checking for TrackSegment
     * src/lib/gps/TrackSegment.{cpp, h } :bounding box
 
-    Added a class that represents a bounding box and deals with any 
+    Added a class that represents a bounding box and deals with any
     functions expected of a bounding box class such as intersection
-    detection. 
+    detection.
     * src/lib/BoundingBox.{h,cpp} : new class
 
-    Added a default implemetation of paintLayer to AbstractLayer and 
-    added another convience class to measure the istance between two 
-    QPointF. 
-    * src/lib/AbstractLayer/AbstractLayer.{h,cpp} : default 
+    Added a default implemetation of paintLayer to AbstractLayer and
+    added another convience class to measure the istance between two
+    QPointF.
+    * src/lib/AbstractLayer/AbstractLayer.{h,cpp} : default
                                         implementation of paint and
                                         new convinence class.
 
-    Added a new interface that aviods the need to subclass 
-    AbstractLayer{data, container} to implement a new layer and 
-    instead making them only a default implementation. 
+    Added a new interface that aviods the need to subclass
+    AbstractLayer{data, container} to implement a new layer and
+    instead making them only a default implementation.
     * src/lib/AbstractLayer/AbstractLayerInterface.{h, cpp}: new class
 
     Added a BoundingBox variable to ViewParams
     * src/lib/ViewParams.h : BoundingBox
 
-    Added operator==() to GeoPoint that evaluates the lat and long 
-    using GeoPoint::geoCoordinates and compares them 
+    Added operator==() to GeoPoint that evaluates the lat and long
+    using GeoPoint::geoCoordinates and compares them
     * src/lib/Geopoint.{h,cpp} : operator==()
 
-    
+
 
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
@@ -716,7 +722,7 @@
 	because that's what it is.
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
-	
+
 	Tooltips for Mapthemes ...
 
         *  src/lib/vectorcomposer.cpp
@@ -726,7 +732,7 @@
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
-	Putting Findlibgps.cmake back into place 
+	Putting Findlibgps.cmake back into place
 	which wasn't meant to get removed.
 
         *  Findlibgps.cmake
@@ -734,7 +740,7 @@
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
 	Another patch by Tim Sutton of QGis fame.
-	Improves Mac integration, introduces 
+	Improves Mac integration, introduces
 	unit tests and fixes some indentation.
 
         *  install_mac/1-release-extra.sh
@@ -753,7 +759,7 @@
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
-	Renaming TileScissor class and files to 
+	Renaming TileScissor class and files to
 	TileCreator.
 
 	* src/lib/tilescissor.cpp
@@ -773,11 +779,11 @@
 
 	Fixing another issue reported by Luis Silva:
 
-	"The image sizes must really be the correct ones 
-	otherwise the tiling process just puts the same 
-	image on both hemispheres." 
+	"The image sizes must really be the correct ones
+	otherwise the tiling process just puts the same
+	image on both hemispheres."
 
-	Cleaning up the TileScissor class a lot while 
+	Cleaning up the TileScissor class a lot while
 	fixing that issue: Renamed variables to be
 	more suggestive and made code more elegant.
 
@@ -791,10 +797,10 @@
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
-	Fixing issue reported by Luis Silva by making sure 
+	Fixing issue reported by Luis Silva by making sure
 	that the preview images match the expected size:
 
-	" Also the 'map view' tab gets garbled with previews of 
+	" Also the 'map view' tab gets garbled with previews of
 	sizes other than 136x136. The previews go on top of each other."
 
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
@@ -804,14 +810,14 @@
 	Simplify code structure.
 	(rectangularPaintPlaceFolder): Reindent to follow code structure.
 	Also makes it more like sphericalPaintPlaceFolder
-	
+
 	Integrate some changes from the KML SoC project.
 	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder): Remove
 	double definition and #ifdef test
 	(sphericalPaintPlaceFolder): Take firstTime parameter
 	(rectangularPaintPlaceFolder): Take firstTime parameter
 	(paintPlaceFolder): Use new call signatures.
-	
+
 	Fix Krazy issue 18: check for inappropriate pass-by-value args
 	* src/lib/placemarkmanager.{h,cpp} (loadDocumentFromCache): Take
 	QString& parameter.
@@ -896,14 +902,14 @@
 
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
-    - Ladies and gentlemen, we introduce the 
+    - Ladies and gentlemen, we introduce the
 	International Date Line.
-      Cross it from east to the west to enjoy 
+      Cross it from east to the west to enjoy
       a peek 24-hours ahead into the future of KDE 4.
 
      Our IDL includes the Kiribati line.
 
-     More info at: 
+     More info at:
 http://en.wikipedia.org/wiki/International_Dateline
 
      * tools/dateline/dateline.pro

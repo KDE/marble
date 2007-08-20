@@ -36,11 +36,15 @@ class KMLPlaceMarkParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  private:
+    void setPlaceMarkSymbol();
+
+ private:
     enum
     {
         IDLE,
         WAIT_POP,
-        WAIT_ROLE
+        WAIT_ROLE,
+        WAIT_COUNTRYNAMECODE
     };
 
     KMLObjectParser*    m_currentParser;

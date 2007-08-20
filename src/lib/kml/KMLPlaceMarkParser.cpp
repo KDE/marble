@@ -25,6 +25,7 @@ namespace
      */
     const QString POP_TAG               = "pop";
     const QString ROLE_TAG              = "role";
+    const QString COUNTRYNAMECODE_TAG   = "countrynamecode";
 }
 
 KMLPlaceMarkParser::KMLPlaceMarkParser( KMLPlaceMark& placemark )
@@ -85,6 +86,10 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
             m_phase = WAIT_ROLE;
             result = true;
         }
+        else if ( lowerName == COUNTRYNAMECODE_TAG ) {
+            m_phase = WAIT_COUNTRYNAMECODE;
+            result = true;
+        }
     }
 
     return result;
@@ -117,6 +122,7 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
         switch ( m_phase ) {
             case IDLE:
                 if ( lowerName == PLACEMARKPARSER_TAG ) {
+                    setPlaceMarkSymbol();
                     m_parsed = true;
                     result = true;
                 }
@@ -132,6 +138,12 @@ bool KMLPlaceMarkParser::endElement( const QString& namespaceURI,
                     m_phase = IDLE;
                     result = true;
                 }
+            case WAIT_COUNTRYNAMECODE:
+                if ( lowerName == COUNTRYNAMECODE_TAG ) {
+                    m_phase = IDLE;
+                    result = true;
+                }
+                break;
             default:
                 break;
         }
@@ -171,10 +183,27 @@ bool KMLPlaceMarkParser::characters( const QString& str )
                 placemark.setRole( str.at(0) );
                 result = true;
                 break;
+            case WAIT_COUNTRYNAMECODE:
+                placemark.setCountryCode( str );
+                break;
             default:
                 break;
         }
     }
 
     return result;
+}
+
+void KMLPlaceMarkParser::setPlaceMarkSymbol()
+{
+    KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
+
+    if ( placemark.role() == 'P' )      placemark.setSymbol(16);
+    else if ( placemark.role() == 'M' ) placemark.setSymbol(17);
+    else if ( placemark.role() == 'H' ) placemark.setSymbol(18);
+    else if ( placemark.role() == 'V' ) placemark.setSymbol(19);
+    else if ( placemark.role() == 'F' ) placemark.setSymbol(20);
+    else if ( placemark.role() == 'N' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 );
+    else if ( placemark.role() == 'R' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 2);
+    else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 3 );
 }
