@@ -22,8 +22,7 @@
 
 
 PlaceMark::PlaceMark()
-  : m_coordinate(),
-    m_name()
+  : m_coordinate()
 {
     m_symbol       = 0;
     m_population   = 0;
@@ -37,14 +36,13 @@ PlaceMark::PlaceMark()
     m_selected     = 0; // 0: not selected 1: centered 2:hover
 }
 
-PlaceMark::PlaceMark( const QString& _name )
-  : m_coordinate(),
-    m_name( _name )
+PlaceMark::PlaceMark( const QString& name )
+  : KMLFeature( name ),
+    m_coordinate()
 {
     m_symbol       = 0;
     //m_labelPixmap  = QPixmap();
 }
-
 
 void PlaceMark::coordinate( double& lon, double& lat )
 {
@@ -131,23 +129,23 @@ const QPixmap PlaceMark::symbolPixmap() const
 
 void PlaceMark::pack( QDataStream& stream ) const
 {
-    stream << m_name;
+    KMLFeature::pack( stream );
+
     stream << m_population;
     stream << m_symbol;
     stream << m_popidx;
     stream << m_role;
-    stream << m_description;
     stream << m_countrycode;
 }
 
 
 void PlaceMark::unpack( QDataStream& stream )
 {
-    stream >> m_name;
+    KMLFeature::unpack( stream );
+
     stream >> m_population;
     stream >> m_symbol;
     stream >> m_popidx;
     stream >> m_role;
-    stream >> m_description;
     stream >> m_countrycode;
 }

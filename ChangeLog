@@ -1,3 +1,12 @@
+2007-08-21  Murad Tagirov  <tmurad@gmail.com>
+
+    Inherit KMLPlaceMark -> PlaceMark -> KMLFeature like
+    in kml class diagram.
+    * src/lib/kml/KMLFeature.{h,cpp}
+    * src/lib/kml/KMLPlaceMark.{h,cpp}
+    * src/lib/PlaceMark.{h,cpp}
+
+
 2007-08-20  Carlos Licea  <carlos_licea@hotmail.com>
     *MarbleWidget: added a test to see if the point given
      to geocoordinates in flat projection it's outside the map.

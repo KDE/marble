@@ -20,9 +20,9 @@
 #include <QtGui/QPixmap>
 
 #include "GeoPoint.h"
-#include "kml/Serializable.h"
+#include "kml/KMLFeature.h"
 
-class PlaceMark : public Serializable
+class PlaceMark : public KMLFeature
 {
  public:
     PlaceMark();
@@ -34,14 +34,8 @@ class PlaceMark : public Serializable
 
     const Quaternion& quaternion() const { return m_coordinate.quaternion(); }
 
-    QString name() const         { return m_name; }
-    void setName( QString name ) { m_name = name; }
-
     const QChar role() const   { return m_role; }
     void setRole( QChar role ) { m_role = role; }
-
-    const QString description() const          { return m_description;        }
-    void setDescription( QString description ) { m_description = description; }
 
     const QString countryCode() const          { return m_countrycode;        }
     void setCountryCode( QString countrycode ) { m_countrycode = countrycode; }
@@ -84,7 +78,6 @@ class PlaceMark : public Serializable
 
  protected:
     GeoPoint  m_coordinate;     // The geographic location
-    QString   m_name;
 
     // Basic data
     int       m_population;
@@ -95,7 +88,6 @@ class PlaceMark : public Serializable
     int       m_popidx;
 
     QChar     m_role;
-    QString   m_description;
     QString   m_countrycode;
 };
 

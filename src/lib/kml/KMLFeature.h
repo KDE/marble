@@ -13,14 +13,11 @@
 #define KMLFEATURE_H
 
 
-#include "PlaceMark.h"
+#include <QtCore/QString>
 #include "KMLObject.h"
 
-#include <QtCore/QString>
-
 class KMLFeature
-  : public KMLObject,
-    public PlaceMark
+  : public KMLObject
 {
  public:
     virtual ~KMLFeature();
@@ -45,6 +42,7 @@ class KMLFeature
 
  protected:
     KMLFeature();
+    KMLFeature( const QString& name );
 
  private:
     QString     m_name;

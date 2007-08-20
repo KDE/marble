@@ -12,23 +12,16 @@
 #ifndef KMLPLACEMARK_H
 #define KMLPLACEMARK_H
 
-#include "KMLFeature.h"
-
-#include "GeoPoint.h"
+#include "PlaceMark.h"
 
 class KMLPlaceMark
-  : public KMLFeature
+  : public PlaceMark
 {
  public:
     KMLPlaceMark();
     virtual ~KMLPlaceMark();
 
-    void setCoordinate( double lon, double lat );
-
     QString toString() const;
-
- private:
-//    GeoPoint    m_coordinate; // PlaceMark class already has this field as protected
 };
 
 #endif // KMLPLACEMARK_H

@@ -11,9 +11,16 @@
 
 #include "KMLFeature.h"
 
+#include <QtCore/QDataStream>
+
 
 KMLFeature::KMLFeature() :
     m_visible( true )
+{
+}
+
+KMLFeature::KMLFeature( const QString& name ) :
+    m_name( name )
 {
 }
 
@@ -28,7 +35,6 @@ QString KMLFeature::name() const
 
 void KMLFeature::setName( const QString &value )
 {
-    PlaceMark::setName( value ); //FIXME
     m_name = value;
 }
 
@@ -75,7 +81,6 @@ void KMLFeature::setVisible( bool value )
 void KMLFeature::pack( QDataStream& stream ) const
 {
     KMLObject::pack( stream );
-    PlaceMark::pack (stream );
 
     stream << m_name;
     stream << m_address;

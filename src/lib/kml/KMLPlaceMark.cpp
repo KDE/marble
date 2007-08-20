@@ -21,11 +21,6 @@ KMLPlaceMark::~KMLPlaceMark()
 {
 }
 
-void KMLPlaceMark::setCoordinate( double lon, double lat )
-{
-    m_coordinate = GeoPoint( lon, lat );
-}
-
 QString KMLPlaceMark::toString() const
 {
     return QString();
