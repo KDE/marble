@@ -47,6 +47,9 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      */
     virtual ~AbstractLayerData();
     
+    /**
+     * @brief get the string of the internal geoPoint
+     */
     QString toString();
     
     /**
@@ -77,15 +80,13 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis);
-    
+    /**
+     * @brief default implemetation of AbstractLayerInterface function
+     *        that does not apply to a single point
+     */
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis, BoundingBox box);
-    
-    /*
-    virtual QPixmap symbolPixmap()=0;
-    */
-
 
     /**
      * @brief check if this Layer Data is visible on screen
@@ -105,8 +106,14 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      */
     GeoPoint position() const ;
     
+    /**
+     * @brief evaluate the latitude of this LayerData object
+     */
     double lat() const;
     
+    /**
+     * @brief evaluate the longitude of this LayerData object
+     */
     double lon() const;
    
     /**
@@ -152,6 +159,9 @@ class AbstractLayerData : public virtual AbstractLayerInterface
                      double radius, QPointF *position);
     
  protected:
+    /**
+     * @brief print a text representation of this class to a stream
+     */
     virtual void printToStream( QTextStream & ) const;
     
  private:
