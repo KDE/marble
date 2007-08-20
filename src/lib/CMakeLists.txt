@@ -137,11 +137,6 @@ else (QTONLY)
   kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
 endif (QTONLY)
 
-# why this??
-ADD_DEFINITIONS(${QT_DEFINITIONS})
-ADD_DEFINITIONS(-DQT_NO_DEBUG)
-ADD_DEFINITIONS(-DQT_SHARED)
-ADD_DEFINITIONS(-DQT_DLL)
 if(WIN32)
   # distinguish between debug and release plugin
   SET(CMAKE_DEBUG_POSTFIX "d")
