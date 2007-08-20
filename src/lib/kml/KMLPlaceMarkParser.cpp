@@ -173,10 +173,13 @@ bool KMLPlaceMarkParser::characters( const QString& str )
     if ( ! result ) {
 
         KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
-
+        
+        //removed decleration from the switch statment
+        int population;
+        
         switch ( m_phase ) {
             case WAIT_POP:
-                int population = str.toInt();
+                population = str.toInt();
                 placemark.setPopulation( population );
                 placemark.setPopidx( popIdx( population ) );
                 result = true;

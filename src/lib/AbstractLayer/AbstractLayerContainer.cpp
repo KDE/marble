@@ -39,6 +39,7 @@ AbstractLayerContainer::~AbstractLayerContainer()
     delete m_visible;
     delete m_data;
     delete m_name;
+    delete m_boundingBox;
 }
 
 void AbstractLayerContainer::draw ( ClipPainter *painter, 

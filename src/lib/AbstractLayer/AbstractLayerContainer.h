@@ -25,13 +25,17 @@ class BoundingBox;
  * @brief Container to hold AbstractLayerData objects
  *
  * This container will hold all data that can be drawn on the Marble
- * Widget. The Container has a virtual @c draw() method that calls the
- * @c draw() method of all @c AbstractLayerData objects in the
- * Container. Because of the presence of pretty large Containers the
+ * Widget. The Container inherits the @c AbstractLayerInterface Class
+ * and provides sensible default implementations for its methods using
+ * the @c draw() implementations in the @c AbstractLayerData objects.
+ * Because of the presence of pretty large Containers the
  * container itself will only represent @b visible data and will
  * contain a reference to a binary file that represents all of the
- * layer data. Each time the view changes the visible data should be
- * altered by a thread that will monitor and deal with this process.
+ * layer data. The intention of this class is to keep the complicated
+ * memory managment away from any new developers making it easier to 
+ * implement a new layer Each time the view changes the visible data
+ * should be  altered by a thread that will monitor and deal with
+ * this process.
  */
 class AbstractLayerContainer : public QVector<AbstractLayerData*>,
                                public virtual AbstractLayerInterface
