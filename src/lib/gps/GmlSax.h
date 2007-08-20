@@ -20,10 +20,10 @@ A very simple Xml Parser that will be based on the Gml Scema ( Geographic Markup
 
 	@author Andrew Manson <g.real.ate@gmail.com>
 */
-class GmlSax : public QXmlDefaultHandler 
+class GmlSax : public QXmlDefaultHandler, public QObject
 {
 public:
-    GmlSax();
+    GmlSax( double *lon, double *lat );
 
     ~GmlSax();
     
@@ -39,8 +39,8 @@ public:
     bool characters( const QString &str );
     
 private:
-    double lat;
-    double lon;
+    double *m_lat;
+    double *m_lon;
     
     QString currentText;
 

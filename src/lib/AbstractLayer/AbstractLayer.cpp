@@ -16,8 +16,8 @@
 #include <QtCore/QSize>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
-#include <QtCore/QRectF>
 
+#include "BoundingBox.h"
 #include "ClipPainter.h"
 
 
@@ -87,22 +87,6 @@ void AbstractLayer::setVisible( bool visible )
     m_visible = visible;
 }
 
-
-void AbstractLayer::paint( ClipPainter* painter, 
-                              const QSize& screenSize,
-                              double radius, Quaternion rotAxis)
-
-{
-    Quaternion invRotAxis = rotAxis.inverse();
-    QVector<AbstractLayerContainer *>::const_iterator it;
-    
-    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
-        if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, radius, invRotAxis );
-        }
-    }
-}
-
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
                                 double radius, Quaternion rotAxis)
@@ -115,25 +99,22 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
             (*it)->draw( painter, screenSize, radius, invRotAxis );
         }
     }
-    // FIXME: should be pure virtual
-
 }
 
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
                                 double radius, Quaternion rotAxis, 
-                                QRectF bounding )
+                                BoundingBox bounding )
 {
     Quaternion invRotAxis = rotAxis.inverse();
     QVector<AbstractLayerContainer *>::const_iterator it;
     
     for( it = m_containers->begin(); it < m_containers->end(); ++it ){
         if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, radius, invRotAxis );
+            (*it)->draw( painter, screenSize, radius, invRotAxis, 
+                         bounding );
         }
     }
-    // FIXME: should be pure virtual
-
 }
 
 double AbstractLayer::distance ( const QPoint &a, const QPoint &b )

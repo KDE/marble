@@ -66,13 +66,19 @@ public:
     void  getData( bool error );
 
  private:
+    //used to draw the arrow in gps tracking
     GpxFile             *m_currentGpx;
     QPolygonF           currentDraw;
     QPolygonF           previousDraw;
     QPointF             m_previousDistancePosition;
     
-    TrackingMethod      m_trackingMethod;
+    //used to get info from ip address
     QTemporaryFile gmlFile;
+    bool                m_downloadFinished;
+    
+    
+    TrackingMethod      m_trackingMethod;
+    
    
     Waypoint            *m_currentPosition;
     TrackPoint          *m_gpsCurrentPosition;

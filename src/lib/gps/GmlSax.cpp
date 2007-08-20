@@ -13,8 +13,10 @@
 #include <QDebug>
 #include <QMessageBox>
 
-GmlSax::GmlSax()
+GmlSax::GmlSax( double *lon, double *lat )
 {
+    m_lon = lon;
+    m_lat = lat;
 }
 
 
@@ -43,10 +45,17 @@ bool GmlSax::endElement( const QString &namespaceURI,
     
     Q_UNUSED( namespaceURI );
     Q_UNUSED( localName );
-    qDebug() << "really now!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1";
     
     if ( qName == "gml:coordinates") {
-        qDebug() << currentText;
+        QString temp = currentText;
+        qDebug() << temp;
+        
+        QStringList tempList = temp.split(",");
+        
+        qDebug() << tempList[0]<<  tempList[1];
+        
+        *m_lon = tempList[0].toDouble();
+        *m_lat = tempList[1].toDouble();
     }
 
     return true;
@@ -69,5 +78,7 @@ bool GmlSax::characters( const QString &str )
     // @TODO can this ever be false? Tim
     return true;
 }
+
+#include "GmlSax.moc"
 
 

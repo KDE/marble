@@ -36,13 +36,10 @@ GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method,
     m_gpsTrackSeg = 0;
     m_updateDelay =0;
     
-    if (!(gmlFile.open())) {
-        qDebug()<< "now we know!";
-    }
-    
-//      m_tempFile.open();
-    connect( &host, SIGNAL( done(  bool ) ),this, 
-              SLOT( getData( bool )) ) ;
+    //for ip adress evaluation
+    connect( &host, SIGNAL( done(  bool ) ),
+             this,  SLOT( getData( bool ) ) ) ;
+    m_downloadFinished = false;
     
 #ifdef HAVE_LIBGPS
     m_gpsd     = new gpsmm();
@@ -109,6 +106,7 @@ void GpsTracking::getData( bool error )
     if ( !error ) {
         m_data = QString( host.readAll() );
         updateIp();
+        m_downloadFinished = true;
         
     }
 }
@@ -122,16 +120,21 @@ void GpsTracking::updateIp( )
 //         qDebug() << gmlFile.readAll();
 //         qDebug() << host.readAll();
 //         
+    double lon;
+    double lat;
         QXmlInputSource gmlInput/*( &gmlFile )*/;
         gmlInput.setData( m_data );
     
         QXmlSimpleReader gmlReader;
-        GmlSax gmlSaxHandler;
+        GmlSax gmlSaxHandler( &lon, &lat );
     
         gmlReader.setContentHandler( &gmlSaxHandler );
         gmlReader.setErrorHandler( &gmlSaxHandler );
     
         gmlReader.parse( &gmlInput );
+        
+    qDebug() << "in the real world" << lon << lat;
+    m_gpsCurrentPosition->setPosition( lat, lon );
     
 }
 
@@ -144,14 +147,16 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
                __FILE__, __LINE__);
         exit(1); //force fail
         break;
+        
     case IP:
+        
         if ( m_updateDelay > 0 ) {
             --m_updateDelay;
             return QRegion();
         }
         
         host.setHost( "api.hostip.info" );
-        host.get( "http://api.hostip.info/"/*, &m_tempFile */);
+        host.get( "http://api.hostip.info/");
         m_updateDelay = 15000;
         
         
@@ -163,10 +168,9 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         Q_UNUSED( radius );
         Q_UNUSED( invRotAxis );
 #else
-
+        //m_gpsdData has been successully set
         if ( m_gpsdData != 0 ){
             m_gpsdData =m_gpsd->query( "p" );
-        
             m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
                                          m_gpsdData->fix.longitude );
        
@@ -179,8 +183,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
             {
                 m_gpsTrackSeg->append( m_gpsPreviousPosition );
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
-                m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking
-);
+               m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
             }
         } else {
 
@@ -202,29 +205,36 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         return QRegion(temp1).united( QRegion(temp2) );
     
 #endif
-    
-
-        
-        
     }
     return QRegion();
-
-    
-
-
 }
 
 void GpsTracking::draw( ClipPainter *painter,
                         const QSize &canvasSize, double radius,
                         Quaternion invRotAxis )
 {
-    painter->setPen( Qt::black );
-    painter->setBrush( Qt::white );
-    painter->drawPolygon( currentDraw, Qt::OddEvenFill );
-    /*
-    if ( m_gpsTrackSeg != 0) {
-       m_gpsTrackSeg->draw( painter, canvasSize, radius, invRotAxis );
-    }*/
+    QPoint temp;
+    switch( m_trackingMethod ){ 
+    case IP: 
+        
+        if( m_gpsCurrentPosition->getPixelPos( canvasSize,
+                                               invRotAxis, 
+                                            (int)radius, &temp ) )
+        {
+            painter->drawEllipse( temp.x(), temp.y(), 10, 10 );
+        }
+        
+        break;
+    case Gps:
+        painter->setPen( Qt::black );
+        painter->setBrush( Qt::white );
+        painter->drawPolygon( currentDraw, Qt::OddEvenFill );
+        break;
+    case MobilePhone:
+        
+        break;
+    }
+    
 }
 
 
