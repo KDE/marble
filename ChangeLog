@@ -1,5 +1,11 @@
 2007-08-20  Murad Tagirov  <tmurad@gmail.com>
 
+    Added destructor to PlaceMarkManager to delete m_documentList.
+    Delete d->m_placeMarkManager in MarbleModel's destructor instead of
+    d->m_placeMarkContainer.
+    * src/lib/MarbleModel.cpp
+    * src/lib/PlaceMarkManager.{h,cpp}
+
     Set placemark symbol like in xmlhandler. Added
     parsing of CountryNameCode tag
     * src/lib/kml/KMLPlaceMarkParser.{h,cpp}

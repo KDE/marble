@@ -67,8 +67,8 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
-    
-    
+
+
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -113,16 +113,16 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_gpxFileModel = new GpxFileModel;
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
-    
+
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
              this,  SIGNAL( regionChanged( BoundingBox ) ) );
-    
+
     d->m_projection = Spherical;
 }
 
 MarbleModel::~MarbleModel()
 {
-    delete d->m_placeMarkContainer;
+    delete d->m_placemarkmanager;
     delete d->m_texmapper;
     delete d;
 }
@@ -160,7 +160,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
-    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) ); 
+    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) );
     d->m_maptheme->open( MarbleDirs::path( mapPath ) );
 
     // If this layer is a bitmaplayer, check if the cached tiles for
@@ -400,7 +400,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->m_canvasImage->size(),
                                viewParams->m_radius,
-                               viewParams->m_planetAxis, 
+                               viewParams->m_planetAxis,
                                viewParams->m_boundingBox );
 }
 

@@ -34,6 +34,18 @@ PlaceMarkManager::PlaceMarkManager()
 }
 
 
+PlaceMarkManager::~PlaceMarkManager()
+{
+    m_placeMarkContainer->deleteAll();
+
+#ifdef KML_GSOC
+    foreach ( KMLDocument* document, m_documentList ) {
+        delete document;
+    }
+#endif
+}
+
+
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
 #ifdef KML_GSOC
