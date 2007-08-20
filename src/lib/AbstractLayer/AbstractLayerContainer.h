@@ -69,6 +69,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * 
      * this method does not apply to AbstractLayerContainer and should
      * never be called.
+     * @param painter only provided to match AbstractLayerInterface
+     * @param point only provided to match AbstractLayerInterface
      */
     virtual void draw ( ClipPainter *painter, const QPoint &point );
     
@@ -77,11 +79,28 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * 
      * @c draw() is intended to deal with drawing all visable Data
      * Objects in this Container by calling their @c draw() function.
+     * @param painter this will be used to draw the contianer
+     * @param canvasSize the size of the marble widget view
+     * @param radius measure of zoom level
+     * @param invRotAxis inversion of the rotation Quaternion that
+     *                   represents the rotation of the globe
      */
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis);
     
+    /**
+     * @brief draw this Container after evaluating its bounding Box
+     * 
+     * this container will only get drawn if the bounding box of the
+     * view intersects with the bounding box of the container
+     * @param painter this will be used to draw the contianer
+     * @param canvasSize the size of the marble widget view
+     * @param radius measure of zoom level
+     * @param invRotAxis inversion of the rotation Quaternion that
+     *                   represents the rotation of the globe
+     * @param box the bounding box that holds the view
+     */
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, double radius,
                       Quaternion invRotAxis, BoundingBox box);
@@ -117,6 +136,13 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      */
     void createBoundingBox();
     
+    /**
+     * @brief generate a QVector of QPointF representing the x and y
+     *        values of each AbstractLayerData's Quaternion
+     * 
+     * this method is used to collect the information nessary to 
+     * create the bounding box from this container. 
+     */
     QVector<QPointF> geoCoord();
  protected:
     /** 
@@ -129,6 +155,9 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      */
     virtual void processVisible();
     
+    /**
+     * @brief print a text representation of this class to a stream
+     */
     virtual void printToStream( QTextStream& ) const;
     
     /**
@@ -171,8 +200,6 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * taken from placecontainer for compatability.
      */
     QString *m_name;
-    
-    
 };
 
 
