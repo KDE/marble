@@ -317,6 +317,7 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
                 firstPoint = false;
                 m_lastSign = currentSign;
             }
+            //correction of the Dateline
             if( fabs(degY) == M_PI/2 )
                 x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
 

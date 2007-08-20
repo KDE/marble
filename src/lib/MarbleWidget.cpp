@@ -656,6 +656,7 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     int imageHalfHeight  = height() / 2;
     const double  inverseRadius = 1.0 / (double)(radius());
     bool noerr = false;
+
     switch( d->m_viewParams.m_projection ) {
     case Spherical:
         if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
@@ -677,13 +678,16 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
         break;
 
     case Equirectangular:
-        if ( true ) {//m_activeRegion.contains( QPoint( x, y ) ) ) { // FIXME: add criterium whether point is outside the map
-            float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
-            float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
-            int xPixels = x - imageHalfWidth;
-            int yPixels = y - imageHalfHeight;
+        float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
+        float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
+        int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
+        int yTop = imageHalfHeight - radius() + yCenterOffset;
+        int yBottom = yTop + 2*radius();
+        if ( y >= yTop && y < yBottom ) {
+            int const xPixels = x - imageHalfWidth;
+            int const yPixels = y - imageHalfHeight;
 
-            double pixel2rad = M_PI / (2 * radius());
+            double const pixel2rad = M_PI / (2 * radius());
             lat = yPixels * pixel2rad - centerLat;
             lon = xPixels * pixel2rad - centerLon;
 
@@ -835,7 +839,9 @@ void MarbleWidget::setBoundingBox()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
-    bool  doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
+    bool  doClip = false;
+    if( d->m_viewParams.m_projection == Spherical )
+        doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
                      || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
 
     // Create a painter that will do the painting.
