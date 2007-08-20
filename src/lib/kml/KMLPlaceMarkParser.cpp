@@ -176,7 +176,9 @@ bool KMLPlaceMarkParser::characters( const QString& str )
 
         switch ( m_phase ) {
             case WAIT_POP:
-                placemark.setPopulation( str.toInt() );
+                int population = str.toInt();
+                placemark.setPopulation( population );
+                placemark.setPopidx( popIdx( population ) );
                 result = true;
                 break;
             case WAIT_ROLE:
@@ -206,4 +208,26 @@ void KMLPlaceMarkParser::setPlaceMarkSymbol()
     else if ( placemark.role() == 'N' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 );
     else if ( placemark.role() == 'R' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 2);
     else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 3 );
+}
+
+int KMLPlaceMarkParser::popIdx( int population )
+{
+    int popidx = 15;
+
+    if ( population < 2500 )        popidx=1;
+    else if ( population < 5000)    popidx=2;
+    else if ( population < 7500)    popidx=3;
+    else if ( population < 10000)   popidx=4;
+    else if ( population < 25000)   popidx=5;
+    else if ( population < 50000)   popidx=6;
+    else if ( population < 75000)   popidx=7;
+    else if ( population < 100000)  popidx=8;
+    else if ( population < 250000)  popidx=9;
+    else if ( population < 500000)  popidx=10;
+    else if ( population < 750000)  popidx=11;
+    else if ( population < 1000000) popidx=12;
+    else if ( population < 2500000) popidx=13;
+    else if ( population < 5000000) popidx=14;
+
+    return popidx;
 }

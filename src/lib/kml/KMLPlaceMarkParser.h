@@ -37,6 +37,7 @@ class KMLPlaceMarkParser : public KMLFeatureParser
 
  private:
     void setPlaceMarkSymbol();
+    int popIdx( int population );
 
  private:
     enum

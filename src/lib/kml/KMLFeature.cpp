@@ -75,6 +75,7 @@ void KMLFeature::setVisible( bool value )
 void KMLFeature::pack( QDataStream& stream ) const
 {
     KMLObject::pack( stream );
+    PlaceMark::pack (stream );
 
     stream << m_name;
     stream << m_address;

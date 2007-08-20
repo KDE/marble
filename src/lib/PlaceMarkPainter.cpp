@@ -156,7 +156,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
     switch( viewParams->m_projection ) {
         case Spherical:
             sphericalPaintPlaceFolder(    painter, imgwidth, imgheight,
-                                          viewParams, placecontainer, 
+                                          viewParams, placecontainer,
                                           planetAxis, firstTime );
             break;
         case Equirectangular:
@@ -221,13 +221,11 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     {
         mark  = *it; // no cast
 
-#ifndef KML_GSOC
         // Skip the places that are too small.
         if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
              // && mark->symbol() != 0
              && mark->selected() == 0 )
             continue;
-#endif
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
@@ -451,7 +449,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
         // Skip placemarks that are outside the screen area
         if ( ( ( x < 0 || x >= imgwidth )
                // FIXME: Carlos: check this:
-               && x - 4 * viewParams->m_radius < 0 
+               && x - 4 * viewParams->m_radius < 0
                && x + 4 * viewParams->m_radius >= imgwidth
                )
              || y < 0 || y >= imgheight ) {
@@ -561,7 +559,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
 
         int tempSymbol = mark->symbolPos().x();
         int tempText = mark->textRect().x();
-        for ( int i = tempSymbol - 4 * viewParams->m_radius; 
+        for ( int i = tempSymbol - 4 * viewParams->m_radius;
               i >= 0;
               i -= 4 * viewParams->m_radius )
         {
@@ -571,8 +569,8 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
             painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
         }
 
-        for ( int i = tempSymbol; 
-              i <= imgwidth; 
+        for ( int i = tempSymbol;
+              i <= imgwidth;
               i += 4 * viewParams->m_radius )
         {
             mark->textRect().moveLeft(i - tempSymbol + tempText );
@@ -840,7 +838,7 @@ void PlaceMarkPainter::paintPlaceFolder(QPainter* painter,
 #endif
 
 
-bool PlaceMarkPainter::isVisible( PlaceMark *mark, 
+bool PlaceMarkPainter::isVisible( PlaceMark *mark,
                                   Quaternion &planetAxis,
                                   int imgwidth, int imgheight,
                                   ViewParams *viewParams,

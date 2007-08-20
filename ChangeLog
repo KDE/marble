@@ -1,5 +1,12 @@
 2007-08-20  Murad Tagirov  <tmurad@gmail.com>
 
+    Inherit PlaceMark from Serializable to be
+    able to pack/unpack it's content
+    * src/lib/kml/KMLFeature.cpp
+    * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
+    * src/lib/PlaceMarkPainter.cpp
+    * src/lib/PlaceMark.{h,cpp}
+
     Added destructor to PlaceMarkManager to delete m_documentList.
     Delete d->m_placeMarkManager in MarbleModel's destructor instead of
     d->m_placeMarkContainer.

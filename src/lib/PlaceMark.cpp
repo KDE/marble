@@ -100,7 +100,7 @@ const QPixmap PlaceMark::symbolPixmap() const
 	QPixmap( MarbleDirs::path( "bitmaps/city_4_white.png" ) ),
 	QPixmap( MarbleDirs::path( "bitmaps/city_4_yellow.png" ) ),
 	QPixmap( MarbleDirs::path( "bitmaps/city_4_orange.png" ) ),
-	QPixmap( MarbleDirs::path( "bitmaps/city_4_red.png" ) ),	
+	QPixmap( MarbleDirs::path( "bitmaps/city_4_red.png" ) ),
 
 	QPixmap( MarbleDirs::path( "bitmaps/city_3_white.png" ) ),
 	QPixmap( MarbleDirs::path( "bitmaps/city_3_yellow.png" ) ),
@@ -126,4 +126,28 @@ const QPixmap PlaceMark::symbolPixmap() const
     };
 
     return placesymbol[m_symbol];
+}
+
+
+void PlaceMark::pack( QDataStream& stream ) const
+{
+    stream << m_name;
+    stream << m_population;
+    stream << m_symbol;
+    stream << m_popidx;
+    stream << m_role;
+    stream << m_description;
+    stream << m_countrycode;
+}
+
+
+void PlaceMark::unpack( QDataStream& stream )
+{
+    stream >> m_name;
+    stream >> m_population;
+    stream >> m_symbol;
+    stream >> m_popidx;
+    stream >> m_role;
+    stream >> m_description;
+    stream >> m_countrycode;
 }

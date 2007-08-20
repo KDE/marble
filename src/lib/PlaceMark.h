@@ -20,14 +20,15 @@
 #include <QtGui/QPixmap>
 
 #include "GeoPoint.h"
+#include "kml/Serializable.h"
 
-class PlaceMark
+class PlaceMark : public Serializable
 {
  public:
     PlaceMark();
     PlaceMark( const QString& );
 
-    GeoPoint  coordinate() const { return m_coordinate; } 
+    GeoPoint  coordinate() const { return m_coordinate; }
     void      coordinate( double &lon, double &lat );
     void      setCoordinate( double lon, double lat );
 
@@ -68,11 +69,18 @@ class PlaceMark
     void setTextPixmap( QPixmap& textPixmap ) { m_textPixmap = textPixmap;}
     QPixmap m_textPixmap;
     void clearTextPixmap() {
-        if ( !m_textPixmap.isNull() ) m_textPixmap = QPixmap(); 
+        if ( !m_textPixmap.isNull() ) m_textPixmap = QPixmap();
     }
     QPoint& symbolPos()              { return m_symbolPos;   }
     void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }
     QPoint      m_symbolPos;	// position of the placemark's symbol
+
+    /*
+     * Serializable methods
+     */
+    virtual void pack( QDataStream& stream ) const;
+    virtual void unpack( QDataStream& stream );
+
 
  protected:
     GeoPoint  m_coordinate;     // The geographic location
