@@ -16,12 +16,17 @@
 #include "Track.h"
 #include "Route.h"
 #include "Waypoint.h"
+
 #include "GpxFile.h"
 #include "WaypointContainer.h"
 #include "TrackContainer.h"
 #include "RouteContainer.h"
 #include "BoundingBox.h"
 #include "GpxSax.h"
+
+#include <QtCore/QFile>
+#include <QtXml/QXmlInputSource>
+#include <QDebug>
 
 GpxFile::GpxFile( const QString &fileName )
 {
@@ -106,17 +111,17 @@ void GpxFile::printToStream( QTextStream &out ) const
 
 void GpxFile::addWaypoint( Waypoint *waypoint )
 {
-    m_waypoints->append( dynamic_cast<AbstractLayerData*>(waypoint) );
+    m_waypoints->append( waypoint );
 }
 
 void GpxFile::addTrack( Track *track )
 {
-    m_tracks->append( dynamic_cast<AbstractLayerData*>(track) );
+    m_tracks->append( track );
 }
 
 void GpxFile::addRoute( Route *route )
 {
-    m_routes->append( dynamic_cast<AbstractLayerData*>(route) );
+    m_routes->append( route );
 }
 
 void    GpxFile::setName( const QString &name )
