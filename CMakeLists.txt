@@ -16,7 +16,10 @@ endif(APPLE OR WIN32)
 set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
 set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
-
+if (QTONLY)
+    set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
+    set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
+if (QTONLY)
 ####################################################
 # Detect default for the user configurable MARBLE_DATA_PATH option
 

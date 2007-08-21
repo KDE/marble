@@ -22,6 +22,11 @@
 
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
+	* CMakeLists.txt:
+	- Fixing the multilib issue for real.
+
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
 	* src/lib/CMakeLists.txt:
 	  texcolorizer->TextureColorizer
 	  Fix "elseif".
