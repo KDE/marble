@@ -1,5 +1,9 @@
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
+    Correcting Tim Sutton's ifelse-typo.
+
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
 	Applied changes by Tim Sutton to make Marble
 	work better on the Mac. Also applied changes 
 	to correct the credits list.

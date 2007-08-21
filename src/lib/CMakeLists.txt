@@ -206,7 +206,7 @@ endif(WIN32 AND QTONLY)
 
 if (APPLE AND QTONLY)
   # do nothing because we dont put .h files in the bundle
-elseif (APPLE AND QTONLY)
+else (APPLE AND QTONLY)
   install( FILES
            MarbleWidget.h
            MarbleModel.h

@@ -173,7 +173,7 @@ if(WIN32 AND QTONLY)
 else(WIN32 AND QTONLY)
     if (APPLE AND QTONLY)
       # No need for this when installing to a bundle
-    elseif (APPLE AND QTONLY)
+    else (APPLE AND QTONLY)
       #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
       if( NOT QTONLY)
         install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
