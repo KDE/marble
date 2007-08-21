@@ -1,3 +1,8 @@
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/CMakeLists.txt:
+	- Library Version number: 0.4.0
+
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename files according to the coding standards: TinyWebBrowser
