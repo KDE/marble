@@ -29,10 +29,10 @@ Code Quality:
    - placemarkpainter.{h,cpp}        -> PlaceMarkPainter                done
    - searchcombobox.{h,cpp}          Removed!                           done
    - searchlistview.{h,cpp}          -> MarbleSearchListView            done
-   - texcolorizer.{h,cpp}                                               --
-   - texturepalette.cpp                                                 --
+   - texcolorizer.{h,cpp}                                               done
+   - texturepalette.cpp                                                 done
    - tinywebbrowser.{h,cpp}                                             --
-   - vectorcomposer.{h,cpp}                                             done
+   - vectorcomposer.{h,cpp}                                             --
    - vectormap.{h,cpp}                                                  done
    - xmlhandler.{h,cpp}                                                 done
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE

@@ -1,7 +1,14 @@
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename files according to the coding standards: VectorComposer
+	* src/lib/vectorcomposer.cpp: renamed into VectorComposer.cpp
+	* src/lib/vectorcomposer.h:   renamed into VectorComposer.h
+	* src/lib/CMakeLists.txt:  Reflect name changes
+	* src/lib/MarbleModel.h: use new name
+	* src/lib/ViewParams.cpp: use new name
+
 	Rename files according to the coding standards: VectorMap
-	* src/lib/vectorman.cpp: renamed into VectorMap.cpp
+	* src/lib/vectormap.cpp: renamed into VectorMap.cpp
 	* src/lib/vectormap.h:   renamed into VectorMap.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
 	* src/lib/MarbleModel.cpp: use new name

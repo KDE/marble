@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "vectorcomposer.h"
+#include "VectorComposer.h"
 
 #include <cmath>
 

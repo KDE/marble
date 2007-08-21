@@ -56,9 +56,9 @@ class ViewParams
     bool        m_showPlaceMarks;
     bool        m_showElevationModel;
 
-    bool        m_showRelief;   // for texcolorizer.
+    bool        m_showRelief;   // for TextureColorizer.
 
-    bool        m_showIceLayer; // for vectorcomposer
+    bool        m_showIceLayer; // for VectorComposer
     bool        m_showBorders;
     bool        m_showRivers;
     bool        m_showLakes;

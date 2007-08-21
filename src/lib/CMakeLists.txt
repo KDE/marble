@@ -80,7 +80,7 @@ set(marblewidget_SRCS
            TileLoader.cpp
            TileCreator.cpp
            tinywebbrowser.cpp
-           vectorcomposer.cpp
+           VectorComposer.cpp
            VectorMap.cpp
            XmlHandler.cpp
            BoundingBox.cpp
@@ -256,7 +256,7 @@ else (APPLE AND QTONLY)
            TileLoader.h
            TileCreator.h
            tinywebbrowser.h
-           vectorcomposer.h
+           VectorComposer.h
            VectorMap.h
            XmlHandler.h
            marble_export.h

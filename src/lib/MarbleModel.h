@@ -42,7 +42,7 @@
 #include "PlaceMarkModel.h"
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
-#include "vectorcomposer.h"
+#include "VectorComposer.h"
 #include "TextureColorizer.h"
 
 class ClipPainter;
