@@ -202,6 +202,8 @@ else(WIN32 AND QTONLY)
 
   else(APPLE AND QTONLY)
     if(QTONLY)
+      install(TARGETS marblewidget DESTINATION lib)
+    else(QTONLY)
       install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
     endif(QTONLY)
   endif(APPLE AND QTONLY)
