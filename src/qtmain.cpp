@@ -11,6 +11,7 @@
 
 #include <QtGui/QApplication>
 #include <QtCore/QFile>
+#include <QtCore/QDir>
 
 #include "QtMainWindow.h"
 

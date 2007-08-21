@@ -15,13 +15,13 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <cmath>
-#include <unistd.h>
 
 #include <QtCore/QFile>
 #include <QtCore/QDataStream> 
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #ifdef Q_OS_UNIX
+# include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/mman.h> /* mmap() is defined in this header */
