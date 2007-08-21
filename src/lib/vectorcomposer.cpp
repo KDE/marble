@@ -18,7 +18,7 @@
 
 #include "GeoPolygon.h"
 #include "ClipPainter.h"
-#include "vectormap.h"
+#include "VectorMap.h"
 #include "ViewParams.h"
 #include "MarbleDirs.h"
 

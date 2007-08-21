@@ -9,7 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "vectormap.h"
+
+#include "VectorMap.h"
 
 #include <cmath>
 #include <stdlib.h>

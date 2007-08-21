@@ -32,8 +32,8 @@ Code Quality:
    - texcolorizer.{h,cpp}                                               --
    - texturepalette.cpp                                                 --
    - tinywebbrowser.{h,cpp}                                             --
-   - vectorcomposer.{h,cpp}                                             --
-   - vectormap.{h,cpp}                                                  --
+   - vectorcomposer.{h,cpp}                                             done
+   - vectormap.{h,cpp}                                                  done
    - xmlhandler.{h,cpp}                                                 done
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
