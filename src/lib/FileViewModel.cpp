@@ -128,11 +128,11 @@ void FileViewModel::closeFile()
                 AbstractFileViewItem& item = *m_itemList.at( row );
                 item.closeFile();
 
-                /*
-                *TODO
-                *remove this item from model
-                *and emit layoutChanged
-                */
+                delete &item;
+                m_itemList.removeAt( row );
+
+                emit layoutChanged();
+                //emit updateRegion();
             }
         }
     }
