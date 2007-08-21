@@ -71,7 +71,7 @@ set(marblewidget_SRCS
            PlaceMarkModel.cpp
            PlaceMarkInfoDialog.cpp
            Quaternion.cpp
-           texcolorizer.cpp
+           TextureColorizer.cpp
            FlatScanlineTextureMapper.cpp
            GlobeScanlineTextureMapper.cpp
            AbstractScanlineTextureMapper.cpp
@@ -209,7 +209,7 @@ endif(WIN32 AND QTONLY)
 
 if (APPLE AND QTONLY)
   # do nothing because we dont put .h files in the bundle
-elseif (APPLE AND QTONLY)
+else (APPLE AND QTONLY)
   install( FILES
            MarbleWidget.h
            MarbleModel.h
@@ -247,7 +247,7 @@ elseif (APPLE AND QTONLY)
            PlaceMarkInfoDialog.h
            Quaternion.h
            ScreenPolygon.h
-           texcolorizer.h
+           TextureColorizer.h
            FlatScanlineTextureMapper.h
            GlobeScanlineTextureMapper.h
            AbstractScanlineTextureMapper.h

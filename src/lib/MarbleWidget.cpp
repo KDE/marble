@@ -27,7 +27,7 @@
 #include "global.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
-#include "texcolorizer.h"
+#include "TextureColorizer.h"
 #include "ClipPainter.h"
 #include "FileViewModel.h"
 #include "GpxFileViewItem.h"

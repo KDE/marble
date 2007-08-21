@@ -43,7 +43,7 @@
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
 #include "vectorcomposer.h"
-#include "texcolorizer.h"
+#include "TextureColorizer.h"
 
 class ClipPainter;
 class FileViewModel;

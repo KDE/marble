@@ -1,3 +1,11 @@
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/CMakeLists.txt:
+	  texcolorizer->TextureColorizer
+	  Fix "elseif".
+	* src/lib/texcolorizer.{cpp,h}: 
+	  texcolorizer->TextureColorizer
+
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename files according to the coding standards: XmlHandler

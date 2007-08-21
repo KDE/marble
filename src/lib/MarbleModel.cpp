@@ -22,7 +22,7 @@
 #include "FileViewModel.h"
 #include "GeoPolygon.h"
 #include "ViewParams.h"
-#include "texcolorizer.h"
+#include "TextureColorizer.h"
 #include "TileLoader.h"
 #include "TileCreator.h"
 #include "MapTheme.h"
