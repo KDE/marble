@@ -10,7 +10,7 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 if (QTONLY)
-  set(GENERIC_LIB_VERSION "5.0.0")
+  set(GENERIC_LIB_VERSION "0.4.0")
   set(GENERIC_LIB_SOVERSION "5")
 endif (QTONLY)
 
@@ -137,11 +137,6 @@ else (QTONLY)
   kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
 endif (QTONLY)
 
-# why this??
-ADD_DEFINITIONS(${QT_DEFINITIONS})
-ADD_DEFINITIONS(-DQT_NO_DEBUG)
-ADD_DEFINITIONS(-DQT_SHARED)
-ADD_DEFINITIONS(-DQT_DLL)
 if(WIN32)
   # distinguish between debug and release plugin
   SET(CMAKE_DEBUG_POSTFIX "d")
@@ -202,9 +197,7 @@ else(WIN32 AND QTONLY)
 
   else(APPLE AND QTONLY)
     if(QTONLY)
-      install(TARGETS marblewidget DESTINATION lib)
-    else(QTONLY)
-      install(TARGETS marblewidget DESTINATION ${LIB_INSTALL_DIR})
+      install(TARGETS marblewidget DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
     endif(QTONLY)
   endif(APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
