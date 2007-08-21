@@ -1,6 +1,13 @@
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
-    Correcting Tim Sutton's ifelse-typo.
+	- Applying Danimo's fixes to src/lib/HttpFetchFile.cpp
+	and src/lib/gps/GpsFile.cpp for the Windows build.
+
+	See SVN commit 703039 and 703003
+
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
+	- Correcting Tim Sutton's ifelse-typo.
 
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 

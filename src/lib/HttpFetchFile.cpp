@@ -127,7 +127,10 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 
     QString localFileUrlString = job->targetDirString + job->relativeUrlString;
 
-    QString localFilePath = localFileUrlString.section( QDir::separator(), 0, -2 ); 
+    QDir localFileDir(localFileUrlString);
+    localFileDir.cdUp();
+    localFileDir.cdUp();
+    QString localFilePath = localFileDir.absolutePath();
 //    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFilePath;
 
     if ( !QDir( localFilePath ).exists() )

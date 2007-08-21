@@ -8,6 +8,9 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
+#include "Track.h"
+#include "Route.h"
+#include "Waypoint.h"
 
 #include "GpxFile.h"
 #include "WaypointContainer.h"
@@ -103,17 +106,17 @@ void GpxFile::printToStream( QTextStream &out ) const
 
 void GpxFile::addWaypoint( Waypoint *waypoint )
 {
-    m_waypoints->append( (AbstractLayerData*)waypoint );
+    m_waypoints->append( waypoint );
 }
 
 void GpxFile::addTrack( Track *track )
 {
-    m_tracks->append( (AbstractLayerData*)track );
+    m_tracks->append( track );
 }
 
 void GpxFile::addRoute( Route *route )
 {
-    m_routes->append( (AbstractLayerData*)route );
+    m_routes->append( route );
 }
 
 void    GpxFile::setName( const QString &name )
