@@ -1,5 +1,11 @@
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename files according to the coding standards: TinyWebBrowser
+	* src/lib/tinywebbrowser.cpp: renamed into TinyWebBrowser.cpp
+	* src/lib/tinywebbrowser.h:   renamed into TinyWebBrowser.h
+	* src/lib/CMakeLists.txt:  Reflect name changes
+	* src/lib/PlaceMarkInfoDialog.ui: use new name
+
 	Rename files according to the coding standards: VectorComposer
 	* src/lib/vectorcomposer.cpp: renamed into VectorComposer.cpp
 	* src/lib/vectorcomposer.h:   renamed into VectorComposer.h

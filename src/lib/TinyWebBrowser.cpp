@@ -10,7 +10,7 @@
 //
 
 
-#include "tinywebbrowser.h"
+#include "TinyWebBrowser.h"
 
 #include <QtCore/QFileInfo>
 #include <QtCore/QUrl>
@@ -98,4 +98,4 @@ void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, int
 }
 
 
-#include "tinywebbrowser.moc"
+#include "TinyWebBrowser.moc"

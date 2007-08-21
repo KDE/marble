@@ -446,7 +446,7 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>TinyWebBrowser</class>
    <extends>QTextBrowser</extends>
-   <header>tinywebbrowser.h</header>
+   <header>TinyWebBrowser.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

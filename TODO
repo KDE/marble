@@ -20,7 +20,7 @@ Misc
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
 
 Code Quality:
- * Filename == Classname (CamelCasing)                                  INGE
+ * Filename == Classname (CamelCasing)                                  DONE
    - maptheme.{h,cpp}                -> MapTheme                        done
    - placemark.{h,cpp}               -> PlaceMark                       done
    - placemarkinfodialog.{h,cpp,ui}  -> PlaceMarkInfoDialog             done
@@ -31,8 +31,8 @@ Code Quality:
    - searchlistview.{h,cpp}          -> MarbleSearchListView            done
    - texcolorizer.{h,cpp}                                               done
    - texturepalette.cpp                                                 done
-   - tinywebbrowser.{h,cpp}                                             --
-   - vectorcomposer.{h,cpp}                                             --
+   - tinywebbrowser.{h,cpp}                                             done
+   - vectorcomposer.{h,cpp}                                             done
    - vectormap.{h,cpp}                                                  done
    - xmlhandler.{h,cpp}                                                 done
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
