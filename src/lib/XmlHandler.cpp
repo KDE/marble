@@ -10,7 +10,7 @@
 //
 
 
-#include "xmlhandler.h"
+#include "XmlHandler.h"
 
 #include <cmath>
 
@@ -19,7 +19,7 @@
 #include "PlaceMarkContainer.h"
 
 
-KAtlasXmlHandler::KAtlasXmlHandler()
+XmlHandler::XmlHandler()
 {
     m_placeMarkContainer = new PlaceMarkContainer("placecontainer" );
     m_placemark = 0;
@@ -27,7 +27,7 @@ KAtlasXmlHandler::KAtlasXmlHandler()
 }
 
 
-KAtlasXmlHandler::KAtlasXmlHandler( PlaceMarkContainer* placeMarkContainer )
+XmlHandler::XmlHandler( PlaceMarkContainer* placeMarkContainer )
 {
     m_placeMarkContainer = placeMarkContainer;
     m_placemark = 0;
@@ -35,7 +35,7 @@ KAtlasXmlHandler::KAtlasXmlHandler( PlaceMarkContainer* placeMarkContainer )
 }
 
 
-bool KAtlasXmlHandler::startDocument()
+bool XmlHandler::startDocument()
 {
     m_inKml       = false;
     m_inPlacemark = false;
@@ -48,9 +48,9 @@ bool KAtlasXmlHandler::startDocument()
 
 
 
-bool KAtlasXmlHandler::startElement( const QString&, const QString&,
-                                     const QString &name,
-                                     const QXmlAttributes& attrs )
+bool XmlHandler::startElement( const QString&, const QString&,
+                               const QString &name,
+                               const QXmlAttributes& attrs )
 {
     Q_UNUSED( attrs );
 
@@ -99,7 +99,7 @@ bool KAtlasXmlHandler::startElement( const QString&, const QString&,
 }
 
 
-bool KAtlasXmlHandler::characters( const QString& str )
+bool XmlHandler::characters( const QString& str )
 {
     m_currentText += str;
 
@@ -107,8 +107,8 @@ bool KAtlasXmlHandler::characters( const QString& str )
 }
 
 
-bool KAtlasXmlHandler::endElement( const QString&, const QString&,
-                                   const QString &name )
+bool XmlHandler::endElement( const QString&, const QString&,
+                             const QString &name )
 {
     QString nameLower = name.toLower();
 
@@ -184,7 +184,7 @@ bool KAtlasXmlHandler::endElement( const QString&, const QString&,
 }
 
 
-bool KAtlasXmlHandler::stopDocument()
+bool XmlHandler::stopDocument()
 {
     qDebug() << "Placemarks: " << m_placeMarkContainer->size();
 
@@ -192,7 +192,7 @@ bool KAtlasXmlHandler::stopDocument()
 }
 
 
-int KAtlasXmlHandler::popIdx( int population )
+int XmlHandler::popIdx( int population )
 {
     int popidx = 15;
 

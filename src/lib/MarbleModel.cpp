@@ -29,7 +29,7 @@
 #include "MarbleDirs.h"
 #include "TileCreatorDialog.h"
 #include "PlaceMarkManager.h"
-#include "xmlhandler.h"
+#include "XmlHandler.h"
 #include "gps/GpsLayer.h"
 
 

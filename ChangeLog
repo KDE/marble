@@ -1,6 +1,11 @@
-2007-08-21    <ingwa@c83-252-235-145.bredband.comhem.se>
-
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename files according to the coding standards: XmlHandler
+	* src/lib/xmlhandler.cpp: renamed into XmlHandler.cpp
+	* src/lib/xmlhandler.h:   renamed into XmlHandler.h
+	* src/lib/CMakeLists.txt:  Reflect name changes
+	* src/lib/MarbleModel.cpp: use new name
+	* src/lib/PlaceMarkManager.cpp: use new name
 
 	Fix errors on Windows.
 	* src/lib/gps/GpxFile.cpp (add*): Use dynamic casts instead of

@@ -34,7 +34,7 @@ Code Quality:
    - tinywebbrowser.{h,cpp}                                             --
    - vectorcomposer.{h,cpp}                                             --
    - vectormap.{h,cpp}                                                  --
-   - xmlhandler.{h,cpp}                                                 --
+   - xmlhandler.{h,cpp}                                                 done
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
    - SearchListView  -> MarbleSearchListView                            done

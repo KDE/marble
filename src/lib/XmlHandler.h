@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GPXMLHANDLER_H
-#define GPXMLHANDLER_H
+#ifndef XMLHANDLER_H
+#define XMLHANDLER_H
 
 
 #include <QtCore/QDebug>
@@ -22,11 +22,11 @@ class PlaceMark;
 class PlaceMarkContainer;
 
 
-class KAtlasXmlHandler : public QXmlDefaultHandler
+class XmlHandler : public QXmlDefaultHandler
 {
  public:
-    KAtlasXmlHandler();
-    KAtlasXmlHandler( PlaceMarkContainer* );
+    XmlHandler();
+    XmlHandler( PlaceMarkContainer* );
 
     bool startDocument();
     bool stopDocument();
@@ -54,4 +54,5 @@ class KAtlasXmlHandler : public QXmlDefaultHandler
     bool                 m_coordsset;
 };
 
-#endif // GPXMLHANDLER_H
+
+#endif // XMLHANDLER_H

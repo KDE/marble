@@ -82,7 +82,7 @@ set(marblewidget_SRCS
            tinywebbrowser.cpp
            vectorcomposer.cpp
            vectormap.cpp
-           xmlhandler.cpp
+           XmlHandler.cpp
            BoundingBox.cpp
            FileViewModel.cpp
            GpxFileViewItem.cpp
@@ -258,7 +258,7 @@ elseif (APPLE AND QTONLY)
            tinywebbrowser.h
            vectorcomposer.h
            vectormap.h
-           xmlhandler.h
+           XmlHandler.h
            marble_export.h
            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )

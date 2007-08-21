@@ -20,7 +20,7 @@
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
-#include "xmlhandler.h"
+#include "XmlHandler.h"
 
 
 PlaceMarkManager::PlaceMarkManager()
@@ -169,7 +169,7 @@ void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
 {
 
-    KAtlasXmlHandler handler( placeMarkContainer );
+    XmlHandler handler( placeMarkContainer );
 
     QFile file( filename );
 
