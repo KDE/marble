@@ -35,6 +35,7 @@
 #include <MarbleWidget.h>
 #include <MarbleDirs.h>
 #include <MapTheme.h>
+#include <FileViewModel.h>
 
 
 class MarbleControlBoxPrivate
@@ -71,7 +72,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_minimumzoom = 950;
 
     d->uiWidget.setupUi( this );
- 
+
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
 
@@ -83,47 +84,47 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     //  Iterate through all of the Side Widget values  //
     d->uiWidget.toolBox->setCurrentIndex( 0 );
     d->m_navigationWidget = d->uiWidget.toolBox->currentWidget();
-    
+
     d->uiWidget.toolBox->setCurrentIndex( 1 );
     d->m_legendWidget = d->uiWidget.toolBox->currentWidget();
-    
+
     d->uiWidget.toolBox->setCurrentIndex( 2 );
     d->m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
-    
+
     d->uiWidget.toolBox->setCurrentIndex( 3 );
     d->m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
-    
+
     d->uiWidget.toolBox->setCurrentIndex( 4 );
     d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
-    
+
 //  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
- //   toolBox->removeItem( 3 ); 
+ //   toolBox->removeItem( 3 );
     d->uiWidget.toolBox->setCurrentIndex(0);
-    
+
     //default
     setCurrentLocationTabShown( false );
     setFileViewTabShown( false );
 
     setupGpsOption();
 
-    connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ), 
-             this,                      SIGNAL( goHome() ) ); 
+    connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ),
+             this,                      SIGNAL( goHome() ) );
     connect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
-             this,                      SIGNAL( zoomChanged( int ) ) ); 
+             this,                      SIGNAL( zoomChanged( int ) ) );
     connect( d->uiWidget.zoomInButton,  SIGNAL( clicked() ),
-             this,                      SIGNAL( zoomIn() ) ); 
+             this,                      SIGNAL( zoomIn() ) );
     connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
-             this,                      SIGNAL( zoomOut() ) ); 
+             this,                      SIGNAL( zoomOut() ) );
 
     connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
-             this,                        SIGNAL( moveLeft() ) ); 
+             this,                        SIGNAL( moveLeft() ) );
     connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
-             this,                        SIGNAL( moveRight() ) ); 
+             this,                        SIGNAL( moveRight() ) );
     connect( d->uiWidget.moveUpButton,    SIGNAL( clicked() ),
-             this,                        SIGNAL( moveUp() ) ); 
+             this,                        SIGNAL( moveUp() ) );
     connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
-             this,                        SIGNAL (moveDown() ) ); 
+             this,                        SIGNAL (moveDown() ) );
 
     connect(d->uiWidget.searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
             this,                         SLOT( searchLineChanged( const QString& ) ) );
@@ -146,7 +147,7 @@ void MarbleControlBox::setupGpsOption()
 
     d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
     d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
-    
+
     connect( d->uiWidget.m_gpsDrawBox, SIGNAL( clicked( bool ) ),
              this,                     SLOT( disableGpsInput( bool ) ) );
 }
@@ -159,11 +160,12 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
-    
+
+#if 1
     //set up everything for the FileModel
     d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
-    
-    connect( d->uiWidget.m_fileView->selectionModel(), 
+
+    connect( d->uiWidget.m_fileView->selectionModel(),
           SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
           this,
           SLOT( enableFileViewActions() ) );
@@ -171,7 +173,26 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              widget->gpxFileModel(), SLOT( saveFile() ) );
     connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
              widget->gpxFileModel(), SLOT( closeFile() ) );
-    
+#else
+    FileViewModel* model = new FileViewModel( this );
+    d->uiWidget.m_fileView->setModel( model );
+
+    connect( d->uiWidget.m_fileView->selectionModel(),
+             SIGNAL( selectionChanged( const QItemSelection&, const QItemSelection& )),
+             this,
+             SLOT( enableFileViewActions() ) );
+
+    connect( d->uiWidget.m_saveButton,
+             SIGNAL( clicked() ),
+             model,
+             SLOT( saveFile() ) );
+
+    connect( d->uiWidget.m_closeButton,
+             SIGNAL( clicked () ),
+             model,
+             SLOT( closeFile() ) );
+#endif
+
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
     d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
@@ -199,7 +220,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->m_widget, SIGNAL(themeChanged( QString )), this, SLOT( selectTheme( QString )) );
     selectTheme( d->m_widget->mapTheme() );
 
-    connect(d->m_widget, SIGNAL(zoomChanged(int)), 
+    connect(d->m_widget, SIGNAL(zoomChanged(int)),
 	    this,     SLOT(changeZoom(int)));
     connect(this,     SIGNAL(centerOn(const QModelIndex&)),
 	    d->m_widget, SLOT(centerOn(const QModelIndex&)));
@@ -229,18 +250,18 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget,                     SLOT( setShowCompass( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
-    
+
     //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
              d->m_widget, SLOT( changeCurrentPosition( double, double ) ) );
-    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( double, double, 
+    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( double, double,
                                             GeoPoint::Unit ) ),
              this, SLOT( receiveGpsCoordinates ( double, double,
                                                  GeoPoint::Unit) ) );
 
-    connect( d->m_widget, SIGNAL( timeout() ), 
+    connect( d->m_widget, SIGNAL( timeout() ),
              this,        SIGNAL( updateGps() ) );
 }
 
@@ -254,9 +275,9 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
         if ( !(index >= 0) ){
             if ( insertIndex < d->uiWidget.toolBox->count() ) {
                 d->uiWidget.toolBox->insertItem( insertIndex,
-                                                 widget, 
+                                                 widget,
                                                  text );
-            } else { 
+            } else {
                 d->uiWidget.toolBox->insertItem( 3 ,widget, text );
             }
             widget->show();
@@ -303,16 +324,16 @@ void MarbleControlBox::disableGpsInput( bool in )
     if( d->uiWidget.m_lonComboBox->currentIndex() == 1 ){
         t_lon *= -1;
     }
-    
+
     if( d->uiWidget.m_latComboBox->currentIndex() == 1 ){
         t_lat *= -1;
     }
-    
+
     emit gpsPositionChanged( t_lon, t_lat );
     emit gpsInputDisabled( in );
 }
 
-void MarbleControlBox::receiveGpsCoordinates( double x, double y, 
+void MarbleControlBox::receiveGpsCoordinates( double x, double y,
                                               GeoPoint::Unit unit){
     if( d->uiWidget.m_catchGps->isChecked() ){
         switch(unit){
@@ -325,7 +346,7 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
             double t_lat=0,t_lon=0;
             t_lat = y * -RAD2DEG;
             t_lon = x * +RAD2DEG;
-            
+
             if( t_lat < 0 ){
                 d->uiWidget.m_latSpinBox->setValue( -t_lat );
                 d->uiWidget.m_latComboBox->setCurrentIndex( 1 );
@@ -333,7 +354,7 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
                 d->uiWidget.m_latSpinBox->setValue( t_lat );
                 d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
             }
-            
+
             if( t_lon < 0 ){
                 d->uiWidget.m_lonSpinBox->setValue( -t_lon );
                 d->uiWidget.m_lonComboBox->setCurrentIndex( 1 );
@@ -341,7 +362,7 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
                 d->uiWidget.m_lonSpinBox->setValue( t_lon );
                 d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
             }
-            
+
             emit gpsPositionChanged( t_lon, t_lat );
         }
     }
@@ -349,17 +370,23 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
 
 void MarbleControlBox::enableFileViewActions()
 {
-    bool tmp = d->uiWidget.m_fileView->selectionModel() 
+    bool tmp = d->uiWidget.m_fileView->selectionModel()
             ->selectedIndexes().count() ==1;
     d->uiWidget.m_saveButton->setEnabled( tmp );
     d->uiWidget.m_closeButton->setEnabled( tmp );
-    
+
+#if 1
     if ( tmp ) {
         QModelIndex tmpIndex = d->uiWidget.m_fileView ->
                 selectionModel() -> currentIndex();
         d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
     }
-    
+#else
+    if ( tmp ) {
+        FileViewModel& model = ( FileViewModel& ) *d->uiWidget.m_fileView->model();
+        model.setSelectedIndex( d->uiWidget.m_fileView->selectionModel()->currentIndex() );
+    }
+#endif
 }
 
 void MarbleControlBox::setNavigationTabShown( bool show )
@@ -410,7 +437,7 @@ void MarbleControlBox::resizeEvent ( QResizeEvent * )
                                                        QSizePolicy::Fixed );
         }
     }
-} 
+}
 
 void MarbleControlBox::searchLineChanged(const QString &search)
 {

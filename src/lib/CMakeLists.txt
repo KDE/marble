@@ -85,6 +85,7 @@ set(marblewidget_SRCS
            vectormap.cpp
            xmlhandler.cpp
            BoundingBox.cpp
+           FileViewModel.cpp
            kml/KMLContainer.cpp
            kml/KMLContainerParser.cpp
            kml/KMLFeature.cpp
@@ -168,7 +169,7 @@ else(WIN32)
   if(libgps_FOUND)
      set(HAVE_LIBGPS 1)
      message( STATUS "building with gpsd support")
-     
+
      INCLUDE_DIRECTORIES(${libgps_INCLUDES})
      TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
   else(libgps_FOUND)
@@ -192,7 +193,7 @@ if(WIN32 AND QTONLY)
   install(TARGETS marblewidget DESTINATION "")
 else(WIN32 AND QTONLY)
   if(APPLE AND QTONLY)
-    install (TARGETS marblewidget DESTINATION 
+    install (TARGETS marblewidget DESTINATION
       ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 
   else(APPLE AND QTONLY)

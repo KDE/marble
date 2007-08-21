@@ -1,5 +1,19 @@
 2007-08-21  Murad Tagirov  <tmurad@gmail.com>
 
+    Introduced FileViewModel class and AbstactFileViewItem class
+    with pure virtual methods (saveFile(), closeFile()). We could
+    create KMLFileViewItem, GpxFileViewItem and implement this methods
+    in order to show opened files in FileView without touching model.
+    * src/lib/FileViewModel.{h,cpp}: new class
+    * src/lib/AbstractFileViewItem.h: new class
+    * src/lib/MarbleControlBox.cpp
+    * src/lib/FileViewModel.cpp
+    * src/lib/CMakeLists.txt
+    * docs/projects/kml/KMLClasses.xmi
+
+
+2007-08-21  Murad Tagirov  <tmurad@gmail.com>
+
     Inherit KMLPlaceMark -> PlaceMark -> KMLFeature like
     in kml class diagram.
     * src/lib/kml/KMLFeature.{h,cpp}
