@@ -1,8 +1,18 @@
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
+	Applied changes by Tim Sutton to make Marble
+	work better on the Mac. Also applied changes 
+	to correct the credits list.
+
+	See SVN commits rev. 702537, 702676 and 702579 
+
+2007-08-21  Torsten Rahn  <rahn@kde.org>
+
 	Applied changes from Daniel Molkentin and
 	Christian Ehrlicher to make Marble work on 
 	Windows, see commits 702574 and 702899.
+
+--- Marble 0.4.0 ---
 
 2007-08-19  Torsten Rahn  <rahn@kde.org>
 

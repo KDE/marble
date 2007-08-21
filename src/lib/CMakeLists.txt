@@ -204,7 +204,10 @@ endif(WIN32 AND QTONLY)
 
 ########### install files ###############
 
-install( FILES
+if (APPLE AND QTONLY)
+  # do nothing because we dont put .h files in the bundle
+elseif (APPLE AND QTONLY)
+  install( FILES
            MarbleWidget.h
            MarbleModel.h
            MarbleControlBox.h
@@ -257,3 +260,4 @@ install( FILES
            marble_export.h
            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
+endif (APPLE AND QTONLY)
