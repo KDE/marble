@@ -21,20 +21,6 @@ Misc
 
 Code Quality:
  * Filename == Classname (CamelCasing)                                  DONE
-   - maptheme.{h,cpp}                -> MapTheme                        done
-   - placemark.{h,cpp}               -> PlaceMark                       done
-   - placemarkinfodialog.{h,cpp,ui}  -> PlaceMarkInfoDialog             done
-   - placemarkmanager.{h,cpp}        -> PlaceMarkManager                done
-   - placemarkmodel.{h,cpp}          -> PlaceMarkModel                  done
-   - placemarkpainter.{h,cpp}        -> PlaceMarkPainter                done
-   - searchcombobox.{h,cpp}          Removed!                           done
-   - searchlistview.{h,cpp}          -> MarbleSearchListView            done
-   - texcolorizer.{h,cpp}                                               done
-   - texturepalette.cpp                                                 done
-   - tinywebbrowser.{h,cpp}                                             done
-   - vectorcomposer.{h,cpp}                                             done
-   - vectormap.{h,cpp}                                                  done
-   - xmlhandler.{h,cpp}                                                 done
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
  * Name all public classes MarbleSomething                              INGE
    - SearchListView  -> MarbleSearchListView                            done
