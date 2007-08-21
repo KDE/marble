@@ -45,6 +45,7 @@ class MeasureTool;
 class TileCreatorDialog;
 class MarbleWidgetPrivate;
 class GpsLayer;
+class FileViewModel;
 #include "gps/GpxFileModel.h"
 
 
@@ -192,7 +193,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const double lon, const double lat, 
+    bool screenCoordinates( const double lon, const double lat,
                             int& x, int& y );
 
     int northPoleY();
@@ -366,7 +367,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  deltaLon  an angle that specifies the change in terms of longitude
      * @param  deltaLat  an angle that specifies the change in terms of latitude
      *
-     * This function rotates the view by two angles, 
+     * This function rotates the view by two angles,
      * deltaLon ("theta") and deltaLat ("phi").
      * If we start at (0, 0), the result will be the exact equivalent
      * of (lon, lat), otherwise the resulting angle will be the sum of
@@ -427,7 +428,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *              +180(W) - -180(E)
      *
      * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations 
+     * and is meant to be used during subsequent transformations
      */
     void  rotateTo(const double& lon, const double& lat);
 
@@ -441,7 +442,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *              -180(anti-clockwise) - +180(clockwise)
      *
      * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations 
+     * and is meant to be used during subsequent transformations
      */
     void  rotateTo( const double& lon, const double& lat, const double& psi);
 
@@ -450,7 +451,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  quat a quaternion specifying the rotation
      *
      * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations 
+     * and is meant to be used during subsequent transformations
      */
     void  rotateTo(const Quaternion& quat);
 
@@ -619,8 +620,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Opens a gpx file for viewing on the Marble Widget
      */
     void openGpxFile( QString &filename );
-    
+
     GpxFileModel * gpxFileModel();
+
+    FileViewModel* fileViewModel() const;
 
     /**
      * @brief  Set whether for rendering quick and dirty algorithms should be used
@@ -659,7 +662,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesProgress( int progress );
 
     void updateChangedMap();
-   
+
     /**
      * @brief update part of the map as defined in the BoundingBox
      */
@@ -702,7 +705,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  drawAtmosphere();
 
     void  setActiveRegion();
-    
+
     void  setBoundingBox();
 
  private:

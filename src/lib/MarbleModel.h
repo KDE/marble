@@ -46,6 +46,7 @@
 #include "texcolorizer.h"
 
 class ClipPainter;
+class FileViewModel;
 class PlaceMark;
 class PlaceMarkManager;
 class GpsLayer;
@@ -118,6 +119,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     GpsLayer           *gpsLayer()           const;
     GpxFileModel       *gpxFileModel()       const;
+    FileViewModel      *fileViewModel()   const;
 
     /**
      * @brief Return whether the Gps Data is visible.

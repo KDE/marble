@@ -29,6 +29,8 @@
 #include "ViewParams.h"
 #include "texcolorizer.h"
 #include "ClipPainter.h"
+#include "FileViewModel.h"
+#include "GpxFileViewItem.h"
 #include "MarbleDirs.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
@@ -61,9 +63,9 @@ class MarbleWidgetPrivate
     int              m_homeZoom;
 
     int              m_logzoom;
-	
+
     int              m_zoomStep;
-    int              m_minimumzoom;    
+    int              m_minimumzoom;
     int              m_maximumzoom;
 
     MarbleWidgetInputHandler  *m_inputhandler;
@@ -122,7 +124,7 @@ void MarbleWidget::construct(QWidget *parent)
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
 
-    // Some point that tackat defined. :-) 
+    // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
@@ -133,7 +135,7 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
 
-    connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) , 
+    connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
              this, SLOT(updateRegion( BoundingBox) ) );
     // Set background: black.
     QPalette p = palette();
@@ -146,11 +148,11 @@ void MarbleWidget::construct(QWidget *parent)
 
     // Fixed a potential crash if MarbleWidget constructed as a toplevel widget
     if ( parent )
-        d->m_viewParams.m_canvasImage = new QImage( parent->width(), 
+        d->m_viewParams.m_canvasImage = new QImage( parent->width(),
                                                     parent->height(),
                                          QImage::Format_ARGB32_Premultiplied );
     else
-        d->m_viewParams.m_canvasImage = new QImage( 100, 100, 
+        d->m_viewParams.m_canvasImage = new QImage( 100, 100,
                                          QImage::Format_ARGB32_Premultiplied);
     d->m_justModified = false;
 
@@ -161,22 +163,22 @@ void MarbleWidget::construct(QWidget *parent)
 
     d->m_popupmenu = new MarbleWidgetPopupMenu( this, d->m_model );
     connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );	
+	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
     connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );	
+	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
     connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
              this,              SLOT( notifyMouseClick( int, int ) ) );
 
     connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
-         this, SIGNAL( mouseMoveGeoPosition( QString ) ) ); 
+         this, SIGNAL( mouseMoveGeoPosition( QString ) ) );
 
     d->m_measureTool = new MeasureTool( this );
 
     connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
 	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
     connect( d->m_popupmenu,   SIGNAL( removeMeasurePoints() ),
-	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );	
-    
+	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );
+
     connect( d->m_model, SIGNAL( timeout() ),
              this,       SLOT( updateGps() ) );
 
@@ -242,13 +244,13 @@ double MarbleWidget::moveStep()
     if ( radius() < sqrt( width() * width() + height() * height() ) )
 	return 180.0 * 0.1;
     else
-	return 180.0 * atan( (double)width() 
+	return 180.0 * atan( (double)width()
 		     / (double)( 2 * radius() ) ) * 0.2;
 }
 
 int MarbleWidget::zoom() const
 {
-    return d->m_logzoom; 
+    return d->m_logzoom;
 }
 
 double MarbleWidget::centerLatitude() const
@@ -263,7 +265,7 @@ double MarbleWidget::centerLongitude() const
 
 void MarbleWidget::setMinimumZoom( int zoom )
 {
-    d->m_minimumzoom = zoom; 
+    d->m_minimumzoom = zoom;
 }
 
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
@@ -273,16 +275,16 @@ void MarbleWidget::addPlaceMarkFile( const QString &filename )
 
 QPixmap MarbleWidget::mapScreenShot()
 {
-    return QPixmap::grabWidget( this ); 
+    return QPixmap::grabWidget( this );
 }
 
 bool MarbleWidget::showScaleBar() const
-{ 
+{
     return d->m_showScaleBar;
 }
 
 bool MarbleWidget::showCompass() const
-{ 
+{
     return d->m_showCompass;
 }
 
@@ -292,47 +294,47 @@ bool MarbleWidget::showGrid() const
 }
 
 bool MarbleWidget::showPlaces() const
-{ 
+{
     return d->m_viewParams.m_showPlaceMarks;
 }
 
 bool MarbleWidget::showCities() const
-{ 
+{
     return d->m_viewParams.m_showCities;
 }
 
 bool MarbleWidget::showTerrain() const
-{ 
+{
     return d->m_viewParams.m_showTerrain;
 }
 
 bool MarbleWidget::showRelief() const
-{ 
+{
     return d->m_viewParams.m_showRelief;
 }
 
 bool MarbleWidget::showElevationModel() const
-{ 
+{
     return d->m_viewParams.m_showElevationModel;
 }
 
 bool MarbleWidget::showIceLayer() const
-{ 
+{
     return d->m_viewParams.m_showIceLayer;
 }
 
 bool MarbleWidget::showBorders() const
-{ 
+{
     return d->m_viewParams.m_showBorders;
 }
 
 bool MarbleWidget::showRivers() const
-{ 
+{
     return d->m_viewParams.m_showRivers;
 }
 
 bool MarbleWidget::showLakes() const
-{ 
+{
     return d->m_viewParams.m_showLakes;
 }
 
@@ -342,7 +344,7 @@ bool MarbleWidget::showGps() const
 }
 
 bool  MarbleWidget::quickDirty() const
-{ 
+{
     return d->m_model->textureMapper()->interlaced();
 }
 
@@ -360,7 +362,7 @@ void MarbleWidget::zoomView(int zoom)
 
     if ( newRadius == radius() )
 	return;
- 
+
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
     int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
@@ -399,7 +401,7 @@ void MarbleWidget::zoomViewBy( int zoomStep )
     else if ( tryZoom > d->m_maximumzoom ) {
         tryZoom = d->m_maximumzoom;
     }
-    
+
     zoom = tryZoom;
     zoomView( zoom );
 }
@@ -469,7 +471,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 	mark->setSelected( 1 );
 	d->m_crosshair.setEnabled( true );
     }
-    else 
+    else
 	d->m_crosshair.setEnabled( false );
 
     d->m_model->placeMarkContainer()->clearTextPixmaps();
@@ -480,7 +482,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
 
 
 void MarbleWidget::setCenterLatitude( double lat )
-{ 
+{
     centerOn( centerLongitude(), lat );
 }
 
@@ -490,7 +492,7 @@ void MarbleWidget::setCenterLongitude( double lon )
 }
 
 Projection MarbleWidget::projection() const
-{ 
+{
     return d->m_viewParams.m_projection;
 }
 
@@ -533,7 +535,7 @@ void MarbleWidget::moveLeft()
 {
     int polarity = 0;
 
-    if ( northPoleY() != 0 ) 
+    if ( northPoleY() != 0 )
         polarity = northPoleY() / abs(northPoleY());
 
     if ( polarity < 0 )
@@ -546,7 +548,7 @@ void MarbleWidget::moveRight()
 {
     int polarity = 0;
 
-    if ( northPoleY() != 0 ) 
+    if ( northPoleY() != 0 )
         polarity = northPoleY() / abs(northPoleY());
 
     if ( polarity < 0 )
@@ -591,7 +593,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     drawAtmosphere();
 
     delete d->m_viewParams.m_coastImage;
-    d->m_viewParams.m_coastImage = new QImage( width(), height(), 
+    d->m_viewParams.m_coastImage = new QImage( width(), height(),
                                                QImage::Format_ARGB32_Premultiplied );
     d->m_justModified = true;
     repaint();
@@ -648,8 +650,8 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 
 
 
-bool MarbleWidget::geoCoordinates(const int x, const int y, 
-                                  double& lon, double& lat, 
+bool MarbleWidget::geoCoordinates(const int x, const int y,
+                                  double& lon, double& lat,
                                   GeoPoint::Unit unit )
 {
     int imageHalfWidth  = width() / 2;
@@ -667,7 +669,7 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
             double qr = 1.0 - qy * qy;
 
             double qr2z = qr - qx * qx;
-            double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;	
+            double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
             Quaternion  qpos( 0.0, qx, qy, qz );
             qpos.rotateAroundAxis( planetAxis() );
@@ -714,15 +716,15 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
     const double  inverseRadius = 1.0 / (double)(radius());
 
-    if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth ) 
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) ) 
+    if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
+        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
     {
         double qx = inverseRadius * (double)( x - imageHalfWidth );
         double qy = inverseRadius * (double)( y - imageHalfHeight );
         double qr = 1.0 - qy * qy;
 
         double qr2z = qr - qx * qx;
-        double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;  
+        double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
         Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( planetAxis() );
@@ -759,7 +761,7 @@ void MarbleWidget::drawAtmosphere()
         int  imageHalfHeight = height() / 2;
 
         // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ), 
+        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
                             1.05 * radius() );
         grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
         grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
@@ -772,7 +774,7 @@ void MarbleWidget::drawAtmosphere()
         painter.setRenderHint( QPainter::Antialiasing, false );
         painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
                             imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                            (int)( 2.1 * (double)(radius()) ), 
+                            (int)( 2.1 * (double)(radius()) ),
                             (int)( 2.1 * (double)(radius()) ) );
     }
 }
@@ -780,15 +782,15 @@ void MarbleWidget::drawAtmosphere()
 
 void MarbleWidget::setActiveRegion()
 {
-    int zoom = radius(); 
+    int zoom = radius();
 
-    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50, 
+    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
                                  QRegion::Rectangle );
 
     switch( d->m_viewParams.m_projection ) {
         case Spherical:
             if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	       d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
+	       d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom,
                                        2 * zoom, 2 * zoom, QRegion::Ellipse );
             }
             break;
@@ -845,13 +847,13 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                      || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
 
     // Create a painter that will do the painting.
-    ClipPainter painter( this, doClip ); 
+    ClipPainter painter( this, doClip );
 
     // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
-    d->m_model->paintGlobe( &painter, 
-                            width(), height(), &d->m_viewParams, 
-                            needsUpdate() 
+    d->m_model->paintGlobe( &painter,
+                            width(), height(), &d->m_viewParams,
+                            needsUpdate()
                             || d->m_viewParams.m_canvasImage->isNull(),
                             dirtyRect );
     d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.m_planetAxis;
@@ -872,12 +874,12 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                                                               d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
 
     // 4. Paint the crosshair.
-    d->m_crosshair.paint( &painter, 
+    d->m_crosshair.paint( &painter,
                           d->m_viewParams.m_canvasImage->width(),
                           d->m_viewParams.m_canvasImage->height() );
 
     // 5. Paint measure points if there are any.
-    d->m_measureTool->paintMeasurePoints( &painter, 
+    d->m_measureTool->paintMeasurePoints( &painter,
                                           d->m_viewParams.m_canvasImage->width() / 2,
                                           d->m_viewParams.m_canvasImage->height() / 2,
                                           radius(), planetAxis(),
@@ -886,7 +888,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     // Set the region of the image where the user can drag it.
     setActiveRegion();
-    
+
     //Set the Bounding Box
     setBoundingBox();
 }
@@ -930,43 +932,43 @@ void MarbleWidget::setMapTheme( const QString& maptheme )
 }
 
 void MarbleWidget::setShowScaleBar( bool visible )
-{ 
+{
     d->m_showScaleBar = visible;
     repaint();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
-{ 
+{
     d->m_showCompass = visible;
     repaint();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
-{ 
+{
     d->m_viewParams.m_showGrid = visible;
     repaint();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
-{ 
+{
     d->m_viewParams.m_showPlaceMarks = visible;
     repaint();
 }
 
 void MarbleWidget::setShowCities( bool visible )
-{ 
+{
     d->m_viewParams.m_showCities = visible;
     repaint();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
-{ 
+{
     d->m_viewParams.m_showTerrain = visible;
     repaint();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
-{ 
+{
     d->m_viewParams.m_showRelief = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -974,7 +976,7 @@ void MarbleWidget::setShowRelief( bool visible )
 }
 
 void MarbleWidget::setShowElevationModel( bool visible )
-{ 
+{
     d->m_viewParams.m_showElevationModel = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -982,7 +984,7 @@ void MarbleWidget::setShowElevationModel( bool visible )
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
-{ 
+{
     d->m_viewParams.m_showIceLayer = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -990,13 +992,13 @@ void MarbleWidget::setShowIceLayer( bool visible )
 }
 
 void MarbleWidget::setShowBorders( bool visible )
-{ 
+{
     d->m_viewParams.m_showBorders = visible;
     repaint();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
-{ 
+{
     d->m_viewParams.m_showRivers =  visible;
     repaint();
 }
@@ -1028,7 +1030,7 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     double  lat   = 0;
 
     valid = geoCoordinates( x, y, lon, lat, GeoPoint::Radian );
-    
+
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoPoint::Radian);
     }
@@ -1036,21 +1038,34 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 
 void MarbleWidget::updateGps()
 {
-    
-    QRegion temp = d->m_model->gpsLayer()->updateGps(  
-                                        size(), radius(), 
+
+    QRegion temp = d->m_model->gpsLayer()->updateGps(
+                                        size(), radius(),
                                         planetAxis() );
     update(temp);
     /*
-    d->m_model->gpsLayer()->updateGps(  
-                         size(), radius(), 
+    d->m_model->gpsLayer()->updateGps(
+                         size(), radius(),
                               planetAxis() );
     update();*/
 }
 
 void MarbleWidget::openGpxFile(QString &filename)
 {
+#if 1
     d->m_model->gpsLayer()->loadGpx( filename );
+#else
+    /*
+     * TODO
+     * 1. create new gpx file
+     * 2. create gpxFileViewItem
+     * 3. append created item to FileViewModel
+     * 4. !!! emit update region and layout changes if need. FIXME
+     */
+    GpxFileViewItem* item = new GpxFileViewItem( new GpxFile( filename ) );
+    d->m_model->fileViewModel()->append( item );
+    updateRegion( BoundingBox() );
+#endif
 }
 
 GpxFileModel *MarbleWidget::gpxFileModel()
@@ -1058,12 +1073,17 @@ GpxFileModel *MarbleWidget::gpxFileModel()
     return d->m_model->gpxFileModel();
 }
 
+FileViewModel* MarbleWidget::fileViewModel() const
+{
+    return d->m_model->fileViewModel();
+}
+
 void MarbleWidget::setQuickDirty( bool enabled )
 {
     int transparency;
     switch( d->m_viewParams.m_projection ) {
         case Spherical:
-            // Interlace texture mapping 
+            // Interlace texture mapping
             d->m_model->textureMapper()->setInterlaced( enabled );
             // Update texture map during the repaint that follows:
             setNeedsUpdate();
@@ -1113,11 +1133,11 @@ void MarbleWidget::updateChangedMap()
 void MarbleWidget::updateRegion( BoundingBox box )
 {
     Q_UNUSED(box);
-    //really not sure if this is nessary as its designed for 
+    //really not sure if this is nessary as its designed for
     //placemark based layers
     setNeedsUpdate();
-    
-    /*TODO: write a method for BoundingBox to cacluate the screen 
+
+    /*TODO: write a method for BoundingBox to cacluate the screen
      *region and pass that to update()*/
     update();
 }

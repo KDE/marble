@@ -19,6 +19,7 @@
 
 #include "global.h"
 #include "ClipPainter.h"
+#include "FileViewModel.h"
 #include "GeoPolygon.h"
 #include "ViewParams.h"
 #include "texcolorizer.h"
@@ -57,6 +58,8 @@ class MarbleModelPrivate
 
     QTimer       *m_timer;
     Projection   m_projection;
+
+    FileViewModel       *m_fileviewmodel;
 };
 
 MarbleModel::MarbleModel( QWidget *parent )
@@ -118,6 +121,11 @@ MarbleModel::MarbleModel( QWidget *parent )
              this,  SIGNAL( regionChanged( BoundingBox ) ) );
 
     d->m_projection = Spherical;
+
+    /*
+     * Create FileViewModel
+     */
+    d->m_fileviewmodel = new FileViewModel( this );
 }
 
 MarbleModel::~MarbleModel()
@@ -444,6 +452,11 @@ GpsLayer *MarbleModel::gpsLayer()         const
 GpxFileModel *MarbleModel::gpxFileModel()   const
 {
     return d->m_gpxFileModel;
+}
+
+FileViewModel *MarbleModel::fileViewModel() const
+{
+    return d->m_fileviewmodel;
 }
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )

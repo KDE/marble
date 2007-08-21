@@ -1,5 +1,17 @@
 2007-08-21  Murad Tagirov  <tmurad@gmail.com>
 
+    Created class GpxFileViewItem. Moved almost all functioanality
+    from GpxFileModel to FileViewModel and GpxFileViewItem. Currently
+    some part of code is ifdefed with "#if 0" in MarbleWidget and
+    MarbleControlBox to keep existing functionality.
+    * src/lib/MarbleWidget.{h,cpp}
+    * src/lib/MarbleModel.{h,cpp}
+    * src/lib/FileViewModel.{h,cpp}: new class
+    * src/lib/GpxFileViewItem.{h,cpp}
+    * src/lib/MarbleControlBox.cpp
+    * src/lib/CMakeLists.txt
+    * src/lib/AbstractFileViewItem.h
+
     Introduced FileViewModel class and AbstactFileViewItem class
     with pure virtual methods (saveFile(), closeFile()). We could
     create KMLFileViewItem, GpxFileViewItem and implement this methods

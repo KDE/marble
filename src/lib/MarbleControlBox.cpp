@@ -174,7 +174,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
              widget->gpxFileModel(), SLOT( closeFile() ) );
 #else
-    FileViewModel* model = new FileViewModel( this );
+    FileViewModel* model = widget->fileViewModel();
     d->uiWidget.m_fileView->setModel( model );
 
     connect( d->uiWidget.m_fileView->selectionModel(),
