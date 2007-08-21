@@ -1,4 +1,10 @@
+2007-08-21    <ingwa@c83-252-235-145.bredband.comhem.se>
+
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix errors on Windows.
+	* src/lib/gps/GpxFile.cpp (add*): Use dynamic casts instead of
+	C-style casts
 
 	Remove obsolete class: SearchComboBox
 	* src/lib/searchcombobox.cpp: remove

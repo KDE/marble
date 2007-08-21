@@ -9,16 +9,19 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
+#include <QtCore/QFile>
+#include <QtXml/QXmlInputSource>
+#include <QDebug>
+
+#include "Track.h"
+#include "Route.h"
+#include "Waypoint.h"
 #include "GpxFile.h"
 #include "WaypointContainer.h"
 #include "TrackContainer.h"
 #include "RouteContainer.h"
 #include "BoundingBox.h"
 #include "GpxSax.h"
-
-#include <QtCore/QFile>
-#include <QtXml/QXmlInputSource>
-#include <QDebug>
 
 GpxFile::GpxFile( const QString &fileName )
 {
@@ -103,17 +106,17 @@ void GpxFile::printToStream( QTextStream &out ) const
 
 void GpxFile::addWaypoint( Waypoint *waypoint )
 {
-    m_waypoints->append( (AbstractLayerData*)waypoint );
+    m_waypoints->append( dynamic_cast<AbstractLayerData*>(waypoint) );
 }
 
 void GpxFile::addTrack( Track *track )
 {
-    m_tracks->append( (AbstractLayerData*)track );
+    m_tracks->append( dynamic_cast<AbstractLayerData*>(track) );
 }
 
 void GpxFile::addRoute( Route *route )
 {
-    m_routes->append( (AbstractLayerData*)route );
+    m_routes->append( dynamic_cast<AbstractLayerData*>(route) );
 }
 
 void    GpxFile::setName( const QString &name )
@@ -164,5 +167,3 @@ void    GpxFile::setActive( bool active )
 {
     m_active = active;
 }
-
-
