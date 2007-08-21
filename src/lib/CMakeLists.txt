@@ -71,7 +71,6 @@ set(marblewidget_SRCS
            PlaceMarkModel.cpp
            PlaceMarkInfoDialog.cpp
            Quaternion.cpp
-           searchcombobox.cpp
            texcolorizer.cpp
            FlatScanlineTextureMapper.cpp
            GlobeScanlineTextureMapper.cpp
@@ -248,7 +247,6 @@ elseif (APPLE AND QTONLY)
            PlaceMarkInfoDialog.h
            Quaternion.h
            ScreenPolygon.h
-           searchcombobox.h
            texcolorizer.h
            FlatScanlineTextureMapper.h
            GlobeScanlineTextureMapper.h

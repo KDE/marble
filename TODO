@@ -27,7 +27,7 @@ Code Quality:
    - placemarkmanager.{h,cpp}        -> PlaceMarkManager                done
    - placemarkmodel.{h,cpp}          -> PlaceMarkModel                  done
    - placemarkpainter.{h,cpp}        -> PlaceMarkPainter                done
-   - searchcombobox.{h,cpp}                                             --
+   - searchcombobox.{h,cpp}          Removed!                           done
    - searchlistview.{h,cpp}          -> MarbleSearchListView            done
    - texcolorizer.{h,cpp}                                               --
    - texturepalette.cpp                                                 --

@@ -1,3 +1,10 @@
+2007-08-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Remove obsolete class: SearchComboBox
+	* src/lib/searchcombobox.cpp: remove
+	* src/lib/searchcombobox.h: remove
+	* src/lib/CMakeLists.txt:  Reflect removal
+
 2007-08-21  Murad Tagirov  <tmurad@gmail.com>
 
     Created class GpxFileViewItem. Moved almost all functioanality
