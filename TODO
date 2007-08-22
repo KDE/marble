@@ -118,18 +118,28 @@ Make it a KDE4 application as a real member of kdeedu.
  * KApplication                                                         DONE
  * AboutData                                                            DONE
  * KConfig XT                                                           TACK
- * Translation                                                          TACK
+   - Use KConfig XT for settings					done
+   - Provide settings dialog (?)					--
+ * Translation                                                          DONE
  * User docs                                                            DONE
  * KDEPrint support                                                     DONE
  * DBus Support                                                         TACK
 
-Features
+Features:
  * Areas, e.g. countries or districts                                   ----
+
+Documentation:
+ * Programmers manual for using Marble components in other applications	----
+ * Apidox for all public classes					----
 
  
 Before KDE 4.1
 ----------------------------------------------------------------
+
+Widget:
  * Support to display Timezones
+
+Data:
  * Evaluate the implementation of tile specifications like 
 
    http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation
