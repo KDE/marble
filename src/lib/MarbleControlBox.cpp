@@ -161,7 +161,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
 
-#if 1
+#ifndef KML_GSOC
     //set up everything for the FileModel
     d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
 
@@ -375,7 +375,7 @@ void MarbleControlBox::enableFileViewActions()
     d->uiWidget.m_saveButton->setEnabled( tmp );
     d->uiWidget.m_closeButton->setEnabled( tmp );
 
-#if 1
+#ifndef KML_GSOC
     if ( tmp ) {
         QModelIndex tmpIndex = d->uiWidget.m_fileView ->
                 selectionModel() -> currentIndex();

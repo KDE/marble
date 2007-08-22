@@ -9,21 +9,20 @@
 //
 
 
-#ifndef GPXFILEVIEWITEM_H
-#define GPXFILEVIEWITEM_H
+#ifndef KMLFILEVIEWITEM_H
+#define KMLFILEVIEWITEM_H
 
-#include <QObject>
+#include <QtCore/QVariant>
 #include "AbstractFileViewItem.h"
 
-class GpxFile;
+class KMLDocument;
+class PlaceMarkManager;
 
-class GpxFileViewItem
-  : public QObject,
-    public AbstractFileViewItem
+class KMLFileViewItem : public AbstractFileViewItem
 {
   public:
-    GpxFileViewItem( GpxFile* file );
-    ~GpxFileViewItem();
+    KMLFileViewItem( PlaceMarkManager& manager, KMLDocument& document );
+    ~KMLFileViewItem();
 
     /*
      * AbstractFileViewItem methods
@@ -35,7 +34,8 @@ class GpxFileViewItem
     virtual void setShown( bool value );
 
   private:
-    GpxFile*    m_gpxFile;
+    PlaceMarkManager&   m_placeMarkManager;
+    KMLDocument&        m_document;
 };
 
 #endif

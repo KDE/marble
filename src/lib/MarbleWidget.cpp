@@ -1052,19 +1052,11 @@ void MarbleWidget::updateGps()
 
 void MarbleWidget::openGpxFile(QString &filename)
 {
-#if 1
+#ifndef KML_GSOC
     d->m_model->gpsLayer()->loadGpx( filename );
 #else
-    /*
-     * TODO
-     * 1. create new gpx file
-     * 2. create gpxFileViewItem
-     * 3. append created item to FileViewModel
-     * 4. !!! emit update region and layout changes if need. FIXME
-     */
     GpxFileViewItem* item = new GpxFileViewItem( new GpxFile( filename ) );
     d->m_model->fileViewModel()->append( item );
-    updateRegion( BoundingBox() );
 #endif
 }
 

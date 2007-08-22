@@ -1,3 +1,17 @@
+2007-08-22  Murad Tagirov  <tmurad@gmail.com>
+
+    Added new class KMLFileViewItem. FileViewItem
+    now shows loaded kml documents. It's possible to
+    show or hide them. TODO: save/close kml documents
+    * src/lib/MarbleWidget.cpp
+    * src/lib/MarbleModel.{h,cpp}
+    * src/lib/FileViewModel.{h,cpp}
+    * src/lib/MarbleControlBox.cpp
+    * src/lib/PlaceMarkManager.{h,cpp}
+    * src/lib/GpxFileViewItem.h
+    * src/lib/CMakeLists.txt
+    * src/lib/KMLFileViewItem.{h,cpp}: new class
+
 2007-08-22  Inge Wallin  <inge@lysator.liu.se>
 
 	Daily Krazy issues. This time: Spelling errors
@@ -42,7 +56,7 @@
 	* src/lib/CMakeLists.txt:
 	  texcolorizer->TextureColorizer
 	  Fix "elseif".
-	* src/lib/texcolorizer.{cpp,h}: 
+	* src/lib/texcolorizer.{cpp,h}:
 	  texcolorizer->TextureColorizer
 
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>

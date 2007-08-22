@@ -86,6 +86,7 @@ set(marblewidget_SRCS
            BoundingBox.cpp
            FileViewModel.cpp
            GpxFileViewItem.cpp
+           KMLFileViewItem.cpp
            kml/KMLContainer.cpp
            kml/KMLContainerParser.cpp
            kml/KMLFeature.cpp

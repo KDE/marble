@@ -140,6 +140,8 @@ void PlaceMarkManager::loadKml( const QString& filename )
              */
             cacheDocument( *document );
             updateCacheIndex();
+
+            emit kmlDocumentLoaded( *document );
         }
     }
 
@@ -366,3 +368,5 @@ void PlaceMarkManager::loadDocumentFromCache ( QString &path, KMLDocument& docum
 }
 
 #endif
+
+#include "PlaceMarkManager.moc"

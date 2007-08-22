@@ -77,8 +77,8 @@ bool FileViewModel::setData (const QModelIndex& index, const QVariant& value, in
 
                 if ( item.isShown() != newValue ) {
                     item.setShown( newValue );
-                    emit dataChanged ( index, index );
-                    // emit updateRegion
+                    emit dataChanged( index, index );
+                    emit updateRegion( BoundingBox() );
                     return true;
                 }
             }
@@ -97,6 +97,7 @@ void FileViewModel::append ( AbstractFileViewItem* item )
 {
     m_itemList.append( item );
     emit layoutChanged();
+    emit updateRegion( BoundingBox() );
 }
 
 void FileViewModel::saveFile()
@@ -132,7 +133,7 @@ void FileViewModel::closeFile()
                 m_itemList.removeAt( row );
 
                 emit layoutChanged();
-                //emit updateRegion();
+                emit updateRegion( BoundingBox() );
             }
         }
     }

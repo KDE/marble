@@ -21,8 +21,10 @@
 
 class KMLDocument;
 
-class PlaceMarkManager
+class PlaceMarkManager : public QObject
 {
+    Q_OBJECT
+
  public:
     PlaceMarkManager();
     ~PlaceMarkManager();
@@ -39,6 +41,9 @@ class PlaceMarkManager
 #ifdef KML_GSOC
     const QList < KMLFolder* >& getFolderList() const;
 #endif
+
+  signals:
+    void kmlDocumentLoaded( KMLDocument& );
 
  protected:
     void importKml( const QString&, PlaceMarkContainer* );

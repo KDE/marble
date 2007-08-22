@@ -21,6 +21,7 @@
 #include "ClipPainter.h"
 #include "FileViewModel.h"
 #include "GeoPolygon.h"
+#include "KMLFileViewItem.h"
 #include "ViewParams.h"
 #include "TextureColorizer.h"
 #include "TileLoader.h"
@@ -109,6 +110,9 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkmanager   = new PlaceMarkManager();
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
+    connect( d->m_placemarkmanager, SIGNAL( kmlDocumentLoaded( KMLDocument& ) ),
+             this,                  SLOT( kmlDocumentLoaded( KMLDocument& ) ) );
+
     d->m_placeMarkContainer->clearTextPixmaps();
 
     d->m_placemarkmodel = new PlaceMarkModel( this );
@@ -126,6 +130,9 @@ MarbleModel::MarbleModel( QWidget *parent )
      * Create FileViewModel
      */
     d->m_fileviewmodel = new FileViewModel( this );
+
+    connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox ) ),
+             this,               SIGNAL( regionChanged( BoundingBox ) ) );
 }
 
 MarbleModel::~MarbleModel()
@@ -476,6 +483,14 @@ QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
 void MarbleModel::notifyModelChanged()
 {
     emit modelChanged();
+}
+
+void MarbleModel::kmlDocumentLoaded( KMLDocument& document )
+{
+    AbstractFileViewItem* item = new KMLFileViewItem( *d->m_placemarkmanager,
+                                                      document );
+
+    d->m_fileviewmodel->append( item );
 }
 
 
