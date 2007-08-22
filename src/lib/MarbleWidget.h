@@ -339,6 +339,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  public Q_SLOTS:
 
+    /**
+     * @brief paint the widget (FIXME: Not Yet Implemented) 
+     * @param painter  the QPainter to paint with
+     * @param option   fixme
+     * @param widget   fixme
+     */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                 QWidget *widget);
     /**
@@ -671,9 +677,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.
+     * @param zoom  The new zoom value.
      */
-    void  zoomChanged( int );
+    void  zoomChanged( int zoom );
 
+    /**
+     * @brief Signal that the theme has changed
+     * @param theme  Name of the new theme.
+     */
     void  themeChanged( QString );
 
     void  mouseMoveGeoPosition( QString );

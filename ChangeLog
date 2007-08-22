@@ -1,3 +1,7 @@
+2007-08-23  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleWidget.h: Added some apidox
+
 2007-08-22  Murad Tagirov  <tmurad@gmail.com>
 
     Display time spent to parse kml file.
