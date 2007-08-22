@@ -7,14 +7,19 @@
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
+
+
 #ifndef ABSTRACTLAYERCONTAINER_H
 #define ABSTRACTLAYERCONTAINER_H
+
 
 #include <QtCore/QVector>
 #include <QtCore/QString>
 #include <QtCore/QBitArray>
+
 #include "AbstractLayerData.h"
 #include "AbstractLayerInterface.h"
+
 
 class ClipPainter;
 class QPointF;
@@ -32,7 +37,7 @@ class BoundingBox;
  * container itself will only represent @b visible data and will
  * contain a reference to a binary file that represents all of the
  * layer data. The intention of this class is to keep the complicated
- * memory managment away from any new developers making it easier to 
+ * memory management away from any new developers making it easier to 
  * implement a new layer Each time the view changes the visible data
  * should be  altered by a thread that will monitor and deal with
  * this process.

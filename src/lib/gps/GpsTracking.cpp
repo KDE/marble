@@ -36,7 +36,7 @@ GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method,
     m_gpsTrackSeg = 0;
     m_updateDelay =0;
     
-    //for ip adress evaluation
+    //for ip address evaluation
     connect( &host, SIGNAL( done(  bool ) ),
              this,  SLOT( getData( bool ) ) ) ;
     m_downloadFinished = false;

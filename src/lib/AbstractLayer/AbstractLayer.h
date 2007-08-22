@@ -35,7 +35,7 @@ class BoundingBox;
  * Marble. It contains convienience classes and can be used as a 
  * framework for implementing new layers. So far there is default
  * implementations for all of the virtual methods so that any
- * developer may implement a whole new layer with the least ammount of
+ * developer may implement a whole new layer with the least amount of
  * effort.
  **/
 class AbstractLayer: public QObject

@@ -1,3 +1,10 @@
+2007-08-22  Inge Wallin  <inge@lysator.liu.se>
+
+	Daily Krazy issues. This time: Spelling errors
+	* src/lib/gps/GpsTracking.cpp (GpsTracking):      Fix spello
+	* src/lib/AbstractLayer/AbstractLayer.h:          Fix spello
+	* src/lib/AbstractLayer/AbstractLayerContainer.h: Fix spello
+
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/CMakeLists.txt:
