@@ -136,6 +136,16 @@ void PlaceMark::pack( QDataStream& stream ) const
     stream << m_popidx;
     stream << m_role;
     stream << m_countrycode;
+
+    /*
+     * pack coordinates
+     */
+    double lon;
+    double lat;
+
+    m_coordinate.geoCoordinates( lon, lat );
+    stream << lon;
+    stream << lat;
 }
 
 
@@ -148,4 +158,14 @@ void PlaceMark::unpack( QDataStream& stream )
     stream >> m_popidx;
     stream >> m_role;
     stream >> m_countrycode;
+
+    /*
+     * unpack coordinates
+     */
+    double lon;
+    double lat;
+
+    stream >> lon;
+    stream >> lat;
+    setCoordinate( lon, lat );
 }

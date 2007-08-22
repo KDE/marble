@@ -123,14 +123,17 @@ void PlaceMarkManager::loadKml( const QString& filename )
              */
             KMLDocument* document = new KMLDocument();
             document->setName( QFileInfo( sourceFile ).fileName() );
+
+            QTime t;
+            t.start();
             document->load( sourceFile );
+            qDebug("KML document loaded. Name: %s. Time: %d", document->name().toAscii().data(), t.elapsed());
 
             if ( ! m_documentList.isEmpty() ) {
                 const KMLDocument& lastLoadedDocument = *m_documentList.last();
                 document->setId( lastLoadedDocument.id() + 1 );
             }
 
-            qDebug("KML document loaded. Name: %s", document->name().toAscii().data());
             m_documentList.append( document );
             sourceFile.close();
 

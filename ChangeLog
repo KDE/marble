@@ -1,5 +1,16 @@
 2007-08-22  Murad Tagirov  <tmurad@gmail.com>
 
+    Display time spent to parse kml file.
+    * src/lib/PlaceMarkManager.cpp
+
+    Pack/Unpack placemark's coordinates
+    * src/lib/PlaceMark.cpp
+
+    Class diagram updated
+    * docs/projects/kml/KMLClasses.xmi
+
+2007-08-22  Murad Tagirov  <tmurad@gmail.com>
+
     Added new class KMLFileViewItem. FileViewItem
     now shows loaded kml documents. It's possible to
     show or hide them. TODO: save/close kml documents
