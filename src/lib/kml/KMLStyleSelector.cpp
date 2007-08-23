@@ -10,6 +10,7 @@
 
 
 #include "KMLStyleSelector.h"
+#include <QtCore/QDataStream>
 
 KMLStyleSelector::KMLStyleSelector()
 {
