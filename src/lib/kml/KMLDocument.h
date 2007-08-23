@@ -27,9 +27,10 @@ class KMLDocument : public KMLFolder
     void load( QIODevice& source );
 
     void addStyle( KMLStyle* style );
+    const KMLStyle& getStyle( QString styleId ) const;
 
   private:
-    QList < KMLStyle* > m_styleList;
+    QHash < QString, KMLStyle* > m_styleHash;
 };
 
 #endif // KMLDOCUMENT_H

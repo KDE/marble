@@ -8,25 +8,19 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-#ifndef KMLDOCUMENTPARSER_H
-#define KMLDOCUMENTPARSER_H
 
-#include "KMLContainerParser.h"
+#ifndef KMLSTYLEPARSER_H
+#define KMLSTYLEPARSER_H
 
-class KMLDocument;
+#include "KMLObjectParser.h"
+
 class KMLStyle;
 
-class KMLDocumentParser : public KMLContainerParser
+class KMLStyleParser : public KMLObjectParser
 {
- public:
-    KMLDocumentParser( KMLDocument& document );
-    virtual ~KMLDocumentParser();
-
-    /*
-     * QXmlDefaultHandler virtual methods
-     */
-    virtual bool startDocument();
-    virtual bool endDocument();
+  public:
+    KMLStyleParser( KMLStyle& style );
+    virtual ~KMLStyleParser();
 
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,
@@ -38,12 +32,6 @@ class KMLDocumentParser : public KMLContainerParser
                              const QString& qName );
 
     virtual bool characters( const QString& ch );
-
- private:
-    bool    m_parsed;
-
-    KMLObjectParser*    m_currentParser;
-    KMLStyle*           m_currentStyle;
 };
 
-#endif // KMLDOCUMENTPARSER_H
+#endif

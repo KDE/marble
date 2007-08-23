@@ -1,8 +1,24 @@
+2007-08-23  Murad Tagirov  <tmurad@gmail.com>
+
+    Added KMLStyleParse class to parse KMLStyle objects.
+    Minor fixes in previously introduced styles
+    related classes.
+    * src/lib/kml/KMLDocumentParser.{h,cpp}
+    * src/lib/kml/KMLContainerParser.cpp
+    * src/lib/kml/KMLStyleSelector.{h,cpp}
+    * src/lib/kml/KMLStyleParser.{h,cpp}: new class
+    * src/lib/kml/KMLDocument.{h,cpp}
+    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/CMakeLists.txt
+
+    - Class diagram updated
+    * docs/projects/kml/KMLClasses.xmi
+
 2007-08-23  Torsten Rahn  <rahn@kde.org>
 
 	- More cleanup in TextureMapper classes and
 	better code documentation. Now it should be
-	possible for other people to fully 
+	possible for other people to fully
 	understand it.
 	* src/lib/AbstractScanlineTextureMapper.{cpp,h}
 	* src/lib/TileLoader.h

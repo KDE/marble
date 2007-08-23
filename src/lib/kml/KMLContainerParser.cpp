@@ -29,6 +29,8 @@ KMLContainerParser::KMLContainerParser( KMLContainer& container )
 
 KMLContainerParser::~KMLContainerParser()
 {
+    delete m_currentParser;
+    delete m_currentPlaceMark;
 }
 
 bool KMLContainerParser::startElement( const QString& namespaceURI,
@@ -57,10 +59,7 @@ bool KMLContainerParser::startElement( const QString& namespaceURI,
         if ( nameLower == PLACEMARK_START_TAG ) {
             if ( m_currentParser != 0 ) {
                 delete m_currentParser;
-                m_currentParser = 0;
-
                 delete m_currentPlaceMark;
-                m_currentPlaceMark = 0;
             }
 
             m_currentPlaceMark = new KMLPlaceMark();

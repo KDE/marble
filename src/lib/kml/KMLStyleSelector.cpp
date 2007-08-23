@@ -20,7 +20,7 @@ void KMLStyleSelector::setStyleId( QString value )
     m_styleId = value;
 }
 
-QString KMLStyleSelector::getStyleId() const
+QString KMLStyleSelector::styleId() const
 {
     return m_styleId;
 }

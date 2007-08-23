@@ -24,7 +24,7 @@ KMLDocument::KMLDocument()
 
 KMLDocument::~KMLDocument()
 {
-    foreach ( KMLStyle* style, m_styleList ) {
+    foreach ( KMLStyle* style, m_styleHash ) {
         delete style;
     }
 }
@@ -54,5 +54,14 @@ void KMLDocument::load( QIODevice& source )
 
 void KMLDocument::addStyle( KMLStyle* style )
 {
-    m_styleList.append( style );
+    qDebug("KMLDocument: Add new style");
+    m_styleHash.insert( style->styleId(), style );
+}
+
+const KMLStyle& KMLDocument::getStyle( QString styleId ) const
+{
+    /*
+     * TODO: m_styleHash always should contain at least default KMLStyle element
+     */
+    return *m_styleHash.value( styleId );
 }

@@ -72,7 +72,6 @@ bool KMLPlaceMarkParser::startElement( const QString& namespaceURI,
         else if ( lowerName == POINTPARSER_TAG ) {
             if ( m_currentParser != 0 ) {
                 delete m_currentParser;
-                m_currentParser = 0;
             }
 
             m_currentParser = new KMLPointParser( (KMLPlaceMark&) m_object );
@@ -173,10 +172,10 @@ bool KMLPlaceMarkParser::characters( const QString& str )
     if ( ! result ) {
 
         KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
-        
+
         //removed decleration from the switch statment
         int population;
-        
+
         switch ( m_phase ) {
             case WAIT_POP:
                 population = str.toInt();

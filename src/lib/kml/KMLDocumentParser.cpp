@@ -14,17 +14,28 @@
 
 #include "KMLDocument.h"
 #include "KMLPlaceMarkParser.h"
+#include "KMLStyle.h"
+#include "KMLStyleParser.h"
 
 namespace
 {
-    const QString DOCUMENT_TAG = "document";
-    const QString KML_TAG = "kml";
+    const QString DOCUMENT_TAG  = "document";
+    const QString KML_TAG       = "kml";
+    const QString STYLE_TAG     = "style";
 }
 
 KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
   : KMLContainerParser( document ),
-    m_parsed( false )
+    m_parsed( false ),
+    m_currentParser( 0 ),
+    m_currentStyle( 0 )
 {
+}
+
+KMLDocumentParser::~KMLDocumentParser()
+{
+    delete m_currentParser;
+    delete m_currentStyle;
 }
 
 bool KMLDocumentParser::startDocument()
@@ -50,27 +61,38 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
 
     m_level++;
 
-    /*
-     * Document specific fields will parse will in a feature
-     * i.e. list of StyleSelector, Schema objects
-     */
-    bool result = KMLContainerParser::startElement( namespaceUri, localName, name, atts);
+    bool result = false;
 
-    QString lowerName = name.toLower();
+    if ( m_currentParser != 0 ) {
+        result = m_currentParser->startElement( namespaceUri, localName, name, atts );
+    }
+    else {
+        result = KMLContainerParser::startElement( namespaceUri, localName, name, atts);
+    }
 
     if ( ! result ) {
+        QString lowerName = name.toLower();
+
         if ( lowerName == KML_TAG ) {
             result = true;
 
-            // should remove this hack
+            // FIXME: remove this hack
             m_level--;
         }
         else if ( lowerName == DOCUMENT_TAG ) {
             result = true;
         }
-    }
+        else if ( lowerName == STYLE_TAG ) {
+            if ( m_currentParser != 0 ) {
+                delete m_currentParser;
+                delete m_currentStyle;
+            }
 
-//    qDebug("Start - %s. Result: %d", lowerName.toAscii().data(), result);
+            m_currentStyle = new KMLStyle();
+            m_currentParser = new KMLStyleParser( *m_currentStyle );
+            result = m_currentParser->startElement( namespaceUri, localName, name, atts );
+        }
+    }
 
     return true;
 }
@@ -83,7 +105,25 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
         return false;
     }
 
-    bool result = KMLContainerParser::endElement( namespaceUri, localName, qName );
+    bool result = false;
+
+    if ( m_currentParser != 0 ) {
+        result = m_currentParser->endElement( namespaceUri, localName, qName );
+
+        if ( result ) {
+            if ( m_currentParser->isParsed() ) {
+                delete m_currentParser;
+                m_currentParser = 0;
+
+                KMLDocument& document = (KMLDocument&) m_object;
+                document.addStyle( m_currentStyle );
+                m_currentStyle = 0;
+            }
+        }
+    }
+    else {
+        bool result = KMLContainerParser::endElement( namespaceUri, localName, qName );
+    }
 
     if ( ! result ) {
         QString lowerName = qName.toLower();
@@ -94,15 +134,13 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
             // should remove this hack
             m_level++;
         }
-        if ( lowerName == DOCUMENT_TAG ) {
+        else if ( lowerName == DOCUMENT_TAG ) {
             m_parsed = true;
             result = true;
         }
     }
 
     m_level--;
-
-//    qDebug("Stop - %s. Result: %d", qName.toAscii().data(), result);
 
     return true;
 }
@@ -113,10 +151,12 @@ bool KMLDocumentParser::characters( const QString& ch )
         return false;
     }
 
-    //Changed by Tim to suport building with -Werror -Wall
-    //since unused vars are errors with above flags
-    //bool result = KMLContainerParser::characters( ch );
-    KMLContainerParser::characters( ch ); 
+    if ( m_currentParser != 0 ) {
+        m_currentParser->characters( ch );
+    }
+    else {
+        KMLContainerParser::characters( ch );
+    }
 
     //why not return result?
     return true;

@@ -19,7 +19,7 @@ class KMLStyleSelector : public KMLObject
 {
   public:
     void setStyleId( QString value );
-    QString getStyleId() const;
+    QString styleId() const;
 
     /*
      * Serializable methods
