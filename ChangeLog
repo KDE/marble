@@ -1,3 +1,15 @@
+2007-08-23  Torsten Rahn  <rahn@kde.org>
+
+	- More cleanup in TextureMapper classes and
+	better code documentation. Now it should be
+	possible for other people to fully 
+	understand it.
+	* src/lib/AbstractScanlineTextureMapper.{cpp,h}
+	* src/lib/TileLoader.h
+	* src/lib/GlobeScanlineTextureMapper.cpp
+	* src/lib/FlatScanlineTextureMapper.cpp
+	* ChangeLog
+
 2007-08-23  Murad Tagirov  <tmurad@gmail.com>
 
     - Added new classes for basic kml styles support
@@ -16,6 +28,15 @@
 2007-08-23  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleWidget.h: Added some apidox
+
+2007-08-22  Torsten Rahn  <rahn@kde.org>
+
+	Cleaning up the TextureMapper classes a bit.
+	More to follow.
+
+	* src/lib/AbstractScanlineTextureMapper.cpp: Cleanup
+	* src/lib/GlobeScanlineTextureMapper.cpp: Cleanup
+	* src/lib/TileLoader.h: Introducing globalWidth()/Height()
 
 2007-08-22  Murad Tagirov  <tmurad@gmail.com>
 

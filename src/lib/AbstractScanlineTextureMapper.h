@@ -56,28 +56,35 @@ public:
 
     void tileLevelInit( int tileLevel );
 
+    // Coordinates on the tile
     int     m_posX;
     int     m_posY;
+
+    // maximum values for global texture coordinates
+    // ( with origin in upper left corner, measured in pixel) 
+    int     m_maxGlobalX;
+    int     m_maxGlobalY;
 
     int     m_imageHeight;
     int     m_imageWidth;
     int     m_imageRadius;
 
+    // Previous coordinates
     double  m_prevLat;
     double  m_prevLon;
 
-    int     m_fullRangeLon;
-    int     m_halfRangeLat;
-    double  m_halfRangeLon;
-    double  m_quatRangeLat;
+    // Coordinate transformations:
 
-    int     m_fullNormLon;
-    int     m_halfNormLat;
-    double  m_halfNormLon;
-    double  m_quatNormLat;
-
+    // Converts Radian to global texture coordinates 
+    // ( with origin in center, measured in pixel) 
     double  m_rad2PixelX;
     double  m_rad2PixelY;
+
+    // Converts global texture coordinates 
+    // ( with origin in center, measured in pixel) 
+    // to tile coordinates ( measured in pixel )
+    double  m_toTileCoordinatesLon;
+    double  m_toTileCoordinatesLat;
 
     bool m_interlaced;
 
@@ -86,10 +93,14 @@ public:
     TileLoader  *m_tileLoader;
     QRgb        *m_scanLine;
 
-    int          m_maxTileLevel;
 
     TextureTile *m_tile;
+
     int          m_tileLevel;
+    int          m_maxTileLevel;
+
+    // Position of the tile in global Texture Coordinates
+    // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
 };

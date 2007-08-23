@@ -54,14 +54,10 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
     m_tilePosX = 0;
     m_tilePosY = 0;
 
-    m_fullRangeLon = 0;
-    m_halfRangeLat = 0;
-    m_halfRangeLon = 0.0;
-    m_quatRangeLat = 0.0;
-    m_fullNormLon  = 0;
-    m_halfNormLat  = 0;
-    m_halfNormLon  = 0.0;
-    m_quatNormLat  = 0.0;
+    m_maxGlobalX  = 0;
+    m_maxGlobalY  = 0;
+    m_toTileCoordinatesLon  = 0.0;
+    m_toTileCoordinatesLat  = 0.0;
 
     m_rad2PixelX = 0.0;
     m_rad2PixelY = 0.0;
@@ -117,26 +113,24 @@ void AbstractScanlineTextureMapper::selectTileLevel(int radius)
 
 void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 {
-    int ResolutionX = (int)( 1728000000.0
-			     / (double)( TileLoader::levelToColumn( tileLevel ) )
-			     / (double)( m_tileLoader->tileWidth() ) );
-    int ResolutionY = (int)( 864000000.0
-			     / (double)( TileLoader::levelToRow( tileLevel ) )
-			     / (double)( m_tileLoader->tileHeight() ) );
+    // rad2PixelY might later on evolve into a method to allow 
+    // Mercator as a source texture format. That's why we have it
+    // in addition to rad2PixelX.
+    m_rad2PixelX = (double)(m_tileLoader->globalWidth( tileLevel )) / (2.0 * M_PI);
+    m_rad2PixelY = (double)(m_tileLoader->globalHeight( tileLevel )) / M_PI;
 
-    m_rad2PixelX = ( 864000000.0 / M_PI / (double)(ResolutionX) );
-    m_rad2PixelY = ( 864000000.0 / M_PI / (double)(ResolutionY) );
+    m_maxGlobalX = m_tileLoader->globalWidth( m_tileLevel )  - 1;
+    m_maxGlobalY = m_tileLoader->globalHeight( m_tileLevel ) - 1;
 
-
-    m_fullRangeLon = (int)   ( 1728000000.0 / (double)(ResolutionX) ) - 1;
-    m_halfRangeLon = (double)( 864000000.0 / (double)(ResolutionX) );
-    m_quatRangeLat = (double)( 432000000.0 / (double)(ResolutionY) );
-    m_halfRangeLat = (int)   ( 2.0 * m_quatRangeLat ) - 1;
-
-    m_fullNormLon = m_fullRangeLon - m_tilePosX;
-    m_halfNormLon = m_halfRangeLon - m_tilePosX;
-    m_halfNormLat = m_halfRangeLat - m_tilePosY;
-    m_quatNormLat = m_quatRangeLat - m_tilePosY;
+    // These variables move the origin of global texture coordinates from 
+    // the center to the upper left corner and subtract the tile position 
+    // in that coordinate system. In total this equals a coordinate 
+    // transformation to tile coordinates.
+  
+    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
+                             / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
+                             / 2 - m_tilePosY);
 }
 
 
@@ -154,11 +148,11 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
                                                QRgb* scanLine)
 {
     // Convert the lon and lat coordinates of the position on the scanline
-    // measured in radiant to the pixel position of the requested 
+    // measured in radian to the pixel position of the requested 
     // coordinate on the current tile.
  
-    m_posX = (int)( m_halfNormLon + lon * m_rad2PixelX );
-    m_posY = (int)( m_quatNormLat + lat * m_rad2PixelY );
+    m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelY );
+    m_posY = (int)( m_toTileCoordinatesLat + lat * m_rad2PixelY );
 
     // Most of the time while moving along the scanLine we'll stay on the 
     // same tile. However at the tile border we might "fall off". If that 
@@ -184,16 +178,16 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
 
 void AbstractScanlineTextureMapper::nextTile()
 {
-    // Necessary to prevent e.g. crash if lon = -pi
-    if ( m_posX > m_fullNormLon ) m_posX = m_fullNormLon;
-    if ( m_posY > m_halfNormLat ) m_posY = m_halfNormLat;
-
-    // The origin (0, 0) is in the upper left corner
-    // lon: 360 deg = 1728000000 pixel
-    // lat: 180 deg = 864000000 pixel
+    // Move from tile coordinates to global texture coordinates 
+    // ( with origin in upper left corner, measured in pixel) 
 
     int lon = m_posX + m_tilePosX;
+    if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
+    if ( lon < 0 ) lon += m_maxGlobalX;
+
     int lat = m_posY + m_tilePosY;
+    if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
+    if ( lat < 0 ) lat += m_maxGlobalY;
 
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
@@ -203,19 +197,19 @@ void AbstractScanlineTextureMapper::nextTile()
 
     m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
 
-    // Recalculate some convenience variables for the new tile:
-    // m_tilePosX/Y stores the position of the tiles in pixels
+    // Update position variables:
+    // m_tilePosX/Y stores the position of the tiles in 
+    // global texture coordinates 
+    // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
-
-    m_fullNormLon = m_fullRangeLon - m_tilePosX;
-    m_halfNormLon = m_halfRangeLon - m_tilePosX;
+    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
+                             / 2 - m_tilePosX);
     m_posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileLoader->tileHeight();
-
-    m_halfNormLat = m_halfRangeLat - m_tilePosY;
-    m_quatNormLat = m_quatRangeLat - m_tilePosY;
+    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
+                             / 2 - m_tilePosY);
     m_posY = lat - m_tilePosY;
 }
 

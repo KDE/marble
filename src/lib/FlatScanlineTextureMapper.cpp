@@ -41,10 +41,10 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage,
     m_tilePosX = 65535;
     m_tilePosY = 65535;
 
-    m_fullNormLon = m_fullRangeLon - m_tilePosX;
-    m_halfNormLon = m_halfRangeLon - m_tilePosX;
-    m_halfNormLat = m_halfRangeLat - m_tilePosY;
-    m_quatNormLat = m_quatRangeLat - m_tilePosY;
+    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
+                             / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
+                             / 2 - m_tilePosY);
 
     int yTop;
     int yBottom;

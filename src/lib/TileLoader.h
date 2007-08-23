@@ -65,6 +65,15 @@ class TileLoader : public QObject {
     int tileWidth()  const { return m_tileWidth; }
     int tileHeight() const { return m_tileHeight; }
 
+    int globalWidth( int level ) const 
+    {
+        return m_tileWidth * levelToColumn( level );
+    };
+    int globalHeight( int level ) const 
+    {
+        return m_tileHeight * levelToRow( level );
+    };
+
     static int levelToRow( int level );
     static int levelToColumn( int level );
     static int rowToLevel( int row );

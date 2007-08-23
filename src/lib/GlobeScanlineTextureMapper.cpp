@@ -90,11 +90,10 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-
-    m_fullNormLon = m_fullRangeLon - m_tilePosX;
-    m_halfNormLon = m_halfRangeLon - m_tilePosX;
-    m_halfNormLat = m_halfRangeLat - m_tilePosY;
-    m_quatNormLat = m_quatRangeLat - m_tilePosY;
+    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
+                             / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
+                             / 2 - m_tilePosY);
 
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -263,7 +262,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelX * 128.0 );
+        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelY * 128.0 );
         const int itStepLat = (int)( stepLat * m_nInverse * m_rad2PixelY * 128.0 );
 
         m_prevLon *= m_rad2PixelX;
@@ -273,8 +272,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
         // AbstractScanlineTextureMapper::pixelValue(...) here and 
         // calculate the performance critical issues via integers
 
-        int itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
-        int itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
+        int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+        int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
 
         if ( m_tile->depth() == 8 ) {
             for ( int j=1; j < m_n; ++j ) {
@@ -287,8 +286,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
                    || m_posY < 0 )
                 {
                     nextTile();
-                    itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
+                    itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
                     m_posX = ( itLon + itStepLon * j ) >> 7;
                     m_posY = ( itLat + itStepLat * j ) >> 7;
                 }
@@ -308,8 +307,8 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
                      || m_posY < 0 )
                 {
                     nextTile();
-                    itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
+                    itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
                     m_posX = ( itLon + itStepLon * j ) >> 7;
                     m_posY = ( itLat + itStepLat * j ) >> 7;
                 }
