@@ -17,8 +17,8 @@ namespace
     const QString STYLE_TAG     = "style";
 }
 
-KMLStyleParser::KMLStyleParser( KMLStyle& style ) :
-    KMLObjectParser( style )
+KMLStyleParser::KMLStyleParser( KMLStyle& style )
+  : KMLObjectParser( style )
 {
 }
 

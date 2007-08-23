@@ -1,5 +1,10 @@
 2007-08-23  Murad Tagirov  <tmurad@gmail.com>
 
+    Added new parsing classes
+    * src/lib/kml/KMLColorStyleParser.{h,cpp} : new class
+    * src/lib/kml/KMLLabelStyleParser.{h,cpp} : new class
+    * src/lib/kml/KMLIconStyleParser.{h,cpp}  : new class
+
     Added KMLStyleParse class to parse KMLStyle objects.
     Minor fixes in previously introduced styles
     related classes.

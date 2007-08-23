@@ -14,7 +14,7 @@
 
 #include "KMLColorStyle.h"
 
-class KMLLabelStyle : KMLColorStyle
+class KMLLabelStyle : public KMLColorStyle
 {
   public:
     KMLLabelStyle();

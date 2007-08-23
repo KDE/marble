@@ -88,6 +88,7 @@ set(marblewidget_SRCS
            GpxFileViewItem.cpp
            KMLFileViewItem.cpp
            kml/KMLColorStyle.cpp
+           kml/KMLColorStyleParser.cpp
            kml/KMLContainer.cpp
            kml/KMLContainerParser.cpp
            kml/KMLFeature.cpp
@@ -96,7 +97,9 @@ set(marblewidget_SRCS
            kml/KMLDocument.cpp
            kml/KMLDocumentParser.cpp
            kml/KMLIconStyle.cpp
+           kml/KMLIconStyleParser.cpp
            kml/KMLLabelStyle.cpp
+           kml/KMLLabelStyleParser.cpp
            kml/KMLObject.cpp
            kml/KMLObjectParser.cpp
            kml/KMLPlaceMark.cpp
