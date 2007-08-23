@@ -12,16 +12,24 @@
 #ifndef KMLDOCUMENT_H
 #define KMLDOCUMENT_H
 
+#include <QtCore/QList>
 #include "KMLFolder.h"
 
 class QIODevice;
+class KMLStyle;
 
 class KMLDocument : public KMLFolder
 {
- public:
+  public:
     KMLDocument();
+    ~KMLDocument();
 
     void load( QIODevice& source );
+
+    void addStyle( KMLStyle* style );
+
+  private:
+    QList < KMLStyle* > m_styleList;
 };
 
 #endif // KMLDOCUMENT_H

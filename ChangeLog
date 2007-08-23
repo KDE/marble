@@ -1,3 +1,18 @@
+2007-08-23  Murad Tagirov  <tmurad@gmail.com>
+
+    - Added new classes for basic kml styles support
+    * src/lib/kml/KMLStyle.c{h,cpp}:     new class
+    * src/lib/kml/KMLColorStyle.{h,cpp}: new class
+    * src/lib/kml/KMLLabelStyle.{h,cpp}: new class
+    * src/lib/kml/KMLStyleSelector.h:    new class
+    * src/lib/kml/KMLIconStyle.{h,cpp}:  new class
+    * src/lib/kml/KMLDocument.{h,cpp}
+    * src/lib/PlaceMarkManager.cpp
+    * src/lib/CMakeLists.txt
+
+    - KML styles related classes updated in a class diagram
+    * docs/projects/kml/KMLClasses.xmi
+
 2007-08-23  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleWidget.h: Added some apidox

@@ -16,9 +16,17 @@
 
 #include "KMLDocumentParser.h"
 #include "KMLPlaceMark.h"
+#include "KMLStyle.h"
 
 KMLDocument::KMLDocument()
 {
+}
+
+KMLDocument::~KMLDocument()
+{
+    foreach ( KMLStyle* style, m_styleList ) {
+        delete style;
+    }
 }
 
 void KMLDocument::load( QIODevice& source )
@@ -42,4 +50,9 @@ void KMLDocument::load( QIODevice& source )
     if ( ! result ) {
         qDebug("KMLDocument::load( QIODevice& ). Error while parsing xml source");
     }
+}
+
+void KMLDocument::addStyle( KMLStyle* style )
+{
+    m_styleList.append( style );
 }
