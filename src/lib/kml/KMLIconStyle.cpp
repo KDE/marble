@@ -15,26 +15,26 @@ KMLIconStyle::KMLIconStyle()
 {
 }
 
-void KMLIconStyle::setIcon( QIcon value )
+void KMLIconStyle::setIcon( QPixmap value )
 {
-    m_icon = value;
+    m_pixmap = value;
 }
 
-QIcon KMLIconStyle::icon() const
+QPixmap KMLIconStyle::icon() const
 {
-    return m_icon;
+    return m_pixmap;
 }
 
 void KMLIconStyle::pack( QDataStream& stream ) const
 {
     KMLColorStyle::pack( stream );
 
-    stream << m_icon;
+    stream << m_pixmap;
 }
 
 void KMLIconStyle::unpack( QDataStream& stream )
 {
     KMLColorStyle::unpack( stream );
 
-    stream >> m_icon;
+    stream >> m_pixmap;
 }

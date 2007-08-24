@@ -1,11 +1,17 @@
 2007-08-24  Murad Tagirov  <tmurad@gmail.com>
 
+    - Parse IconStyle related tags.
+      TODO: load pixmap specified in <href> tag
+    * src/lib/kml/KMLIconStyle.{h,cpp}
+    * src/lib/kml/KMLIconStyleParser.{h,cpp}
+    * src/lib/kml/KMLColorStyleParser.cpp
+
     - Implemnted parsing of <IconStyle> tag
-    src/lib/kml/KMLStyle.{h,cpp}
-    src/lib/kml/KMLStyleParser.{h,cpp}
+    * src/lib/kml/KMLStyle.{h,cpp}
+    * src/lib/kml/KMLStyleParser.{h,cpp}
 
     - Display time spent to draw opened kml documents
-    src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel.cpp
 
 2007-08-24  Carlos Licea  <carlos_licea@hotmail.com>
     *TextureColorizer: removed the differences of Spherical

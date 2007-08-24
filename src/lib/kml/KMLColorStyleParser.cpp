@@ -27,7 +27,7 @@ bool KMLColorStyleParser::startElement( const QString& namespaceURI,
     }
 
     //TODO
-    return true;
+    return false;
 }
 
 bool KMLColorStyleParser::endElement( const QString& namespaceURI,
@@ -39,7 +39,7 @@ bool KMLColorStyleParser::endElement( const QString& namespaceURI,
     }
 
     //TODO
-    return true;
+    return false;
 }
 
 bool KMLColorStyleParser::characters( const QString& ch )
@@ -49,5 +49,5 @@ bool KMLColorStyleParser::characters( const QString& ch )
     }
 
     //TODO
-    return true;
+    return false;
 }

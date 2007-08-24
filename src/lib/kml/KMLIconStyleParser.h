@@ -31,6 +31,16 @@ class KMLIconStyleParser : public KMLColorStyleParser
                              const QString& qName );
 
     virtual bool characters( const QString& ch );
+
+  private:
+    enum
+    {
+        IDLE,
+        WAIT_ICON,
+        WAIT_HREF
+    };
+
+    int m_phase;
 };
 
 #endif

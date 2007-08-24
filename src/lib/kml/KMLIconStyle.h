@@ -12,7 +12,7 @@
 #ifndef KMLICONSTYLE_H
 #define KMLICONSTYLE_H
 
-#include <QtGui/QIcon>
+#include <QtGui/QPixmap>
 #include "KMLColorStyle.h"
 
 class KMLIconStyle : public KMLColorStyle
@@ -20,8 +20,8 @@ class KMLIconStyle : public KMLColorStyle
   public:
     KMLIconStyle();
 
-    void setIcon( QIcon value );
-    QIcon icon() const;
+    void setIcon( QPixmap value );
+    QPixmap icon() const;
 
     /*
      * Serializable methods
@@ -30,7 +30,7 @@ class KMLIconStyle : public KMLColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
-    QIcon m_icon;
+    QPixmap m_pixmap;
 };
 
 #endif
