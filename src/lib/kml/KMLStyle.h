@@ -21,6 +21,8 @@ class KMLStyle : public KMLStyleSelector
   public:
     KMLStyle();
 
+    KMLIconStyle& getIconStyle();
+
     /*
      * Serializable methods
      */

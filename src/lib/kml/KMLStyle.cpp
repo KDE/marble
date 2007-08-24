@@ -15,6 +15,11 @@ KMLStyle::KMLStyle()
 {
 }
 
+KMLIconStyle& KMLStyle::getIconStyle()
+{
+    return m_iconStyle;
+}
+
 void KMLStyle::pack( QDataStream& stream ) const
 {
     KMLStyleSelector::pack( stream );

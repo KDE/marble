@@ -1,5 +1,14 @@
+2007-08-24  Murad Tagirov  <tmurad@gmail.com>
+
+    - Implemnted parsing of <IconStyle> tag
+    src/lib/kml/KMLStyle.{h,cpp}
+    src/lib/kml/KMLStyleParser.{h,cpp}
+
+    - Display time spent to draw opened kml documents
+    src/lib/MarbleModel.cpp
+
 2007-08-24  Carlos Licea  <carlos_licea@hotmail.com>
-    *TextureColorizer: removed the differences of Spherical 
+    *TextureColorizer: removed the differences of Spherical
      and Rectangular methods, now there's only 1 class for
      both.
 

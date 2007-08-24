@@ -32,6 +32,9 @@ class KMLStyleParser : public KMLObjectParser
                              const QString& qName );
 
     virtual bool characters( const QString& ch );
+
+  private:
+    KMLObjectParser* m_currentParser;
 };
 
 #endif

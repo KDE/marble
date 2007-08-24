@@ -379,6 +379,9 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
      * So user could enable/disable each folder
      */
     if ( viewParams->m_showPlaceMarks ) {
+        QTime t;
+        t.start ();
+
         const QList < KMLFolder* >& folderList = d->m_placemarkmanager->getFolderList();
 
         bool firstTime = true;
@@ -407,6 +410,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                 firstTime = false;
             }
         }
+
+        qDebug("Plaint kml folder list. Elapsed: %d", t.elapsed());
     }
 #endif
 
