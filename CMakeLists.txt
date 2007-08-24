@@ -19,9 +19,11 @@ set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
 if (QTONLY)
     set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
     set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
+    set(ICON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/share/icons CACHE STRING "The icon install dir (default prefix/share/icons/)" )
 endif (QTONLY)
 ####################################################
-# Detect default for the user configurable MARBLE_DATA_PATH option
+# Detect default for the user configurable 
+# MARBLE_DATA_PATH and MARBLE_DATA_INSTALL_PATH option
 
 if(WIN32)
   set(data_dir data)
@@ -61,6 +63,10 @@ endif(WIN32)
 if (NOT MARBLE_DATA_PATH)
   set (MARBLE_DATA_PATH ${data_dir})
 endif (NOT MARBLE_DATA_PATH)
+
+if (NOT MARBLE_DATA_INSTALL_PATH)
+  set (MARBLE_DATA_INSTALL_PATH ${MARBLE_DATA_PATH})
+endif (NOT MARBLE_DATA_INSTALL_PATH)
 
 if(WIN32)
   set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
@@ -180,7 +186,7 @@ IF (ENABLE_TESTS)
 ENDIF (ENABLE_TESTS)
 ####################################################
 # Install extra files
-install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_PATH})
+install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 ############################################################
 # Uninstall stuff

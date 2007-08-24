@@ -1,3 +1,16 @@
+2007-08-24  Torsten Rahn  <rahn@kde.org>
+
+	- add a MARBLE_DATA_INSTALL_PATH (this fixes the situation where packages get built in a directory which doesn't equal the final destination directory.
+	- add icons for the Qt version of the application
+
+	* CMakeLists.txt
+	* data/CMakeLists.txt
+	* data/icons/hi32-app-marble.png
+	* data/icons/hi16-app-marble.png
+	* data/icons/hi64-app-marble.png
+	* data/icons/hi128-app-marble.png
+	* data/icons/hi48-app-marble.png
+
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
 	* CMakeLists.txt:

@@ -3,7 +3,7 @@ credits_authors.html
 credits_data.html
 legend.html
 legend.css
-DESTINATION ${MARBLE_DATA_PATH})
+DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 install (FILES
 bitmaps/checkbox_checked.png
@@ -60,14 +60,14 @@ bitmaps/bathymetry_-6500.png
 bitmaps/bathymetry_-11000.png
 bitmaps/gpsHere.png
 bitmaps/waypoint.png
-DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
 
 install (FILES 
 svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
 svg/marble-logo-72dpi.png
-DESTINATION ${MARBLE_DATA_PATH}/svg)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
 install (FILES 
 flags/flag_ad.svg
@@ -313,30 +313,30 @@ flags/flag_yt.svg
 flags/flag_za.svg
 flags/flag_zm.svg
 flags/flag_zw.svg
-DESTINATION ${MARBLE_DATA_PATH}/flags)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/flags)
 
 install (FILES
 maps/earth/citylights/citylights.jpg
 maps/earth/citylights/citylights.dgml
 maps/earth/citylights/citylights-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights)
 
 install (FILES
 maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/srtm)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg
 maps/earth/bluemarble/bluemarble.dgml
 maps/earth/bluemarble/bluemarble-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/bluemarble)
 
 install (FILES
 maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/plain)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
 
 install (FILES
 mwdbii/PDIFFBORDER.PNT
@@ -353,11 +353,18 @@ mwdbii/PAUST.PNT
 mwdbii/PBORDER.PNT
 mwdbii/PMEXICO.PNT
 mwdbii/DATELINE.PNT
-DESTINATION ${MARBLE_DATA_PATH}/mwdbii)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 install (FILES
 placemarks/baseplacemarks.cache
 placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
-DESTINATION ${MARBLE_DATA_PATH}/placemarks)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/placemarks)
 
+if(QTONLY AND NOT APPLE AND NOT WIN32)
+	install (FILES icons/hi128-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/apps/ RENAME marble.png)
+	install (FILES icons/hi64-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/64x64/apps/ RENAME marble.png)
+	install (FILES icons/hi48-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/apps/ RENAME marble.png)
+	install (FILES icons/hi32-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/apps/ RENAME marble.png)
+	install (FILES icons/hi16-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps/ RENAME marble.png)
+endif(QTONLY AND NOT APPLE AND NOT WIN32 )
