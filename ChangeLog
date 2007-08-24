@@ -1,3 +1,8 @@
+2007-08-24  Carlos Licea  <carlos_licea@hotmail.com>
+    *TextureColorizer: removed the differences of Spherical 
+     and Rectangular methods, now there's only 1 class for
+     both.
+
 2007-08-23  Murad Tagirov  <tmurad@gmail.com>
 
     Added new parsing classes

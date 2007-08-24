@@ -50,8 +50,6 @@ class TextureColorizer
     virtual ~TextureColorizer(){}
 
     void colorize(ViewParams *viewParams);
-    void sphericalColorize(ViewParams *viewParams);
-    void rectangularColorize(ViewParams *viewParams);
 
  private:
     static const uint  texturepalette[][512];
