@@ -369,7 +369,8 @@ void MarbleWidget::zoomView(int zoom)
     int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
     if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         && newRadius != radius() )
+         && newRadius != radius() 
+         || d->m_viewParams.m_projection == Equirectangular )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
         d->m_viewParams.m_canvasImage->fill( Qt::transparent );
