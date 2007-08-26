@@ -26,15 +26,7 @@ Code Quality:
    - SearchListView  -> MarbleSearchListView                            done
    - LegendBrowser   -> MarbleLegendBrowser                             done
    - PlaceMarkModel (Why is this class public at all?)                  --
- * d-pointerify the rest of the public classes                          INGE
-   - MarbleDirs                                                         done
-   - (MarbleThemeSelectView): doesn't have any private members          done
-   - MarbleNavigator                                                    done
-   - MarbleLegendBrowser                                                done
-   - (MarbleSearchListView)   doesn't have any private members          done
-   - MarbleAboutDialog                                                  done
-   - PlaceMarkModel                                                     done
-   - ViewParams                                                         n/a
+ * d-pointerify the rest of the public classes                          DONE
 
 Widget:
  * Separate the view from the globe (model)                             INGE
