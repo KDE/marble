@@ -18,7 +18,7 @@
 class KMLColorStyle : public KMLObject
 {
   public:
-    void setColor( QColor value );
+    void setColor( const QColor &value );
     QColor color() const;
 
     /*

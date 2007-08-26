@@ -15,7 +15,7 @@ KMLIconStyle::KMLIconStyle()
 {
 }
 
-void KMLIconStyle::setIcon( QPixmap value )
+void KMLIconStyle::setIcon( const QPixmap &value )
 {
     m_pixmap = value;
 }

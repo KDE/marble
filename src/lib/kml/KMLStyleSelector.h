@@ -18,7 +18,7 @@
 class KMLStyleSelector : public KMLObject
 {
   public:
-    void setStyleId( QString value );
+    void setStyleId( const QString &value );
     QString styleId() const;
 
     /*

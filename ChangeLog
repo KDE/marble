@@ -1,3 +1,10 @@
+2007-08-26  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy issue 18: inappropriate pass-by-value function args
+	* src/lib/kml/KMLColorStyle.cpp (setColor): Take const QColor&
+	* src/lib/kml/KMLStyleSelector.cpp (setStyleId): Take const QString&
+	* src/lib/kml/KMLIconStyle.cpp (setIcon): Take const QPixmap&
+
 2007-08-25  Carlos Licea  <carlos_licea@hotmail.com>
     *MarbleWidget: solved the trace bug. As I expected the 
      problem was an exception for the Spherical projection

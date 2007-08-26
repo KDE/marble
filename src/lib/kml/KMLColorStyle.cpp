@@ -16,7 +16,7 @@ KMLColorStyle::KMLColorStyle() :
 {
 }
 
-void KMLColorStyle::setColor( QColor value )
+void KMLColorStyle::setColor( const QColor &value )
 {
     m_color = value;
 }

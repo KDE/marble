@@ -16,7 +16,7 @@ KMLStyleSelector::KMLStyleSelector()
 {
 }
 
-void KMLStyleSelector::setStyleId( QString value )
+void KMLStyleSelector::setStyleId( const QString &value )
 {
     m_styleId = value;
 }

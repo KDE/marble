@@ -20,7 +20,7 @@ class KMLIconStyle : public KMLColorStyle
   public:
     KMLIconStyle();
 
-    void setIcon( QPixmap value );
+    void setIcon( const QPixmap &value );
     QPixmap icon() const;
 
     /*
