@@ -62,9 +62,6 @@ bool TileCreator::createTiles()
 
     qDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
-    qDebug() << "TileCreator::createTiles() image dimensions " 
-	     << imageWidth << " x " << imageHeight;
-
     if ( imageWidth > 21600 || imageHeight > 10800 ){
         qDebug("Install map too large!");
         return false;
@@ -80,6 +77,12 @@ bool TileCreator::createTiles()
 
     unsigned int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
     if ( stdImageWidth == 0 ) stdImageWidth = 2 * tileSize;
+
+    if ( stdImageWidth != imageWidth )
+    {
+        qDebug() << 
+        QString( "TileCreator::createTiles() The width of the final image will measure  %1 pixels").arg(stdImageWidth);
+    }
 
     int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
     if ( maxTileLevel < 0 )
@@ -129,13 +132,14 @@ bool TileCreator::createTiles()
             ( QDir::root() ).mkpath( dirName );
     }
 
+    QImage  sourceImage( m_sourceDir );
+
     for ( unsigned int n = 0; n < nmax; ++n ) {
         QApplication::processEvents(); 
 
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
                        imageWidth,(int)( (double)( imageHeight ) / (double)( nmax ) ) );
 
-        QImage  sourceImage( m_sourceDir );
 
         QImage  row = sourceImage.copy( sourceRowRect );
 

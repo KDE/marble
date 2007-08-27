@@ -1,3 +1,15 @@
+2007-08-27  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/HttpFetchFile.cpp:
+	  - Fixing tile loading bug introduced by Danimo's 
+	    last Windows fix
+	* src/lib/GlobeScanlineTextureMapper.cpp:
+	  - Fixing crash due to different tile depths 
+	    reported by Frederik Schwarzer.
+	* src/lib/TileCreator.cpp:
+	  - Faster tile creation
+	  - Making it easier to track bugs from cli output
+
 2007-08-24  Torsten Rahn  <rahn@kde.org>
 
 	- add a MARBLE_DATA_INSTALL_PATH (this fixes the situation where packages get built in a directory which doesn't equal the final destination directory.

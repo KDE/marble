@@ -276,47 +276,28 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
         int itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
         int itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
 
-        if ( m_tile->depth() == 8 ) {
-            for ( int j=1; j < m_n; ++j ) {
+        for ( int j=1; j < m_n; ++j ) {
+            m_posX = ( itLon + itStepLon * j ) >> 7;
+            m_posY = ( itLat + itStepLat * j ) >> 7;
+
+            if (  m_posX >= m_tileLoader->tileWidth() 
+               || m_posX < 0
+               || m_posY >= m_tileLoader->tileHeight()
+               || m_posY < 0 )
+            {
+                nextTile();
+                itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
+                itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
                 m_posX = ( itLon + itStepLon * j ) >> 7;
                 m_posY = ( itLat + itStepLat * j ) >> 7;
+            }
 
-                if (  m_posX >= m_tileLoader->tileWidth() 
-                   || m_posX < 0
-                   || m_posY >= m_tileLoader->tileHeight()
-                   || m_posY < 0 )
-                {
-                    nextTile();
-                    itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
-                    m_posX = ( itLon + itStepLon * j ) >> 7;
-                    m_posY = ( itLat + itStepLat * j ) >> 7;
-                }
-
+            if ( m_tile->depth() == 8 )
                 *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
-                ++scanLine;
-            }
-        }
-        else {
-            for ( int j=1; j < m_n; ++j ) {
-                m_posX = ( itLon + itStepLon * j ) >> 7;
-                m_posY = ( itLat + itStepLat * j ) >> 7;
-
-                if ( m_posX >= m_tileLoader->tileWidth() 
-                     || m_posX < 0
-                     || m_posY >= m_tileLoader->tileHeight()
-                     || m_posY < 0 )
-                {
-                    nextTile();
-                    itLon = (int)( ( m_prevLon + m_halfNormLon ) * 128.0 );
-                    itLat = (int)( ( m_prevLat + m_quatNormLat ) * 128.0 );
-                    m_posX = ( itLon + itStepLon * j ) >> 7;
-                    m_posY = ( itLat + itStepLat * j ) >> 7;
-                }
-
+            else
                 *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
-                ++scanLine;
-            }
+
+            ++scanLine;
         }
     }
 
