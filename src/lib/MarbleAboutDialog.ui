@@ -58,7 +58,7 @@ p, li { white-space: pre-wrap; }
    <item>
     <widget class="QLabel" name="m_pMarbleVersionLabel" >
      <property name="text" >
-      <string>Version 0.4.0</string>
+      <string>Version Unknown</string>
      </property>
     </widget>
    </item>

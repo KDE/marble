@@ -30,7 +30,7 @@ int main (int argc, char *argv[])
 {
     KAboutData aboutData( "marble", 0, 
                           ki18n( "Marble Desktop Globe" ),
-                          "0.4.0", 
+                          "pre-0.5-SVN", 
                           ki18n( "A World Atlas." ),
                           KAboutData::License_LGPL, ki18n( "(c) 2007" ),
                           KLocalizedString(),
