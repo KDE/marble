@@ -131,7 +131,7 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
     
     QDir localFileDir = info.dir();
     QString localFileDirPath = localFileDir.absolutePath();
-    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFileDirPath;
+//    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFileDirPath;
 
     if ( !QDir( localFileDirPath ).exists() )
         ( QDir::root() ).mkpath( localFileDirPath );
