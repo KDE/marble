@@ -516,6 +516,20 @@ void MarbleWidget::setProjection( int projectionIndex )
 
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection = projection;
+
+    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
+
+    if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
+         || d->m_viewParams.m_projection == Equirectangular )
+    {
+        setAttribute(Qt::WA_NoSystemBackground, false);
+        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+    }
+    else {
+        setAttribute(Qt::WA_NoSystemBackground, true);
+    }
+
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
     setNeedsUpdate();
