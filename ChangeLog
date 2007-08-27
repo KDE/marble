@@ -1,4 +1,12 @@
 2007-08-27  Torsten Rahn  <rahn@kde.org>
+	* src/lib/MarbleWidget.{h,cpp}:
+	* src/lib/MarbleControlBox.{h,cpp}:
+	If FLATPROJ_GSOC is defined then enable 
+	switching between projections ...
+
+	Now I need to fix the "jumping projection" bug ...
+
+2007-08-27  Torsten Rahn  <rahn@kde.org>
 	* src/lib/HttpFetchFile.cpp:
 	  - Fixing tile loading bug introduced by Danimo's 
 	    last Windows fix

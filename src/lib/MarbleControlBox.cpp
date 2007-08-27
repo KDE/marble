@@ -37,6 +37,7 @@
 #include <MapTheme.h>
 #include <FileViewModel.h>
 
+// #define FLATPROJ_GSOC
 
 class MarbleControlBoxPrivate
 {
@@ -138,6 +139,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
+    connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
+             this,                              SIGNAL( projectionSelected( int ) ) );
+
+#ifdef FLATPROJ_GSOC
+    d->uiWidget.projectionComboBox->setEnabled( true );
+#endif
 }
 
 void MarbleControlBox::setupGpsOption()
@@ -216,6 +223,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL(moveRight()), d->m_widget, SLOT(moveRight()) );
     connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
     connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
+
+    connect( this, SIGNAL( projectionSelected( int ) ),  d->m_widget, SLOT( setProjection( int ) ) );
 
     connect( d->m_widget, SIGNAL(themeChanged( QString )), this, SLOT( selectTheme( QString )) );
     selectTheme( d->m_widget->mapTheme() );

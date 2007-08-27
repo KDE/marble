@@ -472,7 +472,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void  setProjection( const Projection projection );
+    void  setProjection( int );
 
     /**
      * @brief  get the home point

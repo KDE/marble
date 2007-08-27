@@ -497,8 +497,23 @@ Projection MarbleWidget::projection() const
     return d->m_viewParams.m_projection;
 }
 
-void MarbleWidget::setProjection( const Projection projection )
+void MarbleWidget::setProjection( int projectionIndex )
 {
+    Projection projection;
+
+    switch ( projectionIndex )
+    {
+        case 0:
+            projection = Spherical;
+            break;
+        case 1:
+            projection = Equirectangular;
+            break; 
+        default: 
+            return;
+            break;
+    }
+
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection = projection;
     // Update texture map during the repaint that follows:

@@ -93,6 +93,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void centerOn(const QModelIndex&);
 
     void selectMapTheme( const QString& );
+    void projectionSelected( int );
     
     void gpsInputDisabled( bool );
     void gpsPositionChanged( double lat, double lon);
