@@ -127,14 +127,14 @@ void HttpFetchFile::httpRequestFinished(int requestId, bool error)
 
     QString localFileUrlString = job->targetDirString + job->relativeUrlString;
 
-    QDir localFileDir(localFileUrlString);
-    localFileDir.cdUp();
-    localFileDir.cdUp();
-    QString localFilePath = localFileDir.absolutePath();
-//    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFilePath;
+    QFileInfo info( localFileUrlString );
+    
+    QDir localFileDir = info.dir();
+    QString localFileDirPath = localFileDir.absolutePath();
+    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFileDirPath;
 
-    if ( !QDir( localFilePath ).exists() )
-        ( QDir::root() ).mkpath( localFilePath );
+    if ( !QDir( localFileDirPath ).exists() )
+        ( QDir::root() ).mkpath( localFileDirPath );
 
     jobTargetFile->rename( localFileUrlString );
 
