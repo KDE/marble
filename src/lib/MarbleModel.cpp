@@ -227,7 +227,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
                                                 + d->m_maptheme->tilePrefix(), this );
                     break;
             }
-        else if ( currentProjection != d->m_projection ) {
+        else {//if ( currentProjection != d->m_projection ) {
             delete d->m_texmapper;
             switch( currentProjection ) {
                 case Spherical:
@@ -240,9 +240,9 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
                     break;
             }
         }
-        else
-            d->m_texmapper->setMapTheme( "maps/earth/"
-                                         + d->m_maptheme->tilePrefix() );
+//         else
+//             d->m_texmapper->setMapTheme( "maps/earth/"
+//                                          + d->m_maptheme->tilePrefix() );
         d->m_projection = currentProjection;
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
