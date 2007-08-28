@@ -1,3 +1,12 @@
+2007-08-28  Torsten Rahn  <rahn@kde.org>
+	- Applied build-fixes by Stefan Teleman for OpenSolaris.
+	- Deleted Debian directory per request of the debian packager.
+	* src/lib/MarbleWidget.cpp
+	* src/lib/gps/TrackSegment.cpp
+	* src/lib/TileLoader.cpp
+	* src/lib/CMakeLists.txt
+	* src/CMakeLists.txt
+
 2007-08-27  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/HttpFetchFile.cpp:

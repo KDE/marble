@@ -239,7 +239,7 @@ QAbstractListModel *MarbleWidget::placeMarkModel()
 
 double MarbleWidget::moveStep()
 {
-    if ( radius() < sqrt( width() * width() + height() * height() ) )
+    if ( radius() < sqrt( static_cast<double>( width() * width() + height() * height() ) ) )
 	return 180.0 * 0.1;
     else
 	return 180.0 * atan( (double)width() 
@@ -658,8 +658,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     bool noerr = false;
     switch( d->m_viewParams.m_projection ) {
     case Spherical:
-        if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-                                + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
+        if ( radius() > sqrt( static_cast<double>( ( x - imageHalfWidth ) * ( x - imageHalfWidth ) 
+                                + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) ) )
         {
             double qx = inverseRadius * (double)( x - imageHalfWidth );
             double qy = inverseRadius * (double)( y - imageHalfHeight );
@@ -710,8 +710,8 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
     const double  inverseRadius = 1.0 / (double)(radius());
 
-    if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth ) 
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) ) 
+    if ( radius() > sqrt( static_cast<double>( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
+        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) ) )
     {
         double qx = inverseRadius * (double)( x - imageHalfWidth );
         double qy = inverseRadius * (double)( y - imageHalfHeight );
@@ -783,7 +783,7 @@ void MarbleWidget::setActiveRegion()
 
     switch( d->m_viewParams.m_projection ) {
         case Spherical:
-            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
+            if ( zoom < sqrt( static_cast<double>( width() * width() + height() * height() ) ) / 2 ) {
 	       d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom, 
                                        2 * zoom, 2 * zoom, QRegion::Ellipse );
             }

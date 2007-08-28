@@ -194,7 +194,7 @@ int TileLoader::rowToLevel( int row )
         .arg( row );
         return -1;
     }
-    return (int)( log( row ) / log( 2 ) );
+    return static_cast<int>( ( log( double( row ) ) / log( double( 2.0 ) ) ) );
 }
 
 int TileLoader::columnToLevel( int column )
@@ -206,7 +206,7 @@ int TileLoader::columnToLevel( int column )
         .arg( column );
         return -1;
     }
-    return (int)( log( column / 2 ) / log( 2 ) );
+    return static_cast<int>( ( log( static_cast<double>( column / 2 ) ) / log( double( 2.0 ) ) ) );
 }
 
 int TileLoader::maxCompleteTileLevel( const QString& theme )
