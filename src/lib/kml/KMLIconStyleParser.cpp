@@ -10,7 +10,11 @@
 
 
 #include "KMLIconStyleParser.h"
+
+#include <QtCore/QUrl>
+#include <QtGui/QPixmap>
 #include "KMLIconStyle.h"
+#include "lib/MarbleDirs.h"
 
 namespace
 {
@@ -111,6 +115,7 @@ bool KMLIconStyleParser::characters( const QString& ch )
                 /*
                  * TODO
                  */
+                loadIcon( ch );
                 result = true;
                 break;
             default:
@@ -119,4 +124,23 @@ bool KMLIconStyleParser::characters( const QString& ch )
     }
 
     return result;
+}
+
+void KMLIconStyleParser::loadIcon( const QString& hrefValue )
+{
+    QUrl url( hrefValue );
+
+    /*
+     * Iterate over supported schema values (e.g. file, http, etc).
+     */
+    if ( url.scheme() == "file" ) {
+        QString path = MarbleDirs::path( url.authority() + url.path() );
+
+        if ( QFile::exists( path ) ) {
+            QPixmap pixmap( path );
+
+            KMLIconStyle& style = (KMLIconStyle&) m_object;
+            style.setIcon (pixmap);
+        }
+    }
 }

@@ -1,17 +1,24 @@
+2007-08-29  Murad Tagirov  <tmurad@gmail.com>
+
+    Implemented parsing of icons. Currently support only
+    "file://" url scheme. Use MarbleDirs to locate icon.
+    * src/lib/kml/KMLIconStyleParser.{h,cpp}
+    * docs/projects/kml/KMLClasses.xmi
+
 2007-08-27  Torsten Rahn  <rahn@kde.org>
 	* src/lib/MarbleWidget.{h,cpp}:
 	* src/lib/MarbleControlBox.{h,cpp}:
-	If FLATPROJ_GSOC is defined then enable 
+	If FLATPROJ_GSOC is defined then enable
 	switching between projections ...
 
 	Now I need to fix the "jumping projection" bug ...
 
 2007-08-27  Torsten Rahn  <rahn@kde.org>
 	* src/lib/HttpFetchFile.cpp:
-	  - Fixing tile loading bug introduced by Danimo's 
+	  - Fixing tile loading bug introduced by Danimo's
 	    last Windows fix
 	* src/lib/GlobeScanlineTextureMapper.cpp:
-	  - Fixing crash due to different tile depths 
+	  - Fixing crash due to different tile depths
 	    reported by Frederik Schwarzer.
 	* src/lib/TileCreator.cpp:
 	  - Faster tile creation
@@ -25,7 +32,7 @@
 	* src/lib/kml/KMLIconStyle.cpp (setIcon): Take const QPixmap&
 
 2007-08-25  Carlos Licea  <carlos_licea@hotmail.com>
-    *MarbleWidget: solved the trace bug. As I expected the 
+    *MarbleWidget: solved the trace bug. As I expected the
      problem was an exception for the Spherical projection
      tha wasn't needed in the flat projection.
 

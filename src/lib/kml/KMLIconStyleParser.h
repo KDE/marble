@@ -14,6 +14,7 @@
 
 #include "KMLColorStyleParser.h"
 
+class QString;
 class KMLIconStyle;
 
 class KMLIconStyleParser : public KMLColorStyleParser
@@ -31,6 +32,9 @@ class KMLIconStyleParser : public KMLColorStyleParser
                              const QString& qName );
 
     virtual bool characters( const QString& ch );
+
+  private:
+    void loadIcon( const QString& hrefValue );
 
   private:
     enum
