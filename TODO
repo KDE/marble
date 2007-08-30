@@ -129,7 +129,8 @@ Before KDE 4.1
 ----------------------------------------------------------------
 
 Widget:
- * Support to display Timezones
+ * Support to display Timezones, Data available e.g. at:
+	http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
 Data:
  * Evaluate the implementation of tile specifications like 
