@@ -1,8 +1,0 @@
-?package(marble):needs="X11" \
-  section="Apps/Education" \
-  hints="KDE" \
-  title="Marble" \
-  longtitle="Free 3D Globe" \
-  command="/usr/bin/marble" \
-  icon="/usr/share/pixmaps/globe.xpm"
-

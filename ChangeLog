@@ -1,3 +1,43 @@
+2007-08-30  Torsten Rahn  <rahn@kde.org>
+	Larger commit of issues that came up while 
+	waiting for KDE4 Beta2:
+
+	* src/lib/gps/TrackSegment.cpp:
+	* src/lib/MarbleModel.cpp:
+	- OpenSolaris fixes by Stefan Telemann
+
+	* src/QtMainWindow.cpp:
+	* src/lib/global.h:
+	
+	* src/lib/MarbleWidgetPopupMenu.h:
+	* src/lib/MarbleWidgetPopupMenu.cpp:
+	- Disable "Remove all Measure points" 
+	  menu item if there hasn't been any 
+	  measure point added yet.
+
+	* src/lib/MarbleControlBox.cpp:
+	- Enable flat projection
+
+	* src/lib/CMakeLists.txt:
+	* src/CMakeLists.txt:
+	- Removing obsolete and broken ui file install as
+	reported by Ferdinand Gassauer. 
+
+	* marble.nsi:
+	- Fix by Christian Ehrlicher for Windows Build.
+
+	* src/lib/XmlHandler.cpp:
+	* data/bitmaps/volcano_1.png:
+	* data/bitmaps/mountain_1.png:
+	* data/CMakeLists.txt:
+	* src/lib/PlaceMarkPainter.cpp:
+	* src/lib/PlaceMark.cpp:
+	- Fixes for known issue "KML files don't display
+	at low zoom"
+
+	* debian:
+	- Remove Debian directory on request of the debian packager
+
 2007-08-29  Murad Tagirov  <tmurad@gmail.com>
 
     Implemented parsing of icons. Currently support only

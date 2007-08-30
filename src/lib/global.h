@@ -16,7 +16,6 @@
 
 #include <math.h>
 
-
 // This enum is used to choose projection shown in the view.
 
 enum Projection { 

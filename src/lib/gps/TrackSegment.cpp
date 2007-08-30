@@ -17,7 +17,6 @@
 #include <QtCore/QPoint>
 #include <QtGui/QBrush>
 #include <QtGui/QColor>
-#include <Qt>
 
 #include <cmath>
 #include <QDebug>

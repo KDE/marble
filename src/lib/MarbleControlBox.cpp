@@ -37,7 +37,7 @@
 #include <MapTheme.h>
 #include <FileViewModel.h>
 
-// #define FLATPROJ_GSOC
+#define FLATPROJ_GSOC
 
 class MarbleControlBoxPrivate
 {

@@ -10,14 +10,14 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 if (QTONLY)
-  set(GENERIC_LIB_VERSION "0.4.0")
+  set(GENERIC_LIB_VERSION "0.5.0")
   set(GENERIC_LIB_SOVERSION "5")
 endif (QTONLY)
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} -O2)
+    add_definitions (${QT_DEFINITIONS} -O3)
   endif(NOT WIN32)
 
   include_directories(
@@ -25,7 +25,7 @@ if (QTONLY)
   )
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2)
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O3)
   endif(NOT WIN32)
 
   include_directories(
@@ -137,7 +137,7 @@ set (marblewidget_UI
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
 )
-MESSAGE( STATUS "${marble_UI}" )
+MESSAGE( STATUS "${marblewidget_UI}" )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 

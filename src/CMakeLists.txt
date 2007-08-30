@@ -54,7 +54,7 @@ if (QTONLY)
   # ce: don't know why this is needed here - on win32 
   # 'O2' is activated by default in release mode
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} -O2)
+    add_definitions (${QT_DEFINITIONS} -O3)
   endif(NOT WIN32)
 
   include_directories(
@@ -62,7 +62,7 @@ if (QTONLY)
   )
 else (QTONLY)
   if(NOT WIN32)
-    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O2) 
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O3) 
   endif(NOT WIN32)
 
   include_directories(
@@ -98,19 +98,9 @@ if(MINGW)
    QT4_ADD_RESOURCES2(marble_SRCS marble.rc)
 endif(MINGW)
 
-# FIXME: Check why this is different in QTONLY and KDE.
-#        Maybe use CMAKE_CURRENT_SOURCE_DIR instead?
-if (QTONLY)
-  set ( marble_UI ${CMAKE_SOURCE_DIR}/src/lib/MarbleControlBox.ui )
-else (QTONLY)
-  message( STATUS "source directory is :  " ${CMAKE_SOURCE_DIR})
-  set ( marble_UI ${CMAKE_SOURCE_DIR}/marble/src/lib/MarbleControlBox.ui )
-endif (QTONLY)
-
 qt4_add_resources(marble_SRCS marble.qrc)
 
 if (QTONLY)
-  #message( ${CMAKE_CURRENT_SOURCE_DIR})
   qt4_wrap_ui(marble_SRCS ${marble_UI})
   qt4_automoc(${marble_SRCS})
 else (QTONLY)
