@@ -10,13 +10,16 @@ Mark those tasks that you want to perform with your name:
 During the SoC projects (0.5)
 ----------------------------------------------------------------
 
+Bugs
+ * The flat map is jumping around when zoomed out much and moved        ----
+
 Misc
  * Create a file with use cases and personas                            INGE
    - Continue with the use cases.                                       --
  * Creating tiles during build instead of first run			TACK
  * Fix designer plugin dirs						TACK
  * Fix image downloading for Wikipedia                                  TACK
- * Make the MarbleWidget library have a version number.  See            ----
+ * Make the MarbleWidget library have a version number.  See            DONE
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
 
 Code Quality:
