@@ -1,5 +1,8 @@
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
+	Get rid of large and annoying status message while configuring
+	* src/lib/CMakeLists.txt: Remove status messages
+
 	Make projection choice clearer to the user
 	* src/lib/MarbleControlBox.ui: "Map" -> "Flat Map"
 

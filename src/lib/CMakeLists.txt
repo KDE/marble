@@ -128,7 +128,6 @@ set(marblewidget_SRCS
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
 )
-MESSAGE( STATUS "${marblewidget_SRCS}" )
 
 set (marblewidget_UI
     MarbleControlBox.ui
@@ -137,7 +136,6 @@ set (marblewidget_UI
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
 )
-MESSAGE( STATUS "${marblewidget_UI}" )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 
@@ -185,9 +183,8 @@ else(WIN32)
   else(libgps_FOUND)
      message( STATUS "not building with gpsd support")
   endif(libgps_FOUND)
-
-
 endif(WIN32)
+
 
 configure_file(config-libgps.h.cmake
 ${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
