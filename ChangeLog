@@ -1,5 +1,11 @@
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issue 3: contractions in strings
+	* src/lib/MarbleModel.cpp (MarbleModel): couldn't -> could not
+	* src/lib/GeoPolygon.cpp (load): can't -> cannot
+	* src/lib/TileCreator.cpp (createTiles): doesn't -> does not
+	* tools/dateline/dateline.cpp (main): doesn't -> does not
+
 	Get rid of large and annoying status message while configuring
 	* src/lib/CMakeLists.txt: Remove status messages
 

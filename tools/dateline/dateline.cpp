@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
         if ( rawline.contains( QChar(' ') ) == false )
         {
-            qDebug() << "Line " << line << " doesn't contain a space separator.";
+            qDebug() << "Line " << line << " does not contain a space separator.";
             continue;
         } 
         splitline = rawline.split( QChar(' ') );

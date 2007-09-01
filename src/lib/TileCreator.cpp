@@ -67,7 +67,7 @@ bool TileCreator::createTiles()
         return false;
     } 
 
-    // If the image size of the image source doesn't match the expected 
+    // If the image size of the image source does not match the expected 
     // geometry we need to smooth-scale the image in advance to match
     // the required size 
     bool needsScaling = ( ( imageWidth  % ( 2 * tileSize ) ) > 0 

@@ -88,7 +88,7 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     // We need at least one maptheme to run Marble.
     if ( mapthemedirs.count() == 0 ) {
-        qDebug() << "Couldn't find any maps! Exiting ...";
+        qDebug() << "Could not find any maps! Exiting ...";
         exit(-1);
     }
 

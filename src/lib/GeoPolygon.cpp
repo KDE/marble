@@ -102,7 +102,7 @@ void PntMap::load(const QString &filename)
     struct stat  statbuf;
 
     if ( (fd = open (filename.toLatin1(), O_RDONLY) ) < 0)
-        qDebug() << "can't open" << filename << " for reading";
+        qDebug() << "cannot open" << filename << " for reading";
 
     if ( fstat (fd,&statbuf) < 0 )
         qDebug() << "fstat error";
