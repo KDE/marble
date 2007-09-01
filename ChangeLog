@@ -1,5 +1,9 @@
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issue 22: spelling errors
+	* src/lib/AbstractLayer/AbstractLayerContainer.h: fix spelling
+	* src/lib/kml/KMLStyleParser.cpp (startElement): fix spelling
+
 	Krazy issue 21: signals and slots
 	* src/lib/PlaceMarkManager.h (class PlaceMarkManager): signals ->
 	Q_SIGNALS

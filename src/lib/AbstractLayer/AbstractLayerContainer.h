@@ -202,7 +202,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     /**
      * @brief name of this container
      * 
-     * taken from placecontainer for compatability.
+     * taken from placecontainer for compatibility.
      */
     QString *m_name;
 };

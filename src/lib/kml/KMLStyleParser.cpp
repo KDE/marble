@@ -49,7 +49,7 @@ bool KMLStyleParser::startElement( const QString& namespaceURI,
         QString lowerName = name.toLower();
 
         if ( lowerName == STYLE_TAG ) {
-            qDebug("Start of style tag. Begining to parse KMLStyle object");
+            qDebug("Start of style tag. Beginning to parse KMLStyle object");
 
             /*
             * Get styleID
