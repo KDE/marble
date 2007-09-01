@@ -42,7 +42,7 @@ class PlaceMarkManager : public QObject
     const QList < KMLFolder* >& getFolderList() const;
 #endif
 
-  signals:
+  Q_SIGNALS:
     void kmlDocumentLoaded( KMLDocument& );
 
  protected:
