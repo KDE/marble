@@ -484,7 +484,7 @@
          </item>
          <item>
           <property name="text" >
-           <string>Map</string>
+           <string>Flat Map</string>
           </property>
          </item>
         </widget>

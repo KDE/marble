@@ -1,3 +1,8 @@
+2007-09-01  Inge Wallin  <inge@lysator.liu.se>
+
+	Make projection choice clearer to the user
+	* src/lib/MarbleControlBox.ui: "Map" -> "Flat Map"
+
 2007-08-30  Torsten Rahn  <rahn@kde.org>
 	Larger commit of issues that came up while 
 	waiting for KDE4 Beta2:
