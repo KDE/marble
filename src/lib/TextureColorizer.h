@@ -14,8 +14,8 @@
 //
 
 
-#ifndef TEXCOLORIZER_H
-#define TEXCOLORIZER_H
+#ifndef TEXTURECOLORIZER_H
+#define TEXTURECOLORIZER_H
 
 
 #include <QtCore/QString>

@@ -1,5 +1,9 @@
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy issue 13: proper include directives
+	* src/lib/gps/GpxFile.cpp: Own include file first and dupl. includes
+	* src/lib/TextureColorizer.h: Fix include guard
+
 	Krazy issue 3: contractions in strings
 	* src/lib/MarbleModel.cpp (MarbleModel): couldn't -> could not
 	* src/lib/GeoPolygon.cpp (load): can't -> cannot

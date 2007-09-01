@@ -9,6 +9,8 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
+#include "GpxFile.h"
+
 #include <QtCore/QFile>
 #include <QtXml/QXmlInputSource>
 #include <QDebug>
@@ -17,16 +19,12 @@
 #include "Route.h"
 #include "Waypoint.h"
 
-#include "GpxFile.h"
 #include "WaypointContainer.h"
 #include "TrackContainer.h"
 #include "RouteContainer.h"
 #include "BoundingBox.h"
 #include "GpxSax.h"
 
-#include <QtCore/QFile>
-#include <QtXml/QXmlInputSource>
-#include <QDebug>
 
 GpxFile::GpxFile( const QString &fileName )
 {
