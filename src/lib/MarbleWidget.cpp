@@ -255,12 +255,15 @@ int MarbleWidget::zoom() const
 
 double MarbleWidget::centerLatitude() const
 {
-    return d->m_viewParams.m_planetAxis.pitch() * RAD2DEG;
+    double centerLat =  d->m_viewParams.m_planetAxis.roll() + M_PI;
+    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+    return centerLat * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
-    return - d->m_viewParams.m_planetAxis.yaw() * RAD2DEG;
+    double centerLon =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
+    return centerLon * RAD2DEG;
 }
 
 void MarbleWidget::setMinimumZoom( int zoom )
@@ -710,8 +713,11 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
         break;
 
     case Equirectangular:
-        float const centerLat =  d->m_viewParams.m_planetAxis.pitch();
-        float const centerLon = -d->m_viewParams.m_planetAxis.yaw();
+        // Calculate translation of center point
+        double centerLat =  d->m_viewParams.m_planetAxis.roll() + M_PI;
+        if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+        double centerLon =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
+
         int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
         int yTop = imageHalfHeight - radius() + yCenterOffset;
         int yBottom = yTop + 2*radius();
@@ -825,7 +831,9 @@ void MarbleWidget::setActiveRegion()
             }
             break;
         case Equirectangular:
-            double centerLat = planetAxis().pitch();
+            // Calculate translation of center point
+            double centerLat =  planetAxis().roll() + M_PI;
+            if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
             d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );

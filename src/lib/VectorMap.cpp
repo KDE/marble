@@ -145,8 +145,12 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
     m_radius = radius;
     Quaternion  qbound;
     m_planetAxis = rotAxis;
-    m_centerLat =  m_planetAxis.pitch();
-    m_centerLon = -m_planetAxis.yaw();
+
+    // Calculate translation of center point
+    m_centerLat =  m_planetAxis.roll() + M_PI;
+    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
+    m_centerLon =  m_planetAxis.pitch() + M_PI;
+
     m_xyFactor = (float)( 2 * radius ) / M_PI;
     double degX;
     double degY;

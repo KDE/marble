@@ -11,6 +11,8 @@
 
 #include "TileCreator.h"
 
+#include <cmath>
+
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QRect>
@@ -67,32 +69,42 @@ bool TileCreator::createTiles()
         return false;
     } 
 
-    // If the image size of the image source does not match the expected 
-    // geometry we need to smooth-scale the image in advance to match
-    // the required size 
-    bool needsScaling = ( ( imageWidth  % ( 2 * tileSize ) ) > 0 
-                       || ( imageHeight % tileSize ) > 0 );
+    // Calculating Maximum Tile Level
+    float approxMaxTileLevel = log( imageWidth / ( 2 * tileSize ) ) / log( 2 );
 
-    if ( needsScaling ) qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
+    int  maxTileLevel = 0;
+    if ( approxMaxTileLevel == int( approxMaxTileLevel ) )
+        maxTileLevel = static_cast<int>( approxMaxTileLevel );
+    else
+        maxTileLevel = static_cast<int>( approxMaxTileLevel + 1 );
 
-    unsigned int  stdImageWidth  = ( imageWidth / ( 2*tileSize ) ) * ( 2*tileSize );
-    if ( stdImageWidth == 0 ) stdImageWidth = 2 * tileSize;
-
-    if ( stdImageWidth != imageWidth )
-    {
-        qDebug() << 
-        QString( "TileCreator::createTiles() The width of the final image will measure  %1 pixels").arg(stdImageWidth);
-    }
-
-    int  maxTileLevel = TileLoader::columnToLevel( stdImageWidth / tileSize );
     if ( maxTileLevel < 0 )
     {
         qDebug() 
         << QString( "TileCreator::createTiles(): Invalid Maximum Tile Level: %1" )
         .arg( maxTileLevel );
-        
     }
     qDebug() << "Maximum Tile Level: " << maxTileLevel;
+
+    int maxRows = (int)pow( 2.0, (double)( maxTileLevel ) );
+
+    // If the image size of the image source does not match the expected 
+    // geometry we need to smooth-scale the image in advance to match
+    // the required size 
+    bool needsScaling = ( ( imageWidth  != 2 * maxRows * tileSize )
+                       || ( imageHeight != maxRows * tileSize ) );
+
+    if ( needsScaling ) qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
+
+    unsigned int  stdImageWidth  = 2 * maxRows * tileSize;
+    if ( stdImageWidth == 0 ) stdImageWidth = 2 * tileSize;
+    unsigned int  stdImageHeight  = maxRows * tileSize;
+
+    if ( stdImageWidth != imageWidth )
+    {
+        qDebug() << 
+        QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
+    }
 
     if ( QDir( m_targetDir ).exists() == false ) 
         ( QDir::root() ).mkpath( m_targetDir );

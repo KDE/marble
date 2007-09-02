@@ -414,8 +414,11 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
 
     QPixmap     textpixmap;
 
-    float const centerLat =  planetAxis.pitch();
-    float const centerLon = -planetAxis.yaw();
+    // Calculate translation of center point
+    double centerLat =  planetAxis.roll() + M_PI;
+    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+    double centerLon =  planetAxis.pitch() + M_PI;
+
     double const xyFactor = 2 * viewParams->m_radius / M_PI;
     double degX;
     double degY;

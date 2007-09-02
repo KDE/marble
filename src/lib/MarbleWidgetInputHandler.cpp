@@ -262,7 +262,11 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
             //Hack for properly behavior for the arrow
             if( true ) {//m_widget->m_viewParams->m_projection == Equirectangular ) {
                 int     radius        = m_widget->radius();
-                double  centerLat     = m_widget->planetAxis().pitch();
+
+                // Calculate translation of center point
+                double centerLat =  m_widget->planetAxis().roll() + M_PI;
+                if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+
                 int     yCenterOffset = (int)((float)(2 * radius / M_PI) * centerLat);
                 int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
                 int     yBottom       = yTop + 2 * radius;

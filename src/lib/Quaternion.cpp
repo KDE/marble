@@ -65,48 +65,47 @@ Quaternion Quaternion::inverse() const
 
 void Quaternion::createFromEuler(double pitch, double yaw, double roll)
 {
-    double cX, cY, cZ, sX, sY, sZ, cYcZ, sYsZ, sYcZ, cYsZ;
+    double  cPhi, cThe, cPsi, sPhi, sThe, sPsi, 
+            cThecPsi, sThesPsi, sThecPsi, cThesPsi;
 
     pitch *= 0.5;
     yaw   *= 0.5;
     roll  *= 0.5;
 
-    cX = cos(pitch);
-    cY = cos(yaw);
-    cZ = cos(roll);
+    cPhi = cos(pitch); // also: "heading"
+    cThe = cos(yaw);   // also: "attitude" 
+    cPsi = cos(roll);  // also: "bank"
 
-    sX = sin(pitch);
-    sY = sin(yaw);
-    sZ = sin(roll);
+    sPhi = sin(pitch);
+    sThe = sin(yaw);
+    sPsi = sin(roll);
 
-    cYcZ = cY * cZ;
-    sYsZ = sY * sZ;
-    sYcZ = sY * cZ;
-    cYsZ = cY * sZ;
+    cThecPsi = cThe * cPsi;
+    sThesPsi = sThe * sPsi;
+    sThecPsi = sThe * cPsi;
+    cThesPsi = cThe * sPsi;
 
-    v[Q_W] = cX * cYcZ + sX * sYsZ;
-    v[Q_X] = sX * cYcZ - cX * sYsZ;
-    v[Q_Y] = cX * sYcZ + sX * cYsZ;
-    v[Q_Z] = cX * cYsZ - sX * sYcZ;
+    v[Q_W] = cPhi * cThecPsi + sPhi * sThesPsi;
+    v[Q_X] = sPhi * cThecPsi - cPhi * sThesPsi;
+    v[Q_Y] = cPhi * sThecPsi + sPhi * cThesPsi;
+    v[Q_Z] = cPhi * cThesPsi - sPhi * sThecPsi;
 }
 
 double Quaternion::pitch() const
 {
-    return atan2( 2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z]),
-                 (1.0 - 2.0*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y] ) ) );
-//    return atan(2.0*(v[Q_W]*v[Q_X]+v[Q_Y]*v[Q_Z])/(1-2*(v[Q_X]*v[Q_X]+v[Q_Y]*v[Q_Y])));
+    return atan2( 2.0*(v[Q_Y]*v[Q_W]-v[Q_X]*v[Q_Z]),
+                 (1.0 - 2.0*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z] ) ) );
 }
 
 double Quaternion::yaw() const
 {
-    return asin(2.0*(v[Q_W]*v[Q_Y]-v[Q_Z]*v[Q_X]));
+    return asin(2.0*(v[Q_X]*v[Q_Y]+v[Q_Z]*v[Q_W]));
 }
 
 double Quaternion::roll() const
 {
-    return atan2( 2.0*(v[Q_W]*v[Q_Z]+v[Q_X]*v[Q_Y]),
-                ( 1.0 - 2.0*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z] ) ) );
-//    return atan(2.0*(v[Q_W]*v[Q_Z]+v[Q_X]*v[Q_Y])/(1-2*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z])));
+    return atan2( 2.0*(v[Q_X]*v[Q_W]-v[Q_Y]*v[Q_Z]),
+                ( 1.0 - 2.0*(v[Q_X]*v[Q_X]+v[Q_Z]*v[Q_Z] ) ) );
 }
 
 void Quaternion::display() const

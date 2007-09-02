@@ -63,7 +63,12 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         int yBottom = imgheight;
 
         if( viewParams->m_projection == Equirectangular ) {
-            int yCenterOffset =  (int)((float)(2*radius / M_PI) * viewParams->m_planetAxis.pitch());
+
+            // Calculate translation of center point
+            double centerLat =  viewParams->m_planetAxis.roll() + M_PI;
+            if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+
+            int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);
             yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
             yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
         }

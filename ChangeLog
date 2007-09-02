@@ -1,7 +1,25 @@
+2007-09-02  Torsten Rahn  <rahn@kde.org>
+
+	- Fixed "jumpy" flat projection. Still needs work to 
+	  fix the "jump" for the case where the centerLat
+	  exceeds +/- M_PI which has other causes:
+
+	* MeasureTool.cpp
+	* MarbleWidget.cpp
+	* Quaternion.cpp
+	* PlaceMarkPainter.cpp
+	* VectorMap.cpp
+	* TextureColorizer.cpp
+	* GridMap.cpp
+	* MarbleWidgetInputHandler.cpp
+	* FlatScanlineTextureMapper.cpp
+
+	* TileCreator.cpp:
+	- More fixes for non-standard source texture sizes
+
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
-	Krazy issue 22: spelling errors
-	* src/lib/AbstractLayer/AbstractLayerContainer.h: fix spelling
+	Krazy issue 22: spelling errors	* src/lib/AbstractLayer/AbstractLayerContainer.h: fix spelling
 	* src/lib/kml/KMLStyleParser.cpp (startElement): fix spelling
 
 	Krazy issue 21: signals and slots

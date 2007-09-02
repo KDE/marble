@@ -170,8 +170,12 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     int  imgheight = 2 * imgry;
     int  x = 0;
     int  y = 0;
-    m_centerLat =  planetAxis.pitch();
-    m_centerLon = -planetAxis.yaw();
+
+    // Calculate translation of center point
+    m_centerLat =  planetAxis.roll() + M_PI;
+    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
+    m_centerLon =  planetAxis.pitch() + M_PI;
+
     m_xyFactor = 2*radius / M_PI;
 
     Quaternion  qpos;

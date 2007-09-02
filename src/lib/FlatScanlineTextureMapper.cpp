@@ -63,9 +63,11 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage,
     matrix  planetAxisMatrix;
     planetAxis.toMatrix( planetAxisMatrix );
 
-    // Calculate traslation of center point
-    float const centerLat =  planetAxis.pitch();
-    float const centerLon = -planetAxis.yaw();
+    // Calculate translation of center point
+    double centerLat =  planetAxis.roll() + M_PI;
+    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+    double centerLon =  planetAxis.pitch() + M_PI;
+
     int yCenterOffset =  (int)((float)( 2 * radius / M_PI) * centerLat );
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
