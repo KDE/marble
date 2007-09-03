@@ -296,9 +296,9 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
 void GridMap::rectangularCreateCircle( double val, SphereDim dim, double cutOff )
 {
     // Calculate translation of center point
-    double centerLat =  m_planetAxis.roll() + M_PI;
+    double centerLat =  m_planetAxis.pitch() + M_PI;
     if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-    double centerLon =  m_planetAxis.pitch() + M_PI;
+    double centerLon =  m_planetAxis.yaw() + M_PI;
 
     double       xyFactor  = (float)( 2 * m_radius ) / M_PI;
     m_polygon.clear();

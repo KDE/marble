@@ -152,17 +152,9 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                 m_leftpressedx = event->x();
                 m_leftpressedy = event->y();
 
-                // m_leftpresseda: screen center latitude  during mouse press
-                // m_leftpressedb: screen center longitude during mouse press
-                m_widget->geoCoordinates( m_widget->width() / 2,
-                                          m_widget->height() / 2,
-                                          m_leftpresseda, m_leftpressedb,
-                                          GeoPoint::Radian );
-
-                if ( m_widget->northPoleY() > 0 ) {
-                    m_leftpressedb = M_PI - m_leftpressedb;
-                    m_leftpresseda = M_PI + m_leftpresseda;	 
-                }
+                // Calculate translation of center point
+                m_leftpresseda =  - m_widget->centerLongitude() * DEG2RAD;
+                m_leftpressedb =  - m_widget->centerLatitude() * DEG2RAD;
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -264,10 +256,10 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                 int     radius        = m_widget->radius();
 
                 // Calculate translation of center point
-                double centerLat =  m_widget->planetAxis().roll() + M_PI;
+                double centerLat =  m_widget->planetAxis().pitch() + M_PI;
                 if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
 
-                int     yCenterOffset = (int)((float)(2 * radius / M_PI) * centerLat);
+                int     yCenterOffset = (int)((double)(2 * radius / M_PI) * centerLat);
                 int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
                 int     yBottom       = yTop + 2 * radius;
                 yTop = ( yTop > 0 ) ? yTop : 0;

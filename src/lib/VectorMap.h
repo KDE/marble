@@ -33,9 +33,9 @@ class VectorMap : public ScreenPolygon::Vector
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap(const PntMap*, const int&, Quaternion&, Projection );
+    void createFromPntMap(const PntMap*, const int&, const Quaternion&, Projection );
 
-    void paintBase(ClipPainter *, int radius, bool, Projection );
+    void paintBase(ClipPainter *, int radius, const Quaternion&, bool, Projection );
     void paintMap(ClipPainter *, bool );
     void drawMap(QPaintDevice *, bool, Projection );
 
@@ -53,8 +53,8 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    void sphericalCreateFromPntMap(const PntMap*, const int&, Quaternion&);
-    void rectangularCreateFromPntMap(const PntMap*, const int&, Quaternion&);
+    void sphericalCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
+    void rectangularCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
 
     void createPolyLine( GeoPoint::Vector::ConstIterator, 
                          GeoPoint::Vector::ConstIterator, const int, Projection );
@@ -64,7 +64,7 @@ class VectorMap : public ScreenPolygon::Vector
                             GeoPoint::Vector::ConstIterator, const int );
 
     void sphericalPaintBase(ClipPainter*,int radius, bool);
-    void rectangularPaintBase(ClipPainter*,int radius, bool);
+    void rectangularPaintBase(ClipPainter*,int radius, const Quaternion&, bool);
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();

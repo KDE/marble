@@ -1,3 +1,23 @@
+2007-09-03  Torsten Rahn  <rahn@kde.org>
+
+	- "Fixed" last "jump" issue in the flat projection. 
+	- Tidied up the naming of the euler angles a but
+	- "Fixed" issue in the plain map which made the 
+	  ocean water not being in sync with the rest.
+	Well, all this needs to be tidied up, still.
+
+	* src/lib/MeasureTool.cpp
+	* src/lib/MarbleWidget.cpp
+	* src/lib/Quaternion.cpp
+	* src/lib/PlaceMarkPainter.cpp
+	* src/lib/VectorMap.cpp
+	* src/lib/TextureColorizer.cpp
+	* src/lib/VectorMap.h
+	* src/lib/VectorComposer.cpp
+	* src/lib/GridMap.cpp
+	* src/lib/MarbleWidgetInputHandler.cpp
+	* src/lib/FlatScanlineTextureMapper.cpp
+
 2007-09-02  Torsten Rahn  <rahn@kde.org>
 
 	- Fixed "jumpy" flat projection. Still needs work to 

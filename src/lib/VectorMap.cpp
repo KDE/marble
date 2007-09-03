@@ -62,7 +62,7 @@ VectorMap::~VectorMap()
 
 
 void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 Quaternion& rotAxis, Projection currentProjection)
+                                 const Quaternion& rotAxis, Projection currentProjection)
 {
     switch( currentProjection ) {
         case Spherical:
@@ -75,7 +75,7 @@ void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius,
 }
 
 void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 Quaternion& rotAxis)
+                                 const Quaternion& rotAxis)
 {
     clear();
 
@@ -139,7 +139,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radiu
 }
 
 void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 Quaternion& rotAxis)
+                                 const Quaternion& rotAxis)
 {
     clear();
     m_radius = radius;
@@ -147,9 +147,9 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
     m_planetAxis = rotAxis;
 
     // Calculate translation of center point
-    m_centerLat =  m_planetAxis.roll() + M_PI;
+    m_centerLat =  m_planetAxis.pitch() + M_PI;
     if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  m_planetAxis.pitch() + M_PI;
+    m_centerLon =  m_planetAxis.yaw() + M_PI;
 
     m_xyFactor = (float)( 2 * radius ) / M_PI;
     double degX;
@@ -184,10 +184,10 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
         do {
             m_offset-=4*m_radius;
             boundingPolygon.translate(-4*m_radius,0);
-        } while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() ) );
+        } while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) );
         m_offset += 4 * radius;
         boundingPolygon.translate(4*m_radius,0);
-        while( visibleArea.intersects( (const QRectF&) boundingPolygon.boundingRect() )) {
+        while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) ) {
             m_polygon.clear();
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
@@ -375,14 +375,14 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
 }
 
 
-void VectorMap::paintBase(ClipPainter * painter, int radius, bool antialiasing, Projection currentProjection)
+void VectorMap::paintBase(ClipPainter * painter, int radius, const Quaternion& rotAxis, bool antialiasing, Projection currentProjection)
 {
     switch( currentProjection ) {
         case Spherical:
             sphericalPaintBase(painter,radius,antialiasing);
             break;
         case Equirectangular:
-            rectangularPaintBase(painter,radius,antialiasing);
+            rectangularPaintBase(painter,radius, rotAxis, antialiasing);
             break;
     }
 }
@@ -405,7 +405,7 @@ void VectorMap::sphericalPaintBase(ClipPainter * painter, int radius, bool antia
     }
 }
 
-void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, bool antialiasing)
+void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, const Quaternion& planetAxis, bool antialiasing)
 {
     m_radius = radius;
 
@@ -413,6 +413,10 @@ void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, bool ant
 
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
+
+    // Calculate translation of center point
+    m_centerLat =  planetAxis.pitch() + M_PI;
+    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
 
     int yCenterOffset =  (int)((double)(2*radius) / M_PI * m_centerLat);
     int yTop = m_imgheight/2 - radius + yCenterOffset;

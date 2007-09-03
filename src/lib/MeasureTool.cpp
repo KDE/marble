@@ -172,9 +172,9 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     int  y = 0;
 
     // Calculate translation of center point
-    m_centerLat =  planetAxis.roll() + M_PI;
+    m_centerLat =  planetAxis.pitch() + M_PI;
     if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  planetAxis.pitch() + M_PI;
+    m_centerLon =  planetAxis.yaw() + M_PI;
 
     m_xyFactor = 2*radius / M_PI;
 
