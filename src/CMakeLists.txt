@@ -74,7 +74,6 @@ endif (QTONLY)
 set(marble_SRCS
            ControlView.cpp
            MarbleTest.cpp
-           MainWindowCommon.cpp
 )
 
 set(marble_HDRS
@@ -86,9 +85,20 @@ if (QTONLY)
   set(marble_SRCS ${marble_SRCS} qtmain.cpp QtMainWindow.cpp)
   set(marble_HDRS ${marble_HDRS} QtMainWindow.h)
 else (QTONLY)
-  set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp)
+  set(marble_SRCS ${marble_SRCS} kdemain.cpp KdeMainWindow.cpp marble_part.cpp)
   set(marble_HDRS ${marble_HDRS} KdeMainWindow.h)
 endif (QTONLY)
+
+if (NOT QTONLY)
+  set(marblepart_SRCS marble_part.cpp )
+  kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
+  kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS} ControlView.cpp)
+  target_link_libraries(marble_part ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEPRINT_LIBS} marblewidget)
+
+  install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
+  install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+  install(FILES marble_part.rc DESTINATION ${DATA_INSTALL_DIR}/marble_part)
+endif (NOT QTONLY)
 
 if(MSVC)
   set(marble_SRCS ${marble_SRCS} marble.rc)

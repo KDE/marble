@@ -1,0 +1,260 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
+//
+
+#include <QtCore/QDir>
+#include <QtCore/QTimer>
+#include <QtGui/QClipboard>
+#include <QtGui/QLabel>
+
+#include <kaction.h>
+#include <kactioncollection.h>
+#include <kapplication.h>
+#include <kcomponentdata.h>
+#include <kfiledialog.h>
+#include <kmessagebox.h>
+#include <kprinter.h>
+#include <kparts/genericfactory.h>
+#include <kparts/statusbarextension.h>
+#include <kstandardaction.h>
+#include <kstatusbar.h>
+#include <ktogglefullscreenaction.h>
+
+#include <MarbleDirs.h>
+#include <ControlView.h>
+#include "settings.h"
+
+#include "marble_part.h"
+
+typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
+K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
+
+MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
+  : KParts::ReadOnlyPart( parent ), m_zoomLabel( 0 )
+{
+    MarbleDirs::setMarbleDataPath( arguments.count() != 0 ? arguments.first() : MarbleSettings::marbleDataPath() );
+
+    setComponentData( MarblePartFactory::componentData() );
+
+    m_controlView = new ControlView( parentWidget );
+    setWidget( m_controlView );
+
+    setupActions();
+
+    setXMLFile( "marble_part.rc" );
+
+    m_statusBarExtension = new KParts::StatusBarExtension( this );
+
+    QTimer::singleShot( 0, this, SLOT( setupStatusBar() ) );
+
+    readSettings();
+}
+
+MarblePart::~MarblePart()
+{
+    writeSettings();
+}
+
+ControlView* MarblePart::controlView() const
+{
+    return m_controlView;
+}
+
+KAboutData *MarblePart::createAboutData()
+{
+  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), "0.1" );
+}
+
+bool MarblePart::openUrl( const KUrl &url )
+{
+    return true;
+}
+
+bool MarblePart::openFile()
+{
+    QString fileName;
+    fileName = KFileDialog::getOpenFileName( KUrl(),
+                                    i18n("*.gpx *.kml|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML"),
+                                            widget(), i18n("Open File")
+                                           );
+    if ( ! fileName.isNull() ) {
+        QString extension = fileName.section( '.', -1 );
+
+        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
+            m_controlView->marbleWidget()->openGpxFile( fileName );
+        }
+        else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
+            m_controlView->marbleWidget()->addPlaceMarkFile( fileName );
+        }
+    }
+
+    return true;
+}
+
+void MarblePart::showZoom( int zoom )
+{
+    if ( m_zoomLabel )
+        m_zoomLabel->setText( i18n( "Zoom: %1", QString("%1").arg ( zoom, 4 ) ) );
+}
+
+
+
+void MarblePart::exportMapScreenShot()
+{
+    QString  fileName = KFileDialog::getSaveFileName( QDir::homePath(),
+                                                      i18n( "Images (*.jpg *.png)" ),
+                                                      widget(), i18n("Export Map") );
+
+    if ( !fileName.isEmpty() ) {
+        QPixmap mapPixmap = m_controlView->mapScreenShot();
+        bool  success = mapPixmap.save( fileName );
+        if ( !success ) {
+            KMessageBox::error( widget(), i18nc( "Application name", "Marble" ),
+                                i18n( "An error occurred while trying to save the file.\n" ),
+                                KMessageBox::Notify );
+        }
+    }
+}
+
+
+void MarblePart::printMapScreenShot()
+{
+    QPixmap       mapPixmap = m_controlView->mapScreenShot();
+    QSize         printSize = mapPixmap.size();
+    KPrinter      printer;
+
+    if ( printer.setup( widget() ) ) {
+
+        QRect  mapPageRect = printer.pageRect();
+
+        printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
+
+        QPoint  printTopLeft( mapPageRect.x() + mapPageRect.width() / 2
+                              - printSize.width() / 2,
+                              mapPageRect.y() + mapPageRect.height() / 2
+                              - printSize.height() / 2 );
+
+        QRect     mapPrintRect( printTopLeft, printSize );
+        QPainter  painter( &printer );
+
+        painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
+    }
+}
+
+void MarblePart::showFullScreen( bool isChecked )
+{
+    if ( isChecked ) {
+        if ( KApplication::activeWindow() )
+            KApplication::activeWindow()->showFullScreen();
+    }
+    else {
+        if ( KApplication::activeWindow() )
+            KApplication::activeWindow()->showNormal();
+    }
+
+    m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::showSideBar( bool isChecked )
+{
+    m_controlView->setSideBarShown( isChecked );
+
+    m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::showStatusBar( bool isChecked )
+{
+    if ( !m_statusBarExtension->statusBar() )
+        return;
+
+    m_statusBarExtension->statusBar()->setVisible( isChecked );
+}
+
+void MarblePart::copyMap()
+{
+    QPixmap      mapPixmap = m_controlView->mapScreenShot();
+    QClipboard  *clipboard = KApplication::clipboard();
+
+    clipboard->setPixmap( mapPixmap );
+}
+
+void MarblePart::readSettings()
+{
+    m_controlView->marbleWidget()->setHome( 
+        MarbleSettings::homeLongitude(),
+        MarbleSettings::homeLatitude(),
+        MarbleSettings::homeZoom()
+    );
+    m_controlView->marbleWidget()->goHome();
+}
+
+void MarblePart::writeSettings()
+{
+    double homeLon = 0;
+    double homeLat = 0;
+    int homeZoom = 0;
+    m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+    MarbleSettings::setHomeLongitude( homeLon );
+    MarbleSettings::setHomeLatitude( homeLat );
+    MarbleSettings::setHomeZoom( homeZoom );
+    MarbleSettings::self()->writeConfig();
+}
+
+void MarblePart::setupActions()
+{
+    // Action: Print Map
+    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ), actionCollection() );
+
+    // Action: Export Map
+    m_exportMapAction = new KAction( this );
+    actionCollection()->addAction( "exportMap", m_exportMapAction );
+    m_exportMapAction->setText( i18n( "&Export Map..." ) );
+    m_exportMapAction->setIcon( KIcon( "document-save-as" ) );
+    m_exportMapAction->setShortcut( Qt::CTRL + Qt::Key_S );
+    connect( m_exportMapAction, SIGNAL(triggered( bool ) ),
+             this,              SLOT( exportMapScreenShot() ) );
+
+    // Action: Copy Map to the Clipboard
+    m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ), actionCollection() );
+    m_copyMapAction->setText( i18n( "&Copy Map" ) );
+    
+    // Action: Open a Gpx or a Kml File
+    m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
+    m_openAct->setText( i18n( "&Open Map..." ) );
+
+    // Standard actions.  So far only Quit.
+    KStandardAction::quit( kapp, SLOT( closeAllWindows() ), actionCollection() );
+
+    KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ), actionCollection() );
+
+    m_sideBarAct = new KAction( i18n("Show &Navigation Panel"), this );
+    actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
+    m_sideBarAct->setShortcut( Qt::Key_F9 );
+    m_sideBarAct->setCheckable( true );
+    m_sideBarAct->setChecked( true );
+    m_sideBarAct->setStatusTip( i18n( "Show Navigation Panel" ) );
+    connect( m_sideBarAct, SIGNAL( triggered( bool ) ), this, SLOT( showSideBar( bool ) ) );
+
+    m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(), actionCollection() );
+    connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
+
+    readSettings();
+}
+
+void MarblePart::setupStatusBar()
+{
+    m_zoomLabel = new QLabel( m_statusBarExtension->statusBar() );
+    m_statusBarExtension->addStatusBarItem( m_zoomLabel, -1, false );
+
+    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
+             this,                          SLOT( showZoom( int ) ) );
+    showZoom( m_controlView->marbleWidget()->zoom() );
+}
+
+#include "marble_part.moc"

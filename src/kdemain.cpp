@@ -16,6 +16,7 @@
 
 #include <QtCore/QFile>
  
+#include "ControlView.h"
 #include "KdeMainWindow.h"
 
 #include "MarbleTest.h"
@@ -87,21 +88,22 @@ int main (int argc, char *argv[])
     }
     
     if ( args->isSet( "enableCurrentLocation" ) ) {
-        window->controlView()->setCurrentLocationTabShown(true);
+        window->marbleControl()->setCurrentLocationTabShown(true);
     }
     
     if ( args->isSet( "enableFileView" ) ) {
-        window->controlView()->setFileViewTabShown(true);
+        window->marbleControl()->setFileViewTabShown(true);
     }
 
     // Read the files that are given on the command line.
     // FIXME: What should the '1' below really be?
     // Command line arguments, i.e. files to open
+
     for (int i = 0; i < args->count(); i++) {
 
         // FIXME: Use openUrl( args->url(i)) instead?
         if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
-            ( window->controlView() )->addPlaceMarkFile( args->arg( i ) );
+            ( window->marbleControl() )->addPlaceMarkFile( args->arg( i ) );
     }
 
     delete marbleTest;

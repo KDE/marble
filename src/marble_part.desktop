@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=Marble Part
+MimeType=application/vnd.google-earth.kml+xml
+ServiceTypes=Browser/View,KParts/ReadOnlyPart
+X-KDE-Library=libmarble_part
+Icon=marble
