@@ -67,7 +67,10 @@ Documentation
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
    - MarbleNavigator                                                    --
-
+ * Write more in DESIGN                                                 INGE
+   - Describe the view parameters                                       --
+   - Describe the vector engine                                         --
+   - Describe the placemark engine                                      --
 
 OpenStreetMap support for tiles@home
     - we'd like to get the tiles loaded and displayed                   TACK
