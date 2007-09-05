@@ -384,8 +384,6 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                                         Quaternion planetAxis,
                                         bool firstTime )
 {
-    //int  imgwidth  = 2 * imgrx;
-    //int  imgheight = 2 * imgry;
     int  x = 0;
     int  y = 0;
 
@@ -473,6 +471,10 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
         y = (int)(imgheight / 2 + xyFactor * (degY + centerLat));
 
         // Skip placemarks that are outside the screen area
+        //
+        // FIXME: I have the feeling that this is wrong, because there
+        //        are always insanely few placemarks on the flat map 
+        //        compared to the globe.
         if ( ( ( x < 0 || x >= imgwidth )
                // FIXME: Carlos: check this:
                && x - 4 * viewParams->m_radius < 0
