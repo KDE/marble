@@ -75,6 +75,7 @@ set(marblewidget_SRCS
            FlatScanlineTextureMapper.cpp
            GlobeScanlineTextureMapper.cpp
            AbstractScanlineTextureMapper.cpp
+           DiscCache.cpp
            TextureTile.cpp
            TileCache.cpp
            TileLoader.cpp

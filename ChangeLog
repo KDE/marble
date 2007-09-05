@@ -1,5 +1,9 @@
 2007-09-05  Tobias Koenig  <tokoe@kde.org>
 
+  Add DiscCache class
+
+2007-09-05  Tobias Koenig  <tokoe@kde.org>
+
 	KPartified Marble.
 
 2007-09-05  Inge Wallin  <inge@lysator.liu.se>
