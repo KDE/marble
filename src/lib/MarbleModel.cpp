@@ -453,6 +453,8 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
     d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
+
+    notifyModelChanged();
 }
 
 QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )

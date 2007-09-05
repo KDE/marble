@@ -39,7 +39,7 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
-    readHtml( MarbleDirs::path( "legend.html" ) );
+    readHtml( QUrl::fromLocalFile ( MarbleDirs::path( "legend.html" ) ) );
     setHtml( d->m_html );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);

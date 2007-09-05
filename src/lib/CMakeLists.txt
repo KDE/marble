@@ -126,7 +126,7 @@ set (marblewidget_UI
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
 )
-MESSAGE( STATUS "${marble_UI}" )
+MESSAGE( STATUS "${marblewidget_UI}" )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
 

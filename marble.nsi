@@ -19,15 +19,14 @@
  
 ;    3. This notice may not be removed or altered from any source distribution.
  
-!define setup "marble-setup.exe"
+!define setup "marble-setup-0.4.3.exe"
  
 ; change this to wherever the files to be packaged reside
 !define srcdir "."
-!define qtdir "C:\Qt\4.0.1"
  
-!define company "KDE Project"
+!define company "KDE"
  
-!define prodname "Marble"
+!define prodname "Marble 0.4.3"
 !define exec "marble.exe"
  
 ; optional stuff
@@ -55,7 +54,7 @@
 !define regkey "Software\${company}\${prodname}"
 !define uninstkey "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}"
  
-!define startmenu "$SMPROGRAMS\${company}\${prodname}"
+!define startmenu "$SMPROGRAMS\${prodname}"
 !define uninstaller "uninstall.exe"
  
 ;--------------------------------
@@ -78,12 +77,12 @@ SetDatablockOptimize on
 CRCCheck on
 SilentInstall normal
  
-InstallDir "$PROGRAMFILES\${company}\${prodname}"
+InstallDir "$PROGRAMFILES\${prodname}"
 InstallDirRegKey HKLM "${regkey}" ""
  
 !ifdef licensefile
 LicenseText "License"
-LicenseData "${srcdir}\${licensefile}"
+LicenseData "${srcdir}\data\${licensefile}"
 !endif
  
 ; pages
@@ -150,21 +149,11 @@ Section
  
 ; package all files, recursively, preserving attributes
 ; assume files are in the correct places
-File /a "${qtdir}\bin\QtCore4.dll"
-File /a "${qtdir}\bin\QtGui4.dll"
-File /a "${qtdir}\bin\mingwm10.dll"
-File /a "${qtdir}\plugins\imageformats\qjpeg1.dll"
-CreateDirectory $INSTDIR\imageformats
-Rename qjpeg1.dll $INSTDIR\imageformats\qjpeg1.dll  
 
-File /a "${srcdir}\bin\${exec}"
-
-File /a "${srcdir}\data\*.leg"
-File /a "${srcdir}\data\mwdbii\*.PNT"
-File /a "${srcdir}\data\etopo2\etopo_*"
+File /a /r /x "*.nsi" /x "${setup}" "${srcdir}\*.*" 
 
 !ifdef licensefile
-File /a "${srcdir}\${licensefile}"
+File /a "${srcdir}\data\${licensefile}"
 !endif
  
 !ifdef notefile
@@ -177,7 +166,7 @@ File /a "${srcdir}\${icon}"
  
 ; any application-specific files
 !ifdef files
-!include "${files}"
+include "${files}"
 !endif
  
   WriteUninstaller "${uninstaller}"
@@ -189,10 +178,11 @@ Section
   
   CreateDirectory "${startmenu}"
   SetOutPath $INSTDIR ; for working directory
-!ifdef icon
-  CreateShortCut "${startmenu}\${prodname}.lnk" "$INSTDIR\${exec}" "" "$INSTDIR\${icon}"
-!else
   CreateShortCut "${startmenu}\${prodname}.lnk" "$INSTDIR\${exec}"
+  CreateShortCut "${startmenu}\Uninstall.lnk" $INSTDIR\uninstall.exe"
+
+!ifdef licensefile
+  CreateShortCut "${startmenu}\LICENSE.lnk "$INSTDIR\${licensefile}"
 !endif
  
 !ifdef notefile
@@ -225,29 +215,15 @@ UninstallIcon "${icon}"
  
 Section "Uninstall"
  
-  DeleteRegKey HKLM "${uninstkey}"
-  DeleteRegKey HKLM "${regkey}"
-  
-  Delete "${startmenu}\*.*"
-  Delete "${startmenu}"
- 
-!ifdef licensefile
-Delete "$INSTDIR\${licensefile}"
-!endif
- 
-!ifdef notefile
-Delete "$INSTDIR\${notefile}"
-!endif
- 
-!ifdef icon
-Delete "$INSTDIR\${icon}"
-!endif
- 
-Delete "$INSTDIR\${exec}"
- 
-!ifdef unfiles
-!include "${unfiles}"
-!endif
- 
+DeleteRegKey HKLM "${uninstkey}"
+DeleteRegKey HKLM "${regkey}"
+
+RMDir /r "${startmenu}"
+RMDir /r "$INSTDIR"
+
+; generated on runtime
+DeleteRegKey HKCU "Software\${company}\Marble Desktop Globe"
+RMDir /r "$%USERPROFILE%\.marble"
+
 SectionEnd
 

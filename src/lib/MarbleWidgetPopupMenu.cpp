@@ -47,6 +47,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_rmbMenu->addAction( m_pAddMeasurePointAction );
     m_pRemoveMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
+    m_pRemoveMeasurePointsAction->setEnabled(false);
     m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
     m_rmbMenu->addSeparator();
     m_pSetHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
@@ -61,7 +62,7 @@ void MarbleWidgetPopupMenu::createActions()
     connect( m_pAddMeasurePointAction, SIGNAL( triggered() ),
                                        SLOT( slotAddMeasurePoint() ) );
     connect( m_pRemoveMeasurePointsAction, SIGNAL( triggered() ),
-                                           SIGNAL( removeMeasurePoints() ) );
+                                           SLOT( slotRemoveMeasurePoints() ) );
     connect( m_pAboutDialogAction, SIGNAL( triggered() ), 
                                    SLOT( slotAboutDialog() ) );
 }
@@ -153,7 +154,16 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 
     m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoPoint::Radian );
 
+    m_pRemoveMeasurePointsAction->setEnabled(true);
+
     emit addMeasurePoint( lon, lat );
+}
+
+void MarbleWidgetPopupMenu::slotRemoveMeasurePoints()
+{
+    m_pRemoveMeasurePointsAction->setEnabled(false);
+
+    emit removeMeasurePoints();
 }
 
 void MarbleWidgetPopupMenu::slotAboutDialog()

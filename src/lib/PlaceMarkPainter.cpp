@@ -203,6 +203,12 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     const double outlineWidth = 2.5;
     int          textWidth = 0;
 
+    PlaceMark*  firstMark = *(placecontainer->begin());
+    const bool  noFilter = ( firstMark->population() == 0 
+                             || ( firstMark->population() != 0
+                             && firstMark->role().isNull() ) ) 
+                           ? true : false;
+
     QPixmap     textpixmap;
 
     QVector< QVector< PlaceMark* > >  m_rowsection;
@@ -223,10 +229,16 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
 
 #ifndef KML_GSOC
         // Skip the places that are too small.
-        if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
-             // && mark->symbol() != 0
+         if ( noFilter == false )
+         {
+             if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
              && mark->selected() == 0 )
-            continue;
+                 continue;
+         }
+         else
+         {
+             mark->setSymbol(21);
+         }
 #endif
 
         // Skip terrain marks if we're not showing terrain.
@@ -396,6 +408,12 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
     const double outlineWidth = 2.5;
     int          textWidth = 0;
 
+    PlaceMark*  firstMark = *(placecontainer->begin());
+    const bool  noFilter = ( firstMark->population() == 0 
+                             || ( firstMark->population() != 0
+                             && firstMark->role().isNull() ) ) 
+                           ? true : false;
+
     QPixmap     textpixmap;
 
     float const centerLat =  planetAxis.pitch();
@@ -422,11 +440,16 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
         mark  = *it; // no cast
 
 #ifndef KML_GSOC
-        // Skip the places that are too small.
-        if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
-//             && mark->symbol() != 0
-             && mark->selected() == 0 )
-            continue;
+        if ( noFilter == false )
+        {
+            if ( m_weightfilter.at( mark->popidx() ) > viewParams->m_radius
+            && mark->selected() == 0 )
+                continue;
+        }
+        else
+        {
+            mark->setSymbol(21);
+        }
 #endif
 
         // Skip terrain marks if we're not showing terrain.
@@ -895,6 +918,7 @@ void PlaceMarkPainter::labelFontData( PlaceMark *mark, double outlineWidth,
     // R: Admin. center of _R_egion
     // B: Admin. center of country and region ("_B_oth")
     // N: _N_one
+    font = m_font_regular;
 
     if ( role == 'N' ) {
         font = m_font_regular;
@@ -906,7 +930,7 @@ void PlaceMarkPainter::labelFontData( PlaceMark *mark, double outlineWidth,
         font = m_font_regular;
     }
 
-    if ( mark->symbol() > 13 || mark->selected() != 0 )
+    if ( ( mark->symbol() > 13 && mark->symbol() < 16 )||mark->selected() != 0 )
         font.setWeight( 75 );
 
     if ( role == 'P' )
