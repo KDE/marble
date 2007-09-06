@@ -23,7 +23,7 @@ DiscCache::DiscCache( const QString &cacheDirectory )
       mCacheLimit( 300 * 1024 * 1024 ),
       mCurrentCacheSize( 0 )
 {
-    Q_ASSERT( mCacheDirectory.isEmpty() && "Passed empty cache directory!" );
+    Q_ASSERT( !mCacheDirectory.isEmpty() && "Passed empty cache directory!" );
 
     QFile file( indexFileName( mCacheDirectory ) );
 
@@ -82,6 +82,11 @@ void DiscCache::clear()
 
     // Reset current cache size
     mCurrentCacheSize = 0;
+}
+
+bool DiscCache::exists( const QString &key ) const
+{
+    return mEntries.contains( key );
 }
 
 bool DiscCache::find( const QString &key, QByteArray &data )

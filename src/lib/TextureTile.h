@@ -46,7 +46,7 @@ class TextureTile : public QObject {
     uint   **jumpTable32;
 
  Q_SIGNALS:
-    void downloadTile( const QString& relativeUrlString, int id );
+    void downloadTile( const QString& relativeUrlString, const QString& id );
     void tileUpdateDone();
 
  public Q_SLOTS:

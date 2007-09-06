@@ -22,21 +22,19 @@
 
 #include <QtGui/QTextBrowser>
 
-
 class HttpDownloadManager;
-
+class CacheStoragePolicy;
 
 class TinyWebBrowser : public QTextBrowser
 {
-
     Q_OBJECT
 
  public:
-    TinyWebBrowser( QWidget* parent );
+    TinyWebBrowser( QWidget* parent = 0 );
+    ~TinyWebBrowser();
 
  public Q_SLOTS:
     void setSource( const QString& relativeUrl );
-    void slotDownloadFinished( const QString&, int );
 
  Q_SIGNALS:
     void statusMessage( QString );
@@ -44,7 +42,11 @@ class TinyWebBrowser : public QTextBrowser
  protected:
     virtual QVariant loadResource ( int type, const QUrl & name );
 
+ private Q_SLOTS:
+    void slotDownloadFinished( const QString&, const QString& );
+
  private:
+    CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     QString         m_source;
     QList<QUrl>     m_urlList;

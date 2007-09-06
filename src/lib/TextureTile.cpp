@@ -151,7 +151,7 @@ void TextureTile::loadTile( int x, int y, int level,
     }
     else {
 //      qDebug() << "emit downloadTile(" << relfilename << ");";
-      emit downloadTile( relfilename, m_id );
+      emit downloadTile( relfilename, QString::number( m_id ) );
     }
   }
 

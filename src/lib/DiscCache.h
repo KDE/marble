@@ -24,6 +24,7 @@ class DiscCache
 
         quint64 cacheLimit() const;
         void clear();
+        bool exists( const QString &key ) const;
         bool find( const QString &key, QByteArray &data );
         bool insert( const QString &key, const QByteArray &data );
         void remove( const QString &key );

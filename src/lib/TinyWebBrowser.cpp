@@ -18,23 +18,22 @@
 #include <QtGui/QTextFrame>
 
 #include "HttpDownloadManager.h"
+#include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"
 
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
-    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/") );
-    m_downloadManager->setTargetDir( MarbleDirs::localPath() + "/cache/" );
+    m_storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath() + "/cache/" );
 
-    connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
-        this, SLOT( slotDownloadFinished( QString, int ) ) );
+    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/"),
+                                                 m_storagePolicy );
+
+    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ), 
+        this, SLOT( slotDownloadFinished( QString, QString ) ) );
     connect( m_downloadManager, SIGNAL( statusMessage( QString ) ), 
         this, SIGNAL( statusMessage( QString ) ) );
-//    connect( m_downloadManager, SIGNAL( downloadDone( QString, bool ) ),
-//             this,        SLOT( slotDownloadFinished( QString, bool ) ) );
-//    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ),
-//             SIGNAL( statusMessage( QString) ) );		
 
     QStringList  searchPaths;
     searchPaths << MarbleDirs::localPath() + "/cache/"
@@ -42,58 +41,75 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     setSearchPaths( searchPaths );
 }
 
-
-QVariant TinyWebBrowser::loadResource ( int type, const QUrl & relativeUrl )
+TinyWebBrowser::~TinyWebBrowser()
 {
-    QString relativeUrlString = relativeUrl.toString();
+    delete m_downloadManager;
+    delete m_storagePolicy;
+}
 
-    if (relativeUrlString.startsWith( '/' ) )
-        relativeUrlString = relativeUrlString.section( '/', 1, -1 );
+QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
+{
+    QString server, relativeUrl;
 
-    qDebug() << "loadResource: " << relativeUrlString;
-
-    if ( type != QTextDocument::HtmlResource && !m_urlList.contains(relativeUrlString) ) {
-        qDebug() << QString("Scheduling %1 for download.")
-            .arg(relativeUrlString);
-        m_downloadManager->addJob( relativeUrlString, /* id= */ 0 );
+    if ( url.scheme().isEmpty() ) {
+      // We have something like 'img/foo.png'
+      relativeUrl = url.toString();
+    } else {
+      server = url.scheme() + "://" + url.host();
+      relativeUrl = url.path();
     }
 
-    if ( type == QTextDocument::ImageResource && !m_urlList.contains( relativeUrlString ) )
+    if ( type == QTextDocument::ImageResource )
     {
-        QPixmap  emptyPixmap(1,1);
-        emptyPixmap.fill( Qt::transparent );
-
-        return emptyPixmap;
+        if ( m_storagePolicy->fileExists( relativeUrl ) ) {
+            const QImage img = QImage::fromData( m_storagePolicy->data( relativeUrl ) );
+            return QPixmap::fromImage( img );
+        }
+    } else if ( type == QTextDocument::StyleSheetResource && m_storagePolicy->fileExists( relativeUrl ) ) {
+        return m_storagePolicy->data( relativeUrl );
     }
 
-    return QTextBrowser::loadResource( type, QUrl( relativeUrlString ) );
+    if ( type != QTextDocument::HtmlResource && !m_storagePolicy->fileExists( relativeUrl ) ) {
+        if ( server.isEmpty() ) {
+          m_downloadManager->addJob( relativeUrl, relativeUrl );
+        } else {
+          m_downloadManager->addJob( server, relativeUrl, relativeUrl );
+        }
+        return QVariant();
+    }
+
+    return QTextBrowser::loadResource( type, url );
 }
 
 
-void TinyWebBrowser::setSource( const QString& relativeUrlString )
+void TinyWebBrowser::setSource( const QString& url )
 {
-    m_source = relativeUrlString;
-    m_downloadManager->addJob( relativeUrlString, /* id= */ 0 );
+    m_source = url;
+
+    if ( !m_storagePolicy->fileExists( url ) )
+        m_downloadManager->addJob( url, url );
+    else
+        slotDownloadFinished( url, url );
 }
 
 
-void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, int )
+void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )
 {
-    qDebug() << "downloadFinished" << relativeUrlString;
-//    if ( !m_urlList.contains( relativeUrlString ) )
-//        m_urlList.append( relativeUrlString );
-
     if ( relativeUrlString == m_source )	{
-        QTextBrowser::setSource( relativeUrlString );
+        QTextBrowser::setHtml( m_storagePolicy->data( id ) );
 
         QTextFrameFormat  format = document()->rootFrame()->frameFormat();
         format.setMargin(12);
         document()->rootFrame()->setFrameFormat( format );
-    }
-    else {
-        qDebug( "Reload" );
-//        QTextBrowser::setSource( m_source );
-        // m_urlList.removeAll();
+    } else {
+        /**
+         * Evil hack to trigger page update
+         */
+        QSizeF size = document()->pageSize();
+        size *= 2;
+        document()->setPageSize( size );
+        size /= 2;
+        document()->setPageSize( size );
     }
 }
 

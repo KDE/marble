@@ -106,7 +106,7 @@ class TileLoader : public QObject {
 
 public Q_SLOTS:
 
-    void reloadTile( QString relativeUrlString, int id );
+    void reloadTile( QString relativeUrlString, QString id );
 
     void message( const QString& test ){ qDebug() << test; }
 };

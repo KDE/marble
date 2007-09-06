@@ -1,3 +1,10 @@
+2007-09-06  Tobias Koenig  <tokoe@kde.org>
+
+  Refactored HttpDownloadManager and HttpFetchFile by introducing
+	StoragePolicy.
+
+	Fixed the TinyHttpBrowser to show images and load style sheets.
+
 2007-09-05  Tobias Koenig  <tokoe@kde.org>
 
   Add DiscCache class

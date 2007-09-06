@@ -27,6 +27,8 @@
 
 #include "HttpFetchFile.h"
 
+class StoragePolicy;
+
 /*
  * @Short This class manages scheduled downloads. 
 
@@ -39,52 +41,64 @@
 
 class HttpDownloadManager : public QObject 
 {
+    friend class HttpJob;
+
     Q_OBJECT
-public:
-    HttpDownloadManager( const QUrl& serverUrl );
+ public:
+    /**
+     * Creates a new http download manager.
+     *
+     * @param serverUrl The url of the server to download from.
+     * @param policy The storage policy for this manager.
+     */
+    HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *policy );
+
+    /**
+     * Destroys the http download manager.
+     */
     virtual ~HttpDownloadManager();
 
-    // void addJob(HttpJob*){};
-    // void killJob(HttpJob*){};
-    // void killAllJobs(){};
+    /**
+     * Sets the url of the server to download from.
+     */
+    void setServerUrl( const QUrl& serverUrl );
 
-    void setTargetDir(const QString& targetDir)
-    {
-        m_targetDir = targetDir;
-        m_fetchFile -> setTargetDir( m_targetDir );
-    }
+    /**
+     * Sets the limit of jobs to be queued.
+     */
+    void setJobQueueLimit( int jobQueueLimit );
 
-    void setServerUrl(const QUrl& serverUrl)
-    {
-        m_serverUrl = serverUrl;
-    }
-
-    void setJobQueueLimit(int jobQueueLimit)
-    {
-        m_jobQueueLimit = jobQueueLimit;
-    }
-
-    void setActivatedJobsLimit(int activatedJobsLimit)
-    {
-        m_activatedJobsLimit = activatedJobsLimit;
-    }
+    /**
+     * Sets the limit of active jobs.
+     */
+    void setActivatedJobsLimit( int activatedJobsLimit );
 
  public Q_SLOTS:
-    void addJob( const QString& relativeUrlString, int id );
+    /**
+     * Adds a new job with the relative url and the given id.
+     */
+    void addJob( const QString& relativeUrlString, const QString &id );
 
-    void removeJob(HttpJob*);
+    /**
+     * Adds a new job with a server, relative url and given id.
+     */
+    void addJob( const QString& server, const QString& relativeUrlString, const QString &id );
 
-    void reportResult( HttpJob*, int );
+    /**
+     * Removes the @p job from the manager.
+     */
+    void removeJob( HttpJob *job );
+
 
  Q_SIGNALS:
-    void downloadComplete( QString, int id );
+    void downloadComplete( QString, QString );
     void statusMessage( QString );
 
-private Q_SLOTS:
-
+ private Q_SLOTS:
     void activateJobs();
+    void reportResult( HttpJob *job, int id );
 
-private:
+ private:
     // Check whether the job gets processed already or whether it got blacklisted
     bool              acceptJob( HttpJob  *job );
     bool              m_downloadEnabled;
@@ -98,10 +112,8 @@ private:
     int               m_activatedJobsLimit;
     int               m_jobQueueLimit;
 
-    QString           m_targetDir;
     QUrl              m_serverUrl;
-
-    // QTimer* timer; // the timer needs to be set for each item in the activatedJobsList
+    StoragePolicy    *m_storagePolicy;
 };
 
 
