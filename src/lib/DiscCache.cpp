@@ -7,9 +7,15 @@
 //
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
 //
-
+#if QT_VERSION >= 0x040300
 #include <QtCore/QDirIterator>
+#else
+#include <QtCore/QDir>
+#include <QtCore/QFileInfoListIterator>
+#endif
+
 #include <QtCore/QFile>
+
 
 #include "DiscCache.h"
 
@@ -19,40 +25,40 @@ static QString indexFileName( const QString &cacheDirectory )
 }
 
 DiscCache::DiscCache( const QString &cacheDirectory )
-    : mCacheDirectory( cacheDirectory ),
-      mCacheLimit( 300 * 1024 * 1024 ),
-      mCurrentCacheSize( 0 )
+    : m_CacheDirectory( cacheDirectory ),
+      m_CacheLimit( 300 * 1024 * 1024 ),
+      m_CurrentCacheSize( 0 )
 {
-    Q_ASSERT( !mCacheDirectory.isEmpty() && "Passed empty cache directory!" );
+    Q_ASSERT( !m_CacheDirectory.isEmpty() && "Passed empty cache directory!" );
 
-    QFile file( indexFileName( mCacheDirectory ) );
+    QFile file( indexFileName( m_CacheDirectory ) );
 
     if ( file.exists() ) {
         if ( file.open( QIODevice::ReadOnly ) ) {
             QDataStream s( &file );
             s.setVersion( 8 );
 
-            s >> mCacheLimit;
-            s >> mCurrentCacheSize;
-            s >> mEntries;
+            s >> m_CacheLimit;
+            s >> m_CurrentCacheSize;
+            s >> m_Entries;
 
         } else {
-            qWarning( "Unable to open cache directory %s", qPrintable( mCacheDirectory ) );
+            qWarning( "Unable to open cache directory %s", qPrintable( m_CacheDirectory ) );
         }
     }
 }
 
 DiscCache::~DiscCache()
 {
-    QFile file( indexFileName( mCacheDirectory ) );
+    QFile file( indexFileName( m_CacheDirectory ) );
 
     if ( file.open( QIODevice::WriteOnly ) ) {
         QDataStream s( &file );
         s.setVersion( 8 );
 
-        s << mCacheLimit;
-        s << mCurrentCacheSize;
-        s << mEntries;
+        s << m_CacheLimit;
+        s << m_CurrentCacheSize;
+        s << m_Entries;
     }
 
     file.close();
@@ -60,39 +66,56 @@ DiscCache::~DiscCache()
 
 quint64 DiscCache::cacheLimit() const
 {
-    return mCacheLimit;
+    return m_CacheLimit;
 }
 
 void DiscCache::clear()
 {
-    QDirIterator it( mCacheDirectory );
+#if QT_VERSION >= 0x040300
+    QDirIterator it( m_CacheDirectory );
 
     // Remove all files from cache directory
     while ( it.hasNext() ) {
         it.next();
 
-        if ( it.fileName() == indexFileName( mCacheDirectory ) ) // skip index file
+        if ( it.fileName() == indexFileName( m_CacheDirectory ) ) // skip index file
             continue;
 
         QFile::remove( it.fileName() );
     }
+#else
+    const QDir cacheDir( m_CacheDirectory );
+	const QFileInfoList cachedFiles = cacheDir.entryInfoList();
+
+	QListIterator<QFileInfo> it( cachedFiles );
+    QFileInfo fileinfo;
+
+    while ( it.hasNext() ) {
+        fileinfo = it.next();
+
+        if ( fileinfo.fileName() == indexFileName( m_CacheDirectory ) ) // skip index file
+            continue;
+
+        QFile::remove( fileinfo.fileName() );
+    }
+#endif
 
     // Delete entries
-    mEntries.clear();
+    m_Entries.clear();
 
     // Reset current cache size
-    mCurrentCacheSize = 0;
+    m_CurrentCacheSize = 0;
 }
 
 bool DiscCache::exists( const QString &key ) const
 {
-    return mEntries.contains( key );
+    return m_Entries.contains( key );
 }
 
 bool DiscCache::find( const QString &key, QByteArray &data )
 {
     // Return error if we don't know this key
-    if ( !mEntries.contains( key ) )
+    if ( !m_Entries.contains( key ) )
         return false;
 
     // If we can open the file, load all data and update access timestamp
@@ -100,7 +123,7 @@ bool DiscCache::find( const QString &key, QByteArray &data )
     if ( file.open( QIODevice::ReadOnly ) ) {
         data = file.readAll();
 
-        mEntries[ key ].first = QDateTime::currentDateTime();
+        m_Entries[ key ].first = QDateTime::currentDateTime();
         return true;
     }
 
@@ -115,17 +138,17 @@ bool DiscCache::insert( const QString &key, const QByteArray &data )
         return false;
 
     // If we overwrite an existing entry, substract the size first
-    if ( mEntries.contains( key ) )
-        mCurrentCacheSize -= mEntries.value( key ).second;
+    if ( m_Entries.contains( key ) )
+        m_CurrentCacheSize -= m_Entries.value( key ).second;
 
     // Store the data on disc
     file.write( data );
 
     // Create/Overwrite with a new entry
-    mEntries.insert( key, QPair<QDateTime, quint64>(QDateTime::currentDateTime(), data.length()) );
+    m_Entries.insert( key, QPair<QDateTime, quint64>(QDateTime::currentDateTime(), data.length()) );
 
     // Add the size of the new entry
-    mCurrentCacheSize += data.length();
+    m_CurrentCacheSize += data.length();
 
     cleanup();
 
@@ -135,7 +158,7 @@ bool DiscCache::insert( const QString &key, const QByteArray &data )
 void DiscCache::remove( const QString &key )
 {
     // Do nothing if we don't know the key
-    if ( !mEntries.contains( key ) )
+    if ( !m_Entries.contains( key ) )
         return;
 
     // If we can't remove the file we don't remove
@@ -144,15 +167,15 @@ void DiscCache::remove( const QString &key )
         return;
 
     // Substract from current size
-    mCurrentCacheSize -= mEntries.value( key ).second;
+    m_CurrentCacheSize -= m_Entries.value( key ).second;
 
     // Finally remove entry
-    mEntries.remove( key );
+    m_Entries.remove( key );
 }
 
 void DiscCache::setCacheLimit( quint64 n )
 {
-    mCacheLimit = n;
+    m_CacheLimit = n;
 
     cleanup();
 }
@@ -162,19 +185,19 @@ QString DiscCache::keyToFileName( const QString &key )
     QString fileName( key );
     fileName.replace( "/", "_" );
 
-    return mCacheDirectory + "/" + fileName;
+    return m_CacheDirectory + "/" + fileName;
 }
 
 void DiscCache::cleanup()
 {
     // Calculate 5% of our current cache limit
-    quint64 fivePercent = quint64( mCacheLimit * 0.05 );
+    quint64 fivePercent = quint64( m_CacheLimit * 0.05 );
 
-    while ( mCurrentCacheSize > (mCacheLimit - fivePercent) ) {
+    while ( m_CurrentCacheSize > (m_CacheLimit - fivePercent) ) {
         QDateTime oldestDate( QDateTime::currentDateTime() );
         QString oldestKey;
 
-        QMapIterator<QString, QPair<QDateTime, quint64> > it( mEntries );
+        QMapIterator<QString, QPair<QDateTime, quint64> > it( m_Entries );
         while ( it.hasNext() ) {
             it.next();
 

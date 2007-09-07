@@ -1,3 +1,8 @@
+2007-09-07  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/DiscCache.{h,cpp}:
+	- Coding-Style & compile with Qt 4.2, too. 
+
 2007-09-06  Tobias Koenig  <tokoe@kde.org>
 
   Refactored HttpDownloadManager and HttpFetchFile by introducing

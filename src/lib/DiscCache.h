@@ -35,12 +35,12 @@ class DiscCache
         void initialScan( const QStringList& );
         void cleanup();
 
-        QString mCacheDirectory;
-        quint64 mCacheLimit;
-        quint64 mCurrentCacheSize;
+        QString m_CacheDirectory;
+        quint64 m_CacheLimit;
+        quint64 m_CurrentCacheSize;
 
         typedef QPair<QDateTime, quint64> Entry;
-        QMap<QString, Entry> mEntries;
+        QMap<QString, Entry> m_Entries;
 };
 
 #endif
