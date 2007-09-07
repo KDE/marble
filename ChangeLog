@@ -3,6 +3,14 @@
   - Put tile creation into a worker thread and
 	  adopted the TileCreationDialog
 
+  - Improved HttpFetchFile by encoding the path
+	  url correctly, adding User-Agent and support
+		for HTTP redirect, now all city names are loaded
+		correctly from WikiPedia
+
+  - Read the HTML pages as UTF-8, now the webpages
+	  look a lot better
+
 2007-09-07  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/DiscCache.{h,cpp}:

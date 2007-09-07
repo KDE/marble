@@ -45,6 +45,7 @@ class HttpJob
         delete buffer;
     }
 
+    QString     originalRelativeUrlString;
     QString     relativeUrlString;
     QString     targetDirString;
     QUrl        serverUrl;

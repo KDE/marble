@@ -62,6 +62,7 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, const QStrin
     HttpJob  *job = new HttpJob;
     job->serverUrl = m_serverUrl;
     job->initiatorId = id;
+    job->originalRelativeUrlString = relativeUrlString;
     job->relativeUrlString = relativeUrlString;
 
     if ( acceptJob( job ) ) {
@@ -83,6 +84,7 @@ void HttpDownloadManager::addJob( const QString& server, const QString& relative
     HttpJob  *job = new HttpJob;
     job->serverUrl = server;
     job->initiatorId = id;
+    job->originalRelativeUrlString = relativeUrlString;
     job->relativeUrlString = relativeUrlString;
 
     if ( acceptJob( job ) ) {
@@ -105,7 +107,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
 
     for (i = m_jobQueue.begin(); i != m_jobQueue.end(); ++i)
     {
-        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        if ( job->originalRelativeUrlString == (*i)->originalRelativeUrlString )
         {
 //            qDebug() << "Download rejected: It's in the queue already.";
             (*i)->initiatorId = job->initiatorId;
@@ -114,7 +116,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     }
     for (i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i)
     {
-        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        if ( job->originalRelativeUrlString == (*i)->originalRelativeUrlString )
         {
 //            qDebug() << "Download rejected: It's being downloaded already.";
             (*i)->initiatorId = job->initiatorId;
@@ -123,7 +125,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     }
     for (i = m_jobBlackList.begin(); i != m_jobBlackList.end(); ++i)
     {
-        if ( job->relativeUrlString == (*i)->relativeUrlString )
+        if ( job->originalRelativeUrlString == (*i)->originalRelativeUrlString )
         {
 //            qDebug() << "Download rejected: Blacklisted.";
             (*i)->initiatorId = job->initiatorId;
@@ -178,7 +180,7 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
     }
     else 
     {
-        emit downloadComplete( job->relativeUrlString, job->initiatorId );
+        emit downloadComplete( job->originalRelativeUrlString, job->initiatorId );
         removeJob( job );
 
 //        qDebug() << "Download Complete!";

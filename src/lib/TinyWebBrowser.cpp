@@ -96,7 +96,7 @@ void TinyWebBrowser::setSource( const QString& url )
 void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )
 {
     if ( relativeUrlString == m_source )	{
-        QTextBrowser::setHtml( m_storagePolicy->data( id ) );
+        QTextBrowser::setHtml( QString::fromUtf8( m_storagePolicy->data( id ) ) );
 
         QTextFrameFormat  format = document()->rootFrame()->frameFormat();
         format.setMargin(12);

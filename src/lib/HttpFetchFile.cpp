@@ -35,7 +35,7 @@ HttpFetchFile::~HttpFetchFile()
 
 void HttpFetchFile::executeJob( HttpJob* job )
 {
-    if ( m_storagePolicy->fileExists( job->relativeUrlString ) ) {
+    if ( m_storagePolicy->fileExists( job->originalRelativeUrlString ) ) {
         qDebug( "File already exists" );
         emit jobDone( job, 1 );
 
@@ -48,7 +48,14 @@ void HttpFetchFile::executeJob( HttpJob* job )
     if ( !sourceUrl.userName().isEmpty() )
         m_pHttp->setUser( sourceUrl.userName(), sourceUrl.password() );
 
-    int httpGetId = m_pHttp->get( sourceUrl.path(), job->buffer );
+    const QString cleanupPath = QUrl::toPercentEncoding( sourceUrl.path(), "/", " -" );
+
+    QHttpRequestHeader header( QLatin1String("GET"), cleanupPath );
+    header.setValue( "Connection", "Keep-Alive" );
+    header.setValue( "User-Agent", "Marble TinyWebBrowser" );
+    header.setValue( "Host", sourceUrl.host() );
+
+    int httpGetId = m_pHttp->request( header, 0, job->buffer );
     m_pJobMap.insert( httpGetId, job );
 
     emit statusMessage( tr("Downloading data...") );
@@ -62,6 +69,16 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
     QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
 
     HttpJob* job = m_pJobMap[ requestId ];
+
+    if ( responseHeader.statusCode() == 301 ) {
+        QUrl newLocation( responseHeader.value( "Location" ) );
+        job->serverUrl = newLocation.scheme() + "://" + newLocation.host();
+        job->relativeUrlString = newLocation.path();
+
+        // Let's try again
+        executeJob( job );
+        return;
+    }
 
     if ( responseHeader.statusCode() != 200 ) {
         emit statusMessage( tr( "Download failed: %1." )
@@ -82,7 +99,7 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 
     }
 
-    if ( !m_storagePolicy->updateFile( job->relativeUrlString, job->data ) ) {
+    if ( !m_storagePolicy->updateFile( job->originalRelativeUrlString, job->data ) ) {
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_storagePolicy->lastErrorMessage() ) );
         emit jobDone( m_pJobMap[ requestId ], error );
