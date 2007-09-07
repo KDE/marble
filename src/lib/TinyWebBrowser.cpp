@@ -21,13 +21,36 @@
 #include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"
 
+static QString guessWikipediaDomain()
+{
+    const QString lang = getenv( "LANG" );
+    QString code;
+
+    if ( lang.isEmpty() )
+        code = "en";
+    else {
+
+        int index = lang.indexOf( '_' );
+        if ( index != -1 ) {
+            code = lang.left( index );
+        } else {
+            index = lang.indexOf( '@' );
+            if ( index != -1 )
+                code = lang.left( index );
+            else
+                code = lang;
+        }
+    }
+
+    return QString( "http://%1.wikipedia.org/" ).arg( code );
+}
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
     : QTextBrowser( parent )
 {
     m_storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath() + "/cache/" );
 
-    m_downloadManager = new HttpDownloadManager( QUrl("http://en.wikipedia.org/"),
+    m_downloadManager = new HttpDownloadManager( QUrl( guessWikipediaDomain() ),
                                                  m_storagePolicy );
 
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ), 

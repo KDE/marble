@@ -11,6 +11,10 @@
   - Read the HTML pages as UTF-8, now the webpages
 	  look a lot better
 
+  - Guess the wikipedia domain to use by examine the
+	  $LANG variable, so 'LANG=sv marble' will use the
+		swedish wikipedia site ;)
+
 2007-09-07  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/DiscCache.{h,cpp}:
