@@ -9,6 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include <QtCore/QTimer>
+
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 
@@ -31,6 +33,7 @@ TileCreatorDialog::~TileCreatorDialog()
 
     m_creator->terminate();
     m_creator->deleteLater();
+    m_creator->wait( 1000 );
 }
 
 void TileCreatorDialog::setProgress( int progress )
@@ -38,7 +41,7 @@ void TileCreatorDialog::setProgress( int progress )
     progressBar->setValue( progress );
 
     if ( progress == 100 )
-        accept(); 
+        QTimer::singleShot( 0, this, SLOT( accept() ) ); 
 }
 
 void TileCreatorDialog::setSummary( const QString& name, 
