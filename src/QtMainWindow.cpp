@@ -53,6 +53,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
 
     readSettings();
     setUpdatesEnabled( true );
+
+    connect( marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
+              this, SLOT( showPosition( QString ) ) );
 }
 
 void MainWindow::createActions()
@@ -244,6 +247,11 @@ void MainWindow::aboutMarble()
 {
     MarbleAboutDialog dlg(this);
     dlg.exec();
+}
+
+void MainWindow::showPosition( const QString& position )
+{
+    statusBar()->showMessage(tr("Position: ") + position );
 }
 
 void MainWindow::openFile()

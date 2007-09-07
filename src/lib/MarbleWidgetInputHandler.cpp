@@ -125,9 +125,17 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         {
             double  lat;
             double  lon;
-            m_widget->geoCoordinates( event->x(), event->y(), lon, lat, GeoPoint::Radian );
-            QString position = GeoPoint( lon, lat ).toString();
-            emit mouseMoveGeoPosition( position );
+            bool isValid = m_widget->geoCoordinates( event->x(), event->y(), lon, lat, GeoPoint::Radian );
+
+            if ( isValid == false )
+            {
+                emit mouseMoveGeoPosition( tr("not available") );
+            } 
+            else
+            {
+                QString position = GeoPoint( lon, lat ).toString( GeoPoint::DMS );
+                emit mouseMoveGeoPosition( position );
+            }
         }
 
 

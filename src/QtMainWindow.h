@@ -49,6 +49,9 @@ class MainWindow : public QMainWindow
     void  readSettings();
     void  writeSettings();
 
+ public Q_SLOTS:
+    void  showPosition( const QString& position);
+
  private Q_SLOTS:
     void exportMapScreenShot();
     void printMapScreenShot();

@@ -1,3 +1,19 @@
+2007-09-08  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/GeoPoint.{h,cpp}:
+	- Introducing different Notations: Decimal and Sexagesimal (DMS).
+
+	* src/QtMainWindow.{h,cpp}:
+	* src/lib/MarbleWidget.{h,cpp}:
+	* src/lib/MarbleWidgetInputHandler.cpp:
+	- Fix for displaying the position in the statusbar.
+
+	* src/plugins/marblewidget/CMakeLists.txt:
+	* src/plugins/navigator/CMakeLists.txt:
+	* examples/example2.ui:
+	- Clean up as somebody broke the MarbleNavigator plugin.
+	  Still needs to be fixed.
+
 2007-09-07  Tobias Koenig  <tokoe@kde.org>
 
   - Put tile creation into a worker thread and

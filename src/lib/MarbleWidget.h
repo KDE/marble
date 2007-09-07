@@ -685,6 +685,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  protected:
     /**
+     * @brief Reimplementation of the leaveEvent() function in QWidget.
+     */
+    void  leaveEvent( QEvent *event );
+
+    /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
     void  paintEvent( QPaintEvent *event );

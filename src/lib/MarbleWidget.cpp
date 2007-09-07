@@ -595,6 +595,11 @@ void MarbleWidget::moveDown()
     rotateBy( 0, -moveStep() );
 }
 
+void MarbleWidget::leaveEvent (QEvent*)
+{
+    emit mouseMoveGeoPosition( tr("not available") );
+}
+
 void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
@@ -628,13 +633,15 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
 void MarbleWidget::connectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == SIGNAL( mouseMoveGeoPosition( QString ) ) )
+    if ( QLatin1String( signal ) == 
+         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( true );
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == SIGNAL( mouseMoveGeoPosition( QString ) ) )
+    if ( QLatin1String( signal ) == 
+         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( false );
 }
 

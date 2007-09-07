@@ -344,8 +344,8 @@
    <slot>setShowPlaces(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>101</x>
-     <y>414</y>
+     <x>111</x>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel" >
      <x>219</x>
@@ -361,7 +361,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
-     <y>414</y>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel" >
      <x>284</x>
@@ -376,8 +376,8 @@
    <slot>setShowGrid(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>129</x>
-     <y>470</y>
+     <x>139</x>
+     <y>497</y>
     </hint>
     <hint type="destinationlabel" >
      <x>169</x>
@@ -393,7 +393,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
-     <y>442</y>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel" >
      <x>323</x>
@@ -412,8 +412,8 @@
      <y>217</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>107</x>
-     <y>540</y>
+     <x>106</x>
+     <y>553</y>
     </hint>
    </hints>
   </connection>
@@ -425,7 +425,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>343</x>
-     <y>414</y>
+     <y>441</y>
     </hint>
     <hint type="destinationlabel" >
      <x>381</x>
@@ -441,7 +441,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>513</x>
-     <y>470</y>
+     <y>497</y>
     </hint>
     <hint type="destinationlabel" >
      <x>513</x>
@@ -456,8 +456,8 @@
    <slot>setShowBorders(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>99</x>
-     <y>442</y>
+     <x>109</x>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel" >
      <x>197</x>
@@ -473,7 +473,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>343</x>
-     <y>442</y>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel" >
      <x>412</x>
@@ -489,7 +489,7 @@
    <hints>
     <hint type="sourcelabel" >
      <x>343</x>
-     <y>470</y>
+     <y>497</y>
     </hint>
     <hint type="destinationlabel" >
      <x>451</x>
@@ -504,8 +504,8 @@
    <slot>setShowRivers(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>337</x>
-     <y>470</y>
+     <x>343</x>
+     <y>497</y>
     </hint>
     <hint type="destinationlabel" >
      <x>481</x>
@@ -520,8 +520,8 @@
    <slot>setQuickDirty(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>398</x>
-     <y>485</y>
+     <x>513</x>
+     <y>525</y>
     </hint>
     <hint type="destinationlabel" >
      <x>345</x>

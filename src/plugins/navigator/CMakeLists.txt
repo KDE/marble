@@ -1,12 +1,5 @@
 
-PROJECT( MarbleNavigatorPlugin )
-cmake_minimum_required(VERSION 2.4.0)
-
-option(QTONLY  "Build Qt only" OFF)
-
-if(QTONLY)
-  find_package(Qt4 REQUIRED)
-endif(QTONLY)
+PROJECT(MarbleNavigatorPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/plugins/navigator
@@ -37,10 +30,8 @@ if (QTONLY)
   qt4_automoc(${marblenavigator_SRCS})
   add_library(MarbleNavigatorPlugin SHARED ${marblenavigator_SRCS})
   target_link_libraries (MarbleNavigatorPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY})
-
   install(TARGETS MarbleNavigatorPlugin DESTINATION ${QT_PLUGINS_DIR}/designer)
 else (QTONLY)
-  INCLUDE_DIRECTORIES( ${KDE4_INCLUDES} )
   kde4_add_library(MarbleNavigatorPlugin SHARED ${marblenavigator_SRCS})
   target_link_libraries (MarbleNavigatorPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
   install(TARGETS MarbleNavigatorPlugin DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer)
