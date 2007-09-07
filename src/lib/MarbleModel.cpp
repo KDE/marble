@@ -189,32 +189,15 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
         {
             qDebug("Base tiles not available. Creating Tiles ... ");
 
-#if 1
-            TileCreatorDialog  tileCreatorDlg( parent );
-            tileCreatorDlg.setSummary( d->m_maptheme->name(),
-                                       d->m_maptheme->description() );
-#endif
-
-            TileCreator tilecreator( d->m_maptheme->prefix(),
+            TileCreator *tileCreator = new TileCreator(
+                                     d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
 
-            // This timer is necessary, because if we remove it, the GUI
-            // never gets shown before the work starts.
-            QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
-#if 1
-            connect( &tilecreator,    SIGNAL( progress( int ) ),
-                     &tileCreatorDlg, SLOT( setProgress( int ) ) );
-
+            TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+            tileCreatorDlg.setSummary( d->m_maptheme->name(),
+                                       d->m_maptheme->description() );
             tileCreatorDlg.exec();
-#else
-
-            connect( &tilecreator, SIGNAL( progress( int ) ),
-                     this,         SIGNAL( creatingTilesProgress( int ) ) );
-
-            emit creatingTilesStart( d->m_maptheme->name(),
-                                 d->m_maptheme->description() );
-#endif
         }
         if ( d->m_texmapper == 0 )
             switch( currentProjection ) {

@@ -86,10 +86,6 @@ class MarbleWidgetPrivate
     MeasureTool     *m_measureTool;
 
     QRegion          m_activeRegion;
-
-    // The progress dialog for the tile creator.
-    TileCreatorDialog  *m_tileCreatorDlg;
-
 };
 
 
@@ -127,10 +123,8 @@ void MarbleWidget::construct(QWidget *parent)
     // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
 
-    connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
-             this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
-    connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
-             this,    SLOT( creatingTilesProgress( int ) ) );
+    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
+             this,    SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
     connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
@@ -1129,29 +1123,19 @@ void MarbleWidget::setQuickDirty( bool enabled )
 
 // This slot will called when the Globe starts to create the tiles.
 
-void MarbleWidget::creatingTilesStart( const QString &name, const QString &description )
+void MarbleWidget::creatingTilesStart( TileCreator *creator, const QString &name, const QString &description )
 {
     qDebug("MarbleWidget::creatingTilesStart called... ");
 
-    d->m_tileCreatorDlg = new TileCreatorDialog( this );
+    TileCreatorDialog dlg( creator, this );
+    dlg.setSummary( name, description );
+    dlg.exec();
 
-    d->m_tileCreatorDlg->setSummary( name, description );
-
-    // The process itself is started by a timer, so an exec() is ok here.
-    d->m_tileCreatorDlg->exec();
     qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
 // This slot will be called during the tile creation progress.  When
 // the progress goes to 100, the dialog should be closed.
-
-void MarbleWidget::creatingTilesProgress( int progress )
-{
-    d->m_tileCreatorDlg->setProgress( progress );
-
-    if ( progress == 100 )
-        delete d->m_tileCreatorDlg;
-}
 
 void MarbleWidget::updateChangedMap()
 {

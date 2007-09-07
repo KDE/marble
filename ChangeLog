@@ -1,3 +1,8 @@
+2007-09-07  Tobias Koenig  <tokoe@kde.org>
+
+  - Put tile creation into a worker thread and
+	  adopted the TileCreationDialog
+
 2007-09-07  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/DiscCache.{h,cpp}:

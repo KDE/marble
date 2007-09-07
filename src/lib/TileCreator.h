@@ -14,11 +14,11 @@
 #define TILECREATOR_H
 
 
-#include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QThread>
 
 
-class TileCreator : public QObject
+class TileCreator : public QThread
 {
     Q_OBJECT
 
@@ -29,8 +29,8 @@ class TileCreator : public QObject
  Q_SIGNALS:
     void  progress( int value );
 
- public Q_SLOTS:
-    bool createTiles();
+ protected:
+    virtual void run();
 
  private:
     QString  m_prefix;

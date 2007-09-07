@@ -9,19 +9,29 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include "TileCreator.h"
 #include "TileCreatorDialog.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QTimer>
-
-#include "TileCreator.h"
-
-
-TileCreatorDialog::TileCreatorDialog(QWidget *parent) : QDialog(parent) 
+TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
+    : QDialog(parent), m_creator( creator )
 {
     setupUi(this);
+
+    connect( m_creator, SIGNAL( progress( int ) ),
+             this, SLOT( setProgress( int ) ), Qt::QueuedConnection );
+
+    // Start the creation process
+    m_creator->start();
 }
 
+TileCreatorDialog::~TileCreatorDialog()
+{
+    disconnect( m_creator, SIGNAL( progress( int ) ),
+                this, SLOT( setProgress( int ) ) );
+
+    m_creator->terminate();
+    m_creator->deleteLater();
+}
 
 void TileCreatorDialog::setProgress( int progress )
 {
@@ -34,9 +44,8 @@ void TileCreatorDialog::setProgress( int progress )
 void TileCreatorDialog::setSummary( const QString& name, 
                                     const QString& description )
 { 
-    QString summary = "<B>" + tr( name.toUtf8() ) + "</B><BR>" + tr( description.toUtf8() );
+    const QString summary = "<B>" + tr( name.toUtf8() ) + "</B><BR>" + tr( description.toUtf8() );
     descriptionLabel->setText( summary );
 }
-
 
 #include "TileCreatorDialog.moc"

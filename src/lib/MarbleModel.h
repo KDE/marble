@@ -47,12 +47,13 @@
 
 class ClipPainter;
 class FileViewModel;
+class GpxFileModel;
+class GpsLayer;
 class KMLDocument;
+class MarbleModelPrivate;
 class PlaceMark;
 class PlaceMarkManager;
-class GpsLayer;
-class GpxFileModel;
-class MarbleModelPrivate;
+class TileCreator;
 class ViewParams;
 
 
@@ -149,8 +150,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void stopPolling();
 
  Q_SIGNALS:
-    void creatingTilesStart( const QString& name, const QString& description );
-    void creatingTilesProgress( int progress );
+    void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
 
     void themeChanged( QString );
     void modelChanged();
