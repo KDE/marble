@@ -7,6 +7,9 @@
 //
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
 //
+
+#include <QtCore/QtGlobal>
+
 #if QT_VERSION >= 0x040300
 #include <QtCore/QDirIterator>
 #else
