@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=Marble Part
+Name[es]=Part Marble
 Name[ga]=Comhpháirt Marble
 Name[pt]=Componente do Marble
 Name[pt_BR]=Componente do Marble
