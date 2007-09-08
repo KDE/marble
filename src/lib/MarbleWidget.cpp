@@ -633,14 +633,14 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
 void MarbleWidget::connectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == 
+    if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( true );
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == 
+    if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( false );
 }
