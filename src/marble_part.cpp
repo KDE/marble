@@ -35,8 +35,8 @@
 
 namespace
 {
-    const char* POSITION_STRING = "Position:";
-    const char* DISTANCE_STRING = "Distance:";
+    const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
+    const char* DISTANCE_STRING = I18N_NOOP( "Distance: %1" );
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
@@ -262,12 +262,10 @@ void MarblePart::showDistance( const QString& distance )
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
-        m_positionLabel->setText( QString( "%1 %2" ).
-        arg( tr( POSITION_STRING ) ).arg( m_position ) ); 
+        m_positionLabel->setText( i18n( POSITION_STRING, m_position ) ); 
 
     if ( m_distanceLabel )
-        m_distanceLabel->setText( QString( "%1 %2" )
-        .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) ); 
+        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) ); 
 }
 
 void MarblePart::setupStatusBar()
