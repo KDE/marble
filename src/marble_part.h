@@ -47,7 +47,6 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
-    void  showZoom(int zoom);
 
   private:
     void  setupActions();
@@ -59,9 +58,6 @@ class MarblePart: public KParts::ReadOnlyPart
     // All the functionality is provided by this widget.
     ControlView  *m_controlView;
 
-    // Zoom label for the statusbar.
-    QLabel       *m_zoomLabel;
-
     // Actions for the GUI.
     KAction      *m_exportMapAction;
     KAction      *m_printMapAction;
@@ -69,6 +65,15 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_sideBarAct;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
+
+    QString m_position;
+    QString m_distance;
+
+    // Zoom label for the statusbar.
+    QLabel       *m_positionLabel;
+    QLabel       *m_distanceLabel;
+
+    void updateStatusBar();
 
     KParts::StatusBarExtension *m_statusBarExtension;
 };

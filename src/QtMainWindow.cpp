@@ -272,8 +272,13 @@ void MainWindow::showDistance( const QString& distance )
 
 void MainWindow::updateStatusBar()
 {
-    m_positionLabel->setText( QString( "%1 %2" ).arg( tr( POSITION_STRING ) ).arg( m_position ) ); 
-    m_distanceLabel->setText( QString( "%1 %2" ).arg( tr( DISTANCE_STRING ) ).arg( m_distance ) ); 
+    if ( m_positionLabel )
+        m_positionLabel->setText( QString( "%1 %2" ).
+        arg( tr( POSITION_STRING ) ).arg( m_position ) ); 
+
+    if ( m_distanceLabel )
+        m_distanceLabel->setText( QString( "%1 %2" )
+        .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) ); 
 }
 
 void MainWindow::openFile()

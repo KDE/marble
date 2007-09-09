@@ -36,7 +36,7 @@ typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
 K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
-  : KParts::ReadOnlyPart( parent ), m_zoomLabel( 0 )
+  : KParts::ReadOnlyPart( parent ), m_positionLabel( 0 ), m_distanceLabel( 0 )
 {
     MarbleDirs::setMarbleDataPath( arguments.count() != 0 ? arguments.first() : MarbleSettings::marbleDataPath() );
 
@@ -96,13 +96,6 @@ bool MarblePart::openFile()
 
     return true;
 }
-
-void MarblePart::showZoom( int zoom )
-{
-    if ( m_zoomLabel )
-        m_zoomLabel->setText( i18n( "Zoom: %1", QString("%1").arg ( zoom, 4 ) ) );
-}
-
 
 
 void MarblePart::exportMapScreenShot()
@@ -247,14 +240,55 @@ void MarblePart::setupActions()
     readSettings();
 }
 
+void MarblePart::showPosition( const QString& position )
+{
+    m_position = position;
+    updateStatusBar();
+}
+
+void MarblePart::showDistance( const QString& distance )
+{
+    m_distance = distance;
+    updateStatusBar();
+}
+
+void MarblePart::updateStatusBar()
+{
+    if ( m_positionLabel )
+        m_positionLabel->setText( QString( "%1 %2" ).
+        arg( tr( POSITION_STRING ) ).arg( m_position ) ); 
+
+    if ( m_distanceLabel )
+        m_distanceLabel->setText( QString( "%1 %2" )
+        .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) ); 
+}
+
 void MarblePart::setupStatusBar()
 {
-    m_zoomLabel = new QLabel( m_statusBarExtension->statusBar() );
-    m_statusBarExtension->addStatusBarItem( m_zoomLabel, -1, false );
+    m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
+    m_positionLabel->setIndent( 5 );
+    QString templatePositionString = 
+        QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
+    int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width()
+                            + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
+    m_positionLabel->setFixedWidth( maxPositionWidth );
+    m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
 
-    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
-             this,                          SLOT( showZoom( int ) ) );
-    showZoom( m_controlView->marbleWidget()->zoom() );
+    m_distanceLabel = new QLabel( m_statusBarExtension->statusBar() );
+    m_distanceLabel->setIndent( 5 );
+    QString templateDistanceString = 
+        QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
+    int maxDistanceWidth = fontMetrics().boundingRect(templateDistanceString).width()
+                            + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
+    m_distanceLabel->setFixedWidth( maxDistanceWidth );
+    m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
+
+    connect( marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
+              this, SLOT( showPosition( QString ) ) );
+    connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
+              this, SLOT( showDistance( QString ) ) );
+
+    updateStatusBar();
 }
 
 #include "marble_part.moc"

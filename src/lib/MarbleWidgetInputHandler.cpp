@@ -41,7 +41,7 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
     arrowcur [1][0] = QCursor(curpmtc,10,3);
     arrowcur [2][0] = QCursor(curpmtr,19,2);
     arrowcur [0][1] = QCursor(curpmcl,3,10);
-    arrowcur [1][1] = QCursor(Qt::PointingHandCursor);
+    arrowcur [1][1] = QCursor(Qt::OpenHandCursor);
     arrowcur [2][1] = QCursor(curpmcr,18,10);
     arrowcur [0][2] = QCursor(curpmbl,2,19);
     arrowcur [1][2] = QCursor(curpmbc,11,18);
@@ -140,6 +140,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 
 
         if ( activeRegion.contains( event->pos() ) ) {
+
             if ( e->type() == QEvent::MouseButtonDblClick) {
                 qDebug("check");
             }
@@ -287,6 +288,21 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
                     m_widget->rotateBy( -m_widget->moveStep() * (double)(-dirx),
                                         -m_widget->moveStep() * (double)(+diry) );
             }				
+        }
+
+        // Adjusting Cursor shape
+
+        if ( ( m_widget->model()-> whichFeatureAt( QPoint( event->x(), event->y() ) ) ).size() == 0 )
+        {
+            if ( m_leftpressed == false )
+                arrowcur [1][1] = QCursor(Qt::OpenHandCursor);
+            else
+                arrowcur [1][1] = QCursor(Qt::ClosedHandCursor);
+        }
+        else
+        {
+            if ( m_leftpressed == false )
+                arrowcur [1][1] = QCursor(Qt::PointingHandCursor);
         }
 
         m_widget->setCursor(arrowcur[dirx+1][diry+1]);

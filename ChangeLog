@@ -1,5 +1,15 @@
 2007-09-09  Torsten Rahn  <rahn@kde.org>
 
+	* src/lib/MarbleWidgetInputHandler.cpp:
+	- Give visual feedback if the mouse hovers placemarks.
+	- Give visual feedback if the mouse drags the planet.
+
+	* src/QtMainWindow.cpp:
+	* src/marble_part.{h,cpp}:
+	- Position and Distance display in StatusBar for KDE frontend.
+
+2007-09-09  Torsten Rahn  <rahn@kde.org>
+
 	* src/QtMainWindow.{h,cpp}
 	* src/lib/MarbleWidget.{h,cpp}
 	* src/lib/MapScaleFloatItem.cpp
