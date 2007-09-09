@@ -32,6 +32,12 @@
 
 #include "marble_part.h"
 
+namespace
+{
+    const char* POSITION_STRING = "Position:";
+    const char* DISTANCE_STRING = "Distance:";
+}
+
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
 K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 

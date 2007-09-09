@@ -38,6 +38,8 @@ class MarblePart: public KParts::ReadOnlyPart
   public Q_SLOTS:
     bool openUrl( const KUrl &url );
     bool openFile();
+    void  showPosition( const QString& position);
+    void  showDistance( const QString& position);
 
   private Q_SLOTS:
     void  exportMapScreenShot();
