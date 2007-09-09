@@ -6,6 +6,7 @@ Name[es]=Part Marble
 Name[ga]=Comhpháirt Marble
 Name[pt]=Componente do Marble
 Name[pt_BR]=Componente do Marble
+Name[sv]=Marble-delprogram
 MimeType=application/vnd.google-earth.kml+xml
 ServiceTypes=Browser/View,KParts/ReadOnlyPart
 X-KDE-Library=libmarble_part
