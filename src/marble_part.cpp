@@ -12,6 +12,7 @@
 #include <QtCore/QTimer>
 #include <QtGui/QClipboard>
 #include <QtGui/QLabel>
+#include <QtGui/QFontMetrics>
 
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -271,11 +272,14 @@ void MarblePart::updateStatusBar()
 
 void MarblePart::setupStatusBar()
 {
+
+    QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
+
     m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
     m_positionLabel->setIndent( 5 );
     QString templatePositionString = 
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
-    int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width()
+    int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
                             + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
     m_positionLabel->setFixedWidth( maxPositionWidth );
     m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
@@ -284,14 +288,14 @@ void MarblePart::setupStatusBar()
     m_distanceLabel->setIndent( 5 );
     QString templateDistanceString = 
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
-    int maxDistanceWidth = fontMetrics().boundingRect(templateDistanceString).width()
+    int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
                             + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
     m_distanceLabel->setFixedWidth( maxDistanceWidth );
     m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
 
-    connect( marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
+    connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
               this, SLOT( showPosition( QString ) ) );
-    connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
+    connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
               this, SLOT( showDistance( QString ) ) );
 
     updateStatusBar();
