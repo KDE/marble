@@ -15,9 +15,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QColor>
 
-
-const double earthdiameter = 6378.0; // km
-
+#include "global.h"
 
 MapScaleFloatItem::MapScaleFloatItem( QObject* parent )
     : QObject(parent)
@@ -79,7 +77,7 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
     m_radius        = radius;
     m_scalebarwidth = width - m_leftmargin - m_rightmargin;
 
-    m_scalebarkm = (double)(m_scalebarwidth) * earthdiameter / (double)(radius);
+    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius);
 
     calcScaleBar();
 

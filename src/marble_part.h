@@ -39,8 +39,6 @@ class MarblePart: public KParts::ReadOnlyPart
     bool openUrl( const KUrl &url );
     bool openFile();
 
-    void  showZoom(int zoom);
-
   private Q_SLOTS:
     void  exportMapScreenShot();
     void  printMapScreenShot();
@@ -49,6 +47,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
+    void  showZoom(int zoom);
 
   private:
     void  setupActions();

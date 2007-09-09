@@ -353,6 +353,7 @@ void MarbleWidget::zoomView(int zoom)
 
     d->m_logzoom = zoom;
 
+
     emit zoomChanged(zoom);
 
     int newRadius = fromLogScale(zoom);
@@ -377,6 +378,9 @@ void MarbleWidget::zoomView(int zoom)
     }
 
     setRadius( newRadius );
+
+    emit distanceChanged( distanceString() );
+
     drawAtmosphere();
 
     repaint();
@@ -597,7 +601,7 @@ void MarbleWidget::moveDown()
 
 void MarbleWidget::leaveEvent (QEvent*)
 {
-    emit mouseMoveGeoPosition( tr("not available") );
+    emit mouseMoveGeoPosition( NOT_AVAILABLE );
 }
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
@@ -1174,6 +1178,24 @@ int MarbleWidget::toLogScale(int zoom)
 {
     zoom = (int)(200.0 * log( (double)zoom ) );
     return zoom;
+}
+
+QString MarbleWidget::distanceString() const
+{
+    const double VIEW_ANGLE = 110.0;
+
+    // Due to Marble's orthographic projection ("we have no focus") 
+    // it's actually not possible to calculate a "real" distance. 
+    // Additionally the viewing angle of the earth doesn't adjust to the window's 
+    // size.
+    // So the only possible workaround is to come up with a distance definition 
+    // which gives a reasonable approximation of reality. Therefore we assume that 
+    // the average window width (about 800 pixels) equals the viewing angle of a 
+    // human being.
+
+    double distance = EARTH_RADIUS * 400.0/(double)(radius()) / tan( 0.5 * VIEW_ANGLE * DEG2RAD );
+
+    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
 #include "MarbleWidget.moc"

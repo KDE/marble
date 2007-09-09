@@ -175,6 +175,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int         zoom() const;
 
     /**
+     * @brief Return the current distance string.
+     */
+    QString     distanceString() const;
+
+    /**
      * @brief  Set the minimum value for the zoom.
      * @param  zoom  The new minimum value.
      */
@@ -670,6 +675,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param zoom  The new zoom value.
      */
     void  zoomChanged( int zoom );
+    void  distanceChanged( const QString& distanceString );
 
     /**
      * @brief Signal that the theme has changed

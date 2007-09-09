@@ -1,3 +1,18 @@
+2007-09-09  Torsten Rahn  <rahn@kde.org>
+
+	* src/QtMainWindow.{h,cpp}
+	* src/lib/MarbleWidget.{h,cpp}
+	* src/lib/MapScaleFloatItem.cpp
+	* src/lib/global.h
+	* src/lib/MarbleWidgetInputHandler.cpp
+	* src/marble_part.h
+
+	- Added Statusbar items to the Qt-Marble frontend.
+	Now we need the same ones for the KDE-Version.
+
+	* src/lib/TinyWebBrowser.cpp:
+	- Fixed Sluggishness and JavaScript code
+
 2007-09-08  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/GeoPoint.{h,cpp}:

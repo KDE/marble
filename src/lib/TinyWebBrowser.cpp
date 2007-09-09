@@ -15,6 +15,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
+#include <QtGui/QPainter>
 #include <QtGui/QTextFrame>
 
 #include "HttpDownloadManager.h"
@@ -119,20 +120,21 @@ void TinyWebBrowser::setSource( const QString& url )
 void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )
 {
     if ( relativeUrlString == m_source )	{
-        QTextBrowser::setHtml( QString::fromUtf8( m_storagePolicy->data( id ) ) );
+        QString documentSource = QString::fromUtf8( m_storagePolicy->data( id ) );
+
+        // Remove JavaScript code as QTextBrowser can't display it anyways.
+        QRegExp scriptExpression("<\\s*script.*\\s*>.*<\\s*/\\s*script\\s*>");
+        scriptExpression.setCaseSensitivity( Qt::CaseInsensitive );
+        scriptExpression.setMinimal( true );
+        documentSource.remove( scriptExpression ) ;
+
+        QTextBrowser::setHtml( documentSource );
 
         QTextFrameFormat  format = document()->rootFrame()->frameFormat();
         format.setMargin(12);
         document()->rootFrame()->setFrameFormat( format );
     } else {
-        /**
-         * Evil hack to trigger page update
-         */
-        QSizeF size = document()->pageSize();
-        size *= 2;
-        document()->setPageSize( size );
-        size /= 2;
-        document()->setPageSize( size );
+        viewport()->update();
     }
 }
 

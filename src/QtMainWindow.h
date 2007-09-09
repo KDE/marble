@@ -20,6 +20,7 @@
 
 
 class QAction;
+class QLabel;
 class QMenu;
 
 class KAtlasControl;
@@ -38,12 +39,12 @@ class MainWindow : public QMainWindow
     MarbleWidget* marbleWidget(){ return m_controlView->marbleWidget(); }
 
  protected:
-    void closeEvent(QCloseEvent *event);
+    void  closeEvent(QCloseEvent *event);
 
  private:
-    void createActions();
-    void createMenus();
-    void createStatusBar();
+    void  createActions();
+    void  createMenus();
+    void  createStatusBar();
 
     QString  readMarbleDataPath();
     void  readSettings();
@@ -51,17 +52,19 @@ class MainWindow : public QMainWindow
 
  public Q_SLOTS:
     void  showPosition( const QString& position);
+    void  showDistance( const QString& position);
 
  private Q_SLOTS:
-    void exportMapScreenShot();
-    void printMapScreenShot();
-    void copyMap();
-    void showFullScreen( bool );
-    void showSideBar( bool );
-    void showStatusBar( bool );
-    void enterWhatsThis();
-    void aboutMarble();
-    void openFile();
+    void  exportMapScreenShot();
+    void  printMapScreenShot();
+    void  copyMap();
+    void  showFullScreen( bool );
+    void  showSideBar( bool );
+    void  showStatusBar( bool );
+    void  enterWhatsThis();
+    void  aboutMarble();
+    void  openFile();
+    void  setupStatusBar();
 
  private:
     ControlView *m_controlView;
@@ -80,6 +83,15 @@ class MainWindow : public QMainWindow
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
     QAction *m_openAct;
+
+    QString m_position;
+    QString m_distance;
+
+    // Zoom label for the statusbar.
+    QLabel       *m_positionLabel;
+    QLabel       *m_distanceLabel;
+
+    void updateStatusBar();
 };
 
  

@@ -129,7 +129,7 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( isValid == false )
             {
-                emit mouseMoveGeoPosition( tr("not available") );
+                emit mouseMoveGeoPosition( NOT_AVAILABLE );
             } 
             else
             {
