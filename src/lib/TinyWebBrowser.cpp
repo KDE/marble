@@ -16,6 +16,8 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
+#include <QtGui/QPrintDialog>
+#include <QtGui/QPrinter>
 #include <QtGui/QTextFrame>
 
 #include "HttpDownloadManager.h"
@@ -119,6 +121,15 @@ void TinyWebBrowser::setSource( const QString& url )
     else
         slotDownloadFinished( url, url );
 
+}
+
+void TinyWebBrowser::print()
+{
+  QPrinter printer;
+
+  QPrintDialog dlg( &printer, this );
+  if ( dlg.exec() )
+    QTextBrowser::print( &printer );
 }
 
 void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )

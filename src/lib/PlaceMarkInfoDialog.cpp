@@ -30,6 +30,12 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
 {
     setupUi(this);
 
+    m_pBackButton->hide();
+    m_pForwardButton->hide();
+
+    connect( m_pPrintButton, SIGNAL( clicked() ),
+             m_pWikipediaBrowser, SLOT( print() ) );
+
     setWindowTitle( tr("Data Sheet: %1").arg( mark->name() ) );
 
 #if 0

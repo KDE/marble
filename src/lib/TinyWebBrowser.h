@@ -35,6 +35,7 @@ class TinyWebBrowser : public QTextBrowser
 
  public Q_SLOTS:
     void setSource( const QString& relativeUrl );
+    void print();
 
  Q_SIGNALS:
     void backwardAvailable( bool );

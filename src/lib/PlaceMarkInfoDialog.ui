@@ -13,11 +13,20 @@
    <string>Data Sheet</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
    </property>
    <item>
     <widget class="QTabWidget" name="m_pTabWidget" >
@@ -29,18 +38,39 @@
        <string>Data Sheet</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
+       <property name="leftMargin" >
+        <number>9</number>
+       </property>
+       <property name="topMargin" >
+        <number>9</number>
+       </property>
+       <property name="rightMargin" >
+        <number>9</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>9</number>
+       </property>
        <item>
         <layout class="QGridLayout" >
-         <property name="margin" >
+         <property name="leftMargin" >
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <property name="horizontalSpacing" >
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing" >
           <number>6</number>
          </property>
          <item row="0" column="0" >
@@ -58,7 +88,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:14pt; font-weight:600;">Name&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -78,9 +108,7 @@ p, li { white-space: pre-wrap; }
          <item rowspan="4" row="0" column="1" >
           <widget class="QLabel" name="flag_val_lbl" >
            <property name="sizePolicy" >
-            <sizepolicy>
-             <hsizetype>0</hsizetype>
-             <vsizetype>0</vsizetype>
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -111,7 +139,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">Role&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -127,7 +155,7 @@ p, li { white-space: pre-wrap; }
             <string>Alternative Name</string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -157,8 +185,8 @@ p, li { white-space: pre-wrap; }
          <property name="html" >
           <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">no description available&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Nimbus Sans L'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Sans Serif'; font-size:9pt;">no description available&lt;/p>&lt;/body>&lt;/html></string>
          </property>
         </widget>
        </item>
@@ -181,9 +209,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QFrame" name="frame" >
          <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>0</hsizetype>
-           <vsizetype>0</vsizetype>
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -195,18 +221,39 @@ p, li { white-space: pre-wrap; }
           <enum>QFrame::Plain</enum>
          </property>
          <layout class="QVBoxLayout" >
-          <property name="margin" >
-           <number>9</number>
-          </property>
           <property name="spacing" >
            <number>6</number>
           </property>
+          <property name="leftMargin" >
+           <number>9</number>
+          </property>
+          <property name="topMargin" >
+           <number>9</number>
+          </property>
+          <property name="rightMargin" >
+           <number>9</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>9</number>
+          </property>
           <item>
            <layout class="QGridLayout" >
-            <property name="margin" >
+            <property name="leftMargin" >
              <number>0</number>
             </property>
-            <property name="spacing" >
+            <property name="topMargin" >
+             <number>0</number>
+            </property>
+            <property name="rightMargin" >
+             <number>0</number>
+            </property>
+            <property name="bottomMargin" >
+             <number>0</number>
+            </property>
+            <property name="horizontalSpacing" >
+             <number>6</number>
+            </property>
+            <property name="verticalSpacing" >
              <number>6</number>
             </property>
             <item row="1" column="1" colspan="2" >
@@ -218,7 +265,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -231,7 +278,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -257,7 +304,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -271,7 +318,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextEditable</enum>
+               <set>Qt::TextEditable</set>
               </property>
              </widget>
             </item>
@@ -284,7 +331,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::LinksAccessibleByMouse</enum>
+               <set>Qt::LinksAccessibleByMouse</set>
               </property>
              </widget>
             </item>
@@ -297,7 +344,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -310,7 +357,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -323,7 +370,7 @@ p, li { white-space: pre-wrap; }
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
               <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
+               <set>Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
@@ -339,20 +386,8 @@ p, li { white-space: pre-wrap; }
        <string>Wikipedia</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
        <item>
         <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
-         <property name="spacing" >
-          <number>6</number>
-         </property>
          <item>
           <widget class="QToolButton" name="m_pBackButton" >
            <property name="enabled" >
@@ -368,7 +403,7 @@ p, li { white-space: pre-wrap; }
             <string>Back</string>
            </property>
            <property name="icon" >
-            <iconset resource="marble.qrc" >:/icons/arrow-left.png</iconset>
+            <iconset/>
            </property>
            <property name="toolButtonStyle" >
             <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -390,7 +425,14 @@ p, li { white-space: pre-wrap; }
             <string>...</string>
            </property>
            <property name="icon" >
-            <iconset resource="marble.qrc" >:/icons/arrow-right.png</iconset>
+            <iconset/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="m_pPrintButton" >
+           <property name="text" >
+            <string>Print Page</string>
            </property>
           </widget>
          </item>
@@ -401,8 +443,8 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="sizeHint" >
             <size>
-             <width>0</width>
-             <height>20</height>
+             <width>281</width>
+             <height>31</height>
             </size>
            </property>
           </spacer>
