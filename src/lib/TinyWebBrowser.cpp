@@ -47,7 +47,8 @@ static QString guessWikipediaDomain()
 }
 
 TinyWebBrowser::TinyWebBrowser( QWidget *parent )
-    : QTextBrowser( parent )
+    : QTextBrowser( parent ),
+      m_source( guessWikipediaDomain() )
 {
     m_storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath() + "/cache/" );
 
@@ -58,11 +59,16 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
         this, SLOT( slotDownloadFinished( QString, QString ) ) );
     connect( m_downloadManager, SIGNAL( statusMessage( QString ) ), 
         this, SIGNAL( statusMessage( QString ) ) );
+    connect( this, SIGNAL( anchorClicked( QUrl ) ),
+        this, SLOT( linkClicked( QUrl ) ) );
 
     QStringList  searchPaths;
     searchPaths << MarbleDirs::localPath() + "/cache/"
                 << MarbleDirs::systemPath() + "/cache/";
     setSearchPaths( searchPaths );
+
+    setOpenLinks( false );
+    setOpenExternalLinks( false );
 }
 
 TinyWebBrowser::~TinyWebBrowser()
@@ -83,8 +89,7 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
       relativeUrl = url.path();
     }
 
-    if ( type == QTextDocument::ImageResource )
-    {
+    if ( type == QTextDocument::ImageResource ) {
         if ( m_storagePolicy->fileExists( relativeUrl ) ) {
             const QImage img = QImage::fromData( m_storagePolicy->data( relativeUrl ) );
             return QPixmap::fromImage( img );
@@ -95,16 +100,15 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
 
     if ( type != QTextDocument::HtmlResource && !m_storagePolicy->fileExists( relativeUrl ) ) {
         if ( server.isEmpty() ) {
-          m_downloadManager->addJob( relativeUrl, relativeUrl );
+            m_downloadManager->addJob( relativeUrl, relativeUrl );
         } else {
-          m_downloadManager->addJob( server, relativeUrl, relativeUrl );
+            m_downloadManager->addJob( server, relativeUrl, relativeUrl );
         }
         return QVariant();
     }
 
     return QTextBrowser::loadResource( type, url );
 }
-
 
 void TinyWebBrowser::setSource( const QString& url )
 {
@@ -114,29 +118,65 @@ void TinyWebBrowser::setSource( const QString& url )
         m_downloadManager->addJob( url, url );
     else
         slotDownloadFinished( url, url );
-}
 
+}
 
 void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )
 {
-    if ( relativeUrlString == m_source )	{
-        QString documentSource = QString::fromUtf8( m_storagePolicy->data( id ) );
-
-        // Remove JavaScript code as QTextBrowser can't display it anyways.
-        QRegExp scriptExpression("<\\s*script.*\\s*>.*<\\s*/\\s*script\\s*>");
-        scriptExpression.setCaseSensitivity( Qt::CaseInsensitive );
-        scriptExpression.setMinimal( true );
-        documentSource.remove( scriptExpression ) ;
-
-        QTextBrowser::setHtml( documentSource );
-
-        QTextFrameFormat  format = document()->rootFrame()->frameFormat();
-        format.setMargin(12);
-        document()->rootFrame()->setFrameFormat( format );
-    } else {
+    if ( relativeUrlString == m_source )
+        setContentHtml( QString::fromUtf8( m_storagePolicy->data( id ) ) );
+    else
         viewport()->update();
+}
+
+void TinyWebBrowser::linkClicked( const QUrl &url )
+{
+    // We do the percent encoding later...
+    QString urlString = QUrl::fromPercentEncoding( url.toString().toLatin1() );
+
+    if ( urlString.startsWith( "#" ) ) { // Handle anchors
+        scrollToAnchor( urlString.mid( 1 ) );
+        return;
+    } else if ( urlString.startsWith( "/" ) )
+        urlString = urlString.mid( 1 ); // Handle local urls
+
+    QString server, relativeUrl;
+    if ( url.scheme().isEmpty() ) {
+        // We have something like 'img/foo.png'
+        relativeUrl = urlString;
+    } else {
+        server = url.scheme() + "://" + url.host();
+        relativeUrl = url.path();
+    }
+
+    m_source = relativeUrl;
+    if ( !m_storagePolicy->fileExists( relativeUrl ) ) {
+        if ( server.isEmpty() ) {
+            m_downloadManager->addJob( relativeUrl, relativeUrl );
+        } else {
+            m_downloadManager->addJob( server, relativeUrl, relativeUrl );
+        }
+    } else {
+        setContentHtml( QString::fromUtf8( m_storagePolicy->data( relativeUrl ) ) );
     }
 }
 
+void TinyWebBrowser::setContentHtml( const QString &content )
+{
+    QString documentContent( content );
+
+    // Remove JavaScript code as QTextBrowser can't display it anyways.
+    QRegExp scriptExpression( "<\\s*script.*\\s*>.*<\\s*/\\s*script\\s*>" );
+
+    scriptExpression.setCaseSensitivity( Qt::CaseInsensitive );
+    scriptExpression.setMinimal( true );
+    documentContent.remove( scriptExpression ) ;
+
+    QTextBrowser::setHtml( documentContent );
+
+    QTextFrameFormat format = document()->rootFrame()->frameFormat();
+    format.setMargin( 12) ;
+    document()->rootFrame()->setFrameFormat( format );
+}
 
 #include "TinyWebBrowser.moc"

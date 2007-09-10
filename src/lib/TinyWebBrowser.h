@@ -37,6 +37,7 @@ class TinyWebBrowser : public QTextBrowser
     void setSource( const QString& relativeUrl );
 
  Q_SIGNALS:
+    void backwardAvailable( bool );
     void statusMessage( QString );
 
  protected:
@@ -44,12 +45,14 @@ class TinyWebBrowser : public QTextBrowser
 
  private Q_SLOTS:
     void slotDownloadFinished( const QString&, const QString& );
+    void linkClicked( const QUrl &url );
 
  private:
+    void setContentHtml( const QString& );
+
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     QString         m_source;
-    QList<QUrl>     m_urlList;
 };
 
 
