@@ -58,6 +58,9 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
 
+    m_position = NOT_AVAILABLE;
+    m_distance = marbleWidget()->distanceString();
+
     QTimer::singleShot( 0, this, SLOT( setupStatusBar() ) );
 
     readSettings();
