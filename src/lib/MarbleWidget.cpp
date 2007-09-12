@@ -111,6 +111,8 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
 
 MarbleWidget::~MarbleWidget()
 {
+    delete d->m_viewParams.m_canvasImage;
+    delete d->m_viewParams.m_coastImage;
     delete d->m_model;
     delete d;
 }

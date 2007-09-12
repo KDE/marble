@@ -59,7 +59,8 @@ TileLoader::TileLoader( const QString& theme )
 
 TileLoader::~TileLoader()
 {
-    cleanupTilehash();
+    flush();
+    m_tileCache.clear();
     m_downloadManager->disconnect();
     
     delete m_downloadManager;

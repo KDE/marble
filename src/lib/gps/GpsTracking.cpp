@@ -44,13 +44,19 @@ GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method,
 #ifdef HAVE_LIBGPS
     m_gpsd     = new gpsmm();
     m_gpsdData = m_gpsd->open( "127.0.0.1", "2947" );
-    
 #endif
 }
 
 
 GpsTracking::~GpsTracking()
 {
+    delete m_gpsCurrentPosition;
+    delete m_gpsPreviousPosition;
+    delete m_gpsTracking;
+
+#ifdef HAVE_LIBGPS
+    delete m_gpsd;
+#endif
 }
 
 
@@ -183,7 +189,7 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
             {
                 m_gpsTrackSeg->append( m_gpsPreviousPosition );
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
-               m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
+                m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
             }
         } else {
 

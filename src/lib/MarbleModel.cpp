@@ -143,6 +143,8 @@ MarbleModel::~MarbleModel()
     delete d->m_texcolorizer; 
     delete d->m_gridmap;
 //    delete d->m_placemarkmanager;
+    delete d->m_gpsLayer;
+    delete d->m_maptheme;
     delete d;
 }
 
