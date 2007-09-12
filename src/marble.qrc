@@ -15,5 +15,6 @@
         <file>icons/marble.png</file>
 	<file>icons/help-contents.png</file>
 	<file>icons/help-whatsthis.png</file>
+	<file>icons/wikipedia.png</file>
     </qresource>
 </RCC>

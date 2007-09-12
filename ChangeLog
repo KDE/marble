@@ -1,3 +1,16 @@
+2007-09-12  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/ClipPainter.cpp:
+	- Cut off on screen.
+
+	* src/marble.qrc:
+	* src/icons/wikipedia.png:
+	* src/lib/PlaceMarkInfoDialog.ui:
+	- Added a Wikipedia icon and a pointer towards the entry.
+
+	* src/lib/TinyWebBrowser.cpp:
+	- Make it compile on Qt 4.2, too.
+
 2007-09-09  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/MarbleWidgetInputHandler.cpp:

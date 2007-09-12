@@ -69,7 +69,9 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
                 << MarbleDirs::systemPath() + "/cache/";
     setSearchPaths( searchPaths );
 
+#if QT_VERSION >= 0x040300
     setOpenLinks( false );
+#endif
     setOpenExternalLinks( false );
 }
 
@@ -129,7 +131,7 @@ void TinyWebBrowser::print()
 
   QPrintDialog dlg( &printer, this );
   if ( dlg.exec() )
-    QTextBrowser::print( &printer );
+    QTextBrowser::document()->print( &printer );
 }
 
 void TinyWebBrowser::slotDownloadFinished( const QString& relativeUrlString, const QString &id )
