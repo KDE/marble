@@ -57,6 +57,8 @@ TextureTile::TextureTile( int id )
       m_id(id),
       m_rawtile( QImage() ),
       m_depth(0),
+      jumpTable8(0),
+      jumpTable32(0),
       m_used(false)
 {
 }
@@ -164,9 +166,11 @@ void TextureTile::loadTile( int x, int y, int level,
 
   switch ( m_depth ) {
       case 32:
+          if ( jumpTable32 ) delete [] jumpTable32;
           jumpTable32 = jumpTableFromQImage32( m_rawtile );
           break;
       case 8:
+          if ( jumpTable8 ) delete [] jumpTable8;
           jumpTable8 = jumpTableFromQImage8( m_rawtile );
           break;
       default:

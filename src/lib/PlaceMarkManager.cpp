@@ -23,7 +23,8 @@
 #include "XmlHandler.h"
 
 
-PlaceMarkManager::PlaceMarkManager()
+PlaceMarkManager::PlaceMarkManager( QObject *parent )
+    : QObject( parent )
 {
     m_placeMarkContainer = new PlaceMarkContainer();
 

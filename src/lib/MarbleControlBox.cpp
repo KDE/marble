@@ -144,6 +144,11 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.projectionComboBox->setEnabled( true );
 }
 
+MarbleControlBox::~MarbleControlBox()
+{
+    delete d;
+}
+
 void MarbleControlBox::setupGpsOption()
 {
     d->uiWidget.m_gpsDrawBox -> setEnabled( true );

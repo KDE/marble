@@ -1,5 +1,24 @@
 2007-09-12  Torsten Rahn  <rahn@kde.org>
 
+	- Various fixes related to finding and
+	fixing possible memory leaks.
+
+	* src/lib/gps/GpxFileModel.{h,cpp}
+	* src/lib/TileLoader.{h,cpp}
+	* src/lib/MarbleLegendBrowser.{h,cpp}
+	* src/lib/CompassFloatItem.{h,cpp}
+	* src/lib/MarbleControlBox.{h,cpp}
+	* src/lib/PlaceMarkManager.{h,cpp}
+	* src/lib/VectorComposer.{h,cpp}
+	* src/lib/MapTheme.cpp
+	* src/lib/MarbleWidget.cpp
+	* src/lib/PlaceMarkModel.cpp
+	* src/lib/MarbleModel.cpp
+	* src/lib/TextureTile.cpp
+	* src/lib/GeoPolygon.cpp
+
+2007-09-12  Torsten Rahn  <rahn@kde.org>
+
 	* src/QtMainWindow.cpp:
 	* src/marble_part.cpp:
 	- "Distance" -> "Altitude"

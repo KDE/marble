@@ -73,6 +73,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
  public:
     MarbleControlBox(QWidget *parent = 0);
+    ~MarbleControlBox();
  
     void addMarbleWidget( MarbleWidget *widget );
 

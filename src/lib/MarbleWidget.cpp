@@ -112,6 +112,7 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
 MarbleWidget::~MarbleWidget()
 {
     delete d->m_model;
+    delete d;
 }
 
 void MarbleWidget::construct(QWidget *parent)

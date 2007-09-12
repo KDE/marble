@@ -261,18 +261,6 @@ void PntMap::load(const QString &filename)
         }	
     }
 
-#if 0
-    for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
-
-
-        const QVector<GeoPoint*>::const_iterator itEndPoint = (*itPolyLine)->end();
-
-        for ( itPoint = (*itPolyLine)->begin(); itPoint != itEndPoint; ++itPoint ){
-            (*itPoint)->setMul(6.0);
-        }	
-    }
-#endif
-
     // Now we calculate the boundaries
     double y = 0;
 	

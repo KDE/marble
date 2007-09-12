@@ -118,7 +118,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkmodel = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 
-    d->m_gpxFileModel = new GpxFileModel;
+    d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
@@ -137,8 +137,12 @@ MarbleModel::MarbleModel( QWidget *parent )
 
 MarbleModel::~MarbleModel()
 {
-    delete d->m_placemarkmanager;
+    delete d->m_placeMarkContainer;
     delete d->m_texmapper;
+    delete d->m_veccomposer;
+    delete d->m_texcolorizer; 
+    delete d->m_gridmap;
+//    delete d->m_placemarkmanager;
     delete d;
 }
 
@@ -199,29 +203,19 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
                                        d->m_maptheme->description() );
             tileCreatorDlg.exec();
         }
-        if ( d->m_texmapper == 0 )
-            switch( currentProjection ) {
-                case Spherical:
-                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-                case Equirectangular:
-                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-            }
-        else {//if ( currentProjection != d->m_projection ) {
+
+        if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
-            switch( currentProjection ) {
-                case Spherical:
-                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-                case Equirectangular:
-                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-            }
+
+        switch( currentProjection ) {
+            case Spherical:
+                d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
+                                            + d->m_maptheme->tilePrefix(), this );
+                break;
+            case Equirectangular:
+                d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+                                            + d->m_maptheme->tilePrefix(), this );
+                break;
         }
 //         else
 //             d->m_texmapper->setMapTheme( "maps/earth/"
@@ -394,7 +388,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
             }
         }
 
-        qDebug("Plaint kml folder list. Elapsed: %d", t.elapsed());
+        qDebug("Paint kml folder list. Elapsed: %d", t.elapsed());
     }
 #endif
 

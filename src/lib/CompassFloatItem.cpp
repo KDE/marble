@@ -44,6 +44,11 @@ CompassFloatItem::CompassFloatItem(QObject* parent)
     m_transparency = 192;
 }
 
+CompassFloatItem::~CompassFloatItem()
+{
+    delete m_svgobj;
+}
+
 void CompassFloatItem::setSourceFile( const QString& relativePath )
 {
     delete m_svgobj;

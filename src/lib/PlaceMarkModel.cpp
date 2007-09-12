@@ -233,6 +233,7 @@ PlaceMarkModel::PlaceMarkModel(QObject *parent)
 }
 
 PlaceMarkModel::~PlaceMarkModel(){
+    delete d;
 }
 
 

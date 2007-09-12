@@ -46,8 +46,9 @@ TileLoader::TileLoader( const QString& theme )
 {
     setMapTheme( theme );
 
+    m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath() );
     m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/"),
-                                                 new FileStoragePolicy( MarbleDirs::localPath() ) );
+                                                 m_storagePolicy );
 
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ), 
              this,              SLOT( reloadTile( QString, QString ) ) );
@@ -60,7 +61,9 @@ TileLoader::~TileLoader()
 {
     cleanupTilehash();
     m_downloadManager->disconnect();
+    
     delete m_downloadManager;
+    delete m_storagePolicy;
 }
 
 
