@@ -36,7 +36,7 @@
 namespace
 {
     const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
-    const char* DISTANCE_STRING = I18N_NOOP( "Distance: %1" );
+    const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;

@@ -1,5 +1,12 @@
 2007-09-12  Torsten Rahn  <rahn@kde.org>
 
+	* src/QtMainWindow.cpp:
+	* src/marble_part.cpp:
+	- "Distance" -> "Altitude"
+	as it got mixed up with the measure tool
+
+2007-09-12  Torsten Rahn  <rahn@kde.org>
+
 	* src/lib/ClipPainter.cpp:
 	- Cut off on screen.
 

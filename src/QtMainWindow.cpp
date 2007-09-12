@@ -37,7 +37,7 @@
 namespace
 {
     const char* POSITION_STRING = "Position:";
-    const char* DISTANCE_STRING = "Distance:";
+    const char* DISTANCE_STRING = "Altitude:";
 }
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent)
