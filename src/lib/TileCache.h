@@ -11,7 +11,6 @@
 
 #ifndef TILECACHE_H
 #define TILECACHE_H
-#
 
 
 /** @file
