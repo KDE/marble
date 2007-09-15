@@ -117,6 +117,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
              this,                      SIGNAL( zoomOut() ) );
 
+    connect( d->uiWidget.zoomSlider,  SIGNAL( valueChanged( int ) ),
+             this,                      SLOT( updateButtons( int ) ) );
+
     connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
              this,                        SIGNAL( moveLeft() ) );
     connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
@@ -149,6 +152,21 @@ MarbleControlBox::~MarbleControlBox()
     delete d->m_mapthememodel;
     delete d;
 }
+
+void MarbleControlBox::updateButtons( int value )
+{
+    if ( value <= d->uiWidget.zoomSlider->minimum() ) {
+        d->uiWidget.zoomInButton->setEnabled( true );
+        d->uiWidget.zoomOutButton->setEnabled( false );
+    } else if ( value >= d->uiWidget.zoomSlider->maximum() ) {
+        d->uiWidget.zoomInButton->setEnabled( false );
+        d->uiWidget.zoomOutButton->setEnabled( true );
+    } else {
+        d->uiWidget.zoomInButton->setEnabled( true );
+        d->uiWidget.zoomOutButton->setEnabled( true );
+    }
+}
+
 
 void MarbleControlBox::setupGpsOption()
 {

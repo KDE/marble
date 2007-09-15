@@ -120,6 +120,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void search();
 
     void selectTheme( const QString & );
+    void updateButtons( int );
  private:
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 

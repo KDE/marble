@@ -1,5 +1,11 @@
 2007-09-15  Torsten Rahn  <rahn@kde.org>
 
+	* src/lib/MarbleControlBox.{h,cpp}:
+	- Disable ZoomIn/Out Buttons at range limit
+	Patch by Frederik Schwarzer.
+
+2007-09-15  Torsten Rahn  <rahn@kde.org>
+
 	* src/lib/PlaceMarkInfoDialog.cpp:
 	- Data Sheet -> Marble Info Center, as mentioned in the Marble
 	  Quality Check.
