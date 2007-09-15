@@ -1,3 +1,14 @@
+2007-09-15  Torsten Rahn  <rahn@kde.org>
+
+	- Add the icon for the menu in the Qt version ;-(
+
+	* data/icons
+	* data/icons/hi32-app-marble.png
+	* data/icons/hi16-app-marble.png
+	* data/icons/hi64-app-marble.png
+	* data/icons/hi128-app-marble.png
+	* data/icons/hi48-app-marble.png
+
 2007-09-12  Torsten Rahn  <rahn@kde.org>
 
 	- Various fixes related to finding and

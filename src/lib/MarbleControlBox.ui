@@ -420,8 +420,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>409</height>
+        <width>112</width>
+        <height>112</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -448,8 +448,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>409</height>
+        <width>112</width>
+        <height>202</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -543,8 +543,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>409</height>
+        <width>96</width>
+        <height>34</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -900,8 +900,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>409</height>
+        <width>182</width>
+        <height>147</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -968,11 +968,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MarbleThemeSelectView</class>
-   <extends>QListView</extends>
-   <header>MarbleThemeSelectView.h</header>
-  </customwidget>
-  <customwidget>
    <class>MarbleSearchListView</class>
    <extends>QListView</extends>
    <header>MarbleSearchListView.h</header>
@@ -981,6 +976,11 @@
    <class>MarbleLegendBrowser</class>
    <extends>QTextBrowser</extends>
    <header>MarbleLegendBrowser.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MarbleThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>MarbleThemeSelectView.h</header>
   </customwidget>
  </customwidgets>
  <resources>

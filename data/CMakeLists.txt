@@ -361,3 +361,10 @@ placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
 DESTINATION ${MARBLE_DATA_PATH}/placemarks)
 
+if(QTONLY AND NOT APPLE AND NOT WIN32)
+    install (FILES icons/hi128-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/128x128/apps/ RENAME marble.png)
+    install (FILES icons/hi64-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/64x64/apps/ RENAME marble.png)
+    install (FILES icons/hi48-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/48x48/apps/ RENAME marble.png)
+    install (FILES icons/hi32-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/32x32/apps/ RENAME marble.png)
+    install (FILES icons/hi16-app-marble.png DESTINATION ${ICON_INSTALL_DIR}/hicolor/16x16/apps/ RENAME marble.png)
+endif(QTONLY AND NOT APPLE AND NOT WIN32 )
