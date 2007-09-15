@@ -8,11 +8,11 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 
 ####################################################
 # User configurable options
-if(APPLE OR WIN32) #by default build Qt only version for OSX and win
+if(APPLE OR WIN32 AND NOT KDE4_FOUND) #by default build Qt only version for OSX and win
   set (QTONLY TRUE CACHE BOOL "Determines if we should compile for Qt only.")
-else(APPLE OR WIN32)
+else(APPLE OR WIN32 AND NOT KDE4_FOUND)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
-endif(APPLE OR WIN32)
+endif(APPLE OR WIN32 AND NOT KDE4_FOUND)
 set (PEDANTIC FALSE CACHE BOOL "Determines if we should compile with -Wall -Werror.")
 set (ENABLE_TESTS FALSE CACHE BOOL "Build unit tests?")
 set (WITH_DESIGNER_PLUGIN FALSE CACHE BOOL "Build designer plugin?")
