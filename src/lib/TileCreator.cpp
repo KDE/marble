@@ -68,7 +68,7 @@ void TileCreator::run()
     } 
 
     // Calculating Maximum Tile Level
-    float approxMaxTileLevel = log( imageWidth / ( 2 * tileSize ) ) / log( 2 );
+    float approxMaxTileLevel = log( imageWidth / ( 2. * tileSize ) ) / log( 2. );
 
     int  maxTileLevel = 0;
     if ( approxMaxTileLevel == int( approxMaxTileLevel ) )
