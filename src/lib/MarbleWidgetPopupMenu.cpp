@@ -44,7 +44,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_posaction->setFont( QFont( "Sans Serif", 7, 50, false ) );
 
     //	Tool actions (Right mouse button)
-    m_pAddMeasurePointAction = new QAction( tr( "&Add Measure Point" ), this);
+    m_pAddMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
     m_rmbMenu->addAction( m_pAddMeasurePointAction );
     m_pRemoveMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
