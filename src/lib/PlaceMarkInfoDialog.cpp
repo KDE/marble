@@ -36,7 +36,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
 
-    setWindowTitle( tr("Data Sheet: %1").arg( mark->name() ) );
+    setWindowTitle( tr("Marble Info Center - %1").arg( mark->name() ) );
 
 #if 0
       QLayout  *layout = this->layout();

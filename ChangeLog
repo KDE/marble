@@ -1,5 +1,11 @@
 2007-09-14  Torsten Rahn  <rahn@kde.org>
 
+	* src/lib/PlaceMarkInfoDialog.cpp:
+	- Data Sheet -> Marble Info Center, as mentioned in the Marble
+	  Quality Check.
+
+2007-09-14  Torsten Rahn  <rahn@kde.org>
+
     Lot's of backports from trunk to get rid of known issues:
 
      - Various fixes related to finding and
