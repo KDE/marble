@@ -360,6 +360,8 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
                                 currentmaptheme );
     }
 
+    delete maptheme;
+
     return mapthememodel;
 }
 

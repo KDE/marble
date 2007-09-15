@@ -42,7 +42,7 @@ class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
 class TextureColorizer;
 class MeasureTool;
-class TileCreatorDialog;
+class TileCreator;
 class MarbleWidgetPrivate;
 class GpsLayer;
 #include "gps/GpxFileModel.h"
@@ -172,6 +172,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Return the current zoom level.
      */
     int         zoom() const;
+
+    /**
+     * @brief Return the current distance string.
+     */
+    QString     distanceString() const;
 
     /**
      * @brief  Set the minimum value for the zoom.
@@ -630,6 +635,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.
+     * @param creator the tile creator object.
      * @param name  the name of the created theme.
      * @param description  a descriptive text that can be shown in a dialog.
      * @see    creatingTilesProgress
@@ -645,18 +651,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * calls to creatingTilesProgress, and the poup dialog can then be
      * closed.
      */
-    void creatingTilesStart( const QString& name, const QString& description );
-
-    /**
-     * @brief A slot that is called while the model is creating new tiles.
-     * @param  progress  the percentage done
-     * @see    creatingTilesStart
-     *
-     * This function is connected to the models' signal with the same
-     * name. See creatingTilesStart for a description of how it is
-     * used.
-     */
-    void creatingTilesProgress( int progress );
+    void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
     void updateChangedMap();
    
@@ -670,6 +665,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that the zoom has changed, and to what.
      */
     void  zoomChanged( int );
+    void  distanceChanged( const QString& distanceString );
 
     void  themeChanged( QString );
 
@@ -680,6 +676,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  timeout();
 
  protected:
+    /**
+     * @brief Reimplementation of the leaveEvent() function in QWidget.
+     */
+    void  leaveEvent( QEvent *event );
+
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */

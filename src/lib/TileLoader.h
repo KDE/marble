@@ -46,6 +46,8 @@ class HttpDownloadManager;
  * @author Torsten Rahn <rahn@kde.org>
  **/
 
+class FileStoragePolicy;
+
 class TileLoader : public QObject {
     Q_OBJECT
  public:
@@ -81,6 +83,7 @@ class TileLoader : public QObject {
 
  protected:
 
+    FileStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
 
     QString       m_theme;
@@ -97,7 +100,7 @@ class TileLoader : public QObject {
 
 public Q_SLOTS:
 
-    void reloadTile( QString relativeUrlString, int id );
+    void reloadTile( QString relativeUrlString, QString id );
 
     void message( const QString& test ){ qDebug() << test; }
 };

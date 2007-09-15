@@ -26,6 +26,7 @@
 #include <cmath>
 
 #include "HttpDownloadManager.h"
+#include "FileStoragePolicy.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 
@@ -45,10 +46,12 @@ TileLoader::TileLoader( const QString& theme )
 {
     setMapTheme( theme );
 
-    m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/") );
+    m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath() );
+    m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/"),
+                                                 m_storagePolicy );
 
-    connect( m_downloadManager, SIGNAL( downloadComplete( QString, int ) ), 
-             this,              SLOT( reloadTile( QString, int ) ) );
+    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ), 
+             this,              SLOT( reloadTile( QString, QString ) ) );
 
     m_tileCache.clear();
     m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
@@ -56,9 +59,12 @@ TileLoader::TileLoader( const QString& theme )
 
 TileLoader::~TileLoader()
 {
-    cleanupTilehash();
+    flush();
+    m_tileCache.clear();
     m_downloadManager->disconnect();
+    
     delete m_downloadManager;
+    delete m_storagePolicy;
 }
 
 
@@ -142,8 +148,8 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             tile = new TextureTile( tileId );
             m_tileHash[tileId] = tile;
 
-            connect( tile,            SIGNAL( downloadTile( const QString&, int ) ), 
-                     m_downloadManager, SLOT( addJob( const QString&, int ) ) );
+            connect( tile,            SIGNAL( downloadTile( const QString&, const QString& ) ), 
+                     m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
             connect( tile,            SIGNAL( tileUpdateDone() ), 
                      this,              SIGNAL( tileUpdateAvailable() ) );
             tile->loadTile( tilx, tily, tileLevel, m_theme, false );
@@ -297,11 +303,12 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
     return noerr;
 }
 
-void TileLoader::reloadTile( QString relativeUrlString, int id )
+void TileLoader::reloadTile( QString relativeUrlString, QString _id )
 {
-//    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
+//    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
 
-    if ( m_tileHash.contains(id) ) {
+    const int id = _id.toInt();
+    if ( m_tileHash.contains( id ) ) {
         int  level =  id / 100000000;
         int  y     = ( id - level * 100000000 ) / 10000;
         int  x     = id - ( level * 100000000 + y * 10000 );

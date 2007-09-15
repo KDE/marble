@@ -20,6 +20,7 @@
 
 #include "ui_TileCreatorDialog.h"
 
+class TileCreator;
 
 class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
 {
@@ -27,11 +28,15 @@ class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
     Q_OBJECT
 
  public:
-    TileCreatorDialog( QWidget *parent = 0 );
+    TileCreatorDialog( TileCreator *creator, QWidget *parent = 0 );
+    ~TileCreatorDialog();
 
  public Q_SLOTS:
     void setProgress( int progress );
     void setSummary( const QString& name, const QString& description );
+
+ private:
+    TileCreator *m_creator;
 };
 
 

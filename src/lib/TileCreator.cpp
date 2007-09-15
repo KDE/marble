@@ -31,20 +31,18 @@ const int tileSize   = 675;
 
 TileCreator::TileCreator(const QString& prefix, const QString& installmap,
                          const QString& dem, const QString& targetDir) 
-    : m_prefix(prefix),
+    : QThread(0),
+      m_prefix(prefix),
       m_installmap(installmap),
       m_dem(dem),
       m_targetDir(targetDir)
 {
-    /* NOOP */
+    setTerminationEnabled( true );
 }
 
 
-bool TileCreator::createTiles()
+void TileCreator::run()
 {
-
-    QApplication::processEvents(); 
-
     QString m_sourceDir = MarbleDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
     if ( m_targetDir.isNull() )
         m_targetDir = MarbleDirs::localPath() + "/maps/earth/" + m_prefix + '/';
@@ -66,7 +64,7 @@ bool TileCreator::createTiles()
 
     if ( imageWidth > 21600 || imageHeight > 10800 ){
         qDebug("Install map too large!");
-        return false;
+        return;
     } 
 
     // Calculating Maximum Tile Level
@@ -147,8 +145,6 @@ bool TileCreator::createTiles()
     QImage  sourceImage( m_sourceDir );
 
     for ( unsigned int n = 0; n < nmax; ++n ) {
-        QApplication::processEvents(); 
-
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
                        imageWidth,(int)( (double)( imageHeight ) / (double)( nmax ) ) );
 
@@ -167,12 +163,10 @@ bool TileCreator::createTiles()
         if ( row.isNull() ) 
         {
             qDebug() << "Read-Error! Null QImage!";
-            return false;
+            return;
         }
 
         for ( unsigned int m = 0; m < mmax; ++m ) {
-            QApplication::processEvents(); 
-
             QImage tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
 
             tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( maxTileLevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
@@ -304,7 +298,6 @@ bool TileCreator::createTiles()
                 createdTilesCount++;
 						
                 emit progress( percentCompleted );
-                QApplication::processEvents(); 
             }
         }
         qDebug() << "tileLevel: " << tileLevel << " successfully created.";
@@ -333,7 +326,6 @@ bool TileCreator::createTiles()
                 percentCompleted = 90 + (int)( 10 * (double)(savedTilesCount) / 
                                    (double)(totalTileCount) );	
                 emit progress( percentCompleted );
-                QApplication::processEvents(); 
             }
         }
         tileLevel++;	
@@ -341,9 +333,6 @@ bool TileCreator::createTiles()
 
     percentCompleted = 100;
     emit progress( percentCompleted );
-    QApplication::processEvents();
-
-    return true;
 }
 
 

@@ -22,7 +22,8 @@
 
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
                                          MarbleModel *model)
-    : m_model(model),
+    : QObject(widget),
+      m_model(model),
       m_widget(widget) 
 {
     m_lmbMenu = new QMenu( m_widget );

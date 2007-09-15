@@ -72,6 +72,19 @@ VectorComposer::VectorComposer()
     m_dateLineBrush = QBrush( Qt::NoBrush );
 }
 
+VectorComposer::~VectorComposer()
+{
+    delete m_dateLine;
+    delete m_usaStates;    // The states of the USA
+    delete m_countries;    // The country borders
+    delete m_rivers;
+    delete m_glaciers;
+    delete m_lakes;
+    delete m_lakeislands;
+    delete m_islands;
+    delete m_coastLines;
+    delete m_vectorMap;
+}
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {

@@ -17,36 +17,43 @@
 #ifndef HTTPFETCHFILE_H
 #define HTTPFETCHFILE_H
 
-#include <QtCore/QtGlobal>
-#include <QtCore/QFile>
+#include <QtCore/QBuffer>
+#include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
-#include <QtNetwork/QHttp>
-#include <QtNetwork/QHttpResponseHeader>
 
 enum  Priority { NoPriority, Low, Medium, High };
 enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
 
+class QHttp;
+class StoragePolicy;
 
-struct HttpJob
+class HttpJob
 {
+ public:
     HttpJob()
+      : status( NoStatus ),
+        priority( NoPriority )
     {
-        status   = NoStatus;
-        priority = NoPriority;
+        buffer = new QBuffer( &data );
+        buffer->open( QIODevice::WriteOnly );
     }
-    virtual ~HttpJob(){ /* NONE */ }
 
-    QString  relativeUrlString;
+    virtual ~HttpJob()
+    {
+        buffer->close();
+        delete buffer;
+    }
 
-    QUrl     serverUrl;
-
-    QString  targetDirString;
-    QFile*   targetFile;
-
-    qint64   initiatorId;
-    Priority priority;
-    Status   status;
+    QString     originalRelativeUrlString;
+    QString     relativeUrlString;
+    QString     targetDirString;
+    QUrl        serverUrl;
+    QByteArray  data;
+    QBuffer    *buffer;
+    QString     initiatorId;
+    Status      status;
+    Priority    priority;
 };
 
 
@@ -55,14 +62,18 @@ class HttpFetchFile : public QObject
     Q_OBJECT
 
  public:
-    HttpFetchFile( QObject* parent = 0 );
-    ~HttpFetchFile();
+    /**
+     * Creates a new http fetch file object.
+     */
+    HttpFetchFile( StoragePolicy *policy, QObject* parent = 0 );
 
-    void setTargetDir( const QString& targetDirString ){ m_targetDirString = targetDirString; }
+    /**
+     * Destroys the http fetch file object.
+     */
+    ~HttpFetchFile();
 
  public Q_SLOTS:
     void executeJob( HttpJob* job );
-//    void cancelJob( HttpJob* job );
 
  Q_SIGNALS:
     void jobDone( HttpJob*, int );
@@ -70,12 +81,12 @@ class HttpFetchFile : public QObject
 
  private Q_SLOTS:
     // process feedback from m_Http
-    void httpRequestFinished(int requestId, bool error);
+    void httpRequestFinished( int requestId, bool error );
 
  private:
-    QHttp   *m_pHttp;
-    QMap <int, HttpJob*>  m_pFileIdMap;
-    QString m_targetDirString;
+    QHttp *m_pHttp;
+    QMap<int, HttpJob*> m_pJobMap;
+    StoragePolicy *m_storagePolicy;
 };
 
 

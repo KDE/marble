@@ -84,10 +84,6 @@ class MarbleWidgetPrivate
     MeasureTool     *m_measureTool;
 
     QRegion          m_activeRegion;
-
-    // The progress dialog for the tile creator.
-    TileCreatorDialog  *m_tileCreatorDlg;
-
 };
 
 
@@ -113,7 +109,10 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
 
 MarbleWidget::~MarbleWidget()
 {
+    delete d->m_viewParams.m_canvasImage;
+    delete d->m_viewParams.m_coastImage;
     delete d->m_model;
+    delete d;
 }
 
 void MarbleWidget::construct(QWidget *parent)
@@ -125,10 +124,8 @@ void MarbleWidget::construct(QWidget *parent)
     // Some point that tackat defined. :-) 
     setHome( -9.4, 54.8, 1050 );
 
-    connect( d->m_model, SIGNAL( creatingTilesStart( const QString&, const QString& ) ),
-             this,    SLOT( creatingTilesStart( const QString&, const QString& ) ) );
-    connect( d->m_model, SIGNAL( creatingTilesProgress( int ) ),
-             this,    SLOT( creatingTilesProgress( int ) ) );
+    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
+             this,    SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
     connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
@@ -354,6 +351,7 @@ void MarbleWidget::zoomView(int zoom)
 
     d->m_logzoom = zoom;
 
+
     emit zoomChanged(zoom);
 
     int newRadius = fromLogScale(zoom);
@@ -377,6 +375,9 @@ void MarbleWidget::zoomView(int zoom)
     }
 
     setRadius( newRadius );
+
+    emit distanceChanged( distanceString() );
+
     drawAtmosphere();
 
     repaint();
@@ -566,6 +567,11 @@ void MarbleWidget::moveDown()
     rotateBy( 0, -moveStep() );
 }
 
+void MarbleWidget::leaveEvent (QEvent*)
+{
+    emit mouseMoveGeoPosition( NOT_AVAILABLE );
+}
+
 void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
@@ -599,13 +605,15 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
 void MarbleWidget::connectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == SIGNAL( mouseMoveGeoPosition( QString ) ) )
+    if ( QByteArray( signal ) == 
+         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( true );
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
-    if ( QLatin1String( signal ) == SIGNAL( mouseMoveGeoPosition( QString ) ) )
+    if ( QByteArray( signal ) == 
+         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
         d->m_inputhandler->setPositionSignalConnected( false );
 }
 
@@ -1073,29 +1081,19 @@ void MarbleWidget::setQuickDirty( bool enabled )
 
 // This slot will called when the Globe starts to create the tiles.
 
-void MarbleWidget::creatingTilesStart( const QString &name, const QString &description )
+void MarbleWidget::creatingTilesStart( TileCreator *creator, const QString &name, const QString &description )
 {
     qDebug("MarbleWidget::creatingTilesStart called... ");
 
-    d->m_tileCreatorDlg = new TileCreatorDialog( this );
+    TileCreatorDialog dlg( creator, this );
+    dlg.setSummary( name, description );
+    dlg.exec();
 
-    d->m_tileCreatorDlg->setSummary( name, description );
-
-    // The process itself is started by a timer, so an exec() is ok here.
-    d->m_tileCreatorDlg->exec();
     qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
 // This slot will be called during the tile creation progress.  When
 // the progress goes to 100, the dialog should be closed.
-
-void MarbleWidget::creatingTilesProgress( int progress )
-{
-    d->m_tileCreatorDlg->setProgress( progress );
-
-    if ( progress == 100 )
-        delete d->m_tileCreatorDlg;
-}
 
 void MarbleWidget::updateChangedMap()
 {
@@ -1127,6 +1125,24 @@ int MarbleWidget::toLogScale(int zoom)
 {
     zoom = (int)(200.0 * log( (double)zoom ) );
     return zoom;
+}
+
+QString MarbleWidget::distanceString() const
+{
+    const double VIEW_ANGLE = 110.0;
+
+    // Due to Marble's orthographic projection ("we have no focus") 
+    // it's actually not possible to calculate a "real" distance. 
+    // Additionally the viewing angle of the earth doesn't adjust to the window's 
+    // size.
+    // So the only possible workaround is to come up with a distance definition 
+    // which gives a reasonable approximation of reality. Therefore we assume that 
+    // the average window width (about 800 pixels) equals the viewing angle of a 
+    // human being.
+
+    double distance = EARTH_RADIUS * 400.0/(double)(radius()) / tan( 0.5 * VIEW_ANGLE * DEG2RAD );
+
+    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
 #include "MarbleWidget.moc"

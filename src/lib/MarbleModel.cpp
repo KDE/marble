@@ -111,7 +111,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placemarkmodel = new PlaceMarkModel( this );
     d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
 
-    d->m_gpxFileModel = new GpxFileModel;
+    d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
     
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
@@ -122,9 +122,15 @@ MarbleModel::MarbleModel( QWidget *parent )
 
 MarbleModel::~MarbleModel()
 {
-    delete d->m_placeMarkContainer;
-    delete d->m_texmapper;
-    delete d;
+     delete d->m_placeMarkContainer;
+     delete d->m_texmapper;
+     delete d->m_veccomposer;
+     delete d->m_texcolorizer; 
+     delete d->m_gridmap;
+//     delete d->m_placemarkmanager;
+     delete d->m_gpsLayer;
+     delete d->m_maptheme;
+     delete d;
 }
 
 bool MarbleModel::showGps() const
@@ -160,7 +166,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
-    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) ); 
+    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) );
     d->m_maptheme->open( MarbleDirs::path( mapPath ) );
 
     // If this layer is a bitmaplayer, check if the cached tiles for
@@ -174,60 +180,33 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
         {
             qDebug("Base tiles not available. Creating Tiles ... ");
 
-#if 1
-            TileCreatorDialog  tileCreatorDlg( parent );
-            tileCreatorDlg.setSummary( d->m_maptheme->name(),
-                                       d->m_maptheme->description() );
-#endif
-
-            TileCreator tilecreator( d->m_maptheme->prefix(),
+            TileCreator *tileCreator = new TileCreator(
+                                     d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
 
-            // This timer is necessary, because if we remove it, the GUI
-            // never gets shown before the work starts.
-            QTimer::singleShot( 0, &tilecreator, SLOT( createTiles() ) );
-#if 1
-            connect( &tilecreator,    SIGNAL( progress( int ) ),
-                     &tileCreatorDlg, SLOT( setProgress( int ) ) );
-
+            TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+            tileCreatorDlg.setSummary( d->m_maptheme->name(),
+                                       d->m_maptheme->description() );
             tileCreatorDlg.exec();
-#else
-
-            connect( &tilecreator, SIGNAL( progress( int ) ),
-                     this,         SIGNAL( creatingTilesProgress( int ) ) );
-
-            emit creatingTilesStart( d->m_maptheme->name(),
-                                 d->m_maptheme->description() );
-#endif
         }
-        if ( d->m_texmapper == 0 )
-            switch( currentProjection ) {
-                case Spherical:
-                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-                case Equirectangular:
-                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-            }
-        else if ( currentProjection != d->m_projection ) {
+
+        if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
-            switch( currentProjection ) {
-                case Spherical:
-                    d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-                case Equirectangular:
-                    d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                                + d->m_maptheme->tilePrefix(), this );
-                    break;
-            }
+
+        switch( currentProjection ) {
+            case Spherical:
+                d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
+                                            + d->m_maptheme->tilePrefix(), this );
+                break;
+            case Equirectangular:
+                d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
+                                            + d->m_maptheme->tilePrefix(), this );
+                break;
         }
-        else
-            d->m_texmapper->setMapTheme( "maps/earth/"
-                                         + d->m_maptheme->tilePrefix() );
+//         else
+//             d->m_texmapper->setMapTheme( "maps/earth/"
+//                                          + d->m_maptheme->tilePrefix() );
         d->m_projection = currentProjection;
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),

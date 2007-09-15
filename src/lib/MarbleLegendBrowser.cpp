@@ -50,6 +50,11 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     connect ( this, SIGNAL( anchorClicked( QUrl ) ), this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
 }
 
+MarbleLegendBrowser::~MarbleLegendBrowser()
+{
+    delete d;
+}
+
 void MarbleLegendBrowser::readHtml( const QUrl & name )
 {
     QString html;

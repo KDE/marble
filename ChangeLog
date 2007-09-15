@@ -1,3 +1,31 @@
+2007-09-14  Torsten Rahn  <rahn@kde.org>
+
+    Lot's of backports from trunk to get rid of known issues:
+
+     - Various fixes related to finding and
+     fixing possible memory leaks.
+     - Added a Wikipedia icon and a pointer towards the entry.
+     - Give visual feedback if the mouse hovers placemarks.
+     - Give visual feedback if the mouse drags the planet.
+     - Position and Altitude display in StatusBar for KDE frontend.
+     - Added Statusbar items to the Qt-Marble frontend.
+     - Introducing different Notations: Decimal and Sexagesimal (DMS).
+    - Put tile creation into a worker thread and
+       adopted the TileCreationDialog
+    - Improved HttpFetchFile by encoding the path
+       url correctly, adding User-Agent and support
+         for HTTP redirect, now all city names are loaded
+         correctly from WikiPedia
+    - Read the HTML pages as UTF-8, now the webpages
+       look a lot better
+    - Guess the wikipedia domain to use by examine the
+       $LANG variable, so 'LANG=sv marble' will use the
+         swedish wikipedia site ;)
+    - Refactored HttpDownloadManager and HttpFetchFile by introducing
+     StoragePolicy.
+    - Fixed the TinyHttpBrowser to show images and load style sheets.
+    - Add DiscCache class
+
 2007-09-05  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/MarbleWidgetPopupMenu.h:

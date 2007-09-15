@@ -31,6 +31,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 
  public:
     MarbleLegendBrowser( QWidget* parent );
+    ~MarbleLegendBrowser();
 
  public Q_SLOTS:
     void setCheckedLocations( bool checked );

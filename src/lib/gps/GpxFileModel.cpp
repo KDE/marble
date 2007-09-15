@@ -22,8 +22,8 @@
 #endif
 
 
-GpxFileModel::GpxFileModel()
- : QAbstractItemModel()
+GpxFileModel::GpxFileModel( QObject *parent )
+ : QAbstractItemModel( parent )
 {
     m_data = new QVector<GpxFile*>();
 }
@@ -31,6 +31,7 @@ GpxFileModel::GpxFileModel()
 
 GpxFileModel::~GpxFileModel()
 {
+    delete m_data;
 }
 
 void    GpxFileModel::saveFile()

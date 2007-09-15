@@ -42,6 +42,8 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
 
 GpsLayer::~GpsLayer()
 {
+    delete m_currentPosition;
+    delete m_currentGpx;
 }
 
 QRegion GpsLayer::updateGps( const QSize &canvasSize, double radius,

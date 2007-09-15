@@ -40,7 +40,7 @@ class VectorComposer
 {
  public:
     VectorComposer();
-    virtual ~VectorComposer(){}
+    virtual ~VectorComposer();
 
     void  drawTextureMap( ViewParams *viewParams );
     void  paintBaseVectorMap( ClipPainter*, ViewParams* );

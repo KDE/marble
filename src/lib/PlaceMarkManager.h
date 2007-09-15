@@ -21,10 +21,12 @@
 
 class KMLDocument;
 
-class PlaceMarkManager
+class PlaceMarkManager: public QObject
 {
+    Q_OBJECT
+
  public:
-    PlaceMarkManager();
+    PlaceMarkManager( QObject *parent = 0 );
     ~PlaceMarkManager(){}
 
     void addPlaceMarkFile( const QString& );

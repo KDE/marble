@@ -38,13 +38,6 @@ class MainWindow : public KXmlGuiWindow
     ControlView  *controlView()  const { return m_controlView; }
     MarbleWidget *marbleWidget() const { return m_controlView->marbleWidget();}
 
- private:
-    void  setupActions();
-    void  createStatusBar();
-
- public Q_SLOTS:
-    void  showZoom(int zoom);
-
  private Q_SLOTS:
     void  exportMapScreenShot();
     void  printMapScreenShot();
@@ -52,12 +45,16 @@ class MainWindow : public KXmlGuiWindow
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  openFile();
+    void  showPosition( const QString& position);
+    void  showDistance( const QString& position);
+    void  setupStatusBar();
 
  protected:
     virtual void saveProperties( KConfigGroup &group );
     virtual void readProperties( const KConfigGroup &group );
 
  private:
+    void  setupActions();
     QString  readMarbleDataPath();
     void  readSettings();
     void  writeSettings();
@@ -66,9 +63,6 @@ class MainWindow : public KXmlGuiWindow
     // All the functionality is provided by this widget.
     ControlView  *m_controlView;
 
-    // Zoom label for the statusbar.
-    QLabel       *m_zoomLabel;
-
     // Actions for the GUI.
     KAction      *m_exportMapAction;
     KAction      *m_printMapAction;
@@ -76,6 +70,15 @@ class MainWindow : public KXmlGuiWindow
     KAction      *m_sideBarAct;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
+
+    QString m_position;
+    QString m_distance;
+
+    // Zoom label for the statusbar.
+    QLabel       *m_positionLabel;
+    QLabel       *m_distanceLabel;
+
+    void updateStatusBar();
 };
 
  

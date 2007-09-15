@@ -11,141 +11,107 @@
 
 #include "HttpFetchFile.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtGui/QMessageBox>
-#include <QtCore/QTemporaryFile>
+#include <QtNetwork/QHttp>
+#include <QtNetwork/QHttpResponseHeader>
 
 #include "MarbleDirs.h"
+#include "StoragePolicy.h"
 
 
-HttpFetchFile::HttpFetchFile( QObject *parent )
-    : QObject( parent )
+HttpFetchFile::HttpFetchFile( StoragePolicy *policy, QObject *parent )
+    : QObject( parent ),
+      m_storagePolicy( policy )
 {
-    m_pHttp     = new QHttp(this);
-    m_targetDirString = MarbleDirs::localPath() + "/cache/";
-
-    if ( QDir( m_targetDirString ).exists() == false ) 
-        ( QDir::root() ).mkpath( m_targetDirString );
-    // What if we don't succeed in creating the path?
+    m_pHttp = new QHttp(this);
 
     connect( m_pHttp, SIGNAL( requestFinished( int, bool ) ),
-             this,    SLOT( httpRequestFinished( int, bool ) ) );
+             this, SLOT( httpRequestFinished( int, bool ) ) );
 }
 
 HttpFetchFile::~HttpFetchFile()
 {
-//    qDebug() << "Deleting Temporary Files ...";
-    m_pHttp->disconnect();
-
-    QFile* jobTargetFile;
-    QMap<int, HttpJob*>::const_iterator i = m_pFileIdMap.constBegin();
-    while (i != m_pFileIdMap.constEnd()) {
-//        qDebug() << "Deleting Item";
-        HttpJob* job = i.value();
-        jobTargetFile = job->targetFile;
-        jobTargetFile->remove();
-        ++i;
-    }
-//    qDebug() << "Done.";
+    m_pHttp->abort();
 }
 
 void HttpFetchFile::executeJob( HttpJob* job )
 {
-    QString localFileUrlString = job->targetDirString + job->relativeUrlString;
-
-    if ( QFile::exists( localFileUrlString ) ) {
+    if ( m_storagePolicy->fileExists( job->originalRelativeUrlString ) ) {
         qDebug( "File already exists" );
         emit jobDone( job, 1 );
 
         return;
     }
 
-    QTemporaryFile* jobTargetFile = new QTemporaryFile(  QDir::tempPath() + "marble-tile.XXXXXX" );
-    jobTargetFile->setAutoRemove( false );
-    job->targetFile = (QFile*) jobTargetFile;
-
-    if ( !jobTargetFile->open() ) {
-        emit statusMessage( tr( "Unable to save the file %1: %2." )
-                            .arg( localFileUrlString ).arg( jobTargetFile->errorString() ) );
-        delete jobTargetFile;
-        jobTargetFile = 0;
-
-        return;
-    }
-
-    QUrl sourceUrl = QUrl( (job->serverUrl).toString() + job->relativeUrlString ); 
+    const QUrl sourceUrl = QUrl( job->serverUrl.toString() + job->relativeUrlString ); 
 
     m_pHttp->setHost( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
     if ( !sourceUrl.userName().isEmpty() )
         m_pHttp->setUser( sourceUrl.userName(), sourceUrl.password() );
 
-    int httpGetId = m_pHttp->get( sourceUrl.path(), jobTargetFile );
-//    qDebug() << " job id: " << httpGetId << " source: " << sourceUrl.toString();
-    m_pFileIdMap.insert( httpGetId, job );
+    const QString cleanupPath = QUrl::toPercentEncoding( sourceUrl.path(), "/", " -" );
+
+    QHttpRequestHeader header( QLatin1String("GET"), cleanupPath );
+    header.setValue( "Connection", "Keep-Alive" );
+    header.setValue( "User-Agent", "Marble TinyWebBrowser" );
+    header.setValue( "Host", sourceUrl.host() );
+
+    int httpGetId = m_pHttp->request( header, 0, job->buffer );
+    m_pJobMap.insert( httpGetId, job );
 
     emit statusMessage( tr("Downloading data...") );
 }
 
-void HttpFetchFile::httpRequestFinished(int requestId, bool error)
+void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 {
-    if ( !m_pFileIdMap.contains( requestId ) )
+    if ( !m_pJobMap.contains( requestId ) )
         return;
 
     QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
 
-    HttpJob* job = m_pFileIdMap[requestId];
+    HttpJob* job = m_pJobMap[ requestId ];
 
-    QFile* jobTargetFile = job->targetFile;
+    if ( responseHeader.statusCode() == 301 ) {
+        QUrl newLocation( responseHeader.value( "Location" ) );
+        job->serverUrl = newLocation.scheme() + "://" + newLocation.host();
+        job->relativeUrlString = newLocation.path();
 
-    if (responseHeader.statusCode() != 200) {
-//        qDebug() << QString( " response: %1" ).arg( responseHeader.statusCode() );
-        jobTargetFile->remove();
+        // Let's try again
+        executeJob( job );
+        return;
+    }
+
+    if ( responseHeader.statusCode() != 200 ) {
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( responseHeader.reasonPhrase() ) );
-        emit jobDone( m_pFileIdMap[requestId], 1 );
+        emit jobDone( m_pJobMap[ requestId ], 1 );
 
-        m_pFileIdMap.remove( requestId );
+        m_pJobMap.remove( requestId );
         return;
     }
 
     if ( error != 0 ) {
-//        qDebug() << "An error occurred! The Temporary file will be REMOVED!";
-        jobTargetFile->remove();
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_pHttp->errorString() ) );
-        emit jobDone( m_pFileIdMap[requestId], error );
+        emit jobDone( m_pJobMap[ requestId ], error );
 
-        m_pFileIdMap.remove( requestId );
+        m_pJobMap.remove( requestId );
         return;
 
     }
 
-    jobTargetFile->close();
+    if ( !m_storagePolicy->updateFile( job->originalRelativeUrlString, job->data ) ) {
+        emit statusMessage( tr( "Download failed: %1." )
+                            .arg( m_storagePolicy->lastErrorMessage() ) );
+        emit jobDone( m_pJobMap[ requestId ], error );
 
-    QString localFileUrlString = job->targetDirString + job->relativeUrlString;
-
-    QFileInfo info( localFileUrlString );
-    
-    QDir localFileDir = info.dir();
-    QString localFileDirPath = localFileDir.absolutePath();
-//    qDebug() << "Moving download to: " << localFileUrlString << " in: " << localFileDirPath;
-
-    if ( !QDir( localFileDirPath ).exists() )
-        ( QDir::root() ).mkpath( localFileDirPath );
-
-    jobTargetFile->rename( localFileUrlString );
+        m_pJobMap.remove( requestId );
+        return;
+    }
 
     emit statusMessage( tr( "Download finished." ) );
 
-    emit jobDone( m_pFileIdMap[requestId], 0 );
-    m_pFileIdMap.remove( requestId );
-	
-    delete jobTargetFile;
-    jobTargetFile = 0;
-
+    emit jobDone( m_pJobMap[ requestId ], 0 );
+    m_pJobMap.remove( requestId );
 }
 
 #include "HttpFetchFile.moc"

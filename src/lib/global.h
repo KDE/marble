@@ -17,6 +17,8 @@
 #include <math.h>
 
 
+#include <QtCore/QObject>
+
 // This enum is used to choose projection shown in the view.
 
 enum Projection { 
@@ -33,7 +35,11 @@ enum Projection {
 const double DEG2RAD = M_PI / 180.0;
 const double RAD2DEG = 180.0 / M_PI;
 
+const QString NOT_AVAILABLE = QObject::tr("not available");
+
 // Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;
+
+const double EARTH_RADIUS = 6378.0;
 
 #endif

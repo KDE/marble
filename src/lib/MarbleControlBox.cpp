@@ -139,6 +139,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
 }
 
+MarbleControlBox::~MarbleControlBox()
+{
+    delete d->m_mapthememodel;
+    delete d;
+}
+
 void MarbleControlBox::setupGpsOption()
 {
     d->uiWidget.m_gpsDrawBox -> setEnabled( true );

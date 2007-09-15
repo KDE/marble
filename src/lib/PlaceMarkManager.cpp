@@ -23,7 +23,8 @@
 #include "xmlhandler.h"
 
 
-PlaceMarkManager::PlaceMarkManager()
+PlaceMarkManager::PlaceMarkManager( QObject *parent )
+    : QObject( parent )
 {
     m_placeMarkContainer = new PlaceMarkContainer();
 
@@ -81,16 +82,16 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     qDebug( "No recent Default Placemark Cache File available!" );
 
     if ( QFile::exists( defaultsrcname ) ) {
-        PlaceMarkContainer  *importcontainer = new PlaceMarkContainer();
+        PlaceMarkContainer importcontainer;
 
         // Read the KML file.
-        importKml( defaultsrcname, importcontainer );
+        importKml( defaultsrcname, &importcontainer );
 
         // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, importcontainer );
+        saveFile( defaulthomecache, &importcontainer );
 
         // ...and finally add it to the PlaceMarkContainer
-        *m_placeMarkContainer << *importcontainer;
+        *m_placeMarkContainer << importcontainer;
     }
     else {
         qDebug() << "No Default Placemark Source File!";
@@ -354,3 +355,5 @@ void PlaceMarkManager::loadDocumentFromCache ( QString &path, KMLDocument& docum
 }
 
 #endif
+
+#include "PlaceMarkManager.moc"

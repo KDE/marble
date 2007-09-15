@@ -13,6 +13,7 @@
 
 #include <QClipboard>
 #include <QtGui/QLabel>
+#include <QtGui/QFontMetrics>
 #include <QtGui/QPainter>
 
 #include <KApplication>
@@ -31,9 +32,14 @@
 
 // #include <KPrintDialogPage>
 
-
+namespace
+{
+    const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
+    const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
+}
+ 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent)
-    : KXmlGuiWindow(parent)
+    : KXmlGuiWindow(parent), m_positionLabel( 0 ), m_distanceLabel( 0 )
 {
     QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
@@ -46,10 +52,12 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent)
     setXMLFile("marbleui.rc");
 
     // Create the statusbar and populate it with initial data.
-    createStatusBar();
-    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
-             this,                          SLOT( showZoom( int ) ) );
-    showZoom( m_controlView->marbleWidget()->zoom() );
+    m_statusBarExtension = new KParts::StatusBarExtension( this );
+
+    m_position = NOT_AVAILABLE;
+    m_distance = m_controlView->marbleWidget()->distanceString();
+
+    QTimer::singleShot( 0, this, SLOT( setupStatusBar() ) );
 
     setAutoSaveSettings();
 }
@@ -103,14 +111,55 @@ void MainWindow::setupActions()
     readSettings();
 }
 
-
-void MainWindow::createStatusBar()
+void MarblePart::showPosition( const QString& position )
 {
-    // This hides the normal statusbar contents until clearMessage() is called.
-    //statusBar()->showMessage( i18n( "Ready" ) );
+    m_position = position;
+    updateStatusBar();
+}
 
-    m_zoomLabel = new QLabel( statusBar() );
-    statusBar()->addWidget(m_zoomLabel);
+void MarblePart::showDistance( const QString& distance )
+{
+    m_distance = distance;
+    updateStatusBar();
+}
+
+void MarblePart::updateStatusBar()
+{
+    if ( m_positionLabel )
+        m_positionLabel->setText( i18n( POSITION_STRING, m_position ) ); 
+
+    if ( m_distanceLabel )
+        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) ); 
+}
+
+void MainWindow::setupStatusBar()
+{
+    QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
+
+    m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
+    m_positionLabel->setIndent( 5 );
+    QString templatePositionString = 
+        QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
+    int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
+                            + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
+    m_positionLabel->setFixedWidth( maxPositionWidth );
+    m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
+
+    m_distanceLabel = new QLabel( m_statusBarExtension->statusBar() );
+    m_distanceLabel->setIndent( 5 );
+    QString templateDistanceString = 
+        QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
+    int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
+                            + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
+    m_distanceLabel->setFixedWidth( maxDistanceWidth );
+    m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
+
+    connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
+              this, SLOT( showPosition( QString ) ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
+              this, SLOT( showDistance( QString ) ) );
+
+    updateStatusBar();
 }
 
 
@@ -140,6 +189,7 @@ void MainWindow::readSettings()
      m_controlView->marbleWidget()->goHome();
 }
 
+
 void MainWindow::writeSettings()
 {
      double homeLon = 0;
@@ -151,12 +201,6 @@ void MainWindow::writeSettings()
      MarbleSettings::setHomeZoom( homeZoom );
      MarbleSettings::self()->writeConfig();
 }
-
-void MainWindow::showZoom(int zoom)
-{
-  m_zoomLabel->setText( i18n( "Zoom: %1", QString("%1").arg ( zoom, 4 ) ) );
-}
-
 
 
 void MainWindow::exportMapScreenShot()

@@ -32,7 +32,7 @@ public Q_SLOTS:
     void saveFile();
     void closeFile();
 public:
-    GpxFileModel();
+    GpxFileModel( QObject *parent = 0 );
 
     ~GpxFileModel();
     
