@@ -1,5 +1,13 @@
 2007-09-15  Torsten Rahn  <rahn@kde.org>
 
+	* src/lib/PlaceMarkInfoDialog.cpp:
+	- Data Sheet -> Marble Info Center, as mentioned in the Marble
+	  Quality Check.
+	* BUGS:
+	  Make ingwa happy.
+
+2007-09-15  Torsten Rahn  <rahn@kde.org>
+
 	- Add the icon for the menu in the Qt version ;-(
 
 	* data/icons
