@@ -120,7 +120,6 @@ set(marblewidget_SRCS
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
 )
-MESSAGE( STATUS "${marblewidget_SRCS}" )
 
 set (marblewidget_UI
     MarbleControlBox.ui
