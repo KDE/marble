@@ -1,3 +1,8 @@
+2007-09-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Add instruction about how to install into a non-standard prefix
+	* INSTALL (-DCMAKE_INSTALL_PREFIX): add instructions
+
 2007-09-14  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/PlaceMarkInfoDialog.cpp:

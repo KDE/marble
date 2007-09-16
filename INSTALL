@@ -31,6 +31,7 @@ Choose one of them and read below for how to do it.
 NOTE: If you wish to build Marble with debug info include the argument
       -DCMAKE_BUILD_TYPE=debug in the cmake command below.
 
+
 1. Build Marble as a Qt only application.
 
 1.1 Create a build directory
@@ -45,6 +46,12 @@ directory called 'marble-build'.
 Go into the build directory and type
 
   cmake -DQTONLY=ON ../marble
+
+By default, marble is installed into /usr/local.  If you want to
+install it into any other directory, add
+-DCMAKE_INSTALL_PREFIX=/path/to/install/into like in this example:
+
+  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps ../marble
 
 
 1.3 Build marble
