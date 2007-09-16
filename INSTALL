@@ -46,6 +46,12 @@ Go into the build directory and type
 
   cmake -DQTONLY=ON ../marble
 
+By default, marble is installed into /usr/local.  If you want to
+install it into any other directory, add
+-DCMAKE_INSTALL_PREFIX=/path/to/install/into like in this example:
+
+  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps ../marble
+
 
 1.3 Build marble
 
