@@ -40,23 +40,23 @@ MarbleNavigator::MarbleNavigator( QWidget *parent )
 
     setFocusPolicy( Qt::NoFocus );
 
-    connect( d->uiWidget.goHomeButton, SIGNAL( clicked() ), 
-             this,         SIGNAL( goHome() ) ); 
-    connect( d->uiWidget.zoomSlider,   SIGNAL( valueChanged( int ) ),
-             this,         SIGNAL( zoomChanged( int ) ) ); 
+    connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ), 
+             this,                      SIGNAL( goHome() ) ); 
+    connect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
+             this,                      SIGNAL( zoomChanged( int ) ) ); 
     connect( d->uiWidget.zoomInButton,  SIGNAL( clicked() ),
-             this,          SIGNAL( zoomIn() ) ); 
+             this,                      SIGNAL( zoomIn() ) ); 
     connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
-             this,          SIGNAL( zoomOut() ) ); 
+             this,                      SIGNAL( zoomOut() ) ); 
 
     connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
-             this,            SIGNAL( moveLeft() ) ); 
+             this,                        SIGNAL( moveLeft() ) ); 
     connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
-             this,            SIGNAL( moveRight() ) ); 
+             this,                        SIGNAL( moveRight() ) ); 
     connect( d->uiWidget.moveUpButton,    SIGNAL( clicked() ),
-             this,            SIGNAL( moveUp() ) ); 
+             this,                        SIGNAL( moveUp() ) ); 
     connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
-             this,            SIGNAL (moveDown() ) ); 
+             this,                        SIGNAL (moveDown() ) ); 
 }
 
 

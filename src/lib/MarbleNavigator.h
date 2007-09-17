@@ -80,7 +80,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
      * @brief Signal emitted when the zoom slider has been moved.
      * @param zoom  The new zoom value.
      */
-    void zoomChanged(int);
+    void zoomChanged(int zoom);
 
     /**
      * @brief Signal emitted when the Move Left button has been pressed.
@@ -101,7 +101,16 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     //void centerOn(const QModelIndex&);
 
  public Q_SLOTS:
-    void changeZoom(int);
+    /**
+     * @brief Sets the value of the slider.
+     * @param zoom The new zoom value.
+     *
+     * This slot should be called when the zoom value is changed from
+     * the widget itself, e.g. by using the scroll wheel.  It sets the
+     * value of the slider, but nothing more.  In particular it
+     * doesn't emit the zoomChanged signal.
+     */
+    void changeZoom(int zoom);
 
  protected:
     /**

@@ -1,5 +1,9 @@
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
+	More work on APIDOX: 
+	* src/lib/MarbleNavigator.h: Fix apidox and remove warnings
+	* src/lib/MarbleNavigator.cpp (MarbleNavigator): Fix indentation
+
 	APIDOX
 	* src/lib/MarbleNavigator.h: Finish apidox
 	
