@@ -64,10 +64,10 @@ Documentation
  * Coding standards                                                     DONE
  * APIDOX: Class and method docs for at least:                          INGE
    - Mainpage.dox							done
-   - MarbleWidget                                                       done
+   - MarbleWidget                                                       --
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
-   - MarbleNavigator                                                    --
+   - MarbleNavigator                                                    done
  * Write more in DESIGN                                                 INGE
    - Describe the view parameters                                       --
    - Describe the vector engine                                         --

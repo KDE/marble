@@ -1,6 +1,9 @@
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX
+	* src/lib/MarbleNavigator.h: Finish apidox
+	
+	APIDOX
 	* src/lib/MarbleWidget.h (northPoleY, northPoleZ): Document
 	(zoomView): improve docs
 	* src/lib/MarbleControlBox.h (addMarbleWidget): Document

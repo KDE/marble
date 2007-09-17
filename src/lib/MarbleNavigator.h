@@ -39,7 +39,8 @@ class MarbleNavigatorPrivate;
  *
  * This widget lets the user control an instance of MarbleWidget.  The
  * user can control panning and zooming as well as returning to a
- * predefined view called the 'home' position.
+ * predefined view called the 'Home' position.  You cannot change the
+ * Home position from the MarbleNavigator, though.
  *
  * @see MarbleWidget
  * @see MarbleControlBox
@@ -50,19 +51,52 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     Q_OBJECT
 
  public:
+    /**
+     * @brief Construct a new MarbleNavigator
+     * @param parent the parent widget
+     */
     MarbleNavigator(QWidget *parent = 0);
  
+    /**
+     * @brief Construct a new MarbleNavigator
+     * @return the minimum zoom level set in the widget.
+     */
     int  minimumZoom() const;
 	
  Q_SIGNALS:
+    /**
+     * @brief Signal emitted when the Home button has been pressed.
+     */
     void goHome();
+    /**
+     * @brief Signal emitted when the Zoom In button has been pressed.
+     */
     void zoomIn();
+    /**
+     * @brief Signal emitted when the Zoom Out button has been pressed.
+     */
     void zoomOut();
+    /**
+     * @brief Signal emitted when the zoom slider has been moved.
+     * @param zoom  The new zoom value.
+     */
     void zoomChanged(int);
 
+    /**
+     * @brief Signal emitted when the Move Left button has been pressed.
+     */
     void moveLeft();
+    /**
+     * @brief Signal emitted when the Move Right button has been pressed.
+     */
     void moveRight();
+    /**
+     * @brief Signal emitted when the Move Up button has been pressed.
+     */
     void moveUp();
+    /**
+     * @brief Signal emitted when the Move Down button has been pressed.
+     */
     void moveDown();
     //void centerOn(const QModelIndex&);
 
@@ -70,6 +104,12 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     void changeZoom(int);
 
  protected:
+    /**
+     * @brief Reimplementation of the resizeEvent() of the widget.  
+     *
+     * If the MarbleNavigator gets shrunk enough, the slider will be
+     * hidden, leaving only the Zoom Up and Zoom Down buttons.
+     */
     void resizeEvent ( QResizeEvent * );
 
  private:
