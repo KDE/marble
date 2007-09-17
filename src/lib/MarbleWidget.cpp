@@ -501,6 +501,7 @@ Projection MarbleWidget::projection() const
     return d->m_viewParams.m_projection;
 }
 
+// FIXME: Actually take a real Projection as parameter.
 void MarbleWidget::setProjection( int projectionIndex )
 {
     Projection projection;
@@ -558,9 +559,9 @@ void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
     d->m_homeZoom = zoom;
 }
 
-void MarbleWidget::setHome(const GeoPoint& _homePoint, int zoom)
+void MarbleWidget::setHome(const GeoPoint& homePoint, int zoom)
 {
-    d->m_homePoint = _homePoint;
+    d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
 }
 

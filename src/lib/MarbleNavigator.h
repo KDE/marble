@@ -58,7 +58,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     MarbleNavigator(QWidget *parent = 0);
  
     /**
-     * @brief Construct a new MarbleNavigator
+     * @brief Return the minimum zoom level set in the widget.
      * @return the minimum zoom level set in the widget.
      */
     int  minimumZoom() const;

@@ -40,7 +40,7 @@ class MarbleWidget;
 class MarbleControlBoxPrivate;
 
 /** 
- * @short A widget class that contains all sorts of controls for a
+ * @short A widget class that contains advanced controls for a
  * MarbleWidget.
  *
  * This widget lets the user control an instance of MarbleWidget.  The
@@ -49,9 +49,9 @@ class MarbleControlBoxPrivate;
  * with a legend for the symbols on the map, and a <b>Map View</b>
  * page with a choice of themes / datasets.
  *
- * The <b>Navigation</b> pane lets the user navigate around the globe by
+ * The <b>Navigation</b> page lets the user navigate around the globe by
  * using buttons for panning and a slider for zooming.  There is also
- * a "home" button that lets the user go back to a predefined point at
+ * a "Home" button that lets the user go back to a predefined point at
  * the earth, not unlike the home page in a web browser.  In addition
  * there is a search tool that lets the user search for names of
  * points of interest (cities, mountains, glaciers, etc).
@@ -65,6 +65,7 @@ class MarbleControlBoxPrivate;
  * Night view, and a Sattelite view.
  *
  * @see MarbleWidget
+ * @see MarbleNavigator
  */
 
 class MARBLE_EXPORT MarbleControlBox : public QWidget
@@ -72,6 +73,10 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     Q_OBJECT
 
  public:
+    /**
+     * @brief Construct a new MarbleControlBox
+     * @param parent the parent widget
+     */
     MarbleControlBox(QWidget *parent = 0);
     ~MarbleControlBox();
  
@@ -88,17 +93,46 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void setLocations(QAbstractItemModel* locations);
 
+    /**
+     * @brief Return the minimum zoom level set in the widget.
+     * @return the minimum zoom level set in the widget.
+     */
     int minimumZoom() const;
 	
  Q_SIGNALS:
+    /**
+     * @brief Signal emitted when the Home button has been pressed.
+     */
     void goHome();
+    /**
+     * @brief Signal emitted when the Zoom In button has been pressed.
+     */
     void zoomIn();
+    /**
+     * @brief Signal emitted when the Zoom Out button has been pressed.
+     */
     void zoomOut();
-    void zoomChanged(int);
+    /**
+     * @brief Signal emitted when the zoom slider has been moved.
+     * @param zoom  The new zoom value.
+     */
+    void zoomChanged(int zoom);
 
+    /**
+     * @brief Signal emitted when the Move Left button has been pressed.
+     */
     void moveLeft();
+    /**
+     * @brief Signal emitted when the Move Right button has been pressed.
+     */
     void moveRight();
+    /**
+     * @brief Signal emitted when the Move Up button has been pressed.
+     */
     void moveUp();
+    /**
+     * @brief Signal emitted when the Move Down button has been pressed.
+     */
     void moveDown();
     void centerOn(const QModelIndex&);
 
@@ -110,16 +144,45 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void updateGps();
    
  public Q_SLOTS:
-    void changeZoom(int);
+    /**
+     * @brief Sets the value of the slider.
+     * @param zoom The new zoom value.
+     *
+     * This slot should be called when the zoom value is changed from
+     * the widget itself, e.g. by using the scroll wheel.  It sets the
+     * value of the slider, but nothing more.  In particular it
+     * doesn't emit the zoomChanged signal.
+     */
+    void changeZoom(int zoom);
     void disableGpsInput( bool );
     void receiveGpsCoordinates( double, double, GeoPoint::Unit );
     void enableFileViewActions();
     
-    void setNavigationTabShown( bool );
-    void setLegendTabShown( bool );
-    void setMapViewTabShown( bool );
-    void setCurrentLocationTabShown( bool );
-    void setFileViewTabShown( bool );
+    /**
+     * @brief Control whether the Navigation tab is shown.
+     * @param show  boolean that controls if the Navigation tab is shown.
+     */
+    void setNavigationTabShown( bool show );
+    /**
+     * @brief Control whether the Legend tab is shown.
+     * @param show  boolean that controls if the Legend tab is shown.
+     */
+    void setLegendTabShown( bool show );
+    /**
+     * @brief Control whether the Map View tab is shown.
+     * @param show  boolean that controls if the Map View tab is shown.
+     */
+    void setMapViewTabShown( bool show );
+    /**
+     * @brief Control whether the Current Location tab is shown.
+     * @param show  boolean that controls if the Current Location tab is shown.
+     */
+    void setCurrentLocationTabShown( bool show );
+    /**
+     * @brief Control whether the File View tab is shown.
+     * @param show  boolean that controls if the File View tab is shown.
+     */
+    void setFileViewTabShown( bool show );
 
  private Q_SLOTS:
     /// called whenever the user types something new in the search box
@@ -136,6 +199,13 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
                             bool show, QString &text );
 
  protected:
+    /**
+     * @brief Reimplementation of the resizeEvent() of the widget.  
+     *
+     * If the MarbleControlBox gets shrunk enough, the slider in the
+     * Navigation tab will be hidden, leaving only the Zoom Up and
+     * Zoom Down buttons.
+     */
     void resizeEvent ( QResizeEvent * );
 
  private:

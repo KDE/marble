@@ -495,7 +495,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void  setProjection( int );
+    void  setProjection( int projection );
 
     /**
      * @brief  get the home point
@@ -515,7 +515,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the home point
      * @param  homePoint  The new home point.
      */
-    void  setHome(const GeoPoint& _homePoint, int zoom = 1050);
+    void  setHome(const GeoPoint& homePoint, int zoom = 1050);
 
     /**
      * @brief  Move left by the moveStep.
@@ -541,7 +541,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief Get the current map theme
-     * @param maptheme  The name of the new maptheme.
      */
     QString mapTheme() const;
     /**
@@ -700,7 +699,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void  themeChanged( QString );
+    void  themeChanged( QString theme );
 
     void  mouseMoveGeoPosition( QString );
 
