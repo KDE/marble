@@ -121,18 +121,15 @@ bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
         diry = 0;
 
         // emit the position string only if the signal got attached
-        if ( m_positionSignalConnected )
-        {
+        if ( m_positionSignalConnected ) {
             double  lat;
             double  lon;
             bool isValid = m_widget->geoCoordinates( event->x(), event->y(), lon, lat, GeoPoint::Radian );
 
-            if ( isValid == false )
-            {
+            if ( !isValid ) {
                 emit mouseMoveGeoPosition( NOT_AVAILABLE );
             } 
-            else
-            {
+            else {
                 QString position = GeoPoint( lon, lat ).toString( GeoPoint::DMS );
                 emit mouseMoveGeoPosition( position );
             }

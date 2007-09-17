@@ -1,6 +1,11 @@
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
-	Add a main page to the APIdox
+	Cleaning
+	* src/lib/MarbleWidget.cpp: 
+	* src/lib/MarbleWidgetInputHandler.cpp (eventFilter): 
+	Follow coding standards
+	
+	Add a main page to the APIdox.
 	* src/Mainpage.dox: New file
 
 2007-09-16  Inge Wallin  <inge@lysator.liu.se>
