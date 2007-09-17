@@ -23,8 +23,27 @@
 #include "marble_export.h"
 
 
+/** @file
+ * This file contains the header for MarbleNavigator
+ * 
+ * @author Torsten Rahn <tackat@kde.org>
+ * @author Inge Wallin  <inge@lysator.liu.se>
+ */
+
+
 class MarbleNavigatorPrivate;
 
+/** 
+ * @short A widget class that contains simple controls for a
+ * MarbleWidget.
+ *
+ * This widget lets the user control an instance of MarbleWidget.  The
+ * user can control panning and zooming as well as returning to a
+ * predefined view called the 'home' position.
+ *
+ * @see MarbleWidget
+ * @see MarbleControlBox
+ */
 
 class MARBLE_EXPORT MarbleNavigator : public QWidget
 {

@@ -75,6 +75,15 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     MarbleControlBox(QWidget *parent = 0);
     ~MarbleControlBox();
  
+    /**
+     * @brief Add a MarbleWidget to be controlled by this widget.
+     * @param widget  the MarbleWidget to be added.
+     *
+     *  Add a MarbleWidget so that it will be controlled by this
+     *  widget.  This call create all the connections of signals and
+     *  slots that are necessary to have full control of the
+     *  MarbleWidget, and thereby frees the programmer from doing it.
+     */
     void addMarbleWidget( MarbleWidget *widget );
 
     void setLocations(QAbstractItemModel* locations);

@@ -1,5 +1,11 @@
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
+	APIDOX
+	* src/lib/MarbleWidget.h (northPoleY, northPoleZ): Document
+	(zoomView): improve docs
+	* src/lib/MarbleControlBox.h (addMarbleWidget): Document
+	* src/lib/MarbleNavigator.h: Document file and class.
+
 	Cleaning
 	* src/lib/MarbleWidget.cpp: 
 	* src/lib/MarbleWidgetInputHandler.cpp (eventFilter): 

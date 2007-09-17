@@ -201,7 +201,21 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool screenCoordinates( const double lon, const double lat,
                             int& x, int& y );
 
+    /**
+     * @brief Get the Y coordinate of the North Pole.
+     * @return the pixel address of the geographical north pole.
+     */
     int northPoleY();
+    /**
+     * @brief Get the Z coordinate of the North Pole.
+     * @return the Z coordinate of the geographical north pole.
+     *
+     * This function returns the Z coordinate of the north pole. It
+     * will return a positive value if the north pole is visible,
+     * i.e. pointing towards the viewer.  It will return a negative
+     * value if the north pole is behind the horizon, i.e. pointing
+     * away from the viewer.
+     */
     int northPoleZ();
 
     /**
@@ -355,6 +369,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
+     *
+     * The zoom level is an abstract value without physical
+     * interpretation.  A zoom value around 1000 lets the viewer see
+     * all of the earth in the default window.
      */
     void  zoomView(int zoom);
 
@@ -673,6 +691,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Signal that the zoom has changed, and to what.
      * @param zoom  The new zoom value.
+     * @see  zoomView()
      */
     void  zoomChanged( int zoom );
     void  distanceChanged( const QString& distanceString );
