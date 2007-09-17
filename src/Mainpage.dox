@@ -1,0 +1,55 @@
+/** @mainpage Marble 
+
+@short An application and widget class that displays a view of the earth.
+
+Marble is an application that displays a view of the earth.  It is
+both a valuable application in its own right, but also an example
+program that shows how you can use the Marble widgets in your own
+applications. 
+
+We have designed Marble so that you can use its components easily to
+enhance your application with geo services. This manual enumerates the
+components and describes how to use them in your own application.
+
+The Marble application makes use of the following classes and widgets:
+
+1. MarbleWidget, the main widget in any application using the Marble
+   framework.  This widget displays a view of the earth or any other
+   globe, depending on which dataset is used.  The user can navigate
+   the globe using either a control widget, e.g. the MarbleControlBox,
+   or the mouse.  
+
+2. MarbleModel, the data storage class that holds the data that is
+   visualized in the MarbleWidget.  You can either create a
+   MarbleModel of your own, or let the MarbleWidget create one for
+   you. 
+
+   This data model contains 3 separate datatypes: <b>tiles</b> which
+   provide the background, <b>vectors</b> which provide things like
+   country borders and coastlines and <b>placemarks</b> which can show
+   points of interest, such as cities, mountain tops or the poles.
+
+3. MarbleControlBox, the most advanced control widget for
+   MarbleWidget. It can be used to navigate around the globe, zoom,
+   search for placemarks like cities, control aspects of the view such
+   as showing water bodies, ice, terrain types, and cities. It can
+   also be used to control which dataset is used to provide the
+   background for the image and the projection (currently globe and
+   flat). 
+
+These three classes provide the core of the classes that comprise the
+Marble framework.  You can use only them and get a very capable
+application if you just provide them with some good datasets.
+
+In addition to this, there is also a simpler control widget called the
+MarbleNavigator that only controls panning and zooming. The
+MarbleNavigator is incorporated into the MarbleControlBox in the first
+tab.  This control widget can be used in simpler application where
+theming, searching and other advanced controls are not needed.
+
+@see MarbleWidget
+@see MarbleModel
+@see MarbleControlBox
+@see MarbleNavigator
+
+ */
