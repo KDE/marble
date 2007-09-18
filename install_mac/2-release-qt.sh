@@ -9,7 +9,7 @@ LIBPREFIX=${HOME}/apps/Marble.app/Contents/lib
 PLUGINPREFIX=${HOME}/apps/Marble.app/Contents/plugins
 
 QTPREFIX=/Library/Frameworks
-QTFRAMEWORKS="QtCore QtGui QtNetwork QtSql QtSvg QtXml Qt3Support QtDesigner QtTest"
+QTFRAMEWORKS="QtCore QtGui QtNetwork QtSvg QtXml"
 
 # Copy supporting frameworks to application bundle
 mkdir -p $FRAMEWORKPREFIX
@@ -25,28 +25,19 @@ do
 done
 
 # Update path to supporting frameworks
-for FRAMEWORK in QtGui QtNetwork QtSql QtSvg QtXml Qt3Support QtDesigner QtTest
+for FRAMEWORK in QtGui QtNetwork QtSvg QtXml 
 do
 	install_name_tool -change QtCore.framework/Versions/4/QtCore \
 		@executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
 done
-for FRAMEWORK in QtSvg Qt3Support QtDesigner
+for FRAMEWORK in QtSvg 
 do
 	install_name_tool -change QtGui.framework/Versions/4/QtGui \
 		@executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
 	install_name_tool -change QtXml.framework/Versions/4/QtXml \
 		@executable_path/../Frameworks/QtXml.framework/Versions/4/QtXml \
-		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
-done
-for FRAMEWORK in Qt3Support
-do
-	install_name_tool -change QtNetwork.framework/Versions/4/QtNetwork \
-		@executable_path/../Frameworks/QtNetwork.framework/Versions/4/QtNetwork \
-		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
-	install_name_tool -change QtSql.framework/Versions/4/QtSql \
-		@executable_path/../Frameworks/QtSql.framework/Versions/4/QtSql \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
 done
 cd ../
@@ -70,9 +61,9 @@ cd ../../MacOS
 echo `pwd`
 for FILE in \
 	marble \
-	lib/libmarblewidget.5.0.0.dylib
+	lib/libmarblewidget.0.5.0.dylib
 do
-	for FRAMEWORK in QtCore QtGui QtNetwork QtSql QtSvg QtXml Qt3Support QtDesigner QtTest
+	for FRAMEWORK in QtCore QtGui QtNetwork QtSvg QtXml 
 	do
 		install_name_tool -change $FRAMEWORK.framework/Versions/4/$FRAMEWORK \
 			@executable_path/../Frameworks/$FRAMEWORK.framework/Versions/4/$FRAMEWORK \
