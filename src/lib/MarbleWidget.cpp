@@ -25,6 +25,7 @@
 //#include <QtDBus/QDBusConnection>
 
 #include "global.h"
+#include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
 #include "TextureColorizer.h"
@@ -76,6 +77,8 @@ class MarbleWidgetPrivate
     // Parameters for the widgets appearance.
     bool             m_showCompass;
     bool             m_showScaleBar;
+
+    bool             m_showFrameRate;
 
     // Parts of the image in the Widget
     CrossHairFloatItem  m_crosshair;
@@ -186,13 +189,18 @@ void MarbleWidget::construct(QWidget *parent)
     d->m_minimumzoom = 950;
     d->m_maximumzoom = 2200;
 
-    d->m_showScaleBar = true;
-    d->m_showCompass  = true;
+    d->m_showScaleBar  = true;
+    d->m_showCompass   = true;
+    d->m_showFrameRate = false;
 
+    // Widget translation
     QString      locale = QLocale::system().name();
     QTranslator  translator;
     translator.load(QString("marblewidget_") + locale);
     QCoreApplication::installTranslator(&translator);
+
+    // AutoSettings
+    AutoSettings* autoSettings = new AutoSettings( this );
 }
 
 MarbleModel *MarbleWidget::model() const
@@ -341,6 +349,11 @@ bool MarbleWidget::showLakes() const
 bool MarbleWidget::showGps() const
 {
     return d->m_model->gpsLayer()->visible();
+}
+
+bool MarbleWidget::showFrameRate() const
+{
+    return d->m_showFrameRate;
 }
 
 bool  MarbleWidget::quickDirty() const
@@ -888,6 +901,9 @@ void MarbleWidget::setBoundingBox()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
+    QTime t;
+    t.start();
+
     bool  doClip = false;
     if( d->m_viewParams.m_projection == Spherical )
         doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
@@ -938,6 +954,27 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     //Set the Bounding Box
     setBoundingBox();
+
+    double fps = 1000.0 / (double)( t.elapsed() );
+
+    if ( d->m_showFrameRate == true )
+    {
+        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
+
+        QPoint fpsLabelPos( 10, 20 );
+
+        painter.setFont( QFont( "Sans Serif", 10 ) );
+
+        painter.setPen( Qt::black );
+        painter.setBrush( Qt::black );
+        painter.drawText( fpsLabelPos, fpsString );
+
+        painter.setPen( Qt::white );
+        painter.setBrush( Qt::white );
+        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
+    }
+
+    emit framesPerSecond( fps );
 }
 
 void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -1055,6 +1092,12 @@ void MarbleWidget::setShowLakes( bool visible )
     d->m_viewParams.m_showLakes = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::setShowFrameRate( bool visible )
+{
+    d->m_showFrameRate = visible;
     repaint();
 }
 

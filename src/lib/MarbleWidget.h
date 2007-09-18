@@ -36,7 +36,6 @@
 #include "CompassFloatItem.h"
 #include "MapScaleFloatItem.h"
 
-
 class QStyleOptionGraphicsItem;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
@@ -45,8 +44,8 @@ class MeasureTool;
 class TileCreator;
 class MarbleWidgetPrivate;
 class GpsLayer;
+class GpxFileModel;
 class FileViewModel;
-#include "gps/GpxFileModel.h"
 
 
 /**
@@ -351,6 +350,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  showGps() const;
 
     /**
+     * @brief  Return whether the frame rate gets displayed.
+     * @return the frame rates visibility
+     */
+    bool  showFrameRate() const;
+
+    /**
      * @brief  Return whether quick and dirty rendering is enabled.
      * @return Quick and dirty rendering
      */
@@ -628,6 +633,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowGps( bool visible );
 
     /**
+     * @brief Set whether the frame rate gets shown
+     * @param visible  visibility of the frame rate
+     */
+    void setShowFrameRate( bool visible );
+
+    /**
      * @brief Set the current Gps position
      * @param lat the new latitude value
      * @param lon the new longitude value
@@ -706,6 +717,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  mouseClickGeoPosition( double lon, double lat, GeoPoint::Unit );
 
     void  timeout();
+
+    void  framesPerSecond( double fps );
 
  protected:
     /**

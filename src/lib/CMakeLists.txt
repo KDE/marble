@@ -49,6 +49,7 @@ set(marblewidget_SRCS
            MarbleWidgetInputHandler.cpp
            MarbleWidgetPopupMenu.cpp
 
+           AutoSettings.cpp
            ClipPainter.cpp
            GeoPoint.cpp
            GeoPolygon.cpp
@@ -234,6 +235,7 @@ else (APPLE AND QTONLY)
            MarbleWidgetPopupMenu.h
 
            global.h
+           AutoSettings.h
            ClipPainter.h
            GeoPoint.h
            GeoPolygon.h

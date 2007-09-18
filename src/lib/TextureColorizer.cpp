@@ -51,7 +51,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     GpFifo  emboss;
     emboss.buffer = 0;
 
-    double  bendradius = 0;
+    double  bendradius = 0.0;
     const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
     const double  bendReliefx = 0.41 * bendRelief;
     const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;

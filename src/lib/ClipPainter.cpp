@@ -26,7 +26,7 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
     m_currentxpos = 0;
     m_currentypos = 0;
 
-    m_left   = 0.0; 
+    m_left   = -1.0; 
     m_right  = (double)(m_imgwidth);
     m_top    = 0.0; 
     m_bottom = (double)(m_imgheight);	

@@ -49,6 +49,7 @@ int main (int argc, char *argv[])
     KCmdLineOptions  options;
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
+    options.add( "fps", ki18n( "Show frame rate" ) );
     options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
     options.add( "enableFileView", 
                  ki18n( "Enable tab to see gpxFileView") );
@@ -87,6 +88,10 @@ int main (int argc, char *argv[])
         return 0;
     }
     
+    if ( args->isSet( "fps" ) ) {
+        window->marbleControl()->marbleWidget()->setShowFrameRate( true );
+    }
+
     if ( args->isSet( "enableCurrentLocation" ) ) {
         window->marbleControl()->setCurrentLocationTabShown(true);
     }

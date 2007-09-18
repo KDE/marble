@@ -1,3 +1,34 @@
+2007-09-18  Torsten Rahn  <rahn@kde.org>
+
+	* src/kdemain.cpp:
+	* src/qtmain.cpp:
+	* src/lib/MarbleWidget.{cpp,h}:
+	* src/lib/AutoSettings.{h,cpp}:
+	* src/lib/CMakeLists.txt:
+
+	- Added "--fps" comḿand line option to display framerate
+	  on the fly as a preparation for the AutoSettings class.
+	- Added stub for AutoSettings class
+
+	* src/marble_part.cpp:
+	* src/QtMainWindow.cpp:
+
+	- Fixed bug as pointed out by murdok.lnx@gmail.com
+
+	* src/lib/ClipPainter.cpp:
+	* src/lib/MarbleControlBox.cpp:
+	* src/lib/TextureColorizer.cpp:
+
+	- Fixed minor issues
+
+	* data/CMakeLists.txt:
+	* data/bitmaps/airport.png:
+	* data/bitmaps/shipwreck.png:
+	* data/svg/shipwreck.svg:
+
+	- Adding new shipwreck symbol for the legend
+
+
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
 	More work on APIDOX: 

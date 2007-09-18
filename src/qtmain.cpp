@@ -91,6 +91,9 @@ int main(int argc, char *argv[])
             marbleTest->gpsDemo();
             return 0;
         }
+        else if( strcmp( argv[ i ], "--fps" ) == 0 ) {
+            window->marbleControl()->marbleWidget()->setShowFrameRate( true );
+        }
         else if( strcmp( argv[ i ], "--enableCurrentLocation" ) ==0 )
         {
             window->marbleControl()->setCurrentLocationTabShown(true);

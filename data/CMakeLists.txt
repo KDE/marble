@@ -36,6 +36,7 @@ bitmaps/cursor_tr.xpm
 bitmaps/mountain_1.png
 bitmaps/pole_1.png
 bitmaps/pole_2.png
+bitmaps/shipwreck.png
 bitmaps/volcano_1.png
 bitmaps/airport.png
 bitmaps/default_location.png

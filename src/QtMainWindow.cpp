@@ -167,8 +167,16 @@ void MainWindow::exportMapScreenShot()
 
     if ( !fileName.isEmpty() )
     {
+        // Take the case into account where no file format is indicated
+        char * format = 0;
+        if ( !fileName.endsWith("png", Qt::CaseInsensitive) 
+           | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
+        {
+            format = "JPG";
+        }
+
         QPixmap mapPixmap = m_controlView->mapScreenShot();
-        bool success = mapPixmap.save( fileName );
+        bool success = mapPixmap.save( fileName, format );
         if ( success == false )
         {
             QMessageBox::warning(this, tr("Marble"), // krazy:exclude=qclasses

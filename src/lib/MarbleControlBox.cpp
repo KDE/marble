@@ -36,7 +36,7 @@
 #include <MarbleDirs.h>
 #include <MapTheme.h>
 #include <FileViewModel.h>
-
+#include "gps/GpxFileModel.h"
 
 class MarbleControlBoxPrivate
 {

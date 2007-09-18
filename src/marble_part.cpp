@@ -115,8 +115,16 @@ void MarblePart::exportMapScreenShot()
                                                       widget(), i18n("Export Map") );
 
     if ( !fileName.isEmpty() ) {
+        // Take the case into account where no file format is indicated
+        char * format = 0;
+        if ( !fileName.endsWith("png", Qt::CaseInsensitive) 
+           | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
+        {
+            format = "JPG";
+        }
+
         QPixmap mapPixmap = m_controlView->mapScreenShot();
-        bool  success = mapPixmap.save( fileName );
+        bool  success = mapPixmap.save( fileName, format );
         if ( !success ) {
             KMessageBox::error( widget(), i18nc( "Application name", "Marble" ),
                                 i18n( "An error occurred while trying to save the file.\n" ),
