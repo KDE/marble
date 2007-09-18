@@ -91,6 +91,15 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void addMarbleWidget( MarbleWidget *widget );
 
+    /**
+     * @brief Set a list/set of placemark names for the search widget.
+     * @param locations  the QAbstractitemModel containing the placemarks
+     *
+     * This function is called to display a potentially large number
+     * of placemark names in a widget and let the user search between
+     * them.
+     * @see centerOn
+     */
     void setLocations(QAbstractItemModel* locations);
 
     /**
@@ -134,6 +143,16 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @brief Signal emitted when the Move Down button has been pressed.
      */
     void moveDown();
+    /**
+     * @brief Signal emitted when a user selects a placemark in the search widget.
+     * @param index  the index for the chosen placemark.
+     *
+     * This signal is emitted when the user has selected a placemark
+     * in the search, e.g. by double clicking it or by pressing
+     * return.  If it is connected to the centerOn( QModelIndex&) slot
+     * in a MarbleWidget, the widget will center the view on this
+     * placemark.
+     */
     void centerOn(const QModelIndex&);
 
     void selectMapTheme( const QString& );

@@ -194,13 +194,13 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
 
     connect( d->uiWidget.m_fileView->selectionModel(),
-          SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
-          this,
-          SLOT( enableFileViewActions() ) );
-    connect( d->uiWidget.m_saveButton, SIGNAL( clicked() ) ,
-             widget->gpxFileModel(), SLOT( saveFile() ) );
+	     SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
+	     this,
+	     SLOT( enableFileViewActions() ) );
+    connect( d->uiWidget.m_saveButton,  SIGNAL( clicked() ) ,
+             widget->gpxFileModel(),    SLOT( saveFile() ) );
     connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
-             widget->gpxFileModel(), SLOT( closeFile() ) );
+             widget->gpxFileModel(),    SLOT( closeFile() ) );
 #else
     FileViewModel* model = widget->fileViewModel();
     d->uiWidget.m_fileView->setModel( model );
@@ -210,15 +210,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              this,
              SLOT( enableFileViewActions() ) );
 
-    connect( d->uiWidget.m_saveButton,
-             SIGNAL( clicked() ),
-             model,
-             SLOT( saveFile() ) );
+    connect( d->uiWidget.m_saveButton,  SIGNAL( clicked() ),
+             model,                     SLOT( saveFile() ) );
 
-    connect( d->uiWidget.m_closeButton,
-             SIGNAL( clicked () ),
-             model,
-             SLOT( closeFile() ) );
+    connect( d->uiWidget.m_closeButton, SIGNAL( clicked () ),
+             model,                     SLOT( closeFile() ) );
 #endif
 
     // Initialize the MarbleLegendBrowser
@@ -251,10 +247,10 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     selectTheme( d->m_widget->mapTheme() );
 
     connect(d->m_widget, SIGNAL(zoomChanged(int)),
-	    this,     SLOT(changeZoom(int)));
-    connect(this,     SIGNAL(centerOn(const QModelIndex&)),
+	    this,        SLOT(changeZoom(int)));
+    connect(this,        SIGNAL(centerOn(const QModelIndex&)),
 	    d->m_widget, SLOT(centerOn(const QModelIndex&)));
-    connect(this,     SIGNAL(selectMapTheme(const QString&)),
+    connect(this,        SIGNAL(selectMapTheme(const QString&)),
 	    d->m_widget, SLOT(setMapTheme(const QString&)));
 
     // connect signals for the Legend
