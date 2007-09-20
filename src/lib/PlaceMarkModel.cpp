@@ -27,15 +27,10 @@ class PlaceMarkModel::Private
         : m_parent( parent ), m_manager( manager )
     {
         Q_ASSERT( m_manager != 0 );
-
-        // Register at PlaceMarkManager
-        m_manager->setPlaceMarkModel( m_parent );
     }
 
     ~Private()
     {
-        // Unregister from PlaceMarkManager
-        m_manager->setPlaceMarkModel( 0 );
     }
 
     PlaceMarkModel* m_parent;
@@ -49,10 +44,15 @@ PlaceMarkModel::PlaceMarkModel( PlaceMarkManager *manager, QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private( manager, this ) )
 {
+    // Register at PlaceMarkManager
+    d->m_manager->setPlaceMarkModel( this );
 }
 
 PlaceMarkModel::~PlaceMarkModel()
 {
+    // Unregister from PlaceMarkManager
+    d->m_manager->setPlaceMarkModel( 0 );
+
     delete d;
 }
 
