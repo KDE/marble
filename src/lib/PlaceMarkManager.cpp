@@ -20,25 +20,22 @@
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
+#include "MarbleDirs.h"
+#include "PlaceMarkContainer.h"
+#include "PlaceMarkModel.h"
+
 #include "XmlHandler.h"
 
 
 PlaceMarkManager::PlaceMarkManager( QObject *parent )
-    : QObject( parent )
+    : QObject( parent ),
+      m_model( 0 )
 {
-    m_placeMarkContainer = new PlaceMarkContainer();
-
-    addPlaceMarkFile( "cityplacemarks" );
-    addPlaceMarkFile( "baseplacemarks" );
-    addPlaceMarkFile( "elevplacemarks" );
-//    addPlaceMarkFile( "airportplacemarks" );
 }
 
 
 PlaceMarkManager::~PlaceMarkManager()
 {
-    m_placeMarkContainer->deleteAll();
-
 #ifdef KML_GSOC
     foreach ( KMLDocument* document, m_documentList ) {
         delete document;
@@ -46,6 +43,22 @@ PlaceMarkManager::~PlaceMarkManager()
 #endif
 }
 
+PlaceMarkModel* PlaceMarkManager::model() const
+{
+    return m_model;
+}
+
+void PlaceMarkManager::setPlaceMarkModel( PlaceMarkModel *model )
+{
+    m_model = model;
+}
+
+void PlaceMarkManager::loadStandardPlaceMarks()
+{
+    addPlaceMarkFile( "cityplacemarks" );
+    addPlaceMarkFile( "baseplacemarks" );
+    addPlaceMarkFile( "elevplacemarks" );
+}
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
@@ -55,6 +68,8 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
      */
     loadKml( filepath );
 #else
+    Q_ASSERT( m_model != 0 && "You have called addPlaceMarkFile before creating a model!" );
+
     QString  defaultcachename;
     QString  defaultsrcname;
     QString  defaulthomecache;
@@ -63,8 +78,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
         defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
         defaultsrcname   = MarbleDirs::path( "placemarks/" + filepath + ".kml");
         defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + filepath + ".cache";
-    }
-    else
+    } else
         return;
 
     if ( QFile::exists( defaultcachename ) ) {
@@ -84,8 +98,12 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 
         bool  loadok = false;
 
-        if ( cacheoutdated == false )
-            loadok = loadFile( defaultcachename, m_placeMarkContainer );
+        if ( cacheoutdated == false ) {
+            PlaceMarkContainer container;
+            loadok = loadFile( defaultcachename, &container );
+            if ( loadok )
+                m_model->addPlaceMarks( container );
+        }
 
         if ( loadok == true )
             return;
@@ -94,16 +112,16 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     qDebug( "No recent Default Placemark Cache File available!" );
 
     if ( QFile::exists( defaultsrcname ) ) {
-        PlaceMarkContainer importcontainer;
+        PlaceMarkContainer container;
 
         // Read the KML file.
-        importKml( defaultsrcname, &importcontainer );
+        importKml( defaultsrcname, &container );
 
         // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, &importcontainer );
+        saveFile( defaulthomecache, &container );
 
         // ...and finally add it to the PlaceMarkContainer
-        *m_placeMarkContainer << importcontainer;
+        m_model->addPlaceMarks( container );
     }
     else {
         qDebug() << "No Default Placemark Source File!";
@@ -117,14 +135,14 @@ void PlaceMarkManager::loadKml( const QString& filename )
 #ifdef KML_GSOC
     if ( QFile::exists( filename ) ) {
         QFile sourceFile( filename );
-
+ 
         if ( sourceFile.open( QIODevice::ReadOnly ) ) {
             /*
              * Create KMLDocument and set it's name like input filename
              */
             KMLDocument* document = new KMLDocument();
             document->setName( QFileInfo( sourceFile ).fileName() );
-
+ 
             QTime t;
             t.start();
             document->load( sourceFile );
@@ -149,20 +167,15 @@ void PlaceMarkManager::loadKml( const QString& filename )
             emit kmlDocumentLoaded( *document );
         }
     }
-
 #else
-    // This still is buggy and needs a lot of work as does the concept
-    // as a whole ...
+    Q_ASSERT( m_model != 0 && "You have called loadKml before creating a model!" );
 
-    // PlaceMarkContainer* tmp = m_placeMarkContainer;
-    m_placeMarkContainer -> clear();
-    // tmp -> deleteAll();
-    // delete tmp;
+    PlaceMarkContainer container;
+    importKml( filename, &container );
 
-    importKml( filename, m_placeMarkContainer );
+    m_model->addPlaceMarks( container );
 #endif
 }
-
 
 #ifdef KML_GSOC
 const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
@@ -170,7 +183,6 @@ const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
     return ( QList < KMLFolder*>& ) m_documentList;
 }
 #endif
-
 
 void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
@@ -198,6 +210,7 @@ void PlaceMarkManager::importKml( const QString& filename,
     reader.parse( source );
 }
 
+static const quint32 MarbleMagicNumber = 0x31415926;
 
 void PlaceMarkManager::saveFile( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )
@@ -211,7 +224,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
 
     // Write a header with a "magic number" and a version
     // out << (quint32)0xA0B0C0D0;
-    out << (quint32)0x31415926;
+    out << (quint32)MarbleMagicNumber;
     out << (qint32)005;
 
     out.setVersion(QDataStream::Qt_4_0);
@@ -232,8 +245,8 @@ void PlaceMarkManager::saveFile( const QString& filename,
         out << QString( (*it) -> role() );
         out << QString( (*it) -> description() );
         out << QString( (*it) -> countryCode() );
-        out << (qint32)(*it) -> popidx();
-        out << (qint32)(*it) -> symbol();
+        out << (qint32)(*it) -> populationIndex();
+        out << (qint32)(*it) -> symbolIndex();
         out << (qint32)(*it) -> population();
     }
 }
@@ -249,7 +262,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     // Read and check the header
     quint32  magic;
     in >> magic;
-    if (magic != 0x31415926) {
+    if (magic != MarbleMagicNumber) {
         qDebug( "Bad file format!" );
         return false;
     }
@@ -291,9 +304,9 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         in >> tmpstr;
         mark -> setCountryCode( tmpstr );
         in >> a;
-        mark -> setPopidx( a );
+        mark -> setPopulationIndex( a );
         in >> a;
-        mark -> setSymbol( a );
+        mark -> setSymbolIndex( a );
         in >> a;
         mark -> setPopulation( a );
 

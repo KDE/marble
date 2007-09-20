@@ -246,7 +246,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief returns the model for all the placemarks on the globe.
      */
-    QAbstractListModel *placeMarkModel();
+    QAbstractItemModel *placeMarkModel() const;
+
+    /**
+     * @brief returns the selection model for all the placemarks on the globe.
+     */
+    QItemSelectionModel *placeMarkSelectionModel() const;
 
     /**
      * @brief  Return how much the map will move if one of the move slots are called.

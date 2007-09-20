@@ -1,3 +1,7 @@
+2007-09-20  Tobias Koenig <tokoe@kde.org>
+
+  Major refactoring of the PlaceMark handling.
+
 2007-09-20  Torsten Rahn  <rahn@kde.org>
 
 	* data/flags/flag_gr.svg:

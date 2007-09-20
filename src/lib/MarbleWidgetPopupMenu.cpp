@@ -78,13 +78,13 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<PlaceMark*>::const_iterator  it;
+    QVector<QPersistentModelIndex>::const_iterator  it;
     for ( it = m_featurelist.constBegin();
           it != m_featurelist.constEnd(); ++it ) 
     {
-        QAction  *action = new QAction( (*it)->name(), m_lmbMenu );
+        QAction  *action = new QAction( (*it).data().toString(), m_lmbMenu );
         action->setData( actionidx );
-        action->setIcon( (*it)->symbolPixmap() );
+        action->setIcon( (*it).data( Qt::DecorationRole ).value<QPixmap>() );
         m_lmbMenu->addAction( action );
         actionidx++;
     }
@@ -120,13 +120,12 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 
 void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
 {
-    int         actionidx = action->data().toInt();
-    PlaceMark  *mark      = 0;
+    int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        mark = m_featurelist.at( actionidx -1 );
+        QPersistentModelIndex index = m_featurelist.at( actionidx -1 );
 
-        PlaceMarkInfoDialog  dialog( mark, m_widget );
+        PlaceMarkInfoDialog dialog( index, m_widget );
         dialog.exec();
     }
 }

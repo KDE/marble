@@ -22,7 +22,6 @@
 #include <QtGui/QFont>
 
 #include "GeoPoint.h"
-#include "PlaceMark.h"
 #include "global.h"
 #include "ClipPainter.h"
 

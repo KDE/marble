@@ -21,12 +21,13 @@
 #include <QtGui/QLabel>
 #include <QtGui/QTextBrowser>
 
+#include "GeoPoint.h"
 #include "MarbleDirs.h"
-#include "PlaceMark.h"
+#include "PlaceMarkModel.h"
 
 
-PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
-    : QDialog(parent), m_mark(mark)
+PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
+    : QDialog(parent), m_index(index)
 {
     setupUi(this);
 
@@ -36,15 +37,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
 
-    setWindowTitle( tr("Marble Info Center - %1").arg( mark->name() ) );
-
-#if 0
-      QLayout  *layout = this->layout();
-      m_pStatusBar = new QStatusBar( this );
-      layout->addWidget( m_pStatusBar );
-      layout->setSpacing( 2 );
-      layout->setMargin( 2 );
-#endif
+    setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
 
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
              this,                SLOT( showMessage( QString) ) );
@@ -57,11 +50,11 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(PlaceMark* mark, QWidget *parent)
 
 void PlaceMarkInfoDialog::showContent()
 {
-    name_val_lbl->setText( "<H1><b>" + m_mark->name() + "</b></H1>" );
+    name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
     altername_val_lbl->setText( "" );
 
     QString  rolestring;
-    switch ( m_mark->role().toLatin1() ) {
+    switch ( m_index.data( PlaceMarkModel::GeoTypeRole ).toChar().toLatin1() ) {
     case 'C':
         rolestring = tr("Capital");
         break;
@@ -78,7 +71,7 @@ void PlaceMarkInfoDialog::showContent()
         rolestring = tr("Location");
         break;
     case 'H':
-        if ( m_mark->population() > 0 )
+        if ( m_index.data( PlaceMarkModel::PopulationRole ).toInt() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
@@ -95,33 +88,35 @@ void PlaceMarkInfoDialog::showContent()
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
-    requestFlag( m_mark->countryCode() );
+    requestFlag( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
-    QString  description = m_mark->description();
+    const QString description = m_index.data( PlaceMarkModel::DescriptionRole ).toString();
     if ( !description.isEmpty() )
         description_val_browser->setPlainText( description );
 
-    coordinates_val_lbl->setText( m_mark->coordinate().toString() );
-    country_val_lbl->setText( m_mark->countryCode() );
+    coordinates_val_lbl->setText( m_index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().toString() );
+    country_val_lbl->setText( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
-    if ( m_mark->role() == 'H' || m_mark->role() == 'V' ) {
+    const int population = m_index.data( PlaceMarkModel::PopulationRole ).toInt();
+    const QChar role = m_index.data( PlaceMarkModel::GeoTypeRole ).toChar();
+    if ( role == 'H' || role == 'V' ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
 
-        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( m_mark->population() / 1000 ) ) );
+        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( population / 1000 ) ) );
     }
-    else if (m_mark->role() == 'P' || m_mark->role() == 'M') {
+    else if ( role == 'P' || role == 'M' ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
         elevation_lbl->setVisible( false );
     }
     else{
-        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( m_mark->population() ) ) );
+        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( population ) ) );
         elevation_val_lbl->setText( tr("-") );
     }
 
-    emit source( QString("wiki/%1").arg( m_mark->name() ) );
+    emit source( QString("wiki/%1").arg( m_index.data().toString() ) );
 }
 
 

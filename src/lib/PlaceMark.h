@@ -13,61 +13,114 @@
 #ifndef PLACEMARK_H
 #define PLACEMARK_H
 
-
 #include <QtCore/QChar>
-#include <QtCore/QRect>
-#include <QtCore/QVector>
-#include <QtGui/QPixmap>
 
 #include "GeoPoint.h"
 #include "kml/KMLFeature.h"
 
+class QPixmap;
+class QSize;
+
+/**
+ * This class represents a place mark, e.g. a city or a mountain.
+ * It is filled with data by the KML or GPX loader and the
+ * PlaceMarkModel makes use of it.
+ */
 class PlaceMark : public KMLFeature
 {
  public:
+    /**
+     * Creates a new place mark.
+     */
     PlaceMark();
-    PlaceMark( const QString& );
 
-    GeoPoint  coordinate() const { return m_coordinate; }
-    void      coordinate( double &lon, double &lat );
-    void      setCoordinate( double lon, double lat );
+    /**
+     * Creates a new place mark with the given @p name.
+     */
+    PlaceMark( const QString &name );
 
-    const Quaternion& quaternion() const { return m_coordinate.quaternion(); }
+    /**
+     * Returns the coordinat of the place mark as GeoPoint
+     * object.
+     */
+    GeoPoint coordinate() const;
 
-    const QChar role() const   { return m_role; }
-    void setRole( QChar role ) { m_role = role; }
+    /**
+     * Returns the coordinate of the place mark as @p longitude
+     * and @p latitude.
+     */
+    void coordinate( double &longitude, double &latitude );
 
-    const QString countryCode() const          { return m_countrycode;        }
-    void setCountryCode( QString countrycode ) { m_countrycode = countrycode; }
+    /**
+     * Sets the coordinate of the place mark in @p longitude and
+     * @p latitude.
+     */
+    void setCoordinate( double longitude, double latitude );
 
-    const int symbol() const                   { return m_symbol;   }
-    void setSymbol( int symbol )               { m_symbol = symbol; }
+    /**
+     * Returns the role of the place mark.
+     *
+     * TODO: describe roles here!
+     */
+    const QChar role() const;
 
-    const QPixmap  symbolPixmap() const;
-    const QSize    symbolSize()   const;
+    /**
+     * Sets the role of the place mark.
+     */
+    void setRole( const QChar &role );
 
-    const int popidx() const                   { return m_popidx;   }
-    void setPopidx( int popidx )               { m_popidx = popidx; }
+    /**
+     * Returns the country code of the place mark.
+     */
+    const QString countryCode() const;
 
-    const int population() const               { return m_population;       }
-    void setPopulation( int population )       { m_population = population; }
+    /**
+     * Sets the country @p code of the place mark.
+     */
+    void setCountryCode( const QString &code );
 
-    const int selected() const                 { return m_selected;     }
-    void setSelected( int selected )           { m_selected = selected; }
+    /**
+     * Returns the symbol index of the place mark.
+     */
+    const int symbolIndex() const; 
 
+    /**
+     * Sets the symbol @p index of the place mark.
+     */
+    void setSymbolIndex( int index );
 
-    QRect& textRect()              { return m_textRect;    }
-    void setTextRect( const QRect& textRect ) { m_textRect = textRect;}
-    QRect  m_textRect;
-    const QPixmap& textPixmap() const          { return m_textPixmap;       }
-    void setTextPixmap( QPixmap& textPixmap ) { m_textPixmap = textPixmap;}
-    QPixmap m_textPixmap;
-    void clearTextPixmap() {
-        if ( !m_textPixmap.isNull() ) m_textPixmap = QPixmap();
-    }
-    QPoint& symbolPos()              { return m_symbolPos;   }
-    void setSymbolPos( const QPoint& sympos )   { m_symbolPos = sympos; }
-    QPoint      m_symbolPos;	// position of the placemark's symbol
+    /**
+     * Returns the population index of the place mark.
+     *
+     * The population index is a value which describes
+     * at which zoom level the place mark will be shown.
+     */
+    const int populationIndex() const;
+
+    /**
+     * Sets the population @p index of the place mark.
+     */
+    void setPopulationIndex( int index );
+
+    /**
+     * Returns the population of the place mark.
+     */
+    const int population() const;
+
+    /**
+     * Sets the @p population of the place mark.
+     */
+    void setPopulation( int population );
+
+    /**
+     * Returns the symbol size of the place mark.
+     */
+    const QSize symbolSize() const;
+
+    /**
+     * Returns the symbol of the place mark.
+     */
+    const QPixmap symbolPixmap() const;
 
     /*
      * Serializable methods
@@ -75,20 +128,16 @@ class PlaceMark : public KMLFeature
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 
-
- protected:
-    GeoPoint  m_coordinate;     // The geographic location
-
+ private:
     // Basic data
-    int       m_population;
+    GeoPoint m_coordinate;
+    QChar m_role;
+    QString m_countrycode;
+    int m_population;
 
-    // View stuff
-    int       m_selected;	// FIXME: Move to VisiblePlaceMark or the view
-    int       m_symbol;
-    int       m_popidx;
-
-    QChar     m_role;
-    QString   m_countrycode;
+    // View specific data
+    int m_symbolIndex;
+    int m_populationIndex;
 };
 
 #endif // PLACEMARK_H

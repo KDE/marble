@@ -26,13 +26,8 @@ PlaceMarkContainer::PlaceMarkContainer( const QString& name )
 inline bool populationLessThan( PlaceMark* mark1, PlaceMark* mark2 )
 { 
     // If compared items do not differ in terms of being selected,
-    // compare them based on population numbers.  If compared items do
-    // differ in terms of being selected, then let that be the final
-    // criteria.
-    //
-    return  ( mark1->selected() == mark2->selected()
-              ? mark1->population() > mark2->population() 
-              : mark1->selected() == 1 ? true : false );
+    // compare them based on population numbers.
+    return (mark1->population() > mark2->population());
 }
 
 
@@ -44,28 +39,6 @@ void PlaceMarkContainer::setName( const QString& name )
 QString PlaceMarkContainer::name() const
 {
     return m_name;
-}
-
-void PlaceMarkContainer::deleteAll()
-{
-    foreach ( PlaceMark* mark, *this ) {
-        if ( mark != 0 )
-            delete mark;
-    }
-}
-
-void PlaceMarkContainer::clearTextPixmaps()
-{
-    foreach ( PlaceMark* mark, *this )
-        mark->clearTextPixmap();
-}
-
-void PlaceMarkContainer::clearSelected()
-{
-    foreach ( PlaceMark* mark, *this ) {
-        if ( mark != 0 ) 
-            mark->setSelected( 0 ); 
-    } 
 }
 
 void PlaceMarkContainer::sort()

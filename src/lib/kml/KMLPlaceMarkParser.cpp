@@ -180,7 +180,7 @@ bool KMLPlaceMarkParser::characters( const QString& str )
             case WAIT_POP:
                 population = str.toInt();
                 placemark.setPopulation( population );
-                placemark.setPopidx( popIdx( population ) );
+                placemark.setPopulationIndex( popIdx( population ) );
                 result = true;
                 break;
             case WAIT_ROLE:
@@ -202,14 +202,15 @@ void KMLPlaceMarkParser::setPlaceMarkSymbol()
 {
     KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
 
-    if ( placemark.role() == 'P' )      placemark.setSymbol(16);
-    else if ( placemark.role() == 'M' ) placemark.setSymbol(17);
-    else if ( placemark.role() == 'H' ) placemark.setSymbol(18);
-    else if ( placemark.role() == 'V' ) placemark.setSymbol(19);
-    else if ( placemark.role() == 'F' ) placemark.setSymbol(20);
-    else if ( placemark.role() == 'N' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 );
-    else if ( placemark.role() == 'R' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 2);
-    else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setSymbol( ( placemark.popidx() -1 ) / 4 * 4 + 3 );
+    if ( placemark.role() == 'P' )      placemark.setSymbolIndex(16);
+    else if ( placemark.role() == 'M' ) placemark.setSymbolIndex(17);
+    else if ( placemark.role() == 'H' ) placemark.setSymbolIndex(18);
+    else if ( placemark.role() == 'V' ) placemark.setSymbolIndex(19);
+    else if ( placemark.role() == 'F' ) placemark.setSymbolIndex(20);
+    else if ( placemark.role() == 'N' ) placemark.setSymbolIndex( ( placemark.populationIndex() -1 ) / 4 * 4 );
+    else if ( placemark.role() == 'R' ) placemark.setSymbolIndex( ( placemark.populationIndex() -1 ) / 4 * 4 + 2);
+    else if ( placemark.role() == 'C' || placemark.role() == 'B' )
+        placemark.setSymbolIndex( ( placemark.populationIndex() -1 ) / 4 * 4 + 3 );
 }
 
 int KMLPlaceMarkParser::popIdx( int population )

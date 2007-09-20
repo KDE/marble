@@ -16,6 +16,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "global.h"
 #include "ClipPainter.h"
@@ -49,9 +50,11 @@ class MarbleModelPrivate
 
     // Places on the map
     PlaceMarkManager    *m_placemarkmanager;
-    PlaceMarkContainer  *m_placeMarkContainer;
     PlaceMarkModel      *m_placemarkmodel;
     PlaceMarkPainter    *m_placemarkpainter;
+
+    // Selection handling
+    QItemSelectionModel *m_placemarkselectionmodel;
 
     //Gps Stuff
     GpsLayer            *m_gpsLayer;
@@ -78,7 +81,6 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_veccomposer = new VectorComposer();
 
     d->m_placemarkpainter   = 0;
-    d->m_placeMarkContainer = 0;
 
     d->m_maptheme = new MapTheme();
 
@@ -108,15 +110,14 @@ MarbleModel::MarbleModel( QWidget *parent )
                                               MarbleDirs::path( "landcolors.leg" ) );
 
     d->m_placemarkmanager   = new PlaceMarkManager();
-    d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
 
     connect( d->m_placemarkmanager, SIGNAL( kmlDocumentLoaded( KMLDocument& ) ),
              this,                  SLOT( kmlDocumentLoaded( KMLDocument& ) ) );
 
-    d->m_placeMarkContainer->clearTextPixmaps();
+    d->m_placemarkmodel = new PlaceMarkModel( d->m_placemarkmanager, this );
+    d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
 
-    d->m_placemarkmodel = new PlaceMarkModel( this );
-    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
+    d->m_placemarkmanager->loadStandardPlaceMarks();
 
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
@@ -137,12 +138,12 @@ MarbleModel::MarbleModel( QWidget *parent )
 
 MarbleModel::~MarbleModel()
 {
-    delete d->m_placeMarkContainer;
     delete d->m_texmapper;
     delete d->m_veccomposer;
     delete d->m_texcolorizer; 
     delete d->m_gridmap;
-//    delete d->m_placemarkmanager;
+    delete d->m_placemarkmodel;
+    delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
     delete d->m_maptheme;
     delete d;
@@ -235,11 +236,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
     d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
     d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
     d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
-
-    if ( d->m_placeMarkContainer == 0)
-        d->m_placeMarkContainer = new PlaceMarkContainer("placecontainer");
-
-    placeMarkContainer()->clearTextPixmaps();
 
     if ( d->m_placemarkpainter == 0)
         d->m_placemarkpainter = new PlaceMarkPainter( this );
@@ -343,12 +339,13 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the PlaceMark layer
 #ifndef KML_GSOC
-    if ( viewParams->m_showPlaceMarks && d->m_placeMarkContainer->size() > 0 ) {
+    if ( viewParams->m_showPlaceMarks && d->m_placemarkmodel->rowCount() > 0 ) {
         d->m_placemarkpainter->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
                                                  viewParams,
-                                                 d->m_placeMarkContainer,
+                                                 d->m_placemarkmodel,
+                                                 d->m_placemarkselectionmodel,
                                                  viewParams->m_planetAxis );
     }
 #else
@@ -404,15 +401,14 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 }
 
 
-QAbstractListModel *MarbleModel::getPlaceMarkModel() const
+QAbstractItemModel *MarbleModel::placeMarkModel() const
 {
     return d->m_placemarkmodel;
 }
 
-
-PlaceMarkContainer *MarbleModel::placeMarkContainer()   const
+QItemSelectionModel *MarbleModel::placeMarkSelectionModel() const
 {
-    return d->m_placeMarkContainer;
+    return d->m_placemarkselectionmodel;
 }
 
 VectorComposer    *MarbleModel::vectorComposer()   const
@@ -454,14 +450,10 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
     d->m_placemarkmanager->loadKml( filename );
 
-    d->m_placeMarkContainer = d->m_placemarkmanager->getPlaceMarkContainer();
-
-    d->m_placemarkmodel->setContainer( d->m_placeMarkContainer );
-
     notifyModelChanged();
 }
 
-QVector< PlaceMark* > MarbleModel::whichFeatureAt( const QPoint& curpos )
+QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placemarkpainter->whichPlaceMarkAt( curpos );
 }

@@ -22,37 +22,74 @@
 
 #include "marble_export.h"
 
-
-class PlaceMark;
 class PlaceMarkContainer;
-class PlaceMarkModelPrivate; 
+class PlaceMarkManager;
 
-
+/**
+ * This class represents a model of all place marks which
+ * are currently available through a given PlaceMarkManager.
+ */
 class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
 {
+    friend class PlaceMarkManager;
+
     Q_OBJECT
 
  public:
-    PlaceMarkModel(QObject *parent = 0);
+    /**
+     * The roles of the place marks.
+     */
+    enum Roles
+    {
+      GeoTypeRole = Qt::UserRole + 1,  ///< The geo type (e.g. city or mountain)
+      DescriptionRole,                 ///< The description
+      CoordinateRole,                  ///< The GeoPoint coordinate
+      CountryCodeRole,                 ///< The country code
+      SymbolIndexRole,                 ///< The symbol index
+      SymbolSizeRole,                  ///< The symbol size
+      PopulationIndexRole,             ///< The population index
+      PopulationRole                   ///< The population
+    };
+
+    /**
+     * Creates a new place mark model.
+     *
+     * @param manager The place mark manager on which the model shall work.
+     * @param parent The parent object.
+     */
+    PlaceMarkModel( PlaceMarkManager *manager, QObject *parent = 0 );
+
+    /**
+     * Destroys the place mark model.
+     */
     ~PlaceMarkModel();
 	
-    int  rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int  columnCount(const QModelIndex &parent = QModelIndex()) const;
+    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-    PlaceMark* placeMark(const QModelIndex &index) const;
+    QVariant data( const QModelIndex &index, int role ) const;
 
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;  
-
-    virtual QModelIndexList match ( const QModelIndex & start, int role, 
-                                    const QVariant & value, int hits = 1,
-                                    Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
-
-    void setContainer( PlaceMarkContainer* );
+    virtual QModelIndexList match( const QModelIndex &start, int role, 
+                                   const QVariant &value, int hits = 1,
+                                   Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
  private:
-    PlaceMarkModelPrivate  * const d;
+    /**
+     * This method is used by the PlaceMarkManager to add new
+     * place marks to the model.
+     *
+     * Note: The model takes ownership of the place marks!
+     */
+    void addPlaceMarks( const PlaceMarkContainer &placeMarks );
+
+    /**
+     * This method is used by the PlaceMarkManager to clear
+     * the model.
+     */
+    void clearPlaceMarks();
+
+    class Private;
+    Private* const d;
 };
 
 

@@ -45,6 +45,8 @@
 #include "VectorComposer.h"
 #include "TextureColorizer.h"
 
+class QItemSelectionModel;
+
 class ClipPainter;
 class FileViewModel;
 class GpxFileModel;
@@ -102,7 +104,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void  resize( int width, int height );
 
-    QAbstractListModel* getPlaceMarkModel() const;
+    QAbstractItemModel* placeMarkModel() const;
+    QItemSelectionModel* placeMarkSelectionModel() const;
 
     QString mapTheme() const;
 
@@ -110,9 +113,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void addPlaceMarkFile( const QString& filename );
 
-    QVector< PlaceMark* > whichFeatureAt( const QPoint& );
+    QVector<QPersistentModelIndex> whichFeatureAt( const QPoint& ) const;
 
-    PlaceMarkContainer *placeMarkContainer() const;
     PlaceMarkPainter   *placeMarkPainter()   const;
     VectorComposer     *vectorComposer()     const;
     TextureColorizer   *textureColorizer()   const;

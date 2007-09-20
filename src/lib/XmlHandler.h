@@ -52,6 +52,7 @@ class XmlHandler : public QXmlDefaultHandler
     bool                 m_inPoint;
 
     bool                 m_coordsset;
+    bool                 m_hasPopulation;
 };
 
 

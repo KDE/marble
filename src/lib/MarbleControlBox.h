@@ -212,6 +212,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void selectTheme( const QString & );
     void updateButtons( int );
+    void mapCenterOnSignal( const QModelIndex & );
+
  private:
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 

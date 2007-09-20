@@ -16,8 +16,9 @@
 
 #include "ui_PlaceMarkInfoDialog.h"
 
-#include <QtGui/QStatusBar>
+#include <QtCore/QPersistentModelIndex>
 #include <QtCore/QUrl>
+#include <QtGui/QStatusBar>
 
 #include "DeferredFlag.h"
 
@@ -30,7 +31,7 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     Q_OBJECT
 
  public:
-    explicit PlaceMarkInfoDialog( PlaceMark*, QWidget *parent = 0 );
+    explicit PlaceMarkInfoDialog( const QPersistentModelIndex &index, QWidget *parent = 0 );
 
  Q_SIGNALS:
     void source( QString );
@@ -49,9 +50,9 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     void showContent();
     void requestFlag( const QString& );
 
- protected:
+ private:
     DeferredFlag  *m_flagcreator;
-    PlaceMark     *m_mark;
+    QPersistentModelIndex m_index;
 };
 
 

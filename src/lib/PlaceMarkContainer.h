@@ -15,11 +15,15 @@
 
 
 #include <QtCore/QVector>
-#include <QtCore/QDebug>
 
 #include "PlaceMark.h"
 
-
+/**
+ * A helper class which contains a couple of place mark
+ * objects.
+ *
+ * The ownership of the place mark objects is transfered to the container!
+ */
 class PlaceMarkContainer : public QVector<PlaceMark*>
 {
  public:
@@ -29,9 +33,6 @@ class PlaceMarkContainer : public QVector<PlaceMark*>
     void setName( const QString& name );
     QString name() const;
 
-    void deleteAll();
-    void clearTextPixmaps();
-    void clearSelected();
     void sort();
 
  private:	

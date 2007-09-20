@@ -12,7 +12,8 @@
 #ifndef KMLDOCUMENT_H
 #define KMLDOCUMENT_H
 
-#include <QtCore/QList>
+#include <QtCore/QHash>
+
 #include "KMLFolder.h"
 
 class QIODevice;

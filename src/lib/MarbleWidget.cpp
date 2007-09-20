@@ -31,6 +31,7 @@
 #include "TextureColorizer.h"
 #include "ClipPainter.h"
 #include "FileViewModel.h"
+#include "GeoPoint.h"
 #include "GpxFileViewItem.h"
 #include "MarbleDirs.h"
 #include "MarbleWidgetInputHandler.h"
@@ -239,9 +240,14 @@ void MarbleWidget::setNeedsUpdate()
 }
 
 
-QAbstractListModel *MarbleWidget::placeMarkModel()
+QAbstractItemModel *MarbleWidget::placeMarkModel() const
 {
-    return d->m_model->getPlaceMarkModel();
+    return d->m_model->placeMarkModel();
+}
+
+QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
+{
+    return d->m_model->placeMarkSelectionModel();
 }
 
 double MarbleWidget::moveStep()
@@ -472,28 +478,25 @@ void MarbleWidget::centerOn(const double& lon, const double& lat)
 
 void MarbleWidget::centerOn(const QModelIndex& index)
 {
+    QItemSelectionModel *selectionModel = d->m_model->placeMarkSelectionModel();
+    Q_ASSERT( selectionModel );
 
-    PlaceMarkModel* model = (PlaceMarkModel*) d->m_model->getPlaceMarkModel();
-    if (model == 0) qDebug( "model null" );
+    selectionModel->clear();
 
-    PlaceMark* mark = model->placeMark( index );
-
-    d->m_model->placeMarkContainer()->clearSelected();
-
-    if ( mark != 0 ) {
-	double  lon;
+    if ( index.isValid() ) {
+        const GeoPoint point = index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>();
+  
+        double  lon;
         double  lat;
+        point.geoCoordinates( lon, lat );
 
-	mark->coordinate( lon, lat );
-	centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
-	mark->setSelected( 1 );
-	d->m_crosshair.setEnabled( true );
+	      centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
+
+        selectionModel->select( index, QItemSelectionModel::SelectCurrent );
+        d->m_crosshair.setEnabled( true );
     }
     else
-	d->m_crosshair.setEnabled( false );
-
-    d->m_model->placeMarkContainer()->clearTextPixmaps();
-    d->m_model->placeMarkContainer()->sort();
+        d->m_crosshair.setEnabled( false );
 
     repaint();
 }

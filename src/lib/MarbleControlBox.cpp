@@ -25,6 +25,7 @@
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
+#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStringListModel>
 #include <QtGui/QTextFrame>
 
@@ -55,6 +56,7 @@ class MarbleControlBoxPrivate
     QWidget              *m_fileViewWidget;
 
     QStandardItemModel   *m_mapthememodel;
+    QSortFilterProxyModel *m_sortproxy;
 };
 
 
@@ -97,6 +99,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.toolBox->setCurrentIndex( 4 );
     d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
 
+    d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
+    d->uiWidget.locationListView->setModel( d->m_sortproxy );
+
 //  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
  //   toolBox->removeItem( 3 );
@@ -133,7 +138,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
             this,                         SLOT( searchLineChanged( const QString& ) ) );
 
     connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
-             this,                         SIGNAL( centerOn( const QModelIndex& ) ) );
+             this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
     QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
     d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
@@ -188,6 +193,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
     setLocations( d->m_widget->placeMarkModel() );
+    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placeMarkSelectionModel() );
 
 #ifndef KML_GSOC
     //set up everything for the FileModel
@@ -319,7 +325,8 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
-    d->uiWidget.locationListView->setModel( locations );
+    d->m_sortproxy->setSourceModel( locations );
+    d->m_sortproxy->sort( 0 );
 }
 
 int MarbleControlBox::minimumZoom() const
@@ -498,6 +505,11 @@ void MarbleControlBox::selectTheme( const QString &theme )
               }
         }
     }
+}
+
+void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
+{
+    emit centerOn( d->m_sortproxy->mapToSource( index ) );
 }
 
 #include "MarbleControlBox.moc"

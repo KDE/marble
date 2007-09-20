@@ -8,6 +8,7 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
+#include <QtGui/QImage>
 
 #include "KMLContainer.h"
 #include "KMLPlaceMark.h"
@@ -66,7 +67,7 @@ PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewP
           it++ )
     {
         KMLPlaceMark* placemark = *it;
-        qpos = placemark->quaternion();
+        qpos = placemark->coordinate().quaternion();
 
         qpos.rotateAroundAxis(invplanetAxis);
 
@@ -108,7 +109,7 @@ PlaceMarkContainer& KMLContainer::rectangularActivePlaceMarkContainer( const Vie
           it++ )
     {
         KMLPlaceMark* placemark = *it;
-        qpos = placemark->quaternion();
+        qpos = placemark->coordinate().quaternion();
 
         double xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
 

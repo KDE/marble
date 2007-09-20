@@ -21,93 +21,110 @@
 #include <QtGui/QFont>
 #include <QtGui/QPainterPath>
 #include <QtGui/QPixmap>
+#include <QtCore/QPersistentModelIndex>
 #include <QtCore/QRect>
+#include <QtCore/QSet>
 #include <QtCore/QVector>
 
 #include "Quaternion.h"
 #include "PlaceMark.h"
 #include "PlaceMarkContainer.h"
 
-
+class QAbstractItemModel;
+class QItemSelectionModel;
 class QPainter;
-class PlaceMarkContainer;
 class VisiblePlaceMark;
 class ViewParams;
 
-
+/**
+ * Layouts and paints the place marks with a passed
+ * QPainter.
+ */
 class PlaceMarkPainter : public QObject
 {
     Q_OBJECT
 
  public:
-    PlaceMarkPainter(QObject *parent = 0);
+    /**
+     * Creates a new place mark painter.
+     */
+    PlaceMarkPainter( QObject *parent = 0 );
 
-    void paintPlaceFolder(QPainter*, int imgwidth, int imgheight,
-                          ViewParams *viewParams,
-                          const PlaceMarkContainer*,
-                          Quaternion,
-                          bool firstTime = true );
+    /**
+     * Destroys the place mark painter.
+     */
+    ~PlaceMarkPainter();
 
-    void setLabelColor(QColor labelcolor) { m_labelcolor = labelcolor; }
-    QVector<PlaceMark*> whichPlaceMarkAt( const QPoint& );
+    /**
+     * Layouts the paints the place marks.
+     *
+     * @param painter The painter that is used for painting.
+     * @param width The width of the image that shall be painted.
+     * @param height The height of the image that shall be painted.
+     * @param viewParams Parameters that influence the painting.
+     * @param placeMarkModel The PlaceMarkModel or a proxy model on top of it.
+     * @param selectionModel The selection model for the PlaceMarkModel.
+     * @param planetAxis The position of the planet axis.
+     * @param firstTime Whether the map is painted the first time.
+     */
+    void paintPlaceFolder( QPainter *painter, int width, int height,
+                           ViewParams *viewParams,
+                           const QAbstractItemModel *placeMarkModel,
+                           const QItemSelectionModel *selectionModel,
+                           Quaternion planetAxis,
+                           bool firstTime = true );
+
+    /**
+     * Sets the @p color that shall be used for painting the labels.
+     */
+    void setLabelColor( const QColor &color );
+
+    /**
+     * Returns a list of model indexes that are at position @p pos.
+     */
+    QVector<QPersistentModelIndex> whichPlaceMarkAt( const QPoint &pos ) const;
 
  private:
     void sphericalPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
-                          const PlaceMarkContainer*,
+                          const QAbstractItemModel*,
+                          const QItemSelectionModel*,
                           Quaternion,
                           bool firstTime );
     void rectangularPaintPlaceFolder(QPainter*, int imgwidth, int imgheight,
                           ViewParams *viewParams,
-                          const PlaceMarkContainer*,
+                          const QAbstractItemModel*,
+                          const QItemSelectionModel*,
                           Quaternion,
                           bool firstTime );
 
-    void   labelFontData( PlaceMark *mark, double outlineWidth,
-                          QFont &font, int &fontwidth );
-    bool   isVisible( PlaceMark *mark, 
-                          Quaternion &rotAxis,
-                          int imgwidth, int imgheight,
-                          ViewParams *viewParams,
-                          int &x, int &y  );
-#if 0
+    void   labelFontData( VisiblePlaceMark *mark,
+                          QFont &font, int &fontwidth, bool isSelected );
     bool   roomForLabel( const QVector<VisiblePlaceMark*> &currentsec,
-                         VisiblePlaceMark *visibleMark,
-                         PlaceMark *mark,
+                         VisiblePlaceMark *mark,
                          int textwidth,
                          int x, int y );
-#else
-    bool   roomForLabel( const QVector<PlaceMark*> &currentsec,
-                         PlaceMark *mark,
-                         int textwidth,
-                         int x, int y );
-#endif
-    void drawLabelText( QPainter& textpainter, PlaceMark*, QFont font,
-                          double outlineWidth );
+    void drawLabelText( QPainter& textpainter, const QString &name, const QFont &font );
+    void drawLabelPixmap( VisiblePlaceMark *mark, int textWidth,
+                          const QFont &font, bool isSelected );
+
     bool testXBug();
 
- protected:
-
+ private:
     QFont  m_font_regular;
     QFont  m_font_regular_italics;
     QFont  m_font_regular_underline;
     QFont  m_font_mountain;
 
-    // All the visible placemarks.  FIXME: Move to the view.
-#if 0
-    QList<VisiblePlaceMark*>    m_visiblePlacemarks;
-#else
-    QVector<PlaceMark*>    m_visiblePlacemarks;
-#endif
-    QVector<VisiblePlaceMark*>  m_visiblePlacemarksPool;
+    QVector<VisiblePlaceMark*> m_visiblePlaceMarks;
+    QHash<QPersistentModelIndex, VisiblePlaceMark*> m_allPlaceMarks;
 
     QColor  m_labelcolor;
     int     m_fontheight;
     int     m_fontascent;
     int     m_labelareaheight;
 
-    // QVector< QPixmap > m_citysymbol;
-    QVector< int >        m_weightfilter;
+    QVector< int > m_weightfilter;
     QPixmap  m_empty;
     double   m_widthscale;
 
