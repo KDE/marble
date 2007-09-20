@@ -9,6 +9,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
+INCLUDE(geodata/CMakeLists.txt)
+
 if (QTONLY)
   set(GENERIC_LIB_VERSION "0.5.0")
   set(GENERIC_LIB_SOVERSION "5")
@@ -37,6 +39,7 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
+           ${geodata_SRCS}
            MarbleWidget.cpp
            MarbleModel.cpp
            MarbleControlBox.cpp
@@ -127,7 +130,7 @@ set(marblewidget_SRCS
            gps/GpxSax.cpp
            gps/GpxFile.cpp
            gps/GpxFileModel.cpp
-	   AbstractLayer/AbstractLayerInterface.cpp
+           AbstractLayer/AbstractLayerInterface.cpp
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
