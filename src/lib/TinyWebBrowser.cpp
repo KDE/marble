@@ -26,7 +26,7 @@
 
 static QString guessWikipediaDomain()
 {
-    const QString lang = getenv( "LANG" );
+    const QString lang = qgetenv( "LANG" );
     QString code;
 
     if ( lang.isEmpty() || lang == "POSIX" || lang == "C" )
