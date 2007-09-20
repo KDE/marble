@@ -5,6 +5,11 @@ cmake_minimum_required(VERSION 2.4.0)
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

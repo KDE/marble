@@ -4,14 +4,6 @@
 # them against the main application
 #
 
-INCLUDE_DIRECTORIES(
- ${CMAKE_SOURCE_DIR}/marble/src/lib/geodata
- ${CMAKE_SOURCE_DIR}/marble/src/lib/geodata/data
- ${CMAKE_SOURCE_DIR}/marble/src/lib/geodata/handlers/gpx
- ${CMAKE_SOURCE_DIR}/marble/src/lib/geodata/handlers/kml
- ${CMAKE_SOURCE_DIR}/marble/src/lib/geodata/parser
-)
-
 SET( geodata_data_SRCS
           geodata/data/GeoDataDocument.cpp
           geodata/data/GeoDataFolder.cpp
