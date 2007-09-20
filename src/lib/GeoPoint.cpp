@@ -100,7 +100,7 @@ QString GeoPoint::toString( GeoPoint::Notation notation )
     }
 }
 
-bool GeoPoint::operator==( const GeoPoint &test )
+bool GeoPoint::operator==( const GeoPoint &test ) const
 {
     double lonTest;
     double latTest;

@@ -13,6 +13,7 @@
 #ifndef GEOPOINT_H
 #define GEOPOINT_H
 
+#include <QtCore/QMetaType>
 #include <QtCore/QVector>
 
 #include <cmath>
@@ -67,7 +68,7 @@ class GeoPoint {
     const Quaternion &quaternion() const { return m_q; }
     
     QString toString( GeoPoint::Notation notation = GeoPoint::DMS );
-    bool        operator==(const GeoPoint&);
+    bool operator==(const GeoPoint&) const;
 
     // Type definitions
     typedef QVector<GeoPoint> Vector;
@@ -77,5 +78,6 @@ class GeoPoint {
     int         m_detail;
 };
 
+Q_DECLARE_METATYPE( GeoPoint )
 
 #endif // GEOPOINT_H
