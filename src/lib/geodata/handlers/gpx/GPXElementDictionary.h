@@ -31,7 +31,7 @@ namespace GeoDataElementDictionary {
 
     extern const char* gpxTag_gpx;
 	// TODO: add all remaining tags!
-};
+}
 
 // Helper macro
 #define GPX_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(gpx, GPX, Name)
