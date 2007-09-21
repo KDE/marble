@@ -168,4 +168,4 @@ const char* kmlTag_width = "width";
 const char* kmlTag_x = "x";
 const char* kmlTag_y = "y";
 
-};
+}

@@ -29,4 +29,4 @@ const char* gpxTag_nameSpace11 = "http://www.topografix.com/GPX/1/1";
 
 const char* gpxTag_gpx = "gpx";
 
-};
+}
