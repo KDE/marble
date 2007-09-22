@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=Marble Part
+Name[ca]=Part del Marble
 Name[el]=Τμήμα Marble
 Name[es]=Part Marble
 Name[ga]=Comhpháirt Marble
