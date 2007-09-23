@@ -56,9 +56,13 @@ class VisiblePlaceMark
     }
     const QSize& symbolSize() const
     {
-        if ( m_symbolSize.isNull() )
+//        FIXME: tokoe: In some cases we do get an uninitialized m_symbolSize. Why? 
+//        if ( m_symbolSize.isNull() )
+//        {
             m_symbolSize = m_modelIndex.data( PlaceMarkModel::SymbolSizeRole ).toSize();
-        return m_symbolSize;
+            return m_symbolSize;
+//        }
+
     }
     const int symbolIndex() const
     {
@@ -93,7 +97,8 @@ class VisiblePlaceMark
 };
 
 VisiblePlaceMark::VisiblePlaceMark()
-  : m_symbolIndex( 0 )
+  : m_symbolIndex( 0 ), 
+    m_symbolSize( QSize( 0, 0 ) )
 {
 }
 
@@ -248,7 +253,9 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     /**
      * First handle the selected place marks, as they have the highest priority.
      */
+
     const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
+
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
@@ -306,7 +313,6 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
             drawLabelPixmap( mark, textWidth, font, true );
 
         // Finally save the label position on the map.
-        // FIXME: This assumes that the hotspot is the center of the symbol.
         const QSize symbolSize = mark->symbolSize();
         mark->setSymbolPos( QPoint( x - symbolSize.width()  / 2,
                                     y - symbolSize.height() / 2) );
@@ -336,7 +342,6 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                              || ( firstPopulation != 0
                              && firstIndex.data( PlaceMarkModel::GeoTypeRole ).toChar().isNull() ) ) 
                            ? true : false;
-
     for ( int i = 0; i < model->rowCount(); ++i )
     {
         const QModelIndex index = model->index( i, 0 );
@@ -350,7 +355,6 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
             continue;
 
         const int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
-        const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
 
         // Skip the places that are too small.
         if ( noFilter == false ) {
@@ -358,14 +362,16 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                 continue;
         }
 
-        // Skip terrain marks if we're not showing terrain.
-        if ( !viewParams->m_showTerrain
-             && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
-            continue;
+        const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
 
         // Skip city marks if we're not showing cities.
         if ( !viewParams->m_showCities
              && ( symbolIndex >= 0 && symbolIndex < 16 ) )
+            continue;
+
+        // Skip terrain marks if we're not showing terrain.
+        if ( !viewParams->m_showTerrain
+             && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
             continue;
 
         qpos = index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().quaternion();
@@ -598,7 +604,6 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
             continue;
 
         const int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
-        const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
 
 #ifndef KML_GSOC
         if ( noFilter == false ) {
@@ -607,15 +612,16 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                 continue;
         }
 #endif
-
-        // Skip terrain marks if we're not showing terrain.
-        if ( !viewParams->m_showTerrain
-             && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
-            continue;
+        const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
 
         // Skip city marks if we're not showing cities.
         if ( !viewParams->m_showCities
              && ( 0 <= symbolIndex && symbolIndex < 16 ) )
+            continue;
+
+        // Skip terrain marks if we're not showing terrain.
+        if ( !viewParams->m_showTerrain
+             && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
             continue;
 
         qpos = index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().quaternion();
@@ -801,10 +807,13 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
 
     int  xpos = symbolwidth / 2 + x + 1;
     int  ypos = 0;
-    while ( xpos >= x - textwidth - symbolwidth - 1 && !isRoom ) {
+
+    // Check the four possible positions by going through all of them
+ 
+    while ( xpos >= x - textwidth - symbolwidth - 1 ) {
         ypos = y;
 
-        while ( ypos >= y - m_fontheight && !isRoom) {
+        while ( ypos >= y - m_fontheight ) {
 
             isRoom = true;
 
@@ -822,7 +831,7 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
             }
 
             if ( isRoom ) {
-                // FIXME: Should this really be here?
+                // claim the place immediately if it hasn't been used yet 
                 mark->setLabelRect( labelRect );
                 return true;
             }
@@ -903,9 +912,10 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, int textW
     mark->setLabelPixmap( labelPixmap );
 }
 
-// Test if there is a certain bug in the X server.
-// FIXME: Tackat, can you explain here which one?
-//
+// Test if there a bug in the X server which makes 
+// text fully transparent if it gets written on 
+// QPixmaps that were initialized by filling them 
+// with Qt::transparent
 
 bool PlaceMarkPainter::testXBug()
 {
