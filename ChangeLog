@@ -1,6 +1,12 @@
 2007-09-23  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/PlaceMarkPainter.cpp: 
+	- Regretfully sorting out a frequently featured 
+	  Feature regression
+
+2007-09-23  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/PlaceMarkPainter.cpp: 
 	Partially fix the position of the label.
 
 2007-09-20  Inge Wallin  <inge@lysator.liu.se>

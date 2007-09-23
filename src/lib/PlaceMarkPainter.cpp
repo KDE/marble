@@ -50,9 +50,9 @@ class VisiblePlaceMark
     }
     const QPixmap& symbolPixmap() const
     {
-        if ( m_px.isNull() )
-            m_px = m_modelIndex.data( Qt::DecorationRole ).value<QPixmap>();
-        return  m_px;
+        if ( m_symbolPixmap.isNull() )
+            m_symbolPixmap = m_modelIndex.data( Qt::DecorationRole ).value<QPixmap>();
+        return  m_symbolPixmap;
     }
     const QSize& symbolSize() const
     {
@@ -90,10 +90,10 @@ class VisiblePlaceMark
     QPixmap     m_labelPixmap;	// the text label (most often name)
     QRect       m_labelRect;    // bounding box of label
 
-    mutable QString     m_name;        // cached value
-    mutable QSize       m_symbolSize;  // cached value
-    mutable int         m_symbolIndex; // cached value
-    mutable QPixmap     m_px;          // cached value
+    mutable QString     m_name;         // cached value
+    mutable QSize       m_symbolSize;   // cached value
+    mutable int         m_symbolIndex;  // cached value
+    mutable QPixmap     m_symbolPixmap; // cached value
 };
 
 VisiblePlaceMark::VisiblePlaceMark()
@@ -176,6 +176,13 @@ PlaceMarkPainter::~PlaceMarkPainter()
 void PlaceMarkPainter::setLabelColor( const QColor &color )
 {
     m_labelcolor = color;
+
+    QHash<QPersistentModelIndex, VisiblePlaceMark*>::const_iterator i = m_allPlaceMarks.constBegin();
+    while (i != m_allPlaceMarks.constEnd())
+    {
+        i.value()->setLabelPixmap( QPixmap() );
+        ++i;
+    }
 }
 
 QVector<QPersistentModelIndex> PlaceMarkPainter::whichPlaceMarkAt( const QPoint& curpos ) const
