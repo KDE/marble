@@ -305,7 +305,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                             textWidth, x, y ) )
         {
             // Don't clear the label pixmap here, for the label should
-            // really be painted, but there is just too many other
+            // really be painted, but there are just too many other
             // labels around it so there is no room.
             continue;
         }
@@ -348,14 +348,6 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
     {
         const QModelIndex index = model->index( i, 0 );
 
-        const bool isSelected = selectionModel->selection().contains( index );
-
-        /**
-         * We handled selected place marks already, so skip here...
-         */
-        if ( isSelected )
-            continue;
-
         const int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
 
         // Skip the places that are too small.
@@ -368,12 +360,23 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
 
         // Skip city marks if we're not showing cities.
         if ( !viewParams->m_showCities
-             && ( symbolIndex >= 0 && symbolIndex < 16 ) )
+             && ( symbolIndex < 16 ) )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
              && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
+            continue;
+
+        const bool isSelected = selectionModel->selection().contains( index );
+
+        /**
+         * We handled selected place marks already, so skip here...
+         * Given that we assume that only a small amount of places is selected
+         * we check for the selected state after all filters that don't
+         * change the visible placemark lists.
+         */
+        if ( isSelected )
             continue;
 
         qpos = index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().quaternion();
@@ -429,7 +432,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
                             textWidth, x, y ) )
         {
             // Don't clear the label pixmap here, for the label should
-            // really be painted, but there is just too many other
+            // really be painted, but there are just too many other
             // labels around it so there is no room.
             continue;
         }
@@ -441,10 +444,8 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        // FIXME: This assumes that the hotspot is the center of the symbol.
-        const QSize symbolSize = mark->symbolSize();
-        mark->setSymbolPos( QPoint( x - symbolSize.width()  / 2,
-                                    y - symbolSize.height() / 2) );
+        mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
+                                    y - mark->symbolSize().height() / 2) );
 
         // Add the current placemark to the matching row and it's
         // direct neighbors.
@@ -457,7 +458,7 @@ void PlaceMarkPainter::sphericalPaintPlaceFolder(QPainter* painter,
 
         m_visiblePlaceMarks.append( mark );
 
-        labelnum ++;
+        ++labelnum;
         if ( labelnum >= maxlabels )
             break;
     }
@@ -553,7 +554,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                             textWidth, x, y ) )
         {
             // Don't clear the text pixmap here, for the label should
-            // really be painted, but there is just too many other
+            // really be painted, but there are just too many other
             // labels around it so there is no room.
             continue;
         }
@@ -579,7 +580,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
 
         m_visiblePlaceMarks.append( mark );
 
-        labelnum ++;
+        ++labelnum;
         if ( labelnum >= maxlabels )
             break;
     }
@@ -682,7 +683,7 @@ void PlaceMarkPainter::rectangularPaintPlaceFolder(QPainter* painter,
                             textWidth, x, y ) )
         {
             // Don't clear the text pixmap here, for the label should
-            // really be painted, but there is just too many other
+            // really be painted, but there are just too many other
             // labels around it so there is no room.
             continue;
         }
@@ -770,29 +771,35 @@ void PlaceMarkPainter::labelFontData( VisiblePlaceMark *mark,
     // R: Admin. center of _R_egion
     // B: Admin. center of country and region ("_B_oth")
     // N: _N_one
-    font = m_font_regular;
 
-    if ( role == 'N' ) {
-        font = m_font_regular;
-    } else if ( role == 'R' ) {
-        font = m_font_regular_italics;
-    } else if ( role == 'B' || role == 'C' ) {
-        font = m_font_regular_underline;
-    } else {
-        font = m_font_regular;
+    if ( mark->symbolIndex() < 16 )
+    {
+        if ( role == 'N' ) {
+            font = m_font_regular;
+        } else 
+        if ( role == 'R' ) {
+           font = m_font_regular_italics;
+        } else if ( role == 'B' || role == 'C' ) {
+           font = m_font_regular_underline;
+        } else {
+            font = m_font_regular;
+        }
+        if ( mark->symbolIndex() > 13 )
+            font.setWeight( 75 );
+    }
+    else
+    {
+        if ( role == 'P' || role == 'M' ) {
+            font = m_font_regular;
+        } else if ( role == 'H' || role == 'V' ) {
+            font = m_font_mountain;
+        } else {
+            font = m_font_regular;
+        }
     }
 
-    if ( ( mark->symbolIndex() > 13 && mark->symbolIndex() < 16 ) || isSelected )
+    if ( isSelected )
         font.setWeight( 75 );
-
-    if ( role == 'P' )
-        font = m_font_regular;
-    if ( role == 'M' )
-        font = m_font_regular;
-    if ( role == 'H' )
-        font = m_font_mountain;
-    if ( role == 'V' )
-        font = m_font_mountain;
 
     textWidth = ( QFontMetrics( font ).width( mark->name() )
                   + (int)( s_labelOutlineWidth ) );
@@ -812,14 +819,15 @@ bool PlaceMarkPainter::roomForLabel( const QVector<VisiblePlaceMark*> &currentse
 
     // Check the four possible positions by going through all of them
  
+    QRect  labelRect( xpos, ypos, textwidth, m_fontheight );
+
     while ( xpos >= x - textwidth - symbolwidth - 1 ) {
         ypos = y;
 
         while ( ypos >= y - m_fontheight ) {
 
             isRoom = true;
-
-            QRect  labelRect( xpos, ypos, textwidth, m_fontheight );
+            labelRect.moveTo( xpos, ypos );
 
             // Check if there is another label or symbol that overlaps.
             for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();

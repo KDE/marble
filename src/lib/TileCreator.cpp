@@ -322,8 +322,8 @@ void TileCreator::run()
                 bool noerr = tile.save( tileName, "jpg", 85 );
                 if ( noerr == false )
                     qDebug() << "Error while writing Tile: " << tileName; 
-
-                percentCompleted = 90 + (int)( 10 * (double)(savedTilesCount) / 
+                // Don't exceed 99% as this would cancel the thread unexpectedly
+                percentCompleted = 90 + (int)( 9 * (double)(savedTilesCount) / 
                                    (double)(totalTileCount) );	
                 emit progress( percentCompleted );
             }

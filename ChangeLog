@@ -1,3 +1,11 @@
+2007-09-24  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/TileCreator.cpp:
+	- Hopefully fixed Ingwa's bug?
+
+	* src/lib/PlaceMarkPainter.cpp:
+	- Tidying up PlaceMarkPainter.cpp a bit.
+
 2007-09-23  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/PlaceMarkPainter.cpp: 
