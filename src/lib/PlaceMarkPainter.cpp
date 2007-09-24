@@ -56,13 +56,9 @@ class VisiblePlaceMark
     }
     const QSize& symbolSize() const
     {
-//        FIXME: tokoe: In some cases we do get an uninitialized m_symbolSize. Why? 
-//        if ( m_symbolSize.isNull() )
-//        {
-            m_symbolSize = m_modelIndex.data( PlaceMarkModel::SymbolSizeRole ).toSize();
-            return m_symbolSize;
-//        }
-
+        if ( !m_symbolSize.isValid() )
+          m_symbolSize = m_modelIndex.data( PlaceMarkModel::SymbolSizeRole ).toSize();
+        return m_symbolSize;
     }
     const int symbolIndex() const
     {
@@ -97,8 +93,7 @@ class VisiblePlaceMark
 };
 
 VisiblePlaceMark::VisiblePlaceMark()
-  : m_symbolIndex( 0 ), 
-    m_symbolSize( QSize( 0, 0 ) )
+  : m_symbolIndex( 0 ) 
 {
 }
 
