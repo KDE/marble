@@ -28,7 +28,7 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
 
     m_left   = -1.0; 
     m_right  = (double)(m_imgwidth);
-    m_top    = 0.0; 
+    m_top    = -1.0; 
     m_bottom = (double)(m_imgheight);	
 
     // m_debugNodeCount = 0;

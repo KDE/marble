@@ -79,7 +79,51 @@ int main(int argc, char *argv[])
             }
             painter.setBrush( gradient );
             painter.drawRect( 0, 0, 256, 10 );	
+/*
+            int  alpha;
+            if ( j < 8 ) alpha = j;
+            else alpha = 2 * (j - 7) + 7; 
 
+            for ( int i = 0; i < 256; ++i) {
+                if ( filename == filelist[0] ) {
+                    QRgb  palcol = gradimg->pixel( i, 1 );
+                    int   red   = qRed( palcol ) + 16 - alpha; 
+                    if ( red < 0 ) red = 0;
+                    if ( red > 255 ) red = 255;
+                    int   green   = qGreen( palcol ) + 16 - alpha; 
+                    if ( green < 0 ) green = 0;
+                    if ( green > 255 ) green = 255;
+                    int   blue   = qBlue( palcol ) + 16 - alpha; 
+                    if ( blue < 0 ) blue = 0;
+                    if ( blue > 255 ) blue = 255;
+                    palcol = qRgb( red, green, blue );
+
+                    if ( i == 0 )
+                        out << "		{ 0x" << (uint)palcol << "," << endl;
+                    else
+                        out << "		0x" << (uint)palcol << "," << endl;
+                }
+                else {
+                    QRgb  palcol = gradimg->pixel(i,1);
+                    int   red   = qRed( palcol ) + 16 - alpha; 
+                    if ( red < 0 ) red = 0;
+                    if ( red > 255 ) red = 255;
+                    int   green   = qGreen( palcol ) + 16 - alpha; 
+                    if ( green < 0 ) green = 0;
+                    if ( green > 255 ) green = 255;
+                    int   blue   = qBlue( palcol ) + 16 - alpha; 
+                    if ( blue < 0 ) blue = 0;
+                    if ( blue > 255 ) blue = 255;
+                    palcol = qRgb( red, green, blue );
+
+                    if ( i == 255 ) 
+                        out << "		0x" << (uint)palcol << " }," << endl;
+                    else
+                        out << "		0x" << (uint)palcol << "," << endl;
+                    // out << "		" << (uint)gradimg->pixel(i,1) << "," << endl;
+                }
+            }
+*/
             int  alpha = 2 * j;
 
             for ( int i = 0; i < 256; ++i) {
@@ -94,9 +138,9 @@ int main(int argc, char *argv[])
                     palcol = qRgb( red, green, blue );
 
                     if ( i == 0 )
-                        out << "		{ 0x" << (uint)palcol << "," << endl;
+                        out << "        { 0x" << (uint)palcol << "," << endl;
                     else
-                        out << "		0x" << (uint)palcol << "," << endl;
+                        out << "        0x" << (uint)palcol << "," << endl;
                 }
                 else {
                     QRgb  palcol = gradimg->pixel(i,1);
@@ -109,10 +153,10 @@ int main(int argc, char *argv[])
                     palcol = qRgb( red, green, blue );
 
                     if ( i == 255 ) 
-                        out << "		0x" << (uint)palcol << " }," << endl;
+                        out << "        0x" << (uint)palcol << " }," << endl;
                     else
-                        out << "		0x" << (uint)palcol << "," << endl;
-                    // out << "		" << (uint)gradimg->pixel(i,1) << "," << endl;
+                        out << "        0x" << (uint)palcol << "," << endl;
+                    // out << "     " << (uint)gradimg->pixel(i,1) << "," << endl;
                 }
             }
         }

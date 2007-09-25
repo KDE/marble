@@ -88,11 +88,24 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
 
-                if ( showRelief == true && emboss.gpuint.x1 > grey )
-                    bump = ( emboss.gpuint.x1 - grey ) & 0x0f;
+                if ( showRelief == true )
+                {
+                    bump = emboss.gpuint.x1 - grey;
+                    if ( bump > 15 ) bump = 15;
+                    if ( bump < 0 ) bump = 0;
+                }
                 else
                     bump = 0;
-
+/*
+                if ( showRelief == true )
+                {
+                    bump = ( emboss.gpuint.x1 + 7 - grey );
+                    if ( bump  < 0 )  bump = 0;
+                    if ( bump  > 15 )  bump = 15;
+                }
+                else
+                    bump = 8;
+*/
                 if ( *coastdata == landoffscreen )
                     *data = texturepalette[bump][grey + 0x100]; 
                 else {
@@ -136,6 +149,20 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
 
+                if ( showRelief == true )
+                {
+                    bump = ( emboss.gpuint.x1 - grey ) >> 1;
+
+                    bendradius = bendReliefx * relief;
+                    bump *= qRound( 1.0 - bendradius * bendradius );
+
+                    if ( bump > 15 ) bump = 15;
+                    if ( bump < 0 ) bump = 0;
+                }
+                else
+                    bump = 0;
+
+/*
                 if ( showRelief == true && emboss.gpuint.x1 > grey ) {
                     bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
 
@@ -146,14 +173,10 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
                     // cos(x) ~= 1-x^2
 
-                    bendradius = bendReliefx * relief;
-                    bump *= qRound( 1.0 - bendradius * bendradius );
-
-                    bump &= 0x0f;
                 }
                 else
                     bump = 0;
-
+*/
 
                 if ( *coastdata == landoffscreen )
                     *data = texturepalette[bump][grey + 0x100];	

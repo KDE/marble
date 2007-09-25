@@ -55,7 +55,31 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
     m_labelareaheight = 2 * m_fontheight;
+/*
+//  Old weightfilter array. Still here 
+// to be able to compare performance
 
+    m_weightfilter
+        << 9999
+        << 4200
+        << 3900
+        << 3600
+
+        << 3300
+        << 3000
+        << 2700
+        << 2400
+
+        << 2100
+        << 1800
+        << 1500
+        << 1200
+
+        << 900
+        << 400
+        << 200
+        << 0;
+*/
     m_weightfilter
         << 49300
         << 40300
@@ -180,14 +204,10 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_labelareaheight );
 
         // Find out whether the area around the placemark is covered already.
-        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+        // If there's not enough space free don't add a VisiblePlaceMark here.
 
-        if ( labelRect.isNull() )
-        {
-            // Don't add a VisiblePlaceMark here, as there are just too many 
-            // other labels around it so there is no room.
-            continue;
-        }
+        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+        if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
         // specified by "maxlabels".
@@ -235,9 +255,9 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
     for ( int i = 0; i < model->rowCount(); ++i )
     {
-        const QModelIndex index = model->index( i, 0 );
+        QModelIndex index = model->index( i, 0 );
 
-        const int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
+        int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
 
         // Skip the places that are too small.
         if ( noFilter == false ) {
@@ -274,8 +294,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         /**
          * We handled selected place marks already, so skip here...
          * Given that we assume that only a small amount of places is selected
-         * we check for the selected state after all filters that don't
-         * change the visible placemark lists.
+         * we check for the selected state after all other filters
          */
         if ( isSelected )
             continue;
@@ -299,15 +318,11 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         // Choose Section
         const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_labelareaheight );
 
-        // Find out whether the area around the placemark is covered already.
-        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+         // Find out whether the area around the placemark is covered already.
+        // If there's not enough space free don't add a VisiblePlaceMark here.
 
-        if ( labelRect.isNull() )
-        {
-            // Don't add a VisiblePlaceMark here, as there are just too many 
-            // other labels around it so there is no room.
-            continue;
-        }
+        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+        if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
         // specified by "maxlabels".
@@ -343,8 +358,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         m_paintOrder.append( mark );
     }
-
-    m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, viewParams, imgwidth );
+    m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, viewParams );
 }
 
 inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &index, 

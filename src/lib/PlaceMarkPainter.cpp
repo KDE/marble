@@ -50,11 +50,12 @@ void PlaceMarkPainter::setLabelColor( const QColor &color )
 void PlaceMarkPainter::drawPlaceMarks( QPainter* painter, 
                                        QVector<VisiblePlaceMark*> visiblePlaceMarks,
                                        const QItemSelection &selection, 
-                                       ViewParams *viewParams, int imgwidth )
+                                       ViewParams *viewParams )
 {
     QVector<VisiblePlaceMark*>::const_iterator visit = visiblePlaceMarks.constEnd();
 
     VisiblePlaceMark *mark = 0;
+    int imageWidth = viewParams->m_canvasImage->width();
 
     switch( viewParams->m_projection ) {
         case Spherical:
@@ -109,7 +110,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                 }
 
                 for ( int i = tempSymbol;
-                      i <= imgwidth;
+                      i <= imageWidth;
                       i += 4 * viewParams->m_radius )
                 {
                     QRect labelRect( mark->labelRect() );

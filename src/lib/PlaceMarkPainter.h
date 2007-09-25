@@ -44,7 +44,7 @@ class PlaceMarkPainter : public QObject
     void drawPlaceMarks( QPainter* painter, 
                          QVector<VisiblePlaceMark*> visiblePlaceMarks,
                          const QItemSelection &selection, 
-                         ViewParams *viewParams, int imgwidth = 0 );
+                         ViewParams *viewParams );
 
     /**
      * Sets the @p color that shall be used for painting the labels.

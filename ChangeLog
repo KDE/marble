@@ -1,3 +1,17 @@
+2007-09-25  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/PlaceMarkLayout.cpp:
+	* src/lib/PlaceMarkPainter.{h,cpp}:
+	- More polishing in the layout/painter 
+	  classes.
+
+	* src/lib/TextureColorizer.cpp:
+	* src/lib/texturepalette.cpp:
+	* src/lib/ClipPainter.cpp:
+	* tools/palettegen/palettegen.cpp:
+	- Fixing tiny bug to improve render quality.
+	- preparing further improved relief rendering.
+
 2007-09-25  Inge Wallin  <inge@lysator.liu.se>
 
 	Make BUGS file actually usable.
