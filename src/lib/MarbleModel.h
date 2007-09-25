@@ -93,23 +93,63 @@ class MARBLE_EXPORT MarbleModel : public QObject
  public:
     /**
      * @brief  Construct a new MarbleModel.
-     * @param view  The widget that is the view for this Model.
+     * @param parent the parent widget
      */
     MarbleModel( QWidget *parent );
     virtual ~MarbleModel();
 
-    void  paintGlobe(ClipPainter*, int width, int height,
+    /**
+     * @brief   Paint the model into the view
+     * @param painter  the QPainter used to paint the view
+     * @param width    the width of the widget
+     * @param height   the height of the widget
+     * @param viewParams  the view parameters controlling the paint process
+     * @param redrawBackground  a boolean controlling if the background should be redrawn in addition to the globe itself
+     * @param dirtyRect  the rectangle of the widget that needs redrawing.
+     *
+     * The model has the responsibility to actually paint into the
+     * MarbleWidget.  This function is called by MarbleWidget when it
+     * receives a paintEvent and should repaint whole or part of the
+     * widget's contents based on the parameters.
+     *
+     * NOTE: This function will probably move to MarbleWidget in KDE
+     * 4.1, making the MarbleModel/MarbleWidget pair truly follow the
+     * Model/View paradigm.
+     */
+    void  paintGlobe(ClipPainter *painter, int width, int height,
                      ViewParams *viewParams,
-                     bool redrawBackground, const QRect&);
+                     bool redrawBackground, const QRect& dirtyRect);
 
-    void  resize( int width, int height );
-
-    QAbstractItemModel* placeMarkModel() const;
+    /**
+     * @brief Return the list of PlaceMarks as a QAbstractItemModel *
+     * @return a list of all PlaceMarks in the MarbleModel.
+     */
+    QAbstractItemModel*  placeMarkModel() const;
     QItemSelectionModel* placeMarkSelectionModel() const;
 
+    /**
+     * @brief Return the name of the current map theme.
+     * @return the name of the current MapTheme.
+     */
     QString mapTheme() const;
 
-    void setMapTheme( const QString &selectedMap, QWidget *parent, Projection currentProjection );
+    /**
+     * @brief Set a new map theme to use.
+     * @param selectedMap  the name of the selected map theme
+     * @param parent       the parent widget
+     * @param currentProjection  the current projection
+     *
+     * This function sets the map theme, i.e. combination of tile set
+     * and color scheme to use.  If the map theme is not previously
+     * used, some basic tiles are created and a progress dialog is
+     * shown.  This is what the parent parameter is used for.
+     *
+     * NOTE: Both the parent and currentProjection parameters will
+     *       disappear soon.
+     */
+    void setMapTheme( const QString &selectedMap,
+		      QWidget *parent,
+		      Projection currentProjection );
 
     void addPlaceMarkFile( const QString& filename );
 
@@ -139,10 +179,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Start the model's timer polling
-     *
-     * this is default behaviour so does not need to be started unless
-     * it was previously stopped
      * @param time the amount of milliseconds between each poll
+     *
+     * This is default behaviour so does not need to be started unless
+     * it was previously stopped
      */
     void startPolling( int time = 1000 );
 
@@ -152,16 +192,48 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void stopPolling();
 
  Q_SIGNALS:
+#if 0
+    /**
+     * @brief Signal that the MarbleModel has started to create a new set of tiles.
+     * @param 
+     * @see  zoomView()
+     */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
+#endif
 
-    void themeChanged( QString );
+    /**
+     * @brief Signal that the map theme has changed, and to which theme.
+     * @param name the name of the new map theme.
+     * @see  mapTheme
+     * @see  setMapTheme
+     */
+    void themeChanged( QString name );
+    /**
+     * @brief Signal that the MarbleModel has changed in general
+     */
     void modelChanged();
-    void regionChanged( BoundingBox );
+    /**
+     * @brief Signal that a region of the earth has changed
+     * @param rect the region that changed.
+     *
+     * This is currently used only for gpx files, but will likely be
+     * used for more things in the future.
+     */
+    void regionChanged( BoundingBox rect );
+    /**
+     * @brief Signal that a timer has gone off.
+     *
+     * This is currently used only for GPS things right now, but will
+     * likely be used for more things in the future.
+     */
     void timeout();
 
  private Q_SLOTS:
     void notifyModelChanged();
     void kmlDocumentLoaded( KMLDocument& document );
+
+ private:
+    void  resize( int width, int height );
 
  private:
     MarbleModelPrivate  * const d;

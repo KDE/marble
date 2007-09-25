@@ -14,6 +14,10 @@
 
 2007-09-25  Inge Wallin  <inge@lysator.liu.se>
 
+	APIDOX
+	* src/lib/MarbleModel.h: Add apidox
+	* src/lib/MarbleModel.cpp: Improve comments
+	
 	Make BUGS file actually usable.
 	* BUGS: Format better to make it readable
 	

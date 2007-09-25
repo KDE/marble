@@ -124,7 +124,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
-             this,  SIGNAL( regionChanged( BoundingBox ) ) );
+             this,              SIGNAL( regionChanged( BoundingBox ) ) );
 
     d->m_projection = Spherical;
 
@@ -178,12 +178,20 @@ QString MarbleModel::mapTheme() const
 // Set a particular theme for the map and load the appropriate tile level.
 // If the tiles (for the lowest tile level) haven't been created already
 // then create them here and now.
+//
+// FIXME: Get rid of that awful 'parent' parameter and move the tile
+//        creation dialogs out of this function.  Change them into signals 
+//        instead.
+// FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
+//
 
-void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Projection currentProjection )
+void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
+			       Projection currentProjection )
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
-    qDebug( "Setting map theme to : %s", qPrintable( MarbleDirs::path( mapPath ) ) );
+    qDebug( "Setting map theme to : %s",
+	    qPrintable( MarbleDirs::path( mapPath ) ) );
     d->m_maptheme->open( MarbleDirs::path( mapPath ) );
 
     // If this layer is a bitmaplayer, check if the cached tiles for
@@ -227,7 +235,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
         d->m_projection = currentProjection;
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
-            this,           SLOT( notifyModelChanged() ) );
+		 this,           SLOT( notifyModelChanged() ) );
     }
 
     // Set all the colors for the vector layers

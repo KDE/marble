@@ -1,7 +1,5 @@
 /** @mainpage Marble 
 
-@short An application and widget class that displays a view of the earth.
-
 Marble is an application that displays a view of the earth.  It is
 both a valuable application in its own right, but also an example
 program that shows how you can use the Marble widgets in your own
