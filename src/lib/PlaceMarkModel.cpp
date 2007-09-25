@@ -87,8 +87,8 @@ QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
         return d->m_placeMarkContainer.at( index.row() )->symbolPixmap();
     } else if ( role == GeoTypeRole ) {
         return d->m_placeMarkContainer.at( index.row() )->role();
-    } else if ( role == DescriptionRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->description();
+    } else if ( role == PopulationIndexRole ) {
+        return d->m_placeMarkContainer.at( index.row() )->populationIndex();
     } else if ( role == CoordinateRole ) {
         QVariant v;
         v.setValue( d->m_placeMarkContainer.at( index.row() )->coordinate() );
@@ -99,10 +99,10 @@ QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
         return d->m_placeMarkContainer.at( index.row() )->symbolIndex();
     } else if ( role == SymbolSizeRole ) {
         return d->m_placeMarkContainer.at( index.row() )->symbolSize();
-    } else if ( role == PopulationIndexRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->populationIndex();
     } else if ( role == PopulationRole ) {
         return d->m_placeMarkContainer.at( index.row() )->population();
+    } else if ( role == DescriptionRole ) {
+        return d->m_placeMarkContainer.at( index.row() )->description();
     } else
         return QVariant();
 }

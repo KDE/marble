@@ -14,7 +14,7 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-INCLUDE(geodata/CMakeLists.txt)
+# INCLUDE(geodata/CMakeLists.txt)
 
 if (QTONLY)
   set(GENERIC_LIB_VERSION "0.5.0")
@@ -44,7 +44,7 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
-           ${geodata_SRCS}
+#           ${geodata_SRCS}
            MarbleWidget.cpp
            MarbleModel.cpp
            MarbleControlBox.cpp
@@ -74,8 +74,10 @@ set(marblewidget_SRCS
            ViewParams.cpp
            MeasureTool.cpp
            PlaceMark.cpp
+           VisiblePlaceMark.cpp
            PlaceMarkContainer.cpp
            PlaceMarkManager.cpp
+           PlaceMarkLayout.cpp
            PlaceMarkPainter.cpp
            PlaceMarkModel.cpp
            PlaceMarkInfoDialog.cpp
@@ -260,8 +262,10 @@ else (APPLE AND QTONLY)
            ViewParams.h
            MeasureTool.h
            PlaceMark.h
+           VisiblePlaceMark.h
            PlaceMarkContainer.h
            PlaceMarkManager.h
+           PlaceMarkLayout.h
            PlaceMarkPainter.h
            PlaceMarkModel.h
            PlaceMarkInfoDialog.h

@@ -38,7 +38,7 @@
 #include "Quaternion.h"
 #include "GridMap.h"
 #include "PlaceMarkContainer.h"
-#include "PlaceMarkPainter.h"
+#include "PlaceMarkLayout.h"
 #include "PlaceMarkModel.h"
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
@@ -115,7 +115,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QVector<QPersistentModelIndex> whichFeatureAt( const QPoint& ) const;
 
-    PlaceMarkPainter   *placeMarkPainter()   const;
+    PlaceMarkLayout    *placeMarkLayout()   const;
     VectorComposer     *vectorComposer()     const;
     TextureColorizer   *textureColorizer()   const;
 

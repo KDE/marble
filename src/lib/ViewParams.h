@@ -22,6 +22,8 @@
 
 #include "marble_export.h"
 
+#include <QtCore/QDebug>
+
 #include "Quaternion.h"
 #include "BoundingBox.h"
 #include "global.h"
@@ -40,7 +42,6 @@ class ViewParams
  public:
     ViewParams( );
 
- public:
     Projection  m_projection;
     Projection  m_oldProjection;
 
@@ -49,6 +50,24 @@ class ViewParams
     int         m_radiusUpdated;
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;
+
+    void centerCoordinates( double &centerLon, double &centerLat ){
+/*
+            if ( m_planetAxis == m_planetAxisUpdated && m_radius == m_radiusUpdated )
+            {
+                centerLon = m_centerLon;
+                centerLat = m_centerLat;
+            }
+            else
+            {
+*/
+                // Calculate translation of center point
+                centerLon = m_planetAxis.yaw() + M_PI;
+                centerLat = m_planetAxis.pitch() + M_PI;
+                if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+//            }
+    }
+
     BoundingBox m_boundingBox;  // What the view currently can see
 
     // Show/don't show options
@@ -71,6 +90,10 @@ class ViewParams
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere
     QImage  *m_coastImage;      // A slightly higher level image.
+
+ private:
+    double     m_centerLon;         // cached value
+    double     m_centerLat;         // cached value
 };
 
 

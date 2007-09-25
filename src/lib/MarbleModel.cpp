@@ -31,6 +31,7 @@
 #include "MarbleDirs.h"
 #include "TileCreatorDialog.h"
 #include "PlaceMarkManager.h"
+#include "PlaceMarkPainter.h"
 #include "XmlHandler.h"
 #include "gps/GpsLayer.h"
 
@@ -51,7 +52,7 @@ class MarbleModelPrivate
     // Places on the map
     PlaceMarkManager    *m_placemarkmanager;
     PlaceMarkModel      *m_placemarkmodel;
-    PlaceMarkPainter    *m_placemarkpainter;
+    PlaceMarkLayout     *m_placeMarkLayout;
 
     // Selection handling
     QItemSelectionModel *m_placemarkselectionmodel;
@@ -80,7 +81,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
 
-    d->m_placemarkpainter   = 0;
+    d->m_placeMarkLayout   = 0;
 
     d->m_maptheme = new MapTheme();
 
@@ -237,9 +238,10 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent, Proj
     d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
     d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
 
-    if ( d->m_placemarkpainter == 0)
-        d->m_placemarkpainter = new PlaceMarkPainter( this );
-    d->m_placemarkpainter->setLabelColor( d->m_maptheme->labelColor() );
+    if ( d->m_placeMarkLayout == 0)
+        d->m_placeMarkLayout = new PlaceMarkLayout( this );
+    d->m_placeMarkLayout->reset();
+    d->m_placeMarkLayout->placeMarkPainter()->setLabelColor( d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
     d->m_projection = currentProjection;
@@ -340,7 +342,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     // Paint the PlaceMark layer
 #ifndef KML_GSOC
     if ( viewParams->m_showPlaceMarks && d->m_placemarkmodel->rowCount() > 0 ) {
-        d->m_placemarkpainter->paintPlaceFolder( painter,
+        d->m_placeMarkLayout->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),
                                                  viewParams,
@@ -375,7 +377,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
                 PlaceMarkContainer& container = folder.activePlaceMarkContainer( *viewParams );
 
-                d->m_placemarkpainter->paintPlaceFolder( painter,
+                d->m_placeMarkLayout->paintPlaceFolder( painter,
                                                         viewParams->m_canvasImage->width(),
                                                         viewParams->m_canvasImage->height(),
                                                         viewParams,
@@ -426,9 +428,9 @@ AbstractScanlineTextureMapper    *MarbleModel::textureMapper()    const
     return d->m_texmapper;
 }
 
-PlaceMarkPainter *MarbleModel::placeMarkPainter() const
+PlaceMarkLayout *MarbleModel::placeMarkLayout() const
 {
-    return d->m_placemarkpainter;
+    return d->m_placeMarkLayout;
 }
 
 GpsLayer *MarbleModel::gpsLayer()         const
@@ -455,7 +457,7 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 
 QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
-    return d->m_placemarkpainter->whichPlaceMarkAt( curpos );
+    return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
 }
 
 void MarbleModel::notifyModelChanged()
