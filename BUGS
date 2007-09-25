@@ -1,38 +1,216 @@
+			     Marble Bugs
+			     ===========
 
-Marble Quality Check:
+This is the Marble bug file.  It exists mainly so that we can see what
+bugsthere are before we start using the KDE bugzilla for real.
 
-0001 The "bullet points" on the left of geographical objects are not vertically aligned with the text -- intended? tackat: Yes, it's intended. Labels on maps are usually placed in certain discrete allowed positions to avoid overlap of the labels. In Marble the labels are placed either on the top left, top right, left bottom or right bottom. 
 
-0002 panning with the nav buttons on the left should be smooth -- otherwise it's irritating: tackat: Well that's not easy to solve. As you pointed out there are still installs where Marble is slower than on others. "Smooth" scrolling would take eternally long on these if not implemented taking into account such scenarios. So currently the current solution is just the pragmatic solution to give fast navigation to all users. 
+Classification
+--------------
 
-0003 why are some cities titled in italic? maybe add a legend thing at first run, easily closable. tackat: That's indeed an oversight on my part. It was originally mentioned in the Legend what the font properties (bold, underlined, etc.) were meant to represent. 
- in the city data sheet: 
+BUG	     Something is wrong; this should be fixed
 
-0004 flag needs border tackat: Yes, it only now occured to me that the widget could be white indeed (very unlikely for the final version but ...). I don't want to add a border. But I'll add a slight shadow instead. 
+ENHANCEMENT  Do something already existing in a better way.
 
-0005 "city" should be rightaligned, on the same row as the name of the city tackat: No. There is enough space below the name of the city. But for some languages putting it into the same line as the name of the placemark (which is very long in some cases already) this would definetely conflict with the length of the translation of the placemark type ("Capital", "Capital of Region", etc.). 
+FEATURE      The application should do something new.  
 
-0006 Short Description field should be omitted when no short description is available. tackat: I applied another change in recent SVN instead which makes the Wikipedia feature more visible. 
- what is "Download Finished"? tackat: I'll turn this into "Wikipedia data download finished". Better :-) ? 
+If we want to implement one or more of these for a certain version, it
+should be listed in the TODO file.  This file is just a collection.
 
-0007 "data sheet" sounds pretty technical. how about "information"? tackat: Accidently I used "Data Sheet" in two places: The Window title and the tab. The first tab should indeed be just a "data sheet" (Information is pretty useless as basically everything on the screen is "information". Naming the Window title "Data Sheet" is indeed an oversight from the times where the Wikipedia tab didn't exist. I'll name it "Marble Info Center" instead. 
 
-0008 the list of geographical objects on the left doesn't respect my singleclick settings tackat: I want to avoid that if you go through the list using cursor keys that each key press triggers a map update. That's why you need to either double click or click once and press "Enter" to trigger a map update. I will look into this issue. 
+The bugs
+--------
 
-0009 make the list flexible, instead of the zoom slider tackat: No. 
- the navigation sidebar should be a qdockwidget tackat: Yes, it's far from ideal yet and we do indeed think about using a solution similar to a QDockWidget instead. 
+0001 BUG
 
-0010 make measure points draggable tackat: That would be a cool feature indeed. For now I think there are more important things to fix though given that the implementation of this feature would pose quite a challenge. 
+  The "bullet points" on the left of geographical objects are not
+  vertically aligned with the text -- intended? 
 
-0011 GHNS for maps? the ones shipped with marble aren't in a recognized format tackat: I'm bugging Josef since months already to get KNS (The GHNS successor) finished. Until then I can't do much about it although I'd really love to have this feature rather yesterday than tomorrow. 
-fast mouse panning is ignored tackat: What's "fast" mouse panning meant to be? 
+  tackat: Yes, it's intended. Labels on maps are usually placed in
+  certain discrete allowed positions to avoid overlap of the
+  labels. In Marble the labels are placed either on the top left, top
+  right, left bottom or right bottom.
 
-0012 black text sometimes gets lost in the deep space blackness, when completely zoomed out. tackat: That's a know issue. The problem is that I haven't heard anybody come up with a really good solution (And no, I neither want outlines used everywhere nor changing font colors, nor opaque labels). 
 
-0013 country borders are aliased tackat: I hardly can change that for the rendering while moving the map (It would be _really_ slow due to the node count. But I'll probably add a feature any day now that will make the final rendering (once the map doesn't move anymore) high quality with all possible kinds of Antialiasing enabled. That will require some code though. 
+0002 FEATURE
 
-0014 the places where land touches sea/snow have a "vector boundary" - this is aliased as well tackat: Yes, and would be really really slow if we wanted antialiasing here as well. 
+  Panning with the nav buttons on the left should be smooth --
+  otherwise it's irritating.
 
-0015 panning and zooming are quite slow on my machine -- AMD Sempron 2300+, 512MB RAM, nVidia GeForce FX 5500 with binary drivers tackat: Do a "marble --timedemo" on the command line to define "slow". Yes, it's a known issue that certain AMD + ... combinations are incredibly slow. This is partially due to crappy X drivers. I still yet have to see marble on Windows running "slow" ;-( We are working on it but it's not easy to fix. 
+  tackat: Well that's not easy to solve. As you pointed out there are
+  still installs where Marble is slower than on others. "Smooth"
+  scrolling would take eternally long on these if not implemented
+  taking into account such scenarios. So currently the current
+  solution is just the pragmatic solution to give fast navigation to
+  all users.
 
-0016 disable zoom buttons if max or min zoom level is reached --icwiener "tackat: cool idea. I'll add that ASAP. Should be easy to do." 
+
+0003 BUG
+
+  Why are some cities titled in italic? Maybe add a legend thing at
+  first run, easily closable. 
+
+  tackat: That's indeed an oversight on my part. It was originally
+  mentioned in the Legend what the font properties (bold, underlined,
+  etc.) were meant to represent.  in the city data sheet:
+
+
+0004 BUG
+
+  Flags needs a border
+
+  tackat: Yes, it only now occured to me that the widget could be
+  white indeed (very unlikely for the final version but ...). I don't
+  want to add a border. But I'll add a slight shadow instead.
+
+
+0005 BUG
+
+  "city" should be right aligned, on the same row as the name of the
+  city
+
+  tackat: No. There is enough space below the name of the city. But
+  for some languages putting it into the same line as the name of the
+  placemark (which is very long in some cases already) this would
+  definetely conflict with the length of the translation of the
+  placemark type ("Capital", "Capital of Region", etc.).
+
+
+0006 ENHANCEMENT
+
+  "Short Description" field should be omitted when no short description
+  is available.
+
+  tackat: I applied another change in recent SVN instead which makes
+  the Wikipedia feature more visible.
+
+
+0007 ENHANCEMENT
+
+  What is "Download Finished"?
+
+  tackat: I'll turn this into "Wikipedia data download
+  finished". Better :-) ?
+
+
+0008 ENHANCEMENT
+
+  "Data sheet" sounds pretty technical. How about "information"?
+
+  tackat: Accidently I used "Data Sheet" in two places: The Window
+  title and the tab. The first tab should indeed be just a "data
+  sheet" (Information is pretty useless as basically everything on the
+  screen is "information". Naming the Window title "Data Sheet" is
+  indeed an oversight from the times where the Wikipedia tab didn't
+  exist. I'll name it "Marble Info Center" instead.
+
+
+0009 ENHANCEMENT
+
+  The list of geographical objects on the left doesn't respect my
+  singleclick settings.
+
+  tackat: I want to avoid that if you go through the list using cursor
+  keys that each key press triggers a map update. That's why you need
+  to either double click or click once and press "Enter" to trigger a
+  map update. I will look into this issue.
+
+
+0010 ENHANCEMENT
+
+  Make the list flexible, instead of the zoom slider.
+
+  tackat: No.
+
+
+0011 ENHANCEMENT
+
+  The navigation sidebar should be a qdockwidget.
+
+  tackat: Yes, it's far from ideal yet and we do indeed think about
+  using a solution similar to a QDockWidget instead.
+
+
+0012 FEATURE
+
+  Make measure points draggable.
+
+  tackat: That would be a cool feature indeed. For now I think there
+  are more important things to fix though given that the
+  implementation of this feature would pose quite a challenge.
+
+
+0013 FEATURE
+
+  GHNS for maps? The ones shipped with marble aren't in any recognized
+  format.
+
+  tackat: I'm bugging Josef since months already to get KNS (The GHNS
+  successor) finished. Until then I can't do much about it although
+  I'd really love to have this feature rather yesterday than tomorrow.
+
+
+0014 ENHANCEMENT
+ 
+  Fast mouse panning is ignored.
+
+  tackat: What's "fast" mouse panning meant to be?
+
+
+0015 BUG
+
+  Black text sometimes gets lost in the deep space blackness, when
+  completely zoomed out.
+
+  tackat: That's a know issue. The problem is that I haven't heard
+  anybody come up with a really good solution (And no, I neither want
+  outlines used everywhere nor changing font colors, nor opaque
+  labels).
+
+
+0016 ENHANCEMENT
+
+  Country borders are aliased.
+
+  tackat: I hardly can change that for the rendering while moving the
+  map (It would be _really_ slow due to the node count. But I'll
+  probably add a feature any day now that will make the final
+  rendering (once the map doesn't move anymore) high quality with all
+  possible kinds of Antialiasing enabled. That will require some code
+  though.
+
+
+0017 ENHANCEMENT
+
+  The places where land touches sea/snow have a "vector boundary" -
+  this is aliased as well.
+
+  tackat: Yes, and would be really really slow if we wanted
+  antialiasing here as well.
+
+
+0018 ENHANCEMENT
+
+  Panning and zooming are quite slow on my machine -- AMD Sempron
+  2300+, 512MB RAM, nVidia GeForce FX 5500 with binary drivers.
+
+  tackat: Do a "marble --timedemo" on the command line to define
+  "slow". Yes, it's a known issue that certain AMD + ... combinations
+  are incredibly slow. This is partially due to crappy X drivers. I
+  still yet have to see marble on Windows running "slow" ;-( We are
+  working on it but it's not easy to fix.
+
+
+0019 ENHANCEMENT
+
+  Disable zoom buttons if max or min zoom level is reached --icwiener
+
+  "tackat: cool idea. I'll add that ASAP. Should be easy to do."
+
+
+================================================================
+                           RESOLVED
+
+
+================================================================
+                           WONTFIX

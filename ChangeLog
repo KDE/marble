@@ -1,3 +1,8 @@
+2007-09-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Make BUGS file actually usable.
+	* BUGS: Format better to make it readable
+	
 2007-09-25  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/PlaceMarkModel.{h,cpp}:
