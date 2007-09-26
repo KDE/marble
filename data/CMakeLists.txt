@@ -360,6 +360,7 @@ install (FILES
 placemarks/baseplacemarks.cache
 placemarks/cityplacemarks.cache
 placemarks/elevplacemarks.cache
+placemarks/otherplacemarks.cache
 DESTINATION ${MARBLE_DATA_PATH}/placemarks)
 
 if(QTONLY AND NOT APPLE AND NOT WIN32)
