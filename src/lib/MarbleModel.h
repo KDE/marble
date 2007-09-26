@@ -192,14 +192,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void stopPolling();
 
  Q_SIGNALS:
-#if 0
+
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.
      * @param 
      * @see  zoomView()
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
-#endif
+
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.

@@ -91,22 +91,13 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                 if ( showRelief == true )
                 {
-                    bump = emboss.gpuint.x1 - grey;
-                    if ( bump > 15 ) bump = 15;
-                    if ( bump < 0 ) bump = 0;
-                }
-                else
-                    bump = 0;
-/*
-                if ( showRelief == true )
-                {
-                    bump = ( emboss.gpuint.x1 + 7 - grey );
+                    bump = ( emboss.gpuint.x1 + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 )  bump = 15;
                 }
                 else
                     bump = 8;
-*/
+
                 if ( *coastData == landoffscreen )
                     *writeData = texturepalette[bump][grey + 0x100]; 
                 else {
@@ -153,32 +144,23 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                 if ( showRelief == true )
                 {
-                    bump = ( emboss.gpuint.x1 - grey ) >> 1;
-
-                    bendradius = bendReliefx * relief;
-                    bump *= qRound( 1.0 - bendradius * bendradius );
-
-                    if ( bump > 15 ) bump = 15;
-                    if ( bump < 0 ) bump = 0;
-                }
-                else
-                    bump = 0;
-
+                    bump = ( emboss.gpuint.x1 + 8 - grey ) >> 1;
+                    bump += 3;
 /*
-                if ( showRelief == true && emboss.gpuint.x1 > grey ) {
-                    bump = ( emboss.gpuint.x1 - grey ) >> 1; // >> 1 to soften bumpmapping
-
                     // Apply "spherical" bumpmapping 
                     // bump *= cos( bendRelief * sqrt(((imgrx-x)^2+(imgry-y)^2)));
 
                     // very cheap approximation:
                     // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
                     // cos(x) ~= 1-x^2
-
+                    bendradius = bendReliefx * relief;
+                    bump *= qRound( 1.0 - bendradius * bendradius );
+*/
+                    if ( bump > 15 ) bump = 15;
+                    if ( bump < 0 ) bump = 0;
                 }
                 else
-                    bump = 0;
-*/
+                    bump = 8;
 
                 if ( *coastData == landoffscreen )
                     *writeData = texturepalette[bump][grey + 0x100];	

@@ -10,6 +10,7 @@
 //
 
 
+#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
@@ -79,84 +80,39 @@ int main(int argc, char *argv[])
             }
             painter.setBrush( gradient );
             painter.drawRect( 0, 0, 256, 10 );	
-/*
-            int  alpha;
-            if ( j < 8 ) alpha = j;
-            else alpha = 2 * (j - 7) + 7; 
+
+
+            int  alpha = j;
 
             for ( int i = 0; i < 256; ++i) {
-                if ( filename == filelist[0] ) {
-                    QRgb  palcol = gradimg->pixel( i, 1 );
-                    int   red   = qRed( palcol ) + 16 - alpha; 
-                    if ( red < 0 ) red = 0;
-                    if ( red > 255 ) red = 255;
-                    int   green   = qGreen( palcol ) + 16 - alpha; 
-                    if ( green < 0 ) green = 0;
-                    if ( green > 255 ) green = 255;
-                    int   blue   = qBlue( palcol ) + 16 - alpha; 
-                    if ( blue < 0 ) blue = 0;
-                    if ( blue > 255 ) blue = 255;
-                    palcol = qRgb( red, green, blue );
 
+                    QRgb  shadeColor = gradimg->pixel( i, 1 );
+                    QImage  shadeImage ( 256, 10, QImage::Format_RGB32 );
+                    QLinearGradient  shadeGradient( 0, 0, 256, 0 );
+                    shadeGradient.setColorAt(0.15, QColor(Qt::white));
+                    shadeGradient.setColorAt(0.496, shadeColor);
+                    shadeGradient.setColorAt(0.504, shadeColor);
+                    shadeGradient.setColorAt(0.75, QColor(Qt::black));
+                    QPainter  shadePainter(&shadeImage);
+                    shadePainter.setPen(Qt::NoPen);
+                    shadePainter.setBrush( shadeGradient );
+                    shadePainter.drawRect( 0, 0, 256, 10 );  
+                    int shadeIndex = 120 + alpha;
+//                    qDebug() << QString("Shade: %1").arg(shadeIndex);
+                    QRgb  palcol = shadeImage.pixel( shadeIndex, 1 );
+
+                if ( filename == filelist[0] ) {
                     if ( i == 0 )
                         out << "		{ 0x" << (uint)palcol << "," << endl;
                     else
                         out << "		0x" << (uint)palcol << "," << endl;
                 }
                 else {
-                    QRgb  palcol = gradimg->pixel(i,1);
-                    int   red   = qRed( palcol ) + 16 - alpha; 
-                    if ( red < 0 ) red = 0;
-                    if ( red > 255 ) red = 255;
-                    int   green   = qGreen( palcol ) + 16 - alpha; 
-                    if ( green < 0 ) green = 0;
-                    if ( green > 255 ) green = 255;
-                    int   blue   = qBlue( palcol ) + 16 - alpha; 
-                    if ( blue < 0 ) blue = 0;
-                    if ( blue > 255 ) blue = 255;
-                    palcol = qRgb( red, green, blue );
-
                     if ( i == 255 ) 
                         out << "		0x" << (uint)palcol << " }," << endl;
                     else
                         out << "		0x" << (uint)palcol << "," << endl;
                     // out << "		" << (uint)gradimg->pixel(i,1) << "," << endl;
-                }
-            }
-*/
-            int  alpha = 2 * j;
-
-            for ( int i = 0; i < 256; ++i) {
-                if ( filename == filelist[0] ) {
-                    QRgb  palcol = gradimg->pixel( i, 1 );
-                    int   red   = ( qRed( palcol ) - alpha > 0
-                                    ? qRed( palcol ) - alpha : 0 );
-                    int   green = ( qGreen( palcol ) - alpha > 0 
-                                    ? qGreen( palcol ) - alpha : 0 );
-                    int   blue  = ( qBlue( palcol ) - alpha > 0
-                                    ? qBlue( palcol ) - alpha : 0 );
-                    palcol = qRgb( red, green, blue );
-
-                    if ( i == 0 )
-                        out << "        { 0x" << (uint)palcol << "," << endl;
-                    else
-                        out << "        0x" << (uint)palcol << "," << endl;
-                }
-                else {
-                    QRgb  palcol = gradimg->pixel(i,1);
-                    int     red = ( qRed( palcol ) - alpha > 0
-                                    ? qRed( palcol ) - alpha : 0 );
-                    int   green = ( qGreen( palcol ) - alpha  > 0
-                                    ? qGreen( palcol ) - alpha : 0 );
-                    int   blue  = ( qBlue( palcol ) - alpha > 0
-                                    ? qBlue( palcol ) - alpha : 0 );
-                    palcol = qRgb( red, green, blue );
-
-                    if ( i == 255 ) 
-                        out << "        0x" << (uint)palcol << " }," << endl;
-                    else
-                        out << "        0x" << (uint)palcol << "," << endl;
-                    // out << "     " << (uint)gradimg->pixel(i,1) << "," << endl;
                 }
             }
         }

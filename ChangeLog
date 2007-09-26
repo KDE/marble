@@ -1,4 +1,12 @@
 2007-09-26  Torsten Rahn  <rahn@kde.org>
+	* src/lib/TextureColorizer.cpp:
+	* src/lib/texturepalette.cpp:
+	* src/lib/MarbleModel.h:
+	* tools/palettegen/palettegen.cpp:
+	- Highlights for mountains
+	- Fixed bug introduced by ingwa
+
+2007-09-26  Torsten Rahn  <rahn@kde.org>
 	* src/lib/PlaceMarkLayout.{h,cpp}:
 	- Adding placeMarksOnScreenLimit()
 
