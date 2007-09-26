@@ -99,6 +99,8 @@ class PlaceMarkLayout : public QObject
                          const int x, const int y,
                          const int textwidth );
 
+    int    placeMarksOnScreenLimit() const;
+
  private:
     PlaceMarkPainter *m_placeMarkPainter;
 
@@ -108,6 +110,7 @@ class PlaceMarkLayout : public QObject
     QFont  m_font_mountain;
 
     QVector<VisiblePlaceMark*> m_paintOrder;
+    QVector<VisiblePlaceMark*> m_placeMarkPool;
     QHash<QPersistentModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
 
     int     m_fontheight;

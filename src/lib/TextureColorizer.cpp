@@ -75,15 +75,16 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
         for (int y = yTop; y < yBottom; ++y) {
 
-            QRgb  *data = (QRgb*)( origimg->scanLine( y ) );
-            const QRgb  *coastdata = (QRgb*)( coastimg->scanLine( y ) );
+            QRgb  *writeData = (QRgb*)( origimg->scanLine( y ) );
+            uchar  *readData = origimg->scanLine( y );
+            const QRgb  *coastData = (QRgb*)( coastimg->scanLine( y ) );
 
             emboss.buffer = 0;
 		
-            for ( int x = 0; x < imgwidth ; ++x, ++data, ++coastdata ) {
+            for ( int x = 0; x < imgwidth ; ++x, ++writeData, ++coastData, readData+=4 ) {
 
                 // Cheap Embosss / Bumpmapping
-                const uchar  grey = *data & 0x000000ff; // qBlue(*data);
+                const uchar  grey = *readData; // qBlue(*data);
 
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
@@ -106,13 +107,13 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 else
                     bump = 8;
 */
-                if ( *coastdata == landoffscreen )
-                    *data = texturepalette[bump][grey + 0x100]; 
+                if ( *coastData == landoffscreen )
+                    *writeData = texturepalette[bump][grey + 0x100]; 
                 else {
-                    if (*coastdata == lakeoffscreen)
-                    *data = texturepalette[bump][0x055];
+                    if (*coastData == lakeoffscreen)
+                    *writeData = texturepalette[bump][0x055];
                     else {
-                        *data = texturepalette[bump][grey];
+                        *writeData = texturepalette[bump][grey];
                     }
                 }
             }
@@ -133,18 +134,19 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 xright = imgrx + rx;
             }
 
-            QRgb       *data      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
-            const QRgb *coastdata = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
+            QRgb  *writeData      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
+            uchar  *readData          = origimg->scanLine( y ) + xleft*4;
+            const QRgb *coastData = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
 
             double  relief = imgrx - xleft + bendReliefm * dy ;
  
             for ( int x = xleft;
                   x < xright;
-                  ++x, ++data, ++coastdata, relief -= 1.0 )
+                  ++x, ++writeData, ++coastData, readData+=4, relief -= 1.0 )
             {
                 // Cheap Embosss / Bumpmapping
 
-                const uchar grey = *data & 0x000000ff; // qBlue(*data);
+                const uchar grey = *readData; // qBlue(*data);
 
                 emboss.buffer = emboss.buffer >> 8;
                 emboss.gpuint.x4 = grey;	
@@ -178,13 +180,13 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     bump = 0;
 */
 
-                if ( *coastdata == landoffscreen )
-                    *data = texturepalette[bump][grey + 0x100];	
+                if ( *coastData == landoffscreen )
+                    *writeData = texturepalette[bump][grey + 0x100];	
                 else {
-                    if (*coastdata == lakeoffscreen)
-                    *data = texturepalette[bump][0x055];
+                    if (*coastData == lakeoffscreen)
+                    *writeData = texturepalette[bump][0x055];
                     else {
-                        *data = texturepalette[bump][grey];
+                        *writeData = texturepalette[bump][grey];
                     }
                 }
             }

@@ -1,3 +1,10 @@
+2007-09-26  Torsten Rahn  <rahn@kde.org>
+	* src/lib/PlaceMarkLayout.{h,cpp}:
+	- Adding placeMarksOnScreenLimit()
+
+	* src/lib/TextureColorizer.cpp:
+	- Optimization
+
 2007-09-25  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/PlaceMarkLayout.cpp:

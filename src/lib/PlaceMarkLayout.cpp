@@ -29,7 +29,6 @@
 #include "ViewParams.h"
 #include "VisiblePlaceMark.h"
 
-static const int  maxlabels = 100;
 static const double s_labelOutlineWidth = 2.5;
 
 PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
@@ -55,7 +54,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
     m_labelareaheight = 2 * m_fontheight;
-/*
+
 //  Old weightfilter array. Still here 
 // to be able to compare performance
 
@@ -79,7 +78,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
         << 400
         << 200
         << 0;
-*/
+/*
     m_weightfilter
         << 49300
         << 40300
@@ -100,7 +99,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
         << 800
         << 300
         << 0;
-
+*/
     m_placeMarkPainter =  new PlaceMarkPainter( this );
 }
 
@@ -210,10 +209,10 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
-        // specified by "maxlabels".
+        // specified by placeMarksOnScreenLimit().
 
         ++labelnum;
-        if ( labelnum >= maxlabels )
+        if ( labelnum >= placeMarksOnScreenLimit() )
             break;
         if ( !mark )
         {
@@ -325,10 +324,10 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
-        // specified by "maxlabels".
+        // specified by placeMarksOnScreenLimit().
 
         ++labelnum;
-        if ( labelnum >= maxlabels )
+        if ( labelnum >= placeMarksOnScreenLimit() )
             break;
 
         if ( !mark )
@@ -522,5 +521,11 @@ QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
     return QRect(); // At this point there is no space left 
                     // for the rectangle anymore.
 }
+
+int PlaceMarkLayout::placeMarksOnScreenLimit() const
+{
+    return 100;
+}
+
 
 #include "PlaceMarkLayout.moc"
