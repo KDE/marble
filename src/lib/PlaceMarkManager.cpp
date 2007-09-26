@@ -245,9 +245,9 @@ void PlaceMarkManager::saveFile( const QString& filename,
         out << QString( (*it) -> role() );
         out << QString( (*it) -> description() );
         out << QString( (*it) -> countryCode() );
-        out << (qint32)(*it) -> populationIndex();
+        out << (qint32)(*it) -> popularityIndex();
         out << (qint32)(*it) -> symbolIndex();
-        out << (qint32)(*it) -> population();
+        out << (qint32)(*it) -> popularity();
     }
 }
 
@@ -304,11 +304,11 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         in >> tmpstr;
         mark -> setCountryCode( tmpstr );
         in >> a;
-        mark -> setPopulationIndex( a );
+        mark -> setPopularityIndex( a );
         in >> a;
         mark -> setSymbolIndex( a );
         in >> a;
-        mark -> setPopulation( a );
+        mark -> setPopularity( a );
 
         placeMarkContainer -> append( mark );
     }

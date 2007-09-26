@@ -47,8 +47,8 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
       CountryCodeRole,                 ///< The country code
       SymbolIndexRole,                 ///< The symbol index
       SymbolSizeRole,                  ///< The symbol size
-      PopulationIndexRole,             ///< The population index
-      PopulationRole                   ///< The population
+      PopularityIndexRole,             ///< The popularity index
+      PopularityRole                   ///< The popularity
     };
 
     /**

@@ -18,17 +18,17 @@
 #include "PlaceMark.h"
 
 PlaceMark::PlaceMark()
-  : m_population( 0 ),
+  : m_popularity( 0 ),
     m_symbolIndex( 0 ),
-    m_populationIndex( 0 )
+    m_popularityIndex( 0 )
 {
 }
 
 PlaceMark::PlaceMark( const QString& name )
   : KMLFeature( name ),
-    m_population( 0 ),
+    m_popularity( 0 ),
     m_symbolIndex( 0 ),
-    m_populationIndex( 0 )
+    m_popularityIndex( 0 )
 {
 }
 
@@ -77,24 +77,24 @@ void PlaceMark::setSymbolIndex( int index )
     m_symbolIndex = index;
 }
 
-const int PlaceMark::populationIndex() const
+const int PlaceMark::popularityIndex() const
 {
-    return m_populationIndex;
+    return m_popularityIndex;
 }
 
-void PlaceMark::setPopulationIndex( int populationIndex )
+void PlaceMark::setPopularityIndex( int popularityIndex )
 {
-    m_populationIndex = populationIndex;
+    m_popularityIndex = popularityIndex;
 }
 
-const int PlaceMark::population() const
+const int PlaceMark::popularity() const
 {
-    return m_population;
+    return m_popularity;
 }
 
-void PlaceMark::setPopulation( int population )
+void PlaceMark::setPopularity( int popularity )
 {
-    m_population = population;
+    m_popularity = popularity;
 }
 
 const QSize PlaceMark::symbolSize() const
@@ -176,9 +176,9 @@ void PlaceMark::pack( QDataStream& stream ) const
 {
     KMLFeature::pack( stream );
 
-    stream << m_population;
+    stream << m_popularity;
     stream << m_symbolIndex;
-    stream << m_populationIndex;
+    stream << m_popularityIndex;
     stream << m_role;
     stream << m_countrycode;
 
@@ -198,9 +198,9 @@ void PlaceMark::unpack( QDataStream& stream )
 {
     KMLFeature::unpack( stream );
 
-    stream >> m_population;
+    stream >> m_popularity;
     stream >> m_symbolIndex;
-    stream >> m_populationIndex;
+    stream >> m_popularityIndex;
     stream >> m_role;
     stream >> m_countrycode;
 

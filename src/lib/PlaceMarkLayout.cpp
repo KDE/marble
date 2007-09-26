@@ -245,9 +245,9 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
      * Now handle all other place marks...
      */
     const QModelIndex firstIndex = model->index( 0, 0 );
-    const int firstPopulation = firstIndex.data( PlaceMarkModel::PopulationRole ).toInt();
-    const bool  noFilter = ( firstPopulation == 0 
-                             || ( firstPopulation != 0
+    const int firstPopularity = firstIndex.data( PlaceMarkModel::PopularityRole ).toInt();
+    const bool  noFilter = ( firstPopularity == 0 
+                             || ( firstPopularity != 0
                              && firstIndex.data( PlaceMarkModel::GeoTypeRole ).toChar().isNull() ) ) 
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
@@ -256,14 +256,14 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     {
         QModelIndex index = model->index( i, 0 );
 
-        int populationIndex = index.data( PlaceMarkModel::PopulationIndexRole ).toInt();
+        int popularityIndex = index.data( PlaceMarkModel::PopularityIndexRole ).toInt();
 
         // Skip the places that are too small.
         if ( noFilter == false ) {
-            if ( m_weightfilter.at( populationIndex ) > viewParams->m_radius )
+            if ( m_weightfilter.at( popularityIndex ) > viewParams->m_radius )
             {
 //            qDebug() << QString("Filter: %1 Radius: %2")
-//            .arg(m_weightfilter.at( populationIndex )).arg(viewParams->m_radius);
+//            .arg(m_weightfilter.at( popularityIndex )).arg(viewParams->m_radius);
                 break;
             }
         }

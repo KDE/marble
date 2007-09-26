@@ -90,27 +90,27 @@ class PlaceMark : public KMLFeature
     void setSymbolIndex( int index );
 
     /**
-     * Returns the population index of the place mark.
+     * Returns the popularity index of the place mark.
      *
-     * The population index is a value which describes
+     * The popularity index is a value which describes
      * at which zoom level the place mark will be shown.
      */
-    const int populationIndex() const;
+    const int popularityIndex() const;
 
     /**
-     * Sets the population @p index of the place mark.
+     * Sets the popularity @p index of the place mark.
      */
-    void setPopulationIndex( int index );
+    void setPopularityIndex( int index );
 
     /**
-     * Returns the population of the place mark.
+     * Returns the popularity of the place mark.
      */
-    const int population() const;
+    const int popularity() const;
 
     /**
-     * Sets the @p population of the place mark.
+     * Sets the @p popularity of the place mark.
      */
-    void setPopulation( int population );
+    void setPopularity( int popularity );
 
     /**
      * Returns the symbol size of the place mark.
@@ -133,11 +133,11 @@ class PlaceMark : public KMLFeature
     GeoPoint m_coordinate;
     QChar m_role;
     QString m_countrycode;
-    int m_population;
+    int m_popularity;
 
     // View specific data
     int m_symbolIndex;
-    int m_populationIndex;
+    int m_popularityIndex;
 };
 
 #endif // PLACEMARK_H

@@ -124,10 +124,10 @@ bool XmlHandler::endElement( const QString&, const QString&,
         else if ( m_placemark->role() == 'H' ) m_placemark->setSymbolIndex(18);
         else if ( m_placemark->role() == 'V' ) m_placemark->setSymbolIndex(19);
         else if ( m_placemark->role() == 'F' ) m_placemark->setSymbolIndex(20);
-        else if ( m_placemark->role() == 'N' ) m_placemark->setSymbolIndex( ( m_placemark->populationIndex() -1 ) / 4 * 4 );
-        else if ( m_placemark->role() == 'R' ) m_placemark->setSymbolIndex( ( m_placemark->populationIndex() -1 ) / 4 * 4 + 2);
+        else if ( m_placemark->role() == 'N' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 );
+        else if ( m_placemark->role() == 'R' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 2);
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' )
-            m_placemark->setSymbolIndex( ( m_placemark->populationIndex() -1 ) / 4 * 4 + 3 );
+            m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 3 );
         else if ( m_placemark->role().isNull() && !m_hasPopulation )
             m_placemark->setSymbolIndex(21);
 
@@ -160,11 +160,11 @@ bool XmlHandler::endElement( const QString&, const QString&,
         else
             population = m_currentText.toInt();
 
-        m_placemark->setPopulation( population );
+        m_placemark->setPopularity( population );
 
         // else if(population < 7500000) popidx=15;
 
-        m_placemark->setPopulationIndex( popIdx( population ) );
+        m_placemark->setPopularityIndex( popIdx( population ) );
     }
 
     if ( m_inKml && nameLower == "point" ) {
@@ -183,8 +183,8 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
         if ( splitline.size() == 3 ) {
             int elevation = splitline[2].toInt();
-            m_placemark->setPopulation( elevation*1000 );
-            m_placemark->setPopulationIndex( popIdx( abs(elevation*1000) ) );
+            m_placemark->setPopularity( elevation*1000 );
+            m_placemark->setPopularityIndex( popIdx( abs(elevation*1000) ) );
         }
 
         m_coordsset = true;

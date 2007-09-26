@@ -71,7 +71,7 @@ void PlaceMarkInfoDialog::showContent()
         rolestring = tr("Location");
         break;
     case 'H':
-        if ( m_index.data( PlaceMarkModel::PopulationRole ).toInt() > 0 )
+        if ( m_index.data( PlaceMarkModel::PopularityRole ).toInt() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
@@ -97,13 +97,13 @@ void PlaceMarkInfoDialog::showContent()
     coordinates_val_lbl->setText( m_index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().toString() );
     country_val_lbl->setText( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
-    const int population = m_index.data( PlaceMarkModel::PopulationRole ).toInt();
+    const int popularity = m_index.data( PlaceMarkModel::PopularityRole ).toInt();
     const QChar role = m_index.data( PlaceMarkModel::GeoTypeRole ).toChar();
     if ( role == 'H' || role == 'V' ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
 
-        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( population / 1000 ) ) );
+        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( popularity / 1000 ) ) );
     }
     else if ( role == 'P' || role == 'M' ) {
         population_val_lbl->setVisible( false );
@@ -112,7 +112,7 @@ void PlaceMarkInfoDialog::showContent()
         elevation_lbl->setVisible( false );
     }
     else{
-        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( population ) ) );
+        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( popularity ) ) );
         elevation_val_lbl->setText( tr("-") );
     }
 

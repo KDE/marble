@@ -27,7 +27,7 @@ inline bool populationLessThan( PlaceMark* mark1, PlaceMark* mark2 )
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.
-    return (mark1->population() > mark2->population());
+    return (mark1->popularity() > mark2->popularity());
 }
 
 
