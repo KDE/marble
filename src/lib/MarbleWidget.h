@@ -112,6 +112,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
     Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
     Q_PROPERTY(bool showTerrain  READ showTerrain     WRITE setShowTerrain)
+    Q_PROPERTY(bool showOtherPlaces READ showOtherPlaces WRITE setShowOtherPlaces)
 
     Q_PROPERTY(bool showRelief   READ showRelief      WRITE setShowRelief)
     Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
@@ -311,6 +312,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The terrain place mark visibility.
      */
     bool  showTerrain() const;
+
+    /**
+     * @brief  Return whether other places are visible.
+     * @return The visibility of other places.
+     */
+    bool  showOtherPlaces() const;
 
     /**
      * @brief  Return whether the relief is visible.
@@ -594,6 +601,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the terrain place marks
      */
     void setShowTerrain( bool visible );
+
+    /**
+     * @brief  Set whether the other places overlay is visible
+     * @param  visible  visibility of other places
+     */
+    void setShowOtherPlaces( bool visible );
 
     /**
      * @brief  Set whether the relief is visible

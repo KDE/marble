@@ -119,17 +119,18 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
     if ( m_inKml && nameLower == "placemark" ) {
 
-        if ( m_placemark->role() == 'P' )      m_placemark->setSymbolIndex(16);
-        else if ( m_placemark->role() == 'M' ) m_placemark->setSymbolIndex(17);
-        else if ( m_placemark->role() == 'H' ) m_placemark->setSymbolIndex(18);
-        else if ( m_placemark->role() == 'V' ) m_placemark->setSymbolIndex(19);
-        else if ( m_placemark->role() == 'F' ) m_placemark->setSymbolIndex(20);
+        if ( m_placemark->role() == 'H' ) m_placemark->setSymbolIndex(16);
+        else if ( m_placemark->role() == 'V' ) m_placemark->setSymbolIndex(17);
+        else if ( m_placemark->role() == 'P' ) m_placemark->setSymbolIndex(18);
+        else if ( m_placemark->role() == 'M' ) m_placemark->setSymbolIndex(19);
+        else if ( m_placemark->role() == 'W' ) m_placemark->setSymbolIndex(20);
+        else if ( m_placemark->role() == 'F' ) m_placemark->setSymbolIndex(21);
         else if ( m_placemark->role() == 'N' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 );
         else if ( m_placemark->role() == 'R' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 2);
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' )
             m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 3 );
         else if ( m_placemark->role().isNull() && !m_hasPopulation )
-            m_placemark->setSymbolIndex(21);
+            m_placemark->setSymbolIndex(22);
 
         if ( m_coordsset == true )
             m_placeMarkContainer->append( m_placemark );
@@ -220,6 +221,8 @@ int XmlHandler::popIdx( int population )
     else if ( population < 1000000) popidx=12;
     else if ( population < 2500000) popidx=13;
     else if ( population < 5000000) popidx=14;
+
+    if ( m_placemark->role() == 'W' && popidx > 12 ) popidx = 12;
 
     return popidx;
 }

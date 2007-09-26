@@ -84,6 +84,7 @@ class ViewParams
 
     bool        m_showCities;   // About placemarks
     bool        m_showTerrain;
+    bool        m_showOtherPlaces;
     
     bool        m_showGps; //for gps layer
 

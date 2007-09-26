@@ -40,6 +40,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void setCheckedBorders( bool checked );
     void setCheckedWaterBodies( bool checked );
     void setCheckedIceLayer( bool checked );
+    void setCheckedOtherPlaces( bool checked );
     void setCheckedGrid( bool checked );
     void setCheckedRelief( bool checked );
     void setCheckedCompass( bool checked );
@@ -51,6 +52,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledTerrain( bool );
     void toggledBorders( bool );
     void toggledWaterBodies( bool );
+    void toggledOtherPlaces( bool );
     void toggledIceLayer( bool );
     void toggledGrid( bool );
     void toggledRelief( bool );

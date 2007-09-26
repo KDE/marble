@@ -322,6 +322,11 @@ bool MarbleWidget::showTerrain() const
     return d->m_viewParams.m_showTerrain;
 }
 
+bool MarbleWidget::showOtherPlaces() const
+{
+    return d->m_viewParams.m_showOtherPlaces;
+}
+
 bool MarbleWidget::showRelief() const
 {
     return d->m_viewParams.m_showRelief;
@@ -1051,6 +1056,12 @@ void MarbleWidget::setShowCities( bool visible )
 void MarbleWidget::setShowTerrain( bool visible )
 {
     d->m_viewParams.m_showTerrain = visible;
+    repaint();
+}
+
+void MarbleWidget::setShowOtherPlaces( bool visible )
+{
+    d->m_viewParams.m_showOtherPlaces = visible;
     repaint();
 }
 

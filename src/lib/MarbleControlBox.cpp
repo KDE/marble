@@ -230,6 +230,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->uiWidget.marbleLegendBrowser->setCheckedBorders( d->m_widget->showBorders() );
     d->uiWidget.marbleLegendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
                                                       && d->m_widget->showRivers() );
+    d->uiWidget.marbleLegendBrowser->setCheckedOtherPlaces( d->m_widget->showOtherPlaces() );
     d->uiWidget.marbleLegendBrowser->setCheckedGrid( d->m_widget->showGrid() );
     d->uiWidget.marbleLegendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
     d->uiWidget.marbleLegendBrowser->setCheckedRelief( d->m_widget->showRelief() );
@@ -272,6 +273,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget,                     SLOT( setShowRivers( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
              d->m_widget,                     SLOT( setShowLakes( bool ) ) );
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledOtherPlaces( bool ) ),
+             d->m_widget,                     SLOT( setShowOtherPlaces( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledGrid( bool ) ),
              d->m_widget,                     SLOT( setShowGrid( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledIceLayer( bool ) ),

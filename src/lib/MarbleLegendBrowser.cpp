@@ -150,6 +150,9 @@ void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
     if ( name == "waterbodies"){
         emit toggledWaterBodies( checked );
     }
+    if ( name == "otherplaces"){
+        emit toggledOtherPlaces( checked );
+    }
     if ( name == "grid"){
         emit toggledGrid( checked );
     }
@@ -195,6 +198,11 @@ void MarbleLegendBrowser::setCheckedBorders( bool checked )
 void MarbleLegendBrowser::setCheckedWaterBodies( bool checked )
 {
     d->m_checkBoxMap[ "waterbodies" ] = checked;
+}
+
+void MarbleLegendBrowser::setCheckedOtherPlaces( bool checked )
+{
+    d->m_checkBoxMap[ "otherplaces" ] = checked;
 }
 
 void MarbleLegendBrowser::setCheckedIceLayer( bool checked )

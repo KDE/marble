@@ -79,10 +79,14 @@ void PlaceMarkInfoDialog::showContent()
     case 'V':
         rolestring = tr("Volcano");
         break;
-    default:
+    case 'W':
+        rolestring = tr("Shipwreck");
+        break;
     case 'N':
         rolestring = tr("City");
         break;
+    default:
+        rolestring = tr("Other Place");
     }
 
     role_val_lbl->setText( rolestring );
@@ -99,7 +103,7 @@ void PlaceMarkInfoDialog::showContent()
 
     const int popularity = m_index.data( PlaceMarkModel::PopularityRole ).toInt();
     const QChar role = m_index.data( PlaceMarkModel::GeoTypeRole ).toChar();
-    if ( role == 'H' || role == 'V' ) {
+    if ( role == 'H' || role == 'V' || role == 'W') {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
 

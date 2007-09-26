@@ -57,7 +57,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
 
 //  Old weightfilter array. Still here 
 // to be able to compare performance
-
+/*
     m_weightfilter
         << 9999
         << 4200
@@ -78,7 +78,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
         << 400
         << 200
         << 0;
-/*
+*/
     m_weightfilter
         << 49300
         << 40300
@@ -99,7 +99,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
         << 800
         << 300
         << 0;
-*/
+
     m_placeMarkPainter =  new PlaceMarkPainter( this );
 }
 
@@ -285,8 +285,13 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
-             && ( symbolIndex >= 16 && symbolIndex <= 20 ) )
+             && ( symbolIndex >= 16 && symbolIndex <= 17 ) )
             continue;
+
+        if ( !viewParams->m_showOtherPlaces
+             && ( symbolIndex >= 18 && symbolIndex <= 21 ) )
+            continue;
+
 
         const bool isSelected = selection.contains( index );
 

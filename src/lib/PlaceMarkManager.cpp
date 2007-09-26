@@ -58,6 +58,7 @@ void PlaceMarkManager::loadStandardPlaceMarks()
     addPlaceMarkFile( "cityplacemarks" );
     addPlaceMarkFile( "baseplacemarks" );
     addPlaceMarkFile( "elevplacemarks" );
+    addPlaceMarkFile( "otherplacemarks" );
 }
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )

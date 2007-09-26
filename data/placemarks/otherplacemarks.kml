@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+<Document>
+    <SimpleField> 
+        <name>pop</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>state</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>country</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>role</name> 
+        <type>string</type> 
+    </SimpleField> 
+
+    <Placemark> 
+        <name>RMS Titanic</name> 
+        <description>British ocean liner that collided with an iceberg in 1912. At that time the RMS Titanic was on her maiden voyage from Southampton to New York. Of the 2,228 passengers and crew on board, only 705 did survive.</description> 
+        <role>W</role> 
+        <Point>
+            <coordinates>-49.947, 41.725,-3925</coordinates> 
+        </Point> 
+    </Placemark> 
+</Document>
+</kml> 

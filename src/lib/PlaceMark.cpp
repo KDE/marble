@@ -100,7 +100,7 @@ void PlaceMark::setPopularity( int popularity )
 const QSize PlaceMark::symbolSize() const
 {
 
-    static QSize placeSize[ 22 ] = {
+    static QSize placeSize[ 23 ] = {
         QSize( 5, 5 ),
         QSize( 5, 5 ),
         QSize( 5, 5 ),
@@ -121,11 +121,12 @@ const QSize PlaceMark::symbolSize() const
         QSize( 8, 8 ),
         QSize( 8, 8 ),
         
+        QSize( 8, 8 ),
+        QSize( 8, 8 ),
         QSize( 5, 5 ),
         QSize( 6, 6 ),
-        QSize( 8, 8 ),
-        QSize( 8, 8 ),
 
+        QSize( 12, 12 ),
         QSize( 12, 12 ),
         QSize( 7, 7 )
     };
@@ -136,7 +137,7 @@ const QSize PlaceMark::symbolSize() const
 
 const QPixmap PlaceMark::symbolPixmap() const
 {
-    static QPixmap placeSymbol[ 22 ] = {
+    static QPixmap placeSymbol[ 23 ] = {
         QPixmap( MarbleDirs::path( "bitmaps/city_4_white.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/city_4_yellow.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/city_4_orange.png" ) ),
@@ -157,11 +158,12 @@ const QPixmap PlaceMark::symbolPixmap() const
         QPixmap( MarbleDirs::path( "bitmaps/city_1_orange.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/city_1_red.png" ) ),
         
-        QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ),
-        QPixmap( MarbleDirs::path( "bitmaps/pole_2.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/mountain_1.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/volcano_1.png" ) ),
+        QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ),
+        QPixmap( MarbleDirs::path( "bitmaps/pole_2.png" ) ),
 
+        QPixmap( MarbleDirs::path( "bitmaps/shipwreck.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/airport.png" ) ),
         QPixmap( MarbleDirs::path( "bitmaps/default_location.png" ) )
     };
