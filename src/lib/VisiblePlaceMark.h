@@ -24,46 +24,91 @@
 
 #include "PlaceMarkModel.h"
 
+/**
+ * @short A class which represents the visible place marks on a map.
+ *
+ * This class is used by PlaceMarkLayout to pass the visible place marks
+ * to the PlaceMarkPainter.
+ */
 class VisiblePlaceMark
 {
  public:
+    /**
+     * Creates a new visible place mark.
+     */
     VisiblePlaceMark();
+
+    /**
+     * Destroys the visible place mark.
+     */
     ~VisiblePlaceMark();
 
-    const QPersistentModelIndex& modelIndex() const { return m_modelIndex; }
-    void setModelIndex( const QPersistentModelIndex &modelIndex ) { m_modelIndex = modelIndex; }
+    /**
+     * Returns the index of the place mark model which
+     * is associated with this visible plave mark.
+     */
+    const QPersistentModelIndex& modelIndex() const;
 
-    const QString name() const
-    {
-        if ( m_name.isEmpty() )
-            m_name = m_modelIndex.data( Qt::DisplayRole ).toString();
+    /**
+     * Sets the @p index of the place mark model which
+     * is associated with this visible plave mark.
+     */
+    void setModelIndex( const QPersistentModelIndex &index );
 
-        return m_name;
-    }
-    const QPixmap& symbolPixmap() const
-    {
-        if ( m_symbolPixmap.isNull() )
-            m_symbolPixmap = m_modelIndex.data( Qt::DecorationRole ).value<QPixmap>();
-        return  m_symbolPixmap;
-    }
-    const QSize& symbolSize() const
-    {
-        if ( !m_symbolSize.isValid() )
-          m_symbolSize = m_modelIndex.data( PlaceMarkModel::SymbolSizeRole ).toSize();
-        return m_symbolSize;
-    }
+    /**
+     * Returns the name of the place mark.
+     */
+    const QString name() const;
 
-    const QPoint& symbolPos() const { return m_symbolPos; }
-    void setSymbolPos( const QPoint& sympos ) { m_symbolPos = sympos; }
+    /**
+     * Returns the pixmap of the place mark symbol.
+     */
+    const QPixmap& symbolPixmap() const;
 
-    const QPixmap& labelPixmap() const { return m_labelPixmap; }
-    void setLabelPixmap( const QPixmap& labelPixmap ) { m_labelPixmap = labelPixmap; }
+    /**
+     * Returns the size of the place mark symbol.
+     */
+    const QSize& symbolSize() const;
 
-    const QFont& labelFont() const { return m_labelFont; }
-    void setLabelFont( const QFont& labelFont ) { m_labelFont = labelFont; }
+    /**
+     * Returns the position of the place mark symbol on the map.
+     */
+    const QPoint& symbolPos() const;
 
-    const QRect& labelRect() const { return m_labelRect; }
-    void setLabelRect( const QRect& labelRect ) { m_labelRect = labelRect; }
+    /**
+     * Sets the position of the place mark symbol on the map.
+     */
+    void setSymbolPos( const QPoint& sympos );
+
+    /**
+     * Returns the pixmap of the place mark name label.
+     */
+    const QPixmap& labelPixmap() const;
+
+    /**
+     * Sets the @p pixmap of the place mark name label.
+     */
+    void setLabelPixmap( const QPixmap& pixmap );
+
+    /**
+     * Returns the font used for the place mark name label.
+     */
+    const QFont& labelFont() const;
+
+    /**
+     * Sets the @p font used for the place mark name label.
+     */
+    void setLabelFont( const QFont& font );
+
+    /**
+     * Returns the area covered by the place mark name label on the map.
+     */
+    const QRect& labelRect() const;
+
+    /**
+     * Sets the @p area covered by the place mark name label on the map.
+     */
+    void setLabelRect( const QRect& area );
 
  private:
     QPersistentModelIndex m_modelIndex;
