@@ -73,12 +73,12 @@ class VisiblePlaceMark
     /**
      * Returns the position of the place mark symbol on the map.
      */
-    const QPoint& symbolPos() const;
+    const QPoint& symbolPosition() const;
 
     /**
-     * Sets the position of the place mark symbol on the map.
+     * Sets the @p position of the place mark symbol on the map.
      */
-    void setSymbolPos( const QPoint& sympos );
+    void setSymbolPosition( const QPoint& position );
 
     /**
      * Returns the pixmap of the place mark name label.
@@ -114,10 +114,10 @@ class VisiblePlaceMark
     QPersistentModelIndex m_modelIndex;
 
     // View stuff
-    QPoint      m_symbolPos;    // position of the placemark's symbol
-    QPixmap     m_labelPixmap;  // the text label (most often name)
-    QFont       m_labelFont;    // the text label font (most often name)
-    QRect       m_labelRect;    // bounding box of label
+    QPoint      m_symbolPosition; // position of the placemark's symbol
+    QPixmap     m_labelPixmap;    // the text label (most often name)
+    QFont       m_labelFont;      // the text label font (most often name)
+    QRect       m_labelRect;      // bounding box of label
 
     mutable QString     m_name;         // cached value
     mutable QSize       m_symbolSize;   // cached value

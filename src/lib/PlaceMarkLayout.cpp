@@ -129,7 +129,7 @@ QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& 
         const VisiblePlaceMark  *mark = *it; // no cast
 
         if ( mark->labelRect().contains( curpos )
-             || QRect( mark->symbolPos(), mark->symbolSize() ).contains( curpos ) ) {
+             || QRect( mark->symbolPosition(), mark->symbolSize() ).contains( curpos ) ) {
             ret.append( mark->modelIndex() );
         }
     }
@@ -226,8 +226,8 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
-                                    y - mark->symbolSize().height() / 2) );
+        mark->setSymbolPosition( QPoint( x - mark->symbolSize().width()  / 2,
+                                         y - mark->symbolSize().height() / 2) );
         mark->setLabelRect( labelRect );
 
         // Add the current placemark to the matching row and it's
@@ -343,8 +343,8 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        mark->setSymbolPos( QPoint( x - mark->symbolSize().width()  / 2,
-                                    y - mark->symbolSize().height() / 2) );
+        mark->setSymbolPosition( QPoint( x - mark->symbolSize().width()  / 2,
+                                         y - mark->symbolSize().height() / 2) );
         mark->setLabelRect( labelRect );
 
         // Add the current placemark to the matching row and it's
@@ -422,6 +422,8 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
 
             return true;
     }
+
+    return true;
 }
 
 // Set font and textWidth according to the type of the PlaceMark.

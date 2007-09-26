@@ -51,14 +51,14 @@ const QSize& VisiblePlaceMark::symbolSize() const
     return m_symbolSize;
 }
 
-const QPoint& VisiblePlaceMark::symbolPos() const
+const QPoint& VisiblePlaceMark::symbolPosition() const
 {
-    return m_symbolPos;
+    return m_symbolPosition;
 }
 
-void VisiblePlaceMark::setSymbolPos( const QPoint& sympos )
+void VisiblePlaceMark::setSymbolPosition( const QPoint& position )
 {
-    m_symbolPos = sympos;
+    m_symbolPosition = position;
 }
 
 const QPixmap& VisiblePlaceMark::labelPixmap() const

@@ -70,7 +70,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                     drawLabelPixmap( mark, isSelected );
                 }
 
-                painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+                painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
                 painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
             }
 
@@ -87,10 +87,10 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                     drawLabelPixmap( mark, isSelected );
                 }
 
-                painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+                painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
                 painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
 
-                int tempSymbol = mark->symbolPos().x();
+                int tempSymbol = mark->symbolPosition().x();
                 int tempText =   mark->labelRect().x();
 
                 for ( int i = tempSymbol - 4 * viewParams->m_radius;
@@ -101,11 +101,11 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                     labelRect.moveLeft(i - tempSymbol + tempText );
                     mark->setLabelRect( labelRect );
 
-                    QPoint symbolPos( mark->symbolPos() );
+                    QPoint symbolPos( mark->symbolPosition() );
                     symbolPos.setX( i );
-                    mark->setSymbolPos( symbolPos );
+                    mark->setSymbolPosition( symbolPos );
 
-                    painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
                     painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
                 }
 
@@ -117,11 +117,11 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                     labelRect.moveLeft(i - tempSymbol + tempText );
                     mark->setLabelRect( labelRect );
 
-                    QPoint symbolPos( mark->symbolPos() );
+                    QPoint symbolPos( mark->symbolPosition() );
                     symbolPos.setX( i );
-                    mark->setSymbolPos( symbolPos );
+                    mark->setSymbolPosition( symbolPos );
 
-                    painter->drawPixmap( mark->symbolPos(), mark->symbolPixmap() );
+                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
                     painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
                 }
             }
