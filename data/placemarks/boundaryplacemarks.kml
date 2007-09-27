@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> 
+<Document>
+    <SimpleField> 
+        <name>pop</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>state</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>country</name> 
+        <type>string</type> 
+    </SimpleField> 
+    <SimpleField> 
+        <name>role</name> 
+        <type>string</type> 
+    </SimpleField> 
+
+    <Placemark> 
+        <name>Asia</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>4010000000</pop> 
+        <Point>
+            <coordinates>87.3311,43.6811</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Africa</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>944000000</pop> 
+        <Point>
+            <coordinates>26.5,5.4</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>North America</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>523000000</pop> 
+        <Point>
+            <coordinates>-99.9992,48.3553</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>South America</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>381000000</pop> 
+        <Point>
+            <coordinates>-56.1006,-15.6011</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Antarctica</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>4000</pop> 
+        <Point>
+            <coordinates>54.9667,-82.1</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Europe</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>733000000</pop> 
+        <Point>
+            <coordinates>16.75,53.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Australia</name> 
+        <description></description> 
+        <role>K</role> 
+        <pop>34000000</pop> 
+        <Point>
+            <coordinates>134.3548,-25.61</coordinates> 
+        </Point> 
+    </Placemark> 
+</Document>
+</kml> 
