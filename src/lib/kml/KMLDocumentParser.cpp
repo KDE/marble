@@ -122,7 +122,7 @@ bool KMLDocumentParser::endElement( const QString& namespaceUri,
         }
     }
     else {
-        bool result = KMLContainerParser::endElement( namespaceUri, localName, qName );
+        result = KMLContainerParser::endElement( namespaceUri, localName, qName );
     }
 
     if ( ! result ) {
