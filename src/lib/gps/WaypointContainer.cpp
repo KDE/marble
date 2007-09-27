@@ -8,7 +8,9 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
+
 #include "WaypointContainer.h"
+
 
 WaypointContainer::WaypointContainer()
 {
@@ -19,8 +21,8 @@ void WaypointContainer::processVisable()
 }
 
 void WaypointContainer::draw( ClipPainter *painter, 
-                             const QSize &canvasSize, double radius,
-                             Quaternion invRotAxis )
+                              const QSize &canvasSize, double radius,
+                              Quaternion invRotAxis )
 {
     const_iterator it;
     bool draw;
@@ -28,14 +30,12 @@ void WaypointContainer::draw( ClipPainter *painter,
 
     painter->setBrush( QBrush( Qt::white ) );
     
-    for( it = this->begin(); it < this->constEnd();
-         it++ )
-    {
+    for ( it = this->begin(); it < this->constEnd(); ++it ) {
         draw = (*it)->getPixelPos( canvasSize, invRotAxis,
                                    (int)radius, &position );
 
         if ( draw ) {
-            ( *it ) -> draw( painter, position );
+            ( *it )->draw( painter, position );
         }
     }
 }

@@ -1,5 +1,16 @@
 2007-09-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Make some files follow the coding standards better.
+	* src/lib/gps/GpxFile.h,
+	* src/lib/gps/RouteContainer.h,
+	* src/lib/gps/Track.h,
+	* src/lib/gps/WaypointContainer.cpp,
+	* src/lib/gps/Waypoint.h,
+	* src/lib/gps/GpxFileModel.cpp,
+	* src/lib/gps/WaypointContainer.h,
+	* src/lib/gps/GpxFileModel.h:
+	Follow coding standards
+	
 	APIDOX
 	* src/lib/MarbleModel.h: More apidox
 	* src/lib/MarbleModel.cpp: Improve comments

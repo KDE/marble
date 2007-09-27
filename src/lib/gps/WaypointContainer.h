@@ -20,6 +20,7 @@ class WaypointContainer : public virtual AbstractLayerContainer
     WaypointContainer();
     WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
     virtual ~WaypointContainer() {}
+
     /*
     virtual void draw ( ClipPainter *painter, const QPoint &point );
     */

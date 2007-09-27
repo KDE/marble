@@ -8,11 +8,15 @@
 // Copyright 2007   Andrew Manson   <g.real.ate@gmail.com>
 //
 
+
 #include "GpxFileModel.h"
-#include <config-marble.h>
+
 #include <QtCore/Qt>
 #include <QtCore/QFile>
 #include <QDebug>
+
+#include <config-marble.h>
+
 
 #ifdef QTONLY
     #include <QtGui/QFileDialog>
@@ -23,7 +27,7 @@
 
 
 GpxFileModel::GpxFileModel( QObject *parent )
- : QAbstractItemModel( parent )
+    : QAbstractItemModel( parent )
 {
     m_data = new QVector<GpxFile*>();
 }
@@ -39,8 +43,8 @@ void    GpxFileModel::saveFile()
     QString fileName;
 #ifdef QTONLY
     fileName = QFileDialog::getSaveFileName( 0, tr("Save File"),
-            QString(),
-            tr("GpxFile (*.gpx)"));
+                                             QString(),
+                                             tr("GpxFile (*.gpx)"));
 #else
     fileName = KFileDialog::getSaveFileName( KUrl(), 
                                              tr("GpxFile (*.gpx)"),
@@ -49,40 +53,36 @@ void    GpxFileModel::saveFile()
 #endif
     
     QFile file( fileName );
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text) ) {
+    if ( !file.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
         return;
     }
 
     QTextStream out(&file);
-    GpxFile* gpxFile =static_cast<GpxFile*>(
-                                  m_selectedIndex.internalPointer() );
+    GpxFile  *gpxFile = static_cast<GpxFile*>( m_selectedIndex.internalPointer() );
     
     out << (*gpxFile);
 }
 
 void    GpxFileModel::closeFile()
 {
-    GpxFile* file =static_cast<GpxFile*>(
+    GpxFile  *file =static_cast<GpxFile*>(
                                   m_selectedIndex.internalPointer() );
     if ( !file->active() ) {
         int index = m_data->indexOf( file );
-        if ( index >-1 ) {
+        if ( index > -1 ) {
             m_data->remove( index );
             emit( layoutChanged() );
             emit( updateRegion( BoundingBox() ) );
         }
-        
     }
 }
 
 Qt::ItemFlags GpxFileModel::flags( const QModelIndex &item ) const
 {
-    return (static_cast<GpxFile*>(item.internalPointer()) ) ->flags()
-;
+    return ( static_cast<GpxFile*>( item.internalPointer() ) )->flags();
 }
 
-QVariant GpxFileModel::data( const QModelIndex &index, int role ) 
-                                                                const
+QVariant GpxFileModel::data( const QModelIndex &index, int role ) const
 {
     if ( !index.isValid() ) {
         return QVariant();
@@ -90,13 +90,11 @@ QVariant GpxFileModel::data( const QModelIndex &index, int role )
     
     if ( role == Qt::DisplayRole ) {
         
-        return static_cast<GpxFile*> ( index.internalPointer() )
-                                                          ->display();
+        return static_cast<GpxFile*> ( index.internalPointer() )->display();
     }
     
     if ( role == Qt::CheckStateRole ) {
-        return static_cast<GpxFile*>( index.internalPointer() )
-                                                     ->checkState();
+        return static_cast<GpxFile*>( index.internalPointer() )->checkState();
     }
     
     return QVariant();
@@ -104,13 +102,14 @@ QVariant GpxFileModel::data( const QModelIndex &index, int role )
 
 bool GpxFileModel::setData ( const QModelIndex &index, 
                              const QVariant &value,
-                             int role = Qt::EditRole )
+                             int role )
 {
     if ( role == Qt::CheckStateRole ) {
         ( static_cast<GpxFile*>( index.internalPointer() ) ) 
                 ->setCheckState( value.toBool() );
         emit ( dataChanged( index, index ) );
         emit ( updateRegion( BoundingBox() ) );
+
         return true;
     }
     

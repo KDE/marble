@@ -29,10 +29,10 @@
  * reception was lost, or the GPS receiver was turned off, start a new
  * Track Segment for each continuous span of track data.
  */
+
 class Track : public AbstractLayerContainer, 
               public AbstractLayerData,
               public GpsElement
-              
 {
  public:
     /**

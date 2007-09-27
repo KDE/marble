@@ -7,14 +7,17 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
+
 #ifndef GPXFILE_H
 #define GPXFILE_H
 
-#include "AbstractLayer/AbstractLayerInterface.h"
 
 #include <QtCore/Qt>
 #include <QtCore/QString>
 #include <QtCore/QTextStream>
+
+#include "AbstractLayer/AbstractLayerInterface.h"
+
 
 class ClipPainter;
 class QPoint;
@@ -27,6 +30,7 @@ class Route;
 class WaypointContainer;
 class TrackContainer;
 class RouteContainer;
+
 
 class GpxFile : public AbstractLayerInterface
 {

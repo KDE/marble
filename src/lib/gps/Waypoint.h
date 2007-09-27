@@ -201,6 +201,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * @brief m_dgpsid setter
      */
     void setDgpsid( const int &gpsdid );
+
  private:
     /**
      * @brief Elevation (in meters) of the waypoint
