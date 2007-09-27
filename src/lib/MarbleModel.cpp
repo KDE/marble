@@ -349,7 +349,9 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the PlaceMark layer
 #ifndef KML_GSOC
-    if ( viewParams->m_showPlaceMarks && d->m_placemarkmodel->rowCount() > 0 ) {
+    if ( viewParams->m_showPlaceMarks && ( viewParams->m_showCities || 
+         viewParams->m_showTerrain || viewParams->m_showOtherPlaces )
+         && d->m_placemarkmodel->rowCount() > 0 ) {
         d->m_placeMarkLayout->paintPlaceFolder( painter,
                                                  viewParams->m_canvasImage->width(),
                                                  viewParams->m_canvasImage->height(),

@@ -39,11 +39,14 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
+    // Disable changing layout due to the ScrollBarPolicy:
+    setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
     setHtml( d->m_html );
     QTextFrameFormat  format = document()->rootFrame()->frameFormat();
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );
+    viewport()->update();
 
     setTextInteractionFlags( Qt::LinksAccessibleByMouse | Qt::LinksAccessibleByKeyboard );
 

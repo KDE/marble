@@ -36,6 +36,7 @@ ViewParams::ViewParams( )
 
     m_showCities         = true;
     m_showTerrain        = true;
+    m_showOtherPlaces    = true;
     
     m_showGps            = false;
 
