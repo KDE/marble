@@ -1206,8 +1206,6 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator, const QString &name
     qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
-// This slot will be called during the tile creation progress.  When
-// the progress goes to 100, the dialog should be closed.
 
 void MarbleWidget::updateChangedMap()
 {

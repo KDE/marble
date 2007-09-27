@@ -1,3 +1,9 @@
+2007-09-26  Inge Wallin  <inge@lysator.liu.se>
+
+	APIDOX
+	* src/lib/MarbleModel.h: More apidox
+	* src/lib/MarbleModel.cpp: Improve comments
+	
 2007-09-26  Torsten Rahn  <rahn@kde.org>
 	
 	- Correct legend terms (deeply sorry for the translation team).

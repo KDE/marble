@@ -185,8 +185,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void        setMinimumZoom( int zoom );
 
-    // FIXME: Apidox
+    /**
+     * @brief return if the widget needs to be updated.
+     */
     bool needsUpdate() const;
+    /**
+     * @brief Mark the widget as needing an update.
+     */
     void setNeedsUpdate();
 
     /**
@@ -231,7 +236,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
                          double& lon, double& lat,
                          GeoPoint::Unit=GeoPoint::Degree);
 
-    // TODO: APIDOCS
+    /**
+     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
+     * @param x  the x coordinate of the pixel
+     * @param y  the y coordinate of the pixel
+     * @return @c true  if the pixel (x, y) is within the globe
+     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
+     */
+    // FIXME: Make the names of globalQuaternion() and
+    //        geoCoordinates() follow a pattern.
     bool    globalQuaternion( int x, int y, Quaternion &q);
 
     /**
@@ -678,8 +691,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void openGpxFile( QString &filename );
 
-    GpxFileModel * gpxFileModel();
+    /**
+     * @brief Return a QAbstractItemModel containing GPX files.
+     */
+    GpxFileModel  *gpxFileModel();
 
+    /**
+     * @brief Return a QAbstractItemModel containing files.
+     */
     FileViewModel* fileViewModel() const;
 
     /**
@@ -708,6 +727,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
+    /**
+     * @brief Update the widget because the mdoel changed.
+     */
     void updateChangedMap();
 
     /**
