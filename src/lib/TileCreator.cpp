@@ -25,8 +25,8 @@
 
 #include "MarbleDirs.h"
 #include "TileLoader.h"
+#include "TextureTile.h"
 
-const int tileDigits = 6;
 const int tileSize   = 675;
 
 TileCreator::TileCreator(const QString& prefix, const QString& installmap,

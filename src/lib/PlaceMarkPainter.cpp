@@ -19,8 +19,6 @@
 #include "ViewParams.h"
 #include "VisiblePlaceMark.h"
 
-static const double s_labelOutlineWidth = 2.5;
-
 PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
     : QObject( parent )
 {

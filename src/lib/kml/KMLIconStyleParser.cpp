@@ -18,7 +18,7 @@
 
 namespace
 {
-    const QString ICON_STYLE_TAG        = "iconstyle";
+    const QString KMLICON_STYLE_TAG        = "iconstyle";
     const QString ICON_TAG              = "icon";
     const QString HREF_TAG              = "href";
 }
@@ -43,7 +43,7 @@ bool KMLIconStyleParser::startElement( const QString& namespaceURI,
     if ( ! result ) {
         QString lowerName = name.toLower();
 
-        if ( lowerName == ICON_STYLE_TAG ) {
+        if ( lowerName == KMLICON_STYLE_TAG ) {
             result = true;
             qDebug("KMLColorStyleParser: Start to parse IconStyle");
         }
@@ -75,7 +75,7 @@ bool KMLIconStyleParser::endElement( const QString& namespaceURI,
 
         switch ( m_phase ) {
             case IDLE:
-                if ( lowerName == ICON_STYLE_TAG ) {
+                if ( lowerName == KMLICON_STYLE_TAG ) {
                     m_parsed = true;
                     result = true;
                     qDebug("KMLColorStyleParser: IconStyle parsed");

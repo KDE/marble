@@ -17,8 +17,6 @@
 #include "MarbleDirs.h"
 #include "TileLoader.h"
 
-const int tileDigits = 6;
-
 
 static uint **jumpTableFromQImage32( QImage &img )
 {

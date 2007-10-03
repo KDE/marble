@@ -23,6 +23,7 @@
 #include <QtGui/QImage>
 #include <QtCore/QString>
 
+const int tileDigits = 6;
 
 class TextureTile : public QObject {
     Q_OBJECT

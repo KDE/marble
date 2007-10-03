@@ -21,7 +21,7 @@ namespace
 {
     const QString DOCUMENT_TAG  = "document";
     const QString KML_TAG       = "kml";
-    const QString STYLE_TAG     = "style";
+    const QString DOCUMENT_STYLE_TAG     = "style";
 }
 
 KMLDocumentParser::KMLDocumentParser( KMLDocument& document )
@@ -82,7 +82,7 @@ bool KMLDocumentParser::startElement( const QString& namespaceUri,
         else if ( lowerName == DOCUMENT_TAG ) {
             result = true;
         }
-        else if ( lowerName == STYLE_TAG ) {
+        else if ( lowerName == DOCUMENT_STYLE_TAG ) {
             if ( m_currentParser != 0 ) {
                 delete m_currentParser;
                 delete m_currentStyle;

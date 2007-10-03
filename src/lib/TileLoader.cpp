@@ -39,8 +39,6 @@
 # endif
 #endif
 
-const int tileDigits = 6;
-
 
 TileLoader::TileLoader( const QString& theme )
 {

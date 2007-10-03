@@ -32,6 +32,8 @@
 class ViewParams;
 class VisiblePlaceMark;
 
+static const double s_labelOutlineWidth = 2.5;
+
 
 class PlaceMarkPainter : public QObject
 {
