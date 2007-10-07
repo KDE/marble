@@ -140,8 +140,8 @@ ENDIF (NOT SVN_MARKER)
 # Add a custom command to drive the svn script whenever the svn entries
 # file changes.
 CONFIGURE_FILE(
-       ${CMAKE_CURRENT_SOURCE_DIR}/cmake_templates/svnscript.cmake.in_cmake
-       ${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake
+       "${CMAKE_CURRENT_SOURCE_DIR}/cmake_templates/svnscript.cmake.in_cmake"
+       "${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake"
        @ONLY)
 
 ADD_CUSTOM_COMMAND (
