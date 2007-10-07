@@ -145,14 +145,14 @@ CONFIGURE_FILE(
        @ONLY)
 
 ADD_CUSTOM_COMMAND (
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h
+  OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h"
   DEPENDS ${SVN_MARKER}
-  COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake
+  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/svnscript.cmake"
 )
 
 # Add a custom target to drive the custom command.
 ADD_CUSTOM_TARGET(svnversion 
-       ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h)
+       ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/marblesvnversion.h")
 
 
 #############################################################
