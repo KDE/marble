@@ -13,6 +13,8 @@
 #include <QtGui/QClipboard>
 #include <QtGui/QLabel>
 #include <QtGui/QFontMetrics>
+#include <QtGui/QPrinter>
+#include <QtGui/QPrintDialog>
 
 #include <kaction.h>
 #include <kactioncollection.h>
@@ -20,7 +22,6 @@
 #include <kcomponentdata.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
-#include <kprinter.h>
 #include <kparts/genericfactory.h>
 #include <kparts/statusbarextension.h>
 #include <kstandardaction.h>
@@ -138,9 +139,11 @@ void MarblePart::printMapScreenShot()
 {
     QPixmap       mapPixmap = m_controlView->mapScreenShot();
     QSize         printSize = mapPixmap.size();
-    KPrinter      printer;
+    QPrinter      printer;
 
-    if ( printer.setup( widget() ) ) {
+    QPrintDialog printDialog( &printer, widget() );
+
+    if ( printDialog.exec() ) {
 
         QRect  mapPageRect = printer.pageRect();
 
