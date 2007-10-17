@@ -176,7 +176,11 @@ else(WIN32 AND QTONLY)
     else (APPLE AND QTONLY)
       #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
       if( NOT QTONLY)
-        install (TARGETS marble DESTINATION ${BIN_INSTALL_DIR} )
+        install (TARGETS marble
+          RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+          LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+          ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+        )
         install( FILES marble.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
         install(FILES marble.kcfg DESTINATION ${KCFG_INSTALL_DIR})
       else( NOT QTONLY)
