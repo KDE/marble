@@ -1,4 +1,5 @@
 /*
+    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
@@ -27,4 +28,14 @@ GeoDataFolder::GeoDataFolder()
 
 GeoDataFolder::~GeoDataFolder()
 {
+    qDebug("GeoDataFolder::~GeoDataFolder(). Subfolders count: %d", m_folderVector.count());
+
+    foreach ( GeoDataFolder* folder, m_folderVector ) {
+        delete folder;
+    }
+}
+
+void GeoDataFolder::addFolder( GeoDataFolder* folder )
+{
+    m_folderVector.append( folder );
 }

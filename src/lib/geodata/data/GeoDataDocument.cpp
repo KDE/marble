@@ -1,4 +1,5 @@
 /*
+    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
@@ -21,6 +22,9 @@
 
 #include "GeoDataDocument.h"
 
+#include "PlaceMark.h"
+#include "GeoDataStyle.h"
+
 GeoDataDocument::GeoDataDocument()
 {
 }
@@ -37,4 +41,18 @@ const QVector<GeoDataFolder>& GeoDataDocument::folders() const
 void GeoDataDocument::addFolder(const GeoDataFolder& folder)
 {
     m_folders.append(folder);
+}
+
+void GeoDataDocument::addStyle( GeoDataStyle* style )
+{
+    qDebug("GeoDataDocument: Add new style");
+    m_styleHash.insert( style->styleId(), style );
+}
+
+const GeoDataStyle& GeoDataDocument::getStyle( QString styleId ) const
+{
+    /*
+     * TODO: m_styleHash always should contain at least default GeoDataStyle element
+     */
+    return *m_styleHash.value( styleId );
 }

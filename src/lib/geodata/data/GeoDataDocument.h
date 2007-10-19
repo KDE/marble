@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
 
     This file is part of the KDE project
 
@@ -19,14 +20,17 @@
     Boston, MA 02111-1307, USA.
 */
 
-#ifndef GeoDataDocument_h
-#define GeoDataDocument_h
+#ifndef GEODATADOCUMENT_H
+#define GEODATADOCUMENT_H
 
 #include <QVector>
+#include <QHash>
 
 #include "GeoDataFolder.h"
 
-class GeoDataDocument {
+class GeoDataStyle;
+
+class GeoDataDocument : public GeoDataFolder {
 public:
     GeoDataDocument();
     ~GeoDataDocument();
@@ -38,9 +42,12 @@ public:
     // Read-write part of the API - to be used within the tag handlers,
     // to fill our document with content.
     void addFolder(const GeoDataFolder&);
+    void addStyle( GeoDataStyle* style );
+    const GeoDataStyle& getStyle( QString styleId ) const;
 
-private:
+  private:
     QVector<GeoDataFolder> m_folders;
+    QHash < QString, GeoDataStyle* > m_styleHash;
 };
 
-#endif // GeoDataDocument_h
+#endif // GEODATADOCUMENT_H

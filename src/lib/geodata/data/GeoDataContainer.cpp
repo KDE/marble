@@ -10,29 +10,29 @@
 
 #include <QtGui/QImage>
 
-#include "KMLContainer.h"
-#include "KMLPlaceMark.h"
+#include "GeoDataContainer.h"
+#include "PlaceMark.h"
 #include "ViewParams.h"
 
-KMLContainer::KMLContainer()
+GeoDataContainer::GeoDataContainer()
 {
 }
 
-KMLContainer::~KMLContainer()
+GeoDataContainer::~GeoDataContainer()
 {
-    qDebug("KMLContainer::~KMLContainer(). Object count: %d", m_placemarkVector.count());
+    qDebug("GeoDataContainer::~GeoDataContainer(). Object count: %d", m_placemarkVector.count());
 
-    foreach ( KMLPlaceMark* placemark, m_placemarkVector ) {
+    foreach ( GeoDataPlaceMark* placemark, m_placemarkVector ) {
         delete placemark;
     }
 }
 
-void KMLContainer::addPlaceMark( KMLPlaceMark* placemark )
+void GeoDataContainer::addPlaceMark( GeoDataPlaceMark* placemark )
 {
     m_placemarkVector.append( placemark );
 }
 
-PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& viewParams )
+PlaceMarkContainer& GeoDataContainer::activePlaceMarkContainer( const ViewParams& viewParams )
 {
     switch( viewParams.m_projection ) {
         case Spherical:
@@ -48,7 +48,7 @@ PlaceMarkContainer& KMLContainer::activePlaceMarkContainer( const ViewParams& vi
     return sphericalActivePlaceMarkContainer(viewParams);
 }
 
-PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )
+PlaceMarkContainer& GeoDataContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )
 {
     m_activePlaceMarkContainer.clear ();
 
@@ -61,12 +61,12 @@ PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewP
     Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
     Quaternion  qpos;
 
-    QVector < KMLPlaceMark* >::const_iterator  it;
+    QVector < GeoDataPlaceMark* >::const_iterator  it;
     for ( it = m_placemarkVector.constBegin();
           it != m_placemarkVector.constEnd();
           it++ )
     {
-        KMLPlaceMark* placemark = *it;
+        GeoDataPlaceMark* placemark = *it;
         qpos = placemark->coordinate().quaternion();
 
         qpos.rotateAroundAxis(invplanetAxis);
@@ -83,11 +83,11 @@ PlaceMarkContainer& KMLContainer::sphericalActivePlaceMarkContainer( const ViewP
         }
     }
 
-    qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
+    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
     return m_activePlaceMarkContainer;
 }
 
-PlaceMarkContainer& KMLContainer::rectangularActivePlaceMarkContainer( const ViewParams& viewParams )
+PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const ViewParams& viewParams )
 {
     m_activePlaceMarkContainer.clear ();
 
@@ -103,12 +103,12 @@ PlaceMarkContainer& KMLContainer::rectangularActivePlaceMarkContainer( const Vie
     float const centerLat =  viewParams.m_planetAxis.pitch();
     float const centerLon = -viewParams.m_planetAxis.yaw();
 
-    QVector < KMLPlaceMark* >::const_iterator  it;
+    QVector < GeoDataPlaceMark* >::const_iterator  it;
     for ( it = m_placemarkVector.constBegin();
           it != m_placemarkVector.constEnd();
           it++ )
     {
-        KMLPlaceMark* placemark = *it;
+        GeoDataPlaceMark* placemark = *it;
         qpos = placemark->coordinate().quaternion();
 
         double xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
@@ -126,34 +126,34 @@ PlaceMarkContainer& KMLContainer::rectangularActivePlaceMarkContainer( const Vie
         }
     }
 
-    qDebug("KMLDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
+    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
     return m_activePlaceMarkContainer;
 }
 
-void KMLContainer::pack( QDataStream& stream ) const
+void GeoDataContainer::pack( QDataStream& stream ) const
 {
-    KMLFeature::pack( stream );
+    GeoDataFeature::pack( stream );
 
     stream << m_placemarkVector.count();
 
-    for ( QVector <KMLPlaceMark*>::const_iterator iterator = m_placemarkVector.constBegin();
+    for ( QVector <GeoDataPlaceMark*>::const_iterator iterator = m_placemarkVector.constBegin();
           iterator != m_placemarkVector.end();
           iterator++ )
     {
-        const KMLPlaceMark& placemark = * ( *iterator );
+        const GeoDataPlaceMark& placemark = * ( *iterator );
         placemark.pack( stream );
     }
 }
 
-void KMLContainer::unpack( QDataStream& stream )
+void GeoDataContainer::unpack( QDataStream& stream )
 {
-    KMLFeature::unpack( stream );
+    GeoDataFeature::unpack( stream );
 
     int count;
     stream >> count;
 
     for ( int i = 0; i < count; ++i ) {
-        KMLPlaceMark* placemark = new KMLPlaceMark();
+        GeoDataPlaceMark* placemark = new GeoDataPlaceMark();
         placemark->unpack( stream );
 
         m_placemarkVector.append( placemark );

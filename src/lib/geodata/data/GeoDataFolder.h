@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright     2007 Murad Tagirov <tmurad@gmail.com>
 
     This file is part of the KDE project
 
@@ -19,15 +20,20 @@
     Boston, MA 02111-1307, USA.
 */
 
-#ifndef GeoDataFolder_h
-#define GeoDataFolder_h
+#ifndef GEODATAFOLDER_H
+#define GEODATAFOLDER_H
 
-class GeoDataFolder {
-public:
+#include "GeoDataContainer.h"
+
+class GeoDataFolder : public GeoDataContainer{
+ public:
     GeoDataFolder();
     ~GeoDataFolder();
 
-    // TODO: Add data.
+    void addFolder( GeoDataFolder* folder );
+
+ protected:
+    QVector <GeoDataFolder*> m_folderVector;
 };
 
-#endif // GeoDataFolder_h
+#endif // GEODATAFOLDER_H

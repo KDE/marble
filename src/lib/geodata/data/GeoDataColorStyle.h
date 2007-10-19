@@ -21,6 +21,11 @@ class GeoDataColorStyle : public GeoDataObject
     void setColor( const QColor &value );
     QColor color() const;
 
+    enum ColorMode{Normal, Random};
+
+    void setColorMode( const ColorMode &colorMode );
+    ColorMode colorMode() const;
+
     /*
      * Serializable methods
      */
@@ -32,6 +37,7 @@ class GeoDataColorStyle : public GeoDataObject
 
   protected:
     QColor m_color;
+    ColorMode m_colorMode;
 };
 
 #endif // GEODATACOLORSTYLE_H

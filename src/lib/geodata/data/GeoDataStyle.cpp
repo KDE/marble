@@ -9,28 +9,28 @@
 //
 
 
-#include "KMLStyle.h"
+#include "GeoDataStyle.h"
 
-KMLStyle::KMLStyle()
+GeoDataStyle::GeoDataStyle()
 {
 }
 
-KMLIconStyle& KMLStyle::getIconStyle()
+GeoDataIconStyle& GeoDataStyle::getIconStyle()
 {
     return m_iconStyle;
 }
 
-void KMLStyle::pack( QDataStream& stream ) const
+void GeoDataStyle::pack( QDataStream& stream ) const
 {
-    KMLStyleSelector::pack( stream );
+    GeoDataStyleSelector::pack( stream );
 
     m_iconStyle.pack( stream );
     m_labelStyle.pack( stream );
 }
 
-void KMLStyle::unpack( QDataStream& stream )
+void GeoDataStyle::unpack( QDataStream& stream )
 {
-    KMLStyleSelector::unpack( stream );
+    GeoDataStyleSelector::unpack( stream );
 
     m_iconStyle.unpack( stream );
     m_labelStyle.unpack( stream );

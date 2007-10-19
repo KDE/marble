@@ -9,32 +9,32 @@
 //
 
 
-#include "KMLIconStyle.h"
+#include "GeoDataIconStyle.h"
 
-KMLIconStyle::KMLIconStyle()
+GeoDataIconStyle::GeoDataIconStyle()
 {
 }
 
-void KMLIconStyle::setIcon( const QPixmap &value )
+void GeoDataIconStyle::setIcon( const QPixmap &value )
 {
     m_pixmap = value;
 }
 
-QPixmap KMLIconStyle::icon() const
+QPixmap GeoDataIconStyle::icon() const
 {
     return m_pixmap;
 }
 
-void KMLIconStyle::pack( QDataStream& stream ) const
+void GeoDataIconStyle::pack( QDataStream& stream ) const
 {
-    KMLColorStyle::pack( stream );
+    GeoDataColorStyle::pack( stream );
 
     stream << m_pixmap;
 }
 
-void KMLIconStyle::unpack( QDataStream& stream )
+void GeoDataIconStyle::unpack( QDataStream& stream )
 {
-    KMLColorStyle::unpack( stream );
+    GeoDataColorStyle::unpack( stream );
 
     stream >> m_pixmap;
 }

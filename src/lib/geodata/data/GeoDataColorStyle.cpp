@@ -9,33 +9,43 @@
 //
 
 
-#include "KMLColorStyle.h"
+#include "GeoDataColorStyle.h"
 
-KMLColorStyle::KMLColorStyle() :
+GeoDataColorStyle::GeoDataColorStyle() :
     m_color( Qt::black )
 {
 }
 
-void KMLColorStyle::setColor( const QColor &value )
+void GeoDataColorStyle::setColor( const QColor &value )
 {
     m_color = value;
 }
 
-QColor KMLColorStyle::color() const
+QColor GeoDataColorStyle::color() const
 {
     return m_color;
 }
 
-void KMLColorStyle::pack( QDataStream& stream ) const
+void GeoDataColorStyle::setColorMode( const ColorMode &colorMode )
 {
-    KMLObject::pack( stream );
+    m_colorMode = colorMode;
+}
+
+GeoDataColorStyle::ColorMode GeoDataColorStyle::colorMode() const
+{
+    return m_colorMode;
+}
+
+void GeoDataColorStyle::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
 
     stream << m_color;
 }
 
-void KMLColorStyle::unpack( QDataStream& stream )
+void GeoDataColorStyle::unpack( QDataStream& stream )
 {
-    KMLObject::unpack( stream );
+    GeoDataObject::unpack( stream );
 
     stream >> m_color;
 }

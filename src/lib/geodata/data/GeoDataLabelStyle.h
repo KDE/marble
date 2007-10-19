@@ -14,16 +14,29 @@
 
 #include "GeoDataColorStyle.h"
 
+#include <QtGui/QFont>
+
 class GeoDataLabelStyle : public GeoDataColorStyle
 {
   public:
     GeoDataLabelStyle();
+
+    void setScale( const float &scale );
+    float scale() const;
+
+    void setFont( const QFont &font );
+    QFont font() const;
 
     /*
      * Serializable methods
      */
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
+
+  protected:
+    float m_scale;
+
+    QFont m_font;   // No KML property
 };
 
 #endif // GEODATALABELSTYLE_H

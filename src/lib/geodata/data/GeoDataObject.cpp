@@ -9,12 +9,12 @@
 //
 
 
-#include "KMLObject.h"
+#include "GeoDataObject.h"
 
 #include <QtGlobal>
 #include <QtCore/QDataStream>
 
-#ifdef KML_DEBUG
+#ifdef GeoData_DEBUG
 namespace
 {
     // This variable used to count number of allocated
@@ -23,51 +23,51 @@ namespace
 }
 #endif
 
-KMLObject::KMLObject()
+GeoDataObject::GeoDataObject()
   : m_id(0),
     m_targetId(0)
 {
-    #ifdef KML_DEBUG
+    #ifdef GeoData_DEBUG
         ++refCount;
-        qDebug("KMLObject count: %d", refCount);
+        qDebug("GeoDataObject count: %d", refCount);
     #endif
 }
 
-KMLObject::~KMLObject()
+GeoDataObject::~GeoDataObject()
 {
-    #ifdef KML_DEBUG
+    #ifdef GeoData_DEBUG
         --refCount;
-        qDebug("KMLObject count: %d", refCount);
+        qDebug("GeoDataObject count: %d", refCount);
     #endif
 }
 
-int KMLObject::id() const
+int GeoDataObject::id() const
 {
     return m_id;
 }
 
-void KMLObject::setId( int value )
+void GeoDataObject::setId( int value )
 {
     m_id = value;
 }
 
-int KMLObject::targetId() const
+int GeoDataObject::targetId() const
 {
     return m_targetId;
 }
 
-void KMLObject::setTargetId( int value )
+void GeoDataObject::setTargetId( int value )
 {
     m_targetId = value;
 }
 
-void KMLObject::pack( QDataStream& stream ) const
+void GeoDataObject::pack( QDataStream& stream ) const
 {
     stream << m_id;
     stream << m_targetId;
 }
 
-void KMLObject::unpack( QDataStream& stream )
+void GeoDataObject::unpack( QDataStream& stream )
 {
     stream >> m_id;
     stream >> m_targetId;

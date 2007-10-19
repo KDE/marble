@@ -9,18 +9,39 @@
 //
 
 
-#include "KMLLabelStyle.h"
+#include "GeoDataLabelStyle.h"
 
-KMLLabelStyle::KMLLabelStyle()
+GeoDataLabelStyle::GeoDataLabelStyle()
 {
 }
 
-void KMLLabelStyle::pack( QDataStream& stream ) const
+void GeoDataLabelStyle::setScale( const float &scale )
 {
-    KMLColorStyle::pack( stream );
+    m_scale = scale;
 }
 
-void KMLLabelStyle::unpack( QDataStream& stream )
+float GeoDataLabelStyle::scale() const
 {
-    KMLColorStyle::unpack( stream );
+    return m_scale;
+}
+
+void GeoDataLabelStyle::setFont( const QFont &font )
+{
+    m_font = font;
+}
+
+QFont GeoDataLabelStyle::font() const
+{
+    return m_font;
+}
+
+
+void GeoDataLabelStyle::pack( QDataStream& stream ) const
+{
+    GeoDataColorStyle::pack( stream );
+}
+
+void GeoDataLabelStyle::unpack( QDataStream& stream )
+{
+    GeoDataColorStyle::unpack( stream );
 }

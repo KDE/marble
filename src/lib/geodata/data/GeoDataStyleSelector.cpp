@@ -9,33 +9,33 @@
 //
 
 
-#include "KMLStyleSelector.h"
+#include "GeoDataStyleSelector.h"
 #include <QtCore/QDataStream>
 
-KMLStyleSelector::KMLStyleSelector()
+GeoDataStyleSelector::GeoDataStyleSelector()
 {
 }
 
-void KMLStyleSelector::setStyleId( const QString &value )
+void GeoDataStyleSelector::setStyleId( const QString &value )
 {
     m_styleId = value;
 }
 
-QString KMLStyleSelector::styleId() const
+QString GeoDataStyleSelector::styleId() const
 {
     return m_styleId;
 }
 
-void KMLStyleSelector::pack( QDataStream& stream ) const
+void GeoDataStyleSelector::pack( QDataStream& stream ) const
 {
-    KMLObject::pack( stream );
+    GeoDataObject::pack( stream );
 
     stream << m_styleId;
 }
 
-void KMLStyleSelector::unpack( QDataStream& stream )
+void GeoDataStyleSelector::unpack( QDataStream& stream )
 {
-    KMLObject::unpack( stream );
+    GeoDataObject::unpack( stream );
 
     stream >> m_styleId;
 }

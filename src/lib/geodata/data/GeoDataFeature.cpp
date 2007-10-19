@@ -9,78 +9,78 @@
 //
 
 
-#include "KMLFeature.h"
+#include "GeoDataFeature.h"
 
 #include <QtCore/QDataStream>
 
 
-KMLFeature::KMLFeature() :
+GeoDataFeature::GeoDataFeature() :
     m_visible( true )
 {
 }
 
-KMLFeature::KMLFeature( const QString& name ) :
+GeoDataFeature::GeoDataFeature( const QString& name ) :
     m_name( name )
 {
 }
 
-KMLFeature::~KMLFeature()
+GeoDataFeature::~GeoDataFeature()
 {
 }
 
-QString KMLFeature::name() const
+QString GeoDataFeature::name() const
 {
     return m_name;
 }
 
-void KMLFeature::setName( const QString &value )
+void GeoDataFeature::setName( const QString &value )
 {
     m_name = value;
 }
 
-QString KMLFeature::address() const
+QString GeoDataFeature::address() const
 {
     return m_address;
 }
 
-void KMLFeature::setAddress( const QString &value)
+void GeoDataFeature::setAddress( const QString &value)
 {
     m_address = value;
 }
 
-QString KMLFeature::phoneNumber() const
+QString GeoDataFeature::phoneNumber() const
 {
     return m_phoneNumber;
 }
 
-void KMLFeature::setPhoneNumber( const QString &value)
+void GeoDataFeature::setPhoneNumber( const QString &value)
 {
     m_phoneNumber = value;
 }
 
-QString KMLFeature::description() const
+QString GeoDataFeature::description() const
 {
     return m_description;
 }
 
-void KMLFeature::setDescription( const QString &value)
+void GeoDataFeature::setDescription( const QString &value)
 {
     m_description = value;
 }
 
-bool KMLFeature::isVisible() const
+bool GeoDataFeature::isVisible() const
 {
     return m_visible;
 }
 
-void KMLFeature::setVisible( bool value )
+void GeoDataFeature::setVisible( bool value )
 {
     m_visible = value;
 }
 
-void KMLFeature::pack( QDataStream& stream ) const
+void GeoDataFeature::pack( QDataStream& stream ) const
 {
-    KMLObject::pack( stream );
+    GeoDataObject::pack( stream );
 
     stream << m_name;
     stream << m_address;
@@ -89,9 +89,9 @@ void KMLFeature::pack( QDataStream& stream ) const
     stream << m_visible;
 }
 
-void KMLFeature::unpack( QDataStream& stream )
+void GeoDataFeature::unpack( QDataStream& stream )
 {
-    KMLObject::unpack( stream );
+    GeoDataObject::unpack( stream );
 
     stream >> m_name;
     stream >> m_address;

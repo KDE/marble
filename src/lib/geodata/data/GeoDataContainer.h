@@ -17,7 +17,7 @@
 #include "GeoDataFeature.h"
 #include "PlaceMarkContainer.h"
 
-class GeoDataPlaceMark;
+class PlaceMark;
 class ViewParams;
 
 class GeoDataContainer : public GeoDataFeature
