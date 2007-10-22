@@ -42,6 +42,8 @@ class ViewParams
  public:
     ViewParams( );
 
+    ~ViewParams();
+
     Projection  m_projection;
     Projection  m_oldProjection;
 

@@ -43,3 +43,8 @@ ViewParams::ViewParams( )
     // Just to have something.
     m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
 }
+
+ViewParams::~ViewParams()
+{
+    delete m_coastImage;
+}
