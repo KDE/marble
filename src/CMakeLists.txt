@@ -149,7 +149,7 @@ if (QTONLY)
 else (QTONLY)
     target_link_libraries (
       marble 
-      ${KDE4_KDEPRINT_LIBS} 
+      ${KDE4_KPARTS_LIBS} 
       marblewidget
       )
 endif (QTONLY)
