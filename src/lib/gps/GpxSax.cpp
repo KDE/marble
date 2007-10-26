@@ -18,7 +18,6 @@
 #include "GpxFile.h"
 
 #include <QtXml/QXmlAttributes>
-#include <QString>
 #include <QMessageBox>
 /*
 GpxSax::GpxSax(WaypointContainer *wptContainer, 

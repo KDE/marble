@@ -22,7 +22,6 @@
 #ifndef GPXElementDictionary_h
 #define GPXElementDictionary_h
 
-#include <QString>
 
 // Lists all known GPX 1.1 tags (http://www.topografix.com/GPX/1/1/)
 namespace GeoDataElementDictionary {

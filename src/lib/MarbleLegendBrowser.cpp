@@ -18,7 +18,6 @@
 #include <QtCore/QFileInfo>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
-#include <QString>
 #include <QRegExp>
 
 #include "MarbleDirs.h"

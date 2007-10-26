@@ -22,7 +22,6 @@
 #ifndef KMLElementDictionary_h
 #define KMLElementDictionary_h
 
-#include <QString>
 
 // Lists all known KML 2.1 tags (http://code.google.com/apis/kml/documentation/kmlTag_tags_21.html)
 namespace GeoDataElementDictionary {

@@ -23,7 +23,6 @@
 #define GeoDataTagHandler_h
 
 #include <QHash>
-#include <QString>
 
 class GeoDataParser;
 

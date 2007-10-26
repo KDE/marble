@@ -10,7 +10,6 @@
 #ifndef GPSELEMENT_H
 #define GPSELEMENT_H
 
-#include <QString>
 #include <QUrl>
 #include <QVector>
 
