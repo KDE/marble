@@ -59,6 +59,11 @@ MarbleNavigator::MarbleNavigator( QWidget *parent )
              this,                        SIGNAL (moveDown() ) ); 
 }
 
+MarbleNavigator::~MarbleNavigator()
+{
+    delete d;
+}
+
 
 int MarbleNavigator::minimumZoom() const
 {

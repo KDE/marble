@@ -33,6 +33,7 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
 
  public:
     MarbleAboutDialog(QWidget *parent = 0);
+    ~MarbleAboutDialog();
 
  private Q_SLOTS:
     void loadPageContents( int idx );

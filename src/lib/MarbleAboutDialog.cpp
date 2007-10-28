@@ -70,6 +70,11 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
 
 }
 
+MarbleAboutDialog::~MarbleAboutDialog()
+{
+   delete d;
+}
+
 void MarbleAboutDialog::loadPageContents( int idx )
 {
     QTextBrowser* browser = 0;
