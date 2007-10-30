@@ -3,10 +3,15 @@
 # Copy Qt frameworks to marble bundle
 # and make search paths for them relative to bundle
 
-PREFIX=${HOME}/apps/Marble.app/Contents/MacOS
-FRAMEWORKPREFIX=${HOME}/apps/Marble.app/Contents/Frameworks
-LIBPREFIX=${HOME}/apps/Marble.app/Contents/lib
-PLUGINPREFIX=${HOME}/apps/Marble.app/Contents/plugins
+#
+# Change base prefix of you built to another prefix
+#
+
+BASEPREFIX=/Applications
+PREFIX=${BASEPREFIX}/Marble.app/Contents/MacOS
+FRAMEWORKPREFIX=${BASEPREFIX}/Marble.app/Contents/Frameworks
+LIBPREFIX=${BASEPREFIX}/Marble.app/Contents/lib
+PLUGINPREFIX=${BASEPREFIX}/Marble.app/Contents/plugins
 
 QTPREFIX=/Library/Frameworks
 QTFRAMEWORKS="QtCore QtGui QtNetwork QtSvg QtXml"
