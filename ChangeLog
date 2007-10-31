@@ -1,3 +1,10 @@
+2007-10-31  Torsten Rahn  <rahn@kde.org>
+    
+    * src/lib/geodata/data:
+
+    - Changed lots of base classes to internally enable
+    real styles (in the spirit of KML) for placemarks.
+
 2007-09-26  Torsten Rahn  <rahn@kde.org>
 	
 	* data/placemarks/boundaryplacemarks.kml:

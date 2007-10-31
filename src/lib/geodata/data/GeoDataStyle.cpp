@@ -12,26 +12,46 @@
 #include "GeoDataStyle.h"
 
 GeoDataStyle::GeoDataStyle()
+  : m_iconStyle( 0 ),
+    m_labelStyle( 0 )
 {
 }
 
-GeoDataIconStyle& GeoDataStyle::getIconStyle()
+GeoDataStyle::GeoDataStyle( const QPixmap& icon, 
+                            const QFont &font, const QColor &color  )
+  : m_iconStyle( new GeoDataIconStyle( icon ) ),
+    m_labelStyle( new GeoDataLabelStyle( font, color ) )
+{
+}
+
+GeoDataStyle::~GeoDataStyle()
+{
+    delete m_labelStyle;
+    delete m_iconStyle;
+}
+
+GeoDataIconStyle* GeoDataStyle::iconStyle()
 {
     return m_iconStyle;
+}
+
+GeoDataLabelStyle* GeoDataStyle::labelStyle()
+{
+    return m_labelStyle;
 }
 
 void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
 
-    m_iconStyle.pack( stream );
-    m_labelStyle.pack( stream );
+    m_iconStyle->pack( stream );
+    m_labelStyle->pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
 {
     GeoDataStyleSelector::unpack( stream );
 
-    m_iconStyle.unpack( stream );
-    m_labelStyle.unpack( stream );
+    m_iconStyle->unpack( stream );
+    m_labelStyle->unpack( stream );
 }

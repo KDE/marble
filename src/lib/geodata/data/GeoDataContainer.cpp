@@ -11,7 +11,7 @@
 #include <QtGui/QImage>
 
 #include "GeoDataContainer.h"
-#include "PlaceMark.h"
+#include "GeoDataPlaceMark.h"
 #include "ViewParams.h"
 
 GeoDataContainer::GeoDataContainer()

@@ -12,6 +12,12 @@
 #ifndef GEODATASTYLE_H
 #define GEODATASTYLE_H
 
+#include <QtCore/QMetaType>
+#include <QtCore/QPoint>
+#include <QtGui/QColor>
+#include <QtGui/QPixmap>
+#include <QtGui/QFont>
+
 #include "GeoDataStyleSelector.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
@@ -20,8 +26,12 @@ class GeoDataStyle : public GeoDataStyleSelector
 {
   public:
     GeoDataStyle();
+    GeoDataStyle( const QPixmap& icon, 
+                  const QFont &font, const QColor &color  );
+    ~GeoDataStyle();
 
-    GeoDataIconStyle& getIconStyle();
+    GeoDataIconStyle*  iconStyle();
+    GeoDataLabelStyle* labelStyle();
 
     /*
      * Serializable methods
@@ -30,8 +40,10 @@ class GeoDataStyle : public GeoDataStyleSelector
     virtual void unpack( QDataStream& stream );
 
   private:
-    GeoDataIconStyle m_iconStyle;
-    GeoDataLabelStyle m_labelStyle;
+    GeoDataIconStyle  *m_iconStyle;
+    GeoDataLabelStyle *m_labelStyle;
 };
+
+Q_DECLARE_METATYPE( GeoDataStyle* )
 
 #endif // GEODATASTYLE_H

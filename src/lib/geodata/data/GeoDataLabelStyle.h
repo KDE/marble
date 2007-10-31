@@ -20,6 +20,7 @@ class GeoDataLabelStyle : public GeoDataColorStyle
 {
   public:
     GeoDataLabelStyle();
+    GeoDataLabelStyle( const QFont &font, const QColor &color );
 
     void setScale( const float &scale );
     float scale() const;

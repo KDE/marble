@@ -15,6 +15,13 @@ GeoDataLabelStyle::GeoDataLabelStyle()
 {
 }
 
+GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
+  : m_font( font ),
+    m_scale( 1.0 )
+{
+    setColor( color );
+}
+
 void GeoDataLabelStyle::setScale( const float &scale )
 {
     m_scale = scale;

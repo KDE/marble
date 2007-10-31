@@ -22,7 +22,7 @@
 
 #include "GeoDataDocument.h"
 
-#include "PlaceMark.h"
+#include "GeoDataPlaceMark.h"
 #include "GeoDataStyle.h"
 
 GeoDataDocument::GeoDataDocument()

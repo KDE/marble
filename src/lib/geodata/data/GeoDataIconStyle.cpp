@@ -11,30 +11,86 @@
 
 #include "GeoDataIconStyle.h"
 
+#include <QtCore/QDebug>
+
 GeoDataIconStyle::GeoDataIconStyle()
+  : m_icon( QPixmap() ),
+    m_scale( 1.0 ),
+    m_hotSpot( new GeoDataHotSpot() )
 {
 }
 
-void GeoDataIconStyle::setIcon( const QPixmap &value )
+GeoDataIconStyle::GeoDataIconStyle( const QPixmap& icon, const QPointF &hotSpot )
+  : m_icon( icon ),
+    m_scale( 1.0 ),
+    m_hotSpot( new GeoDataHotSpot( hotSpot ) )
 {
-    m_pixmap = value;
+}
+
+GeoDataIconStyle::~GeoDataIconStyle()
+{
+    delete m_hotSpot;
+}
+
+void GeoDataIconStyle::setIcon( const QPixmap &icon )
+{
+    m_icon = icon;
 }
 
 QPixmap GeoDataIconStyle::icon() const
 {
-    return m_pixmap;
+    return m_icon;
+}
+
+void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits )
+{
+    m_hotSpot->setHotSpot( hotSpot, xunits, xunits );
+}
+
+const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upper left
+{
+    GeoDataHotSpot::Units xunits;
+    GeoDataHotSpot::Units yunits;
+
+    m_pixelHotSpot = m_hotSpot->hotSpot( xunits, yunits );
+
+    if ( xunits == GeoDataHotSpot::Fraction )
+        m_pixelHotSpot.setX( m_icon.width()  * m_pixelHotSpot.x() );
+    else {
+        if ( xunits == GeoDataHotSpot::InsetPixels )
+            m_pixelHotSpot.setX( m_icon.width()  - m_pixelHotSpot.x() );
+    }
+
+    if ( yunits == GeoDataHotSpot::Fraction )
+        m_pixelHotSpot.setY( m_icon.height() * ( 1.0 - m_pixelHotSpot.y() ) );
+    else {
+        if ( yunits == GeoDataHotSpot::Pixels )
+            m_pixelHotSpot.setY( m_icon.height() - m_pixelHotSpot.y() );
+    }
+
+    return m_pixelHotSpot;
+}
+
+void GeoDataIconStyle::setScale( const float &scale )
+{
+    m_scale = scale;
+}
+
+float GeoDataIconStyle::scale() const
+{
+    return m_scale;
 }
 
 void GeoDataIconStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
 
-    stream << m_pixmap;
+    stream << m_icon;
 }
 
 void GeoDataIconStyle::unpack( QDataStream& stream )
 {
     GeoDataColorStyle::unpack( stream );
 
-    stream >> m_pixmap;
+    stream >> m_icon;
 }

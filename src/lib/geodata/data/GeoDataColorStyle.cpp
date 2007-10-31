@@ -12,7 +12,8 @@
 #include "GeoDataColorStyle.h"
 
 GeoDataColorStyle::GeoDataColorStyle() :
-    m_color( Qt::black )
+    m_color( Qt::white ),
+    m_colorMode( Normal )
 {
 }
 
@@ -41,6 +42,7 @@ void GeoDataColorStyle::pack( QDataStream& stream ) const
     GeoDataObject::pack( stream );
 
     stream << m_color;
+//    stream << m_colorMode;
 }
 
 void GeoDataColorStyle::unpack( QDataStream& stream )
@@ -48,4 +50,5 @@ void GeoDataColorStyle::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     stream >> m_color;
+//    stream >> m_colorMode;
 }
