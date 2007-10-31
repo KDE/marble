@@ -326,13 +326,16 @@ void TileCreator::run()
                 percentCompleted = 90 + (int)( 9 * (double)(savedTilesCount) / 
                                    (double)(totalTileCount) );	
                 emit progress( percentCompleted );
+		qDebug() << "Saving Tile #" << savedTilesCount << " of " << totalTileCount << " Percent: " << percentCompleted;
             }
         }
         tileLevel++;	
     }
 
+	qDebug() << "About to emit signal";
     percentCompleted = 100;
     emit progress( percentCompleted );
+	qDebug() << "percentCompleted: " << percentCompleted;
 }
 
 

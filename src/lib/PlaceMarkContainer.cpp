@@ -23,7 +23,7 @@ PlaceMarkContainer::PlaceMarkContainer( const QString& name )
 }
 
 
-inline bool populationLessThan( PlaceMark* mark1, PlaceMark* mark2 )
+inline bool populationLessThan( GeoDataPlaceMark* mark1, GeoDataPlaceMark* mark2 )
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.

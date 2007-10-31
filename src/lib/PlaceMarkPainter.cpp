@@ -12,9 +12,12 @@
 #include "PlaceMarkPainter.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QPersistentModelIndex>
 #include <QtCore/QPoint>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
+
+#include "geodata/data/GeoDataStyle.h"
 
 #include "ViewParams.h"
 #include "VisiblePlaceMark.h"
@@ -22,27 +25,12 @@
 PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
     : QObject( parent )
 {
-#ifdef Q_OS_MACX
-    m_font_regular           = QFont( "Sans Serif", 10, 50, false );
-#else
-    m_font_regular           = QFont( "Sans Serif",  8, 50, false );
-#endif
-    m_fontheight = QFontMetrics( m_font_regular ).height();
-    m_fontascent = QFontMetrics( m_font_regular ).ascent();
-
-    m_labelcolor = QColor( 0, 0, 0, 255 );
-
     m_useXWorkaround = testXBug();
     qDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
 }
 
 PlaceMarkPainter::~PlaceMarkPainter()
 {
-}
-
-void PlaceMarkPainter::setLabelColor( const QColor &color )
-{
-    m_labelcolor = color;
 }
 
 void PlaceMarkPainter::drawPlaceMarks( QPainter* painter, 
@@ -131,14 +119,19 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
 }
 
 inline void PlaceMarkPainter::drawLabelText(QPainter& labelPainter,
-                                            const QString &name, const QFont &font )
+                                            const QString &name, const QFont &labelFont )
 {
+    QFont font = labelFont;
+    font.setWeight( 75 );
+
     QPen    outlinepen( Qt::white );
     outlinepen.setWidthF( s_labelOutlineWidth );
     QBrush  outlinebrush( Qt::black );
 
     QPainterPath   outlinepath;
-    const QPointF  baseline( s_labelOutlineWidth / 2.0, m_fontascent );
+
+    int fontascent = QFontMetrics( font ).ascent();
+    const QPointF  baseline( s_labelOutlineWidth / 2.0, fontascent );
     outlinepath.addText( baseline, font, name );
     labelPainter.setRenderHint( QPainter::Antialiasing, true );
     labelPainter.setPen( outlinepen );
@@ -154,40 +147,49 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
 
     QPainter labelPainter;
     QPixmap labelPixmap;
+    const QPersistentModelIndex &index = mark->modelIndex();
+    GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+
+    QString labelName = mark->name();
+    QRect  labelRect  = mark->labelRect();
+    QFont  labelFont  = style->labelStyle()->font();
+    QColor labelColor = style->labelStyle()->color();
 
     // Due to some XOrg bug this requires a workaround via
-    // QImage in some cases.
+    // QImage in some cases (at least with Qt 4.2).
     if ( !m_useXWorkaround ) {
-        labelPixmap = QPixmap( mark->labelRect().width(), m_fontheight );
+        labelPixmap = QPixmap( labelRect.size() );
         labelPixmap.fill( Qt::transparent );
 
         labelPainter.begin( &labelPixmap );
 
         if ( !isSelected ) {
-            labelPainter.setFont( mark->labelFont() );
-            labelPainter.setPen( m_labelcolor );
-            labelPainter.drawText( 0, m_fontascent, mark->name() );
+            labelPainter.setFont( labelFont );
+            labelPainter.setPen( labelColor );
+            int fontascent = QFontMetrics( labelFont ).ascent();
+            labelPainter.drawText( 0, fontascent, labelName );
         }
         else {
-            drawLabelText( labelPainter, mark->name(), mark->labelFont() );
+            drawLabelText( labelPainter, labelName, labelFont  );
         }
 
         labelPainter.end();
     } else {
 
-        QImage image( mark->labelRect().width(), m_fontheight,
+        QImage image( labelRect.size(),
                       QImage::Format_ARGB32_Premultiplied );
         image.fill( 0 );
 
         labelPainter.begin( &image );
 
         if ( !isSelected ) {
-            labelPainter.setFont( mark->labelFont() );
-            labelPainter.setPen( m_labelcolor );
-            labelPainter.drawText( 0, m_fontascent, mark->name() );
+            labelPainter.setFont( labelFont );
+            labelPainter.setPen( labelColor );
+            int fontascent = QFontMetrics( labelFont ).ascent();
+            labelPainter.drawText( 0, fontascent, labelName );
         }
         else {
-            drawLabelText( labelPainter, mark->name(), mark->labelFont() );
+            drawLabelText( labelPainter, labelName, labelFont );
         }
 
         labelPainter.end();

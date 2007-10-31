@@ -25,7 +25,7 @@
 #include <QtCore/QRect>
 #include <QtCore/QVector>
 
-#include "PlaceMark.h"
+#include "GeoDataPlaceMark.h"
 #include "PlaceMarkLayout.h"
 
 
@@ -48,28 +48,14 @@ class PlaceMarkPainter : public QObject
                          const QItemSelection &selection, 
                          ViewParams *viewParams );
 
-    /**
-     * Sets the @p color that shall be used for painting the labels.
-     */
-    void setLabelColor( const QColor &color );
-
  private:
 
-    void drawLabelText( QPainter& textpainter, const QString &name, const QFont &font );
+    void drawLabelText( QPainter& textpainter, const QString &name, const QFont &labelFont );
     void drawLabelPixmap( VisiblePlaceMark *mark, bool isSelected );
 
     bool testXBug();
 
-    QFont  m_font_regular;
-    QFont  m_font_regular_italics;
-    QFont  m_font_regular_underline;
-    QFont  m_font_mountain;
-
-    QColor  m_labelcolor;
-    int     m_fontheight;
-    int     m_fontascent;
-
-    bool     m_useXWorkaround;  // Indicates need for an X windows workaround.
+    bool m_useXWorkaround;  // Indicates need for an X windows workaround.
 };
 
 #endif // PLACEMARKPAINTER_H

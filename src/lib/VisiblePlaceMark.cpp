@@ -11,6 +11,11 @@
 
 #include "VisiblePlaceMark.h"
 
+#include <QtCore/QDebug>
+
+#include "geodata/data/GeoDataStyle.h"
+
+
 VisiblePlaceMark::VisiblePlaceMark()
 {
 }
@@ -39,16 +44,9 @@ const QString VisiblePlaceMark::name() const
 
 const QPixmap& VisiblePlaceMark::symbolPixmap() const
 {
-    if ( m_symbolPixmap.isNull() )
-        m_symbolPixmap = m_modelIndex.data( Qt::DecorationRole ).value<QPixmap>();
+    GeoDataStyle* style = m_modelIndex.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+    m_symbolPixmap = style->iconStyle()->icon(); 
     return  m_symbolPixmap;
-}
-
-const QSize& VisiblePlaceMark::symbolSize() const
-{
-    if ( !m_symbolSize.isValid() )
-      m_symbolSize = m_modelIndex.data( PlaceMarkModel::SymbolSizeRole ).toSize();
-    return m_symbolSize;
 }
 
 const QPoint& VisiblePlaceMark::symbolPosition() const
@@ -69,16 +67,6 @@ const QPixmap& VisiblePlaceMark::labelPixmap() const
 void VisiblePlaceMark::setLabelPixmap( const QPixmap& labelPixmap )
 {
     m_labelPixmap = labelPixmap;
-}
-
-const QFont& VisiblePlaceMark::labelFont() const
-{
-    return m_labelFont;
-}
-
-void VisiblePlaceMark::setLabelFont( const QFont& labelFont )
-{
-    m_labelFont = labelFont;
 }
 
 const QRect& VisiblePlaceMark::labelRect() const

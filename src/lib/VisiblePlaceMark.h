@@ -66,11 +66,6 @@ class VisiblePlaceMark
     const QPixmap& symbolPixmap() const;
 
     /**
-     * Returns the size of the place mark symbol.
-     */
-    const QSize& symbolSize() const;
-
-    /**
      * Returns the position of the place mark symbol on the map.
      */
     const QPoint& symbolPosition() const;
@@ -91,16 +86,6 @@ class VisiblePlaceMark
     void setLabelPixmap( const QPixmap& pixmap );
 
     /**
-     * Returns the font used for the place mark name label.
-     */
-    const QFont& labelFont() const;
-
-    /**
-     * Sets the @p font used for the place mark name label.
-     */
-    void setLabelFont( const QFont& font );
-
-    /**
      * Returns the area covered by the place mark name label on the map.
      */
     const QRect& labelRect() const;
@@ -116,11 +101,9 @@ class VisiblePlaceMark
     // View stuff
     QPoint      m_symbolPosition; // position of the placemark's symbol
     QPixmap     m_labelPixmap;    // the text label (most often name)
-    QFont       m_labelFont;      // the text label font (most often name)
     QRect       m_labelRect;      // bounding box of label
 
     mutable QString     m_name;         // cached value
-    mutable QSize       m_symbolSize;   // cached value
     mutable QPixmap     m_symbolPixmap; // cached value
 };
 

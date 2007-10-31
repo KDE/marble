@@ -18,7 +18,7 @@
 #include <QtXml/QXmlDefaultHandler>
 
 
-class PlaceMark;
+class GeoDataPlaceMark;
 class PlaceMarkContainer;
 
 
@@ -38,11 +38,11 @@ class XmlHandler : public QXmlDefaultHandler
     bool characters( const QString& str );
 
  protected:
-    int popIdx( int population );
+    int popIdx( qint64 population );
 
  private:
     PlaceMarkContainer  *m_placeMarkContainer;
-    PlaceMark           *m_placemark;
+    GeoDataPlaceMark           *m_placemark;
 
     QString              m_currentText;
 

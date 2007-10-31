@@ -59,6 +59,7 @@ void PlaceMarkManager::loadStandardPlaceMarks()
     addPlaceMarkFile( "baseplacemarks" );
     addPlaceMarkFile( "elevplacemarks" );
     addPlaceMarkFile( "otherplacemarks" );
+    addPlaceMarkFile( "boundaryplacemarks" );
 }
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
@@ -131,7 +132,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 }
 
 
-void PlaceMarkManager::loadKml( const QString& filename )
+void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
 {
 #ifdef KML_GSOC
     if ( QFile::exists( filename ) ) {
@@ -174,7 +175,7 @@ void PlaceMarkManager::loadKml( const QString& filename )
     PlaceMarkContainer container;
     importKml( filename, &container );
 
-    m_model->addPlaceMarks( container );
+    m_model->addPlaceMarks( container, clearPrevious );
 #endif
 }
 
@@ -226,7 +227,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
     // Write a header with a "magic number" and a version
     // out << (quint32)0xA0B0C0D0;
     out << (quint32)MarbleMagicNumber;
-    out << (qint32)005;
+    out << (qint32)011;
 
     out.setVersion(QDataStream::Qt_4_0);
 
@@ -247,8 +248,8 @@ void PlaceMarkManager::saveFile( const QString& filename,
         out << QString( (*it) -> description() );
         out << QString( (*it) -> countryCode() );
         out << (qint32)(*it) -> popularityIndex();
-        out << (qint32)(*it) -> symbolIndex();
-        out << (qint32)(*it) -> popularity();
+        out << (qint32)(*it) -> visualCategory();
+        out << (qint64)(*it) -> popularity();
     }
 }
 
@@ -271,7 +272,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     // Read the version
     qint32  version;
     in >> version;
-    if (version < 005) {
+    if (version < 011) {
         qDebug( "Bad file - too old!" );
         return false;
     }
@@ -288,11 +289,12 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     double   lon;
     double   lat;
     QString  tmpstr;
-    qint32   a;
+    qint32   tmpint32;
+    qint64   tmpint64;
 
-    PlaceMark  *mark;
+    GeoDataPlaceMark  *mark;
     while ( !in.atEnd() ) {
-        mark = new PlaceMark();
+        mark = new GeoDataPlaceMark();
 
         in >> tmpstr;
         mark -> setName( tmpstr );
@@ -304,12 +306,12 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         mark -> setDescription( tmpstr );
         in >> tmpstr;
         mark -> setCountryCode( tmpstr );
-        in >> a;
-        mark -> setPopularityIndex( a );
-        in >> a;
-        mark -> setSymbolIndex( a );
-        in >> a;
-        mark -> setPopularity( a );
+        in >> tmpint32;
+        mark -> setPopularityIndex( tmpint32 );
+        in >> tmpint32;
+        mark -> setVisualCategory( (GeoDataPlaceMark::GeoDataVisualCategory)( tmpint32 ) );
+        in >> tmpint64;
+        mark -> setPopularity( tmpint64 );
 
         placeMarkContainer -> append( mark );
     }

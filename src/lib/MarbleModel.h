@@ -51,7 +51,7 @@ class ClipPainter;
 class FileViewModel;
 class GpxFileModel;
 class GpsLayer;
-class KMLDocument;
+class GeoDataDocument;
 class MarbleModelPrivate;
 class PlaceMark;
 class PlaceMarkManager;
@@ -230,7 +230,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  private Q_SLOTS:
     void notifyModelChanged();
-    void kmlDocumentLoaded( KMLDocument& document );
+    void geoDataDocumentLoaded( GeoDataDocument& document );
 
  private:
     void  resize( int width, int height );

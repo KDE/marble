@@ -15,13 +15,13 @@
 #include <QtCore/QVariant>
 #include "AbstractFileViewItem.h"
 
-class KMLDocument;
+class GeoDataDocument;
 class PlaceMarkManager;
 
 class KMLFileViewItem : public AbstractFileViewItem
 {
   public:
-    KMLFileViewItem( PlaceMarkManager& manager, KMLDocument& document );
+    KMLFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document );
     ~KMLFileViewItem();
 
     /*
@@ -35,7 +35,7 @@ class KMLFileViewItem : public AbstractFileViewItem
 
   private:
     PlaceMarkManager&   m_placeMarkManager;
-    KMLDocument&        m_document;
+    GeoDataDocument&        m_document;
 };
 
 #endif

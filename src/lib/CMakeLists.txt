@@ -14,7 +14,7 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-# INCLUDE(geodata/CMakeLists.txt)
+INCLUDE(geodata/CMakeLists.txt)
 
 if (QTONLY)
   set(GENERIC_LIB_VERSION "0.5.0")
@@ -73,7 +73,6 @@ set(marblewidget_SRCS
            MapTheme.cpp
            ViewParams.cpp
            MeasureTool.cpp
-           PlaceMark.cpp
            VisiblePlaceMark.cpp
            PlaceMarkContainer.cpp
            PlaceMarkManager.cpp
@@ -101,27 +100,39 @@ set(marblewidget_SRCS
            FileViewModel.cpp
            GpxFileViewItem.cpp
            KMLFileViewItem.cpp
-           kml/KMLColorStyle.cpp
-           kml/KMLColorStyleParser.cpp
-           kml/KMLContainer.cpp
-           kml/KMLContainerParser.cpp
-           kml/KMLFeature.cpp
-           kml/KMLFeatureParser.cpp
-           kml/KMLFolder.cpp
-           kml/KMLDocument.cpp
-           kml/KMLDocumentParser.cpp
-           kml/KMLIconStyle.cpp
-           kml/KMLIconStyleParser.cpp
-           kml/KMLLabelStyle.cpp
-           kml/KMLLabelStyleParser.cpp
-           kml/KMLObject.cpp
-           kml/KMLObjectParser.cpp
-           kml/KMLPlaceMark.cpp
-           kml/KMLPlaceMarkParser.cpp
-           kml/KMLPointParser.cpp
-           kml/KMLStyle.cpp
-           kml/KMLStyleParser.cpp
-           kml/KMLStyleSelector.cpp
+           geodata/data/GeoDataColorStyle.cpp
+           geodata/data/GeoDataContainer.cpp
+           geodata/data/GeoDataDocument.cpp
+           geodata/data/GeoDataFeature.cpp
+           geodata/data/GeoDataFolder.cpp
+           geodata/data/GeoDataHotSpot.cpp
+           geodata/data/GeoDataIconStyle.cpp
+           geodata/data/GeoDataLabelStyle.cpp
+           geodata/data/GeoDataObject.cpp
+           geodata/data/GeoDataPlaceMark.cpp
+           geodata/data/GeoDataStyle.cpp
+           geodata/data/GeoDataStyleSelector.cpp
+#           kml/KMLColorStyle.cpp
+#           kml/KMLColorStyleParser.cpp
+#           kml/KMLContainer.cpp
+#           kml/KMLContainerParser.cpp
+#           kml/KMLFeature.cpp
+#           kml/KMLFeatureParser.cpp
+#           kml/KMLFolder.cpp
+#           kml/KMLDocument.cpp
+#           kml/KMLDocumentParser.cpp
+#           kml/KMLIconStyle.cpp
+#           kml/KMLIconStyleParser.cpp
+#           kml/KMLLabelStyle.cpp
+#           kml/KMLLabelStyleParser.cpp
+#           kml/KMLObject.cpp
+#           kml/KMLObjectParser.cpp
+#           kml/KMLGeoDataPlaceMark.cpp
+#           kml/KMLPlaceMarkParser.cpp
+#           kml/KMLPointParser.cpp
+#           kml/KMLStyle.cpp
+#           kml/KMLStyleParser.cpp
+#           kml/KMLStyleSelector.cpp
            gps/GpsTracking.cpp
            gps/GpsElement.cpp
            gps/Waypoint.cpp
@@ -261,7 +272,6 @@ else (APPLE AND QTONLY)
            MapTheme.h
            ViewParams.h
            MeasureTool.h
-           PlaceMark.h
            VisiblePlaceMark.h
            PlaceMarkContainer.h
            PlaceMarkManager.h

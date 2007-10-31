@@ -15,7 +15,7 @@
 #include <cmath>
 
 #include "global.h"
-#include "PlaceMark.h"
+#include "GeoDataPlaceMark.h"
 #include "PlaceMarkContainer.h"
 
 
@@ -64,7 +64,7 @@ bool XmlHandler::startElement( const QString&, const QString&,
     if ( m_inKml && nameLower == "placemark" ) {
         m_inPlacemark = true;
         m_coordsset = false;
-        m_placemark = new PlaceMark();
+        m_placemark = new GeoDataPlaceMark();
     }
 
     if ( m_inPlacemark && nameLower == "name" ) {
@@ -119,18 +119,26 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
     if ( m_inKml && nameLower == "placemark" ) {
 
-        if ( m_placemark->role() == 'H' ) m_placemark->setSymbolIndex(16);
-        else if ( m_placemark->role() == 'V' ) m_placemark->setSymbolIndex(17);
-        else if ( m_placemark->role() == 'P' ) m_placemark->setSymbolIndex(18);
-        else if ( m_placemark->role() == 'M' ) m_placemark->setSymbolIndex(19);
-        else if ( m_placemark->role() == 'W' ) m_placemark->setSymbolIndex(20);
-        else if ( m_placemark->role() == 'F' ) m_placemark->setSymbolIndex(21);
-        else if ( m_placemark->role() == 'N' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 );
-        else if ( m_placemark->role() == 'R' ) m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 2);
-        else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' )
-            m_placemark->setSymbolIndex( ( m_placemark->popularityIndex() -1 ) / 4 * 4 + 3 );
-        else if ( m_placemark->role().isNull() && !m_hasPopulation )
-            m_placemark->setSymbolIndex(22);
+        if ( m_placemark->role() == 'H' )      m_placemark->setVisualCategory( GeoDataPlaceMark::Mountain );
+        else if ( m_placemark->role() == 'V' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Volcano );
+        else if ( m_placemark->role() == 'P' ) m_placemark->setVisualCategory( GeoDataPlaceMark::GeographicPole );
+        else if ( m_placemark->role() == 'M' ) m_placemark->setVisualCategory( GeoDataPlaceMark::MagneticPole );
+        else if ( m_placemark->role() == 'W' ) m_placemark->setVisualCategory( GeoDataPlaceMark::ShipWreck );
+        else if ( m_placemark->role() == 'F' ) m_placemark->setVisualCategory( GeoDataPlaceMark::AirPort );
+        else if ( m_placemark->role() == 'K' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Continent );
+
+        else if ( m_placemark->role() == 'N' ) m_placemark->setVisualCategory( 
+            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallCity )
+                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+        else if ( m_placemark->role() == 'R' ) m_placemark->setVisualCategory( 
+            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallStateCapital )
+                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+        else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setVisualCategory( 
+            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallNationCapital )
+                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+
+        else if ( m_placemark->role() == ' ' && !m_hasPopulation )
+            m_placemark->setVisualCategory( GeoDataPlaceMark::Default ); // default location
 
         if ( m_coordsset == true )
             m_placeMarkContainer->append( m_placemark );
@@ -155,11 +163,11 @@ bool XmlHandler::endElement( const QString&, const QString&,
     }
 
     if ( m_inPlacemark && nameLower == "pop" ) {
-        int  population;
+        qint64 population;
         if ( m_currentText.isEmpty() )
             population = 0;
         else
-            population = m_currentText.toInt();
+            population = m_currentText.toLongLong();
 
         m_placemark->setPopularity( population );
 
@@ -203,7 +211,7 @@ bool XmlHandler::stopDocument()
 }
 
 
-int XmlHandler::popIdx( int population )
+int XmlHandler::popIdx( qint64 population )
 {
     int popidx = 15;
 
@@ -222,6 +230,7 @@ int XmlHandler::popIdx( int population )
     else if ( population < 2500000) popidx=13;
     else if ( population < 5000000) popidx=14;
 
+    if ( m_placemark->role() == 'W' && popidx > 12 ) popidx = 15;
     if ( m_placemark->role() == 'W' && popidx > 12 ) popidx = 12;
 
     return popidx;

@@ -72,7 +72,7 @@ class PlaceMarkManager : public QObject
     /**
      * Loads a new KML file into the manager.
      */
-    void loadKml( const QString &fileName );
+    void loadKml( const QString &fileName, bool clearPrevious = false );
 
  Q_SIGNALS:
     void kmlDocumentLoaded( KMLDocument& );

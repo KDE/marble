@@ -165,7 +165,7 @@ void GeoDataFeature::initializeDefaultStyles()
 
     s_defaultStyle[Continent]
         = new GeoDataStyle( QPixmap(), 
-              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#aa0000" ) );
+              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
 
     s_defaultStyleInitialized = true;
 
@@ -282,7 +282,7 @@ const GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() con
     return m_visualCategory;
 }
 
-void GeoDataFeature::setGeoDataVisualCategory( GeoDataFeature::GeoDataVisualCategory index )
+void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory index )
 {
     m_visualCategory = index;
 }

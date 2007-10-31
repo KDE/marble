@@ -112,11 +112,14 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     d->m_placemarkmanager   = new PlaceMarkManager();
 
-    connect( d->m_placemarkmanager, SIGNAL( kmlDocumentLoaded( KMLDocument& ) ),
-             this,                  SLOT( kmlDocumentLoaded( KMLDocument& ) ) );
+    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
+             this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
 
     d->m_placemarkmodel = new PlaceMarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
+
+    connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged ( QItemSelection, QItemSelection) ),
+             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) ); 
 
     d->m_placemarkmanager->loadStandardPlaceMarks();
 
@@ -209,12 +212,17 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
                                      d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
-
+		qDebug("TileCreator created");
             TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+		qDebug("TileCreatorDialog created");
             tileCreatorDlg.setSummary( d->m_maptheme->name(),
                                        d->m_maptheme->description() );
+		qDebug("TileCreatorDialog summary set");
             tileCreatorDlg.exec();
+		qDebug("TileCreatorDialog executed");
         }
+
+	qDebug("About to continue");
 
         if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
@@ -248,8 +256,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
 
     if ( d->m_placeMarkLayout == 0)
         d->m_placeMarkLayout = new PlaceMarkLayout( this );
-    d->m_placeMarkLayout->reset();
-    d->m_placeMarkLayout->placeMarkPainter()->setLabelColor( d->m_maptheme->labelColor() );
+    d->m_placeMarkLayout->requestStyleReset();
+//    d->m_placeMarkLayout->placeMarkPainter()->setLabelColor( d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
     d->m_projection = currentProjection;
@@ -347,7 +355,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_gridmap->paintGridMap( painter, true );
     }
 
-    // Paint the PlaceMark layer
+    // Paint the GeoDataPlaceMark layer
 #ifndef KML_GSOC
     if ( viewParams->m_showPlaceMarks && ( viewParams->m_showCities || 
          viewParams->m_showTerrain || viewParams->m_showOtherPlaces )
@@ -370,15 +378,15 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         QTime t;
         t.start ();
 
-        const QList < KMLFolder* >& folderList = d->m_placemarkmanager->getFolderList();
+        const QList < GeoDataFolder* >& folderList = d->m_placemarkmanager->getFolderList();
 
         bool firstTime = true;
 
-        for ( QList<KMLFolder*>::const_iterator iterator = folderList.constBegin();
+        for ( QList<GeoDataFolder*>::const_iterator iterator = folderList.constBegin();
             iterator != folderList.constEnd();
             ++iterator )
         {
-            KMLFolder& folder = *( *iterator );
+            GeoDataFolder& folder = *( *iterator );
 
             /*
              * Show only placemarks which are visible
@@ -460,7 +468,7 @@ FileViewModel *MarbleModel::fileViewModel() const
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
-    d->m_placemarkmanager->loadKml( filename );
+    d->m_placemarkmanager->loadKml( filename, true );
 
     notifyModelChanged();
 }
@@ -475,7 +483,7 @@ void MarbleModel::notifyModelChanged()
     emit modelChanged();
 }
 
-void MarbleModel::kmlDocumentLoaded( KMLDocument& document )
+void MarbleModel::geoDataDocumentLoaded( GeoDataDocument& document )
 {
     AbstractFileViewItem* item = new KMLFileViewItem( *d->m_placemarkmanager,
                                                       document );

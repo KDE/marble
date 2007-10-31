@@ -18,17 +18,14 @@
 #define PLACEMARKLAYOUT_H
 
 
-#include <QtGui/QFont>
-#include <QtGui/QPainterPath>
-#include <QtGui/QPixmap>
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QRect>
 #include <QtCore/QSet>
 #include <QtCore/QVector>
 
 #include "Quaternion.h"
-#include "PlaceMark.h"
-#include "PlaceMarkContainer.h"
+
+#include "geodata/data/GeoDataPlaceMark.h"
 
 class QAbstractItemModel;
 class QItemSelectionModel;
@@ -40,6 +37,8 @@ class ViewParams;
 /**
  * Layouts the place marks with a passed QPainter.
  */
+
+
 
 class PlaceMarkLayout : public QObject
 {
@@ -76,18 +75,29 @@ class PlaceMarkLayout : public QObject
                            bool firstTime = true );
 
     /**
+     * Returns a the maximum height of all possible labels.
+     * WARNING: This is a really slow method as it traverses all placemarks
+     * to check the labelheight.
+     * FIXME: Once a StyleManager that manages all styles has been implemented
+     * just traverse all existing styles. 
+     */
+
+    int maxLabelHeight( const QAbstractItemModel* model,
+                        const QItemSelectionModel* selectionModel ) const;
+
+    /**
      * Returns a list of model indexes that are at position @p pos.
      */
     QVector<QPersistentModelIndex> whichPlaceMarkAt( const QPoint &pos ) const;
 
     PlaceMarkPainter* placeMarkPainter() const;
 
-    void reset();
+ public Q_SLOTS:
+
+    void requestStyleReset();
 
  private:
-
-    void   labelFontData( const QPersistentModelIndex& index,
-                          const bool isSelected, QFont &font, int &fontwidth );
+    void styleReset();
 
     bool   locatedOnScreen ( const QPersistentModelIndex &index, 
                              int &x, int &y, const int &imgwidth, const int &imgheight,
@@ -97,27 +107,21 @@ class PlaceMarkLayout : public QObject
     QRect  roomForLabel ( const QPersistentModelIndex& index,
                          const QVector<VisiblePlaceMark*> &currentsec,
                          const int x, const int y,
-                         const int textwidth );
+                         const int textWidth );
 
     int    placeMarksOnScreenLimit() const;
 
  private:
     PlaceMarkPainter *m_placeMarkPainter;
 
-    QFont  m_font_regular;
-    QFont  m_font_regular_italics;
-    QFont  m_font_regular_underline;
-    QFont  m_font_mountain;
-
     QVector<VisiblePlaceMark*> m_paintOrder;
     QVector<VisiblePlaceMark*> m_placeMarkPool;
     QHash<QPersistentModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
 
-    int     m_fontheight;
-    int     m_fontascent;
-    int     m_labelareaheight;
-
     QVector< int > m_weightfilter;
+
+    int     m_maxLabelHeight;
+    bool    m_styleResetRequested;
 };
 
 

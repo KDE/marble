@@ -10,9 +10,9 @@
 
 
 #include "KMLFileViewItem.h"
-#include "kml/KMLDocument.h"
+#include "geodata/data/GeoDataDocument.h"
 
-KMLFileViewItem::KMLFileViewItem( PlaceMarkManager& manager, KMLDocument& document ) :
+KMLFileViewItem::KMLFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document ) :
     m_placeMarkManager( manager ),
     m_document( document )
 {

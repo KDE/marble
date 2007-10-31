@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
 #include "TileCreator.h"
@@ -41,7 +42,10 @@ void TileCreatorDialog::setProgress( int progress )
     progressBar->setValue( progress );
 
     if ( progress == 100 )
+	{
         QTimer::singleShot( 0, this, SLOT( accept() ) ); 
+	qDebug() << "Single Shot";
+	}
 }
 
 void TileCreatorDialog::setSummary( const QString& name, 

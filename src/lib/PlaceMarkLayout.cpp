@@ -17,12 +17,14 @@
 #include <QtCore/QPoint>
 #include <QtCore/QVector>
 #include <QtCore/QVectorIterator>
-#include <QtGui/QIcon>
+#include <QtGui/QFont>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 
+#include "geodata/data/GeoDataPlaceMark.h"
+#include "geodata/data/GeoDataStyle.h"
+
 #include "global.h"
-#include "PlaceMark.h"
 #include "PlaceMarkPainter.h"
 #include "PlaceMarkModel.h"
 #include "MarbleDirs.h"
@@ -32,26 +34,8 @@
 PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
     : QObject( parent )
 {
-#ifdef Q_OS_MACX
-    m_font_mountain = QFont( "Sans Serif",9, 50, false );
-
-    m_font_regular           = QFont( "Sans Serif", 10, 50, false );
-    m_font_regular_italics   = QFont( "Sans Serif", 10, 50, true );
-    m_font_regular_underline = QFont( "Sans Serif", 10, 50, false );
-#else
-    m_font_mountain          = QFont( "Sans Serif",  7, 50, false );
-
-    m_font_regular           = QFont( "Sans Serif",  8, 50, false );
-    m_font_regular_italics   = QFont( "Sans Serif",  8, 50, true );
-    m_font_regular_underline = QFont( "Sans Serif",  8, 50, false );
-#endif
-
-    m_font_regular_underline.setUnderline( true );
-
-    m_fontheight = QFontMetrics( m_font_regular ).height();
-    m_fontascent = QFontMetrics( m_font_regular ).ascent();
-
-    m_labelareaheight = 2 * m_fontheight;
+    m_maxLabelHeight = 0;
+    m_styleResetRequested = true;
 
 //  Old weightfilter array. Still here 
 // to be able to compare performance
@@ -103,10 +87,16 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
 
 PlaceMarkLayout::~PlaceMarkLayout()
 {
-    reset();
+    styleReset();
 }
 
-void PlaceMarkLayout::reset()
+void PlaceMarkLayout::requestStyleReset()
+{
+    qDebug() << "Style reset requested.";
+    m_styleResetRequested = true;
+}
+
+void PlaceMarkLayout::styleReset()
 {
     m_paintOrder.clear();
 
@@ -126,7 +116,7 @@ QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& 
         const VisiblePlaceMark  *mark = *it; // no cast
 
         if ( mark->labelRect().contains( curpos )
-             || QRect( mark->symbolPosition(), mark->symbolSize() ).contains( curpos ) ) {
+             || QRect( mark->symbolPosition(), mark->symbolPixmap().size() ).contains( curpos ) ) {
             ret.append( mark->modelIndex() );
         }
     }
@@ -137,6 +127,38 @@ QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& 
 PlaceMarkPainter* PlaceMarkLayout::placeMarkPainter() const
 { 
     return m_placeMarkPainter; 
+}
+
+int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
+                                     const QItemSelectionModel* selectionModel ) const
+{
+    qDebug() << "Detecting maxLabelHeight ...";
+
+    int maxLabelHeight = 0;
+
+    const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
+
+    for ( int i = 0; i < selectedIndexes.count(); ++i ) {
+        const QModelIndex index = selectedIndexes.at( i );
+        GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+        QFont labelFont = style->labelStyle()->font();
+        int textHeight = QFontMetrics( labelFont ).height();
+        if ( textHeight > maxLabelHeight )
+            maxLabelHeight = textHeight; 
+    }
+
+    for ( int i = 0; i < model->rowCount(); ++i )
+    {
+        QModelIndex index = model->index( i, 0 );
+
+        GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+        QFont labelFont = style->labelStyle()->font();
+        int textHeight = QFontMetrics( labelFont ).height();
+        if ( textHeight > maxLabelHeight ) 
+            maxLabelHeight = textHeight; 
+    }
+
+    return maxLabelHeight;
 }
 
 void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
@@ -150,7 +172,14 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     int x = 0;
     int y = 0;
 
-    int secnumber = imgheight / m_labelareaheight + 1;
+    if ( m_styleResetRequested == true )
+    {
+        m_styleResetRequested = false;
+        styleReset();
+        m_maxLabelHeight = maxLabelHeight( model, selectionModel );
+    }
+
+    int secnumber = imgheight / m_maxLabelHeight + 1;
 
     Quaternion inversePlanetAxis = planetAxis.inverse();
     Quaternion qpos;
@@ -194,11 +223,16 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             textWidth = mark->labelRect().width();
         }
         else {
-            labelFontData( index, true, labelFont, textWidth );
+            GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+            labelFont = style->labelStyle()->font();
+            labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
+
+            textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() )
+                  + (int)( 2 * s_labelOutlineWidth ) );
         }
 
         // Choose Section
-        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_labelareaheight );
+        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
         // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlaceMark here.
@@ -217,19 +251,21 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             // If there is no visible place mark yet for this index, create a new one...
             mark = new VisiblePlaceMark;
             mark->setModelIndex( QPersistentModelIndex( index ) );
-            mark->setLabelFont( labelFont );
 
             m_visiblePlaceMarks.insert( index, mark );
         }
 
         // Finally save the label position on the map.
-        mark->setSymbolPosition( QPoint( x - mark->symbolSize().width()  / 2,
-                                         y - mark->symbolSize().height() / 2) );
+        GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+        QPointF hotSpot = style->iconStyle()->hotSpot();
+
+        mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
+                                         y - (int)( hotSpot.y() ) ) );
         mark->setLabelRect( labelRect );
 
         // Add the current placemark to the matching row and it's
         // direct neighbors.
-        int idx = y / m_labelareaheight;
+        int idx = y / m_maxLabelHeight;
         if ( idx - 1 >= 0 )
             rowsection[ idx - 1 ].append( mark );
         rowsection[ idx ].append( mark );
@@ -274,20 +310,20 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             continue;
         }
 
-        const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
+        const int visualCategory  = index.data( PlaceMarkModel::VisualCategoryRole ).toInt();
 
         // Skip city marks if we're not showing cities.
         if ( !viewParams->m_showCities
-             && ( symbolIndex < 16 ) )
+             && ( visualCategory > 3 && visualCategory < 20 ) )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
-             && ( symbolIndex >= 16 && symbolIndex <= 17 ) )
+             && ( visualCategory >= 20 && visualCategory <= 21 ) )
             continue;
 
         if ( !viewParams->m_showOtherPlaces
-             && ( symbolIndex >= 18 && symbolIndex <= 21 ) )
+             && ( visualCategory >= 22 && visualCategory <= 25 ) )
             continue;
 
 
@@ -314,11 +350,14 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             textWidth = mark->labelRect().width();
         }
         else {
-            labelFontData( index, false, labelFont, textWidth );
+            GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+            labelFont = style->labelStyle()->font();
+
+            textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() ) );
         }
 
         // Choose Section
-        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_labelareaheight );
+        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
          // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlaceMark here.
@@ -339,19 +378,20 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             mark = new VisiblePlaceMark;
 
             mark->setModelIndex( QPersistentModelIndex( index ) );
-            mark->setLabelFont( labelFont );
-
             m_visiblePlaceMarks.insert( index, mark );
         }
 
         // Finally save the label position on the map.
-        mark->setSymbolPosition( QPoint( x - mark->symbolSize().width()  / 2,
-                                         y - mark->symbolSize().height() / 2) );
+        GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+        QPointF hotSpot = style->iconStyle()->hotSpot();
+
+        mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
+                                         y - (int)( hotSpot.y() ) ) );
         mark->setLabelRect( labelRect );
 
         // Add the current placemark to the matching row and it's
         // direct neighbors.
-        int idx = y / m_labelareaheight;
+        int idx = y / m_maxLabelHeight;
         if ( idx - 1 >= 0 )
             rowsection[ idx - 1 ].append( mark );
         rowsection[ idx ].append( mark );
@@ -428,73 +468,30 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
     return true;
 }
 
-// Set font and textWidth according to the type of the PlaceMark.
-//
-void PlaceMarkLayout::labelFontData( const QPersistentModelIndex& index,
-                                      const bool isSelected, QFont &font, int &textWidth )
-{
-    const QChar role = index.data( PlaceMarkModel::GeoTypeRole ).toChar();
-
-    // C: Admin. center of _C_ountry
-    // R: Admin. center of _R_egion
-    // B: Admin. center of country and region ("_B_oth")
-    // N: _N_one
-
-    const int symbolIndex = index.data( PlaceMarkModel::SymbolIndexRole ).toInt();
-
-    if ( symbolIndex < 16 )
-    {
-        if ( role == 'N' ) {
-            font = m_font_regular;
-        } else 
-        if ( role == 'R' ) {
-           font = m_font_regular_italics;
-        } else if ( role == 'B' || role == 'C' ) {
-           font = m_font_regular_underline;
-        } else {
-            font = m_font_regular;
-        }
-        if ( symbolIndex > 13 )
-            font.setWeight( 75 );
-    }
-    else
-    {
-        if ( role == 'P' || role == 'M' ) {
-            font = m_font_regular;
-        } else if ( role == 'H' || role == 'V' ) {
-            font = m_font_mountain;
-        } else {
-            font = m_font_regular;
-        }
-    }
-
-    if ( isSelected )
-        font.setWeight( 75 );
-
-    textWidth = ( QFontMetrics( font ).width( index.data( Qt::DisplayRole ).toString() )
-                  + (int)( s_labelOutlineWidth ) );
-}
-
-
 QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
                                       const QVector<VisiblePlaceMark*> &currentsec,
                                       const int x, const int y,
-                                      const int textwidth )
+                                      const int textWidth )
 {
     bool  isRoom      = false;
-    int   symbolwidth = index.data( PlaceMarkModel::SymbolSizeRole ).toSize().width();
+
+    GeoDataStyle* style = index.data( PlaceMarkModel::StyleRole ).value<GeoDataStyle*>();
+    int symbolwidth = style->iconStyle()->icon().width();
+
+    QFont labelFont = style->labelStyle()->font();
+    int textHeight = QFontMetrics( labelFont ).height();
 
     int  xpos = symbolwidth / 2 + x + 1;
     int  ypos = 0;
 
     // Check the four possible positions by going through all of them
  
-    QRect  labelRect( xpos, ypos, textwidth, m_fontheight );
+    QRect  labelRect( xpos, ypos, textWidth, textHeight );
 
-    while ( xpos >= x - textwidth - symbolwidth - 1 ) {
+    while ( xpos >= x - textWidth - symbolwidth - 1 ) {
         ypos = y;
 
-        while ( ypos >= y - m_fontheight ) {
+        while ( ypos >= y - textHeight ) {
 
             isRoom = true;
             labelRect.moveTo( xpos, ypos );
@@ -515,10 +512,10 @@ QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
                 return labelRect;
             }
 
-            ypos -= m_fontheight;
+            ypos -= textHeight;
         }
 
-        xpos -= ( symbolwidth + textwidth + 2 );
+        xpos -= ( symbolwidth + textWidth + 2 );
     }
 
     return QRect(); // At this point there is no space left 

@@ -1,5 +1,12 @@
 2007-10-31  Torsten Rahn  <rahn@kde.org>
     
+    * src:
+
+    - Make current code use styles.
+    - Fix old broken KML loading.
+
+2007-10-31  Torsten Rahn  <rahn@kde.org>
+    
     * src/lib/geodata/data:
 
     - Changed lots of base classes to internally enable

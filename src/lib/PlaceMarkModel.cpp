@@ -9,8 +9,11 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtGui/QPixmap>
+
+#include "geodata/data/GeoDataStyle.h"
 
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkManager.h"
@@ -84,7 +87,10 @@ QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
     if ( role == Qt::DisplayRole ) {
         return d->m_placeMarkContainer.at( index.row() )->name();
     } else if ( role == Qt::DecorationRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->symbolPixmap();
+        GeoDataStyle* style = (GeoDataStyle*)( d->m_placeMarkContainer.at( index.row() )->style() );
+        QVariant v;
+        v.setValue( style->iconStyle()->icon() );
+        return v;
     } else if ( role == GeoTypeRole ) {
         return d->m_placeMarkContainer.at( index.row() )->role();
     } else if ( role == PopularityIndexRole ) {
@@ -95,10 +101,13 @@ QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
         return v;
     } else if ( role == CountryCodeRole ) {
         return d->m_placeMarkContainer.at( index.row() )->countryCode();
-    } else if ( role == SymbolIndexRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->symbolIndex();
-    } else if ( role == SymbolSizeRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->symbolSize();
+    } else if ( role == VisualCategoryRole ) {
+        return d->m_placeMarkContainer.at( index.row() )->visualCategory();
+    } else if ( role == StyleRole ) {
+        GeoDataStyle* s = d->m_placeMarkContainer.at( index.row() )->style();
+        QVariant v;
+        v.setValue( s );
+        return v;
     } else if ( role == PopularityRole ) {
         return d->m_placeMarkContainer.at( index.row() )->popularity();
     } else if ( role == DescriptionRole ) {
@@ -143,12 +152,19 @@ QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role,
     return results;
 }
 
-void PlaceMarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks )
+void PlaceMarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious )
 {
-  d->m_placeMarkContainer << placeMarks;
-  d->m_placeMarkContainer.sort();
+  // For now we simply remove any previous placemarks
+    if ( clearPrevious == true )
+    {
+        qDeleteAll(d->m_placeMarkContainer.begin(), d->m_placeMarkContainer.end());
+        d->m_placeMarkContainer.clear();
+    }
 
-  reset();
+    d->m_placeMarkContainer << placeMarks;
+    d->m_placeMarkContainer.sort();
+
+    reset();
 }
 
 void PlaceMarkModel::clearPlaceMarks()

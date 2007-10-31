@@ -55,6 +55,9 @@ void PlaceMarkInfoDialog::showContent()
 
     QString  rolestring;
     switch ( m_index.data( PlaceMarkModel::GeoTypeRole ).toChar().toLatin1() ) {
+    case 'K':
+        rolestring = tr("Continent");
+        break;
     case 'C':
         rolestring = tr("Capital");
         break;
@@ -101,7 +104,7 @@ void PlaceMarkInfoDialog::showContent()
     coordinates_val_lbl->setText( m_index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().toString() );
     country_val_lbl->setText( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
-    const int popularity = m_index.data( PlaceMarkModel::PopularityRole ).toInt();
+    const qint64 popularity = m_index.data( PlaceMarkModel::PopularityRole ).toLongLong();
     const QChar role = m_index.data( PlaceMarkModel::GeoTypeRole ).toChar();
     if ( role == 'H' || role == 'V' || role == 'W') {
         population_val_lbl->setVisible( false );
@@ -116,7 +119,11 @@ void PlaceMarkInfoDialog::showContent()
         elevation_lbl->setVisible( false );
     }
     else{
-        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( popularity ) ) );
+        if ( popularity < 10000000 )
+            population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( popularity ) ) );
+        else
+            population_val_lbl->setText( tr("%1 Mio. inh.")
+            .arg( QLocale::system().toString( popularity / 1000000 ) ) );
         elevation_val_lbl->setText( tr("-") );
     }
 

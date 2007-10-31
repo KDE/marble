@@ -95,7 +95,7 @@ class GeoDataFeature
     /**
      * Sets the symbol @p index of the place mark.
      */
-    void setGeoDataVisualCategory( GeoDataFeature::GeoDataVisualCategory index );
+    void setVisualCategory( GeoDataFeature::GeoDataVisualCategory index );
 
     /**
      * Returns the role of the place mark.

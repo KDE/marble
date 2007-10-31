@@ -202,15 +202,26 @@ void KMLPlaceMarkParser::setPlaceMarkSymbol()
 {
     KMLPlaceMark& placemark = (KMLPlaceMark&) m_object;
 
-    if ( placemark.role() == 'P' )      placemark.setSymbolIndex(16);
-    else if ( placemark.role() == 'M' ) placemark.setSymbolIndex(17);
-    else if ( placemark.role() == 'H' ) placemark.setSymbolIndex(18);
-    else if ( placemark.role() == 'V' ) placemark.setSymbolIndex(19);
-    else if ( placemark.role() == 'F' ) placemark.setSymbolIndex(20);
-    else if ( placemark.role() == 'N' ) placemark.setSymbolIndex( ( placemark.popularityIndex() -1 ) / 4 * 4 );
-    else if ( placemark.role() == 'R' ) placemark.setSymbolIndex( ( placemark.popularityIndex() -1 ) / 4 * 4 + 2);
-    else if ( placemark.role() == 'C' || placemark.role() == 'B' )
-        placemark.setSymbolIndex( ( placemark.popularityIndex() -1 ) / 4 * 4 + 3 );
+    if ( placemark.role() == 'H' )      placemark.setSymbolIndex( PlaceMark::Mountain );
+    else if ( placemark.role() == 'V' ) placemark.setSymbolIndex( PlaceMark::Volcano );
+    else if ( placemark.role() == 'P' ) placemark.setSymbolIndex( PlaceMark::GeographicPole );
+    else if ( placemark.role() == 'M' ) placemark.setSymbolIndex( PlaceMark::MagneticPole );
+    else if ( placemark.role() == 'W' ) placemark.setSymbolIndex( PlaceMark::ShipWreck );
+    else if ( placemark.role() == 'F' ) placemark.setSymbolIndex( PlaceMark::AirPort );
+    else if ( placemark.role() == 'K' ) placemark.setSymbolIndex( PlaceMark::Empty );
+
+    else if ( placemark.role() == 'N' ) placemark.setSymbolIndex( 
+        ( ( PlaceMark::SymbolIndex )( ( (int)( PlaceMark::SmallCity )
+        + placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
+    else if ( placemark.role() == 'R' ) placemark.setSymbolIndex( 
+        ( ( PlaceMark::SymbolIndex )( ( (int)( PlaceMark::SmallStateCapital )
+        + placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
+    else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setSymbolIndex( 
+        ( ( PlaceMark::SymbolIndex )( ( (int)( PlaceMark::SmallNationCapital )
+        + placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
+
+    else if ( placemark.role().isNull() ) // FIXME: && !m_hasPopulation
+        placemark.setSymbolIndex( PlaceMark::Default ); // default location
 }
 
 int KMLPlaceMarkParser::popIdx( int population )

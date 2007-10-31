@@ -45,8 +45,8 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
       DescriptionRole,                 ///< The description
       CoordinateRole,                  ///< The GeoPoint coordinate
       CountryCodeRole,                 ///< The country code
-      SymbolIndexRole,                 ///< The symbol index
-      SymbolSizeRole,                  ///< The symbol size
+      VisualCategoryRole,              ///< The category
+      StyleRole,                       ///< The style
       PopularityIndexRole,             ///< The popularity index
       PopularityRole                   ///< The popularity
     };
@@ -80,7 +80,7 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlaceMarks( const PlaceMarkContainer &placeMarks );
+    void addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious = false );
 
     /**
      * This method is used by the PlaceMarkManager to clear
