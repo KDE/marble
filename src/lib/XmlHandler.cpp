@@ -126,7 +126,7 @@ bool XmlHandler::endElement( const QString&, const QString&,
         else if ( m_placemark->role() == 'W' ) m_placemark->setVisualCategory( GeoDataPlaceMark::ShipWreck );
         else if ( m_placemark->role() == 'F' ) m_placemark->setVisualCategory( GeoDataPlaceMark::AirPort );
         else if ( m_placemark->role() == 'K' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Continent );
-
+        else if ( m_placemark->role() == 'O' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Ocean );
         else if ( m_placemark->role() == 'N' ) m_placemark->setVisualCategory( 
             ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallCity )
                 + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
@@ -230,8 +230,8 @@ int XmlHandler::popIdx( qint64 population )
     else if ( population < 2500000) popidx=13;
     else if ( population < 5000000) popidx=14;
 
-    if ( m_placemark->role() == 'W' && popidx > 12 ) popidx = 15;
     if ( m_placemark->role() == 'W' && popidx > 12 ) popidx = 12;
+    if ( m_placemark->role() == 'O' ) popidx = 14;
 
     return popidx;
 }

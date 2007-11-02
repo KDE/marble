@@ -1,9 +1,16 @@
-2007-10-31  Torsten Rahn  <rahn@kde.org>
+2007-11-01  Torsten Rahn  <rahn@kde.org>
     
-    * src:
+    * src/lib/PlaceMarkInfoDialog.cpp
+    * src/lib/XmlHandler.cpp
+    * src/lib/MarbleModel.cpp
+    * src/lib/geodata/data/GeoDataFeature.cpp
+    * src/lib/geodata/data/GeoDataFeature.h
+    * ChangeLog
+    * data/placemarks/COPYRIGHT
+    * data/placemarks/boundaryplacemarks.kml
+    * data/placemarks/boundaryplacemarks.cache
 
-    - Make current code use styles.
-    - Fix old broken KML loading.
+    - Adding Oceans.
 
 2007-10-31  Torsten Rahn  <rahn@kde.org>
     
@@ -11,6 +18,13 @@
 
     - Changed lots of base classes to internally enable
     real styles (in the spirit of KML) for placemarks.
+
+2007-10-31  Torsten Rahn  <rahn@kde.org>
+    
+    * src/lib/geodata/data:
+
+    - Added some data about continents with 
+      points of geodetic centers / inaccessibility.
 
 2007-09-26  Torsten Rahn  <rahn@kde.org>
 	

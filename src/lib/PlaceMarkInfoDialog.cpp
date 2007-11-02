@@ -20,6 +20,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QLabel>
 #include <QtGui/QTextBrowser>
+#include <QtGui/QTextFrame>
 
 #include "GeoPoint.h"
 #include "MarbleDirs.h"
@@ -45,11 +46,21 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
              m_pWikipediaBrowser, SLOT( setSource( QString ) ) );
 
     showContent();
+
+        QTextFrameFormat format = description_val_browser->document()->rootFrame()->frameFormat();
+        format.setMargin( 12) ;
+        description_val_browser->document()->rootFrame()->setFrameFormat( format );
+
 }
 
 
 void PlaceMarkInfoDialog::showContent()
 {
+    elevation_lbl->setVisible( true );
+    elevation_val_lbl->setVisible( true );
+    population_lbl->setText( tr("Population:") );
+
+
     name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
     altername_val_lbl->setText( "" );
 
@@ -57,6 +68,9 @@ void PlaceMarkInfoDialog::showContent()
     switch ( m_index.data( PlaceMarkModel::GeoTypeRole ).toChar().toLatin1() ) {
     case 'K':
         rolestring = tr("Continent");
+        break;
+    case 'O':
+        rolestring = tr("Ocean");
         break;
     case 'C':
         rolestring = tr("Capital");
@@ -98,9 +112,13 @@ void PlaceMarkInfoDialog::showContent()
     requestFlag( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
     const QString description = m_index.data( PlaceMarkModel::DescriptionRole ).toString();
-    if ( !description.isEmpty() )
-        description_val_browser->setPlainText( description );
 
+    description_val_browser->setEnabled( false );
+    if ( !description.isEmpty() )
+    {
+        description_val_browser->setEnabled( true );
+        description_val_browser->setPlainText( description );
+    }
     coordinates_val_lbl->setText( m_index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().toString() );
     country_val_lbl->setText( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
 
@@ -117,6 +135,17 @@ void PlaceMarkInfoDialog::showContent()
         population_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
         elevation_lbl->setVisible( false );
+    }
+    else if ( role == 'O' )
+    {
+        population_lbl->setText( tr("Total Area:") );
+        if ( popularity < 10000000 )
+            population_val_lbl->setText( tr("%1 sq km").arg( QLocale::system().toString( popularity ) ) );
+        else
+            population_val_lbl->setText( tr("%1 Mio. sq km")
+                .arg( QLocale::system().toString( popularity / 1000000 ) ) );
+        elevation_lbl->setVisible( false );
+        elevation_val_lbl->setVisible( false );
     }
     else{
         if ( popularity < 10000000 )

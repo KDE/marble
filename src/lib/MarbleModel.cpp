@@ -71,7 +71,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     : d( new MarbleModelPrivate )
 {
     d->m_timer = new QTimer( this );
-    d->m_timer->start( 1000 );
+    d->m_timer->start( 5000 );
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
@@ -222,7 +222,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
 		qDebug("TileCreatorDialog executed");
         }
 
-	qDebug("About to continue");
+//	qDebug("About to continue");
 
         if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
@@ -285,7 +285,10 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 {
     resize( width, height );
 
+    qDebug() << "Repainting";
+
     if ( redrawBackground ) {
+        qDebug() << "Redrawing Background";
 
         if ( d->m_maptheme->bitmaplayer().enabled == true ) {
 

@@ -167,6 +167,10 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
 
+    s_defaultStyle[Ocean]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
+
     s_defaultStyleInitialized = true;
 
     QFont tmp;

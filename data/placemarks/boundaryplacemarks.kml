@@ -81,5 +81,68 @@
             <coordinates>134.3548,-25.61</coordinates> 
         </Point> 
     </Placemark> 
+    <Placemark> 
+        <name>Arctic Ocean</name> 
+        <description>The Arctic Ocean is the smallest of the world's five oceans (after the Pacific Ocean, Atlantic Ocean, Indian Ocean, and the recently delimited Southern Ocean). The Northwest Passage (US and Canada) and Northern Sea Route (Norway and Russia) are two important seasonal waterways. A sparse network of air, ocean, river, and land routes circumscribes the Arctic Ocean.</description> 
+        <role>O</role> 
+        <pop>14056000</pop> 
+        <Point>
+            <coordinates>0.0,90.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Indian Ocean</name> 
+        <description>The Indian Ocean is the third largest of the world's five oceans (after the Pacific Ocean and Atlantic Ocean, but larger than the Southern Ocean and Arctic Ocean). Four critically important access waterways are the Suez Canal (Egypt), Bab el Mandeb (Djibouti-Yemen), Strait of Hormuz (Iran-Oman), and Strait of Malacca (Indonesia-Malaysia). The decision by the International Hydrographic Organization in the spring of 2000 to delimit a fifth ocean, the Southern Ocean, removed the portion of the Indian Ocean south of 60 degrees south latitude.</description> 
+        <role>O</role> 
+        <pop>68556000</pop> 
+        <Point>
+            <coordinates>80.0,-20.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>North Atlantic Ocean</name> 
+        <description>The Atlantic Ocean is the second largest of the world's five oceans (after the Pacific Ocean, but larger than the Indian Ocean, Southern Ocean, and Arctic Ocean). The Kiel Canal (Germany), Oresund (Denmark-Sweden), Bosporus (Turkey), Strait of Gibraltar (Morocco-Spain), and the Saint Lawrence Seaway (Canada-US) are important strategic access waterways. The decision by the International Hydrographic Organization in the spring of 2000 to delimit a fifth world ocean, the Southern Ocean, removed the portion of the Atlantic Ocean south of 60 degrees south latitude.</description> 
+        <role>O</role> 
+        <pop>76762000</pop> 
+        <Point>
+            <coordinates>-45.0,30.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>North Pacific Ocean</name> 
+        <description>The Pacific Ocean is the largest of the world's five oceans (followed by the Atlantic Ocean, Indian Ocean, Southern Ocean, and Arctic Ocean). Strategically important access waterways include the La Perouse, Tsugaru, Tsushima, Taiwan, Singapore, and Torres Straits. The decision by the International Hydrographic Organization in the spring of 2000 to delimit a fifth ocean, the Southern Ocean, removed the portion of the Pacific Ocean south of 60 degrees south.</description> 
+        <role>O</role> 
+        <pop>155557000</pop> 
+        <Point>
+            <coordinates>180.0,30.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>South Pacific Ocean</name> 
+        <description>The Pacific Ocean is the largest of the world's five oceans (followed by the Atlantic Ocean, Indian Ocean, Southern Ocean, and Arctic Ocean). Strategically important access waterways include the La Perouse, Tsugaru, Tsushima, Taiwan, Singapore, and Torres Straits. The decision by the International Hydrographic Organization in the spring of 2000 to delimit a fifth ocean, the Southern Ocean, removed the portion of the Pacific Ocean south of 60 degrees south.</description> 
+        <role>O</role> 
+        <pop>155557000</pop> 
+        <Point>
+            <coordinates>-145.0,-30.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>South Atlantic Ocean</name> 
+        <description>The Atlantic Ocean is the second largest of the world's five oceans (after the Pacific Ocean, but larger than the Indian Ocean, Southern Ocean, and Arctic Ocean). The Kiel Canal (Germany), Oresund (Denmark-Sweden), Bosporus (Turkey), Strait of Gibraltar (Morocco-Spain), and the Saint Lawrence Seaway (Canada-US) are important strategic access waterways. The decision by the International Hydrographic Organization in the spring of 2000 to delimit a fifth world ocean, the Southern Ocean, removed the portion of the Atlantic Ocean south of 60 degrees south latitude.</description> 
+        <role>O</role> 
+        <pop>76762000</pop> 
+        <Point>
+            <coordinates>-20.0,-30.0</coordinates> 
+        </Point> 
+    </Placemark> 
+    <Placemark> 
+        <name>Southern Ocean</name> 
+        <description>A large body of recent oceanographic research has shown that the Antarctic Circumpolar Current (ACC), an ocean current that flows from west to east around Antarctica, plays a crucial role in global ocean circulation. The region where the cold waters of the ACC meet and mingle with the warmer waters of the north defines a distinct border - the Antarctic Convergence - which fluctuates with the seasons, but which encompasses a discrete body of water and a unique ecologic region. The Convergence concentrates nutrients, which promotes marine plant life, and which in turn allows for a greater abundance of animal life. In the spring of 2000, the International Hydrographic Organization decided to delimit the waters within the Convergence as a fifth world ocean - the Southern Ocean - by combining the southern portions of the Atlantic Ocean, Indian Ocean, and Pacific Ocean. The Southern Ocean extends from the coast of Antarctica north to 60 degrees south latitude, which coincides with the Antarctic Treaty Limit and which approximates the extent of the Antarctic Convergence. As such, the Southern Ocean is now the fourth largest of the world's five oceans (after the Pacific Ocean, Atlantic Ocean, and Indian Ocean, but larger than the Arctic Ocean).</description> 
+        <role>O</role> 
+        <pop>20327000</pop> 
+        <Point>
+            <coordinates>90.0,-60.0</coordinates> 
+        </Point> 
+    </Placemark> 
 </Document>
 </kml> 

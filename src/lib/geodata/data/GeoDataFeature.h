@@ -56,6 +56,7 @@ class GeoDataFeature
                        ShipWreck,
                        AirPort,
                        Continent,
+                       Ocean,
                        LastIndex // Important: Make sure that this is always the last 
                                  // item and just use it to specify the array size
                    };
