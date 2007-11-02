@@ -46,7 +46,7 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ), m_positionLabel( 0 ), m_distanceLabel( 0 )
 {
-    MarbleDirs::setMarbleDataPath( arguments.count() != 0 ? arguments.first() : MarbleSettings::marbleDataPath() );
+    MarbleDirs::setMarbleDataPath( (arguments.count() != 0 && !arguments.first().isEmpty() ) ? arguments.first() : MarbleSettings::marbleDataPath() );
 
     setComponentData( MarblePartFactory::componentData() );
 
