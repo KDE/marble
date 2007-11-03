@@ -71,7 +71,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     : d( new MarbleModelPrivate )
 {
     d->m_timer = new QTimer( this );
-    d->m_timer->start( 5000 );
+    d->m_timer->start( 200 );
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );

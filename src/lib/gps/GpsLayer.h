@@ -53,8 +53,8 @@ class GpsLayer : public AbstractLayer
     
     void loadGpx(const QString &fileName);
 //  public slots:
-    QRegion updateGps(const QSize &canvasSize, double radius,
-                      Quaternion rotAxis);
+    bool updateGps(const QSize &canvasSize, double radius,
+                      Quaternion rotAxis, QRegion &reg);
 
     GpxFileModel        *m_fileModel;
  private:

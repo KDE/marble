@@ -65,7 +65,7 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
 {
 #ifdef HAVE_LIBGPS
     if( !m_gpsd ) {
-        currentDraw.clear();
+        m_currentDraw.clear();
         return;
     }
 #endif
@@ -81,7 +81,7 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
             invRotAxis, radius, &previousPosition );
    
     if ( !draw ) {
-        currentDraw.clear();
+        m_currentDraw.clear();
         return;
     }
 
@@ -96,15 +96,28 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
     // The normal of the unit vector between first and second
     QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
     
-    previousDraw = currentDraw;
+    m_previousDraw = m_currentDraw;
     
-    currentDraw.clear();
-    currentDraw << position
+    m_currentDraw.clear();
+    m_currentDraw << position
                 << ( position - ( unitVector * 9 ) 
                               + ( unitVector2 * 9 ) )
                 << ( position + ( unitVector * 19.0 ) )
                 << ( position - ( unitVector * 9 ) 
                               - ( unitVector2 * 9 ) );
+}
+QRegion GpsTracking::genRegion( const QSize &canvasSize, double radius,
+                               Quaternion invRotAxis ) 
+{
+        construct( canvasSize, radius, invRotAxis );
+    
+        QRect temp1(m_currentDraw.boundingRect().toRect());
+        QRect temp2(m_previousDraw.boundingRect().toRect());
+    
+        temp1.adjust( -5, -5, 10, 10);
+        temp2.adjust( -5, -5, 10, 10);
+    
+        return QRegion(temp1).united( QRegion(temp2) );
 }
 
 void GpsTracking::getData( bool error )
@@ -144,8 +157,8 @@ void GpsTracking::updateIp( )
     
 }
 
-QRegion GpsTracking::update(const QSize &canvasSize, double radius,
-                            Quaternion invRotAxis) 
+bool GpsTracking::update(const QSize &canvasSize, double radius,
+                            Quaternion invRotAxis, QRegion &reg) 
 {
     switch ( m_trackingMethod ) {
     case MobilePhone:
@@ -158,15 +171,21 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
         
         if ( m_updateDelay > 0 ) {
             --m_updateDelay;
-            return QRegion();
+            
+            //removed need for returning empty regions
+            //return QRegion();
+            
+            return false;
         }
         
         host.setHost( "api.hostip.info" );
         host.get( "http://api.hostip.info/");
         m_updateDelay = 15000;
         
+        //removed empty return
+        //return QRegion();
         
-        return QRegion();
+        return false;
         break;
     case Gps:
 #ifndef HAVE_LIBGPS
@@ -190,6 +209,10 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
                 m_gpsTrackSeg->append( m_gpsPreviousPosition );
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
                 m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
+                reg = genRegion( canvasSize, radius,invRotAxis);
+                return true;
+            } else {
+                return false;
             }
         } else {
 
@@ -200,19 +223,20 @@ QRegion GpsTracking::update(const QSize &canvasSize, double radius,
             }
         }
     
+        /*
         construct( canvasSize, radius, invRotAxis );
     
-        QRect temp1(currentDraw.boundingRect().toRect());
-        QRect temp2(previousDraw.boundingRect().toRect());
+        QRect temp1(m_currentDraw.boundingRect().toRect());
+        QRect temp2(m_previousDraw.boundingRect().toRect());
     
         temp1.adjust( -5, -5, 10, 10);
         temp2.adjust( -5, -5, 10, 10);
     
         return QRegion(temp1).united( QRegion(temp2) );
+        */
     
 #endif
     }
-    return QRegion();
 }
 
 void GpsTracking::draw( ClipPainter *painter,
@@ -234,7 +258,7 @@ void GpsTracking::draw( ClipPainter *painter,
     case Gps:
         painter->setPen( Qt::black );
         painter->setBrush( Qt::white );
-        painter->drawPolygon( currentDraw, Qt::OddEvenFill );
+        painter->drawPolygon( m_currentDraw, Qt::OddEvenFill );
         break;
     case MobilePhone:
         

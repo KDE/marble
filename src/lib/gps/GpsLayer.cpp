@@ -46,11 +46,11 @@ GpsLayer::~GpsLayer()
     delete m_currentGpx;
 }
 
-QRegion GpsLayer::updateGps( const QSize &canvasSize, double radius,
-                             Quaternion rotAxis )
+bool GpsLayer::updateGps( const QSize &canvasSize, double radius,
+                             Quaternion rotAxis, QRegion &reg )
 {
     return  m_tracking->update( canvasSize, radius, 
-                                rotAxis.inverse() );
+                                rotAxis.inverse(), reg );
 //     return QRegion();
 }
 
@@ -63,7 +63,8 @@ void GpsLayer::paintLayer( ClipPainter *painter,
     if ( visible() ) {
         m_currentPosition->draw( painter, canvasSize, 
                                 radius, invRotAxis );
-        updateGps( canvasSize, radius, rotAxis );
+        QRegion temp; // useless variable
+        updateGps( canvasSize, radius, rotAxis, temp);
         paintCurrentPosition( painter, canvasSize, radius, 
                               invRotAxis );
     }

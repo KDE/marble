@@ -49,12 +49,40 @@ public:
                           QObject *parent = 0 );
     ~GpsTracking();
 
-    
-    QRegion update(const QSize &canvasSize, double radius,
-                   Quaternion invRotAxis);
+    /**
+     * @brief update the gps object
+     * 
+     * this function is designed to be polled at a regular interval so
+     * that the gps object can update its position and construct the 
+     * new polygon that needs to be painted to screen. 
+     * 
+     * @param canvasSize current size of view
+     * @param radius current radius of globe
+     * @param invRotAxis current Quaternion representation of globe.
+     * @param reg the region on screen that needs to be re-painted
+     *            following this update
+     * @return @c true the region of the screen needs to be repainted
+     *         @c false the gps object was not updated so no repaint
+     *                  nessary.
+     */
+    bool update(const QSize &canvasSize, double radius,
+                   Quaternion invRotAxis, QRegion &reg);
     
     void construct ( const QSize &canvasSize, double radius,
                      Quaternion invRotAxis );
+    /**
+     * generates the region of the view that needs to be updated when 
+     * the position of the gps changes. it is a union of the old 
+     * position with the new one. 
+     * 
+     * @param canvasSize current size of view. 
+     * @param radius    current radius
+     * @param invRotAxis current Quaternion representation of globe.
+     * @return QRegion representation of where on the view needs to be
+     *         updated.
+     */
+    QRegion     genRegion( const QSize &canvasSize, double radius,
+                          Quaternion invRotAxis );
     
     void draw( ClipPainter *painter,
                 const QSize &canvasSize, double radius,
@@ -68,8 +96,8 @@ public:
  private:
     //used to draw the arrow in gps tracking
     GpxFile             *m_currentGpx;
-    QPolygonF           currentDraw;
-    QPolygonF           previousDraw;
+    QPolygonF           m_currentDraw;
+    QPolygonF           m_previousDraw;
     QPointF             m_previousDistancePosition;
     
     //used to get info from ip address
