@@ -14,7 +14,6 @@
 
 
 #include <QtCore/QString>
-
 #include <QtCore/QSize>
 #include <QtGui/QPixmap>
 #include <QtGui/QFont>
@@ -25,8 +24,16 @@
 class GeoDataStyle;
 class GeoDataStyleSelector;
 
-class GeoDataFeature
-  : public GeoDataObject
+
+/**
+ * @short A base class for all geodata features
+ *
+ * GeoDataFeature is the base class for all geodata classes. It is
+ * never instantiated by itself, but is always used as part of a
+ * derived object.
+ */
+
+class GeoDataFeature : public GeoDataObject
 {
  public:
 
@@ -61,6 +68,7 @@ class GeoDataFeature
                                  // item and just use it to specify the array size
                    };
 
+    GeoDataFeature();
     virtual ~GeoDataFeature();
 
     QString name() const;

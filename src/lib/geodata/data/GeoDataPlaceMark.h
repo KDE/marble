@@ -13,67 +13,69 @@
 #ifndef GEODATAPLACEMARK_H
 #define GEODATAPLACEMARK_H
 
+
 #include <QtCore/QChar>
 
 #include "GeoPoint.h"
 #include "GeoDataFeature.h"
 
 /**
- * This class represents a place mark, e.g. a city or a mountain.
- * It is filled with data by the GeoData or GPX loader and the
+ * @short a class representing a point of interest on the map
+ *
+ * This class represents a placemark, e.g. a city or a mountain.
+ * It is filled with data by the KML or GPX loader and the
  * PlaceMarkModel makes use of it.
  */
+
 class GeoDataPlaceMark: public GeoDataFeature
 {
  public:
     /**
-     * Creates a new place mark.
+     * Create a new placemark.
      */
     GeoDataPlaceMark();
 
     /**
-     * Creates a new place mark with the given @p name.
+     * Create a new placemark with the given @p name.
      */
     GeoDataPlaceMark( const QString &name );
 
     /**
-     * Returns the coordinat of the place mark as GeoPoint
-     * object.
+     * Return the coordinate of the placemark as a GeoPoint
      */
     GeoPoint coordinate() const;
 
     /**
-     * Returns the coordinate of the place mark as @p longitude
+     * Return the coordinate of the placemark as @p longitude
      * and @p latitude.
      */
     void coordinate( double &longitude, double &latitude );
 
     /**
-     * Sets the coordinate of the place mark in @p longitude and
+     * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
     void setCoordinate( double longitude, double latitude );
 
     /**
-     * Returns the country code of the place mark.
+     * Return the country code of the placemark.
      */
     const QString countryCode() const;
 
     /**
-     * Sets the country @p code of the place mark.
+     * Set the country @p code of the placemark.
      */
     void setCountryCode( const QString &code );
 
-    /**
-     * Serializable methods
-     */
+    // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
+    // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
 
  private:
     // Basic data
-    GeoPoint m_coordinate;
-    QString m_countrycode;
+    GeoPoint  m_coordinate;
+    QString   m_countrycode;
 };
 
 #endif // GEODATAPLACEMARK_H
