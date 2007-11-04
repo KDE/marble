@@ -1,9 +1,12 @@
 2007-11-04  Inge Wallin  <inge@lysator.liu.se>
 
+	APIDOX
+	* src/lib/geodata/data/GeoDataFeature.h: More apidox
+	
 	Warnings--
 	* src/kdemain.cpp,
 	* src/lib/PlaceMarkContainer.cpp,
-	* src/lib/geodata7data/GeoDataFeature.cpp:
+	* src/lib/geodata/data/GeoDataFeature.cpp:
 	Improve comments, remove warnings, clean code
 
 	APIDOX
