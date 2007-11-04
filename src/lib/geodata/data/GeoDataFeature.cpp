@@ -36,8 +36,8 @@ GeoDataFeature::GeoDataFeature() :
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name ) :
-    m_visible( true ),
     m_name( name ),
+    m_visible( true ),
     m_style( 0 ), 
     m_visualCategory( Unknown ),
     m_role(' '),

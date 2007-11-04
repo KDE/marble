@@ -58,12 +58,11 @@ int main (int argc, char *argv[])
 
     KApplication app;
 
-    QString marbleDataPath;
-    uint dataPathIndex;
+    QString  marbleDataPath;
+    int      dataPathIndex = 0;
 
     for ( int i = 1; i < argc - 1; ++i ) {
-        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 )
-        {
+        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 ) {
             dataPathIndex = i + 1;
             marbleDataPath = argv[ dataPathIndex ];
         }
@@ -101,14 +100,11 @@ int main (int argc, char *argv[])
     }
 
     // Read the files that are given on the command line.
-    // FIXME: What should the '1' below really be?
-    // Command line arguments, i.e. files to open
-
-    for (int i = 0; i < args->count(); i++) {
+    for ( int i = 0; i < args->count(); ++i ) {
 
         // FIXME: Use openUrl( args->url(i)) instead?
         if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
-            ( window->marbleControl() )->addPlaceMarkFile( args->arg( i ) );
+            window->marbleControl()->addPlaceMarkFile( args->arg( i ) );
     }
 
     delete marbleTest;

@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
 #include "PlaceMarkContainer.h"
 
 
@@ -27,7 +28,8 @@ inline bool populationLessThan( GeoDataPlaceMark* mark1, GeoDataPlaceMark* mark2
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.
-    return ( abs( (double) mark1->popularity() ) > abs( (double) mark2->popularity() ) );
+    return ( abs( (double) mark1->popularity() )
+             > abs( (double) mark2->popularity() ) );
 }
 
 
@@ -40,6 +42,7 @@ QString PlaceMarkContainer::name() const
 {
     return m_name;
 }
+
 
 void PlaceMarkContainer::sort()
 {
