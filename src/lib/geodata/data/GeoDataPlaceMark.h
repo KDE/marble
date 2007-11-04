@@ -22,9 +22,13 @@
 /**
  * @short a class representing a point of interest on the map
  *
- * This class represents a placemark, e.g. a city or a mountain.
- * It is filled with data by the KML or GPX loader and the
+ * This class represents a point of interest, e.g. a city or a
+ * mountain.  It is filled with data by the KML or GPX loader and the
  * PlaceMarkModel makes use of it.
+ *
+ * This is more or less only a GeoDataFeature with a geographic
+ * position and a country code attached to it.  The country code is
+ * not provided in a KML file.
  */
 
 class GeoDataPlaceMark: public GeoDataFeature
@@ -73,9 +77,9 @@ class GeoDataPlaceMark: public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
  private:
-    // Basic data
-    GeoPoint  m_coordinate;
-    QString   m_countrycode;
+    // Data for a Placemark in addition to those in GeoDataFeature.
+    GeoPoint  m_coordinate;     // The geographic position
+    QString   m_countrycode;    // Country code.
 };
 
 #endif // GEODATAPLACEMARK_H

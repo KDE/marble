@@ -42,6 +42,9 @@ class GeoDataFeature : public GeoDataObject
 {
  public:
 
+    /**
+     * @brief  A categorization of a placemark as defined by ...FIXME.
+     */
     enum GeoDataVisualCategory {
         None,
         Default,
@@ -100,20 +103,26 @@ class GeoDataFeature : public GeoDataObject
      */
     void setName( const QString &value );
 
+    /// Return the address of the feature
     QString address() const;
+    /// Set the address of this feature to @p value.
     void setAddress( const QString &value);
 
+    /// Return the phone number of the feature
     QString phoneNumber() const;
+    /// Set the phone number of this feature to @p value.
     void setPhoneNumber( const QString &value);
 
+    /// Return the text description of the feature.
     QString description() const;
+    /// Set the description of this feature to @p value.
     void setDescription( const QString &value);
 
     /// Return whether this feature is visible or not
     bool isVisible() const;
     /**
      * @brief Set a new value for visibility
-     * @param value  new value for the visibilty
+     * @param value  new value for the visibility
      *
      * This function sets the visibility, i.e. whether this feature
      * should be shown or not.  This can be changed either from a GUI
@@ -122,103 +131,113 @@ class GeoDataFeature : public GeoDataObject
     void setVisible( bool value );
 
     /**
-     * Returns the style assigned to the placemark.
+     * Return the style assigned to the placemark.
      */
     GeoDataStyle* style() const;
-
     /**
      * Sets the style of the placemark.
+     * @param  style  the new style to be used.
      */
     void setStyle( GeoDataStyle* style );
 
     /**
-     * Returns the symbol index of the placemark.
+     * Return the symbol index of the placemark.
      */
-    const GeoDataFeature::GeoDataVisualCategory visualCategory() const; 
-
+    const GeoDataVisualCategory visualCategory() const; 
     /**
      * Sets the symbol @p index of the placemark.
+     * @param  category  the new category to be used.
      */
-    void setVisualCategory( GeoDataFeature::GeoDataVisualCategory index );
+    void setVisualCategory( GeoDataVisualCategory category );
 
     /**
-     * Returns the role of the placemark.
+     * Return the role of the placemark.
      *
-     * TODO: describe roles here!
+     * FIXME: describe roles here!
      */
     const QChar role() const;
-
     /**
      * Sets the role of the placemark.
+     * @param  role  the new role to be used.
      */
     void setRole( const QChar &role );
 
 
     /**
-     * Returns the popularity index of the placemark.
+     * @brief Return the popularity index of the placemark.
      *
-     * The popularity index is a value which describes
-     * at which zoom level the placemark will be shown.
+     * The popularity index is a value which describes at which zoom
+     * level the placemark will be shown.
      */
     const int popularityIndex() const;
-
     /**
      * Sets the popularity @p index of the placemark.
+     * @param  index  the new index to be used.
      */
     void setPopularityIndex( int index );
 
     /**
-     * Returns the popularity of the placemark.
+     * Return the popularity of the placemark.
      */
     const qint64 popularity() const;
-
     /**
      * Sets the @p popularity of the placemark.
+     * @param  popularity  the new popularity value
      */
     void setPopularity( qint64 popularity );
 
+    // ----------------------------------------------------------------
+    // The following functions are use for painting, and mostly for placemarks.
+
     /**
-     * Returns the symbol size of the placemark.
+     * Return the symbol size of the feature in pixels.
      */
     const QSize symbolSize() const;
 
     /**
-     * Returns the symbol of the placemark.
+     * Return the symbol of the feature as a pixmap.
+     *
+     * Note that the pixmaps are shared between all features with the
+     * same visual category
      */
     const QPixmap symbolPixmap() const;
 
     /**
-     * Returns the label font of the placemark.
+     * Return the label font of the placemark.
      */
     static void resetDefaultStyles();
 
 
+    /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
  protected:
+    /// Create a new GeoDataFeature with @p name as its name.
     GeoDataFeature( const QString& name );
 
-    GeoDataVisualCategory m_visualCategory;
+    /// The visual category of this feature.  @see GeoDataVisualCategory
+    GeoDataVisualCategory  m_visualCategory;
 
  private:
     static void initializeDefaultStyles();
 
  private:
-    QString     m_name;
-    QString     m_description;
-    QString     m_address;
-    QString     m_phoneNumber;
+    QString     m_name;         // Name of the feature. Is shown on screen
+    QString     m_description;  // A longer textual description
+    QString     m_address;      // The address.  Optional
+    QString     m_phoneNumber;  // Phone         Optional
+    qint64      m_popularity;   // Population(!)
+    int         m_popularityIndex; // Index of population
 
     bool        m_visible;      // True if this feature should be shown.
 
+    QChar       m_role;
+
     GeoDataStyleSelector* m_style;
 
-    QChar m_role;
-
-    qint64  m_popularity;
-    int     m_popularityIndex;
-
+    // Static members
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;
 };
