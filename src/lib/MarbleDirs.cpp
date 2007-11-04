@@ -94,11 +94,11 @@ if ( !runTimeMarbleDataPath.isEmpty() )
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
 //    qDebug( "%s <-- marble data path", qPrintable( compileTimeMarbleDataPath ) );
+    if(QDir(compileTimeMarbleDataPath).exists())
+        return compileTimeMarbleDataPath;
+#endif  // MARBLE_DATA_PATH
 
-    return compileTimeMarbleDataPath;
-#endif
-
-return QDir( qApp->applicationDirPath() 
+    return QDir( qApp->applicationDirPath() 
 
 #if defined(QTONLY)
                      + QLatin1String( "/data" )

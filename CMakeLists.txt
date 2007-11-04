@@ -25,7 +25,11 @@ endif (QTONLY)
 # Detect default for the user configurable MARBLE_DATA_PATH option
 
 if(WIN32)
-  set(data_dir data)
+  if(QTONLY)
+    set(data_dir data)
+  else(QTONLY)
+    set(data_dir ${DATA_INSTALL_DIR}/marble/data)
+  endif(QTONLY)
 else(WIN32)
   if(APPLE)
     # needed for finding bundle path in e.g. katlasdir.h
