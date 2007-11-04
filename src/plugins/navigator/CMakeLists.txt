@@ -33,7 +33,7 @@ if (QTONLY)
   install(TARGETS MarbleNavigatorPlugin DESTINATION ${QT_PLUGINS_DIR}/designer)
 else (QTONLY)
   kde4_add_library(MarbleNavigatorPlugin SHARED ${marblenavigator_SRCS})
-  target_link_libraries (MarbleNavigatorPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY})
+  target_link_libraries (MarbleNavigatorPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
   install(TARGETS MarbleNavigatorPlugin DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer)
 endif (QTONLY)
 
