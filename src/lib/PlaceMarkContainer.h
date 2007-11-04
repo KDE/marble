@@ -27,12 +27,23 @@
 class PlaceMarkContainer : public QVector<GeoDataPlaceMark*>
 {
  public:
+    /// Create a new PlaceMarkContainer.
     PlaceMarkContainer();
+    /**
+     * @brief Create a new PlaceMarkContainer
+     * param  name the name of the container
+     */
     PlaceMarkContainer( const QString& name );
 
-    void setName( const QString& name );
+    /// Return the name of the container
     QString name() const;
+    /**
+     * @brief Set a new name for the PlaceMarkContainer
+     * param  name the new name of the container
+     */
+    void setName( const QString& name );
 
+    /// @brief Sort the placemarks in descending order by population.
     void sort();
 
  private:	

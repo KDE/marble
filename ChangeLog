@@ -1,6 +1,9 @@
 2007-11-04  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX
+	* src/lib/PlaceMarkContainer.h: Add apidox
+
+	APIDOX
 	* src/lib/geodata/data/GeoDataObject.h,	
 	* src/lib/geodata/data/GeoDataFeature.h,	
 	* src/lib/geodata/data/GeoDataPlaceMark.h:
