@@ -37,7 +37,6 @@
 class GeoDataObject : public Serializable
 {
  public:
-    GeoDataObject();
     virtual ~GeoDataObject();
 
     /**

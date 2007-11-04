@@ -162,7 +162,6 @@ class GeoDataFeature : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
  protected:
-    GeoDataFeature();
     GeoDataFeature( const QString& name );
 
     GeoDataVisualCategory m_visualCategory;
