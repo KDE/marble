@@ -29,10 +29,10 @@ class WaypointContainer : public virtual AbstractLayerContainer
                        const QSize &canvasSize, double radius,
                        Quaternion invRotAxis );
     
-    /*
+    
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis, BoundingBox box );*/
+                       Quaternion invRotAxis, BoundingBox box );
 
  protected:
     virtual void processVisable();

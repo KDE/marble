@@ -92,8 +92,7 @@ void GpxFile::draw( ClipPainter *painter,
     if ( !m_visible ){
         return;
     }
-//     m_waypoints->draw( painter, canvasSize, radius, invRotAxis,
-// box);
+    m_waypoints->draw( painter, canvasSize, radius, invRotAxis, box);
     m_routes->draw( painter, canvasSize, radius, invRotAxis, box);
     m_tracks->draw( painter, canvasSize, radius, invRotAxis, box);
 }

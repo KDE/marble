@@ -10,6 +10,7 @@
 
 
 #include "WaypointContainer.h"
+#include "BoundingBox.h"
 
 
 WaypointContainer::WaypointContainer()
@@ -18,6 +19,13 @@ WaypointContainer::WaypointContainer()
 
 void WaypointContainer::processVisable()
 {
+}
+
+void WaypointContainer::draw( ClipPainter *painter, 
+                           const QSize &canvasSize, double radius,
+                           Quaternion invRotAxis, BoundingBox box )
+{
+    draw( painter, canvasSize, radius, invRotAxis);
 }
 
 void WaypointContainer::draw( ClipPainter *painter, 

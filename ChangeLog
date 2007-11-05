@@ -1,3 +1,7 @@
+2007-11-05 Andrew Manson <g.real.ate@gmail.com>
+    Fixed bug that prevented Waypoints from a gpx file being
+    displayed on the view. 
+
 2007-11-04  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX
@@ -23,7 +27,7 @@
 	Add apidox.  GeoDataObject and GeoDataPlaceMark are finished,
 	GeoDataFeature not really yet.
 
-2007-11-01 Andrew Manson <g.real.ate@gmail.com>
+2007-11-04 Andrew Manson <g.real.ate@gmail.com>
     Altered the gps layer update scheme to stop it 
     updating anything if the gps location has not changed.
 
