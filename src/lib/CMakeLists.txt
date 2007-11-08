@@ -232,11 +232,7 @@ else(WIN32 AND QTONLY)
     if(QTONLY)
       install(TARGETS marblewidget DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
     else(QTONLY)
-        install(TARGETS marblewidget
-            RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-            LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-            ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-        )
+        install(TARGETS marblewidget  DESTINATION ${LIB_INSTALL_DIR})
     endif(QTONLY)
   endif(APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
