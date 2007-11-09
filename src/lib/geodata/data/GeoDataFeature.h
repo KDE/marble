@@ -28,9 +28,9 @@ class GeoDataStyleSelector;
 /**
  * @short A base class for all geodata features
  *
- * GeoDataFeature is the base class for all geodata classes. It is
- * never instantiated by itself, but is always used as part of a
- * derived class.
+ * GeoDataFeature is the base class for most geodata classes that
+ * correspond to places on a map. It is never instantiated by itself,
+ * but is always used as part of a derived class.
  *
  * @see GeoDataPlaceMark
  * @see GeoDataContainer

@@ -24,25 +24,25 @@
  *
  * This class represents a point of interest, e.g. a city or a
  * mountain.  It is filled with data by the KML or GPX loader and the
- * PlaceMarkModel makes use of it.
+ * PlacemarkModel makes use of it.
  *
  * This is more or less only a GeoDataFeature with a geographic
  * position and a country code attached to it.  The country code is
  * not provided in a KML file.
  */
 
-class GeoDataPlaceMark: public GeoDataFeature
+class GeoDataPlacemark: public GeoDataFeature
 {
  public:
     /**
      * Create a new placemark.
      */
-    GeoDataPlaceMark();
+    GeoDataPlacemark();
 
     /**
      * Create a new placemark with the given @p name.
      */
-    GeoDataPlaceMark( const QString &name );
+    GeoDataPlacemark( const QString &name );
 
     /**
      * Return the coordinate of the placemark as a GeoPoint

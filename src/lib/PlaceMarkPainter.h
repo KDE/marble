@@ -25,7 +25,7 @@
 #include <QtCore/QRect>
 #include <QtCore/QVector>
 
-#include "GeoDataPlaceMark.h"
+#include "GeoDataPlacemark.h"
 #include "PlaceMarkLayout.h"
 
 

@@ -18,7 +18,7 @@
 #include <QtXml/QXmlDefaultHandler>
 
 
-class GeoDataPlaceMark;
+class GeoDataPlacemark;
 class PlaceMarkContainer;
 
 
@@ -42,7 +42,7 @@ class XmlHandler : public QXmlDefaultHandler
 
  private:
     PlaceMarkContainer  *m_placeMarkContainer;
-    GeoDataPlaceMark           *m_placemark;
+    GeoDataPlacemark    *m_placemark;
 
     QString              m_currentText;
 

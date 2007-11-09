@@ -11,7 +11,7 @@
 #include <QtGui/QImage>
 
 #include "GeoDataContainer.h"
-#include "GeoDataPlaceMark.h"
+#include "GeoDataPlacemark.h"
 #include "ViewParams.h"
 
 GeoDataContainer::GeoDataContainer()
@@ -22,12 +22,12 @@ GeoDataContainer::~GeoDataContainer()
 {
     qDebug("GeoDataContainer::~GeoDataContainer(). Object count: %d", m_placemarkVector.count());
 
-    foreach ( GeoDataPlaceMark* placemark, m_placemarkVector ) {
+    foreach ( GeoDataPlacemark* placemark, m_placemarkVector ) {
         delete placemark;
     }
 }
 
-void GeoDataContainer::addPlaceMark( GeoDataPlaceMark* placemark )
+void GeoDataContainer::addPlaceMark( GeoDataPlacemark* placemark )
 {
     m_placemarkVector.append( placemark );
 }
@@ -61,12 +61,12 @@ PlaceMarkContainer& GeoDataContainer::sphericalActivePlaceMarkContainer( const V
     Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
     Quaternion  qpos;
 
-    QVector < GeoDataPlaceMark* >::const_iterator  it;
+    QVector < GeoDataPlacemark* >::const_iterator  it;
     for ( it = m_placemarkVector.constBegin();
           it != m_placemarkVector.constEnd();
           it++ )
     {
-        GeoDataPlaceMark* placemark = *it;
+        GeoDataPlacemark* placemark = *it;
         qpos = placemark->coordinate().quaternion();
 
         qpos.rotateAroundAxis(invplanetAxis);
@@ -103,12 +103,12 @@ PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const
     float const centerLat =  viewParams.m_planetAxis.pitch();
     float const centerLon = -viewParams.m_planetAxis.yaw();
 
-    QVector < GeoDataPlaceMark* >::const_iterator  it;
+    QVector < GeoDataPlacemark* >::const_iterator  it;
     for ( it = m_placemarkVector.constBegin();
           it != m_placemarkVector.constEnd();
           it++ )
     {
-        GeoDataPlaceMark* placemark = *it;
+        GeoDataPlacemark* placemark = *it;
         qpos = placemark->coordinate().quaternion();
 
         double xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
@@ -136,11 +136,11 @@ void GeoDataContainer::pack( QDataStream& stream ) const
 
     stream << m_placemarkVector.count();
 
-    for ( QVector <GeoDataPlaceMark*>::const_iterator iterator = m_placemarkVector.constBegin();
+    for ( QVector <GeoDataPlacemark*>::const_iterator iterator = m_placemarkVector.constBegin();
           iterator != m_placemarkVector.end();
           iterator++ )
     {
-        const GeoDataPlaceMark& placemark = * ( *iterator );
+        const GeoDataPlacemark& placemark = * ( *iterator );
         placemark.pack( stream );
     }
 }
@@ -153,7 +153,7 @@ void GeoDataContainer::unpack( QDataStream& stream )
     stream >> count;
 
     for ( int i = 0; i < count; ++i ) {
-        GeoDataPlaceMark* placemark = new GeoDataPlaceMark();
+        GeoDataPlacemark* placemark = new GeoDataPlacemark();
         placemark->unpack( stream );
 
         m_placemarkVector.append( placemark );

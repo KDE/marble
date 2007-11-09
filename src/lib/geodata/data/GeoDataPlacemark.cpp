@@ -12,44 +12,44 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
 
-#include "GeoDataPlaceMark.h"
+#include "GeoDataPlacemark.h"
 
 
-GeoDataPlaceMark::GeoDataPlaceMark()
+GeoDataPlacemark::GeoDataPlacemark()
 {
 }
 
-GeoDataPlaceMark::GeoDataPlaceMark( const QString& name )
+GeoDataPlacemark::GeoDataPlacemark( const QString& name )
   : GeoDataFeature( name )
 {
 }
 
-GeoPoint GeoDataPlaceMark::coordinate() const
+GeoPoint GeoDataPlacemark::coordinate() const
 {
     return m_coordinate;
 }
 
-void GeoDataPlaceMark::coordinate( double& lon, double& lat )
+void GeoDataPlacemark::coordinate( double& lon, double& lat )
 {
     m_coordinate.geoCoordinates( lon, lat );
 }
 
-void GeoDataPlaceMark::setCoordinate( double lon, double lat )
+void GeoDataPlacemark::setCoordinate( double lon, double lat )
 {
     m_coordinate = GeoPoint( lon, lat );
 }
 
-const QString GeoDataPlaceMark::countryCode() const
+const QString GeoDataPlacemark::countryCode() const
 {
     return m_countrycode;
 }
 
-void GeoDataPlaceMark::setCountryCode( const QString &countrycode )
+void GeoDataPlacemark::setCountryCode( const QString &countrycode )
 {
     m_countrycode = countrycode;
 }
 
-void GeoDataPlaceMark::pack( QDataStream& stream ) const
+void GeoDataPlacemark::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
 
@@ -67,7 +67,7 @@ void GeoDataPlaceMark::pack( QDataStream& stream ) const
 }
 
 
-void GeoDataPlaceMark::unpack( QDataStream& stream )
+void GeoDataPlacemark::unpack( QDataStream& stream )
 {
     GeoDataFeature::unpack( stream );
 

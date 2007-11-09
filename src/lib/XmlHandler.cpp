@@ -15,7 +15,7 @@
 #include <cmath>
 
 #include "global.h"
-#include "GeoDataPlaceMark.h"
+#include "GeoDataPlacemark.h"
 #include "PlaceMarkContainer.h"
 
 
@@ -64,7 +64,7 @@ bool XmlHandler::startElement( const QString&, const QString&,
     if ( m_inKml && nameLower == "placemark" ) {
         m_inPlacemark = true;
         m_coordsset = false;
-        m_placemark = new GeoDataPlaceMark();
+        m_placemark = new GeoDataPlacemark();
     }
 
     if ( m_inPlacemark && nameLower == "name" ) {
@@ -119,26 +119,26 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
     if ( m_inKml && nameLower == "placemark" ) {
 
-        if ( m_placemark->role() == 'H' )      m_placemark->setVisualCategory( GeoDataPlaceMark::Mountain );
-        else if ( m_placemark->role() == 'V' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Volcano );
-        else if ( m_placemark->role() == 'P' ) m_placemark->setVisualCategory( GeoDataPlaceMark::GeographicPole );
-        else if ( m_placemark->role() == 'M' ) m_placemark->setVisualCategory( GeoDataPlaceMark::MagneticPole );
-        else if ( m_placemark->role() == 'W' ) m_placemark->setVisualCategory( GeoDataPlaceMark::ShipWreck );
-        else if ( m_placemark->role() == 'F' ) m_placemark->setVisualCategory( GeoDataPlaceMark::AirPort );
-        else if ( m_placemark->role() == 'K' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Continent );
-        else if ( m_placemark->role() == 'O' ) m_placemark->setVisualCategory( GeoDataPlaceMark::Ocean );
+        if ( m_placemark->role() == 'H' )      m_placemark->setVisualCategory( GeoDataPlacemark::Mountain );
+        else if ( m_placemark->role() == 'V' ) m_placemark->setVisualCategory( GeoDataPlacemark::Volcano );
+        else if ( m_placemark->role() == 'P' ) m_placemark->setVisualCategory( GeoDataPlacemark::GeographicPole );
+        else if ( m_placemark->role() == 'M' ) m_placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
+        else if ( m_placemark->role() == 'W' ) m_placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
+        else if ( m_placemark->role() == 'F' ) m_placemark->setVisualCategory( GeoDataPlacemark::AirPort );
+        else if ( m_placemark->role() == 'K' ) m_placemark->setVisualCategory( GeoDataPlacemark::Continent );
+        else if ( m_placemark->role() == 'O' ) m_placemark->setVisualCategory( GeoDataPlacemark::Ocean );
         else if ( m_placemark->role() == 'N' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallCity )
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
                 + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
         else if ( m_placemark->role() == 'R' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallStateCapital )
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
                 + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
         else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlaceMark::GeoDataVisualCategory )( (int)( GeoDataPlaceMark::SmallNationCapital )
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
                 + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
 
         else if ( m_placemark->role() == ' ' && !m_hasPopulation )
-            m_placemark->setVisualCategory( GeoDataPlaceMark::Default ); // default location
+            m_placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
 
         if ( m_coordsset == true )
             m_placeMarkContainer->append( m_placemark );

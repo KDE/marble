@@ -292,9 +292,9 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     qint32   tmpint32;
     qint64   tmpint64;
 
-    GeoDataPlaceMark  *mark;
+    GeoDataPlacemark  *mark;
     while ( !in.atEnd() ) {
-        mark = new GeoDataPlaceMark();
+        mark = new GeoDataPlacemark();
 
         in >> tmpstr;
         mark -> setName( tmpstr );
@@ -309,7 +309,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         in >> tmpint32;
         mark -> setPopularityIndex( tmpint32 );
         in >> tmpint32;
-        mark -> setVisualCategory( (GeoDataPlaceMark::GeoDataVisualCategory)( tmpint32 ) );
+        mark -> setVisualCategory( (GeoDataPlacemark::GeoDataVisualCategory)( tmpint32 ) );
         in >> tmpint64;
         mark -> setPopularity( tmpint64 );
 

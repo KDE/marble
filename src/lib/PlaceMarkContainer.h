@@ -16,7 +16,7 @@
 
 #include <QtCore/QVector>
 
-#include "geodata/data/GeoDataPlaceMark.h"
+#include "geodata/data/GeoDataPlacemark.h"
 
 /**
  * A helper class which contains a couple of place mark
@@ -24,7 +24,7 @@
  *
  * The ownership of the place mark objects is transfered to the container!
  */
-class PlaceMarkContainer : public QVector<GeoDataPlaceMark*>
+class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
 {
  public:
     /// Create a new PlaceMarkContainer.
