@@ -23,6 +23,7 @@
 #ifndef GEODATADOCUMENT_H
 #define GEODATADOCUMENT_H
 
+
 #include <QVector>
 #include <QHash>
 

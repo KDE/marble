@@ -32,7 +32,7 @@ class GeoDataStyleSelector;
  * correspond to places on a map. It is never instantiated by itself,
  * but is always used as part of a derived class.
  *
- * @see GeoDataPlaceMark
+ * @see GeoDataPlacemark
  * @see GeoDataContainer
  */
 

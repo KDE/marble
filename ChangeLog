@@ -1,3 +1,31 @@
+2007-11-09  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix documentation:
+	* lib/geodata/data/GeoDataDocument.h,
+	  lib/geodata/data/GeoDataContainer.h,
+	  lib/geodata/data/GeoDataFeature.h:
+	Reference GeoDataPlacemark
+	
+	Rename PlaceMark into Placemark
+        * lib/geodata/data/GeoDataPlaceMark.h    -> GeoDataPlacemark.h
+        * lib/geodata/data/GeoDataPlaceMark.cpp  -> GeoDataPlacemark.cpp
+        * lib/CMakeLists.txt: Mirror namechange above
+        * lib/MarbleWidgetPopupMenu.cpp,
+          lib/PlaceMarkContainer.cpp,
+          lib/PlaceMarkContainer.h,
+          lib/PlaceMarkLayout.cpp,
+          lib/PlaceMarkLayout.h,
+          lib/PlaceMarkManager.cpp,
+          lib/PlaceMarkPainter.h,
+          lib/XmlHandler.cpp,
+          lib/XmlHandler.h,
+          lib/geodata/CMakeLists.txt,
+          lib/geodata/data/GeoDataContainer.cpp,
+          lib/geodata/data/GeoDataContainer.h,
+          lib/geodata/data/GeoDataDocument.cpp,
+          lib/geodata/data/GeoDataFeature.h:
+	Use new names
+	
 2007-11-05 Andrew Manson <g.real.ate@gmail.com>
     Fixed bug that prevented Waypoints from a gpx file being
     displayed on the view. 

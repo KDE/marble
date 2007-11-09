@@ -18,11 +18,10 @@
 #include "GeoDataFeature.h"
 #include "PlaceMarkContainer.h"
 
-//class PlaceMark;
 class ViewParams;
 
 /**
- * @short  A base class that can hold GeoDataPlaceMarks
+ * @short  A base class that can hold GeoDataPlacemarks
  * FIXME: Should hold GeoDataFeatures
  *
  * GeoDataContainer is the base class for the GeoData container
