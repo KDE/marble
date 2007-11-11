@@ -1,5 +1,8 @@
 2007-11-11  Inge Wallin  <inge@lysator.liu.se>
 
+	APIDOX:
+	* src/lib/MarbleWidget.h: More APIDOX
+
 	Fix geodata classes according to KML spec and APIDOX:
 	* src/lib/geodata/data/GeoDataFolder.h: (addFolder): removed
 	(m_folderVector): removed

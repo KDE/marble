@@ -240,12 +240,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
      * @param x  the x coordinate of the pixel
      * @param y  the y coordinate of the pixel
+     * @param q  the out parameter where the result is returned
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
+    bool    globalQuaternion( int x, int y, Quaternion &q);
     // FIXME: Make the names of globalQuaternion() and
     //        geoCoordinates() follow a pattern.
-    bool    globalQuaternion( int x, int y, Quaternion &q);
 
     /**
      * @brief Return the longitude of the center point.
@@ -543,7 +544,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setHome(const double lon, const double lat, const int zoom = 1050);
     /**
      * @brief  Set the home point
-     * @param  homePoint  The new home point.
+     * @param  homePoint  the new home point.
+     * @param  zoom       the default zoom level for the new home point.
      */
     void  setHome(const GeoPoint& homePoint, int zoom = 1050);
 
