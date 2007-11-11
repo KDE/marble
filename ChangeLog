@@ -1,5 +1,18 @@
 2007-11-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Rename PlaceMarkModel --> MarblePlacemarkModel
+	* PlaceMarkModel.h   -->  MarblePlacemarkModel.h
+	* PlaceMarkModel.cpp -->  MarblePlacemarkModel.cpp
+	* PlaceMarkModel_P.h -->  MarblePlacemarkModel_P.h
+	* MarbleModel.{h,cpp},
+	* MarbleWidget.cpp,
+	* PlaceMarkManager.{h,cpp},
+	* PlaceMarkLayout.cpp,
+	* PlaceMarkPainter.cpp,
+	* VisiblePlaceMark.{h,cpp},
+	* PlaceMarkInfoDialog.cpp,
+	* CMakeLists.txt: Reflect this namechange.
+
 	APIDOX:
 	* src/lib/MarbleWidget.h: More APIDOX
 

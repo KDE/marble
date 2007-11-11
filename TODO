@@ -25,37 +25,15 @@ Misc
 Code Quality:
  * Filename == Classname (CamelCasing)                                  DONE
  * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
- * Name all public classes MarbleSomething                              INGE
-   - SearchListView  -> MarbleSearchListView                            done
-   - LegendBrowser   -> MarbleLegendBrowser                             done
-   - PlaceMarkModel (Why is this class public at all?)                  --
+ * Name all public classes MarbleSomething                              DONE
  * d-pointerify the rest of the public classes                          DONE
 
 Widget:
  * Separate the view from the globe (model)                             INGE
-    - Let the view parameters be in the view instead of in the globe    inge
+    - Let the view parameters be in the view instead of in the globe    done
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
- * Introduce the class ViewParams that controls the painting            INGE
-    - Position, Zoom                                                    done
-    - width, height                                                     inge
-    - show... crosshair/mapscale/compass                                n/a
-    - show... terrain/cities/...                                        done
-    - show... relief (texturecolorizer)                                 done
-    - show... ice/borders/rivers/lakes    (vectorcomposer)              done
-    - interlaced (rename to quickAndDirty?)                             inge
-    - caches (coastimg, ...)                                            done
-   Note: these will NOT be done:
-    - mapTheme (this is tricky and will have to wait)                   --
-
-Vector backend
- * Better scalability                                                   ----
-
-Integration with Qt designer
- * control files for the following widgets                              TACK
-   - MarbleControlBox                                                   --
-   - MarbleLocator (search field for placemarks)                        --
-   - MarbleLegendBrowser                                                --
+ * Introduce the class ViewParams that controls the painting            DONE
 
  * Installation issues                                                  TACK
    - Only install the public include files                              --
@@ -64,10 +42,11 @@ Documentation
  * Coding standards                                                     DONE
  * APIDOX: Class and method docs for at least:                          INGE
    - Mainpage.dox							done
-   - MarbleWidget                                                       --
+   - MarbleWidget                                                       done
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
    - MarbleNavigator                                                    done
+   - MarblePlacemarkModel						--
  * Write more in DESIGN                                                 INGE
    - Describe the view parameters                                       --
    - Describe the vector engine                                         --
@@ -103,12 +82,21 @@ KML support (Murad Tagirov)
 Before KDE 4.0
 ----------------------------------------------------------------
 
+Documentation:
+ * APIDOX for classes in geodata/data                                   INGE
+    - HotSpot                                                           --
+    - Style                                                             --
+    - IconStyle                                                         --
+    - LabelStyle                                                        --
+    - StyleSelector                                                     --
+    - Serializable?                                                     --
+
 Widget:
  * Make it possible to paint on different device types in addition      ----
    to painting on the MarbleWidget
     - QGraphicsView                                                     --
     - QPixmap                                                           --
-    - QSvgRendrerer                                                     --
+    - QSvgRenderer                                                      --
  * Offer accessor method for the Pixmap, so it can be used to export    DONE
    the image, print it and copy it.
 
@@ -135,6 +123,9 @@ Documentation:
 Before KDE 4.1
 ----------------------------------------------------------------
 
+Vector backend
+ * Better scalability                                                   ----
+
 Widget:
  * Support to display Timezones, Data available e.g. at:
 	http://sarangworld.com/NMLUG/WorldTZ_102.zip
@@ -148,3 +139,8 @@ Data:
    for practical relevance and implement those bits into our client that 
    make sense for us to have.
 
+Integration with Qt designer
+ * control files for the following widgets                              TACK
+   - MarbleControlBox                                                   --
+   - MarbleLocator (search field for placemarks)                        --
+   - MarbleLegendBrowser                                                --
