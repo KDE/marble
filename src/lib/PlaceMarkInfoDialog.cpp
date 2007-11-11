@@ -24,7 +24,7 @@
 
 #include "GeoPoint.h"
 #include "MarbleDirs.h"
-#include "PlaceMarkModel.h"
+#include "MarblePlacemarkModel.h"
 
 
 PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
@@ -65,7 +65,7 @@ void PlaceMarkInfoDialog::showContent()
     altername_val_lbl->setText( "" );
 
     QString  rolestring;
-    switch ( m_index.data( PlaceMarkModel::GeoTypeRole ).toChar().toLatin1() ) {
+    switch ( m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar().toLatin1() ) {
     case 'K':
         rolestring = tr("Continent");
         break;
@@ -88,7 +88,7 @@ void PlaceMarkInfoDialog::showContent()
         rolestring = tr("Location");
         break;
     case 'H':
-        if ( m_index.data( PlaceMarkModel::PopularityRole ).toInt() > 0 )
+        if ( m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
@@ -109,9 +109,9 @@ void PlaceMarkInfoDialog::showContent()
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
-    requestFlag( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
+    requestFlag( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
-    const QString description = m_index.data( PlaceMarkModel::DescriptionRole ).toString();
+    const QString description = m_index.data( MarblePlacemarkModel::DescriptionRole ).toString();
 
     description_val_browser->setEnabled( false );
     if ( !description.isEmpty() )
@@ -119,11 +119,11 @@ void PlaceMarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setPlainText( description );
     }
-    coordinates_val_lbl->setText( m_index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>().toString() );
-    country_val_lbl->setText( m_index.data( PlaceMarkModel::CountryCodeRole ).toString() );
+    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().toString() );
+    country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
-    const qint64 popularity = m_index.data( PlaceMarkModel::PopularityRole ).toLongLong();
-    const QChar role = m_index.data( PlaceMarkModel::GeoTypeRole ).toChar();
+    const qint64 popularity = m_index.data( MarblePlacemarkModel::PopularityRole ).toLongLong();
+    const QChar role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar();
     if ( role == 'H' || role == 'V' || role == 'W') {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );

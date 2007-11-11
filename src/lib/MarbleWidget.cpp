@@ -489,7 +489,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     selectionModel->clear();
 
     if ( index.isValid() ) {
-        const GeoPoint point = index.data( PlaceMarkModel::CoordinateRole ).value<GeoPoint>();
+        const GeoPoint point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>();
   
         double  lon;
         double  lat;

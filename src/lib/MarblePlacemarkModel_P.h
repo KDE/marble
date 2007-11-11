@@ -8,8 +8,8 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 //
 
-#ifndef PLACEMARKMODEL_P_H
-#define PLACEMARKMODEL_P_H
+#ifndef MARBLEPLACEMARKMODEL_P_H
+#define MARBLEPLACEMARKMODEL_P_H
 
 namespace GeoString
 {

@@ -17,7 +17,7 @@
 
 class KMLDocument;
 class PlaceMarkContainer;
-class PlaceMarkModel;
+class MarblePlacemarkModel;
 
 /**
  * This class is responsible for loading the
@@ -25,11 +25,11 @@ class PlaceMarkModel;
  * and file formats.
  *
  * The loaded data are accessable via the
- * PlaceMarkModel returned by model().
+ * MarblePlacemarkModel returned by model().
  */
 class PlaceMarkManager : public QObject
 {
-    friend class PlaceMarkModel;
+    friend class MarblePlacemarkModel;
     Q_OBJECT
 
  public:
@@ -51,7 +51,7 @@ class PlaceMarkManager : public QObject
      *
      * Note: The manager has not the ownership of the model.
      */
-    PlaceMarkModel *model() const;
+    MarblePlacemarkModel *model() const;
 
     /**
      * This methods loads the standard place mark files.
@@ -82,9 +82,9 @@ class PlaceMarkManager : public QObject
     void saveFile( const QString&, PlaceMarkContainer* );
     bool loadFile( const QString&, PlaceMarkContainer* );
 
-    void setPlaceMarkModel( PlaceMarkModel *model );
+    void setPlaceMarkModel( MarblePlacemarkModel *model );
 
-    PlaceMarkModel* m_model;
+    MarblePlacemarkModel* m_model;
 
 #ifdef KML_GSOC
     void updateCacheIndex();

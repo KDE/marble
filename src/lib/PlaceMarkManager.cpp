@@ -22,7 +22,7 @@
 
 #include "MarbleDirs.h"
 #include "PlaceMarkContainer.h"
-#include "PlaceMarkModel.h"
+#include "MarblePlacemarkModel.h"
 
 #include "XmlHandler.h"
 
@@ -43,12 +43,12 @@ PlaceMarkManager::~PlaceMarkManager()
 #endif
 }
 
-PlaceMarkModel* PlaceMarkManager::model() const
+MarblePlacemarkModel* PlaceMarkManager::model() const
 {
     return m_model;
 }
 
-void PlaceMarkManager::setPlaceMarkModel( PlaceMarkModel *model )
+void PlaceMarkManager::setPlaceMarkModel( MarblePlacemarkModel *model )
 {
     m_model = model;
 }

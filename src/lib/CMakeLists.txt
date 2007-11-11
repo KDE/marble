@@ -57,6 +57,8 @@ set(marblewidget_SRCS
            MarbleWidgetInputHandler.cpp
            MarbleWidgetPopupMenu.cpp
 
+           MarblePlacemarkModel.cpp
+
            AutoSettings.cpp
            ClipPainter.cpp
            GeoPoint.cpp
@@ -78,7 +80,6 @@ set(marblewidget_SRCS
            PlaceMarkManager.cpp
            PlaceMarkLayout.cpp
            PlaceMarkPainter.cpp
-           PlaceMarkModel.cpp
            PlaceMarkInfoDialog.cpp
            Quaternion.cpp
            TextureColorizer.cpp
@@ -277,7 +278,7 @@ else (APPLE AND QTONLY)
            PlaceMarkManager.h
            PlaceMarkLayout.h
            PlaceMarkPainter.h
-           PlaceMarkModel.h
+           MarblePlacemarkModel.h
            PlaceMarkInfoDialog.h
            Quaternion.h
            ScreenPolygon.h

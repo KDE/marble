@@ -10,12 +10,12 @@
 //
 
 //
-// PlaceMarkModel resembles the model for Placemarks
+// MarblePlacemarkModel resembles the model for Placemarks
 //
 
 
-#ifndef PLACEMARKMODEL_H
-#define PLACEMARKMODEL_H
+#ifndef MARBLEPLACEMARKMODEL_H
+#define MARBLEPLACEMARKMODEL_H
 
 
 #include <QtCore/QAbstractListModel>
@@ -29,7 +29,7 @@ class PlaceMarkManager;
  * This class represents a model of all place marks which
  * are currently available through a given PlaceMarkManager.
  */
-class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
+class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 {
     friend class PlaceMarkManager;
 
@@ -57,12 +57,12 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
      * @param manager The place mark manager on which the model shall work.
      * @param parent The parent object.
      */
-    PlaceMarkModel( PlaceMarkManager *manager, QObject *parent = 0 );
+    MarblePlacemarkModel( PlaceMarkManager *manager, QObject *parent = 0 );
 
     /**
      * Destroys the place mark model.
      */
-    ~PlaceMarkModel();
+    ~MarblePlacemarkModel();
 	
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
@@ -93,4 +93,4 @@ class MARBLE_EXPORT PlaceMarkModel : public QAbstractListModel
 };
 
 
-#endif // PLACEMARKMODEL_H
+#endif // MARBLEPLACEMARKMODEL_H

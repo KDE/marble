@@ -9,6 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
 #include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtGui/QPixmap>
@@ -18,15 +19,15 @@
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkManager.h"
 
-#include "PlaceMarkModel.h"
-#include "PlaceMarkModel_P.h"
+#include "MarblePlacemarkModel.h"
+#include "MarblePlacemarkModel_P.h"
 
-class PlaceMarkModel::Private
+class MarblePlacemarkModel::Private
 {
     friend class PlaceMarkManager;
 
  public:
-    Private( PlaceMarkManager *manager, PlaceMarkModel *parent )
+    Private( PlaceMarkManager *manager, MarblePlacemarkModel *parent )
         : m_parent( parent ), m_manager( manager )
     {
         Q_ASSERT( m_manager != 0 );
@@ -36,14 +37,17 @@ class PlaceMarkModel::Private
     {
     }
 
-    PlaceMarkModel* m_parent;
-    PlaceMarkManager* m_manager;
-    PlaceMarkContainer m_placeMarkContainer;
+    MarblePlacemarkModel  *m_parent;
+    PlaceMarkManager      *m_manager;
+    PlaceMarkContainer     m_placeMarkContainer;
 };
+
 
 // ---------------------------------------------------------------------------
 
-PlaceMarkModel::PlaceMarkModel( PlaceMarkManager *manager, QObject *parent )
+
+MarblePlacemarkModel::MarblePlacemarkModel( PlaceMarkManager *manager, 
+					    QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private( manager, this ) )
 {
@@ -51,7 +55,7 @@ PlaceMarkModel::PlaceMarkModel( PlaceMarkManager *manager, QObject *parent )
     d->m_manager->setPlaceMarkModel( this );
 }
 
-PlaceMarkModel::~PlaceMarkModel()
+MarblePlacemarkModel::~MarblePlacemarkModel()
 {
     // Unregister from PlaceMarkManager
     d->m_manager->setPlaceMarkModel( 0 );
@@ -60,7 +64,7 @@ PlaceMarkModel::~PlaceMarkModel()
 }
 
 
-int PlaceMarkModel::rowCount( const QModelIndex &parent ) const
+int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
 {
     if ( !parent.isValid() )
         return d->m_placeMarkContainer.size();
@@ -68,7 +72,7 @@ int PlaceMarkModel::rowCount( const QModelIndex &parent ) const
         return 0;
 }
 
-int PlaceMarkModel::columnCount( const QModelIndex &parent ) const
+int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
 {
     if ( !parent.isValid() )
         return 1;
@@ -76,7 +80,7 @@ int PlaceMarkModel::columnCount( const QModelIndex &parent ) const
         return 0;
 }
 
-QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
+QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
 {
     if ( !index.isValid() )
         return QVariant();
@@ -116,9 +120,9 @@ QVariant PlaceMarkModel::data( const QModelIndex &index, int role ) const
         return QVariant();
 }
 
-QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role, 
-                                       const QVariant & value, int hits,
-                                       Qt::MatchFlags flags ) const
+QModelIndexList MarblePlacemarkModel::match( const QModelIndex & start, int role, 
+					     const QVariant & value, int hits,
+					     Qt::MatchFlags flags ) const
 {
     QList<QModelIndex> results;
 
@@ -152,7 +156,7 @@ QModelIndexList PlaceMarkModel::match( const QModelIndex & start, int role,
     return results;
 }
 
-void PlaceMarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious )
+void MarblePlacemarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious )
 {
   // For now we simply remove any previous placemarks
     if ( clearPrevious == true )
@@ -167,7 +171,7 @@ void PlaceMarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool c
     reset();
 }
 
-void PlaceMarkModel::clearPlaceMarks()
+void MarblePlacemarkModel::clearPlaceMarks()
 {
   qDeleteAll( d->m_placeMarkContainer );
   d->m_placeMarkContainer.clear();
@@ -175,4 +179,4 @@ void PlaceMarkModel::clearPlaceMarks()
   reset();
 }
 
-#include "PlaceMarkModel.moc"
+#include "MarblePlacemarkModel.moc"

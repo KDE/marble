@@ -39,7 +39,7 @@
 #include "GridMap.h"
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkLayout.h"
-#include "PlaceMarkModel.h"
+#include "MarblePlacemarkModel.h"
 #include "GlobeScanlineTextureMapper.h"
 #include "FlatScanlineTextureMapper.h"
 #include "VectorComposer.h"

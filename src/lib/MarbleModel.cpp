@@ -50,9 +50,9 @@ class MarbleModelPrivate
     GridMap             *m_gridmap;
 
     // Places on the map
-    PlaceMarkManager    *m_placemarkmanager;
-    PlaceMarkModel      *m_placemarkmodel;
-    PlaceMarkLayout     *m_placeMarkLayout;
+    PlaceMarkManager      *m_placemarkmanager;
+    MarblePlacemarkModel  *m_placemarkmodel;
+    PlaceMarkLayout       *m_placeMarkLayout;
 
     // Selection handling
     QItemSelectionModel *m_placemarkselectionmodel;
@@ -115,7 +115,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
              this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
 
-    d->m_placemarkmodel = new PlaceMarkModel( d->m_placemarkmanager, this );
+    d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
 
     connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged ( QItemSelection, QItemSelection) ),
