@@ -10,9 +10,6 @@ Mark those tasks that you want to perform with your name:
 During the SoC projects (0.5)
 ----------------------------------------------------------------
 
-Bugs
- * The flat map is jumping around when zoomed out much and moved        ----
-
 Misc
  * Create a file with use cases and personas                            INGE
    - Continue with the use cases.                                       --
@@ -21,22 +18,6 @@ Misc
  * Fix image downloading for Wikipedia                                  TACK
  * Make the MarbleWidget library have a version number.  See            DONE
    okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
-
-Code Quality:
- * Filename == Classname (CamelCasing)                                  DONE
- * Filenames KAtlasFoo -> MarbleFoo or something else                   DONE
- * Name all public classes MarbleSomething                              DONE
- * d-pointerify the rest of the public classes                          DONE
-
-Widget:
- * Separate the view from the globe (model)                             INGE
-    - Let the view parameters be in the view instead of in the globe    done
-    - Don't open any dialogs from the globe, do it from the controller. inge
-    - Let the view know about the globe, but not the other way.         done
- * Introduce the class ViewParams that controls the painting            DONE
-
- * Installation issues                                                  TACK
-   - Only install the public include files                              --
 
 Documentation
  * Coding standards                                                     DONE
@@ -69,18 +50,12 @@ KML support (Murad Tagirov)
  * One overall aim: make Digikam KML output and plasma weather applet 
    work together with Marble. 
 
-2D View (Carlos Licea)
- * create an additional class FlatTextureMapper that will work          ----
-   scanline based like SphereTextureMapper (using getPixelValue).
- * Modify the input handler to take the flat projection into account.   ----
- * Adjust the vector mapping backend as well as the PlaceMark           ----
-   placing backend.
- * Create a new class for Texturemapping that doesn't work scanline     ---- 
-   based anymore but uses the tiles as a whole on a kind of ScrollView.
-
 
 Before KDE 4.0
 ----------------------------------------------------------------
+
+Bugs
+  See the BUGS file.
 
 Documentation:
  * APIDOX for classes in geodata/data                                   INGE
@@ -99,6 +74,11 @@ Widget:
     - QSvgRenderer                                                      --
  * Offer accessor method for the Pixmap, so it can be used to export    DONE
    the image, print it and copy it.
+ * Separate the view from the globe (model)                             INGE
+    - Let the view parameters be in the view instead of in the globe    done
+    - Don't open any dialogs from the globe, do it from the controller. inge
+    - Let the view know about the globe, but not the other way.         done
+
 
 
 Make it a KDE4 application as a real member of kdeedu.
@@ -112,12 +92,12 @@ Make it a KDE4 application as a real member of kdeedu.
  * KDEPrint support                                                     DONE
  * DBus Support                                                         TACK
 
-Features:
- * Areas, e.g. countries or districts                                   ----
-
 Documentation:
  * Programmers manual for using Marble components in other applications	----
  * Apidox for all public classes					----
+
+Installation issues                                                     TACK
+ * Only install the public include files                                --
 
  
 Before KDE 4.1
@@ -129,6 +109,9 @@ Vector backend
 Widget:
  * Support to display Timezones, Data available e.g. at:
 	http://sarangworld.com/NMLUG/WorldTZ_102.zip
+
+Features:
+ * Areas, e.g. countries or districts                                   ----
 
 Data:
  * Evaluate the implementation of tile specifications like 
