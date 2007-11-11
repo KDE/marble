@@ -16,13 +16,11 @@
 #include <QtCore/QVector>
 
 #include "GeoDataFeature.h"
-#include "PlaceMarkContainer.h"
 
 class ViewParams;
 
 /**
- * @short  A base class that can hold GeoDataPlacemarks
- * FIXME: Should hold GeoDataFeatures
+ * @short  A base class that can hold GeoDataFeatures
  *
  * GeoDataContainer is the base class for the GeoData container
  * classes GeoDataFolder and GeoDataDocument.  It is never
@@ -30,8 +28,8 @@ class ViewParams;
  * class.
  *
  * It is based on GeoDataFeature, and it only adds a
- * PlaceMarkContainer to it, making it a Feature that can hold other
- * Features.
+ * QVector<GeodataFeature *> to it, making it a Feature that can hold
+ * other Features.
  *
  * @see GeoDataFolder
  * @see GeoDataDocument
@@ -42,25 +40,29 @@ class GeoDataContainer : public GeoDataFeature
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
-    void addPlaceMark( GeoDataPlacemark* placemark );
+    void addFeature( GeoDataFeature* feature );
 
     virtual void pack( QDataStream& stream ) const;
     virtual void unpack( QDataStream& stream );
 
+#if 0
     /*
      * Will move this method to GeoDataDocumentModel in a next step
      */
     PlaceMarkContainer& activePlaceMarkContainer( const ViewParams& viewParams );
+#endif
 
  protected:
     GeoDataContainer();
-    QVector < GeoDataPlacemark* > m_placemarkVector;
+    QVector < GeoDataFeature* >  m_featureVector;
 
  private:
+#if 0  // FIXME: This doesn't belong here.
     PlaceMarkContainer& sphericalActivePlaceMarkContainer( const ViewParams& viewParams );
     PlaceMarkContainer& rectangularActivePlaceMarkContainer( const ViewParams& viewParams );
 
     PlaceMarkContainer m_activePlaceMarkContainer;
+#endif
 };
 
 #endif // GEODATACONTAINER_H

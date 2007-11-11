@@ -1,3 +1,10 @@
+2007-11-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Make the GeoDataContainer follow the KML spec.
+	* src/lib/geodata/data/GeoDataContainer.h (class
+	GeoDataContainer): Contain GeoDataFeatures instead of
+	GeoDataPlacemarks. 
+
 2007-11-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix documentation:
