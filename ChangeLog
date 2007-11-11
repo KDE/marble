@@ -1,9 +1,24 @@
 2007-11-11  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix geodata classes according to KML spec and APIDOX:
+	* src/lib/geodata/data/GeoDataFolder.h: (addFolder): removed
+	(m_folderVector): removed
+	(class GeoDataFolder): Added APIDOX.
+	* src/lib/geodata/data/GeoDataFolder.cpp: (~GeoDataFolder): make
+	empty
+	(addFolder): removed
+	* src/lib/geodata/data/GeoDataDocument.{h,cpp}: (class
+	GeoDataDocument): Base on GeoDataContainer instead of GeoDataFolder
+	(getStyle): renamed to style
+	(folders): return QVector instead of QVector&
+	(class GeoDataDocument): added APIDOX
+	* src/lib/geodata/data/GeoDataContaner.h: Added APIDOX
+
 	Make the GeoDataContainer follow the KML spec.
 	* src/lib/geodata/data/GeoDataContainer.h (class
 	GeoDataContainer): Contain GeoDataFeatures instead of
-	GeoDataPlacemarks. 
+	GeoDataPlacemarks.
+	* src/lib/geodata/data/GeoDataContainer.cpp: follow changes.
 
 2007-11-09  Inge Wallin  <inge@lysator.liu.se>
 

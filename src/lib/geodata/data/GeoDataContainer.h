@@ -40,9 +40,21 @@ class GeoDataContainer : public GeoDataFeature
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
+    /**
+     * @brief  Add a feature to the container
+     * @param  feature  the new feature
+     */
     void addFeature( GeoDataFeature* feature );
 
+    /**
+     * @brief  Serialize the container to a stream.
+     * @param  stream  the stream
+     */
     virtual void pack( QDataStream& stream ) const;
+    /**
+     * @brief  Unserialize the container from a stream
+     * @param  stream  the stream
+     */
     virtual void unpack( QDataStream& stream );
 
 #if 0
@@ -53,7 +65,9 @@ class GeoDataContainer : public GeoDataFeature
 #endif
 
  protected:
+    /// Default constructor
     GeoDataContainer();
+    /// The vector holding all the features in the container.
     QVector < GeoDataFeature* >  m_featureVector;
 
  private:

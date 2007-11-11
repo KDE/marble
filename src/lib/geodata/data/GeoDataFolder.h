@@ -1,6 +1,7 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright     2007 Murad Tagirov <tmurad@gmail.com>
+    Copyright     2007 Murad Tagirov      <tmurad@gmail.com>
+    Copyright     2007 Inge Wallin        <inge@lysator.liu.se>
 
     This file is part of the KDE project
 
@@ -20,20 +21,28 @@
     Boston, MA 02110-1301, USA.
 */
 
+
 #ifndef GEODATAFOLDER_H
 #define GEODATAFOLDER_H
 
+
 #include "GeoDataContainer.h"
 
-class GeoDataFolder : public GeoDataContainer{
+/**
+ * @short A container that is used to arrange other GeoDataFeatures.
+ *
+ * A GeoDataFolder is used to arrange other GeoDataFeatures
+ * hierarchically (Folders, Placemarks, NetworkLinks, or Overlays). A
+ * GeoDataFeature is visible only if it and all its ancestors are
+ * visible.
+ *
+ * @see GeoDataFeature
+ * @see GeoDataContainer
+ */
+class GeoDataFolder : public GeoDataContainer {
  public:
     GeoDataFolder();
     ~GeoDataFolder();
-
-    void addFolder( GeoDataFolder* folder );
-
- protected:
-    QVector <GeoDataFolder*> m_folderVector;
 };
 
 #endif // GEODATAFOLDER_H

@@ -27,28 +27,48 @@
 #include <QVector>
 #include <QHash>
 
-#include "GeoDataFolder.h"
+#include "GeoDataContainer.h"
 
+class GeoDataFolder;
 class GeoDataStyle;
 
-class GeoDataDocument : public GeoDataFolder {
+/**
+ * @short A container for Features, Styles and in the future Schemas.
+ *
+ * A GeoDataDocument is a container for features, styles, and
+ * schemas. This element is required if your KML file uses schemas or
+ * shared styles. It is recommended that all Styles be defined in a
+ * Document, each with an id, and then later referenced by a
+ * styleUrl for a given Feature or StyleMap.
+ */
+class GeoDataDocument : public GeoDataContainer {
 public:
     GeoDataDocument();
     ~GeoDataDocument();
 
-    // Read-only part of the API - to be used after _parsing_,
-    // to actually process the data within Marble that we parsed.
-    const QVector<GeoDataFolder>& folders() const;
+    /**
+     * @brief A convenience function that returns all folders in the document.
+     * @return A QVector of GeoDataFolder*
+     *
+     * @see GeoDataFolder
+     */
+    const QVector<GeoDataFolder*> folders() const;
 
-    // Read-write part of the API - to be used within the tag handlers,
-    // to fill our document with content.
-    void addFolder(const GeoDataFolder&);
+    /**
+     * @brief Add a style to the style storage
+     * @param style  the new style
+     */
     void addStyle( GeoDataStyle* style );
-    const GeoDataStyle& getStyle( QString styleId ) const;
+
+    /**
+     * @brief Return a style in the style storage
+     * @param styleId  the id of the style
+     */
+    const GeoDataStyle* style( QString styleId ) const;
 
   private:
-    QVector<GeoDataFolder> m_folders;
-    QHash < QString, GeoDataStyle* > m_styleHash;
+    QHash < QString, GeoDataStyle* >  m_styleHash;
 };
+
 
 #endif // GEODATADOCUMENT_H
