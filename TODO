@@ -59,11 +59,11 @@ Bugs
 
 Documentation:
  * APIDOX for classes in geodata/data                                   INGE
-    - HotSpot                                                           --
-    - Style                                                             --
+    - StyleSelector                                                     done
+    - Style                                                             done
     - IconStyle                                                         --
     - LabelStyle                                                        --
-    - StyleSelector                                                     --
+    - HotSpot                                                           --
     - Serializable?                                                     --
 
 Widget:

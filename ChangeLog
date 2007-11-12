@@ -1,4 +1,10 @@
+2007-11-12  Inge Wallin  <ingwa@localhost.localdomain>
+
+
 2007-11-12  Inge Wallin  <inge@lysator.liu.se>
+
+	APIDOX
+	* src/lib/geodata/data/GeoDataStyle.h: Add APIDOX
 
 	APIDOX
 	* src/lib/geodata/data/GeoDataStyleSelector.h: Add APIDOX

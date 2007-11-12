@@ -6,11 +6,13 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2007      Inge Wallin   <ingwa@kde.org>
 //
 
 
 #ifndef GEODATASTYLE_H
 #define GEODATASTYLE_H
+
 
 #include <QtCore/QMetaType>
 #include <QtCore/QPoint>
@@ -22,26 +24,58 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 
+
+/**
+ * @short an addressable style group
+ *
+ * A GeoDataStyle defines an addressable style group that can be
+ * referenced by GeoDataStyleMaps and GeoDataFeatures. GeoDataStyles
+ * affect how Geometry is presented in the 3D viewer (not yet
+ * implemented) and how Features appear. Shared styles are collected
+ * in a GeoDataDocument and must have an id defined for them so that
+ * they can be referenced by the individual Features that use them.
+ *
+ * @see GeoDataIconStyle
+ * @see GeoDataLabelStyle
+ */
 class GeoDataStyle : public GeoDataStyleSelector
 {
   public:
+    /// Construct a default style
     GeoDataStyle();
+    /**
+     * @brief Construct a new style
+     * @param  icon   used to construct the icon style
+     * @param  font   used to construct the label styls
+     * @param  color  used to construct the label styls
+     */
     GeoDataStyle( const QPixmap& icon, 
                   const QFont &font, const QColor &color  );
     ~GeoDataStyle();
 
+    /// Return the icon style of this style
     GeoDataIconStyle*  iconStyle();
+    /// Return the label style of this style
     GeoDataLabelStyle* labelStyle();
 
-    /*
-     * Serializable methods
+    /**
+     * @brief Serialize the style to a stream
+     * @param  stream  the stream
      */
     virtual void pack( QDataStream& stream ) const;
+    /**
+     * @brief  Unserialize the style from a stream
+     * @param  stream  the stream
+     */
     virtual void unpack( QDataStream& stream );
 
   private:
-    GeoDataIconStyle  *m_iconStyle;
-    GeoDataLabelStyle *m_labelStyle;
+    GeoDataIconStyle   *m_iconStyle;
+    GeoDataLabelStyle  *m_labelStyle;
+    // LineStyle
+    // PolyStyle
+    // BalloonStyle
+    // ListStyle
 };
 
 Q_DECLARE_METATYPE( GeoDataStyle* )
