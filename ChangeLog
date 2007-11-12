@@ -1,3 +1,8 @@
+2007-11-12  Inge Wallin  <inge@lysator.liu.se>
+
+	APIDOX
+	* src/lib/geodata/data/GeoDataStyleSelector.h: Add APIDOX
+
 2007-11-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename PlaceMarkModel --> MarblePlacemarkModel
