@@ -30,7 +30,7 @@ Documentation:
     - Style                                                             done
     - ColorStyle                                                        done
     - IconStyle                                                         inge
-    - LabelStyle                                                        inge
+    - LabelStyle                                                        done
     - HotSpot?                                                          --
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----

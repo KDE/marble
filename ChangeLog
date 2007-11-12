@@ -1,6 +1,9 @@
 2007-11-12  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX
+	* src/lib/geodata/data/GeoDataLabelStyle.h: Add APIDOX
+
+	APIDOX
 	* src/lib/geodata/data/GeoDataColorStyle.h: Add APIDOX
 
 	APIDOX
