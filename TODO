@@ -7,48 +7,15 @@ Mark those tasks that you want to perform with your name:
  MURA   Murad Tagirov
 
 
-During the SoC projects (0.5)
+Whenever -- not tied to any release
 ----------------------------------------------------------------
 
-Misc
- * Create a file with use cases and personas                            INGE
-   - Continue with the use cases.                                       --
- * Creating tiles during build instead of first run			TACK
- * Fix designer plugin dirs						TACK
- * Fix image downloading for Wikipedia                                  TACK
- * Make the MarbleWidget library have a version number.  See            DONE
-   okularcore in kdegraphics/okular/CMakeLists.txt for how to do it.
-
 Documentation
- * Coding standards                                                     DONE
- * APIDOX: Class and method docs for at least:                          INGE
-   - Mainpage.dox							done
-   - MarbleWidget                                                       done
-   - MarbleControlBox                                                   --
-   - MarbleModel                                                        --
-   - MarbleNavigator                                                    done
-   - MarblePlacemarkModel						--
  * Write more in DESIGN                                                 INGE
    - Describe the view parameters                                       --
    - Describe the vector engine                                         --
    - Describe the placemark engine                                      --
-
-OpenStreetMap support for tiles@home
-    - we'd like to get the tiles loaded and displayed                   TACK
-
-
-Integration of Google Summer of Code projects (0.6)
-----------------------------------------------------------------
-
-GPS support (Andrew Manson)
- * Read GPX files                                                       ----
- * Show waypoints                                                       ----
- * Show tracks                                                          ----
- * Show 'You are here' using the GPS.                                   ----
-
-KML support (Murad Tagirov)
- * One overall aim: make Digikam KML output and plasma weather applet 
-   work together with Marble. 
+ * Write more in USECASES                                               INGE
 
 
 Before KDE 4.0
@@ -62,11 +29,19 @@ Documentation:
     - StyleSelector                                                     done
     - Style                                                             done
     - ColorStyle                                                        done
-    - IconStyle                                                         --
-    - LabelStyle                                                        --
+    - IconStyle                                                         inge
+    - LabelStyle                                                        inge
     - HotSpot?                                                          --
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----
+    - ...
+ * APIDOX for classes in src/lib:                                      INGE
+   - Mainpage.dox							done
+   - MarbleWidget                                                       done
+   - MarbleControlBox                                                   --
+   - MarbleModel                                                        --
+   - MarbleNavigator                                                    done
+   - MarblePlacemarkModel						--
 
 Widget:
  * Make it possible to paint on different device types in addition      ----
@@ -81,18 +56,28 @@ Widget:
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
 
-
-
 Make it a KDE4 application as a real member of kdeedu.
  * KApplication                                                         DONE
  * AboutData                                                            DONE
  * KConfig XT                                                           TACK
-   - Use KConfig XT for settings					done
-   - Provide settings dialog (?)					--
+    - Use KConfig XT for settings					done
+    - Provide settings dialog (?)					--
  * Translation                                                          DONE
  * User docs                                                            DONE
  * KDEPrint support                                                     DONE
- * DBus Support                                                         TACK
+
+Finish existing features
+ * KML support (Murad Tagirov)                                          ----
+    - One overall aim: make Digikam KML output and plasma weather       --
+      applet work together with Marble. 
+ * GPS support (Andrew Manson)
+    - Read GPX files                                                    ----
+    - Show waypoints                                                    ----
+    - Show tracks                                                       ----
+    - Show 'You are here' using the GPS                                 ----
+ * Creating tiles during build instead of first run			TACK
+ * Fix designer plugin dirs						TACK
+ * Fix image downloading for Wikipedia                                  TACK
 
 Documentation:
  * Programmers manual for using Marble components in other applications	----
@@ -105,6 +90,9 @@ Installation issues                                                     TACK
 Before KDE 4.1
 ----------------------------------------------------------------
 
+Make it a more complete KDE4 application as a real member of kdeedu.
+ * DBus Support                                                         TACK
+
 Vector backend
  * Better scalability                                                   ----
 
@@ -114,6 +102,9 @@ Widget:
 
 Features:
  * Areas, e.g. countries or districts                                   ----
+ * Support for OpenStreetMap                                            TACK
+    - load tiles                                                        --
+    - display tiles                                                     --
 
 Data:
  * Evaluate the implementation of tile specifications like 
