@@ -42,6 +42,7 @@ void GeoDataColorStyle::pack( QDataStream& stream ) const
     GeoDataObject::pack( stream );
 
     stream << m_color;
+    // FIXME: Why is not colorMode saved?
 //    stream << m_colorMode;
 }
 
@@ -50,5 +51,6 @@ void GeoDataColorStyle::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     stream >> m_color;
+    // FIXME: Why is not colorMode saved?
 //    stream >> m_colorMode;
 }

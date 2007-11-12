@@ -61,10 +61,12 @@ Documentation:
  * APIDOX for classes in geodata/data                                   INGE
     - StyleSelector                                                     done
     - Style                                                             done
+    - ColorStyle                                                        done
     - IconStyle                                                         --
     - LabelStyle                                                        --
-    - HotSpot                                                           --
+    - HotSpot?                                                          --
     - Serializable?                                                     --
+ * APIDOX for classes in AbstractLayer                                  ----
 
 Widget:
  * Make it possible to paint on different device types in addition      ----
