@@ -25,6 +25,7 @@ class TileCreator : public QThread
  public: 
     TileCreator( const QString& prefix, const QString& installmap, 
                  const QString& dem, const QString& targetDir=QString() );
+    void cancelTileCreation();
 
  Q_SIGNALS:
     void  progress( int value );
@@ -37,6 +38,7 @@ class TileCreator : public QThread
     QString  m_installmap;
     QString  m_dem;
     QString  m_targetDir;
+    bool     m_cancelled;
 };
 
 

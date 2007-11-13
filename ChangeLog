@@ -1,3 +1,9 @@
+2007-11-12  Torsten Rahn  <rahn@kde.org>
+    
+    * src/lib/TileCreator.{h,cpp}: Fix TileCreator bug
+    * src/lib/TileCreatorDialog.{h,cpp}: Fix TileCreator bug
+    * src/lib/MarbleModel.cpp: Fix TileCreator bug
+
 2007-11-12  Inge Wallin  <inge@lysator.liu.se>
 
 	APIDOX

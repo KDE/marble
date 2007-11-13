@@ -212,17 +212,12 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
                                      d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
-		qDebug("TileCreator created");
             TileCreatorDialog tileCreatorDlg( tileCreator, parent );
-		qDebug("TileCreatorDialog created");
             tileCreatorDlg.setSummary( d->m_maptheme->name(),
                                        d->m_maptheme->description() );
-		qDebug("TileCreatorDialog summary set");
             tileCreatorDlg.exec();
-		qDebug("TileCreatorDialog executed");
+            qDebug("Tile creation completed");
         }
-
-	qDebug("About to continue");
 
         if ( d->m_texmapper != 0 )
             delete d->m_texmapper;

@@ -329,6 +329,7 @@ void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itSt
             m_currentPoint = QPointF( x, y );
             if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
+
                 if ( degY > M_PI / 3 ) {
                        m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, y );
                        m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset

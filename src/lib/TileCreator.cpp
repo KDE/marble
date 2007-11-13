@@ -35,11 +35,16 @@ TileCreator::TileCreator(const QString& prefix, const QString& installmap,
       m_prefix(prefix),
       m_installmap(installmap),
       m_dem(dem),
-      m_targetDir(targetDir)
+      m_targetDir(targetDir),
+      m_cancelled( false )
 {
     setTerminationEnabled( true );
 }
 
+void TileCreator::cancelTileCreation()
+{
+    m_cancelled = true;
+}
 
 void TileCreator::run()
 {
@@ -167,6 +172,9 @@ void TileCreator::run()
         }
 
         for ( unsigned int m = 0; m < mmax; ++m ) {
+
+            if ( m_cancelled == true ) return;
+
             QImage tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
 
             tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( maxTileLevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
@@ -210,6 +218,8 @@ void TileCreator::run()
 
             unsigned int  mmaxit = TileLoader::levelToColumn( tileLevel );;
             for ( unsigned int m = 0; m < mmaxit; ++m ) {
+
+                if ( m_cancelled == true ) return;
 
                 tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tileLevel + 1 ).arg( 2*n, tileDigits, 10, QChar('0') ).arg( 2*m, tileDigits, 10, QChar('0') );
                 QImage  img_topleft( tileName );
@@ -314,6 +324,9 @@ void TileCreator::run()
         for ( unsigned int n = 0; n < nmaxit; ++n) {
             unsigned int mmaxit =  TileLoader::levelToColumn( tileLevel );
             for ( unsigned int m = 0; m < mmaxit; ++m) { 
+
+                if ( m_cancelled == true ) return;
+
                 savedTilesCount++;
 
                 tileName = m_targetDir + QString("%1/%2/%2_%3.jpg").arg( tileLevel ).arg( n, tileDigits, 10, QChar('0') ).arg( m, tileDigits, 10, QChar('0') );
@@ -326,15 +339,15 @@ void TileCreator::run()
                 percentCompleted = 90 + (int)( 9 * (double)(savedTilesCount) / 
                                    (double)(totalTileCount) );	
                 emit progress( percentCompleted );
-		qDebug() << "Saving Tile #" << savedTilesCount << " of " << totalTileCount << " Percent: " << percentCompleted;
+//		qDebug() << "Saving Tile #" << savedTilesCount << " of " << totalTileCount << " Percent: " << percentCompleted;
             }
         }
         tileLevel++;	
     }
 
-	qDebug() << "About to emit signal";
     percentCompleted = 100;
     emit progress( percentCompleted );
+
 	qDebug() << "percentCompleted: " << percentCompleted;
 }
 

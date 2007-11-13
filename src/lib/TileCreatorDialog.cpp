@@ -32,9 +32,10 @@ TileCreatorDialog::~TileCreatorDialog()
     disconnect( m_creator, SIGNAL( progress( int ) ),
                 this, SLOT( setProgress( int ) ) );
 
-    m_creator->terminate();
+    if ( m_creator->isRunning() )
+        m_creator->cancelTileCreation();
+    m_creator->wait();
     m_creator->deleteLater();
-    m_creator->wait( 1000 );
 }
 
 void TileCreatorDialog::setProgress( int progress )
@@ -44,7 +45,6 @@ void TileCreatorDialog::setProgress( int progress )
     if ( progress == 100 )
 	{
         QTimer::singleShot( 0, this, SLOT( accept() ) ); 
-	qDebug() << "Single Shot";
 	}
 }
 
