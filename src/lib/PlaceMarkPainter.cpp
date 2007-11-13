@@ -27,10 +27,16 @@ PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
 {
     m_useXWorkaround = testXBug();
     qDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
+
+    m_defaultLabelColor = Qt::black;
 }
 
 PlaceMarkPainter::~PlaceMarkPainter()
 {
+}
+
+void PlaceMarkPainter::setDefaultLabelColor( const QColor& color ){
+    m_defaultLabelColor = color;
 }
 
 void PlaceMarkPainter::drawPlaceMarks( QPainter* painter, 
@@ -154,6 +160,10 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
     QRect  labelRect  = mark->labelRect();
     QFont  labelFont  = style->labelStyle()->font();
     QColor labelColor = style->labelStyle()->color();
+
+    // FIXME: To be removed after MapTheme / KML refactoring
+    if ( labelColor == Qt::black && m_defaultLabelColor != Qt::black )
+        labelColor = m_defaultLabelColor;
 
     // Due to some XOrg bug this requires a workaround via
     // QImage in some cases (at least with Qt 4.2).

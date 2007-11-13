@@ -48,6 +48,9 @@ class PlaceMarkPainter : public QObject
                          const QItemSelection &selection, 
                          ViewParams *viewParams );
 
+    // FIXME: To be removed after MapTheme / KML refactoring
+    void setDefaultLabelColor( const QColor& color );
+
  private:
 
     void drawLabelText( QPainter& textpainter, const QString &name, const QFont &labelFont );
@@ -56,6 +59,9 @@ class PlaceMarkPainter : public QObject
     bool testXBug();
 
     bool m_useXWorkaround;  // Indicates need for an X windows workaround.
+
+    // FIXME: To be removed after MapTheme / KML refactoring
+    QColor m_defaultLabelColor;
 };
 
 #endif // PLACEMARKPAINTER_H

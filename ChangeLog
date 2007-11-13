@@ -1,4 +1,12 @@
-2007-11-12  Torsten Rahn  <rahn@kde.org>
+2007-11-13  Torsten Rahn  <rahn@kde.org>
+    
+    * src/lib/PlaceMarkPainter.{h,cpp}: Fix black labels on dark maps
+    * src/lib/MarbleModel.cpp: Fix black labels on dark maps
+
+    This is just a quick and dirty workaround that needs to get removed
+    later on.
+
+2007-11-13  Torsten Rahn  <rahn@kde.org>
     
     * src/lib/TileCreator.{h,cpp}: Fix TileCreator bug
     * src/lib/TileCreatorDialog.{h,cpp}: Fix TileCreator bug
