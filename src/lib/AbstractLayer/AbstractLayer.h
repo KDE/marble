@@ -58,8 +58,8 @@ class AbstractLayer: public QObject
      */
     virtual void paintLayer(ClipPainter* painter, 
                             const QSize& screenSize,
-                            double radius, Quaternion rotAxis);
-    
+                            ViewParams *viewParams );
+
     /**
      * @brief method to paint the whole Layer
      * 
@@ -76,7 +76,7 @@ class AbstractLayer: public QObject
      */
     virtual void paintLayer(ClipPainter* painter, 
                             const QSize& screenSize,
-                            double radius, Quaternion rotAxis, 
+                            ViewParams *viewParams, 
                             BoundingBox bounding );
 
  public:
@@ -84,12 +84,12 @@ class AbstractLayer: public QObject
      * @brief Construct this layer with a parent
      */
     AbstractLayer( QObject * parent=0 );
-    
+
     /**
      * @brief distructor
      */
     ~AbstractLayer();
-    
+
     /** 
      * @brief get screen pixel position from a geographical position
      * 
@@ -113,8 +113,7 @@ class AbstractLayer: public QObject
      **/
     static bool getPixelPosFromGeoPoint(double _lon, double _lat, 
                                  const QSize &screenSize, 
-                                 Quaternion invRotAxis, 
-                                 int radius,
+                                 ViewParams *viewParams,
                                  QPoint *position);
 
      /**
@@ -134,22 +133,21 @@ class AbstractLayer: public QObject
       **/ 
     bool getPixelPosFromGeoPoint(GeoPoint geoPosition,
                                  const QSize &screenSize,
-                                 Quaternion invRotAxis,
-                                 int radius,
+                                 ViewParams *viewParams,
                                  QPoint *position);
-    
+
     /**
      * @brief  Return whether the Layer is visible.
      * @return The Layer visibility.
      */
     bool  visible() const;
-    
+
     /**
      * @brief  Set whether the Layer is visible
      * @param  visible  visibility of the Layer
      */
     void setVisible( bool visible );
-    
+
     /**
      * @brief convenience method to find the distance between 2 points
      * 
@@ -158,7 +156,7 @@ class AbstractLayer: public QObject
      * view for drawing purposes.
      */
     static double distance ( const QPoint &, const QPoint & );
-    
+
     /**
      * @brief overloaded method to allow for double presision distance
      */

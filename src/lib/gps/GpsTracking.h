@@ -19,7 +19,7 @@
 #include <QtNetwork/QHttp>
 #include "ClipPainter.h"
 #include "Quaternion.h"
-
+#include "ViewParams.h"
 #include "config-libgps.h"
 
 
@@ -39,11 +39,11 @@ class GpxFile;
 class GpsTracking : public QObject 
 {
     Q_OBJECT
-            
+
 public:
-    
+
     enum TrackingMethod { Gps, IP, MobilePhone };
-    
+
     explicit GpsTracking( GpxFile *currentGpx,
                           TrackingMethod method = Gps, 
                           QObject *parent = 0 );
@@ -65,11 +65,11 @@ public:
      *         @c false the gps object was not updated so no repaint
      *                  nessary.
      */
-    bool update(const QSize &canvasSize, double radius,
-                   Quaternion invRotAxis, QRegion &reg);
-    
-    void construct ( const QSize &canvasSize, double radius,
-                     Quaternion invRotAxis );
+    bool update(const QSize &canvasSize, ViewParams *viewParams,
+                QRegion &reg);
+
+    void construct ( const QSize &canvasSize,
+                     ViewParams *viewParams );
     /**
      * generates the region of the view that needs to be updated when 
      * the position of the gps changes. it is a union of the old 
@@ -81,14 +81,14 @@ public:
      * @return QRegion representation of where on the view needs to be
      *         updated.
      */
-    QRegion     genRegion( const QSize &canvasSize, double radius,
-                          Quaternion invRotAxis );
-    
+    QRegion     genRegion( const QSize &canvasSize, 
+                           ViewParams *viewParams );
+
     void draw( ClipPainter *painter,
-                const QSize &canvasSize, double radius,
-                Quaternion invRotAxis );
-    
-    
+                const QSize &canvasSize, 
+                ViewParams *viewParams );
+
+
  public slots:
     void  updateIp( );
     void  getData( bool error );
@@ -99,15 +99,15 @@ public:
     QPolygonF           m_currentDraw;
     QPolygonF           m_previousDraw;
     QPointF             m_previousDistancePosition;
-    
+
     //used to get info from ip address
     QTemporaryFile gmlFile;
     bool                m_downloadFinished;
-    
-    
+
+
     TrackingMethod      m_trackingMethod;
-    
-   
+
+
     Waypoint            *m_currentPosition;
     TrackPoint          *m_gpsCurrentPosition;
     TrackPoint          *m_gpsPreviousPosition;
@@ -116,7 +116,7 @@ public:
     gpsmm               *m_gpsd;
     struct gps_data_t   *m_gpsdData;
 #endif
-    
+
     TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
     TrackSegment        *m_gpsTrackSeg;
@@ -124,7 +124,7 @@ public:
     int                 m_updateDelay;
     QTemporaryFile      m_tempFile;
     QString             m_data;
-    
+
     QHttp host;
 
 

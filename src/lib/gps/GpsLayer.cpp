@@ -25,14 +25,14 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
                 :AbstractLayer( parent )
 {
     m_currentPosition = new Waypoint( 0,0 );
-    
+
     /*
     m_waypoints = new WaypointContainer();
     m_tracks = new TrackContainer();*/
-    
+
 //     m_files = new QVector<GpxFile*>();
     m_fileModel = fileModel;
-    
+
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
     m_fileModel->addFile( m_currentGpx );
@@ -46,42 +46,37 @@ GpsLayer::~GpsLayer()
     delete m_currentGpx;
 }
 
-bool GpsLayer::updateGps( const QSize &canvasSize, double radius,
-                             Quaternion rotAxis, QRegion &reg )
+bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
+                          QRegion &reg )
 {
-    return  m_tracking->update( canvasSize, radius, 
-                                rotAxis.inverse(), reg );
+    return  m_tracking->update( canvasSize, viewParams, reg );
 //     return QRegion();
 }
 
 void GpsLayer::paintLayer( ClipPainter *painter, 
-                          const QSize &canvasSize, double radius,
-                          Quaternion rotAxis, BoundingBox box )
+                          const QSize &canvasSize, ViewParams *viewParams,
+                          BoundingBox box )
 {
-    Quaternion invRotAxis = rotAxis.inverse();
-    
     if ( visible() ) {
         m_currentPosition->draw( painter, canvasSize, 
-                                radius, invRotAxis );
+                                 viewParams );
         QRegion temp; // useless variable
-        updateGps( canvasSize, radius, rotAxis, temp);
-        paintCurrentPosition( painter, canvasSize, radius, 
-                              invRotAxis );
+        updateGps( canvasSize, viewParams, temp);
+        paintCurrentPosition( painter, canvasSize, viewParams );
     }
-    
+
     QVector<GpxFile*>::const_iterator it;
     for( it = m_fileModel->allFiles()->constBegin(); 
          it < m_fileModel->allFiles()->constEnd(); ++it ){
-        (*it)->draw( painter, canvasSize, radius, invRotAxis, box );
+        (*it)->draw( painter, canvasSize, viewParams, box );
     }
 }
 
 void GpsLayer::paintCurrentPosition( ClipPainter *painter, 
                                      const QSize &canvasSize, 
-                                     double radius,
-                                     Quaternion invRotAxis)
+                                     ViewParams *viewParams )
 {
-    m_tracking->draw( painter, canvasSize, radius, invRotAxis );
+    m_tracking->draw( painter, canvasSize, viewParams );
 }
 
 void GpsLayer::changeCurrentPosition( double lat, double lon )
@@ -92,10 +87,10 @@ void GpsLayer::changeCurrentPosition( double lat, double lon )
 void GpsLayer::loadGpx( const QString &fileName )
 {
     GpxFile *tempFile = new GpxFile( fileName );
-    
+
 //     QTextStream test(stderr);
 //     test << *tempFile;
-    
+
     m_fileModel->addFile( tempFile );
 }
 

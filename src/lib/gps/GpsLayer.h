@@ -37,34 +37,31 @@ class GpsTracking;
 
 class GpsLayer : public AbstractLayer
 {
-    
  public:
     explicit GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
-                            const QSize &canvasSize, double radius,
-                            Quaternion rotAxis, BoundingBox box );
+                            const QSize &canvasSize, ViewParams *viewParams,
+                            BoundingBox box );
     virtual void paintCurrentPosition( ClipPainter *painter, 
                                        const QSize &canvasSize, 
-                                       double radius,
-                                       Quaternion invRotAxis );
-    
+                                       ViewParams *viewParams );
+
     void changeCurrentPosition( double lat, double lon );
-    
+
     void loadGpx(const QString &fileName);
 //  public slots:
-    bool updateGps(const QSize &canvasSize, double radius,
-                      Quaternion rotAxis, QRegion &reg);
+    bool updateGps(const QSize &canvasSize, ViewParams *viewParams,
+                   QRegion &reg);
 
     GpxFileModel        *m_fileModel;
  private:
     Waypoint            *m_currentPosition;
-    
+
 //     QVector<GpxFile*>   *m_files;
-   
+
     GpxFile             *m_currentGpx;
     GpsTracking         *m_tracking;
-    
 };
 
 #endif

@@ -23,19 +23,18 @@ Track::Track() :
 }
 
 void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
-                 double radius, Quaternion invRotAxis)
+                 ViewParams *viewParams )
 {
     const_iterator it;
     for( it = this->begin(); it < this->constEnd();
          it++ )
     {
-        ( *it ) -> draw( painter, canvasSize, radius, invRotAxis );
+        ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }
 
 void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
-                 double radius, Quaternion invRotAxis, 
-                 BoundingBox box)
+                 ViewParams *viewParams, BoundingBox box)
 {
     
     /*
@@ -61,8 +60,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
     for( it = this->begin(); it < this->constEnd();
          it++ )
     {
-        ( *it ) -> draw( painter, canvasSize, radius, invRotAxis, 
-                         box );
+        ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }
 

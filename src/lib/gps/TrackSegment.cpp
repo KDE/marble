@@ -29,8 +29,8 @@ TrackSegment::TrackSegment()
 }
 
 void TrackSegment::draw( ClipPainter *painter, 
-                         const QSize &canvasSize, double radius,
-                         Quaternion invRotAxis )
+                         const QSize &canvasSize,
+                         ViewParams *viewParams )
 {
     QPoint *previous=0, position;
     bool draw;
@@ -41,7 +41,7 @@ void TrackSegment::draw( ClipPainter *painter,
     for( it = constBegin(); it < constEnd();
          it++ )
     {
-        draw = (*it)->getPixelPos(canvasSize, invRotAxis, (int)radius,
+        draw = (*it)->getPixelPos(canvasSize, viewParams,
                  &position);
         if( draw ) {
             //if this is the first TrackPoint in this segment
@@ -70,13 +70,13 @@ void TrackSegment::draw( ClipPainter *painter,
 }
 
 void TrackSegment::draw(ClipPainter *painter, 
-                        const QSize &canvasSize, double radius,
-                        Quaternion invRotAxis, BoundingBox box)
+                        const QSize &canvasSize, ViewParams *viewParams,
+                        BoundingBox box)
 {
     
     if ( box.isValid() && m_boundingBox->isValid() ) {
         if ( box.intersects( *m_boundingBox ) ) {
-            draw( painter, canvasSize, radius, invRotAxis );
+            draw( painter, canvasSize, viewParams );
         }
         else {
             
@@ -85,7 +85,7 @@ void TrackSegment::draw(ClipPainter *painter,
     }
     else {
         //bouding box doesn't work so draw anyway
-        draw( painter, canvasSize, radius, invRotAxis );
+        draw( painter, canvasSize, viewParams );
     }
    
 }

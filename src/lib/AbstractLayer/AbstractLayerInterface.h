@@ -11,6 +11,7 @@
 #define ABSTRACTLAYERINTERFACE_H
 
 #include <QtCore/QTextStream>
+#include "../ViewParams.h"
 
 class ClipPainter;
 class QPoint;
@@ -28,12 +29,12 @@ class AbstractLayerInterface
     virtual void draw ( ClipPainter *painter, const QPoint &point )=0;
     
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis )=0;
+                       const QSize &canvasSize, 
+                       ViewParams *viewParams )=0;
     
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis, BoundingBox box )=0;
+                       const QSize &canvasSize, ViewParams *viewParams,
+                       BoundingBox box )=0;
     
     virtual void printToStream( QTextStream& ) const;
     

@@ -13,13 +13,13 @@
 
 
 void RouteContainer::draw( ClipPainter *painter, 
-                           const QSize &canvasSize, double radius,
-                           Quaternion invRotAxis, BoundingBox box )
+                           const QSize &canvasSize, ViewParams *viewParams,
+                           BoundingBox box )
 {
     const_iterator it;
 
     for( it = constBegin() ; it < constEnd() ; ++it ) {
-        (*it)->draw( painter, canvasSize, radius, invRotAxis, box);
+        (*it)->draw( painter, canvasSize, viewParams );
     }
 
 }

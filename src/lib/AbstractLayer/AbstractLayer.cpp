@@ -35,14 +35,13 @@ AbstractLayer::~AbstractLayer()
 
 
 bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
-                                             const QSize &screenSize, 
-                                             Quaternion invRotAxis, 
-                                             int radius, 
+                                             const QSize &screenSize,
+                                             ViewParams *viewParams,
                                              QPoint *point)
 {
     Quaternion  qpos( _lon, _lat ); //temp
-    qpos.rotateAroundAxis(invRotAxis);
-
+    qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
+    int radius = viewParams->m_radius;
     if ( qpos.v[Q_Z] > 0 ) {
         point->setX( (int)( ( screenSize.width() / 2 ) 
                             + ( radius * qpos.v[Q_X] ) ) );
@@ -56,20 +55,18 @@ bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
 
 
 bool AbstractLayer::getPixelPosFromGeoPoint( GeoPoint position,
-                                             const QSize &screenSize, 
-                                             Quaternion invRotAxis,
-                                             int radius, 
+                                             const QSize &screenSize,
+                                             ViewParams *viewParams,
                                              QPoint *point)
 {
     Quaternion  qpos = position.quaternion(); //temp
-    qpos.rotateAroundAxis( invRotAxis );
-
+    qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
+    int radius = viewParams->m_radius;
     if ( qpos.v[Q_Z] > 0 ){
         point->setX( (int)( ( screenSize.width() / 2 )
                             + ( radius * qpos.v[Q_X] ) ) );
         point->setY( (int)( ( screenSize.height() / 2 )
                             + ( radius * qpos.v[Q_Y] ) ) );
-        
         return true;
     } else {
         return false;
@@ -89,29 +86,27 @@ void AbstractLayer::setVisible( bool visible )
 
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
-                                double radius, Quaternion rotAxis)
+                                ViewParams *viewParams)
 {
-    Quaternion invRotAxis = rotAxis.inverse();
     QVector<AbstractLayerContainer *>::const_iterator it;
-    
+
     for( it = m_containers->begin(); it < m_containers->end(); ++it ){
         if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, radius, invRotAxis );
+            (*it)->draw( painter, screenSize, viewParams );
         }
     }
 }
 
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
-                                double radius, Quaternion rotAxis, 
+                                ViewParams *viewParams, 
                                 BoundingBox bounding )
 {
-    Quaternion invRotAxis = rotAxis.inverse();
     QVector<AbstractLayerContainer *>::const_iterator it;
-    
+
     for( it = m_containers->begin(); it < m_containers->end(); ++it ){
         if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, radius, invRotAxis, 
+            (*it)->draw( painter, screenSize, viewParams, 
                          bounding );
         }
     }
@@ -121,7 +116,7 @@ double AbstractLayer::distance ( const QPoint &a, const QPoint &b )
 {
     return distance( QPointF( a.x(), a.y() ),
                      QPointF( b.x(), b.y() ) );
-    
+
 }
 
 double AbstractLayer::distance ( const QPointF &a, const QPointF &b )

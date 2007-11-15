@@ -31,20 +31,20 @@ GpxFile::GpxFile( const QString &fileName )
     m_tracks = new TrackContainer;
     m_waypoints = new WaypointContainer;
     m_routes = new RouteContainer;
-    
+
     m_name = QString (fileName);
-    
+
     QFile gpxFile( fileName );
     QXmlInputSource gpxInput( &gpxFile );
-    
+
     QXmlSimpleReader gpxReader;
     GpxSax gpxSaxHandler( this );
-    
+
     gpxReader.setContentHandler( &gpxSaxHandler );
     gpxReader.setErrorHandler( &gpxSaxHandler );
-    
+
     gpxReader.parse( &gpxInput );
-    
+
     m_checkState = Qt::Checked;
     setVisible( true );
     setActive( false );
@@ -55,9 +55,9 @@ GpxFile::GpxFile()
     m_tracks = new TrackContainer;
     m_waypoints = new WaypointContainer;
     m_routes = new RouteContainer;
-    
+
     m_name = "GpxFile";
-    
+
     m_checkState = Qt::Checked;
     setVisible( true );
     setActive( true );
@@ -74,27 +74,27 @@ void GpxFile::draw( ClipPainter *painter, const QPoint &point )
 }
 
 void GpxFile::draw( ClipPainter *painter, 
-                    const QSize &canvasSize, double radius,
-                    Quaternion invRotAxis )
+                    const QSize &canvasSize,
+                    ViewParams *viewParams )
 {
     if ( !m_visible ){
         return;
     }
-    m_waypoints->draw( painter, canvasSize, radius, invRotAxis);
+    m_waypoints->draw( painter, canvasSize, viewParams );
 //     m_routes->draw( painter, canvasSize, radius, invRotAxis);
-    m_tracks->draw( painter, canvasSize, radius, invRotAxis);
+    m_tracks->draw( painter, canvasSize, viewParams );
 }
 
 void GpxFile::draw( ClipPainter *painter, 
-                    const QSize &canvasSize, double radius,
-                    Quaternion invRotAxis, BoundingBox box )
+                    const QSize &canvasSize, ViewParams *viewParams,
+                    BoundingBox box )
 {
     if ( !m_visible ){
         return;
     }
-    m_waypoints->draw( painter, canvasSize, radius, invRotAxis, box);
-    m_routes->draw( painter, canvasSize, radius, invRotAxis, box);
-    m_tracks->draw( painter, canvasSize, radius, invRotAxis, box);
+    m_waypoints->draw( painter, canvasSize, viewParams, box);
+    m_routes->draw( painter, canvasSize, viewParams, box);
+    m_tracks->draw( painter, canvasSize, viewParams, box);
 }
 
 void GpxFile::printToStream( QTextStream &out ) const
@@ -151,12 +151,12 @@ void    GpxFile::setCheckState( Qt::CheckState state )
 void    GpxFile::setCheckState( bool state )
 {
     setVisible( state );
-    
+
     if ( state ) {
         m_checkState = Qt::Checked;
         return;
     }
-    
+
     m_checkState = Qt::Unchecked;
 }
 

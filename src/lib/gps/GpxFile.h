@@ -37,22 +37,22 @@ class GpxFile : public AbstractLayerInterface
  public:
     GpxFile( const QString &fileName );
     GpxFile();
-    
+
     virtual void draw( ClipPainter *painter, const QPoint &point );
-    
+
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis );
+                       const QSize &canvasSize,
+                       ViewParams *viewParams );
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, double radius,
-                       Quaternion invRotAxis, BoundingBox box );
+                       const QSize &canvasSize, ViewParams *viewParams,
+                       BoundingBox box );
     virtual void printToStream( QTextStream & ) const;
-    
+
     void addWaypoint( Waypoint *waypoint );
     void addTrack( Track *track );
     void addRoute( Route *route );
     void    setName( const QString &name );
-    
+
     Qt::ItemFlags   flags() const;
     QString         display();
     Qt::CheckState  checkState();
@@ -60,9 +60,7 @@ class GpxFile : public AbstractLayerInterface
     void            setCheckState( bool state );
     bool            active() const;
     void            setActive( bool active );
-    
-    
-    
+
  private:
     bool                m_active;
     QString             m_name;

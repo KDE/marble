@@ -58,18 +58,15 @@ void Waypoint::draw( ClipPainter * painter,
 }
 
 void Waypoint::draw( ClipPainter *painter, const QSize &canvasSize,
-                     double radius, Quaternion invRotAxis )
+                     ViewParams *viewParams )
 {
     QPoint position;
     bool draw = false;
-    
-    draw = getPixelPos( canvasSize, invRotAxis, (int)radius, 
+    draw = getPixelPos( canvasSize, viewParams,
                         &position );
-   
     if ( draw) {
         this->draw( painter, position );
     }
-    
 }
 
 void Waypoint::printToStream( QTextStream &out ) const 
@@ -86,7 +83,6 @@ void Waypoint::printBodyToStream( QTextStream &out ) const
         out << "<ele>" << m_elevation << "</ele>\n";
     }
     //TODO:: add rest of body GPX elements here
-
 }
 
 /*

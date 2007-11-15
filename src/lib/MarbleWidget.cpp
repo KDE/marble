@@ -1142,11 +1142,9 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 
 void MarbleWidget::updateGps()
 {
-
     QRegion temp;
     bool    draw;
-    draw = d->m_model->gpsLayer()->updateGps( size(), radius(),
-                                              planetAxis(), temp );
+    draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
     if( draw ){
         update(temp);
     }

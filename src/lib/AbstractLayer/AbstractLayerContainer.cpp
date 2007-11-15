@@ -51,28 +51,26 @@ void AbstractLayerContainer::draw ( ClipPainter *painter,
 
 void AbstractLayerContainer::draw(ClipPainter *painter, 
                                   const QSize &canvasSize, 
-                                  double radius, 
-                                  Quaternion invRotAxis)
+                                  ViewParams *viewParams )
 {
     const_iterator it;
     
     for( it = constBegin() ; it < constEnd() ; ++it ) {
-        (*it)->draw( painter, canvasSize, radius, invRotAxis);
+        (*it)->draw( painter, canvasSize, viewParams );
     }
 }
 
-void AbstractLayerContainer::draw(ClipPainter *painter, 
-                                  const QSize &canvasSize, 
-                                  double radius, 
-                                  Quaternion invRotAxis, 
-                                  BoundingBox box)
+void AbstractLayerContainer::draw(ClipPainter *painter,
+                                  const QSize &canvasSize,
+                                  ViewParams *viewParams,
+                                  BoundingBox box )
 {
     if ( box.isValid() ) {
         if ( m_boundingBox->intersects( box ) ) {
-            draw( painter, canvasSize, radius, invRotAxis);
+            draw( painter, canvasSize, viewParams );
         }
     } else { 
-        draw( painter, canvasSize, radius, invRotAxis);
+        draw( painter, canvasSize, viewParams );
     }
 }
 

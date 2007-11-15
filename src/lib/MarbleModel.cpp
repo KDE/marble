@@ -410,10 +410,10 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the Gps Layer
     d->m_gpsLayer->setVisible( viewParams->m_showGps );
+    //FIXME:We might just send ViewParams instead of this bunch of parameters
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->m_canvasImage->size(),
-                               viewParams->m_radius,
-                               viewParams->m_planetAxis,
+                               viewParams,
                                viewParams->m_boundingBox );
 }
 

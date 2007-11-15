@@ -26,21 +26,21 @@ GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method,
      :QObject( parent )
 {
     m_trackingMethod = method;
-    
+
     m_gpsCurrentPosition  = new TrackPoint( 0,0 );
     m_gpsPreviousPosition = new TrackPoint( 0,0 );
     m_gpsTracking         = new TrackPoint( 0,0 );
-    
+
     m_gpsTrack    = new Track();
     currentGpx->addTrack( m_gpsTrack );
     m_gpsTrackSeg = 0;
     m_updateDelay =0;
-    
+
     //for ip address evaluation
     connect( &host, SIGNAL( done(  bool ) ),
              this,  SLOT( getData( bool ) ) ) ;
     m_downloadFinished = false;
-    
+
 #ifdef HAVE_LIBGPS
     m_gpsd     = new gpsmm();
     m_gpsdData = m_gpsd->open( "127.0.0.1", "2947" );
@@ -60,9 +60,10 @@ GpsTracking::~GpsTracking()
 }
 
 
-void GpsTracking::construct( const QSize &canvasSize, double radius,
-                             Quaternion invRotAxis )
+void GpsTracking::construct( const QSize &canvasSize,
+                             ViewParams *viewParams )
 {
+    double const radius = viewParams->m_radius;
 #ifdef HAVE_LIBGPS
     if( !m_gpsd ) {
         m_currentDraw.clear();
@@ -71,15 +72,15 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
 #endif
     QPointF position;
     QPointF previousPosition;
-    
+
     bool draw = false;
-    
+
     draw = m_gpsCurrentPosition -> getPixelPos( canvasSize,
-            invRotAxis, radius, &position );
-    
+            viewParams, &position );
+
     draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, 
-            invRotAxis, radius, &previousPosition );
-   
+            viewParams, &previousPosition );
+
     if ( !draw ) {
         m_currentDraw.clear();
         return;
@@ -90,14 +91,14 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
     if (distance == 0) {
         return;
     }
-    
+
     QPointF unitVector = ( position - previousPosition )
                                     / distance;
     // The normal of the unit vector between first and second
     QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
-    
+
     m_previousDraw = m_currentDraw;
-    
+
     m_currentDraw.clear();
     m_currentDraw << position
                 << ( position - ( unitVector * 9 ) 
@@ -106,17 +107,17 @@ void GpsTracking::construct( const QSize &canvasSize, double radius,
                 << ( position - ( unitVector * 9 ) 
                               - ( unitVector2 * 9 ) );
 }
-QRegion GpsTracking::genRegion( const QSize &canvasSize, double radius,
-                               Quaternion invRotAxis ) 
+QRegion GpsTracking::genRegion( const QSize &canvasSize,
+                                ViewParams *viewParams )
 {
-        construct( canvasSize, radius, invRotAxis );
-    
+        construct( canvasSize, viewParams );
+
         QRect temp1(m_currentDraw.boundingRect().toRect());
         QRect temp2(m_previousDraw.boundingRect().toRect());
-    
+
         temp1.adjust( -5, -5, 10, 10);
         temp2.adjust( -5, -5, 10, 10);
-    
+
         return QRegion(temp1).united( QRegion(temp2) );
 }
 
@@ -126,13 +127,11 @@ void GpsTracking::getData( bool error )
         m_data = QString( host.readAll() );
         updateIp();
         m_downloadFinished = true;
-        
     }
 }
 
 void GpsTracking::updateIp( )
 {
-        
 //         QTextStream out(&gmlFile);
 //         gmlFile.write( host.readAll() );
 //         out << host.readAll();
@@ -141,24 +140,23 @@ void GpsTracking::updateIp( )
 //         
     double lon;
     double lat;
-        QXmlInputSource gmlInput/*( &gmlFile )*/;
-        gmlInput.setData( m_data );
-    
-        QXmlSimpleReader gmlReader;
-        GmlSax gmlSaxHandler( &lon, &lat );
-    
-        gmlReader.setContentHandler( &gmlSaxHandler );
-        gmlReader.setErrorHandler( &gmlSaxHandler );
-    
-        gmlReader.parse( &gmlInput );
-        
+    QXmlInputSource gmlInput/*( &gmlFile )*/;
+    gmlInput.setData( m_data );
+
+    QXmlSimpleReader gmlReader;
+    GmlSax gmlSaxHandler( &lon, &lat );
+
+    gmlReader.setContentHandler( &gmlSaxHandler );
+    gmlReader.setErrorHandler( &gmlSaxHandler );
+
+    gmlReader.parse( &gmlInput );
+
     qDebug() << "in the real world" << lon << lat;
     m_gpsCurrentPosition->setPosition( lat, lon );
-    
 }
 
-bool GpsTracking::update(const QSize &canvasSize, double radius,
-                            Quaternion invRotAxis, QRegion &reg) 
+bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
+                         QRegion &reg) 
 {
     switch ( m_trackingMethod ) {
     case MobilePhone:
@@ -166,39 +164,35 @@ bool GpsTracking::update(const QSize &canvasSize, double radius,
                __FILE__, __LINE__);
         exit(1); //force fail
         break;
-        
+
     case IP:
-        
+
         if ( m_updateDelay > 0 ) {
             --m_updateDelay;
-            
             //removed need for returning empty regions
             //return QRegion();
-            
             return false;
         }
-        
+
         host.setHost( "api.hostip.info" );
         host.get( "http://api.hostip.info/");
         m_updateDelay = 15000;
-        
+
         //removed empty return
         //return QRegion();
-        
+
         return false;
         break;
     case Gps:
 #ifndef HAVE_LIBGPS
         Q_UNUSED( canvasSize );
-        Q_UNUSED( radius );
-        Q_UNUSED( invRotAxis );
 #else
         //m_gpsdData has been successully set
         if ( m_gpsdData != 0 ){
             m_gpsdData =m_gpsd->query( "p" );
             m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
                                          m_gpsdData->fix.longitude );
-       
+
             if (m_gpsTrackSeg == 0 ){
                 m_gpsTrackSeg = new TrackSegment();
                 m_gpsTrack->append( m_gpsTrackSeg );
@@ -209,7 +203,7 @@ bool GpsTracking::update(const QSize &canvasSize, double radius,
                 m_gpsTrackSeg->append( m_gpsPreviousPosition );
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
                 m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
-                reg = genRegion( canvasSize, radius,invRotAxis);
+                reg = genRegion( canvasSize, viewParams );
                 return true;
             } else {
                 return false;
@@ -222,38 +216,36 @@ bool GpsTracking::update(const QSize &canvasSize, double radius,
                 m_gpsTrackSeg = 0;
             }
         }
-    
+
         /*
         construct( canvasSize, radius, invRotAxis );
-    
+
         QRect temp1(m_currentDraw.boundingRect().toRect());
         QRect temp2(m_previousDraw.boundingRect().toRect());
-    
+
         temp1.adjust( -5, -5, 10, 10);
         temp2.adjust( -5, -5, 10, 10);
-    
+
         return QRegion(temp1).united( QRegion(temp2) );
         */
-    
+
 #endif
     }
 }
 
 void GpsTracking::draw( ClipPainter *painter,
-                        const QSize &canvasSize, double radius,
-                        Quaternion invRotAxis )
+                        const QSize &canvasSize, 
+                        ViewParams *viewParams )
 {
     QPoint temp;
     switch( m_trackingMethod ){ 
     case IP: 
-        
         if( m_gpsCurrentPosition->getPixelPos( canvasSize,
-                                               invRotAxis, 
-                                            (int)radius, &temp ) )
+                                               viewParams,
+                                               &temp ) )
         {
             painter->drawEllipse( temp.x(), temp.y(), 10, 10 );
         }
-        
         break;
     case Gps:
         painter->setPen( Qt::black );
@@ -261,12 +253,8 @@ void GpsTracking::draw( ClipPainter *painter,
         painter->drawPolygon( m_currentDraw, Qt::OddEvenFill );
         break;
     case MobilePhone:
-        
         break;
     }
-    
 }
 
-
 #include "GpsTracking.moc"
-

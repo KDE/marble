@@ -26,11 +26,11 @@ class TrackSegment : public AbstractLayerContainer,
  public:
     TrackSegment();
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis, BoundingBox box );
+                      const QSize &canvasSize, ViewParams *viewParams,
+                      BoundingBox box );
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis);
+                      const QSize &canvasSize,
+                      ViewParams *viewParams );
     virtual void draw(ClipPainter*, const QPoint&);
     void drawArrow( ClipPainter*,  QPointF,  QPointF );
     

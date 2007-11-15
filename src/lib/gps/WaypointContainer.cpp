@@ -22,15 +22,15 @@ void WaypointContainer::processVisable()
 }
 
 void WaypointContainer::draw( ClipPainter *painter, 
-                           const QSize &canvasSize, double radius,
-                           Quaternion invRotAxis, BoundingBox box )
+                           const QSize &canvasSize, ViewParams *viewParams,
+                           BoundingBox box )
 {
-    draw( painter, canvasSize, radius, invRotAxis);
+    draw( painter, canvasSize, viewParams );
 }
 
 void WaypointContainer::draw( ClipPainter *painter, 
-                              const QSize &canvasSize, double radius,
-                              Quaternion invRotAxis )
+                              const QSize &canvasSize,
+                              ViewParams *viewParams )
 {
     const_iterator it;
     bool draw;
@@ -39,8 +39,8 @@ void WaypointContainer::draw( ClipPainter *painter,
     painter->setBrush( QBrush( Qt::white ) );
     
     for ( it = this->begin(); it < this->constEnd(); ++it ) {
-        draw = (*it)->getPixelPos( canvasSize, invRotAxis,
-                                   (int)radius, &position );
+        draw = (*it)->getPixelPos( canvasSize, viewParams,
+                                   &position );
 
         if ( draw ) {
             ( *it )->draw( painter, position );

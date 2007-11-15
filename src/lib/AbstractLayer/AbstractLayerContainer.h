@@ -91,8 +91,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      *                   represents the rotation of the globe
      */
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis);
+                      const QSize &canvasSize,
+                      ViewParams *viewParams );
     
     /**
      * @brief draw this Container after evaluating its bounding Box
@@ -107,8 +107,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * @param box the bounding box that holds the view
      */
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis, BoundingBox box);
+                      const QSize &canvasSize, ViewParams *viewParams,
+                      BoundingBox box);
     
     /**
      * @brief m_name getter

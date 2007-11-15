@@ -21,39 +21,37 @@ Route::Route() :  AbstractLayerContainer(),
 }
 
 void Route::draw( ClipPainter *painter, const QSize &canvasSize,
-                  double radius, Quaternion invRotAxis )
+                  ViewParams *viewParams )
 {
     //temparory item to keep track of previous point
     AbstractLayerData *first=0;
-    
+
     //record the posisions of the points
     QPoint firstPos;
     QPoint secondPos;
-    
     const_iterator it;
-    
+
     // Initialise first to the beginning of the vector.
     first = *(begin());
-    
+
     for ( it = constBegin(); it < constEnd(); it++){
-        first->getPixelPos( canvasSize, invRotAxis, (int)radius, 
-                                &firstPos );
-        
-        (*it)->getPixelPos( canvasSize, invRotAxis, (int)radius, 
-                                 &secondPos );
-        
+        first->getPixelPos( canvasSize, viewParams,
+                            &firstPos );
+
+        (*it)->getPixelPos( canvasSize, viewParams , 
+                            &secondPos );
+
         if ( distance( firstPos, secondPos ) > 25 ) {
             first->draw( painter, firstPos );
             (*it)->draw( painter, secondPos );
-            
             painter->drawLine( firstPos, secondPos );
         }
     }
 }
 
 void Route::draw( ClipPainter *painter, 
-                  const QSize &canvasSize, double radius,
-                  Quaternion invRotAxis, BoundingBox box )
+                  const QSize &canvasSize, ViewParams *viewParams,
+                  BoundingBox box )
 {
 }
 

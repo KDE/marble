@@ -12,9 +12,10 @@
 #ifndef ABSTRACTLAYERDATA_H
 #define ABSTRACTLAYERDATA_H
 
-
+#include "../global.h"
 #include "../GeoPoint.h"
 #include "AbstractLayerInterface.h"
+#include "../ViewParams.h"
 
 
 class QPixmap;
@@ -73,20 +74,18 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * drawing and can be called from within this one. 
      * @param painter used to draw the AbstractLayerData object
      * @param canvasSize the size of the Marble Widget screen
-     * @param radius the radius of the globe, measure of zoom level
-     * @param invRotAxis Quaternion representation of the rotation of
-     *                   the globe, previously inverted.
+     * @param viewParams parameters for painting the map
      */
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis);
+                      const QSize &canvasSize,
+                      ViewParams *viewParams);
     /**
      * @brief default implemetation of AbstractLayerInterface function
      *        that does not apply to a single point
      */
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
-                      Quaternion invRotAxis, BoundingBox box);
+                      const QSize &canvasSize, ViewParams *viewParams,
+                      BoundingBox box);
 
     /**
      * @brief check if this Layer Data is visible on screen
@@ -150,13 +149,10 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      *         @c false if the position is on the other side of the 
      *                  globe
      */
-    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
-                                 int radius, QPoint *position);
-    
-    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
-                     int radius, QPointF *position);
-    bool getPixelPos(const QSize &screenSize, Quaternion invRotAxis, 
-                     double radius, QPointF *position);
+    bool getPixelPos(const QSize &screenSize, ViewParams *viewParams,
+                     QPoint *position );
+    bool getPixelPos(const QSize &screenSize, ViewParams *viewParams, 
+                     QPointF *position );
     
  protected:
     /**

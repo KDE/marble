@@ -47,15 +47,15 @@ void AbstractLayerData::draw ( ClipPainter *, const QPoint & )
 
 
 void AbstractLayerData::draw(ClipPainter *painter, 
-                             const QSize &canvasSize, double radius,
-                             Quaternion invRotAxis)
+                             const QSize &canvasSize,
+                             ViewParams *viewParams )
 {
     qDebug() <<"in AbstractLayerData::draw() without bounding box";
 }
 
 void AbstractLayerData::draw( ClipPainter *painter, 
-                  const QSize &canvasSize, double radius,
-                  Quaternion invRotAxis, BoundingBox box )
+                  const QSize &canvasSize, ViewParams *viewParams,
+                  BoundingBox box )
 {
     //does not apply to abstractLayerData
     qDebug() <<"in AbstractLayerData::draw() with bounding box";
@@ -80,9 +80,9 @@ double  AbstractLayerData::lat() const
 {
     double tmpLat;
     double tmpLon;
-    
+
     m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
-    
+
     return tmpLat;
 }
 
@@ -90,9 +90,9 @@ double  AbstractLayerData::lon() const
 {
     double tmpLat;
     double tmpLon;
-    
+
     m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
-    
+
     return tmpLon;
 }
 
@@ -111,55 +111,65 @@ void AbstractLayerData::setPosition( const double &lat,
 }
 
 bool AbstractLayerData::getPixelPos( const QSize &screenSize,
-                                     Quaternion invRotAxis, 
-                                     int radius, QPoint *point)
+                                      ViewParams *viewParams,
+                                      QPoint *point )
 {
     QPointF tempPoint;
     bool    tempBool;
-    
-    tempBool = getPixelPos( screenSize, invRotAxis, radius,
-                            &tempPoint );
+
+    tempBool = getPixelPos( screenSize, viewParams, &tempPoint );
     point -> setX( (int)tempPoint.x() );
     point -> setY( (int)tempPoint.y() );
-    
+
     return tempBool;
 }
 
 bool AbstractLayerData::getPixelPos( const QSize &screenSize,
-                                     Quaternion invRotAxis, 
-                                     int radius, QPointF *point)
+                                     ViewParams *viewParams,
+                                     QPointF *point )
 {
+    int radius = viewParams->m_radius;
     Quaternion  qpos = m_position->quaternion(); 
-    qpos.rotateAroundAxis( invRotAxis );
+    switch ( viewParams->m_projection ) {
+        case Spherical:
+            qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
 
-    if ( qpos.v[Q_Z] > 0 ){
-        point->setX( ( ( screenSize.width() / 2 )
-                + ( radius * qpos.v[Q_X] ) ) );
-        point->setY( ( ( screenSize.height() / 2 )
-                + ( radius * qpos.v[Q_Y] ) ) );
-        
-        return true;
-    } else {
-        return false;
-    }
-}
+            if ( qpos.v[Q_Z] > 0 ){
+                point->setX( ( ( screenSize.width() / 2 )
+                        + ( radius * qpos.v[Q_X] ) ) );
+                point->setY( ( ( screenSize.height() / 2 )
+                        + ( radius * qpos.v[Q_Y] ) ) );
 
-bool AbstractLayerData::getPixelPos( const QSize &screenSize,
-                                     Quaternion invRotAxis, 
-                                     double radius, QPointF *point)
-{
-    Quaternion  qpos = m_position->quaternion(); 
-    qpos.rotateAroundAxis( invRotAxis );
+                return true;
+            } else {
+                return false;
+            }
+        break;
+        case Equirectangular:
+            double degX;
+            double degY;
+            double xyFactor = 2 * viewParams->m_radius / M_PI;
 
-    if ( qpos.v[Q_Z] > 0 ){
-        point->setX( ( ( screenSize.width() / 2 )
-                + ( radius * qpos.v[Q_X] ) ) );
-        point->setY( ( ( screenSize.height() / 2 )
-                + ( radius * qpos.v[Q_Y] ) ) );
-        
-        return true;
-    } else {
-        return false;
+            double centerLon;
+            double centerLat;
+
+            // Let (x, y) be the position on the screen of the placemark..
+            qpos.getSpherical( degX, degY );
+            viewParams->centerCoordinates( centerLon, centerLat );
+
+            int x = (int)( screenSize.width()/ 2 + xyFactor * (degX + centerLon));
+            int y = (int)(screenSize.height()/ 2 + xyFactor * (degY + centerLat));
+
+            point->setX( x );
+            point->setY( y );
+
+            if ( x < 0 || x >= screenSize.width() ||
+                 y < screenSize.height() / 2 - 2*viewParams->m_radius || 
+                 y >= screenSize.height()/ 2 + 2*viewParams->m_radius )
+            {
+                return false;
+            }
+            return true;
     }
 }
 
