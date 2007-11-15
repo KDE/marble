@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=Marble Part
 Name[ca]=Part del Marble
@@ -17,6 +16,6 @@ Name[x-test]=xxMarble Partxx
 Name[zh_CN]=Marble 组件
 Name[zh_TW]=Marble 部件
 MimeType=application/vnd.google-earth.kml+xml;
-ServiceTypes=Browser/View,KParts/ReadOnlyPart
+X-KDE-ServiceTypes=Browser/View,KParts/ReadOnlyPart
 X-KDE-Library=libmarble_part
 Icon=marble
