@@ -177,6 +177,7 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     m_centerLon =  planetAxis.yaw() + M_PI;
 
     m_xyFactor = 2*radius / M_PI;
+    m_radius = radius;
 
     Quaternion  qpos;
     Quaternion  prevqpos;
@@ -338,14 +339,27 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 {
     double      x;
     double      y;
+    int         currentSign;
+    int         previousSign;
+    double      prevX;
     double      degX;
     double      degY;
+    double      previousDegX;
+    double      previousY;
+    double      interpolatedY;
+    double      centerLonPixel = m_centerLon * m_xyFactor;
+    double      centerLatPixel = m_centerLat * m_xyFactor;
     QPolygonF   distancePath;
 
     Q_UNUSED( antialiasing );
 
     double      t = 0.0;
     Quaternion  itpos;
+    //Calculate the sign of the first measurePoint
+    itpos.slerp( prevqpos, qpos, t );
+    itpos.getSpherical(degX,degY);
+    currentSign = previousSign = (degX<0)?-1:1;
+    previousDegX = degX;
 
     Q_UNUSED( antialiasing );
 
@@ -355,10 +369,27 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical(degX,degY);
 
-        x = (double)( imgrx + (degX + m_centerLon ) *m_xyFactor );
-        y = (double)( imgry + (degY + m_centerLat ) *m_xyFactor );
-
-        distancePath << QPointF( x, y );
+        x = (double)( imgrx + ( degX ) *m_xyFactor + centerLonPixel );
+        y = (double)( imgry + ( degY ) *m_xyFactor + centerLatPixel );
+        //The next steeps deal with the measurement of two points
+        //that the shortest path crosses the dateline
+        currentSign = (degX < 0)?-1:1;
+        if( previousSign != currentSign && fabs(previousDegX) + fabs(degX) > M_PI) {
+            //FIXME:Find a better interpolation
+            interpolatedY= ( y + previousY ) / 2;
+            distancePath << QPointF( imgrx + centerLonPixel 
+                                    + previousSign*2*radius,
+                                      interpolatedY );
+            painter->drawPolyline( distancePath );
+            distancePath.clear();
+            distancePath << QPointF( imgrx + centerLonPixel 
+                                    + currentSign*2*radius, 
+                                      interpolatedY);
+        }
+        else distancePath << QPointF( x, y );
+        previousSign = currentSign;
+        previousDegX = degX;
+        previousY = y;
     }
 
     painter->drawPolyline( distancePath );

@@ -82,6 +82,7 @@ class MeasureTool : public QObject
     double m_centerLat;
     double m_centerLon;
     double m_xyFactor;
+    int m_radius;
 };
 
 
