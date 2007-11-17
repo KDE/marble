@@ -676,9 +676,6 @@ void MarbleWidget::disconnectNotify ( const char * signal )
 
 int MarbleWidget::northPoleY()
 {
-    if( d->m_viewParams.m_projection == Equirectangular ) {
-        return -1;
-    }
     Quaternion  northPole     = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
