@@ -325,31 +325,31 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the grid around the earth.
     if ( viewParams->m_showGrid ) {
-        QPen  gridpen( QColor( 255, 255, 255, 128 ) );
+        QPen  gridpen( QColor( 231, 231, 231, 255 ) );
 
         // Create and paint a grid
         d->m_gridmap->createGrid( viewParams->m_radius,
                                   viewParams->m_planetAxis,
                                   viewParams->m_projection );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, true );
+        d->m_gridmap->paintGridMap( painter, false );
 
         // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( viewParams->m_radius,
                                      viewParams->m_planetAxis,
                                      viewParams->m_projection );
         gridpen.setStyle( Qt::DotLine );
-        gridpen.setWidthF( 1.5f );
+//        gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, true );
+        d->m_gridmap->paintGridMap( painter, false );
 
         // Create Equator
         d->m_gridmap->createEquator( viewParams->m_radius,
                                      viewParams->m_planetAxis,
                                      viewParams->m_projection );
-        gridpen.setWidthF( 2.0f );
+//        gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, true );
+        d->m_gridmap->paintGridMap( painter, false );
     }
 
     // Paint the GeoDataPlaceMark layer

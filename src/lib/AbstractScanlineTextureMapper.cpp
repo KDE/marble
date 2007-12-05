@@ -79,6 +79,7 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 void AbstractScanlineTextureMapper::setMapTheme( const QString& theme )
 {
     m_tileLoader->setMapTheme(theme);
+    m_tileLevel = -1;
     detectMaxTileLevel();
 }
 

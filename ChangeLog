@@ -1,3 +1,11 @@
+2007-12-05  Torsten Rahn  <rahn@kde.org>
+    
+    * src/lib/AbstractScanlineTextureMapper.cpp: Small fix by Jan Becker
+    * src/lib/MarbleControlBox.cpp: Fix by Casper Boeman for QToolBox issue
+    * src/lib/MarbleModel.cpp: "Fix" to improve Marble speed
+
+    All changes are trivial.
+
 2007-11-13  Torsten Rahn  <rahn@kde.org>
     
     * src/lib/PlaceMarkPainter.{h,cpp}: Fix black labels on dark maps

@@ -78,11 +78,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
 
-    d->uiWidget.NavigationTab->setBackgroundRole( QPalette::Window );
-    d->uiWidget.LegendTab->setBackgroundRole( QPalette::Window );
-    d->uiWidget.MapViewTab->setBackgroundRole( QPalette::Window );
-    d->uiWidget.CurrentLocationTab->setBackgroundRole( QPalette::Window );
-
     //  Iterate through all of the Side Widget values  //
     d->uiWidget.toolBox->setCurrentIndex( 0 );
     d->m_navigationWidget = d->uiWidget.toolBox->currentWidget();
