@@ -30,6 +30,8 @@
 class GeoDataLabelStyle : public GeoDataColorStyle
 {
   public:
+    enum Alignment{Corner, Center /*, Left, Right, Below  */};
+
     /// Construct a new GeoDataLabelStyle
     GeoDataLabelStyle();
     /**
@@ -49,7 +51,16 @@ class GeoDataLabelStyle : public GeoDataColorStyle
      * @return  the current scale
      */
     float scale() const;
-
+    /**
+     * @brief Set the alignment of the label
+     * @param  int the alignment
+     */
+    void setAlignment ( GeoDataLabelStyle::Alignment alignment );
+    /**
+     * @brief Return the alignment of the label
+     * @return  the current alignment
+     */
+    GeoDataLabelStyle::Alignment alignment() const;
     /**
      * @brief Set the font of the label
      * @param  font  the new font
@@ -75,6 +86,8 @@ class GeoDataLabelStyle : public GeoDataColorStyle
   protected:
     /// The current scale of the label
     float  m_scale;
+    /// The current alignment of the label
+    Alignment m_alignment;
     /// The current font of the label
     QFont  m_font;   // Not a KML property
 };

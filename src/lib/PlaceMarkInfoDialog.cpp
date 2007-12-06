@@ -66,12 +66,6 @@ void PlaceMarkInfoDialog::showContent()
 
     QString  rolestring;
     switch ( m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar().toLatin1() ) {
-    case 'K':
-        rolestring = tr("Continent");
-        break;
-    case 'O':
-        rolestring = tr("Ocean");
-        break;
     case 'C':
         rolestring = tr("Capital");
         break;
@@ -102,6 +96,15 @@ void PlaceMarkInfoDialog::showContent()
     case 'N':
         rolestring = tr("City");
         break;
+    case 'O':
+        rolestring = tr("Ocean");
+        break;
+    case 'S':
+        rolestring = tr("Nation");
+        break;
+    case 'K':
+        rolestring = tr("Continent");
+        break;
     default:
         rolestring = tr("Other Place");
     }
@@ -117,43 +120,77 @@ void PlaceMarkInfoDialog::showContent()
     if ( !description.isEmpty() )
     {
         description_val_browser->setEnabled( true );
-        description_val_browser->setPlainText( description );
+        description_val_browser->setHtml( description );
     }
     coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().toString() );
     country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
-    const qint64 popularity = m_index.data( MarblePlacemarkModel::PopularityRole ).toLongLong();
+    const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
+    const double area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
+    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().altitude();
+
+
+    area_lbl->setText( tr("Area:") );
+    if ( area < 10000000 )
+        area_val_lbl->setText( tr("%1 sq km").arg( QLocale::system().toString( area ) ) );
+    else
+        area_val_lbl->setText( tr("%1 Mio. sq km")
+                .arg( QLocale::system().toString( area / 1000000.0, 'g', 4 ) ) );
+
+    if ( population < 10000000 )
+        population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( population ) ) );
+    else
+        population_val_lbl->setText( tr("%1 Mio. inh.")
+            .arg( QLocale::system().toString( population / 1000000.0, 'g', 4 ) ) );
+
+    elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( altitude ) ) );
+
     const QChar role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar();
+
+    country_lbl->setVisible( true );
+    country_val_lbl->setVisible( true );
+    elevation_lbl->setVisible( true );
+    elevation_val_lbl->setVisible( true );
+    area_lbl->setVisible( true );
+    area_val_lbl->setVisible( true );
+    population_lbl->setVisible( true );
+    population_val_lbl->setVisible( true );
+
+    if ( altitude <= 0 )
+        elevation_val_lbl->setText( tr("-") );
+
+    if ( role == 'O' ) {
+        population_val_lbl->setVisible( false );
+        population_lbl->setVisible( false );
+        country_lbl->setVisible( false );
+        country_val_lbl->setVisible( false );
+    }
+    if ( role == 'K' )
+    {
+        country_lbl->setVisible( false );
+        country_val_lbl->setVisible( false );
+    }
+
     if ( role == 'H' || role == 'V' || role == 'W') {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
-
-        elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( popularity / 1000 ) ) );
     }
     else if ( role == 'P' || role == 'M' ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
         elevation_lbl->setVisible( false );
+        area_val_lbl->setVisible( false );
+        area_lbl->setVisible( false );
     }
-    else if ( role == 'O' )
+    else if ( role == 'O' || role == 'K' || role == 'S'  )
     {
-        population_lbl->setText( tr("Total Area:") );
-        if ( popularity < 10000000 )
-            population_val_lbl->setText( tr("%1 sq km").arg( QLocale::system().toString( popularity ) ) );
-        else
-            population_val_lbl->setText( tr("%1 Mio. sq km")
-                .arg( QLocale::system().toString( popularity / 1000000 ) ) );
         elevation_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
     }
     else{
-        if ( popularity < 10000000 )
-            population_val_lbl->setText( tr("%1 inh.").arg( QLocale::system().toString( popularity ) ) );
-        else
-            population_val_lbl->setText( tr("%1 Mio. inh.")
-            .arg( QLocale::system().toString( popularity / 1000000 ) ) );
-        elevation_val_lbl->setText( tr("-") );
+        area_val_lbl->setVisible( false );
+        area_lbl->setVisible( false );
     }
 
     emit source( QString("wiki/%1").arg( m_index.data().toString() ) );

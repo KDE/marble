@@ -14,7 +14,7 @@
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
-        <name>country</name> 
+        <name>countrycode</name> 
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
@@ -26,143 +26,143 @@
         <name>Aconcagua</name> 
         <description>Highest peak in the Americas</description> 
         <Country>
-	     <CountryNameCode>CL</CountryNameCode>
+	    <countrycode>CL</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>-70.0,-32.65,6960</coordinates> 
+            <coordinates>-70.0,-32.65,6960.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mount Elbrus</name> 
         <description>Highest peak in Europe</description> 
         <Country>
-	     <CountryNameCode>RU</CountryNameCode>
+	    <countrycode>RU</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>42.4364,43.3519,5642</coordinates> 
+            <coordinates>42.4364,43.3519,5642.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Kilimanjaro</name> 
         <description>Highest peak in Africa</description> 
         <Country>
-	     <CountryNameCode>KE</CountryNameCode>
+	    <countrycode>KE</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>39.95,-3.4,5895</coordinates> 
+            <coordinates>39.95,-3.4,5895.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mont Blanc</name> 
         <description>Highest Mountain in Western Europe</description> 
         <Country>
-	     <CountryNameCode>FR</CountryNameCode>
+	    <countrycode>FR</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>6.6833,45.35,4807</coordinates> 
+            <coordinates>6.6833,45.35,4807.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mount Everest</name> 
         <description>Highest point on earth</description> 
         <Country>
-	     <CountryNameCode>NP</CountryNameCode>
+	    <countrycode>NP</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>86.9333,27.9833,8850</coordinates> 
+            <coordinates>86.9333,27.9833,8850.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mount Kosciuszko</name> 
         <description>Highest mountain in mainland Australia</description> 
         <Country>
-	     <CountryNameCode>AU</CountryNameCode>
+	    <countrycode>AU</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>148.2667,-36.45,2229</coordinates> 
+            <coordinates>148.2667,-36.45,2229.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mount McKinley</name> 
         <description>Highest mountain in North America</description> 
         <Country>
-	     <CountryNameCode>US</CountryNameCode>
+	    <countrycode>US</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>-151.0074,63.0695,6194</coordinates> 
+            <coordinates>-151.0074,63.0695,6194.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Puncak Jaya</name> 
         <description>Highest mountain on the greater Australian continent</description> 
         <Country>
-	     <CountryNameCode>ID</CountryNameCode>
+	    <countrycode>ID</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>137.1833,-4.0833,5030</coordinates> 
+            <coordinates>137.1833,-4.0833,5030.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Vinson Massif</name> 
         <description>Highest mountain of Antarctica</description> 
          <Country>
-	     <CountryNameCode>AQ</CountryNameCode>
+	    <countrycode>AQ</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>-85.6333,-78.5333,4897</coordinates> 
+            <coordinates>-85.6333,-78.5333,4897.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mauna Kea</name> 
         <description>Largest volcano on Earth</description> 
         <Country>
-	     <CountryNameCode>US</CountryNameCode>
+	    <countrycode>US</countrycode>
         </Country> 
         <role>V</role> 
         <Point>
-            <coordinates>-155.47,19.82,4205</coordinates> 
+            <coordinates>-155.47,19.82,4205.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mauna Loa</name> 
         <description>Largest active volcano on Earth</description> 
         <Country>
-	     <CountryNameCode>US</CountryNameCode>
+	    <countrycode>US</countrycode>
         </Country> 
         <role>V</role> 
         <Point>
-            <coordinates>-155.608,19.475,4170</coordinates> 
+            <coordinates>-155.608,19.475,4170.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Mount Etna</name> 
         <description>Largest and most active volcano in Europe</description> 
         <Country>
-	     <CountryNameCode>IT</CountryNameCode>
+	    <countrycode>IT</countrycode>
         </Country> 
         <role>V</role> 
         <Point>
-            <coordinates>15.0,37.75,3323</coordinates> 
+            <coordinates>15.0,37.75,3323.0</coordinates> 
         </Point> 
     </Placemark> 
     <Placemark> 
         <name>Challenger Deep</name> 
         <description>The ocean floor's deepest spot which is located at the southern end of the Marianas Trench off the Mariana Islands. Some sources list Witjas Deep instead with a depth of -11.034 m.</description> 
         <Country>
-	     <CountryNameCode>MP</CountryNameCode>
+	    <countrycode>MP</countrycode>
         </Country> 
         <role>H</role> 
         <Point>
-            <coordinates>142.200,11.333,-10920</coordinates> 
+            <coordinates>142.200,11.333,-10920.0</coordinates> 
         </Point> 
     </Placemark> 
 </Document>

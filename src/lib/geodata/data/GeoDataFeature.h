@@ -78,6 +78,7 @@ class GeoDataFeature : public GeoDataObject
         AirPort,
         Continent,
         Ocean,
+        Nation,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
@@ -177,11 +178,11 @@ class GeoDataFeature : public GeoDataObject
     void setPopularityIndex( int index );
 
     /**
-     * Return the popularity of the placemark.
+     * Return the popularity of the feature.
      */
     const qint64 popularity() const;
     /**
-     * Sets the @p popularity of the placemark.
+     * Sets the @p popularity of the feature.
      * @param  popularity  the new popularity value
      */
     void setPopularity( qint64 popularity );

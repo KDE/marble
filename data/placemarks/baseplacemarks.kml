@@ -10,7 +10,7 @@
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
-        <name>country</name> 
+        <name>countrycode</name> 
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
@@ -22,7 +22,6 @@
         <name>North Pole</name> 
         <description>Geographic North Pole</description> 
         <role>P</role> 
-        <pop>100000000</pop> 
         <Point>
             <coordinates>0.0,90.00</coordinates> 
         </Point> 
@@ -30,11 +29,10 @@
     <Placemark> 
         <name>South Pole</name> 
         <description>Geographic South Pole</description> 
-         <Country>
-	     <CountryNameCode>AQ</CountryNameCode>
+        <Country>
+	    <countrycode>AQ</countrycode>
         </Country> 
-       <role>P</role> 
-        <pop>100000000</pop> 
+        <role>P</role> 
         <Point>
             <coordinates>0.0,-90.00</coordinates> 
         </Point> 
@@ -43,7 +41,6 @@
         <name>North Magnetic Pole</name> 
         <description>The physical magnetic south pole in 2005</description> 
         <role>M</role> 
-        <pop>1000000</pop> 
         <Point>
             <coordinates>-118.32,83.21</coordinates> 
         </Point> 
@@ -51,11 +48,10 @@
     <Placemark> 
         <name>South Magnetic Pole</name> 
         <description>The physical magnetic north pole in 2005</description> 
-         <Country>
-	     <CountryNameCode>AQ</CountryNameCode>
+        <Country>
+	    <countrycode>AQ</countrycode>
         </Country> 
         <role>M</role> 
-        <pop>1000000</pop> 
         <Point>
             <coordinates>137.86,-64.53</coordinates> 
         </Point> 

@@ -27,7 +27,8 @@ AbstractLayerData::AbstractLayerData( const GeoPoint &position ):
 AbstractLayerData::AbstractLayerData( double lat, 
                                       double lon): m_visible(true)
 {
-    m_position = new GeoPoint( lon, lat, GeoPoint::Degree);
+//  FIXME: Add altitude as soon as it becomes relevant  
+    m_position = new GeoPoint( lon, lat, 0, GeoPoint::Degree);
 }
 
 AbstractLayerData::~AbstractLayerData()
@@ -107,7 +108,8 @@ void AbstractLayerData::setPosition( const double &lat,
 {
     //int detail = m_position->detail();
     delete m_position;
-    m_position = new GeoPoint( lon, lat, GeoPoint::Degree);
+//  FIXME: Add altitude as soon as it becomes relevant  
+    m_position = new GeoPoint( lon, lat, 0, GeoPoint::Degree);
 }
 
 bool AbstractLayerData::getPixelPos( const QSize &screenSize,

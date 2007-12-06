@@ -48,6 +48,8 @@ GeoDataFeature::GeoDataFeature( const QString& name ) :
 
 GeoDataFeature::~GeoDataFeature()
 {
+    for ( int i = 0; i < GeoDataFeature::LastIndex ; ++i )
+        delete s_defaultStyle[ i ];
 }
 
 void GeoDataFeature::initializeDefaultStyles()
@@ -167,10 +169,20 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[Continent]
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
+    // Align area labels centered
+    s_defaultStyle[Continent] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[Ocean]
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
+    // Align area labels centered
+    s_defaultStyle[Ocean] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+
+    s_defaultStyle[Nation]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.2 ), 75, false ), QColor( "#404040" ) );
+    // Align area labels centered
+    s_defaultStyle[Nation] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyleInitialized = true;
 

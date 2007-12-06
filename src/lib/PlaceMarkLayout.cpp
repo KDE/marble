@@ -80,7 +80,7 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
         << 1200
         << 800
         << 300
-        << 0;
+        << 200;
 
     m_placeMarkPainter =  new PlaceMarkPainter( this );
 }
@@ -140,7 +140,8 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
@@ -151,7 +152,8 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     {
         QModelIndex index = model->index( i, 0 );
 
-        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight ) 
@@ -169,22 +171,14 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                                         Quaternion planetAxis,
                                         bool firstTime )
 {
-    int x = 0;
-    int y = 0;
-
     if ( m_styleResetRequested == true )
     {
         m_styleResetRequested = false;
         styleReset();
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
     }
-
-    int secnumber = imgheight / m_maxLabelHeight + 1;
-
+    const int secnumber = imgheight / m_maxLabelHeight + 1;
     Quaternion inversePlanetAxis = planetAxis.inverse();
-    Quaternion qpos;
-
-    painter->setPen( QColor( Qt::black ) );
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
@@ -193,12 +187,15 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     m_paintOrder.clear();
 
     int labelnum = 0;
+    int x = 0;
+    int y = 0;
 
     /**
      * First handle the selected place marks, as they have the highest priority.
      */
 
     const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
+    MarblePlacemarkModel* selectionPlacemarkModel = (MarblePlacemarkModel*) selectionModel;
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
@@ -223,7 +220,8 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             textWidth = mark->labelRect().width();
         }
         else {
-            GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+            GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+//            GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
             labelFont = style->labelStyle()->font();
             labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
 
@@ -256,7 +254,8 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QPointF hotSpot = style->iconStyle()->hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
@@ -285,6 +284,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                              && firstIndex.data( MarblePlacemarkModel::GeoTypeRole ).toChar().isNull() ) ) 
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
+    const MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) model;
 
     for ( int i = 0; i < model->rowCount(); ++i )
     {
@@ -298,6 +298,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             {
 //            qDebug() << QString("Filter: %1 Radius: %2")
 //            .arg(m_weightfilter.at( popularityIndex )).arg(viewParams->m_radius);
+//                qDebug() << "BREAK at " << i;
                 break;
             }
         }
@@ -344,13 +345,15 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // Find the corresponding visible place mark
         VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
+        GeoDataStyle* style = 0;
 
         // Specify font properties
         if ( mark ) {
             textWidth = mark->labelRect().width();
         }
         else {
-            GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+            style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+//            style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
             labelFont = style->labelStyle()->font();
 
             textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() ) );
@@ -382,7 +385,9 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+        if ( style == 0 )
+            style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+//            style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
         QPointF hotSpot = style->iconStyle()->hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
@@ -406,30 +411,32 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &index, 
                                                int &x, int &y, 
                                                const int &imgwidth, const int &imgheight,
-                                               const Quaternion inversePlanetAxis,
+                                               const Quaternion &inversePlanetAxis,
                                                ViewParams * viewParams )
 {
-    Quaternion qpos = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().quaternion();
+    MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) index.model();
+    Quaternion qpos = ( placemarkModel->coordinateData( index ) ).quaternion();
+//    Quaternion qpos = ( index.data().value<GeoPoint>() ).quaternion();
 
     if( viewParams->m_projection == Spherical ) {
 
-            qpos.rotateAroundAxis( inversePlanetAxis );
+        qpos.rotateAroundAxis( inversePlanetAxis );
 
-             // Skip placemarks at the other side of the earth.
-            if ( qpos.v[Q_Z] < 0 ) {
-                return false;
-            }
+        // Skip placemarks at the other side of the earth.
+        if ( qpos.v[Q_Z] < 0 ) {
+            return false;
+        }
 
-            // Let (x, y) be the position on the screen of the placemark..
-            x = (int)(imgwidth  / 2 + viewParams->m_radius * qpos.v[Q_X]);
-            y = (int)(imgheight / 2 + viewParams->m_radius * qpos.v[Q_Y]);
+        // Let (x, y) be the position on the screen of the placemark..
+        x = (int)(imgwidth  / 2 + viewParams->m_radius * qpos.v[Q_X]);
+        y = (int)(imgheight / 2 + viewParams->m_radius * qpos.v[Q_Y]);
 
-            // Skip placemarks that are outside the screen area
-            if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
-                return false;
-            }
+        // Skip placemarks that are outside the screen area
+        if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
+            return false;
+        }
 
-            return true;
+        return true;
     }
 
     if( viewParams->m_projection == Equirectangular ) {
@@ -475,47 +482,73 @@ QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
 {
     bool  isRoom      = false;
 
-    GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+//    GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+    GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+
     int symbolwidth = style->iconStyle()->icon().width();
 
     QFont labelFont = style->labelStyle()->font();
     int textHeight = QFontMetrics( labelFont ).height();
 
-    int  xpos = symbolwidth / 2 + x + 1;
-    int  ypos = 0;
+    if( style->labelStyle()->alignment() == GeoDataLabelStyle::Corner )
+    {
+        int  xpos = symbolwidth / 2 + x + 1;
+        int  ypos = 0;
 
-    // Check the four possible positions by going through all of them
+        // Check the four possible positions by going through all of them
  
-    QRect  labelRect( xpos, ypos, textWidth, textHeight );
+        QRect  labelRect( xpos, ypos, textWidth, textHeight );
+    
+        while ( xpos >= x - textWidth - symbolwidth - 1 ) {
+            ypos = y;
 
-    while ( xpos >= x - textWidth - symbolwidth - 1 ) {
-        ypos = y;
+            while ( ypos >= y - textHeight ) {
 
-        while ( ypos >= y - textHeight ) {
+                isRoom = true;
+                labelRect.moveTo( xpos, ypos );
 
-            isRoom = true;
-            labelRect.moveTo( xpos, ypos );
-
-            // Check if there is another label or symbol that overlaps.
-            for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
-                  beforeit != currentsec.constEnd();
-                  ++beforeit )
-            {
-                if ( labelRect.intersects( (*beforeit)->labelRect()) ) {
-                    isRoom = false;
-                    break;
+                // Check if there is another label or symbol that overlaps.
+                for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+                      beforeit != currentsec.constEnd();
+                      ++beforeit )
+                {
+                    if ( labelRect.intersects( (*beforeit)->labelRect()) ) {
+                        isRoom = false;
+                        break;
+                    }
                 }
+
+                if ( isRoom ) {
+                    // claim the place immediately if it hasn't been used yet 
+                    return labelRect;
+                }
+
+                ypos -= textHeight;
             }
 
-            if ( isRoom ) {
-                // claim the place immediately if it hasn't been used yet 
-                return labelRect;
-            }
+            xpos -= ( symbolwidth + textWidth + 2 );
+        }
+    }
+    else if( style->labelStyle()->alignment() == GeoDataLabelStyle::Center )
+    {
+        isRoom = true;
+        QRect  labelRect( x - textWidth / 2, y - textHeight / 2, textWidth, textHeight );
 
-            ypos -= textHeight;
+        // Check if there is another label or symbol that overlaps.
+        for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
+              beforeit != currentsec.constEnd();
+              ++beforeit )
+        {
+            if ( labelRect.intersects( (*beforeit)->labelRect()) ) {
+                isRoom = false;
+                break;
+            }
         }
 
-        xpos -= ( symbolwidth + textWidth + 2 );
+        if ( isRoom ) {
+            // claim the place immediately if it hasn't been used yet 
+            return labelRect;
+        }
     }
 
     return QRect(); // At this point there is no space left 
@@ -524,6 +557,10 @@ QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
 
 int PlaceMarkLayout::placeMarksOnScreenLimit() const
 {
+    // For now we just return 100.
+    // Later on once we focus on decent high dpi print quality
+    // we should replace this static value by a dynamic value
+    // that takes the area that gets displayed into account.
     return 100;
 }
 

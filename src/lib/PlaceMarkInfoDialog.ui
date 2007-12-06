@@ -5,19 +5,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>522</height>
+    <width>513</width>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Marble Infocenter</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
    </property>
    <item>
     <widget class="QTabWidget" name="m_pTabWidget" >
@@ -29,18 +38,24 @@
        <string>Data Sheet</string>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
        <item>
         <layout class="QGridLayout" >
-         <property name="margin" >
+         <property name="leftMargin" >
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
+         </property>
+         <property name="horizontalSpacing" >
+          <number>6</number>
+         </property>
+         <property name="verticalSpacing" >
           <number>6</number>
          </property>
          <item row="0" column="0" >
@@ -58,7 +73,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:14pt; font-weight:600;">Name&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -78,9 +93,7 @@ p, li { white-space: pre-wrap; }
          <item rowspan="4" row="0" column="1" >
           <widget class="QLabel" name="flag_val_lbl" >
            <property name="sizePolicy" >
-            <sizepolicy>
-             <hsizetype>0</hsizetype>
-             <vsizetype>0</vsizetype>
+            <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -111,7 +124,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-style:italic;">Role&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -127,7 +140,7 @@ p, li { white-space: pre-wrap; }
             <string>Alternative Name</string>
            </property>
            <property name="textInteractionFlags" >
-            <enum>Qt::TextSelectableByMouse</enum>
+            <set>Qt::TextSelectableByMouse</set>
            </property>
           </widget>
          </item>
@@ -157,7 +170,7 @@ p, li { white-space: pre-wrap; }
          <property name="html" >
           <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal; text-decoration:none;">
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">No description available.&lt;/p>
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;/p>
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">If you are connected to the internet please click the "Wikipedia" tab at the top of this page to get more information.&lt;/p>&lt;/body>&lt;/html></string>
@@ -183,9 +196,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QFrame" name="frame" >
          <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>0</hsizetype>
-           <vsizetype>0</vsizetype>
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -196,140 +207,150 @@ p, li { white-space: pre-wrap; }
          <property name="frameShadow" >
           <enum>QFrame::Plain</enum>
          </property>
-         <layout class="QVBoxLayout" >
-          <property name="margin" >
-           <number>9</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <layout class="QGridLayout" >
-            <property name="margin" >
-             <number>0</number>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="coordinates_lbl" >
+            <property name="text" >
+             <string>Coordinates:</string>
             </property>
-            <property name="spacing" >
-             <number>6</number>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
-            <item row="1" column="1" colspan="2" >
-             <widget class="QLabel" name="country_val_lbl" >
-              <property name="text" >
-               <string>Country</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" >
-             <widget class="QLabel" name="elevation_lbl" >
-              <property name="text" >
-               <string>Elevation:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2" >
-             <spacer>
-              <property name="orientation" >
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" >
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="0" >
-             <widget class="QLabel" name="coordinates_lbl" >
-              <property name="text" >
-               <string>Coordinates:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1" >
-             <widget class="QLabel" name="coordinates_val_lbl" >
-              <property name="text" >
-               <string>000° 00' 00" N
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLabel" name="coordinates_val_lbl" >
+            <property name="text" >
+             <string>000° 00' 00" N
 000° 00' 00" E </string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextEditable</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1" colspan="2" >
-             <widget class="QLabel" name="population_val_lbl" >
-              <property name="text" >
-               <string>1000000</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::LinksAccessibleByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0" >
-             <widget class="QLabel" name="country_lbl" >
-              <property name="text" >
-               <string>Country:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1" colspan="2" >
-             <widget class="QLabel" name="elevation_val_lbl" >
-              <property name="text" >
-               <string>9000 m</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0" >
-             <widget class="QLabel" name="population_lbl" >
-              <property name="text" >
-               <string>Population:</string>
-              </property>
-              <property name="alignment" >
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-              </property>
-              <property name="textInteractionFlags" >
-               <enum>Qt::TextSelectableByMouse</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextEditable</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="elevation_lbl" >
+            <property name="text" >
+             <string>Elevation:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2" >
+           <widget class="QLabel" name="elevation_val_lbl" >
+            <property name="text" >
+             <string>9000.0 m</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QLabel" name="area_lbl" >
+            <property name="text" >
+             <string>Area:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2" >
+           <widget class="QLabel" name="area_val_lbl" >
+            <property name="text" >
+             <string>0.0 sq km</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <widget class="QLabel" name="country_lbl" >
+            <property name="text" >
+             <string>Country:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2" >
+           <widget class="QLabel" name="country_val_lbl" >
+            <property name="text" >
+             <string>Country</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" >
+           <widget class="QLabel" name="population_lbl" >
+            <property name="text" >
+             <string>Population:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2" >
+           <widget class="QLabel" name="population_val_lbl" >
+            <property name="text" >
+             <string>1000000</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::LinksAccessibleByMouse</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -344,19 +365,37 @@ p, li { white-space: pre-wrap; }
        <iconset resource="../marble.qrc" >:/icons/wikipedia.png</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>9</number>
-       </property>
        <property name="spacing" >
         <number>6</number>
        </property>
+       <property name="leftMargin" >
+        <number>9</number>
+       </property>
+       <property name="topMargin" >
+        <number>9</number>
+       </property>
+       <property name="rightMargin" >
+        <number>9</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>9</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" >
-         <property name="margin" >
-          <number>0</number>
-         </property>
          <property name="spacing" >
           <number>6</number>
+         </property>
+         <property name="leftMargin" >
+          <number>0</number>
+         </property>
+         <property name="topMargin" >
+          <number>0</number>
+         </property>
+         <property name="rightMargin" >
+          <number>0</number>
+         </property>
+         <property name="bottomMargin" >
+          <number>0</number>
          </property>
          <item>
           <widget class="QToolButton" name="m_pBackButton" >

@@ -38,7 +38,8 @@ class XmlHandler : public QXmlDefaultHandler
     bool characters( const QString& str );
 
  protected:
-    int popIdx( qint64 population );
+    int cityPopIdx( qint64 population );
+    int areaPopIdx( double area );
 
  private:
     PlaceMarkContainer  *m_placeMarkContainer;
@@ -52,7 +53,7 @@ class XmlHandler : public QXmlDefaultHandler
     bool                 m_inPoint;
 
     bool                 m_coordsset;
-    bool                 m_hasPopulation;
+    bool                 m_hasPopularity;
 };
 
 

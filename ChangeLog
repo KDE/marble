@@ -1,3 +1,14 @@
+2007-12-06  Torsten Rahn  <rahn@kde.org>
+    
+    * Sorting out performance problems related to QVariant usage
+    * Adding alignment capability for labels to satisfy ingwa's complains ;)
+    * adding data for english country names (translation of displayed data 
+      is scheduled for 4.1)
+    * Some minor fixes and added source comments.
+
+    The appearance of features per zoom level still needs trivial fine tuning 
+    which I'll do later today.
+
 2007-12-05  Torsten Rahn  <rahn@kde.org>
     
     * src/lib/AbstractScanlineTextureMapper.cpp: Small fix by Jan Becker

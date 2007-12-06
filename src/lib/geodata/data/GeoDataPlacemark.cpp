@@ -15,12 +15,16 @@
 #include "GeoDataPlacemark.h"
 
 
-GeoDataPlacemark::GeoDataPlacemark()
+GeoDataPlacemark::GeoDataPlacemark() :
+    m_area( -1.0 ),
+    m_population( -1 )
 {
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
-  : GeoDataFeature( name )
+  : GeoDataFeature( name ),
+    m_area( -1.0 ),
+    m_population( -1 )
 {
 }
 
@@ -29,14 +33,35 @@ GeoPoint GeoDataPlacemark::coordinate() const
     return m_coordinate;
 }
 
-void GeoDataPlacemark::coordinate( double& lon, double& lat )
+void GeoDataPlacemark::coordinate( double& lon, double& lat, double& alt )
 {
     m_coordinate.geoCoordinates( lon, lat );
+    alt = m_coordinate.altitude();
 }
 
-void GeoDataPlacemark::setCoordinate( double lon, double lat )
+void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
 {
-    m_coordinate = GeoPoint( lon, lat );
+    m_coordinate = GeoPoint( lon, lat, alt );
+}
+
+const double GeoDataPlacemark::area() const
+{
+    return m_area;
+}
+
+void GeoDataPlacemark::setArea( double area )
+{
+    m_area = area;
+}
+
+const qint64 GeoDataPlacemark::population() const
+{
+    return m_population;
+}
+
+void GeoDataPlacemark::setPopulation( qint64 population )
+{
+    m_population = population;
 }
 
 const QString GeoDataPlacemark::countryCode() const
@@ -71,6 +96,8 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
 {
     GeoDataFeature::unpack( stream );
 
+    stream >> m_area;
+    stream >> m_population;
     stream >> m_countrycode;
 
     /*

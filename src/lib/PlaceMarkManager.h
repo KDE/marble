@@ -15,7 +15,7 @@
 
 #include <QtCore/QObject>
 
-class KMLDocument;
+class GeoDataDocument;
 class PlaceMarkContainer;
 class MarblePlacemarkModel;
 
@@ -75,7 +75,7 @@ class PlaceMarkManager : public QObject
     void loadKml( const QString &fileName, bool clearPrevious = false );
 
  Q_SIGNALS:
-    void kmlDocumentLoaded( KMLDocument& );
+    void geoDataDocumentLoaded( GeoDataDocument& );
 
  private:
     void importKml( const QString&, PlaceMarkContainer* );

@@ -53,13 +53,37 @@ class GeoDataPlacemark: public GeoDataFeature
      * Return the coordinate of the placemark as @p longitude
      * and @p latitude.
      */
-    void coordinate( double &longitude, double &latitude );
+    void coordinate( double &longitude, double &latitude, double &altitude );
 
     /**
      * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
-    void setCoordinate( double longitude, double latitude );
+    void setCoordinate( double longitude, double latitude, double altitude = 0 );
+
+    /**
+     * Return the area size of the feature in square km.
+     *
+     * FIXME: Once we make Marble more area-aware we need to 
+     * move this into the GeoDataArea class which will get 
+     * inherited from GeoDataPlaceMark (or GeoDataFeature). 
+     */
+    const double area() const;
+
+    /**
+     * Set the area size of the feature in square km.
+     */
+    void setArea( double area );
+
+    /**
+     * Return the population of the placemark.
+     */
+    const qint64 population() const;
+    /**
+     * Sets the @p population of the placemark.
+     * @param  population  the new population value
+     */
+    void setPopulation( qint64 population );
 
     /**
      * Return the country code of the placemark.
@@ -80,6 +104,8 @@ class GeoDataPlacemark: public GeoDataFeature
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoPoint  m_coordinate;     // The geographic position
     QString   m_countrycode;    // Country code.
+    double    m_area;           // Area in square kilometer
+    qint64    m_population;     // population in number of inhabitants
 };
 
 #endif // GEODATAPLACEMARK_H

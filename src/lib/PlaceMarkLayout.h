@@ -101,7 +101,7 @@ class PlaceMarkLayout : public QObject
 
     bool   locatedOnScreen ( const QPersistentModelIndex &index, 
                              int &x, int &y, const int &imgwidth, const int &imgheight,
-                             const Quaternion inversePlanetAxis,
+                             const Quaternion &inversePlanetAxis,
                              ViewParams * viewParams );
 
     QRect  roomForLabel ( const QPersistentModelIndex& index,

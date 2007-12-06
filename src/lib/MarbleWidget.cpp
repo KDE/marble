@@ -569,14 +569,14 @@ void MarbleWidget::home( double &lon, double &lat, int& zoom)
 
     d->m_homePoint.geoCoordinates( homeLon, homeLat );
     lon = homeLon * RAD2DEG;
-    lat = homeLat * -RAD2DEG;
+    lat = homeLat * RAD2DEG;
 
     zoom = d->m_homeZoom;
 }
 
 void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 {
-    d->m_homePoint = GeoPoint( lon, lat, GeoPoint::Degree );
+    d->m_homePoint = GeoPoint( lon, lat, 0, GeoPoint::Degree );
     d->m_homeZoom = zoom;
 }
 

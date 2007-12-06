@@ -52,14 +52,17 @@ class GeoPoint {
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at -pi/2, southpole at pi/2)
      */
-    GeoPoint(double _lon, double _lat, 
+    GeoPoint(double _lon, double _lat, double alt = 0,
              GeoPoint::Unit _unit = GeoPoint::Radian);
 
     GeoPoint(int _detail, int _lon, int _lat);
 
     ~GeoPoint(){}
 
-    int detail()  const { return m_detail; }
+    double altitude() const { return m_altitude; }
+    void   setAltitude( const double altitude );
+
+    int    detail()   const { return m_detail; }
 
     void geoCoordinates( double& lon, double& lat, 
                          GeoPoint::Unit unit = GeoPoint::Radian )
@@ -75,6 +78,8 @@ class GeoPoint {
 
  private:
     Quaternion  m_q;
+    double      m_lon, m_lat;
+    double      m_altitude;     // in meters above sea level
     int         m_detail;
 };
 

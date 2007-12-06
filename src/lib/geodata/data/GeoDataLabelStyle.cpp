@@ -17,9 +17,20 @@ GeoDataLabelStyle::GeoDataLabelStyle()
 
 GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
   : m_font( font ),
+    m_alignment( GeoDataLabelStyle::Corner ),
     m_scale( 1.0 )
 {
     setColor( color );
+}
+
+void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )
+{
+    m_alignment = alignment;
+}
+
+GeoDataLabelStyle::Alignment GeoDataLabelStyle::alignment() const
+{
+    return m_alignment;
 }
 
 void GeoDataLabelStyle::setScale( const float &scale )

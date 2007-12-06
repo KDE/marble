@@ -72,6 +72,30 @@ def convertPopulation( ciaString ):
     populationString="%s" % (populationString)
     return populationString
 
+def convertArea( ciaString ):
+#    print ciaString
+#    print "..."
+    prefixEnd=ciaString.find("</i> ")
+    if prefixEnd!=-1 :
+        ciaString = ciaString[ prefixEnd + 5 : len(ciaString) ].strip()
+    prefixEnd=ciaString.find("(")
+    if prefixEnd!=-1 :
+        ciaString = ciaString[ 0 : prefixEnd ].strip()
+    prefixEnd=ciaString.find(";")
+    if prefixEnd!=-1 :
+        ciaString = ciaString[ prefixEnd + 1 : len(ciaString) ].strip()
+    prefixEnd=ciaString.find("land -")
+    if prefixEnd!=-1 :
+        ciaString = ciaString[ prefixEnd + 6 : len(ciaString) ].strip()
+    
+    areaString=ciaString.split(' ')[0]
+#    print areaString
+    areaString=areaString.replace(",", "")
+    area=float(areaString)
+    areaString="%02.1f" % area
+#    print areaString
+    return areaString
+
 
 # First build two hashes that map FIPS10 to ISO country codes
 # and FIPS10 to country names. As a source for data we use 
@@ -122,9 +146,10 @@ for line in countryCodeSource:
 
 startTopicTag="<div align=\"right\">"
 stopTopicTag="</div>"
-topicTagList=["Background:", "Geographic coordinates:", "Population:"]
+topicTagList=["Background:", "Geographic coordinates:", "Area:", "Population:"]
 topicBackgroundString=""
 topicCoordinatesString=""
+topicAreaString=""
 topicPopulationString=""
 placemarkFolder=""
 valueTag="<br> "
@@ -132,7 +157,10 @@ finishTag="</table>"
 inside=0
 subcount=-1
 
+print "Parsing ..."
+
 for item in countryCodeDict:
+    print item 
 #    print item + " " + countryCodeDict.get( item, "-" ) + " " + countryDict.get( item, "-" )
     fileUrlString="./geos/%s.html" % (item.lower())
 #    print fileUrlString
@@ -160,6 +188,8 @@ for item in countryCodeDict:
                             topicBackgroundString=line.strip()
                         if topicTag=="Geographic coordinates:" :
                             topicCoordinatesString=line.strip()
+                        if topicTag=="Area:" :
+                            topicAreaString=line.strip()
                         if topicTag=="Population:" :
                             topicPopulationString=line.strip()
                         inside=0
@@ -169,10 +199,13 @@ for item in countryCodeDict:
                         subcount+=1
     
     topicCoordinatesString=convertCoordinates( topicCoordinatesString )
+    topicAreaString=convertArea( topicAreaString )
     topicPopulationString=convertPopulation( topicPopulationString )
     countryNameString=countryDict.get( item, "-" )
     countryCodeString=countryCodeDict.get( item, "-" )
-    
+
+    topicBackgroundString=topicBackgroundString + "  <i>Source: CIA - The World Factbook 2007</i> " 
+   
 # Now that we have all the data needed we create a KML snippet that
 # represents the country data and add it to the previous ones that 
 # we've generated already.
@@ -181,15 +214,14 @@ for item in countryCodeDict:
     <Placemark> 
         <name>%s</name> 
         <description>%s</description> 
-        <Country>
-         <CountryNameCode>%s</CountryNameCode>
-        </Country> 
+        <countrycode>%s</countrycode>
         <role>S</role> 
+        <area>%s</area> 
         <pop>%s</pop> 
         <Point>
             <coordinates>%s</coordinates> 
         </Point> 
-    </Placemark>''' %( countryNameString, topicBackgroundString, countryCodeString, topicPopulationString, topicCoordinatesString )
+    </Placemark>''' %( countryNameString, topicBackgroundString, countryCodeString, topicAreaString, topicPopulationString, topicCoordinatesString )
     placemarkFolder += placemarkString
 
 # Now we insert all our KML code for the countries into a KML 
@@ -203,11 +235,15 @@ kmlDocument = '''<?xml version="1.0" encoding="UTF-8"?>
         <type>int</type> 
     </SimpleField> 
     <SimpleField> 
+        <name>area</name> 
+        <type>int</type> 
+    </SimpleField> 
+    <SimpleField> 
         <name>state</name> 
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
-        <name>CountryNameCode</name> 
+        <name>countrycode</name> 
         <type>string</type> 
     </SimpleField> 
     <SimpleField> 
