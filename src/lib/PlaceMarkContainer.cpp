@@ -28,8 +28,8 @@ inline bool populationLessThan( GeoDataPlacemark* mark1, GeoDataPlacemark* mark2
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.
-    return ( abs( (double) mark1->popularity() )
-             > abs( (double) mark2->popularity() ) );
+    return ( fabs( (double) mark1->popularity() )
+             > fabs( (double) mark2->popularity() ) );
 }
 
 

@@ -48,8 +48,6 @@ GeoDataFeature::GeoDataFeature( const QString& name ) :
 
 GeoDataFeature::~GeoDataFeature()
 {
-    for ( int i = 0; i < GeoDataFeature::LastIndex ; ++i )
-        delete s_defaultStyle[ i ];
 }
 
 void GeoDataFeature::initializeDefaultStyles()
