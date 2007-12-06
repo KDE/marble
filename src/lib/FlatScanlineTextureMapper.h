@@ -21,7 +21,7 @@
 class FlatScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
-    explicit FlatScanlineTextureMapper(const QString& path, QObject * parent = 0);
+    explicit FlatScanlineTextureMapper(TileLoader *tileLoader, QObject * parent = 0);
     void mapTexture(QImage* canvasImage, const int&, Quaternion& planetAxis);
 
  private:

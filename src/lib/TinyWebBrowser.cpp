@@ -78,7 +78,7 @@ TinyWebBrowser::TinyWebBrowser( QWidget *parent )
 TinyWebBrowser::~TinyWebBrowser()
 {
     delete m_downloadManager;
-    delete m_storagePolicy;
+//    delete m_storagePolicy;
 }
 
 QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )

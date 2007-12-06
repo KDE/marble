@@ -29,8 +29,8 @@
 
 // #define INTERLACE
 
-GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( const QString& path, QObject * parent  ) 
-    : AbstractScanlineTextureMapper( path, parent )
+GlobeScanlineTextureMapper::GlobeScanlineTextureMapper( TileLoader *tileLoader, QObject * parent  ) 
+    : AbstractScanlineTextureMapper( tileLoader, parent )
 {
     m_interpolate  = false;
     m_nBest = 0;

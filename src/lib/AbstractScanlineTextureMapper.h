@@ -30,7 +30,7 @@ class AbstractScanlineTextureMapper : public AbstractLayer
     Q_OBJECT
 
 public:
-    explicit AbstractScanlineTextureMapper( const QString& path, QObject * parent=0 );
+    explicit AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent=0 );
     ~AbstractScanlineTextureMapper();
 
     virtual void mapTexture(QImage* canvasImage, const int&, 

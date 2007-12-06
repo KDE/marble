@@ -44,6 +44,9 @@ class MarbleModelPrivate
     QString             m_selectedMap;
     TextureColorizer    *m_texcolorizer;
 
+    HttpDownloadManager *m_downloadManager;
+
+    TileLoader          *m_tileLoader;
     AbstractScanlineTextureMapper   *m_texmapper;
 
     VectorComposer      *m_veccomposer; // FIXME: Make not a pointer.
@@ -76,7 +79,8 @@ MarbleModel::MarbleModel( QWidget *parent )
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
 
-
+    d->m_downloadManager = 0;
+    d->m_tileLoader = new TileLoader( d->m_downloadManager );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -143,6 +147,7 @@ MarbleModel::MarbleModel( QWidget *parent )
 MarbleModel::~MarbleModel()
 {
     delete d->m_texmapper;
+    delete d->m_tileLoader;
     delete d->m_veccomposer;
     delete d->m_texcolorizer; 
     delete d->m_gridmap;
@@ -200,7 +205,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     // If this layer is a bitmaplayer, check if the cached tiles for
     // it are already generated, and if not, do so.
     if ( d->m_maptheme->bitmaplayer().enabled ) {
-
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
         if ( !TileLoader::baseTilesAvailable( "maps/earth/"
@@ -222,14 +226,14 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
         if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
 
+        d->m_tileLoader->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
+
         switch( currentProjection ) {
             case Spherical:
-                d->m_texmapper = new GlobeScanlineTextureMapper( "maps/earth/"
-                                            + d->m_maptheme->tilePrefix(), this );
+                d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
                 break;
             case Equirectangular:
-                d->m_texmapper = new FlatScanlineTextureMapper( "maps/earth/"
-                                            + d->m_maptheme->tilePrefix(), this );
+                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
                 break;
         }
 //         else
@@ -260,6 +264,13 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     d->m_projection = currentProjection;
     emit themeChanged( d->m_maptheme->name() );
     notifyModelChanged();
+}
+
+
+void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
+{
+    d->m_downloadManager = downloadManager;
+    d->m_tileLoader->setDownloadManager( d->m_downloadManager );
 }
 
 

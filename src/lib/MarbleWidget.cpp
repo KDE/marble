@@ -37,6 +37,8 @@
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "TileCreatorDialog.h"
+#include "HttpDownloadManager.h"
+#include "FileStoragePolicy.h"
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 
@@ -69,6 +71,8 @@ class MarbleWidgetPrivate
     int              m_zoomStep;
     int              m_minimumzoom;
     int              m_maximumzoom;
+
+    HttpDownloadManager       *m_downloadManager;
 
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
@@ -115,6 +119,9 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
 
 MarbleWidget::~MarbleWidget()
 {
+    // Remove and delete an existing InputHandler
+    setInputHandler(NULL);
+    setDownloadManager(NULL);
     delete d->m_viewParams.m_canvasImage;
     delete d->m_viewParams.m_coastImage;
     delete d->m_model;
@@ -157,23 +164,13 @@ void MarbleWidget::construct(QWidget *parent)
                                          QImage::Format_ARGB32_Premultiplied);
     d->m_justModified = false;
 
-
-    d->m_inputhandler = new MarbleWidgetInputHandler( this, d->m_model );
-    installEventFilter( d->m_inputhandler );
-    setMouseTracking( true );
-
+    d->m_downloadManager = NULL;
+    d->m_inputhandler = NULL;
     d->m_popupmenu = new MarbleWidgetPopupMenu( this, d->m_model );
-    connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-	     d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
-    connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-	     d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
-    connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
-             this,              SLOT( notifyMouseClick( int, int ) ) );
-
-    connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
-	     this,              SIGNAL( mouseMoveGeoPosition( QString ) ) );
-
     d->m_measureTool = new MeasureTool( this );
+
+    setInputHandler(new MarbleWidgetDefaultInputHandler);
+    setMouseTracking( true );
 
     connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
 	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
@@ -207,6 +204,40 @@ void MarbleWidget::construct(QWidget *parent)
 MarbleModel *MarbleWidget::model() const
 {
     return d->m_model;
+}
+
+
+void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
+{
+    if ( d->m_inputhandler )
+        delete d->m_inputhandler;
+
+    d->m_inputhandler = handler;
+
+    if ( d->m_inputhandler )
+    {
+        d->m_inputhandler->init(this);
+        installEventFilter( d->m_inputhandler );
+        connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
+                 d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
+        connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
+                 d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
+        connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
+                 this,              SLOT( notifyMouseClick( int, int ) ) );
+
+        connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
+                 this,              SIGNAL( mouseMoveGeoPosition( QString ) ) );
+    }
+}
+
+
+void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
+{
+    if ( d->m_downloadManager )
+       delete d->m_downloadManager;
+
+    d->m_downloadManager = downloadManager;
+    d->m_model->setDownloadManager(d->m_downloadManager);
 }
 
 
@@ -664,14 +695,14 @@ void MarbleWidget::connectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        d->m_inputhandler->setPositionSignalConnected( true );
+        if ( d->m_inputhandler ) d->m_inputhandler->setPositionSignalConnected( true );
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        d->m_inputhandler->setPositionSignalConnected( false );
+        if ( d->m_inputhandler ) d->m_inputhandler->setPositionSignalConnected( false );
 }
 
 int MarbleWidget::northPoleY()
@@ -912,7 +943,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     QTime t;
     t.start();
 
-    bool  doClip = false;
+    bool doClip = false;
     if( d->m_viewParams.m_projection == Spherical )
         doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
                      || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
@@ -1225,6 +1256,23 @@ void MarbleWidget::updateRegion( BoundingBox box )
     /*TODO: write a method for BoundingBox to cacluate the screen
      *region and pass that to update()*/
     update();
+}
+
+void MarbleWidget::setDownloadUrl( const QString &url )
+{
+    setDownloadUrl( QUrl( url ) );
+}
+
+void MarbleWidget::setDownloadUrl( const QUrl &url ) {
+    if ( d->m_downloadManager != NULL )
+        d->m_downloadManager->setServerUrl( url );
+    else
+    {
+        HttpDownloadManager *downloadManager;
+        downloadManager = new HttpDownloadManager( url,
+                                                   new FileStoragePolicy( MarbleDirs::localPath() ) );
+        d->m_model->setDownloadManager( downloadManager );
+    }
 }
 
 int MarbleWidget::fromLogScale(int zoom)

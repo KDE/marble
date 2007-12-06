@@ -22,8 +22,8 @@
 #include "TileLoader.h"
 
 
-FlatScanlineTextureMapper::FlatScanlineTextureMapper(const QString& path, QObject * parent )
-    : AbstractScanlineTextureMapper( path, parent )
+FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
+    : AbstractScanlineTextureMapper( tileLoader, parent )
 {
     m_oldCenterLon   = 0.0;
     m_oldYPaintedTop = 0;

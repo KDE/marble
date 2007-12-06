@@ -26,9 +26,8 @@
 #include <cmath>
 
 #include "HttpDownloadManager.h"
-#include "FileStoragePolicy.h"
-#include "MarbleDirs.h"
 #include "TextureTile.h"
+#include "MarbleDirs.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
@@ -40,31 +39,50 @@
 #endif
 
 
-TileLoader::TileLoader( const QString& theme )
+TileLoader::TileLoader( HttpDownloadManager *downloadManager )
 {
+    m_downloadManager = 0;
+    setDownloadManager( downloadManager );
+    init();
+}
+
+TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManager )
+{
+    m_downloadManager = 0;
+    setDownloadManager( downloadManager );
     setMapTheme( theme );
-
-    m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath() );
-    m_downloadManager = new HttpDownloadManager( QUrl("http://download.kde.org/apps/marble/"),
-                                                 m_storagePolicy );
-
-    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ), 
-             this,              SLOT( reloadTile( QString, QString ) ) );
-
-    m_tileCache.clear();
-    m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
+    init();
 }
 
 TileLoader::~TileLoader()
 {
     flush();
     m_tileCache.clear();
-    m_downloadManager->disconnect();
-    
-    delete m_downloadManager;
-    delete m_storagePolicy;
+    if ( m_downloadManager != 0 )
+        m_downloadManager->disconnect(this);
 }
 
+void TileLoader::init()
+{
+    m_tileCache.clear();
+    m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
+}
+
+void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
+{
+    if ( m_downloadManager != 0 )
+    {
+        m_downloadManager->disconnect(this);
+        m_downloadManager = NULL;
+    }
+
+    m_downloadManager = downloadManager;
+    if ( m_downloadManager != 0 )
+    {
+        connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
+                 this,              SLOT( reloadTile( QString, QString ) ) );
+    }
+}
 
 void TileLoader::setMapTheme( const QString& theme )
 {
@@ -146,8 +164,12 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             tile = new TextureTile( tileId );
             m_tileHash[tileId] = tile;
 
-            connect( tile,            SIGNAL( downloadTile( const QString&, const QString& ) ), 
-                     m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
+            if ( m_downloadManager != 0 )
+            {
+                connect( tile,            SIGNAL( downloadTile( const QString&, const QString& ) ), 
+                         m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
+            }
+
             connect( tile,            SIGNAL( tileUpdateDone() ), 
                      this,              SIGNAL( tileUpdateAvailable() ) );
             tile->loadTile( tilx, tily, tileLevel, m_theme, false );

@@ -1,4 +1,27 @@
 2007-12-06  Torsten Rahn  <rahn@kde.org>
+
+    Very nice patch set by Jan Becker <tahoma@gmx.de>. From his own description:
+
+    * TextureMappers does not create/own a TileLoader, they use one
+    * MarbleWidgetInputHandler has been stripped down to an interface and 
+MarbleWidgetDefaultInputHandler derives from it and is the InputHandler 
+default implementation
+    * TileLoader does not create/own a DownloadManager, it uses one
+    * MarbleModel manages a TileLoader and passes it to the TextureMappers it 
+creates
+    * MarbleWidget manages now the DownloadManager and passes it to its model
+    * MarbleModel has two additional methods to set the InputHandler and 
+DownloadManager
+    * Added "download.kde.org/..." url to MarbleWidget in ControlView
+
+    One of his patches still needs to be discussed due to CacheStoragePolicy not having been taken
+    into account conceptually:
+
+    * The FileStoragePolicy instance passed to the HttpDownloadManager is now 
+owned by the HttpDownloadManager (I do not know the reasons to just use it 
+there, are their any dependencies to other code regarding this ownership?)
+
+2007-12-06  Torsten Rahn  <rahn@kde.org>
     
     * Sorting out performance problems related to QVariant usage
     * Adding alignment capability for labels to satisfy ingwa's complains ;)

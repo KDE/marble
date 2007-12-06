@@ -154,6 +154,20 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     MarbleModel  *model() const;
 
     /**
+     * @brief Set the input handler
+     */
+    void setInputHandler(MarbleWidgetInputHandler *handler);
+
+    /**
+     * @brief Set the download manager to load missing tiles
+     * @param manager the manager instance
+     *
+     * The instance will be destructed by MarbleWidget when not
+     * used any longer.
+     */
+    void setDownloadManager(HttpDownloadManager *downloadManager);
+
+    /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
     const QRegion  activeRegion();
@@ -738,6 +752,18 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief update part of the map as defined in the BoundingBox
      */
     void updateRegion( BoundingBox );
+
+    /**
+     * @brief Set the download url to load missing tiles
+     * @param url the url string
+     */
+    void setDownloadUrl( const QString &url );
+
+    /**
+     * @brief Set the download url to load missing tiles
+     * @param url the url objects
+     */
+    void setDownloadUrl( const QUrl &url );
 
  Q_SIGNALS:
     /**

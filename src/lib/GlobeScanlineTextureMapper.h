@@ -37,7 +37,7 @@ class TileLoader;
 class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
-    explicit GlobeScanlineTextureMapper( const QString& path, QObject * parent =0 );
+    explicit GlobeScanlineTextureMapper( TileLoader *tileLoader, QObject * parent =0 );
     virtual ~GlobeScanlineTextureMapper();
 
     void resizeMap(int width, int height);

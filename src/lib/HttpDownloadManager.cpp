@@ -13,6 +13,7 @@
 
 #include <QtCore/QDebug>
 
+#include "FileStoragePolicy.h"
 #include "HttpFetchFile.h"
 #include "MarbleDirs.h"
 
@@ -37,6 +38,8 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *
 
 HttpDownloadManager::~HttpDownloadManager()
 {
+    if ( m_storagePolicy != 0 )
+        delete m_storagePolicy;
 }
 
 void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )

@@ -23,10 +23,22 @@
 
 
 
-MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
-                                                   MarbleModel  *model)
-    : m_widget( marbleWidget ),
-      m_model( model )
+MarbleWidgetInputHandler::MarbleWidgetInputHandler()
+    : m_widget( NULL ),
+      m_model( NULL )
+{
+    m_positionSignalConnected = false;
+}
+
+
+void MarbleWidgetInputHandler::init(MarbleWidget *w)
+{
+    m_widget = w;
+    m_model = w->model();
+}
+
+
+MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
 {
     curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
     curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
@@ -51,12 +63,10 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler(MarbleWidget *marbleWidget,
     m_midpressed  = false;
 
     m_dragThreshold = 3;
-
-    m_positionSignalConnected = false;
 }
 
 
-bool MarbleWidgetInputHandler::eventFilter( QObject* o, QEvent* e )
+bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
     Q_UNUSED( o );
 

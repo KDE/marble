@@ -29,13 +29,13 @@
 
 
 
-AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& path, QObject * parent )
+AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     :AbstractLayer(parent)
 {
     m_posX = 0;
     m_posY = 0;
 
-    m_tileLoader   = new TileLoader( path );
+    m_tileLoader   = tileLoader;
     m_scanLine     = 0;
 
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
@@ -72,7 +72,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( const QString& pat
 AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 {
       m_tileLoader->disconnect();
-      delete m_tileLoader;
+//      delete m_tileLoader;
 }
 
 

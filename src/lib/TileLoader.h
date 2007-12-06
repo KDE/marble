@@ -51,8 +51,11 @@ class FileStoragePolicy;
 class TileLoader : public QObject {
     Q_OBJECT
  public:
-    TileLoader( const QString& theme );
+    TileLoader( HttpDownloadManager *downloadManager );
+    TileLoader( const QString& theme, HttpDownloadManager *downloadManager );
     virtual ~TileLoader();
+
+    void setDownloadManager( HttpDownloadManager *downloadManager );
 
     TextureTile* loadTile( int tilx, int tily, int tileLevel );
 
@@ -90,9 +93,11 @@ class TileLoader : public QObject {
     // the mandatory most basic tile level is fully available
     static bool baseTilesAvailable( const QString& theme );
 
+ private:
+    void init();
+
  protected:
 
-    FileStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
 
     QString       m_theme;

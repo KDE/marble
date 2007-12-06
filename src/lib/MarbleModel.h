@@ -57,6 +57,7 @@ class PlaceMark;
 class PlaceMarkManager;
 class TileCreator;
 class ViewParams;
+class HttpDownloadManager;
 
 
 /**
@@ -150,6 +151,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setMapTheme( const QString &selectedMap,
 		      QWidget *parent,
 		      Projection currentProjection );
+
+    /**
+     * @brief Set the downloadmanager to load missing tiles
+     * @param downloadManager the HttpDownloadManager instance
+     *
+     * This function sets the downloadmanager to load tiles that
+     * are missing locally. The desctruction of the instance
+     * will be handled by MarbleModel.
+     */
+    void setDownloadManager( HttpDownloadManager *downloadManager );
 
     void addPlaceMarkFile( const QString& filename );
 

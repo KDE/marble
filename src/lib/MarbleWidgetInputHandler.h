@@ -35,28 +35,41 @@ class MarbleWidgetInputHandler  : public QObject
     Q_OBJECT
 
  public:
-    MarbleWidgetInputHandler(MarbleWidget*, MarbleModel*);
+    MarbleWidgetInputHandler();
     virtual ~MarbleWidgetInputHandler(){}
 
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
+    bool isPositionSignalConnected() const { return m_positionSignalConnected; }
+
+    void init(MarbleWidget*);
 
  Q_SIGNALS:
     // Mouse button menus
     void lmbRequest( int, int );
     void rmbRequest( int, int );
-    
+
     //Gps coordinates
     void mouseClickScreenPosition( int, int );
-
     void mouseMoveGeoPosition( QString );
+
+ protected:
+    MarbleWidget  *m_widget;
+    MarbleModel   *m_model;
+
+    bool     m_positionSignalConnected;
+};
+
+
+
+class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
+{
+ public:
+    MarbleWidgetDefaultInputHandler();
 
  protected:
     bool eventFilter( QObject *, QEvent * );
 
  private:
-    MarbleWidget  *m_widget;
-    MarbleModel   *m_model;
-
     QPixmap  curpmtl;
     QPixmap  curpmtc;
     QPixmap  curpmtr;
@@ -81,9 +94,8 @@ class MarbleWidgetInputHandler  : public QObject
 
     int      m_dragThreshold;
     QTime    m_dragtimer;
-
-    bool     m_positionSignalConnected;
 };
+
 
 
 #endif // MARBLEWIDGETINPUTHANDLER
