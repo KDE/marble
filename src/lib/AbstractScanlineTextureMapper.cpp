@@ -152,7 +152,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // measured in radian to the pixel position of the requested 
     // coordinate on the current tile.
  
-    m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelY );
+    m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelX );
     m_posY = (int)( m_toTileCoordinatesLat + lat * m_rad2PixelY );
 
     // Most of the time while moving along the scanLine we'll stay on the 

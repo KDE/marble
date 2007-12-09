@@ -49,9 +49,9 @@ GeoPoint::GeoPoint( double _lon, double _lat, double alt, GeoPoint::Unit unit)
         m_lat = _lat;
         break;
     case( GeoPoint::Degree ):
-        m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        m_q = Quaternion( _lon * DEG2RAD , _lat * -DEG2RAD  );
         m_lon = _lon * DEG2RAD;
-        m_lat = _lat * DEG2RAD;
+        m_lat = _lat * -DEG2RAD;
     }
 }
 
@@ -83,7 +83,7 @@ QString GeoPoint::toString( GeoPoint::Notation notation )
 
     double lat, lon;
     lon = fabs( m_lon * RAD2DEG );
-    lat = fabs( m_lat * RAD2DEG );
+    lat = fabs( -m_lat * RAD2DEG );
 
     if ( notation == GeoPoint::DMS )
     {

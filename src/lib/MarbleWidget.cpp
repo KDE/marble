@@ -526,7 +526,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
         double  lat;
         point.geoCoordinates( lon, lat );
 
-	      centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
+	    centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
 
         selectionModel->select( index, QItemSelectionModel::SelectCurrent );
         d->m_crosshair.setEnabled( true );
@@ -595,13 +595,7 @@ void MarbleWidget::setProjection( int projectionIndex )
 
 void MarbleWidget::home( double &lon, double &lat, int& zoom)
 {
-    double  homeLon = 0;
-    double  homeLat = 0;
-
-    d->m_homePoint.geoCoordinates( homeLon, homeLat );
-    lon = homeLon * RAD2DEG;
-    lat = homeLat * RAD2DEG;
-
+    d->m_homePoint.geoCoordinates( lon, lat, GeoPoint::Degree );
     zoom = d->m_homeZoom;
 }
 
