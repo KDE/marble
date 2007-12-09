@@ -93,7 +93,7 @@ if (NOT QTONLY)
   set(marblepart_SRCS marble_part.cpp )
   kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
   kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS} ControlView.cpp)
-  target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} marblewidget)
+  target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF2_LIBS} marblewidget)
 
   install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
   install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
@@ -150,6 +150,7 @@ else (QTONLY)
     target_link_libraries (
       marble 
       ${KDE4_KPARTS_LIBS} 
+      ${KDE4_KNEWSTUFF2_LIBS} 
       marblewidget
       )
 endif (QTONLY)
@@ -191,9 +192,10 @@ else(WIN32 AND QTONLY)
     endif (APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
 
-# install the XML GUI file
+# install the XML GUI file and the Hot New Stuff config
 if( NOT QTONLY )
     install( FILES marbleui.rc DESTINATION ${DATA_INSTALL_DIR}/marble )
+    install( FILES marble.knsrc  DESTINATION ${DATA_INSTALL_DIR}/marble )
 endif( NOT QTONLY )
 
 configure_file(

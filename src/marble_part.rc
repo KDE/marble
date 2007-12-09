@@ -4,6 +4,7 @@
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
     <Action name="file_open"/>
+    <Action name="new_stuff"/>
     <Action name="exportMap"/>
     <Action name="file_print"/>
     <Separator/>

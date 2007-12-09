@@ -27,6 +27,9 @@
 #include <kstandardaction.h>
 #include <kstatusbar.h>
 #include <ktogglefullscreenaction.h>
+#include <knewstuff2/ui/knewstuffaction.h>
+#include <knewstuff2/engine.h>
+#include <KStandardDirs>
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
@@ -239,13 +242,20 @@ void MarblePart::setupActions()
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ), actionCollection() );
     m_copyMapAction->setText( i18n( "&Copy Map" ) );
-    
+
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
     m_openAct->setText( i18n( "&Open Map..." ) );
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( closeAllWindows() ), actionCollection() );
+
+    // Action: Get hot new stuff
+    m_newStuffAction = KNS::standardAction(QString(), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
+///@todo enable the name and status tip when string freeze is lifted
+//     m_newStuffAction = KNS::standardAction(i18n("Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
+//     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
+    m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ), actionCollection() );
 
@@ -313,6 +323,19 @@ void MarblePart::setupStatusBar()
               this, SLOT( showDistance( QString ) ) );
 
     updateStatusBar();
+}
+
+void MarblePart::showNewStuffDialog()
+{
+    QString newStuffConfig = KStandardDirs::locate ("data", "marble/marble.knsrc");
+    kDebug() << "KNS config file:" << newStuffConfig;
+
+    KNS::Engine::Engine engine;
+    bool ret = engine.init(newStuffConfig);
+    if(ret)
+    {
+        KNS::Entry::List entries = engine.downloadDialogModal(0);
+    }
 }
 
 #include "marble_part.moc"

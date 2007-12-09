@@ -49,6 +49,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  setupStatusBar();
+    void  showNewStuffDialog();
 
   private:
     void  setupActions();
@@ -67,6 +68,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_sideBarAct;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
+    KAction      *m_newStuffAction;
 
     QString m_position;
     QString m_distance;
