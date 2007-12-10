@@ -18,7 +18,6 @@
 
 #include "global.h"
 #include "Quaternion.h"
-#include "GeoDataPoint.h"
 #include "ScreenPolygon.h"
 
 

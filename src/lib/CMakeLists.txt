@@ -53,15 +53,12 @@ set(marblewidget_SRCS
            MarbleThemeSelectView.cpp
            MarbleSearchListView.cpp
            MarbleAboutDialog.cpp
-
            MarbleWidgetInputHandler.cpp
            MarbleWidgetPopupMenu.cpp
-
            MarblePlacemarkModel.cpp
 
            AutoSettings.cpp
            ClipPainter.cpp
-           GeoDataPoint.cpp
            GeoPolygon.cpp
            GridMap.cpp
            HttpDownloadManager.cpp
@@ -111,6 +108,7 @@ set(marblewidget_SRCS
            geodata/data/GeoDataLabelStyle.cpp
            geodata/data/GeoDataObject.cpp
            geodata/data/GeoDataPlacemark.cpp
+           geodata/data/GeoDataPoint.cpp
            geodata/data/GeoDataStyle.cpp
            geodata/data/GeoDataStyleSelector.cpp
 #           kml/KMLColorStyle.cpp
@@ -259,7 +257,6 @@ else (APPLE AND QTONLY)
            global.h
            AutoSettings.h
            ClipPainter.h
-           GeoDataPoint.h
            GeoPolygon.h
            GridMap.h
            HttpDownloadManager.h

@@ -13,7 +13,7 @@
 #define ABSTRACTLAYERDATA_H
 
 #include "../global.h"
-#include "../GeoDataPoint.h"
+#include "../geodata/data/GeoDataPoint.h"
 #include "AbstractLayerInterface.h"
 #include "../ViewParams.h"
 

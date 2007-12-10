@@ -24,7 +24,7 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QWidget>
 
-#include "GeoDataPoint.h"
+#include "geodata/data/GeoDataPoint.h"
 
 
 /** @file

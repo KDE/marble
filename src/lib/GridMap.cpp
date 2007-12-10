@@ -19,6 +19,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
+#include "geodata/data/GeoDataPoint.h"
 #include "global.h"
 #include "ClipPainter.h"
 
