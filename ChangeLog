@@ -1,3 +1,7 @@
+2007-12-10  Torsten Rahn  <rahn@kde.org>
+
+    * Renaming the class "GeoPoint" -> "GeoDataPoint"
+
 2007-12-06  Torsten Rahn  <rahn@kde.org>
 
     Very nice patch set by Jan Becker <tahoma@gmx.de>. From his own description:

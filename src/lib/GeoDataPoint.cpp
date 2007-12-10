@@ -10,7 +10,7 @@
 //
 
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 
 #include <cmath>
 
@@ -19,7 +19,7 @@
 #include "global.h"
 
 
-GeoPoint::GeoPoint(int _detail, int _lon, int _lat)
+GeoDataPoint::GeoDataPoint(int _detail, int _lon, int _lat)
   : m_detail(_detail ),
     m_lon( (double)(_lon) / RAD2INT * 2 ),
     m_lat( (double)(_lat) / RAD2INT * 2 ),
@@ -29,7 +29,7 @@ GeoPoint::GeoPoint(int _detail, int _lon, int _lat)
 		      (double)(_lat) / RAD2INT * 2 );
 }
 
-GeoPoint::GeoPoint(int _lon, int _lat)
+GeoDataPoint::GeoDataPoint(int _lon, int _lat)
   : m_lon( (double)(_lon) / RAD2INT * 2 ),
     m_lat( (double)(_lat) / RAD2INT * 2 ),
     m_altitude(0.0)
@@ -38,30 +38,30 @@ GeoPoint::GeoPoint(int _lon, int _lat)
 		      (double)(_lat) / RAD2INT * 2 );
 }
 
-GeoPoint::GeoPoint( double _lon, double _lat, double alt, GeoPoint::Unit unit)
+GeoDataPoint::GeoDataPoint( double _lon, double _lat, double alt, GeoDataPoint::Unit unit)
 {
     m_altitude = alt;
 
     switch(unit){
-    case( GeoPoint::Radian ):
+    case( GeoDataPoint::Radian ):
         m_q = Quaternion( _lon, _lat );
         m_lon = _lon;
         m_lat = _lat;
         break;
-    case( GeoPoint::Degree ):
+    case( GeoDataPoint::Degree ):
         m_q = Quaternion( _lon * DEG2RAD , _lat * -DEG2RAD  );
         m_lon = _lon * DEG2RAD;
         m_lat = _lat * -DEG2RAD;
     }
 }
 
-void GeoPoint::setAltitude( const double altitude )
+void GeoDataPoint::setAltitude( const double altitude )
 {
     m_altitude = altitude;
 }
 
-void GeoPoint::geoCoordinates( double& lon, double& lat, 
-                               GeoPoint::Unit unit ) const
+void GeoDataPoint::geoCoordinates( double& lon, double& lat, 
+                               GeoDataPoint::Unit unit ) const
 {
     switch ( unit ) 
     {
@@ -76,7 +76,7 @@ void GeoPoint::geoCoordinates( double& lon, double& lat,
     }
 }
 
-QString GeoPoint::toString( GeoPoint::Notation notation )
+QString GeoDataPoint::toString( GeoDataPoint::Notation notation )
 {
     QString nsstring = ( m_lat < 0 ) ? "N" : "S";  
     QString westring = ( m_lon < 0 ) ? "W" : "E";  
@@ -85,7 +85,7 @@ QString GeoPoint::toString( GeoPoint::Notation notation )
     lon = fabs( m_lon * RAD2DEG );
     lat = fabs( -m_lat * RAD2DEG );
 
-    if ( notation == GeoPoint::DMS )
+    if ( notation == GeoDataPoint::DMS )
     {
         int londeg = (int) lon;
         int lonmin = (int) ( 60 * (lon - londeg) );
@@ -102,7 +102,7 @@ QString GeoPoint::toString( GeoPoint::Notation notation )
     	.arg(latdeg, 3, 10, QChar(' ') ).arg(latmin, 2, 10, QChar('0') )
         .arg(latsec, 2, 10, QChar('0') ).arg(nsstring);
     }
-    else // notation = GeoPoint::Decimal
+    else // notation = GeoDataPoint::Decimal
     {
         return QString("%L1\xb0%2, %L3\xb0%4")
         .arg(lon, 6, 'f', 3, QChar(' ') ).arg(westring)
@@ -110,7 +110,7 @@ QString GeoPoint::toString( GeoPoint::Notation notation )
     }
 }
 
-bool GeoPoint::operator==( const GeoPoint &test ) const
+bool GeoDataPoint::operator==( const GeoDataPoint &test ) const
 {
     // Comparing 2 ints is faster than comparing 4 ints
     // Therefore we compare the Lon-Lat coordinates instead 

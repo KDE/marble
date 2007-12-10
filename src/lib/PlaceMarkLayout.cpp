@@ -416,7 +416,7 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
 {
     MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) index.model();
     Quaternion qpos = ( placemarkModel->coordinateData( index ) ).quaternion();
-//    Quaternion qpos = ( index.data().value<GeoPoint>() ).quaternion();
+//    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
 
     if( viewParams->m_projection == Spherical ) {
 

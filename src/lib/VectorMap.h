@@ -20,7 +20,7 @@
 
 #include "global.h"
 #include "Quaternion.h"
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "ScreenPolygon.h"
 
 
@@ -56,12 +56,12 @@ class VectorMap : public ScreenPolygon::Vector
     void sphericalCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
     void rectangularCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
 
-    void createPolyLine( GeoPoint::Vector::ConstIterator, 
-                         GeoPoint::Vector::ConstIterator, const int, Projection );
-    void sphericalCreatePolyLine( GeoPoint::Vector::ConstIterator, 
-                            GeoPoint::Vector::ConstIterator, const int );
-    void rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator, 
-                            GeoPoint::Vector::ConstIterator, const int );
+    void createPolyLine( GeoDataPoint::Vector::ConstIterator, 
+                         GeoDataPoint::Vector::ConstIterator, const int, Projection );
+    void sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+                            GeoDataPoint::Vector::ConstIterator, const int );
+    void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+                            GeoDataPoint::Vector::ConstIterator, const int );
 
     void sphericalPaintBase(ClipPainter*,int radius, bool);
     void rectangularPaintBase(ClipPainter*,int radius, const Quaternion&, bool);
@@ -73,7 +73,7 @@ class VectorMap : public ScreenPolygon::Vector
     int            getDetailLevel() const;
 
  private:
-    GeoPoint::Vector  m_boundary;
+    GeoDataPoint::Vector  m_boundary;
 
     double            m_zlimit;
     double            m_plimit;

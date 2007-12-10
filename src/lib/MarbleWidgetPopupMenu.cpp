@@ -98,11 +98,11 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     double  lat;
     double  lon;
 
-    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoPoint::Radian );
+    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataPoint::Radian );
 
     // Any idea what this could do on activation?
     m_posaction->setEnabled( false );
-    m_posaction->setText( GeoPoint( lon, lat ).toString() );
+    m_posaction->setText( GeoDataPoint( lon, lat ).toString() );
     m_lmbMenu->addAction( m_posaction );
 
     m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
@@ -137,7 +137,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     double  lat;
     double  lon;
 
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoPoint::Degree );
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Degree );
     if ( valid == true )
     {
 //        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
@@ -152,7 +152,7 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
     double  lat;
     double  lon;
 
-    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoPoint::Radian );
+    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
 
     m_pRemoveMeasurePointsAction->setEnabled(true);
 

@@ -17,10 +17,10 @@
 #include "ClipPainter.h"
 #include "BoundingBox.h"
 
-AbstractLayerData::AbstractLayerData( const GeoPoint &position ):
+AbstractLayerData::AbstractLayerData( const GeoDataPoint &position ):
                     m_visible(true)
 {
-    m_position = new GeoPoint;
+    m_position = new GeoDataPoint;
     *m_position = position;
 }
 
@@ -28,7 +28,7 @@ AbstractLayerData::AbstractLayerData( double lat,
                                       double lon): m_visible(true)
 {
 //  FIXME: Add altitude as soon as it becomes relevant  
-    m_position = new GeoPoint( lon, lat, 0, GeoPoint::Degree);
+    m_position = new GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree);
 }
 
 AbstractLayerData::~AbstractLayerData()
@@ -72,7 +72,7 @@ void AbstractLayerData::setVisible( bool visible )
     m_visible = visible;
 }
 
-GeoPoint AbstractLayerData::position() const
+GeoDataPoint AbstractLayerData::position() const
 {
     return *m_position; 
 } 
@@ -82,7 +82,7 @@ double  AbstractLayerData::lat() const
     double tmpLat;
     double tmpLon;
 
-    m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
+    m_position->geoCoordinates( tmpLon, tmpLat, GeoDataPoint::Degree );
 
     return tmpLat;
 }
@@ -92,15 +92,15 @@ double  AbstractLayerData::lon() const
     double tmpLat;
     double tmpLon;
 
-    m_position->geoCoordinates( tmpLon, tmpLat, GeoPoint::Degree );
+    m_position->geoCoordinates( tmpLon, tmpLat, GeoDataPoint::Degree );
 
     return tmpLon;
 }
 
-void AbstractLayerData::setPosition( const GeoPoint &position )
+void AbstractLayerData::setPosition( const GeoDataPoint &position )
 {
     delete m_position;
-    m_position = new GeoPoint(position);
+    m_position = new GeoDataPoint(position);
 }
 
 void AbstractLayerData::setPosition( const double &lat,
@@ -109,7 +109,7 @@ void AbstractLayerData::setPosition( const double &lat,
     //int detail = m_position->detail();
     delete m_position;
 //  FIXME: Add altitude as soon as it becomes relevant  
-    m_position = new GeoPoint( lon, lat, 0, GeoPoint::Degree);
+    m_position = new GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree);
 }
 
 bool AbstractLayerData::getPixelPos( const QSize &screenSize,

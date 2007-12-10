@@ -16,7 +16,7 @@
 
 #include <QtCore/QChar>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "GeoDataFeature.h"
 
 /**
@@ -45,9 +45,9 @@ class GeoDataPlacemark: public GeoDataFeature
     GeoDataPlacemark( const QString &name );
 
     /**
-     * Return the coordinate of the placemark as a GeoPoint
+     * Return the coordinate of the placemark as a GeoDataPoint
      */
-    GeoPoint coordinate() const;
+    GeoDataPoint coordinate() const;
 
     /**
      * Return the coordinate of the placemark as @p longitude
@@ -102,7 +102,7 @@ class GeoDataPlacemark: public GeoDataFeature
 
  private:
     // Data for a Placemark in addition to those in GeoDataFeature.
-    GeoPoint  m_coordinate;     // The geographic position
+    GeoDataPoint  m_coordinate;     // The geographic position
     QString   m_countrycode;    // Country code.
     double    m_area;           // Area in square kilometer
     qint64    m_population;     // population in number of inhabitants

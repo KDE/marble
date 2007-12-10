@@ -63,15 +63,15 @@ void GeoPolygon::setBoundary(int x0, int y0, int x1, int y1)
         if ( xcenter < -ARCMINUTE )
             xcenter += (int)( 2 * ARCMINUTE );
 
-        m_boundary.append( GeoPoint( 1, xcenter, (y0 + y1)/2 ) );
+        m_boundary.append( GeoDataPoint( 1, xcenter, (y0 + y1)/2 ) );
     }
     else
-        m_boundary.append( GeoPoint( 1, (x0 + x1)/2, (y0 + y1)/2 ) );
+        m_boundary.append( GeoDataPoint( 1, (x0 + x1)/2, (y0 + y1)/2 ) );
 
-    m_boundary.append(GeoPoint( 1, x0, y0));
-    m_boundary.append(GeoPoint( 1, x1, y1));
-    m_boundary.append(GeoPoint( 1, x1, y0));
-    m_boundary.append(GeoPoint( 1, x0, y1));
+    m_boundary.append(GeoDataPoint( 1, x0, y0));
+    m_boundary.append(GeoDataPoint( 1, x1, y1));
+    m_boundary.append(GeoDataPoint( 1, x1, y0));
+    m_boundary.append(GeoDataPoint( 1, x0, y1));
 }
 
 
@@ -151,11 +151,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoPoint( 5, (int)(lon), (int)(lat) ) );
+            polyline->append( GeoDataPoint( 5, (int)(lon), (int)(lat) ) );
         }
         else {
             // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
-            last()->append( GeoPoint( (int)(header), (int)(lon), (int)(lat) ) ); 
+            last()->append( GeoDataPoint( (int)(header), (int)(lon), (int)(lat) ) ); 
         }
         ++count;
     }
@@ -203,11 +203,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoPoint( 5, (int)(lon), (int)(lat) ) );
+            polyline->append( GeoDataPoint( 5, (int)(lon), (int)(lat) ) );
         }
         else {
             // qDebug(QString("header: %1 lat: %2 lon: %3").arg(header).arg(lat).arg(lon).toLatin1());
-            last()->append( GeoPoint( (int)(header), (int)(lon), (int)(lat) ) );
+            last()->append( GeoDataPoint( (int)(header), (int)(lon), (int)(lat) ) );
         }
         ++count;
     }
@@ -233,11 +233,11 @@ void PntMap::load(const QString &filename)
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
-    GeoPoint::Vector::ConstIterator       itPoint;
+    GeoDataPoint::Vector::ConstIterator       itPoint;
 
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 
-        GeoPoint::Vector::Iterator  itEndPoint = (*itPolyLine)->end();
+        GeoDataPoint::Vector::Iterator  itEndPoint = (*itPolyLine)->end();
 
         for ( itPoint = (*itPolyLine)->begin(); 
               itPoint != itEndPoint;
@@ -270,7 +270,7 @@ void PntMap::load(const QString &filename)
         double  x1 = -ARCMINUTE;
         double  y0 = ARCMINUTE / 2.0;
         double  y1 = -ARCMINUTE / 2.0;		
-        GeoPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
+        GeoDataPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
 
         if ( (*itPolyLine)->getDateLine() ) { 
 					

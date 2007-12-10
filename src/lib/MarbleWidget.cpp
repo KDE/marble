@@ -31,7 +31,7 @@
 #include "TextureColorizer.h"
 #include "ClipPainter.h"
 #include "FileViewModel.h"
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "GpxFileViewItem.h"
 #include "MarbleDirs.h"
 #include "MarbleWidgetInputHandler.h"
@@ -63,7 +63,7 @@ class MarbleWidgetPrivate
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
-    GeoPoint         m_homePoint;
+    GeoDataPoint         m_homePoint;
     int              m_homeZoom;
 
     int              m_logzoom;
@@ -520,7 +520,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
     selectionModel->clear();
 
     if ( index.isValid() ) {
-        const GeoPoint point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>();
+        const GeoDataPoint point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>();
   
         double  lon;
         double  lat;
@@ -595,17 +595,17 @@ void MarbleWidget::setProjection( int projectionIndex )
 
 void MarbleWidget::home( double &lon, double &lat, int& zoom)
 {
-    d->m_homePoint.geoCoordinates( lon, lat, GeoPoint::Degree );
+    d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
     zoom = d->m_homeZoom;
 }
 
 void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 {
-    d->m_homePoint = GeoPoint( lon, lat, 0, GeoPoint::Degree );
+    d->m_homePoint = GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree );
     d->m_homeZoom = zoom;
 }
 
-void MarbleWidget::setHome(const GeoPoint& homePoint, int zoom)
+void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 {
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
@@ -701,7 +701,7 @@ void MarbleWidget::disconnectNotify ( const char * signal )
 
 int MarbleWidget::northPoleY()
 {
-    Quaternion  northPole     = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  northPole     = GeoDataPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
@@ -711,7 +711,7 @@ int MarbleWidget::northPoleY()
 
 int MarbleWidget::northPoleZ()
 {
-    Quaternion  northPole     = GeoPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  northPole     = GeoDataPoint( 0.0, -M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
     northPole.rotateAroundAxis( invPlanetAxis );
@@ -722,7 +722,7 @@ int MarbleWidget::northPoleZ()
 bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
-    Quaternion  qpos       = GeoPoint( lon, lat ).quaternion();
+    Quaternion  qpos       = GeoDataPoint( lon, lat ).quaternion();
     Quaternion  invRotAxis = d->m_viewParams.m_planetAxis.inverse();
 
     qpos.rotateAroundAxis(invRotAxis);
@@ -740,7 +740,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat,
-                                  GeoPoint::Unit unit )
+                                  GeoDataPoint::Unit unit )
 {
     int imageHalfWidth  = width() / 2;
     int imageHalfHeight  = height() / 2;
@@ -792,7 +792,7 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
         break;
     }
 
-    if ( unit == GeoPoint::Degree ) {
+    if ( unit == GeoDataPoint::Degree ) {
         lon *= -RAD2DEG;
         lat *= -RAD2DEG;
     }
@@ -1158,10 +1158,10 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     double  lon   = 0;
     double  lat   = 0;
 
-    valid = geoCoordinates( x, y, lon, lat, GeoPoint::Radian );
+    valid = geoCoordinates( x, y, lon, lat, GeoDataPoint::Radian );
 
     if ( valid ) {
-        emit mouseClickGeoPosition( lon, lat, GeoPoint::Radian);
+        emit mouseClickGeoPosition( lon, lat, GeoDataPoint::Radian);
     }
 }
 

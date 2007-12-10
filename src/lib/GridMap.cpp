@@ -239,7 +239,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
             double lat = ( dim == Latitude )  ? val : dimVal;
             double lon = ( dim == Longitude ) ? val : dimVal;
 
-            GeoPoint    geoit( lon, -lat );
+            GeoDataPoint    geoit( lon, -lat );
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 

@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEOPOINT_H
-#define GEOPOINT_H
+#ifndef GEODATAPOINT_H
+#define GEODATAPOINT_H
 
 #include <QtCore/QMetaType>
 #include <QtCore/QVector>
@@ -21,7 +21,7 @@
 
 const double TWOPI = 2 * M_PI;
 
-class GeoPoint {
+class GeoDataPoint {
  public:
     /**
      * @brief enum used constructor to specify the units used
@@ -43,8 +43,8 @@ class GeoPoint {
      */
     enum Notation{Decimal, DMS};
 
-    GeoPoint(){}
-    GeoPoint(int _lon, int _lat);
+    GeoDataPoint(){}
+    GeoDataPoint(int _lon, int _lat);
     /**
      * @brief create a geopoint from longitude and latitude
      * @param _lon longitude
@@ -52,12 +52,12 @@ class GeoPoint {
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at -pi/2, southpole at pi/2)
      */
-    GeoPoint(double _lon, double _lat, double alt = 0,
-             GeoPoint::Unit _unit = GeoPoint::Radian);
+    GeoDataPoint(double _lon, double _lat, double alt = 0,
+             GeoDataPoint::Unit _unit = GeoDataPoint::Radian);
 
-    GeoPoint(int _detail, int _lon, int _lat);
+    GeoDataPoint(int _detail, int _lon, int _lat);
 
-    ~GeoPoint(){}
+    ~GeoDataPoint(){}
 
     double altitude() const { return m_altitude; }
     void   setAltitude( const double altitude );
@@ -65,16 +65,16 @@ class GeoPoint {
     int    detail()   const { return m_detail; }
 
     void geoCoordinates( double& lon, double& lat, 
-                         GeoPoint::Unit unit = GeoPoint::Radian )
+                         GeoDataPoint::Unit unit = GeoDataPoint::Radian )
                                                                 const;
  
     const Quaternion &quaternion() const { return m_q; }
     
-    QString toString( GeoPoint::Notation notation = GeoPoint::DMS );
-    bool operator==(const GeoPoint&) const;
+    QString toString( GeoDataPoint::Notation notation = GeoDataPoint::DMS );
+    bool operator==(const GeoDataPoint&) const;
 
     // Type definitions
-    typedef QVector<GeoPoint> Vector;
+    typedef QVector<GeoDataPoint> Vector;
 
  private:
     Quaternion  m_q;
@@ -83,6 +83,6 @@ class GeoPoint {
     int         m_detail;
 };
 
-Q_DECLARE_METATYPE( GeoPoint )
+Q_DECLARE_METATYPE( GeoDataPoint )
 
-#endif // GEOPOINT_H
+#endif // GEODATAPOINT_H

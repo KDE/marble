@@ -22,7 +22,7 @@
 #include <QtGui/QTextBrowser>
 #include <QtGui/QTextFrame>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 
@@ -122,12 +122,12 @@ void PlaceMarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setHtml( description );
     }
-    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().toString() );
+    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().toString() );
     country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
     const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
     const double area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
-    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoPoint>().altitude();
+    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().altitude();
 
 
     area_lbl->setText( tr("Area:") );

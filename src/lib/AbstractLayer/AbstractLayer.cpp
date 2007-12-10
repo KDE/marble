@@ -34,7 +34,7 @@ AbstractLayer::~AbstractLayer()
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
+bool AbstractLayer::getPixelPosFromGeoDataPoint( double _lon, double _lat,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)
@@ -54,7 +54,7 @@ bool AbstractLayer::getPixelPosFromGeoPoint( double _lon, double _lat,
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoPoint( GeoPoint position,
+bool AbstractLayer::getPixelPosFromGeoDataPoint( GeoDataPoint position,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)

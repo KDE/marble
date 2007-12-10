@@ -18,7 +18,7 @@
 
 #include "global.h"
 #include "Quaternion.h"
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "ScreenPolygon.h"
 
 

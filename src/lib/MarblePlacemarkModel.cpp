@@ -80,7 +80,7 @@ int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
         return 0;
 }
 
-GeoPoint MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
+GeoDataPoint MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
 {
     return d->m_placeMarkContainer.at( index.row() )->coordinate();
 }

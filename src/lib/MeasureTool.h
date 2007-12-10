@@ -21,7 +21,7 @@
 #include <QtCore/QVector>
 #include <QtGui/QFont>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "global.h"
 #include "ClipPainter.h"
 
@@ -42,7 +42,7 @@ class MeasureTool : public QObject
 
  public Q_SLOTS:
     void addMeasurePoint( double lon, double lat ) {
-        m_pMeasurePointList << new GeoPoint( lon, lat );
+        m_pMeasurePointList << new GeoDataPoint( lon, lat );
     }
     void removeMeasurePoints() {
         m_pMeasurePointList.clear();
@@ -71,7 +71,7 @@ class MeasureTool : public QObject
 
     QColor  m_linecolor;
 
-    QVector<GeoPoint*>  m_pMeasurePointList;
+    QVector<GeoDataPoint*>  m_pMeasurePointList;
 
     QPen    m_pen;
 

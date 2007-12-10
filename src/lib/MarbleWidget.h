@@ -29,7 +29,7 @@
 
 //#include <QtDBus/QtDBus>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "marble_export.h"
 #include "MarbleModel.h"
 #include "CrossHairFloatItem.h"
@@ -248,7 +248,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
-                         GeoPoint::Unit=GeoPoint::Degree);
+                         GeoDataPoint::Unit=GeoDataPoint::Degree);
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
@@ -561,7 +561,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome(const GeoPoint& homePoint, int zoom = 1050);
+    void  setHome(const GeoDataPoint& homePoint, int zoom = 1050);
 
     /**
      * @brief  Move left by the moveStep.
@@ -782,7 +782,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void  mouseMoveGeoPosition( QString );
 
-    void  mouseClickGeoPosition( double lon, double lat, GeoPoint::Unit );
+    void  mouseClickGeoPosition( double lon, double lat, GeoDataPoint::Unit );
 
     void  timeout();
 

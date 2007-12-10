@@ -17,8 +17,6 @@
 
 #include "GeoDataFeature.h"
 
-class ViewParams;
-
 /**
  * @short  A base class that can hold GeoDataFeatures
  *

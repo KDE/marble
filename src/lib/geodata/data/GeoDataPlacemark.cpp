@@ -28,7 +28,7 @@ GeoDataPlacemark::GeoDataPlacemark( const QString& name )
 {
 }
 
-GeoPoint GeoDataPlacemark::coordinate() const
+GeoDataPoint GeoDataPlacemark::coordinate() const
 {
     return m_coordinate;
 }
@@ -41,7 +41,7 @@ void GeoDataPlacemark::coordinate( double& lon, double& lat, double& alt )
 
 void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
 {
-    m_coordinate = GeoPoint( lon, lat, alt );
+    m_coordinate = GeoDataPoint( lon, lat, alt );
 }
 
 const double GeoDataPlacemark::area() const

@@ -15,7 +15,7 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"

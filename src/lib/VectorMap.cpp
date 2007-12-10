@@ -107,7 +107,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radiu
 
     //	const int detail = 0;
     const int  detail = getDetailLevel();
-    GeoPoint   corner;
+    GeoDataPoint   corner;
 
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
@@ -200,8 +200,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
     }
 }
 
-void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoPoint::Vector::ConstIterator  itEndPoint,
+void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail, Projection currentProjection )
 {
     switch( currentProjection ) {
@@ -214,11 +214,11 @@ void VectorMap::createPolyLine( GeoPoint::Vector::ConstIterator  itStartPoint,
     }
 }
 
-void VectorMap::sphericalCreatePolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoPoint::Vector::ConstIterator  itEndPoint,
+void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail)
 {
-    GeoPoint::Vector::const_iterator  itPoint;
+    GeoDataPoint::Vector::const_iterator  itPoint;
 
     // Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
     Quaternion qpos;
@@ -290,11 +290,11 @@ void VectorMap::sphericalCreatePolyLine( GeoPoint::Vector::ConstIterator  itStar
     }
 }
 
-void VectorMap::rectangularCreatePolyLine( GeoPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoPoint::Vector::ConstIterator  itEndPoint,
+void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
+                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail)
 {
-    GeoPoint::Vector::const_iterator  itPoint;
+    GeoDataPoint::Vector::const_iterator  itPoint;
 
     Quaternion qpos;
 

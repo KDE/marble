@@ -18,13 +18,13 @@
 #include <QtCore/QDebug>
 
 #include "Quaternion.h"
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 
 /*
-	GeoPoint defines the nodes in a polyLine 
+	GeoDataPoint defines the nodes in a polyLine 
 */
 
-class GeoPolygon : public GeoPoint::Vector 
+class GeoPolygon : public GeoDataPoint::Vector 
 {
  public:
     GeoPolygon();
@@ -40,7 +40,7 @@ class GeoPolygon : public GeoPoint::Vector
     void setDateLine(bool crossed){ m_crossed = crossed; }
 
     void setBoundary(int, int, int, int);
-    GeoPoint::Vector getBoundary() const { return m_boundary; } 
+    GeoDataPoint::Vector getBoundary() const { return m_boundary; } 
 
     void displayBoundary(){
 	Quaternion  q;
@@ -67,7 +67,7 @@ class GeoPolygon : public GeoPoint::Vector
     bool  m_crossed;
     bool  m_closed;
 
-    GeoPoint::Vector  m_boundary;
+    GeoDataPoint::Vector  m_boundary;
 
     int   m_x0;
     int   m_y0;

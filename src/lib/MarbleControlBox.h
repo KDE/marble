@@ -24,7 +24,7 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QWidget>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 
 
 /** @file
@@ -174,7 +174,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void changeZoom(int zoom);
     void disableGpsInput( bool );
-    void receiveGpsCoordinates( double, double, GeoPoint::Unit );
+    void receiveGpsCoordinates( double, double, GeoDataPoint::Unit );
     void enableFileViewActions();
     
     /**

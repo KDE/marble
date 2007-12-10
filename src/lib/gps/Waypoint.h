@@ -41,7 +41,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * @param position the geopoint that will be the position of this
      *                 waypoint
      */
-    Waypoint( GeoPoint position );
+    Waypoint( GeoDataPoint position );
     
     /**
      * @brief simple destructor

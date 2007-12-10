@@ -61,7 +61,7 @@ set(marblewidget_SRCS
 
            AutoSettings.cpp
            ClipPainter.cpp
-           GeoPoint.cpp
+           GeoDataPoint.cpp
            GeoPolygon.cpp
            GridMap.cpp
            HttpDownloadManager.cpp
@@ -259,7 +259,7 @@ else (APPLE AND QTONLY)
            global.h
            AutoSettings.h
            ClipPainter.h
-           GeoPoint.h
+           GeoDataPoint.h
            GeoPolygon.h
            GridMap.h
            HttpDownloadManager.h

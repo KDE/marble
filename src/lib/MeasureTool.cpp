@@ -81,7 +81,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
     // painter->setPen(QColor(Qt::white));	
     // painter->drawPolyline(distancePathShadow);
 
-    QVector<GeoPoint*>::const_iterator  it;
+    QVector<GeoDataPoint*>::const_iterator  it;
 
     // QPolygonF  measurePoints;
     // QPolygonF distancePathShadow;
@@ -188,7 +188,7 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     // painter->setPen(QColor(Qt::white));	
     // painter->drawPolyline(distancePathShadow);
 
-    QVector<GeoPoint*>::const_iterator  it;
+    QVector<GeoDataPoint*>::const_iterator  it;
 
     // QPolygonF  measurePoints;
     // QPolygonF distancePathShadow;

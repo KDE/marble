@@ -15,7 +15,7 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoPoint.h"
+#include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
@@ -104,7 +104,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
-    Quaternion  northPole = GeoPoint( 0.0, (double)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  northPole = GeoDataPoint( 0.0, (double)( -M_PI * 0.5 ) ).quaternion();
 
     Quaternion  inversePlanetAxis = planetAxis;
     inversePlanetAxis = inversePlanetAxis.inverse();

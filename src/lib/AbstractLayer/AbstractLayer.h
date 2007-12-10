@@ -111,7 +111,7 @@ class AbstractLayer: public QObject
      *
      * 
      **/
-    static bool getPixelPosFromGeoPoint(double _lon, double _lat, 
+    static bool getPixelPosFromGeoDataPoint(double _lon, double _lat, 
                                  const QSize &screenSize, 
                                  ViewParams *viewParams,
                                  QPoint *position);
@@ -120,7 +120,7 @@ class AbstractLayer: public QObject
       * @brief get screen pixel position. 
       * 
       * Method to simplify the retreval of the screen pixel position
-      * from a GeoPoint object.
+      * from a GeoDataPoint object.
       * @param geoPosition the position of the point we want to find
       * @param invRotAxis inversion of the Quaternion status of the
       *                   globe
@@ -131,7 +131,7 @@ class AbstractLayer: public QObject
       * @return @c true if the pixel is visible on the screen
       *         @c false if the pixel is outside the screen
       **/ 
-    bool getPixelPosFromGeoPoint(GeoPoint geoPosition,
+    bool getPixelPosFromGeoDataPoint(GeoDataPoint geoPosition,
                                  const QSize &screenSize,
                                  ViewParams *viewParams,
                                  QPoint *position);
