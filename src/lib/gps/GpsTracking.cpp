@@ -231,6 +231,8 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
 
 #endif
     }
+
+    return false;
 }
 
 void GpsTracking::draw( ClipPainter *painter,
