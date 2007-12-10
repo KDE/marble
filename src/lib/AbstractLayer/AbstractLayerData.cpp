@@ -171,8 +171,8 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
             {
                 return false;
             }
-            return true;
     }
+    return true;
 }
 
 void AbstractLayerData::printToStream( QTextStream &out ) const
