@@ -38,6 +38,17 @@ ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
 }
 
 
+void ClipPainter::setClipping(bool enable)
+{
+    m_clip = enable;
+}
+
+
+bool ClipPainter::hasClipping() const {
+    return m_clip;
+}
+
+
 void ClipPainter::drawPolygon ( const QPolygonF & pa, Qt::FillRule fillRule )
 {
 

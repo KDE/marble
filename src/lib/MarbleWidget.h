@@ -800,6 +800,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  paintEvent( QPaintEvent *event );
 
     /**
+     * @brief Enables custom drawing onto the MarbleWidget straight after
+     * @brief the globe and before all other layers has been rendered.
+     * @param painter 
+     */
+    virtual void  customPaint( ClipPainter *painter );
+
+    /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
     void  resizeEvent( QResizeEvent* );

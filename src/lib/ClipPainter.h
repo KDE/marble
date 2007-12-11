@@ -25,6 +25,9 @@ class ClipPainter : public QPainter
     ClipPainter(QPaintDevice*, bool);
     ~ClipPainter(){}
 
+    void setClipping( bool enable );
+    bool hasClipping() const;
+
     void drawPolygon( const QPolygonF &, 
                       Qt::FillRule fillRule = Qt::OddEvenFill );
     void drawPolyline( const QPolygonF & );

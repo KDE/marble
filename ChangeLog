@@ -1,3 +1,17 @@
+2007-12-11  Torsten Rahn  <rahn@kde.org>
+
+    Patch set by Jan Becker <tahoma@gmx.de>:
+    * src/lib/MeasureTool.cpp:
+      Bugfix to make Measuretool mostly work in 
+      Equirectangular projection (tiny small issues
+      which aren't relevant for now still remain)
+    * src/lib/MarbleWidget.{h,cpp}:
+      virtual void customPaint() and bugfix for
+      considering equirectangular projection in 
+      screenCoordinates(...)
+    * src/lib/ClipPainter.{h,cpp}: 
+      Introduction of setClipping(bool) and hasClipping()
+
 2007-12-10  Torsten Rahn  <rahn@kde.org>
 
     * Renaming the class "GeoPoint" -> "GeoDataPoint"

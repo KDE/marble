@@ -956,6 +956,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
     d->m_justModified                   = false;
 
+    customPaint( &painter );
+
     // 2. Paint the compass
     if ( d->m_showCompass )
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
@@ -1008,6 +1010,12 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     }
 
     emit framesPerSecond( fps );
+}
+
+void MarbleWidget::customPaint(ClipPainter *painter)
+{
+    Q_UNUSED( painter );
+    /* This is a NOOP */
 }
 
 void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

@@ -339,61 +339,128 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 {
     double      x;
     double      y;
-    int         currentSign;
-    int         previousSign;
-    double      prevX;
+    double      tmpX;
+    double      offset = 0;
+    int         sign;
+    int         width;
+    int         mapWidth;
+    int         segmentCount = 0;
+    int         steps;
     double      degX;
     double      degY;
     double      previousDegX;
+    double      deltaDeg;
+    double      previousX;
     double      previousY;
     double      interpolatedY;
-    double      centerLonPixel = m_centerLon * m_xyFactor;
-    double      centerLatPixel = m_centerLat * m_xyFactor;
-    QPolygonF   distancePath;
-
-    Q_UNUSED( antialiasing );
-
+    double      oneOverSteps;
+    double      restartPos;
+    bool        flushed = false;
     double      t = 0.0;
     Quaternion  itpos;
+
+    Q_UNUSED(antialiasing);
+
+    width = 2 * imgrx;
+    mapWidth = 4 * radius;
+    steps = 20;
+    oneOverSteps = 1./(double)steps;
+
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
-    itpos.getSpherical(degX,degY);
-    currentSign = previousSign = (degX<0)?-1:1;
+    itpos.getSpherical( degX, degY );
     previousDegX = degX;
 
-    Q_UNUSED( antialiasing );
-
-    for ( int i = 0; i < 21; ++i ) {
-        t = (double)(i) / 20.0;
+    for ( int i = 0; i <= steps; ++i ) {
+        t = (double)i * oneOverSteps;
 
         itpos.slerp( prevqpos, qpos, t );
-        itpos.getSpherical(degX,degY);
+        itpos.getSpherical( degX,degY );
 
-        x = (double)( imgrx + ( degX ) *m_xyFactor + centerLonPixel );
-        y = (double)( imgry + ( degY ) *m_xyFactor + centerLatPixel );
-        //The next steeps deal with the measurement of two points
+        x = (double)(imgrx + (degX + m_centerLon) *m_xyFactor);
+        y = (double)(imgry + (degY + m_centerLat) *m_xyFactor);
+
+        //The next steps deal with the measurement of two points
         //that the shortest path crosses the dateline
-        currentSign = (degX < 0)?-1:1;
-        if( previousSign != currentSign && fabs(previousDegX) + fabs(degX) > M_PI) {
-            //FIXME:Find a better interpolation
-            interpolatedY= ( y + previousY ) / 2;
-            distancePath << QPointF( imgrx + centerLonPixel 
-                                    + previousSign*2*radius,
-                                      interpolatedY );
-            painter->drawPolyline( distancePath );
-            distancePath.clear();
-            distancePath << QPointF( imgrx + centerLonPixel 
-                                    + currentSign*2*radius, 
-                                      interpolatedY);
+        sign = (degX < 0)?-1:1;
+
+        deltaDeg = degX - previousDegX;
+
+        // Normalize the coordinates into 'common' space
+        if ( fabs( deltaDeg ) > M_PI ) {
+            offset += -sign * mapWidth;
+            if ( deltaDeg > 0 )
+                deltaDeg -= 2*M_PI;
+            else
+                deltaDeg += 2*M_PI;
         }
-        else distancePath << QPointF( x, y );
-        previousSign = currentSign;
+
+        x += offset;
+
+        if ( x < 0  ) {
+            tmpX = x + mapWidth;
+            if ( tmpX < width )
+                x = tmpX;
+        }
+        else if ( x > width ) {
+            tmpX = x - mapWidth;
+            if ( tmpX > 0 )
+                x = tmpX;
+        }
+
+        // Wrap?
+        if ( x < 0 || x > width ) {
+            tmpX = deltaDeg > 0?width:0;
+
+            if ( segmentCount ) {
+                interpolatedY = ((tmpX - previousX) * (y - previousY)) / (x - previousX) + previousY;
+                painter->drawLine( previousX, previousY, tmpX, interpolatedY );
+                segmentCount = 0;
+            }
+
+            flushed = true;
+        }
+        else {
+            // Direction mismatch ?
+            if ( deltaDeg * (x - previousX) < 0 ) {
+                if ( deltaDeg < 0 ) {
+                    previousX += mapWidth;
+                    restartPos = width;
+                }
+                else {
+                    previousX -= mapWidth;
+                    restartPos = 0;
+                }
+            }
+
+            if ( flushed ) {
+                if ( previousX < 0 || x < 0 )
+                    restartPos = 0;
+                else
+                    restartPos = width;
+
+                flushed = false;
+                interpolatedY = ((restartPos - previousX) * (y - previousY)) / (x - previousX) + previousY;
+                if ( segmentCount )
+                    painter->drawLine( previousX, previousY, x, interpolatedY );
+
+                previousX = restartPos;
+                previousY = interpolatedY;
+                ++segmentCount;
+            }
+
+            if ( segmentCount )
+                painter->drawLine( previousX, previousY, x, y );
+
+            ++segmentCount;
+        }
+
         previousDegX = degX;
+        previousX = x;
         previousY = y;
     }
-
-    painter->drawPolyline( distancePath );
 }
+
 
 bool MeasureTool::testbug()
 {
