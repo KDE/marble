@@ -386,7 +386,7 @@ void VectorMap::paintBase(ClipPainter * painter, int radius, const Quaternion& r
 
 void VectorMap::sphericalPaintBase(ClipPainter * painter, int radius, bool antialiasing)
 {
-    m_radius = radius-1;
+    m_radius = radius;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 

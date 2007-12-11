@@ -210,7 +210,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
     // cutoff: the amount of each quarter circle that is cut off at
     // the pole in radians
 
-    const double cutCoeff   = 1 - cutOff / PIHALF;
+    const double cutCoeff   = 1.0 - cutOff / PIHALF;
 
     // We draw each circle in quarters ( or parts of those ).
     // This is especially convenient for the great longitude circles which 
@@ -244,8 +244,8 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
             Quaternion  qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF( (double)(m_imageWidth / 2 + m_radius * qpos.v[Q_X]) + 1,
-                                      (double)(m_imageHeight / 2 + m_radius * qpos.v[Q_Y]) + 1 );
+            m_currentPoint = QPointF( (double)(m_imageWidth / 2 + m_radius * qpos.v[Q_X]),
+                                      (double)(m_imageHeight / 2 + m_radius * qpos.v[Q_Y]) );
             //qDebug() << "Radius: " << m_radius
             //         << "QPointF(" << (double)(m_imageWidth / 2 + m_radius*qpos.v[Q_X])+1
             //        << ", " << (double)(m_imageHeight / 2 + m_radius*qpos.v[Q_Y])+1 << ")";
@@ -260,8 +260,8 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
                 m_lastVisible = m_currentlyVisible;
 
                 // Initially m_lastPoint MUST NOT equal m_currentPoint
-                m_lastPoint = QPointF( m_currentPoint.x() + 1.0, 
-                                       m_currentPoint.y() + 1.0 );
+                m_lastPoint = QPointF( m_currentPoint.x(), 
+                                       m_currentPoint.y() );
             }
 
             if (m_currentlyVisible != m_lastVisible) {
@@ -279,7 +279,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
 
             // Take care of screencrossing crossings if horizon is visible.
             // Filter points which aren't on the visible hemisphere.
-            if ( m_currentlyVisible && m_currentPoint != m_lastPoint ) {
+            if ( m_currentlyVisible ) {
                 // most recent addition: m_currentPoint != m_lastPoint
                 //			qDebug("accepted");
                 m_polygon << m_currentPoint;
@@ -362,18 +362,18 @@ const QPointF GridMap::horizonPoint()
     double  xa = 0;
     double  ya = 0;
 
-    xa = m_currentPoint.x() - ( m_imageWidth / 2 + 1 ) ;
+    xa = m_currentPoint.x() - ( m_imageWidth / 2 ) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
-    double  radicant = (double)(m_radius +1) * (double)( m_radius +1) - xa*xa;
+    double  radicant = (double)(m_radius) * (double)( m_radius) - xa*xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
-    if ( ( m_currentPoint.y() - ( m_imageHeight / 2 + 1 ) ) < 0 )
+    if ( ( m_currentPoint.y() - ( m_imageHeight / 2 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (double)m_imageWidth / 2  + xa + 1,
-                    (double)m_imageHeight / 2 + ya + 1 );
+    return QPointF( (double)m_imageWidth / 2  + xa,
+                    (double)m_imageHeight / 2 + ya );
 }
 
 
