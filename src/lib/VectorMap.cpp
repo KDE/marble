@@ -143,7 +143,6 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
 {
     clear();
     m_radius = radius;
-    Quaternion  qbound;
     m_planetAxis = rotAxis;
 
     // Calculate translation of center point
@@ -152,8 +151,7 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
     m_centerLon =  m_planetAxis.yaw() + M_PI;
 
     m_xyFactor = (float)( 2 * radius ) / M_PI;
-    double degX;
-    double degY;
+    double lon, lat;
     double x;
     double y;
 
@@ -173,10 +171,9 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
         for ( int i = 0; i < 4; ++i ) {
-            qbound = m_boundary[i].quaternion();
-            qbound.getSpherical(degX,degY);
-            x = m_imgwidth / 2  + m_xyFactor * (degX + m_centerLon);
-            y = m_imgheight / 2 + m_xyFactor * (degY + m_centerLat);
+            m_boundary[i].geoCoordinates(lon, lat);
+            x = m_imgwidth / 2  + m_xyFactor * (lon + m_centerLon);
+            y = m_imgheight / 2 + m_xyFactor * (lat + m_centerLat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -302,8 +299,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
     bool firstPoint = true;
-    double degX;
-    double degY;
+    double lon, lat;
 
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -313,24 +309,24 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 #ifdef VECMAP_DEBUG
             ++m_debugNodeCount;
 #endif
-            qpos = itPoint->quaternion();
-            qpos.getSpherical(degX,degY);
-            double x = m_imgwidth/2 + m_xyFactor * (degX + m_centerLon) + m_offset;
-            double y = m_imgheight/2 + m_xyFactor * (degY + m_centerLat);
-            int currentSign = ( degX > 0 ) ? 1 : -1 ;
+
+            itPoint->geoCoordinates( lon, lat);
+            double x = m_imgwidth/2  + m_xyFactor * (lon + m_centerLon) + m_offset;
+            double y = m_imgheight/2 + m_xyFactor * (lat + m_centerLat);
+            int currentSign = ( lon > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
                 m_lastSign = currentSign;
             }
             //correction of the Dateline
-            if( fabs(degY) == M_PI/2 )
+            if( fabs(lat) == M_PI/2 )
                 x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
 
             m_currentPoint = QPointF( x, y );
-            if ( m_lastSign != currentSign && fabs(m_lastX) + fabs(degX) > M_PI ) {
+            if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
                 //If the "jump" ocurrs in the Anctartica's latitudes
 
-                if ( degY > M_PI / 3 ) {
+                if ( lat > M_PI / 3 ) {
                        m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, y );
                        m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset
                             , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ) );
@@ -341,15 +337,15 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                 else {
                     if( !CrossedDateline ) {
                         m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor);
+                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor);
                         otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor );
+                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor );
                     }
                     else {
                         m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor );
+                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor );
                         otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastY + m_centerLat) * m_xyFactor);
+                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor);
                     }
                 }
                 CrossedDateline = !CrossedDateline;
@@ -359,8 +355,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
             else
                 otherPolygon<<m_currentPoint;
 
-            m_lastX = degX;
-            m_lastY = degY;
+            m_lastLon = lon;
+            m_lastLat = lat;
             m_lastSign = currentSign;
         }
     }
@@ -433,9 +429,10 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection cu
             clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
             break;
         case Equirectangular:
-            clip = false;
+            clip = true; // clipping should always be enabled
             break;
     }
+
     ClipPainter  painter(origimg, clip);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
     painter.setPen(m_pen);

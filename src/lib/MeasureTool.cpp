@@ -195,12 +195,10 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
 
     m_totalDistance = 0.0;
 
-    double  lon;
-    double  lat;
     double  prevlon = 0.0;
     double  prevlat = 0.0;
-    double  degX = 0.0;
-    double  degY = 0.0;
+    double  lon = 0.0;
+    double  lat = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -240,11 +238,11 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
           it != m_pMeasurePointList.constEnd();
           it++ )
     {
-        qpos = (*it)->quaternion();
-        qpos.getSpherical(degX,degY);
+        (*it)->quaternion();
+        qpos.getSpherical(lon,lat);
 
-        x = (int)( imgrx + (degX + m_centerLon ) *m_xyFactor );
-        y = (int)( imgry + (degY + m_centerLat ) *m_xyFactor );
+        x = (int)( imgrx + (lon + m_centerLon ) *m_xyFactor );
+        y = (int)( imgry + (lat + m_centerLat ) *m_xyFactor );
 
         // Don't process placemarks if they are outside the screen area.
         if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
@@ -346,10 +344,10 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
     int         mapWidth;
     int         segmentCount = 0;
     int         steps;
-    double      degX;
-    double      degY;
-    double      previousDegX;
-    double      deltaDeg;
+    double      lon;
+    double      lat;
+    double      previousLon;
+    double      deltaLon;
     double      previousX;
     double      previousY;
     double      interpolatedY;
@@ -368,31 +366,31 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
-    itpos.getSpherical( degX, degY );
-    previousDegX = degX;
+    itpos.getSpherical( lon, lat );
+    previousLon = lon;
 
     for ( int i = 0; i <= steps; ++i ) {
         t = (double)i * oneOverSteps;
 
         itpos.slerp( prevqpos, qpos, t );
-        itpos.getSpherical( degX,degY );
+        itpos.getSpherical( lon,lat );
 
-        x = (double)(imgrx + (degX + m_centerLon) *m_xyFactor);
-        y = (double)(imgry + (degY + m_centerLat) *m_xyFactor);
+        x = (double)(imgrx + (lon + m_centerLon) *m_xyFactor);
+        y = (double)(imgry + (lat + m_centerLat) *m_xyFactor);
 
         //The next steps deal with the measurement of two points
         //that the shortest path crosses the dateline
-        sign = (degX < 0)?-1:1;
+        sign = (lon < 0)?-1:1;
 
-        deltaDeg = degX - previousDegX;
+        deltaLon = lon - previousLon;
 
         // Normalize the coordinates into 'common' space
-        if ( fabs( deltaDeg ) > M_PI ) {
+        if ( fabs( deltaLon ) > M_PI ) {
             offset += -sign * mapWidth;
-            if ( deltaDeg > 0 )
-                deltaDeg -= 2*M_PI;
+            if ( deltaLon > 0 )
+                deltaLon -= 2*M_PI;
             else
-                deltaDeg += 2*M_PI;
+                deltaLon += 2*M_PI;
         }
 
         x += offset;
@@ -410,11 +408,11 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 
         // Wrap?
         if ( x < 0 || x > width ) {
-            tmpX = deltaDeg > 0?width:0;
+            tmpX = deltaLon > 0?width:0;
 
             if ( segmentCount ) {
                 interpolatedY = ((tmpX - previousX) * (y - previousY)) / (x - previousX) + previousY;
-                painter->drawLine( previousX, previousY, tmpX, interpolatedY );
+                painter->drawLine( (int)(previousX), (int)(previousY), (int)(tmpX), (int)(interpolatedY) );
                 segmentCount = 0;
             }
 
@@ -422,8 +420,8 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
         }
         else {
             // Direction mismatch ?
-            if ( deltaDeg * (x - previousX) < 0 ) {
-                if ( deltaDeg < 0 ) {
+            if ( deltaLon * (x - previousX) < 0 ) {
+                if ( deltaLon < 0 ) {
                     previousX += mapWidth;
                     restartPos = width;
                 }
@@ -442,7 +440,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
                 flushed = false;
                 interpolatedY = ((restartPos - previousX) * (y - previousY)) / (x - previousX) + previousY;
                 if ( segmentCount )
-                    painter->drawLine( previousX, previousY, x, interpolatedY );
+                    painter->drawLine( (int)(previousX), (int)(previousY), (int)(x), (int)(interpolatedY) );
 
                 previousX = restartPos;
                 previousY = interpolatedY;
@@ -450,12 +448,12 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
             }
 
             if ( segmentCount )
-                painter->drawLine( previousX, previousY, x, y );
+                painter->drawLine( (int)(previousX), (int)(previousY), (int)(x), (int)(y) );
 
             ++segmentCount;
         }
 
-        previousDegX = degX;
+        previousLon = lon;
         previousX = x;
         previousY = y;
     }

@@ -1,5 +1,25 @@
 2007-12-11  Torsten Rahn  <rahn@kde.org>
 
+    One single major bug left for the flat map and 
+    the flat map is now as fast as the globe.
+
+    * src/lib/MeasureTool.cpp: degX,Y -> lon, lat
+
+    * src/lib/MarbleWidget.cpp:
+       - Some fix by Jan Becker about screenCoordinates(...)
+       - degX,Y -> lon, lat
+    * src/lib/VectorMap.{h,cpp}:
+       - Speedup by avoiding Quaternion representation for
+         rectangular projection
+       - degX,Y -> lon, lat
+    * src/lib/PlaceMarkLayout.cpp:
+       - Fixing "two few placemarks" bug for rect. projection
+       - Speedup by avoiding Quaternion representation for
+         rect. projection
+       - degX,Y -> lon, lat
+
+2007-12-11  Torsten Rahn  <rahn@kde.org>
+
     Patch set by Jan Becker <tahoma@gmx.de>:
     * src/lib/MeasureTool.cpp:
       Bugfix to make Measuretool mostly work in 

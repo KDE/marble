@@ -415,11 +415,11 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
                                                ViewParams * viewParams )
 {
     MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) index.model();
-    Quaternion qpos = ( placemarkModel->coordinateData( index ) ).quaternion();
-//    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
 
     if( viewParams->m_projection == Spherical ) {
 
+        Quaternion qpos = ( placemarkModel->coordinateData( index ) ).quaternion();
+        //    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
         qpos.rotateAroundAxis( inversePlanetAxis );
 
         // Skip placemarks at the other side of the earth.
@@ -441,35 +441,32 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
 
     if( viewParams->m_projection == Equirectangular ) {
 
-            double degX;
-            double degY;
+            double lon, lat;
             double xyFactor = 2 * viewParams->m_radius / M_PI;
 
             double centerLon;
             double centerLat;
 
             // Let (x, y) be the position on the screen of the placemark..
-            qpos.getSpherical( degX, degY );
+            placemarkModel->coordinateData( index ).geoCoordinates( lon, lat );
+
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            x = (int)(imgwidth  / 2 + xyFactor * (degX + centerLon));
-            y = (int)(imgheight / 2 + xyFactor * (degY + centerLat));
+            x = (int)(imgwidth  / 2 + xyFactor * (lon + centerLon));
+            y = (int)(imgheight / 2 + xyFactor * (lat + centerLat));
 
             // Skip placemarks that are outside the screen area
             //
-            // FIXME: I have the feeling that this is wrong, because there
-            //        are always insanely few placemarks on the flat map 
-            //        compared to the globe.
-            if ( ( ( x < 0 || x >= imgwidth )
-                   // FIXME: Carlos: check this:
-                   && x - 4 * viewParams->m_radius < 0
-                   && x + 4 * viewParams->m_radius >= imgwidth )
-                   || y < 0 || y >= imgheight )
+            if ( (y >= 0 && y < imgheight)
+                 && ( (x >= 0 && x < imgwidth) 
+                   || (x - 4 * viewParams->m_radius >= 0 && x - 4 * viewParams->m_radius < imgwidth)
+                   || (x + 4 * viewParams->m_radius >= 0 && x + 4 * viewParams->m_radius < imgwidth) ) 
+               )
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
     }
 
     return true;

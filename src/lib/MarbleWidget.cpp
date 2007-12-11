@@ -722,21 +722,33 @@ int MarbleWidget::northPoleZ()
 bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
-    Quaternion  qpos       = GeoDataPoint( lon, lat ).quaternion();
-    Quaternion  invRotAxis = d->m_viewParams.m_planetAxis.inverse();
-
-    qpos.rotateAroundAxis(invRotAxis);
-
-    x = (int)(  d->m_viewParams.m_radius * qpos.v[Q_X] );
-    y = (int)( -d->m_viewParams.m_radius * qpos.v[Q_Y] );
-
-    if ( qpos.v[Q_Z] >= 0.0 )
-        return true;
-    else
-        return false;
+     switch( d->m_viewParams.m_projection ) {
+     case Spherical:
+     {
+         Quaternion p(lon * DEG2RAD, -lat * DEG2RAD);
+         p.rotateAroundAxis(d->m_viewParams.m_planetAxis.inverse());
+ 
+         x = (int)( width() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
+         y = (int)( height() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_Y] );
+ 
+         return p.v[Q_Z] > 0;
+     }
+ 
+     case Equirectangular:
+         double centerLat =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
+         if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+         double centerLon =  d->m_viewParams.m_planetAxis.yaw() + M_PI;
+         if ( centerLon > M_PI ) centerLon -= 2*M_PI;
+         double xyFactor = 2*d->m_viewParams.m_radius / M_PI;
+ 
+         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * xyFactor );
+         y = (int)( height() / 2 + ( -lat * DEG2RAD + centerLat ) * xyFactor );
+ 
+         return true;
+     }
+ 
+     return false;
 }
-
-
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat,

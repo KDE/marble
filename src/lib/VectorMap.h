@@ -87,8 +87,8 @@ class VectorMap : public ScreenPolygon::Vector
     Quaternion m_planetAxis;
     int m_lastSign;
     int m_offset;
-    double m_lastX;
-    double m_lastY;
+    double m_lastLon;
+    double m_lastLat;
 
     //	int m_debugNodeCount;
 
