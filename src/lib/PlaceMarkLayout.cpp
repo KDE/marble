@@ -195,13 +195,11 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
      */
 
     const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
-    MarblePlacemarkModel* selectionPlacemarkModel = (MarblePlacemarkModel*) selectionModel;
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-        if ( !locatedOnScreen ( index, x, y, imgwidth, imgheight, 
-                                inversePlanetAxis, viewParams ) )
+        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, inversePlanetAxis, viewParams ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;
@@ -209,20 +207,19 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
-        QFont labelFont;
         int textWidth = 0;
 
         // Find the corresponding visible place mark
         VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
+
+        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
 
         // Specify font properties
         if ( mark ) {
             textWidth = mark->labelRect().width();
         }
         else {
-            GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
-//            GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
-            labelFont = style->labelStyle()->font();
+            QFont labelFont = style->labelStyle()->font();
             labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
 
             textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() )
@@ -235,7 +232,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlaceMark here.
 
-        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+        QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
         if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
@@ -254,8 +251,6 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
-        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QPointF hotSpot = style->iconStyle()->hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
@@ -284,7 +279,6 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                              && firstIndex.data( MarblePlacemarkModel::GeoTypeRole ).toChar().isNull() ) ) 
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
-    const MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) model;
 
     for ( int i = 0; i < model->rowCount(); ++i )
     {
@@ -303,8 +297,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             }
         }
 
-        if ( !locatedOnScreen ( index, x, y, imgwidth, imgheight, 
-                                inversePlanetAxis, viewParams ) )
+        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, inversePlanetAxis, viewParams ) )
         {
 //           qDebug("Deleting"); 
             delete m_visiblePlaceMarks.take( index );
@@ -340,22 +333,18 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
-        QFont labelFont;
         int textWidth = 0;
 
         // Find the corresponding visible place mark
         VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
-        GeoDataStyle* style = 0;
+        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
 
         // Specify font properties
         if ( mark ) {
             textWidth = mark->labelRect().width();
         }
         else {
-            style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
-//            style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
-            labelFont = style->labelStyle()->font();
-
+            QFont labelFont = style->labelStyle()->font();
             textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() ) );
         }
 
@@ -365,7 +354,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
          // Find out whether the area around the placemark is covered already.
         // If there's not enough space free don't add a VisiblePlaceMark here.
 
-        QRect labelRect = roomForLabel( index, currentsec, x, y, textWidth );
+        QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
         if ( labelRect.isNull() ) continue;
 
         // Make sure not to draw more placemarks on the screen than 
@@ -385,9 +374,6 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         }
 
         // Finally save the label position on the map.
-        if ( style == 0 )
-            style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
-//            style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
         QPointF hotSpot = style->iconStyle()->hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
@@ -408,17 +394,15 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, viewParams );
 }
 
-inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &index, 
+inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint, 
                                                int &x, int &y, 
                                                const int &imgwidth, const int &imgheight,
                                                const Quaternion &inversePlanetAxis,
                                                ViewParams * viewParams )
 {
-    MarblePlacemarkModel* placemarkModel = (MarblePlacemarkModel*) index.model();
-
     if( viewParams->m_projection == Spherical ) {
 
-        Quaternion qpos = ( placemarkModel->coordinateData( index ) ).quaternion();
+        Quaternion qpos = ( geopoint ).quaternion();
         //    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
         qpos.rotateAroundAxis( inversePlanetAxis );
 
@@ -448,7 +432,7 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
             double centerLat;
 
             // Let (x, y) be the position on the screen of the placemark..
-            placemarkModel->coordinateData( index ).geoCoordinates( lon, lat );
+            geopoint.geoCoordinates( lon, lat );
 
             viewParams->centerCoordinates( centerLon, centerLat );
 
@@ -472,15 +456,12 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const QPersistentModelIndex &inde
     return true;
 }
 
-QRect PlaceMarkLayout::roomForLabel( const QPersistentModelIndex& index,
+QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                                       const QVector<VisiblePlaceMark*> &currentsec,
                                       const int x, const int y,
                                       const int textWidth )
 {
     bool  isRoom      = false;
-
-//    GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
-    GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
 
     int symbolwidth = style->iconStyle()->icon().width();
 
