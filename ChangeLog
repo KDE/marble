@@ -1,5 +1,9 @@
 2007-12-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Bugfix: 
+	* src/lib/geodata/data/GeoDataIconStyle.cpp (setHotSpot): use (x, y)
+	instead of (x, x):
+	
 	Mini fixes
 	* src/lib/MarbleWidget.h: Fix apidox typo.
 	* src/lib/geodata/data/GeoDataIconStyle.h: Add ingwa as copyright holder

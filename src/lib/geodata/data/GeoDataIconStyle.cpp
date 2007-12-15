@@ -14,15 +14,15 @@
 #include <QtCore/QDebug>
 
 GeoDataIconStyle::GeoDataIconStyle()
-  : m_icon( QPixmap() ),
-    m_scale( 1.0 ),
+  : m_scale( 1.0 ),
+    m_icon( QPixmap() ),
     m_hotSpot( new GeoDataHotSpot() )
 {
 }
 
 GeoDataIconStyle::GeoDataIconStyle( const QPixmap& icon, const QPointF &hotSpot )
-  : m_icon( icon ),
-    m_scale( 1.0 ),
+  : m_scale( 1.0 ),
+    m_icon( icon ),
     m_hotSpot( new GeoDataHotSpot( hotSpot ) )
 {
 }
@@ -42,9 +42,11 @@ QPixmap GeoDataIconStyle::icon() const
     return m_icon;
 }
 
-void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits )
+void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot, 
+                                   GeoDataHotSpot::Units xunits,
+                                   GeoDataHotSpot::Units yunits )
 {
-    m_hotSpot->setHotSpot( hotSpot, xunits, xunits );
+    m_hotSpot->setHotSpot( hotSpot, xunits, uunits );
 }
 
 const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upper left
