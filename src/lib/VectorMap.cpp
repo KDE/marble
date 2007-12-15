@@ -162,12 +162,13 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
     ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int  detail = getDetailLevel();
-
+//    qDebug() << "==============";
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
+//        if ( (*itPolyLine)->getDateLine() == true ) (*itPolyLine)->displayBoundary();
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
         for ( int i = 0; i < 4; ++i ) {
@@ -318,42 +319,53 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                 firstPoint = false;
                 m_lastSign = currentSign;
             }
-            //correction of the Dateline
-            if( fabs(lat) == M_PI/2 )
-                x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
+
+//          This looked wrong to me or at least needs some very good explanation (tackat):
+//            if( fabs(lat) == M_PI/2 )
+//                x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
 
             m_currentPoint = QPointF( x, y );
-            if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
-                //If the "jump" ocurrs in the Anctartica's latitudes
 
+            //correction of the Dateline
+            if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
+
+                // x coordinate on the screen for the points on the dateline on both
+                // sides of the flat map.
+                double lastXAtDateLine = m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset;
+                double xAtDateLine = m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset;
+                double lastYAtDateLine = m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor;
+                double yAtSouthPole = m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 );
+
+                //If the "jump" ocurrs in the Anctartica's latitudes
                 if ( lat > M_PI / 3 ) {
-                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, y );
-                       m_polygon<<QPointF( m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset
-                            , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ) );
-                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset
-                            , m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 ));
-                       m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, y);
+                       // FIXME: This should actually need to get investigated in ClipPainter.
+                       // For now though we just help ClipPainter to get the clipping right.
+                       if ( lastXAtDateLine > m_imgwidth - 1 ) lastXAtDateLine = m_imgwidth - 1;
+                       if ( lastXAtDateLine < 0 ) lastXAtDateLine = 0; 
+                       if ( xAtDateLine > m_imgwidth - 1 ) xAtDateLine = m_imgwidth - 1;
+                       if ( xAtDateLine < 0 ) xAtDateLine = 0; 
+
+                       m_polygon << QPointF( lastXAtDateLine, y ); 
+                       m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );
+                       m_polygon << QPointF( xAtDateLine,     yAtSouthPole );
+                       m_polygon << QPointF( xAtDateLine,     y );
                 }
                 else {
                     if( !CrossedDateline ) {
-                        m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor);
-                        otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor );
+                        m_polygon << QPointF( lastXAtDateLine, lastYAtDateLine );
+                        otherPolygon << QPointF( xAtDateLine,  y );
                     }
                     else {
-                        m_polygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor );
-                        otherPolygon<<QPointF(m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset, 
-                                            m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor);
+                        m_polygon    << QPointF( xAtDateLine,     y );
+                        otherPolygon << QPointF( lastXAtDateLine, lastYAtDateLine);
                     }
+                    CrossedDateline = !CrossedDateline;
                 }
-                CrossedDateline = !CrossedDateline;
             }
             if ( !CrossedDateline )
-                m_polygon<<m_currentPoint;
+                m_polygon << m_currentPoint;
             else
-                otherPolygon<<m_currentPoint;
+                otherPolygon << m_currentPoint;
 
             m_lastLon = lon;
             m_lastLat = lat;
@@ -450,17 +462,11 @@ void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection cu
         else
             painter.drawPolyline( *itPolygon );
     }
-
-    // painter.drawEllipse(imgrx-m_radius,imgry-m_radius,2*m_radius,2*m_radius+1);
 }
 
 
 void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
 {
-    // bool clip = (m_radius > imgrx || m_radius > imgry) ? true : false;
-
-    // ClipPainter painter(origimg, clip);
-    // QPainter painter(origimg);
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter->setPen( m_pen );
@@ -477,8 +483,6 @@ void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
         else
             painter->drawPolyline( *itPolygon );
     }
-
-    // painter.drawEllipse(imgrx-m_radius,imgry-m_radius,2*m_radius,2*m_radius+1);
 }
 
 

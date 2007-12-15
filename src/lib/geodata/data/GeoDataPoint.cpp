@@ -19,28 +19,10 @@
 #include "global.h"
 
 
-GeoDataPoint::GeoDataPoint(int _detail, int _lon, int _lat)
-  : m_lon( (double)( _lon ) / RAD2INT * 2 ),
-    m_lat( (double)( _lat ) / RAD2INT * 2 ),
-    m_altitude( 0.0 ),
-    m_detail(_detail )
+GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint::Unit unit, int _detail )
+  : m_altitude( _alt ),
+    m_detail( _detail )
 {
-    m_q = Quaternion( (double)(_lon) / RAD2INT * 2,
-		      (double)(_lat) / RAD2INT * 2 );
-}
-
-GeoDataPoint::GeoDataPoint(int _lon, int _lat)
-  : m_lon( (double)(_lon) / RAD2INT * 2 ),
-    m_lat( (double)(_lat) / RAD2INT * 2 ),
-    m_altitude(0.0)
-{
-    m_q = Quaternion( (double)(_lon) / RAD2INT * 2,
-		      (double)(_lat) / RAD2INT * 2 );
-}
-
-GeoDataPoint::GeoDataPoint( double _lon, double _lat, double alt, GeoDataPoint::Unit unit)
-{
-    m_altitude = alt;
 
     switch(unit){
     case( GeoDataPoint::Radian ):

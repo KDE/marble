@@ -106,28 +106,28 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
 
     if ( role == Qt::DisplayRole ) {
         return d->m_placeMarkContainer.at( index.row() )->name();
-    } else if ( role == CoordinateRole ) {
-        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->coordinate() );
-    } else if ( role == StyleRole ) {
-        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style() );
     } else if ( role == Qt::DecorationRole ) {
           return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style()->iconStyle()->icon() );
-    } else if ( role == GeoTypeRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->role();
     } else if ( role == PopularityIndexRole ) {
         return d->m_placeMarkContainer.at( index.row() )->popularityIndex();
+    } else if ( role == VisualCategoryRole ) {
+        return d->m_placeMarkContainer.at( index.row() )->visualCategory();
     } else if ( role == AreaRole ) {
         return d->m_placeMarkContainer.at( index.row() )->area();
     } else if ( role == PopulationRole ) {
         return d->m_placeMarkContainer.at( index.row() )->population();
     } else if ( role == CountryCodeRole ) {
         return d->m_placeMarkContainer.at( index.row() )->countryCode();
-    } else if ( role == VisualCategoryRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->visualCategory();
     } else if ( role == PopularityRole ) {
         return d->m_placeMarkContainer.at( index.row() )->popularity();
     } else if ( role == DescriptionRole ) {
         return d->m_placeMarkContainer.at( index.row() )->description();
+    } else if ( role == GeoTypeRole ) {
+        return d->m_placeMarkContainer.at( index.row() )->role();
+    } else if ( role == CoordinateRole ) {
+        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->coordinate() );
+    } else if ( role == StyleRole ) {
+        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style() );
     } else
         return QVariant();
 }

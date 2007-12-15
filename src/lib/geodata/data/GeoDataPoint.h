@@ -44,7 +44,7 @@ class GeoDataPoint {
     enum Notation{Decimal, DMS};
 
     GeoDataPoint(){}
-    GeoDataPoint(int _lon, int _lat);
+
     /**
      * @brief create a geopoint from longitude and latitude
      * @param _lon longitude
@@ -53,9 +53,7 @@ class GeoDataPoint {
      * (default for Radian: north pole at -pi/2, southpole at pi/2)
      */
     GeoDataPoint(double _lon, double _lat, double alt = 0,
-             GeoDataPoint::Unit _unit = GeoDataPoint::Radian);
-
-    GeoDataPoint(int _detail, int _lon, int _lat);
+             GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0);
 
     ~GeoDataPoint(){}
 

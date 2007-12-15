@@ -46,17 +46,17 @@ class GeoPolygon : public GeoDataPoint::Vector
 	Quaternion  q;
 	double      lon;
 	double      lat;
-
-	m_boundary.at(0).geoCoordinates(lon, lat);
+	m_boundary.at(0).geoCoordinates(lon, lat, GeoDataPoint::Degree);
 	qDebug() << "Boundary:" << lon << ", " << lat << " Size: " << m_boundary.size();
-	m_boundary.at(1).geoCoordinates(lon, lat);
+	m_boundary.at(1).geoCoordinates(lon, lat, GeoDataPoint::Degree);
 	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(2).geoCoordinates(lon, lat);
+	m_boundary.at(2).geoCoordinates(lon, lat, GeoDataPoint::Degree);
 	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(3).geoCoordinates(lon, lat);
+	m_boundary.at(3).geoCoordinates(lon, lat, GeoDataPoint::Degree);
 	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(4).geoCoordinates(lon, lat);
+	m_boundary.at(4).geoCoordinates(lon, lat, GeoDataPoint::Degree);
 	qDebug() << "Boundary:" << lon << ", " << lat;
+    qDebug() << "-----";
 	// qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
     }
 
