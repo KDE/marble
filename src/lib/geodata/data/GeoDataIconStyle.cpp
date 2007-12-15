@@ -46,7 +46,7 @@ void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot,
                                    GeoDataHotSpot::Units xunits,
                                    GeoDataHotSpot::Units yunits )
 {
-    m_hotSpot->setHotSpot( hotSpot, xunits, uunits );
+    m_hotSpot->setHotSpot( hotSpot, xunits, yunits );
 }
 
 const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upper left
