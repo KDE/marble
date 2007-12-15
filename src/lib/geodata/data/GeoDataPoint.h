@@ -78,7 +78,8 @@ class GeoDataPoint {
 
  private:
     Quaternion  m_q;
-    double      m_lon, m_lat;
+    double      m_lon;
+    double      m_lat;
     double      m_altitude;     // in meters above sea level
     int         m_detail;
 };

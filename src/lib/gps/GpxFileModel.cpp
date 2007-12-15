@@ -128,6 +128,8 @@ QModelIndex GpxFileModel::index ( int row, int column,
 
 QModelIndex GpxFileModel::parent ( const QModelIndex & index ) const
 {
+    Q_UNUSED( index );
+
     return QModelIndex();
 }
 
@@ -142,6 +144,8 @@ int GpxFileModel::rowCount ( const QModelIndex & parent ) const
 
 int GpxFileModel::columnCount ( const QModelIndex & parent ) const 
 {
+    Q_UNUSED( parent );
+
     return 1;
 }
 

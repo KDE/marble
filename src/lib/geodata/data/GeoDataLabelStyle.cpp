@@ -16,9 +16,9 @@ GeoDataLabelStyle::GeoDataLabelStyle()
 }
 
 GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
-  : m_font( font ),
+  : m_scale( 1.0 ),
     m_alignment( GeoDataLabelStyle::Corner ),
-    m_scale( 1.0 )
+    m_font( font )
 {
     setColor( color );
 }

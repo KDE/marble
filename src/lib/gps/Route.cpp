@@ -53,6 +53,10 @@ void Route::draw( ClipPainter *painter,
                   const QSize &canvasSize, ViewParams *viewParams,
                   BoundingBox box )
 {
+    Q_UNUSED( painter );
+    Q_UNUSED( canvasSize );
+    Q_UNUSED( viewParams );
+    Q_UNUSED( box );
 }
 
 void Route::draw( ClipPainter*, const QPoint& )

@@ -67,7 +67,8 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * @brief implementation of AbstractLayerData::draw
      * @see AbstractLayerData::draw
      */
-    virtual void draw( ClipPainter *painter, const QSize &canvasSize, 
+    virtual void draw( ClipPainter *painter,
+                       const QSize &canvasSize, 
                        ViewParams *viewParams );
     virtual void printToStream( QTextStream & ) const;
     void printBodyToStream( QTextStream & ) const;

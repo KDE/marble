@@ -171,14 +171,13 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                                         Quaternion planetAxis,
                                         bool firstTime )
 {
-    if ( m_styleResetRequested == true )
-    {
+    if ( m_styleResetRequested == true ) {
         m_styleResetRequested = false;
         styleReset();
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
     }
-    const int secnumber = imgheight / m_maxLabelHeight + 1;
-    Quaternion inversePlanetAxis = planetAxis.inverse();
+    const int   secnumber         = imgheight / m_maxLabelHeight + 1;
+    Quaternion  inversePlanetAxis = planetAxis.inverse();
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)

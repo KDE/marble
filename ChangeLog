@@ -1,5 +1,33 @@
 2007-12-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix unnecessary warnings:
+	* MarbleWidget.cpp,
+	TileCreator.cpp,
+	AbstractLayer/AbstractLayerData.h,
+	AbstractLayer/AbstractLayerContainer.cpp,
+	AbstractLayer/AbstractLayerData.cpp,
+	TileLoader.cpp,
+	PlaceMarkLayout.cpp,
+	XmlHandler.cpp,
+	PlaceMarkManager.cpp,
+	FileViewModel.cpp,
+	TextureColorizer.cpp,
+	geodata/data/GeoDataIconStyle.h,
+	geodata/data/GeoDataPoint.cpp,
+	geodata/data/GeoDataFeature.cpp,
+	geodata/data/GeoDataPoint.h,
+	geodata/data/GeoDataLabelStyle.cpp,
+	gps/Route.cpp,
+	gps/RouteContainer.cpp,
+	gps/Track.cpp,
+	gps/RouteContainer.h,
+	gps/GpsTracking.cpp,
+	gps/TrackContainer.h,
+	gps/WaypointContainer.cpp,
+	gps/Waypoint.h,
+	gps/GpxFileModel.cpp,
+	gps/WaypointContainer.h:  Fix most warnings.
+	
 	Bugfix: 
 	* src/lib/geodata/data/GeoDataIconStyle.cpp (setHotSpot): use (x, y)
 	instead of (x, x):

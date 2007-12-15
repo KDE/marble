@@ -30,7 +30,8 @@ class RouteContainer : public virtual AbstractLayerContainer
                         Quaternion invRotAxis );*/
     
      virtual void draw( ClipPainter *painter, 
-                        const QSize &canvasSize, ViewParams *viewParams,
+                        const QSize &canvasSize,
+                        ViewParams *viewParams,
                         BoundingBox box );
 };
 

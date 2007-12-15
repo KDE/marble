@@ -45,8 +45,11 @@ AbstractLayerContainer::~AbstractLayerContainer()
 void AbstractLayerContainer::draw ( ClipPainter *painter, 
                                     const QPoint &point )
 {
-    qDebug() << "AbstractLayerContainter::draw( ClipPainter, QPoint)";
-    //this does not apply to An AbstractLayerContainer
+    // This does not apply to An AbstractLayerContainer.
+    Q_UNUSED( painter );
+    Q_UNUSED( point );
+
+    //qDebug() << "AbstractLayerContainter::draw( ClipPainter, QPoint)";
 }
 
 void AbstractLayerContainer::draw(ClipPainter *painter, 

@@ -15,10 +15,9 @@
 
 
 Track::Track() : 
-                 AbstractLayerContainer(),
-                 AbstractLayerData(0,0),
-                 GpsElement()
-                  
+    AbstractLayerContainer(),
+    AbstractLayerData(0,0),
+    GpsElement()
 {
 }
 
@@ -26,9 +25,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
                  ViewParams *viewParams )
 {
     const_iterator it;
-    for( it = this->begin(); it < this->constEnd();
-         it++ )
-    {
+    for ( it = this->begin(); it < this->constEnd(); it++ ) {
         ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }
@@ -36,8 +33,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
 void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
                  ViewParams *viewParams, BoundingBox box)
 {
-    
-    /*
+#if 0
     qDebug()<<"test er";
     if ( box.isValid() ) {
         if ( box.intersects( *m_boundingBox ) ) {
@@ -47,7 +43,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
         else {
             qDebug() << "not Drawing Track";
             qDebug() << box.string();
-             qDebug() << m_boundingBox->string();
+            qDebug() << m_boundingBox->string();
             return;
         }
     }
@@ -55,7 +51,8 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
         qDebug()<<"implementing but not using";
         //bouding box doesn't work so draw anyway
         draw( painter, canvasSize, radius, invRotAxis );
-    }*/
+    }
+#endif
     const_iterator it;
     for( it = this->begin(); it < this->constEnd();
          it++ )

@@ -51,15 +51,25 @@ void AbstractLayerData::draw(ClipPainter *painter,
                              const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-    qDebug() <<"in AbstractLayerData::draw() without bounding box";
+    Q_UNUSED( painter );
+    Q_UNUSED( canvasSize );
+    Q_UNUSED( viewParams );
+
+    //qDebug() <<"in AbstractLayerData::draw() without bounding box";
 }
 
 void AbstractLayerData::draw( ClipPainter *painter, 
-                  const QSize &canvasSize, ViewParams *viewParams,
-                  BoundingBox box )
+                              const QSize &canvasSize,
+                              ViewParams *viewParams,
+                              BoundingBox box )
 {
-    //does not apply to abstractLayerData
-    qDebug() <<"in AbstractLayerData::draw() with bounding box";
+    // Does not apply to abstractLayerData
+    Q_UNUSED( painter );
+    Q_UNUSED( canvasSize );
+    Q_UNUSED( viewParams );
+    Q_UNUSED( box );
+
+    //qDebug() <<"in AbstractLayerData::draw() with bounding box";
 }
 
 bool AbstractLayerData::visible() const

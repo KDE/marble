@@ -31,7 +31,8 @@ class WaypointContainer : public virtual AbstractLayerContainer
     
     
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, ViewParams *viewParams,
+                       const QSize &canvasSize,
+                       ViewParams *viewParams,
                        BoundingBox box );
 
  protected:

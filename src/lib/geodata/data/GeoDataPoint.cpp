@@ -20,10 +20,10 @@
 
 
 GeoDataPoint::GeoDataPoint(int _detail, int _lon, int _lat)
-  : m_detail(_detail ),
-    m_lon( (double)(_lon) / RAD2INT * 2 ),
-    m_lat( (double)(_lat) / RAD2INT * 2 ),
-    m_altitude(0.0)
+  : m_lon( (double)( _lon ) / RAD2INT * 2 ),
+    m_lat( (double)( _lat ) / RAD2INT * 2 ),
+    m_altitude( 0.0 ),
+    m_detail(_detail )
 {
     m_q = Quaternion( (double)(_lon) / RAD2INT * 2,
 		      (double)(_lat) / RAD2INT * 2 );

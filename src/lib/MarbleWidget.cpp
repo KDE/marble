@@ -197,8 +197,11 @@ void MarbleWidget::construct(QWidget *parent)
     translator.load(QString("marblewidget_") + locale);
     QCoreApplication::installTranslator(&translator);
 
-    // AutoSettings
+#if 0 // Reeneable when the autosettings are actually used
+
+   // AutoSettings
     AutoSettings* autoSettings = new AutoSettings( this );
+#endif
 }
 
 MarbleModel *MarbleWidget::model() const

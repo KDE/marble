@@ -33,7 +33,8 @@ class TrackContainer : public AbstractLayerContainer
                        ViewParams *viewParams );
     
     virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, ViewParams *viewParams,
+                       const QSize &canvasSize,
+                       ViewParams *viewParams,
                        BoundingBox box );
 };
 

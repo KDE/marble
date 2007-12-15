@@ -26,6 +26,8 @@ FileViewModel::~FileViewModel()
 
 int FileViewModel::rowCount( const QModelIndex & parent ) const
 {
+    Q_UNUSED( parent );
+
     return m_itemList.count();
 }
 
@@ -55,6 +57,8 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
 
 Qt::ItemFlags FileViewModel::flags( const QModelIndex & index ) const
 {
+    Q_UNUSED( index );
+
     return Qt::ItemFlags( Qt::ItemIsUserCheckable |
                           Qt::ItemIsEnabled |
                           Qt::ItemIsSelectable );

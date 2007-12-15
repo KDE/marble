@@ -305,6 +305,7 @@ int XmlHandler::cityPopIdx( qint64 population )
 
 int XmlHandler::areaPopIdx( double area )
 {
+    Q_UNUSED( area );
     int popidx = 15;
 /*
     if ( population < 2500 )        popidx=1;

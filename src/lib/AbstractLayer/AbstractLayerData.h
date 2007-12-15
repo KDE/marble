@@ -84,7 +84,8 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      *        that does not apply to a single point
      */
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, ViewParams *viewParams,
+                      const QSize &canvasSize,
+                      ViewParams *viewParams,
                       BoundingBox box);
 
     /**

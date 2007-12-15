@@ -63,23 +63,24 @@ GpsTracking::~GpsTracking()
 void GpsTracking::construct( const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-    double const radius = viewParams->m_radius;
+    //double const radius = viewParams->m_radius;
+
 #ifdef HAVE_LIBGPS
     if( !m_gpsd ) {
         m_currentDraw.clear();
         return;
     }
 #endif
-    QPointF position;
-    QPointF previousPosition;
+    QPointF  position;
+    QPointF  previousPosition;
 
     bool draw = false;
 
-    draw = m_gpsCurrentPosition -> getPixelPos( canvasSize,
-            viewParams, &position );
+    draw = m_gpsCurrentPosition -> getPixelPos( canvasSize, viewParams,
+                                                &position );
 
-    draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, 
-            viewParams, &previousPosition );
+    draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, viewParams,
+                                                 &previousPosition );
 
     if ( !draw ) {
         m_currentDraw.clear();
@@ -87,36 +88,38 @@ void GpsTracking::construct( const QSize &canvasSize,
     }
 
     double distance = sqrt( AbstractLayer::distance( position,
-                                                  previousPosition) );
+                                                     previousPosition) );
     if (distance == 0) {
         return;
     }
 
-    QPointF unitVector = ( position - previousPosition )
-                                    / distance;
+    QPointF unitVector = ( ( position - previousPosition )
+                           / distance );
     // The normal of the unit vector between first and second
-    QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
+    QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
 
     m_previousDraw = m_currentDraw;
 
     m_currentDraw.clear();
     m_currentDraw << position
-                << ( position - ( unitVector * 9 ) 
-                              + ( unitVector2 * 9 ) )
-                << ( position + ( unitVector * 19.0 ) )
-                << ( position - ( unitVector * 9 ) 
-                              - ( unitVector2 * 9 ) );
+                  << ( position - ( unitVector * 9 ) 
+                                + ( unitVector2 * 9 ) )
+                  << ( position + ( unitVector * 19.0 ) )
+                  << ( position - ( unitVector * 9 ) 
+                                - ( unitVector2 * 9 ) );
 }
+
+
 QRegion GpsTracking::genRegion( const QSize &canvasSize,
                                 ViewParams *viewParams )
 {
         construct( canvasSize, viewParams );
 
-        QRect temp1(m_currentDraw.boundingRect().toRect());
-        QRect temp2(m_previousDraw.boundingRect().toRect());
+        QRect temp1( m_currentDraw.boundingRect().toRect() );
+        QRect temp2( m_previousDraw.boundingRect().toRect() );
 
-        temp1.adjust( -5, -5, 10, 10);
-        temp2.adjust( -5, -5, 10, 10);
+        temp1.adjust( -5, -5, 10, 10 );
+        temp2.adjust( -5, -5, 10, 10 );
 
         return QRegion(temp1).united( QRegion(temp2) );
 }

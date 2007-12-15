@@ -89,6 +89,8 @@ KAboutData *MarblePart::createAboutData()
 
 bool MarblePart::openUrl( const KUrl &url )
 {
+    Q_UNUSED( url );
+
     return true;
 }
 

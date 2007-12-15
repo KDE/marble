@@ -325,7 +325,8 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
 
 void TileLoader::reloadTile( QString relativeUrlString, QString _id )
 {
-//    qDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
+    Q_UNUSED( relativeUrlString );
+    // qDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
 
     const int id = _id.toInt();
     if ( m_tileHash.contains( id ) ) {

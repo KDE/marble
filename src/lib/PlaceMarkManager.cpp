@@ -234,7 +234,6 @@ void PlaceMarkManager::saveFile( const QString& filename,
     double  lon;
     double  lat;
     double  alt;
-    double  area;
 
     PlaceMarkContainer::const_iterator  it;
 
