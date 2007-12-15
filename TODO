@@ -77,7 +77,7 @@ Finish existing features
     - Show 'You are here' using the GPS                                 ----
  * Creating tiles during build instead of first run			TACK
  * Fix designer plugin dirs						TACK
- * Fix image downloading for Wikipedia                                  TACK
+ * Fix image downloading for Wikipedia                                  DONE
 
 Documentation:
  * Programmers manual for using Marble components in other applications	----
