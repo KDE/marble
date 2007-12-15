@@ -139,17 +139,6 @@ The bugs
   are more important things to fix though given that the
   implementation of this feature would pose quite a challenge.
 
-
-0013 FEATURE
-
-  GHNS for maps? The ones shipped with marble aren't in any recognized
-  format.
-
-  tackat: I'm bugging Josef since months already to get KNS (The GHNS
-  successor) finished. Until then I can't do much about it although
-  I'd really love to have this feature rather yesterday than tomorrow.
-
-
 0014 ENHANCEMENT
  
   Fast mouse panning is ignored.
