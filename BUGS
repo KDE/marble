@@ -52,7 +52,7 @@ The bugs
 
   tackat: That's indeed an oversight on my part. It was originally
   mentioned in the Legend what the font properties (bold, underlined,
-  etc.) were meant to represent.  in the city data sheet:
+  etc.) were meant to represent.
 
 
 0004 BUG
@@ -138,6 +138,7 @@ The bugs
   tackat: That would be a cool feature indeed. For now I think there
   are more important things to fix though given that the
   implementation of this feature would pose quite a challenge.
+
 
 0014 ENHANCEMENT
  
