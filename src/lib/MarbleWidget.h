@@ -73,15 +73,15 @@ class FileViewModel;
  * <b>placemarks</b> which can show points of interest, such as
  * cities, mountain tops or the poles.
  *
- * Besides navigating with the mouse, you can also use it to get
- * information about items on the map. You can either click on a
- * GeoDataPlaceMark with the left mouse button or with the right mouse button
+ * In addition to navigating with the mouse, you can also use it to
+ * get information about items on the map. You can either click on a
+ * placemark with the left mouse button or with the right mouse button
  * anywhere on the map.
  *
- * The left mouse button opens up a menu with all the PlaceMarks
+ * The left mouse button opens up a menu with all the placemarks
  * within a certain distance from the mouse pointer. When you choose
  * one item from the menu, Marble will open up a dialog window with
- * some information about the GeoDataPlaceMark and also try to connect to
+ * some information about the placemark and also try to connect to
  * Wikipedia to retrieve an article about it. If there is such an
  * article, you will get a mini-browser window with the article in a tab.
  *
@@ -289,7 +289,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     double  moveStep();
 
     /**
-     * @brief  Add a GeoDataPlaceMark file to the model.
+     * @brief  Add a GeoDataPlacemark file to the model.
      * @param  filename  the filename of the file containing the PlaceMarks.
      */
     void addPlaceMarkFile( const QString &filename );

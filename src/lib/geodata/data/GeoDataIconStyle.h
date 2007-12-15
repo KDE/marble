@@ -6,13 +6,16 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2007      Inge Wallin   <ingwa@kde.org>
 //
 
 
 #ifndef GEODATAICONSTYLE_H
 #define GEODATAICONSTYLE_H
 
+
 #include <QtGui/QPixmap>
+
 #include "GeoDataColorStyle.h"
 #include "GeoDataHotSpot.h"
 
