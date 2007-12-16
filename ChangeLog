@@ -1,5 +1,11 @@
 2007-12-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix more warnings
+	* src/lib/gps/Track.cpp,
+	src/lib/gps/Gpslayer.h,
+	src/lib/geodata/data/GeoDataFeature.cpp,
+	src/lib/GridMap.cpp: Fix warnings
+	
 	Fix unnecessary warnings:
 	* MarbleWidget.cpp,
 	TileCreator.cpp,

@@ -41,8 +41,9 @@ class GpsLayer : public AbstractLayer
     explicit GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
-                            const QSize &canvasSize, ViewParams *viewParams,
-                            BoundingBox box );
+                             const QSize &canvasSize,
+                             ViewParams *viewParams,
+                             BoundingBox box );
     virtual void paintCurrentPosition( ClipPainter *painter, 
                                        const QSize &canvasSize, 
                                        ViewParams *viewParams );

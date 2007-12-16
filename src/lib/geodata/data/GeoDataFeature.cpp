@@ -27,9 +27,9 @@ GeoDataStyle* GeoDataFeature::s_defaultStyle[];
 
 GeoDataFeature::GeoDataFeature() :
     m_visualCategory( Unknown ),
-    m_visible( true ),
     m_popularity( 0 ),
     m_popularityIndex( 0 ),
+    m_visible( true ),
     m_role(' '),
     m_style( 0 )
 {

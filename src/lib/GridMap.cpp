@@ -207,8 +207,8 @@ void GridMap::createCircle( double val, SphereDim dim, Projection currentProject
 
 void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
 {
-    // cutoff: the amount of each quarter circle that is cut off at
-    // the pole in radians
+    // cutOff: the amount of each quarter circle that is cut off at
+    //         the pole in radians
 
     const double cutCoeff   = 1.0 - cutOff / PIHALF;
 
@@ -296,6 +296,9 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
 
 void GridMap::rectangularCreateCircle( double val, SphereDim dim, double cutOff )
 {
+    // Only used in spherical projection.
+    Q_UNUSED( cutOff );
+
     // Calculate translation of center point
     double centerLat =  m_planetAxis.pitch() + M_PI;
     if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 

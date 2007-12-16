@@ -54,9 +54,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
     }
 #endif
     const_iterator it;
-    for( it = this->begin(); it < this->constEnd();
-         it++ )
-    {
+    for( it = this->begin(); it < this->constEnd(); it++ ) {
         ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }
