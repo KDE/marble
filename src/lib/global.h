@@ -36,6 +36,7 @@ const QString NOT_AVAILABLE = QObject::tr("not available");
 // Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;
 
-const double EARTH_RADIUS = 6378.0;
+// Average earth radius in m
+const double EARTH_RADIUS = 6378000.0;
 
 #endif

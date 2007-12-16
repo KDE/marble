@@ -71,7 +71,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_searchTerm = QString();
     d->m_searchTriggered = false;
     // FIXME: Get this from the widget?
-    d->m_minimumzoom = 950;
+    d->m_minimumzoom = 900;
 
     d->uiWidget.setupUi( this );
 

@@ -77,7 +77,7 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
     m_radius        = radius;
     m_scalebarwidth = width - m_leftmargin - m_rightmargin;
 
-    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius);
+    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius * 1000);
 
     calcScaleBar();
 

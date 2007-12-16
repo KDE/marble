@@ -290,7 +290,7 @@
               <string>Use this slider to adjust the zoom level of the map.</string>
              </property>
              <property name="minimum" >
-              <number>1000</number>
+              <number>900</number>
              </property>
              <property name="maximum" >
               <number>2200</number>

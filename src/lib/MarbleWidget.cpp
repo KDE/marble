@@ -1319,7 +1319,7 @@ QString MarbleWidget::distanceString() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
     //
-    double distance = ( EARTH_RADIUS * 400.0
+    double distance = ( EARTH_RADIUS * 0.4
 			/ (double)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 

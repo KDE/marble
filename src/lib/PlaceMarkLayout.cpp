@@ -400,7 +400,8 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
                                                ViewParams * viewParams )
 {
     if( viewParams->m_projection == Spherical ) {
-
+    
+        double absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
         Quaternion qpos = ( geopoint ).quaternion();
         //    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
         qpos.rotateAroundAxis( inversePlanetAxis );
@@ -410,9 +411,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             return false;
         }
 
+        double pixelAltitude = ( viewParams->m_radius )/ EARTH_RADIUS * absoluteAltitude;
         // Let (x, y) be the position on the screen of the placemark..
-        x = (int)(imgwidth  / 2 + viewParams->m_radius * qpos.v[Q_X]);
-        y = (int)(imgheight / 2 + viewParams->m_radius * qpos.v[Q_Y]);
+        x = (int)(imgwidth  / 2 + pixelAltitude * qpos.v[Q_X]);
+        y = (int)(imgheight / 2 + pixelAltitude * qpos.v[Q_Y]);
 
         // Skip placemarks that are outside the screen area
         if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
