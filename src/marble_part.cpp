@@ -332,7 +332,7 @@ void MarblePart::showNewStuffDialog()
     QString newStuffConfig = KStandardDirs::locate ("data", "marble/marble.knsrc");
     kDebug() << "KNS config file:" << newStuffConfig;
 
-    KNS::Engine::Engine engine;
+    KNS::Engine engine;
     bool ret = engine.init(newStuffConfig);
     if(ret)
     {
