@@ -13,6 +13,7 @@
 #include "XmlHandler.h"
 
 #include <cmath>
+#include <QtGlobal>
 
 #include "global.h"
 #include "GeoDataPlacemark.h"
@@ -131,7 +132,7 @@ bool XmlHandler::endElement( const QString&, const QString&,
             {
                 m_hasPopularity = true;
                 m_placemark->setPopularity( altitude * 1000 );
-                m_placemark->setPopularityIndex( cityPopIdx( altitude * 1000 ) );
+                m_placemark->setPopularityIndex( cityPopIdx( qAbs(altitude * 1000) ) );
             }
         }
         else if ( m_placemark->role() == 'K' || m_placemark->role() == 'O' || m_placemark->role() == 'S' )
