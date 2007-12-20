@@ -77,8 +77,8 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->setPen( m_pen );	
-    // painter->setPen(QColor(Qt::white));	
+    painter->setPen( m_pen );
+    // painter->setPen(QColor(Qt::white));
     // painter->drawPolyline(distancePathShadow);
 
     QVector<GeoDataPoint*>::const_iterator  it;
@@ -90,8 +90,8 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 
     double  lon;
     double  lat;
-    double  prevlon = 0.0;
-    double  prevlat = 0.0;
+    double  prevLon = 0.0;
+    double  prevLat = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -104,7 +104,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 // FIXME: This is not needed, shouldn't it be removed?
 //         if ( qpos.v[Q_Z] > 0 ) {
 //             x = (int)( imgrx + radius*qpos.v[Q_X] );
-//             y = (int)( imgry + radius*qpos.v[Q_Y] );	
+//             y = (int)( imgry + radius*qpos.v[Q_Y] );
 // 
 //             measurePoints << QPointF( x, y );
 //             // distancePathShadow << QPointF(x,y+1);
@@ -113,24 +113,24 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            m_totalDistance += acos( sin( prevlat ) * sin( lat )
-                                     + cos( prevlat ) * cos( lat ) * cos( prevlon - lon ) ) * 6371221.0;
+            m_totalDistance += acos( sin( prevLat ) * sin( lat )
+                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
 
             drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Spherical );
         }
 
         prevqpos = qpos;
-        prevlon  = lon; 
-        prevlat  = lat;
+        prevLon  = lon; 
+        prevLat  = lat;
     }
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
 #if 0
       if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
-      painter->setPen( QColor( Qt::red ) );	
+      painter->setPen( QColor( Qt::red ) );
       painter->drawPolyline( measurePoints );
-      // painter->setPen( QColor( Qt::white ) );	
+      // painter->setPen( QColor( Qt::white ) );
       // painter->drawPolyline( distancePathShadow );
       if ( antialiasing == true )
           painter->setRenderHint( QPainter::Antialiasing, false );
@@ -150,7 +150,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 
 //             Don't process placemarks if they are outside the screen area.
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-                paintMark( painter, x, y );	
+                paintMark( painter, x, y );
             }
         }
     }
@@ -184,8 +184,8 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->setPen( m_pen );	
-    // painter->setPen(QColor(Qt::white));	
+    painter->setPen( m_pen );
+    // painter->setPen(QColor(Qt::white));
     // painter->drawPolyline(distancePathShadow);
 
     QVector<GeoDataPoint*>::const_iterator  it;
@@ -195,8 +195,8 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
 
     m_totalDistance = 0.0;
 
-    double  prevlon = 0.0;
-    double  prevlat = 0.0;
+    double  prevLon = 0.0;
+    double  prevLat = 0.0;
     double  lon = 0.0;
     double  lat = 0.0;
 
@@ -211,24 +211,24 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            m_totalDistance += acos( sin( prevlat ) * sin( lat )
-                                     + cos( prevlat ) * cos( lat ) * cos( prevlon - lon ) ) * 6371221.0;
+            m_totalDistance += acos( sin( prevLat ) * sin( lat )
+                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
 
             drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Equirectangular );
         }
 
         prevqpos = qpos;
-        prevlon  = lon; 
-        prevlat  = lat;
+        prevLon  = lon; 
+        prevLat  = lat;
     }
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
 #if 0
       if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
-      painter->setPen( QColor( Qt::red ) );	
+      painter->setPen( QColor( Qt::red ) );
       painter->drawPolyline( measurePoints );
-      // painter->setPen( QColor( Qt::white ) );	
+      // painter->setPen( QColor( Qt::white ) );
       // painter->drawPolyline( distancePathShadow );
       if ( antialiasing == true )
           painter->setRenderHint( QPainter::Antialiasing, false );
@@ -238,16 +238,13 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
           it != m_pMeasurePointList.constEnd();
           it++ )
     {
-        (*it)->quaternion();
+        qpos = (*it)->quaternion();
         qpos.getSpherical(lon,lat);
 
         x = (int)( imgrx + (lon + m_centerLon ) *m_xyFactor );
         y = (int)( imgry + (lat + m_centerLat ) *m_xyFactor );
 
-        // Don't process placemarks if they are outside the screen area.
-        if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-            paintMark( painter, x, y );	
-        }
+        rectangularPaintMark( painter, x, y, imgwidth, imgheight );
     }
 
     if ( m_pMeasurePointList.size() > 1 )
@@ -266,7 +263,7 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter,
 
     if ( totalDistance >= 1000.0 )
         distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
-    else	
+    else
         distanceString = tr("Total Distance: %1 m").arg( totalDistance );
 
     painter->setPen( QColor( Qt::black ) );
@@ -285,6 +282,27 @@ void MeasureTool::paintMark( ClipPainter* painter, int x, int y )
     painter->setPen( QColor( Qt::white ) );
     painter->drawLine( x - halfsize, y, x + halfsize , y );
     painter->drawLine( x, y - halfsize, x, y + halfsize );
+}
+
+void MeasureTool::rectangularPaintMark( ClipPainter* painter, int x, int y,
+                                        int width, int height )
+{
+    //calls PaintMark multiple times so we can repeat the x mark
+    //for the rectangular projection
+
+    //check if it's inside the y range of the screen
+    if ( y > height || y < 0 )
+        return;
+    //calculate the left-most possible X
+    while ( x > 0 ) {
+        x-=4*m_radius;
+    }
+    x+=4*m_radius;
+    //start painting and repeating until we leave the screen
+    while ( x <= width ) {
+        paintMark( painter, x, y );
+        x+=4*m_radius;
+    }
 }
 
 void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
@@ -337,128 +355,90 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 {
     double      x;
     double      y;
-    double      tmpX;
-    double      offset = 0;
-    int         sign;
-    int         width;
-    int         mapWidth;
-    int         segmentCount = 0;
-    int         steps;
+    int         currentSign;
+    int         previousSign;
     double      lon;
     double      lat;
     double      previousLon;
-    double      deltaLon;
-    double      previousX;
     double      previousY;
+    double      previousX;
     double      interpolatedY;
-    double      oneOverSteps;
-    double      restartPos;
-    bool        flushed = false;
+
+    double      centerLonPixel = m_centerLon * m_xyFactor;
+    double      centerLatPixel = m_centerLat * m_xyFactor;
+    QPolygonF   distancePath;
+    m_visibleArea = QRectF( 0, 0, imgrx*2, imgry*2 );
+
+    Q_UNUSED( antialiasing );
+
     double      t = 0.0;
     Quaternion  itpos;
-
-    Q_UNUSED(antialiasing);
-
-    width = 2 * imgrx;
-    mapWidth = 4 * radius;
-    steps = 20;
-    oneOverSteps = 1./(double)steps;
-
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
-    itpos.getSpherical( lon, lat );
+    itpos.getSpherical(lon,lat);
+    currentSign = previousSign = (lon<0)?-1:1;
     previousLon = lon;
 
-    for ( int i = 0; i <= steps; ++i ) {
-        t = (double)i * oneOverSteps;
+    Q_UNUSED( antialiasing );
+
+    for ( int i = 0; i < 21; ++i ) {
+        t = (double)(i) / 20.0;
 
         itpos.slerp( prevqpos, qpos, t );
-        itpos.getSpherical( lon,lat );
+        itpos.getSpherical(lon,lat);
 
-        x = (double)(imgrx + (lon + m_centerLon) *m_xyFactor);
-        y = (double)(imgry + (lat + m_centerLat) *m_xyFactor);
-
-        //The next steps deal with the measurement of two points
+        x = (double)( imgrx + ( lon ) *m_xyFactor + centerLonPixel );
+        y = (double)( imgry + ( lat ) *m_xyFactor + centerLatPixel );
+        //The next steeps deal with the measurement of two points
         //that the shortest path crosses the dateline
-        sign = (lon < 0)?-1:1;
-
-        deltaLon = lon - previousLon;
-
-        // Normalize the coordinates into 'common' space
-        if ( fabs( deltaLon ) > M_PI ) {
-            offset += -sign * mapWidth;
-            if ( deltaLon > 0 )
-                deltaLon -= 2*M_PI;
-            else
-                deltaLon += 2*M_PI;
+        currentSign = (lon < 0)?-1:1;
+        if( previousSign != currentSign && fabs(previousLon) + fabs(lon) > M_PI) {
+            //FIXME:Fix the interpolation the problem is i think the (x - previousX) as is too wide
+//          It's based on y = y1 + (y2-y1)/(x2-x1)*(x-x1)
+//             interpolatedY= previousY + ( y - previousY ) /
+//                             ( x - previousX ) *
+//                                 ( imgrx + previousSign*2*radius - previousX );
+            //This is temporal just to be able to commit
+            interpolatedY= ( y + previousY )/2;
+            distancePath << QPointF( imgrx + centerLonPixel
+                                    + previousSign*2*radius,
+                                      interpolatedY );
+            drawAndRepeatDistancePath( painter, distancePath );
+            distancePath.clear();
+            distancePath << QPointF( imgrx + centerLonPixel
+                                    + currentSign*2*radius,
+                                      interpolatedY);
         }
-
-        x += offset;
-
-        if ( x < 0  ) {
-            tmpX = x + mapWidth;
-            if ( tmpX < width )
-                x = tmpX;
-        }
-        else if ( x > width ) {
-            tmpX = x - mapWidth;
-            if ( tmpX > 0 )
-                x = tmpX;
-        }
-
-        // Wrap?
-        if ( x < 0 || x > width ) {
-            tmpX = deltaLon > 0?width:0;
-
-            if ( segmentCount ) {
-                interpolatedY = ((tmpX - previousX) * (y - previousY)) / (x - previousX) + previousY;
-                painter->drawLine( (int)(previousX), (int)(previousY), (int)(tmpX), (int)(interpolatedY) );
-                segmentCount = 0;
-            }
-
-            flushed = true;
-        }
-        else {
-            // Direction mismatch ?
-            if ( deltaLon * (x - previousX) < 0 ) {
-                if ( deltaLon < 0 ) {
-                    previousX += mapWidth;
-                    restartPos = width;
-                }
-                else {
-                    previousX -= mapWidth;
-                    restartPos = 0;
-                }
-            }
-
-            if ( flushed ) {
-                if ( previousX < 0 || x < 0 )
-                    restartPos = 0;
-                else
-                    restartPos = width;
-
-                flushed = false;
-                interpolatedY = ((restartPos - previousX) * (y - previousY)) / (x - previousX) + previousY;
-                if ( segmentCount )
-                    painter->drawLine( (int)(previousX), (int)(previousY), (int)(x), (int)(interpolatedY) );
-
-                previousX = restartPos;
-                previousY = interpolatedY;
-                ++segmentCount;
-            }
-
-            if ( segmentCount )
-                painter->drawLine( (int)(previousX), (int)(previousY), (int)(x), (int)(y) );
-
-            ++segmentCount;
-        }
-
+        else distancePath << QPointF( x, y );
+        previousSign = currentSign;
         previousLon = lon;
         previousX = x;
         previousY = y;
     }
+
+    drawAndRepeatDistancePath( painter, distancePath );
 }
 
+void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
+                                             const QPolygonF distancePath )
+{
+    //copy the QPolygonF so we can freely translate it
+    QPolygonF distancePathMovable(distancePath);
+    //repeat to right
+    while ( m_visibleArea.intersects( distancePathMovable.boundingRect() ) ) {
+        painter->drawPolyline( distancePathMovable );
+        distancePathMovable.translate( 4 * m_radius, 0 );
+    }
+    //reset to center position
+    distancePathMovable = distancePath;
+    //translate to the first left repeating
+    distancePathMovable.translate( -4 * m_radius, 0 );
+    //repeat to left
+    while ( m_visibleArea.intersects( distancePathMovable.boundingRect() ) ) {
+        painter->drawPolyline( distancePathMovable );
+        distancePathMovable.translate( -4 * m_radius, 0 );
+    }
+}
 
 bool MeasureTool::testbug()
 {

@@ -39,7 +39,11 @@ class MeasureTool : public QObject
 
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
     void  paintTotalDistanceLabel( ClipPainter*, int, int, double );
-
+ private:
+	void drawAndRepeatDistancePath( ClipPainter* painter,
+									const QPolygonF distancePath );
+	void rectangularPaintMark( ClipPainter* painter, int x, int y,
+                               int width, int height );
  public Q_SLOTS:
     void addMeasurePoint( double lon, double lat ) {
         m_pMeasurePointList << new GeoDataPoint( lon, lat );
@@ -79,11 +83,11 @@ class MeasureTool : public QObject
 
     bool    m_useworkaround;
     //Needed for the flat projection
+	QRectF m_visibleArea;
     double m_centerLat;
     double m_centerLon;
     double m_xyFactor;
     int m_radius;
 };
-
 
 #endif // MEASURETOOL_H
