@@ -66,20 +66,19 @@ void VectorMap::createFromPntMap( const PntMap* pntmap, ViewParams* viewParams )
 {
     switch( viewParams->m_projection ) {
         case Spherical:
-            sphericalCreateFromPntMap( pntmap, viewParams->m_radius, viewParams->m_planetAxis );
+            sphericalCreateFromPntMap( pntmap, viewParams );
             break;
         case Equirectangular:
-            rectangularCreateFromPntMap( pntmap, viewParams->m_radius, viewParams->m_planetAxis );
+            rectangularCreateFromPntMap( pntmap, viewParams );
             break;
     }
 }
 
-void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 const Quaternion& rotAxis)
+void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* viewParams )
 {
     clear();
 
-    m_radius = radius;
+    m_radius = viewParams->m_radius;
 
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
@@ -101,7 +100,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radiu
 
     Quaternion  qbound;
 
-    rotAxis.inverse().toMatrix( m_rotMatrix );
+    viewParams->m_planetAxis.inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -138,24 +137,19 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radiu
     }
 }
 
-void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 const Quaternion& planetAxis)
+void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* viewParams )
 {
     clear();
-    m_radius = radius;
-    m_planetAxis = planetAxis;
+    m_radius = viewParams->m_radius;
 
     // Calculate translation of center point
-    m_centerLat =  - m_planetAxis.pitch();
-    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  + m_planetAxis.yaw();
+    viewParams->centerCoordinates( m_centerLon, m_centerLat );
 
-    m_rad2Pixel = (float)( 2 * radius ) / M_PI;
+    m_rad2Pixel = (float)( 2 * m_radius ) / M_PI;
     double lon, lat;
-    double x;
-    double y;
+    double x, y;
 
-    planetAxis.inverse().toMatrix( m_rotMatrix );
+    viewParams->m_planetAxis.inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -180,11 +174,12 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
 
         m_offset = 0;
         do {
-            m_offset-=4*m_radius;
-            boundingPolygon.translate(-4*m_radius,0);
+            m_offset -= 4 * m_radius;
+            boundingPolygon.translate( -4 * m_radius, 0 );
         } while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) );
-        m_offset += 4 * radius;
-        boundingPolygon.translate(4*m_radius,0);
+
+        m_offset += 4 * m_radius;
+        boundingPolygon.translate( 4 * m_radius, 0 );
         while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) ) {
             m_polygon.clear();
             m_polygon.reserve( (*itPolyLine)->size() );
@@ -312,8 +307,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 #endif
 
             itPoint->geoCoordinates( lon, lat);
-            double x = m_imgwidth/2  - m_rad2Pixel * (m_centerLon - lon) + m_offset;
-            double y = m_imgheight/2 + m_rad2Pixel * (m_centerLat - lat);
+            double x = m_imgwidth / 2  - m_rad2Pixel * (m_centerLon - lon) + m_offset;
+            double y = m_imgheight / 2 + m_rad2Pixel * (m_centerLat - lat);
             int currentSign = ( lon > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
@@ -332,10 +327,10 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
                 // x coordinate on the screen for the points on the dateline on both
                 // sides of the flat map.
-                double lastXAtDateLine = m_imgwidth/2 + m_rad2Pixel * ( m_lastSign*M_PI - m_centerLon) + m_offset;
-                double xAtDateLine = m_imgwidth/2 + m_rad2Pixel * ( -m_lastSign*M_PI - m_centerLon) + m_offset;
-                double lastYAtDateLine = m_imgheight/2 - (m_lastLat - m_centerLat) * m_rad2Pixel;
-                double yAtSouthPole = m_imgheight/2 - m_rad2Pixel * (M_PI / 2 - m_centerLat);
+                double lastXAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( m_lastSign*M_PI - m_centerLon) + m_offset;
+                double xAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( -m_lastSign*M_PI - m_centerLon) + m_offset;
+                double lastYAtDateLine = m_imgheight / 2 - (m_lastLat - m_centerLat) * m_rad2Pixel;
+                double yAtSouthPole = m_imgheight / 2 - m_rad2Pixel * (M_PI / 2 - m_centerLat);
 
                 //If the "jump" ocurrs in the Anctartica's latitudes
 
@@ -391,21 +386,21 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 }
 
 
-void VectorMap::paintBase(ClipPainter * painter, int radius, const Quaternion& rotAxis, bool antialiasing, Projection currentProjection)
+void VectorMap::paintBase(ClipPainter * painter, ViewParams* viewParams, bool antialiasing )
 {
-    switch( currentProjection ) {
+    switch( viewParams->m_projection ) {
         case Spherical:
-            sphericalPaintBase(painter,radius,antialiasing);
+            sphericalPaintBase(   painter, viewParams, antialiasing );
             break;
         case Equirectangular:
-            rectangularPaintBase(painter,radius, rotAxis, antialiasing);
+            rectangularPaintBase( painter, viewParams, antialiasing);
             break;
     }
 }
 
-void VectorMap::sphericalPaintBase(ClipPainter * painter, int radius, bool antialiasing)
+void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
 {
-    m_radius = radius;
+    m_radius =  viewParams->m_radius;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -421,9 +416,9 @@ void VectorMap::sphericalPaintBase(ClipPainter * painter, int radius, bool antia
     }
 }
 
-void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, const Quaternion& planetAxis, bool antialiasing)
+void VectorMap::rectangularPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
 {
-    m_radius = radius;
+    m_radius = viewParams->m_radius;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -431,13 +426,13 @@ void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, const Qu
     painter->setBrush( m_brush );
 
     // Calculate translation of center point
-    m_centerLat =  -planetAxis.pitch();
-    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
+    double centerLon, centerLat;
+    viewParams->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset =  (int)((double)(2*radius) / M_PI * m_centerLat);
-    int yTop = m_imgheight/2 - radius + yCenterOffset;
+    int yCenterOffset =  (int)((double)( 2 * m_radius ) / M_PI * centerLat);
+    int yTop = m_imgheight / 2 - m_radius + yCenterOffset;
 
-    painter->drawRect( 0, yTop, m_imgwidth, 2*radius);
+    painter->drawRect( 0, yTop, m_imgwidth, 2 * m_radius);
 }
 
 void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection currentProjection )

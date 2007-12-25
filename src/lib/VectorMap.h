@@ -33,11 +33,11 @@ class VectorMap : public ScreenPolygon::Vector
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap( const PntMap*, ViewParams* viewParams );
+    void createFromPntMap( const PntMap*, ViewParams *viewParams );
 
-    void paintBase(ClipPainter *, int radius, const Quaternion&, bool, Projection );
-    void paintMap(ClipPainter *, bool );
-    void drawMap(QPaintDevice *, bool, Projection );
+    void paintBase( ClipPainter *painter, ViewParams *viewParams, bool antialiasing );
+    void paintMap( ClipPainter *painter, bool antialiasing );
+    void drawMap( QPaintDevice *paintDevice, bool antialiasing, Projection );
 
     void resizeMap( int width, int height );
 
@@ -53,8 +53,8 @@ class VectorMap : public ScreenPolygon::Vector
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    void sphericalCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
-    void rectangularCreateFromPntMap(const PntMap*, const int&, const Quaternion&);
+    void sphericalCreateFromPntMap( const PntMap*, ViewParams *viewParams );
+    void rectangularCreateFromPntMap( const PntMap*, ViewParams *viewParams );
 
     void createPolyLine( GeoDataPoint::Vector::ConstIterator, 
                          GeoDataPoint::Vector::ConstIterator, const int, Projection );
@@ -63,8 +63,8 @@ class VectorMap : public ScreenPolygon::Vector
     void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
                             GeoDataPoint::Vector::ConstIterator, const int );
 
-    void sphericalPaintBase(ClipPainter*,int radius, bool);
-    void rectangularPaintBase(ClipPainter*,int radius, const Quaternion&, bool);
+    void sphericalPaintBase(   ClipPainter *painter, ViewParams *viewParams, bool antialiasing );
+    void rectangularPaintBase( ClipPainter *painter, ViewParams *viewParams, bool antialiasing );
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();
