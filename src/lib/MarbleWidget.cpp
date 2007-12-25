@@ -511,7 +511,7 @@ void MarbleWidget::centerOn(const double& lon, const double& lat)
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
                                                   lon * DEG2RAD,
                                                   0.0 );
-    d->m_viewParams.m_planetAxis.display();
+//    d->m_viewParams.m_planetAxis.display();
     repaint();
 }
 

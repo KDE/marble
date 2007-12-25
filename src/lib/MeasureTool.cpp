@@ -20,6 +20,8 @@
 #include "Quaternion.h"
 #include "ViewParams.h"
 
+#include "global.h"
+
 MeasureTool::MeasureTool(QObject* parent)
     : QObject(parent)
 {
@@ -95,7 +97,7 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, ViewParams 
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
             m_totalDistance += acos( sin( prevLat ) * sin( lat )
-                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
+                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
 
             drawDistancePath( painter, prevqpos, qpos, viewParams, antialiasing );
         }
@@ -176,7 +178,7 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter, ViewParam
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
             m_totalDistance += acos( sin( prevLat ) * sin( lat )
-                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
+                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
 
             drawDistancePath( painter, prevqpos, qpos, viewParams, antialiasing );
         }
