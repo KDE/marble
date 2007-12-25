@@ -76,10 +76,11 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 }
 
 
-void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage, 
-                                            const int& radius,
-                                            Quaternion& planetAxis)
+void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
+    QImage* canvasImage = viewParams->m_canvasImage;
+    const int radius = viewParams->m_radius;
+
     // Scanline based algorithm to texture map a sphere
 
     // Initialize needed variables:
@@ -104,16 +105,13 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
-    Quaternion  northPole = GeoDataPoint( 0.0, (double)( -M_PI * 0.5 ) ).quaternion();
+    Quaternion  northPole = GeoDataPoint( 0.0, (double)( M_PI * 0.5 ) ).quaternion();
 
-    Quaternion  inversePlanetAxis = planetAxis;
-    inversePlanetAxis = inversePlanetAxis.inverse();
-
-    northPole.rotateAroundAxis( inversePlanetAxis );
+    northPole.rotateAroundAxis( viewParams->m_planetAxis );
 
     // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
-    planetAxis.toMatrix( planetAxisMatrix );
+    viewParams->m_planetAxis.toMatrix( planetAxisMatrix );
 
     int skip = ( m_interlaced == true ) ? 1 : 0;
 
@@ -127,7 +125,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
     for ( m_y = yTop; m_y < yBottom ; ++m_y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        m_qy = inverseRadius * (double)( m_y - m_imageHeight / 2 );
+        m_qy = inverseRadius * (double)( m_imageHeight / 2 - m_y );
         m_qr = 1.0 - m_qy * m_qy;
 
         // rx is the radius component in x direction
@@ -177,7 +175,7 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
 //                qDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea == true
                      && northPoleX >= leftInterval + m_n
-                     && northPoleX < leftInterval + 2*m_n
+                     && northPoleX < leftInterval + 2 * m_n
                      && m_x < leftInterval + 3 * m_n )
                 {
                     m_interpolate = false;
@@ -205,9 +203,10 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
             m_qpos.rotateAroundAxis( planetAxisMatrix );
 
             m_qpos.getSpherical( lon, lat );
-
+//            qDebug() << QString("lon: %1 lat: %2").arg(lon).arg(lat);
             // Approx for m_n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
+
             if ( m_interpolate ) {
                 pixelValueApprox( lon, lat, m_scanLine );
 
@@ -218,8 +217,8 @@ void GlobeScanlineTextureMapper::mapTexture(QImage* canvasImage,
             // to understand the interpolation:
             pixelValue( lon, lat, m_scanLine );
 
-            m_prevLat = lat; // preparing for interpolation
             m_prevLon = lon;
+            m_prevLat = lat; // preparing for interpolation
 
             ++m_scanLine;
         }
@@ -262,7 +261,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelY * 128.0 );
+        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelX * 128.0 );
         const int itStepLat = (int)( stepLat * m_nInverse * m_rad2PixelY * 128.0 );
 
         m_prevLon *= m_rad2PixelX;

@@ -21,8 +21,8 @@
 #include "ScreenPolygon.h"
 
 
+class ViewParams;
 class ClipPainter;
-
 
 class GridMap : public ScreenPolygon::Vector
 {
@@ -30,9 +30,9 @@ class GridMap : public ScreenPolygon::Vector
     GridMap();
     ~GridMap();
 
-    void createTropics( const int&, Quaternion&, Projection );
-    void createEquator (const int&, Quaternion&, Projection );
-    void createGrid( const int&, Quaternion&, Projection );
+    void createTropics( ViewParams *viewParams );
+    void createEquator ( ViewParams *viewParams );
+    void createGrid( ViewParams *viewParams );
 
     void paintGridMap(ClipPainter * painter, bool );
 
@@ -43,13 +43,13 @@ class GridMap : public ScreenPolygon::Vector
     enum SphereDim { Longitude, Latitude };
 
  private:
-    void createCircles( int lonNum, int latNum, Projection currentProjection );
-    void sphericalCreateCircles( int lonNum, int latNum );
-    void rectangularCreateCircles( int lonNum, int latNum );
+    void createCircles( int lonNum, int latNum, ViewParams *viewParams );
+    void sphericalCreateCircles( int lonNum, int latNum, ViewParams *viewParams );
+    void rectangularCreateCircles( int lonNum, int latNum, ViewParams *viewParams );
 
-    void createCircle( double, SphereDim, Projection currentProjection, double cutCoeff = 0.0 );
-    void sphericalCreateCircle( double, SphereDim, double cutCoeff = 0.0 );
-    void rectangularCreateCircle( double, SphereDim, double cutCoeff = 0.0 );
+    void createCircle( double val, SphereDim, ViewParams *viewParams, double cutCoeff = 0.0 );
+    void sphericalCreateCircle( double val, SphereDim, ViewParams *viewParams, double cutCoeff = 0.0 );
+    void rectangularCreateCircle( double val, SphereDim,  ViewParams *viewParams, double cutCoeff = 0.0 );
 
     const QPointF horizonPoint();
 

@@ -33,8 +33,7 @@ public:
     explicit AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent=0 );
     ~AbstractScanlineTextureMapper();
 
-    virtual void mapTexture(QImage* canvasImage, const int&, 
-                            Quaternion& planetAxis) = 0;
+    virtual void mapTexture( ViewParams *viewParams ) = 0;
 
     void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }

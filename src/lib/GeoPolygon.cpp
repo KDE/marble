@@ -128,7 +128,7 @@ void PntMap::load(const QString &filename)
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] ,
         // iLon [0,2 * ARCMINUTE]
 						
-        iLat = -iLat;
+//        iLat = -iLat;
 
         //
         // 90 00N =   -ARCMINUTE / 2
@@ -188,7 +188,7 @@ void PntMap::load(const QString &filename)
         stream >> header >> iLat >> iLon;		
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE] 
 						
-        iLat = -iLat;
+//        iLat = -iLat;
         if ( header > 5 ) {
 			
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());

@@ -117,8 +117,8 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     // rad2PixelY might later on evolve into a method to allow 
     // Mercator as a source texture format. That's why we have it
     // in addition to rad2PixelX.
-    m_rad2PixelX = (double)(m_tileLoader->globalWidth( tileLevel )) / (2.0 * M_PI);
-    m_rad2PixelY = (double)(m_tileLoader->globalHeight( tileLevel )) / M_PI;
+    m_rad2PixelX = +(double)(m_tileLoader->globalWidth( tileLevel ))  / (2.0 * M_PI);
+    m_rad2PixelY = -(double)(m_tileLoader->globalHeight( tileLevel )) / M_PI;
 
     m_maxGlobalX = m_tileLoader->globalWidth( m_tileLevel )  - 1;
     m_maxGlobalY = m_tileLoader->globalHeight( m_tileLevel ) - 1;
@@ -151,7 +151,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // Convert the lon and lat coordinates of the position on the scanline
     // measured in radian to the pixel position of the requested 
     // coordinate on the current tile.
- 
+
     m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelX );
     m_posY = (int)( m_toTileCoordinatesLat + lat * m_rad2PixelY );
 

@@ -30,10 +30,11 @@ FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QO
 }
 
 
-void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage, 
-                                           const int& radius, 
-                                           Quaternion& planetAxis)
+void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
+    QImage* canvasImage = viewParams->m_canvasImage;
+    const int radius = viewParams->m_radius;
+
    // Initialize needed variables:
     double lon = 0.0;
     double lat = 0.0;
@@ -47,33 +48,23 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage,
                              / 2 - m_tilePosY);
 
     int yTop;
-    int yBottom;
     int yPaintedTop;
     int yPaintedBottom;
-    int xLeft;
-    int xRight;
-    int xPaintedLeft;
-    int xPaintedRight;
 
     // Reset backend
     m_tileLoader->resetTilehash();
     selectTileLevel(radius);
 
-    // Calculate axis matrix to represent the planet's rotation
-    matrix  planetAxisMatrix;
-    planetAxis.toMatrix( planetAxisMatrix );
-
     // Calculate translation of center point
-    double centerLat =  planetAxis.pitch() + M_PI;
-    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-    double centerLon =  planetAxis.yaw() + M_PI;
+    double centerLon, centerLat;
+    viewParams->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset =  (int)((float)( 2 * radius / M_PI) * centerLat );
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
     //and what actually can be painted
-    yPaintedTop    = yTop    = m_imageHeight / 2 - radius + yCenterOffset;
-    yPaintedBottom = yBottom = m_imageHeight / 2 + radius + yCenterOffset;
+    yPaintedTop    = yTop = m_imageHeight / 2 - radius + yCenterOffset;
+    yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
 
     if (yPaintedTop < 0)                yPaintedTop = 0;
     if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
@@ -81,42 +72,32 @@ void FlatScanlineTextureMapper::mapTexture(QImage* canvasImage,
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
     //Calculate x-range
-    xLeft = m_imageWidth / 2 - 2 * radius;
-    xRight = m_imageWidth / 2 + 2 * radius;
-
-    xPaintedLeft = 0;
-    xPaintedRight = m_imageWidth;
+    const int xPaintedLeft = 0;
+    const int xPaintedRight = m_imageWidth;
 
     // Calculate how many degrees are being represented per pixel.
-    float xfactor = 2 * M_PI / (float)(xRight - xLeft);
-    float yfactor = M_PI / (float)( yBottom - yTop );
+    const float rad2Pixel = M_PI / (float)( 2 * radius );
 
-    float leftLon = - centerLon - ( xfactor * m_imageWidth / 2 );
+    float leftLon = + centerLon - ( rad2Pixel * m_imageWidth / 2 );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
-    while ( leftLon > M_PI )  leftLon -= 2 * M_PI;
+    while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
 
-    // ----------------------------------------------------------------
-    // The real beef: Paint the map.
+    // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-        lat = -M_PI/2 + (y - yTop )* yfactor;
+        lat = M_PI/2 - (y - yTop )* rad2Pixel;
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
         for ( int x = xPaintedLeft; x < xPaintedRight; ++x ) {
-            lon += xfactor;
+            lon += rad2Pixel;
             if ( lon < -M_PI ) lon += 2 * M_PI;
-            if ( lon > M_PI )  lon -= 2 * M_PI;
+            if ( lon >  M_PI ) lon -= 2 * M_PI;
             pixelValue( lon, lat, m_scanLine + x );
         }
     }
 
     // Remove unused lines
-    int clearStart = 0;
-    int clearStop  = yTop;
-
-    if ( yPaintedTop - m_oldYPaintedTop <= 0 ) {
-        clearStart = yPaintedBottom;
-        clearStop  = m_imageHeight;
-    }
+    const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
+    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? m_imageHeight  : yTop;
 
     for ( int y = clearStart; y < clearStop; ++y ) {
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );

@@ -89,7 +89,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 dirx = 1;
             break;
         case 0x01000013: 
-            diry = -1;
+            diry = 1;
             break;
         case 0x01000014: 
             if ( polarity < 0 )
@@ -98,7 +98,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 dirx = -1;
             break;
         case 0x01000015: 
-            diry = 1;
+            diry = -1;
             break;
         case 0x2b:
             m_widget->zoomIn();
@@ -169,8 +169,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 m_leftpressedy = event->y();
 
                 // Calculate translation of center point
-                m_leftpresseda =  - m_widget->centerLongitude() * DEG2RAD;
-                m_leftpressedb =  - m_widget->centerLatitude() * DEG2RAD;
+                m_leftpresseda =  m_widget->centerLongitude() * DEG2RAD;
+                m_leftpressedb =  m_widget->centerLatitude() * DEG2RAD;
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -224,21 +224,26 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     return true; 
 
                 double direction = 1;
-                if ( m_widget->northPoleZ() > 0 ) {	
-                    if ( event->y() < ( m_widget->northPoleY()
-                                        + m_widget->height() / 2 ) )
-                        direction = -1;
-                }
-                else {
-                    if (event->y() > ( -m_widget->northPoleY() 
-                                       + m_widget->height() / 2 ) )
-                        direction = -1;
-                }
+                // Choose spin direction by taking into account whether we
+                // drag above or below the visible pole.
+                if ( m_widget->projection() == Spherical )
+                {
+                    if ( m_widget->northPoleZ() > 0 ) {
 
-                m_widget->rotateTo( - RAD2DEG * (double)(m_leftpresseda)
-                                    + 90 * direction * deltax / radius, 
-                                    + RAD2DEG * (double)(-m_leftpressedb)
-                                    + 90 * deltay / radius );
+                        if ( event->y() < ( - m_widget->northPoleY()
+                                        + m_widget->height() / 2 ) )
+                            direction = -1;
+                    }
+                    else {
+                        if (event->y() > ( + m_widget->northPoleY() 
+                                           + m_widget->height() / 2 ) )
+                            direction = -1;
+                    }
+                }
+                m_widget->rotateTo( RAD2DEG * (double)(m_leftpresseda)
+                                    - 90.0 * direction * deltax / radius, 
+                                    RAD2DEG * (double)(m_leftpressedb)
+                                    + 90.0 * deltay / radius );
 
                 m_widget->repaint();
             }
@@ -272,11 +277,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int     radius        = m_widget->radius();
 
                 // Calculate translation of center point
-                double centerLat =  m_widget->planetAxis().pitch() + M_PI;
+                double centerLat =  - m_widget->planetAxis().pitch();
                 if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
 
                 int     yCenterOffset = (int)((double)(2 * radius / M_PI) * centerLat);
-                int     yTop          =  m_widget->height() / 2 - radius + yCenterOffset;
+                int     yTop          =  m_widget->height() / 2 - radius - yCenterOffset;
                 int     yBottom       = yTop + 2 * radius;
                 yTop = ( yTop > 0 ) ? yTop : 0;
                 if ( dirx == 0 && event->y() < yTop)

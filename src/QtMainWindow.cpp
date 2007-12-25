@@ -381,7 +381,7 @@ void MainWindow::readSettings()
 
      settings.beginGroup("MarbleWidget");
          m_controlView->marbleWidget()->setHome( 
-            settings.value("homeLongitude", -9.4).toDouble(), 
+            settings.value("homeLongitude", 9.4).toDouble(), 
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );

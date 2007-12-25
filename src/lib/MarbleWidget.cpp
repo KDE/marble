@@ -300,14 +300,14 @@ int MarbleWidget::zoom() const
 
 double MarbleWidget::centerLatitude() const
 {
-    double centerLat =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
+    double centerLat =  -d->m_viewParams.m_planetAxis.pitch();
     if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
     return centerLat * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
-    double centerLon =  d->m_viewParams.m_planetAxis.yaw() + M_PI;
+    double centerLon =  d->m_viewParams.m_planetAxis.yaw();
     return centerLon * RAD2DEG;
 }
 
@@ -508,10 +508,10 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * DEG2RAD,
-                                                  (lon + 180.0) * DEG2RAD,
+    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
+                                                  lon * DEG2RAD,
                                                   0.0 );
-
+    d->m_viewParams.m_planetAxis.display();
     repaint();
 }
 
@@ -529,7 +529,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
         double  lat;
         point.geoCoordinates( lon, lat );
 
-	    centerOn( -lon * RAD2DEG, -lat * RAD2DEG );
+	    centerOn( lon * RAD2DEG, lat * RAD2DEG );
 
         selectionModel->select( index, QItemSelectionModel::SelectCurrent );
         d->m_crosshair.setEnabled( true );
@@ -704,17 +704,16 @@ void MarbleWidget::disconnectNotify ( const char * signal )
 
 int MarbleWidget::northPoleY()
 {
-    Quaternion  northPole     = GeoDataPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
     northPole.rotateAroundAxis(invPlanetAxis);
-
     return (int)( d->m_viewParams.m_radius * northPole.v[Q_Y] );
 }
 
 int MarbleWidget::northPoleZ()
 {
-    Quaternion  northPole     = GeoDataPoint( 0.0, -M_PI * 0.5 ).quaternion();
+    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
     northPole.rotateAroundAxis( invPlanetAxis );
@@ -728,7 +727,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
      switch( d->m_viewParams.m_projection ) {
      case Spherical:
      {
-         Quaternion p(lon * DEG2RAD, -lat * DEG2RAD);
+         Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
          p.rotateAroundAxis(d->m_viewParams.m_planetAxis.inverse());
  
          x = (int)( width() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
@@ -738,14 +737,12 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
      }
  
      case Equirectangular:
-         double centerLat =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
-         if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-         double centerLon =  d->m_viewParams.m_planetAxis.yaw() + M_PI;
-         if ( centerLon > M_PI ) centerLon -= 2*M_PI;
-         double xyFactor = 2*d->m_viewParams.m_radius / M_PI;
+         double centerLon, centerLat;
+         d->m_viewParams.centerCoordinates(centerLon, centerLat);
+         double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
  
-         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * xyFactor );
-         y = (int)( height() / 2 + ( -lat * DEG2RAD + centerLat ) * xyFactor );
+         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
+         y = (int)( height() / 2 + ( lat * DEG2RAD + centerLat ) * rad2Pixel );
  
          return true;
      }
@@ -768,7 +765,7 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                 + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
         {
             double qx = inverseRadius * (double)( x - imageHalfWidth );
-            double qy = inverseRadius * (double)( y - imageHalfHeight );
+            double qy = inverseRadius * (double)( imageHalfHeight - y );
             double qr = 1.0 - qy * qy;
 
             double qr2z = qr - qx * qx;
@@ -784,9 +781,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
 
     case Equirectangular:
         // Calculate translation of center point
-        double centerLat =  d->m_viewParams.m_planetAxis.pitch() + M_PI;
-        if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-        double centerLon =  d->m_viewParams.m_planetAxis.yaw() + M_PI;
+        double centerLon, centerLat;
+        d->m_viewParams.centerCoordinates(centerLon, centerLat);
 
         int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
         int yTop = imageHalfHeight - radius() + yCenterOffset;
@@ -796,8 +792,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
             int const yPixels = y - imageHalfHeight;
 
             double const pixel2rad = M_PI / (2 * radius());
-            lat = yPixels * pixel2rad - centerLat;
-            lon = xPixels * pixel2rad - centerLon;
+            lat = - yPixels * pixel2rad + centerLat;
+            lon = + xPixels * pixel2rad + centerLon;
 
             while( lon > M_PI ) lon -= 2*M_PI;
             while( lon < -M_PI ) lon += 2*M_PI;
@@ -808,8 +804,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     }
 
     if ( unit == GeoDataPoint::Degree ) {
-        lon *= -RAD2DEG;
-        lat *= -RAD2DEG;
+        lon *= RAD2DEG;
+        lat *= RAD2DEG;
     }
 
     return noerr;
@@ -847,15 +843,15 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
 void MarbleWidget::rotateTo( const double& lon, const double& lat, const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( lat * DEG2RAD,   // "phi"
+    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,   // "phi"
                                                   lon * DEG2RAD,   // "theta"
                                                   psi * DEG2RAD );
 }
 
 void MarbleWidget::rotateTo(const double& lon, const double& lat)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( (lat + 180.0) * DEG2RAD,
-                                                  (lon + 180.0) * DEG2RAD,
+    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
+                                                  lon  * DEG2RAD,
                                                   0.0 );
 }
 
@@ -902,7 +898,7 @@ void MarbleWidget::setActiveRegion()
             break;
         case Equirectangular:
             // Calculate translation of center point
-            double centerLat =  planetAxis().pitch() + M_PI;
+            double centerLat =  -planetAxis().pitch();
             if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
@@ -1048,7 +1044,7 @@ void MarbleWidget::goHome()
     double  homeLat = 0;
     d->m_homePoint.geoCoordinates( homeLon, homeLat );
 
-    rotateTo( homeLon * RAD2DEG, homeLat * -RAD2DEG );
+    rotateTo( homeLon * RAD2DEG, homeLat * RAD2DEG );
 
     zoomView( d->m_homeZoom ); // default 1050
 

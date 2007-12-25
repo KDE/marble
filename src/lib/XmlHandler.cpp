@@ -259,11 +259,11 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
         if ( splitline.size() == 2 ) {
             m_placemark->setCoordinate( DEG2RAD * splitline[0].toDouble(),
-                                       -DEG2RAD * splitline[1].toDouble() );
+                                        DEG2RAD * splitline[1].toDouble() );
         }
         if ( splitline.size() == 3 ) {
             m_placemark->setCoordinate( DEG2RAD * splitline[0].toDouble(),
-                                       -DEG2RAD * splitline[1].toDouble(),
+                                        DEG2RAD * splitline[1].toDouble(),
                                         splitline[2].toDouble() );
         }
 

@@ -1,3 +1,12 @@
+2007-12-25  Torsten Rahn  <rahn@kde.org>
+
+	* Fix coordinate system 
+          ( North is + and South is - , West is - and East is +
+            in the internal radian based coordinate system now)
+	* More usage of centerCoordinates(lon, lat);
+	* Speed-ups in flat projection code
+	* code cleanup, better naming
+
 2007-12-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix more warnings

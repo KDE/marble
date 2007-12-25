@@ -31,9 +31,9 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
         m_lat = _lat;
         break;
     case( GeoDataPoint::Degree ):
-        m_q = Quaternion( _lon * DEG2RAD , _lat * -DEG2RAD  );
+        m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
         m_lon = _lon * DEG2RAD;
-        m_lat = _lat * -DEG2RAD;
+        m_lat = _lat * DEG2RAD;
     }
 }
 
@@ -53,19 +53,19 @@ void GeoDataPoint::geoCoordinates( double& lon, double& lat,
         break;
     case Degree:
             lon = m_lon * RAD2DEG;
-            lat = m_lat * -RAD2DEG;
+            lat = m_lat * RAD2DEG;
         break;
     }
 }
 
 QString GeoDataPoint::toString( GeoDataPoint::Notation notation )
 {
-    QString nsstring = ( m_lat < 0 ) ? "N" : "S";  
+    QString nsstring = ( m_lat > 0 ) ? "N" : "S";  
     QString westring = ( m_lon < 0 ) ? "W" : "E";  
 
     double lat, lon;
     lon = fabs( m_lon * RAD2DEG );
-    lat = fabs( -m_lat * RAD2DEG );
+    lat = fabs( m_lat * RAD2DEG );
 
     if ( notation == GeoDataPoint::DMS )
     {

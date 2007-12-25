@@ -67,11 +67,9 @@ class PlaceMarkLayout : public QObject
      * @param planetAxis The position of the planet axis.
      * @param firstTime Whether the map is painted the first time.
      */
-    void paintPlaceFolder( QPainter *painter, int width, int height,
-                           ViewParams *viewParams,
+    void paintPlaceFolder( QPainter *painter, ViewParams *viewParams,
                            const QAbstractItemModel *placeMarkModel,
                            const QItemSelectionModel *selectionModel,
-                           Quaternion planetAxis,
                            bool firstTime = true );
 
     /**

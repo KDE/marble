@@ -164,20 +164,21 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 }
 
 void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
-                                        int imgwidth, int imgheight,
                                         ViewParams *viewParams,
                                         const QAbstractItemModel* model,
                                         const QItemSelectionModel* selectionModel,
-                                        Quaternion planetAxis,
                                         bool firstTime )
 {
+    const int imgwidth  = viewParams->m_canvasImage->width();
+    const int imgheight = viewParams->m_canvasImage->height();
+
     if ( m_styleResetRequested == true ) {
         m_styleResetRequested = false;
         styleReset();
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
-    Quaternion  inversePlanetAxis = planetAxis.inverse();
+    Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
@@ -414,7 +415,7 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
         double pixelAltitude = ( viewParams->m_radius )/ EARTH_RADIUS * absoluteAltitude;
         // Let (x, y) be the position on the screen of the placemark..
         x = (int)(imgwidth  / 2 + pixelAltitude * qpos.v[Q_X]);
-        y = (int)(imgheight / 2 + pixelAltitude * qpos.v[Q_Y]);
+        y = (int)(imgheight / 2 - pixelAltitude * qpos.v[Q_Y]);
 
         // Skip placemarks that are outside the screen area
         if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
@@ -427,18 +428,16 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
     if( viewParams->m_projection == Equirectangular ) {
 
             double lon, lat;
-            double xyFactor = 2 * viewParams->m_radius / M_PI;
+            double rad2Pixel = 2 * viewParams->m_radius / M_PI;
 
-            double centerLon;
-            double centerLat;
-
-            // Let (x, y) be the position on the screen of the placemark..
-            geopoint.geoCoordinates( lon, lat );
-
+            double centerLon, centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            x = (int)(imgwidth  / 2 + xyFactor * (lon + centerLon));
-            y = (int)(imgheight / 2 + xyFactor * (lat + centerLat));
+            geopoint.geoCoordinates( lon, lat );
+
+            // Let (x, y) be the position on the screen of the placemark..
+            x = (int)(imgwidth  / 2 - rad2Pixel * (centerLon - lon));
+            y = (int)(imgheight / 2 + rad2Pixel * (centerLat - lat));
 
             // Skip placemarks that are outside the screen area
             //

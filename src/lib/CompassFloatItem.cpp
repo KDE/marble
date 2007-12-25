@@ -89,7 +89,7 @@ QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight,
 
 
     QString dirstr = tr( "N" );
-    if ( polarity == 1 ) 
+    if ( polarity == -1 ) 
         dirstr = tr( "S" );
     if ( polarity == 0 )
         dirstr = "";

@@ -54,20 +54,13 @@ class ViewParams
     Quaternion  m_planetAxisUpdated;
 
     void centerCoordinates( double &centerLon, double &centerLat ){
-/*
-            if ( m_planetAxis == m_planetAxisUpdated && m_radius == m_radiusUpdated )
-            {
-                centerLon = m_centerLon;
-                centerLat = m_centerLat;
-            }
-            else
-            {
-*/
                 // Calculate translation of center point
-                centerLon = m_planetAxis.yaw() + M_PI;
-                centerLat = m_planetAxis.pitch() + M_PI;
-                if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-//            }
+                centerLat = - m_planetAxis.pitch();
+                if ( centerLat > M_PI ) centerLat -= 2 * M_PI;
+                centerLon = + m_planetAxis.yaw();
+                if ( centerLon > M_PI ) centerLon -= 2*M_PI;
+//                qDebug() << "centerLon" << centerLon * RAD2DEG;
+//                qDebug() << "centerLat" << centerLat * RAD2DEG;
     }
 
     BoundingBox m_boundingBox;  // What the view currently can see
@@ -94,9 +87,6 @@ class ViewParams
     QImage  *m_canvasImage;     // Base image with space and atmosphere
     QImage  *m_coastImage;      // A slightly higher level image.
 
- private:
-    double     m_centerLon;         // cached value
-    double     m_centerLat;         // cached value
 };
 
 

@@ -98,7 +98,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
 
-    m_vectorMap -> createFromPntMap( m_coastLines, radius, rotAxis, viewParams->m_projection );
+    m_vectorMap -> createFromPntMap( m_coastLines, viewParams );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
     m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
@@ -107,7 +107,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
     m_vectorMap -> setzPointLimit( 0.9 );
 
-    m_vectorMap -> createFromPntMap( m_islands, radius, rotAxis, viewParams->m_projection );
+    m_vectorMap -> createFromPntMap( m_islands, viewParams );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
     m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
@@ -117,11 +117,11 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
 
-         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_lakes, viewParams );
          m_vectorMap -> setBrush( m_textureLakeBrush );
          m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
 
-         m_vectorMap -> createFromPntMap( m_lakeislands, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_lakeislands, viewParams );
          m_vectorMap -> setBrush( m_textureLandBrush );
          m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
     }
@@ -130,7 +130,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
         // Glaciers
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
-         m_vectorMap -> createFromPntMap( m_glaciers, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_glaciers, viewParams );
          m_vectorMap -> setBrush( m_textureGlacierBrush );
 
          m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
@@ -153,7 +153,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
 
-    m_vectorMap -> createFromPntMap( m_coastLines, radius, rotAxis, viewParams->m_projection );
+    m_vectorMap -> createFromPntMap( m_coastLines, viewParams );
     m_vectorMap -> setPen( m_landPen );
     m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, false );
@@ -162,7 +162,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
     m_vectorMap -> setzPointLimit( 0.9 );
 
-    m_vectorMap -> createFromPntMap( m_islands, radius, rotAxis, viewParams->m_projection );
+    m_vectorMap -> createFromPntMap( m_islands, viewParams );
     m_vectorMap -> setPen( m_landPen );
     m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, false );
@@ -172,12 +172,12 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
 
-         m_vectorMap -> createFromPntMap( m_lakes, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_lakes, viewParams );
          m_vectorMap -> setPen( m_lakePen );
          m_vectorMap -> setBrush( m_lakeBrush );
          m_vectorMap -> paintMap( painter, false );
 
-         m_vectorMap -> createFromPntMap( m_lakeislands, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_lakeislands, viewParams );
          m_vectorMap -> setBrush( m_landBrush );
          m_vectorMap -> paintMap( painter, false );
     }
@@ -195,7 +195,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
-         m_vectorMap -> createFromPntMap( m_rivers, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_rivers, viewParams );
 
          m_vectorMap -> setPen( m_riverPen );
          m_vectorMap -> setBrush( m_riverBrush );
@@ -206,7 +206,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
         // Countries
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
-         m_vectorMap -> createFromPntMap( m_countries, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_countries, viewParams );
 
          m_vectorMap -> setPen( m_countryPen );
          m_vectorMap -> setBrush( m_countryBrush );
@@ -215,7 +215,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
         // US-States
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
-         m_vectorMap -> createFromPntMap( m_usaStates, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_usaStates, viewParams );
 
          m_vectorMap -> setPen( m_statePen );
          m_vectorMap -> setBrush( m_stateBrush );
@@ -224,7 +224,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
         // International Dateline
          m_vectorMap -> setzBoundingBoxLimit( 0.0 );
          m_vectorMap -> setzPointLimit( 0.0 );
-         m_vectorMap -> createFromPntMap( m_dateLine, radius, rotAxis, viewParams->m_projection );
+         m_vectorMap -> createFromPntMap( m_dateLine, viewParams );
 
          m_vectorMap -> setPen( m_dateLinePen );
          m_vectorMap -> setBrush( m_dateLineBrush );

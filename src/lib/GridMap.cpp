@@ -22,7 +22,7 @@
 #include "geodata/data/GeoDataPoint.h"
 #include "global.h"
 #include "ClipPainter.h"
-
+#include "ViewParams.h"
 
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
@@ -54,42 +54,42 @@ GridMap::~GridMap()
 }
 
 
-void GridMap::createTropics(const int& radius, Quaternion& planetAxis, Projection currentProjection)
+void GridMap::createTropics( ViewParams* viewParams )
 {
     clear();
-    m_radius = radius;
-    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+    m_radius = viewParams->m_radius;
+    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 
     // Turn on the major circles of latitude if we've zoomed in far
     // enough (radius > 400 pixels)
     if ( m_radius >  400 ) {
-        createCircle( PIHALF - AXIALTILT , Latitude, currentProjection ); // Arctic Circle
-        createCircle( AXIALTILT - PIHALF , Latitude, currentProjection ); // Antarctic Circle
-        createCircle( AXIALTILT , Latitude, currentProjection );          // Tropic of Cancer 
-        createCircle( -AXIALTILT , Latitude, currentProjection );         // Tropic of Capricorn
+        createCircle( PIHALF - AXIALTILT , Latitude, viewParams ); // Arctic Circle
+        createCircle( AXIALTILT - PIHALF , Latitude, viewParams ); // Antarctic Circle
+        createCircle( AXIALTILT , Latitude,  viewParams );          // Tropic of Cancer 
+        createCircle( -AXIALTILT , Latitude, viewParams );         // Tropic of Capricorn
     }
 }
 
-void GridMap::createEquator(const int& radius, Quaternion& planetAxis, Projection currentProjection) 
+void GridMap::createEquator( ViewParams* viewParams ) 
 {
     clear();
-    m_radius = radius;
-    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+    m_radius = viewParams->m_radius;
+    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 
-    if( currentProjection == Equirectangular )
-        m_planetAxis = planetAxis;
+    if( viewParams->m_projection == Equirectangular )
+        m_planetAxis = viewParams->m_planetAxis;
 
-    createCircle( 0.0 , Latitude, currentProjection );
+    createCircle( 0.0 , Latitude, viewParams );
 }
 
-void GridMap::createGrid(const int& radius, Quaternion& planetAxis, Projection currentProjection)
+void GridMap::createGrid( ViewParams* viewParams )
 {
     clear();
+    m_radius = viewParams->m_radius;
+    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
 
-    m_radius = radius;
-    planetAxis.inverse().toMatrix( m_planetAxisMatrix );
-    if( currentProjection == Equirectangular )
-        m_planetAxis = planetAxis;
+    if( viewParams->m_projection == Equirectangular )
+        m_planetAxis = viewParams->m_planetAxis;
 
     //	FIXME:	- Higher precision after optimization 
     //		  ( will keep grid lines from vanishing at high zoom levels ) 
@@ -97,47 +97,47 @@ void GridMap::createGrid(const int& radius, Quaternion& planetAxis, Projection c
     //	if ( m_radius > 6400 ) { m_precision = 30; createCircles( 64, 48 ); return; } else 
     if ( m_radius > 3200 ) {
         m_precision = 40;
-        createCircles( 32, 24, currentProjection ); 
+        createCircles( 32, 24, viewParams ); 
         return;
     } 
     else if ( m_radius > 1600 ) {
         m_precision = 30;
-        createCircles( 16, 12, currentProjection );
+        createCircles( 16, 12, viewParams );
         return;
     }	
     else if ( m_radius >  700 ) {
         m_precision = 30;
-        createCircles( 8, 6, currentProjection );
+        createCircles( 8, 6, viewParams );
         return;
     }	
     else if ( m_radius >  400 ) {
         m_precision = 20;
-        createCircles( 4, 3, currentProjection );
+        createCircles( 4, 3, viewParams );
         return;
     }	
     else if ( m_radius >  100 ) {
         m_precision = 10;
-        createCircles( 2, 3, currentProjection );
+        createCircles( 2, 3, viewParams );
         return;
     }	
 
-    createCircles( 2, 1, currentProjection );	
+    createCircles( 2, 1, viewParams );	
 }
 
 
-void GridMap::createCircles( const int lonNum, const int latNum, Projection currentProjection )
+void GridMap::createCircles( const int lonNum, const int latNum, ViewParams *viewParams )
 {
-    switch( currentProjection ) {
+    switch( viewParams->m_projection ) {
         case Spherical:
-            sphericalCreateCircles( lonNum, latNum );
+            sphericalCreateCircles( lonNum, latNum, viewParams );
             break;
         case Equirectangular:
-            rectangularCreateCircles( lonNum, latNum );
+            rectangularCreateCircles( lonNum, latNum, viewParams );
             break;
     }
 }
 
-void GridMap::sphericalCreateCircles( const int lonNum, const int latNum )
+void GridMap::sphericalCreateCircles( const int lonNum, const int latNum, ViewParams *viewParams )
 {
     // latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
     // lonNum: number of longitude circles between lon = 0 deg and lon < 90 deg
@@ -146,8 +146,8 @@ void GridMap::sphericalCreateCircles( const int lonNum, const int latNum )
 
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, Spherical );
-            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, Spherical );
+            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
+            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
         } 
     } 
 
@@ -155,17 +155,17 @@ void GridMap::sphericalCreateCircles( const int lonNum, const int latNum )
         return;
 
     // Universal prime meridian and its orthogonal great circle:
-    createCircle( + 0,      Longitude, Spherical );
-    createCircle( + PIHALF, Longitude, Spherical );	
+    createCircle( + 0,      Longitude, viewParams );
+    createCircle( + PIHALF, Longitude, viewParams );	
 
     for ( int i = 1; i < lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * PIHALF / lonNum,          Longitude, Spherical, cutOff );
-        createCircle( i * PIHALF / lonNum + PIHALF, Longitude, Spherical, cutOff );	
+        createCircle( i * PIHALF / lonNum,          Longitude, viewParams, cutOff );
+        createCircle( i * PIHALF / lonNum + PIHALF, Longitude, viewParams, cutOff );	
     }
 }
 
-void GridMap::rectangularCreateCircles( const int lonNum, const int latNum )
+void GridMap::rectangularCreateCircles( const int lonNum, const int latNum, ViewParams *viewParams )
 {
 
     // latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
@@ -175,8 +175,8 @@ void GridMap::rectangularCreateCircles( const int lonNum, const int latNum )
 
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, Equirectangular );
-            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, Equirectangular );
+            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
+            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
         } 
     } 
 
@@ -184,28 +184,28 @@ void GridMap::rectangularCreateCircles( const int lonNum, const int latNum )
         return;
 
     // Universal prime meridian
-    createCircle( + 0,      Longitude, Equirectangular );
+    createCircle( + 0,      Longitude, viewParams );
 
     for ( int i = 0; i <= lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * M_PI / lonNum,          Longitude, Equirectangular, cutOff );
-        createCircle( i * M_PI / lonNum + M_PI, Longitude, Equirectangular, cutOff );	
+        createCircle( i * M_PI / lonNum,        Longitude, viewParams, cutOff );
+        createCircle( i * M_PI / lonNum + M_PI, Longitude, viewParams, cutOff );	
     }
 }
 
-void GridMap::createCircle( double val, SphereDim dim, Projection currentProjection, double cutOff)
+void GridMap::createCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff)
 {
-    switch( currentProjection ) {
+    switch( viewParams->m_projection ) {
         case Spherical:
-            sphericalCreateCircle( val, dim, cutOff );
+            sphericalCreateCircle( val, dim, viewParams, cutOff );
             break;
         case Equirectangular:
-            rectangularCreateCircle( val, dim, cutOff );
+            rectangularCreateCircle( val, dim, viewParams, cutOff );
             break;
     }
 }
 
-void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
+void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff )
 {
     // cutOff: the amount of each quarter circle that is cut off at
     //         the pole in radians
@@ -245,7 +245,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
             m_currentPoint = QPointF( (double)(m_imageWidth / 2 + m_radius * qpos.v[Q_X]),
-                                      (double)(m_imageHeight / 2 + m_radius * qpos.v[Q_Y]) );
+                                      (double)(m_imageHeight / 2 - m_radius * qpos.v[Q_Y]) );
             //qDebug() << "Radius: " << m_radius
             //         << "QPointF(" << (double)(m_imageWidth / 2 + m_radius*qpos.v[Q_X])+1
             //        << ", " << (double)(m_imageHeight / 2 + m_radius*qpos.v[Q_Y])+1 << ")";
@@ -294,34 +294,33 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, double cutOff )
     }
 }
 
-void GridMap::rectangularCreateCircle( double val, SphereDim dim, double cutOff )
+void GridMap::rectangularCreateCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff )
 {
     // Only used in spherical projection.
     Q_UNUSED( cutOff );
 
     // Calculate translation of center point
-    double centerLat =  m_planetAxis.pitch() + M_PI;
-    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
-    double centerLon =  m_planetAxis.yaw() + M_PI;
+    double centerLon, centerLat;
+    viewParams->centerCoordinates( centerLon, centerLat );
 
-    double       xyFactor  = (float)( 2 * m_radius ) / M_PI;
+    double       rad2Pixel  = (float)( 2 * m_radius ) / M_PI;
     m_polygon.clear();
 
     if ( dim == Latitude ) {
-        QPointF beginPoint( 0.0f, m_imageHeight / 2 + ( centerLat + val ) * xyFactor );
-        QPointF endPoint( m_imageWidth, m_imageHeight / 2 + ( centerLat + val ) * xyFactor );
+        QPointF beginPoint( 0.0f, m_imageHeight / 2 + ( centerLat - val ) * rad2Pixel );
+        QPointF endPoint( m_imageWidth, m_imageHeight / 2 + ( centerLat - val ) * rad2Pixel );
         m_polygon << beginPoint << endPoint;
         append( m_polygon );
     }
     else {
-        float beginY = m_imageHeight / 2 - m_radius + centerLat * xyFactor;
+        float beginY = m_imageHeight / 2 - m_radius + centerLat * rad2Pixel;
         float endY   = beginY + 2 * m_radius;
         if ( beginY < 0 ) 
             beginY = 0;
         if ( endY > m_imageHeight )
             endY = m_imageHeight ;
 
-        float x = m_imageWidth / 2 + ( centerLon + val ) * xyFactor;
+        float x = m_imageWidth / 2 + ( val - centerLon ) * rad2Pixel;
         while ( x > 4 * m_radius ) 
             x -= 4 * m_radius;
         while ( x < m_imageWidth ) {

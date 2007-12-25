@@ -6,7 +6,7 @@
  <kcfgfile name="marblerc" />
  <group name="MarbleWidget" >
   <entry key="homeLongitude" type="Double" >
-   <default>-9.4</default>
+   <default>9.4</default>
   </entry>
   <entry key="homeLatitude" type="Double" >
    <default>54.8</default>

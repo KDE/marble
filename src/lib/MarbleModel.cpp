@@ -297,9 +297,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
         if ( d->m_maptheme->bitmaplayer().enabled == true ) {
 
-            d->m_texmapper->mapTexture( viewParams->m_canvasImage,
-                                        viewParams->m_radius,
-                                        viewParams->m_planetAxis );
+            d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->m_showElevationModel
                 && d->m_maptheme->bitmaplayer().dem == "true" )
@@ -339,25 +337,19 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );
 
         // Create and paint a grid
-        d->m_gridmap->createGrid( viewParams->m_radius,
-                                  viewParams->m_planetAxis,
-                                  viewParams->m_projection );
+        d->m_gridmap->createGrid( viewParams );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, false );
 
         // Create and paint the tropics and polar circles
-        d->m_gridmap->createTropics( viewParams->m_radius,
-                                     viewParams->m_planetAxis,
-                                     viewParams->m_projection );
+        d->m_gridmap->createTropics( viewParams );
         gridpen.setStyle( Qt::DotLine );
 //        gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, false );
 
         // Create Equator
-        d->m_gridmap->createEquator( viewParams->m_radius,
-                                     viewParams->m_planetAxis,
-                                     viewParams->m_projection );
+        d->m_gridmap->createEquator( viewParams );
 //        gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, false );
@@ -368,13 +360,9 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     if ( viewParams->m_showPlaceMarks && ( viewParams->m_showCities || 
          viewParams->m_showTerrain || viewParams->m_showOtherPlaces )
          && d->m_placemarkmodel->rowCount() > 0 ) {
-        d->m_placeMarkLayout->paintPlaceFolder( painter,
-                                                 viewParams->m_canvasImage->width(),
-                                                 viewParams->m_canvasImage->height(),
-                                                 viewParams,
+        d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,
                                                  d->m_placemarkmodel,
-                                                 d->m_placemarkselectionmodel,
-                                                 viewParams->m_planetAxis );
+                                                 d->m_placemarkselectionmodel );
     }
 #else
     /*
@@ -403,13 +391,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
                 PlaceMarkContainer& container = folder.activePlaceMarkContainer( *viewParams );
 
-                d->m_placeMarkLayout->paintPlaceFolder( painter,
-                                                        viewParams->m_canvasImage->width(),
-                                                        viewParams->m_canvasImage->height(),
-                                                        viewParams,
-                                                        &container,
-                                                        viewParams->m_planetAxis,
-                                                        firstTime );
+                d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,
+                                                        &container, firstTime );
 
                 firstTime = false;
             }

@@ -23,6 +23,7 @@
 #include "global.h"
 #include "ClipPainter.h"
 #include "GeoPolygon.h"
+#include "ViewParams.h"
 
 
 // #define VECMAP_DEBUG 
@@ -61,15 +62,14 @@ VectorMap::~VectorMap()
 }
 
 
-void VectorMap::createFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 const Quaternion& rotAxis, Projection currentProjection)
+void VectorMap::createFromPntMap( const PntMap* pntmap, ViewParams* viewParams )
 {
-    switch( currentProjection ) {
+    switch( viewParams->m_projection ) {
         case Spherical:
-            sphericalCreateFromPntMap( pntmap, radius, rotAxis );
+            sphericalCreateFromPntMap( pntmap, viewParams->m_radius, viewParams->m_planetAxis );
             break;
         case Equirectangular:
-            rectangularCreateFromPntMap( pntmap, radius, rotAxis );
+            rectangularCreateFromPntMap( pntmap, viewParams->m_radius, viewParams->m_planetAxis );
             break;
     }
 }
@@ -139,23 +139,23 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, const int& radiu
 }
 
 void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& radius, 
-                                 const Quaternion& rotAxis)
+                                 const Quaternion& planetAxis)
 {
     clear();
     m_radius = radius;
-    m_planetAxis = rotAxis;
+    m_planetAxis = planetAxis;
 
     // Calculate translation of center point
-    m_centerLat =  m_planetAxis.pitch() + M_PI;
+    m_centerLat =  - m_planetAxis.pitch();
     if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  m_planetAxis.yaw() + M_PI;
+    m_centerLon =  + m_planetAxis.yaw();
 
-    m_xyFactor = (float)( 2 * radius ) / M_PI;
+    m_rad2Pixel = (float)( 2 * radius ) / M_PI;
     double lon, lat;
     double x;
     double y;
 
-    rotAxis.inverse().toMatrix( m_rotMatrix );
+    planetAxis.inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -173,8 +173,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, const int& rad
         boundingPolygon.clear();
         for ( int i = 0; i < 4; ++i ) {
             m_boundary[i].geoCoordinates(lon, lat);
-            x = m_imgwidth / 2  + m_xyFactor * (lon + m_centerLon);
-            y = m_imgheight / 2 + m_xyFactor * (lat + m_centerLat);
+            x = m_imgwidth / 2  - m_rad2Pixel * (m_centerLon - lon);
+            y = m_imgheight / 2 + m_rad2Pixel * (m_centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -232,8 +232,8 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
 #endif
             qpos = itPoint->quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
-            m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1,
-                                      m_imgry + m_radius * qpos.v[Q_Y] + 1 );
+            m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1.0,
+                                      m_imgry - m_radius * qpos.v[Q_Y] + 1.0 );
 			
             // Take care of horizon crossings if horizon is visible
             m_lastvisible = m_currentlyvisible;			
@@ -312,8 +312,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 #endif
 
             itPoint->geoCoordinates( lon, lat);
-            double x = m_imgwidth/2  + m_xyFactor * (lon + m_centerLon) + m_offset;
-            double y = m_imgheight/2 + m_xyFactor * (lat + m_centerLat);
+            double x = m_imgwidth/2  - m_rad2Pixel * (m_centerLon - lon) + m_offset;
+            double y = m_imgheight/2 + m_rad2Pixel * (m_centerLat - lat);
             int currentSign = ( lon > 0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
@@ -322,21 +322,23 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
 //          This looked wrong to me or at least needs some very good explanation (tackat):
 //            if( fabs(lat) == M_PI/2 )
-//                x = m_imgwidth/2 + m_xyFactor * m_centerLon - 2*m_radius + m_offset;
+//                x = m_imgwidth/2 + m_rad2Pixel * m_centerLon - 2*m_radius + m_offset;
 
             m_currentPoint = QPointF( x, y );
 
             //correction of the Dateline
+
             if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
 
                 // x coordinate on the screen for the points on the dateline on both
                 // sides of the flat map.
-                double lastXAtDateLine = m_imgwidth/2 + m_xyFactor * ( m_lastSign*M_PI + m_centerLon) + m_offset;
-                double xAtDateLine = m_imgwidth/2 + m_xyFactor * ( -m_lastSign*M_PI + m_centerLon) + m_offset;
-                double lastYAtDateLine = m_imgheight/2 + (m_lastLat + m_centerLat) * m_xyFactor;
-                double yAtSouthPole = m_imgheight/2 + m_xyFactor * (m_centerLat + M_PI / 2 );
+                double lastXAtDateLine = m_imgwidth/2 + m_rad2Pixel * ( m_lastSign*M_PI - m_centerLon) + m_offset;
+                double xAtDateLine = m_imgwidth/2 + m_rad2Pixel * ( -m_lastSign*M_PI - m_centerLon) + m_offset;
+                double lastYAtDateLine = m_imgheight/2 - (m_lastLat - m_centerLat) * m_rad2Pixel;
+                double yAtSouthPole = m_imgheight/2 - m_rad2Pixel * (M_PI / 2 - m_centerLat);
 
                 //If the "jump" ocurrs in the Anctartica's latitudes
+
                 if ( lat > M_PI / 3 ) {
                        // FIXME: This should actually need to get investigated in ClipPainter.
                        // For now though we just help ClipPainter to get the clipping right.
@@ -351,6 +353,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                        m_polygon << QPointF( xAtDateLine,     y );
                 }
                 else {
+
                     if( !CrossedDateline ) {
                         m_polygon << QPointF( lastXAtDateLine, lastYAtDateLine );
                         otherPolygon << QPointF( xAtDateLine,  y );
@@ -362,6 +365,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                     CrossedDateline = !CrossedDateline;
                 }
             }
+
             if ( !CrossedDateline )
                 m_polygon << m_currentPoint;
             else
@@ -372,6 +376,9 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
             m_lastSign = currentSign;
         }
     }
+
+//    if ( CrossedDateline == true )
+//        m_polygon << otherPolygon;
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
@@ -424,7 +431,7 @@ void VectorMap::rectangularPaintBase(ClipPainter * painter, int radius, const Qu
     painter->setBrush( m_brush );
 
     // Calculate translation of center point
-    m_centerLat =  planetAxis.pitch() + M_PI;
+    m_centerLat =  -planetAxis.pitch();
     if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
 
     int yCenterOffset =  (int)((double)(2*radius) / M_PI * m_centerLat);

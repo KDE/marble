@@ -31,16 +31,31 @@ Quaternion::Quaternion(double w, double x, double y, double z)
     set( w, x, y, z );
 }
 
-Quaternion::Quaternion(double alpha, double beta)
+Quaternion::Quaternion(double lon, double lat)
 {
     v[Q_W] = 0.0;
 
-    const double  cosBeta = cos(beta);
-    v[Q_X] = -cosBeta * sin(alpha);
-    v[Q_Y] = -sin(beta);
-    v[Q_Z] = cosBeta * cos(alpha);
+    const double  cosLat = cos(lat);
+    v[Q_X] = cosLat * sin(lon);
+    v[Q_Y] = sin(lat);
+    v[Q_Z] = cosLat * cos(lon);
 }
 
+void Quaternion::getSpherical(double &lon, double &lat) const 
+{
+    double  y = v[Q_Y];
+    if ( y > 1.0 )
+        y = 1.0;
+    else if ( y < -1.0 )
+        y = -1.0;
+
+    lat = asin( y );
+
+    if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005) 
+        lon = atan2(v[Q_X], v[Q_Z]);
+    else
+        lon = 0.0;
+}
 
 void Quaternion::normalize() 
 {
@@ -185,22 +200,6 @@ void Quaternion::slerp(const Quaternion q1, const Quaternion q2, double t)
     v[Q_Y] = p1*q1.v[Q_Y] + p2*q2.v[Q_Y];
     v[Q_Z] = p1*q1.v[Q_Z] + p2*q2.v[Q_Z];
     v[Q_W] = p1*q1.v[Q_W] + p2*q2.v[Q_W];
-}
-
-void Quaternion::getSpherical(double &alpha, double &beta) const 
-{
-    double  y = v[Q_Y];
-    if ( y > 1.0 )
-        y = 1.0;
-    else if ( y < -1.0 )
-        y = -1.0;
-
-    beta = -asin( y );
-
-    if(v[Q_X] * v[Q_X] + v[Q_Z] * v[Q_Z] > 0.00005) 
-        alpha = -atan2(v[Q_X], v[Q_Z]);
-    else
-        alpha = 0.0;
 }
 
 void Quaternion::toMatrix(matrix &m) const

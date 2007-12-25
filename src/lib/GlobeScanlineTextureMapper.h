@@ -41,7 +41,7 @@ class GlobeScanlineTextureMapper : public AbstractScanlineTextureMapper
     virtual ~GlobeScanlineTextureMapper();
 
     void resizeMap(int width, int height);
-    void mapTexture(QImage* canvasImage, const int& radius, Quaternion& planetAxis);
+    void mapTexture( ViewParams *viewParams );
 
  protected:
     void pixelValueApprox(const double& lon, const double& lat,

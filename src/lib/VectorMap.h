@@ -24,16 +24,16 @@
 #include "ScreenPolygon.h"
 
 
-class PntMap;
 class ClipPainter;
-
+class PntMap;
+class ViewParams;
 
 class VectorMap : public ScreenPolygon::Vector
 {
  public:
     VectorMap();
     ~VectorMap();
-    void createFromPntMap(const PntMap*, const int&, const Quaternion&, Projection );
+    void createFromPntMap( const PntMap*, ViewParams* viewParams );
 
     void paintBase(ClipPainter *, int radius, const Quaternion&, bool, Projection );
     void paintMap(ClipPainter *, bool );
@@ -121,7 +121,7 @@ class VectorMap : public ScreenPolygon::Vector
     //Needed for the flat projection
     double m_centerLat;
     double m_centerLon;
-    double m_xyFactor;
+    double m_rad2Pixel;
 };
 
 

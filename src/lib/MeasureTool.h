@@ -86,7 +86,7 @@ class MeasureTool : public QObject
 	QRectF m_visibleArea;
     double m_centerLat;
     double m_centerLon;
-    double m_xyFactor;
+    double m_rad2Pixel;
     int m_radius;
 };
 

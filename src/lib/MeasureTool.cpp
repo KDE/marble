@@ -146,7 +146,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
         if ( qpos.v[Q_Z] > 0 ) {
 
             x = (int)( imgrx + radius * qpos.v[Q_X] );
-            y = (int)( imgry + radius * qpos.v[Q_Y] );
+            y = (int)( imgry - radius * qpos.v[Q_Y] );
 
 //             Don't process placemarks if they are outside the screen area.
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
@@ -172,11 +172,11 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     int  y = 0;
 
     // Calculate translation of center point
-    m_centerLat =  planetAxis.pitch() + M_PI;
+    m_centerLat =  planetAxis.pitch();
     if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  planetAxis.yaw() + M_PI;
+    m_centerLon =  -planetAxis.yaw();
 
-    m_xyFactor = 2*radius / M_PI;
+    m_rad2Pixel = 2 * radius / M_PI;
     m_radius = radius;
 
     Quaternion  qpos;
@@ -241,8 +241,8 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
         qpos = (*it)->quaternion();
         qpos.getSpherical(lon,lat);
 
-        x = (int)( imgrx + (lon + m_centerLon ) *m_xyFactor );
-        y = (int)( imgry + (lat + m_centerLat ) *m_xyFactor );
+        x = (int)( imgrx + (lon + m_centerLon ) * m_rad2Pixel );
+        y = (int)( imgry - (lat + m_centerLat ) * m_rad2Pixel );
 
         rectangularPaintMark( painter, x, y, imgwidth, imgheight );
     }
@@ -339,7 +339,7 @@ void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion pr
 
         if ( itpos.v[Q_Z] > 0 ) {
             x = (double)(imgrx) + (double)(radius) * itpos.v[Q_X];
-            y = (double)(imgry) + (double)(radius) * itpos.v[Q_Y];
+            y = (double)(imgry) - (double)(radius) * itpos.v[Q_Y];
 
             // paintMark( painter, x, y );
             distancePath << QPointF( x, y );
@@ -364,10 +364,8 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
     double      previousX;
     double      interpolatedY;
 
-    double      centerLonPixel = m_centerLon * m_xyFactor;
-    double      centerLatPixel = m_centerLat * m_xyFactor;
     QPolygonF   distancePath;
-    m_visibleArea = QRectF( 0, 0, imgrx*2, imgry*2 );
+    m_visibleArea = QRectF( 0, 0, 2 * imgrx, 2 * imgry );
 
     Q_UNUSED( antialiasing );
 
@@ -376,7 +374,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
     itpos.getSpherical(lon,lat);
-    currentSign = previousSign = (lon<0)?-1:1;
+    currentSign = previousSign = (lon < 0)?-1:1;
     previousLon = lon;
 
     Q_UNUSED( antialiasing );
@@ -387,8 +385,8 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical(lon,lat);
 
-        x = (double)( imgrx + ( lon ) *m_xyFactor + centerLonPixel );
-        y = (double)( imgry + ( lat ) *m_xyFactor + centerLatPixel );
+        x = (double)( imgrx + ( lon + m_centerLon ) * m_rad2Pixel );
+        y = (double)( imgry - ( lat + m_centerLat ) * m_rad2Pixel );
         //The next steeps deal with the measurement of two points
         //that the shortest path crosses the dateline
         currentSign = (lon < 0)?-1:1;
@@ -399,14 +397,14 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 //                             ( x - previousX ) *
 //                                 ( imgrx + previousSign*2*radius - previousX );
             //This is temporal just to be able to commit
-            interpolatedY= ( y + previousY )/2;
-            distancePath << QPointF( imgrx + centerLonPixel
-                                    + previousSign*2*radius,
+            interpolatedY= ( y + previousY ) / 2;
+            distancePath << QPointF( imgrx + m_centerLon * m_rad2Pixel
+                                    + previousSign * 2 * radius,
                                       interpolatedY );
             drawAndRepeatDistancePath( painter, distancePath );
             distancePath.clear();
-            distancePath << QPointF( imgrx + centerLonPixel
-                                    + currentSign*2*radius,
+            distancePath << QPointF( imgrx + m_centerLon * m_rad2Pixel
+                                    + currentSign * 2 * radius,
                                       interpolatedY);
         }
         else distancePath << QPointF( x, y );
