@@ -89,8 +89,7 @@ GeoDataStyle* MarblePlacemarkModel::styleData( const QModelIndex &index ) const
 {
     if ( !index.isValid() )
         return 0;
-    else
-    {
+    else {
         GeoDataFeature* feature = d->m_placeMarkContainer.at( index.row() );
         return feature->style();
     }
@@ -171,9 +170,8 @@ QModelIndexList MarblePlacemarkModel::match( const QModelIndex & start, int role
 void MarblePlacemarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious )
 {
   // For now we simply remove any previous placemarks
-    if ( clearPrevious == true )
-    {
-        qDeleteAll(d->m_placeMarkContainer.begin(), d->m_placeMarkContainer.end());
+    if ( clearPrevious ) {
+        qDeleteAll( d->m_placeMarkContainer.begin(), d->m_placeMarkContainer.end() );
         d->m_placeMarkContainer.clear();
     }
 

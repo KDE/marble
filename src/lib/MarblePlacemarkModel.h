@@ -68,12 +68,21 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     ~MarblePlacemarkModel();
 	
+    /**
+     * Return the number of Placemarks in the Model.
+     */
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
     GeoDataPoint coordinateData( const QModelIndex &index ) const;
     GeoDataStyle* styleData( const QModelIndex &index ) const;
 
+    /**
+     * Return the data according to the index.
+     *
+     * @param index  the index of the data
+     * @param role   which part of the data to return.  @see Roles
+     */
     QVariant data( const QModelIndex &index, int role ) const;
 
     virtual QModelIndexList match( const QModelIndex &start, int role, 
