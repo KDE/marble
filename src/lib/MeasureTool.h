@@ -25,6 +25,7 @@
 #include "global.h"
 #include "ClipPainter.h"
 
+class ViewParams;
 
 class MeasureTool : public QObject
 {
@@ -33,39 +34,36 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
-    void  paintMeasurePoints( ClipPainter*, int, int, int, Quaternion, bool, Projection );
-    void  sphericalPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
-    void  rectangularPaintMeasurePoints ( ClipPainter*, int, int, int, Quaternion, bool );
+    void  paintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
+    void  sphericalPaintMeasurePoints ( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
+    void  rectangularPaintMeasurePoints ( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
 
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
-    void  paintTotalDistanceLabel( ClipPainter*, int, int, double );
+    void  paintTotalDistanceLabel( ClipPainter * painter, int imgrx, int imgry, double totalDistance );
  private:
-	void drawAndRepeatDistancePath( ClipPainter* painter,
+	void  drawAndRepeatDistancePath( ClipPainter* painter,
 									const QPolygonF distancePath );
-	void rectangularPaintMark( ClipPainter* painter, int x, int y,
+	void  rectangularPaintMark( ClipPainter* painter, int x, int y,
                                int width, int height );
  public Q_SLOTS:
-    void addMeasurePoint( double lon, double lat ) {
-        m_pMeasurePointList << new GeoDataPoint( lon, lat );
+    void  addMeasurePoint( double lon, double lat ) {
+              m_pMeasurePointList << new GeoDataPoint( lon, lat );
     }
-    void removeMeasurePoints() {
-        m_pMeasurePointList.clear();
+    void  removeMeasurePoints() {
+              m_pMeasurePointList.clear();
     }
 
  protected:
     bool  testbug(); 
     void  paintMark( ClipPainter* painter, int x, int y );
     void  drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                            int imgrx, int imgry, int radius, 
-                            bool antialiasing, Projection );
+                             ViewParams &viewParams, bool antialiasing );
 
     void  sphericalDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                            int imgrx, int imgry, int radius, 
-                            bool antialiasing );
+                             ViewParams &viewParams, bool antialiasing );
 
     void  rectangularDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                            int imgrx, int imgry, int radius, 
-                            bool antialiasing );
+                             ViewParams &viewParams, bool antialiasing );
 
     double  m_totalDistance;
 

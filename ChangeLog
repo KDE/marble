@@ -1,3 +1,16 @@
+    * src/lib/MeasureTool.{cpp, h}:
+    * src/lib/MarbleWidget.cpp:
+
+    More ViewParam-ization.
+
+2007-12-25  Torsten Rahn  <rahn@kde.org>
+
+	* VectorMap.{cpp,h}:
+	* TextureColorizer.cpp:
+	* VectorComposer.cpp:
+
+	More ViewParam-ization.
+
 2007-12-25  Torsten Rahn  <rahn@kde.org>
 
 	* Fix coordinate system 

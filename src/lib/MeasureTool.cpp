@@ -18,7 +18,7 @@
 #include <QtGui/QPainter>
 
 #include "Quaternion.h"
-
+#include "ViewParams.h"
 
 MeasureTool::MeasureTool(QObject* parent)
     : QObject(parent)
@@ -42,49 +42,38 @@ MeasureTool::MeasureTool(QObject* parent)
     m_pen.setWidthF( 2.0 );
 }
 
-void MeasureTool::paintMeasurePoints( ClipPainter* painter, 
-                                     int imgrx, int imgry, int radius, 
-                                     Quaternion planetAxis, bool antialiasing, 
-                                     Projection currentProjection )
+void MeasureTool::paintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing )
 {
-    switch( currentProjection ) {
+    switch( viewParams.m_projection ) {
         case Spherical:
-            sphericalPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+            sphericalPaintMeasurePoints( painter, viewParams, antialiasing );
             break;
         case Equirectangular:
-            rectangularPaintMeasurePoints( painter, imgrx, imgry, radius, planetAxis, antialiasing );
+            rectangularPaintMeasurePoints( painter, viewParams, antialiasing );
             break;
     }
 }
 
-void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter, 
-                                     int imgrx, int imgry, int radius, 
-                                     Quaternion planetAxis, bool antialiasing )
+void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing )
 {
     if ( m_pMeasurePointList.isEmpty() )
         return;
 
-    int  imgwidth  = 2 * imgrx;
-    int  imgheight = 2 * imgry;
+    int  imgwidth  = viewParams.m_canvasImage->width();
+    int  imgheight = viewParams.m_canvasImage->height();
+    int  radius = viewParams.m_radius;
     int  x = 0;
     int  y = 0;
-    //int  lastx = 0;
-    //int  lasty = 0; 
 
-    Quaternion  invplanetAxis = planetAxis.inverse();
+    Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
     Quaternion  qpos;
     Quaternion  prevqpos;
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setPen( m_pen );
-    // painter->setPen(QColor(Qt::white));
-    // painter->drawPolyline(distancePathShadow);
 
     QVector<GeoDataPoint*>::const_iterator  it;
-
-    // QPolygonF  measurePoints;
-    // QPolygonF distancePathShadow;
 
     m_totalDistance = 0.0;
 
@@ -101,14 +90,6 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
     {
         qpos = (*it)->quaternion();
         qpos.rotateAroundAxis( invplanetAxis );
-// FIXME: This is not needed, shouldn't it be removed?
-//         if ( qpos.v[Q_Z] > 0 ) {
-//             x = (int)( imgrx + radius*qpos.v[Q_X] );
-//             y = (int)( imgry + radius*qpos.v[Q_Y] );
-// 
-//             measurePoints << QPointF( x, y );
-//             // distancePathShadow << QPointF(x,y+1);
-//         }
 
         (*it)->geoCoordinates( lon, lat );
 
@@ -116,7 +97,7 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
             m_totalDistance += acos( sin( prevLat ) * sin( lat )
                                      + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
 
-            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Spherical );
+            drawDistancePath( painter, prevqpos, qpos, viewParams, antialiasing );
         }
 
         prevqpos = qpos;
@@ -126,15 +107,6 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
-#if 0
-      if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
-      painter->setPen( QColor( Qt::red ) );
-      painter->drawPolyline( measurePoints );
-      // painter->setPen( QColor( Qt::white ) );
-      // painter->drawPolyline( distancePathShadow );
-      if ( antialiasing == true )
-          painter->setRenderHint( QPainter::Antialiasing, false );
-#endif
 
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
@@ -145,8 +117,8 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
 
         if ( qpos.v[Q_Z] > 0 ) {
 
-            x = (int)( imgrx + radius * qpos.v[Q_X] );
-            y = (int)( imgry - radius * qpos.v[Q_Y] );
+            x = (int)( imgwidth / 2 + radius * qpos.v[Q_X] );
+            y = (int)( imgheight / 2 - radius * qpos.v[Q_Y] );
 
 //             Don't process placemarks if they are outside the screen area.
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
@@ -156,25 +128,22 @@ void MeasureTool::sphericalPaintMeasurePoints(ClipPainter* painter,
     }
 
     if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, imgrx, imgry, m_totalDistance );
+        paintTotalDistanceLabel( painter, imgwidth / 2, imgheight / 2, m_totalDistance );
 }
 
-void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter, 
-                                     int imgrx, int imgry, int radius, 
-                                     Quaternion planetAxis, bool antialiasing )
+void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing )
 {
     if ( m_pMeasurePointList.isEmpty() )
         return;
 
-    int  imgwidth  = 2 * imgrx;
-    int  imgheight = 2 * imgry;
+    int  imgwidth  = viewParams.m_canvasImage->width();
+    int  imgheight = viewParams.m_canvasImage->height();
+    int  radius = viewParams.m_radius;
     int  x = 0;
     int  y = 0;
 
     // Calculate translation of center point
-    m_centerLat =  planetAxis.pitch();
-    if ( m_centerLat > M_PI ) m_centerLat -= 2 * M_PI; 
-    m_centerLon =  -planetAxis.yaw();
+    viewParams.centerCoordinates( m_centerLon, m_centerLat );
 
     m_rad2Pixel = 2 * radius / M_PI;
     m_radius = radius;
@@ -185,13 +154,8 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, true );
     painter->setPen( m_pen );
-    // painter->setPen(QColor(Qt::white));
-    // painter->drawPolyline(distancePathShadow);
 
     QVector<GeoDataPoint*>::const_iterator  it;
-
-    // QPolygonF  measurePoints;
-    // QPolygonF distancePathShadow;
 
     m_totalDistance = 0.0;
 
@@ -214,7 +178,7 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
             m_totalDistance += acos( sin( prevLat ) * sin( lat )
                                      + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * 6371221.0;
 
-            drawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing, Equirectangular );
+            drawDistancePath( painter, prevqpos, qpos, viewParams, antialiasing );
         }
 
         prevqpos = qpos;
@@ -224,15 +188,6 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
 
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
-#if 0
-      if (antialiasing == true) painter->setRenderHint(QPainter::Antialiasing, true);
-      painter->setPen( QColor( Qt::red ) );
-      painter->drawPolyline( measurePoints );
-      // painter->setPen( QColor( Qt::white ) );
-      // painter->drawPolyline( distancePathShadow );
-      if ( antialiasing == true )
-          painter->setRenderHint( QPainter::Antialiasing, false );
-#endif
 
     for ( it = m_pMeasurePointList.constBegin(); 
           it != m_pMeasurePointList.constEnd();
@@ -241,14 +196,14 @@ void MeasureTool::rectangularPaintMeasurePoints(ClipPainter* painter,
         qpos = (*it)->quaternion();
         qpos.getSpherical(lon,lat);
 
-        x = (int)( imgrx + (lon + m_centerLon ) * m_rad2Pixel );
-        y = (int)( imgry - (lat + m_centerLat ) * m_rad2Pixel );
+        x = (int)( imgwidth / 2  - ( m_centerLon - lon ) * m_rad2Pixel );
+        y = (int)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
 
         rectangularPaintMark( painter, x, y, imgwidth, imgheight );
     }
 
     if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, imgrx, imgry, m_totalDistance );
+        paintTotalDistanceLabel( painter, imgwidth / 2, imgheight / 2, m_totalDistance );
 }
 
 void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter, 
@@ -306,26 +261,27 @@ void MeasureTool::rectangularPaintMark( ClipPainter* painter, int x, int y,
 }
 
 void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
-                                    Quaternion qpos, int imgrx, int imgry, 
-                                    int radius, bool antialiasing, Projection currentProjection )
+                                    Quaternion qpos, ViewParams &viewParams, bool antialiasing )
 {
-    switch( currentProjection ) {
+    switch( viewParams.m_projection ) {
         case Spherical:
-            sphericalDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            sphericalDrawDistancePath(   painter, prevqpos, qpos, viewParams, antialiasing );
             break;
         case Equirectangular:
-            rectangularDrawDistancePath( painter, prevqpos, qpos, imgrx, imgry, radius, antialiasing );
+            rectangularDrawDistancePath( painter, prevqpos, qpos, viewParams, antialiasing );
             break;
     }
 }
 
 void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion prevqpos,
-                                    Quaternion qpos, int imgrx, int imgry, 
-                                    int radius, bool antialiasing )
+                                    Quaternion qpos, ViewParams &viewParams, bool antialiasing )
 {
     double      t = 0.0;
     Quaternion  itpos;
 
+    int  imgwidth  = viewParams.m_canvasImage->width();
+    int  imgheight = viewParams.m_canvasImage->height();
+    int  radius = viewParams.m_radius;
     double      x;
     double      y;
     QPolygonF   distancePath;
@@ -338,8 +294,8 @@ void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion pr
         itpos.slerp( prevqpos, qpos, t );
 
         if ( itpos.v[Q_Z] > 0 ) {
-            x = (double)(imgrx) + (double)(radius) * itpos.v[Q_X];
-            y = (double)(imgry) - (double)(radius) * itpos.v[Q_Y];
+            x = (double)(imgwidth  / 2) + (double)(radius) * itpos.v[Q_X];
+            y = (double)(imgheight / 2) - (double)(radius) * itpos.v[Q_Y];
 
             // paintMark( painter, x, y );
             distancePath << QPointF( x, y );
@@ -350,9 +306,12 @@ void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion pr
 }
 
 void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion prevqpos,
-                                    Quaternion qpos, int imgrx, int imgry, 
-                                    int radius, bool antialiasing )
+                                    Quaternion qpos, ViewParams &viewParams, bool antialiasing )
 {
+    int         imgwidth  = viewParams.m_canvasImage->width();
+    int         imgheight = viewParams.m_canvasImage->height();
+    int         radius = viewParams.m_radius;
+
     double      x;
     double      y;
     int         currentSign;
@@ -365,7 +324,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
     double      interpolatedY;
 
     QPolygonF   distancePath;
-    m_visibleArea = QRectF( 0, 0, 2 * imgrx, 2 * imgry );
+    m_visibleArea = QRectF( 0, 0, imgwidth, imgheight );
 
     Q_UNUSED( antialiasing );
 
@@ -385,8 +344,8 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical(lon,lat);
 
-        x = (double)( imgrx + ( lon + m_centerLon ) * m_rad2Pixel );
-        y = (double)( imgry - ( lat + m_centerLat ) * m_rad2Pixel );
+        x = (double)( imgwidth / 2  - ( m_centerLon - lon ) * m_rad2Pixel );
+        y = (double)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
         //The next steeps deal with the measurement of two points
         //that the shortest path crosses the dateline
         currentSign = (lon < 0)?-1:1;
@@ -398,13 +357,13 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 //                                 ( imgrx + previousSign*2*radius - previousX );
             //This is temporal just to be able to commit
             interpolatedY= ( y + previousY ) / 2;
-            distancePath << QPointF( imgrx + m_centerLon * m_rad2Pixel
+            distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel
                                     + previousSign * 2 * radius,
                                       interpolatedY );
             drawAndRepeatDistancePath( painter, distancePath );
             distancePath.clear();
-            distancePath << QPointF( imgrx + m_centerLon * m_rad2Pixel
-                                    + currentSign * 2 * radius,
+            distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel
+                                    + currentSign  * 2 * radius,
                                       interpolatedY);
         }
         else distancePath << QPointF( x, y );

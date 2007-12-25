@@ -988,12 +988,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                           d->m_viewParams.m_canvasImage->height() );
 
     // 5. Paint measure points if there are any.
-    d->m_measureTool->paintMeasurePoints( &painter,
-                                          d->m_viewParams.m_canvasImage->width() / 2,
-                                          d->m_viewParams.m_canvasImage->height() / 2,
-                                          radius(), planetAxis(),
-                                          true,
-                                          d->m_viewParams.m_projection );
+    d->m_measureTool->paintMeasurePoints( &painter, d->m_viewParams, true );
 
     // Set the region of the image where the user can drag it.
     setActiveRegion();
