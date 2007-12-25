@@ -277,8 +277,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int     radius        = m_widget->radius();
 
                 // Calculate translation of center point
-                double centerLat =  - m_widget->planetAxis().pitch();
-                if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+                double centerLat = DEG2RAD * m_widget->centerLatitude();
 
                 int     yCenterOffset = (int)((double)(2 * radius / M_PI) * centerLat);
                 int     yTop          =  m_widget->height() / 2 - radius - yCenterOffset;

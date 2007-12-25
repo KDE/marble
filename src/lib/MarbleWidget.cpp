@@ -151,10 +151,11 @@ void MarbleWidget::construct(QWidget *parent)
     setPalette( p );
     setBackgroundRole( QPalette::Window );
     setAutoFillBackground( true );
-//     setProjection( Equirectangular );
+//    setProjection( Equirectangular );
 //    setAttribute(Qt::WA_NoSystemBackground);
 
-    // Fixed a potential crash if MarbleWidget constructed as a toplevel widget
+//    Fixed a potential crash if MarbleWidget constructed as a toplevel widget
+
     if ( parent )
         d->m_viewParams.m_canvasImage = new QImage( parent->width(),
                                                     parent->height(),
@@ -199,7 +200,7 @@ void MarbleWidget::construct(QWidget *parent)
 
 #if 0 // Reeneable when the autosettings are actually used
 
-   // AutoSettings
+      // AutoSettings
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
 }
@@ -300,14 +301,17 @@ int MarbleWidget::zoom() const
 
 double MarbleWidget::centerLatitude() const
 {
-    double centerLat =  -d->m_viewParams.m_planetAxis.pitch();
-    if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+    // Calculate translation of center point
+    double centerLon, centerLat;
+    d->m_viewParams.centerCoordinates(centerLon, centerLat);
     return centerLat * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
-    double centerLon =  d->m_viewParams.m_planetAxis.yaw();
+    // Calculate translation of center point
+    double centerLon, centerLat;
+    d->m_viewParams.centerCoordinates(centerLon, centerLat);
     return centerLon * RAD2DEG;
 }
 
@@ -730,13 +734,14 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
          Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
          p.rotateAroundAxis(d->m_viewParams.m_planetAxis.inverse());
  
-         x = (int)( width() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
+         x = (int)( width() / 2   + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
          y = (int)( height() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_Y] );
  
          return p.v[Q_Z] > 0;
      }
  
      case Equirectangular:
+         // Calculate translation of center point
          double centerLon, centerLat;
          d->m_viewParams.centerCoordinates(centerLon, centerLat);
          double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
@@ -898,11 +903,12 @@ void MarbleWidget::setActiveRegion()
             break;
         case Equirectangular:
             // Calculate translation of center point
-            double centerLat =  -planetAxis().pitch();
-            if ( centerLat > M_PI ) centerLat -= 2 * M_PI; 
+            double centerLon, centerLat;
+            d->m_viewParams.centerCoordinates( centerLon, centerLat );
+
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
-            d->m_activeRegion &= QRegion( 0, yTop, width(), 2*zoom, QRegion::Rectangle );
+            d->m_activeRegion &= QRegion( 0, yTop, width(), 2 * zoom, QRegion::Rectangle );
             break;
     }
 }
