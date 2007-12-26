@@ -330,11 +330,11 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                 double lastXAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( m_lastSign*M_PI - m_centerLon) + m_offset;
                 double xAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( -m_lastSign*M_PI - m_centerLon) + m_offset;
                 double lastYAtDateLine = m_imgheight / 2 - (m_lastLat - m_centerLat) * m_rad2Pixel;
-                double yAtSouthPole = m_imgheight / 2 - m_rad2Pixel * (M_PI / 2 - m_centerLat);
+                double yAtSouthPole = m_imgheight / 2 + m_rad2Pixel * (M_PI / 2 + m_centerLat);
 
                 //If the "jump" ocurrs in the Anctartica's latitudes
 
-                if ( lat > M_PI / 3 ) {
+                if ( lat < - M_PI / 3 ) {
                        // FIXME: This should actually need to get investigated in ClipPainter.
                        // For now though we just help ClipPainter to get the clipping right.
                        if ( lastXAtDateLine > m_imgwidth - 1 ) lastXAtDateLine = m_imgwidth - 1;
