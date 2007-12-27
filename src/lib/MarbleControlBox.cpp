@@ -247,6 +247,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( d->m_widget, SIGNAL(themeChanged( QString )), this, SLOT( selectTheme( QString )) );
     selectTheme( d->m_widget->mapTheme() );
+    connect( d->m_widget, SIGNAL(projectionChanged( int )), this, SLOT( selectProjection( int )) );
+    selectProjection( d->m_widget->projection() );
 
     connect(d->m_widget, SIGNAL(zoomChanged(int)),
 	    this,        SLOT(changeZoom(int)));
@@ -503,6 +505,12 @@ void MarbleControlBox::selectTheme( const QString &theme )
               }
         }
     }
+}
+
+void MarbleControlBox::selectProjection( int projectionIndex )
+{
+    if ( projectionIndex != d->uiWidget.projectionComboBox->currentIndex() )
+        d->uiWidget.projectionComboBox->setCurrentIndex( projectionIndex );
 }
 
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )

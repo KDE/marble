@@ -385,7 +385,10 @@ void MainWindow::readSettings()
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );
-         m_controlView->marbleWidget()->goHome();
+         m_controlView->marbleWidget()->goHome();         
+         m_controlView->marbleWidget()->setProjection(
+            settings.value("projection", 0 ).toInt()
+         );
      settings.endGroup();
 }
 
@@ -397,7 +400,7 @@ void MainWindow::writeSettings()
      QSettings settings("KDE", "Marble Desktop Globe");
 #endif
 
-     settings.beginGroup("MainWindow");
+     settings.beginGroup( "MainWindow" );
          settings.setValue( "size", size() );
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
@@ -405,14 +408,17 @@ void MainWindow::writeSettings()
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
      settings.endGroup();
 
-     settings.beginGroup("MarbleWidget");
+     settings.beginGroup( "MarbleWidget" );
          double homeLon = 0;
          double homeLat = 0;
          int homeZoom = 0;
          m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+         int projection = (int)( m_controlView->marbleWidget()->projection() );
+
          settings.setValue( "homeLongitude", homeLon );
          settings.setValue( "homeLatitude", homeLat );
          settings.setValue( "homeZoom", homeZoom );
+         settings.setValue( "projection", projection ); 
      settings.endGroup();
 }
 

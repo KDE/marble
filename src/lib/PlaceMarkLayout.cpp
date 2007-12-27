@@ -308,16 +308,16 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // Skip city marks if we're not showing cities.
         if ( !viewParams->m_showCities
-             && ( visualCategory > 3 && visualCategory < 20 ) )
+             && ( visualCategory > 2 && visualCategory < 20 ) )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
         if ( !viewParams->m_showTerrain
-             && ( visualCategory >= 20 && visualCategory <= 21 ) )
+             && ( visualCategory >= 20 && visualCategory <= 23 ) )
             continue;
 
         if ( !viewParams->m_showOtherPlaces
-             && ( visualCategory >= 22 && visualCategory <= 25 ) )
+             && ( visualCategory >= 24 && visualCategory <= 27 ) )
             continue;
 
 

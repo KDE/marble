@@ -68,17 +68,19 @@ class GeoDataFeature : public GeoDataObject
         LargeCountyCapital,
         LargeStateCapital,
         LargeNationCapital,
+        Nation,
 
-        // Other types of features
+        // Terrain
         Mountain,
         Volcano,
+        Continent,
+        Ocean,
+
+        // Places of Interest
         GeographicPole,
         MagneticPole,
         ShipWreck,
         AirPort,
-        Continent,
-        Ocean,
-        Nation,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

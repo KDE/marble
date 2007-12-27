@@ -268,10 +268,10 @@ void PntMap::load(const QString &filename)
 	
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
-        double  lonLeft = ARCMINUTE;
-        double  lonRight = -ARCMINUTE;
-        double  latTop = ARCMINUTE / 2.0;
-        double  latBottom = -ARCMINUTE / 2.0;		
+        double  lonLeft =   +ARCMINUTE;
+        double  lonRight =  -ARCMINUTE;
+        double  latTop =    -ARCMINUTE / 2.0;
+        double  latBottom = +ARCMINUTE / 2.0;		
         GeoDataPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
 
         if ( (*itPolyLine)->getDateLine() ) { 
@@ -284,12 +284,12 @@ void PntMap::load(const QString &filename)
                 x = (int)( ARCMINUTE * lon / M_PI );
 
                 if ( x < lonLeft  && x > -ARCMINUTE / 2 ) lonLeft = x;
-                if ( x > lonRight  && x < -ARCMINUTE / 2 ) lonRight = x;
+                if ( x > lonRight && x < -ARCMINUTE / 2 ) lonRight = x;
 				
                 y = (int)( ARCMINUTE * lat / M_PI );
 
-                if ( y < latTop ) latTop = y;
-                if ( y > latBottom ) latBottom = y;
+                if ( y > latTop )    latTop = y;
+                if ( y < latBottom ) latBottom = y;
             }
 
             (*itPolyLine)->setBoundary( (int)(lonLeft), (int)(latTop),
@@ -311,8 +311,8 @@ void PntMap::load(const QString &filename)
 				
                 y = (int)( ARCMINUTE * lat / M_PI );
 
-                if (y < latTop) latTop = y;
-                if (y > latBottom) latBottom = y;
+                if (y > latTop)    latTop = y;
+                if (y < latBottom) latBottom = y;
             }
             (*itPolyLine)->setBoundary( (int)(lonLeft), (int)(latTop),
                                         (int)(lonRight), (int)(latBottom) );

@@ -156,6 +156,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void centerOn(const QModelIndex&);
 
     void selectMapTheme( const QString& );
+
     void projectionSelected( int );
     
     void gpsInputDisabled( bool );
@@ -211,6 +212,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void search();
 
     void selectTheme( const QString & );
+    void selectProjection( int projectionIndex );
+
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
 

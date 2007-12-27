@@ -563,6 +563,8 @@ Projection MarbleWidget::projection() const
 // FIXME: Actually take a real Projection as parameter.
 void MarbleWidget::setProjection( int projectionIndex )
 {
+    emit projectionChanged( projectionIndex );
+
     Projection projection;
 
     switch ( projectionIndex )

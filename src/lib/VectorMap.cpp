@@ -173,6 +173,7 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
         }
 
         m_offset = 0;
+
         do {
             m_offset -= 4 * m_radius;
             boundingPolygon.translate( -4 * m_radius, 0 );
@@ -180,6 +181,7 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
 
         m_offset += 4 * m_radius;
         boundingPolygon.translate( 4 * m_radius, 0 );
+
         while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) ) {
             m_polygon.clear();
             m_polygon.reserve( (*itPolyLine)->size() );
@@ -315,10 +317,6 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
                 m_lastSign = currentSign;
             }
 
-//          This looked wrong to me or at least needs some very good explanation (tackat):
-//            if( fabs(lat) == M_PI/2 )
-//                x = m_imgwidth/2 + m_rad2Pixel * m_centerLon - 2*m_radius + m_offset;
-
             m_currentPoint = QPointF( x, y );
 
             //correction of the Dateline
@@ -327,12 +325,12 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
                 // x coordinate on the screen for the points on the dateline on both
                 // sides of the flat map.
-                double lastXAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( m_lastSign*M_PI - m_centerLon) + m_offset;
-                double xAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( -m_lastSign*M_PI - m_centerLon) + m_offset;
-                double lastYAtDateLine = m_imgheight / 2 - (m_lastLat - m_centerLat) * m_rad2Pixel;
-                double yAtSouthPole = m_imgheight / 2 + m_rad2Pixel * (M_PI / 2 + m_centerLat);
+                double lastXAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( m_lastSign * M_PI - m_centerLon ) + m_offset;
+                double xAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( -m_lastSign * M_PI - m_centerLon ) + m_offset;
+                double lastYAtDateLine = m_imgheight / 2 - ( m_lastLat - m_centerLat ) * m_rad2Pixel;
+                double yAtSouthPole = m_imgheight / 2 + m_rad2Pixel * ( M_PI / 2 + m_centerLat );
 
-                //If the "jump" ocurrs in the Anctartica's latitudes
+                //If the "jump" occurs in the Anctartica's latitudes
 
                 if ( lat < - M_PI / 3 ) {
                        // FIXME: This should actually need to get investigated in ClipPainter.
@@ -366,14 +364,11 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
             else
                 otherPolygon << m_currentPoint;
 
-            m_lastLon = lon;
-            m_lastLat = lat;
+            m_lastLon  = lon;
+            m_lastLat  = lat;
             m_lastSign = currentSign;
         }
     }
-
-//    if ( CrossedDateline == true )
-//        m_polygon << otherPolygon;
 
     // Avoid polygons degenerated to Points.
     if ( m_polygon.size() >= 2 ) {
@@ -429,15 +424,15 @@ void VectorMap::rectangularPaintBase(ClipPainter * painter, ViewParams *viewPara
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset =  (int)((double)( 2 * m_radius ) / M_PI * centerLat);
+    int yCenterOffset = (int)( centerLat * (double)( 2 * m_radius ) / M_PI );
     int yTop = m_imgheight / 2 - m_radius + yCenterOffset;
 
     painter->drawRect( 0, yTop, m_imgwidth, 2 * m_radius);
 }
 
-void VectorMap::drawMap(QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
+void VectorMap::drawMap( QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
 {
-    bool clip=false; //assume false
+    bool clip = false; //assume false
     switch( currentProjection ) {
         case Spherical:
             clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;

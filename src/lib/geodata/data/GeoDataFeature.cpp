@@ -140,6 +140,12 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/city_1_red.png" ) ), 
               QFont( defaultFamily, defaultSize, 75, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[Nation]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.2 ), 75, false ), QColor( "#404040" ) );
+    // Align area labels centered
+    s_defaultStyle[Nation] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+
     s_defaultStyle[Mountain]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/mountain_1.png" ) ), 
               QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
@@ -147,6 +153,18 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[Volcano]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/volcano_1.png" ) ), 
               QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Continent]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
+    // Align area labels centered
+    s_defaultStyle[Continent] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+
+    s_defaultStyle[Ocean]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
+    // Align area labels centered
+    s_defaultStyle[Ocean] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[GeographicPole]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ), 
@@ -163,24 +181,6 @@ void GeoDataFeature::initializeDefaultStyles()
     s_defaultStyle[AirPort]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/airport.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
-
-    s_defaultStyle[Continent]
-        = new GeoDataStyle( QPixmap(), 
-              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
-    // Align area labels centered
-    s_defaultStyle[Continent] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
-
-    s_defaultStyle[Ocean]
-        = new GeoDataStyle( QPixmap(), 
-              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
-    // Align area labels centered
-    s_defaultStyle[Ocean] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
-
-    s_defaultStyle[Nation]
-        = new GeoDataStyle( QPixmap(), 
-              QFont( defaultFamily, (int)(defaultSize * 1.2 ), 75, false ), QColor( "#404040" ) );
-    // Align area labels centered
-    s_defaultStyle[Nation] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyleInitialized = true;
 

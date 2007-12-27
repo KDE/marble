@@ -6,6 +6,26 @@ Mark those tasks that you want to perform with your name:
  CARU   Carlos Licea
  MURA   Murad Tagirov
 
+Showstoppers to fix before KDE 4.0:
+
+Before Dec 28th:
+----------------
+- Investigate Crash on Quit
+- Save Projection in KDE interface
+- Save Projection in Qt interface (DONE)
+- Update Projection ComboBox accordingly (DONE)
+- Fix dateline issue with Bounding Box
+- Fix area visibility mapped to Legend (DONE)
+- Fix order of Feature appearance
+- Fix MarbleNavigator Plugin
+
+- fix header file installation (INGWA)
+
+Before Dec 31th:
+----------------
+- API docs
+- User documentation 
+- Update VERSION NUMBER to 0.5
 
 Whenever -- not tied to any release
 ----------------------------------------------------------------

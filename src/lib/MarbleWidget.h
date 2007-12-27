@@ -780,6 +780,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  themeChanged( QString theme );
 
+    void  projectionChanged( int );
+
     void  mouseMoveGeoPosition( QString );
 
     void  mouseClickGeoPosition( double lon, double lat, GeoDataPoint::Unit );

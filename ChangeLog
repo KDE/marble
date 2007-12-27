@@ -1,3 +1,12 @@
+2007-12-27  Torsten Rahn  <rahn@kde.org>
+
+    - Save Projection in Qt interface
+    - Update Projection ComboBox accordingly
+    - Partially fix dateline issue with Bounding Box
+    - Fix area visibility mapped to Legend
+
+2007-12-25  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MeasureTool.{cpp, h}:
     * src/lib/MarbleWidget.cpp:
 
