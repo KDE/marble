@@ -36,10 +36,10 @@ GeoPolygon::GeoPolygon()
     m_closed  = false;
 
     m_num = 0;
-    m_x0  = 0;
-    m_y0  = 0;
-    m_x1  = 0;
-    m_y1  = 0;
+    m_lonLeft    = 0;
+    m_latTop     = 0;
+    m_lonRight   = 0;
+    m_latBottom  = 0;
 }
 
 GeoPolygon::~GeoPolygon()
@@ -47,31 +47,31 @@ GeoPolygon::~GeoPolygon()
 }
 
 
-void GeoPolygon::setBoundary(int x0, int y0, int x1, int y1)
+void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, double latBottom)
 {
-    m_x0 = x0;
-    m_y0 = y0;
-    m_x1 = x1;
-    m_y1 = y1;
+    m_lonLeft   = lonLeft;
+    m_latTop    = latTop;
+    m_lonRight  = lonRight;
+    m_latBottom = latBottom;
 
     m_boundary.clear();
     if ( getDateLine() ) {
-        int xcenter = (int)( ( x0 + ( 2 * ARCMINUTE + x1) ) / 2 );
+        double xcenter = ( lonLeft + ( 2 * M_PI + lonRight) ) / 2;
 
-        if ( xcenter > ARCMINUTE ) 
-            xcenter -= (int)( 2 * ARCMINUTE );
-        if ( xcenter < -ARCMINUTE )
-            xcenter += (int)( 2 * ARCMINUTE );
+        if ( xcenter > M_PI ) 
+            xcenter -=  2 * M_PI;
+        if ( xcenter < -M_PI )
+            xcenter +=  2 * M_PI;
 
-        m_boundary.append( GeoDataPoint( (double)(xcenter) * INT2RAD, (0.5 * (double)(y0 + y1)) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ) );
+        m_boundary.append( GeoDataPoint( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataPoint::Radian, 1 ) );
     }
     else
-        m_boundary.append( GeoDataPoint( (0.5 * (double)(x0 + x1)) * INT2RAD, (0.5 * (double)(y0 + y1)) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ) );
+        m_boundary.append( GeoDataPoint( 0.5 * (lonLeft + lonRight), 0.5 * (latTop + latBottom), 0.0, GeoDataPoint::Radian, 1 ) );
 
-    m_boundary.append(GeoDataPoint( (double)(x0) * INT2RAD, (double)(y0) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( (double)(x1) * INT2RAD, (double)(y1) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( (double)(x1) * INT2RAD, (double)(y0) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( (double)(x0) * INT2RAD, (double)(y1) * INT2RAD, 0.0, GeoDataPoint::Radian, 1 ));
+    m_boundary.append(GeoDataPoint( lonLeft,  latTop,    0.0, GeoDataPoint::Radian, 1 ));
+    m_boundary.append(GeoDataPoint( lonRight, latBottom, 0.0, GeoDataPoint::Radian, 1 ));
+    m_boundary.append(GeoDataPoint( lonRight, latTop,    0.0, GeoDataPoint::Radian, 1 ));
+    m_boundary.append(GeoDataPoint( lonLeft,  latBottom, 0.0, GeoDataPoint::Radian, 1 ));
 
 }
 
@@ -268,10 +268,10 @@ void PntMap::load(const QString &filename)
 	
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
-        double  lonLeft =   +ARCMINUTE;
-        double  lonRight =  -ARCMINUTE;
-        double  latTop =    -ARCMINUTE / 2.0;
-        double  latBottom = +ARCMINUTE / 2.0;		
+        double  lonLeft =   +M_PI;
+        double  lonRight =  -M_PI;
+        double  latTop =    -M_PI / 2.0;
+        double  latBottom = +M_PI / 2.0;		
         GeoDataPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
 
         if ( (*itPolyLine)->getDateLine() ) { 
@@ -281,19 +281,18 @@ void PntMap::load(const QString &filename)
                   ++itPoint )
             {
                 (*itPoint).geoCoordinates( lon, lat );
-                x = (int)( ARCMINUTE * lon / M_PI );
+                x = lon;
 
-                if ( x < lonLeft  && x > -ARCMINUTE / 2 ) lonLeft = x;
-                if ( x > lonRight && x < -ARCMINUTE / 2 ) lonRight = x;
+                if ( x < lonLeft  && x > -M_PI / 2 ) lonLeft = x;
+                if ( x > lonRight && x < -M_PI / 2 ) lonRight = x;
 				
-                y = (int)( ARCMINUTE * lat / M_PI );
+                y = lat;
 
                 if ( y > latTop )    latTop = y;
                 if ( y < latBottom ) latBottom = y;
             }
 
-            (*itPolyLine)->setBoundary( (int)(lonLeft), (int)(latTop),
-                                        (int)(lonRight), (int)(latBottom) );
+            (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
             // (*itPolyLine)->displayBoundary();
         }		
         else {			
@@ -304,18 +303,17 @@ void PntMap::load(const QString &filename)
                 double  lon;
                 double  lat;
                 (*itPoint).geoCoordinates( lon, lat );
-                x = (int)( ARCMINUTE * lon / M_PI );
+                x = lon;
 
                 if (x < lonLeft) lonLeft = x;
                 if (x > lonRight) lonRight = x;
 				
-                y = (int)( ARCMINUTE * lat / M_PI );
+                y = lat;
 
                 if (y > latTop)    latTop = y;
                 if (y < latBottom) latBottom = y;
             }
-            (*itPolyLine)->setBoundary( (int)(lonLeft), (int)(latTop),
-                                        (int)(lonRight), (int)(latBottom) );
+            (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
             // (*itPolyLine)->displayBoundary();
         }
         // qDebug() << "Test" << (int)(lonLeft) << (int)(latTop) << (int)(lonRight) << (int)(latBottom);

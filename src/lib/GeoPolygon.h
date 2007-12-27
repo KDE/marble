@@ -39,7 +39,7 @@ class GeoPolygon : public GeoDataPoint::Vector
     bool getDateLine() const { return m_crossed; }
     void setDateLine(bool crossed){ m_crossed = crossed; }
 
-    void setBoundary(int, int, int, int);
+    void setBoundary( double, double, double, double );
     GeoDataPoint::Vector getBoundary() const { return m_boundary; } 
 
     void displayBoundary(){
@@ -69,11 +69,11 @@ class GeoPolygon : public GeoDataPoint::Vector
 
     GeoDataPoint::Vector  m_boundary;
 
-    int   m_x0;
-    int   m_y0;
-    int   m_x1;
-    int   m_y1;
-    int   m_num;
+    double  m_lonLeft;
+    double  m_latTop;
+    double  m_lonRight;
+    double  m_latBottom;
+    int     m_num;
 };
 
 
