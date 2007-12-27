@@ -18,7 +18,7 @@ Before Dec 28th:
 - Fix area visibility mapped to Legend (DONE)
 - Fix order of Feature appearance
 - Fix MarbleNavigator Plugin
-
+- Bug 154700
 - fix header file installation (INGWA)
 
 Before Dec 31th:
