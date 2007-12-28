@@ -170,7 +170,10 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
 */
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
-        for ( int i = 0; i < 5; ++i ) {
+
+        // Let's just use the top left and the bottom right bounding box point for 
+        // this projection
+        for ( int i = 1; i < 3; ++i ) {
             m_boundary[i].geoCoordinates(lon, lat);
             x = (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * (m_centerLon - lon);
             y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (m_centerLat - lat);
@@ -182,12 +185,17 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
         do {
             m_offset -= 4 * m_radius;
             boundingPolygon.translate( -4 * m_radius, 0 );
-        } while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) );
-
+        } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset + 4 * m_radius, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset + 4 * m_radius, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
+                );
         m_offset += 4 * m_radius;
         boundingPolygon.translate( 4 * m_radius, 0 );
 
-        while( visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) ) {
+        while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset + 4 * m_radius, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset + 4 * m_radius, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
+                ) {
             m_polygon.clear();
             m_polygon.reserve( (*itPolyLine)->size() );
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
