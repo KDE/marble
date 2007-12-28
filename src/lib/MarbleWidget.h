@@ -29,7 +29,7 @@
 
 //#include <QtDBus/QtDBus>
 
-#include "geodata/data/GeoDataPoint.h"
+#include "GeoDataPoint.h"       // In geodata/data/
 #include "marble_export.h"
 #include "MarbleModel.h"
 #include "CrossHairFloatItem.h"

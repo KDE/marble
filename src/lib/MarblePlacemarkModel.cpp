@@ -14,7 +14,7 @@
 #include <QtCore/QModelIndex>
 #include <QtGui/QPixmap>
 
-#include "geodata/data/GeoDataStyle.h"
+#include "GeoDataStyle.h"       // In geodata/data/
 
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkManager.h"

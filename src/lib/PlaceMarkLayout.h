@@ -25,7 +25,7 @@
 
 #include "Quaternion.h"
 
-#include "geodata/data/GeoDataPlacemark.h"
+#include "GeoDataPlacemark.h"   // In geodata/data/
 
 class QAbstractItemModel;
 class QItemSelectionModel;

@@ -17,7 +17,7 @@
 #include <QtGui/QColor>
 
 #include "Quaternion.h"
-#include "AbstractLayer/AbstractLayer.h"
+#include "AbstractLayer.h"      // In AbstractLayer/
 
 
 class QImage;

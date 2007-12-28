@@ -16,7 +16,7 @@
 
 #include <QtCore/QVector>
 
-#include "geodata/data/GeoDataPlacemark.h"
+#include "GeoDataPlacemark.h"   // In geodata/data/
 
 /**
  * A helper class which contains a couple of place mark

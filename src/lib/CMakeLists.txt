@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.4.0)
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
+ ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
@@ -256,6 +257,7 @@ else (APPLE AND QTONLY)
 
            global.h
            AutoSettings.h
+           BoundingBox.h
            ClipPainter.h
            GeoPolygon.h
            GridMap.h
@@ -292,6 +294,17 @@ else (APPLE AND QTONLY)
            VectorMap.h
            XmlHandler.h
            marble_export.h
+
+           AbstractLayer/AbstractLayer.h
+           AbstractLayer/AbstractLayerContainer.h
+           AbstractLayer/AbstractLayerData.h
+           AbstractLayer/AbstractLayerInterface.h
+
+           geodata/data/Serializable.h
+           geodata/data/GeoDataObject.h
+           geodata/data/GeoDataPoint.h
+           geodata/data/GeoDataPlacemark.h
+           geodata/data/GeoDataFeature.h
            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)

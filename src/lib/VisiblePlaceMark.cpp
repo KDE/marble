@@ -13,7 +13,7 @@
 
 #include <QtCore/QDebug>
 
-#include "geodata/data/GeoDataStyle.h"
+#include "GeoDataStyle.h"
 
 
 VisiblePlaceMark::VisiblePlaceMark()

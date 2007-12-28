@@ -1,3 +1,29 @@
+2007-12-28  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix includes so that using the widget from an external program
+	works again.
+	* src/CMakeLists.txt: Add AbstractLayer and geodata/data as
+	include directories
+	* src/lib/CMakeLists.txt:
+	 - Add AbstractLayer and geodata/data as include directories
+	 - Install plenty more include files.
+	* src/lib/AbstractLayer/AbstractLayer.h,
+	* src/lib/AbstractLayer/AbstractLayerData.h,
+	* src/lib/AbstractLayer/AbstractLayerInterface.h,
+	* src/lib/AbstractScanlineTextureMapper.h,
+	* src/lib/GridMap.cpp,
+	* src/lib/KMLFileViewItem.cpp,
+	* src/lib/MarbleControlBox.h,
+	* src/lib/MarblePlacemarkModel.cpp,
+	* src/lib/MarbleWidget.h,
+	* src/lib/MeasureTool.h,
+	* src/lib/PlaceMarkContainer.h,
+	* src/lib/PlaceMarkLayout.cpp,
+	* src/lib/PlaceMarkLayout.h,
+	* src/lib/PlaceMarkPainter.cpp,
+	* src/lib/VisiblePlaceMark.cpp: Always include just "foo.h" and
+	not "lib/foo.h" or "geodata/data/foo.h" or anything similar
+
 2007-12-28  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/VectorMap.cpp:

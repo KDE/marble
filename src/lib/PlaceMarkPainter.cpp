@@ -17,7 +17,7 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 
-#include "geodata/data/GeoDataStyle.h"
+#include "GeoDataStyle.h"
 
 #include "ViewParams.h"
 #include "VisiblePlaceMark.h"

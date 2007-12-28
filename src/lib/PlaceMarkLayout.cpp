@@ -21,8 +21,8 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 
-#include "geodata/data/GeoDataPlacemark.h"
-#include "geodata/data/GeoDataStyle.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
 
 #include "global.h"
 #include "PlaceMarkPainter.h"

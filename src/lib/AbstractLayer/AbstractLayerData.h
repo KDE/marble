@@ -12,10 +12,10 @@
 #ifndef ABSTRACTLAYERDATA_H
 #define ABSTRACTLAYERDATA_H
 
-#include "../global.h"
-#include "../geodata/data/GeoDataPoint.h"
+#include "global.h"
+#include "GeoDataPoint.h"
 #include "AbstractLayerInterface.h"
-#include "../ViewParams.h"
+#include "ViewParams.h"
 
 
 class QPixmap;

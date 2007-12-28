@@ -11,7 +11,8 @@
 #define ABSTRACTLAYERINTERFACE_H
 
 #include <QtCore/QTextStream>
-#include "../ViewParams.h"
+
+#include "ViewParams.h"
 
 class ClipPainter;
 class QPoint;
