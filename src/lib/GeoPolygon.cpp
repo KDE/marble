@@ -330,7 +330,10 @@ void PntMap::load(const QString &filename)
 //            qDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
 
         }
-        (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
+        if ( isCrossingDateLine == false ) {
+            (*itPolyLine)->setDateLine( GeoPolygon::None );
+            (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
+        }
     }
 //    qDebug() << "Elapsed: " << timer->elapsed();
     delete timer;
