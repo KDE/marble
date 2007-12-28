@@ -36,10 +36,10 @@ GeoPolygon::GeoPolygon()
     m_closed  = false;
 
     m_index = 0;
-    m_lonLeft    = 0;
-    m_latTop     = 0;
-    m_lonRight   = 0;
-    m_latBottom  = 0;
+    m_lonLeft    = 0.0;
+    m_latTop     = 0.0;
+    m_lonRight   = 0.0;
+    m_latBottom  = 0.0;
 }
 
 GeoPolygon::~GeoPolygon()
@@ -55,12 +55,12 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
 
     m_boundary.clear();
     if ( getDateLine() == GeoPolygon::Even ) {
-        double xcenter = ( lonLeft + ( 2 * M_PI + lonRight) ) / 2;
+        double xcenter = ( lonLeft + ( 2.0 * M_PI + lonRight) ) / 2.0;
 
         if ( xcenter > M_PI ) 
-            xcenter -=  2 * M_PI;
+            xcenter -=  2.0 * M_PI;
         if ( xcenter < -M_PI )
-            xcenter +=  2 * M_PI;
+            xcenter +=  2.0 * M_PI;
 
         m_boundary.append( GeoDataPoint( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataPoint::Radian, 1 ) );
     }
@@ -275,7 +275,7 @@ void PntMap::load(const QString &filename)
         {
             (*itPoint).geoCoordinates( lon, lat );
 
-            int currentSign = ( lon > 0 ) ? 1 : -1 ;
+            int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 
             if( itPoint == (*itPolyLine)->begin() ) {
                 lastSign = currentSign;
@@ -305,7 +305,8 @@ void PntMap::load(const QString &filename)
         if ( isOriginalSide == false ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Odd );
 //            qDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
-            (*itPolyLine)->setBoundary( -M_PI, latTop, +M_PI, M_PI / 2 );
+            (*itPolyLine)->setBoundary( -M_PI, latTop, M_PI, -M_PI / 2.0 );
+//            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
         }
 
         if ( isOriginalSide == true && isCrossingDateLine == true ) { 

@@ -162,13 +162,18 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-//        if ( (*itPolyLine)->getDateLine() != 0 ) (*itPolyLine)->displayBoundary();
+/*
+        if ( (*itPolyLine)->getDateLine() != 0 ) {
+            (*itPolyLine)->displayBoundary();
+            qDebug() << " Size: " << (*itPolyLine)->size();
+        }
+*/
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
         for ( int i = 0; i < 5; ++i ) {
             m_boundary[i].geoCoordinates(lon, lat);
-            x = m_imgwidth  / 2 - m_rad2Pixel * (m_centerLon - lon);
-            y = m_imgheight / 2 + m_rad2Pixel * (m_centerLat - lat);
+            x = (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * (m_centerLon - lon);
+            y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (m_centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -309,9 +314,9 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 #endif
 
             itPoint->geoCoordinates( lon, lat);
-            double x = m_imgwidth / 2  - m_rad2Pixel * (m_centerLon - lon) + m_offset;
-            double y = m_imgheight / 2 + m_rad2Pixel * (m_centerLat - lat);
-            int currentSign = ( lon > 0 ) ? 1 : -1 ;
+            double x = (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * (m_centerLon - lon) + m_offset;
+            double y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (m_centerLat - lat);
+            int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
                 m_lastSign = currentSign;
@@ -325,20 +330,20 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
                 // x coordinate on the screen for the points on the dateline on both
                 // sides of the flat map.
-                double lastXAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( m_lastSign * M_PI - m_centerLon ) + m_offset;
-                double xAtDateLine = m_imgwidth / 2 + m_rad2Pixel * ( -m_lastSign * M_PI - m_centerLon ) + m_offset;
-                double lastYAtDateLine = m_imgheight / 2 - ( m_lastLat - m_centerLat ) * m_rad2Pixel;
-                double yAtSouthPole = m_imgheight / 2 + m_rad2Pixel * ( M_PI / 2 + m_centerLat );
+                double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + m_rad2Pixel * ( m_lastSign * M_PI - m_centerLon ) + m_offset;
+                double xAtDateLine = (double)(m_imgwidth) / 2.0 + m_rad2Pixel * ( -m_lastSign * M_PI - m_centerLon ) + m_offset;
+                double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - m_centerLat ) * m_rad2Pixel;
+                double yAtSouthPole = (double)(m_imgheight) / 2.0 + m_rad2Pixel * ( M_PI / 2.0 + m_centerLat );
 
                 //If the "jump" occurs in the Anctartica's latitudes
 
                 if ( lat < - M_PI / 3 ) {
                        // FIXME: This should actually need to get investigated in ClipPainter.
                        // For now though we just help ClipPainter to get the clipping right.
-                       if ( lastXAtDateLine > m_imgwidth - 1 ) lastXAtDateLine = m_imgwidth - 1;
-                       if ( lastXAtDateLine < 0 ) lastXAtDateLine = 0; 
-                       if ( xAtDateLine > m_imgwidth - 1 ) xAtDateLine = m_imgwidth - 1;
-                       if ( xAtDateLine < 0 ) xAtDateLine = 0; 
+                       if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 ) lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+                       if ( lastXAtDateLine < 0.0 ) lastXAtDateLine = 0.0; 
+                       if ( xAtDateLine > (double)(m_imgwidth) - 1.0 ) xAtDateLine = (double)(m_imgwidth) - 1.0;
+                       if ( xAtDateLine < 0.0 ) xAtDateLine = 0.0; 
 
                        m_polygon << QPointF( lastXAtDateLine, y ); 
                        m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );
