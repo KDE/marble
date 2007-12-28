@@ -213,17 +213,26 @@ void MarblePart::readSettings()
         MarbleSettings::homeZoom()
     );
     m_controlView->marbleWidget()->goHome();
+
+    m_controlView->marbleWidget()->setProjection( MarbleSettings::projection() );
 }
 
 void MarblePart::writeSettings()
 {
-    double homeLon = 0;
-    double homeLat = 0;
-    int homeZoom = 0;
+    double  homeLon = 0;
+    double  homeLat = 0;
+    int     homeZoom = 0;
+
+    // Get the 'home' values from the widget...
     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+
+    // ...and store them in the settings.
     MarbleSettings::setHomeLongitude( homeLon );
     MarbleSettings::setHomeLatitude( homeLat );
     MarbleSettings::setHomeZoom( homeZoom );
+
+    MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
+
     MarbleSettings::self()->writeConfig();
 }
 

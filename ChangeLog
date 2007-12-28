@@ -1,5 +1,10 @@
 2007-12-28  Inge Wallin  <inge@lysator.liu.se>
 
+	Save projection too in KDE version.
+	* src/marble.kcfg: Added projection to variables.
+	* src/marble_part.cpp (writeSettings): Write projection
+	(readSettings): read projection
+
 	Fix includes so that using the widget from an external program
 	works again.
 	* src/CMakeLists.txt: Add AbstractLayer and geodata/data as
