@@ -185,6 +185,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
         do {
             m_offset -= 4 * m_radius;
             boundingPolygon.translate( -4 * m_radius, 0 );
+//      FIXME: Get rid of this really fugly code once we will have a proper
+//             LatLonBox check implemented and in place.
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
                 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset + 4 * m_radius, boundingPolygon.at(0).y() ) ) ) 
                 || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset + 4 * m_radius, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
@@ -192,6 +194,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
         m_offset += 4 * m_radius;
         boundingPolygon.translate( 4 * m_radius, 0 );
 
+//      FIXME: Get rid of this really fugly code once we will have a proper
+//             LatLonBox check implemented and in place.
         while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
                 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset + 4 * m_radius, boundingPolygon.at(0).y() ) ) ) 
                 || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset + 4 * m_radius, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
