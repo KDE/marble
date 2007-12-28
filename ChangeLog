@@ -1,3 +1,10 @@
+2007-12-28  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/VectorMap.cpp:
+    * src/lib/GeoPolygon.{cpp,h}:
+
+    - Partially fix dateline issue with Bounding Box
+
 2007-12-27  Torsten Rahn  <rahn@kde.org>
 
     - Save Projection in Qt interface

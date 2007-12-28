@@ -162,12 +162,12 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-//        if ( (*itPolyLine)->getDateLine() == true ) (*itPolyLine)->displayBoundary();
+//        if ( (*itPolyLine)->getDateLine() != 0 ) (*itPolyLine)->displayBoundary();
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
-        for ( int i = 0; i < 4; ++i ) {
+        for ( int i = 0; i < 5; ++i ) {
             m_boundary[i].geoCoordinates(lon, lat);
-            x = m_imgwidth / 2  - m_rad2Pixel * (m_centerLon - lon);
+            x = m_imgwidth  / 2 - m_rad2Pixel * (m_centerLon - lon);
             y = m_imgheight / 2 + m_rad2Pixel * (m_centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }

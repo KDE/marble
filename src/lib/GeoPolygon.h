@@ -30,41 +30,46 @@ class GeoPolygon : public GeoDataPoint::Vector
     GeoPolygon();
     ~GeoPolygon();
 
-    int  getNum() const { return m_num; }
+    /**
+     * @brief enum used to specify how a polyline crosses the IDL
+     *
+     * "None" means that the polyline doesn't cross the 
+     * International Dateline (IDL). 
+     *
+     * "Odd" means that the polyline crosses the IDL. The number 
+     * of times that the IDL is being crossed is odd. As a result
+     * the polyline covers the whole range of longitude and the 
+     * feature described by the polyline contains one of the poles 
+     * (example: Antarctica).  
+     * International Dateline (IDL). 
+     * "Even" means that each time the polyline crosses the IDL it 
+     * also returns back to the original side later on by crossing
+     * the IDL again (example: Russia).
+     */
+
+    enum DateLineCrossing{None, Odd, Even};
+
+    int  getIndex() const { return m_index; }
     bool getClosed() const { return m_closed; }
     void setClosed(bool closed){ m_closed = closed; }
 
-    void setNum(int num){ m_num = num; }
+    void setIndex(int index){ m_index = index; }
 
-    bool getDateLine() const { return m_crossed; }
-    void setDateLine(bool crossed){ m_crossed = crossed; }
+    int getDateLine() const { return m_dateLineCrossing; }
+    void setDateLine(int dateLineCrossing){ m_dateLineCrossing = dateLineCrossing; }
 
     void setBoundary( double, double, double, double );
     GeoDataPoint::Vector getBoundary() const { return m_boundary; } 
 
-    void displayBoundary(){
-	Quaternion  q;
-	double      lon;
-	double      lat;
-	m_boundary.at(0).geoCoordinates(lon, lat, GeoDataPoint::Degree);
-	qDebug() << "Boundary:" << lon << ", " << lat << " Size: " << m_boundary.size();
-	m_boundary.at(1).geoCoordinates(lon, lat, GeoDataPoint::Degree);
-	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(2).geoCoordinates(lon, lat, GeoDataPoint::Degree);
-	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(3).geoCoordinates(lon, lat, GeoDataPoint::Degree);
-	qDebug() << "Boundary:" << lon << ", " << lat;
-	m_boundary.at(4).geoCoordinates(lon, lat, GeoDataPoint::Degree);
-	qDebug() << "Boundary:" << lon << ", " << lat;
-    qDebug() << "-----";
-	// qDebug() << "Boundary:" << m_x0 << ", " << m_y0 << ", " << m_x1 << ", " << m_y1;
-    }
+    void displayBoundary();
 
     // Type definitions
     typedef QVector<GeoPolygon *> PtrVector;
 
+//    QString m_sourceFileName;
+
  private:	
-    bool  m_crossed;
+    int   m_dateLineCrossing;
     bool  m_closed;
 
     GeoDataPoint::Vector  m_boundary;
@@ -73,7 +78,7 @@ class GeoPolygon : public GeoDataPoint::Vector
     double  m_latTop;
     double  m_lonRight;
     double  m_latBottom;
-    int     m_num;
+    int     m_index;
 };
 
 

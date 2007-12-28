@@ -32,10 +32,10 @@ const double INT2RAD = M_PI / 10800.0;
 
 GeoPolygon::GeoPolygon()
 {
-    m_crossed = false;
+    m_dateLineCrossing = false;
     m_closed  = false;
 
-    m_num = 0;
+    m_index = 0;
     m_lonLeft    = 0;
     m_latTop     = 0;
     m_lonRight   = 0;
@@ -46,7 +46,6 @@ GeoPolygon::~GeoPolygon()
 {
 }
 
-
 void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, double latBottom)
 {
     m_lonLeft   = lonLeft;
@@ -55,7 +54,7 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
     m_latBottom = latBottom;
 
     m_boundary.clear();
-    if ( getDateLine() ) {
+    if ( getDateLine() == GeoPolygon::Even ) {
         double xcenter = ( lonLeft + ( 2 * M_PI + lonRight) ) / 2;
 
         if ( xcenter > M_PI ) 
@@ -75,6 +74,23 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
 
 }
 
+void GeoPolygon::displayBoundary(){
+    Quaternion  q;
+    double      lon;
+    double      lat;
+    m_boundary.at(0).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    qDebug() << "Boundary:" << lon << ", " << lat;
+    m_boundary.at(1).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    qDebug() << "Boundary:" << lon << ", " << lat;
+    m_boundary.at(2).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    qDebug() << "Boundary:" << lon << ", " << lat;
+    m_boundary.at(3).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    qDebug() << "Boundary:" << lon << ", " << lat;
+    m_boundary.at(4).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    qDebug() << "Boundary:" << lon << ", " << lat;
+
+//    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine();
+}
 
 // ================================================================
 //                               class PntMap
@@ -128,8 +144,6 @@ void PntMap::load(const QString &filename)
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] ,
         // iLon [0,2 * ARCMINUTE]
 						
-//        iLat = -iLat;
-
         //
         // 90 00N =   -ARCMINUTE / 2
         // 90 00S =   ARCMINUTE / 2
@@ -143,7 +157,8 @@ void PntMap::load(const QString &filename)
             GeoPolygon  *polyline = new GeoPolygon();
             append( polyline );
 
-            polyline->setNum( header );
+//            polyline->m_sourceFileName=filename;
+            polyline->setIndex( header );
 
             // Find out whether the Polyline is a river or a closed polygon
             if ( ( header >= 7000 && header < 8000 )
@@ -188,14 +203,13 @@ void PntMap::load(const QString &filename)
         stream >> header >> iLat >> iLon;		
         // Transforming Range of Coordinates to iLat [0,ARCMINUTE] , iLon [0,2 * ARCMINUTE] 
 						
-//        iLat = -iLat;
         if ( header > 5 ) {
 			
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
             GeoPolygon  *polyline = new GeoPolygon();
             append( polyline );
 
-            polyline->setNum(header);
+            polyline->setIndex(header);
 
             // Find out whether the Polyline is a river or a closed polygon
             if ( ( header >= 7000 && header < 8000 )
@@ -238,88 +252,87 @@ void PntMap::load(const QString &filename)
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
     GeoDataPoint::Vector::ConstIterator   itPoint;
 
-    // Detect for all Polylines, whether they are crossing the international date line 
-    for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
-
-        GeoDataPoint::Vector::Iterator  itEndPoint = (*itPolyLine)->end();
-
-        for ( itPoint = (*itPolyLine)->begin(); 
-              itPoint != itEndPoint;
-              ++itPoint )
-        {
-            (*itPoint).geoCoordinates(lon, lat);
-
-            int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
-            if ( itPoint == (*itPolyLine)->begin() )
-                lastSign = currentSign;
-
-            if ( lastSign != currentSign && fabs(lastLon) + fabs(lon) > M_PI )
-            {
-                    (*itPolyLine)->setDateLine(true);
-                    itPoint = itEndPoint - 1;
-            }
-            lastLon = lon;
-        }	
-    }
-
     // Now we calculate the boundaries
-    double x = 0;
-    double y = 0;
 	
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
-        double  lonLeft =   +M_PI;
-        double  lonRight =  -M_PI;
-        double  latTop =    -M_PI / 2.0;
-        double  latBottom = +M_PI / 2.0;		
+        double  lonLeft       =  +M_PI;
+        double  lonRight      =  -M_PI;
+        double  otherLonLeft  =  +M_PI;
+        double  otherLonRight =  -M_PI;
+        double  latTop        =  -M_PI / 2.0;
+        double  latBottom     =  +M_PI / 2.0;		
+
+        bool isCrossingDateLine = false;
+        bool isOriginalSide = true;
+        int  lastSign     = 0;
+
         GeoDataPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
-
-        if ( (*itPolyLine)->getDateLine() ) { 
 					
-            for ( itPoint = (*itPolyLine)->begin();
-                  itPoint != itEndPoint;
-                  ++itPoint )
-            {
-                (*itPoint).geoCoordinates( lon, lat );
-                x = lon;
+        for ( itPoint = (*itPolyLine)->begin();
+                itPoint != itEndPoint;
+                ++itPoint )
+        {
+            (*itPoint).geoCoordinates( lon, lat );
 
-                if ( x < lonLeft  && x > -M_PI / 2 ) lonLeft = x;
-                if ( x > lonRight && x < -M_PI / 2 ) lonRight = x;
-				
-                y = lat;
+            int currentSign = ( lon > 0 ) ? 1 : -1 ;
 
-                if ( y > latTop )    latTop = y;
-                if ( y < latBottom ) latBottom = y;
+            if( itPoint == (*itPolyLine)->begin() ) {
+                lastSign = currentSign;
+                lastLon  = lon;
             }
 
-            (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
-            // (*itPolyLine)->displayBoundary();
-        }		
-        else {			
-            for ( itPoint = (*itPolyLine)->begin();
-                  itPoint != itEndPoint;
-                  ++itPoint )
-            {
-                double  lon;
-                double  lat;
-                (*itPoint).geoCoordinates( lon, lat );
-                x = lon;
-
-                if (x < lonLeft) lonLeft = x;
-                if (x > lonRight) lonRight = x;
-				
-                y = lat;
-
-                if (y > latTop)    latTop = y;
-                if (y < latBottom) latBottom = y;
+            if ( lastSign != currentSign && fabs(lastLon) + fabs(lon) > M_PI ) {
+                isOriginalSide = !isOriginalSide;
+                isCrossingDateLine = true;
             }
-            (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
-            // (*itPolyLine)->displayBoundary();
+
+            if ( isOriginalSide == true ) { 
+                if ( lon < lonLeft  ) lonLeft = lon;
+                if ( lon > lonRight ) lonRight = lon;
+			} else {
+                if ( lon < otherLonLeft  ) otherLonLeft = lon;
+                if ( lon > otherLonRight ) otherLonRight = lon;
+            }
+
+            if ( lat > latTop )    latTop = lat;
+            if ( lat < latBottom ) latBottom = lat;
+
+            lastSign = currentSign;
+            lastLon  = lon;
         }
-        // qDebug() << "Test" << (int)(lonLeft) << (int)(latTop) << (int)(lonRight) << (int)(latBottom);
-        // (*itPolyLine)->setBoundary((int)(lonLeft),(int)(latTop),(int)(lonRight),(int)(latBottom));
-        // (*itPolyLine)->displayBoundary();
+
+        if ( isOriginalSide == false ) {
+            (*itPolyLine)->setDateLine( GeoPolygon::Odd );
+//            qDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
+            (*itPolyLine)->setBoundary( -M_PI, latTop, +M_PI, M_PI / 2 );
+        }
+
+        if ( isOriginalSide == true && isCrossingDateLine == true ) { 
+            (*itPolyLine)->setDateLine( GeoPolygon::Even );
+//            qDebug() << "Even >> File: " << (*itPolyLine)->m_sourceFileName << " Size: " << (*itPolyLine)->size();
+
+//            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
+
+            double leftLonRight, rightLonLeft;
+
+            if ( fabs( M_PI * lonRight/fabs(lonRight) - lonRight ) >  
+                 fabs( M_PI * otherLonRight/fabs(otherLonRight) - otherLonRight ) ) {
+                rightLonLeft = otherLonLeft; 
+                leftLonRight = lonRight; 
+            } else {
+                rightLonLeft = lonLeft;
+                leftLonRight = otherLonRight;
+            }
+
+            (*itPolyLine)->setBoundary( rightLonLeft, latTop, leftLonRight, latBottom );
+
+//            qDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
+
+        }
+        (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
     }
 //    qDebug() << "Elapsed: " << timer->elapsed();
     delete timer;
 }
+
