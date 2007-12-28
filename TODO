@@ -11,7 +11,7 @@ Showstoppers to fix before KDE 4.0:
 Before Dec 28th:
 ----------------
 - Check OpenSUSE for Crash on Quit
-- Save Projection in KDE interface
+- Save Projection in KDE interface              DONE
 - Save Projection in Qt interface               DONE
 - Update Projection ComboBox accordingly        DONE
 - Fix dateline issue with Bounding Box
