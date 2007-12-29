@@ -167,13 +167,15 @@ QModelIndexList MarblePlacemarkModel::match( const QModelIndex & start, int role
     return results;
 }
 
-void MarblePlacemarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious )
+void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious )
 {
   // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
         qDeleteAll( d->m_placeMarkContainer.begin(), d->m_placeMarkContainer.end() );
         d->m_placeMarkContainer.clear();
     }
+
+    createFilterProperties( placeMarks );
 
     d->m_placeMarkContainer << placeMarks;
     d->m_placeMarkContainer.sort();
@@ -183,10 +185,142 @@ void MarblePlacemarkModel::addPlaceMarks( const PlaceMarkContainer &placeMarks, 
 
 void MarblePlacemarkModel::clearPlaceMarks()
 {
-  qDeleteAll( d->m_placeMarkContainer );
-  d->m_placeMarkContainer.clear();
+    qDeleteAll( d->m_placeMarkContainer );
+    d->m_placeMarkContainer.clear();
 
-  reset();
+    reset();
+}
+
+void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container )
+{
+
+    QVector<GeoDataPlacemark*>::Iterator i;
+    for ( i = container.begin(); i != container.constEnd(); ++i ) {
+        GeoDataPlacemark* placemark = *i;
+
+        bool hasPopularity = false;
+
+        if ( placemark->role() == 'H' || placemark->role() == 'V' )
+        {
+            qint64 altitude = (qint64)( placemark->coordinate().altitude() );
+            if ( altitude != 0 )
+            {
+                hasPopularity = true;
+                placemark->setPopularity( altitude * 1000 );
+                placemark->setPopularityIndex( cityPopIdx( qAbs(altitude * 1000) ) );
+            }
+        }
+        else if ( placemark->role() == 'K' || placemark->role() == 'O' || placemark->role() == 'S' )
+        {
+            double area = placemark->area();
+            if ( area >= 0.0 )
+            {
+                hasPopularity = true;
+                placemark->setPopularity( (qint64)(area) );
+                placemark->setPopularityIndex( areaPopIdx( area ) );
+            }
+        }
+        else if ( placemark->role() == 'P' )
+        {
+            placemark->setPopularity( 100000000 );
+            placemark->setPopularityIndex( cityPopIdx( 100000000 ) );
+        }
+        else if ( placemark->role() == 'M' )
+        {
+            placemark->setPopularity( 1000000 );
+            placemark->setPopularityIndex( cityPopIdx( 1000000 ) );
+        }
+        else
+        {
+            qint64 population = placemark->population();
+            if ( population >= 0 )
+            {
+                hasPopularity = true;
+                placemark->setPopularity( population );
+                placemark->setPopularityIndex( cityPopIdx( population ) );
+            }
+        }
+
+//  Then we set the visual category:
+
+        if ( placemark->role() == 'H' )      placemark->setVisualCategory( GeoDataPlacemark::Mountain );
+        else if ( placemark->role() == 'V' ) placemark->setVisualCategory( GeoDataPlacemark::Volcano );
+        else if ( placemark->role() == 'P' ) placemark->setVisualCategory( GeoDataPlacemark::GeographicPole );
+        else if ( placemark->role() == 'M' ) placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
+        else if ( placemark->role() == 'W' ) placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
+        else if ( placemark->role() == 'F' ) placemark->setVisualCategory( GeoDataPlacemark::AirPort );
+        else if ( placemark->role() == 'K' ) placemark->setVisualCategory( GeoDataPlacemark::Continent );
+        else if ( placemark->role() == 'O' ) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
+        else if ( placemark->role() == 'S' ) placemark->setVisualCategory( GeoDataPlacemark::Nation );
+        else if ( placemark->role() == 'N' ) placemark->setVisualCategory( 
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
+                + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+        else if ( placemark->role() == 'R' ) placemark->setVisualCategory( 
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
+                + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+        else if ( placemark->role() == 'C' || placemark->role() == 'B' ) placemark->setVisualCategory( 
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
+                + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
+
+        else if ( placemark->role() == ' ' && !hasPopularity )
+            placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
+
+        if ( placemark->role() == 'W' && placemark->popularityIndex() > 12 )
+            placemark->setPopularityIndex( 12 );
+        if ( placemark->role() == 'O' )
+            placemark->setPopularityIndex( 14 );
+        if ( placemark->role() == 'K' )
+            placemark->setPopularityIndex( 15 );
+        if ( placemark->role() == 'S' && placemark->popularityIndex() < 12 )
+            placemark->setPopularityIndex( 12 );
+
+    }
+
+}
+
+int MarblePlacemarkModel::cityPopIdx( qint64 population )
+{
+    int popidx = 15;
+
+    if ( population < 2500 )        popidx=1;
+    else if ( population < 5000)    popidx=2;
+    else if ( population < 7500)    popidx=3;
+    else if ( population < 10000)   popidx=4;
+    else if ( population < 25000)   popidx=5;
+    else if ( population < 50000)   popidx=6;
+    else if ( population < 75000)   popidx=7;
+    else if ( population < 100000)  popidx=8;
+    else if ( population < 250000)  popidx=9;
+    else if ( population < 500000)  popidx=10;
+    else if ( population < 750000)  popidx=11;
+    else if ( population < 1000000) popidx=12;
+    else if ( population < 2500000) popidx=13;
+    else if ( population < 5000000) popidx=14;
+
+    return popidx;
+}
+
+int MarblePlacemarkModel::areaPopIdx( double area )
+{
+    Q_UNUSED( area );
+    int popidx = 15;
+/*
+    if ( population < 2500 )        popidx=1;
+    else if ( population < 5000)    popidx=2;
+    else if ( population < 7500)    popidx=3;
+    else if ( population < 10000)   popidx=4;
+    else if ( population < 25000)   popidx=5;
+    else if ( population < 50000)   popidx=6;
+    else if ( population < 75000)   popidx=7;
+    else if ( population < 100000)  popidx=8;
+    else if ( population < 250000)  popidx=9;
+    else if ( population < 500000)  popidx=10;
+    else if ( population < 750000)  popidx=11;
+    else if ( population < 1000000) popidx=12;
+    else if ( population < 2500000) popidx=13;
+    else if ( population < 5000000) popidx=14;
+*/
+    return popidx;
 }
 
 #include "MarblePlacemarkModel.moc"

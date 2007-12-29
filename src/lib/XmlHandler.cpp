@@ -41,7 +41,6 @@ bool XmlHandler::startDocument()
     m_inKml         = false;
     m_inPlacemark   = false;
     m_inPoint       = false;
-    m_hasPopularity = false;
 
     qDebug("Starting KML-Import" );
 
@@ -125,86 +124,10 @@ bool XmlHandler::endElement( const QString&, const QString&,
 
 //  First we derive the popularity:
 
-        if ( m_placemark->role() == 'H' || m_placemark->role() == 'V' )
-        {
-            qint64 altitude = (qint64)( m_placemark->coordinate().altitude() );
-            if ( altitude != 0 )
-            {
-                m_hasPopularity = true;
-                m_placemark->setPopularity( altitude * 1000 );
-                m_placemark->setPopularityIndex( cityPopIdx( qAbs(altitude * 1000) ) );
-            }
-        }
-        else if ( m_placemark->role() == 'K' || m_placemark->role() == 'O' || m_placemark->role() == 'S' )
-        {
-            double area = m_placemark->area();
-            if ( area >= 0.0 )
-            {
-                m_hasPopularity = true;
-                m_placemark->setPopularity( (qint64)(area) );
-                m_placemark->setPopularityIndex( areaPopIdx( area ) );
-            }
-        }
-        else if ( m_placemark->role() == 'P' )
-        {
-            m_placemark->setPopularity( 100000000 );
-            m_placemark->setPopularityIndex( cityPopIdx( 100000000 ) );
-        }
-        else if ( m_placemark->role() == 'M' )
-        {
-            m_placemark->setPopularity( 1000000 );
-            m_placemark->setPopularityIndex( cityPopIdx( 1000000 ) );
-        }
-        else
-        {
-            qint64 population = m_placemark->population();
-            if ( population >= 0 )
-            {
-                m_hasPopularity = true;
-                m_placemark->setPopularity( population );
-                m_placemark->setPopularityIndex( cityPopIdx( population ) );
-            }
-        }
-
-//  Then we set the visual category:
-
-        if ( m_placemark->role() == 'H' )      m_placemark->setVisualCategory( GeoDataPlacemark::Mountain );
-        else if ( m_placemark->role() == 'V' ) m_placemark->setVisualCategory( GeoDataPlacemark::Volcano );
-        else if ( m_placemark->role() == 'P' ) m_placemark->setVisualCategory( GeoDataPlacemark::GeographicPole );
-        else if ( m_placemark->role() == 'M' ) m_placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
-        else if ( m_placemark->role() == 'W' ) m_placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
-        else if ( m_placemark->role() == 'F' ) m_placemark->setVisualCategory( GeoDataPlacemark::AirPort );
-        else if ( m_placemark->role() == 'K' ) m_placemark->setVisualCategory( GeoDataPlacemark::Continent );
-        else if ( m_placemark->role() == 'O' ) m_placemark->setVisualCategory( GeoDataPlacemark::Ocean );
-        else if ( m_placemark->role() == 'S' ) m_placemark->setVisualCategory( GeoDataPlacemark::Nation );
-        else if ( m_placemark->role() == 'N' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
-                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( m_placemark->role() == 'R' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
-                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( m_placemark->role() == 'C' || m_placemark->role() == 'B' ) m_placemark->setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
-                + ( m_placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
-
-        else if ( m_placemark->role() == ' ' && !m_hasPopularity )
-            m_placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
-
-        if ( m_placemark->role() == 'W' && m_placemark->popularityIndex() > 12 )
-            m_placemark->setPopularityIndex( 12 );
-        if ( m_placemark->role() == 'O' )
-            m_placemark->setPopularityIndex( 14 );
-        if ( m_placemark->role() == 'K' )
-            m_placemark->setPopularityIndex( 15 );
-        if ( m_placemark->role() == 'S' && m_placemark->popularityIndex() < 12 )
-            m_placemark->setPopularityIndex( 12 );
-
         if ( m_coordsset == true )
             m_placeMarkContainer->append( m_placemark );
 
         m_inPlacemark = false;
-
-        m_hasPopularity = false;
     }
 
     if ( m_inPlacemark && nameLower == "name" ) {
@@ -242,7 +165,6 @@ bool XmlHandler::endElement( const QString&, const QString&,
             area = 0.0;
         else
             area = m_currentText.toDouble();
-        m_hasPopularity = true;
         m_placemark->setArea( area );
     }
 
@@ -279,50 +201,4 @@ bool XmlHandler::stopDocument()
     qDebug() << "Placemarks: " << m_placeMarkContainer->size();
 
     return true;
-}
-
-
-int XmlHandler::cityPopIdx( qint64 population )
-{
-    int popidx = 15;
-
-    if ( population < 2500 )        popidx=1;
-    else if ( population < 5000)    popidx=2;
-    else if ( population < 7500)    popidx=3;
-    else if ( population < 10000)   popidx=4;
-    else if ( population < 25000)   popidx=5;
-    else if ( population < 50000)   popidx=6;
-    else if ( population < 75000)   popidx=7;
-    else if ( population < 100000)  popidx=8;
-    else if ( population < 250000)  popidx=9;
-    else if ( population < 500000)  popidx=10;
-    else if ( population < 750000)  popidx=11;
-    else if ( population < 1000000) popidx=12;
-    else if ( population < 2500000) popidx=13;
-    else if ( population < 5000000) popidx=14;
-
-    return popidx;
-}
-
-int XmlHandler::areaPopIdx( double area )
-{
-    Q_UNUSED( area );
-    int popidx = 15;
-/*
-    if ( population < 2500 )        popidx=1;
-    else if ( population < 5000)    popidx=2;
-    else if ( population < 7500)    popidx=3;
-    else if ( population < 10000)   popidx=4;
-    else if ( population < 25000)   popidx=5;
-    else if ( population < 50000)   popidx=6;
-    else if ( population < 75000)   popidx=7;
-    else if ( population < 100000)  popidx=8;
-    else if ( population < 250000)  popidx=9;
-    else if ( population < 500000)  popidx=10;
-    else if ( population < 750000)  popidx=11;
-    else if ( population < 1000000) popidx=12;
-    else if ( population < 2500000) popidx=13;
-    else if ( population < 5000000) popidx=14;
-*/
-    return popidx;
 }

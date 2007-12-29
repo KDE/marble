@@ -1,3 +1,22 @@
+2007-12-29  Torsten Rahn  <rahn@kde.org>
+
+    Instead of saving VisualCategories, Popularity and
+    PopularityIndex we create them on the fly.
+    Reduces file size and reduces my headaches a bit. 
+
+    * src/lib/MarblePlacemarkModel.h
+    * src/lib/XmlHandler.cpp
+    * src/lib/MarblePlacemarkModel.cpp
+    * src/lib/PlaceMarkManager.cpp
+    * src/lib/VectorMap.cpp
+    * src/lib/XmlHandler.h
+    * src/lib/GeoPolygon.cpp
+    * data/placemarks/baseplacemarks.cache
+    * data/placemarks/elevplacemarks.cache
+    * data/placemarks/otherplacemarks.cache
+    * data/placemarks/boundaryplacemarks.cache
+    * data/placemarks/cityplacemarks.cache
+
 2007-12-28  Inge Wallin  <inge@lysator.liu.se>
 
 	Save projection too in KDE version.

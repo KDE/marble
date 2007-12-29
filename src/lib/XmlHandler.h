@@ -37,10 +37,6 @@ class XmlHandler : public QXmlDefaultHandler
 
     bool characters( const QString& str );
 
- protected:
-    int cityPopIdx( qint64 population );
-    int areaPopIdx( double area );
-
  private:
     PlaceMarkContainer  *m_placeMarkContainer;
     GeoDataPlacemark    *m_placemark;
@@ -53,8 +49,6 @@ class XmlHandler : public QXmlDefaultHandler
     bool                 m_inPoint;
 
     bool                 m_coordsset;
-    bool                 m_hasPopularity;
 };
-
 
 #endif // XMLHANDLER_H

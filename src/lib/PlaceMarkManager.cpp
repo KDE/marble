@@ -227,7 +227,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
     // Write a header with a "magic number" and a version
     // out << (quint32)0xA0B0C0D0;
     out << (quint32)MarbleMagicNumber;
-    out << (qint32)012;
+    out << (qint32)013;
 
     out.setVersion(QDataStream::Qt_4_0);
 
@@ -250,9 +250,6 @@ void PlaceMarkManager::saveFile( const QString& filename,
         out << QString( (*it) -> countryCode() );
         out << (qreal)(*it) -> area();
         out << (qint64)(*it) -> population();
-        out << (qint64)(*it) -> popularity();
-        out << (qint32)(*it) -> popularityIndex();
-        out << (qint32)(*it) -> visualCategory();
     }
 }
 
@@ -275,7 +272,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     // Read the version
     qint32  version;
     in >> version;
-    if (version < 012) {
+    if (version < 013) {
         qDebug( "Bad file - too old!" );
         return false;
     }
@@ -319,12 +316,6 @@ bool PlaceMarkManager::loadFile( const QString& filename,
         mark -> setArea(area);
         in >> tmpint64;
         mark -> setPopulation( tmpint64 );
-        in >> tmpint64;
-        mark -> setPopularity( tmpint64 );
-        in >> tmpint32;
-        mark -> setPopularityIndex( tmpint32 );
-        in >> tmpint32;
-        mark -> setVisualCategory( (GeoDataPlacemark::GeoDataVisualCategory)( tmpint32 ) );
 
         placeMarkContainer -> append( mark );
     }

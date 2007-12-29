@@ -96,7 +96,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlaceMarks( const PlaceMarkContainer &placeMarks, bool clearPrevious = false );
+    void addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious = false );
 
     /**
      * This method is used by the PlaceMarkManager to clear
@@ -104,8 +104,14 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void clearPlaceMarks();
 
+    void createFilterProperties( PlaceMarkContainer &container );
+
     class Private;
     Private* const d;
+
+ protected:
+    int cityPopIdx( qint64 population );
+    int areaPopIdx( double area );
 };
 
 

@@ -89,7 +89,7 @@ void GeoPolygon::displayBoundary(){
     m_boundary.at(4).geoCoordinates(lon, lat, GeoDataPoint::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
 
-//    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine();
+//    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine() << " Index: " << getIndex();
 }
 
 // ================================================================
