@@ -43,7 +43,7 @@ class AbstractLayer: public QObject
     //FIXME: make AbstractLayer inherit from AbstractLayerInterface
     //       and change the function paintLayer() to draw()
     Q_OBJECT
- public slots:
+ public Q_SLOTS:
     /**
      * @brief method to paint the whole Layer
      * 
