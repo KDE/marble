@@ -16,7 +16,7 @@ Before Dec 28th:
 - Save MapTheme in KDE interface                DONE
 - Save MapTheme in Qt interface                 DONE(?)
 - Update Projection ComboBox accordingly        DONE
-- Fix dateline issue with Bounding Box
+- Fix dateline issue with Bounding Box          DONE
 - Fix area visibility mapped to Legend          DONE
 - Fix order of Feature appearance               DONE
 - Fix MarbleNavigator Plugin
