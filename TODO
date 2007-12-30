@@ -16,7 +16,7 @@ Before Dec 28th:
 - Update Projection ComboBox accordingly        DONE
 - Fix dateline issue with Bounding Box
 - Fix area visibility mapped to Legend          DONE
-- Fix order of Feature appearance
+- Fix order of Feature appearance               DONE
 - Fix MarbleNavigator Plugin
 - Bug 154700
 - fix header file installation                  DONE

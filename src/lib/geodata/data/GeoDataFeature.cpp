@@ -363,17 +363,11 @@ void GeoDataFeature::pack( QDataStream& stream ) const
     stream << m_description;
     stream << m_visible;
     stream << m_role;
-
-    stream << m_popularity;
-    stream << (int)( m_visualCategory );
-    stream << m_popularityIndex;
 }
 
 void GeoDataFeature::unpack( QDataStream& stream )
 {
     GeoDataObject::unpack( stream );
-
-    int tmpVisualCategory = 0;
 
     stream >> m_name;
     stream >> m_address;
@@ -381,9 +375,4 @@ void GeoDataFeature::unpack( QDataStream& stream )
     stream >> m_description;
     stream >> m_visible;
     stream >> m_role;
-
-    stream >> m_popularity;
-    stream >> tmpVisualCategory;
-    m_visualCategory = ( GeoDataFeature::GeoDataVisualCategory ) tmpVisualCategory;
-    stream >> m_popularityIndex;
 }

@@ -200,35 +200,40 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
 
         bool hasPopularity = false;
 
-        if ( placemark->role() == 'H' || placemark->role() == 'V' )
+        // Mountain (H), Volcano (V), Shipwreck (W)
+        if ( placemark->role() == 'H' || placemark->role() == 'V' || placemark->role() == 'W' )
         {
-            qint64 altitude = (qint64)( placemark->coordinate().altitude() );
-            if ( altitude != 0 )
+            double altitude = placemark->coordinate().altitude();
+            if ( altitude != 0.0 )
             {
                 hasPopularity = true;
-                placemark->setPopularity( altitude * 1000 );
-                placemark->setPopularityIndex( cityPopIdx( qAbs(altitude * 1000) ) );
+                placemark->setPopularity( (qint64)(altitude * 1000.0) );
+                placemark->setPopularityIndex( cityPopIdx( qAbs( (qint64)(altitude * 1000.0) ) ) );
             }
         }
+        // Continent (K), Ocean (O), Nation (S)
         else if ( placemark->role() == 'K' || placemark->role() == 'O' || placemark->role() == 'S' )
         {
             double area = placemark->area();
             if ( area >= 0.0 )
             {
                 hasPopularity = true;
-                placemark->setPopularity( (qint64)(area) );
+//                qDebug() << placemark->name() << " " << (qint64)(area);
+                placemark->setPopularity( (qint64)(area * 100) );
                 placemark->setPopularityIndex( areaPopIdx( area ) );
             }
         }
+        // Pole (P)
         else if ( placemark->role() == 'P' )
         {
-            placemark->setPopularity( 100000000 );
-            placemark->setPopularityIndex( cityPopIdx( 100000000 ) );
+            placemark->setPopularity( 1000000000 );
+            placemark->setPopularityIndex( 18 );
         }
+        // Magnetic Pole (M)
         else if ( placemark->role() == 'M' )
         {
-            placemark->setPopularity( 1000000 );
-            placemark->setPopularityIndex( cityPopIdx( 1000000 ) );
+            placemark->setPopularity( 10000000 );
+            placemark->setPopularityIndex( 13 );
         }
         else
         {
@@ -268,11 +273,9 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         if ( placemark->role() == 'W' && placemark->popularityIndex() > 12 )
             placemark->setPopularityIndex( 12 );
         if ( placemark->role() == 'O' )
-            placemark->setPopularityIndex( 14 );
+            placemark->setPopularityIndex( 16 );
         if ( placemark->role() == 'K' )
-            placemark->setPopularityIndex( 15 );
-        if ( placemark->role() == 'S' && placemark->popularityIndex() < 12 )
-            placemark->setPopularityIndex( 12 );
+            placemark->setPopularityIndex( 19 );
 
     }
 
@@ -303,23 +306,14 @@ int MarblePlacemarkModel::cityPopIdx( qint64 population )
 int MarblePlacemarkModel::areaPopIdx( double area )
 {
     Q_UNUSED( area );
-    int popidx = 15;
-/*
-    if ( population < 2500 )        popidx=1;
-    else if ( population < 5000)    popidx=2;
-    else if ( population < 7500)    popidx=3;
-    else if ( population < 10000)   popidx=4;
-    else if ( population < 25000)   popidx=5;
-    else if ( population < 50000)   popidx=6;
-    else if ( population < 75000)   popidx=7;
-    else if ( population < 100000)  popidx=8;
-    else if ( population < 250000)  popidx=9;
-    else if ( population < 500000)  popidx=10;
-    else if ( population < 750000)  popidx=11;
-    else if ( population < 1000000) popidx=12;
-    else if ( population < 2500000) popidx=13;
-    else if ( population < 5000000) popidx=14;
-*/
+    int popidx = 17;
+    if      ( area <  200000  )      popidx=11;
+    else if ( area <  400000  )      popidx=12;
+    else if ( area < 1000000  )      popidx=13;
+    else if ( area < 2500000  )      popidx=14;
+    else if ( area < 5000000  )      popidx=15;
+    else if ( area < 10000000 )      popidx=16;
+
     return popidx;
 }
 
