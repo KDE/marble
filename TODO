@@ -13,8 +13,8 @@ Before Dec 28th:
 - Check OpenSUSE for Crash on Quit
 - Save Projection in KDE interface              DONE
 - Save Projection in Qt interface               DONE
-- Save MapTheme in KDE interface                INGE
-- Save MapTheme in Qt interface                 INGE
+- Save MapTheme in KDE interface                DONE
+- Save MapTheme in Qt interface                 DONE(?)
 - Update Projection ComboBox accordingly        DONE
 - Fix dateline issue with Bounding Box
 - Fix area visibility mapped to Legend          DONE
