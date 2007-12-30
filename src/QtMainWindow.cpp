@@ -387,7 +387,7 @@ void MainWindow::readSettings()
          );
          m_controlView->marbleWidget()->goHome();         
          m_controlView->marbleWidget()->setMapTheme( 
-            settings.value("mapTheme", "" )
+            settings.value("mapTheme", "" ).toString()
          );
          m_controlView->marbleWidget()->setProjection(
             settings.value("projection", 0 ).toInt()
