@@ -386,6 +386,9 @@ void MainWindow::readSettings()
             settings.value("homeZoom", 1050 ).toInt()
          );
          m_controlView->marbleWidget()->goHome();         
+         m_controlView->marbleWidget()->setMapTheme( 
+            settings.value("mapTheme", "" )
+         );
          m_controlView->marbleWidget()->setProjection(
             settings.value("projection", 0 ).toInt()
          );
@@ -413,11 +416,14 @@ void MainWindow::writeSettings()
          double homeLat = 0;
          int homeZoom = 0;
          m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
-         int projection = (int)( m_controlView->marbleWidget()->projection() );
+         QString  mapTheme = m_controlView->marbleWidget()->mapTheme();
+         int      projection = (int)( m_controlView->marbleWidget()->projection() );
 
          settings.setValue( "homeLongitude", homeLon );
-         settings.setValue( "homeLatitude", homeLat );
-         settings.setValue( "homeZoom", homeZoom );
+         settings.setValue( "homeLatitude",  homeLat );
+         settings.setValue( "homeZoom",      homeZoom );
+
+         settings.setValue( "mapTheme",   mapTheme ); 
          settings.setValue( "projection", projection ); 
      settings.endGroup();
 }

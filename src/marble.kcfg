@@ -14,6 +14,9 @@
   <entry key="homeZoom" type="Int" >
    <default>1050</default>
   </entry>
+  <entry key="mapTheme" type="String" >
+   <default></default>
+  </entry>
   <entry key="projection" type="Int" >
    <default>0</default>
   </entry>

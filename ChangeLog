@@ -1,3 +1,12 @@
+2007-12-30    Inge Wallin  <inge@lysator.liu.se>
+
+	Save and restore the current map theme in the settings.
+	* src/marble.kcfg: add mapTheme as a setting of type string.
+	* src/marble_part.cpp (readSettings): Read mapTheme
+	(writeSettings): Write mapTheme
+	* src/QtMainWindow.cpp (readSettings): Read mapTheme
+	(writeSettings): Write mapTheme
+
 2007-12-30  Torsten Rahn  <rahn@kde.org>
 
     - Fixed order of Feature appearance (still could
