@@ -1,3 +1,8 @@
+2007-12-31  Torsten Rahn  <rahn@kde.org>
+
+    * lib/MeasureTool.cpp: Fixed partial disappearance of the 
+      measureline east to the date line. 
+
 2007-12-30  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/VectorMap.cpp: Fixed last "turns-white" bug

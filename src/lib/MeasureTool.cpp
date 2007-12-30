@@ -383,6 +383,11 @@ void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
 {
     //copy the QPolygonF so we can freely translate it
     QPolygonF distancePathMovable(distancePath);
+
+    if ( distancePathMovable.boundingRect().topLeft().x() < 0 
+        && distancePathMovable.boundingRect().topRight().x() < 0 ) {
+        distancePathMovable.translate( 4 * m_radius, 0 );
+    }
     //repeat to right
     while ( m_visibleArea.intersects( distancePathMovable.boundingRect() ) ) {
         painter->drawPolyline( distancePathMovable );
