@@ -162,12 +162,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-/*
-        if ( (*itPolyLine)->getIndex() == 1001 ) {
-            (*itPolyLine)->displayBoundary();
-//            qDebug() << " Size: " << (*itPolyLine)->size();
-        }
-*/
+        m_offset = 0;
+
         m_boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
 
@@ -181,10 +177,14 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
 /*            if ( (*itPolyLine)->getIndex() == 1001 ){
                 qDebug() << "x: " << x << " y: " << y << " 4*m_radius: " << 4*m_radius;
                 qDebug() << "lon: " << lon << " clon: " << m_centerLon;
-            }*/
+            } */
         }
 
-        m_offset = 0;
+        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 )
+        {
+            boundingPolygon.translate( 4 * m_radius, 0 );
+            m_offset += 4 * m_radius;            
+        }
 
         do {
             m_offset -= 4 * m_radius;
@@ -201,8 +201,8 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
         while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
-                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset + 4 * m_radius, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset + 4 * m_radius, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
+                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
                 ) {
 
             m_polygon.clear();
