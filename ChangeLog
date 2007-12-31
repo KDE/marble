@@ -1,15 +1,25 @@
+2007-12-31    Inge Wallin  <inge@lysator.liu.se>
+
+	* src/ControlView.h (marbleControl): New function
+	* src/lib/MarbleControlBox.{h,cpp} (updateMapThemes): New function
+	(constructor): call updateMapThemes().
+	* src/marble_part.cpp (showNewStuffDialog): update the map themes 
+	list in the controlbox.
+	(misc): cleaning
+	* src/lib/MapTheme.cpp: cleaning
+	* src/lib/MarbleModel.cpp: cleaning	
+
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/navigator/CMakeLists.txt:
     - Fix MarbleNavigator Plugin
 
-2007-12-31  Torsten Rahn  <rahn@kde.org>
-
+    Icons for projection combobox:
     * src/marble.qrc:
     * src/lib/MarbleControlBox.ui:
     * src/icons/map-flat.png:
     * src/icons/map-globe.png:
-    - Icons for projection combobox
+
 
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 

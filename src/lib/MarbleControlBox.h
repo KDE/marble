@@ -107,6 +107,14 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @return the minimum zoom level set in the widget.
      */
     int minimumZoom() const;
+
+    /**
+     * @brief Update the list of Map Themes.
+     *
+     * This should be called after the user has installed a new map
+     * theme, e.g. after he/she used GHNS.
+     */
+    void updateMapThemes();
 	
  Q_SIGNALS:
     /**

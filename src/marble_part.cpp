@@ -264,9 +264,11 @@ void MarblePart::setupActions()
 
     // Action: Get hot new stuff
     m_newStuffAction = KNS::standardAction(QString(), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
-///@todo enable the name and status tip when string freeze is lifted
-//     m_newStuffAction = KNS::standardAction(i18n("Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
-//     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
+    // FIXME: Enable the name and status tip when string freeze is lifted.
+#if 0
+    m_newStuffAction = KNS::standardAction( i18n("Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
+    m_newStuffAction->setStatusTip(i18n("&Download new maps"));
+#endif
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ), actionCollection() );
@@ -330,24 +332,27 @@ void MarblePart::setupStatusBar()
     m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
 
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
-              this, SLOT( showPosition( QString ) ) );
+             this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
-              this, SLOT( showDistance( QString ) ) );
+             this,                          SLOT( showDistance( QString ) ) );
 
     updateStatusBar();
 }
 
 void MarblePart::showNewStuffDialog()
 {
-    QString newStuffConfig = KStandardDirs::locate ("data", "marble/marble.knsrc");
+    QString  newStuffConfig = KStandardDirs::locate ( "data", 
+                                                      "marble/marble.knsrc" );
     kDebug() << "KNS config file:" << newStuffConfig;
 
-    KNS::Engine engine;
-    bool ret = engine.init(newStuffConfig);
-    if(ret)
-    {
+    KNS::Engine  engine;
+    bool         ret = engine.init( newStuffConfig );
+    if ( ret ) {
         KNS::Entry::List entries = engine.downloadDialogModal(0);
     }
+
+    // Update the map theme widget by updating the model.
+    m_controlView->marbleControl()->updateMapThemes();
 }
 
 #include "marble_part.moc"

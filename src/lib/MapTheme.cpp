@@ -38,9 +38,7 @@ int MapTheme::open( const QString& path )
         return -4;
     }
       
-    
-    QFile         file( path );
-
+    QFile  file( path );
     if ( !file.open( QIODevice::ReadOnly ) ) {
         qDebug() << QString("Could not open ") + path;
         return -1;
@@ -211,17 +209,17 @@ int MapTheme::open( const QString& path )
 
 QStringList MapTheme::findMapThemes( const QString& path )
 {
-    QDir  localPaths = QDir( MarbleDirs::localPath() + '/' + path );
-    QDir  sysdirs   = QDir( MarbleDirs::systemPath() + '/' + path );
+    QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
+    QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
 
     QStringList  localmappaths = localPaths.entryList( QStringList( "*" ),
-                                                      QDir::AllDirs
-                                                      | QDir::NoSymLinks
-                                                      | QDir::NoDotAndDotDot );
-    QStringList sysmappaths = sysdirs.entryList( QStringList( "*" ),
-                                                 QDir::AllDirs
-                                                 | QDir::NoSymLinks
-                                                 | QDir::NoDotAndDotDot );
+                                                       QDir::AllDirs
+                                                       | QDir::NoSymLinks
+                                                       | QDir::NoDotAndDotDot );
+    QStringList  sysmappaths = sysdirs.entryList( QStringList( "*" ),
+                                                  QDir::AllDirs
+                                                  | QDir::NoSymLinks
+                                                  | QDir::NoDotAndDotDot );
 
 
     QStringList  localmapdirs;

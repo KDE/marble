@@ -41,7 +41,7 @@ class MarbleModelPrivate
  public:
     // View and paint stuff
     MapTheme            *m_maptheme;
-    QString             m_selectedMap;
+    QString              m_selectedMap;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;

@@ -36,7 +36,8 @@ class ControlView : public QWidget
     ControlView( QWidget * = 0 );
     virtual ~ControlView(){}
 
-    MarbleWidget  *marbleWidget() const { return m_marbleWidget; }
+    MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
+    MarbleControlBox  *marbleControl() const { return m_control;      }
 
     void zoomIn();
     void zoomOut();

@@ -55,8 +55,8 @@ class MarbleControlBoxPrivate
     QWidget              *m_currentLocationWidget;
     QWidget              *m_fileViewWidget;
 
-    QStandardItemModel   *m_mapthememodel;
-    QSortFilterProxyModel *m_sortproxy;
+    QStandardItemModel     *m_mapthememodel;
+    QSortFilterProxyModel  *m_sortproxy;
 };
 
 
@@ -135,9 +135,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
              this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
-    QStringList          mapthemedirs  = MapTheme::findMapThemes( "maps/earth" );
-    d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapthememodel );
+    d->m_mapthememodel = 0;
+    updateMapThemes();
 
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
@@ -151,6 +150,14 @@ MarbleControlBox::~MarbleControlBox()
 {
     delete d->m_mapthememodel;
     delete d;
+}
+
+
+void MarbleControlBox::updateMapThemes()
+{
+    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth" );
+    d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapthememodel );
 }
 
 void MarbleControlBox::updateButtons( int value )
