@@ -586,12 +586,23 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  goHome();
 
     /**
-     * @brief Get the current map theme
+     * @brief Get the ID of the current map theme
+     * To ensure that a unique identifier is being used the theme does NOT 
+     * get represented by its name but the by relative location of the file 
+     * that specifies the theme:
+     *
+     * Example: 
+     *    maptheme = "bluemarble/bluemarble.dgml"
      */
     QString mapTheme() const;
     /**
      * @brief Set a new map theme
-     * @param maptheme  The name of the new maptheme.
+     * @param maptheme  The ID of the new maptheme. To ensure that a unique 
+     * identifier is being used the theme does NOT get represented by its 
+     * name but the by relative location of the file that specifies the theme:
+     *
+     * Example: 
+     *    maptheme = "bluemarble/bluemarble.dgml" 
      */
     void  setMapTheme( const QString& maptheme );
 

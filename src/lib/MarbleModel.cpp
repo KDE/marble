@@ -262,7 +262,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
 
     d->m_selectedMap = selectedMap;
     d->m_projection = currentProjection;
-    emit themeChanged( d->m_maptheme->name() );
+    emit themeChanged( selectedMap );
     notifyModelChanged();
 }
 

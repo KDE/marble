@@ -130,13 +130,19 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Return the name of the current map theme.
-     * @return the name of the current MapTheme.
+     * @return the identifier of the current MapTheme.
+     * To ensure that a unique identifier is being used the theme does NOT 
+     * get represented by its name but the by relative location of the file 
+     * that specifies the theme:
+     *
+     * Example: 
+     *    maptheme = "bluemarble/bluemarble.dgml"
      */
     QString mapTheme() const;
 
     /**
      * @brief Set a new map theme to use.
-     * @param selectedMap  the name of the selected map theme
+     * @param selectedMap  the identifier of the selected map theme
      * @param parent       the parent widget
      * @param currentProjection  the current projection
      *
@@ -147,6 +153,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
      *
      * NOTE: Both the parent and currentProjection parameters will
      *       disappear soon.
+     *
+     * The ID of the new maptheme. To ensure that a unique 
+     * identifier is being used the theme does NOT get represented by its 
+     * name but the by relative location of the file that specifies the theme:
+     *
+     * Example: 
+     *    maptheme = "bluemarble/bluemarble.dgml" 
      */
     void setMapTheme( const QString &selectedMap,
 		      QWidget *parent,
@@ -214,11 +227,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
-     * @param name the name of the new map theme.
+     * @param name the identifier of the new map theme.
      * @see  mapTheme
      * @see  setMapTheme
      */
-    void themeChanged( QString name );
+    void themeChanged( QString mapTheme );
     /**
      * @brief Signal that the MarbleModel has changed in general
      */

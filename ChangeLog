@@ -1,5 +1,12 @@
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleWidget.h:
+    * src/lib/MarbleModel.{cpp, h}:
+    - Fixing the missing selection in the map view tab once
+      the map setting gets restored. + Adding related API docs.
+
+2007-12-31  Torsten Rahn  <rahn@kde.org>
+
     * lib/MeasureTool.cpp: Fixed partial disappearance of the 
       measureline east to the date line. 
 
