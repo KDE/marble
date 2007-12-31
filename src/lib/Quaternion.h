@@ -35,10 +35,10 @@ class Quaternion {
     Quaternion(double w, double x, double y, double z);
     /*!\brief used to generate Quaternion from longitude and latitude
      * 
-     * \param alpha longitude
-     * \param beta latitude
+     * \param lon longitude
+     * \param lat latitude
      */
-    Quaternion(double alpha, double beta);
+    Quaternion(double lon, double lat);
     virtual ~Quaternion(){ }
 
     // Operators
@@ -49,6 +49,8 @@ class Quaternion {
     void        set(double w, double x, double y, double z) {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
     }
+
+    void        getSpherical(double &alpha, double &beta) const; // Geo: lon, lat
 
     void        normalize();
 
@@ -64,8 +66,6 @@ class Quaternion {
 
     virtual void rotateAroundAxis(const Quaternion &q);
     void        slerp(const Quaternion q1, const Quaternion q2, double t);
-
-    void        getSpherical(double &alpha, double &beta) const; // Geo: lon, lat
 
     void        scalar(double mult);
 

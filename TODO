@@ -20,7 +20,9 @@ Before Dec 28th:
 - Fix area visibility mapped to Legend          DONE
 - Fix order of Feature appearance               DONE
 - Fix MarbleNavigator Plugin                    DONE
-- Bug 154700
+- Bug 154700                                    ingwa
+- Disable Install button on Install in KNS      ingwa
+- KNS Url ?
 - fix header file installation                  DONE
 
 Before Dec 31th:
