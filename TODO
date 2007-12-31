@@ -19,7 +19,7 @@ Before Dec 28th:
 - Fix dateline issue with Bounding Box          DONE
 - Fix area visibility mapped to Legend          DONE
 - Fix order of Feature appearance               DONE
-- Fix MarbleNavigator Plugin
+- Fix MarbleNavigator Plugin                    DONE
 - Bug 154700
 - fix header file installation                  DONE
 
