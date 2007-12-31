@@ -14,7 +14,7 @@ Before Dec 28th:
 - Save Projection in KDE interface              DONE
 - Save Projection in Qt interface               DONE
 - Save MapTheme in KDE interface                DONE
-- Save MapTheme in Qt interface                 DONE(?)
+- Save MapTheme in Qt interface                 DONE
 - Update Projection ComboBox accordingly        DONE
 - Fix dateline issue with Bounding Box          DONE
 - Fix area visibility mapped to Legend          DONE
