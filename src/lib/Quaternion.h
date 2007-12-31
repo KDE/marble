@@ -50,7 +50,7 @@ class Quaternion {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
     }
 
-    void        getSpherical(double &alpha, double &beta) const; // Geo: lon, lat
+    void        getSpherical(double &lon, double &lat) const;
 
     void        normalize();
 
