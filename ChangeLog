@@ -1,5 +1,10 @@
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
+    * src/plugins/navigator/CMakeLists.txt:
+    - Fix MarbleNavigator Plugin
+
+2007-12-31  Torsten Rahn  <rahn@kde.org>
+
     * src/marble.qrc:
     * src/lib/MarbleControlBox.ui:
     * src/icons/map-flat.png:
