@@ -1,5 +1,13 @@
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
+    * src/marble.qrc:
+    * src/lib/MarbleControlBox.ui:
+    * src/icons/map-flat.png:
+    * src/icons/map-globe.png:
+    - Icons for projection combobox
+
+2007-12-31  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleWidget.h:
     * src/lib/MarbleModel.{cpp, h}:
     - Fixing the missing selection in the map view tab once

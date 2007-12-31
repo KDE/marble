@@ -481,10 +481,16 @@
           <property name="text" >
            <string>Globe</string>
           </property>
+          <property name="icon" >
+            <iconset resource="../marble.qrc" >:/icons/map-globe.png</iconset>
+          </property>
          </item>
          <item>
           <property name="text" >
            <string>Flat Map</string>
+          </property>
+          <property name="icon" >
+            <iconset resource="../marble.qrc" >:/icons/map-flat.png</iconset>
           </property>
          </item>
         </widget>
