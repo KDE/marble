@@ -86,7 +86,7 @@ class PlaceMarkLayout : public QObject
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<QPersistentModelIndex> whichPlaceMarkAt( const QPoint &pos ) const;
+    QVector<QPersistentModelIndex> whichPlaceMarkAt( const QPoint &pos );
 
     PlaceMarkPainter* placeMarkPainter() const;
 

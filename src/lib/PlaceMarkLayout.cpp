@@ -108,13 +108,16 @@ void PlaceMarkLayout::requestStyleReset()
 void PlaceMarkLayout::styleReset()
 {
     m_paintOrder.clear();
-
     qDeleteAll( m_visiblePlaceMarks );
     m_visiblePlaceMarks.clear();
 }
 
-QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos ) const
+QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
 {
+    if ( m_styleResetRequested == true ) {
+        styleReset();
+    }
+
     QVector<QPersistentModelIndex> ret;
 
     QVector<VisiblePlaceMark*>::const_iterator  it;

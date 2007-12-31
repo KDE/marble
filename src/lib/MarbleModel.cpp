@@ -124,6 +124,8 @@ MarbleModel::MarbleModel( QWidget *parent )
 
     connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged ( QItemSelection, QItemSelection) ),
              d->m_placeMarkLayout,         SLOT( requestStyleReset() ) ); 
+    connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
+             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) ); 
 
     d->m_placemarkmanager->loadStandardPlaceMarks();
 

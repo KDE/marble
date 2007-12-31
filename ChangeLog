@@ -1,3 +1,11 @@
+2007-12-31  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/PlaceMarkLayout.{cpp,h}:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/VisiblePlaceMark.cpp:
+
+    - Fixing a crash reported by Claudiu Costin.
+
 2007-12-31    Inge Wallin  <inge@lysator.liu.se>
 
 	* src/ControlView.h (marbleControl): New function
