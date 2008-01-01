@@ -42,6 +42,7 @@ class MarbleModelPrivate
     // View and paint stuff
     MapTheme            *m_maptheme;
     QString              m_selectedMap;
+    int                  m_previousMapLoadedFine;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;
@@ -88,7 +89,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_placeMarkLayout   = 0;
 
     d->m_maptheme = new MapTheme();
-
+    d->m_previousMapLoadedFine = false;
 
     QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
     QString      selectedmap;
@@ -202,7 +203,19 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     QString mapPath = QString("maps/earth/%1").arg( selectedMap );
     qDebug( "Setting map theme to : %s",
 	    qPrintable( MarbleDirs::path( mapPath ) ) );
-    d->m_maptheme->open( MarbleDirs::path( mapPath ) );
+
+    int error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
+    if ( error < 0 ){
+        if ( d->m_previousMapLoadedFine == true ) return;
+        else { 
+            // Actually this case can't really happen as the
+            // existance of valid .dgml files gets checked before and
+            // the directory string can't get invalid either.
+            qDebug() << "Couldn't find a valid map.";
+            exit(-1);
+        } 
+    }
+    d->m_previousMapLoadedFine = true;
 
     // If this layer is a bitmaplayer, check if the cached tiles for
     // it are already generated, and if not, do so.
