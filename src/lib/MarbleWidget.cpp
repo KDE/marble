@@ -156,13 +156,6 @@ void MarbleWidget::construct(QWidget *parent)
 
 //    Fixed a potential crash if MarbleWidget constructed as a toplevel widget
 
-    if ( parent )
-        d->m_viewParams.m_canvasImage = new QImage( parent->width(),
-                                                    parent->height(),
-                                         QImage::Format_ARGB32_Premultiplied );
-    else
-        d->m_viewParams.m_canvasImage = new QImage( 100, 100,
-                                         QImage::Format_ARGB32_Premultiplied);
     d->m_justModified = false;
 
     d->m_downloadManager = NULL;

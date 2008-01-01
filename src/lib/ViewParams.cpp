@@ -41,7 +41,8 @@ ViewParams::ViewParams( )
     m_showGps            = false;
 
     // Just to have something.
-    m_coastImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
+    m_canvasImage = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
+    m_coastImage  = new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied );
 }
 
 ViewParams::~ViewParams()
