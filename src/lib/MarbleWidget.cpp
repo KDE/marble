@@ -151,10 +151,6 @@ void MarbleWidget::construct(QWidget *parent)
     setPalette( p );
     setBackgroundRole( QPalette::Window );
     setAutoFillBackground( true );
-//    setProjection( Equirectangular );
-//    setAttribute(Qt::WA_NoSystemBackground);
-
-//    Fixed a potential crash if MarbleWidget constructed as a toplevel widget
 
     d->m_justModified = false;
 
