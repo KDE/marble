@@ -123,8 +123,9 @@ MarbleWidget::~MarbleWidget()
     setInputHandler(NULL);
     setDownloadManager(NULL);
     delete d->m_model;
-    delete d->m_viewParams.m_canvasImage;
-    delete d->m_viewParams.m_coastImage;
+//    Moved to ViewParams:
+//    delete d->m_viewParams.m_canvasImage;
+//    delete d->m_viewParams.m_coastImage;
     delete d;
 }
 

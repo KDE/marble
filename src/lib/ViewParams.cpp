@@ -47,6 +47,6 @@ ViewParams::ViewParams( )
 
 ViewParams::~ViewParams()
 {
-//    FIXME: Memory Leak on quitting the application:
-//    delete m_coastImage;
+    delete m_canvasImage;
+    delete m_coastImage;
 }
