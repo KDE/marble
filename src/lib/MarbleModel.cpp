@@ -43,7 +43,7 @@ class MarbleModelPrivate
     // View and paint stuff
     MapTheme            *m_maptheme;
     QString              m_selectedMap;
-    int                  m_previousMapLoadedFine;
+    bool                 m_previousMapLoadedFine;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;
