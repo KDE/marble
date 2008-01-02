@@ -166,6 +166,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
 		      Projection currentProjection );
 
     /**
+     * @brief Return the downloadmanager to load missing tiles
+     * @return the HttpDownloadManager instance.
+     */
+
+    HttpDownloadManager* downloadManager() const;
+
+   /**
      * @brief Set the downloadmanager to load missing tiles
      * @param downloadManager the HttpDownloadManager instance
      *

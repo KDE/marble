@@ -49,4 +49,6 @@ ViewParams::~ViewParams()
 {
     delete m_canvasImage;
     delete m_coastImage;
+    m_canvasImage = 0;
+    m_coastImage = 0;
 }

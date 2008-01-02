@@ -1,6 +1,15 @@
 2008-01-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/ViewParams.cpp:
+
+    - Getting rid of m_downloadManager in MarbleWidget to simplify code.
+    - Thereby fixed a mem leak concerning the same issue.
+
+2008-01-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.cpp:
     * src/lib/ViewParams.cpp:
     Initialize m_canvasimg before the model gets instantiated.
 

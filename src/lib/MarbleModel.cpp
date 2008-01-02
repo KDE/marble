@@ -20,6 +20,7 @@
 
 #include "global.h"
 #include "ClipPainter.h"
+#include "HttpDownloadManager.h"
 #include "FileViewModel.h"
 #include "GeoPolygon.h"
 #include "KMLFileViewItem.h"
@@ -281,11 +282,21 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     notifyModelChanged();
 }
 
+HttpDownloadManager* MarbleModel::downloadManager() const
+{
+    return d->m_downloadManager;
+}
+
 
 void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
 {
+    HttpDownloadManager *previousDownloadManager = d->m_downloadManager;
+
+    d->m_tileLoader->setDownloadManager( downloadManager );
     d->m_downloadManager = downloadManager;
-    d->m_tileLoader->setDownloadManager( d->m_downloadManager );
+
+    if ( previousDownloadManager != 0 ) 
+        delete previousDownloadManager;
 }
 
 

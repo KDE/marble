@@ -72,8 +72,6 @@ class MarbleWidgetPrivate
     int              m_minimumzoom;
     int              m_maximumzoom;
 
-    HttpDownloadManager       *m_downloadManager;
-
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
@@ -155,7 +153,6 @@ void MarbleWidget::construct(QWidget *parent)
 
     d->m_justModified = false;
 
-    d->m_downloadManager = NULL;
     d->m_inputhandler = NULL;
     d->m_popupmenu = new MarbleWidgetPopupMenu( this, d->m_model );
     d->m_measureTool = new MeasureTool( this );
@@ -227,11 +224,7 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
 
 void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 {
-    if ( d->m_downloadManager )
-       delete d->m_downloadManager;
-
-    d->m_downloadManager = downloadManager;
-    d->m_model->setDownloadManager(d->m_downloadManager);
+    d->m_model->setDownloadManager( downloadManager );
 }
 
 
@@ -1270,11 +1263,11 @@ void MarbleWidget::setDownloadUrl( const QString &url )
 }
 
 void MarbleWidget::setDownloadUrl( const QUrl &url ) {
-    if ( d->m_downloadManager != NULL )
-        d->m_downloadManager->setServerUrl( url );
+    HttpDownloadManager *downloadManager = d->m_model->downloadManager();
+    if ( downloadManager != NULL )
+        downloadManager->setServerUrl( url );
     else
     {
-        HttpDownloadManager *downloadManager;
         downloadManager = new HttpDownloadManager( url,
                                                    new FileStoragePolicy( MarbleDirs::localPath() ) );
         d->m_model->setDownloadManager( downloadManager );
