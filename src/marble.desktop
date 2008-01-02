@@ -2,6 +2,7 @@
 Type=Application
 Exec=marble
 Name=Marble
+Name[hi]=संगमरमर
 Name[nb]=Marmor
 Name[ne]=मार्बल
 Name[x-test]=xxMarblexx
@@ -16,6 +17,7 @@ GenericName[et]=Töölaua gloobus
 GenericName[fa]=کره رومیزی
 GenericName[fr]=Globe terrestre
 GenericName[ga]=Cruinneog Dheisce
+GenericName[hi]=डेस्कटॉप ग्लोब
 GenericName[it]=Globo per il desktop
 GenericName[ja]=デスクトップ地球儀
 GenericName[ko]=데스크톱 지구본
