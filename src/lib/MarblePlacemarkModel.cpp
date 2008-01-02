@@ -57,6 +57,7 @@ MarblePlacemarkModel::MarblePlacemarkModel( PlaceMarkManager *manager,
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
 {
+    clearPlaceMarks();
     // Unregister from PlaceMarkManager
     d->m_manager->setPlaceMarkModel( 0 );
 
