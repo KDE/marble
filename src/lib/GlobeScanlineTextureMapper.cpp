@@ -133,7 +133,18 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                       - ( ( m_y - m_imageHeight / 2 )
                       * ( m_y - m_imageHeight / 2 ) ) ) );
 
-        // Calculate the actual x-range of the map within the current scanline
+        // Calculate the actual x-range of the map within the current scanline.
+        // 
+        // If the circular border of the earth disk is still visible then xLeft
+        // equals the scanline position of the most left pixel that gets covered
+        // by the earth disk. In terms of math this equals the half image width minus 
+        // the radius component on the current scanline in x direction ("rx").
+        //
+        // If the zoom factor is high enough then the whole screen gets covered
+        // by the earth and the border of the earth disk isn't visible anymore.
+        // In that situation xLeft equals zero.
+        // For xRight the situation is similar.
+
         const int xLeft  = ( ( m_imageWidth / 2 - rx > 0 )
                              ? m_imageWidth / 2 - rx : 0 ); 
         const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
