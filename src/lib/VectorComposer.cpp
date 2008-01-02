@@ -89,7 +89,6 @@ VectorComposer::~VectorComposer()
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
     QPaintDevice  *origimg = viewParams->m_coastImage;
-    const int      radius  = viewParams->m_radius;
     Quaternion     rotAxis = viewParams->m_planetAxis;
 
     //	m_vectorMap -> clearNodeCount();
@@ -142,7 +141,6 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 void VectorComposer::paintBaseVectorMap( ClipPainter *painter, 
                                          ViewParams *viewParams )
 {
-    const int   radius  = viewParams->m_radius;
     Quaternion  rotAxis = viewParams->m_planetAxis;
 
     m_vectorMap -> setPen( m_oceanPen );
@@ -188,7 +186,6 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 {
     // m_vectorMap -> clearNodeCount();
 
-    const int   radius  = viewParams->m_radius;
     Quaternion  rotAxis = viewParams->m_planetAxis;
 
     if ( viewParams->m_showRivers ) {

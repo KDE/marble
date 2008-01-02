@@ -321,7 +321,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
     double      lon;
     double      lat;
     double      previousLon;
-    double      previousY;
+    double      previousY = 0.0;
     double      previousX;
     double      interpolatedY;
 
@@ -348,6 +348,11 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 
         x = (double)( imgwidth / 2  - ( m_centerLon - lon ) * m_rad2Pixel );
         y = (double)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
+
+        if ( i == 0 ) {
+            previousY = y;
+        }
+
         //The next steeps deal with the measurement of two points
         //that the shortest path crosses the dateline
         currentSign = (lon < 0)?-1:1;

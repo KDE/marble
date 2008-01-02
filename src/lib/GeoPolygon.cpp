@@ -246,7 +246,6 @@ void PntMap::load(const QString &filename)
     double  lon     = 0.0;
     double  lastLon = 0.0;
     double  lat     = 0.0;
-    int lastSign    = 0;
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();

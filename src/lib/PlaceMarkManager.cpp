@@ -292,7 +292,6 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     double   area;
 
     QString  tmpstr;
-    qint32   tmpint32;
     qint64   tmpint64;
 
     QString testo;

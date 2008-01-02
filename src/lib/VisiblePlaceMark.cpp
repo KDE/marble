@@ -49,7 +49,6 @@ const QPixmap& VisiblePlaceMark::symbolPixmap() const
     if ( style == 0 )
     {
         qDebug() << "Style pointer null";
-        return QPixmap();
     }
     m_symbolPixmap = style->iconStyle()->icon(); 
     return  m_symbolPixmap;
