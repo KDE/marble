@@ -1,4 +1,12 @@
-2008-01-01  Torsten Rahn  <rahn@kde.org>
+2008-01-03  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/GlobeScanlineTextureMapper.cpp:
+    - Fix precise rendering around north pole
+
+    - Fix for [Bug 154916] Crash on startup in MarbleWidget::resizeEvent
+      Still needs verification.
+
+2008-01-02  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.cpp:
     * src/lib/MarbleModel.{cpp,h}:

@@ -107,7 +107,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Calculate north pole position to decrease pole distortion later on
     Quaternion  northPole = GeoDataPoint( 0.0, (double)( M_PI * 0.5 ) ).quaternion();
 
-    northPole.rotateAroundAxis( viewParams->m_planetAxis );
+    northPole.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
 
     // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
@@ -162,7 +162,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
         // Decrease pole distortion due to linear approximation ( y-axis )
         bool crossingPoleArea = false;
-        int northPoleY = m_imageHeight / 2 + (int)( radius * northPole.v[Q_Y] );
+        int northPoleY = m_imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
              && northPoleY - ( m_n * 0.75 ) <= m_y
              && northPoleY + ( m_n * 0.75 ) >= m_y ) 
@@ -224,9 +224,15 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 m_scanLine += ( m_n - 1 );
             }
 
-            // You can temporarily comment out this line and run Marble
-            // to understand the interpolation:
-            pixelValue( lon, lat, m_scanLine );
+//          Comment out the pixelValue line and run Marble if you want
+//          to understand the interpolation:
+
+//          Uncomment the crossingPoleArea line to check precise 
+//          rendering around north pole:
+
+//            if ( crossingPoleArea == false )
+            if ( m_x < m_imageWidth ) 
+                pixelValue( lon, lat, m_scanLine );
 
             m_prevLon = lon;
             m_prevLat = lat; // preparing for interpolation
