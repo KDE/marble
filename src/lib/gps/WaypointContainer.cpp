@@ -39,6 +39,7 @@ void WaypointContainer::draw( ClipPainter *painter,
     bool draw;
     QPoint position;
 
+    painter->setPen( QPen( Qt::black ) );
     painter->setBrush( QBrush( Qt::white ) );
     
     for ( it = this->begin(); it < this->constEnd(); ++it ) {

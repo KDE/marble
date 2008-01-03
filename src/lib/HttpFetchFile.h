@@ -18,6 +18,7 @@
 #define HTTPFETCHFILE_H
 
 #include <QtCore/QBuffer>
+#include <QtCore/QDebug>
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>

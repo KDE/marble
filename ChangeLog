@@ -1,5 +1,27 @@
 2008-01-03  Torsten Rahn  <rahn@kde.org>
 
+    * ChangeLog:
+    * src/lib/gps/Track.cpp:
+    * src/lib/gps/Track.h:
+    * src/lib/gps/GpxSax.cpp:
+    * src/lib/gps/GpsTracking.cpp:
+    * src/lib/gps/WaypointContainer.cpp:
+    * src/lib/gps/GpxSax.h:
+    * src/lib/gps/GpxFileModel.cpp:
+    * src/lib/AbstractLayer/AbstractLayerData.cpp:
+    * src/lib/HttpFetchFile.h:
+    * src/lib/HttpDownloadManager.cpp:
+    * src/lib/global.h:
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/HttpFetchFile.cpp:
+
+    - Fixed mem leaks in the DownloadManager. 
+    - Bumping up the version number to 0.5
+    - Fixing Andrew's gpx/GPS functionality
+
+2008-01-03  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/GlobeScanlineTextureMapper.cpp:
     - Fix precise rendering around north pole
 

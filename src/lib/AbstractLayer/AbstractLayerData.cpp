@@ -150,7 +150,7 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
                 point->setX( ( ( screenSize.width() / 2 )
                         + ( radius * qpos.v[Q_X] ) ) );
                 point->setY( ( ( screenSize.height() / 2 )
-                        + ( radius * qpos.v[Q_Y] ) ) );
+                        - ( radius * qpos.v[Q_Y] ) ) );
 
                 return true;
             } else {
@@ -158,19 +158,19 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
             }
         break;
         case Equirectangular:
-            double degX;
-            double degY;
+            double lon;
+            double lat;
             double xyFactor = 2 * viewParams->m_radius / M_PI;
 
             double centerLon;
             double centerLat;
 
             // Let (x, y) be the position on the screen of the placemark..
-            qpos.getSpherical( degX, degY );
+            qpos.getSpherical( lon, lat );
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            int x = (int)( screenSize.width()/ 2 + xyFactor * (degX + centerLon));
-            int y = (int)(screenSize.height()/ 2 + xyFactor * (degY + centerLat));
+            int x = (int)( screenSize.width()/ 2 - xyFactor * (centerLon - lon));
+            int y = (int)(screenSize.height()/ 2 + xyFactor * (centerLat - lat));
 
             point->setX( x );
             point->setY( y );

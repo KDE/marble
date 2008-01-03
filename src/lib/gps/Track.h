@@ -40,7 +40,8 @@ class Track : public AbstractLayerContainer,
      * @brief empty constructor
      */
     Track();
-    
+    ~Track();
+
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, 
                       ViewParams *viewParams );

@@ -70,7 +70,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_widget = 0;
     d->m_searchTerm = QString();
     d->m_searchTriggered = false;
-    // FIXME: Get this from the widget?
+    // FIXME: Get this from MapTheme.
     d->m_minimumzoom = 900;
 
     d->uiWidget.setupUi( this );

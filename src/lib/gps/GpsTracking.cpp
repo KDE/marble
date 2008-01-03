@@ -54,6 +54,8 @@ GpsTracking::~GpsTracking()
     delete m_gpsPreviousPosition;
     delete m_gpsTracking;
 
+    delete m_gpsTrack;
+
 #ifdef HAVE_LIBGPS
     delete m_gpsd;
 #endif

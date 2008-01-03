@@ -29,7 +29,7 @@ enum Projection {
 const double DEG2RAD = M_PI / 180.0;
 const double RAD2DEG = 180.0 / M_PI;
 
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "pre-0.5-SVN" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.5 KDE 4.0 Release" );
 
 const QString NOT_AVAILABLE = QObject::tr("not available");
 

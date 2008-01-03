@@ -151,7 +151,10 @@ MarbleModel::MarbleModel( QWidget *parent )
 MarbleModel::~MarbleModel()
 {
     delete d->m_texmapper;
-    delete d->m_tileLoader;
+
+    delete d->m_tileLoader; // disconnects from downloadManager in dtor
+    delete d->m_downloadManager;
+
     delete d->m_veccomposer;
     delete d->m_texcolorizer; 
     delete d->m_gridmap;

@@ -68,6 +68,12 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 
     QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
 
+//    FIXME: Check whether this assumption is a safe on:
+//    ( Problem: Conditional jump later on depends on uninitialised value )
+//
+//    if ( responseHeader.isValid() == false )
+//        return;
+
     HttpJob* job = m_pJobMap[ requestId ];
 
     if ( responseHeader.statusCode() == 301 ) {

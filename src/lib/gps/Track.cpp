@@ -21,6 +21,15 @@ Track::Track() :
 {
 }
 
+Track::~Track() 
+{
+    iterator it;
+    for ( it = this->begin(); it < this->constEnd(); it++ ) {
+        delete (*it);
+    }
+    clear();
+}
+
 void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
                  ViewParams *viewParams )
 {

@@ -23,7 +23,7 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *
     , m_serverUrl( serverUrl )
     , m_storagePolicy( policy )
 {
-    m_downloadEnabled = true; //disabled for now
+    m_downloadEnabled = true; //enabled for now
 
     m_jobQueue.clear();
     m_activatedJobList.clear();
@@ -38,6 +38,17 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *
 
 HttpDownloadManager::~HttpDownloadManager()
 {
+    m_downloadEnabled = false;
+
+    qDeleteAll( m_jobQueue );
+    m_jobQueue.clear();
+
+    qDeleteAll( m_activatedJobList );
+    m_activatedJobList.clear();
+
+    qDeleteAll( m_jobBlackList );
+    m_jobBlackList.clear();
+
     if ( m_storagePolicy != 0 )
         delete m_storagePolicy;
 }
@@ -146,6 +157,7 @@ void HttpDownloadManager::removeJob( HttpJob* job )
     if ( pos > 0 )
     {
         m_activatedJobList.removeAt( pos );
+//        qDebug() << "Removing: " << job->initiatorId;
         delete job;
     }
 
@@ -173,13 +185,13 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
     {
         int pos = m_activatedJobList.indexOf( job );
 
-        if ( pos > 0 )
+        if ( pos >= 0 )
         {
             m_activatedJobList.removeAt( pos );
-        }
-        m_jobBlackList.push_back( job );
+            m_jobBlackList.push_back( job );
 
-//        qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->relativeUrlString ).arg( m_jobBlackList.size() );
+//            qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->relativeUrlString ).arg( m_jobBlackList.size() );
+        }
     }
     else 
     {

@@ -36,9 +36,16 @@ GpxSax::GpxSax( GpxFile *gpxFile )
     
     m_tempLat = 0.0;
     m_tempLon = 0.0;
+
+    m_track = 0;
+    m_trackSeg = 0;
 }
 
-
+GpxSax::~GpxSax()
+{
+    delete m_track;
+    delete m_trackSeg;
+}
 
 bool GpxSax::startElement( const QString &namespaceURI,
                            const QString &localName,

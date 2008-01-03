@@ -13,6 +13,7 @@
 
 #include <QtCore/Qt>
 #include <QtCore/QFile>
+#include <QtCore/QVectorIterator>
 #include <QDebug>
 
 #include <config-marble.h>
@@ -35,6 +36,13 @@ GpxFileModel::GpxFileModel( QObject *parent )
 
 GpxFileModel::~GpxFileModel()
 {
+/*
+    FIXME: Do we need to clean up here?
+    QVector<GpxFile*>::iterator it = (*m_data).begin();
+    if ( m_data->size() > 1 )
+        qDeleteAll( ++it, (*m_data).end()  );
+    m_data->clear();
+*/
     delete m_data;
 }
 
