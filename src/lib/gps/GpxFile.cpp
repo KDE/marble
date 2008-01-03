@@ -63,6 +63,13 @@ GpxFile::GpxFile()
     setActive( true );
 }
 
+GpxFile::~GpxFile()
+{
+    delete m_tracks;
+    delete m_waypoints;
+    delete m_routes;
+}
+
 void GpxFile::draw( ClipPainter *painter, const QPoint &point )
 {
     if ( !m_visible ){ 

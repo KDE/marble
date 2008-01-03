@@ -38,6 +38,8 @@ class GpxFile : public AbstractLayerInterface
     GpxFile( const QString &fileName );
     GpxFile();
 
+    ~GpxFile();
+
     virtual void draw( ClipPainter *painter, const QPoint &point );
 
     virtual void draw( ClipPainter *painter, 

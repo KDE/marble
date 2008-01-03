@@ -43,6 +43,7 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
 GpsLayer::~GpsLayer()
 {
     delete m_currentPosition;
+    delete m_tracking;
     delete m_currentGpx;
 }
 
