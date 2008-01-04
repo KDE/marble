@@ -60,7 +60,14 @@ More sophisticated issues which need some thinking and discussion (some issues m
 
 - Make Marble use different render settings while panning (MOVE) and after releasing the mouse (DROP).
 
-For KDE 4.0.1 it should use the render quality MEDIUM for panning and HIGH or PRINT after the mouse button has been released
+For KDE 4.0.1 it should use the render quality MEDIUM for panning and HIGH or PRINT after the mouse button has been released. Note: For KDE 4.1 there should be two comboboxes in the settings dialog:
+
+Display Quality:
+
+During mouse move: [^ Medium ]
+On mouse drop:     [^ High   ]
+
+- Rerender the map at "PRINT quality" once "File -> Print" or "Edit -> Copy" get selected.
 
 
 
