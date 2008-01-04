@@ -47,8 +47,16 @@ For KDE 4.0.1 it should use MEDIUM for panning and HIGH or PRINT after the mouse
 
 *** Fix Double Click on map (which should center the map on the point being double clicked).
 
+*** Add a *small* percentage bar to the status bar that indicates map downloads (should be really tiny and not obtrusive just to see that something is going on). Ideally the user would get a tooltip once he hovers that progress bar with numbers of files in the queue, maybe amount of data that has been downloaded during the session.
 
-- Planning and architecture: write proposals for Marble 0.6 / KDE 4.1
+- Planning and architecture: write proposals for Marble 0.6 / KDE 4.1:
+Topics:
+
+- Layer Management class
+- Projection class
+- LatLonBoundingBoxes
+- Model-View concept
+- Spatial Indices
 
 
 Whenever -- not tied to any release
@@ -111,14 +119,14 @@ Make it a KDE4 application as a real member of kdeedu.
  * KDEPrint support                                                     DONE
 
 Finish existing features
- * KML support (Murad Tagirov)                                          ----
+ * KML support (Murad Tagirov)                                          DONE (needs refactoring to QXmlStreamReader)
     - One overall aim: make Digikam KML output and plasma weather       --
       applet work together with Marble. 
  * GPS support (Andrew Manson)
-    - Read GPX files                                                    ----
-    - Show waypoints                                                    ----
-    - Show tracks                                                       ----
-    - Show 'You are here' using the GPS                                 ----
+    - Read GPX files                                                    DONE
+    - Show waypoints                                                    DONE
+    - Show tracks                                                       DONE
+    - Show 'You are here' using the GPS                                 DONE
  * Creating tiles during build instead of first run			TACK
  * Fix designer plugin dirs						TACK
  * Fix image downloading for Wikipedia                                  DONE
