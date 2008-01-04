@@ -22,8 +22,25 @@ temperature Winder (Dec)
 Showstoppers to fix before KDE 4.0.1 / Marble 0.5.1:
 ====================================================
 
-Refinement:
+REFINEMENTS:
+
+Low hanging (but important) fruits:
+-----------------------------------
+
 *** Update screenshots in the docs!
+
+*** Add maximumZoom and minimumZoom support for .dgml files. MapTheme should parse this information and should change Marble's zoom slider accordingly.
+
+*** Fix Double Click on map (which should center the map on the point being double clicked).
+
+*** Add a *small* percentage bar to the status bar that indicates map downloads (should be really tiny and not obtrusive just to see that something is going on). Ideally the user would get a tooltip once he hovers that progress bar with numbers of files in the queue, maybe amount of data that has been downloaded during the session.
+
+BUGS:
+*** We need to invoke a PlaceMarkLayout::requestStyleReset once a KML file has been loaded. Otherwise labels will overlap.
+*** Free tileloader cache if we switch to plain map (or rather: free tileloader cache if we stop using a theme that is using the tileloader). Check "top" console command to confirm it got fixed.
+
+
+More sophisticated issues which need some thinking and discussion (some issues might be delayed to 4.1):
 
 *** Create map tiles at compile time
 
@@ -31,23 +48,21 @@ Refinement:
 - After maps get downloaded sometimes the resolution doesn't get updated to what is has just been stored on the disc
 - Implement "retry to download the tile 3 times during the current session if the tile couldn't get fetched on first try"
 
-*** Minor Backend feature polishment:
+*** Minor Backend feature fixes and polishment:
 - Create a LatLonBoundingBox
 - Create a QPersistentModelIndex for MarblePlaceMarkModel items to improve speed on close up zooms.
 - Make Marble have a RenderingQuality setting in ViewParams: 
 
-* LOW: For slow hardware with different defaults ( No Relief in Atlas View, using setShowQuickAndDirty(true) for really sloppy interpolation )
+* LOW: For slow hardware with different defaults ( No relief in Atlas View, using setShowQuickAndDirty(true) for really sloppy interpolation )
 * MEDIUM: Basically what we have now
 * HIGH: Uses Antialiased vector lines
-* PRINT: Adds some Really Slow (TM) nice stuff that are typical for printed maps: e.g. Blue antialiased coast lines for the Atlas map.
+* PRINT: Adds some Really Slow (TM) nice things that are typical for printed maps: e.g. Blue antialiased coast lines for the Atlas map.
 
-- Make Marble use different Render Settings while panning (MOVE) and after releasing the mouse (DROP).
+- Make Marble use different render settings while panning (MOVE) and after releasing the mouse (DROP).
 
-For KDE 4.0.1 it should use MEDIUM for panning and HIGH or PRINT after the mouse button has been released
+For KDE 4.0.1 it should use the render quality MEDIUM for panning and HIGH or PRINT after the mouse button has been released
 
-*** Fix Double Click on map (which should center the map on the point being double clicked).
 
-*** Add a *small* percentage bar to the status bar that indicates map downloads (should be really tiny and not obtrusive just to see that something is going on). Ideally the user would get a tooltip once he hovers that progress bar with numbers of files in the queue, maybe amount of data that has been downloaded during the session.
 
 - Planning and architecture: write proposals for Marble 0.6 / KDE 4.1:
 Topics:
