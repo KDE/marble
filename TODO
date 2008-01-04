@@ -6,30 +6,50 @@ Mark those tasks that you want to perform with your name:
  CARU   Carlos Licea
  MURA   Murad Tagirov
 
-Showstoppers to fix before KDE 4.0:
+TODO for Jan 11:
 
-Before Dec 28th:
-----------------
-- Check OpenSUSE for Crash on Quit
-- Save Projection in KDE interface              DONE
-- Save Projection in Qt interface               DONE
-- Save MapTheme in KDE interface                DONE
-- Save MapTheme in Qt interface                 DONE
-- Update Projection ComboBox accordingly        DONE
-- Fix dateline issue with Bounding Box          DONE
-- Fix area visibility mapped to Legend          DONE
-- Fix order of Feature appearance               DONE
-- Fix MarbleNavigator Plugin                    DONE
-- Bug 154700                                    DONE
-- Disable Install button on Install in KNS      ingwa
-- KNS Url ?                                     ----
-- fix header file installation                  DONE
+Add maps to GHNS:
 
-Before Dec 31th:
-----------------
-- API docs
-- User documentation 
-- Update VERSION NUMBER to 0.5
+Annual precipation, 
+precipation Summer (June)
+precipation Winder (Dec)
+
+Annual temperature
+temperature Summer (June)
+temperature Winder (Dec)
+
+
+Showstoppers to fix before KDE 4.0.1 / Marble 0.5.1:
+====================================================
+
+Refinement:
+*** Update screenshots in the docs!
+
+*** Create map tiles at compile time
+
+*** Download manager fixes:
+- After maps get downloaded sometimes the resolution doesn't get updated to what is has just been stored on the disc
+- Implement "retry to download the tile 3 times during the current session if the tile couldn't get fetched on first try"
+
+*** Minor Backend feature polishment:
+- Create a LatLonBoundingBox
+- Create a QPersistentModelIndex for MarblePlaceMarkModel items to improve speed on close up zooms.
+- Make Marble have a RenderingQuality setting in ViewParams: 
+
+* LOW: For slow hardware with different defaults ( No Relief in Atlas View, using setShowQuickAndDirty(true) for really sloppy interpolation )
+* MEDIUM: Basically what we have now
+* HIGH: Uses Antialiased vector lines
+* PRINT: Adds some Really Slow (TM) nice stuff that are typical for printed maps: e.g. Blue antialiased coast lines for the Atlas map.
+
+- Make Marble use different Render Settings while panning (MOVE) and after releasing the mouse (DROP).
+
+For KDE 4.0.1 it should use MEDIUM for panning and HIGH or PRINT after the mouse button has been released
+
+*** Fix Double Click on map (which should center the map on the point being double clicked).
+
+
+- Planning and architecture: write proposals for Marble 0.6 / KDE 4.1
+
 
 Whenever -- not tied to any release
 ----------------------------------------------------------------
