@@ -2,6 +2,7 @@
 Type=Service
 Name=Marble Part
 Name[ca]=Part del Marble
+Name[csb]=Mòduł Marble
 Name[de]=Marble-Part
 Name[el]=Τμήμα Marble
 Name[es]=Part Marble
@@ -10,7 +11,9 @@ Name[ga]=Comhpháirt Marble
 Name[hi]=मार्बल पार्ट
 Name[it]=Componente Marble
 Name[ja]=Marble パート
+Name[km]=ផ្នែក​ថ្ម​ម៉ាប
 Name[ko]=Marble 부분
+Name[ne]=मार्बल अंश
 Name[nl]=Marble-component
 Name[pl]=Moduł Marble
 Name[pt]=Componente do Marble
