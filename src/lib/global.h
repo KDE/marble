@@ -16,7 +16,7 @@
 
 #include <math.h>
 
-#include <QtCore/QObject>
+#include <QtCore/QCoreApplication>
 
 // This enum is used to choose projection shown in the view.
 
@@ -31,7 +31,7 @@ const double RAD2DEG = 180.0 / M_PI;
 
 const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.5 -- KDE 4.0 Release" );
 
-const QString NOT_AVAILABLE = QObject::tr("not available");
+const QString NOT_AVAILABLE = QCoreApplication::tr("not available");
 
 // Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;

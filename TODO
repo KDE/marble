@@ -13,11 +13,11 @@ Before Release of 4.0.0 (Jan 11th)
 
 Add maps to GHNS:
  * Annual precipation,                                                  ----
-    - precipation Summer (June)                                         --
-    - precipation Winder (Dec)                                          --
+    - precipation July                                        --
+    - precipation December                                          --
  * Annual temperature                                                   ----
-    - temperature Summer (June)                                         --
-    - temperature Winder (Dec)                                          --
+    - temperature July                                         --
+    - temperature December                                          --
 
 
 Before Release of KDE 4.0.1 / Marble 0.5.1:
