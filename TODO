@@ -6,21 +6,22 @@ Mark those tasks that you want to perform with your name:
  CARU   Carlos Licea
  MURA   Murad Tagirov
 
-TODO for Jan 11:
+
+
+Before Release of 4.0.0 (Jan 11th)
+----------------------------------
 
 Add maps to GHNS:
-
-Annual precipation, 
-precipation Summer (June)
-precipation Winder (Dec)
-
-Annual temperature
-temperature Summer (June)
-temperature Winder (Dec)
+ * Annual precipation,                                                  ----
+    - precipation Summer (June)                                         --
+    - precipation Winder (Dec)                                          --
+ * Annual temperature                                                   ----
+    - temperature Summer (June)                                         --
+    - temperature Winder (Dec)                                          --
 
 
-Showstoppers to fix before KDE 4.0.1 / Marble 0.5.1:
-====================================================
+Before Release of KDE 4.0.1 / Marble 0.5.1:
+===========================================
 
 REFINEMENTS:
 
@@ -71,18 +72,9 @@ On mouse drop:     [^ High   ]
 
 
 
-- Planning and architecture: write proposals for Marble 0.6 / KDE 4.1:
-Topics:
-
-- Layer Management class
-- Projection class
-- LatLonBoundingBoxes
-- Model-View concept
-- Spatial Indices
-
 
 Whenever -- not tied to any release
-----------------------------------------------------------------
+================================================================
 
 Documentation
  * Write more in DESIGN                                                 INGE
@@ -92,19 +84,15 @@ Documentation
  * Write more in USECASES                                               INGE
 
 
-Before KDE 4.0
-----------------------------------------------------------------
+Before KDE 4.0.1
+================================================================
 
 Bugs
   See the BUGS file.
 
 Documentation:
  * APIDOX for classes in geodata/data                                   INGE
-    - StyleSelector                                                     done
-    - Style                                                             done
-    - ColorStyle                                                        done
     - IconStyle                                                         inge
-    - LabelStyle                                                        done
     - HotSpot?                                                          --
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----
@@ -118,51 +106,28 @@ Documentation:
    - MarblePlacemarkModel						--
 
 Widget:
- * Make it possible to paint on different device types in addition      ----
-   to painting on the MarbleWidget
-    - QGraphicsView                                                     --
-    - QPixmap                                                           --
-    - QSvgRenderer                                                      --
- * Offer accessor method for the Pixmap, so it can be used to export    DONE
-   the image, print it and copy it.
  * Separate the view from the globe (model)                             INGE
     - Let the view parameters be in the view instead of in the globe    done
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
 
-Make it a KDE4 application as a real member of kdeedu.
- * KApplication                                                         DONE
- * AboutData                                                            DONE
- * KConfig XT                                                           TACK
-    - Use KConfig XT for settings					done
-    - Provide settings dialog (?)					--
- * Translation                                                          DONE
- * User docs                                                            DONE
- * KDEPrint support                                                     DONE
-
-Finish existing features
- * KML support (Murad Tagirov)                                          DONE (needs refactoring to QXmlStreamReader)
-    - One overall aim: make Digikam KML output and plasma weather       --
-      applet work together with Marble. 
- * GPS support (Andrew Manson)
-    - Read GPX files                                                    DONE
-    - Show waypoints                                                    DONE
-    - Show tracks                                                       DONE
-    - Show 'You are here' using the GPS                                 DONE
- * Creating tiles during build instead of first run			TACK
- * Fix designer plugin dirs						TACK
- * Fix image downloading for Wikipedia                                  DONE
-
 Documentation:
  * Programmers manual for using Marble components in other applications	----
  * Apidox for all public classes					----
 
-Installation issues                                                     TACK
- * Only install the public include files                                --
-
  
 Before KDE 4.1
-----------------------------------------------------------------
+================================================================
+
+Planning and architecture:
+ * write proposals for Marble 0.6 / KDE 4.1                             ----
+    - Layer Management class                                            --
+    - Data source plugins                                               --
+    - Visualization plugins (layers?)                                   --
+    - Projection class                                                  --
+    - Bounding boxes                                                    --
+    - Model-View concept                                                --
+    - Spatial Indices                                                   --
 
 Make it a more complete KDE4 application as a real member of kdeedu.
  * DBus Support                                                         TACK
@@ -170,15 +135,22 @@ Make it a more complete KDE4 application as a real member of kdeedu.
 Vector backend
  * Better scalability                                                   ----
 
-Widget:
- * Support to display Timezones, Data available e.g. at:
-	http://sarangworld.com/NMLUG/WorldTZ_102.zip
-
 Features:
  * Areas, e.g. countries or districts                                   ----
  * Support for OpenStreetMap                                            TACK
     - load tiles                                                        --
     - display tiles                                                     --
+ * Support to display Timezones, Data available e.g. at:
+	http://sarangworld.com/NMLUG/WorldTZ_102.zip
+
+Internal structure:
+ * Refactor KML to use QXmlStreamReader                                 ----
+ * Make MarbleModel a real model and MarbleWidget a real view           ----
+ * Make it possible to paint on whatever QPainter Marble is given       ----
+
+Installation issues
+ * Only install the public include files                                ----
+ * Creating tiles during build instead of first run			TACK
 
 Data:
  * Evaluate the implementation of tile specifications like 
