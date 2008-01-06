@@ -67,7 +67,7 @@ void PlaceMarkInfoDialog::showContent()
     QString  rolestring;
     switch ( m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar().toLatin1() ) {
     case 'C':
-        rolestring = tr("Capital");
+        rolestring = i18n("Capital");
         break;
     case 'B':
         rolestring = tr("Capital");
