@@ -38,16 +38,9 @@ Low hanging (but important) fruits:
 
 BUGS:
 
-*** We need to invoke a PlaceMarkLayout::requestStyleReset once a KML file has been loaded. Otherwise labels will overlap.
+*** Find the reason why labels overlap when a KML file gets loaded.
 
-*** Free tileloader cache if we switch to plain map (or rather: free tileloader cache if we stop using a theme that is using the tileloader). Check "top" console command to confirm it got fixed.
-
-*** In flat projection if you move the map way up or down in total view then the compass rose will show an "S" at the top. The class CompassFloatItem.cpp needs to get adjusted to always shown an "N" on top if the projection is Equirectangular.
-
-*** Backport translation fixes ( http://lists.kde.org/?l=kde-commits&m=119952700130505&w=2 )once it got confirmed that they do work.
-
-*** Text on the map doesn't seem to get antialiased ( see http://jlp.holodeck1.com/blog/wp-content/uploads/2008/01/marble.png ). The fix should probably go into trunk first for a week or two to ensure proper testing.
-
+*** Fix blue tint on the sky.
 
 More sophisticated issues which need some thinking and discussion (some issues might be delayed to 4.1):
 

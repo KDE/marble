@@ -22,6 +22,8 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QFont>
 
+#include "global.h"
+
 
 class QSvgRenderer;
 
@@ -33,7 +35,7 @@ class CompassFloatItem : public QObject
     CompassFloatItem( QObject *parent = 0 );
     ~CompassFloatItem();
 
-    QPixmap  &drawCompassPixmap( int, int, int );
+    QPixmap  &drawCompassPixmap( int, int, int, Projection );
 
     int transparency() const { return m_transparency; }
     void setTransparency( int transparency ) { m_transparency = transparency; m_width = -1; }

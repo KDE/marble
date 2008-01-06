@@ -263,6 +263,9 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
 		 this,           SLOT( notifyModelChanged() ) );
     }
+    else {
+        d->m_tileLoader->flush();
+    }
 
     // Set all the colors for the vector layers
     d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );

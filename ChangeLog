@@ -1,3 +1,14 @@
+2008-01-06  Torsten Rahn  <rahn@kde.org>
+
+    - Bumping up version number.
+
+    - Fixed up-down direction of toolbar arrow buttons and screen arrow buttons.
+
+    - Fixed: Free tileloader cache if we switch to plain map 
+
+    - Fixed: In flat projection if you move the map way up or down in total view then the compass rose will show an "S" at the top. 
+
+
 2008-01-03  Torsten Rahn  <rahn@kde.org>
 
     * ChangeLog:

@@ -172,6 +172,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
             maxLabelHeight = textHeight; 
     }
 
+    qDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
     return maxLabelHeight;
 }
 
@@ -479,6 +480,7 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
 
     QFont labelFont = style->labelStyle()->font();
     int textHeight = QFontMetrics( labelFont ).height();
+//    qDebug() << textHeight;
 
     if( style->labelStyle()->alignment() == GeoDataLabelStyle::Corner )
     {

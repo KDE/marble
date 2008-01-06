@@ -633,12 +633,12 @@ void MarbleWidget::moveRight()
 
 void MarbleWidget::moveUp()
 {
-    rotateBy( 0, moveStep() );
+    rotateBy( 0, -moveStep() );
 }
 
 void MarbleWidget::moveDown()
 {
-    rotateBy( 0, -moveStep() );
+    rotateBy( 0, +moveStep() );
 }
 
 void MarbleWidget::leaveEvent (QEvent*)
@@ -965,7 +965,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
                             d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
                                                             d->m_viewParams.m_canvasImage->height(),
-                                                            northPoleY() ) );
+                                                            northPoleY(), d->m_viewParams.m_projection ) );
 
     // 3. Paint the scale.
     if ( d->m_showScaleBar )
