@@ -272,6 +272,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 diry = 1;
             if ( diry < -1 )
                 diry = -1;
+
             //Hack for properly behavior for the arrow
             if( true ) {//m_widget->m_viewParams->m_projection == Equirectangular ) {
                 int     radius        = m_widget->radius();
@@ -294,10 +295,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 if ( polarity < 0 )
                     m_widget->rotateBy( -m_widget->moveStep() * (double)(+dirx),
-                                        -m_widget->moveStep() * (double)(+diry) );
+                                        m_widget->moveStep() * (double)(+diry) );
                 else
                     m_widget->rotateBy( -m_widget->moveStep() * (double)(-dirx),
-                                        -m_widget->moveStep() * (double)(+diry) );
+                                        m_widget->moveStep() * (double)(+diry) );
             }				
         }
 

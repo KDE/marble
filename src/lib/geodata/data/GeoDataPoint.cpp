@@ -14,6 +14,7 @@
 
 #include <cmath>
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 
 #include "global.h"
@@ -60,8 +61,8 @@ void GeoDataPoint::geoCoordinates( double& lon, double& lat,
 
 QString GeoDataPoint::toString( GeoDataPoint::Notation notation )
 {
-    QString nsstring = ( m_lat > 0 ) ? "N" : "S";  
-    QString westring = ( m_lon < 0 ) ? "W" : "E";  
+    QString nsstring = ( m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
+    QString westring = ( m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
 
     double lat, lon;
     lon = fabs( m_lon * RAD2DEG );

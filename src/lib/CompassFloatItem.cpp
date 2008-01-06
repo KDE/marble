@@ -58,7 +58,7 @@ void CompassFloatItem::setSourceFile( const QString& relativePath )
 }
 
 QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight, 
-                                              int northpoley )
+                                              int northpoley, Projection projection )
 {
     int  width    = 52;
     int  polarity = 0;
@@ -89,7 +89,7 @@ QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight,
 
 
     QString dirstr = tr( "N" );
-    if ( polarity == -1 ) 
+    if ( polarity == -1 && projection == Spherical ) 
         dirstr = tr( "S" );
     if ( polarity == 0 )
         dirstr = "";
