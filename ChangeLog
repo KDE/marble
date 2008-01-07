@@ -1,3 +1,23 @@
+2008-01-07  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/ViewParams.h:
+    * src/lib/MarbleWidget.{h, cpp}:
+    * src/lib/MarbleModel.cpp:
+
+    - Fixed blue tint of space and added setBackgroundTransparency method as part of the fix.
+    - Don't draw the whole screen if the globe doesn't cover it completely.
+    - Fixed Atmosphere not getting drawn when changing projection.
+
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleControlBox.ui:
+
+    - Getting rid of scrollbars under normal conditions.
+
+    * data/vectorsource/lakes.svg:
+    * data/mwdbii/PLAKE.PNT:
+
+    - Fixing lake placement bug as described in easyLINUX (TM) magazine.
+
 2008-01-06  Torsten Rahn  <rahn@kde.org>
 
     - Bumping up version number.

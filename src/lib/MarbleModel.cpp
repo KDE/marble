@@ -347,9 +347,17 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
+    int radius = (int)(1.05 * (double)(viewParams->m_radius));
 
     if ( d->m_maptheme->bitmaplayer().enabled == true ) {
-        painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+        if ( viewParams->m_projection == Spherical ) {
+            QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
+            rect = rect.intersect( dirtyRect );
+            painter->drawImage( rect, *viewParams->m_canvasImage, rect );
+        }
+        else {
+            painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+        }
     }
 
 //    qDebug( "Painted in %ims", t.elapsed() );

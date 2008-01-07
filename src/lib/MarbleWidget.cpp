@@ -92,6 +92,8 @@ class MarbleWidgetPrivate
     MeasureTool     *m_measureTool;
 
     QRegion          m_activeRegion;
+
+    bool m_isBackgroundTransparent;
 };
 
 
@@ -144,12 +146,11 @@ void MarbleWidget::construct(QWidget *parent)
 
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
              this, SLOT(updateRegion( BoundingBox) ) );
+
     // Set background: black.
-    QPalette p = palette();
-    p.setColor( QPalette::Window, Qt::black );
-    setPalette( p );
-    setBackgroundRole( QPalette::Window );
-    setAutoFillBackground( true );
+    setPalette( QPalette ( Qt::black ) );
+
+    setBackgroundTransparency( false );
 
     d->m_justModified = false;
 
@@ -225,6 +226,12 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
 void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 {
     d->m_model->setDownloadManager( downloadManager );
+}
+
+void MarbleWidget::setBackgroundTransparency( bool isTransparent )
+{
+    d->m_isBackgroundTransparent = isTransparent;
+    setAutoFillBackground( !isTransparent );
 }
 
 
@@ -419,7 +426,8 @@ void MarbleWidget::zoomView(int zoom)
          || d->m_viewParams.m_projection == Equirectangular )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
-        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+        // FIXME: Add Qt::transparent if 
+        d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
         setAttribute(Qt::WA_NoSystemBackground, true);
@@ -573,11 +581,13 @@ void MarbleWidget::setProjection( int projectionIndex )
          || d->m_viewParams.m_projection == Equirectangular )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
-        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+        d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
         setAttribute(Qt::WA_NoSystemBackground, true);
     }
+
+    drawAtmosphere();
 
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
@@ -662,7 +672,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
     if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
         setAttribute(Qt::WA_NoSystemBackground, false);
-        d->m_viewParams.m_canvasImage->fill( Qt::transparent );
+        d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
         setAttribute(Qt::WA_NoSystemBackground, true);
