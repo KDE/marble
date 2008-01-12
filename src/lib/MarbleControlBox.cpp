@@ -464,17 +464,21 @@ void MarbleControlBox::setFileViewTabShown( bool show )
 
 void MarbleControlBox::resizeEvent ( QResizeEvent * )
 {
-    if ( height() < 480 ) {
+    if ( height() < 500 ) {
         if ( !d->uiWidget.zoomSlider->isHidden() ) {
+            setUpdatesEnabled(false);
             d->uiWidget.zoomSlider->hide();
             d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
                                                        QSizePolicy::Expanding );
+            setUpdatesEnabled(true);
         }
     } else {
         if ( d->uiWidget.zoomSlider->isHidden() == true ) {
+            setUpdatesEnabled(false);
             d->uiWidget.zoomSlider->show();
             d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
                                                        QSizePolicy::Fixed );
+            setUpdatesEnabled(true);
         }
     }
 }

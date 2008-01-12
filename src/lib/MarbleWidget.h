@@ -168,6 +168,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setDownloadManager(HttpDownloadManager *downloadManager);
 
     /**
+     * @brief Set whether the background should be transparent
+     *
+     * If the background is not transparent then it will be black
+     * like space is supposed to be.
+     */
+    void setBackgroundTransparency( bool isTransparent );
+
+    /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
     const QRegion  activeRegion();
