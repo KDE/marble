@@ -222,15 +222,16 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *view
     double coeff  = 1.0;
     double offset = 0.0;
 
-    for ( int i = 0; i < 4; ++i ) {
+    const int steps = (int) ( cutCoeff * quartSteps );
 
-        m_polygon.clear();
+    for ( int i = 0; i < 4; ++i ) {
 
         if ( i > 1 ) 
             coeff = - 1.0;
         offset = ( i % 2 ) ? 1.0 : 0.0;
 
-        const int steps = (int) ( cutCoeff * quartSteps );
+        m_polygon.clear();
+        m_polygon.reserve( steps + 1 );
 
         for ( int j = 0; j < steps + 1; ++j ) {
 

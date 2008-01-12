@@ -56,14 +56,13 @@
 class MarbleWidgetPrivate
 {
  public:
-
     // The model we are showing.
     MarbleModel     *m_model;
 
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
-    GeoDataPoint         m_homePoint;
+    GeoDataPoint     m_homePoint;
     int              m_homeZoom;
 
     int              m_logzoom;
@@ -72,10 +71,12 @@ class MarbleWidgetPrivate
     int              m_minimumzoom;
     int              m_maximumzoom;
 
+    int              m_headingTowards;
+
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
-    TextureColorizer        *m_sealegend;
+    TextureColorizer          *m_sealegend;
 
     // Parameters for the widgets appearance.
     bool             m_showCompass;
@@ -84,16 +85,14 @@ class MarbleWidgetPrivate
     bool             m_showFrameRate;
 
     // Parts of the image in the Widget
-    CrossHairFloatItem  m_crosshair;
-    CompassFloatItem    m_compass;  // Shown in the upper right
-    MapScaleFloatItem   m_mapscale; // Shown in the lower left
+    CrossHairFloatItem         m_crosshair;
+    CompassFloatItem           m_compass;  // Shown in the upper right
+    MapScaleFloatItem          m_mapscale; // Shown in the lower left
 
     // Tools
     MeasureTool     *m_measureTool;
 
     QRegion          m_activeRegion;
-
-    bool m_isBackgroundTransparent;
 };
 
 
@@ -147,10 +146,15 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
              this, SLOT(updateRegion( BoundingBox) ) );
 
+    connect( this, SIGNAL( headingTowards( int ) ) ,
+             d->m_model, SLOT(setHeadingTowards( int ) ) );
+
     // Set background: black.
     setPalette( QPalette ( Qt::black ) );
 
-    setBackgroundTransparency( false );
+    // Set whether the black space gets displayed or the earth gets simply 
+    // displayed on the widget background.
+    setAutoFillBackground( true );
 
     d->m_justModified = false;
 
@@ -169,11 +173,14 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( timeout() ),
              this,       SLOT( updateGps() ) );
 
+    d->m_headingTowards = NoWhere;
+
     d->m_logzoom  = 0;
     d->m_zoomStep = 40;
+
     goHome();
 
-    d->m_minimumzoom = 950;
+    d->m_minimumzoom = 800;
     d->m_maximumzoom = 2400;
 
     d->m_showScaleBar  = true;
@@ -226,12 +233,6 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
 void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 {
     d->m_model->setDownloadManager( downloadManager );
-}
-
-void MarbleWidget::setBackgroundTransparency( bool isTransparent )
-{
-    d->m_isBackgroundTransparent = isTransparent;
-    setAutoFillBackground( !isTransparent );
 }
 
 
@@ -402,6 +403,7 @@ bool  MarbleWidget::quickDirty() const
 
 void MarbleWidget::zoomView(int zoom)
 {
+
     // Prevent infinite loops.
     if ( zoom  == d->m_logzoom )
 	return;
@@ -415,6 +417,17 @@ void MarbleWidget::zoomView(int zoom)
 
     if ( newRadius == radius() )
 	return;
+
+    if ( newRadius > radius() &&  d->m_headingTowards != Down )
+    {
+        d->m_headingTowards = Down;
+        emit headingTowards( Down );
+    }
+    if ( newRadius < radius() &&  d->m_headingTowards != Up )
+    {
+        d->m_headingTowards = Up;
+        emit headingTowards( Up );
+    }
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
@@ -858,7 +871,8 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    if( d->m_viewParams.m_projection == Spherical ) {
+    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
+) {
         int  imageHalfWidth  = width() / 2;
         int  imageHalfHeight = height() / 2;
 

@@ -1,3 +1,25 @@
+2008-01-13  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarblePlacemarkModel.{h,cpp}:
+    * src/lib/PlaceMarkLayout.{h,cpp}:
+
+    - Patch by Claudiu Covaci to get satellite displayed on the far-off hemisphere.
+
+    - Performance fix to keep speed when zooming in from slowing down.
+      This addresses a regression due to the Model-View-refactorization which 
+      made the speed going down by 50%. 
+
+    * src/lib/MarbleWidget.{h,cpp}:
+    * src/lib/MarbleModel.{h,cpp}:
+
+    - We don't need to reinvent setAutoFillBackground ...
+    - We don't want to draw the atmosphere on close-up zoom
+    - Introduction of direction detection
+    - clean-up
+
+    * src/lib/GridMap.cpp: Small performance fix
+    * src/MarbleTest.cpp: Fixing default coordinates
+
 2008-01-07  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/ViewParams.h:

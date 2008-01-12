@@ -67,6 +67,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * Destroys the place mark model.
      */
     ~MarblePlacemarkModel();
+
+    QList<QPersistentModelIndex> persistentIndexList () const;
 	
     /**
      * Return the number of Placemarks in the Model.

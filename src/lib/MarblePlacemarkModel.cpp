@@ -64,6 +64,15 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
     delete d;
 }
 
+QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const
+{
+    QList<QPersistentModelIndex> modelIndexList;
+    for ( int i = 0; i < rowCount(); ++i )
+    {
+        modelIndexList.append( QPersistentModelIndex( index( i, 0 ) ) );
+    }
+    return modelIndexList;
+}
 
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
 {
