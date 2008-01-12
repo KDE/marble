@@ -12,6 +12,9 @@
 
 		<installmap>srtm.jpg</installmap>
 
+        <minimumzoom>  900 </minimumzoom>
+        <maximumzoom> 2100 </maximumzoom>
+
 		<layer type="vector" name="mwdbii"/>
 
         <CountryStyle>

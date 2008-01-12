@@ -13,6 +13,9 @@
 
 		<installmap>bluemarble.jpg</installmap>
 
+        <minimumzoom>  900 </minimumzoom>
+        <maximumzoom> 2400 </maximumzoom>
+
 		<LabelStyle>
 			<color>#ffffff</color>
 		</LabelStyle>
