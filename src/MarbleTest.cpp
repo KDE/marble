@@ -27,7 +27,7 @@ void MarbleTest::timeDemo()
 {
     m_marbleWidget->zoomView( 1500 );
 //    m_marbleWidget->resize( 800, 600 );
-    m_marbleWidget->centerOn( -9.4, 54.8 );
+    m_marbleWidget->centerOn( 9.4, 54.8 );
     QTime t;
     //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
     //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );

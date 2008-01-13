@@ -58,7 +58,7 @@ class FileViewModel;
  * the mouse.
  *
  * By clicking on the globe and moving the mouse, the position can be
- * moved.  The user can also zoom by using the scroll wheel of the
+ * changed.  The user can also zoom by using the scroll wheel of the
  * mouse in the widget. The zoom value is not tied to any units, but
  * is an abstract value without any physical meaning. A value around
  * 1000 shows the full globe in a normal-sized window. Higher zoom
@@ -125,6 +125,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
 
  public:
+
+    enum Direction { 
+        NoWhere,
+        Up, Down,
+        // TODO:
+        North, NorthEast, East, SouthEast,
+        South, SouthWest, West, NorthWest
+    };
+
     /**
      * @brief Construct a new MarbleWidget.
      * @param parent the parent widget
@@ -167,13 +176,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setDownloadManager(HttpDownloadManager *downloadManager);
 
-    /**
-     * @brief Set whether the background should be transparent
-     *
-     * If the background is not transparent then it will be black
-     * like space is supposed to be.
-     */
-    void setBackgroundTransparency( bool isTransparent );
 
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
@@ -544,6 +546,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c Mercator          another flat map
      */
     Projection  projection() const;
+
     /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
@@ -792,6 +795,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  zoomChanged( int zoom );
     void  distanceChanged( const QString& distanceString );
+
+    void  headingTowards( int direction );
 
     /**
      * @brief Signal that the theme has changed

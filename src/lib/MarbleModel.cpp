@@ -288,6 +288,11 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     notifyModelChanged();
 }
 
+void MarbleModel::setHeadingTowards( int headingTowards )
+{
+    qDebug() << "Heading towards: " << headingTowards;
+}
+
 HttpDownloadManager* MarbleModel::downloadManager() const
 {
     return d->m_downloadManager;

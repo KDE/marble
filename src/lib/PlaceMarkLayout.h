@@ -99,7 +99,7 @@ class PlaceMarkLayout : public QObject
 
     bool   locatedOnScreen ( const GeoDataPoint &index, 
                              int &x, int &y, const int &imgwidth, const int &imgheight,
-                             const Quaternion &inversePlanetAxis,
+                             const matrix &planetAxisMatrix,
                              ViewParams * viewParams );
 
     QRect  roomForLabel ( GeoDataStyle * style,
@@ -115,6 +115,8 @@ class PlaceMarkLayout : public QObject
     QVector<VisiblePlaceMark*> m_paintOrder;
     QVector<VisiblePlaceMark*> m_placeMarkPool;
     QHash<QPersistentModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
+
+    QList<QPersistentModelIndex> m_persistentIndexList;
 
     QVector< int > m_weightfilter;
 

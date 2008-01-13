@@ -152,7 +152,6 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
         GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
@@ -164,7 +163,6 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     {
         QModelIndex index = model->index( i, 0 );
 
-//        GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
         GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
@@ -188,10 +186,14 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     if ( m_styleResetRequested == true ) {
         m_styleResetRequested = false;
         styleReset();
+        m_persistentIndexList = ( (MarblePlacemarkModel*) model )->persistentIndexList();
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
-    Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
+
+//    Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
+    matrix  planetAxisMatrix;
+    viewParams->m_planetAxis.inverse().toMatrix( planetAxisMatrix );
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
@@ -212,7 +214,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, inversePlanetAxis, viewParams ) )
+        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, planetAxisMatrix, viewParams ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;
@@ -293,9 +295,10 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
 
-    for ( int i = 0; i < model->rowCount(); ++i )
+    QList<QPersistentModelIndex>::ConstIterator i;
+    for ( i = m_persistentIndexList.begin(); i != m_persistentIndexList.end(); ++i )
     {
-        QModelIndex index = model->index( i, 0 );
+        const QPersistentModelIndex& index = *i;
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
@@ -303,16 +306,12 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         if ( noFilter == false ) {
             if ( m_weightfilter.at( popularityIndex ) > viewParams->m_radius )
             {
-//            qDebug() << QString("Filter: %1 Radius: %2")
-//            .arg(m_weightfilter.at( popularityIndex )).arg(viewParams->m_radius);
-//                qDebug() << "BREAK at " << i;
                 break;
             }
         }
 
-        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, inversePlanetAxis, viewParams ) )
+        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, planetAxisMatrix, viewParams ) )
         {
-//           qDebug("Deleting"); 
             delete m_visiblePlaceMarks.take( index );
             continue;
         }
@@ -337,8 +336,8 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         const bool isSelected = selection.contains( index );
 
         /**
-         * We handled selected place marks already, so skip here...
-         * Given that we assume that only a small amount of places is selected
+         * We handled selected place marks already, so we skip them here...
+         * Assuming that only a small amount of places is selected
          * we check for the selected state after all other filters
          */
         if ( isSelected )
@@ -382,7 +381,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
             // If there is no visible place mark yet for this index, create a new one...
             mark = new VisiblePlaceMark;
 
-            mark->setModelIndex( QPersistentModelIndex( index ) );
+            mark->setModelIndex( index );
             m_visiblePlaceMarks.insert( index, mark );
         }
 
@@ -410,7 +409,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint, 
                                                int &x, int &y, 
                                                const int &imgwidth, const int &imgheight,
-                                               const Quaternion &inversePlanetAxis,
+                                               const matrix &planetAxisMatrix,
                                                ViewParams * viewParams )
 {
     if( viewParams->m_projection == Spherical ) {
@@ -418,14 +417,22 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
         double absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
         Quaternion qpos = ( geopoint ).quaternion();
         //    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
-        qpos.rotateAroundAxis( inversePlanetAxis );
-
-        // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 ) {
-            return false;
-        }
+        qpos.rotateAroundAxis( planetAxisMatrix );
 
         double pixelAltitude = ( viewParams->m_radius )/ EARTH_RADIUS * absoluteAltitude;
+	    if (geopoint.altitude() < 10000) {
+	        // Skip placemarks at the other side of the earth.
+	        if ( qpos.v[Q_Z] < 0 ) {
+	            return false;
+	        }
+	    }
+	    else {
+            double earthCenteredX=pixelAltitude * qpos.v[Q_X];
+            double earthCenteredY=pixelAltitude * qpos.v[Q_Y];
+            // don't draw high placemarks (e.g. satellites) that are not visible
+	        if ( qpos.v[Q_Z] < 0 && (earthCenteredX*earthCenteredX + earthCenteredY*earthCenteredY) < viewParams->m_radius * viewParams->m_radius)
+	            return false;
+	    }
         // Let (x, y) be the position on the screen of the placemark..
         x = (int)(imgwidth  / 2 + pixelAltitude * qpos.v[Q_X]);
         y = (int)(imgheight / 2 - pixelAltitude * qpos.v[Q_Y]);
