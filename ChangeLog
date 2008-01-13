@@ -1,3 +1,12 @@
+2008-01-13    Inge Wallin  <inge@lysator.liu.se>
+
+	Support minimumZoom and maximumZoom in .dgml files.
+	* src/lib/MapTheme.h (m_minimumZoom, m_maximumZoom): new members
+	* src/lib/MapTheme.cpp (open): Support miminumZoom and maximumZoom
+	in .dgml files
+	(open): use else if instead of only if's
+	* src/lib/MarbleModel.cpp (setMapTheme): cleaning
+	
 2008-01-13  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarblePlacemarkModel.{h,cpp}:

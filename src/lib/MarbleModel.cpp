@@ -210,7 +210,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
 
     int error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
     if ( error < 0 ){
-        if ( d->m_previousMapLoadedFine == true ) return;
+        if ( d->m_previousMapLoadedFine == true )
+            return;
         else { 
             // Actually this case can't really happen as the
             // existance of valid .dgml files gets checked before and
