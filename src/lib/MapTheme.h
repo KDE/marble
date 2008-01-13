@@ -68,6 +68,8 @@ private:
     QString    m_prefix;
     QString    m_icon;
     QColor     m_labelColor;
+    int        m_minimumZoom;
+    int        m_maximumZoom;
 
     QColor     m_oceanColor;
     QColor     m_landColor;

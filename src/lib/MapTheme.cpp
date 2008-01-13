@@ -83,32 +83,33 @@ int MapTheme::open( const QString& path )
             QDomElement  mapStyleSibling = element.firstChildElement();
             while ( !mapStyleSibling.isNull() ) {
 
-                if ( mapStyleSibling.tagName().toLower() == "name" ) {
+                QString  tagNameLower = mapStyleSibling.tagName().toLower();
+                if ( tagNameLower == "name" ) {
                     m_name = mapStyleSibling.text();
 //                    qDebug() << "Parsed Name: " << m_name;
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "prefix" ) {
+                else if ( tagNameLower == "prefix" ) {
                     m_prefix = mapStyleSibling.text();
                     // qDebug() << m_prefix;
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "icon" ) {
+                else if ( tagNameLower == "icon" ) {
                     m_icon = mapStyleSibling.text();
                     // qDebug() << m_icon;
                 }
 				
-                if ( mapStyleSibling.tagName().toLower() == "description" ) {
+                else if ( tagNameLower == "description" ) {
                     m_description = mapStyleSibling.text();
                     // qDebug() << m_description;
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "installmap" ) {
+                else if ( tagNameLower == "installmap" ) {
                     m_installmap = mapStyleSibling.text();
                     // qDebug() << m_installmap;
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "labelstyle" ) {
+                else if ( tagNameLower == "labelstyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
@@ -118,7 +119,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "oceanstyle" ) {
+                else if ( tagNameLower == "oceanstyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
@@ -128,7 +129,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "landstyle" ) {
+                else if ( tagNameLower == "landstyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
@@ -138,7 +139,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "countrystyle" ) {
+                else if ( tagNameLower == "countrystyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "border-color" ) {
@@ -148,7 +149,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "statestyle" ) {
+                else if ( tagNameLower == "statestyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "border-color" ) {
@@ -158,7 +159,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "lakestyle" ) {
+                else if ( tagNameLower == "lakestyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
@@ -168,7 +169,7 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "riverstyle" ) {
+                else if ( tagNameLower == "riverstyle" ) {
                     QDomElement labelStyleSibling = mapStyleSibling.firstChildElement();
                     while ( !labelStyleSibling.isNull() ) {
                         if ( labelStyleSibling.tagName().toLower() == "color" ) {
@@ -178,22 +179,42 @@ int MapTheme::open( const QString& path )
                     }
                 }
 
-                if ( mapStyleSibling.tagName().toLower() == "layer" ) {
+                else if ( tagNameLower == "layer" ) {
 
-                    if ( mapStyleSibling.attribute( "type", "" ) == "bitmap" )
-                    {
+                    if ( mapStyleSibling.attribute( "type", "" ) == "bitmap" ) {
                         m_bitmaplayer.enabled = true;
                         m_bitmaplayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_bitmaplayer.type    = mapStyleSibling.attribute( "type", "" );
                         m_bitmaplayer.dem     = mapStyleSibling.attribute( "dem", "" );
                     }
 
-                    if ( mapStyleSibling.attribute( "type", "" ) == "vector" )
-                    {
+                    if ( mapStyleSibling.attribute( "type", "" ) == "vector" ) {
                         m_vectorlayer.enabled = true;
                         m_vectorlayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_vectorlayer.type    = mapStyleSibling.attribute( "type", "" );
                     }					
+                }
+
+                else if ( tagNameLower == "minimumZoom" ) {
+                    bool  ok;
+
+                    // Get the minimum zoom. If there is none, use a default.
+                    m_minimumZoom = mapStyleSibling.text().toInt( &ok );
+                    if (! ok )
+                        // FIXME: Find another way to set this.
+                        //        It should be dependent on the sphere.
+                        m_minimumZoom = 950;
+                }
+
+                else if ( tagNameLower == "maximumZoom" ) {
+                    bool  ok;
+
+                    // Get the minimum zoom. If there is none, use a default.
+                    m_maximumZoom = mapStyleSibling.text().toInt( &ok );
+                    if (! ok )
+                        // FIXME: Find another way to set this.
+                        //        It should be dependent on the sphere.
+                        m_maximumZoom = 2500;
                 }
 
                 mapStyleSibling = mapStyleSibling.nextSiblingElement();
