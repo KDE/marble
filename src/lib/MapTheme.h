@@ -42,14 +42,16 @@ public:
     QString name()          const { return m_name;        }
     QString prefix()        const { return m_prefix;      }
     QString icon()          const { return m_icon;        }
-    QColor labelColor()     const { return m_labelColor;  }
+    QColor  labelColor()    const { return m_labelColor;  }
+    int     minimumZoom()   const { return m_minimumZoom; }
+    int     maximumZoom()   const { return m_maximumZoom; }
 
-    QColor oceanColor()     const { return m_oceanColor;  }
-    QColor landColor()      const { return m_landColor;   }
+    QColor oceanColor()         const { return m_oceanColor;         }
+    QColor landColor()          const { return m_landColor;          }
     QColor countryBorderColor() const { return m_countryBorderColor; }
     QColor stateBorderColor()   const { return m_stateBorderColor;   }
-    QColor lakeColor()      const { return m_lakeColor;   }
-    QColor riverColor()     const { return m_riverColor;  }
+    QColor lakeColor()          const { return m_lakeColor;          }
+    QColor riverColor()         const { return m_riverColor;         }
 
     QString tilePrefix()    const { return m_prefix;      }
     QString description()   const { return m_description; }
