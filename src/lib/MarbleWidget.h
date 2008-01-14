@@ -209,21 +209,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int         minimumZoom() const;
 
     /**
-     * @brief  Set the minimum value for the zoom.
-     * @param  zoom  The new minimum value.
-     */
-    void        setMinimumZoom( int zoom );
-
-    /**
      * @brief return the minimum zoom value for the current map theme.
      */
     int         maximumZoom() const;
-
-    /**
-     * @brief  Set the maximum value for the zoom.
-     * @param  zoom  The new maximum value.
-     */
-    void        setMaximumZoom( int zoom );
 
     /**
      * @brief return if the widget needs to be updated.

@@ -58,6 +58,12 @@ int MapTheme::open( const QString& path )
         return -3;
     }
 
+    // Some default values.
+    // FIXME: Find another way to set this.
+    //        They should be dependent on the sphere.
+    m_minimumZoom = 900;
+    m_maximumZoom = 2500;
+
     m_labelColor = QColor( 0, 0, 0, 255 );
 
     m_oceanColor = QColor( 0, 0, 0, 255 );
@@ -197,24 +203,22 @@ int MapTheme::open( const QString& path )
 
                 else if ( tagNameLower == "minimumZoom" ) {
                     bool  ok;
+                    int   value;
 
-                    // Get the minimum zoom. If there is none, use a default.
-                    m_minimumZoom = mapStyleSibling.text().toInt( &ok );
-                    if (! ok )
-                        // FIXME: Find another way to set this.
-                        //        It should be dependent on the sphere.
-                        m_minimumZoom = 900;
+                    // Get the minimum zoom.
+                    value = mapStyleSibling.text().toInt( &ok );
+                    if ( ok )
+                        m_minimumZoom = value;
                 }
 
                 else if ( tagNameLower == "maximumZoom" ) {
                     bool  ok;
+                    int   value;
 
-                    // Get the minimum zoom. If there is none, use a default.
-                    m_maximumZoom = mapStyleSibling.text().toInt( &ok );
-                    if (! ok )
-                        // FIXME: Find another way to set this.
-                        //        It should be dependent on the sphere.
-                        m_maximumZoom = 2500;
+                    // Get the maximum zoom.
+                    value = mapStyleSibling.text().toInt( &ok );
+                    if ( ok )
+                        m_maximumZoom = value;
                 }
 
                 mapStyleSibling = mapStyleSibling.nextSiblingElement();
@@ -223,6 +227,9 @@ int MapTheme::open( const QString& path )
 
         element = element.nextSiblingElement();
     }
+
+    //qDebug() << "minimum zoom: " << m_minimumZoom;
+    //qDebug() << "maximum zoom: " << m_maximumZoom;
 
     return 0;
 }

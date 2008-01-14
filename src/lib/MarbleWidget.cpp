@@ -308,22 +308,12 @@ double MarbleWidget::centerLongitude() const
 
 int  MarbleWidget::minimumZoom() const
 {
-    return d->m_minimumzoom;
-}
-
-void MarbleWidget::setMinimumZoom( int zoom )
-{
-    d->m_minimumzoom = zoom;
+    return d->m_model->minimumZoom();
 }
 
 int  MarbleWidget::maximumZoom() const
 {
-    return d->m_maximumzoom;
-}
-
-void MarbleWidget::setMaximumZoom( int zoom )
-{
-    d->m_maximumzoom = zoom;
+    return d->m_model->maximumZoom();
 }
 
 void MarbleWidget::addPlaceMarkFile( const QString &filename )

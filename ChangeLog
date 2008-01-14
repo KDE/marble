@@ -1,6 +1,23 @@
+2008-01-15  Inge Wallin  <inge@lysator.liu.se>
+
+	Complete min/maximumZoom in .dgml files.
+	* src/lib/MapTheme.cpp (open): Provide default values for
+	minimumZoom and maxmimumZoom
+	(open): bug fix in parsing.
+	* src/lib/MarbleModel.h (setMinimumZoom, setMaximiumZoom): removed
+	* src/lib/MarbleModel.cpp (minimumZoom, maximumZoom): Use values
+	from MapTheme
+	* src/lib/MarbleWidget.cpp (minimumZoom, maximumZoom): Use values
+	from MarbleModel
+	* src/lib/MarbleControlBox.cpp (MarbleControlBoxPrivate::m_minimumZoom):  removed
+	(minimumZoom): use value from the widget.
+	(changeZoom): don't use m_minimumzoom
+	* src/ControlView.cpp (ControlView): Remove initialization of
+	minimum zoom in the widget.
+
 2008-01-14    Inge Wallin  <inge@lysator.liu.se>
 
-	// Continue with min and max zoom in .dgml files
+	Continue with min and max zoom in .dgml files
 	* src/lib/MapTheme.h (minimumZoom, maximumZoom): New methods
 	* src/lib/MapTheme.cpp (open): New default for minimumZoom
 	* src/lib/MarbleWidget.{h,cpp} (minumumZoom, maximumZoom,
