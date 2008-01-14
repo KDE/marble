@@ -194,7 +194,7 @@ int TileLoader::levelToRow( int level )
         qDebug()
         << QString( "TileLoader::levelToRow(): Invalid level: %1" )
         .arg( level );
-        return -1;
+        return 0;
     }
     return (int)pow( 2.0, (double)( level ) );
 }
