@@ -13,11 +13,12 @@ Before Release of 4.0.0 (Jan 11th)
 
 Add maps to GHNS:
  * Annual precipation,                                                  ----
-    - precipation July                                        --
-    - precipation December                                          --
+    - precipation July                                                  --
+    - precipation December                                              --
  * Annual temperature                                                   ----
-    - temperature July                                         --
-    - temperature December                                          --
+    - temperature July                                                  --
+    - temperature December                                              --
+
 
 
 Before Release of KDE 4.0.1 / Marble 0.5.1:
@@ -30,9 +31,13 @@ Low hanging (but important) fruits:
 
 *** Update screenshots in the docs!
 
-*** Add maximumZoom and minimumZoom support for .dgml files. MapTheme should parse this information and should change Marble's zoom slider accordingly.
+*** Add maximumZoom and minimumZoom support for .dgml files. MapTheme   INGE
+    should parse this information and should change Marble's zoom
+    slider accordingly.
 
-*** Followup task for maximum/minimumZoom (should be similar to add): To get useful temperature/precipation/... maps we need to be able to add items to the legend in the .dgml file:
+*** Followup task for maximum/minimumZoom (should be similar to add):
+    To get useful temperature/precipation/... maps we need to be able
+    to add items to the legend in the .dgml file:
 
 <Legend>
     <heading>Temperature</heading>
@@ -48,28 +53,51 @@ Low hanging (but important) fruits:
     <LegendItem>
 </Legend>
 
-MapTheme needs to get modified to parse this and add the properties of the legend items into a QMap.
-Some method in MarbleLegendBrowser needs to retrieve the data, create an HTML stream from it and insert it at a point in the html template that gets marked accordingly. As a result one would get the data displayed in a manner similar to the "Elevation" entries. Eventually using this feature we can remove the "Elevation" section (as it is specific to the "Atlas" map) and replace it by an entry in the .dgml file.
+MapTheme needs to get modified to parse this and add the properties of
+the legend items into a QMap.  Some method in MarbleLegendBrowser
+needs to retrieve the data, create an HTML stream from it and insert
+it at a point in the html template that gets marked accordingly. As a
+result one would get the data displayed in a manner similar to the
+"Elevation" entries. Eventually using this feature we can remove the
+"Elevation" section (as it is specific to the "Atlas" map) and replace
+it by an entry in the .dgml file.
 
-*** Fix Double Click on map (which should center the map on the point being double clicked).
+*** Fix Double Click on map (which should center the map on the point
+    being double clicked).
 
-*** Add a *small* percentage bar to the status bar that indicates map downloads (should be really tiny and not obtrusive just to see that something is going on). Ideally the user would get a tooltip once he hovers that progress bar with numbers of files in the queue, maybe amount of data that has been downloaded during the session.
+*** Add a *small* percentage bar to the status bar that indicates map   ----
+    downloads (should be really tiny and not obtrusive just to see
+    that something is going on). Ideally the user would get a tooltip
+    once he hovers that progress bar with numbers of files in the
+    queue, maybe amount of data that has been downloaded during the
+    session.
+
 
 BUGS:
 
-*** Find the reason why labels overlap when a KML file gets loaded.
+*** Find the reason why labels overlap when a KML file gets loaded.     ----
 
-More sophisticated issues which need some thinking and discussion (some issues might be delayed to 4.1):
+*** Fix blue tint on the sky.                                           ----
+
+
+More sophisticated issues
+-------------------------
+
+These need some thinking and discussion (some issues might be delayed
+to 4.1):
 
 *** Create map tiles at compile time
 
 *** Download manager fixes:
-- After maps get downloaded sometimes the resolution doesn't get updated to what is has just been stored on the disc
-- Implement "retry to download the tile 3 times during the current session if the tile couldn't get fetched on first try"
+- After maps get downloaded sometimes the resolution doesn't get
+  updated to what is has just been stored on the disc
+- Implement "retry to download the tile 3 times during the current
+  session if the tile couldn't get fetched on first try"
 
 *** Minor Backend feature fixes and polishment:
 - Create a LatLonBoundingBox
 - Create a QPersistentModelIndex for MarblePlaceMarkModel items to improve speed on close up zooms.
+
 - Make Marble have a RenderingQuality setting in ViewParams: 
 
 * LOW: For slow hardware with different defaults ( No relief in Atlas View, using setShowQuickAndDirty(true) for really sloppy interpolation )
@@ -77,9 +105,12 @@ More sophisticated issues which need some thinking and discussion (some issues m
 * HIGH: Uses Antialiased vector lines
 * PRINT: Adds some Really Slow (TM) nice things that are typical for printed maps: e.g. Blue antialiased coast lines for the Atlas map.
 
-- Make Marble use different render settings while panning (MOVE) and after releasing the mouse (DROP).
+- Make Marble use different render settings while panning (MOVE) and
+  after releasing the mouse (DROP).
 
-For KDE 4.0.1 it should use the render quality MEDIUM for panning and HIGH or PRINT after the mouse button has been released. Note: For KDE 4.1 there should be two comboboxes in the settings dialog:
+For KDE 4.0.1 it should use the render quality MEDIUM for panning and
+HIGH or PRINT after the mouse button has been released. Note: For KDE
+4.1 there should be two comboboxes in the settings dialog:
 
 Display Quality:
 
@@ -171,13 +202,12 @@ Installation issues
  * Creating tiles during build instead of first run			TACK
 
 Data:
- * Evaluate the implementation of tile specifications like 
+ * Evaluate the implementation of tile specifications like              ----
+   - http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation   --
+   - http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification     --
 
-   http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation
-   http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification
-
-   for practical relevance and implement those bits into our client that 
-   make sense for us to have.
+   for practical relevance and implement those bits into our client
+   that make sense for us to have.
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
