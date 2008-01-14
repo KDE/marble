@@ -91,7 +91,7 @@ void TileCreator::run()
     }
     qDebug() << "Maximum Tile Level: " << maxTileLevel;
 
-    uint maxRows = (int)pow( 2.0, (double)( maxTileLevel ) );
+    uint maxRows = TileLoader::levelToRow( maxTileLevel );
 
     // If the image size of the image source does not match the expected 
     // geometry we need to smooth-scale the image in advance to match
