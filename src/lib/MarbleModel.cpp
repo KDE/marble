@@ -289,6 +289,18 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     notifyModelChanged();
 }
 
+
+int MarbleModel::minimumZoom() const
+{
+    return d->m_maptheme->minimumZoom();
+}
+
+int MarbleModel::maximumZoom() const
+{
+    return d->m_maptheme->maximumZoom();
+}
+
+
 void MarbleModel::setHeadingTowards( int headingTowards )
 {
     qDebug() << "Heading towards: " << headingTowards;

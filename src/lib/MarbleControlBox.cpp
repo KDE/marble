@@ -46,7 +46,6 @@ class MarbleControlBoxPrivate
     MarbleWidget  *m_widget;
     QString        m_searchTerm;
     bool           m_searchTriggered;
-    int            m_minimumzoom;
 
     Ui::MarbleControlBox  uiWidget;
     QWidget              *m_navigationWidget;
@@ -70,8 +69,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_widget = 0;
     d->m_searchTerm = QString();
     d->m_searchTriggered = false;
-    // FIXME: Get this from MapTheme.
-    d->m_minimumzoom = 900;
 
     d->uiWidget.setupUi( this );
 
@@ -341,7 +338,7 @@ void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 
 int MarbleControlBox::minimumZoom() const
 {
-    return d->m_minimumzoom;
+    return d->m_widget->minimumZoom();
 }
 
 
@@ -350,7 +347,7 @@ void MarbleControlBox::changeZoom(int zoom)
     // No infinite loops here
     // if (zoomSlider->value() != zoom)
     d->uiWidget.zoomSlider->setValue( zoom );
-    d->uiWidget.zoomSlider->setMinimum( d->m_minimumzoom );
+    d->uiWidget.zoomSlider->setMinimum( minimumZoom() );
 }
 
 void MarbleControlBox::disableGpsInput( bool in )
@@ -528,8 +525,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
             // Since this slot is called when a change of map theme is
             // already finished, we can use the widget to get the
             // values.
-            d->uiWidget.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
-            d->uiWidget.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
+            d->uiWidget.zoomSlider->setMinimum( d->m_widget->model()->minimumZoom() );
+            d->uiWidget.zoomSlider->setMaximum( d->m_widget->model()->maximumZoom() );
 
             // Break out of the loop
             break;

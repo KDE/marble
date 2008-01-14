@@ -166,6 +166,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
 		      Projection currentProjection );
 
     /**
+     * @brief Return the minimum zoom for the current map theme.
+     */
+    int minimumZoom() const;
+
+    /**
+     * @brief Return the maximum zoom for the current map theme.
+     */
+    int maximumZoom() const;
+
+    /**
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
      */

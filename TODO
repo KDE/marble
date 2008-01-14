@@ -55,7 +55,7 @@ Documentation:
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----
     - ...
- * APIDOX for classes in src/lib:                                      INGE
+ * APIDOX for classes in src/lib:                                       INGE
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
    - MarblePlacemarkModel						--
