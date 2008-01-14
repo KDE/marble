@@ -50,21 +50,14 @@ Bugs
 
 Documentation:
  * APIDOX for classes in geodata/data                                   INGE
-    - StyleSelector                                                     done
-    - Style                                                             done
-    - ColorStyle                                                        done
     - IconStyle                                                         inge
-    - LabelStyle                                                        done
     - HotSpot?                                                          --
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----
     - ...
  * APIDOX for classes in src/lib:                                      INGE
-   - Mainpage.dox							done
-   - MarbleWidget                                                       done
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
-   - MarbleNavigator                                                    done
    - MarblePlacemarkModel						--
 
 Widget:
@@ -73,22 +66,10 @@ Widget:
     - QGraphicsView                                                     --
     - QPixmap                                                           --
     - QSvgRenderer                                                      --
- * Offer accessor method for the Pixmap, so it can be used to export    DONE
-   the image, print it and copy it.
  * Separate the view from the globe (model)                             INGE
     - Let the view parameters be in the view instead of in the globe    done
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
-
-Make it a KDE4 application as a real member of kdeedu.
- * KApplication                                                         DONE
- * AboutData                                                            DONE
- * KConfig XT                                                           TACK
-    - Use KConfig XT for settings					done
-    - Provide settings dialog (?)					--
- * Translation                                                          DONE
- * User docs                                                            DONE
- * KDEPrint support                                                     DONE
 
 Finish existing features
  * KML support (Murad Tagirov)                                          ----
@@ -101,46 +82,7 @@ Finish existing features
     - Show 'You are here' using the GPS                                 ----
  * Creating tiles during build instead of first run			TACK
  * Fix designer plugin dirs						TACK
- * Fix image downloading for Wikipedia                                  DONE
 
 Documentation:
  * Programmers manual for using Marble components in other applications	----
  * Apidox for all public classes					----
-
-Installation issues                                                     TACK
- * Only install the public include files                                --
-
- 
-Before KDE 4.1
-----------------------------------------------------------------
-
-Make it a more complete KDE4 application as a real member of kdeedu.
- * DBus Support                                                         TACK
-
-Vector backend
- * Better scalability                                                   ----
-
-Widget:
- * Support to display Timezones, Data available e.g. at:
-	http://sarangworld.com/NMLUG/WorldTZ_102.zip
-
-Features:
- * Areas, e.g. countries or districts                                   ----
- * Support for OpenStreetMap                                            TACK
-    - load tiles                                                        --
-    - display tiles                                                     --
-
-Data:
- * Evaluate the implementation of tile specifications like 
-
-   http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation
-   http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification
-
-   for practical relevance and implement those bits into our client that 
-   make sense for us to have.
-
-Integration with Qt designer
- * control files for the following widgets                              TACK
-   - MarbleControlBox                                                   --
-   - MarbleLocator (search field for placemarks)                        --
-   - MarbleLegendBrowser                                                --
