@@ -1,3 +1,13 @@
+2008-01-14    Inge Wallin  <inge@lysator.liu.se>
+
+	// Continue with min and max zoom in .dgml files
+	* src/lib/MapTheme.h (minimumZoom, maximumZoom): New methods
+	* src/lib/MapTheme.cpp (open): New default for minimumZoom
+	* src/lib/MarbleWidget.{h,cpp} (minumumZoom, maximumZoom,
+	setMaximumZoom): new methods
+	* src/lib/MarbleControlBox (selectTheme): dig out minimumZoom and
+	maximumZoom from the widget.
+	
 2008-01-13    Inge Wallin  <inge@lysator.liu.se>
 
 	Support minimumZoom and maximumZoom in .dgml files.

@@ -203,7 +203,7 @@ int MapTheme::open( const QString& path )
                     if (! ok )
                         // FIXME: Find another way to set this.
                         //        It should be dependent on the sphere.
-                        m_minimumZoom = 950;
+                        m_minimumZoom = 900;
                 }
 
                 else if ( tagNameLower == "maximumZoom" ) {

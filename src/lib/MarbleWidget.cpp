@@ -306,9 +306,24 @@ double MarbleWidget::centerLongitude() const
     return centerLon * RAD2DEG;
 }
 
+int  MarbleWidget::minimumZoom() const
+{
+    return d->m_minimumzoom;
+}
+
 void MarbleWidget::setMinimumZoom( int zoom )
 {
     d->m_minimumzoom = zoom;
+}
+
+int  MarbleWidget::maximumZoom() const
+{
+    return d->m_maximumzoom;
+}
+
+void MarbleWidget::setMaximumZoom( int zoom )
+{
+    d->m_maximumzoom = zoom;
 }
 
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
@@ -1068,7 +1083,8 @@ QString MarbleWidget::mapTheme() const
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    if ( maptheme == d->m_model->mapTheme() && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection)
+    if ( maptheme == d->m_model->mapTheme()
+         && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection )
         return;
 
     d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );

@@ -252,9 +252,12 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( this, SIGNAL( projectionSelected( int ) ),  d->m_widget, SLOT( setProjection( int ) ) );
 
-    connect( d->m_widget, SIGNAL(themeChanged( QString )), this, SLOT( selectTheme( QString )) );
+    connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
+             this,        SLOT( selectTheme( QString ) ) );
     selectTheme( d->m_widget->mapTheme() );
-    connect( d->m_widget, SIGNAL(projectionChanged( int )), this, SLOT( selectProjection( int )) );
+
+    connect( d->m_widget, SIGNAL( projectionChanged( int ) ),
+             this,        SLOT( selectProjection( int ) ) );
     selectProjection( d->m_widget->projection() );
 
     connect(d->m_widget, SIGNAL(zoomChanged(int)),
@@ -506,14 +509,30 @@ void MarbleControlBox::selectTheme( const QString &theme )
 {
     for ( int row = 0; row < d->m_mapthememodel->rowCount(); ++row ) {
         QModelIndex itIndexName = d->m_mapthememodel->index( row, 1, QModelIndex() );
-        QModelIndex itIndex = d->m_mapthememodel->index( row, 0, QModelIndex() );
-//        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapthememodel->data( itIndexName ).toString();
-        if ( theme == d->m_mapthememodel->data( itIndexName ).toString() ) {
-              if ( itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
-                d->uiWidget.marbleThemeSelectView->setCurrentIndex( itIndex );
-                d->uiWidget.marbleThemeSelectView->scrollTo( itIndex );
-                break;
-              }
+        QModelIndex itIndex     = d->m_mapthememodel->index( row, 0, QModelIndex() );
+        // qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapthememodel->data( itIndexName ).toString();
+
+        // If  we have found the theme in the theme model,
+        //     and it is not the one that we already have,
+        // then
+        //     set the new one in the ui.
+        if ( theme == d->m_mapthememodel->data( itIndexName ).toString()
+             && itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
+            // Mark the correct picture for the selected map theme and
+            // also make sure it's shown.
+            d->uiWidget.marbleThemeSelectView->setCurrentIndex( itIndex );
+            d->uiWidget.marbleThemeSelectView->scrollTo( itIndex );
+
+            // Dig out the min and max zoom and set the slider.
+            //
+            // Since this slot is called when a change of map theme is
+            // already finished, we can use the widget to get the
+            // values.
+            d->uiWidget.zoomSlider->setMinimum( d->m_widget->minimumZoom() );
+            d->uiWidget.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
+
+            // Break out of the loop
+            break;
         }
     }
 }
