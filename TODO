@@ -32,6 +32,25 @@ Low hanging (but important) fruits:
 
 *** Add maximumZoom and minimumZoom support for .dgml files. MapTheme should parse this information and should change Marble's zoom slider accordingly.
 
+*** Followup task for maximum/minimumZoom (should be similar to add): To get useful temperature/precipation/... maps we need to be able to add items to the legend in the .dgml file:
+
+<Legend>
+    <heading>Temperature</heading>
+    <LegendItem>
+        <!-- For now integrating legend item symbols using pixmaps should be enough -->
+        <ItemSymbol><img src="legend30deg.png"></ItemSymbol>
+        <ItemText>30°C</ItemText>
+    <LegendItem>
+    <LegendItem>
+        <!-- Later on specifying RGB numbers for color codes would be very convenient: -->
+        <ItemSymbol><color>#FF8075</color></ItemSymbol>
+        <ItemText>20°C</ItemText>
+    <LegendItem>
+</Legend>
+
+MapTheme needs to get modified to parse this and add the properties of the legend items into a QMap.
+Some method in MarbleLegendBrowser needs to retrieve the data, create an HTML stream from it and insert it at a point in the html template that gets marked accordingly. As a result one would get the data displayed in a manner similar to the "Elevation" entries. Eventually using this feature we can remove the "Elevation" section (as it is specific to the "Atlas" map) and replace it by an entry in the .dgml file.
+
 *** Fix Double Click on map (which should center the map on the point being double clicked).
 
 *** Add a *small* percentage bar to the status bar that indicates map downloads (should be really tiny and not obtrusive just to see that something is going on). Ideally the user would get a tooltip once he hovers that progress bar with numbers of files in the queue, maybe amount of data that has been downloaded during the session.
@@ -39,8 +58,6 @@ Low hanging (but important) fruits:
 BUGS:
 
 *** Find the reason why labels overlap when a KML file gets loaded.
-
-*** Fix blue tint on the sky.
 
 More sophisticated issues which need some thinking and discussion (some issues might be delayed to 4.1):
 
