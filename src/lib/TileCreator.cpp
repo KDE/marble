@@ -60,12 +60,12 @@ void TileCreator::run()
     QImageReader testImage( m_sourceDir );
 
     QVector<QRgb> grayScalePalette;
-    for (unsigned int cnt = 0; cnt <= 255; ++cnt) {
+    for ( int cnt = 0; cnt <= 255; ++cnt ) {
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
-    unsigned int  imageWidth  = testImage.size().width();
-    unsigned int  imageHeight = testImage.size().height();
+    int  imageWidth  = testImage.size().width();
+    int  imageHeight = testImage.size().height();
 
     qDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
@@ -101,9 +101,9 @@ void TileCreator::run()
 
     if ( needsScaling ) qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
-    unsigned int  stdImageWidth  = 2 * maxRows * tileSize;
+    int  stdImageWidth  = 2 * maxRows * tileSize;
     if ( stdImageWidth == 0 ) stdImageWidth = 2 * tileSize;
-    unsigned int  stdImageHeight  = maxRows * tileSize;
+    int  stdImageHeight  = maxRows * tileSize;
 
     if ( stdImageWidth != imageWidth )
     {
@@ -128,12 +128,12 @@ void TileCreator::run()
 
     qDebug() << totalTileCount << " tiles to be created in total.";
 
-    unsigned int mmax = TileLoader::levelToColumn( maxTileLevel );
-    unsigned int nmax = TileLoader::levelToRow( maxTileLevel );
+    int mmax = TileLoader::levelToColumn( maxTileLevel );
+    int nmax = TileLoader::levelToRow( maxTileLevel );
 
     // Loading each row at highest spatial resolution and croping tiles
-    unsigned int percentCompleted = 0;
-    unsigned int createdTilesCount = 0;
+    int percentCompleted = 0;
+    int createdTilesCount = 0;
     QString tileName;
 
     // Creating directory structure for the highest level
@@ -142,7 +142,7 @@ void TileCreator::run()
     if ( !QDir( dirName ).exists() ) 
         ( QDir::root() ).mkpath( dirName );
 
-    for ( unsigned int n = 0; n < nmax; ++n ) {
+    for ( int n = 0; n < nmax; ++n ) {
         QString dirName( m_targetDir
                          + QString("%1/%2").arg(maxTileLevel).arg( n, tileDigits, 10, QChar('0') ) );
         if ( !QDir( dirName ).exists() ) 
@@ -151,7 +151,7 @@ void TileCreator::run()
 
     QImage  sourceImage( m_sourceDir );
 
-    for ( unsigned int n = 0; n < nmax; ++n ) {
+    for ( int n = 0; n < nmax; ++n ) {
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
                        imageWidth,(int)( (double)( imageHeight ) / (double)( nmax ) ) );
 
@@ -173,7 +173,7 @@ void TileCreator::run()
             return;
         }
 
-        for ( unsigned int m = 0; m < mmax; ++m ) {
+        for ( int m = 0; m < mmax; ++m ) {
 
             if ( m_cancelled == true ) return;
 
@@ -208,9 +208,9 @@ void TileCreator::run()
     while( tileLevel > 0 ) {
         tileLevel--;
 
-        unsigned int nmaxit =  TileLoader::levelToRow( tileLevel );;
+        int nmaxit =  TileLoader::levelToRow( tileLevel );;
 
-        for ( unsigned int n = 0; n < nmaxit; ++n ) {
+        for ( int n = 0; n < nmaxit; ++n ) {
             QString  dirName( m_targetDir
                               + QString("%1/%2").arg(tileLevel).arg( n, tileDigits, 10, QChar('0') ) );
 
@@ -218,8 +218,8 @@ void TileCreator::run()
             if ( !QDir( dirName ).exists() ) 
                 ( QDir::root() ).mkpath( dirName );
 
-            unsigned int  mmaxit = TileLoader::levelToColumn( tileLevel );;
-            for ( unsigned int m = 0; m < mmaxit; ++m ) {
+            int  mmaxit = TileLoader::levelToColumn( tileLevel );;
+            for ( int m = 0; m < mmaxit; ++m ) {
 
                 if ( m_cancelled == true ) return;
 
@@ -242,13 +242,13 @@ void TileCreator::run()
                     tile.setColorTable( grayScalePalette );
                     uchar* destLine;
 
-                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
+                    for ( int y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topleft.scanLine( 2 * y );
-                        for ( unsigned int x = 0; x < tileSize / 2; ++x )
+                        for ( int x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2*x ];
                     }
-                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
+                    for ( int y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topright.scanLine( 2 * y );
                         for ( uint x = tileSize / 2; x < tileSize; ++x )
@@ -270,13 +270,13 @@ void TileCreator::run()
                 else {
                     QRgb* destLine;
 
-                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
+                    for ( int y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
                         for ( uint x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2 * x ];
                     }
-                    for ( unsigned int y = 0; y < tileSize / 2; ++y ) {
+                    for ( int y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
                         for ( uint x = tileSize / 2; x < tileSize; ++x )
@@ -322,10 +322,10 @@ void TileCreator::run()
  
     tileLevel = 0;
     while ( tileLevel <= maxTileLevel ) {
-        unsigned int nmaxit =  TileLoader::levelToRow( tileLevel );
-        for ( unsigned int n = 0; n < nmaxit; ++n) {
-            unsigned int mmaxit =  TileLoader::levelToColumn( tileLevel );
-            for ( unsigned int m = 0; m < mmaxit; ++m) { 
+        int nmaxit =  TileLoader::levelToRow( tileLevel );
+        for ( int n = 0; n < nmaxit; ++n) {
+            int mmaxit =  TileLoader::levelToColumn( tileLevel );
+            for ( int m = 0; m < mmaxit; ++m) { 
 
                 if ( m_cancelled == true ) return;
 
