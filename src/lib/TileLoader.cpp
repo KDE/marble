@@ -194,7 +194,7 @@ int TileLoader::levelToRow( int level )
         qDebug()
         << QString( "TileLoader::levelToRow(): Invalid level: %1" )
         .arg( level );
-        return -1;
+        return 0;
     }
     return (int)pow( 2.0, (double)( level ) );
 }
@@ -206,7 +206,7 @@ int TileLoader::levelToColumn( int level )
         qDebug()
         << QString( "TileLoader::levelToColumn(): Invalid level: %1" )
         .arg( level );
-        return -1;
+        return 0;
     }
     return (int)pow( 2.0, (double)( level + 1 ) );
 }
@@ -218,7 +218,7 @@ int TileLoader::rowToLevel( int row )
         qDebug()
         << QString( "TileLoader::rowToLevel(): Invalid number of rows: %1" )
         .arg( row );
-        return -1;
+        return 0;
     }
     return (int)( log( row ) / log( 2 ) );
 }
@@ -230,7 +230,7 @@ int TileLoader::columnToLevel( int column )
         qDebug()
         << QString( "TileLoader::columnToLevel(): Invalid number of columns: %1" )
         .arg( column );
-        return -1;
+        return 0;
     }
     return (int)( log( column / 2 ) / log( 2 ) );
 }
