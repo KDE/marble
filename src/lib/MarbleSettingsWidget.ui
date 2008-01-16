@@ -1,0 +1,610 @@
+<ui version="4.0" >
+ <class>Form</class>
+ <widget class="QWidget" name="Form" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>506</width>
+    <height>418</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="Cache" >
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;View</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="groupBox" >
+         <property name="title" >
+          <string>&amp;Units</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>118</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>&amp;Distance:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>comboBox_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QComboBox" name="comboBox_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text" >
+              <string>Kilometer, Meter</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Miles, Feet</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>An&amp;gle:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>comboBox</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QComboBox" name="comboBox" >
+            <item>
+             <property name="text" >
+              <string>Degree (DMS)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Degree (Decimal)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>UTM</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2" >
+         <property name="title" >
+          <string>Map &amp;Quality</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_5" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>&amp;Static image:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>comboBox_3</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QComboBox" name="comboBox_3" >
+            <property name="currentIndex" >
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text" >
+              <string>Low Quality</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Normal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>High Quality</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Print Quality</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_3" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>During &amp;animations:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>comboBox_4</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QComboBox" name="comboBox_4" >
+            <property name="currentIndex" >
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text" >
+              <string>Low Quality</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Normal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>High Quality</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>Print Quality</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="label_7" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>128</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;Place names:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>comboBox_6</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_6" >
+           <item>
+            <property name="text" >
+             <string>User language and local language</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>User language</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Local language</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" >
+         <item>
+          <widget class="QLabel" name="label_4" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>128</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Default Map &amp;Font:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>fontComboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFontComboBox" name="fontComboBox" />
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>&amp;Navigation</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <layout class="QGridLayout" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="label_6" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>118</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;Drag location:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>comboBox_5</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" >
+          <widget class="QComboBox" name="comboBox_5" >
+           <item>
+            <property name="text" >
+             <string>Pole axis stays vertically</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Follow mouse exactly</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0" >
+          <widget class="QLabel" name="label_12" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize" >
+            <size>
+             <width>118</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;On Startup:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>comboBox_7</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QComboBox" name="comboBox_7" >
+           <item>
+            <property name="text" >
+             <string>Show Home Location</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Return to last location visited</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox" >
+         <property name="text" >
+          <string>&amp;Animate voyage to the target</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>221</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Seite" >
+      <attribute name="title" >
+       <string>&amp;Cache</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="groupBox_3" >
+         <property name="title" >
+          <string>C&amp;ache</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_10" >
+            <property name="minimumSize" >
+             <size>
+              <width>118</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>&amp;Physical memory:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>spinBox_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QSpinBox" name="spinBox_2" >
+            <property name="maximum" >
+             <number>999999</number>
+            </property>
+            <property name="value" >
+             <number>30</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <widget class="QLabel" name="label_13" >
+            <property name="text" >
+             <string>MB</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" >
+           <widget class="QPushButton" name="pushButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>C&amp;lear</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4" colspan="2" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>151</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_11" >
+            <property name="minimumSize" >
+             <size>
+              <width>118</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>&amp;Hard disc:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>spinBox_3</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QSpinBox" name="spinBox_3" >
+            <property name="maximum" >
+             <number>999999</number>
+            </property>
+            <property name="value" >
+             <number>999999</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" >
+           <widget class="QLabel" name="label_14" >
+            <property name="text" >
+             <string>MB</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3" colspan="2" >
+           <widget class="QPushButton" name="pushButton_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Cl&amp;ear</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>141</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4" >
+         <property name="title" >
+          <string>&amp;Proxy</string>
+         </property>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label_8" >
+            <property name="text" >
+             <string>&amp;Url:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>lineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit" >
+            <property name="text" >
+             <string>http://</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9" >
+            <property name="text" >
+             <string>P&amp;ort:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>spinBox</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox" >
+            <property name="maximum" >
+             <number>9999</number>
+            </property>
+            <property name="value" >
+             <number>8080</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>71</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,3 +1,12 @@
+2008-01-16  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleSettingsWidget.ui:
+
+    - Committing Settings Widget for KDE 4.1. This 
+    mockup-stage .ui file shows about what I have in mind
+    in terms of features being supported for KDE 4.1 and 
+    how they should get offered in the settings dialog.
+
 2008-01-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Complete min/maximumZoom in .dgml files.
