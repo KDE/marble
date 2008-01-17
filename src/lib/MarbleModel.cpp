@@ -409,12 +409,15 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the GeoDataPlaceMark layer
 #ifndef KML_GSOC
-    if ( viewParams->m_showPlaceMarks && ( viewParams->m_showCities || 
-         viewParams->m_showTerrain || viewParams->m_showOtherPlaces )
-         && d->m_placemarkmodel->rowCount() > 0 ) {
+    if ( viewParams->m_showPlaceMarks 
+         && ( viewParams->m_showCities
+              || viewParams->m_showTerrain 
+              || viewParams->m_showOtherPlaces )
+         && d->m_placemarkmodel->rowCount() > 0 )
+    {
         d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,
-                                                 d->m_placemarkmodel,
-                                                 d->m_placemarkselectionmodel );
+                                                d->m_placemarkmodel,
+                                                d->m_placemarkselectionmodel );
     }
 #else
     /*
