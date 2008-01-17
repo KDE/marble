@@ -98,7 +98,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    selectTileLevel(radius);
+    selectTileLevel( viewParams );
 
     // Evaluate the degree of interpolation
     m_n    = ( m_imageRadius < radius * radius ) ? m_nBest : 8;

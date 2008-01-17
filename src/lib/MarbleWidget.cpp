@@ -71,8 +71,6 @@ class MarbleWidgetPrivate
     int              m_minimumzoom;
     int              m_maximumzoom;
 
-    int              m_headingTowards;
-
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
@@ -146,8 +144,6 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
              this, SLOT(updateRegion( BoundingBox) ) );
 
-    connect( this, SIGNAL( headingTowards( int ) ) ,
-             d->m_model, SLOT(setHeadingTowards( int ) ) );
 
     // Set background: black.
     setPalette( QPalette ( Qt::black ) );
@@ -173,7 +169,6 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL( timeout() ),
              this,       SLOT( updateGps() ) );
 
-    d->m_headingTowards = NoWhere;
 
     d->m_logzoom  = 0;
     d->m_zoomStep = 40;
@@ -422,17 +417,6 @@ void MarbleWidget::zoomView(int zoom)
 
     if ( newRadius == radius() )
 	return;
-
-    if ( newRadius > radius() &&  d->m_headingTowards != Down )
-    {
-        d->m_headingTowards = Down;
-        emit headingTowards( Down );
-    }
-    if ( newRadius < radius() &&  d->m_headingTowards != Up )
-    {
-        d->m_headingTowards = Up;
-        emit headingTowards( Up );
-    }
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.

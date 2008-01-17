@@ -81,11 +81,16 @@ void AbstractScanlineTextureMapper::setMapTheme( const QString& theme )
     m_tileLoader->setMapTheme(theme);
     m_tileLevel = -1;
     detectMaxTileLevel();
+
+    m_preloadTileLevel = -1;
+    m_previousRadius = 0;
 }
 
 
-void AbstractScanlineTextureMapper::selectTileLevel(int radius)
+void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 {
+    const int radius = viewParams->m_radius;
+
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
@@ -96,7 +101,38 @@ void AbstractScanlineTextureMapper::selectTileLevel(int radius)
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
-    tileLevel = (int)( log( linearLevel ) / log( 2.0 ) ) + 1;
+    double tileLevelF = log( linearLevel ) / log( 2.0 ) + 1.0;
+    tileLevel = (int)( tileLevelF );
+
+//    qDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
+
+    double tileCol = 0.0; 
+    double tileRow = 0.0;
+
+    if (    tileLevelF > tileLevel + 0.3 
+         && m_preloadTileLevel != tileLevel + 1
+         && m_previousRadius < radius 
+         && tileLevel > 0 && tileLevel < m_maxTileLevel ) {
+
+        m_preloadTileLevel = tileLevel + 1;
+
+        centerTiles( viewParams, m_preloadTileLevel, tileCol, tileRow );
+//        qDebug() << "Preload tileLevel: " << m_preloadTileLevel
+//        << " tileCol: " << tileCol << " tileRow: " << tileRow;
+    }
+    if (    tileLevelF < tileLevel + 0.7 
+         && m_preloadTileLevel != tileLevel - 1
+         && m_previousRadius > radius 
+         && tileLevel > 1 && tileLevel < m_maxTileLevel + 1 ) {
+
+        m_preloadTileLevel = tileLevel - 1;
+
+        centerTiles( viewParams, m_preloadTileLevel, tileCol, tileRow );
+//        qDebug() << "Preload tileLevel: " << m_preloadTileLevel
+//        << " tileCol: " << tileCol << " tileRow: " << tileRow;
+    }
+    if ( m_previousRadius == radius ) m_preloadTileLevel = -1;
+    else m_previousRadius = radius;
 
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
@@ -104,11 +140,23 @@ void AbstractScanlineTextureMapper::selectTileLevel(int radius)
     if ( tileLevel != m_tileLevel ) {
         m_tileLoader->flush();
         m_tileLevel = tileLevel;
+//        qDebug() << "Texture Level was set to: " << tileLevel;
 
         tileLevelInit( tileLevel );
     }
+}
 
-    // qDebug() << "Texture Level was set to: " << tileLevel;
+
+void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams, 
+    const int tileLevel, double& tileCol, double& tileRow )
+{
+    double centerLon, centerLat;
+    viewParams->centerCoordinates( centerLon, centerLat );
+
+    tileCol = TileLoader::levelToColumn( tileLevel ) 
+              * ( 1.0 + centerLon / M_PI ) / 2.0;
+    tileRow = TileLoader::levelToRow( tileLevel )
+              * ( 0.5 - centerLat / M_PI );
 }
 
 

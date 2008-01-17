@@ -38,9 +38,12 @@ public:
     void setMapTheme( const QString& theme );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
     virtual void resizeMap( int width, int height );
-    void selectTileLevel(int radius);
+    void selectTileLevel( ViewParams* viewParams );
     bool interlaced() { return m_interlaced; }
     void setInterlaced( bool enabled ) { m_interlaced = enabled; }
+
+    void centerTiles( ViewParams *viewParams, const int tileLevel,
+                      double& tileCol, double& tileRow );
 
  Q_SIGNALS:
     void mapChanged();
@@ -97,6 +100,9 @@ public:
 
     int          m_tileLevel;
     int          m_maxTileLevel;
+
+    int          m_preloadTileLevel;
+    int          m_previousRadius;
 
     // Position of the tile in global Texture Coordinates
     // ( with origin in upper left corner, measured in pixel) 
