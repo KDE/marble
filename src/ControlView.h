@@ -51,6 +51,8 @@ class ControlView : public QWidget
     void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
 
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
+    
+    void showSun(bool show) {m_marbleWidget->showSun(show);}
 
  public slots:
     void setSideBarShown( bool );    

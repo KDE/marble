@@ -1322,4 +1322,13 @@ QString MarbleWidget::distanceString() const
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
+void MarbleWidget::showSun(bool show) {
+  d->m_model->showSun(show);
+  
+  // Update texture map during the repaint that follows:
+  setMapTheme( d->m_model->mapTheme() );
+  setNeedsUpdate();
+  repaint();
+}
+
 #include "MarbleWidget.moc"

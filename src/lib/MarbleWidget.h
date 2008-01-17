@@ -406,6 +406,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return Quick and dirty rendering
      */
     bool  quickDirty() const;
+    
+    void showSun(bool show);
 
  public Q_SLOTS:
 

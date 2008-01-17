@@ -113,6 +113,11 @@ void MainWindow::createActions()
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
+     m_showSunAct = new QAction( tr("S&un Shading"), this);
+     m_showSunAct->setCheckable( true );
+     m_showSunAct->setStatusTip(tr("Show Sun Shading"));
+     connect(m_showSunAct, SIGNAL(triggered( bool )), this, SLOT( showSun( bool )));
+
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
      m_whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
@@ -145,6 +150,8 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_sideBarAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_statusBarAct);
+    m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_showSunAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
     m_helpMenu->addAction(m_whatsThisAct);
@@ -251,6 +258,13 @@ void MainWindow::showStatusBar( bool isChecked )
     {
         statusBar()->hide();
     }
+
+    m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::showSun( bool isChecked )
+{
+    m_controlView->showSun(isChecked);
 
     m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
 }

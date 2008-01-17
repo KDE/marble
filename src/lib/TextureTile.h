@@ -23,6 +23,8 @@
 #include <QtGui/QImage>
 #include <QtCore/QString>
 
+#include "SunLocator.h"
+
 const int tileDigits = 6;
 
 class TextureTile : public QObject {
@@ -52,17 +54,20 @@ class TextureTile : public QObject {
 
  public Q_SLOTS:
     void   loadTile( int x, int y, int level, 
-                     const QString& theme, bool requestTileUpdate = true );
+                     const QString& theme, bool requestTileUpdate = true, bool sun_shading = false );
     void reloadTile( int x, int y, int level, 
-                     const QString& theme );
+                     const QString& theme, bool sun_shading = false );
 
  protected:
     int      m_id;
 
     QImage   m_rawtile;
+    QImage   m_worktile;
 
     int      m_depth;
     bool     m_used;
+    
+    SunLocator m_sun;
 };
 
 

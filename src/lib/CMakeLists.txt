@@ -152,6 +152,9 @@ set(marblewidget_SRCS
            AbstractLayer/AbstractLayer.cpp
            AbstractLayer/AbstractLayerContainer.cpp
            AbstractLayer/AbstractLayerData.cpp
+
+           SunLocator.cpp
+           ExtDateTime.cpp
 )
 
 set (marblewidget_UI

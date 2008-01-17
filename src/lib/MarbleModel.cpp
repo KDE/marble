@@ -534,5 +534,9 @@ void MarbleModel::geoDataDocumentLoaded( GeoDataDocument& document )
     d->m_fileviewmodel->append( item );
 }
 
+void MarbleModel::showSun(bool show) {
+  d->m_tileLoader->showSun(show);
+}
+
 
 #include "MarbleModel.moc"

@@ -231,6 +231,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief stop the model from polling
      */
     void stopPolling();
+    
+    void showSun(bool show);
 
  public Q_SLOTS:
 

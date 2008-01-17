@@ -128,6 +128,8 @@ class TileLoader : public QObject {
     // the mandatory most basic tile level is fully available
     static bool baseTilesAvailable( const QString& theme );
 
+    void showSun(bool show) {m_sun_shading = show;}
+
  private:
     void init();
 
@@ -143,6 +145,8 @@ class TileLoader : public QObject {
     int           m_tileHeight;
 
     TileCache     m_tileCache;
+
+    bool m_sun_shading;
 
  Q_SIGNALS:
     void tileUpdateAvailable();

@@ -40,6 +40,7 @@
 
 
 TileLoader::TileLoader( HttpDownloadManager *downloadManager )
+ : m_sun_shading(false)
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
@@ -47,6 +48,7 @@ TileLoader::TileLoader( HttpDownloadManager *downloadManager )
 }
 
 TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManager )
+ : m_sun_shading(false)
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
@@ -172,7 +174,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
             connect( tile,            SIGNAL( tileUpdateDone() ), 
                      this,              SIGNAL( tileUpdateAvailable() ) );
-            tile->loadTile( tilx, tily, tileLevel, m_theme, false );
+            tile->loadTile( tilx, tily, tileLevel, m_theme, false, m_sun_shading );
         }
     } 
 
@@ -334,7 +336,7 @@ void TileLoader::reloadTile( QString relativeUrlString, QString _id )
         int  y     = ( id - level * 100000000 ) / 10000;
         int  x     = id - ( level * 100000000 + y * 10000 );
 
-        (m_tileHash[id]) -> reloadTile( x, y, level, m_theme );
+        (m_tileHash[id]) -> reloadTile( x, y, level, m_theme, m_sun_shading );
     }
     else {
          qDebug() << "No such ID";

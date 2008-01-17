@@ -14,6 +14,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 
+#include <cmath>
+
 #include "MarbleDirs.h"
 #include "TileLoader.h"
 
@@ -56,7 +58,8 @@ TextureTile::TextureTile( int id )
       m_id(id),
       m_rawtile( QImage() ),
       m_depth(0),
-      m_used(false)
+      m_used(false)/*,
+      m_sun_shading(false)*/
 {
 }
 
@@ -81,7 +84,7 @@ TextureTile::~TextureTile()
 
 
 void TextureTile::loadTile( int x, int y, int level, 
-			    const QString& theme, bool requestTileUpdate )
+			    const QString& theme, bool requestTileUpdate, bool sun_shading )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
   m_used = true; // Needed to avoid frequent deletion of tiles
@@ -159,16 +162,38 @@ void TextureTile::loadTile( int x, int y, int level,
     exit(-1);
   }
 
-  m_depth = m_rawtile.depth();
+  m_worktile = m_rawtile;
+  m_depth = m_worktile.depth();
+
+  if(sun_shading) {
+  // add sun shading
+  double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
+  double global_height = m_worktile.height() * TileLoader::levelToRow(level);
+  double lon_scale = 2*M_PI / global_width;
+  double lat_scale = -M_PI / global_height;
+  for(int cur_x = 0; cur_x < m_worktile.width(); cur_x++) {
+    double lon = lon_scale * (x * m_worktile.width() + cur_x);
+    for(int cur_y = 0; cur_y < m_worktile.height(); cur_y++) {
+      double lat = lat_scale * (y * m_worktile.height() + cur_y) - 0.5*M_PI;
+      QRgb pixcol = m_worktile.pixel(cur_x, cur_y);
+      pixcol = m_sun.shadePixel(pixcol, m_sun.shading(lat, lon));
+      if(m_depth == 8) {
+//          m_worktile.setPixel(cur_x, cur_y, 0); // TODO
+      } else {
+        m_worktile.setPixel(cur_x, cur_y, pixcol);
+      }
+    }
+  }
+  }
 
   switch ( m_depth ) {
       case 32:
           if ( jumpTable32 ) delete [] jumpTable32;
-          jumpTable32 = jumpTableFromQImage32( m_rawtile );
+          jumpTable32 = jumpTableFromQImage32( m_worktile );
           break;
       case 8:
           if ( jumpTable8 ) delete [] jumpTable8;
-          jumpTable8 = jumpTableFromQImage8( m_rawtile );
+          jumpTable8 = jumpTableFromQImage8( m_worktile );
           break;
       default:
           qDebug() << QString("Color m_depth %1 of tile %2 could not be retrieved. Exiting.").arg(m_depth).arg(absfilename);
@@ -182,12 +207,12 @@ void TextureTile::loadTile( int x, int y, int level,
 }
 
 
-void TextureTile::reloadTile( int x, int y, int level, const QString& theme )
+void TextureTile::reloadTile( int x, int y, int level, const QString& theme, bool sun_shading )
 {
     // qDebug() << "slotLoadTile variables: |" << theme << "|" 
     // << level << "|" << x << "|" << y;
 
-    loadTile( x, y, level, theme, true );
+    loadTile( x, y, level, theme, true, sun_shading );
 }
 
 
