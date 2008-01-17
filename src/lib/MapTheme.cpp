@@ -201,7 +201,7 @@ int MapTheme::open( const QString& path )
                     }					
                 }
 
-                else if ( tagNameLower == "minimumZoom" ) {
+                else if ( tagNameLower == "minimumzoom" ) {
                     bool  ok;
                     int   value;
 
@@ -211,7 +211,7 @@ int MapTheme::open( const QString& path )
                         m_minimumZoom = value;
                 }
 
-                else if ( tagNameLower == "maximumZoom" ) {
+                else if ( tagNameLower == "maximumzoom" ) {
                     bool  ok;
                     int   value;
 

@@ -31,9 +31,9 @@ Low hanging (but important) fruits:
 
 *** Update screenshots in the docs!
 
-*** Add maximumZoom and minimumZoom support for .dgml files. MapTheme   INGE
-    should parse this information and should change Marble's zoom
-    slider accordingly.
+*** Add maximumZoom and minimumZoom support for .dgml files.            DONE
+    MapTheme should parse this information and should change Marble's
+    zoom slider accordingly.
 
 *** Followup task for maximum/minimumZoom (should be similar to add):
     To get useful temperature/precipation/... maps we need to be able
