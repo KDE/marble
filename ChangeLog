@@ -1,3 +1,9 @@
+2008-01-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix bug that made min/max zoom in .dgml files not work.
+	* src/lib/TileCreator.cpp (open): Compare against lower cased
+	names minimumzoom and maximumzoom.
+
 2008-01-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Complete min/maximumZoom in .dgml files.
