@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Form</class>
- <widget class="QWidget" name="Form" >
+ <class>MarbleSettingsWidget</class>
+ <widget class="QWidget" name="MarbleSettingsWidget" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Form</string>
+   <string>Marble Settings</string>
   </property>
   <layout class="QVBoxLayout" >
    <property name="leftMargin" >

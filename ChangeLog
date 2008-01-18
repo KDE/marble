@@ -1,5 +1,11 @@
 2008-01-18  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/SunControlWidget.ui:
+
+    - Adding Sun control widget for David Roberts.
+
+2008-01-18  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/TextureTile.{cpp,h}:
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/SunLocator.{cpp,h}:
