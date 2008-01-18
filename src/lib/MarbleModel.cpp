@@ -300,12 +300,6 @@ int MarbleModel::maximumZoom() const
     return d->m_maptheme->maximumZoom();
 }
 
-
-void MarbleModel::setHeadingTowards( int headingTowards )
-{
-    qDebug() << "Heading towards: " << headingTowards;
-}
-
 HttpDownloadManager* MarbleModel::downloadManager() const
 {
     return d->m_downloadManager;

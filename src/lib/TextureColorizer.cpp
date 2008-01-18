@@ -42,7 +42,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     // This variable is not used anywhere..
     const int  imgradius = imgrx * imgrx + imgry * imgry;
 
-    const uint  landoffscreen = qRgb(255,0,0);
+    const uint landoffscreen = qRgb(255,0,0);
     // const uint seaoffscreen = qRgb(0,0,0);
     const uint lakeoffscreen = qRgb(0,255,0);
     // const uint glaciercolor = qRgb(200,200,200);
@@ -50,11 +50,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     int     bump = 0;
     GpFifo  emboss;
     emboss.buffer = 0;
-
-    //double  bendradius = 0.0;
-    const double  bendRelief  = M_PI * 0.5 / ( (double)(radius) * sqrt(2.0) );
-    const double  bendReliefx = 0.41 * bendRelief;
-    const double  bendReliefm = 0.941246 * bendRelief / bendReliefx;
 
     const bool showRelief = viewParams->m_showRelief;
 
@@ -75,22 +70,23 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
         for (int y = yTop; y < yBottom; ++y) {
 
-            QRgb  *writeData = (QRgb*)( origimg->scanLine( y ) );
-            uchar  *readData = origimg->scanLine( y );
-            const QRgb  *coastData = (QRgb*)( coastimg->scanLine( y ) );
+            QRgb  *writeData         = (QRgb*)( origimg->scanLine( y ) );
+            const QRgb  *coastData   = (QRgb*)( coastimg->scanLine( y ) );
+
+            uchar *readDataStart     = origimg->scanLine( y );
+            const uchar *readDataEnd = readDataStart + imgwidth*4;
 
             emboss.buffer = 0;
 		
-            for ( int x = 0; x < imgwidth ; ++x, ++writeData, ++coastData, readData+=4 ) {
+            for ( uchar* readData = readDataStart; readData < readDataEnd; readData+=4, ++writeData, ++coastData ) {
 
                 // Cheap Embosss / Bumpmapping
-                const uchar  grey = *readData; // qBlue(*data);
-
-                emboss.buffer = emboss.buffer >> 8;
-                emboss.gpuint.x4 = grey;	
+                const uchar&  grey = *readData; // qBlue(*data);
 
                 if ( showRelief == true )
                 {
+                    emboss.gpuint.x4 = grey;
+                    emboss.buffer = emboss.buffer >> 8;
                     bump = ( emboss.gpuint.x1 + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 )  bump = 15;
@@ -102,7 +98,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     *writeData = texturepalette[bump][grey + 0x100]; 
                 else {
                     if (*coastData == lakeoffscreen)
-                    *writeData = texturepalette[bump][0x055];
+                        *writeData = texturepalette[bump][0x055];
                     else {
                         *writeData = texturepalette[bump][grey];
                     }
@@ -111,51 +107,38 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         }
     }
     else {
-        int ytop    = ( imgry-radius < 0 ) ? 0 : imgry-radius;
-        int ybottom = ( ytop == 0 ) ? imgheight : imgry + radius;
+        int yTop    = ( imgry-radius < 0 ) ? 0 : imgry-radius;
+        const int yBottom = ( yTop == 0 ) ? imgheight : imgry + radius;
 
-        for ( int y = ytop; y < ybottom; ++y ) {
+        for ( int y = yTop; y < yBottom; ++y ) {
             const int  dy = imgry - y;
             int  rx = (int)sqrt( (double)( radius * radius - dy * dy ) );
-            int  xleft  = 0; 
-            int  xright = imgwidth;
+            int  xLeft  = 0; 
+            int  xRight = imgwidth;
 
             if ( imgrx-rx > 0 ) {
-                xleft  = imgrx - rx; 
-                xright = imgrx + rx;
+                xLeft  = imgrx - rx; 
+                xRight = imgrx + rx;
             }
 
-            QRgb  *writeData      = (QRgb*)( origimg->scanLine( y ) ) + xleft;
-            uchar  *readData          = origimg->scanLine( y ) + xleft*4;
-            const QRgb *coastData = (QRgb*)( coastimg->scanLine( y ) ) + xleft;
+            QRgb  *writeData         = (QRgb*)( origimg->scanLine( y ) )  + xLeft;
+            const QRgb *coastData    = (QRgb*)( coastimg->scanLine( y ) ) + xLeft;
 
-            double  relief = imgrx - xleft + bendReliefm * dy ;
+            uchar *readDataStart     = origimg->scanLine( y ) + xLeft * 4;
+            const uchar *readDataEnd = origimg->scanLine( y ) + xRight * 4;
+
  
-            for ( int x = xleft;
-                  x < xright;
-                  ++x, ++writeData, ++coastData, readData+=4, relief -= 1.0 )
-            {
+            for ( uchar* readData = readDataStart; readData < readDataEnd; readData+=4, ++writeData, ++coastData ) {
                 // Cheap Embosss / Bumpmapping
 
-                const uchar grey = *readData; // qBlue(*data);
-
-                emboss.buffer = emboss.buffer >> 8;
-                emboss.gpuint.x4 = grey;	
+                const uchar& grey = *readData; // qBlue(*data);
 
                 if ( showRelief == true )
                 {
-                    bump = ( emboss.gpuint.x1 + 8 - grey ) >> 1;
-                    bump += 3;
-/*
-                    // Apply "spherical" bumpmapping 
-                    // bump *= cos( bendRelief * sqrt(((imgrx-x)^2+(imgry-y)^2)));
+                    emboss.buffer = emboss.buffer >> 8;
+                    emboss.gpuint.x4 = grey;    
+                    bump = ( emboss.gpuint.x1 + 16 - grey ) >> 1;
 
-                    // very cheap approximation:
-                    // sqrt(dx^2 + dy^2) ~= 0.41 dx + 0.941246  +/- 3%
-                    // cos(x) ~= 1-x^2
-                    bendradius = bendReliefx * relief;
-                    bump *= qRound( 1.0 - bendradius * bendradius );
-*/
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 ) bump = 0;
                 }

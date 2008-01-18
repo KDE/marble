@@ -126,14 +126,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  public:
 
-    enum Direction { 
-        NoWhere,
-        Up, Down,
-        // TODO:
-        North, NorthEast, East, SouthEast,
-        South, SouthWest, West, NorthWest
-    };
-
     /**
      * @brief Construct a new MarbleWidget.
      * @param parent the parent widget
@@ -799,8 +791,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  zoomChanged( int zoom );
     void  distanceChanged( const QString& distanceString );
-
-    void  headingTowards( int direction );
 
     /**
      * @brief Signal that the theme has changed

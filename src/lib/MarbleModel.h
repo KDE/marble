@@ -234,8 +234,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  public Q_SLOTS:
 
-    void setHeadingTowards( int );
-
  Q_SIGNALS:
 
     /**

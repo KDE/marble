@@ -53,7 +53,7 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Reset backend
     m_tileLoader->resetTilehash();
-    selectTileLevel(radius);
+    selectTileLevel( viewParams );
 
     // Calculate translation of center point
     double centerLon, centerLat;
