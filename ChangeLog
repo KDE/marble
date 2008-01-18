@@ -1,3 +1,16 @@
+2008-01-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/TextureTile.{cpp,h}:
+    - Visualize Tile loading by displaying filename tags
+      on the globe.
+    - Ŕight now you need to set
+
+      bool tileIdVisible = true;
+
+    in TextureTile.cpp, line 174 to see the effect. Really cool
+    and makes tile loading pretty clear if you haven't understood
+    it yet.
+
 2008-01-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning

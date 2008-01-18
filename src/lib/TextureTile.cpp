@@ -13,6 +13,9 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
+#include <QtGui/QFont>
+#include <QtGui/QPainter>
+#include <QtGui/QPen>
 
 #include <cmath>
 
@@ -165,6 +168,14 @@ void TextureTile::loadTile( int x, int y, int level,
   m_worktile = m_rawtile;
   m_depth = m_worktile.depth();
 
+  // FIXME: This should get accessible from MarbleWidget, so we can pass over 
+  //        a testing command line option
+  bool tileIdVisible = false;
+
+  if( tileIdVisible ) {
+    showTileId( m_worktile, theme, level, x, y );
+  }
+
   if(sun_shading) {
   // add sun shading
   double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
@@ -215,5 +226,68 @@ void TextureTile::reloadTile( int x, int y, int level, const QString& theme, boo
     loadTile( x, y, level, theme, true, sun_shading );
 }
 
+void TextureTile::showTileId( QImage& worktile, QString theme, int level, int x, int y )
+{
+    QString filename = QString("%1_%2.jpg")
+        .arg( x, tileDigits, 10, QChar('0') )
+        .arg( y, tileDigits, 10, QChar('0') );
+
+    QPainter painter(&m_worktile);
+
+    QColor foreground;
+    QColor background;
+
+    if ( ( (double)(x)/2 == x/2 && (double)(y)/2 == y/2 ) || 
+         ( (double)(x)/2 != x/2 && (double)(y)/2 != y/2 ) 
+       )
+    {
+        foreground.setNamedColor("#FFFFFF");
+        background.setNamedColor("#000000");
+    }
+    else
+    {
+        foreground.setNamedColor("#000000");
+        background.setNamedColor("#FFFFFF");
+    }
+
+    int strokeWidth = 10;
+    QPen testPen( foreground );
+    testPen.setWidth( strokeWidth );
+    testPen.setJoinStyle(Qt::MiterJoin);
+
+    painter.setPen( testPen );
+    painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
+                      worktile.width()  - strokeWidth,
+                      worktile.height() - strokeWidth
+    );
+    QFont testFont("Sans", 30, QFont::Bold);
+    QFontMetrics testFm(testFont);
+    painter.setFont(testFont);
+
+    QPen outlinepen( foreground );
+    outlinepen.setWidthF( 6 );
+
+    painter.setPen( outlinepen );
+    painter.setBrush( background );
+
+    QPainterPath   outlinepath;
+
+    QPointF  baseline1( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
+                             (worktile.height() * 0.25) );
+    outlinepath.addText( baseline1, testFont, QString( "level: %1" ).arg(level) );
+
+    QPointF  baseline2( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
+                             (worktile.height() * 0.50) );
+    outlinepath.addText( baseline2, testFont, filename );
+
+    QPointF  baseline3( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
+                             (worktile.height() * 0.75) );
+    outlinepath.addText( baseline3, testFont, theme );
+
+    painter.drawPath( outlinepath );
+
+    painter.setPen( Qt::NoPen );
+    painter.drawPath( outlinepath );
+}
 
 #include "TextureTile.moc"

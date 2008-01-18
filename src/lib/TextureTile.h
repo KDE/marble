@@ -59,6 +59,9 @@ class TextureTile : public QObject {
                      const QString& theme, bool sun_shading = false );
 
  protected:
+
+    void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
+
     int      m_id;
 
     QImage   m_rawtile;
