@@ -170,7 +170,7 @@ void TextureTile::loadTile( int x, int y, int level,
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
-  bool tileIdVisible = true;
+  bool tileIdVisible = false;
 
   if( tileIdVisible ) {
     showTileId( m_worktile, theme, level, x, y );
