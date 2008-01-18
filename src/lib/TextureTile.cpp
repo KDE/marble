@@ -180,15 +180,17 @@ void TextureTile::loadTile( int x, int y, int level,
   // TODO add support for 8-bit maps?
   // add sun shading
   m_sun.updatePosition();
-  double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
-  double global_height = m_worktile.height() * TileLoader::levelToRow(level);
-  double lon_scale = 2*M_PI / global_width;
-  double lat_scale = -M_PI / global_height;
-  for(int cur_y = 0; cur_y < m_worktile.height(); cur_y++) {
-    double lat = lat_scale * (y * m_worktile.height() + cur_y) - 0.5*M_PI;
+  const double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
+  const double global_height = m_worktile.height() * TileLoader::levelToRow(level);
+  const double lon_scale = 2*M_PI / global_width;
+  const double lat_scale = -M_PI / global_height;
+  const int tileHeight = m_worktile.height();
+  const int tileWidth = m_worktile.width();
+  for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
+    double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
     QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
-    for(int cur_x = 0; cur_x < m_worktile.width(); cur_x++) {
-      double lon = lon_scale * (x * m_worktile.width() + cur_x);
+    for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
+      double lon = lon_scale * (x * tileWidth + cur_x);
       m_sun.shadePixel(*scanline, m_sun.shading(lat, lon));
       scanline++;
     }
