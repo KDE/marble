@@ -170,29 +170,27 @@ void TextureTile::loadTile( int x, int y, int level,
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
-  bool tileIdVisible = false;
+  bool tileIdVisible = true;
 
   if( tileIdVisible ) {
     showTileId( m_worktile, theme, level, x, y );
   }
 
-  if(sun_shading) {
+  if(sun_shading && m_depth == 32) {
+  // TODO add support for 8-bit maps?
   // add sun shading
+  m_sun.updatePosition();
   double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
   double global_height = m_worktile.height() * TileLoader::levelToRow(level);
   double lon_scale = 2*M_PI / global_width;
   double lat_scale = -M_PI / global_height;
-  for(int cur_x = 0; cur_x < m_worktile.width(); cur_x++) {
-    double lon = lon_scale * (x * m_worktile.width() + cur_x);
-    for(int cur_y = 0; cur_y < m_worktile.height(); cur_y++) {
-      double lat = lat_scale * (y * m_worktile.height() + cur_y) - 0.5*M_PI;
-      QRgb pixcol = m_worktile.pixel(cur_x, cur_y);
-      pixcol = m_sun.shadePixel(pixcol, m_sun.shading(lat, lon));
-      if(m_depth == 8) {
-//          m_worktile.setPixel(cur_x, cur_y, 0); // TODO
-      } else {
-        m_worktile.setPixel(cur_x, cur_y, pixcol);
-      }
+  for(int cur_y = 0; cur_y < m_worktile.height(); cur_y++) {
+    double lat = lat_scale * (y * m_worktile.height() + cur_y) - 0.5*M_PI;
+    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
+    for(int cur_x = 0; cur_x < m_worktile.width(); cur_x++) {
+      double lon = lon_scale * (x * m_worktile.width() + cur_x);
+      m_sun.shadePixel(*scanline, m_sun.shading(lat, lon));
+      scanline++;
     }
   }
   }

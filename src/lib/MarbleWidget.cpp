@@ -97,21 +97,31 @@ class MarbleWidgetPrivate
 
 MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget(parent),
-      d( new MarbleWidgetPrivate )
+      d( new MarbleWidgetPrivate ),
+      m_sun_shading(false)
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = new MarbleModel( this );
     construct( parent );
+    
+    m_sun_timer = new QTimer(this);
+    connect(m_sun_timer, SIGNAL(timeout()), this, SLOT(updateSun()));
+    m_sun_timer->start(60000);
 }
 
 
 MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     : QWidget(parent),
-      d( new MarbleWidgetPrivate )
+      d( new MarbleWidgetPrivate ),
+      m_sun_shading(false)
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = model;
     construct( parent );
+    
+    m_sun_timer = new QTimer(this);
+    connect(m_sun_timer, SIGNAL(timeout()), this, SLOT(updateSun()));
+    m_sun_timer->start(60000);
 }
 
 MarbleWidget::~MarbleWidget()
@@ -1322,13 +1332,19 @@ QString MarbleWidget::distanceString() const
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
+void MarbleWidget::updateSun(bool force) {
+  // update the sun shading
+  if(m_sun_shading || force) {
+    qDebug() << "Updating the sun shading map...";
+    d->m_model->showSun(m_sun_shading);
+    setNeedsUpdate();
+    repaint();
+  }
+}
+
 void MarbleWidget::showSun(bool show) {
-  d->m_model->showSun(show);
-  
-  // Update texture map during the repaint that follows:
-  setMapTheme( d->m_model->mapTheme() );
-  setNeedsUpdate();
-  repaint();
+  m_sun_shading = show;
+  updateSun(true);
 }
 
 #include "MarbleWidget.moc"

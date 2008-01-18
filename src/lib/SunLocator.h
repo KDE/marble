@@ -13,7 +13,7 @@ class SunLocator {
 		virtual ~SunLocator();
 		void updatePosition();
 		double shading(double lat, double lon);
-		QRgb shadePixel(QRgb pixcol, double shade);
+		void shadePixel(QRgb& pixcol, double shade);
 	
 	protected:
 		double m_lat;

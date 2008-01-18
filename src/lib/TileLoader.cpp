@@ -343,5 +343,11 @@ void TileLoader::reloadTile( QString relativeUrlString, QString _id )
     }
 }
 
+void TileLoader::showSun(bool show) {
+  m_sun_shading = show;
+  flush(); // trigger a reload of all tiles that are currently in use
+  m_tileCache.clear(); // clear the tile cache in physical memory
+}
+
 
 #include "TileLoader.moc"

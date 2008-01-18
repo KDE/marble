@@ -26,6 +26,7 @@
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
+#include <QTimer>
 
 //#include <QtDBus/QtDBus>
 
@@ -411,6 +412,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  public Q_SLOTS:
 
+    void updateSun(bool force = false);
+    
     /**
      * @brief paint the widget (FIXME: Not Yet Implemented) 
      * @param painter  the QPainter to paint with
@@ -850,6 +853,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  private:
     MarbleWidgetPrivate  * const d;
+    bool m_sun_shading;
+    QTimer* m_sun_timer;
 };
 
 

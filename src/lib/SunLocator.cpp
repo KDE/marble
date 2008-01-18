@@ -6,7 +6,7 @@
 
 SunLocator::SunLocator() {
 	m_datetime = new ExtDateTime();
-	updatePosition();
+// 	updatePosition();
 }
 
 SunLocator::~SunLocator() {
@@ -47,14 +47,23 @@ double SunLocator::shading(double lat, double lon) {
 	return h;
 }
 
-QRgb SunLocator::shadePixel(QRgb pixcol, double shade) {
-	const int factor = 200;
+void SunLocator::shadePixel(QRgb& pixcol, double shade) {
 	const double penumbra = 0.02;
 	
-	if(shade <= 0.5 - penumbra/2.0)
-		return pixcol;
-	else if(shade >= 0.5 + penumbra/2.0)
-		return QColor(pixcol).darker(factor + 100).rgb();
-	else
-		return QColor(pixcol).darker(int((shade - (0.5 - penumbra/2.0)) * factor/penumbra + 100)).rgb();
+	if(shade <= 0.5 - penumbra/2.0) return; // daylight - no change
+	
+	int r = qRed(pixcol);
+	int g = qGreen(pixcol);
+	int b = qBlue(pixcol);
+	
+	if(shade >= 0.5 + penumbra/2.0) {
+		// night
+		pixcol = qRgb(r/2, g/2, b/2);
+	} else {
+		// graduated shading
+		double darkness = (0.5 + penumbra/2.0 - shade) / penumbra;
+		double d = 0.5*darkness + 0.5;
+		
+		pixcol = qRgb((int)(d*r), (int)(d*g), (int)(d*b));
+	}
 }

@@ -1,6 +1,21 @@
 2008-01-18  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/TextureTile.{cpp,h}:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/SunLocator.{cpp,h}:
+    * src/lib/TileLoader.{cpp,h}:
+    * src/lib/TextureTile.cpp
+
+    - More patches by David Roberts to fix and speed-up
+    the sun shading. 
+    Only issues left: 
+    - There shouldn't be any timers in MarbleWidget
+    - TileLoader shouldn't be aware of things like
+    "sunshading".
+
+2008-01-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/TextureTile.{cpp,h}:
     - Visualize Tile loading by displaying filename tags
       on the globe.
     - Ŕight now you need to set
