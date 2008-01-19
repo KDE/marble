@@ -1,5 +1,19 @@
 2008-01-18  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/SunLocator.{cpp,h}:
+    * src/lib/TextureTile.{cpp,h}:
+
+    - Another awesome patch by our "weather man" 
+    David Roberts. This one adds: 
+    - the (internal) option to let the citylights 
+    map show up on the night side of the satellite view.
+
+    - clouds (only show up if you create cloud tiles
+    in the maps/earth/clouds directory which doesn't happen 
+    automatically yet. But it works well already.
+
+2008-01-18  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/SunControlWidget.ui:
 
     - Adding Sun control widget for David Roberts.

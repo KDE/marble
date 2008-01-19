@@ -85,9 +85,7 @@ TextureTile::~TextureTile()
 //    delete m_rawtile;
 }
 
-
-void TextureTile::loadTile( int x, int y, int level, 
-			    const QString& theme, bool requestTileUpdate, bool sun_shading )
+QImage TextureTile::loadRawTile( int x, int y, int level, const QString& theme )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
   m_used = true; // Needed to avoid frequent deletion of tiles
@@ -145,7 +143,7 @@ void TextureTile::loadTile( int x, int y, int level,
 //          qDebug() << "Finished scaling up the Temporary Tile.";
         }
 
-        m_rawtile = temptile;
+        return temptile;
 
         break;
       } // !tempfile.isNull()
@@ -159,6 +157,39 @@ void TextureTile::loadTile( int x, int y, int level,
       emit downloadTile( relfilename, QString::number( m_id ) );
     }
   }
+}
+
+void TextureTile::loadTile( int x, int y, int level, 
+			    const QString& theme, bool requestTileUpdate, bool sun_shading )
+{
+  //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
+//   m_used = true; // Needed to avoid frequent deletion of tiles
+// 
+  QString  absfilename;
+// 
+//   // qDebug() << "Requested tile level" << level;
+// 
+//   // If the tile level offers the requested tile then load it.
+//   // Otherwise cycle from the requested tilelevel down to one where
+//   // the requested area is covered.  Then scale the area to create a
+//   // replacement for the tile that has been requested.
+// 
+  for ( int i = level; i > -1; --i ) {
+
+    double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
+    double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
+    double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
+    double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
+
+    QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
+        .arg(theme).arg(i)
+        .arg( (int)(testy1), tileDigits, 10, QChar('0') )
+        .arg( (int)(testx1), tileDigits, 10, QChar('0') );
+
+    absfilename = MarbleDirs::path( relfilename );
+  }
+
+  m_rawtile = loadRawTile(x, y, level, theme);
 
   if ( m_rawtile.isNull() ) {
     qDebug() << "An essential tile is missing. Please rerun the application.";
@@ -167,6 +198,43 @@ void TextureTile::loadTile( int x, int y, int level,
 
   m_worktile = m_rawtile;
   m_depth = m_worktile.depth();
+  
+  // TODO be able to set this somewhere
+  bool cloudlayer = true;
+  
+  if(QFile::exists(MarbleDirs::path("maps/earth/clouds")) && cloudlayer && m_depth == 32) {
+  m_cloudtile = loadRawTile(x, y, level, "maps/earth/clouds");
+
+  if(!m_cloudtile.isNull()) {
+//   qDebug() << "painting clouds";
+  // overlay m_cloudtile onto m_worktile
+  const int ctileHeight = m_cloudtile.height();
+  const int ctileWidth = m_cloudtile.width();
+  for(int cur_y = 0; cur_y < ctileHeight; cur_y++) {
+    QRgb* cscanline = (QRgb*)m_cloudtile.scanLine(cur_y);
+    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
+    for(int cur_x = 0; cur_x < ctileWidth; cur_x++) {
+      double c = qRed(*cscanline)/255.0;
+      QRgb pix = *scanline;
+      int r = qRed(pix);
+      int g = qGreen(pix);
+      int b = qBlue(pix);
+      *scanline = qRgb((int)(r + (255-r)*c), (int)(g + (255-g)*c), (int)(b + (255-b)*c));
+      cscanline++;
+      scanline++;
+    }
+  }
+  }
+  }
+  
+  // TODO be able to set this somewhere
+  bool shade_citylights = true;
+  
+  if(shade_citylights && m_depth == 32) {
+  m_nighttile = loadRawTile(x, y, level, "maps/earth/citylights");
+
+  if ( m_nighttile.isNull() ) shade_citylights = false;
+  }
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
@@ -186,14 +254,30 @@ void TextureTile::loadTile( int x, int y, int level,
   const double lat_scale = -M_PI / global_height;
   const int tileHeight = m_worktile.height();
   const int tileWidth = m_worktile.width();
+  if(shade_citylights) {
+  for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
+    double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
+    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
+    QRgb* nscanline = (QRgb*)m_nighttile.scanLine(cur_y);
+    for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
+      double lon = lon_scale * (x * tileWidth + cur_x);
+      double shade = m_sun.shading(lat, lon);
+      m_sun.shadePixelComposite(*scanline, *nscanline, shade);
+      scanline++;
+      nscanline++;
+    }
+  }
+  } else {
   for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
     double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
     QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
     for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
       double lon = lon_scale * (x * tileWidth + cur_x);
-      m_sun.shadePixel(*scanline, m_sun.shading(lat, lon));
+      double shade = m_sun.shading(lat, lon);
+      m_sun.shadePixel(*scanline, shade);
       scanline++;
     }
+  }
   }
   }
 
@@ -216,7 +300,6 @@ void TextureTile::loadTile( int x, int y, int level,
     emit tileUpdateDone();
   }
 }
-
 
 void TextureTile::reloadTile( int x, int y, int level, const QString& theme, bool sun_shading )
 {

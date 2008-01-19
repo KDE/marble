@@ -61,10 +61,13 @@ class TextureTile : public QObject {
  protected:
 
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
+    QImage loadRawTile(int x, int y, int level, const QString& theme);
 
     int      m_id;
 
     QImage   m_rawtile;
+    QImage   m_cloudtile;
+    QImage   m_nighttile;
     QImage   m_worktile;
 
     int      m_depth;

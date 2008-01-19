@@ -14,6 +14,7 @@ class SunLocator {
 		void updatePosition();
 		double shading(double lat, double lon);
 		void shadePixel(QRgb& pixcol, double shade);
+		void shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade);
 	
 	protected:
 		double m_lat;

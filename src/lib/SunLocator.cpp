@@ -67,3 +67,27 @@ void SunLocator::shadePixel(QRgb& pixcol, double shade) {
 		pixcol = qRgb((int)(d*r), (int)(d*g), (int)(d*b));
 	}
 }
+
+void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade) {
+	const double penumbra = 0.02;
+	
+	if(shade <= 0.5 - penumbra/2.0) return; // daylight - no change
+	
+	if(shade >= 0.5 + penumbra/2.0) {
+		// night
+		pixcol = dpixcol;
+	} else {
+		// graduated shading
+		double d = (0.5 + penumbra/2.0 - shade) / penumbra;
+		
+		int r = qRed(pixcol);
+		int g = qGreen(pixcol);
+		int b = qBlue(pixcol);
+		
+		int dr = qRed(dpixcol);
+		int dg = qGreen(dpixcol);
+		int db = qBlue(dpixcol);
+		
+		pixcol = qRgb((int)(d*r + (1-d)*dr), (int)(d*g + (1-d)*dg), (int)(d*b + (1-d)*db));
+	}
+}
