@@ -1,6 +1,14 @@
 2008-01-18  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/SunLocator.{cpp,h}:
+
+    - Changing name of the "penumbra" to "twilight zone"
+    and the value to 18 degrees (h=0.1) which seems a bit more 
+    realistic to me according to the definition of twilight.
+
+2008-01-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/SunLocator.{cpp,h}:
     * src/lib/TextureTile.{cpp,h}:
 
     - Another awesome patch by our "weather man" 

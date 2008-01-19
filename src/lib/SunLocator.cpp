@@ -48,20 +48,20 @@ double SunLocator::shading(double lat, double lon) {
 }
 
 void SunLocator::shadePixel(QRgb& pixcol, double shade) {
-	const double penumbra = 0.02;
+	const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 	
-	if(shade <= 0.5 - penumbra/2.0) return; // daylight - no change
+	if(shade <= 0.5 - twilightZone/2.0) return; // daylight - no change
 	
 	int r = qRed(pixcol);
 	int g = qGreen(pixcol);
 	int b = qBlue(pixcol);
 	
-	if(shade >= 0.5 + penumbra/2.0) {
+	if(shade >= 0.5 + twilightZone/2.0) {
 		// night
 		pixcol = qRgb(r/2, g/2, b/2);
 	} else {
 		// graduated shading
-		double darkness = (0.5 + penumbra/2.0 - shade) / penumbra;
+		double darkness = (0.5 + twilightZone/2.0 - shade) / twilightZone;
 		double d = 0.5*darkness + 0.5;
 		
 		pixcol = qRgb((int)(d*r), (int)(d*g), (int)(d*b));
@@ -69,16 +69,16 @@ void SunLocator::shadePixel(QRgb& pixcol, double shade) {
 }
 
 void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade) {
-	const double penumbra = 0.02;
+	const double twilightZone = 0.1;
 	
-	if(shade <= 0.5 - penumbra/2.0) return; // daylight - no change
+	if(shade <= 0.5 - twilightZone/2.0) return; // daylight - no change
 	
-	if(shade >= 0.5 + penumbra/2.0) {
+	if(shade >= 0.5 + twilightZone/2.0) {
 		// night
 		pixcol = dpixcol;
 	} else {
 		// graduated shading
-		double d = (0.5 + penumbra/2.0 - shade) / penumbra;
+		double d = (0.5 + twilightZone/2.0 - shade) / twilightZone;
 		
 		int r = qRed(pixcol);
 		int g = qGreen(pixcol);
