@@ -228,7 +228,7 @@ void TextureTile::loadTile( int x, int y, int level,
   }
   
   // TODO be able to set this somewhere
-  bool shade_citylights = true;
+  bool shade_citylights = false;
   
   if(shade_citylights && m_depth == 32) {
   m_nighttile = loadRawTile(x, y, level, "maps/earth/citylights");
