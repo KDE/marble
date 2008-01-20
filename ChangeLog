@@ -1,6 +1,24 @@
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/SunControlWidget.{cpp,h,ui}:
+    * src/ControlView.h:
+    * src/QtMainWindow.h:
+
+    - Making the SunControlWidget dialog 
+    non-modal, so the user can switch settings while
+    panning the globe.
+    - Adding a combobox that controls the actual 
+    sun shading. The "Show" button in the dialog
+    has the purpose to show a "sun position icon"
+    in the future. "Center" centers the globe on 
+    that position.
+    - Renaming some methods and properties
+    accordingy (showSun -> showSunShading).
+
+2008-01-20  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/SunLocator.{cpp,h}:
     * src/lib/TextureTile.{cpp,h}:
     * src/lib/TileLoader.{cpp,h}:

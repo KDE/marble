@@ -62,7 +62,7 @@ class ControlView : public QWidget
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
     void setFileViewTabShown( bool );
-    void showSun(bool show) {m_marbleWidget->showSun(show);}
+    void showSunShading(bool show) {m_marbleWidget->showSunShading(show);}
     void centerSun() {m_marbleWidget->centerSun();}
 
  private:

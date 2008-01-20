@@ -20,10 +20,12 @@ class MARBLE_EXPORT SunControlWidget : public QDialog {
 	
 	private Q_SLOTS:
 	void showSunClicked(bool checked);
+    void showSunShadingClicked(int index);
 	void centerSunClicked(bool checked);
 	
 	Q_SIGNALS:
 	void showSun(bool show);
+    void showSunShading(bool show);
 	void centerSun();
 	
 	private:

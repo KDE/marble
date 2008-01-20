@@ -264,10 +264,15 @@ void MainWindow::showStatusBar( bool isChecked )
 
 void MainWindow::showSun( bool isChecked )
 {
-    SunControlWidget dlg(this, m_controlView->sunLocator());
-    connect(&dlg, SIGNAL(showSun(bool)), m_controlView, SLOT(showSun(bool)));
-    connect(&dlg, SIGNAL(centerSun()), m_controlView, SLOT(centerSun()));
-    dlg.exec();
+     if (!m_sunControlDialog) {
+         m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
+         connect(m_sunControlDialog, SIGNAL(showSunShading(bool)), m_controlView, SLOT(showSunShading(bool)));
+         connect(m_sunControlDialog, SIGNAL(centerSun()), m_controlView, SLOT(centerSun()));
+     }
+
+     m_sunControlDialog->show();
+     m_sunControlDialog->raise();
+     m_sunControlDialog->activateWindow();
 }
 
 void MainWindow::enterWhatsThis()

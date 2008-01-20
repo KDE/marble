@@ -25,6 +25,7 @@ class QMenu;
 
 class KAtlasControl;
 class MarbleWidget;
+class SunControlWidget;
  
 
 class MainWindow : public QMainWindow
@@ -69,6 +70,7 @@ class MainWindow : public QMainWindow
 
  private:
     ControlView *m_controlView;
+    SunControlWidget* m_sunControlDialog;
 
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;

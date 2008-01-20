@@ -1335,7 +1335,7 @@ void MarbleWidget::updateSun(bool force) {
   }
 }
 
-void MarbleWidget::showSun(bool show) {
+void MarbleWidget::showSunShading(bool show) {
   SunLocator* sunLocator = d->m_model->sunLocator();
   sunLocator->setShow(show);
   updateSun(true);

@@ -408,7 +408,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool  quickDirty() const;
     
-    void showSun(bool show);
+    void showSunShading(bool show);
     
     void centerSun();
     
