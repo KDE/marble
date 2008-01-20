@@ -75,6 +75,8 @@ class MarbleModelPrivate
 MarbleModel::MarbleModel( QWidget *parent )
     : d( new MarbleModelPrivate )
 {
+    m_sunLocator = new SunLocator();
+
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
 
@@ -82,7 +84,7 @@ MarbleModel::MarbleModel( QWidget *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_downloadManager = 0;
-    d->m_tileLoader = new TileLoader( d->m_downloadManager );
+    d->m_tileLoader = new TileLoader( d->m_downloadManager, m_sunLocator );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();

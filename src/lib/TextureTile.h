@@ -54,9 +54,9 @@ class TextureTile : public QObject {
 
  public Q_SLOTS:
     void   loadTile( int x, int y, int level, 
-                     const QString& theme, bool requestTileUpdate = true, bool sun_shading = false );
+                     const QString& theme, bool requestTileUpdate = true, SunLocator* sunLocator = 0 );
     void reloadTile( int x, int y, int level, 
-                     const QString& theme, bool sun_shading = false );
+                     const QString& theme, SunLocator* sunLocator = 0 );
 
  protected:
 
@@ -72,8 +72,6 @@ class TextureTile : public QObject {
 
     int      m_depth;
     bool     m_used;
-    
-    SunLocator m_sun;
 };
 
 

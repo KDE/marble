@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>419</width>
-    <height>227</height>
+    <width>460</width>
+    <height>234</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -205,6 +205,9 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="text" >
          <string>Sh&amp;ow</string>
+        </property>
+        <property name="checkable" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>

@@ -52,7 +52,8 @@ class ControlView : public QWidget
 
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
     
-    void showSun(bool show) {m_marbleWidget->showSun(show);}
+    SunLocator* sunLocator() {return m_marbleWidget->sunLocator();}
+    
 
  public slots:
     void setSideBarShown( bool );    
@@ -61,6 +62,8 @@ class ControlView : public QWidget
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
     void setFileViewTabShown( bool );
+    void showSun(bool show) {m_marbleWidget->showSun(show);}
+    void centerSun() {m_marbleWidget->centerSun();}
 
  private:
     //MarbleModel       *m_marbleModel;

@@ -61,8 +61,7 @@ TextureTile::TextureTile( int id )
       m_id(id),
       m_rawtile( QImage() ),
       m_depth(0),
-      m_used(false)/*,
-      m_sun_shading(false)*/
+      m_used(false)
 {
 }
 
@@ -157,10 +156,12 @@ QImage TextureTile::loadRawTile( int x, int y, int level, const QString& theme )
       emit downloadTile( relfilename, QString::number( m_id ) );
     }
   }
+  
+  return QImage();
 }
 
 void TextureTile::loadTile( int x, int y, int level, 
-			    const QString& theme, bool requestTileUpdate, bool sun_shading )
+			    const QString& theme, bool requestTileUpdate, SunLocator* sunLocator )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
 //   m_used = true; // Needed to avoid frequent deletion of tiles
@@ -202,7 +203,7 @@ void TextureTile::loadTile( int x, int y, int level,
   // TODO be able to set this somewhere
   bool cloudlayer = true;
   
-  if(QFile::exists(MarbleDirs::path("maps/earth/clouds")) && cloudlayer && m_depth == 32) {
+  if(cloudlayer && m_depth == 32 && level < 2) {
   m_cloudtile = loadRawTile(x, y, level, "maps/earth/clouds");
 
   if(!m_cloudtile.isNull()) {
@@ -244,10 +245,10 @@ void TextureTile::loadTile( int x, int y, int level,
     showTileId( m_worktile, theme, level, x, y );
   }
 
-  if(sun_shading && m_depth == 32) {
+  if(sunLocator != 0 && sunLocator->getShow() && m_depth == 32) {
   // TODO add support for 8-bit maps?
   // add sun shading
-  m_sun.updatePosition();
+  sunLocator->updatePosition();
   const double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
   const double global_height = m_worktile.height() * TileLoader::levelToRow(level);
   const double lon_scale = 2*M_PI / global_width;
@@ -261,8 +262,8 @@ void TextureTile::loadTile( int x, int y, int level,
     QRgb* nscanline = (QRgb*)m_nighttile.scanLine(cur_y);
     for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
       double lon = lon_scale * (x * tileWidth + cur_x);
-      double shade = m_sun.shading(lat, lon);
-      m_sun.shadePixelComposite(*scanline, *nscanline, shade);
+      double shade = sunLocator->shading(lat, lon);
+      sunLocator->shadePixelComposite(*scanline, *nscanline, shade);
       scanline++;
       nscanline++;
     }
@@ -273,8 +274,8 @@ void TextureTile::loadTile( int x, int y, int level,
     QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
     for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
       double lon = lon_scale * (x * tileWidth + cur_x);
-      double shade = m_sun.shading(lat, lon);
-      m_sun.shadePixel(*scanline, shade);
+      double shade = sunLocator->shading(lat, lon);
+      sunLocator->shadePixel(*scanline, shade);
       scanline++;
     }
   }
@@ -301,12 +302,12 @@ void TextureTile::loadTile( int x, int y, int level,
   }
 }
 
-void TextureTile::reloadTile( int x, int y, int level, const QString& theme, bool sun_shading )
+void TextureTile::reloadTile( int x, int y, int level, const QString& theme, SunLocator* sunLocator )
 {
     // qDebug() << "slotLoadTile variables: |" << theme << "|" 
     // << level << "|" << x << "|" << y;
 
-    loadTile( x, y, level, theme, true, sun_shading );
+    loadTile( x, y, level, theme, true, sunLocator );
 }
 
 void TextureTile::showTileId( QImage& worktile, QString theme, int level, int x, int y )

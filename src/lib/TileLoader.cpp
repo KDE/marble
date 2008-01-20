@@ -39,16 +39,14 @@
 #endif
 
 
-TileLoader::TileLoader( HttpDownloadManager *downloadManager )
- : m_sun_shading(false)
+TileLoader::TileLoader( HttpDownloadManager *downloadManager, SunLocator* sunLocator ) : m_sunLocator(sunLocator)
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
     init();
 }
 
-TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManager )
- : m_sun_shading(false)
+TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManager, SunLocator* sunLocator ) : m_sunLocator(sunLocator)
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
@@ -58,6 +56,7 @@ TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManag
 
 TileLoader::~TileLoader()
 {
+    delete m_sunLocator;
     flush();
     m_tileCache.clear();
     if ( m_downloadManager != 0 )
@@ -174,7 +173,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
             connect( tile,            SIGNAL( tileUpdateDone() ), 
                      this,              SIGNAL( tileUpdateAvailable() ) );
-            tile->loadTile( tilx, tily, tileLevel, m_theme, false, m_sun_shading );
+            tile->loadTile( tilx, tily, tileLevel, m_theme, false, m_sunLocator );
         }
     } 
 
@@ -336,7 +335,7 @@ void TileLoader::reloadTile( QString relativeUrlString, QString _id )
         int  y     = ( id - level * 100000000 ) / 10000;
         int  x     = id - ( level * 100000000 + y * 10000 );
 
-        (m_tileHash[id]) -> reloadTile( x, y, level, m_theme, m_sun_shading );
+        (m_tileHash[id]) -> reloadTile( x, y, level, m_theme, m_sunLocator );
     }
     else {
          qDebug() << "No such ID";
@@ -344,7 +343,7 @@ void TileLoader::reloadTile( QString relativeUrlString, QString _id )
 }
 
 void TileLoader::showSun(bool show) {
-  m_sun_shading = show;
+  m_sunLocator->setShow(show);
   flush(); // trigger a reload of all tiles that are currently in use
   m_tileCache.clear(); // clear the tile cache in physical memory
 }

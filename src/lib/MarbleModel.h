@@ -45,6 +45,8 @@
 #include "VectorComposer.h"
 #include "TextureColorizer.h"
 
+#include "SunLocator.h"
+
 class QItemSelectionModel;
 
 class ClipPainter;
@@ -233,6 +235,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void stopPolling();
     
     void showSun(bool show);
+    
+    SunLocator* sunLocator() {return m_sunLocator;}
 
  public Q_SLOTS:
 
@@ -282,6 +286,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  private:
     MarbleModelPrivate  * const d;
+    SunLocator* m_sunLocator;
 };
 
 

@@ -1,4 +1,25 @@
-2008-01-18  Torsten Rahn  <rahn@kde.org>
+2008-01-20  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/SunLocator.{cpp,h}:
+    * src/lib/TextureTile.{cpp,h}:
+    * src/lib/TileLoader.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/lib/SunControlWidget.ui:
+    * src/ControlView.h:
+
+    All patches by David Roberts:
+    - Adding Torsten Rahn's .ui file to the UI
+    - Implementation of "Center" and "Show" button functionality.
+    - Moved SunLocator out of the TileLoader ("yipee!") 
+    - Moved QTimer out of MarbleWidget into SunLocator ("yipee!")
+    - Disabling clouds for Level >= 2.
+
+    Now we really need the Layer Management class - I'll create a document 
+    that will cover its basic concepts.
+
+2008-01-19  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/SunLocator.{cpp,h}:
 

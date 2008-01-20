@@ -409,6 +409,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  quickDirty() const;
     
     void showSun(bool show);
+    
+    void centerSun();
+    
+    SunLocator* sunLocator();
 
  public Q_SLOTS:
 
@@ -853,8 +857,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
  private:
     MarbleWidgetPrivate  * const d;
-    bool m_sun_shading;
-    QTimer* m_sun_timer;
 };
 
 

@@ -97,31 +97,23 @@ class MarbleWidgetPrivate
 
 MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget(parent),
-      d( new MarbleWidgetPrivate ),
-      m_sun_shading(false)
+      d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = new MarbleModel( this );
     construct( parent );
-    
-    m_sun_timer = new QTimer(this);
-    connect(m_sun_timer, SIGNAL(timeout()), this, SLOT(updateSun()));
-    m_sun_timer->start(60000);
+    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
 }
 
 
 MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
     : QWidget(parent),
-      d( new MarbleWidgetPrivate ),
-      m_sun_shading(false)
+      d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = model;
     construct( parent );
-    
-    m_sun_timer = new QTimer(this);
-    connect(m_sun_timer, SIGNAL(timeout()), this, SLOT(updateSun()));
-    m_sun_timer->start(60000);
+    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
 }
 
 MarbleWidget::~MarbleWidget()
@@ -1334,17 +1326,32 @@ QString MarbleWidget::distanceString() const
 
 void MarbleWidget::updateSun(bool force) {
   // update the sun shading
-  if(m_sun_shading || force) {
+  SunLocator* sunLocator = d->m_model->sunLocator();
+  if(sunLocator->getShow() || force) {
     qDebug() << "Updating the sun shading map...";
-    d->m_model->showSun(m_sun_shading);
+    d->m_model->showSun(sunLocator->getShow());
     setNeedsUpdate();
     repaint();
   }
 }
 
 void MarbleWidget::showSun(bool show) {
-  m_sun_shading = show;
+  SunLocator* sunLocator = d->m_model->sunLocator();
+  sunLocator->setShow(show);
   updateSun(true);
+}
+
+void MarbleWidget::centerSun() {
+  SunLocator* sunLocator = d->m_model->sunLocator();
+  sunLocator->updatePosition();
+  double lat = sunLocator->getLat();
+  double lon = sunLocator->getLon();
+  qDebug() << "Centering on Sun at " << lat << lon;
+  centerOn(lon, lat);
+}
+
+SunLocator* MarbleWidget::sunLocator() {
+  return d->m_model->sunLocator();
 }
 
 #include "MarbleWidget.moc"

@@ -30,6 +30,8 @@
 
 #include "TileCache.h"
 
+#include "SunLocator.h"
+
 class TextureTile;
 class HttpDownloadManager;
 
@@ -51,8 +53,8 @@ class FileStoragePolicy;
 class TileLoader : public QObject {
     Q_OBJECT
  public:
-    TileLoader( HttpDownloadManager *downloadManager );
-    TileLoader( const QString& theme, HttpDownloadManager *downloadManager );
+    TileLoader( HttpDownloadManager *downloadManager, SunLocator* sunLocator = 0 );
+    TileLoader( const QString& theme, HttpDownloadManager *downloadManager, SunLocator* sunLocator = 0 );
     virtual ~TileLoader();
 
     void setDownloadManager( HttpDownloadManager *downloadManager );
@@ -145,8 +147,8 @@ class TileLoader : public QObject {
     int           m_tileHeight;
 
     TileCache     m_tileCache;
-
-    bool m_sun_shading;
+    
+    SunLocator* m_sunLocator;
 
  Q_SIGNALS:
     void tileUpdateAvailable();

@@ -2,21 +2,27 @@
 
 #include "SunLocator.h"
 
-#include <cmath>
+const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
+const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
+const int update_interval = 60000; // emit updateSun() every update_interval ms
 
-SunLocator::SunLocator() {
+SunLocator::SunLocator() : QObject(), m_show(false) {
 	m_datetime = new ExtDateTime();
-// 	updatePosition();
+	
+	m_timer = new QTimer();
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(timerTimeout()));
+	m_timer->start(update_interval);
 }
 
 SunLocator::~SunLocator() {
+	delete m_datetime;
+	delete m_timer;
 }
 
 void SunLocator::updatePosition() {
 	// find orientation of sun
-	
 	m_datetime->update();
-	const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
+	
 	long d = m_datetime->toJDN() - J2000; // find current Julian day number relative to epoch J2000
 	
 	// adapted from http://www.stargazing.net/kepler/sun.html
@@ -44,41 +50,40 @@ double SunLocator::shading(double lat, double lon) {
 	theta = 2*asin(sqrt(h))
 	*/
 	
-	return h;
+	double brightness;
+	if(h <= 0.5 - twilightZone/2.0) brightness = 1.0;
+	else if(h >= 0.5 + twilightZone/2.0) brightness = 0.0;
+	else brightness = (0.5 + twilightZone/2.0 - h) / twilightZone;
+	
+	return brightness;
 }
 
-void SunLocator::shadePixel(QRgb& pixcol, double shade) {
-	const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
-	
-	if(shade <= 0.5 - twilightZone/2.0) return; // daylight - no change
+void SunLocator::shadePixel(QRgb& pixcol, double brightness) {
+	if(brightness > 0.99999) return; // daylight - no change
 	
 	int r = qRed(pixcol);
 	int g = qGreen(pixcol);
 	int b = qBlue(pixcol);
 	
-	if(shade >= 0.5 + twilightZone/2.0) {
+	if(brightness < 0.00001) {
 		// night
 		pixcol = qRgb(r/2, g/2, b/2);
 	} else {
 		// graduated shading
-		double darkness = (0.5 + twilightZone/2.0 - shade) / twilightZone;
-		double d = 0.5*darkness + 0.5;
-		
+		double d = 0.5*brightness + 0.5;
 		pixcol = qRgb((int)(d*r), (int)(d*g), (int)(d*b));
 	}
 }
 
-void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade) {
-	const double twilightZone = 0.1;
+void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double brightness) {
+	if(brightness > 0.99999) return; // daylight - no change
 	
-	if(shade <= 0.5 - twilightZone/2.0) return; // daylight - no change
-	
-	if(shade >= 0.5 + twilightZone/2.0) {
+	if(brightness < 0.00001) {
 		// night
 		pixcol = dpixcol;
 	} else {
 		// graduated shading
-		double d = (0.5 + twilightZone/2.0 - shade) / twilightZone;
+		double& d = brightness;
 		
 		int r = qRed(pixcol);
 		int g = qGreen(pixcol);
@@ -91,3 +96,10 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade) 
 		pixcol = qRgb((int)(d*r + (1-d)*dr), (int)(d*g + (1-d)*dg), (int)(d*b + (1-d)*db));
 	}
 }
+
+void SunLocator::timerTimeout() {
+// 	qDebug("emit updateSun()");
+	emit updateSun();
+}
+
+#include "SunLocator.moc"

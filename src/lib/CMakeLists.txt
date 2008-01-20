@@ -155,6 +155,7 @@ set(marblewidget_SRCS
 
            SunLocator.cpp
            ExtDateTime.cpp
+           SunControlWidget.cpp
 )
 
 set (marblewidget_UI
@@ -163,6 +164,7 @@ set (marblewidget_UI
     TileCreatorDialog.ui
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
+    SunControlWidget.ui
 )
 
 qt4_add_resources(marblewidget_SRCS libmarble.qrc)
@@ -254,6 +256,7 @@ else (APPLE AND QTONLY)
            MarbleThemeSelectView.h
            MarbleSearchListView.h
            MarbleAboutDialog.h
+           SunControlWidget.h
 
            MarbleWidgetInputHandler.h
            MarbleWidgetPopupMenu.h
@@ -297,6 +300,7 @@ else (APPLE AND QTONLY)
            VectorMap.h
            XmlHandler.h
            marble_export.h
+           SunLocator.h
 
            AbstractLayer/AbstractLayer.h
            AbstractLayer/AbstractLayerContainer.h

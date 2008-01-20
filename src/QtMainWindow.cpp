@@ -33,6 +33,7 @@
 
 #include <MarbleDirs.h>
 #include "lib/MarbleAboutDialog.h"
+#include "lib/SunControlWidget.h"
 
 namespace
 {
@@ -114,8 +115,7 @@ void MainWindow::createActions()
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
      m_showSunAct = new QAction( tr("S&un Shading"), this);
-     m_showSunAct->setCheckable( true );
-     m_showSunAct->setStatusTip(tr("Show Sun Shading"));
+     m_showSunAct->setStatusTip(tr("Configure Sun Shading"));
      connect(m_showSunAct, SIGNAL(triggered( bool )), this, SLOT( showSun( bool )));
 
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
@@ -264,9 +264,10 @@ void MainWindow::showStatusBar( bool isChecked )
 
 void MainWindow::showSun( bool isChecked )
 {
-    m_controlView->showSun(isChecked);
-
-    m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
+    SunControlWidget dlg(this, m_controlView->sunLocator());
+    connect(&dlg, SIGNAL(showSun(bool)), m_controlView, SLOT(showSun(bool)));
+    connect(&dlg, SIGNAL(centerSun()), m_controlView, SLOT(centerSun()));
+    dlg.exec();
 }
 
 void MainWindow::enterWhatsThis()
