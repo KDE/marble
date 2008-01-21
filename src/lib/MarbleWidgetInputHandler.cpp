@@ -187,7 +187,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             // Regarding mouse button releases:
             if ( e->type() == QEvent::MouseButtonRelease
-                 && event->button() == Qt::LeftButton) {
+                 && event->button() == Qt::LeftButton)
+            {
                 
                 //emit current gps coordinates to be be interpreted 
                 //as requested
@@ -216,18 +217,17 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             // Regarding all kinds of mouse moves:
             if ( m_leftpressed == true ) {
                 double  radius = (double)(m_widget->radius());
-                int    deltax = event->x() - m_leftpressedx;
-                int    deltay = event->y() - m_leftpressedy;
+                int     deltax = event->x() - m_leftpressedx;
+                int     deltay = event->y() - m_leftpressedy;
 
-                if (abs(deltax) <= m_dragThreshold
-                    && abs(deltay) <= m_dragThreshold)
+                if ( abs(deltax) <= m_dragThreshold
+                     && abs(deltay) <= m_dragThreshold )
                     return true; 
 
                 double direction = 1;
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
-                if ( m_widget->projection() == Spherical )
-                {
+                if ( m_widget->projection() == Spherical ) {
                     if ( m_widget->northPoleZ() > 0 ) {
 
                         if ( event->y() < ( - m_widget->northPoleY()
@@ -304,15 +304,15 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         // Adjusting Cursor shape
 
-        if ( ( m_widget->model()-> whichFeatureAt( QPoint( event->x(), event->y() ) ) ).size() == 0 )
+        if ( ( m_widget->model()->whichFeatureAt( QPoint( event->x(),
+                                                          event->y() ) ) ).size() == 0 )
         {
             if ( m_leftpressed == false )
                 arrowcur [1][1] = QCursor(Qt::OpenHandCursor);
             else
                 arrowcur [1][1] = QCursor(Qt::ClosedHandCursor);
         }
-        else
-        {
+        else {
             if ( m_leftpressed == false )
                 arrowcur [1][1] = QCursor(Qt::PointingHandCursor);
         }
@@ -324,7 +324,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     else {
         if ( e->type() == QEvent::Wheel ) {
             QWheelEvent  *wheelevt = static_cast<QWheelEvent*>(e);
-            m_widget->zoomViewBy((int)(wheelevt->delta()/3));
+            m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
 
             return true;
         }

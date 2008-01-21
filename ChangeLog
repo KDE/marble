@@ -16,6 +16,16 @@
     - Renaming some methods and properties
     accordingy (showSun -> showSunShading).
 
+2008-01-20  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix bug with max/min zoom, by moving a check.
+	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): Remove
+	m_minimumzoom, m_maximumzoom
+	(MarbleWidget::zoomView): Check for over- and underflow, cleaning
+	(MarbleWidget::zoomViewBy): Simplify by removing check.
+	(misc functions): cleaning
+	* src/lib/MarbleWidgetInputHandler.cpp (Misc functions): cleaning
+
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:
