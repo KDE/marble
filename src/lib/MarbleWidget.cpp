@@ -442,10 +442,9 @@ void MarbleWidget::zoomView(int newZoom)
 
     emit distanceChanged( distanceString() );
 
-    // FIXME: Isn't this done by repaint()?
-    // tackat: No, this shouldn't be done by repaint() as
-    // we don't want to have an expensive gradient overlay 
-    // for every repaint.
+    // We don't do this on every paintEvent to improve performance.
+    // Redrawing the atmosphere is only needed if the size of the 
+    // globe changes.
     drawAtmosphere();
 
     repaint();
@@ -474,7 +473,8 @@ void MarbleWidget::rotateTo(const Quaternion& quat)
 {
     d->m_viewParams.m_planetAxis = quat;
 
-    // FIXME: repaint?
+    // This method doesn't force a repaint of the view on purpose!
+    // See header file.
 }
 
 
