@@ -68,8 +68,6 @@ class MarbleWidgetPrivate
     int              m_logzoom;
 
     int              m_zoomStep;
-    int              m_minimumzoom;
-    int              m_maximumzoom;
 
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
@@ -174,9 +172,6 @@ void MarbleWidget::construct(QWidget *parent)
     d->m_zoomStep = 40;
 
     goHome();
-
-    d->m_minimumzoom = 800;
-    d->m_maximumzoom = 2400;
 
     d->m_showScaleBar  = true;
     d->m_showCompass   = true;
@@ -401,44 +396,51 @@ bool  MarbleWidget::quickDirty() const
     return d->m_model->textureMapper()->interlaced();
 }
 
-void MarbleWidget::zoomView(int zoom)
+void MarbleWidget::zoomView(int newZoom)
 {
+    // Check for under and overflow.
+    if ( newZoom < minimumZoom() ) {
+        newZoom = minimumZoom();
+    }
+    else if ( newZoom > maximumZoom() ) {
+        newZoom = maximumZoom();
+    }
 
     // Prevent infinite loops.
-    if ( zoom  == d->m_logzoom )
+    if ( newZoom  == d->m_logzoom )
 	return;
 
-    d->m_logzoom = zoom;
+    d->m_logzoom = newZoom;
 
+    emit zoomChanged( newZoom );
 
-    emit zoomChanged(zoom);
-
-    int newRadius = fromLogScale(zoom);
+    int newRadius = fromLogScale( newZoom );
 
     if ( newRadius == radius() )
 	return;
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
+    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
     int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
     if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
          && newRadius != radius() 
          || d->m_viewParams.m_projection == Equirectangular )
     {
-        setAttribute(Qt::WA_NoSystemBackground, false);
+        setAttribute( Qt::WA_NoSystemBackground, false );
         // FIXME: Add Qt::transparent if 
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
-        setAttribute(Qt::WA_NoSystemBackground, true);
+        setAttribute( Qt::WA_NoSystemBackground, true );
     }
 
     setRadius( newRadius );
 
     emit distanceChanged( distanceString() );
 
+    // FIXME: Isn't this done by repaint()?
     drawAtmosphere();
 
     repaint();
@@ -449,21 +451,7 @@ void MarbleWidget::zoomView(int zoom)
 
 void MarbleWidget::zoomViewBy( int zoomStep )
 {
-    // Prevent infinite loops
-
-    int zoom    = radius();
-    int tryZoom = toLogScale( zoom ) + zoomStep;
-    // qDebug() << QString::number(tryZoom) << " "
-    //         << QString::number(minimumzoom);
-    if ( tryZoom < d->m_minimumzoom ) {
-        tryZoom = d->m_minimumzoom;
-    }
-    else if ( tryZoom > d->m_maximumzoom ) {
-        tryZoom = d->m_maximumzoom;
-    }
-
-    zoom = tryZoom;
-    zoomView( zoom );
+    zoomView( toLogScale( radius() ) + zoomStep );
 }
 
 
@@ -480,6 +468,8 @@ void MarbleWidget::zoomOut()
 void MarbleWidget::rotateTo(const Quaternion& quat)
 {
     d->m_viewParams.m_planetAxis = quat;
+
+    // FIXME: repaint?
 }
 
 
@@ -506,7 +496,7 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
-                                                  lon * DEG2RAD,
+                                                   lon * DEG2RAD,
                                                   0.0 );
 //    d->m_viewParams.m_planetAxis.display();
     repaint();
@@ -597,7 +587,7 @@ void MarbleWidget::setProjection( int projectionIndex )
     repaint();
 }
 
-void MarbleWidget::home( double &lon, double &lat, int& zoom)
+void MarbleWidget::home( double &lon, double &lat, int& zoom )
 {
     d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
     zoom = d->m_homeZoom;
@@ -895,8 +885,10 @@ void MarbleWidget::setActiveRegion()
     switch( d->m_viewParams.m_projection ) {
         case Spherical:
             if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	       d->m_activeRegion &= QRegion( width() / 2 - zoom, height() / 2 - zoom,
-                                       2 * zoom, 2 * zoom, QRegion::Ellipse );
+	       d->m_activeRegion &= QRegion( width()  / 2 - zoom, 
+                                             height() / 2 - zoom,
+                                             2 * zoom, 2 * zoom, 
+                                             QRegion::Ellipse );
             }
             break;
         case Equirectangular:
@@ -906,7 +898,9 @@ void MarbleWidget::setActiveRegion()
 
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
-            d->m_activeRegion &= QRegion( 0, yTop, width(), 2 * zoom, QRegion::Rectangle );
+            d->m_activeRegion &= QRegion( 0, yTop, 
+                                          width(), 2 * zoom,
+                                          QRegion::Rectangle );
             break;
     }
 }

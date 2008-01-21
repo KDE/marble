@@ -1,3 +1,13 @@
+2008-01-20  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix bug with max/min zoom by moving a check.
+	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): Remove
+	m_minimumzoom, m_maximumzoom
+	(MarbleWidget::zoomView): Check for over- and underflow, cleaning
+	(MarbleWidget::zoomViewBy): Simplify by removing check.
+	(misc functions): cleaning
+	* src/lib/MarbleWidgetInputHandler.cpp (Misc functions): cleaning
+
 2008-01-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix bug that made min/max zoom in .dgml files not work.
