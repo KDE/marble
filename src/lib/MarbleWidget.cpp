@@ -429,7 +429,6 @@ void MarbleWidget::zoomView(int newZoom)
          || d->m_viewParams.m_projection == Equirectangular )
     {
         setAttribute( Qt::WA_NoSystemBackground, false );
-        // FIXME: Add Qt::transparent if 
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
@@ -440,7 +439,9 @@ void MarbleWidget::zoomView(int newZoom)
 
     emit distanceChanged( distanceString() );
 
-    // FIXME: Isn't this done by repaint()?
+    // We don't do this on every paintEvent to improve performance.
+    // Redrawing the atmosphere is only needed if the size of the 
+    // globe changes.
     drawAtmosphere();
 
     repaint();
@@ -469,7 +470,8 @@ void MarbleWidget::rotateTo(const Quaternion& quat)
 {
     d->m_viewParams.m_planetAxis = quat;
 
-    // FIXME: repaint?
+    // This method doesn't force a repaint of the view on purpose!
+    // See header file.
 }
 
 
