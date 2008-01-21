@@ -13,6 +13,9 @@
 
 		<installmap>citylights.jpg</installmap>
 
+                <minimumzoom> 1000 </minimumzoom>
+                <maximumzoom> 1500 </maximumzoom>
+
 		<LabelStyle>
 			<color>#ffffff</color>
 		</LabelStyle>
