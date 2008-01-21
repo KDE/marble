@@ -408,15 +408,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool  quickDirty() const;
     
-    void showSunShading(bool show);
-    
-    void centerSun();
-    
     SunLocator* sunLocator();
 
  public Q_SLOTS:
 
-    void updateSun(bool force = false);
+    void updateSun();
+    void centerSun();
     
     /**
      * @brief paint the widget (FIXME: Not Yet Implemented) 

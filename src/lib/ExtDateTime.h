@@ -7,12 +7,18 @@
 
 class ExtDateTime : public QDateTime {
 	public:
-		explicit ExtDateTime();
-		virtual ~ExtDateTime();
-		void update();
-		int year0();
-		long toJDN();
-		double dayFraction();
+	explicit ExtDateTime();
+	virtual ~ExtDateTime();
+	void update();
+	int year0();
+	long toJDN();
+	double dayFraction();
+	
+	void setReference(QDateTime datetime);
+	void setOffset(int offset) {m_offset = offset;}
+	
+	protected:
+	int m_offset;
 };
 
 #endif

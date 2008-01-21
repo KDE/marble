@@ -2,15 +2,14 @@
 
 #include "ExtDateTime.h"
 
-ExtDateTime::ExtDateTime() {
-	update();
+ExtDateTime::ExtDateTime() : m_offset(0) {
+	setTimeSpec(Qt::UTC);
 }
 
-ExtDateTime::~ExtDateTime() {
-}
+ExtDateTime::~ExtDateTime() {}
 
 void ExtDateTime::update() {
-	QDateTime datetime = currentDateTime().toUTC();
+	QDateTime datetime = currentDateTime().toUTC().addSecs(m_offset);
 	setDate(datetime.date());
 	setTime(datetime.time());
 }
@@ -56,4 +55,10 @@ double ExtDateTime::dayFraction() {
 	f = f/24.0;
 	
 	return f;
+}
+
+void ExtDateTime::setReference(QDateTime datetime) {
+	QDateTime cur_datetime = currentDateTime();
+	cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
+	m_offset = cur_datetime.secsTo(datetime);
 }

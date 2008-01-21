@@ -100,7 +100,6 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = new MarbleModel( this );
     construct( parent );
-    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
 }
 
 
@@ -111,7 +110,6 @@ MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = model;
     construct( parent );
-    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
 }
 
 MarbleWidget::~MarbleWidget()
@@ -190,6 +188,9 @@ void MarbleWidget::construct(QWidget *parent)
       // AutoSettings
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
+
+    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
+    connect(d->m_model->sunLocator(), SIGNAL(centerSun()), this, SLOT(centerSun()));
 }
 
 MarbleModel *MarbleWidget::model() const
@@ -431,7 +432,6 @@ void MarbleWidget::zoomView(int newZoom)
          || d->m_viewParams.m_projection == Equirectangular )
     {
         setAttribute( Qt::WA_NoSystemBackground, false );
-        // FIXME: Add Qt::transparent if 
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
@@ -443,6 +443,9 @@ void MarbleWidget::zoomView(int newZoom)
     emit distanceChanged( distanceString() );
 
     // FIXME: Isn't this done by repaint()?
+    // tackat: No, this shouldn't be done by repaint() as
+    // we don't want to have an expensive gradient overlay 
+    // for every repaint.
     drawAtmosphere();
 
     repaint();
@@ -1318,21 +1321,14 @@ QString MarbleWidget::distanceString() const
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
-void MarbleWidget::updateSun(bool force) {
+void MarbleWidget::updateSun() {
   // update the sun shading
   SunLocator* sunLocator = d->m_model->sunLocator();
-  if(sunLocator->getShow() || force) {
-    qDebug() << "Updating the sun shading map...";
-    d->m_model->showSun(sunLocator->getShow());
-    setNeedsUpdate();
-    repaint();
-  }
-}
-
-void MarbleWidget::showSunShading(bool show) {
-  SunLocator* sunLocator = d->m_model->sunLocator();
-  sunLocator->setShow(show);
-  updateSun(true);
+  qDebug() << "Updating the sun shading map...";
+  d->m_model->update();
+  setNeedsUpdate();
+  repaint();
+  qDebug() << "Finished updating the sun shading map";
 }
 
 void MarbleWidget::centerSun() {

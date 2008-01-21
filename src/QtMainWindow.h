@@ -62,7 +62,7 @@ class MainWindow : public QMainWindow
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
-    void  showSun( bool );
+    void  showSun();
     void  enterWhatsThis();
     void  aboutMarble();
     void  openFile();

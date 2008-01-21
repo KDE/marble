@@ -228,13 +228,10 @@ void TextureTile::loadTile( int x, int y, int level,
   }
   }
   
-  // TODO be able to set this somewhere
-  bool shade_citylights = false;
-  
-  if(shade_citylights && m_depth == 32) {
+  if(sunLocator != 0 && sunLocator->getCitylights() && m_depth == 32) {
   m_nighttile = loadRawTile(x, y, level, "maps/earth/citylights");
 
-  if ( m_nighttile.isNull() ) shade_citylights = false;
+  if ( m_nighttile.isNull() ) sunLocator->setCitylights(false);
   }
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
@@ -255,7 +252,7 @@ void TextureTile::loadTile( int x, int y, int level,
   const double lat_scale = -M_PI / global_height;
   const int tileHeight = m_worktile.height();
   const int tileWidth = m_worktile.width();
-  if(shade_citylights) {
+  if(sunLocator->getCitylights()) {
   for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
     double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
     QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);

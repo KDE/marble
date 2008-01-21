@@ -234,7 +234,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void stopPolling();
     
-    void showSun(bool show);
+    void update();
     
     SunLocator* sunLocator() {return m_sunLocator;}
 

@@ -1,3 +1,24 @@
+2008-01-21  Torsten Rahn  <rahn@kde.org>
+
+    * src/QtMainWindow.{cpp,h}:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/TileLoader.{cpp,h}:
+    * src/lib/SunLocator.{cpp,h}:
+    * src/lib/SunControlWidget.{ui,cpp,h}:
+    * src/lib/ExtDateTime.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/MarblePlacemarkModel.cpp:
+    * src/lib/TextureTile.cpp:
+    * src/lib/PlaceMarkLayout.cpp:
+    * src/ControlView.h:
+
+    More patches by David Roberts:
+    - code cleanup, moved some more stuff into SunLocator.
+    - implemented the date/time setting in the sun control. Added a "now" 
+      button to allow the user to return to the current time. 
+    - changed the center sun to actively follow the sun rather than just 
+      as a one time centering. 
+
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:

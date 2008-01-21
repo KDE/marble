@@ -6,11 +6,11 @@ const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Tim
 const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
-SunLocator::SunLocator() : QObject(), m_show(false) {
+SunLocator::SunLocator() : QObject(), m_show(false), m_citylights(false), m_centered(false) {
 	m_datetime = new ExtDateTime();
 	
 	m_timer = new QTimer();
-	connect(m_timer, SIGNAL(timeout()), this, SLOT(timerTimeout()));
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
 	m_timer->start(update_interval);
 }
 
@@ -97,9 +97,19 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double brightn
 	}
 }
 
-void SunLocator::timerTimeout() {
-// 	qDebug("emit updateSun()");
+void SunLocator::update() {
+	if(m_show) emit updateSun();
+	if(m_centered) emit centerSun();
+}
+
+void SunLocator::setShow(bool show) {
+	m_show = show;
 	emit updateSun();
+}
+
+void SunLocator::setCentered(bool centered) {
+	m_centered = centered;
+	if(m_centered) emit centerSun();
 }
 
 #include "SunLocator.moc"

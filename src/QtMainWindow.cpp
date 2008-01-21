@@ -41,7 +41,7 @@ namespace
     const char* DISTANCE_STRING = "Altitude:";
 }
 
-MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent)
+MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent), m_sunControlDialog(0)
 {
     setUpdatesEnabled( false );
     
@@ -114,9 +114,9 @@ void MainWindow::createActions()
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
-     m_showSunAct = new QAction( tr("S&un Shading"), this);
-     m_showSunAct->setStatusTip(tr("Configure Sun Shading"));
-     connect(m_showSunAct, SIGNAL(triggered( bool )), this, SLOT( showSun( bool )));
+     m_showSunAct = new QAction( tr("S&un Control"), this);
+     m_showSunAct->setStatusTip(tr("Configure Sun Control"));
+     connect(m_showSunAct, SIGNAL(triggered()), this, SLOT( showSun()));
 
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
@@ -262,14 +262,9 @@ void MainWindow::showStatusBar( bool isChecked )
     m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
-void MainWindow::showSun( bool isChecked )
+void MainWindow::showSun()
 {
-     if (!m_sunControlDialog) {
-         m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
-         connect(m_sunControlDialog, SIGNAL(showSunShading(bool)), m_controlView, SLOT(showSunShading(bool)));
-         connect(m_sunControlDialog, SIGNAL(centerSun()), m_controlView, SLOT(centerSun()));
-     }
-
+     if (!m_sunControlDialog) m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
      m_sunControlDialog->show();
      m_sunControlDialog->raise();
      m_sunControlDialog->activateWindow();

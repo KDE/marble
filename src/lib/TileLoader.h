@@ -130,7 +130,7 @@ class TileLoader : public QObject {
     // the mandatory most basic tile level is fully available
     static bool baseTilesAvailable( const QString& theme );
 
-    void showSun(bool show);
+    void update();
 
  private:
     void init();
