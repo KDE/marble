@@ -1,6 +1,14 @@
 2008-01-21  Torsten Rahn  <rahn@kde.org>
 
     * docs/layermanagement.txt: 
+	
+    - Adding some more concepts:
+        - DGML 1.2: basic structure and an example
+        - rendering order
+
+2008-01-21  Torsten Rahn  <rahn@kde.org>
+
+    * docs/layermanagement.txt: 
 
     - Initial overview over planned layer management class ("LMC") concept.
 
