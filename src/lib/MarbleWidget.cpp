@@ -1002,7 +1002,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
     // Add to GlobeScanlineTextureMapper.
-    bool fog = true;
+    bool fog = false;
     if (fog == true)
         drawFog();
 
