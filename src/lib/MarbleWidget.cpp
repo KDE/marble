@@ -191,6 +191,7 @@ void MarbleWidget::construct(QWidget *parent)
 
     connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
     connect(d->m_model->sunLocator(), SIGNAL(centerSun()), this, SLOT(centerSun()));
+    connect(d->m_model->sunLocator(), SIGNAL(reenableWidgetInput()), this, SLOT(enableInput()));
 }
 
 MarbleModel *MarbleWidget::model() const
@@ -879,6 +880,35 @@ void MarbleWidget::drawAtmosphere()
     }
 }
 
+void MarbleWidget::drawFog()
+{
+    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
+) {
+        int  imageHalfWidth  = width() / 2;
+        int  imageHalfHeight = height() / 2;
+
+        // Recalculate the atmosphere effect and paint it to canvasImage.
+        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                            radius() );
+
+        // FIXME: Add a cosine relationship
+        grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
+        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
+
+        QBrush    brush1( grad1 );
+        QPen      pen1( Qt::NoPen );
+        QPainter  painter( this );
+        painter.setBrush( brush1 );
+        painter.setPen( pen1 );
+        painter.setRenderHint( QPainter::Antialiasing, false );
+
+        // FIXME: Cut out what's really needed
+        painter.drawEllipse( imageHalfWidth - radius(),
+                            imageHalfHeight - radius(),
+                            2 * radius(),
+                            2 * radius() );
+    }
+}
 
 void MarbleWidget::setActiveRegion()
 {
@@ -969,6 +999,12 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.m_planetAxis;
     d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
     d->m_justModified                   = false;
+
+    //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
+    // Add to GlobeScanlineTextureMapper.
+    bool fog = true;
+    if (fog == true)
+        drawFog();
 
     customPaint( &painter );
 
@@ -1338,10 +1374,20 @@ void MarbleWidget::centerSun() {
   double lon = sunLocator->getLon();
   qDebug() << "Centering on Sun at " << lat << lon;
   centerOn(lon, lat);
+  disableInput();
 }
 
 SunLocator* MarbleWidget::sunLocator() {
   return d->m_model->sunLocator();
+}
+
+void MarbleWidget::enableInput() {
+  if(!d->m_inputhandler) setInputHandler(new MarbleWidgetDefaultInputHandler);
+}
+
+void MarbleWidget::disableInput() {
+  setInputHandler(NULL);
+  setCursor(Qt::ArrowCursor);
 }
 
 #include "MarbleWidget.moc"

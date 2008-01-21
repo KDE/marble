@@ -414,6 +414,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void updateSun();
     void centerSun();
+    void enableInput();
+    void disableInput();
     
     /**
      * @brief paint the widget (FIXME: Not Yet Implemented) 
@@ -847,6 +849,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int   fromLogScale(int);
 
     void  drawAtmosphere();
+    void  drawFog();
 
     void  setActiveRegion();
 

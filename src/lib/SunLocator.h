@@ -40,6 +40,7 @@ class SunLocator : public QObject {
 	Q_SIGNALS:
 	void updateSun();
 	void centerSun();
+	void reenableWidgetInput();
 	
 	protected:
 	double m_lat;

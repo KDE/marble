@@ -1,5 +1,21 @@
 2008-01-21  Torsten Rahn  <rahn@kde.org>
 
+    * docs/layermanagement.txt: 
+
+    - Initial overview over planned layer management class ("LMC") concept.
+
+    * src/lib/MarbleWidget.{cpp,h}:
+
+    - Deprecated method to create fog (it's unfortunately too slow 
+      as is, but I commit it to get it taken into consideration for the LMC).
+
+    * src/lib/MarbleWidget.h:
+    * src/lib/SunLocator.{cpp,h}:
+
+    - Patch by David Roberts to disable InputHandler
+
+2008-01-21  Torsten Rahn  <rahn@kde.org>
+
     * src/QtMainWindow.{cpp,h}:
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/TileLoader.{cpp,h}:

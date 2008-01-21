@@ -110,6 +110,7 @@ void SunLocator::setShow(bool show) {
 void SunLocator::setCentered(bool centered) {
 	m_centered = centered;
 	if(m_centered) emit centerSun();
+	else emit reenableWidgetInput();
 }
 
 #include "SunLocator.moc"
