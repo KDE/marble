@@ -39,6 +39,11 @@ Low hanging (but important) fruits:
     To get useful temperature/precipation/... maps we need to be able
     to add items to the legend in the .dgml file:
 
+    This is also a first step towards the new DGML version format that 
+    we need for the new layer management class.
+
+    see also: docs/layermanagement.txt.
+
 <Legend>
     <heading>Temperature</heading>
     <LegendItem>

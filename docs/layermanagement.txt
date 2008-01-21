@@ -25,11 +25,12 @@ Note that we distinguish between "BACKEND"-classes and the objects based on the 
 	
 - "Execution order" of the different backends should be based on the following mechanisms:
 	a) each backend should provide "hardcoded" hints which describe dependencies (e.g. the texture colorization depends on the result of a texturemapping backend ) and allowed ranges for the rendering order (e.g. floating items should always be displayed on top of the map,  a starry background needs to get drawn before the globe is painted)
-	b) the layermanagement class needs to fetch information from the .dgml-parser about the different types of backends that get used in a map. The .dgml file also needs to provide information about the rendering order.
+	b) In Marble the structure of each map gets described in the map's .dgml file. So the layermanagement class needs to fetch information from the .dgml-parser about the different types of backends that get used in a map. The .dgml file also needs to provide information about the rendering order.
 	c) for backend types where there are no hard requirements on the rendering order the LMC should decide itself which order to take.
 
-- According to the concept described so far it should be possible to paint different layers based on the very same backend  directly on top of each other (e.g. a cloud layer on top of a satellite map layer. This would result in two different layers. However for reasons of performance it needs to be possible to merge the data into a single layer ("MergedLayer"). 
-This gets already done for placemarks where data from different files gets merged into a single file. It also gets done already for clouds on top of the satellite image data. However what's missing is a more generic approach where a MergedLayerPainter class operates directly on the tiles based on the information it receives from the LMC. Before telling the MergedLayerPainter class which layers need to get painted on top of the tiles the LMC needs to check whether tiles or sourceimage data is available for the map. If there is no such data available the LMC needs to either notify the TileLoader that it needs to create tiles or the LMC will simply ignore the missing data and will skip asking the MergedLayerPainter to render the missing data. 
+- According to the concept described so far it should be possible to paint different layers based on the very same backend  directly on top of each other (e.g. a cloud layer on top of a satellite map layer. Normally this would result in two different layers. However for reasons of performance it needs to be possible to merge the data into a single layer right from the start("MergedLayer").
+
+This gets already done for placemarks in current SVN where data from different files gets merged into a single file. It also gets done already for clouds on top of the satellite image data. However what's missing is a more generic approach where a MergedLayerPainter class operates directly on the tiles based on the information it receives from the LMC. Before telling the MergedLayerPainter class which layers need to get painted on top of the tiles the LMC needs to check whether tiles or sourceimage data is available for the map. If there is no such data available the LMC needs to either notify the TileLoader that it needs to create tiles or the LMC will simply ignore the missing data and will skip asking the MergedLayerPainter to render the missing data. 
 
 - The plugin-backend concept should allow CUSTOM BACKENDS created by third party developers. 
 - Creating new geographical features on the map should happen using a Qt-like API (which would include the QPainter API to draw in screen coordinates):
@@ -47,7 +48,7 @@ Code snippet:
 	painter.drawGeoEllipse( here.lon(), here.lat(), 5, 5 ); 
 	
 
-- It should be possible to use this Qt-like Geo-API either from outside the MarbleWidget or from inside the custom backend plugin.
+- It should be possible to use this Qt-style Geo-API either from outside the MarbleWidget or from inside the custom backend plugin.
 
 
 FUTURE low-priority enhancements (for usage in "real" light GIS apps that might use Marble in the future):
