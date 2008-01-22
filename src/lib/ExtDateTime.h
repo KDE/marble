@@ -7,33 +7,35 @@
 #include <QDateTime>
 #include <QTimer>
 
-class ExtDateTime : public QObject {
-	Q_OBJECT
+class ExtDateTime : public QObject
+{
+    Q_OBJECT
 	
-	public:
-	explicit ExtDateTime();
-	virtual ~ExtDateTime();
-	int year0();
-	long toJDN();
-	double dayFraction();
-	void setNow() {m_datetime = QDateTime::currentDateTime().toUTC();}
+ public:
+    explicit ExtDateTime();
+    virtual ~ExtDateTime();
+
+    int year0();
+    long toJDN();
+    double dayFraction();
+    void setNow() {m_datetime = QDateTime::currentDateTime().toUTC();}
 	
-	QDateTime datetime() {return m_datetime;}
+    QDateTime datetime() {return m_datetime;}
 	
-	void setDateTime(QDateTime datetime);
-	void setSpeed(int speed) {m_speed = speed;}
+    void setDateTime(QDateTime datetime);
+    void setSpeed(int speed) {m_speed = speed;}
 	
-	private Q_SLOTS:
-	void timerTimeout();
+ private Q_SLOTS:
+    void timerTimeout();
 	
-	Q_SIGNALS:
-	void timeChanged();
+ Q_SIGNALS:
+    void timeChanged();
 	
-	protected:
-	int m_speed;
-	QTimer* m_timer;
-	QDateTime m_datetime;
-	int m_lastmin;
+ protected:
+    int        m_speed;
+    QTimer    *m_timer;
+    QDateTime  m_datetime;
+    int        m_lastmin;
 };
 
 #endif

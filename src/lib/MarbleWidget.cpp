@@ -134,10 +134,12 @@ void MarbleWidget::construct()
     setHome( -9.4, 54.8, 1050 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
-             this,    SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
+             this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
-    connect( d->m_model, SIGNAL(themeChanged( QString )), SIGNAL(themeChanged( QString )) );
-    connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
+    connect( d->m_model, SIGNAL( themeChanged( QString ) ),
+                         SIGNAL( themeChanged( QString ) ) );
+    connect( d->m_model, SIGNAL( modelChanged() ),
+             this,       SLOT( updateChangedMap() ) );
 
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
              this,       SLOT( updateRegion( BoundingBox) ) );
@@ -190,9 +192,12 @@ void MarbleWidget::construct()
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
 
-    connect(d->m_model->sunLocator(), SIGNAL(updateSun()), this, SLOT(updateSun()));
-    connect(d->m_model->sunLocator(), SIGNAL(centerSun()), this, SLOT(centerSun()));
-    connect(d->m_model->sunLocator(), SIGNAL(reenableWidgetInput()), this, SLOT(enableInput()));
+    connect( d->m_model->sunLocator(), SIGNAL( updateSun() ),
+             this,                     SLOT( updateSun() ) );
+    connect( d->m_model->sunLocator(), SIGNAL( centerSun() ),
+             this,                     SLOT( centerSun() ) );
+    connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
+             this,                     SLOT( enableInput() ) );
 }
 
 
@@ -1400,13 +1405,16 @@ SunLocator* MarbleWidget::sunLocator()
     return d->m_model->sunLocator();
 }
 
-void MarbleWidget::enableInput() {
-  if(!d->m_inputhandler) setInputHandler(new MarbleWidgetDefaultInputHandler);
+void MarbleWidget::enableInput()
+{
+    if ( !d->m_inputhandler ) 
+        setInputHandler( new MarbleWidgetDefaultInputHandler );
 }
 
-void MarbleWidget::disableInput() {
-  setInputHandler(NULL);
-  setCursor(Qt::ArrowCursor);
+void MarbleWidget::disableInput()
+{
+    setInputHandler( NULL );
+    setCursor( Qt::ArrowCursor );
 }
 
 #include "MarbleWidget.moc"

@@ -1,3 +1,14 @@
+2008-01-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Make files follow coding standards again:
+	* src/lib/ExtDateTime.{h,cpp}
+	* src/lib/MarbleWidget.cpp
+	* src/lib/MergedLayerPainter.{h,cpp}
+	* src/lib/SunControlWidget.cpp
+	* src/lib/SunLocator.cpp
+	* src/lib/TextureTile.{h,cpp}
+	* src/lib/TileLoader.cpp
+	
 2008-01-22  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/SunLocator.{cpp,h}:

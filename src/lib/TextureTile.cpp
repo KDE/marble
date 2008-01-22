@@ -85,7 +85,8 @@ TextureTile::~TextureTile()
 }
 
 void TextureTile::loadTile( int x, int y, int level, 
-			    const QString& theme, bool requestTileUpdate, SunLocator* sunLocator )
+			    const QString& theme, bool requestTileUpdate, 
+                            SunLocator* sunLocator )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
   m_used = true; // Needed to avoid frequent deletion of tiles
@@ -105,9 +106,12 @@ void TextureTile::loadTile( int x, int y, int level,
   m_painter.setTile(&m_worktile);
 
   // TODO be able to set this somewhere
-  bool cloudlayer = true; if(cloudlayer && m_depth == 32 && level < 2) m_painter.paintClouds();
+  bool  cloudlayer = true; 
+  if ( cloudlayer && m_depth == 32 && level < 2 )
+      m_painter.paintClouds();
 
-  if(sunLocator != 0 && sunLocator->getShow()) m_painter.paintSunShading(sunLocator);
+  if ( sunLocator != 0 && sunLocator->getShow() )
+      m_painter.paintSunShading(sunLocator);
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
@@ -133,7 +137,8 @@ void TextureTile::loadTile( int x, int y, int level,
   }
 }
 
-void TextureTile::reloadTile( int x, int y, int level, const QString& theme, SunLocator* sunLocator )
+void TextureTile::reloadTile( int x, int y, int level, 
+                              const QString& theme, SunLocator* sunLocator )
 {
     // qDebug() << "slotLoadTile variables: |" << theme << "|" 
     // << level << "|" << x << "|" << y;

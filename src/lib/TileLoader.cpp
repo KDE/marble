@@ -39,14 +39,19 @@
 #endif
 
 
-TileLoader::TileLoader( HttpDownloadManager *downloadManager, SunLocator* sunLocator ) : m_sunLocator(sunLocator)
+TileLoader::TileLoader( HttpDownloadManager *downloadManager, 
+                        SunLocator* sunLocator )
+    : m_sunLocator(sunLocator)
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
     init();
 }
 
-TileLoader::TileLoader( const QString& theme, HttpDownloadManager *downloadManager, SunLocator* sunLocator ) : m_sunLocator(sunLocator)
+TileLoader::TileLoader( const QString& theme, 
+                        HttpDownloadManager *downloadManager, 
+                        SunLocator *sunLocator )
+  : m_sunLocator( sunLocator )
 {
     m_downloadManager = 0;
     setDownloadManager( downloadManager );
@@ -71,15 +76,13 @@ void TileLoader::init()
 
 void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
 {
-    if ( m_downloadManager != 0 )
-    {
+    if ( m_downloadManager != 0 ) {
         m_downloadManager->disconnect(this);
         m_downloadManager = NULL;
     }
 
     m_downloadManager = downloadManager;
-    if ( m_downloadManager != 0 )
-    {
+    if ( m_downloadManager != 0 ) {
         connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
                  this,              SLOT( reloadTile( QString, QString ) ) );
     }
@@ -190,11 +193,9 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
 int TileLoader::levelToRow( int level )
 {
-    if ( level < 0 )
-    {
-        qDebug()
-        << QString( "TileLoader::levelToRow(): Invalid level: %1" )
-        .arg( level );
+    if ( level < 0 ) {
+        qDebug() << QString( "TileLoader::levelToRow(): Invalid level: %1" )
+            .arg( level );
         return 0;
     }
     return (int)pow( 2.0, (double)( level ) );
@@ -202,11 +203,9 @@ int TileLoader::levelToRow( int level )
 
 int TileLoader::levelToColumn( int level )
 {
-    if ( level < 0 )
-    {
-        qDebug()
-        << QString( "TileLoader::levelToColumn(): Invalid level: %1" )
-        .arg( level );
+    if ( level < 0 ) {
+        qDebug() << QString( "TileLoader::levelToColumn(): Invalid level: %1" )
+            .arg( level );
         return 0;
     }
     return (int)pow( 2.0, (double)( level + 1 ) );
@@ -214,11 +213,9 @@ int TileLoader::levelToColumn( int level )
 
 int TileLoader::rowToLevel( int row )
 {
-    if ( row < 1 )
-    {
-        qDebug()
-        << QString( "TileLoader::rowToLevel(): Invalid number of rows: %1" )
-        .arg( row );
+    if ( row < 1 )    {
+        qDebug() << QString( "TileLoader::rowToLevel(): Invalid number of rows: %1" )
+            .arg( row );
         return 0;
     }
     return (int)( log( row ) / log( 2 ) );
@@ -226,10 +223,8 @@ int TileLoader::rowToLevel( int row )
 
 int TileLoader::columnToLevel( int column )
 {
-    if ( column < 2 )
-    {
-        qDebug()
-        << QString( "TileLoader::columnToLevel(): Invalid number of columns: %1" )
+    if ( column < 2 ) {
+        qDebug() << QString( "TileLoader::columnToLevel(): Invalid number of columns: %1" )
         .arg( column );
         return 0;
     }
@@ -268,7 +263,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
         ++trylevel;
     }
 
-    if ( tilelevel == -1 ){
+    if ( tilelevel == -1 ) {
         qDebug("No Tiles Found!");
     }
 

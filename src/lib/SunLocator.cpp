@@ -20,7 +20,8 @@ SunLocator::~SunLocator() {
     delete m_datetime;
 }
 
-void SunLocator::updatePosition() {
+void SunLocator::updatePosition()
+{
     // Find the orientation of the sun.
     // Find current Julian day number relative to epoch J2000.
     long d = m_datetime->toJDN() - J2000;
@@ -36,6 +37,7 @@ void SunLocator::updatePosition() {
     m_lon = M_PI - m_datetime->dayFraction() * 2*M_PI;
     m_lat = -delta;
 }
+
 
 // FIXME: Use lon, lat in Marble, not lat, lon
 double SunLocator::shading(double lat, double lon)
@@ -111,21 +113,27 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
     }
 }
 
-void SunLocator::update() {
+void SunLocator::update()
+{
     updatePosition();
-    if(m_show) emit updateSun();
-    if(m_centered) emit centerSun();
+    if ( m_show )
+        emit updateSun();
+    if ( m_centered )
+        emit centerSun();
 }
 
-void SunLocator::setShow(bool show) {
+void SunLocator::setShow(bool show)
+{
     m_show = show;
     updatePosition();
+
     emit updateSun();
 }
 
-void SunLocator::setCentered(bool centered) {
+void SunLocator::setCentered(bool centered)
+{
     m_centered = centered;
-    if( m_centered ) {
+    if ( m_centered ) {
         updatePosition();
         emit centerSun();
     } else

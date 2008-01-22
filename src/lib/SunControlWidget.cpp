@@ -36,7 +36,8 @@ SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
     setModal( false );
 	
     updateDateTime();
-    connect(m_sunLocator->datetime(), SIGNAL(timeChanged()), this, SLOT(updateDateTime()));
+    connect( m_sunLocator->datetime(), SIGNAL( timeChanged() ),
+             this,                     SLOT( updateDateTime() ) );
 }
 
 SunControlWidget::~SunControlWidget()
@@ -53,7 +54,8 @@ void SunControlWidget::showSunClicked(bool checked)
     emit showSun(checked);
 }
 
-void SunControlWidget::nowClicked(bool checked) {
+void SunControlWidget::nowClicked(bool checked)
+{
     m_sunLocator->datetime()->setNow();
     updateDateTime();
 }
@@ -76,7 +78,8 @@ void SunControlWidget::centerSunClicked(bool checked)
     m_sunLocator->setCentered(checked);
 }
 
-void SunControlWidget::updateDateTime() {
+void SunControlWidget::updateDateTime()
+{
     QDateTime datetime = m_sunLocator->datetime()->datetime().toLocalTime();
 	
     QDate  date     = datetime.date();
@@ -135,9 +138,10 @@ void SunControlWidget::datetimeChanged(QDateTime datetime)
     m_sunLocator->update();
 }
 
-void SunControlWidget::speedChanged(int speed) {
-	m_sunLocator->datetime()->setSpeed(speed);
-	m_uiWidget.speedLabel->setText(QString("%1x").arg(speed));
+void SunControlWidget::speedChanged(int speed)
+{
+    m_sunLocator->datetime()->setSpeed( speed );
+    m_uiWidget.speedLabel->setText( QString( "%1x" ).arg( speed ) );
 }
 
 #include "SunControlWidget.moc"
