@@ -29,6 +29,7 @@ class MergedLayerPainter : public QObject
 	
  private:
     QImage loadRawTile(const QString& theme);
+    int maxDivisor( int maximum, int fullLength );
 	
  protected:
     QImage* m_tile;

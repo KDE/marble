@@ -71,6 +71,12 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
     const double lat_scale = -M_PI / global_height;
     const int tileHeight = m_tile->height();
     const int tileWidth = m_tile->width();
+
+    // First we determine the supporting point interval for the interpolation.
+    const int n = maxDivisor( 30, tileWidth );
+    const double nInverse = 1.0 / (double)(n);
+    const int ipRight = n * (int)( tileWidth / n );
+
     if ( sunLocator->getCitylights() ) {
         QImage nighttile = loadRawTile( "maps/earth/citylights" );
         if ( nighttile.isNull() )
@@ -79,24 +85,96 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
             double lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
+            double lastShade = 0.0;
+
             for ( int cur_x = 0; cur_x < tileWidth; ++cur_x) {
+
+                bool interpolate = ( cur_x != 0 && cur_x < ipRight );
+
+                if ( interpolate == true ) cur_x+= n - 1;
+
                 double lon   = lon_scale * (m_x * tileWidth + cur_x);
                 double shade = sunLocator->shading( lat, lon );
-                sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
-                scanline++;
-                nscanline++;
+
+                if ( interpolate == true ) {
+
+                    // if the shading didn't change across the interpolation
+                    // interval move on and don't change anything.
+                    if ( shade == lastShade && shade == 1.0 ) {
+                        scanline += n;
+                        nscanline += n;
+                        continue;
+                    }
+                    else {
+                        double interpolatedShade = lastShade;
+                        const double shadeDiff = ( shade - lastShade ) * nInverse;
+
+                        // Now we do linear interpolation across the tile width
+                        for ( int t = 1; t < n; ++t )
+                        {
+                            interpolatedShade += shadeDiff;
+                            sunLocator->shadePixelComposite( *scanline, *nscanline, interpolatedShade );
+                            scanline++;
+                            nscanline++;
+                        }
+                    }
+                }
+
+                // Make sure we don't exceed the image memory
+                if ( cur_x < tileWidth ) {
+                    sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    scanline++;
+                    nscanline++;
+                }
+
+                lastShade = shade;
             }
         }
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             double lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
-            for ( int cur_x = 0; cur_x < tileWidth; ++cur_x ) {
-                double  lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                double  shade = sunLocator->shading(lat, lon);
 
-                sunLocator->shadePixel( *scanline, shade );
-                scanline++;
+            double lastShade = 0.0;
+
+            for ( int cur_x = 0; cur_x <= tileWidth; ++cur_x ) {
+
+                bool interpolate = ( cur_x != 0 && cur_x < ipRight );
+
+                if ( interpolate == true ) cur_x+= n - 1;
+
+                double lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                double shade = sunLocator->shading(lat, lon);
+
+                if ( interpolate == true ) {
+
+                    // if the shading didn't change across the interpolation
+                    // interval move on and don't change anything.
+                    if ( shade == lastShade && shade == 1.0 ) {
+                        scanline += n;
+                        continue;
+                    }
+                    else {
+                        double interpolatedShade = lastShade;
+                        const double shadeDiff = ( shade - lastShade ) * nInverse;
+
+                        // Now we do linear interpolation across the tile width
+                        for ( int t = 1; t < n; ++t )
+                        {
+                            interpolatedShade += shadeDiff;
+                            sunLocator->shadePixel( *scanline, interpolatedShade );
+                            scanline++;
+                        }
+                    }
+                }
+
+                // Make sure we don't exceed the image memory
+                if ( cur_x < tileWidth ) {
+                    sunLocator->shadePixel( *scanline, shade );
+                    scanline++;
+                }
+
+                lastShade = shade;
             }
         }
     }
@@ -252,6 +330,26 @@ QImage MergedLayerPainter::loadRawTile(const QString& theme)
   }
   
   return QImage();
+}
+
+int MergedLayerPainter::maxDivisor( int maximum, int fullLength )
+{
+    // Find the optimal interpolation interval n for the 
+    // current image canvas width
+    int best = 2;
+
+    int  nEvalMin = fullLength;
+    for ( int it = 1; it <= maximum; ++it ) {
+        // The optimum is the interval which results in the least amount
+        // supporting points taking into account the rest which can't 
+        // get used for interpolation.
+        int nEval = fullLength / it + fullLength % it;
+        if ( nEval < nEvalMin ) {
+            nEvalMin = nEval;
+            best = it; 
+        }
+    }
+    return best;
 }
 
 #include "MergedLayerPainter.moc"

@@ -1,4 +1,11 @@
-2008-01-21  Inge Wallin  <inge@lysator.liu.se>
+2008-01-22  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MergedLayerPainter.{cpp,h}:
+    - Shading speedup by linear interpolation.
+      I'd estimate it's about four times as fast - 
+      of course at expense of clear code :-/ 
+
+2008-01-22  Inge Wallin  <inge@lysator.liu.se>
 
 	Make files follow coding standards again:
 	* src/lib/ExtDateTime.{h,cpp}
