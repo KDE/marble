@@ -135,6 +135,7 @@ will skip asking the MergedLayerPainter to render the missing data.
   have. (Examples for tile expiration: Real-time cloud layers,
   Improvements for OpenStreetMap data).
 
+- LMC should also work fine with OpenGL-based backend-plugins.
 
 FUTURE low-priority enhancements (for usage in "real" light GIS apps
 that might use Marble in the future):

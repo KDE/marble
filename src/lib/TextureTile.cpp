@@ -111,7 +111,7 @@ void TextureTile::loadTile( int x, int y, int level,
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
-  bool tileIdVisible = true; if(tileIdVisible) m_painter.paintTileId(theme);
+  bool tileIdVisible = false; if(tileIdVisible) m_painter.paintTileId(theme);
 
   switch ( m_depth ) {
       case 32:
