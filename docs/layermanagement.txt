@@ -26,7 +26,7 @@ Note that we distinguish between "BACKEND"-classes and the objects based on the 
 - "Execution order" of the different backends should be based on the following mechanisms:
 	a) each backend should provide "hardcoded" hints which describe dependencies (e.g. the texture colorization depends on the result of a texturemapping backend ) and allowed ranges for the rendering order (e.g. floating items should always be displayed on top of the map,  a starry background needs to get drawn before the globe is painted)
 	b) In Marble the structure of each map gets described in the map's .dgml file. So the layermanagement class needs to fetch information from the .dgml-parser about the different types of backends that get used in a map. The .dgml file also needs to provide information about the rendering order.
-	c) for backend types where there are no hard requirements on the rendering order the LMC should decide itself which order to take.
+	c) for backend types where there are no hard requirements on the rendering order the LMC should decide itself which order to take. So if for example a custom backend-plugin doesn't get mentioned in the .dgml file the LMC should make a  well-educated guess at which place inside the layer structure it would be best to insert the layer.
 
 - According to the concept described so far it should be possible to paint different layers based on the very same backend  directly on top of each other (e.g. a cloud layer on top of a satellite map layer. Normally this would result in two different layers. However for reasons of performance it needs to be possible to merge the data into a single layer right from the start("MergedLayer").
 
@@ -49,6 +49,8 @@ Code snippet:
 	
 
 - It should be possible to use this Qt-style Geo-API either from outside the MarbleWidget or from inside the custom backend plugin.
+
+- It should be possible to create custom PROPRIETARY PLUGINS which are able to provide PROPRIETARY DATA in a manner that prevents exporting the whole data at once (yes, while we strongly believe in free maps and free data we would also like to see proprietary apps use our widget - as always patches sent to us under a free license are very much appreciated).
 
 - Expiring layer data: The LMC should get notified about expiration dates of layer data. If layer data expires the LMC should trigger a reload of each chunk of data. Initially it would be enough if we supported reloading the whole data set of a single layer. In the future reloading single data chunks of a layer would be nice to have. (Examples for tile expiration: Real-time cloud layers, Improvements for OpenStreetMap data).
 
