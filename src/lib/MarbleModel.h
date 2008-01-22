@@ -236,6 +236,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     
     void update();
     
+    // FIXME: Breaks compatibility
     SunLocator* sunLocator() {return m_sunLocator;}
 
  public Q_SLOTS:
@@ -286,6 +287,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
  private:
     MarbleModelPrivate  * const d;
+    // FIXME: Breaks forward compatibility; put in MarbleModelPrivate.
     SunLocator* m_sunLocator;
 };
 

@@ -64,8 +64,8 @@ void TileCreator::run()
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
-    int  imageWidth  = testImage.size().width();
-    int  imageHeight = testImage.size().height();
+    uint  imageWidth  = testImage.size().width();
+    uint  imageHeight = testImage.size().height();
 
     qDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
@@ -101,11 +101,11 @@ void TileCreator::run()
     if ( needsScaling ) 
         qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
-    int  stdImageWidth  = 2 * maxRows * tileSize;
+    uint  stdImageWidth  = 2 * maxRows * tileSize;
     if ( stdImageWidth == 0 )
         stdImageWidth = 2 * tileSize;
-    int  stdImageHeight  = maxRows * tileSize;
 
+    uint  stdImageHeight  = maxRows * tileSize;
     if ( stdImageWidth != imageWidth ) {
         qDebug() << 
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
@@ -261,13 +261,13 @@ void TileCreator::run()
                     tile.setColorTable( grayScalePalette );
                     uchar* destLine;
 
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topleft.scanLine( 2 * y );
-                        for ( int x = 0; x < tileSize / 2; ++x )
+                        for ( uint x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2*x ];
                     }
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < tileSize / 2; ++y ) {
                         destLine = tile.scanLine( y );
                         const uchar* srcLine = img_topright.scanLine( 2 * y );
                         for ( uint x = tileSize / 2; x < tileSize; ++x )
@@ -291,13 +291,13 @@ void TileCreator::run()
 
                     QRgb* destLine;
 
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topleft.scanLine( 2 * y );
                         for ( uint x = 0; x < tileSize / 2; ++x )
                             destLine[x] = srcLine[ 2 * x ];
                     }
-                    for ( int y = 0; y < tileSize / 2; ++y ) {
+                    for ( uint y = 0; y < tileSize / 2; ++y ) {
                         destLine = (QRgb*) tile.scanLine( y );
                         const QRgb* srcLine = (QRgb*) img_topright.scanLine( 2 * y );
                         for ( uint x = tileSize / 2; x < tileSize; ++x )

@@ -1,10 +1,20 @@
-// (c) 2008 David Roberts
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2008      David Roberts
+//
+
 
 #ifndef SUNCONTROLWIDGET_H
 #define SUNCONTROLWIDGET_H
 
-#include <QDebug>
+
 #include <QtGui/QDialog>
+#include <QDebug>
 #include <QTimer>
 
 #include "ui_SunControlWidget.h"
@@ -12,34 +22,36 @@
 
 #include "marble_export.h"
 
-class MARBLE_EXPORT SunControlWidget : public QDialog {
-	Q_OBJECT
+
+class MARBLE_EXPORT SunControlWidget : public QDialog
+{
+    Q_OBJECT
 	
-	public:
-	SunControlWidget(QWidget* parent, SunLocator* sunLocator);
-	~SunControlWidget();
+ public:
+    SunControlWidget(QWidget* parent, SunLocator* sunLocator);
+    ~SunControlWidget();
+
+ private Q_SLOTS:
+    void showSunClicked(bool checked);
+    void nowClicked(bool checked);
+    void showSunShadingClicked(int index);
+    void centerSunClicked(bool checked);
+    void timeChanged(const QTime& time);
+    void dateChanged();
+    void hourChanged(int hour);
 	
-	private Q_SLOTS:
-	void showSunClicked(bool checked);
-	void nowClicked(bool checked);
-	void showSunShadingClicked(int index);
-	void centerSunClicked(bool checked);
-	void timeChanged(const QTime& time);
-	void dateChanged();
-	void hourChanged(int hour);
+    void updateDateTime();
 	
-	void updateDateTime();
+ Q_SIGNALS:
+    void showSun(bool show);
 	
-	Q_SIGNALS:
-	void showSun(bool show);
+ private:
+    void datetimeChanged(QDateTime datetime);
 	
-	private:
-	void datetimeChanged(QDateTime datetime);
-	
-	protected:
-	Ui::SunControlWidget m_uiWidget;
-	SunLocator* m_sunLocator;
-	QTimer* m_timer;
+ protected:
+    Ui::SunControlWidget m_uiWidget;
+    SunLocator* m_sunLocator;
+    QTimer* m_timer;
 };
 
 #endif

@@ -843,7 +843,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  disconnectNotify ( const char * signal );
 
  private:
-    void  construct( QWidget *parent );
+    void  construct();
 
     int   toLogScale(int);
     int   fromLogScale(int);

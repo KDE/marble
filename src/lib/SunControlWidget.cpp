@@ -1,111 +1,146 @@
-// (c) 2008 David Roberts
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2008      David Roberts
+//
 
-#include <QtGui/QComboBox>
 
 #include "SunControlWidget.h"
 
-SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator) : QDialog(parent), m_sunLocator(sunLocator) {
-	m_uiWidget.setupUi(this);
+SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
+    : QDialog( parent ),
+      m_sunLocator( sunLocator )
+{
+    m_uiWidget.setupUi( this );
 	
-	connect(m_uiWidget.showToolButton, SIGNAL(clicked(bool)), this, SLOT(showSunClicked(bool)));
-	connect(m_uiWidget.centerToolButton, SIGNAL(clicked(bool)), this, SLOT(centerSunClicked(bool)));
-	connect(m_uiWidget.nowToolButton, SIGNAL(clicked(bool)), this, SLOT(nowClicked(bool)));
-	connect(m_uiWidget.sunShadingComboBox, SIGNAL( currentIndexChanged ( int ) ), this, SLOT(showSunShadingClicked( int )));
-	connect(m_uiWidget.calendarWidget, SIGNAL(selectionChanged()), this, SLOT(dateChanged()));
-	connect(m_uiWidget.timeEdit, SIGNAL(timeChanged(const QTime&)), this, SLOT(timeChanged(const QTime&)));
-	connect(m_uiWidget.timeSlider, SIGNAL(sliderMoved(int)), this, SLOT(hourChanged(int)));
+    connect( m_uiWidget.showToolButton,   SIGNAL( clicked( bool ) ),
+             this,                        SLOT( showSunClicked( bool ) ) );
+    connect( m_uiWidget.centerToolButton, SIGNAL( clicked( bool ) ),
+             this,                        SLOT( centerSunClicked( bool ) ) );
+    connect( m_uiWidget.nowToolButton,    SIGNAL( clicked( bool ) ), 
+             this,                        SLOT( nowClicked( bool ) ) );
+    connect( m_uiWidget.sunShadingComboBox, SIGNAL(  currentIndexChanged ( int ) ), 
+             this,                          SLOT( showSunShadingClicked( int ) ) );
+    connect( m_uiWidget.calendarWidget,   SIGNAL( selectionChanged() ),
+             this,                        SLOT( dateChanged() ) );
+    connect( m_uiWidget.timeEdit,         SIGNAL( timeChanged( const QTime& ) ),
+             this,                        SLOT( timeChanged( const QTime& ) ) );
+    connect( m_uiWidget.timeSlider,       SIGNAL( sliderMoved( int ) ),
+             this,                        SLOT( hourChanged( int ) ) );
 	
-	setModal( false );
+    setModal( false );
 	
-	updateDateTime();
-	m_timer = new QTimer(this);
-	connect(m_timer, SIGNAL(timeout()), this, SLOT(updateDateTime()));
-	m_timer->start(1000);
+    updateDateTime();
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(updateDateTime()));
+    m_timer->start(1000);
 }
 
-SunControlWidget::~SunControlWidget() {
-	delete m_timer;
+SunControlWidget::~SunControlWidget()
+{
+    delete m_timer;
 }
 
-void SunControlWidget::showSunClicked(bool checked) {
-	if(checked) m_uiWidget.showToolButton->setText("&Hide");
-	else m_uiWidget.showToolButton->setText("Sh&ow");
-	emit showSun(checked);
+void SunControlWidget::showSunClicked(bool checked)
+{
+    if ( checked )
+        m_uiWidget.showToolButton->setText( "&Hide" );
+    else
+        m_uiWidget.showToolButton->setText( "Sh&ow" );
+
+    emit showSun(checked);
 }
 
-void SunControlWidget::nowClicked(bool checked) {
-	m_sunLocator->datetime()->setOffset(0);
-	updateDateTime();
+void SunControlWidget::nowClicked(bool checked)
+{
+    m_sunLocator->datetime()->setOffset(0);
+    updateDateTime();
 }
 
-void SunControlWidget::showSunShadingClicked( int index ) {
+void SunControlWidget::showSunShadingClicked( int index )
+{
     if ( index == 0 ) {
-        m_sunLocator->setShow(false);
+        m_sunLocator->setShow( false );
     } else if ( index == 1 ) {
-        m_sunLocator->setCitylights(false);
-        m_sunLocator->setShow(true);
+        m_sunLocator->setCitylights( false );
+        m_sunLocator->setShow( true );
     } else if ( index == 2 ) {
-        m_sunLocator->setCitylights(true);
-        m_sunLocator->setShow(true);
+        m_sunLocator->setCitylights( true );
+        m_sunLocator->setShow( true );
     }
 }
 
-void SunControlWidget::centerSunClicked(bool checked) {
-	m_sunLocator->setCentered(checked);
+void SunControlWidget::centerSunClicked(bool checked)
+{
+    m_sunLocator->setCentered(checked);
 }
 
-void SunControlWidget::updateDateTime() {
-	m_sunLocator->datetime()->update();
-	QDateTime datetime = m_sunLocator->datetime()->toLocalTime();
+void SunControlWidget::updateDateTime()
+{
+    m_sunLocator->datetime()->update();
+    QDateTime datetime = m_sunLocator->datetime()->toLocalTime();
 	
-	QDate date = datetime.date();
-	QDate cur_date = m_uiWidget.calendarWidget->selectedDate();
+    QDate  date     = datetime.date();
+    QDate  cur_date = m_uiWidget.calendarWidget->selectedDate();
 	
-	QTime time = datetime.time();
-	time = time.addSecs(-time.second()); // remove seconds
-	QTime cur_time = m_uiWidget.timeEdit->time();
+    QTime  time     = datetime.time();
+    time = time.addSecs( -time.second() ); // remove seconds
+    QTime  cur_time = m_uiWidget.timeEdit->time();
 	
-	int hour = time.hour();
-	int cur_hour = m_uiWidget.timeSlider->value();
+    int hour = time.hour();
+    int cur_hour = m_uiWidget.timeSlider->value();
 	
-// 	qDebug() << "date:" << date << cur_date;
-// 	qDebug() << "time:" << time << cur_time;
+    // 	qDebug() << "date:" << date << cur_date;
+    // 	qDebug() << "time:" << time << cur_time;
 	
-	if(date != cur_date) m_uiWidget.calendarWidget->setSelectedDate(date);
-	if(time != cur_time) m_uiWidget.timeEdit->setTime(time);
-	if(hour != cur_hour) m_uiWidget.timeSlider->setValue(time.hour());
+    if ( date != cur_date )
+        m_uiWidget.calendarWidget->setSelectedDate( date );
+    if ( time != cur_time )
+        m_uiWidget.timeEdit->setTime( time );
+    if ( hour != cur_hour )
+        m_uiWidget.timeSlider->setValue( time.hour() );
 }
 
-void SunControlWidget::timeChanged(const QTime& time) {
-	QDate date = m_uiWidget.calendarWidget->selectedDate();
-	m_uiWidget.timeSlider->setValue(time.hour());
-	datetimeChanged(QDateTime(date, time));
+void SunControlWidget::timeChanged(const QTime& time)
+{
+    QDate date = m_uiWidget.calendarWidget->selectedDate();
+    m_uiWidget.timeSlider->setValue( time.hour() );
+    datetimeChanged( QDateTime( date, time ) );
 }
 
-void SunControlWidget::dateChanged() {
-	QDate date = m_uiWidget.calendarWidget->selectedDate();
-	QTime time = m_uiWidget.timeEdit->time();
-	datetimeChanged(QDateTime(date, time));
+void SunControlWidget::dateChanged()
+{
+    QDate date = m_uiWidget.calendarWidget->selectedDate();
+    QTime time = m_uiWidget.timeEdit->time();
+    datetimeChanged( QDateTime( date, time ) );
 }
 
-void SunControlWidget::hourChanged(int hour) {
-	QTime time(hour, m_uiWidget.timeEdit->time().minute());
-	m_uiWidget.timeEdit->setTime(time);
+void SunControlWidget::hourChanged(int hour)
+{
+    QTime time( hour, m_uiWidget.timeEdit->time().minute() );
+    m_uiWidget.timeEdit->setTime( time );
 }
 
-void SunControlWidget::datetimeChanged(QDateTime datetime) {
-	datetime = datetime.toUTC();
+void SunControlWidget::datetimeChanged(QDateTime datetime)
+{
+    datetime = datetime.toUTC();
 	
-	m_sunLocator->datetime()->update();
-	QDateTime cur_datetime(*(m_sunLocator->datetime()));
-	cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
+    m_sunLocator->datetime()->update();
+    QDateTime cur_datetime( *(m_sunLocator->datetime()) );
+    // Remove seconds.
+    cur_datetime = cur_datetime.addSecs( -cur_datetime.time().second() );
 	
-// 	qDebug() << cur_datetime << datetime;
-	if(cur_datetime == datetime) return;
+    // 	qDebug() << cur_datetime << datetime;
+    if ( cur_datetime == datetime )
+        return;
 	
-	m_sunLocator->datetime()->setReference(datetime);
-	m_sunLocator->updatePosition();
-	m_sunLocator->update();
+    m_sunLocator->datetime()->setReference( datetime );
+    m_sunLocator->updatePosition();
+    m_sunLocator->update();
 }
 
 #include "SunControlWidget.moc"

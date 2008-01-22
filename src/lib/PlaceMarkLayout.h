@@ -59,8 +59,6 @@ class PlaceMarkLayout : public QObject
      * Layouts the place marks.
      *
      * @param painter The painter that is used for painting.
-     * @param width The width of the image that shall be painted.
-     * @param height The height of the image that shall be painted.
      * @param viewParams Parameters that influence the painting.
      * @param placeMarkModel The PlaceMarkModel or a proxy model on top of it.
      * @param selectionModel The selection model for the PlaceMarkModel.
@@ -68,7 +66,7 @@ class PlaceMarkLayout : public QObject
      * @param firstTime Whether the map is painted the first time.
      */
     void paintPlaceFolder( QPainter *painter, ViewParams *viewParams,
-                           const QAbstractItemModel *placeMarkModel,
+                           const QAbstractItemModel  *placeMarkModel,
                            const QItemSelectionModel *selectionModel,
                            bool firstTime = true );
 

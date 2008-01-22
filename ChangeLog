@@ -43,6 +43,21 @@
     - changed the center sun to actively follow the sun rather than just 
       as a one time centering. 
 
+2008-01-21  Inge Wallin  <inge@lysator.liu.se>
+
+	Remove warnings.
+	* src/lib/MarbleWidget.{h,cpp} (construct): Don't take a widget.
+	* src/lib/TileCreator.cpp: use uint where appropriate, 
+	* src/lib/GridMap.cpp (sphericalCreateCircle): use Q_UNUSED
+
+	Cleaning
+	* src/lib/SunLocator{h,cpp}: Follow coding standards
+	* src/lib/SunControlWidget.{h,cpp}: Follow coding standards
+	* src/lib/TileCreator.cpp: Cleaning
+	
+	Make the BoundingBox usable.
+	* src/lib/BoundingBox.cpp (BoundingBox::init): Fix all bugs.
+
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:

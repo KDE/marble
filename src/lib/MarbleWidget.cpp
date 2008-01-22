@@ -94,22 +94,22 @@ class MarbleWidgetPrivate
 
 
 MarbleWidget::MarbleWidget(QWidget *parent)
-    : QWidget(parent),
+    : QWidget( parent ),
       d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = new MarbleModel( this );
-    construct( parent );
+    construct();
 }
 
 
 MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
-    : QWidget(parent),
+    : QWidget( parent ),
       d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     d->m_model = model;
-    construct( parent );
+    construct();
 }
 
 MarbleWidget::~MarbleWidget()
@@ -124,7 +124,7 @@ MarbleWidget::~MarbleWidget()
     delete d;
 }
 
-void MarbleWidget::construct(QWidget *parent)
+void MarbleWidget::construct()
 {
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
@@ -140,7 +140,7 @@ void MarbleWidget::construct(QWidget *parent)
     connect( d->m_model, SIGNAL(modelChanged()), this, SLOT(updateChangedMap()) );
 
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
-             this, SLOT(updateRegion( BoundingBox) ) );
+             this,       SLOT( updateRegion( BoundingBox) ) );
 
 
     // Set background: black.
@@ -173,6 +173,7 @@ void MarbleWidget::construct(QWidget *parent)
 
     goHome();
 
+    // FloatItems
     d->m_showScaleBar  = true;
     d->m_showCompass   = true;
     d->m_showFrameRate = false;
@@ -194,6 +195,10 @@ void MarbleWidget::construct(QWidget *parent)
     connect(d->m_model->sunLocator(), SIGNAL(reenableWidgetInput()), this, SLOT(enableInput()));
 }
 
+
+// ----------------------------------------------------------------
+
+
 MarbleModel *MarbleWidget::model() const
 {
     return d->m_model;
@@ -207,9 +212,8 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
 
     d->m_inputhandler = handler;
 
-    if ( d->m_inputhandler )
-    {
-        d->m_inputhandler->init(this);
+    if ( d->m_inputhandler ) {
+        d->m_inputhandler->init( this );
         installEventFilter( d->m_inputhandler );
         connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
                  d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
@@ -287,15 +291,19 @@ int MarbleWidget::zoom() const
 double MarbleWidget::centerLatitude() const
 {
     // Calculate translation of center point
-    double centerLon, centerLat;
-    d->m_viewParams.centerCoordinates(centerLon, centerLat);
+    double  centerLon;
+    double  centerLat;
+
+    d->m_viewParams.centerCoordinates( centerLon, centerLat );
     return centerLat * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
     // Calculate translation of center point
-    double centerLon, centerLat;
+    double  centerLon;
+    double  centerLat;
+
     d->m_viewParams.centerCoordinates(centerLon, centerLat);
     return centerLon * RAD2DEG;
 }
@@ -415,11 +423,9 @@ void MarbleWidget::zoomView(int newZoom)
 	return;
 
     d->m_logzoom = newZoom;
-
     emit zoomChanged( newZoom );
 
     int newRadius = fromLogScale( newZoom );
-
     if ( newRadius == radius() )
 	return;
 
@@ -522,7 +528,7 @@ void MarbleWidget::centerOn(const QModelIndex& index)
         double  lat;
         point.geoCoordinates( lon, lat );
 
-	    centerOn( lon * RAD2DEG, lat * RAD2DEG );
+        centerOn( lon * RAD2DEG, lat * RAD2DEG );
 
         selectionModel->select( index, QItemSelectionModel::SelectCurrent );
         d->m_crosshair.setEnabled( true );
@@ -689,14 +695,16 @@ void MarbleWidget::connectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        if ( d->m_inputhandler ) d->m_inputhandler->setPositionSignalConnected( true );
+        if ( d->m_inputhandler )
+            d->m_inputhandler->setPositionSignalConnected( true );
 }
 
 void MarbleWidget::disconnectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
          QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        if ( d->m_inputhandler ) d->m_inputhandler->setPositionSignalConnected( false );
+        if ( d->m_inputhandler )
+            d->m_inputhandler->setPositionSignalConnected( false );
 }
 
 int MarbleWidget::northPoleY()
@@ -704,7 +712,7 @@ int MarbleWidget::northPoleY()
     Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
 
-    northPole.rotateAroundAxis(invPlanetAxis);
+    northPole.rotateAroundAxis( invPlanetAxis );
     return (int)( d->m_viewParams.m_radius * northPole.v[Q_Y] );
 }
 
@@ -752,10 +760,10 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat,
                                   GeoDataPoint::Unit unit )
 {
-    int imageHalfWidth  = width() / 2;
-    int imageHalfHeight  = height() / 2;
-    const double  inverseRadius = 1.0 / (double)(radius());
-    bool noerr = false;
+    int           imageHalfWidth  = width() / 2;
+    int           imageHalfHeight = height() / 2;
+    const double  inverseRadius   = 1.0 / (double)(radius());
+    bool          noerr = false;
 
     switch( d->m_viewParams.m_projection ) {
     case Spherical:
@@ -856,28 +864,34 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
-) {
-        int  imageHalfWidth  = width() / 2;
-        int  imageHalfHeight = height() / 2;
+    // Only draw an atmosphere if projection is spherical
+    if ( d->m_viewParams.m_projection != Spherical )
+        return;
 
-        // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                            1.05 * radius() );
-        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+    // No use to draw atmosphere if it's not visible in the area.
+    // FIXME: Why 4* ??
+    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+        return;
 
-        QBrush    brush1( grad1 );
-        QPen      pen1( Qt::NoPen );
-        QPainter  painter( d->m_viewParams.m_canvasImage );
-        painter.setBrush( brush1 );
-        painter.setPen( pen1 );
-        painter.setRenderHint( QPainter::Antialiasing, false );
-        painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
-                            imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                            (int)( 2.1 * (double)(radius()) ),
-                            (int)( 2.1 * (double)(radius()) ) );
-    }
+    int  imageHalfWidth  = width() / 2;
+    int  imageHalfHeight = height() / 2;
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                           1.05 * radius() );
+    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+    QPainter  painter( d->m_viewParams.m_canvasImage );
+    painter.setBrush( brush1 );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
+    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
+                         imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
+                         (int)( 2.1 * (double)(radius()) ),
+                         (int)( 2.1 * (double)(radius()) ) );
 }
 
 void MarbleWidget::drawFog()
@@ -981,10 +995,10 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     QTime t;
     t.start();
 
-    bool doClip = false;
-    if( d->m_viewParams.m_projection == Spherical )
+    bool  doClip = false;
+    if ( d->m_viewParams.m_projection == Spherical )
         doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
-                     || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
+                   || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
 
     // Create a painter that will do the painting.
     ClipPainter painter( this, doClip );
@@ -1032,13 +1046,12 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     // Set the region of the image where the user can drag it.
     setActiveRegion();
 
-    //Set the Bounding Box
+    // Set the Bounding Box
     setBoundingBox();
 
     double fps = 1000.0 / (double)( t.elapsed() );
 
-    if ( d->m_showFrameRate == true )
-    {
+    if ( d->m_showFrameRate == true ) {
         QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
 
         QPoint fpsLabelPos( 10, 20 );
@@ -1071,6 +1084,7 @@ void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     Q_UNUSED( widget );
 }
 
+
 void MarbleWidget::goHome()
 {
     // d->m_model->rotateTo(0, 0);
@@ -1097,6 +1111,7 @@ void MarbleWidget::setMapTheme( const QString& maptheme )
         return;
 
     d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );
+
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
@@ -1357,28 +1372,34 @@ QString MarbleWidget::distanceString() const
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
-void MarbleWidget::updateSun() {
-  // update the sun shading
-  SunLocator* sunLocator = d->m_model->sunLocator();
-  qDebug() << "Updating the sun shading map...";
-  d->m_model->update();
-  setNeedsUpdate();
-  repaint();
-  qDebug() << "Finished updating the sun shading map";
+void MarbleWidget::updateSun()
+{
+    // Update the sun shading.
+    SunLocator  *sunLocator = d->m_model->sunLocator();
+    qDebug() << "Updating the sun shading map...";
+    d->m_model->update();
+    setNeedsUpdate();
+    repaint();
+    qDebug() << "Finished updating the sun shading map";
 }
 
-void MarbleWidget::centerSun() {
-  SunLocator* sunLocator = d->m_model->sunLocator();
-  sunLocator->updatePosition();
-  double lat = sunLocator->getLat();
-  double lon = sunLocator->getLon();
-  qDebug() << "Centering on Sun at " << lat << lon;
-  centerOn(lon, lat);
-  disableInput();
+
+void MarbleWidget::centerSun()
+{
+    SunLocator  *sunLocator = d->m_model->sunLocator();
+
+    sunLocator->updatePosition();
+    double  lon = sunLocator->getLon();
+    double  lat = sunLocator->getLat();
+    centerOn( lon, lat );
+
+    //qDebug() << "Centering on Sun at " << lat << lon;
+    disableInput();
 }
 
-SunLocator* MarbleWidget::sunLocator() {
-  return d->m_model->sunLocator();
+SunLocator* MarbleWidget::sunLocator()
+{
+    return d->m_model->sunLocator();
 }
 
 void MarbleWidget::enableInput() {

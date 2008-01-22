@@ -207,6 +207,8 @@ void GridMap::createCircle( double val, SphereDim dim, ViewParams *viewParams, d
 
 void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff )
 {
+    Q_UNUSED( viewParams );
+
     // cutOff: the amount of each quarter circle that is cut off at
     //         the pole in radians
 

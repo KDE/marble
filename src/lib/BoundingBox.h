@@ -10,26 +10,34 @@
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
 
+
 #include <QtCore/QVector>
 #include <QtCore/QPointF>
 #include <QtCore/QString>
 
-class BoundingBox : public QVector<QPointF>
+
+class BoundingBox
 {
  public:
     BoundingBox();
     BoundingBox( const QVector<QPointF> & );
-    bool contains( const QPointF & );
-    bool intersects( BoundingBox );
-    bool isValid();
-    QString string();
+
+    bool     contains( const QPointF & );
+    bool     intersects( const BoundingBox & );
+    bool     isValid();
+    QString  string();
+
  private:
-    bool m_dateLine;
-//     bool m_valid;
+    void  init();
+
+ private:
     double m_topX;
     double m_bottomX;
     double m_topY;
     double m_bottomY;
+
+    bool m_dateLine;
+    // bool m_valid;
 };
 
 #endif //BOUNDINGBOX_H
