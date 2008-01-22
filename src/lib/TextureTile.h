@@ -24,6 +24,7 @@
 #include <QtCore/QString>
 
 #include "SunLocator.h"
+#include "MergedLayerPainter.h"
 
 const int tileDigits = 6;
 
@@ -37,6 +38,7 @@ class TextureTile : public QObject {
 
     int  id() const           { return m_id; }
     int  depth() const        { return m_depth; }
+    MergedLayerPainter* painter() {return &m_painter;}
 
     bool used() const         { return m_used; }
     void setUsed( bool used ) { m_used = used; }
@@ -49,7 +51,6 @@ class TextureTile : public QObject {
     uint   **jumpTable32;
 
  Q_SIGNALS:
-    void downloadTile( const QString& relativeUrlString, const QString& id );
     void tileUpdateDone();
 
  public Q_SLOTS:
@@ -61,14 +62,13 @@ class TextureTile : public QObject {
  protected:
 
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
-    QImage loadRawTile(int x, int y, int level, const QString& theme);
 
     int      m_id;
 
     QImage   m_rawtile;
-    QImage   m_cloudtile;
-    QImage   m_nighttile;
     QImage   m_worktile;
+    
+    MergedLayerPainter m_painter;
 
     int      m_depth;
     bool     m_used;

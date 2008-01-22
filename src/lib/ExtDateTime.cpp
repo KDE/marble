@@ -2,20 +2,18 @@
 
 #include "ExtDateTime.h"
 
-ExtDateTime::ExtDateTime() : m_offset(0) {
-	setTimeSpec(Qt::UTC);
+ExtDateTime::ExtDateTime() : QObject(), m_speed(1), m_lastmin(-1) {
+	setNow();
+	
+	m_timer = new QTimer(this);
+	connect(m_timer, SIGNAL(timeout()), this, SLOT(timerTimeout()));
+	m_timer->start(1000);
 }
 
 ExtDateTime::~ExtDateTime() {}
 
-void ExtDateTime::update() {
-	QDateTime datetime = currentDateTime().toUTC().addSecs(m_offset);
-	setDate(datetime.date());
-	setTime(datetime.time());
-}
-
 int ExtDateTime::year0() {
-	int year = date().year();
+	int year = m_datetime.date().year();
 	if(year < 0) year++; // convert 1BCE to year 0, etc
 	return year;
 }
@@ -27,14 +25,14 @@ long ExtDateTime::toJDN() {
 	const int EPOCH_J = 32083; // 29 February 4801BCE in julian calendar
 	
 	int y = year0() + 4800;
-	int m = date().month() - 3;
+	int m = m_datetime.date().month() - 3;
 	
-	if(date().month() <= 2) {
+	if(m_datetime.date().month() <= 2) {
 		y--;
 		m += 12;
 	}
 	
-	long jdn = date().day() + ((153*m + 2) / 5) + 365*y + y/4;
+	long jdn = m_datetime.date().day() + ((153*m + 2) / 5) + 365*y + y/4;
 	
 	if(jdn >= 2331254) {
 		// if the date is >= 1582-10-15, then assume gregorian calendar is being used
@@ -49,16 +47,27 @@ long ExtDateTime::toJDN() {
 
 double ExtDateTime::dayFraction() {
 	double f;
-	f = time().second();
-	f = f/60.0 + time().minute();
-	f = f/60.0 + time().hour();
+	f = m_datetime.time().second();
+	f = f/60.0 + m_datetime.time().minute();
+	f = f/60.0 + m_datetime.time().hour();
 	f = f/24.0;
 	
 	return f;
 }
 
-void ExtDateTime::setReference(QDateTime datetime) {
-	QDateTime cur_datetime = currentDateTime();
-	cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
-	m_offset = cur_datetime.secsTo(datetime);
+void ExtDateTime::timerTimeout() {
+	m_datetime = m_datetime.addSecs(m_speed);
+	int min = m_datetime.time().minute();
+	if(m_lastmin != min) {
+		m_lastmin = min;
+		emit timeChanged();
+	}
 }
+
+void ExtDateTime::setDateTime(QDateTime datetime) {
+	m_datetime = datetime;
+	m_lastmin = m_datetime.time().minute();
+	emit timeChanged();
+}
+
+#include "ExtDateTime.moc"

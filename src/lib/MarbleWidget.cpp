@@ -1383,17 +1383,15 @@ void MarbleWidget::updateSun()
     qDebug() << "Finished updating the sun shading map";
 }
 
-
 void MarbleWidget::centerSun()
 {
     SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    sunLocator->updatePosition();
     double  lon = sunLocator->getLon();
     double  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
-    //qDebug() << "Centering on Sun at " << lat << lon;
+    qDebug() << "Centering on Sun at " << lat << lon;
     disableInput();
 }
 

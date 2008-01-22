@@ -20,7 +20,6 @@ class SunLocator : public QObject
     explicit SunLocator();
     virtual ~SunLocator();
 
-    void    updatePosition();
     double  shading(double lat, double lon);
     void    shadePixel(QRgb& pixcol, double shade);
     void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade);
@@ -45,6 +44,8 @@ class SunLocator : public QObject
     void centerSun();
     void reenableWidgetInput();
 	
+ private:
+    void updatePosition();
  protected:
     double m_lon;
     double m_lat;

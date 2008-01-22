@@ -3,22 +3,37 @@
 #ifndef EXTDATETIME_H
 #define EXTDATETIME_H
 
+#include <QObject>
 #include <QDateTime>
+#include <QTimer>
 
-class ExtDateTime : public QDateTime {
+class ExtDateTime : public QObject {
+	Q_OBJECT
+	
 	public:
 	explicit ExtDateTime();
 	virtual ~ExtDateTime();
-	void update();
 	int year0();
 	long toJDN();
 	double dayFraction();
+	void setNow() {m_datetime = QDateTime::currentDateTime().toUTC();}
 	
-	void setReference(QDateTime datetime);
-	void setOffset(int offset) {m_offset = offset;}
+	QDateTime datetime() {return m_datetime;}
+	
+	void setDateTime(QDateTime datetime);
+	void setSpeed(int speed) {m_speed = speed;}
+	
+	private Q_SLOTS:
+	void timerTimeout();
+	
+	Q_SIGNALS:
+	void timeChanged();
 	
 	protected:
-	int m_offset;
+	int m_speed;
+	QTimer* m_timer;
+	QDateTime m_datetime;
+	int m_lastmin;
 };
 
 #endif

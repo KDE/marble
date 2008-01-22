@@ -1,3 +1,23 @@
+2008-01-22  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/SunLocator.{cpp,h}:
+    * src/lib/TextureTile.{cpp,h}:
+    * src/lib/SunControlWidget.{ui,cpp,h}: 
+    * src/lib/ExtDateTime.{cpp,h}:
+    * src/lib/MergedLayerPainter.{cpp, h}:
+    * src/lib/MarbleWidget.cpp
+    * src/lib/TileLoader.cpp
+    * src/lib/CMakeLists.txt
+    
+    - Another great patch set by David Roberts:
+        - Speed Control implementation, buttons -> slider
+        - Factored out MergedLayerPainter
+        - ExtDateTime now actively updates itself, and in turn all 
+          centering / painting updates are triggered from it (i.e. no more 
+          QTimers in SunLocator or SunControlWidget). 
+        - SunLocator also updates its own position as needed now, rather than 
+          updatePosition() being called externally.
+
 2008-01-21  Torsten Rahn  <rahn@kde.org>
 
     * docs/layermanagement.txt: 

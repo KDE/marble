@@ -31,18 +31,16 @@ SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
              this,                        SLOT( timeChanged( const QTime& ) ) );
     connect( m_uiWidget.timeSlider,       SIGNAL( sliderMoved( int ) ),
              this,                        SLOT( hourChanged( int ) ) );
+	connect(m_uiWidget.speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
 	
     setModal( false );
 	
     updateDateTime();
-    m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(updateDateTime()));
-    m_timer->start(1000);
+    connect(m_sunLocator->datetime(), SIGNAL(timeChanged()), this, SLOT(updateDateTime()));
 }
 
 SunControlWidget::~SunControlWidget()
 {
-    delete m_timer;
 }
 
 void SunControlWidget::showSunClicked(bool checked)
@@ -55,9 +53,8 @@ void SunControlWidget::showSunClicked(bool checked)
     emit showSun(checked);
 }
 
-void SunControlWidget::nowClicked(bool checked)
-{
-    m_sunLocator->datetime()->setOffset(0);
+void SunControlWidget::nowClicked(bool checked) {
+    m_sunLocator->datetime()->setNow();
     updateDateTime();
 }
 
@@ -79,10 +76,8 @@ void SunControlWidget::centerSunClicked(bool checked)
     m_sunLocator->setCentered(checked);
 }
 
-void SunControlWidget::updateDateTime()
-{
-    m_sunLocator->datetime()->update();
-    QDateTime datetime = m_sunLocator->datetime()->toLocalTime();
+void SunControlWidget::updateDateTime() {
+    QDateTime datetime = m_sunLocator->datetime()->datetime().toLocalTime();
 	
     QDate  date     = datetime.date();
     QDate  cur_date = m_uiWidget.calendarWidget->selectedDate();
@@ -129,18 +124,20 @@ void SunControlWidget::datetimeChanged(QDateTime datetime)
 {
     datetime = datetime.toUTC();
 	
-    m_sunLocator->datetime()->update();
-    QDateTime cur_datetime( *(m_sunLocator->datetime()) );
-    // Remove seconds.
-    cur_datetime = cur_datetime.addSecs( -cur_datetime.time().second() );
+    QDateTime cur_datetime = m_sunLocator->datetime()->datetime();
+    cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
 	
     // 	qDebug() << cur_datetime << datetime;
     if ( cur_datetime == datetime )
         return;
 	
-    m_sunLocator->datetime()->setReference( datetime );
-    m_sunLocator->updatePosition();
+    m_sunLocator->datetime()->setDateTime(datetime);
     m_sunLocator->update();
+}
+
+void SunControlWidget::speedChanged(int speed) {
+	m_sunLocator->datetime()->setSpeed(speed);
+	m_uiWidget.speedLabel->setText(QString("%1x").arg(speed));
 }
 
 #include "SunControlWidget.moc"

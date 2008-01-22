@@ -84,113 +84,16 @@ TextureTile::~TextureTile()
 //    delete m_rawtile;
 }
 
-QImage TextureTile::loadRawTile( int x, int y, int level, const QString& theme )
-{
-  //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-  m_used = true; // Needed to avoid frequent deletion of tiles
-
-  QString  absfilename;
-
-  // qDebug() << "Requested tile level" << level;
-
-  // If the tile level offers the requested tile then load it.
-  // Otherwise cycle from the requested tilelevel down to one where
-  // the requested area is covered.  Then scale the area to create a
-  // replacement for the tile that has been requested.
-
-  for ( int i = level; i > -1; --i ) {
-
-    double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
-    double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
-    double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
-    double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
-
-    QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
-        .arg(theme).arg(i)
-        .arg( (int)(testy1), tileDigits, 10, QChar('0') )
-        .arg( (int)(testx1), tileDigits, 10, QChar('0') );
-
-    absfilename = MarbleDirs::path( relfilename );
-
-    if ( QFile::exists( absfilename ) ) {
-//       qDebug() << "The image filename does exist: " << absfilename ;
-
-      QImage temptile( absfilename );
-
-      if ( !temptile.isNull() ) {
-//         qDebug() << "Image has been successfully loaded.";
-
-        if ( level != i ) { 
-//           qDebug() << "About to start cropping an existing image.";
-          QSize tilesize = temptile.size();
-          double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
-          double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
-          double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
-          double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
-
-          QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
-                  (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
-          QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
-                  (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
-
-          // This should not create any memory leaks as
-          // 'copy' and 'scaled' return a value (on the
-          // stack) which gets deep copied always into the
-          // same place for m_rawtile on the heap:
-          temptile = temptile.copy( QRect( topleft, bottomright ) );
-          temptile = temptile.scaled( tilesize ); // TODO: use correct size
-//          qDebug() << "Finished scaling up the Temporary Tile.";
-        }
-
-        return temptile;
-
-        break;
-      } // !tempfile.isNull()
-//      else {
-//         qDebug() << "Image load failed for: " + 
-//           absfilename.toLocal8Bit();
-//      }
-    }
-    else {
-//      qDebug() << "emit downloadTile(" << relfilename << ");";
-      emit downloadTile( relfilename, QString::number( m_id ) );
-    }
-  }
-  
-  return QImage();
-}
-
 void TextureTile::loadTile( int x, int y, int level, 
 			    const QString& theme, bool requestTileUpdate, SunLocator* sunLocator )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-//   m_used = true; // Needed to avoid frequent deletion of tiles
-// 
-  QString  absfilename;
-// 
-//   // qDebug() << "Requested tile level" << level;
-// 
-//   // If the tile level offers the requested tile then load it.
-//   // Otherwise cycle from the requested tilelevel down to one where
-//   // the requested area is covered.  Then scale the area to create a
-//   // replacement for the tile that has been requested.
-// 
-  for ( int i = level; i > -1; --i ) {
+  m_used = true; // Needed to avoid frequent deletion of tiles
 
-    double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
-    double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
-    double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
-    double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
+  m_painter.setInfo(x, y, level, m_id);
 
-    QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
-        .arg(theme).arg(i)
-        .arg( (int)(testy1), tileDigits, 10, QChar('0') )
-        .arg( (int)(testx1), tileDigits, 10, QChar('0') );
-
-    absfilename = MarbleDirs::path( relfilename );
-  }
-
-  m_rawtile = loadRawTile(x, y, level, theme);
+  m_painter.setTile(&m_rawtile);
+  m_painter.paint(theme);
 
   if ( m_rawtile.isNull() ) {
     qDebug() << "An essential tile is missing. Please rerun the application.";
@@ -199,85 +102,16 @@ void TextureTile::loadTile( int x, int y, int level,
 
   m_worktile = m_rawtile;
   m_depth = m_worktile.depth();
-  
+  m_painter.setTile(&m_worktile);
+
   // TODO be able to set this somewhere
-  bool cloudlayer = true;
-  
-  if(cloudlayer && m_depth == 32 && level < 2) {
-  m_cloudtile = loadRawTile(x, y, level, "maps/earth/clouds");
+  bool cloudlayer = true; if(cloudlayer && m_depth == 32 && level < 2) m_painter.paintClouds();
 
-  if(!m_cloudtile.isNull()) {
-//   qDebug() << "painting clouds";
-  // overlay m_cloudtile onto m_worktile
-  const int ctileHeight = m_cloudtile.height();
-  const int ctileWidth = m_cloudtile.width();
-  for(int cur_y = 0; cur_y < ctileHeight; cur_y++) {
-    QRgb* cscanline = (QRgb*)m_cloudtile.scanLine(cur_y);
-    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
-    for(int cur_x = 0; cur_x < ctileWidth; cur_x++) {
-      double c = qRed(*cscanline)/255.0;
-      QRgb pix = *scanline;
-      int r = qRed(pix);
-      int g = qGreen(pix);
-      int b = qBlue(pix);
-      *scanline = qRgb((int)(r + (255-r)*c), (int)(g + (255-g)*c), (int)(b + (255-b)*c));
-      cscanline++;
-      scanline++;
-    }
-  }
-  }
-  }
-  
-  if(sunLocator != 0 && sunLocator->getCitylights() && m_depth == 32) {
-  m_nighttile = loadRawTile(x, y, level, "maps/earth/citylights");
-
-  if ( m_nighttile.isNull() ) sunLocator->setCitylights(false);
-  }
+  if(sunLocator != 0 && sunLocator->getShow()) m_painter.paintSunShading(sunLocator);
 
   // FIXME: This should get accessible from MarbleWidget, so we can pass over 
   //        a testing command line option
-  bool tileIdVisible = false;
-
-  if( tileIdVisible ) {
-    showTileId( m_worktile, theme, level, x, y );
-  }
-
-  if(sunLocator != 0 && sunLocator->getShow() && m_depth == 32) {
-  // TODO add support for 8-bit maps?
-  // add sun shading
-  sunLocator->updatePosition();
-  const double global_width = m_worktile.width() * TileLoader::levelToColumn(level);
-  const double global_height = m_worktile.height() * TileLoader::levelToRow(level);
-  const double lon_scale = 2*M_PI / global_width;
-  const double lat_scale = -M_PI / global_height;
-  const int tileHeight = m_worktile.height();
-  const int tileWidth = m_worktile.width();
-  if(sunLocator->getCitylights()) {
-  for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
-    double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
-    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
-    QRgb* nscanline = (QRgb*)m_nighttile.scanLine(cur_y);
-    for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
-      double lon = lon_scale * (x * tileWidth + cur_x);
-      double shade = sunLocator->shading(lat, lon);
-      sunLocator->shadePixelComposite(*scanline, *nscanline, shade);
-      scanline++;
-      nscanline++;
-    }
-  }
-  } else {
-  for(int cur_y = 0; cur_y < tileHeight; cur_y++) {
-    double lat = lat_scale * (y * tileHeight + cur_y) - 0.5*M_PI;
-    QRgb* scanline = (QRgb*)m_worktile.scanLine(cur_y);
-    for(int cur_x = 0; cur_x < tileWidth; cur_x++) {
-      double lon = lon_scale * (x * tileWidth + cur_x);
-      double shade = sunLocator->shading(lat, lon);
-      sunLocator->shadePixel(*scanline, shade);
-      scanline++;
-    }
-  }
-  }
-  }
+  bool tileIdVisible = true; if(tileIdVisible) m_painter.paintTileId(theme);
 
   switch ( m_depth ) {
       case 32:
@@ -289,7 +123,7 @@ void TextureTile::loadTile( int x, int y, int level,
           jumpTable8 = jumpTableFromQImage8( m_worktile );
           break;
       default:
-          qDebug() << QString("Color m_depth %1 of tile %2 could not be retrieved. Exiting.").arg(m_depth).arg(absfilename);
+          qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
           exit( -1 );
   }
 
@@ -305,70 +139,6 @@ void TextureTile::reloadTile( int x, int y, int level, const QString& theme, Sun
     // << level << "|" << x << "|" << y;
 
     loadTile( x, y, level, theme, true, sunLocator );
-}
-
-void TextureTile::showTileId( QImage& worktile, QString theme, int level, int x, int y )
-{
-    QString filename = QString("%1_%2.jpg")
-        .arg( x, tileDigits, 10, QChar('0') )
-        .arg( y, tileDigits, 10, QChar('0') );
-
-    QPainter painter(&m_worktile);
-
-    QColor foreground;
-    QColor background;
-
-    if ( ( (double)(x)/2 == x/2 && (double)(y)/2 == y/2 ) || 
-         ( (double)(x)/2 != x/2 && (double)(y)/2 != y/2 ) 
-       )
-    {
-        foreground.setNamedColor("#FFFFFF");
-        background.setNamedColor("#000000");
-    }
-    else
-    {
-        foreground.setNamedColor("#000000");
-        background.setNamedColor("#FFFFFF");
-    }
-
-    int strokeWidth = 10;
-    QPen testPen( foreground );
-    testPen.setWidth( strokeWidth );
-    testPen.setJoinStyle(Qt::MiterJoin);
-
-    painter.setPen( testPen );
-    painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
-                      worktile.width()  - strokeWidth,
-                      worktile.height() - strokeWidth
-    );
-    QFont testFont("Sans", 30, QFont::Bold);
-    QFontMetrics testFm(testFont);
-    painter.setFont(testFont);
-
-    QPen outlinepen( foreground );
-    outlinepen.setWidthF( 6 );
-
-    painter.setPen( outlinepen );
-    painter.setBrush( background );
-
-    QPainterPath   outlinepath;
-
-    QPointF  baseline1( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
-                             (worktile.height() * 0.25) );
-    outlinepath.addText( baseline1, testFont, QString( "level: %1" ).arg(level) );
-
-    QPointF  baseline2( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
-                             (worktile.height() * 0.50) );
-    outlinepath.addText( baseline2, testFont, filename );
-
-    QPointF  baseline3( ( worktile.width() - testFm.boundingRect(filename).width() ) / 2,
-                             (worktile.height() * 0.75) );
-    outlinepath.addText( baseline3, testFont, theme );
-
-    painter.drawPath( outlinepath );
-
-    painter.setPen( Qt::NoPen );
-    painter.drawPath( outlinepath );
 }
 
 #include "TextureTile.moc"

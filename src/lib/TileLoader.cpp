@@ -167,7 +167,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
             if ( m_downloadManager != 0 )
             {
-                connect( tile,            SIGNAL( downloadTile( const QString&, const QString& ) ), 
+                connect( tile->painter(),            SIGNAL( downloadTile( const QString&, const QString& ) ), 
                          m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
             }
 

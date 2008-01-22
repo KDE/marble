@@ -156,6 +156,7 @@ set(marblewidget_SRCS
            SunLocator.cpp
            ExtDateTime.cpp
            SunControlWidget.cpp
+           MergedLayerPainter.cpp
 )
 
 set (marblewidget_UI
@@ -301,6 +302,8 @@ else (APPLE AND QTONLY)
            XmlHandler.h
            marble_export.h
            SunLocator.h
+           ExtDateTime.h
+           MergedLayerPainter.h
 
            AbstractLayer/AbstractLayer.h
            AbstractLayer/AbstractLayerContainer.h

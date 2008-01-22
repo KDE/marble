@@ -13,23 +13,15 @@ SunLocator::SunLocator()
     m_centered( false )
 {
     m_datetime = new ExtDateTime();
-	
-    m_timer = new QTimer();
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
-    m_timer->start(update_interval);
+    connect(m_datetime, SIGNAL(timeChanged()), this, SLOT(update()));
 }
 
-SunLocator::~SunLocator()
-{
+SunLocator::~SunLocator() {
     delete m_datetime;
-    delete m_timer;
 }
 
-void SunLocator::updatePosition()
-{
+void SunLocator::updatePosition() {
     // Find the orientation of the sun.
-    m_datetime->update();
-	
     // Find current Julian day number relative to epoch J2000.
     long d = m_datetime->toJDN() - J2000;
 	
@@ -119,27 +111,24 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
     }
 }
 
-
-void SunLocator::update()
-{
-    if ( m_show )
-        emit updateSun();
-    if ( m_centered )
-        emit centerSun();
+void SunLocator::update() {
+    updatePosition();
+    if(m_show) emit updateSun();
+    if(m_centered) emit centerSun();
 }
 
-void SunLocator::setShow(bool show)
-{
+void SunLocator::setShow(bool show) {
     m_show = show;
+    updatePosition();
     emit updateSun();
 }
 
-void SunLocator::setCentered(bool centered)
-{
+void SunLocator::setCentered(bool centered) {
     m_centered = centered;
-    if ( m_centered )
+    if( m_centered ) {
+        updatePosition();
         emit centerSun();
-    else
+    } else
         emit reenableWidgetInput();
 }
 

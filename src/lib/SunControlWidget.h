@@ -41,6 +41,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     void hourChanged(int hour);
 	
     void updateDateTime();
+	void speedChanged(int speed);
 	
  Q_SIGNALS:
     void showSun(bool show);
@@ -51,7 +52,6 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
  protected:
     Ui::SunControlWidget m_uiWidget;
     SunLocator* m_sunLocator;
-    QTimer* m_timer;
 };
 
 #endif
