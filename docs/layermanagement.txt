@@ -50,6 +50,8 @@ Code snippet:
 
 - It should be possible to use this Qt-style Geo-API either from outside the MarbleWidget or from inside the custom backend plugin.
 
+- Expiring layer data: The LMC should get notified about expiration dates of layer data. If layer data expires the LMC should trigger a reload of each chunk of data. Initially it would be enough if we supported reloading the whole data set of a single layer. In the future reloading single data chunks of a layer would be nice to have. (Examples for tile expiration: Real-time cloud layers, Improvements for OpenStreetMap data).
+
 
 FUTURE low-priority enhancements (for usage in "real" light GIS apps that might use Marble in the future):
 
