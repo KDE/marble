@@ -852,28 +852,41 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
-) {
-        int  imageHalfWidth  = width() / 2;
-        int  imageHalfHeight = height() / 2;
+    qint64 imageWidth = (qint64)(width());
+    qint64 imageHeight = (qint64)(height());
+    qint64 imageRadius = (qint64)(radius());
 
-        // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                            1.05 * radius() );
-        grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+    // Only draw an atmosphere if projection is spherical
+    if ( d->m_viewParams.m_projection != Spherical )
+        return;
 
-        QBrush    brush1( grad1 );
-        QPen      pen1( Qt::NoPen );
-        QPainter  painter( d->m_viewParams.m_canvasImage );
-        painter.setBrush( brush1 );
-        painter.setPen( pen1 );
-        painter.setRenderHint( QPainter::Antialiasing, false );
-        painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
-                            imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                            (int)( 2.1 * (double)(radius()) ),
-                            (int)( 2.1 * (double)(radius()) ) );
-    }
+    // No use to draw atmosphere if it's not visible in the area.
+    // FIXME: Why 4* ??
+//    qDebug() << 4 * imageRadius * imageRadius << " radius: " << imageRadius << " width: " << imageWidth ;
+    if ( 4 * imageRadius * imageRadius >= imageWidth * imageWidth + imageHeight * imageHeight )
+        return;
+//    else
+//        qDebug() << "redrawing Atmosphere";
+
+    int  imageHalfWidth  = width() / 2;
+    int  imageHalfHeight = height() / 2;
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                        1.05 * radius() );
+    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+    QPainter  painter( d->m_viewParams.m_canvasImage );
+    painter.setBrush( brush1 );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
+    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
+                        imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
+                        (int)( 2.1 * (double)(radius()) ),
+                        (int)( 2.1 * (double)(radius()) ) );
 }
 
 

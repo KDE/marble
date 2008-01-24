@@ -20,7 +20,8 @@
 MapScaleFloatItem::MapScaleFloatItem( QObject* parent )
     : QObject(parent)
 {
-    m_unit = "km";
+    m_unit = tr("km");
+
     m_scalebarwidth = 250;
     m_scalebarheight = 5;
 
@@ -77,7 +78,7 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
     m_radius        = radius;
     m_scalebarwidth = width - m_leftmargin - m_rightmargin;
 
-    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius * 1000);
+    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius);
 
     calcScaleBar();
 
@@ -107,7 +108,15 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
                                m_fontheight + 3, m_pixelinterval - 1,
                                m_scalebarheight );
 
-        intervalstr.setNum( j * m_valueinterval );
+
+            if ( m_bestdivisor * m_valueinterval > 10000 ) {
+                m_unit = tr("km");
+                intervalstr.setNum( j * m_valueinterval / 1000 );
+            }
+            else {
+                m_unit = tr("m");
+                intervalstr.setNum( j * m_valueinterval );
+            }
 
         if ( j == 0 ) {
             painter->drawText( 0, m_fontheight, "0 " + m_unit );
