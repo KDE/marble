@@ -332,7 +332,7 @@ QImage MergedLayerPainter::loadRawTile(const QString& theme)
   return QImage();
 }
 
-// FIXME: This should likely go into a math class in the future ...
+// TODO: This should likely go into a math class in the future ...
 
 int MergedLayerPainter::maxDivisor( int maximum, int fullLength )
 {

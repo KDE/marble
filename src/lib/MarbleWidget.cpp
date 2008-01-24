@@ -869,14 +869,21 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
+    qint64 imageWidth = (qint64)(width());
+    qint64 imageHeight = (qint64)(height());
+    qint64 imageRadius = (qint64)(radius());
+
     // Only draw an atmosphere if projection is spherical
     if ( d->m_viewParams.m_projection != Spherical )
         return;
 
     // No use to draw atmosphere if it's not visible in the area.
     // FIXME: Why 4* ??
-    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+//    qDebug() << 4 * imageRadius * imageRadius << " radius: " << imageRadius << " width: " << imageWidth ;
+    if ( 4 * imageRadius * imageRadius >= imageWidth * imageWidth + imageHeight * imageHeight )
         return;
+//    else
+//        qDebug() << "redrawing Atmosphere";
 
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;

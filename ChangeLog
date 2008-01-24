@@ -1,3 +1,14 @@
+2008-01-24  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.cpp:
+        - Fixing embarassing bug which resulted in a 
+          severe slowdown from tile level 9 up.
+    * src/lib/MapScaleFloatItem.cpp:
+        - Some dirty fix for the below-1km issue with the 
+          scale bar (this class needs better documentation).
+    * src/lib/MergedLayerPainter.cpp:
+        - Status: FIX->TODO
+
 2008-01-22  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MergedLayerPainter.{cpp,h}:
