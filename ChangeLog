@@ -1,3 +1,17 @@
+2008-01-25  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/CompassFloatItem.cpp:
+      - Some slight fix to the compass after the issue 
+        got pointed out by Jason Harris
+    * src/lib/SunLocator.cpp:
+      - Some shifting magic by Frederik Hoeglund
+    * src/lib/MergedLayerPainter.cpp:
+      - Patch by David Roberts to let MergedLayerPainter 
+        deal with 8bit grayscale cloud images
+    * cloudtiles/tile_clouds.pl:
+      - Perl script to download the real time cloud image
+        and tile it by David Roberts.
+
 2008-01-24  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.cpp:

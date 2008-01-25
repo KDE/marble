@@ -77,7 +77,7 @@ QPixmap& CompassFloatItem::drawCompassPixmap( int canvaswidth, int canvasheight,
     m_width    = width; 
     m_polarity = polarity;
 
-    m_pixmap = QPixmap( m_width, m_width + m_fontheight + 5 );
+    m_pixmap = QPixmap( m_width + 1, m_width + m_fontheight + 6 );
     m_pixmap.fill( Qt::transparent );
 
     QPainter painter( &m_pixmap );

@@ -33,10 +33,14 @@ void MergedLayerPainter::paintClouds()
     const int  ctileWidth  = cloudtile.width();
 	
     for ( int cur_y = 0; cur_y < ctileHeight; ++cur_y ) {
-        QRgb  *cscanline = (QRgb*)cloudtile.scanLine( cur_y );
-        QRgb  *scanline  = (QRgb*)m_tile->scanLine( cur_y );
+        uchar  *cscanline = (uchar*)cloudtile.scanLine( cur_y );
+        QRgb   *scanline  = (QRgb*)m_tile->scanLine( cur_y );
         for ( int cur_x = 0; cur_x < ctileWidth; ++cur_x ) {
-            double  c   = qRed( *cscanline ) / 255.0;
+            double  c;
+            if ( cloudtile.depth() == 32)
+                c = qRed( *((QRgb*)cscanline) ) / 255.0;
+            else
+                c = *cscanline / 255.0;
             QRgb    pix = *scanline;
             int  r = qRed( pix );
             int  g = qGreen( pix );
@@ -44,7 +48,10 @@ void MergedLayerPainter::paintClouds()
             *scanline = qRgb( (int)( r + (255-r)*c ),
                               (int)( g + (255-g)*c ),
                               (int)( b + (255-b)*c ) );
-            cscanline++;
+            if ( cloudtile.depth() == 32)
+                cscanline += sizeof(QRgb);
+            else
+                cscanline++;
             scanline++;
         }
     }
