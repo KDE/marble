@@ -307,20 +307,20 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
         <section name="elevation" checkable="false">
             <heading>Elevation</heading>
             <!-- Example for a pixmap legend item: -->
-            <legenditem>
-                <itemsymbol pixmap="topography_7000.png"/>
-                <itemtext>7000 m</itemtext>
-            </legenditem>
+            <item>
+                <icon pixmap="topography_7000.png"/>
+                <text>7000 m</text>
+            </item>
             <!-- Example for a color gradient legend item: -->
-            <legenditem>
-                <itemsymbol color="#dcbd80"/>
-                <itemtext>5000 m</itemtext>
-            </legenditem>
+            <item>
+                <icon color="#dcbd80"/>
+                <text>5000 m</text>
+            </item>
             <!-- Example for a pixmap with a color as a translucent background: -->
-            <legenditem>
-                <itemsymbol color="#f29b68" pixmap="boundary.png"/>
-                <itemtext>State Boundary</itemtext>
-            </legenditem>
+            <item>
+                <icon color="#f29b68" pixmap="boundary.png"/>
+                <text>State Boundary</text>
+            </item>
             <!-- Insert further legend items here -->
         </section>
     </legend>
