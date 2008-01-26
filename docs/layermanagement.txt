@@ -180,6 +180,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 <?xml version="1.2" encoding="UTF-8"?>
 <DeskGlobeML xmlns="http://edu.kde.org/marble/dgml/1.2">
 <head>
+    <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
+
 	<name>Atlas</name>
 
 	<prefix>srtm</prefix>
@@ -191,16 +193,20 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 	<maximumzoom> 2100 </maximumzoom>
 </head>
 	<!-- Now we create the layer structure that gets handled by the layer management class -->
-<map>
+<map bgcolor="#000000">
 	</canvas>
 	<!-- In this place one could e.g. insert a sky plugin -->
 	</earth>
 
 	<!-- This layer creates the elevation model -->
 	<layer name="srtm" plugin="texture"  type="dem">
-		<sourcedir install=srtm.jpg> srtm <sourcedir>
+		<sourcedir install=srtm.jpg format="JPG" expire="10800"> srtm </sourcedir>
+
 		<!-- If this was the satellite map we could add another sourcedir 
-	             tag for the clouds here resulting in a MergedLayer -->
+	             tag for the clouds here resulting in a MergedLayer 
+             Also note that for the tiles you can suggest a different 
+             image format than for the original install image (e.g. "PNG").
+             -->
 	</layer>
 	
 	<!-- This layer creates the coastlines that are needed to colorize the elevation model properly -->
