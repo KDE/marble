@@ -301,18 +301,22 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 </map>
 
 	<!-- At last we define some legend properties -->
+
 <legend>
-	<heading>Elevation</heading>
-	<legenditem>
-		<!-- For now integrating legend item symbols using pixmaps should be enough -->
-		<itemsymbol><img src="topography_7000.png"></itemsymbol>
-		<itemtext>7000 m</itemtext>
-	</legenditem>
-	<legenditem>
-		<itemsymbol><img src="topography_5000.png"></itemsymbol>
-		<itemtext>5000 m</itemtext>
-	</legenditem>
-	<!-- Insert further legend items here -->
+    <section name="elevation" checkable="false">
+	    <heading>Elevation</heading>
+	    <legenditem>
+		    <!-- For now integrating legend item symbols using pixmaps should be enough -->
+		    <itemsymbol><img src="topography_7000.png"></itemsymbol>
+		    <itemtext>7000 m</itemtext>
+	    </legenditem>
+	    <legenditem>
+		    <itemsymbol><img src="topography_5000.png"></itemsymbol>
+		    <itemtext>5000 m</itemtext>
+	    </legenditem>
+	    <!-- Insert further legend items here -->
+    </section>
 </legend>
+
 </DeskGlobeML>
 
