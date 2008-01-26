@@ -38,4 +38,75 @@
 		</LabelStyle>
 
 	</MapStyle>
+
+    <legend>
+        <section name="elevation" checkable="false">
+            <heading>Elevation</heading>
+            <legenditem>
+                <itemsymbol pixmap="topography_7000.png"/>
+                <itemtext>7000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_5000.png"/>
+                <itemtext>5000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_3500.png"/>
+                <itemtext>3500 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_2000.png"/>
+                <itemtext>2000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_1000.png"/>
+                <itemtext>1000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_500.png"/>
+                <itemtext>500 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_200.png"/>
+                <itemtext>200 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_50.png"/>
+                <itemtext>50 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="topography_0.png"/>
+                <itemtext>0 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_0.png"/>
+                <itemtext>0 m (Water)</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-50.png"/>
+                <itemtext>-50 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-200.png"/>
+                <itemtext>-200 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-2000.png"/>
+                <itemtext>-2000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-4000.png"/>
+                <itemtext>-4000 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-6500.png"/>
+                <itemtext>-6500 m</itemtext>
+            </legenditem>
+            <legenditem>
+                <itemsymbol pixmap="bathymetry_-11000.png"/>
+                <itemtext>-11000 m</itemtext>
+            </legenditem>
+        </section>
+    </legend>
+
 </DeskGlobeML>

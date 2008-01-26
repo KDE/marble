@@ -183,140 +183,147 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 
 <?xml version="2.0" encoding="UTF-8"?>
 <DeskGlobeML xmlns="http://edu.kde.org/marble/dgml/1.2">
-<head>
-    <name>Atlas</name>
 
-	<prefix>srtm</prefix>
-	<icon>srtm-preview.png</icon>
-
-	<description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
-
-	<minimumzoom>  900 </minimumzoom>
-	<maximumzoom> 2100 </maximumzoom>
-
-    <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
-</head>
-
-	<!-- Now we create the layer structure that gets handled by the layer management class -->
-
-<map bgcolor="#000000">
-	</canvas>
-	<!-- In this place one could e.g. insert a sky plugin -->
-	</planet>
-
-	<!-- This layer creates the elevation model -->
-	<layer name="srtm" plugin="texture"  type="dem">
-        <texture format="JPG" expire="10800">
-    		<sourcedir> srtm </sourcedir>
-            <installmap> srtm.jpg </installmap>
-        </texture>
-		<!-- If this was the satellite map we could add another texture 
-	             tag for the clouds here resulting in a MergedLayer 
-             Also note that for the tiles you can suggest a different 
-             image format than for the original install image (e.g. "PNG").
-             -->
-	</layer>
-	
-	<!-- This layer creates the coastlines that are needed to colorize the elevation model properly -->
-	<layer name="mwdbii" plugin="vector" type="filterhelper">
-        <vector name="pcoast" type="land">
-    		<sourcefile format="PNT"> PCOAST.PNT </sourcefile>
-        <vector>
-        <vector name="pisland" type="land">
-    		<sourcefile format="PNT"> PISLAND.PNT </sourcefile>
-        </vector>
-        <vector name="plakeisland" type="land">
-    		<sourcefile format="PNT"> PLAKEISLAND.PNT </sourcefile>
-        </vector>
-        <vector name="plake" type="sea">
-    		<sourcefile format="PNT"> PLAKE.PNT </sourcefile>
-        </vector>
-        <vector name="pglacier" type="sea">
-    		<sourcefile format="PNT">  PGLACIER.PNT </sourcefile>
-        </vector>
-	</layer>
-
-	<!-- This layer provides the colorization -->
-	<layer name="" plugin="filter">
-        <filter name="texturecolorizer" type="colorize">
-    		<dem>srtm</dem>
-    		<coastline>mwdbii<coastline>
-    		<!-- If these don't get defined the default palettes get used -->
-    		<palette type="sea">seapalette.pal</palette>
-    		<palette type="land">landpalette.pal</palette>
-        </filter>
-	<layer>
-
-	<layer name="mwdbii" plugin="vector" type="polyline">
-        <vector name="pdiffborder" type="border">
-    		<sourcefile format="PNT">PDIFFBORDER.PNT</sourcefile>
-            <color>#f29b68</color>
-        </vector>
-        <vector name="pusa48.diff" type="polyline">
-		    <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
-            <color>#f29b68</color>
-        </vector>
-        <vector name="international dateline" type="polyline">
-    		<sourcefile format="PNT">DATELINE.PNT</sourcefile>
-            <color>#000000</color>
-        </vector>
-        <vector name="pusa48" type="polyline">
-    		<sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
-            <color>#637bff</color>
-        </vector>
-	</layer>
-
-	<layer name="standardplaces" plugin="geodata">
-        <geodata name="cityplacemarks">
-    		<sourcefile format="KML">cityplacemarks.kml</sourcefile>
-            <pick>placemark<pick> <!-- picks certain features from a file -->
-        </geodata>
-        <geodata name="baseplacemarks">
-    		<sourcefile format="KML">baseplacemarks.kml</sourcefile>
-            <pick>placemark<pick>
-        </geodata>
-        <geodata name="elevplacemarks">
-    		<sourcefile format="KML">elevplacemarks.kml</sourcefile>
-            <pick>placemark<pick>
-        </geodata>
-        <geodata name="otherplacemarks">
-    		<sourcefile format="KML">otherplacemarks.kml</sourcefile>
-            <pick>placemark<pick>
-        </geodata>
-        <geodata name="boundaryplacemarks">
-    		<sourcefile format="KML">boundaryplacemarks</sourcefile>
-            <pick>placemark<pick>
-        </geodata>
-	</layer>
-
-    <layer name="helloworldlayer" plugin="helloworldplugin">
-        <customplugin name="helloworld">
-            <sourcefile format="JPG">helloworld.jpg</sourcefile>
-        </customplugin>
-    </layer>
-
-	<!-- Here we could e.g. add an atmosphere or satellite layer -->
-
-	</layer name="floatitems" plugins="floatitems">
-</map>
-
-	<!-- At last we define some legend properties -->
-
-<legend>
-    <section name="elevation" checkable="false">
-	    <heading>Elevation</heading>
-	    <legenditem>
-		    <!-- For now integrating legend item symbols using pixmaps should be enough -->
-		    <itemsymbol><img src="topography_7000.png"></itemsymbol>
-		    <itemtext>7000 m</itemtext>
-	    </legenditem>
-	    <legenditem>
-		    <itemsymbol><img src="topography_5000.png"></itemsymbol>
-		    <itemtext>5000 m</itemtext>
-	    </legenditem>
-	    <!-- Insert further legend items here -->
-    </section>
-</legend>
+    <head>
+        <name>Atlas</name>
+    
+	    <prefix>srtm</prefix>
+	    <icon>srtm-preview.png</icon>
+    
+	    <description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
+    
+	    <minimumzoom>  900 </minimumzoom>
+	    <maximumzoom> 2100 </maximumzoom>
+    
+        <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
+    </head>
+    
+	    <!-- Now we create the layer structure that gets handled by the layer management class -->
+    
+    <map bgcolor="#000000">
+	    </canvas>
+	    <!-- In this place one could e.g. insert a sky plugin -->
+	    </planet>
+    
+	    <!-- This layer creates the elevation model -->
+	    <layer name="srtm" plugin="texture"  type="dem">
+            <texture format="JPG" expire="10800">
+                <sourcedir> srtm </sourcedir>
+                <installmap> srtm.jpg </installmap>
+            </texture>
+		    <!-- If this was the satellite map we could add another texture 
+	                tag for the clouds here resulting in a MergedLayer 
+                Also note that for the tiles you can suggest a different 
+                image format than for the original install image (e.g. "PNG").
+                -->
+	    </layer>
+	    
+	    <!-- This layer creates the coastlines that are needed to colorize the elevation model properly -->
+	    <layer name="mwdbii" plugin="vector" type="filterhelper">
+            <vector name="pcoast" type="land">
+                <sourcefile format="PNT"> PCOAST.PNT </sourcefile>
+            <vector>
+            <vector name="pisland" type="land">
+                <sourcefile format="PNT"> PISLAND.PNT </sourcefile>
+            </vector>
+            <vector name="plakeisland" type="land">
+                <sourcefile format="PNT"> PLAKEISLAND.PNT </sourcefile>
+            </vector>
+            <vector name="plake" type="sea">
+                <sourcefile format="PNT"> PLAKE.PNT </sourcefile>
+            </vector>
+            <vector name="pglacier" type="sea">
+                <sourcefile format="PNT">  PGLACIER.PNT </sourcefile>
+            </vector>
+	    </layer>
+    
+	    <!-- This layer provides the colorization -->
+	    <layer name="" plugin="filter">
+            <filter name="texturecolorizer" type="colorize">
+                <dem>srtm</dem>
+                <coastline>mwdbii<coastline>
+                <!-- If these don't get defined the default palettes get used -->
+                <palette type="sea">seapalette.pal</palette>
+                <palette type="land">landpalette.pal</palette>
+            </filter>
+	    <layer>
+    
+	    <layer name="mwdbii" plugin="vector" type="polyline">
+            <vector name="pdiffborder" type="border">
+                <sourcefile format="PNT">PDIFFBORDER.PNT</sourcefile>
+                <color>#f29b68</color>
+            </vector>
+            <vector name="pusa48.diff" type="polyline">
+		        <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
+                <color>#f29b68</color>
+            </vector>
+            <vector name="international dateline" type="polyline">
+                <sourcefile format="PNT">DATELINE.PNT</sourcefile>
+                <color>#000000</color>
+            </vector>
+            <vector name="pusa48" type="polyline">
+                <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
+                <color>#637bff</color>
+            </vector>
+	    </layer>
+    
+	    <layer name="standardplaces" plugin="geodata">
+            <geodata name="cityplacemarks">
+                <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                <pick>placemark<pick> <!-- picks certain features from a file -->
+            </geodata>
+            <geodata name="baseplacemarks">
+                <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                <pick>placemark<pick>
+            </geodata>
+            <geodata name="elevplacemarks">
+                <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                <pick>placemark<pick>
+            </geodata>
+            <geodata name="otherplacemarks">
+                <sourcefile format="KML">otherplacemarks.kml</sourcefile>
+                <pick>placemark<pick>
+            </geodata>
+            <geodata name="boundaryplacemarks">
+                <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                <pick>placemark<pick>
+            </geodata>
+	    </layer>
+    
+        <layer name="helloworldlayer" plugin="helloworldplugin">
+            <customplugin name="helloworld">
+                <sourcefile format="JPG">helloworld.jpg</sourcefile>
+            </customplugin>
+        </layer>
+    
+	    <!-- Here we could e.g. add an atmosphere or satellite layer -->
+    
+	    </layer name="floatitems" plugins="floatitems">
+    </map>
+    
+	    <!-- At last we define some legend properties -->
+    
+    <legend>
+        <section name="elevation" checkable="false">
+            <heading>Elevation</heading>
+            <!-- Example for a pixmap legend item: -->
+            <legenditem>
+                <itemsymbol pixmap="topography_7000.png"/>
+                <itemtext>7000 m</itemtext>
+            </legenditem>
+            <!-- Example for a color gradient legend item: -->
+            <legenditem>
+                <itemsymbol color="#dcbd80"/>
+                <itemtext>5000 m</itemtext>
+            </legenditem>
+            <!-- Example for a pixmap with a color as a translucent background: -->
+            <legenditem>
+                <itemsymbol color="#f29b68" pixmap="boundary.png"/>
+                <itemtext>State Boundary</itemtext>
+            </legenditem>
+            <!-- Insert further legend items here -->
+        </section>
+    </legend>
 
 </DeskGlobeML>
 
