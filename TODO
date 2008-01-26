@@ -46,15 +46,17 @@ Low hanging (but important) fruits:
 
 <Legend>
     <heading>Temperature</heading>
-    <LegendItem>
-        <!-- For now integrating legend item symbols using pixmaps should be enough -->
-        <ItemSymbol><img src="legend30deg.png"></ItemSymbol>
+    <!-- Specifying RGB numbers for color codes: -->
+    <LegendItem color="FF8075>
+        <!-- Legend item symbols are tags to allow > 1 of them -->
+        <ItemSymbol><img src="legend30deg.png"/></ItemSymbol>
+        <!-- Legend item text are tags to allow rich text -->
         <ItemText>30°C</ItemText>
     <LegendItem>
-    <LegendItem>
-        <!-- Later on specifying RGB numbers for color codes would be very convenient: -->
-        <ItemSymbol><color>#FF8075</color></ItemSymbol>
-        <ItemText>20°C</ItemText>
+    <LegendItem color="#000000">
+        <ItemSymbol><img src="city2000.png"/></ItemSymbol>
+        <ItemSymbol><img src="city1000.png"/></ItemSymbol>
+        <ItemText>Cities</ItemText>
     <LegendItem>
 </Legend>
 
