@@ -35,7 +35,7 @@ Low hanging (but important) fruits:
     MapTheme should parse this information and should change Marble's
     zoom slider accordingly.
 
-*** Followup task for maximum/minimumZoom (should be similar to add):
+*** Followup task for maximum/minimumZoom (should be similar to add):   INGE
     To get useful temperature/precipation/... maps we need to be able
     to add items to the legend in the .dgml file:
 
@@ -45,19 +45,20 @@ Low hanging (but important) fruits:
     see also: docs/layermanagement.txt.
 
 <Legend>
-    <heading>Temperature</heading>
-    <!-- Specifying RGB numbers for color codes: -->
-    <LegendItem color="FF8075>
-        <!-- Legend item symbols are tags to allow > 1 of them -->
-        <ItemSymbol><img src="legend30deg.png"/></ItemSymbol>
-        <!-- Legend item text are tags to allow rich text -->
-        <ItemText>30°C</ItemText>
-    <LegendItem>
-    <LegendItem color="#000000">
-        <ItemSymbol><img src="city2000.png"/></ItemSymbol>
-        <ItemSymbol><img src="city1000.png"/></ItemSymbol>
-        <ItemText>Cities</ItemText>
-    <LegendItem>
+    <section>
+        <heading>Temperature</heading>
+        <Item>
+            <!-- Legend item icons are tags to allow more than 1 of them -->
+            <Icon color="FF8075" pixmap="legend30deg.png"/>
+            <!-- Legend item text are tags to allow rich text -->
+            <Text>30°C</Text>
+        </Item>
+        <Item>
+            <Icon color="#000000" pixmap="city2000.png"/>
+            <Icon pixmap="city1000.png"/>
+            <ItemText>Cities</ItemText>
+        </Item>
+    </section>
 </Legend>
 
 MapTheme needs to get modified to parse this and add the properties of

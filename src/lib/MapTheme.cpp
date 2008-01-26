@@ -14,13 +14,78 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
+#include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtXml/QDomDocument>
+#include <QtGui/QColor>
+#include <QtGui/QPixmap>
 #include <QtGui/QIcon>
 #include <QtGui/QStandardItemModel>
 
 #include "MarbleDirs.h"
 #include "TileLoader.h"
+
+
+// ================================================================
+//                           Legend classes
+
+class LegendItem;
+
+class LegendSection
+{
+ public:
+    LegendSection() 
+        : m_heading(),
+          m_items()
+    { }
+    ~LegendSection() {};
+
+    QString  heading()                        const { return m_heading; }
+    void     setHeading( QString hd )               { m_heading = hd;   }
+    QList< LegendItem*> items()               const { return m_items;   }
+    void                addItem( LegendItem *item ) { m_items.append( item ); }
+
+    void     clear()
+    {
+        m_heading.clear();
+        m_items.clear();
+    }
+
+ private:
+    QString               m_heading;
+    QList< LegendItem* >  m_items;
+};
+
+class LegendItem
+{
+ public:
+    LegendItem();
+    ~LegendItem() {}
+
+    QColor   background()             const { return m_background; }
+    void     setBackground( QColor bg )     { m_background = bg;   }
+    QPixmap  symbol()                 const { return m_symbol;     }
+    void     setSymbol( QPixmap sym )       { m_symbol = sym;      }
+    QString  text()                   const { return m_text;       }
+    void     setText( QString txt )         { m_text = txt;        }
+
+ private:
+    QColor   m_background;
+    QPixmap  m_symbol;
+    QString  m_text;
+};
+
+
+LegendItem::LegendItem()
+  : m_background( Qt::white ),
+    m_symbol(),
+    m_text()
+{    
+}
+
+
+// ================================================================
+//                         class MapTheme
 
 
 MapTheme::MapTheme(QObject *parent)
@@ -63,6 +128,7 @@ int MapTheme::open( const QString& path )
     //        They should be dependent on the sphere.
     m_minimumZoom = 900;
     m_maximumZoom = 2500;
+    m_legend.clear();
 
     m_labelColor = QColor( 0, 0, 0, 255 );
 
@@ -92,7 +158,7 @@ int MapTheme::open( const QString& path )
                 QString  tagNameLower = mapStyleSibling.tagName().toLower();
                 if ( tagNameLower == "name" ) {
                     m_name = mapStyleSibling.text();
-//                    qDebug() << "Parsed Name: " << m_name;
+                    // qDebug() << "Parsed Name: " << m_name;
                 }
 
                 else if ( tagNameLower == "prefix" ) {
@@ -223,15 +289,130 @@ int MapTheme::open( const QString& path )
 
                 mapStyleSibling = mapStyleSibling.nextSiblingElement();
             }
-        }
+
+        } // tag mapstyle
+
+        else if ( element.tagName().toLower() == "legend" ) {
+            parseLegend( element );
+        } 
 
         element = element.nextSiblingElement();
-    }
+    } // while
 
     //qDebug() << "minimum zoom: " << m_minimumZoom;
     //qDebug() << "maximum zoom: " << m_maximumZoom;
 
     return 0;
+}
+
+
+bool MapTheme::parseLegend( QDomElement &legendElement )
+{
+    QDomElement  elem = legendElement.firstChildElement();
+    while ( !elem.isNull() ) {
+
+        if ( elem.tagName().toLower() == "section" ) {
+            LegendSection  *section = new LegendSection;
+            bool            ok;
+
+            ok = parseLegendSection( elem, section );
+            if ( ok )
+                m_legend.append( section );
+            else {
+                delete section;
+                return false;
+            }
+        }
+        else {
+            qDebug() << "Unknown tag in legend: "
+                     << elem.tagName();
+        }
+
+        elem = elem.nextSiblingElement();
+    } // while
+
+    return true;
+}
+
+bool MapTheme::parseLegendSection( QDomElement &sectionElement,
+                                   LegendSection *section)
+{
+    QDomElement  elem = sectionElement.firstChildElement();
+    while ( !elem.isNull() ) {
+
+        if ( elem.tagName().toLower() == "heading" ) {
+            section->setHeading( elem.text() );
+            qDebug() << "Heading: " << section->heading();
+        }
+
+        else if ( elem.tagName().toLower() == "item" ) {
+            LegendItem  *item = new LegendItem;
+            bool         ok;
+
+            ok = parseLegendItem( elem, item );
+            if ( ok )
+                section->addItem( item );
+            else {
+                delete item;
+                return false;
+            }
+        }
+
+        else {
+            qDebug() << "Unknown tag in legend section: "
+                     << elem.tagName();
+        }
+
+        elem = elem.nextSiblingElement();
+    } // 
+
+    return true;
+}
+
+bool MapTheme::parseLegendItem( QDomElement &legendItemElement,
+                                LegendItem *legendItem )
+{
+    // Get the background color from a possible attribute color.
+    if ( legendItemElement.hasAttribute( "color" ) ) {
+        QColor color( legendItemElement.attribute( "color" ) );
+        legendItem->setBackground( color );
+    }
+
+    QDomElement  elem = legendItemElement.firstChildElement();
+    while ( !elem.isNull() ) {
+        // FIXME: In the future, support > 1 icon.
+        if ( elem.tagName().toLower() == "icon" ) {
+
+            // Icon element.  Has attributes:
+            //    color
+            //    pixmap
+            if ( elem.hasAttribute( "color" ) ) {
+                legendItem->setBackground( QColor( elem.attribute( "color" ) ) );
+            }
+
+            if ( elem.hasAttribute( "pixmap" ) ) {
+                QString  pixmapName = elem.attribute( "pixmap" );
+                // FIXME: Append path
+                QPixmap  pixmap( pixmapName );
+                legendItem->setSymbol( pixmap );
+            }
+        }
+
+        else if ( elem.tagName().toLower() == "text" ) {
+            legendItem->setText( elem.text() );
+        }
+
+        else {
+            qDebug() << "Unknown tag in legend item: "
+                     << elem.tagName();
+        }
+
+
+        elem = elem.nextSiblingElement();
+    } // 
+
+    // FIXME: Error handling?
+    return true;
 }
 
 
