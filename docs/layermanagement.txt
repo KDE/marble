@@ -150,7 +150,11 @@ that might use Marble in the future):
 I. DGML SYNTAX FOR LAYERS:
 ==========================
 
-The new DGML format has got three main sections:
+Marble uses its own XML format called "DGML" to load and save maps.
+The DGML map format describes the basic properties of a map. The format assumes that the map consists of data that gets imported and integrated from various data sources. So it's different from other map formats which try to describe all the features in a map themselves: DGML reuses existing map data from established file formats (e.g. KML, GPX, GeoRSS), arranges them in layers and compiles them together into a new map.
+
+
+The new planned DGML format has got three main sections:
 
 1. The HEAD section in which basic properties get defined.
 
@@ -177,12 +181,10 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 -----------------------------------------
 
 
-<?xml version="1.2" encoding="UTF-8"?>
+<?xml version="2.0" encoding="UTF-8"?>
 <DeskGlobeML xmlns="http://edu.kde.org/marble/dgml/1.2">
 <head>
-    <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
-
-	<name>Atlas</name>
+    <name>Atlas</name>
 
 	<prefix>srtm</prefix>
 	<icon>srtm-preview.png</icon>
@@ -191,18 +193,24 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 
 	<minimumzoom>  900 </minimumzoom>
 	<maximumzoom> 2100 </maximumzoom>
+
+    <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
 </head>
+
 	<!-- Now we create the layer structure that gets handled by the layer management class -->
+
 <map bgcolor="#000000">
 	</canvas>
 	<!-- In this place one could e.g. insert a sky plugin -->
-	</earth>
+	</planet>
 
 	<!-- This layer creates the elevation model -->
 	<layer name="srtm" plugin="texture"  type="dem">
-		<sourcedir install=srtm.jpg format="JPG" expire="10800"> srtm </sourcedir>
-
-		<!-- If this was the satellite map we could add another sourcedir 
+        <texture format="JPG" expire="10800">
+    		<sourcedir> srtm </sourcedir>
+            <installmap> srtm.jpg </installmap>
+        </texture>
+		<!-- If this was the satellite map we could add another texture 
 	             tag for the clouds here resulting in a MergedLayer 
              Also note that for the tiles you can suggest a different 
              image format than for the original install image (e.g. "PNG").
@@ -211,36 +219,81 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 	
 	<!-- This layer creates the coastlines that are needed to colorize the elevation model properly -->
 	<layer name="mwdbii" plugin="vector" type="filterhelper">
-		<sourcefile name="pcoast"      format="PNT" category="land"> PCOAST.PNT </sourcefile>
-		<sourcefile name="pisland"     format="PNT" category="land"> PISLAND.PNT </sourcefile>
-		<sourcefile name="plakeisland" format="PNT" category="land"> PLAKEISLAND.PNT </sourcefile>
-		<sourcefile name="plake"       format="PNT" category="sea">  PLAKE.PNT </sourcefile>
-		<sourcefile name="pglacier"    format="PNT" category="sea">  PGLACIER.PNT </sourcefile>
+        <vector name="pcoast" type="land">
+    		<sourcefile format="PNT"> PCOAST.PNT </sourcefile>
+        <vector>
+        <vector name="pisland" type="land">
+    		<sourcefile format="PNT"> PISLAND.PNT </sourcefile>
+        </vector>
+        <vector name="plakeisland" type="land">
+    		<sourcefile format="PNT"> PLAKEISLAND.PNT </sourcefile>
+        </vector>
+        <vector name="plake" type="sea">
+    		<sourcefile format="PNT"> PLAKE.PNT </sourcefile>
+        </vector>
+        <vector name="pglacier" type="sea">
+    		<sourcefile format="PNT">  PGLACIER.PNT </sourcefile>
+        </vector>
 	</layer>
 
 	<!-- This layer provides the colorization -->
-	<layer name="" plugin="filter" type="colorize">
-		<dem>srtm</dem>
-		<coastline>mwdbii<coastline>
-		<!-- If these don't get defined the default palettes get used -->
-		<palette type="sea">seapalette.pal</palette>
-		<palette type="land">landpalette.pal</palette>
+	<layer name="" plugin="filter">
+        <filter name="texturecolorizer" type="colorize">
+    		<dem>srtm</dem>
+    		<coastline>mwdbii<coastline>
+    		<!-- If these don't get defined the default palettes get used -->
+    		<palette type="sea">seapalette.pal</palette>
+    		<palette type="land">landpalette.pal</palette>
+        </filter>
 	<layer>
 
-	<layer name="mwdbii" plugin="vector" type="feature">
-		<sourcefile name="pdiffborder" format="PNT" category="border"   color="#f29b68">PDIFFBORDER.PNT</sourcefile>
-		<sourcefile name="pusa48.diff" format="PNT" category="border"   color="#f29b68">PUSA48.DIFF.PNT</sourcefile>
-		<sourcefile name="dateline"    format="PNT" category="timezone" color="#000000">DATELINE.PNT</sourcefile>
-		<sourcefile name="priver.diff" format="PNT" category="river"    color="#637bff">PUSA48.DIFF.PNT</sourcefile>
+	<layer name="mwdbii" plugin="vector" type="polyline">
+        <vector name="pdiffborder" type="border">
+    		<sourcefile format="PNT">PDIFFBORDER.PNT</sourcefile>
+            <color>#f29b68</color>
+        </vector>
+        <vector name="pusa48.diff" type="polyline">
+		    <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
+            <color>#f29b68</color>
+        </vector>
+        <vector name="international dateline" type="polyline">
+    		<sourcefile format="PNT">DATELINE.PNT</sourcefile>
+            <color>#000000</color>
+        </vector>
+        <vector name="pusa48" type="polyline">
+    		<sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
+            <color>#637bff</color>
+        </vector>
 	</layer>
 
-	<layer name="places" plugin="placemarks">
-		<sourcefile name="cityplacemarks"     format="KML">cityplacemarks.kml</sourcefile>
-		<sourcefile name="baseplacemarks"     format="KML">baseplacemarks.kml</sourcefile>
-		<sourcefile name="elevplacemarks"     format="KML">elevplacemarks</sourcefile>
-		<sourcefile name="otherplacemarks"    format="KML">otherplacemarks</sourcefile>
-		<sourcefile name="boundaryplacemarks" format="KML">boundaryplacemarks</sourcefile>
+	<layer name="standardplaces" plugin="geodata">
+        <geodata name="cityplacemarks">
+    		<sourcefile format="KML">cityplacemarks.kml</sourcefile>
+            <pick>placemark<pick> <!-- picks certain features from a file -->
+        </geodata>
+        <geodata name="baseplacemarks">
+    		<sourcefile format="KML">baseplacemarks.kml</sourcefile>
+            <pick>placemark<pick>
+        </geodata>
+        <geodata name="elevplacemarks">
+    		<sourcefile format="KML">elevplacemarks.kml</sourcefile>
+            <pick>placemark<pick>
+        </geodata>
+        <geodata name="otherplacemarks">
+    		<sourcefile format="KML">otherplacemarks.kml</sourcefile>
+            <pick>placemark<pick>
+        </geodata>
+        <geodata name="boundaryplacemarks">
+    		<sourcefile format="KML">boundaryplacemarks</sourcefile>
+            <pick>placemark<pick>
+        </geodata>
 	</layer>
+
+    <layer name="helloworldlayer" plugin="helloworldplugin">
+        <customplugin name="helloworld">
+            <sourcefile format="JPG">helloworld.jpg</sourcefile>
+        </customplugin>
+    </layer>
 
 	<!-- Here we could e.g. add an atmosphere or satellite layer -->
 
