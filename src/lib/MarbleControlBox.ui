@@ -191,6 +191,9 @@
            <property name="viewMode" >
             <enum>QListView::ListMode</enum>
            </property>
+           <property name="uniformItemSizes" >
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>
