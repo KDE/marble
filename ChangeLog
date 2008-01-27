@@ -1,3 +1,16 @@
+2008-01-27  Inge Wallin  <ingwa@c83-252-211-36.bredband.comhem.se>
+
+	Step 2 for definition of the legend in DGML:
+	* src/lib/MarbleLegendBrowser.{h,cpp} (MarbleLegendBrowser):
+	Insert generated HTML into the legend
+	(setMarbleWidget): New function
+	(genSectionsHtml): New function
+	All: follow coding standards
+	* src/lib/MarbleControlBox.cpp (addMarbleWidget): Set the marble
+	widget for the legend browser
+	* data/legend.html: Add a marker where generated contents should
+	be inserted
+	
 2008-01-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of definition of the Legend in DGML.
