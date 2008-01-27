@@ -1,3 +1,13 @@
+2008-01-27  Inge Wallin  <inge@lysator.liu.se>
+
+	Start of definition of the Legend in DGML (backport from trunk)
+	* src/lib/MapTheme.cpp (class LegendSection): new class
+	(class LegendItem): new class
+	(open): parse legend as well
+	(parseLegend): new function
+	(parseLegendSection): new function
+	(parseLegendItem): new function
+
 2008-01-24  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.cpp:

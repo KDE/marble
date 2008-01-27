@@ -31,6 +31,11 @@ typedef struct
 } DgmlLayer;
 
 
+class QDomElement;
+class LegendSection;
+class LegendItem;
+
+
 class MapTheme : public QObject
 {
     Q_OBJECT
@@ -66,12 +71,21 @@ public:
     static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
 
 private:
+    bool parseLegend( QDomElement &legendElement );
+    bool parseLegendSection( QDomElement   &legendSectionElement,
+                             LegendSection *sectionItem );
+    bool parseLegendItem( QDomElement &legendItemElement,
+                          LegendItem  *legendItem );
+
+
+private:
     QString    m_name;
     QString    m_prefix;
     QString    m_icon;
     QColor     m_labelColor;
     int        m_minimumZoom;
     int        m_maximumZoom;
+    QList<LegendSection*>  m_legend;
 
     QColor     m_oceanColor;
     QColor     m_landColor;
