@@ -1,3 +1,11 @@
+2008-01-27  Torsten Rahn  <rahn@kde.org>
+
+	* src/lib/MarbleControlBox.ui: set the locationListView's 
+	property "uniformItemSizes" "true". This solves the 
+	problem of delayed item appearance.
+	Thanks to Trolltech's Alessandro Portale for coming up
+	with this suggestion.
+	
 2008-01-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of definition of the Legend in DGML (backport from trunk)
