@@ -562,7 +562,7 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         themeIconPixmap.load( MarbleDirs::path( relativePath ) );
 
         if ( themeIconPixmap.isNull() ) {
-            relativePath = "svg/application-x-marble.png"; 
+            relativePath = "svg/application-x-marble-gray.png"; 
             themeIconPixmap.load( MarbleDirs::path( relativePath ) );
         }
         else {

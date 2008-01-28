@@ -70,6 +70,7 @@ svg/marble-logo.png
 svg/marble-logo-72dpi.png
 svg/application-x-marble.svg
 svg/application-x-marble.png
+svg/application-x-marble-gray.png
 DESTINATION ${MARBLE_DATA_PATH}/svg)
 
 install (FILES 
