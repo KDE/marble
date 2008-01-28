@@ -35,7 +35,7 @@ Low hanging (but important) fruits:
     MapTheme should parse this information and should change Marble's
     zoom slider accordingly.
 
-*** Followup task for maximum/minimumZoom (should be similar to add):   INGE
+*** Followup task for maximum/minimumZoom (should be similar to add):   DONE
     To get useful temperature/precipation/... maps we need to be able
     to add items to the legend in the .dgml file:
 
@@ -45,7 +45,7 @@ Low hanging (but important) fruits:
     see also: docs/layermanagement.txt.
 
 <Legend>
-    <section>
+    <section name="elevation" checkable="false" spacing="12">
         <heading>Temperature</heading>
         <Item>
             <!-- Legend item icons are tags to allow more than 1 of them -->
@@ -61,16 +61,15 @@ Low hanging (but important) fruits:
     </section>
 </Legend>
 
-MapTheme needs to get modified to parse this and add the properties of
-the legend items into a QMap.  Some method in MarbleLegendBrowser
-needs to retrieve the data, create an HTML stream from it and insert
-it at a point in the html template that gets marked accordingly. As a
-result one would get the data displayed in a manner similar to the
-"Elevation" entries. Eventually using this feature we can remove the
-"Elevation" section (as it is specific to the "Atlas" map) and replace
-it by an entry in the .dgml file.
+*** Followup task to the followup task:                                 INGE?
 
-*** Fix Double Click on map (which should center the map on the point
+    The three properties 
+
+    <section name="elevation" checkable="false" spacing="12">
+
+    need to get added, so we can adjust the colors of the borders.
+
+*** Fix Double Click on map (which should center the map on the point   INGE
     being double clicked).
 
 *** Add a *small* percentage bar to the status bar that indicates map   ----
@@ -83,9 +82,10 @@ it by an entry in the .dgml file.
 
 BUGS:
 
-*** Find the reason why labels overlap when a KML file gets loaded.     ----
+*** Find the reason why labels overlap when a KML file gets loaded.     TACK
+    I'm afraid this will have to get delayed for 4.0.2 ...
 
-*** Fix blue tint on the sky.                                           ----
+*** Fix blue tint on the sky.                                           DONE
 
 
 More sophisticated issues
