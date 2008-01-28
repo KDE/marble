@@ -242,11 +242,8 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     setUpdatesEnabled( false );
     {
         int scrollPosition = verticalScrollBar()->sliderPosition();
-        setHtml( d->m_html );
 
-        QTextFrameFormat  format = document()->rootFrame()->frameFormat();
-        format.setMargin(6);
-        document()->rootFrame()->setFrameFormat( format );
+        loadLegend();
 
         verticalScrollBar()->setSliderPosition( scrollPosition );
     }
