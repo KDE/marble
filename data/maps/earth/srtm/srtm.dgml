@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
-	<MapStyle>
-		<name>Atlas</name>
+    <MapStyle>
+        <name>Atlas</name>
 
-		<prefix>srtm</prefix>
-		<icon>srtm-preview.png</icon>
+        <prefix>srtm</prefix>
+        <icon>srtm-preview.png</icon>
 
-		<description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
-		
-		<layer type="bitmap" name="srtm" dem="true"/>
+        <description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
+        
+        <layer type="bitmap" name="srtm" dem="true"/>
 
-		<installmap>srtm.jpg</installmap>
+        <installmap>srtm.jpg</installmap>
 
-		<layer type="vector" name="mwdbii"/>
+        <minimumzoom>  900 </minimumzoom>
+        <maximumzoom> 2100 </maximumzoom>
+
+        <layer type="vector" name="mwdbii"/>
 
         <CountryStyle>
             <border-color>#f29b68</border-color>
@@ -30,9 +33,80 @@
             <color>#637bff</color>
         </RiverStyle>
 
-		<LabelStyle>
-			<color>#000000</color>
-		</LabelStyle>
+        <LabelStyle>
+            <color>#000000</color>
+        </LabelStyle>
 
-	</MapStyle>
+    </MapStyle>
+
+    <legend>
+        <section name="elevation" checkable="false">
+            <heading>Elevation</heading>
+            <item>
+                <icon color="#c39d55"/>
+                <text>7000 m</text>
+            </item>
+            <item>
+                <icon color="#dcbd80"/>
+                <text>5000 m</text>
+            </item>
+            <item>
+                <icon color="#f0da96"/>
+                <text>3500 m</text>
+            </item>
+            <item>
+                <icon color="#f1e7ad"/>
+                <text>2000 m</text>
+            </item>
+            <item>
+                <icon color="#d7d399"/>
+                <text>1000 m</text>
+            </item>
+            <item>
+                <icon color="#bcc48a"/>
+                <text>500 m</text>
+            </item>
+            <item>
+                <icon color="#98b47a"/>
+                <text>200 m</text>
+            </item>
+            <item>
+                <icon color="#81a96d"/>
+                <text>50 m</text>
+            </item>
+            <item>
+                <icon color="#689961"/>
+                <text>0 m</text>
+            </item>
+            <item>
+                <icon color="#e3ecf5"/>
+                <text>0 m (Water)</text>
+            </item>
+            <item>
+                <icon color="#d0def2"/>
+                <text>-50 m</text>
+            </item>
+            <item>
+                <icon color="#bfd5ee"/>
+                <text>-200 m</text>
+            </item>
+            <item>
+                <icon color="#a3c3e6"/>
+                <text>-2000 m</text>
+            </item>
+            <item>
+                <icon color="#89b0da"/>
+                <text>-4000 m</text>
+            </item>
+            <item>
+                <icon color="#6b99c9"/>
+                <text>-6500 m</text>
+            </item>
+            <item>
+                <icon color="#5182b4"/>
+                <text>-11000 m</text>
+            </item>
+        </section>
+    </legend>
+
 </DeskGlobeML>

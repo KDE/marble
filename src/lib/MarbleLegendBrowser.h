@@ -23,6 +23,7 @@
 #include "marble_export.h"
 
 
+class MarbleWidget;
 class MarbleLegendBrowserPrivate;
 
 class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
@@ -32,6 +33,8 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
  public:
     MarbleLegendBrowser( QWidget* parent );
     ~MarbleLegendBrowser();
+
+    void  setMarbleWidget( MarbleWidget *marbleWidget );
 
  public Q_SLOTS:
     void setCheckedLocations( bool checked );
@@ -60,12 +63,17 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledScaleBar( bool );
 
  private Q_SLOTS:
+    void loadLegend();
+
     void toggleCheckBoxStatus( const QUrl &);
 
  protected:
+    QString  readHtml( const QUrl & name );
+    QString  generateSectionsHtml();
+    void  translateHtml( QString & html );
+
     QVariant loadResource ( int type, const QUrl & name );
-    void sendSignals( const QString &name, bool checked );
-    void readHtml( const QUrl & name );
+    void     sendSignals( const QString &name, bool checked );
 
  private:
     MarbleLegendBrowserPrivate  * const d; 

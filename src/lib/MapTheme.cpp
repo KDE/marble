@@ -17,8 +17,6 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtXml/QDomDocument>
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
 #include <QtGui/QIcon>
 #include <QtGui/QStandardItemModel>
 
@@ -29,55 +27,10 @@
 // ================================================================
 //                           Legend classes
 
-class LegendItem;
-
-class LegendSection
-{
- public:
-    LegendSection() 
-        : m_heading(),
-          m_items()
-    { }
-    ~LegendSection() {};
-
-    QString  heading()                        const { return m_heading; }
-    void     setHeading( QString hd )               { m_heading = hd;   }
-    QList< LegendItem*> items()               const { return m_items;   }
-    void                addItem( LegendItem *item ) { m_items.append( item ); }
-
-    void     clear()
-    {
-        m_heading.clear();
-        m_items.clear();
-    }
-
- private:
-    QString               m_heading;
-    QList< LegendItem* >  m_items;
-};
-
-class LegendItem
-{
- public:
-    LegendItem();
-    ~LegendItem() {}
-
-    QColor   background()             const { return m_background; }
-    void     setBackground( QColor bg )     { m_background = bg;   }
-    QPixmap  symbol()                 const { return m_symbol;     }
-    void     setSymbol( QPixmap sym )       { m_symbol = sym;      }
-    QString  text()                   const { return m_text;       }
-    void     setText( QString txt )         { m_text = txt;        }
-
- private:
-    QColor   m_background;
-    QPixmap  m_symbol;
-    QString  m_text;
-};
 
 
 LegendItem::LegendItem()
-  : m_background( Qt::white ),
+  : m_background( Qt::transparent ),
     m_symbol(),
     m_text()
 {    
@@ -170,7 +123,7 @@ int MapTheme::open( const QString& path )
                     m_icon = mapStyleSibling.text();
                     // qDebug() << m_icon;
                 }
-				
+                
                 else if ( tagNameLower == "description" ) {
                     m_description = mapStyleSibling.text();
                     // qDebug() << m_description;
@@ -264,7 +217,7 @@ int MapTheme::open( const QString& path )
                         m_vectorlayer.enabled = true;
                         m_vectorlayer.name    = mapStyleSibling.attribute( "name", "" );
                         m_vectorlayer.type    = mapStyleSibling.attribute( "type", "" );
-                    }					
+                    }                   
                 }
 
                 else if ( tagNameLower == "minimumzoom" ) {
@@ -342,7 +295,7 @@ bool MapTheme::parseLegendSection( QDomElement &sectionElement,
 
         if ( elem.tagName().toLower() == "heading" ) {
             section->setHeading( elem.text() );
-            qDebug() << "Heading: " << section->heading();
+//            qDebug() << "Heading: " << section->heading();
         }
 
         else if ( elem.tagName().toLower() == "item" ) {
@@ -393,7 +346,7 @@ bool MapTheme::parseLegendItem( QDomElement &legendItemElement,
             if ( elem.hasAttribute( "pixmap" ) ) {
                 QString  pixmapName = elem.attribute( "pixmap" );
                 // FIXME: Append path
-                QPixmap  pixmap( pixmapName );
+                QPixmap  pixmap( MarbleDirs::path( pixmapName ) );
                 legendItem->setSymbol( pixmap );
             }
         }
@@ -519,7 +472,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
     }
 
     // for (int i = 0; i < mapfiles.size(); ++i)
-    //	   qDebug() << "Files: " << mapfiles.at(i);
+    //     qDebug() << "Files: " << mapfiles.at(i);
 
     return mapfiles;
 }
@@ -554,10 +507,24 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 tr( maptheme->name().toUtf8() ), 
                                 Qt::DisplayRole );
-        QIcon mapThemeIcon =  QIcon( QPixmap( MarbleDirs::path( 
-                                    "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) )
-                                    .scaled( maxIconSize, 
-                                    Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+
+        QPixmap themeIconPixmap;
+        QString relativePath;
+
+        relativePath = "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon();
+        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+
+        if ( themeIconPixmap.isNull() ) {
+            relativePath = "svg/application-x-marble-gray.png"; 
+            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+        }
+        else {
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
+                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
+        } 
+
+        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ), mapThemeIcon, 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),

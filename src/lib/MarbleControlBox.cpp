@@ -223,6 +223,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 #endif
 
     // Initialize the MarbleLegendBrowser
+    d->uiWidget.marbleLegendBrowser->setMarbleWidget( d->m_widget );
+
     d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
     d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
     d->uiWidget.marbleLegendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
