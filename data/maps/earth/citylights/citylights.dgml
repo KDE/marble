@@ -26,19 +26,19 @@
         <section name="surface" checkable="false">
             <heading>Surface</heading>
             <item>
-                <icon pixmap="legend/city.png"/>
+                <icon pixmap="maps/earth/citylights/legend/city.png"/>
                 <text>Populated places</text>
             </item>
             <item>
-                <icon pixmap="legend/lightterrain.png"/>
+                <icon pixmap="maps/earth/citylights/legend/lightterrain.png"/>
                 <text>Light terrain</text>
             </item>
             <item>
-                <icon pixmap="legend/darkterrain.png"/>
+                <icon pixmap="maps/earth/citylights/legend/darkterrain.png"/>
                 <text>Dark terrain</text>
             </item>
             <item>
-                <icon pixmap="legend/water.png"/>
+                <icon pixmap="maps/earth/citylights/legend/water.png"/>
                 <text>Water</text>
             </item>
         </section>

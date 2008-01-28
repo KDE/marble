@@ -346,7 +346,7 @@ bool MapTheme::parseLegendItem( QDomElement &legendItemElement,
             if ( elem.hasAttribute( "pixmap" ) ) {
                 QString  pixmapName = elem.attribute( "pixmap" );
                 // FIXME: Append path
-                QPixmap  pixmap( MarbleDirs::path( "maps/earth/" + m_prefix + "/" + pixmapName ) );
+                QPixmap  pixmap( MarbleDirs::path( pixmapName ) );
                 legendItem->setSymbol( pixmap );
             }
         }

@@ -66,7 +66,17 @@ MarbleLegendBrowser::~MarbleLegendBrowser()
 void MarbleLegendBrowser::loadLegend()
 {
     // Read the html string.
-    d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
+
+    // Check for a theme specific legend.html first
+    if ( d->m_marbleWidget != 0 && d->m_marbleWidget->model() != 0 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
+    {
+        MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject(); 
+        d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ) ) );
+    }
+
+    if ( d->m_html.isEmpty() ) {
+        d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
+    }
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
     d->m_loadedSectionsHtml = generateSectionsHtml();
