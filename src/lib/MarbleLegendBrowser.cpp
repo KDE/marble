@@ -70,8 +70,13 @@ void MarbleLegendBrowser::loadLegend()
     // Check for a theme specific legend.html first
     if ( d->m_marbleWidget != 0 && d->m_marbleWidget->model() != 0 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
     {
-        MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject(); 
-        d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ) ) );
+        MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
+        QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ); 
+        qDebug() << customLegendPath;
+        if ( !customLegendPath.isEmpty() )
+            d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
+        else
+            d->m_html = "";
     }
 
     if ( d->m_html.isEmpty() ) {
