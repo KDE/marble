@@ -63,13 +63,17 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledScaleBar( bool );
 
  private Q_SLOTS:
+    void loadLegend();
+
     void toggleCheckBoxStatus( const QUrl &);
 
  protected:
     QString  readHtml( const QUrl & name );
+    QString  generateSectionsHtml();
+    void  translateHtml( QString & html );
+
     QVariant loadResource ( int type, const QUrl & name );
     void     sendSignals( const QString &name, bool checked );
-    QString  genSectionsHtml();
 
  private:
     MarbleLegendBrowserPrivate  * const d; 

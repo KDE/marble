@@ -1,5 +1,18 @@
 2008-01-28  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MapTheme.{cpp,h}:
+    * src/lib/MarbleLegendBrowser.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/MapTheme.h:
+    * data/maps/earth/srtm/srtm.dgml:
+    * data/legend.html:
+    * data/CMakeLists.txt:
+
+    - Continuing Inge's work and extending the 
+    MarbleLegendBrowser to support custom legend items.
+
+2008-01-28  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MapTheme.cpp:
     * data/svg/application-x-marble.svg:
     * data/svg/application-x-marble.png:

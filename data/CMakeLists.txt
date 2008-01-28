@@ -44,22 +44,6 @@ bitmaps/border_1.png
 bitmaps/border_2.png
 bitmaps/river.png
 bitmaps/lake.png
-bitmaps/topography_0.png
-bitmaps/topography_50.png
-bitmaps/topography_200.png
-bitmaps/topography_500.png
-bitmaps/topography_1000.png
-bitmaps/topography_2000.png
-bitmaps/topography_3500.png
-bitmaps/topography_5000.png
-bitmaps/topography_7000.png
-bitmaps/bathymetry_0.png
-bitmaps/bathymetry_-50.png
-bitmaps/bathymetry_-200.png
-bitmaps/bathymetry_-2000.png
-bitmaps/bathymetry_-4000.png
-bitmaps/bathymetry_-6500.png
-bitmaps/bathymetry_-11000.png
 bitmaps/waypoint.png
 DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
 

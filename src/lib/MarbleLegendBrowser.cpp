@@ -16,9 +16,13 @@
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QtGui/QPainter>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
 #include <QRegExp>
+
+#include "MarbleWidget.h"
+#include "MapTheme.h"
 
 #include "MarbleDirs.h"
 
@@ -27,7 +31,8 @@ class MarbleLegendBrowserPrivate
 {
  public:
     MarbleWidget        *m_marbleWidget;
-    QMap<QString, bool>  m_checkBoxMap;
+    QMap<QString, bool>     m_checkBoxMap;
+    QMap<QString, QPixmap>  m_symbolMap;
     QString              m_html;
     QString              m_loadedSectionsHtml;
 };
@@ -40,18 +45,37 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
+    d->m_marbleWidget = 0;
     // Disable changing layout due to the ScrollBarPolicy:
     setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
 
+    setTextInteractionFlags( Qt::LinksAccessibleByMouse
+                             | Qt::LinksAccessibleByKeyboard );
+
+    connect ( this, SIGNAL( anchorClicked( QUrl ) ),
+              this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
+
+   loadLegend();
+}
+
+MarbleLegendBrowser::~MarbleLegendBrowser()
+{
+    delete d;
+}
+
+void MarbleLegendBrowser::loadLegend()
+{
     // Read the html string.
     d->m_html = readHtml( QUrl::fromLocalFile( MarbleDirs::path( "legend.html" ) ) );
 
     // Generate some parts of the html from the MapTheme <Legend> tag. 
-    d->m_loadedSectionsHtml = genSectionsHtml();
+    d->m_loadedSectionsHtml = generateSectionsHtml();
 
     // And then create the final html from these two parts.
     QString  finalHtml = d->m_html;
-    finalHtml.replace( QString( "##genhtml##" ), d->m_loadedSectionsHtml );
+    finalHtml.replace( QString( "<!-- ##customLegendEntries## -->" ), d->m_loadedSectionsHtml );
+
+    translateHtml( finalHtml );
 
     // Set the html string in the QTextBrowser.
     setHtml( finalHtml );
@@ -60,30 +84,26 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );
     viewport()->update();
-
-    setTextInteractionFlags( Qt::LinksAccessibleByMouse
-                             | Qt::LinksAccessibleByKeyboard );
-
-    connect ( this, SIGNAL( anchorClicked( QUrl ) ),
-              this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
 }
-
-MarbleLegendBrowser::~MarbleLegendBrowser()
-{
-    delete d;
-}
-
  
 void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
 {
     // We need this to be able to get to the MapTheme.
     d->m_marbleWidget = marbleWidget;
+
+    loadLegend();
+
+    if ( d->m_marbleWidget ) {
+        connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+                  this, SLOT( loadLegend() ) );
+    }
 }
 
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )
 {
     QString html;
+
 
     QFile data( name.toLocalFile() );
     if ( data.open( QFile::ReadOnly ) ) {
@@ -92,10 +112,15 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
         data.close();
     }
 
+    // Tell QTextBrowser where to search for further document resources
     QStringList paths = searchPaths();
     paths.append( QFileInfo(data).absolutePath() );
     setSearchPaths( paths );
+    return html;
+}
 
+void MarbleLegendBrowser::translateHtml( QString & html )
+{
     // must match string extraction in Messages.sh
     QString s = html.remove( 0, html.indexOf( "<body>" ) );
     QRegExp rx( "</?\\w+((\\s+\\w+(\\s*=\\s*(?:\".*\"|'.*'|[^'\">\\s]+))?)+\\s*|\\s*)/?>" );
@@ -107,18 +132,63 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
     for (QStringList::const_iterator i = words.constBegin(); 
          i != words.constEnd(); ++i)
         html.replace( *i, tr( (*i).toUtf8() ) );
-
-    return html;
 }
 
-QString MarbleLegendBrowser::genSectionsHtml()
+QString MarbleLegendBrowser::generateSectionsHtml()
 {
     // Generate HTML to include into legend.html here.
-    //mapTheme = d->m_marbleWidget->model()->mapThemeObject();
 
-    // FIXME: Implement this function
+    QString customLegendString;
+//    FIXME: Move spacing into LegendItem
+    const int spacing = 12;
 
-    return QString();
+    if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapThemeObject() == 0 )
+        return QString();
+
+    MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject(); 
+
+    QList<LegendSection*> legend = currentMapTheme->legend();
+
+    d->m_symbolMap.clear();
+
+    for (int section = 0; section < legend.size(); ++section) {
+        customLegendString += "<h4>" + legend.at(section)->heading() + "</h4>";
+        customLegendString += "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">";
+
+        QList< LegendItem*> items = legend.at(section)->items();
+        for (int item = 0; item < items.size(); ++item) {
+
+            QPixmap itemSymbol;
+
+            if ( !items.at(item)->symbol().isNull() )
+                 itemSymbol = items.at(item)->symbol();
+            else
+                 itemSymbol = QPixmap( 24, 12 );
+
+            if ( items.at(item)->background() != Qt::transparent )
+            {
+                QPainter painter( &itemSymbol );
+                painter.fillRect( QRect( 0, 0, itemSymbol.width(), itemSymbol.height() ), items.at(item)->background());
+                // Paint the pixmap on top of the colored background
+                painter.drawPixmap( 0, 0, itemSymbol );
+            }
+
+            QString itemIdString = QString("item%1-%2").arg(section).arg(item);
+            d->m_symbolMap[itemIdString] = itemSymbol;
+
+            customLegendString += "    <tr>";
+            customLegendString += QString( "        <td align=\"left\" valign=\"top\" width=\"%1\">" ).arg( itemSymbol.width() + spacing ); 
+            customLegendString += "             <img src=\"pixmap:" + itemIdString + "\">";
+            customLegendString += "        </td>"; 
+            customLegendString += "        <td align=\"left\" valign=\"top}\">"; 
+            customLegendString += "             " + items.at(item)->text();
+            customLegendString += "        </td>"; 
+            customLegendString += "    </tr>";
+        }
+        customLegendString += "</table>";
+    }
+
+    return customLegendString;
 }
 
 
@@ -131,10 +201,8 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
 {
     QString  newName;
 
-    if ( type != QTextDocument::ImageResource
-         || !name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
-        return QTextBrowser::loadResource( type, name );        
-
+    if ( type == QTextDocument::ImageResource
+         && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
     {
         QString checkBoxName = name.toString().section(":", 1, -1);
         if ( !d->m_checkBoxMap.contains( checkBoxName ) ) {
@@ -148,7 +216,16 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
         return QTextBrowser::loadResource( type, QUrl( newName ) );
     }
 
+    if ( type == QTextDocument::ImageResource
+         && name.toString().startsWith("pixmap:", Qt::CaseInsensitive) )
+    {
+        QString pixmapName = name.toString().section(":", 1, -1);
+        if ( d->m_symbolMap.contains( pixmapName ) ) {
+            return d->m_symbolMap.value( pixmapName );
+        }
+    }
 
+    return QTextBrowser::loadResource( type, name );
 }
 
 void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )

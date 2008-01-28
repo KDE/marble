@@ -16,6 +16,7 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QColor>
+#include <QtGui/QPixmap>
 
 #include "marble_export.h"
 
@@ -32,8 +33,52 @@ typedef struct
 
 
 class QDomElement;
-class LegendSection;
-class LegendItem;
+
+
+class LegendItem
+{
+ public:
+    LegendItem();
+    ~LegendItem() {}
+
+    QColor   background()             const { return m_background; }
+    void     setBackground( QColor bg )     { m_background = bg;   }
+    QPixmap  symbol()                 const { return m_symbol;     }
+    void     setSymbol( QPixmap sym )       { m_symbol = sym;      }
+    QString  text()                   const { return m_text;       }
+    void     setText( QString txt )         { m_text = txt;        }
+
+ private:
+    QColor   m_background;
+    QPixmap  m_symbol;
+    QString  m_text;
+};
+
+
+class LegendSection
+{
+ public:
+    LegendSection() 
+        : m_heading(),
+          m_items()
+    { }
+    ~LegendSection() {};
+
+    QString  heading()                        const { return m_heading; }
+    void     setHeading( QString hd )               { m_heading = hd;   }
+    QList< LegendItem*> items()               const { return m_items;   }
+    void                addItem( LegendItem *item ) { m_items.append( item ); }
+
+    void     clear()
+    {
+        m_heading.clear();
+        m_items.clear();
+    }
+
+ private:
+    QString               m_heading;
+    QList< LegendItem* >  m_items;
+};
 
 
 class MapTheme : public QObject
@@ -50,6 +95,7 @@ public:
     QColor  labelColor()    const { return m_labelColor;  }
     int     minimumZoom()   const { return m_minimumZoom; }
     int     maximumZoom()   const { return m_maximumZoom; }
+    QList<LegendSection*> legend() const { return m_legend; }
 
     QColor oceanColor()         const { return m_oceanColor;         }
     QColor landColor()          const { return m_landColor;          }

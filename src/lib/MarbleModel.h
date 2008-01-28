@@ -54,6 +54,7 @@ class FileViewModel;
 class GpxFileModel;
 class GpsLayer;
 class GeoDataDocument;
+class MapTheme;
 class MarbleModelPrivate;
 class PlaceMark;
 class PlaceMarkManager;
@@ -141,6 +142,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      *    maptheme = "bluemarble/bluemarble.dgml"
      */
     QString mapTheme() const;
+
+    MapTheme* mapThemeObject() const;
 
     /**
      * @brief Set a new map theme to use.

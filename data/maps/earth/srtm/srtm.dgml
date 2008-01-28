@@ -43,67 +43,67 @@
         <section name="elevation" checkable="false">
             <heading>Elevation</heading>
             <item>
-                <icon pixmap="topography_7000.png"/>
+                <icon color="#c39d55"/>
                 <text>7000 m</text>
             </item>
             <item>
-                <icon pixmap="topography_5000.png"/>
+                <icon color="#dcbd80"/>
                 <text>5000 m</text>
             </item>
             <item>
-                <icon pixmap="topography_3500.png"/>
+                <icon color="#f0da96"/>
                 <text>3500 m</text>
             </item>
             <item>
-                <icon pixmap="topography_2000.png"/>
+                <icon color="#f1e7ad"/>
                 <text>2000 m</text>
             </item>
             <item>
-                <icon pixmap="topography_1000.png"/>
+                <icon color="#d7d399"/>
                 <text>1000 m</text>
             </item>
             <item>
-                <icon pixmap="topography_500.png"/>
+                <icon color="#bcc48a"/>
                 <text>500 m</text>
             </item>
             <item>
-                <icon pixmap="topography_200.png"/>
+                <icon color="#98b47a"/>
                 <text>200 m</text>
             </item>
             <item>
-                <icon pixmap="topography_50.png"/>
+                <icon color="#81a96d"/>
                 <text>50 m</text>
             </item>
             <item>
-                <icon pixmap="topography_0.png"/>
+                <icon color="#689961"/>
                 <text>0 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_0.png"/>
+                <icon color="#e3ecf5"/>
                 <text>0 m (Water)</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-50.png"/>
+                <icon color="#d0def2"/>
                 <text>-50 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-200.png"/>
+                <icon color="#bfd5ee"/>
                 <text>-200 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-2000.png"/>
+                <icon color="#a3c3e6"/>
                 <text>-2000 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-4000.png"/>
+                <icon color="#89b0da"/>
                 <text>-4000 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-6500.png"/>
+                <icon color="#6b99c9"/>
                 <text>-6500 m</text>
             </item>
             <item>
-                <icon pixmap="bathymetry_-11000.png"/>
+                <icon color="#5182b4"/>
                 <text>-11000 m</text>
             </item>
         </section>

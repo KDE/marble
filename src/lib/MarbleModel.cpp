@@ -192,6 +192,13 @@ QString MarbleModel::mapTheme() const
     return d->m_selectedMap;
 }
 
+
+MapTheme* MarbleModel::mapThemeObject() const
+{
+    return d->m_maptheme;
+}
+
+
 // Set a particular theme for the map and load the appropriate tile level.
 // If the tiles (for the lowest tile level) haven't been created already
 // then create them here and now.
