@@ -557,7 +557,6 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
 
         QPixmap themeIconPixmap;
         QString relativePath;
-        qDebug() << "ICO: " << maptheme->icon();
 
         relativePath = "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon();
         themeIconPixmap.load( MarbleDirs::path( relativePath ) );
