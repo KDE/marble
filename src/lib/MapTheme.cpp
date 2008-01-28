@@ -554,10 +554,25 @@ QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
                                 tr( maptheme->name().toUtf8() ), 
                                 Qt::DisplayRole );
-        QIcon mapThemeIcon =  QIcon( QPixmap( MarbleDirs::path( 
-                                    "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon() ) )
-                                    .scaled( maxIconSize, 
-                                    Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+
+        QPixmap themeIconPixmap;
+        QString relativePath;
+        qDebug() << "ICO: " << maptheme->icon();
+
+        relativePath = "maps/earth/" +  maptheme->prefix() + '/' + maptheme->icon();
+        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+
+        if ( themeIconPixmap.isNull() ) {
+            relativePath = "svg/application-x-marble.png"; 
+            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+        }
+        else {
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
+                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
+        } 
+
+        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ), mapThemeIcon, 
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),

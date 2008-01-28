@@ -1,3 +1,13 @@
+2008-01-28  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapTheme.cpp:
+    * data/svg/application-x-marble.svg:
+    * data/svg/application-x-marble.png:
+    * data/CMakeLists.txt:
+
+    - Adding Nuno Pinheiro's Marble Mimetype icon. 
+    - Using it as a standard preview icon for map themes.
+
 2008-01-27  Torsten Rahn  <rahn@kde.org>
 
 	* src/lib/MarbleControlBox.ui: set the locationListView's 
