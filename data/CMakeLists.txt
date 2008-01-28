@@ -310,6 +310,13 @@ maps/earth/citylights/citylights-preview.png
 DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights)
 
 install (FILES
+maps/earth/citylights/legend/city.png
+maps/earth/citylights/legend/lightterrain.png
+maps/earth/citylights/legend/darkterrain.png
+maps/earth/citylights/legend/water.png
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights/legend)
+
+install (FILES
 maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
@@ -320,6 +327,14 @@ maps/earth/bluemarble/bluemarble.jpg
 maps/earth/bluemarble/bluemarble.dgml
 maps/earth/bluemarble/bluemarble-preview.png
 DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble)
+
+install (FILES
+maps/earth/bluemarble/legend/ice.png
+maps/earth/bluemarble/legend/mountain.png
+maps/earth/bluemarble/legend/vegetation.png
+maps/earth/bluemarble/legend/desert.png
+maps/earth/bluemarble/legend/water.png
+DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble/legend)
 
 install (FILES
 maps/earth/plain/plain.dgml

@@ -21,4 +21,31 @@
 		</LabelStyle>
 
 	</MapStyle>
+
+    <legend>
+        <section name="surface" checkable="false">
+            <heading>Surface</heading>
+            <item>
+                <icon pixmap="legend/ice.png"/>
+                <text>Ice</text>
+            </item>
+            <item>
+                <icon pixmap="legend/mountain.png"/>
+                <text>Mountain</text>
+            </item>
+            <item>
+                <icon pixmap="legend/vegetation.png"/>
+                <text>Vegetation</text>
+            </item>
+            <item>
+                <icon pixmap="legend/desert.png"/>
+                <text>Desert</text>
+            </item>
+            <item>
+                <icon pixmap="legend/water.png"/>
+                <text>Water</text>
+            </item>
+        </section>
+    </legend>
+
 </DeskGlobeML>

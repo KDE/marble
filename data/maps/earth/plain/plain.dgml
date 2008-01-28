@@ -39,4 +39,19 @@
 		</LabelStyle>
 
 	</MapStyle>
+
+    <legend>
+        <section name="surface" checkable="false">
+            <heading>Surface</heading>
+            <item>
+                <icon color="#f2efe9"/>
+                <text>Land</text>
+            </item>
+            <item>
+                <icon color="#99b3cc"/>
+                <text>Water</text>
+            </item>
+        </section>
+    </legend>
+
 </DeskGlobeML>

@@ -21,4 +21,26 @@
 		</LabelStyle>
 
 	</MapStyle>
+
+    <legend>
+        <section name="surface" checkable="false">
+            <heading>Surface</heading>
+            <item>
+                <icon pixmap="legend/city.png"/>
+                <text>Populated places</text>
+            </item>
+            <item>
+                <icon pixmap="legend/lightterrain.png"/>
+                <text>Light terrain</text>
+            </item>
+            <item>
+                <icon pixmap="legend/darkterrain.png"/>
+                <text>Dark terrain</text>
+            </item>
+            <item>
+                <icon pixmap="legend/water.png"/>
+                <text>Water</text>
+            </item>
+        </section>
+    </legend>
 </DeskGlobeML>
