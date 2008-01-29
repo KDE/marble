@@ -46,6 +46,11 @@ MapTheme::MapTheme(QObject *parent)
 {
 }
 
+MapTheme::~MapTheme()
+{
+    qDeleteAll( m_legend );
+    m_legend.clear();
+}
 
 int MapTheme::open( const QString& path )
 {
@@ -81,6 +86,8 @@ int MapTheme::open( const QString& path )
     //        They should be dependent on the sphere.
     m_minimumZoom = 900;
     m_maximumZoom = 2500;
+
+    qDeleteAll( m_legend );
     m_legend.clear();
 
     m_labelColor = QColor( 0, 0, 0, 255 );

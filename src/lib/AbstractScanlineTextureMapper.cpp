@@ -65,6 +65,9 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
     m_tile      = 0;
     m_tileLevel = 0;
 
+    m_preloadTileLevel = -1;
+    m_previousRadius = 0;
+
     m_interlaced = false;
 }
 

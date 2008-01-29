@@ -62,7 +62,10 @@ class LegendSection
         : m_heading(),
           m_items()
     { }
-    ~LegendSection() {};
+    ~LegendSection() {
+        qDeleteAll( m_items );
+        m_items.clear();
+    };
 
     QString  name()                           const { return m_name; }
     void     setName( QString name )                { m_name = name;   }
@@ -96,6 +99,8 @@ class MapTheme : public QObject
 
 public:
     MapTheme(QObject *parent = 0);
+    ~MapTheme();
+
     int open( const QString& path );
 
     QString name()          const { return m_name;        }
