@@ -84,7 +84,11 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-        lat = M_PI/2 - (y - yTop )* rad2Pixel;
+#ifdef MERCATOR
+            lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)radius * M_PI ) );
+#else
+            lat = M_PI/2 - (y - yTop )* rad2Pixel;
+#endif
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
         for ( int x = xPaintedLeft; x < xPaintedRight; ++x ) {
