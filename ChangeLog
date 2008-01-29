@@ -1,5 +1,10 @@
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/FlatScanlineTextureMapper.cpp:
+    - Fixing valgrind's finding of "invalid write (4 bytes)".
+
+2008-01-29  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MapTheme.{cpp,h}:
     * src/lib/AbstractScanlineTextureMapper.cpp:
 

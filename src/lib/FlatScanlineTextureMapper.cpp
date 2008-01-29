@@ -106,7 +106,7 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     for ( int y = clearStart; y < clearStop; ++y ) {
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
-        for ( int x = 0; x <= m_imageWidth; ++x ) {
+        for ( int x = 0; x < m_imageWidth; ++x ) {
             *(m_scanLine + x) = 0;
         }
     }
