@@ -23,7 +23,7 @@
 	</MapStyle>
 
     <legend>
-        <section name="surface" checkable="false">
+        <section name="surface" checkable="false" spacing="12">
             <heading>Surface</heading>
             <item>
                 <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>

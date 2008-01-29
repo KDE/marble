@@ -21,6 +21,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
+// #define MERCATOR
 
 FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
@@ -85,7 +86,7 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
 #ifdef MERCATOR
-            lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)radius * M_PI ) );
+            lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)(2 * radius) * M_PI ) );
 #else
             lat = M_PI/2 - (y - yTop )* rad2Pixel;
 #endif

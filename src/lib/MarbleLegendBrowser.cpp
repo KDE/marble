@@ -72,7 +72,6 @@ void MarbleLegendBrowser::loadLegend()
     {
         MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ); 
-        qDebug() << customLegendPath;
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else
@@ -88,7 +87,7 @@ void MarbleLegendBrowser::loadLegend()
 
     // And then create the final html from these two parts.
     QString  finalHtml = d->m_html;
-    finalHtml.replace( QString( "<!-- ##customLegendEntries## -->" ), d->m_loadedSectionsHtml );
+    finalHtml.replace( QString( "<!-- ##customLegendEntries:all## -->" ), d->m_loadedSectionsHtml );
 
     translateHtml( finalHtml );
 
@@ -154,8 +153,6 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     // Generate HTML to include into legend.html here.
 
     QString customLegendString;
-//    FIXME: Move spacing into LegendItem
-    const int spacing = 12;
 
     if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapThemeObject() == 0 )
         return QString();
@@ -167,10 +164,19 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     d->m_symbolMap.clear();
 
     for (int section = 0; section < legend.size(); ++section) {
-        customLegendString += "<h4>" + legend.at(section)->heading() + "</h4>";
+        QString checkBoxString; 
+
+        if ( legend.at(section)->checkable() == true ) {
+            checkBoxString = "<a href=\"checkbox:" + legend.at(section)->name() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + legend.at(section)->name() + "\">&nbsp;</span></a> ";
+        }
+
+        customLegendString += "<h4>" + checkBoxString + legend.at(section)->heading() + "</h4>";
         customLegendString += "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">";
 
         QList< LegendItem*> items = legend.at(section)->items();
+
+        int spacing = legend.at(section)->spacing();
+
         for (int item = 0; item < items.size(); ++item) {
 
             QPixmap itemSymbol;
@@ -185,7 +191,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
                 QPainter painter( &itemSymbol );
                 painter.fillRect( QRect( 0, 0, itemSymbol.width(), itemSymbol.height() ), items.at(item)->background());
                 // Paint the pixmap on top of the colored background
-                painter.drawPixmap( 0, 0, itemSymbol );
+                painter.drawPixmap( 0, 0, items.at(item)->symbol() );
             }
 
             QString itemIdString = QString("item%1-%2").arg(section).arg(item);

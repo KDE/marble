@@ -41,7 +41,31 @@
 	</MapStyle>
 
     <legend>
-        <section name="surface" checkable="false">
+        <section name="borders" checkable="true" spacing="12">
+            <heading>Boundaries</heading>
+            <item>
+                <icon color="#cccbca" pixmap="bitmaps/border_1.png"/>
+                <text>International</text>
+            </item>
+            <item>
+                <icon color="#cccbca" pixmap="bitmaps/border_2.png"/>
+                <text>State</text>
+            </item>
+        </section>
+
+        <section name="waterbodies" checkable="true" spacing="12">
+            <heading>Water Bodies</heading>
+            <item>
+                <icon color="#99b3cc" pixmap="bitmaps/lake.png"/>
+                <text>Lake</text>
+            </item>
+            <item>
+                <icon color="#99b3cc" pixmap="bitmaps/river.png"/>
+                <text>River</text>
+            </item>
+        </section>
+
+        <section name="surface" checkable="false" spacing="12">
             <heading>Surface</heading>
             <item>
                 <icon color="#f2efe9"/>
