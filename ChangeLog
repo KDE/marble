@@ -1,4 +1,11 @@
-2008-01-28  Torsten Rahn  <rahn@kde.org>
+2008-01-29  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapTheme.{cpp,h}:
+    * src/lib/AbstractScanlineTextureMapper.cpp:
+
+    - Fixing a few memleaks and uninitialized values
+
+2008-01-29  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
     * src/lib/MarbleLegendBrowser.cpp:
