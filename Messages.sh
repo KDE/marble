@@ -1,7 +1,7 @@
 #! /bin/sh
 
 for fname in  `find -iname \*.dgml`; do
-  for field in name description text; do
+  for field in name description text ; do
     grep -inH "<$field>.*<\/$field>" $fname \
     | sed 's/\"/\\\"/g' \
     | sed "s/\\([^:]*\\):\\([^:]*\\):.*<$field>\(.*\)<\/$field>.*/\
