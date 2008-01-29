@@ -266,8 +266,22 @@ bool MapTheme::parseLegend( QDomElement &legendElement )
 
         if ( elem.tagName().toLower() == "section" ) {
             LegendSection  *section = new LegendSection;
-            bool            ok;
 
+            if ( elem.hasAttribute( "name" ) ) {
+                section->setName( elem.attribute( "name" ) );
+            }
+            if ( elem.hasAttribute( "spacing" ) ) {
+                section->setSpacing( elem.attribute( "spacing" ).toInt() );
+            }
+            if ( elem.hasAttribute( "checkable" ) ) {
+                if( elem.attribute( "checkable" ) == "true" )
+                    section->setCheckable( true );
+                else
+                    section->setCheckable( false );
+            }
+
+
+            bool            ok;
             ok = parseLegendSection( elem, section );
             if ( ok )
                 m_legend.append( section );
@@ -292,7 +306,6 @@ bool MapTheme::parseLegendSection( QDomElement &sectionElement,
 {
     QDomElement  elem = sectionElement.firstChildElement();
     while ( !elem.isNull() ) {
-
         if ( elem.tagName().toLower() == "heading" ) {
             section->setHeading( elem.text() );
 //            qDebug() << "Heading: " << section->heading();

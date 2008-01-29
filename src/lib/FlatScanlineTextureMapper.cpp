@@ -21,6 +21,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
+// #define MERCATOR
 
 FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )

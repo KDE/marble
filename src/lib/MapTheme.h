@@ -64,8 +64,14 @@ class LegendSection
     { }
     ~LegendSection() {};
 
+    QString  name()                           const { return m_name; }
+    void     setName( QString name )                { m_name = name;   }
     QString  heading()                        const { return m_heading; }
     void     setHeading( QString hd )               { m_heading = hd;   }
+    bool     checkable()                      const { return m_checkable; }
+    void     setCheckable( bool  checkable )        { m_checkable = checkable; }
+    int      spacing()                        const { return m_spacing; }
+    void     setSpacing( int spacing )              { m_spacing = spacing; }
     QList< LegendItem*> items()               const { return m_items;   }
     void                addItem( LegendItem *item ) { m_items.append( item ); }
 
@@ -76,7 +82,10 @@ class LegendSection
     }
 
  private:
+    QString               m_name;
     QString               m_heading;
+    bool                  m_checkable;
+    int                   m_spacing;
     QList< LegendItem* >  m_items;
 };
 

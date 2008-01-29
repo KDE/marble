@@ -40,7 +40,31 @@
     </MapStyle>
 
     <legend>
-        <section name="elevation" checkable="false">
+        <section name="borders" checkable="true" spacing="12">
+            <heading>Boundaries</heading>
+            <item>
+                <icon color="#f29b68" pixmap="bitmaps/border_1.png"/>
+                <text>International</text>
+            </item>
+            <item>
+                <icon color="#f29b68" pixmap="bitmaps/border_2.png"/>
+                <text>State</text>
+            </item>
+        </section>
+
+        <section name="waterbodies" checkable="true" spacing="12">
+            <heading>Water Bodies</heading>
+            <item>
+                <icon color="#d0dff1" pixmap="bitmaps/lake.png"/>
+                <text>Lake</text>
+            </item>
+            <item>
+                <icon color="#637bff" pixmap="bitmaps/river.png"/>
+                <text>River</text>
+            </item>
+        </section>
+
+        <section name="elevation" checkable="false" spacing="12">
             <heading>Elevation</heading>
             <item>
                 <icon color="#c39d55"/>

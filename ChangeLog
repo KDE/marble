@@ -1,3 +1,22 @@
+2008-01-29  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapTheme.{cpp,h}:
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/FlatScanlineTextureMapper.cpp:
+    * data/bitmaps/border_1.png:
+    * data/bitmaps/border_2.png:
+    * data/bitmaps/river.png:
+    * data/bitmaps/lake.png:
+    * data/maps/earth/srtm/srtm.dgml:
+    * data/legend.html:
+
+    - Implementing "name", "checkable" and "spacing"
+      attribute for LegendSections.
+    - Making existing dgml files use it.
+    - Changing the marker to "...:all" to allow 
+      for custom placement of each section in the 
+      legend.html.
+
 2008-01-28  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
