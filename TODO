@@ -11,18 +11,43 @@ Mark those tasks that you want to perform with your name:
 Before Release of 4.0.0 (Jan 11th)
 ----------------------------------
 
-Add maps to GHNS:
- * Annual precipation,                                                  ----
-    - precipation July                                                  --
-    - precipation December                                              --
- * Annual temperature                                                   ----
-    - temperature July                                                  --
-    - temperature December                                              --
 
 
 
-Before Release of KDE 4.0.1 / Marble 0.5.1:
-===========================================
+Before Release of Marble 0.6:
+=============================
+
+Layer Management Class tasks: 
+
+*** New widget independent image canvas concept and implementation   INGE
+
+*** Split off MapTheme / DGML parsing into geodata/parser.
+    Have a GeoDataMapTheme class that basically only includes those 
+    parts of the current MapTheme except for browsing.
+
+*** Create all available MapTheme objects instead of the 
+    selected one. (right now it just creates a single one, 
+    so you can't access many in parallel without parsing 
+    over and over)
+
+*** Implement / move <head> features as lined out in layermanagement.txt
+    This should happen after the QXmlStreamReader port.
+
+
+*** Implement basic Qt-Plugin based LMC class
+
+*** Move backends into plugins / threads
+
+*** Design and implement a QPainter-style API for GeoPainter
+
+*** Cloud Layer                                                      STRE
+
+*** Mercator Projection                                              CARU
+
+*** Design and implement Projection class                            CARU
+
+*** Fix GPS Support                                                  ANDR
+
 
 REFINEMENTS:
 
@@ -30,44 +55,6 @@ Low hanging (but important) fruits:
 -----------------------------------
 
 *** Update screenshots in the docs!
-
-*** Add maximumZoom and minimumZoom support for .dgml files.            DONE
-    MapTheme should parse this information and should change Marble's
-    zoom slider accordingly.
-
-*** Followup task for maximum/minimumZoom (should be similar to add):   DONE
-    To get useful temperature/precipation/... maps we need to be able
-    to add items to the legend in the .dgml file:
-
-    This is also a first step towards the new DGML version format that 
-    we need for the new layer management class.
-
-    see also: docs/layermanagement.txt.
-
-<Legend>
-    <section name="elevation" checkable="false" spacing="12">
-        <heading>Temperature</heading>
-        <Item>
-            <!-- Legend item icons are tags to allow more than 1 of them -->
-            <Icon color="FF8075" pixmap="legend30deg.png"/>
-            <!-- Legend item text are tags to allow rich text -->
-            <Text>30°C</Text>
-        </Item>
-        <Item>
-            <Icon color="#000000" pixmap="city2000.png"/>
-            <Icon pixmap="city1000.png"/>
-            <ItemText>Cities</ItemText>
-        </Item>
-    </section>
-</Legend>
-
-*** Followup task to the followup task:                                 INGE?
-
-    The three properties 
-
-    <section name="elevation" checkable="false" spacing="12">
-
-    need to get added, so we can adjust the colors of the borders.
 
 *** Fix Double Click on map (which should center the map on the point   INGE
     being double clicked).
@@ -79,13 +66,19 @@ Low hanging (but important) fruits:
     queue, maybe amount of data that has been downloaded during the
     session.
 
+Add maps to GHNS:
+ * Annual precipation,                                                  ----
+    - precipation July                                                  --
+    - precipation December                                              --
+ * Annual temperature                                                   ----
+    - temperature July                                                  --
+    - temperature December                                              --
+
 
 BUGS:
 
 *** Find the reason why labels overlap when a KML file gets loaded.     TACK
     I'm afraid this will have to get delayed for 4.0.2 ...
-
-*** Fix blue tint on the sky.                                           DONE
 
 
 More sophisticated issues
