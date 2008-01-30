@@ -47,3 +47,9 @@ for($x = 0; $x < 2; $x++) {
 	}
 }
 
+# create expiration.txt
+open(EXP, '>', 'expiration.txt');
+print EXP 'Timestamp: ' . time . "\n";
+print EXP 'Expiration: 10800' . "\n";
+close(EXP);
+
