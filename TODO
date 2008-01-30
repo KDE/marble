@@ -23,7 +23,7 @@ Layer Management Class tasks:
 
 *** Split off MapTheme / DGML parsing into geodata/parser.
     Have a GeoDataMapTheme class that basically only includes those 
-    parts of the current MapTheme except for browsing.
+    parts of the current MapTheme except for parsing.
 
 *** Create all available MapTheme objects instead of the 
     selected one. (right now it just creates a single one, 
