@@ -186,16 +186,22 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 
     <head>
         <name>Atlas</name>
-    
 	    <prefix>srtm</prefix>
 	    <icon>srtm-preview.png</icon>
+
+        <!-- describes whether the map theme item will be hidden (e.g. for a clouds layer): -->
+        <visible> true </visible>
     
+        <!-- The description allows for rich text of course: -->
 	    <description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
-    
-	    <minimumzoom>  900 </minimumzoom>
-	    <maximumzoom> 2100 </maximumzoom>
-    
-        <timestamp>1201317416</timestamp> <!-- Seconds since „00:00:00 1970-01-01 UTC“ -->
+
+        <zoom>
+    	    <minimum>   900  </minimum>
+    	    <maximum>  2100  </maximum>
+
+            <!-- describes whether you can zoom trough the levels continuously -->
+            <discrete> false </discrete> 
+        </zoom>
     </head>
     
 	    <!-- Now we create the layer structure that gets handled by the layer management class -->
@@ -301,10 +307,10 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 	    </layer name="floatitems" plugins="floatitems">
     </map>
     
-	    <!-- At last we define some legend properties -->
+	<!-- At last we define some legend properties -->
     
     <legend>
-        <section name="elevation" checkable="false">
+        <section name="elevation" checkable="false" spacing="12">
             <heading>Elevation</heading>
             <!-- Example for a pixmap legend item: -->
             <item>
