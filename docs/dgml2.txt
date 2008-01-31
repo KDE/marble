@@ -2,7 +2,12 @@ III. DGML SYNTAX FOR LAYERS:
 ============================
 
 Marble uses its own XML format called "DGML" to load and save maps.
-The DGML map format describes the basic properties of a map. The format assumes that the map consists of data that gets imported and integrated from various data sources. So it's different from other map formats which try to describe all the features in a map themselves: DGML reuses existing map data from established file formats (e.g. KML, GPX, GeoRSS), arranges them in layers and compiles them together into a new map.
+The DGML map format describes the basic properties of a map. The format
+assumes that the map consists of data that gets imported and integrated
+from various data sources. So it's different from other map formats
+which try to describe all the features in a map themselves: DGML reuses
+existing map data from established file formats (e.g. KML, GPX, GeoRSS),
+arranges them in layers and compiles them together into a new map.
 
 
 The new planned DGML format has got three main sections:
@@ -40,22 +45,27 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
         <prefix>srtm</prefix>
         <icon>srtm-preview.png</icon>
 
-        <!-- describes whether the map theme item will be hidden (e.g. for a clouds layer): -->
+        <!-- describes whether the map theme item will be hidden (e.g.
+             for a clouds layer): -->
         <visible> true </visible>
     
         <!-- The description allows for rich text of course: -->
-        <description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>
+        <description>A classic topographic map. It uses vector lines to
+                     mark coastlines, country borders etc. and bitmap
+                     graphics to create the height relief.</description>
 
         <zoom>
             <minimum>   900  </minimum>
             <maximum>  2100  </maximum>
 
-            <!-- describes whether you can zoom trough the levels continuously -->
+            <!-- describes whether you can zoom trough the levels
+                 continuously -->
             <discrete> false </discrete> 
         </zoom>
     </head>
     
-        <!-- Now we create the layer structure that gets handled by the layer management class -->
+        <!-- Now we create the layer structure that gets handled by the
+layer management class -->
     
     <map bgcolor="#000000">
         </canvas>
@@ -68,14 +78,17 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
                 <sourcedir> srtm </sourcedir>
                 <installmap> srtm.jpg </installmap>
             </texture>
-            <!-- If this was the satellite map we could add another texture 
-                    tag for the clouds here resulting in a MergedLayer 
-                Also note that for the tiles you can suggest a different 
-                image format than for the original install image (e.g. "PNG").
+            <!-- If this was the satellite map we could add another
+                 texture tag for the clouds here resulting in a
+                 MergedLayer. Also note that for the tiles you can
+                 suggest a different 
+                 image format than for the original install image
+                 (e.g. "PNG").
                 -->
         </layer>
         
-        <!-- This layer creates the coastlines that are needed to colorize the elevation model properly -->
+        <!-- This layer creates the coastlines that are needed to
+             colorize the elevation model properly -->
         <layer name="mwdbii" plugin="vector" type="filterhelper">
             <vector name="pcoast" type="land">
                 <sourcefile format="PNT"> PCOAST.PNT </sourcefile>
@@ -99,7 +112,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <filter name="texturecolorizer" type="colorize">
                 <dem>srtm</dem>
                 <coastline>mwdbii<coastline>
-                <!-- If these don't get defined the default palettes get used -->
+                <!-- If these don't get defined the default palettes get
+used -->
                 <palette type="sea">seapalette.pal</palette>
                 <palette type="land">landpalette.pal</palette>
             </filter>
@@ -127,7 +141,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
         <layer name="standardplaces" plugin="geodata">
             <geodata name="cityplacemarks">
                 <sourcefile format="KML">cityplacemarks.kml</sourcefile>
-                <pick>placemark<pick> <!-- picks certain features from a file -->
+                <pick>placemark<pick> <!-- picks certain features from a
+                                           file -->
             </geodata>
             <geodata name="baseplacemarks">
                 <sourcefile format="KML">baseplacemarks.kml</sourcefile>
@@ -138,7 +153,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
                 <pick>placemark<pick>
             </geodata>
             <geodata name="otherplacemarks">
-                <sourcefile format="KML">otherplacemarks.kml</sourcefile>
+                <sourcefile
+                 format="KML">otherplacemarks.kml</sourcefile>
                 <pick>placemark<pick>
             </geodata>
             <geodata name="boundaryplacemarks">
@@ -173,7 +189,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
                 <icon color="#dcbd80"/>
                 <text>5000 m</text>
             </item>
-            <!-- Example for a pixmap with a color as a translucent background: -->
+            <!-- Example for a pixmap with a color as a translucent
+                 background: -->
             <item>
                 <icon color="#f29b68" pixmap="boundary.png"/>
                 <text>State Boundary</text>

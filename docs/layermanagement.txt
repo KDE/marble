@@ -44,7 +44,8 @@ short the new LMC concept aims to:
 Note that we distinguish between "BACKEND"-classes and the objects
 based on the BACKEND-classes called "LAYERS".
 
-Due to different usage and technical requirements layers might either be:
+Due to different usage and technical requirements layers might either
+be:
 
   a) PROJECTION-BASED LAYERS (i.e. they get applied on top of the
      globe using the respective projection transformations).
