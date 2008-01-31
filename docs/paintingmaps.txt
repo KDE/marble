@@ -1,0 +1,67 @@
+
+II. PAINTING THE MAP
+====================
+
+The developer who wants to use Marble in his own application will 
+want to paint the map at some point.
+
+Generally Marble could be used in two different representations:
+
+1.) Using Marble as a Widget. This can be done by using the MarbleWidget class in your application.
+Alternatively you can use the Qt-Designer MarbleWidget-Plugin. .
+
+2.) Using the MarbleMap interface to create just the map on a QPaintDevice. This can be used for plasmoids, flake shapes or for exporting and printing a map at a higher resolution.
+
+Furthermore there are different things you might want to do with the map:
+
+A.) ViewParameter-based SIMPLE API
+
+For most cases simply painting the map with preset settings is enough. Loading a KML document to add  geographical features adds a powerful capability to customize the map.
+
+Painting the map can be done e.g. via source code like this (example: big weather map for printing):
+
+    MarbleMap map;
+
+    map.resize(5000, 2500);
+    map.setRadius( 2000 );
+    map.setMapTheme( earth/bluemarble/bluemarble.dgml );
+    map.open( currentweather.kml );
+
+    map.paint( qpainter, qpaintdevice );
+
+So most of the Simple API deals with adjusting ViewParameters according to the needs. The actual "painting" gets triggered and done by a single paint call.
+
+
+If you want to apply custom modifications in geographic coordinates by creating source code then the SIMPLE API won't be enough: you'd otherwise have to deal yourself with very complex internal stuff ( like clipping, Node interpolation, OpenGL, etc. ) even for such "simple" tasks as drawing a single line between two geographical coordinates. 
+In this case you will want to make use of the Qt-Style Painter-API.
+
+B) Advanced QT-STYLE PAINTER-API
+
+In some cases you might want to add geographical features via source code changes. There are two different locations in which you might want to do this:
+
+- Externally from your application that uses the MarbleWidget (e.g. if you just want to add a few features where creating a whole backend plugin from scratch makes little sense).
+
+- Internally inside a custom backend plugin.
+
+Before adjusting the map using the Qt-Style Painter-API you usually have to "initialize" and prepare the map by using the Simple API.
+Creating new geographical features on the map should happen using a Qt-style Painter-API (which would include the QPainter/ClipPainter API to draw in screen coordinates):
+
+  Code snippet:
+
+    MarbleMap map;
+    GeoPainter painter( map );
+    painter.setPen( Qt::red );
+
+    GeoDataPoint  place1( 54.8, 9.4, GeoDataPoint::Degree );
+    GeoDataPoint  place2( 52.5, 8.4, GeoDataPoint::Degree );
+
+    painter.drawGeoLine( place1, place2 );
+    painter.drawGeoPlacemark( "Flensburg", place1 );
+    painter.drawGeoEllipse( place1.lon(), place1.lat(), 5, 5 ); 
+
+
+Using this API some backend plugins like the MeasureTool could get squeezed down to very little code.
+
+Internally these GeoPainter calls will get "translated" to the methods provided by the mandatory basic backend plugins. (like lines getting drawn via the vector backend plugin).
+
+
