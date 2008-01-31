@@ -34,6 +34,8 @@ bitmaps/cursor_tc.xpm
 bitmaps/cursor_tl.xpm
 bitmaps/cursor_tr.xpm
 bitmaps/mountain_1.png
+bitmaps/nation.png
+bitmaps/ocean.png
 bitmaps/pole_1.png
 bitmaps/pole_2.png
 bitmaps/shipwreck.png
