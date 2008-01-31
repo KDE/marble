@@ -1,4 +1,4 @@
-project(marble)
+project(marble0.5.1)
 
 ####################################################
 # CMake Settings 
@@ -35,7 +35,15 @@ else(WIN32)
     # needed for finding bundle path in e.g. katlasdir.h
     FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
     MARK_AS_ADVANCED (APP_SERVICES_LIBRARY)
-    SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
+    if (STATIC_BUILD)
+      FIND_LIBRARY(QUICKTIME_LIBRARY QuickTime )
+      MARK_AS_ADVANCED (QUICKTIME_LIBRARY)
+      FIND_LIBRARY(CARBON_LIBRARY Carbon )
+      MARK_AS_ADVANCED (CARBON_LIBRARY)
+      SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY} ${QUICKTIME_LIBRARY} ${CARBON_LIBRARY})
+    else (STATIC_BUILD)
+      SET(MAC_EXTRA_LIBS ${APP_SERVICES_LIBRARY})
+    endif (STATIC_BUILD)
     if (QTONLY)
       # for Mac OS X, everything is put inside an application bundle
       SET (CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/)
@@ -67,9 +75,9 @@ if (NOT MARBLE_DATA_PATH)
   set (MARBLE_DATA_PATH ${data_dir})
 endif (NOT MARBLE_DATA_PATH)
 
-if(WIN32)
-  set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (win32 only)?")
-endif(WIN32)
+if(WIN32 OR APPLE)
+  set (STATIC_BUILD FALSE CACHE BOOL "Link to static Qt libs (osx & win32 only)?")
+endif(WIN32 OR APPLE) 
 
 # Variables to test new kml implementation
 # Will removed in feature after success
