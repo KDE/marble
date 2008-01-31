@@ -27,7 +27,7 @@ Painting the map can be done e.g. via source code like this (example: big weathe
     map.setMapTheme( earth/bluemarble/bluemarble.dgml );
     map.open( currentweather.kml );
 
-    map.paint( qpainter, qpaintdevice );
+    map.paint( qpainter );
 
 So most of the Simple API deals with adjusting ViewParameters according to the needs. The actual "painting" gets triggered and done by a single paint call.
 
