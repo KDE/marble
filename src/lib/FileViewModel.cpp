@@ -80,9 +80,11 @@ bool FileViewModel::setData (const QModelIndex& index, const QVariant& value, in
                 bool newValue = value.toBool ();
 
                 if ( item.isShown() != newValue ) {
+		    BoundingBox  box;
+
                     item.setShown( newValue );
                     emit dataChanged( index, index );
-                    emit updateRegion( BoundingBox() );
+                    emit updateRegion( box );
                     return true;
                 }
             }
@@ -99,9 +101,11 @@ void FileViewModel::setSelectedIndex( const QModelIndex& index )
 
 void FileViewModel::append ( AbstractFileViewItem* item )
 {
+    BoundingBox  box;
+
     m_itemList.append( item );
     emit layoutChanged();
-    emit updateRegion( BoundingBox() );
+    emit updateRegion( box );
 }
 
 void FileViewModel::saveFile()
@@ -136,8 +140,9 @@ void FileViewModel::closeFile()
                 delete &item;
                 m_itemList.removeAt( row );
 
+		BoundingBox  box;
                 emit layoutChanged();
-                emit updateRegion( BoundingBox() );
+                emit updateRegion( box );
             }
         }
     }

@@ -17,6 +17,7 @@
 #include <QtGui/QFileDialog>
 
 #include <lib/MarbleWidget.h>
+#include <lib/MarbleModel.h>
 
 MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
     : m_marbleWidget(marbleWidget)

@@ -3,6 +3,29 @@
 	Don't include unnecessary files.
 	* src/lib/MarbleWidget.{h,cpp}
 
+	Make all uses of BoundingBox in parameters references.
+	* src/marble_part.cpp:
+	* src/MarbleTest.cpp
+	* src/lib/BoundingBox.cpp
+	* src/lib/FileViewModel.{h,cpp}
+	* src/lib/MarbleControlBox.cpp
+	* src/lib/MarbleLegendBrowser.cpp
+	* src/lib/MarbleModel.{h,cpp}
+	* src/lib/AbstractLayer/AbstractLayer.{h,cpp}
+	* src/lib/AbstractLayer/AbstractLayerContainer.{h,cpp}
+	* src/lib/AbstractLayer/AbstractLayerData.{h,cpp}
+	* src/lib/AbstractLayer/AbstractLayerInterface.h
+	* src/lib/gps/GpsLayer.{h,cpp}
+	* src/lib/gps/GpxFile.{h,cpp}
+	* src/lib/gps/GpxFileModel.{h,cpp}
+	* src/lib/gps/Route.{h,cpp}
+	* src/lib/gps/RouteContainer.{h,cpp}
+	* src/lib/gps/Track.{h,cpp}
+	* src/lib/gps/TrackContainer.{h,cpp}
+	* src/lib/gps/TrackSegment.{h,cpp}
+	* src/lib/gps/WaypointContainer.{h,cpp}
+	Bounding boxes are now referenses.
+
 2008-02-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.cpp:

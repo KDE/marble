@@ -71,7 +71,7 @@ void TrackSegment::draw( ClipPainter *painter,
 
 void TrackSegment::draw(ClipPainter *painter, 
                         const QSize &canvasSize, ViewParams *viewParams,
-                        BoundingBox box)
+                        BoundingBox &box)
 {
     
     if ( box.isValid() && m_boundingBox->isValid() ) {

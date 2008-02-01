@@ -31,7 +31,7 @@ class GpxFileModel : public QAbstractItemModel
      Q_OBJECT
 
 Q_SIGNALS :
-    void updateRegion( BoundingBox );
+    void updateRegion( BoundingBox& );
     void enableActions( bool );
 public Q_SLOTS:
     void saveFile();

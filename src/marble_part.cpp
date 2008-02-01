@@ -15,6 +15,7 @@
 #include <QtGui/QFontMetrics>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
+#include <QtGui/QPainter>
 
 #include <kaction.h>
 #include <kactioncollection.h>

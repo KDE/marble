@@ -35,7 +35,7 @@ class AbstractLayerInterface
     
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, ViewParams *viewParams,
-                       BoundingBox box )=0;
+                       BoundingBox &box )=0;
     
     virtual void printToStream( QTextStream& ) const;
     

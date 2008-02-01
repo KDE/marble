@@ -43,7 +43,7 @@ class GpsLayer : public AbstractLayer
     virtual void paintLayer( ClipPainter *painter, 
                              const QSize &canvasSize,
                              ViewParams *viewParams,
-                             BoundingBox box );
+                             BoundingBox &box );
     virtual void paintCurrentPosition( ClipPainter *painter, 
                                        const QSize &canvasSize, 
                                        ViewParams *viewParams );

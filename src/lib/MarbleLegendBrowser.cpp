@@ -22,6 +22,7 @@
 #include <QRegExp>
 
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 #include "MapTheme.h"
 
 #include "MarbleDirs.h"
@@ -68,7 +69,9 @@ void MarbleLegendBrowser::loadLegend()
     // Read the html string.
 
     // Check for a theme specific legend.html first
-    if ( d->m_marbleWidget != 0 && d->m_marbleWidget->model() != 0 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
+    if ( d->m_marbleWidget != 0
+	 && d->m_marbleWidget->model() != 0
+	 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
     {
         MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ); 

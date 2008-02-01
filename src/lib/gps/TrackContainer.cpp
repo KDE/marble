@@ -9,10 +9,13 @@
 //
 
 #include "TrackContainer.h"
+
+#include <QDebug>
+
 #include "BoundingBox.h"
 
+
 // #include <QtCore/QPoint>
- #include <QDebug>
 /*
 TrackContainer::TrackContainer() : AbstractLayerContainer()
 {
@@ -20,7 +23,7 @@ TrackContainer::TrackContainer() : AbstractLayerContainer()
 
 void TrackContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize, ViewParams *viewParams,
-                           BoundingBox box )
+                           BoundingBox &box )
 {
     const_iterator it;
 

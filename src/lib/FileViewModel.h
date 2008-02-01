@@ -14,9 +14,12 @@
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QList>
+
 #include "BoundingBox.h"
 
+
 class AbstractFileViewItem;
+
 
 class FileViewModel : public QAbstractListModel
 {
@@ -34,8 +37,8 @@ class FileViewModel : public QAbstractListModel
     void setSelectedIndex( const QModelIndex& index );
     void append ( AbstractFileViewItem* item );
 
-  signals:
-    void updateRegion( BoundingBox );
+  Q_SIGNALS:
+    void updateRegion( BoundingBox& );
 
   public slots:
     void saveFile();

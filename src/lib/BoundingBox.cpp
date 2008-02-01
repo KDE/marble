@@ -7,10 +7,13 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
+
+
 #include "BoundingBox.h"
 
 #include <QtCore/QPointF>
 #include <QDebug>
+
 
 BoundingBox::BoundingBox()
 {

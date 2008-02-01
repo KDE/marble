@@ -66,7 +66,7 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
 void AbstractLayerContainer::draw(ClipPainter *painter,
                                   const QSize &canvasSize,
                                   ViewParams *viewParams,
-                                  BoundingBox box )
+                                  BoundingBox &box )
 {
     if ( box.isValid() ) {
         if ( m_boundingBox->intersects( box ) ) {

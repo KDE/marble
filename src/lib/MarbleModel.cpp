@@ -136,8 +136,8 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
-    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox ) ),
-             this,              SIGNAL( regionChanged( BoundingBox ) ) );
+    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox& ) ),
+             this,              SIGNAL( regionChanged( BoundingBox& ) ) );
 
     d->m_projection = Spherical;
 
@@ -146,8 +146,8 @@ MarbleModel::MarbleModel( QWidget *parent )
      */
     d->m_fileviewmodel = new FileViewModel( this );
 
-    connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox ) ),
-             this,               SIGNAL( regionChanged( BoundingBox ) ) );
+    connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
+             this,               SIGNAL( regionChanged( BoundingBox& ) ) );
 }
 
 MarbleModel::~MarbleModel()

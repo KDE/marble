@@ -56,9 +56,9 @@ class AbstractLayer: public QObject
      * @param rotAxis quaternion that represents the current rotation
      *                of the globe
      */
-    virtual void paintLayer(ClipPainter* painter, 
-                            const QSize& screenSize,
-                            ViewParams *viewParams );
+    virtual void paintLayer( ClipPainter* painter, 
+			     const QSize& screenSize,
+			     ViewParams *viewParams );
 
     /**
      * @brief method to paint the whole Layer
@@ -74,10 +74,10 @@ class AbstractLayer: public QObject
      * @param bounding BoundingBox object that represents the smallest
      *                 area that contains all of the view
      */
-    virtual void paintLayer(ClipPainter* painter, 
-                            const QSize& screenSize,
-                            ViewParams *viewParams, 
-                            BoundingBox bounding );
+    virtual void paintLayer( ClipPainter* painter, 
+			     const QSize& screenSize,
+			     ViewParams *viewParams, 
+			     BoundingBox &bounding );
 
  public:
     /**

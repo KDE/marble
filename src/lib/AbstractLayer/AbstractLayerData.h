@@ -86,7 +86,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize,
                       ViewParams *viewParams,
-                      BoundingBox box);
+                      BoundingBox &box);
 
     /**
      * @brief check if this Layer Data is visible on screen

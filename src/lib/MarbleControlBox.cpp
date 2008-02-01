@@ -34,6 +34,7 @@
 #include <global.h>
 
 #include <MarbleWidget.h>
+#include <MarbleModel.h>
 #include <MarbleDirs.h>
 #include <MapTheme.h>
 #include <FileViewModel.h>
@@ -376,8 +377,9 @@ void MarbleControlBox::disableGpsInput( bool in )
 }
 
 void MarbleControlBox::receiveGpsCoordinates( double x, double y,
-                                              GeoDataPoint::Unit unit){
-    if( d->uiWidget.m_catchGps->isChecked() ){
+                                              GeoDataPoint::Unit unit)
+{
+    if ( d->uiWidget.m_catchGps->isChecked() ) {
         switch(unit){
         case GeoDataPoint::Degree:
             d->uiWidget.m_lonSpinBox->setValue( y );

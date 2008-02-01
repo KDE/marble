@@ -47,7 +47,7 @@ class GpxFile : public AbstractLayerInterface
                        ViewParams *viewParams );
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, ViewParams *viewParams,
-                       BoundingBox box );
+                       BoundingBox &box );
     virtual void printToStream( QTextStream & ) const;
 
     void addWaypoint( Waypoint *waypoint );

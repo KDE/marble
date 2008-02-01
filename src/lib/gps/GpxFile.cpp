@@ -94,7 +94,7 @@ void GpxFile::draw( ClipPainter *painter,
 
 void GpxFile::draw( ClipPainter *painter, 
                     const QSize &canvasSize, ViewParams *viewParams,
-                    BoundingBox box )
+                    BoundingBox &box )
 {
     if ( !m_visible ){
         return;
