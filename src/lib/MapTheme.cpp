@@ -391,7 +391,6 @@ bool MapTheme::parseLegendItem( QDomElement &legendItemElement,
 
 QStringList MapTheme::findMapThemes( const QString& path )
 {
-    qDebug() << path;
     QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
     QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
 
@@ -407,16 +406,8 @@ QStringList MapTheme::findMapThemes( const QString& path )
 
     QStringList  localmapdirs;
     QStringList  sysmapdirs;
-    QStringList  unixmapdirs;
 
     for ( int planet = 0; planet < localmappaths.size(); ++planet ) {
-        qDebug() << "Map dirs: "
-        << MarbleDirs::localPath() + "/maps/" +
-localmappaths.at(planet);
-
-
-//        localmapdirs << MarbleDirs::localPath() + "/maps/" +
-//localmappaths.at(i);
 
         QDir themeDir = QDir( MarbleDirs::localPath() + "/maps/"
 + localmappaths.at( planet ) );
@@ -425,11 +416,7 @@ localmappaths.at(planet);
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
-        qDebug() <<"*";
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            qDebug() << MarbleDirs::localPath() + "/maps/" +
-            localmappaths.at( planet ) + "/" + 
-            thememappaths.at( theme );
             localmapdirs << MarbleDirs::localPath() + "/maps/" +
             localmappaths.at( planet ) + "/" + 
             thememappaths.at( theme );
@@ -437,10 +424,7 @@ localmappaths.at(planet);
     }
 
     for ( int planet = 0; planet < sysmappaths.size(); ++planet ) {
-        // qDebug() << "Map dirs: " << MarbleDirs::systemPath() +
-//"/maps/" + sysmappaths.at(i);
-//        sysmapdirs << MarbleDirs::systemPath() + "/maps/" +
-//sysmappaths.at(i);
+
         QDir themeDir = QDir( MarbleDirs::systemPath() + "/maps/"
 + sysmappaths.at( planet ) );
         QStringList thememappaths =  themeDir.entryList( 
@@ -465,7 +449,6 @@ localmappaths.at(planet);
     while ( it.hasNext() ) {
         themedir = it.next() + '/';
         themedirname = QDir( themedir ).dirName();
-        qDebug() << themedir;
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
@@ -473,17 +456,14 @@ localmappaths.at(planet);
             QStringListIterator  k( tmp );
             while ( k.hasNext() ) {
                 themexml = k.next();
-                // qDebug() << themedirname + "/" + themexml;
                 mapfiles << themedirname + '/' + themexml;
             }
         }
-        // else qDebug("Empty *.dgml list!");
     }
 
     QStringListIterator  j( sysmapdirs );
     while ( j.hasNext() ) {
         themedir = j.next();
-        qDebug() << themedir;
         themedirname = QDir( themedir ).path().section( "/", -2, -1);
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
@@ -492,31 +472,9 @@ localmappaths.at(planet);
             QStringListIterator  l( tmp );
             while ( l.hasNext() ) {
                 themexml = l.next();
-                qDebug() << themedirname + "/" + themexml;
                 mapfiles << themedirname + '/' + themexml;
             }
         }
-        // else qDebug("Empty *.dgml list!");
-    }
-
-    QStringListIterator  k( unixmapdirs );
-    while ( k.hasNext() ) {
-        themedir = k.next();
-        qDebug() << themedir;
-
-        themedirname = QDir( themedir ).path().section( "/", -2, -1);
-
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files | QDir::NoSymLinks );
-        if ( !tmp.isEmpty() ) {
-            QStringListIterator  l( tmp );
-            while ( l.hasNext() ) {
-                themexml = l.next();
-                // qDebug() << themedirname + "/" + themexml;
-                mapfiles << themedirname + '/' + themexml;
-            }
-        }
-        // else qDebug("Empty *.dgml list!");
     }
 
     mapfiles.sort();

@@ -72,10 +72,6 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
-    //Calculate x-range
-    const int xPaintedLeft = 0;
-    const int xPaintedRight = m_imageWidth;
-
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = M_PI / (float)( 2 * radius );
 
@@ -92,11 +88,16 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 #endif
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
-        for ( int x = xPaintedLeft; x < xPaintedRight; ++x ) {
+
+        QRgb * scanLineBegin = m_scanLine;
+        const QRgb * scanLineEnd   = m_scanLine + m_imageWidth;
+
+        for ( QRgb * scanLine = scanLineBegin; scanLine < scanLineEnd;
+              ++scanLine ) {
             lon += rad2Pixel;
             if ( lon < -M_PI ) lon += 2 * M_PI;
             if ( lon >  M_PI ) lon -= 2 * M_PI;
-            pixelValue( lon, lat, m_scanLine + x );
+            pixelValue( lon, lat, scanLine );
         }
     }
 
