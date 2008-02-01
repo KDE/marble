@@ -1,3 +1,8 @@
+2008-02-01  Inge Wallin  <inge@lysator.liu.se>
+
+	Don't include unnecessary files.
+	* src/lib/MarbleWidget.{h,cpp}
+
 2008-02-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.cpp:

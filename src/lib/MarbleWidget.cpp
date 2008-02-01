@@ -24,7 +24,10 @@
 
 //#include <QtDBus/QDBusConnection>
 
-#include "global.h"
+#include "CrossHairFloatItem.h"
+#include "CompassFloatItem.h"
+#include "MapScaleFloatItem.h"
+
 #include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
@@ -141,8 +144,8 @@ void MarbleWidget::construct()
     connect( d->m_model, SIGNAL( modelChanged() ),
              this,       SLOT( updateChangedMap() ) );
 
-    connect( d->m_model, SIGNAL( regionChanged( BoundingBox ) ) ,
-             this,       SLOT( updateRegion( BoundingBox) ) );
+    connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
+             this,       SLOT( updateRegion( BoundingBox& ) ) );
 
 
     // Set background: black.
@@ -1322,7 +1325,7 @@ void MarbleWidget::updateChangedMap()
     update();
 }
 
-void MarbleWidget::updateRegion( BoundingBox box )
+void MarbleWidget::updateRegion( BoundingBox &box )
 {
     Q_UNUSED(box);
     //really not sure if this is nessary as its designed for

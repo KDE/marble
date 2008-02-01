@@ -30,23 +30,33 @@
 
 //#include <QtDBus/QtDBus>
 
-#include "GeoDataPoint.h"       // In geodata/data/
 #include "marble_export.h"
-#include "MarbleModel.h"
-#include "CrossHairFloatItem.h"
-#include "CompassFloatItem.h"
-#include "MapScaleFloatItem.h"
+#include "GeoDataPoint.h"       // In geodata/data/
+#include "global.h"             // types needed in all of marble.
 
+// Qt
+class QAbstractItemModel;
+class QModelIndex;
+class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
+
+// MarbleWidget 
 class MarbleWidgetInputHandler;
 class MarbleWidgetPopupMenu;
+class MarbleWidgetPrivate;
+
+// Marble
+class BoundingBox;
+class MarbleModel;
+class HttpDownloadManager;
 class TextureColorizer;
 class MeasureTool;
 class TileCreator;
-class MarbleWidgetPrivate;
+class SunLocator;
 class GpsLayer;
 class GpxFileModel;
 class FileViewModel;
+class ClipPainter;
 
 
 /**
@@ -167,7 +177,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * The instance will be destructed by MarbleWidget when not
      * used any longer.
      */
-    void setDownloadManager(HttpDownloadManager *downloadManager);
+    void setDownloadManager( HttpDownloadManager *downloadManager );
 
 
     /**
@@ -255,7 +265,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
-                         GeoDataPoint::Unit=GeoDataPoint::Degree);
+                         GeoDataPoint::Unit = GeoDataPoint::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
@@ -777,7 +787,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief update part of the map as defined in the BoundingBox
      */
-    void updateRegion( BoundingBox );
+    void updateRegion( BoundingBox& );
 
     /**
      * @brief Set the download url to load missing tiles
