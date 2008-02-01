@@ -134,7 +134,21 @@ Documentation
  * Write more in USECASES                                               INGE
 
 
-Before KDE 4.0.1
+Integration of Google Summer of Code projects (0.6)
+----------------------------------------------------------------
+
+GPS support (Andrew Manson)
+ * Read GPX files                                                       ----
+ * Show waypoints                                                       ----
+ * Show tracks                                                          ----
+ * Show 'You are here' using the GPS.                                   ----
+
+KML support (Murad Tagirov)
+ * One overall aim: make Digikam KML output and plasma weather applet 
+   work together with Marble. 
+
+
+Before KDE 4.0.2
 ================================================================
 
 Bugs
@@ -190,7 +204,7 @@ Features:
  * Support for OpenStreetMap                                            TACK
     - load tiles                                                        --
     - display tiles                                                     --
- * Support to display Timezones, Data available e.g. at:
+ * Support to display Timezones, Data available e.g. at:		----
 	http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
 Internal structure:
