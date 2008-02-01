@@ -3,7 +3,7 @@
 	<MapStyle>
 		<name>Plain Map</name>
 
-		<prefix>plain</prefix>
+		<prefix>earth/plain</prefix>
 		<icon>plain-preview.png</icon>
 
 		<description>A plain map. It uses vector lines to mark coastlines and country borders etc. .</description>

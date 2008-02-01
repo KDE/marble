@@ -1,3 +1,22 @@
+2008-02-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapTheme.cpp:
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/TileCreator.cpp:
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleModel.cpp:
+    * data/maps/earth/citylights/citylights.dgml:
+    * data/maps/earth/plain/plain.dgml:
+    * data/maps/earth/srtm/srtm.dgml:
+    * data/maps/earth/bluemarble/bluemarble.dgml:
+
+    - Instead of searching through "maps/earth"
+      we are searching through "maps" now.
+
+    If you created your own maps this will 
+    require you to set the "prefix" in the 
+    .dgml file e.g. to "earth/bluemarble"
+
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/FlatScanlineTextureMapper.cpp:

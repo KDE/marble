@@ -4,7 +4,7 @@
 
 		<name>Satellite View</name>
 
-		<prefix>bluemarble</prefix>
+		<prefix>earth/bluemarble</prefix>
 		<icon>bluemarble-preview.png</icon>
 
 		<description>Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory </description>

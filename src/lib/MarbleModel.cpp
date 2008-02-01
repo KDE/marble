@@ -94,7 +94,7 @@ MarbleModel::MarbleModel( QWidget *parent )
     d->m_maptheme = new MapTheme();
     d->m_previousMapLoadedFine = false;
 
-    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth/" );
+    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/" );
     QString      selectedmap;
 
     // We need at least one maptheme to run Marble.
@@ -213,7 +213,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
 			       Projection currentProjection )
 {
     // Read the maptheme into d->m_maptheme.
-    QString mapPath = QString("maps/earth/%1").arg( selectedMap );
+    QString mapPath = QString("maps/%1").arg( selectedMap );
     qDebug( "Setting map theme to : %s",
 	    qPrintable( MarbleDirs::path( mapPath ) ) );
 
@@ -236,7 +236,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
     if ( d->m_maptheme->bitmaplayer().enabled ) {
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
-        if ( !TileLoader::baseTilesAvailable( "maps/earth/"
+        qDebug() << d->m_maptheme->tilePrefix();
+        if ( !TileLoader::baseTilesAvailable( "maps/"
                                               + d->m_maptheme->tilePrefix() ) )
         {
             qDebug("Base tiles not available. Creating Tiles ... ");
@@ -255,7 +256,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
         if ( d->m_texmapper != 0 )
             delete d->m_texmapper;
 
-        d->m_tileLoader->setMapTheme( "maps/earth/" + d->m_maptheme->tilePrefix() );
+        d->m_tileLoader->setMapTheme( "maps/" +
+d->m_maptheme->tilePrefix() );
 
         switch( currentProjection ) {
             case Spherical:

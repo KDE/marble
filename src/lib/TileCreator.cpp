@@ -50,9 +50,11 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    QString m_sourceDir = MarbleDirs::path( "maps/earth/" + m_prefix + '/' + m_installmap );
+    QString m_sourceDir = MarbleDirs::path( "maps/" + m_prefix +
+'/' + m_installmap );
     if ( m_targetDir.isNull() )
-        m_targetDir = MarbleDirs::localPath() + "/maps/earth/" + m_prefix + '/';
+        m_targetDir = MarbleDirs::localPath() + "/maps/" + m_prefix
++ '/';
     if ( !m_targetDir.endsWith('/') )
         m_targetDir += '/';
 

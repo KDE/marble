@@ -152,7 +152,7 @@ MarbleControlBox::~MarbleControlBox()
 
 void MarbleControlBox::updateMapThemes()
 {
-    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/earth" );
+    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps" );
     d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapthememodel );
 }

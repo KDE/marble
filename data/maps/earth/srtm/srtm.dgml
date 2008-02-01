@@ -3,7 +3,7 @@
 	<MapStyle>
 		<name>Atlas</name>
 
-		<prefix>srtm</prefix>
+		<prefix>earth/srtm</prefix>
 		<icon>srtm-preview.png</icon>
 
 		<description>A classic topographic map. It uses vector lines to mark coastlines, country borders etc. and bitmap graphics to create the height relief.</description>

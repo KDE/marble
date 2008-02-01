@@ -4,7 +4,7 @@
 
 		<name>Earth at Night</name>
 
-		<prefix>citylights</prefix>
+		<prefix>earth/citylights</prefix>
 		<icon>citylights-preview.png</icon>
 
 		<description>This image of Earth's city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). </description>

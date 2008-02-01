@@ -1113,6 +1113,7 @@ void MarbleWidget::goHome()
 
 QString MarbleWidget::mapTheme() const
 {
+    qDebug() << d->m_model->mapTheme();
     return d->m_model->mapTheme();
 }
 
