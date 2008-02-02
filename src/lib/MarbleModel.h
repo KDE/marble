@@ -99,7 +99,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Construct a new MarbleModel.
      * @param parent the parent widget
      */
-    MarbleModel( QWidget *parent );
+    MarbleModel( QObject *parent );
     virtual ~MarbleModel();
 
     /**
@@ -167,7 +167,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      *    maptheme = "bluemarble/bluemarble.dgml" 
      */
     void setMapTheme( const QString &selectedMap,
-		      QWidget *parent,
+		      //QWidget *parent,
+		      QObject *parent, /* FIXME */
 		      Projection currentProjection );
 
     /**

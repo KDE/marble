@@ -72,8 +72,9 @@ class MarbleModelPrivate
     FileViewModel       *m_fileviewmodel;
 };
 
-MarbleModel::MarbleModel( QWidget *parent )
-    : d( new MarbleModelPrivate )
+MarbleModel::MarbleModel( QObject *parent )
+    : QObject( parent ),
+      d( new MarbleModelPrivate )
 {
     m_sunLocator = new SunLocator();
 
@@ -209,7 +210,7 @@ MapTheme* MarbleModel::mapThemeObject() const
 // FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
 //
 
-void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
+void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 			       Projection currentProjection )
 {
     // Read the maptheme into d->m_maptheme.
@@ -246,7 +247,9 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QWidget *parent,
                                      d->m_maptheme->prefix(),
                                      d->m_maptheme->installMap(),
                                      d->m_maptheme->bitmaplayer().dem );
-            TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+	    // FIXME
+            //TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+	    TileCreatorDialog tileCreatorDlg( tileCreator, 0 );
             tileCreatorDlg.setSummary( d->m_maptheme->name(),
                                        d->m_maptheme->description() );
             tileCreatorDlg.exec();

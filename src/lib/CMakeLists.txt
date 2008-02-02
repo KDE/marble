@@ -48,6 +48,7 @@ set(marblewidget_SRCS
 #           ${geodata_SRCS}
            MarbleWidget.cpp
            MarbleModel.cpp
+           MarbleMap.cpp
            MarbleControlBox.cpp
            MarbleNavigator.cpp
            MarbleLegendBrowser.cpp
@@ -250,6 +251,7 @@ if (APPLE AND QTONLY)
 else (APPLE AND QTONLY)
   install( FILES
            MarbleWidget.h
+           MarbleMap.h
            MarbleModel.h
            MarbleControlBox.h
            MarbleNavigator.h
