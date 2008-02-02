@@ -1,3 +1,11 @@
+2008-02-02  Inge Wallin  <inge@lysator.liu.se>
+
+	First step of the new widgetless marble
+	* CMakeLists.cpp: Add MarbleMap.{h,cpp}
+	* MarbleMap.{h,cpp}: New files
+	* src/lib/MarbleModel.{h,cpp} (MarbleModel): Make parent a QObject
+	(setMapTheme): Use a QObject instead of a QWidget
+
 2008-02-01  Inge Wallin  <inge@lysator.liu.se>
 
 	Don't include unnecessary files.
