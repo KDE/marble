@@ -28,6 +28,7 @@
 #include "CompassFloatItem.h"
 #include "MapScaleFloatItem.h"
 
+#include "MarbleMap.h"
 #include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
@@ -60,18 +61,20 @@ class MarbleWidgetPrivate
 {
  public:
     // The model we are showing.
+    MarbleMap       *m_map;
     MarbleModel     *m_model;
 
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
+#if 1
     GeoDataPoint     m_homePoint;
     int              m_homeZoom;
 
     int              m_logzoom;
 
     int              m_zoomStep;
-
+#endif
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
@@ -101,17 +104,21 @@ MarbleWidget::MarbleWidget(QWidget *parent)
       d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-    d->m_model = new MarbleModel( this );
+    d->m_map = new MarbleMap();
+    d->m_model = d->m_map->model();
+
     construct();
 }
 
 
-MarbleWidget::MarbleWidget(MarbleModel *model, QWidget *parent)
+MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-    d->m_model = model;
+    d->m_map = map;
+    d->m_model = d->m_map->model();
+
     construct();
 }
 
@@ -120,18 +127,21 @@ MarbleWidget::~MarbleWidget()
     // Remove and delete an existing InputHandler
     setInputHandler(NULL);
     setDownloadManager(NULL);
-    delete d->m_model;
-//    Moved to ViewParams:
-//    delete d->m_viewParams.m_canvasImage;
-//    delete d->m_viewParams.m_coastImage;
+
+    delete d->m_map;
     delete d;
 }
 
 void MarbleWidget::construct()
 {
+    // FIXME: Setup the Map width, height, etc
+    // FIXME: change size of map when needed.
+
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
+
+    d->m_map->setSize( width(), height() );
 
     // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
@@ -173,9 +183,10 @@ void MarbleWidget::construct()
              this,       SLOT( updateGps() ) );
 
 
+#if 1
     d->m_logzoom  = 0;
     d->m_zoomStep = 40;
-
+#endif
     goHome();
 
     // FloatItems
@@ -189,7 +200,7 @@ void MarbleWidget::construct()
     translator.load(QString("marblewidget_") + locale);
     QCoreApplication::installTranslator(&translator);
 
-#if 0 // Reeneable when the autosettings are actually used
+#if 0 // Reenable when the autosettings are actually used.
 
       // AutoSettings
     AutoSettings* autoSettings = new AutoSettings( this );
@@ -206,6 +217,11 @@ void MarbleWidget::construct()
 
 // ----------------------------------------------------------------
 
+
+MarbleMap *MarbleWidget::map() const
+{
+    return d->m_map;
+}
 
 MarbleModel *MarbleWidget::model() const
 {
@@ -244,23 +260,28 @@ void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 
 Quaternion MarbleWidget::planetAxis() const
 {
+#if 0
     return d->m_viewParams.m_planetAxis;
+#else
+    return d->m_map->planetAxis();
+#endif
 }
 
 
 int MarbleWidget::radius() const
 {
-    return d->m_viewParams.m_radius;
+    return d->m_map->radius();
 }
 
 void MarbleWidget::setRadius(const int radius)
 {
-    d->m_viewParams.m_radius = radius;
+    d->m_map->setRadius( radius );
 }
 
 
 bool MarbleWidget::needsUpdate() const
 {
+    return d->m_map->needsUpdate();
     return ( d->m_justModified
              || d->m_viewParams.m_radius != d->m_viewParams.m_radiusUpdated
              || !( d->m_viewParams.m_planetAxis == d->m_viewParams.m_planetAxisUpdated ) );
@@ -268,7 +289,11 @@ bool MarbleWidget::needsUpdate() const
 
 void MarbleWidget::setNeedsUpdate()
 {
+#if 0
     d->m_justModified = true;
+#else
+    d->m_map->setNeedsUpdate();
+#endif
 }
 
 
@@ -284,6 +309,8 @@ QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
 
 double MarbleWidget::moveStep()
 {
+    return d->m_map->moveStep();
+
     if ( radius() < sqrt( width() * width() + height() * height() ) )
 	return 180.0 * 0.1;
     else
@@ -293,11 +320,13 @@ double MarbleWidget::moveStep()
 
 int MarbleWidget::zoom() const
 {
-    return d->m_logzoom;
+    return d->m_map->zoom();
 }
 
 double MarbleWidget::centerLatitude() const
 {
+    return d->m_map->centerLatitude();
+
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
@@ -308,6 +337,8 @@ double MarbleWidget::centerLatitude() const
 
 double MarbleWidget::centerLongitude() const
 {
+    return d->m_map->centerLongitude();
+
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
@@ -418,6 +449,7 @@ bool  MarbleWidget::quickDirty() const
 
 void MarbleWidget::zoomView(int newZoom)
 {
+#if 1
     // Check for under and overflow.
     if ( newZoom < minimumZoom() ) {
         newZoom = minimumZoom();
@@ -465,6 +497,9 @@ void MarbleWidget::zoomView(int newZoom)
     repaint();
 
     setActiveRegion();
+#else
+    d->m_map->zoomView( newZoom );
+#endif
 }
 
 
@@ -476,18 +511,29 @@ void MarbleWidget::zoomViewBy( int zoomStep )
 
 void MarbleWidget::zoomIn()
 {
+#if 1
     zoomViewBy( d->m_zoomStep );
+#else
+    d->m_map->zoomIn();
+#endif
 }
 
 void MarbleWidget::zoomOut()
 {
+#if 1
     zoomViewBy( -d->m_zoomStep );
+#else
+    d->m_map->zoomOut();
+#endif
 }
 
 void MarbleWidget::rotateTo(const Quaternion& quat)
 {
+#if 0
     d->m_viewParams.m_planetAxis = quat;
-
+#else
+    d->m_map->rotateTo( quat );
+#endif
     // This method doesn't force a repaint of the view on purpose!
     // See header file.
 }
@@ -495,19 +541,28 @@ void MarbleWidget::rotateTo(const Quaternion& quat)
 
 void MarbleWidget::rotateBy(const Quaternion& incRot)
 {
+#if 0
     d->m_viewParams.m_planetAxis = incRot * d->m_viewParams.m_planetAxis;
+#else
+    d->m_map->rotateBy( incRot );
+#endif
 
     repaint();
 }
 
 void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 {
+#if 0
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
     d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
     d->m_viewParams.m_planetAxis *= rotPhi;
     d->m_viewParams.m_planetAxis.normalize();
+#else
+    qDebug() << "MarbleWidget::rotateBy(" << deltaLon << ", " << deltaLat << ")";
+    d->m_map->rotateBy( deltaLon, deltaLat );
+#endif
 
     repaint();
 }
@@ -515,10 +570,15 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
+#if 0
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
                                                    lon * DEG2RAD,
                                                   0.0 );
 //    d->m_viewParams.m_planetAxis.display();
+#else
+    d->m_map->centerOn( lon, lat );
+#endif
+
     repaint();
 }
 
@@ -609,20 +669,32 @@ void MarbleWidget::setProjection( int projectionIndex )
 
 void MarbleWidget::home( double &lon, double &lat, int& zoom )
 {
+#if 1
     d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
     zoom = d->m_homeZoom;
+#else
+    d->m_map->home( lon, lat, zoom );
+#endif
 }
 
 void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 {
+#if 1
     d->m_homePoint = GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree );
     d->m_homeZoom = zoom;
+#else
+    d->m_map->setHome( lon, lat, zoom );
+#endif
 }
 
 void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 {
+#if 1
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
+#else
+    d->m_map->setHome( homePoint, zoom );
+#endif
 }
 
 
@@ -670,6 +742,7 @@ void MarbleWidget::leaveEvent (QEvent*)
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
 {
+#if 1
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
 
@@ -697,6 +770,9 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
                                                QImage::Format_ARGB32_Premultiplied );
     d->m_justModified = true;
     repaint();
+    //#else
+    d->m_map->setSize( width(), height() );
+#endif
 }
 
 void MarbleWidget::connectNotify ( const char * signal )
@@ -768,6 +844,8 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat,
                                   GeoDataPoint::Unit unit )
 {
+    return d->m_map->geoCoordinates( x, y, lon, lat, unit );
+
     int           imageHalfWidth  = width() / 2;
     int           imageHalfHeight = height() / 2;
     const double  inverseRadius   = 1.0 / (double)(radius());
@@ -1020,6 +1098,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
+#if 0
     d->m_model->paintGlobe( &painter,
                             width(), height(), &d->m_viewParams,
                             needsUpdate()
@@ -1083,6 +1162,9 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     }
 
     emit framesPerSecond( fps );
+#else
+    d->m_map->doPaint( painter, dirtyRect);
+#endif
 }
 
 void MarbleWidget::customPaint(ClipPainter *painter)
@@ -1102,6 +1184,7 @@ void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 void MarbleWidget::goHome()
 {
+#if 1
     // d->m_model->rotateTo(0, 0);
     double  homeLon = 0;
     double  homeLat = 0;
@@ -1112,6 +1195,9 @@ void MarbleWidget::goHome()
     zoomView( d->m_homeZoom ); // default 1050
 
     repaint(); // not obsolete in case the zoomlevel stays unaltered
+#else
+    d->m_map->goHome();
+#endif
 }
 
 QString MarbleWidget::mapTheme() const

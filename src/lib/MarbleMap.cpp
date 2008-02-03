@@ -210,6 +210,8 @@ void MarbleMap::setSize(int width, int height)
 {
     d->m_width  = width;
     d->m_height = height;
+
+    doResize();
 }
 
 QSize MarbleMap::size() const
@@ -697,8 +699,8 @@ void MarbleMap::leaveEvent (QEvent*)
 {
     emit mouseMoveGeoPosition( NOT_AVAILABLE );
 }
-
-void MarbleWidget::resizeEvent (QResizeEvent*)
+#endif
+void MarbleMap::doResize()  // Used to be resizeEvent()
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
@@ -713,11 +715,15 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     int  imageHeight2 = height() / 2;
 
     if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
+#if 0
         setAttribute(Qt::WA_NoSystemBackground, false);
+#endif
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
+#if 0
         setAttribute(Qt::WA_NoSystemBackground, true);
+#endif
     }
 
     drawAtmosphere();
@@ -728,7 +734,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     d->m_justModified = true;
     repaint();
 }
-
+#if 0
 void MarbleWidget::connectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
@@ -1044,7 +1050,8 @@ void MarbleMap::setBoundingBox()
 }
 
 
-void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
+// Used to be paintEvent()
+void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect) 
 {
     QTime t;
     t.start();

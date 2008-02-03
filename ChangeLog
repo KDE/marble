@@ -1,3 +1,17 @@
+2008-02-03  Inge Wallin  <inge@lysator.liu.se>
+
+	Start to use the MarbleMap in MarbleWidget.
+	NOTE: THIS DOESN'T FULLY WORK!
+	      I have to switch computer now, and I'm really sorry about
+	      this.  Navigation with the keyboard works, but not yet with
+	      the mouse, as the integration is not yet 100%.	
+	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Contain a
+	MarbleMap.
+	(class MarbleWidget): Use the MarbleMap whereever possible.
+	* src/lib/MarbleMap.h (doPaint): now a public function.
+	* src/lib/MarbleMap.cpp: some updates for use in MarbleWidget.
+	* src/lib/ViewParams.cpp: Cleaning
+	
 2008-02-02  Inge Wallin  <inge@lysator.liu.se>
 
 	First step of the new widgetless marble

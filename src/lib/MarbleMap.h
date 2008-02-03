@@ -449,6 +449,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void repaint() const {};	/* FIXME: Only in qwidget */
     void update() const {};	/* FIXME: Only in qwidget */
     void update(QRegion&) const {};	/* FIXME: Only in qwidget */
+    void  doPaint(ClipPainter &painter, QRect &dirtyRect);
 #endif
     /**
      * @brief  Zoom the view to a certain zoomlevel
@@ -868,7 +869,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void  setBoundingBox();
 
-    void  doPaint(ClipPainter &painter, QRect &dirtyRect);
+    void  doResize();
 
  private:
     MarbleMapPrivate  * const d;

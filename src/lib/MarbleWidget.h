@@ -47,6 +47,7 @@ class MarbleWidgetPrivate;
 
 // Marble
 class BoundingBox;
+class MarbleMap;
 class MarbleModel;
 class HttpDownloadManager;
 class TextureColorizer;
@@ -156,9 +157,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * one MarbleWidget for the same MarbleModel (not yet supported,
      * but will be soon).
      */
-    explicit MarbleWidget(MarbleModel *model, QWidget *parent = 0);
+    explicit MarbleWidget(MarbleMap *map, QWidget *parent = 0);
 
     virtual ~MarbleWidget();
+
+    /**
+     * @brief Return the model that this view shows.
+     */
+    MarbleMap  *map() const;
 
     /**
      * @brief Return the model that this view shows.
