@@ -19,44 +19,30 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoDataParser_h
-#define GeoDataParser_h
+#include <QDebug>
 
-#include <QHash>
-#include <QXmlStreamReader>
+#include "DGMLDocumentTagHandler.h"
 
-#include "GeoDataDocument.h"
+#include "DGMLElementDictionary.h"
+#include "GeoDataParser.h"
 
-class GeoDataTagHandler;
+using namespace GeoDataElementDictionary;
 
-enum GeoDataDataSource {
-    GeoDataData_GeoRSS = 0,
-    GeoDataData_GPX    = 1,
-    GeoDataData_KML    = 2
-    GeoDataData_DGML   = 3
-};
+DGML_DEFINE_TAG_HANDLER(Document)
 
-class GeoDataParser : public QXmlStreamReader {
-public:
-    GeoDataParser(GeoDataDataSource source);
-    virtual ~GeoDataParser();
+DGMLDocumentTagHandler::DGMLDocumentTagHandler()
+    : GeoDataTagHandler()
+{
+}
 
-    // Main API.
-    bool read(QIODevice*);
+DGMLDocumentTagHandler::~DGMLDocumentTagHandler()
+{
+}
 
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
+void DGMLDocumentTagHandler::parse(GeoDataParser& parser) const
+{
+    Q_ASSERT(parser.isStartElement() &&
+parser.isValidElement(dgmlTag_Document));
 
-    // If parsing was succesful, call this & be happy.
-    GeoDataDocument& document();
-    const GeoDataDocument& document() const;
-
-private:
-    void parseDocument();
-
-private:
-    GeoDataDocument m_document;
-    GeoDataDataSource m_source;
-};
-
-#endif // GeoDataParser_h
+    qDebug() << "Parsed <Document> start!";    
+}

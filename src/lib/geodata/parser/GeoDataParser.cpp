@@ -33,6 +33,9 @@
 // KML support
 #include "KMLElementDictionary.h"
 
+// DGML support
+#include "DGMLElementDictionary.h"
+
 using namespace GeoDataElementDictionary;
 
 GeoDataParser::GeoDataParser(GeoDataDataSource source)
@@ -78,6 +81,9 @@ bool GeoDataParser::read(QIODevice* device)
             case GeoDataData_KML:
                 valid = isValidElement(kmlTag_kml);
                 break;
+            case GeoDataData_DGML:
+                valid = isValidElement(dgmlTag_dgml);
+                break;
             default:
                 break;
             }
@@ -94,6 +100,9 @@ bool GeoDataParser::read(QIODevice* device)
                 case GeoDataData_KML:
                     raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 file"));
                     break;
+                case GeoDataData_DGML:
+                    raiseError(QObject::tr("The file is not a valid DGML 2.0 file"));
+                    break;                
                 default:
                     raiseError(QObject::tr("File format unrecognized"));
                     break;
@@ -124,6 +133,8 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
         return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
     case GeoDataData_KML:
         return (namespaceUri() == kmlTag_nameSpace20 || namespaceUri() == kmlTag_nameSpace21);    
+    case GeoDataData_DGML:
+        return (namespaceUri() == dgmlTag_nameSpace20);    
     default:
         break;
     }
