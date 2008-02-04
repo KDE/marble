@@ -1,5 +1,8 @@
 2008-02-04  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/MarbleMap.cpp (construct): Don't connect to
+	enableInput() since that slot is only relevant to the widget.
+
 	More fixes in the MarbleWidget / MarbleMap split.
 	* src/lib/MarbleMap.h: Make MarbleWidget a friend of MarbleMap
 	* src/lib/MarbleWidget.cpp: More fixes for MarbleWidget to use
