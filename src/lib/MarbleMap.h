@@ -140,6 +140,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 #endif
  public:
 
+    friend class MarbleWidget;
+
     /**
      * @brief Construct a new MarbleMap.
      *

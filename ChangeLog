@@ -1,3 +1,11 @@
+2008-02-04  Inge Wallin  <inge@lysator.liu.se>
+
+	More fixes in the MarbleWidget / MarbleMap split.
+	* src/lib/MarbleMap.h: Make MarbleWidget a friend of MarbleMap
+	* src/lib/MarbleWidget.cpp: More fixes for MarbleWidget to use
+	MarbleMap.
+	* src/lib/MarbleWidgetInputHandler.cpp: indent better
+
 2008-02-03  Inge Wallin  <inge@lysator.liu.se>
 
 	Start to use the MarbleMap in MarbleWidget.

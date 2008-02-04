@@ -134,7 +134,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( m_positionSignalConnected ) {
             double  lat;
             double  lon;
-            bool isValid = m_widget->geoCoordinates( event->x(), event->y(), lon, lat, GeoDataPoint::Radian );
+            bool isValid = m_widget->geoCoordinates( event->x(), event->y(),
+                                                     lon, lat,
+                                                     GeoDataPoint::Radian );
 
             if ( !isValid ) {
                 emit mouseMoveGeoPosition( NOT_AVAILABLE );

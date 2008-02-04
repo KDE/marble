@@ -260,11 +260,7 @@ void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 
 Quaternion MarbleWidget::planetAxis() const
 {
-#if 0
-    return d->m_viewParams.m_planetAxis;
-#else
     return d->m_map->planetAxis();
-#endif
 }
 
 
@@ -282,18 +278,11 @@ void MarbleWidget::setRadius(const int radius)
 bool MarbleWidget::needsUpdate() const
 {
     return d->m_map->needsUpdate();
-    return ( d->m_justModified
-             || d->m_viewParams.m_radius != d->m_viewParams.m_radiusUpdated
-             || !( d->m_viewParams.m_planetAxis == d->m_viewParams.m_planetAxisUpdated ) );
 }
 
 void MarbleWidget::setNeedsUpdate()
 {
-#if 0
-    d->m_justModified = true;
-#else
     d->m_map->setNeedsUpdate();
-#endif
 }
 
 
@@ -310,12 +299,6 @@ QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
 double MarbleWidget::moveStep()
 {
     return d->m_map->moveStep();
-
-    if ( radius() < sqrt( width() * width() + height() * height() ) )
-	return 180.0 * 0.1;
-    else
-	return 180.0 * atan( (double)width()
-		     / (double)( 2 * radius() ) ) * 0.2;
 }
 
 int MarbleWidget::zoom() const
@@ -326,25 +309,11 @@ int MarbleWidget::zoom() const
 double MarbleWidget::centerLatitude() const
 {
     return d->m_map->centerLatitude();
-
-    // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
-
-    d->m_viewParams.centerCoordinates( centerLon, centerLat );
-    return centerLat * RAD2DEG;
 }
 
 double MarbleWidget::centerLongitude() const
 {
     return d->m_map->centerLongitude();
-
-    // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
-
-    d->m_viewParams.centerCoordinates(centerLon, centerLat);
-    return centerLon * RAD2DEG;
 }
 
 int  MarbleWidget::minimumZoom() const
@@ -529,11 +498,8 @@ void MarbleWidget::zoomOut()
 
 void MarbleWidget::rotateTo(const Quaternion& quat)
 {
-#if 0
-    d->m_viewParams.m_planetAxis = quat;
-#else
     d->m_map->rotateTo( quat );
-#endif
+
     // This method doesn't force a repaint of the view on purpose!
     // See header file.
 }
@@ -541,28 +507,14 @@ void MarbleWidget::rotateTo(const Quaternion& quat)
 
 void MarbleWidget::rotateBy(const Quaternion& incRot)
 {
-#if 0
-    d->m_viewParams.m_planetAxis = incRot * d->m_viewParams.m_planetAxis;
-#else
     d->m_map->rotateBy( incRot );
-#endif
 
     repaint();
 }
 
 void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 {
-#if 0
-    Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
-    Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
-
-    d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
-    d->m_viewParams.m_planetAxis *= rotPhi;
-    d->m_viewParams.m_planetAxis.normalize();
-#else
-    qDebug() << "MarbleWidget::rotateBy(" << deltaLon << ", " << deltaLat << ")";
     d->m_map->rotateBy( deltaLon, deltaLat );
-#endif
 
     repaint();
 }
@@ -570,14 +522,7 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleWidget::centerOn(const double& lon, const double& lat)
 {
-#if 0
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
-                                                   lon * DEG2RAD,
-                                                  0.0 );
-//    d->m_viewParams.m_planetAxis.display();
-#else
     d->m_map->centerOn( lon, lat );
-#endif
 
     repaint();
 }
@@ -793,21 +738,12 @@ void MarbleWidget::disconnectNotify ( const char * signal )
 
 int MarbleWidget::northPoleY()
 {
-    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
-
-    northPole.rotateAroundAxis( invPlanetAxis );
-    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Y] );
+    return d->m_map->northPoleY();
 }
 
 int MarbleWidget::northPoleZ()
 {
-    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
-
-    northPole.rotateAroundAxis( invPlanetAxis );
-
-    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Z] );
+    return d->m_map->northPoleZ();
 }
 
 bool MarbleWidget::screenCoordinates( const double lon, const double lat,
@@ -845,62 +781,6 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   GeoDataPoint::Unit unit )
 {
     return d->m_map->geoCoordinates( x, y, lon, lat, unit );
-
-    int           imageHalfWidth  = width() / 2;
-    int           imageHalfHeight = height() / 2;
-    const double  inverseRadius   = 1.0 / (double)(radius());
-    bool          noerr = false;
-
-    switch( d->m_viewParams.m_projection ) {
-    case Spherical:
-        if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-                                + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
-        {
-            double qx = inverseRadius * (double)( x - imageHalfWidth );
-            double qy = inverseRadius * (double)( imageHalfHeight - y );
-            double qr = 1.0 - qy * qy;
-
-            double qr2z = qr - qx * qx;
-            double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-            Quaternion  qpos( 0.0, qx, qy, qz );
-            qpos.rotateAroundAxis( planetAxis() );
-            qpos.getSpherical( lon, lat );
-
-            noerr = true;
-        }
-        break;
-
-    case Equirectangular:
-        // Calculate translation of center point
-        double centerLon, centerLat;
-        d->m_viewParams.centerCoordinates(centerLon, centerLat);
-
-        int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
-        int yTop = imageHalfHeight - radius() + yCenterOffset;
-        int yBottom = yTop + 2*radius();
-        if ( y >= yTop && y < yBottom ) {
-            int const xPixels = x - imageHalfWidth;
-            int const yPixels = y - imageHalfHeight;
-
-            double const pixel2rad = M_PI / (2 * radius());
-            lat = - yPixels * pixel2rad + centerLat;
-            lon = + xPixels * pixel2rad + centerLon;
-
-            while( lon > M_PI ) lon -= 2*M_PI;
-            while( lon < -M_PI ) lon += 2*M_PI;
-
-            noerr = true;
-        }
-        break;
-    }
-
-    if ( unit == GeoDataPoint::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
-    }
-
-    return noerr;
 }
 
 bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
@@ -1019,6 +899,7 @@ void MarbleWidget::drawFog()
 
 void MarbleWidget::setActiveRegion()
 {
+#if 0
     int zoom = radius();
 
     d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
@@ -1045,10 +926,15 @@ void MarbleWidget::setActiveRegion()
                                           QRegion::Rectangle );
             break;
     }
+#else
+    d->m_map->setActiveRegion();
+#endif
 }
 
 const QRegion MarbleWidget::activeRegion()
 {
+    return d->m_map->activeRegion();
+
     return d->m_activeRegion;
 }
 
@@ -1088,6 +974,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     QTime t;
     t.start();
 
+    // FIXME: Better way to get the ClipPainter
     bool  doClip = false;
     if ( d->m_viewParams.m_projection == Spherical )
         doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
@@ -1096,75 +983,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     // Create a painter that will do the painting.
     ClipPainter painter( this, doClip );
 
-    // 1. Paint the globe itself.
     QRect  dirtyRect = evt->rect();
-#if 0
-    d->m_model->paintGlobe( &painter,
-                            width(), height(), &d->m_viewParams,
-                            needsUpdate()
-                            || d->m_viewParams.m_canvasImage->isNull(),
-                            dirtyRect );
-    d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.m_planetAxis;
-    d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
-    d->m_justModified                   = false;
-
-    //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
-    // Add to GlobeScanlineTextureMapper.
-    bool fog = false;
-    if (fog == true)
-        drawFog();
-
-    customPaint( &painter );
-
-    // 2. Paint the compass
-    if ( d->m_showCompass )
-        painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
-                            d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
-                                                            d->m_viewParams.m_canvasImage->height(),
-                                                            northPoleY(), d->m_viewParams.m_projection ) );
-
-    // 3. Paint the scale.
-    if ( d->m_showScaleBar )
-        painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,
-                            d->m_mapscale.drawScaleBarPixmap( radius(),
-                                                              d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
-
-    // 4. Paint the crosshair.
-    d->m_crosshair.paint( &painter,
-                          d->m_viewParams.m_canvasImage->width(),
-                          d->m_viewParams.m_canvasImage->height() );
-
-    // 5. Paint measure points if there are any.
-    d->m_measureTool->paintMeasurePoints( &painter, d->m_viewParams, true );
-
-    // Set the region of the image where the user can drag it.
-    setActiveRegion();
-
-    // Set the Bounding Box
-    setBoundingBox();
-
-    double fps = 1000.0 / (double)( t.elapsed() );
-
-    if ( d->m_showFrameRate == true ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-        QPoint fpsLabelPos( 10, 20 );
-
-        painter.setFont( QFont( "Sans Serif", 10 ) );
-
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
-
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
-
-    emit framesPerSecond( fps );
-#else
-    d->m_map->doPaint( painter, dirtyRect);
-#endif
+    d->m_map->doPaint( painter, dirtyRect );
 }
 
 void MarbleWidget::customPaint(ClipPainter *painter)
@@ -1428,12 +1248,12 @@ void MarbleWidget::setDownloadUrl( const QString &url )
     setDownloadUrl( QUrl( url ) );
 }
 
-void MarbleWidget::setDownloadUrl( const QUrl &url ) {
+void MarbleWidget::setDownloadUrl( const QUrl &url )
+{
     HttpDownloadManager *downloadManager = d->m_model->downloadManager();
     if ( downloadManager != NULL )
         downloadManager->setServerUrl( url );
-    else
-    {
+    else {
         downloadManager = new HttpDownloadManager( url,
                                                    new FileStoragePolicy( MarbleDirs::localPath() ) );
         d->m_model->setDownloadManager( downloadManager );
