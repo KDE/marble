@@ -8,11 +8,6 @@ Mark those tasks that you want to perform with your name:
 
 
 
-Before Release of 4.0.0 (Jan 11th)
-----------------------------------
-
-
-
 
 Before Release of Marble 0.6:
 =============================
@@ -32,7 +27,6 @@ Layer Management Class tasks:
 
 *** Implement / move <head> features as lined out in layermanagement.txt
     This should happen after the QXmlStreamReader port.
-
 
 *** Implement basic Qt-Plugin based LMC class
 
@@ -56,7 +50,7 @@ Low hanging (but important) fruits:
 
 *** Update screenshots in the docs!
 
-*** Fix Double Click on map (which should center the map on the point   INGE
+*** Fix Double Click on map (which should center the map on the point   ----
     being double clicked).
 
 *** Add a *small* percentage bar to the status bar that indicates map   ----
@@ -90,36 +84,39 @@ to 4.1):
 *** Create map tiles at compile time
 
 *** Download manager fixes:
-- After maps get downloaded sometimes the resolution doesn't get
-  updated to what is has just been stored on the disc
-- Implement "retry to download the tile 3 times during the current
-  session if the tile couldn't get fetched on first try"
+ - After maps get downloaded sometimes the resolution doesn't get
+   updated to what is has just been stored on the disc
+ - Implement "retry to download the tile 3 times during the current
+   session if the tile couldn't get fetched on first try"
 
 *** Minor Backend feature fixes and polishment:
-- Create a LatLonBoundingBox
-- Create a QPersistentModelIndex for MarblePlaceMarkModel items to improve speed on close up zooms.
+ - Create a LatLonBoundingBox
+ - Create a QPersistentModelIndex for MarblePlaceMarkModel items to
+   improve speed on close up zooms.
 
-- Make Marble have a RenderingQuality setting in ViewParams: 
+*** Make Marble have a RenderingQuality setting in ViewParams: 
+ - LOW: For slow hardware with different defaults ( No relief in Atlas
+   View, using setShowQuickAndDirty(true) for really sloppy
+   interpolation )
+ - MEDIUM: Basically what we have now
+ - HIGH: Uses Antialiased vector lines
+ - PRINT: Adds some Really Slow (TM) nice things that are typical for
+   printed maps: e.g. Blue antialiased coast lines for the Atlas map.
 
-* LOW: For slow hardware with different defaults ( No relief in Atlas View, using setShowQuickAndDirty(true) for really sloppy interpolation )
-* MEDIUM: Basically what we have now
-* HIGH: Uses Antialiased vector lines
-* PRINT: Adds some Really Slow (TM) nice things that are typical for printed maps: e.g. Blue antialiased coast lines for the Atlas map.
+ ** Make Marble use different render settings while panning (MOVE) and
+    after releasing the mouse (DROP).
 
-- Make Marble use different render settings while panning (MOVE) and
-  after releasing the mouse (DROP).
+    For KDE 4.0.1 it should use the render quality MEDIUM for panning
+    and HIGH or PRINT after the mouse button has been released. Note:
+    For KDE 4.1 there should be two comboboxes in the settings dialog:
 
-For KDE 4.0.1 it should use the render quality MEDIUM for panning and
-HIGH or PRINT after the mouse button has been released. Note: For KDE
-4.1 there should be two comboboxes in the settings dialog:
+    Display Quality:
 
-Display Quality:
+    During mouse move: [^ Medium ]
+    On mouse drop:     [^ High   ]
 
-During mouse move: [^ Medium ]
-On mouse drop:     [^ High   ]
-
-- Rerender the map at "PRINT quality" once "File -> Print" or "Edit -> Copy" get selected.
-
+ ** Rerender the map at "PRINT quality" once "File -> Print" or 
+    "Edit -> Copy" get selected.
 
 
 
