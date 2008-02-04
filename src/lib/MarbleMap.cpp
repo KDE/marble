@@ -99,6 +99,12 @@ MarbleMap::MarbleMap()
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     //d->m_model = new MarbleModel( this );
+
+    // Due to usage in setActiveRegion these need to get 
+    // initialized before construct() gets called
+    d->m_width  = 0;
+    d->m_height = 0;
+
     d->m_model = new MarbleModel( this );
     construct();
 }
@@ -108,6 +114,12 @@ MarbleMap::MarbleMap(MarbleModel *model)
     : d( new MarbleMapPrivate )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+
+    // Due to usage in setActiveRegion these need to get 
+    // initialized before construct() gets called
+    d->m_width  = 0;
+    d->m_height = 0;
+
     d->m_model = model;
     construct();
 }
@@ -130,8 +142,10 @@ void MarbleMap::construct()
     // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
 
-    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
-             this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
+    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const
+QString&, const QString& ) ),
+             this,       SLOT( creatingTilesStart( TileCreator*, const
+QString&, const QString& ) ) );
 
     connect( d->m_model, SIGNAL( themeChanged( QString ) ),
                          SIGNAL( themeChanged( QString ) ) );
@@ -140,7 +154,6 @@ void MarbleMap::construct()
 
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
              this,       SLOT( updateRegion( BoundingBox& ) ) );
-
 
     // Set background: black.
     // FIXME:
@@ -988,7 +1001,8 @@ void MarbleMap::setActiveRegion()
     switch( d->m_viewParams.m_projection ) {
         case Spherical:
             if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	       d->m_activeRegion &= QRegion( width()  / 2 - zoom, 
+
+	       d->m_activeRegion = QRegion( width()  / 2 - zoom, 
                                              height() / 2 - zoom,
                                              2 * zoom, 2 * zoom, 
                                              QRegion::Ellipse );
@@ -1001,7 +1015,7 @@ void MarbleMap::setActiveRegion()
 
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
-            d->m_activeRegion &= QRegion( 0, yTop, 
+            d->m_activeRegion = QRegion( 0, yTop, 
                                           width(), 2 * zoom,
                                           QRegion::Rectangle );
             break;

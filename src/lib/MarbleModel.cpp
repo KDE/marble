@@ -293,9 +293,9 @@ d->m_maptheme->tilePrefix() );
     if ( d->m_placeMarkLayout == 0)
         d->m_placeMarkLayout = new PlaceMarkLayout( this );
     d->m_placeMarkLayout->requestStyleReset();
-
     // FIXME: To be removed after MapTheme / KML refactoring
-    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
+    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor(
+d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
     d->m_projection = currentProjection;
