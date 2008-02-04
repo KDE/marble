@@ -67,14 +67,14 @@ class MarbleWidgetPrivate
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
-#if 1
+#if 0
     GeoDataPoint     m_homePoint;
     int              m_homeZoom;
-
+#endif
     int              m_logzoom;
 
     int              m_zoomStep;
-#endif
+
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
@@ -614,7 +614,7 @@ void MarbleWidget::setProjection( int projectionIndex )
 
 void MarbleWidget::home( double &lon, double &lat, int& zoom )
 {
-#if 1
+#if 0
     d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
     zoom = d->m_homeZoom;
 #else
@@ -624,7 +624,7 @@ void MarbleWidget::home( double &lon, double &lat, int& zoom )
 
 void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 {
-#if 1
+#if 0
     d->m_homePoint = GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree );
     d->m_homeZoom = zoom;
 #else
@@ -634,7 +634,7 @@ void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 
 void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 {
-#if 1
+#if 0
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
 #else
@@ -1004,7 +1004,7 @@ void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 void MarbleWidget::goHome()
 {
-#if 1
+#if 0
     // d->m_model->rotateTo(0, 0);
     double  homeLon = 0;
     double  homeLat = 0;

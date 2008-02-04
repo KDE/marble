@@ -127,11 +127,6 @@ MarbleMap::~MarbleMap()
 
 void MarbleMap::construct()
 {
-#if 0
-    setMinimumSize( 200, 300 );
-    setFocusPolicy( Qt::WheelFocus );
-    setFocus( Qt::OtherFocusReason );
-#endif
     // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
 
@@ -158,9 +153,6 @@ void MarbleMap::construct()
 
     d->m_justModified = false;
 
-#if 0
-    d->m_inputhandler = NULL;
-#endif
     d->m_measureTool = new MeasureTool( this );
 
     connect( d->m_model, SIGNAL( timeout() ),

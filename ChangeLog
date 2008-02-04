@@ -1,5 +1,11 @@
 2008-02-04  Inge Wallin  <inge@lysator.liu.se>
 
+	Hopefully fix the crash in goHome in the qt only version.
+	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Disable
+	m_homePoint and m_homeZoom.
+	(home, setHome*2, goHome): Immediately call same in MarbleMap.
+	
+
 	* src/lib/MarbleMap.cpp (construct): Don't connect to
 	enableInput() since that slot is only relevant to the widget.
 
