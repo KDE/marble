@@ -193,8 +193,10 @@ void MarbleMap::construct()
              this,                     SLOT( updateSun() ) );
     connect( d->m_model->sunLocator(), SIGNAL( centerSun() ),
              this,                     SLOT( centerSun() ) );
+#if 0
     connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
              this,                     SLOT( enableInput() ) );
+#endif
 }
 
 
