@@ -126,9 +126,8 @@ MarbleMap::MarbleMap(MarbleModel *model)
 
 MarbleMap::~MarbleMap()
 {
-    // Remove and delete an existing InputHandler
-    // FIXME: setInputHandler(NULL);
     setDownloadManager(NULL);
+
     // FIXME: Only delete if we created it ourselves 
     delete d->m_model;
 //    Moved to ViewParams:
@@ -236,30 +235,6 @@ int  MarbleMap::height() const
     return d->m_height;
 }
 
-
-#if 0
-void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
-{
-    if ( d->m_inputhandler )
-        delete d->m_inputhandler;
-
-    d->m_inputhandler = handler;
-
-    if ( d->m_inputhandler ) {
-        d->m_inputhandler->init( this );
-        installEventFilter( d->m_inputhandler );
-        connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-                 d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
-        connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-                 d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
-        connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
-                 this,              SLOT( notifyMouseClick( int, int ) ) );
-
-        connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
-                 this,              SIGNAL( mouseMoveGeoPosition( QString ) ) );
-    }
-}
-#endif
 
 void MarbleMap::setDownloadManager(HttpDownloadManager *downloadManager)
 {
@@ -701,12 +676,7 @@ void MarbleMap::moveDown()
 {
     rotateBy( 0, +moveStep() );
 }
-#if 0
-void MarbleMap::leaveEvent (QEvent*)
-{
-    emit mouseMoveGeoPosition( NOT_AVAILABLE );
-}
-#endif
+
 void MarbleMap::doResize()  // Used to be resizeEvent()
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
@@ -741,23 +711,7 @@ void MarbleMap::doResize()  // Used to be resizeEvent()
     d->m_justModified = true;
     repaint();
 }
-#if 0
-void MarbleWidget::connectNotify ( const char * signal )
-{
-    if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        if ( d->m_inputhandler )
-            d->m_inputhandler->setPositionSignalConnected( true );
-}
 
-void MarbleWidget::disconnectNotify ( const char * signal )
-{
-    if ( QByteArray( signal ) == 
-         QMetaObject::normalizedSignature ( SIGNAL( mouseMoveGeoPosition( QString ) ) ) )
-        if ( d->m_inputhandler )
-            d->m_inputhandler->setPositionSignalConnected( false );
-}
-#endif
 int MarbleMap::northPoleY()
 {
     Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();

@@ -811,20 +811,15 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 }
 
 
-
-
-void MarbleWidget::rotateTo( const double& lon, const double& lat, const double& psi)
+void MarbleWidget::rotateTo( const double& lon, const double& lat,
+                             const double& psi)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,   // "phi"
-                                                  lon * DEG2RAD,   // "theta"
-                                                  psi * DEG2RAD );
+    d->m_map->rotateTo( lon, lat, psi );
 }
 
 void MarbleWidget::rotateTo(const double& lon, const double& lat)
 {
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
-                                                  lon  * DEG2RAD,
-                                                  0.0 );
+    d->m_map->rotateTo( lon, lat );
 }
 
 
@@ -839,9 +834,12 @@ void MarbleWidget::drawAtmosphere()
         return;
 
     // No use to draw atmosphere if it's not visible in the area.
-    // FIXME: Why 4* ??
-//    qDebug() << 4 * imageRadius * imageRadius << " radius: " << imageRadius << " width: " << imageWidth ;
-    if ( 4 * imageRadius * imageRadius >= imageWidth * imageWidth + imageHeight * imageHeight )
+    //
+    // Note: The factor 4 is becuase the radius should be compared
+    // with the height and width / 2, but we don't want to divide
+    // anywhere.
+    if ( 4 * imageRadius * imageRadius
+         >= imageWidth * imageWidth + imageHeight * imageHeight )
         return;
 //    else
 //        qDebug() << "redrawing Atmosphere";

@@ -1,3 +1,11 @@
+2008-02-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix the pan bug that was left from previous commits so that tackat
+	can work again.
+	* src/lib/MarbleWidget.cpp (rotateTo): Delegate to MarbleMap
+	* src/lib/MarbleMap.cpp: cleaning
+	* src/lib/MarbleWidgetInputHandler.cpp: cleaning
+
 2008-02-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Hopefully fix the crash in goHome in the qt only version.
