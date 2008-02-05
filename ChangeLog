@@ -1,5 +1,8 @@
 2008-02-05  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/MarbleWidget.cpp: Continue adapting MarbleWidget to the
+	new MarbleMap.
+
 	Fix the pan bug that was left from previous commits so that tackat
 	can work again.
 	* src/lib/MarbleWidget.cpp (rotateTo): Delegate to MarbleMap

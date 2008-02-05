@@ -168,10 +168,10 @@ void MarbleWidget::construct()
     d->m_justModified = false;
 
     d->m_inputhandler = NULL;
-    d->m_popupmenu = new MarbleWidgetPopupMenu( this, d->m_model );
-    d->m_measureTool = new MeasureTool( this );
+    d->m_popupmenu    = new MarbleWidgetPopupMenu( this, d->m_model );
+    d->m_measureTool  = new MeasureTool( this );
 
-    setInputHandler(new MarbleWidgetDefaultInputHandler);
+    setInputHandler( new MarbleWidgetDefaultInputHandler );
     setMouseTracking( true );
 
     connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
@@ -254,7 +254,7 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
 
 void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
 {
-    d->m_model->setDownloadManager( downloadManager );
+    d->m_map->setDownloadManager( downloadManager );
 }
 
 
@@ -288,12 +288,12 @@ void MarbleWidget::setNeedsUpdate()
 
 QAbstractItemModel *MarbleWidget::placeMarkModel() const
 {
-    return d->m_model->placeMarkModel();
+    return d->m_map->placeMarkModel();
 }
 
 QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
 {
-    return d->m_model->placeMarkSelectionModel();
+    return d->m_map->placeMarkSelectionModel();
 }
 
 double MarbleWidget::moveStep()
@@ -318,16 +318,17 @@ double MarbleWidget::centerLongitude() const
 
 int  MarbleWidget::minimumZoom() const
 {
-    return d->m_model->minimumZoom();
+    return d->m_map->minimumZoom();
 }
 
 int  MarbleWidget::maximumZoom() const
 {
-    return d->m_model->maximumZoom();
+    return d->m_map->maximumZoom();
 }
 
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
+    d->m_map->addPlaceMarkFile( filename );
     d->m_model->addPlaceMarkFile( filename );
 }
 
@@ -335,7 +336,7 @@ QPixmap MarbleWidget::mapScreenShot()
 {
     return QPixmap::grabWidget( this );
 }
-
+//FIXME: continue here
 bool MarbleWidget::showScaleBar() const
 {
     return d->m_showScaleBar;
@@ -529,25 +530,7 @@ void MarbleWidget::centerOn(const double& lon, const double& lat)
 
 void MarbleWidget::centerOn(const QModelIndex& index)
 {
-    QItemSelectionModel *selectionModel = d->m_model->placeMarkSelectionModel();
-    Q_ASSERT( selectionModel );
-
-    selectionModel->clear();
-
-    if ( index.isValid() ) {
-        const GeoDataPoint point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>();
-  
-        double  lon;
-        double  lat;
-        point.geoCoordinates( lon, lat );
-
-        centerOn( lon * RAD2DEG, lat * RAD2DEG );
-
-        selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-        d->m_crosshair.setEnabled( true );
-    }
-    else
-        d->m_crosshair.setEnabled( false );
+    d->m_map->centerOn( index );
 
     repaint();
 }
@@ -645,6 +628,7 @@ void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 
 void MarbleWidget::moveLeft()
 {
+#if 1
     int polarity = 0;
 
     if ( northPoleY() != 0 )
@@ -654,10 +638,14 @@ void MarbleWidget::moveLeft()
         rotateBy( +moveStep(), 0 );
     else
         rotateBy( -moveStep(), 0 );
+#else
+    d->m_map->moveLeft();
+#endif
 }
 
 void MarbleWidget::moveRight()
 {
+#if 1
     int polarity = 0;
 
     if ( northPoleY() != 0 )
@@ -667,17 +655,28 @@ void MarbleWidget::moveRight()
         rotateBy( -moveStep(), 0 );
     else
         rotateBy( +moveStep(), 0 );
+#else
+    d->m_map->moveRight();
+#endif
 }
 
 
 void MarbleWidget::moveUp()
 {
+#if 1
     rotateBy( 0, -moveStep() );
+#else
+    d->m_map->moveUp();
+#endif
 }
 
 void MarbleWidget::moveDown()
 {
+#if 1
     rotateBy( 0, +moveStep() );
+#else
+    d->m_map->moveDown();
+#endif
 }
 
 void MarbleWidget::leaveEvent (QEvent*)
@@ -825,56 +824,20 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    qint64 imageWidth = (qint64)(width());
-    qint64 imageHeight = (qint64)(height());
-    qint64 imageRadius = (qint64)(radius());
-
-    // Only draw an atmosphere if projection is spherical
-    if ( d->m_viewParams.m_projection != Spherical )
-        return;
-
-    // No use to draw atmosphere if it's not visible in the area.
-    //
-    // Note: The factor 4 is becuase the radius should be compared
-    // with the height and width / 2, but we don't want to divide
-    // anywhere.
-    if ( 4 * imageRadius * imageRadius
-         >= imageWidth * imageWidth + imageHeight * imageHeight )
-        return;
-//    else
-//        qDebug() << "redrawing Atmosphere";
-
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
-
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                           1.05 * radius() );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
-
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-    QPainter  painter( d->m_viewParams.m_canvasImage );
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                         (int)( 2.1 * (double)(radius()) ),
-                         (int)( 2.1 * (double)(radius()) ) );
+    d->m_map->drawAtmosphere();
 }
 
 void MarbleWidget::drawFog()
 {
-    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
-) {
+    if ( d->m_viewParams.m_projection == Spherical
+         &&  4 * radius() * radius() < width() * width() + height() * height() )
+    {
         int  imageHalfWidth  = width() / 2;
         int  imageHalfHeight = height() / 2;
 
         // Recalculate the atmosphere effect and paint it to canvasImage.
         QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                            radius() );
+                               radius() );
 
         // FIXME: Add a cosine relationship
         grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
@@ -897,43 +860,12 @@ void MarbleWidget::drawFog()
 
 void MarbleWidget::setActiveRegion()
 {
-#if 0
-    int zoom = radius();
-
-    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
-                                 QRegion::Rectangle );
-
-    switch( d->m_viewParams.m_projection ) {
-        case Spherical:
-            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-	       d->m_activeRegion &= QRegion( width()  / 2 - zoom, 
-                                             height() / 2 - zoom,
-                                             2 * zoom, 2 * zoom, 
-                                             QRegion::Ellipse );
-            }
-            break;
-        case Equirectangular:
-            // Calculate translation of center point
-            double centerLon, centerLat;
-            d->m_viewParams.centerCoordinates( centerLon, centerLat );
-
-            int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
-            int yTop = height()/2 - zoom + yCenterOffset;
-            d->m_activeRegion &= QRegion( 0, yTop, 
-                                          width(), 2 * zoom,
-                                          QRegion::Rectangle );
-            break;
-    }
-#else
     d->m_map->setActiveRegion();
-#endif
 }
 
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->activeRegion();
-
-    return d->m_activeRegion;
 }
 
 void MarbleWidget::setBoundingBox()
@@ -1159,8 +1091,8 @@ void MarbleWidget::updateGps()
     QRegion temp;
     bool    draw;
     draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
-    if( draw ){
-        update(temp);
+    if ( draw ){
+        update( temp );
     }
     /*
     d->m_model->gpsLayer()->updateGps(
@@ -1191,11 +1123,13 @@ FileViewModel* MarbleWidget::fileViewModel() const
 
 void MarbleWidget::setQuickDirty( bool enabled )
 {
-    int transparency;
-    switch( d->m_viewParams.m_projection ) {
+    int  transparency;
+
+    switch ( d->m_viewParams.m_projection ) {
         case Spherical:
             // Interlace texture mapping
             d->m_model->textureMapper()->setInterlaced( enabled );
+
             // Update texture map during the repaint that follows:
             setNeedsUpdate();
             transparency = enabled ? 255 : 192;
@@ -1203,6 +1137,7 @@ void MarbleWidget::setQuickDirty( bool enabled )
             d->m_mapscale.setTransparency( transparency );
             repaint();
             break;
+
         case Equirectangular:
             return;
     }
@@ -1210,7 +1145,9 @@ void MarbleWidget::setQuickDirty( bool enabled )
 
 // This slot will called when the Globe starts to create the tiles.
 
-void MarbleWidget::creatingTilesStart( TileCreator *creator, const QString &name, const QString &description )
+void MarbleWidget::creatingTilesStart( TileCreator *creator,
+                                       const QString &name, 
+                                       const QString &description )
 {
     qDebug("MarbleWidget::creatingTilesStart called... ");
 
@@ -1232,6 +1169,7 @@ void MarbleWidget::updateChangedMap()
 void MarbleWidget::updateRegion( BoundingBox &box )
 {
     Q_UNUSED(box);
+
     //really not sure if this is nessary as its designed for
     //placemark based layers
     setNeedsUpdate();
@@ -1267,7 +1205,7 @@ int MarbleWidget::fromLogScale(int zoom)
 
 int MarbleWidget::toLogScale(int zoom)
 {
-    zoom = (int)(200.0 * log( (double)zoom ) );
+    zoom = (int)( 200.0 * log( (double)zoom ) );
     return zoom;
 }
 
