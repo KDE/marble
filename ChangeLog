@@ -1,3 +1,8 @@
+2008-02-07  Torsten Rahn  <rahn@kde.org>
+
+    * Messages.sh:
+    - Fix for untranslatable string by Burkhard Lück
+
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
