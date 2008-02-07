@@ -67,10 +67,6 @@ class MarbleWidgetPrivate
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
-#if 0
-    GeoDataPoint     m_homePoint;
-    int              m_homeZoom;
-#endif
     int              m_logzoom;
 
     int              m_zoomStep;
@@ -79,17 +75,6 @@ class MarbleWidgetPrivate
     MarbleWidgetPopupMenu     *m_popupmenu;
 
     TextureColorizer          *m_sealegend;
-
-    // Parameters for the widgets appearance.
-    //bool             m_showCompass;
-    //bool             m_showScaleBar;
-
-    bool             m_showFrameRate;
-
-    // Parts of the image in the Widget
-    //CrossHairFloatItem         m_crosshair;
-    //CompassFloatItem           m_compass;  // Shown in the upper right
-    //MapScaleFloatItem          m_mapscale; // Shown in the lower left
 
     // Tools
     MeasureTool     *m_measureTool;
@@ -188,13 +173,6 @@ void MarbleWidget::construct()
     d->m_zoomStep = 40;
 #endif
     goHome();
-
-    // FloatItems
-#if 0
-    d->m_showScaleBar  = true;
-    d->m_showCompass   = true;
-#endif
-    d->m_showFrameRate = false;
 
     // Widget translation
     QString      locale = QLocale::system().name();
@@ -331,108 +309,92 @@ int  MarbleWidget::maximumZoom() const
 void MarbleWidget::addPlaceMarkFile( const QString &filename )
 {
     d->m_map->addPlaceMarkFile( filename );
-    d->m_model->addPlaceMarkFile( filename );
+    //d->m_model->addPlaceMarkFile( filename );
 }
 
 QPixmap MarbleWidget::mapScreenShot()
 {
     return QPixmap::grabWidget( this );
 }
-//FIXME: continue here
+
 bool MarbleWidget::showScaleBar() const
 {
     return d->m_map->showScaleBar();
-    //return d->m_showScaleBar;
 }
 
 bool MarbleWidget::showCompass() const
 {
     return d->m_map->showCompass();
-    //return d->m_showCompass;
 }
 
 bool MarbleWidget::showGrid() const
 {
     return d->m_map->showGrid();
-    //return d->m_viewParams.m_showGrid;
 }
 
 bool MarbleWidget::showPlaces() const
 {
     return d->m_map->showPlaces();
-    //return d->m_viewParams.m_showPlaceMarks;
 }
 
 bool MarbleWidget::showCities() const
 {
     return d->m_map->showCities();
-    //return d->m_viewParams.m_showCities;
 }
 
 bool MarbleWidget::showTerrain() const
 {
     return d->m_map->showTerrain();
-    //return d->m_viewParams.m_showTerrain;
 }
 
 bool MarbleWidget::showOtherPlaces() const
 {
     return d->m_map->showOtherPlaces();
-    return d->m_viewParams.m_showOtherPlaces;
 }
 
 bool MarbleWidget::showRelief() const
 {
     return d->m_map->showRelief();
-    return d->m_viewParams.m_showRelief;
 }
 
 bool MarbleWidget::showElevationModel() const
 {
     return d->m_map->showElevationModel();
-    return d->m_viewParams.m_showElevationModel;
 }
 
 bool MarbleWidget::showIceLayer() const
 {
     return d->m_map->showIceLayer();
-    //return d->m_viewParams.m_showIceLayer;
 }
 
 bool MarbleWidget::showBorders() const
 {
     return d->m_map->showBorders();
-    return d->m_viewParams.m_showBorders;
 }
 
 bool MarbleWidget::showRivers() const
 {
     return d->m_map->showRivers();
-    return d->m_viewParams.m_showRivers;
 }
 
 bool MarbleWidget::showLakes() const
 {
     return d->m_map->showLakes();
-    return d->m_viewParams.m_showLakes;
 }
 
 bool MarbleWidget::showGps() const
 {
     return d->m_map->showGps();
-    return d->m_model->gpsLayer()->visible();
 }
 
 bool MarbleWidget::showFrameRate() const
 {
     return d->m_map->showFrameRate();
-    return d->m_showFrameRate;
 }
 
 bool  MarbleWidget::quickDirty() const
 {
     return d->m_map->quickDirty();
-    return d->m_model->textureMapper()->interlaced();
 }
 
 void MarbleWidget::zoomView(int newZoom)
@@ -615,32 +577,17 @@ void MarbleWidget::setProjection( int projectionIndex )
 
 void MarbleWidget::home( double &lon, double &lat, int& zoom )
 {
-#if 0
-    d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
-    zoom = d->m_homeZoom;
-#else
     d->m_map->home( lon, lat, zoom );
-#endif
 }
 
 void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
 {
-#if 0
-    d->m_homePoint = GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree );
-    d->m_homeZoom = zoom;
-#else
     d->m_map->setHome( lon, lat, zoom );
-#endif
 }
 
 void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 {
-#if 0
-    d->m_homePoint = homePoint;
-    d->m_homeZoom = zoom;
-#else
     d->m_map->setHome( homePoint, zoom );
-#endif
 }
 
 
@@ -952,20 +899,9 @@ void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 
 void MarbleWidget::goHome()
 {
-#if 0
-    // d->m_model->rotateTo(0, 0);
-    double  homeLon = 0;
-    double  homeLat = 0;
-    d->m_homePoint.geoCoordinates( homeLon, homeLat );
-
-    rotateTo( homeLon * RAD2DEG, homeLat * RAD2DEG );
-
-    zoomView( d->m_homeZoom ); // default 1050
+    d->m_map->goHome();
 
     repaint(); // not obsolete in case the zoomlevel stays unaltered
-#else
-    d->m_map->goHome();
-#endif
 }
 
 QString MarbleWidget::mapTheme() const
@@ -989,159 +925,106 @@ void MarbleWidget::setMapTheme( const QString& maptheme )
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {
-#if 1
     d->m_map->setShowScaleBar( visible );
-#else
-    d->m_showScaleBar = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowCompass( bool visible )
 {
-#if 1
     d->m_map->setShowCompass( visible );
-#else
-    d->m_showCompass = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowGrid( bool visible )
 {
-#if 1
     d->m_map->setShowGrid( visible );
-#else
-    d->m_viewParams.m_showGrid = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowPlaces( bool visible )
 {
-#if 1
     d->m_map->setShowPlaces( visible );
-#else
-    d->m_viewParams.m_showPlaceMarks = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowCities( bool visible )
 {
-#if 1
     d->m_map->setShowCities( visible );
-#else
-    d->m_viewParams.m_showCities = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowTerrain( bool visible )
 {
-#if 1
     d->m_map->setShowTerrain( visible );
-#else
-    d->m_viewParams.m_showTerrain = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowOtherPlaces( bool visible )
 {
-#if 1
     d->m_map->setShowOtherPlaces( visible );
-#else
-    d->m_viewParams.m_showOtherPlaces = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowRelief( bool visible )
 {
-#if 1
     d->m_map->setShowRelief( visible );
-#else
-    d->m_viewParams.m_showRelief = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowElevationModel( bool visible )
 {
-#if 1
     d->m_map->setShowElevationModel( visible );
-#else
-    d->m_viewParams.m_showElevationModel = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowIceLayer( bool visible )
 {
-#if 1
     d->m_map->setShowIceLayer( visible );
-#else
-    d->m_viewParams.m_showIceLayer = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowBorders( bool visible )
 {
-#if 1
     d->m_map->setShowBorders( visible );
-#else
-    d->m_viewParams.m_showBorders = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowRivers( bool visible )
 {
-#if 1
     d->m_map->setShowRivers( visible );
-#else
-    d->m_viewParams.m_showRivers =  visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowLakes( bool visible )
 {
-#if 1
     d->m_map->setShowLakes( visible );
-#else
-    d->m_viewParams.m_showLakes = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowFrameRate( bool visible )
 {
-#if 1
     d->m_map->setShowFrameRate( visible );
-#else
-    d->m_showFrameRate = visible;
-#endif
+
     repaint();
 }
 
 void MarbleWidget::setShowGps( bool visible )
 {
-#if 1
     d->m_map->setShowGps( visible );
-#else
-    d->m_viewParams.m_showGps = visible;
-#endif
+
     repaint();
 }
 
@@ -1201,29 +1084,7 @@ FileViewModel* MarbleWidget::fileViewModel() const
 
 void MarbleWidget::setQuickDirty( bool enabled )
 {
-#if 1
     d->m_map->setQuickDirty( enabled );
-#else
-
-    int  transparency;
-
-    switch ( d->m_viewParams.m_projection ) {
-        case Spherical:
-            // Interlace texture mapping
-            d->m_model->textureMapper()->setInterlaced( enabled );
-
-            // Update texture map during the repaint that follows:
-            setNeedsUpdate();
-            transparency = enabled ? 255 : 192;
-            d->m_compass.setTransparency( transparency );
-            d->m_mapscale.setTransparency( transparency );
-            repaint();
-            break;
-
-        case Equirectangular:
-            return;
-    }
-#endif
 }
 
 // This slot will called when the Globe starts to create the tiles.

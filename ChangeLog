@@ -1,3 +1,9 @@
+2008-02-08  Inge Wallin  <inge@lysator.liu.se>
+
+	More preparation
+	* src/lib/MarbleWidget.cpp: Clean away intermediate code from the
+	Widget/Map separation.
+
 2008-02-07  Inge Wallin  <inge@lysator.liu.se>
 
 	More preparation
