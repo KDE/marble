@@ -41,30 +41,19 @@ class ViewParams
 {
  public:
     ViewParams( );
-
     ~ViewParams();
 
+    void centerCoordinates( double &centerLon, double &centerLat );
+
+ public:
     Projection  m_projection;
     Projection  m_oldProjection;
 
     // Parameters that determine the painting
-    int         m_radius;       // Zoom level (pixels / earth radius)
-    int         m_radiusUpdated;
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;
-
-    void centerCoordinates( double &centerLon, double &centerLat )
-    {
-	// Calculate translation of center point
-	centerLat = - m_planetAxis.pitch();
-	if ( centerLat > M_PI )
-	    centerLat -= 2 * M_PI;
-	centerLon = + m_planetAxis.yaw();
-	if ( centerLon > M_PI )
-	    centerLon -= 2 * M_PI;
-	// qDebug() << "centerLon" << centerLon * RAD2DEG;
-	// qDebug() << "centerLat" << centerLat * RAD2DEG;
-    }
+    int         m_radius;       // Zoom level (pixels / earth radius)
+    int         m_radiusUpdated;
 
     BoundingBox m_boundingBox;  // What the view currently can see
 
