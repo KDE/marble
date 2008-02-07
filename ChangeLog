@@ -1,3 +1,8 @@
+2008-02-07  Torsten Rahn  <rahn@kde.org>
+
+    * Messages.sh:
+    - Fix for untranslatable string by Burkhard Lück
+
 2008-02-05  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleWidget.cpp: Continue adapting MarbleWidget to the
