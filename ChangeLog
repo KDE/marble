@@ -1,3 +1,9 @@
+2008-02-07  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleWidget.cpp: Make the legend work again by making
+	all the setters and getters call the equivalent function in
+	MarbleMap. 
+
 2008-02-07  Torsten Rahn  <rahn@kde.org>
 
     * Messages.sh:
