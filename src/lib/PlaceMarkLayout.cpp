@@ -298,10 +298,10 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
 
-    QList<QPersistentModelIndex>::ConstIterator i;
-    for ( i = m_persistentIndexList.begin(); i != m_persistentIndexList.end(); ++i )
+    QList<QPersistentModelIndex>::ConstIterator it;
+    for ( it = m_persistentIndexList.begin(); it != m_persistentIndexList.end(); ++it )
     {
-        const QPersistentModelIndex& index = *i;
+        const QPersistentModelIndex& index = *it;
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
