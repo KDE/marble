@@ -1,5 +1,9 @@
 2008-02-07  Inge Wallin  <inge@lysator.liu.se>
 
+	Cleaning and preparation for next step.
+	* src/lib/ClipPainter.{h,cpp}: Cleaning and documentation.
+
+	Next step in separation of MarbleWidget.
 	* src/lib/MarbleWidget.cpp: Make the legend work again by making
 	all the setters and getters call the equivalent function in
 	MarbleMap. 

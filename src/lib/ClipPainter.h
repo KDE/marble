@@ -17,6 +17,16 @@
 #include <QtGui/QPainter>
 
 
+// The reason for this class is a terrible bug in some versions of the
+// X Server.  Suppose the widget size is, say, 1000 x 1000 and we have
+// a high zoom so that we want to draw a vector from (-100000,
+// -100000) to (100000, 100000).  Then the X server will create a
+// bitmap that is at least 100000 x 100000 and in the process eat all
+// available memory.
+//
+// So we introduce the ClipPainter that clips all vectors to only the
+// part of them that are actually shown.
+//
 
 class ClipPainter : public QPainter 
 {
@@ -26,7 +36,7 @@ class ClipPainter : public QPainter
     ~ClipPainter(){}
 
     void setClipping( bool enable );
-    bool hasClipping() const;
+    bool isClipping() const;
 
     void drawPolygon( const QPolygonF &, 
                       Qt::FillRule fillRule = Qt::OddEvenFill );
@@ -36,26 +46,31 @@ class ClipPainter : public QPainter
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    void drawPolyobject ( const QPolygonF & );
+    // This function does the actual clipping.
+    void clipPolyObject ( const QPolygonF & );
 
     void manageOffScreen();
     const QPointF borderPoint();
 
  private:
-    bool    m_clip;
+    // true if clipping is on.
+    bool    m_doClip;
 
+    // The limits
     double  m_left;
     double  m_right;
     double  m_top;
     double  m_bottom;
 
-    int     m_imgwidth;
-    int     m_imgheight;
+    // Size of the image
+    int     m_imgWidth;
+    int     m_imgHeight;
 
-    int     m_currentpos;
-    int     m_currentxpos;
-    int     m_currentypos;
-    int     m_lastpos;
+    // Used in the paint process of vectors..
+    int     m_currentSector;
+    int     m_currentXSector;
+    int     m_currentYSector;
+    int     m_lastSector;
 
     //	int m_debugNodeCount;
 
@@ -63,7 +78,8 @@ class ClipPainter : public QPainter
     QPointF    m_currentPoint;
     QPointF    m_lastPoint; 
 
-    QPolygonF  m_clipped;
+    // The resulting object from the clipping operation
+    QPolygonF  m_clippedObject;
 };
 
 #endif // CLIPPAINTER_H
