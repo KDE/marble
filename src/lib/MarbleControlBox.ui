@@ -58,7 +58,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
@@ -501,8 +501,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>121</width>
-        <height>204</height>
+        <width>236</width>
+        <height>475</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -553,6 +553,14 @@
           </property>
           <property name="icon" >
            <iconset resource="../marble.qrc" >:/icons/map-flat.png</iconset>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>Mercator</string>
+          </property>
+          <property name="icon" >
+           <iconset resource="../marble.qrc" >:/icons/map-mercator.png</iconset>
           </property>
          </item>
         </widget>
