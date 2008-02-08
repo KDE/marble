@@ -867,7 +867,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setActiveRegion();
 
     void  drawAtmosphere();
-    void  drawFog();
+    void  drawFog( QPainter &painter );
 
  private:
     MarbleWidgetPrivate  * const d;

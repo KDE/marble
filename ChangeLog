@@ -1,3 +1,9 @@
+2008-02-09  Inge Wallin  <inge@lysator.liu.se>
+
+	Draw fog is only relevant in the Map.
+	* src/lib/MarbleWidget.{h,cpp} (drawFog): Only call drawFog in the map. 
+	* src/lib/MarbleMap.cpp (drawFog): Clean
+
 2008-02-08  Inge Wallin  <inge@lysator.liu.se>
 
 	Active Region is only relevant in the Widget

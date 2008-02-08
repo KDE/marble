@@ -62,9 +62,9 @@ class MarbleWidgetPrivate
  public:
     // The model we are showing.
     MarbleMap       *m_map;
-    MarbleModel     *m_model;
+    MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
 
-    ViewParams       m_viewParams;
+    ViewParams       m_viewParams;   // This must go!
     bool             m_justModified; // FIXME: Rename to isDirty
 
     int              m_logzoom;
@@ -130,15 +130,14 @@ void MarbleWidget::construct()
     connect( d->m_map, SIGNAL( projectionChanged( int ) ),
              this,     SIGNAL( projectionChanged( int ) ) );
 
-
-    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
-             this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
-
+    // When some fundamental things change in the model, we got to
+    // show this in the view, i.e. here.
     connect( d->m_model, SIGNAL( themeChanged( QString ) ),
                          SIGNAL( themeChanged( QString ) ) );
     connect( d->m_model, SIGNAL( modelChanged() ),
              this,       SLOT( updateChangedMap() ) );
 
+    // Some part of the screen contents changed.
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
              this,       SLOT( updateRegion( BoundingBox& ) ) );
 
@@ -156,17 +155,24 @@ void MarbleWidget::construct()
     d->m_popupmenu    = new MarbleWidgetPopupMenu( this, d->m_model );
     d->m_measureTool  = new MeasureTool( this );
 
+    // Handle mouse and keyboard input.
     setInputHandler( new MarbleWidgetDefaultInputHandler );
     setMouseTracking( true );
 
+    // The interface to the measure tool consists of a RMB popup menu
+    // and some signals.
     connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
 	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
     connect( d->m_popupmenu,   SIGNAL( removeMeasurePoints() ),
 	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );
 
+    // Track the GPS current point at timely intervals.
     connect( d->m_model, SIGNAL( timeout() ),
              this,       SLOT( updateGps() ) );
 
+    // Show a progress dialog when the model calculates new map tiles.
+    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
+             this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
 #if 1
     d->m_logzoom  = 0;
@@ -181,11 +187,11 @@ void MarbleWidget::construct()
     QCoreApplication::installTranslator(&translator);
 
 #if 0 // Reenable when the autosettings are actually used.
-
-      // AutoSettings
+    // AutoSettings
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
 
+    // FIXME: I suppose this should only exist in MarbleMap
     connect( d->m_model->sunLocator(), SIGNAL( updateSun() ),
              this,                     SLOT( updateSun() ) );
     connect( d->m_model->sunLocator(), SIGNAL( centerSun() ),
@@ -444,12 +450,14 @@ void MarbleWidget::zoomView(int newZoom)
     // globe changes.
     drawAtmosphere();
 
-    repaint();
+    //repaint();
+    //setActiveRegion();
 
-    setActiveRegion();
 #else
     d->m_map->zoomView( newZoom );
 #endif
+    repaint();
+    setActiveRegion();
 }
 
 
@@ -776,36 +784,9 @@ void MarbleWidget::drawAtmosphere()
     d->m_map->drawAtmosphere();
 }
 
-// FIXME: What the deuce is this function doing here?
-void MarbleWidget::drawFog()
+void MarbleWidget::drawFog(QPainter &painter)
 {
-    if ( d->m_viewParams.m_projection == Spherical
-         &&  4 * radius() * radius() < width() * width() + height() * height() )
-    {
-        int  imageHalfWidth  = width() / 2;
-        int  imageHalfHeight = height() / 2;
-
-        // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                               radius() );
-
-        // FIXME: Add a cosine relationship
-        grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
-        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
-
-        QBrush    brush1( grad1 );
-        QPen      pen1( Qt::NoPen );
-        QPainter  painter( this );
-        painter.setBrush( brush1 );
-        painter.setPen( pen1 );
-        painter.setRenderHint( QPainter::Antialiasing, false );
-
-        // FIXME: Cut out what's really needed
-        painter.drawEllipse( imageHalfWidth  - radius(),
-                             imageHalfHeight - radius(),
-                             2 * radius(),
-                             2 * radius() );
-    }
+    d->m_map->drawFog( painter );
 }
 
 

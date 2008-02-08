@@ -867,7 +867,7 @@ void MarbleMap::rotateTo(const double& lon, const double& lat)
 
 void MarbleMap::drawAtmosphere()
 {
-    qint64 imageWidth = (qint64)(width());
+    qint64 imageWidth  = (qint64)(width());
     qint64 imageHeight = (qint64)(height());
     qint64 imageRadius = (qint64)(radius());
 
@@ -875,13 +875,13 @@ void MarbleMap::drawAtmosphere()
     if ( d->m_viewParams.m_projection != Spherical )
         return;
 
-    // No use to draw atmosphere if it's not visible in the area.
-    // FIXME: Why 4* ??
-//    qDebug() << 4 * imageRadius * imageRadius << " radius: " << imageRadius << " width: " << imageWidth ;
-    if ( 4 * imageRadius * imageRadius >= imageWidth * imageWidth + imageHeight * imageHeight )
+    // No use to draw atmosphere if it's not visible in the area.  The
+    // first test is a quick one that will catch all really big radii
+    // and prevent overflow in the real test.
+    if ( radius() > width() + height() )
         return;
-//    else
-//        qDebug() << "redrawing Atmosphere";
+    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+        return;
 
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;
@@ -904,42 +904,48 @@ void MarbleMap::drawAtmosphere()
                          (int)( 2.1 * (double)(radius()) ) );
 }
 
+
 void MarbleMap::drawFog( QPainter &painter )
 {
-    if( d->m_viewParams.m_projection == Spherical &&  4 * radius() * radius() < width() * width() + height() * height()
-) {
-        int  imageHalfWidth  = width() / 2;
-        int  imageHalfHeight = height() / 2;
+    if ( d->m_viewParams.m_projection != Spherical)
+        return;
 
-        // Recalculate the atmosphere effect and paint it to canvasImage.
-        QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                            radius() );
+    // No use to draw the fog if it's not visible in the area.  The
+    // first test is a quick one that will catch all really big radii
+    // and prevent overflow in the real test.
+    if ( radius() > width() + height() )
+        return;
+    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+        return;
 
-        // FIXME: Add a cosine relationship
-        grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
-        grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
 
-        QBrush    brush1( grad1 );
-        QPen      pen1( Qt::NoPen );
-#if 0
-        QPainter  painter( this );
-#else
-	painter.save();
-#endif
-        painter.setBrush( brush1 );
-        painter.setPen( pen1 );
-        painter.setRenderHint( QPainter::Antialiasing, false );
+    int  imageHalfWidth  = width() / 2;
+    int  imageHalfHeight = height() / 2;
 
-        // FIXME: Cut out what's really needed
-        painter.drawEllipse( imageHalfWidth - radius(),
-                            imageHalfHeight - radius(),
-                            2 * radius(),
-                            2 * radius() );
-#if 0
-#else
-	painter.restore();
-#endif
-    }
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                           radius() );
+
+    // FIXME: Add a cosine relationship
+    grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+
+    painter.save();
+
+    painter.setBrush( brush1 );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
+
+    // FIXME: Cut out what's really needed
+    painter.drawEllipse( imageHalfWidth - radius(),
+                         imageHalfHeight - radius(),
+                         2 * radius(),
+                         2 * radius() );
+
+    painter.restore();
 }
 
 void MarbleMap::setBoundingBox()
