@@ -221,8 +221,7 @@ QModelIndex() ), mapThemeIcon,
                                 Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 0,
 QModelIndex() ),
-                                QString( "<span style=\" max-width: 150
-px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
+                                QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
                                 Qt::ToolTipRole);
         mapthememodel->setData( mapthememodel->index( row, 1,
 QModelIndex() ),
