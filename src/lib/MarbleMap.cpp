@@ -88,8 +88,6 @@ class MarbleMapPrivate
 
     // Tools
     MeasureTool     *m_measureTool;
-
-    QRegion          m_activeRegion;
 };
 
 
@@ -478,8 +476,6 @@ void MarbleMap::zoomView(int newZoom)
     drawAtmosphere();
 
     repaint();
-
-    setActiveRegion();
 }
 
 
@@ -682,9 +678,7 @@ void MarbleMap::moveDown()
 // Used to be resizeEvent()
 void MarbleMap::doResize()
 {
-    //	Redefine the area where the mousepointer becomes a navigationarrow
-    setActiveRegion();
-
+    // Recreate the canvas image with the new size.
     delete d->m_viewParams.m_canvasImage;
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
@@ -948,42 +942,6 @@ void MarbleMap::drawFog( QPainter &painter )
     }
 }
 
-void MarbleMap::setActiveRegion()
-{
-    int zoom = radius();
-
-    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
-                                 QRegion::Rectangle );
-
-    switch( d->m_viewParams.m_projection ) {
-        case Spherical:
-            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
-
-	       d->m_activeRegion = QRegion( width()  / 2 - zoom, 
-                                            height() / 2 - zoom,
-                                            2 * zoom, 2 * zoom, 
-                                            QRegion::Ellipse );
-            }
-            break;
-        case Equirectangular:
-            // Calculate translation of center point
-            double centerLon, centerLat;
-            d->m_viewParams.centerCoordinates( centerLon, centerLat );
-
-            int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
-            int yTop = height()/2 - zoom + yCenterOffset;
-            d->m_activeRegion = QRegion( 0, yTop, 
-                                         width(), 2 * zoom,
-                                         QRegion::Rectangle );
-            break;
-    }
-}
-
-const QRegion MarbleMap::activeRegion()
-{
-    return d->m_activeRegion;
-}
-
 void MarbleMap::setBoundingBox()
 {
     QVector<QPointF>  points;
@@ -1071,9 +1029,6 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
 
     // 5. Paint measure points if there are any.
     d->m_measureTool->paintMeasurePoints( &painter, d->m_viewParams, true );
-
-    // Set the region of the image where the user can drag it.
-    setActiveRegion();
 
     // Set the Bounding Box
     setBoundingBox();

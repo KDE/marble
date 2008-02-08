@@ -864,6 +864,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int   toLogScale(int);
     int   fromLogScale(int);
 
+    void  setActiveRegion();
+
     void  drawAtmosphere();
     void  drawFog();
 

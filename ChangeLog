@@ -1,5 +1,9 @@
 2008-02-08  Inge Wallin  <inge@lysator.liu.se>
 
+	Active Region is only relevant in the Widget
+	* src/lib/MarbleMap.{h,cpp}: remove activeRegion from here
+	* src/lib/MarbleWidget.{h,cpp}: move activeRegion here
+
 	Remove unnecessary code.
 	* src/lib/MarbleWidget.{h,cpp} (setActiveRegion): deleted
 	(setBoundingBox): deleted

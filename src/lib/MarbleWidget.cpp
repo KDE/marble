@@ -79,7 +79,8 @@ class MarbleWidgetPrivate
     // Tools
     MeasureTool     *m_measureTool;
 
-    //QRegion          m_activeRegion;
+    // The region on the widget where the user can drag the map.
+    QRegion          m_activeRegion;
 };
 
 
@@ -445,7 +446,7 @@ void MarbleWidget::zoomView(int newZoom)
 
     repaint();
 
-    d->m_map->setActiveRegion();
+    setActiveRegion();
 #else
     d->m_map->zoomView( newZoom );
 #endif
@@ -658,7 +659,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
 #if 1
     //	Redefine the area where the mousepointer becomes a navigationarrow
-    d->m_map->setActiveRegion();
+    setActiveRegion();
 
     delete d->m_viewParams.m_canvasImage;
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
@@ -721,33 +722,6 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
     return d->m_map->screenCoordinates( lon, lat, x, y );
-#if 0
-     switch( d->m_viewParams.m_projection ) {
-     case Spherical:
-     {
-         Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
-         p.rotateAroundAxis(d->m_viewParams.m_planetAxis.inverse());
- 
-         x = (int)( width() / 2   + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
-         y = (int)( height() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_Y] );
- 
-         return p.v[Q_Z] > 0;
-     }
- 
-     case Equirectangular:
-         // Calculate translation of center point
-         double centerLon, centerLat;
-         d->m_viewParams.centerCoordinates(centerLon, centerLat);
-         double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
- 
-         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-         y = (int)( height() / 2 + ( lat * DEG2RAD + centerLat ) * rad2Pixel );
- 
-         return true;
-     }
- 
-     return false;
-#endif
 }
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
@@ -802,6 +776,7 @@ void MarbleWidget::drawAtmosphere()
     d->m_map->drawAtmosphere();
 }
 
+// FIXME: What the deuce is this function doing here?
 void MarbleWidget::drawFog()
 {
     if ( d->m_viewParams.m_projection == Spherical
@@ -826,17 +801,50 @@ void MarbleWidget::drawFog()
         painter.setRenderHint( QPainter::Antialiasing, false );
 
         // FIXME: Cut out what's really needed
-        painter.drawEllipse( imageHalfWidth - radius(),
-                            imageHalfHeight - radius(),
-                            2 * radius(),
-                            2 * radius() );
+        painter.drawEllipse( imageHalfWidth  - radius(),
+                             imageHalfHeight - radius(),
+                             2 * radius(),
+                             2 * radius() );
     }
 }
 
 
 const QRegion MarbleWidget::activeRegion()
 {
-    return d->m_map->activeRegion();
+    return d->m_activeRegion;
+}
+
+void MarbleWidget::setActiveRegion()
+{
+    int zoom = radius();
+
+    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
+                                 QRegion::Rectangle );
+
+    switch( d->m_map->projection() ) {
+        case Spherical:
+            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
+
+	       d->m_activeRegion = QRegion( width()  / 2 - zoom, 
+                                            height() / 2 - zoom,
+                                            2 * zoom, 2 * zoom, 
+                                            QRegion::Ellipse );
+            }
+            break;
+
+        case Equirectangular:
+
+            // Calculate translation of center point
+            double centerLon, centerLat;
+            d->m_map->viewParams()->centerCoordinates( centerLon, centerLat );
+
+            int yCenterOffset =  (int)((double)( 2 * zoom ) / M_PI * centerLat);
+            int yTop          = height() / 2 - zoom + yCenterOffset;
+            d->m_activeRegion = QRegion( 0, yTop, 
+                                         width(), 2 * zoom,
+                                         QRegion::Rectangle );
+            break;
+    }
 }
 
 
@@ -1153,7 +1161,7 @@ QString MarbleWidget::distanceString() const
 void MarbleWidget::updateSun()
 {
     // Update the sun shading.
-    SunLocator  *sunLocator = d->m_model->sunLocator();
+    //SunLocator  *sunLocator = d->m_model->sunLocator();
     qDebug() << "Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();

@@ -194,11 +194,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
 
     /**
-     * @brief Return the active region in which it's possible to drag the view using the mouse.
-     */
-    const QRegion  activeRegion();
-
-    /**
      * @brief  Return the radius of the globe in pixels.
      */
     int         radius() const;
@@ -870,8 +865,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void  drawAtmosphere();
     void  drawFog(QPainter &painter);
-
-    void  setActiveRegion();
 
     void  setBoundingBox();
 
