@@ -119,17 +119,16 @@ MarbleWidget::~MarbleWidget()
 
 void MarbleWidget::construct()
 {
-    // FIXME: Setup the Map width, height, etc
-    // FIXME: change size of map when needed.
-
+    // Widget settings
     setMinimumSize( 200, 300 );
     setFocusPolicy( Qt::WheelFocus );
     setFocus( Qt::OtherFocusReason );
 
+    // Initialize the map and forward some signals.
     d->m_map->setSize( width(), height() );
+    connect( d->m_map, SIGNAL( projectionChanged( int ) ),
+             this,     SIGNAL( projectionChanged( int ) ) );
 
-    // Some point that tackat defined. :-)
-    setHome( -9.4, 54.8, 1050 );
 
     connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
              this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
@@ -528,12 +527,15 @@ void MarbleWidget::setCenterLongitude( double lon )
 
 Projection MarbleWidget::projection() const
 {
-    return d->m_viewParams.m_projection;
+    return d->m_map->projection();
 }
 
 // FIXME: Actually take a real Projection as parameter.
 void MarbleWidget::setProjection( int projectionIndex )
 {
+#if 1
+    d->m_map->setProjection( projectionIndex );
+    //#else
     emit projectionChanged( projectionIndex );
 
     Projection projection;
@@ -553,18 +555,20 @@ void MarbleWidget::setProjection( int projectionIndex )
 
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection = projection;
-
-    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
+#endif
+    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
     int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
     if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         || d->m_viewParams.m_projection == Equirectangular )
+         || d->m_map->projection() == Equirectangular )
     {
-        setAttribute(Qt::WA_NoSystemBackground, false);
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
+        setAttribute( Qt::WA_NoSystemBackground, false );
+        // FIXME: Find some way to fix this.
+        //        Perhaps a function drawBackground() ?
+        d->m_map->viewParams()->m_canvasImage->fill( Qt::black );
     }
     else {
-        setAttribute(Qt::WA_NoSystemBackground, true);
+        setAttribute( Qt::WA_NoSystemBackground, true );
     }
 
     drawAtmosphere();
@@ -572,6 +576,7 @@ void MarbleWidget::setProjection( int projectionIndex )
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
     setNeedsUpdate();
+
     repaint();
 }
 
@@ -713,6 +718,8 @@ int MarbleWidget::northPoleZ()
 bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
+    return d->m_map->screenCoordinates( lon, lat, x, y );
+#if 0
      switch( d->m_viewParams.m_projection ) {
      case Spherical:
      {
@@ -738,6 +745,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
      }
  
      return false;
+#endif
 }
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
@@ -871,9 +879,9 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 
     // FIXME: Better way to get the ClipPainter
     bool  doClip = false;
-    if ( d->m_viewParams.m_projection == Spherical )
-        doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
-                   || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
+    if ( d->m_map->projection() == Spherical )
+        doClip = ( d->m_map->radius() > width() / 2
+                   || d->m_map->radius() > height() / 2 );
 
     // Create a painter that will do the painting.
     ClipPainter painter( this, doClip );

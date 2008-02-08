@@ -48,6 +48,7 @@ class MarbleMapPrivate;
 // Marble
 class BoundingBox;
 class MarbleModel;
+class ViewParams;
 class HttpDownloadManager;
 class TextureColorizer;
 class MeasureTool;
@@ -167,6 +168,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Return the model that this view shows.
      */
     MarbleModel  *model() const;
+
+    ViewParams   *viewParams();
+
 
     void setSize(int width, int height);
     QSize size() const;

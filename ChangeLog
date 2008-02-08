@@ -1,5 +1,10 @@
 2008-02-08  Inge Wallin  <inge@lysator.liu.se>
 
+	Make flat projection work
+	* src/lib/MarbleWidget.cpp: Don't use local m_viewParams for
+	projection.
+	* src/lib/MarbleMap.{h,cpp} (viewParams): New method
+
 	More preparation
 	* src/lib/MarbleWidget.cpp: Clean away intermediate code from the
 	Widget/Map separation.

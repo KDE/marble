@@ -212,6 +212,11 @@ MarbleModel *MarbleMap::model() const
     return d->m_model;
 }
 
+ViewParams *MarbleMap::viewParams()
+{
+    return &d->m_viewParams;
+}
+
 void MarbleMap::setSize(int width, int height)
 {
     d->m_width  = width;
@@ -594,23 +599,19 @@ void MarbleMap::setProjection( int projectionIndex )
     }
 
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
-    d->m_viewParams.m_projection = projection;
-
+    d->m_viewParams.m_projection    = projection;
+#if 0
     int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
     int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
     if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
          || d->m_viewParams.m_projection == Equirectangular )
     {
-#if 0
         setAttribute(Qt::WA_NoSystemBackground, false);
-#endif
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
-#if 0
         setAttribute(Qt::WA_NoSystemBackground, true);
-#endif
     }
 
     drawAtmosphere();
@@ -619,6 +620,7 @@ void MarbleMap::setProjection( int projectionIndex )
     setMapTheme( d->m_model->mapTheme() );
     setNeedsUpdate();
     repaint();
+#endif
 }
 
 void MarbleMap::home( double &lon, double &lat, int& zoom )
