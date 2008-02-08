@@ -1,5 +1,11 @@
 2008-02-08  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove unnecessary code.
+	* src/lib/MarbleWidget.{h,cpp} (setActiveRegion): deleted
+	(setBoundingBox): deleted
+	* src/lib/MarbleMap.cpp: cleaning
+	* src/lib/AbstractLayer/AbstractLayer.cpp: cleaning
+
 	Make flat projection work
 	* src/lib/MarbleWidget.cpp: Don't use local m_viewParams for
 	projection.

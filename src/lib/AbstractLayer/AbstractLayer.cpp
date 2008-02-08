@@ -86,7 +86,7 @@ void AbstractLayer::setVisible( bool visible )
 
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
-                                ViewParams *viewParams)
+                                ViewParams *viewParams )
 {
     QVector<AbstractLayerContainer *>::const_iterator it;
 
@@ -106,8 +106,7 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
 
     for( it = m_containers->begin(); it < m_containers->end(); ++it ){
         if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, viewParams, 
-                         bounding );
+            (*it)->draw( painter, screenSize, viewParams, bounding );
         }
     }
 }

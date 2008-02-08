@@ -679,7 +679,8 @@ void MarbleMap::moveDown()
     rotateBy( 0, +moveStep() );
 }
 
-void MarbleMap::doResize()  // Used to be resizeEvent()
+// Used to be resizeEvent()
+void MarbleMap::doResize()
 {
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
@@ -959,9 +960,9 @@ void MarbleMap::setActiveRegion()
             if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
 
 	       d->m_activeRegion = QRegion( width()  / 2 - zoom, 
-                                             height() / 2 - zoom,
-                                             2 * zoom, 2 * zoom, 
-                                             QRegion::Ellipse );
+                                            height() / 2 - zoom,
+                                            2 * zoom, 2 * zoom, 
+                                            QRegion::Ellipse );
             }
             break;
         case Equirectangular:
@@ -972,8 +973,8 @@ void MarbleMap::setActiveRegion()
             int yCenterOffset =  (int)((double)(2*zoom) / M_PI * centerLat);
             int yTop = height()/2 - zoom + yCenterOffset;
             d->m_activeRegion = QRegion( 0, yTop, 
-                                          width(), 2 * zoom,
-                                          QRegion::Rectangle );
+                                         width(), 2 * zoom,
+                                         QRegion::Rectangle );
             break;
     }
 }

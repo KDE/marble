@@ -79,7 +79,7 @@ class MarbleWidgetPrivate
     // Tools
     MeasureTool     *m_measureTool;
 
-    QRegion          m_activeRegion;
+    //QRegion          m_activeRegion;
 };
 
 
@@ -445,7 +445,7 @@ void MarbleWidget::zoomView(int newZoom)
 
     repaint();
 
-    setActiveRegion();
+    d->m_map->setActiveRegion();
 #else
     d->m_map->zoomView( newZoom );
 #endif
@@ -658,7 +658,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
 #if 1
     //	Redefine the area where the mousepointer becomes a navigationarrow
-    setActiveRegion();
+    d->m_map->setActiveRegion();
 
     delete d->m_viewParams.m_canvasImage;
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
@@ -671,7 +671,9 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 
     if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
         setAttribute(Qt::WA_NoSystemBackground, false);
+#if 0
         d->m_viewParams.m_canvasImage->fill( Qt::black );
+#endif
     }
     else {
         setAttribute(Qt::WA_NoSystemBackground, true);
@@ -831,44 +833,10 @@ void MarbleWidget::drawFog()
     }
 }
 
-void MarbleWidget::setActiveRegion()
-{
-    d->m_map->setActiveRegion();
-}
 
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->activeRegion();
-}
-
-void MarbleWidget::setBoundingBox()
-{
-    QVector<QPointF>  points;
-    Quaternion        temp;
-
-    if ( globalQuaternion( 0, 0, temp) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( globalQuaternion( width() / 2, 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( globalQuaternion( width(), 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( globalQuaternion( 0, height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( globalQuaternion( width()/2, height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( globalQuaternion( width(), height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    d->m_viewParams.m_boundingBox = BoundingBox( points );
 }
 
 
