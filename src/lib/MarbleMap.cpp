@@ -215,6 +215,12 @@ ViewParams *MarbleMap::viewParams()
     return &d->m_viewParams;
 }
 
+MeasureTool *MarbleMap::measureTool()
+{
+    return d->m_measureTool;
+}
+
+
 void MarbleMap::setSize(int width, int height)
 {
     d->m_width  = width;

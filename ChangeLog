@@ -1,5 +1,10 @@
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
+	Make the Measure Tool work again.
+	* src/lib/MarbleMap.{h,cpp} (measureTool): New function
+	* src/lib/MarbleWidget.cpp: Remove all traces of the local
+	MeasureTool.
+
 	Draw fog is only relevant in the Map.
 	* src/lib/MarbleWidget.{h,cpp} (drawFog): Only call drawFog in the map. 
 	* src/lib/MarbleMap.cpp (drawFog): Clean

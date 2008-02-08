@@ -74,11 +74,6 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
 
-    TextureColorizer          *m_sealegend;
-
-    // Tools
-    MeasureTool     *m_measureTool;
-
     // The region on the widget where the user can drag the map.
     QRegion          m_activeRegion;
 };
@@ -153,7 +148,6 @@ void MarbleWidget::construct()
 
     d->m_inputhandler = NULL;
     d->m_popupmenu    = new MarbleWidgetPopupMenu( this, d->m_model );
-    d->m_measureTool  = new MeasureTool( this );
 
     // Handle mouse and keyboard input.
     setInputHandler( new MarbleWidgetDefaultInputHandler );
@@ -161,10 +155,11 @@ void MarbleWidget::construct()
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
-    connect( d->m_popupmenu,   SIGNAL( addMeasurePoint( double, double ) ),
-	     d->m_measureTool, SLOT( addMeasurePoint( double, double ) ) );
-    connect( d->m_popupmenu,   SIGNAL( removeMeasurePoints() ),
-	     d->m_measureTool, SLOT( removeMeasurePoints( ) ) );
+    MeasureTool  *measureTool = d->m_map->measureTool();
+    connect( d->m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
+	     measureTool,    SLOT( addMeasurePoint( double, double ) ) );
+    connect( d->m_popupmenu, SIGNAL( removeMeasurePoints() ),
+	     measureTool,    SLOT( removeMeasurePoints( ) ) );
 
     // Track the GPS current point at timely intervals.
     connect( d->m_model, SIGNAL( timeout() ),

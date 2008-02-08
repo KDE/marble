@@ -61,7 +61,7 @@ class ClipPainter;
 
 
 /**
- * @short A class that can display a view of the earth.
+ * @short A class that can paint a view of the earth.
  *
  * FIXME: Change this description when we are done.
  *
@@ -169,13 +169,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     MarbleModel  *model() const;
 
+    // Accessors to internal objects;
     ViewParams   *viewParams();
+    MeasureTool  *measureTool();
 
-
-    void setSize(int width, int height);
-    QSize size() const;
-    int  width() const;
-    int  height() const;
+    void  setSize(int width, int height);
+    QSize size()   const;
+    int   width()  const;
+    int   height() const;
 
 #if 0
     /**
