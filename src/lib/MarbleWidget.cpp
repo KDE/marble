@@ -64,12 +64,11 @@ class MarbleWidgetPrivate
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
 
-    ViewParams       m_viewParams;   // This must go!
     bool             m_justModified; // FIXME: Rename to isDirty. Also: should be here or in MarbleMap?
 
-    int              m_logzoom;
-
-    int              m_zoomStep;
+    // Some values from m_map, as they were last time we repainted.
+    // To store them here will save some repaintings.
+    int              m_logZoom;
 
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
@@ -132,6 +131,12 @@ void MarbleWidget::construct()
     connect( d->m_model, SIGNAL( modelChanged() ),
              this,       SLOT( updateChangedMap() ) );
 
+    // When some fundamental things change in the map, we got to show
+    // this in the view, i.e. here.
+    connect( d->m_map, SIGNAL( zoomChanged( int ) ),
+             this,     SIGNAL( zoomChanged( int ) ) );
+
+
     // Some part of the screen contents changed.
     connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
              this,       SLOT( updateRegion( BoundingBox& ) ) );
@@ -169,10 +174,8 @@ void MarbleWidget::construct()
     connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
              this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
-#if 1
-    d->m_logzoom  = 0;
-    d->m_zoomStep = 40;
-#endif
+    d->m_logZoom  = 0;
+
     goHome();
 
     // Widget translation
@@ -400,57 +403,35 @@ bool  MarbleWidget::quickDirty() const
 
 void MarbleWidget::zoomView(int newZoom)
 {
-#if 1
-    // Check for under and overflow.
-    if ( newZoom < minimumZoom() ) {
-        newZoom = minimumZoom();
-    }
-    else if ( newZoom > maximumZoom() ) {
-        newZoom = maximumZoom();
-    }
+    // This function is tricky since it needs to be possible to call
+    // both from above as an ordinary function, and "from below",
+    // i.e. as a slot.  That's why we need to save m_logZoom from when
+    // we repainted last time.
 
-    // Prevent infinite loops.
-    if ( newZoom  == d->m_logzoom )
+    qDebug() << "Widget::zoomView started";
+
+    // Make all the internal changes to the map.
+    d->m_map->zoomView( newZoom );
+
+    // If no change, we don't need to repainting or anything else.
+    if ( d->m_logZoom == newZoom )
 	return;
 
-    d->m_logzoom = newZoom;
-    emit zoomChanged( newZoom );
+    d->m_logZoom == newZoom;
 
-    int newRadius = fromLogScale( newZoom );
-    if ( newRadius == radius() )
-	return;
-
-    // Clear canvas if the globe is visible as a whole or if the globe
-    // does shrink.
-    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
-
-    if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         && newRadius != radius() 
-         || d->m_viewParams.m_projection == Equirectangular )
+    // We only have to repaint the background every time if the globe
+    // doesn't cover the whole image.
+    if ( ! d->m_map->globeCoversImage() 
+         || d->m_map->projection() != Spherical )
     {
         setAttribute( Qt::WA_NoSystemBackground, false );
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
     else {
         setAttribute( Qt::WA_NoSystemBackground, true );
     }
 
-    setRadius( newRadius );
-
     emit distanceChanged( distanceString() );
 
-    // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the 
-    // globe changes.
-    drawAtmosphere();
-
-    //repaint();
-    //setActiveRegion();
-
-#else
-    d->m_map->zoomView( newZoom );
-#endif
     repaint();
     setActiveRegion();
 }
@@ -464,20 +445,12 @@ void MarbleWidget::zoomViewBy( int zoomStep )
 
 void MarbleWidget::zoomIn()
 {
-#if 1
-    zoomViewBy( d->m_zoomStep );
-#else
     d->m_map->zoomIn();
-#endif
 }
 
 void MarbleWidget::zoomOut()
 {
-#if 1
-    zoomViewBy( -d->m_zoomStep );
-#else
     d->m_map->zoomOut();
-#endif
 }
 
 void MarbleWidget::rotateTo(const Quaternion& quat)
@@ -824,10 +797,14 @@ QString MarbleWidget::mapTheme() const
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
     if ( maptheme == d->m_model->mapTheme()
-         && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection )
+#if 0 // What is this good for?
+         && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection 
+#endif
+         )
         return;
 
-    d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );
+    // FIXME: Why does setMapTheme have to have a projection?
+    d->m_model->setMapTheme( maptheme, this, d->m_map->projection() );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -962,7 +939,9 @@ void MarbleWidget::updateGps()
 {
     QRegion temp;
     bool    draw;
-    draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
+    draw = d->m_model->gpsLayer()->updateGps( size(),
+                                              d->m_map->viewParams(),
+                                              temp );
     if ( draw ){
         update( temp );
     }

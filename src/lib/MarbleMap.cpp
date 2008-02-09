@@ -66,14 +66,15 @@ class MarbleMapPrivate
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 
+    // The home position
     GeoDataPoint     m_homePoint;
     int              m_homeZoom;
 
+    // zoom related
     int              m_logzoom;
-
     int              m_zoomStep;
 
-    TextureColorizer          *m_sealegend;
+    TextureColorizer  *m_sealegend;
 
     // Parameters for the maps appearance.
     bool             m_showCompass;
@@ -434,54 +435,34 @@ bool  MarbleMap::quickDirty() const
 
 void MarbleMap::zoomView(int newZoom)
 {
+    qDebug() << "Map::zoomView started";
     // Check for under and overflow.
-    if ( newZoom < minimumZoom() ) {
+    if ( newZoom < minimumZoom() )
         newZoom = minimumZoom();
-    }
-    else if ( newZoom > maximumZoom() ) {
+    else if ( newZoom > maximumZoom() )
         newZoom = maximumZoom();
-    }
 
     // Prevent infinite loops.
     if ( newZoom  == d->m_logzoom )
 	return;
-
+    qDebug() << "Map::zoomView: setting new values";
     d->m_logzoom = newZoom;
-    emit zoomChanged( newZoom );
-
-    int newRadius = fromLogScale( newZoom );
-    if ( newRadius == radius() )
-	return;
+    setRadius( fromLogScale( newZoom ) );
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
-
-    if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         && newRadius != radius() 
-         || d->m_viewParams.m_projection == Equirectangular )
+    if ( ! globeCoversImage() 
+         || projection() != Spherical )
     {
-#if 0
-        setAttribute( Qt::WA_NoSystemBackground, false );
-#endif
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
-#if 0
-    else {
-        setAttribute( Qt::WA_NoSystemBackground, true );
-    }
-#endif
-    setRadius( newRadius );
-
-    emit distanceChanged( distanceString() );
 
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
     drawAtmosphere();
-
-    repaint();
+    qDebug() << "emitting zoomChanged";
+    emit zoomChanged( newZoom );
 }
 
 

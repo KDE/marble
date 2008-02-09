@@ -1,5 +1,11 @@
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix all zoom issues.
+	* src/lib/MarbleWidget.cpp (zoomView): Use MarbleMap correctly
+	(zoomIn, zoomOut): call functions in MarbleMap.
+	* src/lib/MarbleMap.cpp (zoomView): Do the correct thing.
+
+	Fix resizing and projection changes for real
 	* src/lib/MarbleWidget.cpp (resizeEvent): Use MarbleMap correctly
 	(setProjection):  Use MarbleMap correctly
 	* src/lib/MarbleMap.cpp (doResize): Do the correct thing.
