@@ -121,8 +121,8 @@ void MarbleWidget::construct()
 
     // Initialize the map and forward some signals.
     d->m_map->setSize( width(), height() );
-    connect( d->m_map, SIGNAL( projectionChanged( int ) ),
-             this,     SIGNAL( projectionChanged( int ) ) );
+    connect( d->m_map, SIGNAL( projectionChanged( Projection ) ),
+             this,     SIGNAL( projectionChanged( Projection ) ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
@@ -408,8 +408,6 @@ void MarbleWidget::zoomView(int newZoom)
     // i.e. as a slot.  That's why we need to save m_logZoom from when
     // we repainted last time.
 
-    qDebug() << "Widget::zoomView started";
-
     // Make all the internal changes to the map.
     d->m_map->zoomView( newZoom );
 
@@ -417,7 +415,7 @@ void MarbleWidget::zoomView(int newZoom)
     if ( d->m_logZoom == newZoom )
 	return;
 
-    d->m_logZoom == newZoom;
+    d->m_logZoom = newZoom;
 
     // We only have to repaint the background every time if the globe
     // doesn't cover the whole image.
@@ -507,12 +505,11 @@ Projection MarbleWidget::projection() const
     return d->m_map->projection();
 }
 
-// FIXME: Actually take a real Projection as parameter.
-void MarbleWidget::setProjection( int projectionIndex )
+void MarbleWidget::setProjection( Projection projection )
 {
-    d->m_map->setProjection( projectionIndex );
+    d->m_map->setProjection( projection );
 
-    if ( d->m_map->projection() == Spherical
+    if ( projection == Spherical
          && d->m_map->globeCoversImage()  )
     {
         setAttribute( Qt::WA_NoSystemBackground, true );
@@ -790,7 +787,6 @@ void MarbleWidget::goHome()
 
 QString MarbleWidget::mapTheme() const
 {
-    qDebug() << d->m_model->mapTheme();
     return d->m_model->mapTheme();
 }
 
@@ -983,13 +979,9 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
                                        const QString &name, 
                                        const QString &description )
 {
-    qDebug("MarbleWidget::creatingTilesStart called... ");
-
     TileCreatorDialog dlg( creator, this );
     dlg.setSummary( name, description );
     dlg.exec();
-
-    qDebug("MarbleWidget::creatingTilesStart exits... ");
 }
 
 
@@ -1068,11 +1060,12 @@ void MarbleWidget::updateSun()
 {
     // Update the sun shading.
     //SunLocator  *sunLocator = d->m_model->sunLocator();
-    qDebug() << "Updating the sun shading map...";
+
+    //qDebug() << "Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
     repaint();
-    qDebug() << "Finished updating the sun shading map";
+    //qDebug() << "Finished updating the sun shading map";
 }
 
 void MarbleWidget::centerSun()

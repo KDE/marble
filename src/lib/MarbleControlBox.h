@@ -24,6 +24,7 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QWidget>
 
+#include "global.h"
 #include "GeoDataPoint.h"       // In geodata/data/
 
 
@@ -165,7 +166,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void selectMapTheme( const QString& );
 
-    void projectionSelected( int );
+    void projectionSelected( Projection );
     
     void gpsInputDisabled( bool );
     void gpsPositionChanged( double lat, double lon);
@@ -212,6 +213,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void setFileViewTabShown( bool show );
 
+    void projectionSelected( int projectionIndex );
+
  private Q_SLOTS:
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);
@@ -220,7 +223,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void search();
 
     void selectTheme( const QString & );
-    void selectProjection( int projectionIndex );
+    void selectProjection( Projection projection );
 
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );

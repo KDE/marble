@@ -170,7 +170,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
             maxLabelHeight = textHeight; 
     }
 
-    qDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
+    //qDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
     return maxLabelHeight;
 }
 

@@ -435,7 +435,6 @@ bool  MarbleMap::quickDirty() const
 
 void MarbleMap::zoomView(int newZoom)
 {
-    qDebug() << "Map::zoomView started";
     // Check for under and overflow.
     if ( newZoom < minimumZoom() )
         newZoom = minimumZoom();
@@ -445,7 +444,6 @@ void MarbleMap::zoomView(int newZoom)
     // Prevent infinite loops.
     if ( newZoom  == d->m_logzoom )
 	return;
-    qDebug() << "Map::zoomView: setting new values";
     d->m_logzoom = newZoom;
     setRadius( fromLogScale( newZoom ) );
 
@@ -461,7 +459,6 @@ void MarbleMap::zoomView(int newZoom)
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
     drawAtmosphere();
-    qDebug() << "emitting zoomChanged";
     emit zoomChanged( newZoom );
 }
 
@@ -561,25 +558,9 @@ Projection MarbleMap::projection() const
     return d->m_viewParams.m_projection;
 }
 
-// FIXME: Actually take a real Projection as parameter.
-void MarbleMap::setProjection( int projectionIndex )
+void MarbleMap::setProjection( Projection projection )
 {
-    emit projectionChanged( projectionIndex );
-
-    Projection projection;
-
-    switch ( projectionIndex )
-    {
-        case 0:
-            projection = Spherical;
-            break;
-        case 1:
-            projection = Equirectangular;
-            break; 
-        default: 
-            return;
-            break;
-    }
+    emit projectionChanged( projection );
 
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection    = projection;
@@ -1059,7 +1040,6 @@ void MarbleMap::goHome()
 
 QString MarbleMap::mapTheme() const
 {
-    qDebug() << d->m_model->mapTheme();
     return d->m_model->mapTheme();
 }
 
@@ -1251,17 +1231,10 @@ void MarbleMap::setQuickDirty( bool enabled )
 
 void MarbleMap::creatingTilesStart( TileCreator *creator, const QString &name, const QString &description )
 {
-    qDebug("MarbleMap::creatingTilesStart called... ");
-
-#if 0
-    TileCreatorDialog dlg( creator, this );
-#else
     TileCreatorDialog dlg( creator, 0 );
-#endif
+
     dlg.setSummary( name, description );
     dlg.exec();
-
-    qDebug("MarbleMap::creatingTilesStart exits... ");
 }
 
 
@@ -1356,12 +1329,13 @@ bool MarbleMap::globeCoversImage()
 void MarbleMap::updateSun()
 {
     // Update the sun shading.
-    SunLocator  *sunLocator = d->m_model->sunLocator();
-    qDebug() << "Updating the sun shading map...";
+    //SunLocator  *sunLocator = d->m_model->sunLocator();
+
+    //qDebug() << "Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
     repaint();
-    qDebug() << "Finished updating the sun shading map";
+    //qDebug() << "Finished updating the sun shading map";
 }
 
 void MarbleMap::centerSun()
@@ -1373,9 +1347,6 @@ void MarbleMap::centerSun()
     centerOn( lon, lat );
 
     qDebug() << "Centering on Sun at " << lat << lon;
-#if 0
-    disableInput();
-#endif
 }
 
 SunLocator* MarbleMap::sunLocator()
@@ -1383,18 +1354,5 @@ SunLocator* MarbleMap::sunLocator()
     return d->m_model->sunLocator();
 }
 
-#if 0
-void MarbleWidget::enableInput()
-{
-    if ( !d->m_inputhandler ) 
-        setInputHandler( new MarbleWidgetDefaultInputHandler );
-}
-
-void MarbleWidget::disableInput()
-{
-    setInputHandler( NULL );
-    setCursor( Qt::ArrowCursor );
-}
-#endif
 
 #include "MarbleMap.moc"

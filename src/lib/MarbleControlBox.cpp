@@ -139,7 +139,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
     connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
-             this,                              SIGNAL( projectionSelected( int ) ) );
+             this,                              SLOT( projectionSelected( int ) ) );
 
     d->uiWidget.projectionComboBox->setEnabled( true );
 }
@@ -250,14 +250,15 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
     connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
 
-    connect( this, SIGNAL( projectionSelected( int ) ),  d->m_widget, SLOT( setProjection( int ) ) );
+    connect( this,        SIGNAL( projectionSelected( Projection ) ),  
+             d->m_widget, SLOT( setProjection( Projection ) ) );
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );
     selectTheme( d->m_widget->mapTheme() );
 
-    connect( d->m_widget, SIGNAL( projectionChanged( int ) ),
-             this,        SLOT( selectProjection( int ) ) );
+    connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
+             this,        SLOT( selectProjection( Projection ) ) );
     selectProjection( d->m_widget->projection() );
 
     connect(d->m_widget, SIGNAL(zoomChanged(int)),
@@ -538,11 +539,18 @@ void MarbleControlBox::selectTheme( const QString &theme )
     }
 }
 
-void MarbleControlBox::selectProjection( int projectionIndex )
+void MarbleControlBox::selectProjection( Projection projection )
 {
-    if ( projectionIndex != d->uiWidget.projectionComboBox->currentIndex() )
-        d->uiWidget.projectionComboBox->setCurrentIndex( projectionIndex );
+    if ( (int)projection != d->uiWidget.projectionComboBox->currentIndex() )
+        d->uiWidget.projectionComboBox->setCurrentIndex( (int) projection );
 }
+
+// Relay a signal and convert the parameter from an int to a Projection.
+void MarbleControlBox::projectionSelected( int projectionIndex )
+{
+    emit projectionSelected( (Projection) projectionIndex );
+}
+
 
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {

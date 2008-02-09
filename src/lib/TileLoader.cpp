@@ -267,7 +267,7 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
         qDebug("No Tiles Found!");
     }
 
-    qDebug() << "Detected maximum complete tile level: " << tilelevel;
+    //qDebug() << "Detected maximum complete tile level: " << tilelevel;
 
     return tilelevel;
 }
@@ -293,8 +293,8 @@ int TileLoader::maxPartialTileLevel( const QString& theme )
             maxtilelevel = value;
     }
 
-    qDebug() << "Detected maximum tile level that contains data: "
-             << maxtilelevel;
+    //qDebug() << "Detected maximum tile level that contains data: "
+    //         << maxtilelevel;
 
     return maxtilelevel;
 }

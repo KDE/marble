@@ -1,5 +1,21 @@
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
+	API change, and remove irritating qDebug()s
+	* src/lib/MarbleWidget.{h,cpp} (setProjection): Take Projection
+	argument
+	(zoomView): Fix bug ==  ->  =
+	(*): Disable irritating qDebug()s.
+	* src/lib/MarbleMap.{h,cpp} (setProjection): Take Projection
+	argument
+	(*): Disable irritating qDebug()s.
+	(enableInput, disableInput): removed
+	* src/marble_part.cpp: Call with Projection parameters
+	* src/lib/MarbleModel.cpp (*): Disable irritating qDebug()s.
+	* src/lib/MarbleControlBox.{h,cpp}: projection signals and slots
+	take a Projection
+	* src/lib/PlaceMarkLayout.cpp: Remove irritating qDebug()s.
+	* src/lib/TileLoader.cpp: Remove irritating qDebug()s.
+
 	Fix all zoom issues.
 	* src/lib/MarbleWidget.cpp (zoomView): Use MarbleMap correctly
 	(zoomIn, zoomOut): call functions in MarbleMap.

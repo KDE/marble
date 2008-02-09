@@ -215,12 +215,12 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 {
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/%1").arg( selectedMap );
-    qDebug( "Setting map theme to : %s",
-	    qPrintable( MarbleDirs::path( mapPath ) ) );
+    //qDebug( "Setting map theme to : %s",
+    //	    qPrintable( MarbleDirs::path( mapPath ) ) );
 
     int error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
     if ( error < 0 ){
-        if ( d->m_previousMapLoadedFine == true )
+        if ( d->m_previousMapLoadedFine )
             return;
         else { 
             // Actually this case can't really happen as the

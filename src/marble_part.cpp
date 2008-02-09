@@ -216,7 +216,7 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->goHome();
 
     m_controlView->marbleWidget()->setMapTheme( MarbleSettings::mapTheme() );
-    m_controlView->marbleWidget()->setProjection( MarbleSettings::projection() );
+    m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
 }
 
 void MarblePart::writeSettings()

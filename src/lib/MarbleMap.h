@@ -583,7 +583,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void  setProjection( int projection );
+    void  setProjection( Projection projection );
 
     /**
      * @brief  get the home point
@@ -837,7 +837,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void  themeChanged( QString theme );
 
-    void  projectionChanged( int );
+    void  projectionChanged( Projection );
 
     void  mouseMoveGeoPosition( QString );
 
