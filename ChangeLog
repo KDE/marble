@@ -1,5 +1,13 @@
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/MarbleWidget.cpp (resizeEvent): Use MarbleMap correctly
+	(setProjection):  Use MarbleMap correctly
+	* src/lib/MarbleMap.cpp (doResize): Do the correct thing.
+	(setProjection): Do the correct thing.
+	(drawAtmosphere): Use globeCoversImage
+	(globeCoversImage): New function
+	* src/lib/MarbleMap.h (globeCoversImage): New function
+
 	Make the Measure Tool work again.
 	* src/lib/MarbleMap.{h,cpp} (measureTool): New function
 	* src/lib/MarbleWidget.cpp: Remove all traces of the local

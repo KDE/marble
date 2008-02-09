@@ -14,33 +14,34 @@ Before Release of Marble 0.6:
 
 Layer Management Class tasks: 
 
-*** New widget independent image canvas concept and implementation   INGE
+*** New widget independent image canvas concept and implementation      INGE
 
-*** Split off MapTheme / DGML parsing into geodata/parser.
+*** Split off MapTheme / DGML parsing into geodata/parser.              ----
     Have a GeoDataMapTheme class that basically only includes those 
     parts of the current MapTheme except for parsing.
 
-*** Create all available MapTheme objects instead of the 
+*** Create all available MapTheme objects instead of the                ----
     selected one. (right now it just creates a single one, 
     so you can't access many in parallel without parsing 
     over and over)
 
-*** Implement / move <head> features as lined out in layermanagement.txt
-    This should happen after the QXmlStreamReader port.
+*** Implement / move <head> features as lined out in                    ----
+    layermanagement.txt This should happen after the QXmlStreamReader
+    port.
 
-*** Implement basic Qt-Plugin based LMC class
+*** Implement basic Qt-Plugin based LMC class                           ----
 
-*** Move backends into plugins / threads
+*** Move backends into plugins / threads                                ----
 
-*** Design and implement a QPainter-style API for GeoPainter
+*** Design and implement a QPainter-style API for GeoPainter            ----
 
-*** Cloud Layer                                                      STRE
+*** Cloud Layer                                                         STRE
 
-*** Mercator Projection                                              CARU
+*** Mercator Projection                                                 CARU
 
-*** Design and implement Projection class                            CARU
+*** Design and implement Projection class                               CARU
 
-*** Fix GPS Support                                                  ANDR
+*** Fix GPS Support                                                     ANDR
 
 
 REFINEMENTS:
@@ -48,7 +49,7 @@ REFINEMENTS:
 Low hanging (but important) fruits:
 -----------------------------------
 
-*** Update screenshots in the docs!
+*** Update screenshots in the docs!                                     ----
 
 *** Fix Double Click on map (which should center the map on the point   ----
     being double clicked).
@@ -158,13 +159,13 @@ Documentation:
     - Serializable?                                                     --
  * APIDOX for classes in AbstractLayer                                  ----
     - ...
- * APIDOX for classes in src/lib:                                      INGE
-   - Mainpage.dox							done
+ * APIDOX for classes in src/lib:                                       INGE
+   - Mainpage.dox                                                       done
    - MarbleWidget                                                       done
    - MarbleControlBox                                                   --
    - MarbleModel                                                        --
    - MarbleNavigator                                                    done
-   - MarblePlacemarkModel						--
+   - MarblePlacemarkModel                                               --
 
 Widget:
  * Separate the view from the globe (model)                             INGE
@@ -173,8 +174,8 @@ Widget:
     - Let the view know about the globe, but not the other way.         done
 
 Documentation:
- * Programmers manual for using Marble components in other applications	----
- * Apidox for all public classes					----
+ * Programmers manual for using Marble components in other applications ----
+ * Apidox for all public classes                                        ----
 
  
 Before KDE 4.1
@@ -201,17 +202,24 @@ Features:
  * Support for OpenStreetMap                                            TACK
     - load tiles                                                        --
     - display tiles                                                     --
- * Support to display Timezones, Data available e.g. at:		----
-	http://sarangworld.com/NMLUG/WorldTZ_102.zip
+    - Generate tiles (adapt fonts, etc, to Marble)                      --
+    - Put tiles on server                                               --
+ * Support to display Timezones, Data available e.g. at:                ----
+        http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
 Internal structure:
+ * New class MarbleMap that can paint a map on any QPainter             INGE
+    - Zoom                                                              --
+    - Resize                                                            done
+    - setProjection                                                     done
+    - other uses of d->viewParams                                       --
  * Refactor KML to use QXmlStreamReader                                 ----
  * Make MarbleModel a real model and MarbleWidget a real view           ----
  * Make it possible to paint on whatever QPainter Marble is given       ----
 
 Installation issues
  * Only install the public include files                                ----
- * Creating tiles during build instead of first run			TACK
+ * Creating tiles during build instead of first run                     TACK
 
 Data:
  * Evaluate the implementation of tile specifications like              ----

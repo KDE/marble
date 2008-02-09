@@ -602,27 +602,19 @@ void MarbleMap::setProjection( int projectionIndex )
 
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection    = projection;
-#if 0
-    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
 
-    if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         || d->m_viewParams.m_projection == Equirectangular )
+    // Redraw the background if necessary
+    if ( !globeCoversImage() 
+         || d->m_viewParams.m_projection != Spherical )
     {
-        setAttribute(Qt::WA_NoSystemBackground, false);
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
-    else {
-        setAttribute(Qt::WA_NoSystemBackground, true);
-    }
-
+ 
     drawAtmosphere();
 
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
     setNeedsUpdate();
-    repaint();
-#endif
 }
 
 void MarbleMap::home( double &lon, double &lat, int& zoom )
@@ -689,30 +681,21 @@ void MarbleMap::doResize()
     d->m_viewParams.m_canvasImage = new QImage( width(), height(),
                                    QImage::Format_ARGB32_Premultiplied );
 
-    // Clear canvas if the globe is visible as a whole or if the globe
-    // does shrink.
-    int  imageWidth2  = width() / 2;
-    int  imageHeight2 = height() / 2;
-
-    if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
-#if 0
-        setAttribute(Qt::WA_NoSystemBackground, false);
-#endif
+    // Repaint the background if necessary
+    if ( ! globeCoversImage() 
+         || d->m_viewParams.m_projection != Spherical )
+    {
         d->m_viewParams.m_canvasImage->fill( Qt::black );
-    }
-    else {
-#if 0
-        setAttribute(Qt::WA_NoSystemBackground, true);
-#endif
     }
 
     drawAtmosphere();
 
+    // Recreate the 
     delete d->m_viewParams.m_coastImage;
     d->m_viewParams.m_coastImage = new QImage( width(), height(),
                                                QImage::Format_ARGB32_Premultiplied );
+
     d->m_justModified = true;
-    repaint();
 }
 
 int MarbleMap::northPoleY()
@@ -873,21 +856,18 @@ void MarbleMap::rotateTo(const double& lon, const double& lat)
 
 void MarbleMap::drawAtmosphere()
 {
-    qint64 imageWidth  = (qint64)(width());
-    qint64 imageHeight = (qint64)(height());
-    qint64 imageRadius = (qint64)(radius());
-
     // Only draw an atmosphere if projection is spherical
     if ( d->m_viewParams.m_projection != Spherical )
         return;
 
-    // No use to draw atmosphere if it's not visible in the area.  The
-    // first test is a quick one that will catch all really big radii
-    // and prevent overflow in the real test.
-    if ( radius() > width() + height() )
+    // No use to draw atmosphere if it's not visible in the area. 
+    if ( globeCoversImage() )
         return;
-    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
-        return;
+
+    // Ok, now we know that at least a little of the atmosphere is
+    // visible, if nothing else in the corners.  Draw the atmosphere
+    // by using a circular gradient.  This is a pure visual effect and
+    // has nothing to do with real physics.
 
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;
@@ -904,7 +884,7 @@ void MarbleMap::drawAtmosphere()
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth - (int)( (double)(radius()) * 1.05 ),
+    painter.drawEllipse( imageHalfWidth  - (int)( (double)(radius()) * 1.05 ),
                          imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
                          (int)( 2.1 * (double)(radius()) ),
                          (int)( 2.1 * (double)(radius()) ) );
@@ -1373,6 +1353,24 @@ QString MarbleMap::distanceString() const
 
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
+
+
+bool MarbleMap::globeCoversImage()
+{
+    // This first test is a quick one that will catch all really big
+    // radii and prevent overflow in the real test.
+    if ( radius() > width() + height() )
+        return true;
+
+    // This is the real test.  The 4 is because we are really
+    // comparing to width/2 and height/2.
+    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+        return true;
+
+    return false;
+}
+
+
 
 void MarbleMap::updateSun()
 {

@@ -820,6 +820,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setDownloadUrl( const QUrl &url );
 
+    bool  globeCoversImage();
+
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.

@@ -65,7 +65,7 @@ class MarbleWidgetPrivate
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
 
     ViewParams       m_viewParams;   // This must go!
-    bool             m_justModified; // FIXME: Rename to isDirty
+    bool             m_justModified; // FIXME: Rename to isDirty. Also: should be here or in MarbleMap?
 
     int              m_logzoom;
 
@@ -537,49 +537,16 @@ Projection MarbleWidget::projection() const
 // FIXME: Actually take a real Projection as parameter.
 void MarbleWidget::setProjection( int projectionIndex )
 {
-#if 1
     d->m_map->setProjection( projectionIndex );
-    //#else
-    emit projectionChanged( projectionIndex );
 
-    Projection projection;
-
-    switch ( projectionIndex )
+    if ( d->m_map->projection() == Spherical
+         && d->m_map->globeCoversImage()  )
     {
-        case 0:
-            projection = Spherical;
-            break;
-        case 1:
-            projection = Equirectangular;
-            break; 
-        default: 
-            return;
-            break;
-    }
-
-    d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
-    d->m_viewParams.m_projection = projection;
-#endif
-    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
-
-    if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         || d->m_map->projection() == Equirectangular )
-    {
-        setAttribute( Qt::WA_NoSystemBackground, false );
-        // FIXME: Find some way to fix this.
-        //        Perhaps a function drawBackground() ?
-        d->m_map->viewParams()->m_canvasImage->fill( Qt::black );
-    }
-    else {
         setAttribute( Qt::WA_NoSystemBackground, true );
     }
-
-    drawAtmosphere();
-
-    // Update texture map during the repaint that follows:
-    setMapTheme( d->m_model->mapTheme() );
-    setNeedsUpdate();
+    else {
+        setAttribute( Qt::WA_NoSystemBackground, false );
+    }
 
     repaint();
 }
@@ -660,40 +627,24 @@ void MarbleWidget::leaveEvent (QEvent*)
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
 {
-#if 1
+    d->m_map->setSize( width(), height() );
+
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
 
-    delete d->m_viewParams.m_canvasImage;
-    d->m_viewParams.m_canvasImage = new QImage( width(), height(),
-                                   QImage::Format_ARGB32_Premultiplied );
-
-    // Clear canvas if the globe is visible as a whole or if the globe
-    // does shrink.
-    int  imageWidth2  = width() / 2;
-    int  imageHeight2 = height() / 2;
-
-    if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
-        setAttribute(Qt::WA_NoSystemBackground, false);
-#if 0
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
-#endif
+    if ( d->m_map->globeCoversImage() ) {
+        setAttribute(Qt::WA_NoSystemBackground, true );
     }
     else {
-        setAttribute(Qt::WA_NoSystemBackground, true);
+        setAttribute(Qt::WA_NoSystemBackground, false );
     }
 
-    drawAtmosphere();
 
-    delete d->m_viewParams.m_coastImage;
-    d->m_viewParams.m_coastImage = new QImage( width(), height(),
-                                               QImage::Format_ARGB32_Premultiplied );
     d->m_justModified = true;
+
     repaint();
-    //#else
-    d->m_map->setSize( width(), height() );
-#endif
 }
+
 
 void MarbleWidget::connectNotify ( const char * signal )
 {
