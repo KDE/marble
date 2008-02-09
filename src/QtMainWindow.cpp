@@ -405,7 +405,7 @@ void MainWindow::readSettings()
             settings.value("mapTheme", "" ).toString()
          );
          m_controlView->marbleWidget()->setProjection(
-            settings.value("projection", 0 ).toInt()
+            (Projection)(settings.value("projection", 0 ).toInt())
          );
      settings.endGroup();
 }
