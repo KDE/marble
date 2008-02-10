@@ -78,8 +78,8 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 
 void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage* canvasImage = viewParams->m_canvasImage;
-    const int radius = viewParams->m_radius;
+    QImage       *canvasImage = viewParams->m_canvasImage;
+    const qint64  radius      = viewParams->m_radius;
 
     // Scanline based algorithm to texture map a sphere
 
@@ -101,7 +101,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     selectTileLevel( viewParams );
 
     // Evaluate the degree of interpolation
-    m_n    = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
+    m_n        = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
     m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
@@ -130,8 +130,8 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
         // rx is the radius component in x direction
         int rx = (int)sqrt( (double)( radius * radius 
-                      - ( ( m_y - m_imageHeight / 2 )
-                      * ( m_y - m_imageHeight / 2 ) ) ) );
+                                      - ( ( m_y - m_imageHeight / 2 )
+                                          * ( m_y - m_imageHeight / 2 ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline.
         // 

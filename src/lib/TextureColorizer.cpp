@@ -33,7 +33,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 {
     QImage  *origimg  = viewParams->m_canvasImage;
     const QImage  *coastimg = viewParams->m_coastImage;
-    const int      radius   = viewParams->m_radius;
+    const qint64   radius   = viewParams->m_radius;
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
@@ -53,7 +53,9 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
     const bool showRelief = viewParams->m_showRelief;
 
-    if ( radius * radius > imgradius || viewParams->m_projection == Equirectangular) {
+    if ( radius * radius > imgradius
+         || viewParams->m_projection == Equirectangular )
+    {
         int yTop = 0;
         int yBottom = imgheight;
 

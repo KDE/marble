@@ -1,3 +1,13 @@
+2008-02-10  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix issue with integer overflow and some cleaning
+	* src/lib/GlobeScanlineTextureMapper.cpp (mapTexture): Use qint64
+	* src/lib/TextureColorizer.cpp (colorize): Use qint64
+	* src/lib/MarbleMap.cpp (drawFog): call globeCoversImage
+	* src/lib/VectorMap.cpp (sphericalCreateFromPntMap): use doubles
+	(sphericalPaintBase): use doubles
+	* src/lib/PlaceMarkLayout.cpp: cleaning
+
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
 	API change, and remove irritating qDebug()s

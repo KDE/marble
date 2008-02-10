@@ -858,21 +858,15 @@ void MarbleMap::drawFog( QPainter &painter )
     if ( d->m_viewParams.m_projection != Spherical)
         return;
 
-    // No use to draw the fog if it's not visible in the area.  The
-    // first test is a quick one that will catch all really big radii
-    // and prevent overflow in the real test.
-    if ( radius() > width() + height() )
-        return;
-    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+    // No use to draw the fog if it's not visible in the area. 
+    if ( globeCoversImage() )
         return;
 
-
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
+    int  imgWidth2  = width() / 2;
+    int  imgHeight2 = height() / 2;
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                           radius() );
+    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), radius() );
 
     // FIXME: Add a cosine relationship
     grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
@@ -888,8 +882,8 @@ void MarbleMap::drawFog( QPainter &painter )
     painter.setRenderHint( QPainter::Antialiasing, false );
 
     // FIXME: Cut out what's really needed
-    painter.drawEllipse( imageHalfWidth - radius(),
-                         imageHalfHeight - radius(),
+    painter.drawEllipse( imgWidth2  - radius(),
+                         imgHeight2 - radius(),
                          2 * radius(),
                          2 * radius() );
 
