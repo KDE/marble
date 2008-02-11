@@ -21,7 +21,12 @@
 #include <QtCore/QString>
 #include <QtCore/QList>
 #include <QtCore/QVector>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+//#include <QtCore/QTextStream>
+#include <QtCore/QStringList>
 #include <QtGui/QImage>
+#include <QtGui/QPainter>
 
 #include "Quaternion.h"
 
@@ -52,8 +57,8 @@ class TextureColorizer
     void colorize(ViewParams *viewParams);
 
  private:
-    static const uint  texturepalette[][512];
+    static uint texturepalette[16][512];
+    void generatePalette(const QString& seafile, const QString& landfile) const;
 };
-
 
 #endif

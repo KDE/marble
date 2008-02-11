@@ -19,14 +19,16 @@
 
 #include "global.h"
 #include "ViewParams.h"
-#include "texturepalette.cpp"
 
+uint TextureColorizer::texturepalette[16][512];
 
 TextureColorizer::TextureColorizer( const QString& seafile, 
                                     const QString& landfile )
 {
-    Q_UNUSED( seafile );
-    Q_UNUSED( landfile );
+//    Q_UNUSED( seafile );
+//    Q_UNUSED( landfile );
+
+   generatePalette(seafile, landfile);
 }
 
 void TextureColorizer::colorize(ViewParams *viewParams)
@@ -161,4 +163,68 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     }
 }
 
+void TextureColorizer::generatePalette(const QString& seafile, const QString& landfile) const
+{    
 
+    //Text copy/pasted from tools/palettegen.cpp 
+
+    QImage  *gradimg = new QImage( 256, 10, QImage::Format_RGB32 );
+
+    QStringList  filelist;
+    filelist << seafile << landfile;
+    QString  filename;
+
+    QPainter  painter(gradimg);
+    painter.setPen(Qt::NoPen);
+
+    for ( int j = 0; j < 16; ++j ) {
+  
+        int offset = 0;
+
+        foreach ( filename, filelist ) {
+	
+            QLinearGradient  gradient( 0, 0, 256, 0 );
+
+            QFile  file( filename );
+            file.open( QIODevice::ReadOnly );
+            QTextStream  stream( &file );  // read the data serialized from the file
+            QString  evalstrg;
+
+            while ( !stream.atEnd() ) {
+                stream >> evalstrg;
+                if ( !evalstrg.isEmpty() && evalstrg.contains( "=" ) ) {
+                    QString  colval = evalstrg.section( "=", 0, 0 );
+                    QString  colpos = evalstrg.section( "=", 1, 1 );
+                    gradient.setColorAt(colpos.toDouble(), QColor(colval));
+                }
+            }
+            painter.setBrush( gradient );
+            painter.drawRect( 0, 0, 256, 10 );	
+
+            int  alpha = j;
+
+            for ( int i = 0; i < 256; ++i) {
+
+                    QRgb  shadeColor = gradimg->pixel( i, 1 );
+                    QImage  shadeImage ( 256, 10, QImage::Format_RGB32 );
+                    QLinearGradient  shadeGradient( 0, 0, 256, 0 );
+                    shadeGradient.setColorAt(0.15, QColor(Qt::white));
+                    shadeGradient.setColorAt(0.496, shadeColor);
+                    shadeGradient.setColorAt(0.504, shadeColor);
+                    shadeGradient.setColorAt(0.75, QColor(Qt::black));
+                    QPainter  shadePainter(&shadeImage);
+                    shadePainter.setPen(Qt::NoPen);
+                    shadePainter.setBrush( shadeGradient );
+                    shadePainter.drawRect( 0, 0, 256, 10 );  
+                    int shadeIndex = 120 + alpha;
+//                    qDebug() << QString("Shade: %1").arg(shadeIndex);
+                    QRgb  palcol = shadeImage.pixel( shadeIndex, 1 );
+
+                // populate texturepalette[][]
+                texturepalette[j][offset + i] = (uint)palcol;
+            }
+
+            offset += 256;
+        }
+    }
+}

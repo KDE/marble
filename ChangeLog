@@ -1,3 +1,12 @@
+2008-02-11  Torsten Rahn  <rahn@kde.org>
+
+    * data/CMakeLists.txt:
+    * src/lib/TextureColorizer.{cpp,h}:
+    * src/lib/texturepalette.cpp: deleted
+
+    Patch by Ismael Asensio to make marble use the .leg files 
+    instead of using the hardcoded values in texturepalette.cpp.
+
 2008-02-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix issue with integer overflow and some cleaning
