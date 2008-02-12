@@ -208,13 +208,7 @@ Features:
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
 Internal structure:
- * New class MarbleMap that can paint a map on any QPainter             INGE
-    - Zoom                                                              done
-    - Resize                                                            done
-    - setProjection                                                     done
-    - other uses of d->viewParams                                       done
-    - create tiles dialog                                               done
-    - class doc for MarbleMap                                           --
+ * New class MarbleMap that can paint a map on any QPainter             DONE
  * Refactor KML to use QXmlStreamReader                                 ----
  * Make MarbleModel a real model and MarbleWidget a real view           ----
  * Make it possible to paint on whatever QPainter Marble is given       ----

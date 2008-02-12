@@ -65,18 +65,17 @@ class ClipPainter;
  *
  * FIXME: Change this description when we are done.
  *
- * This class can display a view of the earth or any other globe,
- * depending on which dataset is used.  The user can navigate the
- * globe using either a control widget, e.g. the MarbleControlBox, or
- * the mouse.  Only some aspects of the widget can be controlled by
- * the mouse.
+ * This class can paint a view of the earth or any other globe,
+ * depending on which dataset is used. It can be used to show the
+ * globe in a widget like MarbleWidget does, or on any other
+ * QPaintDevice.
  *
- * By clicking on the globe and moving the mouse, the position can be
- * changed.  The user can also zoom by using the scroll wheel of the
- * mouse in the widget. The zoom value is not tied to any units, but
- * is an abstract value without any physical meaning. A value around
- * 1000 shows the full globe in a normal-sized window. Higher zoom
- * values give a more zoomed-in view.
+ * The projection and other view parameters that control how MarbleMap
+ * paints the map is given through the class ViewParams. If the
+ * programmer wants to allow the user to control the map, he/she has
+ * to provide a way for the user to interact with it.  An example of
+ * this can be seen in the class MarbleWidgetInputHandler, that lets
+ * the user control a MarbleWidget that uses MarbleMap internally.
  *
  * The MarbleMap needs to be provided with a data model to
  * work. This model is contained in the MarbleModel class. The widget
@@ -87,25 +86,7 @@ class ClipPainter;
  * <b>placemarks</b> which can show points of interest, such as
  * cities, mountain tops or the poles.
  *
- * In addition to navigating with the mouse, you can also use it to
- * get information about items on the map. You can either click on a
- * placemark with the left mouse button or with the right mouse button
- * anywhere on the map.
- *
- * The left mouse button opens up a menu with all the placemarks
- * within a certain distance from the mouse pointer. When you choose
- * one item from the menu, Marble will open up a dialog window with
- * some information about the placemark and also try to connect to
- * Wikipedia to retrieve an article about it. If there is such an
- * article, you will get a mini-browser window with the article in a tab.
- *
- * The right mouse button controls a distance tool.  The distance tool
- * is implemented as a menu where you can choose to either create or
- * remove so called Measure Points. Marble will keep track of the
- * Measure Points and show the total distance in the upper left of the
- * widget.  Measure Points are shown on the map as a little white
- * cross.
- *
+ * @see MarbleWidget
  * @see MarbleControlBox
  * @see MarbleModel
  */

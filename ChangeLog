@@ -1,5 +1,10 @@
 2008-02-12  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix class documentation after the split widget -> widget + map
+	* src/lib/MarbleWidget.h: Fix class documentation
+	* src/lib/MarbleMap.h: Fix class documentation
+	The split is now completely DONE.
+	
 	Only show tile creation dialog in the Widget, not the Map
 	* src/lib/marbleMap.h (creatingTilesstart): removed
 	* src/lib/MarbleMap.cpp (construct): Initialize width, height here

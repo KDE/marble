@@ -66,8 +66,9 @@ class ClipPainter;
  * This widget displays a view of the earth or any other globe,
  * depending on which dataset is used.  The user can navigate the
  * globe using either a control widget, e.g. the MarbleControlBox, or
- * the mouse.  Only some aspects of the widget can be controlled by
- * the mouse.
+ * the mouse.  The mouse and keyboard control is done through a
+ * MarbleWidgetInputHandler. Only some aspects of the widget can be
+ * controlled by the mouse and/or keyboard.
  *
  * By clicking on the globe and moving the mouse, the position can be
  * changed.  The user can also zoom by using the scroll wheel of the
@@ -77,13 +78,13 @@ class ClipPainter;
  * values give a more zoomed-in view.
  *
  * The MarbleWidget needs to be provided with a data model to
- * work. This model is contained in the MarbleModel class. The widget
- * can also construct its own model if none is given to the
- * constructor.  This data model contains 3 separate datatypes:
- * <b>tiles</b> which provide the background, <b>vectors</b> which
- * provide things like country borders and coastlines and
- * <b>placemarks</b> which can show points of interest, such as
- * cities, mountain tops or the poles.
+ * work. This model is contained in the MarbleModel class, and it is
+ * painted by using a MarbleMap. The widget can also construct its own
+ * map and model if none is given to the constructor.  A MarbleModel
+ * contains 3 separate datatypes: <b>tiles</b> which provide the
+ * background, <b>vectors</b> which provide things like country
+ * borders and coastlines and <b>placemarks</b> which can show points
+ * of interest, such as cities, mountain tops or the poles.
  *
  * In addition to navigating with the mouse, you can also use it to
  * get information about items on the map. You can either click on a
@@ -105,6 +106,7 @@ class ClipPainter;
  * cross.
  *
  * @see MarbleControlBox
+ * @see MarbleMap
  * @see MarbleModel
  */
 
