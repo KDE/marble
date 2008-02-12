@@ -1,3 +1,11 @@
+2008-02-12  Inge Wallin  <inge@lysator.liu.se>
+
+	Only show tile creation dialog in the Widget, not the Map
+	* src/lib/marbleMap.h (creatingTilesstart): removed
+	* src/lib/MarbleMap.cpp (construct): Initialize width, height here
+	(construct): Remove connect() for signal creatingTilesStart 
+	(creatingTilesStart): removed
+
 2008-02-11  Torsten Rahn  <rahn@kde.org>
 
     * data/CMakeLists.txt:

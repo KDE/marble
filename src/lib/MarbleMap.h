@@ -778,27 +778,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setQuickDirty( bool enabled );
 
     /**
-     * @brief A slot that is called when the model starts to create new tiles.
-     * @param creator the tile creator object.
-     * @param name  the name of the created theme.
-     * @param description  a descriptive text that can be shown in a dialog.
-     * @see    creatingTilesProgress
-     *
-     * This function is connected to the models signal with the same
-     * name.  When the model needs to create a cache of tiles in
-     * several different resolutions, it will emit creatingTilesStart
-     * once with a name of the theme and a descriptive text.  The
-     * map can then pop up a dialog to explain why there is a
-     * delay.  The model will then call creatingTilesProgress several
-     * times until the parameter reaches 100 (100%), after which the
-     * creation process is finished.  After this there will be no more
-     * calls to creatingTilesProgress, and the poup dialog can then be
-     * closed.
-     */
-    void creatingTilesStart( TileCreator *creator, const QString& name, 
-			     const QString& description );
-
-    /**
      * @brief Update the map because the model changed.
      */
     void updateChangedMap();

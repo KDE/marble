@@ -39,7 +39,6 @@
 #include "FileViewModel.h"
 #include "GeoDataPoint.h"
 #include "GpxFileViewItem.h"
-#include "TileCreatorDialog.h"
 #include "HttpDownloadManager.h"
 #include "FileStoragePolicy.h"
 #include "gps/GpsLayer.h"
@@ -99,11 +98,6 @@ MarbleMap::MarbleMap()
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     //d->m_model = new MarbleModel( this );
 
-    // Due to usage in setActiveRegion these need to get 
-    // initialized before construct() gets called
-    d->m_width  = 0;
-    d->m_height = 0;
-
     d->m_model = new MarbleModel( this );
     construct();
 }
@@ -114,17 +108,16 @@ MarbleMap::MarbleMap(MarbleModel *model)
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
-    // Due to usage in setActiveRegion these need to get 
-    // initialized before construct() gets called
-    d->m_width  = 0;
-    d->m_height = 0;
-
     d->m_model = model;
     construct();
 }
 
 MarbleMap::~MarbleMap()
 {
+    // Some basic initializations.
+    d->m_width  = 0;
+    d->m_height = 0;
+
     setDownloadManager(NULL);
 
     // FIXME: Only delete if we created it ourselves 
@@ -139,11 +132,6 @@ void MarbleMap::construct()
 {
     // Some point that tackat defined. :-)
     setHome( -9.4, 54.8, 1050 );
-
-    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const
-QString&, const QString& ) ),
-             this,       SLOT( creatingTilesStart( TileCreator*, const
-QString&, const QString& ) ) );
 
     connect( d->m_model, SIGNAL( themeChanged( QString ) ),
                          SIGNAL( themeChanged( QString ) ) );
@@ -1219,16 +1207,6 @@ void MarbleMap::setQuickDirty( bool enabled )
         case Equirectangular:
             return;
     }
-}
-
-// This slot will called when the Globe starts to create the tiles.
-
-void MarbleMap::creatingTilesStart( TileCreator *creator, const QString &name, const QString &description )
-{
-    TileCreatorDialog dlg( creator, 0 );
-
-    dlg.setSummary( name, description );
-    dlg.exec();
 }
 
 
