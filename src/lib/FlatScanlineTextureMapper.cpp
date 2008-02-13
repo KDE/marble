@@ -62,8 +62,14 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
     //and what actually can be painted
-    yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
-    yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
+    if( viewParams->m_projection == Equirectangular ) {
+        yPaintedTop    = yTop = m_imageHeight / 2 - radius + yCenterOffset;
+        yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
+    }
+    else if( viewParams->m_projection == Mercator ) {
+        yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
+        yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
+    }
 
     if (yPaintedTop < 0)                yPaintedTop = 0;
     if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
