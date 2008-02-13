@@ -65,7 +65,7 @@ maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
 DESTINATION ${MARBLE_DATA_PATH}/maps/earth/plain)
 
-FILE (GLOB PNT_FILES mwbii/*.PNT)
+FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}
 DESTINATION ${MARBLE_DATA_PATH}/mwdbii)
