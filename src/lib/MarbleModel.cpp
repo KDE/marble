@@ -269,6 +269,10 @@ d->m_maptheme->tilePrefix() );
             case Equirectangular:
                 d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
                 break;
+            case Mercator:
+                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+                break;
+
         }
 //         else
 //             d->m_texmapper->setMapTheme( "maps/earth/"

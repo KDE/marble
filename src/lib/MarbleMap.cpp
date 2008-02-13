@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 //
 
 #include "MarbleMap.h"
@@ -684,6 +685,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
      }
  
      case Equirectangular:
+    {
          // Calculate translation of center point
          double centerLon, centerLat;
          d->m_viewParams.centerCoordinates(centerLon, centerLat);
@@ -691,9 +693,23 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
  
          x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
          y = (int)( height() / 2 + ( lat * DEG2RAD + centerLat ) * rad2Pixel );
- 
+
          return true;
-     }
+    }
+
+     case Mercator:
+    {
+         // Calculate translation of center point
+         double centerLon, centerLat;
+         d->m_viewParams.centerCoordinates(centerLon, centerLat);
+         double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
+ 
+         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
+         y = (int)( log( tan(lat) + 1 / cos(lat) ));
+
+         return true;
+    }
+    }
  
      return false;
 }
@@ -728,6 +744,7 @@ bool MarbleMap::geoCoordinates(const int x, const int y,
         break;
 
     case Equirectangular:
+    {
         // Calculate translation of center point
         double centerLon, centerLat;
         d->m_viewParams.centerCoordinates(centerLon, centerLat);
@@ -749,6 +766,32 @@ bool MarbleMap::geoCoordinates(const int x, const int y,
             noerr = true;
         }
         break;
+    }
+    case Mercator:
+    {
+        // Calculate translation of center point
+        double centerLon, centerLat;
+        d->m_viewParams.centerCoordinates(centerLon, centerLat);
+
+        int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
+        int yTop = imageHalfHeight - radius() + yCenterOffset;
+        int yBottom = yTop + 2*radius();
+        if ( y >= yTop && y < yBottom ) {
+            int const xPixels = x - imageHalfWidth;
+            int const yPixels = y - imageHalfHeight;
+
+            double const pixel2rad = M_PI / (2 * radius());
+
+            lat = atan( sinh( ((imageHalfHeight + yCenterOffset) - y) / (double)(2 * radius()) * M_PI ) );
+            lon = + xPixels * pixel2rad + centerLon;
+
+            while( lon > M_PI ) lon -= 2*M_PI;
+            while( lon < -M_PI ) lon += 2*M_PI;
+
+            noerr = true;
+        }
+        break;
+    }
     }
 
     if ( unit == GeoDataPoint::Degree ) {

@@ -21,8 +21,6 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
-// #define MERCATOR
-
 FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {
@@ -78,14 +76,12 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     float leftLon = + centerLon - ( rad2Pixel * m_imageWidth / 2 );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
-
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-#ifdef MERCATOR
-            lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)(2 * radius) * M_PI ) );
-#else
+        if( viewParams->m_projection == Equirectangular )
             lat = M_PI/2 - (y - yTop )* rad2Pixel;
-#endif
+        else if( viewParams->m_projection == Mercator )
+            lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)(2 * radius) * M_PI ) );
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
 

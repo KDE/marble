@@ -22,8 +22,8 @@
 
 enum Projection { 
     Spherical,
-    Equirectangular
-    // Mercator
+    Equirectangular,
+    Mercator
 };
 
 const double DEG2RAD = M_PI / 180.0;

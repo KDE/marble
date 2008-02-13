@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Carlos Licea <carlos.licea@kdemail.net>
 //
 
 #include "MeasureTool.h"
@@ -359,9 +360,9 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
         if( previousSign != currentSign && fabs(previousLon) + fabs(lon) > M_PI) {
             //FIXME:Fix the interpolation the problem is i think the (x - previousX) as is too wide
 //          It's based on y = y1 + (y2-y1)/(x2-x1)*(x-x1)
-//             interpolatedY= previousY + ( y - previousY ) /
-//                             ( x - previousX ) *
-//                                 ( imgrx + previousSign*2*radius - previousX );
+//            interpolatedY= previousY + ( y - previousY ) /
+//                                       ( 4*radius - fabs( x - previousX ) ) *
+//                                ( imgwidth / 2 - m_rad2Pixel * (m_centerLon - lon) + previousSign*2*radius - previousX );
             //This is temporal just to be able to commit
             interpolatedY= ( y + previousY ) / 2;
             distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel

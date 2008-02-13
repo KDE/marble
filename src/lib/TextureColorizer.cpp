@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 //
 
 #include "TextureColorizer.h"
@@ -56,12 +57,14 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     const bool showRelief = viewParams->m_showRelief;
 
     if ( radius * radius > imgradius
-         || viewParams->m_projection == Equirectangular )
+         || viewParams->m_projection == Equirectangular
+         || viewParams->m_projection == Mercator )
     {
         int yTop = 0;
         int yBottom = imgheight;
 
-        if( viewParams->m_projection == Equirectangular ) {
+        if( viewParams->m_projection == Equirectangular
+            || viewParams->m_projection == Mercator ) {
 
             // Calculate translation of center point
             double centerLon, centerLat;
