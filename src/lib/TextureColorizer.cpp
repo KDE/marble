@@ -71,8 +71,14 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             viewParams->centerCoordinates( centerLon, centerLat );
 
             int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);
-            yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
-            yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
+            if( viewParams->m_projection == Equirectangular ) {
+                yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
+                yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
+            }
+            else if( viewParams->m_projection == Mercator ) {
+                yTop = ( imgry - 2 * radius + yCenterOffset < 0)? 0 : imgry - 2 * radius + yCenterOffset;
+                yBottom = ( imgry + yCenterOffset + 2 * radius > imgheight )? imgheight : imgry + yCenterOffset + 2 * radius;
+            }
         }
 
         for (int y = yTop; y < yBottom; ++y) {
