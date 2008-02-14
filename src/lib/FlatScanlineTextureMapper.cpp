@@ -46,6 +46,9 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
                              / 2 - m_tilePosY);
 
+    // Calculate how many degrees are being represented per pixel.
+    const float rad2Pixel = M_PI / (float)( 2 * radius );
+
     int yTop;
     int yPaintedTop;
     int yPaintedBottom;
@@ -58,7 +61,18 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset =  (int)((float)( 2 * radius / M_PI) * centerLat );
+    int yCenterOffset = 0;
+    if( viewParams->m_projection == Equirectangular ) {
+        yCenterOffset = (int)( centerLat / rad2Pixel );
+    }
+    else if( viewParams->m_projection == Mercator ) {
+        if ( fabs( centerLat ) < atan( sinh( M_PI ) ) )
+            yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
+        else {
+            yCenterOffset = (int)(centerLat / fabs(centerLat)) * 2 * radius;
+            qDebug() << "Southpole?" << yCenterOffset * 180.0 / M_PI ;
+        }
+    }
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
     //and what actually can be painted
@@ -67,17 +81,14 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
     }
     else if( viewParams->m_projection == Mercator ) {
-        yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
-        yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
+        yPaintedTop    = yTop = m_imageHeight / 2 - 2 * ( radius + yCenterOffset );
+        yPaintedBottom        = m_imageHeight / 2 + 2 * ( radius + yCenterOffset );
     }
 
     if (yPaintedTop < 0)                yPaintedTop = 0;
     if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
-
-    // Calculate how many degrees are being represented per pixel.
-    const float rad2Pixel = M_PI / (float)( 2 * radius );
 
     float leftLon = + centerLon - ( rad2Pixel * m_imageWidth / 2 );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
