@@ -2300,7 +2300,7 @@ Criciúma	Santa Catarina	br	N	164,6	28.68°S	49.39°W
 Novocherkassk	Rostov	ru	N	164,6	47.42°N	40.08°E
 Comodoro Rivadavia	Chubut	ar	N	164,5	45.86°S	67.49°W
 Tartûs	Tartûs	sy	R	164,3	34.90°N	35.89°E
-Plzen	Plzenský	cz	R	164,2	49.75°N	13.37°E
+Plzeň	Plzeňský	cz	R	164,2	49.75°N	13.37°E
 Gadag	Karnataka	in	N	164,1	15.44°N	75.63°E
 Pátrai	Ahaia	gr	R	164	38.24°N	21.73°E
 La Serena	Coquimbo	cl	R	163,9	29.90°S	71.25°W
@@ -4025,7 +4025,7 @@ Lishu	Heilongjiang	cn	N	98,6	45.09°N	130.69°E
 Usolje-Sibirskoje	Irkutsk	ru	N	98,6	52.76°N	103.63°E
 Galmûnê	Amparai	lk	N	98,5	7.41°N	81.82°E
 Kâshîpur	Uttaranchal	in	N	98,5	29.22°N	78.96°E
-Cheské Budejovice	Jihocheský	cz	R	98,5	48.98°N	14.46°E
+České Budějovice	Jihočeský	cz	R	98,5	48.98°N	14.46°E
 Liling	Hunan	cn	N	98,5	27.67°N	113.49°E
 Gresik	Jawa Timur	id	N	98,5	7.16°S	112.66°E
 Midland	Texas	us	N	98,5	32.03°N	102.10°W
@@ -4097,7 +4097,7 @@ Nakhon Sawan	Nakhon Sawan	th	R	97,2	15.70°N	100.07°E
 Chaghcharân	Gawr	af	R	97,1	34.52°N	65.25°E
 Ourinhos	São Paulo	br	N	97,1	22.97°S	49.87°W
 ŽAyn Wissârah	Jilfah	dz	N	97,1	35.46°N	2.90°E
-Hradec Králové	Kralovéhradecký	cz	R	97,1	50.22°N	15.82°E
+Hradec Králové	Královéhradecký	cz	R	97,1	50.22°N	15.82°E
 Duyun	Guizhou	cn	N	97,1	26.27°N	107.52°E
 Bâgalkot	Karnataka	in	N	97	16.19°N	75.69°E
 Fort-de-France	Fort-de-France	mq	B	97	14.60°N	61.08°W
@@ -4152,7 +4152,7 @@ Giresun	Giresun	tr	R	96,2	40.92°N	38.39°E
 Jastrzebie-Zdrój	Slaskie	pl	N	96,2	49.99°N	18.59°E
 Ust-Ilimsk	Irkutsk	ru	N	96,2	58.00°N	102.66°E
 Pergamino	Buenos Aires	ar	N	96,1	33.90°S	60.57°W
-Ústí	Ustecký	cz	R	96,1	50.67°N	14.02°E
+Ústí nad Labem	Ústecký	cz	R	96,1	50.67°N	14.02°E
 Gillingham	England	gb	N	96,1	51.39°N	0.55°E
 Puerto Padre	Las Tunas	cu	N	96	21.20°N	76.60°W
 Gokalpur	Delhi	in	N	95,9	28.71°N	77.28°E
@@ -4654,7 +4654,7 @@ Nitra	Nitrianský	sk	R	87,1	48.31°N	18.08°E
 Jiaojiang	Zhejiang	cn	N	87,1	28.68°N	121.45°E
 Dhamtari	Chhattisgarh	in	N	87	20.71°N	81.55°E
 Plantation	Florida	us	N	87	26.13°N	80.26°W
-Havírov	Moravskoslezský	cz	N	87	49.79°N	18.43°E
+Havířov	Moravskoslezský	cz	N	87	49.79°N	18.43°E
 Yeongju	Kyeongsangbuk	kr	N	87	36.83°N	128.62°E
 Changqing	Shandong	cn	N	87	36.55°N	116.73°E
 Yumen	Gansu	cn	N	86,9	39.83°N	97.73°E
@@ -5770,7 +5770,7 @@ al-Qâsim	Bâbil	iq	N	71,7	32.30°N	44.68°E
 Silifke	Içel	tr	N	71,7	36.37°N	33.93°E
 Alytus	Alytaus	lt	R	71,7	54.39°N	24.05°E
 Mackay	Queensland	au	N	71,7	21.14°S	149.18°E
-Kladno	Stredocheský	cz	N	71,7	50.15°N	14.09°E
+Kladno	Středočeský	cz	N	71,7	50.15°N	14.09°E
 Liuhe	Jilin	cn	N	71,7	42.27°N	125.72°E
 Dasmariñas	Southern Tagalog	ph	N	71,7	14.33°N	120.93°E
 Chunan	Miaoli	tw	N	71,7	24.70°N	120.92°E
@@ -6172,7 +6172,7 @@ Eha Amufu	Enugu	ng	N	67,7	6.66°N	7.75°E
 Pedro Juan Caballero	Amambay	py	R	67,7	22.53°S	55.75°W
 Bismil	Diyarbakir	tr	N	67,7	37.85°N	40.67°E
 Torez	Donets'ka	ua	N	67,7	48.03°N	38.61°E
-Most	Ustecký	cz	N	67,7	50.51°N	13.63°E
+Most	Ústecký	cz	N	67,7	50.51°N	13.63°E
 Patûâkhâlî	Patûâkhâlî	bd	R	67,6	22.36°N	90.24°E
 Nioro	Kayes	ml	N	67,6	15.23°N	9.59°W
 Lorain	Ohio	us	N	67,6	41.44°N	82.18°W
@@ -7981,7 +7981,7 @@ Mao	Valverde	do	R	52,9	19.56°N	71.08°W
 Ivantejevka	Moskovskaja Oblast	ru	N	52,9	52.27°N	49.09°E
 Çarsamba	Samsun	tr	N	52,9	41.20°N	36.73°E
 Sirs-al-Layyânah	al-Minûfîyah	eg	N	52,9	30.43°N	30.98°E
-Dechín	Ustecký	cz	N	52,9	50.78°N	14.19°E
+Děčín	Ústecký	cz	N	52,9	50.78°N	14.19°E
 Shoreline	Washington	us	N	52,9	47.75°N	122.36°W
 Ullâl	Karnataka	in	N	52,8	12.80°N	74.85°E
 Funza	Cundinamarca	co	N	52,8	4.71°N	74.21°W
@@ -8170,7 +8170,7 @@ al-Musayyib	Bâbil	iq	N	51,5	32.78°N	44.30°E
 al-Jubayhah	ŽAmmân	jo	N	51,5	32.02°N	35.86°E
 al-ŽAfrûn	Blîdah	dz	N	51,5	36.47°N	2.61°E
 Spassk-Dalnij	Primorje	ru	N	51,5	44.60°N	132.81°E
-Chomutov	Ustecký	cz	N	51,5	50.46°N	13.39°E
+Chomutov	Ústecký	cz	N	51,5	50.46°N	13.39°E
 Rowland Heights	California	us	N	51,5	33.98°N	117.89°W
 Tantan	Guelmim	ma	N	51,5	28.43°N	11.10°W
 Thai Binh	Dong Bang Song Hong	vn	N	51,5	20.45°N	106.34°E
@@ -8270,7 +8270,7 @@ Kobryn	Brèst	by	N	50,8	52.21°N	24.35°E
 Jûrmala	Jûrmala City	lv	R	50,8	56.98°N	23.76°E
 Birwâghîyah	Midyah	dz	N	50,8	36.14°N	2.91°E
 Nankoku	Kôchi	jp	N	50,8	33.58°N	133.64°E
-Teplice	Ustecký	cz	N	50,8	50.65°N	13.82°E
+Teplice	Ústecký	cz	N	50,8	50.65°N	13.82°E
 Heidenheim	Baden-Württemberg	de	N	50,8	48.68°N	10.14°E
 Évreux	Eure	fr	R	50,8	49.03°N	1.14°E
 Tacarigua	Carabobo	ve	N	50,7	10.10°N	67.92°W
@@ -8375,7 +8375,7 @@ al-Habbânîyah	al-Anbâr	iq	N	50,1	33.39°N	43.57°E
 Mukono	Central	ug	N	50,1	0.36°N	32.76°E
 Alexandria	Teleorman	ro	N	50,1	43.99°N	25.34°E
 Pulawy	Lubelskie	pl	N	50,1	51.43°N	21.98°E
-Jihlava	Vysochina	cz	R	50,1	49.40°N	15.58°E
+Jihlava	Vysočina	cz	R	50,1	49.40°N	15.58°E
 Tokoname	Aichi	jp	N	50,1	34.90°N	136.84°E
 Meinung	Kaohsiung Hsien	tw	N	50,1	22.90°N	120.53°E
 Vigan	Ilocos	ph	N	50,1	17.56°N	120.37°E
@@ -8708,10 +8708,10 @@ Ramhormoz	Khûzestân	ir	N	47,9	31.27°N	49.62°E
 Pedro Leopoldo	Minas Gerais	br	N	47,9	19.61°S	44.04°W
 Shepetivka	Khmel'nyts'ka	ua	N	47,9	50.19°N	27.08°E
 Krosno	Podkarpackie	pl	N	47,9	49.70°N	21.76°E
-Prerov	Olomoucký	cz	N	47,9	49.48°N	17.50°E
+Přerov	Olomoucký	cz	N	47,9	49.48°N	17.50°E
 Nysa	Opolskie	pl	N	47,9	50.48°N	17.34°E
 Sundsvall	Västernorrland	se	N	47,9	62.40°N	17.33°E
-Prostejov	Olomoucký	cz	N	47,9	49.48°N	17.12°E
+Prostějov	Olomoucký	cz	N	47,9	49.48°N	17.12°E
 Azusa	California	us	N	47,9	34.14°N	117.91°W
 Jarbah Mîdûn	Madanîyîn	tn	N	47,9	33.82°N	11.00°E
 Ban Phaeo	Samut Sakhon	th	N	47,9	13.58°N	100.12°E
@@ -9129,7 +9129,7 @@ Mozhga	Udmurtija	ru	N	45,4	56.45°N	52.19°E
 Beveren	Oost-Vlaanderen	be	N	45,4	51.22°N	4.25°E
 Parys	Free State	za	N	45,4	26.91°S	27.46°E
 Dimitrovgrad	Haskovo	bg	N	45,4	42.06°N	25.61°E
-Jablonec	Liberecký	cz	N	45,4	50.73°N	15.16°E
+Jablonec nad Nisou	Liberecký	cz	N	45,4	50.73°N	15.16°E
 Hoyerswerda	Sachsen	de	N	45,4	51.44°N	14.24°E
 ŽAyn-at-Turk	Wahrân	dz	N	45,4	35.74°N	0.77°W
 Stade	Niedersachsen	de	N	45,3	53.61°N	9.46°E
@@ -9284,7 +9284,7 @@ Guarabira	Paraíba	br	N	44,5	6.86°S	35.49°W
 Sieradz	Lódzkie	pl	N	44,5	51.60°N	18.74°E
 Wejherowo	Pomorskie	pl	N	44,5	54.60°N	18.23°E
 Arona	Santa Cruz de Tenerife	es	N	44,5	28.09°N	16.67°W
-Mladá Boleslav	Stredocheský	cz	N	44,5	50.42°N	14.90°E
+Mladá Boleslav	Středočeský	cz	N	44,5	50.42°N	14.90°E
 Paternò	Sicilia	it	N	44,5	37.57°N	14.90°E
 Casalnuovo di Napoli	Campania	it	N	44,5	40.90°N	14.28°E
 Kainan	Wakayama	jp	N	44,5	34.15°N	135.21°E
@@ -10508,7 +10508,7 @@ Nâsir	AŽâlî-an-Nîl	sd	N	38,7	8.62°N	33.04°E
 Wanganui	Manawatu-Wanganui	nz	N	38,7	39.93°S	175.03°E
 Kailua	Hawaii	us	N	38,7	21.41°N	157.75°W
 Eisenhüttenstadt	Brandenburg	de	N	38,7	52.16°N	14.62°E
-Cheská Lípa	Liberecký	cz	N	38,7	50.69°N	14.53°E
+Česká Lípa	Liberecký	cz	N	38,7	50.69°N	14.53°E
 Parkway-South Sacramento	California	us	N	38,7	38.51°N	121.45°W
 Valladolid	Yucatán	mx	N	38,6	20.67°N	88.20°W
 Jhâ Jhâ	Bihar	in	N	38,6	24.77°N	86.37°E
@@ -10562,7 +10562,7 @@ Konakovo	Tver	ru	N	38,5	56.71°N	36.77°E
 ŽIzbat-al-Burj	Dumyât	eg	N	38,5	31.50°N	31.83°E
 Montrouge	Hauts-de-Seine	fr	N	38,5	48.81°N	2.32°E
 Brzeg	Opolskie	pl	N	38,5	50.85°N	17.47°E
-Trebích	Vysochina	cz	N	38,5	49.22°N	15.87°E
+Třebíč	Vysočina	cz	N	38,5	49.22°N	15.87°E
 Sôma	Fukushima	jp	N	38,5	37.80°N	140.92°E
 Minakuchi	Shiga	jp	N	38,5	34.97°N	136.17°E
 Hitoyoshi	Kumamoto	jp	N	38,5	32.21°N	130.77°E
@@ -10654,7 +10654,7 @@ Dej	Cluj	ro	N	38,1	47.15°N	23.89°E
 Knysna	Western Cape	za	N	38,1	34.03°S	23.06°E
 Berekum	Brong-Ahafo	gh	N	38,1	7.45°N	2.59°W
 Walkden	England	gb	N	38,1	53.52°N	2.40°W
-Trinec	Moravskoslezský	cz	N	38,1	49.69°N	18.66°E
+Třinec	Moravskoslezský	cz	N	38,1	49.69°N	18.66°E
 Hongseong	Chungcheongnam	kr	N	38,1	36.60°N	126.66°E
 Zuwârat	Tiris Zammûr	mr	R	38,1	22.73°N	12.49°W
 Sumber	Jawa Barat	id	N	38,1	6.75°S	108.48°E
@@ -11031,7 +11031,7 @@ Minsk Mazowiecki	Mazowieckie	pl	N	36,7	52.18°N	21.56°E
 Buinan	Blîdah	dz	N	36,7	36.54°N	2.98°E
 Miranda de Ebro	Burgos	es	N	36,7	42.69°N	2.95°W
 Bijeljina	Republika Srpska	ba	N	36,7	44.76°N	19.22°E
-Tábor	Jihocheský	cz	N	36,7	49.42°N	14.66°E
+Tábor	Jihočeský	cz	N	36,7	49.42°N	14.66°E
 Caltagirone	Sicilia	it	N	36,7	37.24°N	14.51°E
 Lake Oswego	Oregon	us	N	36,7	45.41°N	122.70°W
 Antiguo Cuscatlán	La Libertad	sv	N	36,6	13.68°N	89.23°W
@@ -11363,7 +11363,7 @@ Livry-Gargan	Seine-Saint-Denis	fr	N	35,6	48.92°N	2.54°E
 Noisy-le-Sec	Seine-Saint-Denis	fr	N	35,6	48.89°N	2.46°E
 Lanciano	Abruzzo	it	N	35,6	42.23°N	14.37°E
 Tsuru	Yamanashi	jp	N	35,6	35.57°N	138.91°E
-Pribram	Stredocheský	cz	N	35,6	49.69°N	13.99°E
+Příbram	Středočeský	cz	N	35,6	49.69°N	13.99°E
 Heunghae	Kyeongsangbuk	kr	N	35,6	36.10°N	129.34°E
 Hwawon	Taegu	kr	N	35,6	35.79°N	128.47°E
 Claremont	California	us	N	35,6	34.12°N	117.72°W
@@ -12475,7 +12475,7 @@ Yakoma	Équateur	cd	N	32,1	4.11°N	22.44°E
 Pontault-Combault	Seine-et-Marne	fr	N	32,1	48.79°N	2.61°E
 Franconville	Val-d'Oise	fr	N	32,1	48.98°N	2.22°E
 Ostuni	Puglia	it	N	32,1	40.73°N	17.56°E
-Trutnov	Kralovéhradecký	cz	N	32,1	50.57°N	15.90°E
+Trutnov	Královéhradecký	cz	N	32,1	50.57°N	15.90°E
 Frattamaggiore	Campania	it	N	32,1	40.94°N	14.27°E
 Otsuki	Yamanashi	jp	N	32,1	35.62°N	138.93°E
 Kisogawa	Aichi	jp	N	32,1	35.35°N	136.78°E
@@ -13175,7 +13175,7 @@ Olupona	Osun	ng	N	30,1	7.60°N	4.18°E
 Görele	Giresun	tr	N	30,1	41.03°N	39.02°E
 Mayurnu	Sinnâr	sd	N	30,1	13.42°N	33.65°E
 Alloa	Scotland	gb	N	30,1	56.13°N	3.79°W
-Kolín	Stredocheský	cz	N	30,1	50.03°N	15.19°E
+Kolín	Středočeský	cz	N	30,1	50.03°N	15.19°E
 Santa Maria Capua Vetere	Campania	it	N	30,1	41.09°N	14.26°E
 Nitta	Gumma	jp	N	30,1	36.30°N	139.31°E
 Tosa	Kôchi	jp	N	30,1	33.50°N	133.44°E
@@ -13225,7 +13225,7 @@ Bibai	Hokkaido	jp	N	30	43.33°N	141.86°E
 Aberpura	Papua	id	N	30	2.63°S	140.58°E
 Kasama	Ibaraki	jp	N	30	36.38°N	140.25°E
 Mugnano di Napoli	Campania	it	N	30	40.92°N	14.20°E
-Písek	Jihocheský	cz	N	30	49.31°N	14.14°E
+Písek	Jihočeský	cz	N	30	49.31°N	14.14°E
 Shimamoto	Ôsaka	jp	N	30	34.86°N	135.65°E
 Kaita	Hiroshima	jp	N	30	34.37°N	132.53°E
 Hayang	Kyeongsangbuk	kr	N	30	35.91°N	128.82°E
@@ -13623,8 +13623,8 @@ Leioa	Vizcaya	es	N	29,1	43.33°N	3.00°W
 Viljejka	Minskaja Voblasts'	by	N	29,1	54.49°N	26.91°E
 Darwen	England	gb	N	29,1	53.70°N	2.48°W
 Aurillac	Cantal	fr	R	29,1	44.92°N	2.43°E
-Kromerízh	Zlínský	cz	N	29,1	49.30°N	17.38°E
-Shumperk	Olomoucký	cz	N	29,1	49.97°N	16.97°E
+Kroměříž	Zlínský	cz	N	29,1	49.30°N	17.38°E
+Šumperk	Olomoucký	cz	N	29,1	49.97°N	16.97°E
 Tarui	Gifu	jp	N	29,1	35.37°N	136.53°E
 MacMinnville	Oregon	us	N	29,1	45.21°N	123.19°W
 Vittorio Veneto	Veneto	it	N	29,1	45.99°N	12.29°E
@@ -14232,7 +14232,7 @@ Nowy Dwór Mazowiecki	Mazowieckie	pl	N	27,5	52.43°N	20.71°E
 Villeneuve-Saint-Georges	Val-de-Marne	fr	N	27,5	48.74°N	2.45°E
 Kidsgrove	England	gb	N	27,5	53.09°N	2.26°W
 Palaiseau	Essonne	fr	N	27,5	48.73°N	2.25°E
-Valashské Meziríchí	Zlínský	cz	N	27,5	49.48°N	17.97°E
+Valašské Meziříčí	Zlínský	cz	N	27,5	49.48°N	17.97°E
 Putignano	Puglia	it	N	27,5	40.86°N	17.11°E
 Ninohe	Iwate	jp	N	27,5	40.28°N	141.31°E
 Niscemi	Sicilia	it	N	27,5	37.16°N	14.38°E
@@ -14272,7 +14272,7 @@ Queanbeyan	New South Wales	au	N	27,4	35.35°S	149.22°E
 Rumoi	Hokkaido	jp	N	27,4	43.94°N	141.65°E
 Tono	Iwate	jp	N	27,4	39.34°N	141.53°E
 Sant'Anastasia	Campania	it	N	27,4	40.87°N	14.40°E
-Litvínov	Ustecký	cz	N	27,4	50.61°N	13.60°E
+Litvínov	Ústecký	cz	N	27,4	50.61°N	13.60°E
 Atascadero	California	us	N	27,4	35.49°N	120.69°W
 Mörön	Hövsgöl	mn	R	27,4	49.64°N	100.15°E
 Königsbrunn	Bayern	de	N	27,4	48.28°N	10.89°E
@@ -14399,7 +14399,7 @@ Winsford	England	gb	N	27,1	53.19°N	2.55°W
 Premià de Mar	Barcelona	es	N	27,1	41.50°N	2.38°E
 Chatou	Yvelines	fr	N	27,1	48.89°N	2.14°E
 Blenheim	Marlborough	nz	R	27,1	41.53°S	173.96°E
-Nový Jichín	Moravskoslezský	cz	N	27,1	49.60°N	17.99°E
+Nový Jičín	Moravskoslezský	cz	N	27,1	49.60°N	17.99°E
 Cranbourne	Victoria	au	N	27,1	38.11°S	145.27°E
 Yahaba	Iwate	jp	N	27,1	39.61°N	141.15°E
 Swakopmund	Erongo	na	N	27,1	22.67°S	14.52°E
@@ -14537,9 +14537,9 @@ Borsa	Maramures	ro	N	26,8	47.65°N	24.67°E
 Kópavogur	Höfuðborgarsvæði	is	N	26,8	64.12°N	21.92°W
 Eibar	Guipúzcoa	es	N	26,8	43.19°N	2.45°W
 Timaru	Canterbury	nz	N	26,8	44.38°S	171.22°E
-Uherské Hradishte	Zlínský	cz	N	26,8	49.08°N	17.44°E
+Uherské Hradiště	Zlínský	cz	N	26,8	49.08°N	17.44°E
 Hodonín	Jihomoravský	cz	N	26,8	48.86°N	17.12°E
-Breclav	Jihomoravský	cz	N	26,8	48.76°N	16.89°E
+Břeclav	Jihomoravský	cz	N	26,8	48.76°N	16.89°E
 Aci Catena	Sicilia	it	N	26,8	37.60°N	15.14°E
 Nogi	Tochigi	jp	N	26,8	36.24°N	139.73°E
 Kasakake	Gumma	jp	N	26,8	36.39°N	139.28°E
@@ -15026,7 +15026,7 @@ Ogre	Ogres	lv	R	25,8	56.81°N	24.61°E
 Villiers-sur-Marne	Val-de-Marne	fr	N	25,8	48.84°N	2.55°E
 Villemomble	Seine-Saint-Denis	fr	N	25,8	48.89°N	2.50°E
 Charenton-le-Pont	Val-de-Marne	fr	N	25,8	48.82°N	2.41°E
-Cheský Teshín	Moravskoslezský	cz	N	25,8	49.75°N	18.62°E
+Český Těšín	Moravskoslezský	cz	N	25,8	49.75°N	18.62°E
 Dubnica	Trenčianský	sk	N	25,8	48.97°N	18.18°E
 Vallentuna	Stockholm	se	N	25,8	59.54°N	18.08°E
 Krnov	Moravskoslezský	cz	N	25,8	50.09°N	17.68°E
@@ -15576,7 +15576,7 @@ Pierrefitte-sur-Seine	Seine-Saint-Denis	fr	N	24,7	48.96°N	2.36°E
 Hermanus	Western Cape	za	N	24,7	34.41°S	19.23°E
 Nuku'alofa	Tongatapu	to	B	24,7	21.14°S	175.22°W
 Hobara	Fukushima	jp	N	24,7	37.82°N	140.55°E
-Litomerice	Ustecký	cz	N	24,7	50.54°N	14.12°E
+Litoměřice	Ústecký	cz	N	24,7	50.54°N	14.12°E
 Kamojima	Tokushima	jp	N	24,7	34.07°N	134.35°E
 Central Okanagan	British Columbia	ca	N	24,7	50.03°N	119.87°W
 San Fernando	California	us	N	24,7	34.29°N	118.43°W
@@ -15719,8 +15719,8 @@ Manica	Manica	mz	N	24,4	18.97°S	32.88°E
 Bois-Colombes	Hauts-de-Seine	fr	N	24,4	48.92°N	2.27°E
 Wagrowiec	Wielkopolskie	pl	N	24,4	52.81°N	17.20°E
 Bialogard	Zachodnio-Pomorskie	pl	N	24,4	54.01°N	15.98°E
-Zhd'ár	Vysochina	cz	N	24,4	49.56°N	15.93°E
-Havlíchkuv Brod	Vysochina	cz	N	24,4	49.61°N	15.58°E
+Žďár nad Sázavou	Vysočina	cz	N	24,4	49.56°N	15.93°E
+Havlíčkův Brod	Vysočina	cz	N	24,4	49.61°N	15.58°E
 Whyalla	South Australia	au	N	24,4	33.03°S	137.57°E
 Miwa	Aichi	jp	N	24,4	35.20°N	136.77°E
 Ebino	Miyazaki	jp	N	24,4	32.05°N	130.84°E
@@ -16155,7 +16155,7 @@ Comanesti	Bacau	ro	N	23,6	46.43°N	26.45°E
 Hajdúszoboszló	Hajdú-Bihar	hu	N	23,6	47.45°N	21.40°E
 Hindley	England	gb	N	23,6	53.54°N	2.59°W
 Frome	England	gb	N	23,6	51.24°N	2.33°W
-Koprivnice	Moravskoslezský	cz	N	23,6	49.60°N	18.14°E
+Kopřivnice	Moravskoslezský	cz	N	23,6	49.60°N	18.14°E
 Noicattaro	Puglia	it	N	23,6	41.04°N	16.98°E
 Ouesso	Sangha	cg	R	23,6	1.61°N	16.05°E
 Armidale	New South Wales	au	N	23,6	30.51°S	151.66°E
@@ -16229,7 +16229,7 @@ Kolo	Wielkopolskie	pl	N	23,5	52.20°N	18.64°E
 Hlohovec	Trnavský	sk	N	23,5	48.44°N	17.80°E
 Bihoro	Hokkaido	jp	N	23,5	43.83°N	144.10°E
 Ago	Mie	jp	N	23,5	34.33°N	136.82°E
-Strakonice	Jihocheský	cz	N	23,5	49.26°N	13.91°E
+Strakonice	Jihočeský	cz	N	23,5	49.26°N	13.91°E
 Portogruaro	Veneto	it	N	23,5	45.79°N	12.83°E
 Seria	Belait	bn	N	23,5	4.61°N	114.28°E
 Lehi	Utah	us	N	23,5	40.40°N	111.85°W
@@ -16470,7 +16470,7 @@ San Cataldo	Sicilia	it	N	23,1	37.50°N	14.00°E
 Osawano	Toyama	jp	N	23,1	36.58°N	137.21°E
 Shiga	Shiga	jp	N	23,1	35.19°N	135.92°E
 Ogôri	Yamaguchi	jp	N	23,1	34.09°N	131.40°E
-Klatovy	Plzenský	cz	N	23,1	49.40°N	13.29°E
+Klatovy	Plzeňský	cz	N	23,1	49.40°N	13.29°E
 Valinda	California	us	N	23,1	34.04°N	117.93°W
 Fountain Hills	Arizona	us	N	23,1	33.61°N	111.74°W
 Geidam	Yobe	ng	N	23,1	12.89°N	11.93°E
@@ -16704,7 +16704,7 @@ Basankusu	Équateur	cd	N	22,7	1.22°N	19.79°E
 Szentendre	Pest	hu	N	22,7	47.70°N	19.05°E
 Kushiro	Hokkaido	jp	N	22,7	43.00°N	144.48°E
 Hiraka	Aomori	jp	N	22,7	40.59°N	140.55°E
-Jindrichuv Hradec	Jihocheský	cz	N	22,7	49.15°N	14.99°E
+Jindřichův Hradec	Jihočeský	cz	N	22,7	49.15°N	14.99°E
 Kasamatsu	Gifu	jp	N	22,7	35.38°N	136.77°E
 Saori	Aichi	jp	N	22,7	35.20°N	136.74°E
 Shido	Kagawa	jp	N	22,7	34.32°N	134.17°E
@@ -16815,7 +16815,7 @@ Voorschoten	Zuid-Holland	nl	N	22,5	52.14°N	4.45°E
 Ubaitaba	Bahia	br	N	22,5	14.30°S	39.33°W
 Tucano	Bahia	br	N	22,5	10.97°S	38.79°W
 Tinyah	Bumardas	dz	N	22,5	36.73°N	3.54°E
-Vyshkov	Jihomoravský	cz	N	22,5	49.28°N	17.00°E
+Vyškov	Jihomoravský	cz	N	22,5	49.28°N	17.00°E
 Luban	Dolnoslaskie	pl	N	22,5	51.12°N	15.28°E
 Motomiya	Fukushima	jp	N	22,5	37.52°N	140.40°E
 Amstetten	Niederösterreich	at	N	22,5	48.13°N	14.86°E
@@ -17364,7 +17364,7 @@ Pampierstad	North West	za	N	21,6	27.78°S	24.68°E
 Várpalota	Veszprém	hu	N	21,6	47.20°N	18.14°E
 Acquaviva delle Fonti	Puglia	it	N	21,6	40.89°N	16.84°E
 Icod de los Vinos	Santa Cruz de Tenerife	es	N	21,6	28.36°N	16.70°W
-Náchod	Kralovéhradecký	cz	N	21,6	50.42°N	16.17°E
+Náchod	Královéhradecký	cz	N	21,6	50.42°N	16.17°E
 Birkirkara	Outer Harbour	mt	R	21,6	35.90°N	14.46°E
 Roseto degli Abruzzi	Abruzzo	it	N	21,6	42.66°N	14.02°E
 Kishigawa	Wakayama	jp	N	21,6	34.20°N	135.31°E
@@ -17498,7 +17498,7 @@ Heinola	Päijät-Häme	fi	N	21,4	61.21°N	26.03°E
 Botevgrad	Sofijska oblast	bg	N	21,4	42.92°N	23.78°E
 Droitwich	England	gb	N	21,4	52.26°N	2.16°W
 Rawicz	Wielkopolskie	pl	N	21,4	51.61°N	16.86°E
-Kutná Hora	Stredocheský	cz	N	21,4	49.95°N	15.27°E
+Kutná Hora	Středočeský	cz	N	21,4	49.95°N	15.27°E
 Tôbetsu	Hokkaido	jp	N	21,4	43.21°N	141.52°E
 Obanazawa	Yamagata	jp	N	21,4	38.60°N	140.40°E
 Yechon	Kyeongsangbuk	kr	N	21,4	36.65°N	128.45°E
@@ -17703,7 +17703,7 @@ Kasongo-Lunda	Bandundu	cd	N	21,1	6.48°S	16.83°E
 Takanosu	Akita	jp	N	21,1	40.23°N	140.37°E
 Puerto del Rosario	Las Palmas	es	N	21,1	28.49°N	13.86°W
 Gaeta	Lazio	it	N	21,1	41.22°N	13.56°E
-Jirkov	Ustecký	cz	N	21,1	50.50°N	13.44°E
+Jirkov	Ústecký	cz	N	21,1	50.50°N	13.44°E
 Puan	Chollabuk	kr	N	21,1	35.72°N	126.74°E
 Cholan	Miaoli	tw	N	21,1	24.32°N	120.82°E
 Vänersborg	Västra Götaland	se	N	21,1	58.37°N	12.33°E
@@ -18430,7 +18430,7 @@ Vico Equense	Campania	it	N	20	40.67°N	14.42°E
 Ryûyô	Shizuoka	jp	N	20	34.67°N	137.81°E
 Toyoura	Yamaguchi	jp	N	20	34.13°N	130.91°E
 Hirokawa	Fukuoka	jp	N	20	33.24°N	130.55°E
-Zatec	Ustecký	cz	N	20	50.33°N	13.54°E
+Žatec	Ústecký	cz	N	20	50.33°N	13.54°E
 Hohen Neuendorf	Brandenburg	de	N	20	52.67°N	13.27°E
 Colleferro	Lazio	it	N	20	41.74°N	12.98°E
 Casa de Oro-Mount Helix	California	us	N	20	32.77°N	116.94°W
@@ -19077,7 +19077,7 @@ Plettenberg Bay	Western Cape	za	N	19,1	34.05°S	23.37°E
 Pultusk	Mazowieckie	pl	N	19,1	52.71°N	21.09°E
 Saint-Mandé	Val-de-Marne	fr	N	19,1	48.84°N	2.40°E
 Kawanishi	Yamagata	jp	N	19,1	38.00°N	140.05°E
-Melník	Stredocheský	cz	N	19,1	50.36°N	14.46°E
+Mělník	Středočeský	cz	N	19,1	50.36°N	14.46°E
 Aizubange	Fukushima	jp	N	19,1	37.56°N	139.82°E
 Haibara	Nara	jp	N	19,1	34.53°N	135.95°E
 Nachikatsuura	Wakayama	jp	N	19,1	33.62°N	135.94°E
@@ -19987,7 +19987,7 @@ Hlybokaje	Vicebsk	by	N	17,9	55.14°N	27.68°E
 Warrenton	Northern Cape	za	N	17,9	28.12°S	24.84°E
 Mezökövesd	Borsod-Abaúj-Zemplén	hu	N	17,9	47.81°N	20.58°E
 Achères	Yvelines	fr	N	17,9	48.97°N	2.06°E
-Rozhnov	Zlínský	cz	N	17,9	49.47°N	18.13°E
+Rožnov pod Radhoštěm	Zlínský	cz	N	17,9	49.47°N	18.13°E
 Pleszew	Wielkopolskie	pl	N	17,9	51.91°N	17.78°E
 Boda	Lobaye	cf	N	17,9	4.32°N	17.47°E
 San Giovanni in Fiore	Calabria	it	N	17,9	39.26°N	16.69°E
@@ -20222,8 +20222,8 @@ Velika Kladusha	Federacija Bosna i Hercegovina	ba	N	17,6	45.19°N	15.81°E
 Pozzallo	Sicilia	it	N	17,6	36.73°N	14.83°E
 Kostrzyn	Lubuskie	pl	N	17,6	52.59°N	14.65°E
 Mosta	Northern	mt	R	17,6	35.91°N	14.43°E
-Kralupy nad Vltavou	Stredocheský	cz	N	17,6	50.25°N	14.31°E
-Beroun	Stredocheský	cz	N	17,6	49.97°N	14.07°E
+Kralupy nad Vltavou	Středočeský	cz	N	17,6	50.25°N	14.31°E
+Beroun	Středočeský	cz	N	17,6	49.97°N	14.07°E
 Minturno	Lazio	it	N	17,6	41.28°N	13.74°E
 Port Loko	Northern	sl	N	17,6	8.77°N	12.80°W
 Mühldorf	Bayern	de	N	17,6	48.26°N	12.52°E
@@ -20389,7 +20389,7 @@ Kinkala	Pool	cg	R	17,4	4.35°S	14.76°E
 Slubice	Lubuskie	pl	N	17,4	52.36°N	14.57°E
 Kavalerovo	Primorje	ru	N	17,4	44.27°N	135.05°E
 Ushibuka	Kumamoto	jp	N	17,4	32.20°N	130.02°E
-Kadan	Ustecký	cz	N	17,4	50.38°N	13.27°E
+Kadaň	Ústecký	cz	N	17,4	50.38°N	13.27°E
 Kleinmachnow	Brandenburg	de	N	17,4	52.42°N	13.21°E
 Newport Hills	Washington	us	N	17,4	47.55°N	122.17°W
 Redmond	Oregon	us	N	17,4	44.26°N	121.17°W
@@ -20895,7 +20895,7 @@ La Baule-Escoublac	Loire-Atlantique	fr	N	16,8	47.29°N	2.40°W
 Chilly-Mazarin	Essonne	fr	N	16,8	48.71°N	2.31°E
 Tolosa	Guipúzcoa	es	N	16,8	43.14°N	2.08°W
 Trzcianka	Wielkopolskie	pl	N	16,8	53.04°N	16.46°E
-Cheská Trebová	Pardubický	cz	N	16,8	49.91°N	16.44°E
+Česká Třebová	Pardubický	cz	N	16,8	49.91°N	16.44°E
 Médina	Kaolack	sn	N	16,8	13.61°N	15.59°W
 Gryfice	Zachodnio-Pomorskie	pl	N	16,8	53.92°N	15.19°E
 Carlentini	Sicilia	it	N	16,8	37.27°N	15.01°E
@@ -21066,16 +21066,16 @@ Rypin	Kujawsko-Pomorskie	pl	N	16,6	53.07°N	19.41°E
 Kysucké Nové Mesto	Žilinský	sk	N	16,6	49.30°N	18.78°E
 Laï	Tandjilé	td	R	16,6	9.39°N	16.30°E
 Zlotoryja	Dolnoslaskie	pl	N	16,6	51.12°N	15.91°E
-Pelhrimov	Vysochina	cz	N	16,6	49.44°N	15.22°E
+Pelhřimov	Vysočina	cz	N	16,6	49.44°N	15.22°E
 Scordia	Sicilia	it	N	16,6	37.32°N	14.85°E
 Palagonia	Sicilia	it	N	16,6	37.33°N	14.74°E
-Beneshov	Stredocheský	cz	N	16,6	49.79°N	14.69°E
+Benešov	Středočeský	cz	N	16,6	49.79°N	14.69°E
 San Felice a Cancello	Campania	it	N	16,6	41.02°N	14.49°E
 Boké	Boké	gn	R	16,6	10.94°N	14.30°W
 Hatoyama	Saitama	jp	N	16,6	35.98°N	139.33°E
 Kumiyama	Kyôto	jp	N	16,6	34.88°N	135.74°E
 Heidenau	Sachsen	de	N	16,6	50.99°N	13.86°E
-Rakovník	Stredocheský	cz	N	16,6	50.11°N	13.73°E
+Rakovník	Středočeský	cz	N	16,6	50.11°N	13.73°E
 Koundara	Koundara	gn	R	16,6	12.48°N	13.30°W
 Vilshofen	Bayern	de	N	16,6	48.64°N	13.18°E
 Oatfield	Oregon	us	N	16,6	45.41°N	122.60°W
@@ -21265,9 +21265,9 @@ Konstancin-Jeziorna	Mazowieckie	pl	N	16,4	52.10°N	21.11°E
 Oria	Guipúzcoa	es	N	16,4	43.27°N	2.02°W
 Galanta	Trnavský	sk	N	16,4	48.20°N	17.73°E
 Zabkowice Slaskie	Dolnoslaskie	pl	N	16,4	50.59°N	16.82°E
-Jichín	Kralovéhradecký	cz	N	16,4	50.44°N	15.35°E
+Jičín	Kralovéhradecký	cz	N	16,4	50.44°N	15.35°E
 Ichinohe	Iwate	jp	N	16,4	40.20°N	141.30°E
-Neratovice	Stredocheský	cz	N	16,4	50.26°N	14.51°E
+Neratovice	Středočeský	cz	N	16,4	50.26°N	14.51°E
 Whitehorse	Yukon	ca	R	16,4	60.73°N	135.05°W
 Bikin	Habarovsk	ru	N	16,4	46.82°N	134.26°E
 Sibiti	Lékoumou	cg	R	16,4	3.69°S	13.35°E
@@ -21341,7 +21341,7 @@ Casamassima	Puglia	it	N	16,3	40.95°N	16.91°E
 Ustka	Pomorskie	pl	N	16,3	54.58°N	16.85°E
 Güimar	Santa Cruz de Tenerife	es	N	16,3	28.31°N	16.41°W
 Traiskirchen	Niederösterreich	at	N	16,3	48.02°N	16.30°E
-Dvur Kralové	Kralovéhradecký	cz	N	16,3	50.44°N	15.81°E
+Dvůr Králové	Královéhradecký	cz	N	16,3	50.44°N	15.81°E
 Djambala	Plateaux	cg	R	16,3	2.54°S	14.75°E
 Tokombere	n.a.	ng	N	16,3	11.22°N	13.48°E
 Braunau	Oberösterreich	at	N	16,3	48.26°N	13.04°E
@@ -21542,7 +21542,7 @@ Fót	Pest	hu	N	16,1	47.62°N	19.20°E
 Swidwin	Zachodnio-Pomorskie	pl	N	16,1	53.77°N	15.78°E
 Melfi	Basilicata	it	N	16,1	41.01°N	15.66°E
 Iwanai	Hokkaido	jp	N	16,1	42.98°N	140.51°E
-Varnsdorf	Ustecký	cz	N	16,1	50.92°N	14.61°E
+Varnsdorf	Ústecký	cz	N	16,1	50.92°N	14.61°E
 Alderwood Manor	Washington	us	N	16,1	47.80°N	122.24°W
 Marsciano	Umbria	it	N	16,1	42.92°N	12.33°E
 Bostonia	California	us	N	16,1	32.82°N	116.95°W
@@ -21931,7 +21931,7 @@ San Marco in Lamis	Puglia	it	N	15,7	41.72°N	15.62°E
 Griffith	New South Wales	au	N	15,7	34.29°S	146.04°E
 Helensvale	Queensland	au	N	15,7	15.71°S	145.23°E
 Slavjanka	Primorje	ru	N	15,7	42.87°N	131.37°E
-Klásterec nad Ohrí	Ustecký	cz	N	15,7	50.39°N	13.17°E
+Klášterec nad Ohří	Ústecký	cz	N	15,7	50.39°N	13.17°E
 Ukiah	California	us	N	15,7	39.15°N	123.21°W
 Wilsonville	Oregon	us	N	15,7	45.31°N	122.77°W
 Anacortes	Washington	us	N	15,7	48.49°N	122.63°W
@@ -22035,7 +22035,7 @@ Chakovec	Medhimurje	hr	R	15,6	46.39°N	16.42°E
 Candelária	Santa Cruz de Tenerife	es	N	15,6	28.36°N	16.37°W
 Aci Sant'Antonio	Sicilia	it	N	15,6	37.60°N	15.11°E
 Sorrento	Campania	it	N	15,6	40.63°N	14.37°E
-Bílina	Ustecký	cz	N	15,6	50.55°N	13.76°E
+Bílina	Ústecký	cz	N	15,6	50.55°N	13.76°E
 Falköping	Västra Götaland	se	N	15,6	58.17°N	13.56°E
 East Renton Highlands	Washington	us	N	15,6	47.49°N	122.11°W
 Cattolica	Emilia-Romagna	it	N	15,6	43.95°N	12.81°E
@@ -22117,7 +22117,7 @@ Schwechat	Niederösterreich	at	N	15,5	48.14°N	16.50°E
 Ewa Beach	Hawaii	us	N	15,5	21.32°N	158.01°W
 Guinguinéo	Fatick	sn	N	15,5	14.28°N	15.96°W
 Campagna	Campania	it	N	15,5	40.67°N	15.11°E
-Brandys nad Labem-Stará Boleslav	Stredocheský	cz	N	15,5	50.19°N	14.66°E
+Brandýs nad Labem-Stará Boleslav	Středočeský	cz	N	15,5	50.19°N	14.66°E
 Eslöv	Skåne	se	N	15,5	55.84°N	13.30°E
 Coos Bay	Oregon	us	N	15,5	43.38°N	124.23°W
 Stollberg	Sachsen	de	N	15,5	50.72°N	12.77°E
@@ -22512,7 +22512,7 @@ Dourbali	Chari-Baguirmi	td	N	15,1	11.80°N	15.86°E
 Morwell	Victoria	au	N	15,1	38.23°S	146.40°E
 Lubsko	Lubuskie	pl	N	15,1	51.79°N	14.96°E
 Baronissi	Campania	it	N	15,1	40.74°N	14.75°E
-Slaný	Stredocheský	cz	N	15,1	50.23°N	14.09°E
+Slaný	Středočeský	cz	N	15,1	50.23°N	14.09°E
 Prince Rupert	British Columbia	ca	N	15,1	54.32°N	130.31°W
 Lübbenau	Brandenburg	de	N	15,1	51.87°N	13.96°E
 Centralia	Washington	us	N	15,1	46.72°N	122.96°W
