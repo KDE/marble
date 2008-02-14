@@ -1,14 +1,26 @@
-2008-01-28  Carlos Licea  <carlos.licea@kdemail.net>
-    *src/lib/MeasureTool.cpp: continue trying to fix the interpolation of the
+2008-02-14  Torsten Rahn  <rahn@kde.org>
+
+    * data/placemarks/HOWTO-cities.txt:
+      Added a small HOWTO for creating the kml/cache files.
+    * data/placemarks/cityplacemarks.cache:
+      Imported the latest czech changes.
+    * data/placemarks/cityplacemarks.kml:
+      generated an updated KML file from cities.txt
+    * src/lib/XmlHandler.cpp:
+      fixed a bug in XmlHandler which didn't honor 
+      MarblePlacemarks after its introduction some time ago ("d'oh").
+
+2008-02-13  Carlos Licea  <carlos.licea@kdemail.net>
+    * src/lib/MeasureTool.cpp: continue trying to fix the interpolation of the
     measure of two points which crosses the dateline. Not solved yet,
     although I still have to deeply analize it.
-    *src/lib/MarbleMap.cpp: added Mercator case to screenCoordinates and
+    * src/lib/MarbleMap.cpp: added Mercator case to screenCoordinates and
     geoCoordinates.
-    *src/lib/TextureColorizer.cpp: make it work for the Mercator projection.
-    *src/lib/FlatScanlineTextureMapper.cpp: let it work in the mercator projection
+    * src/lib/TextureColorizer.cpp: make it work for the Mercator projection.
+    * src/lib/FlatScanlineTextureMapper.cpp: let it work in the mercator projection
     checking what projection are we painting, Mercator or Equirectangular.
-    *global.h: add Mercator projection to the enum Projection.
-    *src/lib/MarbleModel.cpp: added the Mercator projection as an option
+    * global.h: add Mercator projection to the enum Projection.
+    * src/lib/MarbleModel.cpp: added the Mercator projection as an option
     for the texture.
 
 2008-02-12  Inge Wallin  <inge@lysator.liu.se>

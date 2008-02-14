@@ -61,7 +61,7 @@ bool XmlHandler::startElement( const QString&, const QString&,
         m_inKml = true;
     }
 
-    if ( m_inKml && nameLower == "placemark" ) {
+    if ( m_inKml && nameLower == "placemark" || m_inKml && nameLower == "marbleplacemark" ) {
         m_inPlacemark = true;
         m_coordsset = false;
         m_placemark = new GeoDataPlacemark();
@@ -120,7 +120,7 @@ bool XmlHandler::endElement( const QString&, const QString&,
         m_inKml = false;
     }
 
-    if ( m_inKml && nameLower == "placemark" ) {
+    if ( m_inKml && nameLower == "placemark" || m_inKml && nameLower == "marbleplacemark" ) {
 
 //  First we derive the popularity:
 
@@ -151,7 +151,6 @@ bool XmlHandler::endElement( const QString&, const QString&,
             population = 0;
         else
             population = m_currentText.toLongLong();
-
         m_placemark->setPopulation( population );
 
         // else if(population < 7500000) popidx=15;
