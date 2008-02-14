@@ -81,8 +81,8 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
     }
     else if( viewParams->m_projection == Mercator ) {
-        yPaintedTop    = yTop = m_imageHeight / 2 - 2 * ( radius + yCenterOffset );
-        yPaintedBottom        = m_imageHeight / 2 + 2 * ( radius + yCenterOffset );
+        yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
+        yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
     }
 
     if (yPaintedTop < 0)                yPaintedTop = 0;
