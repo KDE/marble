@@ -33,8 +33,8 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2007-05-06</date>
-		 <releaseinfo>0.3.5</releaseinfo>
+		 <date>2008-02-07</date>
+		 <releaseinfo>0.5</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual desktop globe 
@@ -69,8 +69,8 @@
              the world at your fingertips. Just like a real atlas or a conventional globe 
              &marble; allows you to freely move across its map and lookup places. 
              Furthermore &marble; allows you to zoom in and have many different views on the 
-             surface of the Earth. In its default configuration &marble; offers three different 
-             views: <guilabel>Atlas</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>.
+             surface of the Earth. In its default configuration &marble; offers four different 
+             views: <guilabel>Atlas</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>.
          </para>
          <para>
              &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are partially integrated with 
@@ -85,7 +85,7 @@
 	 <chapter id="quick-start">
 		 <title>&marble; quick start guide: Navigation</title>
 
-		 <para>Here is &marble; the first time you run it, either from the K menu->Edutainment->Science->marble or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
+		 <para>Here is &marble; the first time you run it, either with  <menuchoice><guimenu>Applications</guimenu><guisubmenu>Edutainment</guisubmenu><guisubmenu>Science</guisubmenu><guimenuitem>Desktop Globe Marble</guimenuitem></menuchoice> from the &kmenu; or with <keycombo action="simul">&Alt;<keycap>F2</keycap></keycombo> and entering <command>marble</command> into the field.</para>
 		 <screenshot>
 			 <screeninfo>&marble; main window</screeninfo>
 			 <mediaobject>
@@ -97,7 +97,7 @@
 		 <para>
 			On the right you can see a topographical map of our beautiful home planet. To allow for 
             better orientation the map offers a scale bar in the lower left corner as well as a windrose on the top right. 
-            To navigate and to control the view you can use the toolbox on the left: Press the arrow buttons to rotate the globe. The <guilabel>Top</guilabel> and <guilabel>Bottom</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
+            To navigate and to control the view you can use the toolbox on the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
 		 </para>
          <para>
             You can accomplish the same behaviour by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much more easily and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
@@ -118,7 +118,7 @@
      <chapter id="map-views">
          <title>Choosing different map views for &marble;</title>
          <para>
-            &marble; comes with three different views: <guilabel>Atlas</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>. You can choose among these by pressing the map view tab on the bottom of &marble;'s toolbox:
+            &marble; comes with four different views: <guilabel>Atlas</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
          </para>
 
          <screenshot>
@@ -132,7 +132,12 @@
          <itemizedlist>
              <listitem>
                 <para>
-                    <guilabel>Topographical map</guilabel>: A classic topographic map. It uses vector lines ( "MicroWorldDataBase II" ) to mark coastlines, country borders &etc; and bitmap graphics ( "ETOPO2" ) to create the height relief.
+                    <guilabel>Atlas</guilabel>: A classic topographic map. It uses vector lines ( "MicroWorldDataBase II" ) to mark coastlines, country borders &etc; and bitmap graphics ( "ETOPO2" ) to create the height relief.
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Plain Map</guilabel>: A plain map. It uses vector lines to mark coastlines and country borders &etc;
                 </para>
              </listitem>
              <listitem>
@@ -172,7 +177,7 @@
             After clicking the name of the location on the popup menu there will appear a data sheet dialog like this:
          </para>
          <screenshot>
-             <screeninfo>&marble; data sheet</screeninfo>
+             <screeninfo>&marble; Data Sheet</screeninfo>
              <mediaobject>
                  <imageobject><imagedata fileref="search-2.png" format="PNG" /></imageobject>
                  <textobject><phrase>&marble; Data Sheet</phrase></textobject>
@@ -216,10 +221,30 @@
                      <varlistentry>
                          <term><menuchoice>
                                  <shortcut>
-                                     <keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+                                     <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
                                  </shortcut>
                                  <guimenu>File</guimenu>
-                                 <guimenuitem>Export map...</guimenuitem>
+                                 <guimenuitem>Open Map...</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Opens</action> a map file.</para></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
+                                 <shortcut>
+                                     <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+                                 </shortcut>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Download New Data...</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Displays</action> the <guilabel>Get Hot New Stuff!</guilabel> dialog to download additional maps for &marble;.</para></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
+                                 <shortcut>
+                                     <keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
+                                 </shortcut>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Export Map...</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Exports</action> a screenshot of &marble;'s map to an image file.</para></listitem>
                      </varlistentry>
@@ -257,7 +282,7 @@
                                      <keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
                                  </shortcut>
                                  <guimenu>Edit</guimenu>
-                                 <guimenuitem>Copy map</guimenuitem>
+                                 <guimenuitem>Copy Map</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Copies</action> a screenshot of &marble;'s map to the global clipboard.</para></listitem>
                      </varlistentry>
@@ -272,18 +297,37 @@
 					 <varlistentry>
 						 <term><menuchoice>
 								 <guimenu>Settings</guimenu>
-								 <guimenuitem>Configure Shortcuts...</guimenuitem>
+								 <guimenuitem>Show Toolbar</guimenuitem>
 						 </menuchoice></term>
-						 <listitem><para><action>Configure</action> the keyboard keys you use to access the different actions.</para>
+						 <listitem><para><action>Toggle</action> the display of the toolbar.</para>
 						 </listitem>
 					 </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
 								 <guimenu>Settings</guimenu>
-								 <guimenuitem>Configure Toolbars...</guimenuitem>
+								 <guimenuitem>Show Statusbar</guimenuitem>
 						 </menuchoice></term>
-						 <listitem><para><action>Configure</action> the items you want to put in the toolbar
-						 </para></listitem>
+						 <listitem><para><action>Toggle</action> the display of the status bar.</para></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term><menuchoice>
+                                 <shortcut>
+                                     <keycap>F9</keycap>
+                                 </shortcut>
+								 <guimenu>Settings</guimenu>
+								 <guimenuitem>Show Navigation Panel</guimenuitem>
+						 </menuchoice></term>
+						 <listitem><para><action>Toggle</action> the display of the navigation panel on the left side of the main window.</para></listitem>
+					 </varlistentry>
+					 <varlistentry>
+						 <term><menuchoice>
+                                 <shortcut>
+                                     <keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo>
+                                 </shortcut>
+								 <guimenu>Settings</guimenu>
+								 <guimenuitem>Full Screen Mode</guimenuitem>
+						 </menuchoice></term>
+						 <listitem><para><action>Switches between normal view and full screen view.</action> In full screen view, the titlebar is hidden and the actual application window is resized to the entire screen.</para></listitem>
 					 </varlistentry>
 
 				 </variablelist>
@@ -314,8 +358,7 @@
              </qandaentry>
              <qandaentry>
                  <question>
-                     <para>Why is &marble; so fast although I don't have hardware acceleration enabled? /</para>
-                     <para>Why doesn't &marble; run smoothly on my expensive 3D graphics card?</para>
+                     <para>Why is &marble; so fast although I don't have hardware acceleration enabled? / Why doesn't &marble; run smoothly on my expensive 3D graphics card?</para>
                  </question>
                  <answer>
                      <para> 
@@ -370,7 +413,7 @@
 
 		 <itemizedlist>
              <listitem><para>
-                     &Torsten.Rahn; <email>rahn@kde.org</email>
+                     &Torsten.Rahn; &Torsten.Rahn.mail;
              </para></listitem>
 			 <listitem><para>
 					 Inge Wallin <email>inge@lysator.liu.se</email>
@@ -398,8 +441,8 @@
 			 <title>Requirements</title>
 
 			 <para>
-				 &marble; itself can be found on <ulink
-					 url="http://edu.kde.org/marble">the &marble; home page</ulink> and
+				 &marble; itself can be found on the <ulink
+					 url="http://edu.kde.org/marble">&marble; home page</ulink> and
 				 is part of the &kde;-Edu project</para>
 
 			 <para>You can find a list of changes in the file
