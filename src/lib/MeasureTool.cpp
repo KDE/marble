@@ -47,7 +47,7 @@ MeasureTool::MeasureTool(QObject* parent)
 
 void MeasureTool::paintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing )
 {
-    switch( viewParams.m_projection ) {
+    switch( viewParams.projection() ) {
         case Spherical:
             sphericalPaintMeasurePoints( painter, viewParams, antialiasing );
             break;
@@ -64,11 +64,11 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, ViewParams 
 
     int  imgwidth  = viewParams.m_canvasImage->width();
     int  imgheight = viewParams.m_canvasImage->height();
-    int  radius = viewParams.m_radius;
+    int  radius    = viewParams.radius();
     int  x = 0;
     int  y = 0;
 
-    Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
+    Quaternion  invplanetAxis = viewParams.planetAxis().inverse();
     Quaternion  qpos;
     Quaternion  prevqpos;
 
@@ -141,7 +141,7 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter, ViewParam
 
     int  imgwidth  = viewParams.m_canvasImage->width();
     int  imgheight = viewParams.m_canvasImage->height();
-    int  radius = viewParams.m_radius;
+    int  radius    = viewParams.radius();
     int  x = 0;
     int  y = 0;
 
@@ -266,7 +266,7 @@ void MeasureTool::rectangularPaintMark( ClipPainter* painter, int x, int y,
 void MeasureTool::drawDistancePath( ClipPainter* painter, Quaternion prevqpos,
                                     Quaternion qpos, ViewParams &viewParams, bool antialiasing )
 {
-    switch( viewParams.m_projection ) {
+    switch( viewParams.projection() ) {
         case Spherical:
             sphericalDrawDistancePath(   painter, prevqpos, qpos, viewParams, antialiasing );
             break;
@@ -284,7 +284,7 @@ void MeasureTool::sphericalDrawDistancePath( ClipPainter* painter, Quaternion pr
 
     int  imgwidth  = viewParams.m_canvasImage->width();
     int  imgheight = viewParams.m_canvasImage->height();
-    int  radius = viewParams.m_radius;
+    int  radius    = viewParams.radius();
     double      x;
     double      y;
     QPolygonF   distancePath;
@@ -313,7 +313,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter* painter, Quaternion 
 {
     int         imgwidth  = viewParams.m_canvasImage->width();
     int         imgheight = viewParams.m_canvasImage->height();
-    int         radius = viewParams.m_radius;
+    int         radius    = viewParams.radius();
 
     double      x;
     double      y;

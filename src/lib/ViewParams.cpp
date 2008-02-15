@@ -17,13 +17,16 @@
 ViewParams::ViewParams( )
 {
     // Default projection
+#if 0
     m_projection    = Spherical;
+#endif
     m_oldProjection = Spherical;
 
     // Default view
+#if 0
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
     m_radius     = 2000;
-    // FIXME: planetAxisUpdated, radiusUpdated
+#endif    // FIXME: planetAxisUpdated, radiusUpdated
     // FIXME: boundingBox
 
     // Show / don't show parameters
@@ -62,8 +65,45 @@ ViewParams::~ViewParams()
 }
 
 
+Projection ViewParams::projection() const
+{
+    return m_viewport.projection();
+}
+
+void ViewParams::setProjection(Projection newProjection)
+{
+    m_viewport.setProjection( newProjection );
+}
+
+
+int ViewParams::radius() const
+{
+    return m_viewport.radius();
+}
+
+void ViewParams::setRadius(int newRadius)
+{
+    m_viewport.setRadius( newRadius );
+}
+
+
+Quaternion ViewParams::planetAxis() const
+{
+    return m_viewport.planetAxis();
+}
+
+void ViewParams::setPlanetAxis(const Quaternion &newAxis)
+{
+    m_viewport.setPlanetAxis( newAxis );
+}
+
+
 void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
 {
+#if 1
+    m_viewport.centerCoordinates( centerLon, centerLat );
+#else
+
     // Calculate translation of center point
     centerLat = - m_planetAxis.pitch();
     if ( centerLat > M_PI )
@@ -75,4 +115,5 @@ void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
 
     // qDebug() << "centerLon" << centerLon * RAD2DEG;
     // qDebug() << "centerLat" << centerLat * RAD2DEG;
+#endif
 }

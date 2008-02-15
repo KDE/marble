@@ -64,7 +64,7 @@ VectorMap::~VectorMap()
 
 void VectorMap::createFromPntMap( const PntMap* pntmap, ViewParams* viewParams )
 {
-    switch( viewParams->m_projection ) {
+    switch( viewParams->projection() ) {
         case Spherical:
             sphericalCreateFromPntMap( pntmap, viewParams );
             break;
@@ -78,7 +78,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
 {
     clear();
 
-    m_radius = viewParams->m_radius;
+    m_radius = viewParams->radius();
 
     // We must use double or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
@@ -106,7 +106,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
 
     Quaternion  qbound;
 
-    viewParams->m_planetAxis.inverse().toMatrix( m_rotMatrix );
+    viewParams->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -146,7 +146,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
 void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* viewParams )
 {
     clear();
-    m_radius = viewParams->m_radius;
+    m_radius = viewParams->radius();
 
     // Calculate translation of center point
     viewParams->centerCoordinates( m_centerLon, m_centerLat );
@@ -155,7 +155,7 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
     double lon, lat;
     double x, y;
 
-    viewParams->m_planetAxis.inverse().toMatrix( m_rotMatrix );
+    viewParams->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -413,7 +413,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
 void VectorMap::paintBase(ClipPainter * painter, ViewParams* viewParams, bool antialiasing )
 {
-    switch( viewParams->m_projection ) {
+    switch( viewParams->projection() ) {
         case Spherical:
             sphericalPaintBase(   painter, viewParams, antialiasing );
             break;
@@ -425,7 +425,7 @@ void VectorMap::paintBase(ClipPainter * painter, ViewParams* viewParams, bool an
 
 void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
 {
-    m_radius =  viewParams->m_radius;
+    m_radius =  viewParams->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -443,7 +443,7 @@ void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams
 
 void VectorMap::rectangularPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
 {
-    m_radius = viewParams->m_radius;
+    m_radius = viewParams->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 

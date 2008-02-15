@@ -26,6 +26,7 @@
 
 #include "Quaternion.h"
 #include "BoundingBox.h"
+#include "ViewportParams.h"
 #include "global.h"
 
 
@@ -43,16 +44,29 @@ class ViewParams
     ViewParams( );
     ~ViewParams();
 
+    // Getters and setters
+    Projection projection() const;
+    void setProjection(Projection newProjection);
+
+    int radius() const;
+    void setRadius(int newRadius);
+
+    Quaternion planetAxis() const;
+    void setPlanetAxis(const Quaternion &newAxis);
+
     void centerCoordinates( double &centerLon, double &centerLat );
 
  public:
-    Projection  m_projection;
+    ViewportParams  m_viewport;
+    //Projection  m_projection;
     Projection  m_oldProjection;
 
     // Parameters that determine the painting
-    Quaternion  m_planetAxis;   // Position, coded in a quaternion
+    //Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;
+#if 0
     int         m_radius;       // Zoom level (pixels / earth radius)
+#endif
     int         m_radiusUpdated;
 
     BoundingBox m_boundingBox;  // What the view currently can see

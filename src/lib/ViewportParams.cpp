@@ -55,12 +55,12 @@ void ViewportParams::setRadius(int newRadius)
 }
 
 
-Quaternion ViewportParams::axis() const
+Quaternion ViewportParams::planetAxis() const
 {
     return m_planetAxis;
 }
 
-void ViewportParams::setAxis(Quaternion newAxis)
+void ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
     m_planetAxis = newAxis;
 }

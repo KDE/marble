@@ -40,8 +40,8 @@ bool AbstractLayer::getPixelPosFromGeoDataPoint( double _lon, double _lat,
                                              QPoint *point)
 {
     Quaternion  qpos( _lon, _lat ); //temp
-    qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
-    int radius = viewParams->m_radius;
+    qpos.rotateAroundAxis( viewParams->planetAxis().inverse() );
+    int radius = viewParams->radius();
     if ( qpos.v[Q_Z] > 0 ) {
         point->setX( (int)( ( screenSize.width() / 2 ) 
                             + ( radius * qpos.v[Q_X] ) ) );
@@ -60,8 +60,8 @@ bool AbstractLayer::getPixelPosFromGeoDataPoint( GeoDataPoint position,
                                              QPoint *point)
 {
     Quaternion  qpos = position.quaternion(); //temp
-    qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
-    int radius = viewParams->m_radius;
+    qpos.rotateAroundAxis( viewParams->planetAxis().inverse() );
+    int radius = viewParams->radius();
     if ( qpos.v[Q_Z] > 0 ){
         point->setX( (int)( ( screenSize.width() / 2 )
                             + ( radius * qpos.v[Q_X] ) ) );

@@ -79,7 +79,7 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
     QImage       *canvasImage = viewParams->m_canvasImage;
-    const qint64  radius      = viewParams->m_radius;
+    const qint64  radius      = viewParams->radius();
 
     // Scanline based algorithm to texture map a sphere
 
@@ -107,11 +107,11 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Calculate north pole position to decrease pole distortion later on
     Quaternion  northPole = GeoDataPoint( 0.0, (double)( M_PI * 0.5 ) ).quaternion();
 
-    northPole.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
+    northPole.rotateAroundAxis( viewParams->planetAxis().inverse() );
 
     // Calculate axis matrix to represent the planet's rotation.
     matrix  planetAxisMatrix;
-    viewParams->m_planetAxis.toMatrix( planetAxisMatrix );
+    viewParams->planetAxis().toMatrix( planetAxisMatrix );
 
     int skip = ( m_interlaced == true ) ? 1 : 0;
 

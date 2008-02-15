@@ -51,8 +51,8 @@ class ViewportParams
     int radius() const;
     void setRadius(int newRadius);
 
-    Quaternion axis() const;
-    void setAxis(Quaternion newAxis);
+    Quaternion planetAxis() const;
+    void setPlanetAxis(const Quaternion &newAxis);
 
     int width()  const;
     int height() const;

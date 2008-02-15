@@ -1,5 +1,25 @@
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Use ViewportParams everywhere
+	* src/lib/ViewportParams.{h,cpp} (planetAxis): Used to be axis
+	* src/lib/ViewParams.{h,cpp} (m_viewport): New member
+	(projection, radius, planetAxis): new getters/setters
+	* src/lib/AbstractLayer/AbstractLayer.cpp,
+	* src/lib/AbstractLayer/AbstractLayerData.cpp,
+	* src/lib/AbstractScanlineTextureMapper.cpp,
+	* src/lib/FlatScanlineTextureMapper.cpp,
+	* src/lib/GlobeScanlineTextureMapper.cpp,
+	* src/lib/GridMap.cpp,
+	* src/lib/MarbleMap.cpp,
+	* src/lib/MarbleModel.cpp,
+	* src/lib/MeasureTool.cpp,
+	* src/lib/PlaceMarkLayout.cpp,
+	* src/lib/PlaceMarkPainter.cpp,
+	* src/lib/TextureColorizer.cpp,
+	* src/lib/VectorComposer.cpp,
+	* src/lib/VectorMap.cpp:
+	Use the new calls in ViewParams.
+
 	Actually implement the methods.
 	* src/lib/ViewportParams.h (ViewportParams::m_size): new member
 	* src/lib/ViewportParams.cpp: Implement all functions	

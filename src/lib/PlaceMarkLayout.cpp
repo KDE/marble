@@ -196,7 +196,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
 //    Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
     matrix  planetAxisMatrix;
-    viewParams->m_planetAxis.inverse().toMatrix( planetAxisMatrix );
+    viewParams->planetAxis().inverse().toMatrix( planetAxisMatrix );
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
@@ -307,7 +307,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
 
         // Skip the places that are too small.
         if ( noFilter == false ) {
-            if ( m_weightfilter.at( popularityIndex ) > viewParams->m_radius )
+            if ( m_weightfilter.at( popularityIndex ) > viewParams->radius() )
             {
                 break;
             }
@@ -415,14 +415,14 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
                                                const matrix &planetAxisMatrix,
                                                ViewParams * viewParams )
 {
-    if( viewParams->m_projection == Spherical ) {
+    if ( viewParams->projection() == Spherical ) {
     
         double absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
         Quaternion qpos = ( geopoint ).quaternion();
         //    Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
         qpos.rotateAroundAxis( planetAxisMatrix );
 
-        double pixelAltitude = ( viewParams->m_radius )/ EARTH_RADIUS * absoluteAltitude;
+        double pixelAltitude = ( viewParams->radius() )/ EARTH_RADIUS * absoluteAltitude;
         if ( geopoint.altitude() < 10000 ) {
             // Skip placemarks at the other side of the earth.
             if ( qpos.v[Q_Z] < 0 ) {
@@ -436,7 +436,7 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             // Don't draw high placemarks (e.g. satellites) that aren't visible.
             if ( qpos.v[Q_Z] < 0
                  && ( earthCenteredX * earthCenteredX + earthCenteredY * earthCenteredY )
-                 < (double)viewParams->m_radius * (double)viewParams->m_radius )
+                 < (double)viewParams->radius() * (double)viewParams->radius() )
                 return false;
         }
 
@@ -452,10 +452,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
         return true;
     }
 
-    if ( viewParams->m_projection == Equirectangular ) {
+    if ( viewParams->projection() == Equirectangular ) {
 
             double lon, lat;
-            double rad2Pixel = 2 * viewParams->m_radius / M_PI;
+            double rad2Pixel = 2 * viewParams->radius() / M_PI;
 
             double centerLon, centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
@@ -470,10 +470,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             //
             if ( (y >= 0 && y < imgheight)
                  && ( (x >= 0 && x < imgwidth) 
-                      || (x - 4 * viewParams->m_radius >= 0
-                          && x - 4 * viewParams->m_radius < imgwidth)
-                      || (x + 4 * viewParams->m_radius >= 0
-                          && x + 4 * viewParams->m_radius < imgwidth) ) )
+                      || (x - 4 * viewParams->radius() >= 0
+                          && x - 4 * viewParams->radius() < imgwidth)
+                      || (x + 4 * viewParams->radius() >= 0
+                          && x + 4 * viewParams->radius() < imgwidth) ) )
             {
                 return true;
             }
@@ -481,10 +481,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             return false;
     }
 
-    if ( viewParams->m_projection == Mercator ) {
+    if ( viewParams->projection() == Mercator ) {
 
             double lon, lat;
-            double rad2Pixel = 2 * viewParams->m_radius / M_PI;
+            double rad2Pixel = 2 * viewParams->radius() / M_PI;
 
             double centerLon, centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
@@ -501,10 +501,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             //
             if ( (y >= 0 && y < imgheight)
                  && ( (x >= 0 && x < imgwidth) 
-                      || (x - 4 * viewParams->m_radius >= 0
-                          && x - 4 * viewParams->m_radius < imgwidth)
-                      || (x + 4 * viewParams->m_radius >= 0
-                          && x + 4 * viewParams->m_radius < imgwidth) ) )
+                      || (x - 4 * viewParams->radius() >= 0
+                          && x - 4 * viewParams->radius() < imgwidth)
+                      || (x + 4 * viewParams->radius() >= 0
+                          && x + 4 * viewParams->radius() < imgwidth) ) )
             {
                 return true;
             }

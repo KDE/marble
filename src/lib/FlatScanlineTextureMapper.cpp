@@ -32,7 +32,7 @@ FlatScanlineTextureMapper::FlatScanlineTextureMapper( TileLoader *tileLoader, QO
 void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
     QImage* canvasImage = viewParams->m_canvasImage;
-    const int radius = viewParams->m_radius;
+    const int radius = viewParams->radius();
 
    // Initialize needed variables:
     double lon = 0.0;
@@ -62,10 +62,10 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     viewParams->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset = 0;
-    if( viewParams->m_projection == Equirectangular ) {
+    if ( viewParams->projection() == Equirectangular ) {
         yCenterOffset = (int)( centerLat / rad2Pixel );
     }
-    else if( viewParams->m_projection == Mercator ) {
+    else if ( viewParams->projection() == Mercator ) {
         if ( fabs( centerLat ) < atan( sinh( M_PI ) ) )
             yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
         else {
@@ -76,11 +76,11 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     //Calculate y-range the represented by the center point, yTop and yBottom 
     //and what actually can be painted
-    if( viewParams->m_projection == Equirectangular ) {
+    if( viewParams->projection() == Equirectangular ) {
         yPaintedTop    = yTop = m_imageHeight / 2 - radius + yCenterOffset;
         yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
     }
-    else if( viewParams->m_projection == Mercator ) {
+    else if ( viewParams->projection() == Mercator ) {
         yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
         yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
     }
@@ -95,9 +95,9 @@ void FlatScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-        if( viewParams->m_projection == Equirectangular )
+        if ( viewParams->projection() == Equirectangular )
             lat = M_PI/2 - (y - yTop )* rad2Pixel;
-        else if( viewParams->m_projection == Mercator )
+        else if ( viewParams->projection() == Mercator )
             lat = atan( sinh( ((m_imageHeight / 2 + yCenterOffset) - y) / (double)(2 * radius) * M_PI ) );
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;

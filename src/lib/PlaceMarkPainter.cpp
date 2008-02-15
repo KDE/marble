@@ -49,7 +49,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
     VisiblePlaceMark *mark = 0;
     int imageWidth = viewParams->m_canvasImage->width();
 
-    switch( viewParams->m_projection ) {
+    switch( viewParams->projection() ) {
         case Spherical:
 
             while ( visit != visiblePlaceMarks.constBegin() ) {
@@ -85,9 +85,9 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                 int tempSymbol = mark->symbolPosition().x();
                 int tempText =   mark->labelRect().x();
 
-                for ( int i = tempSymbol - 4 * viewParams->m_radius;
-                    i >= 0;
-                    i -= 4 * viewParams->m_radius )
+                for ( int i = tempSymbol - 4 * viewParams->radius();
+                      i >= 0;
+                      i -= 4 * viewParams->radius() )
                 {
                     QRect labelRect( mark->labelRect() );
                     labelRect.moveLeft(i - tempSymbol + tempText );
@@ -103,7 +103,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
 
                 for ( int i = tempSymbol;
                       i <= imageWidth;
-                      i += 4 * viewParams->m_radius )
+                      i += 4 * viewParams->radius() )
                 {
                     QRect labelRect( mark->labelRect() );
                     labelRect.moveLeft(i - tempSymbol + tempText );

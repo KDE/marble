@@ -140,11 +140,11 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
                                      ViewParams *viewParams,
                                      QPointF *point )
 {
-    int radius = viewParams->m_radius;
-    Quaternion  qpos = m_position->quaternion(); 
-    switch ( viewParams->m_projection ) {
+    int         radius = viewParams->radius();
+    Quaternion  qpos   = m_position->quaternion(); 
+    switch ( viewParams->projection() ) {
         case Spherical:
-            qpos.rotateAroundAxis( viewParams->m_planetAxis.inverse() );
+            qpos.rotateAroundAxis( viewParams->planetAxis().inverse() );
 
             if ( qpos.v[Q_Z] > 0 ){
                 point->setX( ( ( screenSize.width() / 2 )
@@ -160,7 +160,7 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
         case Equirectangular:
             double lon;
             double lat;
-            double xyFactor = 2 * viewParams->m_radius / M_PI;
+            double xyFactor = 2 * viewParams->radius() / M_PI;
 
             double centerLon;
             double centerLat;
@@ -176,8 +176,8 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
             point->setY( y );
 
             if ( x < 0 || x >= screenSize.width() ||
-                 y < screenSize.height() / 2 - 2*viewParams->m_radius || 
-                 y >= screenSize.height()/ 2 + 2*viewParams->m_radius )
+                 y < screenSize.height() / 2 - 2*viewParams->radius() || 
+                 y >= screenSize.height()/ 2 + 2*viewParams->radius() )
             {
                 return false;
             }

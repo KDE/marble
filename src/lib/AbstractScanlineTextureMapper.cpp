@@ -92,7 +92,7 @@ void AbstractScanlineTextureMapper::setMapTheme( const QString& theme )
 
 void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 {
-    const int radius = viewParams->m_radius;
+    const int radius = viewParams->radius();
 
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)

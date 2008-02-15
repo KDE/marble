@@ -57,8 +57,8 @@ GridMap::~GridMap()
 void GridMap::createTropics( ViewParams* viewParams )
 {
     clear();
-    m_radius = viewParams->m_radius;
-    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+    m_radius = viewParams->radius();
+    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
     // Turn on the major circles of latitude if we've zoomed in far
     // enough (radius > 400 pixels)
@@ -73,11 +73,11 @@ void GridMap::createTropics( ViewParams* viewParams )
 void GridMap::createEquator( ViewParams* viewParams ) 
 {
     clear();
-    m_radius = viewParams->m_radius;
-    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+    m_radius = viewParams->radius();
+    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
-    if( viewParams->m_projection == Equirectangular )
-        m_planetAxis = viewParams->m_planetAxis;
+    if ( viewParams->projection() == Equirectangular )
+        m_planetAxis = viewParams->planetAxis();
 
     createCircle( 0.0 , Latitude, viewParams );
 }
@@ -85,11 +85,11 @@ void GridMap::createEquator( ViewParams* viewParams )
 void GridMap::createGrid( ViewParams* viewParams )
 {
     clear();
-    m_radius = viewParams->m_radius;
-    viewParams->m_planetAxis.inverse().toMatrix( m_planetAxisMatrix );
+    m_radius = viewParams->radius();
+    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
-    if( viewParams->m_projection == Equirectangular )
-        m_planetAxis = viewParams->m_planetAxis;
+    if ( viewParams->projection() == Equirectangular )
+        m_planetAxis = viewParams->planetAxis();
 
     //	FIXME:	- Higher precision after optimization 
     //		  ( will keep grid lines from vanishing at high zoom levels ) 
@@ -127,7 +127,7 @@ void GridMap::createGrid( ViewParams* viewParams )
 
 void GridMap::createCircles( const int lonNum, const int latNum, ViewParams *viewParams )
 {
-    switch( viewParams->m_projection ) {
+    switch( viewParams->projection() ) {
         case Spherical:
             sphericalCreateCircles( lonNum, latNum, viewParams );
             break;
@@ -195,7 +195,7 @@ void GridMap::rectangularCreateCircles( const int lonNum, const int latNum, View
 
 void GridMap::createCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff)
 {
-    switch( viewParams->m_projection ) {
+    switch( viewParams->projection() ) {
         case Spherical:
             sphericalCreateCircle( val, dim, viewParams, cutOff );
             break;

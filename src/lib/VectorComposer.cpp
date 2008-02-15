@@ -89,7 +89,7 @@ VectorComposer::~VectorComposer()
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
     QPaintDevice  *origimg = viewParams->m_coastImage;
-    Quaternion     rotAxis = viewParams->m_planetAxis;
+    Quaternion     rotAxis = viewParams->planetAxis();
 
     //	m_vectorMap -> clearNodeCount();
 
@@ -100,7 +100,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
+    m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
 
     // Islands
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
@@ -109,7 +109,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_islands, viewParams );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
+    m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
 
     if ( viewParams->m_showLakes ) {
          // Lakes
@@ -118,11 +118,11 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
          m_vectorMap -> createFromPntMap( m_lakes, viewParams );
          m_vectorMap -> setBrush( m_textureLakeBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
+         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
 
          m_vectorMap -> createFromPntMap( m_lakeislands, viewParams );
          m_vectorMap -> setBrush( m_textureLandBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
+         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
     }
 
     if ( viewParams->m_showIceLayer ) {
@@ -132,7 +132,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> createFromPntMap( m_glaciers, viewParams );
          m_vectorMap -> setBrush( m_textureGlacierBrush );
 
-         m_vectorMap -> drawMap( origimg, false, viewParams->m_projection );
+         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
     }
 
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
@@ -141,7 +141,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 void VectorComposer::paintBaseVectorMap( ClipPainter *painter, 
                                          ViewParams *viewParams )
 {
-    Quaternion  rotAxis = viewParams->m_planetAxis;
+    Quaternion  rotAxis = viewParams->planetAxis();
 
     m_vectorMap -> setPen( m_oceanPen );
     m_vectorMap -> setBrush( m_oceanBrush );
@@ -186,7 +186,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 {
     // m_vectorMap -> clearNodeCount();
 
-    Quaternion  rotAxis = viewParams->m_planetAxis;
+    Quaternion  rotAxis = viewParams->planetAxis();
 
     if ( viewParams->m_showRivers ) {
         // Rivers

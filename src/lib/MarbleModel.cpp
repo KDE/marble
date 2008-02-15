@@ -377,10 +377,10 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
-    int radius = (int)(1.05 * (double)(viewParams->m_radius));
+    int radius = (int)(1.05 * (double)(viewParams->radius()));
 
     if ( d->m_maptheme->bitmaplayer().enabled == true ) {
-        if ( viewParams->m_projection == Spherical ) {
+        if ( viewParams->projection() == Spherical ) {
             QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
             painter->drawImage( rect, *viewParams->m_canvasImage, rect );

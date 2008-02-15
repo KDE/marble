@@ -243,26 +243,26 @@ void MarbleMap::setDownloadManager(HttpDownloadManager *downloadManager)
 
 Quaternion MarbleMap::planetAxis() const
 {
-    return d->m_viewParams.m_planetAxis;
+    return d->m_viewParams.planetAxis();
 }
 
 
 int MarbleMap::radius() const
 {
-    return d->m_viewParams.m_radius;
+    return d->m_viewParams.radius();
 }
 
 void MarbleMap::setRadius(const int radius)
 {
-    d->m_viewParams.m_radius = radius;
+    d->m_viewParams.setRadius( radius );
 }
 
 
 bool MarbleMap::needsUpdate() const
 {
     return ( d->m_justModified
-             || d->m_viewParams.m_radius != d->m_viewParams.m_radiusUpdated
-             || !( d->m_viewParams.m_planetAxis == d->m_viewParams.m_planetAxisUpdated ) );
+             || d->m_viewParams.radius() != d->m_viewParams.m_radiusUpdated
+             || !( d->m_viewParams.planetAxis() == d->m_viewParams.m_planetAxisUpdated ) );
 }
 
 void MarbleMap::setNeedsUpdate()
@@ -470,7 +470,7 @@ void MarbleMap::zoomOut()
 
 void MarbleMap::rotateTo(const Quaternion& quat)
 {
-    d->m_viewParams.m_planetAxis = quat;
+    d->m_viewParams.setPlanetAxis( quat );
 
     // This method doesn't force a repaint of the view on purpose!
     // See header file.
@@ -479,7 +479,7 @@ void MarbleMap::rotateTo(const Quaternion& quat)
 
 void MarbleMap::rotateBy(const Quaternion& incRot)
 {
-    d->m_viewParams.m_planetAxis = incRot * d->m_viewParams.m_planetAxis;
+    d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
 
     repaint();
 }
@@ -489,9 +489,11 @@ void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    d->m_viewParams.m_planetAxis = rotTheta * d->m_viewParams.m_planetAxis;
-    d->m_viewParams.m_planetAxis *= rotPhi;
-    d->m_viewParams.m_planetAxis.normalize();
+    Quaternion  axis = d->m_viewParams.planetAxis();
+    axis = rotTheta * axis;
+    axis *= rotPhi;
+    axis.normalize();
+    d->m_viewParams.setPlanetAxis( axis );
 
     repaint();
 }
@@ -499,9 +501,15 @@ void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleMap::centerOn(const double& lon, const double& lat)
 {
+#if 0
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
                                                    lon * DEG2RAD,
                                                   0.0 );
+#else
+    Quaternion  quat;
+    quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
+    d->m_viewParams.setPlanetAxis( quat );
+#endif
 //    d->m_viewParams.m_planetAxis.display();
     repaint();
 }
@@ -544,19 +552,19 @@ void MarbleMap::setCenterLongitude( double lon )
 
 Projection MarbleMap::projection() const
 {
-    return d->m_viewParams.m_projection;
+    return d->m_viewParams.projection();
 }
 
 void MarbleMap::setProjection( Projection projection )
 {
     emit projectionChanged( projection );
 
-    d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
-    d->m_viewParams.m_projection    = projection;
+    d->m_viewParams.m_oldProjection = d->m_viewParams.projection();
+    d->m_viewParams.setProjection( projection );
 
     // Redraw the background if necessary
     if ( !globeCoversImage() 
-         || d->m_viewParams.m_projection != Spherical )
+         || d->m_viewParams.projection() != Spherical )
     {
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
@@ -634,7 +642,7 @@ void MarbleMap::doResize()
 
     // Repaint the background if necessary
     if ( ! globeCoversImage() 
-         || d->m_viewParams.m_projection != Spherical )
+         || d->m_viewParams.projection() != Spherical )
     {
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
@@ -652,34 +660,34 @@ void MarbleMap::doResize()
 int MarbleMap::northPoleY()
 {
     Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
+    Quaternion  invPlanetAxis = d->m_viewParams.planetAxis().inverse();
 
     northPole.rotateAroundAxis( invPlanetAxis );
-    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Y] );
+    return (int)( d->m_viewParams.radius() * northPole.v[Q_Y] );
 }
 
 int MarbleMap::northPoleZ()
 {
     Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.m_planetAxis.inverse();
+    Quaternion  invPlanetAxis = d->m_viewParams.planetAxis().inverse();
 
     northPole.rotateAroundAxis( invPlanetAxis );
 
-    return (int)( d->m_viewParams.m_radius * northPole.v[Q_Z] );
+    return (int)( d->m_viewParams.radius() * northPole.v[Q_Z] );
 }
 
 // FIXME: change name
 bool MarbleMap::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {
-     switch( d->m_viewParams.m_projection ) {
+    switch( d->m_viewParams.projection() ) {
      case Spherical:
      {
          Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
-         p.rotateAroundAxis(d->m_viewParams.m_planetAxis.inverse());
+         p.rotateAroundAxis(d->m_viewParams.planetAxis().inverse());
  
-         x = (int)( width() / 2   + (double)( d->m_viewParams.m_radius ) * p.v[Q_X] );
-         y = (int)( height() / 2  + (double)( d->m_viewParams.m_radius ) * p.v[Q_Y] );
+         x = (int)( width() / 2   + (double)( d->m_viewParams.radius() ) * p.v[Q_X] );
+         y = (int)( height() / 2  + (double)( d->m_viewParams.radius() ) * p.v[Q_Y] );
  
          return p.v[Q_Z] > 0;
      }
@@ -689,7 +697,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
          // Calculate translation of center point
          double centerLon, centerLat;
          d->m_viewParams.centerCoordinates(centerLon, centerLat);
-         double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
+         double rad2Pixel = 2*d->m_viewParams.radius() / M_PI;
  
          x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
          y = (int)( height() / 2 + ( lat * DEG2RAD + centerLat ) * rad2Pixel );
@@ -702,7 +710,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
          // Calculate translation of center point
          double centerLon, centerLat;
          d->m_viewParams.centerCoordinates(centerLon, centerLat);
-         double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
+         double rad2Pixel = 2*d->m_viewParams.radius() / M_PI;
  
          x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
          y = (int)(height() / 2 + rad2Pixel * (centerLat - atanh(sin(lat)) ) );
@@ -723,7 +731,7 @@ bool MarbleMap::geoCoordinates(const int x, const int y,
     const double  inverseRadius   = 1.0 / (double)(radius());
     bool          noerr = false;
 
-    switch( d->m_viewParams.m_projection ) {
+    switch( d->m_viewParams.projection() ) {
     case Spherical:
         if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
                                 + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
@@ -834,23 +842,37 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
 
 void MarbleMap::rotateTo( const double& lon, const double& lat, const double& psi)
 {
+#if 0
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,   // "phi"
                                                   lon * DEG2RAD,   // "theta"
                                                   psi * DEG2RAD );
+#else
+    Quaternion  quat;
+    quat.createFromEuler( -lat * DEG2RAD,   // "phi"
+                           lon * DEG2RAD,   // "theta"
+                           psi * DEG2RAD );
+    d->m_viewParams.setPlanetAxis( quat );
+#endif
 }
 
 void MarbleMap::rotateTo(const double& lon, const double& lat)
 {
+#if 0
     d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
                                                   lon  * DEG2RAD,
                                                   0.0 );
+#else
+    Quaternion  quat;
+    quat.createFromEuler( -lat * DEG2RAD, lon  * DEG2RAD, 0.0 );
+    d->m_viewParams.setPlanetAxis( quat );
+#endif
 }
 
 
 void MarbleMap::drawAtmosphere()
 {
     // Only draw an atmosphere if projection is spherical
-    if ( d->m_viewParams.m_projection != Spherical )
+    if ( d->m_viewParams.projection() != Spherical )
         return;
 
     // No use to draw atmosphere if it's not visible in the area. 
@@ -886,7 +908,7 @@ void MarbleMap::drawAtmosphere()
 
 void MarbleMap::drawFog( QPainter &painter )
 {
-    if ( d->m_viewParams.m_projection != Spherical)
+    if ( d->m_viewParams.projection() != Spherical)
         return;
 
     // No use to draw the fog if it's not visible in the area. 
@@ -959,9 +981,9 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
     t.start();
 
     bool  doClip = false;
-    if ( d->m_viewParams.m_projection == Spherical )
-        doClip = ( d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->width() / 2
-                   || d->m_viewParams.m_radius > d->m_viewParams.m_canvasImage->height() / 2 );
+    if ( d->m_viewParams.projection() == Spherical )
+        doClip = ( d->m_viewParams.radius() > d->m_viewParams.m_canvasImage->width() / 2
+                   || d->m_viewParams.radius() > d->m_viewParams.m_canvasImage->height() / 2 );
 
     // Create a painter that will do the painting.
 #if 0
@@ -976,8 +998,8 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
                             needsUpdate()
                             || d->m_viewParams.m_canvasImage->isNull(),
                             dirtyRect );
-    d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.m_planetAxis;
-    d->m_viewParams.m_radiusUpdated     = d->m_viewParams.m_radius;
+    d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.planetAxis();
+    d->m_viewParams.m_radiusUpdated     = d->m_viewParams.radius();
     d->m_justModified                   = false;
 
     //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
@@ -993,7 +1015,7 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
                             d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
                                                             d->m_viewParams.m_canvasImage->height(),
-                                                            northPoleY(), d->m_viewParams.m_projection ) );
+                                                            northPoleY(), d->m_viewParams.projection() ) );
 
     // 3. Paint the scale.
     if ( d->m_showScaleBar )
@@ -1071,10 +1093,10 @@ QString MarbleMap::mapTheme() const
 void MarbleMap::setMapTheme( const QString& maptheme )
 {
     if ( maptheme == d->m_model->mapTheme()
-         && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection )
+         && d->m_viewParams.projection() == d->m_viewParams.m_oldProjection )
         return;
 
-    d->m_model->setMapTheme( maptheme, this, d->m_viewParams.m_projection );
+    d->m_model->setMapTheme( maptheme, this, d->m_viewParams.projection() );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -1236,7 +1258,7 @@ FileViewModel* MarbleMap::fileViewModel() const
 void MarbleMap::setQuickDirty( bool enabled )
 {
     int transparency;
-    switch( d->m_viewParams.m_projection ) {
+    switch( d->m_viewParams.projection() ) {
         case Spherical:
             // Interlace texture mapping
             d->m_model->textureMapper()->setInterlaced( enabled );
