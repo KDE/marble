@@ -1,5 +1,10 @@
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Add the two last projections.
+	* src/lib/EquirectProjection.{h,cpp}: new files
+	* src/lib/MercatorProjection.{h,cpp}: new files
+	* src/lib/CMakeLists.txt: include the new files
+	
 	Control the Sun settings in the KDE GUI.
 	Patch by Christian Banik.  Thanks!
 	* src/marble_part.h (showSun): new function
