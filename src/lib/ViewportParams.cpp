@@ -21,13 +21,85 @@ ViewportParams::ViewportParams( )
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
     m_radius     = 2000;
 
-    m_width      = 100;
-    m_height     = 100;
+    m_size       = QSize( 100, 100 );
 }
 
 ViewportParams::~ViewportParams()
 {
 }
+
+
+// ================================================================
+//                    Getters and setters
+
+
+Projection ViewportParams::projection() const
+{
+    return m_projection;
+}
+
+void ViewportParams::setProjection(Projection newProjection)
+{
+    m_projection = newProjection;
+}
+
+
+int ViewportParams::radius() const
+{
+    return m_radius;
+}
+
+void ViewportParams::setRadius(int newRadius)
+{
+    m_radius = newRadius;
+}
+
+
+Quaternion ViewportParams::axis() const
+{
+    return m_planetAxis;
+}
+
+void ViewportParams::setAxis(Quaternion newAxis)
+{
+    m_planetAxis = newAxis;
+}
+
+
+int ViewportParams::width()  const
+{
+    return m_size.width();
+}
+
+int ViewportParams::height() const
+{
+    return m_size.height();
+}
+
+QSize ViewportParams::size() const
+{
+    return m_size;
+}
+
+
+void ViewportParams::setWidth(int newWidth)
+{
+    m_size.setWidth( newWidth );
+}
+
+void ViewportParams::setHeight(int newHeight)
+{
+    m_size.setHeight( newHeight );
+}
+
+void ViewportParams::setSize(QSize newSize)
+{
+    m_size = newSize;
+}
+
+
+// ================================================================
+//                        Other functions
 
 
 void ViewportParams::centerCoordinates( double &centerLon, double &centerLat )

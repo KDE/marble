@@ -1,5 +1,9 @@
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Actually implement the methods.
+	* src/lib/ViewportParams.h (ViewportParams::m_size): new member
+	* src/lib/ViewportParams.cpp: Implement all functions	
+
 	New class ViewportParams that will be used in the new
 	AbstractProjection
 	* src/lib/ViewportParams.h: New file

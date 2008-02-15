@@ -72,8 +72,7 @@ class ViewportParams
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
     int         m_radius;       // Zoom level (pixels / globe radius)
 
-    int         m_width;
-    int         m_height;
+    QSize       m_size;         // width, height
 
     //BoundingBox m_boundingBox;  // What the view currently can see
 };
