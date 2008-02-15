@@ -1,5 +1,13 @@
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
+	Control the Sun settings in the KDE GUI.
+	Patch by Christian Banik.  Thanks!
+	* src/marble_part.h (showSun): new function
+	* src/marble_part.cpp (showSun): new function
+	(copyMap): activate the show_sun action.
+	* src/marble_part.rc (show_sun): new action
+	* src/marbleui.rc (show_sun): new action
+
 	First shot at new projection classes.
 	* src/lib/AbstractProjection.{h,cpp}: new files
 	* src/lib/SphericalProjection.{h,cpp}: new files

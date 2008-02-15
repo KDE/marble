@@ -37,6 +37,7 @@
 #include "settings.h"
 
 #include "marble_part.h"
+#include "lib/SunControlWidget.h"
 
 namespace
 {
@@ -198,6 +199,18 @@ void MarblePart::showStatusBar( bool isChecked )
     m_statusBarExtension->statusBar()->setVisible( isChecked );
 }
 
+void MarblePart::showSun()
+{
+    if (!m_sunControlDialog) 
+        m_sunControlDialog = new SunControlWidget( NULL, m_controlView->sunLocator() );
+
+
+    m_sunControlDialog->show();
+    m_sunControlDialog->raise();
+    m_sunControlDialog->activateWindow();
+}
+
+
 void MarblePart::copyMap()
 {
     QPixmap      mapPixmap = m_controlView->mapScreenShot();
@@ -284,6 +297,12 @@ void MarblePart::setupActions()
 
     m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(), actionCollection() );
     connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
+
+    // Action: Show Sunshade options
+    m_showSunAct = new KAction( this );
+    actionCollection()->addAction( "show_sun", m_showSunAct );
+    m_showSunAct->setText( i18n( "S&un Control" ) );
+    connect( m_showSunAct, SIGNAL( triggered( bool ) ), this, SLOT( showSun() ) );
 
     readSettings();
 }

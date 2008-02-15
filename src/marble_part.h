@@ -18,6 +18,7 @@ class KAction;
 
 class QLabel;
 class ControlView;
+class SunControlWidget;
 
 namespace KParts {
 class StatusBarExtension;
@@ -48,6 +49,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
+    void  showSun();
     void  setupStatusBar();
     void  showNewStuffDialog();
 
@@ -60,6 +62,7 @@ class MarblePart: public KParts::ReadOnlyPart
   private:
     // All the functionality is provided by this widget.
     ControlView  *m_controlView;
+    SunControlWidget* m_sunControlDialog;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
@@ -69,6 +72,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
     KAction      *m_newStuffAction;
+    KAction      *m_showSunAct;
 
     QString m_position;
     QString m_distance;
@@ -80,6 +84,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void updateStatusBar();
 
     KParts::StatusBarExtension *m_statusBarExtension;
+
 };
 
 #endif
