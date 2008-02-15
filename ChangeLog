@@ -1,5 +1,10 @@
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
+	First shot at new projection classes.
+	* src/lib/AbstractProjection.{h,cpp}: new files
+	* src/lib/SphericalProjection.{h,cpp}: new files
+	* src/lib/CMakelists.txt: add new files
+
 	Use ViewportParams everywhere
 	* src/lib/ViewportParams.{h,cpp} (planetAxis): Used to be axis
 	* src/lib/ViewParams.{h,cpp} (m_viewport): New member
