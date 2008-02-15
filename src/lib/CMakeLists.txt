@@ -72,6 +72,7 @@ set(marblewidget_SRCS
            DeferredFlag.cpp
            TileCreatorDialog.cpp
            MapTheme.cpp
+           ViewportParams.cpp
            ViewParams.cpp
            MeasureTool.cpp
            VisiblePlaceMark.cpp
@@ -279,6 +280,7 @@ else (APPLE AND QTONLY)
            DeferredFlag.h
            TileCreatorDialog.h
            MapTheme.h
+           ViewportParams.h
            ViewParams.h
            MeasureTool.h
            VisiblePlaceMark.h
