@@ -481,6 +481,37 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             return false;
     }
 
+    if ( viewParams->m_projection == Mercator ) {
+
+            double lon, lat;
+            double rad2Pixel = 2 * viewParams->m_radius / M_PI;
+
+            double centerLon, centerLat;
+            viewParams->centerCoordinates( centerLon, centerLat );
+
+            geopoint.geoCoordinates( lon, lat );
+            if(fabs(lat) >=  85.05113*DEG2RAD)
+                return false;
+            // Let (x, y) be the position on the screen of the placemark..
+
+            x = (int)(imgwidth  / 2 - rad2Pixel * (centerLon - lon));
+            y = (int)(imgheight / 2 + rad2Pixel * (centerLat - atanh( sin(lat) ) ));
+
+            // Skip placemarks that are outside the screen area
+            //
+            if ( (y >= 0 && y < imgheight)
+                 && ( (x >= 0 && x < imgwidth) 
+                      || (x - 4 * viewParams->m_radius >= 0
+                          && x - 4 * viewParams->m_radius < imgwidth)
+                      || (x + 4 * viewParams->m_radius >= 0
+                          && x + 4 * viewParams->m_radius < imgwidth) ) )
+            {
+                return true;
+            }
+
+            return false;
+    }
+
     return true;
 }
 

@@ -1,3 +1,11 @@
+2008-02-13  Carlos Licea  <carlos.licea@kdemail.net>
+    Added the Mercator Projection to the placemarks.
+    *src/lib/PlaceMarkPainter.cpp: added Mercator to the switch.
+    *src/lib/PlaceMarkLayout.cpp: added Mercator case to the switch
+     to calculate the position of a given placemark.
+    *src/lib/MarbleMap.cpp: corrected the calculation of the y in
+     screenCoordinates function.
+
 2008-02-14  Torsten Rahn  <rahn@kde.org>
 
     * data/placemarks/HOWTO-cities.txt:

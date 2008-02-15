@@ -67,7 +67,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
             }
 
             break;
-        case Equirectangular:
+        case Equirectangular || Mercator:
 
             while ( visit != visiblePlaceMarks.constBegin() ) {
                 --visit;

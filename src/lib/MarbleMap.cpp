@@ -705,7 +705,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
          double rad2Pixel = 2*d->m_viewParams.m_radius / M_PI;
  
          x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-         y = (int)( log( tan(lat) + 1 / cos(lat) ));
+         y = (int)(height() / 2 + rad2Pixel * (centerLat - atanh(sin(lat)) ) );
 
          return true;
     }
