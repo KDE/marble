@@ -692,146 +692,18 @@ int MarbleMap::northPoleZ()
 bool MarbleMap::screenCoordinates( const double lon, const double lat,
                                    int& x, int& y )
 {
-#if 1
     return d->currentProjection->screenCoordinates( lon, lat,
                                                     d->m_viewParams.viewport(),
                                                     x, y );
-#else
-    switch( d->m_viewParams.projection() ) {
-     case Spherical:
-     {
-         Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
-         p.rotateAroundAxis(d->m_viewParams.planetAxis().inverse());
- 
-         x = (int)( width() / 2   + (double)( d->m_viewParams.radius() ) * p.v[Q_X] );
-         y = (int)( height() / 2  + (double)( d->m_viewParams.radius() ) * p.v[Q_Y] );
- 
-         return p.v[Q_Z] > 0;
-     }
- 
-     case Equirectangular:
-    {
-         // Calculate translation of center point
-         double centerLon, centerLat;
-         d->m_viewParams.centerCoordinates(centerLon, centerLat);
-         double rad2Pixel = 2*d->m_viewParams.radius() / M_PI;
- 
-         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-         y = (int)( height() / 2 + ( lat * DEG2RAD + centerLat ) * rad2Pixel );
-
-         return true;
-    }
-
-     case Mercator:
-    {
-         // Calculate translation of center point
-         double centerLon, centerLat;
-         d->m_viewParams.centerCoordinates(centerLon, centerLat);
-         double rad2Pixel = 2*d->m_viewParams.radius() / M_PI;
- 
-         x = (int)( width() / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-         y = (int)(height() / 2 + rad2Pixel * (centerLat - atanh(sin(lat)) ) );
-
-         return true;
-    }
-    }
- 
-     return false;
-#endif
 }
 
 bool MarbleMap::geoCoordinates( const int x, const int y,
                                 double& lon, double& lat,
                                 GeoDataPoint::Unit unit )
 {
-#if 1
     return d->currentProjection->geoCoordinates( x, y,
                                                  d->m_viewParams.viewport(),
                                                  lon, lat, unit );
-#else
-    int           imageHalfWidth  = width() / 2;
-    int           imageHalfHeight = height() / 2;
-    const double  inverseRadius   = 1.0 / (double)(radius());
-    bool          noerr = false;
-
-    switch( d->m_viewParams.projection() ) {
-    case Spherical:
-        if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-                                + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
-        {
-            double qx = inverseRadius * (double)( x - imageHalfWidth );
-            double qy = inverseRadius * (double)( imageHalfHeight - y );
-            double qr = 1.0 - qy * qy;
-
-            double qr2z = qr - qx * qx;
-            double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-            Quaternion  qpos( 0.0, qx, qy, qz );
-            qpos.rotateAroundAxis( planetAxis() );
-            qpos.getSpherical( lon, lat );
-
-            noerr = true;
-        }
-        break;
-
-    case Equirectangular:
-    {
-        // Calculate translation of center point
-        double centerLon, centerLat;
-        d->m_viewParams.centerCoordinates(centerLon, centerLat);
-
-        int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
-        int yTop = imageHalfHeight - radius() + yCenterOffset;
-        int yBottom = yTop + 2*radius();
-        if ( y >= yTop && y < yBottom ) {
-            int const xPixels = x - imageHalfWidth;
-            int const yPixels = y - imageHalfHeight;
-
-            double const pixel2rad = M_PI / (2 * radius());
-            lat = - yPixels * pixel2rad + centerLat;
-            lon = + xPixels * pixel2rad + centerLon;
-
-            while( lon > M_PI ) lon -= 2*M_PI;
-            while( lon < -M_PI ) lon += 2*M_PI;
-
-            noerr = true;
-        }
-        break;
-    }
-    case Mercator:
-    {
-        // Calculate translation of center point
-        double centerLon, centerLat;
-        d->m_viewParams.centerCoordinates(centerLon, centerLat);
-
-        int yCenterOffset =  (int)((double)(2*radius()) / M_PI * centerLat);
-        int yTop = imageHalfHeight - radius() + yCenterOffset;
-        int yBottom = yTop + 2*radius();
-        if ( y >= yTop && y < yBottom ) {
-            int const xPixels = x - imageHalfWidth;
-            int const yPixels = y - imageHalfHeight;
-
-            double const pixel2rad = M_PI / (2 * radius());
-
-            lat = atan( sinh( ((imageHalfHeight + yCenterOffset) - y) / (double)(2 * radius()) * M_PI ) );
-            lon = + xPixels * pixel2rad + centerLon;
-
-            while( lon > M_PI ) lon -= 2*M_PI;
-            while( lon < -M_PI ) lon += 2*M_PI;
-
-            noerr = true;
-        }
-        break;
-    }
-    }
-
-    if ( unit == GeoDataPoint::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
-    }
-
-    return noerr;
-#endif
 }
 
 bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)

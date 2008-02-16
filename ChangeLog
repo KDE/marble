@@ -1,3 +1,9 @@
+2008-02-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Clean up a bit
+	* src/lib/MarbleMap.cpp (geoCoordinates): remove #if'ed out code
+	 (screenCoordinates): remove #if'ed out code
+	
 2008-02-15  Carlos Licea  <carlos.licea@kdemail.net>
     *PlaceMarkPainter.cpp: Fix my previous verbosiness, thanks Jeremy!.
 
