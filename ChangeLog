@@ -1,3 +1,8 @@
+2008-02-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Follow the coding standards
+	* src/lib/PlaceMarkLayout.cpp: cleaning
+
 2008-02-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Clean up a bit
