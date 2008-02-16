@@ -27,7 +27,7 @@ EquirectProjection::~EquirectProjection()
 
 
 bool EquirectProjection::screenCoordinates( const double lon, const double lat,
-                                            ViewportParams *params,
+                                            const ViewportParams *params,
                                             int& x, int& y )
 {
     // Calculate translation of center point
@@ -43,13 +43,13 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
 }
 
 bool EquirectProjection::geoCoordinates( const int x, const int y,
-                                         ViewportParams *params,
+                                         const ViewportParams *params,
                                          double& lon, double& lat,
                                          GeoDataPoint::Unit unit )
 {
     int           imgWidth2     = params->width() / 2;
     int           imgHeight2    = params->height() / 2;
-    const double  inverseRadius = 1.0 / (double)(params->radius());
+    //const double  inverseRadius = 1.0 / (double)(params->radius());
     bool          noerr         = false;
 
     // Calculate translation of center point
@@ -84,8 +84,8 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
 }
 
 bool EquirectProjection::geoCoordinates( int x, int y, 
-                                          ViewportParams *params,
-                                          Quaternion &q)
+                                         const ViewportParams *params,
+                                         Quaternion &q )
 {
     // NYI
     return false;

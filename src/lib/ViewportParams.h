@@ -63,7 +63,7 @@ class ViewportParams
     void setSize(QSize newSize);
 
     // Other functions
-    void centerCoordinates( double &centerLon, double &centerLat );
+    void centerCoordinates( double &centerLon, double &centerLat ) const;
 
  private:
     Projection  m_projection;

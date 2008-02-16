@@ -1,3 +1,22 @@
+2008-02-16  Inge Wallin  <inge@lysator.liu.se>
+
+	Activate the Projection classes!
+	* src/lib/ViewParams.{h,cpp} (viewport): new function
+	* src/lib/ViewportParams.{h,cpp} (centerCoordinats): is now const
+	* src/lib/MarbleMap.cpp (MarbleMapPrivate): Add 3 projection
+	members and one pointer currentProjection.
+	(construct): init currentProjection
+	(setProjection): set currentProjection
+	(screenCoordinates): use current projection class
+	(geoCoordinates): use current projection class
+	* src/lib/AbstractProjection.h (screenCoordinates): make params const
+	* src/lib/SphericalProjection.{h,cpp} (screenCoordinates): make params const
+	(geoCoordinates): make params const
+	* src/lib/EquirectProjection.{h,cpp} (screenCoordinates): make params const
+	(geoCoordinates): make params const
+	* src/lib/MercatorProjection.{h,cpp} (screenCoordinates): make params const
+	(geoCoordinates): make params const
+
 2008-02-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Add the two last projections.

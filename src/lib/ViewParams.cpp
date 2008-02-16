@@ -65,6 +65,11 @@ ViewParams::~ViewParams()
 }
 
 
+const ViewportParams *ViewParams::viewport() const
+{
+    return &m_viewport;
+}
+
 Projection ViewParams::projection() const
 {
     return m_viewport.projection();

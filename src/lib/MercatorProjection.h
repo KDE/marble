@@ -48,7 +48,7 @@ class MercatorProjection : public AbstractProjection
      *         @c false if the geographical coordinates are not visible on the screen
      */
     bool screenCoordinates( const double lon, const double lat,
-                            ViewportParams *params,
+                            const ViewportParams *params,
                             int& x, int& y );
 
     /**
@@ -61,7 +61,7 @@ class MercatorProjection : public AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     bool geoCoordinates( const int x, const int y,
-                         ViewportParams *params,
+                         const ViewportParams *params,
                          double& lon, double& lat,
                          GeoDataPoint::Unit = GeoDataPoint::Degree );
 
@@ -74,8 +74,8 @@ class MercatorProjection : public AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
     bool    geoCoordinates( int x, int y, 
-                            ViewportParams *params,
-                            Quaternion &q);
+                            const ViewportParams *params,
+                            Quaternion &q );
 
  private:
     //MercatorProjectionPrivate  * const d;

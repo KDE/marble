@@ -27,7 +27,7 @@ SphericalProjection::~SphericalProjection()
 
 
 bool SphericalProjection::screenCoordinates( const double lon, const double lat,
-                                             ViewportParams *params,
+                                             const ViewportParams *params,
                                              int& x, int& y )
 {
     Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
@@ -40,7 +40,7 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
 }
 
 bool SphericalProjection::geoCoordinates( const int x, const int y,
-                                          ViewportParams *params,
+                                          const ViewportParams *params,
                                           double& lon, double& lat,
                                           GeoDataPoint::Unit unit )
 {
@@ -75,8 +75,8 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
 }
 
 bool SphericalProjection::geoCoordinates( int x, int y, 
-                                          ViewportParams *params,
-                                          Quaternion &q)
+                                          const ViewportParams *params,
+                                          Quaternion &q )
 {
     // NYI
     return false;

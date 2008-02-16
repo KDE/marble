@@ -35,6 +35,9 @@
 #include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
+#include "SphericalProjection.h"
+#include "EquirectProjection.h"
+#include "MercatorProjection.h"
 #include "TextureColorizer.h"
 #include "ClipPainter.h"
 #include "FileViewModel.h"
@@ -65,6 +68,11 @@ class MarbleMapPrivate
     int              m_height;
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
+
+    SphericalProjection  sphericalProjection;
+    EquirectProjection   equirectProjection;
+    MercatorProjection   mercatorProjection;
+    AbstractProjection  *currentProjection; // Points to one of the above.
 
     // The home position
     GeoDataPoint     m_homePoint;
@@ -150,6 +158,11 @@ void MarbleMap::construct()
     // displayed on the map background.
     // FIXME:
     //setAutoFillBackground( true );
+
+    // FIXME: Should be initialized to the same as
+    //        ViewportParams::m_projection is initialized to.
+    //        Fix his dependency.
+    d->currentProjection = &d->sphericalProjection;
 
     d->m_justModified = false;
 
@@ -562,6 +575,19 @@ void MarbleMap::setProjection( Projection projection )
     d->m_viewParams.m_oldProjection = d->m_viewParams.projection();
     d->m_viewParams.setProjection( projection );
 
+    // FIXME: Remove this and make it into something better.
+    switch ( projection ) {
+    case Spherical:
+        d->currentProjection = &d->sphericalProjection;
+        break;
+    case Equirectangular:
+        d->currentProjection = &d->equirectProjection;
+        break;
+    case Mercator:
+        d->currentProjection = &d->mercatorProjection;
+        break;
+    }
+
     // Redraw the background if necessary
     if ( !globeCoversImage() 
          || d->m_viewParams.projection() != Spherical )
@@ -678,8 +704,13 @@ int MarbleMap::northPoleZ()
 
 // FIXME: change name
 bool MarbleMap::screenCoordinates( const double lon, const double lat,
-                                      int& x, int& y )
+                                   int& x, int& y )
 {
+#if 1
+    return d->currentProjection->screenCoordinates( lon, lat,
+                                                    d->m_viewParams.viewport(),
+                                                    x, y );
+#else
     switch( d->m_viewParams.projection() ) {
      case Spherical:
      {
@@ -720,12 +751,18 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
     }
  
      return false;
+#endif
 }
 
-bool MarbleMap::geoCoordinates(const int x, const int y,
-                                  double& lon, double& lat,
-                                  GeoDataPoint::Unit unit )
+bool MarbleMap::geoCoordinates( const int x, const int y,
+                                double& lon, double& lat,
+                                GeoDataPoint::Unit unit )
 {
+#if 1
+    return d->currentProjection->geoCoordinates( x, y,
+                                                 d->m_viewParams.viewport(),
+                                                 lon, lat, unit );
+#else
     int           imageHalfWidth  = width() / 2;
     int           imageHalfHeight = height() / 2;
     const double  inverseRadius   = 1.0 / (double)(radius());
@@ -808,6 +845,7 @@ bool MarbleMap::geoCoordinates(const int x, const int y,
     }
 
     return noerr;
+#endif
 }
 
 bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)

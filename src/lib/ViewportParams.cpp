@@ -102,7 +102,7 @@ void ViewportParams::setSize(QSize newSize)
 //                        Other functions
 
 
-void ViewportParams::centerCoordinates( double &centerLon, double &centerLat )
+void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) const
 {
     // Calculate translation of center point
     centerLat = - m_planetAxis.pitch();

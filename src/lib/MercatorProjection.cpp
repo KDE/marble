@@ -27,8 +27,8 @@ MercatorProjection::~MercatorProjection()
 
 
 bool MercatorProjection::screenCoordinates( const double lon, const double lat,
-                                             ViewportParams *params,
-                                             int& x, int& y )
+                                            const ViewportParams *params,
+                                            int& x, int& y )
 {
     // Calculate translation of center point
     double  centerLon;
@@ -43,7 +43,7 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
 }
 
 bool MercatorProjection::geoCoordinates( const int x, const int y,
-                                         ViewportParams *params,
+                                         const ViewportParams *params,
                                          double& lon, double& lat,
                                          GeoDataPoint::Unit unit )
 {
@@ -87,7 +87,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 }
 
 bool MercatorProjection::geoCoordinates( int x, int y, 
-                                         ViewportParams *params,
+                                         const ViewportParams *params,
                                          Quaternion &q)
 {
     // NYI

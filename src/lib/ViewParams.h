@@ -45,6 +45,7 @@ class ViewParams
     ~ViewParams();
 
     // Getters and setters
+    const ViewportParams  *viewport() const;
     Projection projection() const;
     void setProjection(Projection newProjection);
 

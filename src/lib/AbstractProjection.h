@@ -51,7 +51,7 @@ class AbstractProjection
      *         @c false if the geographical coordinates are not visible on the screen
      */
     virtual bool screenCoordinates( const double lon, const double lat,
-                                    ViewportParams *params,
+                                    const ViewportParams *params,
                                     int& x, int& y ) = 0;
 
     /**
@@ -64,9 +64,9 @@ class AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     virtual bool geoCoordinates( const int x, const int y,
-                                 ViewportParams *params,
+                                 const ViewportParams *params,
                                  double& lon, double& lat,
-                                 GeoDataPoint::Unit = GeoDataPoint::Degree ) = 0;
+                                 GeoDataPoint::Unit unit = GeoDataPoint::Degree ) = 0;
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -77,7 +77,7 @@ class AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
     virtual bool geoCoordinates( int x, int y,
-                                 ViewportParams *params,
+                                 const ViewportParams *params,
                                  Quaternion &q ) = 0;
 
  private:
