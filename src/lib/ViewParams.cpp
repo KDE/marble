@@ -17,16 +17,9 @@
 ViewParams::ViewParams( )
 {
     // Default projection
-#if 0
-    m_projection    = Spherical;
-#endif
     m_oldProjection = Spherical;
 
-    // Default view
-#if 0
-    m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
-    m_radius     = 2000;
-#endif    // FIXME: planetAxisUpdated, radiusUpdated
+    // FIXME: planetAxisUpdated, radiusUpdated
     // FIXME: boundingBox
 
     // Show / don't show parameters
@@ -105,20 +98,5 @@ void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 
 void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
 {
-#if 1
     m_viewport.centerCoordinates( centerLon, centerLat );
-#else
-
-    // Calculate translation of center point
-    centerLat = - m_planetAxis.pitch();
-    if ( centerLat > M_PI )
-        centerLat -= 2 * M_PI;
-
-    centerLon = + m_planetAxis.yaw();
-    if ( centerLon > M_PI )
-        centerLon -= 2 * M_PI;
-
-    // qDebug() << "centerLon" << centerLon * RAD2DEG;
-    // qDebug() << "centerLat" << centerLat * RAD2DEG;
-#endif
 }

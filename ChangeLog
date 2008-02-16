@@ -1,5 +1,12 @@
 2008-02-16  Inge Wallin  <inge@lysator.liu.se>
 
+	Clean up after the last few changes.
+	* src/lib/MarbleWidget.cpp (setMapTheme): Clean up
+	* src/lib/MarbleMap.{h,cpp} (misc): Clean up
+	(repaint): removed
+	(update):  removed
+	* src/lib/ViewParams.cpp (ViewParams, centerCoordinates): Clean up
+
 	Activate the Projection classes!
 	* src/lib/ViewParams.{h,cpp} (viewport): new function
 	* src/lib/ViewportParams.{h,cpp} (centerCoordinats): is now const

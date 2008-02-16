@@ -792,11 +792,7 @@ QString MarbleWidget::mapTheme() const
 
 void MarbleWidget::setMapTheme( const QString& maptheme )
 {
-    if ( maptheme == d->m_model->mapTheme()
-#if 0 // What is this good for?
-         && d->m_viewParams.m_projection == d->m_viewParams.m_oldProjection 
-#endif
-         )
+    if ( maptheme == d->m_model->mapTheme() )
         return;
 
     // FIXME: Why does setMapTheme have to have a projection?

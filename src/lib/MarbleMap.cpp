@@ -493,8 +493,6 @@ void MarbleMap::rotateTo(const Quaternion& quat)
 void MarbleMap::rotateBy(const Quaternion& incRot)
 {
     d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
-
-    repaint();
 }
 
 void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
@@ -507,24 +505,14 @@ void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
     axis *= rotPhi;
     axis.normalize();
     d->m_viewParams.setPlanetAxis( axis );
-
-    repaint();
 }
 
 
 void MarbleMap::centerOn(const double& lon, const double& lat)
 {
-#if 0
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
-                                                   lon * DEG2RAD,
-                                                  0.0 );
-#else
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
     d->m_viewParams.setPlanetAxis( quat );
-#endif
-//    d->m_viewParams.m_planetAxis.display();
-    repaint();
 }
 
 void MarbleMap::centerOn(const QModelIndex& index)
@@ -548,8 +536,6 @@ void MarbleMap::centerOn(const QModelIndex& index)
     }
     else
         d->m_crosshair.setEnabled( false );
-
-    repaint();
 }
 
 
@@ -880,30 +866,18 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
 
 void MarbleMap::rotateTo( const double& lon, const double& lat, const double& psi)
 {
-#if 0
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,   // "phi"
-                                                  lon * DEG2RAD,   // "theta"
-                                                  psi * DEG2RAD );
-#else
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD,   // "phi"
                            lon * DEG2RAD,   // "theta"
                            psi * DEG2RAD );
     d->m_viewParams.setPlanetAxis( quat );
-#endif
 }
 
 void MarbleMap::rotateTo(const double& lon, const double& lat)
 {
-#if 0
-    d->m_viewParams.m_planetAxis.createFromEuler( -lat * DEG2RAD,
-                                                  lon  * DEG2RAD,
-                                                  0.0 );
-#else
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon  * DEG2RAD, 0.0 );
     d->m_viewParams.setPlanetAxis( quat );
-#endif
 }
 
 
@@ -1119,8 +1093,6 @@ void MarbleMap::goHome()
     rotateTo( homeLon * RAD2DEG, homeLat * RAD2DEG );
 
     zoomView( d->m_homeZoom ); // default 1050
-
-    repaint(); // not obsolete in case the zoomlevel stays unaltered
 }
 
 QString MarbleMap::mapTheme() const
@@ -1138,49 +1110,41 @@ void MarbleMap::setMapTheme( const QString& maptheme )
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    repaint();
 }
 
 void MarbleMap::setShowScaleBar( bool visible )
 {
     d->m_showScaleBar = visible;
-    repaint();
 }
 
 void MarbleMap::setShowCompass( bool visible )
 {
     d->m_showCompass = visible;
-    repaint();
 }
 
 void MarbleMap::setShowGrid( bool visible )
 {
     d->m_viewParams.m_showGrid = visible;
-    repaint();
 }
 
 void MarbleMap::setShowPlaces( bool visible )
 {
     d->m_viewParams.m_showPlaceMarks = visible;
-    repaint();
 }
 
 void MarbleMap::setShowCities( bool visible )
 {
     d->m_viewParams.m_showCities = visible;
-    repaint();
 }
 
 void MarbleMap::setShowTerrain( bool visible )
 {
     d->m_viewParams.m_showTerrain = visible;
-    repaint();
 }
 
 void MarbleMap::setShowOtherPlaces( bool visible )
 {
     d->m_viewParams.m_showOtherPlaces = visible;
-    repaint();
 }
 
 void MarbleMap::setShowRelief( bool visible )
@@ -1188,7 +1152,6 @@ void MarbleMap::setShowRelief( bool visible )
     d->m_viewParams.m_showRelief = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    repaint();
 }
 
 void MarbleMap::setShowElevationModel( bool visible )
@@ -1196,7 +1159,6 @@ void MarbleMap::setShowElevationModel( bool visible )
     d->m_viewParams.m_showElevationModel = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    repaint();
 }
 
 void MarbleMap::setShowIceLayer( bool visible )
@@ -1204,19 +1166,16 @@ void MarbleMap::setShowIceLayer( bool visible )
     d->m_viewParams.m_showIceLayer = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    repaint();
 }
 
 void MarbleMap::setShowBorders( bool visible )
 {
     d->m_viewParams.m_showBorders = visible;
-    repaint();
 }
 
 void MarbleMap::setShowRivers( bool visible )
 {
     d->m_viewParams.m_showRivers =  visible;
-    repaint();
 }
 
 void MarbleMap::setShowLakes( bool visible )
@@ -1224,25 +1183,21 @@ void MarbleMap::setShowLakes( bool visible )
     d->m_viewParams.m_showLakes = visible;
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    repaint();
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
 {
     d->m_showFrameRate = visible;
-    repaint();
 }
 
 void MarbleMap::setShowGps( bool visible )
 {
     d->m_viewParams.m_showGps = visible;
-    repaint();
 }
 
 void MarbleMap::changeCurrentPosition( double lon, double lat)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
-    repaint();
 }
 
 void MarbleMap::notifyMouseClick( int x, int y)
@@ -1305,7 +1260,6 @@ void MarbleMap::setQuickDirty( bool enabled )
             transparency = enabled ? 255 : 192;
             d->m_compass.setTransparency( transparency );
             d->m_mapscale.setTransparency( transparency );
-            repaint();
             break;
         case Equirectangular:
             return;
@@ -1317,7 +1271,6 @@ void MarbleMap::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    update();
 }
 
 void MarbleMap::updateRegion( BoundingBox &box )
@@ -1329,7 +1282,6 @@ void MarbleMap::updateRegion( BoundingBox &box )
 
     /*TODO: write a method for BoundingBox to cacluate the screen
      *region and pass that to update()*/
-    update();
 }
 
 void MarbleMap::setDownloadUrl( const QString &url )
@@ -1409,7 +1361,6 @@ void MarbleMap::updateSun()
     //qDebug() << "Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
-    repaint();
     //qDebug() << "Finished updating the sun shading map";
 }
 

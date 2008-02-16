@@ -429,8 +429,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 #endif
 #if 0
 #else
-    void repaint() const {};	/* FIXME: Only in qwidget */
-    void update() const {};	/* FIXME: Only in qwidget */
     void update(QRegion&) const {};	/* FIXME: Only in qwidget */
     void  doPaint(ClipPainter &painter, QRect &dirtyRect);
 #endif
