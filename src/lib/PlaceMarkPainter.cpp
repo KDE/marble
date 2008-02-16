@@ -67,58 +67,8 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
             }
 
             break;
+
         case Equirectangular:
-
-            while ( visit != visiblePlaceMarks.constBegin() ) {
-                --visit;
-                mark = *visit;
-
-                if ( mark->labelPixmap().isNull() )
-                {
-                    bool isSelected = selection.contains( mark->modelIndex() );
-                    drawLabelPixmap( mark, isSelected );
-                }
-
-                painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-
-                int tempSymbol = mark->symbolPosition().x();
-                int tempText =   mark->labelRect().x();
-
-                for ( int i = tempSymbol - 4 * viewParams->radius();
-                      i >= 0;
-                      i -= 4 * viewParams->radius() )
-                {
-                    QRect labelRect( mark->labelRect() );
-                    labelRect.moveLeft(i - tempSymbol + tempText );
-                    mark->setLabelRect( labelRect );
-
-                    QPoint symbolPos( mark->symbolPosition() );
-                    symbolPos.setX( i );
-                    mark->setSymbolPosition( symbolPos );
-
-                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-                }
-
-                for ( int i = tempSymbol;
-                      i <= imageWidth;
-                      i += 4 * viewParams->radius() )
-                {
-                    QRect labelRect( mark->labelRect() );
-                    labelRect.moveLeft(i - tempSymbol + tempText );
-                    mark->setLabelRect( labelRect );
-
-                    QPoint symbolPos( mark->symbolPosition() );
-                    symbolPos.setX( i );
-                    mark->setSymbolPosition( symbolPos );
-
-                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-                }
-            }
-            break;
-
         case Mercator:
 
             while ( visit != visiblePlaceMarks.constBegin() ) {
