@@ -68,6 +68,11 @@ Projection ViewParams::projection() const
     return m_viewport.projection();
 }
 
+AbstractProjection *ViewParams::currentProjection() const
+{
+    return m_viewport.currentProjection();
+}
+
 void ViewParams::setProjection(Projection newProjection)
 {
     m_viewport.setProjection( newProjection );

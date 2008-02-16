@@ -1,3 +1,15 @@
+2008-02-17  Inge Wallin  <ingwa@c83-252-220-112.bredband.comhem.se>
+
+	Move current projection to ViewportParams from MarbleMap.
+	* src/lib/MarbleMap.cpp (MarbleMapPrivate): Remove all projections 
+	(construct): Don't init.
+	(setProjection): Don't set currrentProjection;
+	(geoCoordinates, screenCoordinates): new calling conventions
+	* src/lib/ViewParams.cpp (currentProjection): New function
+	* src/lib/ViewportParams.{h,cpp} (currentProjection): New function
+	(setProjection): initialize m_currentProjection
+	(s_*Projection): new static members
+	
 2008-02-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Follow the coding standards

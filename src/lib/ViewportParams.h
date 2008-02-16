@@ -28,6 +28,9 @@
 #include "Quaternion.h"
 #include "BoundingBox.h"
 #include "global.h"
+#include "SphericalProjection.h"
+#include "EquirectProjection.h"
+#include "MercatorProjection.h"
 
 
 class QImage;
@@ -46,6 +49,7 @@ class ViewportParams
 
     // Getters and setters
     Projection projection() const;
+    AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
     int radius() const;
@@ -66,7 +70,10 @@ class ViewportParams
     void centerCoordinates( double &centerLon, double &centerLat ) const;
 
  private:
-    Projection  m_projection;
+    // These two go together.  m_currentProjection points to one of
+    // the static Projection classes at the bottom.
+    Projection           m_projection;
+    AbstractProjection  *m_currentProjection;
 
     // Parameters that determine the painting
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
@@ -75,6 +82,11 @@ class ViewportParams
     QSize       m_size;         // width, height
 
     //BoundingBox m_boundingBox;  // What the view currently can see
+
+
+    static SphericalProjection  s_sphericalProjection;
+    static EquirectProjection   s_equirectProjection;
+    static MercatorProjection   s_mercatorProjection;
 };
 
 

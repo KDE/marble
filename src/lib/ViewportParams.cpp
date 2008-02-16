@@ -15,7 +15,7 @@
 ViewportParams::ViewportParams( )
 {
     // Default projection
-    m_projection = Spherical;
+    setProjection( Spherical );
 
     // Default view
     m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
@@ -38,9 +38,27 @@ Projection ViewportParams::projection() const
     return m_projection;
 }
 
+AbstractProjection *ViewportParams::currentProjection() const
+{
+    return m_currentProjection;
+}
+
 void ViewportParams::setProjection(Projection newProjection)
 {
     m_projection = newProjection;
+
+    // Set the pointer to the current projection class.
+    switch ( newProjection ) {
+    case Spherical:
+        m_currentProjection = &s_sphericalProjection;
+        break;
+    case Equirectangular:
+        m_currentProjection = &s_equirectProjection;
+        break;
+    case Mercator:
+        m_currentProjection = &s_mercatorProjection;
+        break;
+    }
 }
 
 
@@ -116,3 +134,9 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
     // qDebug() << "centerLon" << centerLon * RAD2DEG;
     // qDebug() << "centerLat" << centerLat * RAD2DEG;
 }
+
+
+
+SphericalProjection  ViewportParams::s_sphericalProjection;
+EquirectProjection   ViewportParams::s_equirectProjection;
+MercatorProjection   ViewportParams::s_mercatorProjection;

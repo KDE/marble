@@ -47,6 +47,7 @@ class ViewParams
     // Getters and setters
     const ViewportParams  *viewport() const;
     Projection projection() const;
+    AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
     int radius() const;
