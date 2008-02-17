@@ -1,3 +1,13 @@
+2008-02-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Protect against crashes by removing (potential) overflows in calculation
+	* src/lib/MarbleWidget.{h,cpp} (globeCoversImage): New function
+	(misc): Use globeCoversImage
+	* src/lib/GlobeScanlineTextureMapper.cpp (mapTexture): convert to qint64
+	* src/lib/PlaceMarkLayout.cpp (locatedOnScreen): convert to double
+	* src/lib/VectorMap.cpp (sphericalCreateFromPntMap): Use doubles
+	* src/lib/TextureColorizer.cpp (colorize): Use qint64
+
 2008-02-07  Torsten Rahn  <rahn@kde.org>
 
     * Messages.sh:

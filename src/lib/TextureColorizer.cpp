@@ -31,9 +31,9 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
-    QImage  *origimg  = viewParams->m_canvasImage;
+    QImage        *origimg  = viewParams->m_canvasImage;
     const QImage  *coastimg = viewParams->m_coastImage;
-    const int      radius   = viewParams->m_radius;
+    const qint64   radius   = viewParams->m_radius;
 
     const int  imgheight = origimg->height();
     const int  imgwidth  = origimg->width();
@@ -83,8 +83,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 // Cheap Embosss / Bumpmapping
                 const uchar&  grey = *readData; // qBlue(*data);
 
-                if ( showRelief == true )
-                {
+                if ( showRelief == true ) {
                     emboss.gpuint.x4 = grey;
                     emboss.buffer = emboss.buffer >> 8;
                     bump = ( emboss.gpuint.x1 + 8 - grey );

@@ -407,6 +407,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool  quickDirty() const;
 
+    bool globeCoversImage() const;
+
+
  public Q_SLOTS:
 
     /**

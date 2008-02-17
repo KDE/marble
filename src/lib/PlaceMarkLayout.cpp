@@ -430,7 +430,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             double earthCenteredX=pixelAltitude * qpos.v[Q_X];
             double earthCenteredY=pixelAltitude * qpos.v[Q_Y];
             // don't draw high placemarks (e.g. satellites) that are not visible
-	        if ( qpos.v[Q_Z] < 0 && (earthCenteredX*earthCenteredX + earthCenteredY*earthCenteredY) < viewParams->m_radius * viewParams->m_radius)
+            if ( qpos.v[Q_Z] < 0
+                 && ( ( earthCenteredX * earthCenteredX
+                        + earthCenteredY * earthCenteredY )
+                      < (double)viewParams->m_radius * (double)viewParams->m_radius ) )
 	            return false;
 	    }
         // Let (x, y) be the position on the screen of the placemark..
@@ -463,8 +466,10 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
             //
             if ( (y >= 0 && y < imgheight)
                  && ( (x >= 0 && x < imgwidth) 
-                   || (x - 4 * viewParams->m_radius >= 0 && x - 4 * viewParams->m_radius < imgwidth)
-                   || (x + 4 * viewParams->m_radius >= 0 && x + 4 * viewParams->m_radius < imgwidth) ) 
+                   || (x - 4 * viewParams->m_radius >= 0
+                       && x - 4 * viewParams->m_radius < imgwidth)
+                   || (x + 4 * viewParams->m_radius >= 0
+                       && x + 4 * viewParams->m_radius < imgwidth) ) 
                )
             {
                 return true;

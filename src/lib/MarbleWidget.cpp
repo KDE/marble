@@ -421,12 +421,8 @@ void MarbleWidget::zoomView(int newZoom)
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    int  imageHalfWidth  = d->m_viewParams.m_canvasImage->width()  / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
-
-    if ( newRadius * newRadius < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         && newRadius != radius() 
-         || d->m_viewParams.m_projection == Equirectangular )
+    if ( ! globeCoversImage()
+         || d->m_viewParams.m_projection != Equirectangular )
     {
         setAttribute( Qt::WA_NoSystemBackground, false );
         d->m_viewParams.m_canvasImage->fill( Qt::black );
@@ -568,11 +564,8 @@ void MarbleWidget::setProjection( int projectionIndex )
     d->m_viewParams.m_oldProjection = d->m_viewParams.m_projection;
     d->m_viewParams.m_projection = projection;
 
-    int  imageHalfWidth = d->m_viewParams.m_canvasImage->width() / 2;
-    int  imageHalfHeight = d->m_viewParams.m_canvasImage->height() / 2;
-
-    if ( radius() * radius() < imageHalfWidth * imageHalfWidth + imageHalfHeight * imageHalfHeight
-         || d->m_viewParams.m_projection == Equirectangular )
+    if ( !globeCoversImage() 
+         || d->m_viewParams.m_projection != Spherical )
     {
         setAttribute(Qt::WA_NoSystemBackground, false);
         d->m_viewParams.m_canvasImage->fill( Qt::black );
@@ -664,7 +657,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     int  imageWidth2  = width() / 2;
     int  imageHeight2 = height() / 2;
 
-    if ( radius() < imageWidth2 * imageWidth2 + imageHeight2 * imageHeight2 ) {
+    if ( ! globeCoversImage() ) {
         setAttribute(Qt::WA_NoSystemBackground, false);
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
@@ -852,21 +845,18 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    qint64 imageWidth = (qint64)(width());
-    qint64 imageHeight = (qint64)(height());
-    qint64 imageRadius = (qint64)(radius());
-
     // Only draw an atmosphere if projection is spherical
     if ( d->m_viewParams.m_projection != Spherical )
         return;
 
     // No use to draw atmosphere if it's not visible in the area.
-    // FIXME: Why 4* ??
-//    qDebug() << 4 * imageRadius * imageRadius << " radius: " << imageRadius << " width: " << imageWidth ;
-    if ( 4 * imageRadius * imageRadius >= imageWidth * imageWidth + imageHeight * imageHeight )
+    if ( globeCoversImage() )
         return;
-//    else
-//        qDebug() << "redrawing Atmosphere";
+
+    // Ok, now we know that at least a little of the atmosphere is
+    // visible, if nothing else in the corners.  Draw the atmosphere
+    // by using a circular gradient.  This is a pure visual effect and
+    // has nothing to do with real physics.
 
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;
@@ -1330,5 +1320,22 @@ QString MarbleWidget::distanceString() const
 
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
+
+
+bool MarbleWidget::globeCoversImage() const
+{
+    // This first test is a quick one that will catch all really big
+    // radii and prevent overflow in the real test.
+    if ( radius() > width() + height() )
+        return true;
+
+    // This is the real test.  The 4 is because we are really
+    // comparing to width/2 and height/2.
+    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
+        return true;
+
+    return false;
+}
+
 
 #include "MarbleWidget.moc"

@@ -80,10 +80,16 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
 
     m_radius = viewParams->m_radius;
 
+    // We must use double or int64 for the calculations because we
+    // square radius sometimes below, and it may cause an overflow. We
+    // choose double because of some sqrt() calculations.
+    double   radius    = m_radius;
+    double   imgradius = m_imgradius;
+
     // zlimit: describes the lowest z value of the sphere that is
     //         visible as an excerpt on the screen
-    double zlimit = ( ( m_imgradius < m_radius * m_radius )
-                     ? sqrt(1 - (double)m_imgradius / (double)(m_radius * m_radius))
+    double zlimit = ( ( m_imgradius < radius * radius )
+                     ? sqrt( 1 - imgradius / ( radius * radius ) )
                      : 0.0 );
     // qDebug() << "zlimit: " << zlimit;
 
@@ -95,7 +101,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
                       || m_zPointLimit < 0.0 )
                      ? zlimit : m_zPointLimit;
 
-    m_rlimit = (int)( (double)(m_radius * m_radius)
+    m_rlimit = (int)( (radius * radius)
                       * (1.0 - m_zPointLimit * m_zPointLimit ) );
 
     Quaternion  qbound;
@@ -180,8 +186,7 @@ void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* vi
             } */
         }
 
-        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 )
-        {
+        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
             boundingPolygon.translate( 4 * m_radius, 0 );
             m_offset += 4 * m_radius;            
         }
@@ -426,7 +431,7 @@ void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
 
-    if ( m_imgradius < m_radius * m_radius ) {
+    if ( m_imgradius < (double)m_radius * (double)m_radius ) {
         painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
     }
     else {
@@ -545,7 +550,7 @@ const QPointF VectorMap::horizonPoint()
     xa = m_currentPoint.x() - ( m_imgrx + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
-    //	ya = sqrt( (m_radius +1) * ( m_radius +1) - xa*xa);
+    //	ya = sqrt( ((double)m_radius + 1) * ( (double)m_radius + 1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
         ? sqrt( (double)(m_rlimit) - (double)( xa * xa ) ) : 0;
     // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;

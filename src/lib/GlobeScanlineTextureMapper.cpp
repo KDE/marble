@@ -78,8 +78,8 @@ void GlobeScanlineTextureMapper::resizeMap(int width, int height)
 
 void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage* canvasImage = viewParams->m_canvasImage;
-    const int radius = viewParams->m_radius;
+    QImage       *canvasImage = viewParams->m_canvasImage;
+    const qint64  radius      = viewParams->m_radius;
 
     // Scanline based algorithm to texture map a sphere
 
