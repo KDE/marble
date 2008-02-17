@@ -13,6 +13,10 @@ FILE (GLOB BITMAP_FILES bitmaps/*.png)
 install (FILES ${BITMAP_FILES}
 DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
 
+FILE (GLOB BITMAP_FILES bitmaps/*.xpm)
+install (FILES ${BITMAP_FILES}
+DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
+
 install (FILES 
 svg/compass.svg
 svg/marble-logo.svg
