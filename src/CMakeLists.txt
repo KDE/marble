@@ -186,7 +186,7 @@ else(WIN32 AND QTONLY)
         install (TARGETS marble DESTINATION bin )
         install( FILES marble.desktop  DESTINATION share/applications)
       endif(NOT QTONLY)
-      #install (TARGETS marble DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS} )
+      #install (TARGETS marble ${INSTALL_TARGETS_DEFAULT_ARGS} )
     endif (APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
 
