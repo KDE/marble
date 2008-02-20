@@ -12,9 +12,10 @@ Prerequisites for building Marble are:
  - Qt 4.2 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
-    We have found that revision 701967 (Marble v.0.4.0)
-    works fine. Note that kdelibs is under heavy development, 
-    and some revisions might not work.
+    We have found that Marble v.0.5.x works fine.
+ - gpsd-2.37 or newer. Older versions of gpsd had C++ bindings
+    removed, how far back I don't know but 2.36 was one of them.
+    Great thanks to the gpsd developers for adding them back.
 
 A checkout of Marble. You can check out Marble using SVN via the command:
 
