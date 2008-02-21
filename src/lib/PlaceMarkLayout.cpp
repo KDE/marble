@@ -31,6 +31,14 @@
 #include "ViewParams.h"
 #include "VisiblePlaceMark.h"
 
+#ifdef Q_CC_MSVC
+static double msvc_atanh(double x)
+{
+  return ( 0.5 * log( ( 1.0 + x ) / ( 1.0 - x ) ) );
+}
+#define atanh msvc_atanh
+#endif
+
 PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
     : QObject( parent )
 {
