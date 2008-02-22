@@ -41,6 +41,7 @@ SET( geodata_SRCS
         ${geodata_parser_SRCS}
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
+        Quaternion.cpp
         geodata/GeoDataTest.cpp
    )
 
