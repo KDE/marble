@@ -46,7 +46,7 @@ void DGMLFolderTagHandler::parse(GeoDataParser& parser) const
 parser.isValidElement(dgmlTag_Folder));
 
     GeoDataFolder folder;
-    parser.document().addFolder(folder);
+//    parser.document().addFolder(folder);
 
     // TODO:
     // A <Folder> contains a <Name>. All you need to do now is to create a new GeoDataFolderNameHandler.

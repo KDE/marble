@@ -24,7 +24,7 @@
 
 
 // Lists all known DGML 2.0 tags
-(http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
+// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
 namespace GeoDataElementDictionary {
     extern const char* dgmlTag_nameSpace20;
 
@@ -36,8 +36,9 @@ namespace GeoDataElementDictionary {
     extern const char* dgmlTag_description;
     extern const char* dgmlTag_dgml;
     extern const char* dgmlTag_discrete;
-    extern const char* dgmlTag_document;
+    extern const char* dgmlTag_Document;
     extern const char* dgmlTag_filter;
+    extern const char* dgmlTag_Folder;
     extern const char* dgmlTag_geodata;
     extern const char* dgmlTag_head;
     extern const char* dgmlTag_heading;

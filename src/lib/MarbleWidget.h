@@ -117,6 +117,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
+    Q_PROPERTY(QString mapTheme  READ mapTheme        WRITE setMapTheme)
+    Q_PROPERTY(int projection    READ projection      WRITE setProjection)
+
     Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
     Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
 
@@ -568,11 +571,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c Mercator          another flat map
      */
     Projection  projection() const;
+//    int         projection() const;
 
     /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
+    void  setProjection( int        projection );
     void  setProjection( Projection projection );
 
     /**

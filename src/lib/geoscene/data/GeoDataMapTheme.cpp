@@ -29,7 +29,7 @@
 
 
 
-LegendItem::LegendItem()
+GeoDataLegendItem::GeoDataLegendItem()
   : m_background( Qt::transparent ),
     m_symbol(),
     m_text()
@@ -179,17 +179,15 @@ stringlist )
     GeoDataMapTheme            *maptheme = new GeoDataMapTheme();
 
     // Make sure we don't keep excessively large previews in memory
-    // TODO: Scale the icon down to the default icon size in
-katlasselectview.
-    //       For now maxIconSize already equals what's expected by the
-listview.
+    // TODO: Scale the icon down to the default icon size in katlasselectview.
+    //       For now maxIconSize already equals what's expected by the listview.
     QSize maxIconSize( 136,136 ); 
 
     int  row = 0;
     while ( it.hasNext() ) {
         QString currentmaptheme = it.next();
 
-        maptheme->open( MarbleDirs::path( "maps/" + currentmaptheme ) );
+//        maptheme->open( MarbleDirs::path( "maps/" + currentmaptheme ) );
 
         mapthememodel->insertRows( row, 1, QModelIndex() );
         mapthememodel->setData( mapthememodel->index( row, 0,
@@ -217,15 +215,11 @@ Qt::SmoothTransformation );
         QIcon mapThemeIcon =  QIcon(themeIconPixmap);
 
         mapthememodel->setData( mapthememodel->index( row, 0,
-QModelIndex() ), mapThemeIcon, 
-                                Qt::DecorationRole );
+        QModelIndex() ), mapThemeIcon, Qt::DecorationRole );
         mapthememodel->setData( mapthememodel->index( row, 0,
-QModelIndex() ),
-                                QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
-                                Qt::ToolTipRole);
-        mapthememodel->setData( mapthememodel->index( row, 1,
-QModelIndex() ),
-                                currentmaptheme );
+        QModelIndex() ), QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), Qt::ToolTipRole);
+        mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
+        currentmaptheme );
     }
 
     delete maptheme;

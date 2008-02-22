@@ -55,6 +55,7 @@ MapTheme::~MapTheme()
 int MapTheme::open( const QString& path )
 {
     QDomDocument  doc( "DeskGlobeML" );
+//    qDebug() << "PATH" << path;
     QFileInfo     fileInfo(path);
     if ( !fileInfo.isFile() ) {
         qDebug() << QString("Not a valid maptheme file: ") + path;
@@ -123,7 +124,8 @@ int MapTheme::open( const QString& path )
 
                 else if ( tagNameLower == "prefix" ) {
                     m_prefix = mapStyleSibling.text();
-                    // qDebug() << m_prefix;
+//                    if ( !m_prefix.contains("/") ) m_prefix = "earth/" + m_prefix;
+//                    qDebug() << m_prefix;
                 }
 
                 else if ( tagNameLower == "icon" ) {
@@ -486,8 +488,8 @@ QStringList MapTheme::findMapThemes( const QString& path )
         }
     }
 
-    // for (int i = 0; i < mapfiles.size(); ++i)
-    //	   qDebug() << "Files: " << mapfiles.at(i);
+//     for (int i = 0; i < mapfiles.size(); ++i)
+//    	   qDebug() << "Files: " << mapfiles.at(i);
 
     return mapfiles;
 }

@@ -13,7 +13,6 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataHotSpot.cpp
         geodata/data/GeoDataIconStyle.cpp
         geodata/data/GeoDataLabelStyle.cpp
-        geodata/data/GeoDataMapTheme.cpp
         geodata/data/GeoDataObject.cpp
         geodata/data/GeoDataPlacemark.cpp
         geodata/data/GeoDataPoint.cpp
@@ -37,7 +36,6 @@ SET( geodata_handlers_kml_SRCS
         geodata/handlers/kml/KMLElementDictionary.cpp
    )
 
-
 SET( geodata_SRCS
         ${geodata_data_SRCS}
         ${geodata_parser_SRCS}
@@ -45,3 +43,8 @@ SET( geodata_SRCS
         ${geodata_handlers_kml_SRCS}
         geodata/GeoDataTest.cpp
    )
+
+add_executable(geotest ${geodata_SRCS})
+target_link_libraries (geotest ${QT_QTCORE_LIBRARY} marblewidget)
+
+install (TARGETS geotest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )

@@ -21,44 +21,38 @@
 
 #include <QDebug>
 
-#include "GeoDataParser.h"
-#include "GeoDataTagHandler.h"
+#include "GeoSceneParser.h"
+#include "GeoSceneTagHandler.h"
 
-// TODO: GeoRSS support
-// #include "GeoRSSElementDictionary.h"
+// DGML support
+#include "DGMLElementDictionary.h"
 
-// GPX support
-#include "GPXElementDictionary.h"
+using namespace GeoSceneElementDictionary;
 
-// KML support
-#include "KMLElementDictionary.h"
-
-using namespace GeoDataElementDictionary;
-
-GeoDataParser::GeoDataParser(GeoDataDataSource source)
+GeoSceneParser::GeoSceneParser(GeoSceneDataSource source)
     : QXmlStreamReader()
     , m_source(source)
 {
 }
 
-GeoDataParser::~GeoDataParser()
+GeoSceneParser::~GeoSceneParser()
 {
 }
 
-GeoDataDocument& GeoDataParser::document()
-{
-    return m_document;
-}
-
-const GeoDataDocument& GeoDataParser::document() const
+GeoSceneDocument& GeoSceneParser::document()
 {
     return m_document;
 }
 
-bool GeoDataParser::read(QIODevice* device)
+const GeoSceneDocument& GeoSceneParser::document() const
+{
+    return m_document;
+}
+
+bool GeoSceneParser::read(QIODevice* device)
 {
     // Start with a fresh document
-    m_document = GeoDataDocument();
+    m_document = GeoSceneDocument();
 
     // Set data source
     setDevice(device);
@@ -71,12 +65,8 @@ bool GeoDataParser::read(QIODevice* device)
             bool valid = false;
 
             switch (m_source) {
-            // TODO: case GeoDataData_GeoRSS:
-            case GeoDataData_GPX:
-                valid = isValidElement(gpxTag_gpx);
-                break;                
-            case GeoDataData_KML:
-                valid = isValidElement(kmlTag_kml);
+            case GeoSceneData_DGML:
+                valid = isValidElement(dgmlTag_dgml);
                 break;
             default:
                 break;
@@ -87,13 +77,9 @@ bool GeoDataParser::read(QIODevice* device)
                 break;
             } else {
                 switch (m_source) {
-                // TODO: case GeoDataData_GeoRSS:
-                case GeoDataData_GPX:
-                    raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
+                case GeoSceneData_DGML:
+                    raiseError(QObject::tr("The file is not a valid DGML 2.0 file"));
                     break;                
-                case GeoDataData_KML:
-                    raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 file"));
-                    break;
                 default:
                     raiseError(QObject::tr("File format unrecognized"));
                     break;
@@ -103,12 +89,12 @@ bool GeoDataParser::read(QIODevice* device)
     }
 
     if (error())
-        qDebug() << "[GeoDataParser::read] -> Error occured:" << errorString();
+        qDebug() << "[GeoSceneParser::read] -> Error occured:" << errorString();
 
     return !error();
 }
 
-bool GeoDataParser::isValidElement(const QString& tagName) const
+bool GeoSceneParser::isValidElement(const QString& tagName) const
 {
     if (name() != tagName)
         return false;
@@ -119,11 +105,8 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     // wheter it's _either_ georss, or gpx or kml. To be discussed.
 
     switch (m_source) {
-    // TODO: case GeoDataData_GeoRSS:
-    case GeoDataData_GPX:
-        return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
-    case GeoDataData_KML:
-        return (namespaceUri() == kmlTag_nameSpace20 || namespaceUri() == kmlTag_nameSpace21);    
+    case GeoSceneData_DGML:
+        return (namespaceUri() == dgmlTag_nameSpace20);    
     default:
         break;
     }
@@ -133,7 +116,7 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-void GeoDataParser::parseDocument()
+void GeoSceneParser::parseDocument()
 {
     Q_ASSERT(isStartElement());
 
@@ -147,7 +130,7 @@ void GeoDataParser::parseDocument()
             const QString& tagName = name().toString();
 
             // Check if we have any registered handlers for this node
-            if (const GeoDataTagHandler* handler = GeoDataTagHandler::recognizes(tagName))
+            if (const GeoSceneTagHandler* handler = GeoSceneTagHandler::recognizes(tagName))
                 handler->parse(*this);
 
             parseDocument();

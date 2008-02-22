@@ -35,11 +35,11 @@ typedef struct
 class QDomElement;
 
 
-class LegendItem
+class GeoDataLegendItem
 {
  public:
-    LegendItem();
-    ~LegendItem() {}
+    GeoDataLegendItem();
+    ~GeoDataLegendItem() {}
 
     QColor   background()             const { return m_background; }
     void     setBackground( QColor bg )     { m_background = bg;   }
@@ -75,8 +75,8 @@ class LegendSection
     void     setCheckable( bool  checkable )        { m_checkable = checkable; }
     int      spacing()                        const { return m_spacing; }
     void     setSpacing( int spacing )              { m_spacing = spacing; }
-    QList< LegendItem*> items()               const { return m_items;   }
-    void                addItem( LegendItem *item ) { m_items.append( item ); }
+    QList< GeoDataLegendItem*> items()               const { return m_items;   }
+    void                addItem( GeoDataLegendItem *item ) { m_items.append( item ); }
 
     void     clear()
     {
@@ -89,7 +89,7 @@ class LegendSection
     QString               m_heading;
     bool                  m_checkable;
     int                   m_spacing;
-    QList< LegendItem* >  m_items;
+    QList< GeoDataLegendItem* >  m_items;
 };
 
 

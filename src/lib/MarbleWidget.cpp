@@ -521,6 +521,11 @@ void MarbleWidget::setProjection( Projection projection )
     repaint();
 }
 
+void MarbleWidget::setProjection( int projection )
+{
+    setProjection( (Projection)( projection ) );
+}
+
 void MarbleWidget::home( double &lon, double &lat, int& zoom )
 {
     d->m_map->home( lon, lat, zoom );

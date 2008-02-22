@@ -21,37 +21,43 @@
 
 #include <QDebug>
 
-#include "KMLFolderTagHandler.h"
+#include "GeoSceneTagHandler.h"
 
-#include "KMLElementDictionary.h"
-#include "GeoDataFolder.h"
-#include "GeoDataParser.h"
+GeoSceneTagHandler::TagHash* GeoSceneTagHandler::s_tagHandlerHash = 0;
 
-using namespace GeoDataElementDictionary;
-
-KML_DEFINE_TAG_HANDLER(Folder)
-
-KMLFolderTagHandler::KMLFolderTagHandler()
-    : GeoDataTagHandler()
+GeoSceneTagHandler::GeoSceneTagHandler()
 {
 }
 
-KMLFolderTagHandler::~KMLFolderTagHandler()
+GeoSceneTagHandler::~GeoSceneTagHandler()
 {
 }
 
-void KMLFolderTagHandler::parse(GeoDataParser& parser) const
+GeoSceneTagHandler::TagHash* GeoSceneTagHandler::tagHandlerHash()
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
+    if (!s_tagHandlerHash)
+        s_tagHandlerHash = new TagHash();
 
-    GeoDataFolder folder;
-//    parser.document().addFolder(folder);
+    Q_ASSERT(s_tagHandlerHash);
+    return s_tagHandlerHash;
+}
 
-    // TODO:
-    // A <Folder> contains a <Name>. All you need to do now is to create a new GeoDataFolderNameHandler.
-    // Once GeoDataFolderNameHandler::parse() is fired you need to check the last parsed element's tag.
-    // If it's ie. a <Folder> you know that parser.document().folders().last() is the one you're supposed
-    // to se the name on. Easy, eh?
+void GeoSceneTagHandler::registerHandler(const QString& tagName, const GeoSceneTagHandler* handler)
+{
+    TagHash* hash = tagHandlerHash();
 
-    qDebug() << "Parsed <Folder> start!";    
+    Q_ASSERT(!hash->contains(tagName));
+    hash->insert(tagName, handler);
+
+    qDebug() << "[GeoSceneTagHandler] -> Recognizing" << tagName << "tag!";
+}
+
+const GeoSceneTagHandler* GeoSceneTagHandler::recognizes(const QString& tagName)
+{
+    TagHash* hash = tagHandlerHash();
+
+    if (!hash->contains(tagName))
+        return 0;
+
+    return (*hash)[tagName];
 }

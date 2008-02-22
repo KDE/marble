@@ -10,6 +10,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
  ${QT_INCLUDE_DIR}
 )
@@ -118,6 +119,7 @@ set(marblewidget_SRCS
            geodata/data/GeoDataPoint.cpp
            geodata/data/GeoDataStyle.cpp
            geodata/data/GeoDataStyleSelector.cpp
+           geoscene/data/GeoDataMapTheme.cpp
 #           kml/KMLColorStyle.cpp
 #           kml/KMLColorStyleParser.cpp
 #           kml/KMLContainer.cpp

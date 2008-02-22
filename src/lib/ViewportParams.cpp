@@ -131,8 +131,8 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
     if ( centerLon > M_PI )
         centerLon -= 2 * M_PI;
 
-    // qDebug() << "centerLon" << centerLon * RAD2DEG;
-    // qDebug() << "centerLat" << centerLat * RAD2DEG;
+//     qDebug() << "centerLon" << centerLon * RAD2DEG;
+//     qDebug() << "centerLat" << centerLat * RAD2DEG;
 }
 
 

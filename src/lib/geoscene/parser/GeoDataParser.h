@@ -19,26 +19,24 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoDataParser_h
-#define GeoDataParser_h
+#ifndef GeoSceneParser_h
+#define GeoSceneParser_h
 
 #include <QHash>
 #include <QXmlStreamReader>
 
-#include "GeoDataDocument.h"
+#include "GeoSceneDocument.h"
 
-class GeoDataTagHandler;
+class GeoSceneTagHandler;
 
-enum GeoDataDataSource {
-    GeoDataData_GeoRSS = 0,
-    GeoDataData_GPX    = 1,
-    GeoDataData_KML    = 2
+enum GeoSceneDataSource {
+    GeoSceneData_DGML   = 0
 };
 
-class GeoDataParser : public QXmlStreamReader {
+class GeoSceneParser : public QXmlStreamReader {
 public:
-    GeoDataParser(GeoDataDataSource source);
-    virtual ~GeoDataParser();
+    GeoSceneParser(GeoSceneDataSource source);
+    virtual ~GeoSceneParser();
 
     // Main API.
     bool read(QIODevice*);
@@ -47,15 +45,15 @@ public:
     bool isValidElement(const QString& tagName) const;
 
     // If parsing was succesful, call this & be happy.
-    GeoDataDocument& document();
-    const GeoDataDocument& document() const;
+    GeoSceneDocument& document();
+    const GeoSceneDocument& document() const;
 
 private:
     void parseDocument();
 
 private:
-    GeoDataDocument m_document;
-    GeoDataDataSource m_source;
+    GeoSceneDocument m_document;
+    GeoSceneDataSource m_source;
 };
 
-#endif // GeoDataParser_h
+#endif // GeoSceneParser_h
