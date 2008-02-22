@@ -10,13 +10,15 @@ existing map data from established file formats (e.g. KML, GPX, GeoRSS),
 arranges them in layers and compiles them together into a new map.
 
 
-The new planned DGML format has got three main sections:
+The new planned DGML format has got four main sections:
 
 1. The HEAD section in which basic properties get defined.
 
 2. The MAP section in which the layer structure gets defined. 
 
-3. The LEGEND section in which custom legend elements get defined (to
+3. The SETTINGS section which contains all properties that can get stored.
+
+4. The LEGEND section in which custom legend elements get defined (to
    be done in the future: the whole legend should get defined here).
 
 The order inside the map section follows the rendering process:

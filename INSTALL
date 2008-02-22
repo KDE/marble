@@ -15,6 +15,9 @@ Prerequisites for building Marble are:
     We have found that revision 701967 (Marble v.0.4.0)
     works fine. Note that kdelibs is under heavy development, 
     and some revisions might not work.
+ - gpsd-2.37 or newer. Older versions of gpsd had C++ bindings
+    removed, how far back I don't know but 2.36 was one of them.
+    Great thanks to the gpsd developers for adding them back.
 
 A checkout of Marble. You can check out Marble using SVN via the command:
 
