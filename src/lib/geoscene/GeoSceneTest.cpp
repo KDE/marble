@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     GeoSceneDataSource source = GeoSceneData_DGML; // KML default for now.
 
     if (file.fileName().endsWith(".dgml"))
-        source = GeoDataData_DGML;
+        source = GeoSceneData_DGML;
 
     // Let our baby do the work!
     GeoSceneParser parser(source);
@@ -61,6 +61,6 @@ int main(int argc, char** argv)
 
     // Get result document
     const GeoSceneDocument& document = parser.document();
-    qDebug() << "\nSuccesfully parsed file! It contains " << document.folders().size() << "folders!";
+    qDebug() << "\nSuccesfully parsed file!";
     return 0;
 }

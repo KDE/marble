@@ -35,11 +35,11 @@ typedef struct
 class QDomElement;
 
 
-class GeoDataLegendItem
+class GeoSceneLegendItem
 {
  public:
-    GeoDataLegendItem();
-    ~GeoDataLegendItem() {}
+    GeoSceneLegendItem();
+    ~GeoSceneLegendItem() {}
 
     QColor   background()             const { return m_background; }
     void     setBackground( QColor bg )     { m_background = bg;   }
@@ -75,8 +75,8 @@ class LegendSection
     void     setCheckable( bool  checkable )        { m_checkable = checkable; }
     int      spacing()                        const { return m_spacing; }
     void     setSpacing( int spacing )              { m_spacing = spacing; }
-    QList< GeoDataLegendItem*> items()               const { return m_items;   }
-    void                addItem( GeoDataLegendItem *item ) { m_items.append( item ); }
+    QList< GeoSceneLegendItem*> items()               const { return m_items;   }
+    void                addItem( GeoSceneLegendItem *item ) { m_items.append( item ); }
 
     void     clear()
     {
@@ -89,17 +89,17 @@ class LegendSection
     QString               m_heading;
     bool                  m_checkable;
     int                   m_spacing;
-    QList< GeoDataLegendItem* >  m_items;
+    QList< GeoSceneLegendItem* >  m_items;
 };
 
 
-class GeoDataMapTheme : public QObject
+class GeoSceneMapTheme : public QObject
 {
     Q_OBJECT
 
 public:
-    GeoDataMapTheme(QObject *parent = 0);
-    ~GeoDataMapTheme();
+    GeoSceneMapTheme(QObject *parent = 0);
+    ~GeoSceneMapTheme();
 
     QString name()          const { return m_name;        }
     QString prefix()        const { return m_prefix;      }
@@ -125,7 +125,7 @@ public:
 
     int maxTileLevel()      const { return m_maxtilelevel;}
 
-    static QStringList findGeoDataMapThemes( const QString& );
+    static QStringList findGeoSceneMapThemes( const QString& );
     static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
 
 private:

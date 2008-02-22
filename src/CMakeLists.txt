@@ -9,6 +9,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/lib
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/AbstractLayer
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/data
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geoscene/data
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}/lib
 )

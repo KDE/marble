@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>468</width>
-    <height>361</height>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -147,6 +147,12 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize" >
+             <size>
+              <width>118</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text" >
              <string>&amp;Static image:</string>
             </property>
@@ -242,91 +248,100 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_7" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize" >
-            <size>
-             <width>128</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text" >
-            <string>&amp;Place names:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>comboBox_6</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_6" >
-           <property name="toolTip" >
-            <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+        <widget class="QGroupBox" name="groupBox_5" >
+         <property name="title" >
+          <string>&amp;Text Labels</string>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_7" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize" >
+               <size>
+                <width>118</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>&amp;Place names:</string>
+              </property>
+              <property name="buddy" >
+               <cstring>comboBox_6</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox_6" >
+              <property name="toolTip" >
+               <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place. &lt;/p>&lt;/body>&lt;/html></string>
-           </property>
-           <item>
-            <property name="text" >
-             <string>User language and local language</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>User language</string>
-            </property>
-           </item>
-           <item>
-            <property name="text" >
-             <string>Local language</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label_4" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize" >
-            <size>
-             <width>128</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text" >
-            <string>Default Map &amp;Font:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>fontComboBox</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFontComboBox" name="fontComboBox" >
-           <property name="toolTip" >
-            <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+              </property>
+              <item>
+               <property name="text" >
+                <string>User language and local language</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>User language</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>Local language</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_4" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize" >
+               <size>
+                <width>118</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Default Map &amp;Font:</string>
+              </property>
+              <property name="buddy" >
+               <cstring>fontComboBox</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFontComboBox" name="fontComboBox" >
+              <property name="toolTip" >
+               <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The default font that gets used on the map.&lt;/p>&lt;/body>&lt;/html></string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <spacer>
@@ -335,8 +350,8 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>446</width>
+           <height>20</height>
           </size>
          </property>
         </spacer>

@@ -22,7 +22,7 @@
 #include "DGMLElementDictionary.h"
 
 // One static list of all tag names, to avoid string comparisions all-over-the-place
-namespace GeoDataElementDictionary {
+namespace GeoSceneElementDictionary {
 
 const char* dgmlTag_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 

@@ -5,7 +5,8 @@
 #
 
 SET( geoscene_data_SRCS
-        geoscene/data/GeoDataMapTheme.cpp
+        geoscene/data/GeoSceneDocument.cpp
+        geoscene/data/GeoSceneMapTheme.cpp
 #        geoscene/data/GeoSceneObject.cpp
    )
 
@@ -16,7 +17,6 @@ SET( geoscene_parser_SRCS
 
 SET( geoscene_handlers_dgml_SRCS
         geoscene/handlers/dgml/DGMLDocumentTagHandler.cpp
-        geoscene/handlers/dgml/DGMLFolderTagHandler.cpp
         geoscene/handlers/dgml/DGMLElementDictionary.cpp
    )
 
@@ -27,7 +27,7 @@ SET( geoscene_SRCS
         geoscene/GeoSceneTest.cpp
    )
 
-add_executable(geotest ${geoscene_SRCS})
-target_link_libraries (geotest ${QT_QTCORE_LIBRARY} marblewidget)
+add_executable(geoscenetest ${geoscene_SRCS})
+target_link_libraries (geoscenetest ${QT_QTCORE_LIBRARY} marblewidget)
 
-install (TARGETS geotest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
+install (TARGETS geoscenetest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )

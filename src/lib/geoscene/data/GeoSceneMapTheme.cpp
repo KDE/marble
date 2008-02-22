@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "GeoDataMapTheme.h"
+#include "GeoSceneMapTheme.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
@@ -29,7 +29,7 @@
 
 
 
-GeoDataLegendItem::GeoDataLegendItem()
+GeoSceneLegendItem::GeoSceneLegendItem()
   : m_background( Qt::transparent ),
     m_symbol(),
     m_text()
@@ -38,22 +38,22 @@ GeoDataLegendItem::GeoDataLegendItem()
 
 
 // ================================================================
-//                         class GeoDataMapTheme
+//                         class GeoSceneMapTheme
 
 
-GeoDataMapTheme::GeoDataMapTheme(QObject *parent)
+GeoSceneMapTheme::GeoSceneMapTheme(QObject *parent)
     : QObject(parent)
 {
 }
 
-GeoDataMapTheme::~GeoDataMapTheme()
+GeoSceneMapTheme::~GeoSceneMapTheme()
 {
     qDeleteAll( m_legend );
     m_legend.clear();
 }
 
 
-QStringList GeoDataMapTheme::findGeoDataMapThemes( const QString& path )
+QStringList GeoSceneMapTheme::findGeoSceneMapThemes( const QString& path )
 {
     QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
     QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
@@ -163,7 +163,7 @@ QDir::NoSymLinks );
 }
 
 
-QStandardItemModel* GeoDataMapTheme::mapThemeModel( const QStringList&
+QStandardItemModel* GeoSceneMapTheme::mapThemeModel( const QStringList&
 stringlist )
 {
     QStandardItemModel  *mapthememodel = new QStandardItemModel();
@@ -176,7 +176,7 @@ stringlist )
     mapthememodel->setHeaderData(2, Qt::Horizontal, tr("Path"));
 
     QStringListIterator  it(stringlist);
-    GeoDataMapTheme            *maptheme = new GeoDataMapTheme();
+    GeoSceneMapTheme            *maptheme = new GeoSceneMapTheme();
 
     // Make sure we don't keep excessively large previews in memory
     // TODO: Scale the icon down to the default icon size in katlasselectview.
@@ -228,4 +228,4 @@ Qt::SmoothTransformation );
 }
 
 
-#include "GeoDataMapTheme.moc"
+#include "GeoSceneMapTheme.moc"

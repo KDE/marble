@@ -25,7 +25,7 @@
 
 // Lists all known DGML 2.0 tags
 // http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
-namespace GeoDataElementDictionary {
+namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_nameSpace20;
 
     extern const char* dgmlTag_canvas;

@@ -1,4 +1,5 @@
 /*
+    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
@@ -19,30 +20,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
+#include "GeoSceneDocument.h"
 
-#include "DGMLDocumentTagHandler.h"
-
-#include "DGMLElementDictionary.h"
-#include "GeoSceneParser.h"
-
-using namespace GeoSceneElementDictionary;
-
-DGML_DEFINE_TAG_HANDLER(Document)
-
-DGMLDocumentTagHandler::DGMLDocumentTagHandler()
-    : GeoSceneTagHandler()
+GeoSceneDocument::GeoSceneDocument()
 {
 }
 
-DGMLDocumentTagHandler::~DGMLDocumentTagHandler()
+GeoSceneDocument::~GeoSceneDocument()
 {
-}
-
-void DGMLDocumentTagHandler::parse(GeoSceneParser& parser) const
-{
-    Q_ASSERT(parser.isStartElement() &&
-parser.isValidElement(dgmlTag_Document));
-
-    qDebug() << "Parsed <Document> start!";    
 }
