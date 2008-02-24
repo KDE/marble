@@ -49,7 +49,7 @@ typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
 K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
-  : KParts::ReadOnlyPart( parent ), m_positionLabel( 0 ), m_distanceLabel( 0 )
+  : KParts::ReadOnlyPart( parent ), m_sunControlDialog( 0 ), m_positionLabel( 0 ), m_distanceLabel( 0 )
 {
     // only set marble data path when a path was given
     if(arguments.count() != 0 && !arguments.first().isEmpty())
@@ -130,7 +130,7 @@ void MarblePart::exportMapScreenShot()
         if ( !fileName.endsWith("png", Qt::CaseInsensitive) 
            | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
         {
-            format = "JPG";
+            format = (char*)"JPG";
         }
 
         QPixmap mapPixmap = m_controlView->mapScreenShot();
