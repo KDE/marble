@@ -28,7 +28,7 @@ class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
     Q_OBJECT
 
  public:
-    TileCreatorDialog( TileCreator *creator, QWidget *parent = 0 );
+    explicit TileCreatorDialog( TileCreator *creator, QWidget *parent = 0 );
     ~TileCreatorDialog();
 
  public Q_SLOTS:

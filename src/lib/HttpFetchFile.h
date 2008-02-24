@@ -66,7 +66,7 @@ class HttpFetchFile : public QObject
     /**
      * Creates a new http fetch file object.
      */
-    HttpFetchFile( StoragePolicy *policy, QObject* parent = 0 );
+    explicit HttpFetchFile( StoragePolicy *policy, QObject* parent = 0 );
 
     /**
      * Destroys the http fetch file object.

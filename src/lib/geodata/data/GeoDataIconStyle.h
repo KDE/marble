@@ -24,7 +24,8 @@ class GeoDataIconStyle : public GeoDataColorStyle
 {
   public:
     GeoDataIconStyle();
-    GeoDataIconStyle( const QPixmap& icon, const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
+    explicit GeoDataIconStyle( const QPixmap& icon, 
+                               const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
     ~GeoDataIconStyle();
 
     void setIcon( const QPixmap& icon );

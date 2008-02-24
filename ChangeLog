@@ -1,6 +1,14 @@
 2008-02-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy fixes:
+	* src/lib/HttpFetchFile.h,
+	* src/lib/MarblePlacemarkModel.h,
+	* src/lib/TilereatorDialog.h,
+	* src/lib/TileLoader.h,
+	* src/lib/geodata/data/GeoDataIconStyle.h:
+	  Check for C++ ctors that should be declared 'explicit'
+
+	Krazy fixes:
 	* src/lib/MapTheme.cpp,
 	* src/lib/TinyWebBrowser.cpp,
 	* src/lib/DiscCache.cpp,

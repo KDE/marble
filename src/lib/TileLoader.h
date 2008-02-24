@@ -53,8 +53,11 @@ class FileStoragePolicy;
 class TileLoader : public QObject {
     Q_OBJECT
  public:
-    TileLoader( HttpDownloadManager *downloadManager, SunLocator* sunLocator = 0 );
-    TileLoader( const QString& theme, HttpDownloadManager *downloadManager, SunLocator* sunLocator = 0 );
+    explicit TileLoader( HttpDownloadManager *downloadManager, 
+                         SunLocator* sunLocator = 0 );
+    TileLoader( const QString& theme,
+                HttpDownloadManager *downloadManager,
+                SunLocator* sunLocator = 0 );
     virtual ~TileLoader();
 
     void setDownloadManager( HttpDownloadManager *downloadManager );
