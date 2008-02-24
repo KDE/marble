@@ -85,9 +85,9 @@ QDir::NoDotAndDotDot );
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            localmapdirs << MarbleDirs::localPath() + "/maps/" +
-            localmappaths.at( planet ) + "/" + 
-            thememappaths.at( theme );
+            localmapdirs << ( MarbleDirs::localPath() + "/maps/" 
+                              + localmappaths.at( planet ) + '/'
+                              + thememappaths.at( theme ) );
         }
     }
 
@@ -101,9 +101,9 @@ QDir::NoDotAndDotDot );
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            sysmapdirs << MarbleDirs::systemPath() + "/maps/" +
-            sysmappaths.at( planet ) + "/" + 
-            thememappaths.at( theme );
+            sysmapdirs << ( MarbleDirs::systemPath() + "/maps/" 
+                            + sysmappaths.at( planet ) + '/' 
+                            + thememappaths.at( theme ) );
         }
     }
         

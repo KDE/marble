@@ -147,10 +147,10 @@ void TinyWebBrowser::linkClicked( const QUrl &url )
     // We do the percent encoding later...
     QString urlString = QUrl::fromPercentEncoding( url.toString().toLatin1() );
 
-    if ( urlString.startsWith( "#" ) ) { // Handle anchors
+    if ( urlString.startsWith( '#' ) ) { // Handle anchors
         scrollToAnchor( urlString.mid( 1 ) );
         return;
-    } else if ( urlString.startsWith( "/" ) )
+    } else if ( urlString.startsWith( '/' ) )
         urlString = urlString.mid( 1 ); // Handle local urls
 
     QString server, relativeUrl;

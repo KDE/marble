@@ -420,7 +420,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
             localmapdirs << MarbleDirs::localPath() + "/maps/" +
-            localmappaths.at( planet ) + "/" + 
+            localmappaths.at( planet ) + '/' + 
             thememappaths.at( theme );
         }
     }
@@ -436,7 +436,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
             sysmapdirs << MarbleDirs::systemPath() + "/maps/" +
-            sysmappaths.at( planet ) + "/" + 
+            sysmappaths.at( planet ) + '/' + 
             thememappaths.at( theme );
         }
     }

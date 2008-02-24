@@ -188,7 +188,7 @@ QString DiscCache::keyToFileName( const QString &key )
     QString fileName( key );
     fileName.replace( "/", "_" );
 
-    return m_CacheDirectory + "/" + fileName;
+    return m_CacheDirectory + '/' + fileName;
 }
 
 void DiscCache::cleanup()

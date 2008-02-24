@@ -32,14 +32,14 @@ FileStoragePolicy::~FileStoragePolicy()
 
 bool FileStoragePolicy::fileExists( const QString &fileName ) const
 {
-    const QString fullName( m_dataDirectory + "/" + fileName );
+    const QString fullName( m_dataDirectory + '/' + fileName );
 
     return QFile::exists( fullName );
 }
 
 bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
 {
-    const QString fullName( m_dataDirectory + "/" + fileName );
+    const QString fullName( m_dataDirectory + '/' + fileName );
 
 
     // Create directory if it doesn't exist yet...
