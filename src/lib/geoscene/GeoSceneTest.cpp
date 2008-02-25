@@ -37,7 +37,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    // Check wheter file exists
+    // Check whether file exists
     QFile file(app.arguments().at(1));
     if (!file.exists()) {
         qFatal("File does not exist!");

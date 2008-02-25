@@ -89,7 +89,7 @@ class TileLoader : public QObject {
      * @param level  the tile level
      * @return       the maximum number of rows that a map level was tiled into. 
      *               If the tile level number is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get catched 
+     *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
     static int levelToRow( int level );
@@ -99,7 +99,7 @@ class TileLoader : public QObject {
      * @param level  the tile level
      * @return       the maximum number of columns that a map level was tiled into. 
      *               If the tile level number is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get catched 
+     *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
     static int levelToColumn( int level );
@@ -109,7 +109,7 @@ class TileLoader : public QObject {
      * @param row    the maximum number of rows that a map level was tiled into.
      * @return       the corresponding tile level.
      *               If the number of rows is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get catched 
+     *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
     static int rowToLevel( int row );
@@ -119,7 +119,7 @@ class TileLoader : public QObject {
      * @param column the maximum number of columns that a map level was tiled into.
      * @return       the corresponding tile level.
      *               If the number of columns is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get catched 
+     *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
     static int columnToLevel( int column );

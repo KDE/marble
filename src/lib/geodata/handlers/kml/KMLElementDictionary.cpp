@@ -21,7 +21,7 @@
 
 #include "KMLElementDictionary.h"
 
-// One static list of all tag names, to avoid string comparisions all-over-the-place
+// One static list of all tag names, to avoid string comparisons all-over-the-place
 namespace GeoDataElementDictionary {
 
 const char* kmlTag_nameSpace20 = "http://earth.google.com/kml/2.0";

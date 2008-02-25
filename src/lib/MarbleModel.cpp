@@ -224,7 +224,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
             return;
         else { 
             // Actually this case can't really happen as the
-            // existance of valid .dgml files gets checked before and
+            // existence of valid .dgml files gets checked before and
             // the directory string can't get invalid either.
             qDebug() << "Couldn't find a valid map.";
             exit(-1);

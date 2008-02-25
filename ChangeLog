@@ -1,3 +1,19 @@
+2008-02-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy fixes:
+	* src/lib/TileLoader.h,
+	* src/lib/MarbleModel.cpp,
+	* src/lib/geodata/handlers/kml/KMLElementDictionary.cpp,
+	* src/lib/geodata/handlers/gpx/GPXElementDictionary.cpp,
+	* src/lib/geodata/parser/GeoDataParser.cpp,
+	* src/lib/geodata/parser/GeoDataParser.h,
+	* src/lib/geodata/GeoDataTest.cpp,
+	* src/lib/geoscene/handlers/dgml/DGMLElementDictionary.cpp,
+	* src/lib/geoscene/parser/GeoSceneParser.cpp,
+	* src/lib/geoscene/parser/GeoSceneParser.h,
+	* src/lib/geoscene/GeoSceneTest.cpp:
+	  Fix spelling errors
+
 2008-02-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy fixes:

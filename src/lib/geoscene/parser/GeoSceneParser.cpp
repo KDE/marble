@@ -89,7 +89,7 @@ bool GeoSceneParser::read(QIODevice* device)
     }
 
     if (error())
-        qDebug() << "[GeoSceneParser::read] -> Error occured:" << errorString();
+        qDebug() << "[GeoSceneParser::read] -> Error occurred:" << errorString();
 
     return !error();
 }
@@ -101,8 +101,8 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
 
     // FIXME: Now that we supported intermixed documents (ie. gpx in kml)
     // this check is not valid anymore. Just by knowing the document type
-    // we can't say wheter the element is valid. We probably should check
-    // wheter it's _either_ georss, or gpx or kml. To be discussed.
+    // we can't say whether the element is valid. We probably should check
+    // whether it's _either_ georss, or gpx or kml. To be discussed.
 
     switch (m_source) {
     case GeoSceneData_DGML:

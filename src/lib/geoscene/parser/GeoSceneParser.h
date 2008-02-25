@@ -44,7 +44,7 @@ public:
     // Helper function for the tag handlers
     bool isValidElement(const QString& tagName) const;
 
-    // If parsing was succesful, call this & be happy.
+    // If parsing was successful, call this & be happy.
     GeoSceneDocument& document();
     const GeoSceneDocument& document() const;
 

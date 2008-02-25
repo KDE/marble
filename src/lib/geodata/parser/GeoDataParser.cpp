@@ -103,7 +103,7 @@ bool GeoDataParser::read(QIODevice* device)
     }
 
     if (error())
-        qDebug() << "[GeoDataParser::read] -> Error occured:" << errorString();
+        qDebug() << "[GeoDataParser::read] -> Error occurred:" << errorString();
 
     return !error();
 }
