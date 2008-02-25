@@ -1,7 +1,7 @@
 This file describes what we need to do before certain milestones.
 
 Mark those tasks that you want to perform with your name:
- INGE   Inge Wallin
+ INGE   Inge Wallin            inge@lysator.liu.se
  TACK   Tackat (Torsten Rahn)
  CARU   Carlos Licea
  MURA   Murad Tagirov
@@ -14,7 +14,8 @@ Before Release of Marble 0.6:
 
 Layer Management Class tasks: 
 
-*** New widget independent image canvas concept and implementation      INGE
+*** New widget independent image canvas concept and implementation      DONE
+    -- Check Apidox if there is anything missing.                       --
 
 *** Split off MapTheme / DGML parsing into geodata/parser.              ----
     Have a GeoDataMapTheme class that basically only includes those 
@@ -39,7 +40,7 @@ Layer Management Class tasks:
 
 *** Mercator Projection                                                 CARU
 
-*** Design and implement Projection class                               CARU
+*** Design and implement Projection class                               INGE
 
 *** Fix GPS Support                                                     ANDR
 
