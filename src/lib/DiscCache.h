@@ -30,9 +30,8 @@ class DiscCache
         void remove( const QString &key );
         void setCacheLimit( quint64 n );
 
-    private:        
+    private:
         QString keyToFileName( const QString& );
-        void initialScan( const QStringList& );
         void cleanup();
 
         QString m_CacheDirectory;

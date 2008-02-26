@@ -13,9 +13,9 @@
 
 #include <QtCore/QDebug>
 
-#include "FileStoragePolicy.h"
 #include "HttpFetchFile.h"
 #include "MarbleDirs.h"
+#include "StoragePolicy.h"
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *policy ) 
     : m_activatedJobsLimit( 5 )

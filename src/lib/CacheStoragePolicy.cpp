@@ -50,3 +50,13 @@ QByteArray CacheStoragePolicy::data( const QString &fileName )
 
     return data;
 }
+
+void CacheStoragePolicy::setCacheLimit( quint64 bytes )
+{
+    m_cache.setCacheLimit( bytes );
+}
+
+quint64 CacheStoragePolicy::cacheLimit() const
+{
+    return m_cache.cacheLimit();
+}

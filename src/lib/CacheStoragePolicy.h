@@ -49,6 +49,16 @@ class CacheStoragePolicy : public StoragePolicy
          */
         QByteArray data( const QString &fileName );
 
+        /**
+         * Sets the limit of the cache in @p bytes.
+         */
+        void setCacheLimit( quint64 bytes );
+
+        /**
+         * Returns the limit of the cache in bytes.
+         */
+        quint64 cacheLimit() const;
+
     private:
         DiscCache m_cache;
         QString m_errorMsg;
