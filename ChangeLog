@@ -1,5 +1,15 @@
 2008-02-26  Torsten Rahn  <rahn@kde.org>
 
+    * docs/paintingmaps.txt:
+    * src/lib/GeoPainter.h:
+    - Initial "draft" for GeoPainter.
+      TODO: Implement the case for isGeoProjected = false 
+      first and ignore the case true until the LMC is in 
+      place. 
+      See docs/paintingmaps.txt for details. 
+
+2008-02-26  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/geoscene/GeoSceneTest.cpp:
     * src/lib/geoscene/parser/GeoSceneTagHandler.cpp:
     * src/lib/MarblePlacemarkModel.cpp:

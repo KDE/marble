@@ -75,10 +75,17 @@ to draw in screen coordinates):
     GeoDataPoint  place1( 54.8, 9.4, GeoDataPoint::Degree );
     GeoDataPoint  place2( 52.5, 8.4, GeoDataPoint::Degree );
 
-    painter.drawGeoLine( place1, place2 );
-    painter.drawGeoPlacemark( "Flensburg", place1 );
-    painter.drawGeoEllipse( place1.lon(), place1.lat(), 5, 5 ); 
+    painter.drawLine( place1, place2 );
+    painter.drawPlacemark( "Flensburg", place1 );
 
+    // isGeoProjected = true would paint a circle that might be 
+    // "distorted" according to the geographical projection. 
+    // The height and width would be 5 degrees
+    painter.drawEllipse( place1.lon(), place1.lat(), 5, 5, true ); 
+
+    // isGeoProjected = true would paint a ("unprojected" circle that 
+    // has got a width and height of 5 pixels. 
+    painter.drawEllipse( place1.lon(), place1.lat(), 5, 5, false ); 
 
 Using this API some backend plugins like the MeasureTool could get
 squeezed down to very little code.
