@@ -141,6 +141,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
 
+    Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
+    Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
+
  public:
 
     /**
@@ -428,7 +431,19 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return Quick and dirty rendering
      */
     bool  quickDirty() const;
-    
+
+    /**
+     * @brief  Returns the limit in bytes of the persistent (on hard disc) tile cache.
+     * @return the limit of persistent tile cache
+     */
+    quint64  persistentTileCacheLimit() const;
+
+    /**
+     * @brief  Returns the limit in bytes of the volatile (in RAM) tile cache.
+     * @return the limit of volatile tile cache
+     */
+    quint64  volatileTileCacheLimit() const;
+
     SunLocator* sunLocator();
 
  public Q_SLOTS:
@@ -771,6 +786,18 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  enabled  Enable quick and dirty rendering
      */
     void setQuickDirty( bool enabled );
+
+    /**
+     * @brief  Set the limit of the persistent (on hard disc) tile cache.
+     * @param  bytes The limit in bytes.
+     */
+    void setPersistentTileCacheLimit( quint64 bytes );
+
+    /**
+     * @brief  Set the limit of the volatile (in RAM) tile cache.
+     * @param  bytes The limit in bytes.
+     */
+    void setVolatileTileCacheLimit( quint64 bytes );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.

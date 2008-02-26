@@ -231,6 +231,11 @@ int TileLoader::columnToLevel( int column )
     return (int)( log( column / 2 ) / log( 2 ) );
 }
 
+quint64 TileLoader::volatileCacheLimit() const
+{
+    return m_tileCache.cacheLimit();
+}
+
 int TileLoader::maxCompleteTileLevel( const QString& theme )
 {
     bool  noerr = true; 
@@ -317,6 +322,11 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
     // qDebug() << "Mandatory most basic tile level is fully available: " << noerr;
 
     return noerr;
+}
+
+void TileLoader::setVolatileCacheLimit( quint64 bytes )
+{
+    m_tileCache.setCacheLimit( bytes );
 }
 
 void TileLoader::reloadTile( QString relativeUrlString, QString _id )

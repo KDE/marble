@@ -48,8 +48,6 @@ class HttpDownloadManager;
  * @author Torsten Rahn <rahn@kde.org>
  **/
 
-class FileStoragePolicy;
-
 class TileLoader : public QObject {
     Q_OBJECT
  public:
@@ -83,6 +81,12 @@ class TileLoader : public QObject {
     {
         return m_tileHeight * levelToRow( level );
     };
+
+    /**
+     * @brief  Returns the limit of the volatile (in RAM) cache.
+     * @return the cache limit in bytes
+     */
+    quint64 volatileCacheLimit() const;
 
     /**
      * @brief Get the maximum number of tile rows for a given tile level.
@@ -157,6 +161,12 @@ class TileLoader : public QObject {
     void tileUpdateAvailable();
 
 public Q_SLOTS:
+
+    /**
+     * @brief Set the limit of the volatile (in RAM) cache.
+     * @param bytes The limit in bytes.
+     */
+    void setVolatileCacheLimit( quint64 bytes );
 
     void reloadTile( QString relativeUrlString, QString id );
 

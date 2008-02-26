@@ -555,9 +555,19 @@ void MarbleModel::geoDataDocumentLoaded( GeoDataDocument& document )
     d->m_fileviewmodel->append( item );
 }
 
-void MarbleModel::update() {
-  d->m_tileLoader->update();
+void MarbleModel::update()
+{
+    d->m_tileLoader->update();
 }
 
+quint64 MarbleModel::volatileTileCacheLimit() const
+{
+    return d->m_tileLoader->volatileCacheLimit();
+}
+
+void MarbleModel::setVolatileTileCacheLimit( quint64 bytes )
+{
+    d->m_tileLoader->setVolatileCacheLimit( bytes );
+}
 
 #include "MarbleModel.moc"

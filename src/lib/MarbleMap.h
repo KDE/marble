@@ -119,6 +119,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
     Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
+
+    Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
+    Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
 #endif
  public:
 
@@ -408,7 +411,23 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return Quick and dirty rendering
      */
     bool  quickDirty() const;
-    
+
+    /**
+     * @brief  Returns the limit in bytes of the persistent (on hard disc) tile cache.
+     * @return the limit of persistent tile cache
+     */
+    quint64  persistentTileCacheLimit() const;
+
+    /**
+     * @brief  Returns the limit in bytes of the volatile (in RAM) tile cache.
+     * @return the limit of volatile tile cache
+     */
+    quint64  volatileTileCacheLimit() const;
+
+    /**
+     * @brief  Return the sun locator object.
+     * @return the sun locator object
+     */
     SunLocator* sunLocator();
 
  public Q_SLOTS:
@@ -755,6 +774,18 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  enabled  Enable quick and dirty rendering
      */
     void setQuickDirty( bool enabled );
+
+    /**
+     * @brief  Set the limit of the persistent (on hard disc) tile cache.
+     * @param  bytes The limit in bytes.
+     */
+    void setPersistentTileCacheLimit( quint64 bytes );
+
+    /**
+     * @brief  Set the limit of the volatile (in RAM) tile cache.
+     * @param  bytes The limit in bytes.
+     */
+    void setVolatileTileCacheLimit( quint64 bytes );
 
     /**
      * @brief Update the map because the model changed.

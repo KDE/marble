@@ -243,7 +243,19 @@ class MARBLE_EXPORT MarbleModel : public QObject
     // FIXME: Breaks compatibility
     SunLocator* sunLocator() {return m_sunLocator;}
 
+    /**
+     * @brief  Returns the limit of the volatile (in RAM) tile cache.
+     * @return the cache limit in bytes
+     */
+    quint64 volatileTileCacheLimit() const;
+
  public Q_SLOTS:
+    /**
+     * @brief Set the limit of the volatile (in RAM) tile cache.
+     * @param bytes The limit in bytes.
+     */
+    void setVolatileTileCacheLimit( quint64 bytes );
+
 
  Q_SIGNALS:
 

@@ -395,10 +395,21 @@ bool MarbleWidget::showFrameRate() const
     return d->m_map->showFrameRate();
 }
 
-bool  MarbleWidget::quickDirty() const
+bool MarbleWidget::quickDirty() const
 {
     return d->m_map->quickDirty();
 }
+
+quint64 MarbleWidget::persistentTileCacheLimit() const
+{
+    return d->m_map->persistentTileCacheLimit();
+}
+
+quint64 MarbleWidget::volatileTileCacheLimit() const
+{
+    return d->m_map->volatileTileCacheLimit();
+}
+
 
 void MarbleWidget::zoomView(int newZoom)
 {
@@ -971,6 +982,16 @@ FileViewModel* MarbleWidget::fileViewModel() const
 void MarbleWidget::setQuickDirty( bool enabled )
 {
     d->m_map->setQuickDirty( enabled );
+}
+
+void MarbleWidget::setPersistentTileCacheLimit( quint64 bytes )
+{
+    d->m_map->setPersistentTileCacheLimit( bytes );
+}
+
+void MarbleWidget::setVolatileTileCacheLimit( quint64 bytes )
+{
+    d->m_map->setVolatileTileCacheLimit( bytes );
 }
 
 // This slot will called when the Globe starts to create the tiles.

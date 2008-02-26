@@ -58,6 +58,12 @@
 class MarbleMapPrivate
 {
  public:
+    MarbleMapPrivate()
+        : m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
+          m_volatileTileCacheLimit( 1024*3 ) // 3 KB
+    {
+    }
+
     // The model we are showing.
     MarbleModel     *m_model;
 
@@ -89,6 +95,10 @@ class MarbleMapPrivate
 
     // Tools
     MeasureTool     *m_measureTool;
+
+    // Cache related
+    quint64          m_persistentTileCacheLimit;
+    quint64          m_volatileTileCacheLimit;
 };
 
 
@@ -417,6 +427,16 @@ bool MarbleMap::showFrameRate() const
 bool  MarbleMap::quickDirty() const
 {
     return d->m_model->textureMapper()->interlaced();
+}
+
+quint64 MarbleMap::persistentTileCacheLimit() const
+{
+    return d->m_persistentTileCacheLimit;
+}
+
+quint64 MarbleMap::volatileTileCacheLimit() const
+{
+    return d->m_volatileTileCacheLimit;
 }
 
 void MarbleMap::zoomView(int newZoom)
@@ -1109,6 +1129,17 @@ void MarbleMap::setQuickDirty( bool enabled )
     }
 }
 
+void MarbleMap::setPersistentTileCacheLimit( quint64 bytes )
+{
+    d->m_persistentTileCacheLimit = bytes;
+    // TODO: trigger update
+}
+
+void MarbleMap::setVolatileTileCacheLimit( quint64 bytes )
+{
+    d->m_volatileTileCacheLimit = bytes;
+    d->m_model->setVolatileTileCacheLimit( bytes );
+}
 
 void MarbleMap::updateChangedMap()
 {
