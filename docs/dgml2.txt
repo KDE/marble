@@ -39,7 +39,7 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
 -----------------------------------------
 
 
-<?xml version="2.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
@@ -216,6 +216,6 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
                 <heading>Relief</heading>
             </section>
         </legend>
-    <document>
+    </document>
 </dgml>
 

@@ -49,7 +49,7 @@ void GeoSceneTagHandler::registerHandler(const QString& tagName, const GeoSceneT
     Q_ASSERT(!hash->contains(tagName));
     hash->insert(tagName, handler);
 
-    qDebug() << "[GeoSceneTagHandler] -> Recognizing" << tagName << "tag!";
+    qDebug() << "[GeoSceneTagHandler] -> Registered" << tagName << "tag!";
 }
 
 const GeoSceneTagHandler* GeoSceneTagHandler::recognizes(const QString& tagName)

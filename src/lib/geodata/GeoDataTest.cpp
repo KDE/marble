@@ -48,9 +48,9 @@ int main(int argc, char** argv)
 
     GeoDataDataSource source = GeoDataData_KML; // KML default for now.
 
-    if (file.fileName().endsWith(".rss"))
+    if (file.fileName().toLower().endsWith(".rss"))
         source = GeoDataData_GeoRSS;
-    else if (file.fileName().endsWith(".gpx"))
+    else if (file.fileName().toLower().endsWith(".gpx"))
         source = GeoDataData_GPX;
 
     // Let our baby do the work!

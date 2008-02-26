@@ -1,3 +1,19 @@
+2008-02-26  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geoscene/GeoSceneTest.cpp:
+    * src/lib/geoscene/parser/GeoSceneTagHandler.cpp:
+    * src/lib/MarblePlacemarkModel.cpp:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * docs/dgml2.txt:
+
+    - Minor fixes and typos
+
+    * src/lib/geodata/parser/GeoDataParser.cpp:
+    * src/lib/geodata/parser/GeoDataParser.h:
+
+    - Fixes by Nikolas Zimmermann after I had 
+      pointed out some issues with the previous API.
+
 2008-02-25  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy fixes:

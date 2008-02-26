@@ -47,14 +47,16 @@ public:
     bool isValidElement(const QString& tagName) const;
 
     // If parsing was successful, call this & be happy.
-    GeoDataDocument& document();
-    const GeoDataDocument& document() const;
+    GeoDataDocument* releaseDocument();
+
+    // Only used by the tag handlers!
+    GeoDataDocument& document() const;
 
 private:
     void parseDocument();
 
 private:
-    GeoDataDocument m_document;
+    GeoDataDocument* m_document;
     GeoDataDataSource m_source;
 };
 

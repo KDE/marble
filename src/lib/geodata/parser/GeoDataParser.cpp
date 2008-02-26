@@ -45,20 +45,23 @@ GeoDataParser::~GeoDataParser()
 {
 }
 
-GeoDataDocument& GeoDataParser::document()
+GeoDataDocument* GeoDataParser::releaseDocument()
 {
-    return m_document;
+    GeoDataDocument* document = m_document;
+    m_document = 0;
+    return document;
 }
 
-const GeoDataDocument& GeoDataParser::document() const
+GeoDataDocument& GeoDataParser::document() const
 {
-    return m_document;
+    return *m_document;
 }
 
 bool GeoDataParser::read(QIODevice* device)
 {
-    // Start with a fresh document
-    m_document = GeoDataDocument();
+    // Assert previous document got released.
+    Q_ASSERT(!m_document);
+    m_document = new GeoDataDocument;
 
     // Set data source
     setDevice(device);

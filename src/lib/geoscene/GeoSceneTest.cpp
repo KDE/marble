@@ -30,10 +30,9 @@
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-
     // Expect document as first command line argument
     if (app.arguments().size() <= 1) {
-        qFatal("Pass file name as first argument!");
+        qDebug("Pass file name as first argument!");
         return -1;
     }
 
@@ -47,9 +46,9 @@ int main(int argc, char** argv)
     // Open file in right mode
     file.open(QIODevice::ReadOnly);
 
-    GeoSceneDataSource source = GeoSceneData_DGML; // KML default for now.
+    GeoSceneDataSource source = GeoSceneData_DGML; // DGML default for now.
 
-    if (file.fileName().endsWith(".dgml"))
+    if (file.fileName().toLower().endsWith(".dgml"))
         source = GeoSceneData_DGML;
 
     // Let our baby do the work!
@@ -61,6 +60,6 @@ int main(int argc, char** argv)
 
     // Get result document
     const GeoSceneDocument& document = parser.document();
-    qDebug() << "\nSuccesfully parsed file!";
+    qDebug() << "\nSuccessfully parsed file!";
     return 0;
 }

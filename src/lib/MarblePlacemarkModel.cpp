@@ -68,9 +68,10 @@ QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const
 {
     QList<QPersistentModelIndex> modelIndexList;
     const int constRowCount = rowCount();
+
     for ( int i = 0; i < constRowCount; ++i )
     {
-        modelIndexList.append( QPersistentModelIndex( index( i, 0 ) ) );
+        modelIndexList << index( i, 0 );
     }
     return modelIndexList;
 }
