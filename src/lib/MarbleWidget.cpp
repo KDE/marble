@@ -42,7 +42,6 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "TileCreatorDialog.h"
 #include "HttpDownloadManager.h"
-#include "FileStoragePolicy.h"
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 
@@ -1013,14 +1012,7 @@ void MarbleWidget::setDownloadUrl( const QString &url )
 
 void MarbleWidget::setDownloadUrl( const QUrl &url )
 {
-    HttpDownloadManager *downloadManager = d->m_model->downloadManager();
-    if ( downloadManager != NULL )
-        downloadManager->setServerUrl( url );
-    else {
-        downloadManager = new HttpDownloadManager( url,
-                                                   new FileStoragePolicy( MarbleDirs::localPath() ) );
-        d->m_model->setDownloadManager( downloadManager );
-    }
+    d->m_map->setDownloadUrl( url );
 }
 
 int MarbleWidget::fromLogScale(int zoom)
