@@ -18,11 +18,30 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataPoint.cpp
         geodata/data/GeoDataStyle.cpp
         geodata/data/GeoDataStyleSelector.cpp
+        geodata/scene/GeoSceneDocument.cpp
+        geodata/scene/GeoSceneHead.cpp
+        geodata/scene/GeoSceneMap.cpp
+        geodata/scene/GeoSceneSettings.cpp
+        geodata/scene/GeoSceneLegend.cpp
+        geodata/scene/GeoSceneName.cpp
    )
 
 SET( geodata_parser_SRCS
         geodata/parser/GeoDataParser.cpp
+        geodata/parser/GeoSceneParser.cpp
         geodata/parser/GeoDataTagHandler.cpp
+        geodata/parser/GeoSceneTagHandler.cpp
+   )
+
+SET( geodata_handlers_dgml_SRCS
+        geodata/handlers/dgml/DGMLDocumentTagHandler.cpp
+        geodata/handlers/dgml/DGMLHeadTagHandler.cpp
+        geodata/handlers/dgml/DGMLMapTagHandler.cpp
+        geodata/handlers/dgml/DGMLSettingsTagHandler.cpp
+        geodata/handlers/dgml/DGMLLegendTagHandler.cpp
+        geodata/handlers/dgml/DGMLNameTagHandler.cpp
+        geodata/handlers/dgml/DGMLElementDictionary.cpp
+        geodata/handlers/dgml/DGMLAttributeDictionary.cpp
    )
 
 SET( geodata_handlers_gpx_SRCS
@@ -41,6 +60,7 @@ SET( geodata_SRCS
         ${geodata_parser_SRCS}
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
+        ${geodata_handlers_dgml_SRCS}
         Quaternion.cpp
         geodata/GeoDataTest.cpp
    )

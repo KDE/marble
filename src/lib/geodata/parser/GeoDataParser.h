@@ -30,9 +30,10 @@
 class GeoDataTagHandler;
 
 enum GeoDataDataSource {
-    GeoDataData_GeoRSS = 0,
+    GeoDataData_DGML   = 0,
     GeoDataData_GPX    = 1,
-    GeoDataData_KML    = 2
+    GeoDataData_KML    = 2,
+    GeoDataData_GeoRSS = 3
 };
 
 class GeoDataParser : public QXmlStreamReader {

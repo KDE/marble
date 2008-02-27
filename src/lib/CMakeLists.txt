@@ -8,19 +8,16 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/scene
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
- ${CMAKE_CURRENT_SOURCE_DIR}/geoscene
- ${CMAKE_CURRENT_SOURCE_DIR}/geoscene/data
- ${CMAKE_CURRENT_SOURCE_DIR}/geoscene/handlers/dgml
- ${CMAKE_CURRENT_SOURCE_DIR}/geoscene/parser
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
 
 INCLUDE(geodata/CMakeLists.txt)
-INCLUDE(geoscene/CMakeLists.txt)
 
 if (QTONLY)
   set(GENERIC_LIB_VERSION "0.5.0")
@@ -123,7 +120,6 @@ set(marblewidget_SRCS
            geodata/data/GeoDataPoint.cpp
            geodata/data/GeoDataStyle.cpp
            geodata/data/GeoDataStyleSelector.cpp
-           geoscene/data/GeoSceneMapTheme.cpp
 #           kml/KMLColorStyle.cpp
 #           kml/KMLColorStyleParser.cpp
 #           kml/KMLContainer.cpp

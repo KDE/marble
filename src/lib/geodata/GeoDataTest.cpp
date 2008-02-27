@@ -25,6 +25,7 @@
 #include <QStringList>
 
 #include "GeoDataParser.h"
+#include "GeoSceneParser.h"
 
 int main(int argc, char** argv)
 {
@@ -46,22 +47,27 @@ int main(int argc, char** argv)
     // Open file in right mode
     file.open(QIODevice::ReadOnly);
 
-    GeoDataDataSource source = GeoDataData_KML; // KML default for now.
+    GeoSceneDataSource source = GeoSceneData_DGML; // KML default for now.
+//    GeoDataDataSource source = GeoDataData_KML; // KML default for now.
 
+/*
     if (file.fileName().toLower().endsWith(".rss"))
         source = GeoDataData_GeoRSS;
     else if (file.fileName().toLower().endsWith(".gpx"))
         source = GeoDataData_GPX;
-
+*/
     // Let our baby do the work!
-    GeoDataParser parser(source);
+//    GeoDataParser parser(source);
+    GeoSceneParser parser(source);
     if (!parser.read(&file)) {
         qFatal("Could not parse file!");
         return -1;
     }
 
     // Get result document
-    const GeoDataDocument& document = parser.document();
-    qDebug() << "\nSuccesfully parsed file! It contains " << document.folders().size() << "folders!";
+//    const GeoDataDocument& document = parser.document();
+    const GeoSceneDocument& document = parser.document();
+    qDebug() << "\nSuccesfully parsed file!";
+// It contains " << document.folders().size() << "folders!";
     return 0;
 }

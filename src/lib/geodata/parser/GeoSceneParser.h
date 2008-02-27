@@ -27,7 +27,7 @@
 
 #include "GeoSceneDocument.h"
 
-class GeoSceneTagHandler;
+class GeoDataTagHandler;
 
 enum GeoSceneDataSource {
     GeoSceneData_DGML   = 0
