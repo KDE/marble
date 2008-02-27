@@ -21,6 +21,9 @@ Copyright information
 all data © 2005 by Stefan Helders
 This project is meant to be a freely available data provider. Some requests make me specify the copyright information more precisely. If you want to use the data or pictures on your own website or in a book, please add a note as follows if possible: © by Stefan Helders www.world-gazetteer.com
 
+The data for the Czech Republic were updated using the public database of the Czech Statistical Office which holds the copyright on them. It is permitted to reuse the data as long as the CzSO is mentioned as the source.
+See http://www.czso.cz/eng/redakce.nsf/i/home
+
 OCEANS:
 
 The ocean data inside the "boundaryplacemarks.kml" was taken from the CIA World Factbook which is placed in the public domain.
