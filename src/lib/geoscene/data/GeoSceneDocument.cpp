@@ -29,3 +29,8 @@ GeoSceneDocument::GeoSceneDocument()
 GeoSceneDocument::~GeoSceneDocument()
 {
 }
+
+const GeoSceneHead& GeoSceneDocument::head() const
+{
+    return m_head;
+}

@@ -19,43 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneParser_h
-#define GeoSceneParser_h
+#ifndef DGMLLegendTagHandler_h
+#define DGMLLegendTagHandler_h
 
-#include <QHash>
-#include <QXmlStreamReader>
+#include "GeoSceneTagHandler.h"
 
-#include "GeoSceneDocument.h"
-
-class GeoSceneTagHandler;
-
-enum GeoSceneDataSource {
-    GeoSceneData_DGML   = 0
-};
-
-class GeoSceneParser : public QXmlStreamReader {
+class DGMLLegendTagHandler : public GeoSceneTagHandler {
 public:
-    GeoSceneParser(GeoSceneDataSource source);
-    virtual ~GeoSceneParser();
+    DGMLLegendTagHandler();
+    virtual ~DGMLLegendTagHandler();
 
-    // Main API.
-    bool read(QIODevice*);
-
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
-
-    // If parsing was successful, call this & be happy.
-    GeoSceneDocument* releaseDocument();
-
-    // Only used by the tag handlers!
-    const GeoSceneDocument& document() const;
-
-private:
-    void parseDocument();
-
-private:
-    GeoSceneDocument *m_document;
-    GeoSceneDataSource m_source;
+    virtual void parse(GeoSceneParser&) const;
 };
 
-#endif // GeoSceneParser_h
+#endif // DGMLLegendTagHandler_h

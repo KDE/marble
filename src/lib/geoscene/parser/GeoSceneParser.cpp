@@ -26,6 +26,7 @@
 
 // DGML support
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -39,20 +40,23 @@ GeoSceneParser::~GeoSceneParser()
 {
 }
 
-GeoSceneDocument& GeoSceneParser::document()
+GeoSceneDocument* GeoSceneParser::releaseDocument()
 {
-    return m_document;
+    GeoSceneDocument* document = m_document;
+    m_document = 0;
+    return document;
 }
 
 const GeoSceneDocument& GeoSceneParser::document() const
 {
-    return m_document;
+    return *m_document;
 }
 
 bool GeoSceneParser::read(QIODevice* device)
 {
-    // Start with a fresh document
-    m_document = GeoSceneDocument();
+    // Assert previous document got released.
+    Q_ASSERT(!m_document);
+    m_document = new GeoSceneDocument;
 
     // Set data source
     setDevice(device);
@@ -66,7 +70,7 @@ bool GeoSceneParser::read(QIODevice* device)
 
             switch (m_source) {
             case GeoSceneData_DGML:
-                valid = isValidElement(dgmlTag_dgml);
+                valid = isValidElement(dgmlTag_Dgml);
                 break;
             default:
                 break;
@@ -98,11 +102,6 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
 {
     if (name() != tagName)
         return false;
-
-    // FIXME: Now that we supported intermixed documents (ie. gpx in kml)
-    // this check is not valid anymore. Just by knowing the document type
-    // we can't say whether the element is valid. We probably should check
-    // whether it's _either_ georss, or gpx or kml. To be discussed.
 
     switch (m_source) {
     case GeoSceneData_DGML:

@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,24 +19,15 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEDOCUMENT_H
-#define GEOSCENEDOCUMENT_H
+#include "GeoSceneName.h"
 
-#include "GeoSceneHead.h"
+GeoSceneName::GeoSceneName()
+    : m_name("")
+{
+    /* NOOP */
+}
 
-/**
- * @short A container for features parsed from the DGML file.
- */
-class GeoSceneDocument {
-public:
-    GeoSceneDocument();
-    ~GeoSceneDocument();
-
-    const GeoSceneHead& head() const;
-
-protected:
-    GeoSceneHead m_head;
-};
-
-
-#endif // GEOSCENEDOCUMENT_H
+GeoSceneName::~GeoSceneName()
+{
+    /* NOOP */
+}

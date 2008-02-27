@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -19,43 +20,16 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneParser_h
-#define GeoSceneParser_h
+#ifndef DGMLAttributeDictionary_h
+#define DGMLAttributeDictionary_h
 
-#include <QHash>
-#include <QXmlStreamReader>
 
-#include "GeoSceneDocument.h"
+// Lists all known DGML 2.0 attributes
+// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
+namespace GeoSceneAttributeDictionary {
+    extern const char* dgmlAttr_nameSpace20;
 
-class GeoSceneTagHandler;
+    extern const char* dgmlAttr_bgcolor;
+}
 
-enum GeoSceneDataSource {
-    GeoSceneData_DGML   = 0
-};
-
-class GeoSceneParser : public QXmlStreamReader {
-public:
-    GeoSceneParser(GeoSceneDataSource source);
-    virtual ~GeoSceneParser();
-
-    // Main API.
-    bool read(QIODevice*);
-
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
-
-    // If parsing was successful, call this & be happy.
-    GeoSceneDocument* releaseDocument();
-
-    // Only used by the tag handlers!
-    const GeoSceneDocument& document() const;
-
-private:
-    void parseDocument();
-
-private:
-    GeoSceneDocument *m_document;
-    GeoSceneDataSource m_source;
-};
-
-#endif // GeoSceneParser_h
+#endif // DGMLAttributeDictionary_h

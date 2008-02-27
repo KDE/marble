@@ -19,43 +19,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneParser_h
-#define GeoSceneParser_h
+#include "DGMLAttributeDictionary.h"
 
-#include <QHash>
-#include <QXmlStreamReader>
+// One static list of all tag names, to avoid string comparisons all-over-the-place
+namespace GeoSceneAttributeDictionary {
 
-#include "GeoSceneDocument.h"
+const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
-class GeoSceneTagHandler;
-
-enum GeoSceneDataSource {
-    GeoSceneData_DGML   = 0
-};
-
-class GeoSceneParser : public QXmlStreamReader {
-public:
-    GeoSceneParser(GeoSceneDataSource source);
-    virtual ~GeoSceneParser();
-
-    // Main API.
-    bool read(QIODevice*);
-
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
-
-    // If parsing was successful, call this & be happy.
-    GeoSceneDocument* releaseDocument();
-
-    // Only used by the tag handlers!
-    const GeoSceneDocument& document() const;
-
-private:
-    void parseDocument();
-
-private:
-    GeoSceneDocument *m_document;
-    GeoSceneDataSource m_source;
-};
-
-#endif // GeoSceneParser_h
+const char* dgmlAttr_bgcolor = "bgcolor";
+}

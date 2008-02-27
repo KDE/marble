@@ -19,43 +19,30 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneParser_h
-#define GeoSceneParser_h
+#include <QDebug>
 
-#include <QHash>
-#include <QXmlStreamReader>
+#include "DGMLSettingsTagHandler.h"
 
-#include "GeoSceneDocument.h"
+#include "DGMLElementDictionary.h"
+#include "GeoSceneParser.h"
 
-class GeoSceneTagHandler;
+using namespace GeoSceneElementDictionary;
 
-enum GeoSceneDataSource {
-    GeoSceneData_DGML   = 0
-};
+DGML_DEFINE_TAG_HANDLER(Settings)
 
-class GeoSceneParser : public QXmlStreamReader {
-public:
-    GeoSceneParser(GeoSceneDataSource source);
-    virtual ~GeoSceneParser();
+DGMLSettingsTagHandler::DGMLSettingsTagHandler()
+    : GeoSceneTagHandler()
+{
+}
 
-    // Main API.
-    bool read(QIODevice*);
+DGMLSettingsTagHandler::~DGMLSettingsTagHandler()
+{
+}
 
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
+void DGMLSettingsTagHandler::parse(GeoSceneParser& parser) const
+{
+    Q_ASSERT(parser.isStartElement() &&
+parser.isValidElement(dgmlTag_Settings));
 
-    // If parsing was successful, call this & be happy.
-    GeoSceneDocument* releaseDocument();
-
-    // Only used by the tag handlers!
-    const GeoSceneDocument& document() const;
-
-private:
-    void parseDocument();
-
-private:
-    GeoSceneDocument *m_document;
-    GeoSceneDataSource m_source;
-};
-
-#endif // GeoSceneParser_h
+    qDebug() << "Parsed <Settings> start!";    
+}
