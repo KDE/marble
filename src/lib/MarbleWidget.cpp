@@ -61,6 +61,23 @@
 class MarbleWidgetPrivate
 {
  public:
+    MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
+        : m_parent( parent ), m_map( map )
+    {
+        m_model = m_map->model();
+
+        construct();
+    }
+
+    ~MarbleWidgetPrivate()
+    {
+        delete m_map;
+    }
+
+    void  construct();
+    void  setActiveRegion();
+
+    MarbleWidget    *m_parent;
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
@@ -82,25 +99,17 @@ class MarbleWidgetPrivate
 
 MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
-      d( new MarbleWidgetPrivate )
+      d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-    d->m_map = new MarbleMap();
-    d->m_model = d->m_map->model();
-
-    construct();
 }
 
 
 MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     : QWidget( parent ),
-      d( new MarbleWidgetPrivate )
+      d( new MarbleWidgetPrivate( map, this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-    d->m_map = map;
-    d->m_model = d->m_map->model();
-
-    construct();
 }
 
 MarbleWidget::~MarbleWidget()
@@ -109,75 +118,74 @@ MarbleWidget::~MarbleWidget()
     setInputHandler( 0 );
     setDownloadManager( 0 );
 
-    delete d->m_map;
     delete d;
 }
 
-void MarbleWidget::construct()
+void MarbleWidgetPrivate::construct()
 {
     // Widget settings
-    setMinimumSize( 200, 300 );
-    setFocusPolicy( Qt::WheelFocus );
-    setFocus( Qt::OtherFocusReason );
+    m_parent->setMinimumSize( 200, 300 );
+    m_parent->setFocusPolicy( Qt::WheelFocus );
+    m_parent->setFocus( Qt::OtherFocusReason );
 
     // Initialize the map and forward some signals.
-    d->m_map->setSize( width(), height() );
-    connect( d->m_map, SIGNAL( projectionChanged( Projection ) ),
-             this,     SIGNAL( projectionChanged( Projection ) ) );
+    m_map->setSize( m_parent->width(), m_parent->height() );
+    m_parent->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
+                       m_parent, SIGNAL( projectionChanged( Projection ) ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
-    connect( d->m_model, SIGNAL( themeChanged( QString ) ),
-                         SIGNAL( themeChanged( QString ) ) );
-    connect( d->m_model, SIGNAL( modelChanged() ),
-             this,       SLOT( updateChangedMap() ) );
+    m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
+             m_parent, SIGNAL( themeChanged( QString ) ) );
+    m_parent->connect( m_model, SIGNAL( modelChanged() ),
+             m_parent, SLOT( updateChangedMap() ) );
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
-    connect( d->m_map, SIGNAL( zoomChanged( int ) ),
-             this,     SIGNAL( zoomChanged( int ) ) );
+    m_parent->connect( m_map, SIGNAL( zoomChanged( int ) ),
+                       m_parent, SIGNAL( zoomChanged( int ) ) );
 
 
     // Some part of the screen contents changed.
-    connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
-             this,       SLOT( updateRegion( BoundingBox& ) ) );
+    m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
+                       m_parent, SLOT( updateRegion( BoundingBox& ) ) );
 
 
     // Set background: black.
-    setPalette( QPalette ( Qt::black ) );
+    m_parent->setPalette( QPalette ( Qt::black ) );
 
     // Set whether the black space gets displayed or the earth gets simply 
     // displayed on the widget background.
-    setAutoFillBackground( true );
+    m_parent->setAutoFillBackground( true );
 
-    d->m_justModified = false;
+    m_justModified = false;
 
-    d->m_inputhandler = 0;
-    d->m_popupmenu    = new MarbleWidgetPopupMenu( this, d->m_model );
+    m_inputhandler = 0;
+    m_popupmenu    = new MarbleWidgetPopupMenu( m_parent, m_model );
 
     // Handle mouse and keyboard input.
-    setInputHandler( new MarbleWidgetDefaultInputHandler );
-    setMouseTracking( true );
+    m_parent->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_parent->setMouseTracking( true );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
-    MeasureTool  *measureTool = d->m_map->measureTool();
-    connect( d->m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
-	     measureTool,    SLOT( addMeasurePoint( double, double ) ) );
-    connect( d->m_popupmenu, SIGNAL( removeMeasurePoints() ),
-	     measureTool,    SLOT( removeMeasurePoints( ) ) );
+    MeasureTool  *measureTool = m_map->measureTool();
+    m_parent->connect( m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
+                       measureTool, SLOT( addMeasurePoint( double, double ) ) );
+    m_parent->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
+                       measureTool, SLOT( removeMeasurePoints( ) ) );
 
     // Track the GPS current point at timely intervals.
-    connect( d->m_model, SIGNAL( timeout() ),
-             this,       SLOT( updateGps() ) );
+    m_parent->connect( m_model, SIGNAL( timeout() ),
+                       m_parent, SLOT( updateGps() ) );
 
     // Show a progress dialog when the model calculates new map tiles.
-    connect( d->m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
-             this,       SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
+    m_parent->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
+                       m_parent, SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
-    d->m_logZoom  = 0;
+    m_logZoom  = 0;
 
-    goHome();
+    m_parent->goHome();
 
     // Widget translation
     QString      locale = QLocale::system().name();
@@ -191,12 +199,12 @@ void MarbleWidget::construct()
 #endif
 
     // FIXME: I suppose this should only exist in MarbleMap
-    connect( d->m_model->sunLocator(), SIGNAL( updateSun() ),
-             this,                     SLOT( updateSun() ) );
-    connect( d->m_model->sunLocator(), SIGNAL( centerSun() ),
-             this,                     SLOT( centerSun() ) );
-    connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
-             this,                     SLOT( enableInput() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
+                       m_parent, SLOT( updateSun() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+                       m_parent, SLOT( centerSun() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
+                       m_parent, SLOT( enableInput() ) );
 }
 
 
@@ -443,13 +451,13 @@ void MarbleWidget::zoomView(int newZoom)
     emit distanceChanged( distanceString() );
 
     repaint();
-    setActiveRegion();
+    d->setActiveRegion();
 }
 
 
 void MarbleWidget::zoomViewBy( int zoomStep )
 {
-    zoomView( toLogScale( radius() ) + zoomStep );
+    zoomView( MarbleMapPrivate::toLogScale( radius() ) + zoomStep );
 }
 
 
@@ -617,7 +625,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     d->m_map->setSize( width(), height() );
 
     //	Redefine the area where the mousepointer becomes a navigationarrow
-    setActiveRegion();
+    d->setActiveRegion();
 
     if ( d->m_map->globeCoversImage() ) {
         setAttribute(Qt::WA_NoSystemBackground, true );
@@ -711,37 +719,25 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
     d->m_map->rotateTo( lon, lat );
 }
 
-
-void MarbleWidget::drawAtmosphere()
-{
-    d->m_map->d->drawAtmosphere();
-}
-
-void MarbleWidget::drawFog(QPainter &painter)
-{
-    d->m_map->d->drawFog( painter );
-}
-
-
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_activeRegion;
 }
 
-void MarbleWidget::setActiveRegion()
+void MarbleWidgetPrivate::setActiveRegion()
 {
-    int zoom = radius();
+    int zoom = m_parent->radius();
 
-    d->m_activeRegion = QRegion( 25, 25, width() - 50, height() - 50,
+    m_activeRegion = QRegion( 25, 25, m_parent->width() - 50, m_parent->height() - 50,
                                  QRegion::Rectangle );
 
-    switch( d->m_map->projection() ) {
+    switch( m_map->projection() ) {
         case Spherical:
-            if ( zoom < sqrt( width() * width() + height() * height() ) / 2 ) {
+            if ( zoom < sqrt( m_parent->width() * m_parent->width() + m_parent->height() * m_parent->height() ) / 2 ) {
 
-	       d->m_activeRegion = QRegion( width()  / 2 - zoom, 
-                                            height() / 2 - zoom,
-                                            2 * zoom, 2 * zoom, 
+                m_activeRegion = QRegion( m_parent->width()  / 2 - zoom,
+                                            m_parent->height() / 2 - zoom,
+                                            2 * zoom, 2 * zoom,
                                             QRegion::Ellipse );
             }
             break;
@@ -750,13 +746,13 @@ void MarbleWidget::setActiveRegion()
 
             // Calculate translation of center point
             double centerLon, centerLat;
-            d->m_map->viewParams()->centerCoordinates( centerLon, centerLat );
+            m_map->viewParams()->centerCoordinates( centerLon, centerLat );
 
             int yCenterOffset =  (int)((double)( 2 * zoom ) / M_PI * centerLat);
-            int yTop          = height() / 2 - zoom + yCenterOffset;
-            d->m_activeRegion = QRegion( 0, yTop, 
-                                         width(), 2 * zoom,
-                                         QRegion::Rectangle );
+            int yTop          = m_parent->height() / 2 - zoom + yCenterOffset;
+            m_activeRegion = QRegion( 0, yTop,
+                                      m_parent->width(), 2 * zoom,
+                                      QRegion::Rectangle );
             break;
     }
 }
@@ -1036,19 +1032,6 @@ void MarbleWidget::setDownloadUrl( const QString &url )
 void MarbleWidget::setDownloadUrl( const QUrl &url )
 {
     d->m_map->setDownloadUrl( url );
-}
-
-int MarbleWidget::fromLogScale(int zoom)
-{
-    zoom = (int) pow( M_E, ( (double)zoom / 200.0 ) );
-    // zoom = (int) pow(2.0, ((double)zoom/200));
-    return zoom;
-}
-
-int MarbleWidget::toLogScale(int zoom)
-{
-    zoom = (int)( 200.0 * log( (double)zoom ) );
-    return zoom;
 }
 
 QString MarbleWidget::distanceString() const

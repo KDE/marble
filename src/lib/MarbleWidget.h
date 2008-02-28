@@ -893,17 +893,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  disconnectNotify ( const char * signal );
 
  private:
-    void  construct();
-
-    int   toLogScale(int);
-    int   fromLogScale(int);
-
-    void  setActiveRegion();
-
-    void  drawAtmosphere();
-    void  drawFog( QPainter &painter );
-
- private:
     MarbleWidgetPrivate  * const d;
 };
 
