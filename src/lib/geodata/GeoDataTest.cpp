@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -25,7 +25,10 @@
 #include <QStringList>
 
 #include "GeoDataParser.h"
+#include "GeoDataDocument.h"
+
 #include "GeoSceneParser.h"
+#include "GeoSceneDocument.h"
 
 int main(int argc, char** argv)
 {
@@ -47,27 +50,42 @@ int main(int argc, char** argv)
     // Open file in right mode
     file.open(QIODevice::ReadOnly);
 
-    GeoSceneDataSource source = GeoSceneData_DGML; // KML default for now.
-//    GeoDataDataSource source = GeoDataData_KML; // KML default for now.
+    GeoParser* parser = 0;
+    const QString& fileName = file.fileName().toLower();
 
-/*
-    if (file.fileName().toLower().endsWith(".rss"))
-        source = GeoDataData_GeoRSS;
-    else if (file.fileName().toLower().endsWith(".gpx"))
-        source = GeoDataData_GPX;
-*/
-    // Let our baby do the work!
-//    GeoDataParser parser(source);
-    GeoSceneParser parser(source);
-    if (!parser.read(&file)) {
+    // A real application, would use other heuristics to determine the source type!
+    if (fileName.endsWith(".dgml"))
+        parser = new GeoSceneParser(GeoScene_DGML);
+    else if (fileName.endsWith(".kml"))
+        parser = new GeoDataParser(GeoData_KML);
+    else if (fileName.endsWith(".gpx"))
+        parser = new GeoDataParser(GeoData_GPX);
+
+    if (!parser) {
+        qFatal("Could not determine file format!");
+        return -1;
+    }
+
+    if (!parser->read(&file)) {
         qFatal("Could not parse file!");
         return -1;
     }
 
     // Get result document
-//    const GeoDataDocument& document = parser.document();
-    const GeoSceneDocument& document = parser.document();
+    GeoDocument* document = parser->releaseDocument();
+    Q_ASSERT(document);
+
+    if (document->isGeoDataDocument()) {
+        GeoDataDocument* dataDocument = static_cast<GeoDataDocument*>(document);
+        // TODO: Maybe dump parsed datastructures here!
+    } else if (document->isGeoSceneDocument()) {
+        GeoSceneDocument* dataDocument = static_cast<GeoSceneDocument*>(document);
+        // TODO: Maybe dump parsed datastructures here!
+    } else {
+        // A parsed document should either be a GeoDataDocument or a GeoSceneDocument!
+        Q_ASSERT(false);
+    }
+
     qDebug() << "\nSuccesfully parsed file!";
-// It contains " << document.folders().size() << "folders!";
     return 0;
 }

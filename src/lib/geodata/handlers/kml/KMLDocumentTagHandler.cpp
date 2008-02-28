@@ -24,14 +24,14 @@
 #include "KMLDocumentTagHandler.h"
 
 #include "KMLElementDictionary.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER(Document)
 
 KMLDocumentTagHandler::KMLDocumentTagHandler()
-    : GeoDataTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,7 +39,7 @@ KMLDocumentTagHandler::~KMLDocumentTagHandler()
 {
 }
 
-void KMLDocumentTagHandler::parse(GeoDataParser& parser) const
+void KMLDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Document));
 

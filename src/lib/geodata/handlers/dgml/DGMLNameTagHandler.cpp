@@ -24,14 +24,14 @@
 #include "DGMLNameTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "GeoSceneParser.h"
+#include "GeoParser.h"
 
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Name)
 
 DGMLNameTagHandler::DGMLNameTagHandler()
-    : GeoSceneTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,10 +39,9 @@ DGMLNameTagHandler::~DGMLNameTagHandler()
 {
 }
 
-void DGMLNameTagHandler::parse(GeoSceneParser& parser) const
+void DGMLNameTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() &&
-parser.isValidElement(dgmlTag_Name));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Name));
 
     qDebug() << "Parsed <Name> start!";    
 }

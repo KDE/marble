@@ -24,14 +24,14 @@
 #include "GPXgpxTagHandler.h"
 
 #include "GPXElementDictionary.h"
-#include "GeoDataParser.h"
+#include "GeoParser.h"
 
 using namespace GeoDataElementDictionary;
 
 GPX_DEFINE_TAG_HANDLER(gpx)
 
 GPXgpxTagHandler::GPXgpxTagHandler()
-    : GeoDataTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,7 +39,7 @@ GPXgpxTagHandler::~GPXgpxTagHandler()
 {
 }
 
-void GPXgpxTagHandler::parse(GeoDataParser& parser) const
+void GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_gpx));
 

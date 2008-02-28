@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -22,43 +22,27 @@
 #ifndef GeoDataParser_h
 #define GeoDataParser_h
 
-#include <QHash>
-#include <QXmlStreamReader>
+#include "GeoParser.h"
 
-#include "GeoDataDocument.h"
-
-class GeoDataTagHandler;
-
-enum GeoDataDataSource {
-    GeoDataData_DGML   = 0,
-    GeoDataData_GPX    = 1,
-    GeoDataData_KML    = 2,
-    GeoDataData_GeoRSS = 3
+enum GeoDataSourceType {
+    GeoData_GPX    = 0,
+    GeoData_KML    = 1,
+    GeoData_GeoRSS = 2
 };
 
-class GeoDataParser : public QXmlStreamReader {
+class GeoDataDocument;
+
+class GeoDataParser : public GeoParser {
 public:
-    GeoDataParser(GeoDataDataSource source);
+    GeoDataParser(GeoDataSourceType source);
     virtual ~GeoDataParser();
 
-    // Main API.
-    bool read(QIODevice*);
-
-    // Helper function for the tag handlers
-    bool isValidElement(const QString& tagName) const;
-
-    // If parsing was successful, call this & be happy.
-    GeoDataDocument* releaseDocument();
-
-    // Only used by the tag handlers!
-    GeoDataDocument& document() const;
-
 private:
-    void parseDocument();
+    virtual bool isValidElement(const QString& tagName) const;
+    virtual bool isValidDocumentElement() const;
+    virtual void raiseDocumentElementError();
 
-private:
-    GeoDataDocument* m_document;
-    GeoDataDataSource m_source;
+    virtual GeoDocument* createDocument() const;
 };
 
 #endif // GeoDataParser_h

@@ -24,14 +24,14 @@
 #include "DGMLMapTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "GeoSceneParser.h"
+#include "GeoParser.h"
 
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Map)
 
 DGMLMapTagHandler::DGMLMapTagHandler()
-    : GeoSceneTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,10 +39,9 @@ DGMLMapTagHandler::~DGMLMapTagHandler()
 {
 }
 
-void DGMLMapTagHandler::parse(GeoSceneParser& parser) const
+void DGMLMapTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() &&
-parser.isValidElement(dgmlTag_Map));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
 
     qDebug() << "Parsed <Map> start!";    
 }

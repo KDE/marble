@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -22,17 +22,16 @@
 #include <QDebug>
 
 #include "GeoSceneParser.h"
-#include "GeoSceneTagHandler.h"
+#include "GeoSceneDocument.h"
+#include "GeoTagHandler.h"
 
 // DGML support
 #include "DGMLElementDictionary.h"
-#include "DGMLAttributeDictionary.h"
 
 using namespace GeoSceneElementDictionary;
 
-GeoSceneParser::GeoSceneParser(GeoSceneDataSource source)
-    : QXmlStreamReader()
-    , m_source(source)
+GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
+    : GeoParser(source)
 {
 }
 
@@ -40,71 +39,35 @@ GeoSceneParser::~GeoSceneParser()
 {
 }
 
-GeoSceneDocument* GeoSceneParser::releaseDocument()
+bool GeoSceneParser::isValidDocumentElement() const
 {
-    GeoSceneDocument* document = m_document;
-    m_document = 0;
-    return document;
-}
-
-const GeoSceneDocument& GeoSceneParser::document() const
-{
-    return *m_document;
-}
-
-bool GeoSceneParser::read(QIODevice* device)
-{
-    // Assert previous document got released.
-    Q_ASSERT(!m_document);
-    m_document = new GeoSceneDocument;
-
-    // Set data source
-    setDevice(device);
-
-    // Parse it baby!
-    while (!atEnd()) {
-        readNext();
-
-        if (isStartElement()) {
-            bool valid = false;
-
-            switch (m_source) {
-            case GeoSceneData_DGML:
-                valid = isValidElement(dgmlTag_Dgml);
-                break;
-            default:
-                break;
-            }
-
-            if (valid) {
-                parseDocument();
-                break;
-            } else {
-                switch (m_source) {
-                case GeoSceneData_DGML:
-                    raiseError(QObject::tr("The file is not a valid DGML 2.0 file"));
-                    break;                
-                default:
-                    raiseError(QObject::tr("File format unrecognized"));
-                    break;
-                }
-            }
-        }
+    switch ((GeoSceneSourceType) m_source) {
+    case GeoScene_DGML:
+        return isValidElement(dgmlTag_Dgml);
+    default:
+        Q_ASSERT(false);
+        return false;
     }
+}
 
-    if (error())
-        qDebug() << "[GeoSceneParser::read] -> Error occurred:" << errorString();
-
-    return !error();
+void GeoSceneParser::raiseDocumentElementError()
+{
+    switch ((GeoSceneSourceType) m_source) {
+    case GeoScene_DGML:
+        raiseError(QObject::tr("The file is not a valid DGML 2.0 file"));
+    default:
+        GeoParser::raiseDocumentElementError();
+        break;
+    }
 }
 
 bool GeoSceneParser::isValidElement(const QString& tagName) const
 {
-    if (name() != tagName)
+    if (!GeoParser::isValidElement(tagName))
         return false;
 
-    switch (m_source) {
-    case GeoSceneData_DGML:
+    switch ((GeoSceneSourceType) m_source) {
+    case GeoScene_DGML:
         return (namespaceUri() == dgmlTag_nameSpace20);    
     default:
         break;
@@ -115,24 +78,8 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-void GeoSceneParser::parseDocument()
+
+GeoDocument* GeoSceneParser::createDocument() const
 {
-    Q_ASSERT(isStartElement());
-
-    while (!atEnd()) {
-        readNext();
-
-        if (isEndElement())
-            break;
-
-        if (isStartElement()) {
-            const QString& tagName = name().toString();
-
-            // Check if we have any registered handlers for this node
-            if (const GeoSceneTagHandler* handler = GeoSceneTagHandler::recognizes(tagName))
-                handler->parse(*this);
-
-            parseDocument();
-        }
-    }
+    return new GeoSceneDocument;
 }

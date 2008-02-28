@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -22,7 +22,8 @@
 #include <QDebug>
 
 #include "GeoDataParser.h"
-#include "GeoDataTagHandler.h"
+#include "GeoDataDocument.h"
+#include "GeoTagHandler.h"
 
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"
@@ -35,9 +36,8 @@
 
 using namespace GeoDataElementDictionary;
 
-GeoDataParser::GeoDataParser(GeoDataDataSource source)
-    : QXmlStreamReader()
-    , m_source(source)
+GeoDataParser::GeoDataParser(GeoDataSourceType source)
+    : GeoParser(source)
 {
 }
 
@@ -45,87 +45,46 @@ GeoDataParser::~GeoDataParser()
 {
 }
 
-GeoDataDocument* GeoDataParser::releaseDocument()
+bool GeoDataParser::isValidDocumentElement() const
 {
-    GeoDataDocument* document = m_document;
-    m_document = 0;
-    return document;
-}
-
-GeoDataDocument& GeoDataParser::document() const
-{
-    return *m_document;
-}
-
-bool GeoDataParser::read(QIODevice* device)
-{
-    // Assert previous document got released.
-    Q_ASSERT(!m_document);
-    m_document = new GeoDataDocument;
-
-    // Set data source
-    setDevice(device);
-
-    // Parse it baby!
-    while (!atEnd()) {
-        readNext();
-
-        if (isStartElement()) {
-            bool valid = false;
-
-            switch (m_source) {
-            // TODO: case GeoDataData_GeoRSS:
-            case GeoDataData_GPX:
-                valid = isValidElement(gpxTag_gpx);
-                break;                
-            case GeoDataData_KML:
-                valid = isValidElement(kmlTag_kml);
-                break;
-            default:
-                break;
-            }
-
-            if (valid) {
-                parseDocument();
-                break;
-            } else {
-                switch (m_source) {
-                // TODO: case GeoDataData_GeoRSS:
-                case GeoDataData_GPX:
-                    raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
-                    break;                
-                case GeoDataData_KML:
-                    raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 file"));
-                    break;
-                default:
-                    raiseError(QObject::tr("File format unrecognized"));
-                    break;
-                }
-            }
-        }
+    switch ((GeoDataSourceType) m_source) {
+    // TODO: case GeoData_GeoRSS:
+    case GeoData_GPX:
+        return isValidElement(gpxTag_gpx);
+    case GeoData_KML:
+        return isValidElement(kmlTag_kml);
+    default:
+        Q_ASSERT(false);
+        return false;
     }
+}
 
-    if (error())
-        qDebug() << "[GeoDataParser::read] -> Error occurred:" << errorString();
-
-    return !error();
+void GeoDataParser::raiseDocumentElementError()
+{
+    switch ((GeoDataSourceType) m_source) {
+    // TODO: case GeoData_GeoRSS:
+    case GeoData_GPX:
+        raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
+        break;                
+    case GeoData_KML:
+        raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 file"));
+        break;
+    default:
+        GeoParser::raiseDocumentElementError();
+        break;
+    }
 }
 
 bool GeoDataParser::isValidElement(const QString& tagName) const
 {
-    if (name() != tagName)
+    if (!GeoParser::isValidElement(tagName))
         return false;
 
-    // FIXME: Now that we supported intermixed documents (ie. gpx in kml)
-    // this check is not valid anymore. Just by knowing the document type
-    // we can't say wheter the element is valid. We probably should check
-    // wheter it's _either_ georss, or gpx or kml. To be discussed.
-
-    switch (m_source) {
-    // TODO: case GeoDataData_GeoRSS:
-    case GeoDataData_GPX:
+    switch ((GeoDataSourceType) m_source) {
+    // TODO: case GeoData_GeoRSS:
+    case GeoData_GPX:
         return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
-    case GeoDataData_KML:
+    case GeoData_KML:
         return (namespaceUri() == kmlTag_nameSpace20 || namespaceUri() == kmlTag_nameSpace21);    
     default:
         break;
@@ -136,24 +95,8 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-void GeoDataParser::parseDocument()
+
+GeoDocument* GeoDataParser::createDocument() const
 {
-    Q_ASSERT(isStartElement());
-
-    while (!atEnd()) {
-        readNext();
-
-        if (isEndElement())
-            break;
-
-        if (isStartElement()) {
-            const QString& tagName = name().toString();
-
-            // Check if we have any registered handlers for this node
-            if (const GeoDataTagHandler* handler = GeoDataTagHandler::recognizes(tagName))
-                handler->parse(*this);
-
-            parseDocument();
-        }
-    }
+    return new GeoDataDocument;
 }

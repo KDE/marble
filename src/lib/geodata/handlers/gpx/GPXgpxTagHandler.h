@@ -22,14 +22,14 @@
 #ifndef GPXgpxTagHandler_h
 #define GPXgpxTagHandler_h
 
-#include "GeoDataTagHandler.h"
+#include "GeoTagHandler.h"
 
-class GPXgpxTagHandler : public GeoDataTagHandler {
+class GPXgpxTagHandler : public GeoTagHandler {
 public:
     GPXgpxTagHandler();
     virtual ~GPXgpxTagHandler();
 
-    virtual void parse(GeoDataParser&) const;
+    virtual void parse(GeoParser&) const;
 };
 
 #endif // GPXgpxTagHandler_h

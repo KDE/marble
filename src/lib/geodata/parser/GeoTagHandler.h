@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -19,52 +19,52 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneTagHandler_h
-#define GeoSceneTagHandler_h
+#ifndef GeoTagHandler_h
+#define GeoTagHandler_h
 
 #include <QHash>
 
-class GeoSceneParser;
+class GeoParser;
 
-class GeoSceneTagHandler {
+class GeoTagHandler {
 public:
     // API to be implemented by child handlers.
-    virtual void parse(GeoSceneParser&) const = 0;
+    virtual void parse(GeoParser&) const = 0;
 
 protected: // This base class is not directly constructable nor is it copyable.
-    GeoSceneTagHandler();
-    virtual ~GeoSceneTagHandler();
+    GeoTagHandler();
+    virtual ~GeoTagHandler();
 
 private:
-    GeoSceneTagHandler(const GeoSceneTagHandler&);
-    GeoSceneTagHandler& operator=(const GeoSceneTagHandler&);
+    GeoTagHandler(const GeoTagHandler&);
+    GeoTagHandler& operator=(const GeoTagHandler&);
 
 private: // Only our registrar is allowed to register tag handlers.
-    friend class GeoSceneTagHandlerRegistrar;
-    static void registerHandler(const QString& tagName, const GeoSceneTagHandler*);
+    friend class GeoTagHandlerRegistrar;
+    static void registerHandler(const QString& tagName, const GeoTagHandler*);
 
 private: // Only our parser is allowed to access tag handlers.
-    friend class GeoSceneParser;
-    static const GeoSceneTagHandler* recognizes(const QString& tagName);
+    friend class GeoParser;
+    static const GeoTagHandler* recognizes(const QString& tagName);
 
 private:
-    typedef QHash<QString, const GeoSceneTagHandler*> TagHash;
+    typedef QHash<QString, const GeoTagHandler*> TagHash;
 
     static TagHash* tagHandlerHash();
     static TagHash* s_tagHandlerHash;
 };
 
 // Helper structure
-struct GeoSceneTagHandlerRegistrar {
+struct GeoTagHandlerRegistrar {
 public:
-    GeoSceneTagHandlerRegistrar(const QString& tagName, const GeoSceneTagHandler* handler)
+    GeoTagHandlerRegistrar(const QString& tagName, const GeoTagHandler* handler)
     {
-        GeoSceneTagHandler::registerHandler(tagName, handler);
+        GeoTagHandler::registerHandler(tagName, handler);
     }
 };
 
 // Macros to ease registering new handlers
 #define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name) \
-    static GeoSceneTagHandlerRegistrar s_myTagHandler(Module##Tag_##Name, new UpperCaseModule##Name##TagHandler());
+    static GeoTagHandlerRegistrar s_myTagHandler(Module##Tag_##Name, new UpperCaseModule##Name##TagHandler());
 
-#endif // GeoSceneTagHandler_h
+#endif // GeoTagHandler_h

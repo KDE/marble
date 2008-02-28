@@ -28,6 +28,7 @@
 #include <QHash>
 
 #include "GeoDataContainer.h"
+#include "GeoDocument.h"
 
 class GeoDataFolder;
 class GeoDataStyle;
@@ -41,10 +42,13 @@ class GeoDataStyle;
  * Document, each with an id, and then later referenced by a
  * styleUrl for a given Feature or StyleMap.
  */
-class GeoDataDocument : public GeoDataContainer {
+class GeoDataDocument : public GeoDocument,
+                        public GeoDataContainer {
 public:
     GeoDataDocument();
     ~GeoDataDocument();
+
+    virtual bool isGeoDataDocument() const { return true; }
 
     /**
      * @brief A convenience function that returns all folders in the document.

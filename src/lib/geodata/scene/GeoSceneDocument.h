@@ -24,14 +24,17 @@
 #define GEOSCENEDOCUMENT_H
 
 #include "GeoSceneHead.h"
+#include "GeoDocument.h"
 
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GeoSceneDocument {
+class GeoSceneDocument : public GeoDocument {
 public:
     GeoSceneDocument();
     ~GeoSceneDocument();
+
+    virtual bool isGeoSceneDocument() const { return true; }
 
     const GeoSceneHead& head() const;
 

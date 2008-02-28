@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -21,19 +21,19 @@
 
 #include <QDebug>
 
-#include "GeoSceneTagHandler.h"
+#include "GeoTagHandler.h"
 
-GeoSceneTagHandler::TagHash* GeoSceneTagHandler::s_tagHandlerHash = 0;
+GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;
 
-GeoSceneTagHandler::GeoSceneTagHandler()
+GeoTagHandler::GeoTagHandler()
 {
 }
 
-GeoSceneTagHandler::~GeoSceneTagHandler()
+GeoTagHandler::~GeoTagHandler()
 {
 }
 
-GeoSceneTagHandler::TagHash* GeoSceneTagHandler::tagHandlerHash()
+GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
 {
     if (!s_tagHandlerHash)
         s_tagHandlerHash = new TagHash();
@@ -42,17 +42,17 @@ GeoSceneTagHandler::TagHash* GeoSceneTagHandler::tagHandlerHash()
     return s_tagHandlerHash;
 }
 
-void GeoSceneTagHandler::registerHandler(const QString& tagName, const GeoSceneTagHandler* handler)
+void GeoTagHandler::registerHandler(const QString& tagName, const GeoTagHandler* handler)
 {
     TagHash* hash = tagHandlerHash();
 
     Q_ASSERT(!hash->contains(tagName));
     hash->insert(tagName, handler);
 
-    qDebug() << "[GeoSceneTagHandler] -> Registered" << tagName << "tag!";
+    qDebug() << "[GeoTagHandler] -> Recognizing" << tagName << "tag!";
 }
 
-const GeoSceneTagHandler* GeoSceneTagHandler::recognizes(const QString& tagName)
+const GeoTagHandler* GeoTagHandler::recognizes(const QString& tagName)
 {
     TagHash* hash = tagHandlerHash();
 

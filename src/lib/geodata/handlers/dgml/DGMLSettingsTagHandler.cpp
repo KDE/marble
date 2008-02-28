@@ -24,14 +24,14 @@
 #include "DGMLSettingsTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "GeoSceneParser.h"
+#include "GeoParser.h"
 
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Settings)
 
 DGMLSettingsTagHandler::DGMLSettingsTagHandler()
-    : GeoSceneTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,10 +39,9 @@ DGMLSettingsTagHandler::~DGMLSettingsTagHandler()
 {
 }
 
-void DGMLSettingsTagHandler::parse(GeoSceneParser& parser) const
+void DGMLSettingsTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() &&
-parser.isValidElement(dgmlTag_Settings));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Settings));
 
     qDebug() << "Parsed <Settings> start!";    
 }

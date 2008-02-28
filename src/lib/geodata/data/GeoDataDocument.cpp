@@ -26,6 +26,8 @@
 #include "GeoDataStyle.h"
 
 GeoDataDocument::GeoDataDocument()
+    : GeoDocument()
+    , GeoDataContainer()
 {
 }
 

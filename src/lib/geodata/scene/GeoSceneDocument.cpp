@@ -23,6 +23,7 @@
 #include "GeoSceneDocument.h"
 
 GeoSceneDocument::GeoSceneDocument()
+    : GeoDocument()
 {
 }
 

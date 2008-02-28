@@ -24,14 +24,14 @@
 #include "DGMLLegendTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "GeoSceneParser.h"
+#include "GeoParser.h"
 
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Legend)
 
 DGMLLegendTagHandler::DGMLLegendTagHandler()
-    : GeoSceneTagHandler()
+    : GeoTagHandler()
 {
 }
 
@@ -39,10 +39,9 @@ DGMLLegendTagHandler::~DGMLLegendTagHandler()
 {
 }
 
-void DGMLLegendTagHandler::parse(GeoSceneParser& parser) const
+void DGMLLegendTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() &&
-parser.isValidElement(dgmlTag_Legend));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
 
     qDebug() << "Parsed <Legend> start!";    
 }

@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -19,17 +19,19 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DGMLDocumentTagHandler_h
-#define DGMLDocumentTagHandler_h
+#ifndef GeoDocument_h
+#define GeoDocument_h
 
-#include "GeoTagHandler.h"
+/**
+ * @short A shared base class between GeoDataDocument/GeoSourceDocument
+ */
+class GeoDocument {
+protected:
+    GeoDocument() { }
 
-class DGMLDocumentTagHandler : public GeoTagHandler {
 public:
-    DGMLDocumentTagHandler();
-    virtual ~DGMLDocumentTagHandler();
-
-    virtual void parse(GeoParser&) const;
+    virtual bool isGeoDataDocument() const { return false; }
+    virtual bool isGeoSceneDocument() const { return false; }
 };
 
-#endif // DGMLDocumentTagHandler_h
+#endif // GeoDocument_h

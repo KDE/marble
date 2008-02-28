@@ -27,10 +27,10 @@ SET( geodata_data_SRCS
    )
 
 SET( geodata_parser_SRCS
+    	geodata/parser/GeoParser.cpp
         geodata/parser/GeoDataParser.cpp
         geodata/parser/GeoSceneParser.cpp
-        geodata/parser/GeoDataTagHandler.cpp
-        geodata/parser/GeoSceneTagHandler.cpp
+        geodata/parser/GeoTagHandler.cpp
    )
 
 SET( geodata_handlers_dgml_SRCS

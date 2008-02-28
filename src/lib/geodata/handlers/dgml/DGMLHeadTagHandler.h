@@ -22,14 +22,14 @@
 #ifndef DGMLHeadTagHandler_h
 #define DGMLHeadTagHandler_h
 
-#include "GeoSceneTagHandler.h"
+#include "GeoTagHandler.h"
 
-class DGMLHeadTagHandler : public GeoSceneTagHandler {
+class DGMLHeadTagHandler : public GeoTagHandler {
 public:
     DGMLHeadTagHandler();
     virtual ~DGMLHeadTagHandler();
 
-    virtual void parse(GeoSceneParser&) const;
+    virtual void parse(GeoParser&) const;
 };
 
 #endif // DGMLHeadTagHandler_h

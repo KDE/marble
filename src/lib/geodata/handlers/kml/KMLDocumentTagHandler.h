@@ -22,14 +22,14 @@
 #ifndef KMLDocumentTagHandler_h
 #define KMLDocumentTagHandler_h
 
-#include "GeoDataTagHandler.h"
+#include "GeoTagHandler.h"
 
-class KMLDocumentTagHandler : public GeoDataTagHandler {
+class KMLDocumentTagHandler : public GeoTagHandler {
 public:
     KMLDocumentTagHandler();
     virtual ~KMLDocumentTagHandler();
 
-    virtual void parse(GeoDataParser&) const;
+    virtual void parse(GeoParser&) const;
 };
 
 #endif // KMLDocumentTagHandler_h
