@@ -272,11 +272,9 @@ else (APPLE AND QTONLY)
            MarbleWidgetPopupMenu.h
 
            global.h
-           AutoSettings.h
            BoundingBox.h
            ClipPainter.h
            GeoPolygon.h
-           GridMap.h
            HttpDownloadManager.h
            HttpFetchFile.h
            CrossHairFloatItem.h
@@ -307,13 +305,10 @@ else (APPLE AND QTONLY)
            GlobeScanlineTextureMapper.h
            AbstractScanlineTextureMapper.h
            TextureTile.h
-           TileCache.h
            TileLoader.h
            TileCreator.h
-           TinyWebBrowser.h
            VectorComposer.h
            VectorMap.h
-           XmlHandler.h
            marble_export.h
            SunLocator.h
            ExtDateTime.h

@@ -19,27 +19,45 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include "global.h"
+#include "gps/GpsLayer.h"
+
+#include "AbstractScanlineTextureMapper.h"
 #include "ClipPainter.h"
-#include "HttpDownloadManager.h"
 #include "FileViewModel.h"
+#include "FlatScanlineTextureMapper.h"
 #include "GeoPolygon.h"
+#include "GlobeScanlineTextureMapper.h"
+#include "GridMap.h"
+#include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"
-#include "ViewParams.h"
-#include "TextureColorizer.h"
-#include "TileLoader.h"
-#include "TileCreator.h"
 #include "MapTheme.h"
 #include "MarbleDirs.h"
+#include "MarblePlacemarkModel.h"
+#include "ViewParams.h"
+#include "SunLocator.h"
+#include "TextureColorizer.h"
+#include "TileCreator.h"
 #include "TileCreatorDialog.h"
+#include "TileLoader.h"
 #include "PlaceMarkManager.h"
 #include "PlaceMarkPainter.h"
 #include "XmlHandler.h"
-#include "gps/GpsLayer.h"
 
 
 class MarbleModelPrivate
 {
  public:
+    MarbleModelPrivate( MarbleModel *parent )
+        : m_parent( parent )
+    {
+    }
+
+    void  resize( int width, int height );
+    void notifyModelChanged();
+    void geoDataDocumentLoaded( GeoDataDocument& document );
+
+    MarbleModel         *m_parent;
+
     // View and paint stuff
     MapTheme            *m_maptheme;
     QString              m_selectedMap;
@@ -70,13 +88,14 @@ class MarbleModelPrivate
     Projection   m_projection;
 
     FileViewModel       *m_fileviewmodel;
+    SunLocator* m_sunLocator;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
-      d( new MarbleModelPrivate )
+      d( new MarbleModelPrivate( this ) )
 {
-    m_sunLocator = new SunLocator();
+    d->m_sunLocator = new SunLocator();
 
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
@@ -85,7 +104,7 @@ MarbleModel::MarbleModel( QObject *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_downloadManager = 0;
-    d->m_tileLoader = new TileLoader( d->m_downloadManager, m_sunLocator );
+    d->m_tileLoader = new TileLoader( d->m_downloadManager, d->m_sunLocator );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -304,7 +323,7 @@ d->m_maptheme->labelColor() );
     d->m_selectedMap = selectedMap;
     d->m_projection = currentProjection;
     emit themeChanged( selectedMap );
-    notifyModelChanged();
+    d->notifyModelChanged();
 }
 
 
@@ -336,14 +355,14 @@ void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
 }
 
 
-void MarbleModel::resize( int width, int height )
+void MarbleModelPrivate::resize( int width, int height )
 {
-    if ( d->m_maptheme->bitmaplayer().enabled == true ) {
-        d->m_texmapper->resizeMap( width, height );
+    if ( m_maptheme->bitmaplayer().enabled == true ) {
+        m_texmapper->resizeMap( width, height );
     }
 
-    d->m_veccomposer->resizeMap( width, height );
-    d->m_gridmap->resizeMap( width, height );
+    m_veccomposer->resizeMap( width, height );
+    m_gridmap->resizeMap( width, height );
 }
 
 
@@ -353,7 +372,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                               bool redrawBackground,
                               const QRect& dirtyRect )
 {
-    resize( width, height );
+    d->resize( width, height );
 
     if ( redrawBackground ) {
 
@@ -534,7 +553,7 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
     d->m_placemarkmanager->loadKml( filename, true );
 
-    notifyModelChanged();
+    d->notifyModelChanged();
 }
 
 QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
@@ -542,22 +561,27 @@ QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos
     return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
 }
 
-void MarbleModel::notifyModelChanged()
+void MarbleModelPrivate::notifyModelChanged()
 {
-    emit modelChanged();
+    emit m_parent->modelChanged();
 }
 
-void MarbleModel::geoDataDocumentLoaded( GeoDataDocument& document )
+void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 {
-    AbstractFileViewItem* item = new KMLFileViewItem( *d->m_placemarkmanager,
+    AbstractFileViewItem* item = new KMLFileViewItem( *m_placemarkmanager,
                                                       document );
 
-    d->m_fileviewmodel->append( item );
+    m_fileviewmodel->append( item );
 }
 
 void MarbleModel::update()
 {
     d->m_tileLoader->update();
+}
+
+SunLocator* MarbleModel::sunLocator() const
+{
+    return d->m_sunLocator;
 }
 
 quint64 MarbleModel::volatileTileCacheLimit() const

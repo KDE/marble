@@ -35,32 +35,25 @@
 #include <QtGui/QPixmap>
 
 #include "global.h"
-#include "Quaternion.h"
-#include "GridMap.h"
-#include "PlaceMarkContainer.h"
 #include "PlaceMarkLayout.h"
-#include "MarblePlacemarkModel.h"
-#include "GlobeScanlineTextureMapper.h"
-#include "FlatScanlineTextureMapper.h"
 #include "VectorComposer.h"
 #include "TextureColorizer.h"
 
-#include "SunLocator.h"
-
 class QItemSelectionModel;
 
+class AbstractScanlineTextureMapper;
+class BoundingBox;
 class ClipPainter;
 class FileViewModel;
-class GpxFileModel;
-class GpsLayer;
 class GeoDataDocument;
+class GpsLayer;
+class GpxFileModel;
+class HttpDownloadManager;
 class MapTheme;
 class MarbleModelPrivate;
-class PlaceMark;
-class PlaceMarkManager;
+class SunLocator;
 class TileCreator;
 class ViewParams;
-class HttpDownloadManager;
 
 
 /**
@@ -92,6 +85,8 @@ class HttpDownloadManager;
 
 class MARBLE_EXPORT MarbleModel : public QObject
 {
+    friend class MarbleModelPrivate;
+
     Q_OBJECT
 
  public:
@@ -240,8 +235,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     
     void update();
     
-    // FIXME: Breaks compatibility
-    SunLocator* sunLocator() {return m_sunLocator;}
+    SunLocator* sunLocator() const;
 
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
@@ -294,17 +288,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void timeout();
 
- private Q_SLOTS:
-    void notifyModelChanged();
-    void geoDataDocumentLoaded( GeoDataDocument& document );
-
- private:
-    void  resize( int width, int height );
-
  private:
     MarbleModelPrivate  * const d;
-    // FIXME: Breaks forward compatibility; put in MarbleModelPrivate.
-    SunLocator* m_sunLocator;
+
+    Q_PRIVATE_SLOT( d, void notifyModelChanged() )
+    Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
 };
 
 
