@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
     Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
 
     This file is part of the KDE project
@@ -20,12 +20,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEODATADOCUMENT_H
-#define GEODATADOCUMENT_H
+#ifndef GeoDataDocument_h
+#define GeoDataDocument_h
 
-
-#include <QVector>
 #include <QHash>
+#include <QVector>
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
@@ -51,6 +50,12 @@ public:
     virtual bool isGeoDataDocument() const { return true; }
 
     /**
+     * @brief Add a folder to the document
+     * @param style the new folder
+     */
+    void addFolder(GeoDataFolder*);
+
+    /**
      * @brief A convenience function that returns all folders in the document.
      * @return A QVector of GeoDataFolder*
      *
@@ -62,17 +67,18 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle( GeoDataStyle* style );
+    void addStyle(GeoDataStyle*);
 
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    const GeoDataStyle* style( QString styleId ) const;
+    const GeoDataStyle* style(const QString& styleId) const;
 
-  private:
-    QHash < QString, GeoDataStyle* >  m_styleHash;
+private:
+    QHash<QString, GeoDataStyle*> m_styleHash;
+    QVector<GeoDataFolder*> m_folders;
 };
 
 
-#endif // GEODATADOCUMENT_H
+#endif // GeoDataDocument_h

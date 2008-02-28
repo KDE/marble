@@ -36,8 +36,9 @@ public:
     // Main API.
     bool read(QIODevice*);
 
-    // If parsing was successful, retreive the resulting document.
+    // If parsing was successful, retreive the resulting document and set the contained m_document pointer to 0.
     GeoDocument* releaseDocument();
+    GeoDocument* activeDocument() { return m_document; }
 
     // Used by tag handlers, to be overriden by GeoDataParser/GeoSceneParser
     virtual bool isValidElement(const QString& tagName) const;

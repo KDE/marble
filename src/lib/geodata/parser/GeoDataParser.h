@@ -23,14 +23,13 @@
 #define GeoDataParser_h
 
 #include "GeoParser.h"
+#include "GeoDataDocument.h"
 
 enum GeoDataSourceType {
     GeoData_GPX    = 0,
     GeoData_KML    = 1,
     GeoData_GeoRSS = 2
 };
-
-class GeoDataDocument;
 
 class GeoDataParser : public GeoParser {
 public:
@@ -44,5 +43,13 @@ private:
 
     virtual GeoDocument* createDocument() const;
 };
+
+// Global inlined helper function for the tag handlers
+inline GeoDataDocument* geoDataDoc(GeoParser& parser)
+{
+    GeoDocument* document = parser.activeDocument();
+    Q_ASSERT(document->isGeoDataDocument());
+    return static_cast<GeoDataDocument*>(document);
+}
 
 #endif // GeoDataParser_h

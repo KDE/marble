@@ -19,33 +19,35 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
+#ifndef GeoSceneParser_h
+#define GeoSceneParser_h
 
-#include "KMLFolderTagHandler.h"
+#include "GeoParser.h"
+#include "GeoSceneDocument.h"
 
-#include "KMLElementDictionary.h"
-#include "GeoDataFolder.h"
-#include "GeoDataParser.h"
+enum GeoSceneSourceType {
+    GeoScene_DGML   = 0
+};
 
-using namespace GeoDataElementDictionary;
+class GeoSceneParser : public GeoParser {
+public:
+    GeoSceneParser(GeoSceneSourceType source);
+    virtual ~GeoSceneParser();
 
-KML_DEFINE_TAG_HANDLER(Folder)
+private:
+    virtual bool isValidElement(const QString& tagName) const;
+    virtual bool isValidDocumentElement() const;
+    virtual void raiseDocumentElementError();
 
-KMLFolderTagHandler::KMLFolderTagHandler()
-    : GeoTagHandler()
+    virtual GeoDocument* createDocument() const;
+};
+
+// Global inlined helper function for the tag handlers
+inline GeoSceneDocument* geoSceneDoc(GeoParser& parser)
 {
+    GeoDocument* document = parser.activeDocument();
+    Q_ASSERT(document->isGeoSceneDocument());
+    return static_cast<GeoSceneDocument*>(document);
 }
 
-KMLFolderTagHandler::~KMLFolderTagHandler()
-{
-}
-
-void KMLFolderTagHandler::parse(GeoParser& parser) const
-{
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
-
-    GeoDataFolder* folder = new GeoDataFolder;
-    geoDataDoc(parser)->addFolder(folder);
-
-    qDebug() << "Parsed <Folder> start!";    
-}
+#endif // GeoSceneParser_h

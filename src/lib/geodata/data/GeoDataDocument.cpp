@@ -35,26 +35,28 @@ GeoDataDocument::~GeoDataDocument()
 {
 }
 
+void GeoDataDocument::addFolder(GeoDataFolder* folder)
+{
+    m_folders.append(folder);
+}
+
 const QVector<GeoDataFolder*> GeoDataDocument::folders() const
 {
-    QVector< GeoDataFolder* >  retval;
-
-    // FIXME: Add a loop to get a copy of all the features that are
-    //        actually folders.
-    return retval;
+    return m_folders;
 }
 
-void GeoDataDocument::addStyle( GeoDataStyle* style )
+void GeoDataDocument::addStyle(GeoDataStyle* style)
 {
+    Q_ASSERT(style);
     qDebug("GeoDataDocument: Add new style");
-    m_styleHash.insert( style->styleId(), style );
+    m_styleHash.insert(style->styleId(), style);
 }
 
-const GeoDataStyle* GeoDataDocument::style( QString styleId ) const
+const GeoDataStyle* GeoDataDocument::style(const QString& styleId) const
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
-    return m_styleHash.value( styleId );
+    return m_styleHash.value(styleId);
 }
