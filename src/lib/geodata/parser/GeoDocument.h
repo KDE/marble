@@ -25,11 +25,14 @@
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
-class GeoDocument {
+class GeoDocument
+{
 protected:
     GeoDocument() { }
 
 public:
+    virtual ~GeoDocument() {};
+
     virtual bool isGeoDataDocument() const { return false; }
     virtual bool isGeoSceneDocument() const { return false; }
 };

@@ -26,8 +26,8 @@
 
 GeoParser::GeoParser(GeoDataGenericSourceType source)
     : QXmlStreamReader()
-    , m_source(source)
     , m_document(0)
+    , m_source(source)
 {
 }
 
