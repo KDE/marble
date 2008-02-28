@@ -1,3 +1,11 @@
+2008-02-28  Torsten Rahn  <rahn@kde.org>
+
+    * LICENSE.txt:
+    * ChangeLog:
+
+    - License Change: LGPL2 -> LGPL2+ 
+      as communicated with all other developers.
+
 2008-02-26  Torsten Rahn  <rahn@kde.org>
 
     * docs/paintingmaps.txt:
