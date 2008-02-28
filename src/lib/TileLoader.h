@@ -23,15 +23,10 @@
 #ifndef __MARBLE__TILELOADER_H
 #define __MARBLE__TILELOADER_H
 
-#include <QtCore/QDebug>
-#include <QtCore/QHash>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "TileCache.h"
-
-#include "SunLocator.h"
-
+class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 
@@ -48,129 +43,191 @@ class HttpDownloadManager;
  * @author Torsten Rahn <rahn@kde.org>
  **/
 
-class TileLoader : public QObject {
+class TileLoader : public QObject
+{
     Q_OBJECT
- public:
-    explicit TileLoader( HttpDownloadManager *downloadManager, 
-                         SunLocator* sunLocator = 0 );
-    TileLoader( const QString& theme,
-                HttpDownloadManager *downloadManager,
-                SunLocator* sunLocator = 0 );
-    virtual ~TileLoader();
 
-    void setDownloadManager( HttpDownloadManager *downloadManager );
+    public:
+        /**
+         * Creates a new tile loader.
+         *
+         * @param downloadManager The download manager that shall be used to fetch
+         *                        the tiles from a remote resource.
+         * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
+         */
+        explicit TileLoader( HttpDownloadManager *downloadManager,
+                             SunLocator* sunLocator = 0 );
 
-    TextureTile* loadTile( int tilx, int tily, int tileLevel );
+        /**
+         * Creates a new tile loader for a given @p theme.
+         *
+         * @param theme The theme to load the tiles for.
+         * @param downloadManager The download manager that shall be used to fetch
+         *                        the tiles from a remote resource.
+         * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
+         */
+        TileLoader( const QString& theme,
+                    HttpDownloadManager *downloadManager,
+                    SunLocator* sunLocator = 0 );
 
-    void setMapTheme( const QString& );
-    const QString mapTheme() const { return m_theme; }
+        /**
+         * Destroys the tile loader.
+         */
+        virtual ~TileLoader();
 
-    void resetTilehash();
-    void cleanupTilehash();
+        /**
+         * Sets the download manager that shall be used to fetch the
+         * tiles from a remote resource.
+         */
+        void setDownloadManager( HttpDownloadManager *downloadManager );
 
-    void flush();
+        /**
+         * Loads a tile and returns it.
+         *
+         * @param tilx The x coordinate of the requested tile.
+         * @param tily The y coordinate of the requested tile.
+         * @param tileLevel The zoom level of the requested tile.
+         */
+        TextureTile* loadTile( int tilx, int tily, int tileLevel );
 
-    int tileWidth()  const { return m_tileWidth; }
-    int tileHeight() const { return m_tileHeight; }
+        /**
+         * Sets the map @p theme the tiles shall be loaded for.
+         */
+        void setMapTheme( const QString &theme );
 
-    int globalWidth( int level ) const 
-    {
-        return m_tileWidth * levelToColumn( level );
-    };
-    int globalHeight( int level ) const 
-    {
-        return m_tileHeight * levelToRow( level );
-    };
+        /**
+         * Returns the map theme the tiles shall be loaded for.
+         */
+        const QString mapTheme() const;
 
-    /**
-     * @brief  Returns the limit of the volatile (in RAM) cache.
-     * @return the cache limit in bytes
-     */
-    quint64 volatileCacheLimit() const;
+        /**
+         * Resets the internal tile hash.
+         */
+        void resetTilehash();
 
-    /**
-     * @brief Get the maximum number of tile rows for a given tile level.
-     * @param level  the tile level
-     * @return       the maximum number of rows that a map level was tiled into. 
-     *               If the tile level number is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get caught 
-     *               by the code which makes use of it.
-     */
-    static int levelToRow( int level );
+        /**
+         * Cleans up the internal tile hash.
+         *
+         * Removes all superfluous tiles from the hash.
+         */
+        void cleanupTilehash();
 
-    /**
-     * @brief Get the maximum number of tile columns for a given tile level.
-     * @param level  the tile level
-     * @return       the maximum number of columns that a map level was tiled into. 
-     *               If the tile level number is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get caught 
-     *               by the code which makes use of it.
-     */
-    static int levelToColumn( int level );
+        /**
+         * Clears the internal tile hash.
+         *
+         * Removes all tiles from the hash.
+         */
+        void flush();
 
-    /**
-     * @brief Get the tile level for the given maximum number of tile columns.
-     * @param row    the maximum number of rows that a map level was tiled into.
-     * @return       the corresponding tile level.
-     *               If the number of rows is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get caught 
-     *               by the code which makes use of it.
-     */
-    static int rowToLevel( int row );
+        /**
+         * Returns the width of a tile loaded by this tile loader.
+         */
+        int tileWidth() const;
 
-    /**
-     * @brief Get the tile level for the given maximum number of tile columns.
-     * @param column the maximum number of columns that a map level was tiled into.
-     * @return       the corresponding tile level.
-     *               If the number of columns is invalid then "-1" gets 
-     *               returned so this case of wrong input data can get caught 
-     *               by the code which makes use of it.
-     */
-    static int columnToLevel( int column );
+        /**
+         * Returns the height of a tile loaded by this tile loader.
+         */
+        int tileHeight() const;
 
-    // highest level in which all tiles are available
-    static int maxCompleteTileLevel( const QString& theme );
+        /**
+         * Returns the global width for the given @p level.
+         */
+        int globalWidth( int level ) const;
 
-    // highest level in which some tiles are available
-    static int maxPartialTileLevel( const QString& theme );
+        /**
+         * Returns the global height for the given @p level.
+         */
+        int globalHeight( int level ) const;
 
-    // the mandatory most basic tile level is fully available
-    static bool baseTilesAvailable( const QString& theme );
+        /**
+         * @brief  Returns the limit of the volatile (in RAM) cache.
+         * @return the cache limit in bytes
+         */
+        quint64 volatileCacheLimit() const;
 
-    void update();
+        /**
+         * @brief Get the maximum number of tile rows for a given tile level.
+         * @param level  the tile level
+         * @return       the maximum number of rows that a map level was tiled into. 
+         *               If the tile level number is invalid then "-1" gets 
+         *               returned so this case of wrong input data can get caught 
+         *               by the code which makes use of it.
+         */
+        static int levelToRow( int level );
 
- private:
-    void init();
+        /**
+         * @brief Get the maximum number of tile columns for a given tile level.
+         * @param level  the tile level
+         * @return       the maximum number of columns that a map level was tiled into. 
+         *               If the tile level number is invalid then "-1" gets 
+         *               returned so this case of wrong input data can get caught 
+         *               by the code which makes use of it.
+         */
+        static int levelToColumn( int level );
 
- protected:
+        /**
+         * @brief Get the tile level for the given maximum number of tile columns.
+         * @param row    the maximum number of rows that a map level was tiled into.
+         * @return       the corresponding tile level.
+         *               If the number of rows is invalid then "-1" gets 
+         *               returned so this case of wrong input data can get caught 
+         *               by the code which makes use of it.
+         */
+        static int rowToLevel( int row );
 
-    HttpDownloadManager *m_downloadManager;
+        /**
+         * @brief Get the tile level for the given maximum number of tile columns.
+         * @param column the maximum number of columns that a map level was tiled into.
+         * @return       the corresponding tile level.
+         *               If the number of columns is invalid then "-1" gets 
+         *               returned so this case of wrong input data can get caught 
+         *               by the code which makes use of it.
+         */
+        static int columnToLevel( int column );
 
-    QString       m_theme;
+        /**
+         * Returns the highest level in which all tiles are available for the given @p theme.
+         */
+        static int maxCompleteTileLevel( const QString& theme );
 
-    QHash <int, TextureTile*>  m_tileHash;
+        /**
+         * Returns the highest level in which some tiles are available for the given @p theme.
+         */
+        static int maxPartialTileLevel( const QString& theme );
 
-    int           m_tileWidth;
-    int           m_tileHeight;
+        /**
+         * Returns whether the mandatory most basic tile level is fully available for
+         * the given @p theme.
+         */
+        static bool baseTilesAvailable( const QString& theme );
 
-    TileCache     m_tileCache;
-    
-    SunLocator* m_sunLocator;
+    public Q_SLOTS:
+        /**
+         * @brief Set the limit of the volatile (in RAM) cache.
+         * @param bytes The limit in bytes.
+         */
+        void setVolatileCacheLimit( quint64 bytes );
 
- Q_SIGNALS:
-    void tileUpdateAvailable();
+        /**
+         * Reloads the tile with the given @p id.
+         */
+        void reloadTile( const QString &relativeUrlString, const QString &id );
 
-public Q_SLOTS:
+        /**
+         * Triggers an update of the tile loader.
+         */
+        void update();
 
-    /**
-     * @brief Set the limit of the volatile (in RAM) cache.
-     * @param bytes The limit in bytes.
-     */
-    void setVolatileCacheLimit( quint64 bytes );
+    Q_SIGNALS:
+        /**
+         * This signal is emitted whenever a requested tile has been
+         * downloaded and is available now.
+         */
+        void tileUpdateAvailable();
 
-    void reloadTile( QString relativeUrlString, QString id );
-
-    void message( const QString& test ){ qDebug() << test; }
+    private:
+        class Private;
+        Private* const d;
 };
 
 

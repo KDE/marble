@@ -7,8 +7,8 @@
 #include <QPainter>
 
 #include "MarbleDirs.h"
+#include "TextureTile.h"
 #include "TileLoader.h"
-
 
 MergedLayerPainter::MergedLayerPainter()
 {
