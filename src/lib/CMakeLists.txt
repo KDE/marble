@@ -259,65 +259,24 @@ else (APPLE AND QTONLY)
   install( FILES
            MarbleWidget.h
            MarbleMap.h
-           MarbleModel.h
            MarbleControlBox.h
            MarbleNavigator.h
-           MarbleLegendBrowser.h
-           MarbleThemeSelectView.h
-           MarbleSearchListView.h
-           MarbleAboutDialog.h
-           SunControlWidget.h
 
            MarbleWidgetInputHandler.h
-           MarbleWidgetPopupMenu.h
 
            global.h
-           BoundingBox.h
-           ClipPainter.h
-           GeoPolygon.h
-           HttpDownloadManager.h
-           HttpFetchFile.h
-           CrossHairFloatItem.h
-           CompassFloatItem.h
-           MapScaleFloatItem.h
            MarbleDirs.h
-           DeferredFlag.h
            TileCreatorDialog.h
-           MapTheme.h
            ViewportParams.h
            ViewParams.h
            AbstractProjection.h
            SphericalProjection.h
            EquirectProjection.h
            MercatorProjection.h
-           MeasureTool.h
-           VisiblePlaceMark.h
-           PlaceMarkContainer.h
-           PlaceMarkManager.h
-           PlaceMarkLayout.h
-           PlaceMarkPainter.h
-           MarblePlacemarkModel.h
-           PlaceMarkInfoDialog.h
            Quaternion.h
-           ScreenPolygon.h
-           TextureColorizer.h
-           FlatScanlineTextureMapper.h
-           GlobeScanlineTextureMapper.h
-           AbstractScanlineTextureMapper.h
-           TextureTile.h
-           TileLoader.h
-           TileCreator.h
-           VectorComposer.h
-           VectorMap.h
-           marble_export.h
-           SunLocator.h
-           ExtDateTime.h
-           MergedLayerPainter.h
 
-           AbstractLayer/AbstractLayer.h
-           AbstractLayer/AbstractLayerContainer.h
-           AbstractLayer/AbstractLayerData.h
-           AbstractLayer/AbstractLayerInterface.h
+           TileCreator.h
+           marble_export.h
 
            geodata/data/Serializable.h
            geodata/data/GeoDataObject.h
