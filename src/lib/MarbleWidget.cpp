@@ -62,7 +62,8 @@ class MarbleWidgetPrivate
 {
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
-        : m_parent( parent ), m_map( map )
+        : m_parent( parent ), m_map( map ),
+          m_inputhandler( 0 )
     {
         m_model = m_map->model();
 
