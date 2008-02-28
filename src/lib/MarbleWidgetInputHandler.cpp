@@ -24,8 +24,8 @@
 
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
-    : m_widget( NULL ),
-      m_model( NULL )
+    : m_widget( 0 ),
+      m_model( 0 )
 {
     m_positionSignalConnected = false;
 }

@@ -850,19 +850,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void  disconnectNotify ( const char * signal );
 #endif
  private:
-    void  construct();
-
-    int   toLogScale(int);
-    int   fromLogScale(int);
-
-    void  drawAtmosphere();
-    void  drawFog(QPainter &painter);
-
-    void  setBoundingBox();
-
-    void  doResize();
-
- private:
     MarbleMapPrivate  * const d;
 };
 

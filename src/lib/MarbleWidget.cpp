@@ -47,6 +47,8 @@
 
 #include "MeasureTool.h"
 
+#include "MarbleMap_p.h"
+
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
@@ -104,8 +106,8 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler
-    setInputHandler(NULL);
-    setDownloadManager(NULL);
+    setInputHandler( 0 );
+    setDownloadManager( 0 );
 
     delete d->m_map;
     delete d;
@@ -150,7 +152,7 @@ void MarbleWidget::construct()
 
     d->m_justModified = false;
 
-    d->m_inputhandler = NULL;
+    d->m_inputhandler = 0;
     d->m_popupmenu    = new MarbleWidgetPopupMenu( this, d->m_model );
 
     // Handle mouse and keyboard input.
@@ -712,12 +714,12 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 void MarbleWidget::drawAtmosphere()
 {
-    d->m_map->drawAtmosphere();
+    d->m_map->d->drawAtmosphere();
 }
 
 void MarbleWidget::drawFog(QPainter &painter)
 {
-    d->m_map->drawFog( painter );
+    d->m_map->d->drawFog( painter );
 }
 
 
@@ -1107,7 +1109,7 @@ void MarbleWidget::enableInput()
 
 void MarbleWidget::disableInput()
 {
-    setInputHandler( NULL );
+    setInputHandler( 0 );
     setCursor( Qt::ArrowCursor );
 }
 

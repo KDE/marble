@@ -46,6 +46,8 @@
 
 #include "MeasureTool.h"
 
+#include "MarbleMap_p.h"
+
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
@@ -54,73 +56,32 @@
 #endif
 
 
-
-class MarbleMapPrivate
-{
- public:
-    MarbleMapPrivate()
-        : m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
+MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
+        : m_parent( parent ),
+          m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
           m_volatileTileCacheLimit( 1024*3 ) // 3 KB
-    {
-    }
-
-    // The model we are showing.
-    MarbleModel     *m_model;
-
-    int              m_width;
-    int              m_height;
-    ViewParams       m_viewParams;
-    bool             m_justModified; // FIXME: Rename to isDirty
-
-    // The home position
-    GeoDataPoint     m_homePoint;
-    int              m_homeZoom;
-
-    // zoom related
-    int              m_logzoom;
-    int              m_zoomStep;
-
-    TextureColorizer  *m_sealegend;
-
-    // Parameters for the maps appearance.
-    bool             m_showCompass;
-    bool             m_showScaleBar;
-
-    bool             m_showFrameRate;
-
-    // Parts of the image in the Map
-    CrossHairFloatItem         m_crosshair;
-    CompassFloatItem           m_compass;  // Shown in the upper right
-    MapScaleFloatItem          m_mapscale; // Shown in the lower left
-
-    // Tools
-    MeasureTool     *m_measureTool;
-
-    // Cache related
-    quint64          m_persistentTileCacheLimit;
-    quint64          m_volatileTileCacheLimit;
-};
-
+{
+}
 
 
 MarbleMap::MarbleMap()
-    : d( new MarbleMapPrivate )
+    : d( new MarbleMapPrivate( this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
     //d->m_model = new MarbleModel( this );
 
     d->m_model = new MarbleModel( this );
-    construct();
+    d->construct();
 }
 
 
 MarbleMap::MarbleMap(MarbleModel *model)
-    : d( new MarbleMapPrivate )
+    : d( new MarbleMapPrivate( this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
     d->m_model = model;
-    construct();
+    d->construct();
 }
 
 MarbleMap::~MarbleMap()
@@ -129,25 +90,25 @@ MarbleMap::~MarbleMap()
     d->m_width  = 0;
     d->m_height = 0;
 
-    setDownloadManager(NULL);
+    setDownloadManager( 0 );
 
     // FIXME: Only delete if we created it ourselves 
     delete d->m_model;
     delete d;
 }
 
-void MarbleMap::construct()
+void MarbleMapPrivate::construct()
 {
     // Some point that tackat defined. :-)
-    setHome( -9.4, 54.8, 1050 );
+    m_parent->setHome( -9.4, 54.8, 1050 );
 
-    connect( d->m_model, SIGNAL( themeChanged( QString ) ),
-                         SIGNAL( themeChanged( QString ) ) );
-    connect( d->m_model, SIGNAL( modelChanged() ),
-             this,       SLOT( updateChangedMap() ) );
+    m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
+                       m_parent, SIGNAL( themeChanged( QString ) ) );
+    m_parent->connect( m_model, SIGNAL( modelChanged() ),
+                       m_parent, SLOT( updateChangedMap() ) );
 
-    connect( d->m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
-             this,       SLOT( updateRegion( BoundingBox& ) ) );
+    m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
+                       m_parent, SLOT( updateRegion( BoundingBox& ) ) );
 
     // Set background: black.
     // FIXME:
@@ -158,23 +119,23 @@ void MarbleMap::construct()
     // FIXME:
     //setAutoFillBackground( true );
 
-    d->m_justModified = false;
+    m_justModified = false;
 
-    d->m_measureTool = new MeasureTool( this );
+    m_measureTool = new MeasureTool( m_parent );
 
-    connect( d->m_model, SIGNAL( timeout() ),
-             this,       SLOT( updateGps() ) );
+    m_parent->connect( m_model, SIGNAL( timeout() ),
+                       m_parent, SLOT( updateGps() ) );
 
 
-    d->m_logzoom  = 0;
-    d->m_zoomStep = 40;
+    m_logzoom  = 0;
+    m_zoomStep = 40;
 
-    goHome();
+    m_parent->goHome();
 
     // FloatItems
-    d->m_showScaleBar  = true;
-    d->m_showCompass   = true;
-    d->m_showFrameRate = false;
+    m_showScaleBar  = true;
+    m_showCompass   = true;
+    m_showFrameRate = false;
 
     // Map translation
     QString      locale = QLocale::system().name();
@@ -188,10 +149,10 @@ void MarbleMap::construct()
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
 
-    connect( d->m_model->sunLocator(), SIGNAL( updateSun() ),
-             this,                     SLOT( updateSun() ) );
-    connect( d->m_model->sunLocator(), SIGNAL( centerSun() ),
-             this,                     SLOT( centerSun() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
+                       m_parent,              SLOT( updateSun() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+                       m_parent,              SLOT( centerSun() ) );
 #if 0
     connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
              this,                     SLOT( enableInput() ) );
@@ -223,7 +184,7 @@ void MarbleMap::setSize(int width, int height)
     d->m_width  = width;
     d->m_height = height;
 
-    doResize();
+    d->doResize();
 }
 
 QSize MarbleMap::size() const
@@ -451,7 +412,7 @@ void MarbleMap::zoomView(int newZoom)
     if ( newZoom  == d->m_logzoom )
 	return;
     d->m_logzoom = newZoom;
-    setRadius( fromLogScale( newZoom ) );
+    setRadius( d->fromLogScale( newZoom ) );
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
@@ -464,14 +425,14 @@ void MarbleMap::zoomView(int newZoom)
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
-    drawAtmosphere();
+    d->drawAtmosphere();
     emit zoomChanged( newZoom );
 }
 
 
 void MarbleMap::zoomViewBy( int zoomStep )
 {
-    zoomView( toLogScale( radius() ) + zoomStep );
+    zoomView( d->toLogScale( radius() ) + zoomStep );
 }
 
 
@@ -572,7 +533,7 @@ void MarbleMap::setProjection( Projection projection )
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
  
-    drawAtmosphere();
+    d->drawAtmosphere();
 
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
@@ -636,28 +597,28 @@ void MarbleMap::moveDown()
 }
 
 // Used to be resizeEvent()
-void MarbleMap::doResize()
+void MarbleMapPrivate::doResize()
 {
     // Recreate the canvas image with the new size.
-    delete d->m_viewParams.m_canvasImage;
-    d->m_viewParams.m_canvasImage = new QImage( width(), height(),
-                                   QImage::Format_ARGB32_Premultiplied );
+    delete m_viewParams.m_canvasImage;
+    m_viewParams.m_canvasImage = new QImage( m_parent->width(), m_parent->height(),
+                                             QImage::Format_ARGB32_Premultiplied );
 
     // Repaint the background if necessary
-    if ( ! globeCoversImage() 
-         || d->m_viewParams.projection() != Spherical )
+    if ( ! m_parent->globeCoversImage()
+         || m_viewParams.projection() != Spherical )
     {
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
+        m_viewParams.m_canvasImage->fill( Qt::black );
     }
 
     drawAtmosphere();
 
     // Recreate the 
-    delete d->m_viewParams.m_coastImage;
-    d->m_viewParams.m_coastImage = new QImage( width(), height(),
-                                               QImage::Format_ARGB32_Premultiplied );
+    delete m_viewParams.m_coastImage;
+    m_viewParams.m_coastImage = new QImage( m_parent->width(), m_parent->height(),
+                                            QImage::Format_ARGB32_Premultiplied );
 
-    d->m_justModified = true;
+    m_justModified = true;
 }
 
 int MarbleMap::northPoleY()
@@ -744,14 +705,14 @@ void MarbleMap::rotateTo(const double& lon, const double& lat)
 }
 
 
-void MarbleMap::drawAtmosphere()
+void MarbleMapPrivate::drawAtmosphere()
 {
     // Only draw an atmosphere if projection is spherical
-    if ( d->m_viewParams.projection() != Spherical )
+    if ( m_viewParams.projection() != Spherical )
         return;
 
     // No use to draw atmosphere if it's not visible in the area. 
-    if ( globeCoversImage() )
+    if ( m_parent->globeCoversImage() )
         return;
 
     // Ok, now we know that at least a little of the atmosphere is
@@ -759,42 +720,42 @@ void MarbleMap::drawAtmosphere()
     // by using a circular gradient.  This is a pure visual effect and
     // has nothing to do with real physics.
 
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
+    int  imageHalfWidth  = m_parent->width() / 2;
+    int  imageHalfHeight = m_parent->height() / 2;
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
     QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                           1.05 * radius() );
+                           1.05 * m_parent->radius() );
     grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
     grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
 
     QBrush    brush1( grad1 );
     QPen      pen1( Qt::NoPen );
-    QPainter  painter( d->m_viewParams.m_canvasImage );
+    QPainter  painter( m_viewParams.m_canvasImage );
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth  - (int)( (double)(radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (double)(radius()) * 1.05 ),
-                         (int)( 2.1 * (double)(radius()) ),
-                         (int)( 2.1 * (double)(radius()) ) );
+    painter.drawEllipse( imageHalfWidth  - (int)( (double)(m_parent->radius()) * 1.05 ),
+                         imageHalfHeight - (int)( (double)(m_parent->radius()) * 1.05 ),
+                         (int)( 2.1 * (double)(m_parent->radius()) ),
+                         (int)( 2.1 * (double)(m_parent->radius()) ) );
 }
 
 
-void MarbleMap::drawFog( QPainter &painter )
+void MarbleMapPrivate::drawFog( QPainter &painter )
 {
-    if ( d->m_viewParams.projection() != Spherical)
+    if ( m_viewParams.projection() != Spherical)
         return;
 
     // No use to draw the fog if it's not visible in the area. 
-    if ( globeCoversImage() )
+    if ( m_parent->globeCoversImage() )
         return;
 
-    int  imgWidth2  = width() / 2;
-    int  imgHeight2 = height() / 2;
+    int  imgWidth2  = m_parent->width() / 2;
+    int  imgHeight2 = m_parent->height() / 2;
 
     // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), radius() );
+    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), m_parent->radius() );
 
     // FIXME: Add a cosine relationship
     grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
@@ -810,42 +771,42 @@ void MarbleMap::drawFog( QPainter &painter )
     painter.setRenderHint( QPainter::Antialiasing, false );
 
     // FIXME: Cut out what's really needed
-    painter.drawEllipse( imgWidth2  - radius(),
-                         imgHeight2 - radius(),
-                         2 * radius(),
-                         2 * radius() );
+    painter.drawEllipse( imgWidth2  - m_parent->radius(),
+                         imgHeight2 - m_parent->radius(),
+                         2 * m_parent->radius(),
+                         2 * m_parent->radius() );
 
     painter.restore();
 }
 
-void MarbleMap::setBoundingBox()
+void MarbleMapPrivate::setBoundingBox()
 {
     QVector<QPointF>  points;
     Quaternion        temp;
 
-    if ( globalQuaternion( 0, 0, temp) ) {
+    if ( m_parent->globalQuaternion( 0, 0, temp) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
-    if ( globalQuaternion( width() / 2, 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( globalQuaternion( width(), 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( globalQuaternion( 0, height(), temp ) ) {
+    if ( m_parent->globalQuaternion( m_parent->width() / 2, 0, temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
 
-    if ( globalQuaternion( width()/2, height(), temp ) ) {
+    if ( m_parent->globalQuaternion( m_parent->width(), 0, temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    if ( m_parent->globalQuaternion( 0, m_parent->height(), temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
 
-    if ( globalQuaternion( width(), height(), temp ) ) {
+    if ( m_parent->globalQuaternion( m_parent->width()/2, m_parent->height(), temp ) ) {
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
 
-    d->m_viewParams.m_boundingBox = BoundingBox( points );
+    if ( m_parent->globalQuaternion( m_parent->width(), m_parent->height(), temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+
+    m_viewParams.m_boundingBox = BoundingBox( points );
 }
 
 
@@ -881,7 +842,7 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
     // Add to GlobeScanlineTextureMapper.
     bool fog = false;
     if (fog == true)
-        drawFog(painter);
+        d->drawFog(painter);
 
     customPaint( &painter );
 
@@ -907,7 +868,7 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
     d->m_measureTool->paintMeasurePoints( &painter, d->m_viewParams, true );
 
     // Set the Bounding Box
-    setBoundingBox();
+    d->setBoundingBox();
 
     double fps = 1000.0 / (double)( t.elapsed() );
 
@@ -1165,7 +1126,7 @@ void MarbleMap::setDownloadUrl( const QString &url )
 
 void MarbleMap::setDownloadUrl( const QUrl &url ) {
     HttpDownloadManager *downloadManager = d->m_model->downloadManager();
-    if ( downloadManager != NULL )
+    if ( downloadManager != 0 )
         downloadManager->setServerUrl( url );
     else
     {
@@ -1173,19 +1134,6 @@ void MarbleMap::setDownloadUrl( const QUrl &url ) {
                                                    new FileStoragePolicy( MarbleDirs::localPath() ) );
         d->m_model->setDownloadManager( downloadManager );
     }
-}
-
-int MarbleMap::fromLogScale(int zoom)
-{
-    zoom = (int) pow( M_E, ( (double)zoom / 200.0 ) );
-    // zoom = (int) pow(2.0, ((double)zoom/200));
-    return zoom;
-}
-
-int MarbleMap::toLogScale(int zoom)
-{
-    zoom = (int)(200.0 * log( (double)zoom ) );
-    return zoom;
 }
 
 QString MarbleMap::distanceString() const
