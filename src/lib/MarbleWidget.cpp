@@ -44,6 +44,7 @@
 #include "HttpDownloadManager.h"
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
+#include "SunLocator.h"
 
 #include "MeasureTool.h"
 
@@ -66,8 +67,6 @@ class MarbleWidgetPrivate
           m_inputhandler( 0 )
     {
         m_model = m_map->model();
-
-        construct();
     }
 
     ~MarbleWidgetPrivate()
@@ -103,6 +102,8 @@ MarbleWidget::MarbleWidget(QWidget *parent)
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+
+    d->construct();
 }
 
 
@@ -111,6 +112,8 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
       d( new MarbleWidgetPrivate( map, this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+
+    d->construct();
 }
 
 MarbleWidget::~MarbleWidget()
