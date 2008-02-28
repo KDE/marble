@@ -50,6 +50,7 @@ const char* dgmlTag_Name = "name";
 const char* dgmlTag_Palette = "palette";
 const char* dgmlTag_Pick = "pick";
 const char* dgmlTag_Prefix = "prefix";
+const char* dgmlTag_Property = "property";
 const char* dgmlTag_Settings = "settings";
 const char* dgmlTag_Target = "target";
 const char* dgmlTag_Text = "text";

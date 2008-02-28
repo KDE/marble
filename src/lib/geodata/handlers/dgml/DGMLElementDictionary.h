@@ -52,6 +52,7 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Palette;
     extern const char* dgmlTag_Pick;
     extern const char* dgmlTag_Prefix;
+    extern const char* dgmlTag_Property;
     extern const char* dgmlTag_Settings;
     extern const char* dgmlTag_Target;
     extern const char* dgmlTag_Text;
