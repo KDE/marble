@@ -42,22 +42,22 @@ GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
     return s_tagHandlerHash;
 }
 
-void GeoTagHandler::registerHandler(const QString& tagName, const GeoTagHandler* handler)
+void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHandler* handler)
 {
     TagHash* hash = tagHandlerHash();
 
-    Q_ASSERT(!hash->contains(tagName));
-    hash->insert(tagName, handler);
+    Q_ASSERT(!hash->contains(qName));
+    hash->insert(qName, handler);
 
-    qDebug() << "[GeoTagHandler] -> Recognizing" << tagName << "tag!";
+    qDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
 }
 
-const GeoTagHandler* GeoTagHandler::recognizes(const QString& tagName)
+const GeoTagHandler* GeoTagHandler::recognizes(const QualifiedName& qName)
 {
     TagHash* hash = tagHandlerHash();
 
-    if (!hash->contains(tagName))
+    if (!hash->contains(qName))
         return 0;
 
-    return (*hash)[tagName];
+    return (*hash)[qName];
 }

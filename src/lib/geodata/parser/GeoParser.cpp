@@ -81,9 +81,10 @@ void GeoParser::parseDocument()
 
         if (isStartElement()) {
             const QString& tagName = name().toString();
+            const QString& nameSpace = namespaceUri().toString();
 
             // Check if we have any registered handlers for this node
-            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(tagName))
+            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(GeoTagHandler::QualifiedName(tagName, nameSpace)))
                 handler->parse(*this);
 
             parseDocument();

@@ -29,10 +29,15 @@ namespace GeoDataElementDictionary {
     extern const char* gpxTag_nameSpace11;
 
     extern const char* gpxTag_gpx;
-	// TODO: add all remaining tags!
+    // TODO: add all remaining tags!
 }
 
-// Helper macro
-#define GPX_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(gpx, GPX, Name)
+// Helper macros
+#define GPX_DEFINE_TAG_HANDLER_10(Name) GEODATA_DEFINE_TAG_HANDLER(gpx, GPX, Name, gpxTag_nameSpace10)
+#define GPX_DEFINE_TAG_HANDLER_11(Name) GEODATA_DEFINE_TAG_HANDLER(gpx, GPX, Name, gpxTag_nameSpace11)
+
+#define GPX_DEFINE_TAG_HANDLER(Name) \
+    GPX_DEFINE_TAG_HANDLER_10(Name) \
+    GPX_DEFINE_TAG_HANDLER_11(Name)
 
 #endif // GPXElementDictionary_h

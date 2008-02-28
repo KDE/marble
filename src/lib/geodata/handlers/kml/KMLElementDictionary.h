@@ -170,7 +170,12 @@ namespace GeoDataElementDictionary {
     extern const char* kmlTag_y;
 }
 
-// Helper macro
-#define KML_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(kml, KML, Name)
+// Helper macros
+#define KML_DEFINE_TAG_HANDLER_20(Name) GEODATA_DEFINE_TAG_HANDLER(kml, KML, Name, kmlTag_nameSpace20)
+#define KML_DEFINE_TAG_HANDLER_21(Name) GEODATA_DEFINE_TAG_HANDLER(kml, KML, Name, kmlTag_nameSpace21)
+
+#define KML_DEFINE_TAG_HANDLER(Name) \
+	KML_DEFINE_TAG_HANDLER_20(Name) \
+	KML_DEFINE_TAG_HANDLER_21(Name)
 
 #endif // KMLElementDictionary_h

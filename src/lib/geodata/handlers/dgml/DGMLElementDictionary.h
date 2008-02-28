@@ -65,6 +65,6 @@ namespace GeoSceneElementDictionary {
 }
 
 // Helper macro
-#define DGML_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(dgml, DGML, Name)
+#define DGML_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(dgml, DGML, Name, dgmlTag_nameSpace20)
 
 #endif // DGMLElementDictionary_h

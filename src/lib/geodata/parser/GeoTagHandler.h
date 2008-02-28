@@ -31,6 +31,8 @@ public:
     // API to be implemented by child handlers.
     virtual void parse(GeoParser&) const = 0;
 
+    typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
+
 protected: // This base class is not directly constructable nor is it copyable.
     GeoTagHandler();
     virtual ~GeoTagHandler();
@@ -41,14 +43,14 @@ private:
 
 private: // Only our registrar is allowed to register tag handlers.
     friend class GeoTagHandlerRegistrar;
-    static void registerHandler(const QString& tagName, const GeoTagHandler*);
+    static void registerHandler(const QualifiedName&, const GeoTagHandler*);
 
 private: // Only our parser is allowed to access tag handlers.
     friend class GeoParser;
-    static const GeoTagHandler* recognizes(const QString& tagName);
+    static const GeoTagHandler* recognizes(const QualifiedName&);
 
 private:
-    typedef QHash<QString, const GeoTagHandler*> TagHash;
+    typedef QHash<QualifiedName, const GeoTagHandler*> TagHash;
 
     static TagHash* tagHandlerHash();
     static TagHash* s_tagHandlerHash;
@@ -57,14 +59,15 @@ private:
 // Helper structure
 struct GeoTagHandlerRegistrar {
 public:
-    GeoTagHandlerRegistrar(const QString& tagName, const GeoTagHandler* handler)
+    GeoTagHandlerRegistrar(const GeoTagHandler::QualifiedName& name, const GeoTagHandler* handler)
     {
-        GeoTagHandler::registerHandler(tagName, handler);
+        GeoTagHandler::registerHandler(name, handler);
     }
 };
 
 // Macros to ease registering new handlers
-#define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name) \
-    static GeoTagHandlerRegistrar s_myTagHandler(Module##Tag_##Name, new UpperCaseModule##Name##TagHandler());
+#define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name, NameSpace) \
+    static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoTagHandler::QualifiedName(Module##Tag_##Name, NameSpace), \
+                                                             new UpperCaseModule##Name##TagHandler());
 
 #endif // GeoTagHandler_h
