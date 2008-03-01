@@ -107,13 +107,13 @@ void dumpFoldersRecursively(const GeoDataContainer* container, int depth)
     QVector<GeoDataFolder*> folders = container->folders();
     QString format = formatOutput(depth);
 
-    fprintf(stderr, qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
+    fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
 
     QVector<GeoDataFolder*>::const_iterator it = folders.constBegin();
     const QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
     for (; it != end; ++it) {
-        fprintf(stderr, qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
+        fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
         dumpFoldersRecursively(*it, ++depth);
     }
 }
