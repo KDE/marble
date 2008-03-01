@@ -182,10 +182,10 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     return maxLabelHeight;
 }
 
-void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
+void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams,
-                                        const QAbstractItemModel* model,
-                                        const QItemSelectionModel* selectionModel,
+                                        const QAbstractItemModel  *model,
+                                        const QItemSelectionModel *selectionModel,
                                         bool firstTime )
 {
     const int imgwidth  = viewParams->m_canvasImage->width();
@@ -202,7 +202,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
-//    Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
+    //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
     matrix  planetAxisMatrix;
     viewParams->planetAxis().inverse().toMatrix( planetAxisMatrix );
 
@@ -316,9 +316,7 @@ void PlaceMarkLayout::paintPlaceFolder(QPainter* painter,
         // Skip the places that are too small.
         if ( noFilter == false ) {
             if ( m_weightfilter.at( popularityIndex ) > viewParams->radius() )
-            {
                 break;
-            }
         }
 
         if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, planetAxisMatrix, viewParams ) )
@@ -424,105 +422,12 @@ inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint,
                                                const matrix &planetAxisMatrix,
                                                ViewParams * viewParams )
 {
-    if ( viewParams->projection() == Spherical ) {
-    
-        double absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
-        Quaternion qpos = ( geopoint ).quaternion();
-        //Quaternion qpos = ( index.data().value<GeoDataPoint>() ).quaternion();
-        qpos.rotateAroundAxis( planetAxisMatrix );
-
-        double pixelAltitude = ( viewParams->radius() )/ EARTH_RADIUS * absoluteAltitude;
-        if ( geopoint.altitude() < 10000 ) {
-            // Skip placemarks at the other side of the earth.
-            if ( qpos.v[Q_Z] < 0 ) {
-                return false;
-            }
-        }
-        else {
-            double  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-            double  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-
-            // Don't draw high placemarks (e.g. satellites) that aren't visible.
-            if ( qpos.v[Q_Z] < 0
-                 && ( ( earthCenteredX * earthCenteredX
-                        + earthCenteredY * earthCenteredY )
-                      < (double)viewParams->radius() * (double)viewParams->radius() ) )
-                return false;
-        }
-
-        // Let (x, y) be the position on the screen of the placemark..
-        x = (int)(imgwidth  / 2 + pixelAltitude * qpos.v[Q_X]);
-        y = (int)(imgheight / 2 - pixelAltitude * qpos.v[Q_Y]);
-
-        // Skip placemarks that are outside the screen area
-        if ( x < 0 || x >= imgwidth || y < 0 || y >= imgheight ) {
-            return false;
-        }
-
-        return true;
-    }
-
-    if ( viewParams->projection() == Equirectangular ) {
-
-            double lon, lat;
-            double rad2Pixel = 2 * viewParams->radius() / M_PI;
-
-            double centerLon, centerLat;
-            viewParams->centerCoordinates( centerLon, centerLat );
-
-            geopoint.geoCoordinates( lon, lat );
-
-            // Let (x, y) be the position on the screen of the placemark..
-            x = (int)(imgwidth  / 2 - rad2Pixel * (centerLon - lon));
-            y = (int)(imgheight / 2 + rad2Pixel * (centerLat - lat));
-
-            // Skip placemarks that are outside the screen area
-            //
-            if ( (y >= 0 && y < imgheight)
-                 && ( (x >= 0 && x < imgwidth) 
-                      || (x - 4 * viewParams->radius() >= 0
-                          && x - 4 * viewParams->radius() < imgwidth)
-                      || (x + 4 * viewParams->radius() >= 0
-                          && x + 4 * viewParams->radius() < imgwidth) ) )
-            {
-                return true;
-            }
-
-            return false;
-    }
-
-    if ( viewParams->projection() == Mercator ) {
-
-            double lon, lat;
-            double rad2Pixel = 2 * viewParams->radius() / M_PI;
-
-            double centerLon, centerLat;
-            viewParams->centerCoordinates( centerLon, centerLat );
-
-            geopoint.geoCoordinates( lon, lat );
-            if(fabs(lat) >=  85.05113*DEG2RAD)
-                return false;
-            // Let (x, y) be the position on the screen of the placemark..
-
-            x = (int)(imgwidth  / 2 - rad2Pixel * (centerLon - lon));
-            y = (int)(imgheight / 2 + rad2Pixel * (centerLat - atanh( sin(lat) ) ));
-
-            // Skip placemarks that are outside the screen area
-            //
-            if ( (y >= 0 && y < imgheight)
-                 && ( (x >= 0 && x < imgwidth) 
-                      || (x - 4 * viewParams->radius() >= 0
-                          && x - 4 * viewParams->radius() < imgwidth)
-                      || (x + 4 * viewParams->radius() >= 0
-                          && x + 4 * viewParams->radius() < imgwidth) ) )
-            {
-                return true;
-            }
-
-            return false;
-    }
-
-    return true;
+    // FIXME: Change the calls to lcatedOnScreen to
+    //        currentProjection->screenCoordinates.
+    return viewParams->currentProjection()
+        ->screenCoordinates( geopoint, viewParams->viewport(),
+                             planetAxisMatrix,
+                             x, y );
 }
 
 QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,

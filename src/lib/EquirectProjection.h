@@ -51,6 +51,11 @@ class EquirectProjection : public AbstractProjection
                             const ViewportParams *params,
                             int& x, int& y );
 
+    bool screenCoordinates( const GeoDataPoint &geopoint, 
+                            const ViewportParams *params,
+                            const matrix &planetAxisMatrix,
+                            int &x, int &y );
+
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel

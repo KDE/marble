@@ -49,6 +49,46 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     return true;
 }
 
+bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, 
+                                            const ViewportParams *params,
+                                            const matrix &planetAxisMatrix,
+                                            int &x, int &y )
+{
+    // FIXME: Just call screencoordinates above?
+
+    double  lon;
+    double  lat;
+    double  rad2Pixel = 2 * params->radius() / M_PI;
+
+    double  centerLon;
+    double  centerLat;
+    params->centerCoordinates( centerLon, centerLat );
+
+    geopoint.geoCoordinates( lon, lat );
+    // FIXME: What is this magic number??
+    if ( fabs(lat) >=  85.05113 * DEG2RAD )
+        return false;
+
+    // Let (x, y) be the position on the screen of the placemark..
+    x = (int)( params->width()  / 2 - rad2Pixel * ( centerLon - lon ) );
+    y = (int)( params->height() / 2 + rad2Pixel * ( centerLat - atanh( sin(lat) ) ) );
+
+    // Skip placemarks that are outside the screen area
+    //
+    if ( ( y >= 0 && y < params->height() )
+         && ( ( x >= 0 && x < params->width() ) 
+              || (x - 4 * params->radius() >= 0
+                  && x - 4 * params->radius() < params->width() )
+              || (x + 4 * params->radius() >= 0
+                  && x + 4 * params->radius() < params->width() ) ) )
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
 bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *params,
                                          double& lon, double& lat,

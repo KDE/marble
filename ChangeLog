@@ -1,3 +1,14 @@
+2008-03-01  Inge Wallin  <inge@lysator.liu.se>
+
+	Place placemarks using the new projection classes
+	* src/lib/AbstractProjection.{h,cpp} (screenCoordinates),
+	* src/lib/SphericalProjection.{h,cpp} (screenCoordinates),
+	* src/lib/EquirectProjection.{h,cpp} (screenCoordinates),
+	* src/lib/MercatorProjection.{h,cpp} (screenCoordinates): 
+	New overloaded function
+	* src/lib/PlaceMarkLayout.cpp (locatedOnScreen): Use
+	currentProjection->screenCoordinates instead of own code.
+
 2008-02-28  Torsten Rahn  <rahn@kde.org>
 
     * LICENSE.txt:

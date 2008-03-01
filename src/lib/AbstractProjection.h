@@ -54,6 +54,11 @@ class AbstractProjection
                                     const ViewportParams *params,
                                     int& x, int& y ) = 0;
 
+    virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
+                                    const ViewportParams *params,
+                                    const matrix &planetAxisMatrix,
+                                    int &x, int &y ) = 0;
+
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel

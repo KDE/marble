@@ -42,6 +42,41 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
     return true;
 }
 
+bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, 
+                                            const ViewportParams *params,
+                                            const matrix &planetAxisMatrix,
+                                            int &x, int &y )
+{
+    double  lon;
+    double  lat;
+    double  rad2Pixel = 2 * params->radius() / M_PI;
+
+    double  centerLon;
+    double  centerLat;
+    params->centerCoordinates( centerLon, centerLat );
+
+    geopoint.geoCoordinates( lon, lat );
+
+    // Let (x, y) be the position on the screen of the placemark..
+    x = (int)(params->width()  / 2 - rad2Pixel * (centerLon - lon));
+    y = (int)(params->height() / 2 + rad2Pixel * (centerLat - lat));
+
+    // Skip placemarks that are outside the screen area
+    //
+    if ( ( y >= 0 && y < params->height() )
+         && ( ( x >= 0 && x < params->width() )
+              || ( x - 4 * params->radius() >= 0
+                   && x - 4 * params->radius() < params->width() )
+              || ( x + 4 * params->radius() >= 0
+                   && x + 4 * params->radius() < params->width() ) ) )
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
 bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *params,
                                          double& lon, double& lat,
@@ -59,7 +94,7 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
 
     int yCenterOffset =  (int)((double)(2 * params->radius())
                                / M_PI * centerLat);
-    int yTop = imgHeight2 - params->radius() + yCenterOffset;
+    int yTop    = imgHeight2 - params->radius() + yCenterOffset;
     int yBottom = yTop + 2 * params->radius();
     if ( y >= yTop && y < yBottom ) {
         int const xPixels = x - imgWidth2;
