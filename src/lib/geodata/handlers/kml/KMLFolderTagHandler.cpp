@@ -40,12 +40,16 @@ KMLFolderTagHandler::~KMLFolderTagHandler()
 {
 }
 
-void KMLFolderTagHandler::parse(GeoParser& parser) const
+GeoNode* KMLFolderTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
 
     GeoDataFolder* folder = new GeoDataFolder;
-    geoDataDoc(parser)->addFolder(folder);
 
-    qDebug() << "Parsed <Folder> start!";    
+    GeoStackItem parentItem = parser.parentElement();
+    if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
+        parentItem.nodeAs<GeoDataContainer>()->addFeature(folder);
+
+    qDebug() << "Parsed <Folder> start! Created GeoDataFolder item: " << folder << " parent item name: " << parentItem.qualifiedName().first << " associated item: " << parentItem.associatedNode();
+    return folder;
 }

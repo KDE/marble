@@ -39,9 +39,10 @@ DGMLSettingsTagHandler::~DGMLSettingsTagHandler()
 {
 }
 
-void DGMLSettingsTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLSettingsTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Settings));
 
     qDebug() << "Parsed <Settings> start!";    
+    return 0;
 }

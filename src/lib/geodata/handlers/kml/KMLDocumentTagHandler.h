@@ -29,7 +29,7 @@ public:
     KMLDocumentTagHandler();
     virtual ~KMLDocumentTagHandler();
 
-    virtual void parse(GeoParser&) const;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
 #endif // KMLDocumentTagHandler_h

@@ -39,9 +39,10 @@ GPXgpxTagHandler::~GPXgpxTagHandler()
 {
 }
 
-void GPXgpxTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_gpx));
 
     qDebug() << "Parsed <Document> start!";    
+    return 0;
 }

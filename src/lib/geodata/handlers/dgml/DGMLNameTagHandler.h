@@ -29,7 +29,7 @@ public:
     DGMLNameTagHandler();
     virtual ~DGMLNameTagHandler();
 
-    virtual void parse(GeoParser&) const;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
 #endif // DGMLNameTagHandler_h

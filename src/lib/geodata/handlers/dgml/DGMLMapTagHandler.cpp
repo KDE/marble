@@ -39,9 +39,10 @@ DGMLMapTagHandler::~DGMLMapTagHandler()
 {
 }
 
-void DGMLMapTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLMapTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
 
     qDebug() << "Parsed <Map> start!";    
+    return 0;
 }

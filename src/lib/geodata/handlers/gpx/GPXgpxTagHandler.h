@@ -29,7 +29,7 @@ public:
     GPXgpxTagHandler();
     virtual ~GPXgpxTagHandler();
 
-    virtual void parse(GeoParser&) const;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
 #endif // GPXgpxTagHandler_h

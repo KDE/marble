@@ -39,9 +39,10 @@ DGMLPropertyTagHandler::~DGMLPropertyTagHandler()
 {
 }
 
-void DGMLPropertyTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLPropertyTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Property));
 
     qDebug() << "Parsed <Property> start!";    
+    return 0;
 }

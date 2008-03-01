@@ -24,6 +24,9 @@
 #include "GeoParser.h"
 #include "GeoTagHandler.h"
 
+// Set to a value greather than 0, to dump parent node chain while parsing
+#define DUMP_PARENT_STACK 1
+
 GeoParser::GeoParser(GeoDataGenericSourceType source)
     : QXmlStreamReader()
     , m_document(0)
@@ -34,6 +37,29 @@ GeoParser::GeoParser(GeoDataGenericSourceType source)
 GeoParser::~GeoParser()
 {
 }
+
+#if DUMP_PARENT_STACK > 0
+static void dumpParentStack(const QString& name, int size, bool close)
+{
+    static int depth = 0;
+
+    if (!close)
+        depth++;
+
+    QString result;
+    for (int i = 0; i < depth; ++i)
+        result += " ";
+
+    if (close) {
+        depth--;
+        result += "</";
+    } else
+        result += "<";
+
+    result += name + "> stack size " + QString::number(size);
+    fprintf(stderr, "%s\n", qPrintable(result));
+}
+#endif
 
 bool GeoParser::read(QIODevice* device)
 {
@@ -51,6 +77,10 @@ bool GeoParser::read(QIODevice* device)
 
         if (isStartElement()) {
             if (isValidDocumentElement()) {
+#if DUMP_PARENT_STACK > 0
+                dumpParentStack(name().toString(), m_nodeStack.size(), false);
+#endif
+ 
                 parseDocument();
                 break;
             } else
@@ -69,24 +99,46 @@ bool GeoParser::isValidElement(const QString& tagName) const
     return name() == tagName;
 }
 
+GeoStackItem GeoParser::parentElement(unsigned int depth)
+{
+    QStack<GeoStackItem>::const_iterator it = m_nodeStack.constEnd() - 1;
+
+    if (it - depth < m_nodeStack.constBegin())
+        return GeoStackItem();
+
+    return *(it - depth);
+}
+
 void GeoParser::parseDocument()
 {
     Q_ASSERT(isStartElement());
 
     while (!atEnd()) {
         readNext();
+        GeoTagHandler::QualifiedName qName(name().toString(), namespaceUri().toString());
 
-        if (isEndElement())
+        if (isEndElement()) {
+            if (!isValidDocumentElement())
+                m_nodeStack.pop();
+
+#if DUMP_PARENT_STACK > 0
+            dumpParentStack(name().toString(), m_nodeStack.size(), true);
+#endif
             break;
+        }
 
         if (isStartElement()) {
-            const QString& tagName = name().toString();
-            const QString& nameSpace = namespaceUri().toString();
+            GeoStackItem stackItem(qName, 0);
 
-            // Check if we have any registered handlers for this node
-            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(GeoTagHandler::QualifiedName(tagName, nameSpace)))
-                handler->parse(*this);
+            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(qName))
+                stackItem.assignNode(handler->parse(*this));
 
+            m_nodeStack.push(stackItem);
+
+#if DUMP_PARENT_STACK > 0
+            dumpParentStack(name().toString(), m_nodeStack.size(), false);
+#endif
+ 
             parseDocument();
         }
     }

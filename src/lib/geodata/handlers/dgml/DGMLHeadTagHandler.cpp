@@ -39,9 +39,10 @@ DGMLHeadTagHandler::~DGMLHeadTagHandler()
 {
 }
 
-void DGMLHeadTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLHeadTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Head));
 
     qDebug() << "Parsed <Head> start!";    
+    return 0;
 }

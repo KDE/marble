@@ -41,6 +41,7 @@ class GeoDataStyleSelector;
 class GeoDataFeature : public GeoDataObject
 {
  public:
+    virtual bool isFolder() const { return false; }
 
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.

@@ -22,19 +22,28 @@
 #ifndef GeoDocument_h
 #define GeoDocument_h
 
+#include "GeoTagHandler.h"
+
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
-class GeoDocument
-{
+class GeoDocument {
 protected:
     GeoDocument() { }
+    virtual ~GeoDocument() { }
 
 public:
-    virtual ~GeoDocument() {};
-
     virtual bool isGeoDataDocument() const { return false; }
     virtual bool isGeoSceneDocument() const { return false; }
+};
+
+/**
+ * @short A shared base class for all classes that are mapped to a specifig tag (ie. GeoFolder)
+ */
+class GeoNode {
+protected:
+    GeoNode() { }
+    virtual ~GeoNode() { }
 };
 
 #endif // GeoDocument_h

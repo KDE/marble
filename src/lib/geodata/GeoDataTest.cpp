@@ -24,11 +24,16 @@
 #include <QFile>
 #include <QStringList>
 
+#include "GeoDataFolder.h"
+
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 
 #include "GeoSceneParser.h"
 #include "GeoSceneDocument.h"
+
+void dumpGeoDataDocument(GeoDataDocument*);
+void dumpGeoSceneDocument(GeoSceneDocument*);
 
 int main(int argc, char** argv)
 {
@@ -75,17 +80,51 @@ int main(int argc, char** argv)
     GeoDocument* document = parser->releaseDocument();
     Q_ASSERT(document);
 
-    if (document->isGeoDataDocument()) {
-        GeoDataDocument* dataDocument = static_cast<GeoDataDocument*>(document);
-        // TODO: Maybe dump parsed datastructures here!
-    } else if (document->isGeoSceneDocument()) {
-        GeoSceneDocument* dataDocument = static_cast<GeoSceneDocument*>(document);
-        // TODO: Maybe dump parsed datastructures here!
-    } else {
+    if (document->isGeoDataDocument())
+        dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
+    else if (document->isGeoSceneDocument())
+        dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
+    else {
         // A parsed document should either be a GeoDataDocument or a GeoSceneDocument!
         Q_ASSERT(false);
     }
 
     qDebug() << "\nSuccesfully parsed file!";
     return 0;
+}
+
+QString formatOutput(int depth)
+{
+    QString result;
+    for (int i = 0; i < depth; ++i)
+        result += "  ";
+
+    return result;
+}
+
+void dumpFoldersRecursively(const GeoDataContainer* container, int depth)
+{
+    QVector<GeoDataFolder*> folders = container->folders();
+    QString format = formatOutput(depth);
+
+    fprintf(stderr, qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
+
+    QVector<GeoDataFolder*>::const_iterator it = folders.constBegin();
+    const QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+
+    for (; it != end; ++it) {
+        fprintf(stderr, qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
+        dumpFoldersRecursively(*it, ++depth);
+    }
+}
+
+void dumpGeoDataDocument(GeoDataDocument* document)
+{
+    dumpFoldersRecursively(document, 0);
+    // TODO: Dump all features!
+} 
+
+void dumpGeoSceneDocument(GeoSceneDocument* document)
+{
+    // TODO: Maybe dump parsed datastructures here!
 }

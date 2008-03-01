@@ -24,12 +24,13 @@
 
 #include <QHash>
 
+class GeoNode;
 class GeoParser;
 
 class GeoTagHandler {
 public:
     // API to be implemented by child handlers.
-    virtual void parse(GeoParser&) const = 0;
+    virtual GeoNode* parse(GeoParser&) const = 0;
 
     typedef QPair<QString, QString> QualifiedName; // Tag Name & Namespace pair
 

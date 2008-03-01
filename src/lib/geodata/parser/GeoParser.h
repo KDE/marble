@@ -22,15 +22,18 @@
 #ifndef GeoParser_h
 #define GeoParser_h
 
+#include <QStack>
 #include <QXmlStreamReader>
 
 #include "GeoDocument.h"
 
 typedef int GeoDataGenericSourceType;
 
+class GeoStackItem;
+
 class GeoParser : public QXmlStreamReader {
 public:
-    GeoParser(int sourceType);
+    GeoParser(GeoDataGenericSourceType sourceType);
     virtual ~GeoParser();
 
     // Main API.
@@ -43,6 +46,9 @@ public:
     // Used by tag handlers, to be overriden by GeoDataParser/GeoSceneParser
     virtual bool isValidElement(const QString& tagName) const;
 
+    // Used by tag handlers, to access a parent element's associated GeoStackItem
+    GeoStackItem parentElement(unsigned int depth = 0);
+
 protected:
     // To be implemented by GeoDataParser/GeoSceneParser
     virtual bool isValidDocumentElement() const = 0;
@@ -50,12 +56,46 @@ protected:
 
     virtual GeoDocument* createDocument() const = 0;
 
-private:
-    void parseDocument();
-
 protected:
     GeoDocument* m_document;
     GeoDataGenericSourceType m_source;
+
+private:
+    void parseDocument();
+    QStack<GeoStackItem> m_nodeStack;
+};
+
+class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*> {
+public:
+    GeoStackItem()
+        : QPair<GeoTagHandler::QualifiedName, GeoNode*>()
+    {
+    }
+
+    GeoStackItem(const GeoTagHandler::QualifiedName& qName, GeoNode* node)
+        : QPair<GeoTagHandler::QualifiedName, GeoNode*>(qName, node)
+    {
+    }
+
+    // Fast path for tag handlers
+    bool represents(const char* tagName) const
+    {
+        return second && tagName == first.first;
+    }
+
+    // Helper for tag handlers. Does NOT guard against miscasting. Use with care.
+    template<class T>
+    T* nodeAs()
+    {
+        return static_cast<T*>(second);
+    }
+
+    GeoTagHandler::QualifiedName qualifiedName() const { return first; }
+    GeoNode* associatedNode() const { return second; }
+
+private:
+    friend class GeoParser;
+    void assignNode(GeoNode* node) { second = node; }
 };
 
 #endif // GeoParser_h

@@ -29,7 +29,7 @@ public:
     KMLFolderTagHandler();
     virtual ~KMLFolderTagHandler();
 
-    virtual void parse(GeoParser&) const;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
 #endif // KMLFolderTagHandler_h

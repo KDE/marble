@@ -43,6 +43,8 @@ class GeoDataFolder : public GeoDataContainer {
  public:
     GeoDataFolder();
     ~GeoDataFolder();
+
+    virtual bool isFolder() const { return true; }
 };
 
 #endif // GEODATAFOLDER_H

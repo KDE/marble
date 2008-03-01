@@ -12,7 +12,7 @@
 
 #include "GeoDataContainer.h"
 #include "GeoDataFeature.h"
-#include "ViewParams.h"
+#include "GeoDataFolder.h"
 
 GeoDataContainer::GeoDataContainer()
 {
@@ -20,27 +20,43 @@ GeoDataContainer::GeoDataContainer()
 
 GeoDataContainer::~GeoDataContainer()
 {
-    qDebug("GeoDataContainer::~GeoDataContainer(). Object count: %d", m_featureVector.count());
+    qDebug("GeoDataContainer::~GeoDataContainer(). Object count: %d", m_features.count());
 
-    foreach ( GeoDataFeature* feature, m_featureVector ) {
+    foreach ( GeoDataFeature* feature, m_features ) {
         delete feature;
     }
 }
 
-void GeoDataContainer::addFeature( GeoDataFeature* feature )
+QVector<GeoDataFolder*> GeoDataContainer::folders() const
 {
-    m_featureVector.append( feature );
+    QVector<GeoDataFolder*> results;
+
+    QVector<GeoDataFeature*>::const_iterator it = m_features.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = m_features.constEnd();
+
+    for (; it != end; ++it) {
+        GeoDataFeature* feature = *it;
+
+        if (feature->isFolder())
+            results.append(static_cast<GeoDataFolder*>(feature));
+    }
+
+    return results;
 }
 
+void GeoDataContainer::addFeature(GeoDataFeature* feature)
+{
+    m_features.append(feature);
+}
 
 void GeoDataContainer::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
 
-    stream << m_featureVector.count();
+    stream << m_features.count();
 
-    for ( QVector <GeoDataFeature*>::const_iterator iterator = m_featureVector.constBegin();
-          iterator != m_featureVector.end();
+    for ( QVector <GeoDataFeature*>::const_iterator iterator = m_features.constBegin();
+          iterator != m_features.end();
           iterator++ )
     {
         const GeoDataFeature& feature = * ( *iterator );
@@ -59,7 +75,7 @@ void GeoDataContainer::unpack( QDataStream& stream )
         GeoDataFeature* feature = new GeoDataFeature();
         feature->unpack( stream );
 
-        m_featureVector.append( feature );
+        m_features.append( feature );
     }
 }
 

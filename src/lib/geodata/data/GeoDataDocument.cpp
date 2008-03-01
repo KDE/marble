@@ -22,6 +22,7 @@
 
 #include "GeoDataDocument.h"
 
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
@@ -33,16 +34,6 @@ GeoDataDocument::GeoDataDocument()
 
 GeoDataDocument::~GeoDataDocument()
 {
-}
-
-void GeoDataDocument::addFolder(GeoDataFolder* folder)
-{
-    m_folders.append(folder);
-}
-
-const QVector<GeoDataFolder*> GeoDataDocument::folders() const
-{
-    return m_folders;
 }
 
 void GeoDataDocument::addStyle(GeoDataStyle* style)

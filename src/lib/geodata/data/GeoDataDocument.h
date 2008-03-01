@@ -50,20 +50,6 @@ public:
     virtual bool isGeoDataDocument() const { return true; }
 
     /**
-     * @brief Add a folder to the document
-     * @param style the new folder
-     */
-    void addFolder(GeoDataFolder*);
-
-    /**
-     * @brief A convenience function that returns all folders in the document.
-     * @return A QVector of GeoDataFolder*
-     *
-     * @see GeoDataFolder
-     */
-    const QVector<GeoDataFolder*> folders() const;
-
-    /**
      * @brief Add a style to the style storage
      * @param style  the new style
      */
@@ -77,7 +63,6 @@ public:
 
 private:
     QHash<QString, GeoDataStyle*> m_styleHash;
-    QVector<GeoDataFolder*> m_folders;
 };
 
 

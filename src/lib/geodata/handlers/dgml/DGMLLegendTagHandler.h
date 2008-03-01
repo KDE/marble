@@ -29,7 +29,7 @@ public:
     DGMLLegendTagHandler();
     virtual ~DGMLLegendTagHandler();
 
-    virtual void parse(GeoParser&) const;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
 #endif // DGMLLegendTagHandler_h

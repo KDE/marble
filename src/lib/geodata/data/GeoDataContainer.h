@@ -17,6 +17,8 @@
 
 #include "GeoDataFeature.h"
 
+class GeoDataFolder;
+
 /**
  * @short  A base class that can hold GeoDataFeatures
  *
@@ -37,6 +39,14 @@ class GeoDataContainer : public GeoDataFeature
  public:
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
+
+    /**
+     * @brief A convenience function that returns all folders in this container.
+     * @return A QVector of GeoDataFolder*
+     *
+     * @see GeoDataFolder
+     */
+    QVector<GeoDataFolder*> folders() const;
 
     /**
      * @brief  Add a feature to the container
@@ -66,7 +76,7 @@ class GeoDataContainer : public GeoDataFeature
     /// Default constructor
     GeoDataContainer();
     /// The vector holding all the features in the container.
-    QVector < GeoDataFeature* >  m_featureVector;
+    QVector < GeoDataFeature* >  m_features;
 
  private:
 #if 0  // FIXME: This doesn't belong here.
