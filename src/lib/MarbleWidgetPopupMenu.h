@@ -25,7 +25,6 @@
 
 class QMenu;
 
-class PlaceMark;
 class MarbleWidget;
 class MarbleModel;
 

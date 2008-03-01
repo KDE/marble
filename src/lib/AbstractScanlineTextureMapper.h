@@ -20,7 +20,6 @@
 #include "AbstractLayer.h"      // In AbstractLayer/
 
 
-class QImage;
 class TextureTile;
 class TileLoader;
 

@@ -32,7 +32,6 @@ typedef struct
 } DgmlLayer;
 
 
-class QDomElement;
 
 
 class GeoSceneLegendItem

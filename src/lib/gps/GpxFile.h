@@ -22,7 +22,6 @@
 class ClipPainter;
 class QPoint;
 class QSize;
-class Quaternion;
 class BoundingBox;
 class Waypoint;
 class Track;

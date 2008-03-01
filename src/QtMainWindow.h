@@ -23,7 +23,6 @@ class QAction;
 class QLabel;
 class QMenu;
 
-class KAtlasControl;
 class MarbleWidget;
 class SunControlWidget;
  

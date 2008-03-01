@@ -18,8 +18,6 @@
 #include "ViewParams.h"
 
 
-class QPixmap;
-class QPainter;
 class QPoint;
 class QPointF;
 class QSize;

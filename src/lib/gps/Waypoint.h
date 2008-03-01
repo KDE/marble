@@ -15,7 +15,6 @@
 #include <QtCore/QTime>
 #include <QtCore/QString>
 
-class QPixmap;
 
 /**
  * @brief representaion of a GPS Waypoint.

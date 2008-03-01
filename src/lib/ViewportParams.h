@@ -33,7 +33,6 @@
 #include "MercatorProjection.h"
 
 
-class QImage;
 
 
 /** 

@@ -24,7 +24,6 @@
 
 class ClipPainter;
 class QPoint;
-class QRectF;
 class BoundingBox;
 
 

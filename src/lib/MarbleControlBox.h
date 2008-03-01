@@ -36,7 +36,6 @@
  */
 
 
-class QStandardItemModel;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 

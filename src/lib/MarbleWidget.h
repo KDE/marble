@@ -42,7 +42,6 @@ class QStyleOptionGraphicsItem;
 
 // MarbleWidget 
 class MarbleWidgetInputHandler;
-class MarbleWidgetPopupMenu;
 class MarbleWidgetPrivate;
 
 // Marble
@@ -50,11 +49,8 @@ class BoundingBox;
 class MarbleMap;
 class MarbleModel;
 class HttpDownloadManager;
-class TextureColorizer;
-class MeasureTool;
 class TileCreator;
 class SunLocator;
-class GpsLayer;
 class GpxFileModel;
 class FileViewModel;
 class ClipPainter;

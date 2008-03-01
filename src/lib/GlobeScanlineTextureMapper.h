@@ -20,8 +20,6 @@
 #include "AbstractScanlineTextureMapper.h"
 
 
-class QImage;
-class TextureTile;
 class TileLoader;
 
 

@@ -22,12 +22,8 @@
 #endif
 
 
-class WaypointContainer;
 class Waypoint;
-class TrackContainer;
-class TrackPoint;
 class Track;
-class TrackSegment;
 class BoundingBox;
 class GpxFile;
 class QRegion;

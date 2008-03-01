@@ -29,7 +29,6 @@
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
 
-class GeoDataFolder;
 class GeoDataStyle;
 
 /**
