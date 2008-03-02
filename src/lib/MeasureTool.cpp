@@ -67,19 +67,13 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
     }
 
     if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, 
-                                 viewport->width() / 2,
-                                 viewport->height() / 2,
-                                 m_totalDistance );
+        paintTotalDistanceLabel( painter, m_totalDistance );
 }
 
 void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, 
                                                ViewportParams *viewport,
                                                bool antialiasing )
 {
-    int  imgwidth  = viewport->width();
-    int  imgheight = viewport->height();
-    int  radius    = viewport->radius();
     int  x = 0;
     int  y = 0;
 
@@ -95,8 +89,8 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
 
     m_totalDistance = 0.0;
 
-    double  lon;
-    double  lat;
+    double  lon = 0.0;
+    double  lat = 0.0;
     double  prevLon = 0.0;
     double  prevLat = 0.0;
 
@@ -135,11 +129,16 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
 
         if ( qpos.v[Q_Z] > 0 ) {
 
-            x = (int)( imgwidth / 2 + radius * qpos.v[Q_X] );
-            y = (int)( imgheight / 2 - radius * qpos.v[Q_Y] );
+            x = (int)( viewport->width()  / 2 
+                       + viewport->radius() * qpos.v[Q_X] );
+            y = (int)( viewport->height() / 2
+                       - viewport->radius() * qpos.v[Q_Y] );
 
-//             Don't process placemarks if they are outside the screen area.
-            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
+            // Don't process markers if they are outside the screen area.
+            // FIXME: Some part of it may be visible anyway.
+            if ( x >= 0 && x < viewport->width() 
+                 && y >= 0 && y < viewport->height() )
+            {
                 paintMark( painter, x, y );
             }
         }
@@ -150,17 +149,14 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
                                                  ViewportParams *viewport,
                                                  bool antialiasing )
 {
-    int  imgwidth  = viewport->width();
-    int  imgheight = viewport->height();
-    int  radius    = viewport->radius();
     int  x = 0;
     int  y = 0;
 
     // Calculate translation of center point
     viewport->centerCoordinates( m_centerLon, m_centerLat );
 
-    m_rad2Pixel = 2 * radius / M_PI;
-    m_radius = radius;
+    m_radius    = viewport->radius();
+    m_rad2Pixel = 2 * m_radius / M_PI;
 
     Quaternion  qpos;
     Quaternion  prevqpos;
@@ -173,10 +169,10 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
 
     m_totalDistance = 0.0;
 
-    double  prevLon = 0.0;
-    double  prevLat = 0.0;
     double  lon = 0.0;
     double  lat = 0.0;
+    double  prevLon = 0.0;
+    double  prevLat = 0.0;
 
     QVector<QPolygonF>  distancePaths;
 
@@ -210,23 +206,20 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
         qpos = (*it)->quaternion();
         qpos.getSpherical(lon,lat);
 
-        x = (int)( imgwidth / 2  - ( m_centerLon - lon ) * m_rad2Pixel );
-        y = (int)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
+        x = (int)( viewport->width()  / 2
+                   - ( m_centerLon - lon ) * m_rad2Pixel );
+        y = (int)( viewport->height() / 2
+                   + ( m_centerLat - lat ) * m_rad2Pixel );
 
-        rectangularPaintMark( painter, x, y, imgwidth, imgheight );
+        rectangularPaintMark( painter, x, y, 
+                              viewport->width(), viewport->height() );
     }
 }
 
-void MeasureTool::paintTotalDistanceLabel( ClipPainter * painter, 
-                                           int imgrx, int imgry, 
+void MeasureTool::paintTotalDistanceLabel( ClipPainter *painter, 
                                            double totalDistance )
 {
-    Q_UNUSED( imgrx );
-    Q_UNUSED( imgry );
-
-    // if ( totalDistance == m_totalDistance)
     QString  distanceString;
-
     if ( totalDistance >= 1000.0 )
         distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
     else

@@ -44,13 +44,15 @@ class MeasureTool : public QObject
                                           bool antialiasing );
 
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
-    void  paintTotalDistanceLabel( ClipPainter * painter, int imgrx, int imgry, double totalDistance );
 
  private:
 	void  drawAndRepeatDistancePath( ClipPainter* painter,
                                          const QPolygonF distancePath );
 	void  rectangularPaintMark( ClipPainter* painter, int x, int y,
-                                   int width, int height );
+                                    int width, int height );
+        void  paintTotalDistanceLabel( ClipPainter *painter,
+                                       double totalDistance );
+
  public Q_SLOTS:
     void  addMeasurePoint( double lon, double lat ) {
         m_pMeasurePointList << new GeoDataPoint( lon, lat );
