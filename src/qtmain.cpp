@@ -10,11 +10,14 @@
 //
 
 #include <QtGui/QApplication>
+#include <QtCore/QLocale>
+#include <QtCore/QTranslator>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
 
 #include "QtMainWindow.h"
 
+#include "MarbleDirs.h"
 #include "MarbleTest.h"
 
 #if STATIC_BUILD
@@ -31,10 +34,18 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    // Widget translation
+
+    QString      lang = QLocale::system().name().section('_', 0, 0);
+    QTranslator  translator;
+    translator.load( "marble-" + lang, MarbleDirs::path(QString("lang") ) );
+    app.installTranslator(&translator);
+
     // For non static builds on mac and win
     // we need to be sure we can find the qt image
     // plugins. In mac be sure to look in the
     // application bundle...
+
 #ifdef Q_WS_WIN
     QApplication::addLibraryPath( QApplication::applicationDirPath() 
         + QDir::separator() + "plugins" );

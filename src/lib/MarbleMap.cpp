@@ -602,6 +602,8 @@ void MarbleMap::moveDown()
 // Used to be resizeEvent()
 void MarbleMapPrivate::doResize()
 {
+    QSize size(m_parent->width(), m_parent->height());
+    m_viewParams.viewport()->setSize( size );
     // Recreate the canvas image with the new size.
     delete m_viewParams.m_canvasImage;
     m_viewParams.m_canvasImage = new QImage( m_parent->width(), m_parent->height(),

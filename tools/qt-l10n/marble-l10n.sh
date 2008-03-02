@@ -25,8 +25,10 @@ do
     TARGET="/tmp/marble-$currentcode.po"
 	svn export $SVNEXEC$SVNROOT$currentcode$SVNPATH $TARGET
     if [ -s $TARGET ]; then
-    	msgfmt --qt -o $1/marble-$currentcode.qm /tmp/marble-$currentcode.po
-    	rm /tmp/marble-$currentcode.po
+#    	msgfmt -c --statistics --qt -o $1/marble-$currentcode.qm /tmp/marble-$currentcode.po
+        po2ts /tmp/marble-$currentcode.po /tmp/marble-$currentcode.ts
+        lrelease /tmp/marble-$currentcode.ts -qm $1/marble-$currentcode.qm
+    	rm /tmp/marble-$currentcode.po 
     else
         echo "Couldn't find: $TARGET"
     fi

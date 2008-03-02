@@ -58,7 +58,7 @@ ViewParams::~ViewParams()
 }
 
 
-const ViewportParams *ViewParams::viewport() const
+ViewportParams *ViewParams::viewport()
 {
     return &m_viewport;
 }

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
 //
 
 
@@ -44,11 +44,15 @@
 class GeoPainter : public ClipPainter 
 {
  public:
-    GeoPainter( MarbleMap * map );
+    GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip );
+//    GeoPainter( MarbleMap * map, bool clip );
 
     void drawPoint (  const GeoDataPoint & position );
     void drawPoints (  const GeoDataPoint * points, int pointCount );
     void drawText ( const GeoDataPoint & position, const QString & text );
+    void drawText ( const GeoDataPoint & position, const QString & text );
+//    void drawPlaceMark ( const GeoDataPoint & position, const QString& name );
+//    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
 
     // all cases for isGeoProjected = false get implemented first, as this is much easier to implement.
 
