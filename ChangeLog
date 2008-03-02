@@ -1,3 +1,10 @@
+2008-03-02  Inge Wallin  <inge@lysator.liu.se>
+
+	Prepare the Measuretool for use of the Projection classes.
+	* src/lib/MeasureTool.{h,cpp}: Take ViewportParams everywhere
+	instead of ViewParams.
+	* src/lib/MarbleMap.cpp (doPaint): Send ViewportParams parameter.
+
 2008-03-01  Inge Wallin  <inge@lysator.liu.se>
 
 	Place placemarks using the new projection classes

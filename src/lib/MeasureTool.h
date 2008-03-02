@@ -25,7 +25,7 @@
 #include "global.h"
 #include "ClipPainter.h"
 
-class ViewParams;
+class ViewportParams;
 
 class MeasureTool : public QObject
 {
@@ -34,9 +34,14 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
-    void  paintMeasurePoints( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
-    void  sphericalPaintMeasurePoints ( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
-    void  rectangularPaintMeasurePoints ( ClipPainter *painter, ViewParams &viewParams, bool antialiasing );
+    void  paintMeasurePoints( ClipPainter *painter, ViewportParams *viewport,
+                              bool antialiasing );
+    void  sphericalPaintMeasurePoints ( ClipPainter *painter, 
+                                        ViewportParams *viewport,
+                                        bool antialiasing );
+    void  rectangularPaintMeasurePoints ( ClipPainter *painter,
+                                          ViewportParams *viewport,
+                                          bool antialiasing );
 
     void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
     void  paintTotalDistanceLabel( ClipPainter * painter, int imgrx, int imgry, double totalDistance );
@@ -57,14 +62,20 @@ class MeasureTool : public QObject
  protected:
     bool  testbug(); 
     void  paintMark( ClipPainter* painter, int x, int y );
-    void  drawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                             ViewParams &viewParams, bool antialiasing );
+    void  drawDistancePath( ClipPainter* painter,
+                            Quaternion, Quaternion,
+                            ViewportParams *viewport,
+                            bool antialiasing );
 
-    void  sphericalDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                             ViewParams &viewParams, bool antialiasing );
+    void  sphericalDrawDistancePath( ClipPainter* painter,
+                                     Quaternion, Quaternion,
+                                     ViewportParams *viewport,
+                                     bool antialiasing );
 
-    void  rectangularDrawDistancePath( ClipPainter* painter, Quaternion, Quaternion, 
-                             ViewParams &viewParams, bool antialiasing );
+    void  rectangularDrawDistancePath( ClipPainter* painter,
+                                       Quaternion, Quaternion, 
+                                       ViewportParams *viewport,
+                                       bool antialiasing );
 
     double  m_totalDistance;
 

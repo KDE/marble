@@ -870,7 +870,9 @@ void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect)
                           d->m_viewParams.m_canvasImage->height() );
 
     // 5. Paint measure points if there are any.
-    d->m_measureTool->paintMeasurePoints( &painter, d->m_viewParams, true );
+    d->m_measureTool->paintMeasurePoints( &painter, 
+                                          d->m_viewParams.viewport(),
+                                          true );
 
     // Set the Bounding Box
     d->setBoundingBox();
