@@ -95,11 +95,6 @@ class PlaceMarkLayout : public QObject
  private:
     void styleReset();
 
-    bool   locatedOnScreen ( const GeoDataPoint &index, 
-                             int &x, int &y, const int &imgwidth, const int &imgheight,
-                             const matrix &planetAxisMatrix,
-                             ViewParams * viewParams );
-
     QRect  roomForLabel ( GeoDataStyle * style,
                          const QVector<VisiblePlaceMark*> &currentsec,
                          const int x, const int y,

@@ -29,6 +29,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
 #include "ViewParams.h"
+#include "AbstractProjection.h"
 #include "VisiblePlaceMark.h"
 
 #ifdef Q_CC_MSVC
@@ -225,7 +226,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, planetAxisMatrix, viewParams ) )
+	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), planetAxisMatrix, x, y ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;
@@ -319,7 +320,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                 break;
         }
 
-        if ( !locatedOnScreen ( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), x, y, imgwidth, imgheight, planetAxisMatrix, viewParams ) )
+	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), planetAxisMatrix, x, y ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;
@@ -414,20 +415,6 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     }
     m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, 
                                         viewParams );
-}
-
-inline bool PlaceMarkLayout::locatedOnScreen ( const GeoDataPoint &geopoint, 
-                                               int &x, int &y, 
-                                               const int &imgwidth, const int &imgheight,
-                                               const matrix &planetAxisMatrix,
-                                               ViewParams * viewParams )
-{
-    // FIXME: Change the calls to lcatedOnScreen to
-    //        currentProjection->screenCoordinates.
-    return viewParams->currentProjection()
-        ->screenCoordinates( geopoint, viewParams->viewport(),
-                             planetAxisMatrix,
-                             x, y );
 }
 
 QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
