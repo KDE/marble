@@ -44,7 +44,7 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     double  rad2Pixel = 2 * params->radius() / M_PI;
  
     x = (int)( params->width()  / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-    y = (int)( params->height() / 2 + rad2Pixel * (centerLat - atanh( sin( lat ) ) ) );
+    y = (int)( params->height() / 2 + rad2Pixel * (centerLat - atanh( sin( lat * DEG2RAD ) ) ) );
 
     return true;
 }

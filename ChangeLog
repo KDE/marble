@@ -1,5 +1,9 @@
 2008-03-04  Inge Wallin  <inge@lysator.liu.se>
 
+	Bugfix
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Convert both
+	lon and lat from degrees to radians.
+
 	Apidox
 	* src/lib/AbstractProjection.h: Document all functions and
 	parameters
