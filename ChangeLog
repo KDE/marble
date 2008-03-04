@@ -1,5 +1,9 @@
 2008-03-04  Inge Wallin  <inge@lysator.liu.se>
 
+	Apidox
+	* src/lib/AbstractProjection.h: Document all functions and
+	parameters
+	
 	Cleaning
 	* src/lib/Quaternion.cpp: Follow coding standards
 

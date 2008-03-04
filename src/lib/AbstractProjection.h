@@ -43,17 +43,32 @@ class AbstractProjection
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     * @param lon    the lon coordinate of the requested pixel position
-     * @param lat    the lat coordinate of the requested pixel position
+     * @param lon    the lon coordinate of the requested pixel position in radians
+     * @param lat    the lat coordinate of the requested pixel position in radians
+     * @param params the viewport parametersn
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
+     *
+     * @see ViewportParams
      */
     virtual bool screenCoordinates( const double lon, const double lat,
                                     const ViewportParams *params,
                                     int& x, int& y ) = 0;
 
+    /**
+     * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
+     * @param geopoint the point on earth, including altitude, that we want the coordinates for.
+     * @param params the viewport parameters
+     * @param planetAxisMatrix The matrix describing the current rotation of the globe
+     * @param x      the x coordinate of the pixel is returned through this parameter
+     * @param y      the y coordinate of the pixel is returned through this parameter
+     * @return @c true  if the geographical coordinates are visible on the screen
+     *         @c false if the geographical coordinates are not visible on the screen
+     *
+     * @see ViewportParams
+     */
     virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
                                     const ViewportParams *params,
                                     const matrix &planetAxisMatrix,
@@ -63,8 +78,10 @@ class AbstractProjection
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
+     * @param params the viewport parameters
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
+     * @param unit   the unit of the angles for lon and lat.
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
