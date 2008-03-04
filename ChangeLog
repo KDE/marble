@@ -1,3 +1,8 @@
+2008-03-04  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleaning
+	* src/lib/Quaternion.cpp: Follow coding standards
+
 2008-03-02  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning

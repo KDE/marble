@@ -178,28 +178,33 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
     v[Q_Z] = q.v[Q_W] * z + q.v[Q_X] * y - q.v[Q_Y] * x + q.v[Q_Z] * w;
 }
 
-void Quaternion::slerp(const Quaternion q1, const Quaternion q2, double t)
+void Quaternion::slerp( const Quaternion q1, const Quaternion q2, 
+                        double t)
 {
-    double p1, p2;
+    double  p1;
+    double  p2;
 
-    double cosAlpha = ( q1.v[Q_X]*q2.v[Q_X] + q1.v[Q_Y]*q2.v[Q_Y]
-		       + q1.v[Q_Z]*q2.v[Q_Z] + q1.v[Q_W]*q2.v[Q_W] );
-    double alpha    = acos(cosAlpha);
-    double sinAlpha = sin(alpha);
+    // Let alpha be the angle between the two quaternions.
+    double  cosAlpha = ( q1.v[Q_X] * q2.v[Q_X]
+                         + q1.v[Q_Y] * q2.v[Q_Y]
+                         + q1.v[Q_Z] * q2.v[Q_Z]
+                         + q1.v[Q_W] * q2.v[Q_W] );
+    double  alpha    = acos( cosAlpha );
+    double  sinAlpha = sin( alpha );
 
-    if( sinAlpha > 0.0 ) {
-        p1 = sin( (1.0-t)*alpha ) / sinAlpha;
-        p2 = sin( t*alpha ) / sinAlpha;
+    if ( sinAlpha > 0.0 ) {
+        p1 = sin( ( 1.0 - t ) * alpha ) / sinAlpha;
+        p2 = sin( t           * alpha ) / sinAlpha;
     } else {
         // both Quaternions are equal
         p1 = 1.0;
         p2 = 0.0;
     }
 
-    v[Q_X] = p1*q1.v[Q_X] + p2*q2.v[Q_X];
-    v[Q_Y] = p1*q1.v[Q_Y] + p2*q2.v[Q_Y];
-    v[Q_Z] = p1*q1.v[Q_Z] + p2*q2.v[Q_Z];
-    v[Q_W] = p1*q1.v[Q_W] + p2*q2.v[Q_W];
+    v[Q_X] = p1 * q1.v[Q_X] + p2 * q2.v[Q_X];
+    v[Q_Y] = p1 * q1.v[Q_Y] + p2 * q2.v[Q_Y];
+    v[Q_Z] = p1 * q1.v[Q_Z] + p2 * q2.v[Q_Z];
+    v[Q_W] = p1 * q1.v[Q_W] + p2 * q2.v[Q_W];
 }
 
 void Quaternion::toMatrix(matrix &m) const
