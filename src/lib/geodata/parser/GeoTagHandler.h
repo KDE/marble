@@ -43,7 +43,7 @@ private:
     GeoTagHandler& operator=(const GeoTagHandler&);
 
 private: // Only our registrar is allowed to register tag handlers.
-    friend class GeoTagHandlerRegistrar;
+    friend struct GeoTagHandlerRegistrar;
     static void registerHandler(const QualifiedName&, const GeoTagHandler*);
 
 private: // Only our parser is allowed to access tag handlers.
