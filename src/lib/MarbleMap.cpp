@@ -650,7 +650,8 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
                                    int& x, int& y )
 {
     return d->m_viewParams.currentProjection()
-        ->screenCoordinates( lon, lat, d->m_viewParams.viewport(),
+        ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
+                             d->m_viewParams.viewport(),
                              x, y );
 }
 

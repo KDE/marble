@@ -297,9 +297,7 @@ void MeasureTool::drawPath( ClipPainter *painter,
         // Let itpos be a quaternion that is between prevqpos and qpos.
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical( lon, lat );
-        // FIXME: screenCoordinates() should *not* take degrees!!
-        if ( viewport->currentProjection()->screenCoordinates( lon * RAD2DEG,
-                                                               lat * RAD2DEG,
+        if ( viewport->currentProjection()->screenCoordinates( lon, lat,
                                                                viewport,
                                                                x, y ) )
         {

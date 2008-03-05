@@ -30,8 +30,8 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
                                              const ViewportParams *params,
                                              int& x, int& y )
 {
-    Quaternion p(lon * DEG2RAD, lat * DEG2RAD);
-    p.rotateAroundAxis(params->planetAxis().inverse());
+    Quaternion  p( lon, lat );
+    p.rotateAroundAxis( params->planetAxis().inverse() );
  
     x = (int)( params->width() / 2   + (double)( params->radius() ) * p.v[Q_X] );
     y = (int)( params->height() / 2  + (double)( params->radius() ) * p.v[Q_Y] );

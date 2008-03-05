@@ -1,5 +1,13 @@
 2008-03-05  Inge Wallin  <inge@lysator.liu.se>
 
+	Let all projections take angles in radians instead of degrees
+	* src/lib/SphericalProjection.cpp (screenCoordinates),
+	* src/lib/EquirectProjection.cpp (screenCoordinates),
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Take angles
+	in radians
+	* src/lib/MarbleMap.cpp (screenCoordinates): Convert to radians
+	* src/lib/MeasureTool.cpp (drawPath): Don't convert to degrees.
+
 	Commit unfinished code.
 	* src/lib/MeasureTool.{h,cpp} (drawPath): New function, not yet called.
 

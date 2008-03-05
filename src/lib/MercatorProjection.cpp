@@ -43,8 +43,8 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     params->centerCoordinates( centerLon, centerLat );
     double  rad2Pixel = 2 * params->radius() / M_PI;
  
-    x = (int)( params->width()  / 2 + ( lon * DEG2RAD + centerLon ) * rad2Pixel );
-    y = (int)( params->height() / 2 + rad2Pixel * (centerLat - atanh( sin( lat * DEG2RAD ) ) ) );
+    x = (int)( params->width()  / 2 + ( lon + centerLon ) * rad2Pixel );
+    y = (int)( params->height() / 2 + rad2Pixel * (centerLat - atanh( sin( lat ) ) ) );
 
     return true;
 }
@@ -66,6 +66,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
     geopoint.geoCoordinates( lon, lat );
     // FIXME: What is this magic number??
+    //        Hmm, it must be the cutoff latitude, outside of which is not
+    //        shown.  Create a const double of #define for this!
     if ( fabs(lat) >=  85.05113 * DEG2RAD )
         return false;
 
