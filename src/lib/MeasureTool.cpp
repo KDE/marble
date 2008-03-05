@@ -93,9 +93,6 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
     double  lat = 0.0;
     double  prevLon = 0.0;
     double  prevLat = 0.0;
-
-    QVector<QPolygonF>  distancePaths;
-
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           it++ )
@@ -173,9 +170,6 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
     double  lat = 0.0;
     double  prevLon = 0.0;
     double  prevLat = 0.0;
-
-    QVector<QPolygonF>  distancePaths;
-
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           it++ )
@@ -269,6 +263,9 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
                                     ViewportParams *viewport,
                                     bool antialiasing )
 {
+#if 0
+    drawPath( painter, prevqpos, qpos, viewport, antialiasing );
+#else
     switch( viewport->projection() ) {
         case Spherical:
             sphericalDrawDistancePath(   painter, prevqpos, qpos, viewport, antialiasing );
@@ -277,6 +274,45 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
             rectangularDrawDistancePath( painter, prevqpos, qpos, viewport, antialiasing );
             break;
     }
+#endif
+}
+
+void MeasureTool::drawPath( ClipPainter *painter,
+                            Quaternion   prevqpos,
+                            Quaternion   qpos,
+                            ViewportParams *viewport,
+                            bool antialiasing )
+{
+    Q_UNUSED( antialiasing );
+
+    Quaternion  itpos;
+    QPolygonF   distancePath;
+    for ( int i = 0; i < 21; ++i ) {
+        double  t = (double)(i) / 20.0;
+        double  lon = 0.0;
+        double  lat = 0.0;
+        int     x = 0;
+        int     y = 0;
+
+        // Let itpos be a quaternion that is between prevqpos and qpos.
+        itpos.slerp( prevqpos, qpos, t );
+        itpos.getSpherical( lon, lat );
+        // FIXME: screenCoordinates() should *not* take degrees!!
+        if ( viewport->currentProjection()->screenCoordinates( lon * RAD2DEG,
+                                                               lat * RAD2DEG,
+                                                               viewport,
+                                                               x, y ) )
+        {
+            //qDebug() << "(x,y): " << x << y;
+            paintMark( painter, x, y );
+            //distancePath << QPointF( x, y );
+        }
+        else {
+            //qDebug() << "(x,y): " << x << y;
+        }
+    }
+
+    painter->drawPolyline( distancePath );
 }
 
 void MeasureTool::sphericalDrawDistancePath( ClipPainter *painter,
@@ -285,26 +321,23 @@ void MeasureTool::sphericalDrawDistancePath( ClipPainter *painter,
                                              ViewportParams *viewport,
                                              bool antialiasing )
 {
-    double      t = 0.0;
-    Quaternion  itpos;
+    Q_UNUSED( antialiasing );
 
     int  imgwidth  = viewport->width();
     int  imgheight = viewport->height();
     int  radius    = viewport->radius();
-    double      x;
-    double      y;
+
+    Quaternion  itpos;
     QPolygonF   distancePath;
-
-    Q_UNUSED( antialiasing );
-
     for ( int i = 0; i < 21; ++i ) {
-        t = (double)(i) / 20.0;
+        double  t = (double)(i) / 20.0;
 
+        // Let itpos be ... FIXME
         itpos.slerp( prevqpos, qpos, t );
 
         if ( itpos.v[Q_Z] > 0 ) {
-            x = (double)(imgwidth  / 2) + (double)(radius) * itpos.v[Q_X];
-            y = (double)(imgheight / 2) - (double)(radius) * itpos.v[Q_Y];
+            double  x = (double)(imgwidth  / 2) + (double)(radius) * itpos.v[Q_X];
+            double  y = (double)(imgheight / 2) - (double)(radius) * itpos.v[Q_Y];
 
             // paintMark( painter, x, y );
             distancePath << QPointF( x, y );
@@ -344,7 +377,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
     Quaternion  itpos;
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
-    itpos.getSpherical(lon,lat);
+    itpos.getSpherical( lon, lat );
     currentSign = previousSign = (lon < 0)?-1:1;
     previousLon = lon;
 
@@ -356,7 +389,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical(lon,lat);
 
-        x = (double)( imgwidth / 2  - ( m_centerLon - lon ) * m_rad2Pixel );
+        x = (double)( imgwidth  / 2 - ( m_centerLon - lon ) * m_rad2Pixel );
         y = (double)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
 
         if ( i == 0 ) {
@@ -366,13 +399,17 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
         //The next steeps deal with the measurement of two points
         //that the shortest path crosses the dateline
         currentSign = (lon < 0)?-1:1;
-        if( previousSign != currentSign && fabs(previousLon) + fabs(lon) > M_PI) {
-            //FIXME:Fix the interpolation the problem is i think the (x - previousX) as is too wide
-//          It's based on y = y1 + (y2-y1)/(x2-x1)*(x-x1)
-//            interpolatedY= previousY + ( y - previousY ) /
-//                                       ( 4*radius - fabs( x - previousX ) ) *
-//                                ( imgwidth / 2 - m_rad2Pixel * (m_centerLon - lon) + previousSign*2*radius - previousX );
-            //This is temporal just to be able to commit
+        if ( previousSign != currentSign
+             && fabs(previousLon) + fabs(lon) > M_PI)
+        {
+            // FIXME:Fix the interpolation the problem is i think the
+            //       (x - previousX) as is too wide
+            //
+            // It's based on y = y1 + (y2-y1)/(x2-x1)*(x-x1)
+            // interpolatedY= previousY + ( y - previousY )
+            //                / ( 4*radius - fabs( x - previousX ) )
+            //                * ( imgwidth / 2 - m_rad2Pixel * (m_centerLon - lon) + previousSign*2*radius - previousX );
+            // This is temporal just to be able to commit
             interpolatedY= ( y + previousY ) / 2;
             distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel
                                     + previousSign * 2 * radius,
@@ -380,12 +417,14 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
             drawAndRepeatDistancePath( painter, distancePath );
             distancePath.clear();
             distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel
-                                    + currentSign  * 2 * radius,
-                                      interpolatedY);
+                                     + currentSign  * 2 * radius,
+                                     interpolatedY);
         }
-        else distancePath << QPointF( x, y );
+        else 
+            distancePath << QPointF( x, y );
+
         previousSign = currentSign;
-        previousLon = lon;
+        previousLon  = lon;
         previousX = x;
         previousY = y;
     }

@@ -1,3 +1,8 @@
+2008-03-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Commit unfinished code.
+	* src/lib/MeasureTool.{h,cpp} (drawPath): New function, not yet called.
+
 2008-03-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Bugfix
