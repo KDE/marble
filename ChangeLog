@@ -1,3 +1,8 @@
+2008-03-06  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy fixes (Check for single char QStrings).
+	* src/lib/geodata/parser/GeoParser.cpp (dumpParentStack): Use chars
+
 2008-03-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Let all projections take angles in radians instead of degrees
