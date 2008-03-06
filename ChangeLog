@@ -1,5 +1,11 @@
 2008-03-06  Inge Wallin  <inge@lysator.liu.se>
 
+	Krazy fixes (Check for spelling errors):
+	* src/lib/AbstractLayer/AbstractLayerData.h (AbstractLayerInterface),
+	* src/lib/geodata/parser/GeoParser.h (class GeoParser),
+	* src/lib/geodata/handlers/gpx/GPXElementDictionary.cpp:
+	Fix spelling errors
+
 	Krazy fixes (Check for single char QStrings).
 	* src/lib/geodata/parser/GeoParser.cpp (dumpParentStack): Use chars
 

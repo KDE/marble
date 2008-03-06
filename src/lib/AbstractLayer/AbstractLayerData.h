@@ -88,7 +88,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
 
     /**
      * @brief check if this Layer Data is visible on screen
-     * @return the visibliliy of this Data
+     * @return the visibililiy of this Data
      */
     bool visible() const;
     

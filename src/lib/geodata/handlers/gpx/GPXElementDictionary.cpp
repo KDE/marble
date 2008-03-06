@@ -21,7 +21,7 @@
 
 #include "GPXElementDictionary.h"
 
-// One static list of all tag names, to avoid string comparisions all-over-the-place
+// One static list of all tag names, to avoid string comparisons all-over-the-place
 namespace GeoDataElementDictionary {
 
 const char* gpxTag_nameSpace10 = "http://www.topografix.com/GPX/1/0";
