@@ -31,7 +31,7 @@ const double RAD2DEG = 180.0 / M_PI;
 
 const QString MARBLE_VERSION_STRING = QString::fromLatin1( "pre 0.6 SVN" );
 
-const QString NOT_AVAILABLE = QCoreApplication::tr("not available");
+static const char* NOT_AVAILABLE = QT_TR_NOOP("not available");
 
 // Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;

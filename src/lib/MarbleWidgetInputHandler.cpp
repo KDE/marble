@@ -139,7 +139,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                                                         GeoDataPoint::Radian );
 
             if ( !isValid ) {
-                emit mouseMoveGeoPosition( NOT_AVAILABLE );
+                emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
             } 
             else {
                 QString position = GeoDataPoint( lon, lat ).toString( GeoDataPoint::DMS );

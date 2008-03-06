@@ -621,7 +621,7 @@ void MarbleWidget::moveDown()
 
 void MarbleWidget::leaveEvent (QEvent*)
 {
-    emit mouseMoveGeoPosition( NOT_AVAILABLE );
+    emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
 }
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
