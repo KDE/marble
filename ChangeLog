@@ -1,5 +1,20 @@
 2008-03-07  Inge Wallin  <inge@lysator.liu.se>
 
+	Enable the new projection based measuretool.
+	* src/lib/MeasureTool.cpp (drawDistancePath): use drawPath()
+	instead of individual functions.
+	(drawPath): draw a red line instead of white crosses.
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Bugfix for
+	the +- issue
+
+2008-03-06  Torsten Rahn  <rahn@kde.org>
+
+	Fix transformation bugs where + and - were mixed up.
+	* src/lib/SphericalProjection.cpp (screenCoordinates): bugfix
+	* src/lib/EquirectProjection.cpp (screenCoordinates): bugfix
+
+2008-03-07  Inge Wallin  <inge@lysator.liu.se>
+
 	Introduce new parameter to the Projections: type of coordinates
 	* src/lib/AbstractProjection.h (CoordinateType): New enum type
 	* src/lib/SphericalProjection.{h,cpp} (screenCoordinates): new

@@ -263,7 +263,7 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
                                     ViewportParams *viewport,
                                     bool antialiasing )
 {
-#if 0
+#if 1
     drawPath( painter, prevqpos, qpos, viewport, antialiasing );
 #else
     switch( viewport->projection() ) {
@@ -303,8 +303,8 @@ void MeasureTool::drawPath( ClipPainter *painter,
 				  mappedCoordinates ) )
         {
             //qDebug() << "(x,y): " << x << y;
-            paintMark( painter, x, y );
-            //distancePath << QPointF( x, y );
+            //paintMark( painter, x, y );
+            distancePath << QPointF( x, y );
         }
         else {
             //qDebug() << "(x,y): " << x << y;

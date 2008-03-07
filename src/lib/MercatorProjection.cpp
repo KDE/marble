@@ -47,7 +47,7 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     double  rad2Pixel = 2 * params->radius() / M_PI;
  
     x = (int)( params->width()  / 2 + ( lon + centerLon ) * rad2Pixel );
-    y = (int)( params->height() / 2 + rad2Pixel * (centerLat - atanh( sin( lat ) ) ) );
+    y = (int)( params->height() / 2 - rad2Pixel * (centerLat - atanh( sin( lat ) ) ) );
 
     return true;
 }
@@ -75,8 +75,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
         return false;
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)( params->width()  / 2 - rad2Pixel * ( centerLon - lon ) );
-    y = (int)( params->height() / 2 + rad2Pixel * ( centerLat - atanh( sin(lat) ) ) );
+    x = (int)( params->width()  / 2 + rad2Pixel * ( centerLon - lon ) );
+    y = (int)( params->height() / 2 - rad2Pixel * ( centerLat - atanh( sin(lat) ) ) );
 
     // Skip placemarks that are outside the screen area
     //
