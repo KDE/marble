@@ -28,8 +28,11 @@ EquirectProjection::~EquirectProjection()
 
 bool EquirectProjection::screenCoordinates( const double lon, const double lat,
                                             const ViewportParams *params,
-                                            int& x, int& y )
+                                            int& x, int& y,
+					    CoordinateType coordType )
 {
+    Q_UNUSED( coordType );
+
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;

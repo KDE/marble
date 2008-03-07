@@ -25,6 +25,11 @@
 class ViewportParams;
 
 
+typedef enum {
+    originalCoordinates,
+    mappedCoordinates
+}  CoordinateType;
+
 /**
  * @short A base class for all projections in Marble.
  */
@@ -55,7 +60,8 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const double lon, const double lat,
                                     const ViewportParams *params,
-                                    int& x, int& y ) = 0;
+                                    int& x, int& y,
+				    CoordinateType coordType = originalCoordinates ) = 0;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.

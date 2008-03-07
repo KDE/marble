@@ -297,9 +297,10 @@ void MeasureTool::drawPath( ClipPainter *painter,
         // Let itpos be a quaternion that is between prevqpos and qpos.
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical( lon, lat );
-        if ( viewport->currentProjection()->screenCoordinates( lon, lat,
-                                                               viewport,
-                                                               x, y ) )
+        if ( viewport->currentProjection()
+	     ->screenCoordinates( lon, lat, viewport,
+				  x, y,
+				  mappedCoordinates ) )
         {
             //qDebug() << "(x,y): " << x << y;
             paintMark( painter, x, y );

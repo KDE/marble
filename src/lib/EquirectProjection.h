@@ -49,7 +49,8 @@ class EquirectProjection : public AbstractProjection
      */
     bool screenCoordinates( const double lon, const double lat,
                             const ViewportParams *params,
-                            int& x, int& y );
+                            int& x, int& y,
+			    CoordinateType coordType = originalCoordinates );
 
     bool screenCoordinates( const GeoDataPoint &geopoint, 
                             const ViewportParams *params,

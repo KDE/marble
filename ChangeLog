@@ -1,3 +1,15 @@
+2008-03-07  Inge Wallin  <inge@lysator.liu.se>
+
+	Introduce new parameter to the Projections: type of coordinates
+	* src/lib/AbstractProjection.h (CoordinateType): New enum type
+	* src/lib/SphericalProjection.{h,cpp} (screenCoordinates): new
+	parameter CoordinateType
+	* src/lib/EquirectProjection.{h,cpp} (screenCoordinates): new
+	parameter CoordinateType
+	* src/lib/MercatorProjection.{h,cpp} (screenCoordinates): new
+	parameter CoordinateType
+	* src/lib/MeasureTool.cpp (drawPath): Use new call conventions
+
 2008-03-06  Torsten Rahn  <rahn@kde.org>
 
     * Translation issue as reported by icwiener.
