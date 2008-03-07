@@ -47,12 +47,12 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const double lon, const double lat,
+    inline bool screenCoordinates( const double lon, const double lat,
                             const ViewportParams *params,
                             int& x, int& y,
 			    CoordinateType coordType = originalCoordinates );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint, 
+    inline bool screenCoordinates( const GeoDataPoint &geopoint, 
                             const ViewportParams *params,
                             const matrix &planetAxisMatrix,
                             int &x, int &y );
@@ -66,7 +66,7 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
+    inline bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          double& lon, double& lat,
                          GeoDataPoint::Unit unit = GeoDataPoint::Degree );
@@ -79,7 +79,7 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
-    bool    geoCoordinates( int x, int y, 
+    inline bool    geoCoordinates( int x, int y, 
                             const ViewportParams *params,
                             Quaternion &q );
 

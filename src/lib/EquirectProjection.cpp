@@ -39,8 +39,8 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
     params->centerCoordinates( centerLon, centerLat );
     double  rad2Pixel = 2 * params->radius() / M_PI;
  
-    x = (int)( params->width()  / 2 + ( lon + centerLon ) * rad2Pixel );
-    y = (int)( params->height() / 2 + ( lat + centerLat ) * rad2Pixel );
+    x = (int)( params->width()  / 2 + ( lon - centerLon ) * rad2Pixel );
+    y = (int)( params->height() / 2 - ( lat - centerLat ) * rad2Pixel );
 
     return true;
 }
