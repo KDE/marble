@@ -82,7 +82,9 @@ bool GeoParser::read(QIODevice* device)
 #endif
  
                 parseDocument();
-                break;
+
+                if (!m_nodeStack.isEmpty())
+                    raiseError(QObject::tr("Parsing failed. Still %1 unclosed tags after document end.").arg(m_nodeStack.size()));
             } else
                 raiseDocumentElementError();
         }
@@ -111,8 +113,7 @@ GeoStackItem GeoParser::parentElement(unsigned int depth)
 
 void GeoParser::parseDocument()
 {
-//    Commented out to be able to execute "parser.readElementText()"
-//    Q_ASSERT(isStartElement());
+    Q_ASSERT(isStartElement());
 
     while (!atEnd()) {
         readNext();
@@ -130,17 +131,28 @@ void GeoParser::parseDocument()
 
         if (isStartElement()) {
             GeoStackItem stackItem(qName, 0);
+            bool processChildren = true;
 
-            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(qName))
+            if (const GeoTagHandler* handler = GeoTagHandler::recognizes(qName)) {
                 stackItem.assignNode(handler->parse(*this));
+                processChildren = !isEndElement();
+            }
 
             m_nodeStack.push(stackItem);
 
 #if DUMP_PARENT_STACK > 0
             dumpParentStack(name().toString(), m_nodeStack.size(), false);
 #endif
- 
-            parseDocument();
+
+            if (processChildren)
+                parseDocument();
+            else {
+                m_nodeStack.pop();
+
+#if DUMP_PARENT_STACK > 0
+                dumpParentStack(name().toString(), m_nodeStack.size(), true);
+#endif
+            }
         }
     }
 }
