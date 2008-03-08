@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -21,7 +21,7 @@
 
 #include <QDebug>
 
-#include "DGMLNameTagHandler.h"
+#include "DGMLDescriptionTagHandler.h"
 
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"
@@ -29,22 +29,22 @@
 
 using namespace GeoSceneElementDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Name)
+DGML_DEFINE_TAG_HANDLER(Description)
 
-DGMLNameTagHandler::DGMLNameTagHandler()
+DGMLDescriptionTagHandler::DGMLDescriptionTagHandler()
     : GeoTagHandler()
 {
 }
 
-DGMLNameTagHandler::~DGMLNameTagHandler()
+DGMLDescriptionTagHandler::~DGMLDescriptionTagHandler()
 {
 }
 
-GeoNode* DGMLNameTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLDescriptionTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Name));
-    qDebug() << "Parsed <Name> start!";    
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Description));
+    qDebug() << "Parsed <Description> start!";    
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();

@@ -24,14 +24,19 @@
 
 GeoSceneDocument::GeoSceneDocument()
     : GeoDocument()
+    , m_head(0)
 {
 }
 
 GeoSceneDocument::~GeoSceneDocument()
 {
+    delete m_head;
 }
 
-GeoSceneHead& GeoSceneDocument::head()
+GeoSceneHead* GeoSceneDocument::head() const
 {
+    if (!m_head)
+        m_head = new GeoSceneHead;
+
     return m_head;
 }

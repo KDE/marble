@@ -84,8 +84,8 @@ int main(int argc, char** argv)
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
     else if (document->isGeoSceneDocument())
     {
-        qDebug() << "Name:" << static_cast<GeoSceneDocument*>(document)->head().name(); 
-        qDebug() << "Description:" << static_cast<GeoSceneDocument*>(document)->head().description(); 
+        qDebug() << "Name:" << static_cast<GeoSceneDocument*>(document)->head()->name(); 
+        qDebug() << "Description:" << static_cast<GeoSceneDocument*>(document)->head()->description(); 
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }
     else {

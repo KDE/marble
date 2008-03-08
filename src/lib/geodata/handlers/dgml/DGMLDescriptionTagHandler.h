@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -20,28 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEDOCUMENT_H
-#define GEOSCENEDOCUMENT_H
+#ifndef DGMLDescriptionTagHandler_h
+#define DGMLDescriptionTagHandler_h
 
-#include "GeoSceneHead.h"
-#include "GeoDocument.h"
+#include "GeoTagHandler.h"
 
-/**
- * @short A container for features parsed from the DGML file.
- */
-class GeoSceneDocument : public GeoDocument,
-                         public GeoNode {
+class DGMLDescriptionTagHandler : public GeoTagHandler {
 public:
-    GeoSceneDocument();
-    ~GeoSceneDocument();
+    DGMLDescriptionTagHandler();
+    virtual ~DGMLDescriptionTagHandler();
 
-    virtual bool isGeoSceneDocument() const { return true; }
-
-    GeoSceneHead* head() const;
-
-protected:
-    mutable GeoSceneHead* m_head;
+    virtual GeoNode* parse(GeoParser&) const;
 };
 
-
-#endif // GEOSCENEDOCUMENT_H
+#endif // DGMLDescriptionTagHandler_h
