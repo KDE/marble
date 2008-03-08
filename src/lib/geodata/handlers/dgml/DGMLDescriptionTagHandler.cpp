@@ -19,8 +19,6 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
 #include "DGMLDescriptionTagHandler.h"
 
 #include "DGMLElementDictionary.h"
@@ -44,12 +42,11 @@ GeoNode* DGMLDescriptionTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Description));
-    qDebug() << "Parsed <Description> start!";    
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
-        parentItem.nodeAs<GeoSceneHead>()->setName(parser.readElementText());
+        parentItem.nodeAs<GeoSceneHead>()->setDescription(parser.readElementText());
 
     return 0;
 }

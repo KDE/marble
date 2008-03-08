@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -18,8 +18,6 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-
-#include <QDebug>
 
 #include "DGMLNameTagHandler.h"
 
@@ -44,7 +42,6 @@ GeoNode* DGMLNameTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Name));
-    qDebug() << "Parsed <Name> start!";    
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
