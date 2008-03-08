@@ -1,3 +1,11 @@
+2008-03-08  Inge Wallin  <inge@lysator.liu.se>
+
+	Simplify the GridMap
+	* src/lib/GridMap.{h,cpp}:
+	 - Remove private members m_radius, m_precision and m_planetAxis
+	 - Use ViewportParams instead of ViewParams everywhere.
+	 - send a precision parameter to all CreateCircle functions.
+	
 2008-03-08  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:

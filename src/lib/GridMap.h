@@ -21,8 +21,10 @@
 #include "ScreenPolygon.h"
 
 
-class ViewParams;
+class ViewportParams;
+class ViewParams;               /* FIXME: Remove */
 class ClipPainter;
+
 
 class GridMap : public ScreenPolygon::Vector
 {
@@ -30,9 +32,9 @@ class GridMap : public ScreenPolygon::Vector
     GridMap();
     ~GridMap();
 
-    void createTropics( ViewParams *viewParams );
-    void createEquator ( ViewParams *viewParams );
-    void createGrid( ViewParams *viewParams );
+    void createTropics( ViewportParams *viewport );
+    void createEquator ( ViewportParams *viewport);
+    void createGrid( ViewportParams *port );
 
     void paintGridMap(ClipPainter * painter, bool );
 
@@ -43,18 +45,29 @@ class GridMap : public ScreenPolygon::Vector
     enum SphereDim { Longitude, Latitude };
 
  private:
-    void createCircles( int lonNum, int latNum, ViewParams *viewParams );
-    void sphericalCreateCircles( int lonNum, int latNum, ViewParams *viewParams );
-    void rectangularCreateCircles( int lonNum, int latNum, ViewParams *viewParams );
+    void createCircles( int lonNum, int latNum, int precision,
+                        ViewportParams *port );
+    void sphericalCreateCircles( int lonNum, int latNum, int precision, 
+                                 ViewportParams *viewport );
+    void rectangularCreateCircles( int lonNum, int latNum, int precision, 
+                                   ViewportParams *viewport );
 
-    void createCircle( double val, SphereDim, ViewParams *viewParams, double cutCoeff = 0.0 );
-    void sphericalCreateCircle( double val, SphereDim, ViewParams *viewParams, double cutCoeff = 0.0 );
-    void rectangularCreateCircle( double val, SphereDim,  ViewParams *viewParams, double cutCoeff = 0.0 );
+    void createCircle( double val, SphereDim, 
+                       int precision,
+                       ViewportParams *viewport, double cutCoeff = 0.0 );
+    void sphericalCreateCircle( double val, SphereDim,
+                                int precision,
+                                ViewportParams *viewport, double cutCoeff = 0.0 );
+    void rectangularCreateCircle( double val, SphereDim,
+                                  int precision,
+                                  ViewportParams *viewport, double cutCoeff = 0.0 );
 
-    const QPointF horizonPoint();
+    int            getPrecision( ViewportParams *viewport );
+    const QPointF  horizonPoint( ViewportParams *viewport )
+;
 
+ private:
     matrix   m_planetAxisMatrix;
-    Quaternion m_planetAxis;
 
     ScreenPolygon m_polygon;
 
@@ -70,9 +83,6 @@ class GridMap : public ScreenPolygon::Vector
     //	Dealing with the horizon
     bool     m_lastVisible;
     bool     m_currentlyVisible;
-	
-    int      m_precision;       // Number of nodes on a quarter circle
-    int      m_radius;          // The radius of the earth in pixels.
 };
 
 #endif // GRIDMAP_H

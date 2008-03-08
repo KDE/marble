@@ -43,10 +43,7 @@ GridMap::GridMap()
     m_lastVisible      = false;
     m_currentlyVisible = false;
 
-    m_radius = 0; 
-
     m_pen = QPen(QColor( 255, 255, 255, 128));
-    m_precision = 10;
 }
 
 GridMap::~GridMap()
@@ -54,90 +51,87 @@ GridMap::~GridMap()
 }
 
 
-void GridMap::createTropics( ViewParams* viewParams )
+void GridMap::createTropics( ViewportParams* viewport )
 {
     clear();
-    m_radius = viewParams->radius();
-    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
+    viewport->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
     // Turn on the major circles of latitude if we've zoomed in far
     // enough (radius > 400 pixels)
-    if ( m_radius >  400 ) {
-        createCircle( PIHALF - AXIALTILT , Latitude, viewParams ); // Arctic Circle
-        createCircle( AXIALTILT - PIHALF , Latitude, viewParams ); // Antarctic Circle
-        createCircle( AXIALTILT , Latitude,  viewParams );          // Tropic of Cancer 
-        createCircle( -AXIALTILT , Latitude, viewParams );         // Tropic of Capricorn
+    if ( viewport->radius() >  400 ) {
+        int  precision = getPrecision( viewport );
+
+        // Arctic Circle
+        createCircle( PIHALF - AXIALTILT, Latitude, precision, viewport );
+
+        // Antarctic Circle
+        createCircle( AXIALTILT - PIHALF, Latitude, precision, viewport );
+
+        // Tropic of Cancer 
+        createCircle( AXIALTILT, Latitude, precision, viewport ); 
+
+        // Tropic of Capricorn
+        createCircle( -AXIALTILT, Latitude, precision, viewport );
     }
 }
 
-void GridMap::createEquator( ViewParams* viewParams ) 
+void GridMap::createEquator( ViewportParams* viewport ) 
 {
     clear();
-    m_radius = viewParams->radius();
-    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
+    viewport->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
-    if ( viewParams->projection() == Equirectangular )
-        m_planetAxis = viewParams->planetAxis();
-
-    createCircle( 0.0 , Latitude, viewParams );
+    int  precision = getPrecision( viewport );
+    createCircle( 0.0 , Latitude, precision, viewport );
 }
 
-void GridMap::createGrid( ViewParams* viewParams )
+void GridMap::createGrid( ViewportParams* viewport )
 {
     clear();
-    m_radius = viewParams->radius();
-    viewParams->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
-
-    if ( viewParams->projection() == Equirectangular )
-        m_planetAxis = viewParams->planetAxis();
+    viewport->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
     //	FIXME:	- Higher precision after optimization 
     //		  ( will keep grid lines from vanishing at high zoom levels ) 
 
-    //	if ( m_radius > 6400 ) { m_precision = 30; createCircles( 64, 48 ); return; } else 
-    if ( m_radius > 3200 ) {
-        m_precision = 40;
-        createCircles( 32, 24, viewParams ); 
-        return;
+    int  radius = viewport->radius();
+    int  precision = getPrecision( viewport );
+    if ( radius > 3200 ) {
+        createCircles( 32, 24, precision, viewport );
     } 
-    else if ( m_radius > 1600 ) {
-        m_precision = 30;
-        createCircles( 16, 12, viewParams );
-        return;
+    else if ( radius > 1600 ) {
+        createCircles( 16, 12, precision, viewport );
     }	
-    else if ( m_radius >  700 ) {
-        m_precision = 30;
-        createCircles( 8, 6, viewParams );
-        return;
+    else if ( radius >  700 ) {
+        createCircles( 8, 6, precision, viewport );
     }	
-    else if ( m_radius >  400 ) {
-        m_precision = 20;
-        createCircles( 4, 3, viewParams );
-        return;
+    else if ( radius >  400 ) {
+        createCircles( 4, 3, precision, viewport );
     }	
-    else if ( m_radius >  100 ) {
-        m_precision = 10;
-        createCircles( 2, 3, viewParams );
-        return;
+    else if ( radius >  100 ) {
+        createCircles( 2, 3, precision, viewport );
     }	
-
-    createCircles( 2, 1, viewParams );	
+    else {
+        createCircles( 2, 1, precision, viewport );
+    }
 }
 
 
-void GridMap::createCircles( const int lonNum, const int latNum, ViewParams *viewParams )
+void GridMap::createCircles( const int lonNum, const int latNum,
+                             int precision,
+                             ViewportParams *viewport )
 {
-    switch( viewParams->projection() ) {
+    switch( viewport->projection() ) {
         case Spherical:
-            sphericalCreateCircles( lonNum, latNum, viewParams );
+            sphericalCreateCircles( lonNum, latNum, precision, viewport );
             break;
         case Equirectangular:
-            rectangularCreateCircles( lonNum, latNum, viewParams );
+            rectangularCreateCircles( lonNum, latNum, precision, viewport );
             break;
     }
 }
 
-void GridMap::sphericalCreateCircles( const int lonNum, const int latNum, ViewParams *viewParams )
+void GridMap::sphericalCreateCircles( const int lonNum, const int latNum,
+                                      int precision,
+                                      ViewportParams *viewport )
 {
     // latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
     // lonNum: number of longitude circles between lon = 0 deg and lon < 90 deg
@@ -146,8 +140,10 @@ void GridMap::sphericalCreateCircles( const int lonNum, const int latNum, ViewPa
 
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
-            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
+            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude,
+                          precision, viewport );
+            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude,
+                          precision, viewport );
         } 
     } 
 
@@ -155,17 +151,21 @@ void GridMap::sphericalCreateCircles( const int lonNum, const int latNum, ViewPa
         return;
 
     // Universal prime meridian and its orthogonal great circle:
-    createCircle( + 0,      Longitude, viewParams );
-    createCircle( + PIHALF, Longitude, viewParams );	
+    createCircle( + 0,      Longitude, precision, viewport );
+    createCircle( + PIHALF, Longitude, precision, viewport );	
 
     for ( int i = 1; i < lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * PIHALF / lonNum,          Longitude, viewParams, cutOff );
-        createCircle( i * PIHALF / lonNum + PIHALF, Longitude, viewParams, cutOff );	
+        createCircle( i * PIHALF / lonNum,          Longitude,
+                      precision, viewport, cutOff );
+        createCircle( i * PIHALF / lonNum + PIHALF, Longitude,
+                      precision, viewport, cutOff );	
     }
 }
 
-void GridMap::rectangularCreateCircles( const int lonNum, const int latNum, ViewParams *viewParams )
+void GridMap::rectangularCreateCircles( const int lonNum, const int latNum,
+                                        int precision,
+                                        ViewportParams *viewport )
 {
 
     // latNum: number of latitude circles between lat = 0 deg and lat < 90 deg
@@ -175,8 +175,10 @@ void GridMap::rectangularCreateCircles( const int lonNum, const int latNum, View
 
         // Circles of latitude:
         for ( int i = 1; i < latNum; ++i ) {
-            createCircle( + (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
-            createCircle( - (double)(i) * PIHALF / (double)(latNum), Latitude, viewParams );
+            createCircle( + (double)(i) * PIHALF / (double)(latNum),
+                          Latitude, precision, viewport );
+            createCircle( - (double)(i) * PIHALF / (double)(latNum),
+                          Latitude, precision, viewport );
         } 
     } 
 
@@ -184,31 +186,35 @@ void GridMap::rectangularCreateCircles( const int lonNum, const int latNum, View
         return;
 
     // Universal prime meridian
-    createCircle( + 0,      Longitude, viewParams );
+    createCircle( + 0, Longitude, precision, viewport );
 
     for ( int i = 0; i <= lonNum; ++i ) {
         double cutOff = PIHALF / (double)(latNum);
-        createCircle( i * M_PI / lonNum,        Longitude, viewParams, cutOff );
-        createCircle( i * M_PI / lonNum + M_PI, Longitude, viewParams, cutOff );	
+        createCircle( i * M_PI / lonNum,        Longitude, precision,
+                      viewport, cutOff );
+        createCircle( i * M_PI / lonNum + M_PI, Longitude, precision, 
+                      viewport, cutOff );	
     }
 }
 
-void GridMap::createCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff)
+void GridMap::createCircle( double val, SphereDim dim,
+                            int precision,
+                            ViewportParams *viewport, double cutOff)
 {
-    switch( viewParams->projection() ) {
+    switch( viewport->projection() ) {
         case Spherical:
-            sphericalCreateCircle( val, dim, viewParams, cutOff );
+            sphericalCreateCircle( val, dim, precision, viewport, cutOff );
             break;
         case Equirectangular:
-            rectangularCreateCircle( val, dim, viewParams, cutOff );
+            rectangularCreateCircle( val, dim, precision, viewport, cutOff );
             break;
     }
 }
 
-void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff )
+void GridMap::sphericalCreateCircle( double val, SphereDim dim,
+                                     int precision,
+                                     ViewportParams *viewport, double cutOff )
 {
-    Q_UNUSED( viewParams );
-
     // cutOff: the amount of each quarter circle that is cut off at
     //         the pole in radians
 
@@ -219,13 +225,17 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *view
     // are being cut off close to the poles.
     // quartSteps: the number of nodes in a "quarter" of a circle.
 
-    const double quartSteps = (double) m_precision;
+    const double quartSteps = (double) precision;
 
     double coeff  = 1.0;
     double offset = 0.0;
 
-    const int steps = (int) ( cutCoeff * quartSteps );
+    // Some convenience variables
+    int  radius    = viewport->radius();
+    int  imgWidth  = viewport->width();
+    int  imgHeight = viewport->height();
 
+    const int steps = (int) ( cutCoeff * quartSteps );
     for ( int i = 0; i < 4; ++i ) {
 
         if ( i > 1 ) 
@@ -243,15 +253,15 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *view
             double lat = ( dim == Latitude )  ? val : dimVal;
             double lon = ( dim == Longitude ) ? val : dimVal;
 
-            GeoDataPoint    geoit( lon, -lat );
-            Quaternion  qpos = geoit.quaternion();
+            GeoDataPoint  geoit( lon, -lat );
+            Quaternion    qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF( (double)(m_imageWidth / 2 + m_radius * qpos.v[Q_X]),
-                                      (double)(m_imageHeight / 2 - m_radius * qpos.v[Q_Y]) );
-            //qDebug() << "Radius: " << m_radius
-            //         << "QPointF(" << (double)(m_imageWidth / 2 + m_radius*qpos.v[Q_X])+1
-            //        << ", " << (double)(m_imageHeight / 2 + m_radius*qpos.v[Q_Y])+1 << ")";
+            m_currentPoint = QPointF( (double)(imgWidth / 2 + radius * qpos.v[Q_X]),
+                                      (double)(imgHeight / 2 - radius * qpos.v[Q_Y]) );
+            //qDebug() << "Radius: " << radius
+            //         << "QPointF(" << (double)(imgWidth / 2 + radius*qpos.v[Q_X])+1
+            //        << ", " << (double)(imgHeight / 2 + radius*qpos.v[Q_Y])+1 << ")";
 
             // Take care of horizon crossings if horizon is visible.
             m_lastVisible = m_currentlyVisible;
@@ -268,7 +278,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *view
             }
 
             if (m_currentlyVisible != m_lastVisible) {
-                m_polygon << horizonPoint();
+                m_polygon << horizonPoint( viewport );
 
                 if (m_polygon.size() >= 2) {
                     append(m_polygon);
@@ -291,22 +301,27 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim, ViewParams *view
             m_lastPoint = m_currentPoint;
         }
 
-        if (m_polygon.size() >= 2) {
+        if ( m_polygon.size() >= 2 ) {
             append(m_polygon);
         }
     }
 }
 
-void GridMap::rectangularCreateCircle( double val, SphereDim dim, ViewParams *viewParams, double cutOff )
+void GridMap::rectangularCreateCircle( double val, SphereDim dim,
+                                       int precision,
+                                       ViewportParams *viewport, double cutOff )
 {
     // Only used in spherical projection.
+    Q_UNUSED( precision );
     Q_UNUSED( cutOff );
 
     // Calculate translation of center point
-    double centerLon, centerLat;
-    viewParams->centerCoordinates( centerLon, centerLat );
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
 
-    double       rad2Pixel  = (float)( 2 * m_radius ) / M_PI;
+    double  radius    = viewport->radius();
+    double  rad2Pixel = (float)( 2 * radius ) / M_PI;
     m_polygon.clear();
 
     if ( dim == Latitude ) {
@@ -316,22 +331,23 @@ void GridMap::rectangularCreateCircle( double val, SphereDim dim, ViewParams *vi
         append( m_polygon );
     }
     else {
-        float beginY = m_imageHeight / 2 - m_radius + centerLat * rad2Pixel;
-        float endY   = beginY + 2 * m_radius;
+        float  beginY = m_imageHeight / 2 - radius + centerLat * rad2Pixel;
+        float  endY   = beginY + 2 * radius;
         if ( beginY < 0 ) 
             beginY = 0;
         if ( endY > m_imageHeight )
             endY = m_imageHeight ;
 
         float x = m_imageWidth / 2 + ( val - centerLon ) * rad2Pixel;
-        while ( x > 4 * m_radius ) 
-            x -= 4 * m_radius;
+        while ( x > 4 * radius ) 
+            x -= 4 * radius;
         while ( x < m_imageWidth ) {
-            QPointF beginPoint( x , beginY );
-            QPointF endPoint( x , endY );
-            m_polygon<<beginPoint<<endPoint;
-            x+=4*m_radius;
-            append(m_polygon);
+            QPointF  beginPoint( x , beginY );
+            QPointF  endPoint( x , endY );
+            m_polygon << beginPoint << endPoint;
+            append( m_polygon );
+
+            x += 4 * radius;
             m_polygon.clear();
         }
     }
@@ -348,7 +364,6 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
     painter->setPen(m_pen);
 
     ScreenPolygon::Vector::const_iterator  itEndPolygon = end();
-
     for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); 
           itPolygon != itEndPolygon;
           ++itPolygon )
@@ -361,7 +376,30 @@ void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
 }
 
 
-const QPointF GridMap::horizonPoint()
+int GridMap::getPrecision( ViewportParams *viewport )
+{
+    int  radius = viewport->radius();
+
+    if ( radius > 3200 ) {
+        return 40;
+    } 
+    else if ( radius > 1600 ) {
+        return 30;
+    }	
+    else if ( radius >  700 ) {
+        return 30;
+    }	
+    else if ( radius >  400 ) {
+        return 20;
+    }	
+    else if ( radius >  100 ) {
+        return 10;
+    }
+
+    return 10;
+}
+
+const QPointF GridMap::horizonPoint( ViewportParams *viewport)
 {
     // qDebug("Interpolating");
     double  xa = 0;
@@ -370,14 +408,15 @@ const QPointF GridMap::horizonPoint()
     xa = m_currentPoint.x() - ( m_imageWidth / 2 ) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
-    double  radicant = (double)(m_radius) * (double)( m_radius) - xa*xa;
+    double  radius   = (double)(viewport->radius());
+    double  radicant = radius * radius - xa * xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
     if ( ( m_currentPoint.y() - ( m_imageHeight / 2 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (double)m_imageWidth / 2  + xa,
+    return QPointF( (double)m_imageWidth  / 2 + xa,
                     (double)m_imageHeight / 2 + ya );
 }
 
@@ -387,6 +426,6 @@ void GridMap::resizeMap( int width, int height )
 {
     m_imageWidth  = width;
     m_imageHeight = height;
-    m_imageRadius     = ( m_imageWidth * m_imageWidth / 4
-                          + m_imageHeight * m_imageHeight / 4 );
+    m_imageRadius = ( m_imageWidth * m_imageWidth / 4
+                      + m_imageHeight * m_imageHeight / 4 );
 }
