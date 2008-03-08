@@ -22,7 +22,6 @@
 #ifndef GEOSCENESETTINGS_H
 #define GEOSCENESETTINGS_H
 
-#include "GeoSceneName.h"
 
 /**
  * @short Settings of a GeoScene document.

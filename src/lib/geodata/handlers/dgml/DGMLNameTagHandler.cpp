@@ -25,6 +25,7 @@
 
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"
+#include "GeoSceneHead.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -41,8 +42,17 @@ DGMLNameTagHandler::~DGMLNameTagHandler()
 
 GeoNode* DGMLNameTagHandler::parse(GeoParser& parser) const
 {
+    // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Name));
-
     qDebug() << "Parsed <Name> start!";    
+
+    // Checking for parent item
+    GeoStackItem parentItem = parser.parentElement();
+    if ( parentItem.qualifiedName().first == dgmlTag_Head )
+    {
+        GeoSceneHead* head = parentItem.nodeAs<GeoSceneHead>();
+        if ( head != 0 ) 
+            head->setName(parser.readElementText());
+    }
     return 0;
 }

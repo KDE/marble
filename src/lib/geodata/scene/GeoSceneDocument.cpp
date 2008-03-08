@@ -31,7 +31,7 @@ GeoSceneDocument::~GeoSceneDocument()
 {
 }
 
-const GeoSceneHead& GeoSceneDocument::head() const
+GeoSceneHead& GeoSceneDocument::head()
 {
     return m_head;
 }

@@ -22,6 +22,7 @@
 #include "GeoSceneHead.h"
 
 GeoSceneHead::GeoSceneHead()
+    : m_name( "" )
 {
     /* NOOP */
 }
@@ -29,4 +30,24 @@ GeoSceneHead::GeoSceneHead()
 GeoSceneHead::~GeoSceneHead()
 {
     /* NOOP */
+}
+
+const QString GeoSceneHead::name() const
+{
+    return m_name;
+}
+
+void GeoSceneHead::setName( const QString& name )
+{
+    m_name = name;
+}
+
+const QString GeoSceneHead::description() const
+{
+    return m_description;
+}
+
+void GeoSceneHead::setDescription( const QString& description )
+{
+    m_description = description;
 }

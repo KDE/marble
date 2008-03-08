@@ -111,7 +111,8 @@ GeoStackItem GeoParser::parentElement(unsigned int depth)
 
 void GeoParser::parseDocument()
 {
-    Q_ASSERT(isStartElement());
+//    Commented out to be able to execute "parser.readElementText()"
+//    Q_ASSERT(isStartElement());
 
     while (!atEnd()) {
         readNext();

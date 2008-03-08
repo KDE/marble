@@ -83,7 +83,11 @@ int main(int argc, char** argv)
     if (document->isGeoDataDocument())
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
     else if (document->isGeoSceneDocument())
+    {
+        qDebug() << "Name:" << static_cast<GeoSceneDocument*>(document)->head().name(); 
+        qDebug() << "Description:" << static_cast<GeoSceneDocument*>(document)->head().description(); 
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
+    }
     else {
         // A parsed document should either be a GeoDataDocument or a GeoSceneDocument!
         Q_ASSERT(false);

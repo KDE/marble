@@ -24,7 +24,7 @@
 #include "DGMLDocumentTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "GeoParser.h"
+#include "GeoSceneParser.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -44,5 +44,5 @@ GeoNode* DGMLDocumentTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));
 
     qDebug() << "Parsed <Document> start!";    
-    return 0;
+    return geoSceneDoc(parser);
 }

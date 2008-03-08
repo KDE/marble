@@ -1,3 +1,19 @@
+2008-03-08  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler.cpp:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/parser/GeoParser.cpp:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSettings.h:
+    * src/lib/geodata/scene/GeoSceneDocument.{cpp,h}:
+
+    Adding Name and Description tag - description tag doesn't get 
+    recognized properly due to parent identification not working 
+    correctly yet ...
+
 2008-03-07  Inge Wallin  <inge@lysator.liu.se>
 
 	Enable the new projection based measuretool.

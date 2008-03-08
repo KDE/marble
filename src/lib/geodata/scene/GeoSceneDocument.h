@@ -29,14 +29,15 @@
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GeoSceneDocument : public GeoDocument {
+class GeoSceneDocument : public GeoDocument,
+                         public GeoNode {
 public:
     GeoSceneDocument();
     ~GeoSceneDocument();
 
     virtual bool isGeoSceneDocument() const { return true; }
 
-    const GeoSceneHead& head() const;
+    GeoSceneHead& head();
 
 protected:
     GeoSceneHead m_head;

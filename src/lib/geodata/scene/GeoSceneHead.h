@@ -22,20 +22,26 @@
 #ifndef GEOSCENEHEAD_H
 #define GEOSCENEHEAD_H
 
-#include "GeoSceneName.h"
+#include <QtCore/QString>
+
+#include "GeoDocument.h"
 
 /**
  * @short General properties and identifiers of a GeoScene document.
  */
-class GeoSceneHead {
+class GeoSceneHead : public GeoNode {
 public:
     GeoSceneHead();
     ~GeoSceneHead();
 
-    const GeoSceneName& name() const;
+    const QString name() const;
+    void setName( const QString& );
+    const QString description() const;
+    void setDescription( const QString& );
 
 protected:
-    GeoSceneName m_name;
+    QString m_name;
+    QString m_description;
 };
 
 
