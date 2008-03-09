@@ -263,26 +263,6 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
                                     ViewportParams *viewport,
                                     bool antialiasing )
 {
-#if 1
-    drawPath( painter, prevqpos, qpos, viewport, antialiasing );
-#else
-    switch( viewport->projection() ) {
-        case Spherical:
-            sphericalDrawDistancePath(   painter, prevqpos, qpos, viewport, antialiasing );
-            break;
-        case Equirectangular:
-            rectangularDrawDistancePath( painter, prevqpos, qpos, viewport, antialiasing );
-            break;
-    }
-#endif
-}
-
-void MeasureTool::drawPath( ClipPainter *painter,
-                            Quaternion   prevqpos,
-                            Quaternion   qpos,
-                            ViewportParams *viewport,
-                            bool antialiasing )
-{
     Q_UNUSED( antialiasing );
 
     Quaternion  itpos;
@@ -314,6 +294,7 @@ void MeasureTool::drawPath( ClipPainter *painter,
     painter->drawPolyline( distancePath );
 }
 
+#if 0
 void MeasureTool::sphericalDrawDistancePath( ClipPainter *painter,
                                              Quaternion   prevqpos,
                                              Quaternion   qpos,
@@ -430,7 +411,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
 
     drawAndRepeatDistancePath( painter, distancePath );
 }
-
+#endif
 void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
                                              const QPolygonF distancePath )
 {

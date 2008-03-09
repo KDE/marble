@@ -68,11 +68,6 @@ class MeasureTool : public QObject
                             Quaternion, Quaternion,
                             ViewportParams *viewport,
                             bool antialiasing );
-    void drawPath( ClipPainter *painter,
-                   Quaternion   prevqpos,
-                   Quaternion   qpos,
-                   ViewportParams *viewport,
-                   bool antialiasing );
 
     void  sphericalDrawDistancePath( ClipPainter* painter,
                                      Quaternion, Quaternion,
