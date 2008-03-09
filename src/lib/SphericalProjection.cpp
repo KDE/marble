@@ -35,8 +35,8 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
     if ( coordType == originalCoordinates )
 	p.rotateAroundAxis( params->planetAxis().inverse() );
  
-    x = (int)( params->width() / 2   + (double)( params->radius() ) * p.v[Q_X] );
-    y = (int)( params->height() / 2  - (double)( params->radius() ) * p.v[Q_Y] );
+    x = (int)( params->width()  / 2 + (double)( params->radius() ) * p.v[Q_X] );
+    y = (int)( params->height() / 2 - (double)( params->radius() ) * p.v[Q_Y] );
  
     return p.v[Q_Z] > 0;
 }

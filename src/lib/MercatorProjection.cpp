@@ -46,8 +46,8 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     params->centerCoordinates( centerLon, centerLat );
     double  rad2Pixel = 2 * params->radius() / M_PI;
  
-    x = (int)( params->width()  / 2 + ( lon + centerLon ) * rad2Pixel );
-    y = (int)( params->height() / 2 - rad2Pixel * (centerLat - atanh( sin( lat ) ) ) );
+    x = (int)( params->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( params->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
 
     return true;
 }
@@ -71,15 +71,14 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     // FIXME: What is this magic number??
     //        Hmm, it must be the cutoff latitude, outside of which is not
     //        shown.  Create a const double of #define for this!
-    if ( fabs(lat) >=  85.05113 * DEG2RAD )
+    if ( fabs( lat ) >=  85.05113 * DEG2RAD )
         return false;
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)( params->width()  / 2 + rad2Pixel * ( centerLon - lon ) );
-    y = (int)( params->height() / 2 - rad2Pixel * ( centerLat - atanh( sin(lat) ) ) );
+    x = (int)( params->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( params->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
 
-    // Skip placemarks that are outside the screen area
-    //
+    // Skip placemarks that are outside the screen area.
     if ( ( y >= 0 && y < params->height() )
          && ( ( x >= 0 && x < params->width() ) 
               || (x - 4 * params->radius() >= 0

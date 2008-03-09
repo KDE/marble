@@ -61,8 +61,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     geopoint.geoCoordinates( lon, lat );
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)(params->width()  / 2 - rad2Pixel * (centerLon - lon));
-    y = (int)(params->height() / 2 + rad2Pixel * (centerLat - lat));
+    x = (int)(params->width()  / 2 + rad2Pixel * (lon - centerLon));
+    y = (int)(params->height() / 2 - rad2Pixel * (lat - centerLat));
 
     // Skip placemarks that are outside the screen area
     //

@@ -1,5 +1,13 @@
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
+	Improve Mercator layout esp. of placemarks significantly.
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Fix code
+	layout
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Make
+	projection calculations look alike over the projections
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Fix
+	projection calculation
+
 	Continue towards pure Projection usage.
 	* src/lib/MeasureTool.{h,cpp} (drawPath): Remove function
 
