@@ -1,7 +1,13 @@
 2008-03-09  Inge Wallin  <ingwa@localhost.localdomain>
 
+	Unify painting of Measure Paths.  Now also works on Mercator
+	* src/lib/MeasureTool.cpp (paintMeasurePoints): use projection
+	independent code to paint the paths
+	(sphericalPaintMeasurePoints): remove code to draw paths
+	(rectangularPaintMeasurePoints): remove code to draw paths
+	
 	Unify GridMap::createCircles.  Not fully projection'ed yet.
-	* src/lib/GridMap.cpp (createCircles): New unified code
+	* src/lib/GridMap.{h,cpp} (createCircles): New unified code
 	(sphericalCreateCircles): removed
 	(rectangularCreateCircles): removed
 	(rectangularCreateCircle): handle full circles instead of half

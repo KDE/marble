@@ -57,48 +57,26 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
     if ( m_pMeasurePointList.isEmpty() )
         return;
 
-    switch( viewport->projection() ) {
-        case Spherical:
-            sphericalPaintMeasurePoints( painter, viewport, antialiasing );
-            break;
-        case Equirectangular:
-            rectangularPaintMeasurePoints( painter, viewport, antialiasing );
-            break;
-    }
-
-    if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, m_totalDistance );
-}
-
-void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, 
-                                               ViewportParams *viewport,
-                                               bool antialiasing )
-{
-    int  x = 0;
-    int  y = 0;
-
-    Quaternion  invplanetAxis = viewport->planetAxis().inverse();
-    Quaternion  qpos;
-    Quaternion  prevqpos;
-
-    if ( antialiasing == true )
-        painter->setRenderHint( QPainter::Antialiasing, true );
+    // Prepare the painter for the paths.
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
     painter->setPen( m_pen );
 
-    QVector<GeoDataPoint*>::const_iterator  it;
-
+    // Paint the paths and calculate the total length
     m_totalDistance = 0.0;
-
     double  lon = 0.0;
     double  lat = 0.0;
     double  prevLon = 0.0;
     double  prevLat = 0.0;
+    Quaternion  qpos;
+    Quaternion  prevqpos;
+
+    QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           it++ )
     {
         qpos = (*it)->quaternion();
-        qpos.rotateAroundAxis( invplanetAxis );
+        //qpos.rotateAroundAxis( invplanetAxis );
 
         (*it)->geoCoordinates( lon, lat );
 
@@ -114,9 +92,36 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
         prevLat  = lat;
     }
 
+    // Paint the Measure Points
+    switch( viewport->projection() ) {
+        case Spherical:
+            sphericalPaintMeasurePoints( painter, viewport, antialiasing );
+            break;
+        case Equirectangular:
+            rectangularPaintMeasurePoints( painter, viewport, antialiasing );
+            break;
+    }
+
+    // Paint the total distance in the upper left corner.
+    if ( m_pMeasurePointList.size() > 1 )
+        paintTotalDistanceLabel( painter, m_totalDistance );
+}
+
+void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, 
+                                               ViewportParams *viewport,
+                                               bool antialiasing )
+{
+    int  x = 0;
+    int  y = 0;
+
+    Quaternion  invplanetAxis = viewport->planetAxis().inverse();
+    Quaternion  qpos;
+
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
 
+    // Paint the marks.
+    QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           it++ )
@@ -155,50 +160,22 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
     m_radius    = viewport->radius();
     m_rad2Pixel = 2 * m_radius / M_PI;
 
-    Quaternion  qpos;
-    Quaternion  prevqpos;
 
-    if ( antialiasing == true )
-        painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->setPen( m_pen );
-
-    QVector<GeoDataPoint*>::const_iterator  it;
-
-    m_totalDistance = 0.0;
-
-    double  lon = 0.0;
-    double  lat = 0.0;
-    double  prevLon = 0.0;
-    double  prevLat = 0.0;
-    for ( it = m_pMeasurePointList.constBegin();
-          it != m_pMeasurePointList.constEnd();
-          it++ )
-    {
-        qpos = (*it)->quaternion();
-
-        (*it)->geoCoordinates( lon, lat );
-
-        if ( it!= m_pMeasurePointList.constBegin() ) {
-            m_totalDistance += acos( sin( prevLat ) * sin( lat )
-                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
-
-            drawDistancePath( painter, prevqpos, qpos, viewport, antialiasing );
-        }
-
-        prevqpos = qpos;
-        prevLon  = lon; 
-        prevLat  = lat;
-    }
-
+    // FIXME: wtf?
     if ( antialiasing == true )
         painter->setRenderHint( QPainter::Antialiasing, false );
 
+    Quaternion  qpos;
+    QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin(); 
           it != m_pMeasurePointList.constEnd();
           it++ )
     {
+        double  lon = 0.0;
+        double  lat = 0.0;
+
         qpos = (*it)->quaternion();
-        qpos.getSpherical(lon,lat);
+        qpos.getSpherical( lon, lat );
 
         x = (int)( viewport->width()  / 2
                    - ( m_centerLon - lon ) * m_rad2Pixel );
@@ -280,9 +257,8 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
         if ( viewport->currentProjection()
 	     ->screenCoordinates( lon, lat, viewport,
 				  x, y,
-				  mappedCoordinates ) )
+				  originalCoordinates /*mappedCoordinates*/ ) )
         {
-            //qDebug() << "(x,y): " << x << y;
             //paintMark( painter, x, y );
             distancePath << QPointF( x, y );
         }
@@ -295,38 +271,9 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
 }
 
 #if 0
-void MeasureTool::sphericalDrawDistancePath( ClipPainter *painter,
-                                             Quaternion   prevqpos,
-                                             Quaternion   qpos,
-                                             ViewportParams *viewport,
-                                             bool antialiasing )
-{
-    Q_UNUSED( antialiasing );
-
-    int  imgwidth  = viewport->width();
-    int  imgheight = viewport->height();
-    int  radius    = viewport->radius();
-
-    Quaternion  itpos;
-    QPolygonF   distancePath;
-    for ( int i = 0; i < 21; ++i ) {
-        double  t = (double)(i) / 20.0;
-
-        // Let itpos be ... FIXME
-        itpos.slerp( prevqpos, qpos, t );
-
-        if ( itpos.v[Q_Z] > 0 ) {
-            double  x = (double)(imgwidth  / 2) + (double)(radius) * itpos.v[Q_X];
-            double  y = (double)(imgheight / 2) - (double)(radius) * itpos.v[Q_Y];
-
-            // paintMark( painter, x, y );
-            distancePath << QPointF( x, y );
-        }
-    }
-
-    painter->drawPolyline( distancePath );
-}
-
+// FIXME: Don't remove this yet, since we probably want to add
+//        multiple drawing of the distance paths for projections that
+//        have repeatX() == true.
 void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
                                                Quaternion   prevqpos,
                                                Quaternion   qpos,
