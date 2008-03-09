@@ -35,12 +35,21 @@ public:
     ~GeoSceneHead();
 
     const QString name() const;
-    void setName( const QString& );
+    void setName( const QString& name );
+    const QString target() const;
+    void setTarget( const QString& target );
+    const QString theme() const;
+    void setTheme( const QString& theme );
+    const QString icon() const;
+    void setIcon( const QString& icon );
     const QString description() const;
     void setDescription( const QString& );
 
 protected:
     QString m_name;
+    QString m_target;
+    QString m_theme;
+    QString m_icon;
     QString m_description;
 };
 

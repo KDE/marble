@@ -55,6 +55,7 @@ const char* dgmlTag_Settings = "settings";
 const char* dgmlTag_Target = "target";
 const char* dgmlTag_Text = "text";
 const char* dgmlTag_Texture = "texture";
+const char* dgmlTag_Theme = "theme";
 const char* dgmlTag_Section = "section";
 const char* dgmlTag_Sourcedir = "sourcedir";
 const char* dgmlTag_Sourcefile = "sourcefile";

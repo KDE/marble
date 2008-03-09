@@ -1,3 +1,15 @@
+2008-03-09  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/handlers/dgml/DGMLThemeTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLTargetTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.{cpp,h}:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:
+
+    Adding Theme, Target and Icon tag.
+
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Store if a projection repeats in X direction in the Projection.

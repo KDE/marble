@@ -42,6 +42,36 @@ void GeoSceneHead::setName( const QString& name )
     m_name = name;
 }
 
+const QString GeoSceneHead::target() const
+{
+    return m_target;
+}
+
+void GeoSceneHead::setTarget( const QString& target )
+{
+    m_target = target;
+}
+
+const QString GeoSceneHead::theme() const
+{
+    return m_theme;
+}
+
+void GeoSceneHead::setTheme( const QString& theme )
+{
+    m_theme = theme;
+}
+
+const QString GeoSceneHead::icon() const
+{
+    return m_icon;
+}
+
+void GeoSceneHead::setIcon( const QString& icon )
+{
+    m_icon = icon;
+}
+
 const QString GeoSceneHead::description() const
 {
     return m_description;

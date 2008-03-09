@@ -40,6 +40,9 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLSettingsTagHandler.cpp
         geodata/handlers/dgml/DGMLLegendTagHandler.cpp
         geodata/handlers/dgml/DGMLNameTagHandler.cpp
+        geodata/handlers/dgml/DGMLTargetTagHandler.cpp
+        geodata/handlers/dgml/DGMLThemeTagHandler.cpp
+        geodata/handlers/dgml/DGMLIconTagHandler.cpp
         geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp
         geodata/handlers/dgml/DGMLPropertyTagHandler.cpp
         geodata/handlers/dgml/DGMLElementDictionary.cpp
