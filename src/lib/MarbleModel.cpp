@@ -362,7 +362,6 @@ void MarbleModelPrivate::resize( int width, int height )
     }
 
     m_veccomposer->resizeMap( width, height );
-    m_gridmap->resizeMap( width, height );
 }
 
 
@@ -421,9 +420,15 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         d->m_veccomposer->paintVectorMap( painter, viewParams );
     }
 
-    // Paint the grid around the earth.
+    // Paint the lon/lat grid around the earth.
     if ( viewParams->m_showGrid ) {
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );
+
+        // FIXME: Why would the createFoo() functions be exposed in
+        //        the class GridMap?  Shouldn't just a call to
+        //        paintGrid() or paintEquator be enough?  The internal
+        //        create...() functions should be private and not
+        //        exposed to the outside.
 
         // Create and paint a grid
         d->m_gridmap->createGrid( viewParams->viewport() );
@@ -433,13 +438,13 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( viewParams->viewport() );
         gridpen.setStyle( Qt::DotLine );
-//        gridpen.setWidthF( 1.5f );
+        // gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, false );
 
-        // Create Equator
+        // Create and paint Equator
         d->m_gridmap->createEquator( viewParams->viewport() );
-//        gridpen.setWidthF( 2.0f );
+        // gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
         d->m_gridmap->paintGridMap( painter, false );
     }

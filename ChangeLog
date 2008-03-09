@@ -1,3 +1,10 @@
+2008-03-09  Inge Wallin  <inge@lysator.liu.se>
+
+	Get rid of unnecessary members in GridMap.
+	* src/lib/GridMap.{h,cpp} (resizeMap): remove function
+	(m_imageWidth, m_imageHeight, m_imageRadius): remove members
+	* src/lib/MarbleModel.cpp (resize): Don't call Gridmap::resizeMap
+
 2008-03-08  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify the GridMap

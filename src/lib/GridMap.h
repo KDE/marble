@@ -38,8 +38,6 @@ class GridMap : public ScreenPolygon::Vector
 
     void paintGridMap(ClipPainter * painter, bool );
 
-    void resizeMap( int width, int height );
-
     void setPen ( const QPen & p )  { m_pen = p; }
 
     enum SphereDim { Longitude, Latitude };
@@ -70,10 +68,6 @@ class GridMap : public ScreenPolygon::Vector
     matrix   m_planetAxisMatrix;
 
     ScreenPolygon m_polygon;
-
-    int      m_imageWidth;
-    int      m_imageHeight;
-    int      m_imageRadius;
 
     QPointF  m_currentPoint;
     QPointF  m_lastPoint; 

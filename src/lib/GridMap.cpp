@@ -35,10 +35,6 @@ const double  PIHALF    = M_PI / 2;
 
 GridMap::GridMap()
 {
-    m_imageWidth  = 0;
-    m_imageHeight = 0;
-    m_imageRadius = 0;
-
     //	Initialising booleans for horizoncrossing
     m_lastVisible      = false;
     m_currentlyVisible = false;
@@ -231,9 +227,9 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim,
     double offset = 0.0;
 
     // Some convenience variables
-    int  radius    = viewport->radius();
     int  imgWidth  = viewport->width();
     int  imgHeight = viewport->height();
+    int  radius    = viewport->radius();
 
     const int steps = (int) ( cutCoeff * quartSteps );
     for ( int i = 0; i < 4; ++i ) {
@@ -277,11 +273,11 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim,
                                        m_currentPoint.y() );
             }
 
-            if (m_currentlyVisible != m_lastVisible) {
+            if ( m_currentlyVisible != m_lastVisible ) {
                 m_polygon << horizonPoint( viewport );
 
-                if (m_polygon.size() >= 2) {
-                    append(m_polygon);
+                if ( m_polygon.size() >= 2 ) {
+                    append( m_polygon );
                 }
 
                 m_polygon.clear();
@@ -302,7 +298,7 @@ void GridMap::sphericalCreateCircle( double val, SphereDim dim,
         }
 
         if ( m_polygon.size() >= 2 ) {
-            append(m_polygon);
+            append( m_polygon );
         }
     }
 }
@@ -320,33 +316,48 @@ void GridMap::rectangularCreateCircle( double val, SphereDim dim,
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
+    // Convenience variables
+    int     imgHeight = viewport->height();
+    int     imgWidth  = viewport->width();
     double  radius    = viewport->radius();
     double  rad2Pixel = (float)( 2 * radius ) / M_PI;
+
     m_polygon.clear();
 
     if ( dim == Latitude ) {
-        QPointF beginPoint( 0.0f, m_imageHeight / 2 + ( centerLat - val ) * rad2Pixel );
-        QPointF endPoint( m_imageWidth, m_imageHeight / 2 + ( centerLat - val ) * rad2Pixel );
-        m_polygon << beginPoint << endPoint;
+        double   y = imgHeight / 2 + ( centerLat - val ) * rad2Pixel;
+        QPointF  startPoint( 0.0f,         y );
+        // FIXME: This will be slightly more complicated if we don't
+        //        always allow repetition in the X direction
+        QPointF  endPoint(   imgWidth, y );
+
+        m_polygon << startPoint << endPoint;
         append( m_polygon );
     }
     else {
-        float  beginY = m_imageHeight / 2 - radius + centerLat * rad2Pixel;
-        float  endY   = beginY + 2 * radius;
+        // dim == Longitude
+
+        double  x      = imgWidth / 2 + ( val - centerLon ) * rad2Pixel;
+        float   beginY = imgHeight / 2 - radius + centerLat * rad2Pixel;
+        float   endY   = beginY + 2 * radius;
+
         if ( beginY < 0 ) 
             beginY = 0;
-        if ( endY > m_imageHeight )
-            endY = m_imageHeight ;
+        if ( endY > imgHeight )
+            endY = imgHeight ;
 
-        float x = m_imageWidth / 2 + ( val - centerLon ) * rad2Pixel;
+        // If we are far zoomed out, then there may be repetition in
+        // the X direction.
         while ( x > 4 * radius ) 
             x -= 4 * radius;
-        while ( x < m_imageWidth ) {
-            QPointF  beginPoint( x , beginY );
-            QPointF  endPoint( x , endY );
-            m_polygon << beginPoint << endPoint;
+        while ( x < imgWidth ) {
+            QPointF  startPoint( x, beginY );
+            QPointF  endPoint(   x, endY );
+
+            m_polygon << startPoint << endPoint;
             append( m_polygon );
 
+            // Set up for next pass through the loop
             x += 4 * radius;
             m_polygon.clear();
         }
@@ -405,7 +416,7 @@ const QPointF GridMap::horizonPoint( ViewportParams *viewport)
     double  xa = 0;
     double  ya = 0;
 
-    xa = m_currentPoint.x() - ( m_imageWidth / 2 ) ;
+    xa = m_currentPoint.x() - ( viewport->width() / 2 ) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
     double  radius   = (double)(viewport->radius());
@@ -413,19 +424,9 @@ const QPointF GridMap::horizonPoint( ViewportParams *viewport)
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
-    if ( ( m_currentPoint.y() - ( m_imageHeight / 2 ) ) < 0 )
+    if ( ( m_currentPoint.y() - ( viewport->height() / 2 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (double)m_imageWidth  / 2 + xa,
-                    (double)m_imageHeight / 2 + ya );
-}
-
-
-
-void GridMap::resizeMap( int width, int height )
-{
-    m_imageWidth  = width;
-    m_imageHeight = height;
-    m_imageRadius = ( m_imageWidth * m_imageWidth / 4
-                      + m_imageHeight * m_imageHeight / 4 );
+    return QPointF( (double)viewport->width()  / 2 + xa,
+                    (double)viewport->height() / 2 + ya );
 }
