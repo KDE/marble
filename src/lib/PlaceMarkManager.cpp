@@ -239,7 +239,7 @@ void PlaceMarkManager::saveFile( const QString& filename,
 
     for ( it = placeMarkContainer->constBegin();
           it != placeMarkContainer->constEnd();
-          it++ )
+          ++it )
     {
         out << (*it) -> name();
         (*it) -> coordinate(lon, lat, alt);
@@ -337,7 +337,7 @@ void PlaceMarkManager::updateCacheIndex()
 
         for ( QList <KMLDocument*>::const_iterator iterator = m_documentList.constBegin();
             iterator != m_documentList.constEnd();
-            iterator++ )
+            ++iterator )
         {
             const KMLDocument& document = * ( *iterator );
 

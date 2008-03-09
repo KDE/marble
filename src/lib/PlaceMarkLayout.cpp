@@ -132,7 +132,7 @@ QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& 
     QVector<VisiblePlaceMark*>::const_iterator  it;
     for ( it = m_paintOrder.constBegin();
           it != m_paintOrder.constEnd();
-          it++ )
+          ++it )
     {
         const VisiblePlaceMark  *mark = *it; // no cast
 
@@ -168,8 +168,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
             maxLabelHeight = textHeight; 
     }
 
-    for ( int i = 0; i < model->rowCount(); ++i )
-    {
+    for ( int i = 0; i < model->rowCount(); ++i ) {
         QModelIndex index = model->index( i, 0 );
 
         GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );

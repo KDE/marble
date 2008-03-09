@@ -73,7 +73,7 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
     QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
-          it++ )
+          ++it )
     {
         qpos = (*it)->quaternion();
         //qpos.rotateAroundAxis( invplanetAxis );
@@ -124,7 +124,7 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
     QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
-          it++ )
+          ++it )
     {
         qpos = (*it)->quaternion();
         qpos.rotateAroundAxis( invplanetAxis );
@@ -169,7 +169,7 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
     QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin(); 
           it != m_pMeasurePointList.constEnd();
-          it++ )
+          ++it )
     {
         double  lon = 0.0;
         double  lat = 0.0;
