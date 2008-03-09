@@ -18,6 +18,7 @@
 
 AbstractProjection::AbstractProjection()
 {
+    m_repeatX = false;
 }
 
 AbstractProjection::~AbstractProjection()

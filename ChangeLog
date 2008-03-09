@@ -1,5 +1,13 @@
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
+	Store if a projection repeats in X direction in the Projection.
+	* src/lib/AbstractProjection.h (repeatX): new function
+	(setRepeatX): new function
+	* src/lib/EquirectProjection.cpp (EquirectProjection): Set repeatX
+	to true
+	* src/lib/MercatorProjection.cpp (MercatorProjection): Set repeatX
+	to true
+
 	Improve Mercator layout esp. of placemarks significantly.
 	* src/lib/MercatorProjection.cpp (screenCoordinates): Fix code
 	layout

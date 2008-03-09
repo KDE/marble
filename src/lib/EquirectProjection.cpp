@@ -19,6 +19,7 @@
 EquirectProjection::EquirectProjection()
     : AbstractProjection()
 {
+    m_repeatX = true;
 }
 
 EquirectProjection::~EquirectProjection()

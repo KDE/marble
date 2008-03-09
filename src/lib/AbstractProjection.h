@@ -46,6 +46,9 @@ class AbstractProjection
 
     virtual ~AbstractProjection();
 
+    virtual bool  repeatX() const        { return m_repeatX; }
+    virtual void  setRepeatX( bool val ) { m_repeatX = val;  }
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position in radians
@@ -108,8 +111,10 @@ class AbstractProjection
                                  const ViewportParams *params,
                                  Quaternion &q ) = 0;
 
- private:
-    //AbstractProjectionPrivate  * const d;
+ protected:
+    //AbstractProjectionPrivate  * const d;  Not exported so no need.
+
+    bool m_repeatX;             // Map repeated in X direction.
 };
 
 

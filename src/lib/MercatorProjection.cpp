@@ -26,6 +26,7 @@ static double msvc_atanh(double x)
 MercatorProjection::MercatorProjection()
     : AbstractProjection()
 {
+    m_repeatX = true;
 }
 
 MercatorProjection::~MercatorProjection()
