@@ -46,7 +46,7 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <name>Atlas</name>
             <target>earth</target>
             <theme>srtm</theme>
-            <icon>srtm-preview.png</icon>
+            <icon pixmap="srtm-preview.png"/>
     
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->

@@ -24,10 +24,10 @@
 
 GeoSceneDocument::GeoSceneDocument()
     : GeoDocument()
-    , m_head(0)
-    , m_map(0)
-    , m_settings(0)
-    , m_legend(0)
+    , m_head(new GeoSceneHead)
+    , m_map(new GeoSceneMap)
+    , m_settings(new GeoSceneSettings)
+    , m_legend(new GeoSceneLegend)
 {
 }
 
@@ -42,32 +42,20 @@ GeoSceneDocument::~GeoSceneDocument()
 
 GeoSceneHead* GeoSceneDocument::head() const
 {
-    if (!m_head)
-        m_head = new GeoSceneHead;
-
     return m_head;
 }
 
 GeoSceneMap* GeoSceneDocument::map() const
 {
-    if (!m_map)
-        m_map = new GeoSceneMap;
-
     return m_map;
 }
 
 GeoSceneSettings* GeoSceneDocument::settings() const
 {
-    if (!m_settings)
-        m_settings = new GeoSceneSettings;
-
     return m_settings;
 }
 
 GeoSceneLegend* GeoSceneDocument::legend() const
 {
-    if (!m_legend)
-        m_legend = new GeoSceneLegend;
-
     return m_legend;
 }

@@ -22,7 +22,7 @@
 #include "GeoSceneHead.h"
 
 GeoSceneHead::GeoSceneHead()
-    : m_zoom(0),
+    : m_zoom(new GeoSceneZoom),
       m_name( "" ),
       m_target( "" ),
       m_theme( "" ),
@@ -40,9 +40,6 @@ GeoSceneHead::~GeoSceneHead()
 
 GeoSceneZoom* GeoSceneHead::zoom() const
 {
-    if (!m_zoom)
-        m_zoom = new GeoSceneZoom;
-
     return m_zoom;
 }
 
