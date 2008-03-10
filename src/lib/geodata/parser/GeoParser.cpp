@@ -25,7 +25,7 @@
 #include "GeoTagHandler.h"
 
 // Set to a value greather than 0, to dump parent node chain while parsing
-#define DUMP_PARENT_STACK 1
+#define DUMP_PARENT_STACK 0
 
 GeoParser::GeoParser(GeoDataGenericSourceType source)
     : QXmlStreamReader()
@@ -130,29 +130,38 @@ void GeoParser::parseDocument()
         }
 
         if (isStartElement()) {
-            GeoStackItem stackItem(qName, 0);
             bool processChildren = true;
-
+            GeoStackItem stackItem(qName, 0);
+        
             if (const GeoTagHandler* handler = GeoTagHandler::recognizes(qName)) {
                 stackItem.assignNode(handler->parse(*this));
                 processChildren = !isEndElement();
             }
 
-            m_nodeStack.push(stackItem);
+            // Only add GeoStackItem to the parent chain, if the tag handler for the current element
+            // possibly contains non-textual children. Consider following DGML snippet "<name>Test</name>" -
+            // the DGMLNameTagHandler assumes that <name> only contains textual children, and reads the
+            // joined value of all children using readElementText(). This implicates that tags like <name>
+            // don't contain any children that would need to be procesed using this parseDocument() function.
+            if (processChildren) {
+                m_nodeStack.push(stackItem);
 
 #if DUMP_PARENT_STACK > 0
-            dumpParentStack(name().toString(), m_nodeStack.size(), false);
+                dumpParentStack(name().toString(), m_nodeStack.size(), false);
 #endif
 
-            if (processChildren)
                 parseDocument();
-            else {
-                m_nodeStack.pop();
-
-#if DUMP_PARENT_STACK > 0
-                dumpParentStack(name().toString(), m_nodeStack.size(), true);
-#endif
             }
+#if DUMP_PARENT_STACK > 0
+            else {
+                // This is only used for debugging purposes.
+                m_nodeStack.push(stackItem);
+                dumpParentStack(name().toString(), m_nodeStack.size(), false);
+
+                m_nodeStack.pop();
+                dumpParentStack(name().toString(), m_nodeStack.size(), true);
+            }
+#endif
         }
     }
 }
