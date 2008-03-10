@@ -34,8 +34,8 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Customplugin;
     extern const char* dgmlTag_Dem;
     extern const char* dgmlTag_Description;
-    extern const char* dgmlTag_Dgml;
     extern const char* dgmlTag_Discrete;
+    extern const char* dgmlTag_Dgml;
     extern const char* dgmlTag_Document;
     extern const char* dgmlTag_Filter;
     extern const char* dgmlTag_Geodata;

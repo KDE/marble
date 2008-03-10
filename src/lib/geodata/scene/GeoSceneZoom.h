@@ -19,49 +19,31 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEHEAD_H
-#define GEOSCENEHEAD_H
-
-#include <QtCore/QString>
+#ifndef GEOSCENEZOOM_H
+#define GEOSCENEZOOM_H
 
 #include "GeoDocument.h"
-#include "GeoSceneZoom.h"
 
 /**
- * @short General properties and identifiers of a GeoScene document.
+ * @short Zoom properties of a GeoScene document.
  */
-class GeoSceneHead : public GeoNode {
+class GeoSceneZoom : public GeoNode {
 public:
-    GeoSceneHead();
-    ~GeoSceneHead();
+    GeoSceneZoom();
+    ~GeoSceneZoom();
 
-    const QString name() const;
-    void setName( const QString& name );
-    const QString target() const;
-    void setTarget( const QString& target );
-    const QString theme() const;
-    void setTheme( const QString& theme );
-    const QString icon() const;
-    void setIcon( const QString& icon );
-    const QString description() const;
-    void setDescription( const QString& );
-
-    const bool visible() const;
-    void setVisible( const bool visible );
-
-    GeoSceneZoom* zoom() const;
+    const int minimum() const;
+    void setMinimum( const int name );
+    const int maximum() const;
+    void setMaximum( const int target );
+    const bool discrete() const;
+    void setDiscrete( const bool theme );
 
 protected:
-    mutable GeoSceneZoom* m_zoom;
-
-    QString m_name;
-    QString m_target;
-    QString m_theme;
-    QString m_icon;
-    QString m_description;
-
-    bool m_visible;
+    int  m_minimum;
+    int  m_maximum;
+    bool m_discrete;
 };
 
 
-#endif // GEOSCENEHEAD_H
+#endif // GEOSCENEZOOM_H

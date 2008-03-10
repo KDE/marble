@@ -22,14 +22,28 @@
 #include "GeoSceneHead.h"
 
 GeoSceneHead::GeoSceneHead()
-    : m_name( "" )
+    : m_zoom(0),
+      m_name( "" ),
+      m_target( "" ),
+      m_theme( "" ),
+      m_icon( "" ),
+      m_description( "" ),
+      m_visible( true )
 {
     /* NOOP */
 }
 
 GeoSceneHead::~GeoSceneHead()
 {
-    /* NOOP */
+    delete m_zoom;
+}
+
+GeoSceneZoom* GeoSceneHead::zoom() const
+{
+    if (!m_zoom)
+        m_zoom = new GeoSceneZoom;
+
+    return m_zoom;
 }
 
 const QString GeoSceneHead::name() const
@@ -80,4 +94,14 @@ const QString GeoSceneHead::description() const
 void GeoSceneHead::setDescription( const QString& description )
 {
     m_description = description;
+}
+
+const bool GeoSceneHead::visible() const
+{
+    return m_visible;
+}
+
+void GeoSceneHead::setVisible( const bool visible )
+{
+    m_visible = visible;
 }

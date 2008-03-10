@@ -20,6 +20,7 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataStyleSelector.cpp
         geodata/scene/GeoSceneDocument.cpp
         geodata/scene/GeoSceneHead.cpp
+        geodata/scene/GeoSceneZoom.cpp
         geodata/scene/GeoSceneMap.cpp
         geodata/scene/GeoSceneSettings.cpp
         geodata/scene/GeoSceneLegend.cpp
@@ -44,6 +45,11 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLThemeTagHandler.cpp
         geodata/handlers/dgml/DGMLIconTagHandler.cpp
         geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp
+        geodata/handlers/dgml/DGMLVisibleTagHandler.cpp
+        geodata/handlers/dgml/DGMLZoomTagHandler.cpp
+        geodata/handlers/dgml/DGMLDiscreteTagHandler.cpp
+        geodata/handlers/dgml/DGMLMinimumTagHandler.cpp
+        geodata/handlers/dgml/DGMLMaximumTagHandler.cpp
         geodata/handlers/dgml/DGMLPropertyTagHandler.cpp
         geodata/handlers/dgml/DGMLElementDictionary.cpp
         geodata/handlers/dgml/DGMLAttributeDictionary.cpp

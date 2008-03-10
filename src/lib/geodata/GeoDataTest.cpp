@@ -85,11 +85,16 @@ int main(int argc, char** argv)
     else if (document->isGeoSceneDocument())
     {
         GeoSceneDocument *sceneDocument = static_cast<GeoSceneDocument*>(document);
-        qDebug() << "Name:" << sceneDocument->head()->name(); 
-        qDebug() << "Target:" << sceneDocument->head()->target(); 
-        qDebug() << "Theme:" << sceneDocument->head()->theme(); 
-        qDebug() << "Icon:" << sceneDocument->head()->icon(); 
-        qDebug() << "Description:" << sceneDocument->head()->description(); 
+        qDebug() << "Name: " << sceneDocument->head()->name(); 
+        qDebug() << "Target: " << sceneDocument->head()->target(); 
+        qDebug() << "Theme: " << sceneDocument->head()->theme(); 
+        qDebug() << "Icon: " << sceneDocument->head()->icon(); 
+        qDebug() << "Description: " << sceneDocument->head()->description(); 
+        qDebug() << "Visible: " << sceneDocument->head()->visible(); 
+        qDebug() << "Discrete: " << sceneDocument->head()->zoom()->discrete(); 
+        qDebug() << "Minimum: " << sceneDocument->head()->zoom()->minimum(); 
+        qDebug() << "Maximum: " << sceneDocument->head()->zoom()->maximum(); 
+
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }
     else {
