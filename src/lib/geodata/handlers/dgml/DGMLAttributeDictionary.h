@@ -26,7 +26,9 @@
 
 // Lists all known DGML 2.0 attributes
 // http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
+
 namespace GeoSceneAttributeDictionary {
+
     extern const char* dgmlAttr_nameSpace20;
 
     extern const char* dgmlAttr_bgcolor;

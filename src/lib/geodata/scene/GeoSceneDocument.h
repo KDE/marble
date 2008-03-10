@@ -24,6 +24,9 @@
 #define GEOSCENEDOCUMENT_H
 
 #include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
+#include "GeoSceneSettings.h"
+#include "GeoSceneLegend.h"
 #include "GeoDocument.h"
 
 /**
@@ -37,10 +40,16 @@ public:
 
     virtual bool isGeoSceneDocument() const { return true; }
 
-    GeoSceneHead* head() const;
+    GeoSceneHead*     head() const;
+    GeoSceneMap*      map() const;
+    GeoSceneSettings* settings() const;
+    GeoSceneLegend*   legend() const;
 
 protected:
-    mutable GeoSceneHead* m_head;
+    mutable GeoSceneHead*     m_head;
+    mutable GeoSceneMap*      m_map;
+    mutable GeoSceneSettings* m_settings;
+    mutable GeoSceneLegend*   m_legend;
 };
 
 

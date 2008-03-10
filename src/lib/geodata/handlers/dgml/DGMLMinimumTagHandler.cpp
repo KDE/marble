@@ -54,6 +54,10 @@ GeoNode* DGMLMinimumTagHandler::parse(GeoParser& parser) const
         {
             parentItem.nodeAs<GeoSceneZoom>()->setMinimum( parsedInt );
         }
+        else
+        {
+            parser.raiseError("Error: no valid value for Minimum.");
+        }
     }
 
     return 0;

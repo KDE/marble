@@ -54,6 +54,10 @@ GeoNode* DGMLMaximumTagHandler::parse(GeoParser& parser) const
         {
             parentItem.nodeAs<GeoSceneZoom>()->setMaximum( parsedInt );
         }
+        else
+        {
+            parser.raiseError("Error: no valid value for Maximum.");
+        }
     }
 
     return 0;

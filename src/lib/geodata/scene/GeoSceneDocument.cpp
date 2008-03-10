@@ -25,12 +25,19 @@
 GeoSceneDocument::GeoSceneDocument()
     : GeoDocument()
     , m_head(0)
+    , m_map(0)
+    , m_settings(0)
+    , m_legend(0)
 {
 }
 
 GeoSceneDocument::~GeoSceneDocument()
 {
     delete m_head;
+    delete m_map;
+    delete m_settings;
+    delete m_legend;
+
 }
 
 GeoSceneHead* GeoSceneDocument::head() const
@@ -39,4 +46,28 @@ GeoSceneHead* GeoSceneDocument::head() const
         m_head = new GeoSceneHead;
 
     return m_head;
+}
+
+GeoSceneMap* GeoSceneDocument::map() const
+{
+    if (!m_map)
+        m_map = new GeoSceneMap;
+
+    return m_map;
+}
+
+GeoSceneSettings* GeoSceneDocument::settings() const
+{
+    if (!m_settings)
+        m_settings = new GeoSceneSettings;
+
+    return m_settings;
+}
+
+GeoSceneLegend* GeoSceneDocument::legend() const
+{
+    if (!m_legend)
+        m_legend = new GeoSceneLegend;
+
+    return m_legend;
 }

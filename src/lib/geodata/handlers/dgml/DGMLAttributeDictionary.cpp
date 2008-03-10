@@ -21,7 +21,8 @@
 
 #include "DGMLAttributeDictionary.h"
 
-// One static list of all tag names, to avoid string comparisons all-over-the-place
+// One static list of all attribute names, to avoid string comparisons all-over-the-place
+
 namespace GeoSceneAttributeDictionary {
 
 const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
