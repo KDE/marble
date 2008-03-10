@@ -22,10 +22,12 @@
 #include "DGMLIconTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneHead.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Icon)
 
@@ -46,7 +48,7 @@ GeoNode* DGMLIconTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
-        parentItem.nodeAs<GeoSceneHead>()->setIcon(parser.readElementText());
+        parentItem.nodeAs<GeoSceneHead>()->setIcon( parser.attributes().value( dgmlAttr_pixmap ).toString() );
 
     return 0;
 }
