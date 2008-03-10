@@ -217,10 +217,10 @@ void MainWindow::printMapScreenShot()
 void MainWindow::showFullScreen( bool isChecked )
 {
     if ( isChecked ) {
-        QWidget::showFullScreen();
+        setWindowState( windowState() | Qt::WindowFullScreen ); // set
     }
     else {
-        showNormal();
+        setWindowState( windowState() & ~Qt::WindowFullScreen ); // reset
     }
 
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
