@@ -34,22 +34,10 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
+    // FIXME: Call this something else, since it also paints the paths.
+    //        Suggestion: paint()
     void  paintMeasurePoints( ClipPainter *painter, ViewportParams *viewport,
                               bool antialiasing );
-    void  sphericalPaintMeasurePoints ( ClipPainter *painter, 
-                                        ViewportParams *viewport,
-                                        bool antialiasing );
-    void  rectangularPaintMeasurePoints ( ClipPainter *painter,
-                                          ViewportParams *viewport,
-                                          bool antialiasing );
-
- private:
-	void  drawAndRepeatDistancePath( ClipPainter* painter,
-                                         const QPolygonF distancePath );
-	void  rectangularPaintMark( ClipPainter* painter, int x, int y,
-                                    int width, int height );
-        void  paintTotalDistanceLabel( ClipPainter *painter,
-                                       double totalDistance );
 
  public Q_SLOTS:
     void  addMeasurePoint( double lon, double lat ) {
@@ -59,25 +47,19 @@ class MeasureTool : public QObject
         m_pMeasurePointList.clear();
     }
 
- protected:
-    bool  testbug(); 
-    void  paintMark( ClipPainter* painter, int x, int y );
+ private:
+    void  paintDistancePoints( ClipPainter *painter, ViewportParams *viewport,
+			       bool antialiasing );
+    void  paintMark( ClipPainter* painter, ViewportParams *viewport,
+		     int x, int y );
     void  drawDistancePath( ClipPainter* painter,
                             Quaternion, Quaternion,
                             ViewportParams *viewport,
                             bool antialiasing );
+    void  paintTotalDistanceLabel( ClipPainter *painter,
+				   double totalDistance );
 
-#if 0
-    void  sphericalDrawDistancePath( ClipPainter* painter,
-                                     Quaternion, Quaternion,
-                                     ViewportParams *viewport,
-                                     bool antialiasing );
-
-    void  rectangularDrawDistancePath( ClipPainter* painter,
-                                       Quaternion, Quaternion, 
-                                       ViewportParams *viewport,
-                                       bool antialiasing );
-#endif
+    bool  testbug(); 
 
  private:
     // The list of points in the distance path.

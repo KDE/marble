@@ -47,6 +47,9 @@ MeasureTool::MeasureTool( QObject* parent )
 }
 
 
+// FIXME: Call this something more generic, since it paints both the
+//        points and the paths.
+//
 void MeasureTool::paintMeasurePoints( ClipPainter *painter, 
                                       ViewportParams *viewport,
                                       bool antialiasing )
@@ -90,33 +93,27 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
         prevLat  = lat;
     }
 
-    // Paint the Measure Points
-    switch( viewport->projection() ) {
-        case Spherical:
-            sphericalPaintMeasurePoints( painter, viewport, antialiasing );
-            break;
-        case Equirectangular:
-            rectangularPaintMeasurePoints( painter, viewport, antialiasing );
-            break;
-    }
+    // Paint the end points of the paths.
+    paintDistancePoints( painter, viewport, antialiasing );
 
     // Paint the total distance in the upper left corner.
     if ( m_pMeasurePointList.size() > 1 )
         paintTotalDistanceLabel( painter, totalDistance );
 }
 
-void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, 
-                                               ViewportParams *viewport,
-                                               bool antialiasing )
+void MeasureTool::paintDistancePoints( ClipPainter *painter, 
+				       ViewportParams *viewport,
+				       bool antialiasing )
 {
     int  x = 0;
     int  y = 0;
 
-    Quaternion  invplanetAxis = viewport->planetAxis().inverse();
+    //Quaternion  invplanetAxis = viewport->planetAxis().inverse();
     Quaternion  qpos;
 
-    if ( antialiasing == true )
-        painter->setRenderHint( QPainter::Antialiasing, false );
+    // Convenience variables
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
     // Paint the marks.
     QVector<GeoDataPoint*>::const_iterator  it;
@@ -124,114 +121,66 @@ void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter,
           it != m_pMeasurePointList.constEnd();
           ++it )
     {
+        double  lon;
+        double  lat;
+
         qpos = (*it)->quaternion();
-        qpos.rotateAroundAxis( invplanetAxis );
+        //qpos.rotateAroundAxis( invplanetAxis );
+        qpos.getSpherical( lon, lat );
 
-        if ( qpos.v[Q_Z] > 0 ) {
-
-            x = (int)( viewport->width()  / 2 
-                       + viewport->radius() * qpos.v[Q_X] );
-            y = (int)( viewport->height() / 2
-                       - viewport->radius() * qpos.v[Q_Y] );
-
+        if ( viewport->currentProjection()
+	     ->screenCoordinates( lon, lat, viewport,
+				  x, y,
+				  originalCoordinates /*mappedCoordinates*/ ) )
+	{
             // Don't process markers if they are outside the screen area.
             // FIXME: Some part of it may be visible anyway.
-            if ( x >= 0 && x < viewport->width() 
-                 && y >= 0 && y < viewport->height() )
+            if ( 0 <= x && x < width 
+                 && 0 <= y && y < height )
             {
-                paintMark( painter, x, y );
+                paintMark( painter, viewport, x, y );
             }
         }
     }
 }
 
-void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
-                                                 ViewportParams *viewport,
-                                                 bool antialiasing )
+void MeasureTool::paintMark( ClipPainter* painter, ViewportParams *viewport,
+			     int x, int y )
 {
-    int  x = 0;
-    int  y = 0;
+    const int MarkRadius = 5;
 
-    // Get the lon and lat of the center point
-    viewport->centerCoordinates( m_centerLon, m_centerLat );
-
-    m_radius    = viewport->radius();
-    double  rad2Pixel = 2 * m_radius / M_PI;
-
-
-    // FIXME: wtf?
-    if ( antialiasing == true )
-        painter->setRenderHint( QPainter::Antialiasing, false );
-
-    Quaternion  qpos;
-    QVector<GeoDataPoint*>::const_iterator  it;
-    for ( it = m_pMeasurePointList.constBegin(); 
-          it != m_pMeasurePointList.constEnd();
-          ++it )
-    {
-        double  lon = 0.0;
-        double  lat = 0.0;
-
-        qpos = (*it)->quaternion();
-        qpos.getSpherical( lon, lat );
-
-        x = (int)( viewport->width()  / 2
-                   - ( m_centerLon - lon ) * rad2Pixel );
-        y = (int)( viewport->height() / 2
-                   + ( m_centerLat - lat ) * rad2Pixel );
-
-        rectangularPaintMark( painter, x, y, 
-                              viewport->width(), viewport->height() );
-    }
-}
-
-void MeasureTool::paintTotalDistanceLabel( ClipPainter *painter, 
-                                           double totalDistance )
-{
-    QString  distanceString;
-    if ( totalDistance >= 1000.0 )
-        distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
-    else
-        distanceString = tr("Total Distance: %1 m").arg( totalDistance );
-
-    painter->setPen( QColor( Qt::black ) );
-    painter->setBrush( QColor( 192, 192, 192, 192 ) );
-
-    painter->drawRect( 10, 5, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
-    painter->setFont( m_font_regular );
-    painter->drawText( 15, 10 + m_fontascent, distanceString );
-}
-
-
-void MeasureTool::paintMark( ClipPainter* painter, int x, int y )
-{
-    int  halfsize = 5;
-
-    painter->setPen( QColor( Qt::white ) );
-    painter->drawLine( x - halfsize, y, x + halfsize, y );
-    painter->drawLine( x, y - halfsize, x, y + halfsize );
-}
-
-void MeasureTool::rectangularPaintMark( ClipPainter* painter, int x, int y,
-                                        int width, int height )
-{
-    //calls PaintMark multiple times so we can repeat the x mark
-    //for the rectangular projection
-
-    //check if it's inside the y range of the screen
-    if ( y > height || y < 0 )
+    // Check if the mark is inside the y range of the screen.
+    if ( y < 0 || y > viewport->height() )
         return;
-    //calculate the left-most possible X
-    while ( x > 0 ) {
-        x-=4*m_radius;
+
+    // Some convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+
+    // Paint the mark, and repeat it if the projection allows it.
+    painter->setPen( QColor( Qt::white ) );
+    if ( viewport->currentProjection()->repeatX() ) {
+
+	// Calculate the left-most possible X.
+	while ( x > 0 ) {
+	    x -= 4 * radius;
+	}
+	x += 4 * radius;
+
+	// Start painting and repeat until we leave the screen.
+	while ( x <= width ) {
+	    painter->drawLine( x - MarkRadius, y, x + MarkRadius, y );
+	    painter->drawLine( x, y - MarkRadius, x, y + MarkRadius );
+
+	    x += 4 * radius;
+	}
     }
-    x+=4*m_radius;
-    //start painting and repeating until we leave the screen
-    while ( x <= width ) {
-        paintMark( painter, x, y );
-        x+=4*m_radius;
+    else {
+	painter->drawLine( x - MarkRadius, y, x + MarkRadius, y );
+	painter->drawLine( x, y - MarkRadius, x, y + MarkRadius );
     }
 }
+
 
 void MeasureTool::drawDistancePath( ClipPainter* painter, 
                                     Quaternion prevqpos, Quaternion qpos,
@@ -356,7 +305,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
 
     drawAndRepeatDistancePath( painter, distancePath );
 }
-#endif
+
 void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
                                              const QPolygonF distancePath )
 {
@@ -382,6 +331,25 @@ void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
         distancePathMovable.translate( -4 * m_radius, 0 );
     }
 }
+#endif
+
+void MeasureTool::paintTotalDistanceLabel( ClipPainter *painter, 
+                                           double totalDistance )
+{
+    QString  distanceString;
+    if ( totalDistance >= 1000.0 )
+        distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
+    else
+        distanceString = tr("Total Distance: %1 m").arg( totalDistance );
+
+    painter->setPen( QColor( Qt::black ) );
+    painter->setBrush( QColor( 192, 192, 192, 192 ) );
+
+    painter->drawRect( 10, 5, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
+    painter->setFont( m_font_regular );
+    painter->drawText( 15, 10 + m_fontascent, distanceString );
+}
+
 
 bool MeasureTool::testbug()
 {

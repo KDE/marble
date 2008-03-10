@@ -1,12 +1,23 @@
+2008-03-11  Inge Wallin  <inge@lysator.liu.se>
+
+	Finalize the Projection'ification of the Measuretool:
+	*src/lib/MeasureTool.cpp (paintDistancePoints): Call
+	paintDistancePoints
+	(paintDistancePoints): new function
+	(sphericalPaintMeasurePoints): removed
+	(rectangularPaintMeasurePoints): removed
+	(paintMark): Make it repeat in X if the projection allows it
+	(rectangularPaintMark): removed
+	
 2008-03-10  Inge Wallin  <inge@lysator.liu.se>
 
-	Get rid of a few unneeded members.
+	Get rid of a few unneeded members:
 	* src/lib/MeasureTool.{h,cpp} (m_totalDistance): removed
 	(m_rad2Pixel): removed
 	(m_empty): removed
 	(me_linecolor): removed
 
-	Fix Krazy issues: proper include directives.
+	Fix Krazy issues: proper include directives:
 	/src/lib/MarbleWidget.h,
 	/src/lib/FileStoragePolicy.cpp,
 	/src/lib/MarbleMap.cpp,
@@ -50,7 +61,7 @@
 
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
-	Unify painting of Measure Paths.  Now also works on Mercator
+	Unify painting of Measure Paths.  Now also works on Mercator.
 	* src/lib/MeasureTool.cpp (paintMeasurePoints): use projection
 	independent code to paint the paths
 	(sphericalPaintMeasurePoints): remove code to draw paths
