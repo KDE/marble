@@ -25,6 +25,7 @@
 #include <QtCore/QString>
 
 #include "GeoDocument.h"
+#include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
 
 /**
@@ -41,8 +42,6 @@ public:
     void setTarget( const QString& target );
     const QString theme() const;
     void setTheme( const QString& theme );
-    const QString icon() const;
-    void setIcon( const QString& icon );
     const QString description() const;
     void setDescription( const QString& );
 
@@ -50,14 +49,15 @@ public:
     void setVisible( bool visible );
 
     GeoSceneZoom* zoom() const;
+    GeoSceneIcon* icon() const;
 
 protected:
-    mutable GeoSceneZoom* m_zoom;
+    GeoSceneZoom* m_zoom;
+    GeoSceneIcon* m_icon;
 
     QString m_name;
     QString m_target;
     QString m_theme;
-    QString m_icon;
     QString m_description;
 
     bool m_visible;

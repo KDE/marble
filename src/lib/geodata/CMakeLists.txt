@@ -20,6 +20,7 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataStyleSelector.cpp
         geodata/scene/GeoSceneDocument.cpp
         geodata/scene/GeoSceneHead.cpp
+        geodata/scene/GeoSceneIcon.cpp
         geodata/scene/GeoSceneZoom.cpp
         geodata/scene/GeoSceneMap.cpp
         geodata/scene/GeoSceneSettings.cpp

@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,20 +19,37 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DGMLAttributeDictionary_h
-#define DGMLAttributeDictionary_h
+#include "GeoSceneIcon.h"
 
-
-// Lists all known DGML 2.0 attributes
-// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
-
-namespace GeoSceneAttributeDictionary {
-
-    extern const char* dgmlAttr_nameSpace20;
-
-    extern const char* dgmlAttr_bgcolor;
-    extern const char* dgmlAttr_color;
-    extern const char* dgmlAttr_pixmap;
+GeoSceneIcon::GeoSceneIcon()
+    // Arbitary defaults, as used in Marble
+    : m_pixmap( "" ),
+      m_color( "" )
+{
+    /* NOOP */
 }
 
-#endif // DGMLAttributeDictionary_h
+GeoSceneIcon::~GeoSceneIcon()
+{
+    /* NOOP */
+}
+
+const QString GeoSceneIcon::pixmap() const
+{
+    return m_pixmap;
+}
+
+void GeoSceneIcon::setPixmap( const QString& pixmap )
+{
+    m_pixmap = pixmap;
+}
+
+const QString GeoSceneIcon::color() const
+{
+    return m_color;
+}
+
+void GeoSceneIcon::setColor( const QString& color )
+{
+    m_color = color;
+}

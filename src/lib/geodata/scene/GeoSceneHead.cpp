@@ -23,10 +23,10 @@
 
 GeoSceneHead::GeoSceneHead()
     : m_zoom(new GeoSceneZoom),
+      m_icon(new GeoSceneIcon),
       m_name( "" ),
       m_target( "" ),
       m_theme( "" ),
-      m_icon( "" ),
       m_description( "" ),
       m_visible( true )
 {
@@ -35,7 +35,13 @@ GeoSceneHead::GeoSceneHead()
 
 GeoSceneHead::~GeoSceneHead()
 {
+    delete m_icon;
     delete m_zoom;
+}
+
+GeoSceneIcon* GeoSceneHead::icon() const
+{
+    return m_icon;
 }
 
 GeoSceneZoom* GeoSceneHead::zoom() const
@@ -71,16 +77,6 @@ const QString GeoSceneHead::theme() const
 void GeoSceneHead::setTheme( const QString& theme )
 {
     m_theme = theme;
-}
-
-const QString GeoSceneHead::icon() const
-{
-    return m_icon;
-}
-
-void GeoSceneHead::setIcon( const QString& icon )
-{
-    m_icon = icon;
 }
 
 const QString GeoSceneHead::description() const

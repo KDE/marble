@@ -28,5 +28,6 @@ namespace GeoSceneAttributeDictionary {
 const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
 const char* dgmlAttr_bgcolor = "bgcolor";
+const char* dgmlAttr_color = "color";
 const char* dgmlAttr_pixmap = "pixmap";
 }

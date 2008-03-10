@@ -88,7 +88,8 @@ int main(int argc, char** argv)
         qDebug() << "Name: " << sceneDocument->head()->name(); 
         qDebug() << "Target: " << sceneDocument->head()->target(); 
         qDebug() << "Theme: " << sceneDocument->head()->theme(); 
-        qDebug() << "Icon: " << sceneDocument->head()->icon(); 
+        qDebug() << "Icon (pixmap): " << sceneDocument->head()->icon()->pixmap(); 
+        qDebug() << "Icon (color) : " << sceneDocument->head()->icon()->color(); 
         qDebug() << "Description: " << sceneDocument->head()->description(); 
         qDebug() << "Visible: " << sceneDocument->head()->visible(); 
         qDebug() << "Discrete: " << sceneDocument->head()->zoom()->discrete(); 

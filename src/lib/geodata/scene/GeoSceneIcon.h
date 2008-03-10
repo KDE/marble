@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,20 +19,28 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DGMLAttributeDictionary_h
-#define DGMLAttributeDictionary_h
+#ifndef GEOSCENEICON_H
+#define GEOSCENEICON_H
+
+#include "GeoDocument.h"
+
+/**
+ * @short Icon properties of a GeoScene document.
+ */
+class GeoSceneIcon : public GeoNode {
+public:
+    GeoSceneIcon();
+    ~GeoSceneIcon();
+
+    const QString pixmap() const;
+    void setPixmap( const QString& pixmap );
+    const QString color() const;
+    void setColor( const QString& color );
+
+protected:
+    QString  m_pixmap;
+    QString  m_color;
+};
 
 
-// Lists all known DGML 2.0 attributes
-// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
-
-namespace GeoSceneAttributeDictionary {
-
-    extern const char* dgmlAttr_nameSpace20;
-
-    extern const char* dgmlAttr_bgcolor;
-    extern const char* dgmlAttr_color;
-    extern const char* dgmlAttr_pixmap;
-}
-
-#endif // DGMLAttributeDictionary_h
+#endif // GEOSCENEICON_H

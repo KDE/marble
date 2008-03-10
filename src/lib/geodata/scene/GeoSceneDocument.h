@@ -46,10 +46,10 @@ public:
     GeoSceneLegend*   legend() const;
 
 protected:
-    mutable GeoSceneHead*     m_head;
-    mutable GeoSceneMap*      m_map;
-    mutable GeoSceneSettings* m_settings;
-    mutable GeoSceneLegend*   m_legend;
+    GeoSceneHead*     m_head;
+    GeoSceneMap*      m_map;
+    GeoSceneSettings* m_settings;
+    GeoSceneLegend*   m_legend;
 };
 
 
