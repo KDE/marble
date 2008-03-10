@@ -23,6 +23,9 @@
 
 #include "GeoTagHandler.h"
 
+// Set to a value greather than 0, to dump tag handlers as they get registered
+#define DUMP_TAG_HANDLER_REGISTRATION 0
+
 GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;
 
 GeoTagHandler::GeoTagHandler()
@@ -49,7 +52,9 @@ void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHand
     Q_ASSERT(!hash->contains(qName));
     hash->insert(qName, handler);
 
+#if DUMP_TAG_HANDLER_REGISTRATION > 0
     qDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
+#endif
 }
 
 const GeoTagHandler* GeoTagHandler::recognizes(const QualifiedName& qName)
