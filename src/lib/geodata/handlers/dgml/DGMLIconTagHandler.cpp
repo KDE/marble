@@ -47,10 +47,10 @@ GeoNode* DGMLIconTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head))
-    {
-        parentItem.nodeAs<GeoSceneHead>()->icon()->setPixmap( parser.attributes().value( dgmlAttr_pixmap ).toString() );
-        parentItem.nodeAs<GeoSceneHead>()->icon()->setColor( parser.attributes().value( dgmlAttr_color ).toString() );
+    if (parentItem.represents(dgmlTag_Head)) {
+        GeoSceneIcon* icon = parentItem.nodeAs<GeoSceneHead>()->icon();
+        icon->setPixmap(parser.attribute(dgmlAttr_pixmap));
+        icon->setColor(parser.attribute(dgmlAttr_color));
     }
 
     return 0;

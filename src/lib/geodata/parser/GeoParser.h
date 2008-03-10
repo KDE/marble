@@ -49,8 +49,11 @@ public:
     // Used by tag handlers, to access a parent element's associated GeoStackItem
     GeoStackItem parentElement(unsigned int depth = 0);
 
-    // Used by tag handlers, to emit a warning.
+    // Used by tag handlers, to emit a warning while parsing
     void raiseWarning(const QString&);
+
+    // Used by tag handlers, to retrieve the value for an attribute of the currently parsed element
+    QString attribute(const char* attributeName) const;
 
 protected:
     // To be implemented by GeoDataParser/GeoSceneParser

@@ -177,6 +177,11 @@ void GeoParser::raiseWarning(const QString& warning)
     qDebug() << "[GeoParser::raiseWarning] -> " << warning;
 }
 
+QString GeoParser::attribute(const char* attributeName) const
+{
+    return attributes().value(QString::fromLatin1(attributeName)).toString();
+}
+
 GeoDocument* GeoParser::releaseDocument()
 {
     GeoDocument* document = m_document;
