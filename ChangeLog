@@ -1,5 +1,9 @@
 2008-03-10  Inge Wallin  <inge@lysator.liu.se>
 
+	Get rid of a few unneeded members.
+	* src/lib/MeasureTool.h (m_totalDistance): removed
+	(m_rad2Pixel): removed
+
 	Fix Krazy issues: proper include directives.
 	/src/lib/MarbleWidget.h,
 	/src/lib/FileStoragePolicy.cpp,

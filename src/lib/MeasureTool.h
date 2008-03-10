@@ -69,6 +69,7 @@ class MeasureTool : public QObject
                             ViewportParams *viewport,
                             bool antialiasing );
 
+#if 0
     void  sphericalDrawDistancePath( ClipPainter* painter,
                                      Quaternion, Quaternion,
                                      ViewportParams *viewport,
@@ -78,16 +79,17 @@ class MeasureTool : public QObject
                                        Quaternion, Quaternion, 
                                        ViewportParams *viewport,
                                        bool antialiasing );
+#endif
 
-    double  m_totalDistance;
+ private:
+    // The list of points in the distance path.
+    QVector<GeoDataPoint*>  m_pMeasurePointList;
 
     QFont   m_font_regular;
     int     m_fontheight;
     int     m_fontascent;
 
     QColor  m_linecolor;
-
-    QVector<GeoDataPoint*>  m_pMeasurePointList;
 
     QPen    m_pen;
 
@@ -100,7 +102,6 @@ class MeasureTool : public QObject
 
     double m_centerLat;
     double m_centerLon;
-    double m_rad2Pixel;
     int m_radius;
 };
 

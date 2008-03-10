@@ -31,8 +31,6 @@
 MeasureTool::MeasureTool( QObject* parent )
     : QObject( parent )
 {
-    m_totalDistance = 0;
-
 #ifdef Q_OS_MACX
     m_font_regular = QFont( "Sans Serif", 10, 50, false );
 #else
@@ -50,10 +48,12 @@ MeasureTool::MeasureTool( QObject* parent )
     m_pen.setWidthF( 2.0 );
 }
 
+
 void MeasureTool::paintMeasurePoints( ClipPainter *painter, 
                                       ViewportParams *viewport,
                                       bool antialiasing )
 {
+    // No way to paint anything if the list is empty.
     if ( m_pMeasurePointList.isEmpty() )
         return;
 
@@ -62,7 +62,7 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
     painter->setPen( m_pen );
 
     // Paint the paths and calculate the total length
-    m_totalDistance = 0.0;
+    double  totalDistance = 0.0;
     double  lon = 0.0;
     double  lat = 0.0;
     double  prevLon = 0.0;
@@ -81,7 +81,7 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            m_totalDistance += acos( sin( prevLat ) * sin( lat )
+            totalDistance += acos( sin( prevLat ) * sin( lat )
                                      + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
 
             drawDistancePath( painter, prevqpos, qpos, viewport, antialiasing );
@@ -104,7 +104,7 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
 
     // Paint the total distance in the upper left corner.
     if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, m_totalDistance );
+        paintTotalDistanceLabel( painter, totalDistance );
 }
 
 void MeasureTool::sphericalPaintMeasurePoints( ClipPainter *painter, 
@@ -154,11 +154,11 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
     int  x = 0;
     int  y = 0;
 
-    // Calculate translation of center point
+    // Get the lon and lat of the center point
     viewport->centerCoordinates( m_centerLon, m_centerLat );
 
     m_radius    = viewport->radius();
-    m_rad2Pixel = 2 * m_radius / M_PI;
+    double  rad2Pixel = 2 * m_radius / M_PI;
 
 
     // FIXME: wtf?
@@ -178,9 +178,9 @@ void MeasureTool::rectangularPaintMeasurePoints( ClipPainter *painter,
         qpos.getSpherical( lon, lat );
 
         x = (int)( viewport->width()  / 2
-                   - ( m_centerLon - lon ) * m_rad2Pixel );
+                   - ( m_centerLon - lon ) * rad2Pixel );
         y = (int)( viewport->height() / 2
-                   + ( m_centerLat - lat ) * m_rad2Pixel );
+                   + ( m_centerLat - lat ) * rad2Pixel );
 
         rectangularPaintMark( painter, x, y, 
                               viewport->width(), viewport->height() );
