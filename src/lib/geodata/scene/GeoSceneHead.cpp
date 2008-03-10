@@ -96,12 +96,12 @@ void GeoSceneHead::setDescription( const QString& description )
     m_description = description;
 }
 
-const bool GeoSceneHead::visible() const
+bool GeoSceneHead::visible() const
 {
     return m_visible;
 }
 
-void GeoSceneHead::setVisible( const bool visible )
+void GeoSceneHead::setVisible( bool visible )
 {
     m_visible = visible;
 }

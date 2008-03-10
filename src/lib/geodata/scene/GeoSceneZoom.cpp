@@ -22,6 +22,7 @@
 #include "GeoSceneZoom.h"
 
 GeoSceneZoom::GeoSceneZoom()
+    // Arbitary defaults, as used in Marble
     : m_minimum( 900 ),
       m_maximum( 2500 ),
       m_discrete( false )
@@ -34,32 +35,32 @@ GeoSceneZoom::~GeoSceneZoom()
     /* NOOP */
 }
 
-const int GeoSceneZoom::minimum() const
+int GeoSceneZoom::minimum() const
 {
     return m_minimum;
 }
 
-void GeoSceneZoom::setMinimum( const int minimum )
+void GeoSceneZoom::setMinimum( int minimum )
 {
     m_minimum = minimum;
 }
 
-const int GeoSceneZoom::maximum() const
+int GeoSceneZoom::maximum() const
 {
     return m_maximum;
 }
 
-void GeoSceneZoom::setMaximum( const int maximum )
+void GeoSceneZoom::setMaximum( int maximum )
 {
     m_maximum = maximum;
 }
 
-const bool GeoSceneZoom::discrete() const
+bool GeoSceneZoom::discrete() const
 {
     return m_discrete;
 }
 
-void GeoSceneZoom::setDiscrete( const bool discrete )
+void GeoSceneZoom::setDiscrete( bool discrete )
 {
     m_discrete = discrete;
 }

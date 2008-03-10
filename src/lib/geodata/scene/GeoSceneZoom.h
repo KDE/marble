@@ -32,12 +32,12 @@ public:
     GeoSceneZoom();
     ~GeoSceneZoom();
 
-    const int minimum() const;
-    void setMinimum( const int name );
-    const int maximum() const;
-    void setMaximum( const int target );
-    const bool discrete() const;
-    void setDiscrete( const bool theme );
+    int minimum() const;
+    void setMinimum( int name );
+    int maximum() const;
+    void setMaximum( int target );
+    bool discrete() const;
+    void setDiscrete( bool theme );
 
 protected:
     int  m_minimum;

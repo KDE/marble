@@ -46,8 +46,8 @@ public:
     const QString description() const;
     void setDescription( const QString& );
 
-    const bool visible() const;
-    void setVisible( const bool visible );
+    bool visible() const;
+    void setVisible( bool visible );
 
     GeoSceneZoom* zoom() const;
 
