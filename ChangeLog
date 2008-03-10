@@ -1,6 +1,19 @@
 2008-03-10  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneIcon.h:
+    * src/lib/geodata/scene/GeoSceneHead.h:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneProperty.{cpp,h}:
+
+    Starting to get properties parsed correctly.
+
+2008-03-10  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/CMakeLists.txt:
     * src/lib/geodata/GeoDataTest.cpp:
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary.h:
     * src/lib/geodata/handlers/dgml/DGMLDiscreteTagHandler.{cpp,h}:

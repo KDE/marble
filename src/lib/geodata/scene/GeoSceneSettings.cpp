@@ -28,5 +28,15 @@ GeoSceneSettings::GeoSceneSettings()
 
 GeoSceneSettings::~GeoSceneSettings()
 {
-    /* NOOP */
+    qDebug("GeoSceneSettings::~GeoSceneSettings(). Object count: %d", m_properties.count());
+
+    foreach ( GeoSceneProperty* property, m_properties ) {
+        delete property;
+    }
 }
+
+void GeoSceneSettings::addProperty(GeoSceneProperty* property)
+{
+    m_properties.append(property);
+}
+

@@ -24,23 +24,40 @@
 #include "DGMLPropertyTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
+#include "GeoSceneSettings.h"
+#include "GeoSceneProperty.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Property)
 
 DGMLPropertyTagHandler::DGMLPropertyTagHandler()
     : GeoTagHandler()
 {
+    /* NOOP */
 }
 
 DGMLPropertyTagHandler::~DGMLPropertyTagHandler()
 {
+    /* NOOP */
 }
 
 GeoNode* DGMLPropertyTagHandler::parse(GeoParser& parser) const
 {
+    // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Property));
-    return 0;
+
+    GeoSceneProperty* property = new GeoSceneProperty;
+
+    // Checking for parent item
+    GeoStackItem parentItem = parser.parentElement();
+    if (parentItem.represents(dgmlTag_Settings)) {
+        parentItem.nodeAs<GeoSceneSettings>()->addProperty(property);
+        property->setName(parser.attribute(dgmlAttr_name));
+    }
+
+    return property;
 }

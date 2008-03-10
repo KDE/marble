@@ -24,19 +24,27 @@
 
 #include <QtCore/QString>
 
+#include "GeoDocument.h"
+
 /**
- * @short The name of an object.
+ * @short Settings property within a GeoScene document.
  */
-class GeoSceneProperty {
+class GeoSceneProperty : public GeoNode {
 public:
     GeoSceneProperty();
     ~GeoSceneProperty();
 
-    void setName( const QString &name );
     QString name() const;
+    void setName( const QString& name );
+    bool available() const;
+    void setAvailable( bool available );
+    bool enabled() const;
+    void setEnabled( bool enabled );
 
 protected:
-    QString m_name;
+    QString  m_name;
+    bool     m_available;
+    bool     m_enabled;
 };
 
 

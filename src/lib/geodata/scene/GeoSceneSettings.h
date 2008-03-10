@@ -22,15 +22,30 @@
 #ifndef GEOSCENESETTINGS_H
 #define GEOSCENESETTINGS_H
 
+#include <QtCore/QVector>
+
+#include "GeoDocument.h"
+#include "GeoSceneProperty.h"
 
 /**
  * @short Settings of a GeoScene document.
  */
 
-class GeoSceneSettings {
-public:
+class GeoSceneSettings : public GeoNode {
+  public:
     GeoSceneSettings();
     ~GeoSceneSettings();
+
+    /**
+     * @brief  Add a property to the settings
+     * @param  property  the new property
+     */
+    void addProperty( GeoSceneProperty* property );
+
+
+  protected:
+    /// The vector holding all the properties in the settings.
+    QVector < GeoSceneProperty* >  m_properties;
 };
 
 

@@ -25,6 +25,7 @@
 
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"
+#include "GeoSceneDocument.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -33,14 +34,22 @@ DGML_DEFINE_TAG_HANDLER(Settings)
 DGMLSettingsTagHandler::DGMLSettingsTagHandler()
     : GeoTagHandler()
 {
+    /* NOOP */
 }
 
 DGMLSettingsTagHandler::~DGMLSettingsTagHandler()
 {
+    /* NOOP */
 }
 
 GeoNode* DGMLSettingsTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Settings));
+
+    // Checking for parent item
+    GeoStackItem parentItem = parser.parentElement();
+    if (parentItem.represents(dgmlTag_Document))
+        return parentItem.nodeAs<GeoSceneDocument>()->settings();
+
     return 0;
 }

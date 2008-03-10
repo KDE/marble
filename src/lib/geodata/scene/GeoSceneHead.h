@@ -32,7 +32,7 @@
  * @short General properties and identifiers of a GeoScene document.
  */
 class GeoSceneHead : public GeoNode {
-public:
+  public:
     GeoSceneHead();
     ~GeoSceneHead();
 
@@ -51,7 +51,7 @@ public:
     GeoSceneZoom* zoom() const;
     GeoSceneIcon* icon() const;
 
-protected:
+  protected:
     GeoSceneZoom* m_zoom;
     GeoSceneIcon* m_icon;
 

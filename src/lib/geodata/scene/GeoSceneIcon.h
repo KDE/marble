@@ -22,6 +22,8 @@
 #ifndef GEOSCENEICON_H
 #define GEOSCENEICON_H
 
+#include <QtCore/QString>
+
 #include "GeoDocument.h"
 
 /**

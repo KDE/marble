@@ -22,7 +22,9 @@
 #include "GeoSceneProperty.h"
 
 GeoSceneProperty::GeoSceneProperty()
-    : m_name("")
+    : m_name(""),
+      m_available( false ),
+      m_enabled( false )
 {
     /* NOOP */
 }
@@ -32,12 +34,32 @@ GeoSceneProperty::~GeoSceneProperty()
     /* NOOP */
 }
 
+QString GeoSceneProperty::name() const
+{
+    return m_name;
+}
+
 void GeoSceneProperty::setName( const QString &name )
 {
     m_name = name;
 }
 
-QString GeoSceneProperty::name() const
+bool GeoSceneProperty::available() const
 {
-    return m_name;
+    return m_available;
+}
+
+void GeoSceneProperty::setAvailable( bool available )
+{
+    m_available = available;
+}
+
+bool GeoSceneProperty::enabled() const
+{
+    return m_enabled;
+}
+
+void GeoSceneProperty::setEnabled( bool enabled )
+{
+    m_enabled = enabled;
 }

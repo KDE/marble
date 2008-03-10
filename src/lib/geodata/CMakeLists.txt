@@ -24,8 +24,8 @@ SET( geodata_data_SRCS
         geodata/scene/GeoSceneZoom.cpp
         geodata/scene/GeoSceneMap.cpp
         geodata/scene/GeoSceneSettings.cpp
-        geodata/scene/GeoSceneLegend.cpp
         geodata/scene/GeoSceneProperty.cpp
+        geodata/scene/GeoSceneLegend.cpp
    )
 
 SET( geodata_parser_SRCS
