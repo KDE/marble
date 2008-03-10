@@ -22,10 +22,12 @@
 #include "DGMLDiscreteTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneZoom.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Discrete)
 
@@ -48,9 +50,8 @@ GeoNode* DGMLDiscreteTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Zoom))
     {
         bool discrete = false;
-        QString parsedText = parser.readElementText();
-        if (   parsedText.toLower().trimmed() == "true"
-            || parsedText.toLower().trimmed() == "on" )
+        QString parsedText = parser.readElementText().toLower().trimmed();
+        if (   parsedText == dgmlValue_true || parsedText == dgmlValue_on )
         {
             discrete = true;
         }

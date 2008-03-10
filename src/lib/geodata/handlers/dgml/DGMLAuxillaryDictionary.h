@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -19,35 +20,16 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
+#ifndef DGMLAuxillaryDictionary_h
+#define DGMLAuxillaryDictionary_h
 
-#include "DGMLZoomTagHandler.h"
 
-#include "DGMLElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoSceneDocument.h"
+// Lists all known DGML 2.0 auxillary strings
 
-using namespace GeoSceneElementDictionary;
+namespace GeoSceneAuxillaryDictionary {
 
-DGML_DEFINE_TAG_HANDLER(Zoom)
-
-DGMLZoomTagHandler::DGMLZoomTagHandler()
-    : GeoTagHandler()
-{
+    extern const char* dgmlValue_true;
+    extern const char* dgmlValue_on;
 }
 
-DGMLZoomTagHandler::~DGMLZoomTagHandler()
-{
-}
-
-GeoNode* DGMLZoomTagHandler::parse(GeoParser& parser) const
-{
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
-
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (!parentItem.represents(dgmlTag_Head))
-        return 0;
-
-    return parentItem.nodeAs<GeoSceneHead>()->zoom();;
-}
+#endif // DGMLAuxillaryDictionary_h

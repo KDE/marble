@@ -19,35 +19,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
+#include "DGMLAuxillaryDictionary.h"
 
-#include "DGMLZoomTagHandler.h"
+// One static list of all auxillary strings, to avoid string comparisons all-over-the-place
 
-#include "DGMLElementDictionary.h"
-#include "GeoParser.h"
-#include "GeoSceneDocument.h"
+namespace GeoSceneAuxillaryDictionary {
 
-using namespace GeoSceneElementDictionary;
-
-DGML_DEFINE_TAG_HANDLER(Zoom)
-
-DGMLZoomTagHandler::DGMLZoomTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DGMLZoomTagHandler::~DGMLZoomTagHandler()
-{
-}
-
-GeoNode* DGMLZoomTagHandler::parse(GeoParser& parser) const
-{
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
-
-    // Checking for parent item
-    GeoStackItem parentItem = parser.parentElement();
-    if (!parentItem.represents(dgmlTag_Head))
-        return 0;
-
-    return parentItem.nodeAs<GeoSceneHead>()->zoom();;
+const char* dgmlValue_true = "true";
+const char* dgmlValue_on = "on";
 }

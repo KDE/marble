@@ -49,5 +49,5 @@ GeoNode* DGMLHeadTagHandler::parse(GeoParser& parser) const
     if (!parentItem.represents(dgmlTag_Document))
         return 0;
 
-    return static_cast<GeoSceneDocument*>(parser.activeDocument())->head();
+    return parentItem.nodeAs<GeoSceneDocument>()->head();;
 }

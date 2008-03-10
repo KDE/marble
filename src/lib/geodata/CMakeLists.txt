@@ -53,6 +53,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLPropertyTagHandler.cpp
         geodata/handlers/dgml/DGMLElementDictionary.cpp
         geodata/handlers/dgml/DGMLAttributeDictionary.cpp
+        geodata/handlers/dgml/DGMLAuxillaryDictionary.cpp
    )
 
 SET( geodata_handlers_gpx_SRCS
