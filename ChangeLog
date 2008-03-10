@@ -1,3 +1,18 @@
+2008-03-10  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.h:
+    * src/lib/geodata/handlers/dgml/DGMLDiscreteTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLMinimumTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLVisibleTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLZoomTagHandler.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneZoom.{cpp,h}:
+
+    Adding <visible>, <zoom>, <discrete>, <minimum> and <maximum>.
+
 2008-03-09  Inge Wallin  <ingwa@localhost.localdomain>
 
 	Unify painting of Measure Paths.  Now also works on Mercator
