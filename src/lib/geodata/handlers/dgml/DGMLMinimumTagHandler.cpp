@@ -45,20 +45,18 @@ GeoNode* DGMLMinimumTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Zoom))
-    {
-        bool ok = false;
-        int parsedInt = parser.readElementText().toInt( &ok );
+    if (parentItem.represents(dgmlTag_Zoom)) {
+        QString parsedText = parser.readElementText();
 
-        if ( ok == true )
-        {
-            parentItem.nodeAs<GeoSceneZoom>()->setMinimum( parsedInt );
-        }
+        bool ok = false;
+        int parsedInt = parsedText.toInt(&ok);
+
+        if (ok)
+            parentItem.nodeAs<GeoSceneZoom>()->setMinimum(parsedInt);
         else
-        {
-            parser.raiseError("Error: no valid value for Minimum.");
-        }
+            parser.raiseWarning(QObject::tr("Couldn't convert <minimum> child text content to integer. Was: '%1'").arg(parsedText));
     }
+
 
     return 0;
 }

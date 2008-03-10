@@ -45,19 +45,16 @@ GeoNode* DGMLMaximumTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Zoom))
-    {
-        bool ok = false;
-        int parsedInt = parser.readElementText().toInt( &ok );
+    if (parentItem.represents(dgmlTag_Zoom)) {
+        QString parsedText = parser.readElementText();
 
-        if ( ok == true )
-        {
-            parentItem.nodeAs<GeoSceneZoom>()->setMaximum( parsedInt );
-        }
+        bool ok = false;
+        int parsedInt = parsedText.toInt(&ok);
+
+        if (ok)
+            parentItem.nodeAs<GeoSceneZoom>()->setMaximum(parsedInt);
         else
-        {
-            parser.raiseError("Error: no valid value for Maximum.");
-        }
+            parser.raiseWarning(QObject::tr("Couldn't convert <maximum> child text content to integer. Was: '%1'").arg(parsedText));
     }
 
     return 0;

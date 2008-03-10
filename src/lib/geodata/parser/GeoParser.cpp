@@ -132,7 +132,7 @@ void GeoParser::parseDocument()
         if (isStartElement()) {
             bool processChildren = true;
             GeoStackItem stackItem(qName, 0);
-        
+
             if (const GeoTagHandler* handler = GeoTagHandler::recognizes(qName)) {
                 stackItem.assignNode(handler->parse(*this));
                 processChildren = !isEndElement();
@@ -169,6 +169,12 @@ void GeoParser::parseDocument()
 void GeoParser::raiseDocumentElementError()
 {
     raiseError(QObject::tr("File format unrecognized"));
+}
+
+void GeoParser::raiseWarning(const QString& warning)
+{
+    // TODO: Maybe introduce a strict parsing mode where we feed the warning to raiseError() (which stops parsing).
+    qDebug() << "[GeoParser::raiseWarning] -> " << warning;
 }
 
 GeoDocument* GeoParser::releaseDocument()

@@ -49,6 +49,9 @@ public:
     // Used by tag handlers, to access a parent element's associated GeoStackItem
     GeoStackItem parentElement(unsigned int depth = 0);
 
+    // Used by tag handlers, to emit a warning.
+    void raiseWarning(const QString&);
+
 protected:
     // To be implemented by GeoDataParser/GeoSceneParser
     virtual bool isValidDocumentElement() const = 0;
