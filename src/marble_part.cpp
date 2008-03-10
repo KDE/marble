@@ -8,6 +8,11 @@
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
 //
 
+
+// Own
+#include "marble_part.h"
+
+// Qt
 #include <QtCore/QDir>
 #include <QtCore/QTimer>
 #include <QtGui/QClipboard>
@@ -17,6 +22,7 @@
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPainter>
 
+// KDE
 #include <kaction.h>
 #include <kactioncollection.h>
 #include <kapplication.h>
@@ -32,12 +38,14 @@
 #include <knewstuff2/engine.h>
 #include <KStandardDirs>
 
+// Marble library
+#include "lib/SunControlWidget.h"
+
+// Local dir
 #include <MarbleDirs.h>
 #include <ControlView.h>
 #include "settings.h"
 
-#include "marble_part.h"
-#include "lib/SunControlWidget.h"
 
 namespace
 {

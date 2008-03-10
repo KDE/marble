@@ -9,11 +9,17 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
+// Own
+#include "TileCreatorDialog.h"
+
+// Qt
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
+// Marble
 #include "TileCreator.h"
-#include "TileCreatorDialog.h"
+
 
 TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
     : QDialog(parent), m_creator( creator )

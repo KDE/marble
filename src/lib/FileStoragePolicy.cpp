@@ -8,13 +8,18 @@
 // Copyright 2007      Tobias Koenig <tokoe@kde.org>"
 //
 
+
+// Own
+#include "FileStoragePolicy.h"
+
+// Qt
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
+// Marble
 #include "MarbleDirs.h"
 
-#include "FileStoragePolicy.h"
 
 FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory )
     : m_dataDirectory( dataDirectory )

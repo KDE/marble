@@ -11,6 +11,13 @@
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
 
+
+#include <QtCore/QString>
+
+
+class QByteArray;
+
+
 class StoragePolicy
 {
     public:

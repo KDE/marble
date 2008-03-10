@@ -13,8 +13,17 @@
 #ifndef MARBLEMAP_P_H
 #define MARBLEMAP_P_H
 
+
+#include "ViewParams.h"
+#include "TextureColorizer.h"
+#include "CrossHairFloatItem.h"
+#include "CompassFloatItem.h"
+#include "MapScaleFloatItem.h"
+
+
 class MarbleMap;
 class MarbleModel;
+
 
 class MarbleMapPrivate
 {

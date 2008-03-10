@@ -10,10 +10,15 @@
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 //
 
-#include "MarbleMap.h"
 
+// Own
+#include "MarbleMap.h"
+#include "MarbleMap_p.h"
+
+// Posix
 #include <cmath>
 
+// Qt
 #include <QtCore/QCoreApplication>
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
@@ -25,6 +30,7 @@
 
 //#include <QtDBus/QDBusConnection>
 
+// Marble
 #include "CrossHairFloatItem.h"
 #include "CompassFloatItem.h"
 #include "MapScaleFloatItem.h"
@@ -48,8 +54,6 @@
 #include "ViewParams.h"
 
 #include "gps/GpsLayer.h"
-
-#include "MarbleMap_p.h"
 
 
 #ifdef Q_CC_MSVC

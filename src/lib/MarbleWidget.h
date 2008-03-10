@@ -22,11 +22,11 @@
  */
 
 
+#include <QtCore/QTimer>
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
-#include <QTimer>
 
 //#include <QtDBus/QtDBus>
 

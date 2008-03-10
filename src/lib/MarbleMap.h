@@ -24,9 +24,9 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QObject>
+#include <QtCore/QTimer>
 #include <QtGui/QImage>
 #include <QtGui/QPixmap>
-#include <QTimer>
 
 //#include <QtDBus/QtDBus>
 

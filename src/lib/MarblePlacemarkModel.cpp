@@ -10,17 +10,20 @@
 //
 
 
+// Own
+#include "MarblePlacemarkModel.h"
+#include "MarblePlacemarkModel_P.h"
+
+// Qt
 #include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtGui/QPixmap>
 
+// Marble
 #include "GeoDataStyle.h"       // In geodata/data/
-
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkManager.h"
 
-#include "MarblePlacemarkModel.h"
-#include "MarblePlacemarkModel_P.h"
 
 class MarblePlacemarkModel::Private
 {

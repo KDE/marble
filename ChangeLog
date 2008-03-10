@@ -1,3 +1,19 @@
+2008-03-10  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issues: proper include directives.
+	/src/lib/MarbleWidget.h,
+	/src/lib/FileStoragePolicy.cpp,
+	/src/lib/MarbleMap.cpp,
+	/src/lib/StoragePolicy.h,
+	/src/lib/MarbleMap_p.h,
+	/src/lib/TileCreatorDialog.cpp,
+	/src/lib/MarblePlacemarkModel.cpp,
+	/src/lib/CacheStoragePolicy.cpp,
+	/src/lib/MarbleMap.h,
+	/src/lib/DiscCache.cpp,
+	/src/marble_part.cpp:
+	Fix include directives
+
 2008-03-10  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/CMakeLists.txt:
@@ -26,7 +42,7 @@
 
     Adding <visible>, <zoom>, <discrete>, <minimum> and <maximum>.
 
-2008-03-09  Inge Wallin  <ingwa@localhost.localdomain>
+2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Unify painting of Measure Paths.  Now also works on Mercator
 	* src/lib/MeasureTool.cpp (paintMeasurePoints): use projection

@@ -8,7 +8,13 @@
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
 //
 
+
+// Own
+#include "DiscCache.h"
+
+// Qt
 #include <QtCore/QtGlobal>
+#include <QtCore/QFile>
 
 #if QT_VERSION >= 0x040300
 #include <QtCore/QDirIterator>
@@ -17,10 +23,7 @@
 #include <QtCore/QFileInfoListIterator>
 #endif
 
-#include <QtCore/QFile>
 
-
-#include "DiscCache.h"
 
 static QString indexFileName( const QString &cacheDirectory )
 {

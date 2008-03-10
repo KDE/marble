@@ -8,9 +8,13 @@
 // Copyright 2007      Tobias Koenig <tokoe@kde.org>"
 //
 
+
+// Own
+#include "CacheStoragePolicy.h"
+
+// Qt
 #include <QtCore/QDir>
 
-#include "CacheStoragePolicy.h"
 
 CacheStoragePolicy::CacheStoragePolicy( const QString &cacheDirectory )
     : m_cache( cacheDirectory )
