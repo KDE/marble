@@ -32,15 +32,15 @@ public:
     GeoSceneIcon();
     ~GeoSceneIcon();
 
-    const QString pixmap() const;
-    void setPixmap( const QString& pixmap );
-    const QString color() const;
-    void setColor( const QString& color );
+    QString pixmap() const;
+    void setPixmap(const QString&);
+
+    QString color() const;
+    void setColor(const QString&);
 
 protected:
-    QString  m_pixmap;
-    QString  m_color;
+    QString m_pixmap;
+    QString m_color;
 };
-
 
 #endif // GEOSCENEICON_H

@@ -22,19 +22,14 @@
 #include "GeoSceneIcon.h"
 
 GeoSceneIcon::GeoSceneIcon()
-    // Arbitary defaults, as used in Marble
-    : m_pixmap( "" ),
-      m_color( "" )
 {
-    /* NOOP */
 }
 
 GeoSceneIcon::~GeoSceneIcon()
 {
-    /* NOOP */
 }
 
-const QString GeoSceneIcon::pixmap() const
+QString GeoSceneIcon::pixmap() const
 {
     return m_pixmap;
 }
@@ -44,7 +39,7 @@ void GeoSceneIcon::setPixmap( const QString& pixmap )
     m_pixmap = pixmap;
 }
 
-const QString GeoSceneIcon::color() const
+QString GeoSceneIcon::color() const
 {
     return m_color;
 }
