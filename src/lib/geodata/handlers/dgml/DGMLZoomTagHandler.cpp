@@ -46,8 +46,8 @@ GeoNode* DGMLZoomTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (!parentItem.represents(dgmlTag_Head))
-        return 0;
+    if (parentItem.represents(dgmlTag_Head))
+        return parentItem.nodeAs<GeoSceneHead>()->zoom();
 
-    return parentItem.nodeAs<GeoSceneHead>()->zoom();;
+    return 0;
 }

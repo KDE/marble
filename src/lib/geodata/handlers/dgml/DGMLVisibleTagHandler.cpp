@@ -47,15 +47,9 @@ GeoNode* DGMLVisibleTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head))
-    {
-        bool visible = false;
+    if (parentItem.represents(dgmlTag_Head)) {
         QString parsedText = parser.readElementText().toLower().trimmed();
-        if (   parsedText == dgmlValue_true || parsedText == dgmlValue_on )
-        {
-            visible = true;
-        }
-        parentItem.nodeAs<GeoSceneHead>()->setVisible( visible );
+        parentItem.nodeAs<GeoSceneHead>()->setVisible(parsedText == dgmlValue_true || dgmlValue_on);
     }
 
     return 0;

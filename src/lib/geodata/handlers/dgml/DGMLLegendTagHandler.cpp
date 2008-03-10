@@ -42,7 +42,5 @@ DGMLLegendTagHandler::~DGMLLegendTagHandler()
 GeoNode* DGMLLegendTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
-
-    qDebug() << "Parsed <Legend> start!";    
     return 0;
 }

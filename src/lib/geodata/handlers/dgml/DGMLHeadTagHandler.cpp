@@ -46,8 +46,8 @@ GeoNode* DGMLHeadTagHandler::parse(GeoParser& parser) const
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (!parentItem.represents(dgmlTag_Document))
-        return 0;
+    if (parentItem.represents(dgmlTag_Document))
+        return parentItem.nodeAs<GeoSceneDocument>()->head();
 
-    return parentItem.nodeAs<GeoSceneDocument>()->head();;
+    return 0;
 }

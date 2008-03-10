@@ -42,7 +42,5 @@ DGMLDocumentTagHandler::~DGMLDocumentTagHandler()
 GeoNode* DGMLDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));
-
-    qDebug() << "Parsed <Document> start!";    
     return geoSceneDoc(parser);
 }
