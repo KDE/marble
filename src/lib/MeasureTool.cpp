@@ -40,8 +40,6 @@ MeasureTool::MeasureTool( QObject* parent )
     m_fontheight = QFontMetrics( m_font_regular ).height();
     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
-    m_linecolor  = QColor( 255, 255, 255, 255 );
-
     m_useworkaround = testbug();
 
     m_pen.setColor( QColor( Qt::red ) );
@@ -390,11 +388,11 @@ bool MeasureTool::testbug()
     QString  testchar( "K" );
     QFont    font( "Sans Serif", 10 );
 
-    int fontheight = QFontMetrics( font ).height();
+    int fontHeight = QFontMetrics( font ).height();
     int fontwidth  = QFontMetrics( font ).width( testchar );
     int fontascent = QFontMetrics( font ).ascent();
 
-    QPixmap  pixmap ( fontwidth, fontheight );
+    QPixmap  pixmap ( fontwidth, fontHeight );
     pixmap.fill( Qt::transparent );
 
     QPainter  textpainter;
@@ -407,7 +405,7 @@ bool MeasureTool::testbug()
     QImage  image = pixmap.toImage();
 
     for ( int x = 0; x < fontwidth; ++x )
-        for ( int y = 0; y < fontheight; ++y ) {
+        for ( int y = 0; y < fontHeight; ++y ) {
             if ( qAlpha( image.pixel( x, y ) ) > 0 )
                 return false;
         }

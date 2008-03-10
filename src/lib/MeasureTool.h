@@ -43,8 +43,6 @@ class MeasureTool : public QObject
                                           ViewportParams *viewport,
                                           bool antialiasing );
 
-    void  setLineColor( QColor linecolor ) { m_linecolor = linecolor; }
-
  private:
 	void  drawAndRepeatDistancePath( ClipPainter* painter,
                                          const QPolygonF distancePath );
@@ -89,11 +87,7 @@ class MeasureTool : public QObject
     int     m_fontheight;
     int     m_fontascent;
 
-    QColor  m_linecolor;
-
     QPen    m_pen;
-
-    QPixmap m_empty;
 
     bool    m_useworkaround;
 
