@@ -40,10 +40,11 @@ void GeoSceneSettings::addProperty( const QString& name, GeoSceneProperty* prope
     m_properties.insert( name, property );
 }
 
-GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
+GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 {
     GeoSceneProperty* property = m_properties.value( name );
-    if ( property == 0 ) property = new GeoSceneProperty;
+    if ( !property ) 
+        addProperty( name , new GeoSceneProperty );
     property->setName(name);
 
     return property;

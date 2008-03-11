@@ -41,7 +41,7 @@ class GeoSceneSettings : public GeoNode {
      * @param  property  the new property
      */
     void addProperty( const QString& name, GeoSceneProperty* property );
-    GeoSceneProperty* property( const QString& name ) const;
+    GeoSceneProperty* property( const QString& name );
 
   protected:
     /// The hash table holding all the properties in the settings.
