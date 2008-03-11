@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         qDebug() << "Name: " << sceneDocument->settings()->property( "relief" )->name(); 
         qDebug() << "Available: " << sceneDocument->settings()->property( "relief" )->available(); 
         qDebug() << "Enabled: " << sceneDocument->settings()->property( "relief" )->enabled(); 
-
+        qDebug() << "Test query a nonexistant property: " << sceneDocument->settings()->property( "notexistant" )->name();
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }
     else {
@@ -110,6 +110,8 @@ int main(int argc, char** argv)
     }
 
     qDebug() << "\nSuccesfully parsed file!";
+    delete document;
+
     return 0;
 }
 
