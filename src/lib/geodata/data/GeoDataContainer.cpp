@@ -20,11 +20,7 @@ GeoDataContainer::GeoDataContainer()
 
 GeoDataContainer::~GeoDataContainer()
 {
-    qDebug("GeoDataContainer::~GeoDataContainer(). Object count: %d", m_features.count());
-
-    foreach ( GeoDataFeature* feature, m_features ) {
-        delete feature;
-    }
+    qDeleteAll(m_features);
 }
 
 QVector<GeoDataFolder*> GeoDataContainer::folders() const
