@@ -22,10 +22,16 @@
 #include <QDebug>
 
 #include "GeoParser.h"
+#include "GeoDocument.h"
 #include "GeoTagHandler.h"
 
 // Set to a value greather than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0
+
+#if DUMP_GEONODE_LEAKS > 0
+// Initialize here, as there is no GeoDocument.cpp file
+unsigned long GeoDocument::s_leakProtector = 0;
+#endif
 
 GeoParser::GeoParser(GeoDataGenericSourceType source)
     : QXmlStreamReader()
