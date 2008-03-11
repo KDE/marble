@@ -18,6 +18,9 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataPoint.cpp
         geodata/data/GeoDataStyle.cpp
         geodata/data/GeoDataStyleSelector.cpp
+    )
+
+SET( geodata_scene_SRCS
         geodata/scene/GeoSceneDocument.cpp
         geodata/scene/GeoSceneHead.cpp
         geodata/scene/GeoSceneIcon.cpp
@@ -29,7 +32,7 @@ SET( geodata_data_SRCS
    )
 
 SET( geodata_parser_SRCS
-    	geodata/parser/GeoParser.cpp
+        geodata/parser/GeoParser.cpp
         geodata/parser/GeoDataParser.cpp
         geodata/parser/GeoSceneParser.cpp
         geodata/parser/GeoTagHandler.cpp
@@ -72,15 +75,14 @@ SET( geodata_handlers_kml_SRCS
 
 SET( geodata_SRCS
         ${geodata_data_SRCS}
+        ${geodata_scene_SRCS} 
         ${geodata_parser_SRCS}
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
         ${geodata_handlers_dgml_SRCS}
-        Quaternion.cpp
-        geodata/GeoDataTest.cpp
    )
 
-add_executable(geodatatest ${geodata_SRCS})
+add_executable(geodatatest ${geodata_SRCS} geodata/GeoDataTest.cpp)
 target_link_libraries (geodatatest ${QT_QTCORE_LIBRARY} marblewidget)
 
 install (TARGETS geodatatest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )

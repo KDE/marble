@@ -1,7 +1,6 @@
 PROJECT(marblewidget)
 cmake_minimum_required(VERSION 2.4.0)
 
-
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
@@ -16,7 +15,6 @@ INCLUDE_DIRECTORIES(
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
-
 INCLUDE(geodata/CMakeLists.txt)
 
 if (QTONLY)
@@ -47,7 +45,7 @@ endif (QTONLY)
 ########### next target ###############
 
 set(marblewidget_SRCS
-#           ${geodata_SRCS}
+           ${geodata_SRCS}
            MarbleWidget.cpp
            MarbleModel.cpp
            MarbleMap.cpp
@@ -107,40 +105,6 @@ set(marblewidget_SRCS
            FileViewModel.cpp
            GpxFileViewItem.cpp
            KMLFileViewItem.cpp
-           geodata/data/GeoDataColorStyle.cpp
-           geodata/data/GeoDataContainer.cpp
-           geodata/data/GeoDataDocument.cpp
-           geodata/data/GeoDataFeature.cpp
-           geodata/data/GeoDataFolder.cpp
-           geodata/data/GeoDataHotSpot.cpp
-           geodata/data/GeoDataIconStyle.cpp
-           geodata/data/GeoDataLabelStyle.cpp
-           geodata/data/GeoDataObject.cpp
-           geodata/data/GeoDataPlacemark.cpp
-           geodata/data/GeoDataPoint.cpp
-           geodata/data/GeoDataStyle.cpp
-           geodata/data/GeoDataStyleSelector.cpp
-#           kml/KMLColorStyle.cpp
-#           kml/KMLColorStyleParser.cpp
-#           kml/KMLContainer.cpp
-#           kml/KMLContainerParser.cpp
-#           kml/KMLFeature.cpp
-#           kml/KMLFeatureParser.cpp
-#           kml/KMLFolder.cpp
-#           kml/KMLDocument.cpp
-#           kml/KMLDocumentParser.cpp
-#           kml/KMLIconStyle.cpp
-#           kml/KMLIconStyleParser.cpp
-#           kml/KMLLabelStyle.cpp
-#           kml/KMLLabelStyleParser.cpp
-#           kml/KMLObject.cpp
-#           kml/KMLObjectParser.cpp
-#           kml/KMLGeoDataPlaceMark.cpp
-#           kml/KMLPlaceMarkParser.cpp
-#           kml/KMLPointParser.cpp
-#           kml/KMLStyle.cpp
-#           kml/KMLStyleParser.cpp
-#           kml/KMLStyleSelector.cpp
            gps/GpsTracking.cpp
            gps/GpsElement.cpp
            gps/Waypoint.cpp
@@ -278,11 +242,6 @@ else (APPLE AND QTONLY)
            TileCreator.h
            marble_export.h
 
-           geodata/data/Serializable.h
-           geodata/data/GeoDataObject.h
-           geodata/data/GeoDataPoint.h
-           geodata/data/GeoDataPlacemark.h
-           geodata/data/GeoDataFeature.h
            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
