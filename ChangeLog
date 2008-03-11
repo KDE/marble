@@ -73,6 +73,15 @@
 
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
+	Use pre incrementation of iterators.
+	* src/lib/MeasureTool.cpp (paintMeasurePoints),
+	(sphericalPaintMeasurePoints),
+	(rectangularPaintMeasurePoints),
+	* src/lib/PlaceMarkManager.cpp (saveFile),
+	(updateCacheIndex),
+	* src/lib/PlaceMarkLayout.cpp (whichPlacemarkAt): 
+	 pre increment iterator
+
 	Unify painting of Measure Paths.  Now also works on Mercator.
 	* src/lib/MeasureTool.cpp (paintMeasurePoints): use projection
 	independent code to paint the paths
