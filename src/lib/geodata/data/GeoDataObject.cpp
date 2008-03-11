@@ -14,31 +14,14 @@
 #include <QtGlobal>
 #include <QtCore/QDataStream>
 
-#ifdef GeoData_DEBUG
-namespace
-{
-    // This variable used to count number of allocated
-    // kml objects. Debug only
-    int refCount = 0;
-}
-#endif
-
 GeoDataObject::GeoDataObject()
   : m_id(0),
     m_targetId(0)
 {
-    #ifdef GeoData_DEBUG
-        ++refCount;
-        qDebug("GeoDataObject count: %d", refCount);
-    #endif
 }
 
 GeoDataObject::~GeoDataObject()
 {
-    #ifdef GeoData_DEBUG
-        --refCount;
-        qDebug("GeoDataObject count: %d", refCount);
-    #endif
 }
 
 int GeoDataObject::id() const
