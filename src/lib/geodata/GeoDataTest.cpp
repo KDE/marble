@@ -98,6 +98,9 @@ int main(int argc, char** argv)
         qDebug() << "Name: " << sceneDocument->settings()->property( "cities" )->name(); 
         qDebug() << "Available: " << sceneDocument->settings()->property( "cities" )->available(); 
         qDebug() << "Enabled: " << sceneDocument->settings()->property( "cities" )->enabled(); 
+        qDebug() << "Name: " << sceneDocument->settings()->property( "relief" )->name(); 
+        qDebug() << "Available: " << sceneDocument->settings()->property( "relief" )->available(); 
+        qDebug() << "Enabled: " << sceneDocument->settings()->property( "relief" )->enabled(); 
 
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }

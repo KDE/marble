@@ -42,5 +42,9 @@ void GeoSceneSettings::addProperty( const QString& name, GeoSceneProperty* prope
 
 GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
 {
-    return m_properties.value( name );
+    GeoSceneProperty* property = m_properties.value( name );
+    if ( property == 0 ) property = new GeoSceneProperty;
+    property->setName(name);
+
+    return property;
 }
