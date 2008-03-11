@@ -30,23 +30,21 @@
 /**
  * @short Settings of a GeoScene document.
  */
-
 class GeoSceneSettings : public GeoNode {
   public:
     GeoSceneSettings();
-    ~GeoSceneSettings();
+    virtual ~GeoSceneSettings();
 
     /**
      * @brief  Add a property to the settings
      * @param  property  the new property
      */
-    void addProperty( const QString& name, GeoSceneProperty* property );
-    GeoSceneProperty* property( const QString& name );
+    void addProperty(const QString& name, GeoSceneProperty*);
+    GeoSceneProperty* property(const QString&);
 
   protected:
     /// The hash table holding all the properties in the settings.
-    QHash < QString, GeoSceneProperty* >  m_properties;
+    QHash<QString, GeoSceneProperty*> m_properties;
 };
-
 
 #endif // GEOSCENESETTINGS_H

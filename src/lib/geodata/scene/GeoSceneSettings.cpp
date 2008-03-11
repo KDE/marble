@@ -23,29 +23,29 @@
 
 GeoSceneSettings::GeoSceneSettings()
 {
-    /* NOOP */
 }
 
 GeoSceneSettings::~GeoSceneSettings()
 {
-    qDebug("GeoSceneSettings::~GeoSceneSettings(). Object count: %d", m_properties.count());
-
-    foreach ( GeoSceneProperty* property, m_properties ) {
-        delete property;
-    }
+    qDeleteAll(m_properties);
 }
 
-void GeoSceneSettings::addProperty( const QString& name, GeoSceneProperty* property )
+void GeoSceneSettings::addProperty(const QString& name, GeoSceneProperty* property)
 {
-    m_properties.insert( name, property );
+    m_properties.insert(name, property);
 }
 
 GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 {
-    GeoSceneProperty* property = m_properties.value( name );
-    if ( !property ) 
-        addProperty( name , new GeoSceneProperty );
+    GeoSceneProperty* property = m_properties.value(name);
+    if (property) {
+        Q_ASSERT(property->name() == name);
+        return property;
+    }
+
+    property = new GeoSceneProperty;
     property->setName(name);
 
+    addProperty(name, property);
     return property;
 }
