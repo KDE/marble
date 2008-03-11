@@ -26,6 +26,7 @@ namespace GeoSceneElementDictionary {
 
 const char* dgmlTag_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
+const char* dgmlTag_Available = "available";
 const char* dgmlTag_Canvas = "canvas";
 const char* dgmlTag_Coastline = "coastline";
 const char* dgmlTag_Color = "color";
@@ -35,6 +36,7 @@ const char* dgmlTag_Description = "description";
 const char* dgmlTag_Dgml = "dgml";
 const char* dgmlTag_Discrete = "discrete";
 const char* dgmlTag_Document = "document";
+const char* dgmlTag_Enabled = "enabled";
 const char* dgmlTag_Filter = "filter";
 const char* dgmlTag_Geodata = "geodata";
 const char* dgmlTag_Head = "head";

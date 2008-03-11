@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -19,28 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneSettings.h"
+#ifndef DGMLAvailableTagHandler_h
+#define DGMLAvailableTagHandler_h
 
-GeoSceneSettings::GeoSceneSettings()
-{
-    /* NOOP */
-}
+#include "GeoTagHandler.h"
 
-GeoSceneSettings::~GeoSceneSettings()
-{
-    qDebug("GeoSceneSettings::~GeoSceneSettings(). Object count: %d", m_properties.count());
+class DGMLAvailableTagHandler : public GeoTagHandler {
+public:
+    DGMLAvailableTagHandler();
+    virtual ~DGMLAvailableTagHandler();
 
-    foreach ( GeoSceneProperty* property, m_properties ) {
-        delete property;
-    }
-}
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
-void GeoSceneSettings::addProperty( const QString& name, GeoSceneProperty* property )
-{
-    m_properties.insert( name, property );
-}
-
-GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
-{
-    return m_properties.value( name );
-}
+#endif // DGMLAvailableTagHandler_h

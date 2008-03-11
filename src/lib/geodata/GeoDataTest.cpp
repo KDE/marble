@@ -95,6 +95,9 @@ int main(int argc, char** argv)
         qDebug() << "Discrete: " << sceneDocument->head()->zoom()->discrete(); 
         qDebug() << "Minimum: " << sceneDocument->head()->zoom()->minimum(); 
         qDebug() << "Maximum: " << sceneDocument->head()->zoom()->maximum(); 
+        qDebug() << "Name: " << sceneDocument->settings()->property( "cities" )->name(); 
+        qDebug() << "Available: " << sceneDocument->settings()->property( "cities" )->available(); 
+        qDebug() << "Enabled: " << sceneDocument->settings()->property( "cities" )->enabled(); 
 
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }

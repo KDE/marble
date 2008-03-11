@@ -1,3 +1,15 @@
+2008-03-11  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLAvailableTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLEnabledTagHandler.{cpp,h}:
+
+    Basic Property parsing: name, available, enabled.
+
 2008-03-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Finalize the Projection'ification of the Measuretool:

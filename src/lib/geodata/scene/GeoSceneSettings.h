@@ -22,7 +22,7 @@
 #ifndef GEOSCENESETTINGS_H
 #define GEOSCENESETTINGS_H
 
-#include <QtCore/QVector>
+#include <QtCore/QHash>
 
 #include "GeoDocument.h"
 #include "GeoSceneProperty.h"
@@ -40,12 +40,12 @@ class GeoSceneSettings : public GeoNode {
      * @brief  Add a property to the settings
      * @param  property  the new property
      */
-    void addProperty( GeoSceneProperty* property );
-
+    void addProperty( const QString& name, GeoSceneProperty* property );
+    GeoSceneProperty* property( const QString& name ) const;
 
   protected:
-    /// The vector holding all the properties in the settings.
-    QVector < GeoSceneProperty* >  m_properties;
+    /// The hash table holding all the properties in the settings.
+    QHash < QString, GeoSceneProperty* >  m_properties;
 };
 
 

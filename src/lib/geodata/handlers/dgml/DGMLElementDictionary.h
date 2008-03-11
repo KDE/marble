@@ -28,6 +28,7 @@
 namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_nameSpace20;
 
+    extern const char* dgmlTag_Available;
     extern const char* dgmlTag_Canvas;
     extern const char* dgmlTag_Coastline;
     extern const char* dgmlTag_Color;
@@ -37,6 +38,7 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Discrete;
     extern const char* dgmlTag_Dgml;
     extern const char* dgmlTag_Document;
+    extern const char* dgmlTag_Enabled;
     extern const char* dgmlTag_Filter;
     extern const char* dgmlTag_Geodata;
     extern const char* dgmlTag_Head;

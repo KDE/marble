@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -19,46 +19,40 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
-#include "DGMLPropertyTagHandler.h"
+#include "DGMLAvailableTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "DGMLAttributeDictionary.h"
+#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneSettings.h"
 #include "GeoSceneProperty.h"
 
 using namespace GeoSceneElementDictionary;
-using namespace GeoSceneAttributeDictionary;
+using namespace GeoSceneAuxillaryDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Property)
+DGML_DEFINE_TAG_HANDLER(Available)
 
-DGMLPropertyTagHandler::DGMLPropertyTagHandler()
+DGMLAvailableTagHandler::DGMLAvailableTagHandler()
     : GeoTagHandler()
 {
     /* NOOP */
 }
 
-DGMLPropertyTagHandler::~DGMLPropertyTagHandler()
+DGMLAvailableTagHandler::~DGMLAvailableTagHandler()
 {
     /* NOOP */
 }
 
-GeoNode* DGMLPropertyTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLAvailableTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Property));
-
-    GeoSceneProperty* property = new GeoSceneProperty;
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Available));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Settings)) {
-        QString name = parser.attribute(dgmlAttr_name);
-        parentItem.nodeAs<GeoSceneSettings>()->addProperty(name, property);
-        property->setName(name);
+    if (parentItem.represents(dgmlTag_Property)) {
+        QString parsedText = parser.readElementText().toLower().trimmed();
+        parentItem.nodeAs<GeoSceneProperty>()->setAvailable(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
-    return property;
+    return 0;
 }
