@@ -16,6 +16,7 @@
 #ifndef __MARBLE__QUATERNION_H
 #define __MARBLE__QUATERNION_H
 
+#include "marble_export.h"
 enum
 {
     Q_X = 0,
@@ -29,7 +30,7 @@ typedef double    xmmfloat[4];
 typedef xmmfloat  matrix[3];
 
 
-class Quaternion {
+class MARBLE_EXPORT Quaternion {
  public:
     Quaternion();
     Quaternion(double w, double x, double y, double z);
