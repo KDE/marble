@@ -37,16 +37,8 @@ class GeoSceneItem : public GeoNode {
     QString text() const;
     void setText(const QString& text);
 
-    QString pixmap() const;
-    void setPixmap(const QString& pixmap);
-
-    QString color() const;
-    void setColor(const QString& color);
-
  protected:
     QString m_text;
-    QString m_pixmap;
-    QString m_color;
 };
 
 

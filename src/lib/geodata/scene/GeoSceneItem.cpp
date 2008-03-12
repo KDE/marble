@@ -22,9 +22,7 @@
 #include "GeoSceneItem.h"
 
 GeoSceneItem::GeoSceneItem()
-    : m_text( "" ),
-      m_pixmap( "" ),
-      m_color( "" )
+    : m_text( "" )
 {
     /* NOOP */
 }
@@ -42,24 +40,4 @@ QString GeoSceneItem::text() const
 void GeoSceneItem::setText( const QString& text )
 {
     m_text = text;
-}
-
-QString GeoSceneItem::pixmap() const
-{
-    return m_pixmap;
-}
-
-void GeoSceneItem::setPixmap( const QString& pixmap )
-{
-    m_pixmap = pixmap;
-}
-
-QString GeoSceneItem::color() const
-{
-    return m_color;
-}
-
-void GeoSceneItem::setColor( const QString& color )
-{
-    m_color = color;
 }

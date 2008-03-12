@@ -48,15 +48,15 @@ GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Item));
 
+    GeoSceneItem* item = 0;
+
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Section)) {
-        GeoSceneItem* item = new GeoSceneItem;
+        item = new GeoSceneItem;
         parentItem.nodeAs<GeoSceneSection>()->addItem( item );
         item->setText(parser.attribute(dgmlAttr_text));
-        item->setPixmap(parser.attribute(dgmlAttr_pixmap));
-        item->setColor(parser.attribute(dgmlAttr_color));
     }
 
-    return 0;
+    return item;
 }
