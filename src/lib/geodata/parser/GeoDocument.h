@@ -22,6 +22,8 @@
 #ifndef GeoDocument_h
 #define GeoDocument_h
 
+#include <stdio.h>
+
 #include "GeoTagHandler.h"
 
 // Set to a value greater than 0, to enable leak tracking of GeoNode objects
