@@ -25,7 +25,7 @@
 #include "GeoTagHandler.h"
 
 class DGMLPropertyTagHandler : public GeoTagHandler {
-public:
+ public:
     DGMLPropertyTagHandler();
     virtual ~DGMLPropertyTagHandler();
 

@@ -30,18 +30,17 @@
  * @short Settings property within a GeoScene document.
  */
 class GeoSceneProperty : public GeoNode {
-public:
-    GeoSceneProperty();
+ public:
+    GeoSceneProperty( const QString& name );
     ~GeoSceneProperty();
 
     QString name() const;
-    void setName( const QString& name );
     bool available() const;
     void setAvailable( bool available );
     bool enabled() const;
     void setEnabled( bool enabled );
 
-protected:
+ protected:
     QString  m_name;
     bool     m_available;
     bool     m_enabled;

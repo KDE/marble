@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,43 +19,47 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneDocument.h"
+#include "GeoSceneItem.h"
 
-GeoSceneDocument::GeoSceneDocument()
-    : GeoDocument()
-    , m_head(new GeoSceneHead)
-    , m_map(new GeoSceneMap)
-    , m_settings(new GeoSceneSettings)
-    , m_legend(new GeoSceneLegend)
+GeoSceneItem::GeoSceneItem()
+    : m_text( "" ),
+      m_pixmap( "" ),
+      m_color( "" )
 {
     /* NOOP */
 }
 
-GeoSceneDocument::~GeoSceneDocument()
+GeoSceneItem::~GeoSceneItem()
 {
-    delete m_head;
-    delete m_map;
-    delete m_settings;
-    delete m_legend;
-
+    /* NOOP */
 }
 
-GeoSceneHead* GeoSceneDocument::head() const
+QString GeoSceneItem::text() const
 {
-    return m_head;
+    return m_text;
 }
 
-GeoSceneMap* GeoSceneDocument::map() const
+void GeoSceneItem::setText( const QString& text )
 {
-    return m_map;
+    m_text = text;
 }
 
-GeoSceneSettings* GeoSceneDocument::settings() const
+QString GeoSceneItem::pixmap() const
 {
-    return m_settings;
+    return m_pixmap;
 }
 
-GeoSceneLegend* GeoSceneDocument::legend() const
+void GeoSceneItem::setPixmap( const QString& pixmap )
 {
-    return m_legend;
+    m_pixmap = pixmap;
+}
+
+QString GeoSceneItem::color() const
+{
+    return m_color;
+}
+
+void GeoSceneItem::setColor( const QString& color )
+{
+    m_color = color;
 }

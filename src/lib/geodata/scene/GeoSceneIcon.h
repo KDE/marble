@@ -30,7 +30,7 @@
  * @short Icon properties of a GeoScene document.
  */
 class GeoSceneIcon : public GeoNode {
-public:
+ public:
     GeoSceneIcon();
     ~GeoSceneIcon();
 
@@ -40,7 +40,7 @@ public:
     QString color() const;
     void setColor(const QString&);
 
-protected:
+ protected:
     QString m_pixmap;
     QString m_color;
 };

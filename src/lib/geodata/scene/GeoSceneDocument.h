@@ -34,7 +34,7 @@
  */
 class GeoSceneDocument : public GeoDocument,
                          public GeoNode {
-public:
+ public:
     GeoSceneDocument();
     ~GeoSceneDocument();
 
@@ -45,7 +45,7 @@ public:
     GeoSceneSettings* settings() const;
     GeoSceneLegend*   legend() const;
 
-protected:
+ protected:
     GeoSceneHead*     m_head;
     GeoSceneMap*      m_map;
     GeoSceneSettings* m_settings;

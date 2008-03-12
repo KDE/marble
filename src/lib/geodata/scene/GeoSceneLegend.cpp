@@ -28,5 +28,26 @@ GeoSceneLegend::GeoSceneLegend()
 
 GeoSceneLegend::~GeoSceneLegend()
 {
-    /* NOOP */
+    qDeleteAll(m_sections);
+}
+
+void GeoSceneLegend::addSection( GeoSceneSection* section )
+{
+    if ( section ) {
+        m_sections.insert( section->name(), section );
+    }
+}
+
+GeoSceneSection* GeoSceneLegend::section( const QString& name )
+{
+    GeoSceneSection* section = m_sections.value(name);
+    if ( section ) {
+        Q_ASSERT(section->name() == name);
+        return section;
+    }
+
+    section = new GeoSceneSection( name );
+    addSection( section );
+
+    return section;
 }

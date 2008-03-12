@@ -19,49 +19,35 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEHEAD_H
-#define GEOSCENEHEAD_H
+#ifndef GEOSCENEITEM_H
+#define GEOSCENEITEM_H
 
 #include <QtCore/QString>
 
 #include "GeoDocument.h"
-#include "GeoSceneIcon.h"
-#include "GeoSceneZoom.h"
 
 /**
- * @short General properties and identifiers of a GeoScene document.
+ * @short The section item in a legend of a GeoScene document.
  */
-class GeoSceneHead : public GeoNode {
+class GeoSceneItem : public GeoNode {
  public:
-    GeoSceneHead();
-    ~GeoSceneHead();
+    GeoSceneItem();
+    ~GeoSceneItem();
 
-    const QString name() const;
-    void setName( const QString& name );
-    const QString target() const;
-    void setTarget( const QString& target );
-    const QString theme() const;
-    void setTheme( const QString& theme );
-    const QString description() const;
-    void setDescription( const QString& );
+    QString text() const;
+    void setText(const QString& text);
 
-    bool visible() const;
-    void setVisible( bool visible );
+    QString pixmap() const;
+    void setPixmap(const QString& pixmap);
 
-    GeoSceneZoom* zoom() const;
-    GeoSceneIcon* icon() const;
+    QString color() const;
+    void setColor(const QString& color);
 
  protected:
-    GeoSceneZoom* m_zoom;
-    GeoSceneIcon* m_icon;
-
-    QString m_name;
-    QString m_target;
-    QString m_theme;
-    QString m_description;
-
-    bool m_visible;
+    QString m_text;
+    QString m_pixmap;
+    QString m_color;
 };
 
 
-#endif // GEOSCENEHEAD_H
+#endif // GEOSCENEITEM_H

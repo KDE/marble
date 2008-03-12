@@ -25,7 +25,7 @@
 #include "GeoTagHandler.h"
 
 class DGMLZoomTagHandler : public GeoTagHandler {
-public:
+ public:
     DGMLZoomTagHandler();
     virtual ~DGMLZoomTagHandler();
 

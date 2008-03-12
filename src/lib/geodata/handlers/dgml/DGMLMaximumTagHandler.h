@@ -25,7 +25,7 @@
 #include "GeoTagHandler.h"
 
 class DGMLMaximumTagHandler : public GeoTagHandler {
-public:
+ public:
     DGMLMaximumTagHandler();
     virtual ~DGMLMaximumTagHandler();
 

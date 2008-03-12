@@ -25,7 +25,7 @@
 #include "GeoTagHandler.h"
 
 class DGMLMinimumTagHandler : public GeoTagHandler {
-public:
+ public:
     DGMLMinimumTagHandler();
     virtual ~DGMLMinimumTagHandler();
 

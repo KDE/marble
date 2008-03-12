@@ -22,11 +22,15 @@
 #include "GeoSceneIcon.h"
 
 GeoSceneIcon::GeoSceneIcon()
+    : m_pixmap( "" ),
+      m_color( "" )
 {
+    /* NOOP */
 }
 
 GeoSceneIcon::~GeoSceneIcon()
 {
+    /* NOOP */
 }
 
 QString GeoSceneIcon::pixmap() const

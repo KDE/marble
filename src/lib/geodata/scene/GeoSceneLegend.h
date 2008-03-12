@@ -22,14 +22,30 @@
 #ifndef GEOSCENELEGEND_H
 #define GEOSCENELEGEND_H
 
+#include <QtCore/QHash>
+
+#include "GeoDocument.h"
+#include "GeoSceneSection.h"
+
 /**
  * @short Legend of a GeoScene document.
  */
 
-class GeoSceneLegend {
-public:
+class GeoSceneLegend : public GeoNode {
+ public:
     GeoSceneLegend();
     ~GeoSceneLegend();
+
+    /**
+     * @brief  Add a section to the legend
+     * @param  section  the new section
+     */
+    void addSection(GeoSceneSection*);
+    GeoSceneSection* section(const QString&);
+
+ protected:
+    /// The hash table holding all the sections in the legend.
+    QHash<QString, GeoSceneSection*> m_sections;
 };
 
 

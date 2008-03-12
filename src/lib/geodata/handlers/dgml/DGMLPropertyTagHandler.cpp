@@ -50,14 +50,15 @@ GeoNode* DGMLPropertyTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Property));
 
-    GeoSceneProperty* property = new GeoSceneProperty;
+    QString name = parser.attribute(dgmlAttr_name);
+
+    GeoSceneProperty* property = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Settings)) {
-        QString name = parser.attribute(dgmlAttr_name);
-        parentItem.nodeAs<GeoSceneSettings>()->addProperty(name, property);
-        property->setName(name);
+        GeoSceneProperty* property = new GeoSceneProperty( name );
+        parentItem.nodeAs<GeoSceneSettings>()->addProperty( property);
     }
 
     return property;

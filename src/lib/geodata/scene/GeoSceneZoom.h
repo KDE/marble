@@ -28,7 +28,7 @@
  * @short Zoom properties of a GeoScene document.
  */
 class GeoSceneZoom : public GeoNode {
-public:
+ public:
     GeoSceneZoom();
     ~GeoSceneZoom();
 
@@ -39,7 +39,7 @@ public:
     bool discrete() const;
     void setDiscrete( bool theme );
 
-protected:
+ protected:
     int  m_minimum;
     int  m_maximum;
     bool m_discrete;

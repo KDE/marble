@@ -32,10 +32,12 @@ DGML_DEFINE_TAG_HANDLER(Maximum)
 DGMLMaximumTagHandler::DGMLMaximumTagHandler()
     : GeoTagHandler()
 {
+    /* NOOP */
 }
 
 DGMLMaximumTagHandler::~DGMLMaximumTagHandler()
 {
+    /* NOOP */
 }
 
 GeoNode* DGMLMaximumTagHandler::parse(GeoParser& parser) const

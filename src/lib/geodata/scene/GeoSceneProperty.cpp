@@ -21,8 +21,8 @@
 
 #include "GeoSceneProperty.h"
 
-GeoSceneProperty::GeoSceneProperty()
-    : m_name(""),
+GeoSceneProperty::GeoSceneProperty( const QString& name )
+    : m_name( name ),
       m_available( false ),
       m_enabled( false )
 {
@@ -37,11 +37,6 @@ GeoSceneProperty::~GeoSceneProperty()
 QString GeoSceneProperty::name() const
 {
     return m_name;
-}
-
-void GeoSceneProperty::setName( const QString &name )
-{
-    m_name = name;
 }
 
 bool GeoSceneProperty::available() const

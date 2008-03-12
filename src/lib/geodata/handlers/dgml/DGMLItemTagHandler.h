@@ -1,5 +1,4 @@
 /*
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
@@ -20,43 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneDocument.h"
+#ifndef DGMLItemTagHandler_h
+#define DGMLItemTagHandler_h
 
-GeoSceneDocument::GeoSceneDocument()
-    : GeoDocument()
-    , m_head(new GeoSceneHead)
-    , m_map(new GeoSceneMap)
-    , m_settings(new GeoSceneSettings)
-    , m_legend(new GeoSceneLegend)
-{
-    /* NOOP */
-}
+#include "GeoTagHandler.h"
 
-GeoSceneDocument::~GeoSceneDocument()
-{
-    delete m_head;
-    delete m_map;
-    delete m_settings;
-    delete m_legend;
+class DGMLItemTagHandler : public GeoTagHandler {
+public:
+    DGMLItemTagHandler();
+    virtual ~DGMLItemTagHandler();
 
-}
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
-GeoSceneHead* GeoSceneDocument::head() const
-{
-    return m_head;
-}
-
-GeoSceneMap* GeoSceneDocument::map() const
-{
-    return m_map;
-}
-
-GeoSceneSettings* GeoSceneDocument::settings() const
-{
-    return m_settings;
-}
-
-GeoSceneLegend* GeoSceneDocument::legend() const
-{
-    return m_legend;
-}
+#endif // DGMLItemTagHandler_h

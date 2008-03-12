@@ -29,6 +29,8 @@ SET( geodata_scene_SRCS
         geodata/scene/GeoSceneSettings.cpp
         geodata/scene/GeoSceneProperty.cpp
         geodata/scene/GeoSceneLegend.cpp
+        geodata/scene/GeoSceneSection.cpp
+        geodata/scene/GeoSceneItem.cpp
    )
 
 SET( geodata_parser_SRCS
@@ -44,6 +46,8 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLMapTagHandler.cpp
         geodata/handlers/dgml/DGMLSettingsTagHandler.cpp
         geodata/handlers/dgml/DGMLLegendTagHandler.cpp
+        geodata/handlers/dgml/DGMLSectionTagHandler.cpp
+        geodata/handlers/dgml/DGMLItemTagHandler.cpp
         geodata/handlers/dgml/DGMLNameTagHandler.cpp
         geodata/handlers/dgml/DGMLTargetTagHandler.cpp
         geodata/handlers/dgml/DGMLThemeTagHandler.cpp

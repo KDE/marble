@@ -68,6 +68,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
           m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
           m_volatileTileCacheLimit( 1024*3 ) // 3 KB
 {
+    /* NOOP */
 }
 
 

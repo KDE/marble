@@ -19,49 +19,37 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEHEAD_H
-#define GEOSCENEHEAD_H
+#ifndef GEOSCENESECTION_H
+#define GEOSCENESECTION_H
 
-#include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include "GeoDocument.h"
-#include "GeoSceneIcon.h"
-#include "GeoSceneZoom.h"
+#include "GeoSceneItem.h"
+
 
 /**
- * @short General properties and identifiers of a GeoScene document.
+ * @short Section of a GeoScene document.
  */
-class GeoSceneHead : public GeoNode {
+
+class GeoSceneSection : public GeoNode {
  public:
-    GeoSceneHead();
-    ~GeoSceneHead();
+    GeoSceneSection( const QString& name );
+    ~GeoSceneSection();
 
-    const QString name() const;
-    void setName( const QString& name );
-    const QString target() const;
-    void setTarget( const QString& target );
-    const QString theme() const;
-    void setTheme( const QString& theme );
-    const QString description() const;
-    void setDescription( const QString& );
-
-    bool visible() const;
-    void setVisible( bool visible );
-
-    GeoSceneZoom* zoom() const;
-    GeoSceneIcon* icon() const;
+    QString name() const;
+    /**
+     * @brief  Add an item to the legend section
+     * @param  item  the new section
+     */
+    void addItem(GeoSceneItem*);
 
  protected:
-    GeoSceneZoom* m_zoom;
-    GeoSceneIcon* m_icon;
+    /// The hash table holding all the sections in the legend.
+    QVector<GeoSceneItem*> m_items;
 
-    QString m_name;
-    QString m_target;
-    QString m_theme;
-    QString m_description;
-
-    bool m_visible;
+    QString  m_name;
 };
 
 
-#endif // GEOSCENEHEAD_H
+#endif // GEOSCENESECTION_H

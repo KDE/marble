@@ -25,6 +25,7 @@
 
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"
+#include "GeoSceneDocument.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -42,5 +43,11 @@ DGMLLegendTagHandler::~DGMLLegendTagHandler()
 GeoNode* DGMLLegendTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));
+
+    // Checking for parent item
+    GeoStackItem parentItem = parser.parentElement();
+    if (parentItem.represents(dgmlTag_Document))
+        return parentItem.nodeAs<GeoSceneDocument>()->legend();
+
     return 0;
 }

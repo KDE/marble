@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,43 +19,28 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "GeoSceneDocument.h"
+#include "GeoSceneSection.h"
 
-GeoSceneDocument::GeoSceneDocument()
-    : GeoDocument()
-    , m_head(new GeoSceneHead)
-    , m_map(new GeoSceneMap)
-    , m_settings(new GeoSceneSettings)
-    , m_legend(new GeoSceneLegend)
+GeoSceneSection::GeoSceneSection( const QString& name )
+    : m_name( name )
 {
     /* NOOP */
 }
 
-GeoSceneDocument::~GeoSceneDocument()
+GeoSceneSection::~GeoSceneSection()
 {
-    delete m_head;
-    delete m_map;
-    delete m_settings;
-    delete m_legend;
-
+    qDeleteAll(m_items);
 }
 
-GeoSceneHead* GeoSceneDocument::head() const
+QString GeoSceneSection::name() const
 {
-    return m_head;
+    return m_name;
 }
 
-GeoSceneMap* GeoSceneDocument::map() const
-{
-    return m_map;
-}
 
-GeoSceneSettings* GeoSceneDocument::settings() const
+void GeoSceneSection::addItem( GeoSceneItem* item )
 {
-    return m_settings;
-}
-
-GeoSceneLegend* GeoSceneDocument::legend() const
-{
-    return m_legend;
+    if ( item ) {
+        m_items.append( item );
+    }
 }

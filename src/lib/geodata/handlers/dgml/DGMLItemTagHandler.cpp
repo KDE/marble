@@ -21,35 +21,42 @@
 
 #include <QDebug>
 
-#include "DGMLZoomTagHandler.h"
+#include "DGMLItemTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneDocument.h"
+#include "GeoSceneSection.h"
+#include "GeoSceneItem.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Zoom)
+DGML_DEFINE_TAG_HANDLER(Item)
 
-DGMLZoomTagHandler::DGMLZoomTagHandler()
+DGMLItemTagHandler::DGMLItemTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
-DGMLZoomTagHandler::~DGMLZoomTagHandler()
+DGMLItemTagHandler::~DGMLItemTagHandler()
 {
-    /* NOOP */
 }
 
-GeoNode* DGMLZoomTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
+    // Check whether the tag is valid
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Item));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head))
-        return parentItem.nodeAs<GeoSceneHead>()->zoom();
+    if (parentItem.represents(dgmlTag_Section)) {
+        GeoSceneItem* item = new GeoSceneItem;
+        parentItem.nodeAs<GeoSceneSection>()->addItem( item );
+        item->setText(parser.attribute(dgmlAttr_text));
+        item->setPixmap(parser.attribute(dgmlAttr_pixmap));
+        item->setColor(parser.attribute(dgmlAttr_color));
+    }
 
     return 0;
 }

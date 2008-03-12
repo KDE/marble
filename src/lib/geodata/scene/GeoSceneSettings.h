@@ -31,7 +31,7 @@
  * @short Settings of a GeoScene document.
  */
 class GeoSceneSettings : public GeoNode {
-  public:
+ public:
     GeoSceneSettings();
     virtual ~GeoSceneSettings();
 
@@ -39,10 +39,10 @@ class GeoSceneSettings : public GeoNode {
      * @brief  Add a property to the settings
      * @param  property  the new property
      */
-    void addProperty(const QString& name, GeoSceneProperty*);
-    GeoSceneProperty* property(const QString&);
+    void addProperty( GeoSceneProperty* );
+    GeoSceneProperty* property( const QString& );
 
-  protected:
+ protected:
     /// The hash table holding all the properties in the settings.
     QHash<QString, GeoSceneProperty*> m_properties;
 };

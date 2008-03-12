@@ -21,35 +21,43 @@
 
 #include <QDebug>
 
-#include "DGMLZoomTagHandler.h"
+#include "DGMLSectionTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneDocument.h"
+#include "GeoSceneLegend.h"
+#include "GeoSceneSection.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Zoom)
+DGML_DEFINE_TAG_HANDLER(Section)
 
-DGMLZoomTagHandler::DGMLZoomTagHandler()
+DGMLSectionTagHandler::DGMLSectionTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
-DGMLZoomTagHandler::~DGMLZoomTagHandler()
+DGMLSectionTagHandler::~DGMLSectionTagHandler()
 {
-    /* NOOP */
 }
 
-GeoNode* DGMLZoomTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLSectionTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));
+    // Check whether the tag is valid
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Section));
+
+    QString name = parser.attribute(dgmlAttr_name);
+
+    GeoSceneSection* section = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Head))
-        return parentItem.nodeAs<GeoSceneHead>()->zoom();
+    if (parentItem.represents(dgmlTag_Legend)) {
+        GeoSceneSection* section = new GeoSceneSection( name );
+        parentItem.nodeAs<GeoSceneLegend>()->addSection( section );
+    }
 
-    return 0;
+    return section;
 }
