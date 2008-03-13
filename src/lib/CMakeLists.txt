@@ -51,6 +51,7 @@ set(marblewidget_SRCS
            MarbleMap.cpp
            MarbleControlBox.cpp
            MarbleNavigator.cpp
+           MarbleSettingsWidget.cpp
            MarbleLegendBrowser.cpp
            MarbleThemeSelectView.cpp
            MarbleSearchListView.cpp
@@ -134,6 +135,7 @@ set(marblewidget_SRCS
 set (marblewidget_UI
     MarbleControlBox.ui
     MarbleNavigator.ui
+    MarbleSettingsWidget.ui
     TileCreatorDialog.ui
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
