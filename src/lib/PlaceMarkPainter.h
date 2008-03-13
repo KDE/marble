@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 //
@@ -29,7 +29,7 @@
 #include "PlaceMarkLayout.h"
 
 
-class ViewParams;
+class ViewportParams;
 class VisiblePlaceMark;
 
 static const double s_labelOutlineWidth = 2.5;
@@ -46,7 +46,7 @@ class PlaceMarkPainter : public QObject
     void drawPlaceMarks( QPainter* painter, 
                          QVector<VisiblePlaceMark*> visiblePlaceMarks,
                          const QItemSelection &selection, 
-                         ViewParams *viewParams );
+                         ViewportParams *viewport );
 
     // FIXME: To be removed after MapTheme / KML refactoring
     void setDefaultLabelColor( const QColor& color );
@@ -58,6 +58,7 @@ class PlaceMarkPainter : public QObject
 
     bool testXBug();
 
+ private:
     bool m_useXWorkaround;  // Indicates need for an X windows workaround.
 
     // FIXME: To be removed after MapTheme / KML refactoring

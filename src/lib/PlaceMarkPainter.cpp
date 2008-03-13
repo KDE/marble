@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 #include "PlaceMarkPainter.h"
@@ -42,87 +42,75 @@ void PlaceMarkPainter::setDefaultLabelColor( const QColor& color ){
 void PlaceMarkPainter::drawPlaceMarks( QPainter* painter, 
                                        QVector<VisiblePlaceMark*> visiblePlaceMarks,
                                        const QItemSelection &selection, 
-                                       ViewParams *viewParams )
+                                       ViewportParams *viewport )
 {
     QVector<VisiblePlaceMark*>::const_iterator visit = visiblePlaceMarks.constEnd();
 
     VisiblePlaceMark *mark = 0;
-    int imageWidth = viewParams->m_canvasImage->width();
+    int imageWidth = viewport->width();
 
-    switch( viewParams->projection() ) {
-        case Spherical:
+    while ( visit != visiblePlaceMarks.constBegin() ) {
+	--visit;
+	mark = *visit;
 
-            while ( visit != visiblePlaceMarks.constBegin() ) {
-                --visit;
-                mark = *visit;
+	if ( mark->labelPixmap().isNull() ) {
+	    bool isSelected = selection.contains( mark->modelIndex() );
+	    drawLabelPixmap( mark, isSelected );
+	}
 
-                if ( mark->labelPixmap().isNull() )
-                {
-                    bool isSelected = selection.contains( mark->modelIndex() );
-                    drawLabelPixmap( mark, isSelected );
-                }
+	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
+	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
+    }
 
-                painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-            }
+    while ( visit != visiblePlaceMarks.constBegin() ) {
+	--visit;
+	mark = *visit;
 
-            break;
+	if ( mark->labelPixmap().isNull() ) {
+	    bool isSelected = selection.contains( mark->modelIndex() );
+	    drawLabelPixmap( mark, isSelected );
+	}
 
-        case Equirectangular:
-        case Mercator:
+	painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
+	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
 
-            while ( visit != visiblePlaceMarks.constBegin() ) {
-                --visit;
-                mark = *visit;
+	if ( ! viewport->currentProjection()->repeatX() )
+	    continue;
 
-                if ( mark->labelPixmap().isNull() )
-                {
-                    bool isSelected = selection.contains( mark->modelIndex() );
-                    drawLabelPixmap( mark, isSelected );
-                }
+	int tempSymbol = mark->symbolPosition().x();
+	int tempText =   mark->labelRect().x();
 
-                painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
+	for ( int i = tempSymbol - 4 * viewport->radius();
+	      i >= 0;
+	      i -= 4 * viewport->radius() )
+	{
+	    QRect labelRect( mark->labelRect() );
+	    labelRect.moveLeft(i - tempSymbol + tempText );
+	    mark->setLabelRect( labelRect );
 
-                int tempSymbol = mark->symbolPosition().x();
-                int tempText =   mark->labelRect().x();
+	    QPoint symbolPos( mark->symbolPosition() );
+	    symbolPos.setX( i );
+	    mark->setSymbolPosition( symbolPos );
 
-                for ( int i = tempSymbol - 4 * viewParams->radius();
-                      i >= 0;
-                      i -= 4 * viewParams->radius() )
-                {
-                    QRect labelRect( mark->labelRect() );
-                    labelRect.moveLeft(i - tempSymbol + tempText );
-                    mark->setLabelRect( labelRect );
+	    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
+	    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
+	}
 
-                    QPoint symbolPos( mark->symbolPosition() );
-                    symbolPos.setX( i );
-                    mark->setSymbolPosition( symbolPos );
+	for ( int i = tempSymbol;
+	      i <= imageWidth;
+	      i += 4 * viewport->radius() )
+        {
+	    QRect labelRect( mark->labelRect() );
+	    labelRect.moveLeft(i - tempSymbol + tempText );
+	    mark->setLabelRect( labelRect );
 
-                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-                }
+	    QPoint symbolPos( mark->symbolPosition() );
+	    symbolPos.setX( i );
+	    mark->setSymbolPosition( symbolPos );
 
-                for ( int i = tempSymbol;
-                      i <= imageWidth;
-                      i += 4 * viewParams->radius() )
-                {
-                    QRect labelRect( mark->labelRect() );
-                    labelRect.moveLeft(i - tempSymbol + tempText );
-                    mark->setLabelRect( labelRect );
-
-                    QPoint symbolPos( mark->symbolPosition() );
-                    symbolPos.setX( i );
-                    mark->setSymbolPosition( symbolPos );
-
-                    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
-                    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
-                }
-            }
-            break;
-
-        default:
-            qDebug()<<"Projection not supported";
+	    painter->drawPixmap( mark->symbolPosition(), mark->symbolPixmap() );
+	    painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
+	}
     }
 }
 
