@@ -1,3 +1,16 @@
+2008-03-13  Inge Wallin  <inge@lysator.liu.se>
+
+	Krazy fixes: Check for proper include directives:
+	* src/lib/gps/Track.cpp,
+	* src/lib/kml/KMLContainer.cpp,
+	* src/lib/geodata/data/GeoDataContainer.cpp,
+	* src/lib/geodata/data/GeoDataPlacemark.cpp,
+	* src/lib/geodata/parser/GeoDataParser.cpp,
+	* src/lib/geodata/parser/GeoTagHandler.cpp,
+	* src/lib/geodata/parser/GeoSceneParser.cpp,
+	* src/lib/geodata/parser/GeoParser.cpp:
+	Fix include files
+
 2008-03-11  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:

@@ -19,11 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
+
+// Own
+#include "GeoParser.h"
+
+// Qt
 #include <QDebug>
 
-#include "GeoParser.h"
+// Geodata
 #include "GeoDocument.h"
 #include "GeoTagHandler.h"
+
 
 // Set to a value greather than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0

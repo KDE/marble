@@ -8,11 +8,17 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
+
+// Own
+#include "KMLContainer.h"
+
+// Qt
 #include <QtGui/QImage>
 
-#include "KMLContainer.h"
+// Marble
 #include "KMLPlaceMark.h"
 #include "ViewParams.h"
+
 
 KMLContainer::KMLContainer()
 {

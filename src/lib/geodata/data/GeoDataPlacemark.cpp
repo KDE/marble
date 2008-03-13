@@ -9,10 +9,13 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+
+// Own
+#include "GeoDataPlacemark.h"
+
+// Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
-
-#include "GeoDataPlacemark.h"
 
 
 GeoDataPlacemark::GeoDataPlacemark() :

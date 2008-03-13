@@ -8,11 +8,17 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
+
+// Own
+#include "GeoDataContainer.h"
+
+// Qt
 #include <QtGui/QImage>
 
-#include "GeoDataContainer.h"
+// Marble
 #include "GeoDataFeature.h"
 #include "GeoDataFolder.h"
+
 
 GeoDataContainer::GeoDataContainer()
 {
@@ -22,6 +28,7 @@ GeoDataContainer::~GeoDataContainer()
 {
     qDeleteAll(m_features);
 }
+
 
 QVector<GeoDataFolder*> GeoDataContainer::folders() const
 {

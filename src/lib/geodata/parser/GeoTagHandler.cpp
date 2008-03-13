@@ -19,9 +19,13 @@
     Boston, MA 02110-1301, USA.
 */
 
+
+// Own
+#include "GeoTagHandler.h"
+
+// Qt
 #include <QDebug>
 
-#include "GeoTagHandler.h"
 
 // Set to a value greather than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0

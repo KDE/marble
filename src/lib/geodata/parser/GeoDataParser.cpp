@@ -19,11 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
+
+// Own
+#include "GeoDataParser.h"
+
+// Qt
 #include <QDebug>
 
-#include "GeoDataParser.h"
+// Geodata
 #include "GeoDataDocument.h"
 #include "GeoTagHandler.h"
+
 
 // TODO: GeoRSS support
 // #include "GeoRSSElementDictionary.h"
@@ -33,6 +39,7 @@
 
 // KML support
 #include "KMLElementDictionary.h"
+
 
 using namespace GeoDataElementDictionary;
 

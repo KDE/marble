@@ -19,14 +19,20 @@
     Boston, MA 02110-1301, USA.
 */
 
+
+// Own
+#include "GeoSceneParser.h"
+
+// Qt
 #include <QDebug>
 
-#include "GeoSceneParser.h"
+// Geodata
 #include "GeoSceneDocument.h"
 #include "GeoTagHandler.h"
 
 // DGML support
 #include "DGMLElementDictionary.h"
+
 
 using namespace GeoSceneElementDictionary;
 
