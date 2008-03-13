@@ -1,5 +1,20 @@
 2008-03-13  Inge Wallin  <inge@lysator.liu.se>
 
+	Improve API for VectorMaps (start of projection independence):
+	* src/lib/VectorMap.{h,cpp}: Take a ViewportParams instead of
+	ViewParams everywhere
+	* src/lib/VectorComposer.cpp (paintVectorMap): Use new call
+	conventions for the VectorMap
+
+	Make drawPlaceMarks() projection independent.
+	* src/lib/PlaceMarkPainter.cpp (drawPlaceMarks): 
+	  - Make it projection independent
+	  - Take a ViewportParams instead of a ViewParams.
+	* src/lib/PlaceMarkPainter.h (drawPlaceMarks): Take a
+	ViewportParams instead of a ViewParams.
+	* src/lib/PlaceMarkLayout.cpp (paintPlaceFolder): Call
+	drawPlaceMarks() using new signature.
+
 	Krazy fixes: Check for proper include directives:
 	* src/lib/gps/Track.cpp,
 	* src/lib/kml/KMLContainer.cpp,

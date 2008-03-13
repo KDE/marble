@@ -23,7 +23,7 @@
 #include "global.h"
 #include "ClipPainter.h"
 #include "GeoPolygon.h"
-#include "ViewParams.h"
+#include "ViewportParams.h"
 
 
 // #define VECMAP_DEBUG 
@@ -62,23 +62,24 @@ VectorMap::~VectorMap()
 }
 
 
-void VectorMap::createFromPntMap( const PntMap* pntmap, ViewParams* viewParams )
+void VectorMap::createFromPntMap( const PntMap* pntmap, ViewportParams* viewport )
 {
-    switch( viewParams->projection() ) {
+    switch( viewport->projection() ) {
         case Spherical:
-            sphericalCreateFromPntMap( pntmap, viewParams );
+            sphericalCreateFromPntMap( pntmap, viewport );
             break;
         case Equirectangular:
-            rectangularCreateFromPntMap( pntmap, viewParams );
+            rectangularCreateFromPntMap( pntmap, viewport );
             break;
     }
 }
 
-void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* viewParams )
+void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap, 
+					   ViewportParams* viewport )
 {
     clear();
 
-    m_radius = viewParams->radius();
+    m_radius = viewport->radius();
 
     // We must use double or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
@@ -106,7 +107,7 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
 
     Quaternion  qbound;
 
-    viewParams->planetAxis().inverse().toMatrix( m_rotMatrix );
+    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -143,19 +144,20 @@ void VectorMap::sphericalCreateFromPntMap(const PntMap* pntmap, ViewParams* view
     }
 }
 
-void VectorMap::rectangularCreateFromPntMap(const PntMap* pntmap, ViewParams* viewParams )
+void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap, 
+					     ViewportParams* viewport )
 {
     clear();
-    m_radius = viewParams->radius();
+    m_radius = viewport->radius();
 
     // Calculate translation of center point
-    viewParams->centerCoordinates( m_centerLon, m_centerLat );
+    viewport->centerCoordinates( m_centerLon, m_centerLat );
 
     m_rad2Pixel = (float)( 2 * m_radius ) / M_PI;
     double lon, lat;
     double x, y;
 
-    viewParams->planetAxis().inverse().toMatrix( m_rotMatrix );
+    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
@@ -411,21 +413,21 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 }
 
 
-void VectorMap::paintBase(ClipPainter * painter, ViewParams* viewParams, bool antialiasing )
+void VectorMap::paintBase(ClipPainter * painter, ViewportParams* viewport, bool antialiasing )
 {
-    switch( viewParams->projection() ) {
+    switch( viewport->projection() ) {
         case Spherical:
-            sphericalPaintBase(   painter, viewParams, antialiasing );
+            sphericalPaintBase(   painter, viewport, antialiasing );
             break;
         case Equirectangular:
-            rectangularPaintBase( painter, viewParams, antialiasing);
+            rectangularPaintBase( painter, viewport, antialiasing);
             break;
     }
 }
 
-void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
+void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewportParams *viewport, bool antialiasing)
 {
-    m_radius =  viewParams->radius();
+    m_radius =  viewport->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -441,9 +443,10 @@ void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewParams *viewParams
     }
 }
 
-void VectorMap::rectangularPaintBase(ClipPainter * painter, ViewParams *viewParams, bool antialiasing)
+void VectorMap::rectangularPaintBase( ClipPainter * painter, 
+				      ViewportParams *viewport, bool antialiasing)
 {
-    m_radius = viewParams->radius();
+    m_radius = viewport->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -452,7 +455,7 @@ void VectorMap::rectangularPaintBase(ClipPainter * painter, ViewParams *viewPara
 
     // Calculate translation of center point
     double centerLon, centerLat;
-    viewParams->centerCoordinates( centerLon, centerLat );
+    viewport->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset = (int)( centerLat * (double)( 2 * m_radius ) / M_PI );
     int yTop = m_imgheight / 2 - m_radius + yCenterOffset;
@@ -633,4 +636,3 @@ int VectorMap::getDetailLevel() const
 
     return detail;
 }
-
