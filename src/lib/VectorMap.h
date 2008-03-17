@@ -57,7 +57,8 @@ class VectorMap : public ScreenPolygon::Vector
     void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
 
     void createPolyLine( GeoDataPoint::Vector::ConstIterator, 
-                         GeoDataPoint::Vector::ConstIterator, const int, Projection );
+                         GeoDataPoint::Vector::ConstIterator, const int, 
+			 ViewportParams *viewport );
     void sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
                             GeoDataPoint::Vector::ConstIterator, const int );
     void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
@@ -70,7 +71,7 @@ class VectorMap : public ScreenPolygon::Vector
     const QPointF  horizonPoint();
     void           createArc();
 
-    int            getDetailLevel() const;
+    int            getDetailLevel( int radius ) const;
 
  private:
     GeoDataPoint::Vector  m_boundary;

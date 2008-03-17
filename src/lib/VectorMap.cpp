@@ -62,7 +62,8 @@ VectorMap::~VectorMap()
 }
 
 
-void VectorMap::createFromPntMap( const PntMap* pntmap, ViewportParams* viewport )
+void VectorMap::createFromPntMap( const PntMap* pntmap, 
+				  ViewportParams* viewport )
 {
     switch( viewport->projection() ) {
         case Spherical:
@@ -112,7 +113,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     //	const int detail = 0;
-    const int  detail = getDetailLevel();
+    const int  detail = getDetailLevel( m_radius );
     GeoDataPoint   corner;
 
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
@@ -134,7 +135,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 
                 // qDebug() << i << " Visible: YES";
                 createPolyLine( (*itPolyLine)->constBegin(),
-                                (*itPolyLine)->constEnd(), detail, Spherical );
+                                (*itPolyLine)->constEnd(), detail, viewport );
 
                 break; // abort foreach test of current boundary
             } 
@@ -163,7 +164,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
     ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
-    const int  detail = getDetailLevel();
+    const int  detail = getDetailLevel( m_radius );
 //    qDebug() << "==============";
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
@@ -218,22 +219,21 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
             createPolyLine( (*itPolyLine)->constBegin(),
-                            (*itPolyLine)->constEnd(), detail, Equirectangular );
+                            (*itPolyLine)->constEnd(), detail, viewport );
 
             m_offset += 4 * m_radius;
             boundingPolygon.translate( 4 * m_radius, 0 );
         }
-
     }
 }
 
 void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoDataPoint::Vector::ConstIterator  itEndPoint,
-                                const int detail, Projection currentProjection )
+                                const int detail, ViewportParams *viewport )
 {
-    switch( currentProjection ) {
+    switch( viewport->projection() ) {
        case Spherical:
-            sphericalCreatePolyLine( itStartPoint, itEndPoint, detail );
+	   sphericalCreatePolyLine( itStartPoint, itEndPoint, detail );
             break;
         case Equirectangular:
             rectangularCreatePolyLine( itStartPoint, itEndPoint, detail );
@@ -622,17 +622,17 @@ void VectorMap::resizeMap( int width, int height )
 }
 
 
-int VectorMap::getDetailLevel() const
+int VectorMap::getDetailLevel( int radius ) const
 {
     int detail = 5;
 	
-    if ( m_radius >   50 ) detail = 4;
-    if ( m_radius >  600 ) detail = 3;
-    if ( m_radius > 1000 ) detail = 2;
-    if ( m_radius > 2500 ) detail = 1;
-    if ( m_radius > 5000 ) detail = 0;
+    if ( radius >   50 ) detail = 4;
+    if ( radius >  600 ) detail = 3;
+    if ( radius > 1000 ) detail = 2;
+    if ( radius > 2500 ) detail = 1;
+    if ( radius > 5000 ) detail = 0;
 
-    //	qDebug() << "Detail: " << detail << " Radius: " << m_radius ;
+    //	qDebug() << "Detail: " << detail << " Radius: " << radius ;
 
     return detail;
 }

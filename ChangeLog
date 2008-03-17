@@ -1,3 +1,9 @@
+2008-03-17  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/VectorMap.{h,cpp} (createPolyLine): Take ViewportParams
+	instead of Projection.
+	(getDetailLevel): Take radius parameter instead of using m_radius.
+
 2008-03-13  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve API for VectorMaps (start of projection independence):
