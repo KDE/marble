@@ -100,7 +100,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
+    m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
 
     // Islands
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
@@ -109,7 +109,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
+    m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
 
     if ( viewParams->m_showLakes ) {
          // Lakes
@@ -118,11 +118,11 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
          m_vectorMap -> createFromPntMap( m_lakes, viewParams->viewport() );
          m_vectorMap -> setBrush( m_textureLakeBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
+         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
 
          m_vectorMap -> createFromPntMap( m_lakeislands, viewParams->viewport() );
          m_vectorMap -> setBrush( m_textureLandBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
+         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
     }
 
     if ( viewParams->m_showIceLayer ) {
@@ -132,7 +132,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> createFromPntMap( m_glaciers, viewParams->viewport() );
          m_vectorMap -> setBrush( m_textureGlacierBrush );
 
-         m_vectorMap -> drawMap( origimg, false, viewParams->projection() );
+         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
     }
 
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();

@@ -1,3 +1,11 @@
+2008-03-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Get rid of an unnecessary member.
+	* src/lib/VectorMap.{h,cpp}: Get rid of m_radius and take a
+	ViewportParams* as parameter where necessary.
+	* src/lib/VectorComposer.cpp (paintBaseVectorMap): Use new calling
+	conventions
+
 2008-03-17  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/VectorMap.{h,cpp} (createPolyLine): Take ViewportParams

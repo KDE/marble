@@ -37,7 +37,8 @@ class VectorMap : public ScreenPolygon::Vector
 
     void paintBase( ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
     void paintMap( ClipPainter *painter, bool antialiasing );
-    void drawMap( QPaintDevice *paintDevice, bool antialiasing, Projection );
+    void drawMap( QPaintDevice *paintDevice, bool antialiasing,
+		  ViewportParams *viewport );
 
     void resizeMap( int width, int height );
 
@@ -60,9 +61,11 @@ class VectorMap : public ScreenPolygon::Vector
                          GeoDataPoint::Vector::ConstIterator, const int, 
 			 ViewportParams *viewport );
     void sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
-                            GeoDataPoint::Vector::ConstIterator, const int );
+				  GeoDataPoint::Vector::ConstIterator, 
+				  const int detail, ViewportParams *viewport );
     void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
-                            GeoDataPoint::Vector::ConstIterator, const int );
+				    GeoDataPoint::Vector::ConstIterator, 
+				    const int detail, ViewportParams *viewport );
 
     void sphericalPaintBase(   ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
     void rectangularPaintBase( ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
@@ -116,7 +119,6 @@ class VectorMap : public ScreenPolygon::Vector
     QPointF           m_horizona;
     QPointF           m_horizonb;
 	
-    int               m_radius;
     int               m_rlimit;
 
     //Needed for the flat projection

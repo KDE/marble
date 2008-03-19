@@ -49,7 +49,6 @@ VectorMap::VectorMap()
     m_currentlyvisible = false;
     m_firsthorizon = false;
 
-    m_radius = 0;
     m_rlimit = 0;
 
     m_brush = QBrush( QColor( 0, 0, 0 ) );
@@ -80,12 +79,10 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 {
     clear();
 
-    m_radius = viewport->radius();
-
     // We must use double or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
     // choose double because of some sqrt() calculations.
-    double   radius    = m_radius;
+    double   radius    = viewport->radius();
     double   imgradius = m_imgradius;
 
     // zlimit: describes the lowest z value of the sphere that is
@@ -113,7 +110,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     //	const int detail = 0;
-    const int  detail = getDetailLevel( m_radius );
+    const int  detail = getDetailLevel( viewport->radius() );
     GeoDataPoint   corner;
 
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
@@ -149,12 +146,12 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 					     ViewportParams* viewport )
 {
     clear();
-    m_radius = viewport->radius();
+    int  radius = viewport->radius();
 
     // Calculate translation of center point
     viewport->centerCoordinates( m_centerLon, m_centerLat );
 
-    m_rad2Pixel = (float)( 2 * m_radius ) / M_PI;
+    m_rad2Pixel = (float)( 2 * radius ) / M_PI;
     double lon, lat;
     double x, y;
 
@@ -164,7 +161,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
     ScreenPolygon boundingPolygon;
     QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
-    const int  detail = getDetailLevel( m_radius );
+    const int  detail = getDetailLevel( radius );
 //    qDebug() << "==============";
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
@@ -184,28 +181,27 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (m_centerLat - lat);
             boundingPolygon << QPointF( x, y );
 /*            if ( (*itPolyLine)->getIndex() == 1001 ){
-                qDebug() << "x: " << x << " y: " << y << " 4*m_radius: " << 4*m_radius;
+                qDebug() << "x: " << x << " y: " << y << " 4*radius: " << 4*radius;
                 qDebug() << "lon: " << lon << " clon: " << m_centerLon;
             } */
         }
 
-        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 )
-        {
-            boundingPolygon.translate( 4 * m_radius, 0 );
-            m_offset += 4 * m_radius;            
+        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
+            boundingPolygon.translate( 4 * radius, 0 );
+            m_offset += 4 * radius;
         }
 
         do {
-            m_offset -= 4 * m_radius;
-            boundingPolygon.translate( -4 * m_radius, 0 );
+            m_offset -= 4 * radius;
+            boundingPolygon.translate( -4 * radius, 0 );
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
                 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
                 || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( m_centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
                 );
-        m_offset += 4 * m_radius;
-        boundingPolygon.translate( 4 * m_radius, 0 );
+        m_offset += 4 * radius;
+        boundingPolygon.translate( 4 * radius, 0 );
 
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
@@ -221,8 +217,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             createPolyLine( (*itPolyLine)->constBegin(),
                             (*itPolyLine)->constEnd(), detail, viewport );
 
-            m_offset += 4 * m_radius;
-            boundingPolygon.translate( 4 * m_radius, 0 );
+            m_offset += 4 * radius;
+            boundingPolygon.translate( 4 * radius, 0 );
         }
     }
 }
@@ -233,19 +229,24 @@ void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoin
 {
     switch( viewport->projection() ) {
        case Spherical:
-	   sphericalCreatePolyLine( itStartPoint, itEndPoint, detail );
+	   sphericalCreatePolyLine( itStartPoint, itEndPoint,
+				    detail, viewport );
             break;
         case Equirectangular:
-            rectangularCreatePolyLine( itStartPoint, itEndPoint, detail );
+            rectangularCreatePolyLine( itStartPoint, itEndPoint, 
+				       detail, viewport );
             break;
     }
 }
 
 void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
-                                const int detail)
+					 GeoDataPoint::Vector::ConstIterator  itEndPoint,
+					 const int detail,
+					 ViewportParams *viewport )
 {
     GeoDataPoint::Vector::const_iterator  itPoint;
+
+    int  radius = viewport->radius();
 
     // Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
     Quaternion qpos;
@@ -261,8 +262,8 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
 #endif
             qpos = itPoint->quaternion();
             qpos.rotateAroundAxis(m_rotMatrix);
-            m_currentPoint = QPointF( m_imgrx + m_radius * qpos.v[Q_X] + 1.0,
-                                      m_imgry - m_radius * qpos.v[Q_Y] + 1.0 );
+            m_currentPoint = QPointF( m_imgrx + radius * qpos.v[Q_X] + 1.0,
+                                      m_imgry - radius * qpos.v[Q_Y] + 1.0 );
 			
             // Take care of horizon crossings if horizon is visible
             m_lastvisible = m_currentlyvisible;			
@@ -318,8 +319,9 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
 }
 
 void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
-                                const int detail)
+					   GeoDataPoint::Vector::ConstIterator  itEndPoint,
+					   const int detail,
+					   ViewportParams *viewport )
 {
     GeoDataPoint::Vector::const_iterator  itPoint;
 
@@ -413,7 +415,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 }
 
 
-void VectorMap::paintBase(ClipPainter * painter, ViewportParams* viewport, bool antialiasing )
+void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
+			   bool antialiasing )
 {
     switch( viewport->projection() ) {
         case Spherical:
@@ -425,28 +428,29 @@ void VectorMap::paintBase(ClipPainter * painter, ViewportParams* viewport, bool 
     }
 }
 
-void VectorMap::sphericalPaintBase(ClipPainter * painter, ViewportParams *viewport, bool antialiasing)
+void VectorMap::sphericalPaintBase( ClipPainter * painter, 
+				    ViewportParams *viewport, bool antialiasing)
 {
-    m_radius =  viewport->radius();
+    int  radius =  viewport->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
 
-    if ( m_imgradius < (double)m_radius * (double)m_radius ) {
+    if ( m_imgradius < (double)radius * (double)radius ) {
         painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
     }
     else {
-        painter->drawEllipse( m_imgrx - m_radius, m_imgry - m_radius, 
-                              2 * m_radius, 2 * m_radius );
+        painter->drawEllipse( m_imgrx - radius, m_imgry - radius, 
+                              2 * radius, 2 * radius );
     }
 }
 
 void VectorMap::rectangularPaintBase( ClipPainter * painter, 
 				      ViewportParams *viewport, bool antialiasing)
 {
-    m_radius = viewport->radius();
+    int  radius = viewport->radius();
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -454,28 +458,31 @@ void VectorMap::rectangularPaintBase( ClipPainter * painter,
     painter->setBrush( m_brush );
 
     // Calculate translation of center point
-    double centerLon, centerLat;
+    double  centerLon;
+    double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)( centerLat * (double)( 2 * m_radius ) / M_PI );
-    int yTop = m_imgheight / 2 - m_radius + yCenterOffset;
+    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
+    int yTop = m_imgheight / 2 - radius + yCenterOffset;
 
-    painter->drawRect( 0, yTop, m_imgwidth, 2 * m_radius);
+    painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
 }
 
-void VectorMap::drawMap( QPaintDevice * origimg, bool antialiasing, Projection currentProjection )
+void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
+			 ViewportParams *viewport )
 {
-    bool clip = false; //assume false
-    switch( currentProjection ) {
+    bool doClip = false; //assume false
+    switch( viewport->projection() ) {
         case Spherical:
-            clip = (m_radius > m_imgrx || m_radius > m_imgry) ? true : false;
+            doClip = ( viewport->radius() > m_imgrx
+		       || viewport->radius() > m_imgry );
             break;
         case Equirectangular:
-            clip = true; // clipping should always be enabled
+            doClip = true; // clipping should always be enabled
             break;
     }
 
-    ClipPainter  painter(origimg, clip);
+    ClipPainter  painter(origimg, doClip);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
     painter.setPen(m_pen);
     painter.setBrush(m_brush);
@@ -494,6 +501,8 @@ void VectorMap::drawMap( QPaintDevice * origimg, bool antialiasing, Projection c
     }
 }
 
+
+// Paint the prepared vectors in screen coordinates.
 
 void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
 {
