@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="marble" version="3">
+<gui name="marble" version="5">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
@@ -20,6 +20,7 @@
   <Menu name="settings" noMerge="1"><text>&amp;Settings</text>
     <Action name="fullscreen"/>
     <Action name="show_sun"/>
+    <Action name="options_configure" append="configure_merge"/>
   </Menu>
 </MenuBar>
 

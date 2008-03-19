@@ -22,6 +22,8 @@ class MarbleWidget;
 
 class MainWindow : public KXmlGuiWindow
 {
+  Q_OBJECT
+
  public:
     explicit MainWindow( const QString& marbleDataPath = QString(), 
                          QWidget *parent = 0 );
@@ -30,7 +32,12 @@ class MainWindow : public KXmlGuiWindow
     ControlView* marbleControl() const;
     MarbleWidget* marbleWidget() const;
 
+  private Q_SLOTS:
+    void  editSettings();
+
  private:
+    void  setupActions();
+
     MarblePart *m_part;
 };
 

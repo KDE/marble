@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="3">
+<kpartgui name="marble_part" version="4">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
