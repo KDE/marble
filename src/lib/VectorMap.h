@@ -77,8 +77,6 @@ class VectorMap : public ScreenPolygon::Vector
     int            getDetailLevel( int radius ) const;
 
  private:
-    GeoDataPoint::Vector  m_boundary;
-
     double            m_zlimit;
     double            m_plimit;
     double            m_zBoundingBoxLimit;	
@@ -86,13 +84,6 @@ class VectorMap : public ScreenPolygon::Vector
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;
-
-    //Used for flat projection
-    Quaternion m_planetAxis;
-    int m_lastSign;
-    int m_offset;
-    double m_lastLon;
-    double m_lastLat;
 
     //	int m_debugNodeCount;
 
@@ -121,10 +112,15 @@ class VectorMap : public ScreenPolygon::Vector
 	
     int               m_rlimit;
 
-    //Needed for the flat projection
-    double m_centerLat;
-    double m_centerLon;
+    // Needed for the flat projection
     double m_rad2Pixel;
+
+    // More stuff for flat projection
+    Quaternion  m_planetAxis;
+    int         m_lastSign;
+    int         m_offset;
+    double      m_lastLon;
+    double      m_lastLat;
 };
 
 

@@ -1,5 +1,10 @@
 2008-03-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Get rid of unnecessary members.
+	* src/lib/VectorMap.{h,cpp}: Remove unnecessary members
+	m_boundary, m_centerLon and m_centerLat and make them local
+	variables instead.
+
 	Get rid of an unnecessary member.
 	* src/lib/VectorMap.{h,cpp}: Get rid of m_radius and take a
 	ViewportParams* as parameter where necessary.
