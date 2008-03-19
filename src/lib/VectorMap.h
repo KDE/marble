@@ -113,10 +113,6 @@ class VectorMap : public ScreenPolygon::Vector
     int               m_rlimit;
 
     // Needed for the flat projection
-    double m_rad2Pixel;
-
-    // More stuff for flat projection
-    Quaternion  m_planetAxis;
     int         m_lastSign;
     int         m_offset;
     double      m_lastLon;

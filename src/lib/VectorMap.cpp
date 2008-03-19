@@ -153,7 +153,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    m_rad2Pixel = (float)( 2 * radius ) / M_PI;
+    double rad2Pixel = (float)( 2 * radius ) / M_PI;
     double lon, lat;
     double x, y;
 
@@ -179,8 +179,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         // this projection
         for ( int i = 1; i < 3; ++i ) {
             boundary[i].geoCoordinates(lon, lat);
-            x = (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * (centerLon - lon);
-            y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (centerLat - lat);
+            x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
+            y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
 /*            if ( (*itPolyLine)->getIndex() == 1001 ){
                 qDebug() << "x: " << x << " y: " << y << " 4*radius: " << 4*radius;
@@ -199,8 +199,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
-                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
+                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
                 );
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
@@ -208,8 +208,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
         while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
-                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
+                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
                 ) {
 
             m_polygon.clear();
@@ -334,6 +334,9 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
+    // Other convenience variables
+    double  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
+
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
@@ -350,8 +353,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 #endif
 
             itPoint->geoCoordinates( lon, lat);
-            double x = (double)(m_imgwidth)  / 2.0 - m_rad2Pixel * (centerLon - lon) + m_offset;
-            double y = (double)(m_imgheight) / 2.0 + m_rad2Pixel * (centerLat - lat);
+            double x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
+            double y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
             int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
             if( firstPoint ) {
                 firstPoint = false;
@@ -366,10 +369,10 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
                 // x coordinate on the screen for the points on the dateline on both
                 // sides of the flat map.
-                double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + m_rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-                double xAtDateLine = (double)(m_imgwidth) / 2.0 + m_rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-                double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * m_rad2Pixel;
-                double yAtSouthPole = (double)(m_imgheight) / 2.0 + m_rad2Pixel * ( M_PI / 2.0 + centerLat );
+                double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+                double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+                double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
+                double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
 
                 //If the "jump" occurs in the Anctartica's latitudes
 

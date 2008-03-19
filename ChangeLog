@@ -1,11 +1,13 @@
-2008-03-19  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+2008-03-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Get rid of unnecessary members.
+	* src/lib/VectorMap.{h,cpp}: Remove unnecessary members
+	m_rad2Pixel, m_planetAxis and make them local variables instead.
 
 	Krazy fixes:Check for contractions in strings 
 	* src/lib/geodata/handlers/dgml/DGMLMinimumTagHandler.cpp, 
 	* src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler.cpp:
 	Fix
-
-2008-03-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Get rid of unnecessary members.
 	* src/lib/VectorMap.{h,cpp}: Remove unnecessary members
