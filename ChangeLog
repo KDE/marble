@@ -1,5 +1,8 @@
 2008-03-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Get rid of unnecessary member
+	* src/lib/VectorMap.{h,cpp}: Remove unnecessary member m_imgradius
+
 	Get rid of unnecessary members.
 	* src/lib/VectorMap.{h,cpp}: Remove unnecessary members
 	m_rad2Pixel, m_planetAxis and make them local variables instead.

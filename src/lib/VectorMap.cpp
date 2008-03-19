@@ -39,7 +39,6 @@ VectorMap::VectorMap()
 
     m_imgrx = 0; 
     m_imgry = 0; 
-    m_imgradius = 0;
     m_imgwidth  = 0; 
     m_imgheight = 0;
 
@@ -82,13 +81,14 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     // We must use double or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
     // choose double because of some sqrt() calculations.
-    double   radius    = viewport->radius();
-    double   imgradius = m_imgradius;
+    double   radius     = viewport->radius();
+    double   imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
 
     // zlimit: describes the lowest z value of the sphere that is
-    //         visible as an excerpt on the screen
-    double zlimit = ( ( imgradius < radius * radius )
-                      ? sqrt( 1 - imgradius / ( radius * radius ) )
+    //         visible on the screen.  This should happen in the
+    //         corners.
+    double zlimit = ( ( imgradius2 < radius * radius )
+                      ? sqrt( 1 - imgradius2 / ( radius * radius ) )
                       : 0.0 );
     // qDebug() << "zlimit: " << zlimit;
 
@@ -161,10 +161,10 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
-    ScreenPolygon boundingPolygon;
-    QRectF visibleArea ( 0, 0, m_imgwidth, m_imgheight );
-    const int  detail = getDetailLevel( radius );
-//    qDebug() << "==============";
+    ScreenPolygon  boundingPolygon;
+    QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    const int      detail = getDetailLevel( radius );
+
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
@@ -198,8 +198,10 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             boundingPolygon.translate( -4 * radius, 0 );
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
-        } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
-                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+        } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
+		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
                 || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
                 );
         m_offset += 4 * radius;
@@ -207,10 +209,23 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
 //      FIXME: Get rid of this really fugly code once we will have a proper
 //             LatLonBox check implemented and in place.
-        while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
-                || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) )
-                ) {
+        while ( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
+		  && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
+		     && ( visibleArea.intersects(
+			    QRectF( boundingPolygon.at(1),
+				    QPointF( (double)(m_imgwidth) / 2.0
+					     - rad2Pixel * ( centerLon - M_PI )
+					     + m_offset, 
+					     boundingPolygon.at(0).y() ) ) ) 
+			  || visibleArea.intersects(
+			         QRectF( QPointF( (double)(m_imgwidth) / 2.0
+						  - rad2Pixel * ( centerLon + M_PI )
+						  + m_offset,
+						  boundingPolygon.at(1).y() ),
+					 boundingPolygon.at(0) ) ) ) )
+		) 
+	{
 
             m_polygon.clear();
             m_polygon.reserve( (*itPolyLine)->size() );
@@ -263,7 +278,7 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
             ++m_debugNodeCount;
 #endif
             qpos = itPoint->quaternion();
-            qpos.rotateAroundAxis(m_rotMatrix);
+            qpos.rotateAroundAxis( m_rotMatrix );
             m_currentPoint = QPointF( m_imgrx + radius * qpos.v[Q_X] + 1.0,
                                       m_imgry - radius * qpos.v[Q_Y] + 1.0 );
 			
@@ -272,7 +287,7 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
 
             // Less accurate:
             // currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
-            m_currentlyvisible = ( qpos.v[Q_Z] >= 0 ) ? true : false;
+            m_currentlyvisible = ( qpos.v[Q_Z] >= 0 );
             if ( itPoint == itStartPoint ) {
                 // qDebug("Initializing scheduled new PolyLine");
                 m_lastvisible  = m_currentlyvisible;
@@ -441,14 +456,15 @@ void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
 void VectorMap::sphericalPaintBase( ClipPainter * painter, 
 				    ViewportParams *viewport, bool antialiasing)
 {
-    int  radius =  viewport->radius();
+    int     radius     =  viewport->radius();
+    double  imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
 
-    if ( m_imgradius < (double)radius * (double)radius ) {
+    if ( imgradius2 < (double)radius * (double)radius ) {
         painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
     }
     else {
@@ -636,8 +652,6 @@ void VectorMap::resizeMap( int width, int height )
 
     m_imgrx = ( m_imgwidth  / 2 );
     m_imgry = ( m_imgheight / 2 );
-
-    m_imgradius = m_imgrx * m_imgrx + m_imgry * m_imgry;
 }
 
 

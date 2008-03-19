@@ -35,6 +35,9 @@ class VectorMap : public ScreenPolygon::Vector
     ~VectorMap();
     void createFromPntMap( const PntMap*, ViewportParams *viewport );
 
+    /**
+     * @brief Paint the background, i.e. the water.
+     */
     void paintBase( ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
     void paintMap( ClipPainter *painter, bool antialiasing );
     void drawMap( QPaintDevice *paintDevice, bool antialiasing,
@@ -67,8 +70,10 @@ class VectorMap : public ScreenPolygon::Vector
 				    GeoDataPoint::Vector::ConstIterator, 
 				    const int detail, ViewportParams *viewport );
 
-    void sphericalPaintBase(   ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
-    void rectangularPaintBase( ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
+    void sphericalPaintBase(   ClipPainter *painter, ViewportParams *viewport, 
+			       bool antialiasing );
+    void rectangularPaintBase( ClipPainter *painter, ViewportParams *viewport, 
+			       bool antialiasing );
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();
@@ -91,7 +96,6 @@ class VectorMap : public ScreenPolygon::Vector
 
     int               m_imgrx;
     int               m_imgry;
-    int               m_imgradius;
     int               m_imgwidth;
     int               m_imgheight;
 
@@ -101,7 +105,7 @@ class VectorMap : public ScreenPolygon::Vector
     QPen              m_pen;
     QBrush            m_brush;
 
-    // Dealing with the horizon
+    // Dealing with the horizon for spherical projection.
     bool              m_firsthorizon;
     bool              m_lastvisible;
     bool              m_currentlyvisible;
@@ -112,7 +116,7 @@ class VectorMap : public ScreenPolygon::Vector
 	
     int               m_rlimit;
 
-    // Needed for the flat projection
+    // Needed for repetition in the X direction for flat projection
     int         m_lastSign;
     int         m_offset;
     double      m_lastLon;
