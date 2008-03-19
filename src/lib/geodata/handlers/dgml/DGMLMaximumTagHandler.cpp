@@ -56,7 +56,7 @@ GeoNode* DGMLMaximumTagHandler::parse(GeoParser& parser) const
         if (ok)
             parentItem.nodeAs<GeoSceneZoom>()->setMaximum(parsedInt);
         else
-            parser.raiseWarning(QObject::tr("Couldn't convert <maximum> child text content to integer. Was: '%1'").arg(parsedText));
+            parser.raiseWarning(QObject::tr("Could not convert <maximum> child text content to integer. Was: '%1'").arg(parsedText));
     }
 
     return 0;

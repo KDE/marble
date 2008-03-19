@@ -1,3 +1,10 @@
+2008-03-19  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+
+	Krazy fixes:Check for contractions in strings 
+	* src/lib/geodata/handlers/dgml/DGMLMinimumTagHandler.cpp, 
+	* src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler.cpp:
+	Fix
+
 2008-03-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Get rid of unnecessary members.

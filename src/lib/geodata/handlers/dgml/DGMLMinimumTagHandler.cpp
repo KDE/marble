@@ -54,7 +54,7 @@ GeoNode* DGMLMinimumTagHandler::parse(GeoParser& parser) const
         if (ok)
             parentItem.nodeAs<GeoSceneZoom>()->setMinimum(parsedInt);
         else
-            parser.raiseWarning(QObject::tr("Couldn't convert <minimum> child text content to integer. Was: '%1'").arg(parsedText));
+            parser.raiseWarning(QObject::tr("Could not convert <minimum> child text content to integer. Was: '%1'").arg(parsedText));
     }
 
 
