@@ -50,7 +50,6 @@
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
-#include "MarbleSettingsWidget.h"
 #include "settings.h"
 
 
