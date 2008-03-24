@@ -20,7 +20,6 @@
   <Menu name="settings" noMerge="1"><text>&amp;Settings</text>
     <Action name="fullscreen"/>
     <Action name="show_sun"/>
-    <Action name="options_configure" append="configure_merge"/>
   </Menu>
 </MenuBar>
 

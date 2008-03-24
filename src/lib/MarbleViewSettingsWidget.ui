@@ -1,0 +1,341 @@
+<ui version="4.0" >
+ <class>MarbleViewSettingsWidget</class>
+ <widget class="QWidget" name="MarbleViewSettingsWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>545</width>
+    <height>472</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>&amp;Units</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>118</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>&amp;Distance:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>comboBox_2</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QComboBox" name="comboBox_2" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip" >
+         <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The unit that gets used to measure altitude, lengths and distances (e.g. km, mi, ft).&lt;/p>&lt;/body>&lt;/html></string>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Kilometer, Meter</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Miles, Feet</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>An&amp;gle:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>comboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QComboBox" name="comboBox" >
+        <property name="toolTip" >
+         <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (e.g. 54°30'00" ) gets used. As an alternative you can choose decimal degrees (e.g. 54.5°).&lt;/p>&lt;/body>&lt;/html></string>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Degree (DMS)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Degree (Decimal)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>UTM</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2" >
+     <property name="title" >
+      <string>Map &amp;Quality</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label_5" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>118</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>&amp;Static image:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>comboBox_3</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QComboBox" name="comboBox_3" >
+        <property name="toolTip" >
+         <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Specifies the map quality that gets displayed while there is no user input. Usually this allows for high map quality as speed is no concern.&lt;/p>&lt;/body>&lt;/html></string>
+        </property>
+        <property name="currentIndex" >
+         <number>2</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Low Quality</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Normal</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>High Quality</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Print Quality</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_3" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text" >
+         <string>During &amp;animations:</string>
+        </property>
+        <property name="buddy" >
+         <cstring>comboBox_4</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QComboBox" name="comboBox_4" >
+        <property name="toolTip" >
+         <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Specifies the map quality that gets displayed during map animations (e.g. while dragging the globe). &lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Especially on slow machines it's advisable to set this option to "low quality" as this will give better speed.&lt;/p>&lt;/body>&lt;/html></string>
+        </property>
+        <property name="currentIndex" >
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Low Quality</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Normal</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>High Quality</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Print Quality</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_5" >
+     <property name="title" >
+      <string>&amp;Text Labels</string>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <layout class="QHBoxLayout" >
+        <item>
+         <widget class="QLabel" name="label_7" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize" >
+           <size>
+            <width>118</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>&amp;Place names:</string>
+          </property>
+          <property name="buddy" >
+           <cstring>comboBox_6</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox_6" >
+          <property name="toolTip" >
+           <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place. &lt;/p>&lt;/body>&lt;/html></string>
+          </property>
+          <item>
+           <property name="text" >
+            <string>User language and local language</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>User language</string>
+           </property>
+          </item>
+          <item>
+           <property name="text" >
+            <string>Local language</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" >
+        <item>
+         <widget class="QLabel" name="label_4" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize" >
+           <size>
+            <width>118</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Default Map &amp;Font:</string>
+          </property>
+          <property name="buddy" >
+           <cstring>fontComboBox</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFontComboBox" name="fontComboBox" >
+          <property name="toolTip" >
+           <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The default font that gets used on the map.&lt;/p>&lt;/body>&lt;/html></string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>446</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,135 @@
+<ui version="4.0" >
+ <class>MarbleNavigationSettingsWidget</class>
+ <widget class="QWidget" name="MarbleNavigationSettingsWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>431</width>
+    <height>259</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QGridLayout" >
+     <item row="0" column="0" >
+      <widget class="QLabel" name="label_dragLocation" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>118</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>&amp;Drag location:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>cfg_dragLocation</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" >
+      <widget class="QComboBox" name="cfg_dragLocation" >
+       <property name="toolTip" >
+        <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">While dragging the mouse there are two standard behaviours when dealing with a virtual globe:&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The location below mouse pointer will follow the cursor exactly: As a result e.g. the north pole won't stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly "detaches" from the cursor. &lt;/p>&lt;/body>&lt;/html></string>
+       </property>
+       <item>
+        <property name="text" >
+         <string>Pole axis stays vertically</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Follow mouse exactly</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0" >
+      <widget class="QLabel" name="label_onStartup" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>118</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>&amp;On Startup:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>cfg_onStartup</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" >
+      <widget class="QComboBox" name="cfg_onStartup" >
+       <property name="toolTip" >
+        <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">By default Marble will display the home location immediately after the application has started. As an alternative it can also show the last position that was active when the user left the application. &lt;/p>&lt;/body>&lt;/html></string>
+       </property>
+       <item>
+        <property name="text" >
+         <string>Show Home Location</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Return to last location visited</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="kcfg_animateTargetVoyage" >
+     <property name="toolTip" >
+      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">When searching for a location Marble can either move instantly to the new location or it can show a travel animation from the previous place to the new place.&lt;/p>&lt;/body>&lt;/html></string>
+     </property>
+     <property name="text" >
+      <string>&amp;Animate voyage to the target</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>221</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

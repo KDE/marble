@@ -24,4 +24,52 @@
    <default></default>
   </entry>
  </group>
+ <group name="Navigation" >
+<!--
+  <entry key="dragLocation" type="Enum" >
+   <label>The behaviour of the planet's axis on mouse dragging.</label>
+   <choices name="Marble::Navigation::DragLocation">
+    <choice name="Navigation::PoleAxisStaysVertically"/>
+    <choice name="Navigation::MouseFollowsExactly"/>
+   </choices>
+   <default>Navigation::PoleAxisStaysVertically</default>
+  </entry>
+  <entry key="onStartup" type="Enum" >
+   <label>The location shown on application startup.</label>
+   <choices name="Marble::Navigation::onStartup">
+    <choice name="Navigation::ShowHomeLocation"/>
+    <choice name="Navigation::ShowLastLocationVisited"/>
+   </choices>
+   <default>Navigation::ShowHomeLocation</default>
+  </entry>
+-->
+  <entry key="animateTargetVoyage" type="Bool" >
+   <label>Display animation on voyage to target.</label>
+   <default>true</default>
+  </entry>
+ </group>
+ <group name="Cache" >
+  <entry key="physicalMemoryCache" type="Int" >
+   <label>Cache for tiles reserved in the physical memory.</label>
+   <default>30</default>
+   <min>0</min>
+   <max>999999</max>
+  </entry>
+  <entry key="harddiscCache" type="Int" >
+   <label>Maximum space on the harddisc that can be used to store tiles.</label>
+   <default>999999</default>
+   <min>0</min>
+   <max>999999</max>
+  </entry>
+  <entry name="proxyUrl" type="String">
+   <label>Url for the proxy server.</label>
+   <default>http://</default>
+  </entry>
+  <entry key="proxyPort" type="Int" >
+   <label>Port for the proxy server.</label>
+   <default>8080</default>
+   <min>0</min>
+   <max>9999</max>
+  </entry>
+ </group>
 </kcfg>

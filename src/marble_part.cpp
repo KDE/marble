@@ -27,6 +27,7 @@
 #include <kactioncollection.h>
 #include <kapplication.h>
 #include <kcomponentdata.h>
+#include <kconfigdialog.h>
 #include <kdeversion.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
@@ -43,8 +44,13 @@
 #include "lib/SunControlWidget.h"
 
 // Local dir
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleCacheSettingsWidget.h"
+
 #include <MarbleDirs.h>
 #include <ControlView.h>
+#include "MarbleSettingsWidget.h"
 #include "settings.h"
 
 
@@ -325,6 +331,8 @@ void MarblePart::setupActions()
     m_showSunAct->setText( i18n( "S&un Control" ) );
     connect( m_showSunAct, SIGNAL( triggered( bool ) ), this, SLOT( showSun() ) );
 
+    KStandardAction::preferences( this, SLOT( editSettings() ), actionCollection() );
+
     readSettings();
 }
 
@@ -394,6 +402,39 @@ void MarblePart::showNewStuffDialog()
 
     // Update the map theme widget by updating the model.
     m_controlView->marbleControl()->updateMapThemes();
+}
+
+void MarblePart::editSettings()
+{
+	if ( KConfigDialog::showDialog( "settings" ) )
+		return; 
+ 
+	KConfigDialog* dialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
+/*
+        connect( dialog, SIGNAL( settingsChanged( const QString &) ), this , SLOT( slotUpdateSettings() ) );
+*/
+        // view page
+        Ui_MarbleViewSettingsWidget ui_viewSettings;
+        QWidget *w_viewSettings = new QWidget( 0 );
+        w_viewSettings->setObjectName( "view_page" );
+        ui_viewSettings.setupUi( w_viewSettings );
+        dialog->addPage( w_viewSettings, i18n( "View" ), "preferences-view" );
+
+        // navigation page
+        Ui_MarbleNavigationSettingsWidget ui_navigationSettings;
+        QWidget *w_navigationSettings = new QWidget( 0 );
+        w_navigationSettings->setObjectName( "navigation_page" );
+        ui_navigationSettings.setupUi( w_navigationSettings );
+        dialog->addPage( w_navigationSettings, i18n( "Navigation" ), "preferences-navigation" );
+
+        // cache page
+        Ui_MarbleCacheSettingsWidget ui_cacheSettings;
+        QWidget *w_cacheSettings = new QWidget( 0 );
+        w_cacheSettings->setObjectName( "cache_page" );
+        ui_cacheSettings.setupUi( w_cacheSettings );
+        dialog->addPage( w_cacheSettings, i18n( "Cache" ), "preferences-cache" );
+
+	dialog->show();
 }
 
 #include "marble_part.moc"

@@ -19,6 +19,8 @@
     <Action name="options_show_sidebar" group="show_merge"/>
     <Action name="fullscreen"/>
     <Action name="show_sun"/>
+    <Separator/>
+    <Action name="options_configure" append="configure_merge"/>
   </Menu>
 </MenuBar>
 

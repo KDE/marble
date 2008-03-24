@@ -32,12 +32,7 @@ class MainWindow : public KXmlGuiWindow
     ControlView* marbleControl() const;
     MarbleWidget* marbleWidget() const;
 
-  private Q_SLOTS:
-    void  editSettings();
-
  private:
-    void  setupActions();
-
     MarblePart *m_part;
 };
 

@@ -53,6 +53,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setupStatusBar();
     void  showNewStuffDialog();
 
+    void  editSettings();
+
   private:
     void  setupActions();
 
