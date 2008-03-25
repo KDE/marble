@@ -1103,16 +1103,17 @@ void MarbleMap::setQuickDirty( bool enabled )
     }
 }
 
-void MarbleMap::setPersistentTileCacheLimit( quint64 bytes )
+void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_persistentTileCacheLimit = bytes;
+    d->m_persistentTileCacheLimit = kiloBytes;
     // TODO: trigger update
 }
 
-void MarbleMap::setVolatileTileCacheLimit( quint64 bytes )
+void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
 {
-    d->m_volatileTileCacheLimit = bytes;
-    d->m_model->setVolatileTileCacheLimit( bytes );
+    qDebug() << "kiloBytes" << kilobytes;
+    d->m_volatileTileCacheLimit = kilobytes;
+    d->m_model->setVolatileTileCacheLimit( kilobytes );
 }
 
 void MarbleMap::updateChangedMap()

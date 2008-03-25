@@ -58,15 +58,15 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>475</height>
+        <width>226</width>
+        <height>465</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -347,6 +347,9 @@
              <property name="sliderPosition" >
               <number>1050</number>
              </property>
+             <property name="tracking" >
+              <bool>true</bool>
+             </property>
              <property name="orientation" >
               <enum>Qt::Vertical</enum>
              </property>
@@ -464,8 +467,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>112</width>
-        <height>112</height>
+        <width>94</width>
+        <height>78</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -501,8 +504,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>475</height>
+        <width>226</width>
+        <height>465</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -617,7 +620,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>96</width>
+        <width>94</width>
         <height>34</height>
        </rect>
       </property>
@@ -1049,8 +1052,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>182</width>
-        <height>147</height>
+        <width>184</width>
+        <height>116</height>
        </rect>
       </property>
       <attribute name="label" >

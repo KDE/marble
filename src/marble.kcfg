@@ -4,6 +4,8 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
  <kcfgfile name="marblerc" />
+ <include>kglobalsettings.h</include>
+ <include>"lib/global.h"</include>
  <group name="MarbleWidget" >
   <entry key="homeLongitude" type="Double" >
    <default>9.4</default>
@@ -24,40 +26,92 @@
    <default></default>
   </entry>
  </group>
+ <group name="View" >
+  <entry key="distanceUnit" type="Enum" >
+   <label>The unit chosen to measure distances.</label>
+   <choices name="Marble::DistanceUnit">
+    <choice name="DistanceUnit::Kilometer"/>
+    <choice name="DistanceUnit::Mile"/>
+   </choices>
+   <default>Marble::Kilometer</default>
+  </entry>
+  <entry key="angleUnit" type="Enum" >
+   <label>The unit chosen to measure angles.</label>
+   <choices name="Marble::AngleUnit">
+    <choice name="AngleUnit::DMSDegree"/>
+    <choice name="AngleUnit::DecimalDegree"/>
+    <choice name="AngleUnit::UTM"/>
+   </choices>
+   <default>Marble::DMSDegree</default>
+  </entry>
+  <entry key="mapQuality" type="Enum" >
+   <label>The quality at which a still map gets painted.</label>
+   <choices name="Marble::MapQuality">
+    <choice name="MapQuality::Outline"/>
+    <choice name="MapQuality::Low"/>
+    <choice name="MapQuality::Normal"/>
+    <choice name="MapQuality::High"/>
+    <choice name="MapQuality::Print"/>
+   </choices>
+   <default>Marble::High</default>
+  </entry>
+  <entry key="animationQuality" type="Enum" >
+   <label>The quality at which an animated map gets painted.</label>
+   <choices name="Marble::MapQuality">
+    <choice name="MapQuality::Outline"/>
+    <choice name="MapQuality::Low"/>
+    <choice name="MapQuality::Normal"/>
+    <choice name="MapQuality::High"/>
+    <choice name="MapQuality::Print"/>
+   </choices>
+   <default>Marble::Normal</default>
+  </entry>
+  <entry key="labelLocalization" type="Enum" >
+   <label>The localization of the labels.</label>
+   <choices name="Marble::LabelLocalization">
+    <choice name="LabelLocalization::CustomAndNative"/>
+    <choice name="LabelLocalization::Custom"/>
+    <choice name="LabelLocalization::Native"/>
+   </choices>
+   <default>Marble::Native</default>
+  </entry>
+  <entry name="mapFont" type="Font">
+   <label>The general font used on the map.</label>
+   <default code="true">KGlobalSettings::generalFont()</default>
+  </entry>
+ </group>
  <group name="Navigation" >
-<!--
   <entry key="dragLocation" type="Enum" >
    <label>The behaviour of the planet's axis on mouse dragging.</label>
-   <choices name="Marble::Navigation::DragLocation">
-    <choice name="Navigation::PoleAxisStaysVertically"/>
-    <choice name="Navigation::MouseFollowsExactly"/>
+   <choices name="Marble::DragLocation">
+    <choice name="DragLocation::KeepAxisVertically"/>
+    <choice name="DragLocation::FollowMousePointer"/>
    </choices>
-   <default>Navigation::PoleAxisStaysVertically</default>
+   <default>Marble::KeepAxisVertically</default>
   </entry>
   <entry key="onStartup" type="Enum" >
    <label>The location shown on application startup.</label>
-   <choices name="Marble::Navigation::onStartup">
-    <choice name="Navigation::ShowHomeLocation"/>
-    <choice name="Navigation::ShowLastLocationVisited"/>
+   <choices name="Marble::onStartup">
+    <choice name="onStartup::ShowHomeLocation"/>
+    <choice name="onStartup::LastLocationVisited"/>
    </choices>
-   <default>Navigation::ShowHomeLocation</default>
+   <default>Marble::ShowHomeLocation</default>
   </entry>
--->
   <entry key="animateTargetVoyage" type="Bool" >
    <label>Display animation on voyage to target.</label>
    <default>true</default>
   </entry>
  </group>
  <group name="Cache" >
-  <entry key="physicalMemoryCache" type="Int" >
+  <entry key="volatileTileCacheLimit" type="Int" >
    <label>Cache for tiles reserved in the physical memory.</label>
    <default>30</default>
    <min>0</min>
    <max>999999</max>
   </entry>
-  <entry key="harddiscCache" type="Int" >
+  <entry key="persistentTileCacheLimit" type="Int" >
    <label>Maximum space on the harddisc that can be used to store tiles.</label>
-   <default>999999</default>
+   <default>300</default>
    <min>0</min>
    <max>999999</max>
   </entry>

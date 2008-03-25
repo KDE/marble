@@ -141,7 +141,7 @@ class TileLoader : public QObject
 
         /**
          * @brief  Returns the limit of the volatile (in RAM) cache.
-         * @return the cache limit in bytes
+         * @return the cache limit in kilobytes
          */
         quint64 volatileCacheLimit() const;
 
@@ -204,9 +204,9 @@ class TileLoader : public QObject
     public Q_SLOTS:
         /**
          * @brief Set the limit of the volatile (in RAM) cache.
-         * @param bytes The limit in bytes.
+         * @param bytes The limit in kilobytes.
          */
-        void setVolatileCacheLimit( quint64 bytes );
+        void setVolatileCacheLimit( quint64 kiloBytes );
 
         /**
          * Reloads the tile with the given @p id.

@@ -429,13 +429,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool  quickDirty() const;
 
     /**
-     * @brief  Returns the limit in bytes of the persistent (on hard disc) tile cache.
+     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
      * @return the limit of persistent tile cache
      */
     quint64  persistentTileCacheLimit() const;
 
     /**
-     * @brief  Returns the limit in bytes of the volatile (in RAM) tile cache.
+     * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
      * @return the limit of volatile tile cache
      */
     quint64  volatileTileCacheLimit() const;
@@ -785,15 +785,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in bytes.
+     * @param  kilobytes The limit in kilobytes.
      */
-    void setPersistentTileCacheLimit( quint64 bytes );
+    void setPersistentTileCacheLimit( quint64 kiloBytes );
 
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
-     * @param  bytes The limit in bytes.
+     * @param  kilobytes The limit in kilobytes.
      */
-    void setVolatileTileCacheLimit( quint64 bytes );
+    void setVolatileTileCacheLimit( quint64 kiloBytes );
 
     /**
      * @brief A slot that is called when the model starts to create new tiles.

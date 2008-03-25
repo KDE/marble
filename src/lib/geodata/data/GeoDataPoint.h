@@ -30,7 +30,10 @@ class GeoDataPoint {
      * However the Marble's interfaces to the outside should default 
      * to degrees.
      */
-    enum Unit{Radian, Degree};
+    enum Unit{
+        Radian,
+        Degree
+    };
     /**
      * @brief enum used to specify the notation / numerical system
      *
@@ -41,7 +44,10 @@ class GeoDataPoint {
      * Sexagesimal DMS notation uses integer based 
      * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree. 
      */
-    enum Notation{Decimal, DMS};
+    enum Notation{
+        Decimal,
+        DMS
+    };
 
     GeoDataPoint(){}
 

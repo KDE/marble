@@ -1,3 +1,38 @@
+2008-03-25  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/global.h:
+    - introducing several enums which are needed for settings. 
+    (DistanceUnit, AngleUnit, MapQuality, LabelLocalization, 
+     etc.)
+
+    * src/marble_part.{cpp,h}:
+    * src/lib/MarbleControlBox.ui:
+    * src/lib/geodata/data/GeoDataPoint.h:
+    * src/marble.kcfg:
+    * src/marble_part.h:
+    * src/ControlView.h:
+    * src/settings.kcfgc:
+
+    - kcfg-izing the settings. 
+    - Making the volatileTileCacheLimit setting work.
+
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/TileLoader.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+
+    - fixed wrong assumption that the cache is measured in bytes
+      internally. Just like QPixmapCache it gets measured 
+      in kiloBytes instead. Beware: the UI specifies things in
+      MegaByte.
+
+    * src/lib/MarbleViewSettingsWidget.ui:
+    * src/lib/MarbleNavigationSettingsWidget.ui:
+    * src/lib/MarbleCacheSettingsWidget.ui:
+
+    - Splitted up the settings ui and kcfg-ized it.
+    - made some strings more user readable.
+
 2008-03-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Get rid of unnecessary member

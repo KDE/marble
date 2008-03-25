@@ -239,16 +239,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
-     * @return the cache limit in bytes
+     * @return the cache limit in kilobytes
      */
     quint64 volatileTileCacheLimit() const;
 
  public Q_SLOTS:
     /**
      * @brief Set the limit of the volatile (in RAM) tile cache.
-     * @param bytes The limit in bytes.
+     * @param kilobytes The limit in kilobytes.
      */
-    void setVolatileTileCacheLimit( quint64 bytes );
+    void setVolatileTileCacheLimit( quint64 kiloBytes );
 
 
  Q_SIGNALS:

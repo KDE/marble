@@ -410,14 +410,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool  quickDirty() const;
 
     /**
-     * @brief  Returns the limit in bytes of the persistent (on hard disc) tile cache.
-     * @return the limit of persistent tile cache
+     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
+     * @return the limit of persistent tile cache in kilobytes.
      */
     quint64  persistentTileCacheLimit() const;
 
     /**
-     * @brief  Returns the limit in bytes of the volatile (in RAM) tile cache.
-     * @return the limit of volatile tile cache
+     * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
+     * @return the limit of volatile tile cache in kilobytes.
      */
     quint64  volatileTileCacheLimit() const;
 
@@ -774,15 +774,15 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in bytes.
+     * @param  bytes The limit in kilobytes.
      */
-    void setPersistentTileCacheLimit( quint64 bytes );
+    void setPersistentTileCacheLimit( quint64 kiloBytes );
 
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
-     * @param  bytes The limit in bytes.
+     * @param  bytes The limit in kilobytes.
      */
-    void setVolatileTileCacheLimit( quint64 bytes );
+    void setVolatileTileCacheLimit( quint64 kiloBytes );
 
     /**
      * @brief Update the map because the model changed.

@@ -364,9 +364,10 @@ bool TileLoader::baseTilesAvailable( const QString& theme )
     return noerr;
 }
 
-void TileLoader::setVolatileCacheLimit( quint64 bytes )
+void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
-    d->m_tileCache.setCacheLimit( bytes );
+    qDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
+    d->m_tileCache.setCacheLimit( kiloBytes );
 }
 
 void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_id )

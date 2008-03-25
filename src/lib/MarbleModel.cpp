@@ -594,9 +594,9 @@ quint64 MarbleModel::volatileTileCacheLimit() const
     return d->m_tileLoader->volatileCacheLimit();
 }
 
-void MarbleModel::setVolatileTileCacheLimit( quint64 bytes )
+void MarbleModel::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_tileLoader->setVolatileCacheLimit( bytes );
+    d->m_tileLoader->setVolatileCacheLimit( kiloBytes );
 }
 
 #include "MarbleModel.moc"

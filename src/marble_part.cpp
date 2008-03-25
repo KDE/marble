@@ -63,7 +63,10 @@ typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
 K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
-  : KParts::ReadOnlyPart( parent ), m_sunControlDialog( 0 ), m_positionLabel( 0 ), m_distanceLabel( 0 )
+  : KParts::ReadOnlyPart( parent ), 
+    m_sunControlDialog( 0 ),
+    m_positionLabel( 0 ), 
+    m_distanceLabel( 0 )
 {
     // only set marble data path when a path was given
     if(arguments.count() != 0 && !arguments.first().isEmpty())
@@ -73,6 +76,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     m_controlView = new ControlView( parentWidget );
     setWidget( m_controlView );
+
+    readSettings();
 
     setupActions();
 
@@ -84,8 +89,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_distance = m_controlView->marbleWidget()->distanceString();
 
     QTimer::singleShot( 0, this, SLOT( setupStatusBar() ) );
-
-    readSettings();
 }
 
 MarblePart::~MarblePart()
@@ -256,6 +259,8 @@ void MarblePart::readSettings()
 
     m_controlView->marbleWidget()->setMapTheme( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
+
+    slotUpdateSettings();
 }
 
 void MarblePart::writeSettings()
@@ -273,6 +278,9 @@ void MarblePart::writeSettings()
     // Map theme and projection
     MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapTheme() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
+
+    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
+    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
 
     MarbleSettings::self()->writeConfig();
 }
@@ -405,13 +413,11 @@ void MarblePart::showNewStuffDialog()
 
 void MarblePart::editSettings()
 {
-	if ( KConfigDialog::showDialog( "settings" ) )
-		return; 
+    if ( KConfigDialog::showDialog( "settings" ) )
+        return; 
  
-	KConfigDialog* dialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
-/*
-        connect( dialog, SIGNAL( settingsChanged( const QString &) ), this , SLOT( slotUpdateSettings() ) );
-*/
+    KConfigDialog* dialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
+
         // view page
         Ui_MarbleViewSettingsWidget ui_viewSettings;
         QWidget *w_viewSettings = new QWidget( 0 );
@@ -433,7 +439,14 @@ void MarblePart::editSettings()
         ui_cacheSettings.setupUi( w_cacheSettings );
         dialog->addPage( w_cacheSettings, i18n( "Cache" ), "preferences-cache" );
 
-	dialog->show();
+        connect( dialog, SIGNAL( settingsChanged( const QString &) ), this , SLOT( slotUpdateSettings() ) );
+        dialog->show();
+}
+
+void MarblePart::slotUpdateSettings()
+{
+    m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
+    m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );
 }
 
 #include "marble_part.moc"

@@ -986,14 +986,14 @@ void MarbleWidget::setQuickDirty( bool enabled )
     d->m_map->setQuickDirty( enabled );
 }
 
-void MarbleWidget::setPersistentTileCacheLimit( quint64 bytes )
+void MarbleWidget::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_map->setPersistentTileCacheLimit( bytes );
+    d->m_map->setPersistentTileCacheLimit( kiloBytes );
 }
 
-void MarbleWidget::setVolatileTileCacheLimit( quint64 bytes )
+void MarbleWidget::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_map->setVolatileTileCacheLimit( bytes );
+    d->m_map->setVolatileTileCacheLimit( kiloBytes );
 }
 
 // This slot will called when the Globe starts to create the tiles.

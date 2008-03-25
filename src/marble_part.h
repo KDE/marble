@@ -54,6 +54,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showNewStuffDialog();
 
     void  editSettings();
+    void  slotUpdateSettings();
 
   private:
     void  setupActions();

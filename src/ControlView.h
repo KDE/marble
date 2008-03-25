@@ -27,7 +27,6 @@
 class QSplitter;
 
 
-
 class ControlView : public QWidget
 {
     Q_OBJECT
