@@ -638,7 +638,6 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
         setAttribute(Qt::WA_NoSystemBackground, false );
     }
 
-
     d->m_justModified = true;
 
     repaint();
@@ -783,15 +782,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 void MarbleWidget::customPaint(ClipPainter *painter)
 {
     Q_UNUSED( painter );
-    /* This is a NOOP */
-}
-
-void MarbleWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                   QWidget *widget)
-{
-    Q_UNUSED( painter );
-    Q_UNUSED( option );
-    Q_UNUSED( widget );
+    /* This is a NOOP in the base class*/
 }
 
 

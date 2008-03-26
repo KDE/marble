@@ -450,14 +450,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void disableInput();
     
     /**
-     * @brief paint the widget (FIXME: Not Yet Implemented) 
-     * @param painter  the QPainter to paint with
-     * @param option   fixme
-     * @param widget   fixme
-     */
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                QWidget *widget);
-    /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.
      *

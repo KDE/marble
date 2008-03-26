@@ -1,5 +1,8 @@
 2008-03-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove unnecessary function
+	* src/lib/MarbleWidget.{h,cpp} (paint): removed
+
 	Remove some unneeded members.
 	* src/lib/MeasureTool.h (m_visibleArea, m_centerLat, m_centerLon,
 	m_radius): remove
