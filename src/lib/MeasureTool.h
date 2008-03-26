@@ -68,13 +68,6 @@ class MeasureTool : public QObject
     QPen    m_pen;
 
     bool    m_useworkaround;
-
-    //Needed for the flat projection
-    QRectF m_visibleArea;
-
-    double m_centerLat;
-    double m_centerLon;
-    int m_radius;
 };
 
 #endif // MEASURETOOL_H

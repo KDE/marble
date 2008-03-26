@@ -1,5 +1,9 @@
 2008-03-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove some unneeded members.
+	* src/lib/MeasureTool.h (m_visibleArea, m_centerLat, m_centerLon,
+	m_radius): remove
+
 	Fix repetition of drawing of the measure tool in some
 	projections. Also change some function names.
 	* src/lib/MeasureTool.cpp (drawDistancePath): Draw repetition
