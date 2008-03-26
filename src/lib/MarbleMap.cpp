@@ -76,9 +76,10 @@ MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-    //d->m_model = new MarbleModel( this );
 
-    d->m_model = new MarbleModel( this );
+    d->m_model        = new MarbleModel( this );
+    d->m_modelIsOwned = true;
+
     d->construct();
 }
 
@@ -88,7 +89,9 @@ MarbleMap::MarbleMap(MarbleModel *model)
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
-    d->m_model = model;
+    d->m_model        = model;
+    d->m_modelIsOwned = false;
+
     d->construct();
 }
 
@@ -100,8 +103,8 @@ MarbleMap::~MarbleMap()
 
     setDownloadManager( 0 );
 
-    // FIXME: Only delete if we created it ourselves 
-    delete d->m_model;
+    if ( d->m_modelIsOwned )
+        delete d->m_model;
     delete d;
 }
 
@@ -650,7 +653,7 @@ int MarbleMap::northPoleZ()
     return (int)( d->m_viewParams.radius() * northPole.v[Q_Z] );
 }
 
-// FIXME: change name
+
 bool MarbleMap::screenCoordinates( const double lon, const double lat,
                                    int& x, int& y )
 {
@@ -822,7 +825,7 @@ void MarbleMapPrivate::setBoundingBox()
 
 
 // Used to be paintEvent()
-void MarbleMap::doPaint(ClipPainter &painter, QRect &dirtyRect) 
+void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect) 
 {
     QTime t;
     t.start();
@@ -1053,14 +1056,18 @@ void MarbleMap::updateGps()
     QRegion temp;
     bool    draw;
     draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
+#if 0  // FIXME: move to MarbleWidget?
     if( draw ){
         update(temp);
     }
-    /*
+#endif
+
+#if 0
     d->m_model->gpsLayer()->updateGps(
                          size(), radius(),
                               planetAxis() );
-    update();*/
+    update();
+#endif
 }
 
 void MarbleMap::openGpxFile(QString &filename)

@@ -20,7 +20,7 @@ class SunLocator : public QObject
     explicit SunLocator();
     virtual ~SunLocator();
 
-    double  shading(double lat, double lon);
+    double  shading(double lon, double lat);
     void    shadePixel(QRgb& pixcol, double shade);
     void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade);
 	

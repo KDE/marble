@@ -242,9 +242,10 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
 }
 
 #if 0
-// FIXME: Don't remove this yet, since we probably want to add
+// FIXME: Don't remove this yet, since we want to fix
 //        multiple drawing of the distance paths for projections that
-//        have repeatX() == true.
+//        have repeatX() == true over the date line.
+//        
 void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
                                                Quaternion   prevqpos,
                                                Quaternion   qpos,
@@ -294,8 +295,8 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
             previousY = y;
         }
 
-        //The next steeps deal with the measurement of two points
-        //that the shortest path crosses the dateline
+        // The next steps deal with the measurement of two points
+        // that the shortest path crosses the dateline
         currentSign = (lon < 0)?-1:1;
         if ( previousSign != currentSign
              && fabs(previousLon) + fabs(lon) > M_PI)
@@ -313,6 +314,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
                                     + previousSign * 2 * radius,
                                       interpolatedY );
             drawAndRepeatDistancePath( painter, distancePath );
+
             distancePath.clear();
             distancePath << QPointF( imgwidth / 2 - m_centerLon * m_rad2Pixel
                                      + currentSign  * 2 * radius,

@@ -19,9 +19,6 @@ ViewParams::ViewParams( )
     // Default projection
     m_oldProjection = Spherical;
 
-    // FIXME: planetAxisUpdated, radiusUpdated
-    // FIXME: boundingBox
-
     // Show / don't show parameters
     m_showGrid           = true;
     m_showPlaceMarks     = true;

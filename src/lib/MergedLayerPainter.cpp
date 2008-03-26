@@ -101,7 +101,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                 if ( interpolate == true ) cur_x+= n - 1;
 
                 double lon   = lon_scale * (m_x * tileWidth + cur_x);
-                double shade = sunLocator->shading( lat, lon );
+                double shade = sunLocator->shading( lon, lat );
 
                 if ( interpolate == true ) {
 
@@ -151,7 +151,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                 if ( interpolate == true ) cur_x+= n - 1;
 
                 double lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                double shade = sunLocator->shading(lat, lon);
+                double shade = sunLocator->shading(lon, lat);
 
                 if ( interpolate == true ) {
 

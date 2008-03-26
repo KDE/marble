@@ -39,8 +39,7 @@ void SunLocator::updatePosition()
 }
 
 
-// FIXME: Use lon, lat in Marble, not lat, lon
-double SunLocator::shading(double lat, double lon)
+double SunLocator::shading(double lon, double lat)
 {
     // haversine formula
     double a = sin((lat-m_lat)/2.0);

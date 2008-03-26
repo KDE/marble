@@ -45,6 +45,7 @@ class MarbleMapPrivate
 
     // The model we are showing.
     MarbleModel     *m_model;
+    bool             m_modelIsOwned;
 
     int              m_width;
     int              m_height;

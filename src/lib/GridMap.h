@@ -22,7 +22,6 @@
 
 
 class ViewportParams;
-class ViewParams;               /* FIXME: Remove */
 class ClipPainter;
 
 

@@ -58,8 +58,6 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
                                             const matrix &planetAxisMatrix,
                                             int &x, int &y )
 {
-    // FIXME: Just call screencoordinates above?
-
     double  lon;
     double  lat;
     double  rad2Pixel = 2 * params->radius() / M_PI;
@@ -121,8 +119,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 
         lat = atan( sinh( ((imgHeight2 + yCenterOffset) - y)
                           / (double)(2 * params->radius()) * M_PI ) );
-        // FIXME: This looks strange with the lonesome +
-        lon = + xPixels * pixel2rad + centerLon;
+        lon = xPixels * pixel2rad + centerLon;
 
         while ( lon > M_PI )  lon -= 2*M_PI;
         while ( lon < -M_PI ) lon += 2*M_PI;

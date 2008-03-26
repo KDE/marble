@@ -203,10 +203,12 @@ void MarbleWidgetPrivate::construct()
 #endif
 
     // FIXME: I suppose this should only exist in MarbleMap
+#if 0
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
                        m_parent, SLOT( updateSun() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_parent, SLOT( centerSun() ) );
+#endif
     m_parent->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_parent, SLOT( enableInput() ) );
 }
@@ -776,7 +778,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     ClipPainter painter( this, doClip );
 
     QRect  dirtyRect = evt->rect();
-    d->m_map->doPaint( painter, dirtyRect );
+    d->m_map->paint( painter, dirtyRect );
 }
 
 void MarbleWidget::customPaint(ClipPainter *painter)

@@ -431,23 +431,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void updateSun();
     void centerSun();
-#if 0
-    void enableInput();
-    void disableInput();
-#endif
-#if 0
+
     /**
-     * @brief paint the map
-     * @param painter  the QPainter to paint with
-     * @param option   fixme
+     * @brief Paint the map using a give painter.
+     * @param painter  The painter to use.
+     * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option);
-#endif
-#if 0
-#else
-    void update(QRegion&) const {};	/* FIXME: Only in qwidget */
-    void  doPaint(ClipPainter &painter, QRect &dirtyRect);
-#endif
+    void  paint(ClipPainter &painter, QRect &dirtyRect);
+
     /**
      * @brief  Zoom the view to a certain zoomlevel
      * @param  zoom  the new zoom level.

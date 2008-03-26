@@ -1,5 +1,22 @@
 2008-03-26  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove some old FIXMEs.
+	* src/lib/MarbleMap_p.cpp (m_modelIsOwned): new member
+	* src/lib/MarbleMap.cpp (constructors): keep track of if the model
+	is owned.
+	(destructor): only delete model if it's owned.
+	(update): removed
+	(updateGps): Don't call update()
+	(paint): removed
+	(doPaint): renamed into paint()
+	* src/lib/MarbleWidget.cpp (construct): Disabled a few connect()s
+	* src/lib/MarbleTool.cpp: fixed some comments
+	* src/lib/MercatorProjection.cpp(screenCoordinates): removed FIXME
+	* src/lib/SunLocator.{h,cpp} (shading): use lon/lat instead of lat/lon
+	* src/lib/MergedLayerPainter.cpp (paintSunShading): use new convention
+	* src/lib/TextureTile.cpp (loadTile): Indent
+	* src/lib/ViewParams.cpp: Remove 2 FIXMEs
+	
 	Remove unnecessary function
 	* src/lib/MarbleWidget.{h,cpp} (paint): removed
 
