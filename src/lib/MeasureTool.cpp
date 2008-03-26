@@ -40,19 +40,16 @@ MeasureTool::MeasureTool( QObject* parent )
     m_fontheight = QFontMetrics( m_font_regular ).height();
     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
-    m_useworkaround = testbug();
+    m_useworkaround = testBug();
 
     m_pen.setColor( QColor( Qt::red ) );
     m_pen.setWidthF( 2.0 );
 }
 
 
-// FIXME: Call this something more generic, since it paints both the
-//        points and the paths.
-//
-void MeasureTool::paintMeasurePoints( ClipPainter *painter, 
-                                      ViewportParams *viewport,
-                                      bool antialiasing )
+void MeasureTool::paint( ClipPainter *painter, 
+                         ViewportParams *viewport,
+                         bool antialiasing )
 {
     // No way to paint anything if the list is empty.
     if ( m_pMeasurePointList.isEmpty() )
@@ -77,15 +74,14 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
           ++it )
     {
         qpos = (*it)->quaternion();
-        //qpos.rotateAroundAxis( invplanetAxis );
 
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
             totalDistance += acos( sin( prevLat ) * sin( lat )
-                                     + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
+                                   + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
 
-            drawDistancePath( painter, prevqpos, qpos, viewport, antialiasing );
+            drawDistancePath( painter, prevqpos, qpos, viewport );
         }
 
         prevqpos = qpos;
@@ -94,28 +90,25 @@ void MeasureTool::paintMeasurePoints( ClipPainter *painter,
     }
 
     // Paint the end points of the paths.
-    paintDistancePoints( painter, viewport, antialiasing );
+    drawDistancePoints( painter, viewport );
 
     // Paint the total distance in the upper left corner.
     if ( m_pMeasurePointList.size() > 1 )
-        paintTotalDistanceLabel( painter, totalDistance );
+        drawTotalDistanceLabel( painter, totalDistance );
 }
 
-void MeasureTool::paintDistancePoints( ClipPainter *painter, 
-				       ViewportParams *viewport,
-				       bool antialiasing )
+void MeasureTool::drawDistancePoints( ClipPainter *painter, 
+                                      ViewportParams *viewport )
 {
     int  x = 0;
     int  y = 0;
-
-    //Quaternion  invplanetAxis = viewport->planetAxis().inverse();
-    Quaternion  qpos;
 
     // Convenience variables
     int  width  = viewport->width();
     int  height = viewport->height();
 
     // Paint the marks.
+    Quaternion                              qpos;
     QVector<GeoDataPoint*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
@@ -125,27 +118,26 @@ void MeasureTool::paintDistancePoints( ClipPainter *painter,
         double  lat;
 
         qpos = (*it)->quaternion();
-        //qpos.rotateAroundAxis( invplanetAxis );
         qpos.getSpherical( lon, lat );
 
         if ( viewport->currentProjection()
 	     ->screenCoordinates( lon, lat, viewport,
 				  x, y,
-				  originalCoordinates /*mappedCoordinates*/ ) )
+				  originalCoordinates ) )
 	{
             // Don't process markers if they are outside the screen area.
             // FIXME: Some part of it may be visible anyway.
             if ( 0 <= x && x < width 
                  && 0 <= y && y < height )
             {
-                paintMark( painter, viewport, x, y );
+                drawMark( painter, viewport, x, y );
             }
         }
     }
 }
 
-void MeasureTool::paintMark( ClipPainter* painter, ViewportParams *viewport,
-			     int x, int y )
+void MeasureTool::drawMark( ClipPainter* painter, ViewportParams *viewport,
+                            int x, int y )
 {
     const int MarkRadius = 5;
 
@@ -169,6 +161,7 @@ void MeasureTool::paintMark( ClipPainter* painter, ViewportParams *viewport,
 
 	// Start painting and repeat until we leave the screen.
 	while ( x <= width ) {
+            // The mark is a simple cross right now.
 	    painter->drawLine( x - MarkRadius, y, x + MarkRadius, y );
 	    painter->drawLine( x, y - MarkRadius, x, y + MarkRadius );
 
@@ -184,11 +177,18 @@ void MeasureTool::paintMark( ClipPainter* painter, ViewportParams *viewport,
 
 void MeasureTool::drawDistancePath( ClipPainter* painter, 
                                     Quaternion prevqpos, Quaternion qpos,
-                                    ViewportParams *viewport,
-                                    bool antialiasing )
+                                    ViewportParams *viewport )
 {
-    Q_UNUSED( antialiasing );
+    // Some convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
 
+    // Create the path.  To get a smooth appearance, split each path
+    // into 20 linear segments. This is probably enough to remove all
+    // jagginess.
+    //
+    // FIXME: Implement a real optimized path drawer that splits just
+    //        as much as is needed, but not more.
     Quaternion  itpos;
     QPolygonF   distancePath;
     for ( int i = 0; i < 21; ++i ) {
@@ -206,7 +206,6 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
 				  x, y,
 				  originalCoordinates /*mappedCoordinates*/ ) )
         {
-            //paintMark( painter, x, y );
             distancePath << QPointF( x, y );
         }
         else {
@@ -214,7 +213,32 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
         }
     }
 
-    painter->drawPolyline( distancePath );
+    // Now actually paint the path. Repeat it if the projection allows it.
+    if ( viewport->currentProjection()->repeatX() ) {
+        QPolygonF   path2( distancePath );
+        QRectF      rect( path2.boundingRect() );
+
+        int         rightX = (int) rect.right();
+        int         leftX  = (int) rect.left();
+        int         move   = 0;
+        while ( rightX > 0 ) {
+            move   += 4 * radius;
+            rightX -= 4 * radius ;
+            leftX  -= 4 * radius ;
+        }
+        move   -= 4 * radius;
+        rightX += 4 * radius;
+        leftX  += 4 * radius;
+
+        path2.translate( (double) -move, 0.0 );
+        while ( leftX < width ) {
+            painter->drawPolyline( path2 );
+            path2.translate( (double) ( 4 * radius ), 0.0 );
+
+            leftX += 4 * radius;
+        }
+    } else
+        painter->drawPolyline( distancePath );
 }
 
 #if 0
@@ -333,8 +357,8 @@ void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
 }
 #endif
 
-void MeasureTool::paintTotalDistanceLabel( ClipPainter *painter, 
-                                           double totalDistance )
+void MeasureTool::drawTotalDistanceLabel( ClipPainter *painter, 
+                                          double totalDistance )
 {
     QString  distanceString;
     if ( totalDistance >= 1000.0 )
@@ -351,7 +375,7 @@ void MeasureTool::paintTotalDistanceLabel( ClipPainter *painter,
 }
 
 
-bool MeasureTool::testbug()
+bool MeasureTool::testBug()
 {
     QString  testchar( "K" );
     QFont    font( "Sans Serif", 10 );

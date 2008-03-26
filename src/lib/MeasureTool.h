@@ -34,10 +34,8 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
-    // FIXME: Call this something else, since it also paints the paths.
-    //        Suggestion: paint()
-    void  paintMeasurePoints( ClipPainter *painter, ViewportParams *viewport,
-                              bool antialiasing );
+    void  paint( ClipPainter *painter, ViewportParams *viewport,
+                 bool antialiasing );
 
  public Q_SLOTS:
     void  addMeasurePoint( double lon, double lat ) {
@@ -48,18 +46,16 @@ class MeasureTool : public QObject
     }
 
  private:
-    void  paintDistancePoints( ClipPainter *painter, ViewportParams *viewport,
-			       bool antialiasing );
-    void  paintMark( ClipPainter* painter, ViewportParams *viewport,
-		     int x, int y );
+    void  drawDistancePoints( ClipPainter *painter, ViewportParams *viewport );
+    void  drawMark( ClipPainter* painter, ViewportParams *viewport,
+                    int x, int y );
     void  drawDistancePath( ClipPainter* painter,
                             Quaternion, Quaternion,
-                            ViewportParams *viewport,
-                            bool antialiasing );
-    void  paintTotalDistanceLabel( ClipPainter *painter,
-				   double totalDistance );
+                            ViewportParams *viewport );
+    void  drawTotalDistanceLabel( ClipPainter *painter,
+                                  double totalDistance );
 
-    bool  testbug(); 
+    bool  testBug(); 
 
  private:
     // The list of points in the distance path.

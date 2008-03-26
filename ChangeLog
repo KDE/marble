@@ -1,3 +1,15 @@
+2008-03-26  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix repetition of drawing of the measure tool in some
+	projections. Also change some function names.
+	* src/lib/MeasureTool.cpp (drawDistancePath): Draw repetition
+	(paintMeasurePoints)      -> paint
+	(paintDistancePoints)     -> drawDistancePoints
+	(paintMark)               -> drawMark
+	(paintTotalDistanceLabel) -> drawTotalDistanceLabel
+	(testbug)                 -> testBug
+	* src/lib/MarbleMap.cpp (doPaint): call paint() instead of old name
+
 2008-03-25  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/global.h:
