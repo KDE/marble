@@ -22,7 +22,7 @@
 
 bool GeoDataFeature::s_defaultStyleInitialized = false;
 
-GeoDataStyle* GeoDataFeature::s_defaultStyle[];
+GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
 
 
 GeoDataFeature::GeoDataFeature() :
