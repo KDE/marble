@@ -12,6 +12,7 @@
 #include "Quaternion.h"
 
 #include <cmath>
+using namespace std;
 
 #include <QtCore/QString>
 #include <QtCore/QDebug>

@@ -262,7 +262,7 @@ QItemSelectionModel *MarbleMap::placeMarkSelectionModel() const
 
 double MarbleMap::moveStep()
 {
-    if ( radius() < sqrt( width() * width() + height() * height() ) )
+    if ( radius() < sqrt( (double)(width() * width() + height() * height()) ) )
 	return 180.0 * 0.1;
     else
 	return 180.0 * atan( (double)width()
@@ -679,8 +679,8 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
 
     const double  inverseRadius = 1.0 / (double)(radius());
 
-    if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
+    if ( radius() > sqrt( (double)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
+        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
     {
         double qx = inverseRadius * (double)( x - imageHalfWidth );
         double qy = inverseRadius * (double)( y - imageHalfHeight );

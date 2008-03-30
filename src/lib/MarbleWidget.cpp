@@ -692,8 +692,8 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
     const double  inverseRadius = 1.0 / (double)(radius());
 
-    if ( radius() > sqrt( ( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight ) ) )
+    if ( radius() > sqrt( (double)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
+        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
     {
         double qx = inverseRadius * (double)( x - imageHalfWidth );
         double qy = inverseRadius * (double)( y - imageHalfHeight );
@@ -738,7 +738,7 @@ void MarbleWidgetPrivate::setActiveRegion()
 
     switch( m_map->projection() ) {
         case Spherical:
-            if ( zoom < sqrt( m_parent->width() * m_parent->width() + m_parent->height() * m_parent->height() ) / 2 ) {
+            if ( zoom < sqrt( (double)(m_parent->width() * m_parent->width() + m_parent->height() * m_parent->height()) ) / 2 ) {
 
                 m_activeRegion = QRegion( m_parent->width()  / 2 - zoom,
                                             m_parent->height() / 2 - zoom,

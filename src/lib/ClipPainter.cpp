@@ -166,7 +166,7 @@ void ClipPainter::manageOffScreen()
 
     // Calculating the slope
     double  divisor = m_currentPoint.x() - m_lastPoint.x();
-    if ( fabs( divisor ) < 0.000001 )
+    if ( std::fabs( divisor ) < 0.000001 )
         // FIXME: Is this ok even if divisor < 0?
         divisor = 0.000001;
 

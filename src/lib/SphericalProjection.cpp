@@ -94,8 +94,8 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     const double  inverseRadius = 1.0 / (double)(params->radius());
     bool          noerr         = false;
 
-    if ( params->radius() > sqrt( ( x - imgWidth2 ) * ( x - imgWidth2 )
-                                  + ( y - imgHeight2 ) * ( y - imgHeight2 ) ) )
+    if ( params->radius() > sqrt( (double)(( x - imgWidth2 ) * ( x - imgWidth2 )
+                                  + ( y - imgHeight2 ) * ( y - imgHeight2 )) ) )
     {
         double qx = inverseRadius * (double)( x - imgWidth2 );
         double qy = inverseRadius * (double)( imgHeight2 - y );

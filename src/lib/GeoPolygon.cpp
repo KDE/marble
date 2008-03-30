@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <cmath>
+using std::fabs;
 
 #include <QtCore/QFile>
 #include <QtCore/QDataStream> 
