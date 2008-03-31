@@ -143,9 +143,16 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
 {
     Quaternion  rotAxis = viewParams->planetAxis();
 
+    bool antialiased = false;
+
+    if (   viewParams->mapQuality( viewParams->m_viewContext ) == Marble::High
+        || viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Print ) {
+            antialiased = true;
+    }
+
     m_vectorMap -> setPen( m_oceanPen );
     m_vectorMap -> setBrush( m_oceanBrush );
-    m_vectorMap -> paintBase( painter, viewParams->viewport(), true );
+    m_vectorMap -> paintBase( painter, viewParams->viewport(), antialiased );
 
     // Coastlines
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
@@ -154,7 +161,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
     m_vectorMap -> setPen( m_landPen );
     m_vectorMap -> setBrush( m_landBrush );
-    m_vectorMap -> paintMap( painter, false );
+    m_vectorMap -> paintMap( painter, antialiased );
 
     // Islands
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
@@ -163,7 +170,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
     m_vectorMap -> setPen( m_landPen );
     m_vectorMap -> setBrush( m_landBrush );
-    m_vectorMap -> paintMap( painter, false );
+    m_vectorMap -> paintMap( painter, antialiased );
 
     if ( viewParams->m_showLakes ) {
          // Lakes
@@ -173,11 +180,11 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
          m_vectorMap -> createFromPntMap( m_lakes, viewParams->viewport() );
          m_vectorMap -> setPen( m_lakePen );
          m_vectorMap -> setBrush( m_lakeBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
 
          m_vectorMap -> createFromPntMap( m_lakeislands, viewParams->viewport() );
          m_vectorMap -> setBrush( m_landBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
     }
 }
 
