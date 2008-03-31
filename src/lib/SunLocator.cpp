@@ -2,6 +2,10 @@
 
 #include "SunLocator.h"
 
+using std::sin;
+using std::cos;
+using std::asin;
+
 const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
 const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms

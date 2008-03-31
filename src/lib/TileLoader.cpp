@@ -234,7 +234,7 @@ int TileLoader::levelToRow( int level )
             .arg( level );
         return 0;
     }
-    return (int)pow( 2.0, (double)( level ) );
+    return (int)std::pow( 2.0, (double)( level ) );
 }
 
 int TileLoader::levelToColumn( int level )
@@ -244,7 +244,7 @@ int TileLoader::levelToColumn( int level )
             .arg( level );
         return 0;
     }
-    return (int)pow( 2.0, (double)( level + 1 ) );
+    return (int)std::pow( 2.0, (double)( level + 1 ) );
 }
 
 int TileLoader::rowToLevel( int row )
@@ -254,7 +254,7 @@ int TileLoader::rowToLevel( int row )
             .arg( row );
         return 0;
     }
-    return (int)( log( row ) / log( 2 ) );
+    return (int)( std::log( (double)row ) / std::log( (double)2.0 ) );
 }
 
 int TileLoader::columnToLevel( int column )
@@ -264,7 +264,7 @@ int TileLoader::columnToLevel( int column )
         .arg( column );
         return 0;
     }
-    return (int)( log( column / 2 ) / log( 2 ) );
+    return (int)( std::log( (double)(column / 2) ) / std::log( (double)2.0 ) );
 }
 
 quint64 TileLoader::volatileCacheLimit() const
