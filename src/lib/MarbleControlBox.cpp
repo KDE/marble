@@ -34,6 +34,8 @@
 #include <global.h>
 
 #include <MarbleWidget.h>
+#include <MarbleMap.h>
+#include <ViewParams.h>
 #include <MarbleModel.h>
 #include <MarbleDirs.h>
 #include <MapTheme.h>
@@ -140,6 +142,11 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
     connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
              this,                              SLOT( projectionSelected( int ) ) );
+
+    connect( d->uiWidget.zoomSlider,  SIGNAL( sliderPressed() ),
+             this,                      SLOT( adjustForAnimation() ) );
+    connect( d->uiWidget.zoomSlider,  SIGNAL( sliderReleased() ),
+             this,                      SLOT( adjustForStill() ) );
 
     d->uiWidget.projectionComboBox->setEnabled( true );
 }
@@ -555,6 +562,22 @@ void MarbleControlBox::projectionSelected( int projectionIndex )
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {
     emit centerOn( d->m_sortproxy->mapToSource( index ) );
+}
+
+void MarbleControlBox::adjustForAnimation()
+{
+    d->m_widget->setViewContext( Marble::Animation );
+}
+
+void MarbleControlBox::adjustForStill()
+{
+    d->m_widget->setViewContext( Marble::Still );
+    ViewParams* viewParams = d->m_widget->map()->viewParams();
+    if ( viewParams->mapQuality( Marble::Still )
+        != viewParams->mapQuality( Marble::Animation ) )
+    {
+        d->m_widget->updateChangedMap();
+    }
 }
 
 #include "MarbleControlBox.moc"
