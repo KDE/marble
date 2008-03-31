@@ -150,6 +150,7 @@ void MeasureTool::drawMark( ClipPainter* painter, ViewportParams *viewport,
     int  width  = viewport->width();
 
     // Paint the mark, and repeat it if the projection allows it.
+    painter->setRenderHint( QPainter::Antialiasing, false );
     painter->setPen( QColor( Qt::white ) );
     if ( viewport->currentProjection()->repeatX() ) {
 

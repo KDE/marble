@@ -879,7 +879,15 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
                           d->m_viewParams.m_canvasImage->height() );
 
     // 5. Paint measure points if there are any.
-    d->m_measureTool->paint( &painter, d->m_viewParams.viewport(), true );
+
+    bool antialiased = false;
+
+    if (   d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::High
+        || d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::Print ) {
+            antialiased = true;
+    }
+
+    d->m_measureTool->paint( &painter, d->m_viewParams.viewport(), antialiased );
 
     // Set the Bounding Box
     d->setBoundingBox();

@@ -233,8 +233,8 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
          m_vectorMap -> paintMap( painter, antialiased );
 
         // International Dateline
-         m_vectorMap -> setzBoundingBoxLimit( 0.0 );
-         m_vectorMap -> setzPointLimit( 0.0 );
+         m_vectorMap -> setzBoundingBoxLimit( -1.0 );
+         m_vectorMap -> setzPointLimit( -1.0 );
          m_vectorMap -> createFromPntMap( m_dateLine, viewParams->viewport() );
 
          m_vectorMap -> setPen( m_dateLinePen );
