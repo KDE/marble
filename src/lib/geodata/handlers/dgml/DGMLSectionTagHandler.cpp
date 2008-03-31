@@ -25,12 +25,14 @@
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"
+#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
+using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Section)
 
@@ -48,7 +50,9 @@ GeoNode* DGMLSectionTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Section));
 
-    QString name = parser.attribute(dgmlAttr_name);
+    QString name      = parser.attribute(dgmlAttr_name);
+    QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
+    int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
 
     GeoSceneSection* section = 0;
 
@@ -56,6 +60,8 @@ GeoNode* DGMLSectionTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Legend)) {
         GeoSceneSection* section = new GeoSceneSection( name );
+        section->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
+        section->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneLegend>()->addSection( section );
     }
 

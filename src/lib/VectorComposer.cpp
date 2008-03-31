@@ -188,6 +188,13 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
     Quaternion  rotAxis = viewParams->planetAxis();
 
+    bool antialiased = false;
+
+    if (   viewParams->mapQuality( viewParams->m_viewContext ) == Marble::High
+        || viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Print ) {
+            antialiased = true;
+    }
+
     if ( viewParams->m_showRivers ) {
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
@@ -196,7 +203,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
          m_vectorMap -> setPen( m_riverPen );
          m_vectorMap -> setBrush( m_riverBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
     }
 
     if ( viewParams->m_showBorders ) {
@@ -207,7 +214,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
          m_vectorMap -> setPen( m_countryPen );
          m_vectorMap -> setBrush( m_countryBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
 
         // US-States
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
@@ -216,7 +223,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
          m_vectorMap -> setPen( m_statePen );
          m_vectorMap -> setBrush( m_stateBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
 
         // International Dateline
          m_vectorMap -> setzBoundingBoxLimit( 0.0 );
@@ -225,7 +232,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
          m_vectorMap -> setPen( m_dateLinePen );
          m_vectorMap -> setBrush( m_dateLineBrush );
-         m_vectorMap -> paintMap( painter, false );
+         m_vectorMap -> paintMap( painter, antialiased );
 
     }
 

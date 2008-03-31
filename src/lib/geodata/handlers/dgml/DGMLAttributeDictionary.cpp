@@ -27,9 +27,11 @@ namespace GeoSceneAttributeDictionary {
 
 const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
-const char* dgmlAttr_bgcolor = "bgcolor";
-const char* dgmlAttr_color = "color";
-const char* dgmlAttr_name = "name";
-const char* dgmlAttr_pixmap = "pixmap";
-const char* dgmlAttr_text = "text";
+const char* dgmlAttr_bgcolor   = "bgcolor";
+const char* dgmlAttr_color     = "color";
+const char* dgmlAttr_checkable = "checkable";
+const char* dgmlAttr_name      = "name";
+const char* dgmlAttr_pixmap    = "pixmap";
+const char* dgmlAttr_spacing   = "spacing";
+const char* dgmlAttr_text      = "text";
 }

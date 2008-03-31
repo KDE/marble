@@ -19,6 +19,11 @@ ViewParams::ViewParams( )
     // Default projection
     m_oldProjection = Spherical;
 
+    m_mapQuality = High;
+    m_animationQuality = Low;
+
+    m_viewContext = Still;
+
     // Show / don't show parameters
     m_showGrid           = true;
     m_showPlaceMarks     = true;
@@ -75,6 +80,21 @@ void ViewParams::setProjection(Projection newProjection)
     m_viewport.setProjection( newProjection );
 }
 
+MapQuality ViewParams::mapQuality( ViewContext viewContext )
+{
+    if ( viewContext == Still )
+        return m_mapQuality; 
+    if ( viewContext == Animation )
+        return m_animationQuality; 
+}
+
+void ViewParams::setMapQuality( ViewContext viewContext, MapQuality mapQuality )
+{
+    if ( viewContext == Still )
+        m_mapQuality = mapQuality; 
+    if ( viewContext == Animation )
+        m_animationQuality = mapQuality; 
+}
 
 int ViewParams::radius() const
 {

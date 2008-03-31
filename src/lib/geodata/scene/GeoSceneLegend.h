@@ -42,10 +42,13 @@ class GeoSceneLegend : public GeoNode {
      */
     void addSection(GeoSceneSection*);
     GeoSceneSection* section(const QString&);
+    QVector<GeoSceneSection*> sections() const;
 
  protected:
-    /// The hash table holding all the sections in the legend.
-    QHash<QString, GeoSceneSection*> m_sections;
+    /// The vector holding all the sections in the legend.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneSection*> m_sections;
 };
 
 

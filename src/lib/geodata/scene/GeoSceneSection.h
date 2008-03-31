@@ -38,6 +38,15 @@ class GeoSceneSection : public GeoNode {
     ~GeoSceneSection();
 
     QString name() const;
+
+    QString heading() const;
+    void setHeading( const QString& heading );
+
+    bool checkable() const;
+    void setCheckable( bool checkable );
+    int  spacing() const;
+    void setSpacing( int spacing );
+
     /**
      * @brief  Add an item to the legend section
      * @param  item  the new section
@@ -45,10 +54,14 @@ class GeoSceneSection : public GeoNode {
     void addItem(GeoSceneItem*);
 
  protected:
-    /// The hash table holding all the sections in the legend.
+    /// The vector holding all the items in the legend section.
     QVector<GeoSceneItem*> m_items;
 
     QString  m_name;
+    QString  m_heading;
+
+    bool     m_checkable;
+    int      m_spacing;
 };
 
 

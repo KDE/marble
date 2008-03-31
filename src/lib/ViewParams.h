@@ -32,6 +32,7 @@
 
 class QImage;
 
+using namespace Marble;
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
@@ -50,6 +51,9 @@ class ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
+    MapQuality mapQuality( ViewContext );
+    void setMapQuality( ViewContext, MapQuality );
+
     int radius() const;
     void setRadius(int newRadius);
 
@@ -62,6 +66,11 @@ class ViewParams
     ViewportParams  m_viewport;
     //Projection  m_projection;
     Projection  m_oldProjection;
+
+    MapQuality  m_mapQuality;
+    MapQuality  m_animationQuality;
+
+    ViewContext m_viewContext;
 
     // Parameters that determine the painting
     //Quaternion  m_planetAxis;   // Position, coded in a quaternion

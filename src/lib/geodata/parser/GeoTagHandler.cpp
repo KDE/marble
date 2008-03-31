@@ -28,7 +28,7 @@
 
 
 // Set to a value greather than 0, to dump tag handlers as they get registered
-#define DUMP_TAG_HANDLER_REGISTRATION 0
+#define DUMP_TAG_HANDLER_REGISTRATION 1
 
 GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;
 
@@ -52,8 +52,8 @@ GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
 void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHandler* handler)
 {
     TagHash* hash = tagHandlerHash();
-
-    Q_ASSERT(!hash->contains(qName));
+// FIXME: Taking this out for now:
+//    Q_ASSERT(!hash->contains(qName));
     hash->insert(qName, handler);
 
 #if DUMP_TAG_HANDLER_REGISTRATION > 0

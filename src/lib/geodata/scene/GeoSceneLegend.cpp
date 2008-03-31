@@ -33,14 +33,34 @@ GeoSceneLegend::~GeoSceneLegend()
 
 void GeoSceneLegend::addSection( GeoSceneSection* section )
 {
+    // Remove any item that has the same name
+    QVector<GeoSceneSection*>::iterator it = m_sections.begin();
+    while (it != m_sections.end()) {
+        GeoSceneSection* currentSection = *it;
+        if ( currentSection->name() == section->name() ) {
+            delete currentSection;
+            it = m_sections.erase(it);
+        }
+        else {
+            ++it;
+        }
+     }
+
     if ( section ) {
-        m_sections.insert( section->name(), section );
+        m_sections.append( section );
     }
 }
 
 GeoSceneSection* GeoSceneLegend::section( const QString& name )
 {
-    GeoSceneSection* section = m_sections.value(name);
+    GeoSceneSection* section = 0;
+
+    QVector<GeoSceneSection*>::const_iterator it = m_sections.begin();
+    for (it = m_sections.begin(); it != m_sections.end(); ++it) {
+        if ( (*it)->name() == name )
+            section = *it;
+    }
+
     if ( section ) {
         Q_ASSERT(section->name() == name);
         return section;
@@ -50,4 +70,9 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
     addSection( section );
 
     return section;
+}
+
+QVector<GeoSceneSection*> GeoSceneLegend::sections() const
+{
+    return m_sections;
 }

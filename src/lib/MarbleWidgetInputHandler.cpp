@@ -20,8 +20,8 @@
 #include "Quaternion.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
-
-
+#include "MarbleMap.h"
+#include "ViewParams.h"
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
@@ -173,6 +173,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 // Calculate translation of center point
                 m_leftpresseda =  m_widget->centerLongitude() * DEG2RAD;
                 m_leftpressedb =  m_widget->centerLatitude() * DEG2RAD;
+
+                m_widget->setViewContext( Marble::Animation );
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -202,6 +204,14 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 		     || ( m_leftpressedx == event->x()
 			  && m_leftpressedy == event->y() ) ) {
                     emit lmbRequest( m_leftpressedx, m_leftpressedy );
+                }
+
+                m_widget->setViewContext( Marble::Still );
+                ViewParams* viewParams = m_widget->map()->viewParams();
+                if ( viewParams->mapQuality( Marble::Still )
+                    != viewParams->mapQuality( Marble::Animation ) )
+                {
+                    m_widget->updateChangedMap();
                 }
 
                 m_leftpressed = false;

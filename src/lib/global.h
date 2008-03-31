@@ -47,6 +47,14 @@ enum AngleUnit {
 };
 
 /**
+ * @brief This enum is used to choose context in which map quality gets used.
+ */
+enum ViewContext {
+    Still,              ///< still image
+    Animation           ///< animated view (e.g. while rotating the globe)
+}; 
+
+/**
  * @brief This enum is used to choose the map quality shown in the view.
  */
 enum MapQuality {

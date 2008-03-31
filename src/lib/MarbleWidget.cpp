@@ -1031,6 +1031,11 @@ void MarbleWidget::setDownloadUrl( const QUrl &url )
     d->m_map->setDownloadUrl( url );
 }
 
+void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
+{
+    d->m_map->setViewContext( viewContext );
+}
+
 QString MarbleWidget::distanceString() const
 {
     const double VIEW_ANGLE = 110.0;

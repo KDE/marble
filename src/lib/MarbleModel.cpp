@@ -433,20 +433,28 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         // Create and paint a grid
         d->m_gridmap->createGrid( viewParams->viewport() );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, false );
+
+        bool antialiased = false;
+
+        if (   viewParams->mapQuality( viewParams->m_viewContext ) == Marble::High
+            || viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Print ) {
+                antialiased = true;
+        }
+
+        d->m_gridmap->paintGridMap( painter, antialiased );
 
         // Create and paint the tropics and polar circles
         d->m_gridmap->createTropics( viewParams->viewport() );
         gridpen.setStyle( Qt::DotLine );
         // gridpen.setWidthF( 1.5f );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, false );
+        d->m_gridmap->paintGridMap( painter, antialiased );
 
         // Create and paint Equator
         d->m_gridmap->createEquator( viewParams->viewport() );
         // gridpen.setWidthF( 2.0f );
         d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, false );
+        d->m_gridmap->paintGridMap( painter, antialiased );
     }
 
     // Paint the GeoDataPlaceMark layer

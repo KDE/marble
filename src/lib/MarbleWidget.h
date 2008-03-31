@@ -32,6 +32,7 @@
 
 #include "marble_export.h"
 #include "GeoDataPoint.h"       // In geodata/data/
+#include "MarbleWidgetInputHandler.h"
 #include "global.h"             // types needed in all of marble.
 
 // Qt
@@ -41,7 +42,7 @@ class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
 
 // MarbleWidget 
-class MarbleWidgetInputHandler;
+// class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 
 // Marble
@@ -828,6 +829,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param url the url objects
      */
     void setDownloadUrl( const QUrl &url );
+
+    /**
+     * @brief Set the view context (i.e. still or animated map) 
+     */
+    void setViewContext( Marble::ViewContext viewContext );
 
  Q_SIGNALS:
     /**

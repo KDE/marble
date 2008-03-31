@@ -37,6 +37,25 @@ QString GeoSceneSection::name() const
     return m_name;
 }
 
+bool GeoSceneSection::checkable() const
+{
+    return m_checkable;
+}
+
+void GeoSceneSection::setCheckable( bool checkable )
+{
+    m_checkable = checkable;
+}
+
+int  GeoSceneSection::spacing() const
+{
+    return m_spacing;
+}
+
+void GeoSceneSection::setSpacing( int spacing )
+{
+    m_spacing = spacing;
+}
 
 void GeoSceneSection::addItem( GeoSceneItem* item )
 {
