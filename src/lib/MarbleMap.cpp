@@ -860,6 +860,10 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     customPaint( &painter );
 
+    int transparency = ( d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::Low ) ? 255 : 192;
+    d->m_compass.setTransparency( transparency );
+    d->m_mapscale.setTransparency( transparency );
+
     // 2. Paint the compass
     if ( d->m_showCompass )
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
