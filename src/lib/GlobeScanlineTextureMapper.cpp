@@ -122,6 +122,9 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                           ? m_imageHeight - skip
                           : yTop + radius + radius - skip );
 
+    bool interlaced = ( m_interlaced ||
+                        viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Low );
+
     for ( m_y = yTop; m_y < yBottom ; ++m_y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
@@ -240,7 +243,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             ++m_scanLine;
         }
 
-        if ( m_interlaced == true ) { // copy scanline to improve performance
+        if ( interlaced == true ) { // copy scanline to improve performance
 
             int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
 
