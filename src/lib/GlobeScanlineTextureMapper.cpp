@@ -243,7 +243,8 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             ++m_scanLine;
         }
 
-        if ( interlaced == true ) { // copy scanline to improve performance
+        // copy scanline to improve performance
+        if ( interlaced == true && m_y + 1 < yBottom ) { 
 
             int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
 
