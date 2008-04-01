@@ -860,7 +860,7 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     customPaint( &painter );
 
-    int transparency = ( d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::Low ) ? 255 : 192;
+    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
     d->m_compass.setTransparency( transparency );
     d->m_mapscale.setTransparency( transparency );
 
@@ -886,8 +886,8 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     bool antialiased = false;
 
-    if (   d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::High
-        || d->m_viewParams.mapQuality( d->m_viewParams.m_viewContext ) == Marble::Print ) {
+    if (   d->m_viewParams.mapQuality() == Marble::High
+        || d->m_viewParams.mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 

@@ -136,8 +136,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
     Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
-    Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
-
     Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
     Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
 
@@ -422,12 +420,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return the frame rates visibility
      */
     bool  showFrameRate() const;
-
-    /**
-     * @brief  Return whether quick and dirty rendering is enabled.
-     * @return Quick and dirty rendering
-     */
-    bool  quickDirty() const;
 
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
@@ -771,12 +763,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     FileViewModel* fileViewModel() const;
 
     /**
-     * @brief  Set whether for rendering quick and dirty algorithms should be used
-     * @param  enabled  Enable quick and dirty rendering
-     */
-    void setQuickDirty( bool enabled );
-
-    /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
      * @param  kilobytes The limit in kilobytes.
      */
@@ -829,6 +815,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param url the url objects
      */
     void setDownloadUrl( const QUrl &url );
+
+    /**
+     * @brief Retrieve the map quality depending on the view context 
+     */
+    Marble::MapQuality mapQuality( Marble::ViewContext = Marble::Still );
+
+    /**
+     * @brief Set the map quality depending on the view context 
+     */
+    void setMapQuality( Marble::MapQuality, Marble::ViewContext = Marble::Still );
 
     /**
      * @brief Set the view context (i.e. still or animated map) 

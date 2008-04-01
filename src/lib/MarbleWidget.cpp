@@ -64,6 +64,7 @@ class MarbleWidgetPrivate
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
         : m_parent( parent ), m_map( map ),
+          m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_inputhandler( 0 )
     {
         m_model = m_map->model();
@@ -81,6 +82,9 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
+
+    MapQuality      m_stillQuality;
+    MapQuality      m_animationQuality;
 
     bool             m_justModified; // FIXME: Rename to isDirty. Also: should be here or in MarbleMap?
 
@@ -134,6 +138,8 @@ void MarbleWidgetPrivate::construct()
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_parent->width(), m_parent->height() );
+    m_map->viewParams()->setMapQuality( m_stillQuality ); 
+
     m_parent->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
                        m_parent, SIGNAL( projectionChanged( Projection ) ) );
 
@@ -409,11 +415,6 @@ bool MarbleWidget::showGps() const
 bool MarbleWidget::showFrameRate() const
 {
     return d->m_map->showFrameRate();
-}
-
-bool MarbleWidget::quickDirty() const
-{
-    return d->m_map->quickDirty();
 }
 
 quint64 MarbleWidget::persistentTileCacheLimit() const
@@ -974,11 +975,6 @@ FileViewModel* MarbleWidget::fileViewModel() const
     return d->m_model->fileViewModel();
 }
 
-void MarbleWidget::setQuickDirty( bool enabled )
-{
-    d->m_map->setQuickDirty( enabled );
-}
-
 void MarbleWidget::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
     d->m_map->setPersistentTileCacheLimit( kiloBytes );
@@ -1031,9 +1027,28 @@ void MarbleWidget::setDownloadUrl( const QUrl &url )
     d->m_map->setDownloadUrl( url );
 }
 
+MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
+{
+    if ( viewContext == Still )
+        return d->m_stillQuality; 
+    if ( viewContext == Animation )
+        return d->m_animationQuality; 
+}
+
+void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )
+{
+    if ( viewContext == Still )
+        d->m_stillQuality = mapQuality; 
+    if ( viewContext == Animation )
+        d->m_animationQuality = mapQuality;
+}
+
 void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
 {
-    d->m_map->setViewContext( viewContext );
+    if ( viewContext == Still )
+        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
+    if ( viewContext == Animation )
+        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
 }
 
 QString MarbleWidget::distanceString() const

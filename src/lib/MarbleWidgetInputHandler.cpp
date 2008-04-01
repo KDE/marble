@@ -182,6 +182,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 m_midpressed  = true;
                 m_leftpressed = false;
                 m_midpressedy = event->y();
+
+                m_widget->setViewContext( Marble::Animation );
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -207,9 +209,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 }
 
                 m_widget->setViewContext( Marble::Still );
-                ViewParams* viewParams = m_widget->map()->viewParams();
-                if ( viewParams->mapQuality( Marble::Still )
-                    != viewParams->mapQuality( Marble::Animation ) )
+                if ( m_widget->mapQuality( Marble::Still )
+                    != m_widget->mapQuality( Marble::Animation ) )
                 {
                     m_widget->updateChangedMap();
                 }
@@ -220,6 +221,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( e->type() == QEvent::MouseButtonRelease
                  && event->button() == Qt::MidButton) {
                 m_midpressed = false;
+
+                m_widget->setViewContext( Marble::Still );
+                if ( m_widget->mapQuality( Marble::Still )
+                    != m_widget->mapQuality( Marble::Animation ) )
+                {
+                    m_widget->updateChangedMap();
+                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease
@@ -335,6 +343,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
+            // FIXME: disable animation quality after some time
+            m_widget->setViewContext( Marble::Animation );
+
             QWheelEvent  *wheelevt = static_cast<QWheelEvent*>(e);
             m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
 

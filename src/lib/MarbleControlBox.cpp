@@ -572,9 +572,9 @@ void MarbleControlBox::adjustForAnimation()
 void MarbleControlBox::adjustForStill()
 {
     d->m_widget->setViewContext( Marble::Still );
-    ViewParams* viewParams = d->m_widget->map()->viewParams();
-    if ( viewParams->mapQuality( Marble::Still )
-        != viewParams->mapQuality( Marble::Animation ) )
+
+    if ( d->m_widget->mapQuality( Marble::Still )
+        != d->m_widget->mapQuality( Marble::Animation ) )
     {
         d->m_widget->updateChangedMap();
     }

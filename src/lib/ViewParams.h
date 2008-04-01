@@ -51,8 +51,8 @@ class ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
-    MapQuality mapQuality( ViewContext );
-    void setMapQuality( ViewContext, MapQuality );
+    Marble::MapQuality mapQuality();
+    void setMapQuality( Marble::MapQuality );
 
     int radius() const;
     void setRadius(int newRadius);
@@ -68,7 +68,6 @@ class ViewParams
     Projection  m_oldProjection;
 
     MapQuality  m_mapQuality;
-    MapQuality  m_animationQuality;
 
     ViewContext m_viewContext;
 

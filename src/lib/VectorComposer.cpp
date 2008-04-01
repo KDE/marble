@@ -145,8 +145,8 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality( viewParams->m_viewContext ) == Marble::High
-        || viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Print ) {
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 
@@ -197,8 +197,8 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality( viewParams->m_viewContext ) == Marble::High
-        || viewParams->mapQuality( viewParams->m_viewContext ) == Marble::Print ) {
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 

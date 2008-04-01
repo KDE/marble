@@ -1,3 +1,26 @@
+2008-04-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleWidgetInputHandler.cpp:
+
+    - Added Quality Settings and a ViewContext to Marble Widget
+    - Removed setQuickDirty(true) and quickDirty() as those 
+      can now be perfectly emulated by choosing MapQuality::Low.
+    - Honoring viewContexts for the middle mouse button / wheel
+
+    * examples/example2.ui:
+
+    - Removed "Quick Dirty" checkbox from the 2nd example.
+
+    * src/lib/ViewParams.{cpp,h}:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/GlobeScanlineTextureMapper.cpp:
+    * src/lib/VectorComposer.cpp:
+
+    - Added Quality Settings to Marble Map
+
 2008-03-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove some old FIXMEs.
