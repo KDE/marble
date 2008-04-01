@@ -827,6 +827,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setMapQuality( Marble::MapQuality, Marble::ViewContext = Marble::Still );
 
     /**
+     * @brief Retrieve the view context (i.e. still or animated map) 
+     */
+    Marble::ViewContext viewContext( Marble::ViewContext viewContext );
+
+    /**
      * @brief Set the view context (i.e. still or animated map) 
      */
     void setViewContext( Marble::ViewContext viewContext );

@@ -63,7 +63,8 @@ class MarbleWidgetPrivate
 {
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
-        : m_parent( parent ), m_map( map ),
+        : m_parent( parent ), m_map( map ), 
+          m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_inputhandler( 0 )
     {
@@ -82,6 +83,8 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
+
+    ViewContext     m_viewContext;
 
     MapQuality      m_stillQuality;
     MapQuality      m_animationQuality;
@@ -1038,13 +1041,32 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )
 {
     if ( viewContext == Still )
-        d->m_stillQuality = mapQuality; 
+    {
+        d->m_stillQuality = mapQuality;
+    }
     if ( viewContext == Animation )
+    {
         d->m_animationQuality = mapQuality;
+    }
+    if ( d->m_viewContext == Still )
+    {
+        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
+    }
+    if ( d->m_viewContext == Animation )
+    {
+        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
+    }
+}
+
+ViewContext MarbleWidget::viewContext( Marble::ViewContext viewContext )
+{
+    return d->m_viewContext;
 }
 
 void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
 {
+    d->m_viewContext = viewContext;
+
     if ( viewContext == Still )
         map()->viewParams()->setMapQuality( d->m_stillQuality ); 
     if ( viewContext == Animation )

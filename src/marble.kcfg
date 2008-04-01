@@ -44,7 +44,7 @@
    </choices>
    <default>Marble::DMSDegree</default>
   </entry>
-  <entry key="mapQuality" type="Enum" >
+  <entry key="stillQuality" type="Enum" >
    <label>The quality at which a still map gets painted.</label>
    <choices name="Marble::MapQuality">
     <choice name="MapQuality::Outline"/>
@@ -64,11 +64,11 @@
     <choice name="MapQuality::High"/>
     <choice name="MapQuality::Print"/>
    </choices>
-   <default>Marble::Normal</default>
+   <default>Marble::Low</default>
   </entry>
   <entry key="labelLocalization" type="Enum" >
    <label>The localization of the labels.</label>
-   <choices name="Marble::LabelLocalization">
+    <choices name="Marble::LabelLocalization">
     <choice name="LabelLocalization::CustomAndNative"/>
     <choice name="LabelLocalization::Custom"/>
     <choice name="LabelLocalization::Native"/>

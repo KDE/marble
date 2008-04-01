@@ -118,7 +118,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <layout class="QGridLayout" >
       <item row="0" column="0" >
-       <widget class="QLabel" name="label_mapQuality" >
+       <widget class="QLabel" name="label_stillQuality" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
           <horstretch>0</horstretch>
@@ -132,15 +132,15 @@ p, li { white-space: pre-wrap; }
          </size>
         </property>
         <property name="text" >
-         <string>&amp;Static image:</string>
+         <string>&amp;Still image:</string>
         </property>
         <property name="buddy" >
-         <cstring>kcfg_mapQuality</cstring>
+         <cstring>kcfg_stillQuality</cstring>
         </property>
        </widget>
       </item>
       <item row="0" column="1" >
-       <widget class="QComboBox" name="kcfg_mapQuality" >
+       <widget class="QComboBox" name="kcfg_stillQuality" >
         <property name="toolTip" >
          <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }

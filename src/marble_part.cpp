@@ -279,6 +279,9 @@ void MarblePart::writeSettings()
     MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapTheme() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
 
+    MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
+    MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
+
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
 
@@ -445,8 +448,14 @@ void MarblePart::editSettings()
 
 void MarblePart::slotUpdateSettings()
 {
+    qDebug() << "Aktualisiert";
+    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
+    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
+
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );
+
+    m_controlView->marbleWidget()->updateChangedMap();
 }
 
 #include "marble_part.moc"

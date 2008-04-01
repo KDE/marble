@@ -1,6 +1,16 @@
 2008-04-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleViewSettingsWidget.ui:
+    * src/marble.kcfg:
+    * src/marble_part.cpp:
+
+    - Enabling Quality Settings in the KDE Marble settings
+    dialog.
+
+2008-04-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/MarbleWidgetInputHandler.cpp:
 
     - Added Quality Settings and a ViewContext to Marble Widget
