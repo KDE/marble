@@ -1,5 +1,21 @@
 2008-04-01  Torsten Rahn  <rahn@kde.org>
 
+    * data/placemarks/cities.txt:
+    * data/placemarks/cityplacemarks.cache:
+    * data/placemarks/cityplacemarks.kml:
+
+    - Corrected polish cities accents/letters by Médéric Boquien.
+
+2008-04-01  Torsten Rahn  <rahn@kde.org>
+
+    * data/placemarks/cities.txt:
+    * data/placemarks/cityplacemarks.cache:
+    * data/placemarks/cityplacemarks.kml:
+
+    - Corrected polish cities accents/letters by Médéric Boquien.
+
+2008-04-01  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/MarbleViewSettingsWidget.ui:
     * src/marble.kcfg:
