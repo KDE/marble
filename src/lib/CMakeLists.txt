@@ -218,7 +218,12 @@ else(WIN32 AND QTONLY)
   endif(APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
 
-add_executable(geodatatest geodata/GeoDataTest.cpp)
+if(QTONLY)
+    add_executable(geodatatest geodata/GeoDataTest.cpp)
+else(QTONLY)
+    add_executable(geodatatest geodata/GeoDataTest.cpp ${geodata_SRCS})
+endif(QTONLY)
+
 target_link_libraries (geodatatest marblewidget)
 
 install (TARGETS geodatatest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )

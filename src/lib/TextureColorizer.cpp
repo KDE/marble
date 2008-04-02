@@ -107,8 +107,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 else
                     bump = 8;
 
-                int red  = qRed( *coastData );
-                if ( red == 255 || red == 0 ) {
+                int alpha = qRed( *coastData );
+                if ( alpha == 255 || alpha == 0 ) {
                     if ( *coastData == landoffscreen )
                         *writeData = texturepalette[bump][grey + 0x100]; 
                     else {
@@ -121,39 +121,38 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 }
                 else
                 {
+                    double c = 1.0 / 255.0;
+
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-                        double landalpha = (double)(red) / 255.0;
 
                         QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
                         QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
 
                         *writeData = qRgb( 
-                              (int)( landalpha * qRed( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qRed( watercolor ) ),
-                              (int)( landalpha * qGreen( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qGreen( watercolor ) ),
-                              (int)( landalpha * qBlue( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qBlue( watercolor ) )
+                            (int) ( c * ( alpha * qRed( landcolor )
+                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
+                            (int) ( c * ( alpha * qGreen( landcolor )
+                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
+                            (int) ( c * ( alpha * qBlue( landcolor )
+                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
                         );
                     }
                     else {
 
                         if ( qGreen( *coastData ) != 0 ) {
-                            double landalpha = qGreen(*coastData) / 255.0;
 
                             QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
                             QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
     
                             *writeData = qRgb( 
-                                (int)( landalpha * qRed( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qRed( landcolor ) ),
-                                (int)( landalpha * qGreen( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qGreen( landcolor ) ),
-                                (int)( landalpha * qBlue( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qBlue( landcolor ) )
+                                (int) ( c * ( alpha * qRed( glaciercolor )
+                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
+                                (int) ( c * ( alpha * qGreen( glaciercolor )
+                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
+                                (int) ( c * ( alpha * qBlue( glaciercolor )
+                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
                             ); 
                         }
-
                     }
                 }
             }
@@ -198,8 +197,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 else
                     bump = 8;
 
-                int red  = qRed( *coastData );
-                if ( red == 255 || red == 0 ) {
+                int alpha = qRed( *coastData );
+                if ( alpha == 255 || alpha == 0 ) {
                     if ( *coastData == landoffscreen )
                         *writeData = texturepalette[bump][grey + 0x100]; 
                     else {
@@ -212,39 +211,38 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 }
                 else
                 {
+                    double c = 1.0 / 255.0;
+
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
-                        double landalpha = (double)(red) / 255.0;
 
                         QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
                         QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
 
                         *writeData = qRgb( 
-                              (int)( landalpha * qRed( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qRed( watercolor ) ),
-                              (int)( landalpha * qGreen( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qGreen( watercolor ) ),
-                              (int)( landalpha * qBlue( landcolor ) )
-                            + (int)( ( 1-landalpha ) * qBlue( watercolor ) )
+                            (int) ( c * ( alpha * qRed( landcolor )
+                            + ( 255 - alpha ) * qRed( watercolor ) ) ),
+                            (int) ( c * ( alpha * qGreen( landcolor )
+                            + ( 255 - alpha ) * qGreen( watercolor ) ) ),
+                            (int) ( c * ( alpha * qBlue( landcolor )
+                            + ( 255 - alpha ) * qBlue( watercolor ) ) )
                         );
                     }
                     else {
 
                         if ( qGreen( *coastData ) != 0 ) {
-                            double landalpha = qGreen(*coastData) / 255.0;
 
                             QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
                             QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
     
                             *writeData = qRgb( 
-                                (int)( landalpha * qRed( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qRed( landcolor ) ),
-                                (int)( landalpha * qGreen( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qGreen( landcolor ) ),
-                                (int)( landalpha * qBlue( glaciercolor ) )
-                                + (int)( ( 1-landalpha ) * qBlue( landcolor ) )
+                                (int) ( c * ( alpha * qRed( glaciercolor )
+                                + ( 255 - alpha ) * qRed( landcolor ) ) ),
+                                (int) ( c * ( alpha * qGreen( glaciercolor )
+                                + ( 255 - alpha ) * qGreen( landcolor ) ) ),
+                                (int) ( c * ( alpha * qBlue( glaciercolor )
+                                + ( 255 - alpha ) * qBlue( landcolor ) ) )
                             ); 
                         }
-
                     }
                 }
             }
