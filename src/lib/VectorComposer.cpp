@@ -56,8 +56,8 @@ VectorComposer::VectorComposer()
     m_textureLandPen = QPen( Qt::NoPen );
 
     m_textureLandBrush = QBrush( QColor( 255, 0, 0 ) );
-    m_textureLakeBrush = QBrush( QColor( 0, 255, 0 ) );
-    m_textureGlacierBrush = QBrush( QColor( 0, 0, 0 ) );
+    m_textureLakeBrush = QBrush( QColor( 0, 0, 0 ) );
+    m_textureGlacierBrush = QBrush( QColor( 0, 255, 0 ) );
     m_textureBorderPen.setStyle( Qt::SolidLine );
     m_textureBorderPen.setColor( QColor( 0, 255, 0 ) );
 
@@ -93,6 +93,13 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     //	m_vectorMap -> clearNodeCount();
 
+    bool antialiased = false;
+
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print ) {
+            antialiased = true;
+    }
+
     // Coastlines
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
@@ -100,7 +107,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
+    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
 
     // Islands
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
@@ -109,7 +116,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
+    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
 
     if ( viewParams->m_showLakes ) {
          // Lakes
@@ -117,12 +124,14 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> setzPointLimit( 0.98 ); 
 
          m_vectorMap -> createFromPntMap( m_lakes, viewParams->viewport() );
+         m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureLakeBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
 
          m_vectorMap -> createFromPntMap( m_lakeislands, viewParams->viewport() );
+         m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureLandBrush );
-         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
     }
 
     if ( viewParams->m_showIceLayer ) {
@@ -130,9 +139,10 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
          m_vectorMap -> createFromPntMap( m_glaciers, viewParams->viewport() );
+         m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureGlacierBrush );
 
-         m_vectorMap -> drawMap( origimg, false, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
     }
 
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();

@@ -47,7 +47,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
     const uint landoffscreen = qRgb(255,0,0);
     // const uint seaoffscreen = qRgb(0,0,0);
-    const uint lakeoffscreen = qRgb(0,255,0);
+    const uint lakeoffscreen = qRgb(0,0,0);
     // const uint glaciercolor = qRgb(200,200,200);
 
     int     bump = 0;
@@ -107,13 +107,53 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 else
                     bump = 8;
 
-                if ( *coastData == landoffscreen )
-                    *writeData = texturepalette[bump][grey + 0x100]; 
-                else {
-                    if (*coastData == lakeoffscreen)
-                        *writeData = texturepalette[bump][0x055];
+                int red  = qRed( *coastData );
+                if ( red == 255 || red == 0 ) {
+                    if ( *coastData == landoffscreen )
+                        *writeData = texturepalette[bump][grey + 0x100]; 
                     else {
-                        *writeData = texturepalette[bump][grey];
+                        if (*coastData == lakeoffscreen)
+                            *writeData = texturepalette[bump][0x055];
+                        else {
+                            *writeData = texturepalette[bump][grey];
+                        }
+                    }
+                }
+                else
+                {
+                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
+                        double landalpha = (double)(red) / 255.0;
+
+                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
+
+                        *writeData = qRgb( 
+                              (int)( landalpha * qRed( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qRed( watercolor ) ),
+                              (int)( landalpha * qGreen( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qGreen( watercolor ) ),
+                              (int)( landalpha * qBlue( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qBlue( watercolor ) )
+                        );
+                    }
+                    else {
+
+                        if ( qGreen( *coastData ) != 0 ) {
+                            double landalpha = qGreen(*coastData) / 255.0;
+
+                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
+    
+                            *writeData = qRgb( 
+                                (int)( landalpha * qRed( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qRed( landcolor ) ),
+                                (int)( landalpha * qGreen( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qGreen( landcolor ) ),
+                                (int)( landalpha * qBlue( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qBlue( landcolor ) )
+                            ); 
+                        }
+
                     }
                 }
             }
@@ -158,13 +198,53 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 else
                     bump = 8;
 
-                if ( *coastData == landoffscreen )
-                    *writeData = texturepalette[bump][grey + 0x100];	
-                else {
-                    if (*coastData == lakeoffscreen)
-                    *writeData = texturepalette[bump][0x055];
+                int red  = qRed( *coastData );
+                if ( red == 255 || red == 0 ) {
+                    if ( *coastData == landoffscreen )
+                        *writeData = texturepalette[bump][grey + 0x100]; 
                     else {
-                        *writeData = texturepalette[bump][grey];
+                        if (*coastData == lakeoffscreen)
+                            *writeData = texturepalette[bump][0x055];
+                        else {
+                            *writeData = texturepalette[bump][grey];
+                        }
+                    }
+                }
+                else
+                {
+                    if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
+                        double landalpha = (double)(red) / 255.0;
+
+                        QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+                        QRgb watercolor = (QRgb)(texturepalette[bump][grey]);
+
+                        *writeData = qRgb( 
+                              (int)( landalpha * qRed( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qRed( watercolor ) ),
+                              (int)( landalpha * qGreen( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qGreen( watercolor ) ),
+                              (int)( landalpha * qBlue( landcolor ) )
+                            + (int)( ( 1-landalpha ) * qBlue( watercolor ) )
+                        );
+                    }
+                    else {
+
+                        if ( qGreen( *coastData ) != 0 ) {
+                            double landalpha = qGreen(*coastData) / 255.0;
+
+                            QRgb landcolor  = (QRgb)(texturepalette[bump][grey + 0x100]);
+                            QRgb glaciercolor = (QRgb)(texturepalette[bump][grey]);
+    
+                            *writeData = qRgb( 
+                                (int)( landalpha * qRed( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qRed( landcolor ) ),
+                                (int)( landalpha * qGreen( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qGreen( landcolor ) ),
+                                (int)( landalpha * qBlue( glaciercolor ) )
+                                + (int)( ( 1-landalpha ) * qBlue( landcolor ) )
+                            ); 
+                        }
+
                     }
                 }
             }

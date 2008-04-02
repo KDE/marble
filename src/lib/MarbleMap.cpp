@@ -1167,11 +1167,6 @@ void MarbleMap::setDownloadUrl( const QUrl &url ) {
     }
 }
 
-void MarbleMap::setViewContext( Marble::ViewContext viewContext )
-{
-    viewParams()->m_viewContext = viewContext;
-}
-
 QString MarbleMap::distanceString() const
 {
     const double VIEW_ANGLE = 110.0;

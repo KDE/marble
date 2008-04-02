@@ -21,8 +21,6 @@ ViewParams::ViewParams( )
 
     m_mapQuality = Normal;
 
-    m_viewContext = Still;
-
     // Show / don't show parameters
     m_showGrid           = true;
     m_showPlaceMarks     = true;

@@ -69,8 +69,6 @@ class ViewParams
 
     MapQuality  m_mapQuality;
 
-    ViewContext m_viewContext;
-
     // Parameters that determine the painting
     //Quaternion  m_planetAxis;   // Position, coded in a quaternion
     Quaternion  m_planetAxisUpdated;

@@ -797,11 +797,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setDownloadUrl( const QUrl &url );
 
-    /**
-     * @brief Set the view context (i.e. still or animated map) 
-     */
-    void setViewContext( Marble::ViewContext viewContext );
-
     bool  globeCoversImage();
 
  Q_SIGNALS:
