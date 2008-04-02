@@ -52,9 +52,10 @@ GeoTagHandler::TagHash* GeoTagHandler::tagHandlerHash()
 void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHandler* handler)
 {
     TagHash* hash = tagHandlerHash();
-// FIXME: Taking this out for now:
-//    Q_ASSERT(!hash->contains(qName));
+
+    Q_ASSERT(!hash->contains(qName));
     hash->insert(qName, handler);
+    Q_ASSERT(hash->contains(qName));
 
 #if DUMP_TAG_HANDLER_REGISTRATION > 0
     qDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;

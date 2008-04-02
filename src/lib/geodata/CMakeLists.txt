@@ -86,7 +86,4 @@ SET( geodata_SRCS
         ${geodata_handlers_dgml_SRCS}
    )
 
-add_executable(geodatatest ${geodata_SRCS} geodata/GeoDataTest.cpp)
-target_link_libraries (geodatatest ${QT_QTCORE_LIBRARY} marblewidget)
 
-install (TARGETS geodatatest RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
