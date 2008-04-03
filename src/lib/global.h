@@ -33,8 +33,8 @@ namespace Marble {
  * @brief This enum is used to choose the unit chosen to measure distances.
  */
 enum DistanceUnit {
-    Kilometer,          ///< Metric unit
-    Mile                ///< Imperial unit
+    Metric,             ///< Metric unit
+    Imperial            ///< Imperial unit
 };
 
 /**

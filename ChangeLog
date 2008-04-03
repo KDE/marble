@@ -1,3 +1,13 @@
+2008-04-03  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/global.h:
+    * src/marble.kcfg:
+    * src/marble_part.cpp:
+
+    - Implemented the setting which enables the user to let
+    Marble remember the last position on quit 
+    (or uses the Home Location on startup instead).
+
 2008-04-01  Torsten Rahn  <rahn@kde.org>
 
     * data/placemarks/cities.txt:

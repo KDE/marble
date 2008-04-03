@@ -249,14 +249,29 @@ void MarblePart::copyMap()
 }
 
 void MarblePart::readSettings()
-{
+{ 
+    // Last location on quit
+    if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
+        m_controlView->marbleWidget()->centerOn( 
+            MarbleSettings::quitLongitude(),
+            MarbleSettings::quitLatitude()
+        );
+        m_controlView->marbleWidget()->zoomView(
+            MarbleSettings::quitZoom()
+        );
+    }
+
+    // Set home position
     m_controlView->marbleWidget()->setHome( 
         MarbleSettings::homeLongitude(),
         MarbleSettings::homeLatitude(),
         MarbleSettings::homeZoom()
     );
-    m_controlView->marbleWidget()->goHome();
+    if ( MarbleSettings::onStartup() == Marble::ShowHomeLocation ) {
+        m_controlView->marbleWidget()->goHome();
+    }
 
+    // Map theme and projection
     m_controlView->marbleWidget()->setMapTheme( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
 
@@ -265,6 +280,15 @@ void MarblePart::readSettings()
 
 void MarblePart::writeSettings()
 {
+    double  quitLon = m_controlView->marbleWidget()->centerLongitude();;
+    double  quitLat = m_controlView->marbleWidget()->centerLatitude();;
+    int     quitZoom = m_controlView->marbleWidget()->zoom();;
+
+    // Get the 'home' values from the widget and store them in the settings.
+    MarbleSettings::setQuitLongitude( quitLon );
+    MarbleSettings::setQuitLatitude( quitLat );
+    MarbleSettings::setQuitZoom( quitZoom );
+
     double  homeLon = 0;
     double  homeLat = 0;
     int     homeZoom = 0;
@@ -282,6 +306,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
+    // Caches and Proxy
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
 

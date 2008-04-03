@@ -16,6 +16,15 @@
   <entry key="homeZoom" type="Int" >
    <default>1050</default>
   </entry>
+  <entry key="quitLongitude" type="Double" >
+   <default>0.0</default>
+  </entry>
+  <entry key="quitLatitude" type="Double" >
+   <default>0.0</default>
+  </entry>
+  <entry key="quitZoom" type="Int" >
+   <default>1000</default>
+  </entry>
   <entry key="mapTheme" type="String" >
    <default></default>
   </entry>
@@ -30,10 +39,10 @@
   <entry key="distanceUnit" type="Enum" >
    <label>The unit chosen to measure distances.</label>
    <choices name="Marble::DistanceUnit">
-    <choice name="DistanceUnit::Kilometer"/>
-    <choice name="DistanceUnit::Mile"/>
+    <choice name="DistanceUnit::Metric"/>
+    <choice name="DistanceUnit::Imperial"/>
    </choices>
-   <default>Marble::Kilometer</default>
+   <default>Marble::Metric</default>
   </entry>
   <entry key="angleUnit" type="Enum" >
    <label>The unit chosen to measure angles.</label>
