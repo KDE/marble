@@ -33,7 +33,7 @@ GeoSceneLegend::~GeoSceneLegend()
 
 void GeoSceneLegend::addSection( GeoSceneSection* section )
 {
-    // Remove any item that has the same name
+    // Remove any section that has the same name
     QVector<GeoSceneSection*>::iterator it = m_sections.begin();
     while (it != m_sections.end()) {
         GeoSceneSection* currentSection = *it;

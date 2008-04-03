@@ -60,7 +60,7 @@ class GeoSceneHead : public GeoNode {
     QString m_theme;
     QString m_description;
 
-    bool m_visible;
+    bool    m_visible;
 };
 
 

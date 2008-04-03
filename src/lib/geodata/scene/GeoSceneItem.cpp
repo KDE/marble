@@ -21,15 +21,29 @@
 
 #include "GeoSceneItem.h"
 
-GeoSceneItem::GeoSceneItem()
-    : m_text( "" )
+GeoSceneItem::GeoSceneItem( const QString& name )
+    : m_icon(new GeoSceneIcon),
+      m_name( name ),
+      m_text( "" ),
+      m_checkable( false ),
+      m_spacing( 12 )
 {
     /* NOOP */
 }
 
 GeoSceneItem::~GeoSceneItem()
 {
-    /* NOOP */
+      delete m_icon;
+}
+
+GeoSceneIcon* GeoSceneItem::icon() const
+{
+    return m_icon;
+}
+
+QString GeoSceneItem::name() const
+{
+    return m_name;
 }
 
 QString GeoSceneItem::text() const
@@ -40,4 +54,24 @@ QString GeoSceneItem::text() const
 void GeoSceneItem::setText( const QString& text )
 {
     m_text = text;
+}
+
+bool GeoSceneItem::checkable() const
+{
+    return m_checkable;
+}
+
+void GeoSceneItem::setCheckable( bool checkable )
+{
+    m_checkable = checkable;
+}
+
+int  GeoSceneItem::spacing() const
+{
+    return m_spacing;
+}
+
+void GeoSceneItem::setSpacing( int spacing )
+{
+    m_spacing = spacing;
 }

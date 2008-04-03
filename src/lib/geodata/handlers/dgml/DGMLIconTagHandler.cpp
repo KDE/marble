@@ -25,6 +25,7 @@
 #include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneItem.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
@@ -49,6 +50,11 @@ GeoNode* DGMLIconTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head)) {
         GeoSceneIcon* icon = parentItem.nodeAs<GeoSceneHead>()->icon();
+        icon->setPixmap(parser.attribute(dgmlAttr_pixmap));
+        icon->setColor(parser.attribute(dgmlAttr_color));
+    }
+    if (parentItem.represents(dgmlTag_Item)) {
+        GeoSceneIcon* icon = parentItem.nodeAs<GeoSceneItem>()->icon();
         icon->setPixmap(parser.attribute(dgmlAttr_pixmap));
         icon->setColor(parser.attribute(dgmlAttr_color));
     }

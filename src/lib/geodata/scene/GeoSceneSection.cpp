@@ -22,7 +22,10 @@
 #include "GeoSceneSection.h"
 
 GeoSceneSection::GeoSceneSection( const QString& name )
-    : m_name( name )
+    : m_name( name ),
+      m_heading( "" ),
+      m_checkable( false ),
+      m_spacing( 12 )
 {
     /* NOOP */
 }
@@ -32,9 +35,65 @@ GeoSceneSection::~GeoSceneSection()
     qDeleteAll(m_items);
 }
 
+void GeoSceneSection::addItem( GeoSceneItem* item )
+{
+    // Remove any item that has the same name
+    QVector<GeoSceneItem*>::iterator it = m_items.begin();
+    while (it != m_items.end()) {
+        GeoSceneItem* currentItem = *it;
+        if ( currentItem->name() == item->name() ) {
+            delete currentItem;
+            it = m_items.erase(it);
+        }
+        else {
+            ++it;
+        }
+     }
+
+    if ( item ) {
+        m_items.append( item );
+    }
+}
+
+GeoSceneItem* GeoSceneSection::item( const QString& name )
+{
+    GeoSceneItem* item = 0;
+
+    QVector<GeoSceneItem*>::const_iterator it = m_items.begin();
+    for (it = m_items.begin(); it != m_items.end(); ++it) {
+        if ( (*it)->name() == name )
+            item = *it;
+    }
+
+    if ( item ) {
+        Q_ASSERT(item->name() == name);
+        return item;
+    }
+
+    item = new GeoSceneItem( name );
+    addItem( item );
+
+    return item;
+}
+
+QVector<GeoSceneItem*> GeoSceneSection::items() const
+{
+    return m_items;
+}
+
 QString GeoSceneSection::name() const
 {
     return m_name;
+}
+
+QString GeoSceneSection::heading() const
+{
+    return m_heading;
+}
+
+void GeoSceneSection::setHeading( const QString& heading )
+{
+    m_heading = heading;
 }
 
 bool GeoSceneSection::checkable() const
@@ -55,11 +114,4 @@ int  GeoSceneSection::spacing() const
 void GeoSceneSection::setSpacing( int spacing )
 {
     m_spacing = spacing;
-}
-
-void GeoSceneSection::addItem( GeoSceneItem* item )
-{
-    if ( item ) {
-        m_items.append( item );
-    }
 }

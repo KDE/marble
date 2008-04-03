@@ -37,6 +37,14 @@ class GeoSceneSection : public GeoNode {
     GeoSceneSection( const QString& name );
     ~GeoSceneSection();
 
+    /**
+     * @brief  Add an item to the legend section
+     * @param  item  the new item
+     */
+    void addItem(GeoSceneItem*);
+    GeoSceneItem* item(const QString&);
+    QVector<GeoSceneItem*> items() const;
+
     QString name() const;
 
     QString heading() const;
@@ -47,21 +55,17 @@ class GeoSceneSection : public GeoNode {
     int  spacing() const;
     void setSpacing( int spacing );
 
-    /**
-     * @brief  Add an item to the legend section
-     * @param  item  the new section
-     */
-    void addItem(GeoSceneItem*);
-
  protected:
     /// The vector holding all the items in the legend section.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
     QVector<GeoSceneItem*> m_items;
 
-    QString  m_name;
-    QString  m_heading;
+    QString m_name;
+    QString m_heading;
 
-    bool     m_checkable;
-    int      m_spacing;
+    bool    m_checkable;
+    int     m_spacing;
 };
 
 

@@ -25,12 +25,14 @@
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"
+#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
+using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Item)
 
@@ -48,14 +50,19 @@ GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Item));
 
+    QString name      = parser.attribute(dgmlAttr_name);
+    QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
+    int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
+
     GeoSceneItem* item = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Section)) {
-        item = new GeoSceneItem;
+        GeoSceneItem* item = new GeoSceneItem( name );
+        item->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
+        item->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneSection>()->addItem( item );
-        item->setText(parser.attribute(dgmlAttr_text));
     }
 
     return item;

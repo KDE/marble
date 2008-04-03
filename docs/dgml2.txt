@@ -194,12 +194,12 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <section name="elevation" checkable="false" spacing="12">
                 <heading>Elevation</heading>
                 <!-- Example for a pixmap legend item: -->
-                <item>
+                <item name="7000" checkable="false">
                     <icon pixmap="topography_7000.png"/>
                     <text>7000 m</text>
                 </item>
                 <!-- Example for a color gradient legend item: -->
-                <item>
+                <item name="5000" checkable="false">
                     <icon color="#dcbd80"/>
                     <text>5000 m</text>
                 </item>
@@ -212,6 +212,7 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
                 <!-- Insert further legend items here -->
             </section>
             <section name="relief" checkable="true" spacing="12">
+                 <!-- maybe we should make it mandatory to name properties the same as responsible legend entries ... instead of this: -->
                 <checkbox setting="relief"/>
                 <heading>Relief</heading>
             </section>

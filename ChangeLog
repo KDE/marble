@@ -1,5 +1,17 @@
 2008-04-03  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/geodata/scene/GeoSceneItem.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSection.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
+    * src/lib/geodata/scene/GeoSceneLegend.cpp:
+    * src/lib/geodata/scene/GeoSceneHead.h:
+    * docs/dgml2.txt:
+
+    - Completing parsing for GeoSceneItem and GeoSceneSection.
+
+2008-04-03  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/global.h:
     * src/marble.kcfg:
     * src/marble_part.cpp:
