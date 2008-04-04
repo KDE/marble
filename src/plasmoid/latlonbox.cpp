@@ -28,9 +28,9 @@
 
 #include <marble/global.h>
 
-#include "latlonbox.h"
+#include "latlonedit.h"
 
-LatLonBox::LatLonBox(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
+LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
 	m_layout(0),
 	m_degreesSpin(0),
 	m_minutesSpin(0),
@@ -102,7 +102,7 @@ LatLonBox::LatLonBox(QWidget *parent, Marble::Dimension dimension ) : QWidget( p
 	         this, SLOT( comboBoxChanged( const QString & ) ) );
 }
 
-void LatLonBox::checkComboBox()
+void LatLonEdit::checkComboBox()
 {
 	if( m_value < 0 ) {
 		m_comboBox->setEnabled(true);
@@ -126,7 +126,7 @@ void LatLonBox::checkComboBox()
 	}
 }
 
-void LatLonBox::comboBoxChanged( const QString &text )
+void LatLonEdit::comboBoxChanged( const QString &text )
 {
 	if( ( text == tr("N", "North, the direction" ) || text == tr("E", "East, the direction" ) ) &&
 	      m_value < 0 ) {
@@ -139,7 +139,7 @@ void LatLonBox::comboBoxChanged( const QString &text )
 	}
 }
 
-void LatLonBox::setDimension( Marble::Dimension dimension )
+void LatLonEdit::setDimension( Marble::Dimension dimension )
 {
 	//don't do anything
 	if( m_dimension == dimension ) {
@@ -166,7 +166,7 @@ void LatLonBox::setDimension( Marble::Dimension dimension )
 
 }
 
-void LatLonBox::secondsOverflow()
+void LatLonEdit::secondsOverflow()
 {
 	if( m_secondsSpin->value() == 60 ) {
 		m_secondsSpin->setValue( 0 );
@@ -182,7 +182,7 @@ void LatLonBox::secondsOverflow()
 	recalculate();
 }
 	
-void LatLonBox::minutesOverflow()
+void LatLonEdit::minutesOverflow()
 {
 	if( m_minutesSpin->value() == 60 ) {
 		m_minutesSpin->setValue( 0 );
@@ -198,7 +198,7 @@ void LatLonBox::minutesOverflow()
 	recalculate();
 }
 
-void LatLonBox::setValue( double newvalue )
+void LatLonEdit::setValue( double newvalue )
 {
 	m_value = newvalue;
 	reverseRecalculate();
@@ -206,7 +206,7 @@ void LatLonBox::setValue( double newvalue )
 	emit valueChanged( m_value );
 }
 
-void LatLonBox::recalculate()
+void LatLonEdit::recalculate()
 {
 	double newvalue = m_degreesSpin->value();
 	double minsfract = m_minutesSpin->value();
@@ -261,7 +261,7 @@ void LatLonBox::recalculate()
 }
 
 
-void LatLonBox::reverseRecalculate()
+void LatLonEdit::reverseRecalculate()
 {
 	int degreesvalue = 0;	
 	int minutesvalue = 0;

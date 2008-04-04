@@ -158,7 +158,7 @@ void WorldClock::showConfigurationInterface()
 	                            KDialog::Cancel); 
 
          KConfigGroup cg = config();
-         ui.rotationLatLonBox->setValue(cg.readEntry("rotation", -20));
+         ui.rotationLatLonEdit->setValue(cg.readEntry("rotation", -20));
 	 if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked))
                  == Qt::Checked)
               ui.centerSunCheckBox->setChecked(true);
@@ -189,13 +189,13 @@ void WorldClock::configAccepted()
         m_map->updateSun();
         update();
     }
-    if( ui.rotationLatLonBox->value() !=
+    if( ui.rotationLatLonEdit->value() !=
               cg.readEntry("rotation", -20) ) {
-	m_map->centerOn(ui.rotationLatLonBox->value(), 0);
+	m_map->centerOn(ui.rotationLatLonEdit->value(), 0);
         update();
     }
     cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox->checkState()));
-    cg.writeEntry("rotation", ui.rotationLatLonBox->value());
+    cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
 }
 
 #include "worldclock.moc"

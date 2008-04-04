@@ -56,7 +56,7 @@
         </widget>
        </item>
        <item>
-        <widget class="LatLonBox" native="1" name="rotationLatLonBox" />
+        <widget class="LatLonEdit" native="1" name="rotationLatLonEdit" />
        </item>
       </layout>
      </item>
@@ -66,9 +66,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LatLonBox</class>
+   <class>LatLonEdit</class>
    <extends>QWidget</extends>
-   <header>latlonbox.h</header>
+   <header>latlonedit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -93,7 +93,7 @@
   <connection>
    <sender>centerSunCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>rotationLatLonBox</receiver>
+   <receiver>rotationLatLonEdit</receiver>
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >

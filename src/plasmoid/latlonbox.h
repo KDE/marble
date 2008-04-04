@@ -17,8 +17,8 @@
 */
 //(C) 2008 Henry de Valence
 
-#ifndef LATLONBOX_H
-#define LATLONBOX_H
+#ifndef LATLONEDIT_H
+#define LATLONEDIT_H
 
 #include <QWidget>
 #include <QSpinBox>
@@ -28,13 +28,13 @@
 
 #include <marble/global.h>
 
-class LatLonBox : public QWidget
+class LatLonEdit : public QWidget
 {
 	Q_OBJECT
 	//Q_PROPERTY( double m_value READ value WRITE setValue )
 	//Q_PROPERTY( Marble::Dimension m_dimension READ dimension WRITE setDimension )
 public:
-	LatLonBox(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
+	LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
 	double value();
 	Marble::Dimension dimension();
 public slots:
