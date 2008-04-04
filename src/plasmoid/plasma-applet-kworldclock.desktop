@@ -1,0 +1,25 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=World Clock
+Name[de]=Weltuhr
+Name[et]=Maailmakell
+Name[pt]=Relógio Mundial
+Name[pt_BR]=Relógio Mundial
+Name[sv]=Världsklocka
+Comment=Plasmoid to show you the time in different parts of the world
+Comment[et]=Maailma eri paikade aega näitav plasmoid
+Comment[pt]=Plasmóide para lhe mostrar a hora em diferentes partes do mundo
+Comment[pt_BR]=Plasmóide para lhe mostrar a hora em diferentes partes do mundo
+Comment[sv]=Plasmoid som visar tiden på olika ställen i världen
+Type=Service
+ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_worldclock
+X-KDE-PluginInfo-Author=Henry de Valence
+X-KDE-PluginInfo-Email=hdevalence@gmail.com
+X-KDE-PluginInfo-Name=worldclock
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

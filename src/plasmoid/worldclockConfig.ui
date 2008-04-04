@@ -1,0 +1,110 @@
+<ui version="4.0" >
+ <class>worldclockConfig</class>
+ <widget class="QWidget" name="worldclockConfig" >
+  <property name="windowModality" >
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>329</width>
+    <height>139</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Worldclock Applet Configuration</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QVBoxLayout" >
+     <item>
+      <widget class="QCheckBox" name="centerSunCheckBox" >
+       <property name="text" >
+        <string>Centre Map on Sun</string>
+       </property>
+       <property name="checkable" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="rotationLabel" >
+         <property name="text" >
+          <string>Centre Longitude</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="LatLonBox" native="1" name="rotationLatLonBox" />
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LatLonBox</class>
+   <extends>QWidget</extends>
+   <header>latlonbox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>centerSunCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>rotationLabel</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>161</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>82</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>centerSunCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>rotationLatLonBox</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>164</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>244</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
