@@ -20,7 +20,7 @@ include_directories(
    ${KDE4_INCLUDES}
    )
  
-set(worldclock_SRCS latlonbox.cpp worldclock.cpp )
+set(worldclock_SRCS latlonedit.cpp worldclock.cpp )
 kde4_add_ui_files( worldclock_SRCS worldclockConfig.ui )
  
 kde4_add_plugin(plasma_applet_worldclock ${worldclock_SRCS})

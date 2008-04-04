@@ -102,6 +102,11 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 	         this, SLOT( comboBoxChanged( const QString & ) ) );
 }
 
+double LatLonEdit::value()
+{
+	return m_value;
+}
+
 void LatLonEdit::checkComboBox()
 {
 	if( m_value < 0 ) {
