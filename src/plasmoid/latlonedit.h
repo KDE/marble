@@ -42,7 +42,7 @@ public slots:
 	void setDimension( Marble::Dimension );
 private slots:
 	// changes value based on combobox
-	void comboBoxChanged( const QString &text );
+	void comboBoxChanged( int index );
 	// recalculates m_value based on spinboxes
 	void recalculate();
 	// recalculates spinboxes based on m_value

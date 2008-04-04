@@ -48,6 +48,7 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 
 	m_degreesSpin = new QSpinBox;
 	m_comboBox = new QComboBox;
+	//in m_combobox, the +ve is 0 and the -ve is 1 in the index
 	if( m_dimension == Marble::Longitude ) {
 		m_degreesSpin->setMinimum( -180 );
 		m_degreesSpin->setMaximum( 180 );
@@ -57,11 +58,13 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 		m_degreesSpin->setMinimum( -90 );
 		m_degreesSpin->setMaximum( 90 );
 		m_comboBox->addItem( tr("N", "North, the direction" ) );
-		m_comboBox->addItem( tr("S", "East, the direction" ) );
+		m_comboBox->addItem( tr("S", "South, the direction" ) );
 	} else {
 		qDebug() << "Unrecognized dimension";
 	}
 	m_degreesSpin->show();
+	//it's greyed out when it's 0, and that is the default
+	m_comboBox->setEnabled(false);
 	m_comboBox->show();
 
 	m_minutesSpin = new QSpinBox;
@@ -98,8 +101,8 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 	connect( m_degreesSpin, SIGNAL( valueChanged( int ) ),
 	         this, SLOT( recalculate( ) ) );
 
-	connect( m_comboBox, SIGNAL( currentIndexChanged( const QString & ) ),
-	         this, SLOT( comboBoxChanged( const QString & ) ) );
+	connect( m_comboBox, SIGNAL( currentIndexChanged( int ) ),
+	         this, SLOT( comboBoxChanged( int ) ) );
 }
 
 double LatLonEdit::value()
@@ -110,20 +113,15 @@ double LatLonEdit::value()
 void LatLonEdit::checkComboBox()
 {
 	if( m_value < 0 ) {
+		//in case it was disabled by being set to 0
 		m_comboBox->setEnabled(true);
-		if( m_dimension == Marble::Longitude && m_comboBox->currentText() == tr("N", "North, the direction" ) ) {
-			m_comboBox->setCurrentIndex( m_comboBox->findText( tr("S", "South, the direction" ) ) );
-		} 
-		if( m_dimension == Marble::Latitude && m_comboBox->currentText() == tr("E", "East, the direction" ) ) {
-			m_comboBox->setCurrentIndex( m_comboBox->findText( tr("W", "West, the direction" ) ) );
+		if( m_comboBox->currentIndex() == 0 ) {
+			m_comboBox->setCurrentIndex( 1 );
 		} 
 	} else if( m_value > 0 ) {
 		m_comboBox->setEnabled(true);
-		if( m_dimension == Marble::Longitude && m_comboBox->currentText() == tr("S", "South, the direction" ) ) {
-			m_comboBox->setCurrentIndex( m_comboBox->findText( tr("N", "North, the direction" ) ) );
-		} 
-		if( m_dimension == Marble::Latitude && m_comboBox->currentText() == tr("W", "West, the direction" ) ) {
-			m_comboBox->setCurrentIndex( m_comboBox->findText( tr("E", "East, the direction" ) ) );
+		if( m_comboBox->currentIndex() == 1 ) {
+			m_comboBox->setCurrentIndex( 0 );
 		} 
 	} else {
 		//m_value is zero, so long/lat do not apply
@@ -131,14 +129,12 @@ void LatLonEdit::checkComboBox()
 	}
 }
 
-void LatLonEdit::comboBoxChanged( const QString &text )
+void LatLonEdit::comboBoxChanged( int index )
 {
-	if( ( text == tr("N", "North, the direction" ) || text == tr("E", "East, the direction" ) ) &&
-	      m_value < 0 ) {
+	if( index == 0 && m_value < 0 ) {
 		m_value -= m_value * 2;
 		reverseRecalculate();
-	} else if( ( text == tr("S", "South, the direction" ) || text == tr("W", "West, the direction" ) ) &&
-	      m_value > 0 ) {
+	} else if( index == 1 && m_value > 0 ) {
 		m_value -= m_value * 2;
 		reverseRecalculate();
 	}
@@ -151,22 +147,20 @@ void LatLonEdit::setDimension( Marble::Dimension dimension )
 		return;
 	}
 
+	//in m_combobox, the +ve is 0 and the -ve is 1 in the index
 	if( m_dimension == Marble::Longitude ) {
-		m_comboBox->removeItem( m_comboBox->findText( tr("W", "West, the direction" ) ) );
-		m_comboBox->removeItem( m_comboBox->findText( tr("E", "East, the direction" ) ) );
+		m_comboBox->removeItem( 0 );
+		m_comboBox->removeItem( 1 );
 
 		m_comboBox->addItem( tr("N", "North, the direction" ) );
 		m_comboBox->addItem( tr("S", "South, the direction" ) );
 	} else if( m_dimension == Marble::Latitude ) {
-		m_comboBox->removeItem( m_comboBox->findText( tr("N", "North, the direction" ) ) );
-		m_comboBox->removeItem( m_comboBox->findText( tr("S", "South, the direction" ) ) );
+		m_comboBox->removeItem( 0 );
+		m_comboBox->removeItem( 1 );
 
 		m_comboBox->addItem( tr("E", "East, the direction" ) );
 		m_comboBox->addItem( tr("W", "West, the direction" ) );
-	} else {
-		//unknown dimension
-		qDebug() << "unknown dimension, not changing";
-	}
+	} 
 	m_dimension = dimension;
 
 }
