@@ -25,8 +25,8 @@
 #include <QtCore/QVector>
 
 #include "GeoDocument.h"
-#include "GeoSceneItem.h"
 
+class GeoSceneItem;
 
 /**
  * @short Section of a GeoScene document.

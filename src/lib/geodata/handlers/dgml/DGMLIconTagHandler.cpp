@@ -46,17 +46,22 @@ GeoNode* DGMLIconTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
 
+    QString pixmap = parser.attribute(dgmlAttr_pixmap);
+    QString color  = parser.attribute(dgmlAttr_color);
+
+    GeoSceneIcon *icon = 0;
+
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head)) {
-        GeoSceneIcon* icon = parentItem.nodeAs<GeoSceneHead>()->icon();
-        icon->setPixmap(parser.attribute(dgmlAttr_pixmap));
-        icon->setColor(parser.attribute(dgmlAttr_color));
+        icon = parentItem.nodeAs<GeoSceneHead>()->icon();
+        icon->setPixmap( pixmap );
+        icon->setColor( color );
     }
     if (parentItem.represents(dgmlTag_Item)) {
-        GeoSceneIcon* icon = parentItem.nodeAs<GeoSceneItem>()->icon();
-        icon->setPixmap(parser.attribute(dgmlAttr_pixmap));
-        icon->setColor(parser.attribute(dgmlAttr_color));
+        icon = parentItem.nodeAs<GeoSceneItem>()->icon();
+        icon->setPixmap( pixmap );
+        icon->setColor( color );
     }
 
     return 0;

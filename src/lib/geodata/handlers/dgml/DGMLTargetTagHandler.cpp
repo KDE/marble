@@ -24,6 +24,8 @@
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneMap.h"
 
 using namespace GeoSceneElementDictionary;
 
@@ -43,10 +45,17 @@ GeoNode* DGMLTargetTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Target));
 
+    GeoSceneLayer *layer = 0;
+
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
         parentItem.nodeAs<GeoSceneHead>()->setTarget(parser.readElementText());
+
+    if (parentItem.represents(dgmlTag_Map)) {
+        layer = new GeoSceneLayer( "$MARBLETARGET$" );
+        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
+    }
 
     return 0;
 }

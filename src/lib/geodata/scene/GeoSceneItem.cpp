@@ -21,6 +21,8 @@
 
 #include "GeoSceneItem.h"
 
+#include "GeoSceneIcon.h"
+
 GeoSceneItem::GeoSceneItem( const QString& name )
     : m_icon(new GeoSceneIcon),
       m_name( name ),

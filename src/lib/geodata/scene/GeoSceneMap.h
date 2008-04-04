@@ -22,14 +22,40 @@
 #ifndef GEOSCENEMAP_H
 #define GEOSCENEMAP_H
 
+#include <QtCore/QString>
+#include <QtCore/QVector>
+
+#include "GeoDocument.h"
+
+class GeoSceneLayer;
+
 /**
  * @short Map layer structure of a GeoScene document.
  */
 
-class GeoSceneMap {
-public:
+class GeoSceneMap : public GeoNode {
+ public:
     GeoSceneMap();
     ~GeoSceneMap();
+
+    QString backgroundColor() const;
+    void setBackgroundColor( const QString& );
+
+    /**
+     * @brief  Add a section to the legend
+     * @param  section  the new section
+     */
+    void addLayer( GeoSceneLayer* );
+    GeoSceneLayer* layer( const QString& );
+    QVector<GeoSceneLayer*> layers() const;
+
+ protected:
+    /// The vector holding all the sections in the legend.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneLayer*> m_layers;
+
+    QString m_backgroundColor;
 };
 
 

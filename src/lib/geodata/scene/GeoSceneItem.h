@@ -25,11 +25,13 @@
 #include <QtCore/QString>
 
 #include "GeoDocument.h"
-#include "GeoSceneIcon.h"
+
+class GeoSceneIcon;
 
 /**
  * @short The section item in a legend of a GeoScene document.
  */
+
 class GeoSceneItem : public GeoNode {
  public:
     GeoSceneItem( const QString& name );
@@ -38,7 +40,7 @@ class GeoSceneItem : public GeoNode {
     QString name() const;
 
     QString text() const;
-    void setText(const QString& text);
+    void setText( const QString& text );
 
     bool checkable() const;
     void setCheckable( bool checkable );

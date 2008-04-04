@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
 
     This file is part of the KDE project
 
@@ -24,9 +25,12 @@
 #include "DGMLMapTagHandler.h"
 
 #include "DGMLElementDictionary.h"
+#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
+#include "GeoSceneDocument.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Map)
 
@@ -42,5 +46,15 @@ DGMLMapTagHandler::~DGMLMapTagHandler()
 GeoNode* DGMLMapTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
-    return 0;
+
+    GeoSceneMap* map = 0;
+
+    // Checking for parent item
+    GeoStackItem parentItem = parser.parentElement();
+    if (parentItem.represents(dgmlTag_Document)) {
+        map = parentItem.nodeAs<GeoSceneDocument>()->map();
+        map->setBackgroundColor(parser.attribute(dgmlAttr_bgcolor));
+    }
+
+    return map;
 }

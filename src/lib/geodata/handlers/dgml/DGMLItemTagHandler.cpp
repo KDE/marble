@@ -54,12 +54,12 @@ GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
     QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
     int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
 
-    GeoSceneItem* item = 0;
+    GeoSceneItem *item = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Section)) {
-        GeoSceneItem* item = new GeoSceneItem( name );
+        item = new GeoSceneItem( name );
         item->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
         item->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneSection>()->addItem( item );

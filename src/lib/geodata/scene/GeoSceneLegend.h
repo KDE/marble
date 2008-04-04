@@ -22,10 +22,11 @@
 #ifndef GEOSCENELEGEND_H
 #define GEOSCENELEGEND_H
 
-#include <QtCore/QHash>
+#include <QtCore/QVector>
 
 #include "GeoDocument.h"
-#include "GeoSceneSection.h"
+
+class GeoSceneSection;
 
 /**
  * @short Legend of a GeoScene document.
@@ -40,8 +41,8 @@ class GeoSceneLegend : public GeoNode {
      * @brief  Add a section to the legend
      * @param  section  the new section
      */
-    void addSection(GeoSceneSection*);
-    GeoSceneSection* section(const QString&);
+    void addSection( GeoSceneSection* );
+    GeoSceneSection* section( const QString& );
     QVector<GeoSceneSection*> sections() const;
 
  protected:

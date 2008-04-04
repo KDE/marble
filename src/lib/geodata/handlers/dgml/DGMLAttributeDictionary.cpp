@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
 
     This file is part of the KDE project
 
@@ -32,6 +33,8 @@ const char* dgmlAttr_color     = "color";
 const char* dgmlAttr_checkable = "checkable";
 const char* dgmlAttr_name      = "name";
 const char* dgmlAttr_pixmap    = "pixmap";
+const char* dgmlAttr_plugin    = "plugin";
 const char* dgmlAttr_spacing   = "spacing";
 const char* dgmlAttr_text      = "text";
+const char* dgmlAttr_type      = "type";
 }

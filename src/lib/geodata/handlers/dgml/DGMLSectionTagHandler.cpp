@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
 
     This file is part of the KDE project
 
@@ -59,7 +60,7 @@ GeoNode* DGMLSectionTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Legend)) {
-        GeoSceneSection* section = new GeoSceneSection( name );
+        section = new GeoSceneSection( name );
         section->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
         section->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneLegend>()->addSection( section );

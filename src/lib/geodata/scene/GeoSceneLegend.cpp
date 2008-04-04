@@ -21,6 +21,8 @@
 
 #include "GeoSceneLegend.h"
 
+#include "GeoSceneSection.h"
+
 GeoSceneLegend::GeoSceneLegend()
 {
     /* NOOP */
@@ -28,7 +30,7 @@ GeoSceneLegend::GeoSceneLegend()
 
 GeoSceneLegend::~GeoSceneLegend()
 {
-    qDeleteAll(m_sections);
+    qDeleteAll( m_sections );
 }
 
 void GeoSceneLegend::addSection( GeoSceneSection* section )

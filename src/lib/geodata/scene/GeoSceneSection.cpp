@@ -21,6 +21,8 @@
 
 #include "GeoSceneSection.h"
 
+#include "GeoSceneItem.h"
+
 GeoSceneSection::GeoSceneSection( const QString& name )
     : m_name( name ),
       m_heading( "" ),
@@ -32,7 +34,7 @@ GeoSceneSection::GeoSceneSection( const QString& name )
 
 GeoSceneSection::~GeoSceneSection()
 {
-    qDeleteAll(m_items);
+    qDeleteAll( m_items );
 }
 
 void GeoSceneSection::addItem( GeoSceneItem* item )
