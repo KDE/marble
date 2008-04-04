@@ -38,6 +38,14 @@ enum DistanceUnit {
 };
 
 /**
+ * @brief This enum is used to choose the dimension.
+ */
+enum Dimension {
+    Latitude,             ///< Latitude
+    Longitude            ///< Longitude
+};
+
+/**
  * @brief This enum is used to choose the unit chosen to measure angles.
  */
 enum AngleUnit {
