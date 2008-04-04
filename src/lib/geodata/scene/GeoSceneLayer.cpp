@@ -34,6 +34,52 @@ GeoSceneLayer::~GeoSceneLayer()
     /* NOOP */
 }
 
+void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
+{
+    // Remove any dataset that has the same name
+    QVector<GeoSceneAbstractDataset*>::iterator it = m_datasets.begin();
+    while (it != m_datasets.end()) {
+        GeoSceneAbstractDataset* currentAbstractDataset = *it;
+        if ( currentAbstractDataset->name() == dataset->name() ) {
+            delete currentAbstractDataset;
+            it = m_datasets.erase(it);
+        }
+        else {
+            ++it;
+        }
+     }
+
+    if ( dataset ) {
+        m_datasets.append( dataset );
+    }
+}
+
+GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
+{
+    GeoSceneAbstractDataset* dataset = 0;
+
+    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.begin();
+    for (it = m_datasets.begin(); it != m_datasets.end(); ++it) {
+        if ( (*it)->name() == name )
+            dataset = *it;
+    }
+
+    if ( dataset ) {
+        Q_ASSERT(dataset->name() == name);
+        return dataset;
+    }
+
+//    dataset = new GeoSceneAbstractDataset( name );
+    addDataset( dataset );
+
+    return dataset;
+}
+
+QVector<GeoSceneAbstractDataset*> GeoSceneLayer::datasets() const
+{
+    return m_datasets;
+}
+
 QString GeoSceneLayer::name() const
 {
     return m_name;

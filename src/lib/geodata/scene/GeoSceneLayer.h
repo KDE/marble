@@ -29,6 +29,14 @@
 
 
 /**
+ * @short Contents used inside a layer.
+ */
+class GeoSceneAbstractDataset {
+ public:
+    virtual QString name() const;
+};
+
+/**
  * @short Layer of a GeoScene document.
  */
 
@@ -36,6 +44,14 @@ class GeoSceneLayer : public GeoNode {
  public:
     GeoSceneLayer( const QString& name );
     ~GeoSceneLayer();
+
+    /**
+     * @brief  Add a section to the legend
+     * @param  section  the new section
+     */
+    void addDataset( GeoSceneAbstractDataset* );
+    GeoSceneAbstractDataset* dataset( const QString& );
+    QVector<GeoSceneAbstractDataset*> datasets() const;
 
     QString name() const;
 
@@ -46,10 +62,14 @@ class GeoSceneLayer : public GeoNode {
     void setType( const QString& type );
 
  protected:
+    /// The vector holding all the data in the layer.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneAbstractDataset*> m_datasets;
+
     QString m_name;
     QString m_plugin;
     QString m_type;
 };
-
 
 #endif // GEOSCENELAYER_H
