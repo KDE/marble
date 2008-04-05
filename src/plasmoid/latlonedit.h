@@ -21,25 +21,31 @@
 #define LATLONEDIT_H
 
 #include <QWidget>
-#include <QSpinBox>
-#include <QComboBox>
-#include <QHBoxLayout>
-#include <QLabel>
+////QWidgetPlugin is used for Qt Designer
+//#include <QtPlugin>
+
+class QSpinBox;
+class QComboBox;
+class QHBoxLayout;
+class QLabel;
 
 #include <marble/global.h>
 
-class LatLonEdit : public QWidget
+class /* QDESIGNER_WIDGET_EXPORT */ LatLonEdit : public QWidget
 {
 	Q_OBJECT
 	//Q_PROPERTY( double m_value READ value WRITE setValue )
-	//Q_PROPERTY( Marble::Dimension m_dimension READ dimension WRITE setDimension )
+	//Q_PROPERTY( int m_dimension READ dimension WRITE setDimension )
 public:
 	LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
 	double value();
 	Marble::Dimension dimension();
 public slots:
 	void setValue(double newvalue);
-	void setDimension( Marble::Dimension );
+	void setDimension( Marble::Dimension dimension );
+signals:
+	void dimensionChanged( Marble::Dimension dimension );
+	void valueChanged( double value );
 private slots:
 	// changes value based on combobox
 	void comboBoxChanged( int index );
@@ -47,14 +53,14 @@ private slots:
 	void recalculate();
 	// recalculates spinboxes based on m_value
 	void reverseRecalculate();
-	// chnges combobox based on value
+	// changes combobox based on value
 	void checkComboBox();
 	void secondsOverflow();
 	void minutesOverflow();
 private:
 	QHBoxLayout *m_layout;
 
-	Marble::Dimension m_dimension;
+	int m_dimension;
 
 	QComboBox *m_comboBox;
 
@@ -67,8 +73,5 @@ private:
 	QLabel *m_secondsLabel;
 
 	double m_value;
-signals:
-	void dimensionChanged( Marble::Dimension dimension );
-	void valueChanged( double value );
 };
 #endif

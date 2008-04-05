@@ -32,10 +32,10 @@ class WorldClock : public Plasma::Applet
     public:
         WorldClock(QObject *parent, const QVariantList &args);
         ~WorldClock();
+	void init();
         void paintInterface(QPainter *painter, 
 	                    const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);
-        void init();
     public slots:
         void dataUpdated(const QString &name,
 	                 const Plasma::DataEngine::Data &data);

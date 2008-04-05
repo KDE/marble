@@ -1,11 +1,3 @@
-#####
-# I'm pretty sure I've done a lot of bad things
-# in this file, but CMake is unfamiliar and hard.
-# If there's a whole bunch of bad things, I'd
-# appreciate it if you could fix it, because 
-# I don't know how. - hdevalence
-#####
-
 project(worldclock)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 ${CMAKE_SOURCE_DIR}/ )

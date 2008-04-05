@@ -22,6 +22,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QObject>
+#include <QWidget>
 #include <QDebug>
 
 #include <cmath>
@@ -41,7 +42,7 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 	m_comboBox(0)
 {
 	m_value = 0;
-	m_dimension = dimension;
+	m_dimension = static_cast<int>( dimension );
 
 	m_layout = new QHBoxLayout;
 	setLayout( m_layout );
