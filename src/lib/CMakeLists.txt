@@ -251,6 +251,10 @@ else (APPLE AND QTONLY)
            EquirectProjection.h
            MercatorProjection.h
            Quaternion.h
+	   SunLocator.h
+	   ClipPainter.h
+	   geodata/data/GeoDataPoint.h
+	   ExtDateTime.h
 
            TileCreator.h
            marble_export.h
