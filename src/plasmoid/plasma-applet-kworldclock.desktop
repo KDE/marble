@@ -1,7 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=World Clock
+Name[ga]=Clog an Domhain
+Name[pt]=Relógio Mundial
+Name[pt_BR]=Relógio Mundial
 Comment=Plasmoid to show you the time in different parts of the world
+Comment[ga]=Plasmoid a thaispeánann an t-am in áiteanna ar fud an domhain
+Comment[pt]=Um plasmóide que lhe mostra a hora em diferentes partes do mundo
+Comment[pt_BR]=Um plasmóide que lhe mostra a hora em diferentes partes do mundo
 Type=Service
 ServiceTypes=Plasma/Applet
 
