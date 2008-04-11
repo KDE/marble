@@ -161,7 +161,7 @@ application.
 -----------------------------
 
 Quaternion
-GeoPoint, GeoPolygon, PntMap
+GeoDataPoint, GeoPolygon, PntMap
 ScreenPolygon, VectorMap
 
 
@@ -176,9 +176,9 @@ Basic classes
 Quaternion	A simple implementation of the mathematical concept
 		quaternion. 
 
-GeoPoint	A point on the earth, (lon, lat)
+GeoDataPoint	A point on the earth, (lon, lat)
 GeoPolygon	A path or polygon on the earth, consisting of a vector
-		of GeoPoints
+		of GeoDataPoints
 PntMap		A collection of GeoPolygons ( QVector<GeoPolygon *> )
 		FIXME: Rename and move from GeoPolygon.h into own file.
 
@@ -195,7 +195,7 @@ PlaceMark	A point on the earth with some additional data. Can be
 		used for cities of different size.
 		At this point somewhat arbitrary in its choice of
 		properties.  Contains (among others):
-		 - Coordinate (GeoPoint)
+		 - Coordinate (GeoDataPoint)
 		 - Role (QChar) -- city, capital, etc
 		 - Population (int)
 		 - Description (QString)
