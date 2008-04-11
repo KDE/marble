@@ -275,8 +275,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
             qDebug("Tile creation completed");
         }
 
-        if ( d->m_texmapper != 0 )
-            delete d->m_texmapper;
+        delete d->m_texmapper;
 
         d->m_tileLoader->setMapTheme( "maps/" +
 d->m_maptheme->tilePrefix() );
@@ -350,8 +349,7 @@ void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
     d->m_tileLoader->setDownloadManager( downloadManager );
     d->m_downloadManager = downloadManager;
 
-    if ( previousDownloadManager != 0 ) 
-        delete previousDownloadManager;
+    delete previousDownloadManager;
 }
 
 

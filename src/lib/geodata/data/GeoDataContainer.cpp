@@ -69,6 +69,7 @@ void GeoDataContainer::pack( QDataStream& stream ) const
 
 void GeoDataContainer::unpack( QDataStream& stream )
 {
+/*
     GeoDataFeature::unpack( stream );
 
     int count;
@@ -80,6 +81,7 @@ void GeoDataContainer::unpack( QDataStream& stream )
 
         m_features.append( feature );
     }
+*/
 }
 
 

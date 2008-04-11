@@ -1,6 +1,5 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
 
     This file is part of the KDE project
 
@@ -22,47 +21,49 @@
 
 #include <QDebug>
 
-#include "DGMLLayerTagHandler.h"
+#include "DGMLTextureTagHandler.h"
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"
 #include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneMap.h"
 #include "GeoSceneLayer.h"
+#include "GeoSceneTexture.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneAuxillaryDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Layer)
+DGML_DEFINE_TAG_HANDLER(Texture)
 
-DGMLLayerTagHandler::DGMLLayerTagHandler()
+DGMLTextureTagHandler::DGMLTextureTagHandler()
     : GeoTagHandler()
 {
 }
 
-DGMLLayerTagHandler::~DGMLLayerTagHandler()
+DGMLTextureTagHandler::~DGMLTextureTagHandler()
 {
 }
 
-GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLTextureTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Texture));
 
     QString name      = parser.attribute(dgmlAttr_name);
-    QString plugin    = parser.attribute(dgmlAttr_plugin);
+    int     expire    = parser.attribute(dgmlAttr_expire).toInt();
+    QString type      = parser.attribute(dgmlAttr_type);
 
-    GeoSceneLayer *layer = 0;
+    GeoSceneTexture *texture = 0;
 
-    // Checking for parent layer
+    // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Map)) {
-        layer = new GeoSceneLayer( name );
-        layer->setPlugin( plugin );
-        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
+    if (parentItem.represents(dgmlTag_Layer)) {
+        texture = new GeoSceneTexture( name );
+        texture->setExpire( expire );
+        texture->setType( type );
+        parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }
 
-    return layer;
+    return texture;
 }

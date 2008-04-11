@@ -100,8 +100,7 @@ void WorldClock::init()
  
 WorldClock::~WorldClock()
 {
-    if(m_configDialog)
-        delete m_configDialog;
+    delete m_configDialog;
 }
  
 //We want to redraw the map every 10 mins

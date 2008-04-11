@@ -21,10 +21,53 @@
 
 #include "GeoSceneLayer.h"
 
+GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
+    : m_name( name ),
+      m_fileFormat( "" ),
+      m_expire( -1 ),
+      m_type( "" )
+{
+    /* NOOP */
+}
+
+QString GeoSceneAbstractDataset::name() const
+{
+    return m_name;
+}
+
+QString GeoSceneAbstractDataset::fileFormat() const
+{
+    return m_fileFormat;
+}
+
+void GeoSceneAbstractDataset::setFileFormat( const QString& fileFormat )
+{
+    m_fileFormat = fileFormat;
+}
+
+int GeoSceneAbstractDataset::expire() const
+{
+    return m_expire;
+}
+
+void GeoSceneAbstractDataset::setExpire( int expire )
+{
+    m_expire = expire;
+}
+
+QString GeoSceneAbstractDataset::type() const
+{
+    return m_type;
+}
+
+void GeoSceneAbstractDataset::setType( const QString& type )
+{
+    m_type = type;
+}
+
 GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_name( name ),
-      m_plugin( "" ),
-      m_type( "" )
+      m_plugin( "" )
 {
     /* NOOP */
 }
@@ -93,14 +136,4 @@ QString GeoSceneLayer::plugin() const
 void GeoSceneLayer::setPlugin( const QString& plugin )
 {
     m_plugin = plugin;
-}
-
-QString GeoSceneLayer::type() const
-{
-    return m_type;
-}
-
-void GeoSceneLayer::setType( const QString& type )
-{
-    m_type = type;
 }

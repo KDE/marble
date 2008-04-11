@@ -76,9 +76,9 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <target/>
         
             <!-- This layer creates the elevation model -->
-            <layer name="srtm" plugin="texture"  type="dem">
-                <texture format="JPG" expire="10800">
-                    <sourcedir> srtm </sourcedir>
+            <layer name="srtm" plugin="texture">
+                <texture expire="10800" type="dem">
+                    <sourcedir format="JPG"> srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                 </texture>
                 <!-- If this was the satellite map we could add another

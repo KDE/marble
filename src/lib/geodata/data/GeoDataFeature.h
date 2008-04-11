@@ -88,7 +88,6 @@ class GeoDataFeature : public GeoDataObject
         LastIndex
     };
 
-    GeoDataFeature();
     virtual ~GeoDataFeature();
 
     /**
@@ -219,6 +218,7 @@ class GeoDataFeature : public GeoDataObject
 
  protected:
     /// Create a new GeoDataFeature with @p name as its name.
+    GeoDataFeature();
     GeoDataFeature( const QString& name );
 
     /// The visual category of this feature.  @see GeoDataVisualCategory

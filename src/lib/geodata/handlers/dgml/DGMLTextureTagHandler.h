@@ -1,6 +1,5 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2007 Torsten Rahn <rahn@kde.org>
 
     This file is part of the KDE project
 
@@ -20,28 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DGMLAttributeDictionary_h
-#define DGMLAttributeDictionary_h
+#ifndef DGMLTextureTagHandler_h
+#define DGMLTextureTagHandler_h
 
+#include "GeoTagHandler.h"
 
-// Lists all known DGML 2.0 attributes
-// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
+class DGMLTextureTagHandler : public GeoTagHandler {
+public:
+    DGMLTextureTagHandler();
+    virtual ~DGMLTextureTagHandler();
 
-namespace GeoSceneAttributeDictionary {
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
-    extern const char* dgmlAttr_nameSpace20;
-
-    extern const char* dgmlAttr_bgcolor;
-    extern const char* dgmlAttr_color;
-    extern const char* dgmlAttr_checkable;
-    extern const char* dgmlAttr_expire;
-    extern const char* dgmlAttr_format;
-    extern const char* dgmlAttr_name;
-    extern const char* dgmlAttr_pixmap;
-    extern const char* dgmlAttr_plugin;
-    extern const char* dgmlAttr_spacing;
-    extern const char* dgmlAttr_text;
-    extern const char* dgmlAttr_type;
-}
-
-#endif // DGMLAttributeDictionary_h
+#endif // DGMLTextureTagHandler_h

@@ -31,9 +31,25 @@
 /**
  * @short Contents used inside a layer.
  */
-class GeoSceneAbstractDataset {
+class GeoSceneAbstractDataset : public GeoNode {
  public:
-    virtual QString name() const;
+    QString name() const;
+
+    QString fileFormat() const;
+    void setFileFormat( const QString& fileFormat );
+
+    int expire() const;
+    void setExpire( int expire );
+
+    QString type() const;
+    void setType( const QString& type );
+
+ protected:
+    GeoSceneAbstractDataset( const QString& name );
+    QString m_name;
+    QString m_fileFormat;
+    QString m_type;
+    int     m_expire;
 };
 
 /**
@@ -58,9 +74,6 @@ class GeoSceneLayer : public GeoNode {
     QString plugin() const;
     void setPlugin( const QString& plugin );
 
-    QString type() const;
-    void setType( const QString& type );
-
  protected:
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care 
@@ -69,7 +82,6 @@ class GeoSceneLayer : public GeoNode {
 
     QString m_name;
     QString m_plugin;
-    QString m_type;
 };
 
 #endif // GEOSCENELAYER_H

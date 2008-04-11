@@ -1,6 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
+    Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -20,49 +19,34 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
-#include "DGMLLayerTagHandler.h"
+#include "DGMLInstallMapTagHandler.h"
 
 #include "DGMLElementDictionary.h"
-#include "DGMLAttributeDictionary.h"
-#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneMap.h"
-#include "GeoSceneLayer.h"
+#include "GeoSceneTexture.h"
 
 using namespace GeoSceneElementDictionary;
-using namespace GeoSceneAttributeDictionary;
-using namespace GeoSceneAuxillaryDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Layer)
+DGML_DEFINE_TAG_HANDLER(InstallMap)
 
-DGMLLayerTagHandler::DGMLLayerTagHandler()
+DGMLInstallMapTagHandler::DGMLInstallMapTagHandler()
     : GeoTagHandler()
 {
 }
 
-DGMLLayerTagHandler::~DGMLLayerTagHandler()
+DGMLInstallMapTagHandler::~DGMLInstallMapTagHandler()
 {
 }
 
-GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLInstallMapTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_InstallMap));
 
-    QString name      = parser.attribute(dgmlAttr_name);
-    QString plugin    = parser.attribute(dgmlAttr_plugin);
-
-    GeoSceneLayer *layer = 0;
-
-    // Checking for parent layer
+    // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Map)) {
-        layer = new GeoSceneLayer( name );
-        layer->setPlugin( plugin );
-        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
-    }
+    if (parentItem.represents(dgmlTag_Texture))
+        parentItem.nodeAs<GeoSceneTexture>()->setInstallMap(parser.readElementText());
 
-    return layer;
+    return 0;
 }

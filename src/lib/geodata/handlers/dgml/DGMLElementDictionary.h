@@ -31,7 +31,7 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Available;
     extern const char* dgmlTag_Coastline;
     extern const char* dgmlTag_Color;
-    extern const char* dgmlTag_Customplugin;
+    extern const char* dgmlTag_CustomPlugin;
     extern const char* dgmlTag_Dem;
     extern const char* dgmlTag_Description;
     extern const char* dgmlTag_Discrete;
@@ -42,7 +42,7 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Geodata;
     extern const char* dgmlTag_Head;
     extern const char* dgmlTag_Icon;
-    extern const char* dgmlTag_Installmap;
+    extern const char* dgmlTag_InstallMap;
     extern const char* dgmlTag_Item;
     extern const char* dgmlTag_Layer;
     extern const char* dgmlTag_Legend;
@@ -56,8 +56,8 @@ namespace GeoSceneElementDictionary {
     extern const char* dgmlTag_Property;
     extern const char* dgmlTag_Section;
     extern const char* dgmlTag_Settings;
-    extern const char* dgmlTag_Sourcedir;
-    extern const char* dgmlTag_Sourcefile;
+    extern const char* dgmlTag_SourceDir;
+    extern const char* dgmlTag_SourceFile;
     extern const char* dgmlTag_Target;
     extern const char* dgmlTag_Text;
     extern const char* dgmlTag_Texture;

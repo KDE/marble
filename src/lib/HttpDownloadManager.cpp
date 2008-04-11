@@ -49,8 +49,7 @@ HttpDownloadManager::~HttpDownloadManager()
     qDeleteAll( m_jobBlackList );
     m_jobBlackList.clear();
 
-    if ( m_storagePolicy != 0 )
-        delete m_storagePolicy;
+    delete m_storagePolicy;
 }
 
 void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )

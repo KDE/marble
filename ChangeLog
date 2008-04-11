@@ -1,3 +1,34 @@
+2008-04-11  Torsten Rahn  <rahn@kde.org>
+    * docs/dgml2.txt:
+
+    - A few adjustments to the DGML2 format.
+
+    * src/lib/HttpDownloadManager.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/plasmoid/worldclock.cpp:
+
+    - Patch by Jens-Michael Hoffmann:
+    Remove redundant null pointer checks
+
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLSourceDirTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLInstallMapTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLTextTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneTexture.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneLayer.{cpp,h}:
+
+    - Basically completing work on DGML2 parser
+    (except for Vector and Geodata tags which we'll take care of later on ..)
+
+    * src/lib/geodata/data/GeoDataContainer.cpp:
+    * src/lib/geodata/data/GeoDataFeature.h:
+
+    - Moving public Ctor for Abstract class to protected section ...
+
 2008-04-03  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/scene/GeoSceneItem.{cpp,h}:
