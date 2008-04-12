@@ -450,7 +450,7 @@ QStringList MapTheme::findMapThemes( const QString& path )
     QStringListIterator  it( localmapdirs );
     while ( it.hasNext() ) {
         themedir = it.next() + '/';
-        themedirname = QDir( themedir ).dirName();
+        themedirname = QDir( themedir ).path().section( "/", -2, -1);
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
