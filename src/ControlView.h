@@ -24,6 +24,7 @@
 #include "MarbleWidget.h"
 #include "MarbleControlBox.h"
 
+class MapThemeManager;
 class QSplitter;
 
 
@@ -33,7 +34,7 @@ class ControlView : public QWidget
 
  public:
     ControlView( QWidget * = 0 );
-    virtual ~ControlView(){}
+    virtual ~ControlView();
 
     MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
     MarbleControlBox  *marbleControl() const { return m_control;      }
@@ -67,6 +68,8 @@ class ControlView : public QWidget
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
     QSplitter         *m_splitter;
+
+    MapThemeManager   *m_mapThemeManager;
 };
 
 

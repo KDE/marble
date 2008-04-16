@@ -134,7 +134,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml"
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
     QString mapTheme() const;
 
@@ -159,7 +159,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * name but the by relative location of the file that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml" 
+     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
     void setMapTheme( const QString &selectedMap,
 		      //QWidget *parent,

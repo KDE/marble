@@ -17,6 +17,7 @@
 
 #include <MarbleWidget.h>
 #include <MarbleModel.h>
+#include <MapThemeManager.h>
 
 ControlView::ControlView( QWidget *parent )
    : QWidget(parent)
@@ -45,8 +46,14 @@ ControlView::ControlView( QWidget *parent )
     vlayout->setMargin(0);
 
     m_control->addMarbleWidget( m_marbleWidget );
+
+    m_mapThemeManager = new MapThemeManager;
 }
 
+ControlView::~ControlView()
+{
+    delete m_mapThemeManager;
+}
 
 void ControlView::zoomIn()
 {

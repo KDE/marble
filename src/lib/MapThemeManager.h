@@ -18,6 +18,27 @@
 
 #include "marble_export.h"
 
+class GeoSceneDocument;
+
+
+/**
+ * @short The class that handles map themes that are locally available .
+ *
+ * This class which is able to check for maps that are locally available.
+ * After parsing the data it only stores the name, description and path
+ * into a QStandardItemModel.
+ * 
+ * The MapThemeManager is not owned by the MarbleWidget/Map itself. 
+ * Instead it is owned by the widget or application that contains 
+ * MarbleWidget/Map ( usually: the ControlView convenience class )
+ * 
+ * For convenience MarbleThemeManager provides a static helper class 
+ * that loads the properties of a map theme into a GeoSceneDocument 
+ * object.
+ * 
+ * @see GeoSceneDocument
+ */
+
 class MapThemeManager : public QObject
 {
     Q_OBJECT
@@ -25,6 +46,16 @@ class MapThemeManager : public QObject
 public:
     MapThemeManager(QObject *parent = 0);
     ~MapThemeManager();
+
+    /**
+     * @brief Returns the map theme as a GeoSceneDocument object
+     * @param mapThemeStringID  the string ID that refers to the map theme
+     *
+     * This helper method should only get used by MarbleModel to load the
+     * current theme into memory or by the MapThemeManager.
+     */
+    
+    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
 /*
     int open( const QString& path );
 

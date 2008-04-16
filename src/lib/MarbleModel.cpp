@@ -21,6 +21,8 @@
 #include "global.h"
 #include "gps/GpsLayer.h"
 
+#include "GeoSceneDocument.h"
+
 #include "AbstractScanlineTextureMapper.h"
 #include "ClipPainter.h"
 #include "FileViewModel.h"
@@ -31,6 +33,7 @@
 #include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"
 #include "MapTheme.h"
+#include "MapThemeManager.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "VectorComposer.h"
@@ -50,7 +53,8 @@ class MarbleModelPrivate
 {
  public:
     MarbleModelPrivate( MarbleModel *parent )
-        : m_parent( parent )
+        : m_parent( parent ),
+          m_mapTheme( 0 )
     {
     }
 
@@ -61,7 +65,9 @@ class MarbleModelPrivate
     MarbleModel         *m_parent;
 
     // View and paint stuff
-    MapTheme            *m_maptheme;
+    MapTheme            *m_maptheme; // Deprecated: Yeah, Refactoring loves to hate you: 
+                                     // beware of the different capitalization ... ;)
+    GeoSceneDocument    *m_mapTheme;
     QString              m_selectedMap;
     bool                 m_previousMapLoadedFine;
     TextureColorizer    *m_texcolorizer;
@@ -234,6 +240,26 @@ MapTheme* MarbleModel::mapThemeObject() const
 void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 			       Projection currentProjection )
 {
+    // Here we start refactoring the map theme
+    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgm2"); // Hardcoded for a start
+
+    if ( !mapTheme ) {
+        if ( !d->m_mapTheme ){ 
+            qDebug() << "Couldn't find a valid map.";
+            exit(-1);
+        }
+
+        return;
+    }
+
+    d->m_mapTheme = mapTheme;
+
+    qDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
+    qDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
+
+
+    // old "junk":
+
     // Read the maptheme into d->m_maptheme.
     QString mapPath = QString("maps/%1").arg( selectedMap );
     //qDebug( "Setting map theme to : %s",

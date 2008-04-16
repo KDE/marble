@@ -8,7 +8,17 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
+// Own
 #include "MapThemeManager.h"
+
+// Qt
+#include <QtCore/QFile>
+#include <QDebug>
+
+// Local dir
+#include "GeoSceneDocument.h"
+#include "GeoSceneParser.h"
+#include "MarbleDirs.h"
 
 MapThemeManager::MapThemeManager(QObject *parent)
     : QObject(parent)
@@ -19,7 +29,44 @@ MapThemeManager::~MapThemeManager()
 {
 }
 
+GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
+{
+    // Read the maptheme into d->m_maptheme.
+    QString mapThemePath = QString("maps/%1").arg( mapThemeStringID );
 
+
+    // Check whether file exists
+    QFile file( MarbleDirs::path( mapThemePath ) );
+    if (!file.exists()) {
+        qDebug("File does not exist!");
+        return 0;
+    }
+
+    // Open file in right mode
+    file.open(QIODevice::ReadOnly);
+
+    GeoSceneParser* parser = new GeoSceneParser(GeoScene_DGML);;
+
+    if (!parser) {
+        qDebug("Could not determine file format!");
+        return 0;
+    }
+
+    if (!parser->read(&file)) {
+        qDebug("Could not parse file!");
+        return 0;
+    }
+
+    // Get result document
+    GeoSceneDocument* document = static_cast<GeoSceneDocument*>(parser->releaseDocument());
+    Q_ASSERT(document);
+
+    qDebug() << "\nSuccesfully parsed file!";
+
+    delete parser;
+
+    return document;
+}
 
 /*
 int MapTheme::open( const QString& path )

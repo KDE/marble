@@ -1,3 +1,22 @@
+2008-04-16  Torsten Rahn  <rahn@kde.org>
+    * src/lib/MapThemeManager.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/ControlView.h:
+
+    Welcome MapThemeManager, welcome GeoSceneDocument!
+    This is going to replace the MapTheme-kludge now
+    and furthermore preparing for the new layer management
+
+    - Adding MapThemeManager stub to ControlView
+    - Parsing a dummy DGML2 file in the
+      MarbleModel::setMapTheme() method as an initial 
+      introduction of the whole GeoScene model
+
+    * data/CMakeLists.txt:
+    Adding a test dgml file. This needs to get renamed
+    from .dgm2 to .dgml later on again once everything works
+    as expected.
+
 2008-04-11  Torsten Rahn  <rahn@kde.org>
     * docs/dgml2.txt:
 
