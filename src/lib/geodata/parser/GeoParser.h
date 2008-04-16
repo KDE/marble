@@ -25,13 +25,14 @@
 #include <QtCore/QStack>
 #include <QtXml/QXmlStreamReader>
 
+#include <geodata_export.h>
 #include "GeoDocument.h"
 
 typedef int GeoDataGenericSourceType;
 
 class GeoStackItem;
 
-class GeoParser : public QXmlStreamReader {
+class GEODATA_EXPORT GeoParser : public QXmlStreamReader {
 public:
     GeoParser(GeoDataGenericSourceType sourceType);
     virtual ~GeoParser();

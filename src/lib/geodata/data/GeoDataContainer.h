@@ -15,6 +15,8 @@
 
 #include <QtCore/QVector>
 
+#include <geodata_export.h>
+
 #include "GeoDataFeature.h"
 
 class GeoDataFolder;
@@ -34,7 +36,7 @@ class GeoDataFolder;
  * @see GeoDataFolder
  * @see GeoDataDocument
  */
-class GeoDataContainer : public GeoDataFeature
+class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 {
  public:
     /// Destruct the GeoDataContainer

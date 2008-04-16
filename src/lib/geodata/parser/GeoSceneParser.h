@@ -22,6 +22,7 @@
 #ifndef GeoSceneParser_h
 #define GeoSceneParser_h
 
+#include <geodata_export.h>
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
 
@@ -29,7 +30,7 @@ enum GeoSceneSourceType {
     GeoScene_DGML   = 0
 };
 
-class GeoSceneParser : public GeoParser {
+class GEODATA_EXPORT GeoSceneParser : public GeoParser {
 public:
     GeoSceneParser(GeoSceneSourceType source);
     virtual ~GeoSceneParser();

@@ -22,6 +22,7 @@
 #ifndef GeoDataParser_h
 #define GeoDataParser_h
 
+#include <geodata_export.h>
 #include "GeoParser.h"
 #include "GeoDataDocument.h"
 
@@ -31,7 +32,7 @@ enum GeoDataSourceType {
     GeoData_GeoRSS = 2
 };
 
-class GeoDataParser : public GeoParser {
+class GEODATA_EXPORT GeoDataParser : public GeoParser {
 public:
     GeoDataParser(GeoDataSourceType source);
     virtual ~GeoDataParser();

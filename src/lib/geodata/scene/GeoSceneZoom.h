@@ -22,12 +22,13 @@
 #ifndef GEOSCENEZOOM_H
 #define GEOSCENEZOOM_H
 
+#include <geodata_export.h>
 #include "GeoDocument.h"
 
 /**
  * @short Zoom properties of a GeoScene document.
  */
-class GeoSceneZoom : public GeoNode {
+class GEODATA_EXPORT GeoSceneZoom : public GeoNode {
  public:
     GeoSceneZoom();
     ~GeoSceneZoom();

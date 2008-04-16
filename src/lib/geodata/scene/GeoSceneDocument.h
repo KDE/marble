@@ -23,6 +23,7 @@
 #ifndef GEOSCENEDOCUMENT_H
 #define GEOSCENEDOCUMENT_H
 
+#include <geodata_export.h>
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneSettings.h"
@@ -32,7 +33,7 @@
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GeoSceneDocument : public GeoDocument,
+class GEODATA_EXPORT GeoSceneDocument : public GeoDocument,
                          public GeoNode {
  public:
     GeoSceneDocument();

@@ -24,12 +24,14 @@
 
 #include <QtCore/QString>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 
 /**
  * @short Icon properties of a GeoScene document.
  */
-class GeoSceneIcon : public GeoNode {
+class GEODATA_EXPORT GeoSceneIcon : public GeoNode {
  public:
     GeoSceneIcon();
     ~GeoSceneIcon();

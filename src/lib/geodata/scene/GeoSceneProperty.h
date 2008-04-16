@@ -24,12 +24,14 @@
 
 #include <QtCore/QString>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 
 /**
  * @short Settings property within a GeoScene document.
  */
-class GeoSceneProperty : public GeoNode {
+class GEODATA_EXPORT GeoSceneProperty : public GeoNode {
  public:
     GeoSceneProperty( const QString& name );
     ~GeoSceneProperty();

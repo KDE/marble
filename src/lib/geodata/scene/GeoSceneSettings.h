@@ -24,13 +24,15 @@
 
 #include <QtCore/QHash>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 #include "GeoSceneProperty.h"
 
 /**
  * @short Settings of a GeoScene document.
  */
-class GeoSceneSettings : public GeoNode {
+class GEODATA_EXPORT GeoSceneSettings : public GeoNode {
  public:
     GeoSceneSettings();
     virtual ~GeoSceneSettings();

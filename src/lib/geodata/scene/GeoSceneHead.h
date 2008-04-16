@@ -24,6 +24,8 @@
 
 #include <QtCore/QString>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
@@ -31,7 +33,7 @@
 /**
  * @short General properties and identifiers of a GeoScene document.
  */
-class GeoSceneHead : public GeoNode {
+class GEODATA_EXPORT GeoSceneHead : public GeoNode {
  public:
     GeoSceneHead();
     ~GeoSceneHead();

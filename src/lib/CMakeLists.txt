@@ -219,11 +219,7 @@ else(WIN32 AND QTONLY)
   endif(APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
 
-if(QTONLY)
-    add_executable(geodatatest geodata/GeoDataTest.cpp)
-else(QTONLY)
-    add_executable(geodatatest geodata/GeoDataTest.cpp ${geodata_SRCS})
-endif(QTONLY)
+add_executable(geodatatest geodata/GeoDataTest.cpp)
 
 target_link_libraries (geodatatest marblewidget)
 
