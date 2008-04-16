@@ -77,30 +77,28 @@ else (QTONLY)
 endif (QTONLY)
 
 set(marble_SRCS
-           ControlView.cpp
-           MarbleTest.cpp
-           lib/MapThemeManager.cpp
-           lib/geodata/parser/GeoSceneParser.cpp
-           lib/geodata/parser/GeoParser.cpp
-           lib/geodata/scene/GeoSceneDocument.cpp
-lib/geodata/scene/GeoSceneHead.cpp
-lib/geodata/scene/GeoSceneMap.cpp
-lib/geodata/scene/GeoSceneZoom.cpp
-lib/geodata/scene/GeoSceneSettings.cpp
-lib/geodata/scene/GeoSceneLegend.cpp
-lib/geodata/scene/GeoSceneSection.cpp
-lib/geodata/scene/GeoSceneIcon.cpp
-lib/geodata/scene/GeoSceneLayer.cpp
-lib/geodata/scene/GeoSceneItem.cpp
-lib/geodata/scene/GeoSceneProperty.cpp
-lib/geodata/parser/GeoTagHandler.cpp
-
-
+    ControlView.cpp
+    MarbleTest.cpp
+    lib/MapThemeManager.cpp
+    lib/geodata/parser/GeoSceneParser.cpp
+    lib/geodata/parser/GeoParser.cpp
+    lib/geodata/scene/GeoSceneDocument.cpp
+    lib/geodata/scene/GeoSceneHead.cpp
+    lib/geodata/scene/GeoSceneMap.cpp
+    lib/geodata/scene/GeoSceneZoom.cpp
+    lib/geodata/scene/GeoSceneSettings.cpp
+    lib/geodata/scene/GeoSceneLegend.cpp
+    lib/geodata/scene/GeoSceneSection.cpp
+    lib/geodata/scene/GeoSceneIcon.cpp
+    lib/geodata/scene/GeoSceneLayer.cpp
+    lib/geodata/scene/GeoSceneItem.cpp
+    lib/geodata/scene/GeoSceneProperty.cpp
+    lib/geodata/parser/GeoTagHandler.cpp
 )
 
 set(marble_HDRS
-           ControlView.h
-           MarbleTest.h
+    ControlView.h
+    MarbleTest.h
 )
 
 if (QTONLY)

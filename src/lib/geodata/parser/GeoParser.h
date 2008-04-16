@@ -22,8 +22,8 @@
 #ifndef GeoParser_h
 #define GeoParser_h
 
-#include <QStack>
-#include <QXmlStreamReader>
+#include <QtCore/QStack>
+#include <QtXml/QXmlStreamReader>
 
 #include "GeoDocument.h"
 
