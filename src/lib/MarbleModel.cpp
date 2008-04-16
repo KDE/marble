@@ -33,6 +33,7 @@
 #include "MapTheme.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
+#include "VectorComposer.h"
 #include "ViewParams.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -40,6 +41,7 @@
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
 #include "PlaceMarkManager.h"
+#include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
 #include "XmlHandler.h"
 

@@ -72,6 +72,7 @@ set(marblewidget_SRCS
            DeferredFlag.cpp
            TileCreatorDialog.cpp
            MapTheme.cpp
+           MapThemeManager.cpp
            ViewportParams.cpp
            ViewParams.cpp
            AbstractProjection.cpp

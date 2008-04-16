@@ -21,6 +21,7 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
+#include "MarbleModel.h"
 #include "ViewParams.h"
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()

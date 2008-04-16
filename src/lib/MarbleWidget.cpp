@@ -29,6 +29,7 @@
 #include "MapScaleFloatItem.h"
 
 #include "MarbleMap.h"
+#include "MarbleModel.h"
 #include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"

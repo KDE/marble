@@ -35,9 +35,6 @@
 #include <QtGui/QPixmap>
 
 #include "global.h"
-#include "PlaceMarkLayout.h"
-#include "VectorComposer.h"
-#include "TextureColorizer.h"
 
 class QItemSelectionModel;
 
@@ -51,8 +48,11 @@ class GpxFileModel;
 class HttpDownloadManager;
 class MapTheme;
 class MarbleModelPrivate;
+class PlaceMarkLayout;
 class SunLocator;
+class TextureColorizer;
 class TileCreator;
+class VectorComposer;
 class ViewParams;
 
 

@@ -24,9 +24,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
 
-#include "MarbleModel.h"
-
-
+class MarbleModel;
 class MarbleWidget;
 
 
