@@ -9,7 +9,9 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/lib
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/AbstractLayer
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/data
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geoscene/data
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/handlers/dgml
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/parser
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/scene
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}/lib
 )
@@ -77,6 +79,23 @@ endif (QTONLY)
 set(marble_SRCS
            ControlView.cpp
            MarbleTest.cpp
+           lib/MapThemeManager.cpp
+           lib/geodata/parser/GeoSceneParser.cpp
+           lib/geodata/parser/GeoParser.cpp
+           lib/geodata/scene/GeoSceneDocument.cpp
+lib/geodata/scene/GeoSceneHead.cpp
+lib/geodata/scene/GeoSceneMap.cpp
+lib/geodata/scene/GeoSceneZoom.cpp
+lib/geodata/scene/GeoSceneSettings.cpp
+lib/geodata/scene/GeoSceneLegend.cpp
+lib/geodata/scene/GeoSceneSection.cpp
+lib/geodata/scene/GeoSceneIcon.cpp
+lib/geodata/scene/GeoSceneLayer.cpp
+lib/geodata/scene/GeoSceneItem.cpp
+lib/geodata/scene/GeoSceneProperty.cpp
+lib/geodata/parser/GeoTagHandler.cpp
+
+
 )
 
 set(marble_HDRS
@@ -93,7 +112,7 @@ else (QTONLY)
 endif (QTONLY)
 
 if (NOT QTONLY)
-  set(marblepart_SRCS marble_part.cpp )
+  set(marblepart_SRCS marble_part.cpp lib/MapThemeManager.cpp)
   kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
   kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS} ControlView.cpp)
   target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF2_LIBS} marblewidget)
