@@ -21,7 +21,7 @@
 
 #include "MarbleTest.h"
 
-#if STATIC_BUILD
+#ifdef STATIC_BUILD
  #include <QtCore/QtPlugin>
  Q_IMPORT_PLUGIN(qjpeg)
  Q_IMPORT_PLUGIN(qsvg)
