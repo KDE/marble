@@ -69,25 +69,6 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
 }
 
 /*
-int MapTheme::open( const QString& path )
-{
-    qDebug() << "PATH" << path;
-    QFileInfo     fileInfo(path);
-    if ( !fileInfo.isFile() ) {
-        qDebug() << QString("Not a valid maptheme file: ") + path;
-        return -4;
-    }
-      
-    QFile  file( path );
-    if ( !file.open( QIODevice::ReadOnly ) ) {
-        qDebug() << QString("Could not open ") + path;
-        return -1;
-    }
-
-    file.close();
-
-    return 0;
-}
 
 QStringList MapTheme::findMapThemes( const QString& path )
 {

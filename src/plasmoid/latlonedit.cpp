@@ -17,6 +17,8 @@
 */
 //(C) 2008 Henry de Valence
 
+#include "latlonedit.h"
+
 #include <QHBoxLayout>
 #include <QSpinBox>
 #include <QComboBox>
@@ -28,8 +30,6 @@
 #include <cmath>
 
 #include <marble/global.h>
-
-#include "latlonedit.h"
 
 LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
 	m_layout(0),

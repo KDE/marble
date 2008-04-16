@@ -20,9 +20,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
 #include "DGMLSectionTagHandler.h"
+
+#include <QDebug>
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"

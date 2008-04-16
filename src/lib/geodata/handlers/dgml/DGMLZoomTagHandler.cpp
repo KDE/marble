@@ -19,9 +19,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
 #include "DGMLZoomTagHandler.h"
+
+#include <QDebug>
 
 #include "DGMLElementDictionary.h"
 #include "GeoParser.h"

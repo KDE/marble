@@ -17,6 +17,8 @@
 */
 //(C) 2008 Henry de Valence
 
+#include "latloneditplugin.h"
+
 #include <QObject>
 #include <QDesignerCustomWidgetInterface>
 #include <QString>
@@ -24,7 +26,6 @@
 #include <QIcon>
 
 #include "latlonedit.h"
-#include "latloneditplugin.h"
 
 LatLonEditPlugin::LatLonEditPlugin(QObject *parent = 0)
 {

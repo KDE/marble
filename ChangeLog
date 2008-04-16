@@ -1,4 +1,32 @@
 2008-04-16  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapThemeManager.{cpp,h}:
+
+    - we don't need MapThemeManager::open ...
+
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLegendTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLZoomTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
+    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
+    * src/plasmoid/latloneditplugin.cpp:
+    * src/plasmoid/latlonedit.cpp:
+    * src/plasmoid/worldclock.cpp:
+
+    Patch by: Jens-Michael Hoffmann
+
+    - Include own header first!
+
+2008-04-16  Torsten Rahn  <rahn@kde.org>
     * src/lib/MapThemeManager.{cpp,h}:
     * src/lib/MarbleModel.{cpp,h}:
     * src/ControlView.h:

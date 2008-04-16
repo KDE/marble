@@ -16,6 +16,10 @@
 ** MA 02110-1301, USA.
 */
 
+//Mine
+#include "worldclock.h"
+
+
 //Qt
 #include <QPainter>
 
@@ -36,9 +40,6 @@
 #include <marble/SunLocator.h>
 #include <marble/ClipPainter.h>
 
-
-//Mine
-#include "worldclock.h"
 
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)

@@ -19,9 +19,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
 #include "GPXgpxTagHandler.h"
+
+#include <QDebug>
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"

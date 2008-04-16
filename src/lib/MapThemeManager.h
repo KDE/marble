@@ -57,8 +57,6 @@ public:
     
     static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
 /*
-    int open( const QString& path );
-
     int maxTileLevel()      const { return m_maxtilelevel;}
 
     static QStringList findMapThemes( const QString& );

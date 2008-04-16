@@ -19,9 +19,9 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QDebug>
-
 #include "KMLFolderTagHandler.h"
+
+#include <QDebug>
 
 #include "KMLElementDictionary.h"
 #include "GeoDataFolder.h"
