@@ -1,3 +1,9 @@
+2008-04-17  Torsten Rahn  <rahn@kde.org>
+
+    * data/maps/earth/srtm/srtm.dgm2:
+
+    - Some DGML2 sample data.
+
 2008-04-16  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapThemeManager.{cpp,h}:
