@@ -94,7 +94,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     
     /**
      * @brief set whether this Layer Data is visible
-     * @param visible the visiblity of this Data
+     * @param visible the visibility of this Data
      */
     void setVisible( bool visible );
     

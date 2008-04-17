@@ -1,5 +1,21 @@
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
+    Patch by: Claudiu Covaci
+
+    * src/lib/MarbleNavigationSettingsWidget.ui:
+    * src/lib/MarbleViewSettingsWidget.ui:
+    * src/lib/AbstractLayer/AbstractLayerData.h:
+    * src/lib/SunLocator.h:
+    * src/lib/ExtDateTime.h:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/scene/GeoSceneZoom.cpp:
+
+    Krazy-compliance:
+    - typo corrections
+    - "use your own header first" fixes
+
+2008-04-17  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
     * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.h:
     * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.h:

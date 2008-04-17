@@ -3,9 +3,9 @@
 #ifndef EXTDATETIME_H
 #define EXTDATETIME_H
 
-#include <QObject>
-#include <QDateTime>
-#include <QTimer>
+#include <QtCore/QObject>
+#include <QtCore/QDateTime>
+#include <QtCore/QTimer>
 
 class ExtDateTime : public QObject
 {

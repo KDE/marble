@@ -11,7 +11,7 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QColor>
-#include <QTimer>
+#include <QtCore/QTimer>
 
 #include "ExtDateTime.h"
 

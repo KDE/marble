@@ -22,7 +22,7 @@
 #include "GeoSceneZoom.h"
 
 GeoSceneZoom::GeoSceneZoom()
-    // Arbitary defaults, as used in Marble
+    // Arbirtary defaults, as used in Marble
     : m_minimum( 900 ),
       m_maximum( 2500 ),
       m_discrete( false )
