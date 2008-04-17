@@ -17,8 +17,10 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 
+#include "marble_export.h"
 
-class TileCreator : public QThread
+
+class MARBLE_EXPORT TileCreator : public QThread
 {
     Q_OBJECT
 
@@ -27,11 +29,12 @@ class TileCreator : public QThread
                  const QString& dem, const QString& targetDir=QString() );
     void cancelTileCreation();
 
+ protected:
+    virtual void run();
+
  Q_SIGNALS:
     void  progress( int value );
 
- protected:
-    virtual void run();
 
  private:
     QString  m_prefix;

@@ -9,11 +9,12 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set(tilecreator_SRCS
-           main.cpp
+            main.cpp
+            tccore.cpp
 )
 
 add_executable(tilecreator ${tilecreator_SRCS})
-target_link_libraries (tilecreator ${QT_QTCORE_LIBRARY} marblewidget)
+target_link_libraries(tilecreator ${QT_QTCORE_LIBRARY} marblewidget)
 
-# install (TARGETS tilecreator DESTINATION ${BIN_INSTALL_DIR} )
+install (TARGETS tilecreator RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
 
