@@ -1,3 +1,52 @@
+2008-04-17  Patrick Spendrin <ps_ml@gmx.de>
+
+    * lib/TileCreator.h
+    * tilecreator/CMakeLists.txt
+    * main.cpp
+    * tilecreator/tccore.cpp
+    * tilecreator/tccore.h
+
+    first try to make the tilecreator 
+
+2008-04-17  Patrick Spendrin <ps_ml@gmx.de>
+
+    Patch by: Claudiu Covaci
+    
+    * lib/ExtDateTime.cpp
+    * lib/ExtDateTime.h
+    * lib/MergedLayerPainter.cpp
+    * lib/MergedLayerPainter.h
+    * lib/SunLocator.cpp
+    * lib/SunLocator.h
+    * lib/geodata/GeoDataTest.cpp
+    * lib/geodata/scene/GeoSceneZoom.cpp
+    * lib/kml/KMLLabelStyleParser.cpp
+    * plasmoid/latlonedit.cpp
+    * plasmoid/worldclock.cpp
+    * plasmoid/worldclock.h
+ 
+    more Krazy issues
+    
+2008-04-16  Patrick Spendrin <ps_ml@gmx.de>
+
+* CMakeLists.txt
+* lib/CMakeLists.txt
+* lib/geodata/geodata_export.h
+* lib/geodata/data/GeoDataContainer.h
+* lib/geodata/handlers/dgml/DGMLElementDictionary.h
+* lib/geodata/parser/GeoDataParser.h
+* lib/geodata/parser/GeoParser.h
+* lib/geodata/parser/GeoSceneParser.h
+* lib/geodata/scene/GeoSceneDocument.h
+* lib/geodata/scene/GeoSceneHead.h
+* lib/geodata/scene/GeoSceneIcon.h
+* lib/geodata/scene/GeoSceneProperty.h
+* lib/geodata/scene/GeoSceneSettings.h
+* lib/geodata/scene/GeoSceneZoom.h
+
+    fix geodata library part
+    The export should be correct if this library should be used outside of libmarblewidget
+
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleModel.cpp:
