@@ -38,7 +38,7 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     // Check whether file exists
     QFile file( MarbleDirs::path( mapThemePath ) );
     if (!file.exists()) {
-        qDebug("File does not exist!");
+        qDebug() << "File does not exist:" << MarbleDirs::path( mapThemePath );
         return 0;
     }
 

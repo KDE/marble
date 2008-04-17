@@ -47,7 +47,7 @@ DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights/legend)
 install (FILES
 maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
-#maps/earth/srtm/srtm.dgm2
+maps/earth/srtm/srtm.dgm2
 maps/earth/srtm/srtm-preview.png
 DESTINATION ${MARBLE_DATA_PATH}/maps/earth/srtm)
 

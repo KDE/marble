@@ -245,7 +245,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 
     if ( !mapTheme ) {
         if ( !d->m_mapTheme ){ 
-            qDebug() << "Couldn't find a valid map.";
+            qDebug() << "Couldn't find a valid DGML2 map.";
             exit(-1);
         }
 
