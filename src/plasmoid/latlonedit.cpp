@@ -64,7 +64,7 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 		qDebug() << "Unrecognized dimension";
 	}
 	m_degreesSpin->show();
-	//it's greyed out when it's 0, and that is the default
+	//it's grayed out when it's 0, and that is the default
 	m_comboBox->setEnabled(false);
 	m_comboBox->show();
 
@@ -302,6 +302,7 @@ void LatLonEdit::reverseRecalculate()
 
 	checkComboBox();
 }
+
 
 
 
