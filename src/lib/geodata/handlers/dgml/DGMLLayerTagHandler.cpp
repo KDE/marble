@@ -51,8 +51,9 @@ GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
 
-    QString name      = parser.attribute(dgmlAttr_name);
-    QString backend    = parser.attribute(dgmlAttr_backend);
+    QString name      = parser.attribute(dgmlAttr_name).trimmed();
+    QString backend    = parser.attribute(dgmlAttr_backend).toLower().trimmed();
+    QString role      = parser.attribute(dgmlAttr_role).toLower().trimmed();
 
     GeoSceneLayer *layer = 0;
 
@@ -61,6 +62,7 @@ GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Map)) {
         layer = new GeoSceneLayer( name );
         layer->setBackend( backend );
+        layer->setRole( role );
         parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
     }
 

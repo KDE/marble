@@ -46,7 +46,7 @@ GeoNode* DGMLInstallMapTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture))
-        parentItem.nodeAs<GeoSceneTexture>()->setInstallMap(parser.readElementText());
+        parentItem.nodeAs<GeoSceneTexture>()->setInstallMap( parser.readElementText().trimmed() );
 
     return 0;
 }

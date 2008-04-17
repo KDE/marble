@@ -22,6 +22,10 @@
 #include "GeoSceneMap.h"
 
 #include "GeoSceneLayer.h"
+#include "DGMLAuxillaryDictionary.h"
+
+using namespace GeoSceneAuxillaryDictionary;
+
 
 GeoSceneMap::GeoSceneMap()
     : m_backgroundColor( "" )
@@ -78,6 +82,32 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 QVector<GeoSceneLayer*> GeoSceneMap::layers() const
 {
     return m_layers;
+}
+
+bool GeoSceneMap::hasTextureLayers() const
+{
+    GeoSceneLayer* layer = 0;
+
+    QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
+    for (it = m_layers.begin(); it != m_layers.end(); ++it) {
+        if ( (*it)->backend() == dgmlValue_texture && (*it)->datasets().count() > 0 )
+            return true;
+    }
+
+    return false;
+}
+
+bool GeoSceneMap::hasVectorLayers() const
+{
+    GeoSceneLayer* layer = 0;
+
+    QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
+    for (it = m_layers.begin(); it != m_layers.end(); ++it) {
+        if ( (*it)->backend() == dgmlValue_vector && (*it)->datasets().count() > 0 )
+            return true;
+    }
+
+    return false;
 }
 
 QString GeoSceneMap::backgroundColor() const

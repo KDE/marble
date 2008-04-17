@@ -1,5 +1,48 @@
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleModel.cpp:
+
+    - Porting setMapTheme over to DGML2.
+      (Currently #if 0 ed out but almost works already).
+      This should later on get replaced altogether by 
+      the Layer Management Class based mechanism.
+
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLThemeTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLAuxillaryDictionary.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTextTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSourceDirTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLInstallMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLAuxillaryDictionary.h:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTargetTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLHeadingTagHandler.cpp:
+
+    - Trimming away leading and trailing white spaces where needed
+
+    * src/lib/geodata/scene/GeoSceneLayer.{cpp,h}:
+
+    - Moving "role" from the AbstractDataset class up to the Layer.
+    - Documenting the API 
+
+    * src/lib/geodata/scene/GeoSceneMap.{cpp,h}:
+
+    - Adding hasTextureLayer() and hasVectorLayer.
+
+    * docs/dgml2.txt:
+    * data/maps/earth/srtm/srtm.dgm2:
+
+    - Moving "role" from the AbstractDataset class up to the Layer.
+    - Bugfixes.
+
+2008-04-17  Torsten Rahn  <rahn@kde.org>
+
     Patch by: Claudiu Covaci
 
     * src/lib/MarbleNavigationSettingsWidget.ui:

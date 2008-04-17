@@ -46,8 +46,8 @@ GeoNode* DGMLIconTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
 
-    QString pixmap = parser.attribute(dgmlAttr_pixmap);
-    QString color  = parser.attribute(dgmlAttr_color);
+    QString pixmap = parser.attribute(dgmlAttr_pixmap).trimmed();
+    QString color  = parser.attribute(dgmlAttr_color).trimmed();
 
     GeoSceneIcon *icon = 0;
 

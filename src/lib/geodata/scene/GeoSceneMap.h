@@ -42,12 +42,41 @@ class GeoSceneMap : public GeoNode {
     void setBackgroundColor( const QString& );
 
     /**
-     * @brief  Add a section to the legend
-     * @param  section  the new section
+     * @brief  Add a new layer to the map
+     * @param  section  The new layer
      */
     void addLayer( GeoSceneLayer* );
-    GeoSceneLayer* layer( const QString& );
+
+    /**
+     * @brief  Return a layer by its name
+     * @param  name  The name of the layer
+     * @return A pointer to the layer request by its name
+     */
+    GeoSceneLayer* layer( const QString& name );
+
+    /**
+     * @brief  Return all layers
+     * @return A vector that contains pointers to all available layers
+     */
     QVector<GeoSceneLayer*> layers() const;
+
+    /**
+     * @brief  Checks for valid layers that contain texture data
+     * @return Whether a texture layer got created internally 
+     *
+     * NOTE: The existance of the file(s) that contain the actual data  
+     *       still needs to get checked at runtime!
+     */
+    bool hasTextureLayers() const;
+
+    /**
+     * @brief  Checks for valid layers that contain vector data
+     * @return Whether a vector layer got created internally 
+     *
+     * NOTE: The existance of the file(s) that contain the actual data  
+     *       still needs to get checked at runtime!
+     */
+    bool hasVectorLayers() const;
 
  protected:
     /// The vector holding all the sections in the legend.

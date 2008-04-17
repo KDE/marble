@@ -46,7 +46,7 @@ GeoNode* DGMLTextTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Item))
-        parentItem.nodeAs<GeoSceneItem>()->setText(parser.readElementText());
+        parentItem.nodeAs<GeoSceneItem>()->setText( parser.readElementText().trimmed() );
 
     return 0;
 }

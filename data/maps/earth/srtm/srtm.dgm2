@@ -51,26 +51,26 @@
             
             <!-- This layer creates the coastlines that are needed to
                 colorize the elevation model properly -->
-            <layer name="mwdbii" plugin="vector" type="filterhelper">
-                <vector name="pcoast" type="land">
+            <layer name="mwdbii" backend="vector" role="filterhelper">
+                <vector name="pcoast" feature="land">
                     <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
                 </vector>
-                <vector name="pisland" type="land">
+                <vector name="pisland" feature="land">
                     <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plakeisland" type="land">
+                <vector name="plakeisland" feature="land">
                     <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plake" type="sea">
+                <vector name="plake" feature="sea">
                     <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
                 </vector>
-                <vector name="pglacier" type="sea">
+                <vector name="pglacier" feature="sea">
                     <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
                 </vector>
             </layer>
         
             <!-- This layer provides the colorization -->
-            <layer name="" plugin="filter">
+            <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
                     <dem>srtm</dem>
                     <coastline>mwdbii</coastline>
@@ -81,20 +81,20 @@
                 </filter>
             </layer>
         
-            <layer name="mwdbii" backend="vector" type="polyline">
-                <vector name="pdiffborder" type="border">
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pdiffborder" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <color>#f29b68</color>
                 </vector>
-                <vector name="pusa48.diff" type="polyline">
+                <vector name="pusa48.diff" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <color>#f29b68</color>
                 </vector>
-                <vector name="international dateline" type="polyline">
+                <vector name="international dateline" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
                     <color>#000000</color>
                 </vector>
-                <vector name="pusa48" type="polyline">
+                <vector name="pusa48" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <color>#637bff</color>
                 </vector>

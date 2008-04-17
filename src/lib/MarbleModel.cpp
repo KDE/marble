@@ -22,6 +22,8 @@
 #include "gps/GpsLayer.h"
 
 #include "GeoSceneDocument.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneTexture.h"
 
 #include "AbstractScanlineTextureMapper.h"
 #include "ClipPainter.h"
@@ -240,24 +242,132 @@ MapTheme* MarbleModel::mapThemeObject() const
 void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 			       Projection currentProjection )
 {
+#if 0
     // Here we start refactoring the map theme
-    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgm2"); // Hardcoded for a start
+    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( selectedMap ); // Hardcoded for a start
 
+    // Check whether the selected theme got parsed well
     if ( !mapTheme ) {
-        if ( !d->m_mapTheme ){ 
-            qDebug() << "Couldn't find a valid DGML2 map.";
-            exit(-1);
-        }
 
-        return;
+        // Check whether the previous theme works 
+        if ( !d->m_mapTheme ){ 
+            // Fall back to default theme
+            qDebug() << "Falling back to default theme";
+            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgm2");
+
+            // If this last resort doesn't work either shed a tear and exit
+            if ( !mapTheme ) {
+                qDebug() << "Couldn't find a valid DGML2 map.";
+                exit(-1);
+            }
+        }
+        else {
+            qDebug() << "Selected theme doesn't work, so we stick to the previous one";
+            return;
+        }
     }
 
     d->m_mapTheme = mapTheme;
 
+    // Some output to show how to use this stuff ...
     qDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
     qDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
 
+    if ( d->m_mapTheme->map()->hasTextureLayers() )
+        qDebug() << "Contains texture layers! ";
+    else
+        qDebug() << "Does not contain any texture layers! ";
 
+    qDebug() << "Number of SRTM textures: " << d->m_mapTheme->map()->layer("srtm")->datasets().count();
+
+    if ( d->m_mapTheme->map()->hasVectorLayers() )
+        qDebug() << "Contains vector layers! ";
+    else
+        qDebug() << "Does not contain any vector layers! ";
+
+    if ( d->m_mapTheme->map()->hasTextureLayers() ) {
+        // If the tiles aren't already there, put up a progress dialog
+        // while creating them.
+
+        // As long as we don't have an Layer Management Class we just lookup 
+        // the name of the layer that has the same name as the theme ID
+        QString themeID = d->m_mapTheme->head()->theme();
+
+        GeoSceneTexture *texture = 
+            static_cast<GeoSceneTexture*>( d->m_mapTheme->map()->layer( themeID )->datasets().first() );
+
+        QString sourceDir = texture->sourceDir();
+        QString installMap = texture->installMap();
+        QString role = d->m_mapTheme->map()->layer( themeID )->role();
+
+        qDebug() << "Source Dir: " << sourceDir;
+        qDebug() << "Role: " << role;
+
+        if ( !TileLoader::baseTilesAvailable( "maps/"
+                                              + sourceDir ) )
+        {
+            qDebug("DGML2: Base tiles not available. Creating Tiles ... ");
+
+            TileCreator *tileCreator = new TileCreator(
+                                     sourceDir,
+                                     installMap,
+                                     (role == "dem") ? "true" : "false" );
+            // FIXME
+            // TileCreatorDialog tileCreatorDlg( tileCreator, parent );
+            TileCreatorDialog tileCreatorDlg( tileCreator, 0 );
+                tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
+                                           "DGML2" + d->m_mapTheme->head()->description() );
+                tileCreatorDlg.exec();
+                qDebug("Tile creation completed");
+        }
+
+        delete d->m_texmapper;
+
+        d->m_tileLoader->setMapTheme( "maps/" + sourceDir );
+
+        switch( currentProjection ) {
+            case Spherical:
+                d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
+                break;
+            case Equirectangular:
+                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+                break;
+            case Mercator:
+                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+                break;
+
+        }
+
+        d->m_projection = currentProjection;
+
+        connect( d->m_texmapper, SIGNAL( mapChanged() ),
+         this,           SLOT( notifyModelChanged() ) );
+    }
+    else {
+        d->m_tileLoader->flush();
+    }
+/*
+    // Set all the colors for the vector layers
+    d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );
+    d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
+    d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
+    d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
+    d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
+    d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
+*/
+    if ( d->m_placeMarkLayout == 0)
+        d->m_placeMarkLayout = new PlaceMarkLayout( this );
+    d->m_placeMarkLayout->requestStyleReset();
+    // FIXME: To be removed after MapTheme / KML refactoring
+
+    // FIXME: Still needs to get fixed for the DGML2 refactoring
+//    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
+
+    d->m_selectedMap = selectedMap;
+    d->m_projection = currentProjection;
+    emit themeChanged( selectedMap );
+    d->notifyModelChanged();
+#endif
     // old "junk":
 
     // Read the maptheme into d->m_maptheme.

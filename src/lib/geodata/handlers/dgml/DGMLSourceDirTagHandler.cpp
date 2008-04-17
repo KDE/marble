@@ -45,7 +45,7 @@ GeoNode* DGMLSourceDirTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_SourceDir));
 
-    QString format = parser.attribute(dgmlAttr_format);
+    QString format = parser.attribute(dgmlAttr_format).trimmed();
 
     GeoSceneTexture *texture = 0;
 
@@ -53,7 +53,7 @@ GeoNode* DGMLSourceDirTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture)) {
         texture = parentItem.nodeAs<GeoSceneTexture>();
-        texture->setSourceDir(parser.readElementText());
+        texture->setSourceDir( parser.readElementText().trimmed() );
         texture->setFileFormat(format);
     }
 

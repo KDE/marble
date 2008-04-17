@@ -53,7 +53,7 @@ GeoNode* DGMLMapTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Document)) {
         map = parentItem.nodeAs<GeoSceneDocument>()->map();
-        map->setBackgroundColor(parser.attribute(dgmlAttr_bgcolor));
+        map->setBackgroundColor(parser.attribute(dgmlAttr_bgcolor).trimmed());
     }
 
     return map;

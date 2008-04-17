@@ -43,9 +43,6 @@ class GeoSceneAbstractDataset : public GeoNode {
     int expire() const;
     void setExpire( int expire );
 
-    QString role() const;
-    void setRole( const QString& type );
-
     virtual QString type() = 0;
 
  protected:
@@ -53,7 +50,6 @@ class GeoSceneAbstractDataset : public GeoNode {
 
     QString m_name;
     QString m_fileFormat;
-    QString m_role;
     int     m_expire;
 };
 
@@ -79,6 +75,9 @@ class GeoSceneLayer : public GeoNode {
     QString backend() const;
     void setBackend( const QString& plugin );
 
+    QString role() const;
+    void setRole( const QString& type );
+
  protected:
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care 
@@ -87,6 +86,7 @@ class GeoSceneLayer : public GeoNode {
 
     QString m_name;
     QString m_backend;
+    QString m_role;
 };
 
 #endif // GEOSCENELAYER_H

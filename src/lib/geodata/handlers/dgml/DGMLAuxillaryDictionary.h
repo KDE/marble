@@ -30,6 +30,8 @@ namespace GeoSceneAuxillaryDictionary {
 
     extern const char* dgmlValue_true;
     extern const char* dgmlValue_on;
+    extern const char* dgmlValue_texture;
+    extern const char* dgmlValue_vector;
 }
 
 #endif // DGMLAuxillaryDictionary_h

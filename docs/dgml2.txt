@@ -76,8 +76,8 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <target/>
         
             <!-- This layer creates the elevation model -->
-            <layer name="srtm" plugin="texture">
-                <texture expire="10800" type="dem">
+            <layer name="srtm" plugin="texture" type="dem">
+                <texture expire="10800">
                     <sourcedir format="JPG"> srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                 </texture>
@@ -92,7 +92,7 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             
             <!-- This layer creates the coastlines that are needed to
                 colorize the elevation model properly -->
-            <layer name="mwdbii" plugin="vector" type="filterhelper">
+            <layer name="mwdbii" backend="vector" role="filterhelper">
                 <vector name="pcoast" type="land">
                     <sourcefile format="PNT"> PCOAST.PNT </sourcefile>
                 <vector>

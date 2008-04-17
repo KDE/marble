@@ -50,7 +50,7 @@ GeoNode* DGMLTargetTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
-        parentItem.nodeAs<GeoSceneHead>()->setTarget(parser.readElementText());
+        parentItem.nodeAs<GeoSceneHead>()->setTarget( parser.readElementText().trimmed() );
 
     if (parentItem.represents(dgmlTag_Map)) {
         layer = new GeoSceneLayer( "$MARBLETARGET$" );

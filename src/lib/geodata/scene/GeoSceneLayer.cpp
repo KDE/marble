@@ -24,8 +24,7 @@
 GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
     : m_name( name ),
       m_fileFormat( "" ),
-      m_expire( -1 ),
-      m_role( "" )
+      m_expire( -1 )
 {
     /* NOOP */
 }
@@ -55,19 +54,10 @@ void GeoSceneAbstractDataset::setExpire( int expire )
     m_expire = expire;
 }
 
-QString GeoSceneAbstractDataset::role() const
-{
-    return m_role;
-}
-
-void GeoSceneAbstractDataset::setRole( const QString& role )
-{
-    m_role = role;
-}
-
 GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_name( name ),
-      m_backend( "" )
+      m_backend( "" ),
+      m_role( "" )
 {
     /* NOOP */
 }
@@ -136,4 +126,14 @@ QString GeoSceneLayer::backend() const
 void GeoSceneLayer::setBackend( const QString& backend )
 {
     m_backend = backend;
+}
+
+QString GeoSceneLayer::role() const
+{
+    return m_role;
+}
+
+void GeoSceneLayer::setRole( const QString& role )
+{
+    m_role = role;
 }

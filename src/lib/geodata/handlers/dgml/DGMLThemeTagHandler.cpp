@@ -46,7 +46,7 @@ GeoNode* DGMLThemeTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head))
-        parentItem.nodeAs<GeoSceneHead>()->setTheme(parser.readElementText());
+        parentItem.nodeAs<GeoSceneHead>()->setTheme( parser.readElementText().trimmed() );
 
     return 0;
 }

@@ -50,9 +50,8 @@ GeoNode* DGMLTextureTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Texture));
 
-    QString name      = parser.attribute(dgmlAttr_name);
+    QString name      = parser.attribute(dgmlAttr_name).trimmed();
     int     expire    = parser.attribute(dgmlAttr_expire).toInt();
-    QString role      = parser.attribute(dgmlAttr_role);
 
     GeoSceneTexture *texture = 0;
 
@@ -61,12 +60,11 @@ GeoNode* DGMLTextureTagHandler::parse(GeoParser& parser) const
 
     // Check parent type and make sure that the dataSet type 
     // matches the backend of the parent layer
-    if (parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == "texture") {
+    if ( parentItem.represents(dgmlTag_Layer)
+        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_texture ) {
 
         texture = new GeoSceneTexture( name );
         texture->setExpire( expire );
-        texture->setRole( role );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }
 
