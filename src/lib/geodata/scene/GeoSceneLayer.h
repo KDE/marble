@@ -33,6 +33,8 @@
  */
 class GeoSceneAbstractDataset : public GeoNode {
  public:
+    virtual ~GeoSceneAbstractDataset() {};
+
     QString name() const;
 
     QString fileFormat() const;
@@ -41,14 +43,17 @@ class GeoSceneAbstractDataset : public GeoNode {
     int expire() const;
     void setExpire( int expire );
 
-    QString type() const;
-    void setType( const QString& type );
+    QString role() const;
+    void setRole( const QString& type );
+
+    virtual QString type() = 0;
 
  protected:
     GeoSceneAbstractDataset( const QString& name );
+
     QString m_name;
     QString m_fileFormat;
-    QString m_type;
+    QString m_role;
     int     m_expire;
 };
 
@@ -71,8 +76,8 @@ class GeoSceneLayer : public GeoNode {
 
     QString name() const;
 
-    QString plugin() const;
-    void setPlugin( const QString& plugin );
+    QString backend() const;
+    void setBackend( const QString& plugin );
 
  protected:
     /// The vector holding all the data in the layer.
@@ -81,7 +86,7 @@ class GeoSceneLayer : public GeoNode {
     QVector<GeoSceneAbstractDataset*> m_datasets;
 
     QString m_name;
-    QString m_plugin;
+    QString m_backend;
 };
 
 #endif // GEOSCENELAYER_H

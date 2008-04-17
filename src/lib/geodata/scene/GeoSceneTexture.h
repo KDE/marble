@@ -41,6 +41,8 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
+    virtual QString type();
+
  protected:
     QString m_sourceDir;
     QString m_installMap;

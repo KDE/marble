@@ -54,3 +54,8 @@ void GeoSceneTexture::setInstallMap( const QString& installMap )
 {
     m_installMap = installMap;
 }
+
+QString GeoSceneTexture::type()
+{
+    return "texture";
+}

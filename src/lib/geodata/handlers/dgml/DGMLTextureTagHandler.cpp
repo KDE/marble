@@ -52,16 +52,21 @@ GeoNode* DGMLTextureTagHandler::parse(GeoParser& parser) const
 
     QString name      = parser.attribute(dgmlAttr_name);
     int     expire    = parser.attribute(dgmlAttr_expire).toInt();
-    QString type      = parser.attribute(dgmlAttr_type);
+    QString role      = parser.attribute(dgmlAttr_role);
 
     GeoSceneTexture *texture = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Layer)) {
+
+    // Check parent type and make sure that the dataSet type 
+    // matches the backend of the parent layer
+    if (parentItem.represents(dgmlTag_Layer)
+        && parentItem.nodeAs<GeoSceneLayer>()->backend() == "texture") {
+
         texture = new GeoSceneTexture( name );
         texture->setExpire( expire );
-        texture->setType( type );
+        texture->setRole( role );
         parentItem.nodeAs<GeoSceneLayer>()->addDataset( texture );
     }
 

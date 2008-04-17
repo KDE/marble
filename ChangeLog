@@ -1,5 +1,19 @@
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.h:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneLayer.{cpp,h}:
+
+    - Changing attribute names: plugin -> backend, type -> role;
+    - Introduction of a type for each dataSet.
+    - Type checking for dataSets against layer backend.
+
+2008-04-17  Torsten Rahn  <rahn@kde.org>
+
     * data/maps/earth/srtm/srtm.dgm2:
 
     - Some DGML2 sample data.

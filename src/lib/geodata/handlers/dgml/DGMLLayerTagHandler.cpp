@@ -52,7 +52,7 @@ GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Layer));
 
     QString name      = parser.attribute(dgmlAttr_name);
-    QString plugin    = parser.attribute(dgmlAttr_plugin);
+    QString backend    = parser.attribute(dgmlAttr_backend);
 
     GeoSceneLayer *layer = 0;
 
@@ -60,7 +60,7 @@ GeoNode* DGMLLayerTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Map)) {
         layer = new GeoSceneLayer( name );
-        layer->setPlugin( plugin );
+        layer->setBackend( backend );
         parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
     }
 

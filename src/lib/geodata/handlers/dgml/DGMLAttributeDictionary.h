@@ -31,6 +31,7 @@ namespace GeoSceneAttributeDictionary {
 
     extern const char* dgmlAttr_nameSpace20;
 
+    extern const char* dgmlAttr_backend;
     extern const char* dgmlAttr_bgcolor;
     extern const char* dgmlAttr_color;
     extern const char* dgmlAttr_checkable;
@@ -38,10 +39,9 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_format;
     extern const char* dgmlAttr_name;
     extern const char* dgmlAttr_pixmap;
-    extern const char* dgmlAttr_plugin;
+    extern const char* dgmlAttr_role;
     extern const char* dgmlAttr_spacing;
     extern const char* dgmlAttr_text;
-    extern const char* dgmlAttr_type;
 }
 
 #endif // DGMLAttributeDictionary_h
