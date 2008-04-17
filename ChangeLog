@@ -1,3 +1,8 @@
+2008-04-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Remove unused member
+	* src/lib/MarbleModel.cpp (MarbleModelPrivate::m_projection): removed
+
 2008-04-17  Patrick Spendrin <ps_ml@gmx.de>
 
     * lib/TileCreator.h

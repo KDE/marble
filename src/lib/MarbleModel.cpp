@@ -95,7 +95,6 @@ class MarbleModelPrivate
     GpxFileModel        *m_gpxFileModel;
 
     QTimer       *m_timer;
-    Projection   m_projection;
 
     FileViewModel       *m_fileviewmodel;
     SunLocator* m_sunLocator;
@@ -168,8 +167,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox& ) ),
              this,              SIGNAL( regionChanged( BoundingBox& ) ) );
-
-    d->m_projection = Spherical;
 
     /*
      * Create FileViewModel
@@ -338,10 +335,8 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 
         }
 
-        d->m_projection = currentProjection;
-
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
-         this,           SLOT( notifyModelChanged() ) );
+                 this,           SLOT( notifyModelChanged() ) );
     }
     else {
         d->m_tileLoader->flush();
@@ -364,7 +359,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
-    d->m_projection = currentProjection;
     emit themeChanged( selectedMap );
     d->notifyModelChanged();
 #endif
@@ -433,7 +427,6 @@ d->m_maptheme->tilePrefix() );
 //         else
 //             d->m_texmapper->setMapTheme( "maps/earth/"
 //                                          + d->m_maptheme->tilePrefix() );
-        d->m_projection = currentProjection;
 
         connect( d->m_texmapper, SIGNAL( mapChanged() ),
 		 this,           SLOT( notifyModelChanged() ) );
@@ -458,8 +451,8 @@ d->m_maptheme->tilePrefix() );
 d->m_maptheme->labelColor() );
 
     d->m_selectedMap = selectedMap;
-    d->m_projection = currentProjection;
     emit themeChanged( selectedMap );
+
     d->notifyModelChanged();
 }
 
