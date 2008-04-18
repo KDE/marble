@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
 
@@ -21,7 +21,8 @@
  * @short a painter that makes it easy to draw geometric items on the map 
  *
  * This class enables application developers to paint simple geometric 
- * shapes and objects on the map.
+ * shapes and objects on the map. The API is inspired by and 
+ * compatible to QPainter.
  *
  * All methods are using Geographic coordinates to position the item.
  * However while being placed in geographic coordinates the 
@@ -37,6 +38,16 @@
  * Painter transformations (e.g. translate) always happen in screen 
  * coordinates.
  * 
+ * NOTE: Like in QPainter drawing objects should always be a 
+ * VOLATILE operation! This means that e.g. placemarks don't get 
+ * added to the globe permanently. So unless you do the drawing on 
+ * every repaint the objects you draw will disappear on the next 
+ * paint event.
+ * 
+ * So if you want to add placemarks to your map PERMANENTLY 
+ * (i.e. you don't need to take care of repainting) then 
+ * please use other means such as the KML import.
+ *
  * See docs/paintingmaps.txt for more information.
  */
 
@@ -45,12 +56,25 @@ class GeoPainter : public ClipPainter
 {
  public:
     GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip );
+//    Ideally we'd like to have this constructor:
+
 //    GeoPainter( MarbleMap * map, bool clip );
+
+//    .. however I don't see a way to implement it in a way that 
+//    would serialize API graphic calls on one hand and would stay 
+//    compatible with the Qt Painter API on the other hand.
 
     void drawPoint (  const GeoDataPoint & position );
     void drawPoints (  const GeoDataPoint * points, int pointCount );
+
+    // Of course in theory we could have the "isGeoProjected" parameter used 
+    // for drawText as well. However this would largely complicate and slow 
+    // down things to a crawl as we'd need to convert all glyphs to PainterPaths
+    // and convert thos ... . Given that for decent maps you don't really want 
+    // this anyways we leave it out for now ...
     void drawText ( const GeoDataPoint & position, const QString & text );
     void drawText ( const GeoDataPoint & position, const QString & text );
+
 //    void drawPlaceMark ( const GeoDataPoint & position, const QString& name );
 //    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
 
