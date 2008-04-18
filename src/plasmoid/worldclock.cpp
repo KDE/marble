@@ -60,10 +60,10 @@ void WorldClock::init()
     m_map = new MarbleMap(  );
     m_map->setProjection( Equirectangular );
 
-    m_map->setSize(contentSize().width(), contentSize().height());
+    m_map->setSize(geometry().size().width(), geometry().size().height());
     //The radius of the map using this projection 
     //will always be 1/4 of the desired width.
-    m_map->setRadius( (contentSize().width() / 4 ) );
+    m_map->setRadius( (geometry().size().width() / 4 ) );
 
     //offset so that the date line isn't
     //right on the edge of the map
@@ -114,10 +114,10 @@ void WorldClock::connectToEngine()
 
 void WorldClock::resizeMap()
 {
-    m_map->setSize(contentSize().width(), contentSize().height());
+    m_map->setSize(geometry().size().width(), geometry().size().height());
     //The radius of the map using this projection 
     //will always be 1/4 of the desired width.
-    m_map->setRadius( (contentSize().width() / 4 ) );
+    m_map->setRadius( (geometry().size().width() / 4 ) );
     update();
 }
  
