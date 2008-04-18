@@ -36,8 +36,8 @@
         
             <!-- This layer creates the elevation model -->
             <layer name="srtm" backend="texture" role="dem">
-                <texture format="JPG" expire="10800"><!-- type="texture"-->
-                    <sourcedir> earth/srtm </sourcedir>
+                <texture name="srtm_data" expire="10800"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                 </texture>
             </layer>

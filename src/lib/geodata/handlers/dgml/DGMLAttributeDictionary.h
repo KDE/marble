@@ -36,6 +36,7 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_color;
     extern const char* dgmlAttr_checkable;
     extern const char* dgmlAttr_expire;
+    extern const char* dgmlAttr_feature;
     extern const char* dgmlAttr_format;
     extern const char* dgmlAttr_name;
     extern const char* dgmlAttr_pixmap;

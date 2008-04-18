@@ -1,6 +1,5 @@
 /*
     Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
-    Copyright (C) 2008 Torsten Rahn <tackat@kde.org>
 
     This file is part of the KDE project
 
@@ -20,24 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DGMLAttributeDictionary.h"
+#ifndef DGMLVectorTagHandler_h
+#define DGMLVectorTagHandler_h
 
-// One static list of all attribute names, to avoid string comparisons all-over-the-place
+#include "GeoTagHandler.h"
 
-namespace GeoSceneAttributeDictionary {
+class DGMLVectorTagHandler : public GeoTagHandler {
+public:
+    DGMLVectorTagHandler();
+    virtual ~DGMLVectorTagHandler();
 
-const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
-const char* dgmlAttr_backend   = "backend";
-const char* dgmlAttr_bgcolor   = "bgcolor";
-const char* dgmlAttr_color     = "color";
-const char* dgmlAttr_checkable = "checkable";
-const char* dgmlAttr_expire    = "expire";
-const char* dgmlAttr_feature   = "feature";
-const char* dgmlAttr_format    = "format";
-const char* dgmlAttr_name      = "name";
-const char* dgmlAttr_pixmap    = "pixmap";
-const char* dgmlAttr_role      = "role";
-const char* dgmlAttr_spacing   = "spacing";
-const char* dgmlAttr_text      = "text";
-}
+#endif // DGMLVectorTagHandler_h

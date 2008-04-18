@@ -1,5 +1,17 @@
 2008-04-18  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/geodata/handlers/dgml/DGMLSourceFileTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneVector.{cpp,h}:
+    * data/maps/earth/srtm/srtm.dgm2:
+
+    - Adding vector data structure to DGML2, so we can port over 
+      the colors of the vector features.
+
+2008-04-18  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleLegendBrowser.cpp:
     * src/lib/MarbleModel.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
