@@ -9,6 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#define DGML2 0
+
 #include "MarbleModel.h"
 
 #include <cmath>
@@ -219,12 +221,17 @@ QString MarbleModel::mapTheme() const
     return d->m_selectedMap;
 }
 
-
+#if DGML2
+GeoSceneDocument* MarbleModel::mapThemeObject() const
+{
+    return d->m_mapTheme;
+}
+#else
 MapTheme* MarbleModel::mapThemeObject() const
 {
     return d->m_maptheme;
 }
-
+#endif
 
 // Set a particular theme for the map and load the appropriate tile level.
 // If the tiles (for the lowest tile level) haven't been created already
@@ -239,7 +246,7 @@ MapTheme* MarbleModel::mapThemeObject() const
 void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 			       Projection currentProjection )
 {
-#if 0
+#if DGML2
     // Here we start refactoring the map theme
     GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( selectedMap ); // Hardcoded for a start
 
@@ -361,7 +368,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
     d->m_selectedMap = selectedMap;
     emit themeChanged( selectedMap );
     d->notifyModelChanged();
-#endif
+#else
     // old "junk":
 
     // Read the maptheme into d->m_maptheme.
@@ -454,17 +461,26 @@ d->m_maptheme->labelColor() );
     emit themeChanged( selectedMap );
 
     d->notifyModelChanged();
+#endif
 }
 
 
 int MarbleModel::minimumZoom() const
 {
+#if DGML2
+    return d->m_mapTheme->head()->zoom()->minimum();
+#else
     return d->m_maptheme->minimumZoom();
+#endif
 }
 
 int MarbleModel::maximumZoom() const
 {
+#if DGML2
+    return d->m_mapTheme->head()->zoom()->maximum();
+#else
     return d->m_maptheme->maximumZoom();
+#endif
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const

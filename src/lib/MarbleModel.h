@@ -43,6 +43,7 @@ class BoundingBox;
 class ClipPainter;
 class FileViewModel;
 class GeoDataDocument;
+class GeoSceneDocument;
 class GpsLayer;
 class GpxFileModel;
 class HttpDownloadManager;
@@ -138,7 +139,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QString mapTheme() const;
 
+#if DGML2
+    GeoSceneDocument *mapThemeObject() const;
+#else
     MapTheme* mapThemeObject() const;
+#endif
 
     /**
      * @brief Set a new map theme to use.

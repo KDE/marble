@@ -39,6 +39,7 @@ const char* dgmlTag_Enabled = "enabled";
 const char* dgmlTag_Filter = "filter";
 const char* dgmlTag_Geodata = "geodata";
 const char* dgmlTag_Head = "head";
+const char* dgmlTag_Heading = "heading";
 const char* dgmlTag_Icon = "icon";
 const char* dgmlTag_InstallMap = "installmap";
 const char* dgmlTag_Item = "item";

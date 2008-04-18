@@ -1,3 +1,17 @@
+2008-04-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneSection.cpp:
+    * data/maps/earth/srtm/srtm.dgm2:
+
+    - Bare port of LegendBrowser to DGML2
+    - Compile DGMLHeadingHandler, too ...
+    - Getting srtm.dgml2 closer to the real deal.
+
 2008-04-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove unused member

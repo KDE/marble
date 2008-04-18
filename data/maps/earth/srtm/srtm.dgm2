@@ -22,7 +22,7 @@
     
                 <!-- describes whether you can zoom trough the levels
                     continuously -->
-                <discrete> false </discrete> 
+                <discrete> true </discrete> 
             </zoom>
         </head>
         
@@ -40,13 +40,6 @@
                     <sourcedir> earth/srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                 </texture>
-                <!-- If this was the satellite map we could add another
-                    texture tag for the clouds here resulting in a
-                    MergedLayer. Also note that for the tiles you can
-                    suggest a different 
-                    image format than for the original install image
-                    (e.g. "PNG").
-                    -->
             </layer>
             
             <!-- This layer creates the coastlines that are needed to
@@ -100,7 +93,7 @@
                 </vector>
             </layer>
         
-            <layer name="standardplaces" plugin="geodata">
+            <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
                     <pick>placemark</pick> <!-- picks certain features from a
@@ -124,14 +117,6 @@
                     <pick>placemark</pick>
                 </geodata>
             </layer>
-<!--        
-            <layer name="helloworldlayer" plugin="helloworldplugin">
-                <customplugin name="helloworld">
-                    <sourcefile format="JPG">helloworld.jpg</sourcefile>
-                </customplugin>
-            </layer>
--->
-            <!-- Here we could e.g. add an atmosphere or satellite layer -->
         </map>
 
         <settings>
@@ -150,27 +135,71 @@
         <legend>
             <section name="elevation" checkable="false" spacing="12">
                 <heading>Elevation</heading>
-                <!-- Example for a pixmap legend item: -->
-                <item>
-                    <icon pixmap="topography_7000.png"/>
+
+                <item name="topography7000">
+                    <icon color="#c39d55"/>
                     <text>7000 m</text>
                 </item>
-                <!-- Example for a color gradient legend item: -->
-                <item>
+                <item name="topography5000">
                     <icon color="#dcbd80"/>
                     <text>5000 m</text>
                 </item>
-                <!-- Example for a pixmap with a color as a translucent
-                    background: -->
-                <item>
-                    <icon color="#f29b68" pixmap="boundary.png"/>
-                    <text>State Boundary</text>
+                <item name="topography3500">
+                    <icon color="#f0da96"/>
+                    <text>3500 m</text>
                 </item>
-                <!-- Insert further legend items here -->
-            </section>
-            <section name="relief" checkable="true" spacing="12">
-                <checkbox setting="relief"/>
-                <heading>Relief</heading>
+                <item name="topography2000">
+                    <icon color="#f1e7ad"/>
+                    <text>2000 m</text>
+                </item>
+                <item name="topography1000">
+                    <icon color="#d7d399"/>
+                    <text>1000 m</text>
+                </item>
+                <item name="topography500">
+                    <icon color="#bcc48a"/>
+                    <text>500 m</text>
+                </item>
+                <item name="topography200">
+                    <icon color="#98b47a"/>
+                    <text>200 m</text>
+                </item>
+                <item name="topography50">
+                    <icon color="#81a96d"/>
+                    <text>50 m</text>
+                </item>
+                <item name="topography0">
+                    <icon color="#689961"/>
+                    <text>0 m</text>
+                </item>
+                <item name="topography-0">
+                    <icon color="#e3ecf5"/>
+                    <text>0 m (Water)</text>
+                </item>
+                <item name="topography-50">
+                    <icon color="#d0def2"/>
+                    <text>-50 m</text>
+                </item>
+                <item name="topography-200">
+                    <icon color="#bfd5ee"/>
+                    <text>-200 m</text>
+                </item>
+                <item name="topography-2000">
+                    <icon color="#a3c3e6"/>
+                    <text>-2000 m</text>
+                </item>
+                <item name="topography-4000">
+                    <icon color="#89b0da"/>
+                    <text>-4000 m</text>
+                </item>
+                <item name="topography-6500">
+                    <icon color="#6b99c9"/>
+                    <text>-6500 m</text>
+                </item>
+                <item name="topography-11000">
+                    <icon color="#5182b4"/>
+                    <text>-11000 m</text>
+                </item>
             </section>
         </legend>
     </document>

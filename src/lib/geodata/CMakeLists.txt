@@ -52,6 +52,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLDocumentTagHandler.cpp
         geodata/handlers/dgml/DGMLEnabledTagHandler.cpp
         geodata/handlers/dgml/DGMLHeadTagHandler.cpp
+        geodata/handlers/dgml/DGMLHeadingTagHandler.cpp
         geodata/handlers/dgml/DGMLIconTagHandler.cpp
         geodata/handlers/dgml/DGMLInstallMapTagHandler.cpp
         geodata/handlers/dgml/DGMLItemTagHandler.cpp
