@@ -18,7 +18,6 @@ class TCCoreApplication : public QCoreApplication
 {
     public:
         TCCoreApplication( int argc, char ** argv );
-        ~TCCoreApplication();
         
     private:
         TileCreator *m_tilecreator;

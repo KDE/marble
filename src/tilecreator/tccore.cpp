@@ -21,10 +21,3 @@ TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplicatio
         qDebug() << "test";
     }
 }
-
-TCCoreApplication::~TCCoreApplication()
-{
-//    if(m_tilecreator != 0) delete m_tilecreator;
-}
-
-//#include "tccore.moc"
