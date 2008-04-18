@@ -25,8 +25,9 @@
 GeoSceneVector::GeoSceneVector( const QString& name )
     : GeoSceneAbstractDataset( name ),
       m_sourceFile( "" ),
-      m_color( "" ),
-      m_feature( "" )
+      m_feature( "" ),
+      m_pen( QPen() ),
+      m_brush( QBrush() )
 {
     /* NOOP */
 }
@@ -56,14 +57,24 @@ void GeoSceneVector::setFeature( const QString& feature )
     m_feature = feature;
 }
 
-QString GeoSceneVector::color() const
+QPen GeoSceneVector::pen() const
 {
-    return m_color;
+    return m_pen;
 }
 
-void GeoSceneVector::setColor( const QString& color )
+void GeoSceneVector::setPen( const QPen& pen )
 {
-    m_color = color;
+    m_pen = pen;
+}
+
+QBrush GeoSceneVector::brush() const
+{
+    return m_brush;
+}
+
+void GeoSceneVector::setBrush( const QBrush& brush )
+{
+    m_brush = brush;
 }
 
 QString GeoSceneVector::type()

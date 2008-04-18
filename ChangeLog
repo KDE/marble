@@ -1,5 +1,21 @@
 2008-04-18  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleModel.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLPenTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLBrushTagHandler.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneVector{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneLayer{cpp,h}:
+    * data/maps/earth/srtm/srtm.dgm2:
+
+    - Adding Pen and Brush tag to vector tag. 
+    - Emulating old behaviour concerning colors with new DGML2 stuff.
+
+2008-04-18  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/geodata/handlers/dgml/DGMLSourceFileTagHandler.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:

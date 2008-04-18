@@ -103,7 +103,7 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
     }
 
 //    dataset = new GeoSceneAbstractDataset( name );
-    addDataset( dataset );
+//    addDataset( dataset );
 
     return dataset;
 }

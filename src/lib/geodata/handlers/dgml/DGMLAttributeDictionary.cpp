@@ -39,5 +39,7 @@ const char* dgmlAttr_name      = "name";
 const char* dgmlAttr_pixmap    = "pixmap";
 const char* dgmlAttr_role      = "role";
 const char* dgmlAttr_spacing   = "spacing";
+const char* dgmlAttr_style     = "style";
 const char* dgmlAttr_text      = "text";
+const char* dgmlAttr_width     = "width";
 }

@@ -22,7 +22,9 @@
 #ifndef GEOSCENEVECTOR_H
 #define GEOSCENEVECTOR_H
 
-#include <QtCore/QVector>
+#include <QtCore/QString>
+#include <QtGui/QPen>
+#include <QtGui/QBrush>
 
 #include "GeoSceneLayer.h"
 
@@ -41,15 +43,20 @@ class GeoSceneVector : public GeoSceneAbstractDataset {
     QString feature() const;
     void setFeature( const QString& feature );
 
-    QString color() const;
-    void setColor(const QString&);
+    QPen pen() const;
+    void setPen( const QPen& pen );
+
+    QBrush brush() const;
+    void setBrush( const QBrush& brush );
 
     virtual QString type();
 
  protected:
     QString m_sourceFile;
     QString m_feature;
-    QString m_color;
+
+    QPen    m_pen;
+    QBrush  m_brush;
 };
 
 #endif // GEOSCENEVECTOR_H

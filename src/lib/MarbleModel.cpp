@@ -352,18 +352,34 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 
     // Set all the colors for the vector layers
     if ( d->m_mapTheme->map()->hasVectorLayers() ) {
-        GeoSceneVector *vector = 
-            static_cast<GeoSceneVector*>( d->m_mapTheme->map()->layer( "mwdbii" )->datasets().first() );
-
-
         d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
-/*
-        d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
-        d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
-        d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
-        d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
-        d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
-*/
+
+        // Just as with textures this is a workaround for DGML2 to emulate the old behaviour
+
+        GeoSceneLayer *layer = d->m_mapTheme->map()->layer( "mwdbii" );
+        if ( layer ) {
+            GeoSceneVector *vector = 0;
+
+            vector = static_cast<GeoSceneVector*>( layer->dataset("pdiffborder") );
+            if ( vector )
+                d->m_veccomposer->setCountryBorderColor( vector->pen().color() );
+
+            vector = static_cast<GeoSceneVector*>( layer->dataset("rivers") );
+            if ( vector )
+                d->m_veccomposer->setRiverColor( vector->pen().color() );
+
+            vector = static_cast<GeoSceneVector*>( layer->dataset("pusa48") );
+            if ( vector )
+                d->m_veccomposer->setStateBorderColor( vector->pen().color() );
+
+            vector = static_cast<GeoSceneVector*>( layer->dataset("plake") );
+            if ( vector )
+                d->m_veccomposer->setLakeColor( vector->pen().color() );
+
+            vector = static_cast<GeoSceneVector*>( layer->dataset("pcoast") );
+            if ( vector )
+                d->m_veccomposer->setLandColor( vector->brush().color() );
+        }
     }
 
     if ( d->m_placeMarkLayout == 0)
@@ -527,6 +543,60 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 {
     d->resize( width, height );
 
+#if DGML2
+    // FIXME: Remove this once the LMC is there:
+    QString themeID = d->m_mapTheme->head()->theme();
+
+    GeoSceneLayer *layer = 
+        static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
+
+    if ( redrawBackground ) {
+
+        if ( d->m_mapTheme->map()->hasTextureLayers() ) {
+
+            d->m_texmapper->mapTexture( viewParams );
+
+            if ( !viewParams->m_showElevationModel
+                && layer->role() == "dem" )
+            {
+                viewParams->m_coastImage->fill( Qt::transparent );
+
+                // Create VectorMap
+                d->m_veccomposer->drawTextureMap( viewParams );
+
+                // Recolorize the heightmap using the VectorMap
+                d->m_texcolorizer->colorize( viewParams );
+            }
+        }
+    }
+    // Paint the map on the Widget
+//    QTime t;
+//    t.start();
+    int radius = (int)(1.05 * (double)(viewParams->radius()));
+
+    if ( d->m_mapTheme->map()->hasTextureLayers() ) {
+        if ( viewParams->projection() == Spherical ) {
+            QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
+            rect = rect.intersect( dirtyRect );
+            painter->drawImage( rect, *viewParams->m_canvasImage, rect );
+        }
+        else {
+            painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+        }
+    }
+
+//    qDebug( "Painted in %ims", t.elapsed() );
+
+    // Paint the vector layer.
+    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
+
+        if ( !d->m_mapTheme->map()->hasTextureLayers() ) {
+            d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
+        }
+        // Add further Vectors
+        d->m_veccomposer->paintVectorMap( painter, viewParams );
+    }
+#else
     if ( redrawBackground ) {
 
         if ( d->m_maptheme->bitmaplayer().enabled == true ) {
@@ -573,7 +643,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         // Add further Vectors
         d->m_veccomposer->paintVectorMap( painter, viewParams );
     }
-
+#endif
     // Paint the lon/lat grid around the earth.
     if ( viewParams->m_showGrid ) {
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );

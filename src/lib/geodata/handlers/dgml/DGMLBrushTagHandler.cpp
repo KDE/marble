@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
 
     This file is part of the KDE project
 
@@ -19,54 +19,51 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DGMLVectorTagHandler.h"
+#include "DGMLBrushTagHandler.h"
 
-#include <QDebug>
+#include <QtGui/QBrush>
+#include <QtGui/QColor>
+#include <QtCore/QString>
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"
-#include "DGMLAuxillaryDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneLayer.h"
 #include "GeoSceneVector.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
-using namespace GeoSceneAuxillaryDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Vector)
+DGML_DEFINE_TAG_HANDLER(Brush)
 
-DGMLVectorTagHandler::DGMLVectorTagHandler()
+DGMLBrushTagHandler::DGMLBrushTagHandler()
     : GeoTagHandler()
 {
 }
 
-DGMLVectorTagHandler::~DGMLVectorTagHandler()
+DGMLBrushTagHandler::~DGMLBrushTagHandler()
 {
 }
 
-GeoNode* DGMLVectorTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLBrushTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Vector));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Brush));
 
-    QString name      = parser.attribute(dgmlAttr_name).trimmed();
-    QString feature   = parser.attribute(dgmlAttr_feature).trimmed();
+    QString color = parser.attribute(dgmlAttr_color).trimmed();
 
     GeoSceneVector *vector = 0;
+    QBrush brush;
+
+    if ( !color.isEmpty() && QColor( color ).isValid() ) {
+        brush.setColor( QColor( color ) ); 
+    }
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
-
-    // Check parent type and make sure that the dataSet type 
-    // matches the backend of the parent layer
-    if ( parentItem.represents(dgmlTag_Layer)
-        && parentItem.nodeAs<GeoSceneLayer>()->backend() == dgmlValue_vector ) {
-
-        vector = new GeoSceneVector( name );
-        vector->setFeature( feature );
-        parentItem.nodeAs<GeoSceneLayer>()->addDataset( vector );
+    if (parentItem.represents(dgmlTag_Vector)) {
+        vector = parentItem.nodeAs<GeoSceneVector>();
+        vector->setBrush( brush );
     }
 
-    return vector;
+    return 0;
 }

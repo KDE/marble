@@ -42,7 +42,9 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_pixmap;
     extern const char* dgmlAttr_role;
     extern const char* dgmlAttr_spacing;
+    extern const char* dgmlAttr_style;
     extern const char* dgmlAttr_text;
+    extern const char* dgmlAttr_width;
 }
 
 #endif // DGMLAttributeDictionary_h

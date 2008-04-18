@@ -48,6 +48,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLAuxillaryDictionary.cpp
         geodata/handlers/dgml/DGMLElementDictionary.cpp
         geodata/handlers/dgml/DGMLAvailableTagHandler.cpp
+        geodata/handlers/dgml/DGMLBrushTagHandler.cpp
         geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp
         geodata/handlers/dgml/DGMLDiscreteTagHandler.cpp
         geodata/handlers/dgml/DGMLDocumentTagHandler.cpp
@@ -63,6 +64,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLMaximumTagHandler.cpp
         geodata/handlers/dgml/DGMLMinimumTagHandler.cpp
         geodata/handlers/dgml/DGMLNameTagHandler.cpp
+        geodata/handlers/dgml/DGMLPenTagHandler.cpp
         geodata/handlers/dgml/DGMLPropertyTagHandler.cpp
         geodata/handlers/dgml/DGMLSettingsTagHandler.cpp
         geodata/handlers/dgml/DGMLSectionTagHandler.cpp
