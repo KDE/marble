@@ -77,19 +77,20 @@
             <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pdiffborder" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <color>#f29b68</color>
+                    <pen color="#f29b68" />
                 </vector>
                 <vector name="pusa48.diff" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <color>#f29b68</color>
+                    <pen color="#f29b68" />
+                    <brush color="#f29b68" />
                 </vector>
                 <vector name="international dateline" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
-                    <color>#000000</color>
+                    <pen color="#000000" />
                 </vector>
                 <vector name="pusa48" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <color>#637bff</color>
+                    <pen color="#637bff" />
                 </vector>
             </layer>
         

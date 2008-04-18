@@ -26,6 +26,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneTexture.h"
+#include "GeoSceneVector.h"
 
 #include "AbstractScanlineTextureMapper.h"
 #include "ClipPainter.h"
@@ -348,15 +349,23 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
     else {
         d->m_tileLoader->flush();
     }
-/*
+
     // Set all the colors for the vector layers
-    d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );
-    d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
-    d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
-    d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
-    d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
-    d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
+    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
+        GeoSceneVector *vector = 
+            static_cast<GeoSceneVector*>( d->m_mapTheme->map()->layer( "mwdbii" )->datasets().first() );
+
+
+        d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
+/*
+        d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
+        d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
+        d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
+        d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
+        d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
 */
+    }
+
     if ( d->m_placeMarkLayout == 0)
         d->m_placeMarkLayout = new PlaceMarkLayout( this );
     d->m_placeMarkLayout->requestStyleReset();
