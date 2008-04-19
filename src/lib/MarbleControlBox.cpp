@@ -20,13 +20,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#define DGML2 0
+
 #include "MarbleControlBox.h"
 
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QStringListModel>
+#include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
 
 #include "ui_MarbleControlBox.h"
@@ -57,7 +59,7 @@ class MarbleControlBoxPrivate
     QWidget              *m_currentLocationWidget;
     QWidget              *m_fileViewWidget;
 
-    QStandardItemModel     *m_mapthememodel;
+    QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
 };
 
@@ -135,8 +137,11 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
              this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
-    d->m_mapthememodel = 0;
+    d->m_mapThemeModel = 0;
+
+#if !DGML2
     updateMapThemes();
+#endif
 
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
@@ -153,7 +158,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
 MarbleControlBox::~MarbleControlBox()
 {
-    delete d->m_mapthememodel;
+    delete d->m_mapThemeModel;
     delete d;
 }
 
@@ -161,9 +166,15 @@ MarbleControlBox::~MarbleControlBox()
 void MarbleControlBox::updateMapThemes()
 {
     QStringList  mapthemedirs = MapTheme::findMapThemes( "maps" );
-    d->m_mapthememodel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapthememodel );
+    d->m_mapThemeModel = MapTheme::mapThemeModel( mapthemedirs );
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
 }
+
+void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
+    d->m_mapThemeModel = mapThemeModel;
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
+}
+
 
 void MarbleControlBox::updateButtons( int value )
 {
@@ -516,16 +527,19 @@ void MarbleControlBox::search()
 
 void MarbleControlBox::selectTheme( const QString &theme )
 {
-    for ( int row = 0; row < d->m_mapthememodel->rowCount(); ++row ) {
-        QModelIndex itIndexName = d->m_mapthememodel->index( row, 1, QModelIndex() );
-        QModelIndex itIndex     = d->m_mapthememodel->index( row, 0, QModelIndex() );
-        // qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapthememodel->data( itIndexName ).toString();
+    if ( !d->m_mapThemeModel )
+        return;
+
+    for ( int row = 0; row < d->m_mapThemeModel->rowCount(); ++row ) {
+        QModelIndex itIndexName = d->m_mapThemeModel->index( row, 1, QModelIndex() );
+        QModelIndex itIndex     = d->m_mapThemeModel->index( row, 0, QModelIndex() );
+        // qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapThemeModel->data( itIndexName ).toString();
 
         // If  we have found the theme in the theme model,
         //     and it is not the one that we already have,
         // then
         //     set the new one in the ui.
-        if ( theme == d->m_mapthememodel->data( itIndexName ).toString()
+        if ( theme == d->m_mapThemeModel->data( itIndexName ).toString()
              && itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
             // Mark the correct picture for the selected map theme and
             // also make sure it's shown.

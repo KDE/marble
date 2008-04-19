@@ -38,6 +38,7 @@
 
 class MarbleWidget;
 class MarbleControlBoxPrivate;
+class QStandardItemModel;
 
 /** 
  * @short A widget class that contains advanced controls for a
@@ -115,6 +116,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * theme, e.g. after he/she used GHNS.
      */
     void updateMapThemes();
+
+    void setMapThemeModel( QStandardItemModel *model );
 	
  Q_SIGNALS:
     /**

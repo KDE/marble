@@ -36,7 +36,9 @@ MapThemeManager::MapThemeManager(QObject *parent)
     updateMapThemeModel();
 
 /*
-    qDebug() << "MapThemeManager lives!";
+//  Should we put this into 
+//  static QString MapThemeManager::suggestTheme( QString themeSuggestedBySettings ); 
+//  ??
 
     QStringList  mapthemedirs = findMapThemes( "maps/" );
     QString      selectedmap;
@@ -63,6 +65,7 @@ MapThemeManager::MapThemeManager(QObject *parent)
 
 MapThemeManager::~MapThemeManager()
 {
+    delete m_mapThemeModel;
 }
 
 GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
@@ -214,9 +217,6 @@ QStandardItemModel* MapThemeManager::mapThemeModel()
 
 void MapThemeManager::updateMapThemeModel()
 {
-//    QModelIndex  parent;
-//    m_mapThemeModel->insertColumns(0, 3, parent);
-
     QStringList stringlist = findMapThemes( "maps/" );
     QStringListIterator  it(stringlist);
 
@@ -237,112 +237,43 @@ void MapThemeManager::updateMapThemeModel()
             continue;
         }
 
+        QPixmap themeIconPixmap;
+        QString relativePath;
+
+        relativePath = "maps/" 
+                     + mapTheme->head()->target() + "/" + mapTheme->head()->theme() + "/" 
+                     + mapTheme->head()->icon()->pixmap();
+        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+
+        if ( themeIconPixmap.isNull() ) {
+            relativePath = "svg/application-x-marble-gray.png"; 
+            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+        }
+        else {
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
+                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
+        } 
+
+        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+
+        QString name = mapTheme->head()->name();
+        QString description = mapTheme->head()->description();
+
         QList<QStandardItem *> itemList;
-        itemList << new QStandardItem( mapTheme->head()->name() );
-        itemList << new QStandardItem( mapTheme->head()->description() );
-        itemList << new QStandardItem( mapTheme->head()->description() );
+        QStandardItem *item = new QStandardItem( name );
+        item->setData( name, Qt::DisplayRole );
+        item->setData( mapThemeIcon, Qt::DecorationRole );
+        item->setData( QString( "<span style=\" max-width: 150 px;\"> " 
+                       + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
+
+        itemList << item;
+        itemList << new QStandardItem( description );
+        itemList << new QStandardItem( mapTheme->head()->target() + "/" 
+                                       + mapTheme->head()->theme() );
 
         m_mapThemeModel->appendRow(itemList);
-/*
-//        maptheme->open( MarbleDirs::path( "maps/" + currentmaptheme ) );
-
-        m_mapThemeModel->insertRows( row, 1, QModelIndex() );
-//        m_mapThemeModel->setData( m_mapThemeModel->index( row, 0, QModelIndex() ),
-//                                tr( maptheme->name().toUtf8() ), 
-//                                Qt::DisplayRole );
-
-        QPixmap themeIconPixmap;
-        QString relativePath;
-
-//        relativePath = "maps/" +  maptheme->prefix() + '/' + maptheme->icon();
-        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
-
-        if ( themeIconPixmap.isNull() ) {
-            relativePath = "svg/application-x-marble-gray.png"; 
-            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
-        }
-        else {
-            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
-        } 
-
-        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
-
-        m_mapThemeModel->setData( m_mapThemeModel->index( row, 0, QModelIndex() ), mapThemeIcon, 
-                                Qt::DecorationRole );
-//        m_mapThemeModel->setData( m_mapThemeModel->index( row, 0, QModelIndex() ),
-//                                QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
-//                                Qt::ToolTipRole);
-        m_mapThemeModel->setData( m_mapThemeModel->index( row, 1, QModelIndex() ),
-                                currentmaptheme );
-*/
     }
 }
-
-/*
-QStandardItemModel* MapTheme::mapThemeModel( const QStringList& stringlist )
-{
-
-    QStandardItemModel  *mapthememodel = new QStandardItemModel();
-
-    QModelIndex  parent;
-    mapthememodel->insertColumns(0, 3, parent);
-
-    mapthememodel->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    mapthememodel->setHeaderData(1, Qt::Horizontal, tr("Description"));
-    mapthememodel->setHeaderData(2, Qt::Horizontal, tr("Path"));
-
-    QStringListIterator  it(stringlist);
-    MapTheme            *maptheme = new MapTheme();
-
-    // Make sure we don't keep excessively large previews in memory
-    // TODO: Scale the icon down to the default icon size in katlasselectview.
-    //       For now maxIconSize already equals what's expected by the listview.
-    QSize maxIconSize( 136,136 ); 
-
-    int  row = 0;
-    while ( it.hasNext() ) {
-        QString currentmaptheme = it.next();
-
-        maptheme->open( MarbleDirs::path( "maps/" + currentmaptheme ) );
-
-        mapthememodel->insertRows( row, 1, QModelIndex() );
-        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                tr( maptheme->name().toUtf8() ), 
-                                Qt::DisplayRole );
-
-        QPixmap themeIconPixmap;
-        QString relativePath;
-
-        relativePath = "maps/" +  maptheme->prefix() + '/' +
-maptheme->icon();
-        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
-
-        if ( themeIconPixmap.isNull() ) {
-            relativePath = "svg/application-x-marble-gray.png"; 
-            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
-        }
-        else {
-            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
-        } 
-
-        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
-
-        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ), mapThemeIcon, 
-                                Qt::DecorationRole );
-        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
-                                QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toUtf8() ) + " </span>"), 
-                                Qt::ToolTipRole);
-        mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
-                                currentmaptheme );
-    }
-
-    delete maptheme;
-
-    return mapthememodel;
-}
-*/
 
 
 #include "MapThemeManager.moc"

@@ -9,6 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#define DGML2 0
+
 #include "ControlView.h"
 
 #include <QtGui/QLayout>
@@ -48,6 +50,9 @@ ControlView::ControlView( QWidget *parent )
     m_control->addMarbleWidget( m_marbleWidget );
 
     m_mapThemeManager = new MapThemeManager;
+#if DGML2
+    m_control->setMapThemeModel( m_mapThemeManager->mapThemeModel() );
+#endif
 }
 
 ControlView::~ControlView()

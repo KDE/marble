@@ -1,3 +1,19 @@
+2008-04-19  Torsten Rahn  <rahn@kde.org>
+
+    Now everything has been ported to emulate the old
+    behaviour. Only the dgml-maps are missing.
+    For the full port to DGML we need to add the 
+    Layermanagement class now ...
+
+    Switch the four DGML2 defines to 1 to see the
+    (not that visible) difference.
+
+    * src/ControlView.cpp:
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MarbleControlBox.{cpp,h}:
+
+    - Make the MarbleControlBox work with DGML2
+
 2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
 
     * AbstractScanlineTextureMapper.cpp  
