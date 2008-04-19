@@ -1,3 +1,11 @@
+2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/TileLoaderHelper.h
+    * src/lib/TileLoaderHelper.cpp
+    
+    Move some tile independent functions out of TileLoader so they 
+    can be used from TileLoader and TileCreator
+    
 2008-04-19  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MarbleModel.cpp: cleaning
