@@ -1,5 +1,21 @@
 2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * AbstractScanlineTextureMapper.cpp  
+    * CMakeLists.txt  
+    * MergedLayerDecorator.cpp  
+    * TextureTile.cpp  
+    * TextureTile.h  
+    * TileCreator.cpp  
+    * TileLoader.cpp  
+    * TileLoader.h  
+    * TileLoaderHelper.cpp  
+    * global.h  
+
+    - use TileLoaderHelper helper functions now 
+    - move the TileDigits constant to global.h
+
+2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/TileLoaderHelper.h
     * src/lib/TileLoaderHelper.cpp
     
