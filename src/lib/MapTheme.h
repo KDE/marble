@@ -125,8 +125,6 @@ public:
     DgmlLayer bitmaplayer() const { return m_bitmaplayer; }
     DgmlLayer vectorlayer() const { return m_vectorlayer; }
 
-    int maxTileLevel()      const { return m_maxtilelevel;}
-
     static QStringList findMapThemes( const QString& );
     static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
 
@@ -159,7 +157,6 @@ private:
     QString    m_installmap;
     DgmlLayer  m_vectorlayer;
     DgmlLayer  m_bitmaplayer;
-    int        m_maxtilelevel;
 };
 
 

@@ -41,7 +41,6 @@ GeoSceneSection::~GeoSceneSection()
 
 void GeoSceneSection::addItem( GeoSceneItem* item )
 {
-    qDebug() << "Adding Item" << m_items.count();
     // Remove any item that has the same name
     QVector<GeoSceneItem*>::iterator it = m_items.begin();
     while (it != m_items.end()) {
@@ -56,9 +55,7 @@ void GeoSceneSection::addItem( GeoSceneItem* item )
      }
 
     if ( item ) {
-        qDebug() << "appending" << m_items.count();
         m_items.append( item );
-        qDebug() << "appended" << m_items.count();
     }
 }
 

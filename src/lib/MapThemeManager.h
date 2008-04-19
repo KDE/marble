@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
@@ -19,6 +19,7 @@
 #include "marble_export.h"
 
 class GeoSceneDocument;
+class QStandardItemModel;
 
 
 /**
@@ -43,9 +44,17 @@ class MapThemeManager : public QObject
 {
     Q_OBJECT
 
-public:
+ public:
     MapThemeManager(QObject *parent = 0);
     ~MapThemeManager();
+
+    /**
+     * @brief Provides a model of the locally existing themes. 
+     *
+     * This method provides a QStandardItemModel of all themes  
+     * that are available via MarbleDirs.
+     */
+    QStandardItemModel* mapThemeModel();
 
     /**
      * @brief Returns the map theme as a GeoSceneDocument object
@@ -56,12 +65,20 @@ public:
      */
     
     static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
-/*
-    int maxTileLevel()      const { return m_maxtilelevel;}
 
+ public Q_SLOTS:
+    /**
+     * @brief Updates the map theme model on request. 
+     *
+     * This method should usually get invoked on startup or 
+     * by a QFileSystemWatcher instance.
+     */
+    void updateMapThemeModel();
+
+ private:
     static QStringList findMapThemes( const QString& );
-    static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
-*/
+
+    QStandardItemModel* m_mapThemeModel;
 };
 
 
