@@ -1,3 +1,10 @@
+2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/tilecreator/main.cpp
+    * src/tilecreator/CMakeLists.txt
+    
+    - add a first layout how to run the tilecreator in cmake
+
 2008-04-19  Torsten Rahn  <rahn@kde.org>
 
     Now everything has been ported to emulate the old
