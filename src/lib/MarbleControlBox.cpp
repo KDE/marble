@@ -158,7 +158,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
 MarbleControlBox::~MarbleControlBox()
 {
+#if !DGML2
     delete d->m_mapThemeModel;
+#endif
     delete d;
 }
 

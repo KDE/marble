@@ -8,6 +8,7 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
+
 // Own
 #include "MapThemeManager.h"
 
@@ -34,7 +35,6 @@ MapThemeManager::MapThemeManager(QObject *parent)
     m_mapThemeModel->setHeaderData(2, Qt::Horizontal, tr("Path"));
 
     updateMapThemeModel();
-
 /*
 //  Should we put this into 
 //  static QString MapThemeManager::suggestTheme( QString themeSuggestedBySettings ); 
@@ -272,6 +272,8 @@ void MapThemeManager::updateMapThemeModel()
                                        + mapTheme->head()->theme() );
 
         m_mapThemeModel->appendRow(itemList);
+
+        delete mapTheme;
     }
 }
 
