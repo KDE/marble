@@ -1,3 +1,8 @@
+2008-04-19  Inge Wallin  <inge@lysator.liu.se>
+
+	* src/lib/MarbleModel.cpp: cleaning
+	(destructor): delete m_mapTheme
+
 2008-04-19  Torsten Rahn  <rahn@kde.org>
 
     * lib/MarbleWidget.cpp:

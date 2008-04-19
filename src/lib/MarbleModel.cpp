@@ -65,8 +65,8 @@ class MarbleModelPrivate
     }
 
     void  resize( int width, int height );
-    void notifyModelChanged();
-    void geoDataDocumentLoaded( GeoDataDocument& document );
+    void  notifyModelChanged();
+    void  geoDataDocumentLoaded( GeoDataDocument& document );
 
     MarbleModel         *m_parent;
 
@@ -206,6 +206,7 @@ MarbleModel::~MarbleModel()
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
     delete d->m_maptheme;
+    delete d->m_mapTheme;
     delete d;
 }
 
@@ -408,13 +409,13 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 #else
     // old "junk":
 
-    // Read the maptheme into d->m_maptheme.
+    // Read the new maptheme into the old d->m_maptheme.
     QString mapPath = QString("maps/%1").arg( selectedMap );
     //qDebug( "Setting map theme to : %s",
     //	    qPrintable( MarbleDirs::path( mapPath ) ) );
 
-    int error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
-    if ( error < 0 ){
+    int  error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
+    if ( error < 0 ) {
         if ( d->m_previousMapLoadedFine )
             return;
         else { 
@@ -444,7 +445,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
                                      d->m_maptheme->bitmaplayer().dem );
 	    // FIXME
             //TileCreatorDialog tileCreatorDlg( tileCreator, parent );
-	    TileCreatorDialog tileCreatorDlg( tileCreator, 0 );
+	    TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
             tileCreatorDlg.setSummary( d->m_maptheme->name(),
                                        d->m_maptheme->description() );
             tileCreatorDlg.exec();
@@ -634,7 +635,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     if ( d->m_maptheme->bitmaplayer().enabled == true ) {
         if ( viewParams->projection() == Spherical ) {
-            QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
+            QRect rect( width / 2 - radius , height / 2 - radius,
+                        2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
             painter->drawImage( rect, *viewParams->m_canvasImage, rect );
         }
@@ -643,7 +645,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         }
     }
 
-//    qDebug( "Painted in %ims", t.elapsed() );
+    // qDebug( "Painted in %ims", t.elapsed() );
 
     // Paint the vector layer.
     if ( d->m_maptheme->vectorlayer().enabled ) {
