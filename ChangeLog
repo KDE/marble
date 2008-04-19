@@ -1,15 +1,11 @@
 2008-04-19  Torsten Rahn  <rahn@kde.org>
 
     * lib/MarbleWidget.cpp:
-    * lib/MergedLayerDecorator.h:
     * lib/AbstractScanlineTextureMapper.h:
-    * lib/TileLoader.h:
     * lib/MergedLayerDecorator{cpp,h}:
     * lib/TextureTile.h:
     * lib/TileLoader{cpp,h}:
-    * lib/MarbleModel.h:
     * lib/MarbleModel{cpp,h}:
-    * lib/MergedLayerPainter.h:
     * lib/CMakeLists.txt:
     * lib/MergedLayerPainter{cpp,h}:
 
