@@ -76,57 +76,115 @@ TextureTile::~TextureTile()
 	delete [] jumpTable8;
 	break;
     default:
-	qDebug("Color m_depth of a tile could not be retrieved. Exiting.");
-	exit(-1);
+	qDebug() << "Color m_depth(" << m_depth << ") of a tile could not be retrieved. Exiting.";
+//	exit(-1);
     }
 
 //    qDebug() << "Tile deleted: " << m_id;
 //    delete m_rawtile;
 }
 
-void TextureTile::loadTile( int x, int y, int level, 
-			    const QString& theme, bool requestTileUpdate, 
-                            SunLocator* sunLocator )
+void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
+{
+//   qDebug() << "TextureTile::loadRawTile";
+  
+  m_used = true; // Needed to avoid frequent deletion of tiles
+  
+    // qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
+    // m_used = true; // Needed to avoid frequent deletion of tiles
+
+  QString  absfilename;
+
+  // qDebug() << "Requested tile level" << level;
+
+  // If the tile level offers the requested tile then load it.
+  // Otherwise cycle from the requested tilelevel down to one where
+  // the requested area is covered.  Then scale the area to create a
+  // replacement for the tile that has been requested.
+
+  for ( int i = level; i > -1; --i ) {
+
+      double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
+      double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
+      double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
+      double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
+
+      QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
+          .arg(theme).arg(i)
+          .arg( (int)(testy1), tileDigits, 10, QChar('0') )
+          .arg( (int)(testx1), tileDigits, 10, QChar('0') );
+
+      absfilename = MarbleDirs::path( relfilename );
+
+      if ( QFile::exists( absfilename ) ) {
+          // qDebug() << "The image filename does exist: " << absfilename ;
+
+          QImage temptile( absfilename );
+
+          if ( !temptile.isNull() ) {
+              //         qDebug() << "Image has been successfully loaded.";
+
+              if ( level != i ) { 
+                  // qDebug() << "About to start cropping an existing image.";
+                  QSize tilesize = temptile.size();
+                  double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
+                  double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
+                  double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
+                  double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
+
+                  QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
+                                  (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
+                  QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
+                                      (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
+
+                  // This should not create any memory leaks as
+                  // 'copy' and 'scaled' return a value (on the
+                  // stack) which gets deep copied always into the
+                  // same place for m_rawtile on the heap:
+                  temptile = temptile.copy( QRect( topleft, bottomright ) );
+                  temptile = temptile.scaled( tilesize ); // TODO: use correct size
+                  //          qDebug() << "Finished scaling up the Temporary Tile.";
+              }
+
+              m_rawtile = temptile;
+
+              break;
+          } // !tempfile.isNull()
+          //      else {
+          //         qDebug() << "Image load failed for: " + 
+          //           absfilename.toLocal8Bit();
+          //      }
+      }
+      else {
+          //      qDebug() << "emit downloadTile(" << relfilename << ");";
+          emit downloadTile( relfilename, QString::number( m_id ) );
+      }
+  }
+  
+//   qDebug() << "TextureTile::loadRawTile end";
+
+  m_depth = m_rawtile.depth();
+  
+//   qDebug() << "m_depth =" << m_depth;
+}
+
+void TextureTile::loadTile( bool requestTileUpdate )
 {
   //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-  m_used = true; // Needed to avoid frequent deletion of tiles
-
-  m_painter.setInfo(x, y, level, m_id);
-
-  m_painter.setTile(&m_rawtile);
-  m_painter.paint(theme);
 
   if ( m_rawtile.isNull() ) {
     qDebug() << "An essential tile is missing. Please rerun the application.";
     exit(-1);
   }
 
-  m_worktile = m_rawtile;
-  m_depth = m_worktile.depth();
-  m_painter.setTile(&m_worktile);
-
-  // TODO be able to set this somewhere
-  bool  cloudlayer = true; 
-  if ( cloudlayer && m_depth == 32 && level < 2 )
-      m_painter.paintClouds();
-
-  if ( sunLocator != 0 && sunLocator->getShow() )
-      m_painter.paintSunShading(sunLocator);
-
-  // FIXME: This should get accessible from MarbleWidget, so we can pass over 
-  //        a testing command line option
-  bool tileIdVisible = false;
-  if ( tileIdVisible )
-      m_painter.paintTileId(theme);
-
   switch ( m_depth ) {
       case 32:
           if ( jumpTable32 ) delete [] jumpTable32;
-          jumpTable32 = jumpTableFromQImage32( m_worktile );
+          jumpTable32 = jumpTableFromQImage32( m_rawtile );
           break;
       case 8:
           if ( jumpTable8 ) delete [] jumpTable8;
-          jumpTable8 = jumpTableFromQImage8( m_worktile );
+          jumpTable8 = jumpTableFromQImage8( m_rawtile );
           break;
       default:
           qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
@@ -137,15 +195,6 @@ void TextureTile::loadTile( int x, int y, int level,
     // qDebug() << "TileUpdate available";
     emit tileUpdateDone();
   }
-}
-
-void TextureTile::reloadTile( int x, int y, int level, 
-                              const QString& theme, SunLocator* sunLocator )
-{
-    // qDebug() << "slotLoadTile variables: |" << theme << "|" 
-    // << level << "|" << x << "|" << y;
-
-    loadTile( x, y, level, theme, true, sunLocator );
 }
 
 #include "TextureTile.moc"

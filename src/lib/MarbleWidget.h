@@ -441,6 +441,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void centerSun();
     void enableInput();
     void disableInput();
+    void repaintMap();
     
     /**
      * @brief  Zoom the view to a certain zoomlevel

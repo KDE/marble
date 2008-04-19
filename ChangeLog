@@ -1,5 +1,24 @@
 2008-04-19  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/SunLocator.cpp:
+    * src/lib/TileLoader.h:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/TextureTile.{cpp,h}:
+    * src/lib/TileLoader.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/MergedLayerPainter.{cpp,h}:
+
+    Patch by David Roberts:
+
+    - Patch to move the Merged Layer Painter into the TextureMapper class.
+    - Removes all those strange occurances of SunLocator, etc. from 
+      TileLoader and TextureTile.
+    - Makes it possible to switch clouds and Tile IDs on and off later on ...
+
+2008-04-19  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MapThemeManager.{cpp,h}:
     * src/lib/MapTheme.h:
     * src/lib/geodata/scene/GeoSceneSection.cpp:

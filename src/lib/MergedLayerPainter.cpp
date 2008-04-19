@@ -24,7 +24,10 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
-MergedLayerPainter::MergedLayerPainter()
+MergedLayerPainter::MergedLayerPainter(SunLocator* sunLocator)
+ : m_sunLocator(sunLocator),
+   m_cloudlayer(false),
+   m_showTileId(false)
 {
 }
 
@@ -34,7 +37,26 @@ MergedLayerPainter::~MergedLayerPainter()
 
 void MergedLayerPainter::paint(const QString& theme)
 {
-    *m_tile = loadRawTile( theme );
+    if ( m_sunLocator->getShow() )
+      paintSunShading();
+    if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 )
+      paintClouds();
+    if ( m_showTileId )
+      paintTileId( theme );
+    qDebug() << "MergedLayerPainter::paint: emit repaintMap";
+//     emit repaintMap();
+}
+
+QImage MergedLayerPainter::loadRawTile(const QString& theme)
+{
+    // TODO use a TileLoader rather than directly accessing TextureTile?
+    TextureTile tile(m_id);
+    
+    connect( &tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
+             this, SIGNAL( downloadTile( const QString&, const QString& ) ) );
+    
+    tile.loadRawTile(theme, m_level, m_x, m_y);
+    return *(tile.tile());
 }
 
 void MergedLayerPainter::paintClouds()
@@ -71,18 +93,10 @@ void MergedLayerPainter::paintClouds()
     }
 }
 
-void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
+void MergedLayerPainter::paintSunShading()
 {
     if ( m_tile->depth() != 32 )
         return;
-	
-    // FIXME: This should get accessible from MarbleWidget, so we can pass over 
-    //        a testing command line option
-    // 	bool tileIdVisible = false;
-    // 	
-    // 	if( tileIdVisible ) {
-    // 	showTileId( m_worktile, theme, m_level, x, y );
-    // 	}
 	
     // TODO add support for 8-bit maps?
     // add sun shading
@@ -98,7 +112,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
     const double nInverse = 1.0 / (double)(n);
     const int ipRight = n * (int)( tileWidth / n );
 
-    if ( sunLocator->getCitylights() ) {
+    if ( m_sunLocator->getCitylights() ) {
         QImage nighttile = loadRawTile( "maps/earth/citylights" );
         if ( nighttile.isNull() )
             return;
@@ -115,7 +129,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                 if ( interpolate == true ) cur_x+= n - 1;
 
                 double lon   = lon_scale * (m_x * tileWidth + cur_x);
-                double shade = sunLocator->shading( lon, lat );
+                double shade = m_sunLocator->shading( lon, lat );
 
                 if ( interpolate == true ) {
 
@@ -134,7 +148,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                         for ( int t = 1; t < n; ++t )
                         {
                             interpolatedShade += shadeDiff;
-                            sunLocator->shadePixelComposite( *scanline, *nscanline, interpolatedShade );
+                            m_sunLocator->shadePixelComposite( *scanline, *nscanline, interpolatedShade );
                             scanline++;
                             nscanline++;
                         }
@@ -143,7 +157,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
 
                 // Make sure we don't exceed the image memory
                 if ( cur_x < tileWidth ) {
-                    sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                     scanline++;
                     nscanline++;
                 }
@@ -165,7 +179,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                 if ( interpolate == true ) cur_x+= n - 1;
 
                 double lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                double shade = sunLocator->shading(lon, lat);
+                double shade = m_sunLocator->shading(lon, lat);
 
                 if ( interpolate == true ) {
 
@@ -183,7 +197,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
                         for ( int t = 1; t < n; ++t )
                         {
                             interpolatedShade += shadeDiff;
-                            sunLocator->shadePixel( *scanline, interpolatedShade );
+                            m_sunLocator->shadePixel( *scanline, interpolatedShade );
                             scanline++;
                         }
                     }
@@ -191,7 +205,7 @@ void MergedLayerPainter::paintSunShading(SunLocator* sunLocator)
 
                 // Make sure we don't exceed the image memory
                 if ( cur_x < tileWidth ) {
-                    sunLocator->shadePixel( *scanline, shade );
+                    m_sunLocator->shadePixel( *scanline, shade );
                     scanline++;
                 }
 
@@ -275,82 +289,6 @@ void MergedLayerPainter::setInfo(int x, int y, int level, int id)
     m_y = y;
     m_level = level;
     m_id = id;
-}
-
-QImage MergedLayerPainter::loadRawTile(const QString& theme)
-{
-    // qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-    // m_used = true; // Needed to avoid frequent deletion of tiles
-
-  QString  absfilename;
-
-  // qDebug() << "Requested tile level" << level;
-
-  // If the tile level offers the requested tile then load it.
-  // Otherwise cycle from the requested tilelevel down to one where
-  // the requested area is covered.  Then scale the area to create a
-  // replacement for the tile that has been requested.
-
-  for ( int i = m_level; i > -1; --i ) {
-
-      double origx1 = (double)(m_x) / (double)( TileLoader::levelToRow( m_level ) );
-      double origy1 = (double)(m_y) / (double)( TileLoader::levelToColumn( m_level ) );
-      double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
-      double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
-
-      QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
-          .arg(theme).arg(i)
-          .arg( (int)(testy1), tileDigits, 10, QChar('0') )
-          .arg( (int)(testx1), tileDigits, 10, QChar('0') );
-
-      absfilename = MarbleDirs::path( relfilename );
-
-      if ( QFile::exists( absfilename ) ) {
-          // qDebug() << "The image filename does exist: " << absfilename ;
-
-          QImage temptile( absfilename );
-
-          if ( !temptile.isNull() ) {
-              //         qDebug() << "Image has been successfully loaded.";
-
-              if ( m_level != i ) { 
-                  // qDebug() << "About to start cropping an existing image.";
-                  QSize tilesize = temptile.size();
-                  double origx2 = (double)(m_x + 1) / (double)( TileLoader::levelToRow( m_level ) );
-                  double origy2 = (double)(m_y + 1) / (double)( TileLoader::levelToColumn( m_level ) );
-                  double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
-                  double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
-
-                  QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
-                                  (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
-                  QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
-                                      (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
-
-                  // This should not create any memory leaks as
-                  // 'copy' and 'scaled' return a value (on the
-                  // stack) which gets deep copied always into the
-                  // same place for m_rawtile on the heap:
-                  temptile = temptile.copy( QRect( topleft, bottomright ) );
-                  temptile = temptile.scaled( tilesize ); // TODO: use correct size
-                  //          qDebug() << "Finished scaling up the Temporary Tile.";
-              }
-
-              return temptile;
-
-              break;
-          } // !tempfile.isNull()
-          //      else {
-          //         qDebug() << "Image load failed for: " + 
-          //           absfilename.toLocal8Bit();
-          //      }
-      }
-      else {
-          //      qDebug() << "emit downloadTile(" << relfilename << ");";
-          emit downloadTile( relfilename, QString::number( m_id ) );
-      }
-  }
-  
-  return QImage();
 }
 
 // TODO: This should likely go into a math class in the future ...

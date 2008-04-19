@@ -160,10 +160,11 @@ void MarbleMapPrivate::construct()
     AutoSettings* autoSettings = new AutoSettings( this );
 #endif
 
-    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                       m_parent,              SLOT( updateSun() ) );
-    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                       m_parent,              SLOT( centerSun() ) );
+//     qDebug() << "sunLocator =" << m_model->sunLocator();
+//     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
+//                        m_parent,              SLOT( updateSun() ) );
+//     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+//                        m_parent,              SLOT( centerSun() ) );
 #if 0
     connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
              this,                     SLOT( enableInput() ) );

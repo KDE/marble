@@ -26,23 +26,27 @@ class MergedLayerPainter : public QObject
     Q_OBJECT
 	
  public:
-    explicit MergedLayerPainter();
+    explicit MergedLayerPainter(SunLocator* sunLocator);
     virtual ~MergedLayerPainter();
 	
     void paint(const QString& theme);
-    void paintClouds();
-    void paintSunShading(SunLocator* sunLocator);
     void paintTileId(const QString& theme);
+    
+    void showClouds(bool show) {m_cloudlayer = show;}
+    void showTileId(bool show) {m_showTileId = show;}
 	
     void setTile(QImage* tile);
     void setInfo(int x, int y, int level, int id);
 	
  Q_SIGNALS:
     void downloadTile(const QString& relativeUrlString, const QString& id);
+    void repaintMap();
 	
  private:
     QImage loadRawTile(const QString& theme);
     int maxDivisor( int maximum, int fullLength );
+    void paintSunShading();
+    void paintClouds();
 	
  protected:
     QImage* m_tile;
@@ -50,6 +54,9 @@ class MergedLayerPainter : public QObject
     int m_y;
     int m_level;
     int m_id;
+    SunLocator* m_sunLocator;
+    bool m_cloudlayer;
+    bool m_showTileId;
 };
 
 #endif

@@ -16,6 +16,8 @@
 
 #include "SunLocator.h"
 
+#include <QtCore/QDebug>
+
 using std::sin;
 using std::cos;
 using std::asin;
@@ -149,6 +151,8 @@ void SunLocator::setShow(bool show)
 
 void SunLocator::setCentered(bool centered)
 {
+    qDebug() << "SunLocator::setCentered";
+    qDebug() << "sunLocator =" << this;
     m_centered = centered;
     if ( m_centered ) {
         updatePosition();

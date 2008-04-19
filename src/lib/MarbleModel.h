@@ -55,6 +55,8 @@ class TextureColorizer;
 class TileCreator;
 class VectorComposer;
 class ViewParams;
+class TextureTile;
+class MergedLayerPainter;
 
 
 /**
@@ -241,12 +243,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void update();
     
     SunLocator* sunLocator() const;
+    MergedLayerPainter* painter() const;
 
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
      * @return the cache limit in kilobytes
      */
     quint64 volatileTileCacheLimit() const;
+    
 
  public Q_SLOTS:
     /**
@@ -254,6 +258,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param kilobytes The limit in kilobytes.
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
+
+//  private Q_SLOTS:
+    void paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate);
 
 
  Q_SIGNALS:
@@ -298,6 +305,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
+    
+    SunLocator* m_sunLocator;
+    MergedLayerPainter* m_painter;
 };
 
 

@@ -18,6 +18,7 @@
 
 #include "Quaternion.h"
 #include "AbstractLayer.h"      // In AbstractLayer/
+#include "MergedLayerPainter.h"
 
 
 class TextureTile;

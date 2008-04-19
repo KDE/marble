@@ -203,12 +203,16 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // measured in radian to the pixel position of the requested 
     // coordinate on the current tile.
 
+//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
+    
     m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelX );
     m_posY = (int)( m_toTileCoordinatesLat + lat * m_rad2PixelY );
 
     // Most of the time while moving along the scanLine we'll stay on the 
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
+
+//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 2";
 
     if ( m_posX  >= m_tileLoader->tileWidth() 
          || m_posX < 0
@@ -222,10 +226,14 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // This needs to be done differently for grayscale ( uchar, 1 byte ).
     // and color ( uint, 4 bytes ) images.
 
+//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 3; m_posY =" << m_posY << "m_posX =" << m_posX;
+
     if ( m_tile->depth() == 8 )
         *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
     else
         *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
+
+//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 4";
 }
 
 void AbstractScanlineTextureMapper::nextTile()

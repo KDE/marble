@@ -35,10 +35,11 @@ class TextureTile : public QObject {
     TextureTile( int id );
 
     virtual ~TextureTile();
+    
+    void loadRawTile(const QString& theme, int level, int x, int y);
 
     int  id() const           { return m_id; }
     int  depth() const        { return m_depth; }
-    MergedLayerPainter* painter() {return &m_painter;}
 
     bool used() const         { return m_used; }
     void setUsed( bool used ) { m_used = used; }
@@ -46,30 +47,24 @@ class TextureTile : public QObject {
     int numBytes() const      { return m_rawtile.numBytes(); }
 
     const QImage& rawtile()   { return m_rawtile; }
+    QImage* tile()            { return &m_rawtile; }
  
     uchar  **jumpTable8;
     uint   **jumpTable32;
 
  Q_SIGNALS:
     void tileUpdateDone();
+    void downloadTile(const QString& relativeUrlString, const QString& id);
 
  public Q_SLOTS:
-    void   loadTile( int x, int y, int level, 
-                     const QString& theme, bool requestTileUpdate = true, 
-                     SunLocator* sunLocator = 0 );
-    void reloadTile( int x, int y, int level, 
-                     const QString& theme, SunLocator* sunLocator = 0 );
+    void   loadTile( bool requestTileUpdate = true );
 
  protected:
-
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
 
     int      m_id;
 
     QImage   m_rawtile;
-    QImage   m_worktile;
-    
-    MergedLayerPainter m_painter;
 
     int      m_depth;
     bool     m_used;

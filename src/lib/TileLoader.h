@@ -29,6 +29,8 @@
 class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
+class MergedLayerPainter;
+class MarbleModel;
 
 /**
  * @short Tile loading from a quad tree
@@ -55,20 +57,7 @@ class TileLoader : public QObject
          *                        the tiles from a remote resource.
          * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
          */
-        explicit TileLoader( HttpDownloadManager *downloadManager,
-                             SunLocator* sunLocator = 0 );
-
-        /**
-         * Creates a new tile loader for a given @p theme.
-         *
-         * @param theme The theme to load the tiles for.
-         * @param downloadManager The download manager that shall be used to fetch
-         *                        the tiles from a remote resource.
-         * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
-         */
-        TileLoader( const QString& theme,
-                    HttpDownloadManager *downloadManager,
-                    SunLocator* sunLocator = 0 );
+        explicit TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
 
         /**
          * Destroys the tile loader.
@@ -224,10 +213,13 @@ class TileLoader : public QObject
          * downloaded and is available now.
          */
         void tileUpdateAvailable();
+        
+        void paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate);
 
     private:
         class Private;
         Private* const d;
+        MarbleModel* m_parent;
 };
 
 

@@ -46,6 +46,7 @@
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 #include "SunLocator.h"
+#include "MergedLayerPainter.h"
 
 #include "MeasureTool.h"
 
@@ -213,14 +214,17 @@ void MarbleWidgetPrivate::construct()
 #endif
 
     // FIXME: I suppose this should only exist in MarbleMap
-#if 0
+// #if 0
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
                        m_parent, SLOT( updateSun() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_parent, SLOT( centerSun() ) );
-#endif
+// #endif
     m_parent->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_parent, SLOT( enableInput() ) );
+
+    m_parent->connect( m_model->painter(), SIGNAL( repaintMap() ),
+                       m_parent, SLOT( repaintMap() ) );
 }
 
 
@@ -1115,7 +1119,7 @@ void MarbleWidget::centerSun()
     double  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
-    qDebug() << "Centering on Sun at " << lat << lon;
+    qDebug() << "centering on Sun at" << lat << lon;
     disableInput();
 }
 
@@ -1132,8 +1136,15 @@ void MarbleWidget::enableInput()
 
 void MarbleWidget::disableInput()
 {
+    qDebug() << "MarbleWidget::disableInput";
     setInputHandler( 0 );
     setCursor( Qt::ArrowCursor );
+}
+
+void MarbleWidget::repaintMap()
+{
+    qDebug() << "MarbleWidget::repaintMap";
+    repaint();
 }
 
 #include "MarbleWidget.moc"

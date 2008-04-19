@@ -52,6 +52,7 @@
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
 #include "XmlHandler.h"
+#include "TextureTile.h"
 
 
 class MarbleModelPrivate
@@ -100,15 +101,12 @@ class MarbleModelPrivate
     QTimer       *m_timer;
 
     FileViewModel       *m_fileviewmodel;
-    SunLocator* m_sunLocator;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
-    d->m_sunLocator = new SunLocator();
-
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
 
@@ -116,7 +114,12 @@ MarbleModel::MarbleModel( QObject *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_downloadManager = 0;
-    d->m_tileLoader = new TileLoader( d->m_downloadManager, d->m_sunLocator );
+    qDebug() << "MarbleModel: new TileLoader";
+    d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
+
+    qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
+    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, const QString&, bool) ),
+             this,            SLOT( paintTile(TextureTile*, int, int, int, const QString&, bool) ) );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -178,10 +181,19 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
+    
+    m_sunLocator = new SunLocator();
+    m_painter = new MergedLayerPainter(m_sunLocator);
+
+    // TODO be able to set these somewhere
+    m_painter->showClouds(true);
+    m_painter->showTileId(false);
 }
 
 MarbleModel::~MarbleModel()
 {
+    qDebug() << "MarbleModel::~MarbleModel";
+    
     delete d->m_texmapper;
 
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
@@ -441,9 +453,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 
         delete d->m_texmapper;
 
-        d->m_tileLoader->setMapTheme( "maps/" +
-d->m_maptheme->tilePrefix() );
-
         switch( currentProjection ) {
             case Spherical:
                 d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
@@ -456,6 +465,8 @@ d->m_maptheme->tilePrefix() );
                 break;
 
         }
+
+        d->m_tileLoader->setMapTheme( "maps/" + d->m_maptheme->tilePrefix() );
 //         else
 //             d->m_texmapper->setMapTheme( "maps/earth/"
 //                                          + d->m_maptheme->tilePrefix() );
@@ -818,7 +829,12 @@ void MarbleModel::update()
 
 SunLocator* MarbleModel::sunLocator() const
 {
-    return d->m_sunLocator;
+    return m_sunLocator;
+}
+
+MergedLayerPainter* MarbleModel::painter() const
+{
+    return m_painter;
 }
 
 quint64 MarbleModel::volatileTileCacheLimit() const
@@ -829,6 +845,21 @@ quint64 MarbleModel::volatileTileCacheLimit() const
 void MarbleModel::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
     d->m_tileLoader->setVolatileCacheLimit( kiloBytes );
+}
+
+void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate)
+{
+    qDebug() << "MarbleModel::paintTile";
+    
+    if ( d->m_downloadManager != 0 ) {
+        connect( m_painter, SIGNAL( downloadTile( const QString&, const QString& ) ),
+                 d->m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
+    }
+
+    m_painter->setInfo(x, y, level, tile->id());
+    m_painter->setTile(tile->tile());
+    m_painter->paint(theme);
+    tile->loadTile(requestTileUpdate);
 }
 
 #include "MarbleModel.moc"

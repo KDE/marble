@@ -29,6 +29,8 @@
 #include "TextureTile.h"
 #include "MarbleDirs.h"
 #include "TileCache.h"
+#include "MergedLayerPainter.h"
+#include "MarbleModel.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
@@ -42,9 +44,8 @@
 class TileLoader::Private
 {
     public:
-        Private( SunLocator *sunLocator )
-            : m_sunLocator( sunLocator ),
-              m_downloadManager( 0 )
+        Private()
+            : m_downloadManager( 0 )
         {
             m_tileCache.clear();
             m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
@@ -52,10 +53,8 @@ class TileLoader::Private
 
         ~Private()
         {
-            delete m_sunLocator;
         }
 
-        SunLocator* m_sunLocator;
         HttpDownloadManager *m_downloadManager;
         QString       m_theme;
         QHash <int, TextureTile*>  m_tileHash;
@@ -64,20 +63,11 @@ class TileLoader::Private
         TileCache     m_tileCache;
 };
 
-TileLoader::TileLoader( HttpDownloadManager *downloadManager,
-                        SunLocator* sunLocator )
-    : d( new Private(sunLocator) )
+TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent)
+    : d( new Private() ),
+      m_parent(parent)
 {
     setDownloadManager( downloadManager );
-}
-
-TileLoader::TileLoader( const QString& theme,
-                        HttpDownloadManager *downloadManager,
-                        SunLocator *sunLocator )
-    : d( new Private( sunLocator ) )
-{
-    setDownloadManager( downloadManager );
-    setMapTheme( theme );
 }
 
 TileLoader::~TileLoader()
@@ -113,12 +103,13 @@ void TileLoader::setMapTheme( const QString& theme )
     d->m_theme = theme;
 
     TextureTile *tile = new TextureTile( 0 );
-    tile->loadTile( 0, 0, 0, d->m_theme, false );
+    tile->loadRawTile(d->m_theme, 0, 0, 0);
 
     // We assume that all tiles have the same size. TODO: check to be safe
     d->m_tileWidth  = tile->rawtile().width();
     d->m_tileHeight = tile->rawtile().height();
 
+    qDebug() << "TileLoader::setMapTheme: delete tile";
     delete tile;
 }
 
@@ -203,14 +194,18 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             d->m_tileHash[tileId] = tile;
 
             if ( d->m_downloadManager != 0 ) {
-                connect( tile->painter(), SIGNAL( downloadTile( const QString&, const QString& ) ),
+                connect( tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
                          d->m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
             }
 
             connect( tile, SIGNAL( tileUpdateDone() ),
                      this, SIGNAL( tileUpdateAvailable() ) );
 
-            tile->loadTile( tilx, tily, tileLevel, d->m_theme, false, d->m_sunLocator );
+            tile->loadRawTile(d->m_theme, tileLevel, tilx, tily);
+            tile->loadTile(false);
+            // TODO should emit signal rather than directly calling paintTile
+//             emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
+            m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
         }
     } else { // ...otherwise pick the correct one from the hash
         tile = d->m_tileHash.value( tileId );
@@ -381,7 +376,10 @@ void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_i
         int  y     = ( id - level * 100000000 ) / 10000;
         int  x     = id - ( level * 100000000 + y * 10000 );
 
-        (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme, d->m_sunLocator );
+        // TODO should emit signal rather than directly calling paintTile
+//         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
+        m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
+//         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {
          qDebug() << "No such ID";
     }
