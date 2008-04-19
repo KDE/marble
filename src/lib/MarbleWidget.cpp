@@ -46,7 +46,7 @@
 #include "gps/GpsLayer.h"
 #include "BoundingBox.h"
 #include "SunLocator.h"
-#include "MergedLayerPainter.h"
+#include "MergedLayerDecorator.h"
 
 #include "MeasureTool.h"
 

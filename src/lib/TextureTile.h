@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 
 #include "SunLocator.h"
-#include "MergedLayerPainter.h"
+#include "MergedLayerDecorator.h"
 
 const int tileDigits = 6;
 

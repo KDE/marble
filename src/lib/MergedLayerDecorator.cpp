@@ -14,7 +14,7 @@
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "MergedLayerPainter.h"
+#include "MergedLayerDecorator.h"
 
 #include <QtCore/QFile>
 #include <QDebug>
@@ -24,18 +24,18 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 
-MergedLayerPainter::MergedLayerPainter(SunLocator* sunLocator)
+MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
  : m_sunLocator(sunLocator),
    m_cloudlayer(false),
    m_showTileId(false)
 {
 }
 
-MergedLayerPainter::~MergedLayerPainter()
+MergedLayerDecorator::~MergedLayerDecorator()
 {
 }
 
-void MergedLayerPainter::paint(const QString& theme)
+void MergedLayerDecorator::paint(const QString& theme)
 {
     if ( m_sunLocator->getShow() )
       paintSunShading();
@@ -43,11 +43,11 @@ void MergedLayerPainter::paint(const QString& theme)
       paintClouds();
     if ( m_showTileId )
       paintTileId( theme );
-    qDebug() << "MergedLayerPainter::paint: emit repaintMap";
+    qDebug() << "MergedLayerDecorator::paint: emit repaintMap";
 //     emit repaintMap();
 }
 
-QImage MergedLayerPainter::loadRawTile(const QString& theme)
+QImage MergedLayerDecorator::loadRawTile(const QString& theme)
 {
     // TODO use a TileLoader rather than directly accessing TextureTile?
     TextureTile tile(m_id);
@@ -59,7 +59,7 @@ QImage MergedLayerPainter::loadRawTile(const QString& theme)
     return *(tile.tile());
 }
 
-void MergedLayerPainter::paintClouds()
+void MergedLayerDecorator::paintClouds()
 {
     QImage  cloudtile = loadRawTile( "maps/earth/clouds" );
     if ( cloudtile.isNull() )
@@ -93,7 +93,7 @@ void MergedLayerPainter::paintClouds()
     }
 }
 
-void MergedLayerPainter::paintSunShading()
+void MergedLayerDecorator::paintSunShading()
 {
     if ( m_tile->depth() != 32 )
         return;
@@ -215,7 +215,7 @@ void MergedLayerPainter::paintSunShading()
     }
 }
 
-void MergedLayerPainter::paintTileId(const QString& theme)
+void MergedLayerDecorator::paintTileId(const QString& theme)
 {
     QString filename = QString("%1_%2.jpg")
         .arg( m_x, tileDigits, 10, QChar('0') )
@@ -278,12 +278,12 @@ void MergedLayerPainter::paintTileId(const QString& theme)
     painter.drawPath( outlinepath );
 }
 
-void MergedLayerPainter::setTile(QImage* tile)
+void MergedLayerDecorator::setTile(QImage* tile)
 {
     m_tile = tile;
 }
 
-void MergedLayerPainter::setInfo(int x, int y, int level, int id)
+void MergedLayerDecorator::setInfo(int x, int y, int level, int id)
 {
     m_x = x;
     m_y = y;
@@ -293,7 +293,7 @@ void MergedLayerPainter::setInfo(int x, int y, int level, int id)
 
 // TODO: This should likely go into a math class in the future ...
 
-int MergedLayerPainter::maxDivisor( int maximum, int fullLength )
+int MergedLayerDecorator::maxDivisor( int maximum, int fullLength )
 {
     // Find the optimal interpolation interval n for the 
     // current image canvas width
@@ -313,4 +313,4 @@ int MergedLayerPainter::maxDivisor( int maximum, int fullLength )
     return best;
 }
 
-#include "MergedLayerPainter.moc"
+#include "MergedLayerDecorator.moc"

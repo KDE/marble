@@ -56,7 +56,7 @@ class TileCreator;
 class VectorComposer;
 class ViewParams;
 class TextureTile;
-class MergedLayerPainter;
+class MergedLayerDecorator;
 
 
 /**
@@ -243,7 +243,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void update();
     
     SunLocator* sunLocator() const;
-    MergedLayerPainter* painter() const;
+    MergedLayerDecorator* painter() const;
 
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
@@ -307,7 +307,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
     
     SunLocator* m_sunLocator;
-    MergedLayerPainter* m_painter;
+    MergedLayerDecorator* m_painter;
 };
 
 

@@ -1,8 +1,25 @@
 2008-04-19  Torsten Rahn  <rahn@kde.org>
 
+    * lib/MarbleWidget.cpp:
+    * lib/MergedLayerDecorator.h:
+    * lib/AbstractScanlineTextureMapper.h:
+    * lib/TileLoader.h:
+    * lib/MergedLayerDecorator{cpp,h}:
+    * lib/TextureTile.h:
+    * lib/TileLoader{cpp,h}:
+    * lib/MarbleModel.h:
+    * lib/MarbleModel{cpp,h}:
+    * lib/MergedLayerPainter.h:
+    * lib/CMakeLists.txt:
+    * lib/MergedLayerPainter{cpp,h}:
+
+    - Renaming MergedLayerPainter -> MergedLayerDecorator
+
+2008-04-19  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
     * src/lib/MarbleWidget.{cpp,h}:
-    * src/lib/SunLocator.cpp:
+    * src/lib/SunLocator{cpp,h}::
     * src/lib/TileLoader.h:
     * src/lib/MarbleMap.{cpp,h}:
     * src/lib/TextureTile.{cpp,h}:
@@ -21,21 +38,21 @@
 
     * src/lib/MapThemeManager.{cpp,h}:
     * src/lib/MapTheme.h:
-    * src/lib/geodata/scene/GeoSceneSection.cpp:
+    * src/lib/geodata/scene/GeoSceneSection{cpp,h}::
 
     - Some initial work on MapThemeManager
 
 2008-04-18  Patrick Spendrin  <ps_ml@gmx.de>
 
     * src/tilecreator/tccore.h
-    * src/tilecreator/tccore.cpp
+    * src/tilecreator/tccore{cpp,h}:
     
     - remove the unused destructor of the wrapper class
     
 2008-04-18  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleModel.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.cpp:
+    * src/lib/MarbleModel{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLPenTagHandler.{cpp,h}:
@@ -62,12 +79,12 @@
 
 2008-04-18  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/MarbleLegendBrowser{cpp,h}::
     * src/lib/MarbleModel.{cpp,h}:
-    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
     * src/lib/geodata/CMakeLists.txt:
-    * src/lib/geodata/scene/GeoSceneSection.cpp:
+    * src/lib/geodata/scene/GeoSceneSection{cpp,h}::
     * data/maps/earth/srtm/srtm.dgm2:
 
     - Bare port of LegendBrowser to DGML2
@@ -77,14 +94,14 @@
 2008-04-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove unused member
-	* src/lib/MarbleModel.cpp (MarbleModelPrivate::m_projection): removed
+	* src/lib/MarbleModel{cpp,h}: (MarbleModelPrivate::m_projection): removed
 
 2008-04-17  Patrick Spendrin <ps_ml@gmx.de>
 
     * lib/TileCreator.h
     * tilecreator/CMakeLists.txt
-    * main.cpp
-    * tilecreator/tccore.cpp
+    * main{cpp,h}:
+    * tilecreator/tccore{cpp,h}:
     * tilecreator/tccore.h
 
     first try to make the tilecreator 
@@ -93,17 +110,17 @@
 
     Patch by: Claudiu Covaci
     
-    * lib/ExtDateTime.cpp
+    * lib/ExtDateTime{cpp,h}:
     * lib/ExtDateTime.h
-    * lib/MergedLayerPainter.cpp
+    * lib/MergedLayerPainter{cpp,h}:
     * lib/MergedLayerPainter.h
-    * lib/SunLocator.cpp
+    * lib/SunLocator{cpp,h}:
     * lib/SunLocator.h
-    * lib/geodata/GeoDataTest.cpp
-    * lib/geodata/scene/GeoSceneZoom.cpp
-    * lib/kml/KMLLabelStyleParser.cpp
-    * plasmoid/latlonedit.cpp
-    * plasmoid/worldclock.cpp
+    * lib/geodata/GeoDataTest{cpp,h}:
+    * lib/geodata/scene/GeoSceneZoom{cpp,h}:
+    * lib/kml/KMLLabelStyleParser{cpp,h}:
+    * plasmoid/latlonedit{cpp,h}:
+    * plasmoid/worldclock{cpp,h}:
     * plasmoid/worldclock.h
  
     more Krazy issues
@@ -130,29 +147,29 @@
 
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleModel.cpp:
+    * src/lib/MarbleModel{cpp,h}::
 
     - Porting setMapTheme over to DGML2.
       (Currently #if 0 ed out but almost works already).
       This should later on get replaced altogether by 
       the Layer Management Class based mechanism.
 
-    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLThemeTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLAuxillaryDictionary.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLTextTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLSourceDirTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLInstallMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLThemeTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLAuxillaryDictionary{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLTextTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLSourceDirTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLInstallMapTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLAuxillaryDictionary.h:
-    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLTargetTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLHeadingTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLDescriptionTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLTargetTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLHeadingTagHandler{cpp,h}::
 
     - Trimming away leading and trailing white spaces where needed
 
@@ -180,8 +197,8 @@
     * src/lib/AbstractLayer/AbstractLayerData.h:
     * src/lib/SunLocator.h:
     * src/lib/ExtDateTime.h:
-    * src/lib/geodata/GeoDataTest.cpp:
-    * src/lib/geodata/scene/GeoSceneZoom.cpp:
+    * src/lib/geodata/GeoDataTest{cpp,h}::
+    * src/lib/geodata/scene/GeoSceneZoom{cpp,h}::
 
     Krazy-compliance:
     - typo corrections
@@ -189,11 +206,11 @@
 
 2008-04-17  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.h:
     * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.h:
-    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary{cpp,h}::
     * src/lib/geodata/scene/GeoSceneTexture.{cpp,h}:
     * src/lib/geodata/scene/GeoSceneLayer.{cpp,h}:
 
@@ -213,23 +230,23 @@
 
     - we don't need MapThemeManager::open ...
 
-    * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp:
-    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLLegendTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLZoomTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
-    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
-    * src/plasmoid/latloneditplugin.cpp:
-    * src/plasmoid/latlonedit.cpp:
-    * src/plasmoid/worldclock.cpp:
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLLegendTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLZoomTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler{cpp,h}::
+    * src/plasmoid/latloneditplugin{cpp,h}::
+    * src/plasmoid/latlonedit{cpp,h}::
+    * src/plasmoid/worldclock{cpp,h}::
 
     Patch by: Jens-Michael Hoffmann
 
@@ -259,9 +276,9 @@
 
     - A few adjustments to the DGML2 format.
 
-    * src/lib/HttpDownloadManager.cpp:
-    * src/lib/MarbleModel.cpp:
-    * src/plasmoid/worldclock.cpp:
+    * src/lib/HttpDownloadManager{cpp,h}::
+    * src/lib/MarbleModel{cpp,h}::
+    * src/plasmoid/worldclock{cpp,h}::
 
     - Patch by Jens-Michael Hoffmann:
     Remove redundant null pointer checks
@@ -280,7 +297,7 @@
     - Basically completing work on DGML2 parser
     (except for Vector and Geodata tags which we'll take care of later on ..)
 
-    * src/lib/geodata/data/GeoDataContainer.cpp:
+    * src/lib/geodata/data/GeoDataContainer{cpp,h}::
     * src/lib/geodata/data/GeoDataFeature.h:
 
     - Moving public Ctor for Abstract class to protected section ...
@@ -289,9 +306,9 @@
 
     * src/lib/geodata/scene/GeoSceneItem.{cpp,h}:
     * src/lib/geodata/scene/GeoSceneSection.{cpp,h}:
-    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
-    * src/lib/geodata/scene/GeoSceneLegend.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLIconTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler{cpp,h}::
+    * src/lib/geodata/scene/GeoSceneLegend{cpp,h}::
     * src/lib/geodata/scene/GeoSceneHead.h:
     * docs/dgml2.txt:
 
@@ -301,7 +318,7 @@
 
     * src/lib/global.h:
     * src/marble.kcfg:
-    * src/marble_part.cpp:
+    * src/marble_part{cpp,h}::
 
     - Implemented the setting which enables the user to let
     Marble remember the last position on quit 
@@ -328,7 +345,7 @@
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/MarbleViewSettingsWidget.ui:
     * src/marble.kcfg:
-    * src/marble_part.cpp:
+    * src/marble_part{cpp,h}::
 
     - Enabling Quality Settings in the KDE Marble settings
     dialog.
@@ -336,7 +353,7 @@
 2008-04-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:
-    * src/lib/MarbleWidgetInputHandler.cpp:
+    * src/lib/MarbleWidgetInputHandler{cpp,h}::
 
     - Added Quality Settings and a ViewContext to Marble Widget
     - Removed setQuickDirty(true) and quickDirty() as those 
@@ -348,32 +365,32 @@
     - Removed "Quick Dirty" checkbox from the 2nd example.
 
     * src/lib/ViewParams.{cpp,h}:
-    * src/lib/MarbleMap.cpp:
-    * src/lib/MarbleControlBox.cpp:
-    * src/lib/MarbleModel.cpp:
-    * src/lib/GlobeScanlineTextureMapper.cpp:
-    * src/lib/VectorComposer.cpp:
+    * src/lib/MarbleMap{cpp,h}::
+    * src/lib/MarbleControlBox{cpp,h}::
+    * src/lib/MarbleModel{cpp,h}::
+    * src/lib/GlobeScanlineTextureMapper{cpp,h}::
+    * src/lib/VectorComposer{cpp,h}::
 
     - Added Quality Settings to Marble Map
 
 2008-03-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove some old FIXMEs.
-	* src/lib/MarbleMap_p.cpp (m_modelIsOwned): new member
-	* src/lib/MarbleMap.cpp (constructors): keep track of if the model
+	* src/lib/MarbleMap_p{cpp,h}: (m_modelIsOwned): new member
+	* src/lib/MarbleMap{cpp,h}: (constructors): keep track of if the model
 	is owned.
 	(destructor): only delete model if it's owned.
 	(update): removed
 	(updateGps): Don't call update()
 	(paint): removed
 	(doPaint): renamed into paint()
-	* src/lib/MarbleWidget.cpp (construct): Disabled a few connect()s
-	* src/lib/MarbleTool.cpp: fixed some comments
-	* src/lib/MercatorProjection.cpp(screenCoordinates): removed FIXME
+	* src/lib/MarbleWidget{cpp,h}: (construct): Disabled a few connect()s
+	* src/lib/MarbleTool{cpp,h}:: fixed some comments
+	* src/lib/MercatorProjection{cpp,h}:(screenCoordinates): removed FIXME
 	* src/lib/SunLocator.{h,cpp} (shading): use lon/lat instead of lat/lon
-	* src/lib/MergedLayerPainter.cpp (paintSunShading): use new convention
-	* src/lib/TextureTile.cpp (loadTile): Indent
-	* src/lib/ViewParams.cpp: Remove 2 FIXMEs
+	* src/lib/MergedLayerPainter{cpp,h}: (paintSunShading): use new convention
+	* src/lib/TextureTile{cpp,h}: (loadTile): Indent
+	* src/lib/ViewParams{cpp,h}:: Remove 2 FIXMEs
 	
 	Remove unnecessary function
 	* src/lib/MarbleWidget.{h,cpp} (paint): removed
@@ -384,13 +401,13 @@
 
 	Fix repetition of drawing of the measure tool in some
 	projections. Also change some function names.
-	* src/lib/MeasureTool.cpp (drawDistancePath): Draw repetition
+	* src/lib/MeasureTool{cpp,h}: (drawDistancePath): Draw repetition
 	(paintMeasurePoints)      -> paint
 	(paintDistancePoints)     -> drawDistancePoints
 	(paintMark)               -> drawMark
 	(paintTotalDistanceLabel) -> drawTotalDistanceLabel
 	(testbug)                 -> testBug
-	* src/lib/MarbleMap.cpp (doPaint): call paint() instead of old name
+	* src/lib/MarbleMap{cpp,h}: (doPaint): call paint() instead of old name
 
 2008-03-25  Torsten Rahn  <rahn@kde.org>
 
@@ -437,8 +454,8 @@
 	m_rad2Pixel, m_planetAxis and make them local variables instead.
 
 	Krazy fixes:Check for contractions in strings 
-	* src/lib/geodata/handlers/dgml/DGMLMinimumTagHandler.cpp, 
-	* src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler.cpp:
+	* src/lib/geodata/handlers/dgml/DGMLMinimumTagHandler{cpp,h}:, 
+	* src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler{cpp,h}::
 	Fix
 
 	Get rid of unnecessary members.
@@ -449,7 +466,7 @@
 	Get rid of an unnecessary member.
 	* src/lib/VectorMap.{h,cpp}: Get rid of m_radius and take a
 	ViewportParams* as parameter where necessary.
-	* src/lib/VectorComposer.cpp (paintBaseVectorMap): Use new calling
+	* src/lib/VectorComposer{cpp,h}: (paintBaseVectorMap): Use new calling
 	conventions
 
 2008-03-17  Inge Wallin  <inge@lysator.liu.se>
@@ -463,34 +480,34 @@
 	Improve API for VectorMaps (start of projection independence):
 	* src/lib/VectorMap.{h,cpp}: Take a ViewportParams instead of
 	ViewParams everywhere
-	* src/lib/VectorComposer.cpp (paintVectorMap): Use new call
+	* src/lib/VectorComposer{cpp,h}: (paintVectorMap): Use new call
 	conventions for the VectorMap
 
 	Make drawPlaceMarks() projection independent.
-	* src/lib/PlaceMarkPainter.cpp (drawPlaceMarks): 
+	* src/lib/PlaceMarkPainter{cpp,h}: (drawPlaceMarks): 
 	  - Make it projection independent
 	  - Take a ViewportParams instead of a ViewParams.
 	* src/lib/PlaceMarkPainter.h (drawPlaceMarks): Take a
 	ViewportParams instead of a ViewParams.
-	* src/lib/PlaceMarkLayout.cpp (paintPlaceFolder): Call
+	* src/lib/PlaceMarkLayout{cpp,h}: (paintPlaceFolder): Call
 	drawPlaceMarks() using new signature.
 
 	Krazy fixes: Check for proper include directives:
-	* src/lib/gps/Track.cpp,
-	* src/lib/kml/KMLContainer.cpp,
-	* src/lib/geodata/data/GeoDataContainer.cpp,
-	* src/lib/geodata/data/GeoDataPlacemark.cpp,
-	* src/lib/geodata/parser/GeoDataParser.cpp,
-	* src/lib/geodata/parser/GeoTagHandler.cpp,
-	* src/lib/geodata/parser/GeoSceneParser.cpp,
-	* src/lib/geodata/parser/GeoParser.cpp:
+	* src/lib/gps/Track{cpp,h}:,
+	* src/lib/kml/KMLContainer{cpp,h}:,
+	* src/lib/geodata/data/GeoDataContainer{cpp,h}:,
+	* src/lib/geodata/data/GeoDataPlacemark{cpp,h}:,
+	* src/lib/geodata/parser/GeoDataParser{cpp,h}:,
+	* src/lib/geodata/parser/GeoTagHandler{cpp,h}:,
+	* src/lib/geodata/parser/GeoSceneParser{cpp,h}:,
+	* src/lib/geodata/parser/GeoParser{cpp,h}::
 	Fix include files
 
 2008-03-11  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
-    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/GeoDataTest{cpp,h}::
     * src/lib/geodata/CMakeLists.txt:
     * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLAvailableTagHandler.{cpp,h}:
@@ -501,7 +518,7 @@
 2008-03-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Finalize the Projection'ification of the Measuretool:
-	*src/lib/MeasureTool.cpp (paintDistancePoints): Call
+	*src/lib/MeasureTool{cpp,h}: (paintDistancePoints): Call
 	paintDistancePoints
 	(paintDistancePoints): new function
 	(sphericalPaintMeasurePoints): removed
@@ -519,23 +536,23 @@
 
 	Fix Krazy issues: proper include directives:
 	/src/lib/MarbleWidget.h,
-	/src/lib/FileStoragePolicy.cpp,
-	/src/lib/MarbleMap.cpp,
+	/src/lib/FileStoragePolicy{cpp,h}:,
+	/src/lib/MarbleMap{cpp,h}:,
 	/src/lib/StoragePolicy.h,
 	/src/lib/MarbleMap_p.h,
-	/src/lib/TileCreatorDialog.cpp,
-	/src/lib/MarblePlacemarkModel.cpp,
-	/src/lib/CacheStoragePolicy.cpp,
+	/src/lib/TileCreatorDialog{cpp,h}:,
+	/src/lib/MarblePlacemarkModel{cpp,h}:,
+	/src/lib/CacheStoragePolicy{cpp,h}:,
 	/src/lib/MarbleMap.h,
-	/src/lib/DiscCache.cpp,
-	/src/marble_part.cpp:
+	/src/lib/DiscCache{cpp,h}:,
+	/src/marble_part{cpp,h}::
 	Fix include directives
 
 2008-03-10  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/CMakeLists.txt:
     * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.{cpp,h}:
-    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:
     * src/lib/geodata/scene/GeoSceneIcon.h:
     * src/lib/geodata/scene/GeoSceneHead.h:
@@ -547,7 +564,7 @@
 2008-03-10  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/CMakeLists.txt:
-    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/GeoDataTest{cpp,h}::
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary.h:
     * src/lib/geodata/handlers/dgml/DGMLDiscreteTagHandler.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLMaximumTagHandler.{cpp,h}:
@@ -562,16 +579,16 @@
 2008-03-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Use pre incrementation of iterators.
-	* src/lib/MeasureTool.cpp (paintMeasurePoints),
+	* src/lib/MeasureTool{cpp,h}: (paintMeasurePoints),
 	(sphericalPaintMeasurePoints),
 	(rectangularPaintMeasurePoints),
-	* src/lib/PlaceMarkManager.cpp (saveFile),
+	* src/lib/PlaceMarkManager{cpp,h}: (saveFile),
 	(updateCacheIndex),
-	* src/lib/PlaceMarkLayout.cpp (whichPlacemarkAt): 
+	* src/lib/PlaceMarkLayout{cpp,h}: (whichPlacemarkAt): 
 	 pre increment iterator
 
 	Unify painting of Measure Paths.  Now also works on Mercator.
-	* src/lib/MeasureTool.cpp (paintMeasurePoints): use projection
+	* src/lib/MeasureTool{cpp,h}: (paintMeasurePoints): use projection
 	independent code to paint the paths
 	(sphericalPaintMeasurePoints): remove code to draw paths
 	(rectangularPaintMeasurePoints): remove code to draw paths
@@ -588,7 +605,7 @@
     * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLTargetTagHandler.{cpp,h}:
     * src/lib/geodata/handlers/dgml/DGMLIconTagHandler.{cpp,h}:
-    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/GeoDataTest{cpp,h}::
     * src/lib/geodata/CMakeLists.txt:
     * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:
 
@@ -599,17 +616,17 @@
 	Store if a projection repeats in X direction in the Projection.
 	* src/lib/AbstractProjection.h (repeatX): new function
 	(setRepeatX): new function
-	* src/lib/EquirectProjection.cpp (EquirectProjection): Set repeatX
+	* src/lib/EquirectProjection{cpp,h}: (EquirectProjection): Set repeatX
 	to true
-	* src/lib/MercatorProjection.cpp (MercatorProjection): Set repeatX
+	* src/lib/MercatorProjection{cpp,h}: (MercatorProjection): Set repeatX
 	to true
 
 	Improve Mercator layout esp. of placemarks significantly.
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Fix code
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Fix code
 	layout
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Make
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Make
 	projection calculations look alike over the projections
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Fix
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Fix
 	projection calculation
 
 	Continue towards pure Projection usage.
@@ -618,7 +635,7 @@
 	Get rid of unnecessary members in GridMap.
 	* src/lib/GridMap.{h,cpp} (resizeMap): remove function
 	(m_imageWidth, m_imageHeight, m_imageRadius): remove members
-	* src/lib/MarbleModel.cpp (resize): Don't call Gridmap::resizeMap
+	* src/lib/MarbleModel{cpp,h}: (resize): Don't call Gridmap::resizeMap
 
 2008-03-08  Inge Wallin  <inge@lysator.liu.se>
 
@@ -627,15 +644,15 @@
 	 - Remove private members m_radius, m_precision and m_planetAxis
 	 - Use ViewportParams instead of ViewParams everywhere.
 	 - send a precision parameter to all CreateCircle functions.
-	* src/lib/MarbleModel.cpp: Use new call conventions (ViewportParams)
+	* src/lib/MarbleModel{cpp,h}:: Use new call conventions (ViewportParams)
 	
 2008-03-08  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
-    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler.cpp:
-    * src/lib/geodata/GeoDataTest.cpp:
-    * src/lib/geodata/parser/GeoParser.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler{cpp,h}::
+    * src/lib/geodata/handlers/dgml/DGMLNameTagHandler{cpp,h}::
+    * src/lib/geodata/GeoDataTest{cpp,h}::
+    * src/lib/geodata/parser/GeoParser{cpp,h}::
     * src/lib/geodata/CMakeLists.txt:
     * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:
     * src/lib/geodata/scene/GeoSceneSettings.h:
@@ -648,17 +665,17 @@
 2008-03-07  Inge Wallin  <inge@lysator.liu.se>
 
 	Enable the new projection based measuretool.
-	* src/lib/MeasureTool.cpp (drawDistancePath): use drawPath()
+	* src/lib/MeasureTool{cpp,h}: (drawDistancePath): use drawPath()
 	instead of individual functions.
 	(drawPath): draw a red line instead of white crosses.
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Bugfix for
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Bugfix for
 	the +- issue
 
 2008-03-06  Torsten Rahn  <rahn@kde.org>
 
 	Fix transformation bugs where + and - were mixed up.
-	* src/lib/SphericalProjection.cpp (screenCoordinates): bugfix
-	* src/lib/EquirectProjection.cpp (screenCoordinates): bugfix
+	* src/lib/SphericalProjection{cpp,h}: (screenCoordinates): bugfix
+	* src/lib/EquirectProjection{cpp,h}: (screenCoordinates): bugfix
 
 2008-03-07  Inge Wallin  <inge@lysator.liu.se>
 
@@ -670,7 +687,7 @@
 	parameter CoordinateType
 	* src/lib/MercatorProjection.{h,cpp} (screenCoordinates): new
 	parameter CoordinateType
-	* src/lib/MeasureTool.cpp (drawPath): Use new call conventions
+	* src/lib/MeasureTool{cpp,h}: (drawPath): Use new call conventions
 
 2008-03-06  Torsten Rahn  <rahn@kde.org>
 
@@ -682,21 +699,21 @@
 	Krazy fixes (Check for spelling errors):
 	* src/lib/AbstractLayer/AbstractLayerData.h (AbstractLayerInterface),
 	* src/lib/geodata/parser/GeoParser.h (class GeoParser),
-	* src/lib/geodata/handlers/gpx/GPXElementDictionary.cpp:
+	* src/lib/geodata/handlers/gpx/GPXElementDictionary{cpp,h}::
 	Fix spelling errors
 
 	Krazy fixes (Check for single char QStrings).
-	* src/lib/geodata/parser/GeoParser.cpp (dumpParentStack): Use chars
+	* src/lib/geodata/parser/GeoParser{cpp,h}: (dumpParentStack): Use chars
 
 2008-03-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Let all projections take angles in radians instead of degrees
-	* src/lib/SphericalProjection.cpp (screenCoordinates),
-	* src/lib/EquirectProjection.cpp (screenCoordinates),
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Take angles
+	* src/lib/SphericalProjection{cpp,h}: (screenCoordinates),
+	* src/lib/EquirectProjection{cpp,h}: (screenCoordinates),
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Take angles
 	in radians
-	* src/lib/MarbleMap.cpp (screenCoordinates): Convert to radians
-	* src/lib/MeasureTool.cpp (drawPath): Don't convert to degrees.
+	* src/lib/MarbleMap{cpp,h}: (screenCoordinates): Convert to radians
+	* src/lib/MeasureTool{cpp,h}: (drawPath): Don't convert to degrees.
 
 	Commit unfinished code.
 	* src/lib/MeasureTool.{h,cpp} (drawPath): New function, not yet called.
@@ -704,7 +721,7 @@
 2008-03-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Bugfix
-	* src/lib/MercatorProjection.cpp (screenCoordinates): Convert both
+	* src/lib/MercatorProjection{cpp,h}: (screenCoordinates): Convert both
 	lon and lat from degrees to radians.
 
 	Apidox
@@ -712,7 +729,7 @@
 	parameters
 	
 	Cleaning
-	* src/lib/Quaternion.cpp: Follow coding standards
+	* src/lib/Quaternion{cpp,h}:: Follow coding standards
 
 2008-03-02  Inge Wallin  <inge@lysator.liu.se>
 
@@ -722,7 +739,7 @@
 	Prepare the Measuretool for use of the Projection classes.
 	* src/lib/MeasureTool.{h,cpp}: Take ViewportParams everywhere
 	instead of ViewParams.
-	* src/lib/MarbleMap.cpp (doPaint): Send ViewportParams parameter.
+	* src/lib/MarbleMap{cpp,h}: (doPaint): Send ViewportParams parameter.
 
 2008-03-01  Inge Wallin  <inge@lysator.liu.se>
 
@@ -732,7 +749,7 @@
 	* src/lib/EquirectProjection.{h,cpp} (screenCoordinates),
 	* src/lib/MercatorProjection.{h,cpp} (screenCoordinates): 
 	New overloaded function
-	* src/lib/PlaceMarkLayout.cpp (locatedOnScreen): Use
+	* src/lib/PlaceMarkLayout{cpp,h}: (locatedOnScreen): Use
 	currentProjection->screenCoordinates instead of own code.
 
 2008-02-28  Torsten Rahn  <rahn@kde.org>
@@ -755,15 +772,15 @@
 
 2008-02-26  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/geoscene/GeoSceneTest.cpp:
-    * src/lib/geoscene/parser/GeoSceneTagHandler.cpp:
-    * src/lib/MarblePlacemarkModel.cpp:
-    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geoscene/GeoSceneTest{cpp,h}::
+    * src/lib/geoscene/parser/GeoSceneTagHandler{cpp,h}::
+    * src/lib/MarblePlacemarkModel{cpp,h}::
+    * src/lib/geodata/GeoDataTest{cpp,h}::
     * docs/dgml2.txt:
 
     - Minor fixes and typos
 
-    * src/lib/geodata/parser/GeoDataParser.cpp:
+    * src/lib/geodata/parser/GeoDataParser{cpp,h}::
     * src/lib/geodata/parser/GeoDataParser.h:
 
     - Fixes by Nikolas Zimmermann after I had 
@@ -773,16 +790,16 @@
 
 	Krazy fixes:
 	* src/lib/TileLoader.h,
-	* src/lib/MarbleModel.cpp,
-	* src/lib/geodata/handlers/kml/KMLElementDictionary.cpp,
-	* src/lib/geodata/handlers/gpx/GPXElementDictionary.cpp,
-	* src/lib/geodata/parser/GeoDataParser.cpp,
+	* src/lib/MarbleModel{cpp,h}:,
+	* src/lib/geodata/handlers/kml/KMLElementDictionary{cpp,h}:,
+	* src/lib/geodata/handlers/gpx/GPXElementDictionary{cpp,h}:,
+	* src/lib/geodata/parser/GeoDataParser{cpp,h}:,
 	* src/lib/geodata/parser/GeoDataParser.h,
-	* src/lib/geodata/GeoDataTest.cpp,
-	* src/lib/geoscene/handlers/dgml/DGMLElementDictionary.cpp,
-	* src/lib/geoscene/parser/GeoSceneParser.cpp,
+	* src/lib/geodata/GeoDataTest{cpp,h}:,
+	* src/lib/geoscene/handlers/dgml/DGMLElementDictionary{cpp,h}:,
+	* src/lib/geoscene/parser/GeoSceneParser{cpp,h}:,
 	* src/lib/geoscene/parser/GeoSceneParser.h,
-	* src/lib/geoscene/GeoSceneTest.cpp:
+	* src/lib/geoscene/GeoSceneTest{cpp,h}::
 	  Fix spelling errors
 
 2008-02-24  Inge Wallin  <inge@lysator.liu.se>
@@ -796,36 +813,36 @@
 	  Check for C++ ctors that should be declared 'explicit'
 
 	Krazy fixes:
-	* src/lib/MapTheme.cpp,
-	* src/lib/TinyWebBrowser.cpp,
-	* src/lib/DiscCache.cpp,
-	* src/lib/FileStoragePolicy.cpp,
-	* src/lib/geoscene/data/GeoSceneMapTheme.cpp: 
+	* src/lib/MapTheme{cpp,h}:,
+	* src/lib/TinyWebBrowser{cpp,h}:,
+	* src/lib/DiscCache{cpp,h}:,
+	* src/lib/FileStoragePolicy{cpp,h}:,
+	* src/lib/geoscene/data/GeoSceneMapTheme{cpp,h}:: 
 	  Check for single char QStrings better written as a QChar
 
 2008-02-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Move current projection to ViewportParams from MarbleMap.
-	* src/lib/MarbleMap.cpp (MarbleMapPrivate): Remove all projections 
+	* src/lib/MarbleMap{cpp,h}: (MarbleMapPrivate): Remove all projections 
 	(construct): Don't init.
 	(setProjection): Don't set currrentProjection;
 	(geoCoordinates, screenCoordinates): new calling conventions
-	* src/lib/ViewParams.cpp (currentProjection): New function
+	* src/lib/ViewParams{cpp,h}: (currentProjection): New function
 	* src/lib/ViewportParams.{h,cpp} (currentProjection): New function
 	(setProjection): initialize m_currentProjection
 	(s_*Projection): new static members
 	
 	Follow the coding standards
-	* src/lib/PlaceMarkLayout.cpp: cleaning
+	* src/lib/PlaceMarkLayout{cpp,h}:: cleaning
 
 2008-02-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Clean up a bit
-	* src/lib/MarbleMap.cpp (geoCoordinates): remove #if'ed out code
+	* src/lib/MarbleMap{cpp,h}: (geoCoordinates): remove #if'ed out code
 	 (screenCoordinates): remove #if'ed out code
 	
 2008-02-15  Carlos Licea  <carlos.licea@kdemail.net>
-    *PlaceMarkPainter.cpp: Fix my previous verbosiness, thanks Jeremy!.
+    *PlaceMarkPainter{cpp,h}:: Fix my previous verbosiness, thanks Jeremy!.
 
 2008-02-15  Carlos Licea  <carlos.licea@kdemail.net>
     Let there be placemarks.
@@ -835,16 +852,16 @@
 2008-02-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Clean up after the last few changes.
-	* src/lib/MarbleWidget.cpp (setMapTheme): Clean up
+	* src/lib/MarbleWidget{cpp,h}: (setMapTheme): Clean up
 	* src/lib/MarbleMap.{h,cpp} (misc): Clean up
 	(repaint): removed
 	(update):  removed
-	* src/lib/ViewParams.cpp (ViewParams, centerCoordinates): Clean up
+	* src/lib/ViewParams{cpp,h}: (ViewParams, centerCoordinates): Clean up
 
 	Activate the Projection classes!
 	* src/lib/ViewParams.{h,cpp} (viewport): new function
 	* src/lib/ViewportParams.{h,cpp} (centerCoordinats): is now const
-	* src/lib/MarbleMap.cpp (MarbleMapPrivate): Add 3 projection
+	* src/lib/MarbleMap{cpp,h}: (MarbleMapPrivate): Add 3 projection
 	members and one pointer currentProjection.
 	(construct): init currentProjection
 	(setProjection): set currentProjection
@@ -868,7 +885,7 @@
 	Control the Sun settings in the KDE GUI.
 	Patch by Christian Banik.  Thanks!
 	* src/marble_part.h (showSun): new function
-	* src/marble_part.cpp (showSun): new function
+	* src/marble_part{cpp,h}: (showSun): new function
 	(copyMap): activate the show_sun action.
 	* src/marble_part.rc (show_sun): new action
 	* src/marbleui.rc (show_sun): new action
@@ -882,38 +899,38 @@
 	* src/lib/ViewportParams.{h,cpp} (planetAxis): Used to be axis
 	* src/lib/ViewParams.{h,cpp} (m_viewport): New member
 	(projection, radius, planetAxis): new getters/setters
-	* src/lib/AbstractLayer/AbstractLayer.cpp,
-	* src/lib/AbstractLayer/AbstractLayerData.cpp,
-	* src/lib/AbstractScanlineTextureMapper.cpp,
-	* src/lib/FlatScanlineTextureMapper.cpp,
-	* src/lib/GlobeScanlineTextureMapper.cpp,
-	* src/lib/GridMap.cpp,
-	* src/lib/MarbleMap.cpp,
-	* src/lib/MarbleModel.cpp,
-	* src/lib/MeasureTool.cpp,
-	* src/lib/PlaceMarkLayout.cpp,
-	* src/lib/PlaceMarkPainter.cpp,
-	* src/lib/TextureColorizer.cpp,
-	* src/lib/VectorComposer.cpp,
-	* src/lib/VectorMap.cpp:
+	* src/lib/AbstractLayer/AbstractLayer{cpp,h}:,
+	* src/lib/AbstractLayer/AbstractLayerData{cpp,h}:,
+	* src/lib/AbstractScanlineTextureMapper{cpp,h}:,
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:,
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:,
+	* src/lib/GridMap{cpp,h}:,
+	* src/lib/MarbleMap{cpp,h}:,
+	* src/lib/MarbleModel{cpp,h}:,
+	* src/lib/MeasureTool{cpp,h}:,
+	* src/lib/PlaceMarkLayout{cpp,h}:,
+	* src/lib/PlaceMarkPainter{cpp,h}:,
+	* src/lib/TextureColorizer{cpp,h}:,
+	* src/lib/VectorComposer{cpp,h}:,
+	* src/lib/VectorMap{cpp,h}::
 	Use the new calls in ViewParams.
 
 	Actually implement the methods.
 	* src/lib/ViewportParams.h (ViewportParams::m_size): new member
-	* src/lib/ViewportParams.cpp: Implement all functions	
+	* src/lib/ViewportParams{cpp,h}:: Implement all functions	
 
 	New class ViewportParams that will be used in the new
 	AbstractProjection
 	* src/lib/ViewportParams.h: New file
-	* src/lib/ViewportParams.cpp: New file
+	* src/lib/ViewportParams{cpp,h}:: New file
 	* src/lib/CMakeLists.txt: Include the new files
 
 2008-02-13  Carlos Licea  <carlos.licea@kdemail.net>
     Added the Mercator Projection to the placemarks.
-    *src/lib/PlaceMarkPainter.cpp: added Mercator to the switch.
-    *src/lib/PlaceMarkLayout.cpp: added Mercator case to the switch
+    *src/lib/PlaceMarkPainter{cpp,h}:: added Mercator to the switch.
+    *src/lib/PlaceMarkLayout{cpp,h}:: added Mercator case to the switch
      to calculate the position of a given placemark.
-    *src/lib/MarbleMap.cpp: corrected the calculation of the y in
+    *src/lib/MarbleMap{cpp,h}:: corrected the calculation of the y in
      screenCoordinates function.
 
 2008-02-14  Torsten Rahn  <rahn@kde.org>
@@ -924,21 +941,21 @@
       Imported the latest czech changes.
     * data/placemarks/cityplacemarks.kml:
       generated an updated KML file from cities.txt
-    * src/lib/XmlHandler.cpp:
+    * src/lib/XmlHandler{cpp,h}::
       fixed a bug in XmlHandler which didn't honor 
       MarblePlacemarks after its introduction some time ago ("d'oh").
 
 2008-02-13  Carlos Licea  <carlos.licea@kdemail.net>
-    * src/lib/MeasureTool.cpp: continue trying to fix the interpolation of the
+    * src/lib/MeasureTool{cpp,h}:: continue trying to fix the interpolation of the
     measure of two points which crosses the dateline. Not solved yet,
     although I still have to deeply analize it.
-    * src/lib/MarbleMap.cpp: added Mercator case to screenCoordinates and
+    * src/lib/MarbleMap{cpp,h}:: added Mercator case to screenCoordinates and
     geoCoordinates.
-    * src/lib/TextureColorizer.cpp: make it work for the Mercator projection.
-    * src/lib/FlatScanlineTextureMapper.cpp: let it work in the mercator projection
+    * src/lib/TextureColorizer{cpp,h}:: make it work for the Mercator projection.
+    * src/lib/FlatScanlineTextureMapper{cpp,h}:: let it work in the mercator projection
     checking what projection are we painting, Mercator or Equirectangular.
     * global.h: add Mercator projection to the enum Projection.
-    * src/lib/MarbleModel.cpp: added the Mercator projection as an option
+    * src/lib/MarbleModel{cpp,h}:: added the Mercator projection as an option
     for the texture.
 
 2008-02-12  Inge Wallin  <inge@lysator.liu.se>
@@ -950,7 +967,7 @@
 	
 	Only show tile creation dialog in the Widget, not the Map
 	* src/lib/marbleMap.h (creatingTilesstart): removed
-	* src/lib/MarbleMap.cpp (construct): Initialize width, height here
+	* src/lib/MarbleMap{cpp,h}: (construct): Initialize width, height here
 	(construct): Remove connect() for signal creatingTilesStart 
 	(creatingTilesStart): removed
 
@@ -958,20 +975,20 @@
 
     * data/CMakeLists.txt:
     * src/lib/TextureColorizer.{cpp,h}:
-    * src/lib/texturepalette.cpp: deleted
+    * src/lib/texturepalette{cpp,h}:: deleted
 
     Patch by Ismael Asensio to make marble use the .leg files 
-    instead of using the hardcoded values in texturepalette.cpp.
+    instead of using the hardcoded values in texturepalette{cpp,h}:.
 
 2008-02-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix issue with integer overflow and some cleaning
-	* src/lib/GlobeScanlineTextureMapper.cpp (mapTexture): Use qint64
-	* src/lib/TextureColorizer.cpp (colorize): Use qint64
-	* src/lib/MarbleMap.cpp (drawFog): call globeCoversImage
-	* src/lib/VectorMap.cpp (sphericalCreateFromPntMap): use doubles
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}: (mapTexture): Use qint64
+	* src/lib/TextureColorizer{cpp,h}: (colorize): Use qint64
+	* src/lib/MarbleMap{cpp,h}: (drawFog): call globeCoversImage
+	* src/lib/VectorMap{cpp,h}: (sphericalCreateFromPntMap): use doubles
 	(sphericalPaintBase): use doubles
-	* src/lib/PlaceMarkLayout.cpp: cleaning
+	* src/lib/PlaceMarkLayout{cpp,h}:: cleaning
 
 2008-02-09  Inge Wallin  <inge@lysator.liu.se>
 
@@ -984,22 +1001,22 @@
 	argument
 	(*): Disable irritating qDebug()s.
 	(enableInput, disableInput): removed
-	* src/marble_part.cpp: Call with Projection parameters
-	* src/lib/MarbleModel.cpp (*): Disable irritating qDebug()s.
+	* src/marble_part{cpp,h}:: Call with Projection parameters
+	* src/lib/MarbleModel{cpp,h}: (*): Disable irritating qDebug()s.
 	* src/lib/MarbleControlBox.{h,cpp}: projection signals and slots
 	take a Projection
-	* src/lib/PlaceMarkLayout.cpp: Remove irritating qDebug()s.
-	* src/lib/TileLoader.cpp: Remove irritating qDebug()s.
+	* src/lib/PlaceMarkLayout{cpp,h}:: Remove irritating qDebug()s.
+	* src/lib/TileLoader{cpp,h}:: Remove irritating qDebug()s.
 
 	Fix all zoom issues.
-	* src/lib/MarbleWidget.cpp (zoomView): Use MarbleMap correctly
+	* src/lib/MarbleWidget{cpp,h}: (zoomView): Use MarbleMap correctly
 	(zoomIn, zoomOut): call functions in MarbleMap.
-	* src/lib/MarbleMap.cpp (zoomView): Do the correct thing.
+	* src/lib/MarbleMap{cpp,h}: (zoomView): Do the correct thing.
 
 	Fix resizing and projection changes for real
-	* src/lib/MarbleWidget.cpp (resizeEvent): Use MarbleMap correctly
+	* src/lib/MarbleWidget{cpp,h}: (resizeEvent): Use MarbleMap correctly
 	(setProjection):  Use MarbleMap correctly
-	* src/lib/MarbleMap.cpp (doResize): Do the correct thing.
+	* src/lib/MarbleMap{cpp,h}: (doResize): Do the correct thing.
 	(setProjection): Do the correct thing.
 	(drawAtmosphere): Use globeCoversImage
 	(globeCoversImage): New function
@@ -1007,12 +1024,12 @@
 
 	Make the Measure Tool work again.
 	* src/lib/MarbleMap.{h,cpp} (measureTool): New function
-	* src/lib/MarbleWidget.cpp: Remove all traces of the local
+	* src/lib/MarbleWidget{cpp,h}:: Remove all traces of the local
 	MeasureTool.
 
 	Draw fog is only relevant in the Map.
 	* src/lib/MarbleWidget.{h,cpp} (drawFog): Only call drawFog in the map. 
-	* src/lib/MarbleMap.cpp (drawFog): Clean
+	* src/lib/MarbleMap{cpp,h}: (drawFog): Clean
 
 2008-02-08  Inge Wallin  <inge@lysator.liu.se>
 
@@ -1023,28 +1040,28 @@
 	Remove unnecessary code.
 	* src/lib/MarbleWidget.{h,cpp} (setActiveRegion): deleted
 	(setBoundingBox): deleted
-	* src/lib/MarbleMap.cpp: cleaning
-	* src/lib/AbstractLayer/AbstractLayer.cpp: cleaning
+	* src/lib/MarbleMap{cpp,h}:: cleaning
+	* src/lib/AbstractLayer/AbstractLayer{cpp,h}:: cleaning
 
 	Make flat projection work
-	* src/lib/MarbleWidget.cpp: Don't use local m_viewParams for
+	* src/lib/MarbleWidget{cpp,h}:: Don't use local m_viewParams for
 	projection.
 	* src/lib/MarbleMap.{h,cpp} (viewParams): New method
 
 	More preparation
-	* src/lib/MarbleWidget.cpp: Clean away intermediate code from the
+	* src/lib/MarbleWidget{cpp,h}:: Clean away intermediate code from the
 	Widget/Map separation.
 
 2008-02-07  Inge Wallin  <inge@lysator.liu.se>
 
 	More preparation
-	* src/lib/ViewParams.cpp: Cleaning
+	* src/lib/ViewParams{cpp,h}:: Cleaning
 
 	Cleaning and preparation for next step.
 	* src/lib/ClipPainter.{h,cpp}: Cleaning and documentation.
 
 	Next step in separation of MarbleWidget.
-	* src/lib/MarbleWidget.cpp: Make the legend work again by making
+	* src/lib/MarbleWidget{cpp,h}:: Make the legend work again by making
 	all the setters and getters call the equivalent function in
 	MarbleMap. 
 
@@ -1055,31 +1072,31 @@
 
 2008-02-05  Inge Wallin  <inge@lysator.liu.se>
 
-	* src/lib/MarbleWidget.cpp: Continue adapting MarbleWidget to the
+	* src/lib/MarbleWidget{cpp,h}:: Continue adapting MarbleWidget to the
 	new MarbleMap.
 
 	Fix the pan bug that was left from previous commits so that tackat
 	can work again.
-	* src/lib/MarbleWidget.cpp (rotateTo): Delegate to MarbleMap
-	* src/lib/MarbleMap.cpp: cleaning
-	* src/lib/MarbleWidgetInputHandler.cpp: cleaning
+	* src/lib/MarbleWidget{cpp,h}: (rotateTo): Delegate to MarbleMap
+	* src/lib/MarbleMap{cpp,h}:: cleaning
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:: cleaning
 
 2008-02-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Hopefully fix the crash in goHome in the qt only version.
-	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Disable
+	* src/lib/MarbleWidget{cpp,h}: (class MarbleWidgetPrivate): Disable
 	m_homePoint and m_homeZoom.
 	(home, setHome*2, goHome): Immediately call same in MarbleMap.
 	
 
-	* src/lib/MarbleMap.cpp (construct): Don't connect to
+	* src/lib/MarbleMap{cpp,h}: (construct): Don't connect to
 	enableInput() since that slot is only relevant to the widget.
 
 	More fixes in the MarbleWidget / MarbleMap split.
 	* src/lib/MarbleMap.h: Make MarbleWidget a friend of MarbleMap
-	* src/lib/MarbleWidget.cpp: More fixes for MarbleWidget to use
+	* src/lib/MarbleWidget{cpp,h}:: More fixes for MarbleWidget to use
 	MarbleMap.
-	* src/lib/MarbleWidgetInputHandler.cpp: indent better
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:: indent better
 
 2008-02-03  Inge Wallin  <inge@lysator.liu.se>
 
@@ -1088,17 +1105,17 @@
 	      I have to switch computer now, and I'm really sorry about
 	      this.  Navigation with the keyboard works, but not yet with
 	      the mouse, as the integration is not yet 100%.	
-	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Contain a
+	* src/lib/MarbleWidget{cpp,h}: (class MarbleWidgetPrivate): Contain a
 	MarbleMap.
 	(class MarbleWidget): Use the MarbleMap whereever possible.
 	* src/lib/MarbleMap.h (doPaint): now a public function.
-	* src/lib/MarbleMap.cpp: some updates for use in MarbleWidget.
-	* src/lib/ViewParams.cpp: Cleaning
+	* src/lib/MarbleMap{cpp,h}:: some updates for use in MarbleWidget.
+	* src/lib/ViewParams{cpp,h}:: Cleaning
 	
 2008-02-02  Inge Wallin  <inge@lysator.liu.se>
 
 	First step of the new widgetless marble
-	* CMakeLists.cpp: Add MarbleMap.{h,cpp}
+	* CMakeLists{cpp,h}:: Add MarbleMap.{h,cpp}
 	* MarbleMap.{h,cpp}: New files
 	* src/lib/MarbleModel.{h,cpp} (MarbleModel): Make parent a QObject
 	(setMapTheme): Use a QObject instead of a QWidget
@@ -1109,12 +1126,12 @@
 	* src/lib/MarbleWidget.{h,cpp}
 
 	Make all uses of BoundingBox in parameters references.
-	* src/marble_part.cpp:
-	* src/MarbleTest.cpp
-	* src/lib/BoundingBox.cpp
+	* src/marble_part{cpp,h}::
+	* src/MarbleTest{cpp,h}:
+	* src/lib/BoundingBox{cpp,h}:
 	* src/lib/FileViewModel.{h,cpp}
-	* src/lib/MarbleControlBox.cpp
-	* src/lib/MarbleLegendBrowser.cpp
+	* src/lib/MarbleControlBox{cpp,h}:
+	* src/lib/MarbleLegendBrowser{cpp,h}:
 	* src/lib/MarbleModel.{h,cpp}
 	* src/lib/AbstractLayer/AbstractLayer.{h,cpp}
 	* src/lib/AbstractLayer/AbstractLayerContainer.{h,cpp}
@@ -1133,11 +1150,11 @@
 
 2008-02-01  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MapTheme.cpp:
-    * src/lib/MarbleWidget.cpp:
-    * src/lib/TileCreator.cpp:
-    * src/lib/MarbleControlBox.cpp:
-    * src/lib/MarbleModel.cpp:
+    * src/lib/MapTheme{cpp,h}::
+    * src/lib/MarbleWidget{cpp,h}::
+    * src/lib/TileCreator{cpp,h}::
+    * src/lib/MarbleControlBox{cpp,h}::
+    * src/lib/MarbleModel{cpp,h}::
     * data/maps/earth/citylights/citylights.dgml:
     * data/maps/earth/plain/plain.dgml:
     * data/maps/earth/srtm/srtm.dgml:
@@ -1152,21 +1169,21 @@
 
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/FlatScanlineTextureMapper.cpp:
+    * src/lib/FlatScanlineTextureMapper{cpp,h}::
     - Fixing valgrind's finding of "invalid write (4 bytes)".
 
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
-    * src/lib/AbstractScanlineTextureMapper.cpp:
+    * src/lib/AbstractScanlineTextureMapper{cpp,h}::
 
     - Fixing a few memleaks and uninitialized values
 
 2008-01-29  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
-    * src/lib/MarbleLegendBrowser.cpp:
-    * src/lib/FlatScanlineTextureMapper.cpp:
+    * src/lib/MarbleLegendBrowser{cpp,h}::
+    * src/lib/FlatScanlineTextureMapper{cpp,h}::
     * data/bitmaps/border_1.png:
     * data/bitmaps/border_2.png:
     * data/bitmaps/river.png:
@@ -1187,7 +1204,7 @@
 2008-01-28  Carlos Licea  <carlos.licea@kdemail.net>
     * data/credits_authors.html:
     -Changed my e-Mail to carlos.licea@kdemail.net
-    * src/lib/FlatScanLineTextureMapper.cpp:
+    * src/lib/FlatScanLineTextureMapper{cpp,h}::
     -Beggin the implementation of the Mercator projection.    
 
 2008-01-28  Torsten Rahn  <rahn@kde.org>
@@ -1217,7 +1234,7 @@
 
 2008-01-28  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MapTheme.cpp:
+    * src/lib/MapTheme{cpp,h}::
     * data/svg/application-x-marble.svg:
     * data/svg/application-x-marble.png:
     * data/CMakeLists.txt:
@@ -1241,7 +1258,7 @@
 	(setMarbleWidget): New function
 	(genSectionsHtml): New function
 	All: follow coding standards
-	* src/lib/MarbleControlBox.cpp (addMarbleWidget): Set the marble
+	* src/lib/MarbleControlBox{cpp,h}: (addMarbleWidget): Set the marble
 	widget for the legend browser
 	* data/legend.html: Add a marker where generated contents should
 	be inserted
@@ -1249,7 +1266,7 @@
 2008-01-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of definition of the Legend in DGML.
-	* src/lib/MapTheme.cpp (class LegendSection): new class
+	* src/lib/MapTheme{cpp,h}: (class LegendSection): new class
 	(class LegendItem): new class
 	(open): parse legend as well
 	(parseLegend): new function
@@ -1258,12 +1275,12 @@
 
 2008-01-25  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/CompassFloatItem.cpp:
+    * src/lib/CompassFloatItem{cpp,h}::
       - Some slight fix to the compass after the issue 
         got pointed out by Jason Harris
-    * src/lib/SunLocator.cpp:
+    * src/lib/SunLocator{cpp,h}::
       - Some shifting magic by Frederik Hoeglund
-    * src/lib/MergedLayerPainter.cpp:
+    * src/lib/MergedLayerPainter{cpp,h}::
       - Patch by David Roberts to let MergedLayerPainter 
         deal with 8bit grayscale cloud images
     * cloudtiles/tile_clouds.pl:
@@ -1272,13 +1289,13 @@
 
 2008-01-24  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
         - Fixing embarassing bug which resulted in a 
           severe slowdown from tile level 9 up.
-    * src/lib/MapScaleFloatItem.cpp:
+    * src/lib/MapScaleFloatItem{cpp,h}::
         - Some dirty fix for the below-1km issue with the 
           scale bar (this class needs better documentation).
-    * src/lib/MergedLayerPainter.cpp:
+    * src/lib/MergedLayerPainter{cpp,h}::
         - Status: FIX->TODO
 
 2008-01-22  Torsten Rahn  <rahn@kde.org>
@@ -1292,12 +1309,12 @@
 
 	Make files follow coding standards again:
 	* src/lib/ExtDateTime.{h,cpp}
-	* src/lib/MarbleWidget.cpp
+	* src/lib/MarbleWidget{cpp,h}:
 	* src/lib/MergedLayerPainter.{h,cpp}
-	* src/lib/SunControlWidget.cpp
-	* src/lib/SunLocator.cpp
+	* src/lib/SunControlWidget{cpp,h}:
+	* src/lib/SunLocator{cpp,h}:
 	* src/lib/TextureTile.{h,cpp}
-	* src/lib/TileLoader.cpp
+	* src/lib/TileLoader{cpp,h}:
 	
 2008-01-22  Torsten Rahn  <rahn@kde.org>
 
@@ -1306,8 +1323,8 @@
     * src/lib/SunControlWidget.{ui,cpp,h}: 
     * src/lib/ExtDateTime.{cpp,h}:
     * src/lib/MergedLayerPainter.{cpp, h}:
-    * src/lib/MarbleWidget.cpp
-    * src/lib/TileLoader.cpp
+    * src/lib/MarbleWidget{cpp,h}:
+    * src/lib/TileLoader{cpp,h}:
     * src/lib/CMakeLists.txt
     
     - Another great patch set by David Roberts:
@@ -1352,9 +1369,9 @@
     * src/lib/SunControlWidget.{ui,cpp,h}:
     * src/lib/ExtDateTime.{cpp,h}:
     * src/lib/MarbleModel.{cpp,h}:
-    * src/lib/MarblePlacemarkModel.cpp:
-    * src/lib/TextureTile.cpp:
-    * src/lib/PlaceMarkLayout.cpp:
+    * src/lib/MarblePlacemarkModel{cpp,h}::
+    * src/lib/TextureTile{cpp,h}::
+    * src/lib/PlaceMarkLayout{cpp,h}::
     * src/ControlView.h:
 
     More patches by David Roberts:
@@ -1368,16 +1385,16 @@
 
 	Remove warnings.
 	* src/lib/MarbleWidget.{h,cpp} (construct): Don't take a widget.
-	* src/lib/TileCreator.cpp: use uint where appropriate, 
-	* src/lib/GridMap.cpp (sphericalCreateCircle): use Q_UNUSED
+	* src/lib/TileCreator{cpp,h}:: use uint where appropriate, 
+	* src/lib/GridMap{cpp,h}: (sphericalCreateCircle): use Q_UNUSED
 
 	Cleaning
 	* src/lib/SunLocator{h,cpp}: Follow coding standards
 	* src/lib/SunControlWidget.{h,cpp}: Follow coding standards
-	* src/lib/TileCreator.cpp: Cleaning
+	* src/lib/TileCreator{cpp,h}:: Cleaning
 	
 	Make the BoundingBox usable.
-	* src/lib/BoundingBox.cpp (BoundingBox::init): Fix all bugs.
+	* src/lib/BoundingBox{cpp,h}: (BoundingBox::init): Fix all bugs.
 
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
@@ -1400,12 +1417,12 @@
 2008-01-20  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix bug with max/min zoom, by moving a check.
-	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): Remove
+	* src/lib/MarbleWidget{cpp,h}: (MarbleWidgetPrivate): Remove
 	m_minimumzoom, m_maximumzoom
 	(MarbleWidget::zoomView): Check for over- and underflow, cleaning
 	(MarbleWidget::zoomViewBy): Simplify by removing check.
 	(misc functions): cleaning
-	* src/lib/MarbleWidgetInputHandler.cpp (Misc functions): cleaning
+	* src/lib/MarbleWidgetInputHandler{cpp,h}: (Misc functions): cleaning
 
 2008-01-20  Torsten Rahn  <rahn@kde.org>
 
@@ -1462,7 +1479,7 @@
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/SunLocator.{cpp,h}:
     * src/lib/TileLoader.{cpp,h}:
-    * src/lib/TextureTile.cpp
+    * src/lib/TextureTile{cpp,h}:
 
     - More patches by David Roberts to fix and speed-up
     the sun shading. 
@@ -1480,15 +1497,15 @@
 
       bool tileIdVisible = true;
 
-    in TextureTile.cpp, line 174 to see the effect. Really cool
+    in TextureTile{cpp,h}:, line 174 to see the effect. Really cool
     and makes tile loading pretty clear if you haven't understood
     it yet.
 
 2008-01-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning
-	* src/lib/MarbleModel.cpp ():Follow coding standards
-	* src/lib/TileCreator.cpp ():Follow coding standards
+	* src/lib/MarbleModel{cpp,h}: ():Follow coding standards
+	* src/lib/TileCreator{cpp,h}: ():Follow coding standards
 	
 2008-01-17  Torsten Rahn  <rahn@kde.org>
 
@@ -1513,13 +1530,13 @@
 
 2008-01-17  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/TextureColorizer.cpp:
+    * src/lib/TextureColorizer{cpp,h}::
 	- Optimizations.
     * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
     * src/lib/MarbleWidget.{cpp,h}:
     * src/lib/MarbleModel.{cpp,h}:
-    * src/lib/GlobeScanlineTextureMapper.cpp:
-    * src/lib/FlatScanlineTextureMapper.cpp:
+    * src/lib/GlobeScanlineTextureMapper{cpp,h}::
+    * src/lib/FlatScanlineTextureMapper{cpp,h}::
 	- First steps towards tile preloading
 	- Removing the headingTowards stuff as I don't need it.
 
@@ -1529,7 +1546,7 @@
 2008-01-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix bug that made min/max zoom in .dgml files not work.
-	* src/lib/MapTheme.cpp (open): Compare against lower cased
+	* src/lib/MapTheme{cpp,h}: (open): Compare against lower cased
 	names minimumzoom and maximumzoom.
 
 2008-01-16  Torsten Rahn  <rahn@kde.org>
@@ -1544,25 +1561,25 @@
 2008-01-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Complete min/maximumZoom in .dgml files.
-	* src/lib/MapTheme.cpp (open): Provide default values for
+	* src/lib/MapTheme{cpp,h}: (open): Provide default values for
 	minimumZoom and maxmimumZoom
 	(open): bug fix in parsing.
 	* src/lib/MarbleModel.h (setMinimumZoom, setMaximiumZoom): removed
-	* src/lib/MarbleModel.cpp (minimumZoom, maximumZoom): Use values
+	* src/lib/MarbleModel{cpp,h}: (minimumZoom, maximumZoom): Use values
 	from MapTheme
-	* src/lib/MarbleWidget.cpp (minimumZoom, maximumZoom): Use values
+	* src/lib/MarbleWidget{cpp,h}: (minimumZoom, maximumZoom): Use values
 	from MarbleModel
-	* src/lib/MarbleControlBox.cpp (MarbleControlBoxPrivate::m_minimumZoom):  removed
+	* src/lib/MarbleControlBox{cpp,h}: (MarbleControlBoxPrivate::m_minimumZoom):  removed
 	(minimumZoom): use value from the widget.
 	(changeZoom): don't use m_minimumzoom
-	* src/ControlView.cpp (ControlView): Remove initialization of
+	* src/ControlView{cpp,h}: (ControlView): Remove initialization of
 	minimum zoom in the widget.
 
 2008-01-14    Inge Wallin  <inge@lysator.liu.se>
 
 	Continue with min and max zoom in .dgml files
 	* src/lib/MapTheme.h (minimumZoom, maximumZoom): New methods
-	* src/lib/MapTheme.cpp (open): New default for minimumZoom
+	* src/lib/MapTheme{cpp,h}: (open): New default for minimumZoom
 	* src/lib/MarbleWidget.{h,cpp} (minumumZoom, maximumZoom,
 	setMaximumZoom): new methods
 	* src/lib/MarbleControlBox (selectTheme): dig out minimumZoom and
@@ -1572,10 +1589,10 @@
 
 	Support minimumZoom and maximumZoom in .dgml files.
 	* src/lib/MapTheme.h (m_minimumZoom, m_maximumZoom): new members
-	* src/lib/MapTheme.cpp (open): Support miminumZoom and maximumZoom
+	* src/lib/MapTheme{cpp,h}: (open): Support miminumZoom and maximumZoom
 	in .dgml files
 	(open): use else if instead of only if's
-	* src/lib/MarbleModel.cpp (setMapTheme): cleaning
+	* src/lib/MarbleModel{cpp,h}: (setMapTheme): cleaning
 	
 2008-01-13  Torsten Rahn  <rahn@kde.org>
 
@@ -1596,20 +1613,20 @@
     - Introduction of direction detection
     - clean-up
 
-    * src/lib/GridMap.cpp: Small performance fix
-    * src/MarbleTest.cpp: Fixing default coordinates
+    * src/lib/GridMap{cpp,h}:: Small performance fix
+    * src/MarbleTest{cpp,h}:: Fixing default coordinates
 
 2008-01-07  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/ViewParams.h:
     * src/lib/MarbleWidget.{h, cpp}:
-    * src/lib/MarbleModel.cpp:
+    * src/lib/MarbleModel{cpp,h}::
 
     - Fixed blue tint of space and added setBackgroundTransparency method as part of the fix.
     - Don't draw the whole screen if the globe doesn't cover it completely.
     - Fixed Atmosphere not getting drawn when changing projection.
 
-    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleControlBox{cpp,h}::
     * src/lib/MarbleControlBox.ui:
 
     - Getting rid of scrollbars under normal conditions.
@@ -1633,20 +1650,20 @@
 2008-01-03  Torsten Rahn  <rahn@kde.org>
 
     * ChangeLog:
-    * src/lib/gps/Track.cpp:
+    * src/lib/gps/Track{cpp,h}::
     * src/lib/gps/Track.h:
-    * src/lib/gps/GpxSax.cpp:
-    * src/lib/gps/GpsTracking.cpp:
-    * src/lib/gps/WaypointContainer.cpp:
+    * src/lib/gps/GpxSax{cpp,h}::
+    * src/lib/gps/GpsTracking{cpp,h}::
+    * src/lib/gps/WaypointContainer{cpp,h}::
     * src/lib/gps/GpxSax.h:
-    * src/lib/gps/GpxFileModel.cpp:
-    * src/lib/AbstractLayer/AbstractLayerData.cpp:
+    * src/lib/gps/GpxFileModel{cpp,h}::
+    * src/lib/AbstractLayer/AbstractLayerData{cpp,h}::
     * src/lib/HttpFetchFile.h:
-    * src/lib/HttpDownloadManager.cpp:
+    * src/lib/HttpDownloadManager{cpp,h}::
     * src/lib/global.h:
-    * src/lib/MarbleControlBox.cpp:
-    * src/lib/MarbleModel.cpp:
-    * src/lib/HttpFetchFile.cpp:
+    * src/lib/MarbleControlBox{cpp,h}::
+    * src/lib/MarbleModel{cpp,h}::
+    * src/lib/HttpFetchFile{cpp,h}::
 
     - Fixed mem leaks in the DownloadManager. 
     - Bumping up the version number to 0.5
@@ -1654,7 +1671,7 @@
 
 2008-01-03  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/GlobeScanlineTextureMapper.cpp:
+    * src/lib/GlobeScanlineTextureMapper{cpp,h}::
     - Fix precise rendering around north pole
 
     - Fix for [Bug 154916] Crash on startup in MarbleWidget::resizeEvent
@@ -1662,33 +1679,33 @@
 
 2008-01-02  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
     * src/lib/MarbleModel.{cpp,h}:
-    * src/lib/ViewParams.cpp:
+    * src/lib/ViewParams{cpp,h}::
 
     - Getting rid of m_downloadManager in MarbleWidget to simplify code.
     - Thereby fixed a mem leak concerning the same issue.
 
 2008-01-01  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleWidget.cpp:
-    * src/lib/ViewParams.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
+    * src/lib/ViewParams{cpp,h}::
     Initialize m_canvasimg before the model gets instantiated.
 
 2008-01-01  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleModel.cpp: Initialize.
+    * src/lib/MarbleModel{cpp,h}:: Initialize.
 
 2008-01-01  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleModel.cpp: more paranoid check whether the 
+    * src/lib/MarbleModel{cpp,h}:: more paranoid check whether the 
       .dgml file has been opened successfully.
 
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/PlaceMarkLayout.{cpp,h}:
-    * src/lib/MarbleModel.cpp:
-    * src/lib/VisiblePlaceMark.cpp:
+    * src/lib/MarbleModel{cpp,h}::
+    * src/lib/VisiblePlaceMark{cpp,h}::
 
     - Fixing a crash reported by Claudiu Costin.
 
@@ -1697,11 +1714,11 @@
 	* src/ControlView.h (marbleControl): New function
 	* src/lib/MarbleControlBox.{h,cpp} (updateMapThemes): New function
 	(constructor): call updateMapThemes().
-	* src/marble_part.cpp (showNewStuffDialog): update the map themes 
+	* src/marble_part{cpp,h}: (showNewStuffDialog): update the map themes 
 	list in the controlbox.
 	(misc): cleaning
-	* src/lib/MapTheme.cpp: cleaning
-	* src/lib/MarbleModel.cpp: cleaning	
+	* src/lib/MapTheme{cpp,h}:: cleaning
+	* src/lib/MarbleModel{cpp,h}:: cleaning	
 
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
@@ -1724,20 +1741,20 @@
 
 2007-12-31  Torsten Rahn  <rahn@kde.org>
 
-    * lib/MeasureTool.cpp: Fixed partial disappearance of the 
+    * lib/MeasureTool{cpp,h}:: Fixed partial disappearance of the 
       measureline east to the date line. 
 
 2007-12-30  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/VectorMap.cpp: Fixed last "turns-white" bug
+    * src/lib/VectorMap{cpp,h}:: Fixed last "turns-white" bug
 
 2007-12-30    Inge Wallin  <inge@lysator.liu.se>
 
 	Save and restore the current map theme in the settings.
 	* src/marble.kcfg: add mapTheme as a setting of type string.
-	* src/marble_part.cpp (readSettings): Read mapTheme
+	* src/marble_part{cpp,h}: (readSettings): Read mapTheme
 	(writeSettings): Write mapTheme
-	* src/QtMainWindow.cpp (readSettings): Read mapTheme
+	* src/QtMainWindow{cpp,h}: (readSettings): Read mapTheme
 	(writeSettings): Write mapTheme
 
 2007-12-30  Torsten Rahn  <rahn@kde.org>
@@ -1746,11 +1763,11 @@
       have some fine tuning)
     - Changed QDataStream format to 4_2
 
-    * src/lib/PlaceMarkLayout.cpp
-    * src/lib/PlaceMarkContainer.cpp
-    * src/lib/MarblePlacemarkModel.cpp
-    * src/lib/PlaceMarkManager.cpp
-    * src/lib/geodata/data/GeoDataFeature.cpp
+    * src/lib/PlaceMarkLayout{cpp,h}:
+    * src/lib/PlaceMarkContainer{cpp,h}:
+    * src/lib/MarblePlacemarkModel{cpp,h}:
+    * src/lib/PlaceMarkManager{cpp,h}:
+    * src/lib/geodata/data/GeoDataFeature{cpp,h}:
     * data/placemarks/baseplacemarks.cache
     * data/placemarks/elevplacemarks.cache
     * data/placemarks/otherplacemarks.cache
@@ -1764,12 +1781,12 @@
     Reduces file size and reduces my headaches a bit. 
 
     * src/lib/MarblePlacemarkModel.h
-    * src/lib/XmlHandler.cpp
-    * src/lib/MarblePlacemarkModel.cpp
-    * src/lib/PlaceMarkManager.cpp
-    * src/lib/VectorMap.cpp
+    * src/lib/XmlHandler{cpp,h}:
+    * src/lib/MarblePlacemarkModel{cpp,h}:
+    * src/lib/PlaceMarkManager{cpp,h}:
+    * src/lib/VectorMap{cpp,h}:
     * src/lib/XmlHandler.h
-    * src/lib/GeoPolygon.cpp
+    * src/lib/GeoPolygon{cpp,h}:
     * data/placemarks/baseplacemarks.cache
     * data/placemarks/elevplacemarks.cache
     * data/placemarks/otherplacemarks.cache
@@ -1780,7 +1797,7 @@
 
 	Save projection too in KDE version.
 	* src/marble.kcfg: Added projection to variables.
-	* src/marble_part.cpp (writeSettings): Write projection
+	* src/marble_part{cpp,h}: (writeSettings): Write projection
 	(readSettings): read projection
 
 	Fix includes so that using the widget from an external program
@@ -1794,22 +1811,22 @@
 	* src/lib/AbstractLayer/AbstractLayerData.h,
 	* src/lib/AbstractLayer/AbstractLayerInterface.h,
 	* src/lib/AbstractScanlineTextureMapper.h,
-	* src/lib/GridMap.cpp,
-	* src/lib/KMLFileViewItem.cpp,
+	* src/lib/GridMap{cpp,h}:,
+	* src/lib/KMLFileViewItem{cpp,h}:,
 	* src/lib/MarbleControlBox.h,
-	* src/lib/MarblePlacemarkModel.cpp,
+	* src/lib/MarblePlacemarkModel{cpp,h}:,
 	* src/lib/MarbleWidget.h,
 	* src/lib/MeasureTool.h,
 	* src/lib/PlaceMarkContainer.h,
-	* src/lib/PlaceMarkLayout.cpp,
+	* src/lib/PlaceMarkLayout{cpp,h}:,
 	* src/lib/PlaceMarkLayout.h,
-	* src/lib/PlaceMarkPainter.cpp,
-	* src/lib/VisiblePlaceMark.cpp: Always include just "foo.h" and
+	* src/lib/PlaceMarkPainter{cpp,h}:,
+	* src/lib/VisiblePlaceMark{cpp,h}:: Always include just "foo.h" and
 	not "lib/foo.h" or "geodata/data/foo.h" or anything similar
 
 2007-12-28  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/VectorMap.cpp:
+    * src/lib/VectorMap{cpp,h}::
     * src/lib/GeoPolygon.{cpp,h}:
 
     - Partially fix dateline issue with Bounding Box
@@ -1824,15 +1841,15 @@
 2007-12-25  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MeasureTool.{cpp, h}:
-    * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
 
     More ViewParam-ization.
 
 2007-12-25  Torsten Rahn  <rahn@kde.org>
 
 	* VectorMap.{cpp,h}:
-	* TextureColorizer.cpp:
-	* VectorComposer.cpp:
+	* TextureColorizer{cpp,h}::
+	* VectorComposer{cpp,h}::
 
 	More ViewParam-ization.
 
@@ -1848,41 +1865,41 @@
 2007-12-15  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix more warnings
-	* src/lib/gps/Track.cpp,
+	* src/lib/gps/Track{cpp,h}:,
 	src/lib/gps/Gpslayer.h,
-	src/lib/geodata/data/GeoDataFeature.cpp,
-	src/lib/GridMap.cpp: Fix warnings
+	src/lib/geodata/data/GeoDataFeature{cpp,h}:,
+	src/lib/GridMap{cpp,h}:: Fix warnings
 	
 	Fix unnecessary warnings:
-	* MarbleWidget.cpp,
-	TileCreator.cpp,
+	* MarbleWidget{cpp,h}:,
+	TileCreator{cpp,h}:,
 	AbstractLayer/AbstractLayerData.h,
-	AbstractLayer/AbstractLayerContainer.cpp,
-	AbstractLayer/AbstractLayerData.cpp,
-	TileLoader.cpp,
-	PlaceMarkLayout.cpp,
-	XmlHandler.cpp,
-	PlaceMarkManager.cpp,
-	FileViewModel.cpp,
-	TextureColorizer.cpp,
+	AbstractLayer/AbstractLayerContainer{cpp,h}:,
+	AbstractLayer/AbstractLayerData{cpp,h}:,
+	TileLoader{cpp,h}:,
+	PlaceMarkLayout{cpp,h}:,
+	XmlHandler{cpp,h}:,
+	PlaceMarkManager{cpp,h}:,
+	FileViewModel{cpp,h}:,
+	TextureColorizer{cpp,h}:,
 	geodata/data/GeoDataIconStyle.h,
-	geodata/data/GeoDataPoint.cpp,
-	geodata/data/GeoDataFeature.cpp,
+	geodata/data/GeoDataPoint{cpp,h}:,
+	geodata/data/GeoDataFeature{cpp,h}:,
 	geodata/data/GeoDataPoint.h,
-	geodata/data/GeoDataLabelStyle.cpp,
-	gps/Route.cpp,
-	gps/RouteContainer.cpp,
-	gps/Track.cpp,
+	geodata/data/GeoDataLabelStyle{cpp,h}:,
+	gps/Route{cpp,h}:,
+	gps/RouteContainer{cpp,h}:,
+	gps/Track{cpp,h}:,
 	gps/RouteContainer.h,
-	gps/GpsTracking.cpp,
+	gps/GpsTracking{cpp,h}:,
 	gps/TrackContainer.h,
-	gps/WaypointContainer.cpp,
+	gps/WaypointContainer{cpp,h}:,
 	gps/Waypoint.h,
-	gps/GpxFileModel.cpp,
+	gps/GpxFileModel{cpp,h}:,
 	gps/WaypointContainer.h:  Fix most warnings.
 	
 	Bugfix: 
-	* src/lib/geodata/data/GeoDataIconStyle.cpp (setHotSpot): use (x, y)
+	* src/lib/geodata/data/GeoDataIconStyle{cpp,h}: (setHotSpot): use (x, y)
 	instead of (x, x):
 	
 	Mini fixes
@@ -1898,16 +1915,16 @@
     One single major bug left for the flat map and 
     the flat map is now as fast as the globe.
 
-    * src/lib/MeasureTool.cpp: degX,Y -> lon, lat
+    * src/lib/MeasureTool{cpp,h}:: degX,Y -> lon, lat
 
-    * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
        - Some fix by Jan Becker about screenCoordinates(...)
        - degX,Y -> lon, lat
     * src/lib/VectorMap.{h,cpp}:
        - Speedup by avoiding Quaternion representation for
          rectangular projection
        - degX,Y -> lon, lat
-    * src/lib/PlaceMarkLayout.cpp:
+    * src/lib/PlaceMarkLayout{cpp,h}::
        - Fixing "two few placemarks" bug for rect. projection
        - Speedup by avoiding Quaternion representation for
          rect. projection
@@ -1916,7 +1933,7 @@
 2007-12-11  Torsten Rahn  <rahn@kde.org>
 
     Patch set by Jan Becker <tahoma@gmx.de>:
-    * src/lib/MeasureTool.cpp:
+    * src/lib/MeasureTool{cpp,h}::
       Bugfix to make Measuretool mostly work in 
       Equirectangular projection (tiny small issues
       which aren't relevant for now still remain)
@@ -1967,16 +1984,16 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-12-05  Torsten Rahn  <rahn@kde.org>
     
-    * src/lib/AbstractScanlineTextureMapper.cpp: Small fix by Jan Becker
-    * src/lib/MarbleControlBox.cpp: Fix by Casper Boeman for QToolBox issue
-    * src/lib/MarbleModel.cpp: "Fix" to improve Marble speed
+    * src/lib/AbstractScanlineTextureMapper{cpp,h}:: Small fix by Jan Becker
+    * src/lib/MarbleControlBox{cpp,h}:: Fix by Casper Boeman for QToolBox issue
+    * src/lib/MarbleModel{cpp,h}:: "Fix" to improve Marble speed
 
     All changes are trivial.
 
 2007-11-13  Torsten Rahn  <rahn@kde.org>
     
     * src/lib/PlaceMarkPainter.{h,cpp}: Fix black labels on dark maps
-    * src/lib/MarbleModel.cpp: Fix black labels on dark maps
+    * src/lib/MarbleModel{cpp,h}:: Fix black labels on dark maps
 
     This is just a quick and dirty workaround that needs to get removed
     later on.
@@ -1985,7 +2002,7 @@ there, are their any dependencies to other code regarding this ownership?)
     
     * src/lib/TileCreator.{h,cpp}: Fix TileCreator bug
     * src/lib/TileCreatorDialog.{h,cpp}: Fix TileCreator bug
-    * src/lib/MarbleModel.cpp: Fix TileCreator bug
+    * src/lib/MarbleModel{cpp,h}:: Fix TileCreator bug
 
 2007-11-12  Inge Wallin  <inge@lysator.liu.se>
 
@@ -2005,15 +2022,15 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	Rename PlaceMarkModel --> MarblePlacemarkModel
 	* PlaceMarkModel.h   -->  MarblePlacemarkModel.h
-	* PlaceMarkModel.cpp -->  MarblePlacemarkModel.cpp
+	* PlaceMarkModel{cpp,h}: -->  MarblePlacemarkModel{cpp,h}:
 	* PlaceMarkModel_P.h -->  MarblePlacemarkModel_P.h
 	* MarbleModel.{h,cpp},
-	* MarbleWidget.cpp,
+	* MarbleWidget{cpp,h}:,
 	* PlaceMarkManager.{h,cpp},
-	* PlaceMarkLayout.cpp,
-	* PlaceMarkPainter.cpp,
+	* PlaceMarkLayout{cpp,h}:,
+	* PlaceMarkPainter{cpp,h}:,
 	* VisiblePlaceMark.{h,cpp},
-	* PlaceMarkInfoDialog.cpp,
+	* PlaceMarkInfoDialog{cpp,h}:,
 	* CMakeLists.txt: Reflect this namechange.
 
 	APIDOX:
@@ -2023,7 +2040,7 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/geodata/data/GeoDataFolder.h: (addFolder): removed
 	(m_folderVector): removed
 	(class GeoDataFolder): Added APIDOX.
-	* src/lib/geodata/data/GeoDataFolder.cpp: (~GeoDataFolder): make
+	* src/lib/geodata/data/GeoDataFolder{cpp,h}:: (~GeoDataFolder): make
 	empty
 	(addFolder): removed
 	* src/lib/geodata/data/GeoDataDocument.{h,cpp}: (class
@@ -2037,7 +2054,7 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/geodata/data/GeoDataContainer.h (class
 	GeoDataContainer): Contain GeoDataFeatures instead of
 	GeoDataPlacemarks.
-	* src/lib/geodata/data/GeoDataContainer.cpp: follow changes.
+	* src/lib/geodata/data/GeoDataContainer{cpp,h}:: follow changes.
 
 2007-11-09  Inge Wallin  <inge@lysator.liu.se>
 
@@ -2049,21 +2066,21 @@ there, are their any dependencies to other code regarding this ownership?)
 	
 	Rename PlaceMark into Placemark
         * lib/geodata/data/GeoDataPlaceMark.h    -> GeoDataPlacemark.h
-        * lib/geodata/data/GeoDataPlaceMark.cpp  -> GeoDataPlacemark.cpp
+        * lib/geodata/data/GeoDataPlaceMark{cpp,h}:  -> GeoDataPlacemark{cpp,h}:
         * lib/CMakeLists.txt: Mirror namechange above
-        * lib/MarbleWidgetPopupMenu.cpp,
-          lib/PlaceMarkContainer.cpp,
+        * lib/MarbleWidgetPopupMenu{cpp,h}:,
+          lib/PlaceMarkContainer{cpp,h}:,
           lib/PlaceMarkContainer.h,
-          lib/PlaceMarkLayout.cpp,
+          lib/PlaceMarkLayout{cpp,h}:,
           lib/PlaceMarkLayout.h,
-          lib/PlaceMarkManager.cpp,
+          lib/PlaceMarkManager{cpp,h}:,
           lib/PlaceMarkPainter.h,
-          lib/XmlHandler.cpp,
+          lib/XmlHandler{cpp,h}:,
           lib/XmlHandler.h,
           lib/geodata/CMakeLists.txt,
-          lib/geodata/data/GeoDataContainer.cpp,
+          lib/geodata/data/GeoDataContainer{cpp,h}:,
           lib/geodata/data/GeoDataContainer.h,
-          lib/geodata/data/GeoDataDocument.cpp,
+          lib/geodata/data/GeoDataDocument{cpp,h}:,
           lib/geodata/data/GeoDataFeature.h:
 	Use new names
 	
@@ -2081,9 +2098,9 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/geodata/data/GeoDataFeature.h: More apidox
 
 	Warnings--
-	* src/kdemain.cpp,
-	* src/lib/PlaceMarkContainer.cpp,
-	* src/lib/geodata/data/GeoDataFeature.cpp:
+	* src/kdemain{cpp,h}:,
+	* src/lib/PlaceMarkContainer{cpp,h}:,
+	* src/lib/geodata/data/GeoDataFeature{cpp,h}::
 	Improve comments, remove warnings, clean code
 
 	APIDOX
@@ -2102,10 +2119,10 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-11-01  Torsten Rahn  <rahn@kde.org>
     
-    * src/lib/PlaceMarkInfoDialog.cpp
-    * src/lib/XmlHandler.cpp
-    * src/lib/MarbleModel.cpp
-    * src/lib/geodata/data/GeoDataFeature.cpp
+    * src/lib/PlaceMarkInfoDialog{cpp,h}:
+    * src/lib/XmlHandler{cpp,h}:
+    * src/lib/MarbleModel{cpp,h}:
+    * src/lib/geodata/data/GeoDataFeature{cpp,h}:
     * src/lib/geodata/data/GeoDataFeature.h
     * ChangeLog
     * data/placemarks/COPYRIGHT
@@ -2141,16 +2158,16 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/gps/GpxFile.h,
 	* src/lib/gps/RouteContainer.h,
 	* src/lib/gps/Track.h,
-	* src/lib/gps/WaypointContainer.cpp,
+	* src/lib/gps/WaypointContainer{cpp,h}:,
 	* src/lib/gps/Waypoint.h,
-	* src/lib/gps/GpxFileModel.cpp,
+	* src/lib/gps/GpxFileModel{cpp,h}:,
 	* src/lib/gps/WaypointContainer.h,
 	* src/lib/gps/GpxFileModel.h:
 	Follow coding standards
 	
 	APIDOX
 	* src/lib/MarbleModel.h: More apidox
-	* src/lib/MarbleModel.cpp: Improve comments
+	* src/lib/MarbleModel{cpp,h}:: Improve comments
 	
 2007-09-26  Torsten Rahn  <rahn@kde.org>
 	
@@ -2158,15 +2175,15 @@ there, are their any dependencies to other code regarding this ownership?)
 	  Added shipwreck category.
 
 	* src/lib/MarbleWidget.{h,cpp}:
-	* src/lib/PlaceMarkLayout.cpp:
-	* src/lib/XmlHandler.cpp:
-	* src/lib/PlaceMarkContainer.cpp:
+	* src/lib/PlaceMarkLayout{cpp,h}::
+	* src/lib/XmlHandler{cpp,h}::
+	* src/lib/PlaceMarkContainer{cpp,h}::
 	* src/lib/MarbleLegendBrowser.{h,cpp}:
-	* src/lib/PlaceMarkManager.cpp:
+	* src/lib/PlaceMarkManager{cpp,h}::
 	* src/lib/ViewParams.h:
-	* src/lib/PlaceMarkInfoDialog.cpp:
-	* src/lib/MarbleControlBox.cpp:
-	* src/lib/PlaceMark.cpp:
+	* src/lib/PlaceMarkInfoDialog{cpp,h}::
+	* src/lib/MarbleControlBox{cpp,h}::
+	* src/lib/PlaceMark{cpp,h}::
 	* data/placemarks/baseplacemarks.cache:
 	* data/placemarks/elevplacemarks.cache:
 	* data/placemarks/otherplacemarks.kml:
@@ -2175,10 +2192,10 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-09-26  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/TextureColorizer.cpp:
-	* src/lib/texturepalette.cpp:
+	* src/lib/TextureColorizer{cpp,h}::
+	* src/lib/texturepalette{cpp,h}::
 	* src/lib/MarbleModel.h:
-	* tools/palettegen/palettegen.cpp:
+	* tools/palettegen/palettegen{cpp,h}::
 	- Highlights for mountains
 	- Fixed bug introduced by ingwa
 
@@ -2187,20 +2204,20 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/PlaceMarkLayout.{h,cpp}:
 	- Adding placeMarksOnScreenLimit()
 
-	* src/lib/TextureColorizer.cpp:
+	* src/lib/TextureColorizer{cpp,h}::
 	- Optimization
 
 2007-09-25  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/PlaceMarkLayout.cpp:
+	* src/lib/PlaceMarkLayout{cpp,h}::
 	* src/lib/PlaceMarkPainter.{h,cpp}:
 	- More polishing in the layout/painter 
 	  classes.
 
-	* src/lib/TextureColorizer.cpp:
-	* src/lib/texturepalette.cpp:
-	* src/lib/ClipPainter.cpp:
-	* tools/palettegen/palettegen.cpp:
+	* src/lib/TextureColorizer{cpp,h}::
+	* src/lib/texturepalette{cpp,h}::
+	* src/lib/ClipPainter{cpp,h}::
+	* tools/palettegen/palettegen{cpp,h}::
 	- Fixing tiny bug to improve render quality.
 	- preparing further improved relief rendering.
 
@@ -2208,7 +2225,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	APIDOX
 	* src/lib/MarbleModel.h: Add apidox
-	* src/lib/MarbleModel.cpp: Improve comments
+	* src/lib/MarbleModel{cpp,h}:: Improve comments
 	
 	Make BUGS file actually usable.
 	* BUGS: Format better to make it readable
@@ -2229,21 +2246,21 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-09-24  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/TileCreator.cpp:
+	* src/lib/TileCreator{cpp,h}::
 	- Hopefully fixed Ingwa's bug?
 
-	* src/lib/PlaceMarkPainter.cpp:
-	- Tidying up PlaceMarkPainter.cpp a bit.
+	* src/lib/PlaceMarkPainter{cpp,h}::
+	- Tidying up PlaceMarkPainter{cpp,h}: a bit.
 
 2007-09-23  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/PlaceMarkPainter.cpp: 
+	* src/lib/PlaceMarkPainter{cpp,h}:: 
 	- Regretfully sorting out a frequently featured 
 	  Feature regression
 
 2007-09-23  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/PlaceMarkPainter.cpp: 
+	* src/lib/PlaceMarkPainter{cpp,h}:: 
 	Partially fix the position of the label.
 
 2007-09-20  Inge Wallin  <inge@lysator.liu.se>
@@ -2262,8 +2279,8 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-09-18  Torsten Rahn  <rahn@kde.org>
 
-	* src/kdemain.cpp:
-	* src/qtmain.cpp:
+	* src/kdemain{cpp,h}::
+	* src/qtmain{cpp,h}::
 	* src/lib/MarbleWidget.{cpp,h}:
 	* src/lib/AutoSettings.{h,cpp}:
 	* src/lib/CMakeLists.txt:
@@ -2272,14 +2289,14 @@ there, are their any dependencies to other code regarding this ownership?)
 	  on the fly as a preparation for the AutoSettings class.
 	- Added stub for AutoSettings class
 
-	* src/marble_part.cpp:
-	* src/QtMainWindow.cpp:
+	* src/marble_part{cpp,h}::
+	* src/QtMainWindow{cpp,h}::
 
 	- Fixed bug as pointed out by murdok.lnx@gmail.com
 
-	* src/lib/ClipPainter.cpp:
-	* src/lib/MarbleControlBox.cpp:
-	* src/lib/TextureColorizer.cpp:
+	* src/lib/ClipPainter{cpp,h}::
+	* src/lib/MarbleControlBox{cpp,h}::
+	* src/lib/TextureColorizer{cpp,h}::
 
 	- Fixed minor issues
 
@@ -2294,14 +2311,14 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-09-17  Inge Wallin  <inge@lysator.liu.se>
 
 	More work on APIDOX: 
-	* src/lib/MarbleWidget.cpp: Fix errors with parameters.
+	* src/lib/MarbleWidget{cpp,h}:: Fix errors with parameters.
 	* src/lib/MarbleWidget.h,
 	* src/lib/MarbleControlBox.h,
 	* src/lib/MarbleNavigator.h: Much more APIDOX
 	
 	More work on APIDOX: 
 	* src/lib/MarbleNavigator.h: Fix apidox and remove warnings
-	* src/lib/MarbleNavigator.cpp (MarbleNavigator): Fix indentation
+	* src/lib/MarbleNavigator{cpp,h}: (MarbleNavigator): Fix indentation
 
 	APIDOX
 	* src/lib/MarbleNavigator.h: Finish apidox
@@ -2313,8 +2330,8 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/MarbleNavigator.h: Document file and class.
 
 	Cleaning
-	* src/lib/MarbleWidget.cpp: 
-	* src/lib/MarbleWidgetInputHandler.cpp (eventFilter): 
+	* src/lib/MarbleWidget{cpp,h}:: 
+	* src/lib/MarbleWidgetInputHandler{cpp,h}: (eventFilter): 
 	Follow coding standards
 	
 	Add a main page to the APIdox.
@@ -2333,7 +2350,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-09-15  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/PlaceMarkInfoDialog.cpp:
+	* src/lib/PlaceMarkInfoDialog{cpp,h}::
 	- Data Sheet -> Marble Info Center, as mentioned in the Marble
 	  Quality Check.
 	* BUGS:
@@ -2362,23 +2379,23 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/MarbleControlBox.{h,cpp}
 	* src/lib/PlaceMarkManager.{h,cpp}
 	* src/lib/VectorComposer.{h,cpp}
-	* src/lib/MapTheme.cpp
-	* src/lib/MarbleWidget.cpp
-	* src/lib/PlaceMarkModel.cpp
-	* src/lib/MarbleModel.cpp
-	* src/lib/TextureTile.cpp
-	* src/lib/GeoPolygon.cpp
+	* src/lib/MapTheme{cpp,h}:
+	* src/lib/MarbleWidget{cpp,h}:
+	* src/lib/PlaceMarkModel{cpp,h}:
+	* src/lib/MarbleModel{cpp,h}:
+	* src/lib/TextureTile{cpp,h}:
+	* src/lib/GeoPolygon{cpp,h}:
 
 2007-09-12  Torsten Rahn  <rahn@kde.org>
 
-	* src/QtMainWindow.cpp:
-	* src/marble_part.cpp:
+	* src/QtMainWindow{cpp,h}::
+	* src/marble_part{cpp,h}::
 	- "Distance" -> "Altitude"
 	as it got mixed up with the measure tool
 
 2007-09-12  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/ClipPainter.cpp:
+	* src/lib/ClipPainter{cpp,h}::
 	- Cut off on screen.
 
 	* src/marble.qrc:
@@ -2386,16 +2403,16 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/PlaceMarkInfoDialog.ui:
 	- Added a Wikipedia icon and a pointer towards the entry.
 
-	* src/lib/TinyWebBrowser.cpp:
+	* src/lib/TinyWebBrowser{cpp,h}::
 	- Make it compile on Qt 4.2, too.
 
 2007-09-09  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/MarbleWidgetInputHandler.cpp:
+	* src/lib/MarbleWidgetInputHandler{cpp,h}::
 	- Give visual feedback if the mouse hovers placemarks.
 	- Give visual feedback if the mouse drags the planet.
 
-	* src/QtMainWindow.cpp:
+	* src/QtMainWindow{cpp,h}::
 	* src/marble_part.{h,cpp}:
 	- Position and Distance display in StatusBar for KDE frontend.
 
@@ -2403,15 +2420,15 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	* src/QtMainWindow.{h,cpp}
 	* src/lib/MarbleWidget.{h,cpp}
-	* src/lib/MapScaleFloatItem.cpp
+	* src/lib/MapScaleFloatItem{cpp,h}:
 	* src/lib/global.h
-	* src/lib/MarbleWidgetInputHandler.cpp
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:
 	* src/marble_part.h
 
 	- Added Statusbar items to the Qt-Marble frontend.
 	Now we need the same ones for the KDE-Version.
 
-	* src/lib/TinyWebBrowser.cpp:
+	* src/lib/TinyWebBrowser{cpp,h}::
 	- Fixed Sluggishness and JavaScript code
 
 2007-09-08  Torsten Rahn  <rahn@kde.org>
@@ -2421,7 +2438,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	* src/QtMainWindow.{h,cpp}:
 	* src/lib/MarbleWidget.{h,cpp}:
-	* src/lib/MarbleWidgetInputHandler.cpp:
+	* src/lib/MarbleWidgetInputHandler{cpp,h}::
 	- Fix for displaying the position in the statusbar.
 
 	* src/plugins/marblewidget/CMakeLists.txt:
@@ -2470,7 +2487,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-09-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify code.
-	* src/lib/PlaceMarkPainter.cpp (*PaintPlaceFolder): Simplify code
+	* src/lib/PlaceMarkPainter{cpp,h}: (*PaintPlaceFolder): Simplify code
 	structure.
 
 2007-09-03  Torsten Rahn  <rahn@kde.org>
@@ -2481,17 +2498,17 @@ there, are their any dependencies to other code regarding this ownership?)
 	  ocean water not being in sync with the rest.
 	Well, all this needs to be tidied up, still.
 
-	* src/lib/MeasureTool.cpp
-	* src/lib/MarbleWidget.cpp
-	* src/lib/Quaternion.cpp
-	* src/lib/PlaceMarkPainter.cpp
-	* src/lib/VectorMap.cpp
-	* src/lib/TextureColorizer.cpp
+	* src/lib/MeasureTool{cpp,h}:
+	* src/lib/MarbleWidget{cpp,h}:
+	* src/lib/Quaternion{cpp,h}:
+	* src/lib/PlaceMarkPainter{cpp,h}:
+	* src/lib/VectorMap{cpp,h}:
+	* src/lib/TextureColorizer{cpp,h}:
 	* src/lib/VectorMap.h
-	* src/lib/VectorComposer.cpp
-	* src/lib/GridMap.cpp
-	* src/lib/MarbleWidgetInputHandler.cpp
-	* src/lib/FlatScanlineTextureMapper.cpp
+	* src/lib/VectorComposer{cpp,h}:
+	* src/lib/GridMap{cpp,h}:
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:
 
 2007-09-02  Torsten Rahn  <rahn@kde.org>
 
@@ -2499,37 +2516,37 @@ there, are their any dependencies to other code regarding this ownership?)
 	  fix the "jump" for the case where the centerLat
 	  exceeds +/- M_PI which has other causes:
 
-	* MeasureTool.cpp
-	* MarbleWidget.cpp
-	* Quaternion.cpp
-	* PlaceMarkPainter.cpp
-	* VectorMap.cpp
-	* TextureColorizer.cpp
-	* GridMap.cpp
-	* MarbleWidgetInputHandler.cpp
-	* FlatScanlineTextureMapper.cpp
+	* MeasureTool{cpp,h}:
+	* MarbleWidget{cpp,h}:
+	* Quaternion{cpp,h}:
+	* PlaceMarkPainter{cpp,h}:
+	* VectorMap{cpp,h}:
+	* TextureColorizer{cpp,h}:
+	* GridMap{cpp,h}:
+	* MarbleWidgetInputHandler{cpp,h}:
+	* FlatScanlineTextureMapper{cpp,h}:
 
-	* TileCreator.cpp:
+	* TileCreator{cpp,h}::
 	- More fixes for non-standard source texture sizes
 
 2007-09-01  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy issue 22: spelling errors	* src/lib/AbstractLayer/AbstractLayerContainer.h: fix spelling
-	* src/lib/kml/KMLStyleParser.cpp (startElement): fix spelling
+	* src/lib/kml/KMLStyleParser{cpp,h}: (startElement): fix spelling
 
 	Krazy issue 21: signals and slots
 	* src/lib/PlaceMarkManager.h (class PlaceMarkManager): signals ->
 	Q_SIGNALS
 
 	Krazy issue 13: proper include directives
-	* src/lib/gps/GpxFile.cpp: Own include file first and dupl. includes
+	* src/lib/gps/GpxFile{cpp,h}:: Own include file first and dupl. includes
 	* src/lib/TextureColorizer.h: Fix include guard
 
 	Krazy issue 3: contractions in strings
-	* src/lib/MarbleModel.cpp (MarbleModel): couldn't -> could not
-	* src/lib/GeoPolygon.cpp (load): can't -> cannot
-	* src/lib/TileCreator.cpp (createTiles): doesn't -> does not
-	* tools/dateline/dateline.cpp (main): doesn't -> does not
+	* src/lib/MarbleModel{cpp,h}: (MarbleModel): couldn't -> could not
+	* src/lib/GeoPolygon{cpp,h}: (load): can't -> cannot
+	* src/lib/TileCreator{cpp,h}: (createTiles): doesn't -> does not
+	* tools/dateline/dateline{cpp,h}: (main): doesn't -> does not
 
 	Get rid of large and annoying status message while configuring
 	* src/lib/CMakeLists.txt: Remove status messages
@@ -2541,20 +2558,20 @@ there, are their any dependencies to other code regarding this ownership?)
 	Larger commit of issues that came up while 
 	waiting for KDE4 Beta2:
 
-	* src/lib/gps/TrackSegment.cpp:
-	* src/lib/MarbleModel.cpp:
+	* src/lib/gps/TrackSegment{cpp,h}::
+	* src/lib/MarbleModel{cpp,h}::
 	- OpenSolaris fixes by Stefan Telemann
 
-	* src/QtMainWindow.cpp:
+	* src/QtMainWindow{cpp,h}::
 	* src/lib/global.h:
 	
 	* src/lib/MarbleWidgetPopupMenu.h:
-	* src/lib/MarbleWidgetPopupMenu.cpp:
+	* src/lib/MarbleWidgetPopupMenu{cpp,h}::
 	- Disable "Remove all Measure points" 
 	  menu item if there hasn't been any 
 	  measure point added yet.
 
-	* src/lib/MarbleControlBox.cpp:
+	* src/lib/MarbleControlBox{cpp,h}::
 	- Enable flat projection
 
 	* src/lib/CMakeLists.txt:
@@ -2565,12 +2582,12 @@ there, are their any dependencies to other code regarding this ownership?)
 	* marble.nsi:
 	- Fix by Christian Ehrlicher for Windows Build.
 
-	* src/lib/XmlHandler.cpp:
+	* src/lib/XmlHandler{cpp,h}::
 	* data/bitmaps/volcano_1.png:
 	* data/bitmaps/mountain_1.png:
 	* data/CMakeLists.txt:
-	* src/lib/PlaceMarkPainter.cpp:
-	* src/lib/PlaceMark.cpp:
+	* src/lib/PlaceMarkPainter{cpp,h}::
+	* src/lib/PlaceMark{cpp,h}::
 	- Fixes for known issue "KML files don't display
 	at low zoom"
 
@@ -2593,22 +2610,22 @@ there, are their any dependencies to other code regarding this ownership?)
 	Now I need to fix the "jumping projection" bug ...
 
 2007-08-27  Torsten Rahn  <rahn@kde.org>
-	* src/lib/HttpFetchFile.cpp:
+	* src/lib/HttpFetchFile{cpp,h}::
 	  - Fixing tile loading bug introduced by Danimo's
 	    last Windows fix
-	* src/lib/GlobeScanlineTextureMapper.cpp:
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}::
 	  - Fixing crash due to different tile depths
 	    reported by Frederik Schwarzer.
-	* src/lib/TileCreator.cpp:
+	* src/lib/TileCreator{cpp,h}::
 	  - Faster tile creation
 	  - Making it easier to track bugs from cli output
 
 2007-08-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Krazy issue 18: inappropriate pass-by-value function args
-	* src/lib/kml/KMLColorStyle.cpp (setColor): Take const QColor&
-	* src/lib/kml/KMLStyleSelector.cpp (setStyleId): Take const QString&
-	* src/lib/kml/KMLIconStyle.cpp (setIcon): Take const QPixmap&
+	* src/lib/kml/KMLColorStyle{cpp,h}: (setColor): Take const QColor&
+	* src/lib/kml/KMLStyleSelector{cpp,h}: (setStyleId): Take const QString&
+	* src/lib/kml/KMLIconStyle{cpp,h}: (setIcon): Take const QPixmap&
 
 2007-08-25  Carlos Licea  <carlos_licea@hotmail.com>
     *MarbleWidget: solved the trace bug. As I expected the
@@ -2621,14 +2638,14 @@ there, are their any dependencies to other code regarding this ownership?)
       TODO: load pixmap specified in <href> tag
     * src/lib/kml/KMLIconStyle.{h,cpp}
     * src/lib/kml/KMLIconStyleParser.{h,cpp}
-    * src/lib/kml/KMLColorStyleParser.cpp
+    * src/lib/kml/KMLColorStyleParser{cpp,h}:
 
     - Implemnted parsing of <IconStyle> tag
     * src/lib/kml/KMLStyle.{h,cpp}
     * src/lib/kml/KMLStyleParser.{h,cpp}
 
     - Display time spent to draw opened kml documents
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
 
 2007-08-24  Carlos Licea  <carlos_licea@hotmail.com>
     *TextureColorizer: removed the differences of Spherical
@@ -2646,11 +2663,11 @@ there, are their any dependencies to other code regarding this ownership?)
     Minor fixes in previously introduced styles
     related classes.
     * src/lib/kml/KMLDocumentParser.{h,cpp}
-    * src/lib/kml/KMLContainerParser.cpp
+    * src/lib/kml/KMLContainerParser{cpp,h}:
     * src/lib/kml/KMLStyleSelector.{h,cpp}
     * src/lib/kml/KMLStyleParser.{h,cpp}: new class
     * src/lib/kml/KMLDocument.{h,cpp}
-    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser{cpp,h}:
     * src/lib/CMakeLists.txt
 
     - Class diagram updated
@@ -2664,8 +2681,8 @@ there, are their any dependencies to other code regarding this ownership?)
 	understand it.
 	* src/lib/AbstractScanlineTextureMapper.{cpp,h}
 	* src/lib/TileLoader.h
-	* src/lib/GlobeScanlineTextureMapper.cpp
-	* src/lib/FlatScanlineTextureMapper.cpp
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:
 	* ChangeLog
 
 2007-08-23  Murad Tagirov  <tmurad@gmail.com>
@@ -2677,7 +2694,7 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/kml/KMLStyleSelector.h:    new class
     * src/lib/kml/KMLIconStyle.{h,cpp}:  new class
     * src/lib/kml/KMLDocument.{h,cpp}
-    * src/lib/PlaceMarkManager.cpp
+    * src/lib/PlaceMarkManager{cpp,h}:
     * src/lib/CMakeLists.txt
 
     - KML styles related classes updated in a class diagram
@@ -2692,17 +2709,17 @@ there, are their any dependencies to other code regarding this ownership?)
 	Cleaning up the TextureMapper classes a bit.
 	More to follow.
 
-	* src/lib/AbstractScanlineTextureMapper.cpp: Cleanup
-	* src/lib/GlobeScanlineTextureMapper.cpp: Cleanup
+	* src/lib/AbstractScanlineTextureMapper{cpp,h}:: Cleanup
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:: Cleanup
 	* src/lib/TileLoader.h: Introducing globalWidth()/Height()
 
 2007-08-22  Murad Tagirov  <tmurad@gmail.com>
 
     Display time spent to parse kml file.
-    * src/lib/PlaceMarkManager.cpp
+    * src/lib/PlaceMarkManager{cpp,h}:
 
     Pack/Unpack placemark's coordinates
-    * src/lib/PlaceMark.cpp
+    * src/lib/PlaceMark{cpp,h}:
 
     Class diagram updated
     * docs/projects/kml/KMLClasses.xmi
@@ -2712,10 +2729,10 @@ there, are their any dependencies to other code regarding this ownership?)
     Added new class KMLFileViewItem. FileViewItem
     now shows loaded kml documents. It's possible to
     show or hide them. TODO: save/close kml documents
-    * src/lib/MarbleWidget.cpp
+    * src/lib/MarbleWidget{cpp,h}:
     * src/lib/MarbleModel.{h,cpp}
     * src/lib/FileViewModel.{h,cpp}
-    * src/lib/MarbleControlBox.cpp
+    * src/lib/MarbleControlBox{cpp,h}:
     * src/lib/PlaceMarkManager.{h,cpp}
     * src/lib/GpxFileViewItem.h
     * src/lib/CMakeLists.txt
@@ -2724,7 +2741,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-22  Inge Wallin  <inge@lysator.liu.se>
 
 	Daily Krazy issues. This time: Spelling errors
-	* src/lib/gps/GpsTracking.cpp (GpsTracking):      Fix spello
+	* src/lib/gps/GpsTracking{cpp,h}: (GpsTracking):      Fix spello
 	* src/lib/AbstractLayer/AbstractLayer.h:          Fix spello
 	* src/lib/AbstractLayer/AbstractLayerContainer.h: Fix spello
 
@@ -2736,24 +2753,24 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename files according to the coding standards: TinyWebBrowser
-	* src/lib/tinywebbrowser.cpp: renamed into TinyWebBrowser.cpp
+	* src/lib/tinywebbrowser{cpp,h}:: renamed into TinyWebBrowser{cpp,h}:
 	* src/lib/tinywebbrowser.h:   renamed into TinyWebBrowser.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
 	* src/lib/PlaceMarkInfoDialog.ui: use new name
 
 	Rename files according to the coding standards: VectorComposer
-	* src/lib/vectorcomposer.cpp: renamed into VectorComposer.cpp
+	* src/lib/vectorcomposer{cpp,h}:: renamed into VectorComposer{cpp,h}:
 	* src/lib/vectorcomposer.h:   renamed into VectorComposer.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
 	* src/lib/MarbleModel.h: use new name
-	* src/lib/ViewParams.cpp: use new name
+	* src/lib/ViewParams{cpp,h}:: use new name
 
 	Rename files according to the coding standards: VectorMap
-	* src/lib/vectormap.cpp: renamed into VectorMap.cpp
+	* src/lib/vectormap{cpp,h}:: renamed into VectorMap{cpp,h}:
 	* src/lib/vectormap.h:   renamed into VectorMap.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
-	* src/lib/MarbleModel.cpp: use new name
-	* src/lib/VectorComposer.cpp: use new name
+	* src/lib/MarbleModel{cpp,h}:: use new name
+	* src/lib/VectorComposer{cpp,h}:: use new name
 
 2007-08-21  Torsten Rahn  <rahn@kde.org>
 
@@ -2771,18 +2788,18 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename files according to the coding standards: XmlHandler
-	* src/lib/xmlhandler.cpp: renamed into XmlHandler.cpp
+	* src/lib/xmlhandler{cpp,h}:: renamed into XmlHandler{cpp,h}:
 	* src/lib/xmlhandler.h:   renamed into XmlHandler.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
-	* src/lib/MarbleModel.cpp: use new name
-	* src/lib/PlaceMarkManager.cpp: use new name
+	* src/lib/MarbleModel{cpp,h}:: use new name
+	* src/lib/PlaceMarkManager{cpp,h}:: use new name
 
 	Fix errors on Windows.
-	* src/lib/gps/GpxFile.cpp (add*): Use dynamic casts instead of
+	* src/lib/gps/GpxFile{cpp,h}: (add*): Use dynamic casts instead of
 	C-style casts
 
 	Remove obsolete class: SearchComboBox
-	* src/lib/searchcombobox.cpp: remove
+	* src/lib/searchcombobox{cpp,h}:: remove
 	* src/lib/searchcombobox.h: remove
 	* src/lib/CMakeLists.txt:  Reflect removal
 
@@ -2796,7 +2813,7 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/MarbleModel.{h,cpp}
     * src/lib/FileViewModel.{h,cpp}: new class
     * src/lib/GpxFileViewItem.{h,cpp}
-    * src/lib/MarbleControlBox.cpp
+    * src/lib/MarbleControlBox{cpp,h}:
     * src/lib/CMakeLists.txt
     * src/lib/AbstractFileViewItem.h
 
@@ -2806,8 +2823,8 @@ there, are their any dependencies to other code regarding this ownership?)
     in order to show opened files in FileView without touching model.
     * src/lib/FileViewModel.{h,cpp}: new class
     * src/lib/AbstractFileViewItem.h: new class
-    * src/lib/MarbleControlBox.cpp
-    * src/lib/FileViewModel.cpp
+    * src/lib/MarbleControlBox{cpp,h}:
+    * src/lib/FileViewModel{cpp,h}:
     * src/lib/CMakeLists.txt
     * docs/projects/kml/KMLClasses.xmi
 
@@ -2831,15 +2848,15 @@ there, are their any dependencies to other code regarding this ownership?)
 
     Inherit PlaceMark from Serializable to be
     able to pack/unpack it's content
-    * src/lib/kml/KMLFeature.cpp
+    * src/lib/kml/KMLFeature{cpp,h}:
     * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
-    * src/lib/PlaceMarkPainter.cpp
+    * src/lib/PlaceMarkPainter{cpp,h}:
     * src/lib/PlaceMark.{h,cpp}
 
     Added destructor to PlaceMarkManager to delete m_documentList.
     Delete d->m_placeMarkManager in MarbleModel's destructor instead of
     d->m_placeMarkContainer.
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
     * src/lib/PlaceMarkManager.{h,cpp}
 
     Set placemark symbol like in xmlhandler. Added
@@ -2853,42 +2870,42 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename files according to the coding standards: PlaceMarkInfoDialog
-	* src/lib/placemarkinfodialog.cpp: renamed into PlaceMarkInfoDialog.cpp
+	* src/lib/placemarkinfodialog{cpp,h}:: renamed into PlaceMarkInfoDialog{cpp,h}:
 	* src/lib/placemarkinfodialog.h:   renamed into PlaceMarkInfoDialog.h
 	* src/lib/placemarkinfodialog.ui:  renamed into PlaceMarkInfoDialog.ui
 	* src/lib/CMakeLists.txt:  Reflect name changes
-	* src/lib/MarbleWidgetpopupMenu.cpp: use new name
+	* src/lib/MarbleWidgetpopupMenu{cpp,h}:: use new name
 
 	Name changes according to the coding standards:
 	 - PlaceMarkModel
 	 - PlaceMarkPainter
 	 - PlaceMarkManager
-	* src/lib/placemarkmanager.cpp: renamed into PlaceMarkManager.cpp
+	* src/lib/placemarkmanager{cpp,h}:: renamed into PlaceMarkManager{cpp,h}:
 	* src/lib/placemarkmanager.h:   renamed into PlaceMarkManager.h
-	* src/lib/placemarkmodel.cpp:   renamed into PlaceMarkModel.cpp
+	* src/lib/placemarkmodel{cpp,h}::   renamed into PlaceMarkModel{cpp,h}:
 	* src/lib/placemarkmodel.h:     renamed into PlaceMarkModel.h
-	* src/lib/placemarkpainter.cpp: renamed into PlaceMarkPainter.cpp
+	* src/lib/placemarkpainter{cpp,h}:: renamed into PlaceMarkPainter{cpp,h}:
 	* src/lib/placemarkpainter.h:   renamed into PlaceMarkPainter.h
 	* src/lib/CMakeLists.txt:  Reflect name changes
-	* src/lib/MarbleModel.cpp: use new names
+	* src/lib/MarbleModel{cpp,h}:: use new names
 	* src/lib/MarbleModel.h:   use new names
 
 	Name changes according to the coding standards for MapTheme and
 	PlaceMark.
-	* src/lib/maptheme.cpp: renamed into MapTheme.cpp
+	* src/lib/maptheme{cpp,h}:: renamed into MapTheme{cpp,h}:
 	* src/lib/maptheme.h:   renamed into MapTheme.h
-	* src/lib/placemark.cpp: renamed into PlaceMark.cpp
+	* src/lib/placemark{cpp,h}:: renamed into PlaceMark{cpp,h}:
 	* src/lib/placemark.h:   renamed into PlaceMark.h
 	* src/lib/CMakeLists.txt: Reflect name changes.
-	* src/lib/MarbleControlBox.cpp,
-	* src/lib/MarbleModel.cpp,
-	* src/lib/MarbleWidgetPopupMenu.cpp,
+	* src/lib/MarbleControlBox{cpp,h}:,
+	* src/lib/MarbleModel{cpp,h}:,
+	* src/lib/MarbleWidgetPopupMenu{cpp,h}:,
 	* src/lib/MeasureTool.h,
 	* src/lib/PlaceMarkContainer.h,
 	* src/lib/kml/KMLFeature.h,
-	* src/lib/placemarkinfodialog.cpp,
+	* src/lib/placemarkinfodialog{cpp,h}:,
 	* src/lib/placemarkpainter.{h,cpp},
-	* src/lib/xmlhandler.cpp:
+	* src/lib/xmlhandler{cpp,h}::
 	use new names
 
 	Krazy issues: make constructors explicit, use Q_SLOTS macro.
@@ -2897,7 +2914,7 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/MarbleAboutDialog.h: Q_SLOTS
 
 	Rename SearchListView into MarbleSearchListView
-	* src/lib/searchlistview.cpp: rename into MarbleSearchListView.cpp
+	* src/lib/searchlistview{cpp,h}:: rename into MarbleSearchListView{cpp,h}:
 	(MarbleSearchListView): initialize d.
 	* src/lib/searchlistview.h:   rename into MarbleSearchListView.h
 	(d): new member
@@ -2944,22 +2961,22 @@ there, are their any dependencies to other code regarding this ownership?)
 
     Marble 0.4.0
 
-    * src/KdeMainWindow.cpp
-    * src/kdemain.cpp
-    * src/QtMainWindow.cpp
-    * src/lib/AbstractScanlineTextureMapper.cpp
-    * src/lib/TileLoader.cpp
-    * src/lib/HttpDownloadManager.cpp
+    * src/KdeMainWindow{cpp,h}:
+    * src/kdemain{cpp,h}:
+    * src/QtMainWindow{cpp,h}:
+    * src/lib/AbstractScanlineTextureMapper{cpp,h}:
+    * src/lib/TileLoader{cpp,h}:
+    * src/lib/HttpDownloadManager{cpp,h}:
     * src/lib/MarbleAboutDialog.ui
-    * src/lib/MarbleDirs.cpp
-    * src/lib/HttpFetchFile.cpp
-    * src/lib/TextureTile.cpp
-    * src/lib/placemarkmodel.cpp
+    * src/lib/MarbleDirs{cpp,h}:
+    * src/lib/HttpFetchFile{cpp,h}:
+    * src/lib/TextureTile{cpp,h}:
+    * src/lib/placemarkmodel{cpp,h}:
 
 2007-08-18  Torsten Rahn  <rahn@kde.org>
 
-    * src/qtmain.cpp:
-    * src/kdemain.cpp:
+    * src/qtmain{cpp,h}::
+    * src/kdemain{cpp,h}::
 	Added --marbleDataPath command line option.
 
     * src/KdeMainWindow.{cpp,h}:
@@ -2979,16 +2996,16 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	Attempted to Correct a small glitch with the drawing of the gps
 	Tracking object.
-	* src/lib/gps/GpsTracking.cpp : altertered drawing procedure
+	* src/lib/gps/GpsTracking{cpp,h}: : altertered drawing procedure
 
     Added the implementation of saving and closing a file to the
     GpxFileModel.
-    * src/lib/gps/GpxFileModel.cpp : save and close file
+    * src/lib/gps/GpxFileModel{cpp,h}: : save and close file
 
     Fixed a crash due to null pointer BoundingBox
-    * src/lib/gps/TrackSegment.cpp :
-    * src/lib/BoundingBox.cpp :
-    * src/lib/AbstractLayer/AbstractLayerContainer.cpp} :
+    * src/lib/gps/TrackSegment{cpp,h}: :
+    * src/lib/BoundingBox{cpp,h}: :
+    * src/lib/AbstractLayer/AbstractLayerContainer{cpp,h}:} :
 
     Added an implementation for getting pixel position withought need
     for the "double radius" to "int radius" cast.
@@ -2998,7 +3015,7 @@ there, are their any dependencies to other code regarding this ownership?)
     relivant signals from the File View selection model. Also
     connected the button signals to the GpxFileModel save and close
     implementations.
-    * src/lib/MarbleControlBox.cpp :
+    * src/lib/MarbleControlBox{cpp,h}: :
 
     Added info on how to build marble with debug info.
     * INSTALL : debug info
@@ -3020,7 +3037,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename KAtlasFlag into DeferredFlag:
-	* src/lib/katlasflag.cpp: rename into DeferredFlag.cpp
+	* src/lib/katlasflag{cpp,h}:: rename into DeferredFlag{cpp,h}:
 	* src/lib/katlasflag.h:   rename into DeferredFlag.h
 	* src/lib/placemarkinfodialog.{h,cpp}: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
@@ -3028,7 +3045,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-09-18  Frederik Schwarzer  <schwarzerf@gmail.com>
 
 	Let the zoom slider get to the limits using the buttons.
-	* src/lib/MarbleWidget.cpp (ZoomViewBy): Add new checks for the
+	* src/lib/MarbleWidget{cpp,h}: (ZoomViewBy): Add new checks for the
 	endpoints of the slider.
 
 2007-08-18  Torsten Rahn  <rahn@kde.org>
@@ -3057,7 +3074,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-17  Pino Toscano  <pino@kde.org>
 
     * src/KdeMainWindow.{cpp,h}
-    * src/kdemain.cpp
+    * src/kdemain{cpp,h}:
     * src/marble.kcfg
     * src/settings.kcfgc
     * src/CMakeLists.txt
@@ -3066,11 +3083,11 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename KAtlasControl into ControlView:
-	* src/katlascontrol.cpp: rename into ControlView.cpp
+	* src/katlascontrol{cpp,h}:: rename into ControlView{cpp,h}:
 	* src/katlascontrol.h:   rename into ControlView.h
 	* src/KdeMainWindow.{h,cpp}: refer to new name
-	* src/MainWindowCommon.cpp: refer to new name
-	* src/kdemain.cpp: refer to new name
+	* src/MainWindowCommon{cpp,h}:: refer to new name
+	* src/kdemain{cpp,h}:: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 	Note: Tackat will have to do the Qt-only version.
 
@@ -3080,7 +3097,7 @@ there, are their any dependencies to other code regarding this ownership?)
     API.
 
     * src/lib/MarbleWidget.{cpp,h}
-    * src/lib/MarbleDirs.cpp
+    * src/lib/MarbleDirs{cpp,h}:
 
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
@@ -3089,7 +3106,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-08-17  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleDirs.cpp:
+    * src/lib/MarbleDirs{cpp,h}::
     Rearranging the code to be more in line with the
     description in MarbleDirs.h.
     Renaming the two marbleDataPaths to something more
@@ -3111,12 +3128,12 @@ there, are their any dependencies to other code regarding this ownership?)
 
     systemDir --> systemPath, localDir --> localPath
 
-    * src/lib/TileCreator.cpp
-    * src/lib/placemarkmanager.cpp
-    * src/lib/HttpDownloadManager.cpp
-    * src/lib/HttpFetchFile.cpp
-    * src/lib/maptheme.cpp
-    * src/lib/tinywebbrowser.cpp
+    * src/lib/TileCreator{cpp,h}:
+    * src/lib/placemarkmanager{cpp,h}:
+    * src/lib/HttpDownloadManager{cpp,h}:
+    * src/lib/HttpFetchFile{cpp,h}:
+    * src/lib/maptheme{cpp,h}:
+    * src/lib/tinywebbrowser{cpp,h}:
     * src/lib/MarbleDirs.{cpp,h}:
 
     Introduced MarbleDataPath as a "static global".
@@ -3128,30 +3145,30 @@ there, are their any dependencies to other code regarding this ownership?)
 	* data/CMakeLists.txt: install compass.svg instead of windrose.svg
 
 	Rename KAtlasTileCreatorDialog into TileCreatorDialog
-	* src/lib/katlastilecreatordialog.cpp: rename into TileCreatorDialog.cpp
+	* src/lib/katlastilecreatordialog{cpp,h}:: rename into TileCreatorDialog{cpp,h}:
 	* src/lib/katlastilecreatordialog.h:   rename into TileCreatorDialog.h
 	* src/lib/katlastilecreatordialog.ui:  rename into TileCreatorDialog.ui
 	* src/lib/MarbleWidget.{h,cpp}: refer to new name
-	* src/lib/MarbleModel.cpp: refer to new name
+	* src/lib/MarbleModel{cpp,h}:: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 
 	Rename KAtlasMapScale into MapScaleFloatItem
-	* src/lib/katlasmapscale.cpp: rename into MapScaleFloatItem.cpp
+	* src/lib/katlasmapscale{cpp,h}:: rename into MapScaleFloatItem{cpp,h}:
 	* src/lib/katlasmapscale.h:   rename into MapScaleFloatItem.h
 	* src/lib/MarbleWidget.{h,cpp}: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 
 	Rename KAtlasWindRose into CompassFloatItem
-	* src/lib/katlaswindrose.cpp: rename into CompassFloatItem.cpp
+	* src/lib/katlaswindrose{cpp,h}:: rename into CompassFloatItem{cpp,h}:
 	* src/lib/katlaswindrose.h:   rename into CompassFloatItem.h
 	* src/lib/MarbleWidget.{h,cpp}: refer to new name
 	* src/lib/MarbleLegendBrowser.{h,cpp}: refer to new name
-	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/MarbleControlBox{cpp,h}:: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 	* data/svg/windrose.svg: rename into compass.svg
 
 	Rename KAtlasCrossHair into CrossHairFloatItem
-	* src/lib/katlascrosshair.cpp: rename into CrossHairFloatItem.cpp
+	* src/lib/katlascrosshair{cpp,h}:: rename into CrossHairFloatItem{cpp,h}:
 	* src/lib/katlascrosshair.h:   rename into CrossHairFloatItem.h
 	* src/lib/MarbleWidget.{h,cpp}: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
@@ -3169,9 +3186,9 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-08-15  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/maptheme.cpp:
-    * src/lib/MarbleDirs.cpp:
-    Making MarbleDirs.h uninlined by adding MarbleDirs.cpp
+    * src/lib/maptheme{cpp,h}::
+    * src/lib/MarbleDirs{cpp,h}::
+    Making MarbleDirs.h uninlined by adding MarbleDirs{cpp,h}:
     as suggested by Pino Toscano.
     Getting rid of unixDir.
 
@@ -3200,28 +3217,28 @@ there, are their any dependencies to other code regarding this ownership?)
  and also tweaked it so Qt frameworks go into
  @executable_path/../Frameworks/Qt*
  Fixed compiler warnings in :
-   src/lib/MarbleWidget.cpp
-   src/lib/TileCreator.cpp
-   src/lib/GeoPolygon.cpp
+   src/lib/MarbleWidget{cpp,h}:
+   src/lib/TileCreator{cpp,h}:
+   src/lib/GeoPolygon{cpp,h}:
  The application now runs from the generated OSX
  bundle but with some issues that need to be resolved.
 
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename LegendBrowser into MarbleLegendBrowser
-	* src/lib/LegendBrowser.cpp: rename into MarbleLegendBrowser.cpp
+	* src/lib/LegendBrowser{cpp,h}:: rename into MarbleLegendBrowser{cpp,h}:
 	* src/lib/LegendBrowser.h: rename into MarbleLegendBrowser.h
 	* src/lib/MarbleControlBox.ui: refer to new name
-	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/MarbleControlBox{cpp,h}:: refer to new name
 	* src/lib/CMakeLists.txt: reflect name change
 
 	Rename katlasthemeselectview into MarbleThemeSelectView:
-	* src/lib/katlasthemeselectview.cpp: rename into
-	MarbleThemeSelectView.cpp:
+	* src/lib/katlasthemeselectview{cpp,h}:: rename into
+	MarbleThemeSelectView{cpp,h}::
 	* src/lib/katlasthemeselectview.h: rename into
 	MarbleThemeSelectView.h:
 	* src/lib/MarbleControlBox.ui: refer to new name
-	* src/lib/MarbleControlBox.cpp: refer to new name
+	* src/lib/MarbleControlBox{cpp,h}:: refer to new name
 	* src/lib/CMakeLists.txt: Reflect name change
 
 	Krazy issue 22: signals and slots
@@ -3229,15 +3246,15 @@ there, are their any dependencies to other code regarding this ownership?)
 	Q_SLOTS instead
 
 	Krazy issue 18: inappropriate pass-by-value function args.
-	* src/lib/MarbleControlBox.cpp (selectTheme): Take const QString &
+	* src/lib/MarbleControlBox{cpp,h}: (selectTheme): Take const QString &
 
 	Krazy issue 13: proper include directives.
 	* src/lib/MarbleAboutDialog.h
-	* src/lib/kml/KMLPointParser.cpp
+	* src/lib/kml/KMLPointParser{cpp,h}:
 	* src/lib/MarbleWidget.h
 	* src/lib/MarbleNavigator.h
-	* src/lib/xmlhandler.cpp
-	* src/lib/GeoPoint.cpp
+	* src/lib/xmlhandler{cpp,h}:
+	* src/lib/GeoPoint{cpp,h}:
 
 	Krazy issue 11: Constructors should be declared explicit
 	* src/lib/gps/GpsLayer.h (class GpsLayer),
@@ -3246,12 +3263,12 @@ there, are their any dependencies to other code regarding this ownership?)
 	Maintain binary forward compatibility through d-pointer
 	* src/lib/MarbleControlBox.h: Move private member into private
 	class in cpp file.
-	* src/lib/MarbleControlBox.cpp (class MarbleControlBoxPrivate):
+	* src/lib/MarbleControlBox{cpp,h}: (class MarbleControlBoxPrivate):
 	m_mapthememodel: new member
 
 2007-08-14  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/GeoPolygon.cpp:
+	* src/lib/GeoPolygon{cpp,h}::
 	Make Marble work with PowerPC.
 	Patch passed on by
 	Steffen Joeris <steffen.joeris@skolelinux.de>
@@ -3269,10 +3286,10 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-08-14  Inge Wallin  <inge@lysator.liu.se>
 
-	* src/lib/TileCreator.cpp (createTiles): Fix all warnings
+	* src/lib/TileCreator{cpp,h}: (createTiles): Fix all warnings
 
 	Fix the TileCreator that apparently got destroyed some time ago.
-	* src/lib/TileCreator.cpp (createTiles): Fix infinite loop due to
+	* src/lib/TileCreator{cpp,h}: (createTiles): Fix infinite loop due to
 	test of unsigned number against >= 0.
 	(createTiles): fix wrong test of initial tile size.
 
@@ -3291,17 +3308,17 @@ there, are their any dependencies to other code regarding this ownership?)
     Added File View Tab to the Marble Control box as a view to the
     GpxFileModel. The tab is disabled by default and needs command
     line arg --enableFileView to see.
-    * src/kdemain.cpp: cmd line arg
-    * src/katlascontrol.cpp : new method to enable/disable File view
+    * src/kdemain{cpp,h}:: cmd line arg
+    * src/katlascontrol{cpp,h}: : new method to enable/disable File view
     * src/lib/MarbleControlBox.ui : new tab
 
     Added a GpxFileModel to MarbleModelPrivate and added nessary
     accessors.
-    * src/lib/MarbleWidget.cpp : accessor
+    * src/lib/MarbleWidget{cpp,h}: : accessor
     * src/lib/MarbleModel.h : new member variable and accessors
 
     Added nessary ModelItem functions to GpxFile
-    * src/lib/gps/GpxFile.cpp : more like a model item
+    * src/lib/gps/GpxFile{cpp,h}: : more like a model item
 
     Added new Class GpxFileModel
     * src/lib/gps/GpxFileModel.{h,cpp} : new class
@@ -3316,7 +3333,7 @@ there, are their any dependencies to other code regarding this ownership?)
 	- adding What's this icon to the ressource file.
 
     * src/marble.qrc
-    * src/QtMainWindow.cpp
+    * src/QtMainWindow{cpp,h}:
     * src/icons/marble.png
 
 2007-08-13  Pino Toscano  <pino@kde.org>
@@ -3327,12 +3344,12 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-08-13  Torsten Rahn  <rahn@kde.org>
 
-    * src/lib/MarbleWidget.cpp:
-    * src/lib/gps/Track.cpp:
-    * src/lib/TileCreator.cpp:
-    * src/lib/MarbleModel.cpp:
-    * src/lib/TextureTile.cpp:
-    * src/lib/texcolorizer.cpp:
+    * src/lib/MarbleWidget{cpp,h}::
+    * src/lib/gps/Track{cpp,h}::
+    * src/lib/TileCreator{cpp,h}::
+    * src/lib/MarbleModel{cpp,h}::
+    * src/lib/TextureTile{cpp,h}::
+    * src/lib/texcolorizer{cpp,h}::
     * CMakeLists.txt:
 
         Patch by Tim Sutton of QGIS fame. Introduces
@@ -3342,12 +3359,12 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-13  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleModel.{h,cpp}:
-    * src/lib/maptheme.cpp:
-    * src/lib/katlasthemeselectview.cpp:
+    * src/lib/maptheme{cpp,h}::
+    * src/lib/katlasthemeselectview{cpp,h}::
         - Selecting the Maptheme icon in the themeview at startup.
 
-    * src/MarbleTest.cpp:
-    * src/QtMainWindow.cpp:
+    * src/MarbleTest{cpp,h}::
+    * src/QtMainWindow{cpp,h}::
     * src/lib/MarbleWidget.{h, cpp}:
     * src/lib/MarbleControlBox.{ui,h,cpp}:
         - Saving and retrieving Home Location in settings.
@@ -3362,22 +3379,22 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	d-pointerify MarbleNavigator (also Krazy issue 8).
 	* src/lib/MarbleNavigator.h (MarbleNavigator): Introduce d-pointer
-	* src/lib/MarbleNavigator.cpp (MarbleNavigatorPrivate): new class
+	* src/lib/MarbleNavigator{cpp,h}: (MarbleNavigatorPrivate): new class
 	(MarbleNavigator):use d-pointer where appropriate
 
 	Fix some warnings
-	* src/lib/gps/GpsTracking.cpp: Fix warnings
+	* src/lib/gps/GpsTracking{cpp,h}:: Fix warnings
 
 	Move MarbleNavigator from src/plugins/navigator/ to src/lib/
 	* src/lib/MarbleNavigator.h,
-	* src/lib/MarbleNavigator.cpp,
+	* src/lib/MarbleNavigator{cpp,h}:,
 	* src/lib/MarbleNavigator.ui: Moved from src/plugins/navigator
 	* src/lib/CMakeLists.txt,
 	* src/plugins/navigator/CMakeLists.txt: Reflect changes.
 
 	d-pointerify MarbleAboutDialog (also Krazy issue 8).
 	* src/lib/MarbleAboutDialog.h (MarbleAboutDialog): Introduce d-pointer
-	* src/lib/MarbleAboutDialog.cpp (MarbleAboutDialogPrivate): new class
+	* src/lib/MarbleAboutDialog{cpp,h}: (MarbleAboutDialogPrivate): new class
 	(MarbleAboutDialog):use d-pointer where appropriate
 
 2007-08-11  Andrew Manson   <g.real.ate@gmail.com>
@@ -3385,7 +3402,7 @@ there, are their any dependencies to other code regarding this ownership?)
     Altered the updateGps() function in MarbleWidget so that it now
     only updates the region where the the gps marker was and
     currenly is
-    * src/lib/MarbleWidget.cpp : updateGps() now uses regions
+    * src/lib/MarbleWidget{cpp,h}: : updateGps() now uses regions
 
     Added a new class that represents a GpsTracking Object. It is
     designed to remove the need for the Gps Layer to know abount gpsd
@@ -3402,16 +3419,16 @@ there, are their any dependencies to other code regarding this ownership?)
 
 	Rename class KAtlasAboutDialog into MarbleAboutDialog and change
 	file names into MarbleAboutDialog.*
-	* src/lib/MarbleAboutDialog.cpp: renamed from katlasaboutdialog.cpp
+	* src/lib/MarbleAboutDialog{cpp,h}:: renamed from katlasaboutdialog{cpp,h}:
 	* src/lib/MarbleAboutDialog.h: renamed from katlasaboutdialog.h
 	* src/lib/MarbleAboutDialog.ui: renamed from katlasaboutdialog.ui
-	* src/lib/MarbleWidgetPopupMenu.cpp (slotAboutDialog): Use new name
+	* src/lib/MarbleWidgetPopupMenu{cpp,h}: (slotAboutDialog): Use new name
 	* src/lib/CMakeLists.txt: Name changes as above.
 
 	Remove warnings
-	src/lib/MarbleWidget.cpp (paint): mark unused with Q_UNUSED()
+	src/lib/MarbleWidget{cpp,h}: (paint): mark unused with Q_UNUSED()
 	src/lib/global.h (Projection): Disable Mercator
-	src/lib/texcolorizer.cpp (rectangularColorizer): comment out unused var
+	src/lib/texcolorizer{cpp,h}: (rectangularColorizer): comment out unused var
 
 	Make the code clearer by naming things better.
 	* src/lib/placemarkpainter.{h,cpp} (testXBug): Renamed from testbug().
@@ -3421,11 +3438,11 @@ there, are their any dependencies to other code regarding this ownership?)
 	* src/lib/TileCreator.h (TILECREATOR_H): Renamed from TILESCISSOR_H
 
 	More cleaning
-	* src/lib/MarbleWidget.cpp: Cleaning and make the code follow the
+	* src/lib/MarbleWidget{cpp,h}:: Cleaning and make the code follow the
 	coding standards.
 
 	Simplify code in preparation for refactorings
-	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder): Code
+	* src/lib/placemarkpainter{cpp,h}: (sphericalPaintPlaceFolder): Code
 	simplifications
 	(rectangularPaintPlaceFolder): Code simplifications
 
@@ -3438,9 +3455,9 @@ there, are their any dependencies to other code regarding this ownership?)
 
     TODO: store in configuration file.
 
-    * src/lib/MarbleWidget.cpp
+    * src/lib/MarbleWidget{cpp,h}:
     * src/lib/MarbleWidgetPopupMenu.h
-    * src/lib/MarbleWidgetPopupMenu.cpp
+    * src/lib/MarbleWidgetPopupMenu{cpp,h}:
 
 2007-08-11  Torsten Rahn  <rahn@kde.org>
 
@@ -3451,7 +3468,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-11  Inge Wallin  <inge@lysator.liu.se>
 
 	Added getter for symmetry.
-	* src/lib/AbstractLayer/AbstractLayerInterface.cpp (visible): new
+	* src/lib/AbstractLayer/AbstractLayerInterface{cpp,h}: (visible): new
 	method.
 
 2007-08-11  Torsten Rahn  <rahn@kde.org>
@@ -3461,11 +3478,11 @@ there, are their any dependencies to other code regarding this ownership?)
         projections
         - make all methods accept Degree as a unit by
           default ( geoCoordinates RAD->DEG )
-    * src/lib/MarbleWidgetInputHandler.cpp:
+    * src/lib/MarbleWidgetInputHandler{cpp,h}::
     * src/lib/MarbleWidgetPopupMenu.{cpp,h}:
         - make all methods accept Degree as a unit by
           default ( geoCoordinates RAD->DEG )
-    * src/lib/Quaternion.cpp:
+    * src/lib/Quaternion{cpp,h}::
         - remove DEG2ONE.
         - fix an inaccuracy due to usage of int instead of double
     * src/lib/global.h:
@@ -3484,17 +3501,17 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/global.h : RAD2DEG, DEG2RAD, DEG2ONE, RAD2ONE
 
     Adjustments to the usage of RAD2DEG, etc.:
-    * src/lib/vectormap.cpp
+    * src/lib/vectormap{cpp,h}:
     * src/lib/GeoPoint.h
-    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/kml/KMLPointParser{cpp,h}:
     * src/lib/global.h
     * src/lib/MarbleWidget.h
-    * src/lib/MarbleControlBox.cpp
-    * src/lib/xmlhandler.cpp
-    * src/lib/GridMap.cpp
-    * src/lib/GeoPoint.cpp
-    * src/lib/MarbleWidgetInputHandler.cpp
-    * src/qtmain.cpp
+    * src/lib/MarbleControlBox{cpp,h}:
+    * src/lib/xmlhandler{cpp,h}:
+    * src/lib/GridMap{cpp,h}:
+    * src/lib/GeoPoint{cpp,h}:
+    * src/lib/MarbleWidgetInputHandler{cpp,h}:
+    * src/qtmain{cpp,h}:
 
 2007-08-10  Andrew Manson   <g.real.ate@gmail.com>
 
@@ -3526,7 +3543,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
     Fixed the drawing of current position in GpsLayer and made it draw
     a directional arrow in the direction of travel.
-    * src/lib/gps/GpsLayer.cpp : better current position drawn
+    * src/lib/gps/GpsLayer{cpp,h}: : better current position drawn
 
     Implemented BoundingBox checking for TrackSegment
     * src/lib/gps/TrackSegment.{cpp, h } :bounding box
@@ -3560,17 +3577,17 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning
-	* src/lib/placemarkpainter.cpp: Change fontWidth into textWidth,
+	* src/lib/placemarkpainter{cpp,h}:: Change fontWidth into textWidth,
 	because that's what it is.
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
 	Tooltips for Mapthemes ...
 
-        *  src/lib/vectorcomposer.cpp
-        *  src/lib/maptheme.cpp
+        *  src/lib/vectorcomposer{cpp,h}:
+        *  src/lib/maptheme{cpp,h}:
         *  src/lib/MarbleControlBox.ui
-        *  src/lib/katlasthemeselectview.cpp
+        *  src/lib/katlasthemeselectview{cpp,h}:
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
@@ -3587,15 +3604,15 @@ there, are their any dependencies to other code regarding this ownership?)
 
         *  install_mac/1-release-extra.sh
         *  install_mac/2-release-qt.sh
-        *  src/lib/vectorcomposer.cpp
-        *  src/lib/maptheme.cpp
-        *  src/lib/TextureTile.cpp
-        *  src/lib/GeoPolygon.cpp
+        *  src/lib/vectorcomposer{cpp,h}:
+        *  src/lib/maptheme{cpp,h}:
+        *  src/lib/TextureTile{cpp,h}:
+        *  src/lib/GeoPolygon{cpp,h}:
         *  src/lib/MarbleDirs.h
         *  src/lib/CMakeLists.txt
         *  src/CMakeLists.txt
-        *  tests/GeoPolygonTest.cpp
-        *  tests/MarbleWidgetTest.cpp
+        *  tests/GeoPolygonTest{cpp,h}:
+        *  tests/MarbleWidgetTest{cpp,h}:
         *  tests/CMakeLists.txt
         *  CMakeLists.txt
 
@@ -3604,20 +3621,20 @@ there, are their any dependencies to other code regarding this ownership?)
 	Renaming TileScissor class and files to
 	TileCreator.
 
-	* src/lib/tilescissor.cpp
-	* src/lib/TileCreator.cpp
-	* src/lib/MarbleModel.cpp
+	* src/lib/tilescissor{cpp,h}:
+	* src/lib/TileCreator{cpp,h}:
+	* src/lib/MarbleModel{cpp,h}:
 	* src/lib/CMakeLists.txt
 	* src/lib/tilescissor.h
 	* src/lib/TileCreator.h
-	* src/lib/katlastilecreatordialog.cpp
+	* src/lib/katlastilecreatordialog{cpp,h}:
 	* src/DESIGN
-	* src/tilecreator/main.cpp
-	* src/lib/tilescissor.cpp
+	* src/tilecreator/main{cpp,h}:
+	* src/lib/tilescissor{cpp,h}:
 
 2007-08-10  Torsten Rahn  <rahn@kde.org>
 
-	* src/lib/tilescissor.cpp:
+	* src/lib/tilescissor{cpp,h}::
 
 	Fixing another issue reported by Luis Silva:
 
@@ -3632,7 +3649,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify: break out some common code into private methods.
-	* src/lib/placemarkpainter.cpp (roomForLabel): new method
+	* src/lib/placemarkpainter{cpp,h}: (roomForLabel): new method
 	(labelFontData): new method
 	(sphericalPaintPlaceFolder): use new methods
 	(rectangularPaintPlaceFolder): use new methods
@@ -3648,7 +3665,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify code to make it easier to find common code.
-	* src/lib/placemarkpainter.cpp (sphericalPaintPlaceFolder):
+	* src/lib/placemarkpainter{cpp,h}: (sphericalPaintPlaceFolder):
 	Simplify code structure.
 	(rectangularPaintPlaceFolder): Reindent to follow code structure.
 	Also makes it more like sphericalPaintPlaceFolder
@@ -3669,34 +3686,34 @@ there, are their any dependencies to other code regarding this ownership?)
     - renaming katlasdirs.h -> MarbleDirs.h
 
      * ChangeLog
-     * src/lib/tilescissor.cpp
-     * src/lib/AbstractScanlineTextureMapper.cpp
+     * src/lib/tilescissor{cpp,h}:
+     * src/lib/AbstractScanlineTextureMapper{cpp,h}:
      * src/lib/katlasdirs.h
-     * src/lib/gps/Waypoint.cpp
-     * src/lib/gps/TrackSegment.cpp
-     * src/lib/placemarkpainter.cpp
-     * src/lib/TileLoader.cpp
-     * src/lib/katlasaboutdialog.cpp
+     * src/lib/gps/Waypoint{cpp,h}:
+     * src/lib/gps/TrackSegment{cpp,h}:
+     * src/lib/placemarkpainter{cpp,h}:
+     * src/lib/TileLoader{cpp,h}:
+     * src/lib/katlasaboutdialog{cpp,h}:
      * src/lib/placemarkmanager.{h,cpp}
-     * src/lib/placemarkinfodialog.cpp
-     * src/lib/placemark.cpp
-     * src/lib/LegendBrowser.cpp
-     * src/lib/HttpDownloadManager.cpp
-     * src/lib/vectorcomposer.cpp
-     * src/lib/MarbleControlBox.cpp
-     * src/lib/MarbleModel.cpp
-     * src/lib/HttpFetchFile.cpp
-     * src/lib/GlobeScanlineTextureMapper.cpp
-     * src/lib/maptheme.cpp
-     * src/lib/TextureTile.cpp
-     * src/lib/tinywebbrowser.cpp
+     * src/lib/placemarkinfodialog{cpp,h}:
+     * src/lib/placemark{cpp,h}:
+     * src/lib/LegendBrowser{cpp,h}:
+     * src/lib/HttpDownloadManager{cpp,h}:
+     * src/lib/vectorcomposer{cpp,h}:
+     * src/lib/MarbleControlBox{cpp,h}:
+     * src/lib/MarbleModel{cpp,h}:
+     * src/lib/HttpFetchFile{cpp,h}:
+     * src/lib/GlobeScanlineTextureMapper{cpp,h}:
+     * src/lib/maptheme{cpp,h}:
+     * src/lib/TextureTile{cpp,h}:
+     * src/lib/tinywebbrowser{cpp,h}:
      * src/lib/MarbleDirs.h
-     * src/lib/katlaswindrose.cpp
+     * src/lib/katlaswindrose{cpp,h}:
      * src/lib/CMakeLists.txt
-     * src/lib/katlasflag.cpp
-     * src/lib/placemarkmodel.cpp
-     * src/lib/MarbleWidgetInputHandler.cpp
-     * src/lib/FlatScanlineTextureMapper.cpp
+     * src/lib/katlasflag{cpp,h}:
+     * src/lib/placemarkmodel{cpp,h}:
+     * src/lib/MarbleWidgetInputHandler{cpp,h}:
+     * src/lib/FlatScanlineTextureMapper{cpp,h}:
      * src/DESIGN
 
 2007-08-10  Inge Wallin  <inge@lysator.liu.se>
@@ -3705,19 +3722,19 @@ there, are their any dependencies to other code regarding this ownership?)
 	global.h
 	* src/lib/global.h: Add definition of Projection
 	* src/lib/ViewParams.h (ViewParams): Remove definition
-	* src/lib/ViewParams.cpp (ViewParams): Move init of projection
+	* src/lib/ViewParams{cpp,h}: (ViewParams): Move init of projection
 
 2007-08-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename utils.h to global.h since it better describes what it is.
 	* src/lib/utils.h: rename to global.h
-	* GridMap.cpp,          GridMap.h,
-	* MarbleModel.cpp,      MarbleModel.h,
-	* MarbleWidget.cpp,
-	* MarbleWidgetInputHandler.cpp,
-	* placemarkpainter.cpp,
-	* texcolorizer.cpp,
-	* vectormap.cpp,        vectormap.h:
+	* GridMap{cpp,h}:,          GridMap.h,
+	* MarbleModel{cpp,h}:,      MarbleModel.h,
+	* MarbleWidget{cpp,h}:,
+	* MarbleWidgetInputHandler{cpp,h}:,
+	* placemarkpainter{cpp,h}:,
+	* texcolorizer{cpp,h}:,
+	* vectormap{cpp,h}:,        vectormap.h:
 	include global.h instead of utils.h
 	* src/lib/CMakeLists.txt: Add global.h to include files.
 
@@ -3730,10 +3747,10 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-09  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of a unification of the projections.
-	* src/lib/vectormap.cpp (createFromPntMap): Remove a difference
+	* src/lib/vectormap{cpp,h}: (createFromPntMap): Remove a difference
 	between flat and mercator projections
-	* src/lib/vectormap.cpp: Cleaning
-	* src/lib/GeoPolygon.cpp: Cleaning
+	* src/lib/vectormap{cpp,h}:: Cleaning
+	* src/lib/GeoPolygon{cpp,h}:: Cleaning
 
 2007-08-09  Torsten Rahn  <rahn@kde.org>
 
@@ -3755,7 +3772,7 @@ there, are their any dependencies to other code regarding this ownership?)
 http://en.wikipedia.org/wiki/International_Dateline
 
      * tools/dateline/dateline.pro
-     * tools/dateline/dateline.cpp
+     * tools/dateline/dateline{cpp,h}:
      * data/mwdbii/DATELINE.PNT
      * data/CMakeLists.txt
 
@@ -3770,7 +3787,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     - Some changes related to the dateline.
 
     * src/lib/ViewParams.h
-    * src/lib/vectorcomposer.cpp
+    * src/lib/vectorcomposer{cpp,h}:
 
 2007-08-08  Murad Tagirov  <tmurad@gmail.com>
 
@@ -3804,10 +3821,10 @@ http://en.wikipedia.org/wiki/International_Dateline
     * src/mac/CMakeLists.txt
     * src/mac/Contents/Resources/CMakeLists.txt
     * src/mac/Contents/CMakeLists.txt
-    * src/lib/MarbleWidget.cpp
-    * src/lib/gps/Route.cpp
-    * src/lib/gps/Track.cpp
-    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/MarbleWidget{cpp,h}:
+    * src/lib/gps/Route{cpp,h}:
+    * src/lib/gps/Track{cpp,h}:
+    * src/lib/kml/KMLDocumentParser{cpp,h}:
     * src/lib/kml/Serializable.h
     * src/lib/MarbleWidget.h
     * src/lib/CMakeLists.txt
@@ -3831,8 +3848,8 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     * src/lib/MarbleWidget.{h,cpp}
     * src/lib/MarbleWidgetInputHandler.{h,cpp}
-    * src/lib/MarbleControlBox.cpp
-    * src/MarbleTest.cpp
+    * src/lib/MarbleControlBox{cpp,h}:
+    * src/MarbleTest{cpp,h}:
     * CODING
 
     Added lon-lat order to the CODING standards
@@ -3849,10 +3866,10 @@ http://en.wikipedia.org/wiki/International_Dateline
     objects to memory stream. In order to serialize any
     object class must be inherited from Serializable abastract class
     * src/lib/kml/Serializable.h: new file
-    * src/lib/placemarkmanager.cpp
+    * src/lib/placemarkmanager{cpp,h}:
     * src/lib/kml/KMLFeature.{h,cpp}
     * src/lib/kml/KMLObject.{h,cpp}
-    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser{cpp,h}:
     * src/lib/kml/KMLContainer.{h,cpp}
 
 2007-08-06  Torsten Rahn  <rahn@kde.org>
@@ -3880,9 +3897,9 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     Parse Marble's placemark specific fields
     "role" and "pop". Should use schema instead in feature
-    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/kml/KMLDocumentParser{cpp,h}:
     * src/lib/kml/KMLFeature.{h,cpp}
-    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/kml/KMLPointParser{cpp,h}:
     * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
 
 2007-08-05  Torsten Rahn  <rahn@kde.org>
@@ -3899,32 +3916,32 @@ http://en.wikipedia.org/wiki/International_Dateline
 2007-08-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Compile!
-	* src/lib/kml/KMLFeatureParser.cpp (characters): remove a variable.
+	* src/lib/kml/KMLFeatureParser{cpp,h}: (characters): remove a variable.
 	At least gcc 4.1.2 didn't like the previous code.
 
 2007-08-05  Murad Tagirov  <tmurad@gmail.com>
 
     KMLContainer now returns PlaceMarkContainer which
     contains only placemarks that are inside visible area
-    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser{cpp,h}:
     * src/lib/kml/KMLContainer.{h,cpp}
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
 
 2007-08-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Some trivial cleaning that I did while looking through the code to
 	understand it better.
-	* lib/AbstractScanlineTextureMapper.cpp,
-	* lib/MarbleWidget.cpp,
-	* lib/placemarkpainter.cpp,
-	* lib/TileLoader.cpp,
+	* lib/AbstractScanlineTextureMapper{cpp,h}:,
+	* lib/MarbleWidget{cpp,h}:,
+	* lib/placemarkpainter{cpp,h}:,
+	* lib/TileLoader{cpp,h}:,
 	* lib/GlobeScanlineTextureMapper.h,
 	* lib/placemarkpainter.h,
 	* lib/TileLoader.h,
-	* lib/GlobeScanlineTextureMapper.cpp,
-	* lib/TextureTile.cpp,
+	* lib/GlobeScanlineTextureMapper{cpp,h}:,
+	* lib/TextureTile{cpp,h}:,
 	* lib/TextureTile.h,
-	* lib/FlatScanlineTextureMapper.cpp:
+	* lib/FlatScanlineTextureMapper{cpp,h}::
 	Cleaning
 
 2007-08-05  Murad Tagirov  <tmurad@gmail.com>
@@ -3933,7 +3950,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     paints only folders which are visible.
     * src/lib/kml/KMLFeature.{h,cpp}
     * src/lib/kml/KMLFeatureParser.{h,cpp}
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
 
     Updated class diagram and kml related task list
     * projects/kml/kml-tasks
@@ -3955,13 +3972,13 @@ http://en.wikipedia.org/wiki/International_Dateline
 2007-08-04  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 14: inline methods in public classes.
-	* src/lib/placemarkmodel.{h,cpp}: Move all inline methods to .cpp
+	* src/lib/placemarkmodel.{h,cpp}: Move all inline methods to {cpp,h}:
 	file
 	* src/lib/PlaceMarkContainer.{h,cpp}: Move all inline methods to
-	.cpp file
+	{cpp,h}: file
 
 	Fix Krazy issue 12: validity of i18n calls.
-	* src/KdeMainWindow.cpp (exportMapScreenShot): Add a context to
+	* src/KdeMainWindow{cpp,h}: (exportMapScreenShot): Add a context to
 	the i18n call.
 
 	Fix Krazy issue 8: public classes with private members
@@ -3977,7 +3994,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     * src/lib/placemarkmanager.{h,cpp}
     * src/lib/kml/KMLDocument.{h,cpp}
     * src/lib/kml/KMLContainer.{h,cpp}
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
 
     Inherit KMLFeature -> PlaceMark, not KMLPlaceMark -> PlaceMark
     * src/lib/kml/KMLFeature.{h,cpp}
@@ -3987,13 +4004,13 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     Refactored KMLContainer parsing. Ignore whitespaces while parsing.
     Added counter for current tag level to avoid parsing of wrong data.
-    * src/lib/placemarkmanager.cpp
-    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/placemarkmanager{cpp,h}:
+    * src/lib/kml/KMLDocumentParser{cpp,h}:
     * src/lib/kml/KMLContainerParser.{h,cpp}
-    * src/lib/kml/KMLPointParser.cpp
-    * src/lib/kml/KMLFeatureParser.cpp
+    * src/lib/kml/KMLPointParser{cpp,h}:
+    * src/lib/kml/KMLFeatureParser{cpp,h}:
     * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
-    * src/lib/kml/KMLDocument.cpp
+    * src/lib/kml/KMLDocument{cpp,h}:
     * src/lib/kml/KMLObjectParser.{h,cpp}
 
     Make PlaceMarkPainter's part which paint using VisiblePlaceMark comile again
@@ -4005,74 +4022,74 @@ http://en.wikipedia.org/wiki/International_Dateline
 	to use for external applications.
 	* src/lib/MarbleControlBox.h: Don't inherit from
 	Ui::MarbleControlBox
-	* src/lib/MarbleControlBox.cpp: let Ui::MarbleControlBox be a part
+	* src/lib/MarbleControlBox{cpp,h}:: let Ui::MarbleControlBox be a part
 	of MarbleControlBoxPrivate
 	(all): add 'd->uiWidget.' to all uses of previous members.
 
 	Make it possible to choose between Flat projection and globe
 	projection in one place only (utils.h).
-	* src/lib/vectormap.cpp,
+	* src/lib/vectormap{cpp,h}:,
 	* src/lib/utils.h,
-	* src/lib/MarbleWidget.cpp,
-	* src/lib/placemarkpainter.cpp,
+	* src/lib/MarbleWidget{cpp,h}:,
+	* src/lib/placemarkpainter{cpp,h}:,
 	* src/lib/MarbleModel.h,
 	* src/lib/GlobeScanlineTextureMapper.h,
 	* src/lib/vectormap.h,
 	* src/lib/AbstractScanlineTextureMapper.h,
-	* src/lib/MarbleModel.cpp,
-	* src/lib/GlobeScanlineTextureMapper.cpp,
+	* src/lib/MarbleModel{cpp,h}:,
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:,
 	* src/lib/texcolorizer.h,
 	* src/lib/GridMap.h,
-	* src/lib/texcolorizer.cpp,
-	* src/lib/GridMap.cpp,
-	* src/lib/MarbleWidgetInputHandler.cpp:
+	* src/lib/texcolorizer{cpp,h}:,
+	* src/lib/GridMap{cpp,h}:,
+	* src/lib/MarbleWidgetInputHandler{cpp,h}::
 	Include utils.h and remove all other defines of FLAT_PROJ
 
 2007-08-03  Inge Wallin  <inge@lysator.liu.se>
 
 	Finish change lng -> lon according to the coding standards in the
 	library.
-	* src/lib/GeoPolygon.cpp,
-	* src/lib/MarbleWidgetInputHandler.cpp,
-	* src/lib/MarbleWidgetPopupMenu.cpp,
-	* src/lib/placemarkmanager.cpp,
-	* src/lib/placemarkpainter.cpp,
-	* src/lib/vectormap.cpp:
+	* src/lib/GeoPolygon{cpp,h}:,
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:,
+	* src/lib/MarbleWidgetPopupMenu{cpp,h}:,
+	* src/lib/placemarkmanager{cpp,h}:,
+	* src/lib/placemarkpainter{cpp,h}:,
+	* src/lib/vectormap{cpp,h}::
 	Change all lng -> lon
 
 	Change lng -> lon according to the coding standards.
-	* src/lib/AbstractScanlineTextureMapper.cpp,
+	* src/lib/AbstractScanlineTextureMapper{cpp,h}:,
 	* src/lib/AbstractScanlineTextureMapper.h,
-	* src/lib/FlatScanlineTextureMapper.cpp,
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:,
 	* src/lib/FlatScanlineTextureMapper.h,
-	* src/lib/GlobeScanlineTextureMapper.cpp,
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:,
 	* src/lib/GlobeScanlineTextureMapper.h,
-	* src/lib/GridMap.cpp,
+	* src/lib/GridMap{cpp,h}:,
 	* src/lib/GridMap.h,
-	* src/lib/MarbleWidget.cpp,
+	* src/lib/MarbleWidget{cpp,h}:,
 	* src/lib/MarbleWidget.h,
-	* src/lib/measuretool.cpp,
+	* src/lib/measuretool{cpp,h}:,
 	* src/lib/measuretool.h,
-	* src/lib/TileLoader.cpp:
+	* src/lib/TileLoader{cpp,h}::
 	Change all lng -> lon
 
 	Reduce visibility of internal classes.
 	* src/lib/ViewParams.h (class ViewParams): Don't export this class
 	* src/lib/MarbleModel.{h,cpp}: Move #include of maptheme.h from .h
-	to .cpp
+	to {cpp,h}:
 	* src/lib/maptheme.h (class ViewParams): Don't export this class
 
  	Remove storage of half of image width/height
-	* src/lib/GridMap.cpp: Remove storage of half of image width/heigh.
+	* src/lib/GridMap{cpp,h}:: Remove storage of half of image width/heigh.
 
 	Cleaning and remove storage of half of image width/height
 	* src/lib/AbstractScanlineTextureMapper.{h,cpp},
-	* src/lib/FlatScanlineTextureMapper.cpp,
-	* src/lib/GlobeScanlineTextureMapper.cpp: Cleaning
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:,
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:: Cleaning
 
 2007-08-02  Inge Wallin  <inge@lysator.liu.se>
 
-	* src/lib/MarbleModel.cpp: General cleaning.
+	* src/lib/MarbleModel{cpp,h}:: General cleaning.
 
 2007-08-01  Murad Tagirov  <tmurad@gmail.com>
 
@@ -4082,7 +4099,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 2007-07-31  Inge Wallin  <inge@lysator.liu.se>
 
 	Make kdemain and qtmain more alike.
-	* src/kdemain.cpp (main): Add same setAttribute as in qtmain.cpp
+	* src/kdemain{cpp,h}: (main): Add same setAttribute as in qtmain{cpp,h}:
 
 	More krazy issue 14: inline methods in public classes
 	* src/lib/placemarkpainter.h (drawLabelText): not inline
@@ -4091,7 +4108,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 	(seleced): not inline
 
 	Make it easier to change test setup.
-	* src/MarbleTest.cpp (timeDemo): More logical setup
+	* src/MarbleTest{cpp,h}: (timeDemo): More logical setup
 
 	Fix krazy issue 14: inline methods in public classes
 	* src/lib/GridMap.{h,cpp} (initCrossHorizon): Remove function and
@@ -4100,11 +4117,11 @@ http://en.wikipedia.org/wiki/International_Dateline
 	and put in the code, since it was only used once..
 
 	Cleaning, according to the TODO file.
-	* src/lib/maptheme.cpp: Clean (not many changes, really)
+	* src/lib/maptheme{cpp,h}:: Clean (not many changes, really)
 
 	Fix krazy issue 23: spelling errors.
-	* src/lib/HttpFetchFile.cpp (httpRequestFinished): Fix spelling
-	* src/lib/gps/Route.cpp (draw): Fix spelling
+	* src/lib/HttpFetchFile{cpp,h}: (httpRequestFinished): Fix spelling
+	* src/lib/gps/Route{cpp,h}: (draw): Fix spelling
 
 	Translate headers of MarbleControlBox tabs, and fix Krazy issue
 	18: inappropriate pass-by-value function args.
@@ -4116,56 +4133,56 @@ http://en.wikipedia.org/wiki/International_Dateline
 	(setCurrentLocationTabShown): Translate header of tabs
 
 	Add a warning for tackat to look at.
-	* src/lib/TileCache.cpp (insert): Add warning.
+	* src/lib/TileCache{cpp,h}: (insert): Add warning.
 
 	Krazy issue 13: Proper include directives.
-	* src/lib/TileCache.cpp: Guard
+	* src/lib/TileCache{cpp,h}:: Guard
 	* src/lib/gps/TrackContainer.h: Guard
 	* src/lib/gps/TrackPoint.h: Guard
 
 	Coding standards.
-	* src/lib/MarbleWidgetInputHandler.cpp: Fix indentation according
+	* src/lib/MarbleWidgetInputHandler{cpp,h}:: Fix indentation according
 	to coding standards.
 
 	Move vector on/off parameters to ViewParams:
 	* src/lib/ViewParams.h: new members: m_showIcelayer,
 	m_showBorders, m_showRivers, m_showLakes
-	* src/lib/ViewParams.cpp (constructor): initialize the new members
+	* src/lib/ViewParams{cpp,h}: (constructor): initialize the new members
 	* src/lib/vectorcomposer.h (class VectorComposer):
 	(drawTexturemap): Change signature to only take a ViewParams*
 	(paintBaseTexturemap): Change signature to take a ViewParams*
 	(paintTexturemap): Change signature to take a ViewParams*
-	* src/lib/vectorcomposer.cpp:
-	* src/lib/MarbleModel.cpp (paintGlobe): Call
+	* src/lib/vectorcomposer{cpp,h}::
+	* src/lib/MarbleModel{cpp,h}: (paintGlobe): Call
 	VectorComposer methods according to new signatures.
-	* src/lib/MarbleWidget.cpp: Use new members in Viewparams
+	* src/lib/MarbleWidget{cpp,h}:: Use new members in Viewparams
 
 2007-07-30  Inge Wallin  <inge@lysator.liu.se>
 
 	Move relief on/off parameter to ViewParams
 	* src/lib/ViewParams.h: new member: m_showRelief
-	* src/lib/ViewParams.cpp (constructor): initialize m_showRelief
+	* src/lib/ViewParams{cpp,h}: (constructor): initialize m_showRelief
 	* src/lib/texcolorizer.h (class TextureColorizer): Change
 	signature to only take a ViewParams*
-	* src/lib/texcolorizer.cpp (colorize):
+	* src/lib/texcolorizer{cpp,h}: (colorize):
 	  - take a ViewParams* as parameter only
 	  - Get showRelief from the view params
-	* src/lib/MarbleModel.cpp (paintGlobe): Call
+	* src/lib/MarbleModel{cpp,h}: (paintGlobe): Call
 	TexColorizer::colorize according to new signature.
-	* src/lib/MarbleWidget.cpp (showRelief): Get data from viewparams.
+	* src/lib/MarbleWidget{cpp,h}: (showRelief): Get data from viewparams.
 	(setShowRelief): set data in viewparams
 
 2007-07-29  Murad Tagirov  <tmurad@gmail.com>
 
     Temporary disabled weightfilter if KML_GSOC is defined
-    * src/lib/placemarkpainter.cpp
+    * src/lib/placemarkpainter{cpp,h}:
 
     Commented m_coordinate field becauase PlaceMark class
     already has same protected field
     * src/lib/kml/KMLPlaceMark.h
 
     Not delete m_placeMarkContainer field is KML_GSOC is defined
-    * src/lib/MarbleModel.cpp
+    * src/lib/MarbleModel{cpp,h}:
 
 2007-07-29  Torsten Rahn  <rahn@kde.org>
 
@@ -4201,8 +4218,8 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     Added teh catch for the command line argument "--gpsdemo" that
     initiates the Gps test
-    * src/kdemain.cpp:
-    * src/qtmain.cpp:
+    * src/kdemain{cpp,h}::
+    * src/qtmain{cpp,h}::
 
     Added accessors to katlascontrol for enableing/disableing the
     tabs in MarbleControlBox
@@ -4214,7 +4231,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     Added getters for all member variables and repaired all the Api
     Comments to follow the style of other files
     * src/lib/gps/GpsElement.h : comments + getters
-    * src/lib/gps/GpsElement.cpp: comments + getters
+    * src/lib/gps/GpsElement{cpp,h}:: comments + getters
     * src/lib/gps/Track.h: comments
 
     Made GpsDataElements follow more object oriented aproach layed
@@ -4225,7 +4242,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     Repaired problems with Gpx file loading and applied a true
     representation of a tracksegment
-    * src/lib/gps/GpxSax.cpp:
+    * src/lib/gps/GpxSax{cpp,h}::
 
     made TrackSegment follow Object Oriented Aproach and draw a red
     triangle after every 5 trackpoints
@@ -4257,12 +4274,12 @@ http://en.wikipedia.org/wiki/International_Dateline
 	to ViewParams.
 	(showCities,showTerrain,setShowCities,setShowTerrain): remove
 	* src/lib/ViewParams.h (m_showCities, m_showTerrain): new members
-	* src/lib/ViewParams.cpp (m_showCities, m_showTerrain): initialize
+	* src/lib/ViewParams{cpp,h}: (m_showCities, m_showTerrain): initialize
 	* src/lib/placemarkpainter.{h,cpp} (paintPlaceFolder,isVisible):
 	Take parameter ViewParams*
-	* src/lib/MarbleModel.cpp (paintGlobe): Use new call signature for
+	* src/lib/MarbleModel{cpp,h}: (paintGlobe): Use new call signature for
 	PlaceMarkPainter::paintPlaceFolder
-	* src/lib/MarbleWidget.cpp (showTerrain): Use new call signature
+	* src/lib/MarbleWidget{cpp,h}: (showTerrain): Use new call signature
 	for all of the above.
 
 2007-07-24  Inge Wallin  <inge@lysator.liu.se>
@@ -4279,32 +4296,32 @@ http://en.wikipedia.org/wiki/International_Dateline
 2007-07-23  Murad Tagirov  <tmurad@gmail.com>
 
 	Fixed compilation of code ifdefed with KML_GSOC
-	* src/lib/MarbleModel.cpp
+	* src/lib/MarbleModel{cpp,h}:
 
 2007-07-23  Inge Wallin  <inge@lysator.liu.se>
 
 	Move the image caches to ViewParams (same commit as the next entry)
 	* src/lib/ViewParams.h (ViewParams): m_coastImage: New member
-	* src/lib/ViewParams.cpp (ViewParams): Initialize new member
-	* src/lib/MarbleWidget.cpp: Use new call conventions everyhere
+	* src/lib/ViewParams{cpp,h}: (ViewParams): Initialize new member
+	* src/lib/MarbleWidget{cpp,h}:: Use new call conventions everyhere
 	* src/lib/MarbleModel.{h,cpp} (paintGlobe): new parameters:
 	width,height
 
 	Make the resize functions take width, height parameters instead of
 	a QImage*
-	* src/lib/MarbleModel.cpp (resize): Take width,height parameters
+	* src/lib/MarbleModel{cpp,h}: (resize): Take width,height parameters
 	and use them for all calls.
-	* src/lib/AbstractScanlineTextureMapper.cpp (resizeMap):
-	* src/lib/GlobeScanlineTextureMapper.cpp (resizeMap):
-	* src/lib/GridMap.cpp (resizeMap):
-	* src/lib/vectorcomposer.cpp (resizeMap):
-	* src/lib/vectormap.cpp (resizeMap): Take width,height parameters
+	* src/lib/AbstractScanlineTextureMapper{cpp,h}: (resizeMap):
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}: (resizeMap):
+	* src/lib/GridMap{cpp,h}: (resizeMap):
+	* src/lib/vectorcomposer{cpp,h}: (resizeMap):
+	* src/lib/vectormap{cpp,h}: (resizeMap): Take width,height parameters
 	instead of a QImage*.
 
 	Move some more view parameters to ViewParams
 	* src/lib/ViewParams.h (ViewParams): Added members m_showGrid,
 	m_showPlaceMarks, m_showElevationModel
-	* src/lib/ViewParams.cpp (ViewParams): Initialize new members
+	* src/lib/ViewParams{cpp,h}: (ViewParams): Initialize new members
 	* src/lib/Marble{Model,Widget}.{h,cpp} (showGrid, showPlaceMarks,
 	showElevationModel + set... methods): Remove. Use the ones in
 	MarbleWidget or ViewParams instead.
@@ -4316,20 +4333,20 @@ http://en.wikipedia.org/wiki/International_Dateline
 	spelling mistakes
 
 	Remove warnings
-	* src/lib/gps/GpxSax.cpp: Remove most warnings
-	* src/lib/AbstractLayer/AbstractLayer.cpp
-	* src/lib/AbstractLayer/AbstractLayerData.cpp
-	* src/lib/placemarkpainter.cpp
-	* src/lib/kml/KMLObject.cpp
-	* src/lib/kml/KMLPointParser.cpp
-	* src/lib/kml/KMLFeatureParser.cpp
-	* src/lib/HttpDownloadManager.cpp
-	* src/lib/TextureTile.cpp
-	* src/lib/texcolorizer.cpp
+	* src/lib/gps/GpxSax{cpp,h}:: Remove most warnings
+	* src/lib/AbstractLayer/AbstractLayer{cpp,h}:
+	* src/lib/AbstractLayer/AbstractLayerData{cpp,h}:
+	* src/lib/placemarkpainter{cpp,h}:
+	* src/lib/kml/KMLObject{cpp,h}:
+	* src/lib/kml/KMLPointParser{cpp,h}:
+	* src/lib/kml/KMLFeatureParser{cpp,h}:
+	* src/lib/HttpDownloadManager{cpp,h}:
+	* src/lib/TextureTile{cpp,h}:
+	* src/lib/texcolorizer{cpp,h}:
 	Remove all warnings,
 
 	Fix Krazy issue 18: Inappropriate pass-by-value.
-	* src/lib/MarbleWidget.cpp (openGpxFile): Take QString& instead of
+	* src/lib/MarbleWidget{cpp,h}: (openGpxFile): Take QString& instead of
 	QString.
 
 2007-07-19  Torsten Rahn  <rahn@kde.org>
@@ -4341,7 +4358,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 	Put more stuff into ViewParams.
 	* src/lib/ViewParams.h (ViewParams): New members: m_radius,
 	m_radiusUpdated, m_planetAxis, m_planetAxisUpdated.
-	* src/lib/ViewParams.cpp (ViewParams): Initialize new members
+	* src/lib/ViewParams{cpp,h}: (ViewParams): Initialize new members
 	* src/lib/Marble{Model,Widget}.{h,cpp}: Move lots of methods from
 	MarbleModel to MarbleWidget.
 	(paintGlobe): New parameter redrawBackground
@@ -4390,10 +4407,10 @@ for a presentation yesterday.
 2007-07-11  Murad Tagirov  <tmurad@gmail.com>
 
     Added support to open kml files from dialog
-    * src/QtMainWindow.cpp
+    * src/QtMainWindow{cpp,h}:
 
     Use ifdef in addPlaceMarkFile method to apply new kml parsing
-    * src/lib/placemarkmanager.cpp
+    * src/lib/placemarkmanager{cpp,h}:
 
 2007-07-11  Inge Wallin  <inge@lysator.liu.se>
 
@@ -4405,7 +4422,7 @@ for a presentation yesterday.
 
     Use QCoreApplication instead of QApplication
     Use "Schema" tag to compliant to kml reference
-    * tools/asc2kml/asc2kml.cpp
+    * tools/asc2kml/asc2kml{cpp,h}:
 
     Updated kml diagram after talk with Inge Wallin
     * projects/kml/KMLClasses.xmi
@@ -4414,15 +4431,15 @@ for a presentation yesterday.
 
 	Fix Krazy issues 4 and 15: copyright and license
 	* src/lib/AbstractScanlineTextureMapper.h
-	* src/lib/AbstractScanlineTextureMapper.cpp
+	* src/lib/AbstractScanlineTextureMapper{cpp,h}:
 	* src/lib/FlatScanlineTextureMapper.h
-	* src/lib/FlatScanlineTextureMapper.cpp
+	* src/lib/FlatScanlineTextureMapper{cpp,h}:
 	* src/lib/GlobeScanlineTextureMapper.h
-	* src/lib/GlobeScanlineTextureMapper.cpp
+	* src/lib/GlobeScanlineTextureMapper{cpp,h}:
 	* src/lib/gps/GpsLayer.h: Fix license and copyright
 
 	Fix Krazy issue 4: Acceptable copyright.
-	* src/lib/gps/Track.cpp (addTrackSeg): Fix Krazy issue and cleaning
+	* src/lib/gps/Track{cpp,h}: (addTrackSeg): Fix Krazy issue and cleaning
 
 2007-07-10  Inge Wallin  <inge@lysator.liu.se>
 
@@ -4430,18 +4447,18 @@ for a presentation yesterday.
 	* src/lib/MarbleWidget.{h,cpp} (drawAtmosphere): New function
 	(zoomView): Call drawAtmosphere()
 	(resizeEvent): Call drawAtmosphere()
-	* src/lib/MarbleModel.cpp (resize): Remove draw atmosphere
+	* src/lib/MarbleModel{cpp,h}: (resize): Remove draw atmosphere
 
 	Introduce the ViewParams class and move one item into it.
 	* src/lib/ViewParams.{h,cpp}: new files.
-	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Add
+	* src/lib/MarbleWidget{cpp,h}: (class MarbleWidgetPrivate): Add
 	m_viewParams and delete m_canvasImage
 	* src/lib/MarbleModel.{h,cpp}: Use ViewParams where applicable.
 
 	Move initialization of the basic image from MarbleModel to
 	MarbleWidget
-	* src/lib/MarbleModel.cpp (setRadius): Remove most contents
-	* src/lib/MarbleWidget.cpp (zoomView): Add the contents from above
+	* src/lib/MarbleModel{cpp,h}: (setRadius): Remove most contents
+	* src/lib/MarbleWidget{cpp,h}: (zoomView): Add the contents from above
 
 	Krazy fix: Use proper include directives
 	* src/lib/httpfetchfile.h: Fix include
@@ -4456,17 +4473,17 @@ for a presentation yesterday.
 	(setRadius): Add parameter canvasImage
 	(resize):  Add parameter canvasImage
 	(setCanvasImage): removed
-	* src/lib/MarbleWidget.cpp: Follow new call signatures
+	* src/lib/MarbleWidget{cpp,h}:: Follow new call signatures
 
 	Remove m_view from MarbleModelPrivate so that the Model no longer
 	keeps track of the View.
 	* src/lib/MarbleModel.{h,cpp} (setMapTheme): Add a parent
 	parameter
 	(class MarbleModelPrivate): remove m_view.
-	* src/lib/MarbleWidget.cpp (setMapTheme): Use new call convenction.
+	* src/lib/MarbleWidget{cpp,h}: (setMapTheme): Use new call convenction.
 
 	Improve parameter parsing in KDE version.
-	* src/kdemain.cpp (main): Use KDE classes to parse command line
+	* src/kdemain{cpp,h}: (main): Use KDE classes to parse command line
 
 2007-07-10  Torsten Rahn  <rahn@kde.org>
 
@@ -4502,7 +4519,7 @@ quite some cases)
 	functions.
 
 	Fix d-pointer for MarbleModel
-	* src/lib/MarbleModel.cpp: Move m_timer to MarbleModelPrivate
+	* src/lib/MarbleModel{cpp,h}:: Move m_timer to MarbleModelPrivate
 
 	d-pointer'ify PlaceMarkModel
 	* src/lib/placemarkmodel.{h,cpp}: Use d-pointer
@@ -4519,7 +4536,7 @@ quite some cases)
 
 2007-07-06  Torsten Rahn  <rahn@kde.org>
 
-* src/lib/<placemarkmodel.cpp:
+* src/lib/<placemarkmodel{cpp,h}::
 
 - Patch by Benoit Sigoure aka Tsuna.
 
@@ -4536,8 +4553,8 @@ Thanks Benoit!
 	* src/lib/AbstractLayer/AbstractLayer.{h,cpp}: general cleaning
 	(showLayer): renamed into visible.
 	(setShowLayer): renamed into setVisible.
-	* src/lib/MarbleModel.cpp: use new names
-	* src/lib/MarbleWidget.cpp: Use new names
+	* src/lib/MarbleModel{cpp,h}:: use new names
+	* src/lib/MarbleWidget{cpp,h}:: Use new names
 	* src/lib/FlatScanlineTextureMapper.h: Use new names
 
 	Cleaning and Apidox
@@ -4551,7 +4568,7 @@ Thanks Benoit!
 2007-07-02 Murad Tagirov  <tmurad@gmail.com>
 
     Removed calling of "clear" method in constructor of PlaceMarkContainer.
-    * src/lib/PlaceMarkContainer.cpp
+    * src/lib/PlaceMarkContainer{cpp,h}:
 
     Updated kml class diagram to show how to integrate KMLDocument with
     current PlaceMarkPainter class. Should discuss with Marble people.
@@ -4567,7 +4584,7 @@ Thanks Benoit!
 	Move MarbleControlBox into the library where it belongs.
 	* src/MarbleControlBox.{h,cpp}: Move to src/lib
 	* src/MarbleControlBox.ui: Move to src/lib and fix includes
-	* src/katlascontrol.cpp: Fix includes
+	* src/katlascontrol{cpp,h}:: Fix includes
 	* src/CMakeLists.txt: Fix include directories
 	* src/lib/CMakeLists.txt: Fix include directories
 
@@ -4597,7 +4614,7 @@ Thanks Benoit!
     *src/lib/AbstractLayer/AbstractLayer.{h,cpp} (m_showLayer):New
 
     Added nessary variables to MarbleModelPrivate for the gps layer
-    * src/lib/MarbleModel.cpp (m_gpsLayer, m_showGps) : New Variables
+    * src/lib/MarbleModel{cpp,h}: (m_gpsLayer, m_showGps) : New Variables
 
     Added new file to take care of gps layer with a Waypoint to
     represent current position.
@@ -4615,11 +4632,11 @@ Thanks Benoit!
 
 	Break out search for label space.
 	* src/lib/placemarkpainter.{h,cpp} (roomForLabel): new function
-	* src/lib/placemarkpainter.cpp (paintPlaceFolder): call roomForLabel
+	* src/lib/placemarkpainter{cpp,h}: (paintPlaceFolder): call roomForLabel
 
 	* src/lib/placemarkpainter.h
 	(PlaceMarkPainter::m_visiblePlaceMarks): use QList instead of QVector
-	* src/lib/placemarkpainter.cpp (paintPlaceFolder): Almost make the
+	* src/lib/placemarkpainter{cpp,h}: (paintPlaceFolder): Almost make the
 	QPixmap cache work.
 
 2007-06-25  Inge Wallin  <inge@lysator.liu.se>
@@ -4629,24 +4646,24 @@ Thanks Benoit!
 	width/height as parameters instead of the same/2.
 	(paintPlaceFolder): call isVisible.
 	(isVisible): New method
-	* src/lib/MarbleModel.cpp (paintGlobe): Use new call signature for
+	* src/lib/MarbleModel{cpp,h}: (paintGlobe): Use new call signature for
 	paintPlaceFolder
 
 	Cleaning in preparation for a bugfix
-	* src/lib/GridMap.cpp:  Cleaning
+	* src/lib/GridMap{cpp,h}::  Cleaning
 	 (createTropics): Show the tropics/polar circles already at radius=400
-	* src/lib/MarbleWidget.cpp (centerOn): Remove superfluous code
+	* src/lib/MarbleWidget{cpp,h}: (centerOn): Remove superfluous code
 
 2007-06-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning while learning the code
 	* src/lib/placamarkmanager.h: Comment
-	* src/lib/MarbleModel.cpp: Comments and cleaning
+	* src/lib/MarbleModel{cpp,h}:: Comments and cleaning
 
 2007-06-23  Inge Wallin  <inge@lysator.liu.se>
 
 	Add support for setting the home point and zoom (not working yet)
-	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): new
+	* src/lib/MarbleWidget{cpp,h}: (class MarbleWidgetPrivate): new
 	methods: m_homePoint and m_homeZoom
 	* src/lib/MarbleWidget.{h,cpp} (setHome): New method
 	* src/lib/MarbleModel.{h,cpp} (rotateTo): new method
@@ -4657,7 +4674,7 @@ Thanks Benoit!
 	* src/lib/MarbleWidget.{h,cpp}: Cleaning
 
 	Fix a bug where wrong PlaceMark was reused.
-	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): new method
+	* src/lib/placemarkpainter{cpp,h}: (class VisiblePlaceMark): new method
 	(paintPlaceFolder): Set PlaceMark when a VisiblePlaceMark is reused.
 
 	Optimize memory usage by only save labels for those PlaceMarks
@@ -4665,28 +4682,28 @@ Thanks Benoit!
 	* src/lib/placemark.h (class PlaceMark): Remove members
 	m_symbolPixmap, m_symbolPos, m_labelPixmap, m_textRect, m_visible
 	and their accessor functions.
-	* src/lib/placemark.cpp: (PlaceMark): Remove initialization of
+	* src/lib/placemark{cpp,h}:: (PlaceMark): Remove initialization of
 	removed members.
 	* src/lib/placemark.h: (PlaceMarkContainer::clearTextPixmaps):
 	Remove
 	* src/lib/placemarkpainter.h (class PlaceMarkPainter): New members
 	m_visiblePlacemarks, m_visiblePlacemarksPool
-	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): New class
+	* src/lib/placemarkpainter{cpp,h}: (class VisiblePlaceMark): New class
 	(paintPlaceFolder): Use the VisiblePlacemarks in painting
-	* src/lib/MarbleModel.cpp (setMapTheme): Don't call clearTextPixmaps
-	* src/lib/MarbleWidget.cpp (centerOn): Don't call clearTextPixmaps
+	* src/lib/MarbleModel{cpp,h}: (setMapTheme): Don't call clearTextPixmaps
+	* src/lib/MarbleWidget{cpp,h}: (centerOn): Don't call clearTextPixmaps
 
 2007-06-21  Andrew Manson   <g.real.ate@gmail.com>
 
-	Fixed a simple off by one error in TextureMapper.cpp. The issue
+	Fixed a simple off by one error in TextureMapper{cpp,h}:. The issue
 	was with the implementation of interlacing, or in fact when the
 	display stopped using that method to draw.
 
 2007-06-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix linking issue with AbstractLayer and Q_OBJECT
-	* src/lib/CMakeLists.txt: Include AbstractLayer/AbstractLayer.cpp
-	* src/lib/AbstractLayer/AbstractLayer.cpp: Include moc file.
+	* src/lib/CMakeLists.txt: Include AbstractLayer/AbstractLayer{cpp,h}:
+	* src/lib/AbstractLayer/AbstractLayer{cpp,h}:: Include moc file.
 
 2007-06-19  Andrew Manson   <g.real.ate@gmail.com>
 
@@ -4700,38 +4717,38 @@ Thanks Benoit!
 
     Added Implementations of nessary AbstractLayer classes that are
     extended by the GPS Classes.
-    * src/lib/AbstractLayer/AbstractLayerContainer.cpp : Added
-    * src/lib/AbstractLayer/AbstractLayerData.cpp : Added
+    * src/lib/AbstractLayer/AbstractLayerContainer{cpp,h}: : Added
+    * src/lib/AbstractLayer/AbstractLayerData{cpp,h}: : Added
 
 2007-06-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Start of a simple system to only store pixmaps and other UI data
 	for visible placemarks.
-	* src/lib/placemarkpainter.cpp (class VisiblePlaceMark): New class
+	* src/lib/placemarkpainter{cpp,h}: (class VisiblePlaceMark): New class
 
 	Name change to improve readability
 	* src/lib/placemark.h (class PlaceMark): m_rect -> m_textRect
-	* src/lib/placemark.cpp (PlaceMark): Use new name
+	* src/lib/placemark{cpp,h}: (PlaceMark): Use new name
 
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Simplify and clean the code in preparation for other changes.
-	* src/lib/placemarkpainter.cpp (paintPlaceFolder): Simplify the
+	* src/lib/placemarkpainter{cpp,h}: (paintPlaceFolder): Simplify the
 	code a lot, and in particular use pre-increments for iterators,
 	which makes it a lot faster.
 
 	Change name of class PlaceContainer into PlaceMarkContainer.
 	* src/lib/placecontainer.h:   new name: PlaceMarkContainer.h
-	* src/lib/placecontainer.cpp: new name: PlaceMarkContainer.cpp
+	* src/lib/placecontainer{cpp,h}:: new name: PlaceMarkContainer{cpp,h}:
 	* src/lib/CMakeLists.txt: reflect the name change
-	* src/lib/MarbleModel.h,       src/lib/MarbleModel.cpp,
-	* src/lib/MarbleWidget.cpp,
-	* src/lib/kml/KMLDocument.cpp,
-	* src/lib/kml/KMLFolder.cpp,
-	* src/lib/placemarkmanager.h,  src/lib/placemarkmanager.cpp,
-	* src/lib/placemarkmodel.h,    src/lib/placemarkmodel.cpp,
-	* src/lib/placemarkpainter.h,  src/lib/placemarkpainter.cpp,
-	* src/lib/xmlhandler.h,        src/lib/xmlhandler.cpp:
+	* src/lib/MarbleModel.h,       src/lib/MarbleModel{cpp,h}:,
+	* src/lib/MarbleWidget{cpp,h}:,
+	* src/lib/kml/KMLDocument{cpp,h}:,
+	* src/lib/kml/KMLFolder{cpp,h}:,
+	* src/lib/placemarkmanager.h,  src/lib/placemarkmanager{cpp,h}:,
+	* src/lib/placemarkmodel.h,    src/lib/placemarkmodel{cpp,h}:,
+	* src/lib/placemarkpainter.h,  src/lib/placemarkpainter{cpp,h}:,
+	* src/lib/xmlhandler.h,        src/lib/xmlhandler{cpp,h}::
 	  Use the new names.
 
 2007-06-16  Murad Tagirov  <tmurad@gmail.com>
@@ -4743,8 +4760,8 @@ Thanks Benoit!
     * src/lib/kml/KMLPlaceMarkParser.{h,cpp}
 
     Moved "deg2rad" constant from xmlhandler to GeoPoint.
-    * src/lib/xmlhandler.cpp
-    * src/lib/GeoPoint.cpp
+    * src/lib/xmlhandler{cpp,h}:
+    * src/lib/GeoPoint{cpp,h}:
 
     Added "m_parsed" field to parser classes to avoid
     parsing of incorrect tag sequences.
@@ -4758,7 +4775,7 @@ Thanks Benoit!
 2007-06-16  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue 22: Check for spelling errors
-	* src/lib/kml/KMLPlaceMarkParser.cpp: appers -> appears
+	* src/lib/kml/KMLPlaceMarkParser{cpp,h}:: appers -> appears
 
 2007-06-16  Murad Tagirov  <tmurad@gmail.com>
 
@@ -4793,10 +4810,10 @@ Thanks Benoit!
     - Changed the colorpalette to something more
       subtil and professional looking.
 
-    * src/lib/vectorcomposer.cpp: change color for lakes
-    * src/lib/MarbleModel.cpp: new default map
-    * src/lib/texturepalette.cpp: better colors
-    * tools/palettegen/palettegen.cpp: fix dir structure
+    * src/lib/vectorcomposer{cpp,h}:: change color for lakes
+    * src/lib/MarbleModel{cpp,h}:: new default map
+    * src/lib/texturepalette{cpp,h}:: better colors
+    * tools/palettegen/palettegen{cpp,h}:: fix dir structure
     * data/maps/earth/srtm: SRTM data
     * data/maps/earth/srtm/srtm.jpg: SRTM data
     * data/maps/earth/srtm/srtm.dgml: SRTM data
@@ -4824,8 +4841,8 @@ Thanks Benoit!
 	* src/lib/AbstractLayer/AbstractLayer.h (class AbstractLayer): Add Q_OBJECT
 
 	Fix Krazy issue 12: Check for proper include directives.
-	* src/lib/AbstractLayer.cpp:               Fix include
-	* src/lib/AbstractLayer/AbstractLayer.cpp: Fix include
+	* src/lib/AbstractLayer{cpp,h}::               Fix include
+	* src/lib/AbstractLayer/AbstractLayer{cpp,h}:: Fix include
 
 	Fix Krazy issue 09: Check that files end with a newline.
 	* src/lib/AbstractLayer/AbstractLayerData.h: Add a newline.
@@ -4857,7 +4874,7 @@ Thanks Benoit!
     * data/placemarks/elevplacemarks.cache:  float->double
     * data/placemarks/cityplacemarks.cache:  float->double
 
-    * src/lib/placemarkmanager.cpp:          float->double
+    * src/lib/placemarkmanager{cpp,h}::          float->double
 
 2007-06-15  Murad Tagirov  <tmurad@gmail.com>
     Added KML_GSOC variable to check parsing
@@ -4876,7 +4893,7 @@ Thanks Benoit!
     Added KML_DEBUG to CMakeList to debug count of kml objects.
     If KML_DEBUG is ON then KMLObject count number of instances
     this could help to avoid memory leaks in feature
-    * src/lib/kml/KMLObject.cpp
+    * src/lib/kml/KMLObject{cpp,h}:
 
 2007-06-12  Murad Tagirov  <tmurad@gmail.com>
     Added KMLFolder. KMLDocument now inherited from KMLFolder
@@ -4902,16 +4919,16 @@ Thanks Benoit!
 
 	Finish the float to double changes
 	* src/lib/AbstractLayer.{h,cpp}: float -> double
-	* src/lib/Quaternion.cpp:        float -> double
-	* src/lib/GeoPolygon.cpp:        float -> double
-	* src/lib/katlaswindrose.cpp:    float -> double
-	* src/lib/xmlhandler.cpp:        float -> double
-	* src/lib/TextureMapper.cpp:     float -> double
+	* src/lib/Quaternion{cpp,h}::        float -> double
+	* src/lib/GeoPolygon{cpp,h}::        float -> double
+	* src/lib/katlaswindrose{cpp,h}::    float -> double
+	* src/lib/xmlhandler{cpp,h}::        float -> double
+	* src/lib/TextureMapper{cpp,h}::     float -> double
 
 	More float to double changes, the measure tool
 	* src/lib/measuretool.{h,cpp}:   float -> double
 	* src/lib/katlasviewpopupmenu.h: float -> double
-	* src/lib/katlasviewinputhandler.cpp: float -> double
+	* src/lib/katlasviewinputhandler{cpp,h}:: float -> double
 	* src/lib/MarbleWidget.h:        float -> double in connect()
 
 	More float to double changes, the placemark layer
@@ -4922,9 +4939,9 @@ Thanks Benoit!
 	* src/lib/clippainter.{h,cpp}:   float -> double
 
 	More float to double changes - the rest of the tile layer
-	* src/lib/tilescissor.cpp:       float -> double
-	* src/lib/texcolorizer.cpp:      float -> double
-	* src/lib/TextureTile.cpp:       float -> double
+	* src/lib/tilescissor{cpp,h}::       float -> double
+	* src/lib/texcolorizer{cpp,h}::      float -> double
+	* src/lib/TextureTile{cpp,h}::       float -> double
 
 	More float to double changes, taking it step by step.
 	* src/lib/GridMap.{h,cpp}:       float -> double
@@ -4938,11 +4955,11 @@ Thanks Benoit!
 	* src/lib/Quaternion.{h,cpp}: float -> double
 	* src/lib/GeoPoint.{h,cpp}:   float -> double
 	* src/lib/GeoPolygon.{h,cpp}: float -> double
-	* src/lib/MarbleWidget.{h,cpp},  src/lib/TextureMapper.cpp
+	* src/lib/MarbleWidget.{h,cpp},  src/lib/TextureMapper{cpp,h}:
 	src/lib/katlasviewinputhandler.{h,cpp},
-	src/lib/katlasviewpopupmenu.cpp, src/lib/measuretool.cpp,
-	src/lib/placemark.{h,cpp},       src/lib/placemarkmanager.cpp
-	src/main.cpp: Just change the floats that needed to be changed.
+	src/lib/katlasviewpopupmenu{cpp,h}:, src/lib/measuretool{cpp,h}:,
+	src/lib/placemark.{h,cpp},       src/lib/placemarkmanager{cpp,h}:
+	src/main{cpp,h}:: Just change the floats that needed to be changed.
 
 2007-06-11  Torsten Rahn  <rahn@kde.org>
 
@@ -4961,8 +4978,8 @@ Thanks Benoit!
 	* src/lib/vectormap.{h,cpp}: use the m_ convention everywhere.
 
 	Minor cleaning while learning the code
-	* src/lib/vectormap.cpp, placemark.h, placemarkpainter.cpp,
-	vectorcomposer.cpp, MarbleModel.cpp: minor comments and cleaning
+	* src/lib/vectormap{cpp,h}:, placemark.h, placemarkpainter{cpp,h}:,
+	vectorcomposer{cpp,h}:, MarbleModel{cpp,h}:: minor comments and cleaning
 
 2007-06-09  Torsten Rahn  <rahn@kde.org>
 
@@ -4971,12 +4988,12 @@ Thanks Benoit!
 2007-06-07  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
 
 	Introduce d-pointer in MarbleWidget
-	* src/lib/MarbleWidget.cpp (d): new member
-	* src/lib/MarbleWidget.cpp (MarbleWidgetPrivate): new class
-	(rest of MarbleWidget.cpp): use d-> everywhere
+	* src/lib/MarbleWidget{cpp,h}: (d): new member
+	* src/lib/MarbleWidget{cpp,h}: (MarbleWidgetPrivate): new class
+	(rest of MarbleWidget{cpp,h}:): use d-> everywhere
 
 	Krazy 4: Check for an acceptable copyright
-	* src/lib/kml/KMLDocument.cpp: Add header with copyright.
+	* src/lib/kml/KMLDocument{cpp,h}:: Add header with copyright.
 
 2007-06-06  Murad Tagirov  <tmurad@gmail.com>
 
@@ -4989,22 +5006,22 @@ Thanks Benoit!
 	* src/lib/kml/*.{h,cpp}: Set the correct email for Murad Tagirov
 
 	Krazy 13: Check for inlince methods in public classes
-	* src/MarbleControlBox.cpp (setLocations): Make non-inline
+	* src/MarbleControlBox{cpp,h}: (setLocations): Make non-inline
 	(minimumZoom): Make non-inline
 
 	Krazy 13: Check for inlince methods in public classes
 	* src/lib/MarbleWidget.{h,cpp}: make all functions non-inline
 
 	Krazy 13: Check for inlince methods in public classes
-	* src/lib/searchlistview.cpp (activate): Make non-inline.
+	* src/lib/searchlistview{cpp,h}: (activate): Make non-inline.
 
 	Krazy 12: Check for proper include directives
 	* src/lib/marble_export.h: Use <QtCore/QtGlobal> instead of "..."
 
 	Introduce d-pointer in MarbleModel
-	* src/lib/MarbleModel.cpp (d): new member
-	* src/lib/MarbleModel.cpp (MarbleModelPrivate): new class
-	(rest of MarbleModel.cpp): use d-> everywhere
+	* src/lib/MarbleModel{cpp,h}: (d): new member
+	* src/lib/MarbleModel{cpp,h}: (MarbleModelPrivate): new class
+	(rest of MarbleModel{cpp,h}:): use d-> everywhere
 	This also fixes a lot of Krazy 13.issues:
 	  inline functions in public classes.
 
@@ -5064,8 +5081,8 @@ Thanks Benoit!
 
 	Krazy: 12. Check for proper include directives
 	* src/lib/marble_export.h: Fix include
-	* src/plugins/marblewidget/MarbleWidgetPlugin.cpp: Fix include
-	* src/plugins/navigator/MarbleNavigatorPlugin.cpp: Fix include
+	* src/plugins/marblewidget/MarbleWidgetPlugin{cpp,h}:: Fix include
+	* src/plugins/navigator/MarbleNavigatorPlugin{cpp,h}:: Fix include
 
 	Clean up
 	* src/lib/vectorcomposer.{h,cpp}: use the m_ convention everywhere.
@@ -5102,40 +5119,40 @@ Murad, this should look like:
 
 	APIDOX
 	* src/lib/MarbleWidget.h: Finish APIDOX.
-	* src/lib/MarbleWidget.cpp: small naming
+	* src/lib/MarbleWidget{cpp,h}:: small naming
 
 	APIDOX
 	* src/lib/MarbleWidget.h: Document everything but the slots.
 
 	Fix compile error
-	* src/plugins/marblewidget/MarbleWidgetPlugin.cpp (createWidget):
+	* src/plugins/marblewidget/MarbleWidgetPlugin{cpp,h}: (createWidget):
 	Use MarbleModel instead of KAtlasGlobe.
 
 2007-06-02  Inge Wallin  <inge@lysator.liu.se>
 
 	Improve integration between MarbleControlBox and MarbleWidget
 	* src/MarbleControlBox.h (m_widget): new member
-	* src/MarbleControlBox.cpp (addMarbleWidget): New method
-	* src/katlascontrol.cpp (KAtlasControl): use addMarbleWidget
+	* src/MarbleControlBox{cpp,h}: (addMarbleWidget): New method
+	* src/katlascontrol{cpp,h}: (KAtlasControl): use addMarbleWidget
 	instead of connecting signals/slots ourselves
 
 	Make a standalone widget that creates its own model
-	* src/lib/MarbleWidget.cpp (MarbleWidget(parent)): new constructor
+	* src/lib/MarbleWidget{cpp,h}: (MarbleWidget(parent)): new constructor
 	(construct): New method
-	* src/katlascontrol.cpp (KAtlasControl): Use new constructor for
+	* src/katlascontrol{cpp,h}: (KAtlasControl): Use new constructor for
 	MarbleWidget
 	* src/katlascontrol.h (KAtlasControl::m_marbleModel): removed
 
 	Rename KatlasGlobe -> MarbleModel
 	* src/lib/MarbleModel.h (): renamed from katlasglobe.h
-	* src/lib/MarbleModel.cpp (): renamed from katlasglobe.cpp
+	* src/lib/MarbleModel{cpp,h}: (): renamed from katlasglobe{cpp,h}:
 	* src/katlascontrol.{h,cpp}: use new name
 	* src/lib/MarbleWidget.{h,cpp}: use new name
 	* src/lib/katlasviewpopupmenu.{h,cpp}: use new name
 	* src/lib/katlasviewinputhandler.{h,cpp}: use new name
 
 	Show zoom level in the status bar
-	* src/KdeMainWindow.cpp (showZoom): new slot
+	* src/KdeMainWindow{cpp,h}: (showZoom): new slot
 	(createStatusBar): create zoom label
 	(MainWindow): Show initial zoom level
 	* src/katlascontrol.h (marbleWidget): New method
@@ -5172,10 +5189,10 @@ Murad, this should look like:
 	Rename KAtlasToolBox into MarbleControlBox
 	* src/katlastoolbox.ui  -> src/MarbleControlBox.ui
 	* src/katlastoolbox.h   -> src/MarbleControlBox.h
-	* src/katlastoolbox.cpp -> src/MarbleControlBox.cpp
+	* src/katlastoolbox{cpp,h}: -> src/MarbleControlBox{cpp,h}:
 	* src/CmakeLists.txt: use new name
 	* src/marbleosx.pro:  use new name
-	* src/katlascontrol.cpp: Use new class name
+	* src/katlascontrol{cpp,h}:: Use new class name
 	* src/DESIGN: Update documentation
 
 2007-05-29  Torsten Rahn  <rahn@kde.org>
@@ -5189,28 +5206,28 @@ Some fixes:
 2007-05-28  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix Krazy issue: Check for Qt classes that should not be used
-	* src/QtMainWindow.cpp (exportMapScreenShot): Suppress false
+	* src/QtMainWindow{cpp,h}: (exportMapScreenShot): Suppress false
 	positives for krazy tests
-	* src/KdeMainWindow.cpp (exportMapScreenShot): Use KMessageBox
+	* src/KdeMainWindow{cpp,h}: (exportMapScreenShot): Use KMessageBox
 	instead of QMessageBox.
 
 	Fix Krazy issue: missing tags: copyright
 	Fix Krazy issue: missing license
-	* tools/palettegen/palettegen.cpp (main): Generate header with
+	* tools/palettegen/palettegen{cpp,h}: (main): Generate header with
 	Copyright and license
-	* src/texturepalette.cpp: Regenerate this file with the above
+	* src/texturepalette{cpp,h}:: Regenerate this file with the above
 	mentioned header.
 
 	Fix Krazy issue: inappropriate pass-by-value function args
 	* src/TextureTile.h (signal downloadTile): Pass QString parameter
 	by reference
-	* src/HttpDownloadManager.cpp (addJob): Pass QString parameter by
+	* src/HttpDownloadManager{cpp,h}: (addJob): Pass QString parameter by
 	reference.
-	* src/TileLoader.cpp (loadTile): Connect with parameter QString &
+	* src/TileLoader{cpp,h}: (loadTile): Connect with parameter QString &
 
 	Fix Krazy issue: Proper include directives
-	* tools/palettegen/palettegen.cpp:
-	* tools/texissor/texissor.cpp: Fix includes
+	* tools/palettegen/palettegen{cpp,h}::
+	* tools/texissor/texissor{cpp,h}:: Fix includes
 
 2007-05-27  Torsten Rahn  <rahn@kde.org>
 
@@ -5220,24 +5237,24 @@ Some fixes:
 2007-05-26  Inge Wallin  <inge@lysator.liu.se>
 
 	Rename katlasview.{h,cpp} into MarbleWidget
-	* src/katlasview.cpp -> src/MarbleWidget.cpp:
+	* src/katlasview{cpp,h}: -> src/MarbleWidget{cpp,h}::
 	src/katlasview.h   -> src/MarbleWidget.h
-	src/katlascontrol.h,          src/katlascontrol.cpp,
-	src/katlasviewinputhandler.h, src/katlasviewinputhandler.cpp,
-	src/katlasviewpopupmenu.h,    src/katlasviewpopupmenu.cpp: Use new name
+	src/katlascontrol.h,          src/katlascontrol{cpp,h}:,
+	src/katlasviewinputhandler.h, src/katlasviewinputhandler{cpp,h}:,
+	src/katlasviewpopupmenu.h,    src/katlasviewpopupmenu{cpp,h}:: Use new name
 	src/CMakeLists.txt: Use new filenames
 
 	Create MarbleControl widget
 	* src/marblecontrol.ui:  new file
 	* src/marblecontrol.h:   new file
-	* src/marblecontrol.cpp: new file
+	* src/marblecontrol{cpp,h}:: new file
 
 	Cleanup
-	* tools/svg2pnt/svg2pnt.cpp: Clean
-	* tools/svg2pnt/svgxmlhandler.cpp: Clean
-	* tools/texissor/texissor.cpp: Clean
-	* tools/palettegen/palettegen.cpp: Clean
-	* tools/asc2kml/asc2kml.cpp: Clean
+	* tools/svg2pnt/svg2pnt{cpp,h}:: Clean
+	* tools/svg2pnt/svgxmlhandler{cpp,h}:: Clean
+	* tools/texissor/texissor{cpp,h}:: Clean
+	* tools/palettegen/palettegen{cpp,h}:: Clean
+	* tools/asc2kml/asc2kml{cpp,h}:: Clean
 
 	Krazy codechecks
 	* tools/*/*.{h,cpp}: Add license and copyright status
@@ -5261,19 +5278,19 @@ Some fixes:
 2007-05-20  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
-	* src/katlasviewpopupmenu.cpp (): Clean
+	* src/katlasviewpopupmenu{cpp,h}: (): Clean
 
 2007-05-19  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleanup
-	* src/katlasviewinputhandler.cpp (*): Clean
+	* src/katlasviewinputhandler{cpp,h}: (*): Clean
 
 	Cleanup
-	* src/TileLoader.cpp,   src/HttpDownloadManager.cpp
-	src/katlastoolbox.cpp,  src/measuretool.cpp,
-	src/texcolorizer.cpp,   src/katlaswindrose.cpp,
-	src/katlastoolbox.h,    src/xmlhandler.cpp,
-	src/placemarkmodel.cpp, src/katlasviewinputhandler.cpp: Remove warnings
+	* src/TileLoader{cpp,h}:,   src/HttpDownloadManager{cpp,h}:
+	src/katlastoolbox{cpp,h}:,  src/measuretool{cpp,h}:,
+	src/texcolorizer{cpp,h}:,   src/katlaswindrose{cpp,h}:,
+	src/katlastoolbox.h,    src/xmlhandler{cpp,h}:,
+	src/placemarkmodel{cpp,h}:, src/katlasviewinputhandler{cpp,h}:: Remove warnings
 
 	Fix a bug
 	* src/TileLoader.h (message): Print the variable test instead of

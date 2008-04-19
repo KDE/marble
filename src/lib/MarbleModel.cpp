@@ -183,7 +183,7 @@ MarbleModel::MarbleModel( QObject *parent )
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
     
     m_sunLocator = new SunLocator();
-    m_painter = new MergedLayerPainter(m_sunLocator);
+    m_painter = new MergedLayerDecorator(m_sunLocator);
 
     // TODO be able to set these somewhere
     m_painter->showClouds(true);
@@ -832,7 +832,7 @@ SunLocator* MarbleModel::sunLocator() const
     return m_sunLocator;
 }
 
-MergedLayerPainter* MarbleModel::painter() const
+MergedLayerDecorator* MarbleModel::painter() const
 {
     return m_painter;
 }

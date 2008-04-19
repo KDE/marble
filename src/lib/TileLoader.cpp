@@ -29,7 +29,7 @@
 #include "TextureTile.h"
 #include "MarbleDirs.h"
 #include "TileCache.h"
-#include "MergedLayerPainter.h"
+#include "MergedLayerDecorator.h"
 #include "MarbleModel.h"
 
 #include <QtCore/QDebug>

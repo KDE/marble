@@ -13,21 +13,21 @@
 // You should have received a copy of the GNU Lesser General Public 
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MERGEDLAYERPAINTER_H
-#define MERGEDLAYERPAINTER_H
+#ifndef MERGED_LAYER_DECORATOR_H
+#define MERGED_LAYER_DECORATOR_H
 
 #include <QImage>
 #include <QObject>
 
 #include "SunLocator.h"
 
-class MergedLayerPainter : public QObject
+class MergedLayerDecorator : public QObject
 {
     Q_OBJECT
 	
  public:
-    explicit MergedLayerPainter(SunLocator* sunLocator);
-    virtual ~MergedLayerPainter();
+    explicit MergedLayerDecorator(SunLocator* sunLocator);
+    virtual ~MergedLayerDecorator();
 	
     void paint(const QString& theme);
     void paintTileId(const QString& theme);

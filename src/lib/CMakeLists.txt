@@ -129,7 +129,7 @@ set(marblewidget_SRCS
     SunLocator.cpp
     ExtDateTime.cpp
     SunControlWidget.cpp
-    MergedLayerPainter.cpp
+    MergedLayerDecorator.cpp
 )
 
 set (marblewidget_UI

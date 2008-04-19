@@ -29,7 +29,7 @@
 class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
-class MergedLayerPainter;
+class MergedLayerDecorator;
 class MarbleModel;
 
 /**
