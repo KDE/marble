@@ -23,9 +23,9 @@
 #include <QtGui/QImageReader>
 #include <QtGui/QPainter>
 
+#include "global.h"
 #include "MarbleDirs.h"
-#include "TileLoader.h"
-#include "TextureTile.h"
+#include "TileLoaderHelper.h"
 
 // FIXME: This shouldn't be defined here, but centrally somewhere
 const uint  tileSize = 675;
@@ -92,7 +92,7 @@ void TileCreator::run()
     }
     qDebug() << "Maximum Tile Level: " << maxTileLevel;
 
-    uint maxRows = TileLoader::levelToRow( maxTileLevel );
+    uint maxRows = TileLoaderHelper::levelToRow( maxTileLevel );
 
     // If the image size of the image source does not match the expected 
     // geometry we need to smooth-scale the image in advance to match
@@ -123,15 +123,15 @@ void TileCreator::run()
     int  totalTileCount = 0;
 
     while ( tileLevel <= maxTileLevel ) {
-        totalTileCount += ( TileLoader::levelToRow( tileLevel )
-                            * TileLoader::levelToColumn( tileLevel ) );
+        totalTileCount += ( TileLoaderHelper::levelToRow( tileLevel )
+                            * TileLoaderHelper::levelToColumn( tileLevel ) );
         tileLevel++;
     }
 
     qDebug() << totalTileCount << " tiles to be created in total.";
 
-    int  mmax = TileLoader::levelToColumn( maxTileLevel );
-    int  nmax = TileLoader::levelToRow( maxTileLevel );
+    int  mmax = TileLoaderHelper::levelToColumn( maxTileLevel );
+    int  nmax = TileLoaderHelper::levelToRow( maxTileLevel );
 
     // Loading each row at highest spatial resolution and croping tiles
     int      percentCompleted = 0;
@@ -214,7 +214,7 @@ void TileCreator::run()
     while( tileLevel > 0 ) {
         tileLevel--;
 
-        int  nmaxit =  TileLoader::levelToRow( tileLevel );;
+        int  nmaxit =  TileLoaderHelper::levelToRow( tileLevel );;
 
         for ( int n = 0; n < nmaxit; ++n ) {
             QString  dirName( m_targetDir
@@ -226,7 +226,7 @@ void TileCreator::run()
             if ( !QDir( dirName ).exists() ) 
                 ( QDir::root() ).mkpath( dirName );
 
-            int   mmaxit = TileLoader::levelToColumn( tileLevel );;
+            int   mmaxit = TileLoaderHelper::levelToColumn( tileLevel );;
             for ( int m = 0; m < mmaxit; ++m ) {
 
                 if ( m_cancelled == true )
@@ -348,9 +348,9 @@ void TileCreator::run()
  
     tileLevel = 0;
     while ( tileLevel <= maxTileLevel ) {
-        int nmaxit =  TileLoader::levelToRow( tileLevel );
+        int nmaxit =  TileLoaderHelper::levelToRow( tileLevel );
         for ( int n = 0; n < nmaxit; ++n) {
-            int mmaxit =  TileLoader::levelToColumn( tileLevel );
+            int mmaxit =  TileLoaderHelper::levelToColumn( tileLevel );
             for ( int m = 0; m < mmaxit; ++m) { 
 
                 if ( m_cancelled == true )

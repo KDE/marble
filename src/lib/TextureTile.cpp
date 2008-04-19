@@ -19,8 +19,9 @@
 
 #include <cmath>
 
+#include "global.h"
 #include "MarbleDirs.h"
-#include "TileLoader.h"
+#include "TileLoaderHelper.h"
 
 
 static uint **jumpTableFromQImage32( QImage &img )
@@ -104,10 +105,10 @@ void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
 
   for ( int i = level; i > -1; --i ) {
 
-      double origx1 = (double)(x) / (double)( TileLoader::levelToRow( level ) );
-      double origy1 = (double)(y) / (double)( TileLoader::levelToColumn( level ) );
-      double testx1 = origx1 * (double)( TileLoader::levelToRow( i ) ) ;
-      double testy1 = origy1 * (double)( TileLoader::levelToColumn( i ) );
+      double origx1 = (double)(x) / (double)( TileLoaderHelper::levelToRow( level ) );
+      double origy1 = (double)(y) / (double)( TileLoaderHelper::levelToColumn( level ) );
+      double testx1 = origx1 * (double)( TileLoaderHelper::levelToRow( i ) ) ;
+      double testy1 = origy1 * (double)( TileLoaderHelper::levelToColumn( i ) );
 
       QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
           .arg(theme).arg(i)
@@ -127,10 +128,10 @@ void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
               if ( level != i ) { 
                   // qDebug() << "About to start cropping an existing image.";
                   QSize tilesize = temptile.size();
-                  double origx2 = (double)(x + 1) / (double)( TileLoader::levelToRow( level ) );
-                  double origy2 = (double)(y + 1) / (double)( TileLoader::levelToColumn( level ) );
-                  double testx2 = origx2 * (double)( TileLoader::levelToRow( i ) );
-                  double testy2 = origy2 * (double)( TileLoader::levelToColumn( i ) );
+                  double origx2 = (double)(x + 1) / (double)( TileLoaderHelper::levelToRow( level ) );
+                  double origy2 = (double)(y + 1) / (double)( TileLoaderHelper::levelToColumn( level ) );
+                  double testx2 = origx2 * (double)( TileLoaderHelper::levelToRow( i ) );
+                  double testy2 = origy2 * (double)( TileLoaderHelper::levelToColumn( i ) );
 
                   QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
                                   (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );

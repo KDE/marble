@@ -23,13 +23,13 @@
 
 #include "TileLoader.h"
 
-#include <cmath>
-
+#include "global.h"
 #include "HttpDownloadManager.h"
 #include "TextureTile.h"
 #include "MarbleDirs.h"
 #include "TileCache.h"
 #include "MarbleModel.h"
+#include "TileLoaderHelper.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
@@ -167,12 +167,12 @@ int TileLoader::tileHeight() const
 
 int TileLoader::globalWidth( int level ) const
 {
-    return d->m_tileWidth * levelToColumn( level );
+    return d->m_tileWidth * TileLoaderHelper::levelToColumn( level );
 }
 
 int TileLoader::globalHeight( int level ) const
 {
-    return d->m_tileHeight * levelToRow( level );
+    return d->m_tileHeight * TileLoaderHelper::levelToRow( level );
 }
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
@@ -221,46 +221,6 @@ const QString TileLoader::mapTheme() const
     return d->m_theme;
 }
 
-int TileLoader::levelToRow( int level )
-{
-    if ( level < 0 ) {
-        qDebug() << QString( "TileLoader::levelToRow(): Invalid level: %1" )
-            .arg( level );
-        return 0;
-    }
-    return (int)std::pow( 2.0, (double)( level ) );
-}
-
-int TileLoader::levelToColumn( int level )
-{
-    if ( level < 0 ) {
-        qDebug() << QString( "TileLoader::levelToColumn(): Invalid level: %1" )
-            .arg( level );
-        return 0;
-    }
-    return (int)std::pow( 2.0, (double)( level + 1 ) );
-}
-
-int TileLoader::rowToLevel( int row )
-{
-    if ( row < 1 )    {
-        qDebug() << QString( "TileLoader::rowToLevel(): Invalid number of rows: %1" )
-            .arg( row );
-        return 0;
-    }
-    return (int)( std::log( (double)row ) / std::log( (double)2.0 ) );
-}
-
-int TileLoader::columnToLevel( int column )
-{
-    if ( column < 2 ) {
-        qDebug() << QString( "TileLoader::columnToLevel(): Invalid number of columns: %1" )
-        .arg( column );
-        return 0;
-    }
-    return (int)( std::log( (double)(column / 2) ) / std::log( (double)2.0 ) );
-}
-
 quint64 TileLoader::volatileCacheLimit() const
 {
     return d->m_tileCache.cacheLimit();
@@ -275,10 +235,10 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 
     // if ( m_bitmaplayer.type.toLower() == "bitmap" ){
     while ( noerr == true ) {
-        int nmaxit = TileLoader::levelToRow( trylevel );
+        int nmaxit = TileLoaderHelper::levelToRow( trylevel );
 
         for ( int n = 0; n < nmaxit; ++n ) {
-            int mmaxit = TileLoader::levelToColumn( trylevel );
+            int mmaxit = TileLoaderHelper::levelToColumn( trylevel );
 
             for ( int m = 0; m < mmaxit; ++m ) {
                 QString tilepath = MarbleDirs::path( QString("%1/%2/%3/%3_%4.jpg")

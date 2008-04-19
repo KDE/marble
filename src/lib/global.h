@@ -108,6 +108,8 @@ const QString MARBLE_VERSION_STRING = QString::fromLatin1( "pre 0.6 SVN" );
 
 static const char* NOT_AVAILABLE = QT_TR_NOOP("not available");
 
+const int tileDigits = 6;
+
 // Usage deprecated:
 const double RAD2INT = 21600.0 / M_PI;
 

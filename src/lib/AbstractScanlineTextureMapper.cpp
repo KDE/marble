@@ -20,6 +20,7 @@
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
+#include "TileLoaderHelper.h"
 
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
@@ -156,9 +157,9 @@ void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams,
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    tileCol = TileLoader::levelToColumn( tileLevel ) 
+    tileCol = TileLoaderHelper::levelToColumn( tileLevel ) 
               * ( 1.0 + centerLon / M_PI ) / 2.0;
-    tileRow = TileLoader::levelToRow( tileLevel )
+    tileRow = TileLoaderHelper::levelToRow( tileLevel )
               * ( 0.5 - centerLat / M_PI );
 }
 

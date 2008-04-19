@@ -97,6 +97,7 @@ set(marblewidget_SRCS
     TextureTile.cpp
     TileCache.cpp
     TileLoader.cpp
+    TileLoaderHelper.cpp
     TileCreator.cpp
     TinyWebBrowser.cpp
     VectorComposer.cpp

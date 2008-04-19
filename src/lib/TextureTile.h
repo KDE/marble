@@ -26,8 +26,6 @@
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 
-const int tileDigits = 6;
-
 class TextureTile : public QObject {
     Q_OBJECT
 

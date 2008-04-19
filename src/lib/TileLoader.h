@@ -134,46 +134,6 @@ class TileLoader : public QObject
         quint64 volatileCacheLimit() const;
 
         /**
-         * @brief Get the maximum number of tile rows for a given tile level.
-         * @param level  the tile level
-         * @return       the maximum number of rows that a map level was tiled into. 
-         *               If the tile level number is invalid then "-1" gets 
-         *               returned so this case of wrong input data can get caught 
-         *               by the code which makes use of it.
-         */
-        static int levelToRow( int level );
-
-        /**
-         * @brief Get the maximum number of tile columns for a given tile level.
-         * @param level  the tile level
-         * @return       the maximum number of columns that a map level was tiled into. 
-         *               If the tile level number is invalid then "-1" gets 
-         *               returned so this case of wrong input data can get caught 
-         *               by the code which makes use of it.
-         */
-        static int levelToColumn( int level );
-
-        /**
-         * @brief Get the tile level for the given maximum number of tile columns.
-         * @param row    the maximum number of rows that a map level was tiled into.
-         * @return       the corresponding tile level.
-         *               If the number of rows is invalid then "-1" gets 
-         *               returned so this case of wrong input data can get caught 
-         *               by the code which makes use of it.
-         */
-        static int rowToLevel( int row );
-
-        /**
-         * @brief Get the tile level for the given maximum number of tile columns.
-         * @param column the maximum number of columns that a map level was tiled into.
-         * @return       the corresponding tile level.
-         *               If the number of columns is invalid then "-1" gets 
-         *               returned so this case of wrong input data can get caught 
-         *               by the code which makes use of it.
-         */
-        static int columnToLevel( int column );
-
-        /**
          * Returns the highest level in which all tiles are available for the given @p theme.
          */
         static int maxCompleteTileLevel( const QString& theme );
