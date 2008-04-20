@@ -1,3 +1,28 @@
+2008-04-20  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapTheme.{cpp,h}:
+
+    - Replaced by GeoSceneDocument and MapThemeManager.
+
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MarbleControlBox.h:
+    * src/lib/MarbleThemeSelectView.cpp:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/MarbleControlBox.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/marble_part.cpp:
+    * data/maps/earth/citylights/citylights.dgml:
+    * data/maps/earth/plain/plain.dgml:
+    * data/maps/earth/srtm/srtm.dgml:
+    * data/maps/earth/srtm/srtm.dgm2:
+    * data/maps/earth/bluemarble/bluemarble.dgml:
+    * data/CMakeLists.txt:
+
+    - Replacing all of the DGML code by DGML2 code
+    - Delayed Initialization for MapThemeModel
+    - Ported DGML files to DGML2 format.
+
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/tilecreator/main.cpp

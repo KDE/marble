@@ -9,8 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#define DGML2 0
-
 #include "MarbleModel.h"
 
 #include <cmath>
@@ -37,7 +35,6 @@
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"
-#include "MapTheme.h"
 #include "MapThemeManager.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
@@ -71,8 +68,6 @@ class MarbleModelPrivate
     MarbleModel         *m_parent;
 
     // View and paint stuff
-    MapTheme            *m_maptheme; // Deprecated: Yeah, Refactoring loves to hate you: 
-                                     // beware of the different capitalization ... ;)
     GeoSceneDocument    *m_mapTheme;
     QString              m_selectedMap;
     bool                 m_previousMapLoadedFine;
@@ -114,7 +109,7 @@ MarbleModel::MarbleModel( QObject *parent )
              this,       SIGNAL( timeout() ) );
 
     d->m_downloadManager = 0;
-    qDebug() << "MarbleModel: new TileLoader";
+
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
     qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
@@ -125,29 +120,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_veccomposer = new VectorComposer();
 
     d->m_placeMarkLayout   = 0;
-
-    d->m_maptheme = new MapTheme();
-    d->m_previousMapLoadedFine = false;
-
-    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps/" );
-    QString      selectedmap;
-
-    // We need at least one maptheme to run Marble.
-    if ( mapthemedirs.count() == 0 ) {
-        qDebug() << "Could not find any maps! Exiting ...";
-        exit(-1);
-    }
-
-    // If any map directories were found, try to find the default map:
-    // srtm.  If we can find that, just grab the first one.
-    if ( mapthemedirs.count() >= 1 ) {
-        QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
-        if ( tmp.count() >= 1 )
-            selectedmap = tmp[0];
-        else
-            selectedmap = mapthemedirs[0];
-    }
-    setMapTheme( selectedmap, parent, Spherical );
 
     d->m_gridmap      = new GridMap();
     d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
@@ -205,7 +177,7 @@ MarbleModel::~MarbleModel()
     delete d->m_placemarkmodel;
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
-    delete d->m_maptheme;
+//    delete d->m_maptheme;
     delete d->m_mapTheme;
     delete d;
 }
@@ -235,17 +207,10 @@ QString MarbleModel::mapTheme() const
     return d->m_selectedMap;
 }
 
-#if DGML2
 GeoSceneDocument* MarbleModel::mapThemeObject() const
 {
     return d->m_mapTheme;
 }
-#else
-MapTheme* MarbleModel::mapThemeObject() const
-{
-    return d->m_maptheme;
-}
-#endif
 
 // Set a particular theme for the map and load the appropriate tile level.
 // If the tiles (for the lowest tile level) haven't been created already
@@ -260,7 +225,6 @@ MapTheme* MarbleModel::mapThemeObject() const
 void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
 			       Projection currentProjection )
 {
-#if DGML2
     // Here we start refactoring the map theme
     GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( selectedMap ); // Hardcoded for a start
 
@@ -271,11 +235,11 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
         if ( !d->m_mapTheme ){ 
             // Fall back to default theme
             qDebug() << "Falling back to default theme";
-            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgm2");
+            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgml");
 
             // If this last resort doesn't work either shed a tear and exit
             if ( !mapTheme ) {
-                qDebug() << "Couldn't find a valid DGML2 map.";
+                qDebug() << "Couldn't find a valid DGML map.";
                 exit(-1);
             }
         }
@@ -317,9 +281,6 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
-
-        qDebug() << "Source Dir: " << sourceDir;
-        qDebug() << "Role: " << role;
 
         if ( !TileLoader::baseTilesAvailable( "maps/"
                                               + sourceDir ) )
@@ -406,118 +367,21 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
     d->m_selectedMap = selectedMap;
     emit themeChanged( selectedMap );
     d->notifyModelChanged();
-#else
-    // old "junk":
-
-    // Read the new maptheme into the old d->m_maptheme.
-    QString mapPath = QString("maps/%1").arg( selectedMap );
-    //qDebug( "Setting map theme to : %s",
-    //	    qPrintable( MarbleDirs::path( mapPath ) ) );
-
-    int  error = d->m_maptheme->open( MarbleDirs::path( mapPath ) );
-    if ( error < 0 ) {
-        if ( d->m_previousMapLoadedFine )
-            return;
-        else { 
-            // Actually this case can't really happen as the
-            // existence of valid .dgml files gets checked before and
-            // the directory string can't get invalid either.
-            qDebug() << "Couldn't find a valid map.";
-            exit(-1);
-        } 
-    }
-    d->m_previousMapLoadedFine = true;
-
-    // If this layer is a bitmaplayer, check if the cached tiles for
-    // it are already generated, and if not, do so.
-    if ( d->m_maptheme->bitmaplayer().enabled ) {
-        // If the tiles aren't already there, put up a progress dialog
-        // while creating them.
-        qDebug() << d->m_maptheme->tilePrefix();
-        if ( !TileLoader::baseTilesAvailable( "maps/"
-                                              + d->m_maptheme->tilePrefix() ) )
-        {
-            qDebug("Base tiles not available. Creating Tiles ... ");
-
-            TileCreator *tileCreator = new TileCreator(
-                                     d->m_maptheme->prefix(),
-                                     d->m_maptheme->installMap(),
-                                     d->m_maptheme->bitmaplayer().dem );
-	    // FIXME
-            //TileCreatorDialog tileCreatorDlg( tileCreator, parent );
-	    TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
-            tileCreatorDlg.setSummary( d->m_maptheme->name(),
-                                       d->m_maptheme->description() );
-            tileCreatorDlg.exec();
-            qDebug("Tile creation completed");
-        }
-
-        delete d->m_texmapper;
-
-        switch( currentProjection ) {
-            case Spherical:
-                d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-            case Equirectangular:
-                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-            case Mercator:
-                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-
-        }
-
-        d->m_tileLoader->setMapTheme( "maps/" + d->m_maptheme->tilePrefix() );
-//         else
-//             d->m_texmapper->setMapTheme( "maps/earth/"
-//                                          + d->m_maptheme->tilePrefix() );
-
-        connect( d->m_texmapper, SIGNAL( mapChanged() ),
-		 this,           SLOT( notifyModelChanged() ) );
-    }
-    else {
-        d->m_tileLoader->flush();
-    }
-
-    // Set all the colors for the vector layers
-    d->m_veccomposer->setOceanColor( d->m_maptheme->oceanColor() );
-    d->m_veccomposer->setLandColor( d->m_maptheme->landColor() );
-    d->m_veccomposer->setCountryBorderColor( d->m_maptheme->countryBorderColor() );
-    d->m_veccomposer->setStateBorderColor( d->m_maptheme->countryBorderColor() );
-    d->m_veccomposer->setLakeColor( d->m_maptheme->lakeColor() );
-    d->m_veccomposer->setRiverColor( d->m_maptheme->riverColor() );
-
-    if ( d->m_placeMarkLayout == 0)
-        d->m_placeMarkLayout = new PlaceMarkLayout( this );
-    d->m_placeMarkLayout->requestStyleReset();
-    // FIXME: To be removed after MapTheme / KML refactoring
-    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor(
-d->m_maptheme->labelColor() );
-
-    d->m_selectedMap = selectedMap;
-    emit themeChanged( selectedMap );
-
-    d->notifyModelChanged();
-#endif
 }
 
 
 int MarbleModel::minimumZoom() const
 {
-#if DGML2
-    return d->m_mapTheme->head()->zoom()->minimum();
-#else
-    return d->m_maptheme->minimumZoom();
-#endif
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->minimum();
+    return 0;
 }
 
 int MarbleModel::maximumZoom() const
 {
-#if DGML2
-    return d->m_mapTheme->head()->zoom()->maximum();
-#else
-    return d->m_maptheme->maximumZoom();
-#endif
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->maximum();
+    return 0;
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
@@ -539,10 +403,9 @@ void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
 
 void MarbleModelPrivate::resize( int width, int height )
 {
-    if ( m_maptheme->bitmaplayer().enabled == true ) {
+    if ( m_mapTheme->map()->hasTextureLayers() ) {
         m_texmapper->resizeMap( width, height );
     }
-
     m_veccomposer->resizeMap( width, height );
 }
 
@@ -555,7 +418,6 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 {
     d->resize( width, height );
 
-#if DGML2
     // FIXME: Remove this once the LMC is there:
     QString themeID = d->m_mapTheme->head()->theme();
 
@@ -608,55 +470,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
         // Add further Vectors
         d->m_veccomposer->paintVectorMap( painter, viewParams );
     }
-#else
-    if ( redrawBackground ) {
 
-        if ( d->m_maptheme->bitmaplayer().enabled == true ) {
-
-            d->m_texmapper->mapTexture( viewParams );
-
-            if ( !viewParams->m_showElevationModel
-                && d->m_maptheme->bitmaplayer().dem == "true" )
-            {
-                viewParams->m_coastImage->fill( Qt::transparent );
-
-                // Create VectorMap
-                d->m_veccomposer->drawTextureMap( viewParams );
-
-                // Recolorize the heightmap using the VectorMap
-                d->m_texcolorizer->colorize( viewParams );
-            }
-        }
-    }
-    // Paint the map on the Widget
-//    QTime t;
-//    t.start();
-    int radius = (int)(1.05 * (double)(viewParams->radius()));
-
-    if ( d->m_maptheme->bitmaplayer().enabled == true ) {
-        if ( viewParams->projection() == Spherical ) {
-            QRect rect( width / 2 - radius , height / 2 - radius,
-                        2 * radius, 2 * radius);
-            rect = rect.intersect( dirtyRect );
-            painter->drawImage( rect, *viewParams->m_canvasImage, rect );
-        }
-        else {
-            painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
-        }
-    }
-
-    // qDebug( "Painted in %ims", t.elapsed() );
-
-    // Paint the vector layer.
-    if ( d->m_maptheme->vectorlayer().enabled ) {
-
-        if ( d->m_maptheme->bitmaplayer().enabled == false ) {
-            d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
-        }
-        // Add further Vectors
-        d->m_veccomposer->paintVectorMap( painter, viewParams );
-    }
-#endif
     // Paint the lon/lat grid around the earth.
     if ( viewParams->m_showGrid ) {
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );

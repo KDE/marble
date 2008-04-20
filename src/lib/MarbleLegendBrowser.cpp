@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#define DGML2 0
 
 #include "MarbleLegendBrowser.h"
 
@@ -27,7 +26,6 @@
 #include "GeoSceneItem.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "MapTheme.h"
 
 #include "MarbleDirs.h"
 
@@ -77,13 +75,8 @@ void MarbleLegendBrowser::loadLegend()
 	 && d->m_marbleWidget->model() != 0
 	 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
     {
-#if DGML2 
         GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->head()->theme() + "/legend.html" ); 
-#else
-        MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
-        QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->prefix() + "/legend.html" ); 
-#endif
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else
@@ -169,11 +162,9 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapThemeObject() == 0 )
         return QString();
 
-#if DGML2 
     GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
 
     QVector<GeoSceneSection*> sections = currentMapTheme->legend()->sections();
-    qDebug() << "Count Secions: "  << sections.count();
 
     d->m_symbolMap.clear();
 
@@ -231,59 +222,6 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         }
         customLegendString += "</table>";
     }
-#else
-    MapTheme* currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
-
-    QList<LegendSection*> legend = currentMapTheme->legend();
-
-    d->m_symbolMap.clear();
-
-    for (int section = 0; section < legend.size(); ++section) {
-        QString checkBoxString; 
-
-        if ( legend.at(section)->checkable() == true ) {
-            checkBoxString = "<a href=\"checkbox:" + legend.at(section)->name() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + legend.at(section)->name() + "\">&nbsp;</span></a> ";
-        }
-
-        customLegendString += "<h4>" + checkBoxString + legend.at(section)->heading() + "</h4>";
-        customLegendString += "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">";
-
-        QList< LegendItem*> items = legend.at(section)->items();
-
-        int spacing = legend.at(section)->spacing();
-
-        for (int item = 0; item < items.size(); ++item) {
-
-            QPixmap itemSymbol;
-
-            if ( !items.at(item)->symbol().isNull() )
-                 itemSymbol = items.at(item)->symbol();
-            else
-                 itemSymbol = QPixmap( 24, 12 );
-
-            if ( items.at(item)->background() != Qt::transparent )
-            {
-                QPainter painter( &itemSymbol );
-                painter.fillRect( QRect( 0, 0, itemSymbol.width(), itemSymbol.height() ), items.at(item)->background());
-                // Paint the pixmap on top of the colored background
-                painter.drawPixmap( 0, 0, items.at(item)->symbol() );
-            }
-
-            QString itemIdString = QString("item%1-%2").arg(section).arg(item);
-            d->m_symbolMap[itemIdString] = itemSymbol;
-
-            customLegendString += "    <tr>";
-            customLegendString += QString( "        <td align=\"left\" valign=\"top\" width=\"%1\">" ).arg( itemSymbol.width() + spacing ); 
-            customLegendString += "             <img src=\"pixmap:" + itemIdString + "\">";
-            customLegendString += "        </td>"; 
-            customLegendString += "        <td align=\"left\" valign=\"top}\">"; 
-            customLegendString += "             " + items.at(item)->text();
-            customLegendString += "        </td>"; 
-            customLegendString += "    </tr>";
-        }
-        customLegendString += "</table>";
-    }
-#endif
 
     return customLegendString;
 }

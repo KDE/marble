@@ -1,46 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
-	<MapStyle>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Earth at Night</name>
+            <target>earth</target>
+            <theme>citylights</theme>
+            <icon pixmap="citylights-preview.png"/>
+    
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+        
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[This image of Earth's city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).]]></description>
+    
+            <zoom>
+                <minimum>  1000  </minimum>
+                <maximum>  1500  </maximum>
+    
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete> 
+            </zoom>
+        </head>
+        
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+        
+        <map bgcolor="#000000">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+        
+            <!-- This layer creates the elevation model -->
+            <layer name="citylights" backend="texture">
+                <texture name="citylights_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/citylights </sourcedir>
+                    <installmap> citylights.jpg </installmap>
+                </texture>
+            </layer>
+                            
+<!--
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pdiffborder" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#f29b68" />
+                </vector>
+                <vector name="pusa48" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#f29b68" />
+                </vector>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
+                </vector>
+                <vector name="rivers" feature="river">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#637bff" />
+                </vector>
+            </layer>
+-->
+            <layer name="standardplaces" backend="geodata">
+                <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <pick>placemark</pick> <!-- picks certain features from a
+                                            file -->
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+            </layer>
+        </map>
 
-		<name>Earth at Night</name>
+        <settings>
+            <property name="boundaries">
+                <available>true</available>
+                <enabled>false</enabled>
+            </property>
+            <property name="relief">
+                <available>true</available>
+                <enabled>true</enabled>
+            </property>
+        </settings>
+        
+        <!-- At last we define some legend properties -->
+        
+        <legend>
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
 
-		<prefix>earth/citylights</prefix>
-		<icon>citylights-preview.png</icon>
-
-		<description>This image of Earth's city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). </description>
-		
-		<layer type="bitmap" name="citylights"/>
-
-		<installmap>citylights.jpg</installmap>
-
-        <minimumzoom> 1000 </minimumzoom>
-        <maximumzoom> 1500 </maximumzoom>
-
-		<LabelStyle>
-			<color>#ffffff</color>
-		</LabelStyle>
-
-	</MapStyle>
-
-    <legend>
-        <section name="surface" checkable="false" spacing="12">
-            <heading>Surface</heading>
-            <item>
-                <icon pixmap="maps/earth/citylights/legend/city.png"/>
-                <text>Populated places</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/citylights/legend/lightterrain.png"/>
-                <text>Light terrain</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/citylights/legend/darkterrain.png"/>
-                <text>Dark terrain</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/citylights/legend/water.png"/>
-                <text>Water</text>
-            </item>
-        </section>
-    </legend>
-</DeskGlobeML>
+                <item name="populated-places">
+                    <icon pixmap="maps/earth/citylights/legend/city.png"/>
+                    <text>Populated Places</text>
+                </item>
+                <item name="light-terrain">
+                    <icon pixmap="maps/earth/citylights/legend/lightterrain.png"/>
+                    <text>Light terrain</text>
+                </item>
+                <item name="dark-terrain">
+                    <icon pixmap="maps/earth/citylights/legend/darkterrain.png"/>
+                    <text>Dark terrain</text>
+                </item>
+                <item name="water">
+                    <icon pixmap="maps/earth/citylights/legend/water.png"/>
+                    <text>Water</text>
+                </item>
+            </section>
+        </legend>
+    </document>
+</dgml>

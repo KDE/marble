@@ -436,7 +436,8 @@ void MarblePart::showNewStuffDialog()
     }
 
     // Update the map theme widget by updating the model.
-    m_controlView->marbleControl()->updateMapThemes();
+    // Shouldn't be needed anymore ...
+//    m_controlView->marbleControl()->updateMapThemes();
 }
 
 void MarblePart::editSettings()

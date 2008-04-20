@@ -1,81 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
-	<MapStyle>
-		<name>Plain Map</name>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Plain Map</name>
+            <target>earth</target>
+            <theme>plain</theme>
+            <icon pixmap="plain-preview.png"/>
+    
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+        
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[A <i>plain map</i>. It uses vector lines to mark coastlines and country borders etc..]]></description>
+    
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2100  </maximum>
+    
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete> 
+            </zoom>
+        </head>
+        
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+        
+        <map bgcolor="#99b3cc">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+        
+            
+            <!-- This layer creates the coastlines that are needed to
+                colorize the elevation model properly -->
+<!--            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
+                <vector name="pcoast" feature="land">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                </vector>
+                <vector name="pisland" feature="land">
+                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
+                </vector>
+                <vector name="plakeisland" feature="land">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
+                </vector>
+                <vector name="plake" feature="sea">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
+                </vector>
+                <vector name="pglacier" feature="sea">
+                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
+                </vector>
+            </layer>
+-->        
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pcoast" feature="coast">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <brush color="#f2efe9" />
+                </vector>
+                <vector name="pdiffborder" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </vector>
+                <vector name="pusa48" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#cccbca" />
+                </vector>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
+                </vector>
+                <vector name="plake" feature="lake">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
+                    <pen color="#99b3cc" />
+                </vector>
+                <vector name="rivers" feature="river">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#99b3cc" />
+                </vector>
+            </layer>
+        
+            <layer name="standardplaces" backend="geodata">
+                <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <pick>placemark</pick> <!-- picks certain features from a
+                                            file -->
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+            </layer>
+        </map>
 
-		<prefix>earth/plain</prefix>
-		<icon>plain-preview.png</icon>
+        <settings>
+            <property name="boundaries">
+                <available>true</available>
+                <enabled>false</enabled>
+            </property>
+            <property name="relief">
+                <available>true</available>
+                <enabled>true</enabled>
+            </property>
+        </settings>
+        
+        <!-- At last we define some legend properties -->
+        
+        <legend>
+            <section name="borders" checkable="true" spacing="12">
+                <heading>Boundaries</heading>
 
-		<description>A plain map. It uses vector lines to mark coastlines and country borders etc. .</description>
-		
-		<layer type="vector" name="mwdbii"/>
+                <item name="international-boundary">
+                    <icon color="#cccbca" pixmap="bitmaps/border_1.png"/>
+                    <text>International</text>
+                </item>
+                <item name="state-boundary">
+                    <icon color="#cccbca" pixmap="bitmaps/border_2.png"/>
+                    <text>State</text>
+                </item>
+            </section>
+    
+            <section name="waterbodies" checkable="true" spacing="12">
+                <heading>Water Bodies</heading>
 
-        <OceanStyle>
-            <color>#99b3cc</color>
-        </OceanStyle>
+                <item name="lake">
+                    <icon color="#99b3cc" pixmap="bitmaps/lake.png"/>
+                    <text>Lake</text>
+                </item>
+                <item name="river">
+                    <icon color="#99b3cc" pixmap="bitmaps/river.png"/>
+                    <text>River</text>
+                </item>
+            </section>
+    
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
 
-        <LandStyle>
-            <color>#f2efe9</color>
-        </LandStyle>
-
-        <CountryStyle>
-            <border-color>#cccbca</border-color>
-        </CountryStyle>
-
-        <StateStyle>
-            <border-color>#cccbca</border-color>
-        </StateStyle>
-
-        <LakeStyle>
-            <color>#99b3cc</color>
-        </LakeStyle>
-
-        <RiverStyle>
-            <color>#99b3cc</color>
-        </RiverStyle>
-
-		<LabelStyle>
-			<color>#000000</color>
-		</LabelStyle>
-
-	</MapStyle>
-
-    <legend>
-        <section name="borders" checkable="true" spacing="12">
-            <heading>Boundaries</heading>
-            <item>
-                <icon color="#cccbca" pixmap="bitmaps/border_1.png"/>
-                <text>International</text>
-            </item>
-            <item>
-                <icon color="#cccbca" pixmap="bitmaps/border_2.png"/>
-                <text>State</text>
-            </item>
-        </section>
-
-        <section name="waterbodies" checkable="true" spacing="12">
-            <heading>Water Bodies</heading>
-            <item>
-                <icon color="#99b3cc" pixmap="bitmaps/lake.png"/>
-                <text>Lake</text>
-            </item>
-            <item>
-                <icon color="#99b3cc" pixmap="bitmaps/river.png"/>
-                <text>River</text>
-            </item>
-        </section>
-
-        <section name="surface" checkable="false" spacing="12">
-            <heading>Surface</heading>
-            <item>
-                <icon color="#f2efe9"/>
-                <text>Land</text>
-            </item>
-            <item>
-                <icon color="#99b3cc"/>
-                <text>Water</text>
-            </item>
-        </section>
-    </legend>
-
-</DeskGlobeML>
+                <item name="land">
+                    <icon color="#f2efe9"/>
+                    <text>Land</text>
+                </item>
+                <item name="water">
+                    <icon color="#99b3cc"/>
+                    <text>Water</text>
+                </item>
+            </section>
+        </legend>
+    </document>
+</dgml>

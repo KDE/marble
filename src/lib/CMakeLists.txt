@@ -71,7 +71,6 @@ set(marblewidget_SRCS
     MarbleDirs.cpp
     DeferredFlag.cpp
     TileCreatorDialog.cpp
-    MapTheme.cpp
     MapThemeManager.cpp
     ViewportParams.cpp
     ViewParams.cpp

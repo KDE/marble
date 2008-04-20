@@ -17,6 +17,7 @@
 #include <QtCore/QFile>
 #include <QtGui/QStandardItemModel>
 #include <QtCore/QStringList>
+#include <QtCore/QTimer>
 #include <QtCore/QDebug>
 
 // Local dir
@@ -30,37 +31,8 @@ MapThemeManager::MapThemeManager(QObject *parent)
 {
     m_mapThemeModel = new QStandardItemModel( 0, 3 );
 
-    m_mapThemeModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    m_mapThemeModel->setHeaderData(1, Qt::Horizontal, tr("Description"));
-    m_mapThemeModel->setHeaderData(2, Qt::Horizontal, tr("Path"));
-
-    updateMapThemeModel();
-/*
-//  Should we put this into 
-//  static QString MapThemeManager::suggestTheme( QString themeSuggestedBySettings ); 
-//  ??
-
-    QStringList  mapthemedirs = findMapThemes( "maps/" );
-    QString      selectedmap;
-
-    // We need at least one maptheme to run Marble.
-    if ( mapthemedirs.count() == 0 ) {
-        qDebug() << "Could not find any maps! Exiting ...";
-        exit(-1);
-    }
-
-    // If any map directories were found, try to find the default map:
-    // srtm.  If we can find that, just grab the first one.
-    if ( mapthemedirs.count() >= 1 ) {
-        QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
-        if ( tmp.count() >= 1 )
-            selectedmap = tmp[0];
-        else
-            selectedmap = mapthemedirs[0];
-    }
-
-//    setMapTheme( selectedmap, parent, Spherical );
-*/
+    // Delayed model initialization
+    QTimer::singleShot( 0, this, SLOT( updateMapThemeModel() ) );
 }
 
 MapThemeManager::~MapThemeManager()
@@ -168,7 +140,7 @@ QStringList MapThemeManager::findMapThemes( const QString& path )
         themedir = it.next() + '/';
         themedirname = QDir( themedir ).path().section( "/", -2, -1);
 
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgm2" ),
+        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  k( tmp );
@@ -184,7 +156,7 @@ QStringList MapThemeManager::findMapThemes( const QString& path )
         themedir = j.next();
         themedirname = QDir( themedir ).path().section( "/", -2, -1);
 
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgm2" ),
+        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  l( tmp );
@@ -217,6 +189,12 @@ QStandardItemModel* MapThemeManager::mapThemeModel()
 
 void MapThemeManager::updateMapThemeModel()
 {
+    m_mapThemeModel->clear();
+
+    m_mapThemeModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    m_mapThemeModel->setHeaderData(1, Qt::Horizontal, tr("Path"));
+    m_mapThemeModel->setHeaderData(2, Qt::Horizontal, tr("Description"));
+
     QStringList stringlist = findMapThemes( "maps/" );
     QStringListIterator  it(stringlist);
 
@@ -267,9 +245,10 @@ void MapThemeManager::updateMapThemeModel()
                        + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
 
         itemList << item;
-        itemList << new QStandardItem( description );
         itemList << new QStandardItem( mapTheme->head()->target() + "/" 
-                                       + mapTheme->head()->theme() );
+                                       + mapTheme->head()->theme() + "/"
+                                       + mapTheme->head()->theme() + ".dgml" );
+        itemList << new QStandardItem( description );
 
         m_mapThemeModel->appendRow(itemList);
 
@@ -277,5 +256,31 @@ void MapThemeManager::updateMapThemeModel()
     }
 }
 
+/*
+//  Should we put this into 
+//  static QString MapThemeManager::suggestTheme( QString themeSuggestedBySettings ); 
+//  ??
+
+    QStringList  mapthemedirs = findMapThemes( "maps/" );
+    QString      selectedmap;
+
+    // We need at least one maptheme to run Marble.
+    if ( mapthemedirs.count() == 0 ) {
+        qDebug() << "Could not find any maps! Exiting ...";
+        exit(-1);
+    }
+
+    // If any map directories were found, try to find the default map:
+    // srtm.  If we can find that, just grab the first one.
+    if ( mapthemedirs.count() >= 1 ) {
+        QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
+        if ( tmp.count() >= 1 )
+            selectedmap = tmp[0];
+        else
+            selectedmap = mapthemedirs[0];
+    }
+
+//    setMapTheme( selectedmap, parent, Spherical );
+*/
 
 #include "MapThemeManager.moc"

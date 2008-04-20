@@ -20,7 +20,6 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#define DGML2 0
 
 #include "MarbleControlBox.h"
 
@@ -40,7 +39,6 @@
 #include <ViewParams.h>
 #include <MarbleModel.h>
 #include <MarbleDirs.h>
-#include <MapTheme.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
 
@@ -139,10 +137,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapThemeModel = 0;
 
-#if !DGML2
-    updateMapThemes();
-#endif
-
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
     connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
@@ -158,18 +152,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
 MarbleControlBox::~MarbleControlBox()
 {
-#if !DGML2
-    delete d->m_mapThemeModel;
-#endif
     delete d;
-}
-
-
-void MarbleControlBox::updateMapThemes()
-{
-    QStringList  mapthemedirs = MapTheme::findMapThemes( "maps" );
-    d->m_mapThemeModel = MapTheme::mapThemeModel( mapthemedirs );
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
 }
 
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
@@ -531,11 +514,10 @@ void MarbleControlBox::selectTheme( const QString &theme )
 {
     if ( !d->m_mapThemeModel )
         return;
-
     for ( int row = 0; row < d->m_mapThemeModel->rowCount(); ++row ) {
         QModelIndex itIndexName = d->m_mapThemeModel->index( row, 1, QModelIndex() );
         QModelIndex itIndex     = d->m_mapThemeModel->index( row, 0, QModelIndex() );
-        // qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapThemeModel->data( itIndexName ).toString();
+//        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapThemeModel->data( itIndexName ).toString();
 
         // If  we have found the theme in the theme model,
         //     and it is not the one that we already have,

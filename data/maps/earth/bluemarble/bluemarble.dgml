@@ -1,51 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DeskGlobeML xmlns="http://deskglobe.kde.org/dgml/1.0">
-	<MapStyle>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Satellite View</name>
+            <target>earth</target>
+            <theme>bluemarble</theme>
+            <icon pixmap="bluemarble-preview.png"/>
+    
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+        
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory ]]></description>
+    
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2400  </maximum>
+    
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete> 
+            </zoom>
+        </head>
+        
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+        
+        <map bgcolor="#000000">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+        
+            <!-- This layer creates the elevation model -->
+            <layer name="bluemarble" backend="texture">
+                <texture name="bluemarble_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/bluemarble </sourcedir>
+                    <installmap> bluemarble.jpg </installmap>
+                </texture>
+                <texture name="clouds_data" expire="10800"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/clouds </sourcedir>
+                    <installmap> clouds.jpg </installmap>
+                </texture>
+            </layer>
+                            
+<!--
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pdiffborder" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#f29b68" />
+                </vector>
+                <vector name="pusa48" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#f29b68" />
+                </vector>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
+                </vector>
+                <vector name="rivers" feature="river">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#637bff" />
+                </vector>
+            </layer>
+-->
+            <layer name="standardplaces" backend="geodata">
+                <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
+                    <pick>placemark</pick> <!-- picks certain features from a
+                                            file -->
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+            </layer>
+        </map>
 
-		<name>Satellite View</name>
+        <settings>
+            <property name="boundaries">
+                <available>true</available>
+                <enabled>false</enabled>
+            </property>
+            <property name="relief">
+                <available>true</available>
+                <enabled>true</enabled>
+            </property>
+        </settings>
+        
+        <!-- At last we define some legend properties -->
+        
+        <legend>
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
 
-		<prefix>earth/bluemarble</prefix>
-		<icon>bluemarble-preview.png</icon>
-
-		<description>Earth as seen from Space. The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory </description>
-		
-		<layer type="bitmap" name="bluemarble"/>
-
-		<installmap>bluemarble.jpg</installmap>
-
-        <minimumzoom>  900 </minimumzoom>
-        <maximumzoom> 2400 </maximumzoom>
-
-		<LabelStyle>
-			<color>#ffffff</color>
-		</LabelStyle>
-
-	</MapStyle>
-
-    <legend>
-        <section name="surface" checkable="false" spacing="12">
-            <heading>Surface</heading>
-            <item>
-                <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>
-                <text>Ice</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/bluemarble/legend/mountain.png"/>
-                <text>Mountain</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/bluemarble/legend/vegetation.png"/>
-                <text>Vegetation</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/bluemarble/legend/desert.png"/>
-                <text>Desert</text>
-            </item>
-            <item>
-                <icon pixmap="maps/earth/bluemarble/legend/water.png"/>
-                <text>Water</text>
-            </item>
-        </section>
-    </legend>
-
-</DeskGlobeML>
+                <item name="ice">
+                    <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>
+                    <text>Ice</text>
+                </item>
+                <item name="mountain">
+                    <icon pixmap="maps/earth/bluemarble/legend/mountain.png"/>
+                    <text>Mountain</text>
+                </item>
+                <item name="vegetation">
+                    <icon pixmap="maps/earth/bluemarble/legend/vegetation.png"/>
+                    <text>Vegetation</text>
+                </item>
+                <item name="desert">
+                    <icon pixmap="maps/earth/bluemarble/legend/desert.png"/>
+                    <text>Desert</text>
+                </item>
+                <item name="water">
+                    <icon pixmap="maps/earth/bluemarble/legend/water.png"/>
+                    <text>Water</text>
+                </item>
+            </section>
+        </legend>
+    </document>
+</dgml>
