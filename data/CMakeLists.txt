@@ -3,19 +3,19 @@ credits_authors.html
 credits_data.html
 legend.html
 legend.css
-DESTINATION ${MARBLE_DATA_PATH})
+DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 FILE (GLOB LEGEND_FILES *.leg)
 install (FILES ${LEGEND_FILES}
-DESTINATION ${MARBLE_DATA_PATH})
+DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 FILE (GLOB BITMAP_FILES bitmaps/*.png)
 install (FILES ${BITMAP_FILES}
-DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
 
 FILE (GLOB BITMAP_FILES bitmaps/*.xpm)
 install (FILES ${BITMAP_FILES}
-DESTINATION ${MARBLE_DATA_PATH}/bitmaps)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bitmaps)
 
 install (FILES 
 svg/compass.svg
@@ -25,36 +25,36 @@ svg/marble-logo-72dpi.png
 svg/application-x-marble.svg
 svg/application-x-marble.png
 svg/application-x-marble-gray.png
-DESTINATION ${MARBLE_DATA_PATH}/svg)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
 FILE (GLOB SVG_FILES flags/*.svg)
 install (FILES ${SVG_FILES}
-DESTINATION ${MARBLE_DATA_PATH}/flags)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/flags)
 
 install (FILES
 maps/earth/citylights/citylights.jpg
 maps/earth/citylights/citylights.dgml
 maps/earth/citylights/citylights-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights)
 
 install (FILES
 maps/earth/citylights/legend/city.png
 maps/earth/citylights/legend/lightterrain.png
 maps/earth/citylights/legend/darkterrain.png
 maps/earth/citylights/legend/water.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/citylights/legend)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights/legend)
 
 install (FILES
 maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/srtm)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg
 maps/earth/bluemarble/bluemarble.dgml
 maps/earth/bluemarble/bluemarble-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/bluemarble)
 
 install (FILES
 maps/earth/bluemarble/legend/ice.png
@@ -62,22 +62,22 @@ maps/earth/bluemarble/legend/mountain.png
 maps/earth/bluemarble/legend/vegetation.png
 maps/earth/bluemarble/legend/desert.png
 maps/earth/bluemarble/legend/water.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/bluemarble/legend)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/bluemarble/legend)
 
 install (FILES
 maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
-DESTINATION ${MARBLE_DATA_PATH}/maps/earth/plain)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
 
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}
-DESTINATION ${MARBLE_DATA_PATH}/mwdbii)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 FILE (GLOB PLACEMARK_FILES placemarks/*.cache)
 install (FILES
   ${PLACEMARK_FILES}
-DESTINATION ${MARBLE_DATA_PATH}/placemarks)
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/placemarks)
 
 if(NOT APPLE AND NOT WIN32)
   if(QTONLY)
