@@ -348,6 +348,7 @@ void TileLoader::update()
 {
     flush(); // trigger a reload of all tiles that are currently in use
     d->m_tileCache.clear(); // clear the tile cache in physical memory
+    emit tileUpdateAvailable();
 }
 
 #include "TileLoader.moc"

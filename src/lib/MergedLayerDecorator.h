@@ -32,8 +32,11 @@ class MergedLayerDecorator : public QObject
     void paint(const QString& theme);
     void paintTileId(const QString& theme);
     
-    void showClouds(bool show) {m_cloudlayer = show;}
-    void showTileId(bool show) {m_showTileId = show;}
+    void setShowClouds(bool show);
+    bool showClouds() const;
+
+    void setShowTileId(bool show);
+    bool showTileId() const;
 	
     void setTile(QImage* tile);
     void setInfo(int x, int y, int level, int id);

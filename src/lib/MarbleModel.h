@@ -234,11 +234,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief stop the model from polling
      */
     void stopPolling();
-    
-    void update();
-    
+
     SunLocator* sunLocator() const;
-    MergedLayerDecorator* painter() const;
+    MergedLayerDecorator* layerDecorator() const;
 
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
@@ -257,6 +255,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 //  private Q_SLOTS:
     void paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate);
 
+    /**
+     * @brief Update the model
+     */
+    void update();
 
  Q_SIGNALS:
 
@@ -287,6 +289,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * used for more things in the future.
      */
     void regionChanged( BoundingBox &rect );
+
     /**
      * @brief Signal that a timer has gone off.
      *
@@ -302,7 +305,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
     
     SunLocator* m_sunLocator;
-    MergedLayerDecorator* m_painter;
+    MergedLayerDecorator* m_layerDecorator;
 };
 
 

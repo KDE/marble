@@ -24,6 +24,7 @@
 #include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
@@ -335,6 +336,11 @@ bool MarbleMap::showCompass() const
 bool MarbleMap::showGrid() const
 {
     return d->m_viewParams.m_showGrid;
+}
+
+bool MarbleMap::showClouds() const
+{
+    return d->m_model->layerDecorator()->showClouds();
 }
 
 bool MarbleMap::showPlaces() const
@@ -971,6 +977,12 @@ void MarbleMap::setShowScaleBar( bool visible )
 void MarbleMap::setShowCompass( bool visible )
 {
     d->m_showCompass = visible;
+}
+
+void MarbleMap::setShowClouds( bool visible )
+{
+    d->m_model->layerDecorator()->setShowClouds( visible );
+    d->m_model->update();
 }
 
 void MarbleMap::setShowGrid( bool visible )

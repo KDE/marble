@@ -223,8 +223,8 @@ void MarbleWidgetPrivate::construct()
     m_parent->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_parent, SLOT( enableInput() ) );
 
-    m_parent->connect( m_model->painter(), SIGNAL( repaintMap() ),
-                       m_parent, SLOT( repaintMap() ) );
+//    m_parent->connect( m_model->layerDecorator(), SIGNAL( repaintMap() ),
+//                       m_parent, SLOT( repaintMap() ) );
 }
 
 
@@ -358,6 +358,11 @@ bool MarbleWidget::showScaleBar() const
 bool MarbleWidget::showCompass() const
 {
     return d->m_map->showCompass();
+}
+
+bool MarbleWidget::showClouds() const
+{
+    return d->m_map->showClouds();
 }
 
 bool MarbleWidget::showGrid() const
@@ -836,6 +841,13 @@ void MarbleWidget::setShowCompass( bool visible )
     repaint();
 }
 
+void MarbleWidget::setShowClouds( bool visible )
+{
+    d->m_map->setShowClouds( visible );
+
+    repaint();
+}
+
 void MarbleWidget::setShowGrid( bool visible )
 {
     d->m_map->setShowGrid( visible );
@@ -1107,7 +1119,6 @@ void MarbleWidget::updateSun()
     //qDebug() << "Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
-    repaint();
     //qDebug() << "Finished updating the sun shading map";
 }
 
@@ -1140,11 +1151,11 @@ void MarbleWidget::disableInput()
     setInputHandler( 0 );
     setCursor( Qt::ArrowCursor );
 }
-
+/*
 void MarbleWidget::repaintMap()
 {
     qDebug() << "MarbleWidget::repaintMap";
     repaint();
 }
-
+*/
 #include "MarbleWidget.moc"

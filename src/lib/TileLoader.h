@@ -162,7 +162,8 @@ class TileLoader : public QObject
         void reloadTile( const QString &relativeUrlString, const QString &id );
 
         /**
-         * Triggers an update of the tile loader.
+         * Effectively triggers a reload of all tiles that are currently in use
+         * and clears the tile cache in physical memory.
          */
         void update();
 

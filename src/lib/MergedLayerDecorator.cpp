@@ -38,14 +38,34 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::paint(const QString& theme)
 {
-    if ( m_sunLocator->getShow() )
-      paintSunShading();
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 )
       paintClouds();
+    if ( m_sunLocator->getShow() )
+      paintSunShading();
     if ( m_showTileId )
       paintTileId( theme );
     qDebug() << "MergedLayerDecorator::paint: emit repaintMap";
 //     emit repaintMap();
+}
+
+void MergedLayerDecorator::setShowClouds( bool visible )
+{
+    m_cloudlayer = visible;
+}
+
+bool MergedLayerDecorator::showClouds() const
+{
+    return m_cloudlayer;
+}
+
+void MergedLayerDecorator::setShowTileId( bool visible )
+{
+    m_showTileId = visible;
+}
+
+bool MergedLayerDecorator::showTileId() const
+{
+    return m_showTileId;
 }
 
 QImage MergedLayerDecorator::loadRawTile(const QString& theme)

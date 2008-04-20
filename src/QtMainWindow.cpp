@@ -114,6 +114,16 @@ void MainWindow::createActions()
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
+     m_showCloudsAct = new QAction( tr("&Clouds"), this);
+     m_showCloudsAct->setCheckable( true );
+     m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
+     connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
+
+     m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
+     m_showAtmosphereAct->setCheckable( true );
+     m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
+     connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
+
      m_showSunAct = new QAction( tr("S&un Control"), this);
      m_showSunAct->setStatusTip(tr("Configure Sun Control"));
      connect(m_showSunAct, SIGNAL(triggered()), this, SLOT( showSun()));
@@ -151,6 +161,8 @@ void MainWindow::createMenus()
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_statusBarAct);
     m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_showCloudsAct);
+    m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addAction(m_showSunAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
@@ -260,6 +272,20 @@ void MainWindow::showStatusBar( bool isChecked )
     }
 
     m_statusBarAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::showClouds( bool isChecked )
+{
+    m_controlView->marbleWidget()->setShowClouds( isChecked );
+
+    m_showCloudsAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::showAtmosphere( bool isChecked )
+{
+//    m_controlView->marbleWidget()->model()->layerDecorator()->showClouds( isChecked );
+
+    m_showAtmosphereAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
 void MainWindow::showSun()
@@ -392,6 +418,7 @@ void MainWindow::readSettings()
          showFullScreen(settings.value("fullScreen", false ).toBool());
          showSideBar(settings.value("sideBar", true ).toBool());
          showStatusBar(settings.value("statusBar", false ).toBool());
+         showClouds(settings.value("showClouds", true ).toBool());
      settings.endGroup();
 
      settings.beginGroup("MarbleWidget");
@@ -424,6 +451,7 @@ void MainWindow::writeSettings()
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
+         settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );

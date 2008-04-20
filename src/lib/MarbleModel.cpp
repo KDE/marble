@@ -155,11 +155,13 @@ MarbleModel::MarbleModel( QObject *parent )
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
     
     m_sunLocator = new SunLocator();
-    m_painter = new MergedLayerDecorator(m_sunLocator);
+    m_layerDecorator = new MergedLayerDecorator(m_sunLocator);
+
+    connect( m_layerDecorator, SIGNAL( repaintMap() ), SIGNAL( modelChanged() ) );
 
     // TODO be able to set these somewhere
-    m_painter->showClouds(true);
-    m_painter->showTileId(false);
+    m_layerDecorator->setShowClouds(true);
+    m_layerDecorator->setShowTileId(false);
 }
 
 MarbleModel::~MarbleModel()
@@ -640,7 +642,7 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 
 void MarbleModel::update()
 {
-    d->m_tileLoader->update();
+    QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 
 SunLocator* MarbleModel::sunLocator() const
@@ -648,9 +650,9 @@ SunLocator* MarbleModel::sunLocator() const
     return m_sunLocator;
 }
 
-MergedLayerDecorator* MarbleModel::painter() const
+MergedLayerDecorator* MarbleModel::layerDecorator() const
 {
-    return m_painter;
+    return m_layerDecorator;
 }
 
 quint64 MarbleModel::volatileTileCacheLimit() const
@@ -668,13 +670,13 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level, const QS
     qDebug() << "MarbleModel::paintTile";
     
     if ( d->m_downloadManager != 0 ) {
-        connect( m_painter, SIGNAL( downloadTile( const QString&, const QString& ) ),
+        connect( m_layerDecorator, SIGNAL( downloadTile( const QString&, const QString& ) ),
                  d->m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
     }
 
-    m_painter->setInfo(x, y, level, tile->id());
-    m_painter->setTile(tile->tile());
-    m_painter->paint(theme);
+    m_layerDecorator->setInfo(x, y, level, tile->id());
+    m_layerDecorator->setTile(tile->tile());
+    m_layerDecorator->paint(theme);
     tile->loadTile(requestTileUpdate);
 }
 

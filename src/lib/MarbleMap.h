@@ -102,6 +102,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
     Q_PROPERTY(bool showCompass  READ showCompass     WRITE setShowCompass)
     Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
+
+    Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
+
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
     Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
     Q_PROPERTY(bool showTerrain  READ showTerrain     WRITE setShowTerrain)
@@ -324,6 +327,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return The compass visibility.
      */
     bool  showCompass() const;
+
+    /**
+     * @brief  Return whether the cloud cover is visible.
+     * @return The cloud cover visibility.
+     */
+    bool  showClouds() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
@@ -646,6 +655,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the compass
      */
     void setShowCompass( bool visible );
+
+    /**
+     * @brief  Set whether the cloud cover is visible
+     * @param  visible  visibility of the cloud cover
+     */
+    void setShowClouds( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible
