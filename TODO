@@ -17,6 +17,8 @@ Layer Management Class tasks:
 *** New widget independent image canvas concept and implementation      DONE
     -- Check Apidox if there is anything missing.                       --
 
+*** Add formal description of DGML                                      ----
+
 *** Split off MapTheme / DGML parsing into geodata/parser.              ----
     Have a GeoDataMapTheme class that basically only includes those 
     parts of the current MapTheme except for parsing.
