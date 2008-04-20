@@ -35,7 +35,7 @@ else(WIN32 AND QTONLY)
 endif(WIN32 AND QTONLY)
 
 if( TILES_AT_COMPILETIME )
-    set(ENV{QT_PLUGIN_PATH} ${QT_PLUGIN_PATH})
+    set(ENV{QT_PLUGIN_PATH} ${QT_PLUGINS_DIR})
     macro( MARBLE_COMPILE_TILES mapname grayscale )
         # the parameters of tilecreator are:
         #  PREFIX  the source directory
