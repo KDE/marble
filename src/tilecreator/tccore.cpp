@@ -12,12 +12,11 @@
 
 TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplication( argc, argv )
 {
+    
     if( !(argc < 4) )
     {
         m_tilecreator = new TileCreator( argv [1], argv[2], argv[3], argv[4] );
         connect(m_tilecreator, SIGNAL(finished()), this, SLOT(quit()));
         m_tilecreator->start();
-        qDebug() << m_tilecreator->isFinished() << m_tilecreator->isRunning();
-        qDebug() << "test";
     }
 }

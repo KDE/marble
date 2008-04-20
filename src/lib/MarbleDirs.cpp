@@ -98,7 +98,7 @@ if ( !runTimeMarbleDataPath.isEmpty() )
         return compileTimeMarbleDataPath;
 #endif  // MARBLE_DATA_PATH
 
-    return QDir( qApp->applicationDirPath() 
+    return QDir( QCoreApplication::applicationDirPath() 
 
 #if defined(QTONLY)
                      + QLatin1String( "/data" )

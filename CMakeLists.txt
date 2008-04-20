@@ -4,8 +4,6 @@ project(marble)
 # CMake Settings 
 SET(CMAKE_COLOR_MAKEFILE ON)
 
-
-
 ####################################################
 # User configurable options
 if(KDE4_FOUND)
@@ -187,6 +185,12 @@ include(DistTarget)
 IF (ENABLE_TESTS)
   add_subdirectory(tests)
 ENDIF (ENABLE_TESTS)
+
+####################################################
+# Generate the tiles with the tilecreator at compile time
+# if this option is set, srtm.jpg will not be installed but the generated tiles instead
+option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
+
 ####################################################
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})

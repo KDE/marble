@@ -1,39 +1,56 @@
-project(TileCreator)
-#SET(TILES_AT_COMPILETIME 1)
-if(TILES_AT_COMPILETIME)
-    include_directories(
-     ${CMAKE_SOURCE_DIR}/src/tilecreator
-     ${CMAKE_BINARY_DIR}/src/tilecreator
-     ${QT_INCLUDE_DIR}
-     ${QT_QTDESIGNER_INCLUDE_DIR}
-    )
-    include(${QT_USE_FILE})
+project( TileCreator )
+include_directories(
+ ${CMAKE_SOURCE_DIR}/src/tilecreator
+ ${CMAKE_BINARY_DIR}/src/tilecreator
+ ${QT_INCLUDE_DIR}
+ ${QT_QTDESIGNER_INCLUDE_DIR}
+)
+include( ${QT_USE_FILE} )
 
-    set(tilecreator_SRCS
-                ../lib/TileCreator.cpp
-                ../lib/TileLoaderHelper.cpp
-                ../lib/MarbleDirs.cpp
-                main.cpp
-                tccore.cpp
-    )
+set( tilecreator_SRCS
+            ../lib/TileCreator.cpp
+            ../lib/TileLoaderHelper.cpp
+            ../lib/MarbleDirs.cpp
+            main.cpp
+            tccore.cpp
+)
 
-    add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
-    add_executable(tilecreator ${tilecreator_SRCS})
-    target_link_libraries(tilecreator ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
+add_executable( tilecreator ${tilecreator_SRCS} )
+target_link_libraries( tilecreator ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} )
 
-    macro(MARBLE_COMPILE_TILES mapname grayscale)
+if(WIN32 AND QTONLY)
+    install (TARGETS tilecreator DESTINATION "")
+else(WIN32 AND QTONLY)
+    if (APPLE AND QTONLY)
+      # No need for this when installing to a bundle
+    else (APPLE AND QTONLY)
+      #set_target_properties(marble PROPERTIES VERSION 1.0.0 SOVERSION 1)
+      if( NOT QTONLY)
+        install (TARGETS tilecreator ${INSTALL_TARGETS_DEFAULT_ARGS})
+      else( NOT QTONLY)
+        install (TARGETS marble DESTINATION bin )
+      endif(NOT QTONLY)
+    endif (APPLE AND QTONLY)
+endif(WIN32 AND QTONLY)
+
+if( TILES_AT_COMPILETIME )
+    set( ENV{QT_PLUGIN_PATH} ${QT_PLUGIN_PATH})
+    macro( MARBLE_COMPILE_TILES mapname grayscale )
         # the parameters of tilecreator are:
         #  PREFIX  the source directory
         #  INSTALLMAP  the map in the form MAPNAME/MAPNAME.jpg
         #  DEM  "true" for srtm, "false" else
         #  TARGETDIR the destination directory
-        add_custom_command( OUTPUT output1
-                            COMMAND tilecreator ARGS "D:/sources/trunk/KDE/kdeedu/marble/data/maps/earth srtm/srtm.jpg true D:/cygopt/kde-root/tmp/marble-qt-0.5.1/work/mingw-Debug/src/tilecreator" )
+        configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/../../data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
+        add_custom_command( TARGET tilecreator POST_BUILD
+                            COMMAND tilecreator ARGS earth ${mapname}/${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles )
+        install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_PATH}/maps/earth/${mapname})
     endmacro(MARBLE_COMPILE_TILES)
     # only for srtm data the generation needs long - for all other data you can also sp
-#    MARBLE_COMPILE_TILES(bluemarble "false")
-#    MARBLE_COMPILE_TILES(citylights "false")
-#    MARBLE_COMPILE_TILES(plain "false")
-#    MARBLE_COMPILE_TILES(srtm "true")
-    #install (TARGETS tilecreator RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
-endif(TILES_AT_COMPILETIME)
+#    MARBLE_COMPILE_TILES(bluemarble false)
+#    MARBLE_COMPILE_TILES(citylights false)
+#    MARBLE_COMPILE_TILES(plain false)
+    MARBLE_COMPILE_TILES(srtm true)
+    
+endif( TILES_AT_COMPILETIME )

@@ -45,10 +45,15 @@ maps/earth/citylights/legend/water.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights/legend)
 
 install (FILES
-maps/earth/srtm/srtm.jpg
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
+
+if(NOT TILES_AT_COMPILETIME)
+install (FILES
+maps/earth/srtm/srtm.jpg
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
+endif(NOT TILES_AT_COMPILETIME)
 
 install (FILES
 maps/earth/bluemarble/bluemarble.jpg

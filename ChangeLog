@@ -1,3 +1,17 @@
+2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * CMakeLists.txt
+    * data/CMakeLists.txt
+    * src/tilecreator/CMakeLists.txt
+    
+    * src/lib/MarbleDirs.cpp
+    * src/tilecreator/tccore.cpp
+    
+    - add an option to create the tiles of srtm data at compiletime
+      this should make it possible to ship marble with it
+    - use QCoreApplication for the tilecreators sake
+    
+    
 2008-04-20  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapTheme.{cpp,h}:
