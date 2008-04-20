@@ -79,10 +79,11 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     return document;
 }
 
-QStringList MapThemeManager::findMapThemes( const QString& path )
+QStringList MapThemeManager::findMapThemes()
 {
-    QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
-    QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
+    QString const mapDir = "maps/";
+    QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + mapDir );
+    QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + mapDir );
 
     QStringList  localmappaths = localPaths.entryList( QStringList( "*" ),
                                                        QDir::AllDirs
@@ -99,33 +100,33 @@ QStringList MapThemeManager::findMapThemes( const QString& path )
 
     for ( int planet = 0; planet < localmappaths.size(); ++planet ) {
 
-        QDir themeDir = QDir( MarbleDirs::localPath() + "/maps/"
-+ localmappaths.at( planet ) );
+        QDir themeDir = QDir( MarbleDirs::localPath() + '/' + mapDir
+            + localmappaths.at( planet ) );
         QStringList thememappaths = themeDir.entryList( 
                                      QStringList( "*" ),
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            localmapdirs << MarbleDirs::localPath() + "/maps/" +
-            localmappaths.at( planet ) + '/' + 
-            thememappaths.at( theme );
+            localmapdirs << MarbleDirs::localPath() + '/' + mapDir
+                + localmappaths.at( planet ) + '/'
+                + thememappaths.at( theme );
         }
     }
 
     for ( int planet = 0; planet < sysmappaths.size(); ++planet ) {
 
-        QDir themeDir = QDir( MarbleDirs::systemPath() + "/maps/"
-+ sysmappaths.at( planet ) );
+        QDir themeDir = QDir( MarbleDirs::systemPath() + '/' + mapDir
+            + sysmappaths.at( planet ) );
         QStringList thememappaths =  themeDir.entryList( 
                                      QStringList( "*" ),
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            sysmapdirs << MarbleDirs::systemPath() + "/maps/" +
-            sysmappaths.at( planet ) + '/' + 
-            thememappaths.at( theme );
+            sysmapdirs << MarbleDirs::systemPath() + '/' + mapDir
+                + sysmappaths.at( planet ) + '/'
+                + thememappaths.at( theme );
         }
     }
         
@@ -177,7 +178,7 @@ QStringList MapThemeManager::findMapThemes( const QString& path )
     }
 
 //     for (int i = 0; i < mapfiles.size(); ++i)
-//    	   qDebug() << "Files: " << mapfiles.at(i);
+//        qDebug() << "Files: " << mapfiles.at(i);
 
     return mapfiles;
 }
@@ -195,7 +196,7 @@ void MapThemeManager::updateMapThemeModel()
     m_mapThemeModel->setHeaderData(1, Qt::Horizontal, tr("Path"));
     m_mapThemeModel->setHeaderData(2, Qt::Horizontal, tr("Description"));
 
-    QStringList stringlist = findMapThemes( "maps/" );
+    QStringList stringlist = findMapThemes();
     QStringListIterator  it(stringlist);
 
     // Make sure we don't keep excessively large previews in memory

@@ -76,7 +76,7 @@ class MapThemeManager : public QObject
     void updateMapThemeModel();
 
  private:
-    static QStringList findMapThemes( const QString& );
+    static QStringList findMapThemes();
 
     QStandardItemModel* m_mapThemeModel;
 };

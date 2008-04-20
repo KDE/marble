@@ -1,3 +1,12 @@
+2008-04-21  Jens-Michael Hoffmann   jensmh@gmx.de
+
+    * src/lib/MapThemeManager.cpp
+    * src/lib/MapThemeManager.h
+    
+    This patchs removes the parameter of MapThemeManager::findMapThemes because it 
+    is constant ("maps/"). Removes redundant occurrence of literal "maps/" 
+    inside, too.
+    
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
     * CMakeLists.txt
