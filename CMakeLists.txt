@@ -5,6 +5,11 @@ project(marble)
 SET(CMAKE_COLOR_MAKEFILE ON)
 
 ####################################################
+# Generate the tiles with the tilecreator at compile time
+# if this option is set, srtm.jpg will not be installed but the generated tiles instead
+option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
+
+####################################################
 # User configurable options
 if(KDE4_FOUND)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
@@ -185,11 +190,6 @@ include(DistTarget)
 IF (ENABLE_TESTS)
   add_subdirectory(tests)
 ENDIF (ENABLE_TESTS)
-
-####################################################
-# Generate the tiles with the tilecreator at compile time
-# if this option is set, srtm.jpg will not be installed but the generated tiles instead
-option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 
 ####################################################
 # Install extra files

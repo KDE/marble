@@ -1,6 +1,14 @@
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
     * CMakeLists.txt
+    * src/tilecreator/CMakeLists.txt
+    
+    - make the option useful (it was behind the actual code using it)
+    - fix one typo
+    
+2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * CMakeLists.txt
     * data/CMakeLists.txt
     * src/tilecreator/CMakeLists.txt
     

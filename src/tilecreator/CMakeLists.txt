@@ -29,13 +29,13 @@ else(WIN32 AND QTONLY)
       if( NOT QTONLY)
         install (TARGETS tilecreator ${INSTALL_TARGETS_DEFAULT_ARGS})
       else( NOT QTONLY)
-        install (TARGETS marble DESTINATION bin )
+        install (TARGETS tilecreator DESTINATION bin )
       endif(NOT QTONLY)
     endif (APPLE AND QTONLY)
 endif(WIN32 AND QTONLY)
 
 if( TILES_AT_COMPILETIME )
-    set( ENV{QT_PLUGIN_PATH} ${QT_PLUGIN_PATH})
+    set(ENV{QT_PLUGIN_PATH} ${QT_PLUGIN_PATH})
     macro( MARBLE_COMPILE_TILES mapname grayscale )
         # the parameters of tilecreator are:
         #  PREFIX  the source directory
@@ -44,7 +44,9 @@ if( TILES_AT_COMPILETIME )
         #  TARGETDIR the destination directory
         configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/../../data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
         add_custom_command( TARGET tilecreator POST_BUILD
-                            COMMAND tilecreator ARGS earth ${mapname}/${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles )
+                            COMMAND tilecreator ARGS earth ${mapname}/${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
+                            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                            COMMENT generating tiles for srtm data )
         install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_PATH}/maps/earth/${mapname})
     endmacro(MARBLE_COMPILE_TILES)
     # only for srtm data the generation needs long - for all other data you can also sp
