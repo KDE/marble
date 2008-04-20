@@ -47,6 +47,10 @@ if( TILES_AT_COMPILETIME )
                             COMMAND tilecreator ARGS earth ${mapname}/${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             COMMENT generating tiles for srtm data )
+        # this shouldn't happen but it happens far to often
+        if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/tiles)
+            file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles)
+        endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/tiles)
         install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_PATH}/maps/earth/${mapname})
     endmacro(MARBLE_COMPILE_TILES)
     # only for srtm data the generation needs long - for all other data you can also sp
