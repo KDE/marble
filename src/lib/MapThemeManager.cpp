@@ -79,108 +79,76 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     return document;
 }
 
+QStringList MapThemeManager::findMapThemes( const QString& basePath )
+{
+    const QString mapDirName = "maps/";
+    const QString mapPathName = basePath + '/' + mapDirName;
+
+    QDir paths = QDir( mapPathName );
+
+    QStringList mapPaths = paths.entryList( QStringList( "*" ),
+                                            QDir::AllDirs
+                                            | QDir::NoSymLinks
+                                            | QDir::NoDotAndDotDot );
+    QStringList mapDirs;
+
+    for ( int planet = 0; planet < mapPaths.size(); ++planet ) {
+
+        QDir themeDir = QDir( mapPathName + mapPaths.at( planet ) );
+        QStringList themeMapPaths = themeDir.entryList( 
+                                     QStringList( "*" ),
+                                     QDir::AllDirs |
+                                     QDir::NoSymLinks |
+                                     QDir::NoDotAndDotDot );
+        for ( int theme = 0; theme < themeMapPaths.size(); ++theme ) {
+            mapDirs << mapPathName + mapPaths.at( planet ) + '/'
+                + themeMapPaths.at( theme );
+        }
+    }
+
+
+    QStringList mapFiles;
+    QStringListIterator it( mapDirs );
+    while ( it.hasNext() ) {
+        QString themeDir = it.next() + '/';
+        QString themeDirName = QDir( themeDir ).path().section( "/", -2, -1);
+        QStringList tmp = ( QDir( themeDir ) ).entryList( QStringList( "*.dgml" ),
+                                              QDir::Files | QDir::NoSymLinks );
+        if ( !tmp.isEmpty() ) {
+            QStringListIterator k( tmp );
+            while ( k.hasNext() ) {
+                QString themeXml = k.next();
+                mapFiles << themeDirName + '/' + themeXml;
+            }
+        }
+    }
+
+//     for (int i = 0; i < mapFiles.size(); ++i)
+//         qDebug() << basePath << "-Files: " << mapFiles.at(i);
+
+    return mapFiles;
+}
+
 QStringList MapThemeManager::findMapThemes()
 {
-    QString const mapDir = "maps/";
-    QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + mapDir );
-    QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + mapDir );
+    QStringList mapFilesLocal = findMapThemes( MarbleDirs::localPath() );
+    QStringList mapFilesSystem = findMapThemes( MarbleDirs::systemPath() );
+    QStringList allMapFiles( mapFilesLocal );
+    allMapFiles << mapFilesSystem;
 
-    QStringList  localmappaths = localPaths.entryList( QStringList( "*" ),
-                                                       QDir::AllDirs
-                                                       | QDir::NoSymLinks
-                                                       | QDir::NoDotAndDotDot );
-    QStringList  sysmappaths = sysdirs.entryList( QStringList( "*" ),
-                                                  QDir::AllDirs
-                                                  | QDir::NoSymLinks
-                                                  | QDir::NoDotAndDotDot );
-
-
-    QStringList  localmapdirs;
-    QStringList  sysmapdirs;
-
-    for ( int planet = 0; planet < localmappaths.size(); ++planet ) {
-
-        QDir themeDir = QDir( MarbleDirs::localPath() + '/' + mapDir
-            + localmappaths.at( planet ) );
-        QStringList thememappaths = themeDir.entryList( 
-                                     QStringList( "*" ),
-                                     QDir::AllDirs |
-                                     QDir::NoSymLinks |
-                                     QDir::NoDotAndDotDot );
-        for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            localmapdirs << MarbleDirs::localPath() + '/' + mapDir
-                + localmappaths.at( planet ) + '/'
-                + thememappaths.at( theme );
-        }
-    }
-
-    for ( int planet = 0; planet < sysmappaths.size(); ++planet ) {
-
-        QDir themeDir = QDir( MarbleDirs::systemPath() + '/' + mapDir
-            + sysmappaths.at( planet ) );
-        QStringList thememappaths =  themeDir.entryList( 
-                                     QStringList( "*" ),
-                                     QDir::AllDirs |
-                                     QDir::NoSymLinks |
-                                     QDir::NoDotAndDotDot );
-        for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            sysmapdirs << MarbleDirs::systemPath() + '/' + mapDir
-                + sysmappaths.at( planet ) + '/'
-                + thememappaths.at( theme );
-        }
-    }
-        
-    QStringList  mapfiles;
-    QStringList  tmp;
-    QString      themedir;
-    QString      themedirname;
-    QString      themexml;
-
-    QStringListIterator  it( localmapdirs );
-    while ( it.hasNext() ) {
-        themedir = it.next() + '/';
-        themedirname = QDir( themedir ).path().section( "/", -2, -1);
-
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files | QDir::NoSymLinks );
-        if ( !tmp.isEmpty() ) {
-            QStringListIterator  k( tmp );
-            while ( k.hasNext() ) {
-                themexml = k.next();
-                mapfiles << themedirname + '/' + themexml;
-            }
-        }
-    }
-
-    QStringListIterator  j( sysmapdirs );
-    while ( j.hasNext() ) {
-        themedir = j.next();
-        themedirname = QDir( themedir ).path().section( "/", -2, -1);
-
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files | QDir::NoSymLinks );
-        if ( !tmp.isEmpty() ) {
-            QStringListIterator  l( tmp );
-            while ( l.hasNext() ) {
-                themexml = l.next();
-                mapfiles << themedirname + '/' + themexml;
-            }
-        }
-    }
-
-    mapfiles.sort();
-
-    for ( int i = 1; i < mapfiles.size(); ++i ) {
-        if ( mapfiles.at(i) == mapfiles.at( i - 1 ) ) {
-            mapfiles.removeAt(i);
+    // remove duplicate entries
+    allMapFiles.sort();
+    for ( int i = 1; i < allMapFiles.size(); ++i ) {
+        if ( allMapFiles.at(i) == allMapFiles.at( i - 1 ) ) {
+            allMapFiles.removeAt(i);
             --i;
         }
     }
 
-//     for (int i = 0; i < mapfiles.size(); ++i)
-//        qDebug() << "Files: " << mapfiles.at(i);
+    for (int i = 0; i < allMapFiles.size(); ++i)
+       qDebug() << "Files: " << allMapFiles.at(i);
 
-    return mapfiles;
+    return allMapFiles;
 }
 
 QStandardItemModel* MapThemeManager::mapThemeModel()
