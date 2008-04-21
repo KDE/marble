@@ -56,7 +56,7 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     // Open file in right mode
     file.open(QIODevice::ReadOnly);
 
-    GeoSceneParser* parser = new GeoSceneParser(GeoScene_DGML);;
+    GeoSceneParser* parser = new GeoSceneParser(GeoScene_DGML);
 
     if (!parser) {
         qDebug("Could not determine file format!");

@@ -280,9 +280,9 @@ void MarblePart::readSettings()
 
 void MarblePart::writeSettings()
 {
-    double  quitLon = m_controlView->marbleWidget()->centerLongitude();;
-    double  quitLat = m_controlView->marbleWidget()->centerLatitude();;
-    int     quitZoom = m_controlView->marbleWidget()->zoom();;
+    double  quitLon = m_controlView->marbleWidget()->centerLongitude();
+    double  quitLat = m_controlView->marbleWidget()->centerLatitude();
+    int     quitZoom = m_controlView->marbleWidget()->zoom();
 
     // Get the 'home' values from the widget and store them in the settings.
     MarbleSettings::setQuitLongitude( quitLon );

@@ -214,7 +214,7 @@ void TileCreator::run()
     while( tileLevel > 0 ) {
         tileLevel--;
 
-        int  nmaxit =  TileLoaderHelper::levelToRow( tileLevel );;
+        int  nmaxit =  TileLoaderHelper::levelToRow( tileLevel );
 
         for ( int n = 0; n < nmaxit; ++n ) {
             QString  dirName( m_targetDir
@@ -226,7 +226,7 @@ void TileCreator::run()
             if ( !QDir( dirName ).exists() ) 
                 ( QDir::root() ).mkpath( dirName );
 
-            int   mmaxit = TileLoaderHelper::levelToColumn( tileLevel );;
+            int   mmaxit = TileLoaderHelper::levelToColumn( tileLevel );
             for ( int m = 0; m < mmaxit; ++m ) {
 
                 if ( m_cancelled == true )
@@ -329,7 +329,7 @@ void TileCreator::run()
 
                 bool  ok = tile.save( tileName, "jpg", 100 );
                 if ( ! ok ) 
-                    qDebug() << "Error while writing Tile: " << tileName;;
+                    qDebug() << "Error while writing Tile: " << tileName;
 
                 percentCompleted =  (int) ( 90 * (double)(createdTilesCount)
                                             / (double)(totalTileCount) );	
