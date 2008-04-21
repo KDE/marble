@@ -56,25 +56,18 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     // Open file in right mode
     file.open(QIODevice::ReadOnly);
 
-    GeoSceneParser* parser = new GeoSceneParser(GeoScene_DGML);
+    GeoSceneParser parser(GeoScene_DGML);
 
-    if (!parser) {
-        qDebug("Could not determine file format!");
-        return 0;
-    }
-
-    if (!parser->read(&file)) {
+    if (!parser.read(&file)) {
         qDebug("Could not parse file!");
         return 0;
     }
 
     // Get result document
-    GeoSceneDocument* document = static_cast<GeoSceneDocument*>(parser->releaseDocument());
+    GeoSceneDocument* document = static_cast<GeoSceneDocument*>(parser.releaseDocument());
     Q_ASSERT(document);
 
     qDebug() << "\nSuccesfully parsed file!";
-
-    delete parser;
 
     return document;
 }

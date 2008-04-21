@@ -1,6 +1,13 @@
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MapThemeManager.cpp
+
+    - Don't allocate local GeoSceneParser variable dynamically.
+    - Remove useless null check.
+
+2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MapThemeManager.cpp
     * src/lib/TileCreator.cpp
     * src/marble_part.cpp
 
