@@ -165,7 +165,6 @@ void MapThemeManager::updateMapThemeModel()
     //       For now maxIconSize already equals what's expected by the listview.
     QSize maxIconSize( 136,136 ); 
 
-    int  row = 0;
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
         qDebug() << "About to add: " << mapThemeID;
@@ -173,7 +172,6 @@ void MapThemeManager::updateMapThemeModel()
         GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
         
         if ( !mapTheme ) {
-            delete mapTheme;
             continue;
         }
 

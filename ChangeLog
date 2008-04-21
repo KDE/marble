@@ -2,6 +2,13 @@
 
     * src/lib/MapThemeManager.cpp
 
+    - Remove unused local variable.
+    - Remove pointless delete.
+
+2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MapThemeManager.cpp
+
     - Don't allocate local GeoSceneParser variable dynamically.
     - Remove useless null check.
 
