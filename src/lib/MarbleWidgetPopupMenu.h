@@ -48,6 +48,7 @@ class MarbleWidgetPopupMenu  : public QObject
 
  protected Q_SLOTS:
     void  slotSetHomePoint();
+    void  slotCopyCoordinates();
     void  slotAddMeasurePoint();
     void  slotRemoveMeasurePoints();
     void  slotAboutDialog();
@@ -64,12 +65,12 @@ class MarbleWidgetPopupMenu  : public QObject
     QMenu    *m_lmbMenu;
     QMenu    *m_rmbMenu;
     QAction  *m_earthaction;	
-    QAction  *m_posaction;
 
-    QAction  *m_pSetHomePointAction; 
-    QAction  *m_pAddMeasurePointAction;	
-    QAction  *m_pRemoveMeasurePointsAction;	
-    QAction  *m_pAboutDialogAction;	
+    QAction  *m_copyCoordinateAction;
+    QAction  *m_setHomePointAction; 
+    QAction  *m_addMeasurePointAction;	
+    QAction  *m_removeMeasurePointsAction;	
+    QAction  *m_aboutDialogAction;	
 
 };
 

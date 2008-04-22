@@ -319,16 +319,6 @@ int MarbleWidget::zoom() const
     return d->m_map->zoom();
 }
 
-double MarbleWidget::centerLatitude() const
-{
-    return d->m_map->centerLatitude();
-}
-
-double MarbleWidget::centerLongitude() const
-{
-    return d->m_map->centerLongitude();
-}
-
 int  MarbleWidget::minimumZoom() const
 {
     return d->m_map->minimumZoom();
@@ -363,6 +353,11 @@ bool MarbleWidget::showCompass() const
 bool MarbleWidget::showClouds() const
 {
     return d->m_map->showClouds();
+}
+
+bool MarbleWidget::showAtmosphere() const
+{
+    return d->m_map->showAtmosphere();
 }
 
 bool MarbleWidget::showGrid() const
@@ -699,6 +694,16 @@ bool MarbleWidget::geoCoordinates(const int x, const int y,
     return d->m_map->geoCoordinates( x, y, lon, lat, unit );
 }
 
+double MarbleWidget::centerLatitude() const
+{
+    return d->m_map->centerLatitude();
+}
+
+double MarbleWidget::centerLongitude() const
+{
+    return d->m_map->centerLongitude();
+}
+
 bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 {
     int  imageHalfWidth  = width() / 2;
@@ -844,6 +849,13 @@ void MarbleWidget::setShowCompass( bool visible )
 void MarbleWidget::setShowClouds( bool visible )
 {
     d->m_map->setShowClouds( visible );
+
+    repaint();
+}
+
+void MarbleWidget::setShowAtmosphere( bool visible )
+{
+    d->m_map->setShowAtmosphere( visible );
 
     repaint();
 }

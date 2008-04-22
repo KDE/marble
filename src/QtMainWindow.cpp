@@ -96,6 +96,11 @@ void MainWindow::createActions()
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
+     m_copyCoordinatesAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("C&opy Coordinates"), this);
+//     m_copyMapAct->setShortcut(tr("Ctrl+C"));
+     m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
+     connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
+
      m_sideBarAct = new QAction( tr("Show &Navigation Panel"), this);
      m_sideBarAct->setShortcut(tr("F9"));
      m_sideBarAct->setCheckable( true );
@@ -154,15 +159,16 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&Edit"));
     m_fileMenu->addAction(m_copyMapAct);
+    m_fileMenu->addAction(m_copyCoordinatesAct);
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
     m_fileMenu->addAction(m_fullScreenAct);
     m_fileMenu->addAction(m_sideBarAct);
-    m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_statusBarAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_showCloudsAct);
     m_fileMenu->addAction(m_showAtmosphereAct);
+    m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_showSunAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
@@ -252,6 +258,17 @@ void MainWindow::showSideBar( bool isChecked )
     m_sideBarAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+void MainWindow::copyCoordinates()
+{
+    double lon = m_controlView->marbleWidget()->centerLongitude();
+    double lat = m_controlView->marbleWidget()->centerLatitude();
+
+    QString  positionString = GeoDataPoint( lon, lat, GeoDataPoint::Degree ).toString();
+    QClipboard  *clipboard = QApplication::clipboard();
+
+    clipboard->setText( positionString );
+}
+
 void MainWindow::copyMap()
 {
     QPixmap      mapPixmap = m_controlView->mapScreenShot();
@@ -283,7 +300,7 @@ void MainWindow::showClouds( bool isChecked )
 
 void MainWindow::showAtmosphere( bool isChecked )
 {
-//    m_controlView->marbleWidget()->model()->layerDecorator()->showClouds( isChecked );
+    m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
 
     m_showAtmosphereAct->setChecked( isChecked ); // Sync state with the GUI
 }
@@ -419,6 +436,7 @@ void MainWindow::readSettings()
          showSideBar(settings.value("sideBar", true ).toBool());
          showStatusBar(settings.value("statusBar", false ).toBool());
          showClouds(settings.value("showClouds", true ).toBool());
+         showAtmosphere(settings.value("showAtmosphere", true ).toBool());
      settings.endGroup();
 
      settings.beginGroup("MarbleWidget");
@@ -452,6 +470,7 @@ void MainWindow::writeSettings()
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
+         settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );

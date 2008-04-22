@@ -297,7 +297,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
             // TileCreatorDialog tileCreatorDlg( tileCreator, parent );
             TileCreatorDialog tileCreatorDlg( tileCreator, 0 );
                 tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
-                                           "DGML2" + d->m_mapTheme->head()->description() );
+                                           d->m_mapTheme->head()->description() );
                 tileCreatorDlg.exec();
                 qDebug("Tile creation completed");
         }

@@ -23,6 +23,8 @@ ViewParams::ViewParams( )
 
     // Show / don't show parameters
     m_showGrid           = true;
+    m_showAtmosphere     = true;
+
     m_showPlaceMarks     = true;
     m_showElevationModel = false;
 

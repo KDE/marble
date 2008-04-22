@@ -58,6 +58,7 @@ class MainWindow : public QMainWindow
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
+    void  copyCoordinates();
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
@@ -80,6 +81,7 @@ class MainWindow : public QMainWindow
     QAction *m_printAct;
     QAction *m_quitAct;
     QAction *m_copyMapAct;
+    QAction *m_copyCoordinatesAct;
     QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;

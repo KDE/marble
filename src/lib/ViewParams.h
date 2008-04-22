@@ -81,6 +81,11 @@ class ViewParams
 
     // Show/don't show options
     bool        m_showGrid;
+
+//  FIXME: All of these parameters should get stored as a GeoSceneSettings 
+//         property object in the future instead ...
+    bool        m_showAtmosphere;
+
     bool        m_showPlaceMarks;
     bool        m_showElevationModel;
 

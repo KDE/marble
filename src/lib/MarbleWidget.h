@@ -125,6 +125,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
 
     Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
+    Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
 
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
     Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
@@ -351,6 +352,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The cloud cover visibility.
      */
     bool  showClouds() const;
+
+    /**
+     * @brief  Return whether the atmospheric glow is visible.
+     * @return The cloud cover visibility.
+     */
+    bool  showAtmosphere() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
@@ -667,6 +674,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  visible  visibility of the cloud cover
      */
     void setShowClouds( bool visible );
+
+    /**
+     * @brief  Set whether the atmospheric glow is visible
+     * @param  visible  visibility of the atmospheric glow
+     */
+    void setShowAtmosphere( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible

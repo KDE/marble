@@ -25,12 +25,12 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
 {
 
     switch(unit){
-    case( GeoDataPoint::Radian ):
+    case Radian:
         m_q = Quaternion( _lon, _lat );
         m_lon = _lon;
         m_lat = _lat;
         break;
-    case( GeoDataPoint::Degree ):
+    case Degree:
         m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
         m_lon = _lon * DEG2RAD;
         m_lat = _lat * DEG2RAD;

@@ -343,6 +343,11 @@ bool MarbleMap::showClouds() const
     return d->m_model->layerDecorator()->showClouds();
 }
 
+bool MarbleMap::showAtmosphere() const
+{
+    return d->m_viewParams.m_showAtmosphere;
+}
+
 bool MarbleMap::showPlaces() const
 {
     return d->m_viewParams.m_showPlaceMarks;
@@ -443,7 +448,10 @@ void MarbleMap::zoomView(int newZoom)
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
-    d->drawAtmosphere();
+    if ( d->m_viewParams.m_showAtmosphere ) {
+        d->drawAtmosphere();
+    }
+
     emit zoomChanged( newZoom );
 }
 
@@ -551,7 +559,9 @@ void MarbleMap::setProjection( Projection projection )
         d->m_viewParams.m_canvasImage->fill( Qt::black );
     }
  
-    d->drawAtmosphere();
+    if ( d->m_viewParams.m_showAtmosphere ) {
+        d->drawAtmosphere();
+    }
 
     // Update texture map during the repaint that follows:
     setMapTheme( d->m_model->mapTheme() );
@@ -631,7 +641,9 @@ void MarbleMapPrivate::doResize()
         m_viewParams.m_canvasImage->fill( Qt::black );
     }
 
-    drawAtmosphere();
+    if ( m_viewParams.m_showAtmosphere ) {
+        drawAtmosphere();
+    }
 
     // Recreate the 
     delete m_viewParams.m_coastImage;
@@ -977,6 +989,14 @@ void MarbleMap::setShowScaleBar( bool visible )
 void MarbleMap::setShowCompass( bool visible )
 {
     d->m_showCompass = visible;
+}
+
+void MarbleMap::setShowAtmosphere( bool visible )
+{
+    qDebug() << "ATMOSPHERE" << visible;
+    d->m_viewParams.m_showAtmosphere = visible;
+    // Quick and dirty way to 
+    d->doResize();
 }
 
 void MarbleMap::setShowClouds( bool visible )

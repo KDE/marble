@@ -335,6 +335,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool  showClouds() const;
 
     /**
+     * @brief  Return whether the atmospheric glow is visible.
+     * @return The cloud cover visibility.
+     */
+    bool  showAtmosphere() const;
+
+    /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
@@ -661,6 +667,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the cloud cover
      */
     void setShowClouds( bool visible );
+
+    /**
+     * @brief  Set whether the atmospheric glow is visible
+     * @param  visible  visibility of the atmospheric glow
+     */
+    void setShowAtmosphere( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible

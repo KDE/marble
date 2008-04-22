@@ -11,6 +11,7 @@
 
 #include "MarbleWidgetPopupMenu.h"
 
+#include <QtGui/QClipboard>
 #include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
@@ -40,32 +41,33 @@ void MarbleWidgetPopupMenu::createActions()
     //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
     m_earthaction = new QAction( tr( "&Earth" ), this );
     m_earthaction->setData( 0 );
-    m_posaction = new QAction( tr( "0 N 0 W" ), this );
-    m_posaction->setFont( QFont( "Sans Serif", 7, 50, false ) );
+    m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
-    m_pAddMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
-    m_rmbMenu->addAction( m_pAddMeasurePointAction );
-    m_pRemoveMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
+    m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
+    m_rmbMenu->addAction( m_addMeasurePointAction );
+    m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
-    m_pRemoveMeasurePointsAction->setEnabled(false);
-    m_rmbMenu->addAction( m_pRemoveMeasurePointsAction );
+    m_removeMeasurePointsAction->setEnabled(false);
+    m_rmbMenu->addAction( m_removeMeasurePointsAction );
     m_rmbMenu->addSeparator();
-    m_pSetHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
-    m_rmbMenu->addAction( m_pSetHomePointAction );
+    m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
+    m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addSeparator();
 
-    m_pAboutDialogAction = new QAction( tr( "&About" ), this );
-    m_rmbMenu->addAction( m_pAboutDialogAction );
+    m_aboutDialogAction = new QAction( tr( "&About" ), this );
+    m_rmbMenu->addAction( m_aboutDialogAction );
 
-    connect( m_pSetHomePointAction,    SIGNAL( triggered() ),
+    connect( m_setHomePointAction,    SIGNAL( triggered() ),
                                        SLOT( slotSetHomePoint() ) );
-    connect( m_pAddMeasurePointAction, SIGNAL( triggered() ),
+    connect( m_addMeasurePointAction, SIGNAL( triggered() ),
                                        SLOT( slotAddMeasurePoint() ) );
-    connect( m_pRemoveMeasurePointsAction, SIGNAL( triggered() ),
+    connect( m_removeMeasurePointsAction, SIGNAL( triggered() ),
                                            SLOT( slotRemoveMeasurePoints() ) );
-    connect( m_pAboutDialogAction, SIGNAL( triggered() ), 
+    connect( m_aboutDialogAction, SIGNAL( triggered() ), 
                                    SLOT( slotAboutDialog() ) );
+    connect( m_copyCoordinateAction,SIGNAL( triggered() ),
+                         SLOT( slotCopyCoordinates() ) );
 }
 
 
@@ -100,10 +102,13 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataPoint::Radian );
 
-    // Any idea what this could do on activation?
-    m_posaction->setEnabled( false );
-    m_posaction->setText( GeoDataPoint( lon, lat ).toString() );
-    m_lmbMenu->addAction( m_posaction );
+    m_copyCoordinateAction->setEnabled( true );
+    m_copyCoordinateAction->setText( "Copy Coordinates" );
+    m_copyCoordinateAction->setData( curpos );
+
+    QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataPoint( lon, lat, GeoDataPoint::Radian ).toString() );
+    positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
+    positionMenu->addAction( m_copyCoordinateAction );
 
     m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
@@ -112,8 +117,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     QPoint curpos = QPoint( xpos, ypos );
-    m_pSetHomePointAction->setData( curpos );
-    m_pAddMeasurePointAction->setData( curpos );
+    m_setHomePointAction->setData( curpos );
+    m_addMeasurePointAction->setData( curpos );
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
@@ -132,7 +137,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
 
 void MarbleWidgetPopupMenu::slotSetHomePoint()
 {
-    QPoint  p = m_pSetHomePointAction->data().toPoint();
+    QPoint  p = m_setHomePointAction->data().toPoint();
 
     double  lat;
     double  lon;
@@ -145,23 +150,40 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     }
 }
 
+void MarbleWidgetPopupMenu::slotCopyCoordinates()
+{
+    QPoint  p = m_copyCoordinateAction->data().toPoint();
+
+    double  lon;
+    double  lat;
+
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
+    if ( valid == true )
+    {
+        QString  positionString = GeoDataPoint( lon, lat, GeoDataPoint::Radian ).toString();
+        QClipboard  *clipboard = QApplication::clipboard();
+
+        clipboard->setText( positionString );
+    }
+}
+
 void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 {
-    QPoint  p = m_pAddMeasurePointAction->data().toPoint();
+    QPoint  p = m_addMeasurePointAction->data().toPoint();
 
     double  lat;
     double  lon;
 
     m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
 
-    m_pRemoveMeasurePointsAction->setEnabled(true);
+    m_removeMeasurePointsAction->setEnabled(true);
 
     emit addMeasurePoint( lon, lat );
 }
 
 void MarbleWidgetPopupMenu::slotRemoveMeasurePoints()
 {
-    m_pRemoveMeasurePointsAction->setEnabled(false);
+    m_removeMeasurePointsAction->setEnabled(false);
 
     emit removeMeasurePoints();
 }
