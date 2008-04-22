@@ -160,7 +160,7 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
     if ( valid == true )
     {
-        QString  positionString = GeoDataPoint( lon, lat, GeoDataPoint::Radian ).toString();
+        QString  positionString = GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Radian ).toString();
         QClipboard  *clipboard = QApplication::clipboard();
 
         clipboard->setText( positionString );

@@ -23,7 +23,6 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
   : m_altitude( _alt ),
     m_detail( _detail )
 {
-
     switch(unit){
     case Radian:
         m_q = Quaternion( _lon, _lat );

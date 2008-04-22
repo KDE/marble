@@ -1,5 +1,18 @@
 2008-04-22  Torsten Rahn  <rahn@kde.org>
 
+    * ChangeLog:
+    * src/QtMainWindow.cpp:
+    * src/lib/MarbleWidgetPopupMenu.cpp:
+    * src/lib/geodata/data/GeoDataPoint.cpp:
+
+    - Don't forget that GeoDataPoint makes the altitude parameter
+      mandatory when choosing units ... Fixes wrong coordinates 
+      being copied.
+    - Fixing missing colons in Patrick's and Jens' Changelog
+      entries. ( prevents proper highlightning in Kate ) :-)
+
+2008-04-22  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleWidgetPopupMenu.{cpp,h}:
 
     - Small m_p-> m_ cleanup, "Copy Coordinates" Action on LMB.
@@ -16,8 +29,8 @@
 
 2008-04-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.h
-    * src/lib/MapThemeManager.cpp
+    * src/lib/MapThemeManager.h:
+    * src/lib/MapThemeManager.cpp:
 
     Use QFileSystemWatcher in MapThemeManager.
     On the signal directoryChanged the list of watched paths gets
@@ -30,30 +43,30 @@
 
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.cpp
+    * src/lib/MapThemeManager.cpp:
 
     - Remove unused local variable.
     - Remove pointless delete.
 
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.cpp
+    * src/lib/MapThemeManager.cpp:
 
     - Don't allocate local GeoSceneParser variable dynamically.
     - Remove useless null check.
 
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.cpp
-    * src/lib/TileCreator.cpp
-    * src/marble_part.cpp
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/TileCreator.cpp:
+    * src/marble_part.cpp:
 
     Remove extra semicolons.
 
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.h
-    * src/lib/MapThemeManager.cpp
+    * src/lib/MapThemeManager.h:
+    * src/lib/MapThemeManager.cpp:
 
     Move code from MapThemeManager::findMapThemes that is duplicated
     for local (.marble) and system (kde/share/apps/marble) directories
@@ -61,8 +74,8 @@
 
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MapThemeManager.cpp
-    * src/lib/MapThemeManager.h
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MapThemeManager.h:
 
     This patchs removes the parameter of MapThemeManager::findMapThemes because it 
     is constant ("maps/"). Removes redundant occurrence of literal "maps/" 
@@ -70,20 +83,20 @@
 
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * CMakeLists.txt
-    * src/tilecreator/CMakeLists.txt
+    * CMakeLists.txt:
+    * src/tilecreator/CMakeLists.txt:
     
     - make the option useful (it was behind the actual code using it)
     - fix one typo
     
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * CMakeLists.txt
-    * data/CMakeLists.txt
-    * src/tilecreator/CMakeLists.txt
+    * CMakeLists.txt:
+    * data/CMakeLists.txt:
+    * src/tilecreator/CMakeLists.txt:
     
-    * src/lib/MarbleDirs.cpp
-    * src/tilecreator/tccore.cpp
+    * src/lib/MarbleDirs.cpp:
+    * src/tilecreator/tccore.cpp:
     
     - add an option to create the tiles of srtm data at compiletime
       this should make it possible to ship marble with it
@@ -117,8 +130,8 @@
 
 2008-04-20  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/tilecreator/main.cpp
-    * src/tilecreator/CMakeLists.txt
+    * src/tilecreator/main.cpp:
+    * src/tilecreator/CMakeLists.txt:
     
     - add a first layout how to run the tilecreator in cmake
 
@@ -140,24 +153,24 @@
 
 2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * AbstractScanlineTextureMapper.cpp  
-    * CMakeLists.txt  
-    * MergedLayerDecorator.cpp  
-    * TextureTile.cpp  
-    * TextureTile.h  
-    * TileCreator.cpp  
-    * TileLoader.cpp  
-    * TileLoader.h  
-    * TileLoaderHelper.cpp  
-    * global.h  
+    * AbstractScanlineTextureMapper.cpp:  
+    * CMakeLists.txt:
+    * MergedLayerDecorator.cpp:
+    * TextureTile.cpp:
+    * TextureTile.h:
+    * TileCreator.cpp:
+    * TileLoader.cpp:
+    * TileLoader.h:
+    * TileLoaderHelper.cpp:
+    * global.h:
 
     - use TileLoaderHelper helper functions now 
     - move the TileDigits constant to global.h
 
 2008-04-19  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/TileLoaderHelper.h
-    * src/lib/TileLoaderHelper.cpp
+    * src/lib/TileLoaderHelper.h:
+    * src/lib/TileLoaderHelper.cpp:
     
     Move some tile independent functions out of TileLoader so they 
     can be used from TileLoader and TileCreator
@@ -292,20 +305,20 @@
     
 2008-04-16  Patrick Spendrin <ps_ml@gmx.de>
 
-* CMakeLists.txt
-* lib/CMakeLists.txt
-* lib/geodata/geodata_export.h
-* lib/geodata/data/GeoDataContainer.h
-* lib/geodata/handlers/dgml/DGMLElementDictionary.h
-* lib/geodata/parser/GeoDataParser.h
-* lib/geodata/parser/GeoParser.h
-* lib/geodata/parser/GeoSceneParser.h
-* lib/geodata/scene/GeoSceneDocument.h
-* lib/geodata/scene/GeoSceneHead.h
-* lib/geodata/scene/GeoSceneIcon.h
-* lib/geodata/scene/GeoSceneProperty.h
-* lib/geodata/scene/GeoSceneSettings.h
-* lib/geodata/scene/GeoSceneZoom.h
+    * CMakeLists.txt:
+    * lib/CMakeLists.txt:
+    * lib/geodata/geodata_export.h:
+    * lib/geodata/data/GeoDataContainer.h:
+    * lib/geodata/handlers/dgml/DGMLElementDictionary.h:
+    * lib/geodata/parser/GeoDataParser.h:
+    * lib/geodata/parser/GeoParser.h:
+    * lib/geodata/parser/GeoSceneParser.h:
+    * lib/geodata/scene/GeoSceneDocument.h:
+    * lib/geodata/scene/GeoSceneHead.h:
+    * lib/geodata/scene/GeoSceneIcon.h:
+    * lib/geodata/scene/GeoSceneProperty.h:
+    * lib/geodata/scene/GeoSceneSettings.h:
+    * lib/geodata/scene/GeoSceneZoom.h:
 
     fix geodata library part
     The export should be correct if this library should be used outside of libmarblewidget
