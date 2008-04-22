@@ -13,12 +13,15 @@
 #ifndef MAPTHEMEMANAGER_H
 #define MAPTHEMEMANAGER_H
 
-
+#include <QtCore/QList>
 #include <QtCore/QObject>
+#include <QtCore/QStringList>
 
 #include "marble_export.h"
 
 class GeoSceneDocument;
+class QFileSystemWatcher;
+class QStandardItem;
 class QStandardItemModel;
 
 
@@ -75,15 +78,43 @@ class MapThemeManager : public QObject
      */
     void updateMapThemeModel();
 
+    void directoryChanged( const QString& path );
+    void fileChanged( const QString & path );
+
  private:
     /**
-     * @brief Helper method for findMapThemes()
+     * @brief Adds directory paths and .dgml file paths to the given QStringList.
+     */
+    static void addMapThemePaths( const QString& mapPathName, QStringList& result );
+
+    /**
+     * @brief Helper method for findMapThemes(). Searches for .dgml files below
+     *        given directory path.
      */
     static QStringList findMapThemes( const QString& basePath );
 
+    /**
+     * @brief Searches for .dgml files below local and system map directory.
+     */
     static QStringList findMapThemes();
 
+    static GeoSceneDocument* loadMapThemeFile( const QString& mapThemePath );
+
+    /**
+     * @brief Returns all directory paths and .dgml file paths below local and
+     *        system map directory.
+     */
+    static QStringList pathsToWatch();
+
+    /**
+     * @brief Helper method for updateMapThemeModel().
+     */
+    QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
+
+    void initFileSystemWatcher();
+
     QStandardItemModel* m_mapThemeModel;
+    QFileSystemWatcher* m_fileSystemWatcher;
 };
 
 

@@ -15,6 +15,8 @@
 // Qt
 #include <QtCore/QDir>
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QFileSystemWatcher>
 #include <QtGui/QStandardItemModel>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
@@ -26,10 +28,17 @@
 #include "MarbleDirs.h"
 
 
+namespace {
+    const QString mapDirName = "maps";
+    const int columnRelativePath = 1;
+}
+
+
 MapThemeManager::MapThemeManager(QObject *parent)
     : QObject(parent)
 {
     m_mapThemeModel = new QStandardItemModel( 0, 3 );
+    initFileSystemWatcher();
 
     // Delayed model initialization
     QTimer::singleShot( 0, this, SLOT( updateMapThemeModel() ) );
@@ -38,14 +47,32 @@ MapThemeManager::MapThemeManager(QObject *parent)
 MapThemeManager::~MapThemeManager()
 {
     delete m_mapThemeModel;
+    delete m_fileSystemWatcher;
+}
+
+void MapThemeManager::initFileSystemWatcher()
+{
+    QStringList paths = pathsToWatch();
+
+    QStringListIterator it( paths );
+    while ( it.hasNext() )
+        qDebug() << "path to watch: " << it.next();
+
+    m_fileSystemWatcher = new QFileSystemWatcher( paths, this );
+    connect( m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
+             this, SLOT( directoryChanged( const QString& )));
+    connect( m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
+             this, SLOT( fileChanged( const QString& )));
 }
 
 GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
 {
-    // Read the maptheme into d->m_maptheme.
-    QString mapThemePath = QString("maps/%1").arg( mapThemeStringID );
+    const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
+    return loadMapThemeFile( mapThemePath );
+}
 
-
+GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath )
+{
     // Check whether file exists
     QFile file( MarbleDirs::path( mapThemePath ) );
     if (!file.exists()) {
@@ -72,9 +99,21 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     return document;
 }
 
+QStringList MapThemeManager::pathsToWatch()
+{
+    QStringList result;
+    const QString localMapPathName = MarbleDirs::localPath() + '/' + mapDirName;
+    const QString systemMapPathName = MarbleDirs::systemPath() + '/' + mapDirName;
+
+    result << localMapPathName;
+    result << systemMapPathName;
+    addMapThemePaths( localMapPathName, result );
+    addMapThemePaths( systemMapPathName, result );
+    return result;
+}
+
 QStringList MapThemeManager::findMapThemes( const QString& basePath )
 {
-    const QString mapDirName = "maps/";
     const QString mapPathName = basePath + '/' + mapDirName;
 
     QDir paths = QDir( mapPathName );
@@ -87,14 +126,14 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
 
     for ( int planet = 0; planet < mapPaths.size(); ++planet ) {
 
-        QDir themeDir = QDir( mapPathName + mapPaths.at( planet ) );
+        QDir themeDir = QDir( mapPathName + '/' + mapPaths.at( planet ) );
         QStringList themeMapPaths = themeDir.entryList( 
                                      QStringList( "*" ),
                                      QDir::AllDirs |
                                      QDir::NoSymLinks |
                                      QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < themeMapPaths.size(); ++theme ) {
-            mapDirs << mapPathName + mapPaths.at( planet ) + '/'
+            mapDirs << mapPathName + '/' + mapPaths.at( planet ) + '/'
                 + themeMapPaths.at( theme );
         }
     }
@@ -149,6 +188,61 @@ QStandardItemModel* MapThemeManager::mapThemeModel()
     return m_mapThemeModel;
 }
 
+QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThemeID )
+{
+    qDebug() << "About to create: " << mapThemeID;
+    QList<QStandardItem *> itemList;
+
+    GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
+    if ( !mapTheme ) {
+        return itemList;
+    }
+
+    QPixmap themeIconPixmap;
+    QString relativePath;
+
+    relativePath = mapDirName + '/'
+        + mapTheme->head()->target() + '/' + mapTheme->head()->theme() + '/'
+        + mapTheme->head()->icon()->pixmap();
+    themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+
+    if ( themeIconPixmap.isNull() ) {
+        relativePath = "svg/application-x-marble-gray.png"; 
+        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+    }
+    else {
+        // Make sure we don't keep excessively large previews in memory
+        // TODO: Scale the icon down to the default icon size in katlasselectview.
+        //       For now maxIconSize already equals what's expected by the listview.
+        QSize maxIconSize( 136, 136 );
+        themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
+                                                  Qt::KeepAspectRatio,
+                                                  Qt::SmoothTransformation );
+    }
+
+    QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+
+    QString name = mapTheme->head()->name();
+    QString description = mapTheme->head()->description();
+    qDebug() << "item: name: " << name << "description: " << description;
+
+    QStandardItem *item = new QStandardItem( name );
+    item->setData( name, Qt::DisplayRole );
+    item->setData( mapThemeIcon, Qt::DecorationRole );
+    item->setData( QString( "<span style=\" max-width: 150 px;\"> " 
+                   + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
+
+    itemList << item;
+    itemList << new QStandardItem( mapTheme->head()->target() + "/" 
+                                   + mapTheme->head()->theme() + "/"
+                                   + mapTheme->head()->theme() + ".dgml" );
+    itemList << new QStandardItem( description );
+
+    delete mapTheme;
+
+    return itemList;
+}
+
 void MapThemeManager::updateMapThemeModel()
 {
     m_mapThemeModel->clear();
@@ -160,59 +254,99 @@ void MapThemeManager::updateMapThemeModel()
     QStringList stringlist = findMapThemes();
     QStringListIterator  it(stringlist);
 
-    // Make sure we don't keep excessively large previews in memory
-    // TODO: Scale the icon down to the default icon size in katlasselectview.
-    //       For now maxIconSize already equals what's expected by the listview.
-    QSize maxIconSize( 136,136 ); 
-
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
         qDebug() << "About to add: " << mapThemeID;
 
-        GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
-        
-        if ( !mapTheme ) {
-            continue;
+	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
+        if ( !itemList.empty() ) {
+            m_mapThemeModel->appendRow(itemList);
         }
+    }
+}
 
-        QPixmap themeIconPixmap;
-        QString relativePath;
+void MapThemeManager::directoryChanged( const QString& path )
+{
+    qDebug() << "directoryChanged:" << path;
 
-        relativePath = "maps/" 
-                     + mapTheme->head()->target() + "/" + mapTheme->head()->theme() + "/" 
-                     + mapTheme->head()->icon()->pixmap();
-        themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+    QStringList paths = pathsToWatch();
+    m_fileSystemWatcher->addPaths( paths );
 
-        if ( themeIconPixmap.isNull() ) {
-            relativePath = "svg/application-x-marble-gray.png"; 
-            themeIconPixmap.load( MarbleDirs::path( relativePath ) );
+    updateMapThemeModel();
+}
+
+void MapThemeManager::fileChanged( const QString& path )
+{
+    qDebug() << "fileChanged:" << path;
+
+    // 1. if the file does not (anymore) exist, it got deleted and we
+    //    have to delete the corresponding item from the model
+    // 2. if the file exists it is changed and we have to replace
+    //    the item with a new one.
+
+    QString mapThemeId = path.section( '/', -3 );
+    qDebug() << "mapThemeId:" << mapThemeId;
+    QList<QStandardItem *> matchingItems = m_mapThemeModel->findItems( mapThemeId,
+                                                                       Qt::MatchFixedString
+				                                       | Qt::MatchCaseSensitive,
+                                                                       columnRelativePath );
+    qDebug() << "matchingItems:" << matchingItems.size();
+    Q_ASSERT( matchingItems.size() <= 1 );
+    int insertAtRow = 0;
+
+    if ( matchingItems.size() == 1 ) {
+        const int row = matchingItems.front()->row();
+	insertAtRow = row;
+        QList<QStandardItem *> toBeDeleted = m_mapThemeModel->takeRow( row );
+	while ( !toBeDeleted.isEmpty() ) {
+            delete toBeDeleted.takeFirst();
         }
-        else {
-            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                              Qt::KeepAspectRatio, Qt::SmoothTransformation );
-        } 
+    }
 
-        QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+    QFileInfo fileInfo( path );
+    if ( fileInfo.exists() ) {
+        QList<QStandardItem *> newMapThemeRow = createMapThemeRow( mapThemeId );
+        if ( !newMapThemeRow.empty() ) {
+            m_mapThemeModel->insertRow( insertAtRow, newMapThemeRow );
+        }
+    }
+}
 
-        QString name = mapTheme->head()->name();
-        QString description = mapTheme->head()->description();
+//
+// <mapPathName>/<orbDirName>/<themeDirName>
+//
+void MapThemeManager::addMapThemePaths( const QString& mapPathName, QStringList& result )
+{
+    QDir mapPath( mapPathName );
+    QStringList orbDirNames = mapPath.entryList( QStringList( "*" ),
+                                                 QDir::AllDirs
+                                                 | QDir::NoSymLinks
+                                                 | QDir::NoDotAndDotDot );
+    QStringListIterator itOrb( orbDirNames );
+    while ( itOrb.hasNext() ) {
+        QString orbPathName = mapPathName + '/' + itOrb.next();
+        result << orbPathName;
 
-        QList<QStandardItem *> itemList;
-        QStandardItem *item = new QStandardItem( name );
-        item->setData( name, Qt::DisplayRole );
-        item->setData( mapThemeIcon, Qt::DecorationRole );
-        item->setData( QString( "<span style=\" max-width: 150 px;\"> " 
-                       + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
+        QDir orbPath( orbPathName );
+        QStringList themeDirNames = orbPath.entryList( QStringList( "*" ),
+                                                       QDir::AllDirs
+                                                       | QDir::NoSymLinks
+                                                       | QDir::NoDotAndDotDot );
+        QStringListIterator itThemeDir( themeDirNames );
+        while ( itThemeDir.hasNext() ) {
+            QString themePathName = orbPathName + '/' + itThemeDir.next();
+            result << themePathName;
 
-        itemList << item;
-        itemList << new QStandardItem( mapTheme->head()->target() + "/" 
-                                       + mapTheme->head()->theme() + "/"
-                                       + mapTheme->head()->theme() + ".dgml" );
-        itemList << new QStandardItem( description );
-
-        m_mapThemeModel->appendRow(itemList);
-
-        delete mapTheme;
+            QDir themePath( themePathName );
+	    QStringList themeFileNames = themePath.entryList( QStringList( "*.dgml" ),
+                                                              QDir::Files
+                                                              | QDir::NoSymLinks );
+            QStringListIterator itThemeFile( themeFileNames );
+            while ( itThemeFile.hasNext() ) {
+                QString themeFilePathName = themePathName + '/' + itThemeFile.next();
+                result << themeFilePathName;
+            }
+        }
     }
 }
 

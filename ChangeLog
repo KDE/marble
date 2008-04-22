@@ -1,3 +1,17 @@
+2008-04-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MapThemeManager.h
+    * src/lib/MapThemeManager.cpp
+
+    Use QFileSystemWatcher in MapThemeManager.
+    On the signal directoryChanged the list of watched paths gets
+    updated and MapThemeModel gets updated using updateMapThemeModel.
+    On the signal fileChanged the corresponding item of the model
+    gets removed or updated.
+    There is some potential to optimize left. For example in case of
+    directoryChanged we could update only the corresponding part of
+    the model if any.
+
 2008-04-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MapThemeManager.cpp
