@@ -11,7 +11,7 @@
 
 #include "KMLObject.h"
 
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
 
 #ifdef KML_DEBUG

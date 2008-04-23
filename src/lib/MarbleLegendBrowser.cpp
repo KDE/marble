@@ -19,7 +19,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
-#include <QRegExp>
+#include <QtCore/QRegExp>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneSection.h"

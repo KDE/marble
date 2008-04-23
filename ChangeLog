@@ -1,4 +1,16 @@
-2008-04-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
+2008-04-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * kdeedu/marble/src/lib/XmlHandler.cpp:
+    * kdeedu/marble/src/lib/MarbleLegendBrowser.cpp:
+    * kdeedu/marble/src/lib/GpxFileViewItem.h:
+    * kdeedu/marble/src/lib/ViewParams.cpp:
+    * kdeedu/marble/src/lib/BoundingBox.cpp:
+    * kdeedu/marble/src/lib/kml/KMLObject.cpp:
+    * kdeedu/marble/src/lib/SunControlWidget.h:
+
+    Fix include statements for Qt header: add Qt module.
+
+2008-04-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * kdeedu/marble/src/lib/gps/GpxFile.cpp:
     * kdeedu/marble/src/lib/gps/Track.cpp:

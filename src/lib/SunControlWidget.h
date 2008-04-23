@@ -14,8 +14,8 @@
 
 
 #include <QtGui/QDialog>
-#include <QDebug>
-#include <QTimer>
+#include <QtCore/QDebug>
+#include <QtCore/QTimer>
 
 #include "ui_SunControlWidget.h"
 #include "SunLocator.h"

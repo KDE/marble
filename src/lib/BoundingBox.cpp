@@ -12,7 +12,7 @@
 #include "BoundingBox.h"
 
 #include <QtCore/QPointF>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 BoundingBox::BoundingBox()

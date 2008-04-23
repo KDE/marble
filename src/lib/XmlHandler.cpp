@@ -13,7 +13,7 @@
 #include "XmlHandler.h"
 
 #include <cmath>
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 
 #include "global.h"
 #include "GeoDataPlacemark.h"

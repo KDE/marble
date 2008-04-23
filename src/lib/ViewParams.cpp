@@ -11,7 +11,7 @@
 
 #include "ViewParams.h"
 
-#include <QImage>
+#include <QtGui/QImage>
 
 
 ViewParams::ViewParams( )

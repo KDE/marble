@@ -12,7 +12,7 @@
 #ifndef GPXFILEVIEWITEM_H
 #define GPXFILEVIEWITEM_H
 
-#include <QObject>
+#include <QtCore/QObject>
 #include "AbstractFileViewItem.h"
 
 class GpxFile;
