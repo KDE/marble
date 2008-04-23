@@ -21,7 +21,7 @@
 
 #include "KMLDocumentTagHandler.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
 #include "GeoDataParser.h"

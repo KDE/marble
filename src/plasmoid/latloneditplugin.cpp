@@ -19,11 +19,11 @@
 
 #include "latloneditplugin.h"
 
-#include <QObject>
-#include <QDesignerCustomWidgetInterface>
-#include <QString>
-#include <QWidget>
-#include <QIcon>
+#include <QtCore/QObject>
+#include <QtDesigner/QDesignerCustomWidgetInterface>
+#include <QtCore/QString>
+#include <QtGui/QWidget>
+#include <QtGui/QIcon>
 
 #include "latlonedit.h"
 

@@ -13,7 +13,7 @@
 #include "Track.h"
 
 // QT
-#include <QDebug>
+#include <QtCore/QDebug>
 
 // Marble
 #include "BoundingBox.h"

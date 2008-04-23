@@ -13,7 +13,7 @@
 
 #include <QtCore/QFile>
 #include <QtXml/QXmlInputSource>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "Track.h"
 #include "Route.h"

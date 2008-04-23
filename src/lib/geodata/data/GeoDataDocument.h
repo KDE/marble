@@ -23,8 +23,8 @@
 #ifndef GeoDataDocument_h
 #define GeoDataDocument_h
 
-#include <QHash>
-#include <QVector>
+#include <QtCore/QHash>
+#include <QtCore/QVector>
 
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"

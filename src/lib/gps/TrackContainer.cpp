@@ -10,7 +10,7 @@
 
 #include "TrackContainer.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "BoundingBox.h"
 

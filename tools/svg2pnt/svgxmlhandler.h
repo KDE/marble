@@ -14,7 +14,7 @@
 #define SVGXMLHHANDLER_H
 
 
-#include <QXmlDefaultHandler>
+#include <QtXml/QXmlDefaultHandler>
 
 
 class SVGXmlHandler : public QXmlDefaultHandler

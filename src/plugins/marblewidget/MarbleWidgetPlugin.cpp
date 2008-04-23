@@ -10,7 +10,7 @@
 
 #include "MarbleWidgetPlugin.h"
 
-#include <QtPlugin>
+#include <QtCore/QtPlugin>
 
 #include "../../lib/MarbleModel.h"
 #include "../../lib/MarbleWidget.h"

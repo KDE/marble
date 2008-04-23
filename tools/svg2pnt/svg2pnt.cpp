@@ -10,8 +10,8 @@
 //
 
 
-#include <QApplication>
-#include <QDebug>
+#include <QtGui/QApplication>
+#include <QtCore/QDebug>
 
 #include "svgxmlhandler.h"
 

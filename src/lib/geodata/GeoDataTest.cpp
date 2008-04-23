@@ -19,10 +19,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QApplication>
-#include <QDebug>
-#include <QFile>
-#include <QStringList>
+#include <QtGui/QApplication>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
 
 #include "GeoDataFolder.h"
 

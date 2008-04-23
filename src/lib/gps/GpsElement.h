@@ -10,8 +10,8 @@
 #ifndef GPSELEMENT_H
 #define GPSELEMENT_H
 
-#include <QUrl>
-#include <QVector>
+#include <QtCore/QUrl>
+#include <QtCore/QVector>
 
 /**
  * @brief common details of every gps element

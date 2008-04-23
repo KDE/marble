@@ -14,7 +14,7 @@
 #include <QtCore/Qt>
 #include <QtCore/QFile>
 #include <QtCore/QVectorIterator>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include <config-marble.h>
 

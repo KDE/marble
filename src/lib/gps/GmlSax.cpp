@@ -10,8 +10,8 @@
 
 #include "GmlSax.h"
 
-#include <QDebug>
-#include <QMessageBox>
+#include <QtCore/QDebug>
+#include <QtGui/QMessageBox>
 
 GmlSax::GmlSax( double *lon, double *lat )
 {

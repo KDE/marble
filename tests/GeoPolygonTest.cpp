@@ -10,10 +10,10 @@
 // Copyright 2007      Tim Sutton   <tim@linfiniti.com>
 //
 
-#include <QtGui> //needed because this is a gui test
+#include <QtGui/QtGui> //needed because this is a gui test
 #include <QtTest/QtTest>
-#include <QtCore>
-#include <QTime>
+#include <QtCore/QtCore>
+#include <QtCore/QTime>
 #include <lib/GeoPolygon.h>
 
 class GeoPolygonTest: public QObject

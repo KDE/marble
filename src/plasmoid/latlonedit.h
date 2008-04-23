@@ -20,9 +20,9 @@
 #ifndef LATLONEDIT_H
 #define LATLONEDIT_H
 
-#include <QWidget>
+#include <QtGui/QWidget>
 ////QWidgetPlugin is used for Qt Designer
-//#include <QtPlugin>
+//#include <QtCore/QtPlugin>
 
 class QSpinBox;
 class QComboBox;

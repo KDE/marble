@@ -11,7 +11,7 @@
 #include "AbstractLayerContainer.h"
 #include "ClipPainter.h"
 #include "BoundingBox.h"
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include <QtCore/QPointF>
 

@@ -11,7 +11,7 @@
 
 #include "GeoDataObject.h"
 
-#include <QtGlobal>
+#include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
 
 GeoDataObject::GeoDataObject()

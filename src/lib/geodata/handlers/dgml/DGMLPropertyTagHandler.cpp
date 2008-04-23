@@ -21,7 +21,7 @@
 
 #include "DGMLPropertyTagHandler.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAttributeDictionary.h"

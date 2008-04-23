@@ -21,7 +21,7 @@
 
 #include "GPXgpxTagHandler.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"

@@ -21,7 +21,7 @@
 
 #include "KMLFolderTagHandler.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
 #include "GeoDataFolder.h"

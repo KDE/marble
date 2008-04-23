@@ -19,7 +19,7 @@
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method, 
                           QObject *parent ) 

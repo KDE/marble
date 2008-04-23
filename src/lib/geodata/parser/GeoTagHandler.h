@@ -22,7 +22,7 @@
 #ifndef GeoTagHandler_h
 #define GeoTagHandler_h
 
-#include <QHash>
+#include <QtCore/QHash>
 
 class GeoNode;
 class GeoParser;

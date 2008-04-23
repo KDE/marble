@@ -19,7 +19,7 @@
 
 
 //Qt
-#include <QPainter>
+#include <QtGui/QPainter>
 
 
 //KDE

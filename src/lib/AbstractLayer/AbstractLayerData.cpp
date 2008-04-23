@@ -12,7 +12,7 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QPoint>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "ClipPainter.h"
 #include "BoundingBox.h"

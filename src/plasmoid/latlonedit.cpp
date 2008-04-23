@@ -19,13 +19,13 @@
 
 #include "latlonedit.h"
 
-#include <QHBoxLayout>
-#include <QSpinBox>
-#include <QComboBox>
-#include <QLabel>
-#include <QObject>
-#include <QWidget>
-#include <QDebug>
+#include <QtGui/QHBoxLayout>
+#include <QtGui/QSpinBox>
+#include <QtGui/QComboBox>
+#include <QtGui/QLabel>
+#include <QtCore/QObject>
+#include <QtGui/QWidget>
+#include <QtCore/QDebug>
 
 #include <cmath>
 

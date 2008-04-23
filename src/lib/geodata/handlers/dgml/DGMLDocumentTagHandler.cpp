@@ -21,7 +21,7 @@
 
 #include "DGMLDocumentTagHandler.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "DGMLElementDictionary.h"
 #include "GeoSceneParser.h"

@@ -24,7 +24,7 @@
 #include "GeoTagHandler.h"
 
 // Qt
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 // Set to a value greather than 0, to dump tag handlers as they get registered

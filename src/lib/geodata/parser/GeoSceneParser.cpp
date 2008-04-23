@@ -24,7 +24,7 @@
 #include "GeoSceneParser.h"
 
 // Qt
-#include <QDebug>
+#include <QtCore/QDebug>
 
 // Geodata
 #include "GeoSceneDocument.h"

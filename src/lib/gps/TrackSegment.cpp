@@ -19,7 +19,7 @@
 #include <QtGui/QColor>
 
 #include <cmath>
-#include <QDebug>
+#include <QtCore/QDebug>
 
 
 TrackSegment::TrackSegment()
