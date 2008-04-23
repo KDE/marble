@@ -28,6 +28,12 @@
   <entry key="mapTheme" type="String" >
    <default></default>
   </entry>
+  <entry key="showClouds" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="showAtmosphere" type="Bool" >
+   <default>true</default>
+  </entry>
   <entry key="projection" type="Int" >
    <default>0</default>
   </entry>

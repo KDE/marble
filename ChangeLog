@@ -1,5 +1,15 @@
 2008-04-22  Torsten Rahn  <rahn@kde.org>
 
+    * src/marble_part.{cpp,h,rc}:
+    * src/QtMainWindow.cpp:
+    * src/marble.kcfg:
+    * src/marbleui.rc:
+ 
+    - Adding Clouds, Atmosphere and Copy Coordinates to 
+      the KDE interface.
+
+2008-04-22  Torsten Rahn  <rahn@kde.org>
+
     * ChangeLog:
     * src/QtMainWindow.cpp:
     * src/lib/MarbleWidgetPopupMenu.cpp:

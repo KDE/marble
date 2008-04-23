@@ -46,6 +46,9 @@ class MarblePart: public KParts::ReadOnlyPart
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
+    void  copyCoordinates();
+    void  setShowClouds( bool );
+    void  setShowAtmosphere( bool );
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
@@ -71,6 +74,9 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_exportMapAction;
     KAction      *m_printMapAction;
     KAction      *m_copyMapAction;
+    KAction      *m_copyCoordinatesAction;
+    KAction      *m_showCloudsAction;
+    KAction      *m_showAtmosphereAction;
     KAction      *m_sideBarAct;
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;

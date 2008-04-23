@@ -41,6 +41,8 @@
 #include <KStandardDirs>
 
 // Marble library
+#include "GeoDataPoint.h"
+#include "lib/SunControlWidget.h"
 #include "lib/SunControlWidget.h"
 
 // Local dir
@@ -77,9 +79,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_controlView = new ControlView( parentWidget );
     setWidget( m_controlView );
 
-    readSettings();
-
     setupActions();
+    readSettings();
 
     setXMLFile( "marble_part.rc" );
 
@@ -187,6 +188,20 @@ void MarblePart::printMapScreenShot()
     }
 }
 
+void MarblePart::setShowClouds( bool isChecked )
+{
+    m_controlView->marbleWidget()->setShowClouds( isChecked );
+
+    m_showCloudsAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::setShowAtmosphere( bool isChecked )
+{
+    m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
+
+    m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
 void MarblePart::showFullScreen( bool isChecked )
 {
     if ( isChecked ) {
@@ -248,6 +263,19 @@ void MarblePart::copyMap()
     clipboard->setPixmap( mapPixmap );
 }
 
+void MarblePart::copyCoordinates()
+{
+/*
+    double lon = m_controlView->marbleWidget()->centerLongitude();
+    double lat = m_controlView->marbleWidget()->centerLatitude();
+
+    QString  positionString = GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree ).toString();
+    QClipboard  *clipboard = QApplication::clipboard();
+
+    clipboard->setText( positionString );
+*/
+}
+
 void MarblePart::readSettings()
 { 
     // Last location on quit
@@ -274,6 +302,11 @@ void MarblePart::readSettings()
     // Map theme and projection
     m_controlView->marbleWidget()->setMapTheme( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
+
+    m_controlView->marbleWidget()->setShowClouds( MarbleSettings::showClouds() );
+    m_showCloudsAction->setChecked( MarbleSettings::showClouds() );
+    m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
+    m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
 
     slotUpdateSettings();
 }
@@ -303,6 +336,9 @@ void MarblePart::writeSettings()
     MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapTheme() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
 
+    MarbleSettings::setShowClouds( m_controlView->marbleWidget()->showClouds() );
+    MarbleSettings::setShowAtmosphere( m_controlView->marbleWidget()->showAtmosphere() );
+
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
@@ -330,6 +366,12 @@ void MarblePart::setupActions()
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ), actionCollection() );
     m_copyMapAction->setText( i18n( "&Copy Map" ) );
+
+    // Action: Copy Coordinates string
+    m_copyCoordinatesAction = new KAction( this );
+    actionCollection()->addAction( "edit_copy_coordinates", m_copyCoordinatesAction );
+    m_copyCoordinatesAction->setText( i18n( "C&opy Coordinates" ) );
+    connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ), this, SLOT( copyCoordinates() ) );
 
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
@@ -359,6 +401,22 @@ void MarblePart::setupActions()
 
     m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(), actionCollection() );
     connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
+
+    // Action: Show Atmosphere option
+    m_showAtmosphereAction = new KAction( this );
+    actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
+    m_showAtmosphereAction->setCheckable( true );
+    m_showAtmosphereAction->setChecked( true );
+    m_showAtmosphereAction->setText( i18n( "&Atmosphere" ) );
+    connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ), this, SLOT( setShowAtmosphere( bool ) ) );
+
+    // Action: Show Clouds option
+    m_showCloudsAction = new KAction( this );
+    actionCollection()->addAction( "show_clouds", m_showCloudsAction );
+    m_showCloudsAction->setCheckable( true );
+    m_showCloudsAction->setChecked( true );
+    m_showCloudsAction->setText( i18n( "&Clouds" ) );
+    connect( m_showCloudsAction, SIGNAL( triggered( bool ) ), this, SLOT( setShowClouds( bool ) ) );
 
     // Action: Show Sunshade options
     m_showSunAct = new KAction( this );
@@ -474,7 +532,7 @@ void MarblePart::editSettings()
 
 void MarblePart::slotUpdateSettings()
 {
-    qDebug() << "Aktualisiert";
+    qDebug() << "Updating Settings ...";
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
 

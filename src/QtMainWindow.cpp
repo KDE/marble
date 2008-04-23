@@ -97,7 +97,6 @@ void MainWindow::createActions()
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
      m_copyCoordinatesAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("C&opy Coordinates"), this);
-//     m_copyMapAct->setShortcut(tr("Ctrl+C"));
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
