@@ -16,6 +16,7 @@
 #include <QtCore/QTime>
 #include <QtGui/QFileDialog>
 
+#include <lib/global.h>
 #include <lib/MarbleWidget.h>
 #include <lib/MarbleModel.h>
 
@@ -26,8 +27,9 @@ MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
 
 void MarbleTest::timeDemo()
 {
-    m_marbleWidget->show();
     m_marbleWidget->zoomView( 1500 );
+    m_marbleWidget->setMapTheme( "earth/srtm/srtm.dgml" );
+    m_marbleWidget->setMapQuality( Marble::Normal );
 //    m_marbleWidget->resize( 800, 600 );
     m_marbleWidget->centerOn( 9.4, 54.8 );
     QTime t;
@@ -41,14 +43,6 @@ void MarbleTest::timeDemo()
     m_marbleWidget->setShowRivers( false );
     m_marbleWidget->setShowLakes( false );
 */
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveUp();
-            QCoreApplication::flush();
-        }
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveDown();
-            QCoreApplication::flush();
-        }
 
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
@@ -63,16 +57,7 @@ void MarbleTest::timeDemo()
 
     t.start();
 
-    for ( int j = 0; j < 100; ++j ) {
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveUp();
-            QCoreApplication::flush();
-        }
-        for ( int k = 0; k < 10; ++k ) {
-            m_marbleWidget->moveDown();
-            QCoreApplication::flush();
-        }
-
+    for ( int j = 0; j < 10; ++j ) {
         for ( int k = 0; k < 10; ++k ) {
             m_marbleWidget->moveRight();
             QCoreApplication::flush();
@@ -84,7 +69,7 @@ void MarbleTest::timeDemo()
     }
 
     qDebug( "Timedemo finished in %ims", t.elapsed() );
-    qDebug() <<  QString("= %1 fps").arg(4000*1000/(double)(t.elapsed()));
+    qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
 
 }
 
