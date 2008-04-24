@@ -24,19 +24,20 @@
 #include <QtCore/QString>
 
 #include "SunLocator.h"
+#include "TileId.h"
 #include "MergedLayerDecorator.h"
 
 class TextureTile : public QObject {
     Q_OBJECT
 
  public:
-    TextureTile( int id );
+    TextureTile( TileId const& tid );
 
     virtual ~TextureTile();
     
     void loadRawTile(const QString& theme, int level, int x, int y);
 
-    int  id() const           { return m_id; }
+    TileId const& id() const  { return m_id; }
     int  depth() const        { return m_depth; }
 
     bool used() const         { return m_used; }
@@ -60,7 +61,7 @@ class TextureTile : public QObject {
  protected:
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
 
-    int      m_id;
+    TileId   m_id;
 
     QImage   m_rawtile;
 

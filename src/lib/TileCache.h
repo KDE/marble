@@ -23,6 +23,7 @@
 #include <QtCore/QCache>
 #include <QtCore/QObject>
 #include "TextureTile.h"
+#include "TileId.h"
 
 
 /** 
@@ -43,17 +44,17 @@ class TileCache : public QObject
     // In opposite to QPixmapCache we can create several caches
     void clear() { m_cache.clear(); }
 
-    bool contains( int key );
-    bool find( int key, TextureTile* tile );
-    bool insert( int key, TextureTile* tile );
-    void remove( int key ){ m_cache.remove( key ); }
-    TextureTile* take( int key );
+    bool contains( TileId const& key );
+    bool find( TileId const& key, TextureTile* tile );
+    bool insert( TileId const& key, TextureTile* tile );
+    void remove( TileId const& key ){ m_cache.remove( key ); }
+    TextureTile* take( TileId const& key );
 
     int cacheLimit() const { return ( m_cache.maxCost() / 1024 ); }
     void setCacheLimit( int cacheLimit ) { m_cache.setMaxCost( 1024 * cacheLimit ); }
 
  private:
-    QCache<int, TextureTile> m_cache;
+    QCache<TileId, TextureTile> m_cache;
 };
 
 

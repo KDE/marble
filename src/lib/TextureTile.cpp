@@ -55,7 +55,7 @@ static uchar **jumpTableFromQImage8( QImage &img )
     return jumpTable;
 }
 
-TextureTile::TextureTile( int id )
+TextureTile::TextureTile( TileId const& id )
     : QObject(),
       jumpTable8(0),
       jumpTable32(0),
@@ -158,7 +158,7 @@ void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
       }
       else {
           //      qDebug() << "emit downloadTile(" << relfilename << ");";
-          emit downloadTile( relfilename, QString::number( m_id ) );
+          emit downloadTile( relfilename, m_id.toString() );
       }
   }
   

@@ -28,6 +28,7 @@
 #include "TextureTile.h"
 #include "MarbleDirs.h"
 #include "TileCache.h"
+#include "TileId.h"
 #include "MarbleModel.h"
 #include "TileLoaderHelper.h"
 
@@ -56,7 +57,7 @@ class TileLoader::Private
 
         HttpDownloadManager *m_downloadManager;
         QString       m_theme;
-        QHash <int, TextureTile*>  m_tileHash;
+        QHash <TileId, TextureTile*>  m_tileHash;
         int           m_tileWidth;
         int           m_tileHeight;
         TileCache     m_tileCache;
@@ -101,7 +102,7 @@ void TileLoader::setMapTheme( const QString& theme )
 
     d->m_theme = theme;
 
-    TextureTile *tile = new TextureTile( 0 );
+    TextureTile *tile = new TextureTile( TileId() );
     tile->loadRawTile(d->m_theme, 0, 0, 0);
 
     // We assume that all tiles have the same size. TODO: check to be safe
@@ -114,7 +115,7 @@ void TileLoader::setMapTheme( const QString& theme )
 
 void TileLoader::resetTilehash()
 {
-    QHash<int, TextureTile*>::const_iterator it = d->m_tileHash.constBegin();
+    QHash<TileId, TextureTile*>::const_iterator it = d->m_tileHash.constBegin();
     while ( it != d->m_tileHash.constEnd() ) {
         it.value()->setUsed( false );
         ++it;
@@ -126,7 +127,7 @@ void TileLoader::cleanupTilehash()
     // Make sure that tiles which haven't been used during the last
     // rendering of the map at all get removed from the tile hash.
 
-    QHashIterator<int, TextureTile*> it( d->m_tileHash );
+    QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
     while ( it.hasNext() ) {
         it.next();
         if ( it.value()->used() == false ) {
@@ -142,7 +143,7 @@ void TileLoader::cleanupTilehash()
 void TileLoader::flush()
 {
     // Remove all tiles from m_tileHash
-    QHashIterator<int, TextureTile*> it( d->m_tileHash );
+    QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
     while ( it.hasNext() ) {
         it.next();
 
@@ -179,7 +180,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
     // Choosing the correct tile via Lon/Lat info 
     TextureTile* tile = 0;
-    int tileId = tileLevel * 100000000 + ( tily * 10000 ) + tilx;
+    TileId tileId( tileLevel, tilx, tily );
 
 
     // If the tile hasn't been loaded into the m_tileHash yet, then do so...
@@ -188,7 +189,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             tile = d->m_tileCache.take( tileId );
             d->m_tileHash[tileId] = tile;
         } else {
-            // qDebug() << "load Tile from Disk: " << tileId;
+            // qDebug() << "load Tile from Disk: " << tileId.toString();
             tile = new TextureTile( tileId );
             d->m_tileHash[tileId] = tile;
 
@@ -329,18 +330,18 @@ void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_i
     Q_UNUSED( relativeUrlString );
     // qDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
 
-    const int id = _id.toInt();
+    const TileId id = TileId::fromString( _id );
     if ( d->m_tileHash.contains( id ) ) {
-        int  level =  id / 100000000;
-        int  y     = ( id - level * 100000000 ) / 10000;
-        int  x     = id - ( level * 100000000 + y * 10000 );
+        int  level = id.zoomLevel();
+        int  y     = id.y();
+        int  x     = id.x();
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
         m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {
-         qDebug() << "No such ID";
+        qDebug() << "No such ID:" << id.toString();
     }
 }
 

@@ -20,6 +20,7 @@
 #include <QObject>
 
 #include "SunLocator.h"
+#include "TileId.h"
 
 class MergedLayerDecorator : public QObject
 {
@@ -39,7 +40,7 @@ class MergedLayerDecorator : public QObject
     bool showTileId() const;
 	
     void setTile(QImage* tile);
-    void setInfo(int x, int y, int level, int id);
+    void setInfo(int x, int y, int level, TileId const& id);
 	
  Q_SIGNALS:
     void downloadTile(const QString& relativeUrlString, const QString& id);
@@ -56,7 +57,7 @@ class MergedLayerDecorator : public QObject
     int m_x;
     int m_y;
     int m_level;
-    int m_id;
+    TileId m_id;
     SunLocator* m_sunLocator;
     bool m_cloudlayer;
     bool m_showTileId;

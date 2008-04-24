@@ -304,7 +304,7 @@ void MergedLayerDecorator::setTile(QImage* tile)
     m_tile = tile;
 }
 
-void MergedLayerDecorator::setInfo(int x, int y, int level, int id)
+void MergedLayerDecorator::setInfo(int x, int y, int level, TileId const& id)
 {
     m_x = x;
     m_y = y;

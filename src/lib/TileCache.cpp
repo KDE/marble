@@ -14,7 +14,7 @@
 #include <QtCore/QDebug>
 
 
-bool TileCache::find( int key, TextureTile* tile )
+bool TileCache::find( TileId const& key, TextureTile* tile )
 {
     if ( m_cache.contains( key ) )
     {
@@ -24,21 +24,21 @@ bool TileCache::find( int key, TextureTile* tile )
     return false;
 }
 
-bool TileCache::insert( int key, TextureTile* tile )
+bool TileCache::insert( TileId const& key, TextureTile* tile )
 {
-//    qDebug() << "Tile " << tile->id() << " cached. Cache size: " 
+//    qDebug() << "Tile " << key.toString() << " cached. Cache size: " 
 //             << m_cache.totalCost() / 1024 << " kB";
     return m_cache.insert( key, tile, tile->numBytes() );
 }
 
-bool TileCache::contains( int key )
+bool TileCache::contains( TileId const& key )
 {
     return m_cache.contains( key );
 }
 
-TextureTile* TileCache::take( int key )
+TextureTile* TileCache::take( TileId const& key )
 {
-//    qDebug() << "Tile " << key << " taken from cache. Cache size: " 
+//    qDebug() << "Tile " << key.toString() << " taken from cache. Cache size: " 
 //             << m_cache.totalCost() / 1024 << " kB";
     return m_cache.take( key );
 }

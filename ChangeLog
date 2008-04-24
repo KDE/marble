@@ -1,3 +1,18 @@
+2008-04-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * kdeedu/marble/src/lib/TileId.cpp:
+    * kdeedu/marble/src/lib/MergedLayerDecorator.h:
+    * kdeedu/marble/src/lib/TileId.h:
+    * kdeedu/marble/src/lib/MergedLayerDecorator.cpp:
+    * kdeedu/marble/src/lib/TextureTile.cpp:
+    * kdeedu/marble/src/lib/TileCache.cpp:
+    * kdeedu/marble/src/lib/TextureTile.h:
+    * kdeedu/marble/src/lib/TileLoader.cpp:
+    * kdeedu/marble/src/lib/TileCache.h:
+    * kdeedu/marble/src/lib/CMakeLists.txt:
+
+    Add class TileId because int is not sufficient for higher zoom levels.
+
 2008-04-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * kdeedu/marble/src/lib/XmlHandler.cpp:
