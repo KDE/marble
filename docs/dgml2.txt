@@ -9,17 +9,35 @@ which try to describe all the features in a map themselves: DGML reuses
 existing map data from established file formats (e.g. KML, GPX, GeoRSS),
 arranges them in layers and compiles them together into a new map.
 
+Additionally DGML 2 provides means to connect the checkboxes used in the 
+legend to switch items on the map on and off. This is done using the
+"connect" attribute in a manner similar to Qt's Signals and Slots.
 
-The new planned DGML format has got four main sections:
+The DGML 2 format has got four main sections:
 
 1. The HEAD section in which basic properties get defined.
 
 2. The MAP section in which the layer structure gets defined. 
 
-3. The SETTINGS section which contains all properties that can get stored.
+   Via the CONNECT attribute the layers and dataSets
+   can get connected to the properties provided by the settings section.
+   This provides the ability to connect the checkboxes in the
+   legend to the layers on the map being displayed. E.g. the attribute
+   connect="borders" located in the "pborder" dataSet tag would 
+   enable to switch the international border on and off on the map via 
+   the associated property value.
 
-4. The LEGEND section in which custom legend elements get defined (to
-   be done in the future: the whole legend should get defined here).
+3. The SETTINGS section which contains all properties that can get stored.
+   This section basically contains the model for all properties.
+   Mostly it contains the information whether a particular 
+   geographical feature is available (i.e. the map provides a "relief")
+   and whether it is enabled by default.
+
+4. The LEGEND section in which the markup of custom legend elements 
+   get defined (to be done in the future: the whole legend should get 
+   defined here).
+   Via the CONNECT attribute the checkable legend sections and items
+   can get connected to the properties provided by the settings section. 
 
 The order inside the map section follows the rendering process:
 
@@ -53,9 +71,9 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description>A classic topographic map. It uses vector lines to
+            <description><![CDATA[A <i>classic topographic map</i>. It uses vector lines to
                         mark coastlines, country borders etc. and bitmap
-                        graphics to create the height relief.</description>
+                        graphics to create the height relief.]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>
@@ -71,152 +89,223 @@ EXAMPLE 1 : ATLAS ( filename: srtm.dgml )
     layer management class -->
         
         <map bgcolor="#000000">
-            <!-- <canvas/> -->
+            <canvas/>
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
         
             <!-- This layer creates the elevation model -->
-            <layer name="srtm" plugin="texture" type="dem">
-                <texture expire="10800">
-                    <sourcedir format="JPG"> srtm </sourcedir>
+            <layer name="srtm" backend="texture" role="dem">
+                <texture name="srtm_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
                 </texture>
-                <!-- If this was the satellite map we could add another
-                    texture tag for the clouds here resulting in a
-                    MergedLayer. Also note that for the tiles you can
-                    suggest a different 
-                    image format than for the original install image
-                    (e.g. "PNG").
-                    -->
             </layer>
             
             <!-- This layer creates the coastlines that are needed to
                 colorize the elevation model properly -->
-            <layer name="mwdbii" backend="vector" role="filterhelper">
-                <vector name="pcoast" type="land">
-                    <sourcefile format="PNT"> PCOAST.PNT </sourcefile>
-                <vector>
-                <vector name="pisland" type="land">
-                    <sourcefile format="PNT"> PISLAND.PNT </sourcefile>
+            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
+                <vector name="pcoast" feature="land">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
                 </vector>
-                <vector name="plakeisland" type="land">
-                    <sourcefile format="PNT"> PLAKEISLAND.PNT </sourcefile>
+                <vector name="pisland" feature="land">
+                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plake" type="sea">
-                    <sourcefile format="PNT"> PLAKE.PNT </sourcefile>
+                <vector name="plakeisland" feature="land" connect="waterbodies">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="pglacier" type="sea">
-                    <sourcefile format="PNT">  PGLACIER.PNT </sourcefile>
+                <vector name="plake" feature="sea" connect="waterbodies">
+                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
+                </vector>
+                <vector name="pglacier" feature="sea">
+                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
                 </vector>
             </layer>
         
             <!-- This layer provides the colorization -->
-            <layer name="" plugin="filter">
+            <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
                     <dem>srtm</dem>
-                    <coastline>mwdbii<coastline>
+                    <coastline>mwdbii</coastline>
                     <!-- If these don't get defined the default palettes get
                     used -->
                     <palette type="sea">seapalette.pal</palette>
                     <palette type="land">landpalette.pal</palette>
                 </filter>
-            <layer>
+            </layer>
         
-            <layer name="mwdbii" plugin="vector" type="polyline">
-                <vector name="pdiffborder" type="border">
-                    <sourcefile format="PNT">PDIFFBORDER.PNT</sourcefile>
-                    <color>#f29b68</color>
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pdiffborder" feature="border" connect="borders">
+                    <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
+                    <pen color="#f29b68" />
                 </vector>
-                <vector name="pusa48.diff" type="polyline">
-                    <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
-                    <color>#f29b68</color>
+                <vector name="pusa48" feature="border" connect="borders">
+                    <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
+                    <pen color="#f29b68" />
                 </vector>
-                <vector name="international dateline" type="polyline">
-                    <sourcefile format="PNT">DATELINE.PNT</sourcefile>
-                    <color>#000000</color>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#000000" />
                 </vector>
-                <vector name="pusa48" type="polyline">
-                    <sourcefile format="PNT">PUSA48.DIFF.PNT</sourcefile>
-                    <color>#637bff</color>
+                <vector name="rivers" feature="river" connect="waterbodies">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#637bff" />
                 </vector>
             </layer>
         
-            <layer name="standardplaces" plugin="geodata">
+            <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
                     <sourcefile format="KML">cityplacemarks.kml</sourcefile>
-                    <pick>placemark<pick> <!-- picks certain features from a
+                    <pick>placemark</pick> <!-- picks certain features from a
                                             file -->
                 </geodata>
                 <geodata name="baseplacemarks">
                     <sourcefile format="KML">baseplacemarks.kml</sourcefile>
-                    <pick>placemark<pick>
+                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="elevplacemarks">
                     <sourcefile format="KML">elevplacemarks.kml</sourcefile>
-                    <pick>placemark<pick>
+                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="otherplacemarks">
                     <sourcefile
                     format="KML">otherplacemarks.kml</sourcefile>
-                    <pick>placemark<pick>
+                    <pick>placemark</pick>
                 </geodata>
                 <geodata name="boundaryplacemarks">
                     <sourcefile format="KML">boundaryplacemarks</sourcefile>
-                    <pick>placemark<pick>
+                    <pick>placemark</pick>
                 </geodata>
             </layer>
-        
-            <layer name="helloworldlayer" plugin="helloworldplugin">
-                <customplugin name="helloworld">
-                    <sourcefile format="JPG">helloworld.jpg</sourcefile>
-                </customplugin>
-            </layer>
-        
-            <!-- Here we could e.g. add an atmosphere or satellite layer -->
-        
-            </layer name="floatitems" plugins="floatitems">
         </map>
 
         <settings>
-            <property name="cities">
-                <available>true</available>
-                <enabled>true</enabled>
-            </property>
-            <property name="relief">
-                <available>true</available>
-                <enabled>true</enabled>
-            </property>
+            <group name="Boundaries">
+                <property name="boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="international-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            </group>
+            <group name="Water Bodies">
+                <property name="waterbodies">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="lakes">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="rivers">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+            <group>
         </settings>
         
         <!-- At last we define some legend properties -->
         
         <legend>
+            <section name="boundaries" checkable="true" connect="boundaries" spacing="12">
+                <heading>Boundaries</heading>
+
+                <item name="international-boundary">
+                    <icon color="#f29b68" pixmap="bitmaps/border_1.png"/>
+                    <text>International</text>
+                </item>
+                <item name="state">
+                    <icon color="#f29b68" pixmap="bitmaps/border_2.png"/>
+                    <text>State</text>
+                </item>
+            </section>
+    
+            <section name="waterbodies" checkable="true" connect="waterbodies" spacing="12">
+                <heading>Water Bodies</heading>
+
+                <item name="lake">
+                    <icon color="#d0dff1" pixmap="bitmaps/lake.png"/>
+                    <text>Lake</text>
+                </item>
+                <item name="river">
+                    <icon color="#637bff" pixmap="bitmaps/river.png"/>
+                    <text>River</text>
+                </item>
+            </section>
+    
             <section name="elevation" checkable="false" spacing="12">
                 <heading>Elevation</heading>
-                <!-- Example for a pixmap legend item: -->
-                <item name="7000" checkable="false">
-                    <icon pixmap="topography_7000.png"/>
+
+                <item name="topography7000">
+                    <icon color="#c39d55"/>
                     <text>7000 m</text>
                 </item>
-                <!-- Example for a color gradient legend item: -->
-                <item name="5000" checkable="false">
+                <item name="topography5000">
                     <icon color="#dcbd80"/>
                     <text>5000 m</text>
                 </item>
-                <!-- Example for a pixmap with a color as a translucent
-                    background: -->
-                <item>
-                    <icon color="#f29b68" pixmap="boundary.png"/>
-                    <text>State Boundary</text>
+                <item name="topography3500">
+                    <icon color="#f0da96"/>
+                    <text>3500 m</text>
                 </item>
-                <!-- Insert further legend items here -->
-            </section>
-            <section name="relief" checkable="true" spacing="12">
-                 <!-- maybe we should make it mandatory to name properties the same as responsible legend entries ... instead of this: -->
-                <checkbox setting="relief"/>
-                <heading>Relief</heading>
+                <item name="topography2000">
+                    <icon color="#f1e7ad"/>
+                    <text>2000 m</text>
+                </item>
+                <item name="topography1000">
+                    <icon color="#d7d399"/>
+                    <text>1000 m</text>
+                </item>
+                <item name="topography500">
+                    <icon color="#bcc48a"/>
+                    <text>500 m</text>
+                </item>
+                <item name="topography200">
+                    <icon color="#98b47a"/>
+                    <text>200 m</text>
+                </item>
+                <item name="topography50">
+                    <icon color="#81a96d"/>
+                    <text>50 m</text>
+                </item>
+                <item name="topography0">
+                    <icon color="#689961"/>
+                    <text>0 m</text>
+                </item>
+                <item name="topography-0">
+                    <icon color="#e3ecf5"/>
+                    <text>0 m (Water)</text>
+                </item>
+                <item name="topography-50">
+                    <icon color="#d0def2"/>
+                    <text>-50 m</text>
+                </item>
+                <item name="topography-200">
+                    <icon color="#bfd5ee"/>
+                    <text>-200 m</text>
+                </item>
+                <item name="topography-2000">
+                    <icon color="#a3c3e6"/>
+                    <text>-2000 m</text>
+                </item>
+                <item name="topography-4000">
+                    <icon color="#89b0da"/>
+                    <text>-4000 m</text>
+                </item>
+                <item name="topography-6500">
+                    <icon color="#6b99c9"/>
+                    <text>-6500 m</text>
+                </item>
+                <item name="topography-11000">
+                    <icon color="#5182b4"/>
+                    <text>-11000 m</text>
+                </item>
             </section>
         </legend>
     </document>
 </dgml>
-
