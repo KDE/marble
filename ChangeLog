@@ -1,3 +1,8 @@
+2008-04-25  Inge Wallin  <inge@lysator.liu.se>
+
+	Crazy issue 7: Single char QStrings better written as a QChar
+	* src/lib/MapThemeManager.cpp (createMapThemeRow): 
+
 2008-04-25  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.{cpp,h}:

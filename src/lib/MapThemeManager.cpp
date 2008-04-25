@@ -233,8 +233,8 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
                    + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
 
     itemList << item;
-    itemList << new QStandardItem( mapTheme->head()->target() + "/" 
-                                   + mapTheme->head()->theme() + "/"
+    itemList << new QStandardItem( mapTheme->head()->target() + '/' 
+                                   + mapTheme->head()->theme() + '/'
                                    + mapTheme->head()->theme() + ".dgml" );
     itemList << new QStandardItem( description );
 
