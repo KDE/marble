@@ -8,6 +8,11 @@
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
+
+#ifndef TCCORE_H
+#define TCCOREGEOSCENEMAP_H
+
+
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QObject>
@@ -23,3 +28,5 @@ class TCCoreApplication : public QCoreApplication
         TileCreator *m_tilecreator;
 };
 
+
+#endif

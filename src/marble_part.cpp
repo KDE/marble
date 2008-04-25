@@ -43,7 +43,6 @@
 // Marble library
 #include "GeoDataPoint.h"
 #include "lib/SunControlWidget.h"
-#include "lib/SunControlWidget.h"
 
 // Local dir
 #include "ui_MarbleViewSettingsWidget.h"
