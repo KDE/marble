@@ -1,5 +1,11 @@
+2008-04-25  Inge Wallin  <ingwa@shihonage.lkpg.cendio.se>
+
+
 2008-04-25  Inge Wallin  <inge@lysator.liu.se>
 
+	Crazy issue 25: Spelling errors
+	* src/lib/geodata/scene/GeoSceneMap.h: Spelling fixes
+	
 	Crazy issue 7: Single char QStrings better written as a QChar
 	* src/lib/MapThemeManager.cpp (createMapThemeRow): 
 
