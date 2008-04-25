@@ -17,18 +17,18 @@ Layer Management Class tasks:
 *** New widget independent image canvas concept and implementation      DONE
     -- Check Apidox if there is anything missing.                       --
 
-*** Add formal description of DGML                                      ----
+*** Add formal description of DGML                                      INPROGRESS
 
-*** Split off MapTheme / DGML parsing into geodata/parser.              ----
+*** Split off MapTheme / DGML parsing into geodata/parser.              DONE (TACK/NIKO)
     Have a GeoDataMapTheme class that basically only includes those 
     parts of the current MapTheme except for parsing.
 
-*** Create all available MapTheme objects instead of the                ----
+*** Create all available MapTheme objects instead of the                RESOLVED (TACK/JM)
     selected one. (right now it just creates a single one, 
     so you can't access many in parallel without parsing 
     over and over)
 
-*** Implement / move <head> features as lined out in                    ----
+*** Implement / move <head> features as lined out in                    DONE (TACK)
     layermanagement.txt This should happen after the QXmlStreamReader
     port.
 
@@ -85,7 +85,7 @@ More sophisticated issues
 These need some thinking and discussion (some issues might be delayed
 to 4.1):
 
-*** Create map tiles at compile time
+*** Create map tiles at compile time   DONE (by Patrick)
 
 *** Download manager fixes:
  - After maps get downloaded sometimes the resolution doesn't get
@@ -96,9 +96,9 @@ to 4.1):
 *** Minor Backend feature fixes and polishment:
  - Create a LatLonBoundingBox
  - Create a QPersistentModelIndex for MarblePlaceMarkModel items to
-   improve speed on close up zooms.
+   improve speed on close up zooms.                                     DONE (TACK)
 
-*** Make Marble have a RenderingQuality setting in ViewParams: 
+*** Make Marble have a RenderingQuality setting in ViewParams:          DONE (TACK)
  - LOW: For slow hardware with different defaults ( No relief in Atlas
    View, using setShowQuickAndDirty(true) for really sloppy
    interpolation )
@@ -108,7 +108,7 @@ to 4.1):
    printed maps: e.g. Blue antialiased coast lines for the Atlas map.
 
  ** Make Marble use different render settings while panning (MOVE) and
-    after releasing the mouse (DROP).
+    after releasing the mouse (DROP).                                   DONE (TACK)
 
     For KDE 4.0.1 it should use the render quality MEDIUM for panning
     and HIGH or PRINT after the mouse button has been released. Note:
