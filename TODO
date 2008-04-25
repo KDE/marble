@@ -17,18 +17,13 @@ Layer Management Class tasks:
 *** New widget independent image canvas concept and implementation      DONE
     -- Check Apidox if there is anything missing.                       --
 
-*** Add formal description of DGML                                      INPROGRESS
+*** Add formal description of DGML                                      TACK
 
-*** Split off MapTheme / DGML parsing into geodata/parser.              DONE (TACK/NIKO)
+*** Split off MapTheme / DGML parsing into geodata/parser.              DONE
     Have a GeoDataMapTheme class that basically only includes those 
     parts of the current MapTheme except for parsing.
 
-*** Create all available MapTheme objects instead of the                RESOLVED (TACK/JM)
-    selected one. (right now it just creates a single one, 
-    so you can't access many in parallel without parsing 
-    over and over)
-
-*** Implement / move <head> features as lined out in                    DONE (TACK)
+*** Implement / move <head> features as lined out in                    DONE
     layermanagement.txt This should happen after the QXmlStreamReader
     port.
 
@@ -37,6 +32,8 @@ Layer Management Class tasks:
 *** Move backends into plugins / threads                                ----
 
 *** Design and implement a QPainter-style API for GeoPainter            ----
+    Design								--
+    Implement								--
 
 *** Cloud Layer                                                         STRE
 
@@ -52,10 +49,6 @@ REFINEMENTS:
 Low hanging (but important) fruits:
 -----------------------------------
 
-*** Update screenshots in the docs!                                     ----
-
-*** Fix Double Click on map (which should center the map on the point   ----
-    being double clicked).
 
 *** Add a *small* percentage bar to the status bar that indicates map   ----
     downloads (should be really tiny and not obtrusive just to see
@@ -64,28 +57,11 @@ Low hanging (but important) fruits:
     queue, maybe amount of data that has been downloaded during the
     session.
 
-Add maps to GHNS:
- * Annual precipation,                                                  ----
-    - precipation July                                                  --
-    - precipation December                                              --
- * Annual temperature                                                   ----
-    - temperature July                                                  --
-    - temperature December                                              --
-
-
-BUGS:
-
-*** Find the reason why labels overlap when a KML file gets loaded.     TACK
-    I'm afraid this will have to get delayed for 4.0.2 ...
-
 
 More sophisticated issues
 -------------------------
 
-These need some thinking and discussion (some issues might be delayed
-to 4.1):
-
-*** Create map tiles at compile time   DONE (by Patrick)
+These need some thinking and discussion
 
 *** Download manager fixes:
  - After maps get downloaded sometimes the resolution doesn't get
@@ -98,30 +74,6 @@ to 4.1):
  - Create a QPersistentModelIndex for MarblePlaceMarkModel items to
    improve speed on close up zooms.                                     DONE (TACK)
 
-*** Make Marble have a RenderingQuality setting in ViewParams:          DONE (TACK)
- - LOW: For slow hardware with different defaults ( No relief in Atlas
-   View, using setShowQuickAndDirty(true) for really sloppy
-   interpolation )
- - MEDIUM: Basically what we have now
- - HIGH: Uses Antialiased vector lines
- - PRINT: Adds some Really Slow (TM) nice things that are typical for
-   printed maps: e.g. Blue antialiased coast lines for the Atlas map.
-
- ** Make Marble use different render settings while panning (MOVE) and
-    after releasing the mouse (DROP).                                   DONE (TACK)
-
-    For KDE 4.0.1 it should use the render quality MEDIUM for panning
-    and HIGH or PRINT after the mouse button has been released. Note:
-    For KDE 4.1 there should be two comboboxes in the settings dialog:
-
-    Display Quality:
-
-    During mouse move: [^ Medium ]
-    On mouse drop:     [^ High   ]
-
- ** Rerender the map at "PRINT quality" once "File -> Print" or 
-    "Edit -> Copy" get selected.
-
 
 
 Whenever -- not tied to any release
@@ -133,6 +85,15 @@ Documentation
    - Describe the vector engine                                         --
    - Describe the placemark engine                                      --
  * Write more in USECASES                                               INGE
+
+Add maps to GHNS:
+ * Annual precipation,                                                  ----
+    - precipation July                                                  --
+    - precipation December                                              --
+ * Annual temperature                                                   ----
+    - temperature July                                                  --
+    - temperature December                                              --
+
 
 
 Integration of Google Summer of Code projects (0.6)
@@ -153,7 +114,10 @@ Before KDE 4.0.2
 ================================================================
 
 Bugs
-  See the BUGS file.
+ * Fix Double Click on map						----
+   (should center the map on the point being double clicked).
+ * Find the reason why labels overlap when a KML file gets loaded.	TACK
+ * More bugs: See the BUGS file.
 
 Documentation:
  * APIDOX for classes in geodata/data                                   INGE
@@ -169,6 +133,8 @@ Documentation:
    - MarbleModel                                                        --
    - MarbleNavigator                                                    done
    - MarblePlacemarkModel                                               --
+ * Programmers manual for using Marble components in other applications ----
+ * Apidox for all public classes                                        ----
 
 Widget:
  * Separate the view from the globe (model)                             INGE
@@ -176,13 +142,13 @@ Widget:
     - Don't open any dialogs from the globe, do it from the controller. inge
     - Let the view know about the globe, but not the other way.         done
 
-Documentation:
- * Programmers manual for using Marble components in other applications ----
- * Apidox for all public classes                                        ----
-
  
 Before KDE 4.1
 ================================================================
+
+Documentation 
+ * Update manual for the new features					----	
+    - Update screenshots     						--
 
 Planning and architecture:
  * write proposals for Marble 0.6 / KDE 4.1                             ----
@@ -218,7 +184,7 @@ Internal structure:
 
 Installation issues
  * Only install the public include files                                ----
- * Creating tiles during build instead of first run                     TACK
+ * Creating tiles during build instead of first run                     DONE
 
 Data:
  * Evaluate the implementation of tile specifications like              ----
@@ -233,3 +199,57 @@ Integration with Qt designer
    - MarbleControlBox                                                   --
    - MarbleLocator (search field for placemarks)                        --
    - MarbleLegendBrowser                                                --
+
+Some advanced features
+ * Make Marble have a RenderingQuality setting in ViewParams:           DONE
+   - Use different render settings while panning (MOVE) and 		done
+     after releasing the mouse (DROP).
+   - Rerender the map at "PRINT quality" once "File -> Print" or	--
+     "Edit -> Copy" get selected.
+
+
+
+Before KDE 4.2
+================================================================
+
+To be populated...
+
+
+
+Longer Explanations for some things
+================================================================
+
+The following are longer explanations for some features so that we
+don't have to explain them in the list above and thus get better
+overview.
+
+
+RenderingQuality in ViewParams
+------------------------------
+
+For performance reasons, Marble should render the map in different
+qualities in different situations.
+
+ - LOW: For slow hardware with different defaults
+    - No relief in Atlas View
+    - using setShowQuickAndDirty(true) for really sloppy interpolation
+ - MEDIUM: Basically what we have now
+ - HIGH: Uses Antialiased vector lines
+ - PRINT: Adds some Really Slow (TM) nice things that are typical for
+   printed maps: e.g. Blue antialiased coast lines for the Atlas map.
+
+ ** Make Marble use different render settings while panning (MOVE) and
+    after releasing the mouse (DROP)
+
+    For KDE 4.0.1 it should use the render quality MEDIUM for panning
+    and HIGH or PRINT after the mouse button has been released. Note:
+    For KDE 4.1 there should be two comboboxes in the settings dialog:
+
+    Display Quality:
+
+    During mouse move: [^ Medium ]
+    On mouse drop:     [^ High   ]
+
+ ** Rerender the map at "PRINT quality" once "File -> Print" or 
+    "Edit -> Copy" get selected.
+
