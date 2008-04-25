@@ -3,6 +3,13 @@
     * src/lib/TileId.cpp:
     * src/lib/TileId.h:
 
+    Remove operator< for TileId because it is not needed.
+
+2008-04-25  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TileId.cpp:
+    * src/lib/TileId.h:
+
     Fix performance regression of the TileId patch of 2008-04-24.
     - make operators and hash function friends of TileId so they can
       access the members directly.

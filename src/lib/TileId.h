@@ -16,7 +16,6 @@
 
 class TileId
 {
-  friend bool operator<( TileId const& lhs, TileId const& rhs );
   friend bool operator==( TileId const& lhs, TileId const& rhs );
   friend uint qHash( TileId const& );
 
@@ -38,7 +37,6 @@ class TileId
 };
 
 
-bool operator<( TileId const& lhs, TileId const& rhs );
 bool operator==( TileId const& lhs, TileId const& rhs );
 uint qHash( TileId const& );
 

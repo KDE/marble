@@ -51,20 +51,6 @@ int TileId::zoomLevel() const
     return m_zoomLevel;
 }
 
-bool operator<(TileId const& lhs, TileId const& rhs )
-{
-  if ( lhs.m_zoomLevel < rhs.m_zoomLevel )
-      return true;
-  else if ( rhs.m_zoomLevel < lhs.m_zoomLevel )
-      return false;
-  else if ( lhs.m_tileX < rhs.m_tileX )
-      return true;
-  else if ( rhs.m_tileX < lhs.m_tileX )
-      return false;
-  else
-      return lhs.m_tileY < rhs.m_tileY;
-}
-
 bool operator==(TileId const& lhs, TileId const& rhs )
 {
     return lhs.m_zoomLevel == rhs.m_zoomLevel
