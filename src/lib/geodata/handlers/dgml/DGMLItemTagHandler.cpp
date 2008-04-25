@@ -52,6 +52,7 @@ GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
 
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString checkable = parser.attribute(dgmlAttr_checkable).toLower().trimmed();
+    QString connectTo = parser.attribute(dgmlAttr_connect).trimmed();
     int     spacing   = parser.attribute(dgmlAttr_spacing).toInt();
 
     GeoSceneItem *item = 0;
@@ -61,6 +62,7 @@ GeoNode* DGMLItemTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Section)) {
         item = new GeoSceneItem( name );
         item->setCheckable( checkable == dgmlValue_true || dgmlValue_on );
+        item->setConnectTo( connectTo );
         item->setSpacing( spacing );
         parentItem.nodeAs<GeoSceneSection>()->addItem( item );
     }

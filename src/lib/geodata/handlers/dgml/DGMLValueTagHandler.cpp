@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DGMLEnabledTagHandler.h"
+#include "DGMLValueTagHandler.h"
 
 #include "DGMLElementDictionary.h"
 #include "DGMLAuxillaryDictionary.h"
@@ -29,29 +29,29 @@
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAuxillaryDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Enabled)
+DGML_DEFINE_TAG_HANDLER(Value)
 
-DGMLEnabledTagHandler::DGMLEnabledTagHandler()
+DGMLValueTagHandler::DGMLValueTagHandler()
     : GeoTagHandler()
 {
     /* NOOP */
 }
 
-DGMLEnabledTagHandler::~DGMLEnabledTagHandler()
+DGMLValueTagHandler::~DGMLValueTagHandler()
 {
     /* NOOP */
 }
 
-GeoNode* DGMLEnabledTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLValueTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Enabled));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Value));
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Property)) {
         QString parsedText = parser.readElementText().toLower().trimmed();
-        parentItem.nodeAs<GeoSceneProperty>()->setEnabled(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
+        parentItem.nodeAs<GeoSceneProperty>()->setDefaultValue(parsedText == dgmlValue_true || parsedText == dgmlValue_on);
     }
 
     return 0;

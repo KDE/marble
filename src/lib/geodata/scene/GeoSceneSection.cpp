@@ -29,6 +29,7 @@ GeoSceneSection::GeoSceneSection( const QString& name )
     : m_name( name ),
       m_heading( "" ),
       m_checkable( false ),
+      m_connectTo( "" ),
       m_spacing( 12 )
 {
     /* NOOP */
@@ -108,6 +109,16 @@ bool GeoSceneSection::checkable() const
 void GeoSceneSection::setCheckable( bool checkable )
 {
     m_checkable = checkable;
+}
+
+QString GeoSceneSection::connectTo() const
+{
+    return m_connectTo;
+}
+
+void GeoSceneSection::setConnectTo( const QString& connectTo )
+{
+    m_connectTo = connectTo;
 }
 
 int  GeoSceneSection::spacing() const

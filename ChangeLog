@@ -1,3 +1,21 @@
+2008-04-25  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLValueTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLElementDictionary.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLEnabledTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DGMLAttributeDictionary.{cpp,h}:
+    * src/lib/geodata/GeoDataTest.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneItem.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSection.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneProperty.{cpp,h}:
+    * data/maps/earth/srtm/srtm.dgml:
+
+    - Changing the "Enabled" element to "Value"
+    - Introducing the "Connect(To)" attribute in the legend's items and sections.
+
 2008-04-24  Torsten Rahn  <rahn@kde.org>
 
     * src/MarbleTest.cpp:

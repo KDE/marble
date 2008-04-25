@@ -28,6 +28,7 @@ GeoSceneItem::GeoSceneItem( const QString& name )
       m_name( name ),
       m_text( "" ),
       m_checkable( false ),
+      m_connectTo( "" ),
       m_spacing( 12 )
 {
     /* NOOP */
@@ -66,6 +67,16 @@ bool GeoSceneItem::checkable() const
 void GeoSceneItem::setCheckable( bool checkable )
 {
     m_checkable = checkable;
+}
+
+QString GeoSceneItem::connectTo() const
+{
+    return m_connectTo;
+}
+
+void GeoSceneItem::setConnectTo( const QString& connectTo )
+{
+    m_connectTo = connectTo;
 }
 
 int  GeoSceneItem::spacing() const

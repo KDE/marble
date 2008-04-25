@@ -24,7 +24,8 @@
 GeoSceneProperty::GeoSceneProperty( const QString& name )
     : m_name( name ),
       m_available( false ),
-      m_enabled( false )
+      m_defaultValue( false ),
+      m_value( false )
 {
     /* NOOP */
 }
@@ -49,12 +50,22 @@ void GeoSceneProperty::setAvailable( bool available )
     m_available = available;
 }
 
-bool GeoSceneProperty::enabled() const
+bool GeoSceneProperty::defaultValue() const
 {
-    return m_enabled;
+    return m_defaultValue;
 }
 
-void GeoSceneProperty::setEnabled( bool enabled )
+void GeoSceneProperty::setDefaultValue( bool defaultValue )
 {
-    m_enabled = enabled;
+    m_defaultValue = defaultValue;
+}
+
+bool GeoSceneProperty::value() const
+{
+    return m_value;
+}
+
+void GeoSceneProperty::setValue( bool value )
+{
+    m_value = value;
 }

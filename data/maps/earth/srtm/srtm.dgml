@@ -51,10 +51,10 @@
                 <vector name="pisland" feature="land">
                     <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plakeisland" feature="land">
+                <vector name="plakeisland" feature="land" connect="waterbodies">
                     <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
                 </vector>
-                <vector name="plake" feature="sea">
+                <vector name="plake" feature="sea" connect="waterbodies">
                     <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
                 </vector>
                 <vector name="pglacier" feature="sea">
@@ -75,11 +75,11 @@
             </layer>
         
             <layer name="mwdbii" backend="vector" role="polyline">
-                <vector name="pdiffborder" feature="border">
+                <vector name="pdiffborder" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
                     <pen color="#f29b68" />
                 </vector>
-                <vector name="pusa48" feature="border">
+                <vector name="pusa48" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
                     <pen color="#f29b68" />
                 </vector>
@@ -87,7 +87,7 @@
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
                     <pen color="#000000" />
                 </vector>
-                <vector name="rivers" feature="river">
+                <vector name="rivers" feature="river" connect="waterbodies">
                     <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
                     <pen color="#637bff" />
                 </vector>
@@ -120,33 +120,53 @@
         </map>
 
         <settings>
-            <property name="boundaries">
-                <available>true</available>
-                <enabled>false</enabled>
-            </property>
-            <property name="relief">
-                <available>true</available>
-                <enabled>true</enabled>
-            </property>
+<!--            <group name="Boundaries"> -->
+                <property name="boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="international-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+<!--            </group>
+            <group name="Water Bodies"> -->
+                <property name="waterbodies">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="lakes">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+                <property name="rivers">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
+<!--            </group> -->
         </settings>
         
         <!-- At last we define some legend properties -->
         
         <legend>
-            <section name="borders" checkable="true" spacing="12">
+            <section name="boundaries" checkable="true" connect="boundaries" spacing="12">
                 <heading>Boundaries</heading>
 
                 <item name="international-boundary">
                     <icon color="#f29b68" pixmap="bitmaps/border_1.png"/>
                     <text>International</text>
                 </item>
-                <item name="state-boundary">
+                <item name="state">
                     <icon color="#f29b68" pixmap="bitmaps/border_2.png"/>
                     <text>State</text>
                 </item>
             </section>
     
-            <section name="waterbodies" checkable="true" spacing="12">
+            <section name="waterbodies" checkable="true" connect="waterbodies" spacing="12">
                 <heading>Water Bodies</heading>
 
                 <item name="lake">

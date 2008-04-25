@@ -32,6 +32,7 @@ const char* dgmlAttr_backend   = "backend";
 const char* dgmlAttr_bgcolor   = "bgcolor";
 const char* dgmlAttr_color     = "color";
 const char* dgmlAttr_checkable = "checkable";
+const char* dgmlAttr_connect   = "connect";
 const char* dgmlAttr_expire    = "expire";
 const char* dgmlAttr_feature   = "feature";
 const char* dgmlAttr_format    = "format";

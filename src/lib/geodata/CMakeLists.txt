@@ -52,7 +52,6 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLDescriptionTagHandler.cpp
         geodata/handlers/dgml/DGMLDiscreteTagHandler.cpp
         geodata/handlers/dgml/DGMLDocumentTagHandler.cpp
-        geodata/handlers/dgml/DGMLEnabledTagHandler.cpp
         geodata/handlers/dgml/DGMLHeadTagHandler.cpp
         geodata/handlers/dgml/DGMLHeadingTagHandler.cpp
         geodata/handlers/dgml/DGMLIconTagHandler.cpp
@@ -74,6 +73,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DGMLTextTagHandler.cpp
         geodata/handlers/dgml/DGMLTextureTagHandler.cpp
         geodata/handlers/dgml/DGMLThemeTagHandler.cpp
+        geodata/handlers/dgml/DGMLValueTagHandler.cpp
         geodata/handlers/dgml/DGMLVectorTagHandler.cpp
         geodata/handlers/dgml/DGMLVisibleTagHandler.cpp
         geodata/handlers/dgml/DGMLZoomTagHandler.cpp

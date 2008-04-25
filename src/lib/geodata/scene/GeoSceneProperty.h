@@ -39,13 +39,16 @@ class GEODATA_EXPORT GeoSceneProperty : public GeoNode {
     QString name() const;
     bool available() const;
     void setAvailable( bool available );
-    bool enabled() const;
-    void setEnabled( bool enabled );
+    bool defaultValue() const;
+    void setDefaultValue( bool defaultValue );
+    bool value() const;
+    void setValue( bool value );
 
  protected:
     QString  m_name;
     bool     m_available;
-    bool     m_enabled;
+    bool     m_defaultValue;
+    bool     m_value;
 };
 
 

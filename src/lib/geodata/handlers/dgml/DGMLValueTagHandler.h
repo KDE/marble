@@ -19,17 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DGMLEnabledTagHandler_h
-#define DGMLEnabledTagHandler_h
+#ifndef DGMLValueTagHandler_h
+#define DGMLValueTagHandler_h
 
 #include "GeoTagHandler.h"
 
-class DGMLEnabledTagHandler : public GeoTagHandler {
+class DGMLValueTagHandler : public GeoTagHandler {
  public:
-    DGMLEnabledTagHandler();
-    virtual ~DGMLEnabledTagHandler();
+    DGMLValueTagHandler();
+    virtual ~DGMLValueTagHandler();
 
     virtual GeoNode* parse(GeoParser&) const;
 };
 
-#endif // DGMLEnabledTagHandler_h
+#endif // DGMLValueTagHandler_h

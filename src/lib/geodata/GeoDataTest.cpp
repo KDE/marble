@@ -97,10 +97,10 @@ int main(int argc, char** argv)
         qDebug() << "Maximum: " << sceneDocument->head()->zoom()->maximum(); 
         qDebug() << "Name: " << sceneDocument->settings()->property( "cities" )->name(); 
         qDebug() << "Available: " << sceneDocument->settings()->property( "cities" )->available(); 
-        qDebug() << "Enabled: " << sceneDocument->settings()->property( "cities" )->enabled(); 
+        qDebug() << "Value: " << sceneDocument->settings()->property( "cities" )->value(); 
         qDebug() << "Name: " << sceneDocument->settings()->property( "relief" )->name(); 
         qDebug() << "Available: " << sceneDocument->settings()->property( "relief" )->available(); 
-        qDebug() << "Enabled: " << sceneDocument->settings()->property( "relief" )->enabled(); 
+        qDebug() << "Value: " << sceneDocument->settings()->property( "relief" )->value(); 
         qDebug() << "Test query a nonexistent property: " << sceneDocument->settings()->property( "nonexistent" )->name();
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }

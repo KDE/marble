@@ -44,6 +44,10 @@ class GeoSceneItem : public GeoNode {
 
     bool checkable() const;
     void setCheckable( bool checkable );
+
+    QString connectTo() const;
+    void setConnectTo( const QString& text );
+
     int  spacing() const;
     void setSpacing( int spacing );
 
@@ -54,6 +58,7 @@ class GeoSceneItem : public GeoNode {
 
     QString m_name;
     QString m_text;
+    QString m_connectTo;
 
     bool    m_checkable;
     int     m_spacing;

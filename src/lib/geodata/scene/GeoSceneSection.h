@@ -52,6 +52,10 @@ class GeoSceneSection : public GeoNode {
 
     bool checkable() const;
     void setCheckable( bool checkable );
+
+    QString connectTo() const;
+    void setConnectTo( const QString& text );
+
     int  spacing() const;
     void setSpacing( int spacing );
 
@@ -63,6 +67,7 @@ class GeoSceneSection : public GeoNode {
 
     QString m_name;
     QString m_heading;
+    QString m_connectTo;
 
     bool    m_checkable;
     int     m_spacing;
