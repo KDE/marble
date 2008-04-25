@@ -1,3 +1,19 @@
+2008-04-25  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TileId.cpp:
+    * src/lib/TileId.h:
+
+    Fix performance regression of the TileId patch of 2008-04-24.
+    - make operators and hash function friends of TileId so they can
+      access the members directly.
+    - improve hash function, no more QString usage here.
+    - fix for operator<, comparison of m_tileX was wrong.
+
+    --timedemo results for my machine, average of 5 runs each:
+    before TileId patch: 13722 ms, 14,575 fps
+    with TileId patch:   18103 ms, 11,048 fps (32% regression)
+    with TileId fixed:   13788 ms, 14,506 fps (0,5% regression)
+
 2008-04-25  Inge Wallin  <inge@lysator.liu.se>
 
 	Crazy issue 13: Proper include directives

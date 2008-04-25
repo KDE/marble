@@ -16,6 +16,10 @@
 
 class TileId
 {
+  friend bool operator<( TileId const& lhs, TileId const& rhs );
+  friend bool operator==( TileId const& lhs, TileId const& rhs );
+  friend uint qHash( TileId const& );
+
  public:
   TileId( int zoomLevel, int tileX, int tileY );
   TileId();

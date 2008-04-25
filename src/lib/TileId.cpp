@@ -53,26 +53,29 @@ int TileId::zoomLevel() const
 
 bool operator<(TileId const& lhs, TileId const& rhs )
 {
-  if ( lhs.zoomLevel() < rhs.zoomLevel() )
+  if ( lhs.m_zoomLevel < rhs.m_zoomLevel )
       return true;
-  else if ( rhs.zoomLevel() < lhs.zoomLevel() )
+  else if ( rhs.m_zoomLevel < lhs.m_zoomLevel )
       return false;
-  else if ( lhs.x() < rhs.x() )
+  else if ( lhs.m_tileX < rhs.m_tileX )
       return true;
-  else if ( rhs.x() < lhs.x() )
-      return true;
+  else if ( rhs.m_tileX < lhs.m_tileX )
+      return false;
   else
-      return lhs.y() < rhs.y();
+      return lhs.m_tileY < rhs.m_tileY;
 }
 
 bool operator==(TileId const& lhs, TileId const& rhs )
 {
-    return lhs.zoomLevel() == rhs.zoomLevel()
-      && lhs.x() == rhs.x()
-      && lhs.y() == rhs.y();
+    return lhs.m_zoomLevel == rhs.m_zoomLevel
+      && lhs.m_tileX == rhs.m_tileX
+      && lhs.m_tileY == rhs.m_tileY;
 }
 
 uint qHash( TileId const& tid )
 {
-    return qHash( tid.toString() );
+    quint64 tmp = (quint64)(tid.m_zoomLevel) << 36
+      + (quint64)(tid.m_tileX) << 18
+      + (quint64)(tid.m_tileY);
+    return qHash( tmp );
 }
