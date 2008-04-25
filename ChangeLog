@@ -27,80 +27,80 @@
 
 2008-04-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * kdeedu/marble/src/lib/TileId.cpp:
-    * kdeedu/marble/src/lib/MergedLayerDecorator.h:
-    * kdeedu/marble/src/lib/TileId.h:
-    * kdeedu/marble/src/lib/MergedLayerDecorator.cpp:
-    * kdeedu/marble/src/lib/TextureTile.cpp:
-    * kdeedu/marble/src/lib/TileCache.cpp:
-    * kdeedu/marble/src/lib/TextureTile.h:
-    * kdeedu/marble/src/lib/TileLoader.cpp:
-    * kdeedu/marble/src/lib/TileCache.h:
-    * kdeedu/marble/src/lib/CMakeLists.txt:
+    * src/lib/TileId.cpp:
+    * src/lib/MergedLayerDecorator.h:
+    * src/lib/TileId.h:
+    * src/lib/MergedLayerDecorator.cpp:
+    * src/lib/TextureTile.cpp:
+    * src/lib/TileCache.cpp:
+    * src/lib/TextureTile.h:
+    * src/lib/TileLoader.cpp:
+    * src/lib/TileCache.h:
+    * src/lib/CMakeLists.txt:
 
     Add class TileId because int is not sufficient for higher zoom levels.
 
 2008-04-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * kdeedu/marble/src/lib/XmlHandler.cpp:
-    * kdeedu/marble/src/lib/MarbleLegendBrowser.cpp:
-    * kdeedu/marble/src/lib/GpxFileViewItem.h:
-    * kdeedu/marble/src/lib/ViewParams.cpp:
-    * kdeedu/marble/src/lib/BoundingBox.cpp:
-    * kdeedu/marble/src/lib/kml/KMLObject.cpp:
-    * kdeedu/marble/src/lib/SunControlWidget.h:
+    * src/lib/XmlHandler.cpp:
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/GpxFileViewItem.h:
+    * src/lib/ViewParams.cpp:
+    * src/lib/BoundingBox.cpp:
+    * src/lib/kml/KMLObject.cpp:
+    * src/lib/SunControlWidget.h:
 
     Fix include statements for Qt header: add Qt module.
 
 2008-04-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * kdeedu/marble/src/lib/gps/GpxFile.cpp:
-    * kdeedu/marble/src/lib/gps/Track.cpp:
-    * kdeedu/marble/src/lib/gps/TrackContainer.cpp:
-    * kdeedu/marble/src/lib/gps/GpsElement.h:
-    * kdeedu/marble/src/lib/gps/GpxSax.cpp:
-    * kdeedu/marble/src/lib/gps/GpsTracking.cpp:
-    * kdeedu/marble/src/lib/gps/GpxFileModel.cpp:
-    * kdeedu/marble/src/lib/gps/TrackSegment.cpp:
-    * kdeedu/marble/src/lib/gps/GmlSax.cpp:
-    * kdeedu/marble/src/lib/AbstractLayer/AbstractLayerContainer.cpp:
-    * kdeedu/marble/src/lib/AbstractLayer/AbstractLayerData.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/kml/KMLDocumentTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLLegendTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLZoomTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/GeoDataTest.cpp:
-    * kdeedu/marble/src/lib/geodata/data/GeoDataDocument.h:
-    * kdeedu/marble/src/lib/geodata/data/GeoDataObject.cpp:
-    * kdeedu/marble/src/lib/geodata/parser/GeoDataParser.cpp:
-    * kdeedu/marble/src/lib/geodata/parser/GeoTagHandler.cpp:
-    * kdeedu/marble/src/lib/geodata/parser/GeoSceneParser.cpp:
-    * kdeedu/marble/src/lib/geodata/parser/GeoParser.cpp:
-    * kdeedu/marble/src/lib/geodata/parser/GeoTagHandler.h:
-    * kdeedu/marble/src/plugins/marblewidget/MarbleWidgetPlugin.cpp:
-    * kdeedu/marble/src/plugins/marblewidget/MarbleWidgetPlugin.h:
-    * kdeedu/marble/src/plugins/navigator/MarbleNavigatorPlugin.h:
-    * kdeedu/marble/src/plugins/navigator/MarbleNavigatorPlugin.cpp:
-    * kdeedu/marble/src/plasmoid/latloneditplugin.cpp:
-    * kdeedu/marble/src/plasmoid/latlonedit.cpp:
-    * kdeedu/marble/src/plasmoid/worldclock.cpp:
-    * kdeedu/marble/src/plasmoid/latlonedit.h:
-    * kdeedu/marble/tools/svg2pnt/svgxmlhandler.cpp:
-    * kdeedu/marble/tools/svg2pnt/svg2pnt.cpp:
-    * kdeedu/marble/tools/svg2pnt/svgxmlhandler.h:
-    * kdeedu/marble/tests/GeoPolygonTest.cpp:
-    * kdeedu/marble/tests/MarbleWidgetTest.cpp:
+    * src/lib/gps/GpxFile.cpp:
+    * src/lib/gps/Track.cpp:
+    * src/lib/gps/TrackContainer.cpp:
+    * src/lib/gps/GpsElement.h:
+    * src/lib/gps/GpxSax.cpp:
+    * src/lib/gps/GpsTracking.cpp:
+    * src/lib/gps/GpxFileModel.cpp:
+    * src/lib/gps/TrackSegment.cpp:
+    * src/lib/gps/GmlSax.cpp:
+    * src/lib/AbstractLayer/AbstractLayerContainer.cpp:
+    * src/lib/AbstractLayer/AbstractLayerData.cpp:
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLHeadTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLVectorTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLayerTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLLegendTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLSettingsTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLZoomTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLItemTagHandler.cpp:
+    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/data/GeoDataDocument.h:
+    * src/lib/geodata/data/GeoDataObject.cpp:
+    * src/lib/geodata/parser/GeoDataParser.cpp:
+    * src/lib/geodata/parser/GeoTagHandler.cpp:
+    * src/lib/geodata/parser/GeoSceneParser.cpp:
+    * src/lib/geodata/parser/GeoParser.cpp:
+    * src/lib/geodata/parser/GeoTagHandler.h:
+    * src/plugins/marblewidget/MarbleWidgetPlugin.cpp:
+    * src/plugins/marblewidget/MarbleWidgetPlugin.h:
+    * src/plugins/navigator/MarbleNavigatorPlugin.h:
+    * src/plugins/navigator/MarbleNavigatorPlugin.cpp:
+    * src/plasmoid/latloneditplugin.cpp:
+    * src/plasmoid/latlonedit.cpp:
+    * src/plasmoid/worldclock.cpp:
+    * src/plasmoid/latlonedit.h:
+    * tools/svg2pnt/svgxmlhandler.cpp:
+    * tools/svg2pnt/svg2pnt.cpp:
+    * tools/svg2pnt/svgxmlhandler.h:
+    * tests/GeoPolygonTest.cpp:
+    * tests/MarbleWidgetTest.cpp:
 
     Fix include statements for Qt header: add Qt module.
 
