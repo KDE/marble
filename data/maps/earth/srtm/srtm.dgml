@@ -153,7 +153,7 @@
         <!-- At last we define some legend properties -->
         
         <legend>
-            <section name="boundaries" checkable="true" connect="boundaries" spacing="12">
+            <section name="borders" checkable="true" connect="boundaries" spacing="12">
                 <heading>Boundaries</heading>
 
                 <item name="international-boundary">
