@@ -40,7 +40,7 @@ class MARBLE_EXPORT Quaternion {
      * \param lat latitude
      */
     Quaternion(double lon, double lat);
-    virtual ~Quaternion(){ }
+    ~Quaternion(){ }
 
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
@@ -65,7 +65,7 @@ class MARBLE_EXPORT Quaternion {
 
     void        display() const;
 
-    virtual void rotateAroundAxis(const Quaternion &q);
+    void        rotateAroundAxis(const Quaternion &q);
     void        slerp(const Quaternion q1, const Quaternion q2, double t);
 
     void        scalar(double mult);

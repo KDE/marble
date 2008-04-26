@@ -1,5 +1,12 @@
 2008-04-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/Quaternion.h:
+
+    Make Quaternion non-virtual, that gives me a 4,5% better
+    performance with --timedemo.
+
+2008-04-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MergedLayerDecorator.h:
     * src/lib/MergedLayerDecorator.cpp:
 
