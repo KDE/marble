@@ -19,52 +19,44 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "DGMLPropertyTagHandler.h"
+#include "DGMLGroupTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "DGMLElementDictionary.h"
-#include "DGMLAttributeDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneSettings.h"
-#include "GeoSceneGroup.h"
-#include "GeoSceneProperty.h"
+#include "GeoSceneDocument.h"
 
 using namespace GeoSceneElementDictionary;
-using namespace GeoSceneAttributeDictionary;
 
-DGML_DEFINE_TAG_HANDLER(Property)
+DGML_DEFINE_TAG_HANDLER(Group)
 
-DGMLPropertyTagHandler::DGMLPropertyTagHandler()
+DGMLGroupTagHandler::DGMLGroupTagHandler()
     : GeoTagHandler()
 {
     /* NOOP */
 }
 
-DGMLPropertyTagHandler::~DGMLPropertyTagHandler()
+DGMLGroupTagHandler::~DGMLGroupTagHandler()
 {
     /* NOOP */
 }
 
-GeoNode* DGMLPropertyTagHandler::parse(GeoParser& parser) const
+GeoNode* DGMLGroupTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Property));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Group));
 
-    QString name = parser.attribute(dgmlAttr_name).trimmed();
+    QString name      = parser.attribute(dgmlAttr_name);
 
-    GeoSceneProperty* property = 0;
+    GeoSceneGroup* group = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Settings)) {
-        GeoSceneProperty* property = new GeoSceneProperty( name );
-        parentItem.nodeAs<GeoSceneSettings>()->addProperty( property);
-    }
-    if (parentItem.represents(dgmlTag_Group)) {
-        GeoSceneProperty* property = new GeoSceneProperty( name );
-        parentItem.nodeAs<GeoSceneGroup>()->addProperty( property);
+        group = new GeoSceneGroup( name );
+        parentItem.nodeAs<GeoSceneSettings>()->addGroup( group );
     }
 
-    return property;
+    return group;
 }

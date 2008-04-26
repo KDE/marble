@@ -21,6 +21,9 @@
 
 #include "GeoSceneSettings.h"
 
+#include "GeoSceneProperty.h"
+#include "GeoSceneGroup.h"
+
 GeoSceneSettings::GeoSceneSettings()
 {
     /* NOOP */
@@ -29,6 +32,28 @@ GeoSceneSettings::GeoSceneSettings()
 GeoSceneSettings::~GeoSceneSettings()
 {
     qDeleteAll(m_properties);
+    qDeleteAll(m_groups);
+}
+
+void GeoSceneSettings::addGroup( GeoSceneGroup* group )
+{
+    if ( group ) {
+        m_groups.insert( group->name(), group );
+    }
+}
+
+GeoSceneGroup* GeoSceneSettings::group( const QString& name )
+{
+    GeoSceneGroup* group = m_groups.value(name);
+    if ( group ) {
+        Q_ASSERT(group->name() == name);
+        return group;
+    }
+
+    group = new GeoSceneGroup( name );
+    addGroup( group );
+
+    return group;
 }
 
 void GeoSceneSettings::addProperty( GeoSceneProperty* property )

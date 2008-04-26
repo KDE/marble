@@ -1,3 +1,23 @@
+2008-04-26  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLGroupTagHandler.{cpp,h}:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneGroup.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+
+    - Introducing the group tag for settings properties.
+      This tag is just for categorizing the properties
+      and doesn't have a role concerning the 
+      legend view. However if one were to develop 
+      an alternative treeview which would just be 
+      created around the properties themselves then
+      this element can be used to categorize the properties.
+      Additionally it will get used for saving the 
+      values of the properties inside the rc-files in 
+      the future.
+
 2008-04-25  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/TileId.cpp:

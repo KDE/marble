@@ -19,44 +19,40 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENESETTINGS_H
-#define GEOSCENESETTINGS_H
+#ifndef GEOSCENEGROUP_H
+#define GEOSCENEGROUP_H
 
-#include <QtCore/QHash>
-
-#include <geodata_export.h>
+#include <QtCore/QVector>
 
 #include "GeoDocument.h"
 
 class GeoSceneProperty;
-class GeoSceneGroup;
 
 /**
- * @short Settings of a GeoScene document.
+ * @short Group inside the settings of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneSettings : public GeoNode {
+
+class GeoSceneGroup : public GeoNode {
  public:
-    GeoSceneSettings();
-    virtual ~GeoSceneSettings();
+    GeoSceneGroup( const QString& name );
+    ~GeoSceneGroup();
 
     /**
-     * @brief  Add a property to the settings
+     * @brief  Add a property to this setting group
      * @param  property  the new property
      */
-    void addGroup( GeoSceneGroup* );
-    GeoSceneGroup* group( const QString& );
+    void addProperty(GeoSceneProperty*);
+    GeoSceneProperty* property(const QString&);
+    QVector<GeoSceneProperty*> properties() const;
 
-    /**
-     * @brief  Add a property to the settings
-     * @param  property  the new property
-     */
-    void addProperty( GeoSceneProperty* );
-    GeoSceneProperty* property( const QString& );
+    QString name() const;
 
  protected:
-    /// The hash table holding all the properties in the settings.
-    QHash<QString, GeoSceneProperty*> m_properties;
-    QHash<QString, GeoSceneGroup*> m_groups;
+    /// The vector holding all the properties in this settings group.
+    QVector<GeoSceneProperty*> m_properties;
+
+    QString m_name;
 };
 
-#endif // GEOSCENESETTINGS_H
+
+#endif // GEOSCENEGROUP_H

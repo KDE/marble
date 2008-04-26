@@ -22,6 +22,7 @@ SET( geodata_data_SRCS
 
 SET( geodata_scene_SRCS
         geodata/scene/GeoSceneDocument.cpp
+        geodata/scene/GeoSceneGroup.cpp
         geodata/scene/GeoSceneHead.cpp
         geodata/scene/GeoSceneIcon.cpp
         geodata/scene/GeoSceneItem.cpp
