@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 
@@ -46,14 +46,15 @@ class AbstractProjection
 
     virtual ~AbstractProjection();
 
-    virtual bool  repeatX() const        { return m_repeatX; }
-    virtual void  setRepeatX( bool val ) { m_repeatX = val;  }
+    virtual double  maxLat()  const        { return m_maxLat; }
+    virtual bool    repeatX() const        { return m_repeatX; }
+    virtual void    setRepeatX( bool val ) { m_repeatX = val;  }
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position in radians
      * @param lat    the lat coordinate of the requested pixel position in radians
-     * @param params the viewport parametersn
+     * @param viewport the viewport parameters
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @return @c true  if the geographical coordinates are visible on the screen
@@ -62,14 +63,14 @@ class AbstractProjection
      * @see ViewportParams
      */
     virtual bool screenCoordinates( const double lon, const double lat,
-                                    const ViewportParams *params,
+                                    const ViewportParams *viewport,
                                     int& x, int& y,
 				    CoordinateType coordType = originalCoordinates ) = 0;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param geopoint the point on earth, including altitude, that we want the coordinates for.
-     * @param params the viewport parameters
+     * @param viewport the viewport parameters
      * @param planetAxisMatrix The matrix describing the current rotation of the globe
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
@@ -79,7 +80,7 @@ class AbstractProjection
      * @see ViewportParams
      */
     virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
-                                    const ViewportParams *params,
+                                    const ViewportParams *viewport,
                                     const matrix &planetAxisMatrix,
                                     int &x, int &y ) = 0;
 
@@ -87,7 +88,7 @@ class AbstractProjection
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel
      * @param y      the y coordinate of the pixel
-     * @param params the viewport parameters
+     * @param viewport the viewport parameters
      * @param lon    the longitude angle is returned through this parameter
      * @param lat    the latitude angle is returned through this parameter
      * @param unit   the unit of the angles for lon and lat.
@@ -95,7 +96,7 @@ class AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     virtual bool geoCoordinates( const int x, const int y,
-                                 const ViewportParams *params,
+                                 const ViewportParams *viewport,
                                  double& lon, double& lat,
                                  GeoDataPoint::Unit unit = GeoDataPoint::Degree ) = 0;
 
@@ -103,18 +104,20 @@ class AbstractProjection
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
      * @param x  the x coordinate of the pixel
      * @param y  the y coordinate of the pixel
+     * @param viewport the viewport parameters
      * @param q  the out parameter where the result is returned
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
     virtual bool geoCoordinates( int x, int y,
-                                 const ViewportParams *params,
+                                 const ViewportParams *viewport,
                                  Quaternion &q ) = 0;
 
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
-    bool m_repeatX;             // Map repeated in X direction.
+    double  m_maxLat;		// The max latitude.  Not always 90 degrees.
+    bool    m_repeatX;		// Map repeated in X direction.
 };
 
 

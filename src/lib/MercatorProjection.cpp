@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 
@@ -26,6 +26,9 @@ static double msvc_atanh(double x)
 MercatorProjection::MercatorProjection()
     : AbstractProjection()
 {
+    // This is the max value where atanh( sin( lat ) ) is defined.
+    m_maxLat  = 85.05113 * DEG2RAD;
+
     m_repeatX = true;
 }
 
@@ -35,7 +38,7 @@ MercatorProjection::~MercatorProjection()
 
 
 bool MercatorProjection::screenCoordinates( const double lon, const double lat,
-                                            const ViewportParams *params,
+                                            const ViewportParams *viewport,
                                             int& x, int& y,
 					    CoordinateType coordType )
 {
@@ -44,27 +47,27 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
-    params->centerCoordinates( centerLon, centerLat );
-    double  rad2Pixel = 2 * params->radius() / M_PI;
+    viewport->centerCoordinates( centerLon, centerLat );
+    double  rad2Pixel = 2 * viewport->radius() / M_PI;
  
-    x = (int)( params->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( params->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+    x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
 
     return true;
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, 
-                                            const ViewportParams *params,
+                                            const ViewportParams *viewport,
                                             const matrix &planetAxisMatrix,
                                             int &x, int &y )
 {
     double  lon;
     double  lat;
-    double  rad2Pixel = 2 * params->radius() / M_PI;
+    double  rad2Pixel = 2 * viewport->radius() / M_PI;
 
     double  centerLon;
     double  centerLat;
-    params->centerCoordinates( centerLon, centerLat );
+    viewport->centerCoordinates( centerLon, centerLat );
 
     geopoint.geoCoordinates( lon, lat );
     // FIXME: What is this magic number??
@@ -74,16 +77,16 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
         return false;
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)( params->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( params->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+    x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
 
     // Skip placemarks that are outside the screen area.
-    if ( ( y >= 0 && y < params->height() )
-         && ( ( x >= 0 && x < params->width() ) 
-              || (x - 4 * params->radius() >= 0
-                  && x - 4 * params->radius() < params->width() )
-              || (x + 4 * params->radius() >= 0
-                  && x + 4 * params->radius() < params->width() ) ) )
+    if ( ( y >= 0 && y < viewport->height() )
+         && ( ( x >= 0 && x < viewport->width() ) 
+              || (x - 4 * viewport->radius() >= 0
+                  && x - 4 * viewport->radius() < viewport->width() )
+              || (x + 4 * viewport->radius() >= 0
+                  && x + 4 * viewport->radius() < viewport->width() ) ) )
     {
         return true;
     }
@@ -93,32 +96,32 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
 
 bool MercatorProjection::geoCoordinates( const int x, const int y,
-                                         const ViewportParams *params,
+                                         const ViewportParams *viewport,
                                          double& lon, double& lat,
                                          GeoDataPoint::Unit unit )
 {
-    int           imgWidth2     = params->width() / 2;
-    int           imgHeight2    = params->height() / 2;
-    const double  inverseRadius = 1.0 / (double)(params->radius());
+    int           radius        = viewport->radius();
+    int           imgWidth2     = viewport->width() / 2;
+    int           imgHeight2    = viewport->height() / 2;
+    const double  inverseRadius = 1.0 / (double)(radius);
     bool          noerr         = false;
 
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
-    params->centerCoordinates( centerLon, centerLat );
+    viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset =  (int)((double)(2 * params->radius())
-                               / M_PI * centerLat);
-    int yTop          = imgHeight2 - params->radius() + yCenterOffset;
-    int yBottom       = yTop + 2 * params->radius();
+    int yCenterOffset = (int)( centerLat * (double)(2 * radius) / M_PI);
+    int yTop          = imgHeight2 - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
     if ( y >= yTop && y < yBottom ) {
         int const  xPixels = x - imgWidth2;
         int const  yPixels = y - imgHeight2;
 
-        double const pixel2rad = M_PI / (2 * params->radius());
+        double const pixel2rad = M_PI / (2 * radius);
 
         lat = atan( sinh( ((imgHeight2 + yCenterOffset) - y)
-                          / (double)(2 * params->radius()) * M_PI ) );
+                          / (double)(2 * radius) * M_PI ) );
         lon = xPixels * pixel2rad + centerLon;
 
         while ( lon > M_PI )  lon -= 2*M_PI;
@@ -136,7 +139,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 }
 
 bool MercatorProjection::geoCoordinates( int x, int y, 
-                                         const ViewportParams *params,
+                                         const ViewportParams *viewport,
                                          Quaternion &q)
 {
     // NYI
