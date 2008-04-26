@@ -50,7 +50,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     const uint lakeoffscreen = qRgb(0,0,0);
     // const uint glaciercolor = qRgb(200,200,200);
 
-    int     bump = 0;
+    int     bump = 8;
     GpFifo  emboss;
     emboss.buffer = 0;
 
@@ -104,8 +104,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     if ( bump  < 0 )  bump = 0;
                     if ( bump  > 15 )  bump = 15;
                 }
-                else
-                    bump = 8;
 
                 int alpha = qRed( *coastData );
                 if ( alpha == 255 || alpha == 0 ) {
@@ -194,8 +192,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 ) bump = 0;
                 }
-                else
-                    bump = 8;
 
                 int alpha = qRed( *coastData );
                 if ( alpha == 255 || alpha == 0 ) {
