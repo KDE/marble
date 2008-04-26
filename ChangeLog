@@ -1,3 +1,10 @@
+2008-04-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MergedLayerDecorator.h:
+    * src/lib/MergedLayerDecorator.cpp:
+
+    Fix include statements for Qt header: add Qt module.
+
 2008-04-26  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:

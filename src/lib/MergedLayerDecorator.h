@@ -16,8 +16,8 @@
 #ifndef MERGED_LAYER_DECORATOR_H
 #define MERGED_LAYER_DECORATOR_H
 
-#include <QImage>
-#include <QObject>
+#include <QtGui/QImage>
+#include <QtCore/QObject>
 
 #include "SunLocator.h"
 #include "TileId.h"

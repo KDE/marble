@@ -17,8 +17,8 @@
 #include "MergedLayerDecorator.h"
 
 #include <QtCore/QFile>
-#include <QDebug>
-#include <QPainter>
+#include <QtCore/QDebug>
+#include <QtGui/QPainter>
 
 #include "global.h"
 #include "MarbleDirs.h"
