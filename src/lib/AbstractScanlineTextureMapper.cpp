@@ -213,8 +213,6 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
 
-//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 2";
-
     if ( m_posX  >= m_tileLoader->tileWidth() 
          || m_posX < 0
          || m_posY >= m_tileLoader->tileHeight()
@@ -223,18 +221,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
         nextTile();
     }
 
-    // Now retrieve the color value of the requested pixel on the tile.
-    // This needs to be done differently for grayscale ( uchar, 1 byte ).
-    // and color ( uint, 4 bytes ) images.
-
-//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 3; m_posY =" << m_posY << "m_posX =" << m_posX;
-
-    if ( m_tile->depth() == 8 )
-        *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
-    else
-        *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
-
-//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 4";
+    *scanLine = m_tile->pixel( m_posX, m_posY ); 
 }
 
 void AbstractScanlineTextureMapper::nextTile()

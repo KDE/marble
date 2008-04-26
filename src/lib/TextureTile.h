@@ -48,8 +48,15 @@ class TextureTile : public QObject {
     const QImage& rawtile()   { return m_rawtile; }
     QImage* tile()            { return &m_rawtile; }
  
-    uchar  **jumpTable8;
-    uint   **jumpTable32;
+    // Here we retrieve the color value of the requested pixel on the tile.
+    // This needs to be done differently for grayscale ( uchar, 1 byte ).
+    // and color ( uint, 4 bytes ) images.
+
+    uint pixel( int x, int y ) const {
+        if ( m_depth == 8 )
+            return  jumpTable8[y][x];
+        return  jumpTable32[y][x];
+    }
 
  Q_SIGNALS:
     void tileUpdateDone();
@@ -60,6 +67,9 @@ class TextureTile : public QObject {
 
  protected:
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
+
+    uchar  **jumpTable8;
+    uint   **jumpTable32;
 
     TileId   m_id;
 

@@ -311,10 +311,7 @@ void GlobeScanlineTextureMapper::pixelValueApprox(const double& lon,
                 m_posY = ( itLat + itStepLat * j ) >> 7;
             }
 
-            if ( m_tile->depth() == 8 )
-                *scanLine = m_tile->jumpTable8[m_posY][m_posX ];
-            else
-                *scanLine = m_tile->jumpTable32[m_posY][m_posX ];
+            *scanLine = m_tile->pixel( m_posX, m_posY ); 
 
             ++scanLine;
         }
