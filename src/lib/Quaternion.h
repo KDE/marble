@@ -40,7 +40,6 @@ class MARBLE_EXPORT Quaternion {
      * \param lat latitude
      */
     Quaternion(double lon, double lat);
-    ~Quaternion(){ }
 
     // Operators
     Quaternion  operator*(const Quaternion &q) const;

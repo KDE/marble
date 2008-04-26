@@ -1,3 +1,9 @@
+2008-04-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/Quaternion.h:
+
+    Remove empty destructor.
+
 2008-04-26  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/TextureColorizer.cpp:
