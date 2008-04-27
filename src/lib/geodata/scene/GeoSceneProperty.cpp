@@ -27,7 +27,6 @@ GeoSceneProperty::GeoSceneProperty( const QString& name )
       m_defaultValue( false ),
       m_value( false )
 {
-    /* NOOP */
 }
 
 GeoSceneProperty::~GeoSceneProperty()
@@ -67,5 +66,12 @@ bool GeoSceneProperty::value() const
 
 void GeoSceneProperty::setValue( bool value )
 {
+    if ( m_value == value ) 
+        return;
+
     m_value = value;
+
+    emit valueChanged( m_name, m_value );
 }
+
+#include "GeoSceneProperty.moc"

@@ -32,7 +32,10 @@ class GeoSceneProperty;
  * @short Group inside the settings of a GeoScene document.
  */
 
-class GeoSceneGroup : public GeoNode {
+class GeoSceneGroup : public QObject, 
+                      public GeoNode {
+    Q_OBJECT
+
  public:
     GeoSceneGroup( const QString& name );
     ~GeoSceneGroup();
@@ -46,6 +49,9 @@ class GeoSceneGroup : public GeoNode {
     QVector<GeoSceneProperty*> properties() const;
 
     QString name() const;
+
+ Q_SIGNALS:
+    void valueChanged( QString, bool );
 
  protected:
     /// The vector holding all the properties in this settings group.

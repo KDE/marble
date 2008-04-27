@@ -79,9 +79,23 @@ void ViewParams::setProjection(Projection newProjection)
     m_viewport.setProjection( newProjection );
 }
 
+GeoSceneDocument *ViewParams::mapTheme()
+{
+    return m_mapTheme; 
+}
+
 MapQuality ViewParams::mapQuality()
 {
     return m_mapQuality; 
+}
+
+void ViewParams::setMapTheme( GeoSceneDocument *mapTheme )
+{
+    // Don't replace a working theme with one that obviously wouldn't work
+    if ( mapTheme != 0 ) {
+        delete m_mapTheme;
+        m_mapTheme = mapTheme; 
+    }
 }
 
 void ViewParams::setMapQuality( MapQuality mapQuality )

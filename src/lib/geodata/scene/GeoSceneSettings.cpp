@@ -39,6 +39,10 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
 {
     if ( group ) {
         m_groups.insert( group->name(), group );
+
+        // Establish connection to the outside, e.g. the LegendBrowser
+        connect ( group, SIGNAL( valueChanged( QString, bool ) ), 
+                         SIGNAL( valueChanged( QString, bool ) ) );
     }
 }
 
@@ -49,9 +53,6 @@ GeoSceneGroup* GeoSceneSettings::group( const QString& name )
         Q_ASSERT(group->name() == name);
         return group;
     }
-
-    group = new GeoSceneGroup( name );
-    addGroup( group );
 
     return group;
 }
@@ -76,3 +77,5 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 
     return property;
 }
+
+#include "GeoSceneSettings.moc"

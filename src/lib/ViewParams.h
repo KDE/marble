@@ -24,6 +24,7 @@
 
 #include <QtCore/QDebug>
 
+#include "GeoSceneDocument.h"
 #include "Quaternion.h"
 #include "BoundingBox.h"
 #include "ViewportParams.h"
@@ -47,9 +48,13 @@ class ViewParams
 
     // Getters and setters
     ViewportParams  *viewport();
+
     Projection projection() const;
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
+
+    GeoSceneDocument *mapTheme();
+    void setMapTheme( GeoSceneDocument* );
 
     Marble::MapQuality mapQuality();
     void setMapQuality( Marble::MapQuality );
@@ -66,6 +71,7 @@ class ViewParams
     ViewportParams  m_viewport;
     //Projection  m_projection;
     Projection  m_oldProjection;
+    GeoSceneDocument *m_mapTheme;
 
     MapQuality  m_mapQuality;
 

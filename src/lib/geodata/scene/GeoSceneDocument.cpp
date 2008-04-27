@@ -29,7 +29,9 @@ GeoSceneDocument::GeoSceneDocument()
     , m_settings(new GeoSceneSettings)
     , m_legend(new GeoSceneLegend)
 {
-    /* NOOP */
+    // Establish connection of property changes to the outside, e.g. the LegendBrowser
+    connect ( m_settings, SIGNAL( valueChanged( QString, bool ) ), 
+                          SIGNAL( valueChanged( QString, bool ) ) );
 }
 
 GeoSceneDocument::~GeoSceneDocument()
@@ -60,3 +62,5 @@ GeoSceneLegend* GeoSceneDocument::legend() const
 {
     return m_legend;
 }
+
+#include "GeoSceneDocument.moc"

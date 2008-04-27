@@ -33,8 +33,11 @@
 /**
  * @short A container for features parsed from the DGML file.
  */
-class GEODATA_EXPORT GeoSceneDocument : public GeoDocument,
-                         public GeoNode {
+class GEODATA_EXPORT GeoSceneDocument : public QObject, 
+                                        public GeoDocument,
+                                        public GeoNode {
+    Q_OBJECT
+
  public:
     GeoSceneDocument();
     ~GeoSceneDocument();
@@ -45,6 +48,9 @@ class GEODATA_EXPORT GeoSceneDocument : public GeoDocument,
     GeoSceneMap*      map() const;
     GeoSceneSettings* settings() const;
     GeoSceneLegend*   legend() const;
+
+ Q_SIGNALS:
+    void valueChanged( QString, bool );
 
  protected:
     GeoSceneHead*     m_head;

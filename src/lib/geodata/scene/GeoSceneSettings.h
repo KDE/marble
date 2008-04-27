@@ -34,7 +34,10 @@ class GeoSceneGroup;
 /**
  * @short Settings of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneSettings : public GeoNode {
+class GEODATA_EXPORT GeoSceneSettings : public QObject, 
+                                        public GeoNode {
+    Q_OBJECT
+
  public:
     GeoSceneSettings();
     virtual ~GeoSceneSettings();
@@ -52,6 +55,9 @@ class GEODATA_EXPORT GeoSceneSettings : public GeoNode {
      */
     void addProperty( GeoSceneProperty* );
     GeoSceneProperty* property( const QString& );
+
+ Q_SIGNALS:
+    void valueChanged( QString, bool );
 
  protected:
     /// The hash table holding all the properties in the settings.

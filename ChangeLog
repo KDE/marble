@@ -1,3 +1,18 @@
+2008-04-27  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
+    * src/lib/ViewParams.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneGroup.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneDocument.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneProperty.{cpp,h}:
+
+    - QObjectifiying GeoSceneDocument, Settings, Group and Property.
+    - Adding valueChanged( QString property, bool enabled ) signals.
+    - Adding GeoSceneDocument style mapTheme setters and getters to 
+      ViewParams ...
+
 2008-04-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Add a maxLat() method to all projections.

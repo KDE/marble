@@ -22,16 +22,23 @@
 #ifndef GEOSCENEPROPERTY_H
 #define GEOSCENEPROPERTY_H
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
 
 #include <geodata_export.h>
 
 #include "GeoDocument.h"
 
+
+
 /**
  * @short Settings property within a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneProperty : public GeoNode {
+
+class GEODATA_EXPORT GeoSceneProperty : public QObject, 
+                                        public GeoNode {
+    Q_OBJECT
+
  public:
     GeoSceneProperty( const QString& name );
     ~GeoSceneProperty();
@@ -43,6 +50,9 @@ class GEODATA_EXPORT GeoSceneProperty : public GeoNode {
     void setDefaultValue( bool defaultValue );
     bool value() const;
     void setValue( bool value );
+
+ Q_SIGNALS:
+    void valueChanged( QString, bool );
 
  protected:
     QString  m_name;

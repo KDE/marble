@@ -115,6 +115,10 @@ void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
     if ( d->m_marbleWidget ) {
         connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                   this, SLOT( loadLegend() ) );
+/*        connect ( d->m_marbleWidget->map()->viewParams()->mapTheme()
+                  SIGNAL( themeChanged( QString ) ),
+                  this, SLOT( loadLegend() ) );
+*/
     }
 }
 

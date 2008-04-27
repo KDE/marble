@@ -53,6 +53,11 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
 
     if ( property ) {
         m_properties.append( property );
+
+        // Establish connection to the outside, e.g. the LegendBrowser
+        connect ( property, SIGNAL( valueChanged( QString, bool ) ), 
+                            SIGNAL( valueChanged( QString, bool ) ) );
+        emit valueChanged( property->name(), property->value() );
     }
 }
 
@@ -71,9 +76,6 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
         return property;
     }
 
-    property = new GeoSceneProperty( name );
-    addProperty( property );
-
     return property;
 }
 
@@ -86,3 +88,5 @@ QString GeoSceneGroup::name() const
 {
     return m_name;
 }
+
+#include "GeoSceneGroup.moc"
