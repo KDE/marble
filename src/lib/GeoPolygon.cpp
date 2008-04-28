@@ -119,10 +119,10 @@ void PntMap::load(const QString &filename)
     unsigned char* src; 
     struct stat  statbuf;
 
-    if ( (fd = open (filename.toLatin1(), O_RDONLY) ) < 0)
+    if ( (fd = open (filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
         qDebug() << "cannot open" << filename << " for reading";
 
-    if ( fstat (fd,&statbuf) < 0 )
+    if ( fstat (fd,&statbuf) < 0 ) // krazy:exclude=syscalls
         qDebug() << "fstat error";
 
     int  filelength = statbuf.st_size;

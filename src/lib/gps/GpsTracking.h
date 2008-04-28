@@ -20,7 +20,7 @@
 #include "ClipPainter.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
-#include "config-libgps.h"
+#include "config-libgps.h" // krazy:exclude=includes
 
 
 #ifdef HAVE_LIBGPS
