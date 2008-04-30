@@ -31,7 +31,7 @@
 #include "GeoTagHandler.h"
 
 // DGML support
-#include "DGMLElementDictionary.h"
+#include "DgmlElementDictionary.h"
 
 
 using namespace GeoSceneElementDictionary;

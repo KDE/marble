@@ -22,7 +22,7 @@
 #include "GeoSceneMap.h"
 
 #include "GeoSceneLayer.h"
-#include "DGMLAuxillaryDictionary.h"
+#include "DgmlAuxillaryDictionary.h"
 
 using namespace GeoSceneAuxillaryDictionary;
 
