@@ -1,3 +1,19 @@
+2008-05-01  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.h
+    * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.h
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.cpp
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.cpp
+    * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.h
+    * src/lib/geodata/scene/GeoSceneTexture.cpp
+    * src/lib/geodata/scene/GeoSceneTexture.h
+    * src/lib/geodata/CMakeLists.txt
+    * docs/dgml2.dtd
+
+    Add storageLayout element to DGML in order to support different
+    storage layouts. This is needed for OpenStreetMap.
+
 2008-04-30  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/dgml/DGMLSourceFileTagHandler.cpp

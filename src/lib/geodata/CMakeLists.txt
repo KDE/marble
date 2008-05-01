@@ -70,6 +70,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlSectionTagHandler.cpp
         geodata/handlers/dgml/DgmlSourceDirTagHandler.cpp
         geodata/handlers/dgml/DgmlSourceFileTagHandler.cpp
+        geodata/handlers/dgml/DgmlStorageLayoutTagHandler.cpp
         geodata/handlers/dgml/DgmlTargetTagHandler.cpp
         geodata/handlers/dgml/DgmlTextTagHandler.cpp
         geodata/handlers/dgml/DgmlTextureTagHandler.cpp

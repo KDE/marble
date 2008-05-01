@@ -36,6 +36,7 @@ const char* dgmlAttr_connect   = "connect";
 const char* dgmlAttr_expire    = "expire";
 const char* dgmlAttr_feature   = "feature";
 const char* dgmlAttr_format    = "format";
+const char* dgmlAttr_mode      = "mode";
 const char* dgmlAttr_name      = "name";
 const char* dgmlAttr_pixmap    = "pixmap";
 const char* dgmlAttr_role      = "role";

@@ -30,9 +30,10 @@
 <!ELEMENT settings (group|property)*>
 <!ELEMENT sourceDir>
 <!ELEMENT sourceFile>
+<!ELEMENT storageLayout (#PCDATA)>
 <!ELEMENT target EMPTY>
 <!ELEMENT text (#PCDATA)>
-<!ELEMENT texture (sourcedir, installmap?)>
+<!ELEMENT texture (sourcedir, installmap?, storageLayout?)>
 <!ELEMENT theme (#PCDATA)>
 <!ELEMENT value>
 <!ELEMENT vector (sourcefile, pen?, brush?)>

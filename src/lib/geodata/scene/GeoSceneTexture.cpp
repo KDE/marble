@@ -25,7 +25,9 @@
 GeoSceneTexture::GeoSceneTexture( const QString& name )
     : GeoSceneAbstractDataset( name ),
       m_sourceDir( "" ),
-      m_installMap( "" )
+      m_installMap( "" ),
+      m_storageLayoutMode( Marble ),
+      m_customStorageLayout( "" )
 {
     /* NOOP */
 }
@@ -53,6 +55,26 @@ QString GeoSceneTexture::installMap() const
 void GeoSceneTexture::setInstallMap( const QString& installMap )
 {
     m_installMap = installMap;
+}
+
+GeoSceneTexture::StorageLayoutMode GeoSceneTexture::storageLayoutMode() const
+{
+    return m_storageLayoutMode;
+}
+
+void GeoSceneTexture::setStorageLayoutMode( const StorageLayoutMode mode )
+{
+    m_storageLayoutMode = mode;
+}
+
+QString GeoSceneTexture::customStorageLayout()const
+{
+    return m_customStorageLayout;
+}
+
+void GeoSceneTexture::setCustomStorageLayout( const QString& layout )
+{
+    m_customStorageLayout = layout;
 }
 
 QString GeoSceneTexture::type()

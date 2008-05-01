@@ -32,6 +32,8 @@
 
 class GeoSceneTexture : public GeoSceneAbstractDataset {
  public:
+    enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
+
     GeoSceneTexture( const QString& name );
     ~GeoSceneTexture();
 
@@ -41,11 +43,19 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
+    StorageLayoutMode storageLayoutMode() const;
+    void setStorageLayoutMode( StorageLayoutMode const );
+
+    QString customStorageLayout()const;
+    void setCustomStorageLayout( const QString& );
+
     virtual QString type();
 
  protected:
     QString m_sourceDir;
     QString m_installMap;
+    StorageLayoutMode m_storageLayoutMode;
+    QString m_customStorageLayout;
 };
 
 #endif // GEOSCENETEXTURE_H
