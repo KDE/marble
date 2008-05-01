@@ -269,7 +269,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect(this,        SIGNAL(centerOn(const QModelIndex&)),
 	    d->m_widget, SLOT(centerOn(const QModelIndex&)));
     connect(this,        SIGNAL(selectMapTheme(const QString&)),
-	    d->m_widget, SLOT(setMapTheme(const QString&)));
+	    d->m_widget, SLOT(setMapThemeId(const QString&)));
 
     // connect signals for the Legend
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
