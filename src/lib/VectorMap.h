@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 
@@ -59,6 +59,7 @@ class VectorMap : public ScreenPolygon::Vector
  private:
     void sphericalCreateFromPntMap( const PntMap*, ViewportParams *viewport );
     void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
+    void mercatorCreateFromPntMap( const PntMap*, ViewportParams *viewport );
 
     void createPolyLine( GeoDataPoint::Vector::ConstIterator, 
                          GeoDataPoint::Vector::ConstIterator, const int, 
@@ -69,11 +70,16 @@ class VectorMap : public ScreenPolygon::Vector
     void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
 				    GeoDataPoint::Vector::ConstIterator, 
 				    const int detail, ViewportParams *viewport );
+    void mercatorCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+				 GeoDataPoint::Vector::ConstIterator, 
+				 const int detail, ViewportParams *viewport );
 
     void sphericalPaintBase(   ClipPainter *painter, ViewportParams *viewport, 
 			       bool antialiasing );
     void rectangularPaintBase( ClipPainter *painter, ViewportParams *viewport, 
 			       bool antialiasing );
+    void mercatorPaintBase( ClipPainter *painter, ViewportParams *viewport, 
+			    bool antialiasing );
 
     void           manageCrossHorizon();
     const QPointF  horizonPoint();

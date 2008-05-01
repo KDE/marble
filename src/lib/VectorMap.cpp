@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 
@@ -440,6 +440,12 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 }
 
 
+// Paint the background of the ground, i.e. the water.
+//
+// FIXME: This is a strange thing to have in the vector code. 
+//        Move it somewhere better.
+// FIXME: Btw, we shouldn't assume that the globe to paint is the earth.
+//
 void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
@@ -449,6 +455,9 @@ void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
             break;
         case Equirectangular:
             rectangularPaintBase( painter, viewport, antialiasing);
+            break;
+        case Mercator:
+            mercatorPaintBase( painter, viewport, antialiasing);
             break;
     }
 }
@@ -489,10 +498,41 @@ void VectorMap::rectangularPaintBase( ClipPainter * painter,
     viewport->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
-    int yTop = m_imgheight / 2 - radius + yCenterOffset;
+    int yTop          = m_imgheight / 2 - radius + yCenterOffset;
 
     painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
 }
+
+void VectorMap::mercatorPaintBase( ClipPainter * painter, 
+				   ViewportParams *viewport, bool antialiasing)
+{
+    int  radius = viewport->radius();
+
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
+
+    painter->setPen( m_pen );
+    painter->setBrush( m_brush );
+
+    int yTop;
+    //int yBottom;
+    int dummy;
+    AbstractProjection *proj = viewport->currentProjection();
+
+    // Get the top pixel of the projected map.
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport, 
+			     dummy, yTop );
+    if ( yTop < 0 )
+      yTop = 0;
+#if 0
+    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+			     dummy, yBottom );
+    if ( yBottom > viewport->height() )
+      yBottom = viewport->height();
+#endif
+
+    painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
+}
+
 
 void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
 			 ViewportParams *viewport )
@@ -504,6 +544,9 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
 		       || viewport->radius() > m_imgry );
             break;
         case Equirectangular:
+            doClip = true; // clipping should always be enabled
+            break;
+        case Mercator:
             doClip = true; // clipping should always be enabled
             break;
     }
