@@ -636,9 +636,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml"
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    QString mapTheme() const;
+    QString mapThemeId() const;
     /**
      * @brief Set a new map theme
      * @param maptheme  The ID of the new maptheme. To ensure that a unique 
@@ -646,9 +646,9 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * name but the by relative location of the file that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml" 
+     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void  setMapTheme( const QString& maptheme );
+    void  setMapThemeId( const QString& maptheme );
 
     /**
      * @brief  Set whether the scale bar overlay is visible

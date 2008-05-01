@@ -564,7 +564,7 @@ void MarbleMap::setProjection( Projection projection )
     }
 
     // Update texture map during the repaint that follows:
-    setMapTheme( d->m_model->mapTheme() );
+//    setMapTheme( d->m_viewParams.mapTheme() );
     setNeedsUpdate();
 }
 
@@ -873,7 +873,7 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
     // Add to GlobeScanlineTextureMapper.
-    bool fog = false;
+    bool fog = true;
     if (fog == true)
         d->drawFog(painter);
 
@@ -964,18 +964,20 @@ void MarbleMap::goHome()
     zoomView( d->m_homeZoom ); // default 1050
 }
 
-QString MarbleMap::mapTheme() const
+QString MarbleMap::mapThemeId() const
 {
-    return d->m_model->mapTheme();
+    return d->m_model->mapThemeId();
 }
 
-void MarbleMap::setMapTheme( const QString& maptheme )
+void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
-    if ( maptheme == d->m_model->mapTheme()
+    if ( mapThemeId == d->m_model->mapThemeId()
          && d->m_viewParams.projection() == d->m_viewParams.m_oldProjection )
         return;
-
-    d->m_model->setMapTheme( maptheme, this, d->m_viewParams.projection() );
+    qDebug() << "MapThemeId in MarbleMap::setMapTheme: " << mapThemeId;
+    viewParams()->setMapThemeId( mapThemeId );
+    GeoSceneDocument *mapTheme = viewParams()->mapTheme();
+    d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -993,9 +995,8 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    qDebug() << "ATMOSPHERE" << visible;
     d->m_viewParams.m_showAtmosphere = visible;
-    // Quick and dirty way to 
+    // Quick and dirty way to force a whole update of the view
     d->doResize();
 }
 

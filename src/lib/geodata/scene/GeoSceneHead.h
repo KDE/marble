@@ -44,6 +44,9 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode {
     void setTarget( const QString& target );
     const QString theme() const;
     void setTheme( const QString& theme );
+
+    const QString mapThemeId() const;
+
     const QString description() const;
     void setDescription( const QString& );
 

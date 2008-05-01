@@ -73,9 +73,9 @@ void MarbleLegendBrowser::loadLegend()
     // Check for a theme specific legend.html first
     if ( d->m_marbleWidget != 0
 	 && d->m_marbleWidget->model() != 0
-	 && d->m_marbleWidget->model()->mapThemeObject() != 0 )
+	 && d->m_marbleWidget->model()->mapTheme() != 0 )
     {
-        GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
+        GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->head()->theme() + "/legend.html" ); 
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
@@ -115,10 +115,11 @@ void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
     if ( d->m_marbleWidget ) {
         connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                   this, SLOT( loadLegend() ) );
-/*        connect ( d->m_marbleWidget->map()->viewParams()->mapTheme()
-                  SIGNAL( themeChanged( QString ) ),
+
+        // FIXME: This doesn't do anything yet and needs improvement
+        connect ( d->m_marbleWidget->model()->mapTheme(),
+                  SIGNAL( valueChanged( QString, bool ) ),
                   this, SLOT( loadLegend() ) );
-*/
     }
 }
 
@@ -163,10 +164,10 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
     QString customLegendString;
 
-    if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapThemeObject() == 0 )
+    if ( d->m_marbleWidget == 0 || d->m_marbleWidget->model() == 0 || d->m_marbleWidget->model()->mapTheme() == 0 )
         return QString();
 
-    GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapThemeObject();
+    GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
 
     QVector<GeoSceneSection*> sections = currentMapTheme->legend()->sections();
 

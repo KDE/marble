@@ -11,6 +11,8 @@
 
 #include "ViewParams.h"
 
+#include "MapThemeManager.h"
+
 #include <QtGui/QImage>
 
 
@@ -19,6 +21,7 @@ ViewParams::ViewParams( )
     // Default projection
     m_oldProjection = Spherical;
 
+    m_mapTheme = 0;
     m_mapQuality = Normal;
 
     // Show / don't show parameters
@@ -79,6 +82,36 @@ void ViewParams::setProjection(Projection newProjection)
     m_viewport.setProjection( newProjection );
 }
 
+void ViewParams::setMapThemeId( const QString& mapThemeId )
+{
+    qDebug() << "MapThemeId" << mapThemeId;
+    // Here we start refactoring the map theme
+    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
+
+    // Check whether the selected theme got parsed well
+    if ( !mapTheme ) {
+
+        // Check whether the previous theme works 
+        if ( !m_mapTheme ){ 
+            // Fall back to default theme
+            qDebug() << "Falling back to default theme";
+            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgml");
+
+            // If this last resort doesn't work either shed a tear and exit
+            if ( !mapTheme ) {
+                qDebug() << "Couldn't find a valid DGML map.";
+                exit(-1);
+            }
+        }
+        else {
+            qDebug() << "Selected theme doesn't work, so we stick to the previous one";
+            return;
+        }
+    }
+
+    m_mapTheme = mapTheme;
+}
+
 GeoSceneDocument *ViewParams::mapTheme()
 {
     return m_mapTheme; 
@@ -93,7 +126,6 @@ void ViewParams::setMapTheme( GeoSceneDocument *mapTheme )
 {
     // Don't replace a working theme with one that obviously wouldn't work
     if ( mapTheme != 0 ) {
-        delete m_mapTheme;
         m_mapTheme = mapTheme; 
     }
 }

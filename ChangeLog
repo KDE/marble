@@ -166,6 +166,23 @@
 
 2008-04-27  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/ViewParams.cpp:
+
+    - Getting rid of "parent" in MarbleModel::setMapTheme() ...
+
+    * src/lib/geodata/scene/GeoSceneLayer.cpp:
+
+    - mem leak fix in GeoSceneLayer.
+
+    * src/lib/MarbleLegendBrowser.{cpp,h}:
+
+    - Initial change towards getting properties connected to 
+      the LegendBrowser.
+
+2008-04-27  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleLegendBrowser.cpp:
     * src/lib/geodata/handlers/dgml/DGMLPropertyTagHandler.cpp:
     * src/lib/ViewParams.{cpp,h}:

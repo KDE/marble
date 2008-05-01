@@ -702,13 +702,11 @@ int VectorMap::getDetailLevel( int radius ) const
 {
     int detail = 5;
 	
-    if ( radius >   50 ) detail = 4;
-    if ( radius >  600 ) detail = 3;
-    if ( radius > 1000 ) detail = 2;
-    if ( radius > 2500 ) detail = 1;
-    if ( radius > 5000 ) detail = 0;
-
-    //	qDebug() << "Detail: " << detail << " Radius: " << radius ;
+    if ( radius > 5000 )      detail = 0;
+    else if ( radius > 2500 ) detail = 1;
+    else if ( radius > 1000 ) detail = 2;
+    else if ( radius >  600 ) detail = 3;
+    else if ( radius >   50 ) detail = 4;
 
     return detail;
 }

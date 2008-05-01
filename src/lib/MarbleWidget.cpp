@@ -814,23 +814,31 @@ void MarbleWidget::goHome()
     repaint(); // not obsolete in case the zoomlevel stays unaltered
 }
 
-QString MarbleWidget::mapTheme() const
+QString MarbleWidget::mapThemeId() const
 {
-    return d->m_model->mapTheme();
+    return d->m_model->mapThemeId();
 }
 
-void MarbleWidget::setMapTheme( const QString& maptheme )
+void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    if ( maptheme == d->m_model->mapTheme() )
+    if ( mapThemeId == d->m_model->mapThemeId() )
         return;
 
+    qDebug() << "MapThemeId in MarbleWidget::setMapTheme: " << mapThemeId;
+
     // FIXME: Why does setMapTheme have to have a projection?
-    d->m_model->setMapTheme( maptheme, this, d->m_map->projection() );
+    d->m_map->setMapThemeId( mapThemeId );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     repaint();
 }
+
+GeoSceneDocument *MarbleWidget::mapTheme() const
+{
+    return d->m_map->viewParams()->mapTheme();
+}
+
 
 void MarbleWidget::setShowScaleBar( bool visible )
 {

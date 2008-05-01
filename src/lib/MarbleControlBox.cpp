@@ -258,7 +258,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );
-    selectTheme( d->m_widget->mapTheme() );
+    selectTheme( d->m_widget->mapThemeId() );
 
     connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
              this,        SLOT( selectProjection( Projection ) ) );

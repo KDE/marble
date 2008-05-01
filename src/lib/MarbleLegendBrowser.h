@@ -18,6 +18,7 @@
 #define MARBLELEGENDBROWSER_H
 
 
+#include <QtCore/QDebug>
 #include <QtGui/QTextBrowser>
 
 #include "marble_export.h"
@@ -64,6 +65,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 
  private Q_SLOTS:
     void loadLegend();
+    void test(){ qDebug() << "TEST"; }
 
     void toggleCheckBoxStatus( const QUrl &);
 

@@ -64,7 +64,7 @@ GeoSceneLayer::GeoSceneLayer( const QString& name )
 
 GeoSceneLayer::~GeoSceneLayer()
 {
-    /* NOOP */
+   qDeleteAll( m_datasets );
 }
 
 void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )

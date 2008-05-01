@@ -41,6 +41,8 @@ class QModelIndex;
 class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
 
+class GeoSceneDocument;
+
 // MarbleWidget 
 // class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
@@ -114,7 +116,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
-    Q_PROPERTY(QString mapTheme  READ mapTheme        WRITE setMapTheme)
+    Q_PROPERTY(QString mapThemeId  READ mapThemeId    WRITE setMapThemeId)
     Q_PROPERTY(int projection    READ projection      WRITE setProjection)
 
     Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
@@ -643,9 +645,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml"
+     *    mapThemeId = "earth/bluemarble/bluemarble.dgml"
      */
-    QString mapTheme() const;
+    QString mapThemeId() const;
+
+    /**
+     * @brief Get the GeoSceneDocument object of the current map theme
+     */
+    GeoSceneDocument *mapTheme() const;
+
     /**
      * @brief Set a new map theme
      * @param maptheme  The ID of the new maptheme. To ensure that a unique 
@@ -653,9 +661,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * name but the by relative location of the file that specifies the theme:
      *
      * Example: 
-     *    maptheme = "bluemarble/bluemarble.dgml" 
+     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void  setMapTheme( const QString& maptheme );
+    void  setMapThemeId( const QString& maptheme );
 
     /**
      * @brief  Set whether the scale bar overlay is visible

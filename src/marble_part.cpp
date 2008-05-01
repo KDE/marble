@@ -299,7 +299,7 @@ void MarblePart::readSettings()
     }
 
     // Map theme and projection
-    m_controlView->marbleWidget()->setMapTheme( MarbleSettings::mapTheme() );
+    m_controlView->marbleWidget()->setMapThemeId( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
 
     m_controlView->marbleWidget()->setShowClouds( MarbleSettings::showClouds() );
@@ -332,7 +332,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setHomeZoom( homeZoom );
 
     // Map theme and projection
-    MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapTheme() );
+    MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapThemeId() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
 
     MarbleSettings::setShowClouds( m_controlView->marbleWidget()->showClouds() );

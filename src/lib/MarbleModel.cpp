@@ -69,8 +69,6 @@ class MarbleModelPrivate
 
     // View and paint stuff
     GeoSceneDocument    *m_mapTheme;
-    QString              m_selectedMap;
-    bool                 m_previousMapLoadedFine;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;
@@ -179,7 +177,6 @@ MarbleModel::~MarbleModel()
     delete d->m_placemarkmodel;
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
-//    delete d->m_maptheme;
     delete d->m_mapTheme;
     delete d;
 }
@@ -204,12 +201,17 @@ void MarbleModel::stopPolling()
     d->m_timer->stop();
 }
 
-QString MarbleModel::mapTheme() const
+QString MarbleModel::mapThemeId() const
 {
-    return d->m_selectedMap;
+    QString mapThemeId = "";
+
+    if (d->m_mapTheme)
+        mapThemeId = d->m_mapTheme->head()->mapThemeId();
+
+    return mapThemeId;
 }
 
-GeoSceneDocument* MarbleModel::mapThemeObject() const
+GeoSceneDocument* MarbleModel::mapTheme() const
 {
     return d->m_mapTheme;
 }
@@ -224,33 +226,9 @@ GeoSceneDocument* MarbleModel::mapThemeObject() const
 // FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
 //
 
-void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
+void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 			       Projection currentProjection )
 {
-    // Here we start refactoring the map theme
-    GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( selectedMap ); // Hardcoded for a start
-
-    // Check whether the selected theme got parsed well
-    if ( !mapTheme ) {
-
-        // Check whether the previous theme works 
-        if ( !d->m_mapTheme ){ 
-            // Fall back to default theme
-            qDebug() << "Falling back to default theme";
-            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgml");
-
-            // If this last resort doesn't work either shed a tear and exit
-            if ( !mapTheme ) {
-                qDebug() << "Couldn't find a valid DGML map.";
-                exit(-1);
-            }
-        }
-        else {
-            qDebug() << "Selected theme doesn't work, so we stick to the previous one";
-            return;
-        }
-    }
-
     d->m_mapTheme = mapTheme;
 
     // Some output to show how to use this stuff ...
@@ -366,8 +344,7 @@ void MarbleModel::setMapTheme( const QString &selectedMap, QObject *parent,
     // FIXME: Still needs to get fixed for the DGML2 refactoring
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
 
-    d->m_selectedMap = selectedMap;
-    emit themeChanged( selectedMap );
+    emit themeChanged( mapTheme->head()->mapThemeId() );
     d->notifyModelChanged();
 }
 

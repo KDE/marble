@@ -49,12 +49,23 @@ class ViewParams
     // Getters and setters
     ViewportParams  *viewport();
 
+/** 
+ *  The actual parameters for the look get loaded 
+ *  via setMapThemeID.
+ *  mapTheme returns a pointer which then can get
+ *  passed on to the MarbleModel and the MarbleLegendBrowser. 
+ */
+    void setMapThemeId( const QString& );
+    QString mapThemeId();
+    GeoSceneDocument *mapTheme();
+
+    void setMapTheme( GeoSceneDocument * );
+
     Projection projection() const;
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
-    GeoSceneDocument *mapTheme();
-    void setMapTheme( GeoSceneDocument* );
+
 
     Marble::MapQuality mapQuality();
     void setMapQuality( Marble::MapQuality );

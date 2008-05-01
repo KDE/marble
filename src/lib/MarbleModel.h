@@ -138,9 +138,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example: 
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
-    QString mapTheme() const;
+    QString mapThemeId() const;
 
-    GeoSceneDocument *mapThemeObject() const;
+    GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme to use.
@@ -163,9 +163,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example: 
      *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void setMapTheme( const QString &selectedMap,
-		      //QWidget *parent,
-		      QObject *parent, /* FIXME */
+    void setMapTheme( GeoSceneDocument* mapTheme,
 		      Projection currentProjection );
 
     /**
@@ -243,7 +241,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return the cache limit in kilobytes
      */
     quint64 volatileTileCacheLimit() const;
-    
+
 
  public Q_SLOTS:
     /**
