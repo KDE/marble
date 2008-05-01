@@ -190,7 +190,6 @@ QStandardItemModel* MapThemeManager::mapThemeModel()
 
 QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThemeID )
 {
-    qDebug() << "About to create: " << mapThemeID;
     QList<QStandardItem *> itemList;
 
     GeoSceneDocument *mapTheme = loadMapTheme( mapThemeID );
@@ -224,7 +223,6 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
 
     QString name = mapTheme->head()->name();
     QString description = mapTheme->head()->description();
-    qDebug() << "item: name: " << name << "description: " << description;
 
     QStandardItem *item = new QStandardItem( name );
     item->setData( name, Qt::DisplayRole );
@@ -256,7 +254,6 @@ void MapThemeManager::updateMapThemeModel()
 
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
-        qDebug() << "About to add: " << mapThemeID;
 
 	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {

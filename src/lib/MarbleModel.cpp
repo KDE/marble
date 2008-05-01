@@ -110,7 +110,7 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
-    qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
+//    qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
     connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, const QString&, bool) ),
              this,            SLOT( paintTile(TextureTile*, int, int, int, const QString&, bool) ) );
 
@@ -230,7 +230,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 			       Projection currentProjection )
 {
     d->m_mapTheme = mapTheme;
-
+/*
     // Some output to show how to use this stuff ...
     qDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
     qDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
@@ -246,6 +246,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         qDebug() << "Contains vector layers! ";
     else
         qDebug() << "Does not contain any vector layers! ";
+*/
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         // If the tiles aren't already there, put up a progress dialog
@@ -265,7 +266,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         if ( !TileLoader::baseTilesAvailable( "maps/"
                                               + sourceDir ) )
         {
-            qDebug("DGML2: Base tiles not available. Creating Tiles ... ");
+            qDebug("Base tiles not available. Creating Tiles ... ");
 
             TileCreator *tileCreator = new TileCreator(
                                      sourceDir,
@@ -280,25 +281,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 qDebug("Tile creation completed");
         }
 
-        delete d->m_texmapper;
+        if ( !d->m_texmapper )
+            setProjection( currentProjection );
 
         d->m_tileLoader->setMapTheme( "maps/" + sourceDir );
-
-        switch( currentProjection ) {
-            case Spherical:
-                d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-            case Equirectangular:
-                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-            case Mercator:
-                d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
-                break;
-
-        }
-
-        connect( d->m_texmapper, SIGNAL( mapChanged() ),
-                 this,           SLOT( notifyModelChanged() ) );
     }
     else {
         d->m_tileLoader->flush();
@@ -348,19 +334,24 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->notifyModelChanged();
 }
 
-
-int MarbleModel::minimumZoom() const
+void MarbleModel::setProjection( Projection projection )
 {
-    if ( d->m_mapTheme )
-        return d->m_mapTheme->head()->zoom()->minimum();
-    return 0;
-}
+    delete d->m_texmapper;
 
-int MarbleModel::maximumZoom() const
-{
-    if ( d->m_mapTheme )
-        return d->m_mapTheme->head()->zoom()->maximum();
-    return 0;
+    switch( projection ) {
+        case Spherical:
+            d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
+            break;
+        case Equirectangular:
+            d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+            break;
+        case Mercator:
+            d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+            break;
+    }
+
+    connect( d->m_texmapper, SIGNAL( mapChanged() ),
+                this,           SLOT( notifyModelChanged() ) );
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const

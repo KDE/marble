@@ -84,8 +84,6 @@ void ViewParams::setProjection(Projection newProjection)
 
 void ViewParams::setMapThemeId( const QString& mapThemeId )
 {
-    qDebug() << "MapThemeId" << mapThemeId;
-    // Here we start refactoring the map theme
     GeoSceneDocument* mapTheme = MapThemeManager::loadMapTheme( mapThemeId );
 
     // Check whether the selected theme got parsed well

@@ -824,8 +824,6 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
     if ( mapThemeId == d->m_model->mapThemeId() )
         return;
 
-    qDebug() << "MapThemeId in MarbleWidget::setMapTheme: " << mapThemeId;
-
     // FIXME: Why does setMapTheme have to have a projection?
     d->m_map->setMapThemeId( mapThemeId );
 

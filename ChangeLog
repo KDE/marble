@@ -1,3 +1,47 @@
+2008-05-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneHead.cpp:
+
+    - Cleanup: remove redundant mini/maximumZoom from MarbleModel,
+      remove qDebugs, fixing the mapThemeId, some minor regressions and 
+      bugs.
+
+2008-05-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleMap.cpp:
+    * src/lib/MarbleModel.{cpp,h}:
+
+    - Fixing changing of projections using yet another workaround 
+      before we introduce the LayerManager.
+
+2008-05-01  Torsten Rahn  <rahn@kde.org>
+
+    * src/MarbleTest.cpp:
+    * src/QtMainWindow.cpp:
+    * src/lib/MarbleControlBox.cpp:  
+    * src/lib/MarbleLegendBrowser.{cpp,h}:  
+    * src/lib/MarbleMap.{cpp,h}:  
+    * src/lib/MarbleModel.{cpp,h}:  
+    * src/lib/MarbleWidget.{cpp,h}:  
+    * src/lib/ViewParams.{cpp,h}:  
+    * src/lib/geodata/scene/GeoSceneHead.{cpp,h}:  
+    * src/lib/geodata/scene/GeoSceneLayer.{cpp,h}:  
+    * src/marble_part.cpp: 
+
+    - mapTheme -> mapThemeId
+    - mapThemeObject -> mapTheme
+    - Instantiating the GeoSceneDocument object in Viewparams now.
+    - Afterwards its pointer gets passed to MarbleModel (later: LayerManager)
+      to feed the parameters to the backends.
+
+    * src/lib/VectorMap.{cpp,h}:  
+    - performance fix in VectorMap::getDetailLevel by Pino Toscano ...
+
+
 2008-05-01  Inge Wallin  <inge@lysator.liu.se>
 
 	// Paint the background for the mercator projection.

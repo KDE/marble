@@ -167,14 +167,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 		      Projection currentProjection );
 
     /**
-     * @brief Return the minimum zoom for the current map theme.
+     * @brief  Set the Projection used for the map
+     * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    int minimumZoom() const;
-
-    /**
-     * @brief Return the maximum zoom for the current map theme.
-     */
-    int maximumZoom() const;
+    void  setProjection( Projection projection );
 
     /**
      * @brief Return the downloadmanager to load missing tiles

@@ -518,7 +518,6 @@ void MarbleControlBox::selectTheme( const QString &theme )
         QModelIndex itIndexName = d->m_mapThemeModel->index( row, 1, QModelIndex() );
         QModelIndex itIndex     = d->m_mapThemeModel->index( row, 0, QModelIndex() );
 //        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapThemeModel->data( itIndexName ).toString();
-
         // If  we have found the theme in the theme model,
         //     and it is not the one that we already have,
         // then
@@ -535,8 +534,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
             // Since this slot is called when a change of map theme is
             // already finished, we can use the widget to get the
             // values.
-            d->uiWidget.zoomSlider->setMinimum( d->m_widget->model()->minimumZoom() );
-            d->uiWidget.zoomSlider->setMaximum( d->m_widget->model()->maximumZoom() );
+            d->uiWidget.zoomSlider->setMinimum( d->m_widget->map()->minimumZoom() );
+            d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
 
             // Break out of the loop
             break;

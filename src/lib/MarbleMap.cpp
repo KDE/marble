@@ -298,12 +298,18 @@ double MarbleMap::centerLongitude() const
 
 int  MarbleMap::minimumZoom() const
 {
-    return d->m_model->minimumZoom();
+    if ( d->m_viewParams.mapTheme() )
+        return d->m_viewParams.mapTheme()->head()->zoom()->minimum();
+
+    return 950;
 }
 
 int  MarbleMap::maximumZoom() const
 {
-    return d->m_model->maximumZoom();
+    if ( d->m_viewParams.mapTheme() )
+        return d->m_viewParams.mapTheme()->head()->zoom()->maximum();
+
+    return 2100;
 }
 
 void MarbleMap::addPlaceMarkFile( const QString &filename )
@@ -564,7 +570,7 @@ void MarbleMap::setProjection( Projection projection )
     }
 
     // Update texture map during the repaint that follows:
-//    setMapTheme( d->m_viewParams.mapTheme() );
+    d->m_model->setProjection( projection );
     setNeedsUpdate();
 }
 
@@ -873,7 +879,7 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
     // Add to GlobeScanlineTextureMapper.
-    bool fog = true;
+    bool fog = false;
     if (fog == true)
         d->drawFog(painter);
 
@@ -976,7 +982,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
         return;
     qDebug() << "MapThemeId in MarbleMap::setMapTheme: " << mapThemeId;
     viewParams()->setMapThemeId( mapThemeId );
-    GeoSceneDocument *mapTheme = viewParams()->mapTheme();
+    GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
     d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
     // Update texture map during the repaint that follows:
