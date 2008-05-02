@@ -225,7 +225,6 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
 
     bool showBorders;
     viewParams->mapTheme()->settings()->propertyValue( "borders", showBorders );
-    qDebug() << showBorders;
 
     if ( showBorders ) {
         // Countries
