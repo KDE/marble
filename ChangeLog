@@ -1,3 +1,28 @@
+2008-05-02  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleLegendBrowser.{cpp,h}:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/ViewParams.{cpp,h}:
+    * src/lib/MarbleMap_p.h::
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+    * data/maps/earth/citylights/citylights.dgml:
+    * data/maps/earth/plain/plain.dgml:
+    * data/maps/earth/srtm/srtm.dgml:
+    * data/maps/earth/bluemarble/bluemarble.dgml:
+    * data/legend.html:
+    * src/lib/VectorMap.cpp:
+    * src/lib/PlaceMarkLayout.cpp:
+    * src/lib/TileLoaderHelper.cpp:
+    * src/lib/TextureColorizer.cpp:
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/VectorComposer.cpp:
+    * src/lib/MarbleControlBox.cpp:
+
+    - Getting rid of the bool members in ViewParams and moving
+      properties over to GeoSceneDocument.
+
 2008-05-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/TextureTile.cpp

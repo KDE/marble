@@ -24,6 +24,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
+#include "GeoSceneProperty.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 
@@ -66,6 +67,49 @@ MarbleLegendBrowser::~MarbleLegendBrowser()
     delete d;
 }
 
+void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
+{
+    // We need this to be able to get to the MapTheme.
+    d->m_marbleWidget = marbleWidget;
+
+    initTheme();
+
+    if ( d->m_marbleWidget ) {
+        connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
+                  this, SLOT( initTheme() ) );
+    }
+}
+
+void MarbleLegendBrowser::initTheme()
+{
+    qDebug() << "initTheme";
+
+    // Check for a theme specific legend.html first
+    if ( d->m_marbleWidget != 0
+     && d->m_marbleWidget->model() != 0
+     && d->m_marbleWidget->model()->mapTheme() != 0 )
+    {
+        GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
+
+        QVector<GeoSceneProperty*> allProperties = currentMapTheme->settings()->allProperties();
+
+        d->m_checkBoxMap.clear();
+
+        QVector<GeoSceneProperty*>::const_iterator it = allProperties.begin();
+        for (it = allProperties.begin(); it != allProperties.end(); ++it) {
+            if ( (*it)->available() == true ) {
+                setCheckedProperty( (*it)->name(), (*it)->value() );
+            }
+        }
+
+        disconnect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ), 0, 0 );
+        connect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ),
+                  this, SLOT( test( QString, bool ) ) );
+    }
+
+    loadLegend();
+}
+
 void MarbleLegendBrowser::loadLegend()
 {
     qDebug() << "loadLegend";
@@ -78,10 +122,6 @@ void MarbleLegendBrowser::loadLegend()
 	 && d->m_marbleWidget->model()->mapTheme() != 0 )
     {
         GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
-
-        disconnect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ), 0, 0 );
-        connect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ),
-                  this, SLOT( test( QString, bool ) ) );
 
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->head()->theme() + "/legend.html" ); 
         if ( !customLegendPath.isEmpty() )
@@ -111,22 +151,6 @@ void MarbleLegendBrowser::loadLegend()
     document()->rootFrame()->setFrameFormat( format );
     viewport()->update();
 }
- 
-void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
-{
-    // We need this to be able to get to the MapTheme.
-    d->m_marbleWidget = marbleWidget;
-
-    loadLegend();
-
-    if ( d->m_marbleWidget ) {
-        connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
-                  this, SLOT( loadLegend() ) );
-
-        // FIXME: This doesn't do anything yet and needs improvement
-    }
-}
-
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )
 {
@@ -202,17 +226,18 @@ QString MarbleLegendBrowser::generateSectionsHtml()
             else
                 itemPixmap = QPixmap( 24, 12 );
 
-            QPixmap itemIcon = itemPixmap;
-            QColor itemColor = QColor( items.at(item)->icon()->color() );
+            QPixmap itemIcon = itemPixmap.copy();
 
-            if ( itemColor != Qt::transparent )
-            {
-                QPainter painter( &itemIcon );
-                painter.fillRect( QRect( 0, 0, itemIcon.width(), itemIcon.height() ), itemColor);
-                // Paint the pixmap on top of the colored background
-                if ( !pixmapRelativePath.isEmpty() ) {
-                    painter.drawPixmap( 0, 0, itemPixmap );
-                }
+            QColor itemColor = QColor( items.at(item)->icon()->color() );
+            if ( !itemColor.isValid() )
+                itemColor = QColor( Qt::transparent );
+
+            itemIcon.fill( itemColor );
+
+            QPainter painter( &itemIcon );
+
+            if ( !pixmapRelativePath.isEmpty() ) {
+                painter.drawPixmap( 0, 0, itemPixmap );
             }
 
 
@@ -278,7 +303,7 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 
         if ( d->m_checkBoxMap.contains( checkBoxName ) ) {
             d->m_checkBoxMap[ checkBoxName ] = !d->m_checkBoxMap.value( checkBoxName );
-            sendSignals( checkBoxName, d->m_checkBoxMap.value( checkBoxName ) );
+            emit toggledShowProperty( checkBoxName, d->m_checkBoxMap.value( checkBoxName ) );
         }
     }
 
@@ -295,52 +320,15 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     repaint();
 }
 
-void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
-{
-    emit toggledShowProperty( name, checked );
-
-    if ( name == "locations") {
-        emit toggledLocations( checked );
-    }
-    if ( name == "cities") {
-        emit toggledCities( checked );
-    }
-    if ( name == "terrain") {
-        emit toggledTerrain( checked );
-    }
-/*
-    if ( name == "borders") {
-        emit toggledBorders( checked );
-    }
-*/
-    if ( name == "waterbodies") {
-        emit toggledWaterBodies( checked );
-    }
-    if ( name == "otherplaces") {
-        emit toggledOtherPlaces( checked );
-    }
-    if ( name == "grid") {
-        emit toggledGrid( checked );
-    }
-    if ( name == "ice") {
-        emit toggledIceLayer( checked );
-    }
-    if ( name == "relief") {
-        emit toggledRelief( checked );
-    }
-    if ( name == "compass") {
-        emit toggledCompass( checked );
-    }
-    if ( name == "scalebar") {
-        emit toggledScaleBar( checked );
-    }
-}
-
-
 // ----------------------------------------------------------------
 //  Lots of slots
 
+void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
+{
+    d->m_checkBoxMap[ name ] = checked;
+}
 
+/*
 void MarbleLegendBrowser::setCheckedLocations( bool checked )
 {
     d->m_checkBoxMap[ "locations" ] = checked;
@@ -395,7 +383,7 @@ void MarbleLegendBrowser::setCheckedScaleBar( bool checked )
 {
     d->m_checkBoxMap[ "scalebar" ] = checked;
 }
-
+*/
 
 
 #include "MarbleLegendBrowser.moc"

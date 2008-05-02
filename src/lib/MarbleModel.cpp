@@ -230,9 +230,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 			       Projection currentProjection )
 {
     d->m_mapTheme = mapTheme;
-/*
+
     // Some output to show how to use this stuff ...
     qDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
+/*
     qDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
 
     if ( d->m_mapTheme->map()->hasTextureLayers() )
@@ -279,7 +280,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 tileCreatorDlg.exec();
                 qDebug("Tile creation completed");
         }
-
         d->m_tileLoader->setTextureLayer( texture );
 
         if ( !d->m_texmapper )
@@ -444,7 +444,11 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     }
 
     // Paint the lon/lat grid around the earth.
-    if ( viewParams->m_showGrid ) {
+    bool showGrid;
+
+    viewParams->mapTheme()->settings()->propertyValue( "coordinate-grid", showGrid );
+
+    if ( showGrid ) {
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );
 
         // FIXME: Why would the createFoo() functions be exposed in
@@ -482,10 +486,14 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 
     // Paint the GeoDataPlaceMark layer
 #ifndef KML_GSOC
-    if ( viewParams->m_showPlaceMarks 
-         && ( viewParams->m_showCities
-              || viewParams->m_showTerrain 
-              || viewParams->m_showOtherPlaces )
+    bool showPlaces, showCities, showTerrain, showOtherPlaces;
+
+    viewParams->mapTheme()->settings()->propertyValue( "places", showPlaces );
+    viewParams->mapTheme()->settings()->propertyValue( "cities", showCities );
+    viewParams->mapTheme()->settings()->propertyValue( "terrain", showTerrain );
+    viewParams->mapTheme()->settings()->propertyValue( "otherplaces", showOtherPlaces );
+
+    if ( showPlaces && ( showCities || showTerrain || showOtherPlaces )
          && d->m_placemarkmodel->rowCount() > 0 )
     {
         d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,

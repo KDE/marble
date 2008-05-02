@@ -63,8 +63,6 @@ class MarbleMapPrivate
     TextureColorizer  *m_sealegend;
 
     // Parameters for the maps appearance.
-    bool             m_showCompass;
-    bool             m_showScaleBar;
 
     bool             m_showFrameRate;
 

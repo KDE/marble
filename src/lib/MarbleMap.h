@@ -118,8 +118,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
     Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
 
-    Q_PROPERTY(bool quickDirty   READ quickDirty      WRITE setQuickDirty)
-
     Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
     Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
 #endif
@@ -315,6 +313,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Return a QPixmap with the current contents of the map.
      */
     QPixmap mapScreenShot();
+
+    /**
+     * @brief  Return the property value by name.
+     * @return The property value (usually: visibility).
+     */
+    bool  propertyValue( const QString& name) const;
 
     /**
      * @brief  Return whether the scale bar is visible.
@@ -651,10 +655,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void  setMapThemeId( const QString& maptheme );
 
     /**
-     * @brief  Set whether a map theme property is visible
-     * @param  visible  visibility of the scale bar
+     * @brief  Sets the value of a map theme property
+     * @param  value  value of the property (usually: visibility)
+     * 
+     * Later on we might add a "setPropertyType and a QVariant
+     * if needed.
      */
-    void setShowProperty( const QString& name, bool visible );
+    void setPropertyValue( const QString& name, bool value );
 
     /**
      * @brief  Set whether the scale bar overlay is visible
@@ -789,12 +796,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Return a QAbstractItemModel containing files.
      */
     FileViewModel* fileViewModel() const;
-
-    /**
-     * @brief  Set whether for rendering quick and dirty algorithms should be used
-     * @param  enabled  Enable quick and dirty rendering
-     */
-    void setQuickDirty( bool enabled );
 
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.

@@ -229,6 +229,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setMarbleWidget( d->m_widget );
 
+/*
     d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
     d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
     d->uiWidget.marbleLegendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
@@ -241,7 +242,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->uiWidget.marbleLegendBrowser->setCheckedRelief( d->m_widget->showRelief() );
     d->uiWidget.marbleLegendBrowser->setCheckedCompass( d->m_widget->showCompass() );
     d->uiWidget.marbleLegendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
-
+*/
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
     connect( this, SIGNAL(zoomChanged(int)), d->m_widget, SLOT(zoomView(int)) );
@@ -274,7 +275,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // connect signals for the Legend
 
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
-             d->m_widget,                     SLOT( setShowProperty( QString, bool ) ) );
+             d->m_widget,                     SLOT( setPropertyValue( QString, bool ) ) );
+
+/*
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
              d->m_widget,                     SLOT( setShowPlaces( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCities( bool ) ),
@@ -299,7 +302,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget,                     SLOT( setShowCompass( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
              d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
-
+*/
     //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );

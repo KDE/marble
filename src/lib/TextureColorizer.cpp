@@ -69,7 +69,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     GpFifo  emboss;
     emboss.buffer = 0;
 
-    const bool showRelief = viewParams->m_showRelief;
+    bool showRelief;
+    viewParams->mapTheme()->settings()->propertyValue( "relief", showRelief );
 
     if ( radius * radius > imgradius
          || viewParams->projection() == Equirectangular

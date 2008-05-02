@@ -118,7 +118,11 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> setBrush( m_textureLandBrush );
     m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
 
-    if ( viewParams->m_showLakes ) {
+    bool showWaterbodies, showLakes;
+    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->mapTheme()->settings()->propertyValue( "lakes", showLakes );
+
+    if ( showWaterbodies || showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -134,7 +138,10 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
     }
 
-    if ( viewParams->m_showIceLayer ) {
+    bool showIce;
+    viewParams->mapTheme()->settings()->propertyValue( "ice", showIce );
+
+    if ( showIce ) {
         // Glaciers
          m_vectorMap -> setzBoundingBoxLimit( 0.8 );
          m_vectorMap -> setzPointLimit( 0.9 );
@@ -182,7 +189,11 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, antialiased );
 
-    if ( viewParams->m_showLakes ) {
+    bool showWaterbodies, showLakes;
+    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->mapTheme()->settings()->propertyValue( "lakes", showLakes );
+
+    if ( showWaterbodies || showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -212,7 +223,11 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
             antialiased = true;
     }
 
-    if ( viewParams->m_showRivers ) {
+    bool showWaterbodies, showRivers;
+    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->mapTheme()->settings()->propertyValue( "rivers", showRivers );
+
+    if ( showWaterbodies || showRivers ) {
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );

@@ -272,7 +272,7 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() < detail )
-	    continue;
+            continue;
 
 	// Calculate polygon nodes
 #ifdef VECMAP_DEBUG

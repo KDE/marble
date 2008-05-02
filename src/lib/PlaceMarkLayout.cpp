@@ -216,6 +216,13 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     int x = 0;
     int y = 0;
 
+    bool showPlaces, showCities, showTerrain, showOtherPlaces;
+
+    viewParams->mapTheme()->settings()->propertyValue( "places", showPlaces );
+    viewParams->mapTheme()->settings()->propertyValue( "cities", showCities );
+    viewParams->mapTheme()->settings()->propertyValue( "terrain", showTerrain );
+    viewParams->mapTheme()->settings()->propertyValue( "otherplaces", showOtherPlaces );
+
     /**
      * First handle the selected placemarks, as they have the highest priority.
      */
@@ -328,16 +335,16 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         const int visualCategory  = index.data( MarblePlacemarkModel::VisualCategoryRole ).toInt();
 
         // Skip city marks if we're not showing cities.
-        if ( !viewParams->m_showCities
+        if ( !showCities
              && ( visualCategory > 2 && visualCategory < 20 ) )
             continue;
 
         // Skip terrain marks if we're not showing terrain.
-        if ( !viewParams->m_showTerrain
+        if ( !showTerrain
              && ( visualCategory >= 20 && visualCategory <= 23 ) )
             continue;
 
-        if ( !viewParams->m_showOtherPlaces
+        if ( !showOtherPlaces
              && ( visualCategory >= 24 && visualCategory <= 27 ) )
             continue;
 

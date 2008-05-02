@@ -67,6 +67,10 @@ void MapThemeManager::initFileSystemWatcher()
 
 GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID )
 {
+    if ( mapThemeStringID.isEmpty() )
+        return 0;
+
+    qDebug() << "loadMapTheme" << mapThemeStringID;
     const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
     return loadMapThemeFile( mapThemePath );
 }

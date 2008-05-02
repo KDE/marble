@@ -38,20 +38,11 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void  setMarbleWidget( MarbleWidget *marbleWidget );
 
  public Q_SLOTS:
-    void setCheckedLocations( bool checked );
-    void setCheckedCities( bool checked );
-    void setCheckedTerrain( bool checked );
-    void setCheckedBorders( bool checked );
-    void setCheckedWaterBodies( bool checked );
-    void setCheckedIceLayer( bool checked );
-    void setCheckedOtherPlaces( bool checked );
-    void setCheckedGrid( bool checked );
-    void setCheckedRelief( bool checked );
-    void setCheckedCompass( bool checked );
-    void setCheckedScaleBar( bool checked );
+    void setCheckedProperty( const QString& name, bool checked );
     void test( const QString& name, bool value ){ qDebug() << "TEST" << name << value; }
 
  Q_SIGNALS:
+/*
     void toggledLocations( bool );
     void toggledCities( bool );
     void toggledTerrain( bool );
@@ -63,10 +54,12 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledRelief( bool );
     void toggledCompass( bool );
     void toggledScaleBar( bool );
-
+*/
     void toggledShowProperty( QString, bool );
 
  private Q_SLOTS:
+    void initTheme();
+
     void loadLegend();
 
     void toggleCheckBoxStatus( const QUrl &);
@@ -77,7 +70,6 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void  translateHtml( QString & html );
 
     QVariant loadResource ( int type, const QUrl & name );
-    void     sendSignals( const QString &name, bool checked );
 
  private:
     MarbleLegendBrowserPrivate  * const d; 

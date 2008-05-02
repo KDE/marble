@@ -821,10 +821,10 @@ QString MarbleWidget::mapThemeId() const
 
 void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    if ( mapThemeId == d->m_model->mapThemeId() )
+    qDebug() << "MapThemeId" << mapThemeId;
+    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
         return;
 
-    // FIXME: Why does setMapTheme have to have a projection?
     d->m_map->setMapThemeId( mapThemeId );
 
     // Update texture map during the repaint that follows:
@@ -837,11 +837,13 @@ GeoSceneDocument *MarbleWidget::mapTheme() const
     return d->m_map->viewParams()->mapTheme();
 }
 
-void MarbleWidget::setShowProperty( const QString& name, bool visible )
+void MarbleWidget::setPropertyValue( const QString& name, bool value )
 {
-    qDebug() << "In MarbleWidget the property " << name << "was set to " << visible;
-    d->m_map->setShowProperty( name, visible );
+    qDebug() << "In MarbleWidget the property " << name << "was set to " << value;
+    d->m_map->setPropertyValue( name, value );
 
+    // Update texture map during the repaint that follows:
+    setNeedsUpdate();
     repaint();
 }
 

@@ -22,24 +22,9 @@ ViewParams::ViewParams( )
     m_mapQuality = Normal;
 
     // Show / don't show parameters
-    m_showGrid           = true;
     m_showAtmosphere     = true;
 
-    m_showPlaceMarks     = true;
     m_showElevationModel = false;
-
-    m_showRelief         = true;
-
-    // Terrain features
-    m_showIceLayer       = true;
-    m_showBorders        = true;
-    m_showRivers         = true;
-    m_showLakes          = true;
-
-    // Placemarks
-    m_showCities         = true;
-    m_showTerrain        = true;
-    m_showOtherPlaces    = true;
 
     // Other layers
     m_showGps            = false;

@@ -145,8 +145,6 @@ void MarbleMapPrivate::construct()
     m_parent->goHome();
 
     // FloatItems
-    m_showScaleBar  = true;
-    m_showCompass   = true;
     m_showFrameRate = false;
 
     // Map translation
@@ -328,20 +326,26 @@ QPixmap MarbleMap::mapScreenShot()
 #endif
 }
 
+bool MarbleMap::propertyValue( const QString& name ) const
+{
+    bool value;
+    d->m_viewParams.mapTheme()->settings()->propertyValue( name, value );
+    return value;
+}
 
 bool MarbleMap::showScaleBar() const
 {
-    return d->m_showScaleBar;
+    return propertyValue( "scalebar" );
 }
 
 bool MarbleMap::showCompass() const
 {
-    return d->m_showCompass;
+    return propertyValue( "compass" );
 }
 
 bool MarbleMap::showGrid() const
 {
-    return d->m_viewParams.m_showGrid;
+    return propertyValue( "coordinate-grid" );
 }
 
 bool MarbleMap::showClouds() const
@@ -356,27 +360,27 @@ bool MarbleMap::showAtmosphere() const
 
 bool MarbleMap::showPlaces() const
 {
-    return d->m_viewParams.m_showPlaceMarks;
+    return propertyValue( "places" );
 }
 
 bool MarbleMap::showCities() const
 {
-    return d->m_viewParams.m_showCities;
+    return propertyValue( "cities" );
 }
 
 bool MarbleMap::showTerrain() const
 {
-    return d->m_viewParams.m_showTerrain;
+    return propertyValue( "terrain" );
 }
 
 bool MarbleMap::showOtherPlaces() const
 {
-    return d->m_viewParams.m_showOtherPlaces;
+    return propertyValue( "otherplaces" );
 }
 
 bool MarbleMap::showRelief() const
 {
-    return d->m_viewParams.m_showRelief;
+    return propertyValue( "relief" );
 }
 
 bool MarbleMap::showElevationModel() const
@@ -386,22 +390,22 @@ bool MarbleMap::showElevationModel() const
 
 bool MarbleMap::showIceLayer() const
 {
-    return d->m_viewParams.m_showIceLayer;
+    return propertyValue( "ice" );
 }
 
 bool MarbleMap::showBorders() const
 {
-    return d->m_viewParams.m_showBorders;
+    return propertyValue( "borders" );
 }
 
 bool MarbleMap::showRivers() const
 {
-    return d->m_viewParams.m_showRivers;
+    return propertyValue( "rivers" );
 }
 
 bool MarbleMap::showLakes() const
 {
-    return d->m_viewParams.m_showLakes;
+    return propertyValue( "lakes" );
 }
 
 bool MarbleMap::showGps() const
@@ -851,6 +855,11 @@ void MarbleMapPrivate::setBoundingBox()
 // Used to be paintEvent()
 void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect) 
 {
+    if ( !d->m_viewParams.mapTheme() ) {
+        qDebug() << "No theme yet!";
+        return;
+    }
+        
     QTime t;
     t.start();
 
@@ -889,14 +898,20 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
     d->m_mapscale.setTransparency( transparency );
 
     // 2. Paint the compass
-    if ( d->m_showCompass )
+
+    bool showCompass, showScaleBar;
+
+    d->m_viewParams.mapTheme()->settings()->propertyValue( "compass", showCompass );
+    d->m_viewParams.mapTheme()->settings()->propertyValue( "scalebar", showScaleBar );
+
+    if ( showCompass )
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
                             d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
                                                             d->m_viewParams.m_canvasImage->height(),
                                                             northPoleY(), d->m_viewParams.projection() ) );
 
     // 3. Paint the scale.
-    if ( d->m_showScaleBar )
+    if ( showScaleBar )
         painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( radius(),
                                                               d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
@@ -976,31 +991,32 @@ QString MarbleMap::mapThemeId() const
 
 void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
-    if ( mapThemeId == d->m_model->mapThemeId() )
+    if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
         return;
-    qDebug() << "MapThemeId in MarbleMap::setMapTheme: " << mapThemeId;
+
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
+
     d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
 }
 
-void MarbleMap::setShowProperty( const QString& name, bool visible )
+void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
-    qDebug() << "In MarbleMap the property " << name << "was set to " << visible;
-    d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, visible );
+    qDebug() << "In MarbleMap the property " << name << "was set to " << value;
+    d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, value );
 }
 
 void MarbleMap::setShowScaleBar( bool visible )
 {
-    d->m_showScaleBar = visible;
+    setPropertyValue( "scalebar", visible );
 }
 
 void MarbleMap::setShowCompass( bool visible )
 {
-    d->m_showCompass = visible;
+    setPropertyValue( "compass", visible );
 }
 
 void MarbleMap::setShowAtmosphere( bool visible )
@@ -1018,34 +1034,32 @@ void MarbleMap::setShowClouds( bool visible )
 
 void MarbleMap::setShowGrid( bool visible )
 {
-    d->m_viewParams.m_showGrid = visible;
+    setPropertyValue( "coordinate-grid", visible );
 }
 
 void MarbleMap::setShowPlaces( bool visible )
 {
-    d->m_viewParams.m_showPlaceMarks = visible;
+    setPropertyValue( "places", visible );
 }
 
 void MarbleMap::setShowCities( bool visible )
 {
-    d->m_viewParams.m_showCities = visible;
+    setPropertyValue( "cities", visible );
 }
 
 void MarbleMap::setShowTerrain( bool visible )
 {
-    d->m_viewParams.m_showTerrain = visible;
+    setPropertyValue( "terrain", visible );
 }
 
 void MarbleMap::setShowOtherPlaces( bool visible )
 {
-    d->m_viewParams.m_showOtherPlaces = visible;
+    setPropertyValue( "otherplaces", visible );
 }
 
 void MarbleMap::setShowRelief( bool visible )
 {
-    d->m_viewParams.m_showRelief = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    setPropertyValue( "relief", visible );
 }
 
 void MarbleMap::setShowElevationModel( bool visible )
@@ -1057,26 +1071,22 @@ void MarbleMap::setShowElevationModel( bool visible )
 
 void MarbleMap::setShowIceLayer( bool visible )
 {
-    d->m_viewParams.m_showIceLayer = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    setPropertyValue( "ice", visible );
 }
 
 void MarbleMap::setShowBorders( bool visible )
 {
-    d->m_viewParams.m_showBorders = visible;
+    setPropertyValue( "borders", visible );
 }
 
 void MarbleMap::setShowRivers( bool visible )
 {
-    d->m_viewParams.m_showRivers =  visible;
+    setPropertyValue( "rivers", visible );
 }
 
 void MarbleMap::setShowLakes( bool visible )
 {
-    d->m_viewParams.m_showLakes = visible;
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    setPropertyValue( "lakes", visible );
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
@@ -1144,24 +1154,6 @@ GpxFileModel *MarbleMap::gpxFileModel()
 FileViewModel* MarbleMap::fileViewModel() const
 {
     return d->m_model->fileViewModel();
-}
-
-void MarbleMap::setQuickDirty( bool enabled )
-{
-    int transparency;
-    switch( d->m_viewParams.projection() ) {
-        case Spherical:
-            // Interlace texture mapping
-            d->m_model->textureMapper()->setInterlaced( enabled );
-            // Update texture map during the repaint that follows:
-            setNeedsUpdate();
-            transparency = enabled ? 255 : 192;
-            d->m_compass.setTransparency( transparency );
-            d->m_mapscale.setTransparency( transparency );
-            break;
-        case Equirectangular:
-            return;
-    }
 }
 
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )

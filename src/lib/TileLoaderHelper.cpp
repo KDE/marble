@@ -73,15 +73,25 @@ int TileLoaderHelper::columnToLevel( int column )
 QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x, int y )
 {
     // for now just return the old "relfilename", since storageLayout is not yet there
-    QString relfilename = QString( "%1/%2/%3/%3_%4.jpg" )
-        .arg( themeStr( textureLayer ) ).arg( level )
-        .arg( y, tileDigits, 10, QChar('0') )
-        .arg( x, tileDigits, 10, QChar('0') );
+    QString relfilename;
+
+    if ( textureLayer ) {
+        relfilename = QString( "%1/%2/%3/%3_%4.jpg" )
+            .arg( themeStr( textureLayer ) ).arg( level )
+            .arg( y, tileDigits, 10, QChar('0') )
+            .arg( x, tileDigits, 10, QChar('0') );
+    }
+
     return relfilename;
 }
 
 QString TileLoaderHelper::themeStr( GeoSceneTexture *textureLayer )
 {
-    QString oldThemeStr = "maps/" + textureLayer->sourceDir();
+    QString oldThemeStr;
+
+    if ( textureLayer ) {
+         oldThemeStr = "maps/" + textureLayer->sourceDir();
+    }
+
     return oldThemeStr;
 }

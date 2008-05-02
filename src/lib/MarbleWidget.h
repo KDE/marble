@@ -666,10 +666,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setMapThemeId( const QString& maptheme );
 
     /**
-     * @brief  Set whether a map theme property is visible
-     * @param  visible  visibility of the scale bar
+     * @brief  Sets the value of a map theme property
+     * @param  value  value of the property (usually: visibility)
+     * 
+     * Later on we might add a "setPropertyType and a QVariant
+     * if needed.
      */
-    void setShowProperty( const QString& name, bool visible );
+    void setPropertyValue( const QString& name, bool value );
 
     /**
      * @brief  Set whether the scale bar overlay is visible

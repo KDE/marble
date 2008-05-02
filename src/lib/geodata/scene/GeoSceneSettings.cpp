@@ -106,6 +106,20 @@ bool GeoSceneSettings::propertyValue( const QString& name, bool& value )
     return false;
 }
 
+QVector<GeoSceneProperty*> GeoSceneSettings::allProperties() const
+{
+    QVector<GeoSceneProperty*> allProperties;
+
+    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
+    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+        allProperties << (*itGroup)->properties();
+    }
+
+    allProperties << m_properties;
+
+    return allProperties;
+}
+
 void GeoSceneSettings::addGroup( GeoSceneGroup* group )
 {
     // Remove any property that has the same name
@@ -191,7 +205,7 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
     return property;
 }
 
-QVector<GeoSceneProperty*> GeoSceneSettings::properties() const
+QVector<GeoSceneProperty*> GeoSceneSettings::rootProperties() const
 {
     return m_properties;
 }
