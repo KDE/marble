@@ -18,9 +18,6 @@
 
 ViewParams::ViewParams( )
 {
-    // Default projection
-    m_oldProjection = Spherical;
-
     m_mapTheme = 0;
     m_mapQuality = Normal;
 
@@ -118,14 +115,6 @@ GeoSceneDocument *ViewParams::mapTheme()
 MapQuality ViewParams::mapQuality()
 {
     return m_mapQuality; 
-}
-
-void ViewParams::setMapTheme( GeoSceneDocument *mapTheme )
-{
-    // Don't replace a working theme with one that obviously wouldn't work
-    if ( mapTheme != 0 ) {
-        m_mapTheme = mapTheme; 
-    }
 }
 
 void ViewParams::setMapQuality( MapQuality mapQuality )

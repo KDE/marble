@@ -336,6 +336,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
 void MarbleModel::setProjection( Projection projection )
 {
+//    FIXME: replace this with an approach based on the factory method pattern
+
     delete d->m_texmapper;
 
     switch( projection ) {

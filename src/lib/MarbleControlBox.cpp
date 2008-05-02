@@ -272,6 +272,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 	    d->m_widget, SLOT(setMapThemeId(const QString&)));
 
     // connect signals for the Legend
+    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
+             d->m_widget,                     SLOT( setShowProperty( QString, bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
              d->m_widget,                     SLOT( setShowPlaces( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCities( bool ) ),

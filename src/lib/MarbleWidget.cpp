@@ -838,6 +838,11 @@ GeoSceneDocument *MarbleWidget::mapTheme() const
 }
 
 
+void MarbleWidget::setShowProperty( const QString& name, bool visible )
+{
+    qDebug() << "The property " << name << "was set to " << visible;
+}
+
 void MarbleWidget::setShowScaleBar( bool visible )
 {
     d->m_map->setShowScaleBar( visible );

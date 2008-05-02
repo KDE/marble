@@ -63,6 +63,8 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggledCompass( bool );
     void toggledScaleBar( bool );
 
+    void toggledShowProperty( QString, bool );
+
  private Q_SLOTS:
     void loadLegend();
     void test(){ qDebug() << "TEST"; }

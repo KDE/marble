@@ -41,6 +41,24 @@ class GeoSceneGroup : public QObject,
     ~GeoSceneGroup();
 
     /**
+     * @brief  Set the value of a property in this group
+     * @param  name  the property name
+     * @param  value  the value of the property
+     * @return @c true  the property was found and changed accordingly
+     *         @c false the property couldn't be found in this group
+     */
+    bool setPropertyValue( const QString& name, bool value );
+
+    /**
+     * @brief  Get the value of a property in this group
+     * @param  name  the property name
+     * @param  value  the value of the property
+     * @return @c true  the property was found and returned accordingly
+     *         @c false the property couldn't be found in this group
+     */
+    bool propertyValue( const QString& name, bool& value  );
+
+    /**
      * @brief  Add a property to this setting group
      * @param  property  the new property
      */

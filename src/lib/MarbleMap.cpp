@@ -555,7 +555,6 @@ void MarbleMap::setProjection( Projection projection )
 {
     emit projectionChanged( projection );
 
-    d->m_viewParams.m_oldProjection = d->m_viewParams.projection();
     d->m_viewParams.setProjection( projection );
 
     // Redraw the background if necessary
@@ -877,10 +876,10 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
     d->m_viewParams.m_radiusUpdated     = d->m_viewParams.radius();
     d->m_justModified                   = false;
 
-    //FIXME: This is really slow. Either cache on a pixmap - or maybe better: 
-    // Add to GlobeScanlineTextureMapper.
-    bool fog = false;
-    if (fog == true)
+    //FIXME: This is really slow. That's why we defer this to PrintQuality
+    // Either cache on a pixmap - or maybe better: Add to GlobeScanlineTextureMapper.
+
+    if ( d->m_viewParams.mapQuality() == Marble::Print )
         d->drawFog(painter);
 
     customPaint( &painter );
@@ -977,8 +976,7 @@ QString MarbleMap::mapThemeId() const
 
 void MarbleMap::setMapThemeId( const QString& mapThemeId )
 {
-    if ( mapThemeId == d->m_model->mapThemeId()
-         && d->m_viewParams.projection() == d->m_viewParams.m_oldProjection )
+    if ( mapThemeId == d->m_model->mapThemeId() )
         return;
     qDebug() << "MapThemeId in MarbleMap::setMapTheme: " << mapThemeId;
     viewParams()->setMapThemeId( mapThemeId );

@@ -22,7 +22,7 @@
 #ifndef GEOSCENESETTINGS_H
 #define GEOSCENESETTINGS_H
 
-#include <QtCore/QHash>
+#include <QtCore/QVector>
 
 #include <geodata_export.h>
 
@@ -43,26 +43,56 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     virtual ~GeoSceneSettings();
 
     /**
-     * @brief  Add a property to the settings
-     * @param  property  the new property
+     * @brief  Set the value of a property across groups
+     * @param  name  the property name
+     * @param  value  the value of the property
+     * @return @c true  the property was found and changed accordingly
+     *         @c false the property couldn't be found here
      */
-    void addGroup( GeoSceneGroup* );
-    GeoSceneGroup* group( const QString& );
+    bool setPropertyValue( const QString& name, bool value );
+
+    /**
+     * @brief  Get the value of a property across groups
+     * @param  name  the property name
+     * @param  value  the value of the property
+     * @return @c true  the property was found and returned accordingly
+     *         @c false the property couldn't be found in this group
+     */
+    bool propertyValue( const QString& name, bool& value  );
+
+    /**
+     * @brief  Add a group to the settings
+     * @param  group  the new group
+     */
+    void addGroup( GeoSceneGroup* group );
+
+    /**
+     * @brief  Get a group from the settings
+     * @param  name  the name of the group
+     */
+    GeoSceneGroup* group( const QString& name );
 
     /**
      * @brief  Add a property to the settings
      * @param  property  the new property
      */
-    void addProperty( GeoSceneProperty* );
-    GeoSceneProperty* property( const QString& );
+    void addProperty( GeoSceneProperty* property );
+
+    /**
+     * @brief  Get a property from the settings
+     * @param  name  the name of the property
+     */
+    GeoSceneProperty* property( const QString& name );
+
+    QVector<GeoSceneProperty*> properties() const;
 
  Q_SIGNALS:
     void valueChanged( QString, bool );
 
  protected:
     /// The hash table holding all the properties in the settings.
-    QHash<QString, GeoSceneProperty*> m_properties;
-    QHash<QString, GeoSceneGroup*> m_groups;
+    QVector<GeoSceneProperty*>  m_properties;
+    QVector<GeoSceneGroup*> m_groups;
 };
 
 #endif // GEOSCENESETTINGS_H

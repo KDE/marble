@@ -107,7 +107,7 @@
         </map>
 
         <settings>
-            <property name="boundaries">
+            <property name="borders">
                 <available>true</available>
                 <enabled>false</enabled>
             </property>

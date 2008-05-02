@@ -128,7 +128,6 @@ QString MarbleLegendBrowser::readHtml( const QUrl & name )
 {
     QString html;
 
-
     QFile data( name.toLocalFile() );
     if ( data.open( QFile::ReadOnly ) ) {
         QTextStream in( &data );
@@ -177,7 +176,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
         QString checkBoxString; 
 
         if ( sections.at(section)->checkable() == true ) {
-            checkBoxString = "<a href=\"checkbox:" + sections.at(section)->name() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + sections.at(section)->name() + "\">&nbsp;</span></a> ";
+            checkBoxString = "<a href=\"checkbox:" + sections.at(section)->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + sections.at(section)->name() + "\">&nbsp;</span></a> ";
         }
 
         customLegendString += "<h4>" + checkBoxString + sections.at(section)->heading() + "</h4>";
@@ -294,6 +293,8 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 
 void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
 {
+    emit toggledShowProperty( name, checked );
+
     if ( name == "locations") {
         emit toggledLocations( checked );
     }

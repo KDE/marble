@@ -1,3 +1,28 @@
+2008-05-02  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/scene/GeoSceneGroup.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+
+    - Adding setters and getters to change the value of a  particular
+      property throughout the hierarchy.
+
+    * src/lib/ViewParams.{cpp,h}:
+    * src/lib/MarbleModel.cpp:
+
+    - Spring Cleanup: remove old members like m_oldProjection, added FIXMEs
+
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/MarbleLegendBrowser.{cpp,h}:
+    * src/lib/MarbleControlBox.cpp:
+
+    - Further connect the MarbleControlBox to the settings.
+
+    * data/maps/earth/plain/plain.dgml:
+    * data/maps/earth/srtm/srtm.dgml:
+
+    - Changed boundaries -> borders for now.
+
 2008-05-01  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MapThemeManager.cpp:

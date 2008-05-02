@@ -59,13 +59,11 @@ class ViewParams
     QString mapThemeId();
     GeoSceneDocument *mapTheme();
 
-    void setMapTheme( GeoSceneDocument * );
+    // Convenience methods:
 
     Projection projection() const;
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
-
-
 
     Marble::MapQuality mapQuality();
     void setMapQuality( Marble::MapQuality );
@@ -79,22 +77,19 @@ class ViewParams
     void centerCoordinates( double &centerLon, double &centerLat );
 
  public:
-    ViewportParams  m_viewport;
-    //Projection  m_projection;
-    Projection  m_oldProjection;
     GeoSceneDocument *m_mapTheme;
 
+    ViewportParams  m_viewport;
+
+//  FIXME: These two should go into the Viewport.
+    BoundingBox m_boundingBox;  // What the view currently can see
     MapQuality  m_mapQuality;
 
-    // Parameters that determine the painting
-    //Quaternion  m_planetAxis;   // Position, coded in a quaternion
+//  FIXME: We should try to get rid of these two:    
     Quaternion  m_planetAxisUpdated;
-#if 0
-    int         m_radius;       // Zoom level (pixels / earth radius)
-#endif
     int         m_radiusUpdated;
 
-    BoundingBox m_boundingBox;  // What the view currently can see
+    // Parameters that determine the painting
 
     // Show/don't show options
     bool        m_showGrid;
