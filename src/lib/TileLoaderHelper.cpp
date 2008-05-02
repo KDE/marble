@@ -27,6 +27,9 @@
 
 #include <QtCore/QDebug>
 
+#include "GeoSceneTexture.h"
+#include "global.h"
+
 int TileLoaderHelper::levelToRow( int level )
 {
     if ( level < 0 ) {
@@ -65,4 +68,20 @@ int TileLoaderHelper::columnToLevel( int column )
         return 0;
     }
     return (int)( std::log( (double)(column / 2) ) / std::log( (double)2.0 ) );
+}
+
+QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x, int y )
+{
+    // for now just return the old "relfilename", since storageLayout is not yet there
+    QString relfilename = QString( "%1/%2/%3/%3_%4.jpg" )
+        .arg( themeStr( textureLayer ) ).arg( level )
+        .arg( y, tileDigits, 10, QChar('0') )
+        .arg( x, tileDigits, 10, QChar('0') );
+    return relfilename;
+}
+
+QString TileLoaderHelper::themeStr( GeoSceneTexture *textureLayer )
+{
+    QString oldThemeStr = "maps/" + textureLayer->sourceDir();
+    return oldThemeStr;
 }

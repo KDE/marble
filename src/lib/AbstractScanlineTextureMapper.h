@@ -21,6 +21,7 @@
 #include "MergedLayerDecorator.h"
 
 
+class GeoSceneTexture;
 class TextureTile;
 class TileLoader;
 
@@ -35,7 +36,7 @@ public:
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
-    void setMapTheme( const QString& theme );
+    void setTextureLayer( GeoSceneTexture *textureLayer );
     void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
     virtual void resizeMap( int width, int height );
     void selectTileLevel( ViewParams* viewParams );

@@ -21,6 +21,9 @@
 #include <QtGui/QPainter>
 
 #include "global.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneTexture.h"
+#include "MapThemeManager.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
@@ -28,22 +31,39 @@
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
  : m_sunLocator(sunLocator),
    m_cloudlayer(false),
-   m_showTileId(false)
+   m_showTileId(false),
+   m_cityLightsTheme(MapThemeManager::loadMapTheme("earth/citylights/citylights.dgml")),
+   m_blueMarbleTheme(MapThemeManager::loadMapTheme("earth/bluemarble/bluemarble.dgml")),
+   m_cityLightsTextureLayer(0),
+   m_cloudsTextureLayer(0)
 {
+    // look for the texture layers inside the themes
+    // As long as we don't have an Layer Management Class we just lookup 
+    // the name of the layer that has the same name as the theme ID
+    QString cityLightsId = m_cityLightsTheme->head()->theme();
+    m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
+        m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
+
+    // the clouds texture layer is a layer in the bluemarble theme
+    QString blueMarbleId = m_blueMarbleTheme->head()->theme();
+    m_cloudsTextureLayer = static_cast<GeoSceneTexture*>(
+        m_blueMarbleTheme->map()->layer( blueMarbleId )->dataset( "clouds_data" ) );
 }
 
 MergedLayerDecorator::~MergedLayerDecorator()
 {
+    delete m_cityLightsTheme;
+    delete m_blueMarbleTheme;
 }
 
-void MergedLayerDecorator::paint(const QString& theme)
+void MergedLayerDecorator::paint(const QString& themeId)
 {
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 )
       paintClouds();
     if ( m_sunLocator->getShow() )
       paintSunShading();
     if ( m_showTileId )
-      paintTileId( theme );
+      paintTileId( themeId );
     qDebug() << "MergedLayerDecorator::paint: emit repaintMap";
 //     emit repaintMap();
 }
@@ -68,7 +88,7 @@ bool MergedLayerDecorator::showTileId() const
     return m_showTileId;
 }
 
-QImage MergedLayerDecorator::loadRawTile(const QString& theme)
+QImage MergedLayerDecorator::loadRawTile( GeoSceneTexture *textureLayer )
 {
     // TODO use a TileLoader rather than directly accessing TextureTile?
     TextureTile tile(m_id);
@@ -76,13 +96,13 @@ QImage MergedLayerDecorator::loadRawTile(const QString& theme)
     connect( &tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
              this, SIGNAL( downloadTile( const QString&, const QString& ) ) );
     
-    tile.loadRawTile(theme, m_level, m_x, m_y);
+    tile.loadRawTile( textureLayer, m_level, m_x, m_y );
     return *(tile.tile());
 }
 
 void MergedLayerDecorator::paintClouds()
 {
-    QImage  cloudtile = loadRawTile( "maps/earth/clouds" );
+    QImage  cloudtile = loadRawTile( m_cloudsTextureLayer );
     if ( cloudtile.isNull() )
         return;
 	
@@ -134,7 +154,7 @@ void MergedLayerDecorator::paintSunShading()
     const int ipRight = n * (int)( tileWidth / n );
 
     if ( m_sunLocator->getCitylights() ) {
-        QImage nighttile = loadRawTile( "maps/earth/citylights" );
+        QImage nighttile = loadRawTile( m_cityLightsTextureLayer );
         if ( nighttile.isNull() )
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
@@ -236,7 +256,7 @@ void MergedLayerDecorator::paintSunShading()
     }
 }
 
-void MergedLayerDecorator::paintTileId(const QString& theme)
+void MergedLayerDecorator::paintTileId(const QString& themeId)
 {
     QString filename = QString("%1_%2.jpg")
         .arg( m_x, tileDigits, 10, QChar('0') )
@@ -291,7 +311,7 @@ void MergedLayerDecorator::paintTileId(const QString& theme)
 
     QPointF  baseline3( ( m_tile->width() - testFm.boundingRect(filename).width() ) / 2,
                         m_tile->height() * 0.75 );
-    outlinepath.addText( baseline3, testFont, theme );
+    outlinepath.addText( baseline3, testFont, themeId );
 
     painter.drawPath( outlinepath );
 

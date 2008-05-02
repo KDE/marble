@@ -45,7 +45,8 @@ class TileLoader::Private
 {
     public:
         Private()
-            : m_downloadManager( 0 )
+            : m_downloadManager( 0 ),
+              m_textureLayer( 0 )
         {
             m_tileCache.clear();
             m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
@@ -56,7 +57,7 @@ class TileLoader::Private
         }
 
         HttpDownloadManager *m_downloadManager;
-        QString       m_theme;
+        GeoSceneTexture     *m_textureLayer;
         QHash <TileId, TextureTile*>  m_tileHash;
         int           m_tileWidth;
         int           m_tileHeight;
@@ -94,22 +95,22 @@ void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
     }
 }
 
-void TileLoader::setMapTheme( const QString& theme )
+void TileLoader::setTextureLayer( GeoSceneTexture *textureLayer )
 {
     // Initialize map theme.
     flush();
     d->m_tileCache.clear();
 
-    d->m_theme = theme;
+    d->m_textureLayer = textureLayer;
 
     TextureTile *tile = new TextureTile( TileId() );
-    tile->loadRawTile(d->m_theme, 0, 0, 0);
+    tile->loadRawTile(d->m_textureLayer, 0, 0, 0);
 
     // We assume that all tiles have the same size. TODO: check to be safe
     d->m_tileWidth  = tile->rawtile().width();
     d->m_tileHeight = tile->rawtile().height();
 
-    qDebug() << "TileLoader::setMapTheme: delete tile";
+    qDebug() << "TileLoader::setTextureLayer: delete tile";
     delete tile;
 }
 
@@ -201,11 +202,11 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             connect( tile, SIGNAL( tileUpdateDone() ),
                      this, SIGNAL( tileUpdateAvailable() ) );
 
-            tile->loadRawTile(d->m_theme, tileLevel, tilx, tily);
+            tile->loadRawTile(d->m_textureLayer, tileLevel, tilx, tily);
             tile->loadTile(false);
             // TODO should emit signal rather than directly calling paintTile
 //             emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
-            m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
+            m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_textureLayer, false );
         }
     } else { // ...otherwise pick the correct one from the hash
         tile = d->m_tileHash.value( tileId );
@@ -217,9 +218,9 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     return tile;
 }
 
-const QString TileLoader::mapTheme() const
+GeoSceneTexture* TileLoader::textureLayer() const
 {
-    return d->m_theme;
+    return d->m_textureLayer;
 }
 
 quint64 TileLoader::volatileCacheLimit() const
@@ -227,7 +228,7 @@ quint64 TileLoader::volatileCacheLimit() const
     return d->m_tileCache.cacheLimit();
 }
 
-int TileLoader::maxCompleteTileLevel( const QString& theme )
+int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
 {
     bool noerr = true;
 
@@ -242,10 +243,8 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
             int mmaxit = TileLoaderHelper::levelToColumn( trylevel );
 
             for ( int m = 0; m < mmaxit; ++m ) {
-                QString tilepath = MarbleDirs::path( QString("%1/%2/%3/%3_%4.jpg")
-                                                     .arg( theme ).arg( trylevel )
-                                                     .arg( n, tileDigits, 10, QChar( '0' ) )
-                                                     .arg( m, tileDigits, 10, QChar( '0' ) ) );
+                QString tilepath = MarbleDirs::path(
+                    TileLoaderHelper::relativeTileFileName( textureLayer, trylevel, m, n ));
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
                 if ( noerr == false )
@@ -271,9 +270,9 @@ int TileLoader::maxCompleteTileLevel( const QString& theme )
 }
 
 
-int TileLoader::maxPartialTileLevel( const QString& theme )
+int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 {
-    QString tilepath = MarbleDirs::path( QString( "%1" ).arg( theme ) );
+    QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( textureLayer ) );
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     int maxtilelevel = -1;
@@ -298,15 +297,16 @@ int TileLoader::maxPartialTileLevel( const QString& theme )
 }
 
 
-bool TileLoader::baseTilesAvailable( const QString& theme )
+bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 {
     bool noerr = true; 
 
     // Check whether the two tiles from the lowest texture level are available
+    // FIXME: - this assumes that there are 2 tiles in level 0 which is not true for OpenStreetMap
+    //        - marble could theoretically start without local tiles, too. They can be downloaded.
     for ( int m = 0; m < 2; ++m ) {
-        QString tilepath = MarbleDirs::path( QString( "%1/%2/%3/%3_%4.jpg" ).arg( theme ).arg( 0 )
-                                                  .arg( 0, tileDigits, 10, QChar( '0' ) )
-                                                  .arg( m, tileDigits, 10, QChar( '0' ) ) );
+        QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
+            textureLayer, 0, m, 0 ));
 
         noerr = QFile::exists( tilepath );
 
@@ -338,7 +338,7 @@ void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_i
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
-        m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
+        m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_textureLayer, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {
         qDebug() << "No such ID:" << id.toString();

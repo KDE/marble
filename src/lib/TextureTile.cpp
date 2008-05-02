@@ -85,7 +85,7 @@ TextureTile::~TextureTile()
 //    delete m_rawtile;
 }
 
-void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
+void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y)
 {
 //   qDebug() << "TextureTile::loadRawTile";
   
@@ -110,11 +110,7 @@ void TextureTile::loadRawTile(const QString& theme, int level, int x, int y)
       double testx1 = origx1 * (double)( TileLoaderHelper::levelToRow( i ) ) ;
       double testy1 = origy1 * (double)( TileLoaderHelper::levelToColumn( i ) );
 
-      QString relfilename = QString("%1/%2/%3/%3_%4.jpg")
-          .arg(theme).arg(i)
-          .arg( (int)(testy1), tileDigits, 10, QChar('0') )
-          .arg( (int)(testx1), tileDigits, 10, QChar('0') );
-
+      QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, i, testx1, testy1 );
       absfilename = MarbleDirs::path( relfilename );
 
       if ( QFile::exists( absfilename ) ) {

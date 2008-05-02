@@ -44,6 +44,7 @@ class ClipPainter;
 class FileViewModel;
 class GeoDataDocument;
 class GeoSceneDocument;
+class GeoSceneTexture;
 class GpsLayer;
 class GpxFileModel;
 class HttpDownloadManager;
@@ -247,7 +248,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
 //  private Q_SLOTS:
-    void paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate);
+    void paintTile(TextureTile* tile, int x, int y, int level, GeoSceneTexture *textureLayer, bool requestTileUpdate);
 
     /**
      * @brief Update the model

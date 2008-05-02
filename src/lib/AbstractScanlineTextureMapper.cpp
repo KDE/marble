@@ -80,9 +80,9 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 }
 
 
-void AbstractScanlineTextureMapper::setMapTheme( const QString& theme )
+void AbstractScanlineTextureMapper::setTextureLayer( GeoSceneTexture *textureLayer )
 {
-    m_tileLoader->setMapTheme(theme);
+    m_tileLoader->setTextureLayer( textureLayer );
     m_tileLevel = -1;
     detectMaxTileLevel();
 
@@ -270,7 +270,7 @@ void AbstractScanlineTextureMapper::notifyMapChanged()
 
 void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
-    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->mapTheme() ) + 1 ;
+    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->textureLayer() ) + 1 ;
     qDebug() << "MaxTileLevel: " << m_maxTileLevel;
 }
 

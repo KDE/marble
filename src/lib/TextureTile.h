@@ -27,6 +27,8 @@
 #include "TileId.h"
 #include "MergedLayerDecorator.h"
 
+class GeoSceneTexture;
+
 class TextureTile : public QObject {
     Q_OBJECT
 
@@ -35,7 +37,7 @@ class TextureTile : public QObject {
 
     virtual ~TextureTile();
     
-    void loadRawTile(const QString& theme, int level, int x, int y);
+    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y );
 
     TileId const& id() const  { return m_id; }
     int  depth() const        { return m_depth; }

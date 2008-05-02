@@ -10,6 +10,9 @@ include( ${QT_USE_FILE} )
 set( tilecreator_SRCS
             ../lib/TileCreator.cpp
             ../lib/TileLoaderHelper.cpp
+            ../lib/geodata/parser/GeoDocument.cpp
+            ../lib/geodata/scene/GeoSceneTexture.cpp
+            ../lib/geodata/scene/GeoSceneLayer.cpp
             ../lib/MarbleDirs.cpp
             main.cpp
             tccore.cpp

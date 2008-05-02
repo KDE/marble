@@ -22,6 +22,9 @@
 #include "SunLocator.h"
 #include "TileId.h"
 
+class GeoSceneDocument;
+class GeoSceneTexture;
+
 class MergedLayerDecorator : public QObject
 {
     Q_OBJECT
@@ -29,9 +32,11 @@ class MergedLayerDecorator : public QObject
  public:
     explicit MergedLayerDecorator(SunLocator* sunLocator);
     virtual ~MergedLayerDecorator();
-	
-    void paint(const QString& theme);
-    void paintTileId(const QString& theme);
+
+    // The Parameter themeId is only used for displaying the TileId,
+    // which is a debugging feature, therefore at this point QString remains.
+    void paint(const QString& themeId);
+    void paintTileId(const QString& themeId);
     
     void setShowClouds(bool show);
     bool showClouds() const;
@@ -47,7 +52,7 @@ class MergedLayerDecorator : public QObject
     void repaintMap();
 	
  private:
-    QImage loadRawTile(const QString& theme);
+    QImage loadRawTile( GeoSceneTexture *textureLayer );
     int maxDivisor( int maximum, int fullLength );
     void paintSunShading();
     void paintClouds();
@@ -61,6 +66,10 @@ class MergedLayerDecorator : public QObject
     SunLocator* m_sunLocator;
     bool m_cloudlayer;
     bool m_showTileId;
+    GeoSceneDocument *m_cityLightsTheme;
+    GeoSceneDocument *m_blueMarbleTheme;
+    GeoSceneTexture *m_cityLightsTextureLayer;
+    GeoSceneTexture *m_cloudsTextureLayer;
 };
 
 #endif

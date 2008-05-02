@@ -24,6 +24,10 @@
 #ifndef __MARBLE__TILELOADERHELPER_H
 #define __MARBLE__TILELOADERHELPER_H
 
+#include <QtCore/QString>
+
+class GeoSceneTexture;
+
 namespace TileLoaderHelper {
     /**
      * @brief Get the maximum number of tile rows for a given tile level.
@@ -65,6 +69,18 @@ namespace TileLoaderHelper {
      */
     int columnToLevel( int column );
 
+    /**
+     * @brief Get the relative file name of a tile.
+     */
+    QString relativeTileFileName( GeoSceneTexture *textureLayer, int zoomLevel, int x, int y );
+
+    /**
+     * @brief Get the theme string
+     * @param theme points to the GeoSceneDocument which represents a .dgml file.
+     * @return the old style theme string which used to be the argument for many methods,
+     *         for example "maps/earth/srtm".
+     */
+    QString themeStr( GeoSceneTexture *textureLayer );
 }
 
 #endif // __MARBLE__TILELOADERHELPER_H

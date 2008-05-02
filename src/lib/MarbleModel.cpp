@@ -111,8 +111,8 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
 //    qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
-    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, const QString&, bool) ),
-             this,            SLOT( paintTile(TextureTile*, int, int, int, const QString&, bool) ) );
+    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ),
+             this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
@@ -263,8 +263,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( "maps/"
-                                              + sourceDir ) )
+        if ( !TileLoader::baseTilesAvailable( texture ) )
         {
             qDebug("Base tiles not available. Creating Tiles ... ");
 
@@ -281,10 +280,11 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 qDebug("Tile creation completed");
         }
 
+        d->m_tileLoader->setTextureLayer( texture );
+
         if ( !d->m_texmapper )
             setProjection( currentProjection );
 
-        d->m_tileLoader->setMapTheme( "maps/" + sourceDir );
     }
     else {
         d->m_tileLoader->flush();
@@ -635,7 +635,8 @@ void MarbleModel::setVolatileTileCacheLimit( quint64 kiloBytes )
     d->m_tileLoader->setVolatileCacheLimit( kiloBytes );
 }
 
-void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate)
+void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
+                            GeoSceneTexture *textureLayer, bool requestTileUpdate)
 {
     qDebug() << "MarbleModel::paintTile";
     
@@ -646,7 +647,7 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level, const QS
 
     m_layerDecorator->setInfo(x, y, level, tile->id());
     m_layerDecorator->setTile(tile->tile());
-    m_layerDecorator->paint(theme);
+    m_layerDecorator->paint("maps/" + textureLayer->sourceDir());
     tile->loadTile(requestTileUpdate);
 }
 

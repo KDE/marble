@@ -1,3 +1,28 @@
+2008-05-01  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/MergedLayerDecorator.h
+    * src/lib/AbstractScanlineTextureMapper.h
+    * src/lib/TileLoader.h
+    * src/lib/MergedLayerDecorator.cpp
+    * src/lib/TextureTile.cpp
+    * src/lib/TileLoaderHelper.cpp
+    * src/lib/TextureTile.h
+    * src/lib/TileLoader.cpp
+    * src/lib/MarbleModel.h
+    * src/lib/MarbleModel.cpp
+    * src/lib/geodata/parser/GeoDocument.cpp
+    * src/lib/TileLoaderHelper.h
+    * src/tilecreator/CMakeLists.txt
+
+    Part 2 of groundwork for OpenStreetMap texture tiles.
+    - Rework setMapTheme: pass GeoSceneTexture pointer instead of string
+      and rename to setTextureLayer.
+    - Small fix in MarbleModel: set texture layer of tile loader before
+      calling setProjection.
+    - Inclusion of GeoDocument.cpp so that we can remove the definition of
+      class variable GeoDocument::s_leakProtector from GeoParser.cpp.
+
 2008-05-02  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/TextureColorizer.cpp (colorize): Cleaning and comments

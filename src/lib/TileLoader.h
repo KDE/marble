@@ -30,6 +30,7 @@ class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 class MarbleModel;
+class GeoSceneTexture;
 
 /**
  * @short Tile loading from a quad tree
@@ -79,14 +80,14 @@ class TileLoader : public QObject
         TextureTile* loadTile( int tilx, int tily, int tileLevel );
 
         /**
-         * Sets the map @p theme the tiles shall be loaded for.
+         * Sets the texture layer @p the tiles shall be loaded for.
          */
-        void setMapTheme( const QString &theme );
+        void setTextureLayer( GeoSceneTexture *textureLayer );
 
         /**
-         * Returns the map theme the tiles shall be loaded for.
+         * Returns the texture layer the tiles shall be loaded for.
          */
-        const QString mapTheme() const;
+        GeoSceneTexture* textureLayer() const;
 
         /**
          * Resets the internal tile hash.
@@ -134,20 +135,22 @@ class TileLoader : public QObject
         quint64 volatileCacheLimit() const;
 
         /**
-         * Returns the highest level in which all tiles are available for the given @p theme.
+         * Returns the highest level in which all tiles are available for the given @p
+         * texture layer.
          */
-        static int maxCompleteTileLevel( const QString& theme );
+        static int maxCompleteTileLevel( GeoSceneTexture *textureLayer );
 
         /**
-         * Returns the highest level in which some tiles are available for the given @p theme.
+         * Returns the highest level in which some tiles are available for the given @p
+         * texture layer.
          */
-        static int maxPartialTileLevel( const QString& theme );
+        static int maxPartialTileLevel( GeoSceneTexture *textureLayer );
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for
-         * the given @p theme.
+         * the given @p texture layer.
          */
-        static bool baseTilesAvailable( const QString& theme );
+        static bool baseTilesAvailable( GeoSceneTexture *textureLayer );
 
     public Q_SLOTS:
         /**
@@ -174,7 +177,8 @@ class TileLoader : public QObject
          */
         void tileUpdateAvailable();
         
-        void paintTile(TextureTile* tile, int x, int y, int level, const QString& theme, bool requestTileUpdate);
+        void paintTile(TextureTile* tile, int x, int y, int level, GeoSceneTexture *textureLayer,
+                       bool requestTileUpdate);
 
     private:
         class Private;
