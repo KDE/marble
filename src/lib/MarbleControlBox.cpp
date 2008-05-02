@@ -275,7 +275,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
              d->m_widget,                     SLOT( setShowProperty( QString, bool ) ) );
-
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
              d->m_widget,                     SLOT( setShowPlaces( bool ) ) );
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCities( bool ) ),

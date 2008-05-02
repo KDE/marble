@@ -308,10 +308,11 @@ void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
     if ( name == "terrain") {
         emit toggledTerrain( checked );
     }
-
+/*
     if ( name == "borders") {
         emit toggledBorders( checked );
     }
+*/
     if ( name == "waterbodies") {
         emit toggledWaterBodies( checked );
     }
