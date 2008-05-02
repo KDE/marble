@@ -271,52 +271,52 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
     //	int remain = size();
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
-        if ( itPoint->detail() >= detail ) {
+        if ( itPoint->detail() < detail )
+	    continue;
 
-            // Calculate polygon nodes
+	// Calculate polygon nodes
 #ifdef VECMAP_DEBUG
-            ++m_debugNodeCount;
+	++m_debugNodeCount;
 #endif
-            qpos = itPoint->quaternion();
-            qpos.rotateAroundAxis( m_rotMatrix );
-            m_currentPoint = QPointF( m_imgrx + radius * qpos.v[Q_X] + 1.0,
-                                      m_imgry - radius * qpos.v[Q_Y] + 1.0 );
+	qpos = itPoint->quaternion();
+	qpos.rotateAroundAxis( m_rotMatrix );
+	m_currentPoint = QPointF( m_imgrx + radius * qpos.v[Q_X] + 1.0,
+				  m_imgry - radius * qpos.v[Q_Y] + 1.0 );
 			
-            // Take care of horizon crossings if horizon is visible
-            m_lastvisible = m_currentlyvisible;			
+	// Take care of horizon crossings if horizon is visible
+	m_lastvisible = m_currentlyvisible;			
 
-            // Less accurate:
-            // currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
-            m_currentlyvisible = ( qpos.v[Q_Z] >= 0 );
-            if ( itPoint == itStartPoint ) {
-                // qDebug("Initializing scheduled new PolyLine");
-                m_lastvisible  = m_currentlyvisible;
-                m_lastPoint    = QPointF( m_currentPoint.x() + 1.0, 
-                                          m_currentPoint.y() + 1.0 );
-                m_horizonpair  = false;
-                m_firsthorizon = false;
-            }
-            if ( m_currentlyvisible != m_lastvisible )
-                manageCrossHorizon();
+	// Less accurate:
+	// currentlyvisible = (qpos.v[Q_Z] >= m_zPointLimit) ? true : false;
+	m_currentlyvisible = ( qpos.v[Q_Z] >= 0 );
+	if ( itPoint == itStartPoint ) {
+	    // qDebug("Initializing scheduled new PolyLine");
+	    m_lastvisible  = m_currentlyvisible;
+	    m_lastPoint    = QPointF( m_currentPoint.x() + 1.0, 
+				      m_currentPoint.y() + 1.0 );
+	    m_horizonpair  = false;
+	    m_firsthorizon = false;
+	}
+	if ( m_currentlyvisible != m_lastvisible )
+	    manageCrossHorizon();
 
-            // Take care of screencrossing crossings if horizon is visible.
-            // Filter Points which aren't on the visible Hemisphere.
-            if ( m_currentlyvisible && m_currentPoint != m_lastPoint ) {
-                // most recent addition: currentPoint != lastPoint
-                m_polygon << m_currentPoint;
-            }
-    #if 0
-            else {
-                // Speed burst on invisible hemisphere
-                step = 1;
-                if ( z < -0.2) step = 10;
-                if ( z < -0.4) step = 30;
-                if ( step > remain ) step = 1; 
-            }
-    #endif
+	// Take care of screencrossing crossings if horizon is visible.
+	// Filter Points which aren't on the visible Hemisphere.
+	if ( m_currentlyvisible && m_currentPoint != m_lastPoint ) {
+	    // most recent addition: currentPoint != lastPoint
+	    m_polygon << m_currentPoint;
+	}
+#if 0
+	else {
+	    // Speed burst on invisible hemisphere
+	    step = 1;
+	    if ( z < -0.2) step = 10;
+	    if ( z < -0.4) step = 30;
+	    if ( step > remain ) step = 1; 
+	}
+#endif
 
-            m_lastPoint = m_currentPoint;
-        }
+	m_lastPoint = m_currentPoint;
     }
 
     // In case of horizon crossings, make sure that we always get a
@@ -360,73 +360,73 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
-        if ( itPoint->detail() >= detail ) {
+        if ( itPoint->detail() < detail )
+	    continue;
 
-            // Calculate polygon nodes
+	// Calculate polygon nodes
 #ifdef VECMAP_DEBUG
-            ++m_debugNodeCount;
+	++m_debugNodeCount;
 #endif
 
-            itPoint->geoCoordinates( lon, lat);
-            double x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
-            double y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
-            int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
-            if( firstPoint ) {
-                firstPoint = false;
-                m_lastSign = currentSign;
-            }
+	itPoint->geoCoordinates( lon, lat);
+	double x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
+	double y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
+	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
+	if ( firstPoint ) {
+	    firstPoint = false;
+	    m_lastSign = currentSign;
+	}
 
-            m_currentPoint = QPointF( x, y );
+	m_currentPoint = QPointF( x, y );
 
-            //correction of the Dateline
+	//correction of the Dateline
 
-            if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
+	if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
 
-                // x coordinate on the screen for the points on the dateline on both
-                // sides of the flat map.
-                double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-                double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-                double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
-                double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
+	    // x coordinate on the screen for the points on the dateline on both
+	    // sides of the flat map.
+	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
+	    double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
 
-                //If the "jump" occurs in the Anctartica's latitudes
+	    //If the "jump" occurs in the Anctartica's latitudes
 
-                if ( lat < - M_PI / 3 ) {
-                       // FIXME: This should actually need to get investigated in ClipPainter.
-                       // For now though we just help ClipPainter to get the clipping right.
-                       if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 ) lastXAtDateLine = (double)(m_imgwidth) - 1.0;
-                       if ( lastXAtDateLine < 0.0 ) lastXAtDateLine = 0.0; 
-                       if ( xAtDateLine > (double)(m_imgwidth) - 1.0 ) xAtDateLine = (double)(m_imgwidth) - 1.0;
-                       if ( xAtDateLine < 0.0 ) xAtDateLine = 0.0; 
+	    if ( lat < - M_PI / 3 ) {
+		// FIXME: This should actually need to get investigated in ClipPainter.
+		// For now though we just help ClipPainter to get the clipping right.
+		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 ) lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine < 0.0 ) lastXAtDateLine = 0.0; 
+		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 ) xAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( xAtDateLine < 0.0 ) xAtDateLine = 0.0; 
 
-                       m_polygon << QPointF( lastXAtDateLine, y ); 
-                       m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );
-                       m_polygon << QPointF( xAtDateLine,     yAtSouthPole );
-                       m_polygon << QPointF( xAtDateLine,     y );
-                }
-                else {
+		m_polygon << QPointF( lastXAtDateLine, y ); 
+		m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );
+		m_polygon << QPointF( xAtDateLine,     yAtSouthPole );
+		m_polygon << QPointF( xAtDateLine,     y );
+	    }
+	    else {
 
-                    if( !CrossedDateline ) {
-                        m_polygon << QPointF( lastXAtDateLine, lastYAtDateLine );
-                        otherPolygon << QPointF( xAtDateLine,  y );
-                    }
-                    else {
-                        m_polygon    << QPointF( xAtDateLine,     y );
-                        otherPolygon << QPointF( lastXAtDateLine, lastYAtDateLine);
-                    }
-                    CrossedDateline = !CrossedDateline;
-                }
-            }
+		if ( CrossedDateline ) {
+		    m_polygon    << QPointF( xAtDateLine,     y );
+		    otherPolygon << QPointF( lastXAtDateLine, lastYAtDateLine);
+		}
+		else {
+		    m_polygon << QPointF( lastXAtDateLine, lastYAtDateLine );
+		    otherPolygon << QPointF( xAtDateLine,  y );
+		}
+		CrossedDateline = !CrossedDateline;
+	    }
+	}
 
-            if ( !CrossedDateline )
-                m_polygon << m_currentPoint;
-            else
-                otherPolygon << m_currentPoint;
+	if ( CrossedDateline )
+	    otherPolygon << m_currentPoint;
+	else
+	    m_polygon << m_currentPoint;
 
-            m_lastLon  = lon;
-            m_lastLat  = lat;
-            m_lastSign = currentSign;
-        }
+	m_lastLon  = lon;
+	m_lastLat  = lat;
+	m_lastSign = currentSign;
     }
 
     // Avoid polygons degenerated to Points.
@@ -434,7 +434,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
         append(m_polygon);
     }
 
-    if( otherPolygon.size() >= 2 ) {
+    if ( otherPolygon.size() >= 2 ) {
         append( otherPolygon );
     }
 }

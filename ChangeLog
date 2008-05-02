@@ -1,3 +1,9 @@
+2008-05-02  Inge Wallin  <inge@lysator.liu.se>
+
+	Cleaning in preparation for other, new stuff
+	* src/lib/VectorMap.cpp (sphericalCreatePolyLine): Cleaning
+	(rectangularCreatePolyLine): Cleaning
+
 2008-05-02  Torsten Rahn  <rahn@kde.org>
 
     - Getting toggling the border feature working again - this time via the
@@ -376,7 +382,7 @@
 	Crazy issue 25: Spelling errors
 	* src/lib/geodata/scene/GeoSceneMap.h: Spelling fixes
 	
-	Crazy issue 7: Single char QStrings better written as a QChar
+	Crazy issue 6: Single char QStrings better written as a QChar
 	* src/lib/MapThemeManager.cpp (createMapThemeRow): 
 
 2008-04-25  Torsten Rahn  <rahn@kde.org>
