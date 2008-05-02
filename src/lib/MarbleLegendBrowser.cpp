@@ -68,6 +68,8 @@ MarbleLegendBrowser::~MarbleLegendBrowser()
 
 void MarbleLegendBrowser::loadLegend()
 {
+    qDebug() << "loadLegend";
+
     // Read the html string.
 
     // Check for a theme specific legend.html first
@@ -76,6 +78,11 @@ void MarbleLegendBrowser::loadLegend()
 	 && d->m_marbleWidget->model()->mapTheme() != 0 )
     {
         GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
+
+        disconnect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ), 0, 0 );
+        connect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ),
+                  this, SLOT( test( QString, bool ) ) );
+
         QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->head()->theme() + "/legend.html" ); 
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
@@ -117,9 +124,6 @@ void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
                   this, SLOT( loadLegend() ) );
 
         // FIXME: This doesn't do anything yet and needs improvement
-        connect ( d->m_marbleWidget->model()->mapTheme(),
-                  SIGNAL( valueChanged( QString, bool ) ),
-                  this, SLOT( loadLegend() ) );
     }
 }
 
@@ -304,6 +308,7 @@ void MarbleLegendBrowser::sendSignals( const QString &name, bool checked )
     if ( name == "terrain") {
         emit toggledTerrain( checked );
     }
+
     if ( name == "borders") {
         emit toggledBorders( checked );
     }

@@ -49,6 +49,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void setCheckedRelief( bool checked );
     void setCheckedCompass( bool checked );
     void setCheckedScaleBar( bool checked );
+    void test( const QString& name, bool value ){ qDebug() << "TEST" << name << value; }
 
  Q_SIGNALS:
     void toggledLocations( bool );
@@ -67,7 +68,6 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 
  private Q_SLOTS:
     void loadLegend();
-    void test(){ qDebug() << "TEST"; }
 
     void toggleCheckBoxStatus( const QUrl &);
 

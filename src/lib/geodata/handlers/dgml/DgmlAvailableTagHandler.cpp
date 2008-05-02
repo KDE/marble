@@ -21,6 +21,8 @@
 
 #include "DgmlAvailableTagHandler.h"
 
+#include <QtCore/QDebug>
+
 #include "DgmlElementDictionary.h"
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"

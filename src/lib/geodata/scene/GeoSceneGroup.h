@@ -41,6 +41,15 @@ class GeoSceneGroup : public QObject,
     ~GeoSceneGroup();
 
     /**
+     * @brief  Get the availability of a property in this group
+     * @param  name  the property name
+     * @param  available  availability of the property
+     * @return @c true  the property was registered in this group
+     *         @c false the property wasn't registered in this group
+     */
+    bool propertyAvailable( const QString& name, bool& available  );
+
+    /**
      * @brief  Set the value of a property in this group
      * @param  name  the property name
      * @param  value  the value of the property

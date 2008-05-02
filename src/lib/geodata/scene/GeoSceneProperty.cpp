@@ -21,6 +21,8 @@
 
 #include "GeoSceneProperty.h"
 
+#include <QtCore/QDebug>
+
 GeoSceneProperty::GeoSceneProperty( const QString& name )
     : m_name( name ),
       m_available( false ),
@@ -57,6 +59,7 @@ bool GeoSceneProperty::defaultValue() const
 void GeoSceneProperty::setDefaultValue( bool defaultValue )
 {
     m_defaultValue = defaultValue;
+    setValue( defaultValue );
 }
 
 bool GeoSceneProperty::value() const
@@ -70,7 +73,7 @@ void GeoSceneProperty::setValue( bool value )
         return;
 
     m_value = value;
-
+    qDebug() << "GeoSceneProperty: Setting " << m_name << "to" << m_value; 
     emit valueChanged( m_name, m_value );
 }
 

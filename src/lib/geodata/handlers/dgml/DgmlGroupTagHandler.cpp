@@ -24,10 +24,14 @@
 #include <QtCore/QDebug>
 
 #include "DgmlElementDictionary.h"
+#include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneSettings.h"
+#include "GeoSceneGroup.h"
 
 using namespace GeoSceneElementDictionary;
+using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Group)
 

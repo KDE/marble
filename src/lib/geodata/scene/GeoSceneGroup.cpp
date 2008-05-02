@@ -36,6 +36,21 @@ GeoSceneGroup::~GeoSceneGroup()
     qDeleteAll( m_properties );
 }
 
+bool GeoSceneGroup::propertyAvailable( const QString& name, bool& available )
+{
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
+    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+        if ( (*it)->name() == name ) {
+            available = (*it)->available();
+            return true;
+        }
+    }
+
+    available = false;
+
+    return false;
+}
+
 bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
 {
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();

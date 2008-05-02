@@ -979,12 +979,18 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     if ( mapThemeId == d->m_model->mapThemeId() )
         return;
     qDebug() << "MapThemeId in MarbleMap::setMapTheme: " << mapThemeId;
-    viewParams()->setMapThemeId( mapThemeId );
+    d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
     d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+}
+
+void MarbleMap::setShowProperty( const QString& name, bool visible )
+{
+    qDebug() << "In MarbleMap the property " << name << "was set to " << visible;
+    d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, visible );
 }
 
 void MarbleMap::setShowScaleBar( bool visible )

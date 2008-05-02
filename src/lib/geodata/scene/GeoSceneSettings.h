@@ -43,6 +43,15 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     virtual ~GeoSceneSettings();
 
     /**
+     * @brief  Get the availability of a property across groups
+     * @param  name  the property name
+     * @param  available  availability of the property
+     * @return @c true  the property was registered across groups
+     *         @c false the property wasn't registered across groups
+     */
+    bool propertyAvailable( const QString& name, bool& available  );
+
+    /**
      * @brief  Set the value of a property across groups
      * @param  name  the property name
      * @param  value  the value of the property

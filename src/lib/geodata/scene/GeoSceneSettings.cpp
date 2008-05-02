@@ -21,6 +21,8 @@
 
 #include "GeoSceneSettings.h"
 
+#include <QtCore/QDebug>
+
 #include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"
 
@@ -35,8 +37,33 @@ GeoSceneSettings::~GeoSceneSettings()
     qDeleteAll(m_groups);
 }
 
+bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
+{
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
+    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+        if ( (*it)->name() == name ) {
+            available = (*it)->available();
+            return true;
+        }
+    }
+
+    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
+    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+        bool success = (*itGroup)->propertyAvailable( name, available );
+        if ( success ) {
+            return true;
+        }
+    }
+
+    available = false;
+
+    return false;
+}
+
 bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
 {
+    qDebug() << "GeoSceneSettings: Property " << name << "to" << value; 
+    
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
     for (it = m_properties.begin(); it != m_properties.end(); ++it) {
         if ( (*it)->name() == name ) {

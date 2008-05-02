@@ -120,10 +120,10 @@
         </map>
 
         <settings>
-<!--            <group name="Boundaries"> -->
+-            <group name="Boundaries">
                 <property name="borders">
-                    <available>true</available>
                     <value>true</value>
+                    <available>true</available>
                 </property>
                 <property name="international-boundaries">
                     <available>true</available>
@@ -133,7 +133,7 @@
                     <available>true</available>
                     <value>true</value>
                 </property>
-<!--            </group>
+            </group>
             <group name="Water Bodies"> -->
                 <property name="waterbodies">
                     <available>true</available>
@@ -147,7 +147,7 @@
                     <available>true</available>
                     <value>true</value>
                 </property>
-<!--            </group> -->
+            </group>
         </settings>
         
         <!-- At last we define some legend properties -->

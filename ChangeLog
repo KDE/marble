@@ -1,5 +1,25 @@
 2008-05-02  Torsten Rahn  <rahn@kde.org>
 
+    - Getting toggling the border feature working again - this time via the
+      DGML2 "framework". Fixing lots of bugs on the way there.
+    - introducing lots of qDebug statements (sorry!) for now.
+
+    * src/lib/MarbleLegendBrowser.{cpp,h}:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/geodata/scene/GeoSceneGroup.{cpp,h}:
+    * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
+    * src/lib/geodata/handlers/dgml/DgmlValueTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlAvailableTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlGroupTagHandler.cpp:
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/MarbleControlBox.cpp:
+    * src/lib/VectorComposer.cpp:
+    * src/lib/geodata/scene/GeoSceneProperty.cpp:
+
+2008-05-02  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/geodata/scene/GeoSceneGroup.{cpp,h}:
     * src/lib/geodata/scene/GeoSceneSettings.{cpp,h}:
 

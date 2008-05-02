@@ -53,6 +53,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlDescriptionTagHandler.cpp
         geodata/handlers/dgml/DgmlDiscreteTagHandler.cpp
         geodata/handlers/dgml/DgmlDocumentTagHandler.cpp
+        geodata/handlers/dgml/DgmlGroupTagHandler.cpp
         geodata/handlers/dgml/DgmlHeadTagHandler.cpp
         geodata/handlers/dgml/DgmlHeadingTagHandler.cpp
         geodata/handlers/dgml/DgmlIconTagHandler.cpp

@@ -223,7 +223,11 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
          m_vectorMap -> paintMap( painter, antialiased );
     }
 
-    if ( viewParams->m_showBorders ) {
+    bool showBorders;
+    viewParams->mapTheme()->settings()->propertyValue( "borders", showBorders );
+    qDebug() << showBorders;
+
+    if ( showBorders ) {
         // Countries
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );

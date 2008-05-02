@@ -58,11 +58,11 @@ GeoNode* DgmlPropertyTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Settings)) {
-        GeoSceneProperty* property = new GeoSceneProperty( name );
+        property = new GeoSceneProperty( name );
         parentItem.nodeAs<GeoSceneSettings>()->addProperty( property );
     }
     if (parentItem.represents(dgmlTag_Group)) {
-        GeoSceneProperty* property = new GeoSceneProperty( name );
+        property = new GeoSceneProperty( name );
         parentItem.nodeAs<GeoSceneGroup>()->addProperty( property);
     }
 

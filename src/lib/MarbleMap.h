@@ -651,6 +651,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void  setMapThemeId( const QString& maptheme );
 
     /**
+     * @brief  Set whether a map theme property is visible
+     * @param  visible  visibility of the scale bar
+     */
+    void setShowProperty( const QString& name, bool visible );
+
+    /**
      * @brief  Set whether the scale bar overlay is visible
      * @param  visible  visibility of the scale bar
      */
