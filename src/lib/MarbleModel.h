@@ -171,7 +171,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void  setProjection( Projection projection );
+    void  setupTextureMapper( Projection projection );
 
     /**
      * @brief Return the downloadmanager to load missing tiles

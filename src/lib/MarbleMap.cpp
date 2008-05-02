@@ -572,8 +572,9 @@ void MarbleMap::setProjection( Projection projection )
         d->drawAtmosphere();
     }
 
+    d->m_model->setupTextureMapper( projection );
+
     // Update texture map during the repaint that follows:
-    d->m_model->setProjection( projection );
     setNeedsUpdate();
 }
 
