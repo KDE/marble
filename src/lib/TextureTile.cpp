@@ -110,7 +110,8 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
       double testx1 = origx1 * (double)( TileLoaderHelper::levelToRow( i ) ) ;
       double testy1 = origy1 * (double)( TileLoaderHelper::levelToColumn( i ) );
 
-      QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, i, testx1, testy1 );
+      QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, i,
+                                                                    (int)(testx1), (int)(testy1) );
       absfilename = MarbleDirs::path( relfilename );
 
       if ( QFile::exists( absfilename ) ) {

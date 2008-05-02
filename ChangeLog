@@ -1,5 +1,11 @@
 2008-05-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TextureTile.cpp
+
+    Fix warning.
+
+2008-05-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/parser/GeoParser.cpp
     * src/lib/geodata/CMakeLists.txt
 
