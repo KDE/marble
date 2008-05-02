@@ -31,9 +31,9 @@ QString TileId::toString() const
 
 TileId TileId::fromString( QString const& idStr )
 {
-  return TileId( idStr.section( ':', 0, 0 ).toInt(),
-		 idStr.section( ':', 1, 1 ).toInt(),
-		 idStr.section( ':', 2, 2 ).toInt() );
+    return TileId( idStr.section( ':', 0, 0 ).toInt(),
+                   idStr.section( ':', 1, 1 ).toInt(),
+                   idStr.section( ':', 2, 2 ).toInt() );
 }
 
 int TileId::x() const
@@ -51,17 +51,17 @@ int TileId::zoomLevel() const
     return m_zoomLevel;
 }
 
-bool operator==(TileId const& lhs, TileId const& rhs )
+bool operator==( TileId const& lhs, TileId const& rhs )
 {
     return lhs.m_zoomLevel == rhs.m_zoomLevel
-      && lhs.m_tileX == rhs.m_tileX
-      && lhs.m_tileY == rhs.m_tileY;
+        && lhs.m_tileX == rhs.m_tileX
+        && lhs.m_tileY == rhs.m_tileY;
 }
 
 uint qHash( TileId const& tid )
 {
     quint64 tmp = (quint64)(tid.m_zoomLevel) << 36
-      + (quint64)(tid.m_tileX) << 18
-      + (quint64)(tid.m_tileY);
+        + (quint64)(tid.m_tileX) << 18
+        + (quint64)(tid.m_tileY);
     return qHash( tmp );
 }
