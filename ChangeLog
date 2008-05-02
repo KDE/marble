@@ -1,4 +1,12 @@
-2008-05-01  Jens-Michael Hoffmann  <jensmh@gmx.de>
+2008-05-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/parser/GeoParser.cpp
+    * src/lib/geodata/CMakeLists.txt
+
+    Now that there is a GeoDocument.cpp we can remove the definition
+    of static variable GeoDocument::s_leakProtector from GeoParser.cpp.
+
+2008-05-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/AbstractScanlineTextureMapper.cpp
     * src/lib/MergedLayerDecorator.h

@@ -39,6 +39,7 @@ SET( geodata_scene_SRCS
 
 SET( geodata_parser_SRCS
         geodata/parser/GeoDataParser.cpp
+        geodata/parser/GeoDocument.cpp
         geodata/parser/GeoParser.cpp
         geodata/parser/GeoSceneParser.cpp
         geodata/parser/GeoTagHandler.cpp
