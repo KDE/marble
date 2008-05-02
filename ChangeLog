@@ -1,5 +1,7 @@
 2008-05-02  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/TextureColorizer.cpp (colorize): Cleaning and comments
+
 	Cleaning in preparation for other, new stuff
 	* src/lib/VectorMap.cpp (sphericalCreatePolyLine): Cleaning
 	(rectangularCreatePolyLine): Cleaning

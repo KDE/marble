@@ -23,12 +23,12 @@
 #include <QtCore/QVector>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
-//#include <QtCore/QTextStream>
 #include <QtCore/QStringList>
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 
 #include "Quaternion.h"
+
 
 class ViewParams;
 
@@ -58,7 +58,9 @@ class TextureColorizer
 
  private:
     static uint texturepalette[16][512];
-    void generatePalette(const QString& seafile, const QString& landfile) const;
+    void generatePalette( const QString& seafile,
+			  const QString& landfile ) const;
 };
+
 
 #endif

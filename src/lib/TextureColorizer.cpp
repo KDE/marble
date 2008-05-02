@@ -26,15 +26,30 @@ uint TextureColorizer::texturepalette[16][512];
 TextureColorizer::TextureColorizer( const QString& seafile, 
                                     const QString& landfile )
 {
-//    Q_UNUSED( seafile );
-//    Q_UNUSED( landfile );
-
    generatePalette(seafile, landfile);
 }
 
+
+// This function takes two images, both in viewParams:
+//  - The coast image, which has a number of colors where each color
+//    represents a sort of terrain (ex: land/sea)
+//  - The canvas image, which has a gray scale image, often
+//    representing a height field.
+//
+// It then uses the values of the pixels in the coast image to select
+// a color map.  The value of the pixel in the canvas image is used as
+// an index into the selected color map and the resulting color is
+// written back to the canvas image.  This way we can have different
+// color schemes for land and water.
+//
+// In addition to this, a simple form of bump mapping is performed to
+// increase the illusion of height differences (see the variable
+// showRelief).
+// 
+
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
-    QImage  *origimg  = viewParams->m_canvasImage;
+    QImage        *origimg  = viewParams->m_canvasImage;
     const QImage  *coastimg = viewParams->m_coastImage;
     const qint64   radius   = viewParams->radius();
 
@@ -91,18 +106,20 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
             emboss.buffer = 0;
 		
-            for ( uchar* readData = readDataStart; readData < readDataEnd; readData+=4, ++writeData, ++coastData ) {
+            for ( uchar* readData = readDataStart; 
+		  readData < readDataEnd; 
+		  readData += 4, ++writeData, ++coastData )
+	    {
 
-                // Cheap Embosss / Bumpmapping
+                // Cheap Emboss / Bumpmapping
                 const uchar&  grey = *readData; // qBlue(*data);
 
-                if ( showRelief == true )
-                {
+                if ( showRelief ) {
                     emboss.gpuint.x4 = grey;
                     emboss.buffer = emboss.buffer >> 8;
                     bump = ( emboss.gpuint.x1 + 8 - grey );
                     if ( bump  < 0 )  bump = 0;
-                    if ( bump  > 15 )  bump = 15;
+                    if ( bump  > 15 ) bump = 15;
                 }
 
                 int alpha = qRed( *coastData );
@@ -117,8 +134,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                         }
                     }
                 }
-                else
-                {
+                else {
                     double c = 1.0 / 255.0;
 
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
@@ -178,19 +194,21 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             const uchar *readDataEnd = origimg->scanLine( y ) + xRight * 4;
 
  
-            for ( uchar* readData = readDataStart; readData < readDataEnd; readData+=4, ++writeData, ++coastData ) {
+            for ( uchar* readData = readDataStart;
+		  readData < readDataEnd;
+		  readData += 4, ++writeData, ++coastData )
+	    {
                 // Cheap Embosss / Bumpmapping
 
                 const uchar& grey = *readData; // qBlue(*data);
 
-                if ( showRelief == true )
-                {
+                if ( showRelief == true ) {
                     emboss.buffer = emboss.buffer >> 8;
                     emboss.gpuint.x4 = grey;    
                     bump = ( emboss.gpuint.x1 + 16 - grey ) >> 1;
 
                     if ( bump > 15 ) bump = 15;
-                    if ( bump < 0 ) bump = 0;
+                    if ( bump < 0 )  bump = 0;
                 }
 
                 int alpha = qRed( *coastData );
@@ -205,8 +223,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                         }
                     }
                 }
-                else
-                {
+                else {
                     double c = 1.0 / 255.0;
 
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
@@ -246,15 +263,16 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     }
 }
 
-void TextureColorizer::generatePalette(const QString& seafile, const QString& landfile) const
+void TextureColorizer::generatePalette(const QString& seafile,
+				       const QString& landfile) const
 {
-    QImage  *gradientImage = new QImage( 256, 10, QImage::Format_RGB32 );
-    QPainter  gradientPainter(gradientImage);
-    gradientPainter.setPen(Qt::NoPen);
+    QImage   *gradientImage = new QImage( 256, 10, QImage::Format_RGB32 );
+    QPainter  gradientPainter( gradientImage );
+    gradientPainter.setPen( Qt::NoPen );
 
-    QImage  shadingImage ( 256, 10, QImage::Format_RGB32 );
-    QPainter  shadingPainter(&shadingImage);
-    shadingPainter.setPen(Qt::NoPen);
+    QImage    shadingImage ( 256, 10, QImage::Format_RGB32 );
+    QPainter  shadingPainter( &shadingImage );
+    shadingPainter.setPen( Qt::NoPen );
 
     int offset = 0;
 
@@ -268,14 +286,15 @@ void TextureColorizer::generatePalette(const QString& seafile, const QString& la
         QFile  file( filename );
         file.open( QIODevice::ReadOnly );
         QTextStream  stream( &file );  // read the data from the file
-        QString  evalstrg;
+        QString      evalstrg;
 
         while ( !stream.atEnd() ) {
             stream >> evalstrg;
             if ( !evalstrg.isEmpty() && evalstrg.contains( "=" ) ) {
                 QString  colorValue = evalstrg.section( "=", 0, 0 );
                 QString  colorPosition = evalstrg.section( "=", 1, 1 );
-                gradient.setColorAt(colorPosition.toDouble(), QColor(colorValue));
+                gradient.setColorAt( colorPosition.toDouble(),
+				     QColor( colorValue ) );
             }
         }
         gradientPainter.setBrush( gradient );
@@ -285,7 +304,7 @@ void TextureColorizer::generatePalette(const QString& seafile, const QString& la
   
             int  shadeIndex = 120 + j;
 
-            for ( int i = 0; i < 256; ++i) {
+            for ( int i = 0; i < 256; ++i ) {
 
                     QRgb  shadeColor = gradientImage->pixel( i, 1 );
                     QLinearGradient  shadeGradient( 0, 0, 256, 0 );
