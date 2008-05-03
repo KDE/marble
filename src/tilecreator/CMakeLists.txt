@@ -41,13 +41,15 @@ if( TILES_AT_COMPILETIME )
     set(ENV{QT_PLUGIN_PATH} ${QT_PLUGINS_DIR})
     macro( MARBLE_COMPILE_TILES mapname grayscale )
         # the parameters of tilecreator are:
-        #  PREFIX  the source directory
-        #  INSTALLMAP  the map in the form MAPNAME/MAPNAME.jpg
+        #  SOURCEDIR  the source directory
+        #             this can either be absolute or 
+        #             relative to the marble data path.
+        #  INSTALLMAP  the map in the form MAPNAME.jpg
         #  DEM  "true" for srtm, "false" else
-        #  TARGETDIR the destination directory
+        #  TARGETDIR  the destination directory
         configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/../../data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
         add_custom_command( TARGET tilecreator POST_BUILD
-                            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tilecreator ARGS earth ${mapname}/${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
+                            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tilecreator ARGS ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname} ${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             COMMENT generating tiles for srtm data )
         # this shouldn't happen but it happens far to often

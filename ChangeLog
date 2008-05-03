@@ -1,3 +1,14 @@
+2008-05-03  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/TileCreator.{cpp,h}:
+    * src/tilecreator/CMakeLists.txt:
+
+    - Fixing bug #161474
+
+    - the problem was that Patrick had unconsciously assumed
+      that the install map would be located in its final place
+      already.
+
 2008-05-02  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget.{cpp,h}:

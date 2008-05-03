@@ -31,10 +31,10 @@
 const uint  tileSize = 675;
 
 
-TileCreator::TileCreator(const QString& prefix, const QString& installmap,
+TileCreator::TileCreator(const QString& sourceDir, const QString& installmap,
                          const QString& dem, const QString& targetDir) 
     : QThread(0),
-      m_prefix(prefix),
+      m_sourceDir(sourceDir),
       m_installmap(installmap),
       m_dem(dem),
       m_targetDir(targetDir),
@@ -50,16 +50,28 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    QString m_sourceDir = MarbleDirs::path( "maps/" + m_prefix +
-'/' + m_installmap );
+    qDebug() << "Prefix: " << m_sourceDir << "installmap:" << m_installmap;
+
+    // If the sourceDir starts with a '/' assume an absolute path.
+    // Otherwise assume a relative marble data path
+    QString m_sourcePath;
+    if ( m_sourceDir.startsWith('/') ) {
+        m_sourcePath = m_sourceDir + '/' + m_installmap;
+        qDebug() << "Trying absolulte path:" << m_sourcePath;
+    }
+    else {
+        m_sourcePath = MarbleDirs::path( "maps/" + m_sourceDir +
+    '/' + m_installmap );
+        qDebug() << "Trying relative path:" << "maps/" + m_sourceDir + '/' + m_installmap;
+    }
     if ( m_targetDir.isNull() )
-        m_targetDir = MarbleDirs::localPath() + "/maps/" + m_prefix
-+ '/';
+        m_targetDir = MarbleDirs::localPath() + "/maps/" + m_sourcePath.section( '/', -3, -2 ) + '/';
     if ( !m_targetDir.endsWith('/') )
         m_targetDir += '/';
 
-    qDebug() << "Creating tiles from: " << m_sourceDir;
-    QImageReader testImage( m_sourceDir );
+    qDebug() << "Creating tiles from: " << m_sourcePath;
+    qDebug() << "Installing tiles to: " << m_targetDir;
+    QImageReader testImage( m_sourcePath );
 
     QVector<QRgb> grayScalePalette;
     for ( int cnt = 0; cnt <= 255; ++cnt ) {
@@ -151,7 +163,7 @@ void TileCreator::run()
             ( QDir::root() ).mkpath( dirName );
     }
 
-    QImage  sourceImage( m_sourceDir );
+    QImage  sourceImage( m_sourcePath );
 
     for ( int n = 0; n < nmax; ++n ) {
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
