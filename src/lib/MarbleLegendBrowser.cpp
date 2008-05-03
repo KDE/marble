@@ -228,10 +228,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
 
             QPixmap itemIcon = itemPixmap.copy();
 
-            QColor itemColor = QColor( items.at(item)->icon()->color() );
-            if ( !itemColor.isValid() )
-                itemColor = QColor( Qt::transparent );
-
+            QColor itemColor = items.at(item)->icon()->color();
             itemIcon.fill( itemColor );
 
             QPainter painter( &itemIcon );
@@ -320,70 +317,9 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     repaint();
 }
 
-// ----------------------------------------------------------------
-//  Lots of slots
-
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
     d->m_checkBoxMap[ name ] = checked;
 }
-
-/*
-void MarbleLegendBrowser::setCheckedLocations( bool checked )
-{
-    d->m_checkBoxMap[ "locations" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedCities( bool checked )
-{
-    d->m_checkBoxMap[ "cities" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedTerrain( bool checked )
-{
-    d->m_checkBoxMap[ "terrain" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedBorders( bool checked )
-{
-    d->m_checkBoxMap[ "borders" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedWaterBodies( bool checked )
-{
-    d->m_checkBoxMap[ "waterbodies" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedOtherPlaces( bool checked )
-{
-    d->m_checkBoxMap[ "otherplaces" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedIceLayer( bool checked )
-{
-    d->m_checkBoxMap[ "ice" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedGrid( bool checked )
-{
-    d->m_checkBoxMap[ "grid" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedRelief( bool checked )
-{
-    d->m_checkBoxMap[ "relief" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedCompass( bool checked )
-{
-    d->m_checkBoxMap[ "compass" ] = checked;
-}
-
-void MarbleLegendBrowser::setCheckedScaleBar( bool checked )
-{
-    d->m_checkBoxMap[ "scalebar" ] = checked;
-}
-*/
-
 
 #include "MarbleLegendBrowser.moc"

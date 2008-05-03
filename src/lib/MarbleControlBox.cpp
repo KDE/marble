@@ -229,20 +229,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setMarbleWidget( d->m_widget );
 
-/*
-    d->uiWidget.marbleLegendBrowser->setCheckedLocations( d->m_widget->showPlaces() );
-    d->uiWidget.marbleLegendBrowser->setCheckedCities( d->m_widget->showCities() );
-    d->uiWidget.marbleLegendBrowser->setCheckedTerrain( d->m_widget->showTerrain() );
-    d->uiWidget.marbleLegendBrowser->setCheckedBorders( d->m_widget->showBorders() );
-    d->uiWidget.marbleLegendBrowser->setCheckedWaterBodies( d->m_widget->showLakes()
-                                                      && d->m_widget->showRivers() );
-    d->uiWidget.marbleLegendBrowser->setCheckedOtherPlaces( d->m_widget->showOtherPlaces() );
-    d->uiWidget.marbleLegendBrowser->setCheckedGrid( d->m_widget->showGrid() );
-    d->uiWidget.marbleLegendBrowser->setCheckedIceLayer( d->m_widget->showIceLayer() );
-    d->uiWidget.marbleLegendBrowser->setCheckedRelief( d->m_widget->showRelief() );
-    d->uiWidget.marbleLegendBrowser->setCheckedCompass( d->m_widget->showCompass() );
-    d->uiWidget.marbleLegendBrowser->setCheckedScaleBar( d->m_widget->showScaleBar() );
-*/
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
     connect( this, SIGNAL(zoomChanged(int)), d->m_widget, SLOT(zoomView(int)) );
@@ -277,32 +263,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
              d->m_widget,                     SLOT( setPropertyValue( QString, bool ) ) );
 
-/*
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledLocations( bool ) ),
-             d->m_widget,                     SLOT( setShowPlaces( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCities( bool ) ),
-             d->m_widget,                     SLOT( setShowCities( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledTerrain( bool ) ),
-             d->m_widget,                     SLOT( setShowTerrain( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledBorders( bool ) ),
-             d->m_widget,                     SLOT( setShowBorders( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget,                     SLOT( setShowRivers( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledWaterBodies( bool ) ),
-             d->m_widget,                     SLOT( setShowLakes( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledOtherPlaces( bool ) ),
-             d->m_widget,                     SLOT( setShowOtherPlaces( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledGrid( bool ) ),
-             d->m_widget,                     SLOT( setShowGrid( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledIceLayer( bool ) ),
-             d->m_widget,                     SLOT( setShowIceLayer( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledRelief( bool ) ),
-             d->m_widget,                     SLOT( setShowRelief( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledCompass( bool ) ),
-             d->m_widget,                     SLOT( setShowCompass( bool ) ) );
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledScaleBar( bool ) ),
-             d->m_widget,                     SLOT( setShowScaleBar( bool ) ) );
-*/
     //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );

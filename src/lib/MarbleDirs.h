@@ -86,6 +86,8 @@ class MARBLE_EXPORT MarbleDirs
 
     static void setMarbleDataPath( const QString& adaptedPath);
 
+    static void debug();
+
  private:
     class Private;
     Private  * const d;

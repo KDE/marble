@@ -218,10 +218,10 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
 
-    viewParams->mapTheme()->settings()->propertyValue( "places", showPlaces );
-    viewParams->mapTheme()->settings()->propertyValue( "cities", showCities );
-    viewParams->mapTheme()->settings()->propertyValue( "terrain", showTerrain );
-    viewParams->mapTheme()->settings()->propertyValue( "otherplaces", showOtherPlaces );
+    viewParams->propertyValue( "places", showPlaces );
+    viewParams->propertyValue( "cities", showCities );
+    viewParams->propertyValue( "terrain", showTerrain );
+    viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
     /**
      * First handle the selected placemarks, as they have the highest priority.

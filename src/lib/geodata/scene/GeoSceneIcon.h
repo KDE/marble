@@ -23,6 +23,7 @@
 #define GEOSCENEICON_H
 
 #include <QtCore/QString>
+#include <QtGui/QColor>
 
 #include <geodata_export.h>
 
@@ -39,12 +40,12 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode {
     QString pixmap() const;
     void setPixmap(const QString&);
 
-    QString color() const;
-    void setColor(const QString&);
+    QColor color() const;
+    void setColor(const QColor&);
 
  protected:
     QString m_pixmap;
-    QString m_color;
+    QColor  m_color;
 };
 
 #endif // GEOSCENEICON_H

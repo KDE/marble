@@ -97,6 +97,27 @@ GeoSceneDocument *ViewParams::mapTheme()
     return m_mapTheme; 
 }
 
+void ViewParams::setPropertyValue( const QString &name, bool value )
+{
+    if ( m_mapTheme ) {
+        m_mapTheme->settings()->setPropertyValue( name, value );
+    }
+    else {
+        qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
+}
+
+void ViewParams::propertyValue( const QString &name, bool &value )
+{
+    if ( m_mapTheme ) {
+        m_mapTheme->settings()->propertyValue( name, value );
+    }
+    else {
+        value = false;
+        qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+    }
+}
+
 MapQuality ViewParams::mapQuality()
 {
     return m_mapQuality; 

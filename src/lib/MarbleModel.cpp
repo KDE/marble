@@ -266,7 +266,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
         if ( !TileLoader::baseTilesAvailable( texture ) )
         {
-            qDebug("Base tiles not available. Creating Tiles ... ");
+            qDebug() << "Base tiles not available. Creating Tiles ... \n"
+                     << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+            MarbleDirs::debug();
 
             TileCreator *tileCreator = new TileCreator(
                                      sourceDir,
@@ -444,7 +446,7 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
     // Paint the lon/lat grid around the earth.
     bool showGrid;
 
-    viewParams->mapTheme()->settings()->propertyValue( "coordinate-grid", showGrid );
+    viewParams->propertyValue( "coordinate-grid", showGrid );
 
     if ( showGrid ) {
         QPen  gridpen( QColor( 231, 231, 231, 255 ) );
@@ -486,10 +488,10 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
 #ifndef KML_GSOC
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
 
-    viewParams->mapTheme()->settings()->propertyValue( "places", showPlaces );
-    viewParams->mapTheme()->settings()->propertyValue( "cities", showCities );
-    viewParams->mapTheme()->settings()->propertyValue( "terrain", showTerrain );
-    viewParams->mapTheme()->settings()->propertyValue( "otherplaces", showOtherPlaces );
+    viewParams->propertyValue( "places", showPlaces );
+    viewParams->propertyValue( "cities", showCities );
+    viewParams->propertyValue( "terrain", showTerrain );
+    viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
     if ( showPlaces && ( showCities || showTerrain || showOtherPlaces )
          && d->m_placemarkmodel->rowCount() > 0 )

@@ -65,6 +65,21 @@ class ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
+    /**
+     * @brief  Set the value of a map theme property
+     * @param  name  the property name
+     * @param  value  the value of the property
+     * @return @c true  the property was found and changed accordingly
+     *         @c false the property couldn't be found here
+     */
+    void setPropertyValue( const QString &name, bool value );
+
+    /**
+     * @brief  Get the value of a property across groups
+     * @param  name  the property name
+     */
+    void propertyValue( const QString& name, bool &value );
+
     Marble::MapQuality mapQuality();
     void setMapQuality( Marble::MapQuality );
 
@@ -90,7 +105,6 @@ class ViewParams
     int         m_radiusUpdated;
 
     // Parameters that determine the painting
-
     // Show/don't show options
 
 //  FIXME: All of these parameters should get stored as a GeoSceneSettings 

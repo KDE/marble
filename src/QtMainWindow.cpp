@@ -444,10 +444,10 @@ void MainWindow::readSettings()
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );
-         m_controlView->marbleWidget()->goHome();         
-         m_controlView->marbleWidget()->setMapThemeId( 
-            settings.value("mapTheme", "" ).toString()
-         );
+         m_controlView->marbleWidget()->goHome();
+         QString mapThemeId = settings.value("mapTheme", "" ).toString();
+         qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
+         m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          m_controlView->marbleWidget()->setProjection(
             (Projection)(settings.value("projection", 0 ).toInt())
          );

@@ -259,6 +259,7 @@ void MapThemeManager::updateMapThemeModel()
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
 
+    qDebug() << "MapThemeManager: Building Model, MapThemeID: ";
 	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
             m_mapThemeModel->appendRow(itemList);

@@ -329,7 +329,7 @@ QPixmap MarbleMap::mapScreenShot()
 bool MarbleMap::propertyValue( const QString& name ) const
 {
     bool value;
-    d->m_viewParams.mapTheme()->settings()->propertyValue( name, value );
+    d->m_viewParams.propertyValue( name, value );
     return value;
 }
 
@@ -902,8 +902,8 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     bool showCompass, showScaleBar;
 
-    d->m_viewParams.mapTheme()->settings()->propertyValue( "compass", showCompass );
-    d->m_viewParams.mapTheme()->settings()->propertyValue( "scalebar", showScaleBar );
+    d->m_viewParams.propertyValue( "compass", showCompass );
+    d->m_viewParams.propertyValue( "scalebar", showScaleBar );
 
     if ( showCompass )
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
@@ -1007,7 +1007,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     qDebug() << "In MarbleMap the property " << name << "was set to " << value;
-    d->m_viewParams.mapTheme()->settings()->setPropertyValue( name, value );
+    d->m_viewParams.setPropertyValue( name, value );
 }
 
 void MarbleMap::setShowScaleBar( bool visible )

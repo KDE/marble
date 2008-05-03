@@ -119,8 +119,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
 
     bool showWaterbodies, showLakes;
-    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->mapTheme()->settings()->propertyValue( "lakes", showLakes );
+    viewParams->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->propertyValue( "lakes", showLakes );
 
     if ( showWaterbodies || showLakes ) {
          // Lakes
@@ -139,7 +139,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     }
 
     bool showIce;
-    viewParams->mapTheme()->settings()->propertyValue( "ice", showIce );
+    viewParams->propertyValue( "ice", showIce );
 
     if ( showIce ) {
         // Glaciers
@@ -190,8 +190,8 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     m_vectorMap -> paintMap( painter, antialiased );
 
     bool showWaterbodies, showLakes;
-    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->mapTheme()->settings()->propertyValue( "lakes", showLakes );
+    viewParams->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->propertyValue( "lakes", showLakes );
 
     if ( showWaterbodies || showLakes ) {
          // Lakes
@@ -224,8 +224,8 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
     }
 
     bool showWaterbodies, showRivers;
-    viewParams->mapTheme()->settings()->propertyValue( "waterbodies", showWaterbodies );
-    viewParams->mapTheme()->settings()->propertyValue( "rivers", showRivers );
+    viewParams->propertyValue( "waterbodies", showWaterbodies );
+    viewParams->propertyValue( "rivers", showRivers );
 
     if ( showWaterbodies || showRivers ) {
         // Rivers
@@ -239,7 +239,7 @@ void VectorComposer::paintVectorMap( ClipPainter *painter,
     }
 
     bool showBorders;
-    viewParams->mapTheme()->settings()->propertyValue( "borders", showBorders );
+    viewParams->propertyValue( "borders", showBorders );
 
     if ( showBorders ) {
         // Countries

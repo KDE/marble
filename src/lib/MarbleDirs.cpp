@@ -12,8 +12,9 @@
 
 #include "MarbleDirs.h"
 
-#include <QtCore/QFile>
+#include <QtCore/QDebug>
 #include <QtCore/QDir>
+#include <QtCore/QFile>
 #include <QtGui/QApplication>
 
 #ifdef Q_OS_MACX
@@ -128,4 +129,14 @@ void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
     }
 
     runTimeMarbleDataPath = adaptedPath;
+}
+
+void MarbleDirs::debug()
+{
+    qDebug() << "=== MarbleDirs: ===";
+    qDebug() << "Local Path:" << localPath();
+    qDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath; 
+    qDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH); 
+    qDebug() << "System Path:" << systemPath();
+    qDebug() << "===================";
 }

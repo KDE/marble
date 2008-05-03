@@ -43,12 +43,12 @@ void GeoSceneIcon::setPixmap( const QString& pixmap )
     m_pixmap = pixmap;
 }
 
-QString GeoSceneIcon::color() const
+QColor GeoSceneIcon::color() const
 {
     return m_color;
 }
 
-void GeoSceneIcon::setColor( const QString& color )
+void GeoSceneIcon::setColor( const QColor& color )
 {
     m_color = color;
 }

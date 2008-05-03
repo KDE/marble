@@ -21,6 +21,8 @@
 
 #include "DgmlIconTagHandler.h"
 
+#include <QtGui/QColor>
+
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
@@ -46,8 +48,11 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Icon));
 
-    QString pixmap = parser.attribute(dgmlAttr_pixmap).trimmed();
-    QString color  = parser.attribute(dgmlAttr_color).trimmed();
+    QString pixmapRelativePath  = parser.attribute(dgmlAttr_pixmap).trimmed();
+    QColor  color  = QColor( parser.attribute(dgmlAttr_color).trimmed() );
+
+    if ( !color.isValid() ) 
+        color = Qt::transparent;
 
     GeoSceneIcon *icon = 0;
 
@@ -55,12 +60,12 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Head)) {
         icon = parentItem.nodeAs<GeoSceneHead>()->icon();
-        icon->setPixmap( pixmap );
+        icon->setPixmap( pixmapRelativePath );
         icon->setColor( color );
     }
     if (parentItem.represents(dgmlTag_Item)) {
         icon = parentItem.nodeAs<GeoSceneItem>()->icon();
-        icon->setPixmap( pixmap );
+        icon->setPixmap( pixmapRelativePath );
         icon->setColor( color );
     }
 
