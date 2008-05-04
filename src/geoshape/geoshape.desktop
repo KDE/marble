@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Geo Shape
+
+Name[de]=Geo-Objekt
+Name[x-test]=xxGeo Shapexx
+X-KDE-ServiceTypes=KOffice/Shape
+Type=Service
+X-KDE-Library=geoshape
+X-Flake-MinVersion=0
+X-Flake-PluginVersion=1
