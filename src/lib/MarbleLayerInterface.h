@@ -5,14 +5,16 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
 
 #ifndef MARBLE_LAYER_INTERFACE_H
 #define MARBLE_LAYER_INTERFACE_H
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 
 class ClipPainter;
@@ -26,8 +28,6 @@ class ViewportParams;
 
 class MarbleLayerInterface
 {
-    Q_OBJECT
-
  public:
     virtual ~MarbleLayerInterface();
 

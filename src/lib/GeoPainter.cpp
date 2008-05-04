@@ -75,3 +75,17 @@ void GeoPainter::drawEllipse ( const GeoDataPoint & point, int width, int height
     }
 }
 
+void GeoPainter::drawPixmap ( const GeoDataPoint & point, const QPixmap & pixmap, bool isGeoProjected )
+{
+    int x, y;
+    AbstractProjection *projection = d->m_params->currentProjection();
+
+    if ( isGeoProjected == false ) {
+        // FIXME: Better visibility detection that takes the circle geometry into account
+        bool visible = projection->screenCoordinates( point, d->m_params, x, y );
+        if ( visible ) {
+            QPainter::drawPixmap( x, y, pixmap );
+        }
+    }
+}
+

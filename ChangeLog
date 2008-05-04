@@ -1,5 +1,14 @@
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
+    * src/plugins/designer/navigator/CMakeLists.txt:
+    * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:
+    * src/plugins/marble/test/MarbleTestPlugin.h:
+    * src/plugins/marble/test/CMakeLists.txt:
+
+    - Adding our first test plugin - it doesn't do anything yet.
+
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/GeoPainter.{cpp,h}:
 
     - Started to work on the GeoPainter implementation for later usage 
