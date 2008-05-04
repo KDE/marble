@@ -100,7 +100,7 @@ void GeoPainter::drawPixmap ( const GeoDataPoint & point, const QPixmap & pixmap
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( point, d->m_params, x, y );
         if ( visible ) {
-            QPainter::drawPixmap( x, y, pixmap );
+            QPainter::drawPixmap( x - ( pixmap.width() / 2 ), y - ( pixmap.height() / 2 ), pixmap );
         }
     }
 }

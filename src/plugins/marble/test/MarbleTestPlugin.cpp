@@ -11,7 +11,9 @@
 #include "MarbleTestPlugin.h"
 
 #include <QtGui/QColor>
+#include <QtGui/QPixmap>
 
+#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
 
@@ -65,6 +67,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
 {
     GeoDataPoint flensburg( 9.4, 54.8, 0.0, GeoDataPoint::Degree );
     GeoDataPoint linkoeping( 15.6, 58.4, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint istanbul( 28.0, 41.0, 0.0, GeoDataPoint::Degree );
     GeoDataPoint orbit( 105.6, 30.0, 3000000.0, GeoDataPoint::Degree );
 
     painter->setPen( QColor( 99, 198, 99, 255 ) );
@@ -84,6 +87,8 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     painter->drawEllipse( orbit, 20, 20 ); 
 
     painter->drawText( orbit, "Claudiu" );
+
+    painter->drawPixmap( istanbul, QPixmap( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
 
     return true;
 }
