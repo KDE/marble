@@ -1,3 +1,11 @@
+2008-05-05  Inge Wallin  <inge@lysator.liu.se>
+
+	Add missing exports needed in KDE version.
+	* src/lib/GeoPainter.h (GeoDataPainter): Export this class
+	* src/lib/geodata/data/GeoDataPoint.h (GeoDataPoint): Export this class
+
+2008-05-05 Simon Schmeisser
+	
 * geoshape (directory):  
  * geoshape/CMakeLists.txt:  
  * geoshape/GeoShape.cpp   [License: LGPL (v2+)]:
@@ -32,6 +40,7 @@ M      src/lib/GeoPainter.cpp
 M      src/lib/MarbleModel.h
 M      src/lib/PluginManager.cpp
 M      src/lib/MarbleModel.cpp
+	
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:

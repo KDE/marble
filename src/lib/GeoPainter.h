@@ -13,12 +13,15 @@
 #define GEOPAINTER_H
 
 
+#include "marble_export.h"
+
 #include "ClipPainter.h"
 #include "GeoDataPoint.h"
 #include "MarbleMap.h"
 
 class ViewportParams;
 class GeoPainterPrivate;
+
 
 /**
  * @short a painter that makes it easy to draw geometric items on the map 
@@ -55,7 +58,7 @@ class GeoPainterPrivate;
  */
 
 
-class GeoPainter : public ClipPainter 
+class MARBLE_EXPORT GeoPainter : public ClipPainter 
 {
  public:
     GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip );

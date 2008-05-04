@@ -17,6 +17,9 @@
 #include <QtCore/QVector>
 
 #include <cmath>
+
+#include "geodata_export.h"
+
 #include "Quaternion.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
@@ -26,7 +29,7 @@
 
 const double TWOPI = 2 * M_PI;
 
-class GeoDataPoint {
+class GEODATA_EXPORT GeoDataPoint {
  public:
     /**
      * @brief enum used constructor to specify the units used
