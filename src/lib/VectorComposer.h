@@ -30,7 +30,7 @@
 #include "Quaternion.h"
 
 
-class ClipPainter;
+class GeoPainter;
 class PntMap;
 class VectorMap;
 class ViewParams;
@@ -43,8 +43,8 @@ class VectorComposer
     virtual ~VectorComposer();
 
     void  drawTextureMap( ViewParams *viewParams );
-    void  paintBaseVectorMap( ClipPainter*, ViewParams* );
-    void  paintVectorMap(ClipPainter*, ViewParams* );
+    void  paintBaseVectorMap( GeoPainter*, ViewParams* );
+    void  paintVectorMap(GeoPainter*, ViewParams* );
     void  resizeMap( int width, int height );
 
     /**

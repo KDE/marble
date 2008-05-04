@@ -21,7 +21,7 @@
 #include <QtGui/QColor>
 
 #include "global.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "GeoPolygon.h"
 #include "ViewportParams.h"
 
@@ -393,8 +393,8 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 	    //If the "jump" occurs in the Anctartica's latitudes
 
 	    if ( lat < - M_PI / 3 ) {
-		// FIXME: This should actually need to get investigated in ClipPainter.
-		// For now though we just help ClipPainter to get the clipping right.
+		// FIXME: This should actually need to get investigated in GeoPainter.
+		// For now though we just help GeoPainter to get the clipping right.
 		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 ) lastXAtDateLine = (double)(m_imgwidth) - 1.0;
 		if ( lastXAtDateLine < 0.0 ) lastXAtDateLine = 0.0; 
 		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 ) xAtDateLine = (double)(m_imgwidth) - 1.0;
@@ -446,7 +446,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 //        Move it somewhere better.
 // FIXME: Btw, we shouldn't assume that the globe to paint is the earth.
 //
-void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
+void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
     switch( viewport->projection() ) {
@@ -462,7 +462,7 @@ void VectorMap::paintBase( ClipPainter * painter, ViewportParams* viewport,
     }
 }
 
-void VectorMap::sphericalPaintBase( ClipPainter * painter, 
+void VectorMap::sphericalPaintBase( GeoPainter * painter, 
 				    ViewportParams *viewport, bool antialiasing)
 {
     int     radius     =  viewport->radius();
@@ -482,7 +482,7 @@ void VectorMap::sphericalPaintBase( ClipPainter * painter,
     }
 }
 
-void VectorMap::rectangularPaintBase( ClipPainter * painter, 
+void VectorMap::rectangularPaintBase( GeoPainter * painter, 
 				      ViewportParams *viewport, bool antialiasing)
 {
     int  radius = viewport->radius();
@@ -503,7 +503,7 @@ void VectorMap::rectangularPaintBase( ClipPainter * painter,
     painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
 }
 
-void VectorMap::mercatorPaintBase( ClipPainter * painter, 
+void VectorMap::mercatorPaintBase( GeoPainter * painter, 
 				   ViewportParams *viewport, bool antialiasing)
 {
     int  radius = viewport->radius();
@@ -551,7 +551,7 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
             break;
     }
 
-    ClipPainter  painter(origimg, doClip);
+    GeoPainter  painter(origimg, viewport, doClip);
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
     painter.setPen(m_pen);
     painter.setBrush(m_brush);
@@ -573,7 +573,7 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
 
 // Paint the prepared vectors in screen coordinates.
 
-void VectorMap::paintMap(ClipPainter * painter, bool antialiasing)
+void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
 {
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 

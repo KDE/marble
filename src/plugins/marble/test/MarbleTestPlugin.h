@@ -50,7 +50,7 @@ class MarbleTestPlugin : public QObject, public MarbleLayerInterface
     bool isInitialized () const;
 
 
-    bool render( ClipPainter *painter, GeoSceneLayer * layer, ViewportParams *viewport );
+    bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
 };
 
 #endif

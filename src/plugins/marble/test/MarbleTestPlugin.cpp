@@ -10,6 +10,11 @@
 
 #include "MarbleTestPlugin.h"
 
+#include <QtGui/QColor>
+
+#include "GeoPainter.h"
+#include "GeoDataPoint.h"
+
 
 QStringList MarbleTestPlugin::backendTypes() const
 {
@@ -56,8 +61,30 @@ bool MarbleTestPlugin::isInitialized () const
     return true;
 }
 
-bool MarbleTestPlugin::render( ClipPainter *painter, GeoSceneLayer * layer, ViewportParams *viewport )
+bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
+    GeoDataPoint flensburg( 9.4, 54.8, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint linkoeping( 15.6, 58.4, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint orbit( 105.6, 30.0, 3000000.0, GeoDataPoint::Degree );
+
+    painter->setPen( QColor( 99, 198, 99, 255 ) );
+    painter->setBrush( QColor( 99, 198, 99, 80 ) );
+    painter->drawEllipse( flensburg, 30, 30 ); 
+
+    painter->drawText( flensburg, "Torsten" );
+
+    painter->setPen( QColor( 198, 99, 99, 255 ) );
+    painter->setBrush( QColor( 198, 99, 99, 80 ) );
+    painter->drawEllipse( linkoeping, 40, 40 ); 
+
+    painter->drawText( linkoeping, "Inge" );
+
+    painter->setPen( QColor( 99, 99, 198, 255 ) );
+    painter->setBrush( QColor( 99, 99, 198, 80 ) );
+    painter->drawEllipse( orbit, 20, 20 ); 
+
+    painter->drawText( orbit, "Claudiu" );
+
     return true;
 }
 

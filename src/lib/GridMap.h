@@ -22,7 +22,7 @@
 
 
 class ViewportParams;
-class ClipPainter;
+class GeoPainter;
 
 
 class GridMap : public ScreenPolygon::Vector
@@ -35,7 +35,7 @@ class GridMap : public ScreenPolygon::Vector
     void createEquator ( ViewportParams *viewport);
     void createGrid( ViewportParams *port );
 
-    void paintGridMap(ClipPainter * painter, bool );
+    void paintGridMap(GeoPainter * painter, bool );
 
     void setPen ( const QPen & p )  { m_pen = p; }
 

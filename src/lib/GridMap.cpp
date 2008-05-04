@@ -21,7 +21,7 @@
 
 #include "GeoDataPoint.h"       // In geodata/data/
 #include "global.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "ViewParams.h"
 
 // Except for the equator the major circles of latitude are defined via 
@@ -334,7 +334,7 @@ void GridMap::rectangularCreateCircle( double angle, SphereDim dim,
     }
 }
 
-void GridMap::paintGridMap(ClipPainter * painter, bool antialiasing)
+void GridMap::paintGridMap(GeoPainter * painter, bool antialiasing)
 {
     if ( size() == 0 )
         return;

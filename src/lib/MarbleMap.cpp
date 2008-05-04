@@ -39,7 +39,7 @@
 #include "AbstractScanlineTextureMapper.h"
 #include "AutoSettings.h"
 #include "BoundingBox.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
 #include "GeoDataPoint.h"
@@ -854,7 +854,7 @@ void MarbleMapPrivate::setBoundingBox()
 
 
 // Used to be paintEvent()
-void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect) 
+void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect) 
 {
     if ( !d->m_viewParams.mapTheme() ) {
         qDebug() << "No theme yet!";
@@ -871,7 +871,7 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
 
     // Create a painter that will do the painting.
 #if 0
-    ClipPainter painter( this, doClip );
+    GeoPainter painter( this, doClip );
 #endif
     // 1. Paint the globe itself.
 #if 0
@@ -957,7 +957,7 @@ void MarbleMap::paint(ClipPainter &painter, QRect &dirtyRect)
     emit framesPerSecond( fps );
 }
 
-void MarbleMap::customPaint(ClipPainter *painter)
+void MarbleMap::customPaint(GeoPainter *painter)
 {
     Q_UNUSED( painter );
     /* This is a NOOP */

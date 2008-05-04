@@ -15,14 +15,28 @@
 // Qt
 
 // Local dir
+#include "GeoPainter.h"
+#include "GeoSceneLayer.h"
+#include "MarbleLayerInterface.h"
+#include "ViewportParams.h"
 
 LayerManager::LayerManager(QObject *parent)
     : QObject(parent)
 {
+    // Just for initial testing
+    m_layerInterfaces = m_pluginManager.layerInterfaces();
 }
 
 LayerManager::~LayerManager()
 {
+}
+
+void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+{
+    QList<MarbleLayerInterface *> interfaceList = m_pluginManager.layerInterfaces();
+    foreach( MarbleLayerInterface * interface,  interfaceList ) {
+        interface->render( painter, viewport, layer );
+    }
 }
 
 void LayerManager::loadLayers()

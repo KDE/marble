@@ -56,7 +56,7 @@ class TileCreator;
 class SunLocator;
 class GpxFileModel;
 class FileViewModel;
-class ClipPainter;
+class GeoPainter;
 
 
 /**
@@ -923,7 +923,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief the globe and before all other layers has been rendered.
      * @param painter 
      */
-    virtual void  customPaint( ClipPainter *painter );
+    virtual void  customPaint( GeoPainter *painter );
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.

@@ -17,7 +17,7 @@
 #include <QtCore/QDebug>
 
 #include "GeoPolygon.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "VectorMap.h"
 #include "ViewParams.h"
 #include "MarbleDirs.h"
@@ -155,7 +155,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
-void VectorComposer::paintBaseVectorMap( ClipPainter *painter, 
+void VectorComposer::paintBaseVectorMap( GeoPainter *painter, 
                                          ViewParams *viewParams )
 {
     Quaternion  rotAxis = viewParams->planetAxis();
@@ -209,7 +209,7 @@ void VectorComposer::paintBaseVectorMap( ClipPainter *painter,
     }
 }
 
-void VectorComposer::paintVectorMap( ClipPainter *painter,
+void VectorComposer::paintVectorMap( GeoPainter *painter,
                                      ViewParams *viewParams )
 {
     // m_vectorMap -> clearNodeCount();

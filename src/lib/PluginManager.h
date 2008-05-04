@@ -29,6 +29,8 @@ class PluginManager : public QObject
     PluginManager(QObject *parent = 0);
     ~PluginManager();
 
+    QList<MarbleLayerInterface *> layerInterfaces() const;
+
  public Q_SLOTS:
     /**
      * @brief Browses the plugin directories and installs plugins. 

@@ -54,7 +54,7 @@ class MeasureTool;
 class SunLocator;
 class GpxFileModel;
 class FileViewModel;
-class ClipPainter;
+class GeoPainter;
 
 
 /**
@@ -456,7 +456,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void  paint(ClipPainter &painter, QRect &dirtyRect);
+    void  paint(GeoPainter &painter, QRect &dirtyRect);
 
     /**
      * @brief  Zoom the view to a certain zoomlevel
@@ -865,7 +865,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief the globe and before all other layers has been rendered.
      * @param painter 
      */
-    virtual void  customPaint( ClipPainter *painter );
+    virtual void  customPaint( GeoPainter *painter );
 
 #if 0
     void  connectNotify ( const char * signal );

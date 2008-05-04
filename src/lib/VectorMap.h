@@ -24,7 +24,7 @@
 #include "ScreenPolygon.h"
 
 
-class ClipPainter;
+class GeoPainter;
 class PntMap;
 class ViewportParams;
 
@@ -38,8 +38,8 @@ class VectorMap : public ScreenPolygon::Vector
     /**
      * @brief Paint the background, i.e. the water.
      */
-    void paintBase( ClipPainter *painter, ViewportParams *viewport, bool antialiasing );
-    void paintMap( ClipPainter *painter, bool antialiasing );
+    void paintBase( GeoPainter *painter, ViewportParams *viewport, bool antialiasing );
+    void paintMap( GeoPainter *painter, bool antialiasing );
     void drawMap( QPaintDevice *paintDevice, bool antialiasing,
 		  ViewportParams *viewport );
 
@@ -74,11 +74,11 @@ class VectorMap : public ScreenPolygon::Vector
 				 GeoDataPoint::Vector::ConstIterator, 
 				 const int detail, ViewportParams *viewport );
 
-    void sphericalPaintBase(   ClipPainter *painter, ViewportParams *viewport, 
+    void sphericalPaintBase(   GeoPainter *painter, ViewportParams *viewport, 
 			       bool antialiasing );
-    void rectangularPaintBase( ClipPainter *painter, ViewportParams *viewport, 
+    void rectangularPaintBase( GeoPainter *painter, ViewportParams *viewport, 
 			       bool antialiasing );
-    void mercatorPaintBase( ClipPainter *painter, ViewportParams *viewport, 
+    void mercatorPaintBase( GeoPainter *painter, ViewportParams *viewport, 
 			    bool antialiasing );
 
     void           manageCrossHorizon();

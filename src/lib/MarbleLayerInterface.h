@@ -17,7 +17,7 @@
 #include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 
-class ClipPainter;
+class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
 
@@ -104,7 +104,7 @@ class MarbleLayerInterface
      * @brief Renders the content provided by the layer on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
-    virtual bool render( ClipPainter *painter, GeoSceneLayer * layer, ViewportParams *viewport ) = 0;
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 ) = 0;
 };
 
 Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.0" )

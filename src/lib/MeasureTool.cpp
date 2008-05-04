@@ -47,7 +47,7 @@ MeasureTool::MeasureTool( QObject* parent )
 }
 
 
-void MeasureTool::paint( ClipPainter *painter, 
+void MeasureTool::paint( GeoPainter *painter, 
                          ViewportParams *viewport,
                          bool antialiasing )
 {
@@ -97,7 +97,7 @@ void MeasureTool::paint( ClipPainter *painter,
         drawTotalDistanceLabel( painter, totalDistance );
 }
 
-void MeasureTool::drawDistancePoints( ClipPainter *painter, 
+void MeasureTool::drawDistancePoints( GeoPainter *painter, 
                                       ViewportParams *viewport )
 {
     int  x = 0;
@@ -136,7 +136,7 @@ void MeasureTool::drawDistancePoints( ClipPainter *painter,
     }
 }
 
-void MeasureTool::drawMark( ClipPainter* painter, ViewportParams *viewport,
+void MeasureTool::drawMark( GeoPainter* painter, ViewportParams *viewport,
                             int x, int y )
 {
     const int MarkRadius = 5;
@@ -176,7 +176,7 @@ void MeasureTool::drawMark( ClipPainter* painter, ViewportParams *viewport,
 }
 
 
-void MeasureTool::drawDistancePath( ClipPainter* painter, 
+void MeasureTool::drawDistancePath( GeoPainter* painter, 
                                     Quaternion prevqpos, Quaternion qpos,
                                     ViewportParams *viewport )
 {
@@ -247,7 +247,7 @@ void MeasureTool::drawDistancePath( ClipPainter* painter,
 //        multiple drawing of the distance paths for projections that
 //        have repeatX() == true over the date line.
 //        
-void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
+void MeasureTool::rectangularDrawDistancePath( GeoPainter *painter,
                                                Quaternion   prevqpos,
                                                Quaternion   qpos,
                                                ViewportParams *viewport,
@@ -333,7 +333,7 @@ void MeasureTool::rectangularDrawDistancePath( ClipPainter *painter,
     drawAndRepeatDistancePath( painter, distancePath );
 }
 
-void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
+void MeasureTool::drawAndRepeatDistancePath( GeoPainter* painter,
                                              const QPolygonF distancePath )
 {
     //copy the QPolygonF so we can freely translate it
@@ -360,7 +360,7 @@ void MeasureTool::drawAndRepeatDistancePath( ClipPainter* painter,
 }
 #endif
 
-void MeasureTool::drawTotalDistanceLabel( ClipPainter *painter, 
+void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter, 
                                           double totalDistance )
 {
     QString  distanceString;

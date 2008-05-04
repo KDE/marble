@@ -27,7 +27,7 @@
 #include "GeoSceneVector.h"
 
 #include "AbstractScanlineTextureMapper.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "FlatScanlineTextureMapper.h"
 #include "GeoPolygon.h"
@@ -385,7 +385,7 @@ void MarbleModelPrivate::resize( int width, int height )
 }
 
 
-void MarbleModel::paintGlobe( ClipPainter* painter,
+void MarbleModel::paintGlobe( GeoPainter* painter,
                               int width, int height,
                               ViewParams *viewParams,
                               bool redrawBackground,
@@ -548,6 +548,8 @@ void MarbleModel::paintGlobe( ClipPainter* painter,
                                viewParams->m_canvasImage->size(),
                                viewParams,
                                viewParams->m_boundingBox );
+
+    d->m_layerManager.renderLayers( painter, viewParams->viewport(), layer );
 }
 
 

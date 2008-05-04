@@ -31,6 +31,11 @@ PluginManager::~PluginManager()
 {
 }
 
+QList<MarbleLayerInterface *> PluginManager::layerInterfaces() const
+{
+    return m_layerInterfaces;
+}
+
 void PluginManager::loadPlugins()
 {
     qDebug() << "Starting to load Plugins.";

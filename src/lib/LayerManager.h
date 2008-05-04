@@ -18,6 +18,10 @@
 // Local dir
 #include "PluginManager.h"
 
+class GeoPainter;
+class GeoSceneLayer;
+class ViewportParams;
+
 /**
  * @short The class that handles Marble's DGML layers.
  *
@@ -31,11 +35,15 @@ class LayerManager : public QObject
     LayerManager(QObject *parent = 0);
     ~LayerManager();
 
+    void renderLayers( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+
  public Q_SLOTS:
     void loadLayers();
 
  private:
     PluginManager m_pluginManager;
+
+    QList<MarbleLayerInterface *> m_layerInterfaces;
 };
 
 

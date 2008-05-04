@@ -23,7 +23,7 @@
 
 #include "GeoDataPoint.h"
 #include "global.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 
 class ViewportParams;
 
@@ -34,7 +34,7 @@ class MeasureTool : public QObject
  public:
     MeasureTool( QObject *parent = 0 );
 
-    void  paint( ClipPainter *painter, ViewportParams *viewport,
+    void  paint( GeoPainter *painter, ViewportParams *viewport,
                  bool antialiasing );
 
  public Q_SLOTS:
@@ -46,13 +46,13 @@ class MeasureTool : public QObject
     }
 
  private:
-    void  drawDistancePoints( ClipPainter *painter, ViewportParams *viewport );
-    void  drawMark( ClipPainter* painter, ViewportParams *viewport,
+    void  drawDistancePoints( GeoPainter *painter, ViewportParams *viewport );
+    void  drawMark( GeoPainter* painter, ViewportParams *viewport,
                     int x, int y );
-    void  drawDistancePath( ClipPainter* painter,
+    void  drawDistancePath( GeoPainter* painter,
                             Quaternion, Quaternion,
                             ViewportParams *viewport );
-    void  drawTotalDistanceLabel( ClipPainter *painter,
+    void  drawTotalDistanceLabel( GeoPainter *painter,
                                   double totalDistance );
 
     bool  testBug(); 

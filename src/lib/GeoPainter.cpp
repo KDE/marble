@@ -61,6 +61,17 @@ void GeoPainter::drawText ( const GeoDataPoint & position, const QString & text 
     }
 }
 
+void GeoPainter::drawText ( int x, int y, const QString & text )
+{
+    QPainter::drawText( x, y, text );
+}
+
+void GeoPainter::drawText ( const QPoint & position, const QString & text )
+{
+    QPainter::drawText( position, text );
+}
+
+
 void GeoPainter::drawEllipse ( const GeoDataPoint & point, int width, int height, bool isGeoProjected )
 {
     int x, y;
@@ -70,9 +81,14 @@ void GeoPainter::drawEllipse ( const GeoDataPoint & point, int width, int height
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( point, d->m_params, x, y );
         if ( visible ) {
-            QPainter::drawEllipse( x, y, width, height );
+            QPainter::drawEllipse(  x - width / 2, y - height / 2, width, height  );
         }
     }
+}
+
+void GeoPainter::drawEllipse ( int x, int y, int width, int height )
+{
+    QPainter::drawEllipse( x, y, width, height);
 }
 
 void GeoPainter::drawPixmap ( const GeoDataPoint & point, const QPixmap & pixmap, bool isGeoProjected )
@@ -89,3 +105,7 @@ void GeoPainter::drawPixmap ( const GeoDataPoint & point, const QPixmap & pixmap
     }
 }
 
+void GeoPainter::drawPixmap ( int x, int y, const QPixmap & pixmap )
+{
+    QPainter::drawPixmap( x, y, pixmap );
+}

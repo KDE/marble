@@ -34,7 +34,7 @@
 #include "Quaternion.h"
 #include "ViewParams.h"
 #include "TextureColorizer.h"
-#include "ClipPainter.h"
+#include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "GeoDataPoint.h"
 #include "GpxFileViewItem.h"
@@ -787,20 +787,20 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     QTime t;
     t.start();
 
-    // FIXME: Better way to get the ClipPainter
+    // FIXME: Better way to get the GeoPainter
     bool  doClip = false;
     if ( d->m_map->projection() == Spherical )
         doClip = ( d->m_map->radius() > width() / 2
                    || d->m_map->radius() > height() / 2 );
 
     // Create a painter that will do the painting.
-    ClipPainter painter( this, doClip );
+    GeoPainter painter( this, map()->viewParams()->viewport(), doClip );
 
     QRect  dirtyRect = evt->rect();
     d->m_map->paint( painter, dirtyRect );
 }
 
-void MarbleWidget::customPaint(ClipPainter *painter)
+void MarbleWidget::customPaint(GeoPainter *painter)
 {
     Q_UNUSED( painter );
     /* This is a NOOP in the base class*/

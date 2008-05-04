@@ -1,3 +1,38 @@
+M      src/lib/PluginManager.h
+M      src/lib/MeasureTool.cpp
+M      src/lib/MarbleWidget.cpp
+M      src/lib/VectorComposer.h
+M      src/lib/MarbleWidget.h
+M      src/lib/MarbleLayerInterface.h
+M      src/lib/VectorMap.cpp
+M      src/lib/MarbleMap.cpp
+M      src/lib/GeoPainter.cpp
+M      src/lib/MarbleModel.h
+M      src/lib/PluginManager.cpp
+M      src/lib/MarbleModel.cpp
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
+    * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:
+
+    - Getting our very first plugin to work -- wooooohoooo!
+
+    * src/lib/MeasureTool.{cpp,h}:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/VectorComposer.{cpp,h}:
+    * src/lib/MarbleLayerInterface.h:
+    * src/lib/VectorMap.{cpp,h}:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/GridMap.{cpp,h}:
+
+    - Using GeoPainter instead of ClipPainter everywhere.
+
+    * src/lib/PluginManager.{cpp,h}:
+    * src/lib/GeoPainter.h:
+    * src/lib/LayerManager.{cpp,h}:
+
+    - Doing a temporary solution to get the plugin to work
+      without a real LayerManager class.
+
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/designer/navigator/CMakeLists.txt:

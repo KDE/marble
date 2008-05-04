@@ -40,7 +40,7 @@ class QItemSelectionModel;
 
 class AbstractScanlineTextureMapper;
 class BoundingBox;
-class ClipPainter;
+class GeoPainter;
 class FileViewModel;
 class GeoDataDocument;
 class GeoSceneDocument;
@@ -118,7 +118,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * 4.1, making the MarbleModel/MarbleWidget pair truly follow the
      * Model/View paradigm.
      */
-    void  paintGlobe(ClipPainter *painter, int width, int height,
+    void  paintGlobe(GeoPainter *painter, int width, int height,
                      ViewParams *viewParams,
                      bool redrawBackground, const QRect& dirtyRect);
 
