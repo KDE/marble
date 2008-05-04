@@ -1,3 +1,25 @@
+* geoshape (directory):  
+ * geoshape/CMakeLists.txt:  
+ * geoshape/GeoShape.cpp   [License: LGPL (v2+)]:
+ * geoshape/GeoShape.h   [License: LGPL (v2+)]:
+ * geoshape/GeoTool.cpp   [License: LGPL (v2+)]:
+ * geoshape/GeoTool.h   [License: LGPL (v2+)]:
+ * geoshape/GeoToolFactory.cpp   [License: LGPL (v2+)]:
+ * geoshape/GeoToolFactory.h   [License: LGPL (v2+)]:
+ * geoshape/Plugin.cpp   [License: LGPL (v2+)]:
+ * geoshape/Plugin.h   [License: LGPL (v2+)]:
+ * geoshape/geoshape.desktop:
+
+- My first commit to Marble :)
+   In theory this adds a Koffice flake shape,
+   which uses Marble to display a map. In practice,
+   there is quite some buildsystem magic missing
+   and also some koffice headers need to be exported.
+  In the meantime have a look here for a picture:
+  http://developer.kde.org/~tackat/simons_marble_flake.png
+
+2008-05-04  Simon Schmeisser <mail_to_wrt@gmx.de>
+
 M      src/lib/PluginManager.h
 M      src/lib/MeasureTool.cpp
 M      src/lib/MarbleWidget.cpp
