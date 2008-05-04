@@ -42,12 +42,13 @@ void PluginManager::loadPlugins()
     m_layerInterfaces.clear();
 
     foreach( QString fileName, pluginFileNameList ) {
-        qDebug() << fileName;
+        qDebug() << fileName << " - " << MarbleDirs::path( "plugins/" + fileName );
         QPluginLoader loader( MarbleDirs::path( "plugins/" + fileName ) );
 
-        if( MarbleLayerInterface *interface = 
-            qobject_cast<MarbleLayerInterface *>(loader.instance() ) ) {
-            m_layerInterfaces.append( interface );
+        QObject *interface = loader.instance();
+
+        if( interface ) {
+            m_layerInterfaces.append( qobject_cast<MarbleLayerInterface *>(interface) );
         }
         else
         {

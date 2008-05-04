@@ -29,7 +29,7 @@ class ViewportParams;
 class MarbleLayerInterface
 {
  public:
-    virtual ~MarbleLayerInterface();
+    virtual ~MarbleLayerInterface(){}
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
