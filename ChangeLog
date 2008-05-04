@@ -1,3 +1,29 @@
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
+    * src/plugins/designer/marblewidget/CMakeLists.txt:
+    * src/plugins/designer/navigator/CMakeLists.txt:
+    * src/plugins/designer/CMakeLists.txt:
+    * src/plugins/marblewidget/MarbleWidgetPlugin.cpp:
+    * src/plugins/marblewidget/MarbleWidgetPlugin.h:
+    * src/plugins/marblewidget/CMakeLists.txt:
+    * src/plugins/navigator/MarbleNavigatorPlugin.h:
+    * src/plugins/navigator/CMakeLists.txt:
+    * src/plugins/navigator/MarbleNavigatorPlugin.cpp:
+    * src/plugins/CMakeLists.txt:
+
+    - Moving the designer plugins into their own directory.
+
+2008-05-03  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/TileCreator.{cpp,h}:
+    * src/tilecreator/CMakeLists.txt:
+
+    - Fixing bug #161474
+
+    - the problem was that Patrick had unconsciously assumed
+      that the install map would be located in its final place
+      already.
+
 2008-05-03  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/TileCreator.{cpp,h}:

@@ -2,8 +2,8 @@
 PROJECT(MarbleWidgetPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_SOURCE_DIR}/src/plugins/marblewidget
- ${CMAKE_BINARY_DIR}/src/plugins/marblewidget
+ ${CMAKE_SOURCE_DIR}/src/plugins/designer/marblewidget
+ ${CMAKE_BINARY_DIR}/src/plugins/designer/marblewidget
  ${QT_INCLUDE_DIR}
  ${QT_QTDESIGNER_INCLUDE_DIR}
 )
@@ -19,7 +19,7 @@ set(marbleplugin_HDRS
 )
 MESSAGE( STATUS ${marbleplugin_HDRS} )
 
-qt4_add_resources(marbleplugin_SRCS ../../marble.qrc)
+qt4_add_resources(marbleplugin_SRCS ../../../marble.qrc)
 
 if(WIN32)
   # distinguish between debug and release plugin
