@@ -16,6 +16,7 @@
 #include "marble_export.h"
 
 #include <QtCore/QString>
+#include <QtCore/QDir>
 
 /**
  * @short A class that manages data look-up for Marble.
@@ -77,6 +78,8 @@ class MARBLE_EXPORT MarbleDirs
     MarbleDirs();
 
     static QString path( const QString& relativePath );
+
+    static QStringList entryList( const QString& relativePath, QDir::Filters filters = QDir::NoFilter  );
 
     static QString systemPath(); 
 

@@ -52,6 +52,27 @@ QString MarbleDirs::path( const QString& relativePath )
     return QDir( fullpath ).canonicalPath(); 
 }
 
+QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters filters )
+{
+    QStringList filesLocal = QDir( MarbleDirs::localPath() + '/' + relativePath ).entryList(filters);
+    QStringList filesSystem = QDir( MarbleDirs::systemPath() + '/' + relativePath ).entryList(filters);
+    QStringList allFiles( filesLocal );
+    allFiles << filesSystem;
+
+    // remove duplicate entries
+    allFiles.sort();
+    for ( int i = 1; i < allFiles.size(); ++i ) {
+        if ( allFiles.at(i) == allFiles.at( i - 1 ) ) {
+            allFiles.removeAt(i);
+            --i;
+        }
+    }
+
+    for (int i = 0; i < allFiles.size(); ++i)
+       qDebug() << "Files: " << allFiles.at(i);
+
+    return allFiles;
+}
 
 QString MarbleDirs::systemPath()
 {

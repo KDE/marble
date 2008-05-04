@@ -1,5 +1,30 @@
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleDirs.{cpp,h}:
+
+    - Adding     
+
+        QStringList entryList( const QString& relativePath, QDir::Filters filters  );
+
+      TODO: This could also be useful in MapThemeManager if enhanced.
+
+    * src/lib/MarbleLayerInterface.h:
+
+    - New Plugin Interface to create new layer rendering backends for Marble
+
+    * src/lib/PluginManager.{cpp,h}:
+
+    - Added new plugin manager that searches for new plugins and loads them
+
+    * src/lib/LayerManager.{cpp,h}:
+    * src/lib/MarbleModel.cpp:
+
+    - Added a stub for the new LayerManager class.
+
+    * src/lib/CMakeLists.txt:
+
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
     * src/plugins/designer/marblewidget/CMakeLists.txt:
     * src/plugins/designer/navigator/CMakeLists.txt:
     * src/plugins/designer/CMakeLists.txt:

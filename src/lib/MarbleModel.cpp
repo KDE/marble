@@ -35,21 +35,22 @@
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"
+#include "LayerManager.h"
 #include "MapThemeManager.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
-#include "VectorComposer.h"
-#include "ViewParams.h"
-#include "SunLocator.h"
-#include "TextureColorizer.h"
-#include "TileCreator.h"
-#include "TileCreatorDialog.h"
-#include "TileLoader.h"
 #include "PlaceMarkManager.h"
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
-#include "XmlHandler.h"
+#include "SunLocator.h"
+#include "TextureColorizer.h"
 #include "TextureTile.h"
+#include "TileCreator.h"
+#include "TileCreatorDialog.h"
+#include "TileLoader.h"
+#include "VectorComposer.h"
+#include "ViewParams.h"
+#include "XmlHandler.h"
 
 
 class MarbleModelPrivate
@@ -66,6 +67,8 @@ class MarbleModelPrivate
     void  geoDataDocumentLoaded( GeoDataDocument& document );
 
     MarbleModel         *m_parent;
+
+    LayerManager        m_layerManager;    
 
     // View and paint stuff
     GeoSceneDocument    *m_mapTheme;

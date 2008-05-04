@@ -65,6 +65,8 @@ set(marblewidget_SRCS
     GridMap.cpp
     HttpDownloadManager.cpp
     HttpFetchFile.cpp
+    LayerManager.cpp
+    PluginManager.cpp
     CrossHairFloatItem.cpp
     CompassFloatItem.cpp
     MapScaleFloatItem.cpp
