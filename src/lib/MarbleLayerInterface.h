@@ -20,7 +20,7 @@ class GeoSceneLayer;
 class ViewportParams;
 
 /**
- * @short The class that handles Marble's DGML layers.
+ * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
@@ -32,7 +32,7 @@ class MarbleLayerInterface
     virtual ~MarbleLayerInterface();
 
     /**
-     * @brief Returns the name of the backend that the plugin can render
+     * @brief Returns the name(s) of the backend that the plugin can render
      *.
      * This method should return the name of the backend that the plugin 
      * can render. The string has to be the same one that is given 
@@ -42,10 +42,33 @@ class MarbleLayerInterface
      * "texture". To provide a completely new kind of functionality please 
      * choose your own unique string.
      */    
-    virtual QString backendType() const = 0;
+    virtual QStringList backendTypes() const = 0;
 
-    virtual QString roles() const = 0;
+    /**
+     * @brief Preferred position in the layer stack for the rendering
+     * Gives a preferred position where in the existing layer stack
+     * the render() method of this plugin should get executed.
+     *.
+     * Possible Values: 
+     * "ALWAYS"            -- the plugin renders at the preferred posion 
+     *                        no matter what got specified in the DGML file. 
+     * "SPECIFIED"         -- renders only in case it got specified in the 
+     *                        DGML file.
+     * "SPECIFIED_ALWAYS"  -- In case it got specified in the DGML file
+     *                        render according to the specification 
+     *                        otherwise choose the preferred position
+     */
+    virtual QString renderPolicy() const = 0;
 
+    /**
+     * @brief Preferred position in the layer stack for the rendering
+     * Gives a preferred position where in the existing layer stack
+     * the render() method of this plugin should get executed.
+     *.
+     * Possible Values: 
+     * "NONE", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP"
+     */
+    virtual QString renderPosition() const = 0;
 
     /**
      * @brief Returns the "real name" of the backend.

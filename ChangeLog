@@ -1,5 +1,11 @@
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/MarbleLayerInterface.h:
+
+    - Minor changes and API docs for the Marble Layer Plugin Interface
+
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleDirs.{cpp,h}:
 
     - Adding     
