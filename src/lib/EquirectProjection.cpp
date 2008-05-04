@@ -50,7 +50,6 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
 
 bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                             const ViewportParams *viewport,
-                                            const matrix &planetAxisMatrix,
                                             int &x, int &y )
 {
     double  lon;

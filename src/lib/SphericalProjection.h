@@ -54,7 +54,6 @@ class SphericalProjection : public AbstractProjection
 
     inline bool screenCoordinates( const GeoDataPoint &geopoint, 
                             const ViewportParams *params,
-                            const matrix &planetAxisMatrix,
                             int &x, int &y );
 
     /**

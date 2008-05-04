@@ -54,7 +54,6 @@ class MercatorProjection : public AbstractProjection
 
     bool screenCoordinates( const GeoDataPoint &geopoint, 
                             const ViewportParams *params,
-                            const matrix &planetAxisMatrix,
                             int &x, int &y );
 
     /**

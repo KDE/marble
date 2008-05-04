@@ -17,6 +17,9 @@
 #include "GeoDataPoint.h"
 #include "MarbleMap.h"
 
+class ViewportParams;
+class GeoPainterPrivate;
+
 /**
  * @short a painter that makes it easy to draw geometric items on the map 
  *
@@ -73,7 +76,6 @@ class GeoPainter : public ClipPainter
     // and convert thos ... . Given that for decent maps you don't really want 
     // this anyways we leave it out for now ...
     void drawText ( const GeoDataPoint & position, const QString & text );
-    void drawText ( const GeoDataPoint & position, const QString & text );
 
 //    void drawPlaceMark ( const GeoDataPoint & position, const QString& name );
 //    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
@@ -100,6 +102,8 @@ class GeoPainter : public ClipPainter
     void drawRoundRect ( const GeoDataPoint & point, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );
 
  private:
+
+    GeoPainterPrivate  * const d;
 };
 
 #endif // GEOPAINTER_H

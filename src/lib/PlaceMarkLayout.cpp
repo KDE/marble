@@ -203,8 +203,6 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
     //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
-    matrix  planetAxisMatrix;
-    viewParams->planetAxis().inverse().toMatrix( planetAxisMatrix );
 
     QVector< QVector< VisiblePlaceMark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
@@ -232,7 +230,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), planetAxisMatrix, x, y ) )
+	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), x, y ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;
@@ -326,7 +324,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                 break;
         }
 
-	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), planetAxisMatrix, x, y ) )
+	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), x, y ) )
         {
             delete m_visiblePlaceMarks.take( index );
             continue;

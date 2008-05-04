@@ -61,6 +61,7 @@ set(marblewidget_SRCS
 
     AutoSettings.cpp
     ClipPainter.cpp
+    GeoPainter.cpp
     GeoPolygon.cpp
     GridMap.cpp
     HttpDownloadManager.cpp

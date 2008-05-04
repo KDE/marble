@@ -18,7 +18,8 @@ ViewportParams::ViewportParams( )
     setProjection( Spherical );
 
     // Default view
-    m_planetAxis = Quaternion( 1.0, 0.0, 0.0, 0.0 );
+    setPlanetAxis( Quaternion( 1.0, 0.0, 0.0, 0.0 ) );
+
     m_radius     = 2000;
 
     m_size       = QSize( 100, 100 );
@@ -81,8 +82,13 @@ Quaternion ViewportParams::planetAxis() const
 void ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
     m_planetAxis = newAxis;
+    planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 }
 
+matrix * ViewportParams::planetAxisMatrix() const
+{
+    return &m_planetAxisMatrix;
+}
 
 int ViewportParams::width()  const
 {

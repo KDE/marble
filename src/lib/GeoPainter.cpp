@@ -13,15 +13,37 @@
 #include <QtCore/QDebug>
 
 
+#include "AbstractProjection.h"
+#include "ViewportParams.h"
+
 // #define MARBLE_DEBUG
 
-GeoPainter::GeoPainter( MarbleMap * map, bool clip)
-    : ClipPainter()
+class GeoPainterPrivate
+{
+ public:
+    GeoPainterPrivate( ViewportParams * params )
+        : m_params( params )
+    {
+    }
+
+    ViewportParams * m_params;
+};
+
+GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip )
+    : ClipPainter( pd, clip ),
+      d( new GeoPainterPrivate( params ) )
 {
 }
 
 void GeoPainter::drawPoint (  const GeoDataPoint & position )
 {
+    int x, y;
+    AbstractProjection *projection = d->m_params->currentProjection();
+
+    bool visible = projection->screenCoordinates( position, d->m_params, x, y );
+    if ( visible ) {
+        QPainter::drawPoint( x, y );
+    }
 }
 
 void GeoPainter::drawPoints (  const GeoDataPoint * points, int pointCount )
@@ -30,9 +52,26 @@ void GeoPainter::drawPoints (  const GeoDataPoint * points, int pointCount )
 
 void GeoPainter::drawText ( const GeoDataPoint & position, const QString & text )
 {
+    int x, y;
+    AbstractProjection *projection = d->m_params->currentProjection();
+
+    bool visible = projection->screenCoordinates( position, d->m_params, x, y );
+    if ( visible ) {
+        QPainter::drawText( QPoint( x, y ), text );
+    }
 }
 
-void GeoPainter::drawText ( const GeoDataPoint & position, const QString & text )
+void GeoPainter::drawEllipse ( const GeoDataPoint & point, int width, int height, bool isGeoProjected )
 {
+    int x, y;
+    AbstractProjection *projection = d->m_params->currentProjection();
+
+    if ( isGeoProjected == false ) {
+        // FIXME: Better visibility detection that takes the circle geometry into account
+        bool visible = projection->screenCoordinates( point, d->m_params, x, y );
+        if ( visible ) {
+            QPainter::drawEllipse( x, y, width, height );
+        }
+    }
 }
 

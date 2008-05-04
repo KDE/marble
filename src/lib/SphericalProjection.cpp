@@ -46,13 +46,12 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
 
 bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                              const ViewportParams *viewport,
-                                             const matrix &planetAxisMatrix,
                                              int &x, int &y )
 {
     double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
 
-    qpos.rotateAroundAxis( planetAxisMatrix );
+    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
 
     double      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );

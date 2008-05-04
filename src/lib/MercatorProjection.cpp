@@ -58,7 +58,6 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
 
 bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                             const ViewportParams *viewport,
-                                            const matrix &planetAxisMatrix,
                                             int &x, int &y )
 {
     double  lon;

@@ -56,6 +56,7 @@ class ViewportParams
 
     Quaternion planetAxis() const;
     void setPlanetAxis(const Quaternion &newAxis);
+    matrix * planetAxisMatrix() const;
 
     int width()  const;
     int height() const;
@@ -76,6 +77,7 @@ class ViewportParams
 
     // Parameters that determine the painting
     Quaternion  m_planetAxis;   // Position, coded in a quaternion
+    mutable matrix      m_planetAxisMatrix;
     int         m_radius;       // Zoom level (pixels / globe radius)
 
     QSize       m_size;         // width, height

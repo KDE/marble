@@ -81,7 +81,6 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
                                     const ViewportParams *viewport,
-                                    const matrix &planetAxisMatrix,
                                     int &x, int &y ) = 0;
 
     /**

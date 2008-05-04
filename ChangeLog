@@ -1,5 +1,23 @@
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/GeoPainter.{cpp,h}:
+
+    - Started to work on the GeoPainter implementation for later usage 
+      in plugins (drawPoint, drawText, drawEllipse).
+
+    * src/lib/AbstractProjection.h:
+    * src/lib/EquirectProjection.{cpp,h}:
+    * src/lib/MercatorProjection.{cpp,h}:
+    * src/lib/SphericalProjection.{cpp,h}:
+    * src/lib/PlaceMarkLayout.cpp:
+    * src/lib/CMakeLists.txt:
+    * src/lib/ViewportParams.{cpp,h}:
+
+    - Removed planetAxisMatrix as a parameter from ScreenCoordinates 
+      as it was ugly and as there was a workaround without performance penalty.
+
+2008-05-04  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MarbleLayerInterface.h:
 
     - Minor changes and API docs for the Marble Layer Plugin Interface
