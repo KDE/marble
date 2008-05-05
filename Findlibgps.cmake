@@ -10,12 +10,10 @@ FIND_PATH(libgps_INCLUDES libgpsmm.h)
 
 FIND_LIBRARY(libgps_LIBRARIES gps)
 
-IF( NOT libgps_LIBRARIES)
-    MESSAGE(STATUS "Not building with Gpsd Support")
-ENDIF( NOT libgps_LIBRARIES)
-
 IF (libgps_LIBRARIES AND libgps_INCLUDES)
    SET(libgps_FOUND TRUE)
+ELSE(libgps_LIBRARIES AND libgps_INCLUDES)
+    MESSAGE(STATUS "Not building with Gpsd Support")
 ENDIF (libgps_LIBRARIES AND libgps_INCLUDES)
 
 IF (libgps_FOUND)
