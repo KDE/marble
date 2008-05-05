@@ -16,6 +16,8 @@
  * geoshape/GeoToolFactory.h   [License: LGPL (v2+)]:
  * geoshape/Plugin.cpp   [License: LGPL (v2+)]:
  * geoshape/Plugin.h   [License: LGPL (v2+)]:
+ * geoshape/GeoShapeFactory.cpp   [License: LGPL (v2+)]:
+ * geoshape/GeoShapeFactory.h   [License: LGPL (v2+)]:
  * geoshape/geoshape.desktop:
 
 - My first commit to Marble :)
