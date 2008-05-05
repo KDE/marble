@@ -26,14 +26,11 @@
 
 #include "GeoSceneDocument.h"
 #include "Quaternion.h"
-#include "BoundingBox.h"
 #include "ViewportParams.h"
 #include "global.h"
 
 
 class QImage;
-
-using namespace Marble;
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
@@ -80,9 +77,6 @@ class ViewParams
      */
     void propertyValue( const QString& name, bool &value );
 
-    Marble::MapQuality mapQuality();
-    void setMapQuality( Marble::MapQuality );
-
     int radius() const;
     void setRadius(int newRadius);
 
@@ -96,9 +90,6 @@ class ViewParams
 
     ViewportParams  m_viewport;
 
-//  FIXME: These two should go into the Viewport.
-    BoundingBox m_boundingBox;  // What the view currently can see
-    MapQuality  m_mapQuality;
 
 //  FIXME: We should try to get rid of these two:    
     Quaternion  m_planetAxisUpdated;

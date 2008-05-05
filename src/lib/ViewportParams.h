@@ -32,8 +32,7 @@
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"
 
-
-
+using namespace Marble;
 
 /** 
  * @short A public class that controls what is visible in the viewport of a Marble map.
@@ -66,21 +65,27 @@ class ViewportParams
     void setHeight(int newHeight);
     void setSize(QSize newSize);
 
+    Marble::MapQuality mapQuality();
+    void setMapQuality( Marble::MapQuality );
+
     // Other functions
     void centerCoordinates( double &centerLon, double &centerLat ) const;
+
+    BoundingBox m_boundingBox;  // What the view currently can see
 
  private:
     // These two go together.  m_currentProjection points to one of
     // the static Projection classes at the bottom.
     Projection           m_projection;
     AbstractProjection  *m_currentProjection;
+    MapQuality           m_mapQuality;
 
     // Parameters that determine the painting
-    Quaternion  m_planetAxis;   // Position, coded in a quaternion
-    mutable matrix      m_planetAxisMatrix;
-    int         m_radius;       // Zoom level (pixels / globe radius)
+    Quaternion           m_planetAxis;   // Position, coded in a quaternion
+    mutable matrix       m_planetAxisMatrix;
+    int                  m_radius;       // Zoom level (pixels / globe radius)
 
-    QSize       m_size;         // width, height
+    QSize                m_size;         // width, height
 
     //BoundingBox m_boundingBox;  // What the view currently can see
 

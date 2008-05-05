@@ -18,10 +18,12 @@
 
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
+#include "global.h"
 #include "VectorMap.h"
 #include "ViewParams.h"
 #include "MarbleDirs.h"
 
+using namespace Marble;
 
 VectorComposer::VectorComposer()
 {
@@ -95,8 +97,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print ) {
+    if (   viewParams->viewport()->mapQuality() == Marble::High
+        || viewParams->viewport()->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 
@@ -162,8 +164,8 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print ) {
+    if (   viewParams->viewport()->mapQuality() == Marble::High
+        || viewParams->viewport()->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 
@@ -218,8 +220,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print ) {
+    if (   viewParams->viewport()->mapQuality() == Marble::High
+        || viewParams->viewport()->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 

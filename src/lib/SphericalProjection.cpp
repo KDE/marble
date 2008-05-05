@@ -46,7 +46,7 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
 
 bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                              const ViewportParams *viewport,
-                                             int &x, int &y )
+                                             int &x, int &y, bool &occulted )
 {
     double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
@@ -57,8 +57,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
                                   / EARTH_RADIUS * absoluteAltitude );
     if ( geopoint.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 )
+        if ( qpos.v[Q_Z] < 0 ) {
+            occulted = true;
             return false;
+        }
     }
     else {
         double  earthCenteredX = pixelAltitude * qpos.v[Q_X];
@@ -69,8 +71,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
         if ( qpos.v[Q_Z] < 0
              && ( ( earthCenteredX * earthCenteredX
                     + earthCenteredY * earthCenteredY )
-                  < radius * radius ) )
+                  < radius * radius ) ) {
+            occulted = true;
             return false;
+        }
     }
 
     // Let (x, y) be the position on the screen of the placemark..
@@ -79,9 +83,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
     // Skip placemarks that are outside the screen area
     if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
+        occulted = false;
         return false;
     }
 
+    occulted = false;
     return true;
 }
 

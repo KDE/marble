@@ -123,7 +123,7 @@ void GlobeScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                           : yTop + radius + radius - skip );
 
     bool interlaced = ( m_interlaced ||
-                        viewParams->mapQuality() == Marble::Low );
+                        viewParams->viewport()->mapQuality() == Marble::Low );
 
     for ( m_y = yTop; m_y < yBottom ; ++m_y ) {
 

@@ -466,8 +466,8 @@ void MarbleModel::paintGlobe( GeoPainter* painter,
 
         bool antialiased = false;
 
-        if (   viewParams->mapQuality() == Marble::High
-            || viewParams->mapQuality() == Marble::Print ) {
+        if (   viewParams->viewport()->mapQuality() == Marble::High
+            || viewParams->viewport()->mapQuality() == Marble::Print ) {
                 antialiased = true;
         }
 
@@ -547,7 +547,7 @@ void MarbleModel::paintGlobe( GeoPainter* painter,
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->m_canvasImage->size(),
                                viewParams,
-                               viewParams->m_boundingBox );
+                               viewParams->viewport()->m_boundingBox );
 
     d->m_layerManager.renderLayers( painter, viewParams->viewport(), layer );
 }

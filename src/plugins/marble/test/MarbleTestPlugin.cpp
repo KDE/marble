@@ -65,10 +65,33 @@ bool MarbleTestPlugin::isInitialized () const
 
 bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
+    painter->autoMapQuality();
+
+    GeoDataPoint northpole1( 0.0, 90.0, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint northpole2( 0.0, 90.0, 3000000.0, GeoDataPoint::Degree );
+
+    painter->setPen( QColor( 255, 255, 255, 255 ) );
+
+    painter->drawLine( northpole1, northpole2 );
+
+    GeoDataPoint madrid( -3.7, 40.4, 0.0, GeoDataPoint::Degree );
     GeoDataPoint flensburg( 9.4, 54.8, 0.0, GeoDataPoint::Degree );
     GeoDataPoint linkoeping( 15.6, 58.4, 0.0, GeoDataPoint::Degree );
     GeoDataPoint istanbul( 28.0, 41.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint orbit( 105.6, 30.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint moscow( 37.6, 55.75, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint orbit( 105.6, 0.0, 3000000.0, GeoDataPoint::Degree );
+
+    painter->setPen( QColor( 200, 200, 200, 255 ) );
+    static const GeoDataPoint points[5] = {
+        madrid,
+        flensburg,
+        linkoeping,
+        istanbul,
+        moscow
+    };
+
+    painter->drawPolyline( points, 5 ); 
+
 
     painter->setPen( QColor( 99, 198, 99, 255 ) );
     painter->setBrush( QColor( 99, 198, 99, 80 ) );
@@ -89,6 +112,68 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     painter->drawText( orbit, "Claudiu" );
 
     painter->drawPixmap( istanbul, QPixmap( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
+
+
+    painter->setPen( QColor( 99, 198, 198, 255 ) );
+    QBrush brush( QColor( 99, 198, 198, 80 ) );
+    painter->setBrush( brush );
+
+    painter->drawRect( madrid, 30, 30 ); 
+
+    painter->setPen( QColor( 198, 99, 198, 255 ) );
+    brush.setColor( QColor( 198, 99, 198, 180 ) );
+    brush.setStyle( Qt::DiagCrossPattern );
+    painter->setBrush( brush );
+
+    painter->drawRoundRect( moscow, 40, 40 ); 
+
+    GeoDataPoint m1(-180.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m2(-170.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m3(-160.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m4(-150.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m5(-140.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m6(-130.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m7(-120.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m8(-110.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m9(-100.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m10(-90.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m11(-80.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m12(-70.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m13(-60.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m14(-50.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m15(-40.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m16(-30.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m17(-20.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m18(-10.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+
+    GeoDataPoint m19(0.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m20(10.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m21(20.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m22(30.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m23(40.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m24(50.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m25(60.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m26(70.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m27(80.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m28(90.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m29(100.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m30(110.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m31(120.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m32(130.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m33(140.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m34(150.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m35(160.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m36(170.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataPoint m37(180.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+
+    static const GeoDataPoint ring[37] = {
+        m1, m2, m3, m4, m5, m6, m7, m8, m9,
+        m10, m11, m12, m13, m14, m15, m16, m17, m18, m19,
+        m20, m21, m22, m23, m24, m25, m26, m27, m28, m29,
+        m30, m31, m32, m33, m34, m35, m36, m37
+    };
+
+    painter->drawPolyline( ring, 37 ); 
 
     return true;
 }

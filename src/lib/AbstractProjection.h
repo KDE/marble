@@ -81,7 +81,11 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
                                     const ViewportParams *viewport,
-                                    int &x, int &y ) = 0;
+                                    int &x, int &y, bool &occulted ) = 0;
+
+    bool screenCoordinates( const GeoDataPoint &geopoint, 
+                                    const ViewportParams *viewport,
+                                    int &x, int &y );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

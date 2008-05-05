@@ -19,7 +19,6 @@
 ViewParams::ViewParams( )
 {
     m_mapTheme = 0;
-    m_mapQuality = Normal;
 
     // Show / don't show parameters
     m_showAtmosphere     = true;
@@ -116,16 +115,6 @@ void ViewParams::propertyValue( const QString &name, bool &value )
         value = false;
         qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
-}
-
-MapQuality ViewParams::mapQuality()
-{
-    return m_mapQuality; 
-}
-
-void ViewParams::setMapQuality( MapQuality mapQuality )
-{
-    m_mapQuality = mapQuality; 
 }
 
 int ViewParams::radius() const

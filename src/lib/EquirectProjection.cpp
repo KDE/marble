@@ -50,8 +50,10 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
 
 bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y )
+                                            int &x, int &y, bool &occulted )
 {
+    occulted = false;
+
     double  lon;
     double  lat;
     double  rad2Pixel = 2 * viewport->radius() / M_PI;

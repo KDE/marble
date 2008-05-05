@@ -849,7 +849,7 @@ void MarbleMapPrivate::setBoundingBox()
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
 
-    m_viewParams.m_boundingBox = BoundingBox( points );
+    m_viewParams.viewport()->m_boundingBox = BoundingBox( points );
 }
 
 
@@ -889,12 +889,12 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     //FIXME: This is really slow. That's why we defer this to PrintQuality
     // Either cache on a pixmap - or maybe better: Add to GlobeScanlineTextureMapper.
 
-    if ( d->m_viewParams.mapQuality() == Marble::Print )
+    if ( d->m_viewParams.viewport()->mapQuality() == Marble::Print )
         d->drawFog(painter);
 
     customPaint( &painter );
 
-    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
+    int transparency = ( d->m_viewParams.viewport()->mapQuality() == Marble::Low ) ? 255 : 192;
     d->m_compass.setTransparency( transparency );
     d->m_mapscale.setTransparency( transparency );
 
@@ -926,8 +926,8 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     bool antialiased = false;
 
-    if (   d->m_viewParams.mapQuality() == Marble::High
-        || d->m_viewParams.mapQuality() == Marble::Print ) {
+    if (   d->m_viewParams.viewport()->mapQuality() == Marble::High
+        || d->m_viewParams.viewport()->mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 

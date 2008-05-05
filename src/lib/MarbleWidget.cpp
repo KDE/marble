@@ -143,7 +143,7 @@ void MarbleWidgetPrivate::construct()
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_parent->width(), m_parent->height() );
-    m_map->viewParams()->setMapQuality( m_stillQuality ); 
+    m_map->viewParams()->viewport()->setMapQuality( m_stillQuality ); 
 
     m_parent->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
                        m_parent, SIGNAL( projectionChanged( Projection ) ) );
@@ -1094,11 +1094,11 @@ void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext
     }
     if ( d->m_viewContext == Still )
     {
-        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
+        map()->viewParams()->viewport()->setMapQuality( d->m_stillQuality ); 
     }
     if ( d->m_viewContext == Animation )
     {
-        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
+        map()->viewParams()->viewport()->setMapQuality( d->m_animationQuality ); 
     }
 }
 
@@ -1112,9 +1112,9 @@ void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
     d->m_viewContext = viewContext;
 
     if ( viewContext == Still )
-        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
+        map()->viewParams()->viewport()->setMapQuality( d->m_stillQuality ); 
     if ( viewContext == Animation )
-        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
+        map()->viewParams()->viewport()->setMapQuality( d->m_animationQuality ); 
 }
 
 QString MarbleWidget::distanceString() const

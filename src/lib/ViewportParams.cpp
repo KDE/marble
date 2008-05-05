@@ -21,8 +21,8 @@ ViewportParams::ViewportParams( )
     setPlanetAxis( Quaternion( 1.0, 0.0, 0.0, 0.0 ) );
 
     m_radius     = 2000;
-
     m_size       = QSize( 100, 100 );
+    m_mapQuality = Normal;
 }
 
 ViewportParams::~ViewportParams()
@@ -121,6 +121,15 @@ void ViewportParams::setSize(QSize newSize)
     m_size = newSize;
 }
 
+MapQuality ViewportParams::mapQuality()
+{
+    return m_mapQuality; 
+}
+
+void ViewportParams::setMapQuality( MapQuality mapQuality )
+{
+    m_mapQuality = mapQuality; 
+}
 
 // ================================================================
 //                        Other functions
