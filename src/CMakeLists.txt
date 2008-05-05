@@ -4,8 +4,6 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
-include(MacroOptionalDependPackage)
-
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/lib
@@ -23,16 +21,19 @@ add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
 
-MACRO_OPTIONAL_DEPEND_PACKAGE(Koffice "koffice")
-if(DEPEND_PACKAGE_Koffice)
-        macro_optional_find_package(Koffice QUIET)
-else(DEPEND_PACKAGE_Koffice)
-        set(KOFFICE_FOUND FALSE)
-endif(DEPEND_PACKAGE_Koffice)
-
-if(KOFFICE_FOUND)
-   #add_subdirectory( geoshape )
-endif(KOFFICE_FOUND)
+if (NOT QTONLY)
+  include(MacroOptionalDependPackage)
+  MACRO_OPTIONAL_DEPEND_PACKAGE(Koffice "koffice")
+  if(DEPEND_PACKAGE_Koffice)
+          macro_optional_find_package(Koffice QUIET)
+  else(DEPEND_PACKAGE_Koffice)
+          set(KOFFICE_FOUND FALSE)
+  endif(DEPEND_PACKAGE_Koffice)
+    
+  if(KOFFICE_FOUND)
+  #add_subdirectory( geoshape )
+  endif(KOFFICE_FOUND)
+endif(NOT QTONLY)
 
 if(APPLE)
   add_subdirectory( mac )
