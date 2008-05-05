@@ -20,6 +20,7 @@ include_directories(
 add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
+#add_subdirectory( geoshape )
 if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
