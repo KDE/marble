@@ -60,8 +60,8 @@ bool operator==( TileId const& lhs, TileId const& rhs )
 
 uint qHash( TileId const& tid )
 {
-    quint64 tmp = (quint64)(tid.m_zoomLevel) << 36
-        + (quint64)(tid.m_tileX) << 18
+    quint64 tmp = ((quint64)(tid.m_zoomLevel) << 36)
+        + ((quint64)(tid.m_tileX) << 18)
         + (quint64)(tid.m_tileY);
     return qHash( tmp );
 }
