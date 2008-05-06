@@ -78,15 +78,19 @@ void TileCreator::run()
         grayScalePalette.insert(cnt, qRgb(cnt, cnt, cnt));
     }
 
-    uint  imageWidth  = testImage.size().width();
-    uint  imageHeight = testImage.size().height();
+    int  imageWidth  = testImage.size().width();
+    int  imageHeight = testImage.size().height();
 
     qDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
+    if ( imageWidth < 1 || imageHeight < 1 ) {
+        qDebug("Invalid imagemap!");
+        return;
+    }
     if ( imageWidth > 21600 || imageHeight > 10800 ) {
         qDebug("Install map too large!");
         return;
-    } 
+    }
 
     // Calculating Maximum Tile Level
     float approxMaxTileLevel = std::log( imageWidth / ( 2.0 * tileSize ) ) / std::log( 2.0 );
