@@ -47,9 +47,10 @@ if( TILES_AT_COMPILETIME )
         #  INSTALLMAP  the map in the form MAPNAME.jpg
         #  DEM  "true" for srtm, "false" else
         #  TARGETDIR  the destination directory
+        get_target_property( tilecreator_filename tilecreator LOCATION )
         configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/../../data/maps/earth/${mapname}/${mapname}.jpg ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname}/${mapname}.jpg COPYONLY )
         add_custom_command( TARGET tilecreator POST_BUILD
-                            COMMAND ${CMAKE_CURRENT_BINARY_DIR}/tilecreator ARGS ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname} ${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
+                            COMMAND ${tilecreator_filename} ARGS ${CMAKE_CURRENT_BINARY_DIR}/data/maps/earth/${mapname} ${mapname}.jpg ${grayscale} ${CMAKE_CURRENT_BINARY_DIR}/tiles
                             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                             COMMENT generating tiles for srtm data )
         # this shouldn't happen but it happens far to often

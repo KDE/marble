@@ -55,7 +55,7 @@ void TileCreator::run()
     // If the sourceDir starts with a '/' assume an absolute path.
     // Otherwise assume a relative marble data path
     QString m_sourcePath;
-    if ( m_sourceDir.startsWith('/') ) {
+    if ( QDir::isAbsolutePath(m_sourceDir) ) {
         m_sourcePath = m_sourceDir + '/' + m_installmap;
         qDebug() << "Trying absolulte path:" << m_sourcePath;
     }
