@@ -63,6 +63,7 @@ class GEODATA_EXPORT GeoDataPoint {
      * @brief create a geopoint from longitude and latitude
      * @param _lon longitude
      * @param _lat latitude
+     * @param alt altitude (default: 0)
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at -pi/2, southpole at pi/2)
      */
