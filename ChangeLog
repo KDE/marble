@@ -1,3 +1,11 @@
+2008-05-06  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/GeoPainter.{cpp,h}:
+    * src/plugins/marble/test/MarbleTestPlugin.cpp:
+
+    - More work on GeoPainter: Addition of drawPolygon, drawImage
+    - Declaration of GeoPainter::drawAnnotation
+
 2008-05-05  Inge Wallin  <inge@lysator.liu.se>
 
 	Add missing exports needed in KDE version.

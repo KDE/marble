@@ -23,9 +23,48 @@ using namespace Marble;
 class GeoPainterPrivate
 {
  public:
-    GeoPainterPrivate( ViewportParams * viewport )
+    GeoPainterPrivate( ViewportParams *viewport )
         : m_viewport( viewport )
     {
+    }
+
+    void createPolygonsFromPoints ( const GeoDataPoint * points, int pointCount, QVector<QPolygon *> &polygons, bool isGeoProjected = false )
+    {
+        int x, y;
+        bool previousOcculted;
+        AbstractProjection *projection = m_viewport->currentProjection();
+    
+        if ( isGeoProjected == false ) {
+    
+            QPolygon* polygon;
+//            QVector<QPolygon *> polygons;
+    
+            GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
+            while( itPoint < points + pointCount ) {
+                bool occulted;
+                bool visible = projection->screenCoordinates( *itPoint, m_viewport, x, y, occulted );
+                if ( itPoint == points ){
+                    polygon = new QPolygon;
+                    previousOcculted = occulted;
+                }
+    
+                if ( occulted && !previousOcculted ) {
+                    polygons.append( polygon );
+                    polygon = new QPolygon;
+                }
+    
+                if ( !occulted ) {
+                    polygon->append( QPoint( x, y ) );
+                }
+    
+                previousOcculted = occulted;
+                ++itPoint;
+            }
+    
+            if ( polygon->size() > 1 ){
+                polygons.append( polygon );
+            }
+        }
     }
 
     ViewportParams * m_viewport;
@@ -92,28 +131,42 @@ void GeoPainter::drawText ( const QPoint & position, const QString & text )
 }
 
 
-void GeoPainter::drawEllipse ( const GeoDataPoint & point, int width, int height, bool isGeoProjected )
+void GeoPainter::drawEllipse ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected )
 {
     int x, y;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( point, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
         if ( visible ) {
             QPainter::drawEllipse(  x - width / 2, y - height / 2, width, height  );
         }
     }
 }
 
-void GeoPainter::drawPixmap ( const GeoDataPoint & point, const QPixmap & pixmap, bool isGeoProjected )
+void GeoPainter::drawImage ( const GeoDataPoint & centerPoint, const QImage & image, bool isGeoProjected )
 {
     int x, y;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( point, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        if ( visible ) {
+            QPainter::drawImage( x - ( image.width() / 2 ), y - ( image.height() / 2 ), image );
+        }
+    }
+}
+
+void GeoPainter::drawPixmap ( const GeoDataPoint & centerPoint, const QPixmap & pixmap, bool isGeoProjected )
+{
+    int x, y;
+    AbstractProjection *projection = d->m_viewport->currentProjection();
+
+    if ( isGeoProjected == false ) {
+        // FIXME: Better visibility detection that takes the circle geometry into account
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
         if ( visible ) {
             QPainter::drawPixmap( x - ( pixmap.width() / 2 ), y - ( pixmap.height() / 2 ), pixmap );
         }
@@ -142,77 +195,60 @@ void GeoPainter::drawLine (  const GeoDataPoint & p1,  const GeoDataPoint & p2, 
 
 void GeoPainter::drawPolyline ( const GeoDataPoint * points, int pointCount, bool isGeoProjected )
 {
-    int x, y;
-    bool previousOcculted;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    QVector<QPolygon*> polygons;
+    d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );
 
-    if ( isGeoProjected == false ) {
-
-        QPolygon* polygon;
-        QVector<QPolygon*> polygons;
-
-        GeoDataPoint * itPoint = const_cast<GeoDataPoint *>( points );
-        while( itPoint < points + pointCount ) {
-            bool occulted;
-            bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, x, y, occulted );
-            if ( itPoint == points ){
-                polygon = new QPolygon;
-                previousOcculted = occulted;
-            }
-
-            if ( occulted && !previousOcculted ) {
-                polygons.append( polygon );
-                polygon = new QPolygon;
-            }
-
-            if ( !occulted ) {
-                 polygon->append( QPoint( x, y ) );
-            }
-
-            previousOcculted = occulted;
-            ++itPoint;
-        }
-
-        if ( polygon->size() > 1 ){
-            polygons.append( polygon );
-        }
-
-        foreach( QPolygon* itPolygon, polygons ) {
-            // Using QPainter instead of ClipPainter until some bugs are fixed.
-            QPainter::drawPolyline( *itPolygon );
-        }
-
-        qDeleteAll( polygons );
+    foreach( QPolygon* itPolygon, polygons ) {
+        // Using QPainter instead of ClipPainter until some bugs are fixed.
+        QPainter::drawPolyline( *itPolygon );
     }
+    
+    qDeleteAll( polygons );
 }
 
-void GeoPainter::drawRect ( const GeoDataPoint & point, int width, int height, bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount, Qt::FillRule fillRule, bool isGeoProjected )
+{
+    QVector<QPolygon*> polygons;
+    d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );
+
+    foreach( QPolygon* itPolygon, polygons ) {
+        // Using QPainter instead of ClipPainter until some bugs are fixed.
+        QPainter::drawPolygon( *itPolygon );
+    }
+    
+    qDeleteAll( polygons );
+}
+
+void GeoPainter::drawRect ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected )
 {
     int x, y;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( point, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
         if ( visible ) {
             QPainter::drawRect( x - ( width / 2 ), y - ( height / 2 ), width, height );
         }
     }
 }
 
-void GeoPainter::drawRoundRect ( const GeoDataPoint & point, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
+void GeoPainter::drawRoundRect ( const GeoDataPoint & centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
 {
     int x, y;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( point, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
         if ( visible ) {
             QPainter::drawRoundRect(  x - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd );
         }
     }
 }
+
+
+    // Reenabling QPainter methods. 
 
 void GeoPainter::drawLine ( int x1, int y1, int x2, int y2 )
 {
@@ -229,6 +265,11 @@ void GeoPainter::drawEllipse ( int x, int y, int width, int height )
     QPainter::drawEllipse( x, y, width, height);
 }
 
+void GeoPainter::drawImage ( const QRect & target, const QImage & image, const QRect & source, Qt::ImageConversionFlags flags )
+{
+    QPainter::drawImage( target, image, source, flags );
+}
+
 void GeoPainter::drawPixmap ( int x, int y, const QPixmap & pixmap )
 {
     QPainter::drawPixmap( x, y, pixmap );
@@ -237,6 +278,11 @@ void GeoPainter::drawPixmap ( int x, int y, const QPixmap & pixmap )
 void GeoPainter::drawPolyline( const QPolygonF & polyline )
 {
     ClipPainter::drawPolyline( polyline );
+}
+
+void GeoPainter::drawPolygon( const QPolygonF & polygon )
+{
+    ClipPainter::drawPolygon( polygon );
 }
 
 void GeoPainter::drawRect ( int x, int y, int width, int height )

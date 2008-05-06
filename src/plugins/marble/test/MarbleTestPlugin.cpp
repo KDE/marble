@@ -79,6 +79,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     GeoDataPoint linkoeping( 15.6, 58.4, 0.0, GeoDataPoint::Degree );
     GeoDataPoint istanbul( 28.0, 41.0, 0.0, GeoDataPoint::Degree );
     GeoDataPoint moscow( 37.6, 55.75, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint brasilia( -47.9, -15.75, 0.0, GeoDataPoint::Degree );
     GeoDataPoint orbit( 105.6, 0.0, 3000000.0, GeoDataPoint::Degree );
 
     painter->setPen( QColor( 200, 200, 200, 255 ) );
@@ -112,6 +113,8 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     painter->drawText( orbit, "Claudiu" );
 
     painter->drawPixmap( istanbul, QPixmap( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
+
+    painter->drawImage( brasilia, QImage( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
 
 
     painter->setPen( QColor( 99, 198, 198, 255 ) );
@@ -174,6 +177,21 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     };
 
     painter->drawPolyline( ring, 37 ); 
+
+    GeoDataPoint t1(0.0, 90.0, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint t2(-45.0, 60.0, 0.0, GeoDataPoint::Degree );
+    GeoDataPoint t3(-135.0, 60.0, 0.0, GeoDataPoint::Degree );
+
+    static const GeoDataPoint triangle[3] = {
+        t1, t2, t3
+    };
+
+    painter->setPen( QColor( 198, 99, 99, 255 ) );
+    brush.setColor( QColor( 198, 99, 99, 180 ) );
+    brush.setStyle( Qt::FDiagPattern );
+    painter->setBrush( brush );
+
+    painter->drawPolygon( triangle, 3 ); 
 
     return true;
 }
