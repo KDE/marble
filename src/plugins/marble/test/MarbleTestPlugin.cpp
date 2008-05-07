@@ -193,6 +193,15 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
 
     painter->drawPolygon( triangle, 3 ); 
 
+    GeoDataPoint sotm(-8.6, 52.66, 0.0, GeoDataPoint::Degree );
+
+    painter->setPen( QColor( 198, 99, 99, 255 ) );
+    brush.setColor( QColor( 255, 255, 255, 200 ) );
+    brush.setStyle( Qt::SolidPattern );
+    painter->setBrush( brush );
+
+    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n", QSize( 130, 100 ), +10, -30, 10, 10 );
+
     return true;
 }
 

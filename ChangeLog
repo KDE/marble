@@ -1,3 +1,10 @@
+2008-05-07  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/GeoPainter.{cpp,h}:
+    * src/plugins/marble/test/MarbleTestPlugin.cpp:
+
+    Initial Annotation support for GeoPainter.
+
 2008-05-06  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/GeoPainter.{cpp,h}:

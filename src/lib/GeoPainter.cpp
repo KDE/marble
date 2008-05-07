@@ -11,7 +11,7 @@
 #include "GeoPainter.h"
 
 #include <QtCore/QDebug>
-
+#include <QtGui/QPainterPath>
 
 #include "AbstractProjection.h"
 #include "global.h"
@@ -20,6 +20,7 @@
 // #define MARBLE_DEBUG
 using namespace Marble;
 
+
 class GeoPainterPrivate
 {
  public:
@@ -27,6 +28,10 @@ class GeoPainterPrivate
         : m_viewport( viewport )
     {
     }
+
+//  TODO: Additionally consider dateline
+//  TODO: Add Interpolation of points in case of occulted points 
+//  TODO: Implement isGeoProjected = true case using SLERP
 
     void createPolygonsFromPoints ( const GeoDataPoint * points, int pointCount, QVector<QPolygon *> &polygons, bool isGeoProjected = false )
     {
@@ -68,6 +73,73 @@ class GeoPainterPrivate
     }
 
     ViewportParams * m_viewport;
+
+    void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
+    {
+        double arrowPosition = 0.3;
+        double arrowWidth = 12.0;
+
+        double width =  (double)( bubbleSize.width() );
+        double height = (double)( bubbleSize.height() );
+
+        double dx = 1.0; // x-Mirror
+        double dy = 1.0; // y-Mirror
+
+        double x0 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
+        double x1 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
+        double x2 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
+        double x3 = (double) ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
+        double x4 = (double) ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
+        double x5 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
+        double x6 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
+        double x7 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
+
+        double y0 = (double) ( y + bubbleOffsetY );
+        double y1 = (double) ( y + bubbleOffsetY ) - dy * yRnd;
+        double y2 = (double) ( y + bubbleOffsetY ) - dy * 2 * yRnd;
+        double y5 = (double) ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
+        double y6 = (double) ( y + bubbleOffsetY ) - dy * ( height - yRnd );
+        double y7 = (double) ( y + bubbleOffsetY ) - dy * height;
+
+        QPointF p1 ( x, y ); // pointing point 
+        QPointF p2 ( x4, y0 );
+        QPointF p3 ( x6, y0 );
+        QPointF p4 ( x7, y1 );
+        QPointF p5 ( x7, y6 );
+        QPointF p6 ( x6, y7 );
+        QPointF p7 ( x1, y7 );
+        QPointF p8 ( x0, y6 );
+        QPointF p9 ( x0, y1 );
+        QPointF p10( x1, y0 );
+        QPointF p11( x3, y0 );
+
+        path.moveTo( p1 );
+        path.lineTo( p2 );
+
+        path.lineTo( p3 );
+        QRectF bottomRight( QPointF( x5, y2 ), QPointF( x7, y0 ) );
+        path.arcTo( bottomRight, 270.0, 90.0 );
+
+        path.lineTo( p5 );
+        QRectF topRight( QPointF( x5, y7 ), QPointF( x7, y5 ) );
+        path.arcTo( topRight, 0.0, 90.0 );
+
+        path.lineTo( p7 );
+        QRectF topLeft( QPointF( x0, y7 ), QPointF( x2, y5 ) );
+        path.arcTo( topLeft, 90.0, 90.0 );
+        
+        path.lineTo( p9 );
+        QRectF bottomLeft( QPointF( x0, y2 ), QPointF( x2, y0 ) );
+        path.arcTo( bottomLeft, 180.0, 90.0 );
+
+        path.lineTo( p10 );
+        path.lineTo( p11 );
+        path.lineTo( p1 );
+
+        rect.setTopLeft( QPoint( x1, y6 ) );
+        rect.setBottomRight( QPoint( x6, y1 ) );
+
+    }
 };
 
 GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams * viewport, bool clip )
@@ -86,6 +158,21 @@ void GeoPainter::autoMapQuality ()
     }
 
     setRenderHint( QPainter::Antialiasing, antialiased );
+}
+
+void GeoPainter::drawAnnotation (  const GeoDataPoint & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd )
+{
+    int x, y;
+    AbstractProjection *projection = d->m_viewport->currentProjection();
+
+    bool visible = projection->screenCoordinates( position, d->m_viewport, x, y );
+    if ( visible ) {
+        QPainterPath path;
+        QRectF rect;
+        d->createAnnotationLayout( x, y, bubbleSize, bubbleOffsetX, bubbleOffsetY,  xRnd, yRnd, path, rect );
+        QPainter::drawPath( path );
+        QPainter::drawText( rect, Qt::TextWordWrap, text, &rect );
+    }
 }
 
 void GeoPainter::drawPoint (  const GeoDataPoint & position )
