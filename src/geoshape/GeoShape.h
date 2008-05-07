@@ -29,6 +29,7 @@ class KoImageData;
 class KoImageCollection;
 class KUrl;
 class MarbleMap;
+class QPainter;
 
 class GeoShape : public KoShape
 {

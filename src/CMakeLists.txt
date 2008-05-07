@@ -29,10 +29,13 @@ if (NOT QTONLY)
   else(DEPEND_PACKAGE_Koffice)
           set(KOFFICE_FOUND FALSE)
   endif(DEPEND_PACKAGE_Koffice)
-    
-  if(KOFFICE_FOUND)
-  #add_subdirectory( geoshape )
-  endif(KOFFICE_FOUND)
+   
+  # Laurent: Reactivate it when export header from koffice will fixed 
+  #if(KOFFICE_FOUND)
+  #   add_subdirectory( geoshape )
+  #else(KOFFICE_FOUND)
+  #   MESSAGE(STATUS "We must install koffice before to compile geoshape plugins")
+  #endif(KOFFICE_FOUND)
 endif(NOT QTONLY)
 
 if(APPLE)

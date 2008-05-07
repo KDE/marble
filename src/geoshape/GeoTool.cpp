@@ -27,6 +27,7 @@
 #include <KIconLoader>
 #include <KUrl>
 #include <KFileDialog>
+#include <KDebug>
 
 #include <KoCanvasBase.h>
 #include <KoSelection.h>
