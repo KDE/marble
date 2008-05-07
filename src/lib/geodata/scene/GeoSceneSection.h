@@ -22,6 +22,7 @@
 #ifndef GEOSCENESECTION_H
 #define GEOSCENESECTION_H
 
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include "GeoDocument.h"

@@ -27,6 +27,7 @@
 #include <QtCore/QDebug>
 
 // Geodata
+#include "GeoDocument.h"
 #include "GeoSceneDocument.h"
 #include "GeoTagHandler.h"
 
@@ -74,7 +75,7 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
 
     switch ((GeoSceneSourceType) m_source) {
     case GeoScene_DGML:
-        return (namespaceUri() == dgmlTag_nameSpace20);    
+        return (namespaceUri() == dgmlTag_nameSpace20);
     default:
         break;
     }
@@ -84,8 +85,15 @@ bool GeoSceneParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-
 GeoDocument* GeoSceneParser::createDocument() const
 {
     return new GeoSceneDocument;
+}
+
+// Global helper function for the tag handlers
+GeoSceneDocument* geoSceneDoc(GeoParser& parser)
+{
+    GeoDocument* document = parser.activeDocument();
+    Q_ASSERT(document->isGeoSceneDocument());
+    return static_cast<GeoSceneDocument*>(document);
 }

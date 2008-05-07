@@ -11,6 +11,7 @@
 
 #include "ViewParams.h"
 
+#include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
 
 #include <QtGui/QImage>

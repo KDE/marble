@@ -28,6 +28,7 @@
 
 // Geodata
 #include "GeoDataDocument.h"
+#include "GeoDocument.h"
 #include "GeoTagHandler.h"
 
 
@@ -102,8 +103,15 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     return false;
 }
 
-
 GeoDocument* GeoDataParser::createDocument() const
 {
     return new GeoDataDocument;
+}
+
+// Global helper function for the tag handlers
+GeoDataDocument* geoDataDoc(GeoParser& parser)
+{
+    GeoDocument* document = parser.activeDocument();
+    Q_ASSERT(document->isGeoDataDocument());
+    return static_cast<GeoDataDocument*>(document);
 }

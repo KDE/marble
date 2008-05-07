@@ -28,6 +28,7 @@
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneMap.h"
 
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;

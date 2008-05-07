@@ -24,7 +24,9 @@
 
 #include <geodata_export.h>
 #include "GeoParser.h"
-#include "GeoSceneDocument.h"
+
+class GeoDocument;
+class GeoSceneDocument;
 
 enum GeoSceneSourceType {
     GeoScene_DGML   = 0
@@ -43,12 +45,7 @@ private:
     virtual GeoDocument* createDocument() const;
 };
 
-// Global inlined helper function for the tag handlers
-inline GeoSceneDocument* geoSceneDoc(GeoParser& parser)
-{
-    GeoDocument* document = parser.activeDocument();
-    Q_ASSERT(document->isGeoSceneDocument());
-    return static_cast<GeoSceneDocument*>(document);
-}
+// Global helper function for the tag handlers
+GeoSceneDocument* geoSceneDoc(GeoParser& parser);
 
 #endif // GeoSceneParser_h

@@ -20,8 +20,15 @@
     Boston, MA 02110-1301, USA.
 */
 
+// Own
 #include "GeoSceneDocument.h"
 
+// Marble
+#include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
+#include "GeoSceneLegend.h"
+#include "GeoSceneSettings.h"
+ 
 GeoSceneDocument::GeoSceneDocument()
     : GeoDocument()
     , m_head(new GeoSceneHead)

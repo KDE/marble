@@ -19,6 +19,7 @@
 #include <QtGui/QColor>
 
 #include "global.h"
+#include "GeoSceneSettings.h"
 #include "ViewParams.h"
 
 uint TextureColorizer::texturepalette[16][512];

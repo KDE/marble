@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
+#include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;

@@ -1,3 +1,35 @@
+2008-05-07  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MarbleLegendBrowser.cpp
+    * src/lib/MapThemeManager.cpp
+    * src/lib/MarbleMap.cpp
+    * src/lib/MergedLayerDecorator.cpp
+    * src/lib/TextureColorizer.cpp
+    * src/lib/ViewParams.cpp
+    * src/lib/MarbleModel.cpp
+    * src/lib/geodata/handlers/dgml/DgmlMapTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlDocumentTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlLegendTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlSettingsTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlZoomTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlHeadTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler.cpp
+    * src/lib/geodata/GeoDataTest.cpp
+    * src/lib/geodata/parser/GeoDocument.h
+    * src/lib/geodata/parser/GeoDataParser.cpp
+    * src/lib/geodata/parser/GeoSceneParser.cpp
+    * src/lib/geodata/parser/GeoDataParser.h
+    * src/lib/geodata/parser/GeoSceneParser.h
+    * src/lib/geodata/parser/GeoParser.h
+    * src/lib/geodata/scene/GeoSceneGroup.h
+    * src/lib/geodata/scene/GeoSceneSettings.h
+    * src/lib/geodata/scene/GeoSceneSection.h
+    * src/lib/geodata/scene/GeoSceneDocument.cpp
+    * src/lib/geodata/scene/GeoSceneDocument.h
+
+    - Fix includes.
+    - un-inline geoDataDoc and geoSceneDoc.
+
 2008-05-07  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/GeoPainter.{cpp,h}:

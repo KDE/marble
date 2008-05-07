@@ -22,6 +22,8 @@
 
 #include "global.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneTexture.h"
 #include "MapThemeManager.h"
 #include "MarbleDirs.h"

@@ -22,6 +22,8 @@
 #ifndef GEOSCENESETTINGS_H
 #define GEOSCENESETTINGS_H
 
+#include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include <geodata_export.h>

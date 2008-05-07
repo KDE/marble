@@ -22,6 +22,8 @@
 #ifndef GEOSCENEGROUP_H
 #define GEOSCENEGROUP_H
 
+#include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include "GeoDocument.h"
@@ -32,7 +34,7 @@ class GeoSceneProperty;
  * @short Group inside the settings of a GeoScene document.
  */
 
-class GeoSceneGroup : public QObject, 
+class GeoSceneGroup : public QObject,
                       public GeoNode {
     Q_OBJECT
 
@@ -47,7 +49,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was registered in this group
      *         @c false the property wasn't registered in this group
      */
-    bool propertyAvailable( const QString& name, bool& available  );
+    bool propertyAvailable( const QString& name, bool& available );
 
     /**
      * @brief  Set the value of a property in this group
@@ -65,7 +67,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was found and returned accordingly
      *         @c false the property couldn't be found in this group
      */
-    bool propertyValue( const QString& name, bool& value  );
+    bool propertyValue( const QString& name, bool& value );
 
     /**
      * @brief  Add a property to this setting group

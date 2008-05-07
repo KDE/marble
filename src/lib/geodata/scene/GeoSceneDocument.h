@@ -23,12 +23,15 @@
 #ifndef GEOSCENEDOCUMENT_H
 #define GEOSCENEDOCUMENT_H
 
+#include <QtCore/QObject>
+
 #include <geodata_export.h>
-#include "GeoSceneHead.h"
-#include "GeoSceneMap.h"
-#include "GeoSceneSettings.h"
-#include "GeoSceneLegend.h"
 #include "GeoDocument.h"
+
+class GeoSceneHead;
+class GeoSceneLegend;
+class GeoSceneMap;
+class GeoSceneSettings;
 
 /**
  * @short A container for features parsed from the DGML file.

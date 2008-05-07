@@ -43,6 +43,7 @@
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
 #include "GeoDataPoint.h"
+#include "GeoSceneHead.h"
 #include "GpxFileViewItem.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDirs.h"

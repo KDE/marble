@@ -25,7 +25,8 @@
 
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
-#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "GeoSceneZoom.h"
 
 using namespace GeoSceneElementDictionary;
 

@@ -22,9 +22,12 @@
 #include <QtCore/QRegExp>
 
 #include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 #include "GeoSceneItem.h"
 #include "GeoSceneProperty.h"
+#include "GeoSceneSettings.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 

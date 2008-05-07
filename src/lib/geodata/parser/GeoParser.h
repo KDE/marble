@@ -26,10 +26,11 @@
 #include <QtXml/QXmlStreamReader>
 
 #include <geodata_export.h>
-#include "GeoDocument.h"
+#include "GeoTagHandler.h"
 
 typedef int GeoDataGenericSourceType;
 
+class GeoDocument;
 class GeoStackItem;
 
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader {

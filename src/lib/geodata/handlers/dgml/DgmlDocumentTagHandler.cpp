@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "DgmlElementDictionary.h"
+#include "GeoSceneDocument.h"
 #include "GeoSceneParser.h"
 
 using namespace GeoSceneElementDictionary;

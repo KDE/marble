@@ -22,7 +22,9 @@
 #include "gps/GpsLayer.h"
 
 #include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 

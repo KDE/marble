@@ -24,6 +24,7 @@
 
 // Local dir
 #include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 #include "GeoSceneParser.h"
 #include "MarbleDirs.h"
 
