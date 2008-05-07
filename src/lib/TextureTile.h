@@ -63,6 +63,8 @@ class TextureTile : public QObject {
  Q_SIGNALS:
     void tileUpdateDone();
     void downloadTile(const QString& relativeUrlString, const QString& id);
+    void downloadTile(const QString& serverUrlString, const QString& relativeUrlString,
+                      const QString& id);
 
  public Q_SLOTS:
     void   loadTile( bool requestTileUpdate = true );

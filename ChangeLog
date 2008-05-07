@@ -1,5 +1,19 @@
 2008-05-07  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MergedLayerDecorator.h
+    * src/lib/TileLoader.h
+    * src/lib/MergedLayerDecorator.cpp
+    * src/lib/TextureTile.h
+    * src/lib/TileLoader.cpp
+    * src/lib/MarbleModel.cpp
+    * src/lib/HttpDownloadManager.h
+
+    Part 3 of groundwork for OpenStreetMap texture tiles.
+    Add slots and signal with serverUrl. This has been in HttpDownloadManager
+    but was not connected to the rest.
+
+2008-05-07  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarbleLegendBrowser.cpp
     * src/lib/MapThemeManager.cpp
     * src/lib/MarbleMap.cpp

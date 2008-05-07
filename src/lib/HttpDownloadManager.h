@@ -92,6 +92,7 @@ class HttpDownloadManager : public QObject
 
  Q_SIGNALS:
     void downloadComplete( QString, QString );
+    void downloadComplete( QString, QString, QString );
     void statusMessage( QString );
 
  private Q_SLOTS:

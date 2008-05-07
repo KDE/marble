@@ -165,6 +165,12 @@ class TileLoader : public QObject
         void reloadTile( const QString &relativeUrlString, const QString &id );
 
         /**
+         * Reloads the tile with the given @p id.
+         */
+        void reloadTile( const QString &serverUrlString, const QString &relativeUrlString,
+                         const QString &id );
+
+        /**
          * Effectively triggers a reload of all tiles that are currently in use
          * and clears the tile cache in physical memory.
          */
@@ -181,6 +187,11 @@ class TileLoader : public QObject
                        bool requestTileUpdate);
 
     private:
+        /**
+         * @brief Helper method for the slots reloadTile.
+         */
+        void reloadTile( const QString &idStr );
+
         class Private;
         Private* const d;
         MarbleModel* m_parent;

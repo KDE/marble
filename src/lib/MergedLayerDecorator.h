@@ -49,6 +49,8 @@ class MergedLayerDecorator : public QObject
 	
  Q_SIGNALS:
     void downloadTile(const QString& relativeUrlString, const QString& id);
+    void downloadTile(const QString& serverUrlString, const QString& relativeUrlString,
+                      const QString& id);
     void repaintMap();
 	
  private:

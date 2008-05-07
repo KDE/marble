@@ -97,7 +97,9 @@ QImage MergedLayerDecorator::loadRawTile( GeoSceneTexture *textureLayer )
     
     connect( &tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
              this, SIGNAL( downloadTile( const QString&, const QString& ) ) );
-    
+    connect( &tile, SIGNAL( downloadTile( const QString&, const QString&, const QString& ) ),
+             this, SIGNAL( downloadTile( const QString&, const QString&, const QString& ) ) );
+
     tile.loadRawTile( textureLayer, m_level, m_x, m_y );
     return *(tile.tile());
 }
