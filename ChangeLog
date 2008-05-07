@@ -1,5 +1,13 @@
 2008-05-07  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TileLoaderHelper.cpp
+
+    Part 4 of groundwork for OpenStreetMap texture tiles.
+    Implement OpenStreetMap storageLayout in
+    TileLoaderHelper::relativeTileFileName.
+
+2008-05-07  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MergedLayerDecorator.h
     * src/lib/TileLoader.h
     * src/lib/MergedLayerDecorator.cpp

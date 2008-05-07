@@ -70,19 +70,34 @@ int TileLoaderHelper::columnToLevel( int column )
     return (int)( std::log( (double)(column / 2) ) / std::log( (double)2.0 ) );
 }
 
-QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x, int y )
+QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x,
+                                                int y )
 {
-    // for now just return the old "relfilename", since storageLayout is not yet there
-    QString relfilename;
-
+    QString relFileName;
     if ( textureLayer ) {
-        relfilename = QString( "%1/%2/%3/%3_%4.jpg" )
-            .arg( themeStr( textureLayer ) ).arg( level )
-            .arg( y, tileDigits, 10, QChar('0') )
-            .arg( x, tileDigits, 10, QChar('0') );
+        const QString suffix = textureLayer->fileFormat().toLower();
+        switch ( textureLayer->storageLayoutMode() ) {
+        case GeoSceneTexture::Marble:
+            // FIXME: use format information from GeoSceneTexturex
+            relFileName = QString( "%1/%2/%3/%3_%4.%5" )
+                .arg( themeStr( textureLayer ) )
+                .arg( level )
+                .arg( y, tileDigits, 10, QChar('0') )
+                .arg( x, tileDigits, 10, QChar('0') )
+                .arg( suffix );
+            break;
+        case GeoSceneTexture::OpenStreetMap:
+            // FIXME: use format information from GeoSceneTexturex
+            relFileName = QString( "%1/%2/%3/%4.%5" )
+                .arg( themeStr( textureLayer ) )
+                .arg( level )
+                .arg( x )
+                .arg( y )
+                .arg( suffix );
+            break;
+        }
     }
-
-    return relfilename;
+    return relFileName;
 }
 
 QString TileLoaderHelper::themeStr( GeoSceneTexture *textureLayer )
