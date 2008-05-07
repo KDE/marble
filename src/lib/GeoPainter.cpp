@@ -76,14 +76,15 @@ class GeoPainterPrivate
 
     void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
     {
+        // TODO: MOVE this into an own Annotation class
         double arrowPosition = 0.3;
         double arrowWidth = 12.0;
 
         double width =  (double)( bubbleSize.width() );
         double height = (double)( bubbleSize.height() );
 
-        double dx = 1.0; // x-Mirror
-        double dy = 1.0; // y-Mirror
+        double dx = ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
+        double dy = ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
 
         double x0 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
         double x1 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
@@ -113,6 +114,8 @@ class GeoPainterPrivate
         QPointF p10( x1, y0 );
         QPointF p11( x3, y0 );
 
+        QRectF bubbleBoundingBox(  QPointF( x0, y7 ), QPointF( x7, y0 ) );
+
         path.moveTo( p1 );
         path.lineTo( p2 );
 
@@ -136,9 +139,13 @@ class GeoPainterPrivate
         path.lineTo( p11 );
         path.lineTo( p1 );
 
-        rect.setTopLeft( QPoint( x1, y6 ) );
-        rect.setBottomRight( QPoint( x6, y1 ) );
+        double left   = ( dx > 0 ) ? x1 : x6; 
+        double right  = ( dx > 0 ) ? x6 : x1;
+        double top    = ( dy > 0 ) ? y6 : y1; 
+        double bottom = ( dy > 0 ) ? y1 : y6;
 
+        rect.setTopLeft( QPointF( left, top ) );
+        rect.setBottomRight( QPointF( right, bottom ) );
     }
 };
 

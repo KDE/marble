@@ -74,7 +74,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 //  We don't go for the percentual approach that Qt takes for rounded corners for 
 //  reasons of bad aesthetics here.
 
-    void drawAnnotation (  const GeoDataPoint & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd = 10, int yRnd = 10 );
+    void drawAnnotation (  const GeoDataPoint & position, const QString & text, QSize bubbleSize = QSize( 130, 100 ), int bubbleOffsetX = -10, int bubbleOffsetY = -30, int xRnd = 5, int yRnd = 5 );
 
     void drawPoint (  const GeoDataPoint & position );
     void drawPoints (  const GeoDataPoint * points, int pointCount );

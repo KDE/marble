@@ -200,7 +200,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     brush.setStyle( Qt::SolidPattern );
     painter->setBrush( brush );
 
-    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n", QSize( 130, 100 ), +10, -30, 10, 10 );
+    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n" );
 
     return true;
 }
