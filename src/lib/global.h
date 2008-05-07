@@ -104,7 +104,18 @@ enum OnStartup {
 const double DEG2RAD = M_PI / 180.0;
 const double RAD2DEG = 180.0 / M_PI;
 
+// Version definitions to use with an external application (as digiKam)
+
+// String for about dialog.
 const QString MARBLE_VERSION_STRING = QString::fromLatin1( "pre 0.6 SVN" );
+
+// API Version id:
+// form : 0xMMmmpp
+//        MM = major revision.
+//        mm = minor revision.
+//        pp = patch revision.
+#define MARBLE_VERSION 0x000600
+
 
 static const char* NOT_AVAILABLE = QT_TR_NOOP("not available");
 
