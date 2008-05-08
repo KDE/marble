@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Geo Shape
+Name[sv]=Geografisk form
 
 X-KDE-ServiceTypes=KOffice/Shape
 Type=Service
