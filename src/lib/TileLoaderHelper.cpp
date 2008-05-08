@@ -78,7 +78,6 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
         const QString suffix = textureLayer->fileFormat().toLower();
         switch ( textureLayer->storageLayoutMode() ) {
         case GeoSceneTexture::Marble:
-            // FIXME: use format information from GeoSceneTexturex
             relFileName = QString( "%1/%2/%3/%3_%4.%5" )
                 .arg( themeStr( textureLayer ) )
                 .arg( level )
@@ -87,7 +86,6 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
                 .arg( suffix );
             break;
         case GeoSceneTexture::OpenStreetMap:
-            // FIXME: use format information from GeoSceneTexturex
             relFileName = QString( "%1/%2/%3/%4.%5" )
                 .arg( themeStr( textureLayer ) )
                 .arg( level )
