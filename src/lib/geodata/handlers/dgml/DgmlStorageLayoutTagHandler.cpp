@@ -45,6 +45,20 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_StorageLayout));
 
+    // Attribute levelZeroColumns, default to value of the oldest tile themes
+    int levelZeroColumns = 2;
+    const QString levelZeroColumnsStr = parser.attribute(dgmlAttr_levelZeroColumns).trimmed();
+    if ( !levelZeroColumnsStr.isEmpty() ) {
+        levelZeroColumns = levelZeroColumnsStr.toInt();
+    }
+
+    // Attribute levelZeroRows, default to value of the oldest tile themes
+    int levelZeroRows = 1;
+    const QString levelZeroRowsStr = parser.attribute(dgmlAttr_levelZeroRows).trimmed();
+    if ( !levelZeroRowsStr.isEmpty() ) {
+        levelZeroRows = levelZeroRowsStr.toInt();
+    }
+
     // Attribute mode
     GeoSceneTexture::StorageLayoutMode mode = GeoSceneTexture::Marble;
     const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
@@ -62,6 +76,8 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture)) {
+        parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroColumns( levelZeroColumns );
+        parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroRows( levelZeroRows );
         parentItem.nodeAs<GeoSceneTexture>()->setStorageLayoutMode( mode );
 	if ( mode == GeoSceneTexture::Custom )
             parentItem.nodeAs<GeoSceneTexture>()->setCustomStorageLayout( customLayout );

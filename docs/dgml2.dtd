@@ -30,6 +30,7 @@
 <!ELEMENT settings (group|property)*>
 <!ELEMENT sourceDir>
 <!ELEMENT sourceFile>
+<!-- FIXME: specify storageLayout attributes: levelZeroColumns, levelZeroRows, mode -->
 <!ELEMENT storageLayout (#PCDATA)>
 <!ELEMENT target EMPTY>
 <!ELEMENT text (#PCDATA)>

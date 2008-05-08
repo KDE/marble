@@ -27,7 +27,9 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_sourceDir( "" ),
       m_installMap( "" ),
       m_storageLayoutMode( Marble ),
-      m_customStorageLayout( "" )
+      m_customStorageLayout( "" ),
+      m_levelZeroColumns( 0 ),
+      m_levelZeroRows( 0 )
 {
     /* NOOP */
 }
@@ -75,6 +77,26 @@ QString GeoSceneTexture::customStorageLayout()const
 void GeoSceneTexture::setCustomStorageLayout( const QString& layout )
 {
     m_customStorageLayout = layout;
+}
+
+int GeoSceneTexture::levelZeroColumns() const
+{
+   return m_levelZeroColumns;
+}
+
+void GeoSceneTexture::setLevelZeroColumns( const int columns )
+{
+    m_levelZeroColumns = columns;
+}
+
+int GeoSceneTexture::levelZeroRows() const
+{
+    return m_levelZeroRows;
+}
+
+void GeoSceneTexture::setLevelZeroRows( const int rows )
+{
+    m_levelZeroRows = rows;
 }
 
 QString GeoSceneTexture::type()

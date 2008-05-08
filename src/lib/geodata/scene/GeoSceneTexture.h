@@ -49,6 +49,12 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     QString customStorageLayout()const;
     void setCustomStorageLayout( const QString& );
 
+    int levelZeroColumns() const;
+    void setLevelZeroColumns( const int );
+
+    int levelZeroRows() const;
+    void setLevelZeroRows( const int );
+
     virtual QString type();
 
  protected:
@@ -56,6 +62,8 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     QString m_installMap;
     StorageLayoutMode m_storageLayoutMode;
     QString m_customStorageLayout;
+    int m_levelZeroColumns;
+    int m_levelZeroRows;
 };
 
 #endif // GEOSCENETEXTURE_H
