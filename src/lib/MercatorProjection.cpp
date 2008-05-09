@@ -94,6 +94,10 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return false;
 }
 
+bool MercatorProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted )
+{
+
+}
 
 bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,

@@ -56,6 +56,8 @@ class SphericalProjection : public AbstractProjection
                             const ViewportParams *params,
                             int &x, int &y, bool &occulted );
 
+    bool screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int *y, int& screenPointNum, bool &occulted );
+
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel

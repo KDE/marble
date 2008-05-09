@@ -1,3 +1,16 @@
+2008-05-08  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MercatorProjection.{cpp,h}:
+    * src/lib/SphericalProjection.{cpp,h}:
+    * src/lib/EquirectProjection.{cpp,h}:
+    * src/lib/AbstractProjection.h:
+    * src/lib/GeoPainter.h:
+
+    - First tiny initial step towards the great GeoPainter vector drawing
+      unification: creating a "halfstub" for 
+
+    bool screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted );
+
 2008-05-08  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.cpp

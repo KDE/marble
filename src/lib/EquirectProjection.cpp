@@ -40,10 +40,10 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-    double  rad2Pixel = 2 * viewport->radius() / M_PI;
+    double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
  
-    x = (int)( viewport->width()  / 2 + ( lon - centerLon ) * rad2Pixel );
-    y = (int)( viewport->height() / 2 - ( lat - centerLat ) * rad2Pixel );
+    x = (int)( viewport->width()  / 2.0 + ( lon - centerLon ) * rad2Pixel );
+    y = (int)( viewport->height() / 2.0 - ( lat - centerLat ) * rad2Pixel );
 
     return true;
 }
@@ -56,7 +56,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
     double  lon;
     double  lat;
-    double  rad2Pixel = 2 * viewport->radius() / M_PI;
+    double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
 
     double  centerLon;
     double  centerLat;
@@ -65,8 +65,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     geopoint.geoCoordinates( lon, lat );
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)(viewport->width()  / 2 + rad2Pixel * (lon - centerLon));
-    y = (int)(viewport->height() / 2 - rad2Pixel * (lat - centerLat));
+    x = (int)(viewport->width()  / 2.0 + rad2Pixel * (lon - centerLon));
+    y = (int)(viewport->height() / 2.0 - rad2Pixel * (lat - centerLat));
 
     // Skip placemarks that are outside the screen area
     //
@@ -83,6 +83,75 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return false;
 }
 
+bool EquirectProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted )
+{
+    // on flat projections the observer's view onto the point won't be 
+    // obscured by the target planet itself
+    occulted = false;
+
+    double  lon;
+    double  lat;
+    double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
+
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    geopoint.geoCoordinates( lon, lat );
+
+    // Let (itX, y) be the first guess for one possible position on screen..
+    int itX = (int)(viewport->width()  / 2.0 + rad2Pixel * (lon - centerLon));
+    y = (int)(viewport->height() / 2.0 - rad2Pixel * (lat - centerLat));
+
+    int xRepeatDistance = 4 * viewport->radius();
+
+    // Make sure that the requested point is within the visible y range:
+    if ( y >= 0 && y < viewport->height() ) {
+        // First we deal with the case where the repetition doesn't happen
+        if ( m_repeatX == false ) {
+            *x = itX;
+            if ( itX > 0 && itX < viewport->width() ) {
+                return true;
+            }
+            else {
+                // the requested point is out of the visible x range:
+                return false;
+            }
+        }
+        // For repetition case the same geopoint gets displayed on 
+        // the map many times.across the longitude.
+
+        // Finding the leftmost positive x value
+        if ( itX > xRepeatDistance ) {
+            itX %= xRepeatDistance;
+        }
+        if ( itX < 0 ) {
+            itX += xRepeatDistance;
+        }
+        // the requested point is out of the visible x range:
+        if ( itX > viewport->width() ) {
+            return false;
+        }
+
+        // Now iterate through all visible x screen coordinates for the point 
+        // from left to right.
+        int itNum = 0;
+
+        while ( itX < viewport->width() ) {
+            *x = itX;
+            ++x;
+            ++itNum;
+            itX += xRepeatDistance;
+        }
+
+        screenPointNum = itNum;
+
+        return true;
+    }
+
+    // the requested point is out of the visible y range:
+    return false;
+}
 
 bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
@@ -106,12 +175,12 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
         int const xPixels = x - imgWidth2;
         int const yPixels = y - imgHeight2;
 
-        double const pixel2rad = M_PI / (2 * radius);
+        double const pixel2rad = M_PI / (2.0 * radius);
         lat = - yPixels * pixel2rad + centerLat;
         lon = + xPixels * pixel2rad + centerLon;
 
-        while ( lon > M_PI )  lon -= 2*M_PI;
-        while ( lon < -M_PI ) lon += 2*M_PI;
+        while ( lon > M_PI )  lon -= 2.0 * M_PI;
+        while ( lon < -M_PI ) lon += 2.0 * M_PI;
 
         noerr = true;
     }

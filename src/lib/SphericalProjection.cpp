@@ -91,6 +91,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return true;
 }
 
+bool SphericalProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int *y, int& screenPointNum, bool &occulted )
+{
+
+}
 
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
