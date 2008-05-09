@@ -1,3 +1,20 @@
+2008-05-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/MergedLayerDecorator.cpp
+    * src/lib/TextureTile.cpp
+    * src/lib/TileLoaderHelper.cpp
+    * src/lib/TileCreator.cpp
+    * src/lib/TileLoader.cpp
+    * src/lib/global.h
+    * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.cpp
+    * src/lib/geodata/scene/GeoSceneTexture.cpp
+    * src/lib/TileLoaderHelper.h
+
+    Part 6 of groundwork for OpenStreetMap texture tiles.
+    Utilize levelZeroColumns and levelZeroRows information. This touches
+    mainly TileLoaderHelper and callers.
+
 2008-05-08  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MercatorProjection.{cpp,h}:

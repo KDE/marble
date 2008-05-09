@@ -24,6 +24,7 @@
 #include "TileLoader.h"
 
 #include "global.h"
+#include "GeoSceneTexture.h"
 #include "HttpDownloadManager.h"
 #include "TextureTile.h"
 #include "MarbleDirs.h"
@@ -171,12 +172,14 @@ int TileLoader::tileHeight() const
 
 int TileLoader::globalWidth( int level ) const
 {
-    return d->m_tileWidth * TileLoaderHelper::levelToColumn( level );
+    return d->m_tileWidth * TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(),
+                                                             level );
 }
 
 int TileLoader::globalHeight( int level ) const
 {
-    return d->m_tileHeight * TileLoaderHelper::levelToRow( level );
+    return d->m_tileHeight * TileLoaderHelper::levelToRow( d->m_textureLayer->levelZeroRows(),
+                                                           level );
 }
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
@@ -239,12 +242,15 @@ int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
     int tilelevel = -1;
     int trylevel  = 0;
 
+    const int levelZeroColumns = textureLayer->levelZeroColumns();
+    const int levelZeroRows = textureLayer->levelZeroRows();
+
     // if ( m_bitmaplayer.type.toLower() == "bitmap" ){
     while ( noerr == true ) {
-        int nmaxit = TileLoaderHelper::levelToRow( trylevel );
+        int nmaxit = TileLoaderHelper::levelToRow( levelZeroRows, trylevel );
 
         for ( int n = 0; n < nmaxit; ++n ) {
-            int mmaxit = TileLoaderHelper::levelToColumn( trylevel );
+            int mmaxit = TileLoaderHelper::levelToColumn( levelZeroColumns, trylevel );
 
             for ( int m = 0; m < mmaxit; ++m ) {
                 QString tilepath = MarbleDirs::path(
@@ -304,18 +310,22 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 {
     bool noerr = true; 
+    const int levelZeroColumns = textureLayer->levelZeroColumns();
+    const int levelZeroRows = textureLayer->levelZeroRows();
 
-    // Check whether the two tiles from the lowest texture level are available
-    // FIXME: - this assumes that there are 2 tiles in level 0 which is not true for OpenStreetMap
-    //        - marble could theoretically start without local tiles, too. They can be downloaded.
-    for ( int m = 0; m < 2; ++m ) {
-        QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
-            textureLayer, 0, m, 0 ));
+    // Check whether the tiles from the lowest texture level are available
+    // FIXME: marble could theoretically start without local tiles, too. They can be downloaded.
+    for ( int column = 0; column < levelZeroColumns; ++column ) {
+        for ( int row = 0; row < levelZeroRows; ++row ) {
 
-        noerr = QFile::exists( tilepath );
+            QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
+                textureLayer, 0, column, row ));
 
-        if ( noerr == false )
-            break;
+            noerr = QFile::exists( tilepath );
+
+            if ( noerr == false )
+                break;
+        }
     }
 
     // qDebug() << "Mandatory most basic tile level is fully available: " << noerr;

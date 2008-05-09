@@ -21,6 +21,8 @@
 
 #include "DgmlStorageLayoutTagHandler.h"
 
+#include <QtCore/QDebug>
+
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
@@ -78,6 +80,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Texture)) {
         parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroColumns( levelZeroColumns );
         parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroRows( levelZeroRows );
+        qDebug() << "level zero columns x rows:" << levelZeroColumns << 'x' << levelZeroRows;
         parentItem.nodeAs<GeoSceneTexture>()->setStorageLayoutMode( mode );
 	if ( mode == GeoSceneTexture::Custom )
             parentItem.nodeAs<GeoSceneTexture>()->setCustomStorageLayout( customLayout );

@@ -17,6 +17,7 @@
 
 #include "GeoDataPoint.h"
 #include "GeoPolygon.h"
+#include "GeoSceneTexture.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
@@ -157,9 +158,12 @@ void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams,
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    tileCol = TileLoaderHelper::levelToColumn( tileLevel ) 
+    tileCol = TileLoaderHelper::levelToColumn( m_tileLoader->textureLayer()->levelZeroColumns(),
+                                               tileLevel )
               * ( 1.0 + centerLon / M_PI ) / 2.0;
-    tileRow = TileLoaderHelper::levelToRow( tileLevel )
+
+    tileRow = TileLoaderHelper::levelToRow( m_tileLoader->textureLayer()->levelZeroRows(),
+                                            tileLevel )
               * ( 0.5 - centerLat / M_PI );
 }
 

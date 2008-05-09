@@ -21,6 +21,9 @@
 
 #include "GeoSceneTexture.h"
 
+#include "global.h"
+
+using namespace Marble;
 
 GeoSceneTexture::GeoSceneTexture( const QString& name )
     : GeoSceneAbstractDataset( name ),
@@ -28,8 +31,8 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_installMap( "" ),
       m_storageLayoutMode( Marble ),
       m_customStorageLayout( "" ),
-      m_levelZeroColumns( 0 ),
-      m_levelZeroRows( 0 )
+      m_levelZeroColumns( defaultLevelZeroColumns ),
+      m_levelZeroRows( defaultLevelZeroRows )
 {
     /* NOOP */
 }

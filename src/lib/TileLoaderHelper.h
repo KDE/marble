@@ -31,43 +31,47 @@ class GeoSceneTexture;
 namespace TileLoaderHelper {
     /**
      * @brief Get the maximum number of tile rows for a given tile level.
+     * @param levelZeroRows  the number of rows in level zero
      * @param level  the tile level
      * @return       the maximum number of rows that a map level was tiled into. 
      *               If the tile level number is invalid then "-1" gets 
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToRow( int level );
+    int levelToRow( const int levelZeroRows, int level );
 
     /**
      * @brief Get the maximum number of tile columns for a given tile level.
+     * @param levelZeroColumns  the number of columns in level zero
      * @param level  the tile level
      * @return       the maximum number of columns that a map level was tiled into. 
      *               If the tile level number is invalid then "-1" gets 
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToColumn( int level );
+    int levelToColumn( const int levelZeroColumns, int level );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
+     * @param levelZeroRows  the number of rows in level zero
      * @param row    the maximum number of rows that a map level was tiled into.
      * @return       the corresponding tile level.
      *               If the number of rows is invalid then "-1" gets 
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int rowToLevel( int row );
+    int rowToLevel( const int levelZeroRows, int row );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
+     * @param levelZeroColumns  the number of columns in level zero
      * @param column the maximum number of columns that a map level was tiled into.
      * @return       the corresponding tile level.
      *               If the number of columns is invalid then "-1" gets 
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int columnToLevel( int column );
+    int columnToLevel( const int levelZeroColumns, int column );
 
     /**
      * @brief Get the relative file name of a tile.

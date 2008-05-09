@@ -30,44 +30,44 @@
 #include "GeoSceneTexture.h"
 #include "global.h"
 
-int TileLoaderHelper::levelToRow( int level )
+int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
 {
     if ( level < 0 ) {
         qDebug() << QString( "TileLoaderHelper::levelToRow(): Invalid level: %1" )
             .arg( level );
         return 0;
     }
-    return (int)std::pow( 2.0, (double)( level ) );
+    return levelZeroRows * (int)std::pow( 2.0, (double)( level ) );
 }
 
-int TileLoaderHelper::levelToColumn( int level )
+int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
 {
     if ( level < 0 ) {
         qDebug() << QString( "TileLoaderHelper::levelToColumn(): Invalid level: %1" )
             .arg( level );
         return 0;
     }
-    return (int)std::pow( 2.0, (double)( level + 1 ) );
+    return levelZeroColumns * (int)std::pow( 2.0, (double)( level ) );
 }
 
-int TileLoaderHelper::rowToLevel( int row )
+int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )
 {
-    if ( row < 1 )    {
+    if ( row < levelZeroRows ) {
         qDebug() << QString( "TileLoaderHelper::rowToLevel(): Invalid number of rows: %1" )
             .arg( row );
         return 0;
     }
-    return (int)( std::log( (double)row ) / std::log( (double)2.0 ) );
+    return (int)( std::log( (double)(row / levelZeroRows) ) / std::log( (double)2.0 ) );
 }
 
-int TileLoaderHelper::columnToLevel( int column )
+int TileLoaderHelper::columnToLevel( const int levelZeroColumns, int column )
 {
-    if ( column < 2 ) {
+    if ( column < levelZeroColumns ) {
         qDebug() << QString( "TileLoaderHelper::columnToLevel(): Invalid number of columns: %1" )
         .arg( column );
         return 0;
     }
-    return (int)( std::log( (double)(column / 2) ) / std::log( (double)2.0 ) );
+    return (int)( std::log( (double)(column / levelZeroColumns) ) / std::log( (double)2.0 ) );
 }
 
 QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x,

@@ -145,8 +145,12 @@ void MergedLayerDecorator::paintSunShading()
 	
     // TODO add support for 8-bit maps?
     // add sun shading
-    const double  global_width  = m_tile->width() * TileLoaderHelper::levelToColumn(m_level);
-    const double  global_height = m_tile->height() * TileLoaderHelper::levelToRow(m_level);
+    const double  global_width  = m_tile->width()
+                                  * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
+                                                                     m_level );
+    const double  global_height = m_tile->height()
+                                  * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
+                                                                  m_level );
     const double lon_scale = 2*M_PI / global_width;
     const double lat_scale = -M_PI / global_height;
     const int tileHeight = m_tile->height();

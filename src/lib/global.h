@@ -99,6 +99,9 @@ enum OnStartup {
     LastLocationVisited ///< Show last location visited on quit
 };
 
+const int defaultLevelZeroColumns = 2;
+const int defaultLevelZeroRows = 1;
+
 }
 
 const double DEG2RAD = M_PI / 180.0;
