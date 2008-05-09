@@ -30,7 +30,7 @@ class GeoPainterPrivate
     }
 
 //  TODO: Additionally consider dateline
-//  TODO: Add Interpolation of points in case of occulted points 
+//  TODO: Add Interpolation of points in case of occulted points
 //  TODO: Implement isGeoProjected = true case using SLERP
 
     void createPolygonsFromPoints ( const GeoDataPoint * points, int pointCount, QVector<QPolygon *> &polygons, bool isGeoProjected = false )
@@ -38,12 +38,12 @@ class GeoPainterPrivate
         int x, y;
         bool previousOcculted;
         AbstractProjection *projection = m_viewport->currentProjection();
-    
+
         if ( isGeoProjected == false ) {
-    
+
             QPolygon* polygon;
 //            QVector<QPolygon *> polygons;
-    
+
             GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
             while( itPoint < points + pointCount ) {
                 bool occulted;
@@ -52,20 +52,20 @@ class GeoPainterPrivate
                     polygon = new QPolygon;
                     previousOcculted = occulted;
                 }
-    
+
                 if ( occulted && !previousOcculted ) {
                     polygons.append( polygon );
                     polygon = new QPolygon;
                 }
-    
+
                 if ( !occulted ) {
                     polygon->append( QPoint( x, y ) );
                 }
-    
+
                 previousOcculted = occulted;
                 ++itPoint;
             }
-    
+
             if ( polygon->size() > 1 ){
                 polygons.append( polygon );
             }
@@ -102,7 +102,7 @@ class GeoPainterPrivate
         double y6 = (double) ( y + bubbleOffsetY ) - dy * ( height - yRnd );
         double y7 = (double) ( y + bubbleOffsetY ) - dy * height;
 
-        QPointF p1 ( x, y ); // pointing point 
+        QPointF p1 ( x, y ); // pointing point
         QPointF p2 ( x4, y0 );
         QPointF p3 ( x6, y0 );
         QPointF p4 ( x7, y1 );
@@ -130,7 +130,7 @@ class GeoPainterPrivate
         path.lineTo( p7 );
         QRectF topLeft( QPointF( x0, y7 ), QPointF( x2, y5 ) );
         path.arcTo( topLeft, 90.0, 90.0 );
-        
+
         path.lineTo( p9 );
         QRectF bottomLeft( QPointF( x0, y2 ), QPointF( x2, y0 ) );
         path.arcTo( bottomLeft, 180.0, 90.0 );
@@ -139,9 +139,9 @@ class GeoPainterPrivate
         path.lineTo( p11 );
         path.lineTo( p1 );
 
-        double left   = ( dx > 0 ) ? x1 : x6; 
+        double left   = ( dx > 0 ) ? x1 : x6;
         double right  = ( dx > 0 ) ? x6 : x1;
-        double top    = ( dy > 0 ) ? y6 : y1; 
+        double top    = ( dy > 0 ) ? y6 : y1;
         double bottom = ( dy > 0 ) ? y1 : y6;
 
         rect.setTopLeft( QPointF( left, top ) );
@@ -155,7 +155,12 @@ GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams * viewport, bool clip )
 {
 }
 
-void GeoPainter::autoMapQuality () 
+GeoPainter::~GeoPainter()
+{
+    delete d;
+}
+
+void GeoPainter::autoMapQuality ()
 {
     bool antialiased = false;
 
@@ -278,7 +283,7 @@ void GeoPainter::drawLine (  const GeoDataPoint & p1,  const GeoDataPoint & p2, 
         bool visible2 = projection->screenCoordinates( p2, d->m_viewport, x2, y2 );
 
         if ( ( !visible1 && p2.altitude() > 0 ) || ( !visible2 && p1.altitude() >0 ) )
-            return; 
+            return;
 
         QPolygonF polygon;
         polygon << QPointF( x1, y1 ) << QPointF( x2, y2 );
@@ -296,7 +301,7 @@ void GeoPainter::drawPolyline ( const GeoDataPoint * points, int pointCount, boo
         // Using QPainter instead of ClipPainter until some bugs are fixed.
         QPainter::drawPolyline( *itPolygon );
     }
-    
+
     qDeleteAll( polygons );
 }
 
@@ -309,7 +314,7 @@ void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount, Qt::
         // Using QPainter instead of ClipPainter until some bugs are fixed.
         QPainter::drawPolygon( *itPolygon );
     }
-    
+
     qDeleteAll( polygons );
 }
 
@@ -342,7 +347,7 @@ void GeoPainter::drawRoundRect ( const GeoDataPoint & centerPoint, int width, in
 }
 
 
-    // Reenabling QPainter methods. 
+    // Reenabling QPainter methods.
 
 void GeoPainter::drawLine ( int x1, int y1, int x2, int y2 )
 {
