@@ -15,6 +15,7 @@
 
 #include "GeoDataObject.h"
 
+#include "geodata_export.h"
 
 /**
  * @short A base class for all geodata features
@@ -27,7 +28,7 @@
  * @see GeoDataPolygon
  */
 
-class GeoDataGeometry : public GeoDataObject
+class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
