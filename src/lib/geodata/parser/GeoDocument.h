@@ -31,11 +31,12 @@
 #include <stdio.h>
 #endif
 
+#include "geodata_export.h"
 
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
-class GeoDocument {
+class GEODATA_EXPORT GeoDocument {
 protected:
     GeoDocument() { }
 
@@ -61,7 +62,7 @@ public:
 /**
  * @short A shared base class for all classes that are mapped to a specifig tag (ie. GeoFolder)
  */
-class GeoNode {
+class GEODATA_EXPORT GeoNode {
 protected:
 #if DUMP_GEONODE_LEAKS > 0
     GeoNode()

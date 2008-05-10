@@ -26,6 +26,8 @@
 #include <QtCore/QHash>
 #include <QtCore/QVector>
 
+#include "geodata_export.h"
+
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
 
@@ -40,7 +42,7 @@ class GeoDataStyle;
  * Document, each with an id, and then later referenced by a
  * styleUrl for a given Feature or StyleMap.
  */
-class GeoDataDocument : public GeoDocument,
+class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
                         public GeoDataContainer {
 public:
     GeoDataDocument();

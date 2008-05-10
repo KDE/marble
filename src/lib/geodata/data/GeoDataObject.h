@@ -12,6 +12,8 @@
 #ifndef GEODATAOBJECT_H
 #define GEODATAOBJECT_H
 
+#include "geodata_export.h"
+
 #include "../parser/GeoDocument.h" // TODO: Add include path!
 #include "Serializable.h"
 
@@ -35,7 +37,7 @@
  * mechanism of KML is used, which is currently not supported by
  * Marble.
  */
-class GeoDataObject : public GeoNode,
+class GEODATA_EXPORT GeoDataObject : public GeoNode,
                       public Serializable {
 public:
     virtual ~GeoDataObject();
