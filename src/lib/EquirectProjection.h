@@ -54,9 +54,9 @@ class EquirectProjection : public AbstractProjection
 
     bool screenCoordinates( const GeoDataPoint &geopoint, 
                             const ViewportParams *params,
-                            int &x, int &y, bool &occulted );
+                            int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted );
+    bool screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams *viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

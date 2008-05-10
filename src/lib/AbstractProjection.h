@@ -82,13 +82,13 @@ class AbstractProjection
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
-     * @param occulted  whether the point gets hidden on the far side of the earth
+     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
      *
      * @see ViewportParams
      */
     virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
                                     const ViewportParams *viewport,
-                                    int &x, int &y, bool &occulted ) = 0;
+                                    int &x, int &y, bool &globeHidesPoint ) = 0;
 
     bool screenCoordinates( const GeoDataPoint &geopoint, 
                                     const ViewportParams *viewport,
@@ -101,15 +101,15 @@ class AbstractProjection
      * @param planetAxisMatrix The matrix describing the current rotation of the globe
      * @param x      the x coordinates of the pixels are returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
-     * @param screenPointNum      the amount of times that a single geographical
+     * @param pointRepeatNum      the amount of times that a single geographical
                                   point gets represented on the map
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
-     * @param occulted  whether the point gets hidden on the far side of the earth
+     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted );
+    virtual bool screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint ) = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

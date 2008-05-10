@@ -28,6 +28,6 @@ AbstractProjection::~AbstractProjection()
 bool AbstractProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                          const ViewportParams *viewport, int &x, int &y )
 {
-    bool occulted;
-    return screenCoordinates( geopoint, viewport, x, y, occulted );
+    bool globeHidesPoint;
+    return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }

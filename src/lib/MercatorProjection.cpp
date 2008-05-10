@@ -58,9 +58,9 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
 
 bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y, bool &occulted )
+                                            int &x, int &y, bool &globeHidesPoint )
 {
-    occulted = false;
+    globeHidesPoint = false;
     double  lon;
     double  lat;
     double  rad2Pixel = 2 * viewport->radius() / M_PI;
@@ -94,9 +94,77 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return false;
 }
 
-bool MercatorProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted )
+bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint )
 {
+    // on flat projections the observer's view onto the point won't be 
+    // obscured by the target planet itself
+    globeHidesPoint = false;
 
+    double  lon;
+    double  lat;
+    double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
+
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    geopoint.geoCoordinates( lon, lat );
+
+    if ( fabs( lat ) >=  maxLat() )
+        return false;
+
+    // Let (itX, y) be the first guess for one possible position on screen..
+    int itX = (int)( viewport->width()  / 2.0 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+
+    // Make sure that the requested point is within the visible y range:
+    if ( y >= 0 && y < viewport->height() ) {
+        // First we deal with the case where the repetition doesn't happen
+        if ( m_repeatX == false ) {
+            *x = itX;
+            if ( itX > 0 && itX < viewport->width() ) {
+                return true;
+            }
+            else {
+                // the requested point is out of the visible x range:
+                return false;
+            }
+        }
+        // For the repetition case the same geopoint gets displayed on 
+        // the map many times.across the longitude.
+
+        int xRepeatDistance = 4 * viewport->radius();
+
+        // Finding the leftmost positive x value
+        if ( itX > xRepeatDistance ) {
+            itX %= xRepeatDistance;
+        }
+        if ( itX < 0 ) {
+            itX += xRepeatDistance;
+        }
+        // the requested point is out of the visible x range:
+        if ( itX > viewport->width() ) {
+            return false;
+        }
+
+        // Now iterate through all visible x screen coordinates for the point 
+        // from left to right.
+        int itNum = 0;
+
+        while ( itX < viewport->width() ) {
+            *x = itX;
+            ++x;
+            ++itNum;
+            itX += xRepeatDistance;
+        }
+
+        pointRepeatNum = itNum;
+
+        return true;
+    }
+
+    // the requested point is out of the visible y range:
+    return false;
 }
 
 bool MercatorProjection::geoCoordinates( const int x, const int y,

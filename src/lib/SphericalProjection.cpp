@@ -46,7 +46,7 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
 
 bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                              const ViewportParams *viewport,
-                                             int &x, int &y, bool &occulted )
+                                             int &x, int &y, bool &globeHidesPoint )
 {
     double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
@@ -58,7 +58,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
     if ( geopoint.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
         if ( qpos.v[Q_Z] < 0 ) {
-            occulted = true;
+            globeHidesPoint = true;
             return false;
         }
     }
@@ -72,7 +72,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
              && ( ( earthCenteredX * earthCenteredX
                     + earthCenteredY * earthCenteredY )
                   < radius * radius ) ) {
-            occulted = true;
+            globeHidesPoint = true;
             return false;
         }
     }
@@ -83,17 +83,60 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
     // Skip placemarks that are outside the screen area
     if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
-        occulted = false;
+        globeHidesPoint = false;
         return false;
     }
 
-    occulted = false;
+    globeHidesPoint = false;
     return true;
 }
 
-bool SphericalProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int *y, int& screenPointNum, bool &occulted )
+bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams *viewport, int *x, int &y, int& pointRepeatNum, bool &globeHidesPoint )
 {
+    double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
+    Quaternion  qpos             = geopoint.quaternion();
 
+    qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+
+    double      pixelAltitude = ( ( viewport->radius() ) 
+                                  / EARTH_RADIUS * absoluteAltitude );
+    if ( geopoint.altitude() < 10000 ) {
+        // Skip placemarks at the other side of the earth.
+        if ( qpos.v[Q_Z] < 0 ) {
+            globeHidesPoint = true;
+            return false;
+        }
+    }
+    else {
+        double  earthCenteredX = pixelAltitude * qpos.v[Q_X];
+        double  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
+        double  radius         = viewport->radius();
+
+        // Don't draw high placemarks (e.g. satellites) that aren't visible.
+        if ( qpos.v[Q_Z] < 0
+             && ( ( earthCenteredX * earthCenteredX
+                    + earthCenteredY * earthCenteredY )
+                  < radius * radius ) ) {
+            globeHidesPoint = true;
+            return false;
+        }
+    }
+
+    // Let (x, y) be the position on the screen of the placemark..
+    *x = (int)(viewport->width()  / 2 + pixelAltitude * qpos.v[Q_X]);
+    y = (int)(viewport->height() / 2 - pixelAltitude * qpos.v[Q_Y]);
+
+    // Skip placemarks that are outside the screen area
+    if ( *x < 0 || *x >= viewport->width() || y < 0 || y >= viewport->height() ) {
+        globeHidesPoint = false;
+        return false;
+    }
+
+    // This projection doesn't have any repetitions, 
+    // so the number of screen points referring to the geopoint is one.
+    pointRepeatNum = 1;
+    globeHidesPoint = false;
+    return true;
 }
 
 bool SphericalProjection::geoCoordinates( const int x, const int y,

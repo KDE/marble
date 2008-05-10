@@ -27,16 +27,22 @@ class GeoPainterPrivate
     GeoPainterPrivate( ViewportParams *viewport )
         : m_viewport( viewport )
     {
+        m_x = new int[100];
+    }
+
+    ~GeoPainterPrivate()
+    {
+        delete m_x;
     }
 
 //  TODO: Additionally consider dateline
-//  TODO: Add Interpolation of points in case of occulted points
+//  TODO: Add Interpolation of points in case of globeHidesPoint points
 //  TODO: Implement isGeoProjected = true case using SLERP
 
     void createPolygonsFromPoints ( const GeoDataPoint * points, int pointCount, QVector<QPolygon *> &polygons, bool isGeoProjected = false )
     {
         int x, y;
-        bool previousOcculted;
+        bool previousGlobeHidesPoint;
         AbstractProjection *projection = m_viewport->currentProjection();
 
         if ( isGeoProjected == false ) {
@@ -46,23 +52,23 @@ class GeoPainterPrivate
 
             GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
             while( itPoint < points + pointCount ) {
-                bool occulted;
-                bool visible = projection->screenCoordinates( *itPoint, m_viewport, x, y, occulted );
+                bool globeHidesPoint;
+                bool visible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
                 if ( itPoint == points ){
                     polygon = new QPolygon;
-                    previousOcculted = occulted;
+                    previousGlobeHidesPoint = globeHidesPoint;
                 }
 
-                if ( occulted && !previousOcculted ) {
+                if ( globeHidesPoint && !previousGlobeHidesPoint ) {
                     polygons.append( polygon );
                     polygon = new QPolygon;
                 }
 
-                if ( !occulted ) {
+                if ( !globeHidesPoint ) {
                     polygon->append( QPoint( x, y ) );
                 }
 
-                previousOcculted = occulted;
+                previousGlobeHidesPoint = globeHidesPoint;
                 ++itPoint;
             }
 
@@ -71,8 +77,6 @@ class GeoPainterPrivate
             }
         }
     }
-
-    ViewportParams * m_viewport;
 
     void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
     {
@@ -147,6 +151,10 @@ class GeoPainterPrivate
         rect.setTopLeft( QPointF( left, top ) );
         rect.setBottomRight( QPointF( right, bottom ) );
     }
+
+    ViewportParams * m_viewport;
+
+    int *m_x;
 };
 
 GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams * viewport, bool clip )
@@ -174,100 +182,135 @@ void GeoPainter::autoMapQuality ()
 
 void GeoPainter::drawAnnotation (  const GeoDataPoint & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, x, y );
+    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
     if ( visible ) {
-        QPainterPath path;
-        QRectF rect;
-        d->createAnnotationLayout( x, y, bubbleSize, bubbleOffsetX, bubbleOffsetY,  xRnd, yRnd, path, rect );
-        QPainter::drawPath( path );
-        QPainter::drawText( rect, Qt::TextWordWrap, text, &rect );
+        // Draw all the x-repeat-instances of the point on the screen
+        for( int it = 0; it < pointRepeatNum; ++it ) {
+            QPainterPath path;
+            QRectF rect;
+            d->createAnnotationLayout( d->m_x[it], y, bubbleSize, bubbleOffsetX, bubbleOffsetY,  xRnd, yRnd, path, rect );
+            QPainter::drawPath( path );
+            QPainter::drawText( rect, Qt::TextWordWrap, text, &rect );
+        }
     }
 }
 
 void GeoPainter::drawPoint (  const GeoDataPoint & position )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, x, y );
+    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
     if ( visible ) {
-        QPainter::drawPoint( x, y );
+        // Draw all the x-repeat-instances of the point on the screen
+        for( int it = 0; it < pointRepeatNum; ++it ) {
+            QPainter::drawPoint( d->m_x[it], y );
+        }
     }
 }
 
 void GeoPainter::drawPoints (  const GeoDataPoint * points, int pointCount )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     GeoDataPoint * itPoint = const_cast<GeoDataPoint *>( points );
     while( itPoint < points + pointCount ) {
-        bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, x, y );
-
+        bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    
         if ( visible ) {
-            QPainter::drawPoint( x, y );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawPoint( d->m_x[it], y );
+            }
         }
     }
 }
 
 void GeoPainter::drawText ( const GeoDataPoint & position, const QString & text )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, x, y );
+    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
     if ( visible ) {
-        QPainter::drawText( QPoint( x, y ), text );
+        // Draw all the x-repeat-instances of the point on the screen
+        for( int it = 0; it < pointRepeatNum; ++it ) {
+            QPainter::drawText( d->m_x[it], y, text );
+        }
     }
 }
 
-void GeoPainter::drawText ( const QPoint & position, const QString & text )
-{
-    QPainter::drawText( position, text );
-}
-
-
 void GeoPainter::drawEllipse ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
         if ( visible ) {
-            QPainter::drawEllipse(  x - width / 2, y - height / 2, width, height  );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawEllipse(  d->m_x[it] - width / 2, y - height / 2, width, height  );
+            }
         }
     }
 }
 
 void GeoPainter::drawImage ( const GeoDataPoint & centerPoint, const QImage & image, bool isGeoProjected )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
         if ( visible ) {
-            QPainter::drawImage( x - ( image.width() / 2 ), y - ( image.height() / 2 ), image );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawImage( d->m_x[it] - ( image.width() / 2 ), y - ( image.height() / 2 ), image );
+            }
         }
     }
 }
 
 void GeoPainter::drawPixmap ( const GeoDataPoint & centerPoint, const QPixmap & pixmap, bool isGeoProjected )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
         if ( visible ) {
-            QPainter::drawPixmap( x - ( pixmap.width() / 2 ), y - ( pixmap.height() / 2 ), pixmap );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawPixmap( d->m_x[it] - ( pixmap.width() / 2 ), y - ( pixmap.height() / 2 ), pixmap );
+            }
         }
     }
 }
@@ -320,28 +363,40 @@ void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount, Qt::
 
 void GeoPainter::drawRect ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
         if ( visible ) {
-            QPainter::drawRect( x - ( width / 2 ), y - ( height / 2 ), width, height );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawRect( d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height );
+            }
         }
     }
 }
 
 void GeoPainter::drawRoundRect ( const GeoDataPoint & centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
 {
-    int x, y;
+    int pointRepeatNum;
+    int y;
+    bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, x, y );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+
         if ( visible ) {
-            QPainter::drawRoundRect(  x - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd );
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                QPainter::drawRoundRect( d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height, xRnd, yRnd );
+            }
         }
     }
 }
@@ -387,4 +442,9 @@ void GeoPainter::drawPolygon( const QPolygonF & polygon )
 void GeoPainter::drawRect ( int x, int y, int width, int height )
 {
     QPainter::drawRect( x, y, width, height);
+}
+
+void GeoPainter::drawText ( const QPoint & position, const QString & text )
+{
+    QPainter::drawText( position, text );
 }

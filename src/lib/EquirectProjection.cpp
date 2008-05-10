@@ -50,9 +50,9 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
 
 bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y, bool &occulted )
+                                            int &x, int &y, bool &globeHidesPoint )
 {
-    occulted = false;
+    globeHidesPoint = false;
 
     double  lon;
     double  lat;
@@ -83,11 +83,11 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return false;
 }
 
-bool EquirectProjection::screenCoordinates( GeoDataPoint geopoint, const ViewportParams * viewport, int *x, int &y, int &screenPointNum, bool &occulted )
+bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint )
 {
     // on flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself
-    occulted = false;
+    globeHidesPoint = false;
 
     double  lon;
     double  lat;
@@ -100,10 +100,8 @@ bool EquirectProjection::screenCoordinates( GeoDataPoint geopoint, const Viewpor
     geopoint.geoCoordinates( lon, lat );
 
     // Let (itX, y) be the first guess for one possible position on screen..
-    int itX = (int)(viewport->width()  / 2.0 + rad2Pixel * (lon - centerLon));
-    y = (int)(viewport->height() / 2.0 - rad2Pixel * (lat - centerLat));
-
-    int xRepeatDistance = 4 * viewport->radius();
+    int itX = (int)( viewport->width()  / 2.0 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( viewport->height() / 2.0 - rad2Pixel * ( lat - centerLat ) );
 
     // Make sure that the requested point is within the visible y range:
     if ( y >= 0 && y < viewport->height() ) {
@@ -118,8 +116,10 @@ bool EquirectProjection::screenCoordinates( GeoDataPoint geopoint, const Viewpor
                 return false;
             }
         }
-        // For repetition case the same geopoint gets displayed on 
+        // For the repetition case the same geopoint gets displayed on 
         // the map many times.across the longitude.
+
+        int xRepeatDistance = 4 * viewport->radius();
 
         // Finding the leftmost positive x value
         if ( itX > xRepeatDistance ) {
@@ -144,7 +144,7 @@ bool EquirectProjection::screenCoordinates( GeoDataPoint geopoint, const Viewpor
             itX += xRepeatDistance;
         }
 
-        screenPointNum = itNum;
+        pointRepeatNum = itNum;
 
         return true;
     }

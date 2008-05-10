@@ -1,3 +1,16 @@
+2008-05-10  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MercatorProjection.{cpp,h}:
+    * src/lib/SphericalProjection.{cpp,h}:
+    * src/lib/GeoPainter.cpp:
+    * src/lib/AbstractProjection.{cpp,h}:
+    * src/lib/EquirectProjection.{cpp,h}:
+
+    - Implemented a repetition-aware screenCoordinates method
+      and applied it to GeoPainter -- now we need to do likewise
+      with GeoDataPolygon which will require a few more drastic
+      changes to be efficient.
+
 2008-05-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/AbstractScanlineTextureMapper.cpp
