@@ -1,3 +1,10 @@
+2008-05-11  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/plugins/marble/satellites/SatelliitesPlugin.{h,cpp}: created the files
+
+    - This plugin provides a satellite layer. Which satellites will be 
+      displayed and how the data will be obtained is tbd.
+
 2008-05-10  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/data/GeoDataGeometry.{cpp,h}:
