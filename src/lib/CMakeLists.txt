@@ -244,6 +244,7 @@ else (APPLE AND QTONLY)
 
     global.h
     MarbleDirs.h
+    GeoPainter.h
     TileCreatorDialog.h
     ViewportParams.h
     ViewParams.h
