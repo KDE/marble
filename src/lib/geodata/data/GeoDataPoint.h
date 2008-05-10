@@ -19,7 +19,7 @@
 #include <cmath>
 
 #include "geodata_export.h"
-
+#include "GeoDataGeometry.h"
 #include "Quaternion.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
@@ -29,7 +29,7 @@
 
 const double TWOPI = 2 * M_PI;
 
-class GEODATA_EXPORT GeoDataPoint {
+class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
  public:
     /**
      * @brief enum used constructor to specify the units used

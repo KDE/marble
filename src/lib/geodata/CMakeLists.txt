@@ -10,6 +10,7 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataDocument.cpp
         geodata/data/GeoDataFeature.cpp
         geodata/data/GeoDataFolder.cpp
+        geodata/data/GeoDataGeometry.cpp
         geodata/data/GeoDataHotSpot.cpp
         geodata/data/GeoDataIconStyle.cpp
         geodata/data/GeoDataLabelStyle.cpp

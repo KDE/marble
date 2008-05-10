@@ -1,5 +1,15 @@
 2008-05-10  Torsten Rahn  <rahn@kde.org>
 
+    * src/lib/geodata/data/GeoDataGeometry.{cpp,h}:
+    * src/lib/geodata/data/GeoDataPoint.h:
+    * src/lib/geodata/CMakeLists.txt:
+
+    - Adding KML's abstract geometry class here, so we 
+      can start to work on GeoDataLineString and friends.
+      Making GeoDataPoint inherit accordingly.
+
+2008-05-10  Torsten Rahn  <rahn@kde.org>
+
     * src/lib/MercatorProjection.{cpp,h}:
     * src/lib/SphericalProjection.{cpp,h}:
     * src/lib/GeoPainter.cpp:
