@@ -65,7 +65,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
      * @param _lat latitude
      * @param alt altitude (default: 0)
      * @param _unit units that lon and lat get measured in
-     * (default for Radian: north pole at -pi/2, southpole at pi/2)
+     * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     GeoDataPoint(double _lon, double _lat, double alt = 0,
              GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0);
@@ -88,6 +88,10 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
 
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
+
+    static double normalizeLon( double lon );
+
+    static double normalizeLat( double lat );
 
  private:
     Quaternion  m_q;

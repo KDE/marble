@@ -99,6 +99,12 @@ enum OnStartup {
     LastLocationVisited ///< Show last location visited on quit
 };
 
+enum AltitudeMode {
+    ClampToGround,      ///< Altitude always sticks to ground level
+    RelativeToGround,   ///< Altitude is always given relative to ground level
+    Absolute            ///< Altitude is given relative to the sealevel
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 

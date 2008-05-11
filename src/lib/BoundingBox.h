@@ -15,6 +15,7 @@
 #include <QtCore/QPointF>
 #include <QtCore/QString>
 
+// NOTE: THIS CLASS IS DEPRECATED. Use GeoDataLatLonBox or GeoDataLatLonAltBox instead!
 
 class BoundingBox
 {

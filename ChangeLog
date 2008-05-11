@@ -1,3 +1,16 @@
+2008-05-11  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/global.h:
+    * src/lib/BoundingBox.h:
+    * src/lib/geodata/data/GeoDataLatLonAltBox.{cpp,h}:
+    * src/lib/geodata/data/GeoDataPoint.{cpp,h}:
+    * src/lib/geodata/data/GeoDataGeometry.cpp:
+    * src/lib/geodata/CMakeLists.txt:
+
+    - Adding the new GeoDataLatLonAltBox for later use with 
+      GeoDataLineString ...
+    - Marking the "BoundingBox" deprecated.
+
 2008-05-11  Claudiu Covaci  <claudiu.covaci@gmail.com>
 
     * src/plugins/marble/satellites/SatelliitesPlugin.{h,cpp}: created the files

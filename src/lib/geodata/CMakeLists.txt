@@ -14,6 +14,7 @@ SET( geodata_data_SRCS
         geodata/data/GeoDataHotSpot.cpp
         geodata/data/GeoDataIconStyle.cpp
         geodata/data/GeoDataLabelStyle.cpp
+        geodata/data/GeoDataLatLonAltBox.cpp
         geodata/data/GeoDataObject.cpp
         geodata/data/GeoDataPlacemark.cpp
         geodata/data/GeoDataPoint.cpp

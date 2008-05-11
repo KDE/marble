@@ -23,7 +23,7 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
   : m_altitude( _alt ),
     m_detail( _detail )
 {
-    switch(unit){
+    switch( unit ){
     case Radian:
         m_q = Quaternion( _lon, _lat );
         m_lon = _lon;
@@ -33,6 +33,7 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
         m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
         m_lon = _lon * DEG2RAD;
         m_lat = _lat * DEG2RAD;
+        break;
     }
 }
 
@@ -108,3 +109,43 @@ bool GeoDataPoint::operator==( const GeoDataPoint &test ) const
     return ( lonThis == lonTest 
              && latTest == latThis );
 }
+
+double GeoDataPoint::normalizeLon( double lon )
+{
+    if ( lon > +M_PI ) {
+        int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
+        return lon - ( cycles * 2 * M_PI );
+    } 
+    if ( lon < -M_PI ) {
+        int cycles = (int)( ( lon - M_PI ) / ( 2 * M_PI ) );
+        return lon - ( cycles * 2 * M_PI );
+    } 
+}
+
+double GeoDataPoint::normalizeLat( double lat )
+{
+    if ( lat > ( +M_PI / 2.0 ) ) {
+        int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
+        double temp = lat - ( cycles * 2 * M_PI );
+        if ( temp > ( +M_PI / 2.0 ) ) {
+            return +M_PI - temp;
+        }
+        if ( temp < ( -M_PI / 2.0 ) ) {
+            return -M_PI - temp;
+        }
+    } 
+    if ( lat < ( -M_PI / 2.0 ) ) {
+        int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
+        double temp = lat - ( cycles * 2 * M_PI );
+        if ( temp > ( +M_PI / 2.0 ) ) {
+            return +M_PI - temp;
+        }
+        if ( temp < ( -M_PI / 2.0 ) ) {
+            return -M_PI - temp;
+        }
+    } 
+
+    return lat;
+}
+
+
