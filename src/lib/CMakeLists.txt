@@ -256,7 +256,11 @@ else (APPLE AND QTONLY)
     SunLocator.h
     ClipPainter.h
     geodata/data/GeoDataPoint.h
+    geodata/data/GeoDataGeometry.h
+    geodata/data/GeoDataObject.h
+    geodata/data/Serializable.h
     geodata/geodata_export.h
+    geodata/parser/GeoDocument.h
     ExtDateTime.h
 
     TileCreator.h
