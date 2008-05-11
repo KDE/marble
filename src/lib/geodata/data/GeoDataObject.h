@@ -14,7 +14,7 @@
 
 #include "geodata_export.h"
 
-#include "../parser/GeoDocument.h" // TODO: Add include path!
+#include "GeoDocument.h" 
 #include "Serializable.h"
 
 /**
