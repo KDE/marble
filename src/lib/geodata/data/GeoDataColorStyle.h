@@ -18,6 +18,9 @@
 
 #include "GeoDataObject.h"
 
+#include "geodata_export.h"
+
+class GeoDataColorStylePrivate;
 
 /**
  * @short  an abstract base class for various style classes
@@ -53,7 +56,7 @@
  * @see GeoDataIconStyle
  * @see GeoDataLabelStyle
  */
-class GeoDataColorStyle : public GeoDataObject
+class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 {
   public:
     /**
@@ -88,12 +91,10 @@ class GeoDataColorStyle : public GeoDataObject
 
   protected:
     GeoDataColorStyle();
+    virtual ~GeoDataColorStyle();
 
-  protected:
-    /// stores the current color
-    QColor     m_color;
-    /// stores the current color mode
-    ColorMode  m_colorMode;
+  private:
+    GeoDataColorStylePrivate * const d;
 };
 
 #endif // GEODATACOLORSTYLE_H
