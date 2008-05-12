@@ -34,9 +34,10 @@
 
 
 //Marble
-#include <marble/MarbleMap.h>
-#include <marble/SunLocator.h>
-#include <marble/ClipPainter.h>
+#include "../lib/MarbleMap.h"
+#include "../lib/SunLocator.h"
+#include "../lib/ViewParams.h"
+#include "../lib/GeoPainter.h"
 
 
 
@@ -47,7 +48,6 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     m_sun(0)
 {
     setHasConfigurationInterface(true);
-    setDrawStandardBackground(true);
     //The applet needs a 2:1 ratio
     //so that the map fits properly
     resize(QSize(400, 200));
@@ -141,8 +141,8 @@ void WorldClock::paintInterface(QPainter *p,
     //we avoid an issue where the map is offset
     //from the border of the plasmoid and it looks ugly
     QPixmap pixmap( rect.size() );
-    ClipPainter cp( &pixmap , false );
-    m_map->paint(cp, rect);
+    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
+    m_map->paint(gp, rect);
     p->drawPixmap( 0, 0, pixmap );
 }
 
