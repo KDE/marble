@@ -12,7 +12,7 @@
 
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
-
+#include <QtGui/QRadialGradient>
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
@@ -200,7 +200,23 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     brush.setStyle( Qt::SolidPattern );
     painter->setBrush( brush );
 
-    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n" );
+    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n OSM conference" );
+
+    GeoDataPoint akademy2008(4.5, 51.1, 0.0, GeoDataPoint::Degree );
+
+    painter->setPen( QColor( 99, 99, 0 ) );
+
+    QRadialGradient radialGrad(QPointF(100, 100), 100);
+    radialGrad.setColorAt(0, QColor( 198, 198, 198, 200 ) );
+    radialGrad.setColorAt(0.5, QColor( 199, 198, 99, 200  ) );
+    radialGrad.setColorAt( 1, Qt::white );
+    radialGrad.setSpread( QGradient::ReflectSpread );
+
+    QBrush gradientBrush( radialGrad );
+//    brush.setStyle( Qt::SolidPattern );
+    painter->setBrush( gradientBrush );
+
+    painter->drawAnnotation (  akademy2008, "Akademy 2008,\n  9-15 August 2008,\n KDE conference", QSize(130, 120), 10, 30, 15, 15 );
 
     return true;
 }
