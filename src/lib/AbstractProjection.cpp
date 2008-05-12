@@ -31,3 +31,14 @@ bool AbstractProjection::screenCoordinates( const GeoDataPoint &geopoint,
     bool globeHidesPoint;
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
+
+GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
+{
+    // Quick and dirty default implementation
+
+}
+
+GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
+                                 const ViewportParams *viewport )
+{
+}

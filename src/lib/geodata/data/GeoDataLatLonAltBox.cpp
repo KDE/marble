@@ -213,10 +213,18 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox & box )
     return false;
 }
 
-QString GeoDataLatLonBox::text() const
+QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
 {
-    return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
-            .arg( d->m_north ).arg( d->m_west ).arg( d->m_south ).arg( d->m_east ); 
+    switch( unit ){
+    case GeoDataPoint::Radian:
+        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
+            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
+        break;
+    case GeoDataPoint::Degree:
+        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
+            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
+        break;
+    }
 }
 
 
@@ -307,8 +315,16 @@ bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox & box )
     return false;
 }
 
-QString GeoDataLatLonAltBox::text() const
+QString GeoDataLatLonAltBox::text( GeoDataPoint::Unit unit ) const
 {
-    return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
+    switch( unit ){
+    case GeoDataPoint::Radian:
+        return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
             .arg( d->m_north ).arg( d->m_west ).arg( d->m_maxAltitude ).arg( d->m_south ).arg( d->m_east ).arg( d->m_minAltitude ); 
+        break;
+    case GeoDataPoint::Degree:
+        return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
+            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_maxAltitude ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ).arg( d->m_minAltitude ); 
+        break;
+    }
 }

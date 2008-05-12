@@ -91,7 +91,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     /**
      * @brief Dumps the boundaries of the bounding box for debugging purpose.
      */
-    QString  virtual text() const;
+    QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
 
  private:
     GeoDataLatLonBoxPrivate  * const d;
@@ -146,7 +146,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     /**
      * @brief Dumps the boundaries of the bounding box for debugging purpose.
      */
-    QString  virtual text() const;
+    QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
 
  private:
     GeoDataLatLonAltBoxPrivate  * const d;

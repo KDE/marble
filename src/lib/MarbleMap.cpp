@@ -419,11 +419,6 @@ bool MarbleMap::showFrameRate() const
     return d->m_showFrameRate;
 }
 
-bool  MarbleMap::quickDirty() const
-{
-    return d->m_model->textureMapper()->interlaced();
-}
-
 quint64 MarbleMap::persistentTileCacheLimit() const
 {
     return d->m_persistentTileCacheLimit;

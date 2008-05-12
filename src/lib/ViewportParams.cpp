@@ -11,6 +11,7 @@
 
 #include "ViewportParams.h"
 
+#include <QtCore/QRect>
 
 ViewportParams::ViewportParams( )
 {
@@ -150,6 +151,10 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
 //     qDebug() << "centerLat" << centerLat * RAD2DEG;
 }
 
+GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
+{
+    return m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), m_size ), this );
+}
 
 
 SphericalProjection  ViewportParams::s_sphericalProjection;

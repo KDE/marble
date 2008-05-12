@@ -25,6 +25,8 @@
 #include <QtCore/QSize>
 #include <QtCore/QDebug>
 
+#include "GeoDataLatLonAltBox.h"
+
 #include "Quaternion.h"
 #include "BoundingBox.h"
 #include "global.h"
@@ -50,6 +52,8 @@ class ViewportParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
+    GeoDataLatLonAltBox viewLatLonAltBox() const;
+
     int radius() const;
     void setRadius(int newRadius);
 
@@ -71,6 +75,7 @@ class ViewportParams
     // Other functions
     void centerCoordinates( double &centerLon, double &centerLat ) const;
 
+    // DEPRECATED:
     BoundingBox m_boundingBox;  // What the view currently can see
 
  private:

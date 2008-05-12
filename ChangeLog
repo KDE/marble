@@ -1,3 +1,31 @@
+2008-05-12  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/data/GeoDataLineString.{cpp,h}:
+    * src/lib/geodata/data/GeoDataLinearRing.{cpp,h}:
+    * src/lib/geodata/data/GeoDataLatLonAltBox.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+
+    - Adding GeoDataLinearRing
+    - Adding more GeoDataLineString properties
+
+    * src/lib/ViewportParams.{cpp,h}:
+    * src/lib/AbstractProjection.{cpp,h}:
+
+    - Adding latLonAltBox() to ViewportParams and AbstractProjection
+    - Adding rectOutline() to AbstractProjection
+
+2008-05-11  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/geodata/data/GeoDataLineString.{cpp,h}:
+    * src/lib/geodata/CMakeLists.txt:
+
+    - Adding the new GeoDataLineString which is supposed
+      to replace GeoPolygon at some point.
+
+    * src/lib/MarbleMap.{cpp,h}:
+
+    - Getting rid of a leftover occurance of quickDirty()
+
 2008-05-11  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/global.h:

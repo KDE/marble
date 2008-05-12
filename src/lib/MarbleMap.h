@@ -423,12 +423,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool  showFrameRate() const;
 
     /**
-     * @brief  Return whether quick and dirty rendering is enabled.
-     * @return Quick and dirty rendering
-     */
-    bool  quickDirty() const;
-
-    /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
      * @return the limit of persistent tile cache in kilobytes.
      */
