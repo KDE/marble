@@ -1,3 +1,18 @@
+2008-05-13  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/lib/geodata/data/GeoDataColorStyle.{h,cpp}:
+    * src/lib/geodata/data/GeoDataContainer.{h,cpp}:
+    * src/lib/geodata/data/GeoDataDocument.{h,cpp}:
+    * src/lib/geodata/data/GeoDataFeature.{h,cpp}:
+    * src/lib/geodata/data/GeoDataFolder.h:
+    * src/lib/geodata/data/GeoDataHotSpot.{h,cpp}:
+    * src/lib/geodata/data/GeoDataIconStyle.{h,cpp}:
+    * src/lib/geodata/data/GeoDataLabelStyle.h:
+    * src/lib/geodata/data/GeoDataStyleSelector.h:
+
+    - Change to use the d-pointer technique
+    - Add GEODATA_EXPORT to class declarations
+
 2008-05-12  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/geodata/data/GeoDataLineString.{cpp,h}:

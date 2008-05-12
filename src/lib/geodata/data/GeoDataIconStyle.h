@@ -19,8 +19,11 @@
 #include "GeoDataColorStyle.h"
 #include "GeoDataHotSpot.h"
 
+#include "geodata_export.h"
 
-class GeoDataIconStyle : public GeoDataColorStyle
+class GeoDataIconStylePrivate;
+
+class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 {
   public:
     GeoDataIconStyle();
@@ -44,11 +47,7 @@ class GeoDataIconStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
-    float            m_scale;
-
-    QPixmap          m_icon;    // To save memory we use a pointer
-    GeoDataHotSpot  *m_hotSpot; // default unit is "fraction"
-    mutable QPointF  m_pixelHotSpot;
+    GeoDataIconStylePrivate * const d;
 };
 
 #endif // GEODATAICONSTYLE_H

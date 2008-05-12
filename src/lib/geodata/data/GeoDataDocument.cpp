@@ -26,21 +26,37 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
+class GeoDataDocumentPrivate
+{
+  public:
+    GeoDataDocumentPrivate()
+    {
+    }
+
+    ~GeoDataDocumentPrivate()
+    {
+    }
+
+    QHash<QString, GeoDataStyle*> m_styleHash;
+};
+
 GeoDataDocument::GeoDataDocument()
     : GeoDocument()
     , GeoDataContainer()
+    , d( new GeoDataDocumentPrivate() )
 {
 }
 
 GeoDataDocument::~GeoDataDocument()
 {
+    delete d;
 }
 
 void GeoDataDocument::addStyle(GeoDataStyle* style)
 {
     Q_ASSERT(style);
     qDebug("GeoDataDocument: Add new style");
-    m_styleHash.insert(style->styleId(), style);
+    d->m_styleHash.insert(style->styleId(), style);
 }
 
 const GeoDataStyle* GeoDataDocument::style(const QString& styleId) const
@@ -49,5 +65,5 @@ const GeoDataStyle* GeoDataDocument::style(const QString& styleId) const
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
-    return m_styleHash.value(styleId);
+    return d->m_styleHash.value(styleId);
 }

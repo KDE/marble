@@ -18,6 +18,7 @@
 
 #include "GeoDataObject.h"
 
+#include "geodata_export.h"
 
 /**
  * @short a base class for the style classes
@@ -31,7 +32,7 @@
  * @See GeoDataStyle
  * @See GeoDataStyleMap
  */
-class GeoDataStyleSelector : public GeoDataObject
+class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 {
   public:
     /**

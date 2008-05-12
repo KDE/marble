@@ -33,6 +33,8 @@
 
 class GeoDataStyle;
 
+class GeoDataDocumentPrivate;
+
 /**
  * @short A container for Features, Styles and in the future Schemas.
  *
@@ -63,7 +65,7 @@ public:
     const GeoDataStyle* style(const QString& styleId) const;
 
 private:
-    QHash<QString, GeoDataStyle*> m_styleHash;
+    GeoDataDocumentPrivate * const d;
 };
 
 

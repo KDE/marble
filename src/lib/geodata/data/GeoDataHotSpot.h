@@ -14,8 +14,11 @@
 
 #include <QtCore/QPoint>
 
+#include "geodata_export.h"
 
-class GeoDataHotSpot
+class GeoDataHotSpotPrivate;
+
+class GEODATA_EXPORT GeoDataHotSpot
 {
   public:
     enum Units{Fraction, Pixels, InsetPixels};
@@ -27,9 +30,7 @@ class GeoDataHotSpot
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ), Units xunits = Fraction, Units yunits = Fraction );
 
   private:
-    QPointF m_hotSpot;
-    Units m_xunits;
-    Units m_yunits;
+    GeoDataHotSpotPrivate * const d;
 };
 
 #endif // GEODATAHOTSPOT_H

@@ -11,25 +11,40 @@
 
 #include "GeoDataHotSpot.h"
 
-GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits )
-  : m_hotSpot( hotSpot ),
-    m_xunits( xunits ),
-    m_yunits( yunits )
+class GeoDataHotSpotPrivate
 {
+  public:
+    GeoDataHotSpotPrivate()
+    {
+    }
+
+    ~GeoDataHotSpotPrivate()
+    {
+    }
+
+    QPointF m_hotSpot;
+    GeoDataHotSpot::Units m_xunits;
+    GeoDataHotSpot::Units m_yunits;
+};
+
+GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits ) :
+    d( new GeoDataHotSpotPrivate() )
+{
+    setHotSpot( hotSpot, xunits, yunits );
 }
 
 const QPointF& GeoDataHotSpot::hotSpot( Units &xunits, Units &yunits ) const
 {
-    xunits = m_xunits;
-    yunits = m_yunits;
+    xunits = d->m_xunits;
+    yunits = d->m_yunits;
 
-    return m_hotSpot;
+    return d->m_hotSpot;
 }
 
 
 void GeoDataHotSpot::setHotSpot( const QPointF& hotSpot, Units xunits, Units yunits )
 {
-    m_hotSpot = hotSpot;
-    m_xunits = xunits;
-    m_yunits = yunits;
+    d->m_hotSpot = hotSpot;
+    d->m_xunits = xunits;
+    d->m_yunits = yunits;
 }

@@ -18,6 +18,8 @@
 
 #include "GeoDataColorStyle.h"
 
+#include "geodata_export.h"
+
 
 /**
  * @short specifies how the <b>name</b> of a GeoDataFeature is drawn
@@ -27,7 +29,7 @@
  * (both inherited from GeoDataColorStyle, and scale for the label
  * (name) can be specified.
  */
-class GeoDataLabelStyle : public GeoDataColorStyle
+class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
 {
   public:
     enum Alignment{Corner, Center /*, Left, Right, Below  */};

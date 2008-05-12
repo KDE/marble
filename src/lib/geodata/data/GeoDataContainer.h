@@ -15,9 +15,11 @@
 
 #include <QtCore/QVector>
 
-#include <geodata_export.h>
+#include "geodata_export.h"
 
 #include "GeoDataFeature.h"
+
+class GeoDataContainerPrivate;
 
 class GeoDataFolder;
 
@@ -81,6 +83,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     QVector < GeoDataFeature* >  m_features;
 
  private:
+    GeoDataContainerPrivate * const d;
 #if 0  // FIXME: This doesn't belong here.
     PlaceMarkContainer& sphericalActivePlaceMarkContainer( const ViewParams& viewParams );
     PlaceMarkContainer& rectangularActivePlaceMarkContainer( const ViewParams& viewParams );

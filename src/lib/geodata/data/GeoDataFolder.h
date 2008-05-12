@@ -28,6 +28,8 @@
 
 #include "GeoDataContainer.h"
 
+#include "geodata_export.h"
+
 /**
  * @short A container that is used to arrange other GeoDataFeatures.
  *
@@ -39,7 +41,7 @@
  * @see GeoDataFeature
  * @see GeoDataContainer
  */
-class GeoDataFolder : public GeoDataContainer {
+class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
  public:
     GeoDataFolder();
     ~GeoDataFolder();

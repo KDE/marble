@@ -20,13 +20,27 @@
 #include "GeoDataFolder.h"
 
 
+class GeoDataContainerPrivate
+{
+  public:
+    GeoDataContainerPrivate()
+    {
+    }
+
+    ~GeoDataContainerPrivate()
+    {
+    }
+};
+
 GeoDataContainer::GeoDataContainer()
+    : d( new GeoDataContainerPrivate() )
 {
 }
 
 GeoDataContainer::~GeoDataContainer()
 {
     qDeleteAll(m_features);
+    delete d;
 }
 
 

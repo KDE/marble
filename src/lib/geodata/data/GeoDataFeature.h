@@ -21,9 +21,12 @@
 
 #include "GeoDataObject.h"
 
+#include "geodata_export.h"
+
 class GeoDataStyle;
 class GeoDataStyleSelector;
 
+class GeoDataFeaturePrivate;
 
 /**
  * @short A base class for all geodata features
@@ -38,7 +41,7 @@ class GeoDataStyleSelector;
 
 // FIXME: Later also add NetworkLink and Overlay
 
-class GeoDataFeature : public GeoDataObject
+class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
@@ -228,19 +231,7 @@ class GeoDataFeature : public GeoDataObject
     static void initializeDefaultStyles();
 
  private:
-    QString     m_name;         // Name of the feature. Is shown on screen
-    QString     m_description;  // A longer textual description
-    QString     m_address;      // The address.  Optional
-    QString     m_phoneNumber;  // Phone         Optional
-    qint64      m_popularity;   // Population(!)
-    int         m_popularityIndex; // Index of population
-
-    bool        m_visible;      // True if this feature should be shown.
-
-    QChar       m_role;
-
-    GeoDataStyleSelector* m_style;
-
+    GeoDataFeaturePrivate * const d;
     // Static members
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;

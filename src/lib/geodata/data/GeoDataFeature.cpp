@@ -21,33 +21,54 @@
 #include "GeoDataStyle.h"
 
 bool GeoDataFeature::s_defaultStyleInitialized = false;
-
 GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
+
+class GeoDataFeaturePrivate
+{
+  public:
+    GeoDataFeaturePrivate() :
+        m_popularity( 0 ),
+        m_popularityIndex( 0 ),
+        m_visible( true ),
+        m_role(' '),
+        m_style( 0 )
+    {
+    }
+
+    ~GeoDataFeaturePrivate()
+    {
+    }
+
+    QString     m_name;         // Name of the feature. Is shown on screen
+    QString     m_description;  // A longer textual description
+    QString     m_address;      // The address.  Optional
+    QString     m_phoneNumber;  // Phone         Optional
+    qint64      m_popularity;   // Population(!)
+    int         m_popularityIndex; // Index of population
+
+    bool        m_visible;      // True if this feature should be shown.
+
+    QChar       m_role;
+
+    GeoDataStyleSelector* m_style;
+};
 
 
 GeoDataFeature::GeoDataFeature() :
-    m_visualCategory( Unknown ),
-    m_popularity( 0 ),
-    m_popularityIndex( 0 ),
-    m_visible( true ),
-    m_role(' '),
-    m_style( 0 )
+        m_visualCategory( Unknown ),
+        d( new GeoDataFeaturePrivate() )
 {
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name ) :
-    m_visualCategory( Unknown ),
-    m_name( name ),
-    m_popularity( 0 ),
-    m_popularityIndex( 0 ),
-    m_visible( true ),
-    m_role(' '),
-    m_style( 0 )
+        m_visualCategory( Unknown ),
+        d( new GeoDataFeaturePrivate() )
 {
 }
 
 GeoDataFeature::~GeoDataFeature()
 {
+    delete d;
 }
 
 void GeoDataFeature::initializeDefaultStyles()
@@ -216,52 +237,52 @@ void GeoDataFeature::initializeDefaultStyles()
 
 QString GeoDataFeature::name() const
 {
-    return m_name;
+    return d->m_name;
 }
 
 void GeoDataFeature::setName( const QString &value )
 {
-    m_name = value;
+    d->m_name = value;
 }
 
 QString GeoDataFeature::address() const
 {
-    return m_address;
+    return d->m_address;
 }
 
 void GeoDataFeature::setAddress( const QString &value)
 {
-    m_address = value;
+    d->m_address = value;
 }
 
 QString GeoDataFeature::phoneNumber() const
 {
-    return m_phoneNumber;
+    return d->m_phoneNumber;
 }
 
 void GeoDataFeature::setPhoneNumber( const QString &value)
 {
-    m_phoneNumber = value;
+    d->m_phoneNumber = value;
 }
 
 QString GeoDataFeature::description() const
 {
-    return m_description;
+    return d->m_description;
 }
 
 void GeoDataFeature::setDescription( const QString &value)
 {
-    m_description = value;
+    d->m_description = value;
 }
 
 bool GeoDataFeature::isVisible() const
 {
-    return m_visible;
+    return d->m_visible;
 }
 
 void GeoDataFeature::setVisible( bool value )
 {
-    m_visible = value;
+    d->m_visible = value;
 }
 
 GeoDataStyle* GeoDataFeature::style() const
@@ -275,8 +296,8 @@ GeoDataStyle* GeoDataFeature::style() const
     }
     else
     {
-        if ( m_style != 0 )
-            return static_cast<GeoDataStyle*>(m_style);
+        if ( d->m_style != 0 )
+            return static_cast<GeoDataStyle*>(d->m_style);
         else
         {
             // This should not happen
@@ -289,7 +310,7 @@ GeoDataStyle* GeoDataFeature::style() const
 
 void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
-    m_style = style;
+    d->m_style = style;
 }
 
 const GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
@@ -304,32 +325,32 @@ void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory in
 
 const QChar GeoDataFeature::role() const
 {
-    return m_role;
+    return d->m_role;
 }
 
 void GeoDataFeature::setRole( const QChar &role )
 {
-    m_role = role;
+    d->m_role = role;
 }
 
 const int GeoDataFeature::popularityIndex() const
 {
-    return m_popularityIndex;
+    return d->m_popularityIndex;
 }
 
 void GeoDataFeature::setPopularityIndex( int popularityIndex )
 {
-    m_popularityIndex = popularityIndex;
+    d->m_popularityIndex = popularityIndex;
 }
 
 const qint64 GeoDataFeature::popularity() const
 {
-    return m_popularity;
+    return d->m_popularity;
 }
 
 void GeoDataFeature::setPopularity( qint64 popularity )
 {
-    m_popularity = popularity;
+    d->m_popularity = popularity;
 }
 
 const QSize GeoDataFeature::symbolSize() const
@@ -357,22 +378,22 @@ void GeoDataFeature::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << m_name;
-    stream << m_address;
-    stream << m_phoneNumber;
-    stream << m_description;
-    stream << m_visible;
-    stream << m_role;
+    stream << d->m_name;
+    stream << d->m_address;
+    stream << d->m_phoneNumber;
+    stream << d->m_description;
+    stream << d->m_visible;
+    stream << d->m_role;
 }
 
 void GeoDataFeature::unpack( QDataStream& stream )
 {
     GeoDataObject::unpack( stream );
 
-    stream >> m_name;
-    stream >> m_address;
-    stream >> m_phoneNumber;
-    stream >> m_description;
-    stream >> m_visible;
-    stream >> m_role;
+    stream >> d->m_name;
+    stream >> d->m_address;
+    stream >> d->m_phoneNumber;
+    stream >> d->m_description;
+    stream >> d->m_visible;
+    stream >> d->m_role;
 }
