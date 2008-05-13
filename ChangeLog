@@ -1,5 +1,8 @@
 2008-05-13  Inge Wallin  <inge@lysator.liu.se>
 
+	Remove a FIXME
+	* src/lib/MercatorProjection.cpp (screenCoordinates): Remove a FIXME.
+
 	Fix an old FIXME.
 	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate): Remove
 	m_justModified, since it is never used.

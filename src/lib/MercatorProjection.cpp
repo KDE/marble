@@ -70,10 +70,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     viewport->centerCoordinates( centerLon, centerLat );
 
     geopoint.geoCoordinates( lon, lat );
-    // FIXME: What is this magic number??
-    //        Hmm, it must be the cutoff latitude, outside of which is not
-    //        shown.  Create a const double of #define for this!
-    if ( fabs( lat ) >=  85.05113 * DEG2RAD )
+    if ( fabs( lat ) >=  m_maxLat )
         return false;
 
     // Let (x, y) be the position on the screen of the placemark..
