@@ -17,14 +17,15 @@
 #ifndef WORLDCLOCK_H
 #define WORLDCLOCK_H
 
+
 #include <Plasma/Applet>
 #include <Plasma/DataEngine>
 #include "ui_worldclockConfig.h"
 
+
 class MarbleMap;
 class SunLocator;
 
-// Define our plasma Applet
 class WorldClock : public Plasma::Applet
 {
     Q_OBJECT
@@ -39,13 +40,26 @@ class WorldClock : public Plasma::Applet
         void dataUpdated(const QString &name,
 	                 const Plasma::DataEngine::Data &data);
 	void showConfigurationInterface();
+        void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+        void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+        void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
     protected slots:
         void configAccepted();
     private slots:
         void resizeMap();
     private:
+        void setTz( KTimeZone newtz );
+        void loadLocations();
         void connectToEngine();
+        KTimeZone getZone();
+        bool m_isHovered;
+        QPointF *m_hover;
+        KTimeZones::ZoneMap *m_locations;
+        KTimeZone *m_curtz;
+        QTime *m_time;
+        QString *m_city;
         MarbleMap *m_map;
+        Plasma::DataEngine *m_timeEngine;
 	SunLocator *m_sun;
 	KDialog *m_configDialog;
 	Ui::worldclockConfig ui;

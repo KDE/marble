@@ -26,6 +26,8 @@
 #include <KDebug>
 #include <KDialog>
 #include <KConfigGroup>
+#include <KTimeZone>
+#include <KSystemTimeZones>
 
 
 //Plasma
@@ -55,6 +57,10 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 
 void WorldClock::init()
 {
+    loadLocations();
+    //we'll change the timezone later
+    KTimeZone m_curtz = new KTimeZone( "Local" );
+
     KConfigGroup cg = config();
 
     m_map = new MarbleMap(  );
@@ -102,14 +108,10 @@ WorldClock::~WorldClock()
     delete m_configDialog;
 }
  
-//We want to redraw the map every 10 mins
-//so that the night/day shade is current.
-//10 mins is 1/144th of a rotation.
 void WorldClock::connectToEngine()
 {
-    Plasma::DataEngine* timeEngine = dataEngine("time");
-    //update every 5 mins
-    timeEngine->connectSource("Local", this, 30000, Plasma::AlignToMinute);
+    Plasma::DataEngine *m_timeEngine = dataEngine("time");
+    m_timeEngine->connectSource( m_curtz->name(), this, 6000, Plasma::AlignToMinute);
 }
 
 void WorldClock::resizeMap()
@@ -126,9 +128,42 @@ void WorldClock::resizeMap()
 void WorldClock::dataUpdated(const QString &name, 
                              const Plasma::DataEngine::Data &data)
 {
+    m_time = data["Time"].toTime();
+    m_city = data["Timezone City"].toString();
     m_sun->update();
     m_map->updateSun();
     update();
+}
+
+void WorldClock::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    m_isHovered = false;
+    Applet::hoverLeaveEvent(event);
+    update();
+}
+void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    m_isHovered = true;
+    m_hover = event->pos();
+    setTz( getZone() );
+}
+void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    m_hover = event->pos();
+    setTz( getZone() );
+}
+
+KTimeZone WorldClock::getZone()
+{
+    //TODO: implement. returns the tz 
+    //appropriate for m_hover
+}
+
+void WorldClock::setTz( KTimeZone newtz )
+{
+    m_timeEngine->disconnectSource( m_curtz->name(), this );
+    m_timeEngine->connectSource( newtz->name(), this, 6000, Plasma::AlignToMinute);
+    m_curtz = newtz;
 }
 
 void WorldClock::paintInterface(QPainter *p, 
@@ -144,6 +179,31 @@ void WorldClock::paintInterface(QPainter *p,
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
     m_map->paint(gp, rect);
     p->drawPixmap( 0, 0, pixmap );
+    if ( m_isHovered ) {
+        QString time = m_time->toString( "h:m" );
+
+        /*
+        int width = rect.width() / 4;
+        int height = rect.height() / 2;
+        QPoint centre = rect.center();
+
+        QRect timerect( 0, 0, width, height );
+        timerect.moveCenter( centre );
+        timerect.setHeight( height * 0.7 );
+
+        QRect cityrect( 0, 0, width, height );
+        cityrect.moveCenter( centre );
+        cityrect.setTop( timerect.bottom() );
+        */
+
+        p->setFont( QFont( "Helvetica", 12, QFont::Bold) );
+        p->drawText( 0,0 , rect.width(), rect.height() / 2.2,
+                Qt::AlignHCenter | Qt::AlignBottom, time );
+
+        p->setFont( QFont( "Helvetica", 8, QFont::Bold) );
+        p->drawText( 0,0 , rect.width(), rect.height() / 1.8,
+                Qt::AlignHCenter | Qt::AlignBottom, m_city );
+    }
 }
 
 void WorldClock::showConfigurationInterface()
@@ -195,5 +255,22 @@ void WorldClock::configAccepted()
     cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox->checkState()));
     cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
 }
+
+//This function gets the zones but removes those
+//which do not have a defined lat/lon.
+void WorldClock::loadLocations()
+{
+    //TODO: un-const-ify
+    KTimeZones::ZoneMap *m_locations = KSystemTimeZones::zones();
+    QList<Key> zones = m_locations->keys();
+    for (int i = 0; i < zones.size(); i++ ) {
+        KTimeZone curzone = m_locations->value( zones.at( i ) );
+        if ( curzone.latitude() == KTimeZone::UNKNOWN || 
+             curzone.longitude() == KTimeZone::UNKNOWN ) {
+            m_locations->remove( zones.at(i) );
+        }
+    }
+}
+
 
 #include "worldclock.moc"
