@@ -38,6 +38,8 @@ class EquirectProjection : public AbstractProjection
 
     virtual ~EquirectProjection();
 
+    AbstractProjectionHelper *helper();
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position

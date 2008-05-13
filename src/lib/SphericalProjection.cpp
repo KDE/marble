@@ -13,7 +13,11 @@
 #include "SphericalProjection.h"
 
 // Marble
+#include "SphericalProjectionHelper.h"
 #include "ViewportParams.h"
+
+
+static SphericalProjectionHelper  theHelper;
 
 
 SphericalProjection::SphericalProjection()
@@ -26,6 +30,12 @@ SphericalProjection::SphericalProjection()
 
 SphericalProjection::~SphericalProjection()
 {
+}
+
+
+AbstractProjectionHelper *SphericalProjection::helper()
+{
+    return &theHelper;
 }
 
 

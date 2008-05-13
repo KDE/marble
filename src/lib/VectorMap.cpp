@@ -24,6 +24,7 @@
 #include "GeoPainter.h"
 #include "GeoPolygon.h"
 #include "ViewportParams.h"
+#include "AbstractProjectionHelper.h"
 
 
 // #define VECMAP_DEBUG 
@@ -454,6 +455,7 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
+#if 0
     switch( viewport->projection() ) {
         case Spherical:
             sphericalPaintBase(   painter, viewport, antialiasing );
@@ -465,12 +467,17 @@ void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
             mercatorPaintBase( painter, viewport, antialiasing);
             break;
     }
+#else
+    viewport->currentProjection()->helper()->paintBase( painter, viewport,
+							m_pen, m_brush,
+							antialiasing );
+#endif
 }
 
 void VectorMap::sphericalPaintBase( GeoPainter * painter, 
 				    ViewportParams *viewport, bool antialiasing)
 {
-    int     radius     =  viewport->radius();
+    int     radius     = viewport->radius();
     double  imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );

@@ -13,6 +13,7 @@
 #include "MercatorProjection.h"
 
 // Marble
+#include "MercatorProjectionHelper.h"
 #include "ViewportParams.h"
 
 #ifdef Q_CC_MSVC
@@ -22,6 +23,10 @@ static double msvc_atanh(double x)
 }
 #define atanh msvc_atanh
 #endif
+
+
+static MercatorProjectionHelper  theHelper;
+
 
 MercatorProjection::MercatorProjection()
     : AbstractProjection()
@@ -34,6 +39,12 @@ MercatorProjection::MercatorProjection()
 
 MercatorProjection::~MercatorProjection()
 {
+}
+
+
+AbstractProjectionHelper *MercatorProjection::helper()
+{
+    return &theHelper;
 }
 
 

@@ -26,6 +26,7 @@
 #include "GeoDataPoint.h"
 
 class ViewportParams;
+class AbstractProjectionHelper;
 
 
 typedef enum {
@@ -53,6 +54,8 @@ class AbstractProjection
 
     virtual bool    repeatX() const        { return m_repeatX; }
     virtual void    setRepeatX( bool val ) { m_repeatX = val;  }
+
+    virtual AbstractProjectionHelper *helper() { return 0; }
 
 /*
     TODO: To be considered ...

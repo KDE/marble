@@ -82,6 +82,10 @@ set(marblewidget_SRCS
     SphericalProjection.cpp
     EquirectProjection.cpp
     MercatorProjection.cpp
+    AbstractProjectionHelper.cpp
+    SphericalProjectionHelper.cpp
+    EquirectProjectionHelper.cpp
+    MercatorProjectionHelper.cpp
     MeasureTool.cpp
     VisiblePlaceMark.cpp
     PlaceMarkContainer.cpp
@@ -253,6 +257,10 @@ else (APPLE AND QTONLY)
     SphericalProjection.h
     EquirectProjection.h
     MercatorProjection.h
+    AbstractProjectionHelper.h
+    SphericalProjectionHelper.h
+    EquirectProjectionHelper.h
+    MercatorProjectionHelper.h
     Quaternion.h
     SunLocator.h
     ClipPainter.h

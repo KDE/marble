@@ -13,7 +13,11 @@
 #include "EquirectProjection.h"
 
 // Marble
+#include "EquirectProjectionHelper.h"
 #include "ViewportParams.h"
+
+
+static EquirectProjectionHelper  theHelper;
 
 
 EquirectProjection::EquirectProjection()
@@ -26,6 +30,12 @@ EquirectProjection::EquirectProjection()
 
 EquirectProjection::~EquirectProjection()
 {
+}
+
+
+AbstractProjectionHelper *EquirectProjection::helper()
+{
+    return &theHelper;
 }
 
 

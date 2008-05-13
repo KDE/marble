@@ -14,6 +14,19 @@
 
 2008-05-13  Inge Wallin  <inge@lysator.liu.se>
 
+	New class: ProjectionHelper that will collect code that was
+	previously spread out.
+	* src/lib/AbstractProjectionHelper.{h,cpp}: new file
+	* src/lib/SphericalProjectionHelper.{h,cpp}: new file
+	* src/lib/EquirectProjectionHelper.{h,cpp}: new file
+	* src/lib/MercatorProjectionHelper.{h,cpp}: new file
+	* src/lib/AbstractProjection.{h,cpp} (helper): new function
+	* src/lib/SphericalProjection.{h,cpp} (helper): new function
+	* src/lib/EquirectProjection.{h,cpp} (helper): new function
+	* src/lib/MercatorProjection.{h,cpp} (helper): new function
+	* src/lib/VectorMap.cpp (paintBase): use new mechanism
+	* src/lib/CMakeLists.txt: Include new files
+
 	Actually commit a lot of small changes that I have laying around.
 	* src/lib/VectorMap.cpp,
 	* src/lib/MarbleMap.cpp,
