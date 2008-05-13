@@ -169,6 +169,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
             antialiased = true;
     }
 
+    // Paint the background of it all, i.e. the water.
     m_vectorMap -> setPen( m_oceanPen );
     m_vectorMap -> setBrush( m_oceanBrush );
     m_vectorMap -> paintBase( painter, viewParams->viewport(), antialiased );

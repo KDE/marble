@@ -882,8 +882,9 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     d->m_viewParams.m_radiusUpdated     = d->m_viewParams.radius();
     d->m_justModified                   = false;
 
-    //FIXME: This is really slow. That's why we defer this to PrintQuality
-    // Either cache on a pixmap - or maybe better: Add to GlobeScanlineTextureMapper.
+    // FIXME: This is really slow. That's why we defer this to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
 
     if ( d->m_viewParams.viewport()->mapQuality() == Marble::Print )
         d->drawFog(painter);
@@ -1120,15 +1121,13 @@ void MarbleMap::updateGps()
     bool    draw;
     draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
 #if 0  // FIXME: move to MarbleWidget?
-    if( draw ){
+    if ( draw ) {
         update(temp);
     }
 #endif
 
 #if 0
-    d->m_model->gpsLayer()->updateGps(
-                         size(), radius(),
-                              planetAxis() );
+    d->m_model->gpsLayer()->updateGps( size(), radius(), planetAxis() );
     update();
 #endif
 }

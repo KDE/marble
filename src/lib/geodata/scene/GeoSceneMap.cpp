@@ -86,8 +86,6 @@ QVector<GeoSceneLayer*> GeoSceneMap::layers() const
 
 bool GeoSceneMap::hasTextureLayers() const
 {
-    GeoSceneLayer* layer = 0;
-
     QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
     for (it = m_layers.begin(); it != m_layers.end(); ++it) {
         if ( (*it)->backend() == dgmlValue_texture && (*it)->datasets().count() > 0 )
@@ -99,8 +97,6 @@ bool GeoSceneMap::hasTextureLayers() const
 
 bool GeoSceneMap::hasVectorLayers() const
 {
-    GeoSceneLayer* layer = 0;
-
     QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
     for (it = m_layers.begin(); it != m_layers.end(); ++it) {
         if ( (*it)->backend() == dgmlValue_vector && (*it)->datasets().count() > 0 )

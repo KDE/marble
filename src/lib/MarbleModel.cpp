@@ -269,8 +269,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( texture ) )
-        {
+        if ( !TileLoader::baseTilesAvailable( texture ) ) {
             qDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
@@ -279,13 +278,12 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                                      sourceDir,
                                      installMap,
                                      (role == "dem") ? "true" : "false" );
-            // FIXME
-            // TileCreatorDialog tileCreatorDlg( tileCreator, parent );
-            TileCreatorDialog tileCreatorDlg( tileCreator, 0 );
-                tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
-                                           d->m_mapTheme->head()->description() );
-                tileCreatorDlg.exec();
-                qDebug("Tile creation completed");
+
+            TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
+	    tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
+				       d->m_mapTheme->head()->description() );
+	    tileCreatorDlg.exec();
+	    qDebug("Tile creation completed");
         }
         d->m_tileLoader->setTextureLayer( texture );
     }
@@ -299,7 +297,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     if ( d->m_mapTheme->map()->hasVectorLayers() ) {
         d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
 
-        // Just as with textures this is a workaround for DGML2 to emulate the old behaviour
+        // Just as with textures, this is a workaround for DGML2 to
+        // emulate the old behaviour.
 
         GeoSceneLayer *layer = d->m_mapTheme->map()->layer( "mwdbii" );
         if ( layer ) {
@@ -341,7 +340,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
 void MarbleModel::setupTextureMapper( Projection projection )
 {
-//    FIXME: replace this with an approach based on the factory method pattern
+  // FIXME: replace this with an approach based on the factory method pattern.
 
     delete d->m_texmapper;
 
@@ -358,7 +357,7 @@ void MarbleModel::setupTextureMapper( Projection projection )
     }
 
     connect( d->m_texmapper, SIGNAL( mapChanged() ),
-                this,           SLOT( notifyModelChanged() ) );
+	     this,           SLOT( notifyModelChanged() ) );
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
@@ -387,7 +386,7 @@ void MarbleModelPrivate::resize( int width, int height )
 }
 
 
-void MarbleModel::paintGlobe( GeoPainter* painter,
+void MarbleModel::paintGlobe( GeoPainter *painter,
                               int width, int height,
                               ViewParams *viewParams,
                               bool redrawBackground,

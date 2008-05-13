@@ -1,5 +1,18 @@
 2008-05-13  Inge Wallin  <inge@lysator.liu.se>
 
+	Actually commit a lot of small changes that I have laying around.
+	* src/lib/VectorMap.cpp,
+	* src/lib/MarbleMap.cpp,
+	* src/lib/TileCreator.cpp,
+	* src/lib/AbstractLayer/AbstractLayer.h,
+	* src/lib/ViewParams.h,
+	* src/lib/TileLoader.cpp,
+	* src/lib/MarbleModel.cpp,
+	* src/lib/VectorComposer.cpp,
+	* src/lib/TileCreator.h,
+	* src/lib/geodata/scene/GeoSceneMap.cpp:
+	Follow coding standards, add Copyrights
+
 	Remove a FIXME
 	* src/lib/MercatorProjection.cpp (screenCoordinates): Remove a FIXME.
 

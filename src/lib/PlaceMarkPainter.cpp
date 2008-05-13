@@ -153,7 +153,8 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
     QColor labelColor = style->labelStyle()->color();
 
     // FIXME: To be removed after MapTheme / KML refactoring
-    if ( ( labelColor == Qt::black || labelColor == QColor( "#404040" ) ) && m_defaultLabelColor != Qt::black )
+    if ( ( labelColor == Qt::black || labelColor == QColor( "#404040" ) )
+	 && m_defaultLabelColor != Qt::black )
         labelColor = m_defaultLabelColor;
 
     // Due to some XOrg bug this requires a workaround via

@@ -196,8 +196,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         do {
             m_offset -= 4 * radius;
             boundingPolygon.translate( -4 * radius, 0 );
-//      FIXME: Get rid of this really fugly code once we will have a proper
-//             LatLonBox check implemented and in place.
+	    // FIXME: Get rid of this really fugly code once we have a
+	    //        proper LatLonBox check implemented and in place.
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
@@ -207,8 +207,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
 
-//      FIXME: Get rid of this really fugly code once we will have a proper
-//             LatLonBox check implemented and in place.
+	// FIXME: Get rid of this really fugly code once we will have
+	//        a proper LatLonBox check implemented and in place.
         while ( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		  && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
@@ -393,12 +393,17 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 	    //If the "jump" occurs in the Anctartica's latitudes
 
 	    if ( lat < - M_PI / 3 ) {
-		// FIXME: This should actually need to get investigated in GeoPainter.
-		// For now though we just help GeoPainter to get the clipping right.
-		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 ) lastXAtDateLine = (double)(m_imgwidth) - 1.0;
-		if ( lastXAtDateLine < 0.0 ) lastXAtDateLine = 0.0; 
-		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 ) xAtDateLine = (double)(m_imgwidth) - 1.0;
-		if ( xAtDateLine < 0.0 ) xAtDateLine = 0.0; 
+		// FIXME: This should actually need to get investigated
+		//        in GeoPainter.  For now though we just help
+		//        GeoPainter to get the clipping right.
+		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 )
+		    lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine < 0.0 )
+		    lastXAtDateLine = 0.0; 
+		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 )
+		    xAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( xAtDateLine < 0.0 )
+		    xAtDateLine = 0.0; 
 
 		m_polygon << QPointF( lastXAtDateLine, y ); 
 		m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );

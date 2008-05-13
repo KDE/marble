@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
    Copyright 2007 Montel Laurent <montel@kde.org>
    Copyright 2008 Simon Schmeisser <mail_to_wrt@gmx.de>
+   Copyright (C) 2008 Inge Wallin  <inge@lysator.liu.se.de>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public

@@ -2,6 +2,7 @@
  * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
  * Copyright (C) 2008 Simon Schmeißer <mail_to_wrt@gmx.de>
+ * Copyright (C) 2008 Inge Wallin     <inge@lysator.liu.se.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public

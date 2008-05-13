@@ -98,8 +98,8 @@ class ViewParams
     // Parameters that determine the painting
     // Show/don't show options
 
-//  FIXME: All of these parameters should get stored as a GeoSceneSettings 
-//         property object in the future instead ...
+    // FIXME: All of these parameters should get stored as a GeoSceneSettings 
+    //        property object in the future instead ...
     bool        m_showAtmosphere;
 
     bool        m_showElevationModel;

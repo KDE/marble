@@ -310,11 +310,13 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 {
     bool noerr = true; 
-    const int levelZeroColumns = textureLayer->levelZeroColumns();
-    const int levelZeroRows = textureLayer->levelZeroRows();
+    const int  levelZeroColumns = textureLayer->levelZeroColumns();
+    const int  levelZeroRows    = textureLayer->levelZeroRows();
 
     // Check whether the tiles from the lowest texture level are available
-    // FIXME: marble could theoretically start without local tiles, too. They can be downloaded.
+    //
+    // FIXME: marble could theoretically start without local tiles, too.
+    //        They can be downloaded.
     for ( int column = 0; column < levelZeroColumns; ++column ) {
         for ( int row = 0; row < levelZeroRows; ++row ) {
 
@@ -328,7 +330,8 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
         }
     }
 
-    // qDebug() << "Mandatory most basic tile level is fully available: " << noerr;
+    //qDebug() << "Mandatory most basic tile level is fully available: " 
+    //	     << noerr;
 
     return noerr;
 }

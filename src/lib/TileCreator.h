@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2004-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
 
