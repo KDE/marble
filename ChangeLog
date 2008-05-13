@@ -1,5 +1,9 @@
 2008-05-13  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix include directives (Krazy issue)
+	* src/geoshape/GeoShape.cpp: Remove double include
+	* src/geoshape/GeoToolFactory.cpp: Include own header first
+
 	Introduce d-pointer to a public class
 	* src/lib/TileCreator.{h,cpp}: d-pointerify
 

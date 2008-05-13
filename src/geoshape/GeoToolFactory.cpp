@@ -18,12 +18,17 @@
    Boston, MA 02110-1301, USA.
 */
 
+
+// Own
+#include "GeoToolFactory.h"
+
+// KDE
 #include <klocale.h>
 
+// GeoShape
 #include "GeoShape.h"
 #include "GeoTool.h"
 
-#include "GeoToolFactory.h"
 
 
 GeoToolFactory::GeoToolFactory( QObject* parent)
