@@ -91,8 +91,6 @@ class MarbleWidgetPrivate
     MapQuality      m_stillQuality;
     MapQuality      m_animationQuality;
 
-    bool             m_justModified; // FIXME: Rename to isDirty. Also: should be here or in MarbleMap?
-
     // Some values from m_map, as they were last time we repainted.
     // To store them here will save some repaintings.
     int              m_logZoom;
@@ -172,8 +170,6 @@ void MarbleWidgetPrivate::construct()
     // Set whether the black space gets displayed or the earth gets simply 
     // displayed on the widget background.
     m_parent->setAutoFillBackground( true );
-
-    m_justModified = false;
 
     m_inputhandler = 0;
     m_popupmenu    = new MarbleWidgetPopupMenu( m_parent, m_model );
@@ -648,8 +644,6 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     else {
         setAttribute(Qt::WA_NoSystemBackground, false );
     }
-
-    d->m_justModified = true;
 
     repaint();
 }
