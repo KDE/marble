@@ -29,51 +29,82 @@
 
 using namespace Marble;
 
+
+class TileCreatorPrivate
+{
+ public:
+    TileCreatorPrivate( const QString& sourceDir, const QString& installMap, 
+			const QString& dem, const QString& targetDir=QString() )
+	: m_sourceDir( sourceDir ),
+	  m_installMap( installMap ),
+	  m_dem( dem ),
+	  m_targetDir( targetDir ),
+	  m_cancelled( false )
+    {
+    }
+
+    ~TileCreatorPrivate()
+    {
+    }
+
+ public:
+    QString  m_sourceDir;
+    QString  m_installMap;
+    QString  m_dem;
+    QString  m_targetDir;
+    bool     m_cancelled;
+
+};
+
+
 // FIXME: This shouldn't be defined here, but centrally somewhere
 const uint  tileSize = 675;
 
 
-TileCreator::TileCreator(const QString& sourceDir, const QString& installmap,
+TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
                          const QString& dem, const QString& targetDir) 
     : QThread(0),
-      m_sourceDir(sourceDir),
-      m_installmap(installmap),
-      m_dem(dem),
-      m_targetDir(targetDir),
-      m_cancelled( false )
+      d( new TileCreatorPrivate( sourceDir, installMap, dem, targetDir ) )
 {
     setTerminationEnabled( true );
 }
 
+TileCreator::~TileCreator()
+{
+}
+
 void TileCreator::cancelTileCreation()
 {
-    m_cancelled = true;
+    d->m_cancelled = true;
 }
 
 void TileCreator::run()
 {
-    qDebug() << "Prefix: " << m_sourceDir << "installmap:" << m_installmap;
+    qDebug() << "Prefix: " << d->m_sourceDir 
+	     << "installmap:" << d->m_installMap;
 
     // If the sourceDir starts with a '/' assume an absolute path.
     // Otherwise assume a relative marble data path
-    QString m_sourcePath;
-    if ( QDir::isAbsolutePath(m_sourceDir) ) {
-        m_sourcePath = m_sourceDir + '/' + m_installmap;
-        qDebug() << "Trying absolulte path:" << m_sourcePath;
+    QString  sourcePath;
+    if ( QDir::isAbsolutePath( d->m_sourceDir ) ) {
+        sourcePath = d->m_sourceDir + '/' + d->m_installMap;
+        qDebug() << "Trying absolulte path:" << sourcePath;
     }
     else {
-        m_sourcePath = MarbleDirs::path( "maps/" + m_sourceDir +
-    '/' + m_installmap );
-        qDebug() << "Trying relative path:" << "maps/" + m_sourceDir + '/' + m_installmap;
+        sourcePath = MarbleDirs::path( "maps/" + d->m_sourceDir 
+				       + '/' + d->m_installMap );
+        qDebug() << "Trying relative path:" 
+		 << "maps/" + d->m_sourceDir + '/' + d->m_installMap;
     }
-    if ( m_targetDir.isNull() )
-        m_targetDir = MarbleDirs::localPath() + "/maps/" + m_sourcePath.section( '/', -3, -2 ) + '/';
-    if ( !m_targetDir.endsWith('/') )
-        m_targetDir += '/';
+    if ( d->m_targetDir.isNull() )
+        d->m_targetDir = MarbleDirs::localPath() + "/maps/"
+	    + sourcePath.section( '/', -3, -2 ) + '/';
+    if ( !d->m_targetDir.endsWith('/') )
+        d->m_targetDir += '/';
 
-    qDebug() << "Creating tiles from: " << m_sourcePath;
-    qDebug() << "Installing tiles to: " << m_targetDir;
-    QImageReader testImage( m_sourcePath );
+    qDebug() << "Creating tiles from: " << sourcePath;
+    qDebug() << "Installing tiles to: " << d->m_targetDir;
+    QImageReader testImage( sourcePath );
 
     QVector<QRgb> grayScalePalette;
     for ( int cnt = 0; cnt <= 255; ++cnt ) {
@@ -131,8 +162,8 @@ void TileCreator::run()
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
     }
 
-    if ( QDir( m_targetDir ).exists() == false ) 
-        ( QDir::root() ).mkpath( m_targetDir );
+    if ( QDir( d->m_targetDir ).exists() == false ) 
+        ( QDir::root() ).mkpath( d->m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
     // to prevent compiler warnings this var should
@@ -157,19 +188,19 @@ void TileCreator::run()
     QString  tileName;
 
     // Creating directory structure for the highest level
-    QString  dirName( m_targetDir
+    QString  dirName( d->m_targetDir
                       + QString("%1").arg(maxTileLevel) );
     if ( !QDir( dirName ).exists() ) 
         ( QDir::root() ).mkpath( dirName );
 
     for ( int n = 0; n < nmax; ++n ) {
-        QString dirName( m_targetDir
+        QString dirName( d->m_targetDir
                          + QString("%1/%2").arg(maxTileLevel).arg( n, tileDigits, 10, QChar('0') ) );
         if ( !QDir( dirName ).exists() ) 
             ( QDir::root() ).mkpath( dirName );
     }
 
-    QImage  sourceImage( m_sourcePath );
+    QImage  sourceImage( sourcePath );
 
     for ( int n = 0; n < nmax; ++n ) {
         QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
@@ -194,17 +225,17 @@ void TileCreator::run()
 
         for ( int m = 0; m < mmax; ++m ) {
 
-            if ( m_cancelled == true ) 
+            if ( d->m_cancelled == true ) 
                 return;
 
             QImage  tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
 
-            tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+            tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                        .arg( maxTileLevel )
                                        .arg( n, tileDigits, 10, QChar('0') )
                                        .arg( m, tileDigits, 10, QChar('0') ) );
 
-            if ( m_dem == "true" ) {
+            if ( d->m_dem == "true" ) {
                 tile = tile.convertToFormat(QImage::Format_Indexed8, 
                                             grayScalePalette, 
                                             Qt::ThresholdDither);
@@ -235,7 +266,7 @@ void TileCreator::run()
         int  nmaxit =  TileLoaderHelper::levelToRow( defaultLevelZeroRows, tileLevel );
 
         for ( int n = 0; n < nmaxit; ++n ) {
-            QString  dirName( m_targetDir
+            QString  dirName( d->m_targetDir
                               + ( QString("%1/%2")
                                   .arg(tileLevel)
                                   .arg( n, tileDigits, 10, QChar('0') ) ) );
@@ -247,28 +278,28 @@ void TileCreator::run()
             int   mmaxit = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m ) {
 
-                if ( m_cancelled == true )
+                if ( d->m_cancelled == true )
                     return;
 
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel + 1 )
                                            .arg( 2*n, tileDigits, 10, QChar('0') )
                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
                 QImage  img_topleft( tileName );
 				
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel + 1 )
                                            .arg( 2*n, tileDigits, 10, QChar('0') )
                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
                 QImage  img_topright( tileName );
 
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel + 1 )
                                            .arg( 2*n+1, tileDigits, 10, QChar('0') )
                                            .arg( 2*m, tileDigits, 10, QChar('0') ) );
                 QImage  img_bottomleft( tileName );
 				
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel + 1 )
                                            .arg( 2*n+1, tileDigits, 10, QChar('0') )
                                            .arg( 2*m+1, tileDigits, 10, QChar('0') ) );
@@ -337,7 +368,7 @@ void TileCreator::run()
                     }
                 }
 
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel )
                                            .arg( n, tileDigits, 10, QChar('0') )
                                            .arg( m, tileDigits, 10, QChar('0') ) );
@@ -371,12 +402,12 @@ void TileCreator::run()
             int mmaxit =  TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m) { 
 
-                if ( m_cancelled == true )
+                if ( d->m_cancelled == true )
                     return;
 
                 savedTilesCount++;
 
-                tileName = m_targetDir + ( QString("%1/%2/%2_%3.jpg")
+                tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
                                            .arg( tileLevel )
                                            .arg( n, tileDigits, 10, QChar('0') )
                                            .arg( m, tileDigits, 10, QChar('0') ) );

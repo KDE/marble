@@ -20,13 +20,18 @@
 #include "marble_export.h"
 
 
+class TileCreatorPrivate;
+
+
 class MARBLE_EXPORT TileCreator : public QThread
 {
     Q_OBJECT
 
  public: 
-    TileCreator( const QString& sourceDir, const QString& installmap, 
-                 const QString& dem, const QString& targetDir=QString() );
+    TileCreator( const QString& sourceDir, const QString& installMap, 
+                 const QString& dem,       const QString& targetDir=QString() );
+    virtual ~TileCreator();
+
     void cancelTileCreation();
 
  protected:
@@ -37,11 +42,7 @@ class MARBLE_EXPORT TileCreator : public QThread
 
 
  private:
-    QString  m_sourceDir;
-    QString  m_installmap;
-    QString  m_dem;
-    QString  m_targetDir;
-    bool     m_cancelled;
+    TileCreatorPrivate  * const d;
 };
 
 
