@@ -17,8 +17,14 @@
 #include <QtCore/QString>
 #include <QtCore/Qt>
 
+#include <QtGui/QPen>
 #include <QtGui/QBrush>
 #include <QtGui/QPainterPath>
+
+#include "MarbleLayerInterface.h"
+
+
+class MarbleAbstractFloatItemPrivate;
 
 
 /**
@@ -26,24 +32,30 @@
  *
  */
 
-class MarbleAbstractFloatItem : MarbleLayerInterface
+class MarbleAbstractFloatItem : public MarbleLayerInterface
 {
  public:
-    virtual ~MarbleAbstractFloatItem(){}
+    MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ), 
+                             const QSizeF &size = QSizeF( 150.0, 50.0 ) );
+    virtual ~MarbleAbstractFloatItem();
 
     void    setPosition( const QPointF& position );
     QPointF position() const;
 
-    void    setSize( const QSize& size );
-    virtual QSize   size() const;
+    void    setSize( const QSizeF& size );
+    virtual QSizeF   size() const;
 
     void    setVisible( bool visible );
-    bool    visible const;
+    bool    visible() const;
 
 
     QPen pen() const;
     void setPen( const QPen &pen );
 
+    QBrush background() const;
+    void setBackground( const QBrush &background );
+
+    QRectF contentRect() const;
 
     virtual QPainterPath backgroundShape() const;
 
@@ -59,6 +71,18 @@ class MarbleAbstractFloatItem : MarbleLayerInterface
     double margin() const; 
     void setMargin( double margin );
 
+    double marginTop() const; 
+    void setMarginTop( double marginTop );
+
+    double marginBottom() const; 
+    void setMarginBottom( double marginBottom );
+
+    double marginLeft() const; 
+    void setMarginLeft( double marginLeft );
+
+    double marginRight() const; 
+    void setMarginRight( double marginRight );
+
     double padding () const;
     void setPadding( double width );
 
@@ -66,9 +90,13 @@ class MarbleAbstractFloatItem : MarbleLayerInterface
     bool pixmapCacheEnabled() const;
     void setPixmapCacheEnabled( bool enabled );
 
-    virtual QString renderPolicy() const { return "ALWAYS"; }
+    bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
 
-    virtual QString renderPosition() const { return "ALWAYS_ON_TOP"; }
+    virtual bool renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+
+    virtual QString renderPolicy() const;
+
+    virtual QString renderPosition() const;
 
  private:
     MarbleAbstractFloatItemPrivate  * const d;

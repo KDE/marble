@@ -1,3 +1,17 @@
+2008-05-13  Torsten Rahn  <rahn@kde.org>
+
+    * src/plugins/marble/test/MarbleTestPlugin.cpp:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
+    * src/plugins/marble/overviewmap/CMakeLists.txt:
+    * src/plugins/marble/CMakeLists.txt:
+    * src/lib/MarbleAbstractFloatItem.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/lib/geodata/data/GeoDataColorStyle.cpp:
+
+    - Adding MarbleAbstractFloatItem which is the base for 
+      an info box style class (might get renamed like that).
+    - Started "Overview Map" plugin.
+
 2008-05-13  Inge Wallin  <inge@lysator.liu.se>
 
 	Actually commit a lot of small changes that I have laying around.

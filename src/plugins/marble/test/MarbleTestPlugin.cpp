@@ -213,7 +213,6 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, Ge
     radialGrad.setSpread( QGradient::ReflectSpread );
 
     QBrush gradientBrush( radialGrad );
-//    brush.setStyle( Qt::SolidPattern );
     painter->setBrush( gradientBrush );
 
     painter->drawAnnotation (  akademy2008, "Akademy 2008,\n  9-15 August 2008,\n KDE conference", QSize(130, 120), 10, 30, 15, 15 );

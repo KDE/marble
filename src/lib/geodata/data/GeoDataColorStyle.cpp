@@ -31,7 +31,6 @@ class GeoDataColorStylePrivate
 
 GeoDataColorStyle::GeoDataColorStyle()
       : d( new GeoDataColorStylePrivate() )
-
 {
 }
 

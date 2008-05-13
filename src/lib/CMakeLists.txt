@@ -71,6 +71,7 @@ set(marblewidget_SRCS
     CrossHairFloatItem.cpp
     CompassFloatItem.cpp
     MapScaleFloatItem.cpp
+    MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
     DeferredFlag.cpp
     TileCreatorDialog.cpp
