@@ -62,9 +62,24 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 
 void WorldClock::init()
 {
-    loadLocations();
+    kDebug() << "Loading available locations...";
+    QMap<QString, KTimeZone> m_locations = KSystemTimeZones::zones();
+    QList<QString> zones = m_locations.keys();
+    for (int i = 0; i < zones.size(); i++ ) {
+        KTimeZone curzone = m_locations.value( zones.at( i ) );
+        if ( curzone.latitude() == KTimeZone::UNKNOWN || 
+             curzone.longitude() == KTimeZone::UNKNOWN ) {
+            m_locations.remove( zones.at(i) );
+            kDebug() << "Removed TZ " << zones.at(i);
+        } else {
+            kDebug() << "Kept TZ " << zones.at(i) << " at " << curzone.latitude()
+                     << "," << curzone.longitude();
+        }
+    }
     //we'll change the timezone later
-    KTimeZone *m_curtz = new KTimeZone( "Local" );
+    KTimeZone defaultzone = m_locations.value( "America/Toronto" );
+    
+    KTimeZone *m_curtz = new KTimeZone( defaultzone );
 
     KConfigGroup cg = config();
 
@@ -82,8 +97,7 @@ void WorldClock::init()
     m_map->centerOn( cg.readEntry("rotation", -20), 0 );
     
     //Set how we want the map to look
-    //m_map->setMapTheme( "earth/bluemarble/bluemarble.dgml" );
-    // &c.
+    m_map->setMapThemeId( "earth/bluemarble/bluemarble.dgml" );
     m_map->setShowCompass( false );
     m_map->setShowScaleBar( false );
     m_map->setShowGrid( false );
@@ -106,6 +120,7 @@ void WorldClock::init()
 
     //We need to zoom the map every time we change size
     connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
+    kDebug() << "End of init(), m_locations.isEmpty() =" << m_locations.isEmpty();
 }
  
 WorldClock::~WorldClock()
@@ -160,17 +175,26 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 KTimeZone WorldClock::getZone()
 {
-    qDebug() << "Finding Timezone";
+    kDebug() << "Finding Timezone";
     double lat, lon;
-    m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
+    bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
                                     m_hover.x(), m_hover.y(),
                                     m_map->viewParams()->viewport(),
                                     lon, lat );
     
-    qDebug() << "Mouse is at lat " << lat << " lon " << lon;
+    if( ok ) { 
+        kDebug() << "Mouse is at lat " << lat << " lon " << lon;
+    } else { 
+        kDebug() << "Mouse lat/lon value lookup FAILED";
+        lat = 0;
+        lon = 0;
+    }
     
+    if( m_locations.isEmpty() ) { kDebug() << "m_locations is EMPTY"; }
     QList<QString> zones = m_locations.keys();
-    QString closest;
+    kDebug() << "zones: " << zones;
+    //default in case lookup fails
+    QString closest = "America/Toronto";
     
     double mindist = 10000;
     
@@ -178,25 +202,26 @@ KTimeZone WorldClock::getZone()
         KTimeZone curzone = m_locations.value( zones.at( i ) );
         double tzlon = curzone.longitude();
         double tzlat = curzone.latitude();
-        if ( tzlat == KTimeZone::UNKNOWN || 
-             tzlon == KTimeZone::UNKNOWN ) {
-                continue;
-            }
-        double dist = sqrt( pow( (lat-tzlat), 2) + pow( (lon-tzlon), 2 ) );
+        double londelta, latdelta;
+        latdelta = lat - tzlat;
+        londelta = lon - tzlon;
+        double dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
+        kDebug() << "Distance between mouse and " << zones.at(i)
+                 << "is " << dist;
         if ( dist < mindist ) {
             mindist = dist;
             closest = zones.at( i );
         }
     }
-    qDebug() << "Found " << m_locations.value( closest ).name();
+    kDebug() << "Found " << m_locations.value( closest ).name();
     return m_locations.value( closest );
 }
 
 void WorldClock::setTz( KTimeZone newtz )
 {
-    qDebug() << "Disconnecting Source: " << m_curtz->name();
+    kDebug() << "Disconnecting Source: " << m_curtz->name();
     m_timeEngine->disconnectSource( m_curtz->name(), this );
-    qDebug() << "Connecting Source: " << newtz.name();
+    kDebug() << "Connecting Source: " << newtz.name();
     m_timeEngine->connectSource( newtz.name(), this, 6000, Plasma::AlignToMinute);
     m_curtz = &newtz;
 }
@@ -210,10 +235,9 @@ void WorldClock::paintInterface(QPainter *p,
     //By creating a pixmap and then painting that
     //we avoid an issue where the map is offset
     //from the border of the plasmoid and it looks ugly
-    QPixmap pixmap( rect.size() );
+    QPixmap pixmap( rect.size() ); 
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
     m_map->paint(gp, rect);
-    p->drawPixmap( 0, 0, pixmap );
     if ( m_isHovered ) {
         QString time = m_time.toString( "h:m" );
 
@@ -290,26 +314,5 @@ void WorldClock::configAccepted()
     cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox->checkState()));
     cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
 }
-
-//This function gets the zones but removes those
-//which do not have a defined lat/lon.
-void WorldClock::loadLocations()
-{
-    qDebug() << "Loading available locations...";
-    QMap<QString, KTimeZone> m_locations = KSystemTimeZones::zones();
-    QList<QString> zones = m_locations.keys();
-    for (int i = 0; i < zones.size(); i++ ) {
-        KTimeZone curzone = m_locations.value( zones.at( i ) );
-        if ( curzone.latitude() == KTimeZone::UNKNOWN || 
-             curzone.longitude() == KTimeZone::UNKNOWN ) {
-            m_locations.remove( zones.at(i) );
-            qDebug() << "Removed TZ " << zones.at(i);
-        } else {
-            qDebug() << "Kept TZ " << zones.at(i) << " at " << curzone.latitude()
-                     << "," << curzone.longitude();
-        }
-    }
-}
-
 
 #include "worldclock.moc"

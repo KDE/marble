@@ -56,7 +56,6 @@ class WorldClock : public Plasma::Applet
         void resizeMap();
     private:
         void setTz( KTimeZone newtz );
-        void loadLocations();
         void connectToEngine();
         KTimeZone getZone();
         bool m_isHovered;
