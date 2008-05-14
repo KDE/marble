@@ -1,5 +1,11 @@
 2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.h
+
+    Make constructor explicit.
+
+2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarbleAbstractFloatItem.h
     * src/lib/ViewportParams.h
 
