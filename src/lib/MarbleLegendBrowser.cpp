@@ -25,6 +25,7 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
+#include "GeoSceneIcon.h"
 #include "GeoSceneItem.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneSettings.h"

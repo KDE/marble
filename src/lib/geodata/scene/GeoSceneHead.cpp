@@ -19,7 +19,12 @@
     Boston, MA 02110-1301, USA.
 */
 
+// Own
 #include "GeoSceneHead.h"
+
+// Marble
+#include "GeoSceneIcon.h"
+#include "GeoSceneZoom.h"
 
 GeoSceneHead::GeoSceneHead()
     : m_zoom(new GeoSceneZoom),

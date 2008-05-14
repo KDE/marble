@@ -31,9 +31,11 @@
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneIcon.h"
 #include "GeoSceneParser.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneSettings.h"
+#include "GeoSceneZoom.h"
 
 void dumpGeoDataDocument(GeoDataDocument*);
 void dumpGeoSceneDocument(GeoSceneDocument*);

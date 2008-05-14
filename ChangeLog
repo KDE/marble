@@ -1,3 +1,16 @@
+2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MarbleLegendBrowser.cpp
+    * src/lib/MapThemeManager.cpp
+    * src/lib/MarbleMap.cpp
+    * src/lib/geodata/handlers/dgml/DgmlIconTagHandler.cpp
+    * src/lib/geodata/GeoDataTest.cpp
+    * src/lib/geodata/scene/GeoSceneHead.cpp
+    * src/lib/geodata/scene/GeoSceneHead.h
+    * src/lib/geodata/scene/GeoSceneLayer.h
+
+    Fix includes.
+
 2008-05-14  Claudiu Covaci  <claudiu.covaci@gmail.com>
 
     * src/lib/geodata/data/GeoDataFeature.cpp: a fix in constructor:

@@ -27,8 +27,9 @@
 #include <geodata_export.h>
 
 #include "GeoDocument.h"
-#include "GeoSceneIcon.h"
-#include "GeoSceneZoom.h"
+
+class GeoSceneIcon;
+class GeoSceneZoom;
 
 /**
  * @short General properties and identifiers of a GeoScene document.

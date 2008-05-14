@@ -22,10 +22,10 @@
 #ifndef GEOSCENELAYER_H
 #define GEOSCENELAYER_H
 
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include "GeoDocument.h"
-#include "GeoSceneItem.h"
 
 
 /**

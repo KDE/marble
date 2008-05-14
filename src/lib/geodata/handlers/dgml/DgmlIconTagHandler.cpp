@@ -19,14 +19,18 @@
     Boston, MA 02110-1301, USA.
 */
 
+// Own
 #include "DgmlIconTagHandler.h"
 
+// Qt
 #include <QtGui/QColor>
 
+// Marble
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneHead.h"
+#include "GeoSceneIcon.h"
 #include "GeoSceneItem.h"
 
 using namespace GeoSceneElementDictionary;
