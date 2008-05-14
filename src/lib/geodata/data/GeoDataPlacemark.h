@@ -19,6 +19,10 @@
 #include "GeoDataPoint.h"
 #include "GeoDataFeature.h"
 
+#include "geodata_export.h"
+
+class GeoDataPlacemarkPrivate;
+
 /**
  * @short a class representing a point of interest on the map
  *
@@ -31,7 +35,7 @@
  * not provided in a KML file.
  */
 
-class GeoDataPlacemark: public GeoDataFeature
+class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 {
  public:
     /**
@@ -43,6 +47,11 @@ class GeoDataPlacemark: public GeoDataFeature
      * Create a new placemark with the given @p name.
      */
     GeoDataPlacemark( const QString &name );
+
+    /**
+    * Delete the placemark
+    */
+    ~GeoDataPlacemark();
 
     /**
      * Return the coordinate of the placemark as a GeoDataPoint
@@ -101,11 +110,7 @@ class GeoDataPlacemark: public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
  private:
-    // Data for a Placemark in addition to those in GeoDataFeature.
-    GeoDataPoint  m_coordinate;     // The geographic position
-    QString   m_countrycode;    // Country code.
-    double    m_area;           // Area in square kilometer
-    qint64    m_population;     // population in number of inhabitants
+    GeoDataPlacemarkPrivate * const d;
 };
 
 #endif // GEODATAPLACEMARK_H

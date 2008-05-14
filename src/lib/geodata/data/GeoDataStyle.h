@@ -24,6 +24,9 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 
+#include "geodata_export.h"
+
+class GeoDataStylePrivate;
 
 /**
  * @short an addressable style group
@@ -38,7 +41,7 @@
  * @see GeoDataIconStyle
  * @see GeoDataLabelStyle
  */
-class GeoDataStyle : public GeoDataStyleSelector
+class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
   public:
     /// Construct a default style
@@ -70,12 +73,7 @@ class GeoDataStyle : public GeoDataStyleSelector
     virtual void unpack( QDataStream& stream );
 
   private:
-    GeoDataIconStyle   *m_iconStyle;
-    GeoDataLabelStyle  *m_labelStyle;
-    // LineStyle
-    // PolyStyle
-    // BalloonStyle
-    // ListStyle
+    GeoDataStylePrivate * const d;
 };
 
 Q_DECLARE_METATYPE( GeoDataStyle* )

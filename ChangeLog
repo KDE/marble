@@ -1,3 +1,16 @@
+2008-05-14  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/lib/geodata/data/GeoDataFeature.cpp: a fix in constructor:
+    d->m_name had not been set
+
+    * src/lib/geodata/data/GeoDataObject.{h,cpp}:
+    * src/lib/geodata/data/GeoDataPlacemark.{h,cpp}:
+    * src/lib/geodata/data/GeoDataPoint.{h,cpp}:
+    * src/lib/geodata/data/GeoDataStyle.{h,cpp}:
+
+    - Change to use the d-pointer technique (second part)
+    - Add GEODATA_EXPORT to class declarations
+
 2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/plugins/marble/overviewmap/MarbleOverviewMap.h

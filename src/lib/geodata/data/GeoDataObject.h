@@ -17,6 +17,8 @@
 #include "GeoDocument.h" 
 #include "Serializable.h"
 
+class GeoDataObjectPrivate;
+
 /**
  * @short A base class for all geodata objects
  *
@@ -71,8 +73,7 @@ public:
     GeoDataObject();
 
  private:
-    int  m_id;
-    int  m_targetId;
+    GeoDataObjectPrivate * const d;
 };
 
 #endif // GEODATAOBJECT_H

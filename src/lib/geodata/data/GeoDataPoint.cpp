@@ -18,28 +18,66 @@
 #include <QtCore/QCoreApplication>
 #include "global.h"
 
+class GeoDataPointPrivate
+{
+  public:
+    GeoDataPointPrivate()
+        : m_lon( 0 ),
+          m_lat( 0 ),
+          m_altitude( 0 ),
+          m_detail( 0 )
+    {
+    }
+
+    ~GeoDataPointPrivate()
+    {
+    }
+
+    Quaternion  m_q;
+    double      m_lon;
+    double      m_lat;
+    double      m_altitude;     // in meters above sea level
+    int         m_detail;
+};
+
 
 GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint::Unit unit, int _detail )
-  : m_altitude( _alt ),
-    m_detail( _detail )
+  : d( new GeoDataPointPrivate() )
 {
+    d->m_altitude = _alt;
+    d->m_detail = _detail;
     switch( unit ){
     case Radian:
-        m_q = Quaternion( _lon, _lat );
-        m_lon = _lon;
-        m_lat = _lat;
+        d->m_q = Quaternion( _lon, _lat );
+        d->m_lon = _lon;
+        d->m_lat = _lat;
         break;
     case Degree:
-        m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
-        m_lon = _lon * DEG2RAD;
-        m_lat = _lat * DEG2RAD;
+        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        d->m_lon = _lon * DEG2RAD;
+        d->m_lat = _lat * DEG2RAD;
         break;
     }
 }
 
+GeoDataPoint::GeoDataPoint(const GeoDataPoint& other)
+  : d(new GeoDataPointPrivate(*other.d))
+{
+}
+
+GeoDataPoint::GeoDataPoint()
+  : d( new GeoDataPointPrivate() )
+{
+}
+
+GeoDataPoint::~GeoDataPoint()
+{
+    delete d;
+}
+
 void GeoDataPoint::setAltitude( const double altitude )
 {
-    m_altitude = altitude;
+    d->m_altitude = altitude;
 }
 
 void GeoDataPoint::geoCoordinates( double& lon, double& lat, 
@@ -48,24 +86,24 @@ void GeoDataPoint::geoCoordinates( double& lon, double& lat,
     switch ( unit ) 
     {
     case Radian:
-            lon = m_lon;
-            lat = m_lat;
+            lon = d->m_lon;
+            lat = d->m_lat;
         break;
     case Degree:
-            lon = m_lon * RAD2DEG;
-            lat = m_lat * RAD2DEG;
+            lon = d->m_lon * RAD2DEG;
+            lat = d->m_lat * RAD2DEG;
         break;
     }
 }
 
 QString GeoDataPoint::toString( GeoDataPoint::Notation notation )
 {
-    QString nsstring = ( m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
-    QString westring = ( m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
+    QString nsstring = ( d->m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
+    QString westring = ( d->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
 
     double lat, lon;
-    lon = fabs( m_lon * RAD2DEG );
-    lat = fabs( m_lat * RAD2DEG );
+    lon = fabs( d->m_lon * RAD2DEG );
+    lat = fabs( d->m_lat * RAD2DEG );
 
     if ( notation == GeoDataPoint::DMS )
     {
@@ -149,3 +187,25 @@ double GeoDataPoint::normalizeLat( double lat )
 }
 
 
+double GeoDataPoint::altitude() const
+{
+    return d->m_altitude;
+}
+
+int GeoDataPoint::detail() const
+{
+    return d->m_detail;
+}
+
+const Quaternion& GeoDataPoint::quaternion() const
+{
+    return d->m_q;
+}
+
+GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
+{
+    if ( this == &other )
+        return *this;
+    *d = *other.d;
+    return *this;
+}

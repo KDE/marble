@@ -29,6 +29,8 @@
 
 const double TWOPI = 2 * M_PI;
 
+class GeoDataPointPrivate;
+
 class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
  public:
     /**
@@ -57,7 +59,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
         DMS
     };
 
-    GeoDataPoint(){}
+    GeoDataPoint(const GeoDataPoint& other);
+    GeoDataPoint();
 
     /**
      * @brief create a geopoint from longitude and latitude
@@ -70,21 +73,22 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
     GeoDataPoint(double _lon, double _lat, double alt = 0,
              GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0);
 
-    ~GeoDataPoint(){}
+    ~GeoDataPoint();
 
-    double altitude() const { return m_altitude; }
+    double altitude() const;
     void   setAltitude( const double altitude );
 
-    int    detail()   const { return m_detail; }
+    int    detail()   const;
 
     void geoCoordinates( double& lon, double& lat, 
                          GeoDataPoint::Unit unit = GeoDataPoint::Radian )
                                                                 const;
- 
-    const Quaternion &quaternion() const { return m_q; }
-    
+
+    const Quaternion &quaternion() const;
+
     QString toString( GeoDataPoint::Notation notation = GeoDataPoint::DMS );
     bool operator==(const GeoDataPoint&) const;
+    GeoDataPoint& operator=(const GeoDataPoint &other);
 
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
@@ -94,11 +98,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
     static double normalizeLat( double lat );
 
  private:
-    Quaternion  m_q;
-    double      m_lon;
-    double      m_lat;
-    double      m_altitude;     // in meters above sea level
-    int         m_detail;
+    GeoDataPointPrivate * const d;
 };
 
 Q_DECLARE_METATYPE( GeoDataPoint )

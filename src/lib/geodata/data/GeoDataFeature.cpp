@@ -64,6 +64,7 @@ GeoDataFeature::GeoDataFeature( const QString& name ) :
         m_visualCategory( Unknown ),
         d( new GeoDataFeaturePrivate() )
 {
+    d->m_name = name;
 }
 
 GeoDataFeature::~GeoDataFeature()
