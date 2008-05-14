@@ -37,7 +37,7 @@ int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
             .arg( level );
         return 0;
     }
-    return levelZeroRows * (int)std::pow( 2.0, (double)( level ) );
+    return levelZeroRows * ( 1 << level );
 }
 
 int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
@@ -47,7 +47,7 @@ int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
             .arg( level );
         return 0;
     }
-    return levelZeroColumns * (int)std::pow( 2.0, (double)( level ) );
+    return levelZeroColumns * ( 1 << level );
 }
 
 int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )
