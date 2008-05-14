@@ -19,15 +19,15 @@
 
 
 #include <QtCore/QObject>
-#include <QtGui/QPainter>
 
+class QPainter;
 
 class CrossHairFloatItem : public QObject
 {
     Q_OBJECT
 
  public:
-    CrossHairFloatItem(QObject *parent = 0);
+    explicit CrossHairFloatItem(QObject *parent = 0);
 
     void paint( QPainter*, int, int );
 

@@ -1,5 +1,13 @@
 2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/CrossHairFloatItem.h
+    * src/lib/CrossHairFloatItem.cpp
+
+    - Fix includes.
+    - Make constructor explicit.
+
+2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/TileLoaderHelper.cpp
 
     Replace call to pow with shift expression.

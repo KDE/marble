@@ -13,6 +13,7 @@
 #include "CrossHairFloatItem.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QPainter>
 
 
 CrossHairFloatItem::CrossHairFloatItem(QObject* parent)
