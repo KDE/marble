@@ -13,14 +13,19 @@
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
+#include <QtSvg/QSvgRenderer>
+
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
+#include "ViewportParams.h"
 
 
 MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size )
 {
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/worldmap.svg" ),
+                                 this );
 }
 
 QStringList MarbleOverviewMap::backendTypes() const
@@ -61,6 +66,11 @@ bool MarbleOverviewMap::isInitialized () const
 bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
+
+    painter->setViewport( contentRect().toRect() );
+    m_svgobj->render( painter ); 
+    painter->setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
+
 /*
     GeoDataPoint northpole1( 0.0, -90.0, 0.0, GeoDataPoint::Degree );
     GeoDataPoint northpole2( 0.0, -90.0, 3000000.0, GeoDataPoint::Degree );

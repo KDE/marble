@@ -1,3 +1,30 @@
+2008-05-14  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleAbstractFloatItem.cpp:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
+    * data/svg/worldmap.svg:
+    * data/CMakeLists.txt:
+
+    - Adding worldmap.svg in equirectangular projection by Torsten Rahn
+    - Adding worldmap.svg to the Overviewmap
+      TODO: 1.) Create a pixmap cache to improve performance again
+            2.) Draw boundingbox and boundingpolygon on top
+            3.) Deal generally with the viewport in floatitems
+
+2008-05-13  Torsten Rahn  <rahn@kde.org>
+
+    * src/plugins/marble/test/MarbleTestPlugin.cpp:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
+    * src/plugins/marble/overviewmap/CMakeLists.txt:
+    * src/plugins/marble/CMakeLists.txt:
+    * src/lib/MarbleAbstractFloatItem.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/lib/geodata/data/GeoDataColorStyle.cpp:
+
+    - Adding MarbleAbstractFloatItem which is the base for 
+      an info box style class (might get renamed like that).
+    - Started "Overview Map" plugin.
+
 2008-05-13  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/marble/test/MarbleTestPlugin.cpp:

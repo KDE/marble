@@ -19,6 +19,8 @@
 
 #include "MarbleAbstractFloatItem.h"
 
+class QSvgRenderer;
+
 /**
  * @short The class that creates an overview map.
  *
@@ -31,7 +33,7 @@ class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
 
  public:
     MarbleOverviewMap( const QPointF &point = QPointF( 10.0, 10.0 ), 
-                       const QSizeF &size = QSizeF( 150.0, 50.0 ) );
+                       const QSizeF &size = QSizeF( 166.0, 86.0 ) );
 
     QStringList backendTypes() const;
 
@@ -49,6 +51,9 @@ class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
     bool isInitialized () const;
 
     bool renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+
+ private:
+    QSvgRenderer  *m_svgobj;
 };
 
 #endif

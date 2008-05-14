@@ -29,6 +29,7 @@ svg/marble-logo-72dpi.png
 svg/application-x-marble.svg
 svg/application-x-marble.png
 svg/application-x-marble-gray.png
+svg/worldmap.svg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
 FILE (GLOB SVG_FILES flags/*.svg)

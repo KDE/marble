@@ -79,7 +79,7 @@ double       MarbleAbstractFloatItemPrivate::s_marginTop = 0;
 double       MarbleAbstractFloatItemPrivate::s_marginBottom = 0;
 double       MarbleAbstractFloatItemPrivate::s_marginLeft = 0;
 double       MarbleAbstractFloatItemPrivate::s_marginRight = 0;
-double       MarbleAbstractFloatItemPrivate::s_padding = 3;
+double       MarbleAbstractFloatItemPrivate::s_padding = 4;
 bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = false;
 
 MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point, 
