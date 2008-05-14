@@ -7,6 +7,12 @@ find_package(Plasma REQUIRED)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(
+   ${CMAKE_CURRENT_SOURCE_DIR}
+   ${CMAKE_CURRENT_SOURCE_DIR}/../lib
+   ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata
+   ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata/data
+   ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata/parser
+   ${CMAKE_CURRENT_SOURCE_DIR}/../lib/geodata/scene
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
    ${KDE4_INCLUDES}

@@ -26,6 +26,13 @@
 class MarbleMap;
 class SunLocator;
 
+class QGraphicsSceneHoverEvent;
+class QStyleOptionGraphicsItem;
+class QRect;
+class QString;
+
+class KTimeZone;
+
 class WorldClock : public Plasma::Applet
 {
     Q_OBJECT
@@ -53,11 +60,11 @@ class WorldClock : public Plasma::Applet
         void connectToEngine();
         KTimeZone getZone();
         bool m_isHovered;
-        QPointF *m_hover;
-        KTimeZones::ZoneMap *m_locations;
+        QPointF m_hover;
+        QMap<QString, KTimeZone> m_locations;
         KTimeZone *m_curtz;
-        QTime *m_time;
-        QString *m_city;
+        QTime m_time;
+        QString m_city;
         MarbleMap *m_map;
         Plasma::DataEngine *m_timeEngine;
 	SunLocator *m_sun;

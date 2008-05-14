@@ -19,7 +19,12 @@
 
 
 //Qt
-#include <QtGui/QPainter>
+#include <QPainter>
+#include <QGraphicsSceneHoverEvent>
+#include <QList>
+#include <QSize>
+#include <QRect>
+
 
 
 //KDE
@@ -27,7 +32,7 @@
 #include <KDialog>
 #include <KConfigGroup>
 #include <KTimeZone>
-#include <KSystemTimeZones>
+#include <KSystemTimeZone>
 
 
 //Plasma
@@ -36,10 +41,10 @@
 
 
 //Marble
-#include "../lib/MarbleMap.h"
-#include "../lib/SunLocator.h"
-#include "../lib/ViewParams.h"
-#include "../lib/GeoPainter.h"
+#include "MarbleMap.h"
+#include "SunLocator.h"
+#include "ViewParams.h"
+#include "GeoPainter.h"
 
 
 
@@ -59,7 +64,7 @@ void WorldClock::init()
 {
     loadLocations();
     //we'll change the timezone later
-    KTimeZone m_curtz = new KTimeZone( "Local" );
+    KTimeZone *m_curtz = new KTimeZone( "Local" );
 
     KConfigGroup cg = config();
 
@@ -77,7 +82,7 @@ void WorldClock::init()
     m_map->centerOn( cg.readEntry("rotation", -20), 0 );
     
     //Set how we want the map to look
-    m_map->setMapTheme( "earth/bluemarble/bluemarble.dgml" );
+    //m_map->setMapTheme( "earth/bluemarble/bluemarble.dgml" );
     // &c.
     m_map->setShowCompass( false );
     m_map->setShowScaleBar( false );
@@ -155,15 +160,45 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 KTimeZone WorldClock::getZone()
 {
-    //TODO: implement. returns the tz 
-    //appropriate for m_hover
+    qDebug() << "Finding Timezone";
+    double lat, lon;
+    m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
+                                    m_hover.x(), m_hover.y(),
+                                    m_map->viewParams()->viewport(),
+                                    lon, lat );
+    
+    qDebug() << "Mouse is at lat " << lat << " lon " << lon;
+    
+    QList<QString> zones = m_locations.keys();
+    QString closest;
+    
+    double mindist = 10000;
+    
+    for (int i = 0; i < zones.size(); i++ ) {
+        KTimeZone curzone = m_locations.value( zones.at( i ) );
+        double tzlon = curzone.longitude();
+        double tzlat = curzone.latitude();
+        if ( tzlat == KTimeZone::UNKNOWN || 
+             tzlon == KTimeZone::UNKNOWN ) {
+                continue;
+            }
+        double dist = sqrt( pow( (lat-tzlat), 2) + pow( (lon-tzlon), 2 ) );
+        if ( dist < mindist ) {
+            mindist = dist;
+            closest = zones.at( i );
+        }
+    }
+    qDebug() << "Found " << m_locations.value( closest ).name();
+    return m_locations.value( closest );
 }
 
 void WorldClock::setTz( KTimeZone newtz )
 {
+    qDebug() << "Disconnecting Source: " << m_curtz->name();
     m_timeEngine->disconnectSource( m_curtz->name(), this );
-    m_timeEngine->connectSource( newtz->name(), this, 6000, Plasma::AlignToMinute);
-    m_curtz = newtz;
+    qDebug() << "Connecting Source: " << newtz.name();
+    m_timeEngine->connectSource( newtz.name(), this, 6000, Plasma::AlignToMinute);
+    m_curtz = &newtz;
 }
 
 void WorldClock::paintInterface(QPainter *p, 
@@ -180,7 +215,7 @@ void WorldClock::paintInterface(QPainter *p,
     m_map->paint(gp, rect);
     p->drawPixmap( 0, 0, pixmap );
     if ( m_isHovered ) {
-        QString time = m_time->toString( "h:m" );
+        QString time = m_time.toString( "h:m" );
 
         /*
         int width = rect.width() / 4;
@@ -260,14 +295,18 @@ void WorldClock::configAccepted()
 //which do not have a defined lat/lon.
 void WorldClock::loadLocations()
 {
-    //TODO: un-const-ify
-    KTimeZones::ZoneMap *m_locations = KSystemTimeZones::zones();
-    QList<Key> zones = m_locations->keys();
+    qDebug() << "Loading available locations...";
+    QMap<QString, KTimeZone> m_locations = KSystemTimeZones::zones();
+    QList<QString> zones = m_locations.keys();
     for (int i = 0; i < zones.size(); i++ ) {
-        KTimeZone curzone = m_locations->value( zones.at( i ) );
+        KTimeZone curzone = m_locations.value( zones.at( i ) );
         if ( curzone.latitude() == KTimeZone::UNKNOWN || 
              curzone.longitude() == KTimeZone::UNKNOWN ) {
-            m_locations->remove( zones.at(i) );
+            m_locations.remove( zones.at(i) );
+            qDebug() << "Removed TZ " << zones.at(i);
+        } else {
+            qDebug() << "Kept TZ " << zones.at(i) << " at " << curzone.latitude()
+                     << "," << curzone.longitude();
         }
     }
 }
