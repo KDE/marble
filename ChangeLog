@@ -1,3 +1,11 @@
+2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MarbleAbstractFloatItem.h
+    * src/lib/ViewportParams.h
+
+    Export classes MarbleAbstractFloatItem and ViewportParams, needed for
+    MarbleOverviewMap plugin.
+
 2008-05-14  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleAbstractFloatItem.cpp:

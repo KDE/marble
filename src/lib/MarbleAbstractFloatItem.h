@@ -22,6 +22,7 @@
 #include <QtGui/QPainterPath>
 
 #include "MarbleLayerInterface.h"
+#include "marble_export.h"
 
 
 class MarbleAbstractFloatItemPrivate;
@@ -32,7 +33,7 @@ class MarbleAbstractFloatItemPrivate;
  *
  */
 
-class MarbleAbstractFloatItem : public MarbleLayerInterface
+class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
 {
  public:
     MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ), 

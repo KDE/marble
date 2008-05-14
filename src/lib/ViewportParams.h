@@ -33,6 +33,7 @@
 #include "SphericalProjection.h"
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"
+#include "marble_export.h"
 
 using namespace Marble;
 
@@ -41,7 +42,7 @@ using namespace Marble;
  *
  */
 
-class ViewportParams
+class MARBLE_EXPORT ViewportParams
 {
  public:
     ViewportParams( );
