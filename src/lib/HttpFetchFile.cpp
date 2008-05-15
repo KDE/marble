@@ -31,6 +31,7 @@ HttpFetchFile::HttpFetchFile( StoragePolicy *policy, QObject *parent )
 HttpFetchFile::~HttpFetchFile()
 {
     m_pHttp->abort();
+    delete m_pHttp;
 }
 
 void HttpFetchFile::executeJob( HttpJob* job )
