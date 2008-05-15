@@ -439,6 +439,16 @@ void GeoPainter::drawPolygon( const QPolygonF & polygon )
     ClipPainter::drawPolygon( polygon );
 }
 
+void GeoPainter::drawRect ( const QRectF & rectangle )
+{
+    QPainter::drawRect( rectangle );
+}
+
+void GeoPainter::drawRect ( const QRect & rectangle )
+{
+    QPainter::drawRect( rectangle );
+}
+
 void GeoPainter::drawRect ( int x, int y, int width, int height )
 {
     QPainter::drawRect( x, y, width, height);

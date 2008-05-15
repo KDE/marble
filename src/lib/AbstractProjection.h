@@ -152,11 +152,18 @@ class AbstractProjection
     virtual GeoDataLinearRing rectOutline( const QRect& screenRect,
                                  const ViewportParams *viewport );
 
+    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
+
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
     double  m_maxLat;		// The max latitude.  Not always 90 degrees.
     bool    m_repeatX;		// Map repeated in X direction.
+
+    void coordinateExtremes( double lon, double lat, 
+                             double &westLon, double &eastLon,
+                             double &otherWestLon, double &otherEastLon,
+                             double &northLat, double &southLat );
 };
 
 

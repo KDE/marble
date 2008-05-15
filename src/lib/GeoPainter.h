@@ -127,8 +127,9 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawPolyline( const QPolygonF & polyline );
     void drawPolygon( const QPolygonF & polygon );
     void drawLine ( int x1, int y1, int x2, int y2 );
+    void drawRect ( const QRectF & rectangle );
+    void drawRect ( const QRect & rectangle );
     void drawRect ( int x, int y, int width, int height );
-
  private:
 
     GeoPainterPrivate  * const d;

@@ -34,8 +34,95 @@ bool AbstractProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
 {
-    // Quick and dirty default implementation
+    // For the case where the whole viewport gets covered there is a 
+    // pretty dirty and generic detection algorithm:
 
+    int xStep = 4;
+    int yStep = 4;
+
+    double lon, lat;
+    double eastLon  = -M_PI; 
+    double otherEastLon  = -M_PI; 
+    double westLon  = +M_PI; 
+    double otherWestLon  = +M_PI; 
+    double northLat = -M_PI / 2.0; 
+    double southLat = +M_PI / 2.0; 
+
+
+    // Move along the screenborder and save the highest and lowest lon-lat values.
+
+    for ( int x = 0; x < viewport->width(); x+=xStep )
+    {
+        if ( geoCoordinates( x, 0, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        }
+
+        if ( geoCoordinates( x, viewport->height() - 1, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        }
+    }
+
+    if ( geoCoordinates( viewport->width(), 0, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+        coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    }
+
+    if ( geoCoordinates( viewport->width(), viewport->height() - 1, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+        coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    }
+
+    for ( int y = 0; y < viewport->height(); y+=yStep )
+    {
+        if ( geoCoordinates( 0, y, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        }
+
+        if ( geoCoordinates( viewport->width() - 1, y, viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        }
+    }
+
+    // DateLine check:
+
+    if ( ( M_PI - eastLon ) < 0.05 && ( westLon + M_PI ) < 0.05 && fabs( otherEastLon ) > 0.05 && fabs( otherWestLon ) > 0.05 ) {
+        westLon = otherWestLon;
+        eastLon = otherEastLon;
+    }
+
+    // Now we need to check whether maxLat (e.g. the north pole) gets displayed
+    // inside the viewport.
+
+    // We need a point on the screen at maxLat that definetely gets displayed:
+    double averageLongitude = ( westLon + eastLon ) / 2.0;
+
+    GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
+    GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
+
+    int dummyX, dummyY; // not needed
+
+    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
+        northLat = +M_PI / 2.0;
+    }
+    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
+        southLat = -M_PI / 2.0;
+    }
+
+    GeoDataLatLonAltBox latLonAltBox;
+    latLonAltBox.setBoundaries( westLon, eastLon, northLat, southLat, GeoDataPoint::Radian  );
+
+    return latLonAltBox;
+}
+
+void AbstractProjection::coordinateExtremes( double lon, double lat,
+                                             double &westLon, double &eastLon,
+                                             double &otherWestLon, double &otherEastLon,
+                                             double &northLat, double &southLat )
+{
+    if ( lon < westLon ) westLon = lon;
+    if ( lon < otherWestLon && lon > 0.0 ) otherWestLon = lon;
+    if ( lon > eastLon ) eastLon = lon;
+    if ( lon > otherEastLon && lon < 0.0 ) otherEastLon = lon;
+    if ( lat > northLat ) northLat = lat;
+    if ( lat < southLat ) southLat = lat;
 }
 
 GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,

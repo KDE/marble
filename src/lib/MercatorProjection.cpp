@@ -180,11 +180,11 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          double& lon, double& lat,
                                          GeoDataPoint::Unit unit )
 {
-    int           radius        = viewport->radius();
-    int           imgWidth2     = viewport->width() / 2;
-    int           imgHeight2    = viewport->height() / 2;
-    const double  inverseRadius = 1.0 / (double)(radius);
-    bool          noerr         = false;
+    int           radius             = viewport->radius();
+    int           halfImageWidth     = viewport->width() / 2;
+    int           halfImageHeight    = viewport->height() / 2;
+    const double  inverseRadius      = 1.0 / (double)(radius);
+    bool          noerr              = false;
 
     // Calculate translation of center point
     double  centerLon;
@@ -192,15 +192,15 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     viewport->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset = (int)( centerLat * (double)(2 * radius) / M_PI);
-    int yTop          = imgHeight2 - radius + yCenterOffset;
+    int yTop          = halfImageHeight - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
     if ( y >= yTop && y < yBottom ) {
-        int const  xPixels = x - imgWidth2;
-        int const  yPixels = y - imgHeight2;
+        int const  xPixels = x - halfImageWidth;
+        int const  yPixels = y - halfImageHeight;
 
         double const pixel2rad = M_PI / (2 * radius);
 
-        lat = atan( sinh( ((imgHeight2 + yCenterOffset) - y)
+        lat = atan( sinh( ((halfImageHeight + yCenterOffset) - y)
                           / (double)(2 * radius) * M_PI ) );
         lon = xPixels * pixel2rad + centerLon;
 
@@ -224,4 +224,73 @@ bool MercatorProjection::geoCoordinates( int x, int y,
 {
     // NYI
     return false;
+}
+
+
+GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
+{
+    // For the case where the whole viewport gets covered there is a 
+    // pretty dirty and generic detection algorithm:
+    GeoDataLatLonAltBox latLonAltBox = AbstractProjection::latLonAltBox( screenRect, viewport );
+
+    // The remaining algorithm should be pretty generic for all kinds of 
+    // flat projections:
+
+    // If the whole globe is visible we can easily calculate analytically the lon-/lat- range
+    double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+
+    if ( m_repeatX ) {
+        int xRepeatDistance = 4 * viewport->radius();
+        if ( viewport->width() >= xRepeatDistance ) {
+            latLonAltBox.setWest( -M_PI );
+            latLonAltBox.setEast( +M_PI );
+        }
+    }
+    else {
+        // We need a point on the screen at maxLat that definetely gets displayed:
+        double averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
+    
+        GeoDataPoint maxLonPoint( +M_PI, averageLatitude, GeoDataPoint::Radian );
+        GeoDataPoint minLonPoint( -M_PI, averageLatitude, GeoDataPoint::Radian );
+    
+        int dummyX, dummyY; // not needed
+        bool dummyVal;
+    
+        if ( screenCoordinates( maxLonPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+            latLonAltBox.setEast( +M_PI );
+        }
+        if ( screenCoordinates( minLonPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+            latLonAltBox.setWest( -M_PI );
+        }
+    }
+
+    // Now we need to check whether maxLat (e.g. the north pole) gets displayed
+    // inside the viewport.
+
+    // We need a point on the screen at maxLat that definetely gets displayed:
+    double averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
+
+    GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
+    GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
+
+    int dummyX, dummyY; // not needed
+    bool dummyVal;
+
+    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+        latLonAltBox.setEast( +M_PI );
+        latLonAltBox.setWest( -M_PI );
+    }
+    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+        latLonAltBox.setEast( +M_PI );
+        latLonAltBox.setWest( -M_PI );
+    }
+
+//    qDebug() << latLonAltBox.text( GeoDataPoint::Degree );
+
+    return latLonAltBox;
+}
+
+bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) const
+{
+    return true;
 }

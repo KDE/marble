@@ -157,7 +157,9 @@ double GeoDataPoint::normalizeLon( double lon )
     if ( lon < -M_PI ) {
         int cycles = (int)( ( lon - M_PI ) / ( 2 * M_PI ) );
         return lon - ( cycles * 2 * M_PI );
-    } 
+    }
+
+    return lon;
 }
 
 double GeoDataPoint::normalizeLat( double lat )

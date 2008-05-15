@@ -74,6 +74,20 @@ void ViewportParams::setRadius(int newRadius)
     m_radius = newRadius;
 }
 
+bool ViewportParams::globeCoversViewport() const
+{
+    // This first test is a quick one that will catch all really big
+    // radii and prevent overflow in the real test.
+    if ( m_radius > m_size.width() + m_size.height() )
+        return true;
+
+    // This is the real test.  The 4 is because we are really
+    // comparing to width/2 and height/2.
+    if ( 4 * m_radius * m_radius >= m_size.width() * m_size.width() + m_size.height() * m_size.height() )
+        return true;
+
+    return false;
+}
 
 Quaternion ViewportParams::planetAxis() const
 {

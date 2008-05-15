@@ -1,3 +1,22 @@
+2008-05-15  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MercatorProjection.{cpp,h}:
+    * src/lib/SphericalProjection.{cpp,h}:
+    * src/lib/GeoPainter.{cpp,h}:
+    * src/lib/AbstractProjection.{cpp,h}:
+    * src/lib/EquirectProjection.{cpp,h}:
+    * src/lib/geodata/data/GeoDataLatLonAltBox.{cpp,h}:
+    * src/lib/geodata/data/GeoDataPoint.cpp:
+    * src/lib/ViewportParams.{cpp,h}:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.cpp:
+
+    - Making the Marble Overviewmap functional:
+      We got a Latitude-Longitude-BoundingBox ("LatLonBox") 
+      viewer now ...
+    - Adding methods to retrieve the LatLonBox of the view.
+    - TODO: Fix sluggish performance for float items
+      due to lack of pixmap caching.
+
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MapThemeManager.h

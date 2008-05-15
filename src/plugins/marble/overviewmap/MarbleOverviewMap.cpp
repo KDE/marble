@@ -10,6 +10,7 @@
 
 #include "MarbleOverviewMap.h"
 
+#include <QtCore/QRect>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
@@ -67,18 +68,58 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
 {
     painter->autoMapQuality();
 
-    painter->setViewport( contentRect().toRect() );
+    QRectF mapRect( contentRect() );
+
+    painter->setViewport( mapRect.toRect() );
     m_svgobj->render( painter ); 
     painter->setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
+    GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
 
-/*
-    GeoDataPoint northpole1( 0.0, -90.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint northpole2( 0.0, -90.0, 3000000.0, GeoDataPoint::Degree );
+    double xWest = mapRect.width() / 2 
+                    + mapRect.width() / ( 2 * M_PI ) * latLonAltBox.west();
+    double xEast = mapRect.width() / 2
+                    + mapRect.width() / ( 2 * M_PI ) * latLonAltBox.east();
+    double xNorth = mapRect.height() / 2 
+                    - mapRect.height() / M_PI * latLonAltBox.north();
+    double xSouth = mapRect.height() / 2
+                    - mapRect.height() / M_PI * latLonAltBox.south();
 
-    painter->setPen( QColor( 255, 255, 255, 255 ) );
+    painter->setPen( QPen( Qt::white ) );
+    painter->setBrush( QBrush( Qt::transparent ) );
+    painter->setRenderHint( QPainter::Antialiasing, false );
 
-    painter->drawLine( northpole1, northpole2 );
-*/
+    double boxWidth  = xEast  - xWest;
+    double boxHeight = xSouth - xNorth;
+
+    double minBoxSize = 2.0;
+
+    if ( latLonAltBox.west() <= latLonAltBox.east() ) {
+        // Make sure the latLonBox is still visible
+        if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
+        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
+
+        painter->drawRect( QRectF( xWest + mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
+    }
+    else {
+        // If the dateline is shown in the viewport  and if the poles are not 
+        // then there are two boxes that represent the latLonBox of the view.
+
+        boxWidth = xEast;
+
+        // Make sure the latLonBox is still visible
+        if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
+        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
+
+        painter->drawRect( QRectF( mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
+
+        boxWidth = mapRect.width() - xWest;
+
+        // Make sure the latLonBox is still visible
+        if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
+        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
+
+        painter->drawRect( QRectF( mapRect.left() + xWest, xNorth + mapRect.top(), mapRect.width() - xWest, boxHeight ) );
+    }
     return true;
 }
 

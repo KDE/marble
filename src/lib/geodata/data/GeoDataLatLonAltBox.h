@@ -75,8 +75,8 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     double west( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
     void setWest( const double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
 
-    void    boundaries( double &north, double &south, double &east, double &west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
-    void    setBoundaries( double north, double south, double east, double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    void    boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    void    setBoundaries( double west, double east, double north, double south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
 
     /**
      * @brief Detect whether the bounding box crosses the IDL.

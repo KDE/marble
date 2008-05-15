@@ -12,6 +12,7 @@
 
 #include "GeoDataLatLonAltBox.h"
 
+#include <QtCore/QDebug>
 
 class GeoDataLatLonBoxPrivate
 {
@@ -132,7 +133,7 @@ void GeoDataLatLonBox::setWest( const double west, GeoDataPoint::Unit unit )
     }
 }
 
-void GeoDataLatLonBox::boundaries( double &north, double &south, double &east, double &west, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit )
 {
     switch( unit ){
     case GeoDataPoint::Radian:
@@ -150,7 +151,7 @@ void GeoDataLatLonBox::boundaries( double &north, double &south, double &east, d
     }
 }
 
-void GeoDataLatLonBox::setBoundaries( double north, double south, double east, double west, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setBoundaries( double west, double east, double north, double south, GeoDataPoint::Unit unit )
 {
     switch( unit ){
     case GeoDataPoint::Radian:
@@ -228,12 +229,11 @@ QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
 }
 
 
-class GeoDataLatLonAltBoxPrivate : public GeoDataLatLonBoxPrivate
+class GeoDataLatLonAltBoxPrivate
 {
  public:
     GeoDataLatLonAltBoxPrivate()
-        : GeoDataLatLonBoxPrivate(),
-          m_minAltitude( 0 ),
+        : m_minAltitude( 0 ),
           m_maxAltitude( 0 ),
           m_altitudeMode( ClampToGround )
     {
@@ -320,11 +320,11 @@ QString GeoDataLatLonAltBox::text( GeoDataPoint::Unit unit ) const
     switch( unit ){
     case GeoDataPoint::Radian:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-            .arg( d->m_north ).arg( d->m_west ).arg( d->m_maxAltitude ).arg( d->m_south ).arg( d->m_east ).arg( d->m_minAltitude ); 
+            .arg( north() ).arg( west() ).arg( d->m_maxAltitude ).arg( south() ).arg( east() ).arg( d->m_minAltitude ); 
         break;
     case GeoDataPoint::Degree:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_maxAltitude ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ).arg( d->m_minAltitude ); 
+            .arg( north() * RAD2DEG ).arg( west() * RAD2DEG ).arg( d->m_maxAltitude ).arg( south() * RAD2DEG ).arg( east() * RAD2DEG ).arg( d->m_minAltitude ); 
         break;
     }
 }
