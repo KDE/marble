@@ -1071,9 +1071,10 @@ void MarbleWidget::setDownloadUrl( const QUrl &url )
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 {
     if ( viewContext == Still )
-        return d->m_stillQuality; 
-    if ( viewContext == Animation )
-        return d->m_animationQuality; 
+        return d->m_stillQuality;
+
+    Q_ASSERT( viewContext == Animation );
+    return d->m_animationQuality; 
 }
 
 void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )

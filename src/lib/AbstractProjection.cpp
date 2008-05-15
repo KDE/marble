@@ -128,4 +128,5 @@ void AbstractProjection::coordinateExtremes( double lon, double lat,
 GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
                                  const ViewportParams *viewport )
 {
+    return GeoDataLinearRing();
 }
