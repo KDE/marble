@@ -28,46 +28,65 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneLegend.h"
 #include "GeoSceneSettings.h"
- 
+
+class GeoSceneDocumentPrivate
+{
+  public:
+    GeoSceneDocumentPrivate()
+        : m_head(new GeoSceneHead),
+          m_map(new GeoSceneMap),
+          m_settings(new GeoSceneSettings),
+          m_legend(new GeoSceneLegend)
+    {
+    }
+
+    ~GeoSceneDocumentPrivate()
+    {
+        delete m_head;
+        delete m_map;
+        delete m_settings;
+        delete m_legend;
+    }
+
+    GeoSceneHead*     m_head;
+    GeoSceneMap*      m_map;
+    GeoSceneSettings* m_settings;
+    GeoSceneLegend*   m_legend;
+};
+
+
 GeoSceneDocument::GeoSceneDocument()
-    : GeoDocument()
-    , m_head(new GeoSceneHead)
-    , m_map(new GeoSceneMap)
-    , m_settings(new GeoSceneSettings)
-    , m_legend(new GeoSceneLegend)
+    : GeoDocument(),
+      d( new GeoSceneDocumentPrivate )
 {
     // Establish connection of property changes to the outside, e.g. the LegendBrowser
-    connect ( m_settings, SIGNAL( valueChanged( QString, bool ) ), 
+    connect ( d->m_settings, SIGNAL( valueChanged( QString, bool ) ), 
                           SIGNAL( valueChanged( QString, bool ) ) );
 }
 
 GeoSceneDocument::~GeoSceneDocument()
 {
-    delete m_head;
-    delete m_map;
-    delete m_settings;
-    delete m_legend;
-
+    delete d;
 }
 
 GeoSceneHead* GeoSceneDocument::head() const
 {
-    return m_head;
+    return d->m_head;
 }
 
 GeoSceneMap* GeoSceneDocument::map() const
 {
-    return m_map;
+    return d->m_map;
 }
 
 GeoSceneSettings* GeoSceneDocument::settings() const
 {
-    return m_settings;
+    return d->m_settings;
 }
 
 GeoSceneLegend* GeoSceneDocument::legend() const
 {
-    return m_legend;
+    return d->m_legend;
 }
 
 #include "GeoSceneDocument.moc"

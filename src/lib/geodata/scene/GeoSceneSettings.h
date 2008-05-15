@@ -33,6 +33,8 @@
 class GeoSceneProperty;
 class GeoSceneGroup;
 
+class GeoSceneSettingsPrivate;
+
 /**
  * @short Settings of a GeoScene document.
  */
@@ -111,10 +113,8 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
  Q_SIGNALS:
     void valueChanged( QString, bool );
 
- protected:
-    /// The hash table holding all the properties in the settings.
-    QVector<GeoSceneProperty*>  m_properties;
-    QVector<GeoSceneGroup*> m_groups;
+ private:
+    GeoSceneSettingsPrivate * const d;
 };
 
 #endif // GEOSCENESETTINGS_H

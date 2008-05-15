@@ -26,29 +26,48 @@
 #include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"
 
+class GeoSceneSettingsPrivate
+{
+  public:
+    GeoSceneSettingsPrivate()
+    {
+    }
+
+    ~GeoSceneSettingsPrivate()
+    {
+        qDeleteAll(m_properties);
+        qDeleteAll(m_groups);
+    }
+
+    /// The hash table holding all the properties in the settings.
+    QVector<GeoSceneProperty*>  m_properties;
+    QVector<GeoSceneGroup*> m_groups;
+};
+
+
 GeoSceneSettings::GeoSceneSettings()
+    : d( new GeoSceneSettingsPrivate )
 {
     /* NOOP */
 }
 
 GeoSceneSettings::~GeoSceneSettings()
 {
-    qDeleteAll(m_properties);
-    qDeleteAll(m_groups);
+    delete d;
 }
 
 bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
 {
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.begin();
+    for (it = d->m_properties.begin(); it != d->m_properties.end(); ++it) {
         if ( (*it)->name() == name ) {
             available = (*it)->available();
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
-    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.begin();
+    for (itGroup = d->m_groups.begin(); itGroup != d->m_groups.end(); ++itGroup) {
         bool success = (*itGroup)->propertyAvailable( name, available );
         if ( success ) {
             return true;
@@ -64,16 +83,16 @@ bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
 {
     qDebug() << "GeoSceneSettings: Property " << name << "to" << value; 
     
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.begin();
+    for (it = d->m_properties.begin(); it != d->m_properties.end(); ++it) {
         if ( (*it)->name() == name ) {
             (*it)->setValue( value );
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
-    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.begin();
+    for (itGroup = d->m_groups.begin(); itGroup != d->m_groups.end(); ++itGroup) {
         bool success = (*itGroup)->setPropertyValue( name, value );
         if ( success ) {
             return true;
@@ -85,16 +104,16 @@ bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
 
 bool GeoSceneSettings::propertyValue( const QString& name, bool& value )
 {
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.begin();
+    for (it = d->m_properties.begin(); it != d->m_properties.end(); ++it) {
         if ( (*it)->name() == name ) {
             value = (*it)->value();
             return true;
         }
     }
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
-    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.begin();
+    for (itGroup = d->m_groups.begin(); itGroup != d->m_groups.end(); ++itGroup) {
         bool success = (*itGroup)->propertyValue( name, value );
         if ( success ) {
             return true;
@@ -110,12 +129,12 @@ QVector<GeoSceneProperty*> GeoSceneSettings::allProperties() const
 {
     QVector<GeoSceneProperty*> allProperties;
 
-    QVector<GeoSceneGroup*>::const_iterator itGroup = m_groups.begin();
-    for (itGroup = m_groups.begin(); itGroup != m_groups.end(); ++itGroup) {
+    QVector<GeoSceneGroup*>::const_iterator itGroup = d->m_groups.begin();
+    for (itGroup = d->m_groups.begin(); itGroup != d->m_groups.end(); ++itGroup) {
         allProperties << (*itGroup)->properties();
     }
 
-    allProperties << m_properties;
+    allProperties << d->m_properties;
 
     return allProperties;
 }
@@ -123,12 +142,12 @@ QVector<GeoSceneProperty*> GeoSceneSettings::allProperties() const
 void GeoSceneSettings::addGroup( GeoSceneGroup* group )
 {
     // Remove any property that has the same name
-    QVector<GeoSceneGroup*>::iterator it = m_groups.begin();
-    while (it != m_groups.end()) {
+    QVector<GeoSceneGroup*>::iterator it = d->m_groups.begin();
+    while (it != d->m_groups.end()) {
         GeoSceneGroup* currentGroup = *it;
         if ( currentGroup->name() == group->name() ) {
             delete currentGroup;
-            it = m_groups.erase(it);
+            it = d->m_groups.erase(it);
         }
         else {
             ++it;
@@ -136,7 +155,7 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
      }
 
     if ( group ) {
-        m_groups.append( group );
+        d->m_groups.append( group );
 
         // Establish connection to the outside, e.g. the LegendBrowser
         connect ( group, SIGNAL( valueChanged( QString, bool ) ), 
@@ -148,8 +167,8 @@ GeoSceneGroup* GeoSceneSettings::group( const QString& name )
 {
     GeoSceneGroup* group = 0;
 
-    QVector<GeoSceneGroup*>::const_iterator it = m_groups.begin();
-    for (it = m_groups.begin(); it != m_groups.end(); ++it) {
+    QVector<GeoSceneGroup*>::const_iterator it = d->m_groups.begin();
+    for (it = d->m_groups.begin(); it != d->m_groups.end(); ++it) {
         if ( (*it)->name() == name )
             group = *it;
     }
@@ -165,12 +184,12 @@ GeoSceneGroup* GeoSceneSettings::group( const QString& name )
 void GeoSceneSettings::addProperty( GeoSceneProperty* property )
 {
     // Remove any property that has the same name
-    QVector<GeoSceneProperty*>::iterator it = m_properties.begin();
-    while (it != m_properties.end()) {
+    QVector<GeoSceneProperty*>::iterator it = d->m_properties.begin();
+    while (it != d->m_properties.end()) {
         GeoSceneProperty* currentProperty = *it;
         if ( currentProperty->name() == property->name() ) {
             delete currentProperty;
-            it = m_properties.erase(it);
+            it = d->m_properties.erase(it);
         }
         else {
             ++it;
@@ -178,7 +197,7 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
      }
 
     if ( property ) {
-        m_properties.append( property );
+        d->m_properties.append( property );
 
         // Establish connection to the outside, e.g. the LegendBrowser
         connect ( property, SIGNAL( valueChanged( QString, bool ) ), 
@@ -191,8 +210,8 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 {
     GeoSceneProperty* property = 0;
 
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.begin();
+    for (it = d->m_properties.begin(); it != d->m_properties.end(); ++it) {
         if ( (*it)->name() == name )
             property = *it;
     }
@@ -207,7 +226,7 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 
 QVector<GeoSceneProperty*> GeoSceneSettings::rootProperties() const
 {
-    return m_properties;
+    return d->m_properties;
 }
 
 #include "GeoSceneSettings.moc"

@@ -24,14 +24,16 @@
 #define GEOSCENEDOCUMENT_H
 
 #include <QtCore/QObject>
+#include "GeoDocument.h"
 
 #include <geodata_export.h>
-#include "GeoDocument.h"
 
 class GeoSceneHead;
 class GeoSceneLegend;
 class GeoSceneMap;
 class GeoSceneSettings;
+
+class GeoSceneDocumentPrivate;
 
 /**
  * @short A container for features parsed from the DGML file.
@@ -55,11 +57,8 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
  Q_SIGNALS:
     void valueChanged( QString, bool );
 
- protected:
-    GeoSceneHead*     m_head;
-    GeoSceneMap*      m_map;
-    GeoSceneSettings* m_settings;
-    GeoSceneLegend*   m_legend;
+ private:
+    GeoSceneDocumentPrivate * const d;
 };
 
 

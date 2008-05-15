@@ -1,3 +1,16 @@
+2008-05-15  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/lib/geodata/scene/GeoSceneDocument.{h,cpp}:
+    * src/lib/geodata/scene/GeoSceneHead.{h,cpp}:
+    * src/lib/geodata/scene/GeoSceneLegend.{h,cpp}:
+    * src/lib/geodata/scene/GeoSceneMap.{h,cpp}:
+    * src/lib/geodata/scene/GeoSceneSettings.{h,cpp}:
+
+    - Yet another set of d-pointerifications (this time
+    also moved the protected members in the d-pointer)
+    - Add GEODATA_EXPORT to class declarations
+
+
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * data/maps/earth/OpenStreetMap/0/0/0.png

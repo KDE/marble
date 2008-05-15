@@ -23,16 +23,19 @@
 #define GEOSCENELEGEND_H
 
 #include <QtCore/QVector>
-
 #include "GeoDocument.h"
 
+#include <geodata_export.h>
+
 class GeoSceneSection;
+
+class GeoSceneLegendPrivate;
 
 /**
  * @short Legend of a GeoScene document.
  */
 
-class GeoSceneLegend : public GeoNode {
+class GEODATA_EXPORT GeoSceneLegend : public GeoNode {
  public:
     GeoSceneLegend();
     ~GeoSceneLegend();
@@ -45,11 +48,8 @@ class GeoSceneLegend : public GeoNode {
     GeoSceneSection* section( const QString& );
     QVector<GeoSceneSection*> sections() const;
 
- protected:
-    /// The vector holding all the sections in the legend.
-    /// (We want to preserve the order and don't care 
-    /// much about speed here), so we don't use a hash
-    QVector<GeoSceneSection*> m_sections;
+ private:
+    GeoSceneLegendPrivate * const d;
 };
 
 

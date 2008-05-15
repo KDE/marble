@@ -23,13 +23,14 @@
 #define GEOSCENEHEAD_H
 
 #include <QtCore/QString>
+#include "GeoDocument.h"
 
 #include <geodata_export.h>
 
-#include "GeoDocument.h"
-
 class GeoSceneIcon;
 class GeoSceneZoom;
+
+class GeoSceneHeadPrivate;
 
 /**
  * @short General properties and identifiers of a GeoScene document.
@@ -57,16 +58,8 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode {
     GeoSceneZoom* zoom() const;
     GeoSceneIcon* icon() const;
 
- protected:
-    GeoSceneZoom* m_zoom;
-    GeoSceneIcon* m_icon;
-
-    QString m_name;
-    QString m_target;
-    QString m_theme;
-    QString m_description;
-
-    bool    m_visible;
+ private:
+    GeoSceneHeadPrivate * const d;
 };
 
 

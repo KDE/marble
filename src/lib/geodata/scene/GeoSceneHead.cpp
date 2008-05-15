@@ -26,85 +26,110 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
 
+class GeoSceneHeadPrivate
+{
+  public:
+    GeoSceneHeadPrivate()
+        : m_zoom(new GeoSceneZoom),
+          m_icon(new GeoSceneIcon),
+          m_name( "" ),
+          m_target( "" ),
+          m_theme( "" ),
+          m_description( "" ),
+          m_visible( true )
+    {
+    }
+
+    ~GeoSceneHeadPrivate()
+    {
+        delete m_icon;
+        delete m_zoom;
+    }
+
+    GeoSceneZoom* m_zoom;
+    GeoSceneIcon* m_icon;
+
+    QString m_name;
+    QString m_target;
+    QString m_theme;
+    QString m_description;
+
+    bool    m_visible;
+};
+
+
 GeoSceneHead::GeoSceneHead()
-    : m_zoom(new GeoSceneZoom),
-      m_icon(new GeoSceneIcon),
-      m_name( "" ),
-      m_target( "" ),
-      m_theme( "" ),
-      m_description( "" ),
-      m_visible( true )
+    : d( new GeoSceneHeadPrivate )
 {
     /* NOOP */
 }
 
 GeoSceneHead::~GeoSceneHead()
 {
-    delete m_icon;
-    delete m_zoom;
+    delete d;
 }
 
 GeoSceneIcon* GeoSceneHead::icon() const
 {
-    return m_icon;
+    return d->m_icon;
 }
 
 GeoSceneZoom* GeoSceneHead::zoom() const
 {
-    return m_zoom;
+    return d->m_zoom;
 }
 
 const QString GeoSceneHead::name() const
 {
-    return m_name;
+    return d->m_name;
 }
 
 void GeoSceneHead::setName( const QString& name )
 {
-    m_name = name;
+    d->m_name = name;
 }
 
 const QString GeoSceneHead::target() const
 {
-    return m_target;
+    return d->m_target;
 }
 
 void GeoSceneHead::setTarget( const QString& target )
 {
-    m_target = target;
+    d->m_target = target;
 }
 
 const QString GeoSceneHead::theme() const
 {
-    return m_theme;
+    return d->m_theme;
 }
 
 const QString GeoSceneHead::mapThemeId() const
 {
-    return m_target + '/' + m_theme + '/' + m_theme + ".dgml";
+    return d->m_target + '/' + d->m_theme + '/' + d->m_theme + ".dgml";
 }
 
 void GeoSceneHead::setTheme( const QString& theme )
 {
-    m_theme = theme;
+    d->m_theme = theme;
 }
 
 const QString GeoSceneHead::description() const
 {
-    return m_description;
+    return d->m_description;
 }
 
 void GeoSceneHead::setDescription( const QString& description )
 {
-    m_description = description;
+    d->m_description = description;
 }
 
 bool GeoSceneHead::visible() const
 {
-    return m_visible;
+    return d->m_visible;
 }
 
 void GeoSceneHead::setVisible( bool visible )
 {
-    m_visible = visible;
+    d->m_visible = visible;
 }

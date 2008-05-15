@@ -26,27 +26,48 @@
 
 using namespace GeoSceneAuxillaryDictionary;
 
+class GeoSceneMapPrivate
+{
+  public:
+    GeoSceneMapPrivate()
+        : m_backgroundColor( "" )
+    {
+    }
+
+    ~GeoSceneMapPrivate()
+    {
+        qDeleteAll( m_layers );
+    }
+
+    /// The vector holding all the sections in the legend.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneLayer*> m_layers;
+
+    QString m_backgroundColor;
+};
+
 
 GeoSceneMap::GeoSceneMap()
-    : m_backgroundColor( "" )
+    : d ( new GeoSceneMapPrivate )
 {
     /* NOOP */
 }
 
 GeoSceneMap::~GeoSceneMap()
 {
-    qDeleteAll( m_layers );
+    delete d;
 }
 
 void GeoSceneMap::addLayer( GeoSceneLayer* layer )
 {
     // Remove any layer that has the same name
-    QVector<GeoSceneLayer*>::iterator it = m_layers.begin();
-    while (it != m_layers.end()) {
+    QVector<GeoSceneLayer*>::iterator it = d->m_layers.begin();
+    while (it != d->m_layers.end()) {
         GeoSceneLayer* currentLayer = *it;
         if ( currentLayer->name() == layer->name() ) {
             delete currentLayer;
-            it = m_layers.erase(it);
+            it = d->m_layers.erase(it);
         }
         else {
             ++it;
@@ -54,7 +75,7 @@ void GeoSceneMap::addLayer( GeoSceneLayer* layer )
      }
 
     if ( layer ) {
-        m_layers.append( layer );
+        d->m_layers.append( layer );
     }
 }
 
@@ -62,8 +83,8 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 {
     GeoSceneLayer* layer = 0;
 
-    QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
-    for (it = m_layers.begin(); it != m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
+    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
         if ( (*it)->name() == name )
             layer = *it;
     }
@@ -81,13 +102,13 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 
 QVector<GeoSceneLayer*> GeoSceneMap::layers() const
 {
-    return m_layers;
+    return d->m_layers;
 }
 
 bool GeoSceneMap::hasTextureLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
-    for (it = m_layers.begin(); it != m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
+    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
         if ( (*it)->backend() == dgmlValue_texture && (*it)->datasets().count() > 0 )
             return true;
     }
@@ -97,8 +118,8 @@ bool GeoSceneMap::hasTextureLayers() const
 
 bool GeoSceneMap::hasVectorLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = m_layers.begin();
-    for (it = m_layers.begin(); it != m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
+    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
         if ( (*it)->backend() == dgmlValue_vector && (*it)->datasets().count() > 0 )
             return true;
     }
@@ -108,10 +129,10 @@ bool GeoSceneMap::hasVectorLayers() const
 
 QString GeoSceneMap::backgroundColor() const
 {
-    return m_backgroundColor;
+    return d->m_backgroundColor;
 }
 
 void GeoSceneMap::setBackgroundColor( const QString& backgroundColor )
 {
-    m_backgroundColor = backgroundColor;
+    d->m_backgroundColor = backgroundColor;
 }

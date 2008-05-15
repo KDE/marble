@@ -25,15 +25,18 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 
 class GeoSceneLayer;
 
+class GeoSceneMapPrivate;
+
 /**
  * @short Map layer structure of a GeoScene document.
  */
-
-class GeoSceneMap : public GeoNode {
+class GEODATA_EXPORT GeoSceneMap : public GeoNode {
  public:
     GeoSceneMap();
     ~GeoSceneMap();
@@ -78,13 +81,8 @@ class GeoSceneMap : public GeoNode {
      */
     bool hasVectorLayers() const;
 
- protected:
-    /// The vector holding all the sections in the legend.
-    /// (We want to preserve the order and don't care 
-    /// much about speed here), so we don't use a hash
-    QVector<GeoSceneLayer*> m_layers;
-
-    QString m_backgroundColor;
+ private:
+    GeoSceneMapPrivate * const d;
 };
 
 

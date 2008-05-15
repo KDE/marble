@@ -23,25 +23,45 @@
 
 #include "GeoSceneSection.h"
 
+class GeoSceneLegendPrivate
+{
+  public:
+    GeoSceneLegendPrivate()
+    {
+    }
+
+    ~GeoSceneLegendPrivate()
+    {
+        qDeleteAll( m_sections );
+    }
+
+     /// The vector holding all the sections in the legend.
+    /// (We want to preserve the order and don't care 
+    /// much about speed here), so we don't use a hash
+    QVector<GeoSceneSection*> m_sections;
+};
+
+
 GeoSceneLegend::GeoSceneLegend()
+    : d( new GeoSceneLegendPrivate )
 {
     /* NOOP */
 }
 
 GeoSceneLegend::~GeoSceneLegend()
 {
-    qDeleteAll( m_sections );
+    delete d;
 }
 
 void GeoSceneLegend::addSection( GeoSceneSection* section )
 {
     // Remove any section that has the same name
-    QVector<GeoSceneSection*>::iterator it = m_sections.begin();
-    while (it != m_sections.end()) {
+    QVector<GeoSceneSection*>::iterator it = d->m_sections.begin();
+    while (it != d->m_sections.end()) {
         GeoSceneSection* currentSection = *it;
         if ( currentSection->name() == section->name() ) {
             delete currentSection;
-            it = m_sections.erase(it);
+            it = d->m_sections.erase(it);
         }
         else {
             ++it;
@@ -49,7 +69,7 @@ void GeoSceneLegend::addSection( GeoSceneSection* section )
      }
 
     if ( section ) {
-        m_sections.append( section );
+        d->m_sections.append( section );
     }
 }
 
@@ -57,8 +77,8 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
 {
     GeoSceneSection* section = 0;
 
-    QVector<GeoSceneSection*>::const_iterator it = m_sections.begin();
-    for (it = m_sections.begin(); it != m_sections.end(); ++it) {
+    QVector<GeoSceneSection*>::const_iterator it = d->m_sections.begin();
+    for (it = d->m_sections.begin(); it != d->m_sections.end(); ++it) {
         if ( (*it)->name() == name )
             section = *it;
     }
@@ -76,5 +96,5 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
 
 QVector<GeoSceneSection*> GeoSceneLegend::sections() const
 {
-    return m_sections;
+    return d->m_sections;
 }
