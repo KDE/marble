@@ -48,7 +48,7 @@ class PlaceMarkLayout : public QObject
     /**
      * Creates a new place mark layout.
      */
-    PlaceMarkLayout( QObject *parent = 0 );
+    explicit PlaceMarkLayout( QObject *parent = 0 );
 
     /**
      * Destroys the place mark painter.

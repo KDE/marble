@@ -31,7 +31,7 @@ class KMLFeatureParser : public KMLObjectParser
     virtual bool characters( const QString& str );
 
  protected:
-    KMLFeatureParser( KMLFeature& feature );
+    explicit KMLFeatureParser( KMLFeature& feature );
 
  private:
     enum

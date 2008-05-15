@@ -39,7 +39,7 @@ class GeoSceneGroup : public QObject,
     Q_OBJECT
 
  public:
-    GeoSceneGroup( const QString& name );
+    explicit GeoSceneGroup( const QString& name );
     ~GeoSceneGroup();
 
     /**

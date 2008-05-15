@@ -34,7 +34,7 @@ class KMLContainerParser : public KMLFeatureParser
     virtual bool characters( const QString& ch );
 
  protected:
-    KMLContainerParser( KMLContainer& container );
+    explicit KMLContainerParser( KMLContainer& container );
 
  private:
     KMLObjectParser*      m_currentParser;

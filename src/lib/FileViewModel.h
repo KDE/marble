@@ -26,7 +26,7 @@ class FileViewModel : public QAbstractListModel
     Q_OBJECT
 
   public:
-    FileViewModel( QObject* parent = 0 );
+    explicit FileViewModel( QObject* parent = 0 );
     ~FileViewModel();
 
     virtual int rowCount( const QModelIndex& parent = QModelIndex() ) const;

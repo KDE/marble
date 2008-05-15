@@ -38,7 +38,7 @@ class PlaceMarkManager : public QObject
      *
      * @param parent The parent object.
      */
-    PlaceMarkManager( QObject *parent = 0 );
+    explicit PlaceMarkManager( QObject *parent = 0 );
 
     /**
      * Destroys the place mark manager.

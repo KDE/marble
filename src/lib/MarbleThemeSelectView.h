@@ -30,7 +30,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     Q_OBJECT
 
  public:
-    MarbleThemeSelectView(QWidget *parent = 0);
+    explicit MarbleThemeSelectView(QWidget *parent = 0);
     // void setModel( QAbstractItemModel * model );
 
  protected:

@@ -26,7 +26,7 @@ class MarbleNavigatorPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    MarbleNavigatorPlugin(QObject *parent = 0);
+    explicit MarbleNavigatorPlugin(QObject *parent = 0);
     virtual ~MarbleNavigatorPlugin();
 
     bool isContainer() const;

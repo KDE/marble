@@ -34,7 +34,7 @@ class GeoSceneIcon;
 
 class GeoSceneItem : public GeoNode {
  public:
-    GeoSceneItem( const QString& name );
+    explicit GeoSceneItem( const QString& name );
     ~GeoSceneItem();
 
     QString name() const;

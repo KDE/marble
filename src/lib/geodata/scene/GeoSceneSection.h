@@ -35,7 +35,7 @@ class GeoSceneItem;
 
 class GeoSceneSection : public GeoNode {
  public:
-    GeoSceneSection( const QString& name );
+    explicit GeoSceneSection( const QString& name );
     ~GeoSceneSection();
 
     /**

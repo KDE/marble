@@ -23,7 +23,7 @@ class MARBLE_EXPORT MarbleSearchListView : public QListView
     Q_OBJECT
 
  public:
-    MarbleSearchListView(QWidget*);
+    explicit MarbleSearchListView(QWidget*);
 
  Q_SIGNALS:
     void centerOn(const QModelIndex&);

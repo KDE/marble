@@ -46,7 +46,7 @@ class GeoSceneAbstractDataset : public GeoNode {
     virtual QString type() = 0;
 
  protected:
-    GeoSceneAbstractDataset( const QString& name );
+    explicit GeoSceneAbstractDataset( const QString& name );
 
     QString m_name;
     QString m_fileFormat;
@@ -59,7 +59,7 @@ class GeoSceneAbstractDataset : public GeoNode {
 
 class GeoSceneLayer : public GeoNode {
  public:
-    GeoSceneLayer( const QString& name );
+    explicit GeoSceneLayer( const QString& name );
     ~GeoSceneLayer();
 
     /**

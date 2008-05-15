@@ -97,7 +97,7 @@ class GeoSceneMapTheme : public QObject
     Q_OBJECT
 
 public:
-    GeoSceneMapTheme(QObject *parent = 0);
+    explicit GeoSceneMapTheme(QObject *parent = 0);
     ~GeoSceneMapTheme();
 
     QString name()          const { return m_name;        }

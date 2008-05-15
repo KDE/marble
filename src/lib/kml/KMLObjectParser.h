@@ -24,7 +24,7 @@ class KMLObjectParser : public QXmlDefaultHandler
     bool isParsed() const;
 
  protected:
-    KMLObjectParser( KMLObject& m_object );
+    explicit KMLObjectParser( KMLObject& m_object );
 
     KMLObject&  m_object;
     bool        m_parsed;

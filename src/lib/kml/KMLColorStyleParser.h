@@ -31,7 +31,7 @@ class KMLColorStyleParser : public KMLObjectParser
     virtual bool characters( const QString& ch );
 
   protected:
-    KMLColorStyleParser( KMLColorStyle& style );
+    explicit KMLColorStyleParser( KMLColorStyle& style );
 };
 
 #endif

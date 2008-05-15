@@ -42,7 +42,7 @@ class KMLFeature
 
  protected:
     KMLFeature();
-    KMLFeature( const QString& name );
+    explicit KMLFeature( const QString& name );
 
  private:
     QString     m_name;

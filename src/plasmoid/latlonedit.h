@@ -37,7 +37,7 @@ class /* QDESIGNER_WIDGET_EXPORT */ LatLonEdit : public QWidget
 	//Q_PROPERTY( double m_value READ value WRITE setValue )
 	//Q_PROPERTY( int m_dimension READ dimension WRITE setDimension )
 public:
-	LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
+	explicit LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
 	double value();
 	Marble::Dimension dimension();
 public slots:

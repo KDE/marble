@@ -32,7 +32,7 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
     Q_OBJECT
 
  public:
-    MarbleAboutDialog(QWidget *parent = 0);
+    explicit MarbleAboutDialog(QWidget *parent = 0);
     ~MarbleAboutDialog();
 
  private Q_SLOTS:

@@ -32,7 +32,7 @@ class MeasureTool : public QObject
     Q_OBJECT
 
  public:
-    MeasureTool( QObject *parent = 0 );
+    explicit MeasureTool( QObject *parent = 0 );
 
     void  paint( GeoPainter *painter, ViewportParams *viewport,
                  bool antialiasing );

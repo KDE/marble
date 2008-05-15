@@ -19,7 +19,7 @@ class KMLStyle;
 class KMLDocumentParser : public KMLContainerParser
 {
  public:
-    KMLDocumentParser( KMLDocument& document );
+    explicit KMLDocumentParser( KMLDocument& document );
     virtual ~KMLDocumentParser();
 
     /*

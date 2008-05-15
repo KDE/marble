@@ -97,7 +97,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Construct a new MarbleModel.
      * @param parent the parent widget
      */
-    MarbleModel( QObject *parent );
+    explicit MarbleModel( QObject *parent );
     virtual ~MarbleModel();
 
     /**

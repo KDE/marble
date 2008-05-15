@@ -28,7 +28,7 @@ class KoShape;
 class GeoShapeFactory : public KoShapeFactory
 {
 public:
-    GeoShapeFactory( QObject* parent);
+    explicit GeoShapeFactory( QObject* parent);
     ~GeoShapeFactory() {}
 
     virtual KoShape* createDefaultShape() const;

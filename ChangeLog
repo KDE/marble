@@ -1,3 +1,75 @@
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/MarbleTest.h
+    * src/geoshape/GeoToolFactory.h
+    * src/geoshape/GeoShapeFactory.h
+    * src/lib/PluginManager.h
+    * src/lib/gps/GpxFile.h
+    * src/lib/gps/GpxSax.h
+    * src/lib/gps/Waypoint.h
+    * src/lib/gps/WaypointContainer.h
+    * src/lib/gps/GpxFileModel.h
+    * src/lib/DiscCache.h
+    * src/lib/MarbleAboutDialog.h
+    * src/lib/MarbleThemeSelectView.h
+    * src/lib/FileViewModel.h
+    * src/lib/MapScaleFloatItem.h
+    * src/lib/XmlHandler.h
+    * src/lib/PlaceMarkContainer.h
+    * src/lib/CacheStoragePolicy.h
+    * src/lib/GpxFileViewItem.h
+    * src/lib/CompassFloatItem.h
+    * src/lib/MarbleControlBox.h
+    * src/lib/MarbleNavigator.h
+    * src/lib/PlaceMarkPainter.h
+    * src/lib/PlaceMarkManager.h
+    * src/lib/TextureTile.h
+    * src/lib/AutoSettings.h
+    * src/lib/PlaceMarkLayout.h
+    * src/lib/MarbleMap_p.h
+    * src/lib/MarbleModel.h
+    * src/lib/MarbleLegendBrowser.h
+    * src/lib/MarbleAbstractFloatItem.h
+    * src/lib/kml/KMLFeature.h
+    * src/lib/kml/KMLPointParser.h
+    * src/lib/kml/KMLFeatureParser.h
+    * src/lib/kml/KMLPlaceMarkParser.h
+    * src/lib/kml/KMLColorStyleParser.h
+    * src/lib/kml/KMLLabelStyleParser.h
+    * src/lib/kml/KMLIconStyleParser.h
+    * src/lib/kml/KMLDocumentParser.h
+    * src/lib/kml/KMLContainerParser.h
+    * src/lib/kml/KMLStyleParser.h
+    * src/lib/kml/KMLObjectParser.h
+    * src/lib/BoundingBox.h
+    * src/lib/MarbleSearchListView.h
+    * src/lib/LayerManager.h
+    * src/lib/FileStoragePolicy.h
+    * src/lib/MeasureTool.h
+    * src/lib/DeferredFlag.h
+    * src/lib/geodata/data/GeoDataFeature.h
+    * src/lib/geodata/data/GeoDataHotSpot.h
+    * src/lib/geodata/parser/GeoDataParser.h
+    * src/lib/geodata/parser/GeoSceneParser.h
+    * src/lib/geodata/parser/GeoParser.h
+    * src/lib/geodata/scene/GeoSceneProperty.h
+    * src/lib/geodata/scene/GeoSceneGroup.h
+    * src/lib/geodata/scene/GeoSceneItem.h
+    * src/lib/geodata/scene/GeoSceneMapTheme.h
+    * src/lib/geodata/scene/GeoSceneTexture.h
+    * src/lib/geodata/scene/GeoSceneVector.h
+    * src/lib/geodata/scene/GeoSceneSection.h
+    * src/lib/geodata/scene/GeoSceneLayer.h
+    * src/lib/ScreenPolygon.h
+    * src/plugins/designer/marblewidget/MarbleWidgetPlugin.h
+    * src/plugins/designer/navigator/MarbleNavigatorPlugin.h
+    * src/MarbleViewAdaptor.h
+    * src/ControlView.h
+    * src/plasmoid/latloneditplugin.h
+    * src/plasmoid/latlonedit.h
+
+    Make constructors which can take one argument explicit.
+
 2008-05-15  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MercatorProjection.{cpp,h}:

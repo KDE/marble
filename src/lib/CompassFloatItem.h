@@ -32,7 +32,7 @@ class CompassFloatItem : public QObject
     Q_OBJECT
 
  public:
-    CompassFloatItem( QObject *parent = 0 );
+    explicit CompassFloatItem( QObject *parent = 0 );
     ~CompassFloatItem();
 
     QPixmap  &drawCompassPixmap( int, int, int, Projection );

@@ -31,7 +31,7 @@ class AutoSettings : public QObject
     Q_OBJECT
 
  public:
-    AutoSettings( QObject *parent = 0 );
+    explicit AutoSettings( QObject *parent = 0 );
     ~AutoSettings();
 };
 

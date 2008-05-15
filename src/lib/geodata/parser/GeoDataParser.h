@@ -36,7 +36,7 @@ enum GeoDataSourceType {
 
 class GEODATA_EXPORT GeoDataParser : public GeoParser {
 public:
-    GeoDataParser(GeoDataSourceType source);
+    explicit GeoDataParser(GeoDataSourceType source);
     virtual ~GeoDataParser();
 
 private:

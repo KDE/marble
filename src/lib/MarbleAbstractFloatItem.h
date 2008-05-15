@@ -36,8 +36,8 @@ class MarbleAbstractFloatItemPrivate;
 class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
 {
  public:
-    MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ), 
-                             const QSizeF &size = QSizeF( 150.0, 50.0 ) );
+    explicit MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ),
+                                      const QSizeF &size = QSizeF( 150.0, 50.0 ) );
     virtual ~MarbleAbstractFloatItem();
 
     void    setPosition( const QPointF& position );

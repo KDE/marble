@@ -32,7 +32,7 @@ class LayerManager : public QObject
     Q_OBJECT
 
  public:
-    LayerManager(QObject *parent = 0);
+    explicit LayerManager(QObject *parent = 0);
     ~LayerManager();
 
     void renderLayers( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );

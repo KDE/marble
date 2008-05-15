@@ -55,7 +55,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
      * @brief Construct a new MarbleNavigator
      * @param parent the parent widget
      */
-    MarbleNavigator(QWidget *parent = 0);
+    explicit MarbleNavigator(QWidget *parent = 0);
     ~MarbleNavigator();
  
     /**

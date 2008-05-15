@@ -22,7 +22,7 @@ class CacheStoragePolicy : public StoragePolicy
          *
          * @param cacheDirectory The directory which shall be used for the cache.
          */
-        CacheStoragePolicy( const QString &cacheDirectory );
+        explicit CacheStoragePolicy( const QString &cacheDirectory );
 
         /**
          * Destroys the cache storage policy.

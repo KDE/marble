@@ -33,7 +33,7 @@ class TextureTile : public QObject {
     Q_OBJECT
 
  public:
-    TextureTile( TileId const& tid );
+    explicit TextureTile( TileId const& tid );
 
     virtual ~TextureTile();
     

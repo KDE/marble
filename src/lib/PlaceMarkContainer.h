@@ -33,7 +33,7 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
      * @brief Create a new PlaceMarkContainer
      * param  name the name of the container
      */
-    PlaceMarkContainer( const QString& name );
+    explicit PlaceMarkContainer( const QString& name );
 
     /// Return the name of the container
     QString name() const;

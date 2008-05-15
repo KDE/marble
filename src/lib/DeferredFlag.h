@@ -29,7 +29,7 @@ class DeferredFlag : public QObject
     Q_OBJECT
 
  public:
-    DeferredFlag( QObject *parent = 0 );
+    explicit DeferredFlag( QObject *parent = 0 );
 
     QPixmap& flag(){ return m_pixmap; }
     void setFlag( const QString& filename, const QSize& size );

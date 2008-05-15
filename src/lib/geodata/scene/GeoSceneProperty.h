@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
     Q_OBJECT
 
  public:
-    GeoSceneProperty( const QString& name );
+    explicit GeoSceneProperty( const QString& name );
     ~GeoSceneProperty();
 
     QString name() const;

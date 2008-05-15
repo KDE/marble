@@ -19,7 +19,7 @@
 class DiscCache
 {
     public:
-        DiscCache( const QString &cacheDirectory );
+        explicit DiscCache( const QString &cacheDirectory );
         ~DiscCache();
 
         quint64 cacheLimit() const;

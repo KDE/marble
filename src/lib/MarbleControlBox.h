@@ -78,7 +78,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @brief Construct a new MarbleControlBox
      * @param parent the parent widget
      */
-    MarbleControlBox(QWidget *parent = 0);
+    explicit MarbleControlBox(QWidget *parent = 0);
     ~MarbleControlBox();
  
     /**

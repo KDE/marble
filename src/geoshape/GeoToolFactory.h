@@ -28,7 +28,7 @@ class GeoToolFactory : public KoToolFactory
 {
     Q_OBJECT
 public:
-    GeoToolFactory( QObject* parent);
+    explicit GeoToolFactory( QObject* parent);
     ~GeoToolFactory();
 
     KoTool* createTool( KoCanvasBase* canvas );

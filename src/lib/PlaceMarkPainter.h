@@ -40,7 +40,7 @@ class PlaceMarkPainter : public QObject
     Q_OBJECT
 
  public:
-    PlaceMarkPainter(QObject *parent = 0);
+    explicit PlaceMarkPainter(QObject *parent = 0);
     ~PlaceMarkPainter();
 
     void drawPlaceMarks( QPainter* painter, 

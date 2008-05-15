@@ -26,7 +26,7 @@ class GpxSax : public QXmlDefaultHandler
 {
  public:
   //GpxSax( WaypointContainer *wptContainer, TrackContainer *track );
-    GpxSax( GpxFile *gpxFile );
+    explicit GpxSax( GpxFile *gpxFile );
     ~GpxSax();
 
     bool startElement( const QString &namespaceURI,

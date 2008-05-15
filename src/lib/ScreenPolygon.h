@@ -22,7 +22,7 @@ class ScreenPolygon : public QPolygonF
 {
  public:
     ScreenPolygon() : m_closed( false ) { }
-    ScreenPolygon( bool closed ) : m_closed( closed ) { }
+    explicit ScreenPolygon( bool closed ) : m_closed( closed ) { }
     ~ScreenPolygon() { }
 
     bool closed() const { return m_closed; }

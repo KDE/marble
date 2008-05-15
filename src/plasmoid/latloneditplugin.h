@@ -32,7 +32,7 @@ class LatLonEditPlugin : public QObject,
 	Q_OBJECT
 	Q_INTERFACES(QDesignerCustomWidgetInterface)
 public:
-	LatLonEditPlugin(QObject *parent = 0);
+	explicit LatLonEditPlugin(QObject *parent = 0);
 
 	bool isContainer() const;
 	bool isInitialized() const;

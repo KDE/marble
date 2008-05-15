@@ -22,7 +22,7 @@ class GpxFileViewItem
     public AbstractFileViewItem
 {
   public:
-    GpxFileViewItem( GpxFile* file );
+    explicit GpxFileViewItem( GpxFile* file );
     ~GpxFileViewItem();
 
     /*

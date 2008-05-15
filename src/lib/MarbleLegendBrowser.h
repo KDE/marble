@@ -32,7 +32,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     Q_OBJECT
 
  public:
-    MarbleLegendBrowser( QWidget* parent );
+    explicit MarbleLegendBrowser( QWidget* parent );
     ~MarbleLegendBrowser();
 
     void  setMarbleWidget( MarbleWidget *marbleWidget );

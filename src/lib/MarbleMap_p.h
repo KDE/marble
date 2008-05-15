@@ -30,7 +30,7 @@ class MarbleMapPrivate
     friend class MarbleWidget;
 
  public:
-    MarbleMapPrivate( MarbleMap *parent );
+    explicit MarbleMapPrivate( MarbleMap *parent );
 
     inline static int toLogScale( int zoom ) { return (int)(200.0 * log( (double)zoom ) ); }
     inline static int fromLogScale( int zoom ) { return (int)pow( M_E, ( (double)zoom / 200.0 ) ); }

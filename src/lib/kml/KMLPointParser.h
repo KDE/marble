@@ -19,7 +19,7 @@ class KMLPlaceMark;
 class KMLPointParser : public KMLObjectParser
 {
  public:
-    KMLPointParser( KMLPlaceMark& placemark );
+    explicit KMLPointParser( KMLPlaceMark& placemark );
 
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,

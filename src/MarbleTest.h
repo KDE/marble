@@ -20,7 +20,7 @@ class MarbleWidget;
 
 class MarbleTest {
  public:
-    MarbleTest( MarbleWidget* marbleWidget );
+    explicit MarbleTest( MarbleWidget* marbleWidget );
     virtual ~MarbleTest(){ }
 
     void timeDemo();

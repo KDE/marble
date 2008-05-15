@@ -21,7 +21,7 @@ class BoundingBox
 {
  public:
     BoundingBox();
-    BoundingBox( const QVector<QPointF> & );
+    explicit BoundingBox( const QVector<QPointF> & );
 
     bool     contains( const QPointF & );
     bool     intersects( const BoundingBox & );

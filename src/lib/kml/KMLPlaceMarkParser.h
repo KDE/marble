@@ -21,7 +21,7 @@ class KMLPlaceMark;
 class KMLPlaceMarkParser : public KMLFeatureParser
 {
  public:
-    KMLPlaceMarkParser( KMLPlaceMark& placemark );
+    explicit KMLPlaceMarkParser( KMLPlaceMark& placemark );
     virtual ~KMLPlaceMarkParser();
 
     virtual bool startElement( const QString& namespaceURI,

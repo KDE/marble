@@ -34,7 +34,7 @@ class RouteContainer;
 class GpxFile : public AbstractLayerInterface
 {
  public:
-    GpxFile( const QString &fileName );
+    explicit GpxFile( const QString &fileName );
     GpxFile();
 
     ~GpxFile();

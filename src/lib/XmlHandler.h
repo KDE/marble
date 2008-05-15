@@ -26,7 +26,7 @@ class XmlHandler : public QXmlDefaultHandler
 {
  public:
     XmlHandler();
-    XmlHandler( PlaceMarkContainer* );
+    explicit XmlHandler( PlaceMarkContainer* );
 
     bool startDocument();
     bool stopDocument();

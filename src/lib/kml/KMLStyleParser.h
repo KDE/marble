@@ -19,7 +19,7 @@ class KMLStyle;
 class KMLStyleParser : public KMLObjectParser
 {
   public:
-    KMLStyleParser( KMLStyle& style );
+    explicit KMLStyleParser( KMLStyle& style );
     virtual ~KMLStyleParser();
 
     virtual bool startElement( const QString& namespaceURI,

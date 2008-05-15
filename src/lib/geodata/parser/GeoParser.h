@@ -35,7 +35,7 @@ class GeoStackItem;
 
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader {
 public:
-    GeoParser(GeoDataGenericSourceType sourceType);
+    explicit GeoParser(GeoDataGenericSourceType sourceType);
     virtual ~GeoParser();
 
     // Main API.

@@ -34,7 +34,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
  public:
     enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
 
-    GeoSceneTexture( const QString& name );
+    explicit GeoSceneTexture( const QString& name );
     ~GeoSceneTexture();
 
     QString sourceDir() const;

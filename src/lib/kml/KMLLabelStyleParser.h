@@ -19,7 +19,7 @@ class KMLLabelStyle;
 class KMLLabelStyleParser : public KMLColorStyleParser
 {
   public:
-    KMLLabelStyleParser( KMLLabelStyle& labelStyle );
+    explicit KMLLabelStyleParser( KMLLabelStyle& labelStyle );
 
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,

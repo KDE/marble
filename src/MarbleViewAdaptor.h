@@ -42,7 +42,7 @@ class MarbleViewAdaptor : public QDBusAbstractAdaptor {
     Q_CLASSINFO("D-Bus Interface", "org.kde.DBus.MarbleView")
 
  public:
-    MarbleViewAdaptor( KAtlasView* marbleView )
+    explicit MarbleViewAdaptor( KAtlasView* marbleView )
         : QDBusAbstractAdaptor(marbleView)
     {
     }

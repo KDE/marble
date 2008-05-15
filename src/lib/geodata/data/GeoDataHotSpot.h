@@ -23,7 +23,8 @@ class GEODATA_EXPORT GeoDataHotSpot
   public:
     enum Units{Fraction, Pixels, InsetPixels};
 
-    GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ), Units xunits = Fraction, Units yunits = Fraction );
+    explicit GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
+                             Units xunits = Fraction, Units yunits = Fraction );
 
     const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
 

@@ -20,7 +20,7 @@ class KMLIconStyle;
 class KMLIconStyleParser : public KMLColorStyleParser
 {
   public:
-    KMLIconStyleParser( KMLIconStyle& iconStyle );
+    explicit KMLIconStyleParser( KMLIconStyle& iconStyle );
 
     virtual bool startElement( const QString& namespaceURI,
                                const QString& localName,

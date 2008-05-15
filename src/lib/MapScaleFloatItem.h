@@ -29,7 +29,7 @@ class MapScaleFloatItem : public QObject
     Q_OBJECT
 
  public:
-    MapScaleFloatItem(QObject *parent = 0);
+    explicit MapScaleFloatItem(QObject *parent = 0);
 
     int   invScale() const            { return m_invscale; }
     void  setInvScale( int invscale ) { m_invscale = invscale; }

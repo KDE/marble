@@ -34,7 +34,7 @@
 
 class GeoSceneVector : public GeoSceneAbstractDataset {
  public:
-    GeoSceneVector( const QString& name );
+    explicit GeoSceneVector( const QString& name );
     ~GeoSceneVector();
 
     QString sourceFile() const;

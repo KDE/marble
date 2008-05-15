@@ -222,7 +222,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  protected:
     /// Create a new GeoDataFeature with @p name as its name.
     GeoDataFeature();
-    GeoDataFeature( const QString& name );
+    explicit GeoDataFeature( const QString& name );
 
     /// The visual category of this feature.  @see GeoDataVisualCategory
     GeoDataVisualCategory  m_visualCategory;
