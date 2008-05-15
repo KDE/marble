@@ -10,7 +10,7 @@
 
 
 #ifndef TCCORE_H
-#define TCCOREGEOSCENEMAP_H
+#define TCCORE_H
 
 
 #include <QtCore/QCoreApplication>
