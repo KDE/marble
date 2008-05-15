@@ -32,7 +32,7 @@ class GeoPainterPrivate
 
     ~GeoPainterPrivate()
     {
-        delete m_x;
+        delete[] m_x;
     }
 
 //  TODO: Additionally consider dateline
