@@ -22,5 +22,58 @@
 #include "GeoDocument.h"
 
 #if DUMP_GEONODE_LEAKS > 0
+#include <cstdio>
+#endif
+
+#if DUMP_GEONODE_LEAKS > 0
 unsigned long GeoDocument::s_leakProtector = 0;
 #endif
+
+GeoDocument::GeoDocument()
+{
+}
+
+GeoDocument::~GeoDocument()
+{
+#if DUMP_GEONODE_LEAKS > 0
+    if ( s_leakProtector != 0 ) {
+        fprintf( stderr, "Found %li GeoNode object LEAKS!\n", s_leakProtector );
+        s_leakProtector = 0;
+    }
+#endif
+}
+
+bool GeoDocument::isGeoDataDocument() const
+{
+    return false;
+}
+
+bool GeoDocument::isGeoSceneDocument() const
+{
+    return false;
+}
+
+
+GeoNode::GeoNode()
+{
+#if DUMP_GEONODE_LEAKS > 0
+    GeoDocument::s_leakProtector++;
+
+#if DUMP_GEONODE_LEAKS > 1
+    fprintf( stderr, "Constructed new GeoNode object, leak protection count: %li\n",
+             GeoDocument::s_leakProtector );
+#endif
+#endif
+}
+
+GeoNode::~GeoNode()
+{
+#if DUMP_GEONODE_LEAKS > 0
+    --GeoDocument::s_leakProtector;
+
+#if DUMP_GEONODE_LEAKS > 1
+    fprintf( stderr, "Destructed GeoNode object, leak protection 1count: %li\n",
+             GeoDocument::s_leakProtector );
+#endif
+#endif
+}

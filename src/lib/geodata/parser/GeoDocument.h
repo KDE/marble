@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2008 Nikolas Zimmermann <zimmermann@kde.org>
+    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 
@@ -27,9 +28,6 @@
 // Set to a value greater than 1, to enable detailed tracking of construction/destruction of GeoNode objects
 #define DUMP_GEONODE_LEAKS 1
 
-#if DUMP_GEONODE_LEAKS > 0
-#include <stdio.h>
-#endif
 
 #include "geodata_export.h"
 
@@ -38,25 +36,17 @@
  */
 class GEODATA_EXPORT GeoDocument {
 protected:
-    GeoDocument() { }
+    GeoDocument();
 
 public:
 #if DUMP_GEONODE_LEAKS > 0
     static unsigned long s_leakProtector;
 #endif
 
-    virtual ~GeoDocument()
-    {
-#if DUMP_GEONODE_LEAKS > 0
-        if (s_leakProtector != 0) {
-            fprintf(stderr, "Found %li GeoNode object LEAKS!\n", s_leakProtector);
-            s_leakProtector = 0;
-        }
-#endif
-    }
+    virtual ~GeoDocument();
 
-    virtual bool isGeoDataDocument() const { return false; }
-    virtual bool isGeoSceneDocument() const { return false; }
+    virtual bool isGeoDataDocument() const;
+    virtual bool isGeoSceneDocument() const;
 };
 
 /**
@@ -64,28 +54,8 @@ public:
  */
 class GEODATA_EXPORT GeoNode {
 protected:
-#if DUMP_GEONODE_LEAKS > 0
-    GeoNode()
-    {
-        GeoDocument::s_leakProtector++;
-
-#if DUMP_GEONODE_LEAKS > 1
-        fprintf(stderr, "Constructed new GeoNode object, leak protection count: %li\n", GeoDocument::s_leakProtector);
-#endif
-    }
-
-    virtual ~GeoNode()
-    {
-        --GeoDocument::s_leakProtector;
-
-#if DUMP_GEONODE_LEAKS > 1
-        fprintf(stderr, "Destructed GeoNode object, leak protection 1count: %li\n", GeoDocument::s_leakProtector);
-#endif
-    }
-#else
-    GeoNode() { }
-    virtual ~GeoNode() { }
-#endif
+    GeoNode();
+    virtual ~GeoNode();
 };
 
 #endif // GeoDocument_h

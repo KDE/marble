@@ -1,5 +1,12 @@
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/parser/GeoDocument.h
+    * src/lib/geodata/parser/GeoDocument.cpp
+
+    Un-inline GeoDocument and GeoNode.
+
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/HttpFetchFile.cpp
 
     Fix memory leak.
