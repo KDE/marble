@@ -1,3 +1,14 @@
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/CrossHairFloatItem.h
+    * src/lib/geodata/data/GeoDataPlacemark.cpp
+    * src/lib/geodata/data/GeoDataFeature.h
+    * src/lib/geodata/data/GeoDataFeature.cpp
+    * src/lib/geodata/data/GeoDataPlacemark.h
+
+    - Fix dashboard issues (type qualifiers ignored on function return type).
+    - Make constructor explicit.
+
 2008-05-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/CrossHairFloatItem.h

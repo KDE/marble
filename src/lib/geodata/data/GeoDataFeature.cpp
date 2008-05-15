@@ -314,7 +314,7 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
     d->m_style = style;
 }
 
-const GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
+GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
 {
     return m_visualCategory;
 }
@@ -334,7 +334,7 @@ void GeoDataFeature::setRole( const QChar &role )
     d->m_role = role;
 }
 
-const int GeoDataFeature::popularityIndex() const
+int GeoDataFeature::popularityIndex() const
 {
     return d->m_popularityIndex;
 }
@@ -344,7 +344,7 @@ void GeoDataFeature::setPopularityIndex( int popularityIndex )
     d->m_popularityIndex = popularityIndex;
 }
 
-const qint64 GeoDataFeature::popularity() const
+qint64 GeoDataFeature::popularity() const
 {
     return d->m_popularity;
 }

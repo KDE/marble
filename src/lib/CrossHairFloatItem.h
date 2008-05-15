@@ -10,7 +10,7 @@
 //
 
 //
-// KAtlasCrossHair paints a crosshair
+// CrossHairFloatItem paints a crosshair
 //
 
 
@@ -31,8 +31,8 @@ class CrossHairFloatItem : public QObject
 
     void paint( QPainter*, int, int );
 
-    const bool enabled()            const { return m_enabled; }
-    void       setEnabled( bool enabled ) { m_enabled = enabled; }
+    bool enabled()            const { return m_enabled; }
+    void setEnabled( bool enabled ) { m_enabled = enabled; }
 
  protected:
     bool  m_enabled;

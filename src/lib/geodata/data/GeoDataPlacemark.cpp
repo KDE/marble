@@ -70,7 +70,7 @@ void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
     d->m_coordinate = GeoDataPoint( lon, lat, alt );
 }
 
-const double GeoDataPlacemark::area() const
+double GeoDataPlacemark::area() const
 {
     return d->m_area;
 }
@@ -80,7 +80,7 @@ void GeoDataPlacemark::setArea( double area )
     d->m_area = area;
 }
 
-const qint64 GeoDataPlacemark::population() const
+qint64 GeoDataPlacemark::population() const
 {
     return d->m_population;
 }

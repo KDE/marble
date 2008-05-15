@@ -149,7 +149,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the symbol index of the placemark.
      */
-    const GeoDataVisualCategory visualCategory() const; 
+    GeoDataVisualCategory visualCategory() const; 
     /**
      * Sets the symbol @p index of the placemark.
      * @param  category  the new category to be used.
@@ -175,7 +175,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * The popularity index is a value which describes at which zoom
      * level the placemark will be shown.
      */
-    const int popularityIndex() const;
+    int popularityIndex() const;
     /**
      * Sets the popularity @p index of the placemark.
      * @param  index  the new index to be used.
@@ -185,7 +185,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the popularity of the feature.
      */
-    const qint64 popularity() const;
+    qint64 popularity() const;
     /**
      * Sets the @p popularity of the feature.
      * @param  popularity  the new popularity value

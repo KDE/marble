@@ -46,7 +46,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark with the given @p name.
      */
-    GeoDataPlacemark( const QString &name );
+    explicit GeoDataPlacemark( const QString &name );
 
     /**
     * Delete the placemark
@@ -77,7 +77,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * move this into the GeoDataArea class which will get 
      * inherited from GeoDataPlaceMark (or GeoDataFeature). 
      */
-    const double area() const;
+    double area() const;
 
     /**
      * Set the area size of the feature in square km.
@@ -87,7 +87,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Return the population of the placemark.
      */
-    const qint64 population() const;
+    qint64 population() const;
     /**
      * Sets the @p population of the placemark.
      * @param  population  the new population value
