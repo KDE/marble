@@ -1,5 +1,11 @@
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * data/maps/earth/OpenStreetMap/0/0/0.png
+
+    Add OpenStreetMap base tile.
+
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * data/maps/earth/OpenStreetMap
     * data/maps/earth/OpenStreetMap/OpenStreetMap.dgml
     * data/maps/earth/OpenStreetMap/OpenStreetMap-preview.png
