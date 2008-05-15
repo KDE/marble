@@ -1,5 +1,11 @@
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/parser/GeoDocument.cpp
+
+    Fix conversion specifier for unsigned long int argument.
+
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/parser/GeoDocument.h
     * src/lib/geodata/parser/GeoDocument.cpp
 

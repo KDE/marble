@@ -37,7 +37,7 @@ GeoDocument::~GeoDocument()
 {
 #if DUMP_GEONODE_LEAKS > 0
     if ( s_leakProtector != 0 ) {
-        fprintf( stderr, "Found %li GeoNode object LEAKS!\n", s_leakProtector );
+        fprintf( stderr, "Found %lu GeoNode object LEAKS!\n", s_leakProtector );
         s_leakProtector = 0;
     }
 #endif
@@ -60,7 +60,7 @@ GeoNode::GeoNode()
     GeoDocument::s_leakProtector++;
 
 #if DUMP_GEONODE_LEAKS > 1
-    fprintf( stderr, "Constructed new GeoNode object, leak protection count: %li\n",
+    fprintf( stderr, "Constructed new GeoNode object, leak protection count: %lu\n",
              GeoDocument::s_leakProtector );
 #endif
 #endif
@@ -72,7 +72,7 @@ GeoNode::~GeoNode()
     --GeoDocument::s_leakProtector;
 
 #if DUMP_GEONODE_LEAKS > 1
-    fprintf( stderr, "Destructed GeoNode object, leak protection 1count: %li\n",
+    fprintf( stderr, "Destructed GeoNode object, leak protection count: %lu\n",
              GeoDocument::s_leakProtector );
 #endif
 #endif
