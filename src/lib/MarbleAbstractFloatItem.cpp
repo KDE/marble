@@ -22,7 +22,8 @@ class MarbleAbstractFloatItemPrivate
     MarbleAbstractFloatItemPrivate( const QPointF &point, const QSizeF &size )
         : m_position( point ),
           m_size( size ),
-          m_visible( true )
+          m_visible( true ), 
+          m_newItemProperties( true )
     {
         calculateLayout();
     }
@@ -67,6 +68,9 @@ class MarbleAbstractFloatItemPrivate
     static double       s_marginRight;
     static double       s_padding;
     static bool         s_pixmapCacheEnabled;
+
+    QPixmap             m_cachePixmap;
+    bool                m_newItemProperties;
 };
 
 QPen         MarbleAbstractFloatItemPrivate::s_pen = QPen( Qt::black );
@@ -110,6 +114,7 @@ void MarbleAbstractFloatItem::setSize( const QSizeF& size )
     d->m_size = size;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 QSizeF MarbleAbstractFloatItem::size() const
@@ -135,6 +140,7 @@ QPen MarbleAbstractFloatItem::pen() const
 void MarbleAbstractFloatItem::setPen( const QPen &pen )
 {
     d->s_pen = pen;
+    d->m_newItemProperties = true;
 }
 
 QBrush MarbleAbstractFloatItem::background() const
@@ -145,6 +151,7 @@ QBrush MarbleAbstractFloatItem::background() const
 void MarbleAbstractFloatItem::setBackground( const QBrush &background )
 {
     d->s_background = background;
+    d->m_newItemProperties = true;
 }
 
 QRectF MarbleAbstractFloatItem::contentRect() const
@@ -167,6 +174,7 @@ double MarbleAbstractFloatItem::border() const
 void MarbleAbstractFloatItem::setBorder( double border )
 {
     d->s_border = border;
+    d->m_newItemProperties = true;
 }
 
 QBrush MarbleAbstractFloatItem::borderBrush() const
@@ -177,6 +185,7 @@ QBrush MarbleAbstractFloatItem::borderBrush() const
 void MarbleAbstractFloatItem::setBorderBrush( const QBrush &borderBrush )
 {
     d->s_borderBrush = borderBrush;
+    d->m_newItemProperties = true;
 }
 
 Qt::PenStyle MarbleAbstractFloatItem::borderStyle () const
@@ -187,6 +196,7 @@ Qt::PenStyle MarbleAbstractFloatItem::borderStyle () const
 void MarbleAbstractFloatItem::setBorderStyle( Qt::PenStyle borderStyle )
 {
     d->s_borderStyle = borderStyle;
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::margin() const
@@ -199,6 +209,7 @@ void MarbleAbstractFloatItem::setMargin( double margin )
     d->s_margin = margin;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::marginTop() const
@@ -211,6 +222,7 @@ void MarbleAbstractFloatItem::setMarginTop( double marginTop )
     d->s_marginTop = marginTop;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::marginBottom() const
@@ -223,6 +235,7 @@ void MarbleAbstractFloatItem::setMarginBottom( double marginBottom )
     d->s_marginBottom = marginBottom;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::marginLeft() const
@@ -235,6 +248,7 @@ void MarbleAbstractFloatItem::setMarginLeft( double marginLeft )
     d->s_marginLeft = marginLeft;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::marginRight() const
@@ -247,6 +261,7 @@ void MarbleAbstractFloatItem::setMarginRight( double marginRight )
     d->s_marginRight = marginRight;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
 }
 
 double MarbleAbstractFloatItem::padding () const
@@ -259,6 +274,12 @@ void MarbleAbstractFloatItem::setPadding( double padding )
     d->s_padding = padding;
 
     d->calculateLayout();
+    d->m_newItemProperties = true;
+}
+
+bool MarbleAbstractFloatItem::needsUpdate() const
+{
+    return false;
 }
 
 bool MarbleAbstractFloatItem::pixmapCacheEnabled() const
@@ -269,6 +290,7 @@ bool MarbleAbstractFloatItem::pixmapCacheEnabled() const
 void MarbleAbstractFloatItem::setPixmapCacheEnabled( bool pixmapCacheEnabled )
 {
     d->s_pixmapCacheEnabled = pixmapCacheEnabled;
+    d->m_newItemProperties = true;
 }
 
 QString MarbleAbstractFloatItem::renderPolicy() const 
@@ -282,11 +304,38 @@ QString MarbleAbstractFloatItem::renderPosition() const {
 
 bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
+    // Prevent unneeded redraws
+    if ( !needsUpdate() && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
+        painter->drawPixmap( d->m_position, d->m_cachePixmap );
+        return true;
+    }
+
+    // Reinitialize cachePixmap if the float item changes its size 
+    // or other important common properties 
+    if ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) {
+        d->m_cachePixmap = QPixmap( d->m_size.toSize() );
+    }
+    // unset the dirty flag once all checks are passed
+    d->m_newItemProperties = false;
+
+    // Clear the pixmap and redirect the painter
+    if ( d->s_pixmapCacheEnabled ) {
+        d->m_cachePixmap.fill( Qt::transparent );
+        painter->setRedirected( painter->device(), &( d->m_cachePixmap ), d->m_position.toPoint() );
+        painter->begin( &( d->m_cachePixmap ) );
+    }
+
     painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
     painter->setBrush( d->s_background );
     painter->drawPath( backgroundShape() );
 
-    return renderContent( painter, viewport, layer );
+    bool success = renderContent( painter, viewport, layer );
+
+    if ( d->s_pixmapCacheEnabled ) {
+        painter->end();
+    }
+
+    return success;
 }
 
 bool MarbleAbstractFloatItem::renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )

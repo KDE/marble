@@ -87,6 +87,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
     double padding () const;
     void setPadding( double width );
 
+    virtual bool needsUpdate() const;
 
     bool pixmapCacheEnabled() const;
     void setPixmapCacheEnabled( bool enabled );

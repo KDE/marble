@@ -381,7 +381,7 @@ void GeoPainter::drawRect ( const GeoDataPoint & centerPoint, int width, int hei
     }
 }
 
-void GeoPainter::drawRoundRect ( const GeoDataPoint & centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
+void GeoPainter::drawRoundRect ( const GeoDataPoint &centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
 {
     int pointRepeatNum;
     int y;
@@ -409,7 +409,7 @@ void GeoPainter::drawLine ( int x1, int y1, int x2, int y2 )
     QPainter::drawLine( x1, y1, x2, y2 );
 }
 
-void GeoPainter::drawText ( int x, int y, const QString & text )
+void GeoPainter::drawText ( int x, int y, const QString &text )
 {
     QPainter::drawText( x, y, text );
 }
@@ -419,32 +419,42 @@ void GeoPainter::drawEllipse ( int x, int y, int width, int height )
     QPainter::drawEllipse( x, y, width, height);
 }
 
-void GeoPainter::drawImage ( const QRect & target, const QImage & image, const QRect & source, Qt::ImageConversionFlags flags )
+void GeoPainter::drawImage ( const QRect &target, const QImage &image, const QRect &source, Qt::ImageConversionFlags flags )
 {
     QPainter::drawImage( target, image, source, flags );
 }
 
-void GeoPainter::drawPixmap ( int x, int y, const QPixmap & pixmap )
+void GeoPainter::drawPixmap( int x, int y, const QPixmap &pixmap )
 {
     QPainter::drawPixmap( x, y, pixmap );
 }
 
-void GeoPainter::drawPolyline( const QPolygonF & polyline )
+void GeoPainter::drawPixmap( const QPointF &point, const QPixmap & pixmap )
+{
+    QPainter::drawPixmap( point, pixmap );
+}
+
+void GeoPainter::drawPixmap( const QPoint &point, const QPixmap & pixmap )
+{
+    QPainter::drawPixmap( point, pixmap );
+}
+
+void GeoPainter::drawPolyline( const QPolygonF &polyline )
 {
     ClipPainter::drawPolyline( polyline );
 }
 
-void GeoPainter::drawPolygon( const QPolygonF & polygon )
+void GeoPainter::drawPolygon( const QPolygonF &polygon )
 {
     ClipPainter::drawPolygon( polygon );
 }
 
-void GeoPainter::drawRect ( const QRectF & rectangle )
+void GeoPainter::drawRect ( const QRectF &rectangle )
 {
     QPainter::drawRect( rectangle );
 }
 
-void GeoPainter::drawRect ( const QRect & rectangle )
+void GeoPainter::drawRect ( const QRect &rectangle )
 {
     QPainter::drawRect( rectangle );
 }
