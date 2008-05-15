@@ -1078,6 +1078,7 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 
 void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )
 {
+    // FIXME: Rewrite as a switch
     if ( viewContext == Still )
     {
         d->m_stillQuality = mapQuality;
@@ -1096,7 +1097,7 @@ void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext
     }
 }
 
-ViewContext MarbleWidget::viewContext( Marble::ViewContext viewContext )
+ViewContext MarbleWidget::viewContext() const
 {
     return d->m_viewContext;
 }

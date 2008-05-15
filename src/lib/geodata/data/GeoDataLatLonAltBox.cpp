@@ -226,7 +226,14 @@ QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
     }
+
+    return QString( "GeoDataLatLonBox::text(): Error in unit: %1\n" )
+	.arg( unit );
 }
+
+
+// ================================================================
+//              class GeoDataLatLonAltBoxPrivate
 
 
 class GeoDataLatLonAltBoxPrivate
@@ -320,11 +327,18 @@ QString GeoDataLatLonAltBox::text( GeoDataPoint::Unit unit ) const
     switch( unit ){
     case GeoDataPoint::Radian:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-            .arg( north() ).arg( west() ).arg( d->m_maxAltitude ).arg( south() ).arg( east() ).arg( d->m_minAltitude ); 
+	    .arg( north() ).arg( west() )
+	    .arg( d->m_maxAltitude ).arg( south() )
+	    .arg( east() ).arg( d->m_minAltitude ); 
         break;
     case GeoDataPoint::Degree:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
-            .arg( north() * RAD2DEG ).arg( west() * RAD2DEG ).arg( d->m_maxAltitude ).arg( south() * RAD2DEG ).arg( east() * RAD2DEG ).arg( d->m_minAltitude ); 
+            .arg( north() * RAD2DEG ).arg( west() * RAD2DEG )
+	    .arg( d->m_maxAltitude ).arg( south() * RAD2DEG )
+	    .arg( east() * RAD2DEG ).arg( d->m_minAltitude ); 
         break;
     }
+
+    return QString( "GeoDataLatLonAltBox::text(): Error in unit: %1\n" )
+	.arg( unit );
 }

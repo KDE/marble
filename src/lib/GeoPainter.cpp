@@ -39,7 +39,9 @@ class GeoPainterPrivate
 //  TODO: Add Interpolation of points in case of globeHidesPoint points
 //  TODO: Implement isGeoProjected = true case using SLERP
 
-    void createPolygonsFromPoints ( const GeoDataPoint * points, int pointCount, QVector<QPolygon *> &polygons, bool isGeoProjected = false )
+    void createPolygonsFromPoints( const GeoDataPoint *points, int pointCount, 
+				   QVector<QPolygon *> &polygons, 
+				   bool isGeoProjected = false )
     {
         int x, y;
         bool previousGlobeHidesPoint;
@@ -48,12 +50,12 @@ class GeoPainterPrivate
         if ( isGeoProjected == false ) {
 
             QPolygon* polygon;
-//            QVector<QPolygon *> polygons;
+	    //QVector<QPolygon *> polygons;
 
             GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
             while( itPoint < points + pointCount ) {
                 bool globeHidesPoint;
-                bool visible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
+                //bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
                 if ( itPoint == points ){
                     polygon = new QPolygon;
                     previousGlobeHidesPoint = globeHidesPoint;
@@ -348,7 +350,9 @@ void GeoPainter::drawPolyline ( const GeoDataPoint * points, int pointCount, boo
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount, Qt::FillRule fillRule, bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount, 
+			       Qt::FillRule fillRule, 
+			       bool isGeoProjected )
 {
     QVector<QPolygon*> polygons;
     d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );

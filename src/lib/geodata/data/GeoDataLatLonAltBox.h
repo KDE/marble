@@ -142,6 +142,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     bool     virtual contains( const GeoDataPoint & );
     bool     virtual intersects( const GeoDataLatLonAltBox & );
+    using GeoDataLatLonBox::intersects;
 
     /**
      * @brief Dumps the boundaries of the bounding box for debugging purpose.

@@ -875,7 +875,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Retrieve the view context (i.e. still or animated map) 
      */
-    Marble::ViewContext viewContext( Marble::ViewContext viewContext );
+    Marble::ViewContext viewContext( ) const;
 
     /**
      * @brief Set the view context (i.e. still or animated map) 

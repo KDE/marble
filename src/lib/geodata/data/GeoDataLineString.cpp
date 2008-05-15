@@ -102,13 +102,13 @@ void GeoDataLineString::clear()
 QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator pos )
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataPoint>::erase( pos );
+    return QVector<GeoDataPoint>::erase( pos );
 }
 
 QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator begin, 
                                                            QVector<GeoDataPoint>::Iterator end )
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataPoint>::erase( begin, end );
+    return QVector<GeoDataPoint>::erase( begin, end );
 }
 
