@@ -3,7 +3,8 @@
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>"
- * Copyright 2008       Patrick Spendrin <ps_ml@gmx.de>"
+ * Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+ * Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -37,7 +38,7 @@ int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
             .arg( level );
         return 0;
     }
-    return levelZeroRows * ( 1 << level );
+    return levelZeroRows << level;
 }
 
 int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
@@ -47,7 +48,7 @@ int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
             .arg( level );
         return 0;
     }
-    return levelZeroColumns * ( 1 << level );
+    return levelZeroColumns << level;
 }
 
 int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )

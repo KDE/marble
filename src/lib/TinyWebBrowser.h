@@ -30,7 +30,7 @@ class TinyWebBrowser : public QTextBrowser
     Q_OBJECT
 
  public:
-    TinyWebBrowser( QWidget* parent = 0 );
+    explicit TinyWebBrowser( QWidget* parent = 0 );
     ~TinyWebBrowser();
 
  public Q_SLOTS:

@@ -1,5 +1,18 @@
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MapThemeManager.h
+    * src/lib/MapThemeManager.cpp
+    * src/lib/TileLoaderHelper.cpp
+    * src/lib/TinyWebBrowser.h
+    * src/lib/TileLoaderHelper.h
+
+    Several small changes:
+    - Add my copyright to the files where I contributed in a significant way.
+    - Make constructory explicit.
+    - Simplify shift expressions in TileLoaderHelper after hint from Inge Wallin.
+
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/CrossHairFloatItem.h
     * src/lib/geodata/data/GeoDataPlacemark.cpp
     * src/lib/geodata/data/GeoDataFeature.h
