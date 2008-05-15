@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+
+        <head>
+            <name>OpenStreetMap</name>
+            <target>earth</target>
+            <theme>OpenStreetMap</theme>
+            <icon pixmap="OpenStreetMap-preview.png"/>
+            <visible>true</visible>
+            <description>The world as rendered by openstreetmap.org (mapnik)</description>
+            <zoom>
+                <minimum>  1000  </minimum>
+                <maximum>  4000  </maximum>
+                <discrete> false </discrete>
+            </zoom>
+        </head>
+
+        <map bgcolor="#000000">
+            <canvas/>
+            <target/>
+            <layer name="mapnik" backend="texture" >          <!-- role="dem" > -->
+                <texture name="mapnik_data">
+                    <sourcedir format="PNG"> earth/OpenStreetMap </sourcedir>
+                    <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
+                </texture>
+            </layer>
+        </map>
+
+    </document>
+</dgml>

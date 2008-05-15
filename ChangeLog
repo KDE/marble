@@ -1,5 +1,13 @@
 2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * data/maps/earth/OpenStreetMap
+    * data/maps/earth/OpenStreetMap/OpenStreetMap.dgml
+    * data/maps/earth/OpenStreetMap/OpenStreetMap-preview.png
+
+    Add .dgml and icon for OpenStreetMap theme.
+
+2008-05-15  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/GeoPainter.cpp
 
     Fix memory leak.
