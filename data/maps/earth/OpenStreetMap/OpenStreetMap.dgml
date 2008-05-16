@@ -19,7 +19,7 @@
         <map bgcolor="#000000">
             <canvas/>
             <target/>
-            <layer name="mapnik" backend="texture" >          <!-- role="dem" > -->
+            <layer name="OpenStreetMap" backend="texture" >          <!-- role="dem" > -->
                 <texture name="mapnik_data">
                     <sourcedir format="PNG"> earth/OpenStreetMap </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
