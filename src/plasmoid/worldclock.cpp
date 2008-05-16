@@ -70,10 +70,10 @@ void WorldClock::init()
         if ( curzone.latitude() == KTimeZone::UNKNOWN || 
              curzone.longitude() == KTimeZone::UNKNOWN ) {
             m_locations.remove( zones.at(i) );
-            kDebug() << "Removed TZ " << zones.at(i);
+            //kDebug() << "Removed TZ " << zones.at(i);
         } else {
-            kDebug() << "Kept TZ " << zones.at(i) << " at " << curzone.latitude()
-                     << "," << curzone.longitude();
+            //kDebug() << "Kept TZ " << zones.at(i) << " at " << curzone.latitude()
+                     //<< "," << curzone.longitude();
         }
     }
     //we'll change the timezone before it's even
@@ -102,10 +102,12 @@ void WorldClock::init()
     m_map->setShowScaleBar( false );
     m_map->setShowGrid( false );
     m_map->setShowPlaces( false );
-    m_map->setShowCities( true );
+    m_map->setShowCities( false );
     m_map->setShowOtherPlaces( false );
     m_map->setShowRelief( true );
     m_map->setShowIceLayer( true );
+    m_map->setShowPlaces( false );
+    m_map->setShowOtherPlaces( false );
     //Radius*4 = width
     m_map->setRadius( 100 );
 
@@ -118,9 +120,10 @@ void WorldClock::init()
     m_sun->update();
     m_map->updateSun();
 
+    connectToEngine();
+
     //We need to zoom the map every time we change size
     connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
-    kDebug() << "End of init(), m_locations.isEmpty() =" << m_locations.isEmpty();
 }
  
 WorldClock::~WorldClock()
@@ -131,7 +134,7 @@ WorldClock::~WorldClock()
 void WorldClock::connectToEngine()
 {
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
-    m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
+    m_timeEngine->connectSource( "Local", this, 60, Plasma::AlignToMinute);
 }
 
 void WorldClock::resizeMap()
@@ -145,12 +148,14 @@ void WorldClock::resizeMap()
  
 
 
-void WorldClock::dataUpdated(const QString &name, 
+void WorldClock::dataUpdated(const QString &source, 
                              const Plasma::DataEngine::Data &data)
 {
+    kDebug() << "Time = " << data["Time"].toTime();
     m_localtime = QDateTime( QDate::currentDate(), data["Time"].toTime() );
     m_time = KSystemTimeZones::local().convert( m_locations.value( m_locationkey ),
                                                 m_localtime );
+    kDebug() << "Adjusted Time = " << m_time;
     m_sun->update();
     m_map->updateSun();
     update();
@@ -244,7 +249,11 @@ void WorldClock::paintInterface(QPainter *p,
     m_map->paint(gp, rect);
     p->drawPixmap( 0, 0, pixmap );
     if ( m_isHovered ) {
-        QString time = m_time.toString( "h:m" );
+        kDebug() << "m_isHovered = true, painting text";
+        kDebug() << m_time;
+        p->setPen( QColor( 255, 255, 255 ) );
+        QString timestr = m_time.toString( "h:m" );
+        kDebug() << "time string = " << timestr;
 
         /*
         int width = rect.width() / 4;
@@ -262,7 +271,7 @@ void WorldClock::paintInterface(QPainter *p,
 
         p->setFont( QFont( "Helvetica", 12, QFont::Bold) );
         p->drawText( 0,0 , rect.width(), rect.height() / 2.2,
-                Qt::AlignHCenter | Qt::AlignBottom, time );
+                Qt::AlignHCenter | Qt::AlignBottom, timestr );
 
         p->setFont( QFont( "Helvetica", 8, QFont::Bold) );
         p->drawText( 0,0 , rect.width(), rect.height() / 1.8,

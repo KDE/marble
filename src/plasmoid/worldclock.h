@@ -44,7 +44,7 @@ class WorldClock : public Plasma::Applet
 	                    const QStyleOptionGraphicsItem *option,
                             const QRect& contentsRect);
     public slots:
-        void dataUpdated(const QString &name,
+        void dataUpdated(const QString &source,
 	                 const Plasma::DataEngine::Data &data);
 	void showConfigurationInterface();
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
