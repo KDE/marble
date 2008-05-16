@@ -221,6 +221,8 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     viewParams->propertyValue( "terrain", showTerrain );
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
+    GeoDataLatLonAltBox latLonAltBox = viewParams->viewport()->viewLatLonAltBox();
+
     /**
      * First handle the selected placemarks, as they have the highest priority.
      */
@@ -230,11 +232,14 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), x, y ) )
-        {
-            delete m_visiblePlaceMarks.take( index );
-            continue;
-        }
+        GeoDataPoint geopoint = ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index );
+
+        if ( !latLonAltBox.contains( geopoint ) ||
+             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
+            {
+                delete m_visiblePlaceMarks.take( index );
+                continue;
+            }
 
         // ----------------------------------------------------------------
         // End of checks. Here the actual layouting starts.
@@ -324,11 +329,14 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                 break;
         }
 
-	if ( ! viewParams->currentProjection()->screenCoordinates( ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index ), viewParams->viewport(), x, y ) )
-        {
-            delete m_visiblePlaceMarks.take( index );
-            continue;
-        }
+        GeoDataPoint geopoint = ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index );
+
+        if ( !latLonAltBox.contains( geopoint ) ||
+             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
+            {
+                delete m_visiblePlaceMarks.take( index );
+                continue;
+            }
 
         const int visualCategory  = index.data( MarblePlacemarkModel::VisualCategoryRole ).toInt();
 

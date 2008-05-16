@@ -358,11 +358,12 @@ void GeoDataLatLonAltBox::setAltitudeMode( const AltitudeMode altitudeMode )
 
 bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point )
 {
-    if ( GeoDataLatLonBox::contains( point ) == false )
+    if ( !GeoDataLatLonBox::contains( point ) )
         return false;
 
-    if ( point.altitude() < d->m_minAltitude || point.altitude() > d->m_maxAltitude )
+    if ( point.altitude() < d->m_minAltitude || point.altitude() > d->m_maxAltitude ) {
         return false;
+    }
 
     return true;
 }
