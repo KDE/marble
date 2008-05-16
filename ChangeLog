@@ -1,5 +1,12 @@
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarbleModel.cpp (setMapTheme)
+
+    Part 10 of groundwork for OpenStreetMap texture tiles.
+    Do not call TileCreator if installmap (DGML) is empty.
+
+2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * data/CMakeLists.txt
 
     Part 9 of groundwork for OpenStreetMap texture tiles.

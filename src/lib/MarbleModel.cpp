@@ -269,7 +269,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( texture ) ) {
+        if ( !TileLoader::baseTilesAvailable( texture ) && !installMap.isEmpty() ) {
             qDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
