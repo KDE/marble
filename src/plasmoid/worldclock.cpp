@@ -131,7 +131,7 @@ WorldClock::~WorldClock()
 void WorldClock::connectToEngine()
 {
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
-    m_timeEngine->connectSource( m_locationkey, this, 6000, Plasma::AlignToMinute);
+    m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
 }
 
 void WorldClock::resizeMap()
@@ -148,8 +148,9 @@ void WorldClock::resizeMap()
 void WorldClock::dataUpdated(const QString &name, 
                              const Plasma::DataEngine::Data &data)
 {
-    m_time = data["Time"].toTime();
-    m_city = data["Timezone City"].toString();
+    m_localtime = QDateTime( QDate::currentDate(), data["Time"].toTime() );
+    m_time = KSystemTimeZones::local().convert( m_locations.value( m_locationkey ),
+                                                m_localtime );
     m_sun->update();
     m_map->updateSun();
     update();
@@ -220,11 +221,10 @@ QString WorldClock::getZone()
 
 void WorldClock::setTz( QString newtz )
 {
-    kDebug() << "Disconnecting Source: " << m_locationkey;
-    m_timeEngine->disconnectSource( m_locationkey, this );
-    kDebug() << "Connecting Source: " << newtz;
-    m_timeEngine->connectSource( newtz, this, 6000, Plasma::AlignToMinute);
+    if ( newtz == m_locationkey ) { return; }
     m_locationkey = newtz;
+    m_time = KSystemTimeZones::local().convert( m_locations.value( m_locationkey ),
+                                                m_localtime );
 }
 
 void WorldClock::paintInterface(QPainter *p, 
@@ -236,9 +236,11 @@ void WorldClock::paintInterface(QPainter *p,
     //By creating a pixmap and then painting that
     //we avoid an issue where the map is offset
     //from the border of the plasmoid and it looks ugly
+    //Also painting with two painters onto the same device makes errors.
     QPixmap pixmap( rect.size() ); 
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
     m_map->paint(gp, rect);
+    p->drawPixmap( 0, 0, pixmap );
     if ( m_isHovered ) {
         QString time = m_time.toString( "h:m" );
 
@@ -262,7 +264,7 @@ void WorldClock::paintInterface(QPainter *p,
 
         p->setFont( QFont( "Helvetica", 8, QFont::Bold) );
         p->drawText( 0,0 , rect.width(), rect.height() / 1.8,
-                Qt::AlignHCenter | Qt::AlignBottom, m_city );
+                Qt::AlignHCenter | Qt::AlignBottom, m_locations.value( m_locationkey ).name() );
     }
 }
 

@@ -61,7 +61,8 @@ class WorldClock : public Plasma::Applet
         bool m_isHovered;
         QPointF m_hover;
         QMap<QString, KTimeZone> m_locations;
-        QTime m_time;
+        QDateTime m_time;
+        QDateTime m_localtime;
         QString m_city;
         QString m_locationkey;
         MarbleMap *m_map;
