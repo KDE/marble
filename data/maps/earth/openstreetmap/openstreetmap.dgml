@@ -5,8 +5,8 @@
         <head>
             <name>OpenStreetMap</name>
             <target>earth</target>
-            <theme>OpenStreetMap</theme>
-            <icon pixmap="OpenStreetMap-preview.png"/>
+            <theme>openstreetmap</theme>
+            <icon pixmap="openstreetmap-preview.png"/>
             <visible>true</visible>
             <description>The world as rendered by openstreetmap.org (mapnik)</description>
             <zoom>
@@ -19,9 +19,9 @@
         <map bgcolor="#000000">
             <canvas/>
             <target/>
-            <layer name="OpenStreetMap" backend="texture" >          <!-- role="dem" > -->
+            <layer name="openstreetmap" backend="texture" >          <!-- role="dem" > -->
                 <texture name="mapnik_data">
-                    <sourcedir format="PNG"> earth/OpenStreetMap </sourcedir>
+                    <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
                 </texture>
             </layer>
