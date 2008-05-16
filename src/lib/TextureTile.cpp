@@ -71,6 +71,7 @@ TextureTile::TextureTile( TileId const& id )
 TextureTile::~TextureTile()
 {
     switch ( m_depth ) {
+    case 48:
     case 32:
 	delete [] jumpTable32;
 	break;
@@ -180,6 +181,7 @@ void TextureTile::loadTile( bool requestTileUpdate )
   }
 
   switch ( m_depth ) {
+      case 48:
       case 32:
           if ( jumpTable32 ) delete [] jumpTable32;
           jumpTable32 = jumpTableFromQImage32( m_rawtile );

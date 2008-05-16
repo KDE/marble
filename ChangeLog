@@ -1,6 +1,16 @@
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/TextureTile.cpp
+    (loadTile)
+    (destructor)
+
+    Part 8 of groundwork for OpenStreetMap texture tiles.
+    Add support for 48 bit color depth, reuse jumpTableFromQImage32 for that.
+    TODO: change names *32 to *_32_48?
+
+2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TextureTile.cpp
     * src/lib/TextureTile.h (pixel)
     (loadTile)
     (destructor)
