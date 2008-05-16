@@ -168,4 +168,6 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     GeoDataLatLonAltBoxPrivate  * const d;
 };
 
+bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+
 #endif // GEODATALATLONALTBOX
