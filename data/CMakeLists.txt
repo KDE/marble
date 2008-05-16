@@ -79,6 +79,15 @@ maps/earth/plain/plain.dgml
 maps/earth/plain/plain-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
 
+install (FILES
+maps/earth/openstreetmap/openstreetmap.dgml
+maps/earth/openstreetmap/openstreetmap-preview.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap)
+
+install (FILES
+maps/earth/openstreetmap/0/0/0.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
+
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}
