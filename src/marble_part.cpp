@@ -307,6 +307,10 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
 
+    // Proxy
+    m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
+                                             MarbleSettings::proxyPort() );
+
     slotUpdateSettings();
 }
 
@@ -341,9 +345,13 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
-    // Caches and Proxy
+    // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
+
+    // Proxy
+    MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
+    MarbleSettings::setProxyPort( m_controlView->marbleWidget()->proxyPort() );
 
     MarbleSettings::self()->writeConfig();
 }
@@ -537,6 +545,9 @@ void MarblePart::slotUpdateSettings()
 
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );
+
+    m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
+                                             MarbleSettings::proxyPort() );
 
     m_controlView->marbleWidget()->updateChangedMap();
 }

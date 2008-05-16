@@ -21,6 +21,7 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
+#include <QtNetwork/QNetworkProxy>
 
 //#include <QtDBus/QDBusConnection>
 
@@ -68,7 +69,9 @@ class MarbleWidgetPrivate
         : m_parent( parent ), m_map( map ), 
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
-          m_inputhandler( 0 )
+          m_inputhandler( 0 ),
+          m_proxyHost(),
+          m_proxyPort( 0 )
     {
         m_model = m_map->model();
     }
@@ -100,6 +103,9 @@ class MarbleWidgetPrivate
 
     // The region on the widget where the user can drag the map.
     QRegion          m_activeRegion;
+
+    QString          m_proxyHost;
+    qint16           m_proxyPort;
 };
 
 
@@ -1174,6 +1180,31 @@ void MarbleWidget::disableInput()
     setInputHandler( 0 );
     setCursor( Qt::ArrowCursor );
 }
+
+void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort )
+{
+    d->m_proxyHost = proxyHost;
+    d->m_proxyPort = proxyPort;
+
+    QNetworkProxy::ProxyType type = QNetworkProxy::HttpProxy;
+    if ( proxyHost.isEmpty() )
+        type = QNetworkProxy::NoProxy;
+
+    QNetworkProxy proxy( type, d->m_proxyHost, d->m_proxyPort );
+    QNetworkProxy::setApplicationProxy( proxy );
+    qDebug() << "MarbleWidget::setProxy" << type << d->m_proxyHost << d->m_proxyPort;
+}
+
+QString MarbleWidget::proxyHost() const
+{
+    return d->m_proxyHost;
+}
+
+quint16 MarbleWidget::proxyPort() const
+{
+    return d->m_proxyPort;
+}
+
 /*
 void MarbleWidget::repaintMap()
 {

@@ -453,6 +453,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     SunLocator* sunLocator();
 
+    void setProxy( const QString& proxyHost, const quint16 proxyPort );
+    QString proxyHost() const;
+    quint16 proxyPort() const;
+
  public Q_SLOTS:
 
     void updateSun();
