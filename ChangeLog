@@ -1,3 +1,19 @@
+2008-05-16  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/lib/geodata/data/GeoDataContainer.{h,cpp}:
+    * src/lib/geodata/data/GeoDataHotSpot.{h,cpp}:
+    * src/lib/geodata/data/GeoDataIconStyle.cpp:
+    - fixed the constructors (added the proper constructor
+    in the d-pointer
+    - moved protected members to the d-pointer
+
+    * src/lib/geodata/data/GeoDataLabelStyle.h:
+    - fix: changed protected to private
+
+    * src/lib/geodata/data/GeoDataLabelStyle.{h,cpp}:
+    * src/lib/geodata/data/GeoDataStyleSelector.{h,cpp}:
+    - Change to use the d-pointer technique
+
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * data/maps/earth/OpenStreetMap

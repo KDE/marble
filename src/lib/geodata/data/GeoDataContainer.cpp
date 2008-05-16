@@ -29,7 +29,11 @@ class GeoDataContainerPrivate
 
     ~GeoDataContainerPrivate()
     {
+        qDeleteAll(m_features);
     }
+
+    /// The vector holding all the features in the container.
+    QVector < GeoDataFeature* >  m_features;
 };
 
 GeoDataContainer::GeoDataContainer()
@@ -39,7 +43,6 @@ GeoDataContainer::GeoDataContainer()
 
 GeoDataContainer::~GeoDataContainer()
 {
-    qDeleteAll(m_features);
     delete d;
 }
 
@@ -48,8 +51,8 @@ QVector<GeoDataFolder*> GeoDataContainer::folders() const
 {
     QVector<GeoDataFolder*> results;
 
-    QVector<GeoDataFeature*>::const_iterator it = m_features.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = m_features.constEnd();
+    QVector<GeoDataFeature*>::const_iterator it = d->m_features.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = d->m_features.constEnd();
 
     for (; it != end; ++it) {
         GeoDataFeature* feature = *it;
@@ -63,17 +66,17 @@ QVector<GeoDataFolder*> GeoDataContainer::folders() const
 
 void GeoDataContainer::addFeature(GeoDataFeature* feature)
 {
-    m_features.append(feature);
+    d->m_features.append(feature);
 }
 
 void GeoDataContainer::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
 
-    stream << m_features.count();
+    stream << d->m_features.count();
 
-    for ( QVector <GeoDataFeature*>::const_iterator iterator = m_features.constBegin();
-          iterator != m_features.end();
+    for ( QVector <GeoDataFeature*>::const_iterator iterator = d->m_features.constBegin();
+          iterator != d->m_features.end();
           iterator++ )
     {
         const GeoDataFeature& feature = * ( *iterator );

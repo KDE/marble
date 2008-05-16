@@ -11,46 +11,76 @@
 
 #include "GeoDataLabelStyle.h"
 
+class GeoDataLabelStylePrivate
+{
+  public:
+    GeoDataLabelStylePrivate()
+    {
+    }
+
+    GeoDataLabelStylePrivate( const QFont &font )
+        : m_scale( 1.0 ),
+          m_alignment( GeoDataLabelStyle::Corner ),
+          m_font( font )
+    {
+    }
+
+    ~GeoDataLabelStylePrivate()
+    {
+    }
+
+    /// The current scale of the label
+    float  m_scale;
+    /// The current alignment of the label
+    GeoDataLabelStyle::Alignment m_alignment;
+    /// The current font of the label
+    QFont  m_font;   // Not a KML property
+};
+
 GeoDataLabelStyle::GeoDataLabelStyle()
+    : d (new GeoDataLabelStylePrivate )
 {
 }
 
 GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
-  : m_scale( 1.0 ),
-    m_alignment( GeoDataLabelStyle::Corner ),
-    m_font( font )
+    : d (new GeoDataLabelStylePrivate( font ) )
 {
     setColor( color );
 }
 
+GeoDataLabelStyle::~GeoDataLabelStyle()
+{
+    delete d;
+}
+
 void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )
 {
-    m_alignment = alignment;
+    d->m_alignment = alignment;
 }
 
 GeoDataLabelStyle::Alignment GeoDataLabelStyle::alignment() const
 {
-    return m_alignment;
+    return d->m_alignment;
 }
 
 void GeoDataLabelStyle::setScale( const float &scale )
 {
-    m_scale = scale;
+    d->m_scale = scale;
 }
 
 float GeoDataLabelStyle::scale() const
 {
-    return m_scale;
+    return d->m_scale;
 }
 
 void GeoDataLabelStyle::setFont( const QFont &font )
 {
-    m_font = font;
+    d->m_font = font;
 }
 
 QFont GeoDataLabelStyle::font() const
 {
-    return m_font;
+    return d->m_font;
 }
 
 

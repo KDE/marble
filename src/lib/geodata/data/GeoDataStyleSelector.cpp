@@ -12,30 +12,52 @@
 #include "GeoDataStyleSelector.h"
 #include <QtCore/QDataStream>
 
-GeoDataStyleSelector::GeoDataStyleSelector()
+class GeoDataStyleSelectorPrivate
 {
+  public:
+    GeoDataStyleSelectorPrivate()
+    {
+    }
+
+    ~GeoDataStyleSelectorPrivate()
+    {
+    }
+
+    /// The style id.
+    QString  m_styleId;
+};
+
+
+GeoDataStyleSelector::GeoDataStyleSelector()
+    : d( new GeoDataStyleSelectorPrivate )
+{
+}
+
+GeoDataStyleSelector::~GeoDataStyleSelector()
+{
+    delete d;
 }
 
 void GeoDataStyleSelector::setStyleId( const QString &value )
 {
-    m_styleId = value;
+    d->m_styleId = value;
 }
 
 QString GeoDataStyleSelector::styleId() const
 {
-    return m_styleId;
+    return d->m_styleId;
 }
 
 void GeoDataStyleSelector::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << m_styleId;
+    stream << d->m_styleId;
 }
 
 void GeoDataStyleSelector::unpack( QDataStream& stream )
 {
     GeoDataObject::unpack( stream );
 
-    stream >> m_styleId;
+    stream >> d->m_styleId;
 }

@@ -20,6 +20,8 @@
 
 #include "geodata_export.h"
 
+class GeoDataStyleSelectorPrivate;
+
 /**
  * @short a base class for the style classes
  *
@@ -59,10 +61,10 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 
   protected:
     GeoDataStyleSelector();
+    ~GeoDataStyleSelector();
 
-  protected:
-    /// The style id.
-    QString  m_styleId;
+  private:
+    GeoDataStyleSelectorPrivate * const d;
 };
 
 #endif // GEODATASTYLESELECTOR_H

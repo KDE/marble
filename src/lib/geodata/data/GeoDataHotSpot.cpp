@@ -18,6 +18,13 @@ class GeoDataHotSpotPrivate
     {
     }
 
+    GeoDataHotSpotPrivate( const QPointF& hotSpot, GeoDataHotSpot::Units xunits, GeoDataHotSpot::Units yunits )
+        : m_hotSpot( hotSpot ),
+          m_xunits( xunits ),
+          m_yunits( yunits )
+    {
+    }
+
     ~GeoDataHotSpotPrivate()
     {
     }
@@ -27,10 +34,9 @@ class GeoDataHotSpotPrivate
     GeoDataHotSpot::Units m_yunits;
 };
 
-GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits ) :
-    d( new GeoDataHotSpotPrivate() )
+GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits ) 
+    : d( new GeoDataHotSpotPrivate( hotSpot, xunits, yunits ) )
 {
-    setHotSpot( hotSpot, xunits, yunits );
 }
 
 GeoDataHotSpot::~GeoDataHotSpot()

@@ -79,8 +79,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
  protected:
     /// Default constructor
     GeoDataContainer();
-    /// The vector holding all the features in the container.
-    QVector < GeoDataFeature* >  m_features;
 
  private:
     GeoDataContainerPrivate * const d;

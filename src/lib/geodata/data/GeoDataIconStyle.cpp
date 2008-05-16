@@ -16,15 +16,23 @@
 class GeoDataIconStylePrivate
 {
   public:
-    GeoDataIconStylePrivate() :
-        m_scale( 1.0 ),
-        m_icon( QPixmap() ),
-        m_hotSpot( new GeoDataHotSpot() )
+    GeoDataIconStylePrivate() 
+        : m_scale( 1.0 ),
+          m_icon( QPixmap() ),
+          m_hotSpot( new GeoDataHotSpot() )
+    {
+    }
+
+    GeoDataIconStylePrivate( const QPixmap& icon, const QPointF &hotSpot )
+        : m_scale( 1.0 ),
+          m_icon( icon ),
+          m_hotSpot( new GeoDataHotSpot( hotSpot ) )
     {
     }
 
     ~GeoDataIconStylePrivate()
     {
+        delete m_hotSpot;
     }
 
     float            m_scale;
@@ -40,15 +48,12 @@ GeoDataIconStyle::GeoDataIconStyle() :
 }
 
 GeoDataIconStyle::GeoDataIconStyle( const QPixmap& icon, const QPointF &hotSpot ) :
-    d( new GeoDataIconStylePrivate() )
+    d( new GeoDataIconStylePrivate( icon, hotSpot ) )
 {
-    d->m_icon = icon;
-    d->m_hotSpot->setHotSpot(hotSpot);
 }
 
 GeoDataIconStyle::~GeoDataIconStyle()
 {
-    delete d->m_hotSpot;
     delete d;
 }
 

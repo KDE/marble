@@ -20,6 +20,7 @@
 
 #include "geodata_export.h"
 
+class GeoDataLabelStylePrivate;
 
 /**
  * @short specifies how the <b>name</b> of a GeoDataFeature is drawn
@@ -42,6 +43,8 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      * @param  color  the color to use when showing the name @see GeoDataColorStyle
      */
     GeoDataLabelStyle( const QFont &font, const QColor &color );
+
+    ~GeoDataLabelStyle();
 
     /**
      * @brief Set the scale of the label
@@ -85,13 +88,8 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
      */
     virtual void unpack( QDataStream& stream );
 
-  protected:
-    /// The current scale of the label
-    float  m_scale;
-    /// The current alignment of the label
-    Alignment m_alignment;
-    /// The current font of the label
-    QFont  m_font;   // Not a KML property
+  private:
+    GeoDataLabelStylePrivate * const d;
 };
 
 #endif // GEODATALABELSTYLE_H

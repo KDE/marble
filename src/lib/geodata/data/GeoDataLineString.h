@@ -67,7 +67,7 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
     QVector<GeoDataPoint>::Iterator erase ( QVector<GeoDataPoint>::Iterator begin,
                                             QVector<GeoDataPoint>::Iterator end );
 
- protected:
+ private:
     GeoDataLineStringPrivate  * const d;
 };
 
