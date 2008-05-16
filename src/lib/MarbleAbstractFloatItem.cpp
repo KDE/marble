@@ -303,56 +303,74 @@ QString MarbleAbstractFloatItem::renderPolicy() const
     return "ALWAYS";
 }
 
-QString MarbleAbstractFloatItem::renderPosition() const {
-    return "ALWAYS_ON_TOP";
+QStringList MarbleAbstractFloatItem::renderPosition() const {
+    return QStringList( "FLOAT_ITEM" );
 }
 
-bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
 {
-    // Prevent unneeded redraws
-    if ( !needsUpdate( viewport ) && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
-        painter->drawPixmap( d->m_position, d->m_cachePixmap );
-        return true;
+//    qDebug() << "renderPos: " << renderPos;
+    bool success = true;
+
+    if ( renderPos == "FLOAT_ITEM" ) {
+        // Prevent unneeded redraws
+        if ( !needsUpdate( viewport ) && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
+            painter->drawPixmap( d->m_position, d->m_cachePixmap );
+            return true;
+        }
+    
+        // Reinitialize cachePixmap if the float item changes its size 
+        // or other important common properties 
+        if ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) {
+            // Add extra space for the border
+            QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 );
+            d->m_cachePixmap = QPixmap( cachePixmapSize );
+        }
+        // unset the dirty flag once all checks are passed
+        d->m_newItemProperties = false;
+    
+        // Clear the pixmap and redirect the painter
+        QPaintDevice* mapDevice = painter->device();
+    
+        if ( d->s_pixmapCacheEnabled ) {
+            d->m_cachePixmap.fill( Qt::transparent );
+            painter->end();
+            GeoPainter::setRedirected( mapDevice, &( d->m_cachePixmap ) );
+            painter->begin( &( d->m_cachePixmap ) );
+            painter->translate( -d->m_position.x(), -d->m_position.y() );
+        }
+    
+        painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
+        painter->setBrush( d->s_background );
+        painter->drawPath( backgroundShape() );
+    
+        success = renderFloatItem( painter, viewport, layer );
+    
+        if ( d->s_pixmapCacheEnabled ) {
+            painter->end();
+            GeoPainter::restoreRedirected( mapDevice );
+            painter->begin( mapDevice );
+            painter->drawPixmap( d->m_position, d->m_cachePixmap );
+        }
     }
-
-    // Reinitialize cachePixmap if the float item changes its size 
-    // or other important common properties 
-    if ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) {
-        // Add extra space for the border
-        QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 );
-        d->m_cachePixmap = QPixmap( cachePixmapSize );
-    }
-    // unset the dirty flag once all checks are passed
-    d->m_newItemProperties = false;
-
-    // Clear the pixmap and redirect the painter
-    QPaintDevice* mapDevice = painter->device();
-
-    if ( d->s_pixmapCacheEnabled ) {
-        d->m_cachePixmap.fill( Qt::transparent );
-        painter->end();
-        GeoPainter::setRedirected( mapDevice, &( d->m_cachePixmap ) );
-        painter->begin( &( d->m_cachePixmap ) );
-        painter->translate( -d->m_position.x(), -d->m_position.y() );
-    }
-
-    painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
-    painter->setBrush( d->s_background );
-    painter->drawPath( backgroundShape() );
-
-    bool success = renderContent( painter, viewport, layer );
-
-    if ( d->s_pixmapCacheEnabled ) {
-        painter->end();
-        GeoPainter::restoreRedirected( mapDevice );
-        painter->begin( mapDevice );
-        painter->drawPixmap( d->m_position, d->m_cachePixmap );
+    else {
+        success = renderOnMap( painter, viewport, renderPos, layer );
     }
 
     return success;
 }
 
-bool MarbleAbstractFloatItem::renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool MarbleAbstractFloatItem::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer )
 {
+    // In the derived method here is the right place to draw the contents of the float item
+
+    return true;
+}
+
+bool MarbleAbstractFloatItem::renderOnMap( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer )
+{
+    // In the derived method here is the place where you can draw some additional stuff onto 
+    // the map itself
+
     return true;
 }

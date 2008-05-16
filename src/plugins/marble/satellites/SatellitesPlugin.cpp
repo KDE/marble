@@ -28,9 +28,9 @@ QString SatellitesPlugin::renderPolicy() const
     return QString( "ALWAYS" );
 }
 
-QString SatellitesPlugin::renderPosition() const
+QStringList SatellitesPlugin::renderPosition() const
 {
-    return QString( "ALWAYS_ON_TOP" );
+    return QStringList( "ORBIT" );
 }
 
 QString SatellitesPlugin::name() const
@@ -63,7 +63,7 @@ bool SatellitesPlugin::isInitialized () const
     return true;
 }
 
-bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 

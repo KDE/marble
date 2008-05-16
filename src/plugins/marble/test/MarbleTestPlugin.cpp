@@ -28,9 +28,9 @@ QString MarbleTestPlugin::renderPolicy() const
     return QString( "ALWAYS" );
 }
 
-QString MarbleTestPlugin::renderPosition() const
+QStringList MarbleTestPlugin::renderPosition() const
 {
-    return QString( "ALWAYS_ON_TOP" );
+    return QStringList( "ALWAYS_ON_TOP" );
 }
 
 QString MarbleTestPlugin::name() const
@@ -63,7 +63,7 @@ bool MarbleTestPlugin::isInitialized () const
     return true;
 }
 
-bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 

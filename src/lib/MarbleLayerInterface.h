@@ -66,9 +66,9 @@ class MarbleLayerInterface
      * the render() method of this plugin should get executed.
      *.
      * Possible Values: 
-     * "NONE", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP"
+     * "NONE", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP", "FLOAT_ITEM"
      */
-    virtual QString renderPosition() const = 0;
+    virtual QStringList renderPosition() const = 0;
 
     /**
      * @brief Returns the "real name" of the backend.
@@ -104,7 +104,7 @@ class MarbleLayerInterface
      * @brief Renders the content provided by the layer on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 ) = 0;
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
 Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.0" )

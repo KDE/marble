@@ -93,13 +93,15 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
     bool pixmapCacheEnabled() const;
     void setPixmapCacheEnabled( bool enabled );
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& pos = "FLOAT_ITEM", GeoSceneLayer * layer = 0 );
 
-    virtual bool renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    virtual bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+
+    virtual bool renderOnMap( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     virtual QString renderPolicy() const;
 
-    virtual QString renderPosition() const;
+    virtual QStringList renderPosition() const;
 
  private:
     MarbleAbstractFloatItemPrivate  * const d;

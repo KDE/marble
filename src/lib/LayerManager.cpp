@@ -35,7 +35,15 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport, 
 {
     QList<MarbleLayerInterface *> interfaceList = m_pluginManager.layerInterfaces();
     foreach( MarbleLayerInterface * interface,  interfaceList ) {
-        interface->render( painter, viewport, layer );
+        interface->render( painter, viewport, "ALWAYS_ON_TOP", layer );
+    }
+
+    // Looping a second time through is a quick and dirty way to get 
+    // the float items displayed on top:
+
+    foreach( MarbleLayerInterface * interface,  interfaceList ) {
+        if ( interface->renderPosition().contains("FLOAT_ITEM") )
+            interface->render( painter, viewport, "FLOAT_ITEM", layer );
     }
 }
 

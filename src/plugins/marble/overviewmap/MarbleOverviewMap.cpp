@@ -82,7 +82,7 @@ bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
     return true;
 }
 
-bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 

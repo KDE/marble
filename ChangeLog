@@ -1,5 +1,22 @@
 2008-05-16  Torsten Rahn  <rahn@kde.org>
 
+    * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
+    * src/plugins/marble/satellites/SatellitesPlugin.{cpp,h}:
+    * src/lib/MarbleAbstractFloatItem.{cpp,h}:
+    * src/lib/MarbleLayerInterface.h:
+
+    - Adding a renderPosition cue to the layer classes API.
+    - Adding renderMap method so the MeasureTool can get later 
+      on reimplemented as an AbstractFloatItem. 
+
+    * src/lib/LayerManager.cpp:
+
+    - Adding a quick and dirty way into the LayerManager for the float 
+      items to get always placed on top of everything else.
+      .
+2008-05-16  Torsten Rahn  <rahn@kde.org>
+
     * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
     * src/lib/MarbleAbstractFloatItem.{cpp,h}:
     * src/lib/geodata/data/GeoDataLatLonAltBox.{cpp,h}:

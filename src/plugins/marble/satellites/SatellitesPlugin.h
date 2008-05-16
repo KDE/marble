@@ -27,7 +27,7 @@ class SatellitesPlugin : public QObject, public MarbleLayerInterface
  public:
     QStringList backendTypes() const;
     QString renderPolicy() const;
-    QString renderPosition() const;
+    QStringList renderPosition() const;
     QString name() const;
     QString nameId() const;
     QString description() const;
@@ -35,7 +35,7 @@ class SatellitesPlugin : public QObject, public MarbleLayerInterface
 
     void initialize ();
     bool isInitialized () const;
-    bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
 //    QTimer* m_timer; /**< Timer to set the update interval */
 };

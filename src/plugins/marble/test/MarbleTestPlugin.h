@@ -34,7 +34,7 @@ class MarbleTestPlugin : public QObject, public MarbleLayerInterface
 
     QString renderPolicy() const;
 
-    QString renderPosition() const;
+    QStringList renderPosition() const;
 
     QString name() const;
 
@@ -50,7 +50,7 @@ class MarbleTestPlugin : public QObject, public MarbleLayerInterface
     bool isInitialized () const;
 
 
-    bool render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };
 
 #endif
