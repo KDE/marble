@@ -63,7 +63,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 void WorldClock::init()
 {
     kDebug() << "Loading available locations...";
-    QMap<QString, KTimeZone> m_locations = KSystemTimeZones::zones();
+    m_locations = KSystemTimeZones::zones();
     QList<QString> zones = m_locations.keys();
     for (int i = 0; i < zones.size(); i++ ) {
         KTimeZone curzone = m_locations.value( zones.at( i ) );
@@ -76,10 +76,10 @@ void WorldClock::init()
                      << "," << curzone.longitude();
         }
     }
-    //we'll change the timezone later
-    KTimeZone defaultzone = m_locations.value( "America/Toronto" );
-    
-    KTimeZone *m_curtz = new KTimeZone( defaultzone );
+    //we'll change the timezone before it's even
+    //displayed to the user, so the default zone
+    //is not important
+    m_locationkey = QString( zones.at( 0 ) );
 
     KConfigGroup cg = config();
 
@@ -131,7 +131,7 @@ WorldClock::~WorldClock()
 void WorldClock::connectToEngine()
 {
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
-    m_timeEngine->connectSource( m_curtz->name(), this, 6000, Plasma::AlignToMinute);
+    m_timeEngine->connectSource( m_locationkey, this, 6000, Plasma::AlignToMinute);
 }
 
 void WorldClock::resizeMap()
@@ -173,7 +173,7 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     setTz( getZone() );
 }
 
-KTimeZone WorldClock::getZone()
+QString WorldClock::getZone()
 {
     kDebug() << "Finding Timezone";
     double lat, lon;
@@ -192,8 +192,9 @@ KTimeZone WorldClock::getZone()
     
     if( m_locations.isEmpty() ) { kDebug() << "m_locations is EMPTY"; }
     QList<QString> zones = m_locations.keys();
-    kDebug() << "zones: " << zones;
-    //default in case lookup fails
+    //kDebug() << "zones: " << zones;
+    //default in case lookup fails, which it shouldn't,
+    //because if the lookup fails the default SHOULD be 0,0
     QString closest = "America/Toronto";
     
     double mindist = 10000;
@@ -206,24 +207,24 @@ KTimeZone WorldClock::getZone()
         latdelta = lat - tzlat;
         londelta = lon - tzlon;
         double dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
-        kDebug() << "Distance between mouse and " << zones.at(i)
-                 << "is " << dist;
+        //kDebug() << "Distance between mouse and " << zones.at(i)
+                 //<< "is " << dist;
         if ( dist < mindist ) {
             mindist = dist;
             closest = zones.at( i );
         }
     }
     kDebug() << "Found " << m_locations.value( closest ).name();
-    return m_locations.value( closest );
+    return m_locations.value( closest ).name();
 }
 
-void WorldClock::setTz( KTimeZone newtz )
+void WorldClock::setTz( QString newtz )
 {
-    kDebug() << "Disconnecting Source: " << m_curtz->name();
-    m_timeEngine->disconnectSource( m_curtz->name(), this );
-    kDebug() << "Connecting Source: " << newtz.name();
-    m_timeEngine->connectSource( newtz.name(), this, 6000, Plasma::AlignToMinute);
-    m_curtz = &newtz;
+    kDebug() << "Disconnecting Source: " << m_locationkey;
+    m_timeEngine->disconnectSource( m_locationkey, this );
+    kDebug() << "Connecting Source: " << newtz;
+    m_timeEngine->connectSource( newtz, this, 6000, Plasma::AlignToMinute);
+    m_locationkey = newtz;
 }
 
 void WorldClock::paintInterface(QPainter *p, 

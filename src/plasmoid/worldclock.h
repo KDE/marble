@@ -55,15 +55,15 @@ class WorldClock : public Plasma::Applet
     private slots:
         void resizeMap();
     private:
-        void setTz( KTimeZone newtz );
+        void setTz( QString newtz );
         void connectToEngine();
-        KTimeZone getZone();
+        QString getZone();
         bool m_isHovered;
         QPointF m_hover;
         QMap<QString, KTimeZone> m_locations;
-        KTimeZone *m_curtz;
         QTime m_time;
         QString m_city;
+        QString m_locationkey;
         MarbleMap *m_map;
         Plasma::DataEngine *m_timeEngine;
 	SunLocator *m_sun;
