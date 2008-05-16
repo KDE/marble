@@ -110,9 +110,17 @@ void MergedLayerDecorator::paintClouds()
     if ( cloudtile.isNull() )
         return;
 	
+//     qDebug() << "cloud tile:" << cloudtile.height() << cloudtile.width() << cloudtile.depth()
+//              << "  map tile:" << m_tile->height() << m_tile->width() << m_tile->depth();
+
+    if ( cloudtile.height() != m_tile->height() || cloudtile.width() != m_tile->width() ) {
+      cloudtile = cloudtile.scaled( m_tile->width(), m_tile->height(),
+                                    Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+    }
+
     const int  ctileHeight = cloudtile.height();
     const int  ctileWidth  = cloudtile.width();
-	
+
     for ( int cur_y = 0; cur_y < ctileHeight; ++cur_y ) {
         uchar  *cscanline = (uchar*)cloudtile.scanLine( cur_y );
         QRgb   *scanline  = (QRgb*)m_tile->scanLine( cur_y );

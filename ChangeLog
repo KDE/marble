@@ -1,5 +1,13 @@
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MergedLayerDecorator.cpp (paintClouds)
+
+    Fix crash if clouds are displayed on the OpenStreetMap theme.
+    The tiles have got different sizes so we need to scale one of them,
+    otherwise memory gets overwritten what was the cause of this crash.
+
+2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarbleModel.cpp (setMapTheme)
 
     Part 10 of groundwork for OpenStreetMap texture tiles.
