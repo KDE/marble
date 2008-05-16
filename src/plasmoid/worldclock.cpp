@@ -122,6 +122,19 @@ void WorldClock::init()
 
     connectToEngine();
 
+    m_points = QHash<QString, QPoint>();
+    /*
+    m_points.insert( "topright", QPoint() );
+    m_points.insert( "topleft", QPoint() );
+    m_points.insert( "middleright", QPoint() );
+    m_points.insert( "middleleft", QPoint() );
+    m_points.insert( "bottomright", QPoint() );
+    m_points.insert( "bottomleft", QPoint() );
+    */
+    m_lastRect = QRect( 0, 0, 1, 1 );
+
+    m_timeFont = QFont( "Helvetica", 12, QFont::Bold);
+    m_locationFont = QFont( "Helvetica", 12, QFont::Bold);
     //We need to zoom the map every time we change size
     connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
 }
@@ -134,7 +147,7 @@ WorldClock::~WorldClock()
 void WorldClock::connectToEngine()
 {
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
-    m_timeEngine->connectSource( "Local", this, 60, Plasma::AlignToMinute);
+    m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
 }
 
 void WorldClock::resizeMap()
@@ -183,7 +196,7 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 QString WorldClock::getZone()
 {
-    kDebug() << "Finding Timezone";
+    //kDebug() << "Finding Timezone";
     double lat, lon;
     bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
                                     m_hover.x(), m_hover.y(),
@@ -191,9 +204,9 @@ QString WorldClock::getZone()
                                     lon, lat );
     
     if( ok ) { 
-        kDebug() << "Mouse is at lat " << lat << " lon " << lon;
+        //kDebug() << "Mouse is at lat " << lat << " lon " << lon;
     } else { 
-        kDebug() << "Mouse lat/lon value lookup FAILED";
+        //kDebug() << "Mouse lat/lon value lookup FAILED";
         lat = 0;
         lon = 0;
     }
@@ -222,7 +235,7 @@ QString WorldClock::getZone()
             closest = zones.at( i );
         }
     }
-    kDebug() << "Found " << m_locations.value( closest ).name();
+    //kDebug() << "Found " << m_locations.value( closest ).name();
     return m_locations.value( closest ).name();
 }
 
@@ -232,50 +245,92 @@ void WorldClock::setTz( QString newtz )
     m_locationkey = newtz;
     m_time = KSystemTimeZones::local().convert( m_locations.value( m_locationkey ),
                                                 m_localtime );
+    recalculateFonts();
+}
+
+void WorldClock::recalculatePoints()
+{
+    int x = m_lastRect.width();
+    int y = m_lastRect.height();
+    m_points.insert( "topright", QPoint( ( x*0.666 ), ( y*0.25 ) ) );
+    m_points.insert( "topleft", QPoint( ( x*0.333 ), ( y*0.25 ) ) );
+    m_points.insert( "middleright", QPoint( ( x*0.666 ), ( y*0.58333 ) ) );
+    m_points.insert( "middleleft", QPoint( ( x*0.333 ), ( y*0.58333 ) ) );
+    m_points.insert( "bottomright", QPoint( ( x*0.666 ), ( y*0.75 ) ) );
+    m_points.insert( "bottomleft", QPoint( ( x*0.333 ), ( y*0.75 ) ) );
+    return;
+
+}
+
+void WorldClock::recalculateFonts( )
+{
+    QString timestr = m_time.toString( "hh:mm" );
+    QRect timeRect( m_points.value( "topleft" ), m_points.value( "middleright" ) );
+    QRect locationRect( m_points.value( "middleleft" ), m_points.value( "bottomright" ) );
+    //kDebug() << "timeRect " << timeRect;
+    //kDebug() << "locationRect " << locationRect;
+    //we set very small defaults and then increase them
+    int lastSize = 3;
+    //kDebug() << "Calculating Location Font Size ";
+    for ( int curSize = 4; ; curSize++, lastSize++ ) {
+        //kDebug() << "trying " << curSize << "pt";
+        QFont font( "Helvetica", curSize, QFont::Bold);
+        QFontMetrics metrics( font );
+        QRect rect = metrics.boundingRect( m_locationkey );
+        if ( rect.width()  > locationRect.width() ||
+             rect.height() > locationRect.height() ) {
+            break;
+        }
+    }
+    //kDebug() << "Using " << lastSize << "pt";
+    m_locationFont = QFont( "Helvetica", lastSize, QFont::Bold);
+    //kDebug() << "Calculating Time Font Size ";
+    lastSize = 3;
+    for ( int curSize = 4; ; curSize++, lastSize++ ) {
+        //kDebug() << "trying " << curSize << "pt";
+        QFont font( "Helvetica", curSize, QFont::Bold);
+        QFontMetrics metrics( font );
+        QRect rect = metrics.boundingRect( timestr );
+        if ( rect.width()  > timeRect.width() ||
+             rect.height() > timeRect.height() ) {
+            break;
+        }
+    }
+    //kDebug() << "Using " << lastSize << "pt";
+    m_timeFont = QFont( "Helvetica", lastSize, QFont::Bold);
+    return;
 }
 
 void WorldClock::paintInterface(QPainter *p, 
                                 const QStyleOptionGraphicsItem *option,
                                 const QRect &contentsRect)
 {
-    kDebug() << contentsRect;
-    QRect rect = contentsRect;
-    //By creating a pixmap and then painting that
-    //we avoid an issue where the map is offset
-    //from the border of the plasmoid and it looks ugly
-    //Also painting with two painters onto the same device makes errors.
-    QPixmap pixmap( rect.size() ); 
+    //kDebug() << "contentsRect = " << contentsRect;
+    if ( contentsRect != m_lastRect ) { 
+        //kDebug() << "setting m_lastRect = contentsRect and recalculating";
+        m_lastRect = contentsRect;
+        recalculatePoints();
+        recalculateFonts();
+    }
+    QPixmap pixmap( m_lastRect.size() ); 
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
-    m_map->paint(gp, rect);
+    m_map->paint(gp, m_lastRect);
     p->drawPixmap( 0, 0, pixmap );
     if ( m_isHovered ) {
-        kDebug() << "m_isHovered = true, painting text";
-        kDebug() << m_time;
+        //kDebug() << "m_isHovered = true, painting text";
+        //kDebug() << m_time;
         p->setPen( QColor( 255, 255, 255 ) );
-        QString timestr = m_time.toString( "h:m" );
-        kDebug() << "time string = " << timestr;
+        QString timestr = m_time.toString( "hh:mm" );
+        //kDebug() << "time string = " << timestr;
 
-        /*
-        int width = rect.width() / 4;
-        int height = rect.height() / 2;
-        QPoint centre = rect.center();
+        p->setFont( m_timeFont );
+        p->drawText( QRect( m_points.value( "topleft" ), m_points.value( "middleright" ) ),
+                Qt::AlignCenter, timestr );
 
-        QRect timerect( 0, 0, width, height );
-        timerect.moveCenter( centre );
-        timerect.setHeight( height * 0.7 );
-
-        QRect cityrect( 0, 0, width, height );
-        cityrect.moveCenter( centre );
-        cityrect.setTop( timerect.bottom() );
-        */
-
-        p->setFont( QFont( "Helvetica", 12, QFont::Bold) );
-        p->drawText( 0,0 , rect.width(), rect.height() / 2.2,
-                Qt::AlignHCenter | Qt::AlignBottom, timestr );
-
-        p->setFont( QFont( "Helvetica", 8, QFont::Bold) );
-        p->drawText( 0,0 , rect.width(), rect.height() / 1.8,
-                Qt::AlignHCenter | Qt::AlignBottom, m_locations.value( m_locationkey ).name() );
+        p->setFont( m_locationFont );
+        p->drawText( QRect( m_points.value( "middleleft" ), m_points.value( "bottomright" ) ),
+                Qt::AlignCenter, 
+                m_locationkey.replace( "_", " " ) );
     }
 }
 

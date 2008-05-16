@@ -55,15 +55,20 @@ class WorldClock : public Plasma::Applet
     private slots:
         void resizeMap();
     private:
+        void recalculatePoints();
+        void recalculateFonts();
         void setTz( QString newtz );
         void connectToEngine();
         QString getZone();
         bool m_isHovered;
         QPointF m_hover;
         QMap<QString, KTimeZone> m_locations;
+        QHash<QString, QPoint> m_points;
+        QRect m_lastRect;
+        QFont m_timeFont;
+        QFont m_locationFont;
         QDateTime m_time;
         QDateTime m_localtime;
-        QString m_city;
         QString m_locationkey;
         MarbleMap *m_map;
         Plasma::DataEngine *m_timeEngine;
