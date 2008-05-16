@@ -29,6 +29,11 @@ MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
                                  this );
 }
 
+MarbleOverviewMap::~MarbleOverviewMap()
+{
+    delete m_svgobj;
+}
+
 QStringList MarbleOverviewMap::backendTypes() const
 {
     return QStringList( "overviewmap" );
@@ -83,6 +88,7 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
 
     QRectF mapRect( contentRect() );
 
+    // Rerender worldmap pixmap if the size has changed
     if ( m_worldmap.size() != mapRect.size().toSize() ) {
         m_worldmap = QPixmap( mapRect.size().toSize() );
         m_worldmap.fill( Qt::transparent );
@@ -93,6 +99,7 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
     }
     painter->drawPixmap( mapRect.topLeft(), m_worldmap );
 
+    // Now draw the latitude longitude bounding box
     double xWest = mapRect.width() / 2.0 
                     + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.west();
     double xEast = mapRect.width() / 2.0
@@ -134,7 +141,7 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
 
-        painter->drawRect( QRectF( mapRect.left() + xWest, xNorth + mapRect.top(), mapRect.width() - xWest, boxHeight ) );
+        painter->drawRect( QRectF( mapRect.left() + xWest, xNorth + mapRect.top(), boxWidth, boxHeight ) );
     }
     return true;
 }
