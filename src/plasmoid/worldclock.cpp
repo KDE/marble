@@ -167,11 +167,13 @@ void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     m_isHovered = true;
     m_hover = event->pos();
     setTz( getZone() );
+    update();
 }
 void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_hover = event->pos();
     setTz( getZone() );
+    update();
 }
 
 QString WorldClock::getZone()
