@@ -93,13 +93,17 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
   // replacement for the tile that has been requested.
   const int levelZeroColumns = textureLayer->levelZeroColumns();
   const int levelZeroRows = textureLayer->levelZeroRows();
+  const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, level );
+  const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, level );
 
   for ( int i = level; i > -1; --i ) {
 
-      double origx1 = (double)(x) / (double)( TileLoaderHelper::levelToRow( levelZeroRows, level ) );
-      double origy1 = (double)(y) / (double)( TileLoaderHelper::levelToColumn( levelZeroColumns, level ) );
-      double testx1 = origx1 * (double)( TileLoaderHelper::levelToRow( levelZeroRows, i ) ) ;
-      double testy1 = origy1 * (double)( TileLoaderHelper::levelToColumn( levelZeroColumns, i ) );
+      const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, i );
+      const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, i );
+      double origx1 = (double)(x) / (double)( rowsRequestedLevel );
+      double origy1 = (double)(y) / (double)( columnsRequestedLevel );
+      double testx1 = origx1 * (double)( rowsCurrentLevel );
+      double testy1 = origy1 * (double)( columnsCurrentLevel );
 
       QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, i,
                                                                     (int)(testx1), (int)(testy1) );
@@ -116,10 +120,10 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
               if ( level != i ) { 
                   // qDebug() << "About to start cropping an existing image.";
                   QSize tilesize = temptile.size();
-                  double origx2 = (double)(x + 1) / (double)( TileLoaderHelper::levelToRow( levelZeroRows, level ) );
-                  double origy2 = (double)(y + 1) / (double)( TileLoaderHelper::levelToColumn( levelZeroColumns, level ) );
-                  double testx2 = origx2 * (double)( TileLoaderHelper::levelToRow( levelZeroRows, i ) );
-                  double testy2 = origy2 * (double)( TileLoaderHelper::levelToColumn( levelZeroColumns, i ) );
+                  double origx2 = (double)(x + 1) / (double)( rowsRequestedLevel );
+                  double origy2 = (double)(y + 1) / (double)( columnsRequestedLevel );
+                  double testx2 = origx2 * (double)( rowsCurrentLevel );
+                  double testy2 = origy2 * (double)( columnsCurrentLevel );
 
                   QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
                                   (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
