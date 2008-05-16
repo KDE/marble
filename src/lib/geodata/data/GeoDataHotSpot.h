@@ -25,6 +25,7 @@ class GEODATA_EXPORT GeoDataHotSpot
 
     explicit GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                              Units xunits = Fraction, Units yunits = Fraction );
+    ~GeoDataHotSpot();
 
     const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
 

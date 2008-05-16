@@ -33,6 +33,11 @@ GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yuni
     setHotSpot( hotSpot, xunits, yunits );
 }
 
+GeoDataHotSpot::~GeoDataHotSpot()
+{
+    delete d;
+}
+
 const QPointF& GeoDataHotSpot::hotSpot( Units &xunits, Units &yunits ) const
 {
     xunits = d->m_xunits;
