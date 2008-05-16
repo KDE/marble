@@ -84,6 +84,8 @@ bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
 
 bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
+    painter->save();
+
     painter->autoMapQuality();
 
     QRectF mapRect( contentRect() );
@@ -97,7 +99,7 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
         m_svgobj->render( &mapPainter ); 
         mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
-    painter->drawPixmap( mapRect.topLeft(), m_worldmap );
+    painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
 
     // Now draw the latitude longitude bounding box
     double xWest = mapRect.width() / 2.0 
@@ -123,7 +125,7 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
 
-        painter->drawRect( QRectF( xWest + mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
+        painter->drawRect( QRectF( xWest, xNorth, boxWidth, boxHeight ) );
     }
     else {
         // If the dateline is shown in the viewport  and if the poles are not 
@@ -134,15 +136,17 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
 
-        painter->drawRect( QRectF( mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
+        painter->drawRect( QRectF( 0, xNorth, boxWidth, boxHeight ) );
 
         boxWidth = mapRect.width() - xWest;
 
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
 
-        painter->drawRect( QRectF( mapRect.left() + xWest, xNorth + mapRect.top(), boxWidth, boxHeight ) );
+        painter->drawRect( QRectF( xWest, xNorth, boxWidth, boxHeight ) );
     }
+    painter->restore();
+
     return true;
 }
 

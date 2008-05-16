@@ -167,7 +167,7 @@ QRectF MarbleAbstractFloatItem::renderedRect() const
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRect( d->m_renderedRect );
+    path.addRect( QRectF( QPointF( marginLeft(), marginTop() ), d->m_renderedRect.size() ).toRect() );
     return path;
 }
 
@@ -310,6 +310,7 @@ QStringList MarbleAbstractFloatItem::renderPosition() const {
 bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
 {
 //    qDebug() << "renderPos: " << renderPos;
+
     bool success = true;
 
     if ( renderPos == "FLOAT_ITEM" ) {
@@ -328,22 +329,27 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         }
         // unset the dirty flag once all checks are passed
         d->m_newItemProperties = false;
-    
+
         // Clear the pixmap and redirect the painter
         QPaintDevice* mapDevice = painter->device();
-    
+
         if ( d->s_pixmapCacheEnabled ) {
             d->m_cachePixmap.fill( Qt::transparent );
             painter->end();
+
             GeoPainter::setRedirected( mapDevice, &( d->m_cachePixmap ) );
             painter->begin( &( d->m_cachePixmap ) );
-            painter->translate( -d->m_position.x(), -d->m_position.y() );
         }
-    
+        else {
+            painter->translate( d->m_position.x(), d->m_position.y() );
+        }
+
         painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
         painter->setBrush( d->s_background );
         painter->drawPath( backgroundShape() );
     
+        painter->translate( d->s_padding, d->s_padding );
+
         success = renderFloatItem( painter, viewport, layer );
     
         if ( d->s_pixmapCacheEnabled ) {

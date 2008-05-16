@@ -450,7 +450,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void  paint(GeoPainter &painter, QRect &dirtyRect);
+    void  paint( GeoPainter &painter, QRect &dirtyRect);
 
     /**
      * @brief  Zoom the view to a certain zoomlevel
