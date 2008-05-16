@@ -71,6 +71,7 @@ TileCreator::TileCreator(const QString& sourceDir, const QString& installMap,
 
 TileCreator::~TileCreator()
 {
+    delete d;
 }
 
 void TileCreator::cancelTileCreation()
