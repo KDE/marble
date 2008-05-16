@@ -1,5 +1,19 @@
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarbleWidget.cpp
+    * src/lib/MarbleWidget.h
+	(setProxy)
+	(proxyHost)
+	(proxyPort)
+    * src/marble_part.cpp
+	(readSettings)
+	(writeSettings)
+	(slotUpdateSettings)
+
+    Add Http proxy support.
+
+2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataLatLonAltBox.h
 
     Export operator== for GeoDataLatLonAltBox. Needed in
