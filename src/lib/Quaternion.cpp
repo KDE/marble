@@ -179,7 +179,7 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
     v[Q_Z] = q.v[Q_W] * z + q.v[Q_X] * y - q.v[Q_Y] * x + q.v[Q_Z] * w;
 }
 
-void Quaternion::slerp( const Quaternion q1, const Quaternion q2, 
+void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2, 
                         double t)
 {
     double  p1;
