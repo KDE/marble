@@ -70,22 +70,8 @@ TextureTile::TextureTile( TileId const& id )
 
 TextureTile::~TextureTile()
 {
-    switch ( m_depth ) {
-    case 48:
-    case 32:
-	delete [] jumpTable32;
-	break;
-    case 8:
-    case 1:
-	delete [] jumpTable8;
-	break;
-    default:
-	qDebug() << "Color m_depth(" << m_depth << ") of a tile could not be retrieved. Exiting.";
-//	exit(-1);
-    }
-
-//    qDebug() << "Tile deleted: " << m_id;
-//    delete m_rawtile;
+    delete [] jumpTable32;
+    delete [] jumpTable8;
 }
 
 void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y)
@@ -173,33 +159,35 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
 
 void TextureTile::loadTile( bool requestTileUpdate )
 {
-  //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
+    //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
 
-  if ( m_rawtile.isNull() ) {
-    qDebug() << "An essential tile is missing. Please rerun the application.";
-    exit(-1);
-  }
+    if ( m_rawtile.isNull() ) {
+        qDebug() << "An essential tile is missing. Please rerun the application.";
+        exit(-1);
+    }
 
-  switch ( m_depth ) {
-      case 48:
-      case 32:
-          if ( jumpTable32 ) delete [] jumpTable32;
-          jumpTable32 = jumpTableFromQImage32( m_rawtile );
-          break;
-      case 8:
-      case 1:
-          if ( jumpTable8 ) delete [] jumpTable8;
-          jumpTable8 = jumpTableFromQImage8( m_rawtile );
-          break;
-      default:
-          qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
-          exit( -1 );
-  }
+    switch ( m_depth ) {
+        case 48:
+        case 32:
+            if ( jumpTable32 )
+                delete [] jumpTable32;
+            jumpTable32 = jumpTableFromQImage32( m_rawtile );
+            break;
+        case 8:
+        case 1:
+            if ( jumpTable8 )
+                delete [] jumpTable8;
+            jumpTable8 = jumpTableFromQImage8( m_rawtile );
+            break;
+        default:
+            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
+            exit( -1 );
+    }
 
-  if ( requestTileUpdate ) {
-    // qDebug() << "TileUpdate available";
-    emit tileUpdateDone();
-  }
+    if ( requestTileUpdate ) {
+        // qDebug() << "TileUpdate available";
+        emit tileUpdateDone();
+    }
 }
 
 #include "TextureTile.moc"
