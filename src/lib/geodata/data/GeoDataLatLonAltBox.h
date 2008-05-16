@@ -40,12 +40,16 @@ class GeoDataLatLonBoxPrivate;
 
 class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 {
+    friend bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs );
+
  public:
     GeoDataLatLonBox();
     GeoDataLatLonBox( double north, double south, double east, double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
     virtual ~GeoDataLatLonBox();
 
     virtual bool isFolder() const { return false; }
+
+    GeoDataLatLonBox& operator=( const GeoDataLatLonBox& other );
 
     /**
      * @brief Get the northern boundary of the bounding box.
@@ -74,6 +78,13 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     double west( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
     void setWest( const double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+
+    /**
+     * @brief Get the rotation of the bounding box.
+     * @return the rotation of the bounding box.
+     */
+    double rotation( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
+    void setRotation( const double rotation, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
 
     void    boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
     void    setBoundaries( double west, double east, double north, double south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
@@ -112,11 +123,15 @@ class GeoDataLatLonAltBoxPrivate;
 
 class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 {
+    friend bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+
  public:
     GeoDataLatLonAltBox();
     virtual ~GeoDataLatLonAltBox();
 
     virtual bool isFolder() const { return false; }
+
+    GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
 
     /**
      * @brief Get the lower altitude boundary of the bounding box.

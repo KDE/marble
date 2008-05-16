@@ -57,6 +57,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
     void setBackground( const QBrush &background );
 
     QRectF contentRect() const;
+    QRectF renderedRect() const;
 
     virtual QPainterPath backgroundShape() const;
 
@@ -87,7 +88,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
     double padding () const;
     void setPadding( double width );
 
-    virtual bool needsUpdate() const;
+    virtual bool needsUpdate( ViewportParams *viewport );
 
     bool pixmapCacheEnabled() const;
     void setPixmapCacheEnabled( bool enabled );

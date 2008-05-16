@@ -64,25 +64,43 @@ bool MarbleOverviewMap::isInitialized () const
     return true;
 }
 
+bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
+{
+    GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
+
+    if ( m_latLonAltBox == latLonAltBox ) {
+//        qDebug() << "false";
+        return false;
+    }
+    m_latLonAltBox = latLonAltBox;
+//    qDebug() << "true";
+    return true;
+}
+
 bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 
     QRectF mapRect( contentRect() );
 
-    painter->setViewport( mapRect.toRect() );
-    m_svgobj->render( painter ); 
-    painter->setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
-    GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
+    if ( m_worldmap.size() != mapRect.size().toSize() ) {
+        m_worldmap = QPixmap( mapRect.size().toSize() );
+        m_worldmap.fill( Qt::transparent );
+        QPainter mapPainter( &m_worldmap );
+        mapPainter.setViewport( m_worldmap.rect() );
+        m_svgobj->render( &mapPainter ); 
+        mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
+    }
+    painter->drawPixmap( mapRect.topLeft(), m_worldmap );
 
-    double xWest = mapRect.width() / 2 
-                    + mapRect.width() / ( 2 * M_PI ) * latLonAltBox.west();
-    double xEast = mapRect.width() / 2
-                    + mapRect.width() / ( 2 * M_PI ) * latLonAltBox.east();
-    double xNorth = mapRect.height() / 2 
-                    - mapRect.height() / M_PI * latLonAltBox.north();
-    double xSouth = mapRect.height() / 2
-                    - mapRect.height() / M_PI * latLonAltBox.south();
+    double xWest = mapRect.width() / 2.0 
+                    + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.west();
+    double xEast = mapRect.width() / 2.0
+                    + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.east();
+    double xNorth = mapRect.height() / 2.0 
+                    - mapRect.height() / M_PI * m_latLonAltBox.north();
+    double xSouth = mapRect.height() / 2.0
+                    - mapRect.height() / M_PI * m_latLonAltBox.south();
 
     painter->setPen( QPen( Qt::white ) );
     painter->setBrush( QBrush( Qt::transparent ) );
@@ -92,11 +110,11 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
     double boxHeight = xSouth - xNorth;
 
     double minBoxSize = 2.0;
+    if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
 
-    if ( latLonAltBox.west() <= latLonAltBox.east() ) {
+    if ( m_latLonAltBox.west() <= m_latLonAltBox.east() ) {
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
-        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
 
         painter->drawRect( QRectF( xWest + mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
     }
@@ -108,7 +126,6 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
 
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
-        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
 
         painter->drawRect( QRectF( mapRect.left(), xNorth + mapRect.top(), boxWidth, boxHeight ) );
 
@@ -116,7 +133,6 @@ bool MarbleOverviewMap::renderContent( GeoPainter *painter, ViewportParams *view
 
         // Make sure the latLonBox is still visible
         if ( boxWidth  < minBoxSize ) boxWidth  = minBoxSize;
-        if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
 
         painter->drawRect( QRectF( mapRect.left() + xWest, xNorth + mapRect.top(), mapRect.width() - xWest, boxHeight ) );
     }

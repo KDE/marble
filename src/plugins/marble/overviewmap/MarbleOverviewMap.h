@@ -17,6 +17,7 @@
 
 #include <QtCore/QObject>
 
+#include "GeoDataLatLonAltBox.h"
 #include "MarbleAbstractFloatItem.h"
 
 class QSvgRenderer;
@@ -50,10 +51,15 @@ class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
 
     bool isInitialized () const;
 
+    bool needsUpdate( ViewportParams *viewport );
+
     bool renderContent( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
 
  private:
     QSvgRenderer  *m_svgobj;
+    QPixmap        m_worldmap;
+
+    GeoDataLatLonAltBox m_latLonAltBox;
 };
 
 #endif

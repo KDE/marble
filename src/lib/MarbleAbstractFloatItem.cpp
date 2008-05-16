@@ -78,13 +78,13 @@ QBrush       MarbleAbstractFloatItemPrivate::s_background = QBrush( QColor( 192,
 double       MarbleAbstractFloatItemPrivate::s_border = 1.0;
 QBrush       MarbleAbstractFloatItemPrivate::s_borderBrush = QBrush( Qt::black );
 Qt::PenStyle MarbleAbstractFloatItemPrivate::s_borderStyle = Qt::SolidLine;
-double       MarbleAbstractFloatItemPrivate::s_margin = 0;
-double       MarbleAbstractFloatItemPrivate::s_marginTop = 0;
-double       MarbleAbstractFloatItemPrivate::s_marginBottom = 0;
-double       MarbleAbstractFloatItemPrivate::s_marginLeft = 0;
-double       MarbleAbstractFloatItemPrivate::s_marginRight = 0;
-double       MarbleAbstractFloatItemPrivate::s_padding = 4;
-bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = false;
+double       MarbleAbstractFloatItemPrivate::s_margin = 0.0;
+double       MarbleAbstractFloatItemPrivate::s_marginTop = 0.0;
+double       MarbleAbstractFloatItemPrivate::s_marginBottom = 0.0;
+double       MarbleAbstractFloatItemPrivate::s_marginLeft = 0.0;
+double       MarbleAbstractFloatItemPrivate::s_marginRight = 0.0;
+double       MarbleAbstractFloatItemPrivate::s_padding = 4.0;
+bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = true;
 
 MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point, 
                                                   const QSizeF &size )
@@ -157,6 +157,11 @@ void MarbleAbstractFloatItem::setBackground( const QBrush &background )
 QRectF MarbleAbstractFloatItem::contentRect() const
 {
     return d->m_contentRect;
+}
+
+QRectF MarbleAbstractFloatItem::renderedRect() const
+{
+    return d->m_renderedRect;
 }
 
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
@@ -277,7 +282,7 @@ void MarbleAbstractFloatItem::setPadding( double padding )
     d->m_newItemProperties = true;
 }
 
-bool MarbleAbstractFloatItem::needsUpdate() const
+bool MarbleAbstractFloatItem::needsUpdate( ViewportParams *viewport )
 {
     return false;
 }
@@ -305,7 +310,7 @@ QString MarbleAbstractFloatItem::renderPosition() const {
 bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     // Prevent unneeded redraws
-    if ( !needsUpdate() && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
+    if ( !needsUpdate( viewport ) && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
         painter->drawPixmap( d->m_position, d->m_cachePixmap );
         return true;
     }
@@ -313,16 +318,22 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
     // Reinitialize cachePixmap if the float item changes its size 
     // or other important common properties 
     if ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) {
-        d->m_cachePixmap = QPixmap( d->m_size.toSize() );
+        // Add extra space for the border
+        QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 );
+        d->m_cachePixmap = QPixmap( cachePixmapSize );
     }
     // unset the dirty flag once all checks are passed
     d->m_newItemProperties = false;
 
     // Clear the pixmap and redirect the painter
+    QPaintDevice* mapDevice = painter->device();
+
     if ( d->s_pixmapCacheEnabled ) {
         d->m_cachePixmap.fill( Qt::transparent );
-        painter->setRedirected( painter->device(), &( d->m_cachePixmap ), d->m_position.toPoint() );
+        painter->end();
+        GeoPainter::setRedirected( mapDevice, &( d->m_cachePixmap ) );
         painter->begin( &( d->m_cachePixmap ) );
+        painter->translate( -d->m_position.x(), -d->m_position.y() );
     }
 
     painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
@@ -333,6 +344,9 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
 
     if ( d->s_pixmapCacheEnabled ) {
         painter->end();
+        GeoPainter::restoreRedirected( mapDevice );
+        painter->begin( mapDevice );
+        painter->drawPixmap( d->m_position, d->m_cachePixmap );
     }
 
     return success;

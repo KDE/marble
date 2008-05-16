@@ -21,7 +21,8 @@ class GeoDataLatLonBoxPrivate
         : m_north( +M_PI / 2.0),
           m_south( -M_PI / 2.0),
           m_east(  +M_PI ),
-          m_west(  -M_PI )
+          m_west(  -M_PI ),
+          m_rotation( 0.0 )
     {
     }
 
@@ -35,6 +36,15 @@ class GeoDataLatLonBoxPrivate
     double m_west;
     double m_rotation; // NOT implemented yet!
 };
+
+bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
+{
+    return lhs.d->m_west == rhs.d->m_west
+        && lhs.d->m_east == rhs.d->m_east
+        && lhs.d->m_north == rhs.d->m_north
+        && lhs.d->m_south == rhs.d->m_south
+        && lhs.d->m_rotation == rhs.d->m_rotation;
+}
 
 GeoDataLatLonBox::GeoDataLatLonBox()
     : d( new GeoDataLatLonBoxPrivate() )
@@ -131,6 +141,26 @@ void GeoDataLatLonBox::setWest( const double west, GeoDataPoint::Unit unit )
         d->m_west = GeoDataPoint::normalizeLon( west * DEG2RAD );
         break;
     }
+}
+
+void GeoDataLatLonBox::setRotation( const double rotation, GeoDataPoint::Unit unit )
+{
+    switch( unit ){
+    case GeoDataPoint::Radian:
+        d->m_rotation = rotation;
+        break;
+    case GeoDataPoint::Degree:
+        d->m_rotation = rotation * DEG2RAD;
+        break;
+    }
+}
+
+double GeoDataLatLonBox::rotation( GeoDataPoint::Unit unit ) const
+{
+    if ( unit == GeoDataPoint::Degree ) {
+        return d->m_rotation * RAD2DEG;
+    }
+    return d->m_rotation;
 }
 
 void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit )
@@ -231,9 +261,13 @@ QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
 	.arg( unit );
 }
 
-
-// ================================================================
-//              class GeoDataLatLonAltBoxPrivate
+GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
+{
+    if ( this == &other )
+        return *this;
+    *d = *other.d;
+    return *this;
+}
 
 
 class GeoDataLatLonAltBoxPrivate
@@ -254,6 +288,33 @@ class GeoDataLatLonAltBoxPrivate
     double m_maxAltitude;
     AltitudeMode m_altitudeMode;
 };
+
+bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs )
+{
+    return lhs.west() == rhs.west()
+        && lhs.east() == rhs.east()
+        && lhs.north() == rhs.north()
+        && lhs.south() == rhs.south()
+        && lhs.rotation() == rhs.rotation() 
+        && lhs.d->m_minAltitude == rhs.d->m_minAltitude
+        && lhs.d->m_maxAltitude == rhs.d->m_maxAltitude
+        && lhs.d->m_altitudeMode == rhs.d->m_altitudeMode;
+}
+
+GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &other )
+{
+    if ( this == &other )
+        return *this;
+
+    setWest(  other.west() );
+    setEast(  other.east() );
+    setNorth( other.north() );
+    setSouth( other.south() );
+    setRotation( other.rotation() );
+
+    *d = *other.d;
+    return *this;
+}
 
 GeoDataLatLonAltBox::GeoDataLatLonAltBox()
     : d( new GeoDataLatLonAltBoxPrivate() )
