@@ -75,6 +75,7 @@ TextureTile::~TextureTile()
 	delete [] jumpTable32;
 	break;
     case 8:
+    case 1:
 	delete [] jumpTable8;
 	break;
     default:
@@ -184,6 +185,7 @@ void TextureTile::loadTile( bool requestTileUpdate )
           jumpTable32 = jumpTableFromQImage32( m_rawtile );
           break;
       case 8:
+      case 1:
           if ( jumpTable8 ) delete [] jumpTable8;
           jumpTable8 = jumpTableFromQImage8( m_rawtile );
           break;
