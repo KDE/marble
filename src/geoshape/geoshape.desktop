@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Geo Shape
+Name[es]=Forma geográfica
 Name[km]=រូបរាង​ភូមិសាស្ដ្រ
 Name[pt]=Forma Geo
 Name[pt_BR]=Forma Geo
 Name[sv]=Geografisk form
 Name[uk]=Форма Ґео
+Name[zh_CN]=地理数据
 Name[zh_TW]=地理元件
 
 X-KDE-ServiceTypes=KOffice/Shape

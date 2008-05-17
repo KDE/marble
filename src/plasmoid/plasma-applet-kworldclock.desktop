@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=World Clock
 Name[el]=Παγκόσμιο ρολόι
+Name[es]=Reloj mundial
 Name[ga]=Clog an Domhain
 Name[ja]=世界時計
 Name[km]=នាឡិកា​ពិភពលោក
@@ -14,6 +15,7 @@ Name[zh_CN]=世界时钟
 Name[zh_TW]=世界時鐘
 Comment=Plasmoid to show you the time in different parts of the world
 Comment[el]=Πλασμοειδές εμφάνισης της ώρας σε διάφορα μέρη του κόσμου
+Comment[es]=Plasmoide para mostrar la hora en las diferentes partes del mundo
 Comment[ga]=Plasmoid a thaispeánann an t-am in áiteanna ar fud an domhain
 Comment[ja]=世界各地の時刻を表示するプラズモイド
 Comment[km]=Plasmoid ដែល​ត្រូវបង្ហាញ​ពេលវេលា​ដល់​អ្នក​ជា​ផ្នែកៗ​ផ្សេងគ្នា​​នៃ​ពិភពលោក
