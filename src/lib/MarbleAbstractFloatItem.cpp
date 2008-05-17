@@ -357,12 +357,13 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         success = renderFloatItem( painter, viewport, layer );
     
         if ( d->s_pixmapCacheEnabled ) {
-            painter->resetTransform();
             painter->end();
             GeoPainter::restoreRedirected( mapDevice );
             painter->begin( mapDevice );
             painter->drawPixmap( d->m_position, d->m_cachePixmap );
         }
+
+        painter->resetTransform();
     }
     else {
         success = renderOnMap( painter, viewport, renderPos, layer );

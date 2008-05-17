@@ -92,10 +92,11 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     if ( m_worldmap.size() != mapRect.size().toSize() ) {
         m_worldmap = QPixmap( mapRect.size().toSize() );
         m_worldmap.fill( Qt::transparent );
-        QPainter mapPainter( &m_worldmap );
+        QPainter mapPainter;
+        mapPainter.begin(&m_worldmap);
         mapPainter.setViewport( m_worldmap.rect() );
-        m_svgobj->render( &mapPainter ); 
-        mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
+        m_svgobj->render( &mapPainter );
+        mapPainter.end(); 
     }
     painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
 
