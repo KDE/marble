@@ -1,3 +1,10 @@
+2008-05-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Remove functions that are already moved to projection helpers
+	* src/lib/VectorMap.{h,cpp} (sphericalPaintBase): removed
+	(EquirectPaintBase): removed
+	(MercatorPaintBase): removed
+
 2008-05-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MergedLayerDecorator.cpp (paintClouds)

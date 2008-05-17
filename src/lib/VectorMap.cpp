@@ -455,94 +455,9 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
-#if 0
-    switch( viewport->projection() ) {
-        case Spherical:
-            sphericalPaintBase(   painter, viewport, antialiasing );
-            break;
-        case Equirectangular:
-            rectangularPaintBase( painter, viewport, antialiasing);
-            break;
-        case Mercator:
-            mercatorPaintBase( painter, viewport, antialiasing);
-            break;
-    }
-#else
     viewport->currentProjection()->helper()->paintBase( painter, viewport,
 							m_pen, m_brush,
 							antialiasing );
-#endif
-}
-
-void VectorMap::sphericalPaintBase( GeoPainter * painter, 
-				    ViewportParams *viewport, bool antialiasing)
-{
-    int     radius     = viewport->radius();
-    double  imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
-
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    if ( imgradius2 < (double)radius * (double)radius ) {
-        painter->drawRect( 0, 0, m_imgwidth - 1, m_imgheight - 1 );
-    }
-    else {
-        painter->drawEllipse( m_imgrx - radius, m_imgry - radius, 
-                              2 * radius, 2 * radius );
-    }
-}
-
-void VectorMap::rectangularPaintBase( GeoPainter * painter, 
-				      ViewportParams *viewport, bool antialiasing)
-{
-    int  radius = viewport->radius();
-
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
-
-    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
-    int yTop          = m_imgheight / 2 - radius + yCenterOffset;
-
-    painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
-}
-
-void VectorMap::mercatorPaintBase( GeoPainter * painter, 
-				   ViewportParams *viewport, bool antialiasing)
-{
-    int  radius = viewport->radius();
-
-    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
-    painter->setPen( m_pen );
-    painter->setBrush( m_brush );
-
-    int yTop;
-    //int yBottom;
-    int dummy;
-    AbstractProjection *proj = viewport->currentProjection();
-
-    // Get the top pixel of the projected map.
-    proj->screenCoordinates( 0.0, proj->maxLat(), viewport, 
-			     dummy, yTop );
-    if ( yTop < 0 )
-      yTop = 0;
-#if 0
-    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
-			     dummy, yBottom );
-    if ( yBottom > viewport->height() )
-      yBottom = viewport->height();
-#endif
-
-    painter->drawRect( 0, yTop, m_imgwidth, 2 * radius);
 }
 
 

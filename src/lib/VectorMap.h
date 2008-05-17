@@ -74,13 +74,6 @@ class VectorMap : public ScreenPolygon::Vector
 				 GeoDataPoint::Vector::ConstIterator, 
 				 const int detail, ViewportParams *viewport );
 
-    void sphericalPaintBase(   GeoPainter *painter, ViewportParams *viewport, 
-			       bool antialiasing );
-    void rectangularPaintBase( GeoPainter *painter, ViewportParams *viewport, 
-			       bool antialiasing );
-    void mercatorPaintBase( GeoPainter *painter, ViewportParams *viewport, 
-			    bool antialiasing );
-
     void           manageCrossHorizon();
     const QPointF  horizonPoint();
     void           createArc();
