@@ -15,6 +15,9 @@
 #define ABSTRACTLAYER_H
 
 
+// WARNING: This class is obsolete and will be removed, so do not use it
+
+
 #include <QtCore/QObject>
 #include <QtCore/QSize>
 
@@ -82,7 +85,7 @@ class AbstractLayer: public QObject
     /**
      * @brief Construct this layer with a parent
      */
-    AbstractLayer( QObject * parent=0 );
+    explicit AbstractLayer( QObject * parent=0 );
 
     /**
      * @brief distructor

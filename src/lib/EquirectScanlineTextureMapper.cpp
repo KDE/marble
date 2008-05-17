@@ -24,6 +24,7 @@
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
+#include "ViewParams.h"
 
 
 #ifdef Q_CC_MSVC

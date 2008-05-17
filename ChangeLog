@@ -1,3 +1,14 @@
+2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/SphericalScanlineTextureMapper.cpp
+    * src/lib/AbstractScanlineTextureMapper.h
+    * src/lib/EquirectScanlineTextureMapper.cpp
+    * src/lib/AbstractLayer/AbstractLayer.h
+
+    Class AbstractLayer is obsolete, so do not inherit
+    AbstractScanlineTextureMapper from it.
+
 2008-05-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Move files having to do with projections to their own subdirectory

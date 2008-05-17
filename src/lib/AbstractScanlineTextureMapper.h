@@ -13,20 +13,21 @@
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtGui/QColor>
 
 #include "Quaternion.h"
-#include "AbstractLayer.h"      // In AbstractLayer/
 #include "MergedLayerDecorator.h"
 
 
 class GeoSceneTexture;
 class TextureTile;
 class TileLoader;
+class ViewParams;
 
 
-class AbstractScanlineTextureMapper : public AbstractLayer
+class AbstractScanlineTextureMapper : public QObject
 {
     Q_OBJECT
 

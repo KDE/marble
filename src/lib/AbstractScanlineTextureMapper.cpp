@@ -22,6 +22,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
+#include "ViewParams.h"
 
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
@@ -32,7 +33,7 @@
 
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
-    :AbstractLayer(parent)
+    : QObject( parent )
 {
     m_posX = 0;
     m_posY = 0;

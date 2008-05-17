@@ -20,6 +20,7 @@
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
+#include "ViewParams.h"
 
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
