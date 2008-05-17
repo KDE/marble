@@ -35,7 +35,12 @@ QStringList SatellitesPlugin::renderPosition() const
 
 QString SatellitesPlugin::name() const
 {
-    return QString( "Satellites Plugin" );
+    return tr( "Satellites" );
+}
+
+QString SatellitesPlugin::guiString() const
+{
+    return tr( "&Satellites" );
 }
 
 QString SatellitesPlugin::nameId() const
@@ -45,7 +50,7 @@ QString SatellitesPlugin::nameId() const
 
 QString SatellitesPlugin::description() const
 {
-    return QString( "This plugin diplays TBD satellites." );
+    return tr( "This plugin displays TBD satellites." );
 }
 
 QIcon SatellitesPlugin::icon () const

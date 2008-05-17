@@ -41,6 +41,8 @@ class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
 
     QString name() const;
 
+    QString guiString() const;
+
     QString nameId() const;
 
     QString description() const;

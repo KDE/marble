@@ -29,6 +29,7 @@ class SatellitesPlugin : public QObject, public MarbleLayerInterface
     QString renderPolicy() const;
     QStringList renderPosition() const;
     QString name() const;
+    QString guiString() const;
     QString nameId() const;
     QString description() const;
     QIcon icon () const;

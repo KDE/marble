@@ -38,6 +38,8 @@ class MarbleTestPlugin : public QObject, public MarbleLayerInterface
 
     QString name() const;
 
+    QString guiString() const;
+
     QString nameId() const;
 
     QString description() const;

@@ -40,7 +40,12 @@ QStringList MarbleCompassFloatItem::backendTypes() const
 
 QString MarbleCompassFloatItem::name() const
 {
-    return QString( "Compass" );
+    return tr( "Compass" );
+}
+
+QString MarbleCompassFloatItem::guiString() const
+{
+    return tr( "&Compass" );
 }
 
 QString MarbleCompassFloatItem::nameId() const
@@ -50,7 +55,7 @@ QString MarbleCompassFloatItem::nameId() const
 
 QString MarbleCompassFloatItem::description() const
 {
-    return QString( "This is a float item that provides a compass." );
+    return tr( "This is a float item that provides a compass." );
 }
 
 QIcon MarbleCompassFloatItem::icon () const

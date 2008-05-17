@@ -78,6 +78,15 @@ class MarbleLayerInterface
     virtual QString name() const = 0;
 
     /**
+     * @brief Returns the string that should appear in the UI / in the menu.
+     *.
+     * Using a "&" you can suggest key shortcuts
+     *
+     * Example: "&Stars"
+     */
+    virtual QString guiString() const = 0;
+
+    /**
      * @brief Returns the name ID of the backend.
      *.
      * Example: "starrysky"

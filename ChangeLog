@@ -1,20 +1,29 @@
+2008-05-17  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleLayerInterface.h:
+    * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.{cpp,h}:
+    * src/plugins/marble/compass/CompassFloatItem.{cpp,h}:
+    * src/plugins/marble/satellites/SatellitesPlugin.{cpp,h}:
+
+    - introducing guiString() and translate plugin strings ...
+
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/GeoPainter.h
-    * src/lib/GeoPainter.cpp
+    * src/lib/GeoPainter.{cpp,h}:
 
     Fix includes.
 
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/MergedLayerDecorator.cpp (paintClouds)
+    * src/lib/MergedLayerDecorator.cpp: (paintClouds)
 
     Do not attempt to paint clouds if cloud tile and map tile have
     got different sizes.
 
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/TileLoader.cpp (maxCompleteTileLevel)
+    * src/lib/TileLoader.cpp: (maxCompleteTileLevel)
 
     Rename variables n -> row, m -> column.
 

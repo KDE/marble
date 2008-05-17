@@ -35,7 +35,12 @@ QStringList MarbleTestPlugin::renderPosition() const
 
 QString MarbleTestPlugin::name() const
 {
-    return QString( "Test Plugin" );
+    return tr( "Test Plugin" );
+}
+
+QString MarbleTestPlugin::guiString() const
+{
+    return tr( "&Test Plugin" );
 }
 
 QString MarbleTestPlugin::nameId() const
@@ -45,7 +50,7 @@ QString MarbleTestPlugin::nameId() const
 
 QString MarbleTestPlugin::description() const
 {
-    return QString( "This is a simple test plugin." );
+    return tr( "This is a simple test plugin." );
 }
 
 QIcon MarbleTestPlugin::icon () const

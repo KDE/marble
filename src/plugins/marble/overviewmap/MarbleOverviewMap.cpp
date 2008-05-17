@@ -39,7 +39,12 @@ QStringList MarbleOverviewMap::backendTypes() const
 
 QString MarbleOverviewMap::name() const
 {
-    return QString( "Overview Map" );
+    return tr("Overview Map");
+}
+
+QString MarbleOverviewMap::guiString() const
+{
+    return tr("&Overview Map");
 }
 
 QString MarbleOverviewMap::nameId() const
@@ -49,7 +54,7 @@ QString MarbleOverviewMap::nameId() const
 
 QString MarbleOverviewMap::description() const
 {
-    return QString( "This is a float item that provides an overview map." );
+    return tr("This is a float item that provides an overview map.");
 }
 
 QIcon MarbleOverviewMap::icon () const
