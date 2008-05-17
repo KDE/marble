@@ -71,6 +71,7 @@ SET( geodata_handlers_dgml_SRCS
         geodata/handlers/dgml/DgmlMinimumTagHandler.cpp
         geodata/handlers/dgml/DgmlNameTagHandler.cpp
         geodata/handlers/dgml/DgmlPenTagHandler.cpp
+        geodata/handlers/dgml/DgmlProjectionTagHandler.cpp
         geodata/handlers/dgml/DgmlPropertyTagHandler.cpp
         geodata/handlers/dgml/DgmlSettingsTagHandler.cpp
         geodata/handlers/dgml/DgmlSectionTagHandler.cpp

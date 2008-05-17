@@ -25,6 +25,8 @@
 <!ELEMENT palette>
 <!ELEMENT pen EMPTY>
 <!ELEMENT pick>
+<!-- FIXME: specify projection attributes: name -->
+<!ELEMENT projection>
 <!ELEMENT property (available?, value?)>
 <!ELEMENT section (heading, item*)>
 <!ELEMENT settings (group|property)*>
@@ -34,7 +36,7 @@
 <!ELEMENT storageLayout (#PCDATA)>
 <!ELEMENT target EMPTY>
 <!ELEMENT text (#PCDATA)>
-<!ELEMENT texture (sourcedir, installmap?, storageLayout?)>
+<!ELEMENT texture (sourcedir, installmap?, storageLayout?, projection?)>
 <!ELEMENT theme (#PCDATA)>
 <!ELEMENT value>
 <!ELEMENT vector (sourcefile, pen?, brush?)>

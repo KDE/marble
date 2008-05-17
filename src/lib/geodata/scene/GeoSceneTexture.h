@@ -33,6 +33,7 @@
 class GeoSceneTexture : public GeoSceneAbstractDataset {
  public:
     enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
+    enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
     ~GeoSceneTexture();
@@ -55,6 +56,9 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     int levelZeroRows() const;
     void setLevelZeroRows( const int );
 
+    Projection projection() const;
+    void setProjection( const Projection );
+
     virtual QString type();
 
  protected:
@@ -64,6 +68,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     QString m_customStorageLayout;
     int m_levelZeroColumns;
     int m_levelZeroRows;
+    Projection m_projection;
 };
 
 #endif // GEOSCENETEXTURE_H

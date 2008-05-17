@@ -1,5 +1,29 @@
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.{h,cpp}:
+    (dgmlTag_Projection): new constant.
+    * src/lib/geodata/handlers/dgml/DgmlProjectionTagHandler.{h,cpp}:
+    new class DgmlProjectionTagHandler.
+    * src/lib/geodata/scene/GeoSceneTexture.{h,cpp}:
+    (Projection): new enum.
+    (projection): new method.
+    (setProjection): new method.
+    (m_projection): new member variable.
+    * src/lib/geodata/CMakeLists.txt
+    (geodata_handlers_dgml_SRCS): add DgmlProjectionTagHandler.cpp.
+    * docs/dgml2.dtd
+    (projection): new element.
+    (texture): add optional projection.
+    * data/maps/earth/openstreetmap/openstreetmap.dgml:
+    add projection element.
+
+    Part 11 of groundwork for OpenStreetMap texture tiles.
+    DGML: Add sub element "projection" to "texture". This is needed
+    because the OpenStreetMap tiles use Mercator projection while
+    the existing themes use Equirectangular projection.
+
+2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.h
     * src/lib/MarbleMap.cpp
 

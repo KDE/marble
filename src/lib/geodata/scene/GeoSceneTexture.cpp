@@ -32,7 +32,8 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_storageLayoutMode( Marble ),
       m_customStorageLayout( "" ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
-      m_levelZeroRows( defaultLevelZeroRows )
+      m_levelZeroRows( defaultLevelZeroRows ),
+      m_projection( Equirectangular )
 {
     /* NOOP */
 }
@@ -100,6 +101,16 @@ int GeoSceneTexture::levelZeroRows() const
 void GeoSceneTexture::setLevelZeroRows( const int rows )
 {
     m_levelZeroRows = rows;
+}
+
+GeoSceneTexture::Projection GeoSceneTexture::projection() const
+{
+    return m_projection;
+}
+
+void GeoSceneTexture::setProjection( const Projection projection )
+{
+    m_projection = projection;
 }
 
 QString GeoSceneTexture::type()

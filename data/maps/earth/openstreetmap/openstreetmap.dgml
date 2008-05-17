@@ -23,6 +23,7 @@
                 <texture name="mapnik_data">
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
+                    <projection name="Mercator" />
                 </texture>
             </layer>
         </map>
