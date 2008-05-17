@@ -1,5 +1,12 @@
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/AbstractScanlineTextureMapper.h
+    * src/lib/MarbleMap.cpp
+
+    Fix includes.
+
+2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp
     * src/lib/SphericalScanlineTextureMapper.cpp
     * src/lib/AbstractScanlineTextureMapper.h

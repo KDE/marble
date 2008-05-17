@@ -14,11 +14,7 @@
 
 
 #include <QtCore/QObject>
-#include <QtCore/QString>
 #include <QtGui/QColor>
-
-#include "Quaternion.h"
-#include "MergedLayerDecorator.h"
 
 
 class GeoSceneTexture;

@@ -50,6 +50,7 @@
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
+#include "MergedLayerDecorator.h"
 #include "Quaternion.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
