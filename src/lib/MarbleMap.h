@@ -156,6 +156,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     MeasureTool  *measureTool();
 
     void  setSize(int width, int height);
+    void  setSize(QSize size);
     QSize size()   const;
     int   width()  const;
     int   height() const;

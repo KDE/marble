@@ -200,6 +200,14 @@ void MarbleMap::setSize(int width, int height)
     d->doResize();
 }
 
+void MarbleMap::setSize(QSize size)
+{
+    d->m_width  = size.width();
+    d->m_height = size.height();
+
+    d->doResize();
+}
+
 QSize MarbleMap::size() const
 {
     return QSize( d->m_width, d->m_height );
