@@ -60,6 +60,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
     QRectF renderedRect() const;
 
     virtual QPainterPath backgroundShape() const;
+    void renderBackground( QPainter* );
 
     double border() const;
     void setBorder( double width );

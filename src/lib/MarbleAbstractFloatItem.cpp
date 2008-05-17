@@ -34,18 +34,18 @@ class MarbleAbstractFloatItemPrivate
 
     void calculateLayout()
     {
-        double marginTop = ( s_marginTop == 0 ) ? s_margin : s_marginTop;;
-        double marginBottom = ( s_marginBottom == 0 ) ? s_margin : s_marginBottom;;
-        double marginLeft = ( s_marginLeft == 0 ) ? s_margin : s_marginLeft;
-        double marginRight = ( s_marginRight == 0 ) ? s_margin : s_marginRight;;
+        double marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;;
+        double marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;;
+        double marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
+        double marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;;
 
         m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) ); 
     
         m_contentRect = QRectF( 
             m_position.x() + marginLeft + s_padding, 
             m_position.y() + marginTop + s_padding, 
-            m_size.width() - ( marginLeft + marginRight + 2 * s_padding ), 
-            m_size.height() - ( marginTop + marginBottom + 2 * s_padding ) 
+            m_size.width() - ( marginLeft + marginRight + 2.0 * s_padding ), 
+            m_size.height() - ( marginTop + marginBottom + 2.0 * s_padding ) 
         ); 
     }
 
@@ -167,8 +167,20 @@ QRectF MarbleAbstractFloatItem::renderedRect() const
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRect( QRectF( QPointF( marginLeft(), marginTop() ), d->m_renderedRect.size() ).toRect() );
+    path.addRect( QRectF( QPointF( marginLeft(), marginTop() ), d->m_renderedRect.size() ) );
     return path;
+}
+
+void MarbleAbstractFloatItem::renderBackground( QPainter* painter )
+{
+    painter->save();
+
+    painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
+    painter->setBrush( d->s_background );
+    painter->setRenderHint( QPainter::Antialiasing, true );
+    painter->drawPath( backgroundShape() );
+
+    painter->restore();
 }
 
 double MarbleAbstractFloatItem::border() const
@@ -330,40 +342,27 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         // unset the dirty flag once all checks are passed
         d->m_newItemProperties = false;
 
-        // Clear the pixmap and redirect the painter
-        QPaintDevice* mapDevice = painter->device();
-
         if ( d->s_pixmapCacheEnabled ) {
             d->m_cachePixmap.fill( Qt::transparent );
-            painter->end();
+            GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport );
+            pixmapPainter.translate( 0.5, 0.5 );
+            renderBackground( &pixmapPainter );
 
-            GeoPainter::setRedirected( mapDevice, &( d->m_cachePixmap ) );
-            painter->begin( &( d->m_cachePixmap ) );
+            pixmapPainter.translate( d->s_padding, d->s_padding );
+
+            success = renderFloatItem( &pixmapPainter, viewport, layer );
+
+            painter->drawPixmap( d->m_position, d->m_cachePixmap );
         }
         else {
             painter->translate( d->m_position.x(), d->m_position.y() );
+            renderBackground( painter );
+            painter->translate( d->s_padding, d->s_padding );
+
+            success = renderFloatItem( painter, viewport, layer );
+
+            painter->resetTransform();
         }
-
-        painter->save();
-
-        painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
-        painter->setBrush( d->s_background );
-        painter->setRenderHint( QPainter::Antialiasing, true );
-        painter->drawPath( backgroundShape() );
-        painter->restore();
-
-        painter->translate( d->s_padding, d->s_padding );
-
-        success = renderFloatItem( painter, viewport, layer );
-    
-        if ( d->s_pixmapCacheEnabled ) {
-            painter->end();
-            GeoPainter::restoreRedirected( mapDevice );
-            painter->begin( mapDevice );
-            painter->drawPixmap( d->m_position, d->m_cachePixmap );
-        }
-
-        painter->resetTransform();
     }
     else {
         success = renderOnMap( painter, viewport, renderPos, layer );

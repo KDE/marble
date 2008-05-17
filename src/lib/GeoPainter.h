@@ -61,7 +61,7 @@ class GeoPainterPrivate;
 class MARBLE_EXPORT GeoPainter : public ClipPainter
 {
  public:
-    GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip );
+    GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip = true );
 //    Ideally we'd like to have this constructor:
 
 //    GeoPainter( MarbleMap * map, bool clip );

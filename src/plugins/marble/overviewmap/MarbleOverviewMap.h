@@ -33,7 +33,7 @@ class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
     Q_INTERFACES( MarbleLayerInterface )
 
  public:
-    explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.0, 10.0 ),
+    explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
                                 const QSizeF &size = QSizeF( 166.0, 86.0 ) );
     ~MarbleOverviewMap();
 

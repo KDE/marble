@@ -44,7 +44,7 @@ QString MarbleOverviewMap::name() const
 
 QString MarbleOverviewMap::nameId() const
 {
-    return QString( "overviewmap-plugin" );
+    return QString( "overviewmap" );
 }
 
 QString MarbleOverviewMap::description() const
