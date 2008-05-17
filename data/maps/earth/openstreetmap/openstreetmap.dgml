@@ -8,7 +8,7 @@
             <theme>openstreetmap</theme>
             <icon pixmap="openstreetmap-preview.png"/>
             <visible>true</visible>
-            <description><![CDATA[A <i>global roadmap</i> created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.]]></description>
+            <description><![CDATA[<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.<p>OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.]]></description>
             <zoom>
                 <minimum>  1000  </minimum>
                 <maximum>  4000  </maximum>
