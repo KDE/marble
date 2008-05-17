@@ -40,13 +40,25 @@
       <layout class="QHBoxLayout" name="horizontalLayout" >
        <item>
         <widget class="QLabel" name="timeDisplayLabel" >
+         <property name="toolTip" >
+          <string/>
+         </property>
          <property name="text" >
           <string>Time Display</string>
+         </property>
+         <property name="buddy" >
+          <cstring>timeDisplayComboBox</cstring>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QComboBox" name="timeDisplayComboBox" >
+         <property name="toolTip" >
+          <string>The format to display the time in</string>
+         </property>
+         <property name="whatsThis" >
+          <string>This box allows you to choose the way the time is displayed</string>
+         </property>
          <item>
           <property name="text" >
            <string>24-hour clock</string>
@@ -63,6 +75,15 @@
      </item>
      <item>
       <widget class="QCheckBox" name="showDateCheckBox" >
+       <property name="toolTip" >
+        <string>Check to show the date as well as the time</string>
+       </property>
+       <property name="statusTip" >
+        <string/>
+       </property>
+       <property name="whatsThis" >
+        <string>This checkbox allows you to choose to show the date as well as the time</string>
+       </property>
        <property name="text" >
         <string>Show date</string>
        </property>
@@ -70,6 +91,12 @@
      </item>
      <item>
       <widget class="QCheckBox" name="showFullCheckBox" >
+       <property name="toolTip" >
+        <string>Chooses whether to show the full name of the timezone</string>
+       </property>
+       <property name="whatsThis" >
+        <string>This checkbox chooses whether to show the full name of the timezone; eg "Europe/London" or simply "London"</string>
+       </property>
        <property name="text" >
         <string>Show full timezone name</string>
        </property>
@@ -77,6 +104,12 @@
      </item>
      <item>
       <widget class="QCheckBox" name="centerSunCheckBox" >
+       <property name="toolTip" >
+        <string>Check to centre the map on the area currently illuminated by the sun</string>
+       </property>
+       <property name="whatsThis" >
+        <string>This checkbox allows you to choose to centre the map over the area that is currently illuminated by the sun.</string>
+       </property>
        <property name="text" >
         <string>Centre Map on Sun</string>
        </property>
@@ -89,6 +122,12 @@
       <layout class="QHBoxLayout" >
        <item>
         <widget class="QLabel" name="rotationLabel" >
+         <property name="toolTip" >
+          <string>This longitude will be the centre of the map</string>
+         </property>
+         <property name="whatsThis" >
+          <string>Here you can select the longitude which will be the centre of the map</string>
+         </property>
          <property name="text" >
           <string>Centre Longitude</string>
          </property>
