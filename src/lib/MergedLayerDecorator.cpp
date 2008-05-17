@@ -109,14 +109,15 @@ void MergedLayerDecorator::paintClouds()
     QImage  cloudtile = loadRawTile( m_cloudsTextureLayer );
     if ( cloudtile.isNull() )
         return;
-	
+
+    // Do not attempt to paint clouds if cloud tile and map tile have
+    // got different sizes.
+    // FIXME: make cloud a separate texture layer
+    if ( cloudtile.height() != m_tile->height() || cloudtile.width() != m_tile->width() )
+        return;
+
 //     qDebug() << "cloud tile:" << cloudtile.height() << cloudtile.width() << cloudtile.depth()
 //              << "  map tile:" << m_tile->height() << m_tile->width() << m_tile->depth();
-
-    if ( cloudtile.height() != m_tile->height() || cloudtile.width() != m_tile->width() ) {
-      cloudtile = cloudtile.scaled( m_tile->width(), m_tile->height(),
-                                    Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
-    }
 
     const int  ctileHeight = cloudtile.height();
     const int  ctileWidth  = cloudtile.width();

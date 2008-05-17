@@ -1,5 +1,12 @@
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MergedLayerDecorator.cpp (paintClouds)
+
+    Do not attempt to paint clouds if cloud tile and map tile have
+    got different sizes.
+
+2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/TileLoader.cpp (maxCompleteTileLevel)
 
     Rename variables n -> row, m -> column.
