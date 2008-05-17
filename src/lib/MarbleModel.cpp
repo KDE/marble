@@ -28,12 +28,11 @@
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 
-#include "AbstractScanlineTextureMapper.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
-#include "FlatScanlineTextureMapper.h"
+#include "SphericalScanlineTextureMapper.h"
+#include "EquirectScanlineTextureMapper.h"
 #include "GeoPolygon.h"
-#include "GlobeScanlineTextureMapper.h"
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"
@@ -346,13 +345,14 @@ void MarbleModel::setupTextureMapper( Projection projection )
 
     switch( projection ) {
         case Spherical:
-            d->m_texmapper = new GlobeScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new SphericalScanlineTextureMapper( d->m_tileLoader, this );
             break;
         case Equirectangular:
-            d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
             break;
         case Mercator:
-            d->m_texmapper = new FlatScanlineTextureMapper( d->m_tileLoader, this );
+	    // FIXME FIXME FIXME: Create a MercatorScanlineTextureMapper.
+            d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
             break;
     }
 

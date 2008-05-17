@@ -1,3 +1,15 @@
+2008-05-17  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename files and classes to fit in naming scheme for the projections.
+	* src/lib/GlobeScanlineTextureMapper.{h,cpp}:
+	Renamed into SphericalScanlineTextureMapper.{h,cpp}
+	* src/lib/FlatScanlineTextureMapper.{h,cpp}:
+	Renamed into EquirectScanlineTextureMapper.{h,cpp}
+	* src/lib/MarbleModel.cpp (setupTextureMapper): Use new names for
+	classes
+	(includes): Use new names for files
+	* src/lib/CMakeLists.txt: Use new names for files.
+
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * docs/FAQ

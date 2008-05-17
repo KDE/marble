@@ -95,9 +95,9 @@ set(marblewidget_SRCS
     PlaceMarkInfoDialog.cpp
     Quaternion.cpp
     TextureColorizer.cpp
-    FlatScanlineTextureMapper.cpp
-    GlobeScanlineTextureMapper.cpp
     AbstractScanlineTextureMapper.cpp
+    SphericalScanlineTextureMapper.cpp
+    EquirectScanlineTextureMapper.cpp
     DiscCache.cpp
     CacheStoragePolicy.cpp
     FileStoragePolicy.cpp
