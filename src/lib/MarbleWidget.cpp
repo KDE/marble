@@ -17,7 +17,6 @@
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
-#include <QtCore/QTime>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
@@ -27,10 +26,8 @@
 
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include "AutoSettings.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
-#include "TextureColorizer.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "GeoDataPoint.h"
@@ -780,9 +777,6 @@ void MarbleWidgetPrivate::setActiveRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
-    QTime t;
-    t.start();
-
     // FIXME: Better way to get the GeoPainter
     bool  doClip = true;
     if ( d->m_map->projection() == Spherical )

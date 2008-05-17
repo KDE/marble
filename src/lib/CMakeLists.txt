@@ -60,7 +60,6 @@ set(marblewidget_SRCS
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
 
-    AutoSettings.cpp
     ClipPainter.cpp
     GeoPainter.cpp
     GeoPolygon.cpp

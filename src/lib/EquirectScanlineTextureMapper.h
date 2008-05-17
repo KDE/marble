@@ -14,8 +14,6 @@
 #define EQUIRECTSCANLINETEXTUREMAPPER_H
 
 
-#include <QtCore/QString>
-
 #include "AbstractScanlineTextureMapper.h"
 
 

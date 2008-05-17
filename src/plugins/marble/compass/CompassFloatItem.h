@@ -27,15 +27,15 @@ class QSvgRenderer;
  *
  */
 
-class MarbleCompassFloatItem : public QObject, public MarbleAbstractFloatItem
+class CompassFloatItem  : public QObject, public MarbleAbstractFloatItem
 {
     Q_OBJECT
     Q_INTERFACES( MarbleLayerInterface )
 
  public:
-    explicit MarbleCompassFloatItem( const QPointF &point = QPointF( 200.0, 10.0 ),
+    explicit CompassFloatItem ( const QPointF &point = QPointF( 200.0, 10.0 ),
                                 const QSizeF &size = QSizeF( 86.0, 86.0 ) );
-    ~MarbleCompassFloatItem();
+    ~CompassFloatItem ();
 
     QStringList backendTypes() const;
 
@@ -63,6 +63,7 @@ class MarbleCompassFloatItem : public QObject, public MarbleAbstractFloatItem
  private:
     QSvgRenderer  *m_svgobj;
     QPixmap        m_compass;
+    int            m_polarity;
 };
 
 #endif

@@ -24,7 +24,6 @@
 #include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
-#include <QtCore/QTimer>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
@@ -36,7 +35,6 @@
 #include "MapScaleFloatItem.h"
 
 #include "AbstractScanlineTextureMapper.h"
-#include "AutoSettings.h"
 #include "BoundingBox.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"

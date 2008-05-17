@@ -21,95 +21,133 @@
 #include "ViewportParams.h"
 
 
-MarbleCompassFloatItem::MarbleCompassFloatItem( const QPointF &point, const QSizeF &size )
+CompassFloatItem ::CompassFloatItem ( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size )
 {
     m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
                                  this );
 }
 
-MarbleCompassFloatItem::~MarbleCompassFloatItem()
+CompassFloatItem ::~CompassFloatItem ()
 {
     delete m_svgobj;
 }
 
-QStringList MarbleCompassFloatItem::backendTypes() const
+QStringList CompassFloatItem ::backendTypes() const
 {
     return QStringList( "compass" );
 }
 
-QString MarbleCompassFloatItem::name() const
+QString CompassFloatItem ::name() const
 {
     return tr( "Compass" );
 }
 
-QString MarbleCompassFloatItem::guiString() const
+QString CompassFloatItem ::guiString() const
 {
     return tr( "&Compass" );
 }
 
-QString MarbleCompassFloatItem::nameId() const
+QString CompassFloatItem ::nameId() const
 {
     return QString( "compass" );
 }
 
-QString MarbleCompassFloatItem::description() const
+QString CompassFloatItem ::description() const
 {
     return tr( "This is a float item that provides a compass." );
 }
 
-QIcon MarbleCompassFloatItem::icon () const
+QIcon CompassFloatItem ::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleCompassFloatItem::initialize ()
+void CompassFloatItem ::initialize ()
 {
 }
 
-bool MarbleCompassFloatItem::isInitialized () const
+bool CompassFloatItem ::isInitialized () const
 {
     return true;
 }
 
-QPainterPath MarbleCompassFloatItem::backgroundShape() const
+QPainterPath CompassFloatItem ::backgroundShape() const
 {
     QPainterPath path;
-    path.addEllipse( QRectF( QPointF( marginLeft(), marginTop() ), renderedRect().size() ).toRect() );
+    int fontheight = QFontMetrics( font() ).ascent();
+    int compassLength = static_cast<int>( contentRect().height() ) - 5 - fontheight;
+
+    path.addEllipse( QRectF( QPointF( marginLeft() + padding() + ( contentRect().width() - compassLength ) / 2 , marginTop() + padding() + 5 + fontheight ), QSize( compassLength, compassLength ) ).toRect() );
     return path;
 }
 
-bool MarbleCompassFloatItem::needsUpdate( ViewportParams *viewport )
+bool CompassFloatItem ::needsUpdate( ViewportParams *viewport )
 {
 // figure out the polarity ...
+    if ( m_polarity == viewport->polarity() ) {
+        return false;
+    }
+
+    m_polarity = viewport->polarity();
 
     return true;
 }
 
-bool MarbleCompassFloatItem::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     painter->save();
     painter->autoMapQuality();
 
-    QRectF mapRect( contentRect() );
+    QRectF compassRect( contentRect() );
 
-    // Rerender worldmap pixmap if the size has changed
-    if ( m_compass.size() != mapRect.size().toSize() ) {
-        m_compass = QPixmap( mapRect.size().toSize() );
+    qDebug() << "Polarity" << m_polarity;
+    QString dirstr = tr( "N" );
+    if ( m_polarity == -1 ) 
+        dirstr = tr( "S" );
+    if ( m_polarity == 0 )
+        dirstr = "";
+
+    int fontheight = QFontMetrics( font() ).ascent();
+    int fontwidth = QFontMetrics( font() ).boundingRect( dirstr ).width();
+
+    QPen outlinepen( background().color() );
+    outlinepen.setWidth( 2 );
+    QBrush outlinebrush( pen().color() );
+
+    QPainterPath   outlinepath;
+    const QPointF  baseline( 0.5 * (double)( compassRect.width() - fontwidth ),
+                             (double)(fontheight) + 2.0 );
+    outlinepath.addText( baseline, font(), dirstr );
+
+    painter->setPen( outlinepen );
+    painter->setBrush( outlinebrush );
+    painter->drawPath( outlinepath );
+
+    painter->setPen( Qt::NoPen );
+    painter->drawPath( outlinepath );
+
+    int compassLength = static_cast<int>( contentRect().height() ) - 5 - fontheight;
+        
+    QSize compassSize( compassLength, compassLength ); 
+
+    // Rerender compass pixmap if the size has changed
+    if ( m_compass.size() != compassSize ) {
+        m_compass = QPixmap( compassSize );
         m_compass.fill( Qt::transparent );
         QPainter mapPainter( &m_compass );
         mapPainter.setViewport( m_compass.rect() );
         m_svgobj->render( &mapPainter ); 
         mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
-    painter->drawPixmap( QPoint( 0, 0 ), m_compass );
+    painter->drawPixmap( QPoint( static_cast<int>( contentRect().width() - compassLength ) / 2, fontheight + 5 ), m_compass );
 
     painter->restore();
 
     return true;
 }
 
-Q_EXPORT_PLUGIN2(MarbleCompassFloatItem, MarbleCompassFloatItem)
+Q_EXPORT_PLUGIN2(CompassFloatItem, CompassFloatItem )
 
 #include "CompassFloatItem.moc"
