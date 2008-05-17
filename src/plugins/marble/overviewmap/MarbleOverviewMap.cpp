@@ -11,9 +11,7 @@
 #include "MarbleOverviewMap.h"
 
 #include <QtCore/QRect>
-#include <QtGui/QColor>
 #include <QtGui/QPixmap>
-#include <QtGui/QRadialGradient>
 #include <QtSvg/QSvgRenderer>
 
 #include "MarbleDirs.h"

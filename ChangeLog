@@ -1,3 +1,12 @@
+2008-05-17  Torsten Rahn  <rahn@kde.org>
+
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.cpp:
+    * src/plugins/marble/compass/CompassFloatItem.{cpp,h}:
+    * src/plugins/marble/compass/CMakeLists.txt:
+    * src/plugins/marble/CMakeLists.txt:
+
+    - Early version of the new Compass float item plugin
+
 2008-05-17  Inge Wallin  <inge@lysator.liu.se>
 
 	Remove functions that are already moved to projection helpers

@@ -344,10 +344,14 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
             painter->translate( d->m_position.x(), d->m_position.y() );
         }
 
+        painter->save();
+
         painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
         painter->setBrush( d->s_background );
+        painter->setRenderHint( QPainter::Antialiasing, true );
         painter->drawPath( backgroundShape() );
-    
+        painter->restore();
+
         painter->translate( d->s_padding, d->s_padding );
 
         success = renderFloatItem( painter, viewport, layer );
