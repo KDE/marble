@@ -1,78 +1,10 @@
 This file describes what we need to do before certain milestones.
 
 Mark those tasks that you want to perform with your name:
- INGE   Inge Wallin            inge@lysator.liu.se
- TACK   Tackat (Torsten Rahn)
- CARU   Carlos Licea
+ INGE   Inge Wallin	ingwa     inge@lysator.liu.se
+ TACK   Torsten Rahn	tackat
+ CARU   Carlos Licea	carutsu
  MURA   Murad Tagirov
-
-
-
-
-Before Release of Marble 0.6:
-=============================
-
-Layer Management Class tasks: 
-
-*** New widget independent image canvas concept and implementation      DONE
-    -- Check Apidox if there is anything missing.                       --
-
-*** Add formal description of DGML                                      TACK
-
-*** Split off MapTheme / DGML parsing into geodata/parser.              DONE
-    Have a GeoDataMapTheme class that basically only includes those 
-    parts of the current MapTheme except for parsing.
-
-*** Implement / move <head> features as lined out in                    DONE
-    layermanagement.txt This should happen after the QXmlStreamReader
-    port.
-
-*** Implement basic Qt-Plugin based LMC class                           ----
-
-*** Move backends into plugins / threads                                ----
-
-*** Design and implement a QPainter-style API for GeoPainter            ----
-    Design								--
-    Implement								--
-
-*** Cloud Layer                                                         STRE
-
-*** Mercator Projection                                                 CARU
-
-*** Design and implement Projection class                               INGE
-
-*** Fix GPS Support                                                     ANDR
-
-
-REFINEMENTS:
-
-Low hanging (but important) fruits:
------------------------------------
-
-
-*** Add a *small* percentage bar to the status bar that indicates map   ----
-    downloads (should be really tiny and not obtrusive just to see
-    that something is going on). Ideally the user would get a tooltip
-    once he hovers that progress bar with numbers of files in the
-    queue, maybe amount of data that has been downloaded during the
-    session.
-
-
-More sophisticated issues
--------------------------
-
-These need some thinking and discussion
-
-*** Download manager fixes:
- - After maps get downloaded sometimes the resolution doesn't get
-   updated to what is has just been stored on the disc
- - Implement "retry to download the tile 3 times during the current
-   session if the tile couldn't get fetched on first try"
-
-*** Minor Backend feature fixes and polishment:
- - Create a LatLonBoundingBox
- - Create a QPersistentModelIndex for MarblePlaceMarkModel items to
-   improve speed on close up zooms.                                     DONE (TACK)
 
 
 
@@ -93,21 +25,6 @@ Add maps to GHNS:
  * Annual temperature                                                   ----
     - temperature July                                                  --
     - temperature December                                              --
-
-
-
-Integration of Google Summer of Code projects (0.6)
-----------------------------------------------------------------
-
-GPS support (Andrew Manson)
- * Read GPX files                                                       ----
- * Show waypoints                                                       ----
- * Show tracks                                                          ----
- * Show 'You are here' using the GPS.                                   ----
-
-KML support (Murad Tagirov)
- * One overall aim: make Digikam KML output and plasma weather applet 
-   work together with Marble. 
 
 
 Before KDE 4.0.2
@@ -146,9 +63,11 @@ Widget:
 Before KDE 4.1
 ================================================================
 
-Documentation 
+Documentation / Specification
  * Update manual for the new features					----	
     - Update screenshots     						--
+ * Add formal description of DGML                                      	TACK
+
 
 Planning and architecture:
  * write proposals for Marble 0.6 / KDE 4.1                             ----
@@ -167,7 +86,6 @@ Vector backend
  * Better scalability                                                   ----
 
 Features:
- * Areas, e.g. countries or districts                                   ----
  * Support for OpenStreetMap                                            TACK
     - load tiles                                                        --
     - display tiles                                                     --
@@ -175,24 +93,60 @@ Features:
     - Put tiles on server                                               --
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
+ * Mercator Projection                                                  INGE
+    - Make the vector base work        					--
+    - Move projection stuff to its own subdirectory			done
+ * Fix GPS Support (that's a regression) 				ANDR
+
 
 Internal structure:
+ * Create a QPersistentModelIndex for MarblePlaceMarkModel items to	DONE
+   improve speed on close up zooms.
  * New class MarbleMap that can paint a map on any QPainter             DONE
+    - Check Apidox if there is anything missing.                        --
+ * Design and implement Projection class 				DONE
  * Refactor KML to use QXmlStreamReader                                 ----
  * Make MarbleModel a real model and MarbleWidget a real view           ----
+     Move to 4.2?  Probably...
  * Make it possible to paint on whatever QPainter Marble is given       ----
+     Move to 4.2?  Probably...
+ * Layer Management Class						TACK
+    - Make a QPlugin based interface					--
+    - Move backends into plugins / threads                              --
+    - Split off MapTheme / DGML parsing into geodata/parser. 		done
+        Have a GeoDataMapTheme class that basically only includes
+        those parts of the current MapTheme except for parsing.
+    - Implement / move <head> features as lined out in			done
+      layermanagement.txt This should happen after the 
+      QXmlStreamReader port.
+ * GeoPainter								----
+ * Create a LatLonBoundingBox						DONE
+    - Use it everywhere :-) 						--
+ * Download manager fixes:						----
+    - After maps get downloaded sometimes the resolution doesn't get	--
+      updated to what is has just been stored on the disc
+    - Implement "retry to download the tile 3 times during the current	--
+      session if the tile couldn't get fetched on first try"
+
+GUI / Usability
+ * Make Marble have a RenderingQuality setting in ViewParams:           DONE
+   - Use different render settings while panning (MOVE) and 		done
+     after releasing the mouse (DROP).
+   - Rerender the map at "PRINT quality" once "File -> Print" or	--
+     "Edit -> Copy" get selected.
+ * Add a small indicator to the status bar indicates map downloads      ----
+   (see explanation below)
+
+Smaller issues
+ * Make the about dialog for MarbleWidget more consistent with the	----
+   application About dialog.  Or perhaps disable it for the KDE
+   version?
+ * Cloud Layer                                                          STRE
 
 Installation issues
  * Only install the public include files                                ----
  * Creating tiles during build instead of first run                     DONE
-
-Data:
- * Evaluate the implementation of tile specifications like              ----
-   - http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation   --
-   - http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification     --
-
-   for practical relevance and implement those bits into our client
-   that make sense for us to have.
+    - Create all maps?	       	       	  				--
 
 Integration with Qt designer
  * control files for the following widgets                              TACK
@@ -200,22 +154,20 @@ Integration with Qt designer
    - MarbleLocator (search field for placemarks)                        --
    - MarbleLegendBrowser                                                --
 
-Smaller issues
- * Make the about dialog for MarbleWidget more consistent with the	----
-   application About dialog.  Or perhaps disable it for the KDE
-   version?
+Data
+ * Evaluate the implementation of tile specifications like              ----
+   - http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation   --
+   - http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification     --
 
-Some advanced features
- * Make Marble have a RenderingQuality setting in ViewParams:           DONE
-   - Use different render settings while panning (MOVE) and 		done
-     after releasing the mouse (DROP).
-   - Rerender the map at "PRINT quality" once "File -> Print" or	--
-     "Edit -> Copy" get selected.
+   for practical relevance and implement those bits into our client
+   that make sense for us to have.
 
 
-
-Before KDE 4.2
+Moved to KDE 4.2
 ================================================================
+
+Features:
+ * Areas, e.g. countries or districts                                   ----
 
 To be populated...
 
@@ -257,3 +209,12 @@ qualities in different situations.
 
  ** Rerender the map at "PRINT quality" once "File -> Print" or 
     "Edit -> Copy" get selected.
+
+
+Small indicator in the status bar for downloads
+-----------------------------------------------
+    downloads (should be really tiny and not obtrusive just to see
+    that something is going on). Ideally the user would get a tooltip
+    once he hovers that progress bar with numbers of files in the
+    queue, maybe amount of data that has been downloaded during the
+    session.
