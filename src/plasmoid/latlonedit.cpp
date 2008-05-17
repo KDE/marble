@@ -202,7 +202,7 @@ void LatLonEdit::setValue( double newvalue )
 {
 	m_value = newvalue;
 	reverseRecalculate();
-	qDebug() << "valueChanged: now " << m_value;
+	//qDebug() << "valueChanged: now " << m_value;
 	emit valueChanged( m_value );
 }
 
@@ -215,9 +215,11 @@ void LatLonEdit::recalculate()
 	minsfract = minsfract / 60;
 	secsfract = secsfract / 3600;
 
+        /*
 	qDebug() << "newvalue = " << newvalue;
 	qDebug() << "minsfract = " << minsfract;
 	qDebug() << "secsfract = " << secsfract;
+        */
 
 	//we need two because if the degrees is neg,
 	//the mins/secs *subtract* from the value
@@ -250,7 +252,7 @@ void LatLonEdit::recalculate()
 		m_minutesSpin->setValue( 0 );
 		m_secondsSpin->setValue( 0 );
 	} 
-	qDebug() << "valueChanged: now " << m_value;
+	//qDebug() << "valueChanged: now " << m_value;
 
 	checkComboBox();
 

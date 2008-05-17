@@ -9,7 +9,7 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>139</height>
+    <height>169</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -36,6 +36,45 @@
   <layout class="QVBoxLayout" >
    <item>
     <layout class="QVBoxLayout" >
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" >
+       <item>
+        <widget class="QLabel" name="timeDisplayLabel" >
+         <property name="text" >
+          <string>Time Display</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="timeDisplayComboBox" >
+         <item>
+          <property name="text" >
+           <string>24-hour clock</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>12-hour clock</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="showDateCheckBox" >
+       <property name="text" >
+        <string>Show date</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="showFullCheckBox" >
+       <property name="text" >
+        <string>Show full timezone name</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QCheckBox" name="centerSunCheckBox" >
        <property name="text" >

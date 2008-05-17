@@ -28,8 +28,12 @@ class SunLocator;
 
 class QGraphicsSceneHoverEvent;
 class QStyleOptionGraphicsItem;
+class QFont;
 class QRect;
 class QString;
+class QPainter;
+class QDateTime;
+class QPointF;
 
 class KTimeZone;
 
@@ -46,34 +50,61 @@ class WorldClock : public Plasma::Applet
     public slots:
         void dataUpdated(const QString &source,
 	                 const Plasma::DataEngine::Data &data);
-	void showConfigurationInterface();
+	void createConfigurationInterface(KConfigDialog *parent);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
     protected slots:
         void configAccepted();
     private slots:
+        //connected to geometryChanged()
         void resizeMap();
     private:
+        void connectToEngine();
+
+        //these are used for sizing & positioning text
         void recalculatePoints();
         void recalculateFonts();
+
+        //for changing zones based on mouse position
         void setTz( QString newtz );
-        void connectToEngine();
         QString getZone();
+
+        //time in our selected timezone
+        QDateTime m_time;
+        //time in user's local zone
+        QDateTime m_localtime;
+
+        //the map
+        MarbleMap *m_map;
+	SunLocator *m_sun;
+
+        //hover stuff
         bool m_isHovered;
         QPointF m_hover;
-        QMap<QString, KTimeZone> m_locations;
-        QHash<QString, QPoint> m_points;
-        QRect m_lastRect;
-        QFont m_timeFont;
-        QFont m_locationFont;
-        QDateTime m_time;
-        QDateTime m_localtime;
+
+        //control preferences
+        int m_timeDisplay;
+        bool m_showFull;
+        bool m_showDate;
+
+        //map of locations and key for accessing it.
         QString m_locationkey;
-        MarbleMap *m_map;
+        QMap<QString, KTimeZone> m_locations;
+
+        //so we can check if the size has changed
+        QRect m_lastRect;
+        
+        //Font sizing & positioning
+        QFont m_timeFont;
+        QFont m_dateFont;
+        QFont m_locationFont;
+        QHash<QString, QPoint> m_points; 
+
+        //engine
         Plasma::DataEngine *m_timeEngine;
-	SunLocator *m_sun;
-	KDialog *m_configDialog;
+
+        //config gui
 	Ui::worldclockConfig ui;
 };
  
