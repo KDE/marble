@@ -247,14 +247,14 @@ int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
 
     // if ( m_bitmaplayer.type.toLower() == "bitmap" ){
     while ( noerr == true ) {
-        int nmaxit = TileLoaderHelper::levelToRow( levelZeroRows, trylevel );
+        const int maxRow = TileLoaderHelper::levelToRow( levelZeroRows, trylevel );
 
-        for ( int n = 0; n < nmaxit; ++n ) {
-            int mmaxit = TileLoaderHelper::levelToColumn( levelZeroColumns, trylevel );
+        for ( int row = 0; row < maxRow; ++row ) {
+            const int maxColumn = TileLoaderHelper::levelToColumn( levelZeroColumns, trylevel );
 
-            for ( int m = 0; m < mmaxit; ++m ) {
+            for ( int column = 0; column < maxColumn; ++column ) {
                 QString tilepath = MarbleDirs::path(
-                    TileLoaderHelper::relativeTileFileName( textureLayer, trylevel, m, n ));
+                    TileLoaderHelper::relativeTileFileName( textureLayer, trylevel, column, row ));
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
                 if ( noerr == false )

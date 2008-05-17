@@ -1,3 +1,9 @@
+2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TileLoader.cpp (maxCompleteTileLevel)
+
+    Rename variables n -> row, m -> column.
+
 2008-05-17  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/marble/overviewmap/MarbleOverviewMap.cpp:
