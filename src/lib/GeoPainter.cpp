@@ -14,6 +14,7 @@
 #include <QtGui/QPainterPath>
 
 #include "AbstractProjection.h"
+#include "GeoDataPoint.h"
 #include "global.h"
 #include "ViewportParams.h"
 

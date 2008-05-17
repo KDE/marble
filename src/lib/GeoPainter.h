@@ -16,10 +16,9 @@
 #include "marble_export.h"
 
 #include "ClipPainter.h"
-#include "GeoDataPoint.h"
-#include "MarbleMap.h"
 
 class ViewportParams;
+class GeoDataPoint;
 class GeoPainterPrivate;
 
 
