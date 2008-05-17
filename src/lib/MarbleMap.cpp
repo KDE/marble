@@ -33,7 +33,6 @@
 
 // Marble
 #include "CrossHairFloatItem.h"
-#include "CompassFloatItem.h"
 #include "MapScaleFloatItem.h"
 
 #include "AbstractScanlineTextureMapper.h"
@@ -893,7 +892,7 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     customPaint( &painter );
 
     int transparency = ( d->m_viewParams.viewport()->mapQuality() == Marble::Low ) ? 255 : 192;
-    d->m_compass.setTransparency( transparency );
+//    d->m_compass.setTransparency( transparency );
     d->m_mapscale.setTransparency( transparency );
 
     // 2. Paint the compass
@@ -902,13 +901,13 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     d->m_viewParams.propertyValue( "compass", showCompass );
     d->m_viewParams.propertyValue( "scalebar", showScaleBar );
-
+/*
     if ( showCompass )
         painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
                             d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
                                                             d->m_viewParams.m_canvasImage->height(),
                                                             northPoleY(), d->m_viewParams.projection() ) );
-
+*/
     // 3. Paint the scale.
     if ( showScaleBar )
         painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,

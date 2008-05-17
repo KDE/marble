@@ -20,6 +20,7 @@
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
 #include <QtGui/QPainterPath>
+#include <QtGui/QFont>
 
 #include "MarbleLayerInterface.h"
 #include "marble_export.h"
@@ -70,6 +71,9 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
 
     Qt::PenStyle borderStyle () const; 
     void setBorderStyle( Qt::PenStyle );
+
+    QFont font() const;
+    void setFont( const QFont &font );
 
     double margin() const; 
     void setMargin( double margin );

@@ -25,10 +25,6 @@
 
 //#include <QtDBus/QDBusConnection>
 
-#include "CrossHairFloatItem.h"
-#include "CompassFloatItem.h"
-#include "MapScaleFloatItem.h"
-
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "AutoSettings.h"

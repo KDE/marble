@@ -70,7 +70,7 @@ set(marblewidget_SRCS
     LayerManager.cpp
     PluginManager.cpp
     CrossHairFloatItem.cpp
-    CompassFloatItem.cpp
+#    CompassFloatItem.cpp
     MapScaleFloatItem.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp

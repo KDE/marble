@@ -40,7 +40,6 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewportParams *viewport, 
 
     // Looping a second time through is a quick and dirty way to get 
     // the float items displayed on top:
-
     foreach( MarbleLayerInterface * interface,  interfaceList ) {
         if ( interface->renderPosition().contains("FLOAT_ITEM") )
             interface->render( painter, viewport, "FLOAT_ITEM", layer );

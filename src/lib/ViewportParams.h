@@ -53,6 +53,8 @@ class MARBLE_EXPORT ViewportParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
+    int polarity() const;
+
     GeoDataLatLonAltBox viewLatLonAltBox() const;
 
     int radius() const;

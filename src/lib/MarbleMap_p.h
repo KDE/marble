@@ -17,7 +17,6 @@
 #include "ViewParams.h"
 #include "TextureColorizer.h"
 #include "CrossHairFloatItem.h"
-#include "CompassFloatItem.h"
 #include "MapScaleFloatItem.h"
 
 
@@ -68,7 +67,6 @@ class MarbleMapPrivate
 
     // Parts of the image in the Map
     CrossHairFloatItem         m_crosshair;
-    CompassFloatItem           m_compass;  // Shown in the upper right
     MapScaleFloatItem          m_mapscale; // Shown in the lower left
 
     // Tools

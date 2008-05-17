@@ -61,6 +61,7 @@ class MarbleAbstractFloatItemPrivate
     static double       s_border;
     static QBrush       s_borderBrush;
     static Qt::PenStyle s_borderStyle;
+    static QFont        s_font;
     static double       s_margin;
     static double       s_marginTop;
     static double       s_marginBottom;
@@ -78,6 +79,11 @@ QBrush       MarbleAbstractFloatItemPrivate::s_background = QBrush( QColor( 192,
 double       MarbleAbstractFloatItemPrivate::s_border = 1.0;
 QBrush       MarbleAbstractFloatItemPrivate::s_borderBrush = QBrush( Qt::black );
 Qt::PenStyle MarbleAbstractFloatItemPrivate::s_borderStyle = Qt::SolidLine;
+#ifdef Q_OS_MACX
+    QFont MarbleAbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 10 );
+#else
+    QFont MarbleAbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 8 );
+#endif
 double       MarbleAbstractFloatItemPrivate::s_margin = 0.0;
 double       MarbleAbstractFloatItemPrivate::s_marginTop = 0.0;
 double       MarbleAbstractFloatItemPrivate::s_marginBottom = 0.0;
@@ -213,6 +219,17 @@ Qt::PenStyle MarbleAbstractFloatItem::borderStyle () const
 void MarbleAbstractFloatItem::setBorderStyle( Qt::PenStyle borderStyle )
 {
     d->s_borderStyle = borderStyle;
+    d->m_newItemProperties = true;
+}
+
+QFont MarbleAbstractFloatItem::font() const
+{
+    return d->s_font;
+}
+
+void MarbleAbstractFloatItem::setFont( const QFont &font )
+{
+    d->s_font = font;
     d->m_newItemProperties = true;
 }
 

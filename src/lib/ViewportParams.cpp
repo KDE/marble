@@ -63,6 +63,48 @@ void ViewportParams::setProjection(Projection newProjection)
     }
 }
 
+int ViewportParams::polarity() const
+{
+    GeoDataPoint northPole( 0.0, +M_PI * 0.5 );
+    GeoDataPoint southPole( 0.0, -M_PI * 0.5 );
+
+    bool globeHidesN, globeHidesS;
+    int x;
+    int yN, yS;
+
+    currentProjection()->screenCoordinates( northPole, this,
+                                          x, yN, globeHidesN );
+    currentProjection()->screenCoordinates( southPole, this,
+                                          x, yS, globeHidesS );
+
+    int polarity = 0;
+
+    // case of the flat map:
+    if ( !globeHidesN && !globeHidesS ) {
+        if ( yN < yS ) {
+            polarity = +1;
+        }
+        if ( yS < yN ) {
+            polarity = -1;
+        }
+    }
+    else {
+        if ( !globeHidesN && yN < height() / 2 ) {
+            polarity = +1;
+        }
+        if ( !globeHidesN && yN > height() / 2 ) {
+            polarity = -1;
+        }
+        if ( !globeHidesS && yS > height() / 2 ) {
+            polarity = +1;
+        }
+        if ( !globeHidesS && yS < height() / 2 ) {
+            polarity = -1;
+        }
+    }
+
+    return polarity;
+}
 
 int ViewportParams::radius() const
 {
