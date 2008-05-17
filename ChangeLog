@@ -1,5 +1,28 @@
 2008-05-17  Inge Wallin  <inge@lysator.liu.se>
 
+	Move files having to do with projections to their own subdirectory
+	* src/lib/Projections/: new subdirectory
+	* src/lib/AbstractProjection.cpp,
+	* src/lib/AbstractProjection.h,
+	* src/lib/AbstractProjectionHelper.cpp,
+	* src/lib/AbstractProjectionHelper.h,
+	* src/lib/EquirectProjection.cpp,
+	* src/lib/EquirectProjection.h,
+	* src/lib/EquirectProjectionHelper.cpp,
+	* src/lib/EquirectProjectionHelper.h,
+	* src/lib/MercatorProjection.cpp,
+	* src/lib/MercatorProjection.h,
+	* src/lib/MercatorProjectionHelper.cpp,
+	* src/lib/MercatorProjectionHelper.h,
+	* src/lib/SphericalProjection.cpp,
+	* src/lib/SphericalProjection.h,
+	* src/lib/SphericalProjectionHelper.cpp,
+	* src/lib/SphericalProjectionHelper.h:
+	Move to src/lib/Projections/
+	* src/CMakeLists.txt: Add src/lib/Projections as include directory
+	* src/lib/CMakeLists.txt: Add src/lib/Projections as include directory
+	- Also indicate the move the files above to the new subdirectory.
+
 	Rename files and classes to fit in naming scheme for the projections.
 	* src/lib/GlobeScanlineTextureMapper.{h,cpp}:
 	Renamed into SphericalScanlineTextureMapper.{h,cpp}

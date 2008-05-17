@@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
  ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
+ ${CMAKE_CURRENT_SOURCE_DIR}/Projections
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/scene
@@ -78,14 +79,14 @@ set(marblewidget_SRCS
     MapThemeManager.cpp
     ViewportParams.cpp
     ViewParams.cpp
-    AbstractProjection.cpp
-    SphericalProjection.cpp
-    EquirectProjection.cpp
-    MercatorProjection.cpp
-    AbstractProjectionHelper.cpp
-    SphericalProjectionHelper.cpp
-    EquirectProjectionHelper.cpp
-    MercatorProjectionHelper.cpp
+    Projections/AbstractProjection.cpp
+    Projections/SphericalProjection.cpp
+    Projections/EquirectProjection.cpp
+    Projections/MercatorProjection.cpp
+    Projections/AbstractProjectionHelper.cpp
+    Projections/SphericalProjectionHelper.cpp
+    Projections/EquirectProjectionHelper.cpp
+    Projections/MercatorProjectionHelper.cpp
     MeasureTool.cpp
     VisiblePlaceMark.cpp
     PlaceMarkContainer.cpp
@@ -253,14 +254,14 @@ else (APPLE AND QTONLY)
     TileCreatorDialog.h
     ViewportParams.h
     ViewParams.h
-    AbstractProjection.h
-    SphericalProjection.h
-    EquirectProjection.h
-    MercatorProjection.h
-    AbstractProjectionHelper.h
-    SphericalProjectionHelper.h
-    EquirectProjectionHelper.h
-    MercatorProjectionHelper.h
+    Projections/AbstractProjection.h
+    Projections/SphericalProjection.h
+    Projections/EquirectProjection.h
+    Projections/MercatorProjection.h
+    Projections/AbstractProjectionHelper.h
+    Projections/SphericalProjectionHelper.h
+    Projections/EquirectProjectionHelper.h
+    Projections/MercatorProjectionHelper.h
     Quaternion.h
     SunLocator.h
     ClipPainter.h
