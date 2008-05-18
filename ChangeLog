@@ -1,3 +1,22 @@
+2008-05-18  Torsten Rahn  <rahn@kde.org>
+
+    * src/lib/MarbleWidget.cpp:
+    - Fixing Proxy support for "empty" default value "http://"
+
+    Getting ready for string freeze:
+
+    * src/lib/CMakeLists.txt:
+    * src/marble_part.cpp:
+
+    - Adding Proxy support page right in time for string freeze.
+      It doesn't do anything yet.
+
+    * src/marble_part.rc:
+    - Adding "&Info Boxes" item ( I think that for the user this 
+      term is better suited than "float items" and I'm really not
+      keen on reading the clunky translations that translators 
+      might come up with for "float items".
+  
 2008-05-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/dgml/DgmlElementDictionary.{h,cpp}:

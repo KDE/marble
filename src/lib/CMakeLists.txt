@@ -147,6 +147,7 @@ set (marblewidget_UI
     MarbleViewSettingsWidget.ui
     MarbleNavigationSettingsWidget.ui
     MarbleCacheSettingsWidget.ui
+    MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui

@@ -19,6 +19,9 @@
     <Action name="options_show_statusbar"/>
     <Action name="options_show_sidebar" group="show_merge"/>
     <Separator/>
+    <Menu name="infoboxes" noMerge="1"><text>&amp;Info Boxes</text>
+    </Menu>
+    <Separator/>
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
     <Separator/>

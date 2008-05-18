@@ -1177,7 +1177,9 @@ void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort )
     d->m_proxyPort = proxyPort;
 
     QNetworkProxy::ProxyType type = QNetworkProxy::HttpProxy;
-    if ( proxyHost.isEmpty() )
+
+    // Make sure that no proxy is used for an empty string or the default value: 
+    if ( proxyHost.isEmpty() || proxyHost == "http://" )
         type = QNetworkProxy::NoProxy;
 
     QNetworkProxy proxy( type, d->m_proxyHost, d->m_proxyPort );

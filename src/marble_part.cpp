@@ -48,6 +48,7 @@
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 #include "ui_MarbleCacheSettingsWidget.h"
+#include "ui_MarblePluginSettingsWidget.h"
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
@@ -264,7 +265,6 @@ void MarblePart::copyMap()
 
 void MarblePart::copyCoordinates()
 {
-/*
     double lon = m_controlView->marbleWidget()->centerLongitude();
     double lat = m_controlView->marbleWidget()->centerLatitude();
 
@@ -272,7 +272,6 @@ void MarblePart::copyCoordinates()
     QClipboard  *clipboard = QApplication::clipboard();
 
     clipboard->setText( positionString );
-*/
 }
 
 void MarblePart::readSettings()
@@ -531,7 +530,14 @@ void MarblePart::editSettings()
         QWidget *w_cacheSettings = new QWidget( 0 );
         w_cacheSettings->setObjectName( "cache_page" );
         ui_cacheSettings.setupUi( w_cacheSettings );
-        dialog->addPage( w_cacheSettings, i18n( "Cache" ), "preferences-cache" );
+        dialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-cache" );
+
+        // plugin page
+        Ui_MarblePluginSettingsWidget ui_pluginSettings;
+        QWidget *w_pluginSettings = new QWidget( 0 );
+        w_pluginSettings->setObjectName( "plugin_page" );
+        ui_pluginSettings.setupUi( w_pluginSettings );
+        dialog->addPage( w_pluginSettings, i18n( "Plugins" ), "preferences-plugin" );
 
         connect( dialog, SIGNAL( settingsChanged( const QString &) ), this , SLOT( slotUpdateSettings() ) );
         dialog->show();
