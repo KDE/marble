@@ -8,7 +8,7 @@
     * src/lib/CMakeLists.txt:
     * src/marble_part.cpp:
 
-    - Adding Proxy support page right in time for string freeze.
+    - Adding Plugin support page right in time for string freeze.
       It doesn't do anything yet.
 
     * src/marble_part.rc:
