@@ -38,16 +38,13 @@ MarbleDirs::MarbleDirs()
 QString MarbleDirs::path( const QString& relativePath )
 { 
     QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
-//    qDebug( "localpath: %s", qPrintable( localpath ) );
     QString  systempath  = systemPath() + QDir::separator() + relativePath;	// system path
-//    qDebug( "systempath: %s", qPrintable( systempath ) );
 
 
     QString fullpath = systempath;
     if ( QFile::exists( localpath ) ) {
         fullpath = localpath;
     }
-//    qDebug( "Using path: %s", qPrintable( fullpath ) );
 
     return QDir( fullpath ).canonicalPath(); 
 }
@@ -95,14 +92,7 @@ QString MarbleDirs::systemPath()
     {
       systempath = myPath + "/Contents/Resources/data";
     }
-/*
-    // tackat: If I understood tim correctly this should
-    //         now be obsolete, right?
-    else //must be running from a non .app bundle
-    {
-      systempath = QApplication::applicationDirPath()+"/../share/data";
-    }
-*/
+
     if ( QFile::exists( systempath ) ){ 
       return systempath;
     }
@@ -115,7 +105,7 @@ if ( !runTimeMarbleDataPath.isEmpty() )
 #ifdef MARBLE_DATA_PATH
     //MARBLE_DATA_PATH is a compiler define set by cmake
     QString compileTimeMarbleDataPath(MARBLE_DATA_PATH);
-//    qDebug( "%s <-- marble data path", qPrintable( compileTimeMarbleDataPath ) );
+
     if(QDir(compileTimeMarbleDataPath).exists())
         return compileTimeMarbleDataPath;
 #endif  // MARBLE_DATA_PATH

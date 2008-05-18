@@ -167,12 +167,12 @@
             </group>
             <group name="Surface">
                 <property name="ice">
-                    <value>true</value>
-                    <available>true</available>
+                    <value>false</value>
+                    <available>false</available>
                 </property>
                 <property name="relief">
-                    <value>true</value>
-                    <available>true</available>
+                    <value>false</value>
+                    <available>false</available>
                 </property>
             </group>
 
@@ -320,14 +320,6 @@
                     <icon color="#5182b4"/>
                     <text>-11000 m</text>
                 </item>
-            </section>
-
-            <section name="ice" checkable="true" connect="ice" spacing="12">
-                <heading>Ice &amp; Glaciers</heading>
-            </section>
-
-            <section name="relief" checkable="true" connect="relief" spacing="12">
-                <heading>Relief</heading>
             </section>
 
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
