@@ -145,9 +145,6 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 
     if ( tileLevel != m_tileLevel ) {
         m_tileLoader->flush();
-        m_tileLevel = tileLevel;
-//        qDebug() << "Texture Level was set to: " << tileLevel;
-
         tileLevelInit( tileLevel );
     }
 }
@@ -171,11 +168,14 @@ void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams,
 
 void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 {
+    //    qDebug() << "Texture Level was set to: " << tileLevel;
+    m_tileLevel = tileLevel;
+
     // rad2PixelY might later on evolve into a method to allow 
     // Mercator as a source texture format. That's why we have it
     // in addition to rad2PixelX.
-    m_rad2PixelX = +(double)(m_tileLoader->globalWidth( tileLevel ))  / (2.0 * M_PI);
-    m_rad2PixelY = -(double)(m_tileLoader->globalHeight( tileLevel )) / M_PI;
+    m_rad2PixelX = +(double)(m_tileLoader->globalWidth( m_tileLevel ))  / (2.0 * M_PI);
+    m_rad2PixelY = -(double)(m_tileLoader->globalHeight( m_tileLevel )) / M_PI;
 
     m_maxGlobalX = m_tileLoader->globalWidth( m_tileLevel )  - 1;
     m_maxGlobalY = m_tileLoader->globalHeight( m_tileLevel ) - 1;
