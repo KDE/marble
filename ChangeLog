@@ -1,6 +1,13 @@
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/AbstractScanlineTextureMapper.cpp
+    (constructor): Move initialisations to ctor init list.
+
+    Small cleanup.
+
+2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
     (selectTileLevel): since this method calls tileLevelInit,
     set m_tileLevel there.
     (tileLevelInit): set m_tileLevel here.

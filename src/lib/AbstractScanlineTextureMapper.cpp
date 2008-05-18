@@ -33,45 +33,36 @@
 
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
-    : QObject( parent )
+    : QObject( parent ),
+      m_posX( 0 ),
+      m_posY( 0 ),
+      m_maxGlobalX( 0 ),
+      m_maxGlobalY( 0 ),
+      m_imageHeight( 0 ),
+      m_imageWidth( 0 ),
+      m_imageRadius( 0 ),
+      m_prevLat( 0.0 ),
+      m_prevLon( 0.0 ),
+      m_rad2PixelX( 0.0 ),
+      m_rad2PixelY( 0.0 ),
+      m_toTileCoordinatesLon( 0.0 ),
+      m_toTileCoordinatesLat( 0.0 ),
+      m_interlaced( false ),
+      m_tileLoader( tileLoader ),
+      m_scanLine( 0 ),
+      m_tile( 0 ),
+      m_tileLevel( 0 ),
+      m_maxTileLevel( 0 ),
+      m_preloadTileLevel( -1 ),
+      m_previousRadius( 0 ),
+      m_tilePosX( 0 ),
+      m_tilePosY( 0 )
+
 {
-    m_posX = 0;
-    m_posY = 0;
-
-    m_tileLoader   = tileLoader;
-    m_scanLine     = 0;
-
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
 
     detectMaxTileLevel();
-
-    m_imageWidth  = 0;
-    m_imageHeight = 0;
-
-    m_imageRadius = 0;
-
-    m_prevLat = 0.0; 
-    m_prevLon = 0.0;
-
-    m_tilePosX = 0;
-    m_tilePosY = 0;
-
-    m_maxGlobalX  = 0;
-    m_maxGlobalY  = 0;
-    m_toTileCoordinatesLon  = 0.0;
-    m_toTileCoordinatesLat  = 0.0;
-
-    m_rad2PixelX = 0.0;
-    m_rad2PixelY = 0.0;
-
-    m_tile      = 0;
-    m_tileLevel = 0;
-
-    m_preloadTileLevel = -1;
-    m_previousRadius = 0;
-
-    m_interlaced = false;
 }
 
 
