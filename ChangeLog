@@ -1,5 +1,14 @@
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/SphericalScanlineTextureMapper.h
+    * src/lib/SphericalScanlineTextureMapper.cpp
+
+    Small cleanup in SphericalScanlineTextureMapper.
+    Remove member variables m_x, m_y, m_qr, m_qx, m_qy m_qz and
+    m_qpos and make them local variables in method mapTexture.
+
+2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp
     * src/lib/SphericalScanlineTextureMapper.cpp
     * src/lib/AbstractScanlineTextureMapper.h

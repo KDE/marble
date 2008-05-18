@@ -18,6 +18,7 @@
 #include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
+#include "Quaternion.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
@@ -38,14 +39,6 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tile
 
     m_n = 0;
     m_nInverse = 0.0;
-
-    m_x = 0;
-    m_y = 0;
-
-    m_qr = 0.0; 
-    m_qx = 0.0;
-    m_qy = 0.0;
-    m_qz = 0.0;
 
     m_interlaced = false;
 }
@@ -124,16 +117,16 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     bool interlaced = ( m_interlaced ||
                         viewParams->viewport()->mapQuality() == Marble::Low );
 
-    for ( m_y = yTop; m_y < yBottom ; ++m_y ) {
+    for ( int y = yTop; y < yBottom ; ++y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        m_qy = inverseRadius * (double)( m_imageHeight / 2 - m_y );
-        m_qr = 1.0 - m_qy * m_qy;
+        const double qy = inverseRadius * (double)( m_imageHeight / 2 - y );
+        const double qr = 1.0 - qy * qy;
 
         // rx is the radius component in x direction
         int rx = (int)sqrt( (double)( radius * radius 
-                                      - ( ( m_y - m_imageHeight / 2 )
-                                          * ( m_y - m_imageHeight / 2 ) ) ) );
+                                      - ( ( y - m_imageHeight / 2 )
+                                          * ( y - m_imageHeight / 2 ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline.
         // 
@@ -152,7 +145,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
                              ? xLeft + rx + rx : canvasImage -> width() );
 
-        m_scanLine = (QRgb*)( canvasImage->scanLine( m_y ) ) + xLeft;
+        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
 
         int  xIpLeft  = 1;
         int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
@@ -166,8 +159,8 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         bool crossingPoleArea = false;
         int northPoleY = m_imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
-             && northPoleY - ( m_n * 0.75 ) <= m_y
-             && northPoleY + ( m_n * 0.75 ) >= m_y ) 
+             && northPoleY - ( m_n * 0.75 ) <= y
+             && northPoleY + ( m_n * 0.75 ) >= y ) 
         {
             crossingPoleArea = true;
         }
@@ -175,12 +168,12 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         int ncount = 0;
 
 
-        for ( int m_x = xLeft; m_x < xRight; ++m_x ) {
+        for ( int x = xLeft; x < xRight; ++x ) {
             // Prepare for interpolation
 
             int  leftInterval = xIpLeft + ncount * m_n;
 
-            if ( m_x >= xIpLeft && m_x <= xIpRight ) {
+            if ( x >= xIpLeft && x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
                 int northPoleX = m_imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
@@ -189,12 +182,12 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 if ( crossingPoleArea == true
                      && northPoleX >= leftInterval + m_n
                      && northPoleX < leftInterval + 2 * m_n
-                     && m_x < leftInterval + 3 * m_n )
+                     && x < leftInterval + 3 * m_n )
                 {
                     m_interpolate = false;
                 }
                 else {
-                    m_x += m_n - 1;
+                    x += m_n - 1;
 
                     m_interpolate = true;
                     ++ncount;
@@ -205,17 +198,18 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
-            m_qx = (double)( m_x - m_imageWidth / 2 ) * inverseRadius;
+            const double qx = (double)( x - m_imageWidth / 2 ) * inverseRadius;
 
-            double qr2z = m_qr - m_qx * m_qx;
-            m_qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+            const double qr2z = qr - qx * qx;
+            const double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
-            m_qpos.set( 0.0, m_qx, m_qy, m_qz );
-            m_qpos.rotateAroundAxis( planetAxisMatrix );
+            Quaternion qpos;
+            qpos.set( 0.0, qx, qy, qz );
+            qpos.rotateAroundAxis( planetAxisMatrix );
 
-            m_qpos.getSpherical( lon, lat );
+            qpos.getSpherical( lon, lat );
 //            qDebug() << QString("lon: %1 lat: %2").arg(lon).arg(lat);
             // Approx for m_n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
@@ -233,7 +227,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 //          rendering around north pole:
 
 //            if ( crossingPoleArea == false )
-            if ( m_x < m_imageWidth ) 
+            if ( x < m_imageWidth ) 
                 pixelValue( lon, lat, m_scanLine );
 
             m_prevLon = lon;
@@ -243,14 +237,14 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         }
 
         // copy scanline to improve performance
-        if ( interlaced == true && m_y + 1 < yBottom ) { 
+        if ( interlaced == true && y + 1 < yBottom ) { 
 
             int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
 
-            memcpy( canvasImage->scanLine( m_y + 1 ) + xLeft * pixelByteSize, 
-                    canvasImage->scanLine( m_y ) + xLeft * pixelByteSize, 
+            memcpy( canvasImage->scanLine( y + 1 ) + xLeft * pixelByteSize, 
+                    canvasImage->scanLine( y ) + xLeft * pixelByteSize, 
                     ( xRight - xLeft ) * pixelByteSize );
-            ++m_y;
+            ++y;
         }
     }
 

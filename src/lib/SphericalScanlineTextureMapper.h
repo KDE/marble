@@ -16,7 +16,6 @@
 #include <QtCore/QString>
 #include <QtGui/QColor>
 
-#include "Quaternion.h"
 #include "AbstractScanlineTextureMapper.h"
 
 
@@ -50,17 +49,6 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 
     int     m_n;
     double  m_nInverse;
-
-    int     m_x;
-    int     m_y;
-
-    double  m_qr;
-    double  m_qx;
-    double  m_qy;
-    double  m_qz;
-
-    Quaternion m_qpos;
-
 };
 
 
