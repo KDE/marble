@@ -88,6 +88,16 @@ install (FILES
 maps/earth/openstreetmap/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
 
+install (FILES
+maps/earth/temp-july/temp-july.jpg
+maps/earth/temp-july/temp-july.dgml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/temp-july)
+
+install (FILES
+maps/earth/temp-dec/temp-dec.jpg
+maps/earth/temp-dec/temp-dec.dgml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/temp-dec)
+
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}
