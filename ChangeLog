@@ -1,5 +1,13 @@
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/AbstractScanlineTextureMapper.h
+
+    Small cleanup.
+    - Move definitions of inline methods out of class body.
+    - Declare interlaced() const.
+
+2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp
     (constructor): Move initialisations to ctor init list.
 

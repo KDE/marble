@@ -34,11 +34,11 @@ public:
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
     void setTextureLayer( GeoSceneTexture *textureLayer );
-    void setMaxTileLevel( int level ){ m_maxTileLevel = level; }
+    void setMaxTileLevel( int level );
     virtual void resizeMap( int width, int height );
     void selectTileLevel( ViewParams* viewParams );
-    bool interlaced() { return m_interlaced; }
-    void setInterlaced( bool enabled ) { m_interlaced = enabled; }
+    bool interlaced() const;
+    void setInterlaced( bool enabled );
 
     void centerTiles( ViewParams *viewParams, const int tileLevel,
                       double& tileCol, double& tileRow );
@@ -108,5 +108,19 @@ public:
     int          m_tilePosY;
 };
 
+inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )
+{
+    m_maxTileLevel = level;
+}
+
+inline bool AbstractScanlineTextureMapper::interlaced() const
+{
+    return m_interlaced;
+}
+
+inline void AbstractScanlineTextureMapper::setInterlaced( bool enabled )
+{
+    m_interlaced = enabled;
+}
 
 #endif
