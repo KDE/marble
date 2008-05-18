@@ -12,10 +12,10 @@
 #ifndef ABSTRACTSCANLINETEXTUREMAPPER_H
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
-
 #include <QtCore/QObject>
 #include <QtGui/QColor>
 
+#include <cmath>
 
 class GeoSceneTexture;
 class TextureTile;
@@ -58,6 +58,11 @@ public:
     int globalWidth() const;
     int globalHeight() const;
 
+    // Converts Radian to global texture coordinates 
+    // ( with origin in center, measured in pixel) 
+    double rad2PixelX( const double longitude ) const;
+    double rad2PixelY( const double latitude ) const;
+
     // Coordinates on the tile
     int     m_posX;
     int     m_posY;
@@ -76,11 +81,6 @@ public:
     double  m_prevLon;
 
     // Coordinate transformations:
-
-    // Converts Radian to global texture coordinates 
-    // ( with origin in center, measured in pixel) 
-    double  m_rad2PixelX;
-    double  m_rad2PixelY;
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 
@@ -137,6 +137,16 @@ inline int AbstractScanlineTextureMapper::globalWidth() const
 inline int AbstractScanlineTextureMapper::globalHeight() const
 {
     return m_globalHeight;
+}
+
+inline double AbstractScanlineTextureMapper::rad2PixelX( const double longitude ) const
+{
+    return longitude * (double)(m_globalWidth) / (2.0*M_PI);
+}
+
+inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude ) const
+{
+    return -latitude * (double)(m_globalHeight) / M_PI;
 }
 
 #endif

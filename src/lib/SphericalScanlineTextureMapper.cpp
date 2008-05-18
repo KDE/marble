@@ -281,11 +281,11 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const int itStepLon = (int)( stepLon * m_nInverse * m_rad2PixelX * 128.0 );
-        const int itStepLat = (int)( stepLat * m_nInverse * m_rad2PixelY * 128.0 );
+        const int itStepLon = (int)( rad2PixelX( stepLon * m_nInverse * 128.0 ));
+        const int itStepLat = (int)( rad2PixelY( stepLat * m_nInverse * 128.0 ));
 
-        m_prevLon *= m_rad2PixelX;
-        m_prevLat *= m_rad2PixelY;
+        m_prevLon = rad2PixelX( m_prevLon );
+        m_prevLat = rad2PixelY( m_prevLat );
 
         // To improve speed we unroll 
         // AbstractScanlineTextureMapper::pixelValue(...) here and 

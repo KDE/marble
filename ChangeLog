@@ -1,5 +1,17 @@
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/SphericalScanlineTextureMapper.cpp
+    * src/lib/AbstractScanlineTextureMapper.h
+
+    Part 12 of groundwork for OpenStreetMap texture tiles.
+    Replace conversion factors m_rad2PixelX and m_rad2PixelY with
+    inline methods rad2PixelX and rad2PixelY in order to support
+    Mercator projection later.
+    marble --timedemo shows no regression so far.
+
+2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.h
     * src/lib/AbstractScanlineTextureMapper.cpp
     Add member variables m_globalWidth and m_globalHeight and

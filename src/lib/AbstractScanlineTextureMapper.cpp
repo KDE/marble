@@ -11,8 +11,6 @@
 
 #include "AbstractScanlineTextureMapper.h"
 
-#include <cmath>
-
 #include <QtCore/QDebug>
 
 #include "GeoDataPoint.h"
@@ -43,8 +41,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_imageRadius( 0 ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 ),
-      m_rad2PixelX( 0.0 ),
-      m_rad2PixelY( 0.0 ),
       m_toTileCoordinatesLon( 0.0 ),
       m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
@@ -166,12 +162,6 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
     m_globalHeight = m_tileLoader->globalHeight( m_tileLevel );
 
-    // rad2PixelY might later on evolve into a method to allow 
-    // Mercator as a source texture format. That's why we have it
-    // in addition to rad2PixelX.
-    m_rad2PixelX = +(double)(m_globalWidth)  / (2.0 * M_PI);
-    m_rad2PixelY = -(double)(m_globalHeight) / M_PI;
-
     m_maxGlobalX = m_globalWidth  - 1;
     m_maxGlobalY = m_globalHeight - 1;
 
@@ -204,8 +194,8 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
 
 //     qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
     
-    m_posX = (int)( m_toTileCoordinatesLon + lon * m_rad2PixelX );
-    m_posY = (int)( m_toTileCoordinatesLat + lat * m_rad2PixelY );
+    m_posX = (int)( m_toTileCoordinatesLon + rad2PixelX( lon ));
+    m_posY = (int)( m_toTileCoordinatesLat + rad2PixelY( lat ));
 
     // Most of the time while moving along the scanLine we'll stay on the 
     // same tile. However at the tile border we might "fall off". If that 
