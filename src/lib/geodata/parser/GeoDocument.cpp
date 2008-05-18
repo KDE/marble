@@ -37,7 +37,7 @@ GeoDocument::~GeoDocument()
 {
 #if DUMP_GEONODE_LEAKS > 0
     if ( s_leakProtector != 0 ) {
-        fprintf( stderr, "Found %lu GeoNode object LEAKS!\n", s_leakProtector );
+        std::fprintf( stderr, "Found %lu GeoNode object LEAKS!\n", s_leakProtector );
         s_leakProtector = 0;
     }
 #endif
