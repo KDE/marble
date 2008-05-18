@@ -92,10 +92,8 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
-                             / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
-                             / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (double)(globalWidth() / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (double)(globalHeight() / 2 - m_tilePosY);
 
     // Reset backend
     m_tileLoader->resetTilehash();

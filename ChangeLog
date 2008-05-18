@@ -1,6 +1,19 @@
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/AbstractScanlineTextureMapper.h
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    Add member variables m_globalWidth and m_globalHeight and
+    corresponding access methods.
+    * src/lib/SphericalScanlineTextureMapper.cpp
+    * src/lib/EquirectScanlineTextureMapper.cpp
+
+    Replace m_tileLoader->globalWidth( m_tileLevel ) and
+    m_tileLoader->globalHeight( m_tileLevel ) with
+    m_globalWidth and m_globalHeight.
+
+2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.h
 
     Small cleanup.
     - Move definitions of inline methods out of class body.

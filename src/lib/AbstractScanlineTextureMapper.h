@@ -53,8 +53,10 @@ public:
     void pixelValue(const double& lon, const double& lat, QRgb* scanLine);
     void nextTile();
     void detectMaxTileLevel();
-
     void tileLevelInit( int tileLevel );
+
+    int globalWidth() const;
+    int globalHeight() const;
 
     // Coordinates on the tile
     int     m_posX;
@@ -106,6 +108,10 @@ public:
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
+
+ private:
+    int          m_globalWidth;
+    int          m_globalHeight;
 };
 
 inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )
@@ -121,6 +127,16 @@ inline bool AbstractScanlineTextureMapper::interlaced() const
 inline void AbstractScanlineTextureMapper::setInterlaced( bool enabled )
 {
     m_interlaced = enabled;
+}
+
+inline int AbstractScanlineTextureMapper::globalWidth() const
+{
+    return m_globalWidth;
+}
+
+inline int AbstractScanlineTextureMapper::globalHeight() const
+{
+    return m_globalHeight;
 }
 
 #endif

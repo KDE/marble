@@ -56,8 +56,9 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_preloadTileLevel( -1 ),
       m_previousRadius( 0 ),
       m_tilePosX( 0 ),
-      m_tilePosY( 0 )
-
+      m_tilePosY( 0 ),
+      m_globalWidth( 0 ),
+      m_globalHeight( 0 )
 {
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
@@ -162,24 +163,25 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     //    qDebug() << "Texture Level was set to: " << tileLevel;
     m_tileLevel = tileLevel;
 
+    m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
+    m_globalHeight = m_tileLoader->globalHeight( m_tileLevel );
+
     // rad2PixelY might later on evolve into a method to allow 
     // Mercator as a source texture format. That's why we have it
     // in addition to rad2PixelX.
-    m_rad2PixelX = +(double)(m_tileLoader->globalWidth( m_tileLevel ))  / (2.0 * M_PI);
-    m_rad2PixelY = -(double)(m_tileLoader->globalHeight( m_tileLevel )) / M_PI;
+    m_rad2PixelX = +(double)(m_globalWidth)  / (2.0 * M_PI);
+    m_rad2PixelY = -(double)(m_globalHeight) / M_PI;
 
-    m_maxGlobalX = m_tileLoader->globalWidth( m_tileLevel )  - 1;
-    m_maxGlobalY = m_tileLoader->globalHeight( m_tileLevel ) - 1;
+    m_maxGlobalX = m_globalWidth  - 1;
+    m_maxGlobalY = m_globalHeight - 1;
 
     // These variables move the origin of global texture coordinates from 
     // the center to the upper left corner and subtract the tile position 
     // in that coordinate system. In total this equals a coordinate 
     // transformation to tile coordinates.
   
-    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
-                             / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
-                             / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
 }
 
 
@@ -247,13 +249,11 @@ void AbstractScanlineTextureMapper::nextTile()
     // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
-    m_toTileCoordinatesLon = (double)(m_tileLoader->globalWidth( m_tileLevel ) 
-                             / 2 - m_tilePosX);
+    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
     m_posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileLoader->tileHeight();
-    m_toTileCoordinatesLat = (double)(m_tileLoader->globalHeight( m_tileLevel ) 
-                             / 2 - m_tilePosY);
+    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
     m_posY = lat - m_tilePosY;
 }
 
