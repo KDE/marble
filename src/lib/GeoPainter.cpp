@@ -444,6 +444,11 @@ void GeoPainter::drawPixmap( const QPoint &point, const QPixmap & pixmap )
     QPainter::drawPixmap( point, pixmap );
 }
 
+void GeoPainter::drawPoint ( int x, int y )
+{
+    QPainter::drawPoint( x, y );
+}
+
 void GeoPainter::drawPolyline( const QPolygonF &polyline )
 {
     ClipPainter::drawPolyline( polyline );

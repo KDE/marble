@@ -25,6 +25,11 @@ LayerManager::LayerManager(QObject *parent)
 {
     // Just for initial testing
     m_layerInterfaces = m_pluginManager.layerInterfaces();
+
+    QList<MarbleLayerInterface *> interfaceList = m_pluginManager.layerInterfaces();
+    foreach( MarbleLayerInterface * interface,  interfaceList ) {
+        interface->initialize();
+    }
 }
 
 LayerManager::~LayerManager()

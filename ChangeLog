@@ -1,3 +1,46 @@
+2008-05-19  Torsten Rahn  <rahn@kde.org> 
+
+    - Per aspera ad astra! Now I just need to take the earth's
+      orbit and spinning into account and we can drop KStars 
+      in favour of Marble ;-)
+
+    * src/plugins/marble/stars/MarbleStarsPlugin.{cpp,h}:
+    * src/plugins/marble/stars/CMakeLists.txt:
+    * src/plugins/marble/CMakeLists.txt:
+
+    - Adding Stars plugin to Marble. Still needs polishing and 
+      adjustment for time.
+
+    * src/lib/Projections/AbstractProjection.h:
+    * src/lib/Projections/SphericalProjection.{cpp,h}:
+    * src/lib/Projections/MercatorProjection.{cpp,h}:
+    * src/lib/Projections/EquirectProjection.{cpp,h}:
+
+    - Removing obsolete globeCoversMap() method that has been 
+      moved to the viewport and continues its life as 
+      globeCoversViewport();
+
+    * src/lib/MarbleLayerInterface.h:
+    * src/lib/GeoPainter.{cpp,h}:
+    * src/lib/LayerManager.cpp:
+    * src/plugins/marble/CMakeLists.txt:
+    * data/CMakeLists.txt:
+
+    - Fixing a few things for the stars plugin ...
+
+    * data/stars:
+    * tools/stars/catalog.dat.gz:
+    * tools/stars/stars.{dat,pro,cpp}:
+    * tools/stars/notes.dat.gz:
+
+    - Add public domain BSC5 catalogue and a tool to convert it 
+      to some simple format for Marble
+
+    * tools/texissor:
+    * tools/texissor/texissor.{cpp, pro}:
+
+    - Removed ancient code
+
 2008-05-19  Torsten Rahn  <rahn@kde.org>
 
     - Installing Marble Plugins (hopefully) into the right places.

@@ -89,8 +89,6 @@ class SphericalProjection : public AbstractProjection
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                  const ViewportParams *viewport );
 
-    bool mapCoversViewport( const ViewportParams *viewport ) const;
-
  private:
     //SphericalProjectionPrivate  * const d;
 };

@@ -6,5 +6,5 @@ TEMPLATE = app
 INCLUDEPATH += .
 
 # Input
-SOURCES += texissor.cpp
+SOURCES += stars.cpp
 DESTDIR = ../../bin

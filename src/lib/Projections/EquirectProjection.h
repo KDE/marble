@@ -89,8 +89,6 @@ class EquirectProjection : public AbstractProjection
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                  const ViewportParams *viewport );
 
-    bool mapCoversViewport( const ViewportParams *viewport ) const;
-
  private:
     //EquirectProjectionPrivate  * const d;
 };

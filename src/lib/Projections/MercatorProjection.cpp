@@ -289,8 +289,3 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
 
     return latLonAltBox;
 }
-
-bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) const
-{
-    return true;
-}

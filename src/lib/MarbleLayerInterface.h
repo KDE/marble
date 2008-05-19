@@ -66,7 +66,7 @@ class MarbleLayerInterface
      * the render() method of this plugin should get executed.
      *.
      * Possible Values: 
-     * "NONE", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP", "FLOAT_ITEM"
+     * "NONE", "STARS", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP", "FLOAT_ITEM"
      */
     virtual QStringList renderPosition() const = 0;
 

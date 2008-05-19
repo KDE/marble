@@ -273,8 +273,3 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect, c
 
     return latLonAltBox;
 }
-
-bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) const
-{
-    return true;
-}

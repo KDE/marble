@@ -125,6 +125,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawPixmap ( int x, int y, const QPixmap & pixmap );
     void drawPixmap ( const QPointF & point, const QPixmap & pixmap );
     void drawPixmap ( const QPoint & point, const QPixmap & pixmap );
+    void drawPoint ( int x, int y );
     void drawPolyline( const QPolygonF & polyline );
     void drawPolygon( const QPolygonF & polygon );
     void drawLine ( int x1, int y1, int x2, int y2 );
