@@ -163,9 +163,9 @@ endif (QTONLY)
 
 FIND_FILE(SVN_MARKER entries PATHS ${CMAKE_SOURCE_DIR}/.svn)
 
-IF (NOT SVN_MARKER)
+IF (NOT EXISTS SVN_MARKER)
   SET (SVN_MARKER ${CMAKE_SOURCE_DIR}/CMakeLists.txt)  # Dummy file
-ENDIF (NOT SVN_MARKER)
+ENDIF (NOT EXISTS SVN_MARKER)
 # Add a custom command to drive the svn script whenever the svn entries
 # file changes.
 CONFIGURE_FILE(
