@@ -71,10 +71,10 @@ Documentation / Specification
 
 Planning and architecture:
  * write proposals for Marble 0.6 / KDE 4.1                             ----
-    - Layer Management class                                            --
+    - Layer Management class                                            done
     - Data source plugins                                               --
-    - Visualization plugins (layers?)                                   --
-    - Projection class                                                  --
+    - Visualization plugins (layers?)                                   done?
+    - Projection class                                                  no
     - Bounding boxes                                                    --
     - Model-View concept                                                --
     - Spatial Indices                                                   --
@@ -94,9 +94,14 @@ Features:
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
  * Mercator Projection                                                  INGE
-    - Make the vector base work        					--
     - Move projection stuff to its own subdirectory			done
+    - Create a helper class ProjectionHelper to perform actual actions	done
+    - Make the vector base work        					inge
+    - Move paintBase to ProjectionHelper				done
+    - Move activeArea to ProjectionHelper				inge
+    - Move mapCoversImage (prev. globeCoversImage) to ProjectionHelper	inge
  * Fix GPS Support (that's a regression) 				ANDR
+    - Make it a Marble plugin						--
 
 
 Internal structure:
@@ -111,14 +116,15 @@ Internal structure:
  * Make it possible to paint on whatever QPainter Marble is given       ----
      Move to 4.2?  Probably...
  * Layer Management Class						TACK
-    - Make a QPlugin based interface					--
-    - Move backends into plugins / threads                              --
     - Split off MapTheme / DGML parsing into geodata/parser. 		done
-        Have a GeoDataMapTheme class that basically only includes
-        those parts of the current MapTheme except for parsing.
+      Have a GeoDataMapTheme class that basically only includes
+      those parts of the current MapTheme except for parsing.
     - Implement / move <head> features as lined out in			done
       layermanagement.txt This should happen after the 
       QXmlStreamReader port.
+ * Plugin interface (see also GeoPainter)				TACK
+    - Make a QPlugin based interface					--
+    - Move backends into plugins / threads                              --
  * GeoPainter								----
  * Create a LatLonBoundingBox						DONE
     - Use it everywhere :-) 						--
@@ -128,11 +134,11 @@ Internal structure:
     - Implement "retry to download the tile 3 times during the current	--
       session if the tile couldn't get fetched on first try"
 
-GUI / Usability
+User experience / Usability
  * Make Marble have a RenderingQuality setting in ViewParams:           DONE
    - Use different render settings while panning (MOVE) and 		done
      after releasing the mouse (DROP).
-   - Rerender the map at "PRINT quality" once "File -> Print" or	--
+   - Rerender the map at "PRINT quality" once "File -> Print" or	done
      "Edit -> Copy" get selected.
  * Add a small indicator to the status bar indicates map downloads      ----
    (see explanation below)
