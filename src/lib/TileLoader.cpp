@@ -352,6 +352,7 @@ void TileLoader::reloadTile( const QString &idStr )
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
+        (d->m_tileHash[id])->loadRawTile( d->m_textureLayer, level, x, y ); 
         m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_textureLayer, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {

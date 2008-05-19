@@ -194,10 +194,9 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
     }
     else 
     {
+        // qDebug() << "HttpDownloadManager: Download Complete:" << job->originalRelativeUrlString << job->initiatorId;
         emit downloadComplete( job->originalRelativeUrlString, job->initiatorId );
         removeJob( job );
-
-//        qDebug() << "Download Complete!";
     }
 
 }

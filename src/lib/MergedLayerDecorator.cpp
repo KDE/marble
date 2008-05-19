@@ -66,8 +66,6 @@ void MergedLayerDecorator::paint(const QString& themeId)
       paintSunShading();
     if ( m_showTileId )
       paintTileId( themeId );
-    qDebug() << "MergedLayerDecorator::paint: emit repaintMap";
-//     emit repaintMap();
 }
 
 void MergedLayerDecorator::setShowClouds( bool visible )
