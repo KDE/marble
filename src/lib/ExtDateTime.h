@@ -29,22 +29,45 @@ class ExtDateTime : public QObject
     explicit ExtDateTime();
     virtual ~ExtDateTime();
 
+    /**
+     * @brief Convert 1BCE to year 0, etc.
+     **/
     int year0();
+
+    /**
+     * @brief Convert to julian day number. Adapted from http://en.wikipedia.org/wiki/Julian_day#Calculation
+     **/
     long toJDN();
     double dayFraction();
+
+    /**
+     * @brief Sets the internal date and time with the current one
+     **/
     void setNow() {m_datetime = QDateTime::currentDateTime().toUTC();}
-	
+
+    /**
+     * @brief Returns the internal date and time
+     **/
     QDateTime datetime() {return m_datetime;}
-	
+
+    /**
+     * @brief Sets the internal date and time a custom one
+     * @param datetime The custom date and time
+     **/
     void setDateTime(QDateTime datetime);
+
+    /**
+     * @brief Sets the speed of the timer
+     * @param speed The new speed (integer)
+     **/
     void setSpeed(int speed) {m_speed = speed;}
-	
+
  private Q_SLOTS:
     void timerTimeout();
-	
+
  Q_SIGNALS:
     void timeChanged();
-	
+
  protected:
     int        m_speed;
     QTimer    *m_timer;

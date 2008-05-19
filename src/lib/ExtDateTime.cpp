@@ -22,41 +22,41 @@ ExtDateTime::ExtDateTime()
       m_lastmin( -1 )
 {
     setNow();
-	
+
     m_timer = new QTimer( this );
     connect( m_timer, SIGNAL( timeout() ), 
              this,    SLOT( timerTimeout() ) );
     m_timer->start( 1000 );
 }
 
+
 ExtDateTime::~ExtDateTime() {}
+
 
 int ExtDateTime::year0()
 {
-    // convert 1BCE to year 0, etc
     int year = m_datetime.date().year();
     if ( year < 0 )
         year++;
     return year;
 }
 
+
 long ExtDateTime::toJDN()
 {
-    // Convert to julian day number.
-    // adapted from http://en.wikipedia.org/wiki/Julian_day#Calculation
     const int EPOCH_G = 32045; // 29 February 4801BCE in gregorian calendar
     const int EPOCH_J = 32083; // 29 February 4801BCE in julian calendar
-	
+
     int y = year0() + 4800;
     int m = m_datetime.date().month() - 3;
-	
+
     if ( m_datetime.date().month() <= 2 ) {
         y--;
         m += 12;
     }
-	
+
     long jdn = m_datetime.date().day() + ((153*m + 2) / 5) + 365*y + y/4;
-	
+
     if ( jdn >= 2331254 ) {
         // If the date is >= 1582-10-15, then assume gregorian
         // calendar is being used
@@ -65,9 +65,10 @@ long ExtDateTime::toJDN()
         // Assume julian calendar is being used.
         jdn -= EPOCH_J;
     }
-	
+
     return jdn;
 }
+
 
 double ExtDateTime::dayFraction()
 {
@@ -76,9 +77,10 @@ double ExtDateTime::dayFraction()
     f = f/60.0 + m_datetime.time().minute();
     f = f/60.0 + m_datetime.time().hour();
     f = f/24.0;
-	
+
     return f;
 }
+
 
 void ExtDateTime::timerTimeout()
 {
@@ -90,6 +92,7 @@ void ExtDateTime::timerTimeout()
         emit timeChanged();
     }
 }
+
 
 void ExtDateTime::setDateTime(QDateTime datetime)
 {
