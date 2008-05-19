@@ -9,7 +9,7 @@
     <x>0</x>
     <y>0</y>
     <width>329</width>
-    <height>169</height>
+    <height>173</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -86,6 +86,13 @@
        </property>
        <property name="text" >
         <string>Show date</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="showSecondsCheckBox" >
+       <property name="text" >
+        <string>Show seconds</string>
        </property>
       </widget>
      </item>
