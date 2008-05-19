@@ -50,6 +50,8 @@ GeoNode* KMLFolderTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
         parentItem.nodeAs<GeoDataContainer>()->addFeature(folder);
 
-    qDebug() << "Parsed <Folder> start! Created GeoDataFolder item: " << folder << " parent item name: " << parentItem.qualifiedName().first << " associated item: " << parentItem.associatedNode();
+    qDebug() << "Parsed <Folder> start! Created GeoDataFolder item: " << folder
+             << " parent item name: " << parentItem.qualifiedName().first
+             << " associated item: " << parentItem.associatedNode();
     return folder;
 }
