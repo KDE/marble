@@ -35,7 +35,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
       m_projection( Equirectangular ),
-      m_downloadUrl()
+      m_downloadUrl( "http://download.kde.org/apps/marble/" )
 {
     /* NOOP */
 }

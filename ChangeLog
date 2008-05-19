@@ -1,5 +1,12 @@
 2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/scene/GeoSceneTexture.cpp
+
+    Set m_downloadUrl to "http://download.kde.org/apps/marble/"
+    as default, so we do not need to edit all .dgml files.
+
+2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/TileLoaderHelper.h
     * src/lib/TileLoaderHelper.cpp
 
