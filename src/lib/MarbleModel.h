@@ -57,6 +57,7 @@ class VectorComposer;
 class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
+class ExtDateTime;
 
 
 /**
@@ -301,6 +302,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     
     SunLocator* m_sunLocator;
     MergedLayerDecorator* m_layerDecorator;
+    ExtDateTime* m_dateTime;
 };
 
 

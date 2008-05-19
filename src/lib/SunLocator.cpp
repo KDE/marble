@@ -15,6 +15,7 @@
 
 
 #include "SunLocator.h"
+#include "ExtDateTime.h"
 
 #include <QtCore/QDebug>
 
@@ -26,18 +27,17 @@ const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Tim
 const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
-SunLocator::SunLocator() 
+SunLocator::SunLocator(ExtDateTime *dateTime)
   : QObject(),
+    m_datetime( dateTime ),
     m_show( false ),
     m_citylights( false ),
     m_centered( false )
 {
-    m_datetime = new ExtDateTime();
-    connect(m_datetime, SIGNAL(timeChanged()), this, SLOT(update()));
 }
 
 SunLocator::~SunLocator() {
-    delete m_datetime;
+//     delete m_datetime;
 }
 
 void SunLocator::updatePosition()

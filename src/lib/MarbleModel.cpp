@@ -155,11 +155,15 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
-    
-    m_sunLocator = new SunLocator();
+
+    m_dateTime = new ExtDateTime();
+    m_sunLocator = new SunLocator(m_dateTime);
     m_layerDecorator = new MergedLayerDecorator(m_sunLocator);
 
-    connect( m_layerDecorator, SIGNAL( repaintMap() ), SIGNAL( modelChanged() ) );
+    connect(m_dateTime, SIGNAL( timeChanged() ),
+            m_sunLocator, SLOT( update() ) );
+    connect( m_layerDecorator, SIGNAL( repaintMap() ),
+                               SIGNAL( modelChanged() ) );
 
     // TODO be able to set these somewhere
     m_layerDecorator->setShowClouds(true);

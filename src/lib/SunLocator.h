@@ -35,7 +35,7 @@ class SunLocator : public QObject
     Q_OBJECT
 	
  public:
-    explicit SunLocator();
+    explicit SunLocator(ExtDateTime *dateTime);
     virtual ~SunLocator();
 
     double  shading(double lon, double lat);
@@ -72,7 +72,7 @@ class SunLocator : public QObject
     bool m_show;
     bool m_citylights;
     bool m_centered;
-    QTimer* m_timer;
+//     QTimer* m_timer;
 };
 
 #endif
