@@ -1,3 +1,32 @@
+2008-05-19  Torsten Rahn  <rahn@kde.org>
+
+    - Installing Marble Plugins (hopefully) into the right places.
+
+    * src/lib/MarbleDirs.{cpp,h}:
+
+    - Complementing the existing data paths by introducing the plugin specific paths:
+
+    static QString pluginPath( const QString& relativePath );
+    static QStringList pluginEntryList( const QString& relativePath, QDir::Filters filters = QDir::NoFilter  );
+    static QString pluginSystemPath(); 
+    static QString pluginLocalPath(); 
+    static QString marblePluginPath();
+    static void setMarblePluginPath( const QString& adaptedPath);
+
+    * src/lib/PluginManager.cpp:
+
+    - Making PluginManager look into the right places.
+    - Debug output
+
+    * src/plugins/marble/test/CMakeLists.txt:
+    * src/plugins/marble/overviewmap/CMakeLists.txt:
+    * src/plugins/marble/compass/CMakeLists.txt:
+    * src/plugins/marble/satellites/CMakeLists.txt:
+    * CMakeLists.txt:
+
+    - Installing the plugins into the right places
+    - Debug output
+
 2008-05-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/SphericalScanlineTextureMapper.h

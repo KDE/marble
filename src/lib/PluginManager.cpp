@@ -41,14 +41,16 @@ void PluginManager::loadPlugins()
     qDebug() << "Starting to load Plugins.";
     QStringList pluginFileNameList;
 
-    pluginFileNameList = MarbleDirs::entryList( "plugins", QDir::Files );
+    pluginFileNameList = MarbleDirs::pluginEntryList( "", QDir::Files );
+
+    MarbleDirs::debug();
 
     qDeleteAll( m_layerInterfaces );
     m_layerInterfaces.clear();
 
     foreach( QString fileName, pluginFileNameList ) {
-        qDebug() << fileName << " - " << MarbleDirs::path( "plugins/" + fileName );
-        QPluginLoader loader( MarbleDirs::path( "plugins/" + fileName ) );
+        qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
+        QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject *interface = loader.instance();
 

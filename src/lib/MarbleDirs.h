@@ -79,15 +79,33 @@ class MARBLE_EXPORT MarbleDirs
 
     static QString path( const QString& relativePath );
 
+    static QString pluginPath( const QString& relativePath );
+
+
     static QStringList entryList( const QString& relativePath, QDir::Filters filters = QDir::NoFilter  );
+
+    static QStringList pluginEntryList( const QString& relativePath, QDir::Filters filters = QDir::NoFilter  );
+
 
     static QString systemPath(); 
 
+    static QString pluginSystemPath(); 
+
+
     static QString localPath(); 
+
+    static QString pluginLocalPath(); 
+
 
     static QString marbleDataPath();
 
+    static QString marblePluginPath();
+
+
     static void setMarbleDataPath( const QString& adaptedPath);
+
+    static void setMarblePluginPath( const QString& adaptedPath);
+
 
     static void debug();
 
