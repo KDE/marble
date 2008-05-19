@@ -39,15 +39,21 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_expire;
     extern const char* dgmlAttr_feature;
     extern const char* dgmlAttr_format;
+    extern const char* dgmlAttr_host;
     extern const char* dgmlAttr_levelZeroColumns;
     extern const char* dgmlAttr_levelZeroRows;
     extern const char* dgmlAttr_mode;
     extern const char* dgmlAttr_name;
+    extern const char* dgmlAttr_password;
+    extern const char* dgmlAttr_path;
     extern const char* dgmlAttr_pixmap;
+    extern const char* dgmlAttr_port;
+    extern const char* dgmlAttr_protocol;
     extern const char* dgmlAttr_role;
     extern const char* dgmlAttr_spacing;
     extern const char* dgmlAttr_style;
     extern const char* dgmlAttr_text;
+    extern const char* dgmlAttr_user;
     extern const char* dgmlAttr_width;
 }
 

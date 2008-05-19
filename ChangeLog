@@ -1,3 +1,36 @@
+2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.h
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.cpp
+    Add dgmlTag_DownloadUrl.
+
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.h
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.cpp
+    Add dgmlAttr_host, dgmlAttr_password, dgmlAttr_path,
+    dgmlAttr_port, dgmlAttr_protocol and dgmlAttr_user.
+
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.cpp
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.h
+    Add class DgmlDownloadUrlTagHandler.
+
+    * src/lib/geodata/scene/GeoSceneTexture.cpp
+    * src/lib/geodata/scene/GeoSceneTexture.h
+    Add member variable m_downloadUrl and get+set method.
+
+    * src/lib/geodata/CMakeLists.txt
+    Add DgmlDownloadUrlTagHandler.cpp.
+
+    * docs/dgml2.dtd
+    Add element downloadUrl.
+
+    * data/maps/earth/openstreetmap/openstreetmap.dgml
+    Add downloadUrl.
+
+    Part 13 of groundwork for OpenStreetMap texture tiles.
+    DGML: Add sub element "downloadUrl" to "texture". This is needed
+    because we want do download the OpenStreetMap tiles from the their
+    server and not copy them to download.kde.org.
+
 2008-05-19  Torsten Rahn  <rahn@kde.org> 
 
     - Per aspera ad astra! Now I just need to take the earth's

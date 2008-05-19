@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 
@@ -22,6 +23,7 @@
 #ifndef GEOSCENETEXTURE_H
 #define GEOSCENETEXTURE_H
 
+#include <QtCore/QUrl>
 #include <QtCore/QVector>
 
 #include "GeoSceneLayer.h"
@@ -59,6 +61,9 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     Projection projection() const;
     void setProjection( const Projection );
 
+    QUrl downloadUrl() const;
+    void setDownloadUrl( const QUrl & );
+
     virtual QString type();
 
  protected:
@@ -69,6 +74,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     int m_levelZeroColumns;
     int m_levelZeroRows;
     Projection m_projection;
+    QUrl m_downloadUrl;
 };
 
 #endif // GEOSCENETEXTURE_H

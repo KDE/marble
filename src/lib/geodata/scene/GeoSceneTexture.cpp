@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2008 Torsten Rahn <rahn@kde.org>
+    Copyright (C) 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 
     This file is part of the KDE project
 
@@ -33,7 +34,8 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_customStorageLayout( "" ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
-      m_projection( Equirectangular )
+      m_projection( Equirectangular ),
+      m_downloadUrl()
 {
     /* NOOP */
 }
@@ -111,6 +113,16 @@ GeoSceneTexture::Projection GeoSceneTexture::projection() const
 void GeoSceneTexture::setProjection( const Projection projection )
 {
     m_projection = projection;
+}
+
+QUrl GeoSceneTexture::downloadUrl() const
+{
+    return m_downloadUrl;
+}
+
+void GeoSceneTexture::setDownloadUrl( const QUrl & url )
+{
+    m_downloadUrl = url;
 }
 
 QString GeoSceneTexture::type()
