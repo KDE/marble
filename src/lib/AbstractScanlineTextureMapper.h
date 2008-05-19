@@ -16,6 +16,7 @@
 #include <QtGui/QColor>
 
 #include <cmath>
+#include <math.h>
 
 class GeoSceneTexture;
 class TextureTile;
