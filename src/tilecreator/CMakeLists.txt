@@ -21,6 +21,9 @@ set( tilecreator_SRCS
 add_definitions( -DMAKE_MARBLE_LIB -DTILECREATOR )
 add_executable( tilecreator ${tilecreator_SRCS} )
 target_link_libraries( tilecreator ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTMAIN_LIBRARY} )
+if (APPLE)
+  target_link_libraries (tilecreator ${APP_SERVICES_LIBRARY})
+endif (APPLE)
 
 if(WIN32 AND QTONLY)
     install (TARGETS tilecreator DESTINATION "")
