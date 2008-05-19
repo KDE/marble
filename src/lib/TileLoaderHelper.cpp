@@ -71,6 +71,28 @@ int TileLoaderHelper::columnToLevel( const int levelZeroColumns, int column )
     return (int)( std::log( (double)(column / levelZeroColumns) ) / std::log( (double)2.0 ) );
 }
 
+QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel, int x,
+                                    int y )
+{
+    QUrl tileUrl;
+    if ( textureLayer ) {
+        tileUrl = textureLayer->downloadUrl();
+	QString path = tileUrl.path();
+        const QString suffix = textureLayer->fileFormat().toLower();
+
+        switch ( textureLayer->storageLayoutMode() ) {
+        case GeoSceneTexture::Marble:
+            path += relativeTileFileName( textureLayer, zoomLevel, x, y );
+            break;
+
+        case GeoSceneTexture::OpenStreetMap:
+            path += QString( "%1/%2/%3.%4" ).arg( zoomLevel ).arg( x ).arg( y ).arg( suffix );
+            break;
+        }
+    }
+    return tileUrl;
+}
+
 QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x,
                                                 int y )
 {

@@ -1,5 +1,14 @@
 2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TileLoaderHelper.h
+    * src/lib/TileLoaderHelper.cpp
+
+    Part 14 of groundwork for OpenStreetMap texture tiles.
+    Add function downloadUrl to TileLoaderHelper which makes use of
+    the new downloadUrl element.
+
+2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/dgml/DgmlElementDictionary.h
     * src/lib/geodata/handlers/dgml/DgmlElementDictionary.cpp
     Add dgmlTag_DownloadUrl.

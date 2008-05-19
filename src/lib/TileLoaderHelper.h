@@ -26,6 +26,7 @@
 #define __MARBLE__TILELOADERHELPER_H
 
 #include <QtCore/QString>
+#include <QtCore/QUrl>
 
 class GeoSceneTexture;
 
@@ -73,6 +74,11 @@ namespace TileLoaderHelper {
      *               by the code which makes use of it.
      */
     int columnToLevel( const int levelZeroColumns, int column );
+
+    /**
+     * @brief Get the url for download of a tile.
+     */
+    QUrl downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel, int x, int y );
 
     /**
      * @brief Get the relative file name of a tile.
