@@ -89,6 +89,7 @@ QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel
             path += QString( "%1/%2/%3.%4" ).arg( zoomLevel ).arg( x ).arg( y ).arg( suffix );
             break;
         }
+        tileUrl.setPath( path );
     }
     return tileUrl;
 }

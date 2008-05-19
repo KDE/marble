@@ -1,5 +1,12 @@
 2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TileLoaderHelper.cpp
+
+    Fix function downloadUrl: Do not ignore the value of the
+    path attribute.
+
+2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/scene/GeoSceneTexture.cpp
 
     Set m_downloadUrl to "http://download.kde.org/apps/marble/"
