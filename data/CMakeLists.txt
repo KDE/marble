@@ -85,6 +85,31 @@ maps/earth/openstreetmap/openstreetmap-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap)
 
 install (FILES
+maps/earth/openstreetmap/legend/airportapron.png
+maps/earth/openstreetmap/legend/motorway.png
+maps/earth/openstreetmap/legend/track.png
+maps/earth/openstreetmap/legend/airportrunway.png
+maps/earth/openstreetmap/legend/primaryroad.png
+maps/earth/openstreetmap/legend/tram.png
+maps/earth/openstreetmap/legend/boundary.png
+maps/earth/openstreetmap/legend/railway.png
+maps/earth/openstreetmap/legend/trunkroad.png
+maps/earth/openstreetmap/legend/bridge.png
+maps/earth/openstreetmap/legend/railwaystation.png
+maps/earth/openstreetmap/legend/tunnel.png
+maps/earth/openstreetmap/legend/bridleway.png
+maps/earth/openstreetmap/legend/secondaryroad.png
+maps/earth/openstreetmap/legend/unclassifiedroad.png
+maps/earth/openstreetmap/legend/byway.png
+maps/earth/openstreetmap/legend/significantbuilding.png
+maps/earth/openstreetmap/legend/unsurfacedroad.png
+maps/earth/openstreetmap/legend/cycleway.png
+maps/earth/openstreetmap/legend/subway.png
+maps/earth/openstreetmap/legend/footway.png
+maps/earth/openstreetmap/legend/summitpeak.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/legend)
+
+install (FILES
 maps/earth/openstreetmap/0/0/0.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
 
