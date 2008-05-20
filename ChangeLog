@@ -1,10 +1,10 @@
 2008-05-20  Patrick Spendrin <ps_ml@gmx.de>
 
-    *src/lib/geodata/data/GeoDataPlacemark.{h,cpp}
+    *src/lib/geodata/data/GeoDataPlacemark.{h,cpp}:
     
     add setter Method for GeoDataPoint - this is needed by KML parsing.
     
-2008-05-16  Claudiu Covaci  <claudiu.covaci@gmail.com>
+2008-05-20  Claudiu Covaci  <claudiu.covaci@gmail.com>
 
     * src/lib/MarbleModel.{h,cpp}:
     * src/lib/SunLocator.{h,cpp}:
