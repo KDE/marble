@@ -1,5 +1,11 @@
 2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/FileStoragePolicy.cpp (updateFile)
+
+    Convert images with format QImage::Format_Indexed8 to QImage::Format_RGB32.
+
+2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp
     * src/lib/AbstractScanlineTextureMapper.h
 
