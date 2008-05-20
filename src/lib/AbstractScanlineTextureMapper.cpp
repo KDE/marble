@@ -45,6 +45,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
       m_tileLoader( tileLoader ),
+      m_tileProjection( tileLoader->textureLayer()->projection() ),
       m_scanLine( 0 ),
       m_tile( 0 ),
       m_tileLevel( 0 ),
@@ -73,6 +74,7 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 void AbstractScanlineTextureMapper::setTextureLayer( GeoSceneTexture *textureLayer )
 {
     m_tileLoader->setTextureLayer( textureLayer );
+    m_tileProjection = textureLayer->projection();
     m_tileLevel = -1;
     detectMaxTileLevel();
 

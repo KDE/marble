@@ -1,4 +1,11 @@
-2008-05-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/AbstractScanlineTextureMapper.h
+
+    Fix projection for OpenStreetMap tiles.
+
+2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MergedLayerDecorator.h
     * src/lib/HttpFetchFile.cpp

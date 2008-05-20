@@ -18,7 +18,8 @@
 #include <cmath>
 #include <math.h>
 
-class GeoSceneTexture;
+#include "GeoSceneTexture.h"
+
 class TextureTile;
 class TileLoader;
 class ViewParams;
@@ -94,6 +95,7 @@ public:
     // ------------------------
     // Tile stuff
     TileLoader  *m_tileLoader;
+    GeoSceneTexture::Projection m_tileProjection;
     QRgb        *m_scanLine;
 
 
@@ -147,7 +149,12 @@ inline double AbstractScanlineTextureMapper::rad2PixelX( const double longitude 
 
 inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude ) const
 {
-    return -latitude * (double)(m_globalHeight) / M_PI;
+    switch ( m_tileProjection ) {
+    case GeoSceneTexture::Equirectangular:
+        return -latitude * (double)(m_globalHeight) / M_PI;
+    case GeoSceneTexture::Mercator:
+        return - asinh( tan( latitude )) * (double)(m_globalHeight) / (2.0*M_PI);
+    }
 }
 
 #endif
