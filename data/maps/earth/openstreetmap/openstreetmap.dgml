@@ -28,6 +28,196 @@
                 </texture>
             </layer>
         </map>
+        
+        <legend>
+            <section name="traffic" checkable="false" spacing="12">
+                <heading>Transportation</heading>
 
+                <item name="motorway">
+                    <icon color="#f2efe9"/>
+                    <text>Motorway</text>
+                </item>
+                <item name="trunk_road">
+                    <icon color="#f2efe9"/>
+                    <text>Trunk road</text>
+                </item>
+                <item name="primary_road">
+                    <icon color="#f2efe9"/>
+                    <text>Primary road</text>
+                </item>
+                <item name="secondary_road">
+                    <icon color="#f2efe9"/>
+                    <text>Primary road</text>
+                </item>
+                <item name="secondary_road">
+                    <icon color="#f2efe9"/>
+                    <text>Secondary road</text>
+                </item>
+                <item name="unclassified_road">
+                    <icon color="#f2efe9"/>
+                    <text>Unclassified road</text>
+                </item>
+                <item name="unsurfaced_road">
+                    <icon color="#f2efe9"/>
+                    <text>Unsurfaced road</text>
+                </item>
+                <item name="track">
+                    <icon color="#f2efe9"/>
+                    <text>Track</text>
+                </item>
+                <item name="byway">
+                    <icon color="#f2efe9"/>
+                    <text>Byway</text>
+                </item>
+                <item name="bridleway">
+                    <icon color="#f2efe9"/>
+                    <text>Bridleway</text>
+                </item>
+                <item name="cycleway">
+                    <icon color="#f2efe9"/>
+                    <text>Cycleway</text>
+                </item>
+                <item name="footway">
+                    <icon color="#f2efe9"/>
+                    <text>Footway</text>
+                </item>
+                <item name="railway">
+                    <icon color="#f2efe9"/>
+                    <text>Railway</text>
+                </item>
+                <item name="subway">
+                    <icon color="#f2efe9"/>
+                    <text>Subway</text>
+                </item>
+                <item name="lightrail">
+                    <icon color="#f2efe9"/>
+                    <text>Lightrail, tram</text>
+                </item>
+                <item name="airport_runway">
+                    <icon color="#f2efe9"/>
+                    <text>Airport runway, taxiway</text>
+                </item>
+                <item name="airport_apron_terminal">
+                    <icon color="#f2efe9"/>
+                    <text>Airport apron, terminal</text>
+                </item>
+                <item name="administrative_boundary">
+                    <icon color="#f2efe9"/>
+                    <text>Administrative boundary</text>
+                </item>
+                <item name="bridge">
+                    <icon color="#f2efe9"/>
+                    <text>Bridge</text>
+                </item>
+                <item name="tunnel">
+                    <icon color="#f2efe9"/>
+                    <text>Tunnel</text>
+                </item>
+            </section>
+            <section name="areas" checkable="false" spacing="12">
+                <heading>Areas</heading>
+
+                <item name="forest">
+                    <icon color="#f2efe9"/>
+                    <text>Forest</text>
+                </item>
+                <item name="wood">
+                    <icon color="#f2efe9"/>
+                    <text>Wood</text>
+                </item>
+                <item name="golf_course">
+                    <icon color="#f2efe9"/>
+                    <text>Golf course</text>
+                </item>
+                <item name="park">
+                    <icon color="#f2efe9"/>
+                    <text>Park</text>
+                </item>
+                <item name="residential_area">
+                    <icon color="#f2efe9"/>
+                    <text>Residential Area</text>
+                </item>
+                <item name="tourist_attraction">
+                    <icon color="#f2efe9"/>
+                    <text>Tourist attraction</text>
+                </item>
+                <item name="common_meadow">
+                    <icon color="#f2efe9"/>
+                    <text>Common, meadow</text>
+                </item>
+                <item name="retail_area">
+                    <icon color="#f2efe9"/>
+                    <text>Retail area</text>
+                </item>
+                <item name="industrial_area">
+                    <icon color="#f2efe9"/>
+                    <text>Industrial Area</text>
+                </item>
+                <item name="commercial_area">
+                    <icon color="#f2efe9"/>
+                    <text>Commercial Area</text>
+                </item>
+                <item name="healthland">
+                    <icon color="#f2efe9"/>
+                    <text>Healthland</text>
+                </item>
+                <item name="lake_reservoir">
+                    <icon color="#f2efe9"/>
+                    <text>Lake, reservoir</text>
+                </item>
+                <item name="farm">
+                    <icon color="#f2efe9"/>
+                    <text>Farm</text>
+                </item>
+                <item name="brownfield_site">
+                    <icon color="#f2efe9"/>
+                    <text>Brownfield site</text>
+                </item>
+                <item name="cemetery">
+                    <icon color="#f2efe9"/>
+                    <text>Cemetery</text>
+                </item>
+                <item name="allotments">
+                    <icon color="#f2efe9"/>
+                    <text>Allotments</text>
+                </item>
+                <item name="sports_pitch">
+                    <icon color="#f2efe9"/>
+                    <text>Sports pitch</text>
+                </item>
+                <item name="sports_centre">
+                    <icon color="#f2efe9"/>
+                    <text>Sports centre</text>
+                </item>
+                <item name="nature_reserve">
+                    <icon color="#f2efe9"/>
+                    <text>Nature reserve</text>
+                </item>
+                <item name="military_area">
+                    <icon color="#f2efe9"/>
+                    <text>Military area</text>
+                </item>
+                <item name="school_university">
+                    <icon color="#f2efe9"/>
+                    <text>School, university</text>
+                </item>
+            </section>
+            <section name="buildings" checkable="false" spacing="12">
+                <heading>Buildings</heading>
+
+                <item name="significant_building">
+                    <icon color="#f2efe9"/>
+                    <text>Significant Building</text>
+                </item>
+                <item name="railway_station">
+                    <icon color="#f2efe9"/>
+                    <text>Railway station</text>
+                </item>
+                <item name="summit_peak">
+                    <icon color="#f2efe9"/>
+                    <text>Summit, peak</text>
+                </item>
+            </section>
+        </legend>
     </document>
 </dgml>

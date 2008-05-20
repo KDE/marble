@@ -258,7 +258,7 @@
 
                 <item name="topography7000">
                     <icon color="#c39d55"/>
-                    <text>7000 m</text>
+                    <text>30 °C</text>
                 </item>
                 <item name="topography5000">
                     <icon color="#dcbd80"/>
