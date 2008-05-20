@@ -10,7 +10,7 @@
             <visible>true</visible>
             <description><![CDATA[<p>A <i>global roadmap</i> created by the OpenStreetMap (OSM) project.<p>OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.]]></description>
             <zoom>
-                <minimum>  1000  </minimum>
+                <minimum>   900  </minimum>
                 <maximum>  4000  </maximum>
                 <discrete> false </discrete>
             </zoom>

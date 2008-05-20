@@ -1,5 +1,11 @@
 2008-05-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * data/maps/earth/openstreetmap/openstreetmap.dgml
+
+    Set minimum zoom value to 900.
+
+2008-05-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/FileStoragePolicy.cpp (updateFile)
 
     Remove broken conversion code.
