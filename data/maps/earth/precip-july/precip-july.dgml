@@ -254,7 +254,7 @@
             </section>
     
             <section name="elevation" checkable="false" spacing="12">
-                <heading>Elevation</heading>
+                <heading>Precipitation</heading>
 
                 <item name="topography7000">
                     <icon color="#c39d55"/>
