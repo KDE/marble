@@ -1,5 +1,11 @@
 2008-05-21  Patrick Spendrin  <ps_ml@gmx.de>
 
+    * src/lib/geodata/CMakeLists.txt
+    
+    Add LineStyle to CMakeLists.txt
+    
+2008-05-21  Patrick Spendrin  <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataLineStyle{.h,.cpp}
     
     Add LineStyle using LabelStyle as example
