@@ -48,7 +48,7 @@ bool FileStoragePolicy::fileExists( const QString &fileName ) const
 bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
 {
     const QString fullName( m_dataDirectory + '/' + fileName );
-    QByteArray const * ptr = &data;
+    QByteArray const * convertedData = &data;
 
     // Create directory if it doesn't exist yet...
     QFileInfo info( fullName );
@@ -65,11 +65,11 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     if ( image.loadFromData( data ) && image.format() == QImage::Format_Indexed8 ) {
         qDebug() << "FileStoragePolicy::updateFile converting" << fullName;
         QImage convertedImage = image.convertToFormat( QImage::Format_RGB32 );
-	qDebug() << "convertedImage.depth():" << convertedImage.depth();
-	QBuffer buffer( &ba );
-	buffer.open( QIODevice::WriteOnly );
-	convertedImage.save( &buffer );
-	ptr = &ba;
+        qDebug() << "convertedImage.depth():" << convertedImage.depth();
+        QBuffer buffer( &ba );
+        buffer.open( QIODevice::WriteOnly );
+        convertedImage.save( &buffer );
+        convertedData = &ba;
     }
 
     // ... and save the file content
@@ -79,7 +79,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
         return false;
     }
 
-    if ( !file.write( *ptr ) ) {
+    if ( !file.write( *convertedData ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
         return false;
     }
