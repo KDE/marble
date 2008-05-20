@@ -73,9 +73,9 @@ Planning and architecture:
  * write proposals for Marble 0.6 / KDE 4.1                             ----
     - Layer Management class                                            done
     - Data source plugins                                               --
-    - Visualization plugins (layers?)                                   done?
+    - Visualization plugins (layers?)                                   TACK in progress
     - Projection class                                                  no
-    - Bounding boxes                                                    --
+    - Bounding boxes                                                    TACK
     - Model-View concept                                                --
     - Spatial Indices                                                   --
 
@@ -86,11 +86,9 @@ Vector backend
  * Better scalability                                                   ----
 
 Features:
- * Support for OpenStreetMap                                            TACK
+ * Support for OpenStreetMap                                            JM
     - load tiles                                                        --
     - display tiles                                                     --
-    - Generate tiles (adapt fonts, etc, to Marble)                      --
-    - Put tiles on server                                               --
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
  * Mercator Projection                                                  INGE
@@ -99,34 +97,44 @@ Features:
     - Make the vector base work        					inge
     - Move paintBase to ProjectionHelper				done
     - Move activeArea to ProjectionHelper				inge
-    - Move mapCoversImage (prev. globeCoversImage) to ProjectionHelper	inge
+ 
+    - <strikeout>Move mapCoversImage (prev. globeCoversImage) to ProjectionHelper</strikeout>
+      "mapCoversImage" is NOT meant to go to ProjectionHelper.
+       The projection's main intent is to map e.g. a set of 
+       geo coordinates onto a value set (i.e. the image/screen coordinates. 
+       "mapCoversImage" just describes whether there are invalid 
+       screen coordinates which don't belong to the value set. 
+       Hence mapCoversImage fits perfectly into the projection classes.
+       Actually it should rather get named "projectionCoversImage"  
+       but I guess mapCoversImage brings the point across better.
+
  * Fix GPS Support (that's a regression) 				ANDR
     - Make it a Marble plugin						--
 
 
 Internal structure:
- * Create a QPersistentModelIndex for MarblePlaceMarkModel items to	DONE
+ * Create a QPersistentModelIndex for MarblePlaceMarkModel items to     DONE
    improve speed on close up zooms.
  * New class MarbleMap that can paint a map on any QPainter             DONE
     - Check Apidox if there is anything missing.                        --
- * Design and implement Projection class 				DONE
- * Refactor KML to use QXmlStreamReader                                 ----
+ * Design and implement Projection class 				                DONE
+ * Refactor KML to use QXmlStreamReader                                 DONE
  * Make MarbleModel a real model and MarbleWidget a real view           ----
      Move to 4.2?  Probably...
  * Make it possible to paint on whatever QPainter Marble is given       ----
      Move to 4.2?  Probably...
- * Layer Management Class						TACK
-    - Split off MapTheme / DGML parsing into geodata/parser. 		done
+ * Layer Management Class						                        TACK
+    - Split off MapTheme / DGML parsing into geodata/parser. 		    done
       Have a GeoDataMapTheme class that basically only includes
       those parts of the current MapTheme except for parsing.
-    - Implement / move <head> features as lined out in			done
+    - Implement / move <head> features as lined out in			        done
       layermanagement.txt This should happen after the 
       QXmlStreamReader port.
- * Plugin interface (see also GeoPainter)				TACK
-    - Make a QPlugin based interface					--
+ * Plugin interface (see also GeoPainter)				                TACK
+    - Make a QPlugin based interface					                TACK
     - Move backends into plugins / threads                              --
  * GeoPainter								----
- * Create a LatLonBoundingBox						DONE
+ * Create a LatLonBoundingBox						                    DONE
     - Use it everywhere :-) 						--
  * Download manager fixes:						----
     - After maps get downloaded sometimes the resolution doesn't get	--
@@ -136,15 +144,15 @@ Internal structure:
 
 User experience / Usability
  * Make Marble have a RenderingQuality setting in ViewParams:           DONE
-   - Use different render settings while panning (MOVE) and 		done
+   - Use different render settings while panning (MOVE) and 		    done
      after releasing the mouse (DROP).
-   - Rerender the map at "PRINT quality" once "File -> Print" or	done
+   - Rerender the map at "PRINT quality" once "File -> Print" or	    done
      "Edit -> Copy" get selected.
  * Add a small indicator to the status bar indicates map downloads      ----
    (see explanation below)
 
 Smaller issues
- * Make the about dialog for MarbleWidget more consistent with the	----
+ * Make the about dialog for MarbleWidget more consistent with the	    ----
    application About dialog.  Or perhaps disable it for the KDE
    version?
  * Cloud Layer                                                          STRE
