@@ -82,6 +82,7 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/plain)
 install (FILES
 maps/earth/openstreetmap/openstreetmap.dgml
 maps/earth/openstreetmap/openstreetmap-preview.png
+maps/earth/openstreetmap/legend.html
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap)
 
 install (FILES
