@@ -55,7 +55,9 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
       m_globalWidth( 0 ),
-      m_globalHeight( 0 )
+      m_globalHeight( 0 ),
+      m_normGlobalWidth( 0.0 ),
+      m_normGlobalHeight( 0.0 )
 {
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
@@ -162,7 +164,9 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     m_tileLevel = tileLevel;
 
     m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
+    m_normGlobalWidth = (double)( m_globalWidth / ( 2 * M_PI ) );
     m_globalHeight = m_tileLoader->globalHeight( m_tileLevel );
+    m_normGlobalHeight = (double)( m_globalHeight /  M_PI );
 
     m_maxGlobalX = m_globalWidth  - 1;
     m_maxGlobalY = m_globalHeight - 1;

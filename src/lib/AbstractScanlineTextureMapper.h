@@ -115,6 +115,8 @@ public:
  private:
     int          m_globalWidth;
     int          m_globalHeight;
+    double       m_normGlobalWidth;
+    double       m_normGlobalHeight;
 };
 
 inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )
@@ -144,16 +146,21 @@ inline int AbstractScanlineTextureMapper::globalHeight() const
 
 inline double AbstractScanlineTextureMapper::rad2PixelX( const double longitude ) const
 {
-    return longitude * (double)(m_globalWidth) / (2.0*M_PI);
+    return longitude * m_normGlobalWidth;
 }
 
 inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude ) const
 {
     switch ( m_tileProjection ) {
     case GeoSceneTexture::Equirectangular:
-        return -latitude * (double)(m_globalHeight) / M_PI;
+        return -latitude * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:
-        return - asinh( tan( latitude )) * (double)(m_globalHeight) / (2.0*M_PI);
+        if ( fabs( latitude ) < 1.4835 )
+            return - asinh( tan( latitude ) ) * 0.5 * m_normGlobalHeight;
+        if ( latitude > +1.4835 )
+            return - asinh( tan( +1.4835 ) ) * 0.5 * m_normGlobalHeight; 
+        if ( latitude < -1.4835 )
+            return - asinh( tan( -1.4835 ) ) * 0.5 * m_normGlobalHeight; 
     }
 }
 
