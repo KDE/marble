@@ -18,6 +18,26 @@
 #include "StoragePolicy.h"
 
 
+HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, QString const id )
+    : m_sourceUrl( sourceUrl ),
+      m_destinationFileName( destFileName ),
+      m_originalDestinationFileName( destFileName ),
+      m_data(),
+      m_initiatorId( id ),
+      m_status( NoStatus ),
+      m_priority( NoPriority )
+{
+    m_buffer = new QBuffer( &m_data );
+    m_buffer->open( QIODevice::WriteOnly );
+}
+
+HttpJob::~HttpJob()
+{
+    m_buffer->close();
+    delete m_buffer;
+}
+
+
 HttpFetchFile::HttpFetchFile( StoragePolicy *policy, QObject *parent )
     : QObject( parent ),
       m_storagePolicy( policy )
@@ -36,14 +56,14 @@ HttpFetchFile::~HttpFetchFile()
 
 void HttpFetchFile::executeJob( HttpJob* job )
 {
-    if ( m_storagePolicy->fileExists( job->originalRelativeUrlString ) ) {
+    if ( m_storagePolicy->fileExists( job->originalDestinationFileName() ) ) {
         qDebug( "File already exists" );
         emit jobDone( job, 1 );
 
         return;
     }
 
-    const QUrl sourceUrl = QUrl( job->serverUrl.toString() + job->relativeUrlString ); 
+    const QUrl sourceUrl = job->sourceUrl();
 
     m_pHttp->setHost( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
     if ( !sourceUrl.userName().isEmpty() )
@@ -56,7 +76,7 @@ void HttpFetchFile::executeJob( HttpJob* job )
     header.setValue( "User-Agent", "Marble TinyWebBrowser" );
     header.setValue( "Host", sourceUrl.host() );
 
-    int httpGetId = m_pHttp->request( header, 0, job->buffer );
+    int httpGetId = m_pHttp->request( header, 0, job->buffer() );
     m_pJobMap.insert( httpGetId, job );
 
     emit statusMessage( tr("Downloading data...") );
@@ -79,8 +99,8 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 
     if ( responseHeader.statusCode() == 301 ) {
         QUrl newLocation( responseHeader.value( "Location" ) );
-        job->serverUrl = newLocation.scheme() + "://" + newLocation.host();
-        job->relativeUrlString = newLocation.path();
+        job->setSourceUrl( newLocation );
+        job->setDestinationFileName( newLocation.path() );
 
         // Let's try again
         executeJob( job );
@@ -106,7 +126,7 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 
     }
 
-    if ( !m_storagePolicy->updateFile( job->originalRelativeUrlString, job->data ) ) {
+    if ( !m_storagePolicy->updateFile( job->originalDestinationFileName(), job->data() ) ) {
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( m_storagePolicy->lastErrorMessage() ) );
         emit jobDone( m_pJobMap[ requestId ], error );

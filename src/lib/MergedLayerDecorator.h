@@ -22,6 +22,8 @@
 #include "SunLocator.h"
 #include "TileId.h"
 
+class QUrl;
+
 class GeoSceneDocument;
 class GeoSceneTexture;
 
@@ -48,8 +50,7 @@ class MergedLayerDecorator : public QObject
     void setInfo(int x, int y, int level, TileId const& id);
 	
  Q_SIGNALS:
-    void downloadTile(const QString& relativeUrlString, const QString& id);
-    void downloadTile(const QString& serverUrlString, const QString& relativeUrlString,
+    void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
                       const QString& id);
     void repaintMap();
 	

@@ -106,7 +106,7 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
         if ( server.isEmpty() ) {
             m_downloadManager->addJob( relativeUrl, relativeUrl );
         } else {
-            m_downloadManager->addJob( server, relativeUrl, relativeUrl );
+            m_downloadManager->addJob( server + "/" + relativeUrl, relativeUrl, relativeUrl );
         }
         return QVariant();
     }

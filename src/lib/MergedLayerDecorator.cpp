@@ -93,10 +93,8 @@ QImage MergedLayerDecorator::loadRawTile( GeoSceneTexture *textureLayer )
     // TODO use a TileLoader rather than directly accessing TextureTile?
     TextureTile tile(m_id);
     
-    connect( &tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
-             this, SIGNAL( downloadTile( const QString&, const QString& ) ) );
-    connect( &tile, SIGNAL( downloadTile( const QString&, const QString&, const QString& ) ),
-             this, SIGNAL( downloadTile( const QString&, const QString&, const QString& ) ) );
+    connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ),
+             this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ) );
 
     tile.loadRawTile( textureLayer, m_level, m_x, m_y );
     return *(tile.tile());

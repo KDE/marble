@@ -27,6 +27,8 @@
 #include "TileId.h"
 #include "MergedLayerDecorator.h"
 
+class QUrl;
+
 class GeoSceneTexture;
 
 class TextureTile : public QObject {
@@ -55,15 +57,18 @@ class TextureTile : public QObject {
     // and color ( uint, 4 bytes ) images.
 
     uint pixel( int x, int y ) const {
-        if ( m_depth == 1 || m_depth == 8 )
-            return  jumpTable8[y][x];
+        if ( m_depth == 1 || m_depth == 8 ) {
+            if ( m_rawtile.format() == QImage::Format_Indexed8 )
+	        return m_rawtile.pixel( x, y );
+            else
+                return  jumpTable8[y][x];
+	}
         return  jumpTable32[y][x];
     }
 
  Q_SIGNALS:
     void tileUpdateDone();
-    void downloadTile(const QString& relativeUrlString, const QString& id);
-    void downloadTile(const QString& serverUrlString, const QString& relativeUrlString,
+    void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
                       const QString& id);
 
  public Q_SLOTS:

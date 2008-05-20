@@ -93,8 +93,6 @@ void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
     if ( d->m_downloadManager != 0 ) {
         connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
                  this,              SLOT( reloadTile( QString, QString ) ) );
-        connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString, QString ) ),
-                 this,              SLOT( reloadTile( QString, QString, QString ) ) );
     }
 }
 
@@ -200,10 +198,8 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
             d->m_tileHash[tileId] = tile;
 
             if ( d->m_downloadManager != 0 ) {
-                connect( tile, SIGNAL( downloadTile( const QString&, const QString& ) ),
-                         d->m_downloadManager, SLOT( addJob( const QString&, const QString& ) ) );
-                connect( tile, SIGNAL( downloadTile( QString, QString, QString ) ),
-                         d->m_downloadManager, SLOT( addJob( QString, QString, QString ) ) );
+                connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
+                         d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
             }
 
             connect( tile, SIGNAL( tileUpdateDone() ),
@@ -283,6 +279,7 @@ int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
 int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 {
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( textureLayer ) );
+    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     int maxtilelevel = -1;
@@ -295,13 +292,13 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
          ++constIterator)
     {
         int value = (*constIterator).toInt( &ok, 10 );
-        // qDebug() << "Value: " << value  << "Ok: " << ok;
+        qDebug() << "Value: " << value  << "Ok: " << ok;
         if ( ok && value > maxtilelevel )
             maxtilelevel = value;
     }
 
-    //qDebug() << "Detected maximum tile level that contains data: "
-    //         << maxtilelevel;
+    qDebug() << "Detected maximum tile level that contains data: "
+             << maxtilelevel;
 
     return maxtilelevel;
 }
@@ -344,6 +341,8 @@ void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void TileLoader::reloadTile( const QString &idStr )
 {
+    qDebug() << "TileLoader::reloadTile:" << idStr;
+ 
     const TileId id = TileId::fromString( idStr );
     if ( d->m_tileHash.contains( id ) ) {
         int  level = id.zoomLevel();

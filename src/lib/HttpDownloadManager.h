@@ -80,9 +80,9 @@ class HttpDownloadManager : public QObject
     void addJob( const QString& relativeUrlString, const QString &id );
 
     /**
-     * Adds a new job with a server, relative url and given id.
+     * Adds a new job with a sourceUrl, destination file name and given id.
      */
-    void addJob( const QString& server, const QString& relativeUrlString, const QString &id );
+    void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id );
 
     /**
      * Removes the @p job from the manager.
@@ -92,7 +92,6 @@ class HttpDownloadManager : public QObject
 
  Q_SIGNALS:
     void downloadComplete( QString, QString );
-    void downloadComplete( QString, QString, QString );
     void statusMessage( QString );
 
  private Q_SLOTS:

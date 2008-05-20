@@ -113,9 +113,14 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
           // qDebug() << "The image filename does exist: " << absfilename ;
 
           QImage temptile( absfilename );
+// 	  qDebug() << "TextureTile::loadRawTile "
+// 		   << "depth:" << temptile.depth()
+// 		   << "format:" << temptile.format()
+// 		   << "bytesPerLine:" << temptile.bytesPerLine()
+// 		   << "numBytes:" << temptile.numBytes() ;
 
           if ( !temptile.isNull() ) {
-              //         qDebug() << "Image has been successfully loaded.";
+              // qDebug() << "Image has been successfully loaded.";
 
               if ( level != i ) { 
                   // qDebug() << "About to start cropping an existing image.";
@@ -140,6 +145,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
               }
 
               m_rawtile = temptile;
+              qDebug() << "m_rawtile.m_depth:" << m_rawtile.depth();
 
               break;
           } // !tempfile.isNull()
@@ -149,16 +155,17 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
           //      }
       }
       else {
-          //      qDebug() << "emit downloadTile(" << relfilename << ");";
-          emit downloadTile( relfilename, m_id.toString() );
+	QUrl sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, level, x, y );
+	qDebug() << "emit downloadTile(" << sourceUrl << relfilename << ");";
+	emit downloadTile( sourceUrl, relfilename, m_id.toString() );
       }
   }
   
-//   qDebug() << "TextureTile::loadRawTile end";
+  qDebug() << "TextureTile::loadRawTile end";
 
   m_depth = m_rawtile.depth();
   
-//   qDebug() << "m_depth =" << m_depth;
+  qDebug() << "m_depth =" << m_depth;
 }
 
 void TextureTile::loadTile( bool requestTileUpdate )
