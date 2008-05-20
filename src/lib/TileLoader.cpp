@@ -292,7 +292,7 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
          ++constIterator)
     {
         int value = (*constIterator).toInt( &ok, 10 );
-        qDebug() << "Value: " << value  << "Ok: " << ok;
+        // qDebug() << "Value: " << value  << "Ok: " << ok;
         if ( ok && value > maxtilelevel )
             maxtilelevel = value;
     }
