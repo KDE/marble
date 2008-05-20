@@ -118,87 +118,87 @@
                 <heading>Areas</heading>
 
                 <item name="forest">
-                    <icon color="#f2efe9"/>
+                    <icon color="#8dc56c"/>
                     <text>Forest</text>
                 </item>
                 <item name="wood">
-                    <icon color="#f2efe9"/>
+                    <icon color="#aed1a0"/>
                     <text>Wood</text>
                 </item>
                 <item name="golf_course">
-                    <icon color="#f2efe9"/>
+                    <icon color="#b5e3b5"/>
                     <text>Golf course</text>
                 </item>
                 <item name="park">
-                    <icon color="#f2efe9"/>
+                    <icon color="#b6fdb6"/>
                     <text>Park</text>
                 </item>
                 <item name="residential_area">
-                    <icon color="#f2efe9"/>
+                    <icon color="#cccccc"/>
                     <text>Residential Area</text>
                 </item>
                 <item name="tourist_attraction">
-                    <icon color="#f2efe9"/>
+                    <icon color="#f2caea"/>
                     <text>Tourist attraction</text>
                 </item>
                 <item name="common_meadow">
-                    <icon color="#f2efe9"/>
+                    <icon color="#cfeca8"/>
                     <text>Common, meadow</text>
                 </item>
                 <item name="retail_area">
-                    <icon color="#f2efe9"/>
+                    <icon color="#f1dada"/>
                     <text>Retail area</text>
                 </item>
                 <item name="industrial_area">
-                    <icon color="#f2efe9"/>
+                    <icon color="#ffaeb9"/>
                     <text>Industrial Area</text>
                 </item>
                 <item name="commercial_area">
-                    <icon color="#f2efe9"/>
+                    <icon color="#efc8c8"/>
                     <text>Commercial Area</text>
                 </item>
                 <item name="healthland">
-                    <icon color="#f2efe9"/>
+                    <icon color="#ffffc0"/>
                     <text>Healthland</text>
                 </item>
                 <item name="lake_reservoir">
-                    <icon color="#f2efe9"/>
+                    <icon color="#b5d0d0"/>
                     <text>Lake, reservoir</text>
                 </item>
                 <item name="farm">
-                    <icon color="#f2efe9"/>
+                    <icon color="#ead8bd"/>
                     <text>Farm</text>
                 </item>
                 <item name="brownfield_site">
-                    <icon color="#f2efe9"/>
+                    <icon color="#9d9d6c"/>
                     <text>Brownfield site</text>
                 </item>
                 <item name="cemetery">
-                    <icon color="#f2efe9"/>
+                    <icon color="#aacbaf"/>
                     <text>Cemetery</text>
                 </item>
                 <item name="allotments">
-                    <icon color="#f2efe9"/>
+                    <icon color="#c8b084"/>
                     <text>Allotments</text>
                 </item>
                 <item name="sports_pitch">
-                    <icon color="#f2efe9"/>
+                    <icon color="#8ad3af"/>
                     <text>Sports pitch</text>
                 </item>
                 <item name="sports_centre">
-                    <icon color="#f2efe9"/>
+                    <icon color="#33cc99"/>
                     <text>Sports centre</text>
                 </item>
                 <item name="nature_reserve">
-                    <icon color="#f2efe9"/>
+                    <icon color="#abdf96"/>
                     <text>Nature reserve</text>
                 </item>
                 <item name="military_area">
-                    <icon color="#f2efe9"/>
+                    <icon color="#e18f8f"/>
                     <text>Military area</text>
                 </item>
                 <item name="school_university">
-                    <icon color="#f2efe9"/>
+                    <icon color="#f0f0d8"/>
                     <text>School, university</text>
                 </item>
             </section>
