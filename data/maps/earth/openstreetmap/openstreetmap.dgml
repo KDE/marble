@@ -109,6 +109,10 @@
                     <icon pixmap="maps/earth/openstreetmap/legend/tunnel.png"/>
                     <text>Tunnel</text>
                 </item>
+                <item name="railway_station">
+                    <icon pixmap="maps/earth/openstreetmap/legend/railwaystation.png"/>
+                    <text>Railway station</text>
+                </item>
             </section>
             <section name="areas" checkable="false" spacing="12">
                 <heading>Areas</heading>
@@ -193,21 +197,16 @@
                     <icon color="#e18f8f"/>
                     <text>Military area</text>
                 </item>
+            </section>
+            <section name="places" checkable="false" spacing="12">
+                <heading>Places of Interest</heading>
                 <item name="school_university">
                     <icon color="#f0f0d8"/>
                     <text>School, university</text>
                 </item>
-            </section>
-            <section name="buildings" checkable="false" spacing="12">
-                <heading>Buildings</heading>
-
                 <item name="significant_building">
                     <icon pixmap="maps/earth/openstreetmap/legend/significantbuilding.png"/>
                     <text>Significant Building</text>
-                </item>
-                <item name="railway_station">
-                    <icon pixmap="maps/earth/openstreetmap/legend/railwaystation.png"/>
-                    <text>Railway station</text>
                 </item>
                 <item name="summit_peak">
                     <icon pixmap="maps/earth/openstreetmap/legend/summitpeak.png"/>
