@@ -28,6 +28,20 @@
                 </texture>
             </layer>
         </map>
+        <settings>
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+        </settings>
         
         <legend>
             <section name="traffic" checkable="false" spacing="12">
@@ -213,6 +227,19 @@
                     <text>Summit, peak</text>
                 </item>
             </section>
+
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+
+            <section name="compass" checkable="true" connect="compass" spacing="12">
+                <heading>Compass</heading>
+            </section>
+
+            <section name="scalebar" checkable="true" connect="scalebar" spacing="12">
+                <heading>Scale Bar</heading>
+            </section>
+
         </legend>
     </document>
 </dgml>
