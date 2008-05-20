@@ -70,6 +70,11 @@ void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
     d->m_coordinate = GeoDataPoint( lon, lat, alt );
 }
 
+void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
+{
+    d->m_coordinate = point;
+}
+
 double GeoDataPlacemark::area() const
 {
     return d->m_area;

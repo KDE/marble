@@ -69,6 +69,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * @p latitude.
      */
     void setCoordinate( double longitude, double latitude, double altitude = 0 );
+    
+    /**
+    * Set the coordinate of the placemark with an @p GeoDataPoint.
+    */
+    void setCoordinate( const GeoDataPoint &point );
 
     /**
      * Return the area size of the feature in square km.
