@@ -13,12 +13,10 @@
 #include "FileStoragePolicy.h"
 
 // Qt
-#include <QtCore/QBuffer>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QtGui/QImage>
 
 // Marble
 #include "MarbleDirs.h"
@@ -48,7 +46,6 @@ bool FileStoragePolicy::fileExists( const QString &fileName ) const
 bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
 {
     const QString fullName( m_dataDirectory + '/' + fileName );
-    QByteArray const * convertedData = &data;
 
     // Create directory if it doesn't exist yet...
     QFileInfo info( fullName );
@@ -59,28 +56,17 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     if ( !QDir( localFileDirPath ).exists() )
         QDir::root().mkpath( localFileDirPath );
 
-    // convert images with format QImage::Format_Indexed8
-    QImage image;
-    QByteArray ba;
-    if ( image.loadFromData( data ) && image.format() == QImage::Format_Indexed8 ) {
-        qDebug() << "FileStoragePolicy::updateFile converting" << fullName;
-        QImage convertedImage = image.convertToFormat( QImage::Format_RGB32 );
-        qDebug() << "convertedImage.depth():" << convertedImage.depth();
-        QBuffer buffer( &ba );
-        buffer.open( QIODevice::WriteOnly );
-        convertedImage.save( &buffer );
-        convertedData = &ba;
-    }
-
     // ... and save the file content
     QFile file( fullName );
     if ( !file.open( QIODevice::WriteOnly ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
+        // qDebug() << "file.open" << m_errorMsg;
         return false;
     }
 
-    if ( !file.write( *convertedData ) ) {
+    if ( !file.write( data ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
+        // qDebug() << "file.write" << m_errorMsg;
         return false;
     }
 
