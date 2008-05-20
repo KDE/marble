@@ -76,7 +76,7 @@ TextureTile::~TextureTile()
 
 void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y)
 {
-//   qDebug() << "TextureTile::loadRawTile";
+//  qDebug() << "TextureTile::loadRawTile" << level << x << y;
   
   m_used = true; // Needed to avoid frequent deletion of tiles
   
@@ -156,8 +156,9 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
       }
       else {
 	QUrl sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, level, x, y );
-	qDebug() << "emit downloadTile(" << sourceUrl << relfilename << ");";
-	emit downloadTile( sourceUrl, relfilename, m_id.toString() );
+	QString destFileName = TileLoaderHelper::relativeTileFileName( textureLayer, level, x, y );
+	qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
+	emit downloadTile( sourceUrl, destFileName, m_id.toString() );
       }
   }
   

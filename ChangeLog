@@ -1,5 +1,12 @@
 2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TextureTile.cpp (loadRawTile)
+
+    Fix tile loading, do not use relfilename which might
+    have an old value.
+
+2008-05-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/FileStoragePolicy.cpp (updateFile)
 
     - Rename ptr -> convertedData.
