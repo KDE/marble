@@ -167,6 +167,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void updateGps();
    
  public Q_SLOTS:
+
     /**
      * @brief Sets the value of the slider.
      * @param zoom The new zoom value.
@@ -210,6 +211,9 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void projectionSelected( int projectionIndex );
 
  private Q_SLOTS:
+
+    void updateMapThemeView();
+
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);
 

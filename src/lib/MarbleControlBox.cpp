@@ -158,6 +158,9 @@ MarbleControlBox::~MarbleControlBox()
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
     d->m_mapThemeModel = mapThemeModel;
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
+    connect( d->m_mapThemeModel,       SIGNAL( rowsInserted ( QModelIndex, int, int) ),
+             this,                     SLOT( updateMapThemeView() ) );
+    updateMapThemeView();
 }
 
 
@@ -314,6 +317,10 @@ int MarbleControlBox::minimumZoom() const
     return d->m_widget->minimumZoom();
 }
 
+void MarbleControlBox::updateMapThemeView()
+{
+    selectTheme( d->m_widget->mapThemeId() );
+}
 
 void MarbleControlBox::changeZoom(int zoom)
 {
