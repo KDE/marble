@@ -1,5 +1,12 @@
 2008-05-21  Patrick Spendrin  <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataPolyStyle{.h,.cpp}
+    * src/lib/geodata/CMakeLists.txt
+    
+    Add PolyStyle
+    
+2008-05-21  Patrick Spendrin  <ps_ml@gmx.de>
+
     * src/lib/geodata/CMakeLists.txt
     
     Add LineStyle to CMakeLists.txt
