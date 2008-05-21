@@ -11,3 +11,5 @@ install_name_tool -change $HOME/dev/cpp/marble/build/src/lib/libmarblewidget.5.d
   @executable_path/lib/libmarblewidget.5.dylib \
   ${PREFIX}/Contents/MacOS/marble
 
+# Remove any debug etc symbols - comment this line out if you are debugging!
+strip -x ${PREFIX}/Contents/MacOS/marble

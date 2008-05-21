@@ -4,20 +4,30 @@
 # and make search paths for them relative to bundle
 
 #
-# Change base prefix of you built to another prefix
+# Change the next two lines to match your system
 #
 
-BASEPREFIX=/Applications
-PREFIX=${BASEPREFIX}/Marble.app/Contents/MacOS
-FRAMEWORKPREFIX=${BASEPREFIX}/Marble.app/Contents/Frameworks
-LIBPREFIX=${BASEPREFIX}/Marble.app/Contents/lib
-PLUGINPREFIX=${BASEPREFIX}/Marble.app/Contents/plugins
+UNIVERSAL_LIBS_PREFIX=/usr/local/qgis_universal_deps
+APP_PREFIX=/Applications/Marble.app
 
-QTPREFIX=/Library/Frameworks
+# Note: that if you are debugging you may want to disable the 
+# strip section at the end of this file.
+
+#------ You should not need to edit anything after this -----
+
+MACOS_PREFIX=${APP_PREFIX}/Contents/MacOS
+FRAMEWORKPREFIX=${APP_PREFIX}/Contents/Frameworks
+QTPREFIX=${UNIVERSAL_LIBS_PREFIX}/lib
+mkdir -p $MACOS_PREFIX
+mkdir -p $FRAMEWORKPREFIX
+pushd $PWD
+cd $FRAMEWORKPREFIX
+
 QTFRAMEWORKS="QtCore QtGui QtNetwork QtSvg QtXml"
 
+#
 # Copy supporting frameworks to application bundle
-mkdir -p $FRAMEWORKPREFIX
+#
 cd $FRAMEWORKPREFIX
 for FRAMEWORK in $QTFRAMEWORKS
 do
@@ -30,48 +40,85 @@ do
 done
 
 # Update path to supporting frameworks
-for FRAMEWORK in QtGui QtNetwork QtSvg QtXml 
+for FRAMEWORK in QtGui QtNetwork QtSvg QtXml
 do
-	install_name_tool -change QtCore.framework/Versions/4/QtCore \
+	install_name_tool -change ${QTPREFIX}/QtCore.framework/Versions/4/QtCore \
 		@executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
 done
-for FRAMEWORK in QtSvg 
+
+for FRAMEWORK in QtSvg
 do
-	install_name_tool -change QtGui.framework/Versions/4/QtGui \
+	install_name_tool -change ${QTPREFIX}/QtGui.framework/Versions/4/QtGui \
 		@executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
-	install_name_tool -change QtXml.framework/Versions/4/QtXml \
+	install_name_tool -change ${QTPREFIX}/QtXml.framework/Versions/4/QtXml \
 		@executable_path/../Frameworks/QtXml.framework/Versions/4/QtXml \
 		$FRAMEWORK.framework/Versions/4/$FRAMEWORK
 done
-cd ../
+
+#
+# Update Marble related libs and binaries
+#
+
+cd $MACOS_PREFIX
+for FILE in \
+  marble \
+  lib/libmarblewidget.0.5.0.dylib
+do
+ for FRAMEWORK in QtCore QtGui QtNetwork QtSvg QtXml 
+	do
+		install_name_tool -change ${QTPREFIX}/${FRAMEWORK}.framework/Versions/4/$FRAMEWORK \
+			@executable_path/../Frameworks/$FRAMEWORK.framework/Versions/4/$FRAMEWORK \
+			$MACOS_PREFIX/$FILE
+	done
+done
+
+
+
+#
+# Update qt imageformat plugin paths
+#
+
+
+cd ${MACOS_PREFIX}/../
 mkdir -p plugins/imageformats
 cd plugins/imageformats
+
 LIBJPEG=libjpeg.dylib
-LIBQJPEG=/Developer/Applications/Qt/plugins/imageformats/libqjpeg.dylib
+LIBQJPEG=${UNIVERSAL_LIBS_PREFIX}/plugins/imageformats/libqjpeg.dylib
 if test ! -f $LIBJPEG; then
 	cp $LIBQJPEG $LIBJPEG
 	# Update path to supporting libraries
-	install_name_tool -change QtCore.framework/Versions/4/QtCore \
+	install_name_tool -change ${QTPREFIX}/QtCore.framework/Versions/4/QtCore \
 		@executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
 		$LIBJPEG
-	install_name_tool -change QtGui.framework/Versions/4/QtGui \
+	install_name_tool -change ${QTPREFIX}/QtGui.framework/Versions/4/QtGui \
 		@executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
 		$LIBJPEG
-	install_name_tool -change $LNKJPEG @executable_path/../plugins/imageformats/$LIBJPEG $LIBJPEG
+	install_name_tool -change $LIBQJPEG @executable_path/../plugins/imageformats/$LIBJPEG 
+fi
+LIBGIF=libgif.dylib
+LIBQGIF=${UNIVERSAL_LIBS_PREFIX}/plugins/imageformats/libqgif.dylib
+if test ! -f $LIBGIF; then
+	cp $LIBQGIF $LIBGIF
+	# Update path to supporting libraries
+	install_name_tool -change ${QTPREFIX}/QtCore.framework/Versions/4/QtCore \
+		@executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+		$LIBGIF
+	install_name_tool -change ${QTPREFIX}/QtGui.framework/Versions/4/QtGui \
+		@executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+		$LIBGIF
+	install_name_tool -change $LIBQGIF @executable_path/../plugins/imageformats/$LIBGIF 
 fi
 
-cd ../../MacOS
-echo `pwd`
-for FILE in \
-	marble \
-	lib/libmarblewidget.0.5.0.dylib
+popd
+
+
+# You may want to comment out this section if you are trying to debug...
+# but enable it for final packaging because your bundle will be much
+# smaller
+for FRAMEWORK in $QTFRAMEWORKS
 do
-	for FRAMEWORK in QtCore QtGui QtNetwork QtSvg QtXml 
-	do
-		install_name_tool -change $FRAMEWORK.framework/Versions/4/$FRAMEWORK \
-			@executable_path/../Frameworks/$FRAMEWORK.framework/Versions/4/$FRAMEWORK \
-			$PREFIX/$FILE
-	done
+  strip -x ${APP_PREFIX}/Contents/Frameworks/${FRAMEWORK}.framework/Versions/4/${FRAMEWORK}
 done
