@@ -58,11 +58,11 @@ class TextureTile : public QObject {
 
     uint pixel( int x, int y ) const {
         if ( m_depth == 1 || m_depth == 8 ) {
-            if ( m_rawtile.format() == QImage::Format_Indexed8 )
-	        return m_rawtile.pixel( x, y );
+            if ( !m_isGrayscale )
+                return m_rawtile.pixel( x, y );
             else
                 return  jumpTable8[y][x];
-	}
+        }
         return  jumpTable32[y][x];
     }
 
@@ -85,6 +85,7 @@ class TextureTile : public QObject {
     QImage   m_rawtile;
 
     int      m_depth;
+    bool     m_isGrayscale;
     bool     m_used;
 };
 

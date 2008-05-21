@@ -63,6 +63,7 @@ TextureTile::TextureTile( TileId const& id )
       m_id(id),
       m_rawtile( QImage() ),
       m_depth(0),
+      m_isGrayscale(false),
       m_used(false)
 {
 }
@@ -195,6 +196,8 @@ void TextureTile::loadTile( bool requestTileUpdate )
             qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
             exit( -1 );
     }
+
+    m_isGrayscale = m_rawtile.isGrayscale();
 
     if ( requestTileUpdate ) {
         // qDebug() << "TileUpdate available";
