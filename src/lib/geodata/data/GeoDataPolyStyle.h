@@ -61,7 +61,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
      * @brief Return true if outlines of polygons get drawn
      * @return whether outline is drawn
      */
-    bool fill() const;
+    bool outline() const;
 
     /**
      * @brief  Serialize the style to a stream.
