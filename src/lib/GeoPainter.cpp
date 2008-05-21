@@ -424,6 +424,11 @@ void GeoPainter::drawEllipse ( int x, int y, int width, int height )
     QPainter::drawEllipse( x, y, width, height);
 }
 
+void GeoPainter::drawEllipse ( const QRectF & rectangle )
+{
+    QPainter::drawEllipse( rectangle );
+}
+
 void GeoPainter::drawImage ( const QRect &target, const QImage &image, const QRect &source, Qt::ImageConversionFlags flags )
 {
     QPainter::drawImage( target, image, source, flags );

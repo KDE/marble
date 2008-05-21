@@ -115,6 +115,11 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     double xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
+    double lon, lat;
+    viewport->centerCoordinates( lon, lat );
+    double x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
+    double y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
+
     painter->setPen( QPen( Qt::white ) );
     painter->setBrush( QBrush( Qt::transparent ) );
     painter->setRenderHint( QPainter::Antialiasing, false );
@@ -149,6 +154,14 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
         painter->drawRect( QRectF( xWest, xNorth, boxWidth, boxHeight ) );
     }
+
+    painter->setPen( QPen( Qt::white ) );
+    painter->setBrush( QBrush( Qt::white ) );
+
+    double circleRadius = 2.5;
+    painter->setRenderHint( QPainter::Antialiasing, true );
+    painter->drawEllipse( QRectF( x - circleRadius, y - circleRadius , 2 * circleRadius, 2 * circleRadius ) );
+
     painter->restore();
 
     return true;

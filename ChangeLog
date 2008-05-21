@@ -1,5 +1,19 @@
 2008-05-21  Torsten Rahn  <rahn@kde.org> 
 
+    * TextureTile.cpp:
+    * GeoPainter.{cpp,h}:
+
+    - Don't crash when zooming in very fast or 
+      when typing something into the search field on 
+      high zoom.
+
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.cpp:
+
+    - Add center indicator
+
+
+2008-05-21  Torsten Rahn  <rahn@kde.org> 
+
     * src/lib/SphericalScanlineTextureMapper.cpp:
 
     - Don't interpolate during TextureMapping at all 
