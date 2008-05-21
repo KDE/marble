@@ -131,16 +131,23 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                   double testx2 = origx2 * (double)( rowsCurrentLevel );
                   double testy2 = origy2 * (double)( columnsCurrentLevel );
 
-                  QPoint topleft( (int)( ( testx1 - (int)(testx1) ) * temptile.width() ),
-                                  (int)( ( testy1 - (int)(testy1) ) * temptile.height() ) );
-                  QPoint bottomright( (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1,
-                                      (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1 );
+                  // Determine the rectangular section of the previous tile data 
+                  // which we intend to copy from:
+                  int left   = (int)( ( testx1 - (int)(testx1) ) * temptile.width() );
+                  int top    = (int)( ( testy1 - (int)(testy1) ) * temptile.height() );
+                  int right  = (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1;
+                  int bottom = (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1;
+
+                  // Important: Scaling a null image during the next step would be fatal
+                  // So we make sure the width and height is at least 1.
+                  int rectWidth  = ( right - left > 1 ) ? right  - left : 1;
+                  int rectHeight = ( bottom - top > 1 ) ? bottom - top  : 1;
 
                   // This should not create any memory leaks as
                   // 'copy' and 'scaled' return a value (on the
                   // stack) which gets deep copied always into the
                   // same place for m_rawtile on the heap:
-                  temptile = temptile.copy( QRect( topleft, bottomright ) );
+                  temptile = temptile.copy( left, top, rectWidth, rectHeight );
                   temptile = temptile.scaled( tilesize ); // TODO: use correct size
                   //          qDebug() << "Finished scaling up the Temporary Tile.";
               }
