@@ -1,5 +1,12 @@
 2008-05-21  Torsten Rahn  <rahn@kde.org> 
 
+    * src/lib/SphericalScanlineTextureMapper.cpp:
+
+    - Don't interpolate during TextureMapping at all 
+      if we select Print Quality for still map rendering.
+
+2008-05-21  Torsten Rahn  <rahn@kde.org> 
+
     * src/lib/TextureTile.{cpp,h}:
 
     - Fixing two bugs with one patch:

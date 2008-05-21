@@ -15,6 +15,7 @@
 
 #include <QtCore/QDebug>
 
+#include "global.h"
 #include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
@@ -22,7 +23,6 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
-
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
 // every second scanline will be a deep copy of the first scanline.
@@ -75,6 +75,8 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     QImage       *canvasImage = viewParams->m_canvasImage;
     const qint64  radius      = viewParams->radius();
 
+    const bool printQuality = ( viewParams->viewport()->mapQuality() == Marble::Print );
+
     // Scanline based algorithm to texture map a sphere
 
     // Initialize needed variables:
@@ -94,6 +96,11 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Evaluate the degree of interpolation
     m_n        = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
+
+    if ( printQuality ) {
+        m_n = 1;    // Don't interpolate for print quality.
+    }
+
     m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
@@ -188,8 +195,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 }
                 else {
                     x += m_n - 1;
-
-                    m_interpolate = true;
+                    m_interpolate = !printQuality;
                     ++ncount;
                 } 
             }
