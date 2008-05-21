@@ -22,9 +22,9 @@
 
 #include "GeoShape.h"
 
-#include <KoImageData.h>
+//#include <KoImageData.h>
 #include <KoViewConverter.h>
-#include <KoImageCollection.h>
+//#include <KoImageCollection.h>
 #include <KoShapeLoadingContext.h>
 #include <KoOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
@@ -36,7 +36,8 @@
 #include <kdebug.h>
 
 #include <marble/MarbleMap.h>
-#include <marble/ClipPainter.h>
+#include <marble/GeoPainter.h>
+#include <marble/ViewParams.h>
 
 
 GeoShape::GeoShape()
@@ -69,12 +70,12 @@ void GeoShape::paint( QPainter& painter, const KoViewConverter& converter ) {
     QSize iSize = size().toSize();
 
     m_marbleMap->setSize( iSize.width(), iSize.height() );
-    
 
     QPixmap temp( iSize );
-    ClipPainter cp( &temp, false );
+    temp.fill( Qt::transparent );
+    GeoPainter gp( &temp, m_marbleMap->viewParams()->viewport(), false );
     QRect rect( QPoint(0,0), iSize );
-    m_marbleMap->paint( cp, rect );
+    m_marbleMap->paint( gp, rect );
 
    painter.drawPixmap(target.toRect(), temp);
 
@@ -91,29 +92,17 @@ void GeoShape::saveOdf( KoShapeSavingContext & context ) const
 */
     KoXmlWriter &writer = context.xmlWriter();
 
-    const bool nestedInFrame = context.isSet(KoShapeSavingContext::FrameOpened);
-    if( ! nestedInFrame ) {
-        writer.startElement( "draw:frame" );
-        saveOdfFrameAttributes(context);
-    }
-    saveOdfAttributes(context, 0); // required to clear the 'frameOpened' attribute on KoShape
-    
-    //writer.startElement("draw:object");
+    writer.startElement( "draw:frame" );
+    saveOdfAttributes( context, OdfAllAttributes );
 
-    writer.startElement("koffice:map");
-    // In the spec, only the xlink:href attribute is marked as mandatory, cool :)
-    //QString name = context.addImageForSaving( data->pixmap() );
-    //writer.addAttribute("xlink:href", name);
-    writer.addAttribute("mapThemeId", m_marbleMap->mapThemeId());
-    writer.addAttribute("zoom", m_marbleMap->zoom());
-    writer.addAttribute("centerLongitude", m_marbleMap->centerLongitude());
-    writer.addAttribute("centerLatitude", m_marbleMap->centerLatitude());
-    writer.endElement();
+        writer.startElement("koffice:map");
+            writer.addAttribute("mapThemeId", m_marbleMap->mapThemeId());
+            writer.addAttribute("zoom", m_marbleMap->zoom());
+            writer.addAttribute("centerLongitude", m_marbleMap->centerLongitude());
+            writer.addAttribute("centerLatitude", m_marbleMap->centerLatitude());
+        writer.endElement();
 
-    //writer.endElement();
-
-    if(! nestedInFrame)
-        writer.endElement(); // draw-frame
+    writer.endElement(); // draw-frame
 }
 
 bool GeoShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext &context )

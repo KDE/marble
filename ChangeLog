@@ -1,3 +1,23 @@
+2008-05-21  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/geoshape/GeoShapeFactory.cpp
+
+    - removed some obsolete code, fixed includes a bit
+
+    * src/geoshape/GeoShape.cpp
+
+    - updated to match current state of the api
+    - fixed some includes
+	
+    *  src/geoshape/CMakeLists.txt
+
+    - includes and link dirs are now set correctly
+    - linking is disabled at the moment because of linker error
+
+    * src/CMakeLists.txt
+
+    - enabled building the flake shape
+
 2008-05-21  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * marble/src/lib/TinyWebBrowser.cpp (loadResource)

@@ -19,13 +19,16 @@
  * Boston, MA 02110-1301, USA.
  */
 
+//own
 #include "GeoShapeFactory.h"
-
 #include "GeoShape.h"
-#include <KoXmlNS.h>
-#include "KoShapeControllerBase.h"
-#include "KoImageCollection.h"
 
+//koffice
+#include <KoXmlNS.h>
+#include <KoShapeControllerBase.h>
+//#include "KoImageCollection.h"
+
+//kde
 #include <klocale.h>
 #include <kdebug.h>
 
@@ -57,6 +60,6 @@ bool GeoShapeFactory::supports(const KoXmlElement & e) const
 
 void GeoShapeFactory::populateDataCenterMap(QMap<QString, KoDataCenter *>   & dataCenterMap) 
 {
-    KoImageCollection *imgCol = new KoImageCollection();
-    dataCenterMap["ImageCollection"] = imgCol;
+    //KoImageCollection *imgCol = new KoImageCollection();
+    //dataCenterMap["ImageCollection"] = imgCol;
 }
