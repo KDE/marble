@@ -86,6 +86,8 @@ Vector backend
  * Better scalability                                                   ----
 
 Features:
+ * Settings								----
+    - DMS  <-->  Degrees (decimal)					inge
  * Support for OpenStreetMap                                            JM
     - load tiles                                                        --
     - display tiles                                                     --
