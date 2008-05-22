@@ -54,12 +54,16 @@
 #endif
 
 
+// FIXME(IW): Why are the construct and setActiveRegion functions in
+//            MarbleWidgetPrivate??  That class is only supposed to
+//            hold data for binary compatibility, not have functions.
+
 
 class MarbleWidgetPrivate
 {
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
-        : m_parent( parent ), m_map( map ), 
+        : m_widget( parent ), m_map( map ), 
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_inputhandler( 0 ),
@@ -77,7 +81,7 @@ class MarbleWidgetPrivate
     void  construct();
     void  setActiveRegion();
 
-    MarbleWidget    *m_parent;
+    MarbleWidget    *m_widget;
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
@@ -134,68 +138,68 @@ MarbleWidget::~MarbleWidget()
 void MarbleWidgetPrivate::construct()
 {
     // Widget settings
-    m_parent->setMinimumSize( 200, 300 );
-    m_parent->setFocusPolicy( Qt::WheelFocus );
-    m_parent->setFocus( Qt::OtherFocusReason );
+    m_widget->setMinimumSize( 200, 300 );
+    m_widget->setFocusPolicy( Qt::WheelFocus );
+    m_widget->setFocus( Qt::OtherFocusReason );
 
     // Initialize the map and forward some signals.
-    m_map->setSize( m_parent->width(), m_parent->height() );
+    m_map->setSize( m_widget->width(), m_widget->height() );
     m_map->viewParams()->viewport()->setMapQuality( m_stillQuality ); 
 
-    m_parent->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
-                       m_parent, SIGNAL( projectionChanged( Projection ) ) );
+    m_widget->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
+                       m_widget, SIGNAL( projectionChanged( Projection ) ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
-    m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
-             m_parent, SIGNAL( themeChanged( QString ) ) );
-    m_parent->connect( m_model, SIGNAL( modelChanged() ),
-             m_parent, SLOT( updateChangedMap() ) );
+    m_widget->connect( m_model, SIGNAL( themeChanged( QString ) ),
+             m_widget, SIGNAL( themeChanged( QString ) ) );
+    m_widget->connect( m_model, SIGNAL( modelChanged() ),
+             m_widget, SLOT( updateChangedMap() ) );
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
-    m_parent->connect( m_map, SIGNAL( zoomChanged( int ) ),
-                       m_parent, SIGNAL( zoomChanged( int ) ) );
+    m_widget->connect( m_map, SIGNAL( zoomChanged( int ) ),
+                       m_widget, SIGNAL( zoomChanged( int ) ) );
 
 
     // Some part of the screen contents changed.
-    m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
-                       m_parent, SLOT( updateRegion( BoundingBox& ) ) );
+    m_widget->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
+                       m_widget, SLOT( updateRegion( BoundingBox& ) ) );
 
 
     // Set background: black.
-    m_parent->setPalette( QPalette ( Qt::black ) );
+    m_widget->setPalette( QPalette ( Qt::black ) );
 
     // Set whether the black space gets displayed or the earth gets simply 
     // displayed on the widget background.
-    m_parent->setAutoFillBackground( true );
+    m_widget->setAutoFillBackground( true );
 
     m_inputhandler = 0;
-    m_popupmenu    = new MarbleWidgetPopupMenu( m_parent, m_model );
+    m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
 
     // Handle mouse and keyboard input.
-    m_parent->setInputHandler( new MarbleWidgetDefaultInputHandler );
-    m_parent->setMouseTracking( true );
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_widget->setMouseTracking( true );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
     MeasureTool  *measureTool = m_map->measureTool();
-    m_parent->connect( m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
+    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
                        measureTool, SLOT( addMeasurePoint( double, double ) ) );
-    m_parent->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
+    m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
                        measureTool, SLOT( removeMeasurePoints( ) ) );
 
     // Track the GPS current point at timely intervals.
-    m_parent->connect( m_model, SIGNAL( timeout() ),
-                       m_parent, SLOT( updateGps() ) );
+    m_widget->connect( m_model, SIGNAL( timeout() ),
+                       m_widget, SLOT( updateGps() ) );
 
     // Show a progress dialog when the model calculates new map tiles.
-    m_parent->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
-                       m_parent, SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
+    m_widget->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&, const QString& ) ),
+                       m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&, const QString& ) ) );
 
     m_logZoom  = 0;
 
-    m_parent->goHome();
+    m_widget->goHome();
 
     // Widget translation
     QString      locale = QLocale::system().name();
@@ -210,16 +214,16 @@ void MarbleWidgetPrivate::construct()
 
     // FIXME: I suppose this should only exist in MarbleMap
 // #if 0
-    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                       m_parent, SLOT( updateSun() ) );
-    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                       m_parent, SLOT( centerSun() ) );
+    m_widget->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
+                       m_widget, SLOT( updateSun() ) );
+    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+                       m_widget, SLOT( centerSun() ) );
 // #endif
-    m_parent->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
-                       m_parent, SLOT( enableInput() ) );
+    m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
+                       m_widget, SLOT( enableInput() ) );
 
-//    m_parent->connect( m_model->layerDecorator(), SIGNAL( repaintMap() ),
-//                       m_parent, SLOT( repaintMap() ) );
+//    m_widget->connect( m_model->layerDecorator(), SIGNAL( repaintMap() ),
+//                       m_widget, SLOT( repaintMap() ) );
 }
 
 
@@ -743,19 +747,20 @@ const QRegion MarbleWidget::activeRegion()
 
 void MarbleWidgetPrivate::setActiveRegion()
 {
-    int zoom = m_parent->radius();
+    int zoom = m_widget->radius();
 
-    m_activeRegion = QRegion( 25, 25, m_parent->width() - 50, m_parent->height() - 50,
+    m_activeRegion = QRegion( 25, 25, m_widget->width() - 50, m_widget->height() - 50,
                                  QRegion::Rectangle );
 
-    switch( m_map->projection() ) {
+    switch  ( m_map->projection() ) {
         case Spherical:
-            if ( zoom < sqrt( (double)(m_parent->width() * m_parent->width() + m_parent->height() * m_parent->height()) ) / 2 ) {
+            if ( zoom < sqrt( (double)( m_widget->width() * m_widget->width()
+				       + m_widget->height() * m_widget->height()) ) / 2 ) {
 
-                m_activeRegion = QRegion( m_parent->width()  / 2 - zoom,
-                                            m_parent->height() / 2 - zoom,
-                                            2 * zoom, 2 * zoom,
-                                            QRegion::Ellipse );
+                m_activeRegion = QRegion( m_widget->width()  / 2 - zoom,
+					  m_widget->height() / 2 - zoom,
+					  2 * zoom, 2 * zoom,
+					  QRegion::Ellipse );
             }
             break;
 
@@ -766,9 +771,9 @@ void MarbleWidgetPrivate::setActiveRegion()
             m_map->viewParams()->centerCoordinates( centerLon, centerLat );
 
             int yCenterOffset =  (int)((double)( 2 * zoom ) / M_PI * centerLat);
-            int yTop          = m_parent->height() / 2 - zoom + yCenterOffset;
+            int yTop          = m_widget->height() / 2 - zoom + yCenterOffset;
             m_activeRegion = QRegion( 0, yTop,
-                                      m_parent->width(), 2 * zoom,
+                                      m_widget->width(), 2 * zoom,
                                       QRegion::Rectangle );
             break;
     }
