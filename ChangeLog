@@ -1,3 +1,11 @@
+2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp (constructor)
+
+    Check tileLoader and tileLoader->textureLayer() pointers before
+    accessing them. This hopefully fixes a bug reported by
+    Henry de Valence.
+
 2008-05-22  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/Projections/EquirectProjection.cpp: Clean up
