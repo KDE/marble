@@ -75,7 +75,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     QImage       *canvasImage = viewParams->m_canvasImage;
     const qint64  radius      = viewParams->radius();
 
-    const bool printQuality = ( viewParams->viewport()->mapQuality() == Marble::Print );
+    const bool highQuality = ( viewParams->viewport()->mapQuality() == Marble::High || viewParams->viewport()->mapQuality() == Marble::Print );
 
     // Scanline based algorithm to texture map a sphere
 
@@ -97,7 +97,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Evaluate the degree of interpolation
     m_n        = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
 
-    if ( printQuality ) {
+    if ( highQuality ) {
         m_n = 1;    // Don't interpolate for print quality.
     }
 
@@ -195,7 +195,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 }
                 else {
                     x += m_n - 1;
-                    m_interpolate = !printQuality;
+                    m_interpolate = !highQuality;
                     ++ncount;
                 } 
             }

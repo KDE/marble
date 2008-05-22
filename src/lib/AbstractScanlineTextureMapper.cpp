@@ -32,8 +32,8 @@
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : QObject( parent ),
-      m_posX( 0 ),
-      m_posY( 0 ),
+      m_posX( 0.0 ),
+      m_posY( 0.0 ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),
@@ -194,7 +194,8 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
 
 void AbstractScanlineTextureMapper::pixelValue(const double& lon,
                                                const double& lat, 
-                                               QRgb* scanLine)
+                                               QRgb* scanLine,
+                                               bool smooth )
 {
     // Convert the lon and lat coordinates of the position on the scanline
     // measured in radian to the pixel position of the requested 
@@ -202,22 +203,28 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
 
 //     qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
     
-    m_posX = (int)( m_toTileCoordinatesLon + rad2PixelX( lon ));
-    m_posY = (int)( m_toTileCoordinatesLat + rad2PixelY( lat ));
+    m_posX = m_toTileCoordinatesLon + rad2PixelX( lon );
+    m_posY = m_toTileCoordinatesLat + rad2PixelY( lat );
 
     // Most of the time while moving along the scanLine we'll stay on the 
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
 
-    if ( m_posX  >= m_tileLoader->tileWidth() 
-         || m_posX < 0
-         || m_posY >= m_tileLoader->tileHeight()
-         || m_posY < 0 )
+    if ( m_posX  >= (double)( m_tileLoader->tileWidth() ) 
+         || m_posX < 0.0
+         || m_posY >= (double)( m_tileLoader->tileHeight() )
+         || m_posY < 0.0 )
     {
         nextTile();
     }
 
-    *scanLine = m_tile->pixel( m_posX, m_posY ); 
+    if ( !smooth ) {
+        *scanLine  = m_tile->pixel( m_posX, m_posY );
+    }
+    else {
+        QRgb topLeftValue = m_tile->pixel( m_posX, m_posY );
+        *scanLine = bilinearSmooth( topLeftValue );
+    }
 }
 
 void AbstractScanlineTextureMapper::nextTile()
@@ -266,6 +273,66 @@ void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
     m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->textureLayer() ) + 1 ;
     qDebug() << "MaxTileLevel: " << m_maxTileLevel;
+}
+
+QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
+{
+    double fY = m_posY - (int)(m_posY);
+
+    // Interpolation in y-direction
+    if ( ( m_posY + 1.0 ) < m_tileLoader->tileHeight() ) {
+
+        QRgb bottomLeftValue  =  m_tile->pixel( m_posX , ( m_posY + 1 ) );
+
+        // blending the color values of the top left and bottom left point
+        int ml_red   = (int)( fY * qRed  ( topLeftValue  ) + ( 1.0 - fY ) * qRed  ( bottomLeftValue  ) );
+        int ml_green = (int)( fY * qGreen( topLeftValue  ) + ( 1.0 - fY ) * qGreen( bottomLeftValue  ) );
+        int ml_blue  = (int)( fY * qBlue ( topLeftValue  ) + ( 1.0 - fY ) * qBlue ( bottomLeftValue  ) );
+
+        // Interpolation in x-direction
+        if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
+
+            double fX = m_posX - (int)(m_posX);
+
+            QRgb topRightValue    =  m_tile->pixel( ( m_posX + 1 ), ( m_posY     ) );
+            QRgb bottomRightValue =  m_tile->pixel( ( m_posX + 1 ), ( m_posY + 1 ) );
+
+            // blending the color values of the top right and bottom right point
+            int mr_red   = (int)( fY * qRed  ( topRightValue ) + ( 1.0 - fY ) * qRed  ( bottomRightValue ) );
+            int mr_green = (int)( fY * qGreen( topRightValue ) + ( 1.0 - fY ) * qGreen( bottomRightValue ) );
+            int mr_blue  = (int)( fY * qBlue ( topRightValue ) + ( 1.0 - fY ) * qBlue ( bottomRightValue ) );
+    
+            // blending the color values of the resulting middle left 
+            // and middle right points
+            int mm_red   = (int)( fX * ml_red   + ( 1.0 - fX ) * mr_red   );
+            int mm_green = (int)( fX * ml_green + ( 1.0 - fX ) * mr_green );
+            int mm_blue  = (int)( fX * ml_blue  + ( 1.0 - fX ) * mr_blue  );
+    
+            return qRgb( mm_red, mm_green, mm_blue );
+        }
+        else {
+            return qRgb( ml_red, ml_green, ml_blue );
+        }
+    }
+    else {
+
+        // Interpolation in x-direction
+        if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
+
+            double fX = m_posX - (int)(m_posX);
+
+            QRgb topRightValue    =  m_tile->pixel( ( m_posX + 1 ), ( m_posY     ) );
+
+            // blending the color values of the top left and top right point
+            int tm_red   = (int)( fX * qRed  ( topLeftValue ) + ( 1.0 - fX ) * qRed  ( topRightValue ) );
+            int tm_green = (int)( fX * qGreen( topLeftValue ) + ( 1.0 - fX ) * qGreen( topRightValue ) );
+            int tm_blue  = (int)( fX * qBlue ( topLeftValue ) + ( 1.0 - fX ) * qBlue ( topRightValue ) );
+
+            return qRgb( tm_red, tm_green, tm_blue );
+        }
+    }
+
+    return topLeftValue;
 }
 
 #include "AbstractScanlineTextureMapper.moc"

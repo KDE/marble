@@ -52,7 +52,8 @@ public:
     void notifyMapChanged();
 
  protected:
-    void pixelValue(const double& lon, const double& lat, QRgb* scanLine);
+    void pixelValue( const double& lon, const double& lat, 
+                     QRgb* scanLine, bool smooth = false );
     void nextTile();
     void detectMaxTileLevel();
     void tileLevelInit( int tileLevel );
@@ -64,6 +65,8 @@ public:
     // ( with origin in center, measured in pixel) 
     double rad2PixelX( const double longitude ) const;
     double rad2PixelY( const double latitude ) const;
+
+    QRgb bilinearSmooth( const QRgb& topLeftValue ) const;
 
     // Coordinates on the tile
     int     m_posX;

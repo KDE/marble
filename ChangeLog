@@ -1,13 +1,21 @@
+2008-05-22  Torsten Rahn  <rahn@kde.org> 
+
+    * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
+    * src/lib/SphericalScanlineTextureMapper.cpp:
+
+    - Start of adding bilinear pixel interpolation to 
+      improve image quality. Doesn't work yet.
+
 2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/TileLoader.cpp (setTextureLayer)
+    * src/lib/TileLoader.cpp (setTextureLayer):
 
     Small cleanup.
     Do not allocate tile dynamically since it is a local variable.
 
 2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/SphericalScanlineTextureMapper.cpp (mapTexture)
+    * src/lib/SphericalScanlineTextureMapper.cpp: (mapTexture)
 
     Small cleanup.
     Use dedicated Quaternion constructor instead of default constructor
@@ -15,7 +23,7 @@
 
 2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/AbstractScanlineTextureMapper.cpp (constructor)
+    * src/lib/AbstractScanlineTextureMapper.cpp: (constructor)
 
     Check tileLoader and tileLoader->textureLayer() pointers before
     accessing them. This hopefully fixes a bug reported by
