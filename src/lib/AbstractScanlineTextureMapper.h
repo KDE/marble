@@ -69,8 +69,8 @@ public:
     QRgb bilinearSmooth( const QRgb& topLeftValue ) const;
 
     // Coordinates on the tile
-    int     m_posX;
-    int     m_posY;
+    double     m_posX;
+    double     m_posY;
 
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 

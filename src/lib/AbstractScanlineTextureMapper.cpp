@@ -277,6 +277,7 @@ void AbstractScanlineTextureMapper::detectMaxTileLevel()
 
 QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
 {
+
     double fY = m_posY - (int)(m_posY);
 
     // Interpolation in y-direction
@@ -285,9 +286,9 @@ QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) c
         QRgb bottomLeftValue  =  m_tile->pixel( m_posX , ( m_posY + 1 ) );
 
         // blending the color values of the top left and bottom left point
-        int ml_red   = (int)( fY * qRed  ( topLeftValue  ) + ( 1.0 - fY ) * qRed  ( bottomLeftValue  ) );
-        int ml_green = (int)( fY * qGreen( topLeftValue  ) + ( 1.0 - fY ) * qGreen( bottomLeftValue  ) );
-        int ml_blue  = (int)( fY * qBlue ( topLeftValue  ) + ( 1.0 - fY ) * qBlue ( bottomLeftValue  ) );
+        int ml_red   = (int)( ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  ) );
+        int ml_green = (int)( ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  ) );
+        int ml_blue  = (int)( ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  ) );
 
         // Interpolation in x-direction
         if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
@@ -298,15 +299,15 @@ QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) c
             QRgb bottomRightValue =  m_tile->pixel( ( m_posX + 1 ), ( m_posY + 1 ) );
 
             // blending the color values of the top right and bottom right point
-            int mr_red   = (int)( fY * qRed  ( topRightValue ) + ( 1.0 - fY ) * qRed  ( bottomRightValue ) );
-            int mr_green = (int)( fY * qGreen( topRightValue ) + ( 1.0 - fY ) * qGreen( bottomRightValue ) );
-            int mr_blue  = (int)( fY * qBlue ( topRightValue ) + ( 1.0 - fY ) * qBlue ( bottomRightValue ) );
+            int mr_red   = (int)( ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue ) );
+            int mr_green = (int)( ( 1.0 - fY ) * qGreen( topRightValue ) + fY * qGreen( bottomRightValue ) );
+            int mr_blue  = (int)( ( 1.0 - fY ) * qBlue ( topRightValue ) + fY * qBlue ( bottomRightValue ) );
     
             // blending the color values of the resulting middle left 
             // and middle right points
-            int mm_red   = (int)( fX * ml_red   + ( 1.0 - fX ) * mr_red   );
-            int mm_green = (int)( fX * ml_green + ( 1.0 - fX ) * mr_green );
-            int mm_blue  = (int)( fX * ml_blue  + ( 1.0 - fX ) * mr_blue  );
+            int mm_red   = (int)( ( 1.0 - fX ) * ml_red   + fX * mr_red   );
+            int mm_green = (int)( ( 1.0 - fX ) * ml_green + fX * mr_green );
+            int mm_blue  = (int)( ( 1.0 - fX ) * ml_blue  + fX * mr_blue  );
     
             return qRgb( mm_red, mm_green, mm_blue );
         }
@@ -315,18 +316,20 @@ QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) c
         }
     }
     else {
-
         // Interpolation in x-direction
         if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
 
             double fX = m_posX - (int)(m_posX);
 
+            if ( fX == 0.0 ) 
+                return topLeftValue;
+
             QRgb topRightValue    =  m_tile->pixel( ( m_posX + 1 ), ( m_posY     ) );
 
             // blending the color values of the top left and top right point
-            int tm_red   = (int)( fX * qRed  ( topLeftValue ) + ( 1.0 - fX ) * qRed  ( topRightValue ) );
-            int tm_green = (int)( fX * qGreen( topLeftValue ) + ( 1.0 - fX ) * qGreen( topRightValue ) );
-            int tm_blue  = (int)( fX * qBlue ( topLeftValue ) + ( 1.0 - fX ) * qBlue ( topRightValue ) );
+            int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
+            int tm_green = (int)( ( 1.0 - fX ) * qGreen( topLeftValue ) + fX * qGreen( topRightValue ) );
+            int tm_blue  = (int)( ( 1.0 - fX ) * qBlue ( topLeftValue ) + fX * qBlue ( topRightValue ) );
 
             return qRgb( tm_red, tm_green, tm_blue );
         }

@@ -233,7 +233,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
 //            if ( crossingPoleArea == false )
             if ( x < m_imageWidth ) 
-                pixelValue( lon, lat, m_scanLine );
+                pixelValue( lon, lat, m_scanLine, highQuality );
 
             m_prevLon = lon;
             m_prevLat = lat; // preparing for interpolation
