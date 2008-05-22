@@ -10,6 +10,11 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 
 ####################################################
+# Build the GeoShape for KOffice
+# currently this is testing only - please be aware that a FindKOffice is needed instead!
+option(BUILD_WITH_GEOSHAPE "build the KOffice Geoshape plugin - this requires to install the KOffice headers" OFF)
+
+####################################################
 # User configurable options
 if(KDE4_FOUND)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
