@@ -37,7 +37,7 @@ class QImage;
  *
  */
 
-class ViewParams
+class MARBLE_EXPORT ViewParams
 {
  public:
     ViewParams( );
