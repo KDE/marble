@@ -1,5 +1,8 @@
 2008-05-22  Inge Wallin  <inge@lysator.liu.se>
 
+	* src/lib/Projections/EquirectProjection.cpp: Clean up
+	(screenCoordinates): Don't always return true.
+	
 	Cleaning: m_parent is not a parent, so call it something else.
 	* src/lib/MarbleWidget.cpp (class MarbleWidgetPrivate::m_parent):
 	renamed into m_widget
