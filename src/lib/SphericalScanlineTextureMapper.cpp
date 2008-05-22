@@ -211,8 +211,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
-            Quaternion qpos;
-            qpos.set( 0.0, qx, qy, qz );
+            Quaternion qpos( 0.0, qx, qy, qz );
             qpos.rotateAroundAxis( planetAxisMatrix );
 
             qpos.getSpherical( lon, lat );

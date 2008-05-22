@@ -1,5 +1,13 @@
 2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/SphericalScanlineTextureMapper.cpp (mapTexture)
+
+    Small cleanup.
+    Use dedicated Quaternion constructor instead of default constructor
+    and call to set method.
+
+2008-05-22  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp (constructor)
 
     Check tileLoader and tileLoader->textureLayer() pointers before
