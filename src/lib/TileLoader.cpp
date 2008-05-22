@@ -104,15 +104,13 @@ void TileLoader::setTextureLayer( GeoSceneTexture *textureLayer )
 
     d->m_textureLayer = textureLayer;
 
-    TextureTile *tile = new TextureTile( TileId() );
-    tile->loadRawTile(d->m_textureLayer, 0, 0, 0);
+    TileId id;
+    TextureTile tile( id );
+    tile.loadRawTile( d->m_textureLayer, 0, 0, 0 );
 
     // We assume that all tiles have the same size. TODO: check to be safe
-    d->m_tileWidth  = tile->rawtile().width();
-    d->m_tileHeight = tile->rawtile().height();
-
-    qDebug() << "TileLoader::setTextureLayer: delete tile";
-    delete tile;
+    d->m_tileWidth  = tile.rawtile().width();
+    d->m_tileHeight = tile.rawtile().height();
 }
 
 void TileLoader::resetTilehash()
