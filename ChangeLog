@@ -1,3 +1,9 @@
+2008-05-22  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/lib/MarbleControlBox.cpp
+
+    - fixed crash when ControlBox is used without a MarbleWidget
+
 2008-05-22  Torsten Rahn  <rahn@kde.org> 
 
     * data/credits_data.html:

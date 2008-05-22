@@ -536,11 +536,19 @@ void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 
 void MarbleControlBox::adjustForAnimation()
 {
+    // TODO: use signals here as well 
+    if ( !d->m_widget )
+        return;
+
     d->m_widget->setViewContext( Marble::Animation );
 }
 
 void MarbleControlBox::adjustForStill()
 {
+    // TODO: use signals here as well
+    if ( !d->m_widget )
+        return;
+
     d->m_widget->setViewContext( Marble::Still );
 
     if ( d->m_widget->mapQuality( Marble::Still )
