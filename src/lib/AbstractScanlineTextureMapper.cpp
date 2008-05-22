@@ -201,7 +201,7 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     // measured in radian to the pixel position of the requested 
     // coordinate on the current tile.
 
-//     qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
+    // qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
     
     m_posX = m_toTileCoordinatesLon + rad2PixelX( lon );
     m_posY = m_toTileCoordinatesLat + rad2PixelY( lat );
@@ -219,10 +219,10 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
     }
 
     if ( !smooth ) {
-        *scanLine  = m_tile->pixel( m_posX, m_posY );
+        *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
     }
     else {
-        QRgb topLeftValue = m_tile->pixel( m_posX, m_posY );
+        QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
         *scanLine = bilinearSmooth( topLeftValue );
     }
 }
@@ -232,11 +232,11 @@ void AbstractScanlineTextureMapper::nextTile()
     // Move from tile coordinates to global texture coordinates 
     // ( with origin in upper left corner, measured in pixel) 
 
-    int lon = m_posX + m_tilePosX;
+    int lon = (int)(m_posX + m_tilePosX);
     if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
     if ( lon < 0 ) lon += m_maxGlobalX;
 
-    int lat = m_posY + m_tilePosY;
+    int lat = (int)(m_posY + m_tilePosY);
     if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
     if ( lat < 0 ) lat += m_maxGlobalY;
 

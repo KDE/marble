@@ -42,7 +42,7 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 
  protected:
     void pixelValueApprox(const double& lon, const double& lat,
-                          QRgb *scanLine);
+                          QRgb *scanLine, bool smooth );
 
     bool         m_interpolate;
     int          m_nBest;

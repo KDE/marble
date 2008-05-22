@@ -76,6 +76,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const qint64  radius      = viewParams->radius();
 
     const bool highQuality = ( viewParams->viewport()->mapQuality() == Marble::High || viewParams->viewport()->mapQuality() == Marble::Print );
+    const bool printQuality = ( viewParams->viewport()->mapQuality() == Marble::Print );
 
     // Scanline based algorithm to texture map a sphere
 
@@ -97,7 +98,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Evaluate the degree of interpolation
     m_n        = ( m_imageRadius < radius * radius ) ? m_nBest : 8;
 
-    if ( highQuality ) {
+    if ( printQuality ) {
         m_n = 1;    // Don't interpolate for print quality.
     }
 
@@ -195,7 +196,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 }
                 else {
                     x += m_n - 1;
-                    m_interpolate = !highQuality;
+                    m_interpolate = !printQuality;
                     ++ncount;
                 } 
             }
@@ -220,7 +221,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             // xIpLeft to xIpRight
 
             if ( m_interpolate ) {
-                pixelValueApprox( lon, lat, m_scanLine );
+                pixelValueApprox( lon, lat, m_scanLine, highQuality );
 
                 m_scanLine += ( m_n - 1 );
             }
@@ -268,8 +269,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 // texturemapping, so we move towards integer math to improve speed.
 
 void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
-						      const double& lat,
-						      QRgb *scanLine)
+						      const double& lat, QRgb *scanLine, bool smooth )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -280,8 +280,8 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const int itStepLon = (int)( ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse * 128.0 );
-        const int itStepLat = (int)( ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse * 128.0 );
+        const double itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
+        const double itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
 
         m_prevLon = rad2PixelX( m_prevLon );
         m_prevLat = rad2PixelY( m_prevLat );
@@ -290,26 +290,32 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
         // AbstractScanlineTextureMapper::pixelValue(...) here and 
         // calculate the performance critical issues via integers
 
-        int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
-        int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+        double itLon = m_prevLon + m_toTileCoordinatesLon;
+        double itLat = m_prevLat + m_toTileCoordinatesLat;
 
         for ( int j=1; j < m_n; ++j ) {
-            m_posX = ( itLon + itStepLon * j ) >> 7;
-            m_posY = ( itLat + itStepLat * j ) >> 7;
+            m_posX = itLon + itStepLon * j;
+            m_posY = itLat + itStepLat * j;
 
             if (  m_posX >= m_tileLoader->tileWidth() 
-               || m_posX < 0
+               || m_posX < 0.0
                || m_posY >= m_tileLoader->tileHeight()
-               || m_posY < 0 )
+               || m_posY < 0.0 )
             {
                 nextTile();
-                itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
-                itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
-                m_posX = ( itLon + itStepLon * j ) >> 7;
-                m_posY = ( itLat + itStepLat * j ) >> 7;
+                itLon = m_prevLon + m_toTileCoordinatesLon;
+                itLat = m_prevLat + m_toTileCoordinatesLat;
+                m_posX = itLon + itStepLon * j;
+                m_posY = itLat + itStepLat * j;
             }
 
-            *scanLine = m_tile->pixel( m_posX, m_posY ); 
+            if ( !smooth ) {
+                *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+            }
+            else {
+                QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+                *scanLine = bilinearSmooth( topLeftValue );
+            }
 
             ++scanLine;
         }
@@ -332,7 +338,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
                 m_prevLon -= stepLon;
                 if ( m_prevLon <= -M_PI ) 
                     m_prevLon += TWOPI;
-                pixelValue( m_prevLon, m_prevLat, scanLine );
+                pixelValue( m_prevLon, m_prevLat, scanLine, smooth );
                 ++scanLine;
             }
         }
@@ -348,7 +354,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
                 double  evalLon = curStepLon;
                 if ( curStepLon <= -M_PI )
                     evalLon += TWOPI;
-                pixelValue( evalLon, m_prevLat, scanLine);
+                pixelValue( evalLon, m_prevLat, scanLine, smooth );
                 ++scanLine;
             }
         }

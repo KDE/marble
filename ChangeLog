@@ -1,3 +1,11 @@
+2008-05-22  Torsten Rahn  <rahn@kde.org> 
+
+    * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
+    * src/lib/SphericalScanlineTextureMapper.{cpp,h}:
+
+    -.Improve speed for the subpixel interpolated rendering.
+    - Now we need to speed up the non-subpixel-interpolated case again ...
+
 2008-05-22  Simon Schmeisser  <mail_to_wrt@gmx.de>
 
     * src/lib/MarbleControlBox.cpp

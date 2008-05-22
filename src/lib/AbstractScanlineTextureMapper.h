@@ -12,6 +12,7 @@
 #ifndef ABSTRACTSCANLINETEXTUREMAPPER_H
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
+#include <QtCore/QDebug>
 #include <QtCore/QObject>
 #include <QtGui/QColor>
 
@@ -172,13 +173,12 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude )
 
 inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
 {
-
     double fY = m_posY - (int)(m_posY);
 
     // Interpolation in y-direction
     if ( ( m_posY + 1.0 ) < m_tileLoader->tileHeight() ) {
 
-        QRgb bottomLeftValue  =  m_tile->pixel( m_posX , ( m_posY + 1 ) );
+        QRgb bottomLeftValue  =  m_tile->pixel( (int)(m_posX), (int)(m_posY + 1.0) );
 
         // blending the color values of the top left and bottom left point
         int ml_red   = (int)( ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  ) );
@@ -190,8 +190,8 @@ inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftVa
 
             double fX = m_posX - (int)(m_posX);
 
-            QRgb topRightValue    =  m_tile->pixel( ( m_posX + 1 ), ( m_posY     ) );
-            QRgb bottomRightValue =  m_tile->pixel( ( m_posX + 1 ), ( m_posY + 1 ) );
+            QRgb topRightValue    =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY      ) );
+            QRgb bottomRightValue =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY + 1.0) );
 
             // blending the color values of the top right and bottom right point
             int mr_red   = (int)( ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue ) );
@@ -219,7 +219,7 @@ inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftVa
             if ( fX == 0.0 ) 
                 return topLeftValue;
 
-            QRgb topRightValue    =  m_tile->pixel( ( m_posX + 1 ), ( m_posY     ) );
+            QRgb topRightValue    =  m_tile->pixel( (int)( m_posX + 1 ), (int)( m_posY     ) );
 
             // blending the color values of the top left and top right point
             int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
