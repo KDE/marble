@@ -1210,19 +1210,19 @@
 
 2008-05-04  Simon Schmeisser <mail_to_wrt@gmx.de>
 
-M      src/lib/PluginManager.h
-M      src/lib/MeasureTool.cpp
-M      src/lib/MarbleWidget.cpp
-M      src/lib/VectorComposer.h
-M      src/lib/MarbleWidget.h
-M      src/lib/MarbleLayerInterface.h
-M      src/lib/VectorMap.cpp
-M      src/lib/MarbleMap.cpp
-M      src/lib/GeoPainter.cpp
-M      src/lib/MarbleModel.h
-M      src/lib/PluginManager.cpp
-M      src/lib/MarbleModel.cpp
-	
+    * src/lib/PluginManager.h
+    * src/lib/MeasureTool.cpp
+    * src/lib/MarbleWidget.cpp
+    * src/lib/VectorComposer.h
+    * src/lib/MarbleWidget.h
+    * src/lib/MarbleLayerInterface.h
+    * src/lib/VectorMap.cpp
+    * src/lib/MarbleMap.cpp
+    * src/lib/GeoPainter.cpp
+    * src/lib/MarbleModel.h
+    * src/lib/PluginManager.cpp
+    * src/lib/MarbleModel.cpp
+
 2008-05-04  Torsten Rahn  <rahn@kde.org>
 
     * src/plugins/marble/test/MarbleTestPlugin.{cpp,h}:
