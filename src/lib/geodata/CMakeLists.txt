@@ -97,9 +97,27 @@ SET( geodata_handlers_gpx_SRCS
    )
 
 SET( geodata_handlers_kml_SRCS
-        geodata/handlers/kml/KMLElementDictionary.cpp
+        geodata/handlers/kml/KMLColorModeTagHandler.cpp
+        geodata/handlers/kml/KMLColorTagHandler.cpp
+        geodata/handlers/kml/KMLCoordinatesTagHandler.cpp
         geodata/handlers/kml/KMLDocumentTagHandler.cpp
+        geodata/handlers/kml/KMLElementDictionary.cpp
+        geodata/handlers/kml/KMLFillTagHandler.cpp
         geodata/handlers/kml/KMLFolderTagHandler.cpp
+        geodata/handlers/kml/KMLHeadingTagHandler.cpp
+        geodata/handlers/kml/KMLHotSpotTagHandler.cpp
+        geodata/handlers/kml/KMLHrefTagHandler.cpp
+        geodata/handlers/kml/KMLIconStyleTagHandler.cpp
+        geodata/handlers/kml/KMLIconTagHandler.cpp
+        geodata/handlers/kml/KMLLabelStyleTagHandler.cpp
+        geodata/handlers/kml/KMLLineStyleTagHandler.cpp
+        geodata/handlers/kml/KMLOutlineTagHandler.cpp
+        geodata/handlers/kml/KMLPlacemarkTagHandler.cpp
+        geodata/handlers/kml/KMLPointTagHandler.cpp
+        geodata/handlers/kml/KMLPolyStyleTagHandler.cpp
+        geodata/handlers/kml/KMLStyleTagHandler.cpp
+        geodata/handlers/kml/KMLWidthTagHandler.cpp
+        geodata/handlers/kml/KML_scaleTagHandler.cpp
    )
 
 SET( geodata_SRCS

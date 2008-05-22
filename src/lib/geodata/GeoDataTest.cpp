@@ -46,14 +46,14 @@ int main(int argc, char** argv)
 
     // Expect document as first command line argument
     if (app.arguments().size() <= 1) {
-        qFatal("Pass file name as first argument!");
+        qWarning("Pass file name as first argument!");
         return -1;
     }
 
     // Check whether file exists
     QFile file(app.arguments().at(1));
     if (!file.exists()) {
-        qFatal("File does not exist!");
+        qWarning("File does not exist!");
         return -1;
     }
 
@@ -72,12 +72,12 @@ int main(int argc, char** argv)
         parser = new GeoDataParser(GeoData_GPX);
 
     if (!parser) {
-        qFatal("Could not determine file format!");
+        qWarning("Could not determine file format!");
         return -1;
     }
 
     if (!parser->read(&file)) {
-        qFatal("Could not parse file!");
+        qWarning("Could not parse file!");
         return -1;
     }
 
@@ -85,10 +85,10 @@ int main(int argc, char** argv)
     GeoDocument* document = parser->releaseDocument();
     Q_ASSERT(document);
 
-    if (document->isGeoDataDocument())
+    if (document->isGeoDataDocument()) {
+        GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>(document);
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
-    else if (document->isGeoSceneDocument())
-    {
+    } else if (document->isGeoSceneDocument()) {
         GeoSceneDocument *sceneDocument = static_cast<GeoSceneDocument*>(document);
         qDebug() << "Name: " << sceneDocument->head()->name(); 
         qDebug() << "Target: " << sceneDocument->head()->target(); 

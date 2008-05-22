@@ -1,3 +1,31 @@
+2008-05-22  Patrick Spendrin  <ps_ml@gmx.de>
+
+    * src/lib/geodata/handlers/kml/KMLColorModeTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLColorTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLCoordinatesTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLDocumentTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLElementDictionary{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLFillTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLHeadingTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLHotSpotTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLHrefTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLIconStyleTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLIconTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLLabelStyleTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLLineStyleTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLOutlineTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLPlacemarkTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLPointTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLPolyStyleTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLStyleTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KMLWidthTagHandler{.h,.cpp}
+    * src/lib/geodata/handlers/kml/KML_scaleTagHandler{.h,.cpp}
+    * src/lib/geodata/GeoDataTest.cpp
+    * src/lib/geodata/CMakeLists.txt
+    
+    - add new KML tag handlers (first bunch)
+
 2008-05-22  Simon Schmeisser <mail_to_wrt@gmx.de>
 
     * src/lib/ViewParams.h
