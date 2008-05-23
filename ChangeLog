@@ -1,5 +1,17 @@
 2008-05-23  Inge Wallin  <inge@lysator.liu.se>
 
+	Move handling of the active region to the projection helpers.
+	* Projections/AbstractProjectionHelper.{h,cpp},
+	* Projections/SphericalProjectionHelper.{h,cpp},
+	* Projections/MercatorProjectionHelper.{h,cpp},
+	* Projections/EquirectProjectionHelper.{h,cpp}:
+	(activeRegion): moved from MarbleWidget
+	(setActiveRegion): moved from MarbleWidget
+	* Projections/AbstractProjectionHelper_p.h: new file
+	* src/lib/MarbleWidget.cpp (activeRegion): call function in the
+	projection helpers
+	(setActiveRegion): call function in the projection helpers 
+
 	* src/lib/MarbleWidgetInputHandler.cpp (restoreViewContext): Stop
 	the timer when we redraw with high quality.  It seems the timer
 	otherwise refires every X milliseconds.

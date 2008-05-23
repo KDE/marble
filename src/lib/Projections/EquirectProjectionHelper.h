@@ -44,6 +44,8 @@ class EquirectProjectionHelper : public AbstractProjectionHelper
 		    QBrush         &brush,
 		    bool            antialiasing );
 
+    void setActiveRegion( ViewportParams *viewport );
+
  private:
     //EquirectProjectionPrivate  * const d;
 };

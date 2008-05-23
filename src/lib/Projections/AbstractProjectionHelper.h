@@ -28,7 +28,7 @@
 
 class GeoPainter;
 class ViewportParams;
-
+class AbstractProjectionHelperPrivate;
 
 /**
  * @short A base class for projection helpers in Marble.
@@ -50,10 +50,13 @@ class AbstractProjectionHelper
 			    ViewportParams *viewport, 
 			    QPen           &pen,
 			    QBrush         &brush,
-			    bool            antialiasing );
+			    bool            antialiasing ) = 0;
+
+    virtual void setActiveRegion( ViewportParams *viewport ) = 0;
+    virtual const QRegion activeRegion() const;
 
  protected:
-    //AbstractProjectionPrivate  * const d;  Not exported so no need.
+    AbstractProjectionHelperPrivate  * const d;  // Not exported so no need.
 };
 
 

@@ -44,6 +44,8 @@ class MercatorProjectionHelper : public AbstractProjectionHelper
 		    QBrush         &brush,
 		    bool            antialiasing );
 
+    void setActiveRegion( ViewportParams *viewport );
+
  private:
     //MercatorProjectionPrivate  * const d;
 };

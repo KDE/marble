@@ -11,6 +11,7 @@
 
 // Local
 #include "MercatorProjectionHelper.h"
+#include "AbstractProjectionHelper_p.h"
 
 // Marble
 #include "GeoPainter.h"
@@ -58,4 +59,21 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
 #endif
 
     painter->drawRect( 0, yTop, viewport->width(), 2 * radius);
+}
+
+
+void MercatorProjectionHelper::setActiveRegion( ViewportParams *viewport )
+{
+    // FIXME: Change for Mercator
+    int  radius = viewport->radius();
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    int yCenterOffset = (int)((double)( 2 * radius ) / M_PI * centerLat);
+    int yTop          = viewport->height() / 2 - radius + yCenterOffset;
+    d->activeRegion = QRegion( 0, yTop, viewport->width(), 2 * radius,
+			       QRegion::Rectangle );
 }

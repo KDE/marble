@@ -41,6 +41,7 @@
 #include "BoundingBox.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
+#include "AbstractProjectionHelper.h"
 
 #include "MeasureTool.h"
 
@@ -63,7 +64,8 @@ class MarbleWidgetPrivate
 {
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
-        : m_widget( parent ), m_map( map ), 
+        : m_widget( parent ),
+	  m_map( map ), 
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_inputhandler( 0 ),
@@ -97,9 +99,6 @@ class MarbleWidgetPrivate
 
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
-
-    // The region on the widget where the user can drag the map.
-    QRegion          m_activeRegion;
 
     QString          m_proxyHost;
     qint16           m_proxyPort;
@@ -742,41 +741,15 @@ void MarbleWidget::rotateTo(const double& lon, const double& lat)
 
 const QRegion MarbleWidget::activeRegion()
 {
-    return d->m_activeRegion;
+    return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
 }
 
 void MarbleWidgetPrivate::setActiveRegion()
 {
-    int zoom = m_widget->radius();
+    ViewportParams  *viewport = m_map->viewParams()->viewport();
 
-    m_activeRegion = QRegion( 25, 25, m_widget->width() - 50, m_widget->height() - 50,
-                                 QRegion::Rectangle );
-
-    switch  ( m_map->projection() ) {
-        case Spherical:
-            if ( zoom < sqrt( (double)( m_widget->width() * m_widget->width()
-				       + m_widget->height() * m_widget->height()) ) / 2 ) {
-
-                m_activeRegion = QRegion( m_widget->width()  / 2 - zoom,
-					  m_widget->height() / 2 - zoom,
-					  2 * zoom, 2 * zoom,
-					  QRegion::Ellipse );
-            }
-            break;
-
-        case Equirectangular:
-
-            // Calculate translation of center point
-            double centerLon, centerLat;
-            m_map->viewParams()->centerCoordinates( centerLon, centerLat );
-
-            int yCenterOffset =  (int)((double)( 2 * zoom ) / M_PI * centerLat);
-            int yTop          = m_widget->height() / 2 - zoom + yCenterOffset;
-            m_activeRegion = QRegion( 0, yTop,
-                                      m_widget->width(), 2 * zoom,
-                                      QRegion::Rectangle );
-            break;
-    }
+    viewport->currentProjection()->helper()->setActiveRegion( viewport );
+    return;
 }
 
 

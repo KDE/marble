@@ -12,11 +12,23 @@
 // Local
 #include "AbstractProjectionHelper.h"
 
+// Qt
+#include <QtGui/QRegion>
+
 // Marble
 //#include "ViewportParams.h"
 
 
+class AbstractProjectionHelperPrivate
+{
+ public:
+    QRegion  activeRegion;
+};
+
+
+
 AbstractProjectionHelper::AbstractProjectionHelper()
+    : d( new AbstractProjectionHelperPrivate )
 {
 }
 
@@ -24,7 +36,7 @@ AbstractProjectionHelper::~AbstractProjectionHelper()
 {
 }
 
-
+#if 0 // Made pure virtual (= 0)
 void AbstractProjectionHelper::paintBase( GeoPainter     *painter, 
 					  ViewportParams *viewport,
 					  QPen            &pen,
@@ -32,5 +44,9 @@ void AbstractProjectionHelper::paintBase( GeoPainter     *painter,
 					  bool            antialiasing)
 {
 }
+#endif
 
-
+const QRegion AbstractProjectionHelper::activeRegion() const
+{
+    return d->activeRegion;
+}

@@ -11,6 +11,7 @@
 
 // Local
 #include "SphericalProjectionHelper.h"
+#include "AbstractProjectionHelper_p.h"
 
 // Marble
 #include "GeoPainter.h"
@@ -52,4 +53,22 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
         painter->drawEllipse( imgrx - radius, imgry - radius, 
                               2 * radius, 2 * radius );
     }
+}
+
+
+void SphericalProjectionHelper::setActiveRegion( ViewportParams *viewport )
+{
+    int  radius    = viewport->radius();
+    int  imgWidth  = viewport->width();
+    int  imgHeight = viewport->height();
+
+    // FIXME: Use mapCoversArea()
+    if ( radius * radius < ( imgWidth * imgWidth + imgHeight * imgHeight ) / 4 )
+	d->activeRegion = QRegion( imgWidth  / 2 - radius,
+				   imgHeight / 2 - radius,
+				   2 * radius, 2 * radius,
+				   QRegion::Ellipse );
+    else
+	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
+				   QRegion::Rectangle );
 }

@@ -100,7 +100,7 @@ Features:
     - Create a helper class ProjectionHelper to perform actual actions	done
     - Make the vector base work        					inge
     - Move paintBase to ProjectionHelper				done
-    - Move activeArea to ProjectionHelper				inge
+    - Move activeRegion to ProjectionHelper				done
  
     - <strikeout>Move mapCoversImage (prev. globeCoversImage) to ProjectionHelper</strikeout>
       "mapCoversImage" is NOT meant to go to ProjectionHelper.

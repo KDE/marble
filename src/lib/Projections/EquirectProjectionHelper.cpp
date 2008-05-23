@@ -11,6 +11,7 @@
 
 // Local
 #include "EquirectProjectionHelper.h"
+#include "AbstractProjectionHelper_p.h"
 
 // Marble
 #include "GeoPainter.h"
@@ -49,4 +50,20 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     int yTop          = viewport->height() / 2 - radius + yCenterOffset;
 
     painter->drawRect( 0, yTop, viewport->width(), 2 * radius);
+}
+
+
+void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
+{
+    int  radius = viewport->radius();
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    int yCenterOffset = (int)((double)( 2 * radius ) / M_PI * centerLat);
+    int yTop          = viewport->height() / 2 - radius + yCenterOffset;
+    d->activeRegion = QRegion( 0, yTop, viewport->width(), 2 * radius,
+			       QRegion::Rectangle );
 }
