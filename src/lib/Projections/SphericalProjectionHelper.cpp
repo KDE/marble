@@ -63,12 +63,15 @@ void SphericalProjectionHelper::setActiveRegion( ViewportParams *viewport )
     int  imgHeight = viewport->height();
 
     // FIXME: Use mapCoversArea()
-    if ( radius * radius < ( imgWidth * imgWidth + imgHeight * imgHeight ) / 4 )
-	d->activeRegion = QRegion( imgWidth  / 2 - radius,
+    // Use sqrt() here as setActiveRegion doesn't get called often anyways.
+    if ( radius < sqrt( (double)( imgWidth * imgWidth + imgHeight * imgHeight ) ) / 2 ) {
+    	d->activeRegion = QRegion( imgWidth  / 2 - radius,
 				   imgHeight / 2 - radius,
 				   2 * radius, 2 * radius,
 				   QRegion::Ellipse );
-    else
-	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
+    }
+    else {
+    	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
 				   QRegion::Rectangle );
+    }
 }
