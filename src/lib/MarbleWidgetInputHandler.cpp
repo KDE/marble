@@ -29,6 +29,8 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler()
       m_model( 0 )
 {
     m_positionSignalConnected = false;
+    m_mouseWheelTimer = new QTimer(this);
+    connect( m_mouseWheelTimer, SIGNAL( timeout() ), this, SLOT( restoreViewContext() ) );
 }
 
 
@@ -66,6 +68,15 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     m_dragThreshold = 3;
 }
 
+void MarbleWidgetInputHandler::restoreViewContext()
+{
+    m_widget->setViewContext( Marble::Still );
+    if ( m_widget->mapQuality( Marble::Still )
+        != m_widget->mapQuality( Marble::Animation ) )
+    {
+        m_widget->updateChangedMap();
+    }
+}
 
 bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
@@ -349,7 +360,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             QWheelEvent  *wheelevt = static_cast<QWheelEvent*>(e);
             m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
-
+            m_mouseWheelTimer->start(400);
             return true;
         }
         else

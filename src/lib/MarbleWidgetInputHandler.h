@@ -24,9 +24,10 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
 
+class QTimer;
+
 class MarbleModel;
 class MarbleWidget;
-
 
 class MarbleWidgetInputHandler  : public QObject
 {
@@ -50,11 +51,16 @@ class MarbleWidgetInputHandler  : public QObject
     void mouseClickScreenPosition( int, int );
     void mouseMoveGeoPosition( QString );
 
+ protected Q_SLOTS:
+    void restoreViewContext();
+
  protected:
     MarbleWidget  *m_widget;
     MarbleModel   *m_model;
 
     bool     m_positionSignalConnected;
+
+    QTimer   *m_mouseWheelTimer;
 };
 
 
