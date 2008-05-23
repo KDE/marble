@@ -29,6 +29,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 #include "AbstractProjection.h"
 #include "VisiblePlaceMark.h"
 

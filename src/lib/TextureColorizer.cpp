@@ -19,6 +19,7 @@
 #include <QtGui/QColor>
 
 #include "global.h"
+#include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "ViewParams.h"
 

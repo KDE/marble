@@ -40,6 +40,7 @@
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
 #include "GeoDataPoint.h"
+#include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 #include "GpxFileViewItem.h"
@@ -53,6 +54,7 @@
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 #include "gps/GpsLayer.h"
 

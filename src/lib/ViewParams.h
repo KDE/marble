@@ -20,18 +20,19 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
+#include <QtCore/QString>
 
 #include "marble_export.h"
 
-#include <QtCore/QDebug>
-
-#include "GeoSceneDocument.h"
 #include "Quaternion.h"
-#include "ViewportParams.h"
 #include "global.h"
 
 
 class QImage;
+
+class AbstractProjection;
+class GeoSceneDocument;
+class ViewportParams;
 
 class ViewParamsPrivate;
 

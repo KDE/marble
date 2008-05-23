@@ -23,6 +23,7 @@
 #include "global.h"
 #include "GeoPainter.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".

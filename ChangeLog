@@ -1,5 +1,22 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/SphericalScanlineTextureMapper.cpp:
+    * src/lib/Projections/SphericalProjection.h:
+    * src/lib/PlaceMarkLayout.cpp:
+    * src/lib/PlaceMarkPainter.cpp:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/TextureColorizer.cpp:
+    * src/lib/ViewParams.cpp:
+    * src/lib/ViewParams.h:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/VectorComposer.cpp:
+    * src/lib/GridMap.cpp:
+
+    Fix includes.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/ViewParams.cpp:
     * src/lib/ViewParams.h:
 

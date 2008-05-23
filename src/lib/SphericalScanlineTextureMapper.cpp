@@ -23,6 +23,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 // Defining INTERLACE will make sure that for two subsequent scanlines
 // every second scanline will be a deep copy of the first scanline.

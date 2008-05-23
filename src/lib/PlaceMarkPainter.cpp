@@ -20,6 +20,7 @@
 #include "GeoDataStyle.h"
 
 #include "ViewParams.h"
+#include "ViewportParams.h"
 #include "VisiblePlaceMark.h"
 
 PlaceMarkPainter::PlaceMarkPainter( QObject* parent )

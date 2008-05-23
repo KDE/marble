@@ -12,10 +12,13 @@
 
 #include "ViewParams.h"
 
+#include <QtCore/QDebug>
+#include <QtGui/QImage>
+
+#include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
-
-#include <QtGui/QImage>
+#include "ViewportParams.h"
 
 class ViewParamsPrivate
 {

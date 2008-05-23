@@ -42,6 +42,7 @@
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 #include "AbstractProjectionHelper.h"
+#include "ViewportParams.h"
 
 #include "MeasureTool.h"
 

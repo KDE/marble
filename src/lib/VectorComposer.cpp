@@ -21,6 +21,7 @@
 #include "global.h"
 #include "VectorMap.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 #include "MarbleDirs.h"
 
 using namespace Marble;
