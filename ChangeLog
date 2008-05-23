@@ -1,5 +1,12 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/ViewParams.cpp:
+    * src/lib/ViewParams.h:
+
+    D-pointerfy class ViewParams.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/SphericalScanlineTextureMapper.cpp:
     * src/lib/PlaceMarkLayout.cpp:
     * src/lib/MarbleMap.cpp:

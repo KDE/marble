@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -42,7 +43,7 @@ class ViewParamsPrivate;
 class MARBLE_EXPORT ViewParams
 {
  public:
-    ViewParams( );
+    ViewParams();
     ~ViewParams();
 
     // Getters and setters
@@ -109,29 +110,7 @@ class MARBLE_EXPORT ViewParams
     void setPlanetAxisUpdated( const Quaternion & );
 
  private:
-    GeoSceneDocument *m_mapTheme;
-
-    ViewportParams  m_viewport;
-
-
-//  FIXME: We should try to get rid of these two:    
-    Quaternion  m_planetAxisUpdated;
-    int         m_radiusUpdated;
-
-    // Parameters that determine the painting
-    // Show/don't show options
-
-    // FIXME: All of these parameters should get stored as a GeoSceneSettings 
-    //        property object in the future instead ...
-    bool        m_showAtmosphere;
-
-    bool        m_showElevationModel;
-    
-    bool        m_showGps; //for gps layer
-
-    // Cached data that will make painting faster.
-    QImage  *m_canvasImage;     // Base image with space and atmosphere
-    QImage  *m_coastImage;      // A slightly higher level image.
+    ViewParamsPrivate * const d;
 };
 
 
