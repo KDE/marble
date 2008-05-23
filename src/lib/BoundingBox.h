@@ -23,10 +23,10 @@ class BoundingBox
     BoundingBox();
     explicit BoundingBox( const QVector<QPointF> & );
 
-    bool     contains( const QPointF & );
-    bool     intersects( const BoundingBox & );
-    bool     isValid();
-    QString  string();
+    bool     contains( const QPointF & ) const;
+    bool     intersects( const BoundingBox & ) const;
+    bool     isValid() const;
+    QString  string() const;
 
  private:
     void  init();

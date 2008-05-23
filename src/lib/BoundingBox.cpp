@@ -47,7 +47,7 @@ void BoundingBox::init()
 }
 
 
-bool BoundingBox::contains( const QPointF &point )
+bool BoundingBox::contains( const QPointF &point ) const
 {
     if ( point.x() < m_bottomX || point.x() > m_topX )
         return false;
@@ -59,7 +59,7 @@ bool BoundingBox::contains( const QPointF &point )
 }
 
 
-bool BoundingBox::intersects( const BoundingBox &box ) 
+bool BoundingBox::intersects( const BoundingBox &box ) const
 {
     // Case 1: east border of box intersects:
     if ( m_bottomX < box.m_topX && box.m_topX < m_topX )
@@ -86,7 +86,7 @@ bool BoundingBox::intersects( const BoundingBox &box )
     return false;
 }
 
-bool BoundingBox::isValid()
+bool BoundingBox::isValid() const
 {
     if ( m_topX    == -180.0) return false;
     if ( m_bottomX == +180.0) return false;
@@ -96,7 +96,7 @@ bool BoundingBox::isValid()
     return true;
 }
 
-QString BoundingBox::string() 
+QString BoundingBox::string() const
 {
     QString temp;
     

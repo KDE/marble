@@ -1,5 +1,13 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/BoundingBox.h:
+    * src/lib/BoundingBox.cpp:
+
+    Declare methods const.
+    This is needed for d-pointerfication of class ViewportParams.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarbleWidget.cpp:
     * src/lib/SphericalScanlineTextureMapper.cpp:
     * src/lib/Projections/SphericalProjection.h:
