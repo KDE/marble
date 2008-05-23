@@ -94,7 +94,8 @@ class MARBLE_EXPORT ViewportParams
 
     QSize                m_size;         // width, height
 
-    // FIXME: is this really "DEPRECATED:" or was it just the public accessibility?
+    // FIXME: The usage of the class BoundingBox as a whole is DEPRECATED
+    //        Please use the class GeoDataLatLon(Alt)Box instead! 
     BoundingBox m_boundingBox;  // What the view currently can see
 
 
