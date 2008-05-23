@@ -72,7 +72,7 @@ void SphericalScanlineTextureMapper::resizeMap(int width, int height)
 
 void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage       *canvasImage = viewParams->m_canvasImage;
+    QImage       *canvasImage = viewParams->canvasImage();
     const qint64  radius      = viewParams->radius();
 
     const bool highQuality = ( viewParams->viewport()->mapQuality() == Marble::High || viewParams->viewport()->mapQuality() == Marble::Print );

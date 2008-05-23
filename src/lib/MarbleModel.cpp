@@ -410,10 +410,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
             d->m_texmapper->mapTexture( viewParams );
 
-            if ( !viewParams->m_showElevationModel
+            if ( !viewParams->showElevationModel()
                 && layer->role() == "dem" )
             {
-                viewParams->m_coastImage->fill( Qt::transparent );
+                viewParams->coastImage()->fill( Qt::transparent );
 
                 // Create VectorMap
                 d->m_veccomposer->drawTextureMap( viewParams );
@@ -432,10 +432,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         if ( viewParams->projection() == Spherical ) {
             QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
-            painter->drawImage( rect, *viewParams->m_canvasImage, rect );
+            painter->drawImage( rect, *viewParams->canvasImage(), rect );
         }
         else {
-            painter->drawImage( dirtyRect, *viewParams->m_canvasImage, dirtyRect );
+            painter->drawImage( dirtyRect, *viewParams->canvasImage(), dirtyRect );
         }
     }
 
@@ -547,10 +547,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 #endif
 
     // Paint the Gps Layer
-    d->m_gpsLayer->setVisible( viewParams->m_showGps );
+    d->m_gpsLayer->setVisible( viewParams->showGps() );
     //FIXME:We might just send ViewParams instead of this bunch of parameters
     d->m_gpsLayer->paintLayer( painter,
-                               viewParams->m_canvasImage->size(),
+                               viewParams->canvasImage()->size(),
                                viewParams,
                                viewParams->viewport()->m_boundingBox );
 

@@ -90,7 +90,7 @@ VectorComposer::~VectorComposer()
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
-    QPaintDevice  *origimg = viewParams->m_coastImage;
+    QPaintDevice  *origimg = viewParams->coastImage();
     Quaternion     rotAxis = viewParams->planetAxis();
 
     //	m_vectorMap -> clearNodeCount();

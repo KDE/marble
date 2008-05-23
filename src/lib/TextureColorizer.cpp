@@ -50,8 +50,8 @@ TextureColorizer::TextureColorizer( const QString& seafile,
 
 void TextureColorizer::colorize(ViewParams *viewParams)
 {
-    QImage        *origimg  = viewParams->m_canvasImage;
-    const QImage  *coastimg = viewParams->m_coastImage;
+    QImage        *origimg  = viewParams->canvasImage();
+    const QImage  *coastimg = viewParams->coastImage();
     const qint64   radius   = viewParams->radius();
 
     const int  imgheight = origimg->height();

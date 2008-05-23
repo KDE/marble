@@ -188,8 +188,8 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                                         const QItemSelectionModel *selectionModel,
                                         bool firstTime )
 {
-    const int imgwidth  = viewParams->m_canvasImage->width();
-    const int imgheight = viewParams->m_canvasImage->height();
+    const int imgwidth  = viewParams->canvasImage()->width();
+    const int imgheight = viewParams->canvasImage()->height();
 
     if ( m_styleResetRequested == true ) {
         m_styleResetRequested = false;

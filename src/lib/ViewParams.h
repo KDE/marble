@@ -32,6 +32,8 @@
 
 class QImage;
 
+class ViewParamsPrivate;
+
 /** 
  * @short A public class that controls the painting of a MarbleWidget
  *
@@ -85,7 +87,28 @@ class MARBLE_EXPORT ViewParams
 
     void centerCoordinates( double &centerLon, double &centerLat );
 
- public:
+    QImage * canvasImage() const;
+    void setCanvasImage( QImage * const );
+
+    QImage * coastImage() const;
+    void setCoastImage( QImage * const );
+
+    bool showGps() const;
+    void setShowGps( const bool );
+
+    bool showElevationModel() const;
+    void setShowElevationModel( const bool );
+
+    bool showAtmosphere() const;
+    void setShowAtmosphere( const bool );
+
+    // FIXME: We should try to get rid of these
+    int radiusUpdated() const;
+    void setRadiusUpdated( const int );
+    Quaternion planetAxisUpdated() const;
+    void setPlanetAxisUpdated( const Quaternion & );
+
+ private:
     GeoSceneDocument *m_mapTheme;
 
     ViewportParams  m_viewport;

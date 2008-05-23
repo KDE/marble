@@ -248,8 +248,8 @@ void MarbleMap::setRadius(const int radius)
 bool MarbleMap::needsUpdate() const
 {
     return ( d->m_justModified
-             || d->m_viewParams.radius() != d->m_viewParams.m_radiusUpdated
-             || !( d->m_viewParams.planetAxis() == d->m_viewParams.m_planetAxisUpdated ) );
+             || d->m_viewParams.radius() != d->m_viewParams.radiusUpdated()
+             || !( d->m_viewParams.planetAxis() == d->m_viewParams.planetAxisUpdated() ) );
 }
 
 void MarbleMap::setNeedsUpdate()
@@ -363,7 +363,7 @@ bool MarbleMap::showClouds() const
 
 bool MarbleMap::showAtmosphere() const
 {
-    return d->m_viewParams.m_showAtmosphere;
+    return d->m_viewParams.showAtmosphere();
 }
 
 bool MarbleMap::showPlaces() const
@@ -393,7 +393,7 @@ bool MarbleMap::showRelief() const
 
 bool MarbleMap::showElevationModel() const
 {
-    return d->m_viewParams.m_showElevationModel;
+    return d->m_viewParams.showElevationModel();
 }
 
 bool MarbleMap::showIceLayer() const
@@ -455,13 +455,13 @@ void MarbleMap::zoomView(int newZoom)
     if ( ! globeCoversImage() 
          || projection() != Spherical )
     {
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
+        d->m_viewParams.canvasImage()->fill( Qt::black );
     }
 
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
-    if ( d->m_viewParams.m_showAtmosphere ) {
+    if ( d->m_viewParams.showAtmosphere() ) {
         d->drawAtmosphere();
     }
 
@@ -568,10 +568,10 @@ void MarbleMap::setProjection( Projection projection )
     if ( !globeCoversImage() 
          || d->m_viewParams.projection() != Spherical )
     {
-        d->m_viewParams.m_canvasImage->fill( Qt::black );
+        d->m_viewParams.canvasImage()->fill( Qt::black );
     }
  
-    if ( d->m_viewParams.m_showAtmosphere ) {
+    if ( d->m_viewParams.showAtmosphere() ) {
         d->drawAtmosphere();
     }
 
@@ -643,25 +643,23 @@ void MarbleMapPrivate::doResize()
     QSize size(m_parent->width(), m_parent->height());
     m_viewParams.viewport()->setSize( size );
     // Recreate the canvas image with the new size.
-    delete m_viewParams.m_canvasImage;
-    m_viewParams.m_canvasImage = new QImage( m_parent->width(), m_parent->height(),
-                                             QImage::Format_ARGB32_Premultiplied );
+    m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
+                                             QImage::Format_ARGB32_Premultiplied ));
 
     // Repaint the background if necessary
     if ( ! m_parent->globeCoversImage()
          || m_viewParams.projection() != Spherical )
     {
-        m_viewParams.m_canvasImage->fill( Qt::black );
+        m_viewParams.canvasImage()->fill( Qt::black );
     }
 
-    if ( m_viewParams.m_showAtmosphere ) {
+    if ( m_viewParams.showAtmosphere() ) {
         drawAtmosphere();
     }
 
     // Recreate the 
-    delete m_viewParams.m_coastImage;
-    m_viewParams.m_coastImage = new QImage( m_parent->width(), m_parent->height(),
-                                            QImage::Format_ARGB32_Premultiplied );
+    m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
+                                            QImage::Format_ARGB32_Premultiplied ));
 
     m_justModified = true;
 }
@@ -777,7 +775,7 @@ void MarbleMapPrivate::drawAtmosphere()
 
     QBrush    brush1( grad1 );
     QPen      pen1( Qt::NoPen );
-    QPainter  painter( m_viewParams.m_canvasImage );
+    QPainter  painter( m_viewParams.canvasImage() );
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
@@ -869,8 +867,8 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     bool  doClip = false;
     if ( d->m_viewParams.projection() == Spherical )
-        doClip = ( d->m_viewParams.radius() > d->m_viewParams.m_canvasImage->width() / 2
-                   || d->m_viewParams.radius() > d->m_viewParams.m_canvasImage->height() / 2 );
+        doClip = ( d->m_viewParams.radius() > d->m_viewParams.canvasImage()->width() / 2
+                   || d->m_viewParams.radius() > d->m_viewParams.canvasImage()->height() / 2 );
 
     // Create a painter that will do the painting.
 #if 0
@@ -883,10 +881,12 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     d->m_model->paintGlobe( &painter,
                             width(), height(), &d->m_viewParams,
                             needsUpdate()
-                            || d->m_viewParams.m_canvasImage->isNull(),
+                            || d->m_viewParams.canvasImage()->isNull(),
                             dirtyRect );
-    d->m_viewParams.m_planetAxisUpdated = d->m_viewParams.planetAxis();
-    d->m_viewParams.m_radiusUpdated     = d->m_viewParams.radius();
+    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
+    d->m_viewParams.setPlanetAxisUpdated( d->m_viewParams.planetAxis() );
+    // FIXME: this is ugly, add method updateRadius() to ViewParams
+    d->m_viewParams.setRadiusUpdated( d->m_viewParams.radius() );
     d->m_justModified                   = false;
 
     // FIXME: This is really slow. That's why we defer this to
@@ -910,21 +910,21 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     d->m_viewParams.propertyValue( "scalebar", showScaleBar );
 /*
     if ( showCompass )
-        painter.drawPixmap( d->m_viewParams.m_canvasImage->width() - 60, 10,
-                            d->m_compass.drawCompassPixmap( d->m_viewParams.m_canvasImage->width(),
-                                                            d->m_viewParams.m_canvasImage->height(),
+        painter.drawPixmap( d->m_viewParams.canvasImage()->width() - 60, 10,
+                            d->m_compass.drawCompassPixmap( d->m_viewParams.canvasImage()->width(),
+                                                            d->m_viewParams.canvasImage()->height(),
                                                             northPoleY(), d->m_viewParams.projection() ) );
 */
     // 3. Paint the scale.
     if ( showScaleBar )
-        painter.drawPixmap( 10, d->m_viewParams.m_canvasImage->height() - 40,
+        painter.drawPixmap( 10, d->m_viewParams.canvasImage()->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( radius(),
-                                                              d->m_viewParams.m_canvasImage-> width() / 2 - 20 ) );
+                                                              d->m_viewParams.canvasImage()->width() / 2 - 20 ) );
 
     // 4. Paint the crosshair.
     d->m_crosshair.paint( &painter,
-                          d->m_viewParams.m_canvasImage->width(),
-                          d->m_viewParams.m_canvasImage->height() );
+                          d->m_viewParams.canvasImage()->width(),
+                          d->m_viewParams.canvasImage()->height() );
 
     // 5. Paint measure points if there are any.
 
@@ -1026,7 +1026,7 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    d->m_viewParams.m_showAtmosphere = visible;
+    d->m_viewParams.setShowAtmosphere( visible );
     // Quick and dirty way to force a whole update of the view
     d->doResize();
 }
@@ -1069,7 +1069,7 @@ void MarbleMap::setShowRelief( bool visible )
 
 void MarbleMap::setShowElevationModel( bool visible )
 {
-    d->m_viewParams.m_showElevationModel = visible;
+    d->m_viewParams.setShowElevationModel( visible );
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
 }
@@ -1101,7 +1101,7 @@ void MarbleMap::setShowFrameRate( bool visible )
 
 void MarbleMap::setShowGps( bool visible )
 {
-    d->m_viewParams.m_showGps = visible;
+    d->m_viewParams.setShowGps( visible );
 }
 
 void MarbleMap::changeCurrentPosition( double lon, double lat)

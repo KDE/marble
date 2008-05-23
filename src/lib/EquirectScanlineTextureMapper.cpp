@@ -51,7 +51,7 @@ EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLo
 
 void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage    *canvasImage = viewParams->m_canvasImage;
+    QImage    *canvasImage = viewParams->canvasImage();
     const int  radius      = viewParams->radius();
 
    // Initialize needed variables:

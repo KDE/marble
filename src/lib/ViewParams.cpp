@@ -144,3 +144,75 @@ void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
 {
     m_viewport.centerCoordinates( centerLon, centerLat );
 }
+
+QImage * ViewParams::canvasImage() const
+{
+    return m_canvasImage;
+}
+
+void ViewParams::setCanvasImage( QImage * const image )
+{
+    delete m_canvasImage;
+    m_canvasImage = image;
+}
+
+QImage * ViewParams::coastImage() const
+{
+    return m_coastImage;
+}
+
+void ViewParams::setCoastImage( QImage * const image )
+{
+    delete m_coastImage;
+    m_coastImage = image;
+}
+
+int ViewParams::radiusUpdated() const
+{
+    return m_radiusUpdated;
+}
+
+void ViewParams::setRadiusUpdated( const int radiusUpdated )
+{
+    m_radiusUpdated = radiusUpdated;
+}
+
+bool ViewParams::showGps() const
+{
+    return m_showGps;
+}
+
+void ViewParams::setShowGps( bool const showGps )
+{
+    m_showGps = showGps;
+}
+
+bool ViewParams::showElevationModel() const
+{
+    return m_showElevationModel;
+}
+
+void ViewParams::setShowElevationModel( const bool showElevationModel )
+{
+    m_showElevationModel = showElevationModel;
+}
+
+bool ViewParams::showAtmosphere() const
+{
+    return m_showAtmosphere;
+}
+
+void ViewParams::setShowAtmosphere( const bool showAtmosphere )
+{
+    m_showAtmosphere = showAtmosphere;
+}
+
+Quaternion ViewParams::planetAxisUpdated() const
+{
+    return m_planetAxisUpdated;
+}
+
+void ViewParams::setPlanetAxisUpdated( const Quaternion & planetAxisUpdated )
+{
+    m_planetAxisUpdated = planetAxisUpdated;
+}
