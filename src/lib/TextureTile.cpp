@@ -13,9 +13,6 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
-#include <QtGui/QFont>
-#include <QtGui/QPainter>
-#include <QtGui/QPen>
 
 #include <cmath>
 
