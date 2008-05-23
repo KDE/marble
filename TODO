@@ -119,24 +119,24 @@ Internal structure:
    improve speed on close up zooms.
  * New class MarbleMap that can paint a map on any QPainter             DONE
     - Check Apidox if there is anything missing.                        --
- * Design and implement Projection class 				                DONE
+ * Design and implement Projection class                                DONE
  * Refactor KML to use QXmlStreamReader                                 DONE
  * Make MarbleModel a real model and MarbleWidget a real view           ----
      Move to 4.2?  Probably...
  * Make it possible to paint on whatever QPainter Marble is given       ----
      Move to 4.2?  Probably...
- * Layer Management Class						                        TACK
-    - Split off MapTheme / DGML parsing into geodata/parser. 		    done
+ * Layer Management Class                                               TACK
+    - Split off MapTheme / DGML parsing into geodata/parser.            done
       Have a GeoDataMapTheme class that basically only includes
       those parts of the current MapTheme except for parsing.
-    - Implement / move <head> features as lined out in			        done
+    - Implement / move <head> features as lined out in                  done
       layermanagement.txt This should happen after the 
       QXmlStreamReader port.
- * Plugin interface (see also GeoPainter)				                TACK
-    - Make a QPlugin based interface					                TACK
+ * Plugin interface (see also GeoPainter)                               TACK
+    - Make a QPlugin based interface                                    TACK
     - Move backends into plugins / threads                              --
  * GeoPainter								----
- * Create a LatLonBoundingBox						                    DONE
+ * Create a LatLonBoundingBox                                           DONE
     - Use it everywhere :-) 						--
  * Download manager fixes:						----
     - After maps get downloaded sometimes the resolution doesn't get	--
@@ -146,15 +146,15 @@ Internal structure:
 
 User experience / Usability
  * Make Marble have a RenderingQuality setting in ViewParams:           DONE
-   - Use different render settings while panning (MOVE) and 		    done
+   - Use different render settings while panning (MOVE) and             done
      after releasing the mouse (DROP).
-   - Rerender the map at "PRINT quality" once "File -> Print" or	    done
+   - Rerender the map at "PRINT quality" once "File -> Print" or        done
      "Edit -> Copy" get selected.
  * Add a small indicator to the status bar indicates map downloads      ----
    (see explanation below)
 
 Smaller issues
- * Make the about dialog for MarbleWidget more consistent with the	    ----
+ * Make the about dialog for MarbleWidget more consistent with the      ----
    application About dialog.  Or perhaps disable it for the KDE
    version?
  * Cloud Layer                                                          STRE
