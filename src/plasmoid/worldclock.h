@@ -87,6 +87,7 @@ class WorldClock : public Plasma::Applet
         int m_timeDisplay;
         bool m_showFull;
         bool m_showDate;
+        bool m_showSeconds;
 
         //map of locations and key for accessing it.
         QString m_locationkey;
