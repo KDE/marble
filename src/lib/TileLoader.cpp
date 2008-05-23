@@ -243,19 +243,15 @@ int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
     while ( noerr == true ) {
         const int maxRow = TileLoaderHelper::levelToRow( levelZeroRows, trylevel );
 
-        for ( int row = 0; row < maxRow; ++row ) {
+        for ( int row = 0; noerr && row < maxRow; ++row ) {
             const int maxColumn = TileLoaderHelper::levelToColumn( levelZeroColumns, trylevel );
 
-            for ( int column = 0; column < maxColumn; ++column ) {
+            for ( int column = 0; noerr && column < maxColumn; ++column ) {
                 QString tilepath = MarbleDirs::path(
                     TileLoaderHelper::relativeTileFileName( textureLayer, trylevel, column, row ));
                 // qDebug() << tilepath;
                 noerr = QFile::exists( tilepath );
-                if ( noerr == false )
-                    break;
             }
-            if ( noerr == false )
-                break;
         }
 
         if ( noerr == true )
@@ -312,16 +308,13 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
     //
     // FIXME: marble could theoretically start without local tiles, too.
     //        They can be downloaded.
-    for ( int column = 0; column < levelZeroColumns; ++column ) {
-        for ( int row = 0; row < levelZeroRows; ++row ) {
+    for ( int column = 0; noerr && column < levelZeroColumns; ++column ) {
+        for ( int row = 0; noerr && row < levelZeroRows; ++row ) {
 
-            QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
+            const QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
                 textureLayer, 0, column, row ));
 
             noerr = QFile::exists( tilepath );
-
-            if ( noerr == false )
-                break;
         }
     }
 
