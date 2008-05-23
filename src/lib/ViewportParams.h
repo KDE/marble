@@ -19,9 +19,6 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-
-//#include "marble_export.h"
-
 #include <QtCore/QSize>
 #include <QtCore/QDebug>
 
@@ -77,11 +74,11 @@ class MARBLE_EXPORT ViewportParams
     Marble::MapQuality mapQuality();
     void setMapQuality( Marble::MapQuality );
 
+    BoundingBox boundingBox() const;
+    void setBoundingBox( const BoundingBox & );
+
     // Other functions
     void centerCoordinates( double &centerLon, double &centerLat ) const;
-
-    // DEPRECATED:
-    BoundingBox m_boundingBox;  // What the view currently can see
 
  private:
     // These two go together.  m_currentProjection points to one of
@@ -97,7 +94,8 @@ class MARBLE_EXPORT ViewportParams
 
     QSize                m_size;         // width, height
 
-    //BoundingBox m_boundingBox;  // What the view currently can see
+    // FIXME: is this really "DEPRECATED:" or was it just the public accessibility?
+    BoundingBox m_boundingBox;  // What the view currently can see
 
 
     static SphericalProjection  s_sphericalProjection;

@@ -188,6 +188,16 @@ void ViewportParams::setMapQuality( MapQuality mapQuality )
     m_mapQuality = mapQuality; 
 }
 
+BoundingBox ViewportParams::boundingBox() const
+{
+    return m_boundingBox;
+}
+
+void ViewportParams::setBoundingBox( const BoundingBox & boundingBox )
+{
+    m_boundingBox = boundingBox;
+}
+
 // ================================================================
 //                        Other functions
 

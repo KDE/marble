@@ -852,7 +852,7 @@ void MarbleMapPrivate::setBoundingBox()
         points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
     }
 
-    m_viewParams.viewport()->m_boundingBox = BoundingBox( points );
+    m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
 }
 
 

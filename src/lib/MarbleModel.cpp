@@ -553,7 +553,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->canvasImage()->size(),
                                viewParams,
-                               viewParams->viewport()->m_boundingBox );
+                               viewParams->viewport()->boundingBox() );
 
     d->m_layerManager.renderLayers( painter, viewParams->viewport(), layer );
 }

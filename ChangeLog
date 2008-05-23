@@ -1,5 +1,16 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarbleMap.cpp:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/ViewportParams.h:
+    * src/lib/ViewportParams.cpp:
+
+    Move m_boundingBox, the only public member variable of class
+    ViewportParams to the private section.
+    This is needed for d-pointerfication of class ViewportParams.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/gps/Route.cpp:
     * src/lib/gps/GpxFile.cpp:
     * src/lib/gps/RouteContainer.cpp:
