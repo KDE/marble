@@ -57,7 +57,13 @@ public:
  protected:
     void pixelValue( const double& lon, const double& lat, 
                      QRgb* scanLine, bool smooth = false );
-    void nextTile();
+
+    // method for fast integer calculation
+    void nextTile( int& posx, int& posy );
+
+    // method for precise interpolation
+    void nextTile( double& posx, double& posy );
+
     void detectMaxTileLevel();
     void tileLevelInit( int tileLevel );
 
@@ -71,7 +77,10 @@ public:
 
     QRgb bilinearSmooth( const QRgb& topLeftValue ) const;
 
-    // Coordinates on the tile
+    // Coordinates on the tile for fast integer calculation
+    int        m_iPosX;
+    int        m_iPosY;
+    // Coordinates on the tile for precise interpolation
     double     m_posX;
     double     m_posY;
 

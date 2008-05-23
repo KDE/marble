@@ -1,15 +1,32 @@
+2008-05-22  Torsten Rahn  <rahn@kde.org> 
+
+    * src/lib/AbstractScanlineTextureMapper.{cpp,h}:
+    * src/lib/SphericalScanlineTextureMapper.cpp:
+
+    - For speed reasons we somewhat duplicate the code:
+        - Keep integer based rendering for high performance
+          rendering.
+        - Double based rendering is needed to be able to 
+          do the bilinear interpolation.
+
+        Not pretty but efficient ...
+
+    * src/lib/CrossHairFloatItem.cpp:
+
+    - Enforce the cross hair to be aliased.
+
 2008-05-23  Patrick Spendrin    <ps_ml@gmx.de>
 
-    *data/placemarks/baseplacemarks.kml
-    *data/placemarks/cityplacemarks.kml
-    *data/placemarks/elevplacemarks.kml
-    *data/placemarks/boundaryplacemarks.kml
-    *data/placemarks/otherplacemarks.kml
-    *data/placemarks/baseplacemarks.cache
-    *data/placemarks/cityplacemarks.cache
-    *data/placemarks/elevplacemarks.cache
-    *data/placemarks/boundaryplacemarks.cache
-    *data/placemarks/otherplacemarks.cache
+    * data/placemarks/baseplacemarks.kml:
+    * data/placemarks/cityplacemarks.kml:
+    * data/placemarks/elevplacemarks.kml:
+    * data/placemarks/boundaryplacemarks.kml:
+    * data/placemarks/otherplacemarks.kml:
+    * data/placemarks/baseplacemarks.cache:
+    * data/placemarks/cityplacemarks.cache:
+    * data/placemarks/elevplacemarks.cache:
+    * data/placemarks/boundaryplacemarks.cache:
+    * data/placemarks/otherplacemarks.cache:
     
     make the kml files standard compliant ( to version 2.1 )
     http://earth.google.de/kml/kml_tags_21.html
@@ -17,13 +34,13 @@
     
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * TODO
+    * TODO:
 
     Add my name to the TODO file and mark two items as done.
 
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * TODO
+    * TODO:
 
     Convert tabs to spaces.
 

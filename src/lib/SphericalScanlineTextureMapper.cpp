@@ -280,44 +280,81 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
-        const double itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
-        const double itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
-
-        m_prevLon = rad2PixelX( m_prevLon );
-        m_prevLat = rad2PixelY( m_prevLat );
-
-        // To improve speed we unroll 
-        // AbstractScanlineTextureMapper::pixelValue(...) here and 
-        // calculate the performance critical issues via integers
-
-        double itLon = m_prevLon + m_toTileCoordinatesLon;
-        double itLat = m_prevLat + m_toTileCoordinatesLat;
-
-        for ( int j=1; j < m_n; ++j ) {
-            m_posX = itLon + itStepLon * j;
-            m_posY = itLat + itStepLat * j;
-
-            if (  m_posX >= m_tileLoader->tileWidth() 
-               || m_posX < 0.0
-               || m_posY >= m_tileLoader->tileHeight()
-               || m_posY < 0.0 )
-            {
-                nextTile();
-                itLon = m_prevLon + m_toTileCoordinatesLon;
-                itLat = m_prevLat + m_toTileCoordinatesLat;
+        if ( smooth ) {
+            const double itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
+            const double itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
+    
+            m_prevLon = rad2PixelX( m_prevLon );
+            m_prevLat = rad2PixelY( m_prevLat );
+    
+            // To improve speed we unroll 
+            // AbstractScanlineTextureMapper::pixelValue(...) here and 
+            // calculate the performance critical issues via integers
+    
+            double itLon = m_prevLon + m_toTileCoordinatesLon;
+            double itLat = m_prevLat + m_toTileCoordinatesLat;
+    
+            for ( int j=1; j < m_n; ++j ) {
                 m_posX = itLon + itStepLon * j;
                 m_posY = itLat + itStepLat * j;
+    
+                if (  m_posX >= m_tileLoader->tileWidth() 
+                || m_posX < 0.0
+                || m_posY >= m_tileLoader->tileHeight()
+                || m_posY < 0.0 )
+                {
+                    nextTile( m_posX, m_posY );
+                    itLon = m_prevLon + m_toTileCoordinatesLon;
+                    itLat = m_prevLat + m_toTileCoordinatesLat;
+                    m_posX = itLon + itStepLon * j;
+                    m_posY = itLat + itStepLat * j;
+                }
+    
+                if ( !smooth ) {
+                    *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+                }
+                else {
+                    QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+                    *scanLine = bilinearSmooth( topLeftValue );
+                }
+    
+                ++scanLine;
             }
-
-            if ( !smooth ) {
-                *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+        }
+        else {
+            const int itStepLon = (int)( ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse * 128.0 );
+            const int itStepLat = (int)( ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse * 128.0 );
+    
+            m_prevLon = rad2PixelX( m_prevLon );
+            m_prevLat = rad2PixelY( m_prevLat );
+    
+            // To improve speed we unroll 
+            // AbstractScanlineTextureMapper::pixelValue(...) here and 
+            // calculate the performance critical issues via integers
+    
+            int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+            int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+    
+            for ( int j=1; j < m_n; ++j ) {
+                m_iPosX = ( itLon + itStepLon * j ) >> 7;
+                m_iPosY = ( itLat + itStepLat * j ) >> 7;
+    
+                if (  m_iPosX >= m_tileLoader->tileWidth() 
+                || m_iPosX < 0
+                || m_iPosY >= m_tileLoader->tileHeight()
+                || m_iPosY < 0 )
+                {
+                    nextTile( m_iPosX, m_iPosY );
+                    itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+                    m_iPosX = ( itLon + itStepLon * j ) >> 7;
+                    m_iPosY = ( itLat + itStepLat * j ) >> 7;
+                }
+    
+                *scanLine = m_tile->pixel( m_iPosX, m_iPosY ); 
+    
+                ++scanLine;
             }
-            else {
-                QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-                *scanLine = bilinearSmooth( topLeftValue );
-            }
-
-            ++scanLine;
         }
     }
 

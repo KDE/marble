@@ -34,6 +34,8 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
     : QObject( parent ),
       m_posX( 0.0 ),
       m_posY( 0.0 ),
+      m_iPosX( 0 ),
+      m_iPosY( 0 ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),
@@ -197,46 +199,66 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
                                                QRgb* scanLine,
                                                bool smooth )
 {
-    // Convert the lon and lat coordinates of the position on the scanline
-    // measured in radian to the pixel position of the requested 
-    // coordinate on the current tile.
+    // The same method using integers performs about 33% faster.
+    // However we need the double version to create the high quality mode.
 
-    // qDebug() << "AbstractScanlineTextureMapper::pixelValue 1";
+    if ( smooth ) {
+        // Convert the lon and lat coordinates of the position on the scanline
+        // measured in radian to the pixel position of the requested 
+        // coordinate on the current tile.
+
+        m_posX = m_toTileCoordinatesLon + rad2PixelX( lon );
+        m_posY = m_toTileCoordinatesLat + rad2PixelY( lat );
+
+        // Most of the time while moving along the scanLine we'll stay on the 
+        // same tile. However at the tile border we might "fall off". If that 
+        // happens we need to find out the next tile that needs to be loaded.
     
-    m_posX = m_toTileCoordinatesLon + rad2PixelX( lon );
-    m_posY = m_toTileCoordinatesLat + rad2PixelY( lat );
-
-    // Most of the time while moving along the scanLine we'll stay on the 
-    // same tile. However at the tile border we might "fall off". If that 
-    // happens we need to find out the next tile that needs to be loaded.
-
-    if ( m_posX  >= (double)( m_tileLoader->tileWidth() ) 
-         || m_posX < 0.0
-         || m_posY >= (double)( m_tileLoader->tileHeight() )
-         || m_posY < 0.0 )
-    {
-        nextTile();
-    }
-
-    if ( !smooth ) {
-        *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-    }
-    else {
+        if ( m_posX  >= (double)( m_tileLoader->tileWidth() ) 
+            || m_posX < 0.0
+            || m_posY >= (double)( m_tileLoader->tileHeight() )
+            || m_posY < 0.0 )
+        {
+            nextTile( m_posX, m_posY );
+        }
+    
         QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
         *scanLine = bilinearSmooth( topLeftValue );
     }
+    else {
+        // Convert the lon and lat coordinates of the position on the scanline
+        // measured in radian to the pixel position of the requested 
+        // coordinate on the current tile.
+
+        m_iPosX = (int)( m_toTileCoordinatesLon + rad2PixelX( lon ) );
+        m_iPosY = (int)( m_toTileCoordinatesLat + rad2PixelY( lat ) );
+
+        // Most of the time while moving along the scanLine we'll stay on the 
+        // same tile. However at the tile border we might "fall off". If that 
+        // happens we need to find out the next tile that needs to be loaded.
+    
+        if ( m_iPosX  >= m_tileLoader->tileWidth() 
+            || m_iPosX < 0
+            || m_iPosY >= m_tileLoader->tileHeight()
+            || m_iPosY < 0 )
+        {
+            nextTile( m_iPosX, m_iPosY );
+        }
+    
+        *scanLine = m_tile->pixel( m_iPosX, m_iPosY ); 
+    }
 }
 
-void AbstractScanlineTextureMapper::nextTile()
+void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
 {
     // Move from tile coordinates to global texture coordinates 
     // ( with origin in upper left corner, measured in pixel) 
 
-    int lon = (int)(m_posX + m_tilePosX);
+    int lon = posX + m_tilePosX;
     if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
     if ( lon < 0 ) lon += m_maxGlobalX;
 
-    int lat = (int)(m_posY + m_tilePosY);
+    int lat = posY + m_tilePosY;
     if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
     if ( lat < 0 ) lat += m_maxGlobalY;
 
@@ -255,11 +277,46 @@ void AbstractScanlineTextureMapper::nextTile()
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
     m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
-    m_posX = lon - m_tilePosX;
+    posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileLoader->tileHeight();
     m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
-    m_posY = lat - m_tilePosY;
+    posY = lat - m_tilePosY;
+}
+
+void AbstractScanlineTextureMapper::nextTile( double &posX, double &posY )
+{
+    // Move from tile coordinates to global texture coordinates 
+    // ( with origin in upper left corner, measured in pixel) 
+
+    int lon = (int)(posX + m_tilePosX);
+    if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
+    if ( lon < 0 ) lon += m_maxGlobalX;
+
+    int lat = (int)(posY + m_tilePosY);
+    if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
+    if ( lat < 0 ) lat += m_maxGlobalY;
+
+    // tileCol counts the tile columns left from the current tile.
+    // tileRow counts the tile rows on the top from the current tile.
+
+    int tileCol = lon / m_tileLoader->tileWidth();
+    int tileRow = lat / m_tileLoader->tileHeight();
+
+    m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
+
+    // Update position variables:
+    // m_tilePosX/Y stores the position of the tiles in 
+    // global texture coordinates 
+    // ( origin upper left, measured in pixels )
+
+    m_tilePosX = tileCol * m_tileLoader->tileWidth();
+    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
+    posX = lon - m_tilePosX;
+
+    m_tilePosY = tileRow * m_tileLoader->tileHeight();
+    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
+    posY = lat - m_tilePosY;
 }
 
 void AbstractScanlineTextureMapper::notifyMapChanged()

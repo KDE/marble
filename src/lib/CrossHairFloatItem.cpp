@@ -31,11 +31,15 @@ void CrossHairFloatItem::paint( QPainter* painter, int width, int height)
         int  centery  = height / 2;
         int  halfsize = 5;
 
+        painter->save();
+
+        painter->setRenderHint( QPainter::Antialiasing, false );
         painter->setPen( QColor( Qt::white ) );
         painter->drawLine( centerx - halfsize, centery,
                            centerx + halfsize, centery );
         painter->drawLine( centerx, centery - halfsize,
                            centerx, centery + halfsize );
+        painter->restore();
     }	
 }
 
