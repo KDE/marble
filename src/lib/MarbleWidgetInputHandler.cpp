@@ -33,6 +33,10 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     connect( m_mouseWheelTimer, SIGNAL( timeout() ), this, SLOT( restoreViewContext() ) );
 }
 
+MarbleWidgetInputHandler::~MarbleWidgetInputHandler()
+{
+    delete m_mouseWheelTimer;
+}
 
 void MarbleWidgetInputHandler::init(MarbleWidget *w)
 {

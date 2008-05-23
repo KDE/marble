@@ -35,7 +35,7 @@ class MarbleWidgetInputHandler  : public QObject
 
  public:
     MarbleWidgetInputHandler();
-    virtual ~MarbleWidgetInputHandler(){}
+    virtual ~MarbleWidgetInputHandler();
 
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
     bool isPositionSignalConnected() const { return m_positionSignalConnected; }
