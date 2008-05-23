@@ -23,7 +23,7 @@ TrackContainer::TrackContainer() : AbstractLayerContainer()
 
 void TrackContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize, ViewParams *viewParams,
-                           BoundingBox &box )
+                           const BoundingBox &box )
 {
     const_iterator it;
 

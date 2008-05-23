@@ -56,7 +56,7 @@ bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
 
 void GpsLayer::paintLayer( ClipPainter *painter, 
                           const QSize &canvasSize, ViewParams *viewParams,
-                          BoundingBox &box )
+                          const BoundingBox &box )
 {
     if ( visible() ) {
         m_currentPosition->draw( painter, canvasSize, 

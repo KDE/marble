@@ -1,5 +1,35 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/gps/Route.cpp:
+    * src/lib/gps/GpxFile.cpp:
+    * src/lib/gps/RouteContainer.cpp:
+    * src/lib/gps/Route.h:
+    * src/lib/gps/GpxFile.h:
+    * src/lib/gps/Track.cpp:
+    * src/lib/gps/RouteContainer.h:
+    * src/lib/gps/TrackContainer.cpp:
+    * src/lib/gps/Track.h:
+    * src/lib/gps/TrackContainer.h:
+    * src/lib/gps/WaypointContainer.cpp:
+    * src/lib/gps/WaypointContainer.h:
+    * src/lib/gps/GpsLayer.cpp:
+    * src/lib/gps/TrackSegment.cpp:
+    * src/lib/gps/GpsLayer.h:
+    * src/lib/gps/TrackSegment.h:
+    * src/lib/AbstractLayer/AbstractLayerData.h:
+    * src/lib/AbstractLayer/AbstractLayer.cpp:
+    * src/lib/AbstractLayer/AbstractLayerContainer.cpp:
+    * src/lib/AbstractLayer/AbstractLayer.h:
+    * src/lib/AbstractLayer/AbstractLayerInterface.h:
+    * src/lib/AbstractLayer/AbstractLayerContainer.h:
+    * src/lib/AbstractLayer/AbstractLayerData.cpp:
+
+    Change parameter type of draw and paintLayer methods from
+    "BoundingBox &" to "const BoundingBox &".
+    This is needed for d-pointerfication of class ViewportParams.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/BoundingBox.h:
     * src/lib/BoundingBox.cpp:
 

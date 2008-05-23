@@ -100,7 +100,7 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
 void AbstractLayer::paintLayer( ClipPainter* painter, 
                                 const QSize& screenSize,
                                 ViewParams *viewParams, 
-                                BoundingBox &bounding )
+                                const BoundingBox &bounding )
 {
     QVector<AbstractLayerContainer *>::const_iterator it;
 

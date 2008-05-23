@@ -61,7 +61,7 @@ void AbstractLayerData::draw(ClipPainter *painter,
 void AbstractLayerData::draw( ClipPainter *painter, 
                               const QSize &canvasSize,
                               ViewParams *viewParams,
-                              BoundingBox &box )
+                              const BoundingBox &box )
 {
     // Does not apply to abstractLayerData
     Q_UNUSED( painter );

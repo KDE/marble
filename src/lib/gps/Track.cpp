@@ -45,7 +45,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
 }
 
 void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
-                 ViewParams *viewParams, BoundingBox &box)
+                 ViewParams *viewParams, const BoundingBox &box)
 {
 #if 0
     qDebug()<<"test er";

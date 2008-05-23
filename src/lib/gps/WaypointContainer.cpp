@@ -23,7 +23,7 @@ void WaypointContainer::processVisable()
 
 void WaypointContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize, ViewParams *viewParams,
-                           BoundingBox &box )
+                           const BoundingBox &box )
 {
     Q_UNUSED( box );
 

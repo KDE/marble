@@ -108,7 +108,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      */
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize, ViewParams *viewParams,
-                      BoundingBox &box);
+                      const BoundingBox &box);
     
     /**
      * @brief m_name getter

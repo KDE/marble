@@ -79,7 +79,7 @@ class AbstractLayer: public QObject
     virtual void paintLayer( ClipPainter* painter, 
 			     const QSize& screenSize,
 			     ViewParams *viewParams, 
-			     BoundingBox &bounding );
+			     const BoundingBox &bounding );
 
  public:
     /**

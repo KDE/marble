@@ -35,7 +35,7 @@ class TrackContainer : public AbstractLayerContainer
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize,
                        ViewParams *viewParams,
-                       BoundingBox &box );
+                       const BoundingBox &box );
 };
 
 #endif
