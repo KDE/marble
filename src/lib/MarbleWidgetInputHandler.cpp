@@ -30,7 +30,8 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler()
 {
     m_positionSignalConnected = false;
     m_mouseWheelTimer = new QTimer(this);
-    connect( m_mouseWheelTimer, SIGNAL( timeout() ), this, SLOT( restoreViewContext() ) );
+    connect( m_mouseWheelTimer, SIGNAL( timeout() ),
+	     this,              SLOT( restoreViewContext() ) );
 }
 
 MarbleWidgetInputHandler::~MarbleWidgetInputHandler()
@@ -74,6 +75,10 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
 
 void MarbleWidgetInputHandler::restoreViewContext()
 {
+    // Needs to stop the timer since it repeats otherwise.
+    m_mouseWheelTimer->stop();
+
+    // Redraw the map with the quality set for Marble::Still (if necessary).
     m_widget->setViewContext( Marble::Still );
     if ( m_widget->mapQuality( Marble::Still )
         != m_widget->mapQuality( Marble::Animation ) )
