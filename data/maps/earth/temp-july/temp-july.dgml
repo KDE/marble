@@ -253,72 +253,48 @@
                 </item>
             </section>
     
-            <section name="elevation" checkable="false" spacing="12">
+            <section name="temperature" checkable="false" spacing="12">
                 <heading>Temperature</heading>
 
-                <item name="topography7000">
-                    <icon color="#c39d55"/>
-                    <text>30°C</text>
+                <item name="temp42">
+                    <icon color="#ff0000"/>
+                    <text>42°C</text>
                 </item>
-                <item name="topography5000">
-                    <icon color="#dcbd80"/>
-                    <text>5000 m</text>
+                <item name="temp32">
+                    <icon color="#ff8000"/>
+                    <text>32°C</text>
                 </item>
-                <item name="topography3500">
-                    <icon color="#f0da96"/>
-                    <text>3500 m</text>
+                <item name="temp23">
+                    <icon color="#ffff00"/>
+                    <text>23°C</text>
                 </item>
-                <item name="topography2000">
-                    <icon color="#f1e7ad"/>
-                    <text>2000 m</text>
+                <item name="temp12">
+                    <icon color="#c0c040"/>
+                    <text>12°C</text>
                 </item>
-                <item name="topography1000">
-                    <icon color="#d7d399"/>
-                    <text>1000 m</text>
+                <item name="temp1">
+                    <icon color="#808080"/>
+                    <text>1°C</text>
                 </item>
-                <item name="topography500">
-                    <icon color="#bcc48a"/>
-                    <text>500 m</text>
+                <item name="temp-10">
+                    <icon color="#4040c0"/>
+                    <text>-10°C</text>
                 </item>
-                <item name="topography200">
-                    <icon color="#98b47a"/>
-                    <text>200 m</text>
+                <item name="temp-21">
+                    <icon color="#0000ff"/>
+                    <text>-21°C</text>
                 </item>
-                <item name="topography50">
-                    <icon color="#81a96d"/>
-                    <text>50 m</text>
+                <item name="temp-32">
+                    <icon color="#4040ff"/>
+                    <text>-32°C</text>
                 </item>
-                <item name="topography0">
-                    <icon color="#689961"/>
-                    <text>0 m</text>
+                <item name="temp-41">
+                    <icon color="#8080ff"/>
+                    <text>-41°C</text>
                 </item>
-                <item name="topography-0">
-                    <icon color="#e3ecf5"/>
-                    <text>0 m (Water)</text>
-                </item>
-                <item name="topography-50">
-                    <icon color="#d0def2"/>
-                    <text>-50 m</text>
-                </item>
-                <item name="topography-200">
-                    <icon color="#bfd5ee"/>
-                    <text>-200 m</text>
-                </item>
-                <item name="topography-2000">
-                    <icon color="#a3c3e6"/>
-                    <text>-2000 m</text>
-                </item>
-                <item name="topography-4000">
-                    <icon color="#89b0da"/>
-                    <text>-4000 m</text>
-                </item>
-                <item name="topography-6500">
-                    <icon color="#6b99c9"/>
-                    <text>-6500 m</text>
-                </item>
-                <item name="topography-11000">
-                    <icon color="#5182b4"/>
-                    <text>-11000 m</text>
+                <item name="temp-69">
+                    <icon color="#ffffff"/>
+                    <text>-69°C</text>
                 </item>
             </section>
 
