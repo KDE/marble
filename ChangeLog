@@ -1,5 +1,11 @@
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * TODO:
+
+    Add expiration and search for OpenStreetMap.
+
+2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/TileLoader.cpp (baseTilesAvailable): fix missing break by
     putting the noerr condition into the for statement.
     (maxCompleteTileLevel): rework likewise.

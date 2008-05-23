@@ -89,8 +89,10 @@ Features:
  * Settings								----
     - DMS  <-->  Degrees (decimal)					inge
  * Support for OpenStreetMap                                            JM
-    - load tiles                                                        done
-    - display tiles                                                     done
+    - Load tiles                                                        done
+    - Display tiles                                                     done
+    - Expiration of tiles                                               ----
+    - Searching for cities and streets                                  ----
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
  * Mercator Projection                                                  INGE
