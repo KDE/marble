@@ -1,3 +1,11 @@
+2008-05-24  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * CMakeLists.txt
+    * src/CMakeLists.txt
+    * src/geoshape/CMakeLists.txt
+    
+    use new FindKOfficeLibs.cmake file instead before building the geoshape.
+    
 2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/TileCache.cpp
