@@ -1,3 +1,14 @@
+2008-05-24  Torsten Rahn  <rahn@kde.org> 
+
+    * data/maps/earth/openstreetmap/0/0/0.png:
+
+    - Given that the previous OSM tile shipped with Marble was
+      licensed under the Creative Commons Attribution-ShareAlike 2.0 license
+      and given that Debian doesn't approve this license as a 
+      "free" license we replace the very low resolution tile by a simple blue
+      square for now. Later on we'll add a public domain map in the style
+      of the original OSM tile.
+
 2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/ViewportParams.h:
@@ -5,7 +16,7 @@
 
     D-pointerfy class ViewportParams.
 
-2008-05-22  Torsten Rahn  <rahn@kde.org> 
+2008-05-23  Torsten Rahn  <rahn@kde.org> 
 
     * TileLoader.cpp:
 
