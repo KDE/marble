@@ -47,6 +47,7 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
 
 
 MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
+    : MarbleWidgetInputHandler()
 {
     curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
     curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );

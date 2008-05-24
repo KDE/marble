@@ -1,3 +1,24 @@
+2008-05-22  Torsten Rahn  <rahn@kde.org> 
+
+    * TileLoader.cpp:
+
+    This fixes the most obvious issues with the tile downloading.
+    The only real other issue left is speed: We need to 
+    improve the HttpDownloadManager to have better algorithms
+    to better prioritize the currently needed tiles.
+
+
+    - Fix what is probably Marble's most hated bug:
+      Tiles being "stuck". The culprit: when a new tile was 
+      successfully downloaded and the temporary "replacement" tile 
+      was still in the cache, that replacement tile should have 
+      gotten removed from the cache to make way for the real one.
+
+    * HttpDownloadManager.cpp:
+
+    - Increase number of activated downloads to hopefully 
+      get the speed a little bit up
+
 2008-05-23  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarbleMap.cpp:

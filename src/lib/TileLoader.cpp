@@ -346,6 +346,8 @@ void TileLoader::reloadTile( const QString &idStr )
         m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_textureLayer, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {
+      // Remove "false" tile from cache so it doesn't get loaded anymore
+      d->m_tileCache.remove( id );
       qDebug() << "No such ID:" << idStr;
     }
 }

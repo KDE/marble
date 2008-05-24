@@ -19,7 +19,7 @@
 #include "StoragePolicy.h"
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *policy ) 
-    : m_activatedJobsLimit( 5 )
+    : m_activatedJobsLimit( 40 )
     , m_jobQueueLimit( 1000 )
     , m_serverUrl( serverUrl )
     , m_storagePolicy( policy )
