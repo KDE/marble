@@ -454,9 +454,7 @@ void MarbleWidget::zoomView(int newZoom)
 
     // We only have to repaint the background every time if the globe
     // doesn't cover the whole image.
-    if ( ! d->m_map->globeCoversImage() 
-         || d->m_map->projection() != Spherical )
-    {
+    if ( ! d->m_map->mapCoversViewport() ) {
         setAttribute( Qt::WA_NoSystemBackground, false );
     }
     else {
@@ -544,9 +542,7 @@ void MarbleWidget::setProjection( Projection projection )
 {
     d->m_map->setProjection( projection );
 
-    if ( projection == Spherical
-         && d->m_map->globeCoversImage()  )
-    {
+    if ( d->m_map->mapCoversViewport()  ) {
         setAttribute( Qt::WA_NoSystemBackground, true );
     }
     else {
@@ -642,7 +638,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     //	Redefine the area where the mousepointer becomes a navigationarrow
     d->setActiveRegion();
 
-    if ( d->m_map->globeCoversImage() ) {
+    if ( d->m_map->mapCoversViewport() ) {
         setAttribute(Qt::WA_NoSystemBackground, true );
     }
     else {

@@ -251,3 +251,23 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect, 
 
     return latLonAltBox;
 }
+
+
+bool SphericalProjection::mapCoversViewport( const ViewportParams *viewport ) const
+{
+    qint64  radius = viewport->radius();
+    qint64  width  = viewport->width();
+    qint64  height = viewport->height();
+
+    // This first test is a quick one that will catch all really big
+    // radii and prevent overflow in the real test.
+    if ( radius > width + height )
+        return true;
+
+    // This is the real test.  The 4 is because we are really
+    // comparing to width/2 and height/2.
+    if ( 4 * radius * radius >= width * width + height * height )
+        return true;
+
+    return false;
+}

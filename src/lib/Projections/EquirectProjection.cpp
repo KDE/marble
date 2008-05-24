@@ -285,10 +285,8 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
 }
 
 
-#if 0
 bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) const
 {
-    // FIXME
-    return true;
+    // FIXME: NYI
+    return false;
 }
-#endif

@@ -1,3 +1,18 @@
+2008-05-24  Inge Wallin  <inge@lysator.liu.se>
+
+	Move globeCoversImage to the projection classes and call it
+	mapCoversViewport.
+	* src/lib/Projections/AbstractProjection.h,
+	* src/lib/Projections/SphericalProjection.{h,cpp},
+	* src/lib/Projections/EquirectProjection.{h,cpp},
+	* src/lib/Projections/MercatorProjection.{h,cpp}:
+	(mapCoversViewport): New function.
+	* src/lib/ViewportParams.{h,cpp} (mapCoversViewport): new function
+	* src/lib/MarbleMap.{h,cpp} (globeCoversImage): 
+	   - Renamed into mapCoversViewport
+	   - Call viewport->mapCoversViewport()
+	* src/lib/MarbleWidget.cpp: Call m_map->mapCoversViewport().
+	
 2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/gps/Track.h:
@@ -191,6 +206,8 @@
 	projection helpers
 	(setActiveRegion): call function in the projection helpers 
 
+	Fix a bug that makes marble loop forever after a zoom using the
+	scroll wheel
 	* src/lib/MarbleWidgetInputHandler.cpp (restoreViewContext): Stop
 	the timer when we redraw with high quality.  It seems the timer
 	otherwise refires every X milliseconds.

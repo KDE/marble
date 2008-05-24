@@ -147,10 +147,13 @@ class AbstractProjection
                                  Quaternion &q ) = 0;
 
     virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-                                 const ViewportParams *viewport );
+					      const ViewportParams *viewport );
 
     virtual GeoDataLinearRing rectOutline( const QRect& screenRect,
-                                 const ViewportParams *viewport );
+					   const ViewportParams *viewport );
+
+    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
+
 
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.

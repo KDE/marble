@@ -27,6 +27,10 @@ public:
     // the static Projection classes at the bottom.
     Projection           m_projection;
     AbstractProjection  *m_currentProjection;
+
+    // FIXME: A map quality has *nothing* to do with a viewport.
+    //        This must be removed.  Use the classes for what they are
+    //        designed to hold and do.
     MapQuality           m_mapQuality;
 
     // Parameters that determine the painting
@@ -266,7 +270,13 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 {
-    return d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), d->m_size ), this );
+    return d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 
+							d->m_size ),
+						 this );
 }
 
 
+bool  ViewportParams::mapCoversViewport() const
+{
+    return d->m_currentProjection->mapCoversViewport( this );
+}

@@ -80,6 +80,8 @@ class MARBLE_EXPORT ViewportParams
     // Other functions
     void centerCoordinates( double &centerLon, double &centerLat ) const;
 
+    bool  mapCoversViewport() const;
+
  private:
     Q_DISABLE_COPY( ViewportParams )
     ViewportParamsPrivate * const d;

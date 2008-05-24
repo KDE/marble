@@ -826,7 +826,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setDownloadUrl( const QUrl &url );
 
-    bool  globeCoversImage();
+    bool  mapCoversViewport();
 
  Q_SIGNALS:
     /**

@@ -455,9 +455,7 @@ void MarbleMap::zoomView(int newZoom)
 
     // Clear canvas if the globe is visible as a whole or if the globe
     // does shrink.
-    if ( ! globeCoversImage() 
-         || projection() != Spherical )
-    {
+    if ( ! mapCoversViewport() ) {
         d->m_viewParams.canvasImage()->fill( Qt::black );
     }
 
@@ -568,9 +566,7 @@ void MarbleMap::setProjection( Projection projection )
     d->m_viewParams.setProjection( projection );
 
     // Redraw the background if necessary
-    if ( !globeCoversImage() 
-         || d->m_viewParams.projection() != Spherical )
-    {
+    if ( !mapCoversViewport() ) {
         d->m_viewParams.canvasImage()->fill( Qt::black );
     }
  
@@ -650,9 +646,7 @@ void MarbleMapPrivate::doResize()
                                              QImage::Format_ARGB32_Premultiplied ));
 
     // Repaint the background if necessary
-    if ( ! m_parent->globeCoversImage()
-         || m_viewParams.projection() != Spherical )
-    {
+    if ( ! m_viewParams.viewport()->mapCoversViewport() ) {
         m_viewParams.canvasImage()->fill( Qt::black );
     }
 
@@ -759,7 +753,7 @@ void MarbleMapPrivate::drawAtmosphere()
         return;
 
     // No use to draw atmosphere if it's not visible in the area. 
-    if ( m_parent->globeCoversImage() )
+    if ( m_viewParams.viewport()->mapCoversViewport() )
         return;
 
     // Ok, now we know that at least a little of the atmosphere is
@@ -795,7 +789,7 @@ void MarbleMapPrivate::drawFog( QPainter &painter )
         return;
 
     // No use to draw the fog if it's not visible in the area. 
-    if ( m_parent->globeCoversImage() )
+    if ( m_viewParams.viewport()->mapCoversViewport() )
         return;
 
     int  imgWidth2  = m_parent->width() / 2;
@@ -1231,19 +1225,9 @@ QString MarbleMap::distanceString() const
 }
 
 
-bool MarbleMap::globeCoversImage()
+bool MarbleMap::mapCoversViewport()
 {
-    // This first test is a quick one that will catch all really big
-    // radii and prevent overflow in the real test.
-    if ( radius() > width() + height() )
-        return true;
-
-    // This is the real test.  The 4 is because we are really
-    // comparing to width/2 and height/2.
-    if ( 4 * radius() * radius() >= width() * width() + height() * height() )
-        return true;
-
-    return false;
+    return d->m_viewParams.viewport()->mapCoversViewport();
 }
 
 

@@ -98,19 +98,11 @@ Features:
  * Mercator Projection                                                  INGE
     - Move projection stuff to its own subdirectory			done
     - Create a helper class ProjectionHelper to perform actual actions	done
-    - Make the vector base work        					inge
     - Move paintBase to ProjectionHelper				done
     - Move activeRegion to ProjectionHelper				done
- 
-    - <strikeout>Move mapCoversImage (prev. globeCoversImage) to ProjectionHelper</strikeout>
-      "mapCoversImage" is NOT meant to go to ProjectionHelper.
-       The projection's main intent is to map e.g. a set of 
-       geo coordinates onto a value set (i.e. the image/screen coordinates. 
-       "mapCoversImage" just describes whether there are invalid 
-       screen coordinates which don't belong to the value set. 
-       Hence mapCoversImage fits perfectly into the projection classes.
-       Actually it should rather get named "projectionCoversImage"  
-       but I guess mapCoversImage brings the point across better.
+    - Move mapCoversImage (prev. globeCoversImage) to Projection	done
+    - Make the vector base work (VectorMap)	   			inge
+    - Fix ActiveRegion for Mercator.					inge
 
  * Fix GPS Support (that's a regression) 				ANDR
     - Make it a Marble plugin						--
