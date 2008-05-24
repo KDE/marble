@@ -13,21 +13,62 @@
 
 #include <QtCore/QRect>
 
-ViewportParams::ViewportParams( )
+class ViewportParamsPrivate
 {
-    // Default projection
-    setProjection( Spherical );
+public:
+     ViewportParamsPrivate();
 
+    // These two go together.  m_currentProjection points to one of
+    // the static Projection classes at the bottom.
+    Projection           m_projection;
+    AbstractProjection  *m_currentProjection;
+    MapQuality           m_mapQuality;
+
+    // Parameters that determine the painting
+    Quaternion           m_planetAxis;   // Position, coded in a quaternion
+    mutable matrix       m_planetAxisMatrix;
+    int                  m_radius;       // Zoom level (pixels / globe radius)
+
+    QSize                m_size;         // width, height
+
+    // FIXME: The usage of the class BoundingBox as a whole is DEPRECATED
+    //        Please use the class GeoDataLatLon(Alt)Box instead! 
+    BoundingBox m_boundingBox;  // What the view currently can see
+
+    static SphericalProjection  s_sphericalProjection;
+    static EquirectProjection   s_equirectProjection;
+    static MercatorProjection   s_mercatorProjection;
+};
+
+ViewportParamsPrivate::ViewportParamsPrivate()
+    : m_projection( Spherical ),                    // Default projection
+      m_currentProjection( &s_sphericalProjection ),
+      m_mapQuality( Normal ),
+      m_planetAxis(),
+      m_planetAxisMatrix(),
+      m_radius( 2000 ),
+      m_size( 100, 100 ),
+      m_boundingBox()
+{
+} 
+
+
+// FIXME: avoid usage of static objects
+SphericalProjection  ViewportParamsPrivate::s_sphericalProjection;
+EquirectProjection   ViewportParamsPrivate::s_equirectProjection;
+MercatorProjection   ViewportParamsPrivate::s_mercatorProjection;
+
+
+ViewportParams::ViewportParams()
+    : d( new ViewportParamsPrivate )
+{
     // Default view
     setPlanetAxis( Quaternion( 1.0, 0.0, 0.0, 0.0 ) );
-
-    m_radius     = 2000;
-    m_size       = QSize( 100, 100 );
-    m_mapQuality = Normal;
 }
 
 ViewportParams::~ViewportParams()
 {
+    delete d;
 }
 
 
@@ -37,28 +78,28 @@ ViewportParams::~ViewportParams()
 
 Projection ViewportParams::projection() const
 {
-    return m_projection;
+    return d->m_projection;
 }
 
 AbstractProjection *ViewportParams::currentProjection() const
 {
-    return m_currentProjection;
+    return d->m_currentProjection;
 }
 
 void ViewportParams::setProjection(Projection newProjection)
 {
-    m_projection = newProjection;
+    d->m_projection = newProjection;
 
     // Set the pointer to the current projection class.
     switch ( newProjection ) {
     case Spherical:
-        m_currentProjection = &s_sphericalProjection;
+        d->m_currentProjection = &d->s_sphericalProjection;
         break;
     case Equirectangular:
-        m_currentProjection = &s_equirectProjection;
+        d->m_currentProjection = &d->s_equirectProjection;
         break;
     case Mercator:
-        m_currentProjection = &s_mercatorProjection;
+        d->m_currentProjection = &d->s_mercatorProjection;
         break;
     }
 }
@@ -108,24 +149,25 @@ int ViewportParams::polarity() const
 
 int ViewportParams::radius() const
 {
-    return m_radius;
+    return d->m_radius;
 }
 
 void ViewportParams::setRadius(int newRadius)
 {
-    m_radius = newRadius;
+    d->m_radius = newRadius;
 }
 
 bool ViewportParams::globeCoversViewport() const
 {
     // This first test is a quick one that will catch all really big
     // radii and prevent overflow in the real test.
-    if ( m_radius > m_size.width() + m_size.height() )
+    if ( d->m_radius > d->m_size.width() + d->m_size.height() )
         return true;
 
     // This is the real test.  The 4 is because we are really
     // comparing to width/2 and height/2.
-    if ( 4 * m_radius * m_radius >= m_size.width() * m_size.width() + m_size.height() * m_size.height() )
+    if ( 4 * d->m_radius * d->m_radius >= d->m_size.width() * d->m_size.width()
+                                          + d->m_size.height() * d->m_size.height() )
         return true;
 
     return false;
@@ -133,69 +175,69 @@ bool ViewportParams::globeCoversViewport() const
 
 Quaternion ViewportParams::planetAxis() const
 {
-    return m_planetAxis;
+    return d->m_planetAxis;
 }
 
 void ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
-    m_planetAxis = newAxis;
-    planetAxis().inverse().toMatrix( m_planetAxisMatrix );
+    d->m_planetAxis = newAxis;
+    planetAxis().inverse().toMatrix( d->m_planetAxisMatrix );
 }
 
 matrix * ViewportParams::planetAxisMatrix() const
 {
-    return &m_planetAxisMatrix;
+    return &d->m_planetAxisMatrix;
 }
 
 int ViewportParams::width()  const
 {
-    return m_size.width();
+    return d->m_size.width();
 }
 
 int ViewportParams::height() const
 {
-    return m_size.height();
+    return d->m_size.height();
 }
 
 QSize ViewportParams::size() const
 {
-    return m_size;
+    return d->m_size;
 }
 
 
 void ViewportParams::setWidth(int newWidth)
 {
-    m_size.setWidth( newWidth );
+    d->m_size.setWidth( newWidth );
 }
 
 void ViewportParams::setHeight(int newHeight)
 {
-    m_size.setHeight( newHeight );
+    d->m_size.setHeight( newHeight );
 }
 
 void ViewportParams::setSize(QSize newSize)
 {
-    m_size = newSize;
+    d->m_size = newSize;
 }
 
 MapQuality ViewportParams::mapQuality()
 {
-    return m_mapQuality; 
+    return d->m_mapQuality; 
 }
 
 void ViewportParams::setMapQuality( MapQuality mapQuality )
 {
-    m_mapQuality = mapQuality; 
+    d->m_mapQuality = mapQuality; 
 }
 
 BoundingBox ViewportParams::boundingBox() const
 {
-    return m_boundingBox;
+    return d->m_boundingBox;
 }
 
 void ViewportParams::setBoundingBox( const BoundingBox & boundingBox )
 {
-    m_boundingBox = boundingBox;
+    d->m_boundingBox = boundingBox;
 }
 
 // ================================================================
@@ -205,11 +247,11 @@ void ViewportParams::setBoundingBox( const BoundingBox & boundingBox )
 void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) const
 {
     // Calculate translation of center point
-    centerLat = - m_planetAxis.pitch();
+    centerLat = - d->m_planetAxis.pitch();
     if ( centerLat > M_PI )
         centerLat -= 2 * M_PI;
 
-    centerLon = + m_planetAxis.yaw();
+    centerLon = + d->m_planetAxis.yaw();
     if ( centerLon > M_PI )
         centerLon -= 2 * M_PI;
 
@@ -219,10 +261,7 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 {
-    return m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), m_size ), this );
+    return d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), d->m_size ), this );
 }
 
 
-SphericalProjection  ViewportParams::s_sphericalProjection;
-EquirectProjection   ViewportParams::s_equirectProjection;
-MercatorProjection   ViewportParams::s_mercatorProjection;

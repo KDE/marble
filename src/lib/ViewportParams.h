@@ -32,6 +32,8 @@
 #include "MercatorProjection.h"
 #include "marble_export.h"
 
+class ViewportParamsPrivate;
+
 using namespace Marble;
 
 /** 
@@ -81,27 +83,7 @@ class MARBLE_EXPORT ViewportParams
     void centerCoordinates( double &centerLon, double &centerLat ) const;
 
  private:
-    // These two go together.  m_currentProjection points to one of
-    // the static Projection classes at the bottom.
-    Projection           m_projection;
-    AbstractProjection  *m_currentProjection;
-    MapQuality           m_mapQuality;
-
-    // Parameters that determine the painting
-    Quaternion           m_planetAxis;   // Position, coded in a quaternion
-    mutable matrix       m_planetAxisMatrix;
-    int                  m_radius;       // Zoom level (pixels / globe radius)
-
-    QSize                m_size;         // width, height
-
-    // FIXME: The usage of the class BoundingBox as a whole is DEPRECATED
-    //        Please use the class GeoDataLatLon(Alt)Box instead! 
-    BoundingBox m_boundingBox;  // What the view currently can see
-
-
-    static SphericalProjection  s_sphericalProjection;
-    static EquirectProjection   s_equirectProjection;
-    static MercatorProjection   s_mercatorProjection;
+    ViewportParamsPrivate * const d;
 };
 
 

@@ -1,3 +1,10 @@
+2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/ViewportParams.h:
+    * src/lib/ViewportParams.cpp:
+
+    D-pointerfy class ViewportParams.
+
 2008-05-22  Torsten Rahn  <rahn@kde.org> 
 
     * TileLoader.cpp:
