@@ -28,11 +28,11 @@
 #include "HttpDownloadManager.h"
 #include "TextureTile.h"
 #include "MarbleDirs.h"
-#include "TileCache.h"
 #include "TileId.h"
 #include "MarbleModel.h"
 #include "TileLoaderHelper.h"
 
+#include <QtCore/QCache>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
 
@@ -49,8 +49,7 @@ class TileLoader::Private
             : m_downloadManager( 0 ),
               m_textureLayer( 0 )
         {
-            m_tileCache.clear();
-            m_tileCache.setCacheLimit( 20000 ); // Cache size measured in kiloByte
+            m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
         }
 
         ~Private()
@@ -62,7 +61,7 @@ class TileLoader::Private
         QHash <TileId, TextureTile*>  m_tileHash;
         int           m_tileWidth;
         int           m_tileHeight;
-        TileCache     m_tileCache;
+        QCache <TileId, TextureTile>  m_tileCache;
 };
 
 TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent)
@@ -132,7 +131,7 @@ void TileLoader::cleanupTilehash()
         it.next();
         if ( it.value()->used() == false ) {
 
-            bool inCache = d->m_tileCache.insert( it.key(), it.value() );
+            bool inCache = d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
             d->m_tileHash.remove( it.key() );
             if ( inCache == false )
                 delete it.value();
@@ -147,7 +146,7 @@ void TileLoader::flush()
     while ( it.hasNext() ) {
         it.next();
 
-        bool inCache = d->m_tileCache.insert( it.key(), it.value() );
+        bool inCache = d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
         d->m_tileHash.remove( it.key() );
         if ( inCache == false )
             delete it.value();
@@ -226,7 +225,7 @@ GeoSceneTexture* TileLoader::textureLayer() const
 
 quint64 TileLoader::volatileCacheLimit() const
 {
-    return d->m_tileCache.cacheLimit();
+    return d->m_tileCache.maxCost() / 1024;
 }
 
 int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
@@ -327,7 +326,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
     qDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
-    d->m_tileCache.setCacheLimit( kiloBytes );
+    d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
 void TileLoader::reloadTile( const QString &idStr )

@@ -1,3 +1,12 @@
+2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TileCache.cpp
+    * src/lib/TileLoader.cpp
+    * src/lib/TileCache.h
+    * src/lib/CMakeLists.txt
+
+    Remove class TileCache since it was only a wrapper around QCache.
+
 2008-05-24  Inge Wallin  <inge@lysator.liu.se>
 
 	Move globeCoversImage to the projection classes and call it
