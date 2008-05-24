@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
                      << "<kml xmlns=\"http://earth.google.com/kml/2.0\"> \n"
                      << "<Document> \n";
 
-        targetstream << "    <Schema name=\"MarblePlaceMark\" parent=\"PlaceMark\"> \n";
+        targetstream << "    <Schema name=\"MarblePlacemark\" parent=\"Placemark\"> \n";
         targetstream << "       <SimpleField name=\"pop\" type=\"int\"></SimpleField> \n";
         targetstream << "       <SimpleField name=\"state\" type=\"string\"></SimpleField> \n";
         targetstream << "       <SimpleField name=\"CountryNameCode\" type=\"string\"></SimpleField> \n";
@@ -117,9 +117,7 @@ int main(int argc, char *argv[])
             targetstream << "    <MarblePlacemark> \n";
             targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
             targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
-            targetstream << "        <Country>\n"
-                         << "            <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n"
-                         << "        </Country> \n";
+            targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
             targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
             targetstream << "        <pop>"
                          << escapeXml( QString::number( population ) ) << "</pop> \n";

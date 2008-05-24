@@ -1,5 +1,11 @@
 2008-05-24  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * tools/asc2kml.cpp
+    
+    make output standard compliant to KML 2.1
+    
+2008-05-24  Patrick Spendrin    <ps_ml@gmx.de>
+
     * CMakeLists.txt
     * src/CMakeLists.txt
     * src/geoshape/CMakeLists.txt
