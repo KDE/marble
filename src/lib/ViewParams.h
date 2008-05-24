@@ -111,6 +111,7 @@ class MARBLE_EXPORT ViewParams
     void setPlanetAxisUpdated( const Quaternion & );
 
  private:
+    Q_DISABLE_COPY( ViewParams )
     ViewParamsPrivate * const d;
 };
 
