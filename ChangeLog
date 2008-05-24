@@ -1,5 +1,12 @@
 2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/gps/Track.h:
+    * src/lib/AbstractLayer/AbstractLayerInterface.h:
+
+    Fix includes.
+
+2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/gps/TrackPoint.h:
     * src/lib/AbstractLayer/AbstractLayerData.h:
     * src/lib/AbstractLayer/AbstractLayerContainer.h:

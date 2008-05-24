@@ -11,8 +11,9 @@
 #define TRACK_H
 
 #include "AbstractLayer/AbstractLayerContainer.h"
-#include "../ViewParams.h"
 #include "GpsElement.h"
+
+class ViewParams;
 
 /** 
  * @brief representation of a GPS Track

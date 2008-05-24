@@ -12,13 +12,12 @@
 
 #include <QtCore/QTextStream>
 
-#include "ViewParams.h"
-
 class ClipPainter;
 class QPoint;
 class QSize;
 class BoundingBox;
-
+class ViewParams;
+ 
 class AbstractLayerInterface
 {
     friend QTextStream& operator<<( QTextStream&, 
