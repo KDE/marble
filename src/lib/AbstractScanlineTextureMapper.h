@@ -173,9 +173,11 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude )
         if ( fabs( latitude ) < 1.4835 )
             return - asinh( tan( latitude ) ) * 0.5 * m_normGlobalHeight;
         if ( latitude >= +1.4835 )
-            return - asinh( tan( +1.4835 ) ) * 0.5 * m_normGlobalHeight; 
+            // asinh( tan (1.4835)) => 3.1309587
+            return - 3.1309587 * 0.5 * m_normGlobalHeight; 
         if ( latitude <= -1.4835 )
-            return - asinh( tan( -1.4835 ) ) * 0.5 * m_normGlobalHeight; 
+            // asinh( tan( -1.4835 )) => −3.1309587
+            return 3.1309587 * 0.5 * m_normGlobalHeight; 
     }
 }
 

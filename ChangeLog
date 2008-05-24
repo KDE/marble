@@ -1,3 +1,10 @@
+2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.h
+
+    Small optimisation.
+    Replace constant trigonometric expressions with the actual values.
+
 2008-05-24  Torsten Rahn  <rahn@kde.org> 
 
     * src/lib/EquirectScanlineTextureMapper.cpp:
