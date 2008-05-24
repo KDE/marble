@@ -52,7 +52,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * @param size the amount of Data objects this container will have
      *             at first.
      */
-    AbstractLayerContainer( int size =0 );
+    explicit AbstractLayerContainer( int size =0 );
     
     /**
      * @brief simple constructor with optional starting size and name

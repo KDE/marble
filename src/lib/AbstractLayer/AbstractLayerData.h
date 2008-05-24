@@ -32,7 +32,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * @param position the position that the intended
      *                 AbstractLayerData will be at.
      */
-    AbstractLayerData( const GeoDataPoint &position );
+    explicit AbstractLayerData( const GeoDataPoint &position );
     
     /**
      * @brief make a Data object from latitude and londitude
