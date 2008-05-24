@@ -23,6 +23,7 @@
 #include <QtGui/QPainter>
 
 // marble
+#include "AbstractProjection.h"
 #include "Quaternion.h"
 #include "ViewportParams.h"
 

@@ -17,6 +17,7 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 
+#include "AbstractProjection.h"
 #include "GeoDataStyle.h"
 
 #include "ViewParams.h"

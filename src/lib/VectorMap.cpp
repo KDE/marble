@@ -21,6 +21,7 @@
 #include <QtGui/QColor>
 
 #include "global.h"
+#include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "GeoPolygon.h"
 #include "ViewportParams.h"

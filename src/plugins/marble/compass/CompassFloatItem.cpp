@@ -10,6 +10,7 @@
 
 #include "CompassFloatItem.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>

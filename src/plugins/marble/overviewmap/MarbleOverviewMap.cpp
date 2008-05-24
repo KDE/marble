@@ -14,6 +14,7 @@
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
+#include "AbstractProjection.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"

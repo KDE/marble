@@ -6,12 +6,17 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
 #include "ViewportParams.h"
 
 #include <QtCore/QRect>
+
+#include "SphericalProjection.h"
+#include "EquirectProjection.h"
+#include "MercatorProjection.h"
 
 class ViewportParamsPrivate
 {

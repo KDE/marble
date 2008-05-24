@@ -24,6 +24,7 @@
 
 //#include <QtDBus/QDBusConnection>
 
+#include "AbstractProjection.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Quaternion.h"

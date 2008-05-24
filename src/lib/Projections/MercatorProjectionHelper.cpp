@@ -14,6 +14,7 @@
 #include "AbstractProjectionHelper_p.h"
 
 // Marble
+#include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 

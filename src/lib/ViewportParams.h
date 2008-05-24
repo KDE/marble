@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -20,18 +21,15 @@
  */
 
 #include <QtCore/QSize>
-#include <QtCore/QDebug>
 
 #include "GeoDataLatLonAltBox.h"
 
 #include "Quaternion.h"
 #include "BoundingBox.h"
 #include "global.h"
-#include "SphericalProjection.h"
-#include "EquirectProjection.h"
-#include "MercatorProjection.h"
 #include "marble_export.h"
 
+class AbstractProjection;
 class ViewportParamsPrivate;
 
 using namespace Marble;

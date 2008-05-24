@@ -11,6 +11,22 @@
 
 2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MeasureTool.cpp:
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/Projections/MercatorProjectionHelper.cpp:
+    * src/lib/PlaceMarkPainter.cpp:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/VectorMap.cpp:
+    * src/lib/ViewportParams.h:
+    * src/lib/ViewportParams.cpp:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.cpp:
+    * src/plugins/marble/compass/CompassFloatItem.cpp:
+
+    - Fix includes.
+    - Add my copyright notice to ViewportParams.
+
+2008-05-24  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/ViewportParams.h:
     * src/lib/ViewportParams.cpp:
 

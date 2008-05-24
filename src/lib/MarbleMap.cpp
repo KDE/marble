@@ -34,6 +34,7 @@
 #include "CrossHairFloatItem.h"
 #include "MapScaleFloatItem.h"
 
+#include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "BoundingBox.h"
 #include "GeoPainter.h"
