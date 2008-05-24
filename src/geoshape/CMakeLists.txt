@@ -16,7 +16,7 @@ SET (geoshape_LIB_SRCS
 #linker error with "undefined reference to `ViewParams::viewport()'"
 kde4_add_plugin(geoshape ${geoshape_LIB_SRCS})
 
-target_link_libraries(geoshape marblewidget ${KSTORE_LIBRARY} ${FLAKE_LIBRARY} ${KOGUIUTILS_LIBRARY} ${KOTEXT_LIBRARY} ${KOMAIN_LIBRARY})
+target_link_libraries(geoshape marblewidget ${KSTORE_LIBRARY} ${KOODF_LIBRARY} ${FLAKE_LIBRARY} ${KOGUIUTILS_LIBRARY} ${KOTEXT_LIBRARY} ${KOMAIN_LIBRARY})
 install(TARGETS geoshape DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
