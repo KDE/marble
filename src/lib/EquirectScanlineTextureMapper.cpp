@@ -25,6 +25,7 @@
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 
 #ifdef Q_CC_MSVC
@@ -53,6 +54,9 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
     QImage    *canvasImage = viewParams->canvasImage();
     const int  radius      = viewParams->radius();
+
+    const bool highQuality = ( viewParams->viewport()->mapQuality() == Marble::High || viewParams->viewport()->mapQuality() == Marble::Print );
+    const bool printQuality = ( viewParams->viewport()->mapQuality() == Marble::Print );
 
    // Initialize needed variables:
     double  lon = 0.0;
@@ -133,7 +137,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             lon += rad2Pixel;
             if ( lon < -M_PI ) lon += 2 * M_PI;
             if ( lon >  M_PI ) lon -= 2 * M_PI;
-            pixelValue( lon, lat, scanLine );
+            pixelValue( lon, lat, scanLine, highQuality );
         }
     }
 
