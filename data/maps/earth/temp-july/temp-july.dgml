@@ -67,8 +67,8 @@
                     <coastline>mwdbii</coastline>
                     <!-- If these don't get defined the default palettes get
                     used -->
-                    <palette type="sea">seapalette.pal</palette>
-                    <palette type="land">landpalette.pal</palette>
+                    <palette type="sea">tempcolor.pal</palette>
+                    <palette type="land">tempcolor.pal</palette>
                 </filter>
             </layer>
         
@@ -258,42 +258,51 @@
 
                 <item name="temp42">
                     <icon color="#ff0000"/>
-                    <text>42°C</text>
+		    <text><![CDATA[42&deg;C]]></text>
                 </item>
                 <item name="temp32">
                     <icon color="#ff8000"/>
+		    <text><![CDATA[32&deg;C]]></text>
                     <text>32°C</text>
                 </item>
                 <item name="temp23">
                     <icon color="#ffff00"/>
+		    <text><![CDATA[23&deg;C]]></text>
                     <text>23°C</text>
                 </item>
                 <item name="temp12">
                     <icon color="#c0c040"/>
+		    <text><![CDATA[12&deg;C]]></text>
                     <text>12°C</text>
                 </item>
                 <item name="temp1">
                     <icon color="#808080"/>
+		    <text><![CDATA[1&deg;C]]></text>
                     <text>1°C</text>
                 </item>
                 <item name="temp-10">
                     <icon color="#4040c0"/>
+		    <text><![CDATA[-10&deg;C]]></text>
                     <text>-10°C</text>
                 </item>
                 <item name="temp-21">
                     <icon color="#0000ff"/>
+		    <text><![CDATA[-21&deg;C]]></text>
                     <text>-21°C</text>
                 </item>
                 <item name="temp-32">
                     <icon color="#4040ff"/>
+		    <text><![CDATA[-32&deg;C]]></text>
                     <text>-32°C</text>
                 </item>
                 <item name="temp-41">
                     <icon color="#8080ff"/>
+		    <text><![CDATA[-41&deg;C]]></text>
                     <text>-41°C</text>
                 </item>
                 <item name="temp-69">
                     <icon color="#ffffff"/>
+		    <text><![CDATA[-69&deg;C]]></text>
                     <text>-69°C</text>
                 </item>
             </section>
