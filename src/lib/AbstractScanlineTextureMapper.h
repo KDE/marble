@@ -172,9 +172,9 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude )
     case GeoSceneTexture::Mercator:
         if ( fabs( latitude ) < 1.4835 )
             return - asinh( tan( latitude ) ) * 0.5 * m_normGlobalHeight;
-        if ( latitude > +1.4835 )
+        if ( latitude >= +1.4835 )
             return - asinh( tan( +1.4835 ) ) * 0.5 * m_normGlobalHeight; 
-        if ( latitude < -1.4835 )
+        if ( latitude <= -1.4835 )
             return - asinh( tan( -1.4835 ) ) * 0.5 * m_normGlobalHeight; 
     }
 }
