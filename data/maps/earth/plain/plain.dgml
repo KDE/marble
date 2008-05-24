@@ -218,8 +218,8 @@
                     <text>State</text>
                 </item>
             </section>
-    
-            <section name="waterbodies" checkable="true" connect="borders" spacing="12">
+
+            <section name="waterbodies" checkable="true" connect="waterbodies" spacing="12">
                 <heading>Water Bodies</heading>
 
                 <item name="lake">
