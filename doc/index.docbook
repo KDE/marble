@@ -21,7 +21,6 @@
 			 </author>
 
 			 <!-- TRANS:ROLES_OF_TRANSLATORS -->
-
 		 </authorgroup>
 
 		 <copyright>
@@ -100,11 +99,11 @@
             To navigate and to control the view you can use the toolbox on the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
 		 </para>
          <para>
-            You can accomplish the same behaviour by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much more easily and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
+            You can accomplish the same behaviour by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much easier and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
          </para>
          <para>
             Zoom in and out by moving the vertical slider up and down. If your mouse has got a mouse 
-            wheel you can use that one instead - or you just press the &LMB; and the &RMB; down both at once while moving the mouse up and down.
+            wheel you can use that one instead - or you just hold the &LMB; and the &RMB; down both at once while moving the mouse up and down.
             Changing the zoom level step by step can be done via the <guilabel>Zoom In</guilabel> and <guilabel>Zoom Out</guilabel> buttons which are placed above and below the zoom slider (or using the <keycap>+</keycap> and <keycap>-</keycap> keys on your keyboard.
          </para>
          <para>
@@ -174,7 +173,7 @@
             &LMB;. A popup menu will appear which allows you to retrieve more information
             about the city. This popup menu can also be used to find out the coordinates for any point
             on the globe as the coordinates always get displayed at the bottom of the popup menu.
-            After clicking the name of the location on the popup menu there will appear a data sheet dialog like this:
+            After clicking the name of the location on the popup menu a data sheet dialog will apear, like this:
          </para>
          <screenshot>
              <screeninfo>&marble; Data Sheet</screeninfo>
@@ -184,7 +183,7 @@
              </mediaobject>
          </screenshot>
          <para>
-            On the first tab of the dialog very basic data is provided, like coordinates and the name and flag of the country the place belongs to. Additionally population numbers for cities get shown as well as the elevation for mountains. 
+            On the first tab of the dialog some very basic data is provided, like the name, coordinates and flag of the country the place belongs to. In addition, population numbers for cities get shown, as well as the elevation for mountains. 
             If your computer is connected to the Internet and if you're online &marble; will try to connect to the popular Internet encyclopedia <quote>Wikipedia</quote>. If a matching Wikipedia article is available &marble; will display it on the second tab of the dialog.
          </para>
      </chapter>
@@ -204,7 +203,7 @@
              </mediaobject>
          </screenshot>
          <para>
-            Once you have added at least two measure points the total distance will be displayed in the top left corner of the map. &marble; will assume a spherical earth for all measurements which should be accurate enough for most cases.
+            Once you have added at least two measure points, the total distance will be displayed in the top left corner of the map. &marble; will assume a spherical earth for all measurements which should be accurate enough for most cases.
          </para>
      </chapter>
 
@@ -363,9 +362,9 @@
                  <answer>
                      <para> 
                         Despite depicting the earth as a globe &marble; doesn't make use of any 
-                        3D hardware acceleration. This has got the advantage that it basically 
-                        runs at decent speed on any plattform and hardware supported by &Qt;.
-                        However it has the disadvantage that it doesn't run as smooth as
+                        3D hardware acceleration. This has the advantage of running 
+                        at a decent speed on any plattform and hardware supported by &Qt;.
+                        However it has the disadvantage that it doesn't run as smoothly as
                         it could if it used hardware accelerated OpenGL.
                         &marble; just uses plain 2D graphics and therefore 
                         requires a graphics adapter that is fast at drawing 2D graphics.
@@ -380,7 +379,7 @@
 				 <answer>
 					 <para>
                          No, never. But the authors always welcome feedback. &marble; is licensed 
-						 under the <ulink url="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</ulink>, so you will never have to pay for this program.
+			under the <ulink url="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</ulink>, so you will never have to pay for this program.
                      </para>
 				 </answer>
 			 </qandaentry>
@@ -421,7 +420,6 @@
 		 </itemizedlist>
 
 		 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
-
 		 &underFDL;           <!-- FDL: do not remove -->
 		 &underLGPL;        	 <!-- LGPL License -->
 
