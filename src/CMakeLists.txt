@@ -31,7 +31,6 @@ if (NOT QTONLY)
           set(KOFFICELIBS_FOUND FALSE)
   endif(DEPEND_PACKAGE_KOfficeLibs)
    
-  # Laurent: Reactivate it when export header from koffice will fixed   
   if(KOFFICELIBS_FOUND)
      add_subdirectory( geoshape )
   else(KOFFICELIBS_FOUND)
