@@ -94,6 +94,7 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     virtual ~GeoDataColorStyle();
 
   private:
+    Q_DISABLE_COPY( GeoDataColorStyle )
     GeoDataColorStylePrivate * const d;
 };
 

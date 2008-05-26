@@ -65,6 +65,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
+    Q_DISABLE_COPY( GeoDataLineStyle )
     GeoDataLineStylePrivate * const d;
 };
 

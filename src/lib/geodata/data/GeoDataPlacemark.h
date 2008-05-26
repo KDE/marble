@@ -115,6 +115,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
  private:
+    Q_DISABLE_COPY( GeoDataPlacemark )
     GeoDataPlacemarkPrivate * const d;
 };
 

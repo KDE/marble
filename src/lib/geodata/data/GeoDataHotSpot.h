@@ -32,6 +32,7 @@ class GEODATA_EXPORT GeoDataHotSpot
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ), Units xunits = Fraction, Units yunits = Fraction );
 
   private:
+    Q_DISABLE_COPY( GeoDataHotSpot )
     GeoDataHotSpotPrivate * const d;
 };
 

@@ -231,6 +231,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static void initializeDefaultStyles();
 
  private:
+    Q_DISABLE_COPY( GeoDataFeature )
     GeoDataFeaturePrivate * const d;
     // Static members
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];

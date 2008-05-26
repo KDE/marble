@@ -75,6 +75,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
+    Q_DISABLE_COPY( GeoDataPolyStyle )
     GeoDataPolyStylePrivate * const d;
 };
 

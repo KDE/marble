@@ -89,6 +89,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
+    Q_DISABLE_COPY( GeoDataLabelStyle )
     GeoDataLabelStylePrivate * const d;
 };
 

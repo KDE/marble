@@ -47,6 +47,7 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
+    Q_DISABLE_COPY( GeoDataIconStyle )
     GeoDataIconStylePrivate * const d;
 };
 

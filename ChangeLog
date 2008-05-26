@@ -1,3 +1,19 @@
+2008-05-26  Claudiu Covaci  <claudiu.covaci@gmail.com>
+
+    * src/lib/geodata/data/GeoDataColorStyle.h:
+    * src/lib/geodata/data/GeoDataContainer.h:
+    * src/lib/geodata/data/GeoDataDocument.h:
+    * src/lib/geodata/data/GeoDataFeature.h:
+    * src/lib/geodata/data/GeoDataHotSpot.h:
+    * src/lib/geodata/data/GeoDataIconStyle.h:
+    * src/lib/geodata/data/GeoDataLabelStyle.h:
+    * src/lib/geodata/data/GeoDataLineStyle.h:
+    * src/lib/geodata/data/GeoDataPlacemark.h:
+    * src/lib/geodata/data/GeoDataPolyStyle.h:
+    * src/lib/geodata/data/GeoDataStyle.h:
+    * src/lib/geodata/data/GeoDataStyleSelector.h:
+    Apply the Q_DISABLE_COPY() patch to these d-pointerified classes
+
 2008-05-24  Patrick Spendrin    <ps_ml@gmx.de>
 
     * tools/asc2kml.cpp

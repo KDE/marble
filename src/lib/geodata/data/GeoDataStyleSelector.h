@@ -64,6 +64,7 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     ~GeoDataStyleSelector();
 
   private:
+    Q_DISABLE_COPY( GeoDataStyleSelector )
     GeoDataStyleSelectorPrivate * const d;
 };
 

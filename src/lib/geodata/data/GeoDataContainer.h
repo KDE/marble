@@ -81,6 +81,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     GeoDataContainer();
 
  private:
+    Q_DISABLE_COPY( GeoDataContainer )
     GeoDataContainerPrivate * const d;
 #if 0  // FIXME: This doesn't belong here.
     PlaceMarkContainer& sphericalActivePlaceMarkContainer( const ViewParams& viewParams );

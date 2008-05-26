@@ -65,6 +65,7 @@ public:
     const GeoDataStyle* style(const QString& styleId) const;
 
 private:
+    Q_DISABLE_COPY( GeoDataDocument )
     GeoDataDocumentPrivate * const d;
 };
 
