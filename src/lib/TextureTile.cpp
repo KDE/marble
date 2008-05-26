@@ -173,6 +173,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                 }
 
                 m_rawtile = temptile;
+                m_created = fileInfo.lastModified();
                 tileFound = true;
             } // !tempfile.isNull()
             //      else {

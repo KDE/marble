@@ -2,6 +2,14 @@
 
     * src/lib/TextureTile.cpp (loadRawTile)
 
+    Minor fix for expiration handling.
+    Set creation time stamp of tile to last modification time stamp
+    of the corresponding file.
+
+2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/TextureTile.cpp (loadRawTile)
+
     Replace break statement by check for tileFound to fix
     downloading of expired tiles.
 
