@@ -72,6 +72,9 @@ void VectorMap::createFromPntMap( const PntMap* pntmap,
         case Equirectangular:
             rectangularCreateFromPntMap( pntmap, viewport );
             break;
+        case Mercator:
+            mercatorCreateFromPntMap( pntmap, viewport );
+            break;
     }
 }
 
@@ -242,6 +245,106 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     }
 }
 
+void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap, 
+					  ViewportParams* viewport )
+{
+    clear();
+    int  radius = viewport->radius();
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    double rad2Pixel = (float)( 2 * radius ) / M_PI;
+    double lon, lat;
+    double x, y;
+
+    viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
+    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
+
+    ScreenPolygon  boundingPolygon;
+    QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    const int      detail = getDetailLevel( radius );
+
+    for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
+          itPolyLine < itEndPolyLine;
+          ++itPolyLine )
+    {
+        // This sorts out polygons by bounding box which aren't visible at all.
+        m_offset = 0;
+
+        GeoDataPoint::Vector  boundary = (*itPolyLine)->getBoundary();
+        boundingPolygon.clear();
+
+        // Let's just use the top left and the bottom right bounding box point for 
+        // this projection
+        for ( int i = 1; i < 3; ++i ) {
+            boundary[i].geoCoordinates(lon, lat);
+	    x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
+	    y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat);
+
+            boundingPolygon << QPointF( x, y );
+#if 0
+            if ( (*itPolyLine)->getIndex() == 1001 ) {
+                qDebug() << "x: " << x << " y: " << y << " 4*radius: " << 4*radius;
+                qDebug() << "lon: " << lon << " clon: " << centerLon;
+            }
+#endif
+        }
+
+        if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
+            boundingPolygon.translate( 4 * radius, 0 );
+            m_offset += 4 * radius;
+        }
+
+        do {
+            m_offset -= 4 * radius;
+            boundingPolygon.translate( -4 * radius, 0 );
+	    // FIXME: Get rid of this really fugly code once we have a
+	    //        proper LatLonBox check implemented and in place.
+        } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
+		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
+                );
+        m_offset += 4 * radius;
+        boundingPolygon.translate( 4 * radius, 0 );
+
+	// FIXME: Get rid of this really fugly code once we will have
+	//        a proper LatLonBox check implemented and in place.
+        while ( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
+		  && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
+		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
+		     && ( visibleArea.intersects(
+			    QRectF( boundingPolygon.at(1),
+				    QPointF( (double)(m_imgwidth) / 2.0
+					     - rad2Pixel * ( centerLon - M_PI )
+					     + m_offset, 
+					     boundingPolygon.at(0).y() ) ) ) 
+			  || visibleArea.intersects(
+			         QRectF( QPointF( (double)(m_imgwidth) / 2.0
+						  - rad2Pixel * ( centerLon + M_PI )
+						  + m_offset,
+						  boundingPolygon.at(1).y() ),
+					 boundingPolygon.at(0) ) ) ) )
+		)
+	{
+            m_polygon.clear();
+            m_polygon.reserve( (*itPolyLine)->size() );
+            m_polygon.setClosed( (*itPolyLine)->getClosed() );
+
+            createPolyLine( (*itPolyLine)->constBegin(),
+                            (*itPolyLine)->constEnd(), detail, viewport );
+
+            m_offset += 4 * radius;
+            boundingPolygon.translate( 4 * radius, 0 );
+        }
+    }
+}
+
 void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
                                 GeoDataPoint::Vector::ConstIterator  itEndPoint,
                                 const int detail, ViewportParams *viewport )
@@ -254,6 +357,10 @@ void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoin
         case Equirectangular:
             rectangularCreatePolyLine( itStartPoint, itEndPoint, 
 				       detail, viewport );
+            break;
+        case Mercator:
+            mercatorCreatePolyLine( itStartPoint, itEndPoint, 
+				    detail, viewport );
             break;
     }
 }
@@ -446,6 +553,120 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
     }
 }
 
+void VectorMap::mercatorCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
+					GeoDataPoint::Vector::ConstIterator  itEndPoint,
+					const int detail,
+					ViewportParams *viewport )
+{
+    GeoDataPoint::Vector::const_iterator  itPoint;
+
+    Quaternion qpos;
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    // Other convenience variables
+    double  rad2Pixel = (double)( 2 * viewport->radius() ) / M_PI;
+
+    ScreenPolygon  otherPolygon;
+    otherPolygon.setClosed ( m_polygon.closed() );
+
+    bool    CrossedDateline = false;
+    bool    firstPoint      = true;
+    double  lon;
+    double  lat;
+
+    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+        // remain -= step;
+        if ( itPoint->detail() < detail )
+	    continue;
+
+	// Calculate polygon nodes
+#ifdef VECMAP_DEBUG
+	++m_debugNodeCount;
+#endif
+
+	// FIXME: Call the projection.  Unfortunately there is no
+	//        screenCoordinates taking doubles.
+	itPoint->geoCoordinates( lon, lat);
+	double x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
+	double y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat);
+	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
+	if ( firstPoint ) {
+	    firstPoint = false;
+	    m_lastSign = currentSign;
+	}
+
+	m_currentPoint = QPointF( x, y );
+
+	//correction of the Dateline
+
+	if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
+
+	    // x coordinate on the screen for the points on the dateline on both
+	    // sides of the flat map.
+	    // FIXME: mercator projection here too.
+	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
+	    double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
+
+	    //If the "jump" occurs in the Anctartica's latitudes
+
+	    if ( lat < - M_PI / 3 ) {
+		// FIXME: This should actually need to get investigated
+		//        in GeoPainter.  For now though we just help
+		//        GeoPainter to get the clipping right.
+		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 )
+		    lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine < 0.0 )
+		    lastXAtDateLine = 0.0; 
+		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 )
+		    xAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( xAtDateLine < 0.0 )
+		    xAtDateLine = 0.0; 
+
+		m_polygon << QPointF( lastXAtDateLine, y ); 
+		m_polygon << QPointF( lastXAtDateLine, yAtSouthPole );
+		m_polygon << QPointF( xAtDateLine,     yAtSouthPole );
+		m_polygon << QPointF( xAtDateLine,     y );
+	    }
+	    else {
+
+		if ( CrossedDateline ) {
+		    m_polygon    << QPointF( xAtDateLine,     y );
+		    otherPolygon << QPointF( lastXAtDateLine, lastYAtDateLine);
+		}
+		else {
+		    m_polygon << QPointF( lastXAtDateLine, lastYAtDateLine );
+		    otherPolygon << QPointF( xAtDateLine,  y );
+		}
+		CrossedDateline = !CrossedDateline;
+	    }
+	}
+
+	if ( CrossedDateline )
+	    otherPolygon << m_currentPoint;
+	else
+	    m_polygon << m_currentPoint;
+
+	m_lastLon  = lon;
+	m_lastLat  = lat;
+	m_lastSign = currentSign;
+    }
+
+    // Avoid polygons degenerated to Points.
+    if ( m_polygon.size() >= 2 ) {
+        append(m_polygon);
+    }
+
+    if ( otherPolygon.size() >= 2 ) {
+        append( otherPolygon );
+    }
+}
+
 
 // Paint the background of the ground, i.e. the water.
 //
@@ -456,6 +677,9 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
+    // The paintBase function is projection dependent, and it's not
+    // just a mathematical conversion, so it's located in the
+    // projection helper.
     viewport->currentProjection()->helper()->paintBase( painter, viewport,
 							m_pen, m_brush,
 							antialiasing );
@@ -479,13 +703,12 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
             break;
     }
 
-    GeoPainter  painter(origimg, viewport, doClip);
+    GeoPainter  painter( origimg, viewport, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
-    painter.setPen(m_pen);
-    painter.setBrush(m_brush);
+    painter.setPen( m_pen );
+    painter.setBrush( m_brush );
 
     ScreenPolygon::Vector::const_iterator  itEndPolygon = end();
-
     for ( ScreenPolygon::Vector::const_iterator itPolygon = begin();
           itPolygon != itEndPolygon; 
           ++itPolygon )
