@@ -58,7 +58,7 @@ TextureTile::TextureTile( TileId const& id )
       jumpTable8(0),
       jumpTable32(0),
       m_id(id),
-      m_rawtile( QImage() ),
+      m_rawtile(),
       m_depth(0),
       m_isGrayscale(false),
       m_used(false)
