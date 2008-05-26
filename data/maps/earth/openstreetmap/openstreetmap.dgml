@@ -20,7 +20,9 @@
             <canvas/>
             <target/>
             <layer name="openstreetmap" backend="texture" >
-                <texture name="mapnik_data">
+                <!-- OpenStreetMap mapnik rendered tiles expire after seven days
+                     or 604800 seconds -->
+                <texture name="mapnik_data" expire="604800" >
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
                     <projection name="Mercator" />

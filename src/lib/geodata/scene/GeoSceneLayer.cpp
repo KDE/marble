@@ -21,10 +21,12 @@
 
 #include "GeoSceneLayer.h"
 
+#include <limits>
+
 GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
     : m_name( name ),
       m_fileFormat( "" ),
-      m_expire( -1 )
+      m_expire( std::numeric_limits<int>::max() )
 {
     /* NOOP */
 }

@@ -64,6 +64,8 @@ class TileLoader::Private
         QCache <TileId, TextureTile>  m_tileCache;
 };
 
+
+
 TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent)
     : d( new Private() ),
       m_parent(parent)
@@ -179,41 +181,52 @@ int TileLoader::globalHeight( int level ) const
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
-    // Choosing the correct tile via Lon/Lat info 
-    TextureTile* tile = 0;
     TileId tileId( tileLevel, tilx, tily );
 
+    // check if the tile is in the hash
+    TextureTile * tile = d->m_tileHash.value( tileId, 0 );
+    if ( tile ) {
+        tile->setUsed( true );
+        return tile;
+    }
+    // here ends the performance critical section of this method
 
-    // If the tile hasn't been loaded into the m_tileHash yet, then do so...
-    if ( !d->m_tileHash.contains( tileId ) ) {
-        if ( d->m_tileCache.contains( tileId ) ) {
-            tile = d->m_tileCache.take( tileId );
+    // the tile was not in the hash or has been removed because of expiration
+    // so check if it is in the cache
+    tile = d->m_tileCache.take( tileId );
+    if ( tile ) {
+        // the tile was in the cache, but is it up to date?
+        const QDateTime now = QDateTime::currentDateTime();
+        if ( tile->created().secsTo( now ) < d->m_textureLayer->expire()) {
             d->m_tileHash[tileId] = tile;
-        } else {
-            // qDebug() << "load Tile from Disk: " << tileId.toString();
-            tile = new TextureTile( tileId );
-            d->m_tileHash[tileId] = tile;
-
-            if ( d->m_downloadManager != 0 ) {
-                connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
-                         d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
-            }
-
-            connect( tile, SIGNAL( tileUpdateDone() ),
-                     this, SIGNAL( tileUpdateAvailable() ) );
-
-            tile->loadRawTile(d->m_textureLayer, tileLevel, tilx, tily);
-            tile->loadTile(false);
-            // TODO should emit signal rather than directly calling paintTile
-//             emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
-            m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_textureLayer, false );
-        }
-    } else { // ...otherwise pick the correct one from the hash
-        tile = d->m_tileHash.value( tileId );
-        if ( !tile->used() ) {
             tile->setUsed( true );
+            return tile;
+        } else {
+            delete tile;
+            tile = 0;
         }
     }
+
+    // tile (valid) has not been found in hash or cache, so load it from disk
+    // and place it in the hash from where it will get transfered to the cache
+
+    // qDebug() << "load Tile from Disk: " << tileId.toString();
+    tile = new TextureTile( tileId );
+    d->m_tileHash[tileId] = tile;
+
+    if ( d->m_downloadManager != 0 ) {
+        connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
+                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
+    }
+    connect( tile, SIGNAL( tileUpdateDone() ),
+             this, SIGNAL( tileUpdateAvailable() ) );
+
+    tile->loadRawTile( d->m_textureLayer, tileLevel, tilx, tily );
+    tile->loadTile( false );
+
+    // TODO should emit signal rather than directly calling paintTile
+    // emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
+    m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_textureLayer, false );
 
     return tile;
 }

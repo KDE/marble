@@ -1,5 +1,27 @@
 2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/HttpFetchFile.cpp (executeJob):
+    Do not quit if the file is already there but update it.
+    * src/lib/TextureTile.cpp:
+    * src/lib/TextureTile.h:
+    Add member variable m_created which holds the tile creation time stamp.
+    (loadRawTile): Check if existing tiles are expired.
+    * src/lib/TileLoader.cpp (loadTile):
+    Check if tile from cache is expired.
+    Save call to QHash::value in the time critical section, this gives
+    me a small improvement with --timedemo: 12.5 fps -> 12.7 fps.
+    * src/lib/geodata/handlers/dgml/DgmlTextureTagHandler.cpp:
+    Fix parsing of expire attribut. Default to MAX_INT.
+    * src/lib/geodata/scene/GeoSceneLayer.cpp:
+    Set default for m_expire to MAX_INT.
+    * data/maps/earth/openstreetmap/openstreetmap.dgml:
+    Set texture/@expire to 604800 seconds (7 days).
+
+    - Fix expire handling.
+    - Small --timedemo improvement.
+
+2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/tilecreator/CMakeLists.txt: Add qt4_automoc.
 
     Fix build from scratch.

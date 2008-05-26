@@ -57,13 +57,6 @@ HttpFetchFile::~HttpFetchFile()
 
 void HttpFetchFile::executeJob( HttpJob* job )
 {
-    if ( m_storagePolicy->fileExists( job->originalDestinationFileName() ) ) {
-        qDebug( "File already exists" );
-        emit jobDone( job, 1 );
-
-        return;
-    }
-
     const QUrl sourceUrl = job->sourceUrl();
 
     m_pHttp->setHost( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );

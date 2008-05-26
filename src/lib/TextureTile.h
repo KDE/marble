@@ -19,6 +19,7 @@
 #define __MARBLE__TEXTURETILE_H
 
 
+#include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtGui/QImage>
 #include <QtCore/QString>
@@ -51,7 +52,8 @@ class TextureTile : public QObject {
 
     const QImage& rawtile()   { return m_rawtile; }
     QImage* tile()            { return &m_rawtile; }
- 
+    const QDateTime & created() const;
+
     // Here we retrieve the color value of the requested pixel on the tile.
     // This needs to be done differently for grayscale ( uchar, 1 byte ).
     // and color ( uint, 4 bytes ) images.
@@ -87,7 +89,14 @@ class TextureTile : public QObject {
     int      m_depth;
     bool     m_isGrayscale;
     bool     m_used;
+
+ private:
+    QDateTime m_created;
 };
 
+inline const QDateTime & TextureTile::created() const
+{
+    return m_created;
+}
 
 #endif // __MARBLE__TEXTURETILE_H

@@ -12,7 +12,7 @@
 #include "TextureTile.h"
 
 #include <QtCore/QDebug>
-#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 #include <cmath>
 
@@ -61,7 +61,8 @@ TextureTile::TextureTile( TileId const& id )
       m_rawtile(),
       m_depth(0),
       m_isGrayscale(false),
-      m_used(false)
+      m_used(false),
+      m_created(QDateTime::currentDateTime())
 {
 }
 
@@ -107,8 +108,28 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                                                                       (int)(testx1),
                                                                       (int)(testy1) );
         absfilename = MarbleDirs::path( relfilename );
+        const QFileInfo fileInfo( absfilename );
+        // - if the file does not exist, we want to download it and search an
+        //   existing tile of a lower zoom level for imediate display
+        // - if the file exists and is expired according to the value of the
+        //   expire element we want to download it again and display the old
+        //   tile until the new one is there. Once the updated tile is
+        //   available, it should get displayed.
+        const QDateTime now = QDateTime::currentDateTime();
+        bool download = false;
 
-        if ( QFile::exists( absfilename ) ) {
+        if ( !fileInfo.exists() ) {
+            qDebug() << "File does not exist:" << fileInfo.filePath();
+            download = true;
+        }
+        else if ( fileInfo.lastModified().secsTo( now ) > textureLayer->expire() ) {
+            qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
+                     << "age (seconds):" << fileInfo.lastModified().secsTo( now )
+                     << "allowed age:" << textureLayer->expire();
+            download = true;
+        }
+
+        if ( fileInfo.exists() ) {
             // qDebug() << "The image filename does exist: " << absfilename ;
 
             QImage temptile( absfilename );
@@ -160,7 +181,8 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
             //           absfilename.toLocal8Bit();
             //      }
         }
-        else {
+
+        if ( download ) {
             QUrl sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, level, x, y );
             QString destFileName = TileLoaderHelper::relativeTileFileName( textureLayer,
                                                                            level, x, y );
