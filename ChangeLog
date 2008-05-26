@@ -1,5 +1,11 @@
 2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/tilecreator/CMakeLists.txt: Add qt4_automoc.
+
+    Fix build from scratch.
+
+2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/TextureTile.cpp (constructor):
 
     Save call to QImage default and copy constructor.
