@@ -62,7 +62,7 @@ if( TILES_AT_COMPILETIME )
         if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/tiles)
             file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles)
         endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/tiles)
-        install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_PATH}/maps/earth/${mapname})
+        install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/${mapname})
     endmacro(MARBLE_COMPILE_TILES)
     # only for srtm data the generation needs long - for all other data you can also sp
 #    MARBLE_COMPILE_TILES(bluemarble false)
