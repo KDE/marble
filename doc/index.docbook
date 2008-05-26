@@ -173,7 +173,7 @@
             &LMB;. A popup menu will appear which allows you to retrieve more information
             about the city. This popup menu can also be used to find out the coordinates for any point
             on the globe as the coordinates always get displayed at the bottom of the popup menu.
-            After clicking the name of the location on the popup menu a data sheet dialog will apear, like this:
+            After clicking the name of the location on the popup menu a data sheet dialog will appear, like this:
          </para>
          <screenshot>
              <screeninfo>&marble; Data Sheet</screeninfo>
