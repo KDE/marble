@@ -34,6 +34,7 @@ AbstractProjectionHelper::AbstractProjectionHelper()
 
 AbstractProjectionHelper::~AbstractProjectionHelper()
 {
+    delete d;
 }
 
 #if 0 // Made pure virtual (= 0)
