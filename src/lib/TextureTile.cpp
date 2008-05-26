@@ -94,8 +94,8 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
     const int levelZeroRows = textureLayer->levelZeroRows();
     const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, level );
     const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, level );
-
-    for ( int i = level; i > -1; --i ) {
+    bool tileFound = false;
+    for ( int i = level; !tileFound && i > -1; --i ) {
 
         const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, i );
         const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, i );
@@ -172,9 +172,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                 }
 
                 m_rawtile = temptile;
-                qDebug() << "m_rawtile.m_depth:" << m_rawtile.depth();
-
-                break;
+                tileFound = true;
             } // !tempfile.isNull()
             //      else {
             //         qDebug() << "Image load failed for: " + 

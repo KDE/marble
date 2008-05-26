@@ -1,5 +1,12 @@
 2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/TextureTile.cpp (loadRawTile)
+
+    Replace break statement by check for tileFound to fix
+    downloading of expired tiles.
+
+2008-05-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/HttpFetchFile.cpp (executeJob):
     Do not quit if the file is already there but update it.
     * src/lib/TextureTile.cpp:
