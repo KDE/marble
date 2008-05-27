@@ -52,9 +52,8 @@ GeoNode* KMLPlacemarkTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->addFeature( placemark );
     }
-    qDebug() << "Parsed <Placemark> start! Created GeoDataPlacemark item: " << placemark 
-             << " parent item name: " << parentItem.qualifiedName().first 
-             << " associated item: " << parentItem.associatedNode();
+    qDebug() << "Parsed <" << kmlTag_Placemark << "> containing: " << placemark
+             << " parent item name: " << parentItem.qualifiedName().first;
 
     return placemark;
 }

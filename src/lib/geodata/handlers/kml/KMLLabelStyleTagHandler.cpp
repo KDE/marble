@@ -48,7 +48,10 @@ GeoNode* KMLLabelStyleTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLabelStyle* style = new GeoDataLabelStyle();
     
-    if ( parentItem.represents( kmlTag_Style ) )
+    if ( parentItem.represents( kmlTag_Style ) ) {
+        qDebug() << "Parsed <" << kmlTag_LabelStyle << "> containing: " << style
+                 << " parent item name: " << parentItem.qualifiedName().first;
         return style;
+    }
     return 0;
 }

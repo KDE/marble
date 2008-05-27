@@ -47,8 +47,8 @@ GeoNode* KMLheadingTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        qDebug() << "reading <heading> tag: " << parser.readElementText().trimmed().toFloat()
-        << "currently unused";
+        qDebug() << "Parsed <" << kmlTag_heading << "> containing: " << parser.readElementText().trimmed().toFloat()
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
     return 0;
 }

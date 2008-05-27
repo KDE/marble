@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
+#include "KMLElementDefines.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 
@@ -47,11 +48,11 @@ GeoNode* KMLFolderTagHandler::parse(GeoParser& parser) const
     GeoDataFolder* folder = new GeoDataFolder;
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(kmlTag_Folder) || parentItem.represents(kmlTag_Document))
+    if ( parentItemIsContainer ) {
         parentItem.nodeAs<GeoDataContainer>()->addFeature(folder);
 
-    qDebug() << "Parsed <Folder> start! Created GeoDataFolder item: " << folder
-             << " parent item name: " << parentItem.qualifiedName().first
-             << " associated item: " << parentItem.associatedNode();
+        qDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << folder
+                 << " parent item name: " << parentItem.qualifiedName().first;
+    }
     return folder;
 }

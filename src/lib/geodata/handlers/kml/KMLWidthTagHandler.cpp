@@ -50,6 +50,8 @@ GeoNode* KMLwidthTagHandler::parse( GeoParser& parser ) const
         float width = parser.readElementText().trimmed().toFloat();
         
         parentItem.nodeAs<GeoDataLineStyle>()->setWidth( width );
+        qDebug() << "Parsed <" << kmlTag_width << "> containing: " << width
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
 
     return 0;

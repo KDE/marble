@@ -19,37 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KMLIconTagHandler.h"
+#ifndef KMLopenTagHandler_h
+#define KMLopenTagHandler_h
 
-#include <QtCore/QDebug>
+#include "GeoTagHandler.h"
 
-#include "KMLElementDictionary.h"
-#include "GeoDataIconStyle.h"
-#include "GeoDataParser.h"
+class KMLopenTagHandler : public GeoTagHandler {
+public:
+    KMLopenTagHandler();
+    virtual ~KMLopenTagHandler();
 
-using namespace GeoDataElementDictionary;
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
-KML_DEFINE_TAG_HANDLER( Icon )
-
-KMLIconTagHandler::KMLIconTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KMLIconTagHandler::~KMLIconTagHandler()
-{
-}
-
-GeoNode* KMLIconTagHandler::parse( GeoParser& parser ) const
-{
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Icon ) );
-
-    GeoStackItem parentItem = parser.parentElement();
-    
-    if ( parentItem.represents( kmlTag_IconStyle ) ) {
-        qDebug() << "Parsed <" << kmlTag_Icon << "> containing: " << parentItem.nodeAs<GeoDataIconStyle>()
-                 << " parent item name: " << parentItem.qualifiedName().first;
-        return parentItem.nodeAs<GeoDataIconStyle>();
-    }
-    return 0;
-}
+#endif // KMLopenTagHandler_h

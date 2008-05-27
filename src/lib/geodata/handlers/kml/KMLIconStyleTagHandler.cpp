@@ -48,7 +48,10 @@ GeoNode* KMLIconStyleTagHandler::parse( GeoParser& parser ) const
     
     GeoDataIconStyle* style = new GeoDataIconStyle();
     
-    if ( parentItem.represents( kmlTag_Style ) )
+    if ( parentItem.represents( kmlTag_Style ) ) {
+        qDebug() << "Parsed <" << kmlTag_IconStyle << "> containing: " << style
+                 << " parent item name: " << parentItem.qualifiedName().first;
         return style;
+    }
     return 0;
 }

@@ -19,39 +19,43 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KMLLineStyleTagHandler.h"
+#include "KMLVisibilityTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
-#include "GeoDataLineStyle.h"
+#include "KMLElementDefines.h"
+#include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( LineStyle )
+KML_DEFINE_TAG_HANDLER( visibility )
 
-KMLLineStyleTagHandler::KMLLineStyleTagHandler()
+KMLvisibilityTagHandler::KMLvisibilityTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLLineStyleTagHandler::~KMLLineStyleTagHandler()
+KMLvisibilityTagHandler::~KMLvisibilityTagHandler()
 {
 }
 
-GeoNode* KMLLineStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KMLvisibilityTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineStyle ) );
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_visibility ) );
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLineStyle* style = new GeoDataLineStyle();
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << style
+    if( parentItemIsFeature ) {
+        QString visibility = parser.readElementText().trimmed();
+        if( visibility == QString( "1" ) )
+            parentItem.nodeAs<GeoDataFeature>()->setVisible( true );
+        else
+            parentItem.nodeAs<GeoDataFeature>()->setVisible( false );
+        qDebug() << "Parsed <" << kmlTag_visibility << "> containing: " << visibility
                  << " parent item name: " << parentItem.qualifiedName().first;
-        return style;
     }
+
     return 0;
 }

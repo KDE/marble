@@ -57,6 +57,8 @@ GeoNode* KMLcolorTagHandler::parse( GeoParser& parser ) const
             parentItem.nodeAs<GeoDataColorStyle>()->setColor( 
             QColor::fromRgb( rgba ) );
         }
+        qDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
     return 0;
 }

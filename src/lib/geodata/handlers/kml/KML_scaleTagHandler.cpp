@@ -52,11 +52,15 @@ GeoNode* KMLscaleTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     if ( parentItem.represents( kmlTag_IconStyle ) ) {
-            parentItem.nodeAs<GeoDataIconStyle>()->setScale( 
-            parser.readElementText().trimmed().toFloat() );
+        parentItem.nodeAs<GeoDataIconStyle>()->setScale( 
+        parser.readElementText().trimmed().toFloat() );
+        qDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
+                 << " parent item name: " << parentItem.qualifiedName().first;
     } else if( parentItem.represents( kmlTag_LabelStyle ) ) {
-            parentItem.nodeAs<GeoDataLabelStyle>()->setScale( 
-            parser.readElementText().trimmed().toFloat() );
+        parentItem.nodeAs<GeoDataLabelStyle>()->setScale( 
+        parser.readElementText().trimmed().toFloat() );
+        qDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
     return 0;
 }

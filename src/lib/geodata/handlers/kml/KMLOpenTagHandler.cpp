@@ -19,39 +19,44 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KMLLineStyleTagHandler.h"
+#include "KMLOpenTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
-#include "GeoDataLineStyle.h"
+#include "KMLElementDefines.h"
+
+#include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( LineStyle )
+KML_DEFINE_TAG_HANDLER( open )
 
-KMLLineStyleTagHandler::KMLLineStyleTagHandler()
+KMLopenTagHandler::KMLopenTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLLineStyleTagHandler::~KMLLineStyleTagHandler()
+KMLopenTagHandler::~KMLopenTagHandler()
 {
 }
 
-GeoNode* KMLLineStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KMLopenTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineStyle ) );
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_open ) );
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLineStyle* style = new GeoDataLineStyle();
-    
-    if ( parentItem.represents( kmlTag_Style ) ) {
-        qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << style
+    if( parentItemIsFeature ) {
+        QString open = parser.readElementText().trimmed();
+/*        if( open == QString( "1" ) )
+            parentItem.nodeAs<GeoDataFeature>()->setOpen( true );
+        else
+            parentItem.nodeAs<GeoDataFeature>()->setOpen( false );*/
+        qDebug() << "Parsed <" << kmlTag_open << "> containing: " << open
                  << " parent item name: " << parentItem.qualifiedName().first;
-        return style;
     }
+
     return 0;
 }

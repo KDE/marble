@@ -55,7 +55,8 @@ GeoNode* KMLcolorModeTagHandler::parse( GeoParser& parser ) const
             GeoDataColorStyle::Random );
         else parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( 
             GeoDataColorStyle::Normal );
-
+        qDebug() << "Parsed <" << kmlTag_ColorStyle << "> containing: " << parser.readElementText().trimmed()
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
     return 0;
 }

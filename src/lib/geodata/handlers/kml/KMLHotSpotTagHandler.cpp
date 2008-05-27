@@ -64,6 +64,8 @@ GeoNode* KMLhotSpotTagHandler::parse( GeoParser& parser ) const
         else yunits = GeoDataHotSpot::Fraction;
         
         parentItem.nodeAs<GeoDataIconStyle>()->setHotSpot( pf, xunits, yunits );
+        qDebug() << "Parsed <" << kmlTag_hotSpot << "> containing: " << pf
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
     return 0;
 }

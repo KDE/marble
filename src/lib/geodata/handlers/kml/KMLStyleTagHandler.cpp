@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
+#include "KMLElementDefines.h"
 #include "GeoDataStyle.h"
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
@@ -51,13 +52,11 @@ GeoNode* KMLStyleTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     // FIXME: it is not clear if the following is really what is needed here
     // Valid is any Feature so maybe it is Folder | NetworkLink | Document | ScreenOverlay | GroundOverlay | Placemarks
-    if ( parentItem.represents( kmlTag_Feature ) ) {
+    if ( parentItemIsFeature ) {
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
-    qDebug() << "Parsed <Style> start! Created GeoDataStyle item: " << style
-             << " parent item name: " << parentItem.qualifiedName().first 
-             << " associated item: " << parentItem.associatedNode();
-
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style
+             << " parent item name: " << parentItem.qualifiedName().first;
     return style;
 }

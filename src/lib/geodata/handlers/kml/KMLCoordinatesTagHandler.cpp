@@ -63,9 +63,8 @@ GeoNode* KMLcoordinatesTagHandler::parse( GeoParser& parser ) const
         } else {
             // raise warning
         }
-        qDebug() << "Parsed <coordinates> start! Added  item: " << coordinates 
-                 << " parent item name: " << parentItem.qualifiedName().first 
-                 << " associated item: " << parentItem.associatedNode();
+        qDebug() << "Parsed <" << kmlTag_coordinates << "> containing: " << coordinates
+                 << " parent item name: " << parentItem.qualifiedName().first;
     }
 
     return 0;
