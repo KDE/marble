@@ -1,3 +1,10 @@
+2008-05-27  Patrick Spendrin  <ps_ml@gmx.de>
+
+    * src/lib/geodata/CMakeLists.txt
+    
+    use FILE( GLOB ) to collect all the files
+    that adds new files right away
+    
 2008-05-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Make mercator projection work somewhat.
