@@ -87,6 +87,13 @@ int main(int argc, char** argv)
 
     if (document->isGeoDataDocument()) {
         GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>(document);
+        QVector<GeoDataFeature*>::const_iterator it = dataDocument->features().constBegin();
+        QVector<GeoDataFeature*>::const_iterator end = dataDocument->features().constEnd();
+
+        for (; it != end; ++it) {
+            GeoDataFeature* feature = *it;
+            qDebug() << "Name: " << feature->name();
+        }
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
     } else if (document->isGeoSceneDocument()) {
         GeoSceneDocument *sceneDocument = static_cast<GeoSceneDocument*>(document);

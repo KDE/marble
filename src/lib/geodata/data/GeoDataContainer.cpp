@@ -64,6 +64,11 @@ QVector<GeoDataFolder*> GeoDataContainer::folders() const
     return results;
 }
 
+QVector<GeoDataFeature*> GeoDataContainer::features() const
+{
+    return d->m_features;
+}
+
 void GeoDataContainer::addFeature(GeoDataFeature* feature)
 {
     d->m_features.append(feature);

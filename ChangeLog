@@ -1,4 +1,15 @@
-2008-05-27  Patrick Spendrin  <ps_ml@gmx.de>
+2008-05-27  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataContainer{.h,.cpp}
+    
+    add new features method to handle features
+    
+    * src/lib/geodata/GeoDataTest.cpp
+    * src/lib/geodata/handlers/kml/KMLNameTagHandler{.h,.cpp}
+    
+    read name Tag and give out in GeoDataTest
+    
+2008-05-27  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/CMakeLists.txt
     
