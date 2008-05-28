@@ -213,15 +213,15 @@ set_target_properties(marblewidget PROPERTIES
 
 # choose the correct target install library path
 if(WIN32 AND QTONLY)
-  install(TARGETS marblewidget DESTINATION "")
+  install(TARGETS marblewidget RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
 else(WIN32 AND QTONLY)
   if(APPLE AND QTONLY)
-    install (TARGETS marblewidget DESTINATION
+    install (TARGETS marblewidget LIBRARY DESTINATION
       ${CMAKE_INSTALL_PREFIX}/Marble.app/Contents/MacOS/lib)
 
   else(APPLE AND QTONLY)
     if(QTONLY)
-      install(TARGETS marblewidget DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
+      install(TARGETS marblewidget LIBRARY DESTINATION ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX})
     else(QTONLY)
         install(TARGETS marblewidget  ${INSTALL_TARGETS_DEFAULT_ARGS})
     endif(QTONLY)

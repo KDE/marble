@@ -1,3 +1,11 @@
+2008-05-28  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/CMakeLists.txt
+    * src/lib/CMakeLists.txt
+    * src/tilecreator/CMakeLists.tx
+    
+    fix QTONLY cmake errors when building with cmake version 2.6
+    
 2008-05-27  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/handlers/kml/KMLVisibilityTagHandler{.h,.cpp}
