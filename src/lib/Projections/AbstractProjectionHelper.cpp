@@ -47,6 +47,30 @@ void AbstractProjectionHelper::paintBase( GeoPainter     *painter,
 }
 #endif
 
+/* 
+    FIXME: Actually the paintBase and activeRegion should both draw 
+    the shape of the "projection border" (which is the "border" of 
+    the set of possible values) from the very same place to ease
+    implementation.
+
+    Both the paintBase and the activeRegion can easily get defined 
+    by providing a virtual method which has a QPainterPath as a
+    return value. The implementation of that virtual method would
+    just contain drawing routines for the QPainterPath.
+
+    The method QRegion activeRegion() would get moved into 
+    ViewportParams and would return a cached QRegion object that 
+    gets created via QRegion( painterPath.toFillPolygon() ).
+    As the activeRegion has the same shape but is smaller 
+    than the projection border the polygon created in between 
+    could get scaled down by 50 pixels using QMatrix::map().
+
+    The paintBase method would just use painterPath.toFillPolygon()
+    to create the needed polygon (as drawing polygons is AFAIK faster.
+    than drawing a painterpath).
+
+*/
+
 const QRegion AbstractProjectionHelper::activeRegion() const
 {
     return d->activeRegion;
