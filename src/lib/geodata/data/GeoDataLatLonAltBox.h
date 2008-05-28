@@ -123,7 +123,7 @@ class GeoDataLatLonAltBoxPrivate;
 
 class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 {
-    friend bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+    friend bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
 
  public:
     GeoDataLatLonAltBox();
