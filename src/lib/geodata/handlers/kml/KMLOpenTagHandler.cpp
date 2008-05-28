@@ -24,7 +24,6 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
-#include "KMLElementDefines.h"
 
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
@@ -48,7 +47,7 @@ GeoNode* KMLopenTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItemIsFeature ) {
+    if( parentItem.nodeAs<GeoDataFeature>() ) {
         QString open = parser.readElementText().trimmed();
 /*        if( open == QString( "1" ) )
             parentItem.nodeAs<GeoDataFeature>()->setOpen( true );

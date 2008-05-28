@@ -24,7 +24,6 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
-#include "KMLElementDefines.h"
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 
@@ -46,7 +45,7 @@ GeoNode* KMLnameTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_name ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItemIsFeature ) {
+    if( parentItem.nodeAs<GeoDataFeature>() ) {
         QString name = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataFeature>()->setName( name );

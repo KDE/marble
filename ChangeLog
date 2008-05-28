@@ -1,5 +1,17 @@
 2008-05-28  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLNameTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLOpenTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLVisibilityTagHandler.cpp
+    - src/lib/geodata/handlers/kml/KMLElementDefines.h
+    
+    remove the helper construction with the defines for abstract elements
+    and use the casting instead.
+    
+2008-05-28  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/CMakeLists.txt
     * src/lib/CMakeLists.txt
     * src/tilecreator/CMakeLists.tx

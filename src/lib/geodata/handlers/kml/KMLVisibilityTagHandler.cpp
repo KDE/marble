@@ -24,7 +24,6 @@
 #include <QtCore/QDebug>
 
 #include "KMLElementDictionary.h"
-#include "KMLElementDefines.h"
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 
@@ -47,7 +46,7 @@ GeoNode* KMLvisibilityTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItemIsFeature ) {
+    if( parentItem.nodeAs<GeoDataFeature>() ) {
         QString visibility = parser.readElementText().trimmed();
         if( visibility == QString( "1" ) )
             parentItem.nodeAs<GeoDataFeature>()->setVisible( true );
