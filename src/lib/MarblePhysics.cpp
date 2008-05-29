@@ -49,8 +49,6 @@ GeoDataPoint MarblePhysics::suggestedPosition() const
 
     double y = a * x * x + b * x + g;
 
-    qDebug() << "x:" << x << "y:" << y << "ALT:" << m_sourcePosition.altitude();
-
     return GeoDataPoint( lon, lat, y );
 }
 
