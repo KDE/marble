@@ -20,11 +20,13 @@
 
 #include <QtCore/QVector>
 #include <QtGui/QFont>
+#include <QtGui/QPen>
 
-#include "GeoDataPoint.h"
 #include "global.h"
-#include "GeoPainter.h"
 
+class GeoDataPoint;
+class GeoPainter;
+class Quaternion;
 class ViewportParams;
 
 class MeasureTool : public QObject
@@ -38,19 +40,15 @@ class MeasureTool : public QObject
                  bool antialiasing );
 
  public Q_SLOTS:
-    void  addMeasurePoint( double lon, double lat ) {
-        m_pMeasurePointList << new GeoDataPoint( lon, lat );
-    }
-    void  removeMeasurePoints() {
-        m_pMeasurePointList.clear();
-    }
+    void  addMeasurePoint( double lon, double lat );
+    void  removeMeasurePoints();
 
  private:
     void  drawDistancePoints( GeoPainter *painter, ViewportParams *viewport );
     void  drawMark( GeoPainter* painter, ViewportParams *viewport,
                     int x, int y );
     void  drawDistancePath( GeoPainter* painter,
-                            Quaternion, Quaternion,
+                            const Quaternion&, const Quaternion&,
                             ViewportParams *viewport );
     void  drawTotalDistanceLabel( GeoPainter *painter,
                                   double totalDistance );

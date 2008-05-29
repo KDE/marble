@@ -24,6 +24,7 @@
 
 // marble
 #include "AbstractProjection.h"
+#include "GeoPainter.h"
 #include "Quaternion.h"
 #include "ViewportParams.h"
 
@@ -178,7 +179,7 @@ void MeasureTool::drawMark( GeoPainter* painter, ViewportParams *viewport,
 
 
 void MeasureTool::drawDistancePath( GeoPainter* painter, 
-                                    Quaternion prevqpos, Quaternion qpos,
+                                    const Quaternion & prevqpos, const Quaternion & qpos,
                                     ViewportParams *viewport )
 {
     // Some convenience variables
@@ -249,8 +250,8 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
 //        have repeatX() == true over the date line.
 //        
 void MeasureTool::rectangularDrawDistancePath( GeoPainter *painter,
-                                               Quaternion   prevqpos,
-                                               Quaternion   qpos,
+                                               const Quaternion & prevqpos,
+                                               const Quaternion & qpos,
                                                ViewportParams *viewport,
                                                bool antialiasing )
 {
@@ -376,6 +377,18 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
     painter->drawRect( 10, 5, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
     painter->setFont( m_font_regular );
     painter->drawText( 15, 10 + m_fontascent, distanceString );
+}
+
+
+void MeasureTool::addMeasurePoint( double lon, double lat )
+{
+    m_pMeasurePointList << new GeoDataPoint( lon, lat );
+}
+
+
+void MeasureTool::removeMeasurePoints()
+{
+    m_pMeasurePointList.clear();
 }
 
 
