@@ -30,6 +30,10 @@ public:
 
     ViewportParams  m_viewport;
 
+    // The quality that we are painting right now.
+    MapQuality           m_mapQuality;
+
+
     // FIXME: We should try to get rid of these two:    
     Quaternion  m_planetAxisUpdated;
     int         m_radiusUpdated;
@@ -53,6 +57,7 @@ public:
 ViewParamsPrivate::ViewParamsPrivate()
     : m_mapTheme( 0 ),
       m_viewport(),
+      m_mapQuality( Normal ),
       m_planetAxisUpdated(),
       m_radiusUpdated( 0 ),
       // Show / don't show parameters
@@ -94,6 +99,17 @@ Projection ViewParams::projection() const
 {
     return d->m_viewport.projection();
 }
+
+MapQuality ViewParams::mapQuality()
+{
+    return d->m_mapQuality; 
+}
+
+void ViewParams::setMapQuality( MapQuality mapQuality )
+{
+    d->m_mapQuality = mapQuality; 
+}
+
 
 AbstractProjection *ViewParams::currentProjection() const
 {

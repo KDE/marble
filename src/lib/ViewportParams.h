@@ -71,9 +71,6 @@ class MARBLE_EXPORT ViewportParams
     void setHeight(int newHeight);
     void setSize(QSize newSize);
 
-    Marble::MapQuality mapQuality();
-    void setMapQuality( Marble::MapQuality );
-
     BoundingBox boundingBox() const;
     void setBoundingBox( const BoundingBox & );
 

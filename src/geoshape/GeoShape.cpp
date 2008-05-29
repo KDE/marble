@@ -65,7 +65,8 @@ KoShape * GeoShape::cloneShape() const
     return 0;//clone;
 }
 
-void GeoShape::paint( QPainter& painter, const KoViewConverter& converter ) {
+void GeoShape::paint( QPainter& painter, const KoViewConverter& converter )
+{
     QRectF target = converter.documentToView(QRectF(QPointF(0,0), size()));
     QSize iSize = size().toSize();
 
@@ -73,7 +74,12 @@ void GeoShape::paint( QPainter& painter, const KoViewConverter& converter ) {
 
     QPixmap temp( iSize );
     temp.fill( Qt::transparent );
-    GeoPainter gp( &temp, m_marbleMap->viewParams()->viewport(), false );
+
+    // FIXME: We set the quality to Normal right now.  Perhaps we
+    //        should use different quality in different situations? Or
+    //        perhaps Normal isn't the best quality here?
+    GeoPainter gp( &temp, m_marbleMap->viewParams()->viewport(), 
+		   Marble::Normal, false );
     QRect rect( QPoint(0,0), iSize );
     m_marbleMap->paint( gp, rect );
 

@@ -51,24 +51,25 @@ VectorComposer::VectorComposer()
     m_usaStates = new PntMap();
     m_usaStates->load( MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
 
+    // The date "line", which in reality is rather crooked.
     m_dateLine = new PntMap();
     m_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 
     m_vectorMap = new VectorMap();
 
-    m_textureLandPen = QPen( Qt::NoPen );
-
+    m_textureLandPen   = QPen( Qt::NoPen );
     m_textureLandBrush = QBrush( QColor( 255, 0, 0 ) );
+
     m_textureLakeBrush = QBrush( QColor( 0, 0, 0 ) );
     m_textureGlacierBrush = QBrush( QColor( 0, 255, 0 ) );
     m_textureBorderPen.setStyle( Qt::SolidLine );
     m_textureBorderPen.setColor( QColor( 0, 255, 0 ) );
 
+    m_oceanPen   = QPen( Qt::NoPen );
     m_oceanBrush = QBrush( QColor( 153, 179, 204 ) );
-    m_oceanPen = QPen( Qt::NoPen );
 
+    m_landPen   = QPen( Qt::NoPen );
     m_landBrush = QBrush( QColor( 242, 239, 233 ) );
-    m_landPen = QPen( Qt::NoPen );
 
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
@@ -98,19 +99,22 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     bool antialiased = false;
 
-    if (   viewParams->viewport()->mapQuality() == Marble::High
-        || viewParams->viewport()->mapQuality() == Marble::Print ) {
-            antialiased = true;
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print )
+    {
+	antialiased = true;
     }
 
     // Coastlines
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
 
+    // Draw the coast line vectors
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
+    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport(),
+			    viewParams->mapQuality() );
 
     // Islands
     m_vectorMap -> setzBoundingBoxLimit( 0.8 );
@@ -119,7 +123,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
     m_vectorMap -> setPen( m_textureLandPen );
     m_vectorMap -> setBrush( m_textureLandBrush );
-    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
+    m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport(),
+			    viewParams->mapQuality() );
 
     bool showWaterbodies, showLakes;
     viewParams->propertyValue( "waterbodies", showWaterbodies );
@@ -133,12 +138,14 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> createFromPntMap( m_lakes, viewParams->viewport() );
          m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureLakeBrush );
-         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport(),
+				 viewParams->mapQuality() );
 
          m_vectorMap -> createFromPntMap( m_lakeislands, viewParams->viewport() );
          m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureLandBrush );
-         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport(),
+				 viewParams->mapQuality() );
     }
 
     bool showIce;
@@ -152,7 +159,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
          m_vectorMap -> setPen( Qt::NoPen );
          m_vectorMap -> setBrush( m_textureGlacierBrush );
 
-         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport() );
+         m_vectorMap -> drawMap( origimg, antialiased, viewParams->viewport(),
+				 viewParams->mapQuality() );
     }
 
     // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
@@ -165,9 +173,10 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->viewport()->mapQuality() == Marble::High
-        || viewParams->viewport()->mapQuality() == Marble::Print ) {
-            antialiased = true;
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print )
+    {
+	antialiased = true;
     }
 
     // Paint the background of it all, i.e. the water.
@@ -222,9 +231,10 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->viewport()->mapQuality() == Marble::High
-        || viewParams->viewport()->mapQuality() == Marble::Print ) {
-            antialiased = true;
+    if (   viewParams->mapQuality() == Marble::High
+        || viewParams->mapQuality() == Marble::Print )
+    {
+	antialiased = true;
     }
 
     bool showWaterbodies, showRivers;

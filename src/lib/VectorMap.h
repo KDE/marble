@@ -23,6 +23,7 @@
 #include "GeoDataPoint.h"
 #include "ScreenPolygon.h"
 
+using namespace Marble;
 
 class GeoPainter;
 class PntMap;
@@ -41,7 +42,7 @@ class VectorMap : public ScreenPolygon::Vector
     void paintBase( GeoPainter *painter, ViewportParams *viewport, bool antialiasing );
     void paintMap( GeoPainter *painter, bool antialiasing );
     void drawMap( QPaintDevice *paintDevice, bool antialiasing,
-		  ViewportParams *viewport );
+		  ViewportParams *viewport, MapQuality mapQuality );
 
     void resizeMap( int width, int height );
 

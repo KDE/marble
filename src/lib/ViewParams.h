@@ -66,6 +66,9 @@ class MARBLE_EXPORT ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
+    Marble::MapQuality mapQuality();
+    void setMapQuality( Marble::MapQuality );
+
     /**
      * @brief  Set the value of a map theme property
      * @param  name  the property name

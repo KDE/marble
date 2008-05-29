@@ -180,8 +180,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         GeoDataPoint::Vector  boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
 
-        // Let's just use the top left and the bottom right bounding box point for 
-        // this projection
+        // Let's just use the top left and the bottom right bounding
+        // box point for this projection.
         for ( int i = 1; i < 3; ++i ) {
             boundary[i].geoCoordinates(lon, lat);
             x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
@@ -488,12 +488,11 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
 
 	m_currentPoint = QPointF( x, y );
 
-	//correction of the Dateline
-
+	// Correction of the Dateline
 	if ( m_lastSign != currentSign && fabs(m_lastLon) + fabs(lon) > M_PI ) {
 
-	    // x coordinate on the screen for the points on the dateline on both
-	    // sides of the flat map.
+	    // X coordinate on the screen for the points on the
+	    // dateline on both sides of the flat map.
 	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
 	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
 	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
@@ -687,7 +686,7 @@ void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 
 
 void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
-			 ViewportParams *viewport )
+			 ViewportParams *viewport, MapQuality mapQuality )
 {
     bool doClip = false; //assume false
     switch( viewport->projection() ) {
@@ -703,7 +702,7 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
             break;
     }
 
-    GeoPainter  painter( origimg, viewport, doClip );
+    GeoPainter  painter( origimg, viewport, mapQuality, doClip );
     painter.setRenderHint( QPainter::Antialiasing, antialiasing );
     painter.setPen( m_pen );
     painter.setBrush( m_brush );
@@ -713,7 +712,6 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
           itPolygon != itEndPolygon; 
           ++itPolygon )
     {
-
         if ( itPolygon->closed() )  
             painter.drawPolygon( *itPolygon );
         else

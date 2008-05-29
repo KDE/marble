@@ -1,3 +1,26 @@
+2008-05-29  Inge Wallin  <inge@lysator.liu.se>
+
+	Move the MapQuality measure from ViewParams to ViewportParams.
+	Some cleaning also snuck in.
+	* src/lib/ViewParams.{h,cpp}: Remove MapQuality
+	(mapQuality, setMapQuality): removed
+	* src/lib/ViewportParams.{h,cpp}: Add MapQuality
+	(mapQuality, setMapQuality): added
+	* src/lib/VectorMap.{h,cpp} (drawMap): Add MapQuality
+	* src/lib/GeoPainter.{h,cpp}: Add MapQuality to the object
+	* src/lib/MarbleWidget.cpp: Use new API of the GeoPainter
+	cleaning
+	* src/lib/MarbleMap.cpp: Use new API
+	* src/lib/MarbleModel.cpp: Use new API
+	* src/lib/VectorComposer.cpp: Use new API of VectorMap
+	* src/lib/SphericalScanlineTextureMapper.cpp: cleaning
+	* src/lib/EquirectScanlineTextureMapper.cpp: cleaning
+	* src/lib/MarbleAbstractFloatItem.cpp
+	* src/CMakeLists.txt: Disable the geoshape since it uses installed
+	headers and not headers in the source tree.  If I didn't do this,
+	it would break the compile. Alas.
+	* src/geoshape/GeoShape.cpp (paint): Use new GeoPainter API.
+
 2008-05-28  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp

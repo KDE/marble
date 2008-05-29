@@ -25,8 +25,10 @@ using namespace Marble;
 class GeoPainterPrivate
 {
  public:
-    GeoPainterPrivate( ViewportParams *viewport )
-        : m_viewport( viewport )
+    GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
+        : m_viewport( viewport ),
+	  m_mapQuality( mapQuality )
+
     {
         m_x = new int[100];
     }
@@ -155,14 +157,16 @@ class GeoPainterPrivate
         rect.setBottomRight( QPointF( right, bottom ) );
     }
 
-    ViewportParams * m_viewport;
+    ViewportParams  *m_viewport;
+    MapQuality       m_mapQuality;
 
-    int *m_x;
+    int             *m_x;
 };
 
-GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams * viewport, bool clip )
+GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
+			MapQuality mapQuality, bool clip )
     : ClipPainter( pd, clip ),
-      d( new GeoPainterPrivate( viewport ) )
+      d( new GeoPainterPrivate( viewport, mapQuality ) )
 {
 }
 
@@ -175,8 +179,8 @@ void GeoPainter::autoMapQuality ()
 {
     bool antialiased = false;
 
-    if (   d->m_viewport->mapQuality() == Marble::High
-        || d->m_viewport->mapQuality() == Marble::Print ) {
+    if (   d->m_mapQuality == Marble::High
+        || d->m_mapQuality == Marble::Print ) {
             antialiased = true;
     }
 

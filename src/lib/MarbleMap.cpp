@@ -890,12 +890,12 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     //        PrintQuality. Either cache on a pixmap - or maybe
     //        better: Add to GlobeScanlineTextureMapper.
 
-    if ( d->m_viewParams.viewport()->mapQuality() == Marble::Print )
+    if ( d->m_viewParams.mapQuality() == Marble::Print )
         d->drawFog(painter);
 
     customPaint( &painter );
 
-    int transparency = ( d->m_viewParams.viewport()->mapQuality() == Marble::Low ) ? 255 : 192;
+    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
 //    d->m_compass.setTransparency( transparency );
     d->m_mapscale.setTransparency( transparency );
 
@@ -927,8 +927,8 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     bool antialiased = false;
 
-    if (   d->m_viewParams.viewport()->mapQuality() == Marble::High
-        || d->m_viewParams.viewport()->mapQuality() == Marble::Print ) {
+    if (   d->m_viewParams.mapQuality() == Marble::High
+        || d->m_viewParams.mapQuality() == Marble::Print ) {
             antialiased = true;
     }
 

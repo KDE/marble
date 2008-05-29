@@ -361,7 +361,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
 
         if ( d->s_pixmapCacheEnabled ) {
             d->m_cachePixmap.fill( Qt::transparent );
-            GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport );
+            GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport, Normal );
             pixmapPainter.translate( 0.5, 0.5 );
             renderBackground( &pixmapPainter );
 

@@ -28,11 +28,6 @@ public:
     Projection           m_projection;
     AbstractProjection  *m_currentProjection;
 
-    // FIXME: A map quality has *nothing* to do with a viewport.
-    //        This must be removed.  Use the classes for what they are
-    //        designed to hold and do.
-    MapQuality           m_mapQuality;
-
     // Parameters that determine the painting
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
     mutable matrix       m_planetAxisMatrix;
@@ -52,7 +47,6 @@ public:
 ViewportParamsPrivate::ViewportParamsPrivate()
     : m_projection( Spherical ),                    // Default projection
       m_currentProjection( &s_sphericalProjection ),
-      m_mapQuality( Normal ),
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( 2000 ),
@@ -227,16 +221,6 @@ void ViewportParams::setHeight(int newHeight)
 void ViewportParams::setSize(QSize newSize)
 {
     d->m_size = newSize;
-}
-
-MapQuality ViewportParams::mapQuality()
-{
-    return d->m_mapQuality; 
-}
-
-void ViewportParams::setMapQuality( MapQuality mapQuality )
-{
-    d->m_mapQuality = mapQuality; 
 }
 
 BoundingBox ViewportParams::boundingBox() const

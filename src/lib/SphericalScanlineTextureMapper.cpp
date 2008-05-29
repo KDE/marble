@@ -76,8 +76,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     QImage       *canvasImage = viewParams->canvasImage();
     const qint64  radius      = viewParams->radius();
 
-    const bool highQuality = ( viewParams->viewport()->mapQuality() == Marble::High || viewParams->viewport()->mapQuality() == Marble::Print );
-    const bool printQuality = ( viewParams->viewport()->mapQuality() == Marble::Print );
+    const bool highQuality  = ( viewParams->mapQuality() == Marble::High
+				|| viewParams->mapQuality() == Marble::Print );
+    const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
 
     // Scanline based algorithm to texture map a sphere
 
@@ -123,8 +124,8 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                           ? m_imageHeight - skip
                           : yTop + radius + radius - skip );
 
-    bool interlaced = ( m_interlaced ||
-                        viewParams->viewport()->mapQuality() == Marble::Low );
+    bool interlaced = ( m_interlaced 
+			|| viewParams->mapQuality() == Marble::Low );
 
     for ( int y = yTop; y < yBottom ; ++y ) {
 

@@ -145,21 +145,21 @@ void MarbleWidgetPrivate::construct()
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_widget->width(), m_widget->height() );
-    m_map->viewParams()->viewport()->setMapQuality( m_stillQuality ); 
+    m_map->viewParams()->setMapQuality( m_stillQuality ); 
 
-    m_widget->connect( m_map, SIGNAL( projectionChanged( Projection ) ),
+    m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
-    m_widget->connect( m_model, SIGNAL( themeChanged( QString ) ),
-             m_widget, SIGNAL( themeChanged( QString ) ) );
-    m_widget->connect( m_model, SIGNAL( modelChanged() ),
-             m_widget, SLOT( updateChangedMap() ) );
+    m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
+		       m_widget, SIGNAL( themeChanged( QString ) ) );
+    m_widget->connect( m_model,  SIGNAL( modelChanged() ),
+		       m_widget, SLOT( updateChangedMap() ) );
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
-    m_widget->connect( m_map, SIGNAL( zoomChanged( int ) ),
+    m_widget->connect( m_map,    SIGNAL( zoomChanged( int ) ),
                        m_widget, SIGNAL( zoomChanged( int ) ) );
 
 
@@ -760,7 +760,8 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
                    || d->m_map->radius() > height() / 2 );
 
     // Create a painter that will do the painting.
-    GeoPainter painter( this, map()->viewParams()->viewport(), doClip );
+    GeoPainter painter( this, map()->viewParams()->viewport(),
+			map()->viewParams()->mapQuality(), doClip );
 
     QRect  dirtyRect = evt->rect();
     d->m_map->paint( painter, dirtyRect );
@@ -1052,22 +1053,13 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
 void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )
 {
     // FIXME: Rewrite as a switch
-    if ( viewContext == Still )
-    {
+    if ( viewContext == Still ) {
         d->m_stillQuality = mapQuality;
     }
-    if ( viewContext == Animation )
-    {
+    else if ( viewContext == Animation ) {
         d->m_animationQuality = mapQuality;
     }
-    if ( d->m_viewContext == Still )
-    {
-        map()->viewParams()->viewport()->setMapQuality( d->m_stillQuality ); 
-    }
-    if ( d->m_viewContext == Animation )
-    {
-        map()->viewParams()->viewport()->setMapQuality( d->m_animationQuality ); 
-    }
+    map()->viewParams()->setMapQuality( mapQuality ); 
 }
 
 ViewContext MarbleWidget::viewContext() const
@@ -1080,9 +1072,9 @@ void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
     d->m_viewContext = viewContext;
 
     if ( viewContext == Still )
-        map()->viewParams()->viewport()->setMapQuality( d->m_stillQuality ); 
+        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
     if ( viewContext == Animation )
-        map()->viewParams()->viewport()->setMapQuality( d->m_animationQuality ); 
+        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
 }
 
 QString MarbleWidget::distanceString() const

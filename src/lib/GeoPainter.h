@@ -15,7 +15,12 @@
 
 #include "marble_export.h"
 
+// Marble
+#include "global.h"
 #include "ClipPainter.h"
+
+
+using namespace Marble;
 
 class ViewportParams;
 class GeoDataPoint;
@@ -60,7 +65,8 @@ class GeoPainterPrivate;
 class MARBLE_EXPORT GeoPainter : public ClipPainter
 {
  public:
-    GeoPainter( QPaintDevice* pd, ViewportParams * params, bool clip = true );
+    GeoPainter( QPaintDevice*pd, ViewportParams *params,
+		MapQuality mapQuality, bool clip = true );
 //    Ideally we'd like to have this constructor:
 
 //    GeoPainter( MarbleMap * map, bool clip );

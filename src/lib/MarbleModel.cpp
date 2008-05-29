@@ -409,6 +409,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
+	    // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->showElevationModel()
@@ -424,6 +425,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
             }
         }
     }
+
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
@@ -431,7 +433,8 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         if ( viewParams->projection() == Spherical ) {
-            QRect rect( width / 2 - radius , height / 2 - radius, 2 * radius, 2 * radius);
+            QRect rect( width / 2 - radius, height / 2 - radius,
+			2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
             painter->drawImage( rect, *viewParams->canvasImage(), rect );
         }
@@ -472,8 +475,8 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
         bool antialiased = false;
 
-        if (   viewParams->viewport()->mapQuality() == Marble::High
-            || viewParams->viewport()->mapQuality() == Marble::Print ) {
+        if (   viewParams->mapQuality() == Marble::High
+            || viewParams->mapQuality() == Marble::Print ) {
                 antialiased = true;
         }
 
