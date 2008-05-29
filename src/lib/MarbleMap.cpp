@@ -285,6 +285,41 @@ int MarbleMap::zoom() const
     return d->m_logzoom;
 }
 
+
+double MarbleMap::distance() const
+{
+    // Due to Marble's orthographic projection ("we have no focus")
+    // it's actually not possible to calculate a "real" distance.
+    // Additionally the viewing angle of the earth doesn't adjust to
+    // the window's size.
+    //
+    // So the only possible workaround is to come up with a distance
+    // definition which gives a reasonable approximation of
+    // reality. Therefore we assume that the average window width
+    // (about 800 pixels) equals the viewing angle of a human being.
+
+    const double VIEW_ANGLE = 110.0;
+
+    return ( EARTH_RADIUS * 0.4
+            / (double)( radius() )
+            / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
+}
+
+void MarbleMap::setDistance( double distance )
+{
+    const double VIEW_ANGLE = 110.0;
+
+    setRadius ( (int)( EARTH_RADIUS * 0.4
+            / distance
+            / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
+
+    if ( ! mapCoversViewport() ) {
+        d->m_viewParams.canvasImage()->fill( Qt::black );
+    }
+
+    setNeedsUpdate();
+}
+
 double MarbleMap::centerLatitude() const
 {
     // Calculate translation of center point
@@ -485,15 +520,6 @@ void MarbleMap::zoomOut()
 {
     zoomViewBy( -d->m_zoomStep );
 }
-
-void MarbleMap::rotateTo(const Quaternion& quat)
-{
-    d->m_viewParams.setPlanetAxis( quat );
-
-    // This method doesn't force a repaint of the view on purpose!
-    // See header file.
-}
-
 
 void MarbleMap::rotateBy(const Quaternion& incRot)
 {
@@ -727,25 +753,6 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
 }
 
 
-
-
-void MarbleMap::rotateTo( const double& lon, const double& lat, const double& psi)
-{
-    Quaternion  quat;
-    quat.createFromEuler( -lat * DEG2RAD,   // "phi"
-                           lon * DEG2RAD,   // "theta"
-                           psi * DEG2RAD );
-    d->m_viewParams.setPlanetAxis( quat );
-}
-
-void MarbleMap::rotateTo(const double& lon, const double& lat)
-{
-    Quaternion  quat;
-    quat.createFromEuler( -lat * DEG2RAD, lon  * DEG2RAD, 0.0 );
-    d->m_viewParams.setPlanetAxis( quat );
-}
-
-
 void MarbleMapPrivate::drawAtmosphere()
 {
     // Only draw an atmosphere if projection is spherical
@@ -964,24 +971,13 @@ void MarbleMap::customPaint(GeoPainter *painter)
     /* This is a NOOP */
 }
 
-#if 0
-void MarbleMap::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-                   QWidget *widget)
-{
-    Q_UNUSED( painter );
-    Q_UNUSED( option );
-    Q_UNUSED( widget );
-}
-#endif
-
 void MarbleMap::goHome()
 {
-    // d->m_model->rotateTo(0, 0);
     double  homeLon = 0;
     double  homeLat = 0;
     d->m_homePoint.geoCoordinates( homeLon, homeLat );
 
-    rotateTo( homeLon * RAD2DEG, homeLat * RAD2DEG );
+    centerOn( homeLon * RAD2DEG, homeLat * RAD2DEG );
 
     zoomView( d->m_homeZoom ); // default 1050
 }

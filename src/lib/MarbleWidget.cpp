@@ -34,6 +34,8 @@
 #include "GeoDataPoint.h"
 #include "GpxFileViewItem.h"
 #include "MarbleDirs.h"
+#include "MarblePhysics.h"
+#include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "TileCreatorDialog.h"
@@ -67,10 +69,11 @@ class MarbleWidgetPrivate
  public:
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
         : m_widget( parent ),
-	  m_map( map ), 
+          m_map( map ), 
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_inputhandler( 0 ),
+          m_physics( new MarblePhysics() ),
           m_proxyHost(),
           m_proxyPort( 0 )
     {
@@ -79,6 +82,7 @@ class MarbleWidgetPrivate
 
     ~MarbleWidgetPrivate()
     {
+        delete m_physics;
         delete m_map;
     }
 
@@ -101,6 +105,8 @@ class MarbleWidgetPrivate
 
     MarbleWidgetInputHandler  *m_inputhandler;
     MarbleWidgetPopupMenu     *m_popupmenu;
+
+    MarblePhysics    *m_physics;
 
     QString          m_proxyHost;
     qint16           m_proxyPort;
@@ -225,6 +231,9 @@ void MarbleWidgetPrivate::construct()
 
 //    m_widget->connect( m_model->layerDecorator(), SIGNAL( repaintMap() ),
 //                       m_widget, SLOT( repaintMap() ) );
+
+    m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
+                        m_widget, SLOT( updateAnimation( qreal ) ) );
 }
 
 
@@ -484,15 +493,6 @@ void MarbleWidget::zoomOut()
     d->m_map->zoomOut();
 }
 
-void MarbleWidget::rotateTo(const Quaternion& quat)
-{
-    d->m_map->rotateTo( quat );
-
-    // This method doesn't force a repaint of the view on purpose!
-    // See header file.
-}
-
-
 void MarbleWidget::rotateBy(const Quaternion& incRot)
 {
     d->m_map->rotateBy( incRot );
@@ -508,20 +508,80 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 }
 
 
-void MarbleWidget::centerOn(const double& lon, const double& lat)
+void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated )
 {
-    d->m_map->centerOn( lon, lat );
+    if ( animated )
+    {
+        d->m_physics->jumpTo( GeoDataPoint( lon, lat, distance(), GeoDataPoint::Degree ) );
+    }
+    else
+    {
+        d->m_map->centerOn( lon, lat );
+    }
 
     repaint();
 }
 
-void MarbleWidget::centerOn(const QModelIndex& index)
+void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 {
-    d->m_map->centerOn( index );
+    if ( animated )
+    {
+        QItemSelectionModel *selectionModel = d->m_map->model()->placeMarkSelectionModel();
+        Q_ASSERT( selectionModel );
+    
+        selectionModel->clear();
+    
+        if ( index.isValid() ) {
+            const GeoDataPoint targetPosition = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>();
+
+            d->m_physics->setCurrentPosition( GeoDataPoint( centerLongitude(), centerLatitude(), distance(), GeoDataPoint::Degree ) );
+            d->m_physics->jumpTo( targetPosition );
+
+            selectionModel->select( index, QItemSelectionModel::SelectCurrent );
+        }
+    }
+    else
+    {
+        d->m_map->centerOn( index );
+    }
 
     repaint();
 }
 
+void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
+{
+    if ( animated )
+    {
+        GeoDataPoint targetPosition = position;
+        targetPosition.setAltitude( distance() );
+
+        d->m_physics->jumpTo( targetPosition );
+    }
+    else
+    {
+        double  lon, lat;
+        position.geoCoordinates( lon, lat, GeoDataPoint::Degree );
+        d->m_map->setDistance( position.altitude() );
+        d->m_map->centerOn( lon, lat );
+    }
+
+    repaint();
+}
+
+void MarbleWidget::updateAnimation( qreal updateValue )
+{
+    GeoDataPoint position = d->m_physics->suggestedPosition();
+
+    if ( updateValue < 1.0 )
+    {
+        setViewContext( Marble::Animation );
+        centerOn( position );
+        setViewContext( Marble::Still );
+        return;
+    }
+
+    centerOn( position );
+}
 
 void MarbleWidget::setCenterLatitude( double lat )
 {
@@ -648,7 +708,6 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     repaint();
 }
 
-
 void MarbleWidget::connectNotify ( const char * signal )
 {
     if ( QByteArray( signal ) == 
@@ -725,18 +784,6 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
     }
 }
 
-
-void MarbleWidget::rotateTo( const double& lon, const double& lat,
-                             const double& psi)
-{
-    d->m_map->rotateTo( lon, lat, psi );
-}
-
-void MarbleWidget::rotateTo(const double& lon, const double& lat)
-{
-    d->m_map->rotateTo( lon, lat );
-}
-
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
@@ -749,7 +796,6 @@ void MarbleWidgetPrivate::setActiveRegion()
     viewport->currentProjection()->helper()->setActiveRegion( viewport );
     return;
 }
-
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
@@ -1010,7 +1056,6 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     dlg.exec();
 }
 
-
 void MarbleWidget::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
@@ -1077,25 +1122,19 @@ void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
         map()->viewParams()->setMapQuality( d->m_animationQuality ); 
 }
 
+double MarbleWidget::distance() const
+{
+    return map()->distance();
+}
+
+void MarbleWidget::setDistance( double distance )
+{
+    map()->setDistance( distance );
+}
+
 QString MarbleWidget::distanceString() const
 {
-    const double VIEW_ANGLE = 110.0;
-
-    // Due to Marble's orthographic projection ("we have no focus")
-    // it's actually not possible to calculate a "real" distance.
-    // Additionally the viewing angle of the earth doesn't adjust to
-    // the window's size.
-    //
-    // So the only possible workaround is to come up with a distance
-    // definition which gives a reasonable approximation of
-    // reality. Therefore we assume that the average window width
-    // (about 800 pixels) equals the viewing angle of a human being.
-    //
-    double distance = ( EARTH_RADIUS * 0.4
-			/ (double)( radius() )
-			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
-
-    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
+    return QString( "%L1 %2" ).arg( distance(), 8, 'f', 1, QChar(' ') ).arg( tr("km") );
 }
 
 void MarbleWidget::updateSun()
@@ -1165,11 +1204,4 @@ quint16 MarbleWidget::proxyPort() const
     return d->m_proxyPort;
 }
 
-/*
-void MarbleWidget::repaintMap()
-{
-    qDebug() << "MarbleWidget::repaintMap";
-    repaint();
-}
-*/
 #include "MarbleWidget.moc"

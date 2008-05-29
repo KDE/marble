@@ -73,6 +73,7 @@ set(marblewidget_SRCS
     MapScaleFloatItem.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
+    MarblePhysics.cpp
     DeferredFlag.cpp
     TileCreatorDialog.cpp
     MapThemeManager.cpp

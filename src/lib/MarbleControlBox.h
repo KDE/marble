@@ -128,7 +128,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @brief Signal emitted when the zoom slider has been moved.
      * @param zoom  The new zoom value.
      */
-    void zoomChanged(int zoom);
+    void zoomChanged( int zoom );
 
     /**
      * @brief Signal emitted when the Move Left button has been pressed.
@@ -156,7 +156,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * in a MarbleWidget, the widget will center the view on this
      * placemark.
      */
-    void centerOn(const QModelIndex&);
+    void centerOn( const QModelIndex&, bool );
 
     void selectMapTheme( const QString& );
 

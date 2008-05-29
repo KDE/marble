@@ -161,12 +161,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     int   width()  const;
     int   height() const;
 
-#if 0
-    /**
-     * @brief Set the input handler
-     */
-    void setInputHandler(MarbleMapInputHandler *handler);
-#endif
     /**
      * @brief Set the download manager to load missing tiles
      * @param manager the manager instance
@@ -192,6 +186,17 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Return the current zoom level.
      */
     int         zoom() const;
+
+    /**
+     * @brief Return the current distance.
+     */
+    double      distance() const;
+
+    /**
+     * @brief  Set the distance of the observer to the globe in km.
+     * @param  distance  The new distance in km.
+     */
+    void        setDistance( double distance );
 
     /**
      * @brief Return the current distance string.
@@ -488,18 +493,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * If we start at (0, 0), the result will be the exact equivalent
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
-     *
-     * This method automatically updates the view
      */
     void  rotateBy( const double &deltaLon, const double &deltaLat );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
      * @param  incRot a quaternion specifying the rotation
-     *     *
-     * This method automatically updates the view
      */
-    void  rotateBy(const Quaternion& incRot);
+    void  rotateBy( const Quaternion& incRot );
 
     /**
      * @brief  Center the view on a geographical point
@@ -507,69 +508,26 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *              +90(N) - -90(S)
      * @param  lon  an angle parallel to the longitude lines
      *              +180(W) - -180(E)
-     *
-     * This method automatically updates the view
      */
-    void  centerOn(const double &lon, const double &lat);
+    void  centerOn( const double &lon, const double &lat );
 
     /**
      * @brief  Center the view on a point
      * @param  index  an index for a QModel, indicating a city
-     *
-     * This method automatically updates the view
      */
-    void  centerOn(const QModelIndex& index);
+    void  centerOn( const QModelIndex& index );
 
     /**
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude
-     *
-     * This method automatically updates the view
      */
     void setCenterLatitude( double lat );
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude
-     *
-     * This method automatically updates the view
      */
     void setCenterLongitude( double lon );
-
-    /**
-     * @brief  Center the view on a point
-     * @param  lat  an angle parallel to the latitude lines
-     *              +90(N) - -90(S)
-     * @param  lon  an angle parallel to the longitude lines
-     *              +180(W) - -180(E)
-     *
-     * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations
-     */
-    void  rotateTo(const double& lon, const double& lat);
-
-    /**
-     * @brief  Center the view on a point
-     * @param  lat  an angle parallel to the latitude lines
-     *              +90(N) - -90(S)
-     * @param  lon  an angle parallel to the longitude lines
-     *              +180(W) - -180(E)
-     * @param  psi  clockwise rotation of the globe
-     *              -180(anti-clockwise) - +180(clockwise)
-     *
-     * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations
-     */
-    void  rotateTo( const double& lon, const double& lat, const double& psi);
-
-    /**
-     * @brief  Center the view on a point
-     * @param  quat a quaternion specifying the rotation
-     *
-     * This method does NOT automatically update the view
-     * and is meant to be used during subsequent transformations
-     */
-    void  rotateTo(const Quaternion& quat);
 
     /**
      * @brief  Get the Projection used for the map
@@ -857,15 +815,11 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Enables custom drawing onto the MarbleMap straight after
-     * @brief the globe and before all other layers has been rendered.
+     * @brief the globe and before all other layers have been rendered.
      * @param painter 
      */
     virtual void  customPaint( GeoPainter *painter );
 
-#if 0
-    void  connectNotify ( const char * signal );
-    void  disconnectNotify ( const char * signal );
-#endif
  private:
     MarbleMapPrivate  * const d;
 };

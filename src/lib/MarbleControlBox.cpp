@@ -254,12 +254,12 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              this,        SLOT( selectProjection( Projection ) ) );
     selectProjection( d->m_widget->projection() );
 
-    connect(d->m_widget, SIGNAL(zoomChanged(int)),
-	    this,        SLOT(changeZoom(int)));
-    connect(this,        SIGNAL(centerOn(const QModelIndex&)),
-	    d->m_widget, SLOT(centerOn(const QModelIndex&)));
-    connect(this,        SIGNAL(selectMapTheme(const QString&)),
-	    d->m_widget, SLOT(setMapThemeId(const QString&)));
+    connect( d->m_widget, SIGNAL( zoomChanged( int ) ),
+	    this,        SLOT( changeZoom( int ) ) );
+    connect( this,        SIGNAL( centerOn( const QModelIndex&, bool ) ),
+	    d->m_widget, SLOT( centerOn( const QModelIndex&, bool ) ) );
+    connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
+	    d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
     // connect signals for the Legend
 
@@ -531,7 +531,7 @@ void MarbleControlBox::projectionSelected( int projectionIndex )
 
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {
-    emit centerOn( d->m_sortproxy->mapToSource( index ) );
+    emit centerOn( d->m_sortproxy->mapToSource( index ), true );
 }
 
 void MarbleControlBox::adjustForAnimation()

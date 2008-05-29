@@ -282,12 +282,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                             direction = -1;
                     }
                 }
-                m_widget->rotateTo( RAD2DEG * (double)(m_leftpresseda)
+                m_widget->centerOn( RAD2DEG * (double)(m_leftpresseda)
                                     - 90.0 * direction * deltax / radius, 
                                     RAD2DEG * (double)(m_leftpressedb)
                                     + 90.0 * deltay / radius );
-
-                m_widget->repaint();
             }
 
 
