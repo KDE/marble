@@ -1,3 +1,13 @@
+2008-05-30  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/data/GeoDataObject.h:
+    * src/lib/geodata/data/GeoDataObject.cpp:
+
+    - Define copy constructor and assignment operator for class GeoDataObject,
+      because it has got a d-pointer.
+    - Initialise base class objects in constructor.
+    - Remove empty destructor of GeoDataObjectPrivate.
+
 2008-05-29  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MeasureTool.h:

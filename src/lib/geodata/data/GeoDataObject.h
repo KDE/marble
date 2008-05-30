@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -71,9 +72,11 @@ public:
 
  protected:
     GeoDataObject();
+    GeoDataObject( const GeoDataObject & );
+    GeoDataObject & operator=( const GeoDataObject & );
 
  private:
-    GeoDataObjectPrivate * const d;
+    GeoDataObjectPrivate * d;
 };
 
 #endif // GEODATAOBJECT_H

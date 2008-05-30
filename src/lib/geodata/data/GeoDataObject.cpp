@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -23,19 +24,27 @@ class GeoDataObjectPrivate
     {
     }
 
-    ~GeoDataObjectPrivate()
-    {
-    }
-
     int  m_id;
     int  m_targetId;
 };
 
 GeoDataObject::GeoDataObject()
-    : d( new GeoDataObjectPrivate )
+    : GeoNode(), Serializable(),
+      d( new GeoDataObjectPrivate )
 {
 }
 
+GeoDataObject::GeoDataObject( GeoDataObject const & other )
+    : GeoNode( other ), Serializable( other ),
+      d( new GeoDataObjectPrivate( *other.d ))
+{
+}
+
+GeoDataObject & GeoDataObject::operator=( const GeoDataObject & rhs )
+{
+    *d = *rhs.d;
+    return *this;
+}
 
 GeoDataObject::~GeoDataObject()
 {
