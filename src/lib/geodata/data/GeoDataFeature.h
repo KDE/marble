@@ -220,8 +220,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
  protected:
-    /// Create a new GeoDataFeature with @p name as its name.
     GeoDataFeature();
+    /// Create a new GeoDataFeature with @p name as its name.
     explicit GeoDataFeature( const QString& name );
 
     /// The visual category of this feature.  @see GeoDataVisualCategory
