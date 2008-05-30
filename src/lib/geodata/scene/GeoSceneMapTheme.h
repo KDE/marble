@@ -84,6 +84,8 @@ class LegendSection
     }
 
  private:
+    Q_DISABLE_COPY( LegendSection )
+
     QString               m_name;
     QString               m_heading;
     bool                  m_checkable;
@@ -128,6 +130,8 @@ public:
     static QStandardItemModel* mapThemeModel( const QStringList& stringlist );
 
 private:
+    Q_DISABLE_COPY( GeoSceneMapTheme )
+
     QString    m_name;
     QString    m_prefix;
     QString    m_icon;

@@ -62,6 +62,9 @@ class GeoSceneItem : public GeoNode {
 
     bool    m_checkable;
     int     m_spacing;
+
+ private:
+    Q_DISABLE_COPY( GeoSceneItem )
 };
 
 

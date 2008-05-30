@@ -58,6 +58,7 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
     void valueChanged( QString, bool );
 
  private:
+    Q_DISABLE_COPY( GeoSceneDocument )
     GeoSceneDocumentPrivate * const d;
 };
 

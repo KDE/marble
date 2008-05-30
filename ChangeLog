@@ -1,5 +1,29 @@
 2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/data/GeoDataFeature.h:
+    * src/lib/geodata/data/GeoDataLineString.h:
+    * src/lib/geodata/data/GeoDataLatLonAltBox.h:
+    * src/lib/geodata/scene/GeoSceneZoom.h:
+    * src/lib/geodata/scene/GeoSceneProperty.h:
+    * src/lib/geodata/scene/GeoSceneIcon.h:
+    * src/lib/geodata/scene/GeoSceneGroup.h:
+    * src/lib/geodata/scene/GeoSceneItem.h:
+    * src/lib/geodata/scene/GeoSceneLegend.h:
+    * src/lib/geodata/scene/GeoSceneMapTheme.h:
+    * src/lib/geodata/scene/GeoSceneSettings.h:
+    * src/lib/geodata/scene/GeoSceneHead.h:
+    * src/lib/geodata/scene/GeoSceneSection.h:
+    * src/lib/geodata/scene/GeoSceneLayer.h:
+    * src/lib/geodata/scene/GeoSceneMap.h:
+    * src/lib/geodata/scene/GeoSceneDocument.h:
+
+    - Use Q_DISABLE_COPY for classes that have got a pointer member
+      or a container of pointers.
+    - Add FIXMEs for Q_DISABLE_COPY, implementing copy constructor
+      and d-pointerfication.
+
+2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataLineStyle.h:
     * src/lib/geodata/data/GeoDataPolyStyle.h:
 

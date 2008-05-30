@@ -87,6 +87,9 @@ class GeoSceneGroup : public QObject,
     QVector<GeoSceneProperty*> m_properties;
 
     QString m_name;
+
+ private:
+    Q_DISABLE_COPY( GeoSceneGroup )
 };
 
 

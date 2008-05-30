@@ -44,6 +44,9 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode {
     int  m_minimum;
     int  m_maximum;
     bool m_discrete;
+
+ private:
+    // FIXME: d-pointerfy
 };
 
 

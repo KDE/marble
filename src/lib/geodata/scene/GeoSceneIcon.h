@@ -46,6 +46,8 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode {
  protected:
     QString m_pixmap;
     QColor  m_color;
+
+    // FIXME: d-pointerfy
 };
 
 #endif // GEOSCENEICON_H

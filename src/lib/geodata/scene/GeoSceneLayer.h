@@ -87,6 +87,9 @@ class GeoSceneLayer : public GeoNode {
     QString m_name;
     QString m_backend;
     QString m_role;
+
+ private:
+    Q_DISABLE_COPY( GeoSceneLayer )
 };
 
 #endif // GEOSCENELAYER_H

@@ -59,6 +59,7 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode {
     GeoSceneIcon* icon() const;
 
  private:
+    Q_DISABLE_COPY( GeoSceneHead )
     GeoSceneHeadPrivate * const d;
 };
 

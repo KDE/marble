@@ -82,6 +82,7 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode {
     bool hasVectorLayers() const;
 
  private:
+    Q_DISABLE_COPY( GeoSceneMap )
     GeoSceneMapPrivate * const d;
 };
 

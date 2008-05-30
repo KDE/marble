@@ -68,6 +68,7 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
                                             QVector<GeoDataPoint>::Iterator end );
 
  private:
+    // FIXME: Q_DISABLE_COPY( GeoDataLineString )
     GeoDataLineStringPrivate  * const d;
 };
 

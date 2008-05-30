@@ -59,6 +59,9 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
     bool     m_available;
     bool     m_defaultValue;
     bool     m_value;
+
+ private:
+    // FIXME: d-pointerfy
 };
 
 

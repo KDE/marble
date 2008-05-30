@@ -114,6 +114,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     void valueChanged( QString, bool );
 
  private:
+    Q_DISABLE_COPY( GeoSceneSettings )
     GeoSceneSettingsPrivate * const d;
 };
 

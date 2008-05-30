@@ -49,6 +49,7 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode {
     QVector<GeoSceneSection*> sections() const;
 
  private:
+    Q_DISABLE_COPY( GeoSceneLegend )
     GeoSceneLegendPrivate * const d;
 };
 
