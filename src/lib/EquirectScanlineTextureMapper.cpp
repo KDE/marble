@@ -28,20 +28,6 @@
 #include "ViewportParams.h"
 
 
-#ifdef Q_CC_MSVC
-static double msvc_asinh(double x)
-{
-  if ( _isnan ( x ) ) {
-    errno = EDOM;
-    return x;
-  }
-
-  return ( log( x + sqrt ( x * x + 1.0 ) ) );
-}
-#define asinh msvc_asinh
-#endif
-
-
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {
