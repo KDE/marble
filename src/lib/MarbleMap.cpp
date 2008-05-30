@@ -315,8 +315,8 @@ void MarbleMap::setDistance( double distance )
 
     if ( !mapCoversViewport() ) {
         d->m_viewParams.canvasImage()->fill( Qt::black );
+        setNeedsUpdate();
     }
-    setNeedsUpdate();
 }
 
 double MarbleMap::centerLatitude() const
