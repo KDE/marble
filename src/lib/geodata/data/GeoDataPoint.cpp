@@ -29,10 +29,6 @@ class GeoDataPointPrivate
     {
     }
 
-    ~GeoDataPointPrivate()
-    {
-    }
-
     Quaternion  m_q;
     double      m_lon;
     double      m_lat;
@@ -61,7 +57,8 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, GeoDataPoint:
 }
 
 GeoDataPoint::GeoDataPoint(const GeoDataPoint& other)
-  : d(new GeoDataPointPrivate(*other.d))
+  : GeoDataGeometry(other),
+    d(new GeoDataPointPrivate(*other.d))
 {
 }
 
@@ -206,6 +203,8 @@ const Quaternion& GeoDataPoint::quaternion() const
 
 GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
 {
+    // FIXME: check for self assignment is not neccessary here, discuss
+    // if it should stay or be removed
     if ( this == &other )
         return *this;
     *d = *other.d;
