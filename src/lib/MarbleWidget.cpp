@@ -565,6 +565,13 @@ void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
         d->m_map->centerOn( lon, lat );
     }
 
+    if ( d->m_map->mapCoversViewport() ) {
+        setAttribute(Qt::WA_NoSystemBackground, true );
+    }
+    else {
+        setAttribute(Qt::WA_NoSystemBackground, false );
+    }
+
     repaint();
 }
 

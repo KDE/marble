@@ -41,7 +41,7 @@ class MarblePhysics : public QObject
 
     QTimeLine *m_timeLine;
 
-    double m_gravity;
+    int    m_jumpDuration;
 };
 
 #endif // MARBLE_PHYSICS_H

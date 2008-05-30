@@ -15,9 +15,9 @@
 
 
 MarblePhysics::MarblePhysics()
-    : m_gravity( 9.81 ),
-      m_timeLine( new QTimeLine( 2000 ) )
+    : m_jumpDuration( 2000 )
 {
+    m_timeLine = new QTimeLine( m_jumpDuration );
     m_timeLine->setFrameRange( 0, 500 );
     m_timeLine->setCurveShape( QTimeLine::EaseInOutCurve );
     m_timeLine->setUpdateInterval( 0 );
@@ -36,18 +36,24 @@ GeoDataPoint MarblePhysics::suggestedPosition() const
 
     double t = m_timeLine->currentValue();
 
+    // Spherical interpolation for current position between source position
+    // and target position
     itpos.slerp( m_sourcePosition.quaternion(), m_targetPosition.quaternion(), t );
     itpos.getSpherical( lon, lat );
 
-    double g = m_sourcePosition.altitude();
-    double h = 3000.0;
+    // Purely cinematic approach to calculate the jump path
 
-    double a = - h / ( 1000.0 * 1000.0 );
-    double b = 2.0 * h / 1000.0;
+    double g = m_sourcePosition.altitude(); // Initial altitude
+    double h = 3000.0;                      // Jump height
 
-    double x = 2000.0 * t;
+    // Parameters for the parabolic function that has the maximum at
+    // the point H ( 0.5 * m_jumpDuration, g + h )
+    double a = - h / ( (double)( 0.25 * m_jumpDuration * m_jumpDuration ) );
+    double b = 2.0 * h / (double)( 0.5 * m_jumpDuration );
 
-    double y = a * x * x + b * x + g;
+    double x = (double)(m_jumpDuration ) * t;
+
+    double y = a * x * x + b * x + g;       // Parabolic function
 
     return GeoDataPoint( lon, lat, y );
 }

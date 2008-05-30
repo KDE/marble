@@ -309,15 +309,13 @@ void MarbleMap::setDistance( double distance )
 {
     const double VIEW_ANGLE = 110.0;
 
-    setRadius ( (int)( EARTH_RADIUS * 0.4
+    setRadius( (int)( EARTH_RADIUS * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
 
-    if ( ! mapCoversViewport() ) {
+    if ( !mapCoversViewport() ) {
         d->m_viewParams.canvasImage()->fill( Qt::black );
     }
-
-    setNeedsUpdate();
 }
 
 double MarbleMap::centerLatitude() const

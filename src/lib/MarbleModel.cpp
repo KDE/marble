@@ -406,7 +406,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
 
     if ( redrawBackground ) {
-
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
 	    // Create the height map image a.k.a viewParams->m_canvasImage.
