@@ -1,5 +1,12 @@
 2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/data/GeoDataLineStyle.h:
+    * src/lib/geodata/data/GeoDataPolyStyle.h:
+
+    Declare constructors explicit.
+
+2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataPoint.cpp:
 
     - Initialise base class object in copy constructor.

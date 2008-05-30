@@ -38,7 +38,7 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
      * @brief Construct a new GeoDataLineStyle
      * @param  color  the color to use when showing the name @see GeoDataColorStyle
      */
-    GeoDataLineStyle( const QColor &color );
+    explicit GeoDataLineStyle( const QColor &color );
 
     ~GeoDataLineStyle();
 
