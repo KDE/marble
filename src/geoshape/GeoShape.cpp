@@ -35,9 +35,9 @@
 #include <QPainter>
 #include <kdebug.h>
 
-#include <marble/src/lib/MarbleMap.h>
-#include <marble/src/lib/GeoPainter.h>
-#include <marble/src/lib/ViewParams.h>
+#include <MarbleMap.h>
+#include <GeoPainter.h>
+#include <ViewParams.h>
 
 
 GeoShape::GeoShape()

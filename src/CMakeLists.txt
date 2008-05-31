@@ -32,7 +32,7 @@ if (NOT QTONLY)
   endif(DEPEND_PACKAGE_KOfficeLibs)
    
   if(KOFFICELIBS_FOUND)
-     #add_subdirectory( geoshape )
+     add_subdirectory( geoshape )
   else(KOFFICELIBS_FOUND)
      MESSAGE(STATUS "We must install koffice before to compile geoshape plugins")
   endif(KOFFICELIBS_FOUND)

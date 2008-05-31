@@ -1,3 +1,14 @@
+2008-05-31  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/lib/CMakeList.txt:
+    - enabled geoshape again
+    
+    * src/lib/geoshape/CMakeList.txt:
+    - added missing include directory
+    
+    * src/lib/geoshape/GeoShape.cpp:
+    - changed #include lines to use short form without paths
+    
 2008-05-31  Inge Wallin  <inge@lysator.liu.se>
 
 	* src/lib/MercatorScanlineTextureMapper.{h,cpp}: New files
