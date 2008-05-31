@@ -99,6 +99,7 @@ set(marblewidget_SRCS
     AbstractScanlineTextureMapper.cpp
     SphericalScanlineTextureMapper.cpp
     EquirectScanlineTextureMapper.cpp
+    MercatorScanlineTextureMapper.cpp
     DiscCache.cpp
     CacheStoragePolicy.cpp
     FileStoragePolicy.cpp

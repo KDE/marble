@@ -32,6 +32,7 @@
 #include "FileViewModel.h"
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
+#include "MercatorScanlineTextureMapper.h"
 #include "GeoPolygon.h"
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
@@ -273,7 +274,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( texture ) && !installMap.isEmpty() ) {
+        if ( !TileLoader::baseTilesAvailable( texture )
+	     && !installMap.isEmpty() )
+	{
             qDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
@@ -356,8 +359,7 @@ void MarbleModel::setupTextureMapper( Projection projection )
             d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
             break;
         case Mercator:
-	    // FIXME FIXME FIXME: Create a MercatorScanlineTextureMapper.
-            d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new MercatorScanlineTextureMapper( d->m_tileLoader, this );
             break;
     }
 
