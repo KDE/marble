@@ -34,8 +34,8 @@
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
 
-#include <marble/MarbleControlBox.h>
-#include <marble/MarbleMap.h>
+#include <MarbleControlBox.h>
+#include <MarbleMap.h>
 
 GeoTool::GeoTool( KoCanvasBase* canvas )
     : KoTool( canvas ),

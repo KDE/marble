@@ -23,7 +23,7 @@
 
 #include <KoTool.h>
 
-#include <marble/global.h>
+#include <global.h>
 
 class GeoShape;
 
