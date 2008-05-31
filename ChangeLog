@@ -1,3 +1,52 @@
+2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/kml
+    * src/lib/kml/KMLDocumentParser.cpp
+    * src/lib/kml/KMLContainerParser.cpp
+    * src/lib/kml/KMLFeature.h
+    * src/lib/kml/KMLStyle.cpp
+    * src/lib/kml/KMLPlaceMark.h
+    * src/lib/kml/KMLColorStyle.h
+    * src/lib/kml/KMLLabelStyle.h
+    * src/lib/kml/KMLObject.cpp
+    * src/lib/kml/KMLStyleSelector.h
+    * src/lib/kml/KMLPointParser.h
+    * src/lib/kml/KMLFeatureParser.h
+    * src/lib/kml/KMLStyleParser.cpp
+    * src/lib/kml/KMLIconStyle.h
+    * src/lib/kml/KMLFolder.h
+    * src/lib/kml/KMLPlaceMarkParser.h
+    * src/lib/kml/KMLColorStyleParser.h
+    * src/lib/kml/KMLLabelStyleParser.h
+    * src/lib/kml/KMLDocument.h
+    * src/lib/kml/KMLObjectParser.cpp
+    * src/lib/kml/KMLContainer.h
+    * src/lib/kml/KMLFeature.cpp
+    * src/lib/kml/KMLIconStyleParser.h
+    * src/lib/kml/KMLColorStyle.cpp
+    * src/lib/kml/KMLPlaceMark.cpp
+    * src/lib/kml/KMLDocumentParser.h
+    * src/lib/kml/KMLLabelStyle.cpp
+    * src/lib/kml/KMLStyleSelector.cpp
+    * src/lib/kml/KMLContainerParser.h
+    * src/lib/kml/KMLStyle.h
+    * src/lib/kml/KMLPointParser.cpp
+    * src/lib/kml/Serializable.h
+    * src/lib/kml/KMLFeatureParser.cpp
+    * src/lib/kml/KMLIconStyle.cpp
+    * src/lib/kml/KMLObject.h
+    * src/lib/kml/KMLFolder.cpp
+    * src/lib/kml/KMLColorStyleParser.cpp
+    * src/lib/kml/KMLPlaceMarkParser.cpp
+    * src/lib/kml/KMLLabelStyleParser.cpp
+    * src/lib/kml/KMLDocument.cpp
+    * src/lib/kml/KMLContainer.cpp
+    * src/lib/kml/KMLStyleParser.h
+    * src/lib/kml/KMLIconStyleParser.cpp
+    * src/lib/kml/KMLObjectParser.h
+
+    Remove unused code.
+
 2008-05-31  Torsten Rahn  <rahn@kde.org> 
 
     * src/lib/TextureTile.cpp:
