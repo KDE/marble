@@ -74,7 +74,7 @@ TextureTile::~TextureTile()
     delete [] jumpTable8;
 }
 
-void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y)
+void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *cache )
 {
     // qDebug() << "TextureTile::loadRawTile" << level << x << y;
 
@@ -96,28 +96,34 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
     const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, level );
     const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, level );
     bool tileFound = false;
-    for ( int i = level; !tileFound && i > -1; --i ) {
+    for ( int currentLevel = level; !tileFound && currentLevel > -1; --currentLevel ) {
 
-        const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, i );
-        const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, i );
-        double origx1 = (double)(x) / (double)( rowsRequestedLevel );
-        double origy1 = (double)(y) / (double)( columnsRequestedLevel );
-        double testx1 = origx1 * (double)( rowsCurrentLevel );
-        double testy1 = origy1 * (double)( columnsCurrentLevel );
+        const int rowsCurrentLevel = 
+            TileLoaderHelper::levelToRow( levelZeroRows, currentLevel );
+        const int columnsCurrentLevel =
+            TileLoaderHelper::levelToColumn( levelZeroColumns, currentLevel );
 
-        QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, i,
-                                                                      (int)(testx1),
-                                                                      (int)(testy1) );
+        double normalizedX = (double)(x) / (double)( rowsRequestedLevel );
+        double normalizedY = (double)(y) / (double)( columnsRequestedLevel );
+        double currentX    = normalizedX * (double)( rowsCurrentLevel );
+        double currentY    = normalizedY * (double)( columnsCurrentLevel );
+
+        QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, 
+                                                                      currentLevel,
+                                                                      (int)(currentX),
+                                                                      (int)(currentY) );
         absfilename = MarbleDirs::path( relfilename );
         const QFileInfo fileInfo( absfilename );
+
+        const QDateTime now = QDateTime::currentDateTime();
+        bool download = false;
+
         // - if the file does not exist, we want to download it and search an
         //   existing tile of a lower zoom level for imediate display
         // - if the file exists and is expired according to the value of the
         //   expire element we want to download it again and display the old
         //   tile until the new one is there. Once the updated tile is
         //   available, it should get displayed.
-        const QDateTime now = QDateTime::currentDateTime();
-        bool download = false;
 
         if ( !fileInfo.exists() ) {
             qDebug() << "File does not exist:" << fileInfo.filePath();
@@ -143,43 +149,14 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
             if ( !temptile.isNull() ) {
                 // qDebug() << "Image has been successfully loaded.";
 
-                if ( level != i ) { 
-                    // qDebug() << "About to start cropping an existing image.";
-                    QSize tilesize = temptile.size();
-                    double origx2 = (double)(x + 1) / (double)( rowsRequestedLevel );
-                    double origy2 = (double)(y + 1) / (double)( columnsRequestedLevel );
-                    double testx2 = origx2 * (double)( rowsCurrentLevel );
-                    double testy2 = origy2 * (double)( columnsCurrentLevel );
-
-                    // Determine the rectangular section of the previous tile data 
-                    // which we intend to copy from:
-                    int left   = (int)( ( testx1 - (int)(testx1) ) * temptile.width() );
-                    int top    = (int)( ( testy1 - (int)(testy1) ) * temptile.height() );
-                    int right  = (int)( ( testx2 - (int)(testx1) ) * temptile.width() ) - 1;
-                    int bottom = (int)( ( testy2 - (int)(testy1) ) * temptile.height() ) - 1;
-
-                    // Important: Scaling a null image during the next step would be fatal
-                    // So we make sure the width and height is at least 1.
-                    int rectWidth  = ( right - left > 1 ) ? right  - left : 1;
-                    int rectHeight = ( bottom - top > 1 ) ? bottom - top  : 1;
-
-                    // This should not create any memory leaks as
-                    // 'copy' and 'scaled' return a value (on the
-                    // stack) which gets deep copied always into the
-                    // same place for m_rawtile on the heap:
-                    temptile = temptile.copy( left, top, rectWidth, rectHeight );
-                    temptile = temptile.scaled( tilesize ); // TODO: use correct size
-                    // qDebug() << "Finished scaling up the Temporary Tile.";
+                if ( level != currentLevel ) { 
+                    scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
                 }
 
                 m_rawtile = temptile;
                 m_created = fileInfo.lastModified();
                 tileFound = true;
-            } // !tempfile.isNull()
-            //      else {
-            //         qDebug() << "Image load failed for: " + 
-            //           absfilename.toLocal8Bit();
-            //      }
+            }
         }
 
         if ( download ) {
@@ -231,6 +208,45 @@ void TextureTile::loadTile( bool requestTileUpdate )
         // qDebug() << "TileUpdate available";
         emit tileUpdateDone();
     }
+}
+
+void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, double sourceX, double sourceY, int sourceLevel, int targetX, int targetY, int targetLevel )
+{
+    const int levelZeroColumns = textureLayer->levelZeroColumns();
+    const int levelZeroRows = textureLayer->levelZeroRows();
+    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, targetLevel );
+    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, targetLevel );
+    const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, sourceLevel );
+    const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, sourceLevel );
+
+    // qDebug() << "About to start cropping an existing image.";
+
+    QSize tilesize = tile.size();
+    double normalizedX2 = (double)(targetX + 1) / (double)( rowsRequestedLevel );
+    double normalizedY2 = (double)(targetY + 1) / (double)( columnsRequestedLevel );
+    double currentX2    = normalizedX2 * (double)( rowsCurrentLevel );
+    double currentY2    = normalizedY2 * (double)( columnsCurrentLevel );
+
+    // Determine the rectangular section of the previous tile data 
+    // which we intend to copy from:
+    int left   = (int)( ( sourceX    - (int)( sourceX ) ) * tile.width() );
+    int top    = (int)( ( sourceY    - (int)( sourceY ) ) * tile.height() );
+    int right  = (int)( ( currentX2  - (int)( sourceX ) ) * tile.width() ) - 1;
+    int bottom = (int)( ( currentY2  - (int)( sourceY ) ) * tile.height() ) - 1;
+
+    // Important: Scaling a null image during the next step would be fatal
+    // So we make sure the width and height is at least 1.
+    int rectWidth  = ( right - left > 1 ) ? right  - left : 1;
+    int rectHeight = ( bottom - top > 1 ) ? bottom - top  : 1;
+
+    // This should not create any memory leaks as
+    // 'copy' and 'scaled' return a value (on the
+    // stack) which gets deep copied always into the
+    // same place for m_rawtile on the heap:
+    tile = tile.copy( left, top, rectWidth, rectHeight );
+    tile = tile.scaled( tilesize ); // TODO: use correct size
+    // qDebug() << "Finished scaling up the Temporary Tile.";
+
 }
 
 #include "TextureTile.moc"

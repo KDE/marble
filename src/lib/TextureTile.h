@@ -19,6 +19,7 @@
 #define __MARBLE__TEXTURETILE_H
 
 
+#include <QtCore/QCache>
 #include <QtCore/QDateTime>
 #include <QtCore/QObject>
 #include <QtGui/QImage>
@@ -28,9 +29,13 @@
 #include "TileId.h"
 #include "MergedLayerDecorator.h"
 
+//class QCache;
+
 class QUrl;
 
 class GeoSceneTexture;
+
+class TextureTile;
 
 class TextureTile : public QObject {
     Q_OBJECT
@@ -40,7 +45,7 @@ class TextureTile : public QObject {
 
     virtual ~TextureTile();
     
-    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y );
+    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *cache = 0 );
 
     TileId const& id() const  { return m_id; }
     int  depth() const        { return m_depth; }
@@ -92,6 +97,8 @@ class TextureTile : public QObject {
 
  private:
     QDateTime m_created;
+
+    void scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, double sourceX, double sourceY, int sourceLevel, int targetX, int targetY, int targetLevel  );
 };
 
 inline const QDateTime & TextureTile::created() const

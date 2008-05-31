@@ -1,3 +1,9 @@
+2008-05-31  Torsten Rahn  <rahn@kde.org> 
+
+    * src/lib/TextureTile.cpp:
+
+    - TextureTile cleanup and preparation for threaded loading
+
 2008-05-31  Simon Schmeisser  <mail_to_wrt@gmx.de>
 
     * src/lib/CMakeList.txt:
