@@ -45,7 +45,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
  public:
     GeoDataLatLonBox();
     GeoDataLatLonBox( double north, double south, double east, double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
-    // FIXME: implement copy constructor as well
+    GeoDataLatLonBox( const GeoDataLatLonBox & );
     virtual ~GeoDataLatLonBox();
 
     virtual bool isFolder() const { return false; }
@@ -128,7 +128,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
  public:
     GeoDataLatLonAltBox();
-    // FIXME: implement copy constructor as well
+    GeoDataLatLonAltBox( const GeoDataLatLonAltBox & );
     virtual ~GeoDataLatLonAltBox();
 
     virtual bool isFolder() const { return false; }

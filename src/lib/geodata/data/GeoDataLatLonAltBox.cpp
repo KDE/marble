@@ -26,10 +26,6 @@ class GeoDataLatLonBoxPrivate
     {
     }
 
-    ~GeoDataLatLonBoxPrivate()
-    {
-    }
-
     double m_north;
     double m_south;
     double m_east;
@@ -47,14 +43,22 @@ bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
 }
 
 GeoDataLatLonBox::GeoDataLatLonBox()
-    : d( new GeoDataLatLonBoxPrivate() )
+    : GeoDataObject(),
+      d( new GeoDataLatLonBoxPrivate )
 {
 }
 
 GeoDataLatLonBox::GeoDataLatLonBox( double north, double south, double east, double west, GeoDataPoint::Unit unit )
-    : d( new GeoDataLatLonBoxPrivate() )
+    : GeoDataObject(),
+      d( new GeoDataLatLonBoxPrivate )
 {
     setBoundaries( north, south, east, west, unit );
+}
+
+GeoDataLatLonBox::GeoDataLatLonBox( const GeoDataLatLonBox & other )
+    : GeoDataObject( other ),
+      d( new GeoDataLatLonBoxPrivate( *other.d ))
+{
 }
 
 GeoDataLatLonBox::~GeoDataLatLonBox()
@@ -263,6 +267,7 @@ QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
 
 GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
 {
+    // FIXME: this check is not needed, remove or keep it?
     if ( this == &other )
         return *this;
     *d = *other.d;
@@ -277,10 +282,6 @@ class GeoDataLatLonAltBoxPrivate
         : m_minAltitude( 0 ),
           m_maxAltitude( 0 ),
           m_altitudeMode( ClampToGround )
-    {
-    }
-
-    ~GeoDataLatLonAltBoxPrivate()
     {
     }
 
@@ -303,6 +304,7 @@ bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs 
 
 GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &other )
 {
+    // FIXME: this check is not needed, remove or keep it?
     if ( this == &other )
         return *this;
 
@@ -317,7 +319,14 @@ GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &
 }
 
 GeoDataLatLonAltBox::GeoDataLatLonAltBox()
-    : d( new GeoDataLatLonAltBoxPrivate() )
+    : GeoDataLatLonBox(),
+      d( new GeoDataLatLonAltBoxPrivate )
+{
+}
+
+GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other )
+    : GeoDataLatLonBox( other ),
+      d( new GeoDataLatLonAltBoxPrivate( *other.d ))
 {
 }
 

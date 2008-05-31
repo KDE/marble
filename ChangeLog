@@ -1,5 +1,14 @@
 2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/data/GeoDataLatLonAltBox.cpp:
+    * src/lib/geodata/data/GeoDataLatLonAltBox.h:
+
+    - Implement copy constructor because GeoDataLatLonBox and
+      GeoDataLatLonAltBox have got assignment operators.
+    - Initialise base class objects in constructors.
+
+2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataLineString.cpp:
     * src/lib/geodata/data/GeoDataLineString.h:
 
