@@ -46,6 +46,7 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
+    // yCenterOffset is the number of pixels that the 
     int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
     int yTop          = viewport->height() / 2 - radius + yCenterOffset;
 
@@ -55,7 +56,10 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
 
 void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
 {
+    // Convenience variables
     int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
     // Calculate translation of center point
     double  centerLon;
@@ -63,7 +67,15 @@ void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
     viewport->centerCoordinates( centerLon, centerLat );
 
     int yCenterOffset = (int)((double)( 2 * radius ) / M_PI * centerLat);
-    int yTop          = viewport->height() / 2 - radius + yCenterOffset;
-    d->activeRegion = QRegion( 0, yTop, viewport->width(), 2 * radius,
+    int yTop          = height / 2 - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
+
+    // Don't let the active area be outside the image, and also let a
+    // thin strip 25 pixels wide be outside it.
+    if ( yTop < 25 )
+	yTop = 25;
+    if ( yBottom > height - 25 )
+	yBottom =  height - 25;
+    d->activeRegion = QRegion( 25, yTop, width - 50, yBottom - yTop,
 			       QRegion::Rectangle );
 }

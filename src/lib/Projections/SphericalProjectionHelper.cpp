@@ -34,8 +34,8 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
 					   QBrush         &brush,
 					   bool            antialiasing )
 {
-    int      imgrx = viewport->width() / 2;
-    int      imgry = viewport->height() / 2;
+    int      imgrx      = viewport->width() / 2;
+    int      imgry      = viewport->height() / 2;
     int      radius     = viewport->radius();
     quint64  imgradius2 = ( (quint64)imgrx * (quint64)imgrx
 			    + (quint64)imgry * (quint64)imgry );
@@ -45,7 +45,7 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
     painter->setPen( pen );
     painter->setBrush( brush );
 
-    if ( imgradius2 < (double)radius * (double)radius ) {
+    if ( imgradius2 < (quint64)radius * (quint64)radius ) {
         painter->drawRect( 0, 0, 
 			   viewport->width() - 1, viewport->height() - 1 );
     }
@@ -62,16 +62,17 @@ void SphericalProjectionHelper::setActiveRegion( ViewportParams *viewport )
     int  imgWidth  = viewport->width();
     int  imgHeight = viewport->height();
 
-    // FIXME: Use mapCoversArea()
-    // Use sqrt() here as setActiveRegion doesn't get called often anyways.
-    if ( radius < sqrt( (double)( imgWidth * imgWidth + imgHeight * imgHeight ) ) / 2 ) {
+    // If the globe covers the whole image, then the active region is
+    // all of the image except a strip 25 pixels wide in all
+    // directions.  Otherwise the active region is the globe.
+    if ( viewport->mapCoversViewport() ) {
+    	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
+				   QRegion::Rectangle );
+    }
+    else {
     	d->activeRegion = QRegion( imgWidth  / 2 - radius,
 				   imgHeight / 2 - radius,
 				   2 * radius, 2 * radius,
 				   QRegion::Ellipse );
-    }
-    else {
-    	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
-				   QRegion::Rectangle );
     }
 }

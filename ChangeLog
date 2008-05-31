@@ -1,3 +1,12 @@
+2008-06-01  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix some issues with the active area in the image.
+	* src/lib/Projections/EquirectProjectionHelper.cpp (setActiveRegion):
+	Bound the active area to the viewport.
+
+	* src/lib/Projections/SphericalProjectionHelper.cpp (setActiveRegion):
+	Comment the code better and use mapCoversViewport()
+
 2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/kml
