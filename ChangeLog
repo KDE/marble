@@ -1,3 +1,9 @@
+2008-06-01  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix issue with paintBase
+	* src/lib/Projections/EquirectProjectionHelper.cpp (paintBase):
+	Bound the top and bottom values of the rectangle.
+
 2008-06-01  Torsten Rahn  <rahn@kde.org> 
 
     * src/lib/TextureTile.cpp:

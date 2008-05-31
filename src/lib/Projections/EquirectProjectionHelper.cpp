@@ -34,10 +34,13 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
 					  QBrush         &brush,
 					  bool            antialiasing )
 {
+    // Convenience variables
     int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
+    // Igor, prepare the painter!
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
     painter->setPen( pen );
     painter->setBrush( brush );
 
@@ -46,11 +49,18 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    // yCenterOffset is the number of pixels that the 
-    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
-    int yTop          = viewport->height() / 2 - radius + yCenterOffset;
+    int yCenterOffset = (int)(centerLat * (double)( 2 * radius ) / M_PI );
+    int yTop          = height / 2 - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
 
-    painter->drawRect( 0, yTop, viewport->width(), 2 * radius);
+    // Don't let the active area be outside the image, and also let a
+    // thin strip 25 pixels wide be outside it.
+    if ( yTop < 0 )
+	yTop = 0;
+    if ( yBottom > height )
+	yBottom =  height;
+
+    painter->drawRect( 0, yTop, width, yBottom - yTop );
 }
 
 
@@ -66,7 +76,7 @@ void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)((double)( 2 * radius ) / M_PI * centerLat);
+    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
