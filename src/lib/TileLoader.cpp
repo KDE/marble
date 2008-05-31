@@ -222,7 +222,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     connect( tile, SIGNAL( tileUpdateDone() ),
              this, SIGNAL( tileUpdateAvailable() ) );
 
-    tile->loadRawTile( d->m_textureLayer, tileLevel, tilx, tily );
+    tile->loadRawTile( d->m_textureLayer, tileLevel, tilx, tily, &( d->m_tileCache ) );
     tile->loadTile( false );
 
     // TODO should emit signal rather than directly calling paintTile
@@ -355,7 +355,7 @@ void TileLoader::reloadTile( const QString &idStr )
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
-        (d->m_tileHash[id])->loadRawTile( d->m_textureLayer, level, x, y ); 
+        (d->m_tileHash[id])->loadRawTile( d->m_textureLayer, level, x, y, &( d->m_tileCache ) ); 
         m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_textureLayer, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {

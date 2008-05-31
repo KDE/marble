@@ -74,23 +74,20 @@ TextureTile::~TextureTile()
     delete [] jumpTable8;
 }
 
-void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *cache )
+void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
 {
     // qDebug() << "TextureTile::loadRawTile" << level << x << y;
+    QImage temptile;
 
     m_used = true; // Needed to avoid frequent deletion of tiles
 
-    // qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
-    // m_used = true; // Needed to avoid frequent deletion of tiles
-
     QString  absfilename;
-
-    // qDebug() << "Requested tile level" << level;
 
     // If the tile level offers the requested tile then load it.
     // Otherwise cycle from the requested tilelevel down to one where
     // the requested area is covered.  Then scale the area to create a
     // replacement for the tile that has been requested.
+
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
     const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, level );
@@ -108,53 +105,84 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
         double currentX    = normalizedX * (double)( rowsCurrentLevel );
         double currentY    = normalizedY * (double)( columnsCurrentLevel );
 
-        QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, 
-                                                                      currentLevel,
-                                                                      (int)(currentX),
-                                                                      (int)(currentY) );
-        absfilename = MarbleDirs::path( relfilename );
-        const QFileInfo fileInfo( absfilename );
-
         const QDateTime now = QDateTime::currentDateTime();
+        QDateTime lastModified;
+
         bool download = false;
+        bool currentTileAvailable = false;
 
-        // - if the file does not exist, we want to download it and search an
-        //   existing tile of a lower zoom level for imediate display
-        // - if the file exists and is expired according to the value of the
-        //   expire element we want to download it again and display the old
-        //   tile until the new one is there. Once the updated tile is
-        //   available, it should get displayed.
+        TextureTile *currentTile = 0;
 
-        if ( !fileInfo.exists() ) {
-            qDebug() << "File does not exist:" << fileInfo.filePath();
-            download = true;
+        // Check whether the current tile id is available in the CACHE:
+        if ( tileCache ) {
+            TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );    
+            currentTile = tileCache->take( currentTileId );
+
+            if ( currentTile ) {
+                // the tile was in the cache, but is it up to date?
+                lastModified = currentTile->created();
+                if ( lastModified.secsTo( now ) < textureLayer->expire()) {
+                    temptile = currentTile->rawtile();
+                    qDebug() << "FOUND IN CACHE";
+                    currentTileAvailable = true;
+                } else {
+                    delete currentTile;
+                    currentTile = 0;
+                }
+            }
         }
-        else if ( fileInfo.lastModified().secsTo( now ) > textureLayer->expire() ) {
-            qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
-                     << "age (seconds):" << fileInfo.lastModified().secsTo( now )
-                     << "allowed age:" << textureLayer->expire();
-            download = true;
+        // If the current tile id is not in the cache or if it was 
+        // in the cache but has expired load from DISK:
+
+        if ( !currentTile ) {
+            QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, 
+                                                                        currentLevel,
+                                                                        (int)(currentX),
+                                                                        (int)(currentY) );
+            absfilename = MarbleDirs::path( relfilename );
+            const QFileInfo fileInfo( absfilename );
+            lastModified = fileInfo.lastModified();
+
+            // - if the file does not exist, we want to download it and search an
+            //   existing tile of a lower zoom level for imediate display
+            // - if the file exists and is expired according to the value of the
+            //   expire element we want to download it again and display the old
+            //   tile until the new one is there. Once the updated tile is
+            //   available, it should get displayed.
+ 
+            if ( !fileInfo.exists() ) {
+                qDebug() << "File does not exist:" << fileInfo.filePath();
+                download = true;
+            }
+            else if ( lastModified.secsTo( now ) > textureLayer->expire() ) {
+                qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
+                        << "age (seconds):" << lastModified.secsTo( now )
+                        << "allowed age:" << textureLayer->expire();
+                download = true;
+            }
+
+            if ( fileInfo.exists() ) {
+
+                temptile.load( absfilename );
+                // qDebug() << "TextureTile::loadRawTile "
+                //          << "depth:" << temptile.depth()
+                //          << "format:" << temptile.format()
+                //          << "bytesPerLine:" << temptile.bytesPerLine()
+                //          << "numBytes:" << temptile.numBytes() ;
+                currentTileAvailable = true;
+            }
         }
 
-        if ( fileInfo.exists() ) {
-            // qDebug() << "The image filename does exist: " << absfilename ;
-
-            QImage temptile( absfilename );
-            // qDebug() << "TextureTile::loadRawTile "
-            //          << "depth:" << temptile.depth()
-            //          << "format:" << temptile.format()
-            //          << "bytesPerLine:" << temptile.bytesPerLine()
-            //          << "numBytes:" << temptile.numBytes() ;
-
+        if ( currentTileAvailable ) {
             if ( !temptile.isNull() ) {
-                // qDebug() << "Image has been successfully loaded.";
 
+                // Don't scale if the current tile isn't a fallback
                 if ( level != currentLevel ) { 
                     scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
                 }
 
                 m_rawtile = temptile;
-                m_created = fileInfo.lastModified();
+                m_created = lastModified;
                 tileFound = true;
             }
         }

@@ -45,7 +45,7 @@ class TextureTile : public QObject {
 
     virtual ~TextureTile();
     
-    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *cache = 0 );
+    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
     TileId const& id() const  { return m_id; }
     int  depth() const        { return m_depth; }
@@ -56,7 +56,7 @@ class TextureTile : public QObject {
     int numBytes() const      { return m_rawtile.numBytes(); }
 
     const QImage& rawtile()   { return m_rawtile; }
-    QImage* tile()            { return &m_rawtile; }
+    QImage *tile()            { return &m_rawtile; }
     const QDateTime & created() const;
 
     // Here we retrieve the color value of the requested pixel on the tile.

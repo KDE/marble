@@ -1,3 +1,11 @@
+2008-06-01  Torsten Rahn  <rahn@kde.org> 
+
+    * src/lib/TextureTile.cpp:
+    * src/lib/TileLoader.cpp:
+
+    - Taking cache contents into account when creating fallback
+      tiles: preparation for threaded loading
+
 2008-06-01  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix some issues with the active area in the image.
