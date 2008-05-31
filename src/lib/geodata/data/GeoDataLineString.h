@@ -44,6 +44,8 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
                                          public GeoDataGeometry {
  public:
     GeoDataLineString();
+    GeoDataLineString( const GeoDataLineString & );
+    GeoDataLineString& operator=( const GeoDataLineString & );
 
     virtual ~GeoDataLineString();
 
@@ -68,7 +70,6 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
                                             QVector<GeoDataPoint>::Iterator end );
 
  private:
-    // FIXME: Q_DISABLE_COPY( GeoDataLineString )
     GeoDataLineStringPrivate  * const d;
 };
 

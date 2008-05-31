@@ -23,10 +23,6 @@ class GeoDataLineStringPrivate
     {
     }
 
-    ~GeoDataLineStringPrivate()
-    {
-    }
-
     bool         m_extrude;
     bool         m_tesselate;
     AltitudeMode m_altitudeMode;
@@ -37,8 +33,23 @@ class GeoDataLineStringPrivate
 };
 
 GeoDataLineString::GeoDataLineString()
-    : d( new GeoDataLineStringPrivate() )
+  : QVector<GeoDataPoint>(), GeoDataGeometry(),
+    d( new GeoDataLineStringPrivate )
 {
+}
+
+GeoDataLineString::GeoDataLineString( const GeoDataLineString & other )
+  : QVector<GeoDataPoint>( other ), GeoDataGeometry( other ),
+    d( new GeoDataLineStringPrivate( *other.d ))
+{
+}
+
+GeoDataLineString& GeoDataLineString::operator=( const GeoDataLineString & rhs )
+{
+    // FIXME: check for self assignment is not needed imho, discuss if we
+    // check nevertheless.
+    *d = *rhs.d;
+    return *this;
 }
 
 GeoDataLineString::~GeoDataLineString()

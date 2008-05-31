@@ -1,5 +1,14 @@
 2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/data/GeoDataLineString.cpp:
+    * src/lib/geodata/data/GeoDataLineString.h:
+
+    - Implement copy constructor and assignment operator for class
+      GeoDataLineString because they are used in this d-pointerfied class.
+    - Initialise base class objects in constructor.
+
+2008-05-31  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataFeature.h:
     * src/lib/geodata/data/GeoDataLineString.h:
     * src/lib/geodata/data/GeoDataLatLonAltBox.h:
