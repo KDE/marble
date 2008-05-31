@@ -82,6 +82,8 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
         return;
 
     QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
+//     qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
+//              << responseHeader.reasonPhrase();
 
 //    FIXME: Check whether this assumption is a safe on:
 //    ( Problem: Conditional jump later on depends on uninitialised value )
