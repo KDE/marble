@@ -61,8 +61,12 @@ class CompassFloatItem  : public QObject, public MarbleAbstractFloatItem
     bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
 
  private:
+    Q_DISABLE_COPY( CompassFloatItem )
+
     QSvgRenderer  *m_svgobj;
     QPixmap        m_compass;
+
+    /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 };
 

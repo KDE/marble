@@ -1,3 +1,13 @@
+2008-06-01  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/plugins/marble/compass/CompassFloatItem.h:
+    * src/plugins/marble/compass/CompassFloatItem.cpp:
+
+    - Fix valgrind error: Conditional jump or move depends on uninitialised
+      value(s) in CompassFloatItem::needsUpdate.
+    - Use Q_DISABLE_COPY.
+    - Add api doc for m_polarity.
+
 2008-06-01  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix paintBase and setActiveArea for the Mercator projection.

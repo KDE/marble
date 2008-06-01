@@ -23,7 +23,9 @@
 
 
 CompassFloatItem ::CompassFloatItem ( const QPointF &point, const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size )
+    : MarbleAbstractFloatItem( point, size ),
+      m_compass(),
+      m_polarity( 0 )
 {
     m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
                                  this );
