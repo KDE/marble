@@ -53,8 +53,7 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
-    // Don't let the active area be outside the image, and also let a
-    // thin strip 25 pixels wide be outside it.
+    // Bound the values to the viewport.
     if ( yTop < 0 )
 	yTop = 0;
     if ( yBottom > height )
@@ -86,6 +85,7 @@ void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
 	yTop = 25;
     if ( yBottom > height - 25 )
 	yBottom =  height - 25;
+
     d->activeRegion = QRegion( 25, yTop, width - 50, yBottom - yTop,
 			       QRegion::Rectangle );
 }

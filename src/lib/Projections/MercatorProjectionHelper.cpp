@@ -35,46 +35,65 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
 					   QBrush         &brush,
 					   bool            antialiasing )
 {
-    int  radius = viewport->radius();
+    // Convenience variables
+    //int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
+    // Igor, prepare the painter!
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
-
     painter->setPen( pen );
     painter->setBrush( brush );
 
-    int yTop;
-    //int yBottom;
-    int dummy;
+    int  yTop;
+    int  yBottom;
+    int  xDummy;
     AbstractProjection *proj = viewport->currentProjection();
 
-    // Get the top pixel of the projected map.
+    // Get the top and bottom y coordinates of the projected map.
     proj->screenCoordinates( 0.0, proj->maxLat(), viewport, 
-			     dummy, yTop );
-    if ( yTop < 0 )
-      yTop = 0;
-#if 0
+			     xDummy, yTop );
     proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
-			     dummy, yBottom );
-    if ( yBottom > viewport->height() )
-      yBottom = viewport->height();
-#endif
+			     xDummy, yBottom );
+    if ( yTop < 0 )
+	yTop = 0;
+    if ( yBottom > height )
+	yBottom = height;
 
-    painter->drawRect( 0, yTop, viewport->width(), 2 * radius);
+    painter->drawRect( 0, yTop, width, yBottom - yTop );
 }
 
 
 void MercatorProjectionHelper::setActiveRegion( ViewportParams *viewport )
 {
-    // FIXME: Change for Mercator
-    int  radius = viewport->radius();
+    // Convenience variables
+    //int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
 
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)((double)( 2 * radius ) / M_PI * centerLat);
-    int yTop          = viewport->height() / 2 - radius + yCenterOffset;
-    d->activeRegion = QRegion( 0, yTop, viewport->width(), 2 * radius,
+    int  yTop;
+    int  yBottom;
+    int  xDummy;
+    AbstractProjection *proj = viewport->currentProjection();
+
+    // Get the top and bottom y coordinates of the projected map.
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport, 
+			     xDummy, yTop );
+    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+			     xDummy, yBottom );
+
+    // Don't let the active area be outside the image, and also let a
+    // thin strip 25 pixels wide be outside it.
+    if ( yTop < 25 )
+	yTop = 25;
+    if ( yBottom > height - 25 )
+	yBottom =  height - 25;
+
+    d->activeRegion = QRegion( 25, yTop, width - 50, yBottom - yTop,
 			       QRegion::Rectangle );
 }

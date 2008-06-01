@@ -1,5 +1,12 @@
 2008-06-01  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix paintBase and setActiveArea for the Mercator projection.
+	* src/lib/Projections/MercatorProjectionHelper.cpp (paintBase):
+	Make it look like Equirect...:paintBase
+	(setActiveRegion): same here
+	* src/lib/Projections/EquirectProjectionHelper.cpp (paintBase): 
+	Fix comments 
+	
 	Fix issue with paintBase
 	* src/lib/Projections/EquirectProjectionHelper.cpp (paintBase):
 	Bound the top and bottom values of the rectangle.
