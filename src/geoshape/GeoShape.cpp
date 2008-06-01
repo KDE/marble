@@ -113,7 +113,7 @@ void GeoShape::saveOdf( KoShapeSavingContext & context ) const
 
 bool GeoShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext &context )
 {
-    Q_UNUSED(context);
+    loadOdfAttributes( element, context, OdfAllAttributes );
 
    const QString mapThemeId = element.attribute("mapThemeId");
 
@@ -149,16 +149,6 @@ bool GeoShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext &con
     qDebug() << "map theme: loadOdf is getting called";
     qDebug() << zoom;
 
-  /*  // the frame attributes are loaded outside in the shape registry
-    if( m_imageCollection)//context.imageCollection() )
-    {
-        const QString href = element.attribute("href");
-
-        KoImageData * data = new KoImageData( m_imageCollection);//context.imageCollection() );
-        data->setStoreHref( href );
-        setUserData( data );
-    }
-*/
     return true;
 }
 
