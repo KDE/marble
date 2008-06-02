@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #include "MarbleModel.h"
@@ -136,11 +137,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
-
-    connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged ( QItemSelection, QItemSelection) ),
-             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) ); 
-    connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
-             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) ); 
 
     d->m_placemarkmanager->loadStandardPlaceMarks();
 
@@ -333,8 +329,15 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
 
-    if ( d->m_placeMarkLayout == 0)
+    if ( d->m_placeMarkLayout == 0) {
         d->m_placeMarkLayout = new PlaceMarkLayout( this );
+        connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
+                                                                         QItemSelection) ),
+                 d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
+        connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
+                 d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
+    }
+
     d->m_placeMarkLayout->requestStyleReset();
     // FIXME: To be removed after MapTheme / KML refactoring
 

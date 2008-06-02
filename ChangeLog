@@ -1,3 +1,11 @@
+2008-06-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MarbleModel.cpp:
+
+    Fix bug 162678.
+    Connect PlacemarkSelectionModel and MarblePlacemarkModel to valid
+    PlaceMarkLayout object, not to null pointer.
+
 2008-06-01  Simon Schmeisser  <mail_to_wrt@gmx.de>
 
     * src/lib/geoshape/GeoShape.cpp:
