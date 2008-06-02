@@ -15,10 +15,9 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QList>
 
-#include "BoundingBox.h"
-
 
 class AbstractFileViewItem;
+class BoundingBox;
 
 
 class FileViewModel : public QAbstractListModel
@@ -45,6 +44,7 @@ class FileViewModel : public QAbstractListModel
     void closeFile();
 
   private:
+    Q_DISABLE_COPY( FileViewModel )
     QModelIndex m_selectedIndex;
     QList < AbstractFileViewItem* > m_itemList;
 };

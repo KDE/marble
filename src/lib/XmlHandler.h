@@ -21,6 +21,9 @@
 class GeoDataPlacemark;
 class PlaceMarkContainer;
 
+// FIXME: memory leak in this class (m_placeMarkContainer), but beware
+// that the ownership is unclear if a non-null PlaceMarkContainer pointer
+// is passed via constructor. Eventually use Q_DISABLE_COPY.
 
 class XmlHandler : public QXmlDefaultHandler
 {

@@ -26,7 +26,7 @@ class ExtDateTime : public QObject
     Q_OBJECT
 	
  public:
-    explicit ExtDateTime();
+    ExtDateTime();
     virtual ~ExtDateTime();
 
     /**
@@ -69,6 +69,7 @@ class ExtDateTime : public QObject
     void timeChanged();
 
  protected:
+    Q_DISABLE_COPY( ExtDateTime )
     int        m_speed;
     QTimer    *m_timer;
     QDateTime  m_datetime;

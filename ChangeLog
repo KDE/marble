@@ -1,5 +1,37 @@
 2008-06-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/VectorComposer.h
+    * src/lib/FileViewModel.h
+    * src/lib/PlaceMarkPainter.cpp
+    * src/lib/FileViewModel.cpp
+    * src/lib/XmlHandler.h
+    * src/lib/GpxFileViewItem.h
+    * src/lib/TextureColorizer.cpp
+    * src/lib/VisiblePlaceMark.cpp
+    * src/lib/ExtDateTime.cpp
+    * src/lib/MarbleModel.h
+    * src/lib/SunLocator.h
+    * src/lib/ClipPainter.h
+    * src/lib/TextureColorizer.h
+    * src/lib/VisiblePlaceMark.h
+    * src/lib/ExtDateTime.h
+    * src/lib/geodata/data/GeoDataPlacemark.cpp
+    * src/lib/geodata/data/GeoDataFeature.h
+    * src/lib/geodata/data/GeoDataFeature.cpp
+
+    Several small cleanups/fixes:
+    - Fix includes.
+    - More Q_DISABLE_COPY.
+    - Add FIXMEs.
+    - Add api docs.
+    - Use qobject_cast instead of C style cast.
+    - Remove empty inline destructor.
+    - Not neccessary to declare default constructor as explicit.
+    - Initialisation order for constructor init list.
+    - Initialise base class objects in constructors.
+
+2008-06-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/PluginManager.h:
     * src/lib/MarbleAboutDialog.h:
     * src/lib/MarbleWidgetPopupMenu.h:

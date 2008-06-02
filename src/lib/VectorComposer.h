@@ -27,8 +27,6 @@
 #include <QtGui/QPen>
 #include <QtGui/QPixmap>
 
-#include "Quaternion.h"
-
 
 class GeoPainter;
 class PntMap;
@@ -103,6 +101,7 @@ class VectorComposer
     }
 
  private:
+    Q_DISABLE_COPY( VectorComposer )
     VectorMap  *m_vectorMap;
 
     PntMap     *m_coastLines;

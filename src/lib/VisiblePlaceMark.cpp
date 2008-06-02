@@ -14,7 +14,7 @@
 #include <QtCore/QDebug>
 
 #include "GeoDataStyle.h"
-
+#include "MarblePlacemarkModel.h"
 
 VisiblePlaceMark::VisiblePlaceMark()
 {
@@ -44,7 +44,8 @@ const QString VisiblePlaceMark::name() const
 
 const QPixmap& VisiblePlaceMark::symbolPixmap() const
 {
-    GeoDataStyle* style = ( ( MarblePlacemarkModel* )m_modelIndex.model() )->styleData( m_modelIndex );
+    GeoDataStyle* style = qobject_cast<const MarblePlacemarkModel*>( m_modelIndex.model() )
+        ->styleData( m_modelIndex );
 //    GeoDataStyle* style = m_modelIndex.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
     if ( style == 0 )
     {

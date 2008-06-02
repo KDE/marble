@@ -33,7 +33,6 @@ class ClipPainter : public QPainter
  public:
     ClipPainter();
     ClipPainter(QPaintDevice*, bool);
-    ~ClipPainter(){}
 
     void setClipping( bool enable );
     bool isClipping() const;

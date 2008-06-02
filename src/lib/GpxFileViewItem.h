@@ -22,6 +22,7 @@ class GpxFileViewItem
     public AbstractFileViewItem
 {
   public:
+    /// Takes ownership of file
     explicit GpxFileViewItem( GpxFile* file );
     ~GpxFileViewItem();
 
@@ -35,6 +36,7 @@ class GpxFileViewItem
     virtual void setShown( bool value );
 
   private:
+    Q_DISABLE_COPY( GpxFileViewItem )
     GpxFile*    m_gpxFile;
 };
 

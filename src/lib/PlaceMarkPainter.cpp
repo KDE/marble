@@ -19,7 +19,7 @@
 
 #include "AbstractProjection.h"
 #include "GeoDataStyle.h"
-
+#include "MarblePlacemarkModel.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "VisiblePlaceMark.h"

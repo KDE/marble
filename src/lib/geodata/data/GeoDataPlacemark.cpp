@@ -39,13 +39,14 @@ class GeoDataPlacemarkPrivate
 
 
 GeoDataPlacemark::GeoDataPlacemark()
-    : d( new GeoDataPlacemarkPrivate() )
+    : GeoDataFeature(),
+      d( new GeoDataPlacemarkPrivate )
 {
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
-    : d( new GeoDataPlacemarkPrivate() ),
-      GeoDataFeature( name )
+    : GeoDataFeature( name ),
+      d( new GeoDataPlacemarkPrivate )
 {
 }
 
@@ -110,6 +111,7 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     GeoDataFeature::pack( stream );
 
     stream << d->m_countrycode;
+    // FIXME: what about d->m_area and d->m_population?
 
     /*
      * pack coordinates

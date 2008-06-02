@@ -224,6 +224,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Create a new GeoDataFeature with @p name as its name.
     explicit GeoDataFeature( const QString& name );
 
+    // FIXME: move member to d-pointer class
     /// The visual category of this feature.  @see GeoDataVisualCategory
     GeoDataVisualCategory  m_visualCategory;
 

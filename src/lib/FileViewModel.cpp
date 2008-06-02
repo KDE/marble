@@ -8,9 +8,12 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-
+// Own
 #include "FileViewModel.h"
+
+// Other
 #include "AbstractFileViewItem.h"
+#include "BoundingBox.h"
 
 FileViewModel::FileViewModel( QObject* parent ) :
     QAbstractListModel( parent )

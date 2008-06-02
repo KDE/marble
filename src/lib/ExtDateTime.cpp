@@ -30,7 +30,10 @@ ExtDateTime::ExtDateTime()
 }
 
 
-ExtDateTime::~ExtDateTime() {}
+ExtDateTime::~ExtDateTime()
+{
+  // FIXME: delete m_timer?
+}
 
 
 int ExtDateTime::year0()

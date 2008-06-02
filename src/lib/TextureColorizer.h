@@ -17,18 +17,8 @@
 #ifndef TEXTURECOLORIZER_H
 #define TEXTURECOLORIZER_H
 
-
 #include <QtCore/QString>
-#include <QtCore/QList>
-#include <QtCore/QVector>
-#include <QtCore/QDebug>
-#include <QtCore/QFile>
-#include <QtCore/QStringList>
-#include <QtGui/QImage>
-#include <QtGui/QPainter>
-
-#include "Quaternion.h"
-
+// FIXME: forward decl for QString
 
 class ViewParams;
 

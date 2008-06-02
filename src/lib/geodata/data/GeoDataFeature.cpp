@@ -54,15 +54,17 @@ class GeoDataFeaturePrivate
 };
 
 
-GeoDataFeature::GeoDataFeature() :
-        m_visualCategory( Unknown ),
-        d( new GeoDataFeaturePrivate() )
+GeoDataFeature::GeoDataFeature()
+    : GeoDataObject(),
+      m_visualCategory( Unknown ),
+      d( new GeoDataFeaturePrivate() )
 {
 }
 
-GeoDataFeature::GeoDataFeature( const QString& name ) :
-        m_visualCategory( Unknown ),
-        d( new GeoDataFeaturePrivate() )
+GeoDataFeature::GeoDataFeature( const QString& name )
+    : GeoDataObject(),
+      m_visualCategory( Unknown ),
+      d( new GeoDataFeaturePrivate() )
 {
     d->m_name = name;
 }

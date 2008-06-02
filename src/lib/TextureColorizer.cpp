@@ -14,9 +14,12 @@
 
 #include <cmath>
 
-#include <QtCore/QString>
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QString>
 #include <QtGui/QColor>
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
 
 #include "global.h"
 #include "GeoSceneDocument.h"

@@ -22,7 +22,6 @@
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QRect>
 
-#include "MarblePlacemarkModel.h"
 
 /**
  * @short A class which represents the visible place marks on a map.
