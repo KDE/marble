@@ -192,6 +192,7 @@ class TileLoader : public QObject
          */
         void reloadTile( const QString &idStr );
 
+        Q_DISABLE_COPY( TileLoader )
         class Private;
         Private* const d;
         MarbleModel* m_parent;

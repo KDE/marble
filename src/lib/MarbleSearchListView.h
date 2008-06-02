@@ -33,6 +33,7 @@ class MARBLE_EXPORT MarbleSearchListView : public QListView
     void  activate();
 
  private:
+    Q_DISABLE_COPY( MarbleSearchListView )
     class Private;
     Private  * const d;
 };

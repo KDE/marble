@@ -46,7 +46,8 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
     /// @brief Sort the placemarks in descending order by population.
     void sort();
 
- private:	
+ private:
+    Q_DISABLE_COPY( PlaceMarkContainer )	
     QString  m_name;
 };
 

@@ -53,6 +53,7 @@ class HttpJob
     QByteArray & data();
 
  private:
+    Q_DISABLE_COPY( HttpJob )
     QUrl        m_sourceUrl;
     QString     m_destinationFileName;
     // if there is a redirection, we have to know the original file name
@@ -93,6 +94,7 @@ class HttpFetchFile : public QObject
     void httpRequestFinished( int requestId, bool error );
 
  private:
+    Q_DISABLE_COPY( HttpFetchFile )
     QHttp *m_pHttp;
     QMap<int, HttpJob*> m_pJobMap;
     StoragePolicy *m_storagePolicy;

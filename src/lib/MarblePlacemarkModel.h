@@ -109,6 +109,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
     void createFilterProperties( PlaceMarkContainer &container );
 
+    Q_DISABLE_COPY( MarblePlacemarkModel )
     class Private;
     Private* const d;
 

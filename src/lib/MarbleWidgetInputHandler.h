@@ -55,6 +55,7 @@ class MarbleWidgetInputHandler  : public QObject
     void restoreViewContext();
 
  protected:
+    Q_DISABLE_COPY( MarbleWidgetInputHandler )
     MarbleWidget  *m_widget;
     MarbleModel   *m_model;
 

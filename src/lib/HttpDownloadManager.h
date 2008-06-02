@@ -99,6 +99,7 @@ class HttpDownloadManager : public QObject
     void reportResult( HttpJob *job, int id );
 
  private:
+    Q_DISABLE_COPY( HttpDownloadManager )
     // Check whether the job gets processed already or whether it got blacklisted
     bool              acceptJob( HttpJob  *job );
     bool              m_downloadEnabled;

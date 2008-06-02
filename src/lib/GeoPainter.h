@@ -140,7 +140,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawRect ( const QRect & rectangle );
     void drawRect ( int x, int y, int width, int height );
  private:
-
+    Q_DISABLE_COPY( GeoPainter )
     GeoPainterPrivate  * const d;
 };
 

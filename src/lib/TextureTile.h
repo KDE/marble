@@ -96,6 +96,7 @@ class TextureTile : public QObject {
     bool     m_used;
 
  private:
+    Q_DISABLE_COPY( TextureTile )
     QDateTime m_created;
 
     void scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, double sourceX, double sourceY, int sourceLevel, int targetX, int targetY, int targetLevel  );

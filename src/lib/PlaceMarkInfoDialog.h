@@ -51,6 +51,7 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     void requestFlag( const QString& );
 
  private:
+    Q_DISABLE_COPY( PlaceMarkInfoDialog )
     DeferredFlag  *m_flagcreator;
     QPersistentModelIndex m_index;
 };

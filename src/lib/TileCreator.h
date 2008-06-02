@@ -42,6 +42,7 @@ class MARBLE_EXPORT TileCreator : public QThread
 
 
  private:
+    Q_DISABLE_COPY( TileCreator )
     TileCreatorPrivate  * const d;
 };
 

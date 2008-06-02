@@ -51,6 +51,7 @@ class TinyWebBrowser : public QTextBrowser
  private:
     void setContentHtml( const QString& );
 
+    Q_DISABLE_COPY( TinyWebBrowser )
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     QString         m_source;

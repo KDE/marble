@@ -41,6 +41,7 @@ class PluginManager : public QObject
     void loadPlugins();
 
  private:
+    Q_DISABLE_COPY( PluginManager )
     QList<MarbleLayerInterface *> m_layerInterfaces;
 };
 

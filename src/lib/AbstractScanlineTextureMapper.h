@@ -152,6 +152,7 @@ public:
     int          m_tilePosY;
 
  private:
+    Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     int          m_globalWidth;
     int          m_globalHeight;
     double       m_normGlobalWidth;

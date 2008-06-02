@@ -39,6 +39,7 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
     void loadPageContents( int idx );
 
  private:
+    Q_DISABLE_COPY( MarbleAboutDialog )
     MarbleAboutDialogPrivate  * const d;
 };
 

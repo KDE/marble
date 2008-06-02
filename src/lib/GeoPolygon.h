@@ -95,6 +95,8 @@ class PntMap : public GeoPolygon::PtrVector
     ~PntMap();
 
     void load(const QString &);
+
+    Q_DISABLE_COPY( PntMap )
 };
 
 

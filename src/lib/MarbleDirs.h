@@ -110,6 +110,7 @@ class MARBLE_EXPORT MarbleDirs
     static void debug();
 
  private:
+    Q_DISABLE_COPY( MarbleDirs )
     class Private;
     Private  * const d;
 };

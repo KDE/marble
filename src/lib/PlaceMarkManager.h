@@ -84,6 +84,7 @@ class PlaceMarkManager : public QObject
 
     void setPlaceMarkModel( MarblePlacemarkModel *model );
 
+    Q_DISABLE_COPY( PlaceMarkManager )
     MarblePlacemarkModel* m_model;
 
 #ifdef KML_GSOC

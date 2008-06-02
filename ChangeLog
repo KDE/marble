@@ -1,5 +1,46 @@
 2008-06-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/PluginManager.h:
+    * src/lib/MarbleAboutDialog.h:
+    * src/lib/MarbleWidgetPopupMenu.h:
+    * src/lib/MarbleThemeSelectView.h:
+    * src/lib/MarbleWidgetInputHandler.h:
+    * src/lib/MapThemeManager.h:
+    * src/lib/MergedLayerDecorator.h:
+    * src/lib/AbstractScanlineTextureMapper.h:
+    * src/lib/MarbleWidget.h:
+    * src/lib/TileLoader.h:
+    * src/lib/PlaceMarkContainer.h:
+    * src/lib/MarblePhysics.h:
+    * src/lib/MarbleControlBox.h:
+    * src/lib/MarbleNavigator.h:
+    * src/lib/MarbleDirs.h:
+    * src/lib/PlaceMarkManager.h:
+    * src/lib/TextureTile.h:
+    * src/lib/GeoPolygon.h:
+    * src/lib/PlaceMarkInfoDialog.h:
+    * src/lib/PlaceMarkLayout.h:
+    * src/lib/MarblePlacemarkModel.h:
+    * src/lib/MarbleLegendBrowser.h:
+    * src/lib/HttpFetchFile.h:
+    * src/lib/MarbleAbstractFloatItem.h:
+    * src/lib/SunControlWidget.h:
+    * src/lib/MarbleSearchListView.h:
+    * src/lib/GeoPainter.h:
+    * src/lib/HttpDownloadManager.h:
+    * src/lib/LayerManager.h:
+    * src/lib/TinyWebBrowser.h:
+    * src/lib/MeasureTool.h:
+    * src/lib/MarbleMap.h:
+    * src/lib/TileCreator.h:
+
+    Use Q_DISABLE_COPY for classes that have got a pointer member
+    or a container of pointers or do inherit from a container of
+    pointers and do not have got a copy constructor and assignment
+    operator.
+
+2008-06-02  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarbleModel.cpp:
 
     Fix bug 162678.

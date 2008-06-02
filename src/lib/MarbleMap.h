@@ -821,6 +821,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     virtual void  customPaint( GeoPainter *painter );
 
  private:
+    Q_DISABLE_COPY( MarbleMap )
     MarbleMapPrivate  * const d;
 };
 

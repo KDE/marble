@@ -41,6 +41,7 @@ class LayerManager : public QObject
     void loadLayers();
 
  private:
+    Q_DISABLE_COPY( LayerManager )
     PluginManager m_pluginManager;
 
     QList<MarbleLayerInterface *> m_layerInterfaces;

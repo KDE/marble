@@ -57,6 +57,7 @@ class MarbleWidgetPopupMenu  : public QObject
     void createActions();
 
  private:
+    Q_DISABLE_COPY( MarbleWidgetPopupMenu )
     MarbleModel    *m_model;
     MarbleWidget   *m_widget;
 

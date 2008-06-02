@@ -56,6 +56,8 @@ class MeasureTool : public QObject
     bool  testBug(); 
 
  private:
+    Q_DISABLE_COPY( MeasureTool )
+
     // The list of points in the distance path.
     QVector<GeoDataPoint*>  m_pMeasurePointList;
 

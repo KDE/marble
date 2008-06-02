@@ -61,6 +61,7 @@ class MergedLayerDecorator : public QObject
     void paintClouds();
 	
  protected:
+    Q_DISABLE_COPY( MergedLayerDecorator )
     QImage* m_tile;
     int m_x;
     int m_y;

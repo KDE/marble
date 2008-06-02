@@ -83,6 +83,8 @@ class MapThemeManager : public QObject
     void fileChanged( const QString & path );
 
  private:
+    Q_DISABLE_COPY( MapThemeManager )
+
     /**
      * @brief Adds directory paths and .dgml file paths to the given QStringList.
      */

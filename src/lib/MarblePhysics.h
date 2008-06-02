@@ -36,6 +36,7 @@ class MarblePhysics : public QObject
     void setCurrentPosition( const GeoDataPoint &currentPostion );
 
  private:
+    Q_DISABLE_COPY( MarblePhysics )
     GeoDataPoint m_sourcePosition;
     GeoDataPoint m_targetPosition;
 

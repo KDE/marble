@@ -913,6 +913,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  disconnectNotify ( const char * signal );
 
  private:
+    Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
 };
 

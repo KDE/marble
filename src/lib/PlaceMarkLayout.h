@@ -103,6 +103,8 @@ class PlaceMarkLayout : public QObject
     int    placeMarksOnScreenLimit() const;
 
  private:
+    Q_DISABLE_COPY( PlaceMarkLayout )
+
     PlaceMarkPainter *m_placeMarkPainter;
 
     QVector<VisiblePlaceMark*> m_paintOrder;

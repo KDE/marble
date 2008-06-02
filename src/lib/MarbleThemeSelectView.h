@@ -43,6 +43,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     void selectMapTheme( const QString& );
 
  private:
+    Q_DISABLE_COPY( MarbleThemeSelectView )
     class Private;
     Private  * const d;
 };

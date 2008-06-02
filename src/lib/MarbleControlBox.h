@@ -245,6 +245,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void resizeEvent ( QResizeEvent * );
 
  private:
+    Q_DISABLE_COPY( MarbleControlBox )
     MarbleControlBoxPrivate  * const d;
 };
 

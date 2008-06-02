@@ -72,6 +72,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     QVariant loadResource ( int type, const QUrl & name );
 
  private:
+    Q_DISABLE_COPY( MarbleLegendBrowser )
     MarbleLegendBrowserPrivate  * const d; 
 };
 
