@@ -8,11 +8,11 @@
 // Copyright 2008      Torsten Rahn  <rahn@kde.org>
 //
 
-#include <QtCore/QDebug>
-
 // Own
 #include "MarblePhysics.h"
 
+#include <QtCore/QDebug>
+#include <QtCore/QTimeLine>
 
 MarblePhysics::MarblePhysics()
     : m_jumpDuration( 2000 )

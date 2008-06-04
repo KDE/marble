@@ -1,5 +1,12 @@
 2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarblePhysics.cpp:
+    * src/lib/MarblePhysics.h:
+
+    Fix includes.
+
+2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/gps/Waypoint.cpp:
     * src/lib/gps/Waypoint.h:
 

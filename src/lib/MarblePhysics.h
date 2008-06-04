@@ -13,9 +13,8 @@
 
 #include "GeoDataPoint.h"
 #include <QtCore/QObject>
-#include <QtCore/QQueue>
-#include <QtCore/QTimer>
-#include <QtCore/QTimeLine>
+
+class QTimeLine;
 
 class MarblePhysics : public QObject
 {
