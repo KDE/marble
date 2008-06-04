@@ -43,8 +43,17 @@
                 <value>true</value>
                 <available>true</available>
             </property>
+            <group name="Places">
+                <property name="places">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="otherplaces">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+            </group>
         </settings>
-        
         <legend>
             <section name="traffic" checkable="false" spacing="12">
                 <heading>Transportation</heading>
