@@ -17,8 +17,12 @@
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 
+#include "AbstractLayerContainer.h"
 #include "BoundingBox.h"
 #include "ClipPainter.h"
+#include "GeoDataPoint.h"
+#include "Quaternion.h"
+#include "ViewParams.h"
 
 
 AbstractLayer::AbstractLayer( QObject *parent ) 
@@ -54,7 +58,7 @@ bool AbstractLayer::getPixelPosFromGeoDataPoint( double _lon, double _lat,
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoDataPoint( GeoDataPoint position,
+bool AbstractLayer::getPixelPosFromGeoDataPoint( const GeoDataPoint & position,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)

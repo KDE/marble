@@ -11,7 +11,8 @@
 #ifndef TRACKSEG_H
 #define TRACKSEG_H
 
-#include "AbstractLayer/AbstractLayerContainer.h"
+#include "AbstractLayerContainer.h"
+#include "AbstractLayerData.h"
 
 /**
  * @brief uninterupted sequence of trackPoints

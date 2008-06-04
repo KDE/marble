@@ -12,6 +12,7 @@
 
 #include <QtCore/QDebug>
 
+#include "AbstractLayerData.h"
 #include "BoundingBox.h"
 
 
@@ -42,5 +43,3 @@ void TrackContainer::draw( ClipPainter *painter,
         (*it)->draw( painter, canvasSize, viewParams );
     }
 }
-
-

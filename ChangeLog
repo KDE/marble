@@ -1,5 +1,22 @@
 2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/gps/RouteContainer.cpp:
+    * src/lib/gps/Route.h:
+    * src/lib/gps/TrackContainer.cpp:
+    * src/lib/gps/Track.h:
+    * src/lib/gps/WaypointContainer.cpp:
+    * src/lib/gps/TrackPoint.cpp:
+    * src/lib/gps/WaypointContainer.h:
+    * src/lib/gps/TrackSegment.h:
+    * src/lib/AbstractLayer/AbstractLayer.cpp:
+    * src/lib/AbstractLayer/AbstractLayerContainer.cpp:
+    * src/lib/AbstractLayer/AbstractLayer.h:
+    * src/lib/AbstractLayer/AbstractLayerContainer.h:
+
+    Mainly include fixes but some other cleanups also.
+
+2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/MarblePhysics.cpp:
     * src/lib/MarblePhysics.h:
 

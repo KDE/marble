@@ -18,6 +18,7 @@ TrackPoint::TrackPoint( double lat, double lon )
 {
 }
 
+// FIXME: shouldn't this be ": Waypoint( in )" ?
 TrackPoint::TrackPoint( const TrackPoint & in )
     :Waypoint ( 0, 0 )
 {

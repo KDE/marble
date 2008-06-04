@@ -10,16 +10,16 @@
 #ifndef WAYPOINTCONTAINER_H
 #define WAYPOINTCONTAINER_H
 
-#include "AbstractLayer/AbstractLayerContainer.h"
-#include "ClipPainter.h"
+#include "AbstractLayerContainer.h"
 
+class ClipPainter;
 
 class WaypointContainer : public virtual AbstractLayerContainer
 {
  public:
     WaypointContainer();
-    explicit WaypointContainer( QString name ):AbstractLayerContainer( name ) {}
-    virtual ~WaypointContainer() {}
+    explicit WaypointContainer( const QString & name );
+    virtual ~WaypointContainer();
 
     /*
     virtual void draw ( ClipPainter *painter, const QPoint &point );

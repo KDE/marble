@@ -19,16 +19,16 @@
 
 
 #include <QtCore/QObject>
-#include <QtCore/QSize>
 
-#include "Quaternion.h"
-#include "AbstractLayerContainer.h"
-
-
-class ClipPainter;
 class QPoint;
-class BoundingBox;
+class QPointF;
+class QSize;
 
+class AbstractLayerContainer;
+class BoundingBox;
+class ClipPainter;
+class GeoDataPoint;
+class ViewParams;
 
 /**
  * @brief framework class for each display layer in Marble
@@ -133,7 +133,7 @@ class AbstractLayer: public QObject
       * @return @c true if the pixel is visible on the screen
       *         @c false if the pixel is outside the screen
       **/ 
-    bool getPixelPosFromGeoDataPoint(GeoDataPoint geoPosition,
+    bool getPixelPosFromGeoDataPoint(const GeoDataPoint & geoPosition,
                                  const QSize &screenSize,
                                  ViewParams *viewParams,
                                  QPoint *position);
@@ -182,6 +182,8 @@ class AbstractLayer: public QObject
      * collection and call each container's @c draw() function
      */
     QVector<AbstractLayerContainer *> *m_containers;
+
+    Q_DISABLE_COPY( AbstractLayer )
 };
 #endif //ABSTRACTLAYER_H
 

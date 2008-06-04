@@ -10,7 +10,8 @@
 #ifndef TRACK_H
 #define TRACK_H
 
-#include "AbstractLayer/AbstractLayerContainer.h"
+#include "AbstractLayerContainer.h"
+#include "AbstractLayerData.h"
 #include "GpsElement.h"
 
 class ViewParams;

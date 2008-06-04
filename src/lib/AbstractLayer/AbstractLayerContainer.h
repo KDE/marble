@@ -15,12 +15,12 @@
 
 #include <QtCore/QVector>
 #include <QtCore/QString>
-#include <QtCore/QBitArray>
 
-#include "AbstractLayerData.h"
 #include "AbstractLayerInterface.h"
 
+class QBitArray;
 
+class AbstractLayerData;
 class ClipPainter;
 class QPointF;
 class BoundingBox;
@@ -180,6 +180,8 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     BoundingBox *m_boundingBox;
     
  private:
+    Q_DISABLE_COPY( AbstractLayerContainer )
+
     /** 
      * @brief data is intended to be a binary swap file to minimize
      *        memory footprint.

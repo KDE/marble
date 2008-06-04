@@ -10,10 +10,23 @@
 
 
 #include "WaypointContainer.h"
+
+#include "AbstractLayerData.h"
 #include "BoundingBox.h"
+#include "ClipPainter.h"
 
 
 WaypointContainer::WaypointContainer()
+    : AbstractLayerContainer()
+{
+}
+
+WaypointContainer::WaypointContainer( const QString & name )
+    : AbstractLayerContainer( name )
+{
+}
+
+WaypointContainer::~WaypointContainer()
 {
 }
 

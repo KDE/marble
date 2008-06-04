@@ -9,10 +9,13 @@
 //
 
 #include "AbstractLayerContainer.h"
-#include "ClipPainter.h"
-#include "BoundingBox.h"
-#include <QtCore/QDebug>
 
+#include "AbstractLayerData.h"
+#include "BoundingBox.h"
+#include "ClipPainter.h"
+
+#include <QtCore/QBitArray>
+#include <QtCore/QDebug>
 #include <QtCore/QPointF>
 
 AbstractLayerContainer::AbstractLayerContainer( int size )
