@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 #ifndef WAYPOINT_H
 #define WAYPOINT_H
 
-#include "AbstractLayer/AbstractLayerData.h"
+#include "AbstractLayerData.h"
 #include "GpsElement.h"
 #include <QtCore/QTime>
 #include <QtCore/QString>
@@ -40,12 +41,8 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * @param position the geopoint that will be the position of this
      *                 waypoint
      */
-    explicit Waypoint( GeoDataPoint position );
+    explicit Waypoint( const GeoDataPoint & position );
     
-    /**
-     * @brief simple destructor
-     */
-    ~Waypoint();
     /*
 
     void draw ( ClipPainter *painter, const QPoint &point ){}
@@ -75,7 +72,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_elevation getter
      */
-    double elevation();
+    double elevation() const;
     
     /**
      * @brief m_elevation setter
@@ -85,7 +82,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_time getter
      */
-    QTime time();
+    QTime time() const;
     
     /**
      * @brief m_time setter
@@ -95,7 +92,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_magVariation getter
      */
-    double magVariation();
+    double magVariation() const;
     
     /**
      * @brief m_magVariation setter
@@ -105,7 +102,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_geoIdHeight getter
      */
-    double geoIdHeight();
+    double geoIdHeight() const;
     
     /**
      * @brief m_geoIdHeight setter
@@ -115,7 +112,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_gpsSymbol getter
      */
-    QString gpsSymbol();
+    QString gpsSymbol() const;
     
     /**
      * @brief m_gpsSymbol setter
@@ -125,7 +122,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_type getter
      */
-    QString type();
+    QString type() const;
     
     /**
      * @brief m_type setter
@@ -135,7 +132,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_fix getter
      */
-    QString fix();
+    QString fix() const;
     
     /**
      * @brief m_fix setter
@@ -145,7 +142,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_satalites getter
      */
-    int satalites();
+    int satalites() const;
     
     /**
      * @brief m_satalites setter
@@ -155,7 +152,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_hdop getter
      */
-    double hdop();
+    double hdop() const;
     
     /**
      * @brief m_hdop setter
@@ -165,7 +162,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_vdop getter
      */
-    double vdop();
+    double vdop() const;
     
     /**
      * @brief m_vdop setter
@@ -175,7 +172,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_pdop getter
      */
-    double pdop();
+    double pdop() const;
     
     /**
      * @brief m_pdop setter
@@ -185,7 +182,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_ageOfGpsData getter
      */
-    double ageOfGpsData();
+    double ageOfGpsData() const;
     
     /**
      * @brief m_ageOfGpsData setter
@@ -195,7 +192,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_dgpsid getter
      */
-    int dgpsid();
+    int dgpsid() const;
     
     /**
      * @brief m_dgpsid setter
@@ -206,36 +203,36 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief Elevation (in meters) of the waypoint
      */
-    double *m_elevation;
+    double m_elevation;
     
     /**
      * @brief Timestamp on waypoint creation
      */
-    QTime *m_time;
+    QTime m_time;
     
     /**
      * @brief Magnetic variation (in degrees) at the point
      * 
      * this is a value where 0.0 <= value <= 360.0
      */
-    double *m_magVariation;
+    double m_magVariation;
     
     /**
      * Quote from GPX schema:
      * Height (in meters) of geoid (mean sea level) above WGS84 earth
      * ellipsoid. As defined in NMEA GGA message.
      */
-    double *m_geoIdHeight;
+    double m_geoIdHeight;
     
     /**
      * @brief Text representation of GPS symbol name.
      */
-    QString *m_gpsSymbol;
+    QString m_gpsSymbol;
     
     /**
      * @brief classification of the waypoint
      */
-    QString *m_type;
+    QString m_type;
     
     /**
      * @brief Type of GPS fix. 
@@ -244,12 +241,12 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * leave out fixType entirely. pps = military signal used
      * value comes from list: {'none'|'2d'|'3d'|'dgps'|'pps'}
      */
-    QString *m_fix;
+    QString m_fix;
     
     /**
      * @brief number of satalites to calculate fix
      */
-    int *m_satalites;
+    int m_satalites;
     
     /**
      * @brief Horizontal dilution of precision.
@@ -258,29 +255,29 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * positional accuracy due to the wider angular separation 
      * between the satellites used to calculate a GPS unit's position
      */
-    double *m_hdop;
+    double m_hdop;
     
     /**
      * @brief Vertical dilution of presision.
      */
-    double *m_vdop;
+    double m_vdop;
     
     /**
      * @brief Position dilution of precision.
      */
-    double *m_pdop;
+    double m_pdop;
     
     /**
      * @brief Number of seconds since last DGPS update.
      */
-    double *m_ageOfGpsData;
+    double m_ageOfGpsData;
     
     /**
      * @brief ID of DGPS station used in differential correction.
      * 
      * a value where:  0 <= value <= 1023
      */
-    int *m_dgpsid;
+    int m_dgpsid;
 };
 
 #endif //WAYPOINT_H

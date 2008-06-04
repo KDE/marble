@@ -6,10 +6,12 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #include "Waypoint.h"
-#include "MarbleDirs.h"
+
+//#include "MarbleDirs.h"
 #include "ClipPainter.h"
 
 #include <QtGui/QPixmap>
@@ -17,38 +19,34 @@
 #include <QtCore/QPoint>
 #include <QtCore/QDebug>
 
-Waypoint::Waypoint( double lat, double lon ):
-                    AbstractLayerData( lat, lon ),
-                    GpsElement(), m_elevation(0), m_time(0),
-                    m_magVariation(0), m_geoIdHeight(0),
-                    m_gpsSymbol(0), m_type(0), m_fix(0),
-                    m_satalites(0), m_hdop(0), m_vdop(0),
-                    m_pdop(0), m_ageOfGpsData(0), m_dgpsid(0){}
-
-Waypoint::Waypoint( GeoDataPoint position ):
-                    AbstractLayerData( position ), GpsElement(),
-                    m_elevation(0), m_time(0), m_magVariation(0),
-                    m_geoIdHeight(0), m_gpsSymbol(0), m_type(0),
-                    m_fix(0), m_satalites(0), m_hdop(0), m_vdop(0),
-                    m_pdop(0), m_ageOfGpsData(0), m_dgpsid(0){}
-
-Waypoint::~Waypoint()
+Waypoint::Waypoint( double lat, double lon )
+    : AbstractLayerData( lat, lon ),
+      GpsElement(),
+      m_elevation(0.0),
+      m_magVariation(0.0),
+      m_geoIdHeight(0.0),
+      m_satalites(0),
+      m_hdop(0.0),
+      m_vdop(0.0),
+      m_pdop(0.0),
+      m_ageOfGpsData(0.0),
+      m_dgpsid(0)
 {
-//     delete m_lat;
-//     delete m_lon;
-    delete m_elevation;
-    delete m_time;
-    delete m_magVariation;
-    delete m_geoIdHeight;
-    delete m_gpsSymbol;
-    delete m_type;
-    delete m_fix;
-    delete m_satalites;
-    delete m_hdop;
-    delete m_vdop;
-    delete m_pdop;
-    delete m_ageOfGpsData;
-    delete m_dgpsid;
+}
+
+Waypoint::Waypoint( const GeoDataPoint& position )
+    : AbstractLayerData( position ),
+      GpsElement(),
+      m_elevation(0.0),
+      m_magVariation(0.0),
+      m_geoIdHeight(0.0),
+      m_satalites(0),
+      m_hdop(0.0),
+      m_vdop(0.0),
+      m_pdop(0.0),
+      m_ageOfGpsData(0.0),
+      m_dgpsid(0)
+{
 }
 
 void Waypoint::draw( ClipPainter * painter,
@@ -61,9 +59,7 @@ void Waypoint::draw( ClipPainter *painter, const QSize &canvasSize,
                      ViewParams *viewParams )
 {
     QPoint position;
-    bool draw = false;
-    draw = getPixelPos( canvasSize, viewParams,
-                        &position );
+    const bool draw = getPixelPos( canvasSize, viewParams, &position );
     if ( draw) {
         this->draw( painter, position );
     }
@@ -105,142 +101,132 @@ void Waypoint::setLon( const double &lon )
     *m_lon = lon;
 }*/
 
-double Waypoint::elevation()
+double Waypoint::elevation() const
 {
-    return *m_elevation;
+    return m_elevation;
 }
 
 void Waypoint::setElevation( const double &elevation )
 {
-    m_elevation = new double;
-    *m_elevation = elevation;
+    m_elevation = elevation;
 }
 
-QTime Waypoint::time()
+QTime Waypoint::time() const
 {
-    return QTime( *m_time );
+    return m_time;
 }
 
 void Waypoint::setTime( const QTime &time )
 {
-    m_time = new QTime();
-    *m_time = time;
+    m_time = time;
 }
 
-double Waypoint::magVariation()
+double Waypoint::magVariation() const
 {
-    return *m_magVariation;
+    return m_magVariation;
 }
 
 void Waypoint::setMagVariation( const double &magVar )
 {
-    m_magVariation = new double;
-    *m_magVariation = magVar;
+    m_magVariation = magVar;
 }
 
-double Waypoint::geoIdHeight()
+double Waypoint::geoIdHeight() const
 {
-    return *m_geoIdHeight;
+    return m_geoIdHeight;
 }
 
 void Waypoint::setGeoIdHeight( const double &geoHeightId )
 {
-    m_geoIdHeight = new double;
-    *m_geoIdHeight = geoHeightId;
+    m_geoIdHeight = geoHeightId;
 }
 
-QString Waypoint::gpsSymbol()
+QString Waypoint::gpsSymbol() const
 {
-    return QString( *m_gpsSymbol );
+    return m_gpsSymbol;
 }
 
 void Waypoint::setGpsSymbol( const QString &gpsSymbol )
 {
-    m_gpsSymbol = new QString( gpsSymbol );
+    m_gpsSymbol = gpsSymbol;
 }
 
-QString Waypoint::type()
+QString Waypoint::type() const
 {
-    return QString( *m_type );
+    return m_type;
 }
 
 void Waypoint::setType( const QString &type )
 {
-    m_type = new QString( type );
+    m_type = type;
 }
 
-QString Waypoint::fix()
+QString Waypoint::fix() const
 {
-    return QString( *m_fix );
+    return m_fix;
 }
 
 void Waypoint::setFix( const QString &fix )
 {
-    m_fix = new QString( fix );
+    m_fix = fix;
 }
 
-int Waypoint::satalites()
+int Waypoint::satalites() const
 {
-    return *m_satalites;
+    return m_satalites;
 }
 
 void Waypoint::setSatalites( const int &satalites )
 {
-    m_satalites = new int;
-    *m_satalites = satalites;
+    m_satalites = satalites;
 }
 
-double Waypoint::hdop()
+double Waypoint::hdop() const
 {
-    return *m_hdop;
+    return m_hdop;
 }
 
 void Waypoint::setHdop( const double &hdop )
 {
-    m_hdop = new double;
-    *m_hdop = hdop;
+    m_hdop = hdop;
 }
 
-double Waypoint::vdop()
+double Waypoint::vdop() const
 {
-    return *m_vdop;
+    return m_vdop;
 }
 
 void Waypoint::setVdop( const double &vdop )
 {
-    m_vdop = new double;
-    *m_vdop = vdop;
+    m_vdop = vdop;
 }
 
-double Waypoint::pdop()
+double Waypoint::pdop() const
 {
-    return *m_pdop;
+    return m_pdop;
 }
 
 void Waypoint::setPdop( const double &pdop )
 {
-    m_pdop = new double;
-    *m_pdop = pdop;
+    m_pdop = pdop;
 }
 
-double Waypoint::ageOfGpsData()
+double Waypoint::ageOfGpsData() const
 {
-    return *m_ageOfGpsData;
+    return m_ageOfGpsData;
 }
 
 void Waypoint::setAgeOfGpsData( const double &age )
 {
-    m_ageOfGpsData = new double;
-    *m_ageOfGpsData = age;
+    m_ageOfGpsData = age;
 }
 
-int Waypoint::dgpsid()
+int Waypoint::dgpsid() const
 {
-    return *m_dgpsid;
+    return m_dgpsid;
 }
 
 void Waypoint::setDgpsid( const int &gpsdid )
 {
-    m_dgpsid = new int;
-    *m_dgpsid = gpsdid;
+    m_dgpsid = gpsdid;
 }

@@ -1,5 +1,14 @@
 2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/gps/Waypoint.cpp:
+    * src/lib/gps/Waypoint.h:
+
+    - Fix potential memory leaks and null pointer dereferences by converting
+      pointer members to their base types.
+    - Constify getters.
+
+2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/gps/GpsElement.cpp:
     * src/lib/gps/GpsElement.h:
 
