@@ -1,5 +1,12 @@
 2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/PlaceMarkPainter.h:
+    * src/lib/PlaceMarkPainter.cpp:
+
+    Fix includes.
+
+2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/gps/RouteContainer.cpp:
     * src/lib/gps/Route.h:
     * src/lib/gps/TrackContainer.cpp:

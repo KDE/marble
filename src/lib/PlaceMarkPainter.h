@@ -18,16 +18,14 @@
 #define PLACEMARKPAINTER_H
 
 
-#include <QtGui/QFont>
-#include <QtGui/QItemSelection>
-#include <QtGui/QPainterPath>
-#include <QtGui/QPixmap>
-#include <QtCore/QRect>
+#include <QtCore/QObject>
 #include <QtCore/QVector>
+#include <QtGui/QColor>
 
-#include "GeoDataPlacemark.h"
-#include "PlaceMarkLayout.h"
-
+class QFont;
+class QItemSelection;
+class QPainter;
+class QString;
 
 class ViewportParams;
 class VisiblePlaceMark;
