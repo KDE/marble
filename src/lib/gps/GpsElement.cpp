@@ -6,88 +6,77 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #include "GpsElement.h"
 
 
-
-GpsElement::GpsElement(): m_name(0),        m_gpsComment(0),
-                          m_description(0), m_source(0), m_links(0),
-                          m_number(0)
+GpsElement::GpsElement()
+    : m_number(0)
 {
 }
 
 GpsElement::~GpsElement()
 {
-    delete m_name;
-    delete m_gpsComment;
-    delete m_description;
-    delete m_source;
-    delete m_links;
-    delete m_number;
 }
 
 void GpsElement::setName( const QString &name )
 {
-    m_name = new QString( name );
+    m_name = name;
 }
 
-QString GpsElement::name()
+QString GpsElement::name() const
 {
-    return QString( *m_name );
+    return m_name;
 }
 
 void GpsElement::setGpsComment( const QString &comment )
 {
-    m_gpsComment = new QString( comment );
+    m_gpsComment = comment;
 }
 
-QString GpsElement::gpsComment()
+QString GpsElement::gpsComment() const
 {
-    return QString( *m_gpsComment );
+    return m_gpsComment;
 }
 
 void GpsElement::setDescription( const QString &description )
 {
-    m_description = new QString( description );
+    m_description = description;
 }
 
-QString GpsElement::description()
+QString GpsElement::description() const
 {
-    return QString( *m_description );
+    return m_description;
 }
 
 void GpsElement::setSource( const QString &source )
 {
-    m_source = new QString( source );
+    m_source = source;
 }
 
-QString GpsElement::source()
+QString GpsElement::source() const
 {
-    return QString( *m_source );
+    return m_source;
 }
 
 void GpsElement::addLink( const QString &link )
 {
-    if ( m_links == 0 ) {
-        m_links = new QVector<QUrl>;
-    }
-    m_links -> append( QUrl ( link ) );
+    m_links.append( QUrl( link ) );
 }
 
-QVector<QUrl> GpsElement::links()
+QVector<QUrl> GpsElement::links() const
 {
-    return QVector<QUrl>( *m_links );
+    return m_links;
 }
 
 void GpsElement::setNumber( int number )
 {
-    m_number = new int;
-    *m_number = number;
+    m_number = number;
 }
 
-int GpsElement::number()
+int GpsElement::number() const
 {
-    return *m_number;
+    return m_number;
 }

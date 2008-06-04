@@ -6,10 +6,12 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
+// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 #ifndef GPSELEMENT_H
 #define GPSELEMENT_H
 
+#include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtCore/QVector>
 
@@ -30,7 +32,7 @@ class GpsElement
     /**
      * @brief destructor, delete all pointers
      */
-    ~GpsElement();
+    virtual ~GpsElement();
 
     /**
      * @brief m_name setter
@@ -42,7 +44,7 @@ class GpsElement
      * @return the name of this gps element or an empty string if one
      *         has not been provided
      */
-    QString name();
+    QString name() const;
     
     /**
      * @brief m_gpsComment setter
@@ -54,7 +56,7 @@ class GpsElement
      * @return a comment about this gps data or an empty string if one
      *         has not been provided
      */
-    QString gpsComment();
+    QString gpsComment() const;
     
     /**
      * @brief m_discription setter
@@ -67,7 +69,7 @@ class GpsElement
      *         an empty string if that information has not been 
      *         provided
      */
-    QString description();
+    QString description() const;
     
     /**
      * @brief m_source setter
@@ -79,7 +81,7 @@ class GpsElement
      * @return a string representation of the source of this data or 
      *         an empty string if that information is not known
      */
-    QString source();
+    QString source() const;
     
     /**
      * @brief add a previously verified link to m_links
@@ -90,7 +92,7 @@ class GpsElement
      * @brief get all links
      * @return a vector containing all links or an empty vector
      */
-    QVector<QUrl> links();
+    QVector<QUrl> links() const;
     
     /**
      * @brief m_number setter
@@ -102,23 +104,23 @@ class GpsElement
      * @return the number of this gps element or -1 if one has not
      *         been provided
      */
-    int number();
+    int number() const;
     
  private:
     /**
      * @brief name used to identify this gps element.
      */
-    QString *m_name;
+    QString m_name;
     
     /**
      * @brief comment added to this element
      */
-    QString *m_gpsComment;
+    QString m_gpsComment;
     
     /**
      * @brief description about this gps element
      */
-    QString *m_description;
+    QString m_description;
     
     /*!\brief source of the GPS data
      * 
@@ -126,7 +128,7 @@ class GpsElement
      * Source of data. Included to give user some idea of reliability
      * and accuracy of data.
      */
-    QString *m_source;
+    QString m_source;
     
     /**
      * @brief collection of links to external information about this
@@ -134,7 +136,7 @@ class GpsElement
      * 
      * A Vector of valid links to external information
      */
-    QVector<QUrl> *m_links;
+    QVector<QUrl> m_links;
     
     /**
      * @brief the number of the gps element
@@ -142,7 +144,7 @@ class GpsElement
      * this referes to the number of this gps element in a sequence
      * of elements. this does not apply to waypoints
      */
-    int *m_number;
+    int m_number;
 };
 
 #endif //GPSELEMENT_H
