@@ -2,7 +2,7 @@
 
     * src/lib/PlaceMarkLayout.cpp
 
-    Replace C style casts ob qobject_cast.
+    Replace C style casts with qobject_cast.
 
 2008-06-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
