@@ -115,7 +115,7 @@ int main(int argc, char** argv)
         GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>(document);
         QVector<GeoDataFeature*>::const_iterator it = dataDocument->features().constBegin();
         QVector<GeoDataFeature*>::const_iterator end = dataDocument->features().constEnd();
-
+        qDebug() << "---------------------------------------------------------";
         for (; it != end; ++it) {
             GeoDataFeature* feature = *it;
             qDebug() << "Name: " << feature->name();

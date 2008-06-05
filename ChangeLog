@@ -1,5 +1,11 @@
 2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/GeoDataTest.cpp
+    
+    make layout more distinguishable
+
+2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/CMakeLists.txt
     
     define the compile flag KML_LAZY_IMP - this is used to get
@@ -14,6 +20,7 @@
     * src/lib/geodata/handlers/kml/KMLRoleTagHandler.{h|cpp}
     * src/lib/geodata/handlers/kml/KMLSchemaTagHandler.{h|cpp}
     * src/lib/geodata/handlers/kml/KMLSimpleFieldTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLElementDictionary.{h|cpp}    
     
     add some more tags: area, countrycode, CountryNameCode, MarblePlacemark, 
     pop, role are custom tags used by Marble
