@@ -1,3 +1,28 @@
+2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/GeoDataTest.cpp
+    
+    add a msgHandler for debug messages (only Q_OS_WIN) + use a 
+    QCoreApplication instead of QApplication. This ensures that
+    debug messages can be read in the console on Windows.
+    
+2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * tools/asc2kml/asc2kml.cpp
+    
+    fix state tag - not needed in the schema definition
+    
+2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * data/placemarks/baseplacemarks.kml
+    * data/placemarks/cityplacemarks.kml
+    * data/placemarks/elevplacemarks.kml
+    * data/placemarks/boundaryplacemarks.kml
+    * data/placemarks/otherplacemarks.kml
+    
+    remove the state tag in the schema definition - state is part
+    of the official KML spec
+    
 2008-06-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarbleWidget.cpp:
@@ -378,7 +403,13 @@
 	headers and not headers in the source tree.  If I didn't do this,
 	it would break the compile. Alas.
 	* src/geoshape/GeoShape.cpp (paint): Use new GeoPainter API.
+    
+2008-05-29  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataLatLonAltBox.h
+    
+    use export macro for friend defined operator
+    
 2008-05-28  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp

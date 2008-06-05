@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
@@ -37,12 +37,38 @@
 #include "GeoSceneSettings.h"
 #include "GeoSceneZoom.h"
 
+#ifdef Q_OS_WIN
+#include <stdio.h>
+#include <stdlib.h>
+
+void myMessageOutput(QtMsgType type, const char *msg)
+{
+    switch (type) {
+        case QtDebugMsg:
+            fprintf(stdout, "Debug: %s\n", msg);
+            break;
+        case QtWarningMsg:
+            fprintf(stdout, "Warning: %s\n", msg);
+            break;
+        case QtCriticalMsg:
+            fprintf(stdout, "Critical: %s\n", msg);
+            break;
+        case QtFatalMsg:
+            fprintf(stdout, "Fatal: %s\n", msg);
+            abort();
+    }
+}
+#endif
+
 void dumpGeoDataDocument(GeoDataDocument*);
 void dumpGeoSceneDocument(GeoSceneDocument*);
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc, argv);
+#ifdef Q_OS_WIN
+    qInstallMsgHandler(myMessageOutput);
+#endif
+    QCoreApplication app(argc, argv);
 
     // Expect document as first command line argument
     if (app.arguments().size() <= 1) {
