@@ -42,11 +42,11 @@ static double msvc_atanh(double x)
 #endif
 
 PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
-    : QObject( parent )
+    : QObject( parent ),
+      m_placeMarkPainter( 0 ),
+      m_maxLabelHeight( 0 ),
+      m_styleResetRequested( true )
 {
-    m_maxLabelHeight = 0;
-    m_styleResetRequested = true;
-
 //  Old weightfilter array. Still here 
 // to be able to compare performance
 /*
@@ -162,7 +162,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+        GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
@@ -172,7 +172,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     for ( int i = 0; i < model->rowCount(); ++i ) {
         QModelIndex index = model->index( i, 0 );
 
-        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+        GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
         QFont labelFont = style->labelStyle()->font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight ) 
@@ -189,14 +189,14 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                                         const QItemSelectionModel *selectionModel,
                                         bool firstTime )
 {
-    const int imgwidth  = viewParams->canvasImage()->width();
+  //    const int imgwidth  = viewParams->canvasImage()->width();
     const int imgheight = viewParams->canvasImage()->height();
 
     if ( m_styleResetRequested == true ) {
         m_styleResetRequested = false;
         styleReset();
         qDebug() << "RESET started";
-        m_persistentIndexList = ( (MarblePlacemarkModel*) model )->persistentIndexList();
+        m_persistentIndexList = qobject_cast<const MarblePlacemarkModel*>( model )->persistentIndexList();
         qDebug() << "RESET stopped";
         
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
@@ -232,8 +232,11 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
+        const MarblePlacemarkModel *placemarkModel =
+            qobject_cast<const MarblePlacemarkModel*>( index.model() );
+        Q_ASSERT( placemarkModel );
 
-        GeoDataPoint geopoint = ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index );
+        GeoDataPoint geopoint = placemarkModel->coordinateData( index );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -249,7 +252,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         // Find the corresponding visible placemark
         VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
 
-        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+        GeoDataStyle* style = placemarkModel->styleData( index );
 
         // Specify font properties
         if ( mark ) {
@@ -270,7 +273,8 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         // If there's not enough space free don't add a VisiblePlaceMark here.
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
-        if ( labelRect.isNull() ) continue;
+        if ( labelRect.isNull() )
+            continue;
 
         // Make sure not to draw more placemarks on the screen than 
         // specified by placeMarksOnScreenLimit().
@@ -321,6 +325,9 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( it = m_persistentIndexList.begin(); it != m_persistentIndexList.end(); ++it )
     {
         const QPersistentModelIndex& index = *it;
+        const MarblePlacemarkModel *placemarkModel =
+            qobject_cast<const MarblePlacemarkModel*>( index.model() );
+        Q_ASSERT( placemarkModel );
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
@@ -330,7 +337,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                 break;
         }
 
-        GeoDataPoint geopoint = ( ( MarblePlacemarkModel* )index.model() )->coordinateData( index );
+        GeoDataPoint geopoint = placemarkModel->coordinateData( index );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -372,7 +379,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
         // Find the corresponding visible placemark
         VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
-        GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
+        GeoDataStyle* style = placemarkModel->styleData( index );
 
         // Specify font properties
         if ( mark ) {
@@ -390,7 +397,8 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         // If there's not enough space free don't add a VisiblePlaceMark here.
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
-        if ( labelRect.isNull() ) continue;
+        if ( labelRect.isNull() )
+            continue;
 
         // Make sure not to draw more placemarks on the screen than 
         // specified by placeMarksOnScreenLimit().
