@@ -70,7 +70,6 @@ int main(int argc, char *argv[])
 
         targetstream << "    <Schema name=\"MarblePlacemark\" parent=\"Placemark\"> \n";
         targetstream << "       <SimpleField name=\"pop\" type=\"int\"></SimpleField> \n";
-        targetstream << "       <SimpleField name=\"state\" type=\"string\"></SimpleField> \n";
         targetstream << "       <SimpleField name=\"CountryNameCode\" type=\"string\"></SimpleField> \n";
         targetstream << "       <SimpleField name=\"role\" type=\"string\"></SimpleField> \n";
         targetstream << "    </Schema> \n";
