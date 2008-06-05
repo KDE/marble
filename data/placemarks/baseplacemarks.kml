@@ -3,7 +3,6 @@
 <Document>
     <Schema name="MarblePlacemark" parent="Placemark"> 
        <SimpleField name="pop" type="int"></SimpleField> 
-       <SimpleField name="state" type="string"></SimpleField> 
        <SimpleField name="CountryNameCode" type="string"></SimpleField> 
        <SimpleField name="role" type="string"></SimpleField> 
     </Schema> 
