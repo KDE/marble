@@ -168,6 +168,16 @@ namespace GeoDataElementDictionary {
     extern const char* kmlTag_width;
     extern const char* kmlTag_x;
     extern const char* kmlTag_y;
+    
+#ifdef KML_LAZY_IMP
+// preliminary implementation for the extra defined Tags
+    extern const char* kmlTag_MarblePlacemark;
+    extern const char* kmlTag_area;
+    extern const char* kmlTag_pop;
+    extern const char* kmlTag_role;
+    extern const char* kmlTag_CountryNameCode;
+    extern const char* kmlTag_countrycode;
+#endif // KML_LAZY_IMP
 }
 
 // Helper macros

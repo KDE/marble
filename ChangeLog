@@ -1,5 +1,25 @@
 2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/CMakeLists.txt
+    
+    define the compile flag KML_LAZY_IMP - this is used to get
+    non-KML spec-tags the lazy way
+    
+    * src/lib/geodata/handlers/kml/KMLAreaTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLCountrycodeTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLCountryNameCodeTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLDescriptionTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLMarblePlacemarkTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLPopTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLRoleTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLSchemaTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KMLSimpleFieldTagHandler.{h|cpp}
+    
+    add some more tags: area, countrycode, CountryNameCode, MarblePlacemark, 
+    pop, role are custom tags used by Marble
+    
+2008-06-05  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/GeoDataTest.cpp
     
     add a msgHandler for debug messages (only Q_OS_WIN) + use a 

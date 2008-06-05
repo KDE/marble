@@ -207,7 +207,10 @@ endif(WIN32)
 configure_file(config-libgps.h.cmake
 ${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
 
-set_target_properties(marblewidget PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
+set_target_properties(marblewidget  PROPERTIES 
+                                    VERSION ${GENERIC_LIB_VERSION} 
+                                    SOVERSION ${GENERIC_LIB_SOVERSION}
+                                    COMPILE_FLAGS "-DKML_LAZY_IMP")
 # needed for marble_export.h
 set_target_properties(marblewidget PROPERTIES
   DEFINE_SYMBOL MAKE_MARBLE_LIB
@@ -231,6 +234,7 @@ else(WIN32 AND QTONLY)
 endif(WIN32 AND QTONLY)
 
 add_executable(geodatatest geodata/GeoDataTest.cpp)
+set_target_properties( geodatatest PROPERTIES COMPILE_FLAGS "-DKML_LAZY_IMP" )
 
 target_link_libraries (geodatatest marblewidget)
 

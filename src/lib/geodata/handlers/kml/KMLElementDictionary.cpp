@@ -167,5 +167,12 @@ const char* kmlTag_when = "when";
 const char* kmlTag_width = "width";
 const char* kmlTag_x = "x";
 const char* kmlTag_y = "y";
-
+#ifdef KML_LAZY_IMP
+ const char* kmlTag_MarblePlacemark = "MarblePlacemark";
+ const char* kmlTag_area = "area";
+ const char* kmlTag_pop = "pop";
+ const char* kmlTag_role = "role";
+ const char* kmlTag_CountryNameCode = "CountryNameCode";
+ const char* kmlTag_countrycode = "countrycode";
+#endif // KML_LAZY_IMP
 }
