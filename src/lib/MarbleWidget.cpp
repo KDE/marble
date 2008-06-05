@@ -344,6 +344,11 @@ void MarbleWidget::addPlaceMarkFile( const QString &filename )
     //d->m_model->addPlaceMarkFile( filename );
 }
 
+void MarbleWidget::addPlaceMarkData( const QString &data )
+{
+    d->m_map->addPlaceMarkData( data );
+}
+
 QPixmap MarbleWidget::mapScreenShot()
 {
     return QPixmap::grabWidget( this );

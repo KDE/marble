@@ -74,11 +74,17 @@ class PlaceMarkManager : public QObject
      */
     void loadKml( const QString &fileName, bool clearPrevious = false );
 
+    /**
+     * Loads a new KML data as string into the manager.
+     */
+    void loadKmlFromData( const QString& data, bool clearPrevious = false );
+
  Q_SIGNALS:
     void geoDataDocumentLoaded( GeoDataDocument& );
 
  private:
     void importKml( const QString&, PlaceMarkContainer* );
+    void importKmlFromData( const QString&, PlaceMarkContainer* );
     void saveFile( const QString&, PlaceMarkContainer* );
     bool loadFile( const QString&, PlaceMarkContainer* );
 

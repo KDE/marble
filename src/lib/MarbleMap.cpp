@@ -360,6 +360,10 @@ void MarbleMap::addPlaceMarkFile( const QString &filename )
     d->m_model->addPlaceMarkFile( filename );
 }
 
+void MarbleMap::addPlaceMarkData( const QString &data )
+{
+    d->m_model->addPlaceMarkData( data );
+}
 
 
 QPixmap MarbleMap::mapScreenShot()

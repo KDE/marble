@@ -179,6 +179,21 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
 #endif
 }
 
+void PlaceMarkManager::loadKmlFromData( const QString& data, bool clearPrevious )
+{
+#ifdef KML_GSOC
+    // TODO
+#else
+    Q_ASSERT( m_model != 0 && "You have called loadKmlFromData before creating a model!" );
+
+    PlaceMarkContainer container;
+    importKmlFromData( data, &container );
+
+    m_model->addPlaceMarks( container, clearPrevious );
+#endif
+}
+
+
 #ifdef KML_GSOC
 const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
 {
@@ -207,6 +222,19 @@ void PlaceMarkManager::importKml( const QString& filename,
 #endif
 
     QXmlInputSource   source( &file );
+    QXmlSimpleReader  reader;
+    reader.setContentHandler( &handler );
+    reader.parse( source );
+}
+
+void PlaceMarkManager::importKmlFromData(const QString& data,
+                                         PlaceMarkContainer* placeMarkContainer)
+{
+
+    XmlHandler handler( placeMarkContainer );
+
+    QXmlInputSource   source;
+    source.setData(data);
     QXmlSimpleReader  reader;
     reader.setContentHandler( &handler );
     reader.parse( source );

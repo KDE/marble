@@ -338,6 +338,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void addPlaceMarkFile( const QString &filename );
 
     /**
+     * @brief  Add GeoDataPlacemark data as string to the model.
+     * @param  data  the string containing the PlaceMarks.
+     */
+    void addPlaceMarkData( const QString &data );
+
+    /**
      * @brief  Return the quaternion that specifies the rotation of the globe.
      * @return The quaternion that describes the rotation of the globe.
      */

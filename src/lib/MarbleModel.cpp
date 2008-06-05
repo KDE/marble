@@ -618,6 +618,13 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
     d->notifyModelChanged();
 }
 
+void MarbleModel::addPlaceMarkData( const QString& data )
+{
+    d->m_placemarkmanager->loadKmlFromData( data, true );
+
+    d->notifyModelChanged();
+}
+
 QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
