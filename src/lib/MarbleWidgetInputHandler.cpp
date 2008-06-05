@@ -95,6 +95,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     int polarity = 0;
 
     if ( m_widget->northPoleY() != 0 ) 
+        // FIXME: retrieve the polarity from ViewParams instead
         polarity = m_widget->northPoleY() / abs(m_widget->northPoleY());
 
     //	if ( o == marbleWidget ){
@@ -104,31 +105,41 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         dirx = 0; 
         diry = 0;
         switch ( k->key() ) {
-        case 0x01000012: 
+        case Qt::Key_Left: 
+
+            // Depending on whether the planet is "upright" or
+            // "upside down" we need to choose the direction
+            //  of the rotation  
+
             if ( polarity < 0 )
                 dirx = -1;
             else
                 dirx = 1;
             break;
-        case 0x01000013: 
+        case Qt::Key_Up: 
             diry = 1;
             break;
-        case 0x01000014: 
+        case Qt::Key_Right: 
+
+            // Depending on whether the planet is "upright" or
+            // "upside down" we need to choose the direction
+            //  of the rotation  
+
             if ( polarity < 0 )
                 dirx = 1;
             else
                 dirx = -1;
             break;
-        case 0x01000015: 
+        case Qt::Key_Down: 
             diry = -1;
             break;
-        case 0x2b:
+        case Qt::Key_Plus:
             m_widget->zoomIn();
             break;
-        case 0x2d:
+        case Qt::Key_Minus:
             m_widget->zoomOut();
             break;
-        case 0x01000010:
+        case Qt::Key_Home:
             m_widget->goHome();
             break;
         default:
