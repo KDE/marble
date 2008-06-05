@@ -1,6 +1,27 @@
 2008-06-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
-    * src/lib/PlaceMarkLayout.cpp
+    * src/lib/MarbleWidget.cpp:
+    * src/lib/gps/GmlSax.h:
+    * src/lib/gps/GpxFile.h:
+    * src/lib/gps/RouteContainer.h:
+    * src/lib/gps/GpsTracking.cpp:
+    * src/lib/gps/TrackContainer.h:
+    * src/lib/gps/GpxSax.h:
+    * src/lib/gps/GpxFileModel.cpp:
+    * src/lib/gps/GpsTracking.h:
+    * src/lib/gps/GpxFileModel.h:
+    * src/lib/gps/GpsLayer.cpp:
+    * src/lib/gps/GpsLayer.h:
+    * src/lib/MarbleMap.cpp:
+    * src/lib/AbstractLayer/AbstractLayerData.h:
+    * src/lib/AbstractLayer/AbstractLayerData.cpp:
+    * src/lib/MarbleModel.cpp:
+
+    Fix includes.
+
+2008-06-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/PlaceMarkLayout.cpp:
 
     Replace C style casts with qobject_cast.
 

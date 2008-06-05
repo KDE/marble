@@ -11,6 +11,9 @@
 
 #include "GpxFileModel.h"
 
+#include "BoundingBox.h"
+#include "GpxFile.h"
+
 #include <QtCore/Qt>
 #include <QtCore/QFile>
 #include <QtCore/QVectorIterator>

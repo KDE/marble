@@ -9,12 +9,14 @@
 //
 
 #include "GpsTracking.h"
-#include "TrackPoint.h"
-#include "Track.h"
-#include "TrackSegment.h"
+
+#include "AbstractLayer.h"
+#include "ClipPainter.h"
 #include "GmlSax.h"
 #include "GpxFile.h"
-#include "AbstractLayer/AbstractLayer.h"
+#include "Track.h"
+#include "TrackPoint.h"
+#include "TrackSegment.h"
 
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>

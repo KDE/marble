@@ -94,4 +94,3 @@ void GpsLayer::loadGpx( const QString &fileName )
 
     m_fileModel->addFile( tempFile );
 }
-

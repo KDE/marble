@@ -17,6 +17,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
 #include "global.h"
@@ -35,6 +36,7 @@
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
 #include "GeoPolygon.h"
+#include "gps/GpxFileModel.h"
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
 #include "KMLFileViewItem.h"

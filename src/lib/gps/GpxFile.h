@@ -11,17 +11,15 @@
 #ifndef GPXFILE_H
 #define GPXFILE_H
 
-
-#include <QtCore/Qt>
 #include <QtCore/QString>
-#include <QtCore/QTextStream>
 
-#include "AbstractLayer/AbstractLayerInterface.h"
+#include "AbstractLayerInterface.h"
 
-
-class ClipPainter;
+class QTextStream;
 class QPoint;
 class QSize;
+
+class ClipPainter;
 class BoundingBox;
 class Waypoint;
 class Track;
@@ -29,7 +27,6 @@ class Route;
 class WaypointContainer;
 class TrackContainer;
 class RouteContainer;
-
 
 class GpxFile : public AbstractLayerInterface
 {
@@ -72,4 +69,3 @@ class GpxFile : public AbstractLayerInterface
 };
 
 #endif
-

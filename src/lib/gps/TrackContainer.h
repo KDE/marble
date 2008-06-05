@@ -11,7 +11,7 @@
 #define TRACKCONTAINER_H
 
 
-#include "AbstractLayer/AbstractLayerContainer.h"
+#include "AbstractLayerContainer.h"
 
 /**
  * @brief holds a collection of tracks
@@ -39,5 +39,3 @@ class TrackContainer : public AbstractLayerContainer
 };
 
 #endif
-
-

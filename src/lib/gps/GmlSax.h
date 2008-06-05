@@ -11,9 +11,12 @@
 #ifndef GMLSAX_H
 #define GMLSAX_H
 
-#include <QtXml/QXmlAttributes>
-#include <QtXml/QXmlParseException>
+#include <QtCore/QString>
 #include <QtXml/QXmlDefaultHandler>
+
+class QXmlAttributes;
+class QXmlParseException;
+
 
 /**
 A very simple Xml Parser that will be based on the Gml Scema ( Geographic Markup Language )
@@ -26,7 +29,7 @@ public:
     GmlSax( double *lon, double *lat );
 
     ~GmlSax();
-    
+
     bool startElement( const QString &namespaceURI,
                        const QString &localName,
                        const QString &qName,
@@ -35,15 +38,14 @@ public:
                      const QString &localName,
                      const QString &qName );
     bool fatalError(const QXmlParseException &exception);
-    
+
     bool characters( const QString &str );
-    
+
 private:
     double *m_lat;
     double *m_lon;
-    
-    QString currentText;
 
+    QString currentText;
 };
 
 #endif

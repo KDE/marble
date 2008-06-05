@@ -12,16 +12,13 @@
 #ifndef GPXFILEMODEL_H
 #define GPXFILEMODEL_H
 
-
-#include "GpxFile.h"
-
 #include <QtCore/QAbstractItemModel>
-#include <QtGui/QItemSelectionModel>
+#include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
 #include <QtCore/QVector>
 
-#include "BoundingBox.h"
-
+class BoundingBox;
+class GpxFile;
 
 /**
 *	@author Andrew Manson <g.real.ate@gmail.com>

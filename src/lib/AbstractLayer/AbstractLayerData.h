@@ -12,17 +12,15 @@
 #ifndef ABSTRACTLAYERDATA_H
 #define ABSTRACTLAYERDATA_H
 
-#include "global.h"
 #include "GeoDataPoint.h"
 #include "AbstractLayerInterface.h"
-#include "ViewParams.h"
-
 
 class QPoint;
 class QPointF;
 class QSize;
-class ClipPainter;
 
+class ClipPainter;
+class ViewParams;
 
 class AbstractLayerData : public virtual AbstractLayerInterface
 {

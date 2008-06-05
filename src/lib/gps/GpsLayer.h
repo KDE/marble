@@ -12,8 +12,7 @@
 #ifndef GPSLAYER_H
 #define GPSLAYER_H
 
-
-#include "AbstractLayer/AbstractLayer.h"
+#include "AbstractLayer.h"
 
 #include "config-libgps.h" // krazy:exclude=includes
 
@@ -21,15 +20,14 @@
 #include <libgpsmm.h>
 #endif
 
-
-class Waypoint;
-class Track;
-class BoundingBox;
-class GpxFile;
 class QRegion;
-class GpsTracking;
-#include "GpxFileModel.h"
 
+class BoundingBox;
+class GpsTracking;
+class GpxFile;
+class GpxFileModel;
+class Track;
+class Waypoint;
 
 class GpsLayer : public AbstractLayer
 {

@@ -24,6 +24,7 @@
 #include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
+#include <QtGui/QItemSelectionModel>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>

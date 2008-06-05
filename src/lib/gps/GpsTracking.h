@@ -15,11 +15,8 @@
 #include <QtGui/QPolygonF>
 #include <QtCore/QObject>
 #include <QtCore/QTemporaryFile>
-
 #include <QtNetwork/QHttp>
-#include "ClipPainter.h"
-#include "Quaternion.h"
-#include "ViewParams.h"
+
 #include "config-libgps.h" // krazy:exclude=includes
 
 
@@ -27,11 +24,13 @@
 #include <libgpsmm.h>
 #endif
 
-class Waypoint;
-class TrackPoint;
-class Track;
-class TrackSegment;
+class ClipPainter;
 class GpxFile;
+class Track;
+class TrackPoint;
+class TrackSegment;
+class ViewParams;
+class Waypoint;
 
 /**
 	@author Andrew Manson <g.real.ate@gmail.com>

@@ -16,6 +16,7 @@
 
 #include "ClipPainter.h"
 #include "BoundingBox.h"
+#include "ViewParams.h"
 
 AbstractLayerData::AbstractLayerData( const GeoDataPoint &position ):
                     m_visible(true)

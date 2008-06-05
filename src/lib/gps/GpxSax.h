@@ -48,5 +48,5 @@ class GpxSax : public QXmlDefaultHandler
     double              m_tempLat;
     double              m_tempLon;
 };
-#endif
 
+#endif
