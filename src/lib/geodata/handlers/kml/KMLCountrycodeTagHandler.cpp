@@ -20,7 +20,7 @@
 */
 
 #if KML_LAZY_IMP
-#include "KMLcountrycodeTagHandler.h"
+#include "KMLCountrycodeTagHandler.h"
 
 #include <QtCore/QDebug>
 

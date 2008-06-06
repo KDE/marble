@@ -20,7 +20,7 @@
 */
 
 #if KML_LAZY_IMP
-#include "KMLroleTagHandler.h"
+#include "KMLRoleTagHandler.h"
 
 #include <QtCore/QDebug>
 
@@ -49,12 +49,12 @@ GeoNode* KMLroleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataPlacemark> ) {
+    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         QString role = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role.at( 0 ) );
-        qDebug() << "Parsed <" << kmlTag_role << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
+//         qDebug() << "Parsed <" << kmlTag_role << "> containing: " << content
+//                  << " parent item name: " << parentItem.qualifiedName().first;
     }
 
     return 0;

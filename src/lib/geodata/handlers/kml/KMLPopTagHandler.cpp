@@ -20,7 +20,7 @@
 */
 
 #if KML_LAZY_IMP
-#include "KMLpopTagHandler.h"
+#include "KMLPopTagHandler.h"
 
 #include <QtCore/QDebug>
 

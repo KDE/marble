@@ -20,7 +20,7 @@
 */
 
 #if KML_LAZY_IMP
-#include "KMLareaTagHandler.h"
+#include "KMLAreaTagHandler.h"
 
 #include <QtCore/QDebug>
 
