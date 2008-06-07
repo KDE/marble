@@ -39,6 +39,7 @@
 #include <knewstuff2/ui/knewstuffaction.h>
 #include <knewstuff2/engine.h>
 #include <KStandardDirs>
+#include <kdeprintdialog.h>
 
 // Marble library
 #include "GeoDataPoint.h"
@@ -168,9 +169,9 @@ void MarblePart::printMapScreenShot()
     QSize         printSize = mapPixmap.size();
     QPrinter      printer;
 
-    QPrintDialog printDialog( &printer, widget() );
+    QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, widget());
 
-    if ( printDialog.exec() ) {
+    if ( printDialog->exec() ) {
 
         QRect  mapPageRect = printer.pageRect();
 
@@ -186,6 +187,7 @@ void MarblePart::printMapScreenShot()
 
         painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
     }
+    delete printDialog;
 }
 
 void MarblePart::setShowClouds( bool isChecked )
