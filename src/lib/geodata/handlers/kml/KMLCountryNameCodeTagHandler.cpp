@@ -52,8 +52,10 @@ GeoNode* KMLCountryNameCodeTagHandler::parse( GeoParser& parser ) const
         QString countrycode = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode( countrycode );
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_CountryNameCode << "> containing: " << countrycode
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

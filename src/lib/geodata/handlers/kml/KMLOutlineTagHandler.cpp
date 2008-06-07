@@ -50,8 +50,10 @@ GeoNode* KMLoutlineTagHandler::parse( GeoParser& parser ) const
         bool outline = static_cast<bool>( parser.readElementText().trimmed().toInt() );
         
         parentItem.nodeAs<GeoDataPolyStyle>()->setOutline( outline );
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_outline << "> containing: " << outline
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

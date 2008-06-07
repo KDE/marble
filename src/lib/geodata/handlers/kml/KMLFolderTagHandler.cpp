@@ -51,8 +51,10 @@ GeoNode* KMLFolderTagHandler::parse(GeoParser& parser) const
     if ( parentItem.nodeAs<GeoDataContainer>() ) {
         parentItem.nodeAs<GeoDataContainer>()->addFeature(folder);
 
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << folder
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
     return folder;
 }

@@ -49,8 +49,10 @@ GeoNode* KMLLineStyleTagHandler::parse( GeoParser& parser ) const
     GeoDataLineStyle* style = new GeoDataLineStyle();
     
     if ( parentItem.represents( kmlTag_Style ) ) {
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << style
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
         return style;
     }
     return 0;

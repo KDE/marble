@@ -51,8 +51,10 @@ GeoNode* KMLdescriptionTagHandler::parse( GeoParser& parser ) const
         QString description = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataFeature>()->setDescription( description );
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_description << "> containing: " << description
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

@@ -63,8 +63,10 @@ GeoNode* KMLcoordinatesTagHandler::parse( GeoParser& parser ) const
         } else {
             // raise warning
         }
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_coordinates << "> containing: " << coordinates
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

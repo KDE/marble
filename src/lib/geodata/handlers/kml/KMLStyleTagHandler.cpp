@@ -55,7 +55,9 @@ GeoNode* KMLStyleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
+#ifdef DEBUG_TAGS
     qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style
              << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     return style;
 }

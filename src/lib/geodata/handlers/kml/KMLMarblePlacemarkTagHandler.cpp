@@ -54,8 +54,10 @@ GeoNode* KMLMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->addFeature( placemark );
     }
+#ifdef DEBUG_TAGS
     qDebug() << "Parsed <" << kmlTag_MarblePlacemark << "> containing: " << placemark
              << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
 
     return placemark;
 }

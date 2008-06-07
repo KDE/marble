@@ -53,8 +53,10 @@ GeoNode* KMLroleTagHandler::parse( GeoParser& parser ) const
         QString role = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role.at( 0 ) );
+#ifdef DEBUG_TAGS
 //         qDebug() << "Parsed <" << kmlTag_role << "> containing: " << content
 //                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

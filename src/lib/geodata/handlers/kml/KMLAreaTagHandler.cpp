@@ -52,8 +52,10 @@ GeoNode* KMLareaTagHandler::parse( GeoParser& parser ) const
         QString area = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataPlacemark>()->setArea( area.toDouble() );
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_area << "> containing: " << area
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
 
     return 0;

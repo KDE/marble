@@ -1,3 +1,39 @@
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/handlers/kml/KMLAreaTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLColorModeTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLColorTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLCountryNameCodeTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLCountrycodeTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLDescriptionTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLFillTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLFolderTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLHeadingTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLHotSpotTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLHrefTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLIconStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLIconTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLLabelStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLLineStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLMarblePlacemarkTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLNameTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLOpenTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLOutlineTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPlacemarkTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPointTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPolyStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPopTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLRoleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLSchemaTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLSimpleFieldTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLVisibilityTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLWidthTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KML_scaleTagHandler.cpp
+    
+    wrap qDebug() in #ifdef DEBUG_TAGS
+
 2008-06-06  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/kml/KMLRoleTagHandler.cpp

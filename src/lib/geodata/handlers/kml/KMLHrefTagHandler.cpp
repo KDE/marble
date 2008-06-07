@@ -51,8 +51,10 @@ GeoNode* KMLhrefTagHandler::parse( GeoParser& parser ) const
         // we need a more elaborate version of this part
         QString filename = QUrl( parser.readElementText().trimmed() ).toLocalFile();
         parentItem.nodeAs<GeoDataIconStyle>()->setIcon( filename );
+#ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_href << "> containing: " << parser.readElementText().trimmed()
                  << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
     }
     return 0;
 }
