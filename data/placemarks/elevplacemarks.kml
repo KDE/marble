@@ -8,7 +8,7 @@
     </Schema> 
     <MarblePlacemark> 
         <name>Aconcagua</name> 
-        <description>Highest peak in the Americas</description> 
+        <description><![CDATA[Highest peak in the Americas]]></description> 
         <CountryNameCode>AR</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -17,7 +17,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mount Elbrus</name> 
-        <description>Highest peak in Europe</description> 
+        <description><![CDATA[Highest peak in Europe]]></description> 
         <CountryNameCode>RU</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -26,7 +26,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Kilimanjaro</name> 
-        <description>Highest peak in Africa</description> 
+        <description><![CDATA[Highest peak in Africa]]></description> 
         <CountryNameCode>KE</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -35,7 +35,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mont Blanc</name> 
-        <description>Highest Mountain in Western Europe</description> 
+        <description><![CDATA[Highest Mountain in Western Europe]]></description> 
         <CountryNameCode>FR</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -44,7 +44,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mount Everest</name> 
-        <description>Highest point on earth</description> 
+        <description><![CDATA[Highest point on earth]]></description> 
         <CountryNameCode>NP</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -53,7 +53,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mount Kosciuszko</name> 
-        <description>Highest mountain in mainland Australia</description> 
+        <description><![CDATA[Highest mountain in mainland Australia]]></description> 
         <CountryNameCode>AU</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -62,7 +62,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mount McKinley</name> 
-        <description>Highest mountain in North America</description> 
+        <description><![CDATA[Highest mountain in North America]]></description> 
         <CountryNameCode>US</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -71,7 +71,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Puncak Jaya</name> 
-        <description>Highest mountain on the greater Australian continent</description> 
+        <description><![CDATA[Highest mountain on the greater Australian continent]]></description> 
         <CountryNameCode>ID</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -80,7 +80,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Vinson Massif</name> 
-        <description>Highest mountain of Antarctica</description> 
+        <description><![CDATA[Highest mountain of Antarctica]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>H</role> 
         <Point>
@@ -89,7 +89,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mauna Kea</name> 
-        <description>Largest volcano on Earth</description> 
+        <description><![CDATA[Largest volcano on Earth]]></description> 
         <CountryNameCode>US</CountryNameCode>
         <role>V</role> 
         <Point>
@@ -98,7 +98,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mauna Loa</name> 
-        <description>Largest active volcano on Earth</description> 
+        <description><![CDATA[Largest active volcano on Earth]]></description> 
         <CountryNameCode>US</CountryNameCode>
         <role>V</role> 
         <Point>
@@ -107,7 +107,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Mount Etna</name> 
-        <description>Largest and most active volcano in Europe</description> 
+        <description><![CDATA[Largest and most active volcano in Europe]]></description> 
         <CountryNameCode>IT</CountryNameCode>
         <role>V</role> 
         <Point>
@@ -116,7 +116,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>Challenger Deep</name> 
-        <description>The ocean floor's deepest spot which is located at the southern end of the Marianas Trench off the Mariana Islands. Some sources list Witjas Deep instead with a depth of -11.034 m.</description> 
+        <description><![CDATA[The ocean floor's deepest spot which is located at the southern end of the Marianas Trench off the Mariana Islands. Some sources list Witjas Deep instead with a depth of -11.034 m.]]></description> 
         <CountryNameCode>MP</CountryNameCode>
         <role>H</role> 
         <Point>

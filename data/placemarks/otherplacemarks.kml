@@ -8,7 +8,7 @@
     </Schema> 
     <Placemark> 
         <name>RMS Titanic</name> 
-        <description>British ocean liner that collided with an iceberg in 1912. At that time the RMS Titanic was on her maiden voyage from Southampton to New York. Of the 2,228 passengers and crew on board, only 705 survived.</description> 
+        <description><![CDATA[British ocean liner that collided with an iceberg in 1912. At that time the RMS Titanic was on her maiden voyage from Southampton to New York. Of the 2,228 passengers and crew on board, only 705 survived.]]></description> 
         <role>W</role> 
         <Point>
             <coordinates>-49.947, 41.725,-3925.0</coordinates> 

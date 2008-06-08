@@ -1,5 +1,16 @@
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * data/placemarks/baseplacemarks.kml
+    * data/placemarks/elevplacemarks.kml
+    * data/placemarks/boundaryplacemarks.kml
+    * data/placemarks/otherplacemarks.kml
+
+    make the description be of type CDATA
+    thus you can use html tags in there and the parser
+    will read this part together
+    
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KMLAreaTagHandler.cpp
     * src/lib/geodata/handlers/kml/KMLColorModeTagHandler.cpp
     * src/lib/geodata/handlers/kml/KMLColorTagHandler.cpp

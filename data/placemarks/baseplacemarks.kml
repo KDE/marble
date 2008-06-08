@@ -8,7 +8,7 @@
     </Schema> 
     <MarblePlacemark> 
         <name>North Pole</name> 
-        <description>Geographic North Pole</description> 
+        <description><![CDATA[Geographic North Pole]]></description> 
         <role>P</role> 
         <Point>
             <coordinates>0.0,90.00</coordinates> 
@@ -16,7 +16,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>South Pole</name> 
-        <description>Geographic South Pole</description> 
+        <description><![CDATA[Geographic South Pole]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>P</role> 
         <Point>
@@ -25,7 +25,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>North Magnetic Pole</name> 
-        <description>The physical magnetic south pole in 2005</description> 
+        <description><![CDATA[The physical magnetic south pole in 2005]]></description> 
         <role>M</role> 
         <Point>
             <coordinates>-118.32,83.21</coordinates> 
@@ -33,7 +33,7 @@
     </MarblePlacemark> 
     <MarblePlacemark> 
         <name>South Magnetic Pole</name> 
-        <description>The physical magnetic north pole in 2005</description> 
+        <description><![CDATA[The physical magnetic north pole in 2005]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>M</role> 
         <Point>
