@@ -29,14 +29,29 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
  public:
     /// Create a new PlaceMarkContainer.
     PlaceMarkContainer();
+
     /**
      * @brief Create a new PlaceMarkContainer
      * param  name the name of the container
      */
     explicit PlaceMarkContainer( const QString& name );
 
+    /**
+     * @brief Create a new PlaceMarkContainer
+     * param  container the other PlaceMarkContainer
+     */
+    PlaceMarkContainer( const PlaceMarkContainer& container );
+
+    /**
+     * @brief Create a new PlaceMarkContainer
+     * param  container a QVector of Placemarks
+     * param  name the name of the container
+     */
+    PlaceMarkContainer( const QVector<GeoDataPlacemark*>& container, const QString& name );
+
     /// Return the name of the container
     QString name() const;
+
     /**
      * @brief Set a new name for the PlaceMarkContainer
      * param  name the new name of the container
@@ -46,8 +61,13 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
     /// @brief Sort the placemarks in descending order by population.
     void sort();
 
+    /**
+     * @brief  the assignment operator
+     * param  container the other PlaceMarkContainer
+     */
+    PlaceMarkContainer& operator=( const PlaceMarkContainer& container );
+
  private:
-    Q_DISABLE_COPY( PlaceMarkContainer )	
     QString  m_name;
 };
 

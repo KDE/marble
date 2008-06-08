@@ -17,12 +17,26 @@ PlaceMarkContainer::PlaceMarkContainer()
 {
 }
 
-
 PlaceMarkContainer::PlaceMarkContainer( const QString& name )
-    : m_name(name)
+    : m_name( name )
 {
 }
 
+PlaceMarkContainer::PlaceMarkContainer( const PlaceMarkContainer& container )
+    : QVector<GeoDataPlacemark*>( container ), m_name( container.name() )
+{
+}
+
+PlaceMarkContainer::PlaceMarkContainer( const QVector<GeoDataPlacemark*>& container, const QString& name )
+    : QVector<GeoDataPlacemark*>( container ), m_name( name )
+{
+}
+
+PlaceMarkContainer& PlaceMarkContainer::operator= ( const PlaceMarkContainer& container )
+{
+    QVector<GeoDataPlacemark*>::operator=( container );
+    return *this;
+}
 
 inline bool populationLessThan( GeoDataPlacemark* mark1, GeoDataPlacemark* mark2 )
 { 

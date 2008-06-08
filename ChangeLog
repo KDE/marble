@@ -1,5 +1,12 @@
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/PlaceMarkContainer.{h|cpp}
+
+    make PlaceMarkContainer copiable and
+    add new ctor for QVector<GeoDataPlacemark*>
+
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * data/placemarks/baseplacemarks.kml
     * data/placemarks/elevplacemarks.kml
     * data/placemarks/boundaryplacemarks.kml
