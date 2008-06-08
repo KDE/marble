@@ -91,18 +91,20 @@ Features:
  * Support for OpenStreetMap                                            JM
     - Load tiles                                                        done
     - Display tiles                                                     done
-    - Expiration of tiles                                               ----
-    - Searching for cities and streets                                  ----
+    - Expiration of tiles                                               --
+    - Searching for cities and streets                                  --
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
- * Mercator Projection                                                  INGE
+ * A more general projection system					INGE
     - Move projection stuff to its own subdirectory			done
     - Create a helper class ProjectionHelper to perform actual actions	done
     - Move paintBase to ProjectionHelper				done
     - Move activeRegion to ProjectionHelper				done
     - Move mapCoversImage (prev. globeCoversImage) to Projection	done
+ * Mercator Projection                                                  INGE
+    - Create a MercatorScanlineTextureMapper	      			inge
     - Make the vector base work (VectorMap)	   			inge
-    - Fix ActiveRegion for Mercator.					inge
+    - ActiveRegion for Mercator.					done
 
  * Fix GPS Support (that's a regression) 				ANDR
     - Make it a Marble plugin						--
