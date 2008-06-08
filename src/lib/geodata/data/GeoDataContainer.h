@@ -22,6 +22,7 @@
 class GeoDataContainerPrivate;
 
 class GeoDataFolder;
+class GeoDataPlacemark;
 
 /**
  * @short  A base class that can hold GeoDataFeatures
@@ -59,6 +60,15 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @see GeoDataFeature
      */
     QVector<GeoDataFeature*> features() const;
+
+    /**
+     * @brief A convenience function that returns all placemarks in this container.
+     * @return A QVector of GeoDataPlacemark*
+     *
+     * @see GeoDataPlacemark
+     * @see PlaceMarkContainer
+     */
+    QVector<GeoDataPlacemark*> placemarks() const;
     
     /**
      * @brief  Add a feature to the container

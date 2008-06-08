@@ -1,5 +1,11 @@
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataContainer.{h|cpp}
+
+    add placemarks() function to return only the placemarks
+
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/PlaceMarkContainer.{h|cpp}
 
     make PlaceMarkContainer copiable and

@@ -18,6 +18,7 @@
 // Marble
 #include "GeoDataFeature.h"
 #include "GeoDataFolder.h"
+#include "GeoDataPlacemark.h"
 
 
 class GeoDataContainerPrivate
@@ -57,8 +58,24 @@ QVector<GeoDataFolder*> GeoDataContainer::folders() const
     for (; it != end; ++it) {
         GeoDataFeature* feature = *it;
 
-        if (feature->isFolder())
-            results.append(static_cast<GeoDataFolder*>(feature));
+        if ( dynamic_cast<GeoDataFolder*>( feature ) )
+            results.append( static_cast<GeoDataFolder*>( feature ) );
+    }
+
+    return results;
+}
+
+QVector<GeoDataPlacemark*> GeoDataContainer::placemarks() const
+{
+    QVector<GeoDataPlacemark*> results;
+
+    QVector<GeoDataFeature*>::const_iterator it = d->m_features.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = d->m_features.constEnd();
+
+    for (; it != end; ++it) {
+        GeoDataFeature* feature = *it;
+        if ( dynamic_cast<GeoDataPlacemark*>( feature ) )
+            results.append( static_cast<GeoDataPlacemark*>( feature ) );
     }
 
     return results;
