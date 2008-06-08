@@ -1,5 +1,11 @@
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KMLCoordinatesTagHandler.cpp
+
+    fix coordinates to use the correct unit
+
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataFeature.h
     * src/lib/geodata/data/GeoDataPlacemark.h
     

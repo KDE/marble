@@ -27,6 +27,7 @@
 #include "KMLElementDictionary.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
+#include "global.h"
 
 using namespace GeoDataElementDictionary;
 
@@ -53,12 +54,12 @@ GeoNode* KMLcoordinatesTagHandler::parse( GeoParser& parser ) const
         
         if( coordinates.size() == 2 ) {
             // assume <coordinates>lat,lon</coordinates>
-            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( coordinates.at( 0 ).toDouble(), 
-                                                                  coordinates.at( 1 ).toDouble() );
+            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                                                  DEG2RAD * coordinates.at( 1 ).toDouble() );
         } else if( coordinates.size() == 3 ) {
             // assume <coordinates>lat,lon,alt</coordinates>
-            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( coordinates.at( 0 ).toDouble(), 
-                                                                  coordinates.at( 1 ).toDouble(), 
+            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                                                  DEG2RAD * coordinates.at( 1 ).toDouble(), 
                                                                   coordinates.at( 2 ).toDouble() );
         } else {
             // raise warning
