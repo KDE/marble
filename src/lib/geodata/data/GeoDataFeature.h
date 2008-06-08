@@ -45,6 +45,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
+    virtual bool isPlacemark() const { return false; }
 
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.

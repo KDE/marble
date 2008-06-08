@@ -1,3 +1,12 @@
+2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataFeature.h
+    * src/lib/geodata/data/GeoDataPlacemark.h
+    
+    add function to check more easy if Feature is a placemark
+    This has to be cleaned in future because a check with a
+    cast is more convenient
+    
 2008-06-08  Inge Wallin  <inge@lysator.liu.se>
 
 	* docs/Programmers-manual.txt: New file.  Chapter about

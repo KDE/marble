@@ -114,6 +114,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
 
+    virtual bool isPlacemark() const { return true; }
+
  private:
     Q_DISABLE_COPY( GeoDataPlacemark )
     GeoDataPlacemarkPrivate * const d;
