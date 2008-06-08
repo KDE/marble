@@ -1,0 +1,81 @@
+		      Marble Programmer's Manual
+		      ==========================
+
+
+This file describes how you can use parts of Marble in your own
+program, and how you can enhance Marble in various ways.  We will only
+give an overview; the full API must be discovered through the API
+documentation.
+
+
+I. The Marble Architecture
+--------------------------
+
+Marble is both an application and a set of classes that will easily
+let you visualize geodata in your own application.  In addition to
+that, Marble supports plugins that will let you add data to the map. 
+
+TODO: classes and their relationships
+
+TODO: Data (files, network)
+
+
+II. Using Marble in your own program
+------------------------------------
+
+
+As described above, the Marble package contains classes that let you
+use show geodata in your own application.
+
+
+II.1 Embedding the MarbleWidget in Your Application
+
+Embedding the MarbleWidget is by far the easiest way to use Marble in
+your own application.  You can use the MarbleWidget just like any
+other QWidget.  If you have installed the Qt Designer plugins, you can
+even use the Designer to insert the MarbleWidget into any .ui file.
+
+To let the user control the MarbleWidget, you need one of either
+MarbleControlBox or MarbleNavigator, both QWidgets.  The
+MarbleControlBox is a full-blown control widget that will let the user
+control all aspects of the MarbleWidget: map theme, projection,
+position, zoom. It also provides a search function for placemarks.
+
+The MarbleNavigator is a simpler control widget that only lets the
+user navigate (pan, zoom and home position). The other aspects of the
+widget will have to be controlled in some other way through the API.
+
+In addition to the control widgets, the user can also control the
+MarbleWidgets through keyboard or mouse events.  This is done through
+a class called MarbleWidgetInputHandler.  There is a default
+implementation of the base class called
+MarbleWidgetDefaultInputHandler, which provides the default
+behaviour.  However, the application programmer can define any
+MarbleWidgetInputHandler and register that in the widget through the
+setInputHandler() function.
+
+
+II.2 Using the MarbleMap class
+
+
+
+
+III. Enhancing Marble's Functionality
+-------------------------------------
+
+
+III.1 Adding New Maps 
+
+III.1.1 Marble Path
+
+III.1.2 DGML
+
+
+
+III.2 Writing Marble Plugins
+
+TODO: Layers
+
+TODO: GeoPainter
+
+TODO: 

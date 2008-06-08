@@ -1,3 +1,8 @@
+2008-06-08  Inge Wallin  <inge@lysator.liu.se>
+
+	* docs/Programmers-manual.txt: New file.  Chapter about
+	MarbleWidget done, the rest remaining
+
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataContainer.{h|cpp}
