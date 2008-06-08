@@ -57,7 +57,38 @@ setInputHandler() function.
 
 II.2 Using the MarbleMap class
 
+Programmers who cannot use a MarbleWidget can still use Marble. The
+way to do it is to use the more abstract class MarbleMap.  It
+represents the contents of the MarbleWidget, but without the widget
+part.  A MarbleMap can be manipulated in almost the same way as the
+MarbleWidget. In fact, a MarbleWidget can almost be seen as just a
+container around the MarbleMap.
 
+The most important function of the MarbleMap is paint() function.  It
+uses the GeoPainter to paint the map on any QPaintDevice, and a QRect
+which indicates the part of the image to paint.  This can be useful in
+situations where only part of the image has to be redrawn.
+
+The GeoPainter is a class derived from QPainter with some additional
+features: 
+
+ - It can be used to paint on the map using geo coordinates (lat,
+   lon).  The features that are drawn on the map will be painted in
+   any supported projection can map painted either geo projected or
+   not geo projected.  The former means that e.g. a rectangle that is
+   geo projected may be drawn with non-straight edges according to the
+   chosen projection.
+
+ - It can paint with different qualities (see class MapQuality), which
+   is used to speed things up e.g. during panning or zooming.
+
+ - It has some optimizations that are relevant when very large objects
+   are painted, which is not uncommon at high zoom levels.  These
+   optimizations are especially important when the objects in question
+   are outside the visible area or only partly visible. 
+
+For more uses of the GeoPainter class, see the chapter below on
+writing Marble plugins.
 
 
 III. Enhancing Marble's Functionality
