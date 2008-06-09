@@ -39,7 +39,7 @@
 #include "GPXElementDictionary.h"
 
 // KML support
-#include "KMLElementDictionary.h"
+#include "KmlElementDictionary.h"
 
 
 using namespace GeoDataElementDictionary;
