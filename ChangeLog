@@ -1,3 +1,11 @@
+2008-06-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/kml/KmlColorModeTagHandler.cpp
+
+    Fix compilation on Linux.
+
+2008-06-09  Patrick Spendrin    <ps_ml@gmx.de>
+
     * KmlAreaTagHandler.{h|cpp}
     * KmlColorModeTagHandler.{h|cpp}
     * KmlColorTagHandler.{h|cpp}
