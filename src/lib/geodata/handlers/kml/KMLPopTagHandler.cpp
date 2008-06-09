@@ -50,8 +50,9 @@ GeoNode* KMLpopTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         QString population = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataPlacemark>()->setPopulation( population.toLongLong() );
+        qint64 pop = population.toLongLong();
+        if( pop < 0 ) pop = 0;
+        parentItem.nodeAs<GeoDataPlacemark>()->setPopulation( pop );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_pop << "> containing: " << population
                  << " parent item name: " << parentItem.qualifiedName().first;

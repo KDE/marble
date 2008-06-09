@@ -46,7 +46,7 @@ GeoNode* KMLPointTagHandler::parse( GeoParser& parser ) const
     // FIXME: there needs to be a check that a coordinates subtag is contained
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.represents( kmlTag_Placemark ) ) {
+    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         // FIXME: KMLPoint can be contained in MultiGeometry as well
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""

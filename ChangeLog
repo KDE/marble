@@ -1,3 +1,12 @@
+2008-06-09  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/handlers/kml/KMLAreaTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPointTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KMLPopTagHandler.cpp
+    
+    minor fixes; make KMLPoint be applicable below non KML_Placemarks
+    as well
+
 2008-06-09  Inge Wallin  <inge@lysator.liu.se>
 
 	* docs/Programmers-manual.txt: Added chapter about MarbleMap and
