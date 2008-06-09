@@ -1,5 +1,16 @@
 2008-06-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/KmlFileViewItem.cpp:
+    * src/lib/KMLFileViewItem.h:
+    * src/lib/KmlFileViewItem.h:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/CMakeLists.txt:
+    * src/lib/KMLFileViewItem.cpp:
+
+    Rename class KMLFileViewItem -> KmlFileViewItem.
+
+2008-06-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/kml/KMLStyleTagHandler.cpp:
     * src/lib/geodata/handlers/kml/KMLRoleTagHandler.cpp:
     * src/lib/geodata/handlers/kml/KMLLabelStyleTagHandler.h:

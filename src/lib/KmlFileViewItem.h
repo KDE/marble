@@ -18,11 +18,11 @@
 class GeoDataDocument;
 class PlaceMarkManager;
 
-class KMLFileViewItem : public AbstractFileViewItem
+class KmlFileViewItem : public AbstractFileViewItem
 {
   public:
-    KMLFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document );
-    ~KMLFileViewItem();
+    KmlFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document );
+    ~KmlFileViewItem();
 
     /*
      * AbstractFileViewItem methods

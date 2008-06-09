@@ -39,7 +39,7 @@
 #include "gps/GpxFileModel.h"
 #include "GridMap.h"
 #include "HttpDownloadManager.h"
-#include "KMLFileViewItem.h"
+#include "KmlFileViewItem.h"
 #include "LayerManager.h"
 #include "MapThemeManager.h"
 #include "MarbleDirs.h"
@@ -639,7 +639,7 @@ void MarbleModelPrivate::notifyModelChanged()
 
 void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 {
-    AbstractFileViewItem* item = new KMLFileViewItem( *m_placemarkmanager,
+    AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
                                                       document );
 
     m_fileviewmodel->append( item );

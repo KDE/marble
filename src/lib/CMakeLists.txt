@@ -115,7 +115,7 @@ set(marblewidget_SRCS
     BoundingBox.cpp
     FileViewModel.cpp
     GpxFileViewItem.cpp
-    KMLFileViewItem.cpp
+    KmlFileViewItem.cpp
     gps/GpsTracking.cpp
     gps/GpsElement.cpp
     gps/Waypoint.cpp

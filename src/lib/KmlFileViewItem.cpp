@@ -9,41 +9,41 @@
 //
 
 
-#include "KMLFileViewItem.h"
+#include "KmlFileViewItem.h"
 #include "GeoDataDocument.h"    // In geodata/data/
 
-KMLFileViewItem::KMLFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document ) :
+KmlFileViewItem::KmlFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document ) :
     m_placeMarkManager( manager ),
     m_document( document )
 {
 }
 
-KMLFileViewItem::~KMLFileViewItem()
+KmlFileViewItem::~KmlFileViewItem()
 {
     //TODO
 }
 
-void KMLFileViewItem::saveFile()
+void KmlFileViewItem::saveFile()
 {
     //TODO
 }
 
-void KMLFileViewItem::closeFile()
+void KmlFileViewItem::closeFile()
 {
     //TODO
 }
 
-QVariant KMLFileViewItem::data() const
+QVariant KmlFileViewItem::data() const
 {
     return m_document.name();
 }
 
-bool KMLFileViewItem::isShown() const
+bool KmlFileViewItem::isShown() const
 {
     return m_document.isVisible();
 }
 
-void KMLFileViewItem::setShown( bool value )
+void KmlFileViewItem::setShown( bool value )
 {
     m_document.setVisible( value );
 }
