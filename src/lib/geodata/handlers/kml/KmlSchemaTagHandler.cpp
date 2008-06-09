@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Schema )
 
-KMLSchemaTagHandler::KMLSchemaTagHandler()
+KmlSchemaTagHandler::KmlSchemaTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLSchemaTagHandler::~KMLSchemaTagHandler()
+KmlSchemaTagHandler::~KmlSchemaTagHandler()
 {
 }
 
-GeoNode* KMLSchemaTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Schema ) );
 

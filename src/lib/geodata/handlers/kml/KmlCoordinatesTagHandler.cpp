@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( coordinates )
 
-KMLcoordinatesTagHandler::KMLcoordinatesTagHandler()
+KmlcoordinatesTagHandler::KmlcoordinatesTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLcoordinatesTagHandler::~KMLcoordinatesTagHandler()
+KmlcoordinatesTagHandler::~KmlcoordinatesTagHandler()
 {
 }
 
-GeoNode* KMLcoordinatesTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_coordinates ) );
 

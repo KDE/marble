@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( visibility )
 
-KMLvisibilityTagHandler::KMLvisibilityTagHandler()
+KmlvisibilityTagHandler::KmlvisibilityTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLvisibilityTagHandler::~KMLvisibilityTagHandler()
+KmlvisibilityTagHandler::~KmlvisibilityTagHandler()
 {
 }
 
-GeoNode* KMLvisibilityTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_visibility ) );
 

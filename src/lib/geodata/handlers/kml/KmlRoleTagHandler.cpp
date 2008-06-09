@@ -34,16 +34,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( role )
 
-KMLroleTagHandler::KMLroleTagHandler()
+KmlroleTagHandler::KmlroleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLroleTagHandler::~KMLroleTagHandler()
+KmlroleTagHandler::~KmlroleTagHandler()
 {
 }
 
-GeoNode* KMLroleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_role ) );
 

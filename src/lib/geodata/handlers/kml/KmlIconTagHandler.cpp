@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Icon )
 
-KMLIconTagHandler::KMLIconTagHandler()
+KmlIconTagHandler::KmlIconTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLIconTagHandler::~KMLIconTagHandler()
+KmlIconTagHandler::~KmlIconTagHandler()
 {
 }
 
-GeoNode* KMLIconTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Icon ) );
 

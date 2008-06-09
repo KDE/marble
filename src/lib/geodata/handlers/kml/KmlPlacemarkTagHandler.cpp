@@ -32,16 +32,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Placemark )
 
-KMLPlacemarkTagHandler::KMLPlacemarkTagHandler()
+KmlPlacemarkTagHandler::KmlPlacemarkTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLPlacemarkTagHandler::~KMLPlacemarkTagHandler()
+KmlPlacemarkTagHandler::~KmlPlacemarkTagHandler()
 {
 }
 
-GeoNode* KMLPlacemarkTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Placemark ) );
 

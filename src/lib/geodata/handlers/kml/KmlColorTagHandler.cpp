@@ -32,16 +32,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( color )
 
-KMLcolorTagHandler::KMLcolorTagHandler()
+KmlcolorTagHandler::KmlcolorTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLcolorTagHandler::~KMLcolorTagHandler()
+KmlcolorTagHandler::~KmlcolorTagHandler()
 {
 }
 
-GeoNode* KMLcolorTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_color ) );
 

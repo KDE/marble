@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( outline )
 
-KMLoutlineTagHandler::KMLoutlineTagHandler()
+KmloutlineTagHandler::KmloutlineTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLoutlineTagHandler::~KMLoutlineTagHandler()
+KmloutlineTagHandler::~KmloutlineTagHandler()
 {
 }
 
-GeoNode* KMLoutlineTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmloutlineTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outline ) );
 

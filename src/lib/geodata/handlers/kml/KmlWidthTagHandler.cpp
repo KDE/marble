@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( width )
 
-KMLwidthTagHandler::KMLwidthTagHandler()
+KmlwidthTagHandler::KmlwidthTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLwidthTagHandler::~KMLwidthTagHandler()
+KmlwidthTagHandler::~KmlwidthTagHandler()
 {
 }
 
-GeoNode* KMLwidthTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlwidthTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_width ) );
 

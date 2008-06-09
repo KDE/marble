@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( PolyStyle )
 
-KMLPolyStyleTagHandler::KMLPolyStyleTagHandler()
+KmlPolyStyleTagHandler::KmlPolyStyleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLPolyStyleTagHandler::~KMLPolyStyleTagHandler()
+KmlPolyStyleTagHandler::~KmlPolyStyleTagHandler()
 {
 }
 
-GeoNode* KMLPolyStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlPolyStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_PolyStyle ) );
 

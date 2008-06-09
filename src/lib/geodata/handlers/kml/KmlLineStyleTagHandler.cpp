@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LineStyle )
 
-KMLLineStyleTagHandler::KMLLineStyleTagHandler()
+KmlLineStyleTagHandler::KmlLineStyleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLLineStyleTagHandler::~KMLLineStyleTagHandler()
+KmlLineStyleTagHandler::~KmlLineStyleTagHandler()
 {
 }
 
-GeoNode* KMLLineStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineStyle ) );
 

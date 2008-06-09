@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlColorModeTagHandler.h"
+#include "KmlcolorModeTagHandler.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( colorMode )
 
-KMLcolorModeTagHandler::KMLcolorModeTagHandler()
+KmlcolorModeTagHandler::KmlcolorModeTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLcolorModeTagHandler::~KMLcolorModeTagHandler()
+KmlcolorModeTagHandler::~KmlcolorModeTagHandler()
 {
 }
 
-GeoNode* KMLcolorModeTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlcolorModeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_colorMode ) );
 

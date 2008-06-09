@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( countrycode )
 
-KMLcountrycodeTagHandler::KMLcountrycodeTagHandler()
+KmlcountrycodeTagHandler::KmlcountrycodeTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLcountrycodeTagHandler::~KMLcountrycodeTagHandler()
+KmlcountrycodeTagHandler::~KmlcountrycodeTagHandler()
 {
 }
 
-GeoNode* KMLcountrycodeTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlcountrycodeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_countrycode ) );
 

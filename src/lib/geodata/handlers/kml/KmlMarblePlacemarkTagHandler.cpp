@@ -34,16 +34,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( MarblePlacemark )
 
-KMLMarblePlacemarkTagHandler::KMLMarblePlacemarkTagHandler()
+KmlMarblePlacemarkTagHandler::KmlMarblePlacemarkTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLMarblePlacemarkTagHandler::~KMLMarblePlacemarkTagHandler()
+KmlMarblePlacemarkTagHandler::~KmlMarblePlacemarkTagHandler()
 {
 }
 
-GeoNode* KMLMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MarblePlacemark ) );
 

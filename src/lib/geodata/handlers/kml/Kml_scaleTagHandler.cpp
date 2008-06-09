@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-// be aware that there is another Tag called Scale which uses the name KMLScaleTagHandler.h
-// as it is impossible to use the name KMLscaleTagHandler then, use an underscore
+// be aware that there is another Tag called Scale which uses the name KmlscaleTagHandler.h
+// as it is impossible to use the name KmlscaleTagHandler then, use an underscore
 // to mark the lower case variant
 
 #include "Kml_scaleTagHandler.h"
@@ -36,16 +36,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( scale )
 
-KMLscaleTagHandler::KMLscaleTagHandler()
+KmlscaleTagHandler::KmlscaleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLscaleTagHandler::~KMLscaleTagHandler()
+KmlscaleTagHandler::~KmlscaleTagHandler()
 {
 }
 
-GeoNode* KMLscaleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_scale ) );
 

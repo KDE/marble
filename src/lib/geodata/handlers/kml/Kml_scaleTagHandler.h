@@ -19,21 +19,21 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMLscaleTagHandler_h
-#define KMLscaleTagHandler_h
+#ifndef KmlscaleTagHandler_h
+#define KmlscaleTagHandler_h
 
-// be aware that there is another Tag called Scale which uses the name KMLScaleTagHandler.h
-// as it is impossible to use the name KMLscaleTagHandler then, use an underscore
+// be aware that there is another Tag called Scale which uses the name KmlscaleTagHandler.h
+// as it is impossible to use the name KmlscaleTagHandler then, use an underscore
 // to mark the lower case variant
 
 #include "GeoTagHandler.h"
 
-class KMLscaleTagHandler : public GeoTagHandler {
+class KmlscaleTagHandler : public GeoTagHandler {
 public:
-    KMLscaleTagHandler();
-    virtual ~KMLscaleTagHandler();
+    KmlscaleTagHandler();
+    virtual ~KmlscaleTagHandler();
 
     virtual GeoNode* parse(GeoParser&) const;
 };
 
-#endif // KMLscaleTagHandler_h
+#endif // KmlscaleTagHandler_h

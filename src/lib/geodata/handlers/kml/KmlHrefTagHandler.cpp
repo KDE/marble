@@ -32,16 +32,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( href )
 
-KMLhrefTagHandler::KMLhrefTagHandler()
+KmlhrefTagHandler::KmlhrefTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLhrefTagHandler::~KMLhrefTagHandler()
+KmlhrefTagHandler::~KmlhrefTagHandler()
 {
 }
 
-GeoNode* KMLhrefTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_href ) );
 

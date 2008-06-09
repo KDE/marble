@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Point )
 
-KMLPointTagHandler::KMLPointTagHandler()
+KmlPointTagHandler::KmlPointTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLPointTagHandler::~KMLPointTagHandler()
+KmlPointTagHandler::~KmlPointTagHandler()
 {
 }
 
-GeoNode* KMLPointTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Point ) );
     // FIXME: there needs to be a check that a coordinates subtag is contained

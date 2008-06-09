@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( area )
 
-KMLareaTagHandler::KMLareaTagHandler()
+KmlareaTagHandler::KmlareaTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLareaTagHandler::~KMLareaTagHandler()
+KmlareaTagHandler::~KmlareaTagHandler()
 {
 }
 
-GeoNode* KMLareaTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_area ) );
 

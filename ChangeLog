@@ -1,3 +1,39 @@
+    * KmlAreaTagHandler.{h|cpp}
+    * KmlColorModeTagHandler.{h|cpp}
+    * KmlColorTagHandler.{h|cpp}
+    * KmlCoordinatesTagHandler.{h|cpp}
+    * KmlCountryNameCodeTagHandler.{h|cpp}
+    * KmlCountrycodeTagHandler.{h|cpp}
+    * KmlDescriptionTagHandler.{h|cpp}
+    * KmlDocumentTagHandler.{h|cpp}
+    * KmlFillTagHandler.{h|cpp}
+    * KmlFolderTagHandler.{h|cpp}
+    * KmlHeadingTagHandler.{h|cpp}
+    * KmlHotSpotTagHandler.{h|cpp}
+    * KmlHrefTagHandler.{h|cpp}
+    * KmlIconStyleTagHandler.{h|cpp}
+    * KmlIconTagHandler.{h|cpp}
+    * KmlLabelStyleTagHandler.{h|cpp}
+    * KmlLineStyleTagHandler.{h|cpp}
+    * KmlMarblePlacemarkTagHandler.{h|cpp}
+    * KmlNameTagHandler.{h|cpp}
+    * KmlOpenTagHandler.{h|cpp}
+    * KmlOutlineTagHandler.{h|cpp}
+    * KmlPlacemarkTagHandler.{h|cpp}
+    * KmlPointTagHandler.{h|cpp}
+    * KmlPolyStyleTagHandler.{h|cpp}
+    * KmlPopTagHandler.{h|cpp}
+    * KmlRoleTagHandler.{h|cpp}
+    * KmlSchemaTagHandler.{h|cpp}
+    * KmlSimpleFieldTagHandler.{h|cpp}
+    * KmlStyleTagHandler.{h|cpp}
+    * KmlVisibilityTagHandler.{h|cpp}
+    * KmlWidthTagHandler.{h|cpp}
+    * Kml_scaleTagHandler.{h|cpp}
+    * KmlElementDictionary.h
+    
+    renaming classes as well
+
 2008-06-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/KmlFileViewItem.cpp:

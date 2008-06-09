@@ -32,16 +32,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( hotSpot )
 
-KMLhotSpotTagHandler::KMLhotSpotTagHandler()
+KmlhotSpotTagHandler::KmlhotSpotTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLhotSpotTagHandler::~KMLhotSpotTagHandler()
+KmlhotSpotTagHandler::~KmlhotSpotTagHandler()
 {
 }
 
-GeoNode* KMLhotSpotTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_hotSpot ) );
 

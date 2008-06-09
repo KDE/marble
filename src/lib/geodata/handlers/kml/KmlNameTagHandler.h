@@ -19,17 +19,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMLnameTagHandler_h
-#define KMLnameTagHandler_h
+#ifndef KmlnameTagHandler_h
+#define KmlnameTagHandler_h
 
 #include "GeoTagHandler.h"
 
-class KMLnameTagHandler : public GeoTagHandler {
+class KmlnameTagHandler : public GeoTagHandler {
 public:
-    KMLnameTagHandler();
-    virtual ~KMLnameTagHandler();
+    KmlnameTagHandler();
+    virtual ~KmlnameTagHandler();
 
     virtual GeoNode* parse(GeoParser&) const;
 };
 
-#endif // KMLnameTagHandler_h
+#endif // KmlnameTagHandler_h

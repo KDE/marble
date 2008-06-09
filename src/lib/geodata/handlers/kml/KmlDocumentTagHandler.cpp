@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER(Document)
 
-KMLDocumentTagHandler::KMLDocumentTagHandler()
+KmlDocumentTagHandler::KmlDocumentTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLDocumentTagHandler::~KMLDocumentTagHandler()
+KmlDocumentTagHandler::~KmlDocumentTagHandler()
 {
 }
 
-GeoNode* KMLDocumentTagHandler::parse(GeoParser& parser) const
+GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Document));
 

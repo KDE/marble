@@ -31,16 +31,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LabelStyle )
 
-KMLLabelStyleTagHandler::KMLLabelStyleTagHandler()
+KmlLabelStyleTagHandler::KmlLabelStyleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLLabelStyleTagHandler::~KMLLabelStyleTagHandler()
+KmlLabelStyleTagHandler::~KmlLabelStyleTagHandler()
 {
 }
 
-GeoNode* KMLLabelStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LabelStyle ) );
 

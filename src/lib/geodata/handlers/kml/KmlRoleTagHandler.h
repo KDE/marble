@@ -18,17 +18,17 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-#ifndef KMLroleTagHandler_h
-#define KMLroleTagHandler_h
+#ifndef KmlroleTagHandler_h
+#define KmlroleTagHandler_h
 
 #include "GeoTagHandler.h"
 
-class KMLroleTagHandler : public GeoTagHandler {
+class KmlroleTagHandler : public GeoTagHandler {
 public:
-    KMLroleTagHandler();
-    virtual ~KMLroleTagHandler();
+    KmlroleTagHandler();
+    virtual ~KmlroleTagHandler();
 
     virtual GeoNode* parse(GeoParser&) const;
 };
 
-#endif // KMLroleTagHandler_h
+#endif // KmlroleTagHandler_h

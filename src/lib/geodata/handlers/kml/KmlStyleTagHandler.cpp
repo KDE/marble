@@ -32,16 +32,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Style )
 
-KMLStyleTagHandler::KMLStyleTagHandler()
+KmlStyleTagHandler::KmlStyleTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLStyleTagHandler::~KMLStyleTagHandler()
+KmlStyleTagHandler::~KmlStyleTagHandler()
 {
 }
 
-GeoNode* KMLStyleTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Style ) );
 

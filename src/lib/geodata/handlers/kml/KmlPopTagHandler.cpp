@@ -33,16 +33,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( pop )
 
-KMLpopTagHandler::KMLpopTagHandler()
+KmlpopTagHandler::KmlpopTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLpopTagHandler::~KMLpopTagHandler()
+KmlpopTagHandler::~KmlpopTagHandler()
 {
 }
 
-GeoNode* KMLpopTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlpopTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_pop ) );
 
