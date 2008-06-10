@@ -13,7 +13,7 @@
 #define PLUGINMANAGER_H
 
 #include <QtCore/QObject>
-
+#include "marble_export.h"
 class MarbleLayerInterface;
 
 /**
@@ -21,7 +21,7 @@ class MarbleLayerInterface;
  *
  */
 
-class PluginManager : public QObject
+class MARBLE_EXPORT PluginManager : public QObject
 {
     Q_OBJECT
 
