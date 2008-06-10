@@ -51,7 +51,7 @@ public:
   private:
      QList <panoramioDataStructure> parsedJsonOutput;
      panoramioDataStructure dataStorage;   
-     //   QScriptEngine myEngine;    //this is Line where i am getting ERROR
+     QScriptEngine myEngine;    //this is Line where i am getting ERROR
     
   };
 
