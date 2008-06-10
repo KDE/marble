@@ -168,7 +168,8 @@ if (QTONLY)
       ${QT_QTGUI_LIBRARY} 
       ${QT_QTXML_LIBRARY} 
       ${QT_QTSVG_LIBRARY} 
-      ${QT_QTNETWORK_LIBRARY} 
+      ${QT_QTNETWORK_LIBRARY}
+      ${QT_QTSCRIPT_LIBRARY} 
       ${QT_QTMAIN_LIBRARY} 
       marblewidget)
 else (QTONLY)

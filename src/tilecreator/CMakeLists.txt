@@ -68,6 +68,6 @@ if( TILES_AT_COMPILETIME )
 #    MARBLE_COMPILE_TILES(bluemarble false)
 #    MARBLE_COMPILE_TILES(citylights false)
 #    MARBLE_COMPILE_TILES(plain false)
-    MARBLE_COMPILE_TILES(srtm true)
+ #   MARBLE_COMPILE_TILES(srtm true) #changed by shanky
     
 endif( TILES_AT_COMPILETIME )

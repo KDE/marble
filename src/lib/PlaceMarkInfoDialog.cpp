@@ -37,14 +37,17 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
 
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
-
+    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>() hold the coordinate of cuurent placemark	
     setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
-
+//  The page to shown in placemark is emitted here ..
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
              this,                SLOT( showMessage( QString) ) );
     connect( this,                SIGNAL( source( QString ) ),
-             m_pWikipediaBrowser, SLOT( setSource( QString ) ) );
-
+             m_pWikipediaBrowser, SLOT( setSource( QString ) ) );//for wikipedia
+    connect( this,                SIGNAL( panoramioSource( QString ) ),
+             m_pPanoramioBrowser, SLOT( getPanoramio(QString ) ) );//for panoramio
+    /*connect( m_pPanoramioBrowser, SIGNAL( statusMessage( QString ) ),
+             this,                SLOT( showMessage( QString) ) );*/
     showContent();
 
         QTextFrameFormat format = description_val_browser->document()->rootFrame()->frameFormat();
@@ -194,6 +197,7 @@ void PlaceMarkInfoDialog::showContent()
     }
 
     emit source( QString("wiki/%1").arg( m_index.data().toString() ) );
+    emit panoramioSource(  m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().toString() );  
 }
 
 

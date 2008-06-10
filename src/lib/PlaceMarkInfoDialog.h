@@ -35,7 +35,8 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
 
  Q_SIGNALS:
     void source( QString );
-
+    void panoramioSource( QString );//emits coordinates for Panoramio
+    
  public Q_SLOTS:
     void setFlagLabel();
     void showMessage( QString text )

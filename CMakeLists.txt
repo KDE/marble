@@ -152,12 +152,15 @@ endif(APPLE)
 
 ####################################################
 # Specific options for if building with Qt or kde4 libs
+
 if(QTONLY)
   find_package(Qt4 REQUIRED)
   include( ${QT_USE_FILE} )
   set( QT_USE_QTXML      TRUE )
   set( QT_USE_QTNETWORK  TRUE )
   set( QT_USE_QTTEST     TRUE )
+  set( QT_USE_QTSCRIPT   TRUE )
+  
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)
@@ -167,7 +170,7 @@ else(QTONLY)
   include (KDE4Defaults)
   include (MacroLibrary)
 endif (QTONLY)
-
+message( "${QT_QTCORE_LIBRARY}" )
 #############################################################
 # Create marblesvnversion.h
 # see http://public.kitware.com/pipermail/cmake/2006-July/010299.html
