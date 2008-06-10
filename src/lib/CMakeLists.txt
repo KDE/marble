@@ -164,11 +164,6 @@ else (QTONLY)
   kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
 endif (QTONLY)
 
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
-
 
 # link with release version of Qt libs
 
@@ -284,3 +279,7 @@ else (APPLE AND QTONLY)
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
+
+if( BUILD_MARBLE_TESTS )
+add_subdirectory( tests )
+endif( BUILD_MARBLE_TESTS )

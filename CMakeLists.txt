@@ -10,6 +10,18 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 
 ####################################################
+# build unit tests
+if( QTONLY )
+    option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " OFF )
+    if( BUILD_MARBLE_TESTS )
+        enable_testing()
+    endif( BUILD_MARBLE_TESTS )
+else( QTONLY )
+    # for KDE builds this gets set in the kdeedu CMakeLists.txt
+    set( BUILD_MARBLE_TESTS ON )
+endif( QTONLY )
+
+####################################################
 # User configurable options
 if(KDE4_FOUND)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
