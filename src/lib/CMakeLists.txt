@@ -281,5 +281,5 @@ else (APPLE AND QTONLY)
 endif (APPLE AND QTONLY)
 
 if( BUILD_MARBLE_TESTS )
-#add_subdirectory( tests )
+add_subdirectory( tests )
 endif( BUILD_MARBLE_TESTS )

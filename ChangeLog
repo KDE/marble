@@ -2,6 +2,12 @@
 
     * src/lib/CMakeLists.txt:
 
+    Missing export was fixed by mlaurent, so revert the last change.
+
+2008-06-10  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/CMakeLists.txt:
+
     Disable making of src/lib/tests because of link failure on linux.
 
 2008-06-09  Patrick Spendrin    <ps_ml@gmx.de>
