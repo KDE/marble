@@ -1,4 +1,3 @@
-
 PROJECT(CompassFloatItem)
 
 INCLUDE_DIRECTORIES(
@@ -8,20 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(compass_SRCS
-           CompassFloatItem.cpp
-)
-MESSAGE( STATUS ${compass_SRCS} )
-
-set(compass_HDRS
-           CompassFloatItem.h
-)
-MESSAGE( STATUS ${compass_HDRS} )
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
+set( compass_SRCS CompassFloatItem.cpp )
+set( compass_HDRS CompassFloatItem.h )
 
 if (QTONLY)
   qt4_automoc(${compass_SRCS})

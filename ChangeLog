@@ -1,3 +1,15 @@
+2008-06-09  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/plugins/designer/marblewidget/CMakeLists.txt
+    * src/plugins/designer/navigator/CMakeLists.txt
+    * src/plugins/marble/compass/CMakeLists.txt
+    * src/plugins/marble/overviewmap/CMakeLists.txt
+    * src/plugins/marble/satellites/CMakeLists.txt
+    * src/plugins/marble/stars/CMakeLists.txt
+    * src/plugins/marble/test/CMakeLists.txt
+    
+    fix some issues in build system
+
 2008-06-09  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/kml/KmlColorModeTagHandler.cpp

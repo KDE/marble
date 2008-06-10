@@ -1,4 +1,3 @@
-
 PROJECT(SatellitesPlugin)
 
 INCLUDE_DIRECTORIES(
@@ -8,20 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(satellites_SRCS
-           SatellitesPlugin.cpp
-)
-MESSAGE( STATUS ${satellites_SRCS} )
-
-set(satellites_HDRS
-           SatellitesPlugin.h
-)
-MESSAGE( STATUS ${satellites_HDRS} )
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
+set( satellites_SRCS SatellitesPlugin.cpp )
+set( satellites_HDRS SatellitesPlugin.h )
 
 if (QTONLY)
   qt4_automoc(${satellites_SRCS})

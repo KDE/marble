@@ -1,4 +1,3 @@
-
 PROJECT(MarbleNavigatorPlugin)
 
 INCLUDE_DIRECTORIES(
@@ -9,22 +8,10 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(marblenavigator_SRCS
-           MarbleNavigatorPlugin.cpp
-)
-MESSAGE( STATUS ${marblenavigator_SRCS} )
-
-set(marblenavigator_HDRS
-           MarbleNavigatorPlugin.h
-)
-MESSAGE( STATUS ${marblenavigator_HDRS} )
+set( marblenavigator_SRCS MarbleNavigatorPlugin.cpp )
+set( marblenavigator_HDRS MarbleNavigatorPlugin.h )
 
 qt4_add_resources(marblenavigator_SRCS ../../../marble.qrc)
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
 
 if (QTONLY)
   qt4_automoc(${marblenavigator_SRCS})

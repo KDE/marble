@@ -1,4 +1,3 @@
-
 PROJECT(MarbleStarsPlugin)
 
 INCLUDE_DIRECTORIES(
@@ -8,20 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(marblestars_SRCS
-           MarbleStarsPlugin.cpp
-)
-MESSAGE( STATUS ${marblestars_SRCS} )
-
-set(marblestars_HDRS
-           MarbleStarsPlugin.h
-)
-MESSAGE( STATUS ${marblestars_HDRS} )
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
+set( marblestars_SRCS MarbleStarsPlugin.cpp )
+set( marblestars_HDRS MarbleStarsPlugin.h )
 
 if (QTONLY)
   qt4_automoc(${marblestars_SRCS})

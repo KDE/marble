@@ -1,4 +1,3 @@
-
 PROJECT(MarbleOverviewMap)
 
 INCLUDE_DIRECTORIES(
@@ -8,20 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(marbleoverviewmap_SRCS
-           MarbleOverviewMap.cpp
-)
-MESSAGE( STATUS ${marbleoverviewmap_SRCS} )
-
-set(marbleoverviewmap_HDRS
-           MarbleOverviewMap.h
-)
-MESSAGE( STATUS ${marbleoverviewmap_HDRS} )
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
+set( marbleoverviewmap_SRCS MarbleOverviewMap.cpp )
+set( marbleoverviewmap_HDRS MarbleOverviewMap.h )
 
 if (QTONLY)
   qt4_automoc(${marbleoverviewmap_SRCS})

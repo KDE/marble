@@ -1,4 +1,3 @@
-
 PROJECT(MarbleTestPlugin)
 
 INCLUDE_DIRECTORIES(
@@ -8,20 +7,8 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set(marbletest_SRCS
-           MarbleTestPlugin.cpp
-)
-MESSAGE( STATUS ${marbletest_SRCS} )
-
-set(marbletest_HDRS
-           MarbleTestPlugin.h
-)
-MESSAGE( STATUS ${marbletest_HDRS} )
-
-if(WIN32)
-  # distinguish between debug and release plugin
-  SET(CMAKE_DEBUG_POSTFIX "d")
-endif(WIN32)
+set( marbletest_SRCS MarbleTestPlugin.cpp )
+set( marbletest_HDRS MarbleTestPlugin.h )
 
 if (QTONLY)
   qt4_automoc(${marbletest_SRCS})

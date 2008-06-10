@@ -199,6 +199,13 @@ IF (CMAKE_BUILD_TYPE MATCHES Debug)
 ENDIF (CMAKE_BUILD_TYPE MATCHES Debug)
 
 ####################################################
+# on Win32 set the debug postfix
+if(WIN32)
+  # distinguish between debug and release plugin
+  SET(CMAKE_DEBUG_POSTFIX "d")
+endif(WIN32)
+
+####################################################
 # Descend into subdirectories
 add_subdirectory(src)
 add_subdirectory(data)
