@@ -39,8 +39,8 @@ MarbleDirs::MarbleDirs()
 
 QString MarbleDirs::path( const QString& relativePath )
 { 
-    QString  localpath = localPath() + QDir::separator() + relativePath;	// local path
-    QString  systempath  = systemPath() + QDir::separator() + relativePath;	// system path
+    QString  localpath = localPath() + '/' + relativePath;	// local path
+    QString  systempath  = systemPath() + '/' + relativePath;	// system path
 
 
     QString fullpath = systempath;
@@ -203,7 +203,7 @@ if ( !runTimeMarblePluginPath.isEmpty() )
 #if defined(QTONLY)
                      + QLatin1String( "/plugins" )
 #else
-                     + QLatin1String( "/../lib/marble/plugins" )
+                     + QLatin1String( "/../lib/kde4/plugins/marble" )
 #endif
                      ).canonicalPath();
 }
