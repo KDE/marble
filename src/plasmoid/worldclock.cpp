@@ -42,6 +42,10 @@
 #include "ViewParams.h"
 #include "GeoPainter.h"
 
+//blah compile errors
+#include "ViewportParams.h"
+#include "AbstractProjection.h"
+
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
     m_map(0),
@@ -373,7 +377,8 @@ void WorldClock::paintInterface(QPainter *p,
     p->setRenderHint( QPainter::Antialiasing , true );
     QPixmap pixmap( m_lastRect.size() );
     pixmap.fill( Qt::transparent );
-    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), false );
+    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), 
+                   Marble::Normal, true );
     m_map->paint(gp, m_lastRect);
     p->drawPixmap( 0, 0, pixmap );
 

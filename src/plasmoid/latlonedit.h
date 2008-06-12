@@ -29,7 +29,7 @@ class QComboBox;
 class QHBoxLayout;
 class QLabel;
 
-#include <marble/global.h>
+#include "global.h"
 
 class /* QDESIGNER_WIDGET_EXPORT */ LatLonEdit : public QWidget
 {

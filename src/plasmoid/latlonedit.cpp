@@ -29,7 +29,7 @@
 
 #include <cmath>
 
-#include <marble/global.h>
+#include "global.h"
 
 LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
 	m_layout(0),
