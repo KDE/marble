@@ -1,5 +1,11 @@
 2008-06-13  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/PluginManager.cpp
+
+    make the output of the pluginmanager usable
+
+2008-06-13  Patrick Spendrin    <ps_ml@gmx.de>
+
     * CMakeLists.txt
     * MarbleMacros.cmake
     * src/plugins/designer/marblewidget/CMakeLists.txt

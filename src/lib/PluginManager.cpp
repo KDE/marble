@@ -59,7 +59,8 @@ void PluginManager::loadPlugins()
         }
         else
         {
-            qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin";
+            qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
+            qDebug() << loader.errorString();
         }
     }
 }
