@@ -8,17 +8,5 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set( marbleoverviewmap_SRCS MarbleOverviewMap.cpp )
-set( marbleoverviewmap_HDRS MarbleOverviewMap.h )
 
-if (QTONLY)
-  qt4_automoc(${marbleoverviewmap_SRCS})
-  add_library(MarbleOverviewMap SHARED ${marbleoverviewmap_SRCS})
-  target_link_libraries (MarbleOverviewMap ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
-  install(TARGETS MarbleOverviewMap DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH})
-else (QTONLY)
-  kde4_add_library(MarbleOverviewMap SHARED ${marbleoverviewmap_SRCS})
-  target_link_libraries (MarbleOverviewMap ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
-  install(TARGETS MarbleOverviewMap DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH})
-endif (QTONLY)
-
-set_target_properties(MarbleOverviewMap PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE  SKIP_BUILD_RPATH TRUE BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/${LIB_SUFFIX})
+marble_add_plugin( MarbleOverviewMap ${marbleoverviewmap_SRCS} )

@@ -8,17 +8,5 @@ INCLUDE_DIRECTORIES(
 INCLUDE(${QT_USE_FILE})
 
 set( marblestars_SRCS MarbleStarsPlugin.cpp )
-set( marblestars_HDRS MarbleStarsPlugin.h )
 
-if (QTONLY)
-  qt4_automoc(${marblestars_SRCS})
-  add_library(MarbleStarsPlugin SHARED ${marblestars_SRCS})
-  target_link_libraries (MarbleStarsPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
-  install(TARGETS MarbleStarsPlugin DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH})
-else (QTONLY)
-  kde4_add_library(MarbleStarsPlugin SHARED ${marblestars_SRCS})
-  target_link_libraries (MarbleStarsPlugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY} marblewidget)
-  install(TARGETS MarbleStarsPlugin DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH})
-endif (QTONLY)
-
-set_target_properties(MarbleStarsPlugin PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE  SKIP_BUILD_RPATH TRUE BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/${LIB_SUFFIX})
+marble_add_plugin( MarbleStarsPlugin ${marblestars_SRCS} )

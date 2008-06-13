@@ -1,3 +1,17 @@
+2008-06-13  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * CMakeLists.txt
+    * MarbleMacros.cmake
+    * src/plugins/designer/marblewidget/CMakeLists.txt
+    * src/plugins/designer/navigator/CMakeLists.txt
+    * src/plugins/marble/compass/CMakeLists.txt
+    * src/plugins/marble/overviewmap/CMakeLists.txt
+    * src/plugins/marble/satellites/CMakeLists.txt
+    * src/plugins/marble/stars/CMakeLists.txt
+    * src/plugins/marble/test/CMakeLists.txt
+
+    add new cmake macros to make the building of marble plugins easier
+
 2008-06-10  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/CMakeLists.txt:

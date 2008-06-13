@@ -221,6 +221,10 @@ if(WIN32)
 endif(WIN32)
 
 ####################################################
+# add cmake macros
+include( MarbleMacros )
+
+####################################################
 # Descend into subdirectories
 add_subdirectory(src)
 add_subdirectory(data)
