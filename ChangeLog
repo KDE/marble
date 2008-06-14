@@ -1,9 +1,16 @@
+2008-06-14 Shashank Singh <shashank.personal@gmail.com>
+    * src/lib/jsonparser.h
+    * src/lib/jsonparser.cpp
+    * src/lib/TinyWebBrowser.h
+    * src/lib/TinyWebBrowser.h
+
 2008-06-13  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/tests/CMakeLists.txt
 
     fix linkage of QTONLY version
-
+  
+   
 2008-06-13  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/PluginManager.cpp
@@ -24,6 +31,15 @@
 
     add new cmake macros to make the building of marble plugins easier
 
+2008-06-10  Shashank Singh <shashank.personal@gmail.com>
+    * CMakeLists.txt
+    * src/lib/CmakeLists.txt
+    * added src/lib/jsonparser.h
+    * added src/lib/jsonparser.cpp
+    * changed PLaceMarkinfoDialog.cpp
+    * changed TinyWebBrowser.cpp
+    * changed TinyWebBrowser.h
+    * added a tab named Panoramio in Ui PLaceMarkinfoDialog
 2008-06-10  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/CMakeLists.txt:

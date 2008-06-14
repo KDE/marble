@@ -59,7 +59,7 @@ class TinyWebBrowser : public QTextBrowser
     HttpDownloadManager *m_downloadManager;
     QString         m_source;
     QString baseUrlForPanoramioQuery;
-    JsonParser panoramioJsonParser;   
+    jsonParser panoramioJsonParser;   
 };
 
 

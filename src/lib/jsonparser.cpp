@@ -1,49 +1,101 @@
-//
-// C++ Implementation: jsonparser
-//
-// Description:
-//
-//
-// Author:  <Shashank Singh>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
 #include "jsonparser.h"
 
-JsonParser::JsonParser()
+jsonParser::jsonParser()
+{}
+
+
+jsonParser::~jsonParser()
+{}
+
+panoramioDataStructure jsonParser::parseObjectOnPosition ( const QString &content , int requiredObjectPosition )
 {
+    QString temp="var myJSONObject =" + content;
+    myEngine.evaluate ( temp );
+
+    dataStorage.count = myEngine.evaluate ( "return myJSONObject.count;" ).toInteger();
     
+    dataStorage.height = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                         +QString::number ( requiredObjectPosition )
+                         +QString ( "].height;" ) ) .toInteger();
+    dataStorage.latitude = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                           +QString::number ( requiredObjectPosition )
+                           +QString ( "].latitude;" ) ).toInteger();
+    dataStorage.longitude = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                            +QString::number ( requiredObjectPosition )
+                            +QString ( "].longitude;" ) ).toInteger();
+    dataStorage.owner_id = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                           +QString::number ( requiredObjectPosition )
+                           +QString ( "].owner_id;" ) ).toInteger();
+    dataStorage.owner_name = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                             +QString::number ( requiredObjectPosition )
+                             +QString ( "].owner_name;" ) ).toString();
+    dataStorage.owner_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                            +QString::number ( requiredObjectPosition )
+                            +QString ( "].owner_url;" ) ).toString();
+    dataStorage.photo_id = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                           +QString::number ( requiredObjectPosition )
+                           +QString ( "].photo_id;" ) ).toInteger();
+    dataStorage.photo_title = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                              +QString::number ( requiredObjectPosition )
+                              +QString ( "].photo_title;" ) ).toString();
+    dataStorage.photo_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                            +QString::number ( requiredObjectPosition )
+                            +QString ( "].photo_url;" ) ).toString();
+    dataStorage.upload_date = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                              +QString::number ( requiredObjectPosition )
+                              +QString ( "].upload_date;" ) ).toString();
+    dataStorage.width  = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                         +QString::number ( requiredObjectPosition )
+                         +QString ( "].width;" ) ).toInteger();
+                               
+return dataStorage;
 }
 
-
-JsonParser::~JsonParser()
+QList <panoramioDataStructure> jsonParser::parseAllObjects ( const QString &content ,int numberOfObjects )
 {
- 
-}
+    QString temp="var myJSONObject =" + content;
+    int iterator = 0;//the count starts fom one
 
-/*!
-    \fn JsonParser::parse(const QString &content)
- */
-QList <panoramioDataStructure> JsonParser::parse(const QString &content)
-{
+    myEngine.evaluate ( temp );
+    while ( ( iterator ) < numberOfObjects )
+    {
 
-    QString temp="var myJSONObject = " + content;
-
-//     myEngine.evaluate(temp);
-//     dataStorage.count = myEngine.evaluate("return myJSONObject.count;").toInteger();
-//     dataStorage.photo_url = myEngine.evaluate("return myJSONObject.photos[0].photo_url;").toString();
-//     dataStorage.height = myEngine.evaluate("return myJSONObject.photos[0].height;").toString();
-//     dataStorage.latitude = myEngine.evaluate("return myJSONObject.photos[0].latitude;").toString();
-//     dataStorage.longitude = myEngine.evaluate("return myJSONObject.photos[0].longitude;").toString();
-//     dataStorage.owner_id = myEngine.evaluate("return myJSONObject.photos[0].owner_id;").toString();
-//     dataStorage.owner_name = myEngine.evaluate("return myJSONObject.photos[0].owner_name;").toString();
-//     dataStorage.photo_id = myEngine.evaluate("return myJSONObject.photos[0].photo_id;").toString();
-//     dataStorage.photo_title = myEngine.evaluate("return myJSONObject.photos[0].photo_title;").toString();
-//     dataStorage.upload_date = myEngine.evaluate("return myJSONObject.photos[0].upload_date;").toString();
-//     dataStorage.width  = myEngine.evaluate("return myJSONObject.photos[0].width;").toString();
-//     dataStorage.photo_url=QString("http://mw2.google.com/mw-panoramio/photos/medium/1578881.jpg");          
-    parsedJsonOutput.append(dataStorage);
+        dataStorage.count = myEngine.evaluate ( "return myJSONObject.count;" ).toInteger();
+        dataStorage.height = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                             +QString::number ( iterator )
+                             +QString ( "].height;" ) ) .toInteger();
+        dataStorage.latitude = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                               +QString::number ( iterator )
+                               +QString ( "].latitude;" ) ).toInteger();
+        dataStorage.longitude = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                +QString::number ( iterator )
+                                +QString ( "].longitude;" ) ).toInteger();
+        dataStorage.owner_id = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                               +QString::number ( iterator )
+                               +QString ( "].owner_id;" ) ).toInteger();
+        dataStorage.owner_name = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                 +QString::number ( iterator )
+                                 +QString ( "].owner_name;" ) ).toString();
+        dataStorage.owner_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                +QString::number ( iterator )
+                                +QString ( "].owner_url;" ) ).toString();
+        dataStorage.photo_id = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                               +QString::number ( iterator )
+                               +QString ( "].photo_id;" ) ).toInteger();
+        dataStorage.photo_title = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                  +QString::number ( iterator )
+                                  +QString ( "].photo_title;" ) ).toString();
+        dataStorage.photo_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                +QString::number ( iterator )
+                                +QString ( "].photo_url;" ) ).toString();
+        dataStorage.upload_date = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                  +QString::number ( iterator )
+                                  +QString ( "].upload_date;" ) ).toString();
+        dataStorage.width  = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                             +QString::number ( iterator )
+                             +QString ( "].width;" ) ).toInteger();
+        parsedJsonOutput.insert ( iterator , dataStorage );
+        iterator++;
+    }
     return parsedJsonOutput;
 }
-
