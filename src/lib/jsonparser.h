@@ -1,7 +1,9 @@
 //
-// C++ Interface: jsonparser
+// This file is part of the Marble Desktop Globe.
 //
-// Description:
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
 //
 //
 // Author:  <Shashank Singh>, (C) 2008

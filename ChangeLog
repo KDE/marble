@@ -1,3 +1,7 @@
+2008-06-15 Shashank Singh <shashank.personal@gmail.com>
+    * src/lib/jsonparser.h
+    * src/lib/jsonparser.cpp
+
 2008-06-14 Shashank Singh <shashank.personal@gmail.com>
     * src/lib/jsonparser.h
     * src/lib/jsonparser.cpp
@@ -40,6 +44,7 @@
     * changed TinyWebBrowser.cpp
     * changed TinyWebBrowser.h
     * added a tab named Panoramio in Ui PLaceMarkinfoDialog
+
 2008-06-10  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/CMakeLists.txt:
