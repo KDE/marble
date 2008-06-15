@@ -9,23 +9,25 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-
 #include "PlaceMarkManager.h"
 
-#include <QtCore/QDebug>
+#include <QtCore/QBuffer>
+#include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
 #include <QtCore/QDateTime>
+#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
 #include "MarbleDirs.h"
-#include "PlaceMarkContainer.h"
 #include "MarblePlacemarkModel.h"
+#include "PlaceMarkContainer.h"
 
-#include "XmlHandler.h"
-
+#include "GeoDataDocument.h"
+#include "GeoDataParser.h"
+#include "GeoDataPlacemark.h"
 
 PlaceMarkManager::PlaceMarkManager( QObject *parent )
     : QObject( parent ),
@@ -119,6 +121,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
         // Read the KML file.
         importKml( defaultsrcname, &container );
 
+        qDebug() << "ContainerSize for" << filepath << ":" << container.size();
         // Save the contents in the efficient cache format.
         saveFile( defaulthomecache, &container );
 
@@ -148,7 +151,8 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
             QTime t;
             t.start();
             document->load( sourceFile );
-            qDebug("KML document loaded. Name: %s. Time: %d", document->name().toAscii().data(), t.elapsed());
+            qDebug( "KML document loaded. Name: %s. Time: %d", 
+                    document->name().toAscii().data(), t.elapsed() );
             t.start();
 
             if ( ! m_documentList.isEmpty() ) {
@@ -204,40 +208,44 @@ const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
 void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
 {
-
-    XmlHandler handler( placeMarkContainer );
-
+    GeoDataParser* parser = new GeoDataParser( GeoData_KML );
+    
     QFile file( filename );
+    if ( !file.exists() ) {
+        qWarning( "File does not exist!" );
+        return;
+    }
 
-    // gzip reader:
-#if 0
-    QDataStream  dataIn(&file);
-    QByteArray   compByteArray;
-    dataIn >> compByteArray;
-    QByteArray   xmlByteArray = qUncompress( compByteArray );
-    QString      xmlString    = QString::fromUtf8( xmlByteArray.data(),
-                                                   xmlByteArray.size() );
-    QXmlInputSource  source;
-    source.setData(xmlString);
-#endif
+    // Open file in right mode
+    file.open( QIODevice::ReadOnly );
+    
+    if ( !parser->read( &file ) ) {
+        qWarning( "Could not parse file!" );
+        return;
+    }
+    GeoDocument* document = parser->releaseDocument();
+    Q_ASSERT( document );
 
-    QXmlInputSource   source( &file );
-    QXmlSimpleReader  reader;
-    reader.setContentHandler( &handler );
-    reader.parse( source );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
+                                              QFileInfo( filename ).baseName() );
 }
 
-void PlaceMarkManager::importKmlFromData(const QString& data,
-                                         PlaceMarkContainer* placeMarkContainer)
+void PlaceMarkManager::importKmlFromData( const QString& data,
+                                         PlaceMarkContainer* placeMarkContainer )
 {
+    GeoDataParser* parser = new GeoDataParser( GeoData_KML );
+    
+    if ( !parser->read( new QBuffer( new QByteArray( data.toUtf8() ) ) ) ) {
+        qWarning( "Could not parse data!" );
+        return;
+    }
+    GeoDocument* document = parser->releaseDocument();
+    Q_ASSERT( document );
 
-    XmlHandler handler( placeMarkContainer );
-
-    QXmlInputSource   source;
-    source.setData(data);
-    QXmlSimpleReader  reader;
-    reader.setContentHandler( &handler );
-    reader.parse( source );
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    // we might have to suppress caching for this part
+    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), QString("DataImport") );
 }
 
 static const quint32 MarbleMagicNumber = 0x31415926;
@@ -393,10 +401,10 @@ void PlaceMarkManager::cacheDocument( const KMLDocument& document )
         QDataStream stream ( &cacheFile );
         document.pack( stream );
         cacheFile.close();
-        qDebug( "Saved kml document to cache: %s", path.toAscii().data());
+        qDebug( "Saved kml document to cache: %s", path.toAscii().data() );
     }
     else {
-        qDebug( "Unable to cache kml document to: %s", path.toAscii().data());
+        qDebug( "Unable to cache kml document to: %s", path.toAscii().data() );
     }
 }
 

@@ -1,3 +1,10 @@
+2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/PlaceMarkManager.cpp
+
+    use the new KML implementation; later we can remove the
+    XMLHandler stuff
+
 2008-06-15 Shashank Singh <shashank.personal@gmail.com>
     * src/lib/jsonparser.h
     * src/lib/jsonparser.cpp
