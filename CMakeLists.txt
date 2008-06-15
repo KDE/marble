@@ -155,15 +155,16 @@ endif(APPLE)
 
 if(QTONLY)
   find_package(Qt4 REQUIRED)
-  include( ${QT_USE_FILE} )
   set( QT_USE_QTXML      TRUE )
   set( QT_USE_QTNETWORK  TRUE )
   set( QT_USE_QTTEST     TRUE )
   set( QT_USE_QTSCRIPT   TRUE )
+  include( ${QT_USE_FILE} )
   
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)
+  message("+++++++++${QT_QTSCRIPT_LIBRARY}+++++++++++++")
 else(QTONLY)
   # search packages used by KDE
   find_package(KDE4 REQUIRED)
@@ -210,7 +211,11 @@ endif (PEDANTIC)
 # Add a compiler def so that we can conditionally compile
 # code in debug mode only (e.g. extra console messages)
 IF (CMAKE_BUILD_TYPE MATCHES Debug)
-  ADD_DEFINITIONS(-DDEBUG)
+    IF(NOT MINGW)
+        ADD_DEFINITIONS(-DDEBUG)
+    ELSE(NOT MINGW)
+        REMOVE_DEFINITIONS( -DQT_NO_DEBUG )
+    ENDIF(NOT MINGW)
 ENDIF (CMAKE_BUILD_TYPE MATCHES Debug)
 
 ####################################################

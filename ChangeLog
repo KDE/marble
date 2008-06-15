@@ -1,5 +1,12 @@
 2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * CMakeLists.txt
+
+    fix MinGW plugins
+    fix QTSCRIPT include/linker error
+
+2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/PlaceMarkManager.cpp
 
     use the new KML implementation; later we can remove the
