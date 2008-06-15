@@ -208,7 +208,7 @@ const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
 void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
 {
-    GeoDataParser* parser = new GeoDataParser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML );
     
     QFile file( filename );
     if ( !file.exists() ) {
@@ -219,11 +219,11 @@ void PlaceMarkManager::importKml( const QString& filename,
     // Open file in right mode
     file.open( QIODevice::ReadOnly );
     
-    if ( !parser->read( &file ) ) {
+    if ( !parser.read( &file ) ) {
         qWarning( "Could not parse file!" );
         return;
     }
-    GeoDocument* document = parser->releaseDocument();
+    GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
@@ -234,13 +234,13 @@ void PlaceMarkManager::importKml( const QString& filename,
 void PlaceMarkManager::importKmlFromData( const QString& data,
                                          PlaceMarkContainer* placeMarkContainer )
 {
-    GeoDataParser* parser = new GeoDataParser( GeoData_KML );
+    GeoDataParser parser( GeoData_KML );
     
-    if ( !parser->read( new QBuffer( new QByteArray( data.toUtf8() ) ) ) ) {
+    if ( !parser.read( new QBuffer( new QByteArray( data.toUtf8() ) ) ) ) {
         qWarning( "Could not parse data!" );
         return;
     }
-    GeoDocument* document = parser->releaseDocument();
+    GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );

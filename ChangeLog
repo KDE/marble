@@ -1,5 +1,11 @@
 2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/PlaceMarkManager.cpp
+
+    remove memory leak as suggested by Jens-Michael Hoffmann
+
+2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
+
     * CMakeLists.txt
 
     fix MinGW plugins
