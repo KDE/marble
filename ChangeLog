@@ -1,3 +1,9 @@
+2008-06-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/MarbleWidget.h:
+
+    Small apidocs fixes/cleanups.
+
 2008-06-15  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/PlaceMarkManager.cpp

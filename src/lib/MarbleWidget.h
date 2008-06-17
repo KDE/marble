@@ -171,7 +171,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     virtual ~MarbleWidget();
 
     /**
-     * @brief Return the model that this view shows.
+     * @brief Return the map that this view shows.
      */
     MarbleMap  *map() const;
 
@@ -233,17 +233,17 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QString     distanceString() const;
 
     /**
-     * @brief return the minimum zoom value for the current map theme.
+     * @brief Return the minimum zoom value for the current map theme.
      */
     int         minimumZoom() const;
 
     /**
-     * @brief return the minimum zoom value for the current map theme.
+     * @brief Return the minimum zoom value for the current map theme.
      */
     int         maximumZoom() const;
 
     /**
-     * @brief return if the widget needs to be updated.
+     * @brief Return if the widget needs to be updated.
      */
     bool needsUpdate() const;
     /**
@@ -316,12 +316,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     double  centerLatitude()  const;
 
     /**
-     * @brief returns the model for all the placemarks on the globe.
+     * @brief Returns the model for all the placemarks on the globe.
      */
     QAbstractItemModel *placeMarkModel() const;
 
     /**
-     * @brief returns the selection model for all the placemarks on the globe.
+     * @brief Returns the selection model for all the placemarks on the globe.
      */
     QItemSelectionModel *placeMarkSelectionModel() const;
 
@@ -577,7 +577,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  setProjection( Projection projection );
 
     /**
-     * @brief  get the home point
+     * @brief  Get the home point
      * @param  lon  the longitude of the home point.
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
@@ -765,12 +765,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void changeCurrentPosition( double lon, double lat );
 
      /**
-     * @brief used to notify about the position of the mouse click
+     * @brief Used to notify about the position of the mouse click
       */
     void notifyMouseClick( int x, int y );
 
     /**
-     * @brief updates the gps tracking point by polling
+     * @brief Updates the gps tracking point by polling
      */
     void updateGps();
 
@@ -827,7 +827,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void updateChangedMap();
 
     /**
-     * @brief update part of the map as defined in the BoundingBox
+     * @brief Update part of the map as defined in the BoundingBox
      */
     void updateRegion( BoundingBox& );
 
