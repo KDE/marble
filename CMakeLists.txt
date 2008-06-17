@@ -244,6 +244,11 @@ ENDIF (ENABLE_TESTS)
 # Install extra files
 install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
+####################################################
+# Install CMake module
+install( FILES FindMarble.cmake 
+         DESTINATION ${DATA_INSTALL_DIR}/cmake/modules  )
+
 ############################################################
 # Uninstall stuff
 CONFIGURE_FILE(

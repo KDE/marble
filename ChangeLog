@@ -1,3 +1,13 @@
+2008-06-17  Simon Schmeisser  <mail_to_wrt@gmx.de>
+    * FindMarble.cmake:
+
+    added a CMake module that helps external applications
+    find an installed Marble
+
+    * CMakeLists.txt:
+
+    install CMake module
+
 2008-06-17  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarbleWidget.h:
