@@ -1,3 +1,10 @@
+2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * CMakeLists.txt
+
+    set the cmake minimum version to 2.4.8
+    this might be replaced later by a workaround
+
 2008-06-17  Simon Schmeisser  <mail_to_wrt@gmx.de>
     * FindMarble.cmake:
 

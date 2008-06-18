@@ -22,6 +22,14 @@ else( QTONLY )
 endif( QTONLY )
 
 ####################################################
+# minimum required cmake version
+if( QTONLY )
+    # all previous releases lack QT_QTSCRIPT_LIBRARY needed for panoramio
+    # this might be replaced by a workaround
+    cmake_minimum_required( VERSION 2.4.8 )
+endif( QTONLY )
+
+####################################################
 # User configurable options
 if(KDE4_FOUND)
   set (QTONLY FALSE CACHE BOOL "Determines if we should compile for Qt only.")
@@ -155,16 +163,15 @@ endif(APPLE)
 
 if(QTONLY)
   find_package(Qt4 REQUIRED)
-  set( QT_USE_QTXML      TRUE )
-  set( QT_USE_QTNETWORK  TRUE )
-  set( QT_USE_QTTEST     TRUE )
-  set( QT_USE_QTSCRIPT   TRUE )
+  set( QT_USE_QTXML      ON )
+  set( QT_USE_QTNETWORK  ON )
+  set( QT_USE_QTTEST     ON )
+  set( QT_USE_QTSCRIPT   ON )
   include( ${QT_USE_FILE} )
   
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)
-  message("+++++++++${QT_QTSCRIPT_LIBRARY}+++++++++++++")
 else(QTONLY)
   # search packages used by KDE
   find_package(KDE4 REQUIRED)
