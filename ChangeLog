@@ -1,3 +1,10 @@
+2008-06-18  Torsten Rahn <ps_ml@gmx.de>
+
+    * src/lib/MergedLayerDecorator.{h|cpp}:
+    * src/lib/MarbleModel.cpp:
+
+    - Only show clouds if the clouds property is defined in the dgml file.
+
 2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
 
     * tools/add_kml/add_kml_tag.py

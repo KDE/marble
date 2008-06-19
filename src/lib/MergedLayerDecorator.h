@@ -37,7 +37,7 @@ class MergedLayerDecorator : public QObject
 
     // The Parameter themeId is only used for displaying the TileId,
     // which is a debugging feature, therefore at this point QString remains.
-    void paint(const QString& themeId);
+    void paint( const QString& themeId, GeoSceneDocument *mapTheme = 0 );
     void paintTileId(const QString& themeId);
     
     void setShowClouds(bool show);

@@ -149,6 +149,10 @@
                 </property>
             </group>
 
+            <property name="clouds">
+                <value>true</value>
+                <available>true</available>
+            </property>
             <property name="coordinate-grid">
                 <value>true</value>
                 <available>true</available>

@@ -24,6 +24,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"
+#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "MapThemeManager.h"
 #include "MarbleDirs.h"
@@ -58,10 +59,14 @@ MergedLayerDecorator::~MergedLayerDecorator()
     delete m_blueMarbleTheme;
 }
 
-void MergedLayerDecorator::paint(const QString& themeId)
+void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
 {
-    if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 )
-      paintClouds();
+    if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
+        bool show;
+        if ( mapTheme && mapTheme->settings()->propertyAvailable( "clouds", show ) ) {
+            paintClouds();
+        }
+    }
     if ( m_sunLocator->getShow() )
       paintSunShading();
     if ( m_showTileId )
