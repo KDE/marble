@@ -1,5 +1,12 @@
 2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/XmlHandler.{h|cpp}
+    * src/lib/MarbleModel.cpp
+    * src/lib/CMakeLists.txt
+    remove XmlHandler as now the KML geoparser takes over that part
+
+2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
+
     * CMakeLists.txt
 
     set the cmake minimum version to 2.4.8

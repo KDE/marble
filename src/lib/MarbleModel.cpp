@@ -56,7 +56,6 @@
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "XmlHandler.h"
 
 
 class MarbleModelPrivate
