@@ -47,9 +47,9 @@ SunControlWidget::~SunControlWidget()
 void SunControlWidget::showSunClicked(bool checked)
 {
     if ( checked )
-        m_uiWidget.showToolButton->setText( "&Hide" );
+        m_uiWidget.showToolButton->setText( tr("&Hide") );
     else
-        m_uiWidget.showToolButton->setText( "Sh&ow" );
+        m_uiWidget.showToolButton->setText( tr("Sh&ow") );
 
     emit showSun(checked);
 }
