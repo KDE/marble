@@ -1,5 +1,11 @@
 2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * tools/add_kml/add_kml_tag.py
+
+    fix renaming from KML to Kml
+
+2008-06-18  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/XmlHandler.{h|cpp}
     * src/lib/MarbleModel.cpp
     * src/lib/CMakeLists.txt

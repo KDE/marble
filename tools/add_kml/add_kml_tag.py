@@ -174,20 +174,20 @@ HEADER="""/*
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMLtemplateTagHandler_h
-#define KMLtemplateTagHandler_h
+#ifndef KmltemplateTagHandler_h
+#define KmltemplateTagHandler_h
 
 #include "GeoTagHandler.h"
 
-class KMLtemplateTagHandler : public GeoTagHandler {
+class KmltemplateTagHandler : public GeoTagHandler {
 public:
-    KMLtemplateTagHandler();
-    virtual ~KMLtemplateTagHandler();
+    KmltemplateTagHandler();
+    virtual ~KmltemplateTagHandler();
 
     virtual GeoNode* parse(GeoParser&) const;
 };
 
-#endif // KMLtemplateTagHandler_h
+#endif // KmltemplateTagHandler_h
 """
 
 # the template source file
@@ -212,11 +212,11 @@ SOURCE="""/*
     Boston, MA 02110-1301, USA.
 */
 
-#include "KMLtemplateTagHandler.h"
+#include "KmltemplateTagHandler.h"
 
 #include <QtCore/QDebug>
 
-#include "KMLElementDictionary.h"
+#include "KmlElementDictionary.h"
 
 TEMPLATE_PARENT_HEADERS
 #include "GeoDataParser.h"
@@ -225,16 +225,16 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( template )
 
-KMLtemplateTagHandler::KMLtemplateTagHandler()
+KmltemplateTagHandler::KmltemplateTagHandler()
     : GeoTagHandler()
 {
 }
 
-KMLtemplateTagHandler::~KMLtemplateTagHandler()
+KmltemplateTagHandler::~KmltemplateTagHandler()
 {
 }
 
-GeoNode* KMLtemplateTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmltemplateTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_template ) );
 
@@ -272,10 +272,10 @@ print path
 
 def add_new_copy( tagname, parents ):
     pretend = False
-    if not ( os.path.exists( path + "KML" + tagname.capitalize() + "TagHandler.h" ) or os.path.exists( path + "KML" + tagname.capitalize() + "TagHandler.cpp" ) ):
+    if not ( os.path.exists( path + "Kml" + tagname.capitalize() + "TagHandler.h" ) or os.path.exists( path + "Kml" + tagname.capitalize() + "TagHandler.cpp" ) ):
         if not pretend:
-            file( path + "KML" + tagname.capitalize() + "TagHandler.h", "wb" ).write( HEADER )
-            file( path + "KML" + tagname.capitalize() + "TagHandler.cpp", "wb" ).write( SOURCE )
+            file( path + "Kml" + tagname.capitalize() + "TagHandler.h", "wb" ).write( HEADER )
+            file( path + "Kml" + tagname.capitalize() + "TagHandler.cpp", "wb" ).write( SOURCE )
 
         HEADERS = ""
         if tagname in parents.keys():
@@ -288,16 +288,16 @@ def add_new_copy( tagname, parents ):
         else:
             firstParent = "Parent"
                 
-        sedHeaderCommand = "sed -i -e \"s/KMLtemplateTagHandler/KML" + tagname + "TagHandler/g\" " \
-                           + path + "KML" + tagname.capitalize() + "TagHandler.h"
+        sedHeaderCommand = "sed -i -e \"s/KmltemplateTagHandler/Kml" + tagname + "TagHandler/g\" " \
+                           + path + "Kml" + tagname.capitalize() + "TagHandler.h"
 
-        sedCPPCommand = "sed -i -e \"s/KMLtemplateTagHandler/KML" + tagname + "TagHandler/g\" " \
+        sedCPPCommand = "sed -i -e \"s/KmltemplateTagHandler/Kml" + tagname + "TagHandler/g\" " \
                         + "-e \"s/kmlTag_template/kmlTag_" + tagname +"/g\" " \
                         + "-e \"s/kmlTag_Parent/kmlTag_" + firstParent +"/g\" " \
                         + "-e \"s/KML_DEFINE_TAG_HANDLER( template )/KML_DEFINE_TAG_HANDLER( " + tagname +" )/g\" " \
                         + "-e \"s/TEMPLATE_PARENT_HEADERS/" + HEADERS + "/g\" " \
-                        + "-e \"s/KMLtemplateTagHandler.h/KML" + tagname +"TagHandler.h/g\" " \
-                        + path + "KML" + tagname.capitalize() + "TagHandler.cpp"
+                        + "-e \"s/KmltemplateTagHandler.h/Kml" + tagname +"TagHandler.h/g\" " \
+                        + path + "Kml" + tagname.capitalize() + "TagHandler.cpp"
         #print sedHeaderCommand
         print sedCPPCommand
         if not pretend:
