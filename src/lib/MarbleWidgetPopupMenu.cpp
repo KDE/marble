@@ -103,7 +103,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataPoint::Radian );
 
     m_copyCoordinateAction->setEnabled( true );
-    m_copyCoordinateAction->setText( "Copy Coordinates" );
+    m_copyCoordinateAction->setText( tr("Copy Coordinates") );
     m_copyCoordinateAction->setData( curpos );
 
     QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataPoint( lon, lat, GeoDataPoint::Radian ).toString() );
