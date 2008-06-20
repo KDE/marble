@@ -91,7 +91,7 @@ void GpsTracking::construct( const QSize &canvasSize,
         return;
     }
 
-    double distance = sqrt( AbstractLayer::distance( position,
+    double distance = std::sqrt( AbstractLayer::distance( position,
                                                      previousPosition) );
     if (distance == 0) {
         return;

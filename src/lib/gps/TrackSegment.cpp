@@ -102,7 +102,7 @@ void TrackSegment::drawArrow( ClipPainter *painter,
 {
     //the unit vector in the direction between first and second
     QPointF unitVector =   ( first - second ) 
-                         / ( sqrt( distance( first, second ) ) );
+                         / ( std::sqrt( distance( first, second ) ) );
     //the inverse of the unit vector between first and second
     QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x());
     
