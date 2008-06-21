@@ -85,10 +85,11 @@ void TextureColorizer::colorize(ViewParams *viewParams)
         int yBottom = imgheight;
 
         if( viewParams->projection() == Equirectangular
-            || viewParams->projection() == Mercator ) {
-
+            || viewParams->projection() == Mercator )
+	{
             // Calculate translation of center point
-            double centerLon, centerLat;
+	    double  centerLon;
+	    double  centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
 
             int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);

@@ -1191,12 +1191,12 @@ void MarbleMap::setDownloadUrl( const QString &url )
     setDownloadUrl( QUrl( url ) );
 }
 
-void MarbleMap::setDownloadUrl( const QUrl &url ) {
+void MarbleMap::setDownloadUrl( const QUrl &url )
+{
     HttpDownloadManager *downloadManager = d->m_model->downloadManager();
     if ( downloadManager != 0 )
         downloadManager->setServerUrl( url );
-    else
-    {
+    else {
         downloadManager = new HttpDownloadManager( url,
                                                    new FileStoragePolicy( MarbleDirs::localPath() ) );
         d->m_model->setDownloadManager( downloadManager );
