@@ -28,8 +28,8 @@
 GeoSceneSection::GeoSceneSection( const QString& name )
     : m_name( name ),
       m_heading( "" ),
-      m_checkable( false ),
       m_connectTo( "" ),
+      m_checkable( false ),
       m_spacing( 12 )
 {
     /* NOOP */

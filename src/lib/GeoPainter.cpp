@@ -48,17 +48,18 @@ class GeoPainterPrivate
     {
         int x, y;
         bool previousGlobeHidesPoint;
-        AbstractProjection *projection = m_viewport->currentProjection();
+        //AbstractProjection *projection = m_viewport->currentProjection();
 
         if ( isGeoProjected == false ) {
 
-            QPolygon* polygon;
+            QPolygon  *polygon;
 	    //QVector<QPolygon *> polygons;
 
             GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
-            while( itPoint < points + pointCount ) {
+            while ( itPoint < points + pointCount ) {
                 bool globeHidesPoint;
                 //bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
+
                 if ( itPoint == points ){
                     polygon = new QPolygon;
                     previousGlobeHidesPoint = globeHidesPoint;
@@ -359,6 +360,8 @@ void GeoPainter::drawPolygon ( const GeoDataPoint * points, int pointCount,
 			       Qt::FillRule fillRule, 
 			       bool isGeoProjected )
 {
+    Q_UNUSED( fillRule );
+
     QVector<QPolygon*> polygons;
     d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );
 

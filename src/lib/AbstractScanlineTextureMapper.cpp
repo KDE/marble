@@ -32,10 +32,10 @@
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : QObject( parent ),
-      m_posX( 0.0 ),
-      m_posY( 0.0 ),
       m_iPosX( 0 ),
       m_iPosY( 0 ),
+      m_posX( 0.0 ),
+      m_posY( 0.0 ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),

@@ -46,19 +46,18 @@ GeoNode* KmlcolorModeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_colorMode ) );
 
-    GeoStackItem parentItem = parser.parentElement();
+    GeoStackItem  parentItem = parser.parentElement();
     
     if ( parentItem.represents( kmlTag_ColorStyle ) ) {
-        bool ok;
-        if( parser.readElementText().trimmed() == QString("random") ) 
-            parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( 
-            GeoDataColorStyle::Random );
-        else parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( 
-            GeoDataColorStyle::Normal );
+        if ( parser.readElementText().trimmed() == QString("random") ) 
+	    parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( GeoDataColorStyle::Random );
+        else
+	    parentItem.nodeAs<GeoDataColorStyle>()->setColorMode( GeoDataColorStyle::Normal );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_ColorStyle << "> containing: " << parser.readElementText().trimmed()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }
+
     return 0;
 }

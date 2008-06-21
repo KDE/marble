@@ -204,6 +204,9 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude )
             // asinh( tan( -1.4835 )) => −3.1309587
             return 3.1309587 * 0.5 * m_normGlobalHeight; 
     }
+
+    // Dummy value to avoid a warning.
+    return 0.0;
 }
 
 

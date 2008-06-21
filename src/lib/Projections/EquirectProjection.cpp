@@ -230,8 +230,10 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
 
-    // If the whole globe is visible we can easily calculate analytically the lon-/lat- range
-    double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    // If the whole globe is visible we can easily calculate
+    // analytically the lon-/lat- range
+    // FIXME: Unused variable.  Remove?
+    //double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( m_repeatX ) {
         int xRepeatDistance = 4 * viewport->radius();

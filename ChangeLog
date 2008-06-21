@@ -1,5 +1,19 @@
 2008-06-21  Inge Wallin  <inge@lysator.liu.se>
 
+	Fix a number of warnings in the following files
+	* src/lib/AbstractScanlineTextureMapper.cpp
+	* src/lib/Projections/EquirectProjection.cpp
+	* src/lib/PlaceMarkLayout.cpp
+	* src/lib/AbstractScanlineTextureMapper.h
+	* src/lib/EquirectScanlineTextureMapper.cpp
+	* src/lib/GeoPainter.cpp
+	* src/lib/TileCreator.cpp
+	* src/lib/geodata/handlers/kml/KmlColorModeTagHandler.cpp
+	* src/lib/geodata/scene/GeoSceneItem.cpp
+	* src/lib/geodata/scene/GeoSceneSection.cpp
+	* src/plugins/marble/stars/MarbleStarsPlugin.cpp
+
+	Commit some left-over changes
 	* src/lib/TextureColorizer.cpp (colorize): Follow coding standards
 	* src/lib/MarbleMap.cpp (setDownloadUrl): Follow coding standards
 

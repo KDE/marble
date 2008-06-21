@@ -142,13 +142,13 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport, c
             y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
 
             // Skip placemarks that are outside the screen area
-            if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
+            if ( x < 0 || x >= viewport->width()
+		 || y < 0 || y >= viewport->height() )
                 continue;
-            }
 
             double size;
             if ( (*i).magnitude() < -1 ) size = 6.5;
-            if ( (*i).magnitude() < 0 ) size = 5.5;
+            else if ( (*i).magnitude() < 0 ) size = 5.5;
             else if ( (*i).magnitude() < 1 ) size = 4.5;
             else if ( (*i).magnitude() < 2 ) size = 4.0;
             else if ( (*i).magnitude() < 3 ) size = 3.0;

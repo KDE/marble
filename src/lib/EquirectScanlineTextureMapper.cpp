@@ -43,9 +43,9 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     const bool highQuality = ( viewParams->mapQuality() == Marble::High
 			       || viewParams->mapQuality() == Marble::Print );
-    const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
+    //const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
 
-   // Initialize needed variables:
+    // Initialize needed variables:
     double  lon = 0.0;
     double  lat = 0.0;
 
