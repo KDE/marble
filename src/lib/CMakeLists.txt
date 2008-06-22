@@ -248,6 +248,7 @@ else (APPLE AND QTONLY)
     MarbleMap.h
     MarbleControlBox.h
     MarbleNavigator.h
+    MapThemeManager.h
 
     MarbleWidgetInputHandler.h
 

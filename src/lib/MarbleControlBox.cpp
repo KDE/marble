@@ -319,7 +319,8 @@ int MarbleControlBox::minimumZoom() const
 
 void MarbleControlBox::updateMapThemeView()
 {
-    selectTheme( d->m_widget->mapThemeId() );
+    if (d->m_widget)
+        selectTheme( d->m_widget->mapThemeId() );
 }
 
 void MarbleControlBox::changeZoom(int zoom)

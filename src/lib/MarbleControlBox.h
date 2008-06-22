@@ -110,7 +110,11 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     int minimumZoom() const;
 
     void setMapThemeModel( QStandardItemModel *model );
-	
+
+    void selectTheme( const QString & );
+
+    void selectProjection( Projection projection );
+
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.
@@ -219,9 +223,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
-
-    void selectTheme( const QString & );
-    void selectProjection( Projection projection );
 
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );

@@ -44,7 +44,7 @@ class QStandardItemModel;
  * @see GeoSceneDocument
  */
 
-class MapThemeManager : public QObject
+class MARBLE_EXPORT MapThemeManager : public QObject
 {
     Q_OBJECT
 

@@ -1,3 +1,12 @@
+2008-06-22  Simon Schmeisser <mail_to_wrt@gmx.de>
+
+    * src/lib/MapThemeManager.h
+    * src/lib/MarbleControlBox.h
+    * src/lib/MarbleControlBox.cpp
+    * src/lib/CMakeLists.txt
+
+    - Made MapThemeManager externally accessible
+
 2008-06-21  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix a number of warnings in the following files
