@@ -20,7 +20,7 @@ panoramioDataStructure jsonParser::parseObjectOnPosition ( const QString &conten
     myEngine.evaluate ( temp );
 
     dataStorage.count = myEngine.evaluate ( "return myJSONObject.count;" ).toInteger();
-    
+
     dataStorage.height = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                          +QString::number ( requiredObjectPosition )
                          +QString ( "].height;" ) ) .toInteger();
@@ -48,14 +48,18 @@ panoramioDataStructure jsonParser::parseObjectOnPosition ( const QString &conten
     dataStorage.photo_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                             +QString::number ( requiredObjectPosition )
                             +QString ( "].photo_url;" ) ).toString();
+    dataStorage.photo_file_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                 +QString::number ( requiredObjectPosition )
+                                 +QString ( "].photo_file_url;" ) ).toString();
     dataStorage.upload_date = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                               +QString::number ( requiredObjectPosition )
                               +QString ( "].upload_date;" ) ).toString();
     dataStorage.width  = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                          +QString::number ( requiredObjectPosition )
                          +QString ( "].width;" ) ).toInteger();
-                               
-return dataStorage;
+
+
+    return dataStorage;
 }
 
 QList <panoramioDataStructure> jsonParser::parseAllObjects ( const QString &content ,int numberOfObjects )
@@ -95,6 +99,9 @@ QList <panoramioDataStructure> jsonParser::parseAllObjects ( const QString &cont
         dataStorage.photo_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                                 +QString::number ( iterator )
                                 +QString ( "].photo_url;" ) ).toString();
+        dataStorage.photo_file_url = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
+                                     +QString::number ( iterator )
+                                     +QString ( "].photo_file_url;" ) ).toString();
         dataStorage.upload_date = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
                                   +QString::number ( iterator )
                                   +QString ( "].upload_date;" ) ).toString();

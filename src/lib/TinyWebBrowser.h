@@ -22,44 +22,46 @@
 #include <QDebug>
 #include <QtGui/QTextBrowser>
 #include <jsonparser.h>
+#include <QImage>
 class HttpDownloadManager;
 class CacheStoragePolicy;
 
 class TinyWebBrowser : public QTextBrowser
 {
-    Q_OBJECT
+        Q_OBJECT
 
- public:
-    explicit TinyWebBrowser( QWidget* parent = 0 );
-    ~TinyWebBrowser();
+    public:
+        explicit TinyWebBrowser ( QWidget* parent = 0 );
+        ~TinyWebBrowser();
 
- public Q_SLOTS:
-    void setSource( const QString& relativeUrl );//this slot sets source url for related wikipedia page download
-    void print();
-    void getPanoramio( const QString& place );//this slot will get first image from location most close to current placemark
+    public Q_SLOTS:
+        void setSource ( const QString& relativeUrl );//this slot sets source url for related wikipedia page download
+        void print();
+        void getPanoramio ( const QString& place );//this slot will get first image from location most close to current placemark
+        void testing(QString);
 
+    Q_SIGNALS:
+        void backwardAvailable ( bool );
+        void statusMessage ( QString );
 
- Q_SIGNALS:
-    void backwardAvailable( bool );
-    void statusMessage( QString );
+    protected:
+        virtual QVariant loadResource ( int type, const QUrl & name );
 
- protected:
-    virtual QVariant loadResource ( int type, const QUrl & name );
+    private Q_SLOTS:
+        void slotDownloadFinished ( const QString&, const QString& );
+        void slotPanoramioDownloadFinished ( const QString& , const QString& );
+        void linkClicked ( const QUrl &url );
 
- private Q_SLOTS:
-    void slotDownloadFinished( const QString&, const QString& );
-    void linkClicked( const QUrl &url );
+    private:
+        void setContentHtml ( const QString& );//changes the text into valid plain html
+        void parseJsonOutputFromPanoramio ( const QString& );//this function will parse json output from panormaio
 
- private:
-    void setContentHtml( const QString& );//changes the text into valid plain html
-    void parseJsonOutputFromPanoramio( const QString &content );//this function will parse json output from panormaio 
-
-    Q_DISABLE_COPY( TinyWebBrowser )
-    CacheStoragePolicy *m_storagePolicy;
-    HttpDownloadManager *m_downloadManager;
-    QString         m_source;
-    QString baseUrlForPanoramioQuery;
-    jsonParser panoramioJsonParser;   
+        Q_DISABLE_COPY ( TinyWebBrowser )
+        CacheStoragePolicy *m_storagePolicy;
+        HttpDownloadManager *m_downloadManager;
+        QString         m_source;
+        QString baseUrlForPanoramioQuery;
+        jsonParser panoramioJsonParser;
 };
 
 

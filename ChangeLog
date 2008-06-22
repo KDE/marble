@@ -1,3 +1,10 @@
+2008-06-23  Shashank Singh <shashank.personal@gmail.com>
+    *src/lib/jsonparser.h --corrected a mistake photo_file_url
+    *src/lib/jsonparser.cpp --corrected a mistake regarding photo_file_url
+    *src/lib/HttpFetchFile.cpp -- url after query character was being chopped off ,corrected it
+    *src/lib/TinyWebBrowser.h  -- tinkered with it to enable support for panoramio
+    *src/lib/TinyWebBrowser.cpp
+    *src/lib/HttpDownloadManager -- very small formatting changes 
 2008-06-22  Simon Schmeisser <mail_to_wrt@gmx.de>
 
     * src/lib/MarbleControlBox.cpp

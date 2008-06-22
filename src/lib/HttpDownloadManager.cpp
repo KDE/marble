@@ -18,11 +18,11 @@
 #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 
-HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *policy ) 
-    : m_activatedJobsLimit( 40 )
-    , m_jobQueueLimit( 1000 )
-    , m_serverUrl( serverUrl )
-    , m_storagePolicy( policy )
+HttpDownloadManager::HttpDownloadManager ( const QUrl& serverUrl, StoragePolicy *policy )
+        : m_activatedJobsLimit ( 40 )
+        , m_jobQueueLimit ( 1000 )
+        , m_serverUrl ( serverUrl )
+        , m_storagePolicy ( policy )
 {
     m_downloadEnabled = true; //enabled for now
 
@@ -30,10 +30,10 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *
     m_activatedJobList.clear();
     m_jobBlackList.clear();
 
-    m_fetchFile = new HttpFetchFile( m_storagePolicy, this );
+    m_fetchFile = new HttpFetchFile ( m_storagePolicy, this );
 
-    connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ), this, SLOT( reportResult( HttpJob*, int ) ) );
-    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ), this, SIGNAL( statusMessage( QString ) ) );
+    connect ( m_fetchFile, SIGNAL ( jobDone ( HttpJob*, int ) ), this, SLOT ( reportResult ( HttpJob*, int ) ) );
+    connect ( m_fetchFile, SIGNAL ( statusMessage ( QString ) ), this, SIGNAL ( statusMessage ( QString ) ) );
 }
 
 
@@ -41,46 +41,47 @@ HttpDownloadManager::~HttpDownloadManager()
 {
     m_downloadEnabled = false;
 
-    qDeleteAll( m_jobQueue );
+    qDeleteAll ( m_jobQueue );
     m_jobQueue.clear();
 
-    qDeleteAll( m_activatedJobList );
+    qDeleteAll ( m_activatedJobList );
     m_activatedJobList.clear();
 
-    qDeleteAll( m_jobBlackList );
+    qDeleteAll ( m_jobBlackList );
     m_jobBlackList.clear();
 
     delete m_storagePolicy;
 }
 
-void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )
+void HttpDownloadManager::setServerUrl ( const QUrl& serverUrl )
 {
     m_serverUrl = serverUrl;
 }
 
-void HttpDownloadManager::setJobQueueLimit( int jobQueueLimit )
+void HttpDownloadManager::setJobQueueLimit ( int jobQueueLimit )
 {
     m_jobQueueLimit = jobQueueLimit;
 }
 
-void HttpDownloadManager::setActivatedJobsLimit( int activatedJobsLimit )
+void HttpDownloadManager::setActivatedJobsLimit ( int activatedJobsLimit )
 {
     m_activatedJobsLimit = activatedJobsLimit;
 }
 
-void HttpDownloadManager::addJob( const QString& relativeUrlString, const QString &id )
+void HttpDownloadManager::addJob ( const QString& relativeUrlString, const QString &id )
 {
     if ( !m_downloadEnabled )
         return;
 
-    QUrl sourceUrl( m_serverUrl );
+    QUrl sourceUrl ( m_serverUrl );
     QString path = sourceUrl.path();
-    sourceUrl.setPath( path + relativeUrlString );
+    sourceUrl.setPath ( path + relativeUrlString );
 
-    HttpJob *job = new HttpJob( sourceUrl, relativeUrlString, id );
-    if ( acceptJob( job ) ) {
-        m_jobQueue.enqueue( job );
-        job->setStatus( Pending );
+    HttpJob *job = new HttpJob ( sourceUrl, relativeUrlString, id );
+    if ( acceptJob ( job ) )
+    {
+        m_jobQueue.enqueue ( job );
+        job->setStatus ( Pending );
         activateJobs();
     }
     else
@@ -89,16 +90,16 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, const QStrin
     }
 }
 
-void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
-                                  const QString &id )
+void HttpDownloadManager::addJob ( const QUrl& sourceUrl, const QString& destFileName,
+                                   const QString &id )
 {
     if ( !m_downloadEnabled )
         return;
-
-    HttpJob *job = new HttpJob( sourceUrl, destFileName, id );
-    if ( acceptJob( job ) ) {
-        m_jobQueue.enqueue( job );
-        job->setStatus( Pending );
+    HttpJob *job = new HttpJob ( sourceUrl, destFileName, id );
+    if ( acceptJob ( job ) )
+    {
+        m_jobQueue.enqueue ( job );
+        job->setStatus ( Pending );
         activateJobs();
     }
     else
@@ -107,37 +108,37 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
     }
 }
 
-bool HttpDownloadManager::acceptJob( HttpJob  *job )
+bool HttpDownloadManager::acceptJob ( HttpJob  *job )
 {
     QList<HttpJob*>::iterator i;
 
-    // We update the initiatorId as the previous initiator 
+    // We update the initiatorId as the previous initiator
     // likely doesn't exist anymore
 
-    for (i = m_jobQueue.begin(); i != m_jobQueue.end(); ++i)
+    for ( i = m_jobQueue.begin(); i != m_jobQueue.end(); ++i )
     {
-      if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() )
+        if ( job->originalDestinationFileName() == ( *i )->originalDestinationFileName() )
         {
             qDebug() << "Download rejected: It's in the queue already.";
-            (*i)->setInitiatorId( job->initiatorId() );
+            ( *i )->setInitiatorId ( job->initiatorId() );
             return false;
         }
     }
-    for (i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i)
+    for ( i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i )
     {
-        if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() )
+        if ( job->originalDestinationFileName() == ( *i )->originalDestinationFileName() )
         {
             qDebug() << "Download rejected: It's being downloaded already.";
-            (*i)->setInitiatorId( job->initiatorId() );
+            ( *i )->setInitiatorId ( job->initiatorId() );
             return false;
         }
     }
-    for (i = m_jobBlackList.begin(); i != m_jobBlackList.end(); ++i)
+    for ( i = m_jobBlackList.begin(); i != m_jobBlackList.end(); ++i )
     {
-        if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() )
+        if ( job->originalDestinationFileName() == ( *i )->originalDestinationFileName() )
         {
             qDebug() << "Download rejected: Blacklisted.";
-            (*i)->setInitiatorId( job->initiatorId() );
+            ( *i )->setInitiatorId ( job->initiatorId() );
             return false;
         }
     }
@@ -145,13 +146,13 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     return true;
 }
 
-void HttpDownloadManager::removeJob( HttpJob* job )
+void HttpDownloadManager::removeJob ( HttpJob* job )
 {
-    int pos = m_activatedJobList.indexOf( job );
+    int pos = m_activatedJobList.indexOf ( job );
 
     if ( pos > 0 )
     {
-        m_activatedJobList.removeAt( pos );
+        m_activatedJobList.removeAt ( pos );
         qDebug() << "Removing: " << job->initiatorId();
         delete job;
     }
@@ -168,32 +169,32 @@ void HttpDownloadManager::activateJobs()
         HttpJob  *job = m_jobQueue.dequeue();
 
         qDebug() << "On activatedJobList: " << job->sourceUrl().toString() << job->destinationFileName();
-        m_activatedJobList.push_back( job );
-        job->setStatus( Activated );
-        m_fetchFile->executeJob( job );
+        m_activatedJobList.push_back ( job );
+        job->setStatus ( Activated );
+        m_fetchFile->executeJob ( job );
     }
 }
 
-void HttpDownloadManager::reportResult( HttpJob* job, int err )
+void HttpDownloadManager::reportResult ( HttpJob* job, int err )
 {
     if ( err != 0 )
     {
-        int pos = m_activatedJobList.indexOf( job );
+        int pos = m_activatedJobList.indexOf ( job );
 
         if ( pos >= 0 )
         {
-            m_activatedJobList.removeAt( pos );
-            m_jobBlackList.push_back( job );
+            m_activatedJobList.removeAt ( pos );
+            m_jobBlackList.push_back ( job );
 
-            qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
+            qDebug() << QString ( "Download of %1 Blacklisted. Number of blacklist items: %2" ).arg ( job->destinationFileName() ).arg ( m_jobBlackList.size() );
         }
     }
-    else 
+    else
     {
         qDebug() << "HttpDownloadManager: Download Complete:"
-                  << job->originalDestinationFileName() << job->initiatorId();
-        emit downloadComplete( job->originalDestinationFileName(), job->initiatorId() );
-        removeJob( job );
+        << job->originalDestinationFileName() << job->initiatorId();
+        emit downloadComplete ( job->originalDestinationFileName(), job->initiatorId() );
+        removeJob ( job );
     }
 
 }

@@ -8,9 +8,7 @@
 //
 // Author:  <Shashank Singh>, (C) 2008
 //
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
 
@@ -35,6 +33,7 @@ struct panoramioDataStructure
     long int photo_id ; //id of each photograph
     QString photo_title; //title of each photograph
     QString photo_url; //url of each photograph
+    QString photo_file_url;
     long int longitude;
     long int latitude;
     int width;

@@ -19,17 +19,17 @@
 #include "StoragePolicy.h"
 
 
-HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, QString const id )
-    : m_sourceUrl( sourceUrl ),
-      m_destinationFileName( destFileName ),
-      m_originalDestinationFileName( destFileName ),
-      m_data(),
-      m_initiatorId( id ),
-      m_status( NoStatus ),
-      m_priority( NoPriority )
+HttpJob::HttpJob ( const QUrl & sourceUrl, const QString & destFileName, QString const id )
+        : m_sourceUrl ( sourceUrl ),
+        m_destinationFileName ( destFileName ),
+        m_originalDestinationFileName ( destFileName ),
+        m_data(),
+        m_initiatorId ( id ),
+        m_status ( NoStatus ),
+        m_priority ( NoPriority )
 {
-    m_buffer = new QBuffer( &m_data );
-    m_buffer->open( QIODevice::WriteOnly );
+    m_buffer = new QBuffer ( &m_data );
+    m_buffer->open ( QIODevice::WriteOnly );
 }
 
 HttpJob::~HttpJob()
@@ -39,14 +39,14 @@ HttpJob::~HttpJob()
 }
 
 
-HttpFetchFile::HttpFetchFile( StoragePolicy *policy, QObject *parent )
-    : QObject( parent ),
-      m_storagePolicy( policy )
+HttpFetchFile::HttpFetchFile ( StoragePolicy *policy, QObject *parent )
+        : QObject ( parent ),
+        m_storagePolicy ( policy )
 {
-    m_pHttp = new QHttp(this);
+    m_pHttp = new QHttp ( this );
 
-    connect( m_pHttp, SIGNAL( requestFinished( int, bool ) ),
-             this, SLOT( httpRequestFinished( int, bool ) ) );
+    connect ( m_pHttp, SIGNAL ( requestFinished ( int, bool ) ),
+              this, SLOT ( httpRequestFinished ( int, bool ) ) );
 }
 
 HttpFetchFile::~HttpFetchFile()
@@ -55,30 +55,39 @@ HttpFetchFile::~HttpFetchFile()
     delete m_pHttp;
 }
 
-void HttpFetchFile::executeJob( HttpJob* job )
+void HttpFetchFile::executeJob ( HttpJob* job )
 {
     const QUrl sourceUrl = job->sourceUrl();
 
-    m_pHttp->setHost( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
+    m_pHttp->setHost ( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
     if ( !sourceUrl.userName().isEmpty() )
-        m_pHttp->setUser( sourceUrl.userName(), sourceUrl.password() );
+        m_pHttp->setUser ( sourceUrl.userName(), sourceUrl.password() );
+//    if Url has query item like in panoramio API requests source.path() chops it , this "if" gurantees its correct treatement
+    QString cleanupPath;
+    if ( sourceUrl.hasQuery() == true )
+    {
+        cleanupPath= QString ( sourceUrl.toString ( QUrl::RemoveAuthority | QUrl::RemoveScheme ) );
+    }
+    else
+    {
+        cleanupPath = QUrl::toPercentEncoding ( sourceUrl.path(), "/", " -" );
+    }
 
-    const QString cleanupPath = QUrl::toPercentEncoding( sourceUrl.path(), "/", " -" );
+    qDebug() <<sourceUrl.host() <<"and path="<<cleanupPath;
+    QHttpRequestHeader header ( QLatin1String ( "GET" ), cleanupPath );
+    header.setValue ( "Connection", "Keep-Alive" );
+    header.setValue ( "User-Agent", "Marble TinyWebBrowser" );
+    header.setValue ( "Host", sourceUrl.host() );
 
-    QHttpRequestHeader header( QLatin1String("GET"), cleanupPath );
-    header.setValue( "Connection", "Keep-Alive" );
-    header.setValue( "User-Agent", "Marble TinyWebBrowser" );
-    header.setValue( "Host", sourceUrl.host() );
+    int httpGetId = m_pHttp->request ( header, 0, job->buffer() );
+    m_pJobMap.insert ( httpGetId, job );
 
-    int httpGetId = m_pHttp->request( header, 0, job->buffer() );
-    m_pJobMap.insert( httpGetId, job );
-
-    emit statusMessage( tr("Downloading data...") );
+    emit statusMessage ( tr ( "Downloading data..." ) );
 }
 
-void HttpFetchFile::httpRequestFinished( int requestId, bool error )
+void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
 {
-    if ( !m_pJobMap.contains( requestId ) )
+    if ( !m_pJobMap.contains ( requestId ) )
         return;
 
     QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
@@ -93,48 +102,52 @@ void HttpFetchFile::httpRequestFinished( int requestId, bool error )
 
     HttpJob* job = m_pJobMap[ requestId ];
 
-    if ( responseHeader.statusCode() == 301 ) {
-        QUrl newLocation( responseHeader.value( "Location" ) );
-        job->setSourceUrl( newLocation );
-        job->setDestinationFileName( newLocation.path() );
+    if ( responseHeader.statusCode() == 301 )
+    {
+        QUrl newLocation ( responseHeader.value ( "Location" ) );
+        job->setSourceUrl ( newLocation );
+        job->setDestinationFileName ( newLocation.path() );
 
         // Let's try again
-        executeJob( job );
+        executeJob ( job );
         return;
     }
 
-    if ( responseHeader.statusCode() != 200 ) {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( responseHeader.reasonPhrase() ) );
-        emit jobDone( m_pJobMap[ requestId ], 1 );
+    if ( responseHeader.statusCode() != 200 )
+    {
+        emit statusMessage ( tr ( "Download failed: %1." )
+                             .arg ( responseHeader.reasonPhrase() ) );
+        emit jobDone ( m_pJobMap[ requestId ], 1 );
 
-        m_pJobMap.remove( requestId );
+        m_pJobMap.remove ( requestId );
         return;
     }
 
-    if ( error != 0 ) {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( m_pHttp->errorString() ) );
-        emit jobDone( m_pJobMap[ requestId ], error );
+    if ( error != 0 )
+    {
+        emit statusMessage ( tr ( "Download failed: %1." )
+                             .arg ( m_pHttp->errorString() ) );
+        emit jobDone ( m_pJobMap[ requestId ], error );
 
-        m_pJobMap.remove( requestId );
+        m_pJobMap.remove ( requestId );
         return;
 
     }
 
-    if ( !m_storagePolicy->updateFile( job->originalDestinationFileName(), job->data() ) ) {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( m_storagePolicy->lastErrorMessage() ) );
-        emit jobDone( m_pJobMap[ requestId ], error );
+    if ( !m_storagePolicy->updateFile ( job->originalDestinationFileName(), job->data() ) )
+    {
+        emit statusMessage ( tr ( "Download failed: %1." )
+                             .arg ( m_storagePolicy->lastErrorMessage() ) );
+        emit jobDone ( m_pJobMap[ requestId ], error );
 
-        m_pJobMap.remove( requestId );
+        m_pJobMap.remove ( requestId );
         return;
     }
 
-    emit statusMessage( tr( "Download finished." ) );
+    emit statusMessage ( tr ( "Download finished." ) );
 
-    emit jobDone( m_pJobMap[ requestId ], 0 );
-    m_pJobMap.remove( requestId );
+    emit jobDone ( m_pJobMap[ requestId ], 0 );
+    m_pJobMap.remove ( requestId );
 }
 
 #include "HttpFetchFile.moc"
