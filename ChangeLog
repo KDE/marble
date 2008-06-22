@@ -1,5 +1,9 @@
 2008-06-22  Simon Schmeisser <mail_to_wrt@gmx.de>
 
+    * src/lib/MarbleControlBox.cpp
+
+    - another assumption about having a MarbleWidget hacked out
+
     * src/lib/MapThemeManager.h
     * src/lib/MarbleControlBox.h
     * src/lib/MarbleControlBox.cpp

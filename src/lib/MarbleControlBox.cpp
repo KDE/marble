@@ -508,6 +508,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
             // Since this slot is called when a change of map theme is
             // already finished, we can use the widget to get the
             // values.
+            if ( ! d->m_widget )
+                break;
             d->uiWidget.zoomSlider->setMinimum( d->m_widget->map()->minimumZoom() );
             d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
 
