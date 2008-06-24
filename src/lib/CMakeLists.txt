@@ -88,6 +88,7 @@ set(marblewidget_SRCS
     Projections/EquirectProjectionHelper.cpp
     Projections/MercatorProjectionHelper.cpp
     MeasureTool.cpp
+    ImageLoadThread.cpp
     VisiblePlaceMark.cpp
     PlaceMarkContainer.cpp
     PlaceMarkManager.cpp

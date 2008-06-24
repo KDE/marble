@@ -43,6 +43,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
 
     void    setPosition( const QPointF& position );
     QPointF position() const;
+    QPointF positivePosition( const QRectF& viewPort ) const;
 
     void    setSize( const QSizeF& size );
     virtual QSizeF   size() const;

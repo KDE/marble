@@ -33,8 +33,8 @@ class CompassFloatItem  : public QObject, public MarbleAbstractFloatItem
     Q_INTERFACES( MarbleLayerInterface )
 
  public:
-    explicit CompassFloatItem ( const QPointF &point = QPointF( 200.0, 10.0 ),
-                                const QSizeF &size = QSizeF( 86.0, 86.0 ) );
+    explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),
+                                const QSizeF &size = QSizeF( 75.0, 75.0 ) );
     ~CompassFloatItem ();
 
     QStringList backendTypes() const;

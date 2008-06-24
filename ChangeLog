@@ -1,10 +1,26 @@
+2008-06-24  Torsten Rahn <rahn@kde.org>
+
+    * src/plugins/marble/compass/CompassFloatItem.{cpp,h}:
+    * src/lib/TextureTile.{cpp,h}:
+    * src/lib/MarbleAbstractFloatItem.h:
+    * src/lib/MarbleModel.cpp:
+    * src/lib/MarbleAbstractFloatItem.cpp:
+    * src/lib/PlaceMarkInfoDialog.ui:
+    * src/lib/CMakeLists.txt:
+    * src/lib/ImageLoadThread.{cpp,h}:
+
+    - Fixing the position of the Compass.
+    - Adding the ImageLoadThread class already (does nothing ATM).
+    - Fixing the tab activated by default.
+
 2008-06-23  Shashank Singh <shashank.personal@gmail.com>
-    *src/lib/jsonparser.h --corrected a mistake photo_file_url
-    *src/lib/jsonparser.cpp --corrected a mistake regarding photo_file_url
-    *src/lib/HttpFetchFile.cpp -- url after query character was being chopped off ,corrected it
-    *src/lib/TinyWebBrowser.h  -- tinkered with it to enable support for panoramio
-    *src/lib/TinyWebBrowser.cpp
-    *src/lib/HttpDownloadManager -- very small formatting changes 
+    * src/lib/jsonparser.h --corrected a mistake photo_file_url
+    * src/lib/jsonparser.cpp --corrected a mistake regarding photo_file_url
+    * src/lib/HttpFetchFile.cpp -- url after query character was being chopped off ,corrected it
+    * src/lib/TinyWebBrowser.h  -- tinkered with it to enable support for panoramio
+    * src/lib/TinyWebBrowser.cpp
+    * src/lib/HttpDownloadManager -- very small formatting changes 
+
 2008-06-22  Simon Schmeisser <mail_to_wrt@gmx.de>
 
     * src/lib/MarbleControlBox.cpp

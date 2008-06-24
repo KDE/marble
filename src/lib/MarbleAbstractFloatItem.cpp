@@ -115,6 +115,15 @@ QPointF MarbleAbstractFloatItem::position() const
     return d->m_position;
 }
 
+QPointF MarbleAbstractFloatItem::positivePosition( const QRectF& viewPort ) const
+{
+    double x, y;
+    x = ( d->m_position.x() < 0 ) ? viewPort.width() - d->m_size.width() - d->m_position.x() : d->m_position.x();
+    y = ( d->m_position.y() < 0 ) ? viewPort.height() - d->m_size.height() - d->m_position.y() : d->m_position.y();
+
+    return QPointF( x, y );
+}
+
 void MarbleAbstractFloatItem::setSize( const QSizeF& size )
 {
     d->m_size = size;
@@ -173,7 +182,7 @@ QRectF MarbleAbstractFloatItem::renderedRect() const
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRect( QRectF( QPointF( marginLeft(), marginTop() ), d->m_renderedRect.size() ) );
+    path.addRect( QRectF( QPointF( 0.0, 0.0 ), d->m_renderedRect.size() ) );
     return path;
 }
 
@@ -184,6 +193,7 @@ void MarbleAbstractFloatItem::renderBackground( QPainter* painter )
     painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
     painter->setBrush( d->s_background );
     painter->setRenderHint( QPainter::Antialiasing, true );
+    painter->translate( QPointF( marginLeft(), marginTop() ) );
     painter->drawPath( backgroundShape() );
 
     painter->restore();
@@ -345,7 +355,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
     if ( renderPos == "FLOAT_ITEM" ) {
         // Prevent unneeded redraws
         if ( !needsUpdate( viewport ) && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
-            painter->drawPixmap( d->m_position, d->m_cachePixmap );
+            painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
             return true;
         }
     
@@ -369,10 +379,10 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
 
             success = renderFloatItem( &pixmapPainter, viewport, layer );
 
-            painter->drawPixmap( d->m_position, d->m_cachePixmap );
+            painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
         }
         else {
-            painter->translate( d->m_position.x(), d->m_position.y() );
+            painter->translate( positivePosition( painter->viewport() ) );
             renderBackground( painter );
             painter->translate( d->s_padding, d->s_padding );
 

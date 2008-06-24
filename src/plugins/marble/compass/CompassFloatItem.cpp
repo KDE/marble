@@ -105,7 +105,7 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
     QRectF compassRect( contentRect() );
 
-    qDebug() << "Polarity" << m_polarity;
+//    qDebug() << "Polarity" << m_polarity;
     QString dirstr = tr( "N" );
     if ( m_polarity == -1 ) 
         dirstr = tr( "S" );
@@ -122,7 +122,10 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     QPainterPath   outlinepath;
     const QPointF  baseline( 0.5 * (double)( compassRect.width() - fontwidth ),
                              (double)(fontheight) + 2.0 );
+
     outlinepath.addText( baseline, font(), dirstr );
+
+    painter->setRenderHint( QPainter::Antialiasing, true );
 
     painter->setPen( outlinepen );
     painter->setBrush( outlinebrush );
@@ -130,6 +133,8 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
     painter->setPen( Qt::NoPen );
     painter->drawPath( outlinepath );
+
+    painter->autoMapQuality();
 
     int compassLength = static_cast<int>( contentRect().height() ) - 5 - fontheight;
         

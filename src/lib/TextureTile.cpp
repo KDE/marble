@@ -112,10 +112,10 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
         bool currentTileAvailable = false;
 
         TextureTile *currentTile = 0;
+        TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );
 
         // Check whether the current tile id is available in the CACHE:
         if ( tileCache ) {
-            TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );    
             currentTile = tileCache->take( currentTileId );
 
             if ( currentTile ) {
@@ -123,7 +123,6 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                 lastModified = currentTile->created();
                 if ( lastModified.secsTo( now ) < textureLayer->expire()) {
                     temptile = currentTile->rawtile();
-                    qDebug() << "FOUND IN CACHE";
                     currentTileAvailable = true;
                 } else {
                     delete currentTile;
@@ -136,9 +135,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
 
         if ( !currentTile ) {
             QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, 
-                                                                        currentLevel,
-                                                                        (int)(currentX),
-                                                                        (int)(currentY) );
+                                                                        currentLevel, (int)(currentX), (int)(currentY) );
             absfilename = MarbleDirs::path( relfilename );
             const QFileInfo fileInfo( absfilename );
             lastModified = fileInfo.lastModified();

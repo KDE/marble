@@ -29,13 +29,11 @@
 #include "TileId.h"
 #include "MergedLayerDecorator.h"
 
-//class QCache;
 
 class QUrl;
-
 class GeoSceneTexture;
-
 class TextureTile;
+
 
 class TextureTile : public QObject {
     Q_OBJECT

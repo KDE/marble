@@ -681,7 +681,8 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
 
     m_layerDecorator->setInfo(x, y, level, tile->id());
     m_layerDecorator->setTile(tile->tile());
-    m_layerDecorator->paint("maps/" + textureLayer->sourceDir());
+        
+    m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
     tile->loadTile(requestTileUpdate);
 }
 
