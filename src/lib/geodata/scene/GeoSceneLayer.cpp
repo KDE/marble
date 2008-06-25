@@ -59,7 +59,8 @@ void GeoSceneAbstractDataset::setExpire( int expire )
 GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_name( name ),
       m_backend( "" ),
-      m_role( "" )
+      m_role( "" ),
+      m_filter( 0 )
 {
     /* NOOP */
 }
@@ -138,4 +139,19 @@ QString GeoSceneLayer::role() const
 void GeoSceneLayer::setRole( const QString& role )
 {
     m_role = role;
+}
+
+GeoSceneFilter* GeoSceneLayer::filter()
+{
+    return m_filter;
+}
+
+void GeoSceneLayer::addFilter( GeoSceneFilter *filter )
+{
+    m_filter = filter;
+}
+
+void GeoSceneLayer::removeFilter( GeoSceneFilter *filter )
+{
+    if( filter == m_filter ) { m_filter = 0; }
 }

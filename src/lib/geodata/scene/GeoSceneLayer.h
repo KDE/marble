@@ -26,6 +26,7 @@
 #include <QtCore/QVector>
 
 #include "GeoDocument.h"
+#include "GeoSceneFilter.h"
 
 
 /**
@@ -78,11 +79,17 @@ class GeoSceneLayer : public GeoNode {
     QString role() const;
     void setRole( const QString& type );
 
+	GeoSceneFilter* filter();
+	void addFilter( GeoSceneFilter *filter );
+	void removeFilter( GeoSceneFilter *filter );
+
  protected:
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
     QVector<GeoSceneAbstractDataset*> m_datasets;
+
+	GeoSceneFilter *m_filter;
 
     QString m_name;
     QString m_backend;

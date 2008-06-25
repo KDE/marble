@@ -50,6 +50,7 @@ const char* dgmlAttr_role             = "role";
 const char* dgmlAttr_spacing          = "spacing";
 const char* dgmlAttr_style            = "style";
 const char* dgmlAttr_text             = "text";
+const char* dgmlAttr_type             = "type";
 const char* dgmlAttr_user             = "user";
 const char* dgmlAttr_width            = "width";
 }

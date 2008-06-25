@@ -53,6 +53,7 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_spacing;
     extern const char* dgmlAttr_style;
     extern const char* dgmlAttr_text;
+    extern const char* dgmlAttr_type;
     extern const char* dgmlAttr_user;
     extern const char* dgmlAttr_width;
 }
