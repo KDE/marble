@@ -21,7 +21,6 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QAbstractItemModel>
 #include <QtGui/QWidget>
 
 #include "global.h"
@@ -38,6 +37,8 @@
 
 class MarbleWidget;
 class MarbleControlBoxPrivate;
+class QModelIndex;
+class QAbstractItemModel;
 class QStandardItemModel;
 
 /** 

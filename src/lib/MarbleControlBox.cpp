@@ -23,6 +23,7 @@
 
 #include "MarbleControlBox.h"
 
+#include <QtCore/QAbstractItemModel>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
