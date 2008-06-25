@@ -118,14 +118,17 @@ QPointF MarbleAbstractFloatItem::position() const
 QPointF MarbleAbstractFloatItem::positivePosition( const QRectF& viewPort ) const
 {
     double x, y;
-    x = ( d->m_position.x() < 0 ) ? viewPort.width() - d->m_size.width() - d->m_position.x() : d->m_position.x();
-    y = ( d->m_position.y() < 0 ) ? viewPort.height() - d->m_size.height() - d->m_position.y() : d->m_position.y();
+    x = ( d->m_position.x() < 0 ) ? viewPort.width() - d->m_size.width() + d->m_position.x() : d->m_position.x();
+    y = ( d->m_position.y() < 0 ) ? viewPort.height() - d->m_size.height() + d->m_position.y() : d->m_position.y();
 
     return QPointF( x, y );
 }
 
 void MarbleAbstractFloatItem::setSize( const QSizeF& size )
 {
+    if ( size == d->m_size )
+        return;
+
     d->m_size = size;
 
     d->calculateLayout();
@@ -377,6 +380,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
 
             pixmapPainter.translate( d->s_padding, d->s_padding );
 
+            pixmapPainter.setFont( d->s_font );
             success = renderFloatItem( &pixmapPainter, viewport, layer );
 
             painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
@@ -386,6 +390,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
             renderBackground( painter );
             painter->translate( d->s_padding, d->s_padding );
 
+            painter->setFont( d->s_font );
             success = renderFloatItem( painter, viewport, layer );
 
             painter->resetTransform();

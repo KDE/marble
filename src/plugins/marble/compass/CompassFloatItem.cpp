@@ -101,7 +101,8 @@ bool CompassFloatItem ::needsUpdate( ViewportParams *viewport )
 bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     painter->save();
-    painter->autoMapQuality();
+
+    painter->setRenderHint( QPainter::Antialiasing, true );
 
     QRectF compassRect( contentRect() );
 
@@ -124,8 +125,6 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *vi
                              (double)(fontheight) + 2.0 );
 
     outlinepath.addText( baseline, font(), dirstr );
-
-    painter->setRenderHint( QPainter::Antialiasing, true );
 
     painter->setPen( outlinepen );
     painter->setBrush( outlinebrush );

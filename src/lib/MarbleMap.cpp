@@ -908,7 +908,7 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
 //    d->m_compass.setTransparency( transparency );
-    d->m_mapscale.setTransparency( transparency );
+//    d->m_mapscale.setTransparency( transparency );
 
     // 2. Paint the compass
 
@@ -924,11 +924,12 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
                                                             northPoleY(), d->m_viewParams.projection() ) );
 */
     // 3. Paint the scale.
+/*
     if ( showScaleBar )
         painter.drawPixmap( 10, d->m_viewParams.canvasImage()->height() - 40,
                             d->m_mapscale.drawScaleBarPixmap( radius(),
                                                               d->m_viewParams.canvasImage()->width() / 2 - 20 ) );
-
+*/
     // 4. Paint the crosshair.
     d->m_crosshair.paint( &painter,
                           d->m_viewParams.canvasImage()->width(),

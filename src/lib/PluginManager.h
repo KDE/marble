@@ -14,7 +14,10 @@
 
 #include <QtCore/QObject>
 #include "marble_export.h"
+
 class MarbleLayerInterface;
+
+class QAction;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -43,6 +46,7 @@ class MARBLE_EXPORT PluginManager : public QObject
  private:
     Q_DISABLE_COPY( PluginManager )
     QList<MarbleLayerInterface *> m_layerInterfaces;
+    QList<QAction*> m_floatItemActions;
 };
 
 
