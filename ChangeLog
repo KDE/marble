@@ -1,3 +1,9 @@
+2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/CMakeLists.txt
+
+    fix build error on windows - MapThemeManager.cpp is in marbleWidget
+
 2008-06-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/ExtDateTime.cpp:

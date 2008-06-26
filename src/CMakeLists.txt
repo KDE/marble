@@ -82,7 +82,6 @@ endif (QTONLY)
 set(marble_SRCS
     ControlView.cpp
     MarbleTest.cpp
-    lib/MapThemeManager.cpp
 )
 
 set(marble_HDRS
