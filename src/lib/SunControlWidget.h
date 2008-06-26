@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      David Roberts
+// Copyright 2008      David Roberts <dvdr18@gmail.com>
 //
 
 

@@ -1,4 +1,4 @@
-// Copyright 2008 David Roberts
+// Copyright 2008 David Roberts <dvdr18@gmail.com>
 // 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public

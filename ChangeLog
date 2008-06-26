@@ -1,3 +1,16 @@
+2008-06-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/ExtDateTime.cpp:
+    * src/lib/ExtDateTime.h:
+    * src/lib/MergedLayerDecorator.cpp:
+    * src/lib/MergedLayerDecorator.h:
+    * src/lib/SunControlWidget.cpp:
+    * src/lib/SunControlWidget.h:
+    * src/lib/SunLocator.cpp:
+    * src/lib/SunLocator.h:
+
+    Fix krazy issues (missing email address).
+
 2008-06-25  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarbleControlBox.h:
