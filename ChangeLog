@@ -1,5 +1,12 @@
 2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/tests/CMakeLists.txt
+    * src/lib/tests/MarbleWidgetTest.cpp
+
+    add a new Test for the MarbleWidget - simply try to run a basic MarbleWidget
+
+2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/MarbleWidget.cpp
 
     add a default MapThemeId
