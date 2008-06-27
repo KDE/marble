@@ -17,6 +17,7 @@
 #include <math.h>
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QString>
 
 /**
  * @brief This enum is used to choose the projection shown in the view.
