@@ -1,5 +1,8 @@
 2008-06-27  Inge Wallin  <inge@lysator.liu.se>
 
+	Link!
+	* src/lib/tests/CMakeLists.txt: Add necessary qt libs and fix a bug.
+
 	Compile!  (still doesn't link)
 	* src/lib/global.h: include QString.h
 

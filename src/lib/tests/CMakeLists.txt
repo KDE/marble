@@ -9,13 +9,18 @@ macro( add_marble_test TEST_NAME )
       
         add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
         target_link_libraries( ${TEST_NAME} ${QT_QTMAIN_LIBRARY} 
-                                                 ${QT_QTCORE_LIBRARY} 
-                                                 ${QT_QTGUI_LIBRARY} 
-                                                 ${QT_QTTEST_LIBRARY} 
-                                                 marblewidget )
+ 			       		    ${QT_QTCORE_LIBRARY} 
+ 					    ${QT_QTGUI_LIBRARY} 
+ 					    ${QT_QTTEST_LIBRARY} 
+ 					    marblewidget )
     else( QTONLY )
         kde4_add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
-        target_link_libraries( PluginManagerTest ${QT_QTTEST_LIBRARY} marblewidget )
+        target_link_libraries( ${TEST_NAME}
+			       ${QT_QTMAIN_LIBRARY} 
+ 			       ${QT_QTCORE_LIBRARY} 
+ 			       ${QT_QTGUI_LIBRARY} 
+			       ${QT_QTTEST_LIBRARY}
+			        marblewidget )
     endif( QTONLY )
     add_test( ${TEST_NAME} ${TEST_NAME} )
 endmacro( add_marble_test TEST_NAME )
