@@ -1,5 +1,11 @@
 2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/MarbleWidget.cpp
+
+    add a default MapThemeId
+
+2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/PlaceMarkManager.cpp
 
     fix leakage of GeoNodes - the parser forced me to do it

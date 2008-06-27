@@ -132,6 +132,8 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
     d->construct();
+    
+    setMapThemeId("earth/srtm/srtm.dgml");
 }
 
 MarbleWidget::~MarbleWidget()
