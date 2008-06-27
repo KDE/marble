@@ -1,5 +1,11 @@
 2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/PlaceMarkManager.cpp
+
+    fix leakage of GeoNodes - the parser forced me to do it
+
+2008-06-27  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/CMakeLists.txt
 
     fix build error on windows - MapThemeManager.cpp is in marbleWidget

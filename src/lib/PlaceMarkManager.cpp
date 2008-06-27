@@ -42,6 +42,8 @@ PlaceMarkManager::~PlaceMarkManager()
     foreach ( KMLDocument* document, m_documentList ) {
         delete document;
     }
+#else
+    delete m_model;
 #endif
 }
 
