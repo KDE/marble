@@ -10,7 +10,7 @@
 
 #include <QtGui/QtGui>
 #include <QtTest/QtTest>
-#include "marble/MarbleWidget.h"
+#include "MarbleWidget.h"
 
 class TestMarbleWidget: public QObject
 {
