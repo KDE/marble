@@ -11,6 +11,7 @@
 #include "MarbleStarsPlugin.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QRectF>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include "MarbleDirs.h"
@@ -99,7 +100,9 @@ bool MarbleStarsPlugin::isInitialized () const
     return true;
 }
 
-bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
+				const QString& renderPos,
+				GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 
@@ -155,7 +158,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport, c
             else if ( (*i).magnitude() < 4 ) size = 2.0;
             else if ( (*i).magnitude() < 5 ) size = 1.0;
             else size = 0.5;
-            painter->drawEllipse( x, y, size, size );
+            painter->drawEllipse( QRectF( x, y, size, size ) );
         }
     }
 

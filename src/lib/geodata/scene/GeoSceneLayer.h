@@ -89,11 +89,11 @@ class GeoSceneLayer : public GeoNode {
     /// much about speed here), so we don't use a hash
     QVector<GeoSceneAbstractDataset*> m_datasets;
 
-	GeoSceneFilter *m_filter;
+    GeoSceneFilter  *m_filter;
 
-    QString m_name;
-    QString m_backend;
-    QString m_role;
+    QString          m_name;
+    QString          m_backend;
+    QString          m_role;
 
  private:
     Q_DISABLE_COPY( GeoSceneLayer )

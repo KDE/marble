@@ -183,7 +183,6 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     int           radius             = viewport->radius();
     int           halfImageWidth     = viewport->width() / 2;
     int           halfImageHeight    = viewport->height() / 2;
-    const double  inverseRadius      = 1.0 / (double)(radius);
     bool          noerr              = false;
 
     // Calculate translation of center point
@@ -195,10 +194,8 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     int yTop          = halfImageHeight - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
     if ( y >= yTop && y < yBottom ) {
-        int const  xPixels = x - halfImageWidth;
-        int const  yPixels = y - halfImageHeight;
-
-        double const pixel2rad = M_PI / (2 * radius);
+        int    const  xPixels   = x - halfImageWidth;
+        double const  pixel2rad = M_PI / (2 * radius);
 
         lat = atan( sinh( ((halfImageHeight + yCenterOffset) - y)
                           / (double)(2 * radius) * M_PI ) );

@@ -1,3 +1,12 @@
+2008-06-28  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix warnings
+	* src/plugins/marble/stars/MarbleStarsPlugin.cpp (render): use QRectF for floating point sizes of the stars.
+	* src/lib/Projections/MercatorProjection.cpp (geoCoordinates): remove unused vars
+	* src/lib/MarbleAbstractFloatItem.cpp (misc): mark unused parameters
+	* src/lib/geodata/scene/GeoScenePalette.cpp: Add newline
+	* src/lib/geodata/scene/GeoSceneLayer.h (constructor): initialize in right order
+
 2008-06-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Link!

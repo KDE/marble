@@ -326,6 +326,8 @@ void MarbleAbstractFloatItem::setPadding( double padding )
 
 bool MarbleAbstractFloatItem::needsUpdate( ViewportParams *viewport )
 {
+    Q_UNUSED( viewport );
+
     return false;
 }
 
@@ -403,17 +405,32 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
     return success;
 }
 
-bool MarbleAbstractFloatItem::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer )
+bool MarbleAbstractFloatItem::renderFloatItem( GeoPainter *painter,
+					       ViewportParams *viewport,
+					       GeoSceneLayer *layer )
 {
-    // In the derived method here is the right place to draw the contents of the float item
+    // In the derived method here is the right place to draw the
+    // contents of the float item.
+
+    Q_UNUSED( painter );
+    Q_UNUSED( viewport );
+    Q_UNUSED( layer );
 
     return true;
 }
 
-bool MarbleAbstractFloatItem::renderOnMap( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer *layer )
+bool MarbleAbstractFloatItem::renderOnMap( GeoPainter     *painter,
+					   ViewportParams *viewport,
+					   const QString  &renderPos,
+					   GeoSceneLayer  *layer )
 {
-    // In the derived method here is the place where you can draw some additional stuff onto 
-    // the map itself
+    // In the derived method here is the place where you can draw some
+    // additional stuff onto the map itself.
+
+    Q_UNUSED( painter );
+    Q_UNUSED( viewport );
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
 
     return true;
 }
