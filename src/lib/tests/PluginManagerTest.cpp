@@ -22,7 +22,7 @@ class PluginManagerTest : public QObject {
 void PluginManagerTest::loadPlugins() {
     int pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
     PluginManager *pm = new PluginManager();
-    QCOMPARE( pm->layerInterfaces().size(), pluginNumber );
+    QCOMPARE( pm->layerPlugins().size(), pluginNumber );
 }
 
 QTEST_MAIN( PluginManagerTest )
