@@ -22,6 +22,7 @@
 class SatellitesPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
+    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;

@@ -23,6 +23,7 @@
 class MapScaleFloatItem : public MarbleAbstractFloatItem
 {
     Q_OBJECT
+    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),

@@ -60,6 +60,7 @@ class StarPoint {
 class MarbleStarsPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
+    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;

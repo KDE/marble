@@ -72,7 +72,7 @@ void PluginManager::loadPlugins()
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject *obj = loader.instance();
-        MarbleAbstractLayer * layerPlugin = dynamic_cast<MarbleAbstractLayer *>(obj);
+        MarbleAbstractLayer * layerPlugin = qobject_cast<MarbleAbstractLayer *>(obj);
 
         if( layerPlugin ) {
             m_layerPlugins.append( layerPlugin );
