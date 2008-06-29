@@ -392,8 +392,6 @@ void GridMap::mercatorCreateCircle( double angle, SphereDim dim,
 	if ( yBottom > imgHeight )
 	    yBottom = imgHeight;
 	
-	qDebug() << "yTop: " << yTop << "yBottom: " << yBottom;
-
         // If we are far zoomed out, then there may be repetition in
         // the X direction.
 
