@@ -1,5 +1,10 @@
 2008-06-29  Inge Wallin  <inge@lysator.liu.se>
 
+	Cleaning: Unify qridmap for equirectangular and mercator projections
+	* src/lib/GridMap.{h,cpp} (mercatorCreateCircle): renamed into
+	flatCreateCircle
+	(createCircle): Call flatCreateCircle
+
 	Make gridmap work for Mercator projection
 	* src/lib/GridMap.cpp (mercatorCreateCircle): New function
 	(createCircle): call mercatorCreateCircle

@@ -154,10 +154,8 @@ void GridMap::createCircle( double angle, SphereDim dim,
             sphericalCreateCircle( angle, dim, precision, viewport, cutOff );
             break;
         case Equirectangular:
-            rectangularCreateCircle( angle, dim, precision, viewport, cutOff );
-            break;
         case Mercator:
-            mercatorCreateCircle( angle, dim, precision, viewport, cutOff );
+	    flatCreateCircle( angle, dim, precision, viewport, cutOff );
             break;
     }
 }
@@ -258,90 +256,14 @@ void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
     }
 }
 
-void GridMap::rectangularCreateCircle( double angle, SphereDim dim,
-                                       int precision,
-                                       ViewportParams *viewport, double cutOff )
-{
-    // Only used in spherical projection.
-    Q_UNUSED( precision );
-    Q_UNUSED( cutOff );
-
-    // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
-
-    // Convenience variables
-    int     imgHeight = viewport->height();
-    int     imgWidth  = viewport->width();
-    double  radius    = viewport->radius();
-    double  rad2Pixel = (double)( 2 * radius ) / M_PI;
-
-    m_polygon.clear();
-
-    if ( dim == Latitude ) {
-        double   y = imgHeight / 2 + ( centerLat - angle ) * rad2Pixel;
-        QPointF  startPoint( 0.0f,     y );
-        // FIXME: This will be slightly more complicated if we don't
-        //        always allow repetition in the X direction
-        QPointF  endPoint(   imgWidth, y );
-
-        m_polygon << startPoint << endPoint;
-        append( m_polygon );
-    }
-    else {
-        // dim == Longitude
-
-        // x1 is the first "half" of the circle, and x2 the second.
-        double  x1 = imgWidth / 2 + ( angle - centerLon ) * rad2Pixel;
-        double  x2 = imgWidth / 2 + ( angle + M_PI - centerLon ) * rad2Pixel;
-
-        float   beginY = imgHeight / 2 - radius + centerLat * rad2Pixel;
-        float   endY   = beginY + 2 * radius;
-
-        // Check Y limits.
-        if ( beginY < 0 ) 
-            beginY = 0;
-        if ( endY > imgHeight )
-            endY = imgHeight ;
-
-        // If we are far zoomed out, then there may be repetition in
-        // the X direction.
-        // First do the x1 part of it.
-        while ( x1 > 4 * radius ) 
-            x1 -= 4 * radius;
-        while ( x1 < imgWidth ) {
-            QPointF  startPoint( x1, beginY );
-            QPointF  endPoint(   x1, endY );
-
-            m_polygon << startPoint << endPoint;
-            append( m_polygon );
-
-            // Set up for next pass through the loop
-            x1 += 4 * radius;
-            m_polygon.clear();
-        }
-
-        // Then do the x2 part of it.
-        while ( x2 > 4 * radius ) 
-            x2 -= 4 * radius;
-        while ( x2 < imgWidth ) {
-            QPointF  startPoint( x2, beginY );
-            QPointF  endPoint(   x2, endY );
-
-            m_polygon << startPoint << endPoint;
-            append( m_polygon );
-
-            // Set up for next pass through the loop
-            x2 += 4 * radius;
-            m_polygon.clear();
-        }
-    }
-}
-
-void GridMap::mercatorCreateCircle( double angle, SphereDim dim,
-				    int precision,
-				    ViewportParams *viewport, double cutOff )
+// This function is used for all projections that are flat.
+// Currently that means:
+//  - Equirectangular
+//  - Mercator
+//
+void GridMap::flatCreateCircle( double angle, SphereDim dim,
+				int precision,
+				ViewportParams *viewport, double cutOff )
 {
     // Only used in spherical projection.
     Q_UNUSED( precision );
