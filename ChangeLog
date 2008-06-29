@@ -1,3 +1,9 @@
+2008-06-29  Inge Wallin  <inge@lysator.liu.se>
+
+	Make gridmap work for Mercator projection
+	* src/lib/GridMap.cpp (mercatorCreateCircle): New function
+	(createCircle): call mercatorCreateCircle
+
 2008-06-28  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix warnings

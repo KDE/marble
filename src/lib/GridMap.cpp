@@ -22,6 +22,7 @@
 #include "GeoDataPoint.h"       // In geodata/data/
 #include "global.h"
 #include "GeoPainter.h"
+#include "AbstractProjection.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
@@ -29,9 +30,9 @@
 // the earth's axial tilt, which currently measures about 23°26'21".
  
 const double  AXIALTILT = DEG2RAD * ( 23.0
-                                           + 26.0 / 60.0
-                                           + 21.0 / 3600.0 );
-const double  PIHALF    = M_PI / 2;
+				      + 26.0 / 60.0
+				      + 21.0 / 3600.0 );
+const double  PIHALF    = M_PI / 2.0;
 
 
 GridMap::GridMap()
@@ -155,6 +156,9 @@ void GridMap::createCircle( double angle, SphereDim dim,
         case Equirectangular:
             rectangularCreateCircle( angle, dim, precision, viewport, cutOff );
             break;
+        case Mercator:
+            mercatorCreateCircle( angle, dim, precision, viewport, cutOff );
+            break;
     }
 }
 
@@ -271,7 +275,7 @@ void GridMap::rectangularCreateCircle( double angle, SphereDim dim,
     int     imgHeight = viewport->height();
     int     imgWidth  = viewport->width();
     double  radius    = viewport->radius();
-    double  rad2Pixel = (float)( 2 * radius ) / M_PI;
+    double  rad2Pixel = (double)( 2 * radius ) / M_PI;
 
     m_polygon.clear();
 
@@ -334,6 +338,84 @@ void GridMap::rectangularCreateCircle( double angle, SphereDim dim,
         }
     }
 }
+
+void GridMap::mercatorCreateCircle( double angle, SphereDim dim,
+				    int precision,
+				    ViewportParams *viewport, double cutOff )
+{
+    // Only used in spherical projection.
+    Q_UNUSED( precision );
+    Q_UNUSED( cutOff );
+
+    // Convenience variables
+    AbstractProjection  *currentProjection = viewport->currentProjection();
+    int                  imgHeight = viewport->height();
+    int                  imgWidth  = viewport->width();
+    int                  radius    = viewport->radius();
+
+    int  dummy;
+
+    m_polygon.clear();
+    if ( dim == Latitude ) {
+	// FIXME: At some point add a
+	//        AbstractProjection::screenCoordinates() that produce
+	//        qreals, and then make y and x below qreals instead.
+	int  y;
+
+	currentProjection->screenCoordinates( 0.0, angle, viewport, 
+					      dummy, y );
+
+        QPointF  startPoint( 0.0f,     (double)y );
+        QPointF  endPoint(   imgWidth, (double)y );
+        m_polygon << startPoint << endPoint;
+        append( m_polygon );
+    }
+    else {
+        // dim == Longitude
+
+	int  x;
+	int  yTop;
+	int  yBottom;
+
+	currentProjection->screenCoordinates( angle, 0.0, viewport, 
+					      x, dummy );
+
+	// Get the top and bottom of the map.  Clip it to the screen
+	currentProjection->screenCoordinates( 0.0, currentProjection->maxLat(),
+					      viewport,
+					      dummy, yTop );
+	if ( yTop < 0 )
+	    yTop = 0;
+	currentProjection->screenCoordinates( 0.0, -currentProjection->maxLat(),
+					      viewport,
+					      dummy, yBottom );
+	if ( yBottom > imgHeight )
+	    yBottom = imgHeight;
+	
+	qDebug() << "yTop: " << yTop << "yBottom: " << yBottom;
+
+        // If we are far zoomed out, then there may be repetition in
+        // the X direction.
+
+	// Normally we would add 2*PI (4*radius) but in this case a
+	// circle is shown as a line every half (the front and the
+	// back).
+        while ( x > 2 * radius ) 
+            x -= 2 * radius;
+        while ( x < imgWidth ) {
+            QPointF  startPoint( x, yTop );
+            QPointF  endPoint(   x, yBottom );
+
+            m_polygon << startPoint << endPoint;
+            append( m_polygon );
+
+            // Set up for next pass through the loop
+            x += 2 * radius;
+            m_polygon.clear();
+        }
+    }
+}
+
 
 void GridMap::paintGridMap(GeoPainter * painter, bool antialiasing)
 {

@@ -54,6 +54,9 @@ class GridMap : public ScreenPolygon::Vector
     void rectangularCreateCircle( double angle, SphereDim,
                                   int precision,
                                   ViewportParams *viewport, double cutCoeff = 0.0 );
+    void mercatorCreateCircle( double angle, SphereDim,
+			       int precision,
+			       ViewportParams *viewport, double cutCoeff = 0.0 );
 
     int            getPrecision( ViewportParams *viewport );
     const QPointF  horizonPoint( ViewportParams *viewport )
