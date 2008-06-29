@@ -12,6 +12,7 @@
 #include "MarbleAbstractFloatItem.h"
 
 
+#include <QtGui/QAction>
 #include <QtCore/QDebug>
 #include <QtCore/QRectF>
 #include "GeoPainter.h"
@@ -94,7 +95,8 @@ bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = true;
 
 MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point, 
                                                   const QSizeF &size )
-    : d( new MarbleAbstractFloatItemPrivate( point, size ) )
+    : MarbleAbstractLayer(),
+      d( new MarbleAbstractFloatItemPrivate( point, size ) )
 {
 }
 
@@ -138,16 +140,6 @@ void MarbleAbstractFloatItem::setSize( const QSizeF& size )
 QSizeF MarbleAbstractFloatItem::size() const
 {
     return d->m_size;
-}
-
-void MarbleAbstractFloatItem::setVisible( bool visible )
-{
-    d->m_visible = visible;
-}
-
-bool MarbleAbstractFloatItem::visible() const
-{
-    return d->m_visible;
 }
 
 QPen MarbleAbstractFloatItem::pen() const
@@ -434,3 +426,6 @@ bool MarbleAbstractFloatItem::renderOnMap( GeoPainter     *painter,
 
     return true;
 }
+
+#include "MarbleAbstractFloatItem.moc"
+

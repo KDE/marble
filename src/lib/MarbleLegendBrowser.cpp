@@ -102,13 +102,13 @@ void MarbleLegendBrowser::initTheme()
         QVector<GeoSceneProperty*>::const_iterator it = allProperties.begin();
         for (it = allProperties.begin(); it != allProperties.end(); ++it) {
             if ( (*it)->available() == true ) {
-                setCheckedProperty( (*it)->name(), (*it)->value() );
+                d->m_checkBoxMap[ (*it)->name() ] = (*it)->value();
             }
         }
 
         disconnect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ), 0, 0 );
         connect ( currentMapTheme, SIGNAL( valueChanged( QString, bool ) ),
-                  this, SLOT( test( QString, bool ) ) );
+                  this, SLOT( setCheckedProperty( QString, bool ) ) );
     }
 
     loadLegend();
@@ -324,6 +324,18 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
     d->m_checkBoxMap[ name ] = checked;
+
+    setUpdatesEnabled( false );
+    {
+        int scrollPosition = verticalScrollBar()->sliderPosition();
+
+        loadLegend();
+
+        verticalScrollBar()->setSliderPosition( scrollPosition );
+    }
+    setUpdatesEnabled( true );
+
+    repaint();
 }
 
 #include "MarbleLegendBrowser.moc"

@@ -14,11 +14,13 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QList>
 #include <QtCore/QPluginLoader>
 
 // Local dir
 #include "MarbleDirs.h"
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
+#include "MarbleAbstractFloatItem.h"
 
 PluginManager::PluginManager(QObject *parent)
     : QObject(parent)
@@ -31,9 +33,26 @@ PluginManager::~PluginManager()
 {
 }
 
-QList<MarbleLayerInterface *> PluginManager::layerInterfaces() const
+QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
 {
-    return m_layerInterfaces;
+    QList<MarbleAbstractFloatItem *> floatItemList;
+
+    QList<MarbleAbstractLayer *>::const_iterator i;
+    for (i = m_layerPlugins.begin(); i != m_layerPlugins.end(); ++i)
+    {
+        MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
+        if ( floatItem )
+        {
+            floatItemList.append( floatItem );
+        }
+    }
+
+    return floatItemList;
+}
+
+QList<MarbleAbstractLayer *> PluginManager::layerPlugins() const
+{
+    return m_layerPlugins;
 }
 
 void PluginManager::loadPlugins()
@@ -45,17 +64,18 @@ void PluginManager::loadPlugins()
 
     MarbleDirs::debug();
 
-    qDeleteAll( m_layerInterfaces );
-    m_layerInterfaces.clear();
+    qDeleteAll( m_layerPlugins );
+    m_layerPlugins.clear();
 
     foreach( QString fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
-        QObject *interface = loader.instance();
+        QObject *obj = loader.instance();
+        MarbleAbstractLayer * layerPlugin = dynamic_cast<MarbleAbstractLayer *>(obj);
 
-        if( interface ) {
-            m_layerInterfaces.append( qobject_cast<MarbleLayerInterface *>(interface) );
+        if( layerPlugin ) {
+            m_layerPlugins.append( layerPlugin );
         }
         else
         {

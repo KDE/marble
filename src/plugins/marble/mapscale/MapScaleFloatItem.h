@@ -20,10 +20,9 @@
  *
  */
 
-class MapScaleFloatItem : public QObject, public MarbleAbstractFloatItem
+class MapScaleFloatItem : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),
@@ -55,8 +54,11 @@ class MapScaleFloatItem : public QObject, public MarbleAbstractFloatItem
     int   invScale() const            { return m_invScale; }
     void  setInvScale( int invScale ) { m_invScale = invScale; }
 
+    int      m_radius;
     int      m_invScale;
 
+    int      m_leftBarMargin;
+    int      m_rightBarMargin;
     int      m_scaleBarWidth;
     int      m_scaleBarHeight;
     double   m_scaleBarKm;

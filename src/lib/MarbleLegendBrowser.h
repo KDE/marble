@@ -39,7 +39,6 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 
  public Q_SLOTS:
     void setCheckedProperty( const QString& name, bool checked );
-    void test( const QString& name, bool value ){ qDebug() << "TEST" << name << value; }
 
  Q_SIGNALS:
 /*

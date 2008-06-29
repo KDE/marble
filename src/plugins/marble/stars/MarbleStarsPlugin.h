@@ -9,7 +9,7 @@
 //
 
 //
-// This class is a test plugin.
+// This class is a stars plugin.
 //
 
 #ifndef MARBLESTARSPLUGIN_H
@@ -18,7 +18,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
 #include "Quaternion.h"
 
 class StarPoint {
@@ -57,10 +57,9 @@ class StarPoint {
  *
  */
 
-class MarbleStarsPlugin : public QObject, public MarbleLayerInterface
+class MarbleStarsPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;
@@ -91,4 +90,4 @@ class MarbleStarsPlugin : public QObject, public MarbleLayerInterface
     QVector<StarPoint> m_stars;
 };
 
-#endif
+#endif // MARBLESTARSPLUGIN_H

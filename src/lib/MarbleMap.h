@@ -55,6 +55,7 @@ class SunLocator;
 class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
+class MarbleAbstractFloatItem;
 
 
 /**
@@ -451,6 +452,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return the sun locator object
      */
     SunLocator* sunLocator();
+
+    QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
 

@@ -15,9 +15,8 @@
 #include <QtCore/QObject>
 #include "marble_export.h"
 
-class MarbleLayerInterface;
-
-class QAction;
+class MarbleAbstractLayer;
+class MarbleAbstractFloatItem;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -32,7 +31,8 @@ class MARBLE_EXPORT PluginManager : public QObject
     explicit PluginManager(QObject *parent = 0);
     ~PluginManager();
 
-    QList<MarbleLayerInterface *> layerInterfaces() const;
+    QList<MarbleAbstractFloatItem *> floatItems() const;
+    QList<MarbleAbstractLayer *> layerPlugins() const;
 
  public Q_SLOTS:
     /**
@@ -45,8 +45,7 @@ class MARBLE_EXPORT PluginManager : public QObject
 
  private:
     Q_DISABLE_COPY( PluginManager )
-    QList<MarbleLayerInterface *> m_layerInterfaces;
-    QList<QAction*> m_floatItemActions;
+    QList<MarbleAbstractLayer *> m_layerPlugins;
 };
 
 

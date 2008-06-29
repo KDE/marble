@@ -27,10 +27,9 @@ class QSvgRenderer;
  *
  */
 
-class CompassFloatItem  : public QObject, public MarbleAbstractFloatItem
+class CompassFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),

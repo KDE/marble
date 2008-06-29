@@ -17,17 +17,16 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
-class MarbleTestPlugin : public QObject, public MarbleLayerInterface
+class MarbleTestPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;

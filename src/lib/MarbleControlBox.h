@@ -112,10 +112,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void setMapThemeModel( QStandardItemModel *model );
 
-    void selectTheme( const QString & );
-
-    void selectProjection( Projection projection );
-
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.
@@ -172,6 +168,10 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void updateGps();
    
  public Q_SLOTS:
+
+    void selectTheme( const QString & );
+
+    void selectProjection( Projection projection );
 
     /**
      * @brief Sets the value of the slider.

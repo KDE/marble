@@ -35,6 +35,8 @@
 #include "lib/MarbleAboutDialog.h"
 #include "lib/SunControlWidget.h"
 
+#include "MarbleAbstractFloatItem.h"
+
 namespace
 {
     const char* POSITION_STRING = "Position:";
@@ -165,6 +167,11 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_sideBarAct);
     m_fileMenu->addAction(m_statusBarAct);
     m_fileMenu->addSeparator();
+
+    m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
+    createInfoBoxesMenu();
+
+    m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_showCloudsAct);
     m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addSeparator();
@@ -175,6 +182,22 @@ void MainWindow::createMenus()
     m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
+
+    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxMenu() ) ); 
+}
+
+void MainWindow::createInfoBoxesMenu()
+{
+    m_infoBoxesMenu->clear();
+    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+
+    QList<MarbleAbstractFloatItem *>::const_iterator i;
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
+    {
+        m_infoBoxesMenu->addAction( (*i)->action() );
+    }
+
+    qDebug("CLEARED");
 }
 
 void MainWindow::createStatusBar()

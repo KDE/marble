@@ -79,6 +79,15 @@ class MARBLE_EXPORT ViewParams
     void setPropertyValue( const QString &name, bool value );
 
     /**
+     * @brief  Get the availability of a property across groups
+     * @param  name  the property name
+     * @param  available  availability of the property
+     * @return @c true  the property was registered in the settings
+     *         @c false the property wasn't registered in the settings
+     */
+    void propertyAvailable( const QString& name, bool& available  );
+
+    /**
      * @brief  Get the value of a property across groups
      * @param  name  the property name
      */

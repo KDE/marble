@@ -71,6 +71,7 @@ set(marblewidget_SRCS
     CrossHairFloatItem.cpp
 #    CompassFloatItem.cpp
 #    MapScaleFloatItem.cpp
+    MarbleAbstractLayer.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
     MarblePhysics.cpp

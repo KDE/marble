@@ -1219,4 +1219,8 @@ quint16 MarbleWidget::proxyPort() const
     return d->m_proxyPort;
 }
 
+QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const
+{
+    return d->m_model->floatItems();
+}
 #include "MarbleWidget.moc"

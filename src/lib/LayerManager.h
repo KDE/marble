@@ -18,16 +18,18 @@
 // Local dir
 #include "PluginManager.h"
 
+class LayerManagerPrivate;
+class GeoSceneDocument;
 class GeoPainter;
-class GeoSceneLayer;
-class ViewportParams;
+class ViewParams;
+class MarbleAbstractFloatItem;
 
 /**
  * @short The class that handles Marble's DGML layers.
  *
  */
 
-class LayerManager : public QObject
+class MARBLE_EXPORT LayerManager : public QObject
 {
     Q_OBJECT
 
@@ -35,16 +37,27 @@ class LayerManager : public QObject
     explicit LayerManager(QObject *parent = 0);
     ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    void renderLayers( GeoPainter *painter, ViewParams *viewParams );
+
+    QList<MarbleAbstractFloatItem *> floatItems() const;
+
+ Q_SIGNALS:
+    /**
+     * @brief Signal that the number of floatItems has changed
+     */
+    void floatItemsChanged();
 
  public Q_SLOTS:
     void loadLayers();
 
+    void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
+    void syncActionWithProperty( QString, bool );
+    void syncPropertyWithAction( QString, bool );
+ 
  private:
     Q_DISABLE_COPY( LayerManager )
-    PluginManager m_pluginManager;
 
-    QList<MarbleLayerInterface *> m_layerInterfaces;
+    LayerManagerPrivate  * const d;
 };
 
 

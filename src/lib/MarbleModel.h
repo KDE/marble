@@ -58,6 +58,7 @@ class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
 class ExtDateTime;
+class MarbleAbstractFloatItem;
 
 
 /**
@@ -241,6 +242,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
+    QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
     /**

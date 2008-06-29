@@ -25,7 +25,7 @@ class QMenu;
 
 class MarbleWidget;
 class SunControlWidget;
- 
+class MarbleAbstractFloatItem;
 
 class MainWindow : public QMainWindow
 {
@@ -76,6 +76,7 @@ class MainWindow : public QMainWindow
 
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
+    QMenu *m_infoBoxesMenu;
 
     QAction *m_exportMapAct;
     QAction *m_printAct;
@@ -100,6 +101,7 @@ class MainWindow : public QMainWindow
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
 
+    void createInfoBoxesMenu();
     void updateStatusBar();
 };
 

@@ -57,6 +57,7 @@ class SunLocator;
 class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
+class MarbleAbstractFloatItem;
 
 
 /**
@@ -473,6 +474,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setProxy( const QString& proxyHost, const quint16 proxyPort );
     QString proxyHost() const;
     quint16 proxyPort() const;
+
+    QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
 

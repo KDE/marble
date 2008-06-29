@@ -27,10 +27,9 @@ class QSvgRenderer;
  *
  */
 
-class MarbleOverviewMap : public QObject, public MarbleAbstractFloatItem
+class MarbleOverviewMap : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),

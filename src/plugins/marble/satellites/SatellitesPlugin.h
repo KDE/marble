@@ -13,16 +13,15 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
 
 /**
  * \brief This class displays a layer of satellites (which satellites TBD).
  *
  */
-class SatellitesPlugin : public QObject, public MarbleLayerInterface
+class SatellitesPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;

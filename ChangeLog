@@ -1,3 +1,37 @@
+2008-06-29  Torsten Rahn <rahn@kde.org>
+
+    * src/QtMainWindow.{cpp,h}:
+    * src/lib/PluginManager.h:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/ViewParams.{cpp,h}:
+    * src/lib/MarbleAbstractLayer.{cpp,h}:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/PluginManager.cpp:
+    * src/lib/MarbleLegendBrowser.h:
+    * src/lib/MarbleAbstractFloatItem.{cpp,h}:
+    * src/lib/MarbleControlBox.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/lib/LayerManager.{cpp,h}:
+    * src/tilecreator/CMakeLists.txt:
+    * src/plugins/marble/test/MarbleTestPlugin.h:
+    * src/plugins/marble/overviewmap/MarbleOverviewMap.h:
+    * src/plugins/marble/compass/CompassFloatItem.h:
+    * src/plugins/marble/mapscale/MapScaleFloatItem.{cpp,h}:
+    * src/plugins/marble/satellites/SatellitesPlugin.h:
+    * src/plugins/marble/stars/MarbleStarsPlugin.h:
+    * src/plugins/marble/CMakeLists.txt:
+
+    - Fixing the Plugin framework, so it has got a real base class 
+      ( MarbleAbstractLayer ).
+    - Fixing the checkboxes for the floatitem plugins in the legend.
+    - Adding the info boxes menu entries in the Qt frontend.
+    - Simplifying the plugin API a bit.
+    - D-Pointerification on the LayerManager class.
+    - Fixing the bug introduced with rev. 823208 which would result in 
+      the zoomslider not to get proper tickmarks. 
+
 2008-06-29  Inge Wallin  <inge@lysator.liu.se>
 
 	Cleaning: Unify qridmap for equirectangular and mercator projections

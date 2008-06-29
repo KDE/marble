@@ -64,7 +64,7 @@ if( TILES_AT_COMPILETIME )
         endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/tiles)
         install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tiles/ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/${mapname})
     endmacro(MARBLE_COMPILE_TILES)
-    # only for srtm data the generation needs long - for all other data you can also sp
+# only for srtm data the generation needs long - for all other data you can also sp
 #    MARBLE_COMPILE_TILES(bluemarble false)
 #    MARBLE_COMPILE_TILES(citylights false)
 #    MARBLE_COMPILE_TILES(plain false)

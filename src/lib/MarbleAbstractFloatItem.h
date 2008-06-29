@@ -12,6 +12,7 @@
 #ifndef MARBLE_ABSTRACT_FLOATITEM_H
 #define MARBLE_ABSTRACT_FLOATITEM_H
 
+#include <QtCore/QObject>
 #include <QtCore/QPointF>
 #include <QtCore/QSize>
 #include <QtCore/QString>
@@ -22,9 +23,10 @@
 #include <QtGui/QPainterPath>
 #include <QtGui/QFont>
 
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
 #include "marble_export.h"
 
+class QAction;
 
 class MarbleAbstractFloatItemPrivate;
 
@@ -34,8 +36,10 @@ class MarbleAbstractFloatItemPrivate;
  *
  */
 
-class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
+class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleAbstractLayer
 {
+    Q_OBJECT
+
  public:
     explicit MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ),
                                       const QSizeF &size = QSizeF( 150.0, 50.0 ) );
@@ -47,9 +51,6 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleLayerInterface
 
     void    setSize( const QSizeF& size );
     virtual QSizeF   size() const;
-
-    void    setVisible( bool visible );
-    bool    visible() const;
 
 
     QPen pen() const;

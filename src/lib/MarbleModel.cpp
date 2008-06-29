@@ -73,10 +73,10 @@ class MarbleModelPrivate
 
     MarbleModel         *m_parent;
 
-    LayerManager        m_layerManager;    
 
     // View and paint stuff
     GeoSceneDocument    *m_mapTheme;
+    LayerManager        m_layerManager;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;
@@ -108,6 +108,13 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
+    // FIXME: more on the spot update names and API
+    connect ( &( d->m_layerManager ), SIGNAL( floatItemsChanged() ),
+              this,                   SIGNAL( modelChanged() ) );
+/*
+    connect ( this, SIGNAL( themeChanged ( QString ) ),
+              &( d->m_layerManager ), SLOT( syncViewParamsAndPlugins() ) );
+*/
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
 
@@ -344,8 +351,11 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
-
+    qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
+
+    d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
+
     d->notifyModelChanged();
 }
 
@@ -563,7 +573,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                                viewParams,
                                viewParams->viewport()->boundingBox() );
 
-    d->m_layerManager.renderLayers( painter, viewParams->viewport(), layer );
+    d->m_layerManager.renderLayers( painter, viewParams );
 }
 
 
@@ -684,6 +694,11 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
         
     m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
     tile->loadTile(requestTileUpdate);
+}
+
+QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
+{
+    return d->m_layerManager.floatItems();
 }
 
 #include "MarbleModel.moc"

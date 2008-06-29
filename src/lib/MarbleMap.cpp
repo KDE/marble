@@ -1260,5 +1260,9 @@ SunLocator* MarbleMap::sunLocator()
     return d->m_model->sunLocator();
 }
 
+QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const
+{
+    return d->m_model->floatItems();
+}
 
 #include "MarbleMap.moc"
