@@ -20,6 +20,8 @@ class PluginManagerTest : public QObject {
 };
 
 void PluginManagerTest::loadPlugins() {
+    MarbleDirs::setMarbleDataPath( DATA_PATH );
+    MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
     int pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
     PluginManager *pm = new PluginManager();
     QCOMPARE( pm->layerPlugins().size(), pluginNumber );

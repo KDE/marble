@@ -10,6 +10,7 @@
 
 #include <QtGui/QtGui>
 #include <QtTest/QtTest>
+#include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
 class TestMarbleWidget: public QObject
@@ -23,6 +24,8 @@ private slots:
 
 void TestMarbleWidget::testWidget()
 {
+    MarbleDirs::setMarbleDataPath( DATA_PATH );
+    MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
     MarbleWidget widget;
     widget.setMapThemeId("earth/srtm/srtm.dgml");
 

@@ -1,3 +1,14 @@
+2008-06-39  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/tests/CMakeLists.txt
+    * src/lib/tests/MarbleWidgetTest.cpp
+    * src/lib/tests/PluginManagerTest.cpp
+
+    fix PluginManagerTest on Windows - MARBLE_PLUGIN_PATH and MARBLE_DATA_PATH 
+    have to be set at "runtime" because the tests are still in the builddir when
+    they are run --> this will make QCoreApplication::applicationDirPath 
+    unusable
+
 2008-06-29  Torsten Rahn <rahn@kde.org>
 
     * src/QtMainWindow.{cpp,h}:
