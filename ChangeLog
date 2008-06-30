@@ -1,5 +1,13 @@
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/CMakeLists.txt
+    * src/lib/geodata/CMakeLists.txt
+
+    install all geodata headers to not break digikam each time
+    a new class is added
+
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataPoint.{h|cpp}
     * src/lib/geodata/data/GeoDataLineString.{h|cpp}
     

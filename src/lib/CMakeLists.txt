@@ -271,11 +271,7 @@ else (APPLE AND QTONLY)
     Quaternion.h
     SunLocator.h
     ClipPainter.h
-    geodata/data/GeoDataPoint.h
-    geodata/data/GeoDataGeometry.h
-    geodata/data/GeoDataCoordinates.h
-    geodata/data/GeoDataObject.h
-    geodata/data/Serializable.h
+    ${geodata_data_HDRS}
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
     ExtDateTime.h
