@@ -1,5 +1,11 @@
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataPoint.h
+
+    fix comments
+
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataCoordinates.{h|cpp}
     * src/lib/geodata/data/GeoDataPoint.{h|cpp}
     * src/lib/geodata/data/GeoDataLineString.{h|cpp}

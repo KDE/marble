@@ -32,32 +32,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
     typedef GeoDataCoordinates::Notation GeoDataPoint::Notation;
     typedef GeoDataCoordinates::Unit GeoDataPoint::Unit;
 
-    /**
-     * @brief enum used constructor to specify the units used
-     *
-     * Internally we always use radian for mathematical convenience.
-     * However the Marble's interfaces to the outside should default 
-     * to degrees.
-     */
-/*    enum Unit{
-        Radian,
-        Degree
-    };*/
-    /**
-     * @brief enum used to specify the notation / numerical system
-     *
-     * For degrees there exist two notations: 
-     * "Decimal" (base-10) and the "Sexagesimal DMS" (base-60) which is 
-     * traditionally used in cartography. Decimal notation 
-     * uses floating point numbers to specify parts of a degree. The 
-     * Sexagesimal DMS notation uses integer based 
-     * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree. 
-     */
-/*    enum Notation{
-        Decimal,
-        DMS
-    };*/
-
     GeoDataPoint(const GeoDataPoint& other);
     GeoDataPoint();
 
@@ -74,18 +48,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
 
     ~GeoDataPoint();
 
-//    double altitude() const;
-//    void   setAltitude( const double altitude );
-
     int    detail()   const;
 
-//    void geoCoordinates( double& lon, double& lat, 
-//                         GeoDataPoint::Unit unit = GeoDataPoint::Radian )
-//                                                                const;
-
-//    const Quaternion &quaternion() const;
-
-//    QString toString( GeoDataPoint::Notation notation = GeoDataPoint::DMS );
     bool operator==(const GeoDataPoint&) const;
     GeoDataPoint& operator=(const GeoDataPoint &other);
 
