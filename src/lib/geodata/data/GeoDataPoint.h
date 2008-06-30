@@ -29,8 +29,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
  public:
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
-    typedef GeoDataCoordinates::Notation GeoDataPoint::Notation;
-    typedef GeoDataCoordinates::Unit GeoDataPoint::Unit;
+//    typedef GeoDataCoordinates::Notation GeoDataPoint::Notation;
+//    typedef GeoDataCoordinates::Unit GeoDataPoint::Unit;
 
     GeoDataPoint(const GeoDataPoint& other);
     GeoDataPoint();
