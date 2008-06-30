@@ -1,4 +1,14 @@
-2008-06-39  Patrick Spendrin    <ps_ml@gmx.de>
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataCoordinates.{h|cpp}
+    * src/lib/geodata/data/GeoDataPoint.{h|cpp}
+    * src/lib/geodata/data/GeoDataLineString.{h|cpp}
+
+    add a new class GeoDataCoordinates - this one should take over the datatype 
+    function of GeoDataPoint. Adjust GeoDataPoint and GeoDataLine to the new
+    structure
+
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/tests/CMakeLists.txt
     * src/lib/tests/MarbleWidgetTest.cpp

@@ -40,7 +40,7 @@ class GeoDataLineStringPrivate;
  * currently used for a very similar purpose.
  */
 
-class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
+class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates>,
                                          public GeoDataGeometry {
  public:
     GeoDataLineString();
@@ -60,14 +60,14 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
-    void append ( const GeoDataPoint & value );
+    void append ( const GeoDataCoordinates & value );
     void clear();
 
-    typedef QVector<GeoDataPoint> Vector;
+//    typedef QVector<GeoDataPoint> Vector;
 
-    QVector<GeoDataPoint>::Iterator erase ( QVector<GeoDataPoint>::Iterator pos );
-    QVector<GeoDataPoint>::Iterator erase ( QVector<GeoDataPoint>::Iterator begin,
-                                            QVector<GeoDataPoint>::Iterator end );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator pos );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator begin,
+                                                  QVector<GeoDataCoordinates>::Iterator end );
 
  private:
     GeoDataLineStringPrivate  * const d;

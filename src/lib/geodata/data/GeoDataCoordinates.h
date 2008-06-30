@@ -10,28 +10,29 @@
 //
 
 
-#ifndef GEODATAPOINT_H
-#define GEODATAPOINT_H
+#ifndef GEODATACOORDINATES_H
+#define GEODATACOORDINATES_H
 
 #include <QtCore/QMetaType>
 #include <QtCore/QVector>
+#include <QtCore/QString>
 
 #include <cmath>
 
 #include "geodata_export.h"
-#include "GeoDataGeometry.h"
-#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 
-class GeoDataPointPrivate;
+/* M_PI is a #define that may or may not be handled in <cmath> */
+#ifndef M_PI 
+#define M_PI 3.14159265358979323846264338327950288419717
+#endif
 
-class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeometry {
+const double TWOPI = 2 * M_PI;
+
+class GeoDataCoordinatesPrivate;
+
+class GEODATA_EXPORT GeoDataCoordinates {
  public:
-    // Type definitions
-    typedef QVector<GeoDataPoint> Vector;
-    typedef GeoDataCoordinates::Notation GeoDataPoint::Notation;
-    typedef GeoDataCoordinates::Unit GeoDataPoint::Unit;
-
     /**
      * @brief enum used constructor to specify the units used
      *
@@ -39,10 +40,10 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
      * However the Marble's interfaces to the outside should default 
      * to degrees.
      */
-/*    enum Unit{
+    enum Unit{
         Radian,
         Degree
-    };*/
+    };
     /**
      * @brief enum used to specify the notation / numerical system
      *
@@ -53,50 +54,44 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
      * Sexagesimal DMS notation uses integer based 
      * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree. 
      */
-/*    enum Notation{
+    enum Notation{
         Decimal,
         DMS
-    };*/
+    };
 
-    GeoDataPoint(const GeoDataPoint& other);
-    GeoDataPoint();
+    GeoDataCoordinates(const GeoDataCoordinates& other);
+    GeoDataCoordinates();
 
     /**
-     * @brief create a geopoint from longitude and latitude
+     * @brief create a geocoordinate from longitude and latitude
      * @param _lon longitude
      * @param _lat latitude
      * @param alt altitude (default: 0)
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    GeoDataPoint(double _lon, double _lat, double alt = 0,
-             GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0);
+    GeoDataCoordinates(double _lon, double _lat, double alt = 0,
+             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
-    ~GeoDataPoint();
+    ~GeoDataCoordinates();
 
-//    double altitude() const;
-//    void   setAltitude( const double altitude );
+    double altitude() const;
+    void   setAltitude( const double altitude );
 
-    int    detail()   const;
+    void geoCoordinates( double& lon, double& lat, 
+                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
+                                                                const;
 
-//    void geoCoordinates( double& lon, double& lat, 
-//                         GeoDataPoint::Unit unit = GeoDataPoint::Radian )
-//                                                                const;
+    const Quaternion &quaternion() const;
 
-//    const Quaternion &quaternion() const;
-
-//    QString toString( GeoDataPoint::Notation notation = GeoDataPoint::DMS );
-    bool operator==(const GeoDataPoint&) const;
-    GeoDataPoint& operator=(const GeoDataPoint &other);
-
-    static double normalizeLon( double lon );
-
-    static double normalizeLat( double lat );
+    QString toString( GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS );
+    bool operator==(const GeoDataCoordinates&) const;
+    GeoDataCoordinates& operator=(const GeoDataCoordinates &other);
 
  private:
-    GeoDataPointPrivate * const d;
+    GeoDataCoordinatesPrivate * const d;
 };
 
-Q_DECLARE_METATYPE( GeoDataPoint )
+Q_DECLARE_METATYPE( GeoDataCoordinates )
 
-#endif // GEODATAPOINT_H
+#endif // GEODATACOORDINATES_H
