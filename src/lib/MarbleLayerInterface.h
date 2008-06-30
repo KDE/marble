@@ -116,6 +116,6 @@ class MarbleLayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
-Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.0" )
+Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.01" )
 
 #endif // MARBLE_LAYER_INTERFACE_H

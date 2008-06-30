@@ -50,7 +50,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
 
     int    detail()   const;
 
-    bool operator==(const GeoDataPoint&) const;
+//    bool operator==(const GeoDataPoint&) const;
     GeoDataPoint& operator=(const GeoDataPoint &other);
 
     static double normalizeLon( double lon );
