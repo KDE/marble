@@ -273,6 +273,7 @@ else (APPLE AND QTONLY)
     ClipPainter.h
     geodata/data/GeoDataPoint.h
     geodata/data/GeoDataGeometry.h
+    geodata/data/GeoDataCoordinates.h
     geodata/data/GeoDataObject.h
     geodata/data/Serializable.h
     geodata/geodata_export.h
