@@ -35,7 +35,7 @@ class TinyWebBrowser : public QTextBrowser
         ~TinyWebBrowser();
 
     public Q_SLOTS:
-        void setSource ( const QString& relativeUrl );//this slot sets source url for related wikipedia page download
+        void setSource ( const QUrl& relativeUrl );//this slot sets source url for related wikipedia page download
         void print();
         void getPanoramio ( const QString& place );//this slot will get first image from location most close to current placemark
         void testing(QString);

@@ -132,14 +132,14 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
     return QTextBrowser::loadResource ( type, url );
 }
 
-void TinyWebBrowser::setSource ( const QString& url )
+void TinyWebBrowser::setSource ( const QUrl& url )
 {
-    m_source = url;
+    m_source = url.toString();
 
-    if ( !m_storagePolicy->fileExists ( url ) )
-        m_downloadManager->addJob ( url, url );
+    if ( !m_storagePolicy->fileExists ( m_source ) )
+        m_downloadManager->addJob ( m_source, m_source );
     else
-        slotDownloadFinished ( url, url );
+        slotDownloadFinished ( m_source, m_source );
 
 }
 

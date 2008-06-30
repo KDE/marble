@@ -1,5 +1,11 @@
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/TinyWebBrowser.{h|cpp}
+
+    fix overload warning
+
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataPoint.h
 
     fix comments
