@@ -20,17 +20,44 @@
 
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
-#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
+
+/* M_PI is a #define that may or may not be handled in <cmath> */
+#ifndef M_PI 
+#define M_PI 3.14159265358979323846264338327950288419717
+#endif
+
+const double TWOPI = 2 * M_PI;
 
 class GeoDataPointPrivate;
 
-class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataPoint : public GeoDataGeometry {
  public:
-    // Type definitions
-    typedef QVector<GeoDataPoint> Vector;
-//    typedef GeoDataCoordinates::Notation GeoDataPoint::Notation;
-//    typedef GeoDataCoordinates::Unit GeoDataPoint::Unit;
+    /**
+     * @brief enum used constructor to specify the units used
+     *
+     * Internally we always use radian for mathematical convenience.
+     * However the Marble's interfaces to the outside should default 
+     * to degrees.
+     */
+    enum Unit{
+        Radian,
+        Degree
+    };
+    /**
+     * @brief enum used to specify the notation / numerical system
+     *
+     * For degrees there exist two notations: 
+     * "Decimal" (base-10) and the "Sexagesimal DMS" (base-60) which is 
+     * traditionally used in cartography. Decimal notation 
+     * uses floating point numbers to specify parts of a degree. The 
+     * Sexagesimal DMS notation uses integer based 
+     * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree. 
+     */
+    enum Notation{
+        Decimal,
+        DMS
+    };
 
     GeoDataPoint(const GeoDataPoint& other);
     GeoDataPoint();
@@ -48,10 +75,23 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates, public GeoDataGeo
 
     ~GeoDataPoint();
 
+    double altitude() const;
+    void   setAltitude( const double altitude );
+
     int    detail()   const;
 
-//    bool operator==(const GeoDataPoint&) const;
+    void geoCoordinates( double& lon, double& lat, 
+                         GeoDataPoint::Unit unit = GeoDataPoint::Radian )
+                                                                const;
+
+    const Quaternion &quaternion() const;
+
+    QString toString( GeoDataPoint::Notation notation = GeoDataPoint::DMS );
+    bool operator==(const GeoDataPoint&) const;
     GeoDataPoint& operator=(const GeoDataPoint &other);
+
+    // Type definitions
+    typedef QVector<GeoDataPoint> Vector;
 
     static double normalizeLon( double lon );
 

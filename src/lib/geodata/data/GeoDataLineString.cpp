@@ -28,18 +28,18 @@ class GeoDataLineStringPrivate
     AltitudeMode m_altitudeMode;
 
     bool         m_dirtyBox; // tells whether there have been changes to the
-                             // GeoDataCoordinatess since the LatLonAltBox has 
+                             // GeoDataPoints since the LatLonAltBox has 
                              // been calculated. Saves performance. 
 };
 
 GeoDataLineString::GeoDataLineString()
-  : QVector<GeoDataCoordinates>(), GeoDataGeometry(),
+  : QVector<GeoDataPoint>(), GeoDataGeometry(),
     d( new GeoDataLineStringPrivate )
 {
 }
 
 GeoDataLineString::GeoDataLineString( const GeoDataLineString & other )
-  : QVector<GeoDataCoordinates>( other ), GeoDataGeometry( other ),
+  : QVector<GeoDataPoint>( other ), GeoDataGeometry( other ),
     d( new GeoDataLineStringPrivate( *other.d ))
 {
 }
@@ -98,28 +98,28 @@ void GeoDataLineString::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
-void GeoDataLineString::append ( const GeoDataCoordinates & value )
+void GeoDataLineString::append ( const GeoDataPoint & value )
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataCoordinates>::append( value );
+    QVector<GeoDataPoint>::append( value );
 }
 
 void GeoDataLineString::clear()
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataCoordinates>::clear();
+    QVector<GeoDataPoint>::clear();
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
+QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator pos )
 {
     d->m_dirtyBox = true;
-    return QVector<GeoDataCoordinates>::erase( pos );
+    return QVector<GeoDataPoint>::erase( pos );
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin, 
-                                                           QVector<GeoDataCoordinates>::Iterator end )
+QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator begin, 
+                                                           QVector<GeoDataPoint>::Iterator end )
 {
     d->m_dirtyBox = true;
-    return QVector<GeoDataCoordinates>::erase( begin, end );
+    return QVector<GeoDataPoint>::erase( begin, end );
 }
 

@@ -1,5 +1,12 @@
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataPoint.{h|cpp}
+    * src/lib/geodata/data/GeoDataLineString.{h|cpp}
+    
+    revert changes made earlier because of breakage
+
+2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/TinyWebBrowser.{h|cpp}
 
     fix overload warning
