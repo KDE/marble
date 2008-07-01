@@ -20,6 +20,7 @@
     <Action name="options_show_sidebar" group="show_merge"/>
     <Separator/>
     <Menu name="infoboxes" noMerge="1"><text>&amp;Info Boxes</text>
+    <ActionList name="xxx_file_actionlist" />
     </Menu>
     <Separator/>
     <Action name="show_clouds"/>

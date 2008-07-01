@@ -37,6 +37,8 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     createGUI( 0 );
 
+    m_part->createInfoBoxesMenu();
+
     setAutoSaveSettings();
 }
 

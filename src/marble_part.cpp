@@ -55,6 +55,7 @@
 #include <ControlView.h>
 #include "settings.h"
 
+#include "MarbleAbstractFloatItem.h"
 
 namespace
 {
@@ -81,6 +82,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setWidget( m_controlView );
 
     setupActions();
+
     readSettings();
 
     setXMLFile( "marble_part.rc" );
@@ -445,6 +447,22 @@ void MarblePart::setupActions()
 
     readSettings();
 }
+
+void MarblePart::createInfoBoxesMenu()
+{
+    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+
+    QList<QAction*> actionList;
+
+    QList<MarbleAbstractFloatItem *>::const_iterator i;
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
+    {
+        actionList.append( (*i)->action() );
+    }
+    unplugActionList( "xxx_file_actionlist" );
+    plugActionList( "xxx_file_actionlist", actionList );
+}
+
 
 void MarblePart::showPosition( const QString& position )
 {

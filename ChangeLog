@@ -1,35 +1,44 @@
+2008-07-01  Torsten Rahn <rahn@kde.org>
+
+    * src/KdeMainWindow.cpp:
+    * src/marble_part.{cpp,h,rc}:
+    - Adding float item menus to the menu as well.
+
+    * src/QtMainWindow.cpp:
+    - removed qDebug line.
+
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/CMakeLists.txt
-    * src/lib/geodata/CMakeLists.txt
+    * src/lib/CMakeLists.txt:
+    * src/lib/geodata/CMakeLists.txt:
 
     install all geodata headers to not break digikam each time
     a new class is added
 
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/geodata/data/GeoDataPoint.{h|cpp}
-    * src/lib/geodata/data/GeoDataLineString.{h|cpp}
+    * src/lib/geodata/data/GeoDataPoint.{h|cpp}:
+    * src/lib/geodata/data/GeoDataLineString.{h|cpp}:
     
     revert changes made earlier because of breakage
 
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/TinyWebBrowser.{h|cpp}
+    * src/lib/TinyWebBrowser.{h|cpp}:
 
     fix overload warning
 
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/geodata/data/GeoDataPoint.h
+    * src/lib/geodata/data/GeoDataPoint.h:
 
     fix comments
 
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/geodata/data/GeoDataCoordinates.{h|cpp}
-    * src/lib/geodata/data/GeoDataPoint.{h|cpp}
-    * src/lib/geodata/data/GeoDataLineString.{h|cpp}
+    * src/lib/geodata/data/GeoDataCoordinates.{h|cpp}:
+    * src/lib/geodata/data/GeoDataPoint.{h|cpp}:
+    * src/lib/geodata/data/GeoDataLineString.{h|cpp}:
 
     add a new class GeoDataCoordinates - this one should take over the datatype 
     function of GeoDataPoint. Adjust GeoDataPoint and GeoDataLine to the new
@@ -37,9 +46,9 @@
 
 2008-06-30  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/tests/CMakeLists.txt
-    * src/lib/tests/MarbleWidgetTest.cpp
-    * src/lib/tests/PluginManagerTest.cpp
+    * src/lib/tests/CMakeLists.txt:
+    * src/lib/tests/MarbleWidgetTest.cpp:
+    * src/lib/tests/PluginManagerTest.cpp:
 
     fix PluginManagerTest on Windows - MARBLE_PLUGIN_PATH and MARBLE_DATA_PATH 
     have to be set at "runtime" because the tests are still in the builddir when

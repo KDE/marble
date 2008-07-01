@@ -196,8 +196,6 @@ void MainWindow::createInfoBoxesMenu()
     {
         m_infoBoxesMenu->addAction( (*i)->action() );
     }
-
-    qDebug("CLEARED");
 }
 
 void MainWindow::createStatusBar()
