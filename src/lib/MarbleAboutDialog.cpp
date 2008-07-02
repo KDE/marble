@@ -56,7 +56,7 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     d->licenseLoaded = false;
 
     d->uiWidget.m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
-    d->uiWidget.m_pMarbleVersionLabel->setText( "Version " + MARBLE_VERSION_STRING );
+    d->uiWidget.m_pMarbleVersionLabel->setText( tr("Version %1").arg(MARBLE_VERSION_STRING) );
 
     connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
              this, SLOT( loadPageContents( int ) ) );
