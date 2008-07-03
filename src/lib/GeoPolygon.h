@@ -16,6 +16,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 #include <QtCore/QDebug>
+#include "marble_export.h"
 
 #include "Quaternion.h"
 #include "GeoDataPoint.h"
@@ -24,7 +25,7 @@
 	GeoDataPoint defines the nodes in a polyLine 
 */
 
-class GeoPolygon : public GeoDataPoint::Vector 
+class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector 
 {
  public:
     GeoPolygon();
