@@ -26,6 +26,27 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 marble_add_test( MarbleWidgetSpeedTest )
 
 # GeoPolygon test
+if (QTONLY)
+  # ce: don't know why this is needed here - on win32 
+  # 'O2' is activated by default in release mode
+  if(NOT WIN32)
+    add_definitions (${QT_DEFINITIONS} -O3)
+  endif(NOT WIN32)
+
+  include_directories(
+    ${QT_INCLUDE_DIR}
+  )
+else (QTONLY)
+  if(NOT WIN32)
+    add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} -O3) 
+  endif(NOT WIN32)
+
+  include_directories(
+    ${KDE4_INCLUDES}
+  )
+
+endif (QTONLY)
+
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/data )
