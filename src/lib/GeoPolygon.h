@@ -25,7 +25,7 @@
 	GeoDataPoint defines the nodes in a polyLine 
 */
 
-class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector 
+class GeoPolygon : public GeoDataPoint::Vector 
 {
  public:
     GeoPolygon();
@@ -89,7 +89,7 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector
  * FIXME: Rename it (into GeoPolygonMap?)
  */
 
-class PntMap : public GeoPolygon::PtrVector
+class GEODATA_EXPORT PntMap : public GeoPolygon::PtrVector
 {
  public:
     PntMap();
