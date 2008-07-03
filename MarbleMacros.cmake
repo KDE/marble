@@ -84,3 +84,26 @@ set_target_properties( ${_target_name} PROPERTIES
                        INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/${LIB_SUFFIX} )
 
 endmacro( marble_add_designer_plugin _target_name )
+
+macro( marble_add_test TEST_NAME )
+    if( BUILD_MARBLE_TESTS )
+        set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp )
+        if( QTONLY )
+            qt4_generate_moc( ${TEST_NAME}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc )
+            include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
+            set( ${TEST_NAME}_SRCS ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc ${${TEST_NAME}_SRCS} )
+          
+            add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
+        else( QTONLY )
+            kde4_add_executable( ${TEST_NAME} ${${TEST_NAME}_SRCS} )
+        endif( QTONLY )
+        target_link_libraries( ${TEST_NAME} ${QT_QTMAIN_LIBRARY}
+                                            ${QT_QTCORE_LIBRARY} 
+                                            ${QT_QTGUI_LIBRARY} 
+                                            ${QT_QTTEST_LIBRARY} 
+                                            marblewidget )
+        set_target_properties( ${TEST_NAME} PROPERTIES 
+                               COMPILE_FLAGS "-DDATA_PATH=\"\\\"${DATA_PATH}\\\"\" -DPLUGIN_PATH=\"\\\"${PLUGIN_PATH}\\\"\"" )
+        add_test( ${TEST_NAME} ${TEST_NAME} )
+    endif( BUILD_MARBLE_TESTS )
+endmacro( marble_add_test TEST_NAME )

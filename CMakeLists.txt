@@ -21,6 +21,12 @@ else( QTONLY )
     set( BUILD_MARBLE_TESTS ON )
 endif( QTONLY )
 
+if( BUILD_MARBLE_TESTS )
+#  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
+  #where unit test binaries should be installed to and run from
+#  SET (MARBLE_TEST_DIR   ${CMAKE_CURRENT_BINARY_DIR}/tests)
+endif( BUILD_MARBLE_TESTS )
+
 ####################################################
 # minimum required cmake version
 if( QTONLY )
@@ -133,15 +139,6 @@ set ( CMAKE_MODULE_PATH
      )
 
 ####################################################
-# Enable ctest
-IF (ENABLE_TESTS)
-  ENABLE_TESTING()
-  SET (TEST_DATA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/tests/test_data")
-  #where unit test binaries should be installed to and run from
-  SET (MARBLE_TEST_DIR   ${CMAKE_CURRENT_BINARY_DIR}/tests)
-ENDIF (ENABLE_TESTS)
-
-####################################################
 # Options for static build
 if(STATIC_BUILD)
   add_definitions(-DSTATIC_BUILD=1)
@@ -243,9 +240,7 @@ add_subdirectory(data)
 
 include(DistTarget)
 
-IF (ENABLE_TESTS)
-  add_subdirectory(tests)
-ENDIF (ENABLE_TESTS)
+add_subdirectory(tests)
 
 ####################################################
 # Install extra files

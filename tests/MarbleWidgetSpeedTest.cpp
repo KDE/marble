@@ -14,9 +14,9 @@
 #include <QtTest/QtTest>
 #include <QtCore/QtCore>
 #include <QtCore/QTime>
-#include <lib/MarbleWidget.h>
+#include "MarbleWidget.h"
 
-class MarbleWidgetTest: public QObject
+class MarbleWidgetSpeedTest: public QObject
 {
   Q_OBJECT;
   private slots:
@@ -29,16 +29,16 @@ class MarbleWidgetTest: public QObject
   MarbleWidget *m_marbleWidget;
 };
 
-void MarbleWidgetTest::initTestCase()
+void MarbleWidgetSpeedTest::initTestCase()
 {
   m_marbleWidget = new MarbleWidget();
   m_marbleWidget->show();
 }
-void MarbleWidgetTest::cleanupTestCase()
+void MarbleWidgetSpeedTest::cleanupTestCase()
 {
   delete m_marbleWidget;
 }
-void MarbleWidgetTest::timeTest()
+void MarbleWidgetSpeedTest::timeTest()
 {
     m_marbleWidget->zoomView( 1500 );
 //    m_marbleWidget->resize( 800, 600 );
@@ -78,7 +78,7 @@ void MarbleWidgetTest::timeTest()
 
 }
 
-QTEST_MAIN(MarbleWidgetTest) 
-#include "moc_MarbleWidgetTest.cxx"
+QTEST_MAIN(MarbleWidgetSpeedTest) 
+#include "MarbleWidgetSpeedTest.moc"
   
 

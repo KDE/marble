@@ -14,7 +14,8 @@
 #include <QtTest/QtTest>
 #include <QtCore/QtCore>
 #include <QtCore/QTime>
-#include <lib/GeoPolygon.h>
+
+#include "GeoPolygon.h"
 
 class GeoPolygonTest: public QObject
 {
@@ -41,7 +42,7 @@ void GeoPolygonTest::pointLoadTest()
 }
 
 QTEST_MAIN(GeoPolygonTest) 
-#include "moc_GeoPolygonTest.cxx"
+#include "GeoPolygonTest.moc"
   
 
 

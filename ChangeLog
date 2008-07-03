@@ -1,5 +1,16 @@
 2008-07-03  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * CMakeLists.txt
+    * MarbleMacros.cmake
+    * src/lib/tests/CMakeLists.txt
+    * tests/CMakeLists.txt
+    * tests/GeoPolygonTest.cpp
+    * tests/MarbleWidgetSpeedTest.cpp
+
+    unify testing stuff
+
+2008-07-03  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/GeoDataPoint{.h|_p.h|.cpp}
     * src/lib/geodata/GeoDataCoordinates{.h|_p.h|.cpp}
     * src/lib/Quaternion.h

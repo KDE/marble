@@ -1,17 +1,5 @@
-#####################################################
-# Don't forget to include output directory, otherwise
-# the UI file won't be wrapped!
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} 
-# binary make output dirs for uics and mocs
-  ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_CURRENT_BINARY_DIR}/../src
-  ${CMAKE_CURRENT_BINARY_DIR}/../src/lib
-# source dirs
-  ${CMAKE_CURRENT_SOURCE_DIR}/../src
-  ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib
-# include dirs
-  ${QT_INCLUDE_DIR}
-  )
+#############################################################
+
 ADD_DEFINITIONS(-DTEST_DATA_DIR="\\"${TEST_DATA_DIR}\\"")
 
 #############################################################
@@ -30,56 +18,16 @@ IF (APPLE)
   SET (CMAKE_INSTALL_NAME_DIR @executable_path/../lib)
 ENDIF (APPLE)
 
-# Note for tests we should not include the moc of our
-# qtests in the executable file list as the moc is
-# directly included in the sources
-# and should not be compiled twice. Trying to include
-# them in will cause an error at build time 
-
-# @TODO having to add ${QT_QTTEST_LIBRARY} is ugly - 
-# it should not be needed since we add qttest up in 
-# top level cmakelists. Work out why its not working 
-# right on mac - timlinux
-set (MARBLE_TEST_LIBS ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY} marblewidget)
+set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 #############################################################
-# To add a new test copy the entire blcck that follows
-# and search and replace marblewidget with the name of
-# your test. Do not include the workd 'test' in your search
-# or replace strings. By convention, your test should be called
-# <classname>test if it tests a specific class.
-#
 
 # MarbleWidget test
-SET(MarbleWidgetTest_SRCS MarbleWidgetTest.cpp)
-SET(MarbleWidgetTest_MOC_CPPS MarbleWidgetTest.cpp)
-QT4_WRAP_CPP(MarbleWidgetTest_MOC_SRCS ${MarbleWidgetTest_MOC_CPPS})
-ADD_CUSTOM_TARGET(MarbleWidgetTestmoc ALL DEPENDS ${MarbleWidgetTest_MOC_SRCS})
-ADD_EXECUTABLE(MarbleWidgetTest ${MarbleWidgetTest_SRCS})
-ADD_DEPENDENCIES(MarbleWidgetTest MarbleWidgetTestmoc)
-TARGET_LINK_LIBRARIES(MarbleWidgetTest ${MARBLE_TEST_LIBS})
-INSTALL(TARGETS MarbleWidgetTest RUNTIME DESTINATION ${MARBLE_TEST_DIR})
-ADD_TEST(MarbleWidgetTest ${MARBLE_TEST_DIR}/MarbleWidgetTest)
+marble_add_test( MarbleWidgetSpeedTest )
 
 # GeoPolygon test
-SET(GeoPolygonTest_SRCS GeoPolygonTest.cpp)
-SET(GeoPolygonTest_MOC_CPPS GeoPolygonTest.cpp)
-QT4_WRAP_CPP(GeoPolygonTest_MOC_SRCS ${GeoPolygonTest_MOC_CPPS})
-ADD_CUSTOM_TARGET(GeoPolygonTestmoc ALL DEPENDS ${GeoPolygonTest_MOC_SRCS})
-ADD_EXECUTABLE(GeoPolygonTest ${GeoPolygonTest_SRCS})
-ADD_DEPENDENCIES(GeoPolygonTest GeoPolygonTestmoc)
-TARGET_LINK_LIBRARIES(GeoPolygonTest ${MARBLE_TEST_LIBS})
-INSTALL(TARGETS GeoPolygonTest RUNTIME DESTINATION ${MARBLE_TEST_DIR})
-ADD_TEST(GeoPolygonTest ${MARBLE_TEST_DIR}/GeoPolygonTest)
-
-
-#############################################################
-# Put the libs needed into the test dir
-IF (WIN32)
-INSTALL (FILES ${CMAKE_BINARY_DIR}/src/lib/libmarblewidget.dll DESTINATION ${MARBLE_TEST_DIR})
-ENDIF (WIN32)
-
-IF (APPLE)
-INSTALL (FILES ${CMAKE_BINARY_DIR}/src/lib/libmarblewidget.5.0.0.dylib DESTINATION ${MARBLE_TEST_DIR}/lib/)
-INSTALL (FILES ${CMAKE_BINARY_DIR}/src/lib/libmarblewidget.5.dylib DESTINATION ${MARBLE_TEST_DIR}/lib/)
-ENDIF (APPLE)
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/data )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser )
+marble_add_test( GeoPolygonTest )
