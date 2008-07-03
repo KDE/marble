@@ -19,6 +19,9 @@
 #include "marble_export.h"
 #include <cmath>
 
+using std::cos;
+using std::sin;
+
 enum
 {
     Q_X = 0,
