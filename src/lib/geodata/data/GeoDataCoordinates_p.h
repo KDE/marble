@@ -35,6 +35,7 @@ class GeoDataCoordinatesPrivate
         m_lat = other.m_lat;
         m_altitude = other.m_altitude;
         m_q.set( m_lon, m_lat );
+        return *this;
     }
 
     Quaternion  m_q;
