@@ -18,7 +18,7 @@
 
 class MarbleWidgetSpeedTest: public QObject
 {
-  Q_OBJECT;
+  Q_OBJECT
   private slots:
   void timeTest();
   void initTestCase();// will be called before the first testfunction is executed.
