@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -88,8 +89,9 @@ class GEODATA_EXPORT GeoDataCoordinates {
     bool operator==(const GeoDataCoordinates&) const;
     GeoDataCoordinates& operator=(const GeoDataCoordinates &other);
 
- private:
-    GeoDataCoordinatesPrivate * const d;
+ protected:
+    GeoDataCoordinatesPrivate* const d_ptr;
+
 };
 
 Q_DECLARE_METATYPE( GeoDataCoordinates )

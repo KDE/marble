@@ -1,3 +1,14 @@
+2008-07-03  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/GeoDataPoint{.h|_p.h|.cpp}
+    * src/lib/geodata/GeoDataCoordinates{.h|_p.h|.cpp}
+    * src/lib/Quaternion.h
+
+    use GeoDataCoordinates as a replacement for GeoDataPoint
+    GeoDataCoordinates should be the abstract equivalent of
+    a point on earth - GeoDataPoint is the equivalent of a Point
+    tag in KML (which can have some additional information).
+
 2008-07-01  Torsten Rahn <rahn@kde.org>
 
     * src/KdeMainWindow.cpp:
