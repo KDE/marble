@@ -46,12 +46,12 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Style ) );
 
     GeoDataStyle* style = 0;
-    style = new GeoDataStyle;
 
     GeoStackItem parentItem = parser.parentElement();
     // FIXME: it is not clear if the following is really what is needed here
     // Valid is any Feature so maybe it is Folder | NetworkLink | Document | ScreenOverlay | GroundOverlay | Placemarks
     if ( parentItem.nodeAs<GeoDataFeature>() ) {
+        style = new GeoDataStyle;
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well

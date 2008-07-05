@@ -46,14 +46,14 @@ GeoNode* KmlPolyStyleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataPolyStyle* style = new GeoDataPolyStyle();
+    GeoDataPolyStyle* style = 0;
     
     if ( parentItem.represents( kmlTag_Style ) ) {
-        return style;
+        style = new GeoDataPolyStyle();
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_PolyStyle << "> containing: " << style
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }
-    return 0;
+    return style;
 }

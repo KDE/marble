@@ -66,7 +66,9 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
             qDebug() << "not implemented yet.";
 #endif // DEBUG_TAGS
         }
+        return parentItem.nodeAs<GeoDataDocument>();
+    } else {
+        return 0;
     }
 
-    return parentItem.nodeAs<GeoDataDocument>();
 }

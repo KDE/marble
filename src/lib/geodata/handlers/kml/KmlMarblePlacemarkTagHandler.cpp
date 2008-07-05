@@ -29,6 +29,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataContainer.h"
+#include "GeoDataDocument.h"
 
 using namespace GeoDataElementDictionary;
 
@@ -48,10 +49,10 @@ GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MarblePlacemark ) );
 
     GeoDataPlacemark* placemark = 0;
-    placemark = new GeoDataPlacemark;
 
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
+        placemark = new GeoDataPlacemark();
         parentItem.nodeAs<GeoDataContainer>()->addFeature( placemark );
     }
 #ifdef DEBUG_TAGS
