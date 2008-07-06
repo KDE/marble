@@ -19,46 +19,50 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlPointTagHandler.h"
+#include "KmlLineStringTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
+
 #include "GeoDataPlacemark.h"
+#include "GeoDataLineString.h"
 #include "GeoDataMultiGeometry.h"
+
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( Point )
+KML_DEFINE_TAG_HANDLER( LineString )
 
-KmlPointTagHandler::KmlPointTagHandler()
+KmlLineStringTagHandler::KmlLineStringTagHandler()
     : GeoTagHandler()
 {
 }
 
-KmlPointTagHandler::~KmlPointTagHandler()
+KmlLineStringTagHandler::~KmlLineStringTagHandler()
 {
 }
 
-GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Point ) );
-    // FIXME: there needs to be a check that a coordinates subtag is contained
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineString ) );
 
     GeoStackItem parentItem = parser.parentElement();
+    
+    GeoDataLineString* lineString = 0;
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataPlacemark>();
+        lineString = new GeoDataLineString();
+        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataMultiGeometry>();
+        lineString = new GeoDataLineString();
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( *lineString );
+        delete lineString;
     }
-    return 0;
+#ifdef DEBUG_TAGS
+    qDebug() << "Parsed <" << kmlTag_LineString << ">"
+             << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+
+    return lineString;
 }

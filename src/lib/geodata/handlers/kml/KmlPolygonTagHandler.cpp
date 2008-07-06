@@ -19,46 +19,47 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlPointTagHandler.h"
+#include "KmlPolygonTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
+
 #include "GeoDataPlacemark.h"
 #include "GeoDataMultiGeometry.h"
+
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( Point )
+KML_DEFINE_TAG_HANDLER( Polygon )
 
-KmlPointTagHandler::KmlPointTagHandler()
+KmlPolygonTagHandler::KmlPolygonTagHandler()
     : GeoTagHandler()
 {
 }
 
-KmlPointTagHandler::~KmlPointTagHandler()
+KmlPolygonTagHandler::~KmlPolygonTagHandler()
 {
 }
 
-GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Point ) );
-    // FIXME: there needs to be a check that a coordinates subtag is contained
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Polygon ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataPlacemark>();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataMultiGeometry>();
+    
+    GeoDataPolygon* polygon = 0;
+    if( parentItem.nodeAs<GeoDataPlacemark>() )
+    {
+        polygon = new GeoDataPolygon();
+
+        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
     }
-    return 0;
+#ifdef DEBUG_TAGS
+        qDebug() << "Parsed <" << kmlTag_Polygon << ">"
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+
+    return polygon;
 }

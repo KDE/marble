@@ -26,6 +26,9 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 #include "GeoDataParser.h"
 #include "global.h"
 
@@ -48,27 +51,45 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.represents( kmlTag_Point ) ) {
-        QStringList coordinates;
-        coordinates = parser.readElementText().trimmed().split( "," );
-        
-        if( coordinates.size() == 2 ) {
-            // assume <coordinates>lat,lon</coordinates>
-            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( DEG2RAD * coordinates.at( 0 ).toDouble(), 
-                                                                  DEG2RAD * coordinates.at( 1 ).toDouble() );
-        } else if( coordinates.size() == 3 ) {
-            // assume <coordinates>lat,lon,alt</coordinates>
-            parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( DEG2RAD * coordinates.at( 0 ).toDouble(), 
-                                                                  DEG2RAD * coordinates.at( 1 ).toDouble(), 
-                                                                  coordinates.at( 2 ).toDouble() );
-        } else {
-            // raise warning
-        }
+    if( parentItem.nodeAs<GeoDataGeometry>() ) {
+        QStringList coordinatesLines = parser.readElementText().trimmed().split( " ", QString::SkipEmptyParts );
+        Q_FOREACH( const QString& line, coordinatesLines ) {
+            QStringList coordinates = line.trimmed().split( "," );
+            if( parentItem.represents( kmlTag_Point ) ) {
+                GeoDataPoint* coord = new GeoDataPoint();
+                if( coordinates.size() == 2 ) {
+                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                DEG2RAD * coordinates.at( 1 ).toDouble() );
+                } else if( coordinates.size() == 3 ) {
+                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                DEG2RAD * coordinates.at( 1 ).toDouble(),
+                                coordinates.at( 2 ).toDouble() );
+                }
+                parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( *coord );
+                parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( coord );
+            } else {
+                GeoDataCoordinates* coord = new GeoDataCoordinates();
+                if( coordinates.size() == 2 ) {
+                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                               DEG2RAD * coordinates.at( 1 ).toDouble() );
+                } else if( coordinates.size() == 3 ) {
+                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                               DEG2RAD * coordinates.at( 1 ).toDouble(),
+                               coordinates.at( 2 ).toDouble() );
+                }
+                if( parentItem.represents( kmlTag_LineString ) ) {
+                    parentItem.nodeAs<GeoDataLineString>()->append( coord );
+                } else if( parentItem.represents( kmlTag_LinearRing ) ) {
+                    parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
+                } else {
+                    // raise warning as coordinates out of valid parents found
+                }
+            }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_coordinates << "> containing: " << coordinates
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+        }
     }
-
     return 0;
 }

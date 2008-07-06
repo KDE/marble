@@ -1,5 +1,18 @@
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlLineStringTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlOuterBoundaryIsTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlPointTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlPolygonTagHandler{.h|.cpp}
+
+    (2/2) parse remaining geometry objects and change existing Point and 
+    Coordinates
+
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataLineString{.h|.cpp}
     * src/lib/geodata/data/GeoDataMultiGeometry{.h|.cpp}
     * src/lib/geodata/data/GeoDataPlacemark{.h|.cpp}

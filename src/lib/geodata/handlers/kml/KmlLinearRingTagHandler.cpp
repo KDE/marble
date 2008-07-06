@@ -19,46 +19,49 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlPointTagHandler.h"
+#include "KmlLinearRingTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataMultiGeometry.h"
+
+#include "GeoDataPolygon.h"
+
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( Point )
+KML_DEFINE_TAG_HANDLER( LinearRing )
 
-KmlPointTagHandler::KmlPointTagHandler()
+KmlLinearRingTagHandler::KmlLinearRingTagHandler()
     : GeoTagHandler()
 {
 }
 
-KmlPointTagHandler::~KmlPointTagHandler()
+KmlLinearRingTagHandler::~KmlLinearRingTagHandler()
 {
 }
 
-GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Point ) );
-    // FIXME: there needs to be a check that a coordinates subtag is contained
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LinearRing ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataPlacemark>();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataMultiGeometry>();
+    
+    GeoDataLinearRing* linearRing = 0;
+    if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
+        qDebug() << "outerBoundary";
+        linearRing = new GeoDataLinearRing();
+        parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
+    } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
+        qDebug() << "innerBoundary";
+        linearRing = new GeoDataLinearRing();
+        parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
     }
-    return 0;
+#ifdef DEBUG_TAGS
+        qDebug() << "Parsed <" << kmlTag_LinearRing << ">"
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+
+    return linearRing;
 }

@@ -19,46 +19,39 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlPointTagHandler.h"
+#include "KmlInnerBoundaryIsTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataMultiGeometry.h"
+
+#include "GeoDataPolygon.h"
+
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( Point )
+KML_DEFINE_TAG_HANDLER( innerBoundaryIs )
 
-KmlPointTagHandler::KmlPointTagHandler()
+KmlinnerBoundaryIsTagHandler::KmlinnerBoundaryIsTagHandler()
     : GeoTagHandler()
 {
 }
 
-KmlPointTagHandler::~KmlPointTagHandler()
+KmlinnerBoundaryIsTagHandler::~KmlinnerBoundaryIsTagHandler()
 {
 }
 
-GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Point ) );
-    // FIXME: there needs to be a check that a coordinates subtag is contained
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_innerBoundaryIs ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
+        qDebug() << "Parsed <" << kmlTag_innerBoundaryIs << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataPlacemark>();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> containing: " << ""
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataMultiGeometry>();
-    }
-    return 0;
+#endif
+
+    return parentItem.nodeAs<GeoDataInnerBoundary>();
 }
