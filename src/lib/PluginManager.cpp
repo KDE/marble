@@ -67,7 +67,7 @@ void PluginManager::loadPlugins()
     qDeleteAll( m_layerPlugins );
     m_layerPlugins.clear();
 
-    foreach( QString fileName, pluginFileNameList ) {
+    foreach( const QString &fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 

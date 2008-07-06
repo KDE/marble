@@ -286,7 +286,7 @@ void TextureColorizer::generatePalette(const QString& seafile,
     QStringList  filelist;
     filelist << seafile << landfile;
 
-    foreach ( QString filename, filelist ) {
+    foreach ( const QString &filename, filelist ) {
 
         QLinearGradient  gradient( 0, 0, 256, 0 );
 
