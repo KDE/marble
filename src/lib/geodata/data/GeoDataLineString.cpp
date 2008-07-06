@@ -11,36 +11,29 @@
 
 #include "GeoDataLineString.h"
 
+#include <QtCore/QDebug>
 
 class GeoDataLineStringPrivate
 {
  public:
     GeoDataLineStringPrivate()
-        : m_extrude( false ),
-          m_tesselate( false ),
-          m_altitudeMode( ClampToGround ),
-          m_dirtyBox( true )
+         : m_dirtyBox( true )
     {
     }
-
-    bool         m_extrude;
-    bool         m_tesselate;
-    AltitudeMode m_altitudeMode;
-
     bool         m_dirtyBox; // tells whether there have been changes to the
                              // GeoDataPoints since the LatLonAltBox has 
                              // been calculated. Saves performance. 
 };
 
 GeoDataLineString::GeoDataLineString()
-  : QVector<GeoDataPoint>(), GeoDataGeometry(),
+  : QVector<GeoDataCoordinates*>(), GeoDataGeometry(),
     d( new GeoDataLineStringPrivate )
 {
 }
 
 GeoDataLineString::GeoDataLineString( const GeoDataLineString & other )
-  : QVector<GeoDataPoint>( other ), GeoDataGeometry( other ),
-    d( new GeoDataLineStringPrivate( *other.d ))
+  : QVector<GeoDataCoordinates*>( other ), GeoDataGeometry( other ),
+    d( new GeoDataLineStringPrivate( *other.d ) )
 {
 }
 
@@ -54,22 +47,11 @@ GeoDataLineString& GeoDataLineString::operator=( const GeoDataLineString & rhs )
 
 GeoDataLineString::~GeoDataLineString()
 {
+#if DEBUG_GEODATA
+    qDebug() << "delete Linestring";
+#endif
     delete d;
-}
-
-bool GeoDataLineString::extrude() const
-{
-    return d->m_extrude;
-}
-
-void GeoDataLineString::setExtrude( bool extrude )
-{
-    d->m_extrude = extrude;
-}
-
-bool GeoDataLineString::tesselate() const
-{
-    return d->m_tesselate;
+    qDeleteAll(*this);
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
@@ -83,43 +65,29 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 }
 
 
-void GeoDataLineString::setTesselate( bool tesselate )
-{
-    d->m_tesselate = tesselate;
-}
-
-AltitudeMode GeoDataLineString::altitudeMode() const
-{
-    return d->m_altitudeMode;
-}
-
-void GeoDataLineString::setAltitudeMode( const AltitudeMode altitudeMode )
-{
-    d->m_altitudeMode = altitudeMode;
-}
-
-void GeoDataLineString::append ( const GeoDataPoint & value )
+void GeoDataLineString::append ( GeoDataCoordinates* value )
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataPoint>::append( value );
+    QVector<GeoDataCoordinates*>::append( value );
 }
 
 void GeoDataLineString::clear()
 {
     d->m_dirtyBox = true;
-    QVector<GeoDataPoint>::clear();
+// possible leakage
+    QVector<GeoDataCoordinates*>::clear();
 }
 
-QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator pos )
+QVector<GeoDataCoordinates*>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates*>::Iterator pos )
 {
     d->m_dirtyBox = true;
-    return QVector<GeoDataPoint>::erase( pos );
+    return QVector<GeoDataCoordinates*>::erase( pos );
 }
 
-QVector<GeoDataPoint>::Iterator GeoDataLineString::erase ( QVector<GeoDataPoint>::Iterator begin, 
-                                                           QVector<GeoDataPoint>::Iterator end )
+QVector<GeoDataCoordinates*>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates*>::Iterator begin, 
+                                                                 QVector<GeoDataCoordinates*>::Iterator end )
 {
     d->m_dirtyBox = true;
-    return QVector<GeoDataPoint>::erase( begin, end );
+    return QVector<GeoDataCoordinates*>::erase( begin, end );
 }
 

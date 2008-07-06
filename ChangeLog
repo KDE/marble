@@ -1,5 +1,14 @@
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataLineString{.h|.cpp}
+    * src/lib/geodata/data/GeoDataMultiGeometry{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPlacemark{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPolygon{.h|.cpp}
+
+    (1/2) add remaining geometry objects and save them in Placemark
+
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler{.h|.cpp}
     * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler{.h|.cpp}
     * src/lib/geodata/handlers/kml/KmlTessellateTagHandler{.h|.cpp}

@@ -18,6 +18,7 @@
 
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 
 
@@ -31,7 +32,7 @@ class GeoDataLineStringPrivate;
  *
  * Also known as: non-closed Polyline
  *
- * GeoDataLineString consists of GeoDataPoints connected through line 
+ * GeoDataLineString consists of GeoDataCoordinates connected through line 
  * segments.
  * For convenience and performance we've added special methods 
  * to calculate the smallest GeoDataLatLonAltBox that contains the
@@ -40,7 +41,7 @@ class GeoDataLineStringPrivate;
  * currently used for a very similar purpose.
  */
 
-class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
+class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
                                          public GeoDataGeometry {
  public:
     GeoDataLineString();
@@ -49,27 +50,16 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataPoint>,
 
     virtual ~GeoDataLineString();
 
-    bool extrude() const;
-    void setExtrude( bool extrude );
-
-    bool tesselate() const;
-    void setTesselate( bool tesselate );
-
-    AltitudeMode altitudeMode() const;
-    void setAltitudeMode( const AltitudeMode altitudeMode );
-
     GeoDataLatLonAltBox latLonAltBox() const;
 
-    void append ( const GeoDataPoint & value );
+    void append ( GeoDataCoordinates* value );
     void clear();
 
-    typedef QVector<GeoDataPoint> Vector;
+    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator pos );
+    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator begin,
+                                                   QVector<GeoDataCoordinates*>::Iterator end );
 
-    QVector<GeoDataPoint>::Iterator erase ( QVector<GeoDataPoint>::Iterator pos );
-    QVector<GeoDataPoint>::Iterator erase ( QVector<GeoDataPoint>::Iterator begin,
-                                            QVector<GeoDataPoint>::Iterator end );
-
- private:
+ protected:
     GeoDataLineStringPrivate  * const d;
 };
 

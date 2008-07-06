@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -17,6 +18,10 @@
 #include <QtCore/QChar>
 
 #include "GeoDataPoint.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataFeature.h"
 
 #include "geodata_export.h"
@@ -59,6 +64,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     GeoDataPoint coordinate() const;
 
     /**
+    * Return a pointer to the current Geometry object
+    */
+    GeoDataGeometry* geometry();
+
+    /**
      * Return the coordinate of the placemark as @p longitude
      * and @p latitude.
      */
@@ -74,6 +84,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     * Set the coordinate of the placemark with an @p GeoDataPoint.
     */
     void setCoordinate( const GeoDataPoint &point );
+
+    /**
+    * Set any kind of @p GeoDataGeometry like @p GeoDataPoint , 
+    * @p GeoDataLineString , @p GeoDataLinearRing , @p GeoDataMultiGeometry
+    */
+    void setGeometry( GeoDataPoint* entry );
+    void setGeometry( GeoDataLineString* entry );
+    void setGeometry( GeoDataLinearRing* entry );
+    void setGeometry( GeoDataMultiGeometry* entry );
+    void setGeometry( GeoDataPolygon* entry );
 
     /**
      * Return the area size of the feature in square km.

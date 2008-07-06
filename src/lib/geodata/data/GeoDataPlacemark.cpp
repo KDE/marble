@@ -7,6 +7,7 @@
 //
 // Copyright 2004-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -22,19 +23,22 @@ class GeoDataPlacemarkPrivate
   public:
     GeoDataPlacemarkPrivate()
         : m_area( -1.0 ),
-          m_population( -1 )
+          m_population( -1 ),
+          m_geometry( new GeoDataPoint )
     {
     }
 
     ~GeoDataPlacemarkPrivate()
     {
+        delete m_geometry;
     }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
-    GeoDataPoint  m_coordinate;     // The geographic position
-    QString   m_countrycode;    // Country code.
-    double    m_area;           // Area in square kilometer
-    qint64    m_population;     // population in number of inhabitants
+    GeoDataGeometry*    m_geometry;     // any GeoDataGeometry entry like locations
+    GeoDataPoint        m_coordinate;     // The geographic position
+    QString             m_countrycode;  // Country code.
+    double              m_area;         // Area in square kilometer
+    qint64              m_population;   // population in number of inhabitants
 };
 
 
@@ -52,7 +56,15 @@ GeoDataPlacemark::GeoDataPlacemark( const QString& name )
 
 GeoDataPlacemark::~GeoDataPlacemark()
 {
+#if DEBUG_GEODATA
+    qDebug() << "delete Placemark";
+#endif
     delete d;
+}
+
+GeoDataGeometry* GeoDataPlacemark::geometry()
+{
+    return d->m_geometry;
 }
 
 GeoDataPoint GeoDataPlacemark::coordinate() const
@@ -73,7 +85,37 @@ void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
 
 void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 {
-    d->m_coordinate = point;
+    d->m_coordinate = GeoDataPoint( point );
+}
+
+void GeoDataPlacemark::setGeometry( GeoDataPoint *point )
+{
+    delete d->m_geometry;
+    d->m_geometry = point;
+}
+
+void GeoDataPlacemark::setGeometry( GeoDataLineString *point )
+{
+    delete d->m_geometry;
+    d->m_geometry = point;
+}
+
+void GeoDataPlacemark::setGeometry( GeoDataLinearRing *point )
+{
+    delete d->m_geometry;
+    d->m_geometry = point;
+}
+
+void GeoDataPlacemark::setGeometry( GeoDataPolygon *point )
+{
+    delete d->m_geometry;
+    d->m_geometry = point;
+}
+
+void GeoDataPlacemark::setGeometry( GeoDataMultiGeometry *point )
+{
+    delete d->m_geometry;
+    d->m_geometry = point;
 }
 
 double GeoDataPlacemark::area() const
@@ -113,15 +155,7 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     stream << d->m_countrycode;
     // FIXME: what about d->m_area and d->m_population?
 
-    /*
-     * pack coordinates
-     */
-    double longitude;
-    double latitude;
-
-    d->m_coordinate.geoCoordinates( longitude, latitude );
-    stream << longitude;
-    stream << latitude;
+    d->m_geometry->pack( stream );
 }
 
 
