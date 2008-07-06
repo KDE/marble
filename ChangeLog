@@ -1,5 +1,14 @@
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlDocumentTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlFolderTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLabelStyleTagHandler.cpp
+
+    fix more possible memory leaks and unify debug output
+
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
     * src/lib/geodata/data/GeoDataDocument.cpp
     * src/lib/geodata/data/GeoDataGeometry{.h|.cpp}

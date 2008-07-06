@@ -45,10 +45,11 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
 
-    GeoDataFolder* folder = new GeoDataFolder;
+    GeoDataFolder* folder = 0;
 
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.nodeAs<GeoDataContainer>() ) {
+        folder = new GeoDataFolder;
         parentItem.nodeAs<GeoDataContainer>()->addFeature(folder);
 
 #ifdef DEBUG_TAGS

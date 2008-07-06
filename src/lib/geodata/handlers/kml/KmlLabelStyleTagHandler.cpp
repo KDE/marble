@@ -46,9 +46,10 @@ GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLabelStyle* style = new GeoDataLabelStyle();
+    GeoDataLabelStyle* style = 0;
     
     if ( parentItem.represents( kmlTag_Style ) ) {
+        style = new GeoDataLabelStyle();
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LabelStyle << "> containing: " << style
                  << " parent item name: " << parentItem.qualifiedName().first;

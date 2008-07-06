@@ -44,6 +44,9 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Document));
 
-    qDebug() << "Parsed <" << kmlTag_Document << ">";
-    return geoDataDoc(parser);
+    GeoDataDocument* doc = geoDataDoc( parser );
+#ifdef DEBUG_TAGS
+    qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
+#endif
+    return doc;
 }
