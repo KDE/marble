@@ -1,6 +1,13 @@
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlTessellateTagHandler{.h|.cpp}
+
+    add tags for missing properties
+
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KmlDocumentTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlFolderTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlLabelStyleTagHandler.cpp
