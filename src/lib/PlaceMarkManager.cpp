@@ -238,7 +238,11 @@ void PlaceMarkManager::importKmlFromData( const QString& data,
 {
     GeoDataParser parser( GeoData_KML );
     
-    if ( !parser.read( new QBuffer( new QByteArray( data.toUtf8() ) ) ) ) {
+    QByteArray ba( data.toUtf8() );
+    QBuffer buffer( &ba );
+    buffer.open( QIODevice::ReadOnly );
+    
+    if ( !parser.read( &buffer ) ) {
         qWarning( "Could not parse data!" );
         return;
     }

@@ -1,5 +1,13 @@
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/PlaceMarkManager.cpp
+
+    fix loading via loadKmlFromData; 
+    this should fix usage in Digikam so please rebuild and tell me via mail
+    One has to open QBuffers!!!
+
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler{.h|.cpp}
     * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler{.h|.cpp}
