@@ -1,3 +1,14 @@
+2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
+    * src/lib/geodata/data/GeoDataDocument.cpp
+    * src/lib/geodata/data/GeoDataGeometry{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPoint{.h|.cpp}
+
+    fix setter in GeoDataCoordinates
+    fix missing tessellate, altitudeMode and extrude properties in GeoDataGeometry
+    fix missing setter in GeoDataPoint
+
 2008-07-03  Patrick Spendrin    <ps_ml@gmx.de>
 
     * CMakeLists.txt

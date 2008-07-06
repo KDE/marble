@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -14,6 +15,7 @@
 
 
 #include "GeoDataObject.h"
+#include "global.h"
 
 #include "geodata_export.h"
 
@@ -28,15 +30,32 @@
  * @see GeoDataPolygon
  */
 
+using namespace Marble;
+
+class GeoDataGeometryPrivate;
+
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
 
+    bool extrude() const;
+    void setExtrude( bool extrude );
+
+    bool tessellate() const;
+    void setTessellate( bool tessellate );
+
+    AltitudeMode altitudeMode() const;
+    void setAltitudeMode( const AltitudeMode altitudeMode );
+
+    GeoDataGeometry();
+    GeoDataGeometry( const GeoDataGeometry & other );
+    GeoDataGeometry& operator=( const GeoDataGeometry& other );
+    
     virtual ~GeoDataGeometry();
 
  protected:
-    GeoDataGeometry();
+    GeoDataGeometryPrivate* const d_geom;
 };
 
 #endif // GEODATAGEOMETRY_H

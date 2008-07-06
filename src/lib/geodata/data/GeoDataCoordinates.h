@@ -22,6 +22,7 @@
 
 #include "geodata_export.h"
 #include "Quaternion.h"
+#include "GeoDataObject.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
 #ifndef M_PI 
@@ -32,7 +33,7 @@ const double TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 
-class GEODATA_EXPORT GeoDataCoordinates {
+class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
  public:
     /**
      * @brief enum used constructor to specify the units used
@@ -60,7 +61,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
         DMS
     };
 
-    GeoDataCoordinates(const GeoDataCoordinates& other);
+    GeoDataCoordinates( const GeoDataCoordinates& other );
     GeoDataCoordinates();
 
     /**
@@ -71,13 +72,16 @@ class GEODATA_EXPORT GeoDataCoordinates {
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    GeoDataCoordinates(double _lon, double _lat, double alt = 0,
+    GeoDataCoordinates( double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
     ~GeoDataCoordinates();
 
     double altitude() const;
     void   setAltitude( const double altitude );
+
+    void set(double _lon, double _lat, double alt = 0,
+             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
     void geoCoordinates( double& lon, double& lat, 
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
@@ -86,8 +90,8 @@ class GEODATA_EXPORT GeoDataCoordinates {
     const Quaternion &quaternion() const;
 
     QString toString( GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS );
-    bool operator==(const GeoDataCoordinates&) const;
-    GeoDataCoordinates& operator=(const GeoDataCoordinates &other);
+    bool operator==( const GeoDataCoordinates& ) const;
+    GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
  protected:
     GeoDataCoordinatesPrivate* const d_ptr;

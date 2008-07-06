@@ -94,6 +94,11 @@ int GeoDataPoint::detail() const
     return d->m_detail;
 }
 
+void GeoDataPoint::setDetail( int det )
+{
+    d->m_detail = det;
+}
+
 const Quaternion& GeoDataPoint::quaternion() const
 {
         return GeoDataCoordinates::quaternion();

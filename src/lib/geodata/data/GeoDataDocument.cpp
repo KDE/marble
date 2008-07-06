@@ -26,6 +26,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
+#include <QtCore/QDebug>
+
 class GeoDataDocumentPrivate
 {
   public:
@@ -49,6 +51,9 @@ GeoDataDocument::GeoDataDocument()
 
 GeoDataDocument::~GeoDataDocument()
 {
+#if DEBUG_GEODATA
+    qDebug() << "delete Document";
+#endif
     delete d;
 }
 
