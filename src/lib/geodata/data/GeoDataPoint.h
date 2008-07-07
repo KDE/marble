@@ -53,8 +53,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     int detail()   const;
     void setDetail( int det );
 
-    const Quaternion &quaternion() const;
-
     GeoDataPoint& operator=( const GeoDataPoint &other );
 
     // Type definitions

@@ -1,3 +1,9 @@
+2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataPoint.{cpp,h}:
+
+    optimize a bit - this was done by the compiler before though
+
 2008-07-07  Torsten Rahn <rahn@kde.org>
 
     * src/KdeMainWindow.cpp:
