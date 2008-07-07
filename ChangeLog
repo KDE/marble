@@ -1,5 +1,14 @@
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/tests/CMakeLists.txt
+    * src/lib/tests/KMLTest.cpp
+
+    add a new test for KML parsing and caching: The Test is handling
+    the biggest kml we currently have and saves it into a cache file (at the 
+    location of the executable). The test is expected to pass
+
+2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataMultiGeometry{.h|.cpp}
     * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.cpp
