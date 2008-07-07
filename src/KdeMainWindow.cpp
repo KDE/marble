@@ -47,7 +47,6 @@ MainWindow::~MainWindow()
     delete m_part;
 }
 
-
 ControlView* MainWindow::marbleControl() const
 {
     return m_part->controlView();

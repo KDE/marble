@@ -55,6 +55,7 @@ class SunLocator;
 class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
+class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
 
@@ -453,6 +454,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     SunLocator* sunLocator();
 
+    QList<MarbleAbstractLayer *> layerPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
@@ -759,12 +761,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     FileViewModel* fileViewModel() const;
 
+    void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
      * @param  bytes The limit in kilobytes.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 
+    void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
      * @param  bytes The limit in kilobytes.
@@ -793,7 +797,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setDownloadUrl( const QUrl &url );
 
-    bool  mapCoversViewport();
+    bool mapCoversViewport();
+
+    Marble::AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
+
+    QFont defaultFont() const;
+    void setDefaultFont( const QFont& font );
 
  Q_SIGNALS:
     /**

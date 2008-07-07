@@ -73,6 +73,7 @@ class MarbleWidgetPrivate
           m_map( map ), 
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
+          m_animationsEnabled( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics() ),
           m_proxyHost(),
@@ -99,6 +100,8 @@ class MarbleWidgetPrivate
 
     MapQuality      m_stillQuality;
     MapQuality      m_animationQuality;
+
+    bool m_animationsEnabled;
 
     // Some values from m_map, as they were last time we repainted.
     // To store them here will save some repaintings.
@@ -518,7 +521,7 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
 void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated )
 {
-    if ( animated )
+    if ( d->m_animationsEnabled && animated )
     {
         d->m_physics->jumpTo( GeoDataPoint( lon, lat, distance(), GeoDataPoint::Degree ) );
     }
@@ -532,7 +535,7 @@ void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated
 
 void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 {
-    if ( animated )
+    if ( d->m_animationsEnabled && animated )
     {
         QItemSelectionModel *selectionModel = d->m_map->model()->placeMarkSelectionModel();
         Q_ASSERT( selectionModel );
@@ -558,7 +561,7 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
 {
-    if ( animated )
+    if ( d->m_animationsEnabled && animated )
     {
         GeoDataPoint targetPosition = position;
         targetPosition.setAltitude( distance() );
@@ -1050,9 +1053,20 @@ FileViewModel* MarbleWidget::fileViewModel() const
     return d->m_model->fileViewModel();
 }
 
+void MarbleWidget::clearPersistentTileCache()
+{
+    d->m_map->clearPersistentTileCache();
+}
+
 void MarbleWidget::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
     d->m_map->setPersistentTileCacheLimit( kiloBytes );
+}
+
+void MarbleWidget::clearVolatileTileCache()
+{
+    qDebug() << "About to clear VolatileTileCache";
+    d->m_map->clearVolatileTileCache();
 }
 
 void MarbleWidget::setVolatileTileCacheLimit( quint64 kiloBytes )
@@ -1137,6 +1151,36 @@ void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
         map()->viewParams()->setMapQuality( d->m_animationQuality ); 
 }
 
+bool MarbleWidget::animationsEnabled() const
+{
+    return d->m_animationsEnabled;
+}
+
+void MarbleWidget::setAnimationsEnabled( bool enabled )
+{
+    d->m_animationsEnabled = enabled;
+}
+
+Marble::AngleUnit MarbleWidget::defaultAngleUnit() const
+{
+    return map()->defaultAngleUnit();
+}
+
+void MarbleWidget::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
+{
+    map()->setDefaultAngleUnit( angleUnit );
+}
+
+QFont MarbleWidget::defaultFont() const
+{
+    return map()->defaultFont();
+}
+
+void MarbleWidget::setDefaultFont( const QFont& font )
+{
+    map()->setDefaultFont( font );
+}
+
 double MarbleWidget::distance() const
 {
     return map()->distance();
@@ -1217,6 +1261,11 @@ QString MarbleWidget::proxyHost() const
 quint16 MarbleWidget::proxyPort() const
 {
     return d->m_proxyPort;
+}
+
+QList<MarbleAbstractLayer *> MarbleWidget::layerPlugins() const
+{
+    return d->m_model->layerPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const

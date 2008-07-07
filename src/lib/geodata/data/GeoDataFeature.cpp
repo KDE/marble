@@ -20,6 +20,8 @@
 
 #include "GeoDataStyle.h"
 
+QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");
+
 bool GeoDataFeature::s_defaultStyleInitialized = false;
 GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
 
@@ -80,7 +82,7 @@ void GeoDataFeature::initializeDefaultStyles()
     // the future: Having a PlaceMarkStyleProperty properties[] would
     // help here greatly.
 
-    QString defaultFamily = "Sans Serif";
+    QString defaultFamily = s_defaultFont.family();
 
 #ifdef Q_OS_MACX
     int defaultSize = 10;
@@ -207,6 +209,7 @@ void GeoDataFeature::initializeDefaultStyles()
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyleInitialized = true;
+    s_defaultFont = QFont("Sans Serif");
 
     QFont tmp;
 
@@ -236,6 +239,17 @@ void GeoDataFeature::initializeDefaultStyles()
     tmp = s_defaultStyle[LargeNationCapital] -> labelStyle()-> font();
     tmp.setUnderline( true );
     s_defaultStyle[LargeNationCapital] -> labelStyle()-> setFont( tmp );
+}
+
+QFont GeoDataFeature::defaultFont()
+{
+    return s_defaultFont;
+}
+
+void GeoDataFeature::setDefaultFont( const QFont& font )
+{
+    s_defaultFont = font;
+    s_defaultStyleInitialized = false;
 }
 
 QString GeoDataFeature::name() const

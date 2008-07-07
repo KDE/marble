@@ -55,6 +55,11 @@ LayerManager::~LayerManager()
     delete d;
 }
 
+QList<MarbleAbstractLayer *> LayerManager::layerPlugins() const
+{
+    return d->m_layerPlugins;
+}
+
 QList<MarbleAbstractFloatItem *> LayerManager::floatItems() const
 {
     return d->m_pluginManager.floatItems();
@@ -71,7 +76,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     ViewportParams* viewport = viewParams->viewport();
 
     foreach( MarbleAbstractLayer *layerPlugin,  d->m_layerPlugins ) {
-        if ( layerPlugin && layerPlugin->visible() )
+        if ( layerPlugin && layerPlugin->enabled() && layerPlugin->visible() )
         {
             layerPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
         }
@@ -84,7 +89,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
         {
             MarbleAbstractFloatItem *floatItem = dynamic_cast<MarbleAbstractFloatItem *>(layerPlugin);
 
-            if ( floatItem && floatItem->visible() )
+            if ( floatItem && floatItem->enabled() && layerPlugin->visible() )
             {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );
             }
@@ -112,7 +117,7 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
         }
 
         layerPlugin->disconnect();
-        connect( layerPlugin->action(), SIGNAL( triggered() ), 
+        connect( layerPlugin->action(), SIGNAL( changed() ), 
                  this,                  SIGNAL( floatItemsChanged() ) );
         connect( layerPlugin, SIGNAL( valueChanged( QString, bool ) ),
                  this, SLOT( syncPropertyWithAction( QString, bool ) ) );

@@ -175,7 +175,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
             } 
             else {
-                QString position = GeoDataPoint( lon, lat ).toString( GeoDataPoint::DMS );
+                QString position = GeoDataPoint( lon, lat ).toString();
                 emit mouseMoveGeoPosition( position );
             }
         }

@@ -221,6 +221,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
+    static QFont defaultFont();
+    static void setDefaultFont( const QFont& font );
+
  protected:
     GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
@@ -233,10 +236,13 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
  private:
     static void initializeDefaultStyles();
 
+
  private:
     Q_DISABLE_COPY( GeoDataFeature )
     GeoDataFeaturePrivate * const d;
     // Static members
+    static QFont         s_defaultFont;
+
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;
 };

@@ -23,24 +23,7 @@ p, li { white-space: pre-wrap; }
      </property>
      <layout class="QVBoxLayout" >
       <item>
-       <widget class="QTreeWidget" name="pluginList" >
-        <property name="uniformRowHeights" >
-         <bool>false</bool>
-        </property>
-        <property name="allColumnsShowFocus" >
-         <bool>true</bool>
-        </property>
-        <column>
-         <property name="text" >
-          <string>Name</string>
-         </property>
-        </column>
-        <column>
-         <property name="text" >
-          <string>Description</string>
-         </property>
-        </column>
-       </widget>
+       <widget class="QListView" name="m_pluginListView" />
       </item>
      </layout>
     </widget>

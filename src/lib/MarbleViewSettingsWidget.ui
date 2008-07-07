@@ -40,6 +40,9 @@
       </item>
       <item row="0" column="1" >
        <widget class="QComboBox" name="kcfg_distanceUnit" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
           <horstretch>0</horstretch>
@@ -82,6 +85,9 @@ p, li { white-space: pre-wrap; }
       </item>
       <item row="1" column="1" >
        <widget class="QComboBox" name="kcfg_angleUnit" >
+        <property name="enabled" >
+         <bool>true</bool>
+        </property>
         <property name="toolTip" >
          <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
@@ -264,6 +270,9 @@ p, li { white-space: pre-wrap; }
         </item>
         <item>
          <widget class="QComboBox" name="kcfg_labelLocalization" >
+          <property name="enabled" >
+           <bool>false</bool>
+          </property>
           <property name="toolTip" >
            <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }

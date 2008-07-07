@@ -197,7 +197,6 @@ void PlaceMarkInfoDialog::showContent()
     }
 
     emit source( QString("wiki/%1").arg( m_index.data().toString() ) );
-    emit panoramioSource(  m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().toString() );  
 }
 
 

@@ -14,6 +14,7 @@
 
 // Qt
 #include <QtCore/QDir>
+#include <QtCore/QStringList>
 #include <QtCore/QTimer>
 #include <QtGui/QClipboard>
 #include <QtGui/QLabel>
@@ -21,6 +22,7 @@
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPainter>
+#include <QtGui/QStandardItemModel>
 
 // KDE
 #include <kaction.h>
@@ -48,8 +50,8 @@
 // Local dir
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
-#include "ui_MarbleCacheSettingsWidget.h"
-#include "ui_MarblePluginSettingsWidget.h"
+#include "MarbleCacheSettingsWidget.h"
+#include "MarblePluginSettingsWidget.h"
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
@@ -69,6 +71,8 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ), 
     m_sunControlDialog( 0 ),
+    m_pluginModel( 0 ),
+    m_configDialog( 0 ),
     m_positionLabel( 0 ), 
     m_distanceLabel( 0 )
 {
@@ -98,6 +102,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 MarblePart::~MarblePart()
 {
     writeSettings();
+    delete m_pluginModel;
+    delete m_configDialog;
 }
 
 ControlView* MarblePart::controlView() const
@@ -222,7 +228,7 @@ void MarblePart::showFullScreen( bool isChecked )
         if ( KApplication::activeWindow() )
 //  TODO: Deprecate alternative once KDE 4.0 is outdated
 #if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), false );
+            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), true );
 #else
 	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() & ~Qt::WindowFullScreen );
 #endif
@@ -301,6 +307,21 @@ void MarblePart::readSettings()
         m_controlView->marbleWidget()->goHome();
     }
 
+    // Set map quality
+    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
+    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
+
+    // Set angle unit
+    m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+
+    // Set default font
+    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );     
+
+    // Set whether animations to the target are enabled
+    m_controlView->marbleWidget()->setAnimationsEnabled( 
+        MarbleSettings::animateTargetVoyage()
+    );
+
     // Map theme and projection
     m_controlView->marbleWidget()->setMapThemeId( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
@@ -310,9 +331,38 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
 
+    // Caches
+    m_controlView->marbleWidget()->setVolatileTileCacheLimit( 1000 * MarbleSettings::volatileTileCacheLimit() );
+    m_controlView->marbleWidget()->setPersistentTileCacheLimit( 1000 * MarbleSettings::persistentTileCacheLimit() );
+
     // Proxy
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
                                              MarbleSettings::proxyPort() );
+
+    // Plugins
+    QHash<QString, int> pluginEnabled;
+
+    int nameIdSize = MarbleSettings::pluginNameId().size();
+    int enabledSize = MarbleSettings::pluginEnabled().size();
+
+    if ( nameIdSize == enabledSize )
+    {
+        for ( int i = 0; i < enabledSize; ++i ) 
+        {
+            pluginEnabled[ MarbleSettings::pluginNameId()[i] ] = MarbleSettings::pluginEnabled()[i];
+        }
+    }
+
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
+    {
+        if ( pluginEnabled.contains( (*i)->nameId() ) )
+        {
+            (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
+            (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
+        }
+    }
 
     slotUpdateSettings();
 }
@@ -338,6 +388,14 @@ void MarblePart::writeSettings()
     MarbleSettings::setHomeLatitude( homeLat );
     MarbleSettings::setHomeZoom( homeZoom );
 
+    // Set default font
+    MarbleSettings::setMapFont( m_controlView->marbleWidget()->defaultFont() );
+
+    // Get whether animations to the target are enabled
+    MarbleSettings::setAnimateTargetVoyage( m_controlView->marbleWidget()->animationsEnabled() );
+
+    m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
+
     // Map theme and projection
     MarbleSettings::setMapTheme( m_controlView->marbleWidget()->mapThemeId() );
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
@@ -348,6 +406,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
+    MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
+
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
@@ -356,6 +416,19 @@ void MarblePart::writeSettings()
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
     MarbleSettings::setProxyPort( m_controlView->marbleWidget()->proxyPort() );
 
+    QList<int> pluginEnabled;
+    QStringList pluginNameId;
+
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
+    {
+            pluginEnabled << static_cast<int>( (*i)->enabled() );
+            pluginNameId  << (*i)->nameId();
+    }
+    MarbleSettings::setPluginEnabled( pluginEnabled );
+    MarbleSettings::setPluginNameId(  pluginNameId );
+    
     MarbleSettings::self()->writeConfig();
 }
 
@@ -459,8 +532,8 @@ void MarblePart::createInfoBoxesMenu()
     {
         actionList.append( (*i)->action() );
     }
-    unplugActionList( "xxx_file_actionlist" );
-    plugActionList( "xxx_file_actionlist", actionList );
+    unplugActionList( "infobox_actionlist" );
+    plugActionList( "infobox_actionlist", actionList );
 }
 
 
@@ -538,45 +611,94 @@ void MarblePart::editSettings()
     if ( KConfigDialog::showDialog( "settings" ) )
         return; 
  
-    KConfigDialog* dialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
+        m_configDialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
 
         // view page
         Ui_MarbleViewSettingsWidget ui_viewSettings;
         QWidget *w_viewSettings = new QWidget( 0 );
         w_viewSettings->setObjectName( "view_page" );
         ui_viewSettings.setupUi( w_viewSettings );
-        dialog->addPage( w_viewSettings, i18n( "View" ), "preferences-view" );
+        m_configDialog->addPage( w_viewSettings, i18n( "View" ), "preferences-view" );
 
         // navigation page
         Ui_MarbleNavigationSettingsWidget ui_navigationSettings;
         QWidget *w_navigationSettings = new QWidget( 0 );
         w_navigationSettings->setObjectName( "navigation_page" );
         ui_navigationSettings.setupUi( w_navigationSettings );
-        dialog->addPage( w_navigationSettings, i18n( "Navigation" ), "preferences-navigation" );
+        m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ), "preferences-navigation" );
 
         // cache page
-        Ui_MarbleCacheSettingsWidget ui_cacheSettings;
-        QWidget *w_cacheSettings = new QWidget( 0 );
+        MarbleCacheSettingsWidget *w_cacheSettings = 
+            new MarbleCacheSettingsWidget();
         w_cacheSettings->setObjectName( "cache_page" );
-        ui_cacheSettings.setupUi( w_cacheSettings );
-        dialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-cache" );
+        m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-cache" );
+        connect( w_cacheSettings, SIGNAL( clearVolatileCache() ), m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
+        connect( w_cacheSettings, SIGNAL( clearPersistentCache() ), m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
         // plugin page
-        Ui_MarblePluginSettingsWidget ui_pluginSettings;
-        QWidget *w_pluginSettings = new QWidget( 0 );
-        w_pluginSettings->setObjectName( "plugin_page" );
-        ui_pluginSettings.setupUi( w_pluginSettings );
-        dialog->addPage( w_pluginSettings, i18n( "Plugins" ), "preferences-plugin" );
 
-        connect( dialog, SIGNAL( settingsChanged( const QString &) ), this , SLOT( slotUpdateSettings() ) );
-        dialog->show();
+        m_pluginModel = new QStandardItemModel();
+        QStandardItem *parentItem = m_pluginModel->invisibleRootItem();
+
+        QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+        QList<MarbleAbstractLayer *>::const_iterator i;
+        for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
+        {
+            parentItem->appendRow( (*i)->item() );
+        }
+
+        MarblePluginSettingsWidget *w_pluginSettings = 
+            new MarblePluginSettingsWidget();
+        w_pluginSettings->setModel( m_pluginModel );
+        w_pluginSettings->setObjectName( "plugin_page" );
+        m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ), "preferences-plugin" );
+
+        connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ), SLOT( slotEnableButtonApply() ) );
+        connect( m_configDialog, SIGNAL( settingsChanged( const QString &) ), SLOT( slotUpdateSettings() ) );
+        connect( m_configDialog, SIGNAL( applyClicked() ), SLOT( slotApply() ) );
+        connect( m_configDialog, SIGNAL( okClicked() ), SLOT( slotApply() ) );
+        connect( m_configDialog, SIGNAL( cancelClicked() ), SLOT( slotCancel() ) );
+
+        m_configDialog->show();
+}
+
+void MarblePart::slotEnableButtonApply()
+{
+        m_configDialog->enableButtonApply( true );
+}
+
+void MarblePart::slotApply()
+{
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
+    {
+        (*i)->applyItemState();
+    }
+}
+
+void MarblePart::slotCancel()
+{
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
+    {
+        (*i)->retrieveItemState();
+    }
 }
 
 void MarblePart::slotUpdateSettings()
 {
     qDebug() << "Updating Settings ...";
+
+    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );     
+
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
+
+    m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+
+    m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );

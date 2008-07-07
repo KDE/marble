@@ -21,7 +21,7 @@
 class QAction;
 
 class MarbleAbstractLayerPrivate;
-
+class QStandardItem;
 
 /**
  * @short The abstract class that creates an "empty" float item.
@@ -38,10 +38,16 @@ class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInte
     virtual ~MarbleAbstractLayer();
 
     QAction* action() const;
+    QStandardItem* item() const;
 
+    void applyItemState();
+    void retrieveItemState();
+
+    bool    enabled() const;
     bool    visible() const;
 
  public Q_SLOTS:
+    void    setEnabled( bool enabled );
     void    setVisible( bool visible );
 
  Q_SIGNALS:

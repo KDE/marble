@@ -11,14 +11,16 @@
 //
 
 
-#include "GeoDataCoordinates.h"
 #include "GeoDataCoordinates_p.h"
+#include "GeoDataCoordinates.h"
 
 #include <cmath>
 
 #include <QtCore/QDebug>
 #include <QtCore/QCoreApplication>
 #include "global.h"
+
+GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit )
   : d_ptr( new GeoDataCoordinatesPrivate() )
@@ -87,6 +89,21 @@ void GeoDataCoordinates::geoCoordinates( double& lon, double& lat,
             lat = d_ptr->m_lat * RAD2DEG;
         break;
     }
+}
+
+GeoDataCoordinates::Notation GeoDataCoordinates::defaultNotation()
+{
+    return s_notation;
+}
+
+void GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Notation notation )
+{
+    s_notation = notation;
+}
+
+QString GeoDataCoordinates::toString()
+{
+    return GeoDataCoordinates::toString( s_notation );
 }
 
 QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )

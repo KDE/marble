@@ -69,8 +69,8 @@ set(marblewidget_SRCS
     LayerManager.cpp
     PluginManager.cpp
     CrossHairFloatItem.cpp
-#    CompassFloatItem.cpp
-#    MapScaleFloatItem.cpp
+    MarbleCacheSettingsWidget.cpp
+    MarblePluginSettingsWidget.cpp
     MarbleAbstractLayer.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
@@ -275,7 +275,6 @@ else (APPLE AND QTONLY)
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
     ExtDateTime.h
-
     TileCreator.h
     marble_export.h
 

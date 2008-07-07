@@ -34,6 +34,7 @@ const double TWOPI = 2 * M_PI;
 class GeoDataCoordinatesPrivate;
 
 class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
+
  public:
     /**
      * @brief enum used constructor to specify the units used
@@ -46,6 +47,7 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
         Radian,
         Degree
     };
+
     /**
      * @brief enum used to specify the notation / numerical system
      *
@@ -89,7 +91,11 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
 
     const Quaternion &quaternion() const;
 
-    QString toString( GeoDataCoordinates::Notation notation = GeoDataCoordinates::DMS );
+    static GeoDataCoordinates::Notation defaultNotation();
+    static void setDefaultNotation( GeoDataCoordinates::Notation );
+
+    QString toString();
+    QString toString( GeoDataCoordinates::Notation notation );
     bool operator==( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
@@ -101,6 +107,8 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
  protected:
     GeoDataCoordinatesPrivate* const d_ptr;
 
+ private:
+    static GeoDataCoordinates::Notation s_notation;
 };
 
 Q_DECLARE_METATYPE( GeoDataCoordinates )

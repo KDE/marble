@@ -1,7 +1,34 @@
+2008-07-07  Torsten Rahn <rahn@kde.org>
+
+    * src/KdeMainWindow.cpp:
+    * src/lib/MarbleNavigationSettingsWidget.ui:
+    * src/lib/MarbleWidget.{cpp,h}:
+    * src/lib/MarbleMap.{cpp,h}:
+    * src/lib/MarblePluginSettingsWidget.{cpp,h,ui}:
+    * src/lib/MarbleCacheSettingsWidget.{cpp,h,ui}:
+    * src/lib/MarbleWidgetInputHandler.cpp:
+    * src/lib/MarbleAbstractLayer.{cpp,h}:
+    * src/lib/MarbleViewSettingsWidget.ui:
+    * src/lib/PlaceMarkInfoDialog.cpp:
+    * src/lib/global.h:
+    * src/lib/MarbleModel.{cpp,h}:
+    * src/lib/LayerManager.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+    * src/lib/LayerManager.cpp:
+    * src/lib/geodata/data/GeoDataCoordinates.{cpp,h}:
+    * src/lib/geodata/data/GeoDataFeature.{cpp,h}:
+    * src/marble.kcfg:
+    * src/marble_part.{cpp,h,rc}:
+
+    Fixing Settings Dialog:
+    - Displaying Plugins
+    - Enabling Animated Travel Checkbox
+    - Enabling Change of Degree Notation
+
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
-    * src/lib/tests/CMakeLists.txt
-    * src/lib/tests/KMLTest.cpp
+    * src/lib/tests/CMakeLists.txt:
+    * src/lib/tests/KMLTest.cpp:
 
     add a new test for KML parsing and caching: The Test is handling
     the biggest kml we currently have and saves it into a cache file (at the 

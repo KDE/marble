@@ -41,6 +41,7 @@
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
+#include "GeoDataFeature.h"
 #include "GeoDataPoint.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -906,36 +907,14 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 
     customPaint( &painter );
 
-    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
-//    d->m_compass.setTransparency( transparency );
-//    d->m_mapscale.setTransparency( transparency );
+//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
 
-    // 2. Paint the compass
-
-    bool showCompass, showScaleBar;
-
-    d->m_viewParams.propertyValue( "compass", showCompass );
-    d->m_viewParams.propertyValue( "scalebar", showScaleBar );
-/*
-    if ( showCompass )
-        painter.drawPixmap( d->m_viewParams.canvasImage()->width() - 60, 10,
-                            d->m_compass.drawCompassPixmap( d->m_viewParams.canvasImage()->width(),
-                                                            d->m_viewParams.canvasImage()->height(),
-                                                            northPoleY(), d->m_viewParams.projection() ) );
-*/
-    // 3. Paint the scale.
-/*
-    if ( showScaleBar )
-        painter.drawPixmap( 10, d->m_viewParams.canvasImage()->height() - 40,
-                            d->m_mapscale.drawScaleBarPixmap( radius(),
-                                                              d->m_viewParams.canvasImage()->width() / 2 - 20 ) );
-*/
-    // 4. Paint the crosshair.
+    // 2. Paint the crosshair.
     d->m_crosshair.paint( &painter,
                           d->m_viewParams.canvasImage()->width(),
                           d->m_viewParams.canvasImage()->height() );
 
-    // 5. Paint measure points if there are any.
+    // 3. Paint measure points if there are any.
 
     bool antialiased = false;
 
@@ -1157,10 +1136,19 @@ FileViewModel* MarbleMap::fileViewModel() const
     return d->m_model->fileViewModel();
 }
 
+void MarbleMap::clearPersistentTileCache()
+{
+}
+
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
     d->m_persistentTileCacheLimit = kiloBytes;
     // TODO: trigger update
+}
+
+void MarbleMap::clearVolatileTileCache()
+{
+    d->m_model->clearVolatileTileCache();
 }
 
 void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
@@ -1231,7 +1219,36 @@ bool MarbleMap::mapCoversViewport()
     return d->m_viewParams.viewport()->mapCoversViewport();
 }
 
+Marble::AngleUnit MarbleMap::defaultAngleUnit() const
+{
+    if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal )
+    {
+        return Marble::DecimalDegree;
+    }
 
+    return Marble::DMSDegree;
+}
+
+void MarbleMap::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
+{
+    if ( angleUnit == Marble::DecimalDegree )
+    {
+        GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Decimal );
+        return;
+    }
+
+    GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::DMS );
+}
+
+QFont MarbleMap::defaultFont() const
+{
+    return GeoDataFeature::defaultFont();
+}
+
+void MarbleMap::setDefaultFont( const QFont& font )
+{
+    GeoDataFeature::setDefaultFont( font );
+}
 
 void MarbleMap::updateSun()
 {
@@ -1258,6 +1275,11 @@ void MarbleMap::centerSun()
 SunLocator* MarbleMap::sunLocator()
 {
     return d->m_model->sunLocator();
+}
+
+QList<MarbleAbstractLayer *> MarbleMap::layerPlugins() const
+{
+    return d->m_model->layerPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const

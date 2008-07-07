@@ -57,6 +57,7 @@ class SunLocator;
 class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
+class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
 
@@ -475,6 +476,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QString proxyHost() const;
     quint16 proxyPort() const;
 
+    QList<MarbleAbstractLayer *> layerPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
@@ -792,12 +794,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     FileViewModel* fileViewModel() const;
 
+    void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
      * @param  kilobytes The limit in kilobytes.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 
+    void clearVolatileTileCache();
     /**
      * @brief  Set the limit of the volatile (in RAM) tile cache.
      * @param  kilobytes The limit in kilobytes.
@@ -865,6 +869,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set the view context (i.e. still or animated map) 
      */
     void setViewContext( Marble::ViewContext viewContext );
+
+    /**
+     * @brief Retrieve whether travels to a point should get animated 
+     */
+    bool animationsEnabled() const;
+
+    /**
+     * @brief Set whether travels to a point should get animated 
+     */
+    void setAnimationsEnabled( bool enabled );
+
+    Marble::AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
+
+    QFont defaultFont() const;
+    void setDefaultFont( const QFont& font );
 
  private Q_SLOTS:
 

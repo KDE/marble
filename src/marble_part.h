@@ -12,13 +12,16 @@
 #define MARBLE_PART_H
 
 #include <kparts/part.h>
+#include <QtCore/QHash>
 
 class KAboutData;
 class KAction;
+class KConfigDialog;
 
 class QLabel;
 class ControlView;
 class SunControlWidget;
+class QStandardItemModel;
 
 namespace KParts {
 class StatusBarExtension;
@@ -58,6 +61,11 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showNewStuffDialog();
 
     void  editSettings();
+
+    void  slotEnableButtonApply();
+    void  slotApply();
+    void  slotCancel();
+
     void  slotUpdateSettings();
 
   private:
@@ -83,6 +91,12 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_openAct;
     KAction      *m_newStuffAction;
     KAction      *m_showSunAct;
+
+    QStandardItemModel* m_pluginModel;
+
+    KConfigDialog *m_configDialog;
+
+    QHash<QString, int> m_pluginEnabled;
 
     QString m_position;
     QString m_distance;

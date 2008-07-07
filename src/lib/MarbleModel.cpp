@@ -669,6 +669,12 @@ MergedLayerDecorator* MarbleModel::layerDecorator() const
     return m_layerDecorator;
 }
 
+void MarbleModel::clearVolatileTileCache()
+{
+    d->m_tileLoader->update();
+    qDebug() << "Cleared Volatile Cache!";
+}
+
 quint64 MarbleModel::volatileTileCacheLimit() const
 {
     return d->m_tileLoader->volatileCacheLimit();
@@ -694,6 +700,11 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
         
     m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
     tile->loadTile(requestTileUpdate);
+}
+
+QList<MarbleAbstractLayer *> MarbleModel::layerPlugins() const
+{
+    return d->m_layerManager.layerPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const

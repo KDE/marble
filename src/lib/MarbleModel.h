@@ -58,6 +58,7 @@ class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
 class ExtDateTime;
+class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
 
@@ -242,9 +243,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
+    QList<MarbleAbstractLayer *> layerPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
+    void clearVolatileTileCache();
     /**
      * @brief Set the limit of the volatile (in RAM) tile cache.
      * @param kilobytes The limit in kilobytes.
