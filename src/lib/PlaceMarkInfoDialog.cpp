@@ -44,10 +44,6 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
              this,                SLOT( showMessage( QString) ) );
     connect( this,                SIGNAL( source( QString ) ),
              m_pWikipediaBrowser, SLOT( setSource( QString ) ) );//for wikipedia
-    connect( this,                SIGNAL( panoramioSource( QString ) ),
-             m_pPanoramioBrowser, SLOT( getPanoramio(QString ) ) );//for panoramio
-    /*connect( m_pPanoramioBrowser, SIGNAL( statusMessage( QString ) ),
-             this,                SLOT( showMessage( QString) ) );*/
     showContent();
 
         QTextFrameFormat format = description_val_browser->document()->rootFrame()->frameFormat();
