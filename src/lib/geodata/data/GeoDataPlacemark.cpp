@@ -153,9 +153,12 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     GeoDataFeature::pack( stream );
 
     stream << d->m_countrycode;
-    // FIXME: what about d->m_area and d->m_population?
+    stream << d->m_area;
+    stream << d->m_population;
 
+    stream << d->m_geometry->geometryId();
     d->m_geometry->pack( stream );
+    d->m_coordinate.pack( stream );
 }
 
 
@@ -163,17 +166,48 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
 {
     GeoDataFeature::unpack( stream );
 
+    stream >> d->m_countrycode;
     stream >> d->m_area;
     stream >> d->m_population;
-    stream >> d->m_countrycode;
 
-    /*
-     * unpack coordinates
-     */
-    double longitude;
-    double latitude;
-
-    stream >> longitude;
-    stream >> latitude;
-    setCoordinate( longitude, latitude );
+    int geometryId;
+    stream >> geometryId;
+    switch( geometryId ) {
+        case GeoDataGeometryId:
+            break;
+        case GeoDataPointId:
+            GeoDataPoint* point = new GeoDataPoint();
+            point->unpack( stream );
+            delete d->m_geometry;
+            d->m_geometry = point;
+            break;
+        case GeoDataLineStringId:
+            GeoDataLineString* lineString = new GeoDataLineString();
+            lineString->unpack( stream );
+            delete d->m_geometry;
+            d->m_geometry = lineString;
+            break;
+        case GeoDataLinearRingId:
+            GeoDataLinearRing* linearRing = new GeoDataLinearRing();
+            linearRing->unpack( stream );
+            delete d->m_geometry;
+            d->m_geometry = linearRing;
+            break;
+        case GeoDataPolygonId:
+            GeoDataPolygon* polygon = new GeoDataPolygon();
+            polygon->unpack( stream );
+            delete d->m_geometry;
+            d->m_geometry = polygon;
+            break;
+        case GeoDataMultiGeometryId:
+            GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
+            multiGeometry->unpack( stream );
+            delete d->m_geometry;
+            d->m_geometry = multiGeometry;
+            break;
+        case GeoDataModelId:
+            break;
+        default: break;
+    };
+    d->m_coordinate.unpack( stream );
 }

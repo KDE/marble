@@ -274,6 +274,19 @@ GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
     return *this;
 }
 
+void GeoDataLatLonBox::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    stream << d->m_north << d->m_south << d->m_east << d->m_west << d->m_rotation;
+}
+
+void GeoDataLatLonBox::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+
+    stream >> d->m_north >> d->m_south >> d->m_east >> d->m_west >> d->m_rotation;
+}
 
 class GeoDataLatLonAltBoxPrivate
 {
@@ -412,4 +425,22 @@ QString GeoDataLatLonAltBox::text( GeoDataPoint::Unit unit ) const
 
     return QString( "GeoDataLatLonAltBox::text(): Error in unit: %1\n" )
 	.arg( unit );
+}
+
+void GeoDataLatLonAltBox::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    stream << d->m_minAltitude << d->m_maxAltitude;
+    stream << d->m_altitudeMode;
+}
+
+void GeoDataLatLonAltBox::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+
+    stream >> d->m_minAltitude >> d->m_maxAltitude;
+    int a;
+    stream >> a;
+    d->m_altitudeMode = static_cast<AltitudeMode>( a );
 }

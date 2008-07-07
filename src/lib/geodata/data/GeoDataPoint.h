@@ -48,6 +48,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
 
     ~GeoDataPoint();
 
+    virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
+    
     int detail()   const;
     void setDetail( int det );
 
@@ -70,6 +72,10 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      */
     static double normalizeLat( double lat );
 
+    // Serialize the Placemark to @p stream
+    virtual void pack( QDataStream& stream ) const;
+    // Unserialize the Placemark from @p stream
+    virtual void unpack( QDataStream& stream );
  private:
     GeoDataPointPrivate* const d;
 };

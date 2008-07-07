@@ -72,3 +72,33 @@ const GeoDataStyle* GeoDataDocument::style(const QString& styleId) const
      */
     return d->m_styleHash.value(styleId);
 }
+
+void GeoDataDocument::pack( QDataStream& stream ) const
+{
+    GeoDataContainer::pack( stream );
+
+    stream << d->m_styleHash.size();
+    
+    
+    for( QHash<QString, GeoDataStyle*>::const_iterator iterator 
+          = d->m_styleHash.constBegin(); 
+        iterator != d->m_styleHash.constEnd(); 
+        ++iterator ) {
+        iterator.value()->pack( stream );
+    }
+}
+
+
+void GeoDataDocument::unpack( QDataStream& stream )
+{
+    GeoDataContainer::unpack( stream );
+
+    int size = 0;
+
+    stream >> size;
+    for( int i = 0; i < size; i++ ) {
+        GeoDataStyle* style = new GeoDataStyle();
+        style->unpack( stream );
+        d->m_styleHash.insert( style->styleId(), style );
+    }
+}

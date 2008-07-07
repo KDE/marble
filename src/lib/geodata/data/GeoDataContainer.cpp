@@ -98,29 +98,47 @@ void GeoDataContainer::pack( QDataStream& stream ) const
     stream << d->m_features.count();
 
     for ( QVector <GeoDataFeature*>::const_iterator iterator = d->m_features.constBegin();
-          iterator != d->m_features.end();
-          iterator++ )
+          iterator != d->m_features.constEnd();
+          ++iterator )
     {
         const GeoDataFeature& feature = * ( *iterator );
+        stream << feature.featureId();
         feature.pack( stream );
     }
 }
 
 void GeoDataContainer::unpack( QDataStream& stream )
 {
-/*
     GeoDataFeature::unpack( stream );
 
     int count;
     stream >> count;
 
     for ( int i = 0; i < count; ++i ) {
-        GeoDataFeature* feature = new GeoDataFeature();
-        feature->unpack( stream );
-
-        m_features.append( feature );
+        int featureId;
+        stream >> featureId;
+        switch( featureId ) {
+            case GeoDataDocumentId:
+                /* not usable!!!! */ break;
+            case GeoDataFolderId:
+                GeoDataFolder* folder = new GeoDataFolder();
+                folder->unpack( stream );
+                d->m_features.append( folder );
+                break;
+            case GeoDataPlacemarkId:
+                GeoDataPlacemark* placemark = new GeoDataPlacemark();
+                placemark->unpack( stream );
+                d->m_features.append( placemark );
+                break;
+            case GeoDataNetworkLinkId:
+                break;
+            case GeoDataScreenOverlayId:
+                break;
+            case GeoDataGroundOverlayId:
+                break;
+            default: break;
+        };
     }
-*/
 }
 
 

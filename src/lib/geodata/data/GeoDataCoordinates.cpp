@@ -161,3 +161,23 @@ GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &oth
     *d_ptr = *other.d_ptr;
     return *this;
 }
+
+void GeoDataCoordinates::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    stream << d_ptr->m_lon;
+    stream << d_ptr->m_lat;
+    stream << d_ptr->m_altitude;
+}
+
+void GeoDataCoordinates::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+
+    stream >> d_ptr->m_lon;
+    stream >> d_ptr->m_lat;
+    stream >> d_ptr->m_altitude;
+
+    d_ptr->m_q.set( d_ptr->m_lon, d_ptr->m_lat );
+}

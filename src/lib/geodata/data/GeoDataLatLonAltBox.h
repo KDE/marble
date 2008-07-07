@@ -105,6 +105,11 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
 
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
+
  private:
     GeoDataLatLonBoxPrivate  * const d;
 };
@@ -165,6 +170,11 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * @brief Dumps the boundaries of the bounding box for debugging purpose.
      */
     QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
+
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
 
  private:
     GeoDataLatLonAltBoxPrivate  * const d;

@@ -93,6 +93,11 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
     bool operator==( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
+
  protected:
     GeoDataCoordinatesPrivate* const d_ptr;
 

@@ -110,3 +110,17 @@ GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
     *d = *other.d;
     return *this;
 }
+
+void GeoDataPoint::pack( QDataStream& stream ) const
+{
+    GeoDataCoordinates::pack( stream );
+    
+    stream << d->m_detail;
+}
+
+void GeoDataPoint::unpack( QDataStream& stream )
+{
+    GeoDataCoordinates::unpack( stream );
+    
+    stream >> d->m_detail;
+}

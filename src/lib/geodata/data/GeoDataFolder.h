@@ -47,6 +47,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
     ~GeoDataFolder();
 
     virtual bool isFolder() const { return true; }
+    virtual EnumFeatureId featureId() const { return GeoDataFolderId; };
 };
 
 #endif // GEODATAFOLDER_H

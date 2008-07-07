@@ -38,6 +38,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
     GeoDataLinearRing();
 
     virtual ~GeoDataLinearRing();
+    virtual EnumGeometryId geometryId() const { return GeoDataLinearRingId; };
 };
 
 #endif // GEODATALINEARRING_H

@@ -136,6 +136,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
     virtual bool isPlacemark() const { return true; }
 
+    virtual EnumFeatureId featureId() const { return GeoDataPlacemarkId; };
+
  private:
     Q_DISABLE_COPY( GeoDataPlacemark )
     GeoDataPlacemarkPrivate * const d;

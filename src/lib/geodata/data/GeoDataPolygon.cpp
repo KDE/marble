@@ -19,7 +19,7 @@ class GeoDataPolygonPrivate
  public:
     GeoDataPolygonPrivate()
          : m_dirtyBox( true ),
-           outer( 0 )
+           outer( new GeoDataLinearRing() )
     {
     }
     
@@ -84,7 +84,7 @@ GeoDataLinearRing& GeoDataPolygon::outerBoundary() const
 
 void GeoDataPolygon::setOuterBoundary( GeoDataLinearRing* boundary )
 {
-    if( d_polyg->outer ) delete d_polyg->outer;
+    delete d_polyg->outer;
     d_polyg->outer = boundary;
 }
 
@@ -96,4 +96,37 @@ QVector<GeoDataLinearRing*> GeoDataPolygon::innerBoundaries() const
 void GeoDataPolygon::appendInnerBoundary( GeoDataLinearRing* boundary )
 {
     d_polyg->inner.append( boundary );
+}
+
+void GeoDataPolygon::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    d_polyg->outer->pack( stream );
+    
+    stream << d_polyg->inner.size();
+    
+    for( QVector<GeoDataLinearRing*>::const_iterator iterator 
+          = d_polyg->inner.constBegin(); 
+         iterator != d_polyg->inner.constEnd();
+         ++iterator ) {
+        qDebug() << "innerRing: size" << d_polyg->inner.size();
+        GeoDataLinearRing* linearRing = ( *iterator );
+        linearRing->pack( stream );
+    }
+}
+
+void GeoDataPolygon::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+
+    d_polyg->outer->unpack( stream );
+    int size;
+    
+    stream >> size;
+    for(int i = 0; i < size; i++ ) {
+        GeoDataLinearRing* linearRing = new GeoDataLinearRing();
+        linearRing->unpack( stream );
+        d_polyg->inner.append( linearRing );
+    }
 }

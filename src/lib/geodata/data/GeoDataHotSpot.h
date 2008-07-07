@@ -14,11 +14,13 @@
 
 #include <QtCore/QPoint>
 
+#include "GeoDataObject.h"
+
 #include "geodata_export.h"
 
 class GeoDataHotSpotPrivate;
 
-class GEODATA_EXPORT GeoDataHotSpot
+class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 {
   public:
     enum Units{Fraction, Pixels, InsetPixels};
@@ -31,9 +33,14 @@ class GEODATA_EXPORT GeoDataHotSpot
 
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ), Units xunits = Fraction, Units yunits = Fraction );
 
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
+
   private:
     Q_DISABLE_COPY( GeoDataHotSpot )
-    GeoDataHotSpotPrivate * const d;
+    GeoDataHotSpotPrivate * const d_hot;
 };
 
 #endif // GEODATAHOTSPOT_H

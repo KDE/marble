@@ -75,7 +75,6 @@ public:
     GeoDataObject( const GeoDataObject & );
     GeoDataObject & operator=( const GeoDataObject & );
 
- private:
     GeoDataObjectPrivate * d;
 };
 

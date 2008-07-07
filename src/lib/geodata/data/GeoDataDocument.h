@@ -50,6 +50,7 @@ public:
     GeoDataDocument();
     ~GeoDataDocument();
 
+    virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };
     virtual bool isGeoDataDocument() const { return true; }
 
     /**
@@ -63,6 +64,11 @@ public:
      * @param styleId  the id of the style
      */
     const GeoDataStyle* style(const QString& styleId) const;
+
+    // Serialize the Placemark to @p stream
+    virtual void pack( QDataStream& stream ) const;
+    // Unserialize the Placemark from @p stream
+    virtual void unpack( QDataStream& stream );
 
 private:
     Q_DISABLE_COPY( GeoDataDocument )

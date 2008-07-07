@@ -59,6 +59,18 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
     QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator begin,
                                                    QVector<GeoDataCoordinates*>::Iterator end );
 
+    /**
+     * @brief  Serialize the style to a stream.
+     * @param  stream  the stream
+     */
+    virtual void pack( QDataStream& stream ) const;
+    /**
+     * @brief  Unserialize the style from a stream
+     * @param  stream  the stream
+     */
+    virtual void unpack( QDataStream& stream );
+
+    virtual EnumGeometryId geometryId() const { return GeoDataLineStringId; };
  protected:
     GeoDataLineStringPrivate  * const d;
 };

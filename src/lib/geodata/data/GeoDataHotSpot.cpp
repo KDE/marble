@@ -11,6 +11,8 @@
 
 #include "GeoDataHotSpot.h"
 
+#include <QtCore/QDataStream>
+
 class GeoDataHotSpotPrivate
 {
   public:
@@ -35,27 +37,46 @@ class GeoDataHotSpotPrivate
 };
 
 GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits ) 
-    : d( new GeoDataHotSpotPrivate( hotSpot, xunits, yunits ) )
+    : d_hot( new GeoDataHotSpotPrivate( hotSpot, xunits, yunits ) )
 {
 }
 
 GeoDataHotSpot::~GeoDataHotSpot()
 {
-    delete d;
+    delete d_hot;
 }
 
 const QPointF& GeoDataHotSpot::hotSpot( Units &xunits, Units &yunits ) const
 {
-    xunits = d->m_xunits;
-    yunits = d->m_yunits;
+    xunits = d_hot->m_xunits;
+    yunits = d_hot->m_yunits;
 
-    return d->m_hotSpot;
+    return d_hot->m_hotSpot;
 }
 
 
 void GeoDataHotSpot::setHotSpot( const QPointF& hotSpot, Units xunits, Units yunits )
 {
-    d->m_hotSpot = hotSpot;
-    d->m_xunits = xunits;
-    d->m_yunits = yunits;
+    d_hot->m_hotSpot = hotSpot;
+    d_hot->m_xunits = xunits;
+    d_hot->m_yunits = yunits;
+}
+
+void GeoDataHotSpot::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    stream << d_hot->m_xunits << d_hot->m_yunits;
+    stream << d_hot->m_hotSpot;
+}
+
+void GeoDataHotSpot::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+    int xu, yu;
+    stream >> xu >> yu;
+    d_hot->m_xunits = static_cast<Units>(xu);
+    d_hot->m_yunits = static_cast<Units>(yu);
+    stream >> d_hot->m_hotSpot;
+
 }

@@ -67,9 +67,15 @@ bool GeoDataPolyStyle::outline() const
 void GeoDataPolyStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
+    
+    stream << d->m_fill;
+    stream << d->m_outline;
 }
 
 void GeoDataPolyStyle::unpack( QDataStream& stream )
 {
     GeoDataColorStyle::unpack( stream );
+    
+    stream >> d->m_fill;
+    stream >> d->m_outline;
 }

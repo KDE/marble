@@ -22,4 +22,25 @@ class Serializable
     virtual void unpack( QDataStream& stream ) = 0;
 };
 
+/* the next two id's are needed to get unpacking working - this cannot be
+ * achieved without a special Id
+ */
+enum EnumFeatureId {
+    GeoDataDocumentId = 1,
+    GeoDataFolderId,
+    GeoDataPlacemarkId,
+    GeoDataNetworkLinkId,
+    GeoDataScreenOverlayId,
+    GeoDataGroundOverlayId
+};
+
+enum EnumGeometryId {
+    GeoDataGeometryId,
+    GeoDataPointId,
+    GeoDataLineStringId,
+    GeoDataLinearRingId,
+    GeoDataPolygonId,
+    GeoDataMultiGeometryId,
+    GeoDataModelId
+};
 #endif

@@ -38,6 +38,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
+    virtual EnumGeometryId geometryId() const { return GeoDataGeometryId; };
 
     bool extrude() const;
     void setExtrude( bool extrude );
@@ -46,13 +47,18 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     void setTessellate( bool tessellate );
 
     AltitudeMode altitudeMode() const;
-    void setAltitudeMode( const AltitudeMode altitudeMode );
+    void setAltitudeMode( AltitudeMode altitudeMode );
 
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry & other );
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     
     virtual ~GeoDataGeometry();
+
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
 
  protected:
     GeoDataGeometryPrivate* const d_geom;

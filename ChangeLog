@@ -1,3 +1,27 @@
+2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataContainer.cpp
+    * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
+    * src/lib/geodata/data/GeoDataDocument{.h|.cpp}
+    * src/lib/geodata/data/GeoDataFeature{.h|.cpp}
+    * src/lib/geodata/data/GeoDataFolder.h
+    * src/lib/geodata/data/GeoDataGeometry{.h|.cpp}
+    * src/lib/geodata/data/GeoDataHotSpot{.h|.cpp}
+    * src/lib/geodata/data/GeoDataIconStyle.cpp
+    * src/lib/geodata/data/GeoDataLabelStyle.cpp
+    * src/lib/geodata/data/GeoDataLatLonAltBox{.h|.cpp}
+    * src/lib/geodata/data/GeoDataLinearRing.h
+    * src/lib/geodata/data/GeoDataLineString{.h|.cpp}
+    * src/lib/geodata/data/GeoDataLineStyle.cpp
+    * src/lib/geodata/data/GeoDataObject.h
+    * src/lib/geodata/data/GeoDataPlacemark{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPoint{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPolygon{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPolyStyle.cpp
+    * src/lib/geodata/data/Serializable.h
+
+    serialize!
+
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/PlaceMarkManager.cpp

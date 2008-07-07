@@ -80,3 +80,23 @@ GeoDataGeometry::~GeoDataGeometry()
 {
     delete d_geom;
 }
+
+void GeoDataGeometry::pack( QDataStream& stream ) const
+{
+    GeoDataObject::pack( stream );
+
+    stream << d_geom->m_extrude;
+    stream << d_geom->m_tessellate;
+    stream << d_geom->m_altitudeMode;
+}
+
+void GeoDataGeometry::unpack( QDataStream& stream )
+{
+    GeoDataObject::unpack( stream );
+
+    int am;
+    stream >> d_geom->m_extrude;
+    stream >> d_geom->m_tessellate;
+    stream >> am;
+    d_geom->m_altitudeMode;
+}

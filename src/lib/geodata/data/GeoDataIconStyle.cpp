@@ -112,12 +112,16 @@ void GeoDataIconStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
 
+    stream << d->m_scale;
     stream << d->m_icon;
+    d->m_hotSpot->pack( stream );
 }
 
 void GeoDataIconStyle::unpack( QDataStream& stream )
 {
     GeoDataColorStyle::unpack( stream );
 
+    stream >> d->m_scale;
     stream >> d->m_icon;
+    d->m_hotSpot->unpack( stream );
 }

@@ -87,9 +87,20 @@ QFont GeoDataLabelStyle::font() const
 void GeoDataLabelStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
+
+    stream << d->m_scale;
+    stream << d->m_alignment;
+    stream << d->m_font;
 }
 
 void GeoDataLabelStyle::unpack( QDataStream& stream )
 {
+    int a;
     GeoDataColorStyle::unpack( stream );
+
+    stream >> d->m_scale;
+    stream >> a;
+    stream >> d->m_font;
+
+    d->m_alignment = static_cast<GeoDataLabelStyle::Alignment>( a );
 }

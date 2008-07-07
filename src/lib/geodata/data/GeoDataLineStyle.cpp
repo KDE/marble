@@ -55,9 +55,13 @@ float GeoDataLineStyle::width() const
 void GeoDataLineStyle::pack( QDataStream& stream ) const
 {
     GeoDataColorStyle::pack( stream );
+    
+    stream << d->m_width;
 }
 
 void GeoDataLineStyle::unpack( QDataStream& stream )
 {
     GeoDataColorStyle::unpack( stream );
+    
+    stream >> d->m_width;
 }

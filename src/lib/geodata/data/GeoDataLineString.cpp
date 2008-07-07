@@ -91,3 +91,32 @@ QVector<GeoDataCoordinates*>::Iterator GeoDataLineString::erase ( QVector<GeoDat
     return QVector<GeoDataCoordinates*>::erase( begin, end );
 }
 
+void GeoDataLineString::pack( QDataStream& stream ) const
+{
+    GeoDataGeometry::pack( stream );
+
+    stream << size();
+    
+    for( QVector<GeoDataCoordinates*>::const_iterator iterator 
+          = constBegin(); 
+         iterator != constEnd();
+         ++iterator ) {
+        qDebug() << "innerRing: size" << size();
+        GeoDataCoordinates* coord = ( *iterator );
+        coord->pack( stream );
+    }
+    
+}
+
+void GeoDataLineString::unpack( QDataStream& stream )
+{
+    GeoDataGeometry::unpack( stream );
+    int size;
+    
+    stream >> size;
+    for(int i = 0; i < size; i++ ) {
+        GeoDataCoordinates* coord = new GeoDataCoordinates();
+        coord->unpack( stream );
+        append( coord );
+    }
+}

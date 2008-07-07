@@ -57,6 +57,12 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     QVector<GeoDataLinearRing*> innerBoundaries() const;
     void appendInnerBoundary( GeoDataLinearRing* boundary );
 
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
+
+    virtual EnumGeometryId geometryId() const { return GeoDataPolygonId; };
  protected:
     GeoDataPolygonPrivate * const d_polyg;
 };
