@@ -121,14 +121,18 @@ void GeoDataContainer::unpack( QDataStream& stream )
             case GeoDataDocumentId:
                 /* not usable!!!! */ break;
             case GeoDataFolderId:
+                {
                 GeoDataFolder* folder = new GeoDataFolder();
                 folder->unpack( stream );
                 d->m_features.append( folder );
+                }
                 break;
             case GeoDataPlacemarkId:
+                {
                 GeoDataPlacemark* placemark = new GeoDataPlacemark();
                 placemark->unpack( stream );
                 d->m_features.append( placemark );
+                }
                 break;
             case GeoDataNetworkLinkId:
                 break;

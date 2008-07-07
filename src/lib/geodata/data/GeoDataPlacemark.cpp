@@ -176,34 +176,44 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
         case GeoDataGeometryId:
             break;
         case GeoDataPointId:
+            {
             GeoDataPoint* point = new GeoDataPoint();
             point->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = point;
+            }
             break;
         case GeoDataLineStringId:
+            {
             GeoDataLineString* lineString = new GeoDataLineString();
             lineString->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = lineString;
+            }
             break;
         case GeoDataLinearRingId:
+            {
             GeoDataLinearRing* linearRing = new GeoDataLinearRing();
             linearRing->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = linearRing;
+            }
             break;
         case GeoDataPolygonId:
+            {
             GeoDataPolygon* polygon = new GeoDataPolygon();
             polygon->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = polygon;
+            }
             break;
         case GeoDataMultiGeometryId:
+            {
             GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
             multiGeometry->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = multiGeometry;
+            }
             break;
         case GeoDataModelId:
             break;

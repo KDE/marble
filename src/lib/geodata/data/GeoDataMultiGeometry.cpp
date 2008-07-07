@@ -62,29 +62,39 @@ void GeoDataMultiGeometry::unpack( QDataStream& stream )
             case GeoDataGeometryId:
                 break;
             case GeoDataPointId:
+                {
                 GeoDataPoint* point = new GeoDataPoint();
                 point->unpack( stream );
                 this->append( point );
+                }
                 break;
             case GeoDataLineStringId:
+                {
                 GeoDataLineString* lineString = new GeoDataLineString();
                 lineString->unpack( stream );
                 this->append( lineString );
+                }
                 break;
             case GeoDataLinearRingId:
+                {
                 GeoDataLinearRing* linearRing = new GeoDataLinearRing();
                 linearRing->unpack( stream );
                 this->append( linearRing );
+                }
                 break;
             case GeoDataPolygonId:
+                {
                 GeoDataPolygon* polygon = new GeoDataPolygon();
                 polygon->unpack( stream );
                 this->append( polygon );
+                }
                 break;
             case GeoDataMultiGeometryId:
+                {
                 GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
                 multiGeometry->unpack( stream );
                 this->append( multiGeometry );
+                }
                 break;
             case GeoDataModelId:
                 break;
