@@ -1,5 +1,11 @@
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlTessellateTagHandler.cpp
+    
+2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataContainer.cpp
     * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
     * src/lib/geodata/data/GeoDataDocument{.h|.cpp}

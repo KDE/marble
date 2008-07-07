@@ -26,6 +26,8 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataGeometry.h"
+#include "GeoDataPoint.h"
+#include "GeoDataPlacemark.h"
 
 #include "GeoDataParser.h"
 
@@ -48,13 +50,24 @@ GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataGeometry>() ) {
+    GeoDataGeometry* geometry;
+    bool validParents = false;
+
+    if( parentItem.nodeAs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
+        geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+        validParents = true;
+    } else if( parentItem.nodeAs<GeoDataGeometry>() ) {
+        geometry = parentItem.nodeAs<GeoDataGeometry>();
+        validParents = true;
+    }
+
+    if( validParents ) {
         QString content = parser.readElementText().trimmed();
         
         if( content == QString( "1" ) ) {
-            parentItem.nodeAs<GeoDataGeometry>()->setExtrude( true );
+            geometry->setExtrude( true );
         } else {
-            parentItem.nodeAs<GeoDataGeometry>()->setExtrude( false );
+            geometry->setExtrude( false );
         }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_extrude << "> containing: " << content

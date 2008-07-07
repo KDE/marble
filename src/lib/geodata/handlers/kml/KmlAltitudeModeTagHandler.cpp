@@ -26,6 +26,9 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataGeometry.h"
+#include "GeoDataPoint.h"
+#include "GeoDataPlacemark.h"
+
 #include "GeoDataParser.h"
 
 using namespace GeoDataElementDictionary;
@@ -48,15 +51,26 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataGeometry>() ) {
+    GeoDataGeometry* geometry;
+    bool validParents = false;
+
+    if( parentItem.nodeAs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
+        geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+        validParents = true;
+    } else if( parentItem.nodeAs<GeoDataGeometry>() ) {
+        geometry = parentItem.nodeAs<GeoDataGeometry>();
+        validParents = true;
+    }
+
+    if( validParents ) {
         QString content = parser.readElementText().trimmed();
         
         if( content == QString( "relativeToGround" ) ) {
-            parentItem.nodeAs<GeoDataGeometry>()->setAltitudeMode( RelativeToGround );
+            geometry->setAltitudeMode( RelativeToGround );
         } else if( content == QString( "absolute" ) ) {
-            parentItem.nodeAs<GeoDataGeometry>()->setAltitudeMode( Absolute );
+            geometry->setAltitudeMode( Absolute );
         } else { // clampToGround is Standard
-            parentItem.nodeAs<GeoDataGeometry>()->setAltitudeMode( ClampToGround );
+            geometry->setAltitudeMode( ClampToGround );
         }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_altitudeMode << "> containing: " << content
