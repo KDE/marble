@@ -60,7 +60,7 @@
 #endif
 
 
-// FIXME(IW): Why are the construct and setActiveRegion functions in
+// FIXME(IW): Why is the construct function in
 //            MarbleWidgetPrivate??  That class is only supposed to
 //            hold data for binary compatibility, not have functions.
 
@@ -89,7 +89,6 @@ class MarbleWidgetPrivate
     }
 
     void  construct();
-    void  setActiveRegion();
 
     MarbleWidget    *m_widget;
     // The model we are showing.
@@ -161,6 +160,8 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
+    m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
+                       m_widget, SLOT( setActiveRegion() ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
@@ -219,11 +220,6 @@ void MarbleWidgetPrivate::construct()
     QTranslator  translator;
     translator.load(QString("marblewidget_") + locale);
     QCoreApplication::installTranslator(&translator);
-
-#if 0 // Reenable when the autosettings are actually used.
-    // AutoSettings
-    AutoSettings* autoSettings = new AutoSettings( this );
-#endif
 
     // FIXME: I suppose this should only exist in MarbleMap
 // #if 0
@@ -484,7 +480,7 @@ void MarbleWidget::zoomView(int newZoom)
     emit distanceChanged( distanceString() );
 
     repaint();
-    d->setActiveRegion();
+    setActiveRegion();
 }
 
 
@@ -714,7 +710,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     d->m_map->setSize( width(), height() );
 
     //	Redefine the area where the mousepointer becomes a navigationarrow
-    d->setActiveRegion();
+    setActiveRegion();
 
     if ( d->m_map->mapCoversViewport() ) {
         setAttribute(Qt::WA_NoSystemBackground, true );
@@ -807,9 +803,9 @@ const QRegion MarbleWidget::activeRegion()
     return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
 }
 
-void MarbleWidgetPrivate::setActiveRegion()
+void MarbleWidget::setActiveRegion()
 {
-    ViewportParams  *viewport = m_map->viewParams()->viewport();
+    ViewportParams  *viewport = d->m_map->viewParams()->viewport();
 
     viewport->currentProjection()->helper()->setActiveRegion( viewport );
     return;

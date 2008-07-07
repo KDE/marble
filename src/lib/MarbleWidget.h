@@ -889,6 +889,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  private Q_SLOTS:
 
     void updateAnimation( qreal currentValue );
+    void setActiveRegion();
 
  Q_SIGNALS:
     /**
