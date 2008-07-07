@@ -27,3 +27,5 @@ void MarblePluginSettingsWidget::setModel( QStandardItemModel* pluginModel )
 {
     m_pluginListView->setModel ( pluginModel );
 }
+
+#include "MarblePluginSettingsWidget.moc"

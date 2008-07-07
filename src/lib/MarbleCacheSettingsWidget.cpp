@@ -20,3 +20,5 @@ MarbleCacheSettingsWidget::MarbleCacheSettingsWidget( QWidget *parent ) : QWidge
     connect( button_clearVolatileCache, SIGNAL( clicked() ), SIGNAL( clearVolatileCache() ) );
     connect( button_clearPersistentCache, SIGNAL( clicked() ), SIGNAL( clearPersistentCache() ) );
 }
+
+#include "MarbleCacheSettingsWidget.moc"
