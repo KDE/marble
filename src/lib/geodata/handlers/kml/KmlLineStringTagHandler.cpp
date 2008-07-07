@@ -56,8 +56,7 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
         lineString = new GeoDataLineString();
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( *lineString );
-        delete lineString;
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
     }
 #ifdef DEBUG_TAGS
     qDebug() << "Parsed <" << kmlTag_LineString << ">"

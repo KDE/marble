@@ -26,6 +26,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataPolygon.h"
+#include "GeoDataMultiGeometry.h"
 
 #include "GeoDataParser.h"
 
@@ -57,6 +58,9 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
         qDebug() << "innerBoundary";
         linearRing = new GeoDataLinearRing();
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
+    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        linearRing = new GeoDataLinearRing();
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
     }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LinearRing << ">"

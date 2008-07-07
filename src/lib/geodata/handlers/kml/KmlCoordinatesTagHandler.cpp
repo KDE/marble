@@ -29,6 +29,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataParser.h"
 #include "global.h"
 
@@ -81,6 +82,17 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                     parentItem.nodeAs<GeoDataLineString>()->append( coord );
                 } else if( parentItem.represents( kmlTag_LinearRing ) ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
+                } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+                    GeoDataPoint* point = new GeoDataPoint();
+                    if( coordinates.size() == 2 ) {
+                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                   DEG2RAD * coordinates.at( 1 ).toDouble() );
+                    } else if( coordinates.size() == 3 ) {
+                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                                   DEG2RAD * coordinates.at( 1 ).toDouble(),
+                                   coordinates.at( 2 ).toDouble() );
+                    }
+                    parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
                 } else {
                     // raise warning as coordinates out of valid parents found
                 }

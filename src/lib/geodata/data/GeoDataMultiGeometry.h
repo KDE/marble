@@ -14,8 +14,9 @@
 
 
 #include "geodata_export.h"
-#include "GeoDataLineString.h"
 
+#include "GeoDataGeometry.h"
+#include <QtCore/QVector>
 
 using namespace Marble;
 
@@ -27,13 +28,20 @@ using namespace Marble;
  * of different objects to form one Placemark.
  */
 
-class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry>,
+class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
                                             public GeoDataGeometry {
  public:
     GeoDataMultiGeometry();
     GeoDataMultiGeometry( const GeoDataMultiGeometry& );
 
     virtual ~GeoDataMultiGeometry();
+
+    // Serialize the Placemark to @p stream
+    virtual void pack( QDataStream& stream ) const;
+    // Unserialize the Placemark from @p stream
+    virtual void unpack( QDataStream& stream );
+
+    virtual EnumGeometryId geometryId() const { return GeoDataMultiGeometryId; };
 };
 
 #endif // GEODATAMULTIGEOMETRY_H

@@ -50,11 +50,14 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     GeoDataPolygon* polygon = 0;
-    if( parentItem.nodeAs<GeoDataPlacemark>() )
-    {
+    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         polygon = new GeoDataPolygon();
 
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
+    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        polygon = new GeoDataPolygon();
+
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
     }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Polygon << ">"

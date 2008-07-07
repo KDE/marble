@@ -1,9 +1,22 @@
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataMultiGeometry{.h|.cpp}
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLineStringTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlPolygonTagHandler.cpp
+
+    add GeoDataMultiGeometry representation
+
+2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlTessellateTagHandler.cpp
-    
+
+    fix issues with incorrect parentItem; this should make test
+    in digikam work
+
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataContainer.cpp
