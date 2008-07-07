@@ -21,7 +21,6 @@
 
 #include <QDebug>
 #include <QtGui/QTextBrowser>
-#include <jsonparser.h>
 #include <QImage>
 class HttpDownloadManager;
 class CacheStoragePolicy;
@@ -35,10 +34,9 @@ class TinyWebBrowser : public QTextBrowser
         ~TinyWebBrowser();
 
     public Q_SLOTS:
-        void setSource ( const QUrl& relativeUrl );//this slot sets source url for related wikipedia page download
+        void setSource ( const QUrl& relativeUrl );
         void print();
-        void getPanoramio ( const QString& place );//this slot will get first image from location most close to current placemark
-        void testing(QString);
+
 
     Q_SIGNALS:
         void backwardAvailable ( bool );
@@ -49,19 +47,15 @@ class TinyWebBrowser : public QTextBrowser
 
     private Q_SLOTS:
         void slotDownloadFinished ( const QString&, const QString& );
-        void slotPanoramioDownloadFinished ( const QString& , const QString& );
+
         void linkClicked ( const QUrl &url );
 
     private:
-        void setContentHtml ( const QString& );//changes the text into valid plain html
-        void parseJsonOutputFromPanoramio ( const QString& );//this function will parse json output from panormaio
-
+        void setContentHtml ( const QString& );
         Q_DISABLE_COPY ( TinyWebBrowser )
         CacheStoragePolicy *m_storagePolicy;
         HttpDownloadManager *m_downloadManager;
         QString         m_source;
-        QString baseUrlForPanoramioQuery;
-        jsonParser panoramioJsonParser;
 };
 
 

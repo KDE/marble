@@ -56,7 +56,6 @@ TinyWebBrowser::TinyWebBrowser ( QWidget *parent )
         : QTextBrowser ( parent ),
         m_source ( guessWikipediaDomain() )
 {
-    baseUrlForPanoramioQuery="http://www.panoramio.com/map/get_panoramas.php?";
 
     m_storagePolicy = new CacheStoragePolicy ( MarbleDirs::localPath() + "/cache/" );
 
@@ -152,57 +151,12 @@ void TinyWebBrowser::print()
         QTextBrowser::document()->print ( &printer );
 }
 
-void TinyWebBrowser::getPanoramio ( const QString& place ) //This function will get images from Panoramio and Show on the about place placemark
-{
-
-    qDebug() <<"place=="<<place;
-    QRegExp extractLatLon ( "\\s" );//extract all the whitespace
-    QStringList latlon = place.split ( extractLatLon, QString::SkipEmptyParts );
-    bool ok;
-
-    int lon = latlon[0].toUInt ( &ok , 10 );//first subtext FIXME toInt is not working
-    int lat = latlon[3].toUInt();//fourth subtext
-    qDebug() <<ok;
-    qDebug() <<lon;
-    qDebug() <<"latlon==::::::::::::::::::"<<latlon<<lon<<lat;
-    //constructing url for panoramio query api
-    QString url = QString ( "order=popularity&set=public&from=0&to=20" )
-                  + QString ( "&minx=" ) + QString::number ( lon - 1 )
-                  + QString ( "&miny=" ) + QString::number ( lat - 1 )
-                  + QString ( "&maxx=" ) + QString::number ( lon + 1 )
-                  + QString ( "&maxy=" ) + QString::number ( lat + 1 )
-                  + QString ( "&size=medium" );
-//                   testing();
-    url = baseUrlForPanoramioQuery + url;//completing the Panoramio query urlString
-
-//     url="http://www.panoramio.com/map/get_panoramas.php?from=0&to=20&minx=-180&miny=-90&maxx=180&maxy=90";
-//     url="http://twitter.com/statuses/public_timeline.json?since_id=12345";
-    m_source = url;
-    testing ( url );//remove me
-    m_downloadManager->addJob ( QUrl ( url ),place,place );
-//     slotDownloadFinished ( place,place );
-
-//     slotPanoramioDownloadFinished ( place,place );
-}
-void TinyWebBrowser::testing ( QString url )
-{
-    qDebug() <<"::::::Job Added";
-}
-
 void TinyWebBrowser::slotDownloadFinished ( const QString& relativeUrlString, const QString &id )
 {
     if ( relativeUrlString == m_source )
         setContentHtml ( QString::fromUtf8 ( m_storagePolicy->data ( id ) ) );//The page is being converted to simple html
     else
         viewport()->update();
-}
-
-void TinyWebBrowser::slotPanoramioDownloadFinished ( const QString& urlString, const QString &id )
-{
-//     if ( urlString == m_source )
-    parseJsonOutputFromPanoramio ( QString::fromUtf8 ( m_storagePolicy->data ( id ) ) );//The page is being converted to simple html
-//     else
-//         viewport()->update();
 }
 
 void TinyWebBrowser::linkClicked ( const QUrl &url )
@@ -264,18 +218,5 @@ void TinyWebBrowser::setContentHtml ( const QString &content )
     QTextFrameFormat format = document()->rootFrame()->frameFormat();
     format.setMargin ( 12 ) ;
     document()->rootFrame()->setFrameFormat ( format );
-}
-void TinyWebBrowser::parseJsonOutputFromPanoramio ( const QString &content ) //wil convert the parsed Json Output to html
-{
-    QList <panoramioDataStructure> parsedvalue = panoramioJsonParser.parseAllObjects ( content , 20 );
-    QString html = QString ( "<html><h1>hi</h1><image src=\"" )
-                   + QString ( parsedvalue[0].photo_file_url )
-    + QString ( "\"></html>" );
-    QTextBrowser::setHtml ( html );
-    QTextFrameFormat format = document()->rootFrame()->frameFormat();
-    format.setMargin ( 12 ) ;
-    document()->rootFrame()->setFrameFormat ( format );
-    qDebug() <<html<<"i am in parsed section";
-
 }
 #include "TinyWebBrowser.moc"
