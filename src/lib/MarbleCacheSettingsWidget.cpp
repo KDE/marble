@@ -22,3 +22,6 @@ MarbleCacheSettingsWidget::MarbleCacheSettingsWidget( QWidget *parent ) : QWidge
 }
 
 #include "MarbleCacheSettingsWidget.moc"
+
+
+

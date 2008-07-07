@@ -47,7 +47,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     void setTessellate( bool tessellate );
 
     AltitudeMode altitudeMode() const;
-    void setAltitudeMode( AltitudeMode altitudeMode );
+    void setAltitudeMode( const AltitudeMode altitudeMode );
 
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry & other );
