@@ -54,15 +54,25 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
 					    CoordinateType coordType )
 {
     Q_UNUSED( coordType );
+/*
+    if ( fabs( lat ) >= m_maxLat )
+        return false;
+*/
+    double  rad2Pixel = 2 * viewport->radius() / M_PI;
 
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-    double  rad2Pixel = 2 * viewport->radius() / M_PI;
- 
+
+    if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
+
+    // Let (x, y) be the position on the screen of the placemark..
     x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     return true;
 }
@@ -74,19 +84,26 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     globeHidesPoint = false;
     double  lon;
     double  lat;
+
+    geopoint.geoCoordinates( lon, lat );
+
+    if ( fabs( lat ) >=  m_maxLat )
+        return false;
+
     double  rad2Pixel = 2 * viewport->radius() / M_PI;
 
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    geopoint.geoCoordinates( lon, lat );
-    if ( fabs( lat ) >=  m_maxLat )
-        return false;
-
+    if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
+    
     // Let (x, y) be the position on the screen of the placemark..
     x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     // Skip placemarks that are outside the screen area.
     if ( ( y >= 0 && y < viewport->height() )
@@ -110,20 +127,26 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
 
     double  lon;
     double  lat;
+
+    geopoint.geoCoordinates( lon, lat );
+
+    if ( fabs( lat ) >  maxLat() )
+        return false;
+
     double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
 
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    geopoint.geoCoordinates( lon, lat );
-
-    if ( fabs( lat ) >=  maxLat() )
-        return false;
+    if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
 
     // Let (itX, y) be the first guess for one possible position on screen..
     int itX = (int)( viewport->width()  / 2.0 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat ) );
+    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     // Make sure that the requested point is within the visible y range:
     if ( y >= 0 && y < viewport->height() ) {

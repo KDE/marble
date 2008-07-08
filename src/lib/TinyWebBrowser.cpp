@@ -139,7 +139,6 @@ void TinyWebBrowser::setSource ( const QString& urlString )
         m_downloadManager->addJob ( m_source, m_source );
     else
         slotDownloadFinished ( m_source, m_source );
-
 }
 
 void TinyWebBrowser::print()

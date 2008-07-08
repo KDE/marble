@@ -60,7 +60,7 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
     if ( yBottom > height )
 	yBottom = height;
 
-    painter->drawRect( 0, yTop, width, yBottom - yTop );
+    painter->drawRect( 0, yTop, width - 1, yBottom - yTop );
 }
 
 
@@ -94,6 +94,6 @@ void MercatorProjectionHelper::setActiveRegion( ViewportParams *viewport )
     if ( yBottom > height - 25 )
 	yBottom =  height - 25;
 
-    d->activeRegion = QRegion( 25, yTop, width - 50, yBottom - yTop,
+    d->activeRegion = QRegion( 25, yTop, width - 51, yBottom - yTop,
 			       QRegion::Rectangle );
 }

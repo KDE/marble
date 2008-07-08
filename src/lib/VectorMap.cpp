@@ -194,10 +194,6 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
             x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
             y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
-/*            if ( (*itPolyLine)->getIndex() == 1001 ){
-                qDebug() << "x: " << x << " y: " << y << " 4*radius: " << 4*radius;
-                qDebug() << "lon: " << lon << " clon: " << centerLon;
-            } */
         }
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
@@ -289,16 +285,10 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         // this projection
         for ( int i = 1; i < 3; ++i ) {
             boundary[i].geoCoordinates(lon, lat);
-	    x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
-	    y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat);
+            x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
+            y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 
             boundingPolygon << QPointF( x, y );
-#if 0
-            if ( (*itPolyLine)->getIndex() == 1001 ) {
-                qDebug() << "x: " << x << " y: " << y << " 4*radius: " << 4*radius;
-                qDebug() << "lon: " << lon << " clon: " << centerLon;
-            }
-#endif
         }
 
         if ( boundingPolygon.at(0).x() < 0 || boundingPolygon.at(1).x() < 0 ) {
@@ -598,7 +588,7 @@ void VectorMap::mercatorCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itS
 	//        screenCoordinates taking doubles.
 	itPoint->geoCoordinates( lon, lat);
 	double x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
-	double y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - centerLat);
+	double y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
