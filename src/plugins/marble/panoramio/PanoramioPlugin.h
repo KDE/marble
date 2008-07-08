@@ -59,18 +59,19 @@ class PanoramioPlugin : public MarbleAbstractLayer
     public slots:
         void slotJsonDownloadComplete ( QString , QString );//completed download of json reply fom panoramio
         void slotImageDownloadComplete ( QString , QString );//completed download of image
+
     private:
         CacheStoragePolicy *m_storagePolicy;
         HttpDownloadManager *m_downloadManager;
         jsonParser panoramioJsonParser;
         int decimalToSexagecimal();//convert decimal to DMS system
         void downloadPanoramio ( int,int );
-        QList <QPixmap > imagesWeHave;//this list will hold pointers to pixmaps we have downlaoded
+        QList <QPixmap > imagesWeHave;//this list will hold pointers to pixmaps we have downloaded
         QList <panoramioDataStructure> parsedData;
         panoramioDataStructure temp;
         QPixmap tempImage;
-        int flag;//this flag is one when globe has a Image  (downloaded or already there in cache)
-        int numberOfImagesToShow;//this factor stires how many are to be downlaoded and shown on globe
+        int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
+        int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
 };
 
 #endif
