@@ -13,7 +13,6 @@
 
 #include "GeoDataPoint.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataPoint_p.h"
 
 #include <cmath>
 
@@ -26,27 +25,22 @@
 GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, 
                             GeoDataPoint::Unit unit, int _detail )
   : GeoDataCoordinates( _lon, _lat, _alt, 
-                        static_cast<GeoDataCoordinates::Unit>( unit ) ), 
-    d( new GeoDataPointPrivate() )
+                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail )
 {
-    d->m_detail = _detail;
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataGeometry( other ), 
-    GeoDataCoordinates( other ), 
-    d( new GeoDataPointPrivate( *other.d ) )
+  : GeoDataGeometry( other ),
+    GeoDataCoordinates( other )
 {
 }
 
 GeoDataPoint::GeoDataPoint()
-  : d( new GeoDataPointPrivate() )
 {
 }
 
 GeoDataPoint::~GeoDataPoint()
 {
-    delete d;
 }
 
 double GeoDataPoint::normalizeLon( double lon )
@@ -89,33 +83,18 @@ double GeoDataPoint::normalizeLat( double lat )
     return lat;
 }
 
-int GeoDataPoint::detail() const
-{
-    return d->m_detail;
-}
-
-void GeoDataPoint::setDetail( int det )
-{
-    d->m_detail = det;
-}
-
 GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
 {
     GeoDataCoordinates::operator=( other );
-    *d = *other.d;
     return *this;
 }
 
 void GeoDataPoint::pack( QDataStream& stream ) const
 {
     GeoDataCoordinates::pack( stream );
-    
-    stream << d->m_detail;
 }
 
 void GeoDataPoint::unpack( QDataStream& stream )
 {
     GeoDataCoordinates::unpack( stream );
-    
-    stream >> d->m_detail;
 }

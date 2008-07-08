@@ -49,9 +49,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     ~GeoDataPoint();
 
     virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
-    
-    int detail()   const;
-    void setDetail( int det );
 
     GeoDataPoint& operator=( const GeoDataPoint &other );
 
@@ -74,8 +71,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
- private:
-    GeoDataPointPrivate* const d;
 };
 
 Q_DECLARE_METATYPE( GeoDataPoint )

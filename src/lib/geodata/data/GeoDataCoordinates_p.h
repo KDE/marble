@@ -17,14 +17,16 @@ class GeoDataCoordinatesPrivate
     GeoDataCoordinatesPrivate()
         : m_lon( 0 ),
           m_lat( 0 ),
-          m_altitude( 0 )
+          m_altitude( 0 ),
+          m_detail( 0 )
     {
     }
 
     GeoDataCoordinatesPrivate( const GeoDataCoordinatesPrivate &other )
         : m_lon( other.m_lon ),
           m_lat( other.m_lat ),
-          m_altitude( other.m_altitude )
+          m_altitude( other.m_altitude ),
+          m_detail( other.m_detail )
     {
         m_q.set( m_lon, m_lat );
     }
@@ -34,6 +36,7 @@ class GeoDataCoordinatesPrivate
         m_lon = other.m_lon;
         m_lat = other.m_lat;
         m_altitude = other.m_altitude;
+        m_detail = other.m_detail;
         m_q.set( m_lon, m_lat );
         return *this;
     }
@@ -42,4 +45,5 @@ class GeoDataCoordinatesPrivate
     double      m_lon;
     double      m_lat;
     double      m_altitude;     // in meters above sea level
+    int         m_detail;
 };

@@ -22,10 +22,11 @@
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
-GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit )
+GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit, int _detail )
   : d_ptr( new GeoDataCoordinatesPrivate() )
 {
     d_ptr->m_altitude = _alt;
+    d_ptr->m_detail = _detail;
     switch( unit ){
     case Radian:
         d_ptr->m_q = Quaternion( _lon, _lat );
@@ -168,6 +169,16 @@ double GeoDataCoordinates::altitude() const
     return d_ptr->m_altitude;
 }
 
+int GeoDataCoordinates::detail() const
+{
+    return d_ptr->m_detail;
+}
+
+void GeoDataCoordinates::setDetail( const int det )
+{
+    d_ptr->m_detail = det;
+}
+
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
     return d_ptr->m_q;
@@ -181,8 +192,6 @@ GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &oth
 
 void GeoDataCoordinates::pack( QDataStream& stream ) const
 {
-    GeoDataObject::pack( stream );
-
     stream << d_ptr->m_lon;
     stream << d_ptr->m_lat;
     stream << d_ptr->m_altitude;
@@ -190,8 +199,6 @@ void GeoDataCoordinates::pack( QDataStream& stream ) const
 
 void GeoDataCoordinates::unpack( QDataStream& stream )
 {
-    GeoDataObject::unpack( stream );
-
     stream >> d_ptr->m_lon;
     stream >> d_ptr->m_lat;
     stream >> d_ptr->m_altitude;

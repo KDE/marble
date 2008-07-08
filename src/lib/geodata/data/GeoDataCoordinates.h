@@ -33,7 +33,7 @@ const double TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 
-class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
+class GEODATA_EXPORT GeoDataCoordinates {
 
  public:
     /**
@@ -63,6 +63,10 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
         DMS
     };
 
+    // Type definitions
+    typedef QVector<GeoDataCoordinates> Vector;
+    typedef QVector<GeoDataCoordinates*> PtrVector;
+
     GeoDataCoordinates( const GeoDataCoordinates& other );
     GeoDataCoordinates();
 
@@ -73,14 +77,18 @@ class GEODATA_EXPORT GeoDataCoordinates : public GeoDataObject {
      * @param alt altitude (default: 0)
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
+     * @param _detail detail (default: 0)
      */
     GeoDataCoordinates( double _lon, double _lat, double alt = 0,
-             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
+             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian, int _detail = 0 );
 
     ~GeoDataCoordinates();
 
     double altitude() const;
     void   setAltitude( const double altitude );
+
+    int detail()   const;
+    void setDetail( const int det );
 
     void set(double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
