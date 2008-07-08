@@ -14,7 +14,9 @@
 #include "DiscCache.h"
 #include "StoragePolicy.h"
 
-class CacheStoragePolicy : public StoragePolicy
+#include "marble_export.h"
+
+class MARBLE_EXPORT CacheStoragePolicy : public StoragePolicy
 {
     public:
         /**

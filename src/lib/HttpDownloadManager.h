@@ -25,6 +25,8 @@
 #include <QtCore/QList>
 #include <QtCore/QDebug>
 
+#include "marble_export.h"
+
 #include "HttpFetchFile.h"
 
 class StoragePolicy;
@@ -39,7 +41,7 @@ class StoragePolicy;
  * @author Torsten Rahn
  */
 
-class HttpDownloadManager : public QObject 
+class MARBLE_EXPORT HttpDownloadManager : public QObject 
 {
     friend class HttpJob;
 

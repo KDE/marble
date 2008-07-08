@@ -19,14 +19,14 @@
 #include "../lib/HttpDownloadManager.h"
 #include "../lib/CacheStoragePolicy.h"
 #include "jsonparser.h"
-#include "MarbleLayerInterface.h"
+#include "MarbleAbstractLayer.h"
 
 /**
  * @short The class that specifies the a simple panormaio plugin
  *
  */
 
-class PanoramioPlugin : public QObject, public MarbleLayerInterface
+class PanoramioPlugin : public MarbleAbstractLayer
 {
         Q_OBJECT
         Q_INTERFACES ( MarbleLayerInterface )

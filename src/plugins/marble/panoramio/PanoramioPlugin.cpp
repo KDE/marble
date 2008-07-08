@@ -21,7 +21,7 @@
 
 QStringList PanoramioPlugin::backendTypes() const
 {
-    return QStringList ( "PanoramioJson" );
+    return QStringList ( "panoramio" );
 }
 
 QString PanoramioPlugin::renderPolicy() const
@@ -36,7 +36,7 @@ QStringList PanoramioPlugin::renderPosition() const
 
 QString PanoramioPlugin::name() const
 {
-    return tr ( "panoramio" );
+    return tr ( "Panoramio Photos" );
 }
 
 QString PanoramioPlugin::guiString() const
@@ -46,12 +46,12 @@ QString PanoramioPlugin::guiString() const
 
 QString PanoramioPlugin::nameId() const
 {
-    return QString ( "Panoramio-Plugin" );
+    return QString ( "panoramio" );
 }
 
 QString PanoramioPlugin::description() const
 {
-    return tr ("Autoamtically dwonlaods images from aorund the world in preference to their popularity" );
+    return tr ("Autoamtically downloads images from around the world in preference to their popularity" );
 }
 
 QIcon PanoramioPlugin::icon () const
@@ -62,10 +62,10 @@ QIcon PanoramioPlugin::icon () const
 
 void PanoramioPlugin::initialize ()
 {
-    flag=0;
-    numberOfImagesToShow=5;
-    m_storagePolicy=new CacheStoragePolicy ( MarbleDirs::localPath() + "/cache/" );
-    m_downloadManager=new HttpDownloadManager ( QUrl ( "htttp://mw2.google.com/" ),m_storagePolicy );
+    flag = 0;
+    numberOfImagesToShow = 5;
+    m_storagePolicy = new CacheStoragePolicy ( MarbleDirs::localPath() + "/cache/" );
+    m_downloadManager = new HttpDownloadManager ( QUrl ( "htttp://mw2.google.com/" ),m_storagePolicy );
     downloadPanoramio ( 0,numberOfImagesToShow );
 
 }
@@ -83,7 +83,7 @@ bool PanoramioPlugin::render ( GeoPainter *painter, ViewportParams *viewport, co
     {
         for ( int x=0; x< imagesWeHave.count();x++ )
         {
-            painter->drawPixmap ( GeoDataPoint ( parsedData[x].longitude,parsedData[x].latitude,/*2.0,3.0,*/0.0 ),imagesWeHave[x],GeoDataPoint::Degree);
+            painter->drawPixmap ( GeoDataPoint ( parsedData[x].longitude,parsedData[x].latitude,/*2.0,3.0,*/0.0 ), imagesWeHave[x], GeoDataPoint::Degree);
             qDebug() <<"Shanky=Coordinates arelon_lat" << parsedData[x].longitude << parsedData[x].latitude;
         }
     }
@@ -111,14 +111,14 @@ void PanoramioPlugin::slotImageDownloadComplete ( const QString relativeUrlStrin
 {
 
     //     temp.loadFromData ( m_storagePolicy->data ( id ) );
-    tempImage.load ( MarbleDirs::localPath() + "/cache/"+relativeUrlString );
+    tempImage.load ( MarbleDirs::localPath() + "/cache/" + relativeUrlString );
     imagesWeHave.append ( tempImage.scaled ( QSize ( 50,50 ),  Qt::KeepAspectRatio , Qt::FastTransformation ) );
-    qDebug() <<"::::::::::::::shanky2"<<id<<"="<<tempImage.isNull() <<MarbleDirs::localPath() + "/cache/"+relativeUrlString ;
-    flag=1;
+    qDebug() <<"::::::::::::::shanky2"<< id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/"+relativeUrlString ;
+    flag = 1;
 }
 void PanoramioPlugin::downloadPanoramio ( int rangeFrom , int rangeTo )
 {
-    m_downloadManager->addJob ( QUrl ( "http://www.panoramio.com/map/get_panoramas.php?from="+QString::number(rangeFrom)+"&to="+QString::number(rangeTo)+"&minx=-180&miny=-90&maxx=180&maxy=90" ),"panoramio","panoramio" );
+    m_downloadManager->addJob ( QUrl ( "http://www.panoramio.com/map/get_panoramas.php?from="+QString::number(rangeFrom) + "&to=" + QString::number(rangeTo) + "&minx=-180&miny=-90&maxx=180&maxy=90" ),"panoramio","panoramio" );
     connect ( m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ),this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ) );
     qDebug() <<"::::::::::::::shanky0";
 }

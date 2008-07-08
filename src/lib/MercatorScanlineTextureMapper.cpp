@@ -72,10 +72,10 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     int yCenterOffset = 0;
     if ( fabs( centerLat ) < atan( sinh( M_PI ) ) )
-	yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
+        yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
     else {
-	yCenterOffset = (int)(centerLat / fabs(centerLat)) * 2 * radius;
-	qDebug() << "Southpole?" << yCenterOffset * 180.0 / M_PI ;
+        yCenterOffset = (int)(centerLat / fabs(centerLat)) * 2 * radius;
+        qDebug() << "Southpole?" << yCenterOffset * 180.0 / M_PI ;
     }
 
     // Calculate y-range the represented by the center point, yTop and
@@ -93,24 +93,23 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
 
     // Paint the map.
-    for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-      
-	lat = atan( sinh( ( (m_imageHeight / 2 + yCenterOffset) - y )
-			  / (double)(2 * radius) * M_PI ) );
+    for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {        
+        lat = atan( sinh( ( (m_imageHeight / 2 + yCenterOffset) - y )
+                    / (double)(2 * radius) * M_PI ) );
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
-
+    
         QRgb * scanLineBegin = m_scanLine;
         const QRgb * scanLineEnd   = m_scanLine + m_imageWidth;
-
+    
         for ( QRgb * scanLine = scanLineBegin;
-	      scanLine < scanLineEnd;
-              ++scanLine )
-	{
-            lon += rad2Pixel;
-            if ( lon < -M_PI ) lon += 2 * M_PI;
-            if ( lon >  M_PI ) lon -= 2 * M_PI;
-            pixelValue( lon, lat, scanLine, isHighQuality );
+                    scanLine < scanLineEnd;
+                    ++scanLine )
+        {
+                lon += rad2Pixel;
+                if ( lon < -M_PI ) lon += 2 * M_PI;
+                if ( lon >  M_PI ) lon -= 2 * M_PI;
+                pixelValue( lon, lat, scanLine, isHighQuality );
         }
     }
 
