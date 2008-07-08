@@ -90,31 +90,31 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 
 void GeoDataPlacemark::setGeometry( GeoDataPoint *point )
 {
-    if( d->m_geometry ) delete d->m_geometry;
+    delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataLineString *point )
 {
-    if( d->m_geometry ) delete d->m_geometry;
+    delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataLinearRing *point )
 {
-    if( d->m_geometry ) delete d->m_geometry;
+    delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataPolygon *point )
 {
-    if( d->m_geometry ) delete d->m_geometry;
+    delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataMultiGeometry *point )
 {
-    if( d->m_geometry ) delete d->m_geometry;
+    delete d->m_geometry;
     d->m_geometry = point;
 }
 
@@ -179,7 +179,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPoint* point = new GeoDataPoint();
             point->unpack( stream );
-            if( d->m_geometry ) delete d->m_geometry;
+            delete d->m_geometry;
             d->m_geometry = point;
             }
             break;
@@ -187,7 +187,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataLineString* lineString = new GeoDataLineString();
             lineString->unpack( stream );
-            if( d->m_geometry ) delete d->m_geometry;
+            delete d->m_geometry;
             d->m_geometry = lineString;
             }
             break;
@@ -195,7 +195,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataLinearRing* linearRing = new GeoDataLinearRing();
             linearRing->unpack( stream );
-            if( d->m_geometry ) delete d->m_geometry;
+            delete d->m_geometry;
             d->m_geometry = linearRing;
             }
             break;
@@ -203,7 +203,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPolygon* polygon = new GeoDataPolygon();
             polygon->unpack( stream );
-            if( d->m_geometry ) delete d->m_geometry;
+            delete d->m_geometry;
             d->m_geometry = polygon;
             }
             break;
@@ -211,7 +211,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
             multiGeometry->unpack( stream );
-            if( d->m_geometry ) delete d->m_geometry;
+            delete d->m_geometry;
             d->m_geometry = multiGeometry;
             }
             break;
