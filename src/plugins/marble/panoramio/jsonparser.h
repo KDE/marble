@@ -29,10 +29,10 @@ sanity checking would include :
 */
 struct panoramioDataStructure
 {
-    long int count;//total number of photographs will be stored in this int
-    long int photo_id ; //id of each photograph
-    QString photo_title; //title of each photograph
-    QString photo_url; //url of each photograph
+    long int count;// Total number of photographs will be stored in this int
+    long int photo_id ; // Id of each photograph
+    QString photo_title; // Title of each photograph
+    QString photo_url; // Url of each photograph
     QString photo_file_url;
     double longitude;
     double latitude;
@@ -41,7 +41,7 @@ struct panoramioDataStructure
     QString upload_date;
     long int owner_id;
     QString owner_name;
-    QString owner_url; //Url of the User Uplaoded
+    QString owner_url; // Url of the User Uplaoded
 };
 
 class jsonParser :public QObject
@@ -51,9 +51,9 @@ class jsonParser :public QObject
 
    ~jsonParser();
 
-   panoramioDataStructure parseObjectOnPosition ( const QString &content ,int requiredObjectPosition );//for parsing single object
+   panoramioDataStructure parseObjectOnPosition ( const QString &content, int requiredObjectPosition );//for parsing single object
 
-   QList<panoramioDataStructure> parseAllObjects ( const QString &content,int numberOfObjects );//for parsing a list objects
+   QList<panoramioDataStructure> parseAllObjects ( const QString &content, int numberOfObjects );//for parsing a list objects
     
  private:
     QList <panoramioDataStructure> parsedJsonOutput;
@@ -61,7 +61,6 @@ class jsonParser :public QObject
     panoramioDataStructure dataStorage;
 
     QScriptEngine myEngine;
-
 };
 
 

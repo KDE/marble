@@ -84,7 +84,7 @@ bool PanoramioPlugin::render ( GeoPainter *painter, ViewportParams *viewport, co
         for ( int x = 0; x < imagesWeHave.count(); ++x )
         {
             painter->drawPixmap ( GeoDataPoint ( parsedData[x].longitude,parsedData[x].latitude, 0.0, GeoDataPoint::Degree ), imagesWeHave[x] );
-            qDebug() <<"Shanky=Coordinates arelon_lat" << parsedData[x].longitude << parsedData[x].latitude;
+            qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
         }
     }
     return true;
@@ -92,14 +92,14 @@ bool PanoramioPlugin::render ( GeoPainter *painter, ViewportParams *viewport, co
 
 void PanoramioPlugin::slotJsonDownloadComplete ( QString relativeUrlString, QString id )
 {
-    disconnect ( m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ) );
-    connect ( m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotImageDownloadComplete ( QString , QString ) ) );
+    disconnect ( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ) );
+    connect ( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotImageDownloadComplete ( QString , QString ) ) );
 
-    for ( int x=0;x<numberOfImagesToShow;x++ )
+    for ( int x = 0; x < numberOfImagesToShow; ++x )
     {
-        temp=panoramioJsonParser.parseObjectOnPosition ( QString::fromUtf8 ( m_storagePolicy->data ( id ) ), x );
+        temp = panoramioJsonParser.parseObjectOnPosition ( QString::fromUtf8 ( m_storagePolicy->data ( id ) ), x );
         parsedData.append ( temp );
-        m_downloadManager->addJob ( QUrl ( temp.photo_file_url ),temp.photo_title, QString::number ( x ) );
+        m_downloadManager->addJob ( QUrl ( temp.photo_file_url ), temp.photo_title, QString::number ( x ) );
         qDebug() <<":::::::shanky1" << temp.photo_file_url;
     }
 }
@@ -109,8 +109,8 @@ void PanoramioPlugin::slotImageDownloadComplete ( const QString relativeUrlStrin
 
     //     temp.loadFromData ( m_storagePolicy->data ( id ) );
     tempImage.load ( MarbleDirs::localPath() + "/cache/" + relativeUrlString );
-    imagesWeHave.append ( tempImage.scaled ( QSize ( 50,50 ),  Qt::KeepAspectRatio , Qt::FastTransformation ) );
-    qDebug() <<"::::::::::::::shanky2"<< id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/"+relativeUrlString ;
+    imagesWeHave.append ( tempImage.scaled ( QSize ( 50, 50 ),  Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
+    qDebug() <<"::::::::::::::shanky2"<< id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/" + relativeUrlString ;
     flag = 1;
 }
 
