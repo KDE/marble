@@ -52,7 +52,7 @@ GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
     // Check whether the tag is valid
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Palette));
 
-    QString type      = parser.attribute(dgmlAttr_role).toLower().trimmed();
+    QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
     QString file      = parser.readElementText().trimmed();
 
     GeoScenePalette *palette = 0;
@@ -60,6 +60,7 @@ GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
     // Checking for parent palette
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Filter)) {
+		qDebug() << "Making palette(" << type << "," << file << ")";
         palette = new GeoScenePalette( type, file );
         parentItem.nodeAs<GeoSceneFilter>()->addPalette( palette );
     }

@@ -22,6 +22,7 @@
 #include "GeoSceneMap.h"
 
 #include "GeoSceneLayer.h"
+#include "GeoSceneFilter.h"
 #include "DgmlAuxillaryDictionary.h"
 
 using namespace GeoSceneAuxillaryDictionary;
@@ -43,6 +44,9 @@ class GeoSceneMapPrivate
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
     QVector<GeoSceneLayer*> m_layers;
+
+    /// The vector holding all the filters in the map.
+    QVector<GeoSceneFilter*> m_filters;
 
     QString m_backgroundColor;
 };
@@ -103,6 +107,52 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 QVector<GeoSceneLayer*> GeoSceneMap::layers() const
 {
     return d->m_layers;
+}
+
+void GeoSceneMap::addFilter( GeoSceneFilter* filter )
+{
+    // Remove any filter that has the same name
+    QVector<GeoSceneFilter*>::iterator it = d->m_filters.begin();
+    while (it != d->m_filters.end()) {
+        GeoSceneFilter* currentFilter = *it;
+        if ( currentFilter->name() == filter->name() ) {
+            delete currentFilter;
+            it = d->m_filters.erase(it);
+        }
+        else {
+            ++it;
+        }
+     }
+
+    if ( filter ) {
+        d->m_filters.append( filter );
+    }
+}
+
+GeoSceneFilter* GeoSceneMap::filter( const QString& name )
+{
+    GeoSceneFilter* filter = 0;
+
+    QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.begin();
+    for (it = d->m_filters.begin(); it != d->m_filters.end(); ++it) {
+        if ( (*it)->name() == name )
+            filter = *it;
+    }
+
+    if ( filter ) {
+        Q_ASSERT(filter->name() == name);
+        return filter;
+    }
+
+    filter = new GeoSceneFilter( name );
+    addFilter( filter );
+
+    return filter;
+}
+
+QVector<GeoSceneFilter*> GeoSceneMap::filters() const
+{
+    return d->m_filters;
 }
 
 bool GeoSceneMap::hasTextureLayers() const

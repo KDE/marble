@@ -30,6 +30,7 @@
 #include "GeoDocument.h"
 
 class GeoSceneLayer;
+class GeoSceneFilter;
 
 class GeoSceneMapPrivate;
 
@@ -62,6 +63,25 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode {
      * @return A vector that contains pointers to all available layers
      */
     QVector<GeoSceneLayer*> layers() const;
+
+    /**
+     * @brief  Add a new filter to the map
+     * @param  section  The new filter
+     */
+    void addFilter( GeoSceneFilter* );
+
+    /**
+     * @brief  Return a filter by its name
+     * @param  name  The name of the filter
+     * @return A pointer to the filter request by its name
+     */
+    GeoSceneFilter* filter( const QString& name );
+
+    /**
+     * @brief  Return all filters
+     * @return A vector that contains pointers to all available filters
+     */
+    QVector<GeoSceneFilter*> filters() const;
 
     /**
      * @brief  Checks for valid layers that contain texture data

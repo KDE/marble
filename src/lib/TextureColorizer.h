@@ -46,10 +46,15 @@ class TextureColorizer
 
     void colorize(ViewParams *viewParams);
 
- private:
-    static uint texturepalette[16][512];
+    QString seafile() const;
+    QString landfile() const;
+
     void generatePalette( const QString& seafile,
-			  const QString& landfile ) const;
+                          const QString& landfile );
+ private:
+    QString m_seafile;
+    QString m_landfile;
+    static uint texturepalette[16][512];
 };
 
 

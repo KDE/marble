@@ -34,6 +34,15 @@ TextureColorizer::TextureColorizer( const QString& seafile,
    generatePalette(seafile, landfile);
 }
 
+QString TextureColorizer::seafile() const
+{
+    return m_seafile;
+}
+
+QString TextureColorizer::landfile() const
+{
+    return m_landfile;
+}
 
 // This function takes two images, both in viewParams:
 //  - The coast image, which has a number of colors where each color
@@ -271,7 +280,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 }
 
 void TextureColorizer::generatePalette(const QString& seafile,
-				       const QString& landfile) const
+				       const QString& landfile)
 {
     QImage   *gradientImage = new QImage( 256, 10, QImage::Format_RGB32 );
     QPainter  gradientPainter( gradientImage );
@@ -329,4 +338,6 @@ void TextureColorizer::generatePalette(const QString& seafile,
         }
         offset += 256;
     }
+    m_seafile = seafile;
+    m_landfile = landfile;
 }

@@ -30,6 +30,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneLayer.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneFilter.h"
 
 using namespace GeoSceneElementDictionary;
@@ -54,15 +55,22 @@ GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
 
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
+	qDebug() << "Parsing Filter " << name << "type" << type;
 
     GeoSceneFilter *filter = 0;
 
     // Checking for parent layer
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(dgmlTag_Layer)) {
+    GeoStackItem grandParentItem = parser.parentElement(1);
+    if (parentItem.represents(dgmlTag_Layer) &&
+        grandParentItem.represents(dgmlTag_Map) ) {
+
         filter = new GeoSceneFilter( name );
         filter->setType( type );
         parentItem.nodeAs<GeoSceneLayer>()->addFilter( filter );
+        grandParentItem.nodeAs<GeoSceneMap>()->addFilter( filter );
+        qDebug() << "New filter object " << filter->name() << "has the type"
+                 << filter->type();
     }
 
     return filter;

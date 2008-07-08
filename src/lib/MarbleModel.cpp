@@ -424,7 +424,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
-	    // Create the height map image a.k.a viewParams->m_canvasImage.
+            // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->showElevationModel()
@@ -437,7 +437,45 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
                 // Recolorize the heightmap using the VectorMap
                 d->m_texcolorizer->colorize( viewParams );
-            }
+            } 
+            if( !d->m_mapTheme->map()->filters().isEmpty() ) {
+                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
+                qDebug() << "filters.first()->name() == " << filter->name();
+                qDebug() << "filters.first()->type() == " << filter->type();
+                viewParams->coastImage()->fill( Qt::transparent );
+                // Create VectorMap
+                d->m_veccomposer->drawTextureMap( viewParams );
+
+                //set default values just in case
+                QString seafile = MarbleDirs::path( "seacolors.leg" );
+                QString landfile = MarbleDirs::path( "landcolors.leg" );
+
+                if( filter->type() == "colorize" ) {
+                    QList<GeoScenePalette*> palette = filter->palette();
+                    foreach ( GeoScenePalette *curPalette, palette ) {
+						qDebug() << "Checking palette " << curPalette->type()
+								 << " filename " << curPalette->file();
+                        if( curPalette->type() == "sea" ) {
+                            seafile = MarbleDirs::path( curPalette->file() );
+                        } else if( curPalette->type() == "land" ) {
+                            landfile = MarbleDirs::path( curPalette->file() );
+                        } else {
+                            qDebug() << "Unknown palette type "
+                                     << curPalette->type();
+                        }
+                    }
+                }
+                    
+                    qDebug() << "Found filter: " << seafile << landfile;
+                    if( d->m_texcolorizer->seafile() != seafile ||
+                        d->m_texcolorizer->landfile() != landfile ) {
+
+                        d->m_texcolorizer->generatePalette( seafile, landfile );
+                    }
+                    // Recolorize the heightmap using the VectorMap
+                    d->m_texcolorizer->colorize( viewParams );
+            } else { qDebug() << "No filters to act on..."; }
+
         }
     }
 

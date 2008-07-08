@@ -124,6 +124,16 @@ maps/earth/temp-dec/temp-dec.jpg
 maps/earth/temp-dec/temp-dec.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/temp-dec)
 
+install (FILES
+maps/earth/precip-july/precip-july.jpg
+maps/earth/precip-july/precip-july.dgml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-july)
+
+install (FILES
+maps/earth/precip-dec/precip-dec.jpg
+maps/earth/precip-dec/precip-dec.dgml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-dec)
+
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}

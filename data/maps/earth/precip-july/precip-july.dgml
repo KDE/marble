@@ -67,8 +67,8 @@
                     <coastline>mwdbii</coastline>
                     <!-- If these don't get defined the default palettes get
                     used -->
-                    <palette type="sea">seapalette.pal</palette>
-                    <palette type="land">landpalette.pal</palette>
+                    <palette type="sea">precipcolors.leg</palette>
+                    <palette type="land">precipcolors.leg</palette>
                 </filter>
             </layer>
         
