@@ -20,7 +20,7 @@
 
 #include "global.h"
 #include "Quaternion.h"
-#include "GeoDataCoordinates.h"
+#include "GeoDataPoint.h"
 #include "ScreenPolygon.h"
 
 using namespace Marble;
@@ -62,17 +62,17 @@ class VectorMap : public ScreenPolygon::Vector
     void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
     void mercatorCreateFromPntMap( const PntMap*, ViewportParams *viewport );
 
-    void createPolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-                         GeoDataCoordinates::Vector::ConstIterator, const int, 
+    void createPolyLine( GeoDataPoint::Vector::ConstIterator, 
+                         GeoDataPoint::Vector::ConstIterator, const int, 
 			 ViewportParams *viewport );
-    void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				  GeoDataCoordinates::Vector::ConstIterator, 
+    void sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+				  GeoDataPoint::Vector::ConstIterator, 
 				  const int detail, ViewportParams *viewport );
-    void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				    GeoDataCoordinates::Vector::ConstIterator, 
+    void rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+				    GeoDataPoint::Vector::ConstIterator, 
 				    const int detail, ViewportParams *viewport );
-    void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				 GeoDataCoordinates::Vector::ConstIterator, 
+    void mercatorCreatePolyLine( GeoDataPoint::Vector::ConstIterator, 
+				 GeoDataPoint::Vector::ConstIterator, 
 				 const int detail, ViewportParams *viewport );
 
     void           manageCrossHorizon();

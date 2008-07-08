@@ -55,7 +55,6 @@ GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
 
     QString name      = parser.attribute(dgmlAttr_name).trimmed();
     QString type      = parser.attribute(dgmlAttr_type).toLower().trimmed();
-	qDebug() << "Parsing Filter " << name << "type" << type;
 
     GeoSceneFilter *filter = 0;
 
@@ -69,8 +68,6 @@ GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
         filter->setType( type );
         parentItem.nodeAs<GeoSceneLayer>()->addFilter( filter );
         grandParentItem.nodeAs<GeoSceneMap>()->addFilter( filter );
-        qDebug() << "New filter object " << filter->name() << "has the type"
-                 << filter->type();
     }
 
     return filter;

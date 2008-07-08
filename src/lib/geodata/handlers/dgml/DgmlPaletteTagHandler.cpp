@@ -60,7 +60,6 @@ GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
     // Checking for parent palette
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Filter)) {
-		qDebug() << "Making palette(" << type << "," << file << ")";
         palette = new GeoScenePalette( type, file );
         parentItem.nodeAs<GeoSceneFilter>()->addPalette( palette );
     }

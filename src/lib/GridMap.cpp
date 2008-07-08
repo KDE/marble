@@ -19,6 +19,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
+#include "GeoDataPoint.h"       // In geodata/data/
 #include "global.h"
 #include "GeoPainter.h"
 #include "AbstractProjection.h"
@@ -193,7 +194,6 @@ void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
         m_polygon.clear();
         m_polygon.reserve( steps + 1 );
 
-        Quaternion qpos;
         for ( int j = 0; j < steps + 1; ++j ) {
 
             double itval  = (j != steps) ? (double)(j) / quartSteps : cutCoeff;
@@ -202,7 +202,8 @@ void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
             double lat = ( dim == Latitude )  ? angle : dimVal;
             double lon = ( dim == Longitude ) ? angle : dimVal;
 
-            qpos.set( lon, -lat );
+            GeoDataPoint  geoit( lon, -lat );
+            Quaternion    qpos = geoit.quaternion();
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
             m_currentPoint = QPointF( (double)(imgWidth / 2 + radius * qpos.v[Q_X]),
