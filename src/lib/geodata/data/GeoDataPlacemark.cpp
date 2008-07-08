@@ -24,13 +24,13 @@ class GeoDataPlacemarkPrivate
     GeoDataPlacemarkPrivate()
         : m_area( -1.0 ),
           m_population( -1 ),
-          m_geometry( new GeoDataPoint )
+          m_geometry( 0 )
     {
     }
 
     ~GeoDataPlacemarkPrivate()
     {
-        delete m_geometry;
+        if( m_geometry ) delete m_geometry;
     }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
@@ -90,31 +90,31 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 
 void GeoDataPlacemark::setGeometry( GeoDataPoint *point )
 {
-    delete d->m_geometry;
+    if( d->m_geometry ) delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataLineString *point )
 {
-    delete d->m_geometry;
+    if( d->m_geometry ) delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataLinearRing *point )
 {
-    delete d->m_geometry;
+    if( d->m_geometry ) delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataPolygon *point )
 {
-    delete d->m_geometry;
+    if( d->m_geometry ) delete d->m_geometry;
     d->m_geometry = point;
 }
 
 void GeoDataPlacemark::setGeometry( GeoDataMultiGeometry *point )
 {
-    delete d->m_geometry;
+    if( d->m_geometry ) delete d->m_geometry;
     d->m_geometry = point;
 }
 
@@ -179,7 +179,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPoint* point = new GeoDataPoint();
             point->unpack( stream );
-            delete d->m_geometry;
+            if( d->m_geometry ) delete d->m_geometry;
             d->m_geometry = point;
             }
             break;
@@ -187,7 +187,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataLineString* lineString = new GeoDataLineString();
             lineString->unpack( stream );
-            delete d->m_geometry;
+            if( d->m_geometry ) delete d->m_geometry;
             d->m_geometry = lineString;
             }
             break;
@@ -195,7 +195,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataLinearRing* linearRing = new GeoDataLinearRing();
             linearRing->unpack( stream );
-            delete d->m_geometry;
+            if( d->m_geometry ) delete d->m_geometry;
             d->m_geometry = linearRing;
             }
             break;
@@ -203,7 +203,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataPolygon* polygon = new GeoDataPolygon();
             polygon->unpack( stream );
-            delete d->m_geometry;
+            if( d->m_geometry ) delete d->m_geometry;
             d->m_geometry = polygon;
             }
             break;
@@ -211,7 +211,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             {
             GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
             multiGeometry->unpack( stream );
-            delete d->m_geometry;
+            if( d->m_geometry ) delete d->m_geometry;
             d->m_geometry = multiGeometry;
             }
             break;
