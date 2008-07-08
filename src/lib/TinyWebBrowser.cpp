@@ -131,9 +131,9 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
     return QTextBrowser::loadResource ( type, url );
 }
 
-void TinyWebBrowser::setSource ( const QUrl& url )
+void TinyWebBrowser::setSource ( const QString& urlString )
 {
-    m_source = url.toString();
+    m_source = urlString;
 
     if ( !m_storagePolicy->fileExists ( m_source ) )
         m_downloadManager->addJob ( m_source, m_source );

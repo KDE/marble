@@ -34,7 +34,7 @@ class TinyWebBrowser : public QTextBrowser
         ~TinyWebBrowser();
 
     public Q_SLOTS:
-        void setSource ( const QUrl& relativeUrl );
+        void setSource ( const QString& urlString );
         void print();
 
 
