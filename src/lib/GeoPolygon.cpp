@@ -45,6 +45,8 @@ GeoPolygon::GeoPolygon()
 
 GeoPolygon::~GeoPolygon()
 {
+//    qDeleteAll( begin(), end() );
+    qDeleteAll( m_boundary );
 }
 
 void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, double latBottom)
@@ -63,15 +65,15 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
         if ( xcenter < -M_PI )
             xcenter +=  2.0 * M_PI;
 
-        m_boundary.append( GeoDataPoint( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataPoint::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
     }
     else
-        m_boundary.append( GeoDataPoint( 0.5 * (lonLeft + lonRight), 0.5 * (latTop + latBottom), 0.0, GeoDataPoint::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( 0.5 * (lonLeft + lonRight), 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
 
-    m_boundary.append(GeoDataPoint( lonLeft,  latTop,    0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( lonRight, latBottom, 0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( lonRight, latTop,    0.0, GeoDataPoint::Radian, 1 ));
-    m_boundary.append(GeoDataPoint( lonLeft,  latBottom, 0.0, GeoDataPoint::Radian, 1 ));
+    m_boundary.append( new GeoDataCoordinates( lonLeft,  latTop,    0.0, GeoDataCoordinates::Radian, 1 ));
+    m_boundary.append( new GeoDataCoordinates( lonRight, latBottom, 0.0, GeoDataCoordinates::Radian, 1 ));
+    m_boundary.append( new GeoDataCoordinates( lonRight, latTop,    0.0, GeoDataCoordinates::Radian, 1 ));
+    m_boundary.append( new GeoDataCoordinates( lonLeft,  latBottom, 0.0, GeoDataCoordinates::Radian, 1 ));
 
 }
 
@@ -79,15 +81,15 @@ void GeoPolygon::displayBoundary(){
     Quaternion  q;
     double      lon;
     double      lat;
-    m_boundary.at(0).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    m_boundary.at(0)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
-    m_boundary.at(1).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    m_boundary.at(1)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
-    m_boundary.at(2).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    m_boundary.at(2)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
-    m_boundary.at(3).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    m_boundary.at(3)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
-    m_boundary.at(4).geoCoordinates(lon, lat, GeoDataPoint::Degree);
+    m_boundary.at(4)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
 
 //    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine() << " Index: " << getIndex();
@@ -168,11 +170,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataPoint( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataPoint::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataPoint( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataPoint::Radian, (int)(header) ) ); 
+            last()->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
         }
         ++count;
     }
@@ -219,11 +221,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataPoint( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataPoint::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataPoint( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataPoint::Radian, (int)(header) ) );
+            last()->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
         }
         ++count;
     }
@@ -250,7 +252,7 @@ void PntMap::load(const QString &filename)
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
-    GeoDataPoint::Vector::ConstIterator   itPoint;
+    GeoDataCoordinates::Vector::ConstIterator   itPoint;
 
     // Now we calculate the boundaries
 	
@@ -267,7 +269,7 @@ void PntMap::load(const QString &filename)
         bool isOriginalSide = true;
         int  lastSign     = 0;
 
-        GeoDataPoint::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
+        GeoDataCoordinates::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
 					
         for ( itPoint = (*itPolyLine)->begin();
                 itPoint != itEndPoint;
@@ -290,7 +292,7 @@ void PntMap::load(const QString &filename)
             if ( isOriginalSide == true ) { 
                 if ( lon < lonLeft  ) lonLeft = lon;
                 if ( lon > lonRight ) lonRight = lon;
-			} else {
+            } else {
                 if ( lon < otherLonLeft  ) otherLonLeft = lon;
                 if ( lon > otherLonRight ) otherLonRight = lon;
             }

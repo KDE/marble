@@ -54,14 +54,14 @@ class MARBLE_EXPORT Quaternion {
     void        set(double w, double x, double y, double z) {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
     }
-    void        set(double &lon, double &lat) {
+    void        set(double lon, double lat) {
         v[Q_W] = 0.0;
         const double  cosLat = cos(lat);
         v[Q_X] = cosLat * sin(lon);
         v[Q_Y] = sin(lat);
         v[Q_Z] = cosLat * cos(lon);
     }
-    
+
     void        getSpherical(double &lon, double &lat) const;
 
     void        normalize();
