@@ -98,8 +98,8 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                 yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
             }
             else if ( viewParams->projection() == Mercator ) {
-                yTop = ( imgry - 2 * ( yCenterOffset + radius ) < 0)? 0 : imgry - 2 * ( radius -   yCenterOffset );
-                yBottom = ( imgry + 2 * ( yCenterOffset + radius ) > imgheight )? imgheight : imgry + 2 * ( yCenterOffset + radius );
+                yTop = ( imgry - 2 * radius + yCenterOffset < 0 ) ? 0 : imgry - 2 * radius + yCenterOffset;
+                yBottom = ( imgry + 2 * radius + yCenterOffset > imgheight )? imgheight : imgry + 2 * radius + yCenterOffset;
             }
         }
 
