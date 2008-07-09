@@ -90,13 +90,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="showSecondsCheckBox" >
-       <property name="text" >
-        <string>Show seconds</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QCheckBox" name="showFullCheckBox" >
        <property name="toolTip" >
         <string>Chooses whether to show the full name of the timezone</string>
