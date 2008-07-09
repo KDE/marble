@@ -116,21 +116,25 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/openstreetmap/0/0)
 
 install (FILES
 maps/earth/temp-july/temp-july.jpg
+maps/earth/temp-july/temp-july-preview.png
 maps/earth/temp-july/temp-july.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/temp-july)
 
 install (FILES
 maps/earth/temp-dec/temp-dec.jpg
+maps/earth/temp-dec/temp-dec-preview.png
 maps/earth/temp-dec/temp-dec.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/temp-dec)
 
 install (FILES
 maps/earth/precip-july/precip-july.jpg
+maps/earth/precip-july/precip-july-preview.png
 maps/earth/precip-july/precip-july.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-july)
 
 install (FILES
 maps/earth/precip-dec/precip-dec.jpg
+maps/earth/precip-dec/precip-dec-preview.png
 maps/earth/precip-dec/precip-dec.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-dec)
 

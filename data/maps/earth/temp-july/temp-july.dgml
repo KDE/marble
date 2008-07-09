@@ -5,7 +5,7 @@
             <name>Temperature (July)</name>
             <target>earth</target>
             <theme>temp-july</theme>
-	    <!-- <icon pixmap="srtm-preview.png"/> -->
+            <icon pixmap="temp-july-preview.png"/>
     
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->

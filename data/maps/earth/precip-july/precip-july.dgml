@@ -5,7 +5,7 @@
             <name>Precipitation (July)</name>
             <target>earth</target>
             <theme>precip-july</theme>
-	    <!-- <icon pixmap="srtm-preview.png"/> -->
+            <icon pixmap="precip-july-preview.png"/>
     
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->
