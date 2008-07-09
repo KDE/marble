@@ -19,6 +19,8 @@
 
 //Qt
 #include <QPainter>
+#include <QRadialGradient>
+#include <QBrush>
 #include <QGraphicsSceneHoverEvent>
 #include <QList>
 #include <QSize>
@@ -394,17 +396,13 @@ void WorldClock::paintInterface(QPainter *p,
     if ( ok && m_isHovered ) {
         //kDebug() << "returned x,y = " << tzx << tzy;
         QPoint tz( tzx, tzy );
-        QPen pen( QColor( 0xFF, 0x00, 0x00 ) );
-        int radius = m_lastRect.width() / 15;
-        //first the circle...
-        pen.setWidth( radius / 7 );
-        p->setPen( pen );
+        int radius = m_lastRect.width() / 40;
+        QRadialGradient grad( tz, radius );
+        grad.setColorAt( 0, QColor( 0xFF, 0xFF, 0x00 ) );
+        grad.setColorAt( 1, QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
+        p->setPen( Qt::NoPen );
+        p->setBrush( QBrush( grad ) );
         p->drawEllipse( tz, radius, radius );
-        //now the crosshairs
-        pen.setWidth( pen.width() / 2 );
-        p->setPen( pen );
-        p->drawLine( tz.x()-radius, tz.y(), tz.x()+radius, tz.y() );
-        p->drawLine( tz.x(), tz.y()-radius, tz.x(), tz.y()+radius );
     } //else { kDebug() << "Pixel lookup failed!"; }
 
     p->setPen( QColor( 0xFF, 0xFF, 0xFF ) );
@@ -441,8 +439,6 @@ void WorldClock::paintInterface(QPainter *p,
                             m_points.value( "topright" ) ),
                      Qt::AlignCenter, datestr );
     }
-
-
 
 }
 
