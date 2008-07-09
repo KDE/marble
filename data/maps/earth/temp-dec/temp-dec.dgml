@@ -40,26 +40,6 @@
                 </texture>
             </layer>
             
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
-                <vector name="pcoast" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                </vector>
-                <vector name="pisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plakeisland" feature="land" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plake" feature="sea" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
-                </vector>
-                <vector name="pglacier" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
-                </vector>
-            </layer>
-        
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
@@ -73,13 +53,17 @@
             </layer>
         
             <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pcoast" feature="coast">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <pen color="#555753" />
+                </vector>
                 <vector name="pdiffborder" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#555753" />
                 </vector>
                 <vector name="pusa48" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#555753" />
                 </vector>
                 <vector name="international dateline" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
@@ -152,6 +136,10 @@
                 </property>
             </group>
             <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
                 <property name="waterbodies">
                     <available>false</available>
                     <value>false</value>
@@ -256,53 +244,44 @@
                 <heading>Temperature</heading>
 
                 <item name="temp42">
-                    <icon color="#ff0000"/>
+                    <icon color="#e85752"/>
                     <text><![CDATA[42&deg;C]]></text>
                 </item>
                 <item name="temp32">
-                    <icon color="#ff8000"/>
+                    <icon color="#f4a554"/>
                     <text><![CDATA[32&deg;C]]></text>
-                    <text>32°C</text>
                 </item>
                 <item name="temp23">
-                    <icon color="#ffff00"/>
+                    <icon color="#ffeb55"/>
                     <text><![CDATA[23&deg;C]]></text>
-                    <text>23°C</text>
                 </item>
                 <item name="temp12">
-                    <icon color="#c0c040"/>
+                    <icon color="#92ac91"/>
                     <text><![CDATA[12&deg;C]]></text>
-                    <text>12°C</text>
                 </item>
                 <item name="temp1">
-                    <icon color="#808080"/>
+                    <icon color="#2c72c7"/>
                     <text><![CDATA[1&deg;C]]></text>
-                    <text>1°C</text>
                 </item>
                 <item name="temp-10">
-                    <icon color="#4040c0"/>
+                    <icon color="#175baa"/>
                     <text><![CDATA[-10&deg;C]]></text>
-                    <text>-10°C</text>
                 </item>
                 <item name="temp-21">
-                    <icon color="#0000ff"/>
+                    <icon color="#003876"/>
                     <text><![CDATA[-21&deg;C]]></text>
-                    <text>-21°C</text>
                 </item>
                 <item name="temp-32">
-                    <icon color="#4040ff"/>
+                    <icon color="#003065"/>
                     <text><![CDATA[-32&deg;C]]></text>
-                    <text>-32°C</text>
                 </item>
                 <item name="temp-41">
-                    <icon color="#8080ff"/>
+                    <icon color="#002754"/>
                     <text><![CDATA[-41&deg;C]]></text>
-                    <text>-41°C</text>
                 </item>
                 <item name="temp-69">
-                    <icon color="#ffffff"/>
+                    <icon color="#001e43"/>
                     <text><![CDATA[-69&deg;C]]></text>
-                    <text>-69°C</text>
                 </item>
             </section>
 

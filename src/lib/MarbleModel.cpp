@@ -333,7 +333,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pcoast") );
             if ( vector )
+            {
                 d->m_veccomposer->setLandColor( vector->brush().color() );
+                d->m_veccomposer->setCoastColor( vector->pen().color() );
+            }
         }
     }
 

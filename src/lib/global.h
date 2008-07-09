@@ -126,7 +126,7 @@ const QString MARBLE_VERSION_STRING = QString::fromLatin1( "pre 0.6 SVN" );
 //        pp = patch revision.
 #define MARBLE_VERSION 0x000600
 
-static const char* NOT_AVAILABLE = QT_TR_NOOP("not available");
+static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 
 const int tileDigits = 6;
 

@@ -60,7 +60,14 @@ class VectorComposer
      */
     void setLandColor( const QColor& color ){ 
         m_landBrush = QBrush( color );
-        m_landPen = QPen( Qt::NoPen );
+    }
+
+    /**
+     * @brief  Set color of the land
+     * @param  color  land color
+     */
+    void setCoastColor( const QColor& color ){ 
+        m_landPen = QPen( color );
     }
 
     /**

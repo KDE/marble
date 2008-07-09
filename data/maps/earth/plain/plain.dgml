@@ -32,27 +32,6 @@
             <!-- In this place one could e.g. insert a sky plugin -->
             <target/>
         
-            
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-<!--            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
-                <vector name="pcoast" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                </vector>
-                <vector name="pisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plakeisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plake" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
-                </vector>
-                <vector name="pglacier" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
-                </vector>
-            </layer>
--->        
             <layer name="mwdbii" backend="vector" role="polyline">
                 <vector name="pcoast" feature="coast">
                     <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>

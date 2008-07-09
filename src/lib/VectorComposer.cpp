@@ -188,9 +188,20 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
     m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
     m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
 
+    bool showCoastlines;
+    viewParams->propertyValue( "coastlines", showCoastlines );
+
+    if ( showCoastlines ) {
+        m_vectorMap -> setPen( m_landPen );
+        m_vectorMap -> setBrush( Qt::NoBrush );
+    }
+    else
+    {
+        m_vectorMap -> setPen( Qt::NoPen );
+        m_vectorMap -> setBrush( m_landBrush );
+    }
+
     m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
-    m_vectorMap -> setPen( m_landPen );
-    m_vectorMap -> setBrush( m_landBrush );
     m_vectorMap -> paintMap( painter, antialiased );
 
     // Islands
@@ -198,8 +209,17 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
     m_vectorMap -> setzPointLimit( 0.9 );
 
     m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
-    m_vectorMap -> setPen( m_landPen );
-    m_vectorMap -> setBrush( m_landBrush );
+
+    if ( showCoastlines ) {
+        m_vectorMap -> setPen( m_landPen );
+        m_vectorMap -> setBrush( Qt::NoBrush );
+    }
+    else
+    {
+        m_vectorMap -> setPen( Qt::NoPen );
+        m_vectorMap -> setBrush( m_landBrush );
+    }
+
     m_vectorMap -> paintMap( painter, antialiased );
 
     bool showWaterbodies, showLakes;
@@ -235,6 +255,28 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         || viewParams->mapQuality() == Marble::Print )
     {
 	antialiased = true;
+    }
+
+    // Coastlines
+    bool showCoastlines;
+    viewParams->propertyValue( "coastlines", showCoastlines );
+
+    if ( showCoastlines ) {
+        m_vectorMap -> setzBoundingBoxLimit( 0.4 ); 
+        m_vectorMap -> setzPointLimit( 0 ); // 0.6 results in green pacific
+    
+        m_vectorMap -> createFromPntMap( m_coastLines, viewParams->viewport() );
+        m_vectorMap -> setPen( m_landPen );
+        m_vectorMap -> setBrush( Qt::NoBrush );
+        m_vectorMap -> paintMap( painter, antialiased );
+
+        m_vectorMap -> setzBoundingBoxLimit( 0.8 );
+        m_vectorMap -> setzPointLimit( 0.9 );
+
+        m_vectorMap -> createFromPntMap( m_islands, viewParams->viewport() );
+        m_vectorMap -> setPen( m_landPen );
+        m_vectorMap -> setBrush( Qt::NoBrush );
+        m_vectorMap -> paintMap( painter, antialiased );
     }
 
     bool showWaterbodies, showRivers;
