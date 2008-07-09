@@ -282,6 +282,11 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 void TextureColorizer::generatePalette(const QString& seafile,
 				       const QString& landfile)
 {
+    for(int i = 0; i < 16; i++) {
+        for(int j = 0; j < 512; j++) {
+            texturepalette[i][j] = 0;
+        }
+    }
     QImage   *gradientImage = new QImage( 256, 10, QImage::Format_RGB32 );
     QPainter  gradientPainter( gradientImage );
     gradientPainter.setPen( Qt::NoPen );

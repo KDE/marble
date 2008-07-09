@@ -351,6 +351,27 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
+
+    if( !d->m_mapTheme->map()->filters().isEmpty() ) {
+        GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
+        QString seafile = MarbleDirs::path( "seacolors.leg" );
+        QString landfile = MarbleDirs::path( "landcolors.leg" );
+
+        if( filter->type() == "colorize" ) {
+            QList<GeoScenePalette*> palette = filter->palette();
+            foreach ( GeoScenePalette *curPalette, palette ) {
+                if( curPalette->type() == "sea" ) {
+                    seafile = MarbleDirs::path( curPalette->file() );
+                } else if( curPalette->type() == "land" ) {
+                    landfile = MarbleDirs::path( curPalette->file() );
+                }
+            }
+        }
+        if( d->m_texcolorizer->seafile() != seafile ||
+            d->m_texcolorizer->landfile() != landfile ) {
+            d->m_texcolorizer->generatePalette( seafile, landfile );
+        }
+    }
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
 
@@ -428,16 +449,36 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
             d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->showElevationModel()
-                && layer->role() == "dem" )
-            {
-                viewParams->coastImage()->fill( Qt::transparent );
+                && layer->role() == "dem"
+                && !d->m_mapTheme->map()->filters().isEmpty() ) {
 
+                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
+                viewParams->coastImage()->fill( Qt::transparent );
                 // Create VectorMap
                 d->m_veccomposer->drawTextureMap( viewParams );
 
+                //set default values just in case
+                QString seafile = MarbleDirs::path( "seacolors.leg" );
+                QString landfile = MarbleDirs::path( "landcolors.leg" );
+
+                if( filter->type() == "colorize" ) {
+                    QList<GeoScenePalette*> palette = filter->palette();
+                    foreach ( GeoScenePalette *curPalette, palette ) {
+                        if( curPalette->type() == "sea" ) {
+                            seafile = MarbleDirs::path( curPalette->file() );
+                        } else if( curPalette->type() == "land" ) {
+                            landfile = MarbleDirs::path( curPalette->file() );
+                        }
+                    }
+                }
+                if( d->m_texcolorizer->seafile() != seafile ||
+                    d->m_texcolorizer->landfile() != landfile ) {
+
+                    d->m_texcolorizer->generatePalette( seafile, landfile );
+                }
                 // Recolorize the heightmap using the VectorMap
                 d->m_texcolorizer->colorize( viewParams );
-            }
+            } //else { qDebug() << "No filters to act on..."; }
         }
     }
 

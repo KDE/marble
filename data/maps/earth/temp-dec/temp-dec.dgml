@@ -153,8 +153,8 @@
             </group>
             <group name="Water Bodies">
                 <property name="waterbodies">
-                    <available>true</available>
-                    <value>true</value>
+                    <available>false</available>
+                    <value>false</value>
                 </property>
                 <property name="lakes">
                     <available>false</available>
