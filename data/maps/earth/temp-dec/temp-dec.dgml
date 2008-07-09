@@ -244,19 +244,19 @@
                 <heading>Temperature</heading>
 
                 <item name="temp42">
-                    <icon color="#e85752"/>
+                    <icon color="#e20800"/>
                     <text><![CDATA[42&deg;C]]></text>
                 </item>
                 <item name="temp32">
-                    <icon color="#f4a554"/>
+                    <icon color="#f07113"/>
                     <text><![CDATA[32&deg;C]]></text>
                 </item>
                 <item name="temp23">
-                    <icon color="#ffeb55"/>
+                    <icon color="#ffe429"/>
                     <text><![CDATA[23&deg;C]]></text>
                 </item>
                 <item name="temp12">
-                    <icon color="#92ac91"/>
+                    <icon color="#91a87b"/>
                     <text><![CDATA[12&deg;C]]></text>
                 </item>
                 <item name="temp1">

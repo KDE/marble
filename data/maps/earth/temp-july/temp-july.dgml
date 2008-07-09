@@ -245,44 +245,44 @@
                 <heading>Temperature</heading>
 
                 <item name="temp42">
-                    <icon color="#e85752"/>
-		    <text><![CDATA[42&deg;C]]></text>
+                    <icon color="#e20800"/>
+                    <text><![CDATA[42&deg;C]]></text>
                 </item>
                 <item name="temp32">
-                    <icon color="#f4a554"/>
-		    <text><![CDATA[32&deg;C]]></text>
+                    <icon color="#f07113"/>
+                    <text><![CDATA[32&deg;C]]></text>
                 </item>
                 <item name="temp23">
-                    <icon color="#ffeb55"/>
-		    <text><![CDATA[23&deg;C]]></text>
+                    <icon color="#ffe429"/>
+                    <text><![CDATA[23&deg;C]]></text>
                 </item>
                 <item name="temp12">
-                    <icon color="#92ac91"/>
-		    <text><![CDATA[12&deg;C]]></text>
+                    <icon color="#91a87b"/>
+                    <text><![CDATA[12&deg;C]]></text>
                 </item>
                 <item name="temp1">
                     <icon color="#2c72c7"/>
-		    <text><![CDATA[1&deg;C]]></text>
+                    <text><![CDATA[1&deg;C]]></text>
                 </item>
                 <item name="temp-10">
                     <icon color="#175baa"/>
-		    <text><![CDATA[-10&deg;C]]></text>
+                    <text><![CDATA[-10&deg;C]]></text>
                 </item>
                 <item name="temp-21">
                     <icon color="#003876"/>
-		    <text><![CDATA[-21&deg;C]]></text>
+                    <text><![CDATA[-21&deg;C]]></text>
                 </item>
                 <item name="temp-32">
                     <icon color="#003065"/>
-		    <text><![CDATA[-32&deg;C]]></text>
+                    <text><![CDATA[-32&deg;C]]></text>
                 </item>
                 <item name="temp-41">
                     <icon color="#002754"/>
-		    <text><![CDATA[-41&deg;C]]></text>
+                    <text><![CDATA[-41&deg;C]]></text>
                 </item>
                 <item name="temp-69">
                     <icon color="#001e43"/>
-		    <text><![CDATA[-69&deg;C]]></text>
+                    <text><![CDATA[-69&deg;C]]></text>
                 </item>
             </section>
 

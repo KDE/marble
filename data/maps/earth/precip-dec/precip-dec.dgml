@@ -253,7 +253,7 @@
                     <text>10 mm</text>
                 </item>
                 <item name="precip40">
-                    <icon color="#ffeb55"/>
+                    <icon color="#ffe429"/>
                     <text>40 mm</text>
                 </item>
                 <item name="precip63">
