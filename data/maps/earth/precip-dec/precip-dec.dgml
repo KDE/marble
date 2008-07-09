@@ -40,26 +40,6 @@
                 </texture>
             </layer>
             
-            <!-- This layer creates the coastlines that are needed to
-                colorize the elevation model properly -->
-            <layer name="mwdbii-canvas" backend="vector" role="filterhelper">
-                <vector name="pcoast" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
-                </vector>
-                <vector name="pisland" feature="land">
-                    <sourcefile format="PNT"> earth/mwdbii/PISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plakeisland" feature="land" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKEISLAND.PNT </sourcefile>
-                </vector>
-                <vector name="plake" feature="sea" connect="waterbodies">
-                    <sourcefile format="PNT"> earth/mwdbii/PLAKE.PNT </sourcefile>
-                </vector>
-                <vector name="pglacier" feature="sea">
-                    <sourcefile format="PNT"> earth/mwdbii/PGLACIER.PNT </sourcefile>
-                </vector>
-            </layer>
-        
             <!-- This layer provides the colorization -->
             <layer name="colorme" backend="filter">
                 <filter name="texturecolorizer" type="colorize">
@@ -73,13 +53,17 @@
             </layer>
         
             <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pcoast" feature="coast">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <pen color="#555753" />
+                </vector>
                 <vector name="pdiffborder" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PDIFFBORDER.PNT </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#555753" />
                 </vector>
                 <vector name="pusa48" feature="border" connect="borders">
                     <sourcefile format="PNT"> earth/mwdbii/PUSA48.DIFF.PNT </sourcefile>
-                    <pen color="#f86649" />
+                    <pen color="#555753" />
                 </vector>
                 <vector name="international dateline" feature="border">
                     <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
@@ -152,6 +136,10 @@
                 </property>
             </group>
             <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>true</value>
+                </property>
                 <property name="waterbodies">
                     <available>false</available>
                     <value>false</value>
@@ -257,39 +245,39 @@
                 <heading>Precipitation</heading>
 
                 <item name="precip0">
-                    <icon color="#ff0000"/>
+                    <icon color="#ec7331"/>
                     <text>0 mm</text>
                 </item>
                 <item name="precip10">
-                    <icon color="#ff8000"/>
+                    <icon color="#f29b68"/>
                     <text>10 mm</text>
                 </item>
                 <item name="precip40">
-                    <icon color="#ffff00"/>
+                    <icon color="#ffeb55"/>
                     <text>40 mm</text>
                 </item>
                 <item name="precip63">
-                    <icon color="#80db00"/>
+                    <icon color="#77b753"/>
                     <text>63 mm</text>
                 </item>
                 <item name="precip89">
-                    <icon color="#00ba00"/>
+                    <icon color="#009966"/>
                     <text>89 mm</text>
                 </item>
                 <item name="precip127">
-                    <icon color="#4fac80"/>
+                    <icon color="#00a7b3"/>
                     <text>127 mm</text>
                 </item>
                 <item name="precip256">
-                    <icon color="#9f9fff"/>
+                    <icon color="#2c72c7"/>
                     <text>256 mm</text>
                 </item>
                 <item name="precip512">
-                    <icon color="#6a6aff"/>
+                    <icon color="#0057ae"/>
                     <text>512 mm</text>
                 </item>
                 <item name="precip1024">
-                    <icon color="#0000ff"/>
+                    <icon color="#00438a"/>
                     <text>1024 mm or more</text>
                 </item>
             </section>
