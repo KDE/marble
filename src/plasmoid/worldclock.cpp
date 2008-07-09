@@ -36,7 +36,7 @@
 #include <Plasma/DataEngine>
 
 //Marble
-//#include "globals.h"
+#include "global.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleAbstractFloatItem.h"
@@ -104,13 +104,15 @@ void WorldClock::init()
         m_showDate = true;
     }
 
+    m_lastRect = geometry().toRect();
+
     m_map = new MarbleMap(  );
     m_map->setProjection( Equirectangular );
 
-    m_map->setSize(geometry().size().width(), geometry().size().height());
+    m_map->setSize(m_lastRect.width(), m_lastRect.height());
     //The radius of the map using this projection 
     //will always be 1/4 of the desired width.
-    m_map->setRadius( (geometry().size().width() / 4 ) );
+    m_map->setRadius( (m_lastRect.height() / 2 ) );
 
     //offset so that the date line isn't
     //right on the edge of the map
@@ -153,7 +155,6 @@ void WorldClock::init()
                                     Plasma::AlignToMinute);
 
     m_points = QHash<QString, QPoint>();
-    m_lastRect = geometry().toRect();
 
 
     //We need to zoom the map every time we change size
@@ -169,7 +170,7 @@ void WorldClock::resizeMap()
     m_map->setSize(m_lastRect.width(), m_lastRect.height());
     //The radius of the map using this projection 
     //will always be 1/4 of the desired width.
-    m_map->setRadius( (m_lastRect.width() / 4 ) );
+    m_map->setRadius( (m_lastRect.height() / 2 ) );
     m_map->setNeedsUpdate();
     update();
 }
@@ -378,26 +379,29 @@ void WorldClock::paintInterface(QPainter *p,
     }
 
     //Show the location on the map
-    int tzx;
-    int tzy;
+    int tzx = 0;
+    int tzy = 0;
     double lon = m_locations.value(m_locationkey).longitude();
     double lat = m_locations.value(m_locationkey).latitude();
+    lon *= DEG2RAD;
+    lat *= DEG2RAD;
     //kDebug() << "TZ " << m_locationkey <<  " lon, lat = " << lon << lat;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
               ->screenCoordinates(lon, lat,
                                   m_map->viewParams()->viewport(),
                                   tzx, tzy);
-    if ( ok ) {
+    //kDebug() << "Coordinates are at: " << tzx << tzy;
+    if ( ok && m_isHovered ) {
         //kDebug() << "returned x,y = " << tzx << tzy;
         QPoint tz( tzx, tzy );
         QPen pen( QColor( 0xFF, 0x00, 0x00 ) );
-        int radius = m_lastRect.width() / 10;
+        int radius = m_lastRect.width() / 15;
         //first the circle...
-        pen.setWidth( radius / 10 );
+        pen.setWidth( radius / 7 );
         p->setPen( pen );
         p->drawEllipse( tz, radius, radius );
         //now the crosshairs
-        pen.setWidth( 1 );
+        pen.setWidth( pen.width() / 2 );
         p->setPen( pen );
         p->drawLine( tz.x()-radius, tz.y(), tz.x()+radius, tz.y() );
         p->drawLine( tz.x(), tz.y()-radius, tz.x(), tz.y()+radius );
