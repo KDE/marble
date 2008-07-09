@@ -14,6 +14,7 @@
 #include <QtTest/QtTest>
 #include <QtCore/QtCore>
 #include <QtCore/QTime>
+#include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
 class MarbleWidgetSpeedTest: public QObject
@@ -31,12 +32,14 @@ class MarbleWidgetSpeedTest: public QObject
 
 void MarbleWidgetSpeedTest::initTestCase()
 {
-  m_marbleWidget = new MarbleWidget();
-  m_marbleWidget->show();
+    MarbleDirs::setMarbleDataPath( DATA_PATH );
+    MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
+    m_marbleWidget = new MarbleWidget();
+    m_marbleWidget->show();
 }
 void MarbleWidgetSpeedTest::cleanupTestCase()
 {
-  delete m_marbleWidget;
+    delete m_marbleWidget;
 }
 void MarbleWidgetSpeedTest::timeTest()
 {
@@ -78,7 +81,14 @@ void MarbleWidgetSpeedTest::timeTest()
 
 }
 
-QTEST_MAIN(MarbleWidgetSpeedTest) 
+//QTEST_MAIN(MarbleWidgetSpeedTest)
+int main( int argc, char ** argv )
+{
+    QApplication app( argc, argv );
+    MarbleWidgetSpeedTest speedTest;
+    QTest::qExec( &speedTest );
+    return 0;
+}
 #include "MarbleWidgetSpeedTest.moc"
   
 

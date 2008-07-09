@@ -85,6 +85,14 @@ set_target_properties( ${_target_name} PROPERTIES
 
 endmacro( marble_add_designer_plugin _target_name )
 
+if( WIN32 )
+    set( DATA_PATH ${CMAKE_INSTALL_PREFIX}/${MARBLE_DATA_PATH} )
+    set( PLUGIN_PATH ${CMAKE_INSTALL_PREFIX}/${MARBLE_PLUGIN_PATH} )
+else( WIN32 )
+    set( DATA_PATH ${MARBLE_DATA_PATH} )
+    set( PLUGIN_PATH ${MARBLE_PLUGIN_PATH} )
+endif( WIN32 )
+
 macro( marble_add_test TEST_NAME )
     if( BUILD_MARBLE_TESTS )
         set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp )
