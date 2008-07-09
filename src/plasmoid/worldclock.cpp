@@ -54,6 +54,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     m_sun(0)
 {
     setHasConfigurationInterface(true);
+    setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
     //so that the map fits properly
     resize(QSize(400, 200));
@@ -152,7 +153,8 @@ void WorldClock::init()
                                     Plasma::AlignToMinute);
 
     m_points = QHash<QString, QPoint>();
-    m_lastRect = QRect( 0, 0, 1, 1 );
+    m_lastRect = geometry().toRect();
+
 
     //We need to zoom the map every time we change size
     connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
@@ -164,10 +166,10 @@ WorldClock::~WorldClock()
  
 void WorldClock::resizeMap()
 {
-    m_map->setSize(geometry().size().width(), geometry().size().height());
+    m_map->setSize(m_lastRect.width(), m_lastRect.height());
     //The radius of the map using this projection 
     //will always be 1/4 of the desired width.
-    m_map->setRadius( (geometry().size().width() / 4 ) );
+    m_map->setRadius( (m_lastRect.width() / 4 ) );
     m_map->setNeedsUpdate();
     update();
 }
@@ -360,6 +362,7 @@ void WorldClock::paintInterface(QPainter *p,
         m_map->setRadius( m_lastRect.width() / 4 );
         recalculatePoints();
         recalculateFonts();
+        resizeMap();
     }
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
