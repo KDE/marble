@@ -357,7 +357,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
 
     d->notifyModelChanged();
-
 }
 
 void MarbleModel::setupTextureMapper( Projection projection )
@@ -425,7 +424,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
-            // Create the height map image a.k.a viewParams->m_canvasImage.
+	    // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->showElevationModel()
@@ -439,36 +438,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                 // Recolorize the heightmap using the VectorMap
                 d->m_texcolorizer->colorize( viewParams );
             }
-/*
-            if( !d->m_mapTheme->map()->filters().isEmpty() ) {
-                GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
-                viewParams->coastImage()->fill( Qt::transparent );
-                // Create VectorMap
-                d->m_veccomposer->drawTextureMap( viewParams );
-
-                //set default values just in case
-                QString seafile = MarbleDirs::path( "seacolors.leg" );
-                QString landfile = MarbleDirs::path( "landcolors.leg" );
-
-                if( filter->type() == "colorize" ) {
-                    QList<GeoScenePalette*> palette = filter->palette();
-                    foreach ( GeoScenePalette *curPalette, palette ) {
-                        if( curPalette->type() == "sea" ) {
-                            seafile = MarbleDirs::path( curPalette->file() );
-                        } else if( curPalette->type() == "land" ) {
-                            landfile = MarbleDirs::path( curPalette->file() );
-                        }
-                    }
-                }
-                if( d->m_texcolorizer->seafile() != seafile ||
-                    d->m_texcolorizer->landfile() != landfile ) {
-
-                    d->m_texcolorizer->generatePalette( seafile, landfile );
-                }
-                // Recolorize the heightmap using the VectorMap
-                d->m_texcolorizer->colorize( viewParams );
-            } //else { qDebug() << "No filters to act on..."; }
-*/
         }
     }
 

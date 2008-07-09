@@ -123,17 +123,16 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 
     //	const int detail = 0;
     const int  detail = getDetailLevel( viewport->radius() );
-    GeoDataPoint   corner;
 
     for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
           itPolyLine < itEndPolyLine;
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
-        GeoDataPoint::Vector  boundary = (*itPolyLine)->getBoundary();
+        GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
 
         for ( int i = 0; i < 5; ++i ) {
-            qbound = boundary[i].quaternion();
+            qbound = boundary[i]->quaternion();
 
             qbound.rotateAroundAxis(m_rotMatrix); 
             if ( qbound.v[Q_Z] > m_zBoundingBoxLimit ) {
@@ -184,13 +183,13 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         // This sorts out polygons by bounding box which aren't visible at all.
         m_offset = 0;
 
-        GeoDataPoint::Vector  boundary = (*itPolyLine)->getBoundary();
+        GeoDataCoordinates::PtrVector  boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
 
         // Let's just use the top left and the bottom right bounding
         // box point for this projection.
         for ( int i = 1; i < 3; ++i ) {
-            boundary[i].geoCoordinates(lon, lat);
+            boundary[i]->geoCoordinates(lon, lat);
             x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
             y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
@@ -248,8 +247,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     }
 }
 
-void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap, 
-					  ViewportParams* viewport )
+void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
+                                          ViewportParams* viewport )
 {
     clear();
     int  radius = viewport->radius();
@@ -278,13 +277,13 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         // This sorts out polygons by bounding box which aren't visible at all.
         m_offset = 0;
 
-        GeoDataPoint::Vector  boundary = (*itPolyLine)->getBoundary();
+        GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
         boundingPolygon.clear();
 
         // Let's just use the top left and the bottom right bounding box point for 
         // this projection
         for ( int i = 1; i < 3; ++i ) {
-            boundary[i].geoCoordinates(lon, lat);
+            boundary[i]->geoCoordinates(lon, lat);
             x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
             y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 
@@ -342,8 +341,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     }
 }
 
-void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-                                GeoDataPoint::Vector::ConstIterator  itEndPoint,
+void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
+                                GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
                                 const int detail, ViewportParams *viewport )
 {
     switch( viewport->projection() ) {
@@ -362,12 +361,12 @@ void VectorMap::createPolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoin
     }
 }
 
-void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-					 GeoDataPoint::Vector::ConstIterator  itEndPoint,
-					 const int detail,
-					 ViewportParams *viewport )
+void VectorMap::sphericalCreatePolyLine(
+GeoDataCoordinates::Vector::ConstIterator  itStartPoint,
+GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+const int detail, ViewportParams *viewport )
 {
-    GeoDataPoint::Vector::const_iterator  itPoint;
+    GeoDataCoordinates::Vector::const_iterator  itPoint;
 
     int  radius = viewport->radius();
 
@@ -441,12 +440,12 @@ void VectorMap::sphericalCreatePolyLine( GeoDataPoint::Vector::ConstIterator  it
     }
 }
 
-void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-					   GeoDataPoint::Vector::ConstIterator  itEndPoint,
-					   const int detail,
-					   ViewportParams *viewport )
+void VectorMap::rectangularCreatePolyLine(
+    GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
+    GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+    const int detail, ViewportParams *viewport )
 {
-    GeoDataPoint::Vector::const_iterator  itPoint;
+    GeoDataCoordinates::Vector::const_iterator  itPoint;
 
     Quaternion qpos;
 
@@ -549,12 +548,12 @@ void VectorMap::rectangularCreatePolyLine( GeoDataPoint::Vector::ConstIterator  
     }
 }
 
-void VectorMap::mercatorCreatePolyLine( GeoDataPoint::Vector::ConstIterator  itStartPoint, 
-					GeoDataPoint::Vector::ConstIterator  itEndPoint,
+void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
+					GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
 					const int detail,
 					ViewportParams *viewport )
 {
-    GeoDataPoint::Vector::const_iterator  itPoint;
+    GeoDataCoordinates::Vector::const_iterator  itPoint;
 
     Quaternion qpos;
 

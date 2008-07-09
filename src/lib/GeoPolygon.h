@@ -19,13 +19,13 @@
 #include "marble_export.h"
 
 #include "Quaternion.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 /*
 	GeoDataPoint defines the nodes in a polyLine 
 */
 
-class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector 
+class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 {
  public:
     GeoPolygon();
@@ -60,7 +60,7 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector
     void setDateLine(int dateLineCrossing){ m_dateLineCrossing = dateLineCrossing; }
 
     void setBoundary( double, double, double, double );
-    GeoDataPoint::Vector getBoundary() const { return m_boundary; } 
+    GeoDataCoordinates::PtrVector getBoundary() const { return m_boundary; }
 
     void displayBoundary();
 
@@ -69,11 +69,11 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataPoint::Vector
 
 //    QString m_sourceFileName;
 
- private:	
+ private:
     int   m_dateLineCrossing;
     bool  m_closed;
 
-    GeoDataPoint::Vector  m_boundary;
+    GeoDataCoordinates::PtrVector  m_boundary;
 
     double  m_lonLeft;
     double  m_latTop;
