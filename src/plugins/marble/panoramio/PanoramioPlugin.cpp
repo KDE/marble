@@ -51,7 +51,7 @@ QString PanoramioPlugin::nameId() const
 
 QString PanoramioPlugin::description() const
 {
-    return tr ("Autoamtically downloads images from around the world in preference to their popularity" );
+    return tr ("Automatically downloads images from around the world in preference to their popularity" );
 }
 
 QIcon PanoramioPlugin::icon () const

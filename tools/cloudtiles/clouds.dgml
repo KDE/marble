@@ -8,7 +8,7 @@
 		<icon>clouds-preview.png</icon>
         <visible>false</visible>
 
-		<description>A Real Time.Cloud Map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</description>
+		<description>A Real Time Cloud Map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</description>
 		
 		<layer type="bitmap" name="clouds"/>
 
