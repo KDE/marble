@@ -398,8 +398,10 @@ void WorldClock::paintInterface(QPainter *p,
         QPoint tz( tzx, tzy );
         int radius = m_lastRect.width() / 40;
         QRadialGradient grad( tz, radius );
-        grad.setColorAt( 0, QColor( 0xFF, 0xFF, 0x00 ) );
-        grad.setColorAt( 1, QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
+        grad.setColorAt( 0,   QColor( 0xFF, 0xFF, 0x00, 0xFF ) );
+        grad.setColorAt( 0.33, QColor( 0xFF, 0xFF, 0x00, 0x46 ) );
+        grad.setColorAt( 0.66, QColor( 0xFF, 0xFF, 0x00, 0x14 ) );
+        grad.setColorAt( 1,   QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
         p->setPen( Qt::NoPen );
         p->setBrush( QBrush( grad ) );
         p->drawEllipse( tz, radius, radius );
