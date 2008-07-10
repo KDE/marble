@@ -22,6 +22,12 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
+#ifdef Q_OS_WIN
+//for getting appdata path
+#define _WIN32_IE 0x0400
+#include <shlobj.h>
+#endif
+
 #include <config-marble.h>
 
 namespace
@@ -209,13 +215,33 @@ if ( !runTimeMarblePluginPath.isEmpty() )
 }
 
 QString MarbleDirs::localPath() 
-{ 
+{
+#ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/data" ); // local path
+#else
+    HWND hwnd;
+    CHAR *appdata_path = new CHAR[MAX_PATH];
+    
+    SHGetSpecialFolderPathA( hwnd, appdata_path, CSIDL_APPDATA, 0 );
+    QString appdata( appdata_path );
+    delete appdata_path;
+    return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/data" ); // local path
+#endif
 }
 
 QString MarbleDirs::pluginLocalPath() 
-{ 
+{
+#ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
+#else
+    HWND hwnd;
+    CHAR *appdata_path = new CHAR[MAX_PATH];
+    
+    SHGetSpecialFolderPathA( hwnd, appdata_path, CSIDL_APPDATA, 0 );
+    QString appdata( appdata_path );
+    delete appdata_path;
+    return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/plugins" ); // local path
+#endif
 }
 
 QString MarbleDirs::marbleDataPath()
