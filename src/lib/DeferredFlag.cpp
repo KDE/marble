@@ -36,7 +36,7 @@ void DeferredFlag::setFlag( const QString& filename, const QSize& size )
 
 void DeferredFlag::slotDrawFlag()
 {
-    QString  keystring = QString( m_filename ).replace( "flags/", "" );
+    QString  keystring = QString( m_filename ).remove( "flags/" );
 
     if ( !QPixmapCache::find( keystring, m_pixmap ) ) {
         QSvgRenderer  svgobj( m_filename, this );
