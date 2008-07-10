@@ -61,7 +61,7 @@ GeoDataPolygon& GeoDataPolygon::operator=( const GeoDataPolygon & other )
 
 GeoDataPolygon::~GeoDataPolygon()
 {
-#if DEBUG_GEODATA
+#ifdef DEBUG_GEODATA
     qDebug() << "delete polygon";
 #endif
     delete d_polyg;

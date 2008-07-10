@@ -47,7 +47,7 @@ GeoDataLineString& GeoDataLineString::operator=( const GeoDataLineString & rhs )
 
 GeoDataLineString::~GeoDataLineString()
 {
-#if DEBUG_GEODATA
+#ifdef DEBUG_GEODATA
     qDebug() << "delete Linestring";
 #endif
     delete d;

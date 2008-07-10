@@ -51,7 +51,7 @@ GeoDataDocument::GeoDataDocument()
 
 GeoDataDocument::~GeoDataDocument()
 {
-#if DEBUG_GEODATA
+#ifdef DEBUG_GEODATA
     qDebug() << "delete Document";
 #endif
     delete d;

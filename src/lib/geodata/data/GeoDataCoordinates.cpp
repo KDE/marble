@@ -54,7 +54,7 @@ GeoDataCoordinates::GeoDataCoordinates()
 GeoDataCoordinates::~GeoDataCoordinates()
 {
     delete d_ptr;
-#if DEBUG_GEODATA
+#ifdef DEBUG_GEODATA
 //    qDebug() << "delete coordinates";
 #endif
 }

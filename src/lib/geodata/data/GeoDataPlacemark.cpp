@@ -56,7 +56,7 @@ GeoDataPlacemark::GeoDataPlacemark( const QString& name )
 
 GeoDataPlacemark::~GeoDataPlacemark()
 {
-#if DEBUG_GEODATA
+#ifdef DEBUG_GEODATA
     qDebug() << "delete Placemark";
 #endif
     delete d;

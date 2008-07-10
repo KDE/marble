@@ -25,7 +25,7 @@
 #include "GeoDataObject.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
-#ifndef M_PI 
+#ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
 
@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
      * @brief enum used constructor to specify the units used
      *
      * Internally we always use radian for mathematical convenience.
-     * However the Marble's interfaces to the outside should default 
+     * However the Marble's interfaces to the outside should default
      * to degrees.
      */
     enum Unit{
@@ -51,12 +51,12 @@ class GEODATA_EXPORT GeoDataCoordinates {
     /**
      * @brief enum used to specify the notation / numerical system
      *
-     * For degrees there exist two notations: 
-     * "Decimal" (base-10) and the "Sexagesimal DMS" (base-60) which is 
-     * traditionally used in cartography. Decimal notation 
-     * uses floating point numbers to specify parts of a degree. The 
-     * Sexagesimal DMS notation uses integer based 
-     * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree. 
+     * For degrees there exist two notations:
+     * "Decimal" (base-10) and the "Sexagesimal DMS" (base-60) which is
+     * traditionally used in cartography. Decimal notation
+     * uses floating point numbers to specify parts of a degree. The
+     * Sexagesimal DMS notation uses integer based
+     * Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree.
      */
     enum Notation{
         Decimal,
@@ -82,7 +82,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     GeoDataCoordinates( double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian, int _detail = 0 );
 
-    ~GeoDataCoordinates();
+    virtual ~GeoDataCoordinates();
 
     double altitude() const;
     void   setAltitude( const double altitude );
@@ -93,7 +93,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     void set(double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
-    void geoCoordinates( double& lon, double& lat, 
+    void geoCoordinates( double& lon, double& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
                                                                 const;
 
