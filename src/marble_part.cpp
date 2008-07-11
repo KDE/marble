@@ -113,7 +113,7 @@ ControlView* MarblePart::controlView() const
 
 KAboutData *MarblePart::createAboutData()
 {
-  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), "0.5" );
+  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), "0.6" );
 }
 
 bool MarblePart::openUrl( const KUrl &url )
@@ -228,7 +228,7 @@ void MarblePart::showFullScreen( bool isChecked )
         if ( KApplication::activeWindow() )
 //  TODO: Deprecate alternative once KDE 4.0 is outdated
 #if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), true );
+            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), false );
 #else
 	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() & ~Qt::WindowFullScreen );
 #endif

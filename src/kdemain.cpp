@@ -31,9 +31,9 @@ int main (int argc, char *argv[])
 {
     KAboutData aboutData( "marble", 0, 
                           ki18n( "Marble Desktop Globe" ),
-                          "0.5 -- KDE 4.0 Release", 
+                          "0.6 -- KDE 4.1 Release", 
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007" ),
+                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
@@ -42,6 +42,9 @@ int main (int argc, char *argv[])
     aboutData.addAuthor( ki18n( "Inge Wallin" ),
                          ki18n( "Co-maintainer and Architect" ),
                          "inge@lysator.liu.se" );
+    aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
+                         ki18n( "OpenStreetMap Integration" ),
+                         "jensmh@gmx.de " );
 
     KCmdLineArgs::init( argc, argv, &aboutData );
 

@@ -82,7 +82,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     GeoDataCoordinates( double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian, int _detail = 0 );
 
-    ~GeoDataCoordinates();
+    virtual ~GeoDataCoordinates();
 
     double altitude() const;
     void   setAltitude( const double altitude );
