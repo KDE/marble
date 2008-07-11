@@ -220,10 +220,10 @@ QString MarbleDirs::localPath()
     return QString( QDir::homePath() + "/.marble/data" ); // local path
 #else
     HWND hwnd;
-    CHAR *appdata_path = new CHAR[MAX_PATH];
+    WCHAR *appdata_path = new WCHAR[MAX_PATH];
     
-    SHGetSpecialFolderPathA( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata( appdata_path );
+    SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
+    QString appdata = QString::fromWCharArray( appdata_path );
     delete appdata_path;
     return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/data" ); // local path
 #endif
@@ -235,10 +235,10 @@ QString MarbleDirs::pluginLocalPath()
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
 #else
     HWND hwnd;
-    CHAR *appdata_path = new CHAR[MAX_PATH];
+    WCHAR *appdata_path = new WCHAR[MAX_PATH];
     
-    SHGetSpecialFolderPathA( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata( appdata_path );
+    SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
+    QString appdata = QString::fromWCharArray( appdata_path );
     delete appdata_path;
     return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/plugins" ); // local path
 #endif
