@@ -67,6 +67,13 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      */
     static double normalizeLat( double lat );
 
+    /**
+     * @brief normalize both longitude and latitude at the same time
+     * @param lon the longitude value
+     * @param lat the latitude value
+     */
+    static void normalizeLonLat( double &lon, double &lat );
+
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream

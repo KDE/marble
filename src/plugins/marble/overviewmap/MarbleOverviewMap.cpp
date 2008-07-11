@@ -118,6 +118,7 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
     double lon, lat;
     viewport->centerCoordinates( lon, lat );
+    GeoDataPoint::normalizeLonLat( lon, lat );
     double x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
     double y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
 
