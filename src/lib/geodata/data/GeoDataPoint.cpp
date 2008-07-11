@@ -61,26 +61,93 @@ double GeoDataPoint::normalizeLat( double lat )
 {
     if ( lat > ( +M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
-        double temp = lat - ( cycles * 2 * M_PI );
+        double temp;
+        if( cycles == 0 ) { // pi/2 < lat < pi
+            temp = M_PI - lat;
+        } else {
+            temp = lat - ( cycles * 2 * M_PI );
+        }
         if ( temp > ( +M_PI / 2.0 ) ) {
-            return +M_PI - temp;
+            return ( +M_PI - temp );
         }
         if ( temp < ( -M_PI / 2.0 ) ) {
-            return -M_PI - temp;
+            return ( -M_PI - temp );
+        }
+        return temp;
+    } 
+    if ( lat < ( -M_PI / 2.0 ) ) {
+        int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
+        double temp;
+        if( cycles == 0 ) { 
+            temp = -M_PI - lat;
+        } else {
+            temp = lat - ( cycles * 2 * M_PI );
+        }
+        if ( temp > ( +M_PI / 2.0 ) ) {
+            return ( +M_PI - temp );
+        }
+        if ( temp < ( -M_PI / 2.0 ) ) {
+            return ( -M_PI - temp );
+        }
+        return temp;
+    }
+    return lat;
+}
+
+void GeoDataPoint::normalizeLonLat( double &lon, double &lat )
+{
+    if ( lon > +M_PI ) {
+        int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
+        lon = lon - ( cycles * 2 * M_PI );
+    } 
+    if ( lon < -M_PI ) {
+        int cycles = (int)( ( lon - M_PI ) / ( 2 * M_PI ) );
+        lon = lon - ( cycles * 2 * M_PI );
+    }
+
+    if ( lat > ( +M_PI / 2.0 ) ) {
+        int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
+        double temp;
+        if( cycles == 0 ) { // pi/2 < lat < pi
+            temp = M_PI - lat;
+        } else {
+            temp = lat - ( cycles * 2 * M_PI );
+        }
+        if ( temp > ( +M_PI / 2.0 ) ) {
+            lat =  +M_PI - temp;
+        }
+        if ( temp < ( -M_PI / 2.0 ) ) {
+            lat =  -M_PI - temp;
+        }
+        lat = temp;
+        if( lon > 0 ) { 
+            lon = -M_PI + lon;
+        } else {
+            lon = M_PI + lon;
         }
     } 
     if ( lat < ( -M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
-        double temp = lat - ( cycles * 2 * M_PI );
+        double temp;
+        if( cycles == 0 ) { 
+            temp = -M_PI - lat;
+        } else {
+            temp = lat - ( cycles * 2 * M_PI );
+        }
         if ( temp > ( +M_PI / 2.0 ) ) {
-            return +M_PI - temp;
+            lat =  +M_PI - temp;
         }
         if ( temp < ( -M_PI / 2.0 ) ) {
-            return -M_PI - temp;
+            lat =  -M_PI - temp;
+        }
+        lat = temp;
+        if( lon > 0 ) { 
+            lon = -M_PI + lon;
+        } else {
+            lon = M_PI + lon;
         }
     } 
-
-    return lat;
+    return;
 }
 
 GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
