@@ -136,7 +136,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * get the pixel position on screen of this @c AbstractLayerData
      * @param screenSize the size of the Widget Canvas
      * @param invRotAxis Quaternion representation of the rotation of
-     *                   the glove, previously inverted
+     *                   the globe, previously inverted
      * @param radius the current radius of the globe, measuer of zoom
      *               level
      * @param [out]position the QPoint that will be updated with the 
