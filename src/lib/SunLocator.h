@@ -37,7 +37,7 @@ class SunLocator : public QObject
  public:
     /** At the moment Sunlocator does not take ownership of dateTime.
 	However in the destructor there is a delete commented out.
-	So strictly Q_DISABLE_COPY is not neccessary in this class.
+	So strictly Q_DISABLE_COPY is not necessary in this class.
 	FIXME: clearify this issue.
     */
     explicit SunLocator(ExtDateTime *dateTime);
