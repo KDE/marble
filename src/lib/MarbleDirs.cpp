@@ -9,7 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-
 #include "MarbleDirs.h"
 
 #include <QtCore/QDebug>
@@ -219,11 +218,11 @@ QString MarbleDirs::localPath()
 #ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/data" ); // local path
 #else
-    HWND hwnd;
+    HWND hwnd = 0;
     WCHAR *appdata_path = new WCHAR[MAX_PATH];
     
     SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata = QString::fromWCharArray( appdata_path );
+    QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
     delete appdata_path;
     return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/data" ); // local path
 #endif
@@ -234,11 +233,11 @@ QString MarbleDirs::pluginLocalPath()
 #ifndef Q_OS_WIN
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
 #else
-    HWND hwnd;
+    HWND hwnd = 0;
     WCHAR *appdata_path = new WCHAR[MAX_PATH];
     
     SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
-    QString appdata = QString::fromWCharArray( appdata_path );
+    QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
     delete appdata_path;
     return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/plugins" ); // local path
 #endif
