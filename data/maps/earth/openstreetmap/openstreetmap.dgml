@@ -26,7 +26,9 @@
                     <sourcedir format="PNG"> earth/openstreetmap </sourcedir>
                     <storageLayout levelZeroColumns="1" levelZeroRows="1" mode="OpenStreetMap" />
                     <projection name="Mercator" />
-                    <downloadUrl protocol="http" host="tile.openstreetmap.org" path="/" />
+                    <downloadUrl protocol="http" host="a.tile.openstreetmap.org" path="/" />
+                    <downloadUrl protocol="http" host="b.tile.openstreetmap.org" path="/" />
+                    <downloadUrl protocol="http" host="c.tile.openstreetmap.org" path="/" />
                 </texture>
             </layer>
         </map>

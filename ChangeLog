@@ -1,3 +1,14 @@
+2008-07-16  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.h:
+    * data/maps/earth/openstreetmap/openstreetmap.dgml:
+
+    Implement round robin algorithm for fetching tiles.
+    This was brought up by the OpenStreetMap tile server admins
+    and should go into 4.1 as well.
+
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataPoint.{cpp,h}:

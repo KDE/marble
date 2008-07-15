@@ -78,6 +78,6 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
     if ( !pathStr.isEmpty() )
         url.setPath( pathStr );
 
-    parentItem.nodeAs<GeoSceneTexture>()->setDownloadUrl( url );
+    parentItem.nodeAs<GeoSceneTexture>()->addDownloadUrl( url );
     return 0;
 }
