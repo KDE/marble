@@ -39,6 +39,11 @@ class FileStoragePolicy : public StoragePolicy
         bool updateFile( const QString &fileName, const QByteArray &data );
 
         /**
+         * Clears the cache.
+         */
+	void clearCache();
+
+        /**
          * Returns the last error message.
          */
         QString lastErrorMessage() const;

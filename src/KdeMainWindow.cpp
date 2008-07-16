@@ -18,6 +18,12 @@
 #include <kparts/part.h>
 #include <kparts/componentfactory.h>
 
+#include <QtCore/QDebug>
+
+// GeoData
+#include <GeoSceneDocument.h>
+#include <GeoSceneHead.h>
+
 // Local dir
 #include "ControlView.h"
 #include "marble_part.h"
@@ -40,6 +46,10 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     m_part->createInfoBoxesMenu();
 
     setAutoSaveSettings();
+
+    connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
+	     this, SLOT( setMapTitle() ) );
+    setMapTitle();
 }
 
 MainWindow::~MainWindow()
@@ -55,6 +65,11 @@ ControlView* MainWindow::marbleControl() const
 MarbleWidget* MainWindow::marbleWidget() const
 {
     return m_part->controlView()->marbleWidget();
+}
+
+void MainWindow::setMapTitle()
+{
+    setCaption( marbleWidget()->mapTheme()->head()->name() );
 }
 
 #include "KdeMainWindow.moc"

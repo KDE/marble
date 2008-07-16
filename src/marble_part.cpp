@@ -618,20 +618,20 @@ void MarblePart::editSettings()
         QWidget *w_viewSettings = new QWidget( 0 );
         w_viewSettings->setObjectName( "view_page" );
         ui_viewSettings.setupUi( w_viewSettings );
-        m_configDialog->addPage( w_viewSettings, i18n( "View" ), "preferences-view" );
+        m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
 
         // navigation page
         Ui_MarbleNavigationSettingsWidget ui_navigationSettings;
         QWidget *w_navigationSettings = new QWidget( 0 );
         w_navigationSettings->setObjectName( "navigation_page" );
         ui_navigationSettings.setupUi( w_navigationSettings );
-        m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ), "preferences-navigation" );
+        m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ), "transform-move" );
 
         // cache page
         MarbleCacheSettingsWidget *w_cacheSettings = 
             new MarbleCacheSettingsWidget();
         w_cacheSettings->setObjectName( "cache_page" );
-        m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-cache" );
+        m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-web-browser-cache" );
         connect( w_cacheSettings, SIGNAL( clearVolatileCache() ), m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
         connect( w_cacheSettings, SIGNAL( clearPersistentCache() ), m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 

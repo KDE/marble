@@ -32,6 +32,9 @@ class MainWindow : public KXmlGuiWindow
     ControlView* marbleControl() const;
     MarbleWidget* marbleWidget() const;
 
+ public slots:
+    void setMapTitle();
+
  private:
     MarblePart *m_part;
 };

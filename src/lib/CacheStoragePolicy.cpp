@@ -42,6 +42,11 @@ bool CacheStoragePolicy::updateFile( const QString &fileName, const QByteArray &
     return true;
 }
 
+void CacheStoragePolicy::clearCache()
+{
+    m_cache.clear();
+}
+
 QString CacheStoragePolicy::lastErrorMessage() const
 {
     return m_errorMsg;
