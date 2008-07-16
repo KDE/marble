@@ -219,7 +219,7 @@ QString MarbleDirs::localPath()
     return QString( QDir::homePath() + "/.marble/data" ); // local path
 #else
     HWND hwnd = 0;
-    WCHAR *appdata_path = new WCHAR[MAX_PATH];
+    WCHAR *appdata_path = new WCHAR[MAX_PATH+1];
     
     SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
     QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
@@ -234,7 +234,7 @@ QString MarbleDirs::pluginLocalPath()
     return QString( QDir::homePath() + "/.marble/plugins" ); // local path
 #else
     HWND hwnd = 0;
-    WCHAR *appdata_path = new WCHAR[MAX_PATH];
+    WCHAR *appdata_path = new WCHAR[MAX_PATH+1];
     
     SHGetSpecialFolderPathW( hwnd, appdata_path, CSIDL_APPDATA, 0 );
     QString appdata = QString::fromUtf16( reinterpret_cast<ushort*>( appdata_path ) );
