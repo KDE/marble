@@ -27,6 +27,8 @@ class StoragePolicy
 
         virtual bool updateFile( const QString &fileName, const QByteArray &data ) = 0;
 
+	virtual void clearCache() = 0;
+
         virtual QString lastErrorMessage() const = 0;
 };
 

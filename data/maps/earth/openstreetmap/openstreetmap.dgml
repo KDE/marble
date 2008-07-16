@@ -244,15 +244,6 @@
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
                 <heading>Coordinate Grid</heading>
             </section>
-
-            <section name="compass" checkable="true" connect="compass" spacing="12">
-                <heading>Compass</heading>
-            </section>
-
-            <section name="scalebar" checkable="true" connect="scalebar" spacing="12">
-                <heading>Scale Bar</heading>
-            </section>
-
         </legend>
     </document>
 </dgml>

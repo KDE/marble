@@ -470,12 +470,7 @@ void MarbleWidget::zoomView(int newZoom)
 
     // We only have to repaint the background every time if the globe
     // doesn't cover the whole image.
-    if ( ! d->m_map->mapCoversViewport() ) {
-        setAttribute( Qt::WA_NoSystemBackground, false );
-    }
-    else {
-        setAttribute( Qt::WA_NoSystemBackground, true );
-    }
+    setAttribute( Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     emit distanceChanged( distanceString() );
 
@@ -572,12 +567,7 @@ void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
         d->m_map->centerOn( lon, lat );
     }
 
-    if ( d->m_map->mapCoversViewport() ) {
-        setAttribute(Qt::WA_NoSystemBackground, true );
-    }
-    else {
-        setAttribute(Qt::WA_NoSystemBackground, false );
-    }
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     repaint();
 }
@@ -616,14 +606,10 @@ void MarbleWidget::setProjection( Projection projection )
 {
     d->m_map->setProjection( projection );
 
-    if ( d->m_map->mapCoversViewport()  ) {
-        setAttribute( Qt::WA_NoSystemBackground, true );
-    }
-    else {
-        setAttribute( Qt::WA_NoSystemBackground, false );
-    }
+    setAttribute( Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     repaint();
+    setActiveRegion();
 }
 
 void MarbleWidget::setProjection( int projection )
@@ -712,12 +698,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
     //	Redefine the area where the mousepointer becomes a navigationarrow
     setActiveRegion();
 
-    if ( d->m_map->mapCoversViewport() ) {
-        setAttribute(Qt::WA_NoSystemBackground, true );
-    }
-    else {
-        setAttribute(Qt::WA_NoSystemBackground, false );
-    }
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     repaint();
 }

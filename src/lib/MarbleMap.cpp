@@ -72,7 +72,7 @@
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
           m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
-          m_volatileTileCacheLimit( 1024*3 ) // 3 KB
+          m_volatileTileCacheLimit( 1024*1024*30 ) // 30 MB
 {
     /* NOOP */
 }
@@ -1138,6 +1138,7 @@ FileViewModel* MarbleMap::fileViewModel() const
 
 void MarbleMap::clearPersistentTileCache()
 {
+    
 }
 
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )

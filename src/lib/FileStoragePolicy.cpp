@@ -15,6 +15,7 @@
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
+#include <QtCore/QDirIterator>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
@@ -73,6 +74,17 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     file.close();
 
     return true;
+}
+
+void FileStoragePolicy::clearCache()
+{
+    QDirIterator it( m_dataDirectory, QDirIterator::Subdirectories );
+    while (it.hasNext()) {
+	qDebug() << it.next();
+//      if( it.fileName().endsWith(".jpg") )
+//        QFile::remove( it.fileName() );
+    }
+
 }
 
 QString FileStoragePolicy::lastErrorMessage() const
