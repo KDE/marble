@@ -374,9 +374,9 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
     painter->setPen( QColor( Qt::black ) );
     painter->setBrush( QColor( 192, 192, 192, 192 ) );
 
-    painter->drawRect( 10, 5, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
+    painter->drawRect( 10, 105, 10 + QFontMetrics( m_font_regular ).boundingRect( distanceString ).width() + 5, 10 + m_fontascent + 2 );
     painter->setFont( m_font_regular );
-    painter->drawText( 15, 10 + m_fontascent, distanceString );
+    painter->drawText( 15, 110 + m_fontascent, distanceString );
 }
 
 

@@ -154,15 +154,17 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           double& lon, double& lat,
                                           GeoDataPoint::Unit unit )
 {
-    int           halfImageWidth     = viewport->width() / 2;
-    int           halfImageHeight    = viewport->height() / 2;
     const double  inverseRadius = 1.0 / (double)(viewport->radius());
     bool          noerr         = false;
 
-    if ( viewport->radius() * viewport->radius() > (double)( ( x - halfImageWidth ) * ( x - halfImageWidth ) + ( y - halfImageHeight ) * ( y - halfImageHeight ) ) )
+    double radius = (double)( viewport->radius() );
+    double centerX = (double)( x - viewport->width() / 2 );
+    double centerY = (double)( y - viewport->height() / 2 );
+
+    if ( radius * radius > centerX * centerX + centerY * centerY )
     {
-        double qx = inverseRadius * (double)( x - halfImageWidth );
-        double qy = inverseRadius * (double)( halfImageHeight - y );
+        double qx = inverseRadius * +centerX;
+        double qy = inverseRadius * -centerY;
         double qr = 1.0 - qy * qy;
 
         double qr2z = qr - qx * qx;
