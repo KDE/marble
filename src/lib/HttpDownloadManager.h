@@ -75,6 +75,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      */
     void setActivatedJobsLimit( int activatedJobsLimit );
 
+    StoragePolicy* storagePolicy() const;
+
  public Q_SLOTS:
     /**
      * Adds a new job with the relative url and the given id.

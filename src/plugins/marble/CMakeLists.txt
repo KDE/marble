@@ -5,5 +5,4 @@ add_subdirectory( overviewmap )
 add_subdirectory( stars )
 add_subdirectory( mapscale )
 # add_subdirectory( panoramio )
-# add_subdirectory( satellites )
 

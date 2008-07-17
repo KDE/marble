@@ -78,13 +78,45 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
 
 void FileStoragePolicy::clearCache()
 {
-    QDirIterator it( m_dataDirectory, QDirIterator::Subdirectories );
-    while (it.hasNext()) {
-	qDebug() << it.next();
-//      if( it.fileName().endsWith(".jpg") )
-//        QFile::remove( it.fileName() );
+    if ( m_dataDirectory.isEmpty() || !m_dataDirectory.endsWith("data") )
+    {
+        qDebug() << "Error: Refusing to erase files under unknown conditions for safety reasons!";
+        return;
     }
 
+    QString cachedMapsDirectory = m_dataDirectory + "/maps";
+
+    QDirIterator it( cachedMapsDirectory, QDir::NoDotAndDotDot | QDir::Dirs );
+    qDebug() << cachedMapsDirectory;
+    while (it.hasNext()) {
+        it.next();
+        QString planetDirectory = it.filePath();
+        QDirIterator itPlanet( planetDirectory, QDir::NoDotAndDotDot | QDir::Dirs );
+        while (itPlanet.hasNext()) {
+            itPlanet.next();
+            QString themeDirectory = itPlanet.filePath();
+            QDirIterator itTheme( themeDirectory, QDir::NoDotAndDotDot | QDir::Dirs );
+            while (itTheme.hasNext()) {
+                itTheme.next();
+                QString tileDirectory = itTheme.filePath();
+                QDirIterator itTile( tileDirectory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories );
+                while (itTile.hasNext()) {
+                    itTile.next();
+                    QString filePath = itTile.filePath();
+
+                    // We try to be very careful and just delete images
+                    if ( filePath.toLower().endsWith( ".jpg" ) 
+                      || filePath.toLower().endsWith( ".png" )
+                      || filePath.toLower().endsWith( ".gif" )
+                      || filePath.toLower().endsWith( ".svg" )
+                    )
+                    {
+                        QFile::remove( filePath );
+                    }
+                }
+            }
+        }
+    }
 }
 
 QString FileStoragePolicy::lastErrorMessage() const

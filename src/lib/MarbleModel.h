@@ -254,6 +254,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
+    void clearPersistentTileCache();
+
 //  private Q_SLOTS:
     void paintTile(TextureTile* tile, int x, int y, int level, GeoSceneTexture *textureLayer, bool requestTileUpdate);
 

@@ -1138,7 +1138,7 @@ FileViewModel* MarbleMap::fileViewModel() const
 
 void MarbleMap::clearPersistentTileCache()
 {
-    
+    d->m_model->clearPersistentTileCache();
 }
 
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
