@@ -68,6 +68,11 @@ void HttpDownloadManager::setActivatedJobsLimit ( int activatedJobsLimit )
     m_activatedJobsLimit = activatedJobsLimit;
 }
 
+StoragePolicy* HttpDownloadManager::storagePolicy() const
+{
+    return m_storagePolicy;
+}
+
 void HttpDownloadManager::addJob ( const QString& relativeUrlString, const QString &id )
 {
     if ( !m_downloadEnabled )

@@ -47,6 +47,7 @@
 #include "PlaceMarkManager.h"
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
+#include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "TextureTile.h"
@@ -234,9 +235,8 @@ GeoSceneDocument* MarbleModel::mapTheme() const
 // If the tiles (for the lowest tile level) haven't been created already
 // then create them here and now.
 //
-// FIXME: Get rid of that awful 'parent' parameter and move the tile
-//        creation dialogs out of this function.  Change them into signals 
-//        instead.
+// FIXME: Move the tile creation dialogs out of this function.  Change 
+//        them into signals instead.
 // FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
 //
 
@@ -279,8 +279,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
         if ( !TileLoader::baseTilesAvailable( texture )
-	     && !installMap.isEmpty() )
-	{
+            && !installMap.isEmpty() )
+        {
             qDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
@@ -727,6 +727,47 @@ quint64 MarbleModel::volatileTileCacheLimit() const
 void MarbleModel::setVolatileTileCacheLimit( quint64 kiloBytes )
 {
     d->m_tileLoader->setVolatileCacheLimit( kiloBytes );
+}
+
+void MarbleModel::clearPersistentTileCache()
+{
+    downloadManager()->storagePolicy()->clearCache();
+
+    // Now create base tiles again if needed
+    if ( d->m_mapTheme->map()->hasTextureLayers() ) {
+        // If the tiles aren't already there, put up a progress dialog
+        // while creating them.
+
+        // As long as we don't have an Layer Management Class we just lookup 
+        // the name of the layer that has the same name as the theme ID
+        QString themeID = d->m_mapTheme->head()->theme();
+
+        GeoSceneTexture *texture = 
+            static_cast<GeoSceneTexture*>( d->m_mapTheme->map()->layer( themeID )->datasets().first() );
+
+        QString sourceDir = texture->sourceDir();
+        QString installMap = texture->installMap();
+        QString role = d->m_mapTheme->map()->layer( themeID )->role();
+
+        if ( !TileLoader::baseTilesAvailable( texture )
+            && !installMap.isEmpty() )
+        {
+            qDebug() << "Base tiles not available. Creating Tiles ... \n"
+                     << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
+            MarbleDirs::debug();
+
+            TileCreator *tileCreator = new TileCreator(
+                                     sourceDir,
+                                     installMap,
+                                     (role == "dem") ? "true" : "false" );
+
+            TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
+            tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
+                       d->m_mapTheme->head()->description() );
+            tileCreatorDlg.exec();
+            qDebug("Tile creation completed");
+        }
+    }
 }
 
 void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
