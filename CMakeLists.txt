@@ -57,9 +57,11 @@ if(WIN32)
   if(QTONLY)
     set(data_dir data)
     set(plugin_dir plugins)
+    set(cmake_modules_install_path ${CMAKE_ROOT}/Modules)
   else(QTONLY)
     set(data_dir ${DATA_INSTALL_DIR}/marble/data)
     set(plugin_dir ${PLUGIN_INSTALL_DIR}/plugins/marble)
+    set(cmake_modules_install_path ${DATA_INSTALL_DIR}/cmake/modules)
   endif(QTONLY)
 else(WIN32)
   if(APPLE)
@@ -91,9 +93,11 @@ else(WIN32)
     if (QTONLY)
       set(data_dir ${CMAKE_INSTALL_PREFIX}/share/apps/marble/data)
       set(plugin_dir ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/marble/plugins)
+      set(cmake_modules_install_path ${PACKAGE_ROOT_PREFIX}${CMAKE_ROOT}/Modules)
     else (QTONLY)
       set(data_dir ${DATA_INSTALL_DIR}/marble/data)
       set(plugin_dir ${PLUGIN_INSTALL_DIR}/plugins/marble)
+      set(cmake_modules_install_path ${PACKAGE_ROOT_PREFIX}${DATA_INSTALL_DIR}/cmake/modules)
     endif (QTONLY)
   endif(APPLE)
 endif(WIN32)
@@ -248,8 +252,10 @@ install(FILES LICENSE.txt DESTINATION ${MARBLE_DATA_INSTALL_PATH})
 
 ####################################################
 # Install CMake module
-install( FILES FindMarble.cmake 
-         DESTINATION ${DATA_INSTALL_DIR}/cmake/modules  )
+if( cmake_modules_install_path )
+  install( FILES FindMarble.cmake 
+           DESTINATION ${cmake_modules_install_path}  )
+endif( cmake_modules_install_path )
 
 ############################################################
 # Uninstall stuff
