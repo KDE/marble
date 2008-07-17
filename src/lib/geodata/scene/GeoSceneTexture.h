@@ -61,8 +61,11 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     Projection projection() const;
     void setProjection( const Projection );
 
-    QUrl downloadUrl() const;
-    void setDownloadUrl( const QUrl & );
+    // this method is a little more than just a stupid getter,
+    // it implements the round robin for the tile servers.
+    // on each invocation the next url is returned
+    QUrl downloadUrl();
+    void addDownloadUrl( const QUrl & );
 
     virtual QString type();
 
@@ -74,7 +77,12 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     int m_levelZeroColumns;
     int m_levelZeroRows;
     Projection m_projection;
-    QUrl m_downloadUrl;
+
+    /// List of Urls which are used in a round robin fashion
+    QVector<QUrl> m_downloadUrls;
+
+    /// Points to next Url for the round robin algorithm
+    QVector<QUrl>::const_iterator m_nextUrl;
 };
 
 #endif // GEOSCENETEXTURE_H

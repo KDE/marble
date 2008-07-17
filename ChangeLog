@@ -1,3 +1,15 @@
+2008-07-18  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.h:
+    * data/maps/earth/openstreetmap/openstreetmap.dgml:
+
+    Implement round robin algorithm for fetching tiles.
+    This was brought up by the OpenStreetMap tile server admins.
+    This was committed in trunk on 2008-07-16 and is part of the
+    performance fix for downloading OSM tiles (Bug 162681).
+
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataPoint.{cpp,h}:
