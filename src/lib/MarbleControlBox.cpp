@@ -310,6 +310,7 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
     d->m_sortproxy->setSourceModel( locations );
+    d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->sort( 0 );
 }
 
