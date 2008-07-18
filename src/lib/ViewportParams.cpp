@@ -115,8 +115,10 @@ void ViewportParams::setProjection(Projection newProjection)
 
 int ViewportParams::polarity() const
 {
-    GeoDataPoint northPole( 0.0, +M_PI * 0.5 );
-    GeoDataPoint southPole( 0.0, -M_PI * 0.5 );
+    // For mercator this just gives the extreme latitudes
+    // instead of the actual poles but it works fine as well:
+    GeoDataPoint northPole( 0.0, +currentProjection()->maxLat() );
+    GeoDataPoint southPole( 0.0, -currentProjection()->maxLat() );
 
     bool globeHidesN, globeHidesS;
     int x;

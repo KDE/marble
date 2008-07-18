@@ -106,17 +106,12 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     // Skip placemarks that are outside the screen area.
-    if ( ( y >= 0 && y < viewport->height() )
+    return ( ( y >= 0 && y < viewport->height() )
          && ( ( x >= 0 && x < viewport->width() ) 
               || (x - 4 * viewport->radius() >= 0
                   && x - 4 * viewport->radius() < viewport->width() )
               || (x + 4 * viewport->radius() >= 0
-                  && x + 4 * viewport->radius() < viewport->width() ) ) )
-    {
-        return true;
-    }
-
-    return false;
+                  && x + 4 * viewport->radius() < viewport->width() ) ) );
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint )
