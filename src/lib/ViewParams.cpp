@@ -77,18 +77,15 @@ ViewParamsPrivate::~ViewParamsPrivate()
     delete m_coastImage;
 }
 
-
 ViewParams::ViewParams()
     : d( new ViewParamsPrivate )
 {
 }
 
-
 ViewParams::~ViewParams()
 {
     delete d;
 }
-
 
 ViewportParams *ViewParams::viewport()
 {
@@ -109,7 +106,6 @@ void ViewParams::setMapQuality( MapQuality mapQuality )
 {
     d->m_mapQuality = mapQuality; 
 }
-
 
 AbstractProjection *ViewParams::currentProjection() const
 {
@@ -196,7 +192,6 @@ void ViewParams::setRadius(int newRadius)
     d->m_viewport.setRadius( newRadius );
 }
 
-
 Quaternion ViewParams::planetAxis() const
 {
     return d->m_viewport.planetAxis();
@@ -206,7 +201,6 @@ void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 {
     d->m_viewport.setPlanetAxis( newAxis );
 }
-
 
 void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
 {

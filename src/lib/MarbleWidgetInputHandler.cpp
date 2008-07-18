@@ -23,6 +23,7 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
@@ -92,11 +93,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
     Q_UNUSED( o );
 
-    int polarity = 0;
-
-    if ( m_widget->northPoleY() != 0 ) 
-        // FIXME: retrieve the polarity from ViewParams instead
-        polarity = m_widget->northPoleY() / abs(m_widget->northPoleY());
+    int polarity = m_widget->map()->viewParams()->viewport()->polarity();
 
     //	if ( o == marbleWidget ){
     if ( e->type() == QEvent::KeyPress ) {
@@ -229,7 +226,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && event->button() == Qt::LeftButton)
             {
                 
-                //emit current gps coordinates to be be interpreted 
+                //emit current coordinates to be be interpreted 
                 //as requested
                 emit mouseClickScreenPosition( m_leftpressedx, m_leftpressedy );
 
@@ -311,35 +308,27 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else {
             m_leftpressed = false;
 
-            dirx = (int)( 3 * event->x() / m_widget->width() ) - 1;
+            QRect boundingRect = m_widget->projectedRegion().boundingRect();
+
+            if ( boundingRect.width() != 0 )
+            {
+                dirx = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
+            }
 
             if ( dirx > 1 ) 
                 dirx = 1;
             if ( dirx < -1 )
                 dirx = -1;
 
-            diry = (int)( 3 * event->y() / m_widget->height() ) - 1;
+            if ( boundingRect.height() != 0 )
+            {
+                diry = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
+            }
+
             if ( diry > 1 ) 
                 diry = 1;
             if ( diry < -1 )
                 diry = -1;
-
-            //Hack for properly behavior for the arrow
-            if( true ) {//m_widget->m_viewParams->m_projection == Equirectangular ) {
-                int     radius        = m_widget->radius();
-
-                // Calculate translation of center point
-                double centerLat = DEG2RAD * m_widget->centerLatitude();
-
-                int     yCenterOffset = (int)((double)(2 * radius / M_PI) * centerLat);
-                int     yTop          =  m_widget->height() / 2 - radius - yCenterOffset;
-                int     yBottom       = yTop + 2 * radius;
-                yTop = ( yTop > 0 ) ? yTop : 0;
-                if ( dirx == 0 && event->y() < yTop)
-                    diry=-1;
-                if ( dirx == 0 && event->y() > yBottom )
-                    diry=1;
-            }
 
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {

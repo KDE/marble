@@ -52,8 +52,16 @@ class AbstractProjectionHelper
 			    QBrush         &brush,
 			    bool            antialiasing ) = 0;
 
-    virtual void setActiveRegion( ViewportParams *viewport ) = 0;
+    virtual void createActiveRegion( ViewportParams *viewport ) = 0;
+    void setActiveRegion( const QRegion& );
+
+    virtual void createProjectedRegion( ViewportParams *viewport ) = 0;
+    void setProjectedRegion( const QRegion& );
+
     virtual const QRegion activeRegion() const;
+    virtual const QRegion projectedRegion() const;
+
+    int navigationStripe() const;
 
  protected:
     AbstractProjectionHelperPrivate  * const d;  // Not exported so no need.

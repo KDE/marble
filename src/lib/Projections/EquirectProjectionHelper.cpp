@@ -13,6 +13,9 @@
 #include "EquirectProjectionHelper.h"
 #include "AbstractProjectionHelper_p.h"
 
+// Qt
+#include "QtCore/QDebug"
+
 // Marble
 #include "GeoPainter.h"
 #include "ViewportParams.h"
@@ -59,11 +62,11 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     if ( yBottom > height )
 	yBottom =  height;
 
-    painter->drawRect( 0, yTop, width, yBottom - yTop );
+    painter->drawRect( 0, yTop, width - 1, yBottom - yTop );
 }
 
 
-void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
+void EquirectProjectionHelper::createActiveRegion( ViewportParams *viewport )
 {
     // Convenience variables
     int  radius = viewport->radius();
@@ -79,13 +82,46 @@ void EquirectProjectionHelper::setActiveRegion( ViewportParams *viewport )
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
-    // Don't let the active area be outside the image, and also let a
-    // thin strip 25 pixels wide be outside it.
-    if ( yTop < 25 )
-	yTop = 25;
-    if ( yBottom > height - 25 )
-	yBottom =  height - 25;
+    // Don't let the active area be outside the image
+    if ( yTop < 0 )
+        yTop = 0;
+    if ( yBottom > height )
+        yBottom =  height;
 
-    d->activeRegion = QRegion( 25, yTop, width - 50, yBottom - yTop,
-			       QRegion::Rectangle );
+    setActiveRegion( QRegion(
+                    navigationStripe(), 
+                    navigationStripe() + yTop, 
+                    width - 2 * navigationStripe(), 
+                    yBottom - yTop - 2 * navigationStripe(),
+			        QRegion::Rectangle ) );
+}
+
+void EquirectProjectionHelper::createProjectedRegion( ViewportParams *viewport )
+{
+    // Convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
+    int yTop          = height / 2 - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
+
+    // Don't let the active area be outside the image
+    if ( yTop < 0 )
+        yTop = 0;
+    if ( yBottom > height )
+        yBottom =  height;
+
+    setProjectedRegion( QRegion(
+                    0, 
+                    yTop, 
+                    width, 
+                    yBottom - yTop,
+                    QRegion::Rectangle ) );
 }

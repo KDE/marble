@@ -18,6 +18,8 @@
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"
 
+#include "AbstractProjectionHelper.h"
+
 class ViewportParamsPrivate
 {
 public:
@@ -105,6 +107,10 @@ void ViewportParams::setProjection(Projection newProjection)
         d->m_currentProjection = &d->s_mercatorProjection;
         break;
     }
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 int ViewportParams::polarity() const
@@ -158,6 +164,10 @@ int ViewportParams::radius() const
 void ViewportParams::setRadius(int newRadius)
 {
     d->m_radius = newRadius;
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 bool ViewportParams::globeCoversViewport() const
@@ -185,6 +195,10 @@ void ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
     d->m_planetAxis = newAxis;
     planetAxis().inverse().toMatrix( d->m_planetAxisMatrix );
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 matrix * ViewportParams::planetAxisMatrix() const
@@ -211,16 +225,28 @@ QSize ViewportParams::size() const
 void ViewportParams::setWidth(int newWidth)
 {
     d->m_size.setWidth( newWidth );
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 void ViewportParams::setHeight(int newHeight)
 {
     d->m_size.setHeight( newHeight );
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 void ViewportParams::setSize(QSize newSize)
 {
     d->m_size = newSize;
+
+    // Adjust the active Region
+    currentProjection()->helper()->createActiveRegion( this );
+    currentProjection()->helper()->createProjectedRegion( this );
 }
 
 BoundingBox ViewportParams::boundingBox() const
@@ -247,9 +273,6 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
     centerLon = + d->m_planetAxis.yaw();
     if ( centerLon > M_PI )
         centerLon -= 2 * M_PI;
-
-//     qDebug() << "centerLon" << centerLon * RAD2DEG;
-//     qDebug() << "centerLat" << centerLat * RAD2DEG;
 }
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const

@@ -47,7 +47,7 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
 
     if ( imgradius2 < (quint64)radius * (quint64)radius ) {
         painter->drawRect( 0, 0, 
-			   viewport->width() - 1, viewport->height() - 1 );
+			   viewport->width(), viewport->height() );
     }
     else {
         painter->drawEllipse( imgrx - radius, imgry - radius, 
@@ -55,24 +55,58 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
     }
 }
 
-
-void SphericalProjectionHelper::setActiveRegion( ViewportParams *viewport )
+void SphericalProjectionHelper::createActiveRegion( ViewportParams *viewport )
 {
     int  radius    = viewport->radius();
     int  imgWidth  = viewport->width();
     int  imgHeight = viewport->height();
 
-    // If the globe covers the whole image, then the active region is
-    // all of the image except a strip 25 pixels wide in all
-    // directions.  Otherwise the active region is the globe.
+    // If the globe covers the whole image, then the active region represents
+    // all of the image except for the navigationStripe at the border
+    // of the viewport ("rectActiveRegion").  
+    // Otherwise the active region has got the shape of the visible globe but 
+    // is diminuished by the amount of the width of the navigationStripe ).
+
+    QRegion rectActiveRegion( navigationStripe() , navigationStripe() , 
+    imgWidth - 2 * navigationStripe() , imgHeight - 2 * navigationStripe() ,
+    QRegion::Rectangle );
+
     if ( viewport->mapCoversViewport() ) {
-    	d->activeRegion = QRegion( 25, 25, imgWidth - 50, imgHeight - 50,
-				   QRegion::Rectangle );
+        d->activeRegion = rectActiveRegion;
     }
     else {
-    	d->activeRegion = QRegion( imgWidth  / 2 - radius,
-				   imgHeight / 2 - radius,
-				   2 * radius, 2 * radius,
-				   QRegion::Ellipse );
+        setActiveRegion( QRegion(
+            imgWidth  / 2 - radius + navigationStripe() ,
+            imgHeight / 2 - radius + navigationStripe() ,
+            2 * ( radius - navigationStripe()  ),
+            2 * ( radius - navigationStripe()  ),
+            QRegion::Ellipse ).intersect( rectActiveRegion ) );
+    }
+}
+
+void SphericalProjectionHelper::createProjectedRegion( ViewportParams *viewport )
+{
+    int  radius    = viewport->radius();
+    int  imgWidth  = viewport->width();
+    int  imgHeight = viewport->height();
+
+    // If the globe covers the whole image, then the projected region represents
+    // all of the image.  
+    // Otherwise the active region has got the shape of the visible globe.
+
+    QRegion rectActiveRegion( 0 , 0 , 
+    imgWidth, imgHeight,
+    QRegion::Rectangle );
+
+    if ( viewport->mapCoversViewport() ) {
+        d->activeRegion = rectActiveRegion;
+    }
+    else {
+        setProjectedRegion( QRegion(
+            imgWidth  / 2 - radius,
+            imgHeight / 2 - radius,
+            2 * radius,
+            2 * radius,
+            QRegion::Ellipse ).intersect( rectActiveRegion ) );
     }
 }

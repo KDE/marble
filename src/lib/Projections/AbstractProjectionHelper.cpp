@@ -22,7 +22,9 @@
 class AbstractProjectionHelperPrivate
 {
  public:
-    QRegion  activeRegion;
+    QRegion  m_activeRegion;
+    QRegion  m_projectedRegion;
+    int      m_navigationStripe;
 };
 
 
@@ -30,6 +32,7 @@ class AbstractProjectionHelperPrivate
 AbstractProjectionHelper::AbstractProjectionHelper()
     : d( new AbstractProjectionHelperPrivate )
 {
+    d->m_navigationStripe = 25;
 }
 
 AbstractProjectionHelper::~AbstractProjectionHelper()
@@ -49,9 +52,9 @@ void AbstractProjectionHelper::paintBase( GeoPainter     *painter,
 
 /* 
     FIXME: Actually the paintBase and activeRegion should both draw 
-    the shape of the "projection border" (which is the "border" of 
-    the set of possible values) from the very same place to ease
-    implementation.
+    the shape of the "projected region" (which contains  
+    the set of possible projected values) from the very same place 
+    to ease implementation.
 
     Both the paintBase and the activeRegion can easily get defined 
     by providing a virtual method which has a QPainterPath as a
@@ -63,7 +66,8 @@ void AbstractProjectionHelper::paintBase( GeoPainter     *painter,
     gets created via QRegion( painterPath.toFillPolygon() ).
     As the activeRegion has the same shape but is smaller 
     than the projection border the polygon created in between 
-    could get scaled down by 50 pixels using QMatrix::map().
+    could get scaled down by the size of the 
+    navigationStripe using QMatrix::map().  
 
     The paintBase method would just use painterPath.toFillPolygon()
     to create the needed polygon (as drawing polygons is AFAIK faster.
@@ -71,7 +75,27 @@ void AbstractProjectionHelper::paintBase( GeoPainter     *painter,
 
 */
 
+void AbstractProjectionHelper::setActiveRegion( const QRegion& region )
+{
+    d->m_activeRegion = region;
+}
+
 const QRegion AbstractProjectionHelper::activeRegion() const
 {
-    return d->activeRegion;
+    return d->m_activeRegion;
+}
+
+void AbstractProjectionHelper::setProjectedRegion( const QRegion& region )
+{
+    d->m_projectedRegion = region;
+}
+
+const QRegion AbstractProjectionHelper::projectedRegion() const
+{
+    return d->m_projectedRegion;
+}
+
+int AbstractProjectionHelper::navigationStripe() const
+{
+    return d->m_navigationStripe;
 }
