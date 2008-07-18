@@ -160,8 +160,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
                        m_widget, SIGNAL( projectionChanged( Projection ) ) );
-    m_widget->connect( m_map,    SIGNAL( projectionChanged( Projection ) ),
-                       m_widget, SLOT( setActiveRegion() ) );
 
     // When some fundamental things change in the model, we got to
     // show this in the view, i.e. here.
@@ -475,7 +473,6 @@ void MarbleWidget::zoomView(int newZoom)
     emit distanceChanged( distanceString() );
 
     repaint();
-    setActiveRegion();
 }
 
 
@@ -609,7 +606,6 @@ void MarbleWidget::setProjection( Projection projection )
     setAttribute( Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     repaint();
-    setActiveRegion();
 }
 
 void MarbleWidget::setProjection( int projection )
@@ -695,9 +691,6 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     d->m_map->setSize( width(), height() );
 
-    //	Redefine the area where the mousepointer becomes a navigationarrow
-    setActiveRegion();
-
     setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
 
     repaint();
@@ -781,15 +774,12 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
 
 const QRegion MarbleWidget::activeRegion()
 {
-    return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
+    return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();;
 }
 
-void MarbleWidget::setActiveRegion()
+const QRegion MarbleWidget::projectedRegion()
 {
-    ViewportParams  *viewport = d->m_map->viewParams()->viewport();
-
-    viewport->currentProjection()->helper()->setActiveRegion( viewport );
-    return;
+    return d->m_map->viewParams()->currentProjection()->helper()->projectedRegion();;
 }
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)

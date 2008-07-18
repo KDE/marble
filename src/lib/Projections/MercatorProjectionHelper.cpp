@@ -64,7 +64,7 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
 }
 
 
-void MercatorProjectionHelper::setActiveRegion( ViewportParams *viewport )
+void MercatorProjectionHelper::createActiveRegion( ViewportParams *viewport )
 {
     // Convenience variables
     //int  radius = viewport->radius();
@@ -88,12 +88,51 @@ void MercatorProjectionHelper::setActiveRegion( ViewportParams *viewport )
 			     xDummy, yBottom );
 
     // Don't let the active area be outside the image, and also let a
-    // thin strip 25 pixels wide be outside it.
-    if ( yTop < 25 )
-	yTop = 25;
-    if ( yBottom > height - 25 )
-	yBottom =  height - 25;
+    // thin strip navigationStripe be outside it.
+    if ( yTop < navigationStripe() )
+	yTop = navigationStripe();
+    if ( yBottom > height - navigationStripe() )
+	yBottom =  height - navigationStripe();
 
-    d->activeRegion = QRegion( 25, yTop, width - 51, yBottom - yTop,
-			       QRegion::Rectangle );
+    setActiveRegion( QRegion(
+                      yTop,
+                      width - 2 * navigationStripe(),
+                      yBottom - yTop,
+                      QRegion::Rectangle ) );
+}
+
+void MercatorProjectionHelper::createProjectedRegion( ViewportParams *viewport )
+{
+    // Convenience variables
+    //int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    int  yTop;
+    int  yBottom;
+    int  xDummy;
+    AbstractProjection *proj = viewport->currentProjection();
+
+    // Get the top and bottom y coordinates of the projected map.
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport, 
+                 xDummy, yTop );
+    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+                 xDummy, yBottom );
+
+    if ( yTop < 0 )
+        yTop = 0;
+    if ( yBottom > height )
+        yBottom =  height;
+
+    setProjectedRegion( QRegion(
+                0, 
+                yTop,
+                width,
+                yBottom - yTop,
+                QRegion::Rectangle ) );
 }

@@ -44,7 +44,8 @@ class SphericalProjectionHelper : public AbstractProjectionHelper
 		    QBrush         &brush,
 		    bool            antialiasing );
 
-    void setActiveRegion( ViewportParams *viewport );
+    void createActiveRegion( ViewportParams *viewport );
+    void createProjectedRegion( ViewportParams *viewport );
 
  private:
     //SphericalProjectionPrivate  * const d;

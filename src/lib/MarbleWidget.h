@@ -196,11 +196,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setDownloadManager( HttpDownloadManager *downloadManager );
 
-
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
     const QRegion  activeRegion();
+
+    /**
+     * @brief Return the active region in which it's possible to drag the view using the mouse.
+     */
+    const QRegion  projectedRegion();
 
     /**
      * @brief  Return the radius of the globe in pixels.
@@ -829,7 +833,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
     /**
-     * @brief Update the widget because the mdoel changed.
+     * @brief Update the widget because the model changed.
      */
     void updateChangedMap();
 
@@ -889,7 +893,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  private Q_SLOTS:
 
     void updateAnimation( qreal currentValue );
-    void setActiveRegion();
 
  Q_SIGNALS:
     /**
