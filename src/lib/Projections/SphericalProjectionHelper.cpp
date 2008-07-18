@@ -72,7 +72,7 @@ void SphericalProjectionHelper::createActiveRegion( ViewportParams *viewport )
     QRegion::Rectangle );
 
     if ( viewport->mapCoversViewport() ) {
-        d->activeRegion = rectActiveRegion;
+        setActiveRegion( rectActiveRegion );
     }
     else {
         setActiveRegion( QRegion(
@@ -94,12 +94,12 @@ void SphericalProjectionHelper::createProjectedRegion( ViewportParams *viewport 
     // all of the image.  
     // Otherwise the active region has got the shape of the visible globe.
 
-    QRegion rectActiveRegion( 0 , 0 , 
+    QRegion rectProjectedRegion( 0 , 0 , 
     imgWidth, imgHeight,
     QRegion::Rectangle );
 
     if ( viewport->mapCoversViewport() ) {
-        d->activeRegion = rectActiveRegion;
+        setProjectedRegion( rectProjectedRegion );
     }
     else {
         setProjectedRegion( QRegion(
@@ -107,6 +107,6 @@ void SphericalProjectionHelper::createProjectedRegion( ViewportParams *viewport 
             imgHeight / 2 - radius,
             2 * radius,
             2 * radius,
-            QRegion::Ellipse ).intersect( rectActiveRegion ) );
+            QRegion::Ellipse ).intersect( rectProjectedRegion ) );
     }
 }
