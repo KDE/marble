@@ -37,7 +37,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
 
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
-    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>() hold the coordinate of cuurent placemark	
+    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>() hold the coordinate of current placemark	
     setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
 //  The page to shown in placemark is emitted here ..
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),

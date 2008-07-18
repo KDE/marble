@@ -146,36 +146,36 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return QVariant();
 }
 
-QModelIndexList MarblePlacemarkModel::match( const QModelIndex & start, int role, 
+QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, int role, 
 					     const QVariant & value, int hits,
 					     Qt::MatchFlags flags ) const
 {
     QList<QModelIndex> results;
 
-    int      count = 0;
-    QString  listName;
-    QString  queryString;
-    QString  simplifiedListName;
-    int      row = start.row();
+    int         count = 0;
 
-    while ( row < rowCount() && count != hits ) {
+    QModelIndex entryIndex;
+    QString     listName;
+    QString     queryString = value.toString().toLower();
+    QString     simplifiedListName;
+
+    int         row = start.row();
+    const int   rowNum = rowCount();
+
+    while ( row < rowNum && count != hits ) {
         if ( flags & Qt::MatchStartsWith ) {
-            listName    = data( index( row, 0 ), role ).toString();
-            queryString = value.toString();
+            entryIndex = index( row, 0 );
+            listName    = data( entryIndex, role ).toString().toLower();
             simplifiedListName = GeoString::deaccent( listName );
 
-            if ( listName.startsWith( queryString, Qt::CaseInsensitive ) 
-                 || listName.remove( QChar( '\'' ), Qt::CaseSensitive ).startsWith( queryString )
-                 || listName.replace( QChar( '-' ), QChar( ' ' ) ).startsWith( queryString )
-                 || GeoString::deaccent( simplifiedListName ).startsWith( queryString )
+            if ( listName.startsWith( queryString ) 
+                 || simplifiedListName.startsWith( queryString )
                  )
             {
-                results << index( row, 0 );
-
+                results << entryIndex;
                 ++count;
             }
         }
-
         ++row;
     }
 

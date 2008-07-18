@@ -10,6 +10,7 @@
 //
 
 
+#include "MarblePlacemarkModel.h"
 #include "MarbleSearchListView.h"
 
 #include <QtCore/QDebug>
@@ -36,9 +37,17 @@ void MarbleSearchListView::selectItem(const QString& text)
 
     QModelIndexList  resultlist;
 
-    resultlist = model()->match( model()->index( 0, 0 ),
-                                 Qt::DisplayRole, text, 1,
-                                 Qt::MatchStartsWith );
+    if ( model() )
+    {
+        MarblePlacemarkModel *placemarkModel = (MarblePlacemarkModel *)model();
+        if ( placemarkModel )
+        {
+            QModelIndex firstIndex = placemarkModel->index( 0, 0 );
+            resultlist = placemarkModel->approxMatch( firstIndex,
+                                    Qt::DisplayRole, text, 1,
+                                    Qt::MatchStartsWith );
+        }
+    }
 
     if ( resultlist.size() > 0 ) {
         setCurrentIndex( resultlist[0] );
