@@ -183,7 +183,7 @@ void MainWindow::createMenus()
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
 
-    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxMenu() ) ); 
+    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
 }
 
 void MainWindow::createInfoBoxesMenu()

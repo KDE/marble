@@ -88,7 +88,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     QVariant data( const QModelIndex &index, int role ) const;
 
-    virtual QModelIndexList match( const QModelIndex &start, int role, 
+    QModelIndexList approxMatch( const QModelIndex &start, int role, 
                                    const QVariant &value, int hits = 1,
                                    Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
