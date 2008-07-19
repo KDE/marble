@@ -1,6 +1,14 @@
 2008-07-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpFetchFile.cpp:
+
+    Clean up last commit:
+    - Remove commented out code.
+    - Comment out debug output as it was before.
+
+2008-07-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpFetchFile.cpp:
     * src/lib/HttpFetchFile.h:
     * src/lib/HttpDownloadManager.cpp:
 

@@ -37,15 +37,6 @@ HttpJob::~HttpJob()
 
     delete m_http;
     delete m_buffer;
-
-//     if ( m_http ) {
-//         m_http->abort();
-//         delete m_http;
-//     }
-
-//     if ( m_buffer )
-//     m_buffer->close();
-//     delete m_buffer;
 }
 
 void HttpJob::prepareExecution()
@@ -121,8 +112,8 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     HttpJob * job = m_pJobMap[ requestId ];
 
     QHttpResponseHeader responseHeader = job->m_http->lastResponse();
-    qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
-             << responseHeader.reasonPhrase();
+//     qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
+//              << responseHeader.reasonPhrase();
 
 //    FIXME: Check whether this assumption is a safe on:
 //    ( Problem: Conditional jump later on depends on uninitialised value )
