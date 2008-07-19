@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
@@ -113,7 +113,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     virtual void unpack( QDataStream& stream );
 
  protected:
-    GeoDataCoordinatesPrivate* const d_ptr;
+    GeoDataCoordinatesPrivate* const d;
 
  private:
     static GeoDataCoordinates::Notation s_notation;

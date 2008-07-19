@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2004-2007 Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
@@ -23,37 +23,37 @@
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit, int _detail )
-  : d_ptr( new GeoDataCoordinatesPrivate() )
+  : d( new GeoDataCoordinatesPrivate() )
 {
-    d_ptr->m_altitude = _alt;
-    d_ptr->m_detail = _detail;
+    d->m_altitude = _alt;
+    d->m_detail = _detail;
     switch( unit ){
     case Radian:
-        d_ptr->m_q = Quaternion( _lon, _lat );
-        d_ptr->m_lon = _lon;
-        d_ptr->m_lat = _lat;
+        d->m_q = Quaternion( _lon, _lat );
+        d->m_lon = _lon;
+        d->m_lat = _lat;
         break;
     case Degree:
-        d_ptr->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
-        d_ptr->m_lon = _lon * DEG2RAD;
-        d_ptr->m_lat = _lat * DEG2RAD;
+        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        d->m_lon = _lon * DEG2RAD;
+        d->m_lat = _lat * DEG2RAD;
         break;
     }
 }
 
 GeoDataCoordinates::GeoDataCoordinates( const GeoDataCoordinates& other )
-  : d_ptr( new GeoDataCoordinatesPrivate( *other.d_ptr ) )
+  : d( new GeoDataCoordinatesPrivate( *other.d ) )
 {
 }
 
 GeoDataCoordinates::GeoDataCoordinates()
-  : d_ptr( new GeoDataCoordinatesPrivate() )
+  : d( new GeoDataCoordinatesPrivate() )
 {
 }
 
 GeoDataCoordinates::~GeoDataCoordinates()
 {
-    delete d_ptr;
+    delete d;
 #if DEBUG_GEODATA
 //    qDebug() << "delete coordinates";
 #endif
@@ -61,17 +61,17 @@ GeoDataCoordinates::~GeoDataCoordinates()
 
 void GeoDataCoordinates::set( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit )
 {
-    d_ptr->m_altitude = _alt;
+    d->m_altitude = _alt;
     switch( unit ){
     case Radian:
-        d_ptr->m_q = Quaternion( _lon, _lat );
-        d_ptr->m_lon = _lon;
-        d_ptr->m_lat = _lat;
+        d->m_q = Quaternion( _lon, _lat );
+        d->m_lon = _lon;
+        d->m_lat = _lat;
         break;
     case Degree:
-        d_ptr->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
-        d_ptr->m_lon = _lon * DEG2RAD;
-        d_ptr->m_lat = _lat * DEG2RAD;
+        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        d->m_lon = _lon * DEG2RAD;
+        d->m_lat = _lat * DEG2RAD;
         break;
     }
 }
@@ -82,12 +82,12 @@ void GeoDataCoordinates::geoCoordinates( double& lon, double& lat,
     switch ( unit ) 
     {
     case Radian:
-            lon = d_ptr->m_lon;
-            lat = d_ptr->m_lat;
+            lon = d->m_lon;
+            lat = d->m_lat;
         break;
     case Degree:
-            lon = d_ptr->m_lon * RAD2DEG;
-            lat = d_ptr->m_lat * RAD2DEG;
+            lon = d->m_lon * RAD2DEG;
+            lat = d->m_lat * RAD2DEG;
         break;
     }
 }
@@ -109,12 +109,12 @@ QString GeoDataCoordinates::toString()
 
 QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )
 {
-    QString nsstring = ( d_ptr->m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
-    QString westring = ( d_ptr->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
+    QString nsstring = ( d->m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
+    QString westring = ( d->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
 
     double lat, lon;
-    lon = fabs( d_ptr->m_lon * RAD2DEG );
-    lat = fabs( d_ptr->m_lat * RAD2DEG );
+    lon = fabs( d->m_lon * RAD2DEG );
+    lat = fabs( d->m_lat * RAD2DEG );
 
     if ( notation == GeoDataCoordinates::DMS )
     {
@@ -161,47 +161,47 @@ bool GeoDataCoordinates::operator==( const GeoDataCoordinates &test ) const
 
 void GeoDataCoordinates::setAltitude( const double altitude )
 {
-    d_ptr->m_altitude = altitude;
+    d->m_altitude = altitude;
 }
 
 double GeoDataCoordinates::altitude() const
 {
-    return d_ptr->m_altitude;
+    return d->m_altitude;
 }
 
 int GeoDataCoordinates::detail() const
 {
-    return d_ptr->m_detail;
+    return d->m_detail;
 }
 
 void GeoDataCoordinates::setDetail( const int det )
 {
-    d_ptr->m_detail = det;
+    d->m_detail = det;
 }
 
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
-    return d_ptr->m_q;
+    return d->m_q;
 }
 
 GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &other )
 {
-    *d_ptr = *other.d_ptr;
+    *d = *other.d;
     return *this;
 }
 
 void GeoDataCoordinates::pack( QDataStream& stream ) const
 {
-    stream << d_ptr->m_lon;
-    stream << d_ptr->m_lat;
-    stream << d_ptr->m_altitude;
+    stream << d->m_lon;
+    stream << d->m_lat;
+    stream << d->m_altitude;
 }
 
 void GeoDataCoordinates::unpack( QDataStream& stream )
 {
-    stream >> d_ptr->m_lon;
-    stream >> d_ptr->m_lat;
-    stream >> d_ptr->m_altitude;
+    stream >> d->m_lon;
+    stream >> d->m_lat;
+    stream >> d->m_altitude;
 
-    d_ptr->m_q.set( d_ptr->m_lon, d_ptr->m_lat );
+    d->m_q.set( d->m_lon, d->m_lat );
 }

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Torsten Rahn <rahn@kde.org>
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
 //
 
 
@@ -40,7 +41,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
   private:
     Q_DISABLE_COPY( GeoDataHotSpot )
-    GeoDataHotSpotPrivate * const d_hot;
+    GeoDataHotSpotPrivate * const d;
 };
 
 #endif // GEODATAHOTSPOT_H

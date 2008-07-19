@@ -7,6 +7,7 @@
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
 //
 
 
@@ -61,7 +62,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
  protected:
-    GeoDataGeometryPrivate* const d_geom;
+    GeoDataGeometryPrivate* const d;
 };
 
 #endif // GEODATAGEOMETRY_H
