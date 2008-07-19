@@ -105,6 +105,7 @@ Features:
     - Create a MercatorScanlineTextureMapper	      			inge
     - Make the vector base work (VectorMap)	   			inge
     - ActiveRegion for Mercator.					done
+    - Gridmap								done
 
  * Fix GPS Support (that's a regression) 				ANDR
     - Make it a Marble plugin						--
@@ -129,7 +130,7 @@ Internal structure:
       layermanagement.txt This should happen after the 
       QXmlStreamReader port.
  * Plugin interface (see also GeoPainter)                               TACK
-    - Make a QPlugin based interface                                    TACK
+    - Make a QPlugin based interface                                    done
     - Move backends into plugins / threads                              --
  * GeoPainter								----
  * Create a LatLonBoundingBox                                           DONE
