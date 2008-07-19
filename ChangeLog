@@ -4,7 +4,7 @@
     * src/lib/HttpFetchFile.h:
     * src/lib/HttpDownloadManager.cpp:
 
-    Fix bug 162681 in trunk (slow tile download).
+    Fix bug 162681 (slow tile download).
     The problem with the download implementation was that
     there was only one QHttp object in HttpFetchFile, throught
     which all requests were serialized.
