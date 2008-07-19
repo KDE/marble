@@ -454,6 +454,14 @@ void VectorMap::rectangularCreatePolyLine(
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
+    // Make sure that the centerLat won't exceed maxLat
+    double maxLat = viewport->currentProjection()->maxLat();
+
+    if ( fabs( centerLat ) > maxLat )
+    {
+        centerLat = maxLat * centerLat / fabs( centerLat );
+    }
+
     // Other convenience variables
     double  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
 
@@ -561,6 +569,15 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+
+
+    // Make sure that the centerLat won't exceed maxLat
+    double maxLat = viewport->currentProjection()->maxLat();
+
+    if ( fabs( centerLat ) > maxLat )
+    {
+        centerLat = maxLat * centerLat / fabs( centerLat );
+    }
 
     // Other convenience variables
     double  rad2Pixel = (double)( 2 * viewport->radius() ) / M_PI;

@@ -25,6 +25,8 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
+#include "AbstractProjection.h"
 
 uint TextureColorizer::texturepalette[16][512];
 
@@ -95,18 +97,28 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
         if( viewParams->projection() == Equirectangular
             || viewParams->projection() == Mercator )
-	{
+        {
             // Calculate translation of center point
-	    double  centerLon;
-	    double  centerLat;
+            double  centerLon;
+            double  centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            int yCenterOffset =  (int)((float)(2*radius / M_PI) * centerLat);
+            // Make sure that the centerLat won't exceed maxLat
+            double maxLat = viewParams->viewport()->currentProjection()->maxLat();
+
+            if ( fabs( centerLat ) > maxLat )
+            {
+                centerLat = maxLat * centerLat / fabs( centerLat );
+            }
+
+            const float rad2Pixel = (double)( 2 * radius ) / M_PI;
             if ( viewParams->projection() == Equirectangular ) {
+                int yCenterOffset = (int)( centerLat * rad2Pixel );
                 yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
                 yBottom = ( imgry + yCenterOffset + radius > imgheight )? imgheight : imgry + yCenterOffset + radius;
             }
             else if ( viewParams->projection() == Mercator ) {
+                int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
                 yTop = ( imgry - 2 * radius + yCenterOffset < 0 ) ? 0 : imgry - 2 * radius + yCenterOffset;
                 yBottom = ( imgry + 2 * radius + yCenterOffset > imgheight )? imgheight : imgry + 2 * radius + yCenterOffset;
             }

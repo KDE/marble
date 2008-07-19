@@ -27,6 +27,7 @@
 #include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "AbstractProjection.h"
 
 
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
@@ -55,8 +56,8 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_toTileCoordinatesLon = (double)(globalWidth() / 2 - m_tilePosX);
     m_toTileCoordinatesLat = (double)(globalHeight() / 2 - m_tilePosY);
 
-    // Calculate how many degrees are being represented per pixel.
-    const float rad2Pixel = M_PI / (float)( 2 * radius );
+    // Calculate how many pixel are being represented per radians.
+    const float rad2Pixel = (float)( 2 * radius )/M_PI;
 
     int yTop;
     int yPaintedTop;
@@ -70,13 +71,17 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = 0;
-    if ( fabs( centerLat ) < atan( sinh( M_PI ) ) )
-        yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
-    else {
-        yCenterOffset = (int)(centerLat / fabs(centerLat)) * 2 * radius;
-        qDebug() << "Southpole?" << yCenterOffset * 180.0 / M_PI ;
+    // Make sure that the centerLat won't exceed maxLat
+    double maxLat = viewParams->viewport()->currentProjection()->maxLat();
+
+    if ( fabs( centerLat ) > maxLat )
+    {
+        centerLat = maxLat * centerLat / fabs( centerLat );
     }
+
+    int yCenterOffset = 0;
+
+    yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 
     // Calculate y-range the represented by the center point, yTop and
     // yBottom and what actually can be painted
@@ -88,9 +93,11 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
-    float leftLon = + centerLon - ( rad2Pixel * m_imageWidth / 2 );
+    float leftLon = + centerLon - ( m_imageWidth / 2 / rad2Pixel );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
+
+    const double pixel2Rad = 1.0/rad2Pixel;
 
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {        
@@ -106,7 +113,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                     scanLine < scanLineEnd;
                     ++scanLine )
         {
-                lon += rad2Pixel;
+                lon += pixel2Rad;
                 if ( lon < -M_PI ) lon += 2 * M_PI;
                 if ( lon >  M_PI ) lon -= 2 * M_PI;
                 pixelValue( lon, lat, scanLine, isHighQuality );

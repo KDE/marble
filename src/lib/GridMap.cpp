@@ -278,13 +278,13 @@ void GridMap::flatCreateCircle( double angle, SphereDim dim,
 
     m_polygon.clear();
     if ( dim == Latitude ) {
-	// FIXME: At some point add a
-	//        AbstractProjection::screenCoordinates() that produce
-	//        qreals, and then make y and x below qreals instead.
-	int  y;
+        // FIXME: At some point add a
+        //        AbstractProjection::screenCoordinates() that produce
+        //        qreals, and then make y and x below qreals instead.
+        int  y;
 
-	currentProjection->screenCoordinates( 0.0, angle, viewport, 
-					      dummy, y );
+        currentProjection->screenCoordinates( 0.0, angle, viewport, 
+                           dummy, y );
 
         QPointF  startPoint( 0.0f,     (double)y );
         QPointF  endPoint(   imgWidth, (double)y );
@@ -294,31 +294,32 @@ void GridMap::flatCreateCircle( double angle, SphereDim dim,
     else {
         // dim == Longitude
 
-	int  x;
-	int  yTop;
-	int  yBottom;
+        int  x;
+        int  yTop;
+        int  yBottom;
 
-	currentProjection->screenCoordinates( angle, 0.0, viewport, 
-					      x, dummy );
+        currentProjection->screenCoordinates( angle, 0.0, viewport, 
+                            x, dummy );
 
-	// Get the top and bottom of the map.  Clip it to the screen
-	currentProjection->screenCoordinates( 0.0, currentProjection->maxLat(),
-					      viewport,
-					      dummy, yTop );
-	if ( yTop < 0 )
-	    yTop = 0;
-	currentProjection->screenCoordinates( 0.0, -currentProjection->maxLat(),
-					      viewport,
-					      dummy, yBottom );
-	if ( yBottom > imgHeight )
-	    yBottom = imgHeight;
-	
+        // Get the top and bottom of the map.  Clip it to the screen
+        currentProjection->screenCoordinates( 0.0, currentProjection->maxLat(),
+                            viewport,
+                            dummy, yTop );
+        if ( yTop < 0 )
+            yTop = 0;
+        currentProjection->screenCoordinates( 0.0, -currentProjection->maxLat(),
+                            viewport,
+                            dummy, yBottom );
+        if ( yBottom > imgHeight )
+            yBottom = imgHeight;
+        
         // If we are far zoomed out, then there may be repetition in
         // the X direction.
 
-	// Normally we would add 2*PI (4*radius) but in this case a
-	// circle is shown as a line every half (the front and the
-	// back).
+        // Normally we would add 2*PI (4*radius) but in this case a
+        // circle is shown as a line every half (the front and the
+        // back).
+
         while ( x > 2 * radius ) 
             x -= 2 * radius;
         while ( x < imgWidth ) {

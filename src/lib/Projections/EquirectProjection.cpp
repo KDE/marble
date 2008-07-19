@@ -50,7 +50,13 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+
     double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
+ 
+   if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
  
     // Let (x, y) be the position on the screen of the point.
     x = (int)( viewport->width()  / 2.0 + ( lon - centerLon ) * rad2Pixel );
@@ -79,6 +85,11 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+
+    if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
 
     geopoint.geoCoordinates( lon, lat );
 
@@ -113,6 +124,11 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+
+    if ( fabs( centerLat ) > m_maxLat )
+    {
+        centerLat = m_maxLat * centerLat / fabs( centerLat );
+    }
 
     geopoint.geoCoordinates( lon, lat );
 
