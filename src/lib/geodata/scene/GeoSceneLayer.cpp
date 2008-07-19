@@ -57,10 +57,10 @@ void GeoSceneAbstractDataset::setExpire( int expire )
 }
 
 GeoSceneLayer::GeoSceneLayer( const QString& name )
-    : m_name( name ),
+    : m_filter( 0 ),
+      m_name( name ),
       m_backend( "" ),
-      m_role( "" ),
-      m_filter( 0 )
+      m_role( "" )
 {
     /* NOOP */
 }

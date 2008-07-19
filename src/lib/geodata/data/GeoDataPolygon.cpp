@@ -19,8 +19,8 @@ class GeoDataPolygonPrivate
 {
  public:
     GeoDataPolygonPrivate()
-         : m_dirtyBox( true ),
-           outer( new GeoDataLinearRing() )
+	: outer( new GeoDataLinearRing() ),
+	  m_dirtyBox( true )
     {
     }
     

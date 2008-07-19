@@ -1,5 +1,10 @@
 2008-07-19  Inge Wallin  <inge@lysator.liu.se>
 
+	Reduce warnings: Initialize in the right order.
+	* src/lib/geodata/data/GeoDataPlacemark.cpp (GeoDataPlacemarkPrivate),
+	* src/lib/geodata/data/GeoDataPolygon.cpp (GeoDataPolygonPrivate),
+	* src/lib/geodata/scene/GeoSceneLayer.cpp (GeoSceneLayer): Initialize in the right order.
+
 	Cleanup: Make the d pointer actually be named d.
 	* src/lib/geodata/data/GeoDataPolygon.{h,cpp},
 	* src/lib/geodata/data/GeoDataGeometry.{h,cpp},
