@@ -30,11 +30,21 @@ enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
 class QHttp;
 class StoragePolicy;
 
-class HttpJob
+class HttpJob: public QObject
 {
+    Q_OBJECT
+
  public:
     HttpJob( const QUrl & sourceUrl, const QString & destFileName, QString const id );
     ~HttpJob();
+
+    // allocates QHttp and QBuffer member, has to be done before
+    // execute() because of signal connections.
+    // see FIXME in .cpp
+    void prepareExecution();
+
+    // async, returns http get id
+    int execute();
 
     QUrl sourceUrl() const;
     void setSourceUrl( const QUrl & );
@@ -64,6 +74,8 @@ class HttpJob
     QString     m_initiatorId;
     Status      m_status;
     Priority    m_priority;
+ public:
+    QHttp       *m_http; // FIXME: cleans this up after 4.1
 };
 
 
@@ -95,7 +107,6 @@ class HttpFetchFile : public QObject
 
  private:
     Q_DISABLE_COPY( HttpFetchFile )
-    QHttp *m_pHttp;
     QMap<int, HttpJob*> m_pJobMap;
     StoragePolicy *m_storagePolicy;
 };
