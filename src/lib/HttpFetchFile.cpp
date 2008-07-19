@@ -24,62 +24,81 @@ HttpJob::HttpJob ( const QUrl & sourceUrl, const QString & destFileName, QString
         m_destinationFileName ( destFileName ),
         m_originalDestinationFileName ( destFileName ),
         m_data(),
+        m_buffer( 0 ),
         m_initiatorId ( id ),
         m_status ( NoStatus ),
-        m_priority ( NoPriority )
+        m_priority ( NoPriority ),
+        m_http( 0 )
 {
-    m_buffer = new QBuffer ( &m_data );
-    m_buffer->open ( QIODevice::WriteOnly );
 }
 
 HttpJob::~HttpJob()
 {
-    m_buffer->close();
+
+    delete m_http;
     delete m_buffer;
 }
 
+void HttpJob::prepareExecution()
+{
+    // job can be executed more than once because of redirection
+    // perhaps better to make a new job than (FIXME)
+    if ( !m_http ) {
+        m_http = new QHttp;
+        m_buffer = new QBuffer ( &m_data );
+        m_buffer->open ( QIODevice::WriteOnly );
+    }
+}
+
+int HttpJob::execute()
+{
+    m_http->setHost( m_sourceUrl.host(),
+                     m_sourceUrl.port() != -1 ? m_sourceUrl.port() : 80 );
+    if ( !m_sourceUrl.userName().isEmpty() )
+        m_http->setUser( m_sourceUrl.userName(), m_sourceUrl.password() );
+    // if Url has query item like in panoramio API requests source.path()
+    // chops it , this "if" gurantees its correct treatement
+    QString cleanupPath;
+    if ( m_sourceUrl.hasQuery() == true ) {
+        cleanupPath = QString( m_sourceUrl.toString( QUrl::RemoveAuthority | QUrl::RemoveScheme ) );
+    }
+    else {
+        cleanupPath = QUrl::toPercentEncoding( m_sourceUrl.path(), "/", " -" );
+    }
+
+    qDebug() << m_sourceUrl.host() << "and path=" << cleanupPath;
+    QHttpRequestHeader header ( QLatin1String ( "GET" ), cleanupPath );
+    header.setValue ( "Connection", "Keep-Alive" );
+    header.setValue ( "User-Agent", "Marble TinyWebBrowser" );
+    header.setValue ( "Host", m_sourceUrl.host() );
+
+    const int httpGetId = m_http->request( header, 0, m_buffer );
+    return httpGetId;
+}
 
 HttpFetchFile::HttpFetchFile ( StoragePolicy *policy, QObject *parent )
         : QObject ( parent ),
         m_storagePolicy ( policy )
 {
-    m_pHttp = new QHttp ( this );
-
-    connect ( m_pHttp, SIGNAL ( requestFinished ( int, bool ) ),
-              this, SLOT ( httpRequestFinished ( int, bool ) ) );
 }
 
 HttpFetchFile::~HttpFetchFile()
 {
-    m_pHttp->abort();
-    delete m_pHttp;
 }
 
 void HttpFetchFile::executeJob ( HttpJob* job )
 {
-    const QUrl sourceUrl = job->sourceUrl();
+    // FIXME: this is a little bit ugly, but it resolves the following issues:
+    // 1. not all jobs in the queue should have QHttp allocated,
+    //    but only the active ones
+    // 2. we have to connect before execution, even if it is asynchronously,
+    //    I think.
+    job->prepareExecution();
 
-    m_pHttp->setHost ( sourceUrl.host(), sourceUrl.port() != -1 ? sourceUrl.port() : 80 );
-    if ( !sourceUrl.userName().isEmpty() )
-        m_pHttp->setUser ( sourceUrl.userName(), sourceUrl.password() );
-//    if Url has query item like in panoramio API requests source.path() chops it , this "if" gurantees its correct treatement
-    QString cleanupPath;
-    if ( sourceUrl.hasQuery() == true )
-    {
-        cleanupPath= QString ( sourceUrl.toString ( QUrl::RemoveAuthority | QUrl::RemoveScheme ) );
-    }
-    else
-    {
-        cleanupPath = QUrl::toPercentEncoding ( sourceUrl.path(), "/", " -" );
-    }
+    connect( job->m_http, SIGNAL( requestFinished( int, bool ) ),
+	     this, SLOT( httpRequestFinished( int, bool ) ) );
 
-    qDebug() <<sourceUrl.host() <<"and path="<<cleanupPath;
-    QHttpRequestHeader header ( QLatin1String ( "GET" ), cleanupPath );
-    header.setValue ( "Connection", "Keep-Alive" );
-    header.setValue ( "User-Agent", "Marble TinyWebBrowser" );
-    header.setValue ( "Host", sourceUrl.host() );
-
-    int httpGetId = m_pHttp->request ( header, 0, job->buffer() );
+    int httpGetId = job->execute();
     m_pJobMap.insert ( httpGetId, job );
 
     emit statusMessage ( tr ( "Downloading data..." ) );
@@ -90,7 +109,9 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     if ( !m_pJobMap.contains ( requestId ) )
         return;
 
-    QHttpResponseHeader responseHeader = m_pHttp->lastResponse();
+    HttpJob * job = m_pJobMap[ requestId ];
+
+    QHttpResponseHeader responseHeader = job->m_http->lastResponse();
 //     qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
 //              << responseHeader.reasonPhrase();
 
@@ -99,8 +120,6 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
 //
 //    if ( responseHeader.isValid() == false )
 //        return;
-
-    HttpJob* job = m_pJobMap[ requestId ];
 
     if ( responseHeader.statusCode() == 301 )
     {
@@ -126,7 +145,7 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     if ( error != 0 )
     {
         emit statusMessage ( tr ( "Download failed: %1." )
-                             .arg ( m_pHttp->errorString() ) );
+                             .arg ( job->m_http->errorString() ) );
         emit jobDone ( m_pJobMap[ requestId ], error );
 
         m_pJobMap.remove ( requestId );

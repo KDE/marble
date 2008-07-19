@@ -91,7 +91,7 @@ void HttpDownloadManager::addJob ( const QString& relativeUrlString, const QStri
     }
     else
     {
-        delete job;
+        job->deleteLater();
     }
 }
 
@@ -109,7 +109,7 @@ void HttpDownloadManager::addJob ( const QUrl& sourceUrl, const QString& destFil
     }
     else
     {
-        delete job;
+        job->deleteLater();
     }
 }
 
@@ -159,7 +159,7 @@ void HttpDownloadManager::removeJob ( HttpJob* job )
     {
         m_activatedJobList.removeAt ( pos );
         qDebug() << "Removing: " << job->initiatorId();
-        delete job;
+        job->deleteLater();
     }
 
     activateJobs();
