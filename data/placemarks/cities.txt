@@ -1926,7 +1926,7 @@ Sambhal	Uttar Pradesh	in	N	193,8	28.59°N	78.56°E
 Kôfu	Yamanashi	jp	R	193,8	35.66°N	138.57°E
 Sungai Petani	Kedah	my	N	193,8	5.65°N	100.48°E
 Acarigua	Portuguesa	ve	N	193,7	9.58°N	69.20°W
-Klaipeda	Klaipedos	lt	R	193,5	55.71°N	21.13°E
+Klaipėda	Klaipėdos	lt	R	193,5	55.71°N	21.13°E
 Pingchen	Taoyuan	tw	N	193,4	24.95°N	121.21°E
 Neijiang	Sichuan	cn	N	193,3	29.58°N	105.05°E
 Zabrze	Śląskie	pl	N	193,2	50.30°N	18.78°E
@@ -2849,7 +2849,7 @@ Benguela	Benguela	ao	R	134,5	12.58°S	13.40°E
 Citeureup	Jawa Barat	id	N	134,5	6.48°S	106.86°E
 's-Hertogenbosch	Noord-Brabant	nl	R	134,4	51.70°N	5.31°E
 Spring Valley	Nevada	us	N	134,4	36.11°N	115.24°W
-Shiauliai	Shiauliu	lt	R	134,3	55.93°N	23.32°E
+Šiauliai	Šiaulių	lt	R	134,3	55.93°N	23.32°E
 Batala	Punjab	in	N	134,2	31.82°N	75.21°E
 Orange	California	us	N	134,2	33.81°N	117.82°W
 Sioux Falls	South Dakota	us	N	134	43.54°N	96.73°W
@@ -3241,7 +3241,7 @@ Slov'yans'k	Donets'ka	ua	N	120,2	48.85°N	37.58°E
 San Mateo	Southern Tagalog	ph	N	120,2	14.71°N	121.13°E
 Flint	Michigan	us	N	120,1	43.02°N	83.69°W
 Shchjolkovo	Moskovskaja Oblast	ru	N	120,1	55.90°N	38.02°E
-Panevezhys	Panevezhio	lt	R	120,1	55.74°N	24.37°E
+Panevėžys	Panevėžio	lt	R	120,1	55.74°N	24.37°E
 Nehe	Heilongjiang	cn	N	120,1	48.49°N	124.88°E
 Rishra	Bangla	in	N	120	22.71°N	88.36°E
 Kolâr	Karnataka	in	N	120	13.14°N	78.13°E
@@ -8570,7 +8570,7 @@ Troy	New York	us	N	48,8	42.73°N	73.68°W
 Takâb	Azarbayjân-e Bakhtari	ir	N	48,8	36.41°N	47.10°E
 Heerhugowaard	Noord-Holland	nl	N	48,8	52.67°N	4.85°E
 Itamaraju	Bahia	br	N	48,8	17.04°S	39.53°W
-Marijampole	Marijampoles	lt	R	48,8	54.56°N	23.34°E
+Marijampolė	Marijampolės	lt	R	48,8	54.56°N	23.34°E
 Montana	Montana	bg	R	48,8	43.42°N	23.23°E
 Skierniewice	Łódzkie	pl	N	48,8	51.96°N	20.14°E
 Usa	Ôita	jp	N	48,8	33.53°N	131.36°E
@@ -9619,7 +9619,7 @@ Aboisso	Sud-Comoé	ci	N	42,8	5.47°N	3.20°W
 Babanûsah	Gharb Kurdufân	sd	N	42,8	11.33°N	27.80°E
 Urla	Izmir	tr	N	42,8	38.33°N	26.76°E
 Vawkavysk	Hrodna	by	N	42,8	53.16°N	24.44°E
-Mazheikiai	Telshiu	lt	N	42,8	56.33°N	22.34°E
+Mažeikiai	Telšių	lt	N	42,8	56.33°N	22.34°E
 Kosei	Shiga	jp	N	42,8	35.01°N	136.07°E
 Komatsushima	Tokushima	jp	N	42,8	34.01°N	134.59°E
 Amagi	Fukuoka	jp	N	42,8	33.42°N	130.66°E
@@ -12470,7 +12470,7 @@ Shefar'am	Hazafon	il	N	32,1	32.82°N	35.17°E
 Richmond	KwaZulu Natal	za	N	32,1	29.85°S	30.29°E
 Dumfries	Scotland	gb	N	32,1	55.07°N	3.63°W
 Navodari	Constanta	ro	N	32,1	44.33°N	28.61°E
-Kedainiai	Kauno	lt	N	32,1	55.30°N	23.97°E
+Kėdainiai	Kauno	lt	N	32,1	55.30°N	23.97°E
 Yakoma	Équateur	cd	N	32,1	4.11°N	22.44°E
 Pontault-Combault	Seine-et-Marne	fr	N	32,1	48.79°N	2.61°E
 Franconville	Val-d'Oise	fr	N	32,1	48.98°N	2.22°E
@@ -12653,7 +12653,7 @@ Nikki	Borgou	bj	N	31,6	9.93°N	3.22°E
 Kouvola	Kymenlaakso	fi	R	31,6	60.88°N	26.70°E
 Rosiori de Vede	Teleorman	ro	N	31,6	44.12°N	25.00°E
 Bangassou	Mbomou	cf	R	31,6	4.74°N	22.82°E
-Telshiai	Telshiu	lt	R	31,6	55.99°N	22.23°E
+Telšiai	Telšių	lt	R	31,6	55.99°N	22.23°E
 Conflans-Sainte-Honorine	Yvelines	fr	N	31,6	49.01°N	2.10°E
 Baltijsk	Kaliningrad	ru	N	31,6	54.65°N	19.91°E
 Farafenni	Kerewan	gm	N	31,6	13.57°N	15.61°W
@@ -16099,7 +16099,7 @@ Adra	Almería	es	N	23,7	36.76°N	3.02°W
 Teyateyaneng	Berea	ls	R	23,7	29.15°S	27.74°E
 Monze	Southern	zm	N	23,7	16.28°S	27.48°E
 Moskháton	Attikí	gr	N	23,7	37.95°N	23.67°E
-Plunge	Telshiu	lt	N	23,7	55.91°N	21.85°E
+Plungė	Telšių	lt	N	23,7	55.91°N	21.85°E
 Pogradec	Pogradec	al	R	23,7	40.87°N	20.70°E
 Lazarevac	Central Serbia	rs	N	23,7	44.39°N	20.27°E
 Obrenovac	Central Serbia	rs	N	23,7	44.66°N	20.21°E
@@ -17431,8 +17431,8 @@ Matsapha	Manzini	sz	N	21,5	26.53°S	31.30°E
 Houndé	Tuy	bf	R	21,5	11.49°N	3.52°W
 Çine	Aydin	tr	N	21,5	37.62°N	28.06°E
 Aíyion	Ahaia	gr	N	21,5	38.25°N	22.08°E
-Shilute	Klaipedos	lt	N	21,5	55.35°N	21.47°E
-Kretinga	Klaipedos	lt	N	21,5	55.89°N	21.23°E
+Šilutė	Klaipėdos	lt	N	21,5	55.35°N	21.47°E
+Kretinga	Klaipėdos	lt	N	21,5	55.89°N	21.23°E
 Békés	Békés	hu	N	21,5	46.77°N	21.13°E
 Erandio	Vizcaya	es	N	21,5	43.30°N	2.96°W
 Atherton	England	gb	N	21,5	53.52°N	2.49°W
@@ -18161,7 +18161,7 @@ Croix	Nord	fr	N	20,4	50.67°N	3.14°E
 Karnobat	Burgas	bg	N	20,4	42.66°N	26.99°E
 Târgu-Neamt	Neamt	ro	N	20,4	47.21°N	26.36°E
 Tshilenge	Kasai-Oriental	cd	N	20,4	6.25°S	23.76°E
-Radvilishkis	Shiauliu	lt	N	20,4	55.81°N	23.54°E
+Radviliškis	Šiaulių	lt	N	20,4	55.81°N	23.54°E
 La Celle-Saint-Cloud	Yvelines	fr	N	20,4	48.85°N	2.15°E
 Oroszlány	Komárom-Esztergom	hu	N	20,4	47.48°N	18.31°E
 Strzelce Opolskie	Opolskie	pl	N	20,4	50.52°N	18.30°E
@@ -20142,7 +20142,7 @@ Wakiso	Central	ug	N	17,7	0.42°N	32.46°E
 Wervik	West-Vlaanderen	be	N	17,7	50.78°N	3.03°E
 Slobozia	Transnistria	md	N	17,7	46.75°N	29.71°E
 Dilolo	Katanga	cd	N	17,7	10.68°S	22.34°E
-Palanga	Klaipedos	lt	N	17,7	55.92°N	21.06°E
+Palanga	Klaipėdos	lt	N	17,7	55.92°N	21.06°E
 Carvin	Pas-de-Calais	fr	N	17,7	50.49°N	2.95°E
 Ado Odo	Ogun	ng	N	17,7	6.59°N	2.93°E
 Villeneuve-le-Roi	Val-de-Marne	fr	N	17,7	48.74°N	2.40°E
@@ -20887,7 +20887,7 @@ Daimiel	Ciudad Real	es	N	16,8	39.07°N	3.62°W
 Boussé	Kourwéogo	bf	R	16,8	13.10°N	3.41°W
 Sin-le-Noble	Nord	fr	N	16,8	50.37°N	3.11°E
 Tonota	Central Tutume	bw	N	16,8	21.44°S	27.48°E
-Rokishkis	Panevezhio	lt	N	16,8	55.96°N	25.59°E
+Rokiškis	Panevėžio	lt	N	16,8	55.96°N	25.59°E
 Bocsa	Caras-Severin	ro	N	16,8	45.37°N	21.72°E
 Podujevo	Kosovo and Metohija	rs	N	16,8	42.91°N	21.19°E
 Przasnysz	Mazowieckie	pl	N	16,8	53.01°N	20.88°E
@@ -22299,10 +22299,10 @@ Islwyn	Wales	gb	N	15,3	51.68°N	3.23°W
 Ellisras	Limpopo	za	N	15,3	23.67°S	27.75°E
 Sîdî Barrânî	Matrûh	eg	N	15,3	31.61°N	25.92°E
 Rasnov	Brasov	ro	N	15,3	45.60°N	25.46°E
-Birzhai	Panevezhio	lt	N	15,3	56.20°N	24.75°E
+Biržai	Panevėžio	lt	N	15,3	56.20°N	24.75°E
 Taúros	Attikí	gr	N	15,3	37.97°N	23.70°E
 Kembé	Basse-Kotto	cf	N	15,3	4.62°N	21.89°E
-Gargzhdai	Klaipedos	lt	N	15,3	55.71°N	21.39°E
+Gargždai	Klaipėdos	lt	N	15,3	55.71°N	21.39°E
 Milanówek	Mazowieckie	pl	N	15,3	52.13°N	20.66°E
 Grimari	Ouaka	cf	N	15,3	5.74°N	20.05°E
 Dorchester	England	gb	N	15,3	50.72°N	2.45°W
