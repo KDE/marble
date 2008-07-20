@@ -35,6 +35,7 @@
 #include <QtGui/QPixmap>
 
 #include "global.h"
+#include "ExtDateTime.h"
 
 class QItemSelectionModel;
 
@@ -50,6 +51,7 @@ class GpxFileModel;
 class HttpDownloadManager;
 class MarbleModelPrivate;
 class PlaceMarkLayout;
+class ExtDateTime;
 class SunLocator;
 class TextureColorizer;
 class TileCreator;
@@ -57,7 +59,6 @@ class VectorComposer;
 class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
-class ExtDateTime;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
@@ -234,7 +235,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void stopPolling();
 
-    SunLocator* sunLocator() const;
+    ExtDateTime*          dateTime()       const;
+    SunLocator*           sunLocator()     const;
     MergedLayerDecorator* layerDecorator() const;
 
     /**

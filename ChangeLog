@@ -1,5 +1,10 @@
 2008-07-20  Inge Wallin  <inge@lysator.liu.se>
 
+	Introduce a read-only facade for internal Marble data.
+	* src/lib/CMakeLists.txt: compile new .cpp and install new .h
+	* src/lib/MarbleDataFacade.{h,cpp}: new files
+	* src/lib/MarbleModel.{h,cpp} (dateTime): New function
+
 	Restore forward compatibility
 	* src/lib/MarbleModel.{h,cpp}: Make all members part of the
 	private class.

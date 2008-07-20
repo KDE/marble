@@ -59,6 +59,7 @@ set(marblewidget_SRCS
     MarbleWidgetInputHandler.cpp
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
+    MarbleDataFacade.cpp
 
     ClipPainter.cpp
     GeoPainter.cpp
@@ -250,6 +251,7 @@ else (APPLE AND QTONLY)
     MarbleMap.h
     MarbleControlBox.h
     MarbleNavigator.h
+    MarbleDataFacade.h
     MapThemeManager.h
 
     MarbleWidgetInputHandler.h
