@@ -12,11 +12,15 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QRectF>
+#include <QtCore/QDateTime>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
+
+#include "Quaternion.h"
 #include "ViewportParams.h"
+
 
 QStringList MarbleStarsPlugin::backendTypes() const
 {
@@ -112,6 +116,25 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( starPen );
     painter->setBrush( starBrush );
 
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+
+    double gmst = siderealTime( currentDateTime );
+    double skyRotationAngle = gmst / 12.0 * M_PI;
+
+//    double gmst_hh = (int)( gmst );
+//    double gmst_mm = (gmst - gmst_hh) * 60.0;
+//    qDebug() << "Sidereal Time" << gmst_hh << ":" << gmst_mm;
+//    qDebug() << "sky rotation angle: " << hourAngle;
+
+    double centerLon, centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    Quaternion  skyAxis;
+    skyAxis.createFromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
+
+    matrix       skyAxisMatrix;
+    skyAxis.inverse().toMatrix( skyAxisMatrix );
+
     if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
     {
         int x, y;
@@ -121,7 +144,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         {
             Quaternion  qpos = (*i).quaternion();
 
-            qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
+            qpos.rotateAroundAxis( skyAxisMatrix );
 
             if ( qpos.v[Q_Z] > 0 ) {
                 continue;
@@ -163,6 +186,26 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     return true;
+}
+
+double MarbleStarsPlugin::siderealTime( const QDateTime& currentDateTime )
+{
+    QDateTime utcDateTime = currentDateTime.toTimeSpec ( Qt::UTC );
+    double mjdUtc = (double)( utcDateTime.date().toJulianDay() );
+
+    QDateTime offsetUtc( utcDateTime.date(), utcDateTime.time(), Qt::OffsetFromUTC );
+    double offsetUtcSecs = -offsetUtc.time().secsTo( QTime( 00, 00 ) );
+
+    double d_days = mjdUtc - 2451545.5;
+    double d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
+
+    //  Appendix A of USNO Circular No. 163 (1981):
+    //  Approximate value for Greenwich mean sidereal time in hours: 
+    //  (Loss of precision: 0.1 secs per century)
+    double gmst = 18.697374558 + 24.06570982441908 * d;
+
+    // Range (0..24) for gmst: 
+    return gmst - (int)( gmst / 24.0 ) * 24.0; 
 }
 
 Q_EXPORT_PLUGIN2(MarbleStarsPlugin, MarbleStarsPlugin)

@@ -51,6 +51,7 @@ class StarPoint {
     Quaternion  m_q;
 };
 
+class QDateTime;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -86,6 +87,9 @@ class MarbleStarsPlugin : public MarbleAbstractLayer
 
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+
+    // sidereal time in hours:
+    double siderealTime( const QDateTime& );
 
  private:
     QVector<StarPoint> m_stars;
