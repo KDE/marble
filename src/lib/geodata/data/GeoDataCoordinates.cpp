@@ -23,37 +23,37 @@
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit, int _detail )
-  : d_ptr( new GeoDataCoordinatesPrivate() )
+  : d( new GeoDataCoordinatesPrivate() )
 {
-    d_ptr->m_altitude = _alt;
-    d_ptr->m_detail = _detail;
+    d->m_altitude = _alt;
+    d->m_detail = _detail;
     switch( unit ){
     case Radian:
-        d_ptr->m_q = Quaternion( _lon, _lat );
-        d_ptr->m_lon = _lon;
-        d_ptr->m_lat = _lat;
+        d->m_q = Quaternion( _lon, _lat );
+        d->m_lon = _lon;
+        d->m_lat = _lat;
         break;
     case Degree:
-        d_ptr->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
-        d_ptr->m_lon = _lon * DEG2RAD;
-        d_ptr->m_lat = _lat * DEG2RAD;
+        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+        d->m_lon = _lon * DEG2RAD;
+        d->m_lat = _lat * DEG2RAD;
         break;
     }
 }
 
 GeoDataCoordinates::GeoDataCoordinates( const GeoDataCoordinates& other )
-  : d_ptr( new GeoDataCoordinatesPrivate( *other.d_ptr ) )
+  : d( new GeoDataCoordinatesPrivate( *other.d ) )
 {
 }
 
 GeoDataCoordinates::GeoDataCoordinates()
-  : d_ptr( new GeoDataCoordinatesPrivate() )
+  : d( new GeoDataCoordinatesPrivate() )
 {
 }
 
 GeoDataCoordinates::~GeoDataCoordinates()
 {
-    delete d_ptr;
+    delete d;
 #ifdef DEBUG_GEODATA
 //    qDebug() << "delete coordinates";
 #endif
