@@ -308,11 +308,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
-
-    // FIXME: move to d-pointer class
-    SunLocator* m_sunLocator;
-    MergedLayerDecorator* m_layerDecorator;
-    ExtDateTime* m_dateTime;
 };
 
 

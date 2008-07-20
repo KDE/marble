@@ -1,5 +1,9 @@
 2008-07-20  Inge Wallin  <inge@lysator.liu.se>
 
+	Restore forward compatibility
+	* src/lib/MarbleModel.{h,cpp}: Make all members part of the
+	private class.
+
 	Reduce warnings: Initialize in the right order.
 	* src/lib/geodata/data/GeoDataPlacemark.cpp (GeoDataPlacemarkPrivate),
 	* src/lib/geodata/data/GeoDataPolygon.cpp (GeoDataPolygonPrivate),
