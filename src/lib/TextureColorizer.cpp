@@ -103,14 +103,6 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             double  centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            // Make sure that the centerLat won't exceed maxLat
-            double maxLat = viewParams->viewport()->currentProjection()->maxLat();
-
-            if ( fabs( centerLat ) > maxLat )
-            {
-                centerLat = maxLat * centerLat / fabs( centerLat );
-            }
-
             const float rad2Pixel = (double)( 2 * radius ) / M_PI;
             if ( viewParams->projection() == Equirectangular ) {
                 int yCenterOffset = (int)( centerLat * rad2Pixel );

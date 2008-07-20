@@ -71,14 +71,6 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    // Make sure that the centerLat won't exceed maxLat
-    double maxLat = viewParams->viewport()->currentProjection()->maxLat();
-
-    if ( fabs( centerLat ) > maxLat )
-    {
-        centerLat = maxLat * centerLat / fabs( centerLat );
-    }
-
     int yCenterOffset = (int)( centerLat * rad2Pixel );
 
     // Calculate y-range the represented by the center point, yTop and

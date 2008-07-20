@@ -24,7 +24,7 @@ SphericalProjection::SphericalProjection()
     : AbstractProjection()
 {
     m_maxLat  = 90.0 * DEG2RAD;
-
+    m_traversableMaxLat = true;
     m_repeatX = false;
 }
 

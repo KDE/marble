@@ -71,14 +71,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     double centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    // Make sure that the centerLat won't exceed maxLat
-    double maxLat = viewParams->viewport()->currentProjection()->maxLat();
-
-    if ( fabs( centerLat ) > maxLat )
-    {
-        centerLat = maxLat * centerLat / fabs( centerLat );
-    }
-
     int yCenterOffset = 0;
 
     yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
@@ -102,7 +94,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {        
         lat = atan( sinh( ( (m_imageHeight / 2 + yCenterOffset) - y )
-                    / (double)(2 * radius) * M_PI ) );
+                    * pixel2Rad ) );
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
     

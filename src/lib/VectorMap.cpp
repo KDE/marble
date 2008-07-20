@@ -454,14 +454,6 @@ void VectorMap::rectangularCreatePolyLine(
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    // Make sure that the centerLat won't exceed maxLat
-    double maxLat = viewport->currentProjection()->maxLat();
-
-    if ( fabs( centerLat ) > maxLat )
-    {
-        centerLat = maxLat * centerLat / fabs( centerLat );
-    }
-
     // Other convenience variables
     double  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
 
@@ -500,7 +492,7 @@ void VectorMap::rectangularCreatePolyLine(
 	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
 	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
 	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
-	    double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
+	    double yAtSouthPole = (double)(m_imgheight) / 2.0 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 
@@ -570,15 +562,6 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-
-    // Make sure that the centerLat won't exceed maxLat
-    double maxLat = viewport->currentProjection()->maxLat();
-
-    if ( fabs( centerLat ) > maxLat )
-    {
-        centerLat = maxLat * centerLat / fabs( centerLat );
-    }
-
     // Other convenience variables
     double  rad2Pixel = (double)( 2 * viewport->radius() ) / M_PI;
 
@@ -602,7 +585,12 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 
 	// FIXME: Call the projection.  Unfortunately there is no
 	//        screenCoordinates taking doubles.
-	itPoint->geoCoordinates( lon, lat);
+	itPoint->geoCoordinates( lon, lat );
+
+    // Removing all points beyond +/- 85 deg for Mercator:
+    if ( fabs( lat ) > viewport->currentProjection()->maxLat() )
+        continue;
+
 	double x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
 	double y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
@@ -622,8 +610,8 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 	    // FIXME: mercator projection here too.
 	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
 	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
-	    double yAtSouthPole = (double)(m_imgheight) / 2.0 + rad2Pixel * ( M_PI / 2.0 + centerLat );
+        double lastYAtDateLine = (double)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( m_lastLat ) ) - atanh( sin( centerLat ) ) ) );
+        double yAtSouthPole = (double)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->maxLat() ) ) - atanh( sin( centerLat ) ) ) );
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 

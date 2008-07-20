@@ -632,10 +632,7 @@ void MarbleMap::setHome(const GeoDataPoint& homePoint, int zoom)
 
 void MarbleMap::moveLeft()
 {
-    int polarity = 0;
-
-    if ( northPoleY() != 0 )
-        polarity = northPoleY() / abs(northPoleY());
+    int polarity = viewParams()->viewport()->polarity();
 
     if ( polarity < 0 )
         rotateBy( +moveStep(), 0 );
@@ -645,10 +642,7 @@ void MarbleMap::moveLeft()
 
 void MarbleMap::moveRight()
 {
-    int polarity = 0;
-
-    if ( northPoleY() != 0 )
-        polarity = northPoleY() / abs(northPoleY());
+    int polarity = viewParams()->viewport()->polarity();
 
     if ( polarity < 0 )
         rotateBy( -moveStep(), 0 );
@@ -700,17 +694,6 @@ int MarbleMap::northPoleY()
     northPole.rotateAroundAxis( invPlanetAxis );
     return (int)( d->m_viewParams.radius() * northPole.v[Q_Y] );
 }
-
-int MarbleMap::northPoleZ()
-{
-    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.planetAxis().inverse();
-
-    northPole.rotateAroundAxis( invPlanetAxis );
-
-    return (int)( d->m_viewParams.radius() * northPole.v[Q_Z] );
-}
-
 
 bool MarbleMap::screenCoordinates( const double lon, const double lat,
                                    int& x, int& y )
