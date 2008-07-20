@@ -44,7 +44,11 @@ HttpDownloadManager::~HttpDownloadManager()
     qDeleteAll ( m_jobQueue );
     m_jobQueue.clear();
 
-    qDeleteAll ( m_activatedJobList );
+    QList<HttpJob*>::const_iterator pos = m_activatedJobList.begin();
+    QList<HttpJob*>::const_iterator const end = m_activatedJobList.begin();
+    for (; pos != end; ++pos ) {
+        (*pos)->deleteLater();
+    }
     m_activatedJobList.clear();
 
     qDeleteAll ( m_jobBlackList );

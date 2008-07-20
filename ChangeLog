@@ -1,3 +1,11 @@
+2008-07-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpDownloadManager.cpp:
+
+    Fix regression caused by fix for bug 162681:
+    Use deleteAfter to delete active jobs also in
+    ~HttpDownloadManager.
+
 2008-07-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpFetchFile.cpp:
