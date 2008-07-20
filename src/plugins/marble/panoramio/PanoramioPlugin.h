@@ -73,7 +73,7 @@ class PanoramioPlugin : public MarbleAbstractLayer
         panoramioDataStructure temp;
         QPixmap tempImage;
         int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
-        HttpJob *job;
+//         HttpJob *job;
         int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
 };
 

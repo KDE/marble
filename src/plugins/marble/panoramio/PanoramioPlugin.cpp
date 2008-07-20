@@ -86,13 +86,13 @@ bool PanoramioPlugin::render ( GeoPainter *painter, ViewportParams *viewport, co
         double east = mylatLonAltBox.east();
         double south = mylatLonAltBox.south();
         double north = mylatLonAltBox.north();
-//  if ( ( west - deltaWest ) != 0 || ( east - deltaEast != 0 ) || ( south - deltaSouth != 0 ) || ( north - deltaNorth != 00 ) )
-//  {
-//     //       flag = 0 ;
-//             qDebug() <<"delta part";
-//          downloadPanoramio ( 0 , numberOfImagesToShow , west , east , north , south );
-//         disconnect( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotImageDownloadComplete ( QString , QString ) ) );
-//  }
+ if ( ( west - deltaWest ) != 0 || ( east - deltaEast != 0 ) || ( south - deltaSouth != 0 ) || ( north - deltaNorth != 00 ) )
+ {
+          flag = 0 ;
+            qDebug() <<"delta part";
+         downloadPanoramio ( 0 , numberOfImagesToShow , west , east , north , south );
+        disconnect( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotImageDownloadComplete ( QString , QString ) ) );
+ }
 
         if ( flag == 1 ) {
                 for ( int x = 0; x < imagesWeHave.count(); ++x ) {
@@ -150,16 +150,16 @@ void PanoramioPlugin::downloadPanoramio ( int rangeFrom , int rangeTo ,double ea
                                            + "&minx=" + QString::number ( east * RADIANSTODEGREES )
                                            + "&miny=" + QString::number ( west * RADIANSTODEGREES )
                                            + "&maxx=" + QString::number ( north * RADIANSTODEGREES )
-                                           + "&maxy=" + QString::number ( south * RADIANSTODEGREES ) + "&size=medium" ),"panoramio","panoramio");
+                                           + "&maxy=" + QString::number ( south * RADIANSTODEGREES ) + "&size=medium" ),"panoramio"+QString::number ( east),"panoramio" +QString::number ( east));
         connect ( m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ),this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ) );
         qDebug() <<"::::::::::::::shanky0";
-        job = new HttpJob ( QUrl ( "http://www.panoramio.com/map/get_panoramas.php?from="
-                                   + QString::number ( rangeFrom )
-                                   + "&to=" + QString::number ( rangeTo )
-                                   + "&minx=" + QString::number ( east * RADIANSTODEGREES )
-                                   + "&miny=" + QString::number ( west * RADIANSTODEGREES )
-                                   + "&maxx=" + QString::number ( north * RADIANSTODEGREES )
-                                   + "&maxy=" + QString::number ( south * RADIANSTODEGREES ) + "&size=medium" ), "panoramio","panoramio" );
+//         job = new HttpJob ( QUrl ( "http://www.panoramio.com/map/get_panoramas.php?from="
+//                                    + QString::number ( rangeFrom )
+//                                    + "&to=" + QString::number ( rangeTo )
+//                                    + "&minx=" + QString::number ( east * RADIANSTODEGREES )
+//                                    + "&miny=" + QString::number ( west * RADIANSTODEGREES )
+//                                    + "&maxx=" + QString::number ( north * RADIANSTODEGREES )
+//                                    + "&maxy=" + QString::number ( south * RADIANSTODEGREES ) + "&size=medium" ), "panoramio","panoramio" );
 }
 
 
