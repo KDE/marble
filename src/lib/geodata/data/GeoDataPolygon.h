@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
 //
 
 
@@ -64,7 +65,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
 
     virtual EnumGeometryId geometryId() const { return GeoDataPolygonId; };
  protected:
-    GeoDataPolygonPrivate * const d_polyg;
+    GeoDataPolygonPrivate * const d;
 };
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon {};

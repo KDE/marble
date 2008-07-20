@@ -7,6 +7,7 @@
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
 //
 
 
@@ -31,63 +32,64 @@ class GeoDataGeometryPrivate
 
 bool GeoDataGeometry::extrude() const
 {
-    return d_geom->m_extrude;
+    return d->m_extrude;
 }
 
 void GeoDataGeometry::setExtrude( bool extrude )
 {
-    d_geom->m_extrude = extrude;
+    d->m_extrude = extrude;
 }
 
 bool GeoDataGeometry::tessellate() const
 {
-    return d_geom->m_tessellate;
+    return d->m_tessellate;
 }
 
 void GeoDataGeometry::setTessellate( bool tessellate )
 {
-    d_geom->m_tessellate = tessellate;
+    d->m_tessellate = tessellate;
 }
 
 AltitudeMode GeoDataGeometry::altitudeMode() const
 {
-    return d_geom->m_altitudeMode;
+    return d->m_altitudeMode;
 }
 
 void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
 {
-    d_geom->m_altitudeMode = altitudeMode;
+    d->m_altitudeMode = altitudeMode;
 }
 
 
-GeoDataGeometry::GeoDataGeometry() : d_geom( new GeoDataGeometryPrivate() )
+GeoDataGeometry::GeoDataGeometry() 
+    : d( new GeoDataGeometryPrivate() )
 {
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
-    : d_geom( new GeoDataGeometryPrivate() )
+    : d( new GeoDataGeometryPrivate() )
 {
-    *d_geom = *other.d_geom;
+    *d = *other.d;
 }
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
 {
-    *d_geom = *other.d_geom;
+    *d = *other.d;
     return *this;
 }
 
 GeoDataGeometry::~GeoDataGeometry()
 {
-    delete d_geom;
+    delete d;
 }
 
 void GeoDataGeometry::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << d_geom->m_extrude;
-    stream << d_geom->m_tessellate;
-    stream << d_geom->m_altitudeMode;
+    stream << d->m_extrude;
+    stream << d->m_tessellate;
+    stream << d->m_altitudeMode;
 }
 
 void GeoDataGeometry::unpack( QDataStream& stream )
@@ -95,8 +97,8 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     int am;
-    stream >> d_geom->m_extrude;
-    stream >> d_geom->m_tessellate;
+    stream >> d->m_extrude;
+    stream >> d->m_tessellate;
     stream >> am;
-    d_geom->m_altitudeMode;
+    d->m_altitudeMode;
 }

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
 //
 
 
@@ -37,37 +38,37 @@ class GeoDataHotSpotPrivate
 };
 
 GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yunits ) 
-    : d_hot( new GeoDataHotSpotPrivate( hotSpot, xunits, yunits ) )
+    : d( new GeoDataHotSpotPrivate( hotSpot, xunits, yunits ) )
 {
 }
 
 GeoDataHotSpot::~GeoDataHotSpot()
 {
-    delete d_hot;
+    delete d;
 }
 
 const QPointF& GeoDataHotSpot::hotSpot( Units &xunits, Units &yunits ) const
 {
-    xunits = d_hot->m_xunits;
-    yunits = d_hot->m_yunits;
+    xunits = d->m_xunits;
+    yunits = d->m_yunits;
 
-    return d_hot->m_hotSpot;
+    return d->m_hotSpot;
 }
 
 
 void GeoDataHotSpot::setHotSpot( const QPointF& hotSpot, Units xunits, Units yunits )
 {
-    d_hot->m_hotSpot = hotSpot;
-    d_hot->m_xunits = xunits;
-    d_hot->m_yunits = yunits;
+    d->m_hotSpot = hotSpot;
+    d->m_xunits = xunits;
+    d->m_yunits = yunits;
 }
 
 void GeoDataHotSpot::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << d_hot->m_xunits << d_hot->m_yunits;
-    stream << d_hot->m_hotSpot;
+    stream << d->m_xunits << d->m_yunits;
+    stream << d->m_hotSpot;
 }
 
 void GeoDataHotSpot::unpack( QDataStream& stream )
@@ -75,8 +76,8 @@ void GeoDataHotSpot::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
     int xu, yu;
     stream >> xu >> yu;
-    d_hot->m_xunits = static_cast<Units>(xu);
-    d_hot->m_yunits = static_cast<Units>(yu);
-    stream >> d_hot->m_hotSpot;
+    d->m_xunits = static_cast<Units>(xu);
+    d->m_yunits = static_cast<Units>(yu);
+    stream >> d->m_hotSpot;
 
 }
