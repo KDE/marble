@@ -93,6 +93,12 @@ class MarbleModelPrivate
     MarblePlacemarkModel  *m_placemarkmodel;
     PlaceMarkLayout       *m_placeMarkLayout;
 
+
+    // Misc stuff
+    ExtDateTime           *m_dateTime;
+    SunLocator            *m_sunLocator;
+    MergedLayerDecorator  *m_layerDecorator;
+
     // Selection handling
     QItemSelectionModel *m_placemarkselectionmodel;
 
@@ -163,18 +169,18 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
 
-    m_dateTime = new ExtDateTime();
-    m_sunLocator = new SunLocator(m_dateTime);
-    m_layerDecorator = new MergedLayerDecorator(m_sunLocator);
+    d->m_dateTime       = new ExtDateTime();
+    d->m_sunLocator     = new SunLocator( d->m_dateTime );
+    d->m_layerDecorator = new MergedLayerDecorator( d->m_sunLocator );
 
-    connect(m_dateTime, SIGNAL( timeChanged() ),
-            m_sunLocator, SLOT( update() ) );
-    connect( m_layerDecorator, SIGNAL( repaintMap() ),
-                               SIGNAL( modelChanged() ) );
+    connect(d->m_dateTime,   SIGNAL( timeChanged() ),
+            d->m_sunLocator, SLOT( update() ) );
+    connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
+                                  SIGNAL( modelChanged() ) );
 
     // TODO be able to set these somewhere
-    m_layerDecorator->setShowClouds(true);
-    m_layerDecorator->setShowTileId(false);
+    d->m_layerDecorator->setShowClouds( true );
+    d->m_layerDecorator->setShowTileId( false );
 }
 
 MarbleModel::~MarbleModel()
@@ -705,12 +711,12 @@ void MarbleModel::update()
 
 SunLocator* MarbleModel::sunLocator() const
 {
-    return m_sunLocator;
+    return d->m_sunLocator;
 }
 
 MergedLayerDecorator* MarbleModel::layerDecorator() const
 {
-    return m_layerDecorator;
+    return d->m_layerDecorator;
 }
 
 void MarbleModel::clearVolatileTileCache()
@@ -776,14 +782,14 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
     qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level << "requestTileUpdate" << requestTileUpdate;
     
     if ( d->m_downloadManager != 0 ) {
-        connect( m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString ) ),
+        connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString ) ),
                  d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
     }
 
-    m_layerDecorator->setInfo(x, y, level, tile->id());
-    m_layerDecorator->setTile(tile->tile());
+    d->m_layerDecorator->setInfo(x, y, level, tile->id());
+    d->m_layerDecorator->setTile(tile->tile());
         
-    m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
+    d->m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
     tile->loadTile(requestTileUpdate);
 }
 

@@ -1,3 +1,9 @@
+2008-07-20  Inge Wallin  <inge@lysator.liu.se>
+
+	Restore forward compatibility
+	* src/lib/MarbleModel.{h,cpp}: Make all members part of the
+	private class.
+
 2008-07-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpDownloadManager.cpp:
