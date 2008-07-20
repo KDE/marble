@@ -17,7 +17,6 @@
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
-#include "GeoDataPoint.h"
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
