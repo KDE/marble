@@ -93,9 +93,9 @@ class MarbleModelPrivate
     PlaceMarkLayout       *m_placeMarkLayout;
 
     // Misc stuff.
+    ExtDateTime           *m_dateTime;
     SunLocator            *m_sunLocator;
     MergedLayerDecorator  *m_layerDecorator;
-    ExtDateTime           *m_dateTime;
 
     // Selection handling
     QItemSelectionModel *m_placemarkselectionmodel;
@@ -167,9 +167,9 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
 
+    d->m_dateTime       = new ExtDateTime();
     d->m_sunLocator     = new SunLocator( d->m_dateTime );
     d->m_layerDecorator = new MergedLayerDecorator( d->m_sunLocator );
-    d->m_dateTime       = new ExtDateTime();
 
     connect(d->m_dateTime,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
