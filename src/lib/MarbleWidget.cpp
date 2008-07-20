@@ -717,11 +717,6 @@ int MarbleWidget::northPoleY()
     return d->m_map->northPoleY();
 }
 
-int MarbleWidget::northPoleZ()
-{
-    return d->m_map->northPoleZ();
-}
-
 bool MarbleWidget::screenCoordinates( const double lon, const double lat,
                                       int& x, int& y )
 {

@@ -26,7 +26,7 @@
 #include "TileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-
+#include "AbstractProjection.h"
 
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
@@ -56,7 +56,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_toTileCoordinatesLat = (double)(globalHeight() / 2 - m_tilePosY);
 
     // Calculate how many degrees are being represented per pixel.
-    const float rad2Pixel = M_PI / (float)( 2 * radius );
+    const float rad2Pixel = (float)( 2 * radius ) / M_PI;
 
     int yTop;
     int yPaintedTop;
@@ -68,20 +68,10 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Calculate translation of center point
     double centerLon, centerLat;
+
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = 0;
-    if ( viewParams->projection() == Equirectangular ) {
-        yCenterOffset = (int)( centerLat / rad2Pixel );
-    }
-    else if ( viewParams->projection() == Mercator ) {
-        if ( fabs( centerLat ) < atan( sinh( M_PI ) ) )
-            yCenterOffset = (int)( asinh( tan( centerLat ) ) / rad2Pixel  );
-        else {
-            yCenterOffset = (int)(centerLat / fabs(centerLat)) * 2 * radius;
-            qDebug() << "Southpole?" << yCenterOffset * 180.0 / M_PI ;
-        }
-    }
+    int yCenterOffset = (int)( centerLat * rad2Pixel );
 
     // Calculate y-range the represented by the center point, yTop and
     // yBottom and what actually can be painted
@@ -99,18 +89,17 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
-    float leftLon = + centerLon - ( rad2Pixel * m_imageWidth / 2 );
+    float leftLon = + centerLon - ( m_imageWidth / 2 / rad2Pixel );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
+
+    const double pixel2Rad = 1.0/rad2Pixel;
 
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
       
-        if ( viewParams->projection() == Equirectangular )
-            lat = M_PI/2 - (y - yTop )* rad2Pixel;
-        else if ( viewParams->projection() == Mercator )
-            lat = atan( sinh( ( (m_imageHeight / 2 + yCenterOffset) - y )
-			      / (double)(2 * radius) * M_PI ) );
+        lat = M_PI/2 - (y - yTop )* pixel2Rad;
+
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
 
@@ -118,10 +107,10 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         const QRgb * scanLineEnd   = m_scanLine + m_imageWidth;
 
         for ( QRgb * scanLine = scanLineBegin;
-	      scanLine < scanLineEnd;
+              scanLine < scanLineEnd;
               ++scanLine )
-	{
-            lon += rad2Pixel;
+        {
+            lon += pixel2Rad;
             if ( lon < -M_PI ) lon += 2 * M_PI;
             if ( lon >  M_PI ) lon -= 2 * M_PI;
             pixelValue( lon, lat, scanLine, highQuality );

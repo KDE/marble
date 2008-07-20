@@ -278,7 +278,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
                 if ( m_widget->projection() == Spherical ) {
-                    if ( m_widget->northPoleZ() > 0 ) {
+                    if ( polarity > 0 ) {
 
                         if ( event->y() < ( - m_widget->northPoleY()
                                         + m_widget->height() / 2 ) )

@@ -95,34 +95,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
 
-#if 0
-    Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
-
-    Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
-    Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
-
-    Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
-    Q_PROPERTY(bool showCompass  READ showCompass     WRITE setShowCompass)
-    Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
-
-    Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
-
-    Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
-    Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
-    Q_PROPERTY(bool showTerrain  READ showTerrain     WRITE setShowTerrain)
-    Q_PROPERTY(bool showOtherPlaces READ showOtherPlaces WRITE setShowOtherPlaces)
-
-    Q_PROPERTY(bool showRelief   READ showRelief      WRITE setShowRelief)
-    Q_PROPERTY(bool showElevationModel READ showElevationModel WRITE setShowElevationModel)
-
-    Q_PROPERTY(bool showIceLayer READ showIceLayer    WRITE setShowIceLayer)
-    Q_PROPERTY(bool showBorders  READ showBorders     WRITE setShowBorders)
-    Q_PROPERTY(bool showRivers   READ showRivers      WRITE setShowRivers)
-    Q_PROPERTY(bool showLakes    READ showLakes       WRITE setShowLakes)
-
-    Q_PROPERTY(quint64 persistentTileCacheLimit  READ persistentTileCacheLimit  WRITE setPersistentTileCacheLimit)
-    Q_PROPERTY(quint64 volatileTileCacheLimit    READ volatileTileCacheLimit    WRITE setVolatileTileCacheLimit)
-#endif
  public:
 
     friend class MarbleWidget;
@@ -242,17 +214,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @return the pixel address of the geographical north pole.
      */
     int northPoleY();
-    /**
-     * @brief Get the Z coordinate of the North Pole.
-     * @return the Z coordinate of the geographical north pole.
-     *
-     * This function returns the Z coordinate of the north pole. It
-     * will return a positive value if the north pole is visible,
-     * i.e. pointing towards the viewer.  It will return a negative
-     * value if the north pole is behind the horizon, i.e. pointing
-     * away from the viewer.
-     */
-    int northPoleZ();
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

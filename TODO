@@ -19,12 +19,12 @@ Documentation
  * Write more in USECASES                                               INGE
 
 Add maps to GHNS:
- * Annual precipation,                                                  ----
-    - precipation July                                                  --
-    - precipation December                                              --
- * Annual temperature                                                   ----
-    - temperature July                                                  --
-    - temperature December                                              --
+ * Annual precipation,                                                  DONE
+    - precipation July                                                  DONE
+    - precipation December                                              DONE
+ * Annual temperature                                                   DONE
+    - temperature July                                                  DONE
+    - temperature December                                              DONE
 
 
 Before KDE 4.0.2
@@ -87,11 +87,11 @@ Vector backend
 
 Features:
  * Settings								----
-    - DMS  <-->  Degrees (decimal)					inge
+    - DMS  <-->  Degrees (decimal)					done
  * Support for OpenStreetMap                                            JM
     - Load tiles                                                        done
     - Display tiles                                                     done
-    - Expiration of tiles                                               --
+    - Expiration of tiles                                               done
     - Searching for cities and streets                                  --
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip

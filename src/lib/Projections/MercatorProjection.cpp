@@ -33,7 +33,7 @@ MercatorProjection::MercatorProjection()
 {
     // This is the max value where atanh( sin( lat ) ) is defined.
     m_maxLat  = 85.05113 * DEG2RAD;
-
+    m_traversableMaxLat = false;
     m_repeatX = true;
 }
 
@@ -54,21 +54,16 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
 					    CoordinateType coordType )
 {
     Q_UNUSED( coordType );
-/*
-    if ( fabs( lat ) >= m_maxLat )
+
+    if ( fabs( lat ) > m_maxLat )
         return false;
-*/
+
     double  rad2Pixel = 2 * viewport->radius() / M_PI;
 
     // Calculate translation of center point
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-
-    if ( fabs( centerLat ) > m_maxLat )
-    {
-        centerLat = m_maxLat * centerLat / fabs( centerLat );
-    }
 
     // Let (x, y) be the position on the screen of the placemark..
     x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
@@ -87,7 +82,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
 
     geopoint.geoCoordinates( lon, lat );
 
-    if ( fabs( lat ) >=  m_maxLat )
+    if ( fabs( lat ) >  m_maxLat )
         return false;
 
     double  rad2Pixel = 2 * viewport->radius() / M_PI;
@@ -95,11 +90,6 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-
-    if ( fabs( centerLat ) > m_maxLat )
-    {
-        centerLat = m_maxLat * centerLat / fabs( centerLat );
-    }
     
     // Let (x, y) be the position on the screen of the placemark..
     x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
@@ -125,7 +115,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
 
     geopoint.geoCoordinates( lon, lat );
 
-    if ( fabs( lat ) >  maxLat() )
+    if ( fabs( lat ) > maxLat() )
         return false;
 
     double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
@@ -133,11 +123,6 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
-
-    if ( fabs( centerLat ) > m_maxLat )
-    {
-        centerLat = m_maxLat * centerLat / fabs( centerLat );
-    }
 
     // Let (itX, y) be the first guess for one possible position on screen..
     int itX = (int)( viewport->width()  / 2.0 + rad2Pixel * ( lon - centerLon ) );
@@ -208,16 +193,20 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)( centerLat * (double)(2 * radius) / M_PI);
-    int yTop          = halfImageHeight - radius + yCenterOffset;
-    int yBottom       = yTop + 2 * radius;
+    // Calculate how many pixel are being represented per radians.
+    const float rad2Pixel = (double)( 2 * radius )/M_PI;
+
+    int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
+    int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
+    int yBottom       = yTop + 4 * radius;
+
     if ( y >= yTop && y < yBottom ) {
         int    const  xPixels   = x - halfImageWidth;
-        double const  pixel2rad = M_PI / (2 * radius);
+        double const  pixel2Rad = M_PI / (2 * radius);
 
-        lat = atan( sinh( ((halfImageHeight + yCenterOffset) - y)
-                          / (double)(2 * radius) * M_PI ) );
-        lon = xPixels * pixel2rad + centerLon;
+        lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
+                          * pixel2Rad ) );
+        lon = xPixels * pixel2Rad + centerLon;
 
         while ( lon > M_PI )  lon -= 2*M_PI;
         while ( lon < -M_PI ) lon += 2*M_PI;
@@ -279,27 +268,6 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
         }
     }
 
-    // Now we need to check whether maxLat (e.g. the north pole) gets displayed
-    // inside the viewport.
-
-    // We need a point on the screen at maxLat that definetely gets displayed:
-    double averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
-
-    GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
-    GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
-
-    int dummyX, dummyY; // not needed
-    bool dummyVal;
-
-    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
-        latLonAltBox.setEast( +M_PI );
-        latLonAltBox.setWest( -M_PI );
-    }
-    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
-        latLonAltBox.setEast( +M_PI );
-        latLonAltBox.setWest( -M_PI );
-    }
-
 //    qDebug() << latLonAltBox.text( GeoDataPoint::Degree );
 
     return latLonAltBox;
@@ -308,6 +276,23 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
 
 bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) const
 {
-    // FIXME: NYI
-    return false;
+    int           radius             = viewport->radius();
+    int           halfImageHeight    = viewport->height() / 2;
+
+    // Calculate translation of center point
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    // Calculate how many pixel are being represented per radians.
+    const float rad2Pixel = (float)( 2 * radius )/M_PI;
+
+    int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
+    int yTop          = halfImageHeight - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
+
+    if ( yTop >= 0 ||  yBottom < viewport->height() )
+        return false;
+
+    return true;
 }

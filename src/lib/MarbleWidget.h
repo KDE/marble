@@ -274,17 +274,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return the pixel address of the geographical north pole.
      */
     int northPoleY();
-    /**
-     * @brief Get the Z coordinate of the North Pole.
-     * @return the Z coordinate of the geographical north pole.
-     *
-     * This function returns the Z coordinate of the north pole. It
-     * will return a positive value if the north pole is visible,
-     * i.e. pointing towards the viewer.  It will return a negative
-     * value if the north pole is behind the horizon, i.e. pointing
-     * away from the viewer.
-     */
-    int northPoleZ();
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the widget.

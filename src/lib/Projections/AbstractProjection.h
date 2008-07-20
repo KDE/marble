@@ -51,6 +51,7 @@ class AbstractProjection
     virtual ~AbstractProjection();
 
     virtual double  maxLat()  const        { return m_maxLat; }
+    virtual bool    traversableMaxLat()  const        { return m_traversableMaxLat; }
 
     virtual bool    repeatX() const        { return m_repeatX; }
     virtual void    setRepeatX( bool val ) { m_repeatX = val;  }
@@ -158,8 +159,9 @@ class AbstractProjection
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
-    double  m_maxLat;		// The max latitude.  Not always 90 degrees.
-    bool    m_repeatX;		// Map repeated in X direction.
+    double  m_maxLat;               // The max latitude.  Not always 90 degrees.
+    double  m_traversableMaxLat;    // Whether it's possible to center beyond maxLat.
+    bool    m_repeatX;              // Map repeated in X direction.
 
     void coordinateExtremes( double lon, double lat, 
                              double &westLon, double &eastLon,

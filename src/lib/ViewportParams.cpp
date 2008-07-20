@@ -12,6 +12,7 @@
 
 #include "ViewportParams.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QRect>
 
 #include "SphericalProjection.h"
@@ -111,6 +112,11 @@ void ViewportParams::setProjection(Projection newProjection)
     // Adjust the active Region
     currentProjection()->helper()->createActiveRegion( this );
     currentProjection()->helper()->createProjectedRegion( this );
+
+    // We now need to reset the planetAxis to make sure 
+    // that it's a valid axis orientation!
+    // So this line is important (although it might look odd) ! :
+    setPlanetAxis( planetAxis() );
 }
 
 int ViewportParams::polarity() const
@@ -193,14 +199,48 @@ Quaternion ViewportParams::planetAxis() const
     return d->m_planetAxis;
 }
 
-void ViewportParams::setPlanetAxis(const Quaternion &newAxis)
+bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
-    d->m_planetAxis = newAxis;
+    bool valid = true;
+
+    double maxLat = currentProjection()->maxLat();
+
+    // Make sure that the planetAxis doesn't get invalid
+    // The planetAxis is invalid if lat exceeds
+    // the maximum latitude or longitude as specified by the 
+    // projection
+    // This is should not be done for projections where the
+    // maximum latitude is traversable (e.g. for a sphere).
+
+    if ( !currentProjection()->traversableMaxLat() && fabs( newAxis.pitch() ) > maxLat ) {
+
+        double centerLon, centerLat;
+        centerCoordinates( centerLon, centerLat );
+
+        // Normalize latitude and longitude
+        GeoDataPoint::normalizeLat( centerLat );
+
+        // Checking whether the latitude is valid:
+        if ( fabs( centerLat ) > maxLat )
+        {
+            valid = false;
+            centerLat = maxLat * centerLat / fabs( centerLat );
+        }
+        
+        d->m_planetAxis.createFromEuler( -centerLat, centerLon, newAxis.roll() );
+    }
+    else {
+        d->m_planetAxis = newAxis;
+    }
+
+    // creating matching planetAxis matrix
     planetAxis().inverse().toMatrix( d->m_planetAxisMatrix );
 
-    // Adjust the active Region
+    // Adjust the projected and active Region
     currentProjection()->helper()->createActiveRegion( this );
     currentProjection()->helper()->createProjectedRegion( this );
+
+    return valid;
 }
 
 matrix * ViewportParams::planetAxisMatrix() const
@@ -280,8 +320,8 @@ void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) c
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 {
     return d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 
-							d->m_size ),
-						 this );
+                        d->m_size ),
+                        this );
 }
 
 

@@ -24,7 +24,7 @@ EquirectProjection::EquirectProjection()
     : AbstractProjection()
 {
     m_maxLat  = 90.0 * DEG2RAD;
-
+    m_traversableMaxLat = false;
     m_repeatX = true;
 }
 
@@ -32,12 +32,10 @@ EquirectProjection::~EquirectProjection()
 {
 }
 
-
 AbstractProjectionHelper *EquirectProjection::helper()
 {
     return &theHelper;
 }
-
 
 bool EquirectProjection::screenCoordinates( const double lon, const double lat,
                                             const ViewportParams *viewport,
@@ -50,6 +48,7 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+
     double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
  
     // Let (x, y) be the position on the screen of the point.
@@ -190,14 +189,14 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
 
     // Return here if the y coordinate is outside the map
     if ( y < yTop || y >= yBottom )
-	return false;
+        return false;
 
     int const xPixels = x - halfImageWidth;
     int const yPixels = y - halfImageHeight;
 
-    double const pixel2rad = M_PI / (2.0 * radius);
-    lat = - yPixels * pixel2rad + centerLat;
-    lon = + xPixels * pixel2rad + centerLon;
+    double const pixel2Rad = M_PI / (2.0 * radius);
+    lat = - yPixels * pixel2Rad + centerLat;
+    lon = + xPixels * pixel2Rad + centerLon;
 
     while ( lon > M_PI )  lon -= 2.0 * M_PI;
     while ( lon < -M_PI ) lon += 2.0 * M_PI;
@@ -289,6 +288,25 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
 
 bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) const
 {
-    // FIXME: NYI
-    return false;
+    int   radius          = viewport->radius();
+    int   halfImageHeight = viewport->height() / 2;
+
+    // Get the Lat and Lon of the center point of the screen.
+    double  centerLon;
+    double  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    // Calculate how many pixel are being represented per radians.
+    const float rad2Pixel = (double)( 2 * radius )/M_PI;
+
+    // Get yTop and yBottom, the limits of the map on the screen.
+    int yCenterOffset = (int)( centerLat * rad2Pixel );
+    int yTop          = halfImageHeight - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
+
+    if ( yTop >= 0 ||  yBottom < viewport->height() )
+        return false;
+
+    return true;
 }
+

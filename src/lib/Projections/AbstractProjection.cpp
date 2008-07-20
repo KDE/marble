@@ -15,7 +15,6 @@
 // Marble
 #include "ViewportParams.h"
 
-
 AbstractProjection::AbstractProjection()
 {
     m_repeatX = false;
@@ -45,9 +44,8 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, c
     double otherEastLon  = -M_PI; 
     double westLon  = +M_PI; 
     double otherWestLon  = +M_PI; 
-    double northLat = -M_PI / 2.0; 
-    double southLat = +M_PI / 2.0; 
-
+    double northLat = -m_maxLat; 
+    double southLat = +m_maxLat; 
 
     // Move along the screenborder and save the highest and lowest lon-lat values.
 
@@ -100,10 +98,10 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, c
     int dummyX, dummyY; // not needed
 
     if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
-        northLat = +M_PI / 2.0;
+        northLat = +m_maxLat;
     }
     if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
-        southLat = -M_PI / 2.0;
+        southLat = -m_maxLat;
     }
 
     GeoDataLatLonAltBox latLonAltBox;
