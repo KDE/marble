@@ -27,6 +27,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
+#include "MathHelper.h"
 
 uint TextureColorizer::texturepalette[16][512];
 

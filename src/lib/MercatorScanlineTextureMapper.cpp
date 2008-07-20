@@ -28,6 +28,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
+#include "MathHelper.h"
 
 
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )

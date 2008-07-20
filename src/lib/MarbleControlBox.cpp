@@ -42,6 +42,7 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
+#include "MathHelper.h"
 
 class MarbleControlBoxPrivate
 {
@@ -71,7 +72,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
       d( new MarbleControlBoxPrivate )
 {
     d->m_widget = 0;
-    d->m_searchTerm = QString();
+    d->m_searchTerm.clear();
     d->m_searchTriggered = false;
 
     d->uiWidget.setupUi( this );

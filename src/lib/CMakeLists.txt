@@ -142,6 +142,8 @@ set(marblewidget_SRCS
     ExtDateTime.cpp
     SunControlWidget.cpp
     MergedLayerDecorator.cpp
+    
+    MathHelper.cpp
 )
 
 set (marblewidget_UI
