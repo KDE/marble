@@ -22,9 +22,9 @@ class GeoDataPlacemarkPrivate
 {
   public:
     GeoDataPlacemarkPrivate()
-        : m_area( -1.0 ),
-          m_population( -1 ),
-          m_geometry( 0 )
+      : m_geometry( 0 ),
+	m_area( -1.0 ),
+	m_population( -1 )
     {
     }
 

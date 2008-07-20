@@ -1,3 +1,16 @@
+2008-07-20  Inge Wallin  <inge@lysator.liu.se>
+
+	Reduce warnings: Initialize in the right order.
+	* src/lib/geodata/data/GeoDataPlacemark.cpp (GeoDataPlacemarkPrivate),
+	* src/lib/geodata/data/GeoDataPolygon.cpp (GeoDataPolygonPrivate),
+	* src/lib/geodata/scene/GeoSceneLayer.cpp (GeoSceneLayer): Initialize in the right order.
+
+	Cleanup: Make the d pointer actually be named d.
+	* src/lib/geodata/data/GeoDataPolygon.{h,cpp},
+	* src/lib/geodata/data/GeoDataGeometry.{h,cpp},
+	* src/lib/geodata/data/GeoDataCoordinates.{h,cpp},
+	* src/lib/geodata/data/GeoDataHotSpot.{h,cpp}: rename the d pointer.
+	
 2008-07-19  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpFetchFile.cpp:
