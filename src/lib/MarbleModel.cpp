@@ -708,6 +708,11 @@ void MarbleModel::update()
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 
+ExtDateTime* MarbleModel::dateTime() const
+{
+    return d->m_dateTime;
+}
+
 SunLocator* MarbleModel::sunLocator() const
 {
     return d->m_sunLocator;
