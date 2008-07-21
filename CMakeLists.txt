@@ -179,7 +179,7 @@ else(QTONLY)
   include (KDE4Defaults)
   include (MacroLibrary)
 endif (QTONLY)
-message( "${QT_QTSCRIPT_LIBRARY}" )
+
 #############################################################
 # Create marblesvnversion.h
 # see http://public.kitware.com/pipermail/cmake/2006-July/010299.html
