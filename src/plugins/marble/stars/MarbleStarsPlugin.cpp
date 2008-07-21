@@ -16,6 +16,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include "MarbleDirs.h"
+#include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 
 #include "Quaternion.h"
@@ -116,7 +117,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( starPen );
     painter->setBrush( starBrush );
 
-    QDateTime currentDateTime = QDateTime::currentDateTime();
+    QDateTime currentDateTime = dataFacade()->dateTime();
 
     double gmst = siderealTime( currentDateTime );
     double skyRotationAngle = gmst / 12.0 * M_PI;
@@ -188,14 +189,12 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-double MarbleStarsPlugin::siderealTime( const QDateTime& currentDateTime )
+double MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
 {
-    QDateTime utcDateTime = currentDateTime.toTimeSpec ( Qt::UTC );
+    QDateTime utcDateTime = localDateTime.toTimeSpec ( Qt::UTC );
     double mjdUtc = (double)( utcDateTime.date().toJulianDay() );
 
-    QDateTime offsetUtc( utcDateTime.date(), utcDateTime.time(), Qt::OffsetFromUTC );
-    double offsetUtcSecs = -offsetUtc.time().secsTo( QTime( 00, 00 ) );
-
+    double offsetUtcSecs = -utcDateTime.time().secsTo( QTime( 00, 00 ) );
     double d_days = mjdUtc - 2451545.5;
     double d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
 

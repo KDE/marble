@@ -17,6 +17,7 @@
 
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
+class PluginManagerPrivate;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -28,7 +29,7 @@ class MARBLE_EXPORT PluginManager : public QObject
     Q_OBJECT
 
  public:
-    explicit PluginManager(QObject *parent = 0);
+    explicit PluginManager( QObject *parent = 0 );
     ~PluginManager();
 
     QList<MarbleAbstractFloatItem *> floatItems() const;
@@ -45,7 +46,8 @@ class MARBLE_EXPORT PluginManager : public QObject
 
  private:
     Q_DISABLE_COPY( PluginManager )
-    QList<MarbleAbstractLayer *> m_layerPlugins;
+
+    PluginManagerPrivate  * const d;
 };
 
 

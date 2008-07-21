@@ -219,18 +219,11 @@ void MarbleWidgetPrivate::construct()
     translator.load(QString("marblewidget_") + locale);
     QCoreApplication::installTranslator(&translator);
 
-    // FIXME: I suppose this should only exist in MarbleMap
-// #if 0
-    m_widget->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                       m_widget, SLOT( updateSun() ) );
-    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                       m_widget, SLOT( centerSun() ) );
-// #endif
     m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_widget, SLOT( enableInput() ) );
 
-//    m_widget->connect( m_model->layerDecorator(), SIGNAL( repaintMap() ),
-//                       m_widget, SLOT( repaintMap() ) );
+    m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
+                        m_widget,          SLOT( update() ) );
 
     m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
                         m_widget, SLOT( updateAnimation( qreal ) ) );

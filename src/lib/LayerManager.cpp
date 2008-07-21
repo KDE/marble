@@ -23,35 +23,45 @@
 #include "MarbleLayerInterface.h"
 #include "MarbleAbstractLayer.h"
 #include "MarbleAbstractFloatItem.h"
+#include "MarbleDataFacade.h"
 #include "ViewParams.h"
 
 
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate()
-        : m_mapTheme(0)
+    LayerManagerPrivate( MarbleDataFacade* dataFacade )
+        : m_mapTheme(0),
+          m_dataFacade( dataFacade )
     {
     }
 
-    GeoSceneDocument *m_mapTheme; 
-    PluginManager m_pluginManager;
+    GeoSceneDocument *m_mapTheme;
+
+    MarbleModel* m_model;
+    MarbleDataFacade *m_dataFacade;
+    PluginManager *m_pluginManager;
+
     QList<MarbleAbstractLayer *> m_layerPlugins;
 };
 
-LayerManager::LayerManager( QObject *parent )
+LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate() )
+      d( new LayerManagerPrivate( dataFacade) )
 {
+    d->m_pluginManager = new PluginManager();
+
     // Just for initial testing
-    d->m_layerPlugins = d->m_pluginManager.layerPlugins();
+    d->m_layerPlugins = d->m_pluginManager->layerPlugins();
     foreach( MarbleAbstractLayer * layerPlugin,  d->m_layerPlugins ) {
+        layerPlugin->setDataFacade( d->m_dataFacade );
         layerPlugin->initialize();
     }
 }
 
 LayerManager::~LayerManager()
 {
+    delete d->m_pluginManager;
     delete d;
 }
 
@@ -62,7 +72,7 @@ QList<MarbleAbstractLayer *> LayerManager::layerPlugins() const
 
 QList<MarbleAbstractFloatItem *> LayerManager::floatItems() const
 {
-    return d->m_pluginManager.floatItems();
+    return d->m_pluginManager->floatItems();
 }
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
