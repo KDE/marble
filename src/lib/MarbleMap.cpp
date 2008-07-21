@@ -158,21 +158,10 @@ void MarbleMapPrivate::construct()
     translator.load(QString("marblemap_") + locale);
     QCoreApplication::installTranslator(&translator);
 
-#if 0 // Reeneable when the autosettings are actually used
-
-      // AutoSettings
-    AutoSettings* autoSettings = new AutoSettings( this );
-#endif
-
-//     qDebug() << "sunLocator =" << m_model->sunLocator();
-//     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-//                        m_parent,              SLOT( updateSun() ) );
-//     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-//                        m_parent,              SLOT( centerSun() ) );
-#if 0
-    connect( d->m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
-             this,                     SLOT( enableInput() ) );
-#endif
+    m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
+                        m_parent,              SLOT( updateSun() ) );
+    m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+                        m_parent,              SLOT( centerSun() ) );
 }
 
 

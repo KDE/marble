@@ -21,6 +21,7 @@
 class QAction;
 
 class MarbleAbstractLayerPrivate;
+class MarbleDataFacade;
 class QStandardItem;
 
 /**
@@ -36,6 +37,9 @@ class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInte
  public:
     explicit MarbleAbstractLayer();
     virtual ~MarbleAbstractLayer();
+
+    MarbleDataFacade* dataFacade() const;
+    void  setDataFacade( MarbleDataFacade* );
 
     QAction* action() const;
     QStandardItem* item() const;

@@ -63,6 +63,7 @@ class SunLocator : public QObject
     void update();
 	
  Q_SIGNALS:
+    void updateStars();
     void updateSun();
     void centerSun();
     void reenableWidgetInput();

@@ -58,6 +58,7 @@ void SunControlWidget::nowClicked(bool checked)
 {
     Q_UNUSED( checked )
     m_sunLocator->datetime()->setNow();
+    m_sunLocator->update();
     updateDateTime();
 }
 

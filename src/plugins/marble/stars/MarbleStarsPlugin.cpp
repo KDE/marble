@@ -16,6 +16,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include "MarbleDirs.h"
+#include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 
 #include "Quaternion.h"
@@ -116,7 +117,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( starPen );
     painter->setBrush( starBrush );
 
-    QDateTime currentDateTime = QDateTime::currentDateTime();
+    QDateTime currentDateTime = dataFacade()->dateTime();
 
     double gmst = siderealTime( currentDateTime );
     double skyRotationAngle = gmst / 12.0 * M_PI;

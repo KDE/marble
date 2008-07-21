@@ -22,8 +22,20 @@
 #include "MarbleAbstractLayer.h"
 #include "MarbleAbstractFloatItem.h"
 
-PluginManager::PluginManager(QObject *parent)
-    : QObject(parent)
+
+class PluginManagerPrivate
+{
+ public:
+    PluginManagerPrivate()
+    {
+    }
+
+    QList<MarbleAbstractLayer *> m_layerPlugins;
+};
+
+PluginManager::PluginManager( QObject *parent )
+    : QObject(parent),
+      d( new PluginManagerPrivate() )
 {
     // For testing:
     loadPlugins();
@@ -38,7 +50,7 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
     QList<MarbleAbstractFloatItem *> floatItemList;
 
     QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = m_layerPlugins.begin(); i != m_layerPlugins.end(); ++i)
+    for (i = d->m_layerPlugins.begin(); i != d->m_layerPlugins.end(); ++i)
     {
         MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
         if ( floatItem )
@@ -52,7 +64,7 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
 
 QList<MarbleAbstractLayer *> PluginManager::layerPlugins() const
 {
-    return m_layerPlugins;
+    return d->m_layerPlugins;
 }
 
 void PluginManager::loadPlugins()
@@ -64,8 +76,8 @@ void PluginManager::loadPlugins()
 
     MarbleDirs::debug();
 
-    qDeleteAll( m_layerPlugins );
-    m_layerPlugins.clear();
+    qDeleteAll( d->m_layerPlugins );
+    d->m_layerPlugins.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
@@ -75,7 +87,7 @@ void PluginManager::loadPlugins()
         MarbleAbstractLayer * layerPlugin = qobject_cast<MarbleAbstractLayer *>(obj);
 
         if( layerPlugin ) {
-            m_layerPlugins.append( layerPlugin );
+            d->m_layerPlugins.append( layerPlugin );
         }
         else
         {

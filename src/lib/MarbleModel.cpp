@@ -42,6 +42,7 @@
 #include "KmlFileViewItem.h"
 #include "LayerManager.h"
 #include "MapThemeManager.h"
+#include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "PlaceMarkManager.h"
@@ -64,7 +65,8 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate( MarbleModel *parent )
         : m_parent( parent ),
-          m_mapTheme( 0 )
+          m_mapTheme( 0 ),
+          m_layerManager( 0 )
     {
     }
 
@@ -77,7 +79,7 @@ class MarbleModelPrivate
 
     // View and paint stuff
     GeoSceneDocument    *m_mapTheme;
-    LayerManager        m_layerManager;
+    LayerManager        *m_layerManager;
     TextureColorizer    *m_texcolorizer;
 
     HttpDownloadManager *m_downloadManager;
@@ -115,13 +117,12 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
+    d->m_layerManager = new LayerManager( this );
+
     // FIXME: more on the spot update names and API
-    connect ( &( d->m_layerManager ), SIGNAL( floatItemsChanged() ),
+    connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
               this,                   SIGNAL( modelChanged() ) );
-/*
-    connect ( this, SIGNAL( themeChanged ( QString ) ),
-              &( d->m_layerManager ), SLOT( syncViewParamsAndPlugins() ) );
-*/
+
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
 
@@ -132,7 +133,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
-//    qDebug() << "d->m_tileLoader =" << d->m_tileLoader;
     connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ),
              this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
 
@@ -384,7 +384,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
 
-    d->m_layerManager.syncViewParamsAndPlugins( mapTheme );
+    d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
     d->notifyModelChanged();
 }
@@ -623,7 +623,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                                viewParams,
                                viewParams->viewport()->boundingBox() );
 
-    d->m_layerManager.renderLayers( painter, viewParams );
+    d->m_layerManager->renderLayers( painter, viewParams );
 }
 
 
@@ -800,12 +800,12 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
 
 QList<MarbleAbstractLayer *> MarbleModel::layerPlugins() const
 {
-    return d->m_layerManager.layerPlugins();
+    return d->m_layerManager->layerPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
 {
-    return d->m_layerManager.floatItems();
+    return d->m_layerManager->floatItems();
 }
 
 #include "MarbleModel.moc"

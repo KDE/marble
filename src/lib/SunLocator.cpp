@@ -135,10 +135,16 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
 void SunLocator::update()
 {
     updatePosition();
-    if ( m_show )
-        emit updateSun();
-    if ( m_centered )
-        emit centerSun();
+    if ( m_show || m_centered )
+    {
+        if ( m_show )
+            emit updateSun();
+        if ( m_centered )
+            emit centerSun();
+        return;
+    }
+
+    emit updateStars();
 }
 
 void SunLocator::setShow(bool show)

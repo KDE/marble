@@ -10,7 +10,7 @@
 
 
 #include "MarbleAbstractLayer.h"
-
+#include "MarbleDataFacade.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QDebug>
@@ -20,7 +20,8 @@ class MarbleAbstractLayerPrivate
 {
   public:
     MarbleAbstractLayerPrivate()
-        : m_action(0),
+        : m_dataFacade(0),
+          m_action(0),
           m_item(0),
           m_enabled(true),
           m_visible(true)
@@ -31,6 +32,7 @@ class MarbleAbstractLayerPrivate
     {
     }
 
+    MarbleDataFacade   *m_dataFacade;
     QAction            *m_action;
     QStandardItem      *m_item;
 
@@ -50,6 +52,16 @@ MarbleAbstractLayer::MarbleAbstractLayer()
 MarbleAbstractLayer::~MarbleAbstractLayer()
 {
     delete d;
+}
+
+MarbleDataFacade*  MarbleAbstractLayer::dataFacade() const
+{
+    return d->m_dataFacade;
+}
+
+void  MarbleAbstractLayer::setDataFacade( MarbleDataFacade* dataFacade )
+{
+    d->m_dataFacade = dataFacade;
 }
 
 QAction* MarbleAbstractLayer::action() const
