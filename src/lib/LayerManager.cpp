@@ -24,16 +24,15 @@
 #include "MarbleAbstractLayer.h"
 #include "MarbleAbstractFloatItem.h"
 #include "MarbleDataFacade.h"
-#include "MarbleModel.h"
 #include "ViewParams.h"
 
 
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate( MarbleModel* model )
+    LayerManagerPrivate( MarbleDataFacade* dataFacade )
         : m_mapTheme(0),
-          m_model( model )
+          m_dataFacade( dataFacade )
     {
     }
 
@@ -46,11 +45,10 @@ class LayerManagerPrivate
     QList<MarbleAbstractLayer *> m_layerPlugins;
 };
 
-LayerManager::LayerManager( MarbleModel* model, QObject *parent )
+LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate( model ) )
+      d( new LayerManagerPrivate( dataFacade) )
 {
-    d->m_dataFacade = new MarbleDataFacade( model );
     d->m_pluginManager = new PluginManager();
 
     // Just for initial testing
@@ -64,7 +62,6 @@ LayerManager::LayerManager( MarbleModel* model, QObject *parent )
 LayerManager::~LayerManager()
 {
     delete d->m_pluginManager;
-    delete d->m_dataFacade;
     delete d;
 }
 

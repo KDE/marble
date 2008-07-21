@@ -17,7 +17,6 @@
 
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
-class MarbleDataFacade;
 class PluginManagerPrivate;
 
 /**

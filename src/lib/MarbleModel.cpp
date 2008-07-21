@@ -65,6 +65,7 @@ class MarbleModelPrivate
  public:
     MarbleModelPrivate( MarbleModel *parent )
         : m_parent( parent ),
+          m_dataFacade( 0 ),
           m_mapTheme( 0 ),
           m_layerManager( 0 )
     {
@@ -75,7 +76,7 @@ class MarbleModelPrivate
     void  geoDataDocumentLoaded( GeoDataDocument& document );
 
     MarbleModel         *m_parent;
-
+    MarbleDataFacade    *m_dataFacade;
 
     // View and paint stuff
     GeoSceneDocument    *m_mapTheme;
@@ -117,7 +118,8 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
-    d->m_layerManager = new LayerManager( this );
+    d->m_dataFacade = new MarbleDataFacade( this );
+    d->m_layerManager = new LayerManager( d->m_dataFacade );
 
     // FIXME: more on the spot update names and API
     connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
@@ -199,6 +201,9 @@ MarbleModel::~MarbleModel()
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
     delete d->m_mapTheme;
+    delete d->m_timer;
+    delete d->m_layerManager;
+    delete d->m_dataFacade;
     delete d;
 }
 
