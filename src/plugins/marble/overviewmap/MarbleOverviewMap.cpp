@@ -76,12 +76,17 @@ bool MarbleOverviewMap::isInitialized () const
 bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
 {
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
+    double centerLon, centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
 
-    if ( m_latLonAltBox == latLonAltBox ) {
-//        qDebug() << "false";
+    if ( m_latLonAltBox == latLonAltBox 
+	&& m_centerLon == centerLon
+	&& m_centerLat == centerLat ) {
         return false;
     }
     m_latLonAltBox = latLonAltBox;
+    m_centerLon = centerLon;
+    m_centerLat = centerLat;
 //    qDebug() << "true";
     return true;
 }

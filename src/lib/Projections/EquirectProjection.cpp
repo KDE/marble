@@ -16,6 +16,7 @@
 #include "EquirectProjectionHelper.h"
 #include "ViewportParams.h"
 
+#include <QtCore/QDebug>
 
 static EquirectProjectionHelper  theHelper;
 
@@ -263,7 +264,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // inside the viewport.
 
     // We need a point on the screen at maxLat that definetely gets displayed:
-    double averageLongitude = latLonAltBox.west();
+    double averageLongitude = latLonAltBox.east();
 
     GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
     GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
@@ -305,8 +306,9 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int yBottom       = yTop + 2 * radius;
 
     if ( yTop >= 0 ||  yBottom < viewport->height() )
+    {
         return false;
-
+    }
     return true;
 }
 

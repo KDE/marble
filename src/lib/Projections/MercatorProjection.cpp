@@ -288,8 +288,8 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     const float rad2Pixel = (float)( 2 * radius )/M_PI;
 
     int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
-    int yTop          = halfImageHeight - radius + yCenterOffset;
-    int yBottom       = yTop + 2 * radius;
+    int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
+    int yBottom       = yTop + 4 * radius;
 
     if ( yTop >= 0 ||  yBottom < viewport->height() )
         return false;

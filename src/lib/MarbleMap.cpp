@@ -127,15 +127,6 @@ void MarbleMapPrivate::construct()
     m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
                        m_parent, SLOT( updateRegion( BoundingBox& ) ) );
 
-    // Set background: black.
-    // FIXME:
-    //setPalette( QPalette ( Qt::black ) );
-
-    // Set whether the black space gets displayed or the earth gets simply 
-    // displayed on the map background.
-    // FIXME:
-    //setAutoFillBackground( true );
-
     m_justModified = false;
 
     m_measureTool = new MeasureTool( m_parent );
@@ -236,6 +227,10 @@ int MarbleMap::radius() const
 void MarbleMap::setRadius(const int radius)
 {
     d->m_viewParams.setRadius( radius );
+
+    if ( !mapCoversViewport() ) {
+        setNeedsUpdate();
+    }
 }
 
 
@@ -303,11 +298,6 @@ void MarbleMap::setDistance( double distance )
     setRadius( (int)( EARTH_RADIUS * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
-
-    if ( !mapCoversViewport() ) {
-        d->m_viewParams.canvasImage()->fill( Qt::black );
-        setNeedsUpdate();
-    }
 }
 
 double MarbleMap::centerLatitude() const
@@ -482,12 +472,6 @@ void MarbleMap::zoomView(int newZoom)
     d->m_logzoom = newZoom;
     setRadius( d->fromLogScale( newZoom ) );
 
-    // Clear canvas if the globe is visible as a whole or if the globe
-    // does shrink.
-    if ( ! mapCoversViewport() ) {
-        d->m_viewParams.canvasImage()->fill( Qt::black );
-    }
-
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the 
     // globe changes.
@@ -584,11 +568,6 @@ void MarbleMap::setProjection( Projection projection )
     emit projectionChanged( projection );
 
     d->m_viewParams.setProjection( projection );
-
-    // Redraw the background if necessary
-    if ( !mapCoversViewport() ) {
-        d->m_viewParams.canvasImage()->fill( Qt::black );
-    }
  
     if ( d->m_viewParams.showAtmosphere() ) {
         d->drawAtmosphere();
@@ -658,11 +637,6 @@ void MarbleMapPrivate::doResize()
     // Recreate the canvas image with the new size.
     m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
                                              QImage::Format_ARGB32_Premultiplied ));
-
-    // Repaint the background if necessary
-    if ( ! m_viewParams.viewport()->mapCoversViewport() ) {
-        m_viewParams.canvasImage()->fill( Qt::black );
-    }
 
     if ( m_viewParams.showAtmosphere() ) {
         drawAtmosphere();
@@ -851,14 +825,6 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
         doClip = ( d->m_viewParams.radius() > d->m_viewParams.canvasImage()->width() / 2
                    || d->m_viewParams.radius() > d->m_viewParams.canvasImage()->height() / 2 );
 
-    // Create a painter that will do the painting.
-#if 0
-    GeoPainter painter( this, doClip );
-#endif
-    // 1. Paint the globe itself.
-#if 0
-    QRect  dirtyRect = evt->rect();
-#endif
     d->m_model->paintGlobe( &painter,
                             width(), height(), &d->m_viewParams,
                             needsUpdate()
