@@ -22,7 +22,8 @@
 
 #include <QtGui/QWidget>
 ////QWidgetPlugin is used for Qt Designer
-//#include <QtCore/QtPlugin>
+#include <QtCore/QtPlugin>
+#include <QtDesigner/QDesignerExportWidget>
 
 class QSpinBox;
 class QComboBox;
@@ -30,8 +31,9 @@ class QHBoxLayout;
 class QLabel;
 
 #include "global.h"
+#include "marble_export.h"
 
-class /* QDESIGNER_WIDGET_EXPORT */ LatLonEdit : public QWidget
+class MARBLE_EXPORT /* QDESIGNER_WIDGET_EXPORT*/ LatLonEdit : public QWidget
 {
 	Q_OBJECT
 	//Q_PROPERTY( double m_value READ value WRITE setValue )

@@ -17,63 +17,67 @@
 */
 //Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 
-#include "latloneditplugin.h"
+#include "../../lib/LatLonEdit.h"
+
+#include "LatLonEditPlugin.h"
 
 #include <QtCore/QObject>
-#include <QtDesigner/QDesignerCustomWidgetInterface>
 #include <QtCore/QString>
+#include <QtCore/QtPlugin>
 #include <QtGui/QWidget>
 #include <QtGui/QIcon>
+#include <QtDesigner/QDesignerCustomWidgetInterface>
 
-#include "latlonedit.h"
 
-LatLonEditPlugin::LatLonEditPlugin(QObject *parent = 0)
+LatLonEditPlugin::LatLonEditPlugin(QObject *parent) : QObject(parent)
 {
-	m_initialized = false;
+    m_initialized = false;
 }
 bool LatLonEditPlugin::isInitialized() const
 {
-	return m_initialized;
+    return m_initialized;
+}
 void LatLonEditPlugin::initialize(QDesignerFormEditorInterface *core)
 {
-	m_initialized = true;
+    m_initialized = true;
 }
 bool LatLonEditPlugin::isContainer() const
 {
-	return false;
+    return false;
 }
 QIcon LatLonEditPlugin::icon() const
 {
-	return QIcon();
+    return QIcon();
 }
 QString LatLonEditPlugin::domXml() const
 {
-	return "<widget class=\"LatLonEdit\" name=\"LatLonEdit\">\n"
-	       "</widget>\n";
+    return "<widget class=\"LatLonEdit\" name=\"LatLonEdit\">\n"
+           "</widget>\n";
 }
 QString LatLonEditPlugin::group() const
 {
-	return QString( tr( "Input Widgets" ) );
+    return QString( tr( "Input Widgets" ) );
 }
 QString LatLonEditPlugin::includeFile() const
 {
-	return QString( "latlonedit.h" );
+    return QString( "LatLonEdit.h" );
 }
 QString LatLonEditPlugin::name() const
 {
-	return QString( "LatLonEdit" );
+    return QString( "LatLonEdit" );
 }
 QString LatLonEditPlugin::toolTip() const
 {
-	return QString( "" );
+    return QString( "" );
 }
 QString LatLonEditPlugin::whatsThis() const
 {
-	return QString( "" );
+    return QString( "" );
 }
 QWidget *LatLonEditPlugin::createWidget(QWidget *parent)
 {
-	return new LatLonEdit(parent);
+    return new LatLonEdit(parent);
 }
 
-Q_EXPORT_PLUGIN2(latLonEdit, LatLonEdit)
+Q_EXPORT_PLUGIN2(LatLonEditPlugin, LatLonEditPlugin)
+

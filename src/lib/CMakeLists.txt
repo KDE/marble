@@ -145,6 +145,8 @@ set(marblewidget_SRCS
     MergedLayerDecorator.cpp
     
     MathHelper.cpp
+
+    LatLonEdit.cpp
 )
 
 set (marblewidget_UI
@@ -281,6 +283,8 @@ else (APPLE AND QTONLY)
     ExtDateTime.h
     TileCreator.h
     marble_export.h
+
+    LatLonEdit.h
 
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )

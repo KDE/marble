@@ -20,8 +20,9 @@
 #ifndef LATLONEDITPLUGIN_H
 #define LATLONEDITPLUGIN_H
 
+#include <QtDesigner/QDesignerCustomWidgetInterface>
+
 class QObject;
-class QDesignerCustomWidgetInterface;
 class QString;
 class QWidget;
 class QIcon;
@@ -47,6 +48,6 @@ public:
 	void initialize(QDesignerFormEditorInterface *core);
 
 private:
-	bool initialized;
+	bool m_initialized;
 };
 #endif

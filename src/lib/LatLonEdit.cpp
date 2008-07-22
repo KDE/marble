@@ -17,7 +17,7 @@
 ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "latlonedit.h"
+#include "LatLonEdit.h"
 
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QSpinBox>

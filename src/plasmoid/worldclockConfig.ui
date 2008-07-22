@@ -146,7 +146,7 @@
   <customwidget>
    <class>LatLonEdit</class>
    <extends>QWidget</extends>
-   <header>latlonedit.h</header>
+   <header>LatLonEdit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
