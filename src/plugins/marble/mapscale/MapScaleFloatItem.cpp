@@ -10,6 +10,7 @@
 
 #include "MapScaleFloatItem.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 
@@ -26,12 +27,14 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_leftBarMargin(0),
       m_rightBarMargin(0),
       m_scaleBarWidth(0),
+      m_viewportWidth(0),
       m_scaleBarHeight(5),
       m_scaleBarKm(0.0),
       m_bestDivisor(0),
       m_pixelInterval(0),
       m_valueInterval(0),
-      m_unit(tr("km"))
+      m_unit(tr("km")),
+      m_scaleInitDone( false )
 {
 }
 
@@ -80,18 +83,23 @@ bool MapScaleFloatItem::isInitialized () const
 
 bool MapScaleFloatItem::needsUpdate( ViewportParams *viewport )
 {
-    m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
-    m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
+    int viewportWidth = viewport->width();
 
-    int scaleBarWidth = contentRect().width() - m_leftBarMargin - m_rightBarMargin;
-
-    if ( m_radius == viewport->radius() && scaleBarWidth == m_scaleBarWidth )
+    if ( m_radius == viewport->radius() && viewportWidth == m_viewportWidth && m_scaleInitDone )
     {
         return false;
     }
 
-    m_scaleBarWidth = scaleBarWidth;
+    int fontHeight     = QFontMetrics( font() ).ascent();
+    setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
+
+    m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
+    m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
+
+    m_scaleBarWidth = contentRect().width() - m_leftBarMargin - m_rightBarMargin;
+    m_viewportWidth = viewport->width();
     m_radius = viewport->radius();
+    m_scaleInitDone = true;
 
     return true;
 }
