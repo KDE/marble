@@ -64,6 +64,8 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
 	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
     }
 
+    visit = visiblePlaceMarks.constEnd();
+
     while ( visit != visiblePlaceMarks.constBegin() ) {
 	--visit;
 	mark = *visit;
