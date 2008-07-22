@@ -28,9 +28,11 @@
 #include <QtCore/QTimer>
 
 #include "ExtDateTime.h"
+//FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
+#include "marble_export.h"
 
 
-class SunLocator : public QObject
+class MARBLE_EXPORT SunLocator : public QObject
 {
     Q_OBJECT
 	
