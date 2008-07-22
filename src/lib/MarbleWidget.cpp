@@ -1079,16 +1079,23 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
     return d->m_animationQuality; 
 }
 
-void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext viewContext )
+void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext changedViewContext )
 {
     // FIXME: Rewrite as a switch
-    if ( viewContext == Still ) {
+    if ( changedViewContext == Still ) {
         d->m_stillQuality = mapQuality;
     }
-    else if ( viewContext == Animation ) {
+    else if ( changedViewContext == Animation ) {
         d->m_animationQuality = mapQuality;
     }
-    map()->viewParams()->setMapQuality( mapQuality ); 
+
+    if ( viewContext() == Still ) {
+        map()->viewParams()->setMapQuality( d->m_stillQuality ); 
+    }
+    else if ( viewContext() == Animation )
+    {
+        map()->viewParams()->setMapQuality( d->m_animationQuality ); 
+    }
 }
 
 ViewContext MarbleWidget::viewContext() const
