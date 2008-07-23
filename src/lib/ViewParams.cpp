@@ -234,12 +234,11 @@ void ViewParams::setCanvasImage( QImage * const image )
 {
     delete d->m_canvasImage;
     d->m_canvasImage = image;
-/*
+
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
         d->m_canvasImage->fill( Qt::transparent );
     }
-*/
 }
 
 QImage * ViewParams::coastImage() const

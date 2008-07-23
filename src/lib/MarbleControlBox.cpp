@@ -42,6 +42,7 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
+#include "CustomSortFilterProxyModel.h"
 
 class MarbleControlBoxPrivate
 {
@@ -60,6 +61,7 @@ class MarbleControlBoxPrivate
 
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
+    CustomSortFilterProxyModel *m_mapSortProxy;
 };
 
 
@@ -97,6 +99,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
     d->uiWidget.locationListView->setModel( d->m_sortproxy );
+
+    d->m_mapSortProxy = new CustomSortFilterProxyModel( this );
 
 //  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
@@ -158,7 +162,9 @@ MarbleControlBox::~MarbleControlBox()
 
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
     d->m_mapThemeModel = mapThemeModel;
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
+    d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
+    d->m_mapSortProxy->sort( 0 );
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted ( QModelIndex, int, int) ),
              this,                     SLOT( updateMapThemeView() ) );
     updateMapThemeView();
@@ -489,17 +495,17 @@ void MarbleControlBox::search()
 void MarbleControlBox::selectTheme( const QString &theme )
 {
     qDebug() << "Entered selectTheme";
-    if ( !d->m_mapThemeModel )
+    if ( !d->m_mapSortProxy )
         return;
-    for ( int row = 0; row < d->m_mapThemeModel->rowCount(); ++row ) {
-        QModelIndex itIndexName = d->m_mapThemeModel->index( row, 1, QModelIndex() );
-        QModelIndex itIndex     = d->m_mapThemeModel->index( row, 0, QModelIndex() );
-        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapThemeModel->data( itIndexName ).toString();
+    for ( int row = 0; row < d->m_mapSortProxy->rowCount(); ++row ) {
+        QModelIndex itIndexName = d->m_mapSortProxy->index( row, 1, QModelIndex() );
+        QModelIndex itIndex     = d->m_mapSortProxy->index( row, 0, QModelIndex() );
+        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapSortProxy->data( itIndexName ).toString();
         // If  we have found the theme in the theme model,
         //     and it is not the one that we already have,
         // then
         //     set the new one in the ui.
-        if ( theme == d->m_mapThemeModel->data( itIndexName ).toString()
+        if ( theme == d->m_mapSortProxy->data( itIndexName ).toString()
              && itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
             // Mark the correct picture for the selected map theme and
             // also make sure it's shown.
