@@ -90,7 +90,7 @@ bool PanoramioPlugin::render ( GeoPainter *painter, ViewportParams *viewport, co
  {
           flag = 0 ;
           qDebug() <<"delta part";
-          disconnect(m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ),this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ));
+//           disconnect(m_downloadManager,SIGNAL ( downloadComplete ( QString, QString ) ),this, SLOT ( slotJsonDownloadComplete ( QString , QString ) ));
          downloadPanoramio ( 0 , numberOfImagesToShow , west , east , north , south );
         disconnect( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotImageDownloadComplete ( QString , QString ) ) );
  }
