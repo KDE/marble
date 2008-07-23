@@ -66,7 +66,7 @@ int HttpJob::execute()
         cleanupPath = QUrl::toPercentEncoding( m_sourceUrl.path(), "/", " -" );
     }
 
-    qDebug() << m_sourceUrl.host() << "and path=" << cleanupPath;
+//    qDebug() << m_sourceUrl.host() << "and path=" << cleanupPath;
     QHttpRequestHeader header ( QLatin1String ( "GET" ), cleanupPath );
     header.setValue ( "Connection", "Keep-Alive" );
     header.setValue ( "User-Agent", "Marble TinyWebBrowser" );

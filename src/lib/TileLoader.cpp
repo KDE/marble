@@ -286,7 +286,7 @@ int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
 int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 {
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( textureLayer ) );
-    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
+//    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     int maxtilelevel = -1;
@@ -304,8 +304,8 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
             maxtilelevel = value;
     }
 
-    qDebug() << "Detected maximum tile level that contains data: "
-             << maxtilelevel;
+//    qDebug() << "Detected maximum tile level that contains data: "
+//             << maxtilelevel;
 
     return maxtilelevel;
 }
@@ -345,7 +345,7 @@ void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void TileLoader::reloadTile( const QString &idStr )
 {
-    qDebug() << "TileLoader::reloadTile:" << idStr;
+//    qDebug() << "TileLoader::reloadTile:" << idStr;
  
     const TileId id = TileId::fromString( idStr );
     if ( d->m_tileHash.contains( id ) ) {

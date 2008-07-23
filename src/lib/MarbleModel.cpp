@@ -789,7 +789,7 @@ void MarbleModel::clearPersistentTileCache()
 void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
                             GeoSceneTexture *textureLayer, bool requestTileUpdate)
 {
-    qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level << "requestTileUpdate" << requestTileUpdate;
+//    qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level << "requestTileUpdate" << requestTileUpdate;
     
     if ( d->m_downloadManager != 0 ) {
         connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString ) ),
