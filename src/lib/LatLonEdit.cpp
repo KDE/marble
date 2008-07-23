@@ -305,7 +305,7 @@ void LatLonEdit::reverseRecalculate()
 	checkComboBox();
 }
 
-
+#include "LatLonEdit.moc"
 
 
 
