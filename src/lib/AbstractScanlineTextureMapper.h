@@ -47,6 +47,25 @@ static double msvc_atanh(double x)
 #define atanh msvc_atanh
 #endif
 
+namespace {
+    const double a1 = 1.0/6.0; 
+    const double a2 = 1.0/24.0; 
+    const double a3 = 61.0/5040; 
+    const double a4 = 277.0/72576.0;  
+    const double a5 = 50521.0/39916800.0; 
+    const double a6 = 41581.0/95800320.0; 
+    const double a7 = 199360981.0/1307674368000.0; 
+    const double a8 = 228135437.0/4184557977600.0; 
+    const double a9 = 2404879675441.0/121645100408832000.0; 
+    const double a10 = 14814847529501.0/2043637686868377600.0; 
+    const double a11 = 69348874393137901.0/25852016738884976640000.0; 
+    const double a12 = 238685140977801337.0/238634000666630553600000.0; 
+    const double a13 = 4087072509293123892361.0/10888869450418352160768000000.0;
+    const double a14 = 454540704683713199807.0/3209350995912777478963200000.0;
+    const double a15 = 441543893249023104553682821.0/8222838654177922817725562880000000.0;
+    const double a16 = 2088463430347521052196056349.0/102156677868375135241390522368000000.0;
+}
+
 class TextureTile;
 class TileLoader;
 class ViewParams;
@@ -189,18 +208,48 @@ inline double AbstractScanlineTextureMapper::rad2PixelX( const double longitude 
     return longitude * m_normGlobalWidth;
 }
 
-inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude ) const
+inline double AbstractScanlineTextureMapper::rad2PixelY( const double lat ) const
 {
     switch ( m_tileProjection ) {
     case GeoSceneTexture::Equirectangular:
-        return -latitude * m_normGlobalHeight;
+        return -lat * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:
-        if ( fabs( latitude ) < 1.4835 )
-            return - asinh( tan( latitude ) ) * 0.5 * m_normGlobalHeight;
-        if ( latitude >= +1.4835 )
+        if ( fabs( lat ) < 1.4835 )
+    {
+        // We develop the inverse Gudermannian into a MacLaurin Series:
+        // Inspite of the many elements needed to get decent 
+        // accuracy this is still faster by far than calculating the 
+        // trigonometric expression:
+        // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
+
+        double lat2 = lat * lat;
+        double lat4 = lat2 * lat2;
+        double lat8 = lat4 * lat4;
+        double lat16 = lat8 * lat8;
+
+            return - ( lat 
+        + a1 * lat2 * lat 
+        + a2 * lat4 * lat
+        + a3 * lat4 * lat2 * lat
+        + a4 * lat8 * lat
+        + a5 * lat8 * lat2 * lat
+        + a6 * lat8 * lat4 * lat
+        + a7 * lat8 * lat4 * lat2 * lat
+        + a8 * lat16 * lat
+        + a9 * lat16 * lat2 * lat
+        + a10 * lat16 * lat4 * lat
+        + a11 * lat16 * lat4 * lat2 * lat
+        + a12 * lat16 * lat8 * lat
+        + a13 * lat16 * lat8 * lat2 * lat
+        + a14 * lat16 * lat8 * lat4 * lat
+        + a15 * lat16 * lat8 * lat4 * lat2 * lat
+        + a16 * lat16 * lat16 * lat
+        ) * 0.5 * m_normGlobalHeight;
+    }
+        if ( lat >= +1.4835 )
             // asinh( tan (1.4835)) => 3.1309587
             return - 3.1309587 * 0.5 * m_normGlobalHeight; 
-        if ( latitude <= -1.4835 )
+        if ( lat <= -1.4835 )
             // asinh( tan( -1.4835 )) => −3.1309587
             return 3.1309587 * 0.5 * m_normGlobalHeight; 
     }
@@ -208,7 +257,6 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double latitude )
     // Dummy value to avoid a warning.
     return 0.0;
 }
-
 
 inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
 {
