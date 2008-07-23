@@ -110,7 +110,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     int minimumZoom() const;
 
-    void setMapThemeModel( QStandardItemModel *model );
+    void setMapThemeModel( QStandardItemModel *mapThemeModel );
 
  Q_SIGNALS:
     /**

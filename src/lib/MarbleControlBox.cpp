@@ -42,6 +42,7 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
+#include "CustomSortFilterProxyModel.h"
 
 class MarbleControlBoxPrivate
 {
@@ -60,6 +61,7 @@ class MarbleControlBoxPrivate
 
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
+    CustomSortFilterProxyModel *m_mapSortProxy;
 };
 
 
@@ -97,6 +99,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
     d->uiWidget.locationListView->setModel( d->m_sortproxy );
+
+    d->m_mapSortProxy = new CustomSortFilterProxyModel( this );
 
 //  d->m_currentLocationWidget->hide(); // Current location tab is hidden
                                     //by default
@@ -158,7 +162,9 @@ MarbleControlBox::~MarbleControlBox()
 
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
     d->m_mapThemeModel = mapThemeModel;
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
+    d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
+    d->m_mapSortProxy->sort( 0 );
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted ( QModelIndex, int, int) ),
              this,                     SLOT( updateMapThemeView() ) );
     updateMapThemeView();
