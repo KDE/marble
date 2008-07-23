@@ -40,6 +40,7 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_feature;
     extern const char* dgmlAttr_format;
     extern const char* dgmlAttr_host;
+    extern const char* dgmlAttr_labelColor;
     extern const char* dgmlAttr_levelZeroColumns;
     extern const char* dgmlAttr_levelZeroRows;
     extern const char* dgmlAttr_mode;

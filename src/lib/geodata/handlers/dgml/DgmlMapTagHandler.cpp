@@ -22,6 +22,7 @@
 
 #include "DgmlMapTagHandler.h"
 
+#include <QtGui/QColor>
 #include <QtCore/QDebug>
 
 #include "DgmlElementDictionary.h"
@@ -48,13 +49,19 @@ GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));
 
+    QColor  labelColor  = parser.attribute(dgmlAttr_labelColor).trimmed();
+
+    if ( !labelColor.isValid() ) 
+        labelColor = Qt::black;
+
     GeoSceneMap* map = 0;
 
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Document)) {
         map = parentItem.nodeAs<GeoSceneDocument>()->map();
-        map->setBackgroundColor(parser.attribute(dgmlAttr_bgcolor).trimmed());
+        map->setBackgroundColor( QColor( parser.attribute( dgmlAttr_bgcolor ).trimmed() ) );
+        map->setLabelColor( labelColor );
     }
 
     return map;

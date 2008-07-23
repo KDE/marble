@@ -21,6 +21,8 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 
+#include "GeoSceneDocument.h"
+#include "GeoSceneMap.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
@@ -429,6 +431,14 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
         m_paintOrder.append( mark );
     }
+    if ( viewParams->mapTheme() )
+    {
+        QColor labelColor = viewParams->mapTheme()->map()->labelColor();
+
+        m_placeMarkPainter->setDefaultLabelColor( labelColor );
+
+    }
+
     m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, 
                                         viewParams->viewport() );
 }

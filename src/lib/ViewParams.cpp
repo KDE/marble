@@ -15,6 +15,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QImage>
 
+#include "AbstractProjection.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
@@ -115,6 +116,11 @@ AbstractProjection *ViewParams::currentProjection() const
 void ViewParams::setProjection(Projection newProjection)
 {
     d->m_viewport.setProjection( newProjection );
+
+    // Repaint the background if necessary
+    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
+        canvasImage()->fill( Qt::transparent );
+    }
 }
 
 void ViewParams::setMapThemeId( const QString& mapThemeId )
@@ -190,6 +196,12 @@ int ViewParams::radius() const
 void ViewParams::setRadius(int newRadius)
 {
     d->m_viewport.setRadius( newRadius );
+
+    // Repaint the background if necessary
+    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
+        canvasImage()->fill( Qt::transparent );
+    }
+
 }
 
 Quaternion ViewParams::planetAxis() const
@@ -200,6 +212,12 @@ Quaternion ViewParams::planetAxis() const
 void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 {
     d->m_viewport.setPlanetAxis( newAxis );
+/*
+    // Repaint the background if necessary
+    if ( projection() != Spherical && !currentProjection()->mapCoversViewport( viewport() ) ) {
+        canvasImage()->fill( Qt::transparent );
+    }
+*/
 }
 
 void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
@@ -216,6 +234,12 @@ void ViewParams::setCanvasImage( QImage * const image )
 {
     delete d->m_canvasImage;
     d->m_canvasImage = image;
+
+    // Repaint the background if necessary
+    if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
+        d->m_canvasImage->fill( Qt::transparent );
+    }
+
 }
 
 QImage * ViewParams::coastImage() const

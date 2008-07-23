@@ -113,7 +113,7 @@ ControlView* MarblePart::controlView() const
 
 KAboutData *MarblePart::createAboutData()
 {
-  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), "0.5" );
+  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), "Pre-0.7 SVN" );
 }
 
 bool MarblePart::openUrl( const KUrl &url )
@@ -307,21 +307,6 @@ void MarblePart::readSettings()
         m_controlView->marbleWidget()->goHome();
     }
 
-    // Set map quality
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
-
-    // Set angle unit
-    m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
-
-    // Set default font
-    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );     
-
-    // Set whether animations to the target are enabled
-    m_controlView->marbleWidget()->setAnimationsEnabled( 
-        MarbleSettings::animateTargetVoyage()
-    );
-
     // Map theme and projection
     m_controlView->marbleWidget()->setMapThemeId( MarbleSettings::mapTheme() );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
@@ -330,14 +315,6 @@ void MarblePart::readSettings()
     m_showCloudsAction->setChecked( MarbleSettings::showClouds() );
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
-
-    // Caches
-    m_controlView->marbleWidget()->setVolatileTileCacheLimit( 1000 * MarbleSettings::volatileTileCacheLimit() );
-    m_controlView->marbleWidget()->setPersistentTileCacheLimit( 1000 * MarbleSettings::persistentTileCacheLimit() );
-
-    // Proxy
-    m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
-                                             MarbleSettings::proxyPort() );
 
     // Plugins
     QHash<QString, int> pluginEnabled;

@@ -158,7 +158,7 @@ void HttpDownloadManager::removeJob ( HttpJob* job )
     if ( pos > 0 )
     {
         m_activatedJobList.removeAt ( pos );
-        qDebug() << "Removing: " << job->initiatorId();
+//        qDebug() << "Removing: " << job->initiatorId();
         job->deleteLater();
     }
 
@@ -173,7 +173,7 @@ void HttpDownloadManager::activateJobs()
     {
         HttpJob  *job = m_jobQueue.dequeue();
 
-        qDebug() << "On activatedJobList: " << job->sourceUrl().toString() << job->destinationFileName();
+//        qDebug() << "On activatedJobList: " << job->sourceUrl().toString() << job->destinationFileName();
         m_activatedJobList.push_back ( job );
         job->setStatus ( Activated );
         m_fetchFile->executeJob ( job );
@@ -196,8 +196,8 @@ void HttpDownloadManager::reportResult ( HttpJob* job, int err )
     }
     else
     {
-        qDebug() << "HttpDownloadManager: Download Complete:"
-        << job->originalDestinationFileName() << job->initiatorId();
+//        qDebug() << "HttpDownloadManager: Download Complete:"
+//        << job->originalDestinationFileName() << job->initiatorId();
         emit downloadComplete ( job->originalDestinationFileName(), job->initiatorId() );
         removeJob ( job );
     }

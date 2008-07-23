@@ -61,6 +61,7 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
     int      m_leftBarMargin;
     int      m_rightBarMargin;
     int      m_scaleBarWidth;
+    int      m_viewportWidth;
     int      m_scaleBarHeight;
     double   m_scaleBarKm;
 
@@ -69,6 +70,8 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
     int      m_valueInterval;
 
     QString  m_unit;
+
+    bool     m_scaleInitDone;
 
     void calcScaleBar();
 };

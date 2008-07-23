@@ -148,13 +148,13 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
             //   available, it should get displayed.
  
             if ( !fileInfo.exists() ) {
-                qDebug() << "File does not exist:" << fileInfo.filePath();
+//                qDebug() << "File does not exist:" << fileInfo.filePath();
                 download = true;
             }
             else if ( lastModified.secsTo( now ) > textureLayer->expire() ) {
-                qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
-                        << "age (seconds):" << lastModified.secsTo( now )
-                        << "allowed age:" << textureLayer->expire();
+//                qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
+//                        << "age (seconds):" << lastModified.secsTo( now )
+//                        << "allowed age:" << textureLayer->expire();
                 download = true;
             }
 
@@ -188,16 +188,16 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
             QUrl sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, level, x, y );
             QString destFileName = TileLoaderHelper::relativeTileFileName( textureLayer,
                                                                            level, x, y );
-            qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
+//            qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
             emit downloadTile( sourceUrl, destFileName, m_id.toString() );
         }
     }
 
-    qDebug() << "TextureTile::loadRawTile end";
+//    qDebug() << "TextureTile::loadRawTile end";
 
     m_depth = m_rawtile.depth();
 
-    qDebug() << "m_depth =" << m_depth;
+//    qDebug() << "m_depth =" << m_depth;
 }
 
 void TextureTile::loadTile( bool requestTileUpdate )
