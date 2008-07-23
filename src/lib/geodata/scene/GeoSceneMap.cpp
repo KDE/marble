@@ -48,7 +48,8 @@ class GeoSceneMapPrivate
     /// The vector holding all the filters in the map.
     QVector<GeoSceneFilter*> m_filters;
 
-    QString m_backgroundColor;
+    QColor m_backgroundColor;
+    QColor m_labelColor;
 };
 
 
@@ -177,12 +178,23 @@ bool GeoSceneMap::hasVectorLayers() const
     return false;
 }
 
-QString GeoSceneMap::backgroundColor() const
+QColor GeoSceneMap::backgroundColor() const
 {
     return d->m_backgroundColor;
 }
 
-void GeoSceneMap::setBackgroundColor( const QString& backgroundColor )
+void GeoSceneMap::setBackgroundColor( const QColor& backgroundColor )
 {
     d->m_backgroundColor = backgroundColor;
+}
+
+
+QColor GeoSceneMap::labelColor() const
+{
+    return d->m_labelColor;
+}
+
+void GeoSceneMap::setLabelColor( const QColor& backgroundColor )
+{
+    d->m_labelColor = backgroundColor;
 }

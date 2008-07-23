@@ -22,6 +22,7 @@
 #ifndef GEOSCENEMAP_H
 #define GEOSCENEMAP_H
 
+#include <QtGui/QColor>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
@@ -42,8 +43,11 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode {
     GeoSceneMap();
     ~GeoSceneMap();
 
-    QString backgroundColor() const;
-    void setBackgroundColor( const QString& );
+    QColor backgroundColor() const;
+    void setBackgroundColor( const QColor& );
+
+    QColor labelColor() const;
+    void setLabelColor( const QColor& );
 
     /**
      * @brief  Add a new layer to the map

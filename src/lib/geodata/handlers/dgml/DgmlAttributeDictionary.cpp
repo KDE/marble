@@ -37,6 +37,7 @@ const char* dgmlAttr_expire           = "expire";
 const char* dgmlAttr_feature          = "feature";
 const char* dgmlAttr_format           = "format";
 const char* dgmlAttr_host             = "host";
+const char* dgmlAttr_labelColor       = "labelColor";
 const char* dgmlAttr_levelZeroColumns = "levelZeroColumns";
 const char* dgmlAttr_levelZeroRows    = "levelZeroRows";
 const char* dgmlAttr_mode             = "mode";
