@@ -151,7 +151,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 continue;
             }
 
-            double  skyRadius      = viewport->width();
+            double  skyRadius      = 0.6 * sqrt( viewport->width() * viewport->width() + viewport->height() * viewport->height() );
             double  earthRadius    = viewport->radius();
             double  earthCenteredX = qpos.v[Q_X] * skyRadius;
             double  earthCenteredY = qpos.v[Q_Y] * skyRadius;
