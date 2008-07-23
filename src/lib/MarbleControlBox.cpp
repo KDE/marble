@@ -162,9 +162,12 @@ MarbleControlBox::~MarbleControlBox()
 
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
     d->m_mapThemeModel = mapThemeModel;
+    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapThemeModel );
+/*
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
     d->m_mapSortProxy->sort( 0 );
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
+*/
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted ( QModelIndex, int, int) ),
              this,                     SLOT( updateMapThemeView() ) );
     updateMapThemeView();
