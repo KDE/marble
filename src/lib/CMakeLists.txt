@@ -147,6 +147,9 @@ set(marblewidget_SRCS
     MathHelper.cpp
 
     LatLonEdit.cpp
+
+    MapThemeSortFilterProxyModel.cpp
+
 )
 
 set (marblewidget_UI
@@ -259,6 +262,8 @@ else (APPLE AND QTONLY)
     MapThemeManager.h
 
     MarbleWidgetInputHandler.h
+
+    MapThemeSortFilterProxyModel.h
 
     global.h
     MarbleDirs.h

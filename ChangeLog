@@ -1,3 +1,8 @@
+2008-07-23  Claudiu Covaci  <claudiu.covaci@gmail.com>
+	MarbleControlBox patch to fix the item order by subclassing QSortFilterProxyModel.
+	* src/lib/MarbleControlBox.{h,cpp}: added MapThemeSortFilterProxyModel instance
+	* src/lib/MapThemeSortFilterProxyModel.{h,cpp}: new files
+
 2008-07-20  Inge Wallin  <inge@lysator.liu.se>
 
 	Introduce a read-only facade for internal Marble data.
