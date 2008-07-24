@@ -24,6 +24,7 @@
 #include <qglobal.h>
 
 #ifdef Q_CC_MSVC
+#include <float.h>
 
 double msvc_asinh(double x)
 {
