@@ -522,6 +522,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
             d->uiWidget.zoomSlider->setMinimum( d->m_widget->map()->minimumZoom() );
             d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
 
+            updateButtons( d->uiWidget.zoomSlider->value() );
             // Break out of the loop
             break;
         }
