@@ -10,12 +10,12 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
 {
     QString leftData = sourceModel()->data( left ).toString();
     QString rightData = sourceModel()->data( right ).toString();
-    if ( leftData == "Atlas" or
-         leftData == "Satellite View" or
+    if ( leftData == "Atlas" ||
+         leftData == "Satellite View" ||
          leftData == "OpenStreetMap" )
         return true;
-    else if ( rightData == "Atlas" or
-         rightData == "Satellite View" or
+    else if ( rightData == "Atlas" ||
+         rightData == "Satellite View" ||
          rightData == "OpenStreetMap" )
         return false;
     else
