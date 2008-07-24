@@ -18,15 +18,14 @@
 
 #include <cmath>
 #include <math.h>
-#ifdef _MSC_VER
-#include <msvc/math.h>
-#endif
 
 #include "TileLoader.h"
 #include "TextureTile.h"
 #include "GeoSceneTexture.h"
 
 #ifdef Q_CC_MSVC
+#include <math.h>
+#include <float.h>
 static double msvc_asinh(double x)
 {
   if ( _isnan ( x ) ) {

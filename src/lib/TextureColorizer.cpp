@@ -28,6 +28,20 @@
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 
+#ifdef Q_CC_MSVC
+#include <float.h>
+static double msvc_asinh(double x)
+{
+  if ( _isnan ( x ) ) {
+    errno = EDOM;
+    return x;
+  }
+
+  return ( log( x + sqrt ( x * x + 1.0 ) ) );
+}
+#define asinh msvc_asinh
+#endif
+
 uint TextureColorizer::texturepalette[16][512];
 
 TextureColorizer::TextureColorizer( const QString& seafile, 

@@ -17,6 +17,18 @@
 #include "ViewportParams.h"
 
 #ifdef Q_CC_MSVC
+#include <float.h>
+static double msvc_asinh(double x)
+{
+  if ( _isnan ( x ) ) {
+    errno = EDOM;
+    return x;
+  }
+
+  return ( log( x + sqrt ( x * x + 1.0 ) ) );
+}
+#define asinh msvc_asinh
+
 static double msvc_atanh(double x)
 {
   return ( 0.5 * log( ( 1.0 + x ) / ( 1.0 - x ) ) );
