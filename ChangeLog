@@ -1,3 +1,7 @@
+2008-07-24  Claudiu Covaci  <claudiu.covaci@gmail.com>
+	* src/lib/MarbleControlBox.cpp:
+	Fix: re-enable zoom buttons if newly selected map supports higher zoom levels.
+
 2008-07-23  Claudiu Covaci  <claudiu.covaci@gmail.com>
 	MarbleControlBox patch to fix the item order by subclassing QSortFilterProxyModel.
 	* src/lib/MarbleControlBox.{h,cpp}: added MapThemeSortFilterProxyModel instance
