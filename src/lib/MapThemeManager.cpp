@@ -241,7 +241,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     itemList << new QStandardItem( mapTheme->head()->target() + '/' 
                                    + mapTheme->head()->theme() + '/'
                                    + mapTheme->head()->theme() + ".dgml" );
-    itemList << new QStandardItem( description );
+    itemList << new QStandardItem( tr( description.toUtf8() ) );
 
     delete mapTheme;
 

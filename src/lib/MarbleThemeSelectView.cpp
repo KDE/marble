@@ -33,11 +33,6 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
                    SLOT( selectedMapTheme( QModelIndex ) ) );
 }
 
-#if 0
-MarbleThemeSelectView::setModel( QAbstractItemModel * model )
-{
-}
-#endif
 
 void MarbleThemeSelectView::resizeEvent(QResizeEvent* event)
 {
