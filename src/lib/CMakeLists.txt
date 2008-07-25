@@ -19,8 +19,8 @@ INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
 
 if (QTONLY)
-  set(GENERIC_LIB_VERSION "0.5.0")
-  set(GENERIC_LIB_SOVERSION "5")
+  set(GENERIC_LIB_VERSION "0.6.0")
+  set(GENERIC_LIB_SOVERSION "6")
 endif (QTONLY)
 
 if (QTONLY)
