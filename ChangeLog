@@ -1,3 +1,6 @@
+2008-07-26 shashank singh <shashank_singh@ieee.org>
+    *src/plugins/marble
+    added twitter plugins and did small modification in panoramio plugin
 2008-07-24  Claudiu Covaci  <claudiu.covaci@gmail.com>
 	* src/lib/MarbleControlBox.cpp:
 	Fix: re-enable zoom buttons if newly selected map supports higher zoom levels.
@@ -66,6 +69,7 @@
     Implement round robin algorithm for fetching tiles.
     This was brought up by the OpenStreetMap tile server admins
     and should go into 4.1 as well.
+
 
 2008-07-07  Patrick Spendrin    <ps_ml@gmx.de>
 
@@ -151,6 +155,7 @@
     * src/lib/geodata/data/Serializable.h
 
     serialize!
+
 
 2008-07-06  Patrick Spendrin    <ps_ml@gmx.de>
 

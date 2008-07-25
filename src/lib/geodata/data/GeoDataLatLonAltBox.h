@@ -155,7 +155,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     void setMaxAltitude( const double maxAltitude );
 
     /**
-     * @brief Get the reference system for the altitude.
+     * @brief Get the reference system for the altitude.ar
      * @return the point of reference which marks the origin 
      * for measuring the altitude.
      */

@@ -5,4 +5,5 @@ add_subdirectory( overviewmap )
 add_subdirectory( mapscale )
 add_subdirectory( stars )
 add_subdirectory( panoramio )
+add_subdirectory ( twitter )
 
