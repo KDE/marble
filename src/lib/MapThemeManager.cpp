@@ -232,7 +232,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     QString description = mapTheme->head()->description();
 
     QStandardItem *item = new QStandardItem( name );
-    item->setData( name, Qt::DisplayRole );
+    item->setData( tr( name.toUtf8() ), Qt::DisplayRole );
     item->setData( mapThemeIcon, Qt::DecorationRole );
     item->setData( QString( "<span style=\" max-width: 150 px;\"> " 
                    + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
