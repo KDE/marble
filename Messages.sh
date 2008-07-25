@@ -4,6 +4,7 @@ for fname in  `find -iname \*.dgml`; do
   for field in name description heading text ; do
     grep -inH "<$field>.*<\/$field>" $fname \
     | sed 's/\"/\\\"/g' \
+    | sed 's/<!\[CDATA\[\(.*\)\]\]>/\1/' \
     | sed "s/\\([^:]*\\):\\([^:]*\\):.*<$field>\(.*\)<\/$field>.*/\
            \/\/i18n: file \1 line \2\n\
            i18n(\"\3\");\
