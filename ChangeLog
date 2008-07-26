@@ -1,3 +1,12 @@
+2008-07-26  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpDownloadManager.cpp:
+
+    Fix regression caused by fix for bug 162681:
+    Use deleteAfter to delete active jobs also in
+    ~HttpDownloadManager.
+    Was fixed in 4.1 branch on 2008-07-20.
+
 2008-07-26 shashank singh <shashank_singh@ieee.org>
     *src/plugins/marble
     added twitter plugins and did small modification in panoramio plugin

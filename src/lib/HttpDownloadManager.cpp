@@ -44,7 +44,13 @@ HttpDownloadManager::~HttpDownloadManager()
     qDeleteAll ( m_jobQueue );
     m_jobQueue.clear();
 
-    qDeleteAll ( m_activatedJobList );
+    // activated jobs have to be deleted using deleteLater()
+    // because they may be connected to signals
+    QList<HttpJob*>::const_iterator pos = m_activatedJobList.begin();
+    QList<HttpJob*>::const_iterator const end = m_activatedJobList.end();
+    for (; pos != end; ++pos ) {
+        (*pos)->deleteLater();
+    }
     m_activatedJobList.clear();
 
     qDeleteAll ( m_jobBlackList );
