@@ -29,9 +29,16 @@ sanity checking would include :
 */
 struct twitterDataStructure
 {
+//defining the only parts that are required ,, all oher fields are hence left
 QString user;
 QString location;
 QString text; 
+};
+
+struct googleMapDataStructure
+{
+double lat;
+double lon;
 };
 
 class jsonParser :public QObject
@@ -45,7 +52,9 @@ class jsonParser :public QObject
 
    QList<twitterDataStructure> parseAllObjects ( const QString &content, int numberOfObjects );//for parsing a list objects
     
- private:
+    googleMapDataStructure parseObject(QString &content);//google geocoding api parser
+   
+   private:
  QList <twitterDataStructure> parsedJsonOutput;
 
  twitterDataStructure dataStorage;

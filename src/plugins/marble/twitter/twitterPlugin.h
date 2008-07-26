@@ -67,7 +67,7 @@ public:
 
 public slots:
         void slotJsonDownloadComplete ( QString , QString );//completed download of json reply fom panoramio
-//         void slotImageDownloadComplete ( QString , QString );//completed download of image
+        void slotGeoCodingReplyRecieved ( QString , QString );//completed download of image
 signals:
         void statusMessageForImageDownloadingProcess(QString);
 private:

@@ -56,3 +56,18 @@ QList <twitterDataStructure> jsonParser::parseAllObjects ( const QString &conten
 
         return parsedJsonOutput;
 }
+
+googleMapDataStructure jsonParser::parseObject(QString &content)
+{
+QString temp = "var myJSONObject = " + content;
+int iterator = 0;//the count starts fom one
+googleMapDataStructure returnStructure;
+
+myEngine.evaluate ( temp );
+returnStructure.lat=myEngine.evaluate ( QString ( "return myJSONObject[" )
++ QString::number ( iterator )
++ QString ( "].user.name;" ) ).toString();;
+returnStructure.lon=;
+// qDebug
+return returnStructure;
+}

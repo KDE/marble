@@ -126,14 +126,16 @@ void twitterPlugin::downloadtwitter ( int rangeFrom , int rangeTo ,double east ,
 
 GeoDataPoint twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
 {
-// static double y=0;
-// y+=50;
         GeoDataPoint tempLatLon(0.0,0.0,0.0,GeoDataPoint::Degree );
         m_downloadManager->addJob("http://maps.google.com/maps/geo?q="+streetAddress+"&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ","finLatLon","findLatLon");
-        connect 
+        connect ( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotGeoCodingReplyRecieved ( QString , QString ) ) );
         return tempLatLon;
 }
 
+void twitterPlugin::slotGeoCodingReplyRecieved(QString ,QString)
+{
+
+}
 Q_EXPORT_PLUGIN2 ( twitterPlugin, twitterPlugin )
 
 #include "twitterPlugin.moc"
