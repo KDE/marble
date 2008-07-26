@@ -55,6 +55,16 @@ install it into any other directory, add
 
   cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps ../marble
 
+If you have no write permission to the installation directory of cmake
+(because you have a system installed cmake) you need to add another
+parameter -DPACKAGE_ROOT_PREFIX=/home/ingwa/apps to the cmake command:
+
+  cmake -DQTONLY=ON -DCMAKE_INSTALL_PREFIX=/home/ingwa/apps \
+        -DPACKAGE_ROOT_PREFIX=/home/ingwa/apps ../marble
+
+To modify the position of the data directory at compile time, see the notes
+at 3.1 .
+
 
 1.3 Build marble
 
