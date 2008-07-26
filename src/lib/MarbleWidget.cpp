@@ -658,55 +658,47 @@ void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
 
 void MarbleWidget::moveLeft()
 {
-#if 1
-    int polarity = 0;
-
-    if ( northPoleY() != 0 )
-        polarity = northPoleY() / abs(northPoleY());
-
-    if ( polarity < 0 )
-        rotateBy( +moveStep(), 0 );
-    else
-        rotateBy( -moveStep(), 0 );
-#else
     d->m_map->moveLeft();
-#endif
+
+    // We only have to repaint the background every time if the earth
+    // doesn't cover the whole image.
+    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+
+    repaint();
 }
 
 void MarbleWidget::moveRight()
 {
-#if 1
-    int polarity = 0;
-
-    if ( northPoleY() != 0 )
-        polarity = northPoleY() / abs(northPoleY());
-
-    if ( polarity < 0 )
-        rotateBy( -moveStep(), 0 );
-    else
-        rotateBy( +moveStep(), 0 );
-#else
     d->m_map->moveRight();
-#endif
+
+    // We only have to repaint the background every time if the earth
+    // doesn't cover the whole image.
+    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+
+    repaint();
 }
 
 
 void MarbleWidget::moveUp()
 {
-#if 1
-    rotateBy( 0, -moveStep() );
-#else
     d->m_map->moveUp();
-#endif
+
+    // We only have to repaint the background every time if the earth
+    // doesn't cover the whole image.
+    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+
+    repaint();
 }
 
 void MarbleWidget::moveDown()
 {
-#if 1
-    rotateBy( 0, +moveStep() );
-#else
     d->m_map->moveDown();
-#endif
+
+    // We only have to repaint the background every time if the earth
+    // doesn't cover the whole image.
+    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+
+    repaint();
 }
 
 void MarbleWidget::leaveEvent (QEvent*)

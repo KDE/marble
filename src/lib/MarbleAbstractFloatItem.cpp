@@ -177,7 +177,7 @@ QRectF MarbleAbstractFloatItem::renderedRect() const
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRect( QRectF( QPointF( 0.0, 0.0 ), d->m_renderedRect.size() ) );
+    path.addRect( QRectF( 0.0, 0.0, d->m_renderedRect.size().width() - 1, d->m_renderedRect.size().height() - 1 ) );
     return path;
 }
 
@@ -358,10 +358,17 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
     
         // Reinitialize cachePixmap if the float item changes its size 
         // or other important common properties 
-        if ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) {
+        if ( ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) || d->m_cachePixmap.isNull() ) {
             // Add extra space for the border
-            QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 );
-            d->m_cachePixmap = QPixmap( cachePixmapSize );
+            QSize cachePixmapSize = d->m_size.toSize();
+
+
+            if ( d->m_size.isValid() && !d->m_size.isNull() ) {
+                d->m_cachePixmap = QPixmap( cachePixmapSize ).copy();
+            }
+            else {
+                qDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
+            }
         }
         // unset the dirty flag once all checks are passed
         d->m_newItemProperties = false;
@@ -369,7 +376,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         if ( d->s_pixmapCacheEnabled ) {
             d->m_cachePixmap.fill( Qt::transparent );
             GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport, Normal );
-            pixmapPainter.translate( 0.5, 0.5 );
+
             renderBackground( &pixmapPainter );
 
             pixmapPainter.translate( d->s_padding, d->s_padding );
