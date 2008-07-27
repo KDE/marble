@@ -50,7 +50,12 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     if ( fabs( lat ) > m_maxLat )
         return false;
 
-    double  rad2Pixel = 2 * viewport->radius() / M_PI;
+    // Convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    double  rad2Pixel = 2 * radius / M_PI;
 
     // Calculate translation of center point
     double  centerLon;
@@ -58,8 +63,8 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
+    x = (int)( width  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     return true;
 }
@@ -77,29 +82,36 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
     if ( fabs( lat ) >  m_maxLat )
         return false;
 
-    double  rad2Pixel = 2 * viewport->radius() / M_PI;
+    // Convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    double  rad2Pixel = 2 * radius / M_PI;
 
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
     
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)( viewport->width()  / 2 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
+    x = (int)( width  / 2 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
-    // Skip placemarks that are outside the screen area.
-    return ( ( y >= 0 && y < viewport->height() )
-         && ( ( x >= 0 && x < viewport->width() ) 
-              || (x - 4 * viewport->radius() >= 0
-                  && x - 4 * viewport->radius() < viewport->width() )
-              || (x + 4 * viewport->radius() >= 0
-                  && x + 4 * viewport->radius() < viewport->width() ) ) );
+    // Return true if the calculated point is inside the screen area,
+    // otherwise return false.
+    return ( ( 0 <= y && y < height )
+	     && ( ( 0 <= x && x < width )
+		  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
+		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint )
+bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
+					    const ViewportParams *viewport,
+					    int *x, int &y, int &pointRepeatNum,
+					    bool &globeHidesPoint )
 {
-    // on flat projections the observer's view onto the point won't be 
-    // obscured by the target planet itself
+    // On flat projections the observer's view onto the point won't be 
+    // obscured by the target planet itself.
     globeHidesPoint = false;
 
     double  lon;
@@ -110,22 +122,27 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
     if ( fabs( lat ) > maxLat() )
         return false;
 
-    double  rad2Pixel = 2.0 * viewport->radius() / M_PI;
+    // Convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    double  rad2Pixel = 2.0 * radius / M_PI;
 
     double  centerLon;
     double  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Let (itX, y) be the first guess for one possible position on screen..
-    int itX = (int)( viewport->width()  / 2.0 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
+    int itX = (int)( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
+    y = (int)( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
     // Make sure that the requested point is within the visible y range:
-    if ( y >= 0 && y < viewport->height() ) {
+    if ( 0 <= y && y < height ) {
         // First we deal with the case where the repetition doesn't happen
         if ( m_repeatX == false ) {
             *x = itX;
-            if ( itX > 0 && itX < viewport->width() ) {
+            if ( 0 < itX && itX < width ) {
                 return true;
             }
             else {
@@ -136,7 +153,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
         // For the repetition case the same geopoint gets displayed on 
         // the map many times.across the longitude.
 
-        int xRepeatDistance = 4 * viewport->radius();
+        int xRepeatDistance = 4 * radius;
 
         // Finding the leftmost positive x value
         if ( itX > xRepeatDistance ) {
@@ -146,7 +163,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
             itX += xRepeatDistance;
         }
         // the requested point is out of the visible x range:
-        if ( itX > viewport->width() ) {
+        if ( itX > width ) {
             return false;
         }
 
@@ -154,7 +171,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, const 
         // from left to right.
         int itNum = 0;
 
-        while ( itX < viewport->width() ) {
+        while ( itX < width ) {
             *x = itX;
             ++x;
             ++itNum;
@@ -223,7 +240,8 @@ bool MercatorProjection::geoCoordinates( int x, int y,
 }
 
 
-GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
+GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
+						      const ViewportParams *viewport )
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
@@ -232,7 +250,8 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
 
-    // If the whole globe is visible we can easily calculate analytically the lon-/lat- range
+    // If the whole globe is visible we can easily calculate
+    // analytically the lon-/lat- range.
     double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( m_repeatX ) {
@@ -243,7 +262,8 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
         }
     }
     else {
-        // We need a point on the screen at maxLat that definetely gets displayed:
+        // We need a point on the screen at maxLat that definetely
+        // gets displayed:
         double averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
         GeoDataPoint maxLonPoint( +M_PI, averageLatitude, GeoDataPoint::Radian );
@@ -268,8 +288,8 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect, c
 
 bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) const
 {
-    int           radius             = viewport->radius();
-    int           halfImageHeight    = viewport->height() / 2;
+    int           radius = viewport->radius();
+    int           height = viewport->height();
 
     // Calculate translation of center point
     double  centerLon;
@@ -280,10 +300,10 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     const float rad2Pixel = (float)( 2 * radius )/M_PI;
 
     int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
-    int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
+    int yTop          = height / 2 - 2 * radius + yCenterOffset;
     int yBottom       = yTop + 4 * radius;
 
-    if ( yTop >= 0 ||  yBottom < viewport->height() )
+    if ( yTop >= 0 || yBottom < height )
         return false;
 
     return true;

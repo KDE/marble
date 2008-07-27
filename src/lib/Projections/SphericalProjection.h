@@ -55,10 +55,13 @@ class SphericalProjection : public AbstractProjection
 			    CoordinateType coordType = originalCoordinates );
 
     inline bool screenCoordinates( const GeoDataPoint &geopoint, 
-                            const ViewportParams *params,
-                            int &x, int &y, bool &globeHidesPoint );
+				   const ViewportParams *params,
+				   int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int& pointRepeatNum, bool &globeHidesPoint );
+    bool screenCoordinates( const GeoDataPoint &geopoint,
+			    const ViewportParams * viewport,
+			    int *x, int &y, int &pointRepeatNum,
+			    bool &globeHidesPoint );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -70,9 +73,9 @@ class SphericalProjection : public AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     inline bool geoCoordinates( const int x, const int y,
-                         const ViewportParams *params,
-                         double& lon, double& lat,
-                         GeoDataPoint::Unit unit = GeoDataPoint::Degree );
+				const ViewportParams *params,
+				double& lon, double& lat,
+				GeoDataPoint::Unit unit = GeoDataPoint::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -82,9 +85,9 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
-    inline bool    geoCoordinates( int x, int y, 
-                            const ViewportParams *params,
-                            Quaternion &q );
+    inline bool geoCoordinates( int x, int y, 
+				const ViewportParams *params,
+				Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
 				      const ViewportParams *viewport );

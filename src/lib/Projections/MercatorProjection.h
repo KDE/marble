@@ -58,7 +58,10 @@ class MercatorProjection : public AbstractProjection
                             const ViewportParams *params,
                             int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint );
+    bool screenCoordinates( const GeoDataPoint &geopoint,
+			    const ViewportParams * viewport,
+			    int *x, int &y, int &pointRepeatNum,
+			    bool &globeHidesPoint );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

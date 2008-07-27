@@ -1,3 +1,12 @@
+2008-07-27  Inge Wallin  <inge@lysator.liu.se>
+
+	Clean up projection code in preparation for bigger things.
+	* src/lib/Projections/AbstractProjection.{h,cpp},
+	* src/lib/Projections/SphericalProjection.{h,cpp},
+	* src/lib/Projections/EquirectProjection.{h,cpp},
+	* src/lib/Projections/MercatorProjection.{h,cpp}:
+	Clean up, make clearer and make it follow coding standards
+
 2008-07-27  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/parser/GeoParser.cpp:

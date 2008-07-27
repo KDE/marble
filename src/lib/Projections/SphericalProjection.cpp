@@ -101,7 +101,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return true;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams *viewport, int *x, int &y, int& pointRepeatNum, bool &globeHidesPoint )
+bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
+					     const ViewportParams *viewport,
+					     int *x, int &y,
+					     int &pointRepeatNum,
+					     bool &globeHidesPoint )
 {
     double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
@@ -137,7 +141,9 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, const
     y = (int)(viewport->height() / 2 - pixelAltitude * qpos.v[Q_Y]);
 
     // Skip placemarks that are outside the screen area
-    if ( *x < 0 || *x >= viewport->width() || y < 0 || y >= viewport->height() ) {
+    if ( *x < 0 || *x >= viewport->width() 
+	 || y < 0 || y >= viewport->height() )
+    {
         globeHidesPoint = false;
         return false;
     }
@@ -161,8 +167,7 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     double centerX = (double)( x - viewport->width() / 2 );
     double centerY = (double)( y - viewport->height() / 2 );
 
-    if ( radius * radius > centerX * centerX + centerY * centerY )
-    {
+    if ( radius * radius > centerX * centerX + centerY * centerY ) {
         double qx = inverseRadius * +centerX;
         double qy = inverseRadius * -centerY;
         double qr = 1.0 - qy * qy;
@@ -193,16 +198,20 @@ bool SphericalProjection::geoCoordinates( int x, int y,
     return false;
 }
 
-GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
+GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
+						       const ViewportParams *viewport )
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
     GeoDataLatLonAltBox latLonAltBox = AbstractProjection::latLonAltBox( screenRect, viewport );
 
-    // If the whole globe is visible we can easily calculate analytically the lon-/lat- range
+    // If the whole globe is visible we can easily calculate
+    // analytically the lon-/lat- range.
     double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
-    if ( 2 * viewport->radius() < viewport->height() && viewport->radius() < viewport->width() ) { 
+    if ( 2 * viewport->radius() < viewport->height()
+	 && viewport->radius() < viewport->width() )
+    { 
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:
 
@@ -219,8 +228,9 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect, 
             latLonAltBox.setSouth( -fabs( M_PI / 2.0 - fabs( pitch ) ) );
         }
 
-        // Last but not least we deal with the rare case where the globe is fully visible 
-        // and pitch = 0.0 or pitch = -M_PI or pitch = +M_PI
+        // Last but not least we deal with the rare case where the
+        // globe is fully visible and pitch = 0.0 or pitch = -M_PI or
+        // pitch = +M_PI
         if ( pitch == 0.0 || pitch == -M_PI || pitch == +M_PI ) {
             double yaw = viewport->planetAxis().yaw();
             latLonAltBox.setWest( GeoDataPoint::normalizeLon( yaw - M_PI / 2.0 ) );

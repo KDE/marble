@@ -34,6 +34,7 @@ typedef enum {
     mappedCoordinates
 }  CoordinateType;
 
+
 /**
  * @short A base class for all projections in Marble.
  */
@@ -82,14 +83,15 @@ class AbstractProjection
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
+     *
      * @param geopoint the point on earth, including altitude, that we want the coordinates for.
      * @param viewport the viewport parameters
-     * @param planetAxisMatrix The matrix describing the current rotation of the globe
      * @param x      the x coordinate of the pixel is returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
+     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
+     *
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
      *
      * @see ViewportParams
      */
@@ -97,12 +99,14 @@ class AbstractProjection
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint ) = 0;
 
+    // Will just call the virtual version with a dummy globeHidesPoint.
     bool screenCoordinates( const GeoDataPoint &geopoint, 
-                                    const ViewportParams *viewport,
-                                    int &x, int &y );
+			    const ViewportParams *viewport,
+			    int &x, int &y );
 
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
+     *
      * @param geopoint the point on earth, including altitude, that we want the coordinates for.
      * @param viewport the viewport parameters
      * @param planetAxisMatrix The matrix describing the current rotation of the globe
@@ -110,13 +114,17 @@ class AbstractProjection
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @param pointRepeatNum      the amount of times that a single geographical
                                   point gets represented on the map
+     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
+     *
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataPoint &geopoint, const ViewportParams * viewport, int *x, int &y, int &pointRepeatNum, bool &globeHidesPoint ) = 0;
+    virtual bool screenCoordinates( const GeoDataPoint &geopoint,
+				    const ViewportParams *viewport,
+				    int *x, int &y, int &pointRepeatNum,
+				    bool &globeHidesPoint ) = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -136,10 +144,12 @@ class AbstractProjection
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
+     *
      * @param x  the x coordinate of the pixel
      * @param y  the y coordinate of the pixel
      * @param viewport the viewport parameters
      * @param q  the out parameter where the result is returned
+     *
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */

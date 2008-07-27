@@ -15,6 +15,7 @@
 // Marble
 #include "ViewportParams.h"
 
+
 AbstractProjection::AbstractProjection()
 {
     m_repeatX = false;
@@ -24,14 +25,19 @@ AbstractProjection::~AbstractProjection()
 {
 }
 
+
 bool AbstractProjection::screenCoordinates( const GeoDataPoint &geopoint, 
-                         const ViewportParams *viewport, int &x, int &y )
+					    const ViewportParams *viewport,
+					    int &x, int &y )
 {
     bool globeHidesPoint;
+
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
 
-GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, const ViewportParams *viewport )
+
+GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
+						      const ViewportParams *viewport )
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
@@ -49,39 +55,56 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, c
 
     // Move along the screenborder and save the highest and lowest lon-lat values.
 
-    for ( int x = 0; x < viewport->width(); x+=xStep )
-    {
-        if ( geoCoordinates( x, 0, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    for ( int x = 0; x < viewport->width(); x+=xStep ) {
+	if ( geoCoordinates( x, 0, viewport, lon, lat,
+			     GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon,
+				otherWestLon, otherEastLon,
+				northLat, southLat );
         }
 
-        if ( geoCoordinates( x, viewport->height() - 1, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        if ( geoCoordinates( x, viewport->height() - 1,
+			     viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon,
+				otherWestLon, otherEastLon,
+				northLat, southLat );
         }
     }
 
-    if ( geoCoordinates( viewport->width(), 0, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-        coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    if ( geoCoordinates( viewport->width(), 0, viewport, lon, lat,
+			 GeoDataPoint::Radian ) ) {
+        coordinateExtremes( lon, lat, westLon, eastLon,
+			    otherWestLon, otherEastLon, northLat, southLat );
     }
 
-    if ( geoCoordinates( viewport->width(), viewport->height() - 1, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-        coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    if ( geoCoordinates( viewport->width(), viewport->height() - 1,
+			 viewport, lon, lat, GeoDataPoint::Radian ) ) {
+        coordinateExtremes( lon, lat, westLon, eastLon,
+			    otherWestLon, otherEastLon, northLat, southLat );
     }
 
-    for ( int y = 0; y < viewport->height(); y+=yStep )
-    {
-        if ( geoCoordinates( 0, y, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+    for ( int y = 0; y < viewport->height(); y+=yStep ) {
+        if ( geoCoordinates( 0, y, viewport, lon, lat, 
+			     GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon,
+				otherWestLon, otherEastLon,
+				northLat, southLat );
         }
 
-        if ( geoCoordinates( viewport->width() - 1, y, viewport, lon, lat, GeoDataPoint::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon, otherWestLon, otherEastLon, northLat, southLat );
+        if ( geoCoordinates( viewport->width() - 1, y,
+			     viewport, lon, lat, GeoDataPoint::Radian ) ) {
+            coordinateExtremes( lon, lat, westLon, eastLon,
+				otherWestLon, otherEastLon,
+				northLat, southLat );
         }
     }
 
     // DateLine check:
-
-    if ( ( M_PI - eastLon ) < 0.05 && ( westLon + M_PI ) < 0.05 && fabs( otherEastLon ) > 0.05 && fabs( otherWestLon ) > 0.05 ) {
+    if ( ( M_PI - eastLon ) < 0.05
+	 && ( westLon + M_PI ) < 0.05
+	 && fabs( otherEastLon ) > 0.05
+	 && fabs( otherWestLon ) > 0.05 )
+    {
         westLon = otherWestLon;
         eastLon = otherEastLon;
     }
@@ -105,7 +128,8 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect, c
     }
 
     GeoDataLatLonAltBox latLonAltBox;
-    latLonAltBox.setBoundaries( westLon, eastLon, northLat, southLat, GeoDataPoint::Radian  );
+    latLonAltBox.setBoundaries( westLon, eastLon, northLat, southLat,
+				GeoDataPoint::Radian  );
 
     latLonAltBox.setMinAltitude(      -100000000.0 );
     latLonAltBox.setMaxAltitude( 100000000000000.0 );
