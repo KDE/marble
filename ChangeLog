@@ -1,5 +1,11 @@
 2008-07-27  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/parser/GeoParser.cpp:
+
+    Coding style, make lines shorter.
+
+2008-07-27  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataContainer.h:
 
     Remove #if 0'ed code.

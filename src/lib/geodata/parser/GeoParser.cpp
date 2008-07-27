@@ -91,7 +91,9 @@ bool GeoParser::read(QIODevice* device)
                 parseDocument();
 
                 if (!m_nodeStack.isEmpty())
-                    raiseError(QObject::tr("Parsing failed. Still %1 unclosed tags after document end.").arg(m_nodeStack.size()));
+                    raiseError(
+                        QObject::tr("Parsing failed. Still %1 unclosed tags after document end.")
+                        .arg(m_nodeStack.size()));
             } else
                 raiseDocumentElementError();
         }
@@ -145,11 +147,14 @@ void GeoParser::parseDocument()
                 processChildren = !isEndElement();
             }
 
-            // Only add GeoStackItem to the parent chain, if the tag handler for the current element
-            // possibly contains non-textual children. Consider following DGML snippet "<name>Test</name>" -
-            // the DGMLNameTagHandler assumes that <name> only contains textual children, and reads the
-            // joined value of all children using readElementText(). This implicates that tags like <name>
-            // don't contain any children that would need to be procesed using this parseDocument() function.
+            // Only add GeoStackItem to the parent chain, if the tag handler
+            // for the current element possibly contains non-textual children.
+            // Consider following DGML snippet "<name>Test</name>" - the
+            // DGMLNameTagHandler assumes that <name> only contains textual
+            // children, and reads the joined value of all children using
+            // readElementText(). This implicates that tags like <name>
+            // don't contain any children that would need to be procesed using
+            // this parseDocument() function.
             if (processChildren) {
                 m_nodeStack.push(stackItem);
 
@@ -180,7 +185,8 @@ void GeoParser::raiseDocumentElementError()
 
 void GeoParser::raiseWarning(const QString& warning)
 {
-    // TODO: Maybe introduce a strict parsing mode where we feed the warning to raiseError() (which stops parsing).
+    // TODO: Maybe introduce a strict parsing mode where we feed the warning to
+    // raiseError() (which stops parsing).
     qDebug() << "[GeoParser::raiseWarning] -> " << warning;
 }
 
