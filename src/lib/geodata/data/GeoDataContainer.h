@@ -87,13 +87,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      */
     virtual void unpack( QDataStream& stream );
 
-#if 0
-    /*
-     * Will move this method to GeoDataDocumentModel in a next step
-     */
-    PlaceMarkContainer& activePlaceMarkContainer( const ViewParams& viewParams );
-#endif
-
  protected:
     /// Default constructor
     GeoDataContainer();
@@ -101,12 +94,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
  private:
     Q_DISABLE_COPY( GeoDataContainer )
     GeoDataContainerPrivate * const d;
-#if 0  // FIXME: This doesn't belong here.
-    PlaceMarkContainer& sphericalActivePlaceMarkContainer( const ViewParams& viewParams );
-    PlaceMarkContainer& rectangularActivePlaceMarkContainer( const ViewParams& viewParams );
-
-    PlaceMarkContainer m_activePlaceMarkContainer;
-#endif
 };
 
 #endif // GEODATACONTAINER_H
