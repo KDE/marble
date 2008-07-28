@@ -377,6 +377,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
             d->m_cachePixmap.fill( Qt::transparent );
             GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport, Normal );
 
+            pixmapPainter.translate( 0.5, 0.5 );
             renderBackground( &pixmapPainter );
 
             pixmapPainter.translate( d->s_padding, d->s_padding );
@@ -388,6 +389,8 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         }
         else {
             painter->translate( positivePosition( painter->viewport() ) );
+
+            painter->translate( 0.5, 0.5 );
             renderBackground( painter );
             painter->translate( d->s_padding, d->s_padding );
 
