@@ -260,6 +260,7 @@ else (APPLE AND QTONLY)
     MarbleNavigator.h
     MarbleDataFacade.h
     MarbleAbstractFloatItem.h
+    MarbleAbstractLayer.h
     MapThemeManager.h
 
     MarbleWidgetInputHandler.h
