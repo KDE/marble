@@ -20,7 +20,7 @@
 #include "AbstractLayerContainer.h"
 #include "BoundingBox.h"
 #include "ClipPainter.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 #include "ViewParams.h"
 
@@ -38,7 +38,7 @@ AbstractLayer::~AbstractLayer()
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoDataPoint( double _lon, double _lat,
+bool AbstractLayer::getPixelPosFromGeoDataCoordinates( double _lon, double _lat,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)
@@ -58,7 +58,7 @@ bool AbstractLayer::getPixelPosFromGeoDataPoint( double _lon, double _lat,
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoDataPoint( const GeoDataPoint & position,
+bool AbstractLayer::getPixelPosFromGeoDataCoordinates( const GeoDataCoordinates & position,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)

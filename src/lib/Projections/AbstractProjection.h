@@ -23,7 +23,7 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 class ViewportParams;
 class AbstractProjectionHelper;
@@ -95,12 +95,12 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataPoint &geopoint, 
+    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint ) = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const GeoDataPoint &geopoint, 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
 			    const ViewportParams *viewport,
 			    int &x, int &y );
 
@@ -121,7 +121,7 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataPoint &geopoint,
+    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint,
 				    const ViewportParams *viewport,
 				    int *x, int &y, int &pointRepeatNum,
 				    bool &globeHidesPoint ) = 0;
@@ -144,7 +144,7 @@ class AbstractProjection
     virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
                                  double& lon, double& lat,
-                                 GeoDataPoint::Unit unit = GeoDataPoint::Degree ) = 0;
+                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) = 0;
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.

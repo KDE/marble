@@ -15,7 +15,7 @@
 
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 
 QStringList SatellitesPlugin::backendTypes() const
@@ -72,21 +72,21 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 {
     painter->autoMapQuality();
 
-    GeoDataPoint flensburg( 9.4, 30.8, 2750000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates flensburg( 9.4, 30.8, 2750000.0, GeoDataCoordinates::Degree );
     painter->setPen( QColor( 99, 198, 99, 255 ) );
     painter->setBrush( QColor( 99, 198, 99, 80 ) );
     painter->drawEllipse( flensburg, 30, 30 );
 //     painter->drawPixmap( flensburg, QPixmap( MarbleDirs::path( "bitmaps/torsten.jpg" ) ) ); 
     painter->drawText( flensburg, "Torsten-air" );
 
-    GeoDataPoint linkoeping( 15.6, 58.4, 2500000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates linkoeping( 15.6, 58.4, 2500000.0, GeoDataCoordinates::Degree );
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     painter->setBrush( QColor( 198, 99, 99, 80 ) );
     painter->drawEllipse( linkoeping, 40, 40 ); 
 //     painter->drawPixmap( linkoeping, QPixmap( MarbleDirs::path( "bitmaps/ingwa.jpg" ) ) ); 
     painter->drawText( linkoeping, "Inge-air" );
 
-    GeoDataPoint orbit( 105.6, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
     painter->setPen( QColor( 99, 99, 198, 255 ) );
     painter->setBrush( QColor( 99, 99, 198, 80 ) );
     painter->drawEllipse( orbit, 20, 20 ); 

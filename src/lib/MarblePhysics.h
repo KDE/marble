@@ -11,7 +11,7 @@
 #ifndef MARBLE_PHYSICS_H
 #define MARBLE_PHYSICS_H
 
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include <QtCore/QObject>
 
 class QTimeLine;
@@ -24,20 +24,20 @@ class MarblePhysics : public QObject
     MarblePhysics();
     ~MarblePhysics();
 
-    void jumpTo( const GeoDataPoint &targetPoint );
-    GeoDataPoint suggestedPosition() const;
+    void jumpTo( const GeoDataCoordinates &targetPoint );
+    GeoDataCoordinates suggestedPosition() const;
 
  Q_SIGNALS:
     void valueChanged( qreal );
 
  public Q_SLOTS:
 
-    void setCurrentPosition( const GeoDataPoint &currentPostion );
+    void setCurrentPosition( const GeoDataCoordinates &currentPostion );
 
  private:
     Q_DISABLE_COPY( MarblePhysics )
-    GeoDataPoint m_sourcePosition;
-    GeoDataPoint m_targetPosition;
+    GeoDataCoordinates m_sourcePosition;
+    GeoDataCoordinates m_targetPosition;
 
     QTimeLine *m_timeLine;
 

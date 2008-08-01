@@ -54,11 +54,11 @@ class SphericalProjection : public AbstractProjection
                             int& x, int& y,
 			    CoordinateType coordType = originalCoordinates );
 
-    inline bool screenCoordinates( const GeoDataPoint &geopoint, 
+    inline bool screenCoordinates( const GeoDataCoordinates &geopoint, 
 				   const ViewportParams *params,
 				   int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint,
+    bool screenCoordinates( const GeoDataCoordinates &geopoint,
 			    const ViewportParams * viewport,
 			    int *x, int &y, int &pointRepeatNum,
 			    bool &globeHidesPoint );
@@ -75,7 +75,7 @@ class SphericalProjection : public AbstractProjection
     inline bool geoCoordinates( const int x, const int y,
 				const ViewportParams *params,
 				double& lon, double& lat,
-				GeoDataPoint::Unit unit = GeoDataPoint::Degree );
+				GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.

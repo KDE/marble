@@ -22,7 +22,7 @@
 
 #include "marble_export.h"
 
-class GeoDataPoint;
+class GeoDataCoordinates;
 class GeoDataStyle;
 class PlaceMarkContainer;
 class PlaceMarkManager;
@@ -45,7 +45,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     {
       GeoTypeRole = Qt::UserRole + 1,  ///< The geo type (e.g. city or mountain)
       DescriptionRole,                 ///< The description
-      CoordinateRole,                  ///< The GeoDataPoint coordinate
+      CoordinateRole,                  ///< The GeoDataCoordinates coordinate
       PopulationRole,                  ///< The population
       AreaRole,                        ///< The area size
       CountryCodeRole,                 ///< The country code
@@ -77,7 +77,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-    GeoDataPoint coordinateData( const QModelIndex &index ) const;
+    GeoDataCoordinates coordinateData( const QModelIndex &index ) const;
     GeoDataStyle* styleData( const QModelIndex &index ) const;
 
     /**

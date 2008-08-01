@@ -129,9 +129,9 @@ void twitterPlugin::downloadtwitter ( int rangeFrom , int rangeTo ,double east ,
 
 }
 
-GeoDataPoint twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
+GeoDataCoordinates twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
 {
-        GeoDataPoint tempLatLon(0.0,0.0,0.0,GeoDataPoint::Degree );
+        GeoDataCoordinates tempLatLon(0.0,0.0,0.0,GeoDataCoordinates::Degree );
         m_downloadManager->addJob("http://maps.google.com/maps/geo?q="+streetAddress+"&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ","finLatLon","findLatLon");
         connect ( m_downloadManager, SIGNAL ( downloadComplete ( QString, QString ) ), this, SLOT ( slotGeoCodingReplyRecieved ( QString , QString ) ) );
         return tempLatLon;

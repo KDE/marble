@@ -31,7 +31,7 @@
 //#include <QtDBus/QtDBus>
 
 #include "marble_export.h"
-#include "GeoDataPoint.h"       // In geodata/data/
+#include "GeoDataCoordinates.h"       // In geodata/data/
 #include "MarbleWidgetInputHandler.h"
 #include "global.h"             // types needed in all of marble.
 
@@ -286,7 +286,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
-                         GeoDataPoint::Unit = GeoDataPoint::Degree );
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
@@ -544,7 +544,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  point the point above earth from which the view can be seen
      *               by looking vertically down.
      */
-    void  centerOn( const GeoDataPoint &point, bool animated = false );
+    void  centerOn( const GeoDataCoordinates &point, bool animated = false );
 
     /**
      * @brief  Set the latitude for the center point
@@ -593,7 +593,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome(const GeoDataPoint& homePoint, int zoom = 1050);
+    void  setHome(const GeoDataCoordinates& homePoint, int zoom = 1050);
 
     /**
      * @brief  Move left by the moveStep.
@@ -902,7 +902,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void  mouseMoveGeoPosition( QString );
 
-    void  mouseClickGeoPosition( double lon, double lat, GeoDataPoint::Unit );
+    void  mouseClickGeoPosition( double lon, double lat, GeoDataCoordinates::Unit );
 
     void  timeout();
 

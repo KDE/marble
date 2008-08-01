@@ -1,5 +1,49 @@
 2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/AbstractLayer/AbstractLayer.{h|cpp}
+    * src/lib/AbstractLayer/AbstractLayerData.{h|cpp}
+    * src/lib/geodata/data/GeoDataLatLonAltBox.{h|cpp}
+    * src/lib/gps/Waypoint.{h|cpp}
+    * src/lib/Projections/AbstractProjection.{h|cpp}
+    * src/lib/Projections/AbstractProjectionHelper.h
+    * src/lib/Projections/EquirectProjection.{h|cpp}
+    * src/lib/Projections/MercatorProjection.{h|cpp}
+    * src/lib/Projections/SphericalProjection.{h|cpp}
+    * src/lib/GeoPainter.{h|cpp}
+    * src/lib/MarbleControlBox.{h|cpp}
+    * src/lib/MarbleMap{.h|_p.h|.cpp}
+    * src/lib/MarblePhysics.{h|cpp}
+    * src/lib/MarblePlacemarkModel.{h|cpp}
+    * src/lib/MarbleWidget.{h|cpp}
+    * src/lib/MarbleWidgetInputHandler.cpp
+    * src/lib/MarbleWidgetPopupMenu.cpp
+    * src/lib/MeasureTool.{h|cpp}
+    * src/lib/MercatorScanlineTextureMapper.cpp
+    * src/lib/PlaceMarkContainer.h
+    * src/lib/PlaceMarkInfoDialog.cpp
+    * src/lib/PlaceMarkLayout.cpp
+    * src/lib/ViewParams.cpp
+    * src/plugins/marble/compass/CompassFloatItem.cpp
+    * src/plugins/marble/panoramio/PanoramioPlugin.cpp
+    * src/plugins/marble/satellites/SatellitesPlugin.cpp
+    * src/plugins/marble/twitter/twitterPlugin.{h|cpp}
+    * src/marble_part.cpp
+    * src/QtMainWindow.cpp
+    
+    This commit changes the complete code base from GeoDataPoint
+    to GeoDataCoordinates. This is needed because the extensions
+    provided by GeoDataPoint are not needed most of the times:
+    GeoDataPoint derives from GeoDataGeometry and GeoDataObject -
+    these features are very seldomly needed if you just want to check
+    if a certain 3d-point is within GeoDataLatLonAltBox.
+    Another point in this port is that using GeoDataPoint in a
+    QVector is very expensive in terms of speed - use GeoDataCoordinates
+    for those purposes.
+    I will add further documentation to GeoDataCoordinates.h and
+    GeoDataPoint.h .
+    
+2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/AbstractScanlineTextureMapper.cpp
     * src/lib/EquirectScanlineTextureMapper.cpp
     * src/lib/SphericalScanlineTextureMapper.cpp

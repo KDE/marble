@@ -24,7 +24,7 @@
 
 #include "global.h"
 
-class GeoDataPoint;
+class GeoDataCoordinates;
 class GeoPainter;
 class Quaternion;
 class ViewportParams;
@@ -59,7 +59,7 @@ class MeasureTool : public QObject
     Q_DISABLE_COPY( MeasureTool )
 
     // The list of points in the distance path.
-    QVector<GeoDataPoint*>  m_pMeasurePointList;
+    QVector<GeoDataCoordinates*>  m_pMeasurePointList;
 
     QFont   m_font_regular;
     int     m_fontheight;

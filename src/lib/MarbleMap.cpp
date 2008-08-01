@@ -42,7 +42,7 @@
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
 #include "GeoDataFeature.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
@@ -532,7 +532,7 @@ void MarbleMap::centerOn(const QModelIndex& index)
     selectionModel->clear();
 
     if ( index.isValid() ) {
-        const GeoDataPoint point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>();
+        const GeoDataCoordinates point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
   
         double  lon;
         double  lat;
@@ -581,17 +581,17 @@ void MarbleMap::setProjection( Projection projection )
 
 void MarbleMap::home( double &lon, double &lat, int& zoom )
 {
-    d->m_homePoint.geoCoordinates( lon, lat, GeoDataPoint::Degree );
+    d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
     zoom = d->m_homeZoom;
 }
 
 void MarbleMap::setHome( const double lon, const double lat, const int zoom)
 {
-    d->m_homePoint = GeoDataPoint( lon, lat, 0, GeoDataPoint::Degree );
+    d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
     d->m_homeZoom = zoom;
 }
 
-void MarbleMap::setHome(const GeoDataPoint& homePoint, int zoom)
+void MarbleMap::setHome(const GeoDataCoordinates& homePoint, int zoom)
 {
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
@@ -651,7 +651,7 @@ void MarbleMapPrivate::doResize()
 
 int MarbleMap::northPoleY()
 {
-    Quaternion  northPole     = GeoDataPoint( 0.0, M_PI * 0.5 ).quaternion();
+    Quaternion  northPole     = GeoDataCoordinates( 0.0, M_PI * 0.5 ).quaternion();
     Quaternion  invPlanetAxis = d->m_viewParams.planetAxis().inverse();
 
     northPole.rotateAroundAxis( invPlanetAxis );
@@ -669,7 +669,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
 
 bool MarbleMap::geoCoordinates( const int x, const int y,
                                 double& lon, double& lat,
-                                GeoDataPoint::Unit unit )
+                                GeoDataCoordinates::Unit unit )
 {
     return d->m_viewParams.currentProjection()
         ->geoCoordinates( x, y, d->m_viewParams.viewport(),
@@ -1030,10 +1030,10 @@ void MarbleMap::notifyMouseClick( int x, int y)
     double  lon   = 0;
     double  lat   = 0;
 
-    valid = geoCoordinates( x, y, lon, lat, GeoDataPoint::Radian );
+    valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
     if ( valid ) {
-        emit mouseClickGeoPosition( lon, lat, GeoDataPoint::Radian);
+        emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian);
     }
 }
 

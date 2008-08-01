@@ -20,7 +20,6 @@
 #include <QtCore/QDebug>
 
 // Marble
-#include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"

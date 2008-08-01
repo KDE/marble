@@ -70,7 +70,7 @@ void MeasureTool::paint( GeoPainter *painter,
     Quaternion  qpos;
     Quaternion  prevqpos;
 
-    QVector<GeoDataPoint*>::const_iterator  it;
+    QVector<GeoDataCoordinates*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           ++it )
@@ -111,7 +111,7 @@ void MeasureTool::drawDistancePoints( GeoPainter *painter,
 
     // Paint the marks.
     Quaternion                              qpos;
-    QVector<GeoDataPoint*>::const_iterator  it;
+    QVector<GeoDataCoordinates*>::const_iterator  it;
     for ( it = m_pMeasurePointList.constBegin();
           it != m_pMeasurePointList.constEnd();
           ++it )
@@ -382,7 +382,7 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
 
 void MeasureTool::addMeasurePoint( double lon, double lat )
 {
-    m_pMeasurePointList << new GeoDataPoint( lon, lat );
+    m_pMeasurePointList << new GeoDataCoordinates( lon, lat );
 }
 
 

@@ -54,11 +54,11 @@ class MercatorProjection : public AbstractProjection
                             int& x, int& y,
 			    CoordinateType coordType = originalCoordinates );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint, 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                             const ViewportParams *params,
                             int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataPoint &geopoint,
+    bool screenCoordinates( const GeoDataCoordinates &geopoint,
 			    const ViewportParams * viewport,
 			    int *x, int &y, int &pointRepeatNum,
 			    bool &globeHidesPoint );
@@ -75,7 +75,7 @@ class MercatorProjection : public AbstractProjection
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          double& lon, double& lat,
-                         GeoDataPoint::Unit = GeoDataPoint::Degree );
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.

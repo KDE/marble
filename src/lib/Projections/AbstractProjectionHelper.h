@@ -23,7 +23,6 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
-#include "GeoDataPoint.h"
 
 
 class GeoPainter;

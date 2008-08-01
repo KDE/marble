@@ -22,7 +22,7 @@
 #include <QtGui/QTextBrowser>
 #include <QtGui/QTextFrame>
 
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 
@@ -37,7 +37,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
 
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
-    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>() hold the coordinate of current placemark	
+    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>() hold the coordinate of current placemark	
     setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
 //  The page to shown in placemark is emitted here ..
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
@@ -121,12 +121,12 @@ void PlaceMarkInfoDialog::showContent()
         description_val_browser->setEnabled( true );
         description_val_browser->setHtml( description );
     }
-    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().toString() );
+    coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().toString() );
     country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
     const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
     const double area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
-    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>().altitude();
+    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().altitude();
 
 
     area_lbl->setText( tr("Area:") );

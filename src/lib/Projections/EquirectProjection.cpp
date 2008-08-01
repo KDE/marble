@@ -69,7 +69,7 @@ bool EquirectProjection::screenCoordinates( const double lon, const double lat,
 		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint, 
+bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
                                             int &x, int &y, bool &globeHidesPoint )
 {
@@ -102,7 +102,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
 		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
+bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 					    const ViewportParams *viewport,
 					    int *x, int &y,
 					    int &pointRepeatNum,
@@ -184,7 +184,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataPoint &geopoint,
 bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          double& lon, double& lat,
-                                         GeoDataPoint::Unit unit )
+                                         GeoDataCoordinates::Unit unit )
 {
     int   radius          = viewport->radius();
     int   halfImageWidth  = viewport->width() / 2;
@@ -214,7 +214,7 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
     while ( lon > M_PI )  lon -= 2.0 * M_PI;
     while ( lon < -M_PI ) lon += 2.0 * M_PI;
 
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
@@ -250,7 +250,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // If the whole globe is visible we can easily calculate
     // analytically the lon-/lat- range
     // FIXME: Unused variable.  Remove?
-    //double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    //double pitch = GeoDataCoordinates::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( m_repeatX ) {
         int xRepeatDistance = 4 * radius;
@@ -263,8 +263,8 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         // We need a point on the screen at maxLat that definetely gets displayed:
         double averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
-        GeoDataPoint maxLonPoint( +M_PI, averageLatitude, GeoDataPoint::Radian );
-        GeoDataPoint minLonPoint( -M_PI, averageLatitude, GeoDataPoint::Radian );
+        GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
+        GeoDataCoordinates minLonPoint( -M_PI, averageLatitude, GeoDataCoordinates::Radian );
     
         int dummyX, dummyY; // not needed
         bool dummyVal;
@@ -283,8 +283,8 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     double averageLongitude = latLonAltBox.east();
 
-    GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
-    GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );
 
     int dummyX, dummyY; // not needed
     bool dummyVal;
@@ -298,7 +298,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setWest( -M_PI );
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataPoint::Degree );
+//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

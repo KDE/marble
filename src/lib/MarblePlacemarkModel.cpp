@@ -95,7 +95,7 @@ int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
         return 0;
 }
 
-GeoDataPoint MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
+GeoDataCoordinates MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
 {
     return d->m_placeMarkContainer.at( index.row() )->coordinate();
 }

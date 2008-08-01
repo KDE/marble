@@ -22,7 +22,7 @@
  * A helper class which contains a couple of place mark
  * objects.
  *
- * The ownership of the place mark objects is transfered to the container!
+ * The ownership of the place mark objects is <b>not</b> transfered to the container!
  */
 class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
 {

@@ -280,9 +280,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
              d->m_widget, SLOT( changeCurrentPosition( double, double ) ) );
     connect( d->m_widget, SIGNAL( mouseClickGeoPosition( double, double,
-                                            GeoDataPoint::Unit ) ),
+                                            GeoDataCoordinates::Unit ) ),
              this, SLOT( receiveGpsCoordinates ( double, double,
-                                                 GeoDataPoint::Unit) ) );
+                                                 GeoDataCoordinates::Unit) ) );
 
     connect( d->m_widget, SIGNAL( timeout() ),
              this,        SIGNAL( updateGps() ) );
@@ -364,16 +364,16 @@ void MarbleControlBox::disableGpsInput( bool in )
 }
 
 void MarbleControlBox::receiveGpsCoordinates( double x, double y,
-                                              GeoDataPoint::Unit unit)
+                                              GeoDataCoordinates::Unit unit)
 {
     if ( d->uiWidget.m_catchGps->isChecked() ) {
         switch(unit){
-        case GeoDataPoint::Degree:
+        case GeoDataCoordinates::Degree:
             d->uiWidget.m_lonSpinBox->setValue( y );
             d->uiWidget.m_latSpinBox->setValue( x );
             emit gpsPositionChanged( y, x );
             break;
-        case GeoDataPoint::Radian:
+        case GeoDataCoordinates::Radian:
             double t_lat=0,t_lon=0;
             t_lat = y * -RAD2DEG;
             t_lon = x * +RAD2DEG;

@@ -31,7 +31,7 @@
 //#include <QtDBus/QtDBus>
 
 #include "marble_export.h"
-#include "GeoDataPoint.h"       // In geodata/data/
+#include "GeoDataCoordinates.h"       // In geodata/data/
 #include "global.h"             // types needed in all of marble.
 
 // Qt
@@ -226,7 +226,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     bool geoCoordinates( const int x, const int y,
                          double& lon, double& lat,
-                         GeoDataPoint::Unit = GeoDataPoint::Degree );
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -534,7 +534,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome(const GeoDataPoint& homePoint, int zoom = 1050);
+    void  setHome(const GeoDataCoordinates& homePoint, int zoom = 1050);
 
     /**
      * @brief  Move left by the moveStep.
@@ -785,7 +785,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void  mouseMoveGeoPosition( QString );
 
-    void  mouseClickGeoPosition( double lon, double lat, GeoDataPoint::Unit );
+    void  mouseClickGeoPosition( double lon, double lat, GeoDataCoordinates::Unit );
 
     void  timeout();
 

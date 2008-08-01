@@ -100,13 +100,13 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     double  lat;
     double  lon;
 
-    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataPoint::Radian );
+    m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
 
     m_copyCoordinateAction->setEnabled( true );
     m_copyCoordinateAction->setText( tr("Copy Coordinates") );
     m_copyCoordinateAction->setData( curpos );
 
-    QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataPoint( lon, lat, GeoDataPoint::Radian ).toString() );
+    QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian ).toString() );
     positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
     positionMenu->addAction( m_copyCoordinateAction );
 
@@ -142,7 +142,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     double  lat;
     double  lon;
 
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Degree );
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
     if ( valid == true )
     {
 //        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
@@ -157,10 +157,10 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     double  lon;
     double  lat;
 
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
     if ( valid == true )
     {
-        QString  positionString = GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Radian ).toString();
+        QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian ).toString();
         QClipboard  *clipboard = QApplication::clipboard();
 
         clipboard->setText( positionString );
@@ -174,7 +174,7 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
     double  lat;
     double  lon;
 
-    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataPoint::Radian );
+    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
 
     m_removeMeasurePointsAction->setEnabled(true);
 

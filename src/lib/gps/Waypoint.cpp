@@ -34,7 +34,7 @@ Waypoint::Waypoint( double lat, double lon )
 {
 }
 
-Waypoint::Waypoint( const GeoDataPoint& position )
+Waypoint::Waypoint( const GeoDataCoordinates& position )
     : AbstractLayerData( position ),
       GpsElement(),
       m_elevation(0.0),

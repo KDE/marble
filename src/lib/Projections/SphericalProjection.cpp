@@ -15,7 +15,7 @@
 // Marble
 #include "SphericalProjectionHelper.h"
 #include "ViewportParams.h"
-
+#include "GeoDataPoint.h"
 
 static SphericalProjectionHelper  theHelper;
 
@@ -54,7 +54,7 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
     return p.v[Q_Z] > 0;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint, 
+bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                              const ViewportParams *viewport,
                                              int &x, int &y, bool &globeHidesPoint )
 {
@@ -101,7 +101,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
     return true;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
+bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 					     const ViewportParams *viewport,
 					     int *x, int &y,
 					     int &pointRepeatNum,
@@ -158,7 +158,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataPoint &geopoint,
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
                                           double& lon, double& lat,
-                                          GeoDataPoint::Unit unit )
+                                          GeoDataCoordinates::Unit unit )
 {
     const double  inverseRadius = 1.0 / (double)(viewport->radius());
     bool          noerr         = false;
@@ -182,7 +182,7 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
         noerr = true;
     }
 
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
@@ -244,8 +244,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     double averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
-    GeoDataPoint maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataPoint::Radian );
-    GeoDataPoint minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataPoint::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );
 
     int dummyX, dummyY; // not needed
     bool dummyVal;
@@ -259,7 +259,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setEast( +M_PI );
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataPoint::Degree );
+//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

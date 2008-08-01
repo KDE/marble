@@ -48,7 +48,7 @@ GeoDataLatLonBox::GeoDataLatLonBox()
 {
 }
 
-GeoDataLatLonBox::GeoDataLatLonBox( double north, double south, double east, double west, GeoDataPoint::Unit unit )
+GeoDataLatLonBox::GeoDataLatLonBox( double north, double south, double east, double west, GeoDataCoordinates::Unit unit )
     : GeoDataObject(),
       d( new GeoDataLatLonBoxPrivate )
 {
@@ -66,117 +66,117 @@ GeoDataLatLonBox::~GeoDataLatLonBox()
     delete d;
 }
 
-double GeoDataLatLonBox::north( GeoDataPoint::Unit unit ) const
+double GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
 {
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_north * RAD2DEG;
     }
     return d->m_north;
 }
 
-void GeoDataLatLonBox::setNorth( const double north, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setNorth( const double north, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_north = GeoDataPoint::normalizeLat( north );
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
         break;
     }
 }
 
-double GeoDataLatLonBox::south( GeoDataPoint::Unit unit ) const
+double GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
 {
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_south * RAD2DEG;
     }
     return d->m_south;
 }
 
-void GeoDataLatLonBox::setSouth( const double south, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setSouth( const double south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_south = GeoDataPoint::normalizeLat( south );
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
         break;
     }
 }
 
 
-double GeoDataLatLonBox::east( GeoDataPoint::Unit unit ) const
+double GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
 {
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_east * RAD2DEG;
     }
     return d->m_east;
 }
 
-void GeoDataLatLonBox::setEast( const double east, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setEast( const double east, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_east = GeoDataPoint::normalizeLon( east );
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_east = GeoDataPoint::normalizeLon( east * DEG2RAD );
         break;
     }
 }
 
-double GeoDataLatLonBox::west( GeoDataPoint::Unit unit ) const
+double GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
 {
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_west * RAD2DEG;
     }
     return d->m_west;
 }
 
-void GeoDataLatLonBox::setWest( const double west, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setWest( const double west, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_west = GeoDataPoint::normalizeLon( west );
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_west = GeoDataPoint::normalizeLon( west * DEG2RAD );
         break;
     }
 }
 
-void GeoDataLatLonBox::setRotation( const double rotation, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setRotation( const double rotation, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_rotation = rotation;
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_rotation = rotation * DEG2RAD;
         break;
     }
 }
 
-double GeoDataLatLonBox::rotation( GeoDataPoint::Unit unit ) const
+double GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
 {
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_rotation * RAD2DEG;
     }
     return d->m_rotation;
 }
 
-void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, double &south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         north = d->m_north;
         south = d->m_south;
         east = d->m_east;
         west = d->m_west;
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         north = d->m_north * RAD2DEG;
         south = d->m_south * RAD2DEG;
         east = d->m_east * RAD2DEG;
@@ -185,16 +185,16 @@ void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, do
     }
 }
 
-void GeoDataLatLonBox::setBoundaries( double west, double east, double north, double south, GeoDataPoint::Unit unit )
+void GeoDataLatLonBox::setBoundaries( double west, double east, double north, double south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         d->m_north = GeoDataPoint::normalizeLat( north );
         d->m_south = GeoDataPoint::normalizeLat( south );
         d->m_east =  GeoDataPoint::normalizeLon( east );
         d->m_west =  GeoDataPoint::normalizeLon( west );
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
         d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
         d->m_east =  GeoDataPoint::normalizeLon( east * DEG2RAD );
@@ -210,6 +210,24 @@ bool GeoDataLatLonBox::crossesDateLine() const
     }
 
     return false;
+}
+
+bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
+{
+    double lon, lat;
+
+    point.geoCoordinates( lon, lat );
+
+    // We need to take care of the normal case ...
+    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
+    // ... and the case where the bounding box crosses the date line:
+       ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) )
+        return false;
+    
+    if ( lat < d->m_south || lat > d->m_north )
+        return false;
+
+    return true;
 }
 
 bool GeoDataLatLonBox::contains( const GeoDataPoint &point )
@@ -251,14 +269,14 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox & box )
     return false;
 }
 
-QString GeoDataLatLonBox::text( GeoDataPoint::Unit unit ) const
+QString GeoDataLatLonBox::text( GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
         break;
@@ -381,6 +399,18 @@ void GeoDataLatLonAltBox::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
+bool GeoDataLatLonAltBox::contains( const GeoDataCoordinates &point )
+{
+    if ( !GeoDataLatLonBox::contains( point ) )
+        return false;
+
+    if ( point.altitude() < d->m_minAltitude || point.altitude() > d->m_maxAltitude ) {
+        return false;
+    }
+
+    return true;
+}
+
 bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point )
 {
     if ( !GeoDataLatLonBox::contains( point ) )
@@ -409,16 +439,16 @@ bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox & box )
     return false;
 }
 
-QString GeoDataLatLonAltBox::text( GeoDataPoint::Unit unit ) const
+QString GeoDataLatLonAltBox::text( GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
-    case GeoDataPoint::Radian:
+    case GeoDataCoordinates::Radian:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
 	    .arg( north() ).arg( west() )
 	    .arg( d->m_maxAltitude ).arg( south() )
 	    .arg( east() ).arg( d->m_minAltitude ); 
         break;
-    case GeoDataPoint::Degree:
+    case GeoDataCoordinates::Degree:
         return QString( "North: %1; West: %2 MaxAlt: %3\n South: %4; East: %5 MinAlt: %6" )
             .arg( north() * RAD2DEG ).arg( west() * RAD2DEG )
 	    .arg( d->m_maxAltitude ).arg( south() * RAD2DEG )

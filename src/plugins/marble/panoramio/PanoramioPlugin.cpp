@@ -16,7 +16,7 @@
 #include <QSize>
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
@@ -96,11 +96,11 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
 
     if (flag == 1) {
         for (int x = 0; x < imagesWeHave.count(); ++x) {
-            painter->drawPixmap(GeoDataPoint(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataPoint::Degree), imagesWeHave[x]);
+            painter->drawPixmap(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree), imagesWeHave[x]);
             painter->setBrush(QBrush(Qt::NoBrush));
             painter->setPen(Qt::Dense1Pattern);
             painter->setPen(Qt::white);
-            painter->drawRect(GeoDataPoint(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataPoint::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
+            painter->drawRect(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
 //             qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
         }
     }

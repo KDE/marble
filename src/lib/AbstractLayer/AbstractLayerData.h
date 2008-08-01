@@ -12,7 +12,7 @@
 #ifndef ABSTRACTLAYERDATA_H
 #define ABSTRACTLAYERDATA_H
 
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "AbstractLayerInterface.h"
 
 class QPoint;
@@ -26,11 +26,11 @@ class AbstractLayerData : public virtual AbstractLayerInterface
 {
  public:
     /**
-     * @brief make a Data Object from GeoDataPoint
+     * @brief make a Data Object from GeoDataCoordinates
      * @param position the position that the intended
      *                 AbstractLayerData will be at.
      */
-    explicit AbstractLayerData( const GeoDataPoint &position );
+    explicit AbstractLayerData( const GeoDataCoordinates &position );
     
     /**
      * @brief make a Data object from latitude and londitude
@@ -98,9 +98,9 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     
     /**
      * @brief m_position getter
-     * @return GeoDataPoint representation of the position of this Object
+     * @return GeoDataCoordinates representation of the position of this Object
      */
-    GeoDataPoint position() const ;
+    GeoDataCoordinates position() const ;
     
     /**
      * @brief evaluate the latitude of this LayerData object
@@ -114,11 +114,11 @@ class AbstractLayerData : public virtual AbstractLayerInterface
    
     /**
      * @brief m_position setter
-     * @param posIn the new GeoDataPoint
+     * @param posIn the new GeoDataCoordinates
      * 
      * coppies the Geopoint posIn
      */
-    void setPosition( const GeoDataPoint &posIn );
+    void setPosition( const GeoDataCoordinates &posIn );
     
     /**
      * @brief m_position setter
@@ -161,7 +161,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     /**
      * @brief position of the AbstractLayerData
      */
-    GeoDataPoint *m_position;
+    GeoDataCoordinates *m_position;
     
     /**
      * @brief visability of the AbstractLayerData

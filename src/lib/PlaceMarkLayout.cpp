@@ -233,7 +233,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
             qobject_cast<const MarblePlacemarkModel*>( index.model() );
         Q_ASSERT( placemarkModel );
 
-        GeoDataPoint geopoint = placemarkModel->coordinateData( index );
+        GeoDataCoordinates geopoint = placemarkModel->coordinateData( index );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -334,7 +334,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                 break;
         }
 
-        GeoDataPoint geopoint = placemarkModel->coordinateData( index );
+        GeoDataCoordinates geopoint = placemarkModel->coordinateData( index );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))

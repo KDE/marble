@@ -16,6 +16,7 @@
 #include "MercatorProjectionHelper.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
+#include "GeoDataPoint.h"
 
 static MercatorProjectionHelper  theHelper;
 
@@ -69,7 +70,7 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     return true;
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint, 
+bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
                                             int &x, int &y, bool &globeHidesPoint )
 {
@@ -105,7 +106,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
 		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
+bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 					    const ViewportParams *viewport,
 					    int *x, int &y, int &pointRepeatNum,
 					    bool &globeHidesPoint )
@@ -190,7 +191,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataPoint &geopoint,
 bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          double& lon, double& lat,
-                                         GeoDataPoint::Unit unit )
+                                         GeoDataCoordinates::Unit unit )
 {
     int           radius             = viewport->radius();
     int           halfImageWidth     = viewport->width() / 2;
@@ -223,7 +224,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
         noerr = true;
     }
 
-    if ( unit == GeoDataPoint::Degree ) {
+    if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
@@ -266,8 +267,8 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         // gets displayed:
         double averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
-        GeoDataPoint maxLonPoint( +M_PI, averageLatitude, GeoDataPoint::Radian );
-        GeoDataPoint minLonPoint( -M_PI, averageLatitude, GeoDataPoint::Radian );
+        GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
+        GeoDataCoordinates minLonPoint( -M_PI, averageLatitude, GeoDataCoordinates::Radian );
     
         int dummyX, dummyY; // not needed
         bool dummyVal;
@@ -280,7 +281,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         }
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataPoint::Degree );
+//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

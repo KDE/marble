@@ -16,7 +16,7 @@
 #include <QtCore/QDebug>
 
 #include "global.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
@@ -166,13 +166,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             double  lon;
             bool    isValid = m_widget->geoCoordinates( event->x(), event->y(),
                                                         lon, lat,
-                                                        GeoDataPoint::Radian );
+                                                        GeoDataCoordinates::Radian );
 
             if ( !isValid ) {
                 emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
             } 
             else {
-                QString position = GeoDataPoint( lon, lat ).toString();
+                QString position = GeoDataCoordinates( lon, lat ).toString();
                 emit mouseMoveGeoPosition( position );
             }
         }

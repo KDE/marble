@@ -24,7 +24,6 @@ using namespace Marble;
 
 class ViewportParams;
 class GeoDataCoordinates;
-class GeoDataPoint;
 class GeoPainterPrivate;
 
 
@@ -81,46 +80,46 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 //  We don't go for the percentual approach that Qt takes for rounded corners for
 //  reasons of bad aesthetics here.
 
-    void drawAnnotation (  const GeoDataPoint & position, const QString & text, QSize bubbleSize = QSize( 130, 100 ), int bubbleOffsetX = -10, int bubbleOffsetY = -30, int xRnd = 5, int yRnd = 5 );
+    void drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize = QSize( 130, 100 ), int bubbleOffsetX = -10, int bubbleOffsetY = -30, int xRnd = 5, int yRnd = 5 );
 
-    void drawPoint (  const GeoDataPoint & position );
-    void drawPoints (  const GeoDataPoint * points, int pointCount );
+    void drawPoint (  const GeoDataCoordinates & position );
+    void drawPoints (  const GeoDataCoordinates * points, int pointCount );
 
     // Of course in theory we could have the "isGeoProjected" parameter used
     // for drawText as well. However this would largely complicate and slow
     // down things to a crawl as we'd need to convert all glyphs to PainterPaths
     // and convert thos ... . Given that for decent maps you don't really want
     // this anyways we leave it out for now ...
-    void drawText ( const GeoDataPoint & position, const QString & text );
+    void drawText ( const GeoDataCoordinates & position, const QString & text );
 
-//    void drawPlaceMark ( const GeoDataPoint & position, const QString& name );
+//    void drawPlaceMark ( const GeoDataCoordinates & position, const QString& name );
 //    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
 
     // all cases for isGeoProjected = false get implemented first, as this is much easier to implement.
 
-    void drawEllipse ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected = false );
+    void drawEllipse ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected = false );
 
     // isGeoProjected = true would project the image/pixmap onto the globe. This requires
     // to deal with the TextureMapping classes -> should get implemented later on
 /*
-    void drawImage ( const GeoDataPoint & point, const QImage & image, const QRect & source, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false );
-    void drawImage ( const GeoDataPoint & point, const QImage & image, int sx = 0, int sy = 0, int sw = -1, int sh = -1, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false ); */
+    void drawImage ( const GeoDataCoordinates & point, const QImage & image, const QRect & source, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false );
+    void drawImage ( const GeoDataCoordinates & point, const QImage & image, int sx = 0, int sy = 0, int sw = -1, int sh = -1, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false ); */
 
-    void drawImage ( const GeoDataPoint & centerPoint, const QImage & image, bool isGeoProjected = false );
+    void drawImage ( const GeoDataCoordinates & centerPoint, const QImage & image, bool isGeoProjected = false );
 
-    void drawPixmap ( const GeoDataPoint & centerPoint, const QPixmap & pixmap, bool isGeoProjected = false );
+    void drawPixmap ( const GeoDataCoordinates & centerPoint, const QPixmap & pixmap, bool isGeoProjected = false );
     // In the following cases isGeoProjected = true lets the line segments be bent according
     // to the projection. This requires slerp to be used to interpolate the points inbetween
     // (similar to how measure lines get calculated).-> should get implemented once lmc is in place.
 
-    void drawLine (  const GeoDataPoint & p1,  const GeoDataPoint & p2, bool isGeoProjected = false );
+    void drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected = false );
 
-    void drawPolygon ( const GeoDataPoint * points, int pointCount, Qt::FillRule fillRule = Qt::OddEvenFill, bool isGeoProjected = false );
+    void drawPolygon ( const GeoDataCoordinates * points, int pointCount, Qt::FillRule fillRule = Qt::OddEvenFill, bool isGeoProjected = false );
 
-    void drawPolyline ( const GeoDataPoint * points, int pointCount, bool isGeoProjected = false );
+    void drawPolyline ( const GeoDataCoordinates * points, int pointCount, bool isGeoProjected = false );
 
-    void drawRect ( const GeoDataPoint & centerPoint, int width, int height, bool isGeoProjected = false );
-    void drawRoundRect ( const GeoDataPoint & centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );
+    void drawRect ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected = false );
+    void drawRoundRect ( const GeoDataCoordinates & centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );
 
 
     // Reenabling QPainter methods.

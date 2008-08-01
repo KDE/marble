@@ -29,7 +29,7 @@ MarblePhysics::~MarblePhysics()
     delete m_timeLine;
 }
 
-GeoDataPoint MarblePhysics::suggestedPosition() const
+GeoDataCoordinates MarblePhysics::suggestedPosition() const
 {
     double lon, lat;
     Quaternion  itpos;
@@ -55,16 +55,16 @@ GeoDataPoint MarblePhysics::suggestedPosition() const
 
     double y = a * x * x + b * x + g;       // Parabolic function
 
-    return GeoDataPoint( lon, lat, y );
+    return GeoDataCoordinates( lon, lat, y );
 }
 
-void MarblePhysics::jumpTo( const GeoDataPoint &targetPosition )
+void MarblePhysics::jumpTo( const GeoDataCoordinates &targetPosition )
 {
     m_targetPosition = targetPosition;
     m_timeLine->start();
 }
 
-void MarblePhysics::setCurrentPosition( const GeoDataPoint &sourcePosition )
+void MarblePhysics::setCurrentPosition( const GeoDataCoordinates &sourcePosition )
 {
     m_timeLine->stop();
     m_sourcePosition = sourcePosition;

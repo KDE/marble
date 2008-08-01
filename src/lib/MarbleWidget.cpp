@@ -32,7 +32,7 @@
 #include "ViewParams.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 #include "GpxFileViewItem.h"
 #include "MarbleDirs.h"
 #include "MarblePhysics.h"
@@ -520,7 +520,7 @@ void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated
 {
     if ( d->m_animationsEnabled && animated )
     {
-        d->m_physics->jumpTo( GeoDataPoint( lon, lat, distance(), GeoDataPoint::Degree ) );
+        d->m_physics->jumpTo( GeoDataCoordinates( lon, lat, distance(), GeoDataCoordinates::Degree ) );
     }
     else
     {
@@ -544,9 +544,9 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
         selectionModel->clear();
     
         if ( index.isValid() ) {
-            const GeoDataPoint targetPosition = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataPoint>();
+            const GeoDataCoordinates targetPosition = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
 
-            d->m_physics->setCurrentPosition( GeoDataPoint( centerLongitude(), centerLatitude(), distance(), GeoDataPoint::Degree ) );
+            d->m_physics->setCurrentPosition( GeoDataCoordinates( centerLongitude(), centerLatitude(), distance(), GeoDataCoordinates::Degree ) );
             d->m_physics->jumpTo( targetPosition );
 
             selectionModel->select( index, QItemSelectionModel::SelectCurrent );
@@ -564,11 +564,11 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
     repaint();
 }
 
-void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
+void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 {
     if ( d->m_animationsEnabled && animated )
     {
-        GeoDataPoint targetPosition = position;
+        GeoDataCoordinates targetPosition = position;
         targetPosition.setAltitude( distance() );
 
         d->m_physics->jumpTo( targetPosition );
@@ -576,7 +576,7 @@ void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
     else
     {
         double  lon, lat;
-        position.geoCoordinates( lon, lat, GeoDataPoint::Degree );
+        position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
         d->m_map->setDistance( position.altitude() );
         d->m_map->centerOn( lon, lat );
     }
@@ -590,7 +590,7 @@ void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
 
 void MarbleWidget::updateAnimation( qreal updateValue )
 {
-    GeoDataPoint position = d->m_physics->suggestedPosition();
+    GeoDataCoordinates position = d->m_physics->suggestedPosition();
 
     if ( updateValue < 1.0 )
     {
@@ -650,7 +650,7 @@ void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
     d->m_map->setHome( lon, lat, zoom );
 }
 
-void MarbleWidget::setHome(const GeoDataPoint& homePoint, int zoom)
+void MarbleWidget::setHome(const GeoDataCoordinates& homePoint, int zoom)
 {
     d->m_map->setHome( homePoint, zoom );
 }
@@ -744,7 +744,7 @@ bool MarbleWidget::screenCoordinates( const double lon, const double lat,
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
                                   double& lon, double& lat,
-                                  GeoDataPoint::Unit unit )
+                                  GeoDataCoordinates::Unit unit )
 {
     return d->m_map->geoCoordinates( x, y, lon, lat, unit );
 }
@@ -994,10 +994,10 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     double  lon   = 0;
     double  lat   = 0;
 
-    valid = geoCoordinates( x, y, lon, lat, GeoDataPoint::Radian );
+    valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
     if ( valid ) {
-        emit mouseClickGeoPosition( lon, lat, GeoDataPoint::Radian);
+        emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian);
     }
 }
 

@@ -25,7 +25,7 @@
 #include "MarbleAbstractLayer.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 /**
  * @short The class that specifies the a simple panormaio plugin
@@ -33,7 +33,7 @@
  */
 struct twitterStructure {
         QString twitter ;
-        GeoDataPoint location;
+        GeoDataCoordinates location;
 };
 
 class twitterPlugin : public MarbleAbstractLayer
@@ -78,7 +78,7 @@ private:
         void downloadtwitter ( int,int,double,double,double,double);
         QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded succesfully figured out :)
         QList <twitterDataStructure> parsedData;
-        GeoDataPoint findLatLonOfStreetAddress(QString streetAddress);
+        GeoDataCoordinates findLatLonOfStreetAddress(QString streetAddress);
         int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
 
 };

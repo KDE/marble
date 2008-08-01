@@ -24,7 +24,7 @@
 #include <QtGui/QWidget>
 
 #include "global.h"
-#include "GeoDataPoint.h"       // In geodata/data/
+#include "GeoDataCoordinates.h"       // In geodata/data/
 
 
 /** @file
@@ -184,7 +184,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void changeZoom(int zoom);
     void disableGpsInput( bool );
-    void receiveGpsCoordinates( double, double, GeoDataPoint::Unit );
+    void receiveGpsCoordinates( double, double, GeoDataCoordinates::Unit );
     void enableFileViewActions();
     
     /**

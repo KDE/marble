@@ -283,7 +283,7 @@ void MainWindow::copyCoordinates()
     double lon = m_controlView->marbleWidget()->centerLongitude();
     double lat = m_controlView->marbleWidget()->centerLatitude();
 
-    QString  positionString = GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree ).toString();
+    QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ).toString();
     QClipboard  *clipboard = QApplication::clipboard();
 
     clipboard->setText( positionString );

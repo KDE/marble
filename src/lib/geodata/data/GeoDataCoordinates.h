@@ -22,12 +22,14 @@
 
 #include "geodata_export.h"
 #include "Quaternion.h"
-#include "GeoDataObject.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
 #ifndef M_PI
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
+
+/*
+*/
 
 const double TWOPI = 2 * M_PI;
 

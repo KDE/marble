@@ -44,7 +44,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
  public:
     GeoDataLatLonBox();
-    GeoDataLatLonBox( double north, double south, double east, double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    GeoDataLatLonBox( double north, double south, double east, double west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
     GeoDataLatLonBox( const GeoDataLatLonBox & );
     virtual ~GeoDataLatLonBox();
 
@@ -56,39 +56,39 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      * @brief Get the northern boundary of the bounding box.
      * @return the latitude of the northern boundary.
      */
-    double north( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
-    void setNorth( const double north, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    double north( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setNorth( const double north, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the southern boundary of the bounding box.
      * @return the latitude of the southern boundary.
      */
-    double south( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
-    void setSouth( const double south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    double south( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setSouth( const double south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the eastern boundary of the bounding box.
      * @return the longitude of the eastern boundary.
      */
-    double east( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
-    void setEast( const double east, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    double east( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setEast( const double east, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the western boundary of the bounding box.
      * @return the longitude of the western boundary.
      */
-    double west( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
-    void setWest( const double west, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    double west( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setWest( const double west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the rotation of the bounding box.
      * @return the rotation of the bounding box.
      */
-    double rotation( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
-    void setRotation( const double rotation, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    double rotation( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setRotation( const double rotation, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
-    void    boundaries( double &west, double &east, double &north, double &south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
-    void    setBoundaries( double west, double east, double north, double south, GeoDataPoint::Unit unit = GeoDataPoint::Radian );
+    void    boundaries( double &west, double &east, double &north, double &south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    void    setBoundaries( double west, double east, double north, double south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Detect whether the bounding box crosses the IDL.
@@ -98,12 +98,13 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     bool crossesDateLine() const;
 
     bool     virtual contains( const GeoDataPoint & );
+    bool     virtual contains( const GeoDataCoordinates & );
     bool     virtual intersects( const GeoDataLatLonBox & );
 
     /**
      * @brief Dumps the boundaries of the bounding box for debugging purpose.
      */
-    QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
+    QString  virtual text( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
@@ -163,13 +164,14 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
     bool     virtual contains( const GeoDataPoint & );
+    bool     virtual contains( const GeoDataCoordinates & );
     bool     virtual intersects( const GeoDataLatLonAltBox & );
     using GeoDataLatLonBox::intersects;
 
     /**
      * @brief Dumps the boundaries of the bounding box for debugging purpose.
      */
-    QString  virtual text( GeoDataPoint::Unit unit = GeoDataPoint::Radian ) const;
+    QString  virtual text( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
