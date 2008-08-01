@@ -25,6 +25,11 @@ and "W" for "-"
 // #include "GeoDataLatLonAltBox.h"
 // #include "ViewportParams.h"
 
+twitterPlugin::~twitterPlugin()
+{
+        delete m_storagePolicy;
+}
+
 QStringList twitterPlugin::backendTypes() const
 {
         return QStringList ( "twitter" );

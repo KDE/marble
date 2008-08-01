@@ -64,7 +64,8 @@ public:
         bool isInitialized () const;
 
         bool render ( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
-
+       
+        ~twitterPlugin();
 public slots:
         void slotJsonDownloadComplete ( QString , QString );//completed download of json reply fom panoramio
         void slotGeoCodingReplyRecieved ( QString , QString );//completed download of image
