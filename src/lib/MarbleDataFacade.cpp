@@ -35,6 +35,7 @@ MarbleDataFacade::MarbleDataFacade( MarbleModel *model )
 
 MarbleDataFacade::~MarbleDataFacade()
 {
+    delete d;
 }
 
 QDateTime MarbleDataFacade::dateTime() const

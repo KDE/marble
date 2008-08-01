@@ -43,6 +43,7 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
+    delete d;
 }
 
 QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
