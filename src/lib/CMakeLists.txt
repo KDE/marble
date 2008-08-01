@@ -259,6 +259,7 @@ else (APPLE AND QTONLY)
     MarbleControlBox.h
     MarbleNavigator.h
     MarbleDataFacade.h
+    MarbleAbstractFloatItem.h
     MapThemeManager.h
 
     MarbleWidgetInputHandler.h

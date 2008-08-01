@@ -1,5 +1,11 @@
 2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/CMakeLists.txt
+
+    install MarbleAbstractFloatItem.h
+
+2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataPlacemark.{h|cpp}
 
     replace GeoDataPoint with GeoDataCoordinates here as well
