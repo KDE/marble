@@ -350,4 +350,5 @@ void TextureColorizer::generatePalette(const QString& seafile,
     }
     m_seafile = seafile;
     m_landfile = landfile;
+    delete gradientImage;
 }
