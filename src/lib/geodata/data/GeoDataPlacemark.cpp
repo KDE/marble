@@ -67,9 +67,9 @@ GeoDataGeometry* GeoDataPlacemark::geometry()
     return d->m_geometry;
 }
 
-GeoDataPoint GeoDataPlacemark::coordinate() const
+GeoDataCoordinates GeoDataPlacemark::coordinate() const
 {
-    return d->m_coordinate;
+    return static_cast<GeoDataCoordinates>( d->m_coordinate );
 }
 
 void GeoDataPlacemark::coordinate( double& lon, double& lat, double& alt )

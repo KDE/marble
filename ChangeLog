@@ -1,5 +1,12 @@
 2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/data/GeoDataPlacemark.{h|cpp}
+
+    replace GeoDataPoint with GeoDataCoordinates here as well
+    This lead to a rather strange error before.
+
+2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/AbstractLayer/AbstractLayer.{h|cpp}
     * src/lib/AbstractLayer/AbstractLayerData.{h|cpp}
     * src/lib/geodata/data/GeoDataLatLonAltBox.{h|cpp}

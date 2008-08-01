@@ -61,7 +61,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Return the coordinate of the placemark as a GeoDataPoint
      */
-    GeoDataPoint coordinate() const;
+    GeoDataCoordinates coordinate() const;
 
     /**
     * Return a pointer to the current Geometry object
