@@ -52,8 +52,7 @@ class GeoPainterPrivate
 
         if ( isGeoProjected == false ) {
 
-            QPolygon  *polygon;
-	    //QVector<QPolygon *> polygons;
+            QPolygon  *polygon = new QPolygon;
 
             GeoDataPoint *itPoint = const_cast<GeoDataPoint *>( points );
             while ( itPoint < points + pointCount ) {
@@ -61,7 +60,6 @@ class GeoPainterPrivate
                 bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
 
                 if ( itPoint == points ){
-                    polygon = new QPolygon;
                     previousGlobeHidesPoint = globeHidesPoint;
                 }
 
@@ -80,6 +78,9 @@ class GeoPainterPrivate
 
             if ( polygon->size() > 1 ){
                 polygons.append( polygon );
+            }
+            else {
+                delete polygon;
             }
         }
     }

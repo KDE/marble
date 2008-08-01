@@ -292,8 +292,8 @@ void TextureColorizer::generatePalette(const QString& seafile,
             texturepalette[i][j] = 0;
         }
     }
-    QImage   *gradientImage = new QImage( 256, 10, QImage::Format_RGB32 );
-    QPainter  gradientPainter( gradientImage );
+    QImage   gradientImage ( 256, 10, QImage::Format_RGB32 );
+    QPainter  gradientPainter( &gradientImage );
     gradientPainter.setPen( Qt::NoPen );
 
     QImage    shadingImage ( 256, 10, QImage::Format_RGB32 );
@@ -332,7 +332,7 @@ void TextureColorizer::generatePalette(const QString& seafile,
 
             for ( int i = 0; i < 256; ++i ) {
 
-                    QRgb  shadeColor = gradientImage->pixel( i, 1 );
+                    QRgb  shadeColor = gradientImage.pixel( i, 1 );
                     QLinearGradient  shadeGradient( 0, 0, 256, 0 );
                     shadeGradient.setColorAt(0.15, QColor(Qt::white));
                     shadeGradient.setColorAt(0.496, shadeColor);
@@ -350,5 +350,4 @@ void TextureColorizer::generatePalette(const QString& seafile,
     }
     m_seafile = seafile;
     m_landfile = landfile;
-    delete gradientImage;
 }

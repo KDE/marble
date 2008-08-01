@@ -23,6 +23,7 @@
 using namespace Marble;
 
 class ViewportParams;
+class GeoDataCoordinates;
 class GeoDataPoint;
 class GeoPainterPrivate;
 
