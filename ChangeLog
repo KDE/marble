@@ -1,3 +1,11 @@
+2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp
+    * src/lib/EquirectScanlineTextureMapper.cpp
+    * src/lib/SphericalScanlineTextureMapper.cpp
+
+    cleanup dependencies of GeoDataPoint
+
 2008-07-27  Inge Wallin  <inge@lysator.liu.se>
 
 	Clean up projection code in preparation for bigger things.

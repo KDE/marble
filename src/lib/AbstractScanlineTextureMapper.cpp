@@ -13,7 +13,6 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDirs.h"

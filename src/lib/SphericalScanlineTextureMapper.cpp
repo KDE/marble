@@ -16,7 +16,6 @@
 #include <QtCore/QDebug>
 
 #include "global.h"
-#include "GeoDataPoint.h"
 #include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "Quaternion.h"
@@ -108,7 +107,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     m_nInverse = 1.0 / (double)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
-    Quaternion  northPole = GeoDataPoint( 0.0, (double)( M_PI * 0.5 ) ).quaternion();
+    Quaternion northPole( 0.0, (double)( M_PI * 0.5 ) );
 
     northPole.rotateAroundAxis( viewParams->planetAxis().inverse() );
 
