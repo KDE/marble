@@ -255,6 +255,7 @@ else (APPLE AND QTONLY)
     MarbleDataFacade.h
     MarbleAbstractFloatItem.h
     MarbleAbstractLayer.h
+    AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
 
     MarbleWidgetInputHandler.h
