@@ -14,6 +14,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
+#include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
 
 #include <lib/global.h>
@@ -32,6 +33,9 @@ void MarbleTest::timeDemo()
     m_marbleWidget->setMapQuality( Marble::Normal );
 //    m_marbleWidget->resize( 800, 600 );
     m_marbleWidget->centerOn( 9.4, 54.8 );
+
+    QMessageBox::information(m_marbleWidget, QString( "Marble Speed Test" ), QString( "Press Ok to start test" ) );
+
     QTime t;
     //m_marbleWidget->setMapTheme( "plain/plain.dgml" );
     //m_marbleWidget->setMapTheme( "bluemarble/bluemarble.dgml" );
