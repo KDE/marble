@@ -261,6 +261,7 @@ else (APPLE AND QTONLY)
     MarbleDataFacade.h
     MarbleAbstractFloatItem.h
     MarbleAbstractLayer.h
+    MarbleLayerInterface.h
     AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
 
