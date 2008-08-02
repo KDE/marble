@@ -1,3 +1,13 @@
+2008-08-02  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
+    * src/lib/geodata/data/GeoDataPoint{.h|.cpp}
+
+    - move normalize* functions from GeoDataCoordinates to 
+    GeoDataPoint - they still can be accessed from GeoDataPoint though
+    - add some more documentation to those two classes
+    why they need to be different and how they should be used
+
 2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/CMakeLists.txt

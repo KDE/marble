@@ -35,6 +35,15 @@ const double TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 
+/** GeoDataCoordinates is the simple representation of a single three
+ * dimensional point. It can be used all through out marble as the data type
+ * for three dimensional objects. it comprises of a Quaternion for speed issues.
+ * This class was introduced to reflect the difference between a simple 3d point
+ * and the GeoDataGeometry object containing such a point. The latter is a 
+ * GeoDataPoint and is simply derived from GeoDataCoordinates.
+ * @see GeoDataPoint
+*/
+
 class GEODATA_EXPORT GeoDataCoordinates {
 
  public:
@@ -86,32 +95,101 @@ class GEODATA_EXPORT GeoDataCoordinates {
 
     virtual ~GeoDataCoordinates();
 
+    /**
+        * @brief return the altitude of the Point
+        */
     double altitude() const;
+    /**
+    * @brief set the altitude of the Point
+    * @param altitude altitude
+    */
     void   setAltitude( const double altitude );
 
+    /**
+    * @brief return the detail flag
+    */
     int detail()   const;
+    /**
+    * @brief set the detail flag
+    * @param det detail
+    */
     void setDetail( const int det );
 
+    /**
+    * @brief (re)set the coordinates in a GeoDataCoordinates
+    * @param _lon longitude
+    * @param _lat latitude
+    * @param alt altitude (default: 0)
+    * @param _unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
     void set(double _lon, double _lat, double alt = 0,
              GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
 
+    /**
+    * @brief use this function to get the longitude and latitude with one
+    * call - use the unit parameter to switch between Radian and DMS
+    * @param lon longitude
+    * @param lat latitude
+    * @param unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
     void geoCoordinates( double& lon, double& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
                                                                 const;
 
+    /**
+    * @brief return a Quaternion with the used coordinates
+    */
     const Quaternion &quaternion() const;
 
+    /**
+    * @brief return Notation of string representation
+    */
     static GeoDataCoordinates::Notation defaultNotation();
-    static void setDefaultNotation( GeoDataCoordinates::Notation );
+    /**
+    * @brief set the Notation of the string representation
+    * @param notation Notation
+    */
+    static void setDefaultNotation( GeoDataCoordinates::Notation notation );
 
+    /**
+     * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI
+     * @param lon longitude
+     */
+    static double normalizeLon( double lon );
+
+    /**
+     * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2.
+     * @param lat latitude
+     */
+    static double normalizeLat( double lat );
+
+    /**
+     * @brief normalize both longitude and latitude at the same time
+     * @param lon the longitude value
+     * @param lat the latitude value
+     */
+    static void normalizeLonLat( double &lon, double &lat );
+
+    /**
+    * @brief return a string representation of the coordinate
+    * this is a convenience function which uses the default notation
+    */
     QString toString();
+    /**
+    * @brief return a string with the notation given by notation
+    * @param notation set a notation different from the default one
+    */
     QString toString( GeoDataCoordinates::Notation notation );
+    
+    
     bool operator==( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );
 
-    /// Serialize the contents of the feature to @p stream.
+    /** Serialize the contents of the feature to @p stream. */
     virtual void pack( QDataStream& stream ) const;
-    /// Unserialize the contents of the feature from @p stream.
+    /** Unserialize the contents of the feature from @p stream. */
     virtual void unpack( QDataStream& stream );
 
  protected:

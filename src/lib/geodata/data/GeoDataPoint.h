@@ -26,6 +26,17 @@
 
 class GeoDataPointPrivate;
 
+/** GeoDataPoint is the GeoDataGeometry class representing a single three
+ * dimensional point. It reflects the Point tag of KML spec and can be contained
+ * in objects holding GeoDataGeometry objects. Nevertheless GeoDataPoint
+ * shouldn't be used to simply contain 3d vector data - this part is taken by
+ * GeoDataCoordinates which has nearly the same features and is much more
+ * light weight. Please consider this especially if you expect to have a high
+ * amount of points e.g. for Vectors.
+ * @see GeoDataCoordinates
+ * @see GeoDataGeometry
+*/
+
 class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
                                     public GeoDataGeometry {
  public:
@@ -48,31 +59,15 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
 
     ~GeoDataPoint();
 
+    /**
+    * @brief always returns GeoDataPointId - this function is used to identify GeoDataPoints
+    */
     virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
 
     GeoDataPoint& operator=( const GeoDataPoint &other );
 
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
-
-    /**
-     * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI
-     * @param lon longitude
-     */
-    static double normalizeLon( double lon );
-
-    /**
-     * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2.
-     * @param lat latitude
-     */
-    static double normalizeLat( double lat );
-
-    /**
-     * @brief normalize both longitude and latitude at the same time
-     * @param lon the longitude value
-     * @param lat the latitude value
-     */
-    static void normalizeLonLat( double &lon, double &lat );
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
