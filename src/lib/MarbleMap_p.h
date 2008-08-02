@@ -39,6 +39,10 @@ class MarbleMapPrivate
     void  setBoundingBox();
     void  doResize();
 
+    void  paintGround( GeoPainter &painter, QRect &dirtyRect);
+    void  paintOverlay( GeoPainter &painter, QRect &dirtyRect);
+    void  paintFps( GeoPainter &painter, QRect &dirtyRect, double fps);
+
     MarbleMap       *m_parent;
 
     // The model we are showing.
