@@ -15,7 +15,7 @@
 #include <QtGui/QRadialGradient>
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataPoint.h"
+#include "GeoDataCoordinates.h"
 
 
 QStringList MarbleTestPlugin::backendTypes() const
@@ -72,23 +72,23 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 {
     painter->autoMapQuality();
 
-    GeoDataPoint northpole1( 0.0, 90.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint northpole2( 0.0, 90.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates northpole1( 0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates northpole2( 0.0, 90.0, 3000000.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 255, 255, 255, 255 ) );
 
     painter->drawLine( northpole1, northpole2 );
 
-    GeoDataPoint madrid( -3.7, 40.4, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint flensburg( 9.4, 54.8, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint linkoeping( 15.6, 58.4, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint istanbul( 28.0, 41.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint moscow( 37.6, 55.75, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint brasilia( -47.9, -15.75, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint orbit( 105.6, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates madrid( -3.7, 40.4, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates flensburg( 9.4, 54.8, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates linkoeping( 15.6, 58.4, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates istanbul( 28.0, 41.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates moscow( 37.6, 55.75, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates brasilia( -47.9, -15.75, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 200, 200, 200, 255 ) );
-    static const GeoDataPoint points[5] = {
+    static const GeoDataCoordinates points[5] = {
         madrid,
         flensburg,
         linkoeping,
@@ -135,46 +135,46 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawRoundRect( moscow, 40, 40 ); 
 
-    GeoDataPoint m1(-180.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m2(-170.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m3(-160.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m4(-150.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m5(-140.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m6(-130.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m7(-120.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m8(-110.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m9(-100.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m10(-90.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m11(-80.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m12(-70.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m13(-60.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m14(-50.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m15(-40.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m16(-30.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m17(-20.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m18(-10.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates m1(-180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m2(-170.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m3(-160.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m4(-150.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m5(-140.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m6(-130.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m7(-120.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m8(-110.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m9(-100.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m10(-90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m11(-80.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m12(-70.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m13(-60.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m14(-50.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m15(-40.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m16(-30.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m17(-20.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m18(-10.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
-    GeoDataPoint m19(0.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m20(10.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m21(20.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m22(30.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m23(40.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m24(50.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m25(60.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m26(70.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m27(80.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m28(90.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m29(100.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m30(110.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m31(120.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m32(130.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m33(140.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m34(150.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m35(160.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m36(170.0, 0.0, 3000000.0, GeoDataPoint::Degree );
-    GeoDataPoint m37(180.0, 0.0, 3000000.0, GeoDataPoint::Degree );
+    GeoDataCoordinates m19(0.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m20(10.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m21(20.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m22(30.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m23(40.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m24(50.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m25(60.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m26(70.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m27(80.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m28(90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m29(100.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m30(110.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m31(120.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m32(130.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m33(140.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m34(150.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m35(160.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m36(170.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m37(180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
-    static const GeoDataPoint ring[37] = {
+    static const GeoDataCoordinates ring[37] = {
         m1, m2, m3, m4, m5, m6, m7, m8, m9,
         m10, m11, m12, m13, m14, m15, m16, m17, m18, m19,
         m20, m21, m22, m23, m24, m25, m26, m27, m28, m29,
@@ -183,11 +183,11 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawPolyline( ring, 37 ); 
 
-    GeoDataPoint t1(0.0, 90.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint t2(-45.0, 60.0, 0.0, GeoDataPoint::Degree );
-    GeoDataPoint t3(-135.0, 60.0, 0.0, GeoDataPoint::Degree );
+    GeoDataCoordinates t1(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t2(-45.0, 60.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t3(-135.0, 60.0, 0.0, GeoDataCoordinates::Degree );
 
-    static const GeoDataPoint triangle[3] = {
+    static const GeoDataCoordinates triangle[3] = {
         t1, t2, t3
     };
 
@@ -198,7 +198,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawPolygon( triangle, 3 ); 
 
-    GeoDataPoint sotm(-8.6, 52.66, 0.0, GeoDataPoint::Degree );
+    GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     brush.setColor( QColor( 255, 255, 255, 200 ) );
@@ -207,7 +207,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n OSM conference" );
 
-    GeoDataPoint akademy2008(4.5, 51.1, 0.0, GeoDataPoint::Degree );
+    GeoDataCoordinates akademy2008(4.5, 51.1, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 99, 99, 0 ) );
 
