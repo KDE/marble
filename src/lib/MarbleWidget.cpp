@@ -798,6 +798,9 @@ const QRegion MarbleWidget::projectedRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
+    QTime t;
+    t.start();
+
     // FIXME: Better way to get the GeoPainter
     bool  doClip = true;
     if ( d->m_map->projection() == Spherical )
@@ -809,7 +812,16 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
 			map()->viewParams()->mapQuality(), doClip );
 
     QRect  dirtyRect = evt->rect();
-    d->m_map->paint( painter, dirtyRect );
+
+    // Draws the map like MarbleMap::paint does, but adds our customPaint in between
+    d->m_map->d->paintGround( painter, dirtyRect );
+    d->m_map->customPaint( &painter );
+    customPaint(&painter);
+    d->m_map->d->paintOverlay( painter, dirtyRect );
+
+    double fps = 1000.0 / (double)( t.elapsed() );
+    d->m_map->d->paintFps(painter, dirtyRect, fps);
+    emit d->m_map->framesPerSecond( fps );
 }
 
 void MarbleWidget::customPaint(GeoPainter *painter)

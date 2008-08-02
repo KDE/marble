@@ -812,78 +812,15 @@ void MarbleMapPrivate::setBoundingBox()
 // Used to be paintEvent()
 void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect) 
 {
-    if ( !d->m_viewParams.mapTheme() ) {
-        qDebug() << "No theme yet!";
-        return;
-    }
-        
     QTime t;
     t.start();
 
-    bool  doClip = false;
-    if ( d->m_viewParams.projection() == Spherical )
-        doClip = ( d->m_viewParams.radius() > d->m_viewParams.canvasImage()->width() / 2
-                   || d->m_viewParams.radius() > d->m_viewParams.canvasImage()->height() / 2 );
-
-    d->m_model->paintGlobe( &painter,
-                            width(), height(), &d->m_viewParams,
-                            needsUpdate()
-                            || d->m_viewParams.canvasImage()->isNull(),
-                            dirtyRect );
-    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
-    d->m_viewParams.setPlanetAxisUpdated( d->m_viewParams.planetAxis() );
-    // FIXME: this is ugly, add method updateRadius() to ViewParams
-    d->m_viewParams.setRadiusUpdated( d->m_viewParams.radius() );
-    d->m_justModified                   = false;
-
-    // FIXME: This is really slow. That's why we defer this to
-    //        PrintQuality. Either cache on a pixmap - or maybe
-    //        better: Add to GlobeScanlineTextureMapper.
-
-    if ( d->m_viewParams.mapQuality() == Marble::Print )
-        d->drawFog(painter);
-
+    d->paintGround(painter, dirtyRect);
     customPaint( &painter );
-
-//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
-
-    // 2. Paint the crosshair.
-    d->m_crosshair.paint( &painter,
-                          d->m_viewParams.canvasImage()->width(),
-                          d->m_viewParams.canvasImage()->height() );
-
-    // 3. Paint measure points if there are any.
-
-    bool antialiased = false;
-
-    if (   d->m_viewParams.mapQuality() == Marble::High
-        || d->m_viewParams.mapQuality() == Marble::Print ) {
-            antialiased = true;
-    }
-
-    d->m_measureTool->paint( &painter, d->m_viewParams.viewport(), antialiased );
-
-    // Set the Bounding Box
-    d->setBoundingBox();
+    d->paintOverlay(painter, dirtyRect);
 
     double fps = 1000.0 / (double)( t.elapsed() );
-
-    if ( d->m_showFrameRate == true ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-        QPoint fpsLabelPos( 10, 20 );
-
-        painter.setFont( QFont( "Sans Serif", 10 ) );
-
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
-
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
-
+    d->paintFps(painter, dirtyRect, fps);
     emit framesPerSecond( fps );
 }
 
@@ -1224,6 +1161,82 @@ QList<MarbleAbstractLayer *> MarbleMap::layerPlugins() const
 QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
+}
+
+void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
+{
+    if ( !m_viewParams.mapTheme() ) {
+        qDebug() << "No theme yet!";
+        return;
+    }
+
+    bool  doClip = false;
+    if ( m_viewParams.projection() == Spherical )
+        doClip = ( m_viewParams.radius() > m_viewParams.canvasImage()->width() / 2
+                   || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
+
+    m_model->paintGlobe( &painter,
+                            m_parent->width(), m_parent->height(), &m_viewParams,
+                            m_parent->needsUpdate()
+                            || m_viewParams.canvasImage()->isNull(),
+                            dirtyRect );
+    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
+    m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
+    // FIXME: this is ugly, add method updateRadius() to ViewParams
+    m_viewParams.setRadiusUpdated( m_viewParams.radius() );
+    m_justModified                   = false;
+
+    // FIXME: This is really slow. That's why we defer this to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
+
+    if ( m_viewParams.mapQuality() == Marble::Print )
+        drawFog(painter);
+}
+
+void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
+{
+//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
+
+    // 2. Paint the crosshair.
+    m_crosshair.paint( &painter,
+                          m_viewParams.canvasImage()->width(),
+                          m_viewParams.canvasImage()->height() );
+
+    // 3. Paint measure points if there are any.
+
+    bool antialiased = false;
+
+    if (   m_viewParams.mapQuality() == Marble::High
+        || m_viewParams.mapQuality() == Marble::Print ) {
+            antialiased = true;
+    }
+
+    m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
+
+    // Set the Bounding Box
+    setBoundingBox();
+}
+
+void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, double fps)
+{
+    Q_UNUSED(dirtyRect);
+
+    if ( m_showFrameRate == true ) {
+        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
+
+        QPoint fpsLabelPos( 10, 20 );
+
+        painter.setFont( QFont( "Sans Serif", 10 ) );
+
+        painter.setPen( Qt::black );
+        painter.setBrush( Qt::black );
+        painter.drawText( fpsLabelPos, fpsString );
+
+        painter.setPen( Qt::white );
+        painter.setBrush( Qt::white );
+        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
+    }
 }
 
 #include "MarbleMap.moc"
