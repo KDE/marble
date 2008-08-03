@@ -51,11 +51,9 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLinearRing* linearRing = 0;
     if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
-        qDebug() << "outerBoundary";
         linearRing = new GeoDataLinearRing();
         parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
     } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
-        qDebug() << "innerBoundary";
         linearRing = new GeoDataLinearRing();
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {

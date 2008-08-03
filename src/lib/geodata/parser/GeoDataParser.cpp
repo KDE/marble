@@ -75,7 +75,7 @@ void GeoDataParser::raiseDocumentElementError()
         raiseError(QObject::tr("The file is not a valid GPX 1.0 / 1.1 file"));
         break;                
     case GeoData_KML:
-        raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 file"));
+        raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 / 2.2 file"));
         break;
     default:
         GeoParser::raiseDocumentElementError();
@@ -93,7 +93,9 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     case GeoData_GPX:
         return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
     case GeoData_KML:
-        return (namespaceUri() == kmlTag_nameSpace20 || namespaceUri() == kmlTag_nameSpace21);    
+        return (namespaceUri() == kmlTag_nameSpace20 || 
+                namespaceUri() == kmlTag_nameSpace21 || 
+                namespaceUri() == kmlTag_nameSpace22);
     default:
         break;
     }

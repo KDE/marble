@@ -1,3 +1,11 @@
+2008-08-03  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/handlers/kml/KmlElementDictionary.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.cpp
+    * src/lib/geodata/parsers/GeoDataParser.cpp
+
+    make newest KML documents (version 2.2) at least partly readable
+
 2008-08-02  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataCoordinates{.h|.cpp}
