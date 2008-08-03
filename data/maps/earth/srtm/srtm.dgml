@@ -325,7 +325,7 @@
             </section>
 
             <section name="ice" checkable="true" connect="ice" spacing="12">
-                <heading>Ice &amp; Glaciers</heading>
+                <heading>Ice and Glaciers</heading>
             </section>
 
             <section name="relief" checkable="true" connect="relief" spacing="12">
