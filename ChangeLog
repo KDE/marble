@@ -1,3 +1,24 @@
+2008-08-03  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * marble/src/lib/geodata/handlers/osm-namefinder/AttributeDictionary.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/DescriptionTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/PlaceTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/ElementDictionary.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/SearchResultsTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/DescriptionTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/NearestPlacesTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/PlaceTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/ElementDictionary.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/DistanceTagHandler.cpp
+    * marble/src/lib/geodata/handlers/osm-namefinder/SearchResultsTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/NearestPlacesTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/DistanceTagHandler.h
+    * marble/src/lib/geodata/handlers/osm-namefinder/AttributeDictionary.cpp
+
+    Initial commit for OpenStreetMap name finder XML tag handlers.
+
 2008-08-03  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/handlers/kml/KmlElementDictionary.{h|cpp}
