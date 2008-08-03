@@ -1,3 +1,9 @@
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/data/GeoDataPlacemark.cpp:
+
+    Remove redundant null pointer check.
+
 2008-08-03  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * marble/src/lib/geodata/handlers/osm-namefinder/AttributeDictionary.h

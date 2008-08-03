@@ -30,7 +30,7 @@ class GeoDataPlacemarkPrivate
 
     ~GeoDataPlacemarkPrivate()
     {
-        if( m_geometry ) delete m_geometry;
+        delete m_geometry;
     }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
