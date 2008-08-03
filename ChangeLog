@@ -1,5 +1,12 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/parser/GeoParser.h:
+    * src/lib/geodata/parser/GeoParser.cpp:
+
+    Coding style fixes.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/parser/GeoOnfParser.h:
     * src/lib/geodata/parser/GeoOnfParser.cpp:
 

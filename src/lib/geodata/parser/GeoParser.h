@@ -33,29 +33,31 @@ typedef int GeoDataGenericSourceType;
 class GeoDocument;
 class GeoStackItem;
 
-class GEODATA_EXPORT GeoParser : public QXmlStreamReader {
-public:
-    explicit GeoParser(GeoDataGenericSourceType sourceType);
+class GEODATA_EXPORT GeoParser : public QXmlStreamReader
+{
+ public:
+    explicit GeoParser( GeoDataGenericSourceType sourceType );
     virtual ~GeoParser();
 
     // Main API.
-    bool read(QIODevice*);
+    bool read( QIODevice* );
 
-    // If parsing was successful, retrieve the resulting document and set the contained m_document pointer to 0.
+    // If parsing was successful, retrieve the resulting document
+    // and set the contained m_document pointer to 0.
     GeoDocument* releaseDocument();
     GeoDocument* activeDocument() { return m_document; }
 
     // Used by tag handlers, to be overridden by GeoDataParser/GeoSceneParser
-    virtual bool isValidElement(const QString& tagName) const;
+    virtual bool isValidElement( const QString& tagName ) const;
 
     // Used by tag handlers, to access a parent element's associated GeoStackItem
-    GeoStackItem parentElement(unsigned int depth = 0);
+    GeoStackItem parentElement( unsigned int depth = 0 );
 
     // Used by tag handlers, to emit a warning while parsing
-    void raiseWarning(const QString&);
+    void raiseWarning( const QString& );
 
     // Used by tag handlers, to retrieve the value for an attribute of the currently parsed element
-    QString attribute(const char* attributeName) const;
+    QString attribute( const char* attributeName ) const;
 
 protected:
     // To be implemented by GeoDataParser/GeoSceneParser
@@ -73,20 +75,21 @@ private:
     QStack<GeoStackItem> m_nodeStack;
 };
 
-class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*> {
-public:
+class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*>
+{
+ public:
     GeoStackItem()
         : QPair<GeoTagHandler::QualifiedName, GeoNode*>()
     {
     }
 
-    GeoStackItem(const GeoTagHandler::QualifiedName& qName, GeoNode* node)
-        : QPair<GeoTagHandler::QualifiedName, GeoNode*>(qName, node)
+    GeoStackItem( const GeoTagHandler::QualifiedName& qName, GeoNode* node )
+        : QPair<GeoTagHandler::QualifiedName, GeoNode*>( qName, node )
     {
     }
 
     // Fast path for tag handlers
-    bool represents(const char* tagName) const
+    bool represents( const char* tagName ) const
     {
         return second && tagName == first.first;
     }
@@ -103,7 +106,7 @@ public:
 
 private:
     friend class GeoParser;
-    void assignNode(GeoNode* node) { second = node; }
+    void assignNode( GeoNode* node ) { second = node; }
 };
 
 #endif // GeoParser_h
