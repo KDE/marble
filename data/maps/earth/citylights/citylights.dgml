@@ -12,7 +12,7 @@
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[This image of <i>Earth's city lights<i> was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).]]></description>
+	    <description><![CDATA[This image of <i>Earth's city lights</i> was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS).]]></description>
     
             <zoom>
                 <minimum>  1000  </minimum>
