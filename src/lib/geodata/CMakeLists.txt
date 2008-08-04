@@ -14,6 +14,7 @@ FILE( GLOB geodata_data_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*
 SET( geodata_parser_SRCS
         geodata/parser/GeoDataParser.cpp
         geodata/parser/GeoDocument.cpp
+        geodata/parser/GeoOnfParser.cpp
         geodata/parser/GeoParser.cpp
         geodata/parser/GeoSceneParser.cpp
         geodata/parser/GeoTagHandler.cpp
@@ -24,6 +25,15 @@ SET( geodata_handlers_gpx_SRCS
         geodata/handlers/gpx/GPXgpxTagHandler.cpp
    )
 
+SET( geodata_handlers_osmnamefinder_SRCS
+        geodata/handlers/osm-namefinder/AttributeDictionary.cpp
+        geodata/handlers/osm-namefinder/ElementDictionary.cpp
+        geodata/handlers/osm-namefinder/DescriptionTagHandler.cpp
+        geodata/handlers/osm-namefinder/NamedTagHandler.cpp
+        geodata/handlers/osm-namefinder/NearestPlacesTagHandler.cpp
+        geodata/handlers/osm-namefinder/PlaceTagHandler.cpp
+        geodata/handlers/osm-namefinder/SearchResultsTagHandler.cpp
+   )
 
 SET( geodata_SRCS
         ${geodata_data_SRCS}
@@ -32,6 +42,5 @@ SET( geodata_SRCS
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
         ${geodata_handlers_dgml_SRCS}
+        ${geodata_handlers_osmnamefinder_SRCS}
    )
-
-

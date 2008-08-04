@@ -1,5 +1,12 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/CMakeLists.txt:
+    * src/lib/CMakeLists.txt:
+
+    Add XML tag handlers for OSM name finder to build system.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/osm-namefinder/DescriptionTagHandler.cpp:
 
     Add Q_ASSERT.

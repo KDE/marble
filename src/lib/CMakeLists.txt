@@ -9,6 +9,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/scene
+ ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/gpx
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
