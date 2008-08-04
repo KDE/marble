@@ -65,6 +65,8 @@ QPixmap& MapScaleFloatItem::drawScaleBarPixmap( int radius, int width )
     painter.translate( 5, 5 );
 
     paintScaleBar( &painter, radius, width );	
+    painter.end();
+
     return m_pixmap;
 }
 

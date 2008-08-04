@@ -51,13 +51,13 @@ int main(int argc, char *argv[])
         << "{" << endl;
     out.setIntegerBase(16);
 
-    QImage  *gradimg = new QImage( 256, 10, QImage::Format_RGB32 );
+    QImage  gradimg( 256, 10, QImage::Format_RGB32 );
 
     QStringList  filelist;
     filelist << "../../data/seacolors.leg" << "../../data/landcolors.leg";
     QString  filename;
 
-    QPainter  painter(gradimg);
+    QPainter  painter(&gradimg);
     painter.setPen(Qt::NoPen);
 
     for ( int j = 0; j < 16; ++j ) {
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
             for ( int i = 0; i < 256; ++i) {
 
-                    QRgb  shadeColor = gradimg->pixel( i, 1 );
+                    QRgb  shadeColor = gradimg.pixel( i, 1 );
                     QImage  shadeImage ( 256, 10, QImage::Format_RGB32 );
                     QLinearGradient  shadeGradient( 0, 0, 256, 0 );
                     shadeGradient.setColorAt(0.15, QColor(Qt::white));
@@ -96,7 +96,8 @@ int main(int argc, char *argv[])
                     QPainter  shadePainter(&shadeImage);
                     shadePainter.setPen(Qt::NoPen);
                     shadePainter.setBrush( shadeGradient );
-                    shadePainter.drawRect( 0, 0, 256, 10 );  
+                    shadePainter.drawRect( 0, 0, 256, 10 );
+                    shadePainter.end();
                     int shadeIndex = 120 + alpha;
 //                    qDebug() << QString("Shade: %1").arg(shadeIndex);
                     QRgb  palcol = shadeImage.pixel( shadeIndex, 1 );
@@ -117,6 +118,7 @@ int main(int argc, char *argv[])
             }
         }
     }
+    painter.end();
 
     out << "};" << endl;
 
