@@ -1,5 +1,12 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/MarblePlacemarkModel.cpp:
+
+    MarblePlacemarkModel does not need a PlaceMarkManager in every case,
+    so make it work without one.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/CMakeLists.txt:
     * src/lib/CMakeLists.txt:
 

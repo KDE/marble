@@ -33,7 +33,6 @@ class MarblePlacemarkModel::Private
     Private( PlaceMarkManager *manager, MarblePlacemarkModel *parent )
         : m_parent( parent ), m_manager( manager )
     {
-        Q_ASSERT( m_manager != 0 );
     }
 
     ~Private()
@@ -55,14 +54,16 @@ MarblePlacemarkModel::MarblePlacemarkModel( PlaceMarkManager *manager,
       d( new Private( manager, this ) )
 {
     // Register at PlaceMarkManager
-    d->m_manager->setPlaceMarkModel( this );
+    if ( d->m_manager )
+        d->m_manager->setPlaceMarkModel( this );
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
 {
     clearPlaceMarks();
     // Unregister from PlaceMarkManager
-    d->m_manager->setPlaceMarkModel( 0 );
+    if ( d->m_manager )
+        d->m_manager->setPlaceMarkModel( 0 );
 
     delete d;
 }
