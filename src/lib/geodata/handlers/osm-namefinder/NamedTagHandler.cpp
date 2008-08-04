@@ -132,21 +132,29 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
 
     qDebug() << "parsed named:" << named->name() << " lon:" << lon << " lat:" << lat;
 
-    //    if ( parentItem.represents( tag_searchresults )) {
-    if ( parentItem.nodeAs<GeoDataContainer>() ) {
-        qDebug() << "added via GeoDataContainer::addFeature";
-        parentItem.nodeAs<GeoDataContainer>()->addFeature( named );
+    if ( parentItem.represents( tag_searchresults )) {
+        qDebug() << "added via parent searchresults";
+        GeoDataContainer * const parent = parentItem.nodeAs<GeoDataContainer>();
+        Q_ASSERT( parent );
+        parent->addFeature( named );
 
     } else if ( parentItem.represents( tag_place )) {
-        qDebug() << "not implemented, added via OnfNamed::setPlace";
-        // FIXME: does this work or crash?
-        // parentItem.nodeAs<Named>()->setPlace( named );
+        qDebug() << "added via parent place, not implemented";
 
     } else if ( parentItem.represents( tag_nearestplaces )) {
-        qDebug() << "not implemented, added via OnfNamed::addNearestPlace";
-        // FIXME: does this work or crash?
-        // parentItem.nodeAs<Named>()->addNearestPlace( named );
+        qDebug() << "added via parent nearestplaces, not implemented";
+
+    } else if ( parentItem.first.first.isEmpty() && !parentItem.second ) {
+        // ok, its the parentItem would be searchresults, but we
+        // have here to work around the GeoParser bug
+        GeoDocument * const document = parser.activeDocument();
+        Q_ASSERT( document );
+        GeoDataDocument * const dataDocument =
+            dynamic_cast<GeoDataDocument * const>( document );
+        Q_ASSERT( dataDocument );
+        dataDocument->addFeature( named );
     }
+
     return 0;
 }
 
