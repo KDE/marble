@@ -124,6 +124,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
     Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
 
+    Q_PROPERTY(bool showOverviewMap READ showOverviewMap    WRITE setShowOverviewMap)
     Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
     Q_PROPERTY(bool showCompass  READ showCompass     WRITE setShowCompass)
     Q_PROPERTY(bool showGrid     READ showGrid        WRITE setShowGrid)
@@ -348,6 +349,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return a QPixmap with the current contents of the widget.
      */
     QPixmap mapScreenShot();
+
+    /**
+     * @brief  Return whether the overview map is visible.
+     * @return The overview map visibility.
+     */
+    bool  showOverviewMap() const;
 
     /**
      * @brief  Return whether the scale bar is visible.
@@ -652,6 +659,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * if needed.
      */
     void setPropertyValue( const QString& name, bool value );
+
+    /**
+     * @brief  Set whether the overview map overlay is visible
+     * @param  visible  visibility of the overview map
+     */
+    void setShowOverviewMap( bool visible );
 
     /**
      * @brief  Set whether the scale bar overlay is visible

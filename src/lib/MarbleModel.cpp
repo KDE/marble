@@ -141,8 +141,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
 
-    d->m_placeMarkLayout   = 0;
-
     d->m_gridmap      = new GridMap();
     d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
                                               MarbleDirs::path( "landcolors.leg" ) );
@@ -154,6 +152,13 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
+
+    d->m_placeMarkLayout = new PlaceMarkLayout( this );
+    connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
+                                                                        QItemSelection) ),
+                d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
+    connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
+                d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
 
     d->m_placemarkmanager->loadStandardPlaceMarks();
 
@@ -349,15 +354,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 d->m_veccomposer->setCoastColor( vector->pen().color() );
             }
         }
-    }
-
-    if ( d->m_placeMarkLayout == 0) {
-        d->m_placeMarkLayout = new PlaceMarkLayout( this );
-        connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
-                                                                         QItemSelection) ),
-                 d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
-        connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
-                 d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
     }
 
     d->m_placeMarkLayout->requestStyleReset();

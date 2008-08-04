@@ -363,6 +363,11 @@ bool MarbleMap::propertyValue( const QString& name ) const
     return value;
 }
 
+bool MarbleMap::showOverviewMap() const
+{
+    return propertyValue( "overviewmap" );
+}
+
 bool MarbleMap::showScaleBar() const
 {
     return propertyValue( "scalebar" );
@@ -866,6 +871,11 @@ void MarbleMap::setPropertyValue( const QString& name, bool value )
     d->m_viewParams.setPropertyValue( name, value );
 }
 
+void MarbleMap::setShowOverviewMap( bool visible )
+{
+    setPropertyValue( "overviewmap", visible );
+}
+
 void MarbleMap::setShowScaleBar( bool visible )
 {
     setPropertyValue( "scalebar", visible );
@@ -917,6 +927,8 @@ void MarbleMap::setShowOtherPlaces( bool visible )
 void MarbleMap::setShowRelief( bool visible )
 {
     setPropertyValue( "relief", visible );
+    // Update texture map during the repaint that follows:
+    setNeedsUpdate();
 }
 
 void MarbleMap::setShowElevationModel( bool visible )
@@ -929,6 +941,8 @@ void MarbleMap::setShowElevationModel( bool visible )
 void MarbleMap::setShowIceLayer( bool visible )
 {
     setPropertyValue( "ice", visible );
+    // Update texture map during the repaint that follows:
+    setNeedsUpdate();
 }
 
 void MarbleMap::setShowBorders( bool visible )
@@ -944,6 +958,8 @@ void MarbleMap::setShowRivers( bool visible )
 void MarbleMap::setShowLakes( bool visible )
 {
     setPropertyValue( "lakes", visible );
+    // Update texture map during the repaint that follows:
+    setNeedsUpdate();
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
