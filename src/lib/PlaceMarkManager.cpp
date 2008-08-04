@@ -76,9 +76,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 #else
     Q_ASSERT( m_model != 0 && "You have called addPlaceMarkFile before creating a model!" );
 
-    QString  defaultcachename;
-    QString  defaultsrcname;
-    QString  defaulthomecache;
+    QString defaultcachename;
+    QString defaultsrcname;
+    QString defaulthomecache;
 
     if ( !filepath.contains( "\\" && !filepath.contains( '/' ) ) ) {
         defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
@@ -90,9 +90,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     if ( QFile::exists( defaultcachename ) ) {
         qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
 
-        bool       cacheoutdated = false;
-        QDateTime  sourceLastModified;
-        QDateTime  cacheLastModified;
+        bool      cacheoutdated = false;
+        QDateTime sourceLastModified;
+        QDateTime cacheLastModified;
 
         if ( QFile::exists( defaultsrcname ) ) {
             sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
@@ -102,7 +102,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
                 cacheoutdated = true;
         }
 
-        bool  loadok = false;
+        bool loadok = false;
 
         if ( cacheoutdated == false ) {
             PlaceMarkContainer container;
@@ -142,14 +142,14 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
 #ifdef KML_GSOC
     if ( QFile::exists( filename ) ) {
         QFile sourceFile( filename );
- 
+
         if ( sourceFile.open( QIODevice::ReadOnly ) ) {
             /*
              * Create KMLDocument and set it's name like input filename
              */
-            KMLDocument* document = new KMLDocument();
+            KMLDocument* document = new KMLDocument;
             document->setName( QFileInfo( sourceFile ).fileName() );
- 
+
             QTime t;
             t.start();
             document->load( sourceFile );
@@ -211,7 +211,7 @@ void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
 {
     GeoDataParser parser( GeoData_KML );
-    
+
     QFile file( filename );
     if ( !file.exists() ) {
         qWarning( "File does not exist!" );
@@ -220,7 +220,7 @@ void PlaceMarkManager::importKml( const QString& filename,
 
     // Open file in right mode
     file.open( QIODevice::ReadOnly );
-    
+
     if ( !parser.read( &file ) ) {
         qWarning( "Could not parse file!" );
         return;
@@ -237,11 +237,11 @@ void PlaceMarkManager::importKmlFromData( const QString& data,
                                          PlaceMarkContainer* placeMarkContainer )
 {
     GeoDataParser parser( GeoData_KML );
-    
+
     QByteArray ba( data.toUtf8() );
     QBuffer buffer( &ba );
     buffer.open( QIODevice::ReadOnly );
-    
+
     if ( !parser.read( &buffer ) ) {
         qWarning( "Could not parse data!" );
         return;
@@ -251,7 +251,8 @@ void PlaceMarkManager::importKmlFromData( const QString& data,
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     // we might have to suppress caching for this part
-    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), QString("DataImport") );
+    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(),
+                                              QString("DataImport") );
 }
 
 static const quint32 MarbleMagicNumber = 0x31415926;
@@ -262,36 +263,34 @@ void PlaceMarkManager::saveFile( const QString& filename,
     if ( QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() == false )
         ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
 
-    QFile  file( filename );
-    file.open(QIODevice::WriteOnly);
-    QDataStream  out(&file);
+    QFile file( filename );
+    file.open( QIODevice::WriteOnly );
+    QDataStream out( &file );
 
     // Write a header with a "magic number" and a version
     // out << (quint32)0xA0B0C0D0;
     out << (quint32)MarbleMagicNumber;
     out << (qint32)014;
 
-    out.setVersion(QDataStream::Qt_4_2);
+    out.setVersion( QDataStream::Qt_4_2 );
 
-    double  lon;
-    double  lat;
-    double  alt;
+    double lon;
+    double lat;
+    double alt;
 
-    PlaceMarkContainer::const_iterator  it;
-
-    for ( it = placeMarkContainer->constBegin();
-          it != placeMarkContainer->constEnd();
-          ++it )
+    PlaceMarkContainer::const_iterator it = placeMarkContainer->constBegin();
+    PlaceMarkContainer::const_iterator const end = placeMarkContainer->constEnd();
+    for (; it != end; ++it )
     {
-        out << (*it) -> name();
-        (*it) -> coordinate(lon, lat, alt);
+        out << (*it)->name();
+        (*it)->coordinate( lon, lat, alt );
 
         out << lon << lat << alt;
-        out << QString( (*it) -> role() );
-        out << QString( (*it) -> description() );
-        out << QString( (*it) -> countryCode() );
-        out << (qreal)(*it) -> area();
-        out << (qint64)(*it) -> population();
+        out << QString( (*it)->role() );
+        out << QString( (*it)->description() );
+        out << QString( (*it)->countryCode() );
+        out << (qreal)(*it)->area();
+        out << (qint64)(*it)->population();
     }
 }
 
@@ -299,22 +298,22 @@ void PlaceMarkManager::saveFile( const QString& filename,
 bool PlaceMarkManager::loadFile( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )
 {
-    QFile  file( filename );
-    file.open(QIODevice::ReadOnly);
-    QDataStream in(&file);
+    QFile file( filename );
+    file.open( QIODevice::ReadOnly );
+    QDataStream in( &file );
 
     // Read and check the header
-    quint32  magic;
+    quint32 magic;
     in >> magic;
-    if (magic != MarbleMagicNumber) {
+    if ( magic != MarbleMagicNumber ) {
         qDebug( "Bad file format!" );
         return false;
     }
 
     // Read the version
-    qint32  version;
+    qint32 version;
     in >> version;
-    if (version < 014) {
+    if ( version < 014 ) {
         qDebug( "Bad file - too old!" );
         return false;
     }
@@ -325,7 +324,7 @@ bool PlaceMarkManager::loadFile( const QString& filename,
       }
     */
 
-    in.setVersion(QDataStream::Qt_4_2);
+    in.setVersion( QDataStream::Qt_4_2 );
 
     // Read the data itself
     double   lon;
@@ -340,25 +339,25 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 
     GeoDataPlacemark  *mark;
     while ( !in.atEnd() ) {
-        mark = new GeoDataPlacemark();
+        mark = new GeoDataPlacemark;
 
         in >> tmpstr;
-        mark -> setName( tmpstr );
+        mark->setName( tmpstr );
         testo = tmpstr;
         in >> lon >> lat >> alt;
-        mark -> setCoordinate(lon, lat, alt);
+        mark->setCoordinate( lon, lat, alt );
         in >> tmpstr;
-        mark -> setRole( tmpstr.at(0) );
+        mark->setRole( tmpstr.at(0) );
         in >> tmpstr;
-        mark -> setDescription( tmpstr );
+        mark->setDescription( tmpstr );
         in >> tmpstr;
-        mark -> setCountryCode( tmpstr );
+        mark->setCountryCode( tmpstr );
         in >> area;
-        mark -> setArea(area);
+        mark->setArea( area );
         in >> tmpint64;
-        mark -> setPopulation( tmpint64 );
+        mark->setPopulation( tmpint64 );
 
-        placeMarkContainer -> append( mark );
+        placeMarkContainer->append( mark );
     }
 
     return true;
@@ -367,7 +366,8 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 #ifdef KML_GSOC
 void PlaceMarkManager::updateCacheIndex()
 {
-    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" ).arg( MarbleDirs::localPath() );
+    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" )
+        .arg( MarbleDirs::localPath() );
 
     QFile indexFile( cacheIndexFileName );
     if ( indexFile.open( QIODevice::WriteOnly ) ) {
@@ -381,14 +381,15 @@ void PlaceMarkManager::updateCacheIndex()
             iterator != m_documentList.constEnd();
             ++iterator )
         {
-            const KMLDocument& document = * ( *iterator );
+            const KMLDocument& document = **iterator;
 
-            QString cacheFileName = QString( "%1.%2.cache" ).arg( document.id() ).arg( document.name() );
+            QString cacheFileName = QString( "%1.%2.cache" )
+                .arg( document.id() ).arg( document.name() );
             stream << cacheFileName;
         }
 
         indexFile.close();
-        qDebug( "Create index cache file: %s", cacheIndexFileName.toAscii().data () );
+        qDebug( "Create index cache file: %s", cacheIndexFileName.toAscii().data() );
     }
     else {
         qDebug( "Unable to create index file: %s", cacheIndexFileName.toAscii().data() );
@@ -404,7 +405,7 @@ void PlaceMarkManager::cacheDocument( const KMLDocument& document )
 
     QFile cacheFile( path );
     if ( cacheFile.open( QIODevice::WriteOnly ) ) {
-        QDataStream stream ( &cacheFile );
+        QDataStream stream( &cacheFile );
         document.pack( stream );
         cacheFile.close();
         qDebug( "Saved kml document to cache: %s", path.toAscii().data() );

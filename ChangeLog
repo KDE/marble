@@ -1,5 +1,11 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/PlaceMarkManager.cpp:
+
+    Coding style changes.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp:
 
     OpenstreetMap name finder returns coordinates in degree.
