@@ -1,5 +1,11 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/osm-namefinder/DescriptionTagHandler.cpp:
+
+    Add Q_ASSERT.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp:
 
     Work around GeoParser bug which prevents the handler of the first

@@ -43,6 +43,7 @@ GeoNode * DescriptionTagHandler::parse( GeoParser & parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( tag_named )) {
         GeoDataPlacemark * named = parentItem.nodeAs<GeoDataPlacemark>();
+        Q_ASSERT( named );
         named->setDescription( parser.readElementText().trimmed() );
     }
     return 0;
