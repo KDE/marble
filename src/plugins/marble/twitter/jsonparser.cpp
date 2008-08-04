@@ -15,59 +15,61 @@ jsonParser::~jsonParser()
 {
 }
 
-twitterDataStructure jsonParser::parseObjectOnPosition ( const QString &content , int requiredObjectPosition )
+twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
 {
-        QString temp="var myJSONObject =" + content;
-        myEngine.evaluate ( temp );
 
-        dataStorage.user = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
-                                               + QString::number ( requiredObjectPosition )
-                                               + QString ( "].user;" ) ).toString();
-        dataStorage.location = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
-                               + QString::number ( requiredObjectPosition )
-                               + QString ( "].location;" ) ).toString();
-        dataStorage.text = myEngine.evaluate ( QString ( "return myJSONObject.photos[" )
-                                               + QString::number ( requiredObjectPosition )
-                                               + QString ( "].text;" ) ).toString();
+    QString temp = "var myJSONObject =" + content;
+    myEngine.evaluate(temp);
+
+    dataStorage.user = myEngine.evaluate(QString("return myJSONObject.photos[")
+                                         + QString::number(requiredObjectPosition)
+                                         + QString("].user;")).toString();
+    dataStorage.location = myEngine.evaluate(QString("return myJSONObject.photos[")
+                           + QString::number(requiredObjectPosition)
+                           + QString("].location;")).toString();
+    dataStorage.text = myEngine.evaluate(QString("return myJSONObject.photos[")
+                                         + QString::number(requiredObjectPosition)
+                                         + QString("].text;")).toString();
 
 
-        return dataStorage;
+    return dataStorage;
 }
 
-QList <twitterDataStructure> jsonParser::parseAllObjects ( const QString &content ,int numberOfObjects )
+QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content , int numberOfObjects)
 {
-        QString temp = "var myJSONObject = " + content;
-        int iterator = 0;//the count starts fom one
+    QString temp = "var myJSONObject =  { \"twitter\":" + content + "}";
+    int iterator = 0;//the count starts fom one
 
-        myEngine.evaluate ( temp );
-        while ( ( iterator ) < numberOfObjects ) {
-                dataStorage.user = myEngine.evaluate ( QString ( "return myJSONObject[" )
-                                                       + QString::number ( iterator )
-                                                       + QString ( "].user.name;" ) ).toString();
-                dataStorage.location = myEngine.evaluate ( QString ( "return myJSONObject[" )
-                                       + QString::number ( iterator )
-                                       + QString ( "].location;" ) ).toString();
-                dataStorage.text = myEngine.evaluate ( QString ( "return myJSONObject[" )
-                                                       + QString::number ( iterator )
-                                                       + QString ( "].text;" ) ).toString();
-                parsedJsonOutput.insert ( iterator , dataStorage );
-                ++iterator;
-        }
+    myEngine.evaluate(temp);
+    while ((iterator) < numberOfObjects) {
+        dataStorage.user = myEngine.evaluate(QString("return myJSONObject.twitter[")
+                                             + QString::number(iterator)
+                                             + QString("].user.name;")).toString();
+        dataStorage.location = myEngine.evaluate(QString("return myJSONObject.twitter[")
+                               + QString::number(iterator)
+                               + QString("].user.location;")).toString();
+        dataStorage.text = myEngine.evaluate(QString("return myJSONObject.twitter[")
+                                             + QString::number(iterator)
+                                             + QString("].text;")).toString();
+        parsedJsonOutput.insert(iterator , dataStorage);
 
-        return parsedJsonOutput;
+        /*qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;*/
+        ++iterator;
+    }
+
+    return parsedJsonOutput;
 }
 
-googleMapDataStructure jsonParser::parseObject(QString &content)
+googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 {
-QString temp = "var myJSONObject = " + content;
-int iterator = 0;//the count starts fom one
-googleMapDataStructure returnStructure;
+//     qDebug() << "in geoCodingAPIparseObject";
+    QString temp = "var myJSONObject = " + content;
 
-myEngine.evaluate ( temp );
-returnStructure.lat=myEngine.evaluate ( QString ( "return myJSONObject[" )
-+ QString::number ( iterator )
-+ QString ( "].user.name;" ) ).toString();;
-returnStructure.lon=;
-// qDebug
-return returnStructure;
+    googleMapDataStructure returnStructure;
+
+    myEngine.evaluate(temp);
+    returnStructure.lat = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[0]").toNumber();
+    returnStructure.lon = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[1]").toNumber();
+//     qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
+    return returnStructure;
 }

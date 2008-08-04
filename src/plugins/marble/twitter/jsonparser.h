@@ -27,37 +27,35 @@ sanity checking would include :
 (3)some other plan that i have yet not thought upon :)
     @author Shashank Singh
 */
-struct twitterDataStructure
-{
+struct twitterDataStructure {
 //defining the only parts that are required ,, all oher fields are hence left
-QString user;
-QString location;
-QString text; 
+    QString user;
+    QString location;
+    QString text;
 };
 
-struct googleMapDataStructure
-{
-double lat;
-double lon;
+struct googleMapDataStructure {
+    double lat;
+    double lon;
 };
 
-class jsonParser :public QObject
+class jsonParser : public QObject
 {
- public:
-   jsonParser();
+public:
+    jsonParser();
 
-   ~jsonParser();
+    ~jsonParser();
 
-   twitterDataStructure parseObjectOnPosition ( const QString &content, int requiredObjectPosition );//for parsing single object
+    twitterDataStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
 
-   QList<twitterDataStructure> parseAllObjects ( const QString &content, int numberOfObjects );//for parsing a list objects
-    
-    googleMapDataStructure parseObject(QString &content);//google geocoding api parser
-   
-   private:
- QList <twitterDataStructure> parsedJsonOutput;
+    QList<twitterDataStructure> parseAllObjects(const QString &content, int numberOfObjects);   //for parsing a list objects
 
- twitterDataStructure dataStorage;
+    googleMapDataStructure geoCodingAPIparseObject(QString content);//google geocoding api parser
+
+private:
+    QList <twitterDataStructure> parsedJsonOutput;
+
+    twitterDataStructure dataStorage;
 
     QScriptEngine myEngine;
 };

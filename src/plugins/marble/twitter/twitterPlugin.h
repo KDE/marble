@@ -32,54 +32,55 @@
  *
  */
 struct twitterStructure {
-        QString twitter ;
-        GeoDataCoordinates location;
+    QString twitter ;
+    GeoDataCoordinates location;
 };
 
 class twitterPlugin : public MarbleAbstractLayer
 {
-        Q_OBJECT
-        Q_INTERFACES ( MarbleLayerInterface )
+    Q_OBJECT
+    Q_INTERFACES(MarbleLayerInterface)
 
 public:
-        QStringList backendTypes() const;
+    QStringList backendTypes() const;
 
-        QString renderPolicy() const;
+    QString renderPolicy() const;
 
-        QStringList renderPosition() const;
+    QStringList renderPosition() const;
 
-        QString name() const;
+    QString name() const;
 
-        QString guiString() const;
+    QString guiString() const;
 
-        QString nameId() const;
+    QString nameId() const;
 
-        QString description() const;
+    QString description() const;
 
-        QIcon icon () const;
+    QIcon icon() const;
 
 
-        void initialize ();
+    void initialize();
 
-        bool isInitialized () const;
+    bool isInitialized() const;
 
-        bool render ( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
-       
-        ~twitterPlugin();
+    bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
+
+    ~twitterPlugin();
 public slots:
-        void slotJsonDownloadComplete ( QString , QString );//completed download of json reply fom panoramio
-        void slotGeoCodingReplyRecieved ( QString , QString );//completed download of image
+    void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
+    void slotGeoCodingReplyRecieved(QString , QString);   //completed download of image
+
 signals:
-        void statusMessageForImageDownloadingProcess(QString);
+    void statusMessageForImageDownloadingProcess(QString);
 private:
-        CacheStoragePolicy *m_storagePolicy;
-        HttpDownloadManager *m_downloadManager;
-        jsonParser twitterJsonParser;
-        void downloadtwitter ( int,int,double,double,double,double);
-        QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded succesfully figured out :)
-        QList <twitterDataStructure> parsedData;
-        GeoDataCoordinates findLatLonOfStreetAddress(QString streetAddress);
-        int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
+    CacheStoragePolicy *m_storagePolicy;
+    HttpDownloadManager *m_downloadManager;
+    jsonParser twitterJsonParser;
+    void downloadtwitter(int, int, double, double, double, double);
+    QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded succesfully figured out :)
+    QList <twitterDataStructure> parsedData;
+    void findLatLonOfStreetAddress(QString streetAddress);
+    int privateFlagForRenderingTwitts;//this flag is one when globe has an Image  (downloaded or already there in cache)
 
 };
 
