@@ -1,5 +1,12 @@
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/osm-namefinder/SearchResultsTagHandler.cpp:
+
+    - Remove commented out code.
+    - Use GeoDataDocument instead of GeoDataContainer.
+
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/parser/GeoParser.h:
     * src/lib/geodata/parser/GeoParser.cpp:
 
