@@ -306,11 +306,13 @@ void TextureColorizer::generatePalette(const QString& seafile,
         }
     }
     QImage   gradientImage ( 256, 10, QImage::Format_RGB32 );
-    QPainter  gradientPainter( &gradientImage );
+    QPainter  gradientPainter;
+    gradientPainter.begin( &gradientImage );
     gradientPainter.setPen( Qt::NoPen );
 
     QImage    shadingImage ( 256, 10, QImage::Format_RGB32 );
-    QPainter  shadingPainter( &shadingImage );
+    QPainter  shadingPainter;
+    shadingPainter.begin( &shadingImage );
     shadingPainter.setPen( Qt::NoPen );
 
     int offset = 0;
@@ -361,6 +363,9 @@ void TextureColorizer::generatePalette(const QString& seafile,
         }
         offset += 256;
     }
+    shadingPainter.end();  // Need to explicitely tell painter lifetime to avoid crash
+    gradientPainter.end(); // on some systems. 
+
     m_seafile = seafile;
     m_landfile = landfile;
 }
