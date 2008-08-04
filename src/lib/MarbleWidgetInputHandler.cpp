@@ -97,7 +97,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
     //	if ( o == marbleWidget ){
     if ( e->type() == QEvent::KeyPress ) {
-        QKeyEvent  *k = (QKeyEvent *)e;
+        QKeyEvent const * const k = dynamic_cast<QKeyEvent const * const>( e );
+        Q_ASSERT( k );
 
         dirx = 0; 
         diry = 0;

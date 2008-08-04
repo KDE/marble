@@ -1,5 +1,12 @@
 2008-08-04  Inge Wallin  <inge@lysator.liu.se>
 
+    * src/lib/MarbleWidgetInputHandler.cpp:
+
+    Coding style fix, change C-style cast into dynamic_cast, thanks
+    to Dennis Nienhüser for pointing that out.
+
+2008-08-04  Inge Wallin  <inge@lysator.liu.se>
+
 	* src/lib/geodata/data/GeoDataGeometry.cpp (unpack): Bugfix
 	(GeoDataGeometry): Init in right order.
 	* src/lib/geodata/data/GeoDataPoint.cpp (GeoDataPoint): Init in right order
