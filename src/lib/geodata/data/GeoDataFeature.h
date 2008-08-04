@@ -25,6 +25,7 @@
 
 class GeoDataStyle;
 class GeoDataStyleSelector;
+class GeoDataStyleMap;
 
 class GeoDataFeaturePrivate;
 
@@ -47,7 +48,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual bool isFolder() const { return false; }
     virtual bool isPlacemark() const { return false; }
 
-    virtual EnumFeatureId featureId() const = 0;
+    virtual EnumFeatureId featureId() const { return InvalidFeatureId; };
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
      */
@@ -126,6 +127,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Set the description of this feature to @p value.
     void setDescription( const QString &value);
 
+    /// Return the styleUrl of the feature.
+    QString styleUrl() const;
+    /// Set the styleUrl of this feature to @p value.
+    void setStyleUrl( const QString &value);
+    
     /// Return whether this feature is visible or not
     bool isVisible() const;
     /**
@@ -193,6 +199,20 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @param  popularity  the new popularity value
      */
     void setPopularity( qint64 popularity );
+    
+    /**
+    * Return a pointer to a GeoDataStyleMap object which represents the styleMap
+    * of this feature. A styleMap is simply a QMap<QString,QString> which can connect
+    * two styles with a keyword. This can be used to have a highlighted and a
+    * normal style.
+    * @see GeoDataStyleMap
+    */
+    GeoDataStyleMap* styleMap();
+    /**
+    * Sets the styleMap of the feature
+    */
+    void setStyleMap( GeoDataStyleMap* map );
+    
 
     // ----------------------------------------------------------------
     // The following functions are use for painting, and mostly for placemarks.

@@ -26,6 +26,7 @@ class Serializable
  * achieved without a special Id
  */
 enum EnumFeatureId {
+    InvalidFeatureId = -1,
     GeoDataDocumentId = 1,
     GeoDataFolderId,
     GeoDataPlacemarkId,
@@ -35,8 +36,8 @@ enum EnumFeatureId {
 };
 
 enum EnumGeometryId {
-    GeoDataGeometryId,
-    GeoDataPointId,
+    InvalidGeometryId = -1,
+    GeoDataPointId = 1,
     GeoDataLineStringId,
     GeoDataLinearRingId,
     GeoDataPolygonId,

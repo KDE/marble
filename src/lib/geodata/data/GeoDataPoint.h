@@ -26,7 +26,10 @@
 
 class GeoDataPointPrivate;
 
-/** GeoDataPoint is the GeoDataGeometry class representing a single three
+/** 
+ * @short A Geometry object representing a 3d point
+ *
+ * GeoDataPoint is the GeoDataGeometry class representing a single three
  * dimensional point. It reflects the Point tag of KML spec and can be contained
  * in objects holding GeoDataGeometry objects. Nevertheless GeoDataPoint
  * shouldn't be used to simply contain 3d vector data - this part is taken by

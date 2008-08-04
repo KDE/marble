@@ -20,6 +20,10 @@
 
 #include "geodata_export.h"
 
+using namespace Marble;
+
+class GeoDataGeometryPrivate;
+
 /**
  * @short A base class for all geodata features
  *
@@ -31,15 +35,11 @@
  * @see GeoDataPolygon
  */
 
-using namespace Marble;
-
-class GeoDataGeometryPrivate;
-
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
  public:
     virtual bool isFolder() const { return false; }
-    virtual EnumGeometryId geometryId() const { return GeoDataGeometryId; };
+    virtual EnumGeometryId geometryId() const { return InvalidGeometryId; };
 
     bool extrude() const;
     void setExtrude( bool extrude );

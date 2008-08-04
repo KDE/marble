@@ -19,6 +19,7 @@
 #include "MarbleDirs.h"
 
 #include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 
 QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");
 
@@ -33,18 +34,22 @@ class GeoDataFeaturePrivate
         m_popularityIndex( 0 ),
         m_visible( true ),
         m_role(' '),
-        m_style( 0 )
+        m_style( 0 ),
+        m_styleMap( 0 )
     {
     }
 
     ~GeoDataFeaturePrivate()
     {
+        delete m_style;
+        delete m_styleMap;
     }
 
     QString     m_name;         // Name of the feature. Is shown on screen
     QString     m_description;  // A longer textual description
     QString     m_address;      // The address.  Optional
     QString     m_phoneNumber;  // Phone         Optional
+    QString     m_styleUrl;     // styleUrl     Url#tag to a document wide style
     qint64      m_popularity;   // Population(!)
     int         m_popularityIndex; // Index of population
 
@@ -52,7 +57,8 @@ class GeoDataFeaturePrivate
 
     QChar       m_role;
 
-    GeoDataStyleSelector* m_style;
+    GeoDataStyle* m_style;
+    GeoDataStyleMap* m_styleMap;
 };
 
 
@@ -292,6 +298,16 @@ void GeoDataFeature::setDescription( const QString &value)
     d->m_description = value;
 }
 
+QString GeoDataFeature::styleUrl() const
+{
+    return d->m_styleUrl;
+}
+
+void GeoDataFeature::setStyleUrl( const QString &value)
+{
+    d->m_styleUrl = value;
+}
+
 bool GeoDataFeature::isVisible() const
 {
     return d->m_visible;
@@ -348,6 +364,16 @@ const QChar GeoDataFeature::role() const
 void GeoDataFeature::setRole( const QChar &role )
 {
     d->m_role = role;
+}
+
+GeoDataStyleMap* GeoDataFeature::styleMap()
+{
+    return d->m_styleMap;
+}
+
+void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
+{
+    d->m_styleMap = styleMap;
 }
 
 int GeoDataFeature::popularityIndex() const

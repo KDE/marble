@@ -173,7 +173,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
     int geometryId;
     stream >> geometryId;
     switch( geometryId ) {
-        case GeoDataGeometryId:
+        case InvalidGeometryId:
             break;
         case GeoDataPointId:
             {

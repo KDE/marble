@@ -1,3 +1,27 @@
+2008-08-04  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataStyleMap.{h|cpp}
+    * src/lib/geodata/data/GeoDataFeature.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlStyleMapTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlKeyTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlStyleUrlTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlPairTagHandler.{h|cpp}
+
+    implementing the kml styleMap
+
+    * src/lib/geodata/data/GeoDataCoordinates.h
+    * src/lib/geodata/data/GeoDataDocument.h
+    * src/lib/geodata/data/GeoDataGeometry.h
+    * src/lib/geodata/data/GeoDataPoint.h
+
+    documentation fixes
+
+    * src/lib/geodata/data/Serializable.h
+    * src/lib/geodata/data/GeoDataPlacemark.cpp
+    * src/lib/geodata/data/GeoDataMultiGeometry.cpp
+
+    fix some geometry flag
+
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarblePlacemarkModel.cpp:

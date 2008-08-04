@@ -35,7 +35,10 @@ const double TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 
-/** GeoDataCoordinates is the simple representation of a single three
+/** 
+ * @short A 3d point representation
+ *
+ * GeoDataCoordinates is the simple representation of a single three
  * dimensional point. It can be used all through out marble as the data type
  * for three dimensional objects. it comprises of a Quaternion for speed issues.
  * This class was introduced to reflect the difference between a simple 3d point
