@@ -145,12 +145,12 @@
                     <available>true</available>
                 </property>
                 <property name="international-boundaries">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="state-boundaries">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
             </group>
             <group name="Water Bodies">
@@ -159,12 +159,12 @@
                     <value>true</value>
                 </property>
                 <property name="lakes">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
                 <property name="rivers">
-                    <available>false</available>
-                    <value>false</value>
+                    <available>true</available>
+                    <value>true</value>
                 </property>
             </group>
             <group name="Surface">
@@ -179,6 +179,10 @@
             </group>
 
             <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
                 <value>true</value>
                 <available>true</available>
             </property>

@@ -41,9 +41,11 @@ bool MarbleWidgetPlugin::isInitialized() const
 
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
-    // Create the Model (Globe) and one view.
-    //MarbleModel *model = new MarbleModel( parent );
-    return new MarbleWidget( parent );
+    MarbleWidget* marbleWidget = new MarbleWidget( parent );
+    marbleWidget->setMapThemeId("earth/srtm/srtm.dgml");
+    marbleWidget->setDownloadUrl( "http://download.kde.org/apps/marble/" );
+
+    return marbleWidget;
 }
 
 QString MarbleWidgetPlugin::name() const

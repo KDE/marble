@@ -130,7 +130,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     viewParams->propertyValue( "waterbodies", showWaterbodies );
     viewParams->propertyValue( "lakes", showLakes );
 
-    if ( showWaterbodies || showLakes ) {
+    if ( showWaterbodies && showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -226,7 +226,7 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
     viewParams->propertyValue( "waterbodies", showWaterbodies );
     viewParams->propertyValue( "lakes", showLakes );
 
-    if ( showWaterbodies || showLakes ) {
+    if ( showWaterbodies && showLakes ) {
          // Lakes
          m_vectorMap -> setzBoundingBoxLimit( 0.95 );
          m_vectorMap -> setzPointLimit( 0.98 ); 
@@ -283,7 +283,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     viewParams->propertyValue( "waterbodies", showWaterbodies );
     viewParams->propertyValue( "rivers", showRivers );
 
-    if ( showWaterbodies || showRivers ) {
+    if ( showWaterbodies && showRivers ) {
         // Rivers
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );

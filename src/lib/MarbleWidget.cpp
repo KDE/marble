@@ -355,6 +355,11 @@ QPixmap MarbleWidget::mapScreenShot()
     return QPixmap::grabWidget( this );
 }
 
+bool MarbleWidget::showOverviewMap() const
+{
+    return d->m_map->showOverviewMap();
+}
+
 bool MarbleWidget::showScaleBar() const
 {
     return d->m_map->showScaleBar();
@@ -872,6 +877,13 @@ void MarbleWidget::setPropertyValue( const QString& name, bool value )
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+    repaint();
+}
+
+void MarbleWidget::setShowOverviewMap( bool visible )
+{
+    d->m_map->setShowOverviewMap( visible );
+
     repaint();
 }
 

@@ -296,6 +296,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool  propertyValue( const QString& name) const;
 
     /**
+     * @brief  Return whether the overview map is visible.
+     * @return The overview map visibility.
+     */
+    bool  showOverviewMap() const;
+
+    /**
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
@@ -587,6 +593,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * if needed.
      */
     void setPropertyValue( const QString& name, bool value );
+
+    /**
+     * @brief  Set whether the overview map overlay is visible
+     * @param  visible  visibility of the overview map
+     */
+    void setShowOverviewMap( bool visible );
 
     /**
      * @brief  Set whether the scale bar overlay is visible
