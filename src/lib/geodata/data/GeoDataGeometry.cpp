@@ -67,7 +67,8 @@ GeoDataGeometry::GeoDataGeometry()
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
-    : d( new GeoDataGeometryPrivate() )
+    : GeoDataObject(),
+      d( new GeoDataGeometryPrivate() )
 {
     *d = *other.d;
 }
@@ -100,5 +101,5 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     stream >> d->m_extrude;
     stream >> d->m_tessellate;
     stream >> am;
-    d->m_altitudeMode;
+    d->m_altitudeMode = (AltitudeMode) am;
 }

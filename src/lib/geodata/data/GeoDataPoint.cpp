@@ -30,8 +30,8 @@ GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt,
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataGeometry( other ),
-    GeoDataCoordinates( other )
+  : GeoDataCoordinates( other ),
+    GeoDataGeometry( other )
 {
 }
 
