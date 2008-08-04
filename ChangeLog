@@ -1,3 +1,9 @@
+2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp:
+
+    OpenstreetMap name finder returns coordinates in degree.
+
 2008-08-04  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataStyleMap.{h|cpp}
