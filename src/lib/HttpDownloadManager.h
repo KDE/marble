@@ -28,8 +28,8 @@
 
 #include "marble_export.h"
 
-#include "HttpFetchFile.h"
-
+class HttpFetchFile;
+class HttpJob;
 class StoragePolicy;
 
 /*
