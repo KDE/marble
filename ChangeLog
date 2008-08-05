@@ -1,6 +1,12 @@
 2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpDownloadManager.cpp:
+
+    Coding style cleanup.
+
+2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpDownloadManager.cpp:
     * src/lib/HttpDownloadManager.h:
 
     Change container type of m_jobQueue from QQueue to QStack which
