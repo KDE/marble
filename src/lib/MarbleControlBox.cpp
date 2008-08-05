@@ -24,12 +24,16 @@
 #include "MarbleControlBox.h"
 
 #include <QtCore/QAbstractItemModel>
+#include <QtCore/QBuffer>
+#include <QtCore/QByteArray>
+#include <QtCore/QDataStream>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
+#include <QtNetwork/QHttp>
 
 #include "ui_MarbleControlBox.h"
 
@@ -42,13 +46,19 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
+#include "PlaceMarkContainer.h"
+#include "MarblePlacemarkModel.h"
 #include "MathHelper.h"
 #include "MapThemeSortFilterProxyModel.h"
+
+#include "GeoOnfParser.h"
+#include "GeoDataDocument.h"
+
 
 class MarbleControlBoxPrivate
 {
  public:
-
+    MarbleControlBoxPrivate();
     MarbleWidget  *m_widget;
     QString        m_searchTerm;
     bool           m_searchTriggered;
@@ -63,8 +73,14 @@ class MarbleControlBoxPrivate
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
+    QHttp                   m_osmNameFinder;
+    QBuffer                 *m_osmNameFinderResult;
 };
 
+MarbleControlBoxPrivate::MarbleControlBoxPrivate()
+    : m_osmNameFinder( "gazetteer.openstreetmap.org" )
+{
+}
 
 // ================================================================
 
@@ -135,8 +151,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
              this,                        SIGNAL (moveDown() ) );
 
-    connect(d->uiWidget.searchLineEdit,   SIGNAL( textChanged( const QString& ) ),
-            this,                         SLOT( searchLineChanged( const QString& ) ) );
+    connect( d->uiWidget.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
+             this,                        SLOT( searchLineChanged( const QString& ) ) );
+    connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
+             this,                        SLOT( searchReturnPressed() ) );
+    connect( &d->m_osmNameFinder,         SIGNAL( requestFinished( int, bool ) ),
+             this,                        SLOT( searchRequestFinished( int, bool ) ) );
 
     connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
              this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
@@ -477,12 +497,69 @@ void MarbleControlBox::resizeEvent ( QResizeEvent * )
 void MarbleControlBox::searchLineChanged(const QString &search)
 {
     d->m_searchTerm = search;
+    // if search line is empty, restore original geonames
+    if ( d->m_searchTerm.isEmpty() )
+        setLocations( d->m_widget->placeMarkModel() );
     if ( d->m_searchTriggered )
         return;
     d->m_searchTriggered = true;
     QTimer::singleShot( 0, this, SLOT( search() ) );
 }
 
+void MarbleControlBox::searchRequestFinished( int id, bool error )
+{
+    if ( error ) {
+        qDebug() << "search request" << id << "failed:" << d->m_osmNameFinder.error()
+                 << d->m_osmNameFinder.errorString();
+        return;
+    }
+    QByteArray response = d->m_osmNameFinderResult->data();
+    delete d->m_osmNameFinderResult;
+    //qDebug() << "osm name finder result:" << response;
+
+    GeoDataDocument *searchResults = parseOsmSearchResult( response );
+    populateListView( searchResults );
+}
+
+GeoDataDocument * MarbleControlBox::parseOsmSearchResult( QByteArray & result )
+{
+    // read expects an QIODevice, so use QBuffer
+    QBuffer buffer( &result );
+    buffer.open( QIODevice::ReadOnly );
+    qDebug() << "buffer size:" << buffer.size();
+
+    GeoOnfParser parser;
+    if ( !parser.read( &buffer ) ) {
+        qWarning( "Could not parse buffer!" );
+        return 0;
+    }
+    GeoDocument *document = parser.releaseDocument();
+    Q_ASSERT( document );
+    GeoDataDocument *searchResults = static_cast<GeoDataDocument *>( document );
+    return searchResults;
+}
+
+void MarbleControlBox::searchReturnPressed()
+{
+    // do nothing if search term empty or a request is being executed
+    if ( d->m_searchTerm.isEmpty() || d->m_osmNameFinder.currentId() != 0 )
+        return;
+
+    d->m_osmNameFinderResult = new QBuffer;
+    d->m_osmNameFinder.get( "/namefinder/search.xml?find=" + d->m_searchTerm,
+                            d->m_osmNameFinderResult );
+}
+
+void MarbleControlBox::populateListView( GeoDataDocument * searchResults )
+{
+    Q_ASSERT( searchResults );
+    QVector<GeoDataPlacemark*> placemarks = searchResults->placemarks();
+    qDebug() << "populateListView:" << placemarks.size() << "items";
+    PlaceMarkContainer placemarkContainer( placemarks, "OSM name finder result" );
+    MarblePlacemarkModel * model = new MarblePlacemarkModel( 0 );
+    model->addPlaceMarks( placemarkContainer );
+    setLocations( model );
+}
 
 void MarbleControlBox::search()
 {

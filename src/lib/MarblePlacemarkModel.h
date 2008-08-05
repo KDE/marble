@@ -92,7 +92,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
                                    const QVariant &value, int hits = 1,
                                    Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
- private:
     /**
      * This method is used by the PlaceMarkManager to add new
      * place marks to the model.
@@ -100,6 +99,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * Note: The model takes ownership of the place marks!
      */
     void addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious = false );
+
+ private:
 
     /**
      * This method is used by the PlaceMarkManager to clear

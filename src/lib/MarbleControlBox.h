@@ -34,9 +34,10 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-
+class GeoDataDocument;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
+class QByteArray;
 class QModelIndex;
 class QAbstractItemModel;
 class QStandardItemModel;
@@ -222,6 +223,12 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);
 
+    /// called when the OpenStreetMap name finder request is finished
+    void searchRequestFinished( int id, bool error );
+
+    /// called the Return or Enter key is pressed in the search box.
+    void searchReturnPressed();
+
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
 
@@ -235,6 +242,9 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );
+
+    GeoDataDocument * parseOsmSearchResult( QByteArray & );
+    void populateListView( GeoDataDocument * );
 
  protected:
     /**
