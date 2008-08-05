@@ -24,6 +24,7 @@
 #include <QtCore/QQueue>
 #include <QtCore/QList>
 #include <QtCore/QDebug>
+#include <QtCore/QStack>
 
 #include "marble_export.h"
 
@@ -108,7 +109,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     bool              acceptJob( HttpJob  *job );
     bool              m_downloadEnabled;
 
-    QQueue<HttpJob*>  m_jobQueue;
+    QStack<HttpJob*>  m_jobQueue;
     QList<HttpJob*>   m_activatedJobList;
     QList<HttpJob*>   m_jobBlackList;
 
