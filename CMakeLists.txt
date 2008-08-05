@@ -61,7 +61,7 @@ if(WIN32)
   else(QTONLY)
     set(data_dir ${DATA_INSTALL_DIR}/marble/data)
     set(plugin_dir ${PLUGIN_INSTALL_DIR}/plugins/marble)
-    set(cmake_modules_install_path ${DATA_INSTALL_DIR}/cmake/modules)
+    set(cmake_modules_install_path ${DATA_INSTALL_DIR}/cmake/Modules)
   endif(QTONLY)
 else(WIN32)
   if(APPLE)
@@ -97,7 +97,7 @@ else(WIN32)
     else (QTONLY)
       set(data_dir ${DATA_INSTALL_DIR}/marble/data)
       set(plugin_dir ${PLUGIN_INSTALL_DIR}/plugins/marble)
-      set(cmake_modules_install_path ${PACKAGE_ROOT_PREFIX}${DATA_INSTALL_DIR}/cmake/modules)
+      set(cmake_modules_install_path ${PACKAGE_ROOT_PREFIX}${DATA_INSTALL_DIR}/cmake/Modules)
     endif (QTONLY)
   endif(APPLE)
 endif(WIN32)
@@ -135,7 +135,7 @@ endif(WIN32)
 # Where to look first for cmake modules, 
 # before ${CMAKE_ROOT}/Modules/ is checked
 set ( CMAKE_MODULE_PATH 
-     ${CMAKE_SOURCE_DIR}/cmake/modules 
+     ${CMAKE_SOURCE_DIR}/cmake/Modules 
      ${CMAKE_CURRENT_SOURCE_DIR}
      ${CMAKE_CURRENT_SOURCE_DIR}/src
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake_find_rules
