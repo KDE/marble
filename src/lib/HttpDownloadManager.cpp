@@ -27,10 +27,6 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
 {
     m_downloadEnabled = true; //enabled for now
 
-    m_jobQueue.clear();
-    m_activatedJobList.clear();
-    m_jobBlackList.clear();
-
     m_fetchFile = new HttpFetchFile( m_storagePolicy, this );
 
     connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ),
