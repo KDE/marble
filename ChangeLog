@@ -1,5 +1,13 @@
 2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/osm-namefinder/DistanceTagHandler.cpp:
+    * src/lib/geodata/handlers/osm-namefinder/DistanceTagHandler.h:
+
+    Remove "distance" tag handlers because they are not needed for basic
+    search functionality.
+
+2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/HttpDownloadManager.h:
 
     Replace include with forward decls.
