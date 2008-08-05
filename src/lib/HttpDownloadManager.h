@@ -106,7 +106,13 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
     // Check whether the job gets processed already or whether it got blacklisted
-    bool              acceptJob( HttpJob  *job );
+    bool              acceptJob( HttpJob *job );
+
+    /**
+     * Helper method for the public addJob methods which contains shared code.
+     */
+    void              addJob( HttpJob* );
+
     bool              m_downloadEnabled;
 
     QStack<HttpJob*>  m_jobQueue;

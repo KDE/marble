@@ -1,6 +1,14 @@
 2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/HttpDownloadManager.cpp:
+    * src/lib/HttpDownloadManager.h:
+
+    Refactoring, move redundant code from the two addJob methods
+    to a addJob helper method.
+
+2008-08-05  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpDownloadManager.cpp:
 
     Coding style, don't create so many temporary objects.
 

@@ -78,16 +78,8 @@ StoragePolicy* HttpDownloadManager::storagePolicy() const
     return m_storagePolicy;
 }
 
-void HttpDownloadManager::addJob( const QString& relativeUrlString, const QString &id )
+void HttpDownloadManager::addJob( HttpJob * job )
 {
-    if ( !m_downloadEnabled )
-        return;
-
-    QUrl sourceUrl( m_serverUrl );
-    QString path = sourceUrl.path();
-    sourceUrl.setPath( path + relativeUrlString );
-
-    HttpJob *job = new HttpJob( sourceUrl, relativeUrlString, id );
     if ( acceptJob( job ) ) {
         m_jobQueue.push( job );
         job->setStatus( Pending );
@@ -98,6 +90,19 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, const QStrin
     }
 }
 
+void HttpDownloadManager::addJob( const QString& relativeUrlString, const QString &id )
+{
+    if ( !m_downloadEnabled )
+        return;
+
+    QUrl sourceUrl( m_serverUrl );
+    QString path = sourceUrl.path();
+    sourceUrl.setPath( path + relativeUrlString );
+
+    HttpJob *job = new HttpJob( sourceUrl, relativeUrlString, id );
+    addJob( job );
+}
+
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
                                   const QString &id )
 {
@@ -105,14 +110,7 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
         return;
 
     HttpJob *job = new HttpJob( sourceUrl, destFileName, id );
-    if ( acceptJob( job ) ) {
-        m_jobQueue.push( job );
-        job->setStatus( Pending );
-        activateJobs();
-    }
-    else {
-        job->deleteLater();
-    }
+    addJob( job );
 }
 
 bool HttpDownloadManager::acceptJob( HttpJob  *job )
