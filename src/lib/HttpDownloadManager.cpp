@@ -120,8 +120,9 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     // We update the initiatorId as the previous initiator
     // likely doesn't exist anymore
 
-    QStack<HttpJob*>::iterator j;
-    for ( j = m_jobQueue.begin(); j != m_jobQueue.end(); ++j ) {
+    QStack<HttpJob*>::iterator j = m_jobQueue.begin();
+    QStack<HttpJob*>::iterator const jEnd = m_jobQueue.end();
+    for (; j != jEnd; ++j ) {
         if ( job->originalDestinationFileName() == (*j)->originalDestinationFileName() ) {
             qDebug() << "Download rejected: It's in the queue already.";
             (*j)->setInitiatorId( job->initiatorId() );
@@ -129,15 +130,19 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
         }
     }
 
-    QList<HttpJob*>::iterator i;
-    for ( i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i ) {
+    QList<HttpJob*>::iterator i = m_activatedJobList.begin();
+    QList<HttpJob*>::iterator iEnd = m_activatedJobList.end();
+    for (; i != iEnd; ++i ) {
         if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
             qDebug() << "Download rejected: It's being downloaded already.";
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
         }
     }
-    for ( i = m_jobBlackList.begin(); i != m_jobBlackList.end(); ++i ) {
+
+    i = m_jobBlackList.begin();
+    iEnd = m_jobBlackList.end();
+    for (; i != iEnd; ++i ) {
         if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
             qDebug() << "Download rejected: Blacklisted.";
             (*i)->setInitiatorId( job->initiatorId() );
