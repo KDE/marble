@@ -23,6 +23,8 @@
 
 #include <limits>
 
+// FIXME: Filters are a Dataset.
+
 GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
     : m_name( name ),
       m_fileFormat( "" ),

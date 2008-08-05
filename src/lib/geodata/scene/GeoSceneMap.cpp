@@ -27,6 +27,8 @@
 
 using namespace GeoSceneAuxillaryDictionary;
 
+// FIXME: Filters are a Dataset.
+
 class GeoSceneMapPrivate
 {
   public:

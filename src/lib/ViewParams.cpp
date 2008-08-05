@@ -119,7 +119,7 @@ void ViewParams::setProjection(Projection newProjection)
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill( Qt::transparent );
+        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 }
 
@@ -199,7 +199,7 @@ void ViewParams::setRadius(int newRadius)
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill( Qt::transparent );
+        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 
 }
@@ -215,7 +215,7 @@ void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 /*
     // Repaint the background if necessary
     if ( projection() != Spherical && !currentProjection()->mapCoversViewport( viewport() ) ) {
-        canvasImage()->fill( Qt::transparent );
+        canvasImage()->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 */
 }
@@ -237,7 +237,7 @@ void ViewParams::setCanvasImage( QImage * const image )
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
-        d->m_canvasImage->fill( Qt::transparent );
+        d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
 }
 

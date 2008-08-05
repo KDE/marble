@@ -30,6 +30,7 @@ GeoSceneFilter::GeoSceneFilter( const QString& name )
 
 GeoSceneFilter::~GeoSceneFilter()
 {
+   qDeleteAll( m_palette );
 }
 
 QString GeoSceneFilter::name() const
