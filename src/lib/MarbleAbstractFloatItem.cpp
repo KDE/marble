@@ -480,7 +480,7 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
                     d->m_floatItemMoveStartPos = event->pos();
                     widget->setAttribute( Qt::WA_NoSystemBackground,  false );
                     QRegion dirtyRegion(floatItemRect.toRect());
-                    dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width(),size().height()));
+                    dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width()+1,size().height()+1));
                     widget->repaint(dirtyRegion);
                     widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
                     return true;
