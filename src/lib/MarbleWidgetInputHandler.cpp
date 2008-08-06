@@ -24,6 +24,7 @@
 #include "MarbleModel.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "MarbleAbstractFloatItem.h"
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
@@ -44,6 +45,11 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
 {
     m_widget = w;
     m_model = w->model();
+
+    foreach(MarbleAbstractFloatItem *floatItem, m_widget->floatItems())
+    {
+        m_widget->installEventFilter(floatItem);
+    }
 }
 
 
@@ -160,6 +166,17 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         dirx = 0; 
         diry = 0;
+
+        // Do not handle (and therefore eat) mouse events that occur above float items
+        foreach(MarbleAbstractFloatItem *floatItem, m_widget->floatItems())
+        {
+            QRectF widgetRect(0,0,m_widget->width(),m_widget->height());
+            QRectF floatItemRect = QRectF(floatItem->positivePosition(widgetRect), floatItem->size());
+            if (floatItemRect.contains(event->posF()))
+            {
+                return false;
+            }
+        }
 
         // emit the position string only if the signal got attached
         if ( m_positionSignalConnected ) {

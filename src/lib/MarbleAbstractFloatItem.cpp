@@ -10,7 +10,8 @@
 
 
 #include "MarbleAbstractFloatItem.h"
-
+#include "MarbleWidget.h"
+#include "MarbleMap.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QDebug>
@@ -73,6 +74,8 @@ class MarbleAbstractFloatItemPrivate
 
     QPixmap             m_cachePixmap;
     bool                m_newItemProperties;
+
+    QPoint              m_floatItemMoveStartPos;
 };
 
 QPen         MarbleAbstractFloatItemPrivate::s_pen = QPen( Qt::black );
@@ -435,6 +438,65 @@ bool MarbleAbstractFloatItem::renderOnMap( GeoPainter     *painter,
     Q_UNUSED( layer );
 
     return true;
+}
+
+
+bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
+{
+    MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
+    if (!widget)
+    {
+        return false;
+    }
+
+    // Move float items
+    bool cursorAboveFloatItem(false);
+    if ( e->type() == QEvent::MouseMove
+                || e->type() == QEvent::MouseButtonPress 
+                || e->type() == QEvent::MouseButtonRelease ) {
+        QMouseEvent *event = static_cast<QMouseEvent*>(e);
+        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),widget->height())), size());
+
+        // Click and move above a float item triggers moving the float item
+        if (floatItemRect.contains(event->posF()))
+        {
+            cursorAboveFloatItem = true;
+
+            if (e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton)
+            {
+                d->m_floatItemMoveStartPos = event->pos();
+                return true;
+            }
+
+            if (e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton)
+            {
+                const QPoint &point = event->pos();
+                QPointF position = floatItemRect.topLeft();
+                qreal newX = position.x()+point.x()-d->m_floatItemMoveStartPos.x();
+                qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
+                if (newX>=0 && newY>=0)
+                {
+                    setPosition(QPointF(newX,newY));
+                    d->m_floatItemMoveStartPos = event->pos();
+                    widget->setAttribute( Qt::WA_NoSystemBackground,  false );
+                    QRegion dirtyRegion(floatItemRect.toRect());
+                    dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width(),size().height()));
+                    widget->repaint(dirtyRegion);
+                    widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
+                    return true;
+                }
+            }
+        }
+
+        // Adjusting Cursor shape
+        if ( cursorAboveFloatItem )
+        {
+            widget->setCursor(QCursor(Qt::SizeAllCursor));
+            return true;
+        }
+    }
+
+    return false;
 }
 
 #include "MarbleAbstractFloatItem.moc"

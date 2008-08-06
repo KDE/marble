@@ -110,6 +110,9 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleAbstractLayer
 
     virtual QStringList renderPosition() const;
 
+ protected:
+    bool eventFilter( QObject *, QEvent * );
+
  private:
     Q_DISABLE_COPY( MarbleAbstractFloatItem )
     MarbleAbstractFloatItemPrivate  * const d;
