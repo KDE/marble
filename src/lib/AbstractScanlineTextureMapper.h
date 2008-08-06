@@ -199,28 +199,16 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double lat ) cons
         // trigonometric expression:
         // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
 
-        double lat2 = lat * lat;
-        double lat4 = lat2 * lat2;
-        double lat8 = lat4 * lat4;
-        double lat16 = lat8 * lat8;
+        // We are using the Horner Scheme as a polynom representation
+
+        const double lat2 = lat * lat;
 
             return - ( lat 
-        + a1 * lat2 * lat 
-        + a2 * lat4 * lat
-        + a3 * lat4 * lat2 * lat
-        + a4 * lat8 * lat
-        + a5 * lat8 * lat2 * lat
-        + a6 * lat8 * lat4 * lat
-        + a7 * lat8 * lat4 * lat2 * lat
-        + a8 * lat16 * lat
-        + a9 * lat16 * lat2 * lat
-        + a10 * lat16 * lat4 * lat
-        + a11 * lat16 * lat4 * lat2 * lat
-        + a12 * lat16 * lat8 * lat
-        + a13 * lat16 * lat8 * lat2 * lat
-        + a14 * lat16 * lat8 * lat4 * lat
-        + a15 * lat16 * lat8 * lat4 * lat2 * lat
-        + a16 * lat16 * lat16 * lat
+        + lat * lat2 * (  a1
+        + lat2 * ( a2  + lat2 * ( a3  + lat2 * ( a4  + lat2 * ( a5
+        + lat2 * ( a6  + lat2 * ( a7  + lat2 * ( a8  + lat2 * ( a9
+        + lat2 * ( a10 + lat2 * ( a11 + lat2 * ( a12 + lat2 * ( a13
+        + lat2 * ( a14 + lat2 * ( a15 + lat2 * ( a16 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )
         ) * 0.5 * m_normGlobalHeight;
     }
         if ( lat >= +1.4835 )

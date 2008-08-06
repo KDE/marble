@@ -43,6 +43,8 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
+//    qDeleteAll( d->m_layerPlugins );
+//    d->m_layerPlugins.clear();
     delete d;
 }
 
