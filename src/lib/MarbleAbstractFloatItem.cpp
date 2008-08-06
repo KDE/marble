@@ -25,7 +25,8 @@ class MarbleAbstractFloatItemPrivate
         : m_position( point ),
           m_size( size ),
           m_visible( true ), 
-          m_newItemProperties( true )
+          m_newItemProperties( true ),
+          m_floatItemMoving( false )
     {
         calculateLayout();
     }
@@ -76,6 +77,7 @@ class MarbleAbstractFloatItemPrivate
     bool                m_newItemProperties;
 
     QPoint              m_floatItemMoveStartPos;
+    bool                m_floatItemMoving;
 };
 
 QPen         MarbleAbstractFloatItemPrivate::s_pen = QPen( Qt::black );
@@ -465,31 +467,39 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
             if (e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton)
             {
                 d->m_floatItemMoveStartPos = event->pos();
+                d->m_floatItemMoving = true;
                 return true;
-            }
-
-            if (e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton)
-            {
-                const QPoint &point = event->pos();
-                QPointF position = floatItemRect.topLeft();
-                qreal newX = position.x()+point.x()-d->m_floatItemMoveStartPos.x();
-                qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
-                if (newX>=0 && newY>=0)
-                {
-                    setPosition(QPointF(newX,newY));
-                    d->m_floatItemMoveStartPos = event->pos();
-                    widget->setAttribute( Qt::WA_NoSystemBackground,  false );
-                    QRegion dirtyRegion(floatItemRect.toRect());
-                    dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width()+1,size().height()+1));
-                    widget->repaint(dirtyRegion);
-                    widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
-                    return true;
-                }
             }
         }
 
+        if (e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton
+            && ( cursorAboveFloatItem || d->m_floatItemMoving ) )
+        {
+            d->m_floatItemMoving = true;
+            const QPoint &point = event->pos();
+            QPointF position = floatItemRect.topLeft();
+            qreal newX = position.x()+point.x()-d->m_floatItemMoveStartPos.x();
+            qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
+            if (newX>=0 && newY>=0)
+            {
+                setPosition(QPointF(newX,newY));
+                d->m_floatItemMoveStartPos = event->pos();
+                widget->setAttribute( Qt::WA_NoSystemBackground,  false );
+                QRegion dirtyRegion(floatItemRect.toRect());
+                dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width()+1,size().height()+1));
+                widget->repaint(dirtyRegion);
+                widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
+                return true;
+            }
+        }
+
+        if (e->type() == QEvent::MouseButtonRelease)
+        {
+            d->m_floatItemMoving = false;
+        }
+
         // Adjusting Cursor shape
-        if ( cursorAboveFloatItem )
+        if ( cursorAboveFloatItem || d->m_floatItemMoving )
         {
             widget->setCursor(QCursor(Qt::SizeAllCursor));
             return true;

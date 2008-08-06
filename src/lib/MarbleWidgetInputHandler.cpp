@@ -377,7 +377,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         m_widget->setCursor(arrowcur[dirx+1][diry+1]);
 
-        return true;
+        return false; // let others, especially float items, still process the event
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
