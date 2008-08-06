@@ -47,7 +47,7 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if ( parentItem.represents( kmlTag_ColorStyle ) ) {
+    if ( parentItem.nodeAs<GeoDataColorStyle>() ) {
         bool ok;
         QRgb rgba = parser.readElementText().trimmed().toUInt( &ok, 16 );
         // color tag uses RRGGBBAA whereas QColor uses AARRGGBB - use a circular shift for that

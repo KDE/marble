@@ -27,6 +27,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
+#include "GeoDataDocument.h"
 
 using namespace GeoDataElementDictionary;
 
@@ -48,16 +49,25 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
     GeoDataStyle* style = 0;
 
     GeoStackItem parentItem = parser.parentElement();
-    // FIXME: it is not clear if the following is really what is needed here
-    // Valid is any Feature so maybe it is Folder | NetworkLink | Document | ScreenOverlay | GroundOverlay | Placemarks
-    if ( parentItem.nodeAs<GeoDataFeature>() ) {
+    /// for documents several styles are allowed: document wide styles are saved different!!!!!
+    if( parentItem.represents( kmlTag_Document ) ) {
         style = new GeoDataStyle;
-        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
-    }
-    // FIXME: KMLStyle can be contained in MultiGeometry as well
+        style->setStyleId( parser.attribute( "id" ).trimmed() );
+        parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Document "
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+    }
+    else if ( parentItem.nodeAs<GeoDataFeature>() ) {
+        style = new GeoDataStyle;
+        style->setStyleId( parser.attribute( "id" ).trimmed() );
+        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
+#ifdef DEBUG_TAGS
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Feature "
+             << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
+    }
+    // FIXME: KMLStyle can be contained in MultiGeometry as well
     return style;
 }

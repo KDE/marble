@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
+#include "GeoDataStyle.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataParser.h"
 
@@ -47,9 +48,10 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     GeoDataLineStyle* style = 0;
-    
+    qDebug() << "LineStyle";
     if ( parentItem.represents( kmlTag_Style ) ) {
         style = new GeoDataLineStyle();
+        parentItem.nodeAs<GeoDataStyle>()->setLineStyle( style );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << style
                  << " parent item name: " << parentItem.qualifiedName().first;

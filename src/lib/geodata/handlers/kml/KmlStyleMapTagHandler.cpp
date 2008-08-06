@@ -26,6 +26,7 @@
 #include "KmlElementDictionary.h"
 
 #include "GeoDataFeature.h"
+#include "GeoDataDocument.h"
 #include "GeoDataStyleMap.h"
 
 #include "GeoDataParser.h"
@@ -50,8 +51,17 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     
     GeoDataStyleMap* styleMap = 0;
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
+    if( parentItem.represents( kmlTag_Document ) ) {
         styleMap = new GeoDataStyleMap();
+        styleMap->setStyleId( parser.attribute( "id" ).trimmed() );
+        parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
+#ifdef DEBUG_TAGS
+        qDebug() << "Parsed <" << kmlTag_StyleMap << ">"
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+    } else if( parentItem.nodeAs<GeoDataFeature>() ) {
+        styleMap = new GeoDataStyleMap();
+        styleMap->setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_StyleMap << ">"

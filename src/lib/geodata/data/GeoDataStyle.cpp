@@ -15,14 +15,18 @@ class GeoDataStylePrivate
   public:
     GeoDataStylePrivate()
         : m_iconStyle( 0 ),
-          m_labelStyle( 0 )
+          m_labelStyle( 0 ),
+          m_lineStyle( 0 ),
+          m_polyStyle( 0 )
     {
     }
 
     GeoDataStylePrivate(const QPixmap& icon, 
                         const QFont &font, const QColor &color )
         : m_iconStyle( new GeoDataIconStyle( icon ) ),
-          m_labelStyle( new GeoDataLabelStyle( font, color ) )
+          m_labelStyle( new GeoDataLabelStyle( font, color ) ),
+          m_lineStyle( new GeoDataLineStyle( color ) ),
+          m_polyStyle( new GeoDataPolyStyle( color ) )
     {
     }
 
@@ -31,12 +35,14 @@ class GeoDataStylePrivate
     {
         delete m_labelStyle;
         delete m_iconStyle;
+        delete m_lineStyle;
+        delete m_polyStyle;
     }
 
     GeoDataIconStyle   *m_iconStyle;
     GeoDataLabelStyle  *m_labelStyle;
-    // LineStyle
-    // PolyStyle
+    GeoDataLineStyle   *m_lineStyle;
+    GeoDataPolyStyle   *m_polyStyle;
     // BalloonStyle
     // ListStyle
 };
@@ -57,9 +63,43 @@ GeoDataStyle::~GeoDataStyle()
     delete d;
 }
 
+void GeoDataStyle::setIconStyle( GeoDataIconStyle* style )
+{
+    delete d->m_iconStyle;
+    d->m_iconStyle = style;
+}
+
+void GeoDataStyle::setLineStyle( GeoDataLineStyle* style )
+{
+    delete d->m_lineStyle;
+    d->m_lineStyle = style;
+}
+
+void GeoDataStyle::setLabelStyle( GeoDataLabelStyle* style )
+{
+    delete d->m_labelStyle;
+    d->m_labelStyle = style;
+}
+
+void GeoDataStyle::setPolyStyle( GeoDataPolyStyle* style )
+{
+    delete d->m_polyStyle;
+    d->m_polyStyle = style;
+}
+
 GeoDataIconStyle* GeoDataStyle::iconStyle()
 {
     return d->m_iconStyle;
+}
+
+GeoDataLineStyle* GeoDataStyle::lineStyle()
+{
+    return d->m_lineStyle;
+}
+
+GeoDataPolyStyle* GeoDataStyle::polyStyle()
+{
+    return d->m_polyStyle;
 }
 
 GeoDataLabelStyle* GeoDataStyle::labelStyle()
@@ -73,6 +113,8 @@ void GeoDataStyle::pack( QDataStream& stream ) const
 
     d->m_iconStyle->pack( stream );
     d->m_labelStyle->pack( stream );
+    d->m_polyStyle->pack( stream );
+    d->m_lineStyle->pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
@@ -81,4 +123,6 @@ void GeoDataStyle::unpack( QDataStream& stream )
 
     d->m_iconStyle->unpack( stream );
     d->m_labelStyle->unpack( stream );
+    d->m_lineStyle->unpack( stream );
+    d->m_polyStyle->unpack( stream );
 }

@@ -25,6 +25,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 
 #include <QtCore/QDebug>
 
@@ -40,6 +41,7 @@ class GeoDataDocumentPrivate
     }
 
     QHash<QString, GeoDataStyle*> m_styleHash;
+    QHash<QString, GeoDataStyleMap*> m_styleMapHash;
 };
 
 GeoDataDocument::GeoDataDocument()
@@ -64,13 +66,35 @@ void GeoDataDocument::addStyle(GeoDataStyle* style)
     d->m_styleHash.insert(style->styleId(), style);
 }
 
-const GeoDataStyle* GeoDataDocument::style(const QString& styleId) const
+GeoDataStyle* GeoDataDocument::style(const QString& styleId)
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
     return d->m_styleHash.value(styleId);
+}
+
+QList<GeoDataStyle*> GeoDataDocument::styles() const
+{
+    return d->m_styleHash.values();
+}
+
+void GeoDataDocument::addStyleMap(GeoDataStyleMap* map)
+{
+    Q_ASSERT(map);
+    qDebug("GeoDataDocument: Add new styleMap");
+    d->m_styleMapHash.insert(map->styleId(), map);
+}
+
+GeoDataStyleMap* GeoDataDocument::styleMap(const QString& styleId)
+{
+    return d->m_styleMapHash.value(styleId);
+}
+
+QList<GeoDataStyleMap*> GeoDataDocument::styleMaps() const
+{
+    return d->m_styleMapHash.values();
 }
 
 void GeoDataDocument::pack( QDataStream& stream ) const

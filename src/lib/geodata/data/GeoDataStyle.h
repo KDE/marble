@@ -23,6 +23,8 @@
 #include "GeoDataStyleSelector.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
+#include "GeoDataPolyStyle.h"
+#include "GeoDataLineStyle.h"
 
 #include "geodata_export.h"
 
@@ -40,6 +42,8 @@ class GeoDataStylePrivate;
  *
  * @see GeoDataIconStyle
  * @see GeoDataLabelStyle
+ * @see GeoDataLineStyle
+ * @see GeoDataPolyStyle
  */
 class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 {
@@ -56,10 +60,22 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
                   const QFont &font, const QColor &color  );
     ~GeoDataStyle();
 
+    /// set the icon style
+    void setIconStyle( GeoDataIconStyle * style );
     /// Return the icon style of this style
     GeoDataIconStyle*  iconStyle();
+    /// set the label style
+    void setLabelStyle( GeoDataLabelStyle * style );
     /// Return the label style of this style
     GeoDataLabelStyle* labelStyle();
+    /// set the line style
+    void setLineStyle( GeoDataLineStyle * style );
+    /// Return the label style of this style
+    GeoDataLineStyle* lineStyle();
+    /// set the poly style
+    void setPolyStyle( GeoDataPolyStyle * style );
+    /// Return the label style of this style
+    GeoDataPolyStyle* polyStyle();
 
     /**
      * @brief Serialize the style to a stream

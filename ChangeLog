@@ -1,3 +1,19 @@
+2008-08-04  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataDocument.{h|cpp}
+    * src/lib/geodata/data/GeoDataStyle.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlColorTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlHrefTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlIconStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLabelStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLineStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlPolyStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlStyleTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlStyleMapTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlStyleUrlTagHandler.cpp
+
+    fix styles so that Marble GeoData Plugin can use them
+
 2008-08-06  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/MarbleControlBox.h:

@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
+#include "GeoDataStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataParser.h"
 
@@ -50,6 +51,7 @@ GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
     
     if ( parentItem.represents( kmlTag_Style ) ) {
         style = new GeoDataLabelStyle();
+        parentItem.nodeAs<GeoDataStyle>()->setLabelStyle( style );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LabelStyle << "> containing: " << style
                  << " parent item name: " << parentItem.qualifiedName().first;

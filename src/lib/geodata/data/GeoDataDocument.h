@@ -32,6 +32,7 @@
 #include "GeoDocument.h"
 
 class GeoDataStyle;
+class GeoDataStyleMap;
 
 class GeoDataDocumentPrivate;
 
@@ -63,8 +64,30 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    const GeoDataStyle* style(const QString& styleId) const;
+    GeoDataStyle* style(const QString& styleId);
+    
+    /**
+    * @brief dump a Vector of all styles
+    */
+    QList<GeoDataStyle*> styles() const;
 
+    /**
+    * @brief Add a stylemap to the stylemap storage
+    * @param map  the new stylemap
+    */
+    void addStyleMap(GeoDataStyleMap*);
+    
+    /**
+     * @brief Return a style in the style storage
+     * @param styleId  the id of the style
+     */
+    GeoDataStyleMap* styleMap(const QString& styleId);
+    
+    /**
+    * @brief dump a Vector of all styles
+    */
+    QList<GeoDataStyleMap*> styleMaps() const;
+    
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
