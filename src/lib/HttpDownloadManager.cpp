@@ -44,6 +44,8 @@ HttpDownloadManager::~HttpDownloadManager()
     qDeleteAll ( m_jobQueue );
     m_jobQueue.clear();
 
+    // activated jobs have to be deleted using deleteLater()
+    // because they may be connected to signals
     QList<HttpJob*>::const_iterator pos = m_activatedJobList.begin();
     QList<HttpJob*>::const_iterator const end = m_activatedJobList.end();
     for (; pos != end; ++pos ) {
@@ -89,7 +91,7 @@ void HttpDownloadManager::addJob ( const QString& relativeUrlString, const QStri
     HttpJob *job = new HttpJob ( sourceUrl, relativeUrlString, id );
     if ( acceptJob ( job ) )
     {
-        m_jobQueue.enqueue ( job );
+        m_jobQueue.push ( job );
         job->setStatus ( Pending );
         activateJobs();
     }
@@ -107,7 +109,7 @@ void HttpDownloadManager::addJob ( const QUrl& sourceUrl, const QString& destFil
     HttpJob *job = new HttpJob ( sourceUrl, destFileName, id );
     if ( acceptJob ( job ) )
     {
-        m_jobQueue.enqueue ( job );
+        m_jobQueue.push ( job );
         job->setStatus ( Pending );
         activateJobs();
     }
@@ -119,20 +121,21 @@ void HttpDownloadManager::addJob ( const QUrl& sourceUrl, const QString& destFil
 
 bool HttpDownloadManager::acceptJob ( HttpJob  *job )
 {
-    QList<HttpJob*>::iterator i;
-
     // We update the initiatorId as the previous initiator
     // likely doesn't exist anymore
 
-    for ( i = m_jobQueue.begin(); i != m_jobQueue.end(); ++i )
+    QStack<HttpJob*>::iterator j;
+    for ( j = m_jobQueue.begin(); j != m_jobQueue.end(); ++j )
     {
-        if ( job->originalDestinationFileName() == ( *i )->originalDestinationFileName() )
+        if ( job->originalDestinationFileName() == ( *j )->originalDestinationFileName() )
         {
             qDebug() << "Download rejected: It's in the queue already.";
-            ( *i )->setInitiatorId ( job->initiatorId() );
+            ( *j )->setInitiatorId ( job->initiatorId() );
             return false;
         }
     }
+
+    QList<HttpJob*>::iterator i;
     for ( i = m_activatedJobList.begin(); i != m_activatedJobList.end(); ++i )
     {
         if ( job->originalDestinationFileName() == ( *i )->originalDestinationFileName() )
@@ -175,7 +178,7 @@ void HttpDownloadManager::activateJobs()
     while ( m_jobQueue.count() > 0
             && m_activatedJobList.count() < m_activatedJobsLimit )
     {
-        HttpJob  *job = m_jobQueue.dequeue();
+        HttpJob  *job = m_jobQueue.pop();
 
 //        qDebug() << "On activatedJobList: " << job->sourceUrl().toString() << job->destinationFileName();
         m_activatedJobList.push_back ( job );

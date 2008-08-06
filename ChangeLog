@@ -1,3 +1,15 @@
+2008-08-06  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/HttpDownloadManager.cpp:
+    * src/lib/HttpDownloadManager.h:
+
+    Change container type of m_jobQueue from QQueue to QStack which
+    has the advantage that tiles of the current visited area are
+    loaded first.
+    This is noticable if you scroll and zoom a lot or if the internet
+    connection is slower than DSL like GPRS/EDGE or even 3G GSM.
+    Backported from trunk.
+
 2008-08-01  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/CMakeLists.txt
