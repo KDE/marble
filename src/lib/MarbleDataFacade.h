@@ -32,7 +32,9 @@
 #include "global.h"
 
 class MarbleModel;
+class MarbleGeoDataModel;
 class MarbleDataFacadePrivate;
+class GeoDataDocument;
 
 
 /**
@@ -58,7 +60,7 @@ class MARBLE_EXPORT MarbleDataFacade
 
     QDateTime dateTime() const;
 
-
+    MarbleGeoDataModel* geoDataModel();
  private:
     MarbleDataFacadePrivate  * const d;
 };

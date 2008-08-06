@@ -84,6 +84,47 @@ class GeoPainterPrivate
             }
         }
     }
+    
+    void createPolygonsFromVector( QVector<GeoDataCoordinates*> points, 
+                                   QVector<QPolygon *> &polygons, 
+                                   bool isGeoProjected = false )
+    {
+        int x, y;
+        bool previousGlobeHidesPoint;
+        AbstractProjection *projection = m_viewport->currentProjection();
+
+        if ( isGeoProjected == false ) {
+
+            QPolygon  *polygon = new QPolygon;
+
+            Q_FOREACH( GeoDataCoordinates* itPoint, points ) {
+                bool globeHidesPoint;
+                bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
+
+                if ( itPoint == points.first() ){
+                    previousGlobeHidesPoint = globeHidesPoint;
+                }
+
+                if ( globeHidesPoint && !previousGlobeHidesPoint ) {
+                    polygons.append( polygon );
+                    polygon = new QPolygon;
+                }
+
+                if ( !globeHidesPoint ) {
+                    polygon->append( QPoint( x, y ) );
+                }
+
+                previousGlobeHidesPoint = globeHidesPoint;
+            }
+
+            if ( polygon->size() > 1 ){
+                polygons.append( polygon );
+            }
+            else {
+                delete polygon;
+            }
+        }    
+    }
 
     void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
     {
@@ -357,14 +398,28 @@ void GeoPainter::drawPolyline ( const GeoDataCoordinates * points, int pointCoun
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( const GeoDataCoordinates * points, int pointCount, 
-			       Qt::FillRule fillRule, 
+void GeoPainter::drawPolyline ( QVector<GeoDataCoordinates*> points, 
 			       bool isGeoProjected )
+{
+    QVector<QPolygon*> polygons;
+    d->createPolygonsFromVector( points, polygons, isGeoProjected );
+
+    foreach( QPolygon* itPolygon, polygons ) {
+        // Using QPainter instead of ClipPainter until some bugs are fixed.
+        QPainter::drawPolyline( *itPolygon );
+    }
+
+    qDeleteAll( polygons );
+}
+
+void GeoPainter::drawPolygon ( QVector<GeoDataCoordinates*> points,
+                               Qt::FillRule fillRule, 
+                               bool isGeoProjected )
 {
     Q_UNUSED( fillRule );
 
     QVector<QPolygon*> polygons;
-    d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );
+    d->createPolygonsFromVector( points, polygons, isGeoProjected );
 
     foreach( QPolygon* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.

@@ -115,8 +115,10 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected = false );
 
     void drawPolygon ( const GeoDataCoordinates * points, int pointCount, Qt::FillRule fillRule = Qt::OddEvenFill, bool isGeoProjected = false );
+    void drawPolygon ( QVector<GeoDataCoordinates*> points, Qt::FillRule fillRule = Qt::OddEvenFill, bool isGeoProjected = false );
 
     void drawPolyline ( const GeoDataCoordinates * points, int pointCount, bool isGeoProjected = false );
+    void drawPolyline ( QVector<GeoDataCoordinates*> points, bool isGeoProjected = false );
 
     void drawRect ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected = false );
     void drawRoundRect ( const GeoDataCoordinates & centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );

@@ -1,4 +1,15 @@
-2008-08-04  Patrick Spendrin    <ps_ml@gmx.de>
+2008-08-06  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/CMakeLists.txt
+    * src/lib/GeoPainter.{h|cpp}
+    * src/lib/MarbleDataFacade.{h|cpp}
+    * src/lib/MarbleGeoDataModel.{h|cpp}
+
+    adjust GeoPainter to make direct painting of QVectors possible
+    expose a GeoDataDocument as geoDataRoot through the Facade
+    add a new data model for the geodata api
+
+2008-08-06  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataDocument.{h|cpp}
     * src/lib/geodata/data/GeoDataStyle.{h|cpp}

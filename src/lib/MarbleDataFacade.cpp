@@ -12,24 +12,39 @@
 
 #include <cmath>
 
+// just for now:
+#include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QDebug>
+
 #include "global.h"
 #include "MarbleModel.h"
+#include "MarbleGeoDataModel.h"
+#include "GeoDataDocument.h"
+#include "GeoDataParser.h"
+
 
 
 class MarbleDataFacadePrivate
 {
  public:
-    MarbleDataFacadePrivate( MarbleModel *model )
-        : m_model( model )
+    MarbleDataFacadePrivate( MarbleModel *model, MarbleGeoDataModel *gmodel )
+        : m_model( model ), m_geodatamodel( gmodel )
     {
     }
 
+    ~MarbleDataFacadePrivate()
+    {
+        delete m_geodatamodel;
+    }
+
     MarbleModel  *m_model;
+    MarbleGeoDataModel *m_geodatamodel;
 };
 
 
 MarbleDataFacade::MarbleDataFacade( MarbleModel *model )
-    : d( new MarbleDataFacadePrivate( model ) )
+    : d( new MarbleDataFacadePrivate( model, new MarbleGeoDataModel() ) )
 {
 }
 
@@ -43,5 +58,9 @@ QDateTime MarbleDataFacade::dateTime() const
     return d->m_model->dateTime()->datetime();
 }
 
+MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
+{
+    return d->m_geodatamodel;
+}
 
 #include "MarbleDataFacade.moc"
