@@ -277,6 +277,18 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap -> setPen( m_landPen );
         m_vectorMap -> setBrush( Qt::NoBrush );
         m_vectorMap -> paintMap( painter, antialiased );
+
+        // Lakes
+        m_vectorMap -> setzBoundingBoxLimit( 0.95 );
+        m_vectorMap -> setzPointLimit( 0.98 ); 
+
+        m_vectorMap -> createFromPntMap( m_lakes, viewParams->viewport() );
+        m_vectorMap -> setPen( m_landPen );
+        m_vectorMap -> setBrush( Qt::NoBrush );
+        m_vectorMap -> paintMap( painter, antialiased );
+
+        m_vectorMap -> createFromPntMap( m_lakeislands, viewParams->viewport() );
+        m_vectorMap -> paintMap( painter, antialiased );
     }
 
     bool showWaterbodies, showRivers;

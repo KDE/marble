@@ -49,7 +49,7 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     : QObject( parent ),
       d( new LayerManagerPrivate( dataFacade) )
 {
-    d->m_pluginManager = new PluginManager();
+    d->m_pluginManager = new PluginManager( this );
 
     // Just for initial testing
     d->m_layerPlugins = d->m_pluginManager->layerPlugins();
@@ -86,9 +86,11 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     ViewportParams* viewport = viewParams->viewport();
 
     foreach( MarbleAbstractLayer *layerPlugin,  d->m_layerPlugins ) {
-        if ( layerPlugin && layerPlugin->enabled() && layerPlugin->visible() )
-        {
-            layerPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
+        if ( layerPlugin ){
+            if ( layerPlugin->enabled() && layerPlugin->visible() )
+            {
+                layerPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
+            }
         }
     }
 
@@ -98,7 +100,6 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
         if ( layerPlugin->renderPosition().contains("FLOAT_ITEM") )
         {
             MarbleAbstractFloatItem *floatItem = dynamic_cast<MarbleAbstractFloatItem *>(layerPlugin);
-
             if ( floatItem && floatItem->enabled() && layerPlugin->visible() )
             {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );

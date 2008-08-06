@@ -122,11 +122,6 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     double gmst = siderealTime( currentDateTime );
     double skyRotationAngle = gmst / 12.0 * M_PI;
 
-//    double gmst_hh = (int)( gmst );
-//    double gmst_mm = (gmst - gmst_hh) * 60.0;
-//    qDebug() << "Sidereal Time" << gmst_hh << ":" << gmst_mm;
-//    qDebug() << "sky rotation angle: " << hourAngle;
-
     double centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 

@@ -119,7 +119,7 @@ MarbleModel::MarbleModel( QObject *parent )
       d( new MarbleModelPrivate( this ) )
 {
     d->m_dataFacade = new MarbleDataFacade( this );
-    d->m_layerManager = new LayerManager( d->m_dataFacade );
+    d->m_layerManager = new LayerManager( d->m_dataFacade, this );
 
     // FIXME: more on the spot update names and API
     connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
@@ -192,7 +192,7 @@ MarbleModel::MarbleModel( QObject *parent )
 
 MarbleModel::~MarbleModel()
 {
-    qDebug() << "MarbleModel::~MarbleModel";
+//    qDebug() << "MarbleModel::~MarbleModel";
     
     delete d->m_texmapper;
 
@@ -209,7 +209,11 @@ MarbleModel::~MarbleModel()
     delete d->m_timer;
     delete d->m_layerManager;
     delete d->m_dataFacade;
+    delete d->m_layerDecorator;
+    delete d->m_sunLocator;
+    delete d->m_dateTime;
     delete d;
+    qDebug() << "Model deleted:" << this;
 }
 
 bool MarbleModel::showGps() const
@@ -623,7 +627,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                                viewParams->canvasImage()->size(),
                                viewParams,
                                viewParams->viewport()->boundingBox() );
-
     d->m_layerManager->renderLayers( painter, viewParams );
 }
 
@@ -712,6 +715,8 @@ void MarbleModel::update()
 
 ExtDateTime* MarbleModel::dateTime() const
 {
+//    qDebug() << "In dateTime, model:" << this;
+//    qDebug() << d << ":" << d->m_dateTime;
     return d->m_dateTime;
 }
 
