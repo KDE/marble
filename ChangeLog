@@ -1,5 +1,18 @@
 2008-08-06  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/plugins/marble/CMakeLists.txt
+    * src/plugins/marble/geodata/CMakeLists.txt
+    * src/plugins/marble/geodata/MarbleGeoDataPlugin.{h|cpp}
+    * src/plugins/marble/geodata/czech.kml
+    * src/plugins/marble/geodata/germany.kml
+    * src/plugins/marble/geodata/poland.kml
+
+    add MarbleGeoDataPlugin
+    this plugin dumps the content of KML file to the screen
+    (as far as possible)
+
+2008-08-06  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/CMakeLists.txt
     * src/lib/GeoPainter.{h|cpp}
     * src/lib/MarbleDataFacade.{h|cpp}
