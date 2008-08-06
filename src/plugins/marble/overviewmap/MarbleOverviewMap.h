@@ -58,6 +58,9 @@ class MarbleOverviewMap : public MarbleAbstractFloatItem
 
     bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
 
+ protected:
+    bool eventFilter( QObject *object, QEvent *e );
+
  private:
     QSvgRenderer  *m_svgobj;
     QPixmap        m_worldmap;

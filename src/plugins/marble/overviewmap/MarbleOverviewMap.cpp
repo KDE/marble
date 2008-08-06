@@ -13,12 +13,15 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
+#include <QtGui/QCursor>
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
+#include "MarbleWidget.h"
+#include "MarbleMap.h"
 
 
 MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
@@ -93,6 +96,7 @@ bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
 
 bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
+    Q_UNUSED(layer);
     painter->save();
 
     painter->autoMapQuality();
@@ -172,6 +176,49 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     painter->restore();
 
     return true;
+}
+
+bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
+{
+    MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
+    if (!widget)
+    {
+        return MarbleAbstractFloatItem::eventFilter(object,e);
+    }
+
+    bool cursorAboveFloatItem(false);
+    if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
+        QMouseEvent *event = static_cast<QMouseEvent*>(e);
+        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),widget->height())), size());
+
+        if (floatItemRect.contains(event->posF()))
+        {
+            cursorAboveFloatItem = true;
+
+            // Double click triggers recentering the map at the specified position
+            if (e->type() == QEvent::MouseButtonDblClick)
+            {
+                QRectF mapRect( contentRect() );
+                QPointF pos = event->pos() - floatItemRect.topLeft() - QPointF(padding(),padding());
+
+                double lon = ( pos.x() - mapRect.width() / 2.0 ) / mapRect.width() * 360.0 ;
+                double lat = ( mapRect.height() / 2.0 - pos.y() ) / mapRect.height() * 180.0;
+                widget->centerOn(lon,lat,true);
+
+                return true;
+            }
+
+        }
+
+        if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove && !event->buttons() & Qt::LeftButton)
+        {
+            // Cross hair cursor when moving above the float item without pressing a button
+            widget->setCursor(QCursor(Qt::CrossCursor));
+            return true;
+        }
+    }
+
+    return MarbleAbstractFloatItem::eventFilter(object,e);
 }
 
 Q_EXPORT_PLUGIN2(MarbleOverviewMap, MarbleOverviewMap)
