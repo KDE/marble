@@ -5,27 +5,31 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Patrick Spendrin      <ps_ml@gmx.de>"
 //
 
 //
-// This class is a test plugin.
+// This class is the geodata layer plugin.
 //
 
-#ifndef MARBLETESTPLUGIN_H
-#define MARBLETESTPLUGIN_H
+#ifndef MARBLEGEODATAPLUGIN_H
+#define MARBLEGEODATAPLUGIN_H
 
 #include <QtCore/QObject>
+#include <QtGui/QBrush>
+#include <QtGui/QPen>
 
 #include "MarbleAbstractLayer.h"
 
+
 class GeoDataGeometry;
 class GeoDataFeature;
+class GeoDataDocument;
 
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarbleGeoDataPlugin
+ * MarbleGeoDataPlugin is the beginning of a 
  */
 
 class MarbleGeoDataPlugin : public MarbleAbstractLayer
@@ -33,10 +37,14 @@ class MarbleGeoDataPlugin : public MarbleAbstractLayer
     Q_OBJECT
     Q_INTERFACES( MarbleLayerInterface )
 
+    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
+    void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, QString styleUrl );
     bool renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature );
-    QColor m_currentColor;
 
+    QBrush m_currentBrush;
+    QPen m_currentPen;
+    
  public:
     QStringList backendTypes() const;
 

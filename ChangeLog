@@ -1,3 +1,15 @@
+2008-08-07  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/plugins/marble/geodata/MarbleGeoDataPlugin.{h|cpp}
+    * src/plugins/marble/geodata/Rabet.kml
+    * src/lib/geodata/data/GeoDataLineStyle.cpp
+    * src/lib/geodata/handlers/kml/KmlColorTagHandler.cpp
+
+    fix opacity and line width
+    Note: Look at the town where I live and try to find the street in which
+    I live - even if I painted it in a strange colour.
+    Note: The colours still don't match GE but maybe this is just an illusion
+    
 2008-08-06  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/plugins/marble/CMakeLists.txt

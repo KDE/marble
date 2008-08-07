@@ -14,7 +14,7 @@
 class GeoDataLineStylePrivate
 {
   public:
-    GeoDataLineStylePrivate()
+    GeoDataLineStylePrivate() : m_width( 1.0 )
     {
     }
 

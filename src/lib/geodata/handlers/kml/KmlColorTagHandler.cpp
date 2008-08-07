@@ -52,10 +52,11 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
         QRgb rgba = parser.readElementText().trimmed().toUInt( &ok, 16 );
         // color tag uses RRGGBBAA whereas QColor uses AARRGGBB - use a circular shift for that
         // be aware that QRgb needs to be a typedef for 32 bit UInt for this to work properly
-        rgba = ( rgba << 24 ) | ( rgba >> 8 );
+        //        rgba = ( rgba << 24 ) | ( rgba >> 8 );
+        // after checking against GE it seems as if this isn't needed
         if( ok ) {
             parentItem.nodeAs<GeoDataColorStyle>()->setColor( 
-            QColor::fromRgb( rgba ) );
+            QColor::fromRgba( rgba ) );
         }
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
