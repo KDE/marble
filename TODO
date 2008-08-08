@@ -92,7 +92,7 @@ Features:
     - Load tiles                                                        done
     - Display tiles                                                     done
     - Expiration of tiles                                               done
-    - Searching for cities and streets                                  --
+    - Searching for cities and streets                                  done
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
  * A more general projection system					INGE
