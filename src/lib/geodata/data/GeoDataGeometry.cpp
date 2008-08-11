@@ -6,8 +6,8 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
-// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
 

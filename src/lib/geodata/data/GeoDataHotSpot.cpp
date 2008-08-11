@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
-// Copyright 2008      Inge Wallin <inge@lysator.liu.se>"
+// Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
 
