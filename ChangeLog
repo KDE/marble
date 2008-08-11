@@ -1,5 +1,12 @@
 2008-08-12  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/data/GeoDataHotSpot.h:
+    * src/lib/geodata/data/GeoDataCoordinates.h:
+
+    Clean up.
+
+2008-08-12  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp:
 
     Remove commented out code.

@@ -47,7 +47,8 @@ class GeoDataCoordinatesPrivate;
  * @see GeoDataPoint
 */
 
-class GEODATA_EXPORT GeoDataCoordinates {
+class GEODATA_EXPORT GeoDataCoordinates
+{
 
  public:
     /**
@@ -93,8 +94,9 @@ class GEODATA_EXPORT GeoDataCoordinates {
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      * @param _detail detail (default: 0)
      */
-    GeoDataCoordinates( double _lon, double _lat, double alt = 0,
-             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian, int _detail = 0 );
+    GeoDataCoordinates( double lon, double lat, double alt = 0,
+                        GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian,
+                        int detail = 0 );
 
     virtual ~GeoDataCoordinates();
 
@@ -106,12 +108,12 @@ class GEODATA_EXPORT GeoDataCoordinates {
     * @brief set the altitude of the Point
     * @param altitude altitude
     */
-    void   setAltitude( const double altitude );
+    void setAltitude( const double altitude );
 
     /**
     * @brief return the detail flag
     */
-    int detail()   const;
+    int detail() const;
     /**
     * @brief set the detail flag
     * @param det detail
@@ -126,8 +128,8 @@ class GEODATA_EXPORT GeoDataCoordinates {
     * @param _unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
-    void set(double _lon, double _lat, double alt = 0,
-             GeoDataCoordinates::Unit _unit = GeoDataCoordinates::Radian );
+    void set( double lon, double lat, double alt = 0,
+              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
     * @brief use this function to get the longitude and latitude with one
@@ -150,6 +152,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     * @brief return Notation of string representation
     */
     static GeoDataCoordinates::Notation defaultNotation();
+
     /**
     * @brief set the Notation of the string representation
     * @param notation Notation
@@ -180,6 +183,7 @@ class GEODATA_EXPORT GeoDataCoordinates {
     * this is a convenience function which uses the default notation
     */
     QString toString();
+
     /**
     * @brief return a string with the notation given by notation
     * @param notation set a notation different from the default one

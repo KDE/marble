@@ -32,7 +32,8 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
     const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
 
-    void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ), Units xunits = Fraction, Units yunits = Fraction );
+    void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
+                     Units xunits = Fraction, Units yunits = Fraction );
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
