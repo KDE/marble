@@ -76,53 +76,6 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString name = parser.attribute( attr_name ).trimmed();
     named->setName( name );
 
-    // FIXME: attribute category
-//     const QString category = parser.attribute( attr_category ).trimmed();
-//     named->setCategory( category );
-
-    // FIXME: attribute info
-//     const QString info = parser.attribute( attr_info ).trimmed();
-//     named->setInfo( info );
-
-    // FIXME: attribute rank
-//     int rank = 0;
-//     const QString rankStr = parser.attribute( attr_rank ).trimmed();
-//     if ( !rankStr.isEmpty() )
-//         rank = rankStr.toInt();
-//     named->setRank( rank );
-
-    // FIXME: attribute is_in
-//     const QString is_in = parser.attribute( attr_is_in ).trimmed();
-//     named->setIsIn( is_in );
-
-    // FIXME: attribute region
-//     int region = 0;
-//     const QString regionStr = parser.attribute( attr_region ).trimmed();
-//     if ( !regionStr.isEmpty() )
-//         region = regionStr.toInt();
-//     named->setRegion( region );
-
-    // FIXME: attribute distance
-//     double distance = 0.0;
-//     const QString distanceStr = parser.attribute( attr_distance ).trimmed();
-//     if ( !distanceStr.isEmpty() )
-//         distance = distanceStr.toDouble();
-//     named->setDistanceKm( distance );
-
-    // FIXME: attribute approxdistance
-//     int approxDistanceKm = 0;
-//     const QString approxDistanceStr = parser.attribute( attr_approxdistance ).trimmed();
-//     if ( !approxDistanceStr.isEmpty() )
-//         approxDistanceKm = approxDistanceStr.toInt();
-//     named->setApproxDistanceKm( approxDistanceKm );
-
-    // FIXME: attribute direction
-//     int direction = 0;
-//     const QString directionStr = parser.attribute( attr_direction ).trimmed();
-//     if ( !directionStr.isEmpty() )
-//         direction = directionStr.toInt();
-//     named->setDirection( direction );
-
     // attribute zoom
     int suggestedZoomLevel = 0;
     const QString zoomStr = parser.attribute( attr_zoom ).trimmed();
