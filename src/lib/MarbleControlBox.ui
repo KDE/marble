@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>236</width>
+    <width>285</width>
     <height>630</height>
    </rect>
   </property>
@@ -30,24 +30,18 @@
   <property name="layoutDirection" >
    <enum>Qt::LeftToRight</enum>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_4" >
    <property name="spacing" >
-    <number>6</number>
-   </property>
-   <property name="leftMargin" >
     <number>0</number>
    </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
     <widget class="QToolBox" name="toolBox" >
+     <property name="enabled" >
+      <bool>true</bool>
+     </property>
      <property name="minimumSize" >
       <size>
        <width>150</width>
@@ -58,15 +52,18 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>5</number>
+     </property>
+     <property name="tabSpacing" >
+      <number>4</number>
      </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>226</width>
-        <height>465</height>
+        <width>275</width>
+        <height>434</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -76,36 +73,15 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
+       <property name="margin" >
+        <number>5</number>
        </property>
        <item>
         <layout class="QGridLayout" >
-         <property name="leftMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <property name="horizontalSpacing" >
-          <number>6</number>
-         </property>
-         <property name="verticalSpacing" >
+         <property name="spacing" >
           <number>6</number>
          </property>
          <item row="5" column="0" >
@@ -203,16 +179,7 @@
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
          <item>
@@ -223,7 +190,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::MinimumExpanding</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>0</width>
              <height>10</height>
@@ -233,22 +200,10 @@
          </item>
          <item>
           <layout class="QGridLayout" >
-           <property name="leftMargin" >
+           <property name="margin" >
             <number>0</number>
            </property>
-           <property name="topMargin" >
-            <number>0</number>
-           </property>
-           <property name="rightMargin" >
-            <number>0</number>
-           </property>
-           <property name="bottomMargin" >
-            <number>0</number>
-           </property>
-           <property name="horizontalSpacing" >
-            <number>6</number>
-           </property>
-           <property name="verticalSpacing" >
+           <property name="spacing" >
             <number>6</number>
            </property>
            <item row="5" column="1" >
@@ -263,7 +218,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/zoom-out.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
              </property>
              <property name="shortcut" >
               <string>-</string>
@@ -282,7 +238,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/go-home.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/go-home.png</normaloff>:/icons/go-home.png</iconset>
              </property>
              <property name="shortcut" >
               <string>Home</string>
@@ -301,7 +258,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-right.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
              </property>
             </widget>
            </item>
@@ -317,7 +275,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-up.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/arrow-up.png</normaloff>:/icons/arrow-up.png</iconset>
              </property>
             </widget>
            </item>
@@ -373,7 +332,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/zoom-in.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
              </property>
              <property name="shortcut" >
               <string>+</string>
@@ -392,7 +352,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-down.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/arrow-down.png</normaloff>:/icons/arrow-down.png</iconset>
              </property>
             </widget>
            </item>
@@ -408,7 +369,8 @@
               <string>...</string>
              </property>
              <property name="icon" >
-              <iconset resource="../marble.qrc" >:/icons/arrow-left.png</iconset>
+              <iconset resource="../../../../marble/src/marble.qrc" >
+               <normaloff>:/icons/arrow-left.png</normaloff>:/icons/arrow-left.png</iconset>
              </property>
             </widget>
            </item>
@@ -422,7 +384,7 @@
            <property name="sizeType" >
             <enum>QSizePolicy::MinimumExpanding</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>0</width>
              <height>10</height>
@@ -467,8 +429,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>94</width>
-        <height>78</height>
+        <width>275</width>
+        <height>434</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -478,17 +440,8 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
+       <property name="margin" >
+        <number>5</number>
        </property>
        <item>
         <widget class="MarbleLegendBrowser" name="marbleLegendBrowser" >
@@ -504,8 +457,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>226</width>
-        <height>465</height>
+        <width>275</width>
+        <height>434</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -515,17 +468,8 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
+       <property name="margin" >
+        <number>5</number>
        </property>
        <item>
         <widget class="QLabel" name="projectionLabel" >
@@ -547,7 +491,8 @@
            <string>Globe</string>
           </property>
           <property name="icon" >
-           <iconset resource="../marble.qrc" >:/icons/map-globe.png</iconset>
+           <iconset resource="../../../../marble/src/marble.qrc" >
+            <normaloff>:/icons/map-globe.png</normaloff>:/icons/map-globe.png</iconset>
           </property>
          </item>
          <item>
@@ -555,7 +500,8 @@
            <string>Flat Map</string>
           </property>
           <property name="icon" >
-           <iconset resource="../marble.qrc" >:/icons/map-flat.png</iconset>
+           <iconset resource="../../../../marble/src/marble.qrc" >
+            <normaloff>:/icons/map-flat.png</normaloff>:/icons/map-flat.png</iconset>
           </property>
          </item>
          <item>
@@ -563,7 +509,8 @@
            <string>Mercator</string>
           </property>
           <property name="icon" >
-           <iconset resource="../marble.qrc" >:/icons/map-mercator.png</iconset>
+           <iconset resource="../../../../marble/src/marble.qrc" >
+            <normaloff>:/icons/map-mercator.png</normaloff>:/icons/map-mercator.png</iconset>
           </property>
          </item>
         </widget>
@@ -576,7 +523,7 @@
          <property name="sizeType" >
           <enum>QSizePolicy::Fixed</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>10</height>
@@ -620,8 +567,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>94</width>
-        <height>34</height>
+        <width>275</width>
+        <height>434</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -631,17 +578,8 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
+       <property name="margin" >
+        <number>5</number>
        </property>
        <item>
         <widget class="QFrame" name="currentLocationFrame" >
@@ -661,16 +599,7 @@
           <property name="spacing" >
            <number>6</number>
           </property>
-          <property name="leftMargin" >
-           <number>0</number>
-          </property>
-          <property name="topMargin" >
-           <number>0</number>
-          </property>
-          <property name="rightMargin" >
-           <number>0</number>
-          </property>
-          <property name="bottomMargin" >
+          <property name="margin" >
            <number>0</number>
           </property>
           <item>
@@ -688,16 +617,7 @@
             <property name="spacing" >
              <number>0</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -747,7 +667,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>0</width>
                 <height>20</height>
@@ -772,16 +692,7 @@
             <property name="spacing" >
              <number>0</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -831,7 +742,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>0</width>
                 <height>20</height>
@@ -853,16 +764,7 @@
             <property name="spacing" >
              <number>6</number>
             </property>
-            <property name="leftMargin" >
-             <number>0</number>
-            </property>
-            <property name="topMargin" >
-             <number>0</number>
-            </property>
-            <property name="rightMargin" >
-             <number>0</number>
-            </property>
-            <property name="bottomMargin" >
+            <property name="margin" >
              <number>0</number>
             </property>
             <item>
@@ -870,16 +772,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -887,7 +780,7 @@
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -909,16 +802,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -926,7 +810,7 @@
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -948,16 +832,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -965,7 +840,7 @@
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -990,16 +865,7 @@
               <property name="spacing" >
                <number>6</number>
               </property>
-              <property name="leftMargin" >
-               <number>0</number>
-              </property>
-              <property name="topMargin" >
-               <number>0</number>
-              </property>
-              <property name="rightMargin" >
-               <number>0</number>
-              </property>
-              <property name="bottomMargin" >
+              <property name="margin" >
                <number>0</number>
               </property>
               <item>
@@ -1007,7 +873,7 @@
                 <property name="orientation" >
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" >
+                <property name="sizeHint" stdset="0" >
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -1034,7 +900,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>0</height>
@@ -1052,8 +918,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>184</width>
-        <height>116</height>
+        <width>275</width>
+        <height>434</height>
        </rect>
       </property>
       <attribute name="label" >
@@ -1063,17 +929,8 @@
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
+       <property name="margin" >
+        <number>5</number>
        </property>
        <item>
         <widget class="QListView" name="m_fileView" />
@@ -1083,16 +940,7 @@
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
          <item>
@@ -1100,7 +948,7 @@
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>40</width>
              <height>20</height>
@@ -1132,6 +980,164 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="Seite" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>275</width>
+        <height>434</height>
+       </rect>
+      </property>
+      <attribute name="label" >
+       <string>Current Location</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3" >
+       <item>
+        <widget class="QCheckBox" name="navigationCheckBox" >
+         <property name="text" >
+          <string>Navigation mode</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="speedGroupBox" >
+         <property name="title" >
+          <string>Speed</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout" >
+          <item>
+           <widget class="QLabel" name="speedLabel" >
+            <property name="minimumSize" >
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="frameShape" >
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow" >
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <property name="text" >
+             <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">000,0 km/h&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+            </property>
+            <property name="wordWrap" >
+             <bool>true</bool>
+            </property>
+            <property name="margin" >
+             <number>7</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="positionGroupBox" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Position</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2" >
+          <item>
+           <widget class="QLabel" name="positionLabel" >
+            <property name="minimumSize" >
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="frameShape" >
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow" >
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <property name="text" >
+             <string>&lt;b>Unidentified Position&lt;/b></string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="wordWrap" >
+             <bool>true</bool>
+            </property>
+            <property name="margin" >
+             <number>7</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="longitudeLabel" >
+            <property name="text" >
+             <string>Longitude</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="longitudeValue" >
+            <property name="text" >
+             <string>+00°00'00" E</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="latitudeLabel" >
+            <property name="text" >
+             <string>Latitude</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="latitudeValue" >
+            <property name="text" >
+             <string>+00°00'00" N</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="altitudeLabel" >
+            <property name="text" >
+             <string>Altitude</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="altitudeValue" >
+            <property name="text" >
+             <string>000 m</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -1154,8 +1160,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../marble.qrc" />
-  <include location="libmarble.qrc" />
+  <include location="../../../../marble/src/marble.qrc" />
+  <include location="../../../../marble/src/lib/libmarble.qrc" />
  </resources>
  <connections/>
 </ui>
