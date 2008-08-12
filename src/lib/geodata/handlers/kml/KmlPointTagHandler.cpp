@@ -28,6 +28,9 @@
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Point )
@@ -61,4 +64,6 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
         return parentItem.nodeAs<GeoDataMultiGeometry>();
     }
     return 0;
+}
+
 }

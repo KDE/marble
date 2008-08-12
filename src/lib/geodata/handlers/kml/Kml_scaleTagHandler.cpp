@@ -32,6 +32,9 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( scale )
@@ -67,4 +70,6 @@ GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
     }
     return 0;
+}
+
 }

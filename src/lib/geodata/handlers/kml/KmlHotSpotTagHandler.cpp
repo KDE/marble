@@ -28,6 +28,9 @@
 #include "GeoDataHotSpot.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( hotSpot )
@@ -70,4 +73,6 @@ GeoNode* KmlhotSpotTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
     }
     return 0;
+}
+
 }

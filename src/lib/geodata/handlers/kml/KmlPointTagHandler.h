@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlPointTagHandler : public GeoTagHandler {
 public:
     KmlPointTagHandler();
@@ -31,5 +34,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlPointTagHandler_h

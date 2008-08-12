@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlouterBoundaryIsTagHandler : public GeoTagHandler {
 public:
     KmlouterBoundaryIsTagHandler();
@@ -31,5 +34,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlouterBoundaryIsTagHandler_h

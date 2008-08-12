@@ -27,6 +27,9 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( fill )
@@ -57,4 +60,6 @@ GeoNode* KmlfillTagHandler::parse( GeoParser& parser ) const
     }
 
     return 0;
+}
+
 }

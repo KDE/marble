@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlcolorModeTagHandler : public GeoTagHandler {
 public:
     KmlcolorModeTagHandler();
@@ -31,5 +34,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlcolorModeTagHandler_h

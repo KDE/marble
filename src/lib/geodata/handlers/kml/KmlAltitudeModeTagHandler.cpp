@@ -31,8 +31,10 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
-using namespace Marble;
 
 KML_DEFINE_TAG_HANDLER( altitudeMode )
 
@@ -79,4 +81,6 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     }
 
     return 0;
+}
+
 }

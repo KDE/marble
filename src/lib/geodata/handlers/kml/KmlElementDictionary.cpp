@@ -21,6 +21,9 @@
 
 #include "KmlElementDictionary.h"
 
+namespace Marble
+{
+
 // One static list of all tag names, to avoid string comparisons all-over-the-place
 namespace GeoDataElementDictionary {
 
@@ -176,4 +179,6 @@ const char* kmlTag_y = "y";
  const char* kmlTag_CountryNameCode = "CountryNameCode";
  const char* kmlTag_countrycode = "countrycode";
 #endif // KML_LAZY_IMP
+}
+
 }

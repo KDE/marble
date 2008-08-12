@@ -23,6 +23,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlroleTagHandler : public GeoTagHandler {
 public:
     KmlroleTagHandler();
@@ -30,5 +33,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlroleTagHandler_h

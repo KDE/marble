@@ -28,6 +28,9 @@
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER(Folder)
@@ -58,4 +61,6 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
 #endif // DEBUG_TAGS
     }
     return folder;
+}
+
 }

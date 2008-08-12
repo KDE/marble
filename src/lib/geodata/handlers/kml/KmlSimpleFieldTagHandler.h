@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlSimpleFieldTagHandler : public GeoTagHandler {
 public:
     KmlSimpleFieldTagHandler();
@@ -31,5 +34,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlSimpleFieldTagHandler_h

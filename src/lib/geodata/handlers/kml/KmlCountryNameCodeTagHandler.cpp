@@ -29,6 +29,9 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( CountryNameCode )
@@ -60,4 +63,7 @@ GeoNode* KmlCountryNameCodeTagHandler::parse( GeoParser& parser ) const
 
     return 0;
 }
+
+}
+
 #endif // KML_LAZY_IMP

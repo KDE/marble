@@ -27,6 +27,9 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( heading )
@@ -53,4 +56,6 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
     }
     return 0;
+}
+
 }

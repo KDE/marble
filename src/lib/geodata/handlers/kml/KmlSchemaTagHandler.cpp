@@ -29,6 +29,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Schema )
@@ -70,5 +73,7 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
     } else {
         return 0;
     }
+
+}
 
 }

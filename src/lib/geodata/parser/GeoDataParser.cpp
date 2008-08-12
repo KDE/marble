@@ -41,8 +41,6 @@
 // KML support
 #include "KmlElementDictionary.h"
 
-// FIXME after move into namespace Marble
-using namespace GeoDataElementDictionary;
 using namespace Marble::GeoDataElementDictionary;
 
 GeoDataParser::GeoDataParser(GeoDataSourceType source)

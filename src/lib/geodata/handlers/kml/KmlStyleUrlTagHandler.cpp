@@ -31,6 +31,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( styleUrl )
@@ -72,4 +75,6 @@ GeoNode* KmlstyleUrlTagHandler::parse( GeoParser& parser ) const
 #endif
     }
     return 0;
+}
+
 }

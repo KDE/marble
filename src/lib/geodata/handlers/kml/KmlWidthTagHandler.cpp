@@ -27,6 +27,9 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( width )
@@ -57,4 +60,6 @@ GeoNode* KmlwidthTagHandler::parse( GeoParser& parser ) const
     }
 
     return 0;
+}
+
 }

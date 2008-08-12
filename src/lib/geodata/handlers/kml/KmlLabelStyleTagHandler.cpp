@@ -28,6 +28,9 @@
 #include "GeoDataLabelStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LabelStyle )
@@ -59,4 +62,6 @@ GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
         return style;
     }
     return 0;
+}
+
 }

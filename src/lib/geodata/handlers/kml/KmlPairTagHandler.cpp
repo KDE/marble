@@ -29,6 +29,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Pair )
@@ -56,4 +59,6 @@ GeoNode* KmlPairTagHandler::parse( GeoParser& parser ) const
         return parentItem.nodeAs<GeoDataStyleMap>();
     }
     return 0;
+}
+
 }

@@ -29,6 +29,9 @@
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Placemark )
@@ -58,4 +61,6 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
     return placemark;
+}
+
 }

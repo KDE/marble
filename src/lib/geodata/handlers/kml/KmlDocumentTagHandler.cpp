@@ -27,6 +27,9 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER(Document)
@@ -49,4 +52,6 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
     qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
 #endif
     return doc;
+}
+
 }

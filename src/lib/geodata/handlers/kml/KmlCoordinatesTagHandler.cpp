@@ -33,6 +33,9 @@
 #include "GeoDataParser.h"
 #include "global.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( coordinates )
@@ -104,4 +107,6 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         }
     }
     return 0;
+}
+
 }

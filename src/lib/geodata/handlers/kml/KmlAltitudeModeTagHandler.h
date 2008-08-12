@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmlaltitudeModeTagHandler : public GeoTagHandler {
 public:
     KmlaltitudeModeTagHandler();
@@ -31,5 +34,7 @@ public:
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // KmlaltitudeModeTagHandler_h

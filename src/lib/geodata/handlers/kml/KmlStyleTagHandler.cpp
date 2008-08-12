@@ -29,6 +29,9 @@
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Style )
@@ -70,4 +73,6 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
     return style;
+}
+
 }

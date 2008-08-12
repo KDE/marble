@@ -30,6 +30,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Polygon )
@@ -65,4 +68,6 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
 #endif
 
     return polygon;
+}
+
 }

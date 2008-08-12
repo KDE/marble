@@ -27,6 +27,9 @@
 #include "GeoDataFeature.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( visibility )
@@ -59,4 +62,6 @@ GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
     }
 
     return 0;
+}
+
 }

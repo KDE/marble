@@ -28,6 +28,9 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LineStyle )
@@ -59,4 +62,6 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
         return style;
     }
     return 0;
+}
+
 }

@@ -22,6 +22,8 @@
 #ifndef KMLElementDictionary_h
 #define KMLElementDictionary_h
 
+namespace Marble
+{
 
 // Lists all known KML 2.1 tags (http://code.google.com/apis/kml/documentation/kmlTag_tags_21.html)
 namespace GeoDataElementDictionary {
@@ -190,5 +192,7 @@ namespace GeoDataElementDictionary {
 	KML_DEFINE_TAG_HANDLER_20(Name) \
 	KML_DEFINE_TAG_HANDLER_21(Name) \
     KML_DEFINE_TAG_HANDLER_22(Name)
+
+}
 
 #endif // KMLElementDictionary_h

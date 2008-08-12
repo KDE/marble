@@ -31,6 +31,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LineString )
@@ -64,4 +67,6 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
 #endif
 
     return lineString;
+}
+
 }

@@ -30,6 +30,9 @@
 
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( role )
@@ -61,4 +64,7 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
 
     return 0;
 }
+
+}
+
 #endif // KML_LAZY_IMP
