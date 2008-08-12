@@ -180,31 +180,29 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
 bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
 {
-    if (!enabled() || !visible())
-    {
+    if ( !enabled() || !visible() ) {
         return false;
     }
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
-    if (!widget)
-    {
+    if ( !widget ) {
         return MarbleAbstractFloatItem::eventFilter(object,e);
     }
 
     bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
-        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),widget->height())), size());
+        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
+                widget->height())), size());
 
-        if (floatItemRect.contains(event->posF()))
-        {
+        if ( floatItemRect.contains(event->posF()) ) {
             cursorAboveFloatItem = true;
 
             // Double click triggers recentering the map at the specified position
-            if (e->type() == QEvent::MouseButtonDblClick)
-            {
+            if ( e->type() == QEvent::MouseButtonDblClick ) {
                 QRectF mapRect( contentRect() );
-                QPointF pos = event->pos() - floatItemRect.topLeft() - QPointF(padding(),padding());
+                QPointF pos = event->pos() - floatItemRect.topLeft() 
+                    - QPointF(padding(),padding());
 
                 double lon = ( pos.x() - mapRect.width() / 2.0 ) / mapRect.width() * 360.0 ;
                 double lat = ( mapRect.height() / 2.0 - pos.y() ) / mapRect.height() * 180.0;
@@ -212,10 +210,10 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
 
                 return true;
             }
-
         }
 
-        if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove && !event->buttons() & Qt::LeftButton)
+        if ( cursorAboveFloatItem && e->type() == QEvent::MouseMove 
+                && !event->buttons() & Qt::LeftButton )
         {
             // Cross hair cursor when moving above the float item without pressing a button
             widget->setCursor(QCursor(Qt::CrossCursor));

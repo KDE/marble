@@ -457,14 +457,12 @@ bool MarbleAbstractFloatItem::renderOnMap( GeoPainter     *painter,
 
 bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 {
-	if (!enabled() || !visible() || positionLocked())
-	{
-	    return false;
-	}
+    if ( !enabled() || !visible() || positionLocked() ) {
+        return false;
+    }
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
-    if (!widget)
-    {
+    if ( !widget ) {
         return false;
     }
 
@@ -472,24 +470,24 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseMove
                 || e->type() == QEvent::MouseButtonPress
-                || e->type() == QEvent::MouseButtonRelease ) {
+                || e->type() == QEvent::MouseButtonRelease )
+    {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
-        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),widget->height())), size());
+        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
+                widget->height())), size());
 
         // Click and move above a float item triggers moving the float item
-        if (floatItemRect.contains(event->posF()))
-        {
+        if ( floatItemRect.contains(event->posF()) ) {
             cursorAboveFloatItem = true;
 
-            if (e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton)
-            {
+            if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
                 d->m_floatItemMoveStartPos = event->pos();
                 d->m_floatItemMoving = true;
                 return true;
             }
         }
 
-        if (e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton
+        if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton
             && ( cursorAboveFloatItem || d->m_floatItemMoving ) )
         {
             d->m_floatItemMoving = true;
@@ -497,29 +495,24 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
             QPointF position = floatItemRect.topLeft();
             qreal newX = position.x()+point.x()-d->m_floatItemMoveStartPos.x();
             qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
-            if (newX>=0 && newY>=0)
-            {
-			    // Docking behavior
-			    const qreal dockArea = 60.0; // Alignment area width/height
-			    const qreal dockJump = 30.0; // Alignment indicator jump size
-			    if (widget->width()-size().width()-newX < dockArea)
-			    {
-				    newX = qMin(-1.0, size().width()+newX-widget->width());
-				    if (d->m_floatItemMoveStartPos.x()<event->pos().x())
-				    {
-					    // Indicate change to right alignment with a short jump
-					    newX = qMax( newX, -(dockArea-dockJump) );
-				    }
-			    }
-			    if (widget->height()-size().height()-newY < dockArea)
-			    {
-				    newY = qMin(-1.0,size().height()+newY-widget->height());
-				    if (d->m_floatItemMoveStartPos.y()<event->pos().y())
-				    {
-				 	   // Indicate change to bottom alignment with a short jump
-				 	   newY = qMax( newY, -(dockArea-dockJump) );
-				    }
-			    }
+            if ( newX >= 0 && newY >= 0 ) {
+                // Docking behavior
+                const qreal dockArea = 60.0; // Alignment area width/height
+                const qreal dockJump = 30.0; // Alignment indicator jump size
+                if ( widget->width()-size().width()-newX < dockArea ) {
+                    newX = qMin(-1.0, size().width()+newX-widget->width());
+                    if (d->m_floatItemMoveStartPos.x()<event->pos().x()) {
+                        // Indicate change to right alignment with a short jump
+                        newX = qMax( newX, -(dockArea-dockJump) );
+                    }
+                }
+                if ( widget->height()-size().height()-newY < dockArea ) {
+                    newY = qMin(-1.0,size().height()+newY-widget->height());
+                    if (d->m_floatItemMoveStartPos.y()<event->pos().y()) {
+                       // Indicate change to bottom alignment with a short jump
+                       newY = qMax( newY, -(dockArea-dockJump) );
+                    }
+                }
 
                 setPosition(QPointF(newX,newY));
                 QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size()).toRect();
@@ -534,14 +527,12 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
             }
         }
 
-        if (e->type() == QEvent::MouseButtonRelease)
-        {
+        if ( e->type() == QEvent::MouseButtonRelease ) {
             d->m_floatItemMoving = false;
         }
 
         // Adjusting Cursor shape
-        if ( cursorAboveFloatItem || d->m_floatItemMoving )
-        {
+        if ( cursorAboveFloatItem || d->m_floatItemMoving ) {
             widget->setCursor(QCursor(Qt::SizeAllCursor));
             return true;
         }

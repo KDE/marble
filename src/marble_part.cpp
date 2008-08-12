@@ -503,7 +503,8 @@ void MarblePart::setupActions()
     m_lockFloatItemsAct->setText( i18n( "Lock Position" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
-    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ), this, SLOT( lockFloatItemPosition( bool ) ) );
+    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ), this, 
+            SLOT( lockFloatItemPosition( bool ) ) );
 
     KStandardAction::preferences( this, SLOT( editSettings() ), actionCollection() );
 
@@ -703,9 +704,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
     QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
     QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
-    {
-    	// locking one would suffice as it affects all. nevertheless go through all.
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
+        // locking one would suffice as it affects all. nevertheless go through all.
         (*i)->setPositionLocked(enabled);
     }
 }
