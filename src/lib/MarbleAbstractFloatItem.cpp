@@ -24,7 +24,7 @@ class MarbleAbstractFloatItemPrivate
     MarbleAbstractFloatItemPrivate( const QPointF &point, const QSizeF &size )
         : m_position( point ),
           m_size( size ),
-          m_visible( true ), 
+          m_visible( true ),
           m_newItemProperties( true ),
           m_floatItemMoving( false )
     {
@@ -42,14 +42,14 @@ class MarbleAbstractFloatItemPrivate
         double marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
         double marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;;
 
-        m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) ); 
-    
-        m_contentRect = QRectF( 
-            m_position.x() + marginLeft + s_padding, 
-            m_position.y() + marginTop + s_padding, 
-            m_size.width() - ( marginLeft + marginRight + 2.0 * s_padding ), 
-            m_size.height() - ( marginTop + marginBottom + 2.0 * s_padding ) 
-        ); 
+        m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) );
+
+        m_contentRect = QRectF(
+            m_position.x() + marginLeft + s_padding,
+            m_position.y() + marginTop + s_padding,
+            m_size.width() - ( marginLeft + marginRight + 2.0 * s_padding ),
+            m_size.height() - ( marginTop + marginBottom + 2.0 * s_padding )
+        );
     }
 
     QPointF             m_position;
@@ -72,6 +72,7 @@ class MarbleAbstractFloatItemPrivate
     static double       s_marginRight;
     static double       s_padding;
     static bool         s_pixmapCacheEnabled;
+    static bool         s_positionLocked;
 
     QPixmap             m_cachePixmap;
     bool                m_newItemProperties;
@@ -97,8 +98,9 @@ double       MarbleAbstractFloatItemPrivate::s_marginLeft = 0.0;
 double       MarbleAbstractFloatItemPrivate::s_marginRight = 0.0;
 double       MarbleAbstractFloatItemPrivate::s_padding = 4.0;
 bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = true;
+bool         MarbleAbstractFloatItemPrivate::s_positionLocked = false;
 
-MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point, 
+MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point,
                                                   const QSizeF &size )
     : MarbleAbstractLayer(),
       d( new MarbleAbstractFloatItemPrivate( point, size ) )
@@ -224,7 +226,7 @@ void MarbleAbstractFloatItem::setBorderBrush( const QBrush &borderBrush )
 Qt::PenStyle MarbleAbstractFloatItem::borderStyle () const
 {
     return d->s_borderStyle;
-} 
+}
 
 void MarbleAbstractFloatItem::setBorderStyle( Qt::PenStyle borderStyle )
 {
@@ -246,7 +248,7 @@ void MarbleAbstractFloatItem::setFont( const QFont &font )
 double MarbleAbstractFloatItem::margin() const
 {
     return d->s_margin;
-} 
+}
 
 void MarbleAbstractFloatItem::setMargin( double margin )
 {
@@ -259,7 +261,7 @@ void MarbleAbstractFloatItem::setMargin( double margin )
 double MarbleAbstractFloatItem::marginTop() const
 {
     return d->s_marginTop;
-} 
+}
 
 void MarbleAbstractFloatItem::setMarginTop( double marginTop )
 {
@@ -272,7 +274,7 @@ void MarbleAbstractFloatItem::setMarginTop( double marginTop )
 double MarbleAbstractFloatItem::marginBottom() const
 {
     return d->s_marginBottom;
-} 
+}
 
 void MarbleAbstractFloatItem::setMarginBottom( double marginBottom )
 {
@@ -285,7 +287,7 @@ void MarbleAbstractFloatItem::setMarginBottom( double marginBottom )
 double MarbleAbstractFloatItem::marginLeft() const
 {
     return d->s_marginLeft;
-} 
+}
 
 void MarbleAbstractFloatItem::setMarginLeft( double marginLeft )
 {
@@ -298,7 +300,7 @@ void MarbleAbstractFloatItem::setMarginLeft( double marginLeft )
 double MarbleAbstractFloatItem::marginRight() const
 {
     return d->s_marginRight;
-} 
+}
 
 void MarbleAbstractFloatItem::setMarginRight( double marginRight )
 {
@@ -321,6 +323,16 @@ void MarbleAbstractFloatItem::setPadding( double padding )
     d->m_newItemProperties = true;
 }
 
+bool MarbleAbstractFloatItem::positionLocked() const
+{
+       return d->s_positionLocked;
+}
+
+void MarbleAbstractFloatItem::setPositionLocked( bool enabled )
+{
+       d->s_positionLocked = enabled;
+}
+
 bool MarbleAbstractFloatItem::needsUpdate( ViewportParams *viewport )
 {
     Q_UNUSED( viewport );
@@ -339,7 +351,7 @@ void MarbleAbstractFloatItem::setPixmapCacheEnabled( bool pixmapCacheEnabled )
     d->m_newItemProperties = true;
 }
 
-QString MarbleAbstractFloatItem::renderPolicy() const 
+QString MarbleAbstractFloatItem::renderPolicy() const
 {
     return "ALWAYS";
 }
@@ -360,9 +372,9 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
             painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
             return true;
         }
-    
-        // Reinitialize cachePixmap if the float item changes its size 
-        // or other important common properties 
+
+        // Reinitialize cachePixmap if the float item changes its size
+        // or other important common properties
         if ( ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) || d->m_cachePixmap.isNull() ) {
             // Add extra space for the border
             QSize cachePixmapSize = d->m_size.toSize();
@@ -445,6 +457,11 @@ bool MarbleAbstractFloatItem::renderOnMap( GeoPainter     *painter,
 
 bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
 {
+	if (!enabled() || !visible() || positionLocked())
+	{
+	    return false;
+	}
+
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
     if (!widget)
     {
@@ -454,7 +471,7 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     // Move float items
     bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseMove
-                || e->type() == QEvent::MouseButtonPress 
+                || e->type() == QEvent::MouseButtonPress
                 || e->type() == QEvent::MouseButtonRelease ) {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
         QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),widget->height())), size());
@@ -482,11 +499,35 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
             qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
             if (newX>=0 && newY>=0)
             {
+			    // Docking behavior
+			    const qreal dockArea = 60.0; // Alignment area width/height
+			    const qreal dockJump = 30.0; // Alignment indicator jump size
+			    if (widget->width()-size().width()-newX < dockArea)
+			    {
+				    newX = qMin(-1.0, size().width()+newX-widget->width());
+				    if (d->m_floatItemMoveStartPos.x()<event->pos().x())
+				    {
+					    // Indicate change to right alignment with a short jump
+					    newX = qMax( newX, -(dockArea-dockJump) );
+				    }
+			    }
+			    if (widget->height()-size().height()-newY < dockArea)
+			    {
+				    newY = qMin(-1.0,size().height()+newY-widget->height());
+				    if (d->m_floatItemMoveStartPos.y()<event->pos().y())
+				    {
+				 	   // Indicate change to bottom alignment with a short jump
+				 	   newY = qMax( newY, -(dockArea-dockJump) );
+				    }
+			    }
+
                 setPosition(QPointF(newX,newY));
+                QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size()).toRect();
                 d->m_floatItemMoveStartPos = event->pos();
-                widget->setAttribute( Qt::WA_NoSystemBackground,  false );
                 QRegion dirtyRegion(floatItemRect.toRect());
-                dirtyRegion = dirtyRegion.united(QRect(newX,newY,size().width()+1,size().height()+1));
+                dirtyRegion = dirtyRegion.united(newFloatItemRect);
+
+                widget->setAttribute( Qt::WA_NoSystemBackground,  false );
                 widget->repaint(dirtyRegion);
                 widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
                 return true;

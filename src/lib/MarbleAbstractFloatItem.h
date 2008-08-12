@@ -95,6 +95,9 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleAbstractLayer
     double padding () const;
     void setPadding( double width );
 
+    bool positionLocked() const;
+    void setPositionLocked( bool enabled );
+
     virtual bool needsUpdate( ViewportParams *viewport );
 
     bool pixmapCacheEnabled() const;

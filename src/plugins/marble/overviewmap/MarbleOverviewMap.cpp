@@ -180,6 +180,11 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
 bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
 {
+    if (!enabled() || !visible())
+    {
+        return false;
+    }
+
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
     if (!widget)
     {

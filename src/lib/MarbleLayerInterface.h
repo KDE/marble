@@ -34,14 +34,14 @@ class MarbleLayerInterface
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
      *.
-     * This method should return the name of the backend that the plugin 
-     * can render. The string has to be the same one that is given 
+     * This method should return the name of the backend that the plugin
+     * can render. The string has to be the same one that is given
      * for the attribute in the layer element of the DGML file that
      * backend is able to process.
      * Examples to replace available default backends would be "vector" or
-     * "texture". To provide a completely new kind of functionality please 
+     * "texture". To provide a completely new kind of functionality please
      * choose your own unique string.
-     */    
+     */
     virtual QStringList backendTypes() const = 0;
 
     /**
@@ -49,13 +49,13 @@ class MarbleLayerInterface
      * Gives a preferred position where in the existing layer stack
      * the render() method of this plugin should get executed.
      *.
-     * Possible Values: 
-     * "ALWAYS"            -- the plugin renders at the preferred posion 
-     *                        no matter what got specified in the DGML file. 
-     * "SPECIFIED"         -- renders only in case it got specified in the 
+     * Possible Values:
+     * "ALWAYS"            -- the plugin renders at the preferred posion
+     *                        no matter what got specified in the DGML file.
+     * "SPECIFIED"         -- renders only in case it got specified in the
      *                        DGML file.
      * "SPECIFIED_ALWAYS"  -- In case it got specified in the DGML file
-     *                        render according to the specification 
+     *                        render according to the specification
      *                        otherwise choose the preferred position
      */
     virtual QString renderPolicy() const = 0;
@@ -65,7 +65,7 @@ class MarbleLayerInterface
      * Gives a preferred position where in the existing layer stack
      * the render() method of this plugin should get executed.
      *.
-     * Possible Values: 
+     * Possible Values:
      * "NONE", "STARS", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP", "FLOAT_ITEM"
      */
     virtual QStringList renderPosition() const = 0;
@@ -116,6 +116,6 @@ class MarbleLayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
-Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.01" )
+Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.02" )
 
 #endif // MARBLE_LAYER_INTERFACE_H

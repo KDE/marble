@@ -56,6 +56,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
+    void  lockFloatItemPosition( bool );
     void  showSun();
     void  setupStatusBar();
     void  showNewStuffDialog();
@@ -91,6 +92,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_openAct;
     KAction      *m_newStuffAction;
     KAction      *m_showSunAct;
+    KAction      *m_lockFloatItemsAct;
 
     QStandardItemModel* m_pluginModel;
 

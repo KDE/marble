@@ -69,11 +69,11 @@ typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
 K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
-  : KParts::ReadOnlyPart( parent ), 
+  : KParts::ReadOnlyPart( parent ),
     m_sunControlDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
-    m_positionLabel( 0 ), 
+    m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
     // only set marble data path when a path was given
@@ -154,7 +154,7 @@ void MarblePart::exportMapScreenShot()
     if ( !fileName.isEmpty() ) {
         // Take the case into account where no file format is indicated
         char * format = 0;
-        if ( !fileName.endsWith("png", Qt::CaseInsensitive) 
+        if ( !fileName.endsWith("png", Qt::CaseInsensitive)
            | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
         {
             format = (char*)"JPG";
@@ -255,7 +255,7 @@ void MarblePart::showStatusBar( bool isChecked )
 
 void MarblePart::showSun()
 {
-    if (!m_sunControlDialog) 
+    if (!m_sunControlDialog)
         m_sunControlDialog = new SunControlWidget( NULL, m_controlView->sunLocator() );
 
 
@@ -285,10 +285,10 @@ void MarblePart::copyCoordinates()
 }
 
 void MarblePart::readSettings()
-{ 
+{
     // Last location on quit
     if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
-        m_controlView->marbleWidget()->centerOn( 
+        m_controlView->marbleWidget()->centerOn(
             MarbleSettings::quitLongitude(),
             MarbleSettings::quitLatitude()
         );
@@ -298,7 +298,7 @@ void MarblePart::readSettings()
     }
 
     // Set home position
-    m_controlView->marbleWidget()->setHome( 
+    m_controlView->marbleWidget()->setHome(
         MarbleSettings::homeLongitude(),
         MarbleSettings::homeLatitude(),
         MarbleSettings::homeZoom()
@@ -315,6 +315,8 @@ void MarblePart::readSettings()
     m_showCloudsAction->setChecked( MarbleSettings::showClouds() );
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
+    m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
+    lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
 
     // Plugins
     QHash<QString, int> pluginEnabled;
@@ -324,13 +326,13 @@ void MarblePart::readSettings()
 
     if ( nameIdSize == enabledSize )
     {
-        for ( int i = 0; i < enabledSize; ++i ) 
+        for ( int i = 0; i < enabledSize; ++i )
         {
             pluginEnabled[ MarbleSettings::pluginNameId()[i] ] = MarbleSettings::pluginEnabled()[i];
         }
     }
 
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
     QList<MarbleAbstractLayer *>::const_iterator i;
     for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
     {
@@ -396,7 +398,7 @@ void MarblePart::writeSettings()
     QList<int> pluginEnabled;
     QStringList pluginNameId;
 
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
     QList<MarbleAbstractLayer *>::const_iterator i;
     for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
     {
@@ -405,7 +407,9 @@ void MarblePart::writeSettings()
     }
     MarbleSettings::setPluginEnabled( pluginEnabled );
     MarbleSettings::setPluginNameId(  pluginNameId );
-    
+
+    MarbleSettings::setLockFloatItemPositions( m_lockFloatItemsAct->isChecked() );
+
     MarbleSettings::self()->writeConfig();
 }
 
@@ -493,6 +497,14 @@ void MarblePart::setupActions()
     m_showSunAct->setText( i18n( "S&un Control" ) );
     connect( m_showSunAct, SIGNAL( triggered( bool ) ), this, SLOT( showSun() ) );
 
+    // Action: Lock float items
+    m_lockFloatItemsAct = new KAction ( this );
+    actionCollection()->addAction( "options_lock_floatitems", m_lockFloatItemsAct );
+    m_lockFloatItemsAct->setText( i18n( "Lock Position" ) );
+    m_lockFloatItemsAct->setCheckable( true );
+    m_lockFloatItemsAct->setChecked( false );
+    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ), this, SLOT( lockFloatItemPosition( bool ) ) );
+
     KStandardAction::preferences( this, SLOT( editSettings() ), actionCollection() );
 
     readSettings();
@@ -529,10 +541,10 @@ void MarblePart::showDistance( const QString& distance )
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
-        m_positionLabel->setText( i18n( POSITION_STRING, m_position ) ); 
+        m_positionLabel->setText( i18n( POSITION_STRING, m_position ) );
 
     if ( m_distanceLabel )
-        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) ); 
+        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) );
 }
 
 void MarblePart::setupStatusBar()
@@ -542,7 +554,7 @@ void MarblePart::setupStatusBar()
 
     m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
     m_positionLabel->setIndent( 5 );
-    QString templatePositionString = 
+    QString templatePositionString =
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
     int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
                             + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
@@ -551,7 +563,7 @@ void MarblePart::setupStatusBar()
 
     m_distanceLabel = new QLabel( m_statusBarExtension->statusBar() );
     m_distanceLabel->setIndent( 5 );
-    QString templateDistanceString = 
+    QString templateDistanceString =
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
                             + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
@@ -568,7 +580,7 @@ void MarblePart::setupStatusBar()
 
 void MarblePart::showNewStuffDialog()
 {
-    QString  newStuffConfig = KStandardDirs::locate ( "data", 
+    QString  newStuffConfig = KStandardDirs::locate ( "data",
                                                       "marble/marble.knsrc" );
     kDebug() << "KNS config file:" << newStuffConfig;
 
@@ -586,9 +598,9 @@ void MarblePart::showNewStuffDialog()
 void MarblePart::editSettings()
 {
     if ( KConfigDialog::showDialog( "settings" ) )
-        return; 
- 
-        m_configDialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() ); 
+        return;
+
+        m_configDialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() );
 
         // view page
         Ui_MarbleViewSettingsWidget ui_viewSettings;
@@ -605,7 +617,7 @@ void MarblePart::editSettings()
         m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ), "transform-move" );
 
         // cache page
-        MarbleCacheSettingsWidget *w_cacheSettings = 
+        MarbleCacheSettingsWidget *w_cacheSettings =
             new MarbleCacheSettingsWidget();
         w_cacheSettings->setObjectName( "cache_page" );
         m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-web-browser-cache" );
@@ -617,14 +629,14 @@ void MarblePart::editSettings()
         m_pluginModel = new QStandardItemModel();
         QStandardItem *parentItem = m_pluginModel->invisibleRootItem();
 
-        QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+        QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
         QList<MarbleAbstractLayer *>::const_iterator i;
         for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
         {
             parentItem->appendRow( (*i)->item() );
         }
 
-        MarblePluginSettingsWidget *w_pluginSettings = 
+        MarblePluginSettingsWidget *w_pluginSettings =
             new MarblePluginSettingsWidget();
         w_pluginSettings->setModel( m_pluginModel );
         w_pluginSettings->setObjectName( "plugin_page" );
@@ -646,7 +658,7 @@ void MarblePart::slotEnableButtonApply()
 
 void MarblePart::slotApply()
 {
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
     QList<MarbleAbstractLayer *>::const_iterator i;
     for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
     {
@@ -656,7 +668,7 @@ void MarblePart::slotApply()
 
 void MarblePart::slotCancel()
 {
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();    
+    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
     QList<MarbleAbstractLayer *>::const_iterator i;
     for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
     {
@@ -668,7 +680,7 @@ void MarblePart::slotUpdateSettings()
 {
     qDebug() << "Updating Settings ...";
 
-    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );     
+    m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
@@ -684,6 +696,18 @@ void MarblePart::slotUpdateSettings()
                                              MarbleSettings::proxyPort() );
 
     m_controlView->marbleWidget()->updateChangedMap();
+}
+
+void MarblePart::lockFloatItemPosition( bool enabled )
+{
+    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+
+    QList<MarbleAbstractFloatItem *>::const_iterator i;
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
+    {
+    	// locking one would suffice as it affects all. nevertheless go through all.
+        (*i)->setPositionLocked(enabled);
+    }
 }
 
 #include "marble_part.moc"

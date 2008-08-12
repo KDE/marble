@@ -106,35 +106,35 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         QKeyEvent const * const k = dynamic_cast<QKeyEvent const * const>( e );
         Q_ASSERT( k );
 
-        dirx = 0; 
+        dirx = 0;
         diry = 0;
         switch ( k->key() ) {
-        case Qt::Key_Left: 
+        case Qt::Key_Left:
 
             // Depending on whether the planet is "upright" or
             // "upside down" we need to choose the direction
-            //  of the rotation  
+            //  of the rotation
 
             if ( polarity < 0 )
                 dirx = -1;
             else
                 dirx = 1;
             break;
-        case Qt::Key_Up: 
+        case Qt::Key_Up:
             diry = 1;
             break;
-        case Qt::Key_Right: 
+        case Qt::Key_Right:
 
             // Depending on whether the planet is "upright" or
             // "upside down" we need to choose the direction
-            //  of the rotation  
+            //  of the rotation
 
             if ( polarity < 0 )
                 dirx = 1;
             else
                 dirx = -1;
             break;
-        case Qt::Key_Down: 
+        case Qt::Key_Down:
             diry = -1;
             break;
         case Qt::Key_Plus:
@@ -156,23 +156,23 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
         return true;
-    } 
+    }
     else if ( e->type() == QEvent::MouseMove
-              || e->type() == QEvent::MouseButtonPress 
+              || e->type() == QEvent::MouseButtonPress
               || e->type() == QEvent::MouseButtonRelease ) {
 
         QMouseEvent  *event        = static_cast<QMouseEvent*>(e);
         QRegion       activeRegion = m_widget->activeRegion();
 
-        dirx = 0; 
+        dirx = 0;
         diry = 0;
 
-        // Do not handle (and therefore eat) mouse events that occur above float items
+        // Do not handle (and therefore eat) mouse events that occur above visible float items
         foreach(MarbleAbstractFloatItem *floatItem, m_widget->floatItems())
         {
             QRectF widgetRect(0,0,m_widget->width(),m_widget->height());
             QRectF floatItemRect = QRectF(floatItem->positivePosition(widgetRect), floatItem->size());
-            if (floatItemRect.contains(event->posF()))
+            if (floatItem->enabled() && floatItem->visible() && floatItemRect.contains(event->posF()))
             {
                 return false;
             }
@@ -188,7 +188,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( !isValid ) {
                 emit mouseMoveGeoPosition( tr( NOT_AVAILABLE ) );
-            } 
+            }
             else {
                 QString position = GeoDataCoordinates( lon, lat ).toString();
                 emit mouseMoveGeoPosition( position );
@@ -206,15 +206,15 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::LeftButton ) {
 
-                m_dragtimer.restart();					
+                m_dragtimer.restart();
 
                 m_leftpressed = true;
                 m_midpressed  = false;
 
-                // On the single event of a mouse button press these 
-                // values get stored, to enable us to e.g. calculate the 
-                // distance of a mouse drag while the mouse button is 
-                // still down. 
+                // On the single event of a mouse button press these
+                // values get stored, to enable us to e.g. calculate the
+                // distance of a mouse drag while the mouse button is
+                // still down.
                 m_leftpressedx = event->x();
                 m_leftpressedy = event->y();
 
@@ -243,8 +243,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( e->type() == QEvent::MouseButtonRelease
                  && event->button() == Qt::LeftButton)
             {
-                
-                //emit current coordinates to be be interpreted 
+
+                //emit current coordinates to be be interpreted
                 //as requested
                 emit mouseClickScreenPosition( m_leftpressedx, m_leftpressedy );
 
@@ -290,7 +290,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 if ( abs(deltax) <= m_dragThreshold
                      && abs(deltay) <= m_dragThreshold )
-                    return true; 
+                    return true;
 
                 double direction = 1;
                 // Choose spin direction by taking into account whether we
@@ -303,13 +303,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                             direction = -1;
                     }
                     else {
-                        if (event->y() > ( + m_widget->northPoleY() 
+                        if (event->y() > ( + m_widget->northPoleY()
                                            + m_widget->height() / 2 ) )
                             direction = -1;
                     }
                 }
                 m_widget->centerOn( RAD2DEG * (double)(m_leftpresseda)
-                                    - 90.0 * direction * deltax / radius, 
+                                    - 90.0 * direction * deltax / radius,
                                     RAD2DEG * (double)(m_leftpressedb)
                                     + 90.0 * deltay / radius );
             }
@@ -333,7 +333,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 dirx = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
             }
 
-            if ( dirx > 1 ) 
+            if ( dirx > 1 )
                 dirx = 1;
             if ( dirx < -1 )
                 dirx = -1;
@@ -343,7 +343,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 diry = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
             }
 
-            if ( diry > 1 ) 
+            if ( diry > 1 )
                 diry = 1;
             if ( diry < -1 )
                 diry = -1;
@@ -357,7 +357,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 else
                     m_widget->rotateBy( -m_widget->moveStep() * (double)(-dirx),
                                         m_widget->moveStep() * (double)(+diry) );
-            }				
+            }
         }
 
         // Adjusting Cursor shape
