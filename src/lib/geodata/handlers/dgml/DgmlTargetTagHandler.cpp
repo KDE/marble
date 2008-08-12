@@ -27,6 +27,9 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Target)
@@ -58,4 +61,6 @@ GeoNode* DgmlTargetTagHandler::parse(GeoParser& parser) const
     }
 
     return 0;
+}
+
 }

@@ -25,6 +25,9 @@
 #include "GeoParser.h"
 #include "GeoSceneZoom.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Minimum)
@@ -59,4 +62,6 @@ GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
 
 
     return 0;
+}
+
 }

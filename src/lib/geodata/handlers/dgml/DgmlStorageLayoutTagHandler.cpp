@@ -28,6 +28,9 @@
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneElementDictionary;
 
@@ -87,4 +90,6 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     }
 
     return 0;
+}
+
 }

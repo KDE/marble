@@ -23,15 +23,17 @@
 #ifndef DgmlAuxillaryDictionary_h
 #define DgmlAuxillaryDictionary_h
 
-
 // Lists all known DGML 2.0 auxillary strings
 
-namespace GeoSceneAuxillaryDictionary {
-
+namespace Marble
+{
+namespace GeoSceneAuxillaryDictionary
+{
     extern const char* dgmlValue_true;
     extern const char* dgmlValue_on;
     extern const char* dgmlValue_texture;
     extern const char* dgmlValue_vector;
+}
 }
 
 #endif // DgmlAuxillaryDictionary_h

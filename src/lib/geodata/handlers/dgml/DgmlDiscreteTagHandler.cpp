@@ -26,6 +26,9 @@
 #include "GeoParser.h"
 #include "GeoSceneZoom.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAuxillaryDictionary;
 
@@ -53,4 +56,6 @@ GeoNode* DgmlDiscreteTagHandler::parse(GeoParser& parser) const
     }
 
     return 0;
+}
+
 }

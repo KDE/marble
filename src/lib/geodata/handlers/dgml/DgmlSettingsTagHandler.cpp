@@ -28,6 +28,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Settings)
@@ -53,4 +56,6 @@ GeoNode* DgmlSettingsTagHandler::parse(GeoParser& parser) const
         return parentItem.nodeAs<GeoSceneDocument>()->settings();
 
     return 0;
+}
+
 }

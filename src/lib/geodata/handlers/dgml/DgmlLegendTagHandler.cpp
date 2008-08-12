@@ -29,6 +29,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneLegend.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Legend)
@@ -52,4 +55,6 @@ GeoNode* DgmlLegendTagHandler::parse(GeoParser& parser) const
         return parentItem.nodeAs<GeoSceneDocument>()->legend();
 
     return 0;
+}
+
 }

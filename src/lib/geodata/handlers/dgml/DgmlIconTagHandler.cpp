@@ -33,6 +33,9 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneItem.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 
@@ -74,4 +77,6 @@ GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
     }
 
     return 0;
+}
+
 }

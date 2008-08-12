@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class DgmlMaximumTagHandler : public GeoTagHandler {
  public:
     DgmlMaximumTagHandler();
@@ -31,5 +34,7 @@ class DgmlMaximumTagHandler : public GeoTagHandler {
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // DgmlMaximumTagHandler_h

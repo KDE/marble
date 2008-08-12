@@ -33,6 +33,9 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneFilter.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneAuxillaryDictionary;
@@ -71,4 +74,6 @@ GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
     }
 
     return filter;
+}
+
 }

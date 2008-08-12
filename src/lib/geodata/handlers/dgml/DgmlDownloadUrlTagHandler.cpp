@@ -31,6 +31,9 @@
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneElementDictionary;
 
@@ -80,4 +83,6 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
 
     parentItem.nodeAs<GeoSceneTexture>()->addDownloadUrl( url );
     return 0;
+}
+
 }

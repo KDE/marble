@@ -22,9 +22,12 @@
 
 #include "DgmlAttributeDictionary.h"
 
-// One static list of all attribute names, to avoid string comparisons all-over-the-place
+namespace Marble
+{
+namespace GeoSceneAttributeDictionary
+{
 
-namespace GeoSceneAttributeDictionary {
+// One static list of all attribute names, to avoid string comparisons all-over-the-place
 
 const char* dgmlAttr_nameSpace20 = "http://edu.kde.org/marble/dgml/2.0";
 
@@ -54,4 +57,5 @@ const char* dgmlAttr_text             = "text";
 const char* dgmlAttr_type             = "type";
 const char* dgmlAttr_user             = "user";
 const char* dgmlAttr_width            = "width";
+}
 }

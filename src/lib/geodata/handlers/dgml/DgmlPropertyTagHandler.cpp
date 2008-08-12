@@ -30,6 +30,9 @@
 #include "GeoSceneGroup.h"
 #include "GeoSceneProperty.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 
@@ -67,4 +70,6 @@ GeoNode* DgmlPropertyTagHandler::parse(GeoParser& parser) const
     }
 
     return property;
+}
+
 }

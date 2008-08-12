@@ -25,6 +25,9 @@
 #include "GeoParser.h"
 #include "GeoSceneItem.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Text)
@@ -49,4 +52,6 @@ GeoNode* DgmlTextTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneItem>()->setText( parser.readElementText().trimmed() );
 
     return 0;
+}
+
 }

@@ -23,11 +23,13 @@
 #ifndef DgmlAttributeDictionary_h
 #define DgmlAttributeDictionary_h
 
+namespace Marble
+{
+namespace GeoSceneAttributeDictionary
+{
 
-// Lists all known DGML 2.0 attributes
-// http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
-
-namespace GeoSceneAttributeDictionary {
+    // Lists all known DGML 2.0 attributes
+    // http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
 
     extern const char* dgmlAttr_nameSpace20;
 
@@ -57,6 +59,7 @@ namespace GeoSceneAttributeDictionary {
     extern const char* dgmlAttr_type;
     extern const char* dgmlAttr_user;
     extern const char* dgmlAttr_width;
+}
 }
 
 #endif // DgmlAttributeDictionary_h

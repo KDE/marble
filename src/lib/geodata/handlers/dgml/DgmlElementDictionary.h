@@ -24,9 +24,13 @@
 
 #include <marble_export.h>
 
+namespace Marble
+{
+
 // Lists all known DGML 2.0 tags
 // http://edu.kde.org/marble/apis/dgml/documentation/dgmltags.html)
-namespace GeoSceneElementDictionary {
+namespace GeoSceneElementDictionary
+{
     extern const char* dgmlTag_nameSpace20;
 
     extern  const char* dgmlTag_Available;
@@ -76,5 +80,7 @@ namespace GeoSceneElementDictionary {
 
 // Helper macro
 #define DGML_DEFINE_TAG_HANDLER(Name) GEODATA_DEFINE_TAG_HANDLER(dgml, Dgml, Name, dgmlTag_nameSpace20)
+
+}
 
 #endif // DgmlElementDictionary_h

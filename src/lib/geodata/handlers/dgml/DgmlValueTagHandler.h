@@ -24,6 +24,9 @@
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class DgmlValueTagHandler : public GeoTagHandler {
  public:
     DgmlValueTagHandler();
@@ -31,5 +34,7 @@ class DgmlValueTagHandler : public GeoTagHandler {
 
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}
 
 #endif // DgmlValueTagHandler_h

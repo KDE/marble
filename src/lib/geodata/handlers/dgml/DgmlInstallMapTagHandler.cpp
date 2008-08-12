@@ -25,6 +25,9 @@
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(InstallMap)
@@ -49,4 +52,6 @@ GeoNode* DgmlInstallMapTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneTexture>()->setInstallMap( parser.readElementText().trimmed() );
 
     return 0;
+}
+
 }

@@ -32,6 +32,9 @@
 #include "GeoSceneFilter.h"
 #include "GeoScenePalette.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneAuxillaryDictionary;
@@ -65,4 +68,6 @@ GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
     }
 
     return palette;
+}
+
 }

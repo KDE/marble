@@ -30,6 +30,9 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneVector.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneAuxillaryDictionary;
@@ -69,4 +72,6 @@ GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
     }
 
     return vector;
+}
+
 }

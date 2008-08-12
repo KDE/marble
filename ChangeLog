@@ -1,5 +1,90 @@
 2008-08-12  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/dgml/DgmlVectorTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlItemTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlInstallMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlTextureTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlSourceFileTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlAuxillaryDictionary.h:
+    * src/lib/geodata/handlers/dgml/DgmlMinimumTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlLayerTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlMapTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlMaximumTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlPenTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlDescriptionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlNameTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlPropertyTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlPaletteTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlGroupTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlDiscreteTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlThemeTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlSourceDirTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlSectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlVectorTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlInstallMapTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlLayerTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlDocumentTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlTextTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlPenTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.h:
+    * src/lib/geodata/handlers/dgml/DgmlFilterTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlLegendTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlSourceDirTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlSettingsTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlVisibleTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlPaletteTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlHeadingTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.h:
+    * src/lib/geodata/handlers/dgml/DgmlHeadTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlThemeTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlDiscreteTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlSectionTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlValueTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlProjectionTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlAvailableTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlZoomTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlFilterTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlElementDictionary.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlTargetTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlIconTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlBrushTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlTextTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlVisibleTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlItemTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlHeadingTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlAttributeDictionary.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlDownloadUrlTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlTextureTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlSourceFileTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlHeadTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlLegendTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlSettingsTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlAuxillaryDictionary.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlStorageLayoutTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlNameTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlMinimumTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlProjectionTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlValueTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlMaximumTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlMapTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlBrushTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlPropertyTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlAvailableTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlDescriptionTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlZoomTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlTargetTagHandler.h:
+    * src/lib/geodata/handlers/dgml/DgmlGroupTagHandler.cpp:
+    * src/lib/geodata/handlers/dgml/DgmlIconTagHandler.h:
+    * src/lib/geodata/parser/GeoSceneParser.cpp:
+    * src/lib/geodata/scene/GeoSceneMap.cpp:
+
+    Move from global namespace into namespace Marble.
+
+2008-08-12  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/data/GeoDataHotSpot.h:
     * src/lib/geodata/data/GeoDataCoordinates.h:
 

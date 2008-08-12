@@ -28,6 +28,9 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Zoom)
@@ -53,4 +56,6 @@ GeoNode* DgmlZoomTagHandler::parse(GeoParser& parser) const
         return parentItem.nodeAs<GeoSceneHead>()->zoom();
 
     return 0;
+}
+
 }

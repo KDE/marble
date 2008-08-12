@@ -27,6 +27,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneParser.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Document)
@@ -44,4 +47,6 @@ GeoNode* DgmlDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));
     return geoSceneDoc(parser);
+}
+
 }

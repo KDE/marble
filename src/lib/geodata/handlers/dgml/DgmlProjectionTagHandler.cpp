@@ -28,6 +28,9 @@
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneElementDictionary;
 
@@ -57,4 +60,6 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoSceneTexture>()->setProjection( projection );
     }
     return 0;
+}
+
 }

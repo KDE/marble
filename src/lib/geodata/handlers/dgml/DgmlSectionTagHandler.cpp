@@ -31,6 +31,9 @@
 #include "GeoSceneLegend.h"
 #include "GeoSceneSection.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 using namespace GeoSceneAuxillaryDictionary;
@@ -69,4 +72,6 @@ GeoNode* DgmlSectionTagHandler::parse(GeoParser& parser) const
     }
 
     return section;
+}
+
 }

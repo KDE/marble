@@ -25,7 +25,7 @@
 #include "GeoSceneFilter.h"
 #include "DgmlAuxillaryDictionary.h"
 
-using namespace GeoSceneAuxillaryDictionary;
+using namespace Marble::GeoSceneAuxillaryDictionary;
 
 // FIXME: Filters are a Dataset.
 

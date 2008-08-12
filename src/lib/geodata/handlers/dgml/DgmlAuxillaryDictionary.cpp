@@ -23,10 +23,13 @@
 
 // One static list of all auxillary strings, to avoid string comparisons all-over-the-place
 
-namespace GeoSceneAuxillaryDictionary {
-
+namespace Marble
+{
+namespace GeoSceneAuxillaryDictionary
+{
 const char* dgmlValue_true = "true";
 const char* dgmlValue_on = "on";
 const char* dgmlValue_texture = "texture";
 const char* dgmlValue_vector = "vector";
+}
 }

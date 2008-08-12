@@ -35,7 +35,7 @@
 #include "DgmlElementDictionary.h"
 
 
-using namespace GeoSceneElementDictionary;
+using namespace Marble::GeoSceneElementDictionary;
 
 GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
     : GeoParser(source)

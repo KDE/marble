@@ -31,6 +31,9 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneMap.h"
 
+namespace Marble
+{
+
 using namespace GeoSceneElementDictionary;
 using namespace GeoSceneAttributeDictionary;
 
@@ -65,4 +68,6 @@ GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
     }
 
     return map;
+}
+
 }
