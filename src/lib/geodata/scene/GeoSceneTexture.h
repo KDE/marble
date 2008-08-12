@@ -35,7 +35,8 @@
 namespace Marble
 {
 
-class GeoSceneTexture : public GeoSceneAbstractDataset {
+class GeoSceneTexture : public GeoSceneAbstractDataset
+{
  public:
     enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
     enum Projection { Equirectangular, Mercator };

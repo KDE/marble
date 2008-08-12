@@ -43,7 +43,8 @@ class GeoSceneDocumentPrivate;
  */
 class GEODATA_EXPORT GeoSceneDocument : public QObject, 
                                         public GeoDocument,
-                                        public GeoNode {
+                                        public GeoNode
+{
     Q_OBJECT
 
  public:

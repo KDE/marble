@@ -35,7 +35,8 @@ namespace Marble
  * @short Vector dataset stored in a layer.
  */
 
-class GeoSceneVector : public GeoSceneAbstractDataset {
+class GeoSceneVector : public GeoSceneAbstractDataset
+{
  public:
     explicit GeoSceneVector( const QString& name );
     ~GeoSceneVector();

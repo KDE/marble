@@ -31,7 +31,8 @@ namespace Marble
 /**
  * @short Zoom properties of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneZoom : public GeoNode {
+class GEODATA_EXPORT GeoSceneZoom : public GeoNode
+{
  public:
     GeoSceneZoom();
     ~GeoSceneZoom();

@@ -38,7 +38,8 @@ class GeoSceneLegendPrivate;
  * @short Legend of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneLegend : public GeoNode {
+class GEODATA_EXPORT GeoSceneLegend : public GeoNode
+{
  public:
     GeoSceneLegend();
     ~GeoSceneLegend();

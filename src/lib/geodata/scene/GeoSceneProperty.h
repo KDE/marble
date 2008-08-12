@@ -37,7 +37,8 @@ namespace Marble
  */
 
 class GEODATA_EXPORT GeoSceneProperty : public QObject, 
-                                        public GeoNode {
+                                        public GeoNode
+{
     Q_OBJECT
 
  public:

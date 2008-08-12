@@ -34,7 +34,8 @@ namespace Marble
 /**
  * @short Contents used inside a layer.
  */
-class GeoSceneAbstractDataset : public GeoNode {
+class GeoSceneAbstractDataset : public GeoNode
+{
  public:
     virtual ~GeoSceneAbstractDataset() {};
 

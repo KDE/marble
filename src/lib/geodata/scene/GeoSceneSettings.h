@@ -42,7 +42,8 @@ class GeoSceneSettingsPrivate;
  * @short Settings of a GeoScene document.
  */
 class GEODATA_EXPORT GeoSceneSettings : public QObject, 
-                                        public GeoNode {
+                                        public GeoNode
+{
     Q_OBJECT
 
  public:

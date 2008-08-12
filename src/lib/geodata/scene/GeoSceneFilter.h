@@ -35,7 +35,8 @@ namespace Marble
  * @short Filter of a GeoScene document.
  */
 
-class GeoSceneFilter : public GeoNode {
+class GeoSceneFilter : public GeoNode
+{
  public:
     explicit GeoSceneFilter( const QString& name );
     ~GeoSceneFilter();

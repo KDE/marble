@@ -36,7 +36,8 @@ class GeoSceneItem;
  * @short Section of a GeoScene document.
  */
 
-class GeoSceneSection : public GeoNode {
+class GeoSceneSection : public GeoNode
+{
  public:
     explicit GeoSceneSection( const QString& name );
     ~GeoSceneSection();

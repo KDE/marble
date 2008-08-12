@@ -38,7 +38,8 @@ class GeoSceneHeadPrivate;
 /**
  * @short General properties and identifiers of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneHead : public GeoNode {
+class GEODATA_EXPORT GeoSceneHead : public GeoNode
+{
  public:
     GeoSceneHead();
     ~GeoSceneHead();

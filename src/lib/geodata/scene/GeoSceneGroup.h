@@ -38,7 +38,8 @@ class GeoSceneProperty;
  */
 
 class GeoSceneGroup : public QObject,
-                      public GeoNode {
+                      public GeoNode
+{
     Q_OBJECT
 
  public:

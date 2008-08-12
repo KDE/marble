@@ -33,7 +33,8 @@ namespace Marble
  * @short Palette of a GeoScene document.
  */
 
-class GeoScenePalette : public GeoNode {
+class GeoScenePalette : public GeoNode
+{
  public:
     explicit GeoScenePalette( const QString& type, const QString& file );
     ~GeoScenePalette();

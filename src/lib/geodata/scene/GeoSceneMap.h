@@ -41,7 +41,8 @@ class GeoSceneMapPrivate;
 /**
  * @short Map layer structure of a GeoScene document.
  */
-class GEODATA_EXPORT GeoSceneMap : public GeoNode {
+class GEODATA_EXPORT GeoSceneMap : public GeoNode
+{
  public:
     GeoSceneMap();
     ~GeoSceneMap();
