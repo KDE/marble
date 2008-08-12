@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class KmlMarblePlacemarkTagHandler : public GeoTagHandler {
+class KmlMarblePlacemarkTagHandler : public GeoTagHandler
+{
 public:
     KmlMarblePlacemarkTagHandler();
     virtual ~KmlMarblePlacemarkTagHandler();

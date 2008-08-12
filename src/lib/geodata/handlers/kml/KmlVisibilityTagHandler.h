@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class KmlvisibilityTagHandler : public GeoTagHandler {
+class KmlvisibilityTagHandler : public GeoTagHandler
+{
 public:
     KmlvisibilityTagHandler();
     virtual ~KmlvisibilityTagHandler();

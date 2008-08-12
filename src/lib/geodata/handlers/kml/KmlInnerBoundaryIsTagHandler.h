@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class KmlinnerBoundaryIsTagHandler : public GeoTagHandler {
+class KmlinnerBoundaryIsTagHandler : public GeoTagHandler
+{
 public:
     KmlinnerBoundaryIsTagHandler();
     virtual ~KmlinnerBoundaryIsTagHandler();

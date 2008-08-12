@@ -26,7 +26,8 @@ namespace Marble
 {
 
 // Lists all known KML 2.1 tags (http://code.google.com/apis/kml/documentation/kmlTag_tags_21.html)
-namespace GeoDataElementDictionary {
+namespace GeoDataElementDictionary
+{
     extern const char* kmlTag_nameSpace20;
     extern const char* kmlTag_nameSpace21;
     extern const char* kmlTag_nameSpace22;
