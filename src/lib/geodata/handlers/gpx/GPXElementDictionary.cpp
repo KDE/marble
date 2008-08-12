@@ -21,6 +21,9 @@
 
 #include "GPXElementDictionary.h"
 
+namespace Marble
+{
+
 // One static list of all tag names, to avoid string comparisons all-over-the-place
 namespace GeoDataElementDictionary {
 
@@ -29,4 +32,5 @@ const char* gpxTag_nameSpace11 = "http://www.topografix.com/GPX/1/1";
 
 const char* gpxTag_gpx = "gpx";
 
+}
 }

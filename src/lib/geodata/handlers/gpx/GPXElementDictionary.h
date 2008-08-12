@@ -23,6 +23,9 @@
 #define GPXElementDictionary_h
 
 
+namespace Marble
+{
+
 // Lists all known GPX 1.1 tags (http://www.topografix.com/GPX/1/1/)
 namespace GeoDataElementDictionary {
     extern const char* gpxTag_nameSpace10;
@@ -39,5 +42,7 @@ namespace GeoDataElementDictionary {
 #define GPX_DEFINE_TAG_HANDLER(Name) \
     GPX_DEFINE_TAG_HANDLER_10(Name) \
     GPX_DEFINE_TAG_HANDLER_11(Name)
+
+}
 
 #endif // GPXElementDictionary_h

@@ -26,6 +26,9 @@
 #include "GPXElementDictionary.h"
 #include "GeoParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 GPX_DEFINE_TAG_HANDLER(gpx)
@@ -45,4 +48,6 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     qDebug() << "Parsed <Document> start!";    
     return 0;
+}
+
 }
