@@ -28,6 +28,9 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
+namespace Marble
+{
+
 class GeoSceneTexture;
 
 namespace TileLoaderHelper {
@@ -92,6 +95,8 @@ namespace TileLoaderHelper {
      *         for example "maps/earth/srtm".
      */
     QString themeStr( GeoSceneTexture *textureLayer );
+}
+
 }
 
 #endif // __MARBLE__TILELOADERHELPER_H

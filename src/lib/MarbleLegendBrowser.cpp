@@ -34,6 +34,7 @@
 
 #include "MarbleDirs.h"
 
+using namespace Marble;
 
 class MarbleLegendBrowserPrivate
 {

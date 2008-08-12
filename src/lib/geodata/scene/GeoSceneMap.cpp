@@ -25,7 +25,10 @@
 #include "GeoSceneFilter.h"
 #include "DgmlAuxillaryDictionary.h"
 
-using namespace Marble::GeoSceneAuxillaryDictionary;
+namespace Marble
+{
+
+using namespace GeoSceneAuxillaryDictionary;
 
 // FIXME: Filters are a Dataset.
 
@@ -199,4 +202,6 @@ QColor GeoSceneMap::labelColor() const
 void GeoSceneMap::setLabelColor( const QColor& backgroundColor )
 {
     d->m_labelColor = backgroundColor;
+}
+
 }

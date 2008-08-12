@@ -26,6 +26,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 /**
  * @short Palette of a GeoScene document.
  */
@@ -47,5 +50,7 @@ class GeoScenePalette : public GeoNode {
     QString m_type;
     QString m_file;
 };
+
+}
 
 #endif // GEOSCENELAYER_H

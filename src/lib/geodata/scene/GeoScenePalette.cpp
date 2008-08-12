@@ -21,6 +21,9 @@
 
 #include "GeoScenePalette.h"
 
+namespace Marble
+{
+
 GeoScenePalette::GeoScenePalette( const QString& type,
                                 const QString& file )
 {
@@ -59,4 +62,6 @@ bool GeoScenePalette::operator==( const GeoScenePalette& other )
     if( m_file == other.file() && m_type == other.type() ) {
         return true;
     } else { return false; }
+}
+
 }

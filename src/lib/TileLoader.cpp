@@ -37,6 +37,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
 
+using namespace Marble;
+
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
    long double log(int i) { return log((long double)i); }

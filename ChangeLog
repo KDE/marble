@@ -1,3 +1,62 @@
+2008-08-13  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/lib/AbstractScanlineTextureMapper.cpp:
+    * src/lib/MapThemeManager.h:
+    * src/lib/MergedLayerDecorator.h:
+    * src/lib/MarbleWidget.h:
+    * src/lib/AbstractScanlineTextureMapper.h:
+    * src/lib/MarbleLegendBrowser.cpp:
+    * src/lib/TileLoader.h:
+    * src/lib/MapThemeManager.cpp:
+    * src/lib/MergedLayerDecorator.cpp:
+    * src/lib/TextureTile.cpp:
+    * src/lib/TileLoaderHelper.cpp:
+    * src/lib/TextureTile.h:
+    * src/lib/ViewParams.h:
+    * src/lib/TileLoader.cpp:
+    * src/lib/MarbleModel.h:
+    * src/lib/LayerManager.h:
+    * src/lib/geodata/GeoDataTest.cpp:
+    * src/lib/geodata/parser/GeoSceneParser.cpp:
+    * src/lib/geodata/parser/GeoSceneParser.h:
+    * src/lib/geodata/scene/GeoSceneZoom.h:
+    * src/lib/geodata/scene/GeoSceneFilter.h:
+    * src/lib/geodata/scene/GeoSceneIcon.h:
+    * src/lib/geodata/scene/GeoScenePalette.cpp:
+    * src/lib/geodata/scene/GeoSceneLegend.cpp:
+    * src/lib/geodata/scene/GeoSceneTexture.cpp:
+    * src/lib/geodata/scene/GeoSceneSettings.cpp:
+    * src/lib/geodata/scene/GeoSceneGroup.h:
+    * src/lib/geodata/scene/GeoSceneVector.cpp:
+    * src/lib/geodata/scene/GeoSceneItem.h:
+    * src/lib/geodata/scene/GeoSceneSection.cpp:
+    * src/lib/geodata/scene/GeoSceneMapTheme.h:
+    * src/lib/geodata/scene/GeoSceneHead.h:
+    * src/lib/geodata/scene/GeoSceneDocument.cpp:
+    * src/lib/geodata/scene/GeoSceneLayer.h:
+    * src/lib/geodata/scene/GeoSceneMap.h:
+    * src/lib/geodata/scene/GeoSceneZoom.cpp:
+    * src/lib/geodata/scene/GeoSceneFilter.cpp:
+    * src/lib/geodata/scene/GeoSceneIcon.cpp:
+    * src/lib/geodata/scene/GeoSceneProperty.h:
+    * src/lib/geodata/scene/GeoSceneGroup.cpp:
+    * src/lib/geodata/scene/GeoSceneItem.cpp:
+    * src/lib/geodata/scene/GeoSceneMapTheme.cpp:
+    * src/lib/geodata/scene/GeoSceneHead.cpp:
+    * src/lib/geodata/scene/GeoScenePalette.h:
+    * src/lib/geodata/scene/GeoSceneLegend.h:
+    * src/lib/geodata/scene/GeoSceneTexture.h:
+    * src/lib/geodata/scene/GeoSceneSettings.h:
+    * src/lib/geodata/scene/GeoSceneVector.h:
+    * src/lib/geodata/scene/GeoSceneSection.h:
+    * src/lib/geodata/scene/GeoSceneLayer.cpp:
+    * src/lib/geodata/scene/GeoSceneMap.cpp:
+    * src/lib/geodata/scene/GeoSceneDocument.h:
+    * src/lib/geodata/scene/GeoSceneProperty.cpp:
+    * src/lib/TileLoaderHelper.h:
+
+    Move from global namespace into namespace Marble.
+
 2008-08-12  Simon Schmeisser  <mail_to_wrt@gmx.de>
 
     * src/plugins/marble/geodata/MarbleGeoDataPlugin.cpp

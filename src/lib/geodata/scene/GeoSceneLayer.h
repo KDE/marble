@@ -28,6 +28,8 @@
 #include "GeoDocument.h"
 #include "GeoSceneFilter.h"
 
+namespace Marble
+{
 
 /**
  * @short Contents used inside a layer.
@@ -98,5 +100,7 @@ class GeoSceneLayer : public GeoNode {
  private:
     Q_DISABLE_COPY( GeoSceneLayer )
 };
+
+}
 
 #endif // GEOSCENELAYER_H

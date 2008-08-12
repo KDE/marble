@@ -29,6 +29,9 @@
 #include "GeoSceneLegend.h"
 #include "GeoSceneSettings.h"
 
+namespace Marble
+{
+
 class GeoSceneDocumentPrivate
 {
   public:
@@ -87,6 +90,8 @@ GeoSceneSettings* GeoSceneDocument::settings() const
 GeoSceneLegend* GeoSceneDocument::legend() const
 {
     return d->m_legend;
+}
+
 }
 
 #include "GeoSceneDocument.moc"

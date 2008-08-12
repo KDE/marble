@@ -25,6 +25,9 @@
 #include <geodata_export.h>
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 /**
  * @short Zoom properties of a GeoScene document.
  */
@@ -49,5 +52,6 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode {
     // FIXME: d-pointerfy
 };
 
+}
 
 #endif // GEOSCENEZOOM_H

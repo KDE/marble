@@ -25,6 +25,9 @@
 
 #include "GeoSceneItem.h"
 
+namespace Marble
+{
+
 GeoSceneSection::GeoSceneSection( const QString& name )
     : m_name( name ),
       m_heading( "" ),
@@ -129,4 +132,6 @@ int  GeoSceneSection::spacing() const
 void GeoSceneSection::setSpacing( int spacing )
 {
     m_spacing = spacing;
+}
+
 }

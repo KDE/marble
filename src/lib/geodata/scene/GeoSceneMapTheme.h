@@ -22,6 +22,8 @@
 
 class QStandardItemModel;
 
+namespace Marble
+{
 
 typedef struct
 {
@@ -155,5 +157,6 @@ private:
     int        m_maxtilelevel;
 };
 
+}
 
 #endif // MAPTHEME_H

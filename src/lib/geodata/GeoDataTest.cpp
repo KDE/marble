@@ -60,6 +60,8 @@ void myMessageOutput(QtMsgType type, const char *msg)
 }
 #endif
 
+using namespace Marble;
+
 void dumpGeoDataDocument(GeoDataDocument*);
 void dumpGeoSceneDocument(GeoSceneDocument*);
 

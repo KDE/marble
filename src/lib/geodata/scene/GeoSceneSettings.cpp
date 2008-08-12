@@ -26,6 +26,9 @@
 #include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"
 
+namespace Marble
+{
+
 class GeoSceneSettingsPrivate
 {
   public:
@@ -227,6 +230,8 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
 QVector<GeoSceneProperty*> GeoSceneSettings::rootProperties() const
 {
     return d->m_properties;
+}
+
 }
 
 #include "GeoSceneSettings.moc"

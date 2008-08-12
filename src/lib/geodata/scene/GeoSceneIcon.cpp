@@ -21,6 +21,9 @@
 
 #include "GeoSceneIcon.h"
 
+namespace Marble
+{
+
 GeoSceneIcon::GeoSceneIcon()
     : m_pixmap( "" ),
       m_color( "" )
@@ -51,4 +54,6 @@ QColor GeoSceneIcon::color() const
 void GeoSceneIcon::setColor( const QColor& color )
 {
     m_color = color;
+}
+
 }

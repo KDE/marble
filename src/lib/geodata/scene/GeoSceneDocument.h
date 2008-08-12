@@ -28,6 +28,9 @@
 
 #include <geodata_export.h>
 
+namespace Marble
+{
+
 class GeoSceneHead;
 class GeoSceneLegend;
 class GeoSceneMap;
@@ -62,5 +65,6 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
     GeoSceneDocumentPrivate * const d;
 };
 
+}
 
 #endif // GEOSCENEDOCUMENT_H

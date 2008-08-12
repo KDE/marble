@@ -20,11 +20,14 @@
 
 #include "marble_export.h"
 
-class GeoSceneDocument;
 class QFileSystemWatcher;
 class QStandardItem;
 class QStandardItemModel;
 
+namespace Marble
+{
+class GeoSceneDocument;
+}
 
 /**
  * @short The class that handles map themes that are locally available .
@@ -68,7 +71,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      * current theme into memory or by the MapThemeManager.
      */
     
-    static GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
+    static Marble::GeoSceneDocument* loadMapTheme( const QString& mapThemeStringID );
 
  public Q_SLOTS:
     /**
@@ -101,7 +104,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      */
     static QStringList findMapThemes();
 
-    static GeoSceneDocument* loadMapThemeFile( const QString& mapThemePath );
+    static Marble::GeoSceneDocument* loadMapThemeFile( const QString& mapThemePath );
 
     /**
      * @brief Returns all directory paths and .dgml file paths below local and

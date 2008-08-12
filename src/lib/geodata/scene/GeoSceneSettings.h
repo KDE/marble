@@ -30,6 +30,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 class GeoSceneProperty;
 class GeoSceneGroup;
 
@@ -117,5 +120,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     Q_DISABLE_COPY( GeoSceneSettings )
     GeoSceneSettingsPrivate * const d;
 };
+
+}
 
 #endif // GEOSCENESETTINGS_H

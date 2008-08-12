@@ -29,11 +29,13 @@
 #include "TileId.h"
 #include "MergedLayerDecorator.h"
 
-
 class QUrl;
-class GeoSceneTexture;
 class TextureTile;
 
+namespace Marble
+{
+class GeoSceneTexture;
+}
 
 class TextureTile : public QObject {
     Q_OBJECT
@@ -43,7 +45,8 @@ class TextureTile : public QObject {
 
     virtual ~TextureTile();
     
-    void loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache = 0 );
+    void loadRawTile( Marble::GeoSceneTexture *textureLayer, int level, int x,
+                      int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
     TileId const& id() const  { return m_id; }
     int  depth() const        { return m_depth; }
@@ -97,7 +100,9 @@ class TextureTile : public QObject {
     Q_DISABLE_COPY( TextureTile )
     QDateTime m_created;
 
-    void scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, double sourceX, double sourceY, int sourceLevel, int targetX, int targetY, int targetLevel  );
+    void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
+                        double sourceX, double sourceY, int sourceLevel,
+                        int targetX, int targetY, int targetLevel );
 };
 
 inline const QDateTime & TextureTile::created() const

@@ -28,6 +28,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 class GeoSceneProperty;
 
 /**
@@ -92,5 +95,6 @@ class GeoSceneGroup : public QObject,
     Q_DISABLE_COPY( GeoSceneGroup )
 };
 
+}
 
 #endif // GEOSCENEGROUP_H

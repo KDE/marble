@@ -23,6 +23,9 @@
 
 #include <limits>
 
+namespace Marble
+{
+
 // FIXME: Filters are a Dataset.
 
 GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
@@ -156,4 +159,6 @@ void GeoSceneLayer::addFilter( GeoSceneFilter *filter )
 void GeoSceneLayer::removeFilter( GeoSceneFilter *filter )
 {
     if( filter == m_filter ) { m_filter = 0; }
+}
+
 }

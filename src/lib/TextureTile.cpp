@@ -22,6 +22,7 @@
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"
 
+using namespace Marble;
 
 static uint **jumpTableFromQImage32( QImage &img )
 {

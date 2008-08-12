@@ -31,6 +31,9 @@
 #include "GeoSceneTexture.h"
 #include "global.h"
 
+namespace Marble
+{
+
 int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
 {
     if ( level < 0 ) {
@@ -131,4 +134,6 @@ QString TileLoaderHelper::themeStr( GeoSceneTexture *textureLayer )
     }
 
     return oldThemeStr;
+}
+
 }

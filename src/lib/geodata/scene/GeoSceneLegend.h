@@ -27,6 +27,9 @@
 
 #include <geodata_export.h>
 
+namespace Marble
+{
+
 class GeoSceneSection;
 
 class GeoSceneLegendPrivate;
@@ -53,5 +56,6 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode {
     GeoSceneLegendPrivate * const d;
 };
 
+}
 
 #endif // GEOSCENELEGEND_H

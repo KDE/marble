@@ -27,6 +27,9 @@
 
 #include <geodata_export.h>
 
+namespace Marble
+{
+
 class GeoSceneIcon;
 class GeoSceneZoom;
 
@@ -63,5 +66,6 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode {
     GeoSceneHeadPrivate * const d;
 };
 
+}
 
 #endif // GEOSCENEHEAD_H

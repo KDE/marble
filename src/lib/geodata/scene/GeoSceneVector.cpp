@@ -21,6 +21,8 @@
 
 #include "GeoSceneVector.h"
 
+namespace Marble
+{
 
 GeoSceneVector::GeoSceneVector( const QString& name )
     : GeoSceneAbstractDataset( name ),
@@ -80,4 +82,6 @@ void GeoSceneVector::setBrush( const QBrush& brush )
 QString GeoSceneVector::type()
 {
     return "vector";
+}
+
 }

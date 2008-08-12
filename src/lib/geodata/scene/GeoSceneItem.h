@@ -26,6 +26,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 class GeoSceneIcon;
 
 /**
@@ -67,5 +70,6 @@ class GeoSceneItem : public GeoNode {
     Q_DISABLE_COPY( GeoSceneItem )
 };
 
+}
 
 #endif // GEOSCENEITEM_H

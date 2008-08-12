@@ -23,6 +23,9 @@
 
 #include "GeoSceneIcon.h"
 
+namespace Marble
+{
+
 GeoSceneItem::GeoSceneItem( const QString& name )
     : m_icon(new GeoSceneIcon),
       m_name( name ),
@@ -87,4 +90,6 @@ int  GeoSceneItem::spacing() const
 void GeoSceneItem::setSpacing( int spacing )
 {
     m_spacing = spacing;
+}
+
 }

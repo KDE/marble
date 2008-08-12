@@ -29,6 +29,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 /**
  * @short Icon properties of a GeoScene document.
  */
@@ -49,5 +52,7 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode {
 
     // FIXME: d-pointerfy
 };
+
+}
 
 #endif // GEOSCENEICON_H

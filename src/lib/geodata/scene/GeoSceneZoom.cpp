@@ -21,6 +21,9 @@
 
 #include "GeoSceneZoom.h"
 
+namespace Marble
+{
+
 GeoSceneZoom::GeoSceneZoom()
     // Arbitrary defaults, as used in Marble
     : m_minimum( 900 ),
@@ -63,4 +66,6 @@ bool GeoSceneZoom::discrete() const
 void GeoSceneZoom::setDiscrete( bool discrete )
 {
     m_discrete = discrete;
+}
+
 }

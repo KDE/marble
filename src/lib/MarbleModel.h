@@ -44,8 +44,6 @@ class BoundingBox;
 class GeoPainter;
 class FileViewModel;
 class GeoDataDocument;
-class GeoSceneDocument;
-class GeoSceneTexture;
 class GpsLayer;
 class GpxFileModel;
 class HttpDownloadManager;
@@ -62,6 +60,11 @@ class MergedLayerDecorator;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
+namespace Marble
+{
+class GeoSceneDocument;
+class GeoSceneTexture;
+}
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -145,7 +148,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QString mapThemeId() const;
 
-    GeoSceneDocument *mapTheme() const;
+    Marble::GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme to use.
@@ -168,7 +171,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example: 
      *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void setMapTheme( GeoSceneDocument* mapTheme,
+    void setMapTheme( Marble::GeoSceneDocument* mapTheme,
 		      Projection currentProjection );
 
     /**
@@ -259,7 +262,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void clearPersistentTileCache();
 
 //  private Q_SLOTS:
-    void paintTile(TextureTile* tile, int x, int y, int level, GeoSceneTexture *textureLayer, bool requestTileUpdate);
+    void paintTile( TextureTile* tile, int x, int y, int level,
+                    Marble::GeoSceneTexture *textureLayer,
+                    bool requestTileUpdate );
 
     /**
      * @brief Update the model

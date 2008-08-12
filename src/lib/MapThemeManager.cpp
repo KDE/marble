@@ -30,6 +30,7 @@
 #include "GeoSceneParser.h"
 #include "MarbleDirs.h"
 
+using namespace Marble;
 
 namespace {
     const QString mapDirName = "maps";

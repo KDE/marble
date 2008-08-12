@@ -30,7 +30,12 @@ class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 class MarbleModel;
+
+
+namespace Marble
+{
 class GeoSceneTexture;
+}
 
 /**
  * @short Tile loading from a quad tree
@@ -82,12 +87,12 @@ class TileLoader : public QObject
         /**
          * Sets the texture layer @p the tiles shall be loaded for.
          */
-        void setTextureLayer( GeoSceneTexture *textureLayer );
+        void setTextureLayer( Marble::GeoSceneTexture *textureLayer );
 
         /**
          * Returns the texture layer the tiles shall be loaded for.
          */
-        GeoSceneTexture* textureLayer() const;
+        Marble::GeoSceneTexture* textureLayer() const;
 
         /**
          * Resets the internal tile hash.
@@ -138,19 +143,19 @@ class TileLoader : public QObject
          * Returns the highest level in which all tiles are available for the given @p
          * texture layer.
          */
-        static int maxCompleteTileLevel( GeoSceneTexture *textureLayer );
+        static int maxCompleteTileLevel( Marble::GeoSceneTexture *textureLayer );
 
         /**
          * Returns the highest level in which some tiles are available for the given @p
          * texture layer.
          */
-        static int maxPartialTileLevel( GeoSceneTexture *textureLayer );
+        static int maxPartialTileLevel( Marble::GeoSceneTexture *textureLayer );
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for
          * the given @p texture layer.
          */
-        static bool baseTilesAvailable( GeoSceneTexture *textureLayer );
+        static bool baseTilesAvailable( Marble::GeoSceneTexture *textureLayer );
 
     public Q_SLOTS:
         /**
@@ -183,7 +188,8 @@ class TileLoader : public QObject
          */
         void tileUpdateAvailable();
         
-        void paintTile(TextureTile* tile, int x, int y, int level, GeoSceneTexture *textureLayer,
+        void paintTile(TextureTile* tile, int x, int y, int level,
+                       Marble::GeoSceneTexture *textureLayer,
                        bool requestTileUpdate);
 
     private:

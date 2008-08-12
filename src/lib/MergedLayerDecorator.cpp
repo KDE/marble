@@ -31,6 +31,8 @@
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
 
+using namespace Marble;
+
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
  : m_sunLocator(sunLocator),
    m_cloudlayer(false),

@@ -26,6 +26,10 @@
 #include "GeoParser.h"
 
 class GeoDocument;
+
+namespace Marble
+{
+
 class GeoSceneDocument;
 
 enum GeoSceneSourceType {
@@ -47,5 +51,7 @@ private:
 
 // Global helper function for the tag handlers
 GeoSceneDocument* geoSceneDoc(GeoParser& parser);
+
+}
 
 #endif // GeoSceneParser_h

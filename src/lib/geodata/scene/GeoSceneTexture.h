@@ -32,6 +32,9 @@
  * @short Texture dataset stored in a layer.
  */
 
+namespace Marble
+{
+
 class GeoSceneTexture : public GeoSceneAbstractDataset {
  public:
     enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
@@ -84,5 +87,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset {
     /// Points to next Url for the round robin algorithm
     QVector<QUrl>::const_iterator m_nextUrl;
 };
+
+}
 
 #endif // GEOSCENETEXTURE_H

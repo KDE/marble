@@ -25,6 +25,9 @@
 
 #include "GeoSceneProperty.h"
 
+namespace Marble
+{
+
 GeoSceneGroup::GeoSceneGroup( const QString& name )
     : m_name( name )
 {
@@ -130,6 +133,8 @@ QVector<GeoSceneProperty*> GeoSceneGroup::properties() const
 QString GeoSceneGroup::name() const
 {
     return m_name;
+}
+
 }
 
 #include "GeoSceneGroup.moc"

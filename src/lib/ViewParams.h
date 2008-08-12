@@ -31,10 +31,13 @@
 class QImage;
 
 class AbstractProjection;
-class GeoSceneDocument;
 class ViewportParams;
-
 class ViewParamsPrivate;
+
+namespace Marble
+{
+class GeoSceneDocument;
+}
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
@@ -58,7 +61,7 @@ class MARBLE_EXPORT ViewParams
  */
     void setMapThemeId( const QString& );
     QString mapThemeId();
-    GeoSceneDocument *mapTheme();
+    Marble::GeoSceneDocument *mapTheme();
 
     // Convenience methods:
 

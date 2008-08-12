@@ -47,6 +47,7 @@ class TextureTile;
 class TileLoader;
 class ViewParams;
 
+using Marble::GeoSceneTexture;
 
 class AbstractScanlineTextureMapper : public QObject
 {

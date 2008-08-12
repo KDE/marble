@@ -29,7 +29,8 @@
 
 #include "GeoDocument.h"
 
-
+namespace Marble
+{
 
 /**
  * @short Settings property within a GeoScene document.
@@ -64,5 +65,6 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
     // FIXME: d-pointerfy
 };
 
+}
 
 #endif // GEOSCENEPROPERTY_H

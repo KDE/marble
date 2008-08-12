@@ -21,6 +21,9 @@
 
 #include "GeoSceneFilter.h"
 
+namespace Marble
+{
+
 GeoSceneFilter::GeoSceneFilter( const QString& name )
 {
     /* NOOP */
@@ -66,4 +69,6 @@ void GeoSceneFilter::addPalette( GeoScenePalette *palette )
 int GeoSceneFilter::removePalette( GeoScenePalette *palette )
 {
     return m_palette.removeAll( palette );
+}
+
 }

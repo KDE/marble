@@ -34,8 +34,10 @@
 // DGML support
 #include "DgmlElementDictionary.h"
 
+namespace Marble
+{
 
-using namespace Marble::GeoSceneElementDictionary;
+using namespace GeoSceneElementDictionary;
 
 GeoSceneParser::GeoSceneParser(GeoSceneSourceType source)
     : GeoParser(source)
@@ -96,4 +98,6 @@ GeoSceneDocument* geoSceneDoc(GeoParser& parser)
     GeoDocument* document = parser.activeDocument();
     Q_ASSERT(document->isGeoSceneDocument());
     return static_cast<GeoSceneDocument*>(document);
+}
+
 }

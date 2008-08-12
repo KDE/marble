@@ -19,12 +19,16 @@
 #include "PluginManager.h"
 
 class LayerManagerPrivate;
-class GeoSceneDocument;
 class GeoPainter;
 class ViewParams;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 class MarbleDataFacade;
+
+namespace Marble
+{
+class GeoSceneDocument;
+}
 
 /**
  * @short The class that handles Marble's DGML layers.
@@ -53,7 +57,7 @@ class MARBLE_EXPORT LayerManager : public QObject
  public Q_SLOTS:
     void loadLayers();
 
-    void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
+    void syncViewParamsAndPlugins( Marble::GeoSceneDocument *mapTheme );
     void syncActionWithProperty( QString, bool );
     void syncPropertyWithAction( QString, bool );
  

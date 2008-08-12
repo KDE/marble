@@ -24,8 +24,11 @@
 
 class QUrl;
 
+namespace Marble
+{
 class GeoSceneDocument;
 class GeoSceneTexture;
+}
 
 class MergedLayerDecorator : public QObject
 {
@@ -37,7 +40,7 @@ class MergedLayerDecorator : public QObject
 
     // The Parameter themeId is only used for displaying the TileId,
     // which is a debugging feature, therefore at this point QString remains.
-    void paint( const QString& themeId, GeoSceneDocument *mapTheme = 0 );
+    void paint( const QString& themeId, Marble::GeoSceneDocument *mapTheme = 0 );
     void paintTileId(const QString& themeId);
     
     void setShowClouds(bool show);
@@ -55,7 +58,7 @@ class MergedLayerDecorator : public QObject
     void repaintMap();
 	
  private:
-    QImage loadRawTile( GeoSceneTexture *textureLayer );
+    QImage loadRawTile( Marble::GeoSceneTexture *textureLayer );
     int maxDivisor( int maximum, int fullLength );
     void paintSunShading();
     void paintClouds();
@@ -70,10 +73,10 @@ class MergedLayerDecorator : public QObject
     SunLocator* m_sunLocator;
     bool m_cloudlayer;
     bool m_showTileId;
-    GeoSceneDocument *m_cityLightsTheme;
-    GeoSceneDocument *m_blueMarbleTheme;
-    GeoSceneTexture *m_cityLightsTextureLayer;
-    GeoSceneTexture *m_cloudsTextureLayer;
+    Marble::GeoSceneDocument *m_cityLightsTheme;
+    Marble::GeoSceneDocument *m_blueMarbleTheme;
+    Marble::GeoSceneTexture *m_cityLightsTextureLayer;
+    Marble::GeoSceneTexture *m_cloudsTextureLayer;
 };
 
 #endif

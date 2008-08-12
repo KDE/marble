@@ -23,6 +23,8 @@
 #include "MarbleDirs.h"
 #include "TileLoader.h"
 
+namespace Marble
+{
 
 // ================================================================
 //                           Legend classes
@@ -227,5 +229,6 @@ Qt::SmoothTransformation );
     return mapthememodel;
 }
 
+}
 
 #include "GeoSceneMapTheme.moc"

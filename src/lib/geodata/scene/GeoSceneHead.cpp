@@ -26,6 +26,9 @@
 #include "GeoSceneIcon.h"
 #include "GeoSceneZoom.h"
 
+namespace Marble
+{
+
 class GeoSceneHeadPrivate
 {
   public:
@@ -132,4 +135,6 @@ bool GeoSceneHead::visible() const
 void GeoSceneHead::setVisible( bool visible )
 {
     d->m_visible = visible;
+}
+
 }

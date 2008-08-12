@@ -41,8 +41,6 @@ class QModelIndex;
 class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
 
-class GeoSceneDocument;
-
 // MarbleWidget 
 // class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
@@ -60,6 +58,10 @@ class GeoPainter;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 
+namespace Marble
+{
+class GeoSceneDocument;
+}
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -638,7 +640,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Get the GeoSceneDocument object of the current map theme
      */
-    GeoSceneDocument *mapTheme() const;
+    Marble::GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme

@@ -28,6 +28,9 @@
 
 #include "GeoSceneLayer.h"
 
+namespace Marble
+{
+
 /**
  * @short Vector dataset stored in a layer.
  */
@@ -58,5 +61,7 @@ class GeoSceneVector : public GeoSceneAbstractDataset {
     QPen    m_pen;
     QBrush  m_brush;
 };
+
+}
 
 #endif // GEOSCENEVECTOR_H

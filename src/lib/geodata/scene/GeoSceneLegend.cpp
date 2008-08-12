@@ -23,6 +23,9 @@
 
 #include "GeoSceneSection.h"
 
+namespace Marble
+{
+
 class GeoSceneLegendPrivate
 {
   public:
@@ -97,4 +100,6 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
 QVector<GeoSceneSection*> GeoSceneLegend::sections() const
 {
     return d->m_sections;
+}
+
 }

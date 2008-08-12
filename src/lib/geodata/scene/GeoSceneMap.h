@@ -30,6 +30,9 @@
 
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 class GeoSceneLayer;
 class GeoSceneFilter;
 
@@ -110,5 +113,6 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode {
     GeoSceneMapPrivate * const d;
 };
 
+}
 
 #endif // GEOSCENEMAP_H

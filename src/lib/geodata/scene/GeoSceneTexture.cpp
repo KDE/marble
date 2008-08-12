@@ -24,7 +24,8 @@
 
 #include "global.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 GeoSceneTexture::GeoSceneTexture( const QString& name )
     : GeoSceneAbstractDataset( name ),
@@ -138,4 +139,6 @@ void GeoSceneTexture::addDownloadUrl( const QUrl & url )
 QString GeoSceneTexture::type()
 {
     return "texture";
+}
+
 }
