@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class DgmlMaximumTagHandler : public GeoTagHandler {
+class DgmlMaximumTagHandler : public GeoTagHandler
+{
  public:
     DgmlMaximumTagHandler();
     virtual ~DgmlMaximumTagHandler();

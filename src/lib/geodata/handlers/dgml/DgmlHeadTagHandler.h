@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class DgmlHeadTagHandler : public GeoTagHandler {
+class DgmlHeadTagHandler : public GeoTagHandler
+{
  public:
     DgmlHeadTagHandler();
     virtual ~DgmlHeadTagHandler();

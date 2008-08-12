@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class DgmlStorageLayoutTagHandler : public GeoTagHandler {
+class DgmlStorageLayoutTagHandler : public GeoTagHandler
+{
 public:
     DgmlStorageLayoutTagHandler();
     virtual ~DgmlStorageLayoutTagHandler();

@@ -29,7 +29,8 @@
 namespace Marble
 {
 
-class DgmlFilterTagHandler : public GeoTagHandler {
+class DgmlFilterTagHandler : public GeoTagHandler
+{
 public:
     DgmlFilterTagHandler();
     virtual ~DgmlFilterTagHandler();

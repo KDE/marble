@@ -27,7 +27,8 @@
 namespace Marble
 {
 
-class DgmlDownloadUrlTagHandler : public GeoTagHandler {
+class DgmlDownloadUrlTagHandler : public GeoTagHandler
+{
 public:
     virtual GeoNode* parse( GeoParser& ) const;
 };
