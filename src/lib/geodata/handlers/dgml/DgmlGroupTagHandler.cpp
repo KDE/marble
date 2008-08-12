@@ -41,12 +41,10 @@ DGML_DEFINE_TAG_HANDLER(Group)
 DgmlGroupTagHandler::DgmlGroupTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
 DgmlGroupTagHandler::~DgmlGroupTagHandler()
 {
-    /* NOOP */
 }
 
 GeoNode* DgmlGroupTagHandler::parse(GeoParser& parser) const

@@ -38,12 +38,10 @@ DGML_DEFINE_TAG_HANDLER(Settings)
 DgmlSettingsTagHandler::DgmlSettingsTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
 DgmlSettingsTagHandler::~DgmlSettingsTagHandler()
 {
-    /* NOOP */
 }
 
 GeoNode* DgmlSettingsTagHandler::parse(GeoParser& parser) const

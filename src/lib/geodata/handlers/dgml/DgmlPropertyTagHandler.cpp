@@ -41,12 +41,10 @@ DGML_DEFINE_TAG_HANDLER(Property)
 DgmlPropertyTagHandler::DgmlPropertyTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
 DgmlPropertyTagHandler::~DgmlPropertyTagHandler()
 {
-    /* NOOP */
 }
 
 GeoNode* DgmlPropertyTagHandler::parse(GeoParser& parser) const

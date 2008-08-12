@@ -39,12 +39,10 @@ DGML_DEFINE_TAG_HANDLER(Value)
 DgmlValueTagHandler::DgmlValueTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
 DgmlValueTagHandler::~DgmlValueTagHandler()
 {
-    /* NOOP */
 }
 
 GeoNode* DgmlValueTagHandler::parse(GeoParser& parser) const

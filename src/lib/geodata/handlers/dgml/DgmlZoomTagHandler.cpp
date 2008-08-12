@@ -38,12 +38,10 @@ DGML_DEFINE_TAG_HANDLER(Zoom)
 DgmlZoomTagHandler::DgmlZoomTagHandler()
     : GeoTagHandler()
 {
-    /* NOOP */
 }
 
 DgmlZoomTagHandler::~DgmlZoomTagHandler()
 {
-    /* NOOP */
 }
 
 GeoNode* DgmlZoomTagHandler::parse(GeoParser& parser) const
