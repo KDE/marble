@@ -35,7 +35,6 @@ GeoSceneSection::GeoSceneSection( const QString& name )
       m_checkable( false ),
       m_spacing( 12 )
 {
-    /* NOOP */
 }
 
 GeoSceneSection::~GeoSceneSection()

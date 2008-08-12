@@ -31,7 +31,6 @@ namespace Marble
 GeoSceneGroup::GeoSceneGroup( const QString& name )
     : m_name( name )
 {
-    /* NOOP */
 }
 
 GeoSceneGroup::~GeoSceneGroup()

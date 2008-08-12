@@ -30,12 +30,10 @@ GeoSceneZoom::GeoSceneZoom()
       m_maximum( 2500 ),
       m_discrete( false )
 {
-    /* NOOP */
 }
 
 GeoSceneZoom::~GeoSceneZoom()
 {
-    /* NOOP */
 }
 
 int GeoSceneZoom::minimum() const

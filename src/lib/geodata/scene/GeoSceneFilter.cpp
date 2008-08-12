@@ -26,7 +26,6 @@ namespace Marble
 
 GeoSceneFilter::GeoSceneFilter( const QString& name )
 {
-    /* NOOP */
     m_name = name;
     m_type = "none";
 }

@@ -34,12 +34,11 @@ GeoSceneItem::GeoSceneItem( const QString& name )
       m_checkable( false ),
       m_spacing( 12 )
 {
-    /* NOOP */
 }
 
 GeoSceneItem::~GeoSceneItem()
 {
-      delete m_icon;
+    delete m_icon;
 }
 
 GeoSceneIcon* GeoSceneItem::icon() const

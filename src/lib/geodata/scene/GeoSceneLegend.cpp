@@ -48,7 +48,6 @@ class GeoSceneLegendPrivate
 GeoSceneLegend::GeoSceneLegend()
     : d( new GeoSceneLegendPrivate )
 {
-    /* NOOP */
 }
 
 GeoSceneLegend::~GeoSceneLegend()

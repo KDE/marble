@@ -61,7 +61,6 @@ class GeoSceneMapPrivate
 GeoSceneMap::GeoSceneMap()
     : d ( new GeoSceneMapPrivate )
 {
-    /* NOOP */
 }
 
 GeoSceneMap::~GeoSceneMap()

@@ -27,8 +27,6 @@ namespace Marble
 GeoScenePalette::GeoScenePalette( const QString& type,
                                 const QString& file )
 {
-    //what does this do?
-    /* NOOP */ 
     m_type = type;
     m_file = file;
 }

@@ -31,12 +31,10 @@ GeoSceneVector::GeoSceneVector( const QString& name )
       m_pen( QPen() ),
       m_brush( QBrush() )
 {
-    /* NOOP */
 }
 
 GeoSceneVector::~GeoSceneVector()
 {
-    /* NOOP */
 }
 
 QString GeoSceneVector::sourceFile() const

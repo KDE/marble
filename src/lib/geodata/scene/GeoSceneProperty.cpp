@@ -36,7 +36,6 @@ GeoSceneProperty::GeoSceneProperty( const QString& name )
 
 GeoSceneProperty::~GeoSceneProperty()
 {
-    /* NOOP */
 }
 
 QString GeoSceneProperty::name() const

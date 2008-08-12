@@ -33,7 +33,6 @@ GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
       m_fileFormat( "" ),
       m_expire( std::numeric_limits<int>::max() )
 {
-    /* NOOP */
 }
 
 QString GeoSceneAbstractDataset::name() const

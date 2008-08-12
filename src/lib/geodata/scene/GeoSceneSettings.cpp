@@ -51,7 +51,6 @@ class GeoSceneSettingsPrivate
 GeoSceneSettings::GeoSceneSettings()
     : d( new GeoSceneSettingsPrivate )
 {
-    /* NOOP */
 }
 
 GeoSceneSettings::~GeoSceneSettings()

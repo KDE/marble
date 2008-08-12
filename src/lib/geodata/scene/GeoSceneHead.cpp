@@ -64,7 +64,6 @@ class GeoSceneHeadPrivate
 GeoSceneHead::GeoSceneHead()
     : d( new GeoSceneHeadPrivate )
 {
-    /* NOOP */
 }
 
 GeoSceneHead::~GeoSceneHead()
