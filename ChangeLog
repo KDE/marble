@@ -1,3 +1,10 @@
+2008-08-12  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/plugins/marble/geodata/MarbleGeoDataPlugin.cpp
+    * src/plugins/marble/geodata/jakobsweg.kml
+
+Also displaying points now. Fixed crash when the kml has no StyleMap. Added sample file to test it.
+
 2008-08-12  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/kml/KmlSchemaTagHandler.cpp:

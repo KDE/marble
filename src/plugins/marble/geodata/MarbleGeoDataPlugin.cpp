@@ -78,6 +78,7 @@ QIcon MarbleGeoDataPlugin::icon () const
 
 void MarbleGeoDataPlugin::initialize ()
 {
+    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/jakobsweg.kml" );
     dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/germany.kml" );
     dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/poland.kml" );
     dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/czech.kml" );
@@ -123,8 +124,18 @@ bool MarbleGeoDataPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeo
 
     GeoDataDocument* root = dataFacade()->geoDataModel()->geoDataRoot();
 /// hard coded to use only the "normal" style
-    QString mapped = root->styleMap( styleUrl.remove( '#' ) )->value( QString( "normal" ) );
+    QString mapped = styleUrl;
+    GeoDataStyleMap* styleMap = root->styleMap( styleUrl.remove( '#' ) );
+    if( styleMap ) {
+        mapped = styleMap->value( QString( "normal" ) );
+    }
     mapped.remove( '#' );
+
+
+    if( object->geometryId() == GeoDataPointId ) {
+        setPenStyle( painter, root, mapped );
+        painter->drawPoint( *(dynamic_cast<GeoDataPoint*>( object )) );
+    }
     if( object->geometryId() == GeoDataPolygonId ) {
         setBrushStyle( painter, root, mapped );
         setPenStyle( painter, root, mapped );
