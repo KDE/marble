@@ -48,6 +48,7 @@
 #include "gps/GpxFileModel.h"
 #include "PlaceMarkContainer.h"
 #include "MarblePlacemarkModel.h"
+#include "MarbleRunnerManager.h"
 #include "MathHelper.h"
 #include "MapThemeSortFilterProxyModel.h"
 
@@ -75,6 +76,8 @@ class MarbleControlBoxPrivate
     MapThemeSortFilterProxyModel *m_mapSortProxy;
     QHttp                   m_osmNameFinder;
     QBuffer                 *m_osmNameFinderResult;
+    
+    MarbleRunnerManager  *m_runnerManager;
 };
 
 MarbleControlBoxPrivate::MarbleControlBoxPrivate()
@@ -174,6 +177,14 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                      SLOT( adjustForStill() ) );
 
     d->uiWidget.projectionComboBox->setEnabled( true );
+    
+    d->m_runnerManager = new MarbleRunnerManager( this );
+    
+    connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
+             this,               SLOT( runnerModelChanged( MarblePlacemarkModel* ) ) );
+    
+    
+    
 }
 
 MarbleControlBox::~MarbleControlBox()
@@ -336,6 +347,7 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
+//     qDebug() << "setLocations";
     d->m_sortproxy->setSourceModel( locations );
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->sort( 0 );
@@ -541,10 +553,19 @@ GeoDataDocument * MarbleControlBox::parseOsmSearchResult( QByteArray & result )
 
 void MarbleControlBox::searchReturnPressed()
 {
-    // do nothing if search term empty or a request is being executed
-    if ( d->m_searchTerm.isEmpty() || d->m_osmNameFinder.currentId() != 0 )
+    // do nothing if search term empty
+    if ( d->m_searchTerm.isEmpty() ) {
         return;
-
+    } else {
+//         qDebug() << "Giving runner manager new text" << d->m_searchTerm;
+        d->m_runnerManager->newText( d->m_searchTerm );
+    }
+    
+    //if an osm search is being excecuted run only the runners
+    if( d->m_osmNameFinder.currentId() != 0 ) {
+        return;
+    }
+    
     d->m_osmNameFinderResult = new QBuffer;
     d->m_osmNameFinder.get( "/namefinder/search.xml?find=" + d->m_searchTerm,
                             d->m_osmNameFinderResult );
@@ -568,6 +589,11 @@ void MarbleControlBox::search()
     d->uiWidget.locationListView->selectItem( d->m_searchTerm );
     if ( currentSelected != d->uiWidget.locationListView->currentIndex().row() )
         d->uiWidget.locationListView->activate();
+}
+
+void MarbleControlBox::runnerModelChanged( MarblePlacemarkModel *newmodel )
+{
+    setLocations( newmodel );
 }
 
 void MarbleControlBox::selectTheme( const QString &theme )

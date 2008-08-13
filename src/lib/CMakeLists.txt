@@ -6,6 +6,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_BINARY_DIR}/src/lib
  ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/Projections
+ ${CMAKE_CURRENT_SOURCE_DIR}/runners
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/scene
@@ -151,6 +152,11 @@ set(marblewidget_SRCS
     LatLonEdit.cpp
 
     MapThemeSortFilterProxyModel.cpp
+    
+    MarbleRunnerManager.cpp
+    MarbleRunnerResult.cpp
+    runners/MarbleAbstractRunner.cpp
+    runners/LatLonRunner.cpp
 
 )
 

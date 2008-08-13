@@ -42,6 +42,8 @@ class QModelIndex;
 class QAbstractItemModel;
 class QStandardItemModel;
 
+class MarblePlacemarkModel;
+
 /** 
  * @short A widget class that contains advanced controls for a
  * MarbleWidget.
@@ -231,6 +233,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
+    
+    void runnerModelChanged( MarblePlacemarkModel *newmodel );
 
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
