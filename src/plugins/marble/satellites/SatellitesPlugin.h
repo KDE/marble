@@ -15,6 +15,9 @@
 
 #include "MarbleAbstractLayer.h"
 
+namespace Marble
+{
+
 /**
  * \brief This class displays a layer of satellites (which satellites TBD).
  *
@@ -22,7 +25,7 @@
 class SatellitesPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;
@@ -40,5 +43,7 @@ class SatellitesPlugin : public MarbleAbstractLayer
 
 //    QTimer* m_timer; /**< Timer to set the update interval */
 };
+
+}
 
 #endif

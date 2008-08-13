@@ -25,6 +25,9 @@ Right now this plugin displays public twit from Twitter , and gecocodes [i.e get
 #include <QSize>
 #include <QRegExp>
 
+namespace Marble
+{
+
 twitterPlugin::~twitterPlugin()
 {
     delete m_storagePolicy;
@@ -153,7 +156,8 @@ void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QStrin
         privateFlagForRenderingTwitts = 1;//1 means unblock
 }
 
+}
 
-Q_EXPORT_PLUGIN2(twitterPlugin, twitterPlugin)
+Q_EXPORT_PLUGIN2(twitterPlugin, Marble::twitterPlugin)
 
 #include "twitterPlugin.moc"

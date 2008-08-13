@@ -19,6 +19,9 @@
 
 #include "MarbleAbstractLayer.h"
 
+namespace Marble
+{
+
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
@@ -27,7 +30,7 @@
 class MarbleTestPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;
@@ -54,5 +57,7 @@ class MarbleTestPlugin : public MarbleAbstractLayer
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };
+
+}
 
 #endif

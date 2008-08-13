@@ -27,6 +27,9 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
+
 /**
  * @short The class that specifies the a simple panormaio plugin
  *
@@ -39,7 +42,7 @@ struct twitterStructure {
 class twitterPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES(MarbleLayerInterface)
+    Q_INTERFACES(Marble::MarbleLayerInterface)
 
 public:
     QStringList backendTypes() const;
@@ -83,5 +86,7 @@ private:
     int privateFlagForRenderingTwitts;//this flag is one when globe has an Image  (downloaded or already there in cache)
 
 };
+
+}
 
 #endif

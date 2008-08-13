@@ -17,6 +17,8 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
 
 QStringList SatellitesPlugin::backendTypes() const
 {
@@ -96,6 +98,8 @@ bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     return true;
 }
 
-Q_EXPORT_PLUGIN2(SatellitesPlugin, SatellitesPlugin)
+}
+
+Q_EXPORT_PLUGIN2(SatellitesPlugin, Marble::SatellitesPlugin)
 
 #include "SatellitesPlugin.moc"

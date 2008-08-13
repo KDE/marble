@@ -17,6 +17,8 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
 
 QStringList MarbleTestPlugin::backendTypes() const
 {
@@ -225,6 +227,8 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     return true;
 }
 
-Q_EXPORT_PLUGIN2(MarbleTestPlugin, MarbleTestPlugin)
+}
+
+Q_EXPORT_PLUGIN2(MarbleTestPlugin, Marble::MarbleTestPlugin)
 
 #include "MarbleTestPlugin.moc"

@@ -1,3 +1,16 @@
+2008-08-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
+    * src/plugins/marble/test/MarbleTestPlugin.cpp:
+    * src/plugins/marble/test/MarbleTestPlugin.h:
+    * src/plugins/marble/twitter/twitterPlugin.cpp:
+    * src/plugins/marble/twitter/twitterPlugin.h:
+    * src/plugins/marble/panoramio/PanoramioPlugin.cpp:
+    * src/plugins/marble/panoramio/PanoramioPlugin.h:
+    * src/plugins/marble/satellites/SatellitesPlugin.cpp:
+    * src/plugins/marble/satellites/SatellitesPlugin.h:
+
+    Move deactivated plugins from global namespace into Marble namespace.
+
 2008-08-13  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/KdeMainWindow.cpp:

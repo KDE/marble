@@ -23,6 +23,9 @@
 #include "jsonparser.h"
 #include "MarbleAbstractLayer.h"
 
+namespace Marble
+{
+
 /**
  * @short The class that specifies the a simple panormaio plugin
  *
@@ -31,7 +34,7 @@
 class PanoramioPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES(MarbleLayerInterface)
+    Q_INTERFACES(Marble::MarbleLayerInterface)
 
 public:
     QStringList backendTypes() const;
@@ -76,5 +79,7 @@ private:
 //         HttpJob *job;
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
 };
+
+}
 
 #endif

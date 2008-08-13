@@ -20,6 +20,9 @@
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
+
 QStringList PanoramioPlugin::backendTypes() const
 {
     return QStringList("panoramio");
@@ -162,7 +165,8 @@ void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , double eas
 //                                    + "&maxy=" + QString::number ( south * RADIANSTODEGREES ) + "&size=medium" ), "panoramio","panoramio" );
 }
 
+}
 
-Q_EXPORT_PLUGIN2(PanoramioPlugin, PanoramioPlugin)
+Q_EXPORT_PLUGIN2(PanoramioPlugin, Marble::PanoramioPlugin)
 
 #include "PanoramioPlugin.moc"
