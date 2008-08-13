@@ -76,6 +76,14 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString name = parser.attribute( attr_name ).trimmed();
     named->setName( name );
 
+    // attribute rank
+    int rank = 0;
+    const QString rankStr = parser.attribute( attr_rank ).trimmed();
+    if ( !rankStr.isEmpty() )
+        rank = rankStr.toInt();
+    // FIXME: where is the rank in GeoDataPlacemark?
+    // named->setRank( rank );
+
     // attribute zoom
     int suggestedZoomLevel = 0;
     const QString zoomStr = parser.attribute( attr_zoom ).trimmed();
