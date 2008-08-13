@@ -29,6 +29,8 @@
 #include "AbstractProjection.h"
 #include "MathHelper.h"
 
+using namespace Marble;
+
 uint TextureColorizer::texturepalette[16][512];
 
 TextureColorizer::TextureColorizer( const QString& seafile, 

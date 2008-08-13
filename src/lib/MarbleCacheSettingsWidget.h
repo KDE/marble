@@ -26,6 +26,9 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
+
 /** 
  * @short A public class that adds methods to the UI Cache Settings Widget.
  *
@@ -44,5 +47,6 @@ class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, private Ui::Marb
     void clearPersistentCache();
 };
 
+}
 
 #endif // MARBLECACHESETTINGSWIDGET_H

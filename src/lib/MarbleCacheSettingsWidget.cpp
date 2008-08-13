@@ -13,6 +13,8 @@
 
 #include <QtGui/QPushButton>
 
+using namespace Marble;
+
 MarbleCacheSettingsWidget::MarbleCacheSettingsWidget( QWidget *parent ) : QWidget( parent )
 {
     setupUi( this );

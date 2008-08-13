@@ -15,8 +15,12 @@
 
 #include "Waypoint.h"
 
-class ClipPainter;
 class QPoint;
+
+namespace Marble
+{
+
+class ClipPainter;
 
 /**
  * @brief An element of a Track
@@ -40,5 +44,6 @@ class TrackPoint : public Waypoint
     virtual void printToStream( QTextStream & ) const;
 };
 
+}
 
 #endif

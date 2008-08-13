@@ -20,6 +20,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+using namespace Marble;
 
 EquirectProjectionHelper::EquirectProjectionHelper()
     : AbstractProjectionHelper()

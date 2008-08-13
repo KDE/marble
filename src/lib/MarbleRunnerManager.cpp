@@ -31,6 +31,9 @@
 
 #include <QtDebug>
 
+namespace Marble
+{
+
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
             : QObject(parent)
 {
@@ -104,9 +107,4 @@ void MarbleRunnerManager::setModel( MarblePlacemarkModel *model )
     m_model = model;
 }
 
-
-
-
-
-
-
+}

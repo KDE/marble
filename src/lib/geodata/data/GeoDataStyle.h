@@ -28,6 +28,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataStylePrivate;
 
 /**
@@ -93,6 +96,8 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     GeoDataStylePrivate * const d;
 };
 
-Q_DECLARE_METATYPE( GeoDataStyle* )
+}
+
+Q_DECLARE_METATYPE( Marble::GeoDataStyle* )
 
 #endif // GEODATASTYLE_H

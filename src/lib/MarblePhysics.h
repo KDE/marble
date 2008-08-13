@@ -16,6 +16,9 @@
 
 class QTimeLine;
 
+namespace Marble
+{
+
 class MarblePhysics : public QObject
 {
  Q_OBJECT
@@ -43,5 +46,7 @@ class MarblePhysics : public QObject
 
     int    m_jumpDuration;
 };
+
+}
 
 #endif // MARBLE_PHYSICS_H

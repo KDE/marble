@@ -21,6 +21,8 @@
 #include "GeoDataPlacemark.h"
 #include "PlaceMarkInfoDialog.h"
 
+using namespace Marble;
+
 MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget, 
                                          MarbleModel *model)
     : QObject(widget),

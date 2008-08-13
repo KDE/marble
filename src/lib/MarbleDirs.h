@@ -18,6 +18,9 @@
 #include <QtCore/QString>
 #include <QtCore/QDir>
 
+namespace Marble
+{
+
 /**
  * @short A class that manages data look-up for Marble.
  *
@@ -115,5 +118,6 @@ class MARBLE_EXPORT MarbleDirs
     Private  * const d;
 };
 
+}
 
 #endif // MARBLEDIRS_H

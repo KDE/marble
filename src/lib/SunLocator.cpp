@@ -19,6 +19,8 @@
 
 #include <QtCore/QDebug>
 
+using namespace Marble;
+
 using std::sin;
 using std::cos;
 using std::asin;

@@ -25,6 +25,7 @@
 #include "BoundingBox.h"
 #include "GpxSax.h"
 
+using namespace Marble;
 
 GpxFile::GpxFile( const QString &fileName )
 {

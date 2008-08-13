@@ -22,6 +22,9 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class GeoDataCoordinates;
 class GeoDataStyle;
 class PlaceMarkContainer;
@@ -77,8 +80,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-    GeoDataCoordinates coordinateData( const QModelIndex &index ) const;
-    GeoDataStyle* styleData( const QModelIndex &index ) const;
+    Marble::GeoDataCoordinates coordinateData( const QModelIndex &index ) const;
+    Marble::GeoDataStyle* styleData( const QModelIndex &index ) const;
 
     /**
      * Return the data according to the index.
@@ -119,5 +122,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     int areaPopIdx( double area );
 };
 
+}
 
 #endif // MARBLEPLACEMARKMODEL_H

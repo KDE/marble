@@ -15,6 +15,9 @@
 
 #include <QtCore/QObject>
 
+namespace Marble
+{
+
 class GeoDataDocument;
 class PlaceMarkContainer;
 class MarblePlacemarkModel;
@@ -101,5 +104,7 @@ class PlaceMarkManager : public QObject
     QList < KMLDocument* > m_documentList;
 #endif
 };
+
+}
 
 #endif // PLACEMARKMANAGER_H

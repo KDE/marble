@@ -17,6 +17,9 @@
 #include <QtCore/QVariant>
 #include <QtCore/QVector>
 
+namespace Marble
+{
+
 class BoundingBox;
 class GpxFile;
 
@@ -58,5 +61,6 @@ public:
     QVector<GpxFile*>  *m_data;
 };
 
+}
 
 #endif

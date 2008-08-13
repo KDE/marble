@@ -19,6 +19,9 @@
 #include <QtCore/QThread>
 #include <QtGui/QImage>
 
+namespace Marble
+{
+
 class TileId;
 
 class ImageLoadThread : public QThread {
@@ -32,5 +35,7 @@ class ImageLoadThread : public QThread {
 
     void run();
 };
+
+}
 
 #endif // __MARBLE__IMAGELOADTHREAD_H

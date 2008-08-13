@@ -22,10 +22,15 @@
 
 #include "GeoDataFolder.h"
 
+namespace Marble
+{
+
 GeoDataFolder::GeoDataFolder()
 {
 }
 
 GeoDataFolder::~GeoDataFolder()
 {
+}
+
 }

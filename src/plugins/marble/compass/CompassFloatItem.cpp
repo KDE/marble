@@ -21,6 +21,8 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 CompassFloatItem ::CompassFloatItem ( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size ),
@@ -155,6 +157,8 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     return true;
 }
 
-Q_EXPORT_PLUGIN2(CompassFloatItem, CompassFloatItem )
+}
+
+Q_EXPORT_PLUGIN2( CompassFloatItem, Marble::CompassFloatItem )
 
 #include "CompassFloatItem.moc"

@@ -17,6 +17,9 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
+namespace Marble
+{
+
 class MarbleWidgetSpeedTest: public QObject
 {
   Q_OBJECT
@@ -82,14 +85,15 @@ void MarbleWidgetSpeedTest::timeTest()
 
 }
 
+}
+
 //QTEST_MAIN(MarbleWidgetSpeedTest)
 int main( int argc, char ** argv )
 {
     QApplication app( argc, argv );
-    MarbleWidgetSpeedTest speedTest;
+    Marble::MarbleWidgetSpeedTest speedTest;
     QTest::qExec( &speedTest );
     return 0;
 }
-#include "MarbleWidgetSpeedTest.moc"
-  
 
+#include "MarbleWidgetSpeedTest.moc"

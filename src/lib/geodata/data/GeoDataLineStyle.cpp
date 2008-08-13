@@ -11,6 +11,9 @@
 
 #include "GeoDataLineStyle.h"
 
+namespace Marble
+{
+
 class GeoDataLineStylePrivate
 {
   public:
@@ -64,4 +67,6 @@ void GeoDataLineStyle::unpack( QDataStream& stream )
     GeoDataColorStyle::unpack( stream );
     
     stream >> d->m_width;
+}
+
 }

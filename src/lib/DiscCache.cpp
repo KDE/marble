@@ -23,7 +23,7 @@
 #include <QtCore/QFileInfoListIterator>
 #endif
 
-
+using namespace Marble;
 
 static QString indexFileName( const QString &cacheDirectory )
 {

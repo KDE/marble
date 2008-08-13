@@ -18,17 +18,16 @@
 // Local dir
 #include "PluginManager.h"
 
+namespace Marble
+{
+
 class LayerManagerPrivate;
 class GeoPainter;
+class GeoSceneDocument;
 class ViewParams;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 class MarbleDataFacade;
-
-namespace Marble
-{
-class GeoSceneDocument;
-}
 
 /**
  * @short The class that handles Marble's DGML layers.
@@ -67,5 +66,6 @@ class MARBLE_EXPORT LayerManager : public QObject
     LayerManagerPrivate  * const d;
 };
 
+}
 
 #endif // LAYERMANAGER_H

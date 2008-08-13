@@ -19,6 +19,8 @@
 
 #include "gps/GpxFile.h"
 
+using namespace Marble;
+
 GpxFileViewItem::GpxFileViewItem( GpxFile* file ) :
     m_gpxFile( file )
 {

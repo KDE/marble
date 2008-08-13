@@ -27,6 +27,8 @@
 #include <QtGui/QPen>
 #include <QtGui/QPixmap>
 
+namespace Marble
+{
 
 class GeoPainter;
 class PntMap;
@@ -153,5 +155,7 @@ class VectorComposer
 
     QVector<qreal> m_dashes;
 };
+
+}
 
 #endif // VECTORCOMPOSER_H

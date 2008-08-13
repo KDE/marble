@@ -30,6 +30,9 @@
 
 #include <QtDebug>
 
+namespace Marble
+{
+
 LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
 {
     m_cardinals << tr("N", "one-letter uppercase abbreviation for North");
@@ -145,4 +148,6 @@ void LatLonRunner::parse(const QString &input)
     MarbleRunnerResult result( container, static_cast<MarbleRunnerResult::Score>(score) );
     
     emit runnerFinished( result );    
+}
+
 }

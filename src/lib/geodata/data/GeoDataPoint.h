@@ -24,6 +24,9 @@
 #include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 
+namespace Marble
+{
+
 class GeoDataPointPrivate;
 
 /** 
@@ -78,6 +81,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     virtual void unpack( QDataStream& stream );
 };
 
-Q_DECLARE_METATYPE( GeoDataPoint )
+}
+
+Q_DECLARE_METATYPE( Marble::GeoDataPoint )
 
 #endif // GEODATAPOINT_H

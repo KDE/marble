@@ -16,6 +16,9 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
+namespace Marble
+{
+
 GeoDataMultiGeometry::GeoDataMultiGeometry()
 {
 }
@@ -101,4 +104,6 @@ void GeoDataMultiGeometry::unpack( QDataStream& stream )
             default: break;
         };
     }
+}
+
 }

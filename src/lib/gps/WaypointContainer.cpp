@@ -15,6 +15,7 @@
 #include "BoundingBox.h"
 #include "ClipPainter.h"
 
+using namespace Marble;
 
 WaypointContainer::WaypointContainer()
     : AbstractLayerContainer()

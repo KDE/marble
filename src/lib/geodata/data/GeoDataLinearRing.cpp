@@ -12,10 +12,15 @@
 #include "GeoDataLinearRing.h"
 
 
+namespace Marble
+{
+
 GeoDataLinearRing::GeoDataLinearRing()
 {
 }
 
 GeoDataLinearRing::~GeoDataLinearRing()
 {
+}
+
 }

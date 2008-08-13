@@ -23,6 +23,8 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
 
 class MarbleWidget;
 class MarbleLegendBrowserPrivate;
@@ -75,5 +77,6 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     MarbleLegendBrowserPrivate  * const d; 
 };
 
+}
 
 #endif // MARBLELEGENDBROWSER_H

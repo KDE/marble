@@ -14,6 +14,7 @@
 #include <QtCore/QPointF>
 #include <QtCore/QDebug>
 
+using namespace Marble;
 
 BoundingBox::BoundingBox()
 {

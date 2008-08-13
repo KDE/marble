@@ -16,6 +16,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
 
+using namespace Marble;
 
 MarbleSearchListView::MarbleSearchListView(QWidget* parent)
     : QListView( parent ),

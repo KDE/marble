@@ -15,6 +15,9 @@
 #include <QtCore/QVariant>
 #include "AbstractFileViewItem.h"
 
+namespace Marble
+{
+
 class GeoDataDocument;
 class PlaceMarkManager;
 
@@ -37,5 +40,7 @@ class KmlFileViewItem : public AbstractFileViewItem
     PlaceMarkManager&   m_placeMarkManager;
     GeoDataDocument&        m_document;
 };
+
+}
 
 #endif

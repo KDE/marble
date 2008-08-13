@@ -10,6 +10,8 @@
 
 #include "tccore.h"
 
+using namespace Marble;
+
 TCCoreApplication::TCCoreApplication( int argc, char ** argv ) : QCoreApplication( argc, argv )
 {
     

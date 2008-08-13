@@ -19,13 +19,12 @@
 #include "global.h"
 #include "ClipPainter.h"
 
-
-using namespace Marble;
+namespace Marble
+{
 
 class ViewportParams;
-class GeoDataCoordinates;
 class GeoPainterPrivate;
-
+class GeoDataCoordinates;
 
 /**
  * @short a painter that makes it easy to draw geometric items on the map
@@ -145,5 +144,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     Q_DISABLE_COPY( GeoPainter )
     GeoPainterPrivate  * const d;
 };
+
+}
 
 #endif // GEOPAINTER_H

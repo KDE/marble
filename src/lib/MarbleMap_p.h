@@ -18,6 +18,8 @@
 #include "TextureColorizer.h"
 #include "CrossHairFloatItem.h"
 
+namespace Marble
+{
 
 class MarbleMap;
 class MarbleModel;
@@ -78,5 +80,7 @@ class MarbleMapPrivate
     quint64          m_persistentTileCacheLimit;
     quint64          m_volatileTileCacheLimit;
 };
+
+}
 
 #endif

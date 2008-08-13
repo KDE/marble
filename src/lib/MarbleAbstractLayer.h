@@ -19,10 +19,13 @@
 #include "marble_export.h"
 
 class QAction;
+class QStandardItem;
+
+namespace Marble
+{
 
 class MarbleAbstractLayerPrivate;
 class MarbleDataFacade;
-class QStandardItem;
 
 /**
  * @short The abstract class that creates an "empty" float item.
@@ -32,7 +35,7 @@ class QStandardItem;
 class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInterface
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     explicit MarbleAbstractLayer();
@@ -61,5 +64,7 @@ class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInte
     Q_DISABLE_COPY( MarbleAbstractLayer )
     MarbleAbstractLayerPrivate  * const d;
 };
+
+}
 
 #endif // MARBLE_ABSTRACT_LAYER_H

@@ -12,6 +12,8 @@
 #include "KmlFileViewItem.h"
 #include "GeoDataDocument.h"    // In geodata/data/
 
+using namespace Marble;
+
 KmlFileViewItem::KmlFileViewItem( PlaceMarkManager& manager, GeoDataDocument& document ) :
     m_placeMarkManager( manager ),
     m_document( document )

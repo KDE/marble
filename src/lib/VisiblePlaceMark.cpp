@@ -16,6 +16,8 @@
 #include "GeoDataStyle.h"
 #include "MarblePlacemarkModel.h"
 
+using namespace Marble;
+
 VisiblePlaceMark::VisiblePlaceMark()
 {
 }

@@ -19,10 +19,13 @@
 #include "AbstractLayerInterface.h"
 
 class QBitArray;
+class QPointF;
+
+namespace Marble
+{
 
 class AbstractLayerData;
 class ClipPainter;
-class QPointF;
 class BoundingBox;
 
 
@@ -209,6 +212,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     QString *m_name;
 };
 
+}
 
 #endif //ABSTRACTLAYERCONTAINER_H
 

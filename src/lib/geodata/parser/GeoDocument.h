@@ -31,6 +31,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
@@ -57,5 +60,7 @@ protected:
     GeoNode();
     virtual ~GeoNode();
 };
+
+}
 
 #endif // GeoDocument_h

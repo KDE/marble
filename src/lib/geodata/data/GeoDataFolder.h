@@ -30,6 +30,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 /**
  * @short A container that is used to arrange other GeoDataFeatures.
  *
@@ -49,5 +52,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
     virtual bool isFolder() const { return true; }
     virtual EnumFeatureId featureId() const { return GeoDataFolderId; };
 };
+
+}
 
 #endif // GEODATAFOLDER_H

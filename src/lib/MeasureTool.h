@@ -24,6 +24,9 @@
 
 #include "global.h"
 
+namespace Marble
+{
+
 class GeoDataCoordinates;
 class GeoPainter;
 class Quaternion;
@@ -69,5 +72,7 @@ class MeasureTool : public QObject
 
     bool    m_useworkaround;
 };
+
+}
 
 #endif // MEASURETOOL_H

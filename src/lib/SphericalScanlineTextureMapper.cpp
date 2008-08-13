@@ -32,6 +32,8 @@
 
 // #define INTERLACE
 
+using namespace Marble;
+
 SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tileLoader, QObject * parent  ) 
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {

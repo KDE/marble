@@ -26,6 +26,8 @@
 #include "MarbleDataFacade.h"
 #include "ViewParams.h"
 
+namespace Marble
+{
 
 class LayerManagerPrivate
 {
@@ -169,6 +171,8 @@ void LayerManager::syncPropertyWithAction( QString nameId, bool checked )
         }
         d->m_mapTheme->settings()->setPropertyValue( nameId, checked );
     }
+}
+
 }
 
 #include "LayerManager.moc"

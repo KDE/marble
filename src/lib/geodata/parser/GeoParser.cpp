@@ -30,6 +30,8 @@
 #include "GeoDocument.h"
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
 
 // Set to a value greather than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0
@@ -200,4 +202,6 @@ GeoDocument* GeoParser::releaseDocument()
     GeoDocument* document = m_document;
     m_document = 0;
     return document;
+}
+
 }

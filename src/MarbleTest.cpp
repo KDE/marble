@@ -21,6 +21,8 @@
 #include <lib/MarbleWidget.h>
 #include <lib/MarbleModel.h>
 
+using namespace Marble;
+
 MarbleTest::MarbleTest( MarbleWidget* marbleWidget )
     : m_marbleWidget(marbleWidget)
 {

@@ -19,6 +19,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataPolyStylePrivate;
 
 /**
@@ -78,5 +81,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     Q_DISABLE_COPY( GeoDataPolyStyle )
     GeoDataPolyStylePrivate * const d;
 };
+
+}
 
 #endif // GeoDataPolyStyle_H

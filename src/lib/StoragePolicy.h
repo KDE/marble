@@ -17,6 +17,8 @@
 
 class QByteArray;
 
+namespace Marble
+{
 
 class StoragePolicy
 {
@@ -31,5 +33,7 @@ class StoragePolicy
 
         virtual QString lastErrorMessage() const = 0;
 };
+
+}
 
 #endif

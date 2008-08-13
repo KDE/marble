@@ -11,6 +11,9 @@
 
 #include "GeoDataPolyStyle.h"
 
+namespace Marble
+{
+
 class GeoDataPolyStylePrivate
 {
   public:
@@ -78,4 +81,6 @@ void GeoDataPolyStyle::unpack( QDataStream& stream )
     
     stream >> d->m_fill;
     stream >> d->m_outline;
+}
+
 }

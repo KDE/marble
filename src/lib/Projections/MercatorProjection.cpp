@@ -18,6 +18,8 @@
 #include "MathHelper.h"
 #include "GeoDataPoint.h"
 
+using namespace Marble;
+
 static MercatorProjectionHelper  theHelper;
 
 

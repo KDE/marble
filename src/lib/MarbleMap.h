@@ -40,6 +40,9 @@ class QModelIndex;
 class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
 
+namespace Marble
+{
+
 // MarbleMap 
 //class MarbleWidgetInputHandler;
 //class MarbleWidgetPopupMenu;
@@ -57,7 +60,6 @@ class FileViewModel;
 class GeoPainter;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
-
 
 /**
  * @short A class that can paint a view of the earth.
@@ -817,5 +819,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     MarbleMapPrivate  * const d;
 };
 
+}
 
 #endif // MARBLEMAP_H

@@ -1,6 +1,8 @@
 #include "MapThemeSortFilterProxyModel.h"
 #include <QtCore/QString>
 
+using namespace Marble;
+
 MapThemeSortFilterProxyModel::MapThemeSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {

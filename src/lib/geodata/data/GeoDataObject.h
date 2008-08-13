@@ -18,6 +18,9 @@
 #include "GeoDocument.h" 
 #include "Serializable.h"
 
+namespace Marble
+{
+
 class GeoDataObjectPrivate;
 
 /**
@@ -77,5 +80,7 @@ public:
 
     GeoDataObjectPrivate * d;
 };
+
+}
 
 #endif // GEODATAOBJECT_H

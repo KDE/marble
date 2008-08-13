@@ -19,6 +19,9 @@ class QTextStream;
 class QPoint;
 class QSize;
 
+namespace Marble
+{
+
 class ClipPainter;
 class BoundingBox;
 class Waypoint;
@@ -67,5 +70,7 @@ class GpxFile : public AbstractLayerInterface
     RouteContainer      *m_routes;
     Qt::CheckState      m_checkState;
 };
+
+}
 
 #endif

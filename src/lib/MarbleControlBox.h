@@ -34,14 +34,17 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-class GeoDataDocument;
-class MarbleWidget;
-class MarbleControlBoxPrivate;
 class QByteArray;
 class QModelIndex;
 class QAbstractItemModel;
 class QStandardItemModel;
 
+namespace Marble
+{
+
+class GeoDataDocument;
+class MarbleWidget;
+class MarbleControlBoxPrivate;
 class MarblePlacemarkModel;
 
 /** 
@@ -247,8 +250,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );
 
-    GeoDataDocument * parseOsmSearchResult( QByteArray & );
-    void populateListView( GeoDataDocument * );
+    Marble::GeoDataDocument * parseOsmSearchResult( QByteArray & );
+    void populateListView( Marble::GeoDataDocument * );
 
  protected:
     /**
@@ -265,5 +268,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     MarbleControlBoxPrivate  * const d;
 };
 
+}
 
 #endif // MARBLECONTROLBOX_H

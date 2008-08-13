@@ -25,6 +25,9 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
+
 class ViewportParams;
 class AbstractProjectionHelper;
 
@@ -95,12 +98,12 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
+    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint ) = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
+    bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
 			    const ViewportParams *viewport,
 			    int &x, int &y );
 
@@ -121,7 +124,7 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint,
+    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint,
 				    const ViewportParams *viewport,
 				    int *x, int &y, int &pointRepeatNum,
 				    bool &globeHidesPoint ) = 0;
@@ -144,7 +147,7 @@ class AbstractProjection
     virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
                                  double& lon, double& lat,
-                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) = 0;
+                                 Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -161,11 +164,11 @@ class AbstractProjection
                                  const ViewportParams *viewport,
                                  Quaternion &q ) = 0;
 
-    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-					      const ViewportParams *viewport );
+    virtual Marble::GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
+                                                      const ViewportParams *viewport );
 
-    virtual GeoDataLinearRing rectOutline( const QRect& screenRect,
-					   const ViewportParams *viewport );
+    virtual Marble::GeoDataLinearRing rectOutline( const QRect& screenRect,
+                                                   const ViewportParams *viewport );
 
     virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
@@ -183,5 +186,6 @@ class AbstractProjection
                              double &northLat, double &southLat );
 };
 
+}
 
 #endif // ABSTRACTPROJECTION_H

@@ -14,6 +14,9 @@
 #include "AbstractLayerContainer.h"
 #include "AbstractLayerData.h"
 
+namespace Marble
+{
+
 /**
  * @brief uninterupted sequence of trackPoints
  * 
@@ -36,8 +39,9 @@ class TrackSegment : public AbstractLayerContainer,
     void drawArrow( ClipPainter*,  QPointF,  QPointF );
     
     virtual void printToStream( QTextStream & ) const;
-
 };
+
+}
 
 #endif
 

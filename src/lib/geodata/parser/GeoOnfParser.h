@@ -24,8 +24,10 @@
 #include <geodata_export.h>
 #include "GeoParser.h"
 
-class GeoDocument;
+namespace Marble
+{
 
+class GeoDocument;
 
 class GEODATA_EXPORT GeoOnfParser : public GeoParser {
 public:
@@ -36,5 +38,7 @@ private:
     GeoDocument* createDocument() const;
     bool isValidElement(const QString& tagName) const;
 };
+
+}
 
 #endif

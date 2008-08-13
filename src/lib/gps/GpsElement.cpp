@@ -11,6 +11,7 @@
 
 #include "GpsElement.h"
 
+using namespace Marble;
 
 GpsElement::GpsElement()
     : m_number(0)

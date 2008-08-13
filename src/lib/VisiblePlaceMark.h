@@ -22,6 +22,8 @@
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QRect>
 
+namespace Marble
+{
 
 /**
  * @short A class which represents the visible place marks on a map.
@@ -105,5 +107,7 @@ class VisiblePlaceMark
     mutable QString     m_name;         // cached value
     mutable QPixmap     m_symbolPixmap; // cached value
 };
+
+}
 
 #endif // VISIBLEPLACEMARK_H

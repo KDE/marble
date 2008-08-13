@@ -13,6 +13,9 @@
 
 #include <QtGui/QSortFilterProxyModel>
 
+namespace Marble
+{
+
 class MapThemeSortFilterProxyModel : public QSortFilterProxyModel {
      Q_OBJECT
 
@@ -22,5 +25,7 @@ class MapThemeSortFilterProxyModel : public QSortFilterProxyModel {
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
 
 };
+
+}
 
 #endif //MAPTHEMESORTFILTERPROXYMODEL_H

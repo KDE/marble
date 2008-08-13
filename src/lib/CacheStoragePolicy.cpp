@@ -15,6 +15,7 @@
 // Qt
 #include <QtCore/QDir>
 
+using namespace Marble;
 
 CacheStoragePolicy::CacheStoragePolicy( const QString &cacheDirectory )
     : m_cache( cacheDirectory )

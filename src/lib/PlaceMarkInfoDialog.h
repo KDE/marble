@@ -14,14 +14,19 @@
 #define PLACEMARKINFODIALOG_H
 
 
-#include "ui_PlaceMarkInfoDialog.h"
-
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QUrl>
 #include <QtGui/QStatusBar>
 
 #include "DeferredFlag.h"
 
+// FIXME: remove "using namespace" from header
+using namespace Marble;
+
+#include "ui_PlaceMarkInfoDialog.h"
+
+namespace Marble
+{
 
 class PlaceMark;
 
@@ -56,5 +61,6 @@ class PlaceMarkInfoDialog : public QDialog, private Ui::PlaceMarkInfoDialog
     QPersistentModelIndex m_index;
 };
 
+}
 
 #endif // PLACEMARKINFODIALOG_H

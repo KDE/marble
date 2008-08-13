@@ -19,6 +19,8 @@
 
 #include "ui_MarbleNavigator.h"
 
+namespace Marble
+{
 
 class MarbleNavigatorPrivate
 {
@@ -99,5 +101,6 @@ void MarbleNavigator::resizeEvent ( QResizeEvent * )
     }
 } 
 
+}
 
 #include "MarbleNavigator.moc"

@@ -31,6 +31,9 @@
 /*
 */
 
+namespace Marble
+{
+
 const double TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
@@ -206,6 +209,8 @@ class GEODATA_EXPORT GeoDataCoordinates
     static GeoDataCoordinates::Notation s_notation;
 };
 
-Q_DECLARE_METATYPE( GeoDataCoordinates )
+}
+
+Q_DECLARE_METATYPE( Marble::GeoDataCoordinates )
 
 #endif // GEODATACOORDINATES_H

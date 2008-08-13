@@ -19,13 +19,18 @@ class KAction;
 class KConfigDialog;
 
 class QLabel;
-class ControlView;
-class SunControlWidget;
 class QStandardItemModel;
 
-namespace KParts {
+namespace KParts
+{
 class StatusBarExtension;
 }
+
+namespace Marble
+{
+
+class ControlView;
+class SunControlWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -112,5 +117,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KParts::StatusBarExtension *m_statusBarExtension;
 
 };
+
+}
 
 #endif

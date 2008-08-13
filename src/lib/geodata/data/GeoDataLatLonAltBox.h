@@ -21,9 +21,8 @@
 
 #include "geodata_export.h"
 
-
-using namespace Marble;
-
+namespace Marble
+{
 
 class GeoDataLatLonBoxPrivate;
 
@@ -183,5 +182,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 };
 
 bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs );
+
+}
 
 #endif // GEODATALATLONALTBOX

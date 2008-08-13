@@ -16,6 +16,9 @@
 #ifndef MARBLETEST_H
 #define MARBLETEST_H
 
+namespace Marble
+{
+
 class MarbleWidget;
 
 class MarbleTest {
@@ -34,5 +37,7 @@ class MarbleTest {
  private:
     MarbleWidget      *m_marbleWidget;
 };
+
+}
 
 #endif // MARBLETEST_H

@@ -19,6 +19,8 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
 
 class TileCreatorPrivate;
 
@@ -46,5 +48,6 @@ class MARBLE_EXPORT TileCreator : public QThread
     TileCreatorPrivate  * const d;
 };
 
+}
 
 #endif

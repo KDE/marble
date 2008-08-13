@@ -20,6 +20,9 @@
 
 #include "ui_TileCreatorDialog.h"
 
+namespace Marble
+{
+
 class TileCreator;
 
 class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
@@ -39,5 +42,6 @@ class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
     TileCreator *m_creator;
 };
 
+}
 
 #endif // TILECREATORDIALOG_H

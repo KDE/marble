@@ -22,6 +22,9 @@
 
 class QSvgRenderer;
 
+namespace Marble
+{
+
 /**
  * @short The class that creates an overview map.
  *
@@ -30,7 +33,7 @@ class QSvgRenderer;
 class MarbleOverviewMap : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
@@ -69,5 +72,7 @@ class MarbleOverviewMap : public MarbleAbstractFloatItem
     double m_centerLat;
     double m_centerLon;
 };
+
+}
 
 #endif

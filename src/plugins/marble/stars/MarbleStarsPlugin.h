@@ -21,6 +21,11 @@
 #include "MarbleAbstractLayer.h"
 #include "Quaternion.h"
 
+class QDateTime;
+
+namespace Marble
+{
+
 class StarPoint {
  public:
     StarPoint() {}
@@ -51,7 +56,6 @@ class StarPoint {
     Quaternion  m_q;
 };
 
-class QDateTime;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -61,7 +65,7 @@ class QDateTime;
 class MarbleStarsPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     QStringList backendTypes() const;
@@ -94,5 +98,7 @@ class MarbleStarsPlugin : public MarbleAbstractLayer
  private:
     QVector<StarPoint> m_stars;
 };
+
+}
 
 #endif // MARBLESTARSPLUGIN_H

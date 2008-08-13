@@ -15,6 +15,9 @@
 #include "AbstractLayerContainer.h"
 
 
+namespace Marble
+{
+
 /**
  * @brief holds a collection of Routes
  */
@@ -34,5 +37,7 @@ class RouteContainer : public virtual AbstractLayerContainer
                         ViewParams *viewParams,
                         const BoundingBox &box );
 };
+
+}
 
 #endif

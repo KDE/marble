@@ -24,6 +24,8 @@
 #include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"
 
+using namespace Marble;
+
 static QString guessWikipediaDomain()
 {
     const QString lang = qgetenv ( "LANG" );

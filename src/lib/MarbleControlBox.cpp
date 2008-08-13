@@ -35,8 +35,6 @@
 #include <QtGui/QTextFrame>
 #include <QtNetwork/QHttp>
 
-#include "ui_MarbleControlBox.h"
-
 #include <global.h>
 
 #include <MarbleWidget.h>
@@ -55,6 +53,12 @@
 #include "GeoOnfParser.h"
 #include "GeoDataDocument.h"
 
+using namespace Marble;
+
+#include "ui_MarbleControlBox.h"
+
+namespace Marble
+{
 
 class MarbleControlBoxPrivate
 {
@@ -672,6 +676,8 @@ void MarbleControlBox::adjustForStill()
     {
         d->m_widget->updateChangedMap();
     }
+}
+
 }
 
 #include "MarbleControlBox.moc"

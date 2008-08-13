@@ -18,6 +18,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QPointF>
 
+using namespace Marble;
+
 AbstractLayerContainer::AbstractLayerContainer( int size )
 {
     m_data = new QVector<AbstractLayerData*>( size );

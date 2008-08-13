@@ -28,6 +28,9 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class HttpFetchFile;
 class HttpJob;
 class StoragePolicy;
@@ -128,5 +131,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     StoragePolicy    *m_storagePolicy;
 };
 
+}
 
 #endif // __MARBLE__HTTPDOWNLOADMANAGER_H

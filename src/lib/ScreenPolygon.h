@@ -17,6 +17,8 @@
 #include <QtCore/QVector>
 #include <QtGui/QPolygon>
 
+namespace Marble
+{
 
 class ScreenPolygon : public QPolygonF 
 {
@@ -35,5 +37,7 @@ class ScreenPolygon : public QPolygonF
     // true if the polygon is closed
     bool  m_closed;
 };
+
+}
 
 #endif // SCREENPOLYGON_H

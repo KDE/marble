@@ -19,6 +19,8 @@
 #include <QtCore/QPoint>
 #include <QtCore/QDebug>
 
+using namespace Marble;
+
 Waypoint::Waypoint( double lat, double lon )
     : AbstractLayerData( lat, lon ),
       GpsElement(),

@@ -16,6 +16,8 @@
 
 #include "AbstractScanlineTextureMapper.h"
 
+namespace Marble
+{
 
 class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
@@ -29,5 +31,6 @@ class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
     int    m_oldYPaintedTop;
 };
 
+}
 
 #endif

@@ -14,6 +14,8 @@
 
 #include <QtCore/QPoint>
 
+using namespace Marble;
+
 Route::Route() :  AbstractLayerContainer(),
                   GpsElement(),
                   AbstractLayerData(0,0)

@@ -15,6 +15,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
 
+using namespace Marble;
 
 CrossHairFloatItem::CrossHairFloatItem(QObject* parent)
     : QObject(parent)

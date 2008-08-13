@@ -23,6 +23,8 @@
 #include "GeoDataContainer.h"
 #include "GeoDataParser.h"
 
+using namespace Marble;
+
 class MarbleGeoDataModel::Private {
  public:
     Private() : m_rootDocument( new GeoDataDocument() ) {};

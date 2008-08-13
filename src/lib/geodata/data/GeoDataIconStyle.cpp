@@ -13,6 +13,9 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataIconStylePrivate
 {
   public:
@@ -124,4 +127,6 @@ void GeoDataIconStyle::unpack( QDataStream& stream )
     stream >> d->m_scale;
     stream >> d->m_icon;
     d->m_hotSpot->unpack( stream );
+}
+
 }

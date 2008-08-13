@@ -16,6 +16,9 @@
 #include <QtCore/QPair>
 #include <QtCore/QString>
 
+namespace Marble
+{
+
 class DiscCache
 {
     public:
@@ -41,5 +44,7 @@ class DiscCache
         typedef QPair<QDateTime, quint64> Entry;
         QMap<QString, Entry> m_Entries;
 };
+
+}
 
 #endif

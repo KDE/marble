@@ -21,6 +21,9 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 
+namespace Marble
+{
+
 QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");
 
 bool GeoDataFeature::s_defaultStyleInitialized = false;
@@ -443,4 +446,6 @@ void GeoDataFeature::unpack( QDataStream& stream )
     stream >> d->m_role;
     stream >> d->m_popularity;
     stream >> d->m_popularityIndex;
+}
+
 }

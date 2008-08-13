@@ -21,6 +21,9 @@
 #include "MapThemeManager.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
+
 class ViewParamsPrivate
 {
 public:
@@ -301,4 +304,6 @@ Quaternion ViewParams::planetAxisUpdated() const
 void ViewParams::setPlanetAxisUpdated( const Quaternion & planetAxisUpdated )
 {
     d->m_planetAxisUpdated = planetAxisUpdated;
+}
+
 }

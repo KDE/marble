@@ -29,6 +29,9 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataDocumentPrivate
 {
   public:
@@ -125,4 +128,6 @@ void GeoDataDocument::unpack( QDataStream& stream )
         style->unpack( stream );
         d->m_styleHash.insert( style->styleId(), style );
     }
+}
+
 }

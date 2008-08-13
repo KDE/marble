@@ -23,6 +23,8 @@
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
 
+namespace Marble
+{
 
 MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size )
@@ -224,6 +226,8 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
     return MarbleAbstractFloatItem::eventFilter(object,e);
 }
 
-Q_EXPORT_PLUGIN2(MarbleOverviewMap, MarbleOverviewMap)
+}
+
+Q_EXPORT_PLUGIN2(MarbleOverviewMap, Marble::MarbleOverviewMap)
 
 #include "MarbleOverviewMap.moc"

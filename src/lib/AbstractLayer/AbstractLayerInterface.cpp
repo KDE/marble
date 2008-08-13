@@ -10,6 +10,9 @@
 
 #include "AbstractLayerInterface.h"
 
+namespace Marble
+{
+
 AbstractLayerInterface::~AbstractLayerInterface()
 {
 }
@@ -34,4 +37,6 @@ QTextStream&    operator<<( QTextStream& out,
 {
     item.printToStream( out );
     return out;
+}
+
 }

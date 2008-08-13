@@ -14,6 +14,9 @@
 
 #include <QtCore/QDataStream>
 
+namespace Marble
+{
+
 class GeoDataHotSpotPrivate
 {
   public:
@@ -79,5 +82,6 @@ void GeoDataHotSpot::unpack( QDataStream& stream )
     d->m_xunits = static_cast<Units>(xu);
     d->m_yunits = static_cast<Units>(yu);
     stream >> d->m_hotSpot;
+}
 
 }

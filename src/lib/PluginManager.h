@@ -15,6 +15,9 @@
 #include <QtCore/QObject>
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
 class PluginManagerPrivate;
@@ -50,5 +53,6 @@ class MARBLE_EXPORT PluginManager : public QObject
     PluginManagerPrivate  * const d;
 };
 
+}
 
 #endif // PLUGINMANAGER_H

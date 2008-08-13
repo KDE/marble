@@ -31,6 +31,9 @@
  */
 
 
+namespace Marble
+{
+
 class MarbleNavigatorPrivate;
 
 /** 
@@ -126,5 +129,7 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
     Q_DISABLE_COPY( MarbleNavigator )
     MarbleNavigatorPrivate  * const d;
 };
+
+}
 
 #endif // MARBLENAVIGATOR_H

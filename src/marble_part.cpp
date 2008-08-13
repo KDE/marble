@@ -48,8 +48,6 @@
 #include "lib/SunControlWidget.h"
 
 // Local dir
-#include "ui_MarbleViewSettingsWidget.h"
-#include "ui_MarbleNavigationSettingsWidget.h"
 #include "MarbleCacheSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
 
@@ -58,6 +56,14 @@
 #include "settings.h"
 
 #include "MarbleAbstractFloatItem.h"
+
+using namespace Marble;
+
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
+
+namespace Marble
+{
 
 namespace
 {
@@ -708,6 +714,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
         // locking one would suffice as it affects all. nevertheless go through all.
         (*i)->setPositionLocked(enabled);
     }
+}
+
 }
 
 #include "marble_part.moc"

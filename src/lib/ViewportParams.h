@@ -29,10 +29,11 @@
 #include "global.h"
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class AbstractProjection;
 class ViewportParamsPrivate;
-
-using namespace Marble;
 
 /** 
  * @short A public class that controls what is visible in the viewport of a Marble map.
@@ -84,5 +85,6 @@ class MARBLE_EXPORT ViewportParams
     ViewportParamsPrivate * const d;
 };
 
+}
 
 #endif // VIEWPORTPARAMS_H

@@ -11,6 +11,8 @@
 
 #include "SunControlWidget.h"
 
+using namespace Marble;
+
 SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
     : QDialog( parent ),
       m_sunLocator( sunLocator )

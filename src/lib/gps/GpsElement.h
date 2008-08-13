@@ -15,6 +15,9 @@
 #include <QtCore/QUrl>
 #include <QtCore/QVector>
 
+namespace Marble
+{
+
 /**
  * @brief common details of every gps element
  *
@@ -146,5 +149,7 @@ class GpsElement
      */
     int m_number;
 };
+
+}
 
 #endif //GPSELEMENT_H

@@ -11,6 +11,9 @@
 
 #include "GeoDataLabelStyle.h"
 
+namespace Marble
+{
+
 class GeoDataLabelStylePrivate
 {
   public:
@@ -103,4 +106,6 @@ void GeoDataLabelStyle::unpack( QDataStream& stream )
     stream >> d->m_font;
 
     d->m_alignment = static_cast<GeoDataLabelStyle::Alignment>( a );
+}
+
 }

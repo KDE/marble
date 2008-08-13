@@ -19,6 +19,9 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QString>
 
+namespace Marble
+{
+
 /**
  * @brief This enum is used to choose the projection shown in the view.
  */
@@ -27,8 +30,6 @@ enum Projection {
     Equirectangular,    ///< Flat projection ("plate carree")
     Mercator            ///< Mercator projection
 };
-
-namespace Marble {
 
 /**
  * @brief This enum is used to choose the unit chosen to measure distances.
@@ -109,8 +110,6 @@ enum AltitudeMode {
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
-}
-
 const double DEG2RAD = M_PI / 180.0;
 const double RAD2DEG = 180.0 / M_PI;
 
@@ -135,5 +134,7 @@ const double RAD2INT = 21600.0 / M_PI;
 
 // Average earth radius in m
 const double EARTH_RADIUS = 6378000.0;
+
+}
 
 #endif

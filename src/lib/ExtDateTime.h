@@ -21,6 +21,9 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QTimer>
 
+namespace Marble
+{
+
 class ExtDateTime : public QObject
 {
     Q_OBJECT
@@ -75,5 +78,7 @@ class ExtDateTime : public QObject
     QDateTime  m_datetime;
     int        m_lastmin;
 };
+
+}
 
 #endif

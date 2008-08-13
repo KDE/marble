@@ -26,16 +26,14 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+namespace Marble
+{
+
 class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 class MarbleModel;
-
-
-namespace Marble
-{
 class GeoSceneTexture;
-}
 
 /**
  * @short Tile loading from a quad tree
@@ -204,5 +202,6 @@ class TileLoader : public QObject
         MarbleModel* m_parent;
 };
 
+}
 
 #endif // __MARBLE__TILELOADER_H

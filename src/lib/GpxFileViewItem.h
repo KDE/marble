@@ -15,6 +15,9 @@
 #include <QtCore/QObject>
 #include "AbstractFileViewItem.h"
 
+namespace Marble
+{
+
 class GpxFile;
 
 class GpxFileViewItem
@@ -39,5 +42,7 @@ class GpxFileViewItem
     Q_DISABLE_COPY( GpxFileViewItem )
     GpxFile*    m_gpxFile;
 };
+
+}
 
 #endif

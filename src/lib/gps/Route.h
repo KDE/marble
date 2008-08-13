@@ -14,6 +14,9 @@
 #include "AbstractLayerData.h"
 #include "GpsElement.h"
 
+namespace Marble
+{
+
 /**
  * @brief representation a GPS Route.
  * 
@@ -45,5 +48,7 @@ class Route : public AbstractLayerContainer, public GpsElement,
     virtual void printToStream( QTextStream & ) const;
 
 };
+
+}
 
 #endif //ROUTE_H

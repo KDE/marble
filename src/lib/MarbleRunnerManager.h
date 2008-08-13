@@ -21,16 +21,20 @@
 #ifndef MARBLERUNNERMANAGER_H
 #define MARBLERUNNERMANAGER_H
 
-class MarblePlacemarkModel;
-class PlaceMarkManager;
-//class MarbleRunnerResult;
-class LatLonRunner;
 
 #include "MarbleRunnerResult.h"
 
 #include <QtCore/QObject>
 
 class QString;
+
+namespace Marble
+{
+
+class MarblePlacemarkModel;
+class PlaceMarkManager;
+//class MarbleRunnerResult;
+class LatLonRunner;
 
 class MarbleRunnerManager : public QObject
 {
@@ -59,6 +63,6 @@ private:
     LatLonRunner *m_latlonRunner;
 };
 
-
+}
 
 #endif

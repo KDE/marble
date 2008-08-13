@@ -17,6 +17,9 @@
 
 #include "GeoPolygon.h"
 
+namespace Marble
+{
+
 class GeoPolygonTest: public QObject
 {
   Q_OBJECT
@@ -41,8 +44,7 @@ void GeoPolygonTest::pointLoadTest()
   myPntMap.load(""); //null filename test - marble should not crash!!!
 }
 
-QTEST_MAIN(GeoPolygonTest) 
+}
+
+QTEST_MAIN(Marble::GeoPolygonTest) 
 #include "GeoPolygonTest.moc"
-  
-
-

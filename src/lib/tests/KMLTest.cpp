@@ -23,6 +23,9 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
+
 class KMLTest : public QObject {
     Q_OBJECT
     private slots:
@@ -200,7 +203,8 @@ void KMLTest::loadCitiesFromCache() {
     delete dataDocument;
 }
 
+}
 
-QTEST_MAIN( KMLTest )
+QTEST_MAIN( Marble::KMLTest )
 
 #include "KMLTest.moc"

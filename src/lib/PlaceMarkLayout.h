@@ -30,6 +30,11 @@
 class QAbstractItemModel;
 class QItemSelectionModel;
 class QPainter;
+
+
+namespace Marble
+{
+
 class PlaceMarkPainter;
 class VisiblePlaceMark;
 class ViewParams;
@@ -95,7 +100,7 @@ class PlaceMarkLayout : public QObject
  private:
     void styleReset();
 
-    QRect  roomForLabel ( GeoDataStyle * style,
+    QRect  roomForLabel ( Marble::GeoDataStyle * style,
                          const QVector<VisiblePlaceMark*> &currentsec,
                          const int x, const int y,
                          const int textWidth );
@@ -119,5 +124,6 @@ class PlaceMarkLayout : public QObject
     bool    m_styleResetRequested;
 };
 
+}
 
 #endif // PLACEMARKLAYOUT_H

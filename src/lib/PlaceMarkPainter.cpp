@@ -24,6 +24,8 @@
 #include "ViewportParams.h"
 #include "VisiblePlaceMark.h"
 
+using namespace Marble;
+
 PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
     : QObject( parent )
 {

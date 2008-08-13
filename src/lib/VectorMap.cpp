@@ -30,6 +30,7 @@
 
 // #define VECMAP_DEBUG 
 
+using namespace Marble;
 
 VectorMap::VectorMap()
 {

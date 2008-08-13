@@ -18,13 +18,16 @@
 
 #include "GeoDataPlacemark.h"   // In geodata/data/
 
+namespace Marble
+{
+
 /**
  * A helper class which contains a couple of place mark
  * objects.
  *
  * The ownership of the place mark objects is <b>not</b> transfered to the container!
  */
-class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
+class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark*>
 {
  public:
     /// Create a new PlaceMarkContainer.
@@ -47,7 +50,7 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
      * param  container a QVector of Placemarks
      * param  name the name of the container
      */
-    PlaceMarkContainer( const QVector<GeoDataPlacemark*>& container, const QString& name );
+    PlaceMarkContainer( const QVector<Marble::GeoDataPlacemark*>& container, const QString& name );
 
     /// Return the name of the container
     QString name() const;
@@ -70,5 +73,7 @@ class PlaceMarkContainer : public QVector<GeoDataPlacemark*>
  private:
     QString  m_name;
 };
+
+}
 
 #endif // PLACEMARKCONTAINER_H

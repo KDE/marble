@@ -18,6 +18,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+using namespace Marble;
 
 MercatorProjectionHelper::MercatorProjectionHelper()
     : AbstractProjectionHelper()

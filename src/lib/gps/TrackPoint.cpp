@@ -13,6 +13,8 @@
 
 #include <QtCore/QPoint>
 
+using namespace Marble;
+
 TrackPoint::TrackPoint( double lat, double lon )
     :Waypoint ( lat, lon )
 {

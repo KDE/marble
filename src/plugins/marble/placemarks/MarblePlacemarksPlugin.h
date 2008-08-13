@@ -23,6 +23,9 @@
 #include "MarbleAbstractLayer.h"
 
 
+namespace Marble
+{
+
 class GeoDataGeometry;
 class GeoDataFeature;
 class GeoDataDocument;
@@ -36,7 +39,7 @@ class GeoDataDocument;
 class MarblePlacemarksPlugin : public MarbleAbstractLayer
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
     void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
@@ -71,5 +74,7 @@ class MarblePlacemarksPlugin : public MarbleAbstractLayer
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };
+
+}
 
 #endif

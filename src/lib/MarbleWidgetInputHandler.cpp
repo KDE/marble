@@ -26,6 +26,8 @@
 #include "ViewportParams.h"
 #include "MarbleAbstractFloatItem.h"
 
+using namespace Marble;
+
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
       m_model( 0 )

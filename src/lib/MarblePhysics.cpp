@@ -14,6 +14,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimeLine>
 
+using namespace Marble;
+
 MarblePhysics::MarblePhysics()
     : m_jumpDuration( 2000 )
 {

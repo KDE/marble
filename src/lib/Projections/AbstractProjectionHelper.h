@@ -24,6 +24,8 @@
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataLinearRing.h"
 
+namespace Marble
+{
 
 class GeoPainter;
 class ViewportParams;
@@ -66,5 +68,6 @@ class AbstractProjectionHelper
     AbstractProjectionHelperPrivate  * const d;  // Not exported so no need.
 };
 
+}
 
 #endif // ABSTRACTPROJECTIONHELPER_H

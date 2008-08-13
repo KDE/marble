@@ -29,6 +29,7 @@
     #include <KUrl>
 #endif
 
+using namespace Marble;
 
 GpxFileModel::GpxFileModel( QObject *parent )
     : QAbstractItemModel( parent )

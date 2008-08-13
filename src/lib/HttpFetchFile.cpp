@@ -18,6 +18,7 @@
 #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 
+using namespace Marble;
 
 HttpJob::HttpJob ( const QUrl & sourceUrl, const QString & destFileName, QString const id )
         : m_sourceUrl ( sourceUrl ),

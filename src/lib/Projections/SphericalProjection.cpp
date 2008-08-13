@@ -17,6 +17,8 @@
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
 
+using namespace Marble;
+
 static SphericalProjectionHelper  theHelper;
 
 

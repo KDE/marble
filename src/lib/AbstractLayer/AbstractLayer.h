@@ -24,11 +24,15 @@ class QPoint;
 class QPointF;
 class QSize;
 
+namespace Marble
+{
+
 class AbstractLayerContainer;
 class BoundingBox;
 class ClipPainter;
-class GeoDataCoordinates;
 class ViewParams;
+class GeoDataCoordinates;
+
 
 /**
  * @brief framework class for each display layer in Marble
@@ -185,5 +189,8 @@ class AbstractLayer: public QObject
 
     Q_DISABLE_COPY( AbstractLayer )
 };
+
+}
+
 #endif //ABSTRACTLAYER_H
 

@@ -19,6 +19,9 @@
 
 #include "GeoDataFeature.h"
 
+namespace Marble
+{
+
 class GeoDataContainerPrivate;
 
 class GeoDataFolder;
@@ -95,5 +98,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     Q_DISABLE_COPY( GeoDataContainer )
     GeoDataContainerPrivate * const d;
 };
+
+}
 
 #endif // GEODATACONTAINER_H

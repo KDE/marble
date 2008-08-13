@@ -17,6 +17,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+using namespace Marble;
 
 SphericalProjectionHelper::SphericalProjectionHelper()
     : AbstractProjectionHelper()

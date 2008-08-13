@@ -24,6 +24,8 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
 
 class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 {
@@ -47,5 +49,7 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
     class Private;
     Private  * const d;
 };
+
+}
 
 #endif // KATLASTHEMESELECTVIEW_H

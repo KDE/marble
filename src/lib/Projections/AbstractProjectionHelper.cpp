@@ -19,6 +19,9 @@
 //#include "ViewportParams.h"
 
 
+namespace Marble
+{
+
 class AbstractProjectionHelperPrivate
 {
  public:
@@ -98,4 +101,6 @@ const QRegion AbstractProjectionHelper::projectedRegion() const
 int AbstractProjectionHelper::navigationStripe() const
 {
     return d->m_navigationStripe;
+}
+
 }

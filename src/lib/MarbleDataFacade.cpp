@@ -23,7 +23,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
-
+namespace Marble
+{
 
 class MarbleDataFacadePrivate
 {
@@ -61,6 +62,8 @@ QDateTime MarbleDataFacade::dateTime() const
 MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
 {
     return d->m_geodatamodel;
+}
+
 }
 
 #include "MarbleDataFacade.moc"

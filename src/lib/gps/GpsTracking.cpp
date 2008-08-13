@@ -23,6 +23,8 @@
 
 #include <QtCore/QDebug>
 
+using namespace Marble;
+
 GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method, 
                           QObject *parent ) 
      :QObject( parent )

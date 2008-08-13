@@ -24,6 +24,9 @@
 
 #include <QtCore/QHash>
 
+namespace Marble
+{
+
 class GeoNode;
 class GeoParser;
 
@@ -70,5 +73,7 @@ public:
 #define GEODATA_DEFINE_TAG_HANDLER(Module, UpperCaseModule, Name, NameSpace) \
     static GeoTagHandlerRegistrar s_handler##Name##NameSpace(GeoTagHandler::QualifiedName(Module##Tag_##Name, NameSpace), \
                                                              new UpperCaseModule##Name##TagHandler());
+
+}
 
 #endif // GeoTagHandler_h

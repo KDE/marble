@@ -52,6 +52,8 @@
 
 #include "MarbleMap_p.h"
 
+namespace Marble
+{
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
@@ -1288,4 +1290,7 @@ QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const
 {
     return d->m_model->floatItems();
 }
+
+}
+
 #include "MarbleWidget.moc"

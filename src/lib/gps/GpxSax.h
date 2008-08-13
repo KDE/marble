@@ -16,6 +16,10 @@
 
 class QXmlAttributes;
 class QString;
+
+namespace Marble
+{
+
 class WaypointContainer;
 class Track;
 class TrackContainer;
@@ -48,5 +52,7 @@ class GpxSax : public QXmlDefaultHandler
     double              m_tempLat;
     double              m_tempLon;
 };
+
+}
 
 #endif

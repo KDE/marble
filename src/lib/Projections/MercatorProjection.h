@@ -22,6 +22,9 @@
 
 #include "AbstractProjection.h"
 
+namespace Marble
+{
+
 /**
  * @short A base class for all projections in Marble.
  */
@@ -97,5 +100,7 @@ class MercatorProjection : public AbstractProjection
  private:
     //MercatorProjectionPrivate  * const d;
 };
+
+}
 
 #endif // MERCATORPROJECTION_H

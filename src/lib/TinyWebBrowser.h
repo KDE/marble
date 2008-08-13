@@ -22,6 +22,10 @@
 #include <QDebug>
 #include <QtGui/QTextBrowser>
 #include <QImage>
+
+namespace Marble
+{
+
 class HttpDownloadManager;
 class CacheStoragePolicy;
 
@@ -58,5 +62,6 @@ class TinyWebBrowser : public QTextBrowser
         QString         m_source;
 };
 
+}
 
 #endif // TINYWEBBROWSER_H

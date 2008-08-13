@@ -19,8 +19,9 @@
 #include "ViewportParams.h"
 
 // #define MARBLE_DEBUG
-using namespace Marble;
 
+namespace Marble
+{
 
 class GeoPainterPrivate
 {
@@ -545,4 +546,6 @@ void GeoPainter::drawRect ( int x, int y, int width, int height )
 void GeoPainter::drawText ( const QPoint & position, const QString & text )
 {
     QPainter::drawText( position, text );
+}
+
 }

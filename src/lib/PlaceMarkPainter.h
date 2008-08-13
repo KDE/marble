@@ -27,6 +27,9 @@ class QItemSelection;
 class QPainter;
 class QString;
 
+namespace Marble
+{
+
 class ViewportParams;
 class VisiblePlaceMark;
 
@@ -62,5 +65,7 @@ class PlaceMarkPainter : public QObject
     // FIXME: To be removed after MapTheme / KML refactoring
     QColor m_defaultLabelColor;
 };
+
+}
 
 #endif // PLACEMARKPAINTER_H

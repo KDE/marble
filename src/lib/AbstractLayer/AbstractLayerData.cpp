@@ -18,6 +18,8 @@
 #include "BoundingBox.h"
 #include "ViewParams.h"
 
+using namespace Marble;
+
 AbstractLayerData::AbstractLayerData( const GeoDataCoordinates &position ):
                     m_visible(true)
 {

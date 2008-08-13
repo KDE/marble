@@ -12,6 +12,8 @@
 
 #include "tccore.h"
 
+using namespace Marble;
+
 int main(int argc, char *argv[])
 {
     TCCoreApplication app( argc, argv );

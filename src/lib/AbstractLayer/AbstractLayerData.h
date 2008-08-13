@@ -19,6 +19,9 @@ class QPoint;
 class QPointF;
 class QSize;
 
+namespace Marble
+{
+
 class ClipPainter;
 class ViewParams;
 
@@ -168,6 +171,8 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      */
     bool m_visible;
 };
+
+}
 
 #endif //ABSTRACTLAYERDATA_H
 

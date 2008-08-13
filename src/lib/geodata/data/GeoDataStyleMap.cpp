@@ -12,6 +12,9 @@
 #include "GeoDataStyleMap.h"
 #include <QtCore/QDataStream>
 
+namespace Marble
+{
+
 class GeoDataStyleMapPrivate
 {
   public:
@@ -59,4 +62,6 @@ void GeoDataStyleMap::unpack( QDataStream& stream )
     GeoDataStyleSelector::unpack( stream );
     
     stream >> *this;
+}
+
 }

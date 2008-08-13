@@ -31,6 +31,9 @@
 
 #include "global.h"
 
+namespace Marble
+{
+
 class MarbleModel;
 class MarbleGeoDataModel;
 class MarbleDataFacadePrivate;
@@ -65,5 +68,6 @@ class MARBLE_EXPORT MarbleDataFacade
     MarbleDataFacadePrivate  * const d;
 };
 
+}
 
 #endif // MARBLEMODEL_H

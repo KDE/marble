@@ -29,6 +29,8 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 
+using namespace Marble;
+
 PlaceMarkManager::PlaceMarkManager( QObject *parent )
     : QObject( parent ),
       m_model( 0 )

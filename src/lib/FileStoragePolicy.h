@@ -13,6 +13,9 @@
 
 #include "StoragePolicy.h"
 
+namespace Marble
+{
+
 class FileStoragePolicy : public StoragePolicy
 {
     public:
@@ -52,5 +55,7 @@ class FileStoragePolicy : public StoragePolicy
         QString m_dataDirectory;
         QString m_errorMsg;
 };
+
+}
 
 #endif

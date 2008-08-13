@@ -19,6 +19,9 @@
 
 #include <QtXml/QXmlAttributes>
 #include <QtGui/QMessageBox>
+
+using namespace Marble;
+
 /*
 GpxSax::GpxSax(WaypointContainer *wptContainer, 
                TrackContainer *trkContainer)

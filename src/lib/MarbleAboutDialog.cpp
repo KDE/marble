@@ -33,6 +33,8 @@
 #include "global.h"
 #include "MarbleDirs.h"
 
+namespace Marble
+{
 
 class MarbleAboutDialogPrivate
 {
@@ -140,5 +142,6 @@ void MarbleAboutDialog::loadPageContents( int idx )
     }
 }
 
-#include "MarbleAboutDialog.moc"
+}
 
+#include "MarbleAboutDialog.moc"

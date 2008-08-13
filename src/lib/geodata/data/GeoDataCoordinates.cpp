@@ -20,6 +20,9 @@
 #include <QtCore/QCoreApplication>
 #include "global.h"
 
+namespace Marble
+{
+
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit, int _detail )
@@ -311,4 +314,6 @@ void GeoDataCoordinates::unpack( QDataStream& stream )
     stream >> d->m_altitude;
 
     d->m_q.set( d->m_lon, d->m_lat );
+}
+
 }

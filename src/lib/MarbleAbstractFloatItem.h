@@ -28,6 +28,9 @@
 
 class QAction;
 
+namespace Marble
+{
+
 class MarbleAbstractFloatItemPrivate;
 
 
@@ -120,5 +123,7 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleAbstractLayer
     Q_DISABLE_COPY( MarbleAbstractFloatItem )
     MarbleAbstractFloatItemPrivate  * const d;
 };
+
+}
 
 #endif // MARBLE_ABSTRACT_FLOATITEM_H

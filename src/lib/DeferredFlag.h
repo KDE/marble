@@ -22,6 +22,8 @@
 #include <QtCore/QObject>
 #include <QtGui/QPixmap>
 
+namespace Marble
+{
 
 class DeferredFlag : public QObject
 {
@@ -46,5 +48,6 @@ class DeferredFlag : public QObject
     QPixmap  m_pixmap;
 };
 
+}
 
 #endif // DEFERREDFLAG_H

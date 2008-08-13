@@ -41,6 +41,9 @@ class QModelIndex;
 class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
 
+namespace Marble
+{
+
 // MarbleWidget 
 // class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
@@ -57,11 +60,7 @@ class FileViewModel;
 class GeoPainter;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
-
-namespace Marble
-{
 class GeoSceneDocument;
-}
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -954,5 +953,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     MarbleWidgetPrivate  * const d;
 };
 
+}
 
 #endif // MARBLEWIDGET_H

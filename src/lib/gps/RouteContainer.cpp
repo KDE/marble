@@ -13,6 +13,7 @@
 #include "AbstractLayerData.h"
 #include "BoundingBox.h"
 
+using namespace Marble;
 
 void RouteContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize,

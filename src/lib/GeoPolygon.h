@@ -21,6 +21,9 @@
 #include "Quaternion.h"
 #include "GeoDataCoordinates.h"
 
+namespace Marble
+{
+
 /*
 	GeoDataPoint defines the nodes in a polyLine 
 */
@@ -100,5 +103,6 @@ class GEODATA_EXPORT PntMap : public GeoPolygon::PtrVector
     Q_DISABLE_COPY( PntMap )
 };
 
+}
 
 #endif // GEOPOLYGON_H

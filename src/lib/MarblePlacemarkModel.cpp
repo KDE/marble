@@ -24,6 +24,7 @@
 #include "PlaceMarkContainer.h"
 #include "PlaceMarkManager.h"
 
+using namespace Marble;
 
 class MarblePlacemarkModel::Private
 {

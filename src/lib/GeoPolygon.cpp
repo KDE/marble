@@ -28,6 +28,8 @@ using std::fabs;
 # include <sys/mman.h> /* mmap() is defined in this header */
 #endif
 
+using namespace Marble;
+
 const double ARCMINUTE = 10800; // distance of 180deg in arcminutes
 const double INT2RAD = M_PI / 10800.0;
 

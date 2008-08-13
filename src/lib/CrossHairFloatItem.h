@@ -17,10 +17,12 @@
 #ifndef CROSSHAIRFLOATITEM_H
 #define CROSSHAIRFLOATITEM_H
 
-
 #include <QtCore/QObject>
 
 class QPainter;
+
+namespace Marble
+{
 
 class CrossHairFloatItem : public QObject
 {
@@ -38,5 +40,6 @@ class CrossHairFloatItem : public QObject
     bool  m_enabled;
 };
 
+}
 
 #endif // CROSSHAIRFLOATITEM_H

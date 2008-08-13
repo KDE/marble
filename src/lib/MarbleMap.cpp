@@ -61,6 +61,7 @@
 
 #include "gps/GpsLayer.h"
 
+using namespace Marble;
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H

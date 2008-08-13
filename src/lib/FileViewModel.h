@@ -15,10 +15,11 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QList>
 
+namespace Marble
+{
 
 class AbstractFileViewItem;
 class BoundingBox;
-
 
 class FileViewModel : public QAbstractListModel
 {
@@ -48,5 +49,7 @@ class FileViewModel : public QAbstractListModel
     QModelIndex m_selectedIndex;
     QList < AbstractFileViewItem* > m_itemList;
 };
+
+}
 
 #endif

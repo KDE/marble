@@ -22,9 +22,8 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataLatLonAltBox.h"
 
-
-using namespace Marble;
-
+namespace Marble
+{
 
 class GeoDataPolygonPrivate;
 
@@ -70,4 +69,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon {};
 class GEODATA_EXPORT GeoDataInnerBoundary : public GeoDataPolygon {};
+
+}
+
 #endif // GEODATAPOLYGON_H

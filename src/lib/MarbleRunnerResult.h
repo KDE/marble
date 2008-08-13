@@ -23,6 +23,9 @@
 
 #include "PlaceMarkContainer.h"
 
+namespace Marble
+{
+
 class MarbleRunnerResult 
 {
 public:
@@ -47,6 +50,8 @@ private:
     Score m_score;
 };
 
-Q_DECLARE_METATYPE( MarbleRunnerResult )
+}
+
+Q_DECLARE_METATYPE( Marble::MarbleRunnerResult )
 
 #endif

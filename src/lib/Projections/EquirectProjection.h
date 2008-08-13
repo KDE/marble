@@ -22,6 +22,10 @@
 
 #include "AbstractProjection.h"
 
+
+namespace Marble
+{
+
 /**
  * @short A base class for all projections in Marble.
  */
@@ -98,5 +102,6 @@ class EquirectProjection : public AbstractProjection
     //EquirectProjectionPrivate  * const d;
 };
 
+}
 
 #endif // EQUIRECTPROJECTION_H

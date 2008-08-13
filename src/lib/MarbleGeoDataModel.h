@@ -16,6 +16,8 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
 class GeoDataDocument;
 
 /**
@@ -64,13 +66,13 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
     * Return a pointer to the root object of a geodata tree.
     * This tree is a merged version of all the files loaded into this model
     */
-    GeoDataDocument* geoDataRoot();
+    Marble::GeoDataDocument* geoDataRoot();
  private:
     Q_DISABLE_COPY( MarbleGeoDataModel )
     class Private;
     Private* const d;
-
 };
 
+}
 
 #endif // MarbleGeoDataModel_H

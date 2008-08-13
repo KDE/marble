@@ -16,6 +16,7 @@
 
 #include <QtCore/QDebug>
 
+using namespace Marble;
 
 // #define MARBLE_DEBUG
 

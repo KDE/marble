@@ -13,6 +13,9 @@
 #include "MarbleDirs.h"
 #include "PluginManager.h"
 
+namespace Marble
+{
+
 class PluginManagerTest : public QObject {
     Q_OBJECT
     private slots:
@@ -27,6 +30,8 @@ void PluginManagerTest::loadPlugins() {
     QCOMPARE( pm->layerPlugins().size(), pluginNumber );
 }
 
-QTEST_MAIN( PluginManagerTest )
+}
+
+QTEST_MAIN( Marble::PluginManagerTest )
 
 #include "PluginManagerTest.moc"

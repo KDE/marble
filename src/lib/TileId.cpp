@@ -13,6 +13,8 @@
 
 #include <QtCore/QHash>
 
+namespace Marble
+{
 
 TileId::TileId( int zoomLevel, int tileX, int tileY )
   : m_zoomLevel( zoomLevel ), m_tileX( tileX ), m_tileY( tileY )
@@ -63,5 +65,7 @@ uint qHash( TileId const& tid )
     quint64 tmp = ((quint64)(tid.m_zoomLevel) << 36)
         + ((quint64)(tid.m_tileX) << 18)
         + (quint64)(tid.m_tileY);
-    return qHash( tmp );
+    return ::qHash( tmp );
+}
+
 }

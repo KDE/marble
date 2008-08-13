@@ -22,8 +22,8 @@
 #include "GeoDataLatLonAltBox.h"
 
 
-using namespace Marble;
-
+namespace Marble
+{
 
 class GeoDataLineStringPrivate;
 
@@ -74,5 +74,7 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
  protected:
     GeoDataLineStringPrivate  * const d;
 };
+
+}
 
 #endif // GEODATALINESTRING_H

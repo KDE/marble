@@ -15,8 +15,8 @@
 #include "AbstractLayerData.h"
 #include "BoundingBox.h"
 
+using namespace Marble;
 
-// #include <QtCore/QPoint>
 /*
 TrackContainer::TrackContainer() : AbstractLayerContainer()
 {

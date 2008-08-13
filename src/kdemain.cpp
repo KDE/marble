@@ -26,7 +26,9 @@
  Q_IMPORT_PLUGIN(qjpeg)
  Q_IMPORT_PLUGIN(qsvg)
 #endif
- 
+
+using namespace Marble;
+
 int main (int argc, char *argv[])
 {
     KAboutData aboutData( "marble", 0, 

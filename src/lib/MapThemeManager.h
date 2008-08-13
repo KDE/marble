@@ -26,8 +26,8 @@ class QStandardItemModel;
 
 namespace Marble
 {
+
 class GeoSceneDocument;
-}
 
 /**
  * @short The class that handles map themes that are locally available .
@@ -123,5 +123,6 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     QFileSystemWatcher* m_fileSystemWatcher;
 };
 
+}
 
 #endif // MAPTHEMEMANAGER_H

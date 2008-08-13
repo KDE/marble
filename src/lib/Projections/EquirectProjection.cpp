@@ -18,6 +18,8 @@
 
 #include <QtCore/QDebug>
 
+using namespace Marble;
+
 static EquirectProjectionHelper  theHelper;
 
 

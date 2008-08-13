@@ -21,6 +21,8 @@
 #include <QtGui/QRegion>
 #include <cmath>
 
+using namespace Marble;
+
 GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent ) 
                 :AbstractLayer( parent )
 {

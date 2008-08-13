@@ -23,6 +23,8 @@
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 
+namespace Marble
+{
 
 class MapScaleFloatItem : public QObject
 {
@@ -76,5 +78,6 @@ class MapScaleFloatItem : public QObject
     int m_transparency;
 };
 
+}
 
 #endif // MAPSCALEFLOATITEM_H

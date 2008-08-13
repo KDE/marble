@@ -19,6 +19,8 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size ),
@@ -215,6 +217,8 @@ void MapScaleFloatItem::calcScaleBar()
     m_valueInterval = (int)( bestMagValue * magnitude / m_bestDivisor );
 }
 
-Q_EXPORT_PLUGIN2(MapScaleFloatItem, MapScaleFloatItem)
+}
+
+Q_EXPORT_PLUGIN2(MapScaleFloatItem, Marble::MapScaleFloatItem)
 
 #include "MapScaleFloatItem.moc"

@@ -15,6 +15,7 @@
 // Marble
 #include "ViewportParams.h"
 
+using namespace Marble;
 
 AbstractProjection::AbstractProjection()
 {

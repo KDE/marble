@@ -26,6 +26,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataPlacemarkPrivate;
 
 /**
@@ -142,5 +145,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     Q_DISABLE_COPY( GeoDataPlacemark )
     GeoDataPlacemarkPrivate * const d;
 };
+
+}
 
 #endif // GEODATAPLACEMARK_H

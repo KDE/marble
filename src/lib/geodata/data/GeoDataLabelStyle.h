@@ -20,6 +20,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataLabelStylePrivate;
 
 /**
@@ -92,5 +95,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     Q_DISABLE_COPY( GeoDataLabelStyle )
     GeoDataLabelStylePrivate * const d;
 };
+
+}
 
 #endif // GEODATALABELSTYLE_H

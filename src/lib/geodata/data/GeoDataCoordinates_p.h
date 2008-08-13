@@ -11,6 +11,9 @@
 
 #include "Quaternion.h"
 
+namespace Marble
+{
+
 class GeoDataCoordinatesPrivate
 {
   public:
@@ -47,3 +50,5 @@ class GeoDataCoordinatesPrivate
     double      m_altitude;     // in meters above sea level
     int         m_detail;
 };
+
+}

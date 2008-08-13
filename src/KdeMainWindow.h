@@ -16,6 +16,9 @@
 
 #include <KXmlGuiWindow>
 
+namespace Marble
+{
+
 class ControlView;
 class MarblePart;
 class MarbleWidget;
@@ -39,5 +42,6 @@ class MainWindow : public KXmlGuiWindow
     MarblePart *m_part;
 };
 
- 
+}
+
 #endif

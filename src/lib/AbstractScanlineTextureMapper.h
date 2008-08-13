@@ -43,11 +43,12 @@ namespace {
     const double a16 = 2088463430347521052196056349.0/102156677868375135241390522368000000.0;
 }
 
+namespace Marble
+{
+
 class TextureTile;
 class TileLoader;
 class ViewParams;
-
-using Marble::GeoSceneTexture;
 
 class AbstractScanlineTextureMapper : public QObject
 {
@@ -284,6 +285,8 @@ inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftVa
     }
 
     return topLeftValue;
+}
+
 }
 
 #endif

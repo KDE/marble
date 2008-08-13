@@ -30,6 +30,8 @@
 
 #include <config-marble.h>
 
+using namespace Marble;
+
 namespace
 {
     QString runTimeMarbleDataPath = "";

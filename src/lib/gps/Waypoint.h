@@ -16,6 +16,8 @@
 #include <QtCore/QTime>
 #include <QtCore/QString>
 
+namespace Marble
+{
 
 /**
  * @brief representaion of a GPS Waypoint.
@@ -279,5 +281,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
      */
     int m_dgpsid;
 };
+
+}
 
 #endif //WAYPOINT_H

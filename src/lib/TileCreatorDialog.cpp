@@ -20,6 +20,7 @@
 // Marble
 #include "TileCreator.h"
 
+using namespace Marble;
 
 TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
     : QDialog(parent), m_creator( creator )

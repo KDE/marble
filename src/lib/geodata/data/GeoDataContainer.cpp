@@ -20,6 +20,8 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 
+namespace Marble
+{
 
 class GeoDataContainerPrivate
 {
@@ -246,3 +248,5 @@ PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const
     return m_activePlaceMarkContainer;
 }
 #endif
+
+}

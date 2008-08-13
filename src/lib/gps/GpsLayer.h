@@ -22,6 +22,9 @@
 
 class QRegion;
 
+namespace Marble
+{
+
 class BoundingBox;
 class GpsTracking;
 class GpxFile;
@@ -58,5 +61,7 @@ class GpsLayer : public AbstractLayer
     GpxFile             *m_currentGpx;
     GpsTracking         *m_tracking;
 };
+
+}
 
 #endif

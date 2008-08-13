@@ -35,6 +35,8 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataParser.h"
 
+namespace Marble
+{
 
 QStringList MarblePlacemarksPlugin::backendTypes() const
 {
@@ -159,6 +161,8 @@ bool MarblePlacemarksPlugin::render( GeoPainter *painter, ViewportParams *viewpo
     return true;
 }
 
-Q_EXPORT_PLUGIN2(MarblePlacemarksPlugin, MarblePlacemarksPlugin)
+}
+
+Q_EXPORT_PLUGIN2(MarblePlacemarksPlugin, Marble::MarblePlacemarksPlugin)
 
 #include "MarblePlacemarksPlugin.moc"

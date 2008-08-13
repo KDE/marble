@@ -18,7 +18,8 @@
 #include "GeoDataGeometry.h"
 #include <QtCore/QVector>
 
-using namespace Marble;
+namespace Marble
+{
 
 /**
  * @short A class that can contain other GeoDataGeometry objects
@@ -43,5 +44,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
 
     virtual EnumGeometryId geometryId() const { return GeoDataMultiGeometryId; };
 };
+
+}
 
 #endif // GEODATAMULTIGEOMETRY_H

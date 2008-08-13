@@ -18,6 +18,9 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataPlacemarkPrivate
 {
   public:
@@ -220,4 +223,6 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
         default: break;
     };
     d->m_coordinate.unpack( stream );
+}
+
 }

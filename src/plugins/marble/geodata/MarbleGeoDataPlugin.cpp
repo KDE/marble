@@ -35,6 +35,9 @@
 #include "GeoDataParser.h"
 
 
+namespace Marble
+{
+
 QStringList MarbleGeoDataPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
@@ -176,6 +179,8 @@ bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-Q_EXPORT_PLUGIN2(MarbleGeoDataPlugin, MarbleGeoDataPlugin)
+}
+
+Q_EXPORT_PLUGIN2(MarbleGeoDataPlugin, Marble::MarbleGeoDataPlugin)
 
 #include "MarbleGeoDataPlugin.moc"

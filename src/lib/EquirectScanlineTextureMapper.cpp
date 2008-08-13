@@ -27,6 +27,8 @@
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 
+using namespace Marble;
+
 EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {

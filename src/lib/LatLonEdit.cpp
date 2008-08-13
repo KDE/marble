@@ -31,6 +31,8 @@
 
 #include "global.h"
 
+using namespace Marble;
+
 LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
 	m_layout(0),
 	m_degreesSpin(0),

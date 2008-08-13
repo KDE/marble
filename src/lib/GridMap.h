@@ -20,10 +20,11 @@
 #include "Quaternion.h"
 #include "ScreenPolygon.h"
 
+namespace Marble
+{
 
 class ViewportParams;
 class GeoPainter;
-
 
 class GridMap : public ScreenPolygon::Vector
 {
@@ -56,8 +57,7 @@ class GridMap : public ScreenPolygon::Vector
 			   ViewportParams *viewport, double cutCoeff = 0.0 );
 
     int            getPrecision( ViewportParams *viewport );
-    const QPointF  horizonPoint( ViewportParams *viewport )
-;
+    const QPointF  horizonPoint( ViewportParams *viewport );
 
  private:
     matrix   m_planetAxisMatrix;
@@ -73,5 +73,7 @@ class GridMap : public ScreenPolygon::Vector
     bool     m_lastVisible;
     bool     m_currentlyVisible;
 };
+
+}
 
 #endif // GRIDMAP_H

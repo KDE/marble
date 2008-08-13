@@ -13,6 +13,8 @@
 #include <QtCore/QDebug>
 #include <QtGui/QMessageBox>
 
+using namespace Marble;
+
 GmlSax::GmlSax( double *lon, double *lat )
 {
     m_lon = lon;

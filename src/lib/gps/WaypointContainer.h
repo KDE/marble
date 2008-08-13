@@ -12,6 +12,9 @@
 
 #include "AbstractLayerContainer.h"
 
+namespace Marble
+{
+
 class ClipPainter;
 
 class WaypointContainer : public virtual AbstractLayerContainer
@@ -39,5 +42,6 @@ class WaypointContainer : public virtual AbstractLayerContainer
     virtual void processVisable();
 };
 
+}
 
 #endif //WAYPOINTCONTAINER_H

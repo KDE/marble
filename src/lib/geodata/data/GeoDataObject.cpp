@@ -15,6 +15,9 @@
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
 
+namespace Marble
+{
+
 class GeoDataObjectPrivate
 {
   public:
@@ -81,4 +84,6 @@ void GeoDataObject::unpack( QDataStream& stream )
 {
     stream >> d->m_id;
     stream >> d->m_targetId;
+}
+
 }

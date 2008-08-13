@@ -30,6 +30,8 @@
 
 #include "global.h"
 
+using namespace Marble;
+
 MeasureTool::MeasureTool( QObject* parent )
     : QObject( parent )
 {

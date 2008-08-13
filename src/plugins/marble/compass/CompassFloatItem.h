@@ -22,6 +22,9 @@
 
 class QSvgRenderer;
 
+namespace Marble
+{
+
 /**
  * @short The class that creates a compass
  *
@@ -30,7 +33,7 @@ class QSvgRenderer;
 class CompassFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),
@@ -69,5 +72,7 @@ class CompassFloatItem  : public MarbleAbstractFloatItem
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 };
+
+}
 
 #endif

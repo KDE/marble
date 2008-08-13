@@ -10,6 +10,9 @@
 
 #include "GeoDataColorStyle.h"
 
+namespace Marble
+{
+
 class GeoDataColorStylePrivate
 {
   public:
@@ -75,4 +78,6 @@ void GeoDataColorStyle::unpack( QDataStream& stream )
     stream >> d->m_color;
     // FIXME: Why is not colorMode saved?
 //    stream >> m_colorMode;
+}
+
 }

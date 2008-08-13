@@ -18,6 +18,7 @@
 // Marble
 #include "BoundingBox.h"
 
+using namespace Marble;
 
 Track::Track() : 
     AbstractLayerContainer(),

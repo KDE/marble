@@ -19,6 +19,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataHotSpotPrivate;
 
 class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
@@ -44,5 +47,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     Q_DISABLE_COPY( GeoDataHotSpot )
     GeoDataHotSpotPrivate * const d;
 };
+
+}
 
 #endif // GEODATAHOTSPOT_H

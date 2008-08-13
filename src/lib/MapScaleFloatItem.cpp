@@ -17,6 +17,8 @@
 
 #include "global.h"
 
+using namespace Marble;
+
 MapScaleFloatItem::MapScaleFloatItem( QObject* parent )
     : QObject(parent)
 {

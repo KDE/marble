@@ -20,6 +20,9 @@
 #include <QtCore/QString>
 // FIXME: forward decl for QString
 
+namespace Marble
+{
+
 class ViewParams;
 
 typedef struct
@@ -57,5 +60,6 @@ class TextureColorizer
     static uint texturepalette[16][512];
 };
 
+}
 
 #endif

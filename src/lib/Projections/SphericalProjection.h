@@ -22,6 +22,9 @@
 
 #include "AbstractProjection.h"
 
+namespace Marble
+{
+
 /**
  * @short A base class for all projections in Marble.
  */
@@ -98,5 +101,6 @@ class SphericalProjection : public AbstractProjection
     //SphericalProjectionPrivate  * const d;
 };
 
+}
 
 #endif // SPHERICALPROJECTION_H

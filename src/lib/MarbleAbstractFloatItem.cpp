@@ -18,6 +18,9 @@
 #include <QtCore/QRectF>
 #include "GeoPainter.h"
 
+namespace Marble
+{
+
 class MarbleAbstractFloatItemPrivate
 {
   public:
@@ -541,5 +544,6 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     return false;
 }
 
-#include "MarbleAbstractFloatItem.moc"
+}
 
+#include "MarbleAbstractFloatItem.moc"

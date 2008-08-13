@@ -15,6 +15,8 @@
 #include "AbstractFileViewItem.h"
 #include "BoundingBox.h"
 
+using namespace Marble;
+
 FileViewModel::FileViewModel( QObject* parent ) :
     QAbstractListModel( parent )
 {

@@ -14,6 +14,9 @@
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
 
+namespace Marble
+{
+
 namespace GeoString
 {
     static const QRegExp combiningDiacriticalMarks("[\\x0300-\\x036F]+");
@@ -27,6 +30,7 @@ namespace GeoString
         result = result.replace(QChar(0x0142),'l');
         return result;
     }
+}
 }
 
 #endif

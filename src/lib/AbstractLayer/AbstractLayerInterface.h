@@ -12,12 +12,16 @@
 
 #include <QtCore/QTextStream>
 
-class ClipPainter;
 class QPoint;
 class QSize;
+
+namespace Marble
+{
+
 class BoundingBox;
+class ClipPainter;
 class ViewParams;
- 
+
 class AbstractLayerInterface
 {
     friend QTextStream& operator<<( QTextStream&, 
@@ -43,5 +47,7 @@ class AbstractLayerInterface
  protected:
     bool m_visible;
 };
+
+}
 
 #endif

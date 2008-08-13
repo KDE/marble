@@ -25,6 +25,9 @@
 
 class QMenu;
 
+namespace Marble
+{
+
 class MarbleWidget;
 class MarbleModel;
 
@@ -72,7 +75,8 @@ class MarbleWidgetPopupMenu  : public QObject
     QAction  *m_addMeasurePointAction;	
     QAction  *m_removeMeasurePointsAction;	
     QAction  *m_aboutDialogAction;	
-
 };
+
+}
 
 #endif // MARBLEWIDGETPOPUPMENU_H

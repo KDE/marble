@@ -21,6 +21,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataStyleMapPrivate;
 /**
  * @short a class to map different styles to one style
@@ -67,5 +70,7 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
     Q_DISABLE_COPY( GeoDataStyleMap )
     GeoDataStyleMapPrivate * const d;
 };
+
+}
 
 #endif // GeoDataStyleMap_H

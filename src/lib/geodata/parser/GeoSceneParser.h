@@ -25,11 +25,10 @@
 #include <geodata_export.h>
 #include "GeoParser.h"
 
-class GeoDocument;
-
 namespace Marble
 {
 
+class GeoDocument;
 class GeoSceneDocument;
 
 enum GeoSceneSourceType {

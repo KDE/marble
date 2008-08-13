@@ -24,6 +24,7 @@
 #include "Quaternion.h"
 #include "ViewParams.h"
 
+using namespace Marble;
 
 AbstractLayer::AbstractLayer( QObject *parent ) 
     : QObject( parent )

@@ -13,6 +13,7 @@
 
 #include <QtGui/QResizeEvent>
 
+using namespace Marble;
 
 MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
     : QListView( parent ),

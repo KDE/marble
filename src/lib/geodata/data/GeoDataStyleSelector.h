@@ -20,6 +20,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataStyleSelectorPrivate;
 
 /**
@@ -67,5 +70,7 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     Q_DISABLE_COPY( GeoDataStyleSelector )
     GeoDataStyleSelectorPrivate * const d;
 };
+
+}
 
 #endif // GEODATASTYLESELECTOR_H

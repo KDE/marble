@@ -17,7 +17,8 @@
 #include "GeoDataLineString.h"
 
 
-using namespace Marble;
+namespace Marble
+{
 
 /**
  * @short A class that defines a closed, contiguous set of line segments.
@@ -40,5 +41,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
     virtual ~GeoDataLinearRing();
     virtual EnumGeometryId geometryId() const { return GeoDataLinearRingId; };
 };
+
+}
 
 #endif // GEODATALINEARRING_H

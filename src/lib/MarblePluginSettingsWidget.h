@@ -33,6 +33,9 @@
 
 class QStandardItemModel;
 
+namespace Marble
+{
+
 class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::MarblePluginSettingsWidget
 {
     Q_OBJECT
@@ -46,5 +49,6 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::Mar
     void pluginListViewClicked();
 };
 
+}
 
 #endif // MARBLEPLUGINSETTINGSWIDGET_H

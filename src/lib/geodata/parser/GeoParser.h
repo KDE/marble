@@ -28,6 +28,9 @@
 #include <geodata_export.h>
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 typedef int GeoDataGenericSourceType;
 
 class GeoDocument;
@@ -108,5 +111,7 @@ private:
     friend class GeoParser;
     void assignNode( GeoNode* node ) { second = node; }
 };
+
+}
 
 #endif // GeoParser_h

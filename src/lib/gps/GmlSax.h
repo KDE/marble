@@ -17,6 +17,8 @@
 class QXmlAttributes;
 class QXmlParseException;
 
+namespace Marble
+{
 
 /**
 A very simple Xml Parser that will be based on the Gml Scema ( Geographic Markup Language )
@@ -47,5 +49,7 @@ private:
 
     QString currentText;
 };
+
+}
 
 #endif

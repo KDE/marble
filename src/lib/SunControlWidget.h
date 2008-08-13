@@ -22,6 +22,8 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
 
 class MARBLE_EXPORT SunControlWidget : public QDialog
 {
@@ -54,5 +56,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     Ui::SunControlWidget m_uiWidget;
     SunLocator* m_sunLocator;
 };
+
+}
 
 #endif

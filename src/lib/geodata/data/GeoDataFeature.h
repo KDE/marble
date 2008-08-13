@@ -23,6 +23,9 @@
 
 #include "geodata_export.h"
 
+namespace Marble
+{
+
 class GeoDataStyle;
 class GeoDataStyleSelector;
 class GeoDataStyleMap;
@@ -266,5 +269,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static GeoDataStyle* s_defaultStyle[GeoDataFeature::LastIndex];
     static bool          s_defaultStyleInitialized;
 };
+
+}
 
 #endif // GEODATAFEATURE_H

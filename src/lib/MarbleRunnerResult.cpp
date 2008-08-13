@@ -22,6 +22,9 @@
 
 #include "PlaceMarkContainer.h"
 
+namespace Marble
+{
+
 MarbleRunnerResult::MarbleRunnerResult()
 {
     PlaceMarkContainer empty;
@@ -66,4 +69,4 @@ void MarbleRunnerResult::setPlacemarks( PlaceMarkContainer placemarks )
     m_placemarks = placemarks;
 }
 
-
+}

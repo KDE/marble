@@ -30,14 +30,13 @@
 
 class QImage;
 
+namespace Marble
+{
+
 class AbstractProjection;
 class ViewportParams;
 class ViewParamsPrivate;
-
-namespace Marble
-{
 class GeoSceneDocument;
-}
 
 /** 
  * @short A public class that controls the painting of a MarbleWidget
@@ -130,5 +129,6 @@ class MARBLE_EXPORT ViewParams
     ViewParamsPrivate * const d;
 };
 
+}
 
 #endif // VIEWPARAMS_H

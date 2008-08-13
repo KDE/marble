@@ -27,8 +27,8 @@
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"
 
-using namespace Marble;
-
+namespace Marble
+{
 
 class TileCreatorPrivate
 {
@@ -435,5 +435,6 @@ void TileCreator::run()
     qDebug() << "percentCompleted: " << percentCompleted;
 }
 
+}
 
 #include "TileCreator.moc"

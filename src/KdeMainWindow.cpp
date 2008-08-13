@@ -28,6 +28,9 @@
 #include "ControlView.h"
 #include "marble_part.h"
 
+namespace Marble
+{
+
 MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
     : KXmlGuiWindow( parent )
 {
@@ -70,6 +73,8 @@ MarbleWidget* MainWindow::marbleWidget() const
 void MainWindow::setMapTitle()
 {
     setCaption( marbleWidget()->mapTheme()->head()->name() );
+}
+
 }
 
 #include "KdeMainWindow.moc"

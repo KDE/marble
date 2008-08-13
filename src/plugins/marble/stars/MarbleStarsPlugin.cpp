@@ -22,6 +22,8 @@
 #include "Quaternion.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 QStringList MarbleStarsPlugin::backendTypes() const
 {
@@ -202,6 +204,8 @@ double MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
     return gmst - (int)( gmst / 24.0 ) * 24.0; 
 }
 
-Q_EXPORT_PLUGIN2(MarbleStarsPlugin, MarbleStarsPlugin)
+}
+
+Q_EXPORT_PLUGIN2(MarbleStarsPlugin, Marble::MarbleStarsPlugin)
 
 #include "MarbleStarsPlugin.moc"

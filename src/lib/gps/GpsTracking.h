@@ -24,6 +24,9 @@
 #include <libgpsmm.h>
 #endif
 
+namespace Marble
+{
+
 class ClipPainter;
 class GpxFile;
 class Track;
@@ -129,5 +132,6 @@ public:
 
 };
 
+}
 
 #endif

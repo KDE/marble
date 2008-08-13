@@ -17,6 +17,9 @@
 #include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 
+namespace Marble
+{
+
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
@@ -116,6 +119,8 @@ class MarbleLayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
-Q_DECLARE_INTERFACE( MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.02" )
+}
+
+Q_DECLARE_INTERFACE( Marble::MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.02" )
 
 #endif // MARBLE_LAYER_INTERFACE_H

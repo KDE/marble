@@ -19,6 +19,9 @@
 #include "AbstractScanlineTextureMapper.h"
 
 
+namespace Marble
+{
+
 class TileLoader;
 
 
@@ -51,5 +54,6 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
     double  m_nInverse;
 };
 
+}
 
 #endif // SPHERICALSCANLINETEXTUREMAPPER_H

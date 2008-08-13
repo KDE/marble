@@ -36,6 +36,8 @@
 #include "VisiblePlaceMark.h"
 #include "MathHelper.h"
 
+using namespace Marble;
+
 PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
     : QObject( parent ),
       m_placeMarkPainter( 0 ),

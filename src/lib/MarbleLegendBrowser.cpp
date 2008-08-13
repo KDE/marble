@@ -34,7 +34,8 @@
 
 #include "MarbleDirs.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 class MarbleLegendBrowserPrivate
 {
@@ -337,6 +338,8 @@ void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked 
     setUpdatesEnabled( true );
 
     repaint();
+}
+
 }
 
 #include "MarbleLegendBrowser.moc"

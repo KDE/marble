@@ -24,9 +24,12 @@
 #include "MarbleWidget.h"
 #include "MarbleControlBox.h"
 
-class MapThemeManager;
 class QSplitter;
 
+namespace Marble
+{
+
+class MapThemeManager;
 
 class ControlView : public QWidget
 {
@@ -72,5 +75,6 @@ class ControlView : public QWidget
     MapThemeManager   *m_mapThemeManager;
 };
 
+}
 
 #endif // CONTROLVIEW_H

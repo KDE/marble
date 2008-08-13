@@ -18,6 +18,8 @@
 #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 
+using namespace Marble;
+
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
                                           StoragePolicy *policy )
     : m_activatedJobsLimit( 40 ),

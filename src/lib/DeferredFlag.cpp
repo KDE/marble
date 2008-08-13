@@ -20,6 +20,7 @@
 
 #include "MarbleDirs.h"
 
+using namespace Marble;
 
 DeferredFlag::DeferredFlag( QObject* parent )
     : QObject(parent)

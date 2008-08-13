@@ -12,6 +12,7 @@
 
 #include "PlaceMarkContainer.h"
 
+using namespace Marble;
 
 PlaceMarkContainer::PlaceMarkContainer()
 {

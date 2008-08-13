@@ -17,6 +17,9 @@
 
 // NOTE: THIS CLASS IS DEPRECATED. Use GeoDataLatLonBox or GeoDataLatLonAltBox instead!
 
+namespace Marble
+{
+
 class BoundingBox
 {
  public:
@@ -40,5 +43,7 @@ class BoundingBox
     bool m_dateLine;
     // bool m_valid;
 };
+
+}
 
 #endif //BOUNDINGBOX_H

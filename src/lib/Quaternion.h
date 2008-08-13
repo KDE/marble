@@ -19,6 +19,9 @@
 #include "marble_export.h"
 #include <cmath>
 
+namespace Marble
+{
+
 using std::cos;
 using std::sin;
 
@@ -87,5 +90,7 @@ class MARBLE_EXPORT Quaternion {
     // TODO: Better add accessors...
     xmmfloat    v;
 };
+
+}
 
 #endif // __MARBLE__QUATERNION_H

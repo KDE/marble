@@ -13,6 +13,9 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataLineStringPrivate
 {
  public:
@@ -119,4 +122,6 @@ void GeoDataLineString::unpack( QDataStream& stream )
         coord->unpack( stream );
         append( coord );
     }
+}
+
 }

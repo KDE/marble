@@ -10,6 +10,10 @@
 
 
 #include "GeoDataStyle.h"
+
+namespace Marble
+{
+
 class GeoDataStylePrivate
 {
   public:
@@ -125,4 +129,6 @@ void GeoDataStyle::unpack( QDataStream& stream )
     d->m_labelStyle->unpack( stream );
     d->m_lineStyle->unpack( stream );
     d->m_polyStyle->unpack( stream );
+}
+
 }

@@ -13,6 +13,9 @@
 
 #include "AbstractLayerContainer.h"
 
+namespace Marble
+{
+
 /**
  * @brief holds a collection of tracks
  */
@@ -37,5 +40,7 @@ class TrackContainer : public AbstractLayerContainer
                        ViewParams *viewParams,
                        const BoundingBox &box );
 };
+
+}
 
 #endif

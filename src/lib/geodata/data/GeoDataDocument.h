@@ -31,6 +31,9 @@
 #include "GeoDataContainer.h"
 #include "GeoDocument.h"
 
+namespace Marble
+{
+
 class GeoDataStyle;
 class GeoDataStyleMap;
 
@@ -98,5 +101,6 @@ private:
     GeoDataDocumentPrivate * const d;
 };
 
+}
 
 #endif // GeoDataDocument_h

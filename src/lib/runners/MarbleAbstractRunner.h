@@ -27,6 +27,9 @@
 
 class QString;
 
+namespace Marble
+{
+
 class MarbleAbstractRunner : public QThread
 {
     Q_OBJECT
@@ -41,5 +44,7 @@ signals:
     void runnerStarted();
     void runnerFinished(MarbleRunnerResult result);
 };
+
+}
 
 #endif

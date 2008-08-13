@@ -18,6 +18,9 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class MARBLE_EXPORT MarbleSearchListView : public QListView
 {
     Q_OBJECT
@@ -37,5 +40,7 @@ class MARBLE_EXPORT MarbleSearchListView : public QListView
     class Private;
     Private  * const d;
 };
+
+}
 
 #endif // MARBLESEARCHLISTVIEW_H

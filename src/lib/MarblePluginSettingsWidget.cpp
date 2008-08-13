@@ -14,6 +14,7 @@
 // Qt
 #include <QtGui/QStandardItemModel>
 
+using namespace Marble;
 
 MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent ) : QWidget( parent )
 {

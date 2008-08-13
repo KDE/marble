@@ -59,6 +59,8 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 class MarbleModelPrivate
 {
@@ -812,6 +814,8 @@ QList<MarbleAbstractLayer *> MarbleModel::layerPlugins() const
 QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
 {
     return d->m_layerManager->floatItems();
+}
+
 }
 
 #include "MarbleModel.moc"

@@ -24,7 +24,8 @@
 #include "GeoDataDocument.h"
 #include "osm-namefinder/ElementDictionary.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 GeoOnfParser::GeoOnfParser()
     : GeoParser( 0 )
@@ -46,4 +47,6 @@ bool GeoOnfParser::isValidElement(const QString& tagName) const
 GeoDocument * GeoOnfParser::createDocument() const
 {
     return new GeoDataDocument;
+}
+
 }

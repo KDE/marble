@@ -15,6 +15,9 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataGeometryPrivate
 {
  public:
@@ -102,4 +105,6 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     stream >> d->m_tessellate;
     stream >> am;
     d->m_altitudeMode = (AltitudeMode) am;
+}
+
 }

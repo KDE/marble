@@ -41,7 +41,10 @@
 // KML support
 #include "KmlElementDictionary.h"
 
-using namespace Marble::GeoDataElementDictionary;
+namespace Marble
+{
+
+using namespace GeoDataElementDictionary;
 
 GeoDataParser::GeoDataParser(GeoDataSourceType source)
     : GeoParser(source)
@@ -115,4 +118,6 @@ GeoDataDocument* geoDataDoc(GeoParser& parser)
     GeoDocument* document = parser.activeDocument();
     Q_ASSERT(document->isGeoDataDocument());
     return static_cast<GeoDataDocument*>(document);
+}
+
 }

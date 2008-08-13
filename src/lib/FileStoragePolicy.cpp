@@ -22,6 +22,7 @@
 // Marble
 #include "MarbleDirs.h"
 
+using namespace Marble;
 
 FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory )
     : m_dataDirectory( dataDirectory )

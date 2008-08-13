@@ -21,6 +21,7 @@
 #include <cmath>
 #include <QtCore/QDebug>
 
+using namespace Marble;
 
 TrackSegment::TrackSegment()
     :AbstractLayerContainer(),

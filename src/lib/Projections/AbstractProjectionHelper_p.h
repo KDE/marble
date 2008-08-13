@@ -23,6 +23,8 @@
 // Qt
 #include <QtGui/QRegion>
 
+namespace Marble
+{
 
 class AbstractProjectionHelperPrivate
 {
@@ -30,7 +32,7 @@ class AbstractProjectionHelperPrivate
     QRegion  activeRegion;
 };
 
-
+}
 
 
 #endif // ABSTRACTPROJECTIONHELPER_P_H

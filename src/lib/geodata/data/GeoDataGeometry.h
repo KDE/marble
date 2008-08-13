@@ -20,7 +20,8 @@
 
 #include "geodata_export.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 class GeoDataGeometryPrivate;
 
@@ -64,5 +65,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
  protected:
     GeoDataGeometryPrivate* const d;
 };
+
+}
 
 #endif // GEODATAGEOMETRY_H

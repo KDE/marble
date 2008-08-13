@@ -14,6 +14,9 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
 class GeoDataLatLonBoxPrivate
 {
  public:
@@ -476,4 +479,6 @@ void GeoDataLatLonAltBox::unpack( QDataStream& stream )
     int a;
     stream >> a;
     d->m_altitudeMode = static_cast<AltitudeMode>( a );
+}
+
 }

@@ -23,7 +23,8 @@
 #include "GeoDataCoordinates.h"
 #include "ScreenPolygon.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 class GeoPainter;
 class PntMap;
@@ -123,5 +124,6 @@ class VectorMap : public ScreenPolygon::Vector
     double      m_lastLat;
 };
 
+}
 
 #endif // VECTORMAP_H

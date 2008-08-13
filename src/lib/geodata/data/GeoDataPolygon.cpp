@@ -14,6 +14,8 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
 
 class GeoDataPolygonPrivate
 {
@@ -130,4 +132,6 @@ void GeoDataPolygon::unpack( QDataStream& stream )
         linearRing->unpack( stream );
         d->inner.append( linearRing );
     }
+}
+
 }

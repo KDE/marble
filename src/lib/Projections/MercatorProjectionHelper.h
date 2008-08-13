@@ -26,6 +26,9 @@
  * @short A base class for all projections in Marble.
  */
 
+namespace Marble
+{
+
 class MercatorProjectionHelper : public AbstractProjectionHelper
 {
     // Not a QObject so far because we don't need to send signals.
@@ -51,5 +54,6 @@ class MercatorProjectionHelper : public AbstractProjectionHelper
     //MercatorProjectionPrivate  * const d;
 };
 
+}
 
 #endif // MERCATORPROJECTIONHELPER_H

@@ -15,6 +15,8 @@
 
 #include "TileId.h"
 
+using namespace Marble;
+
 ImageLoadThread::ImageLoadThread( QObject *parent )
     : QThread( parent )
 {

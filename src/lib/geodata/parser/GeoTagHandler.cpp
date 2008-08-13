@@ -27,6 +27,9 @@
 #include <QtCore/QDebug>
 
 
+namespace Marble
+{
+
 // Set to a value greather than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0
 
@@ -70,4 +73,6 @@ const GeoTagHandler* GeoTagHandler::recognizes(const QualifiedName& qName)
         return 0;
 
     return (*hash)[qName];
+}
+
 }

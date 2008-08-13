@@ -25,6 +25,9 @@
 #include <cstdio>
 #endif
 
+namespace Marble
+{
+
 #if DUMP_GEONODE_LEAKS > 0
 unsigned long GeoDocument::s_leakProtector = 0;
 #endif
@@ -76,4 +79,6 @@ GeoNode::~GeoNode()
              GeoDocument::s_leakProtector );
 #endif
 #endif
+}
+
 }

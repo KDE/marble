@@ -20,6 +20,9 @@
 #include <MarbleModel.h>
 #include <MapThemeManager.h>
 
+namespace Marble
+{
+
 ControlView::ControlView( QWidget *parent )
    : QWidget(parent)
 {
@@ -116,6 +119,8 @@ void ControlView::setCurrentLocationTabShown( bool show )
 void ControlView::setFileViewTabShown( bool show )
 {
     m_control->setFileViewTabShown( show );
+}
+
 }
 
 #include "ControlView.moc"

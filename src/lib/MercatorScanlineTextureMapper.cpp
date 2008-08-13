@@ -29,6 +29,7 @@
 #include "AbstractProjection.h"
 #include "MathHelper.h"
 
+using namespace Marble;
 
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )

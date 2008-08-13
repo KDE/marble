@@ -26,6 +26,9 @@
 
 class QTimer;
 
+namespace Marble
+{
+
 class MarbleModel;
 class MarbleWidget;
 
@@ -101,6 +104,6 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
     QTime    m_dragtimer;
 };
 
-
+}
 
 #endif // MARBLEWIDGETINPUTHANDLER

@@ -21,13 +21,16 @@
 #ifndef LATLONRUNNER_H
 #define LATLONRUNNER_H
 
-class MarbleRunnerResult;
-
 #include "MarbleAbstractRunner.h"
 
 class QThread;
 class QString;
 class QStringList;
+
+namespace Marble
+{
+
+class MarbleRunnerResult;
 
 class LatLonRunner : public MarbleAbstractRunner
 {
@@ -42,5 +45,6 @@ private:
     QStringList m_cardinals;
 };
 
-#endif
+}
 
+#endif

@@ -16,6 +16,8 @@
 
 #include <QtGui/QPainter>
 
+namespace Marble
+{
 
 // The reason for this class is a terrible bug in some versions of the
 // X Server.  Suppose the widget size is, say, 1000 x 1000 and we have
@@ -80,5 +82,7 @@ class ClipPainter : public QPainter
     // The resulting object from the clipping operation
     QPolygonF  m_clippedObject;
 };
+
+}
 
 #endif // CLIPPAINTER_H

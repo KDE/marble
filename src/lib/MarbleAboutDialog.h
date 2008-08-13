@@ -22,7 +22,8 @@
 
 #include "marble_export.h"
 
-
+namespace Marble
+{
 
 class MarbleAboutDialogPrivate;
 
@@ -43,5 +44,6 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
     MarbleAboutDialogPrivate  * const d;
 };
 
+}
 
 #endif // KATLASABOUTDIALOG_H

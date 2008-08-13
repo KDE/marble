@@ -16,6 +16,8 @@
 
 #include "ExtDateTime.h"
 
+using namespace Marble;
+
 ExtDateTime::ExtDateTime()
     : QObject(),
       m_speed( 1 ),

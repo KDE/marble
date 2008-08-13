@@ -31,6 +31,8 @@
 //FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
 #include "marble_export.h"
 
+namespace Marble
+{
 
 class MARBLE_EXPORT SunLocator : public QObject
 {
@@ -84,5 +86,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     bool m_centered;
 //     QTimer* m_timer;
 };
+
+}
 
 #endif

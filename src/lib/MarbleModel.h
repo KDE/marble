@@ -39,11 +39,13 @@
 
 class QItemSelectionModel;
 
+namespace Marble
+{
+
 class AbstractScanlineTextureMapper;
 class BoundingBox;
 class GeoPainter;
 class FileViewModel;
-class GeoDataDocument;
 class GpsLayer;
 class GpxFileModel;
 class HttpDownloadManager;
@@ -59,12 +61,9 @@ class TextureTile;
 class MergedLayerDecorator;
 class MarbleAbstractLayer;
 class MarbleAbstractFloatItem;
-
-namespace Marble
-{
+class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
-}
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -317,5 +316,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
 };
 
+}
 
 #endif // MARBLEMODEL_H

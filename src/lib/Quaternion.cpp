@@ -21,6 +21,8 @@ using namespace std;
 #define quatNorm (v[Q_W] * v[Q_W] + v[Q_X] * v[Q_X] + v[Q_Y] * v[Q_Y] + v[Q_Z] * v[Q_Z])
 
 
+using namespace Marble;
+
 Quaternion::Quaternion()
 {
 //    like in libeigen we keep the quaternion uninitialized

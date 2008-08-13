@@ -13,6 +13,9 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 
+namespace Marble
+{
+
 class TestMarbleWidget: public QObject
 {
     Q_OBJECT
@@ -32,6 +35,8 @@ void TestMarbleWidget::testWidget()
     QTest::mouseMove( &widget );
 }
 
-QTEST_MAIN( TestMarbleWidget )
+}
+
+QTEST_MAIN( Marble::TestMarbleWidget )
 
 #include "MarbleWidgetTest.moc"

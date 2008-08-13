@@ -16,6 +16,9 @@
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItem>
 
+namespace Marble
+{
+
 class MarbleAbstractLayerPrivate
 {
   public:
@@ -134,5 +137,6 @@ bool MarbleAbstractLayer::visible() const
     return d->m_visible;
 }
 
-#include "MarbleAbstractLayer.moc"
+}
 
+#include "MarbleAbstractLayer.moc"

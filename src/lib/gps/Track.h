@@ -14,6 +14,9 @@
 #include "AbstractLayerData.h"
 #include "GpsElement.h"
 
+namespace Marble
+{
+
 class ViewParams;
 
 /** 
@@ -54,5 +57,7 @@ class Track : public AbstractLayerContainer,
     
     virtual void printToStream( QTextStream& ) const;
 };
+
+}
 
 #endif //TRACK_H

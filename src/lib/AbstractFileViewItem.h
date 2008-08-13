@@ -14,6 +14,9 @@
 
 #include <QtCore/QVariant>
 
+namespace Marble
+{
+
 class AbstractFileViewItem
 {
   public:
@@ -25,5 +28,7 @@ class AbstractFileViewItem
     virtual bool isShown() const = 0;
     virtual void setShown( bool value ) = 0;
 };
+
+}
 
 #endif

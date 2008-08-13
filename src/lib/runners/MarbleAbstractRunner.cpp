@@ -23,6 +23,9 @@
 #include <QtCore/QThread>
 #include <QtCore/QString>
 
+namespace Marble
+{
+
 MarbleAbstractRunner::MarbleAbstractRunner(QObject *parent) : QThread(parent)
 {
 //     moveToThread(this);
@@ -34,4 +37,6 @@ MarbleAbstractRunner::~MarbleAbstractRunner()
 
 void MarbleAbstractRunner::parse( const QString &input )
 {
+}
+
 }

@@ -19,6 +19,9 @@
 
 #include "../lib/TileCreator.h" 
 
+namespace Marble
+{
+
 class TCCoreApplication : public QCoreApplication
 {
     public:
@@ -28,5 +31,6 @@ class TCCoreApplication : public QCoreApplication
         TileCreator *m_tilecreator;
 };
 
+}
 
 #endif

@@ -22,6 +22,8 @@
 #include "MarbleAbstractLayer.h"
 #include "MarbleAbstractFloatItem.h"
 
+namespace Marble
+{
 
 class PluginManagerPrivate
 {
@@ -98,6 +100,8 @@ void PluginManager::loadPlugins()
             qDebug() << loader.errorString();
         }
     }
+}
+
 }
 
 #include "PluginManager.moc"

@@ -33,6 +33,9 @@ class QLabel;
 #include "global.h"
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class MARBLE_EXPORT /* QDESIGNER_WIDGET_EXPORT*/ LatLonEdit : public QWidget
 {
 	Q_OBJECT
@@ -76,4 +79,7 @@ private:
 
 	double m_value;
 };
+
+}
+
 #endif

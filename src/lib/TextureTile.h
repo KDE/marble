@@ -30,12 +30,12 @@
 #include "MergedLayerDecorator.h"
 
 class QUrl;
-class TextureTile;
 
 namespace Marble
 {
+
+class TextureTile;
 class GeoSceneTexture;
-}
 
 class TextureTile : public QObject {
     Q_OBJECT
@@ -108,6 +108,8 @@ class TextureTile : public QObject {
 inline const QDateTime & TextureTile::created() const
 {
     return m_created;
+}
+
 }
 
 #endif // __MARBLE__TEXTURETILE_H

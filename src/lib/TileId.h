@@ -13,6 +13,8 @@
 
 #include <QtCore/QString>
 
+namespace Marble
+{
 
 class TileId
 {
@@ -40,5 +42,6 @@ class TileId
 bool operator==( TileId const& lhs, TileId const& rhs );
 uint qHash( TileId const& );
 
+}
 
 #endif

@@ -15,6 +15,9 @@
 
 #include "MarbleAbstractFloatItem.h"
 
+namespace Marble
+{
+
 /**
  * @short The class that creates a map scale.
  *
@@ -23,7 +26,7 @@
 class MapScaleFloatItem : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleLayerInterface )
 
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),
@@ -75,5 +78,7 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
 
     void calcScaleBar();
 };
+
+}
 
 #endif // MAPSCALEFLOATITEM_H

@@ -24,10 +24,14 @@
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 
+class QHttp;
+
+namespace Marble
+{
+
 enum  Priority { NoPriority, Low, Medium, High };
 enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
 
-class QHttp;
 class StoragePolicy;
 
 class HttpJob: public QObject
@@ -162,5 +166,6 @@ inline QByteArray & HttpJob::data()
     return m_data;
 }
 
+}
 
 #endif // HTTPFETCHFILE_H

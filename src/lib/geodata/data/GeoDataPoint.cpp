@@ -20,7 +20,8 @@
 #include <QtCore/QCoreApplication>
 #include "global.h"
 
-
+namespace Marble
+{
 
 GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, 
                             GeoDataPoint::Unit unit, int _detail )
@@ -57,4 +58,6 @@ void GeoDataPoint::pack( QDataStream& stream ) const
 void GeoDataPoint::unpack( QDataStream& stream )
 {
     GeoDataCoordinates::unpack( stream );
+}
+
 }

@@ -21,6 +21,9 @@
 
 #include "AbstractProjectionHelper.h"
 
+namespace Marble
+{
+
 class ViewportParamsPrivate
 {
 public:
@@ -328,4 +331,6 @@ GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 bool  ViewportParams::mapCoversViewport() const
 {
     return d->m_currentProjection->mapCoversViewport( this );
+}
+
 }

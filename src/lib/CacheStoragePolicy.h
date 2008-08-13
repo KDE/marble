@@ -16,6 +16,9 @@
 
 #include "marble_export.h"
 
+namespace Marble
+{
+
 class MARBLE_EXPORT CacheStoragePolicy : public StoragePolicy
 {
     public:
@@ -70,5 +73,7 @@ class MARBLE_EXPORT CacheStoragePolicy : public StoragePolicy
         DiscCache m_cache;
         QString m_errorMsg;
 };
+
+}
 
 #endif
