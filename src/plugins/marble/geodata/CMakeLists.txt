@@ -1,4 +1,4 @@
-PROJECT(MarbleTestPlugin)
+PROJECT(MarbleGeoDataPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/geodata

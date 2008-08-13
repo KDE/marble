@@ -5,10 +5,11 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>
+//  Copyright 2008 Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#include "MarbleGeoDataPlugin.h"
+#include "MarblePlacemarksPlugin.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -35,63 +36,60 @@
 #include "GeoDataParser.h"
 
 
-QStringList MarbleGeoDataPlugin::backendTypes() const
+QStringList MarblePlacemarksPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
 }
 
-QString MarbleGeoDataPlugin::renderPolicy() const
+QString MarblePlacemarksPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarbleGeoDataPlugin::renderPosition() const
+QStringList MarblePlacemarksPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MarbleGeoDataPlugin::name() const
+QString MarblePlacemarksPlugin::name() const
 {
-    return tr( "GeoData Plugin" );
+    return tr( "Placemarks Plugin" );
 }
 
-QString MarbleGeoDataPlugin::guiString() const
+QString MarblePlacemarksPlugin::guiString() const
 {
-    return tr( "&GeoData Plugin" );
+    return tr( "&Placemarks Plugin" );
 }
 
-QString MarbleGeoDataPlugin::nameId() const
+QString MarblePlacemarksPlugin::nameId() const
 {
-    return QString( "GeoData-plugin" );
+    return QString( "Placemarks-plugin" );
 }
 
-QString MarbleGeoDataPlugin::description() const
+QString MarblePlacemarksPlugin::description() const
 {
-    return tr( "This is a simple test plugin." );
+    return tr( "A plugin that displays placemarks." );
 }
 
-QIcon MarbleGeoDataPlugin::icon () const
+QIcon MarblePlacemarksPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleGeoDataPlugin::initialize ()
+void MarblePlacemarksPlugin::initialize ()
 {
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/germany.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/poland.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/czech.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/Rabet.kml" );
+    dataFacade()->geoDataModel()->addGeoDataFile( PLACEMARKS_DATA_PATH "/jakobsweg.kml" );
     m_currentBrush = QColor( 0xff, 0x0, 0x0 );
     m_currentPen = QColor( 0xff, 0x0, 0x0 );
 }
 
-bool MarbleGeoDataPlugin::isInitialized () const
+bool MarblePlacemarksPlugin::isInitialized () const
 {
     return true;
 }
 
-void MarbleGeoDataPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
+void MarblePlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
 {
     if( root->style( mapped ) && root->style( mapped )->polyStyle() ) {
         if( m_currentBrush.color() != root->style( mapped )->polyStyle()->color() ) {
@@ -102,7 +100,7 @@ void MarbleGeoDataPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* r
     }
 }
 
-void MarbleGeoDataPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
+void MarblePlacemarksPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
 {
     if( root->style( mapped ) && root->style( mapped )->lineStyle() ) {
         if( m_currentPen.color() != root->style( mapped )->lineStyle()->color() || 
@@ -116,7 +114,7 @@ void MarbleGeoDataPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* roo
     }
 }
 
-bool MarbleGeoDataPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, QString styleUrl )
+bool MarblePlacemarksPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, QString styleUrl )
 {
     painter->save();
     painter->autoMapQuality();
@@ -131,30 +129,15 @@ bool MarbleGeoDataPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeo
     mapped.remove( '#' );
 
 
-    if( object->geometryId() == GeoDataPolygonId ) {
-        setBrushStyle( painter, root, mapped );
+    if( object->geometryId() == GeoDataPointId ) {
         setPenStyle( painter, root, mapped );
-        painter->drawPolygon( dynamic_cast<GeoDataPolygon*>( object )->outerBoundary() );
-    }
-    if( object->geometryId() == GeoDataLinearRingId ) {
-        painter->setBrush( QColor( 0, 0, 0, 0 ) );
-        setPenStyle( painter, root, mapped );
-        painter->drawPolygon( *dynamic_cast<GeoDataLinearRing*>( object ) );
-    }
-    if( object->geometryId() == GeoDataLineStringId ) {
-        setPenStyle( painter, root, mapped );
-        painter->drawPolyline( *dynamic_cast<GeoDataLineString*>( object ) );
-    }
-    if( object->geometryId() == GeoDataMultiGeometryId ) {
-        painter->restore();
-        
-        painter->save();
+        painter->drawPoint( *(dynamic_cast<GeoDataPoint*>( object )) );
     }
     painter->restore();
     return true;
 }
 
-bool MarbleGeoDataPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature )
+bool MarblePlacemarksPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature )
 {
     if( !feature ) return false;
     
@@ -169,13 +152,13 @@ bool MarbleGeoDataPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeat
     return true;
 }
 
-bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool MarblePlacemarksPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     GeoDataDocument* rootDoc = dataFacade()->geoDataModel()->geoDataRoot();
     renderGeoDataFeature( painter, dynamic_cast<GeoDataFeature*>( rootDoc ) );
     return true;
 }
 
-Q_EXPORT_PLUGIN2(MarbleGeoDataPlugin, MarbleGeoDataPlugin)
+Q_EXPORT_PLUGIN2(MarblePlacemarksPlugin, MarblePlacemarksPlugin)
 
-#include "MarbleGeoDataPlugin.moc"
+#include "MarblePlacemarksPlugin.moc"

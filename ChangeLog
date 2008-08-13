@@ -1,3 +1,17 @@
+2008-08-13  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/plugins/marble/placemarks:
+    * src/plugins/marble/placemarks/MarblePlacemarksPlugin.cpp:
+    * src/plugins/marble/placemarks/MarblePlacemarksPlugin.h:
+    * src/plugins/marble/placemarks/CMakeLists.txt:
+    * src/plugins/marble/placemarks/jakobsweg.kml:
+    * src/plugins/marble/geodata/MarbleGeoDataPlugin.cpp:
+    * src/plugins/marble/geodata/CMakeLists.txt:
+    * src/plugins/marble/geodata/jakobsweg.kml:
+    * src/plugins/marble/CMakeLists.txt:
+    
+    Add a plugin that displays simple placemarks
+    
 2008-08-13  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/AbstractScanlineTextureMapper.cpp:
