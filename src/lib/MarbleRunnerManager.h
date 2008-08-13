@@ -23,8 +23,10 @@
 
 class MarblePlacemarkModel;
 class PlaceMarkManager;
-class MarbleRunnerResult;
+//class MarbleRunnerResult;
 class LatLonRunner;
+
+#include "MarbleRunnerResult.h"
 
 #include <QtCore/QObject>
 
