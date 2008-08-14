@@ -352,7 +352,7 @@ void TextureColorizer::generatePalette(const QString& seafile,
         }
         offset += 256;
     }
-    shadingPainter.end();  // Need to explicitely tell painter lifetime to avoid crash
+    shadingPainter.end();  // Need to explicitly tell painter lifetime to avoid crash
     gradientPainter.end(); // on some systems. 
 
     m_seafile = seafile;
