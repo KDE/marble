@@ -63,11 +63,15 @@ QIcon SatellitesPlugin::icon () const
 
 void SatellitesPlugin::initialize ()
 {
+    QStoragePolicy policy = dynamic_cast<StoragePolicy*>(new FileStoragePolicy
+    m_dlman = new HttpDownloadManager( QUrl( "http://celestrak.com" ),
+                                       new FileStoragePolicy( MarbleDirs::localPath() ) );
+    
 }
 
 bool SatellitesPlugin::isInitialized () const
 {
-    return true;
+    return m_init;
 }
 
 bool SatellitesPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )

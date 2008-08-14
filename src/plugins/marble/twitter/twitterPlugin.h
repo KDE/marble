@@ -80,7 +80,7 @@ private:
     HttpDownloadManager *m_downloadManager;
     jsonParser twitterJsonParser;
     void downloadtwitter(int, int, double, double, double, double);
-    QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded succesfully figured out :)
+    QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded successfully figured out :)
     QList <twitterDataStructure> parsedData;
     void findLatLonOfStreetAddress(QString streetAddress);
     int privateFlagForRenderingTwitts;//this flag is one when globe has an Image  (downloaded or already there in cache)
