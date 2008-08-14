@@ -527,6 +527,7 @@ void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated
 {
     if ( d->m_animationsEnabled && animated )
     {
+        d->m_physics->setCurrentPosition( GeoDataCoordinates( centerLongitude(), centerLatitude(), distance(), GeoDataCoordinates::Degree ) );        
         d->m_physics->jumpTo( GeoDataCoordinates( lon, lat, distance(), GeoDataCoordinates::Degree ) );
     }
     else
