@@ -9,9 +9,9 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+#include "MarbleSearchListView.h"
 
 #include "MarblePlacemarkModel.h"
-#include "MarbleSearchListView.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
