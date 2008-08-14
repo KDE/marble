@@ -41,6 +41,12 @@ LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
     m_cardinals << tr("W", "one-letter uppercase abbreviation for West");
 }
 
+
+QString LatLonRunner::name() const
+{
+    return tr("Latitude / Longitude Runner");
+}
+
 LatLonRunner::~LatLonRunner()
 {
 }
@@ -126,7 +132,7 @@ void LatLonRunner::parse(const QString &input)
     ////////////////////////////
     // ACT ON COORDS / / / / / /
     ////////////////////////////
-    int score;
+    MarbleRunnerResult::Score score;
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setName( input );
     
@@ -134,18 +140,18 @@ void LatLonRunner::parse(const QString &input)
         qDebug() << "Matched, making placemark @ lat " << coordinates[0] << "lon" << coordinates[1];
         placemark->setCoordinate( coordinates[1] * DEG2RAD, coordinates[0] * DEG2RAD );
         placemark->setVisible( true );
-        score = 100; // matches regex
+        score = MarbleRunnerResult::PerfectMatch; // matches regex
     } else {
         qDebug() << "Failed to match";
         placemark->setCoordinate( 0, 0 );
-        score = 0; //does not match
+        score = MarbleRunnerResult::NoMatch; //does not match
     }
     
     PlaceMarkContainer container;
     container.setName( "Coordinate search result" );
     container.append( placemark );
     
-    MarbleRunnerResult result( container, static_cast<MarbleRunnerResult::Score>(score) );
+    MarbleRunnerResult result( container, score, name() );
     
     emit runnerFinished( result );    
 }

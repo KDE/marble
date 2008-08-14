@@ -30,14 +30,13 @@ class QStringList;
 namespace Marble
 {
 
-class MarbleRunnerResult;
-
 class LatLonRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
     LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
+    QString name() const;
     
 public slots:
     void parse(const QString &input);

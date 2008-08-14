@@ -157,6 +157,7 @@ set(marblewidget_SRCS
     MarbleRunnerResult.cpp
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
+    runners/OnfRunner.cpp
 
 )
 

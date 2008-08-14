@@ -35,8 +35,13 @@ MarbleAbstractRunner::~MarbleAbstractRunner()
 {
 }
 
-void MarbleAbstractRunner::parse( const QString &input )
+void MarbleAbstractRunner::parse( const QString& /*input*/ )
 {
+}
+
+QString MarbleAbstractRunner::name() const
+{
+    return QString("Abstract Runner");
 }
 
 }

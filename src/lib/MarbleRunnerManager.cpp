@@ -21,10 +21,11 @@
 #include "MarbleRunnerManager.h"
 
 #include "MarbleRunnerResult.h"
-#include "LatLonRunner.h"
 #include "MarblePlacemarkModel.h"
 #include "PlaceMarkManager.h"
 
+#include "LatLonRunner.h"
+#include "OnfRunner.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -37,7 +38,7 @@ namespace Marble
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
             : QObject(parent)
 {
-    qRegisterMetaType<MarbleRunnerResult>();
+    qRegisterMetaType<MarbleRunnerResult>("MarbleRunnerResult");
     
     m_model = new MarblePlacemarkModel(0);
     m_activeRunners = 0;
@@ -47,19 +48,35 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_latlonRunner = new LatLonRunner(0);
     m_latlonRunner->start();
     m_latlonRunner->moveToThread(m_latlonRunner);
-    
     connect( m_latlonRunner, SIGNAL( runnerStarted() ),
              this,           SLOT( slotRunnerStarted() ));
-             
     connect( m_latlonRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
              this,           SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
-             
-    connect( this, SIGNAL( engage(QString) ), m_latlonRunner, SLOT( parse(QString) ));
+    connect( this,           SIGNAL( engage(QString) ),
+             m_latlonRunner, SLOT( parse(QString) ));
+
+    m_onfRunner = new OnfRunner(0);
+    m_onfRunner->start();
+    m_onfRunner->moveToThread(m_onfRunner);
+    connect( m_onfRunner, SIGNAL( runnerStarted() ),
+             this,        SLOT( slotRunnerStarted() ));
+    connect( m_onfRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
+             this,        SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
+    /* //disabled until it worksforsure
+    connect( this,        SIGNAL( engage(QString) ),
+             m_onfRunner, SLOT( parse(QString) ));
+    */
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
 {
+    m_latlonRunner->quit();
+    m_latlonRunner->wait();
     delete m_latlonRunner;
+    
+    m_onfRunner->quit();
+    m_onfRunner->wait();
+    delete m_onfRunner;
 }
 
 void MarbleRunnerManager::newText(QString text)
@@ -80,10 +97,11 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleRunnerResult result )
     m_activeRunners--;
     qDebug() << "Runner finished, active runners: " << m_activeRunners;
     if( result.score() == MarbleRunnerResult::NoMatch ) {
-        qDebug() << "Not a match :(";
+        qDebug() << "[RunnerManager]" << result.runnerName() << "failed to match :(";
         return;
     }
-    qDebug() << "Match found :D";
+    qDebug() << "[RunnerManager]" << result.runnerName() << "reports match found ("
+             << static_cast<int>(result.score()) << ") :D";
     //TODO: use MarbleRunnerResult::ResultType to list the objects in order
     PlaceMarkContainer cont = result.placemarks();
     m_model->addPlaceMarks( cont, false );

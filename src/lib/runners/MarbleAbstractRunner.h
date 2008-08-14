@@ -36,6 +36,7 @@ class MarbleAbstractRunner : public QThread
 public:
     MarbleAbstractRunner(QObject *parent = 0);
     ~MarbleAbstractRunner();
+    virtual QString name() const;
     
 public slots:
     virtual void parse(const QString &input);

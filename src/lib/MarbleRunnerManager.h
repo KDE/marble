@@ -33,8 +33,9 @@ namespace Marble
 
 class MarblePlacemarkModel;
 class PlaceMarkManager;
-//class MarbleRunnerResult;
+
 class LatLonRunner;
+class OnfRunner;
 
 class MarbleRunnerManager : public QObject
 {
@@ -61,6 +62,7 @@ private:
     MarblePlacemarkModel *m_model;
     
     LatLonRunner *m_latlonRunner;
+    OnfRunner *m_onfRunner;
 };
 
 }

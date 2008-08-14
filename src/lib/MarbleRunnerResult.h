@@ -23,6 +23,8 @@
 
 #include "PlaceMarkContainer.h"
 
+#include <QtCore/QString>
+
 namespace Marble
 {
 
@@ -36,7 +38,9 @@ public:
     };
 
     MarbleRunnerResult();
-    MarbleRunnerResult( PlaceMarkContainer placemarks, Score score );
+    MarbleRunnerResult( PlaceMarkContainer placemarks,
+                        Score score,
+                        QString runnerName );
     MarbleRunnerResult( const MarbleRunnerResult &copied );
     
     Score score() const;
@@ -45,9 +49,13 @@ public:
     PlaceMarkContainer placemarks() const;
     void setPlacemarks( PlaceMarkContainer placemarks );
     
+    QString runnerName() const;
+    void setRunnerName( QString runnerName );
+    
 private:
     PlaceMarkContainer m_placemarks;
     Score m_score;
+    QString m_runnerName;
 };
 
 }

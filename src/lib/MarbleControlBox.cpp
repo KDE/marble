@@ -564,7 +564,6 @@ void MarbleControlBox::searchReturnPressed()
 //         qDebug() << "Giving runner manager new text" << d->m_searchTerm;
         d->m_runnerManager->newText( d->m_searchTerm );
     }
-    
     //if an osm search is being excecuted run only the runners
     if( d->m_osmNameFinder.currentId() != 0 ) {
         return;

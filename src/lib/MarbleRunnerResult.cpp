@@ -32,16 +32,20 @@ MarbleRunnerResult::MarbleRunnerResult()
     m_score = static_cast<Score>(0);
 }
 
-MarbleRunnerResult::MarbleRunnerResult( PlaceMarkContainer placemarks, Score score )
+MarbleRunnerResult::MarbleRunnerResult( PlaceMarkContainer placemarks,
+                                        Score score,
+                                        QString runnerName )
 {
     m_placemarks = placemarks;
     m_score = score;
+    m_runnerName = runnerName;
 }
 
 MarbleRunnerResult::MarbleRunnerResult( const MarbleRunnerResult &copied )
 {
     m_placemarks = copied.placemarks();
     m_score = copied.score();
+    m_runnerName = copied.runnerName();
 }
 
 MarbleRunnerResult::Score MarbleRunnerResult::score() const
@@ -68,5 +72,16 @@ void MarbleRunnerResult::setPlacemarks( PlaceMarkContainer placemarks )
 {
     m_placemarks = placemarks;
 }
+
+QString MarbleRunnerResult::runnerName() const
+{
+    return m_runnerName;
+}
+
+void MarbleRunnerResult::setRunnerName( QString runnerName )
+{
+    m_runnerName = runnerName;
+}
+
 
 }
