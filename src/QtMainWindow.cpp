@@ -43,6 +43,8 @@ namespace
     const char* DISTANCE_STRING = "Altitude:";
 }
 
+using namespace Marble;
+
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent), m_sunControlDialog(0)
 {
     setUpdatesEnabled( false );

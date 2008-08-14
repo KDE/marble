@@ -23,6 +23,9 @@ class QAction;
 class QLabel;
 class QMenu;
 
+namespace Marble
+{
+
 class MarbleWidget;
 class SunControlWidget;
 class MarbleAbstractFloatItem;
@@ -105,5 +108,6 @@ class MainWindow : public QMainWindow
     void updateStatusBar();
 };
 
+} // namespace Marble
  
 #endif

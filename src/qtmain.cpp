@@ -31,6 +31,8 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
+using namespace Marble;
+ 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
