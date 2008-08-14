@@ -11,8 +11,8 @@
 //
 
 
-#include "GeoDataCoordinates_p.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataCoordinates_p.h"
 
 #include <cmath>
 
