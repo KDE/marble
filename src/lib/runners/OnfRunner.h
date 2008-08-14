@@ -18,51 +18,33 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MARBLERUNNERMANAGER_H
-#define MARBLERUNNERMANAGER_H
+#ifndef ONFRUNNER_H
+#define ONFRUNNER_H
 
+#include "MarbleAbstractRunner.h"
 
-#include "MarbleRunnerResult.h"
-
-#include <QtCore/QObject>
-
-class QString;
+#include <QtCore/QString>
+class QHttp;
+class QBuffer;
 
 namespace Marble
 {
-
-class MarblePlacemarkModel;
-class PlaceMarkManager;
-
-class LatLonRunner;
-class OnfRunner;
-
-class MarbleRunnerManager : public QObject
+//Openstreetmap Name Finder
+class OnfRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    MarbleRunnerManager( QObject *parent = 0 );
-    ~MarbleRunnerManager();
+    OnfRunner(QObject *parent = 0);
+    ~OnfRunner();
+    QString name() const;
     
-    void setModel(MarblePlacemarkModel *model);
-    MarblePlacemarkModel* model();
 public slots:
-    void newText(QString text);
-signals:
-    void allDone();
-    void modelChanged( MarblePlacemarkModel *model );
-    //tells runners to make it so
-    void engage(QString text);
-private slots:
-    void slotRunnerFinished(MarbleRunnerResult result);
-    void slotRunnerStarted(QString runnerName);
+    void parse(const QString &input);
+    void slotRequestFinished( int id, bool error );
 private:
-    int m_activeRunners;
-    QString m_lastString;
-    MarblePlacemarkModel *m_model;
-    
-    LatLonRunner *m_latlonRunner;
-    OnfRunner *m_onfRunner;
+    void fail();
+    QHttp *m_http;
+    QBuffer *m_buffer;
 };
 
 }

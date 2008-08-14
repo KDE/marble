@@ -227,16 +227,14 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);
-
-    /// called when the OpenStreetMap name finder request is finished
-    void searchRequestFinished( int id, bool error );
-
+    
     /// called the Return or Enter key is pressed in the search box.
     void searchReturnPressed();
 
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
     
+    /// called but the runner manager to notify of updates to the placemark model
     void runnerModelChanged( MarblePlacemarkModel *newmodel );
 
     void updateButtons( int );
@@ -250,10 +248,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );
 
-    Marble::GeoDataDocument * parseOsmSearchResult( QByteArray & );
-    void populateListView( Marble::GeoDataDocument * );
-
- protected:
+protected:
     /**
      * @brief Reimplementation of the resizeEvent() of the widget.  
      *

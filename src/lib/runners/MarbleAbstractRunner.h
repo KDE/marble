@@ -42,7 +42,7 @@ public slots:
     virtual void parse(const QString &input);
     
 signals:
-    void runnerStarted();
+    void runnerStarted(QString runnerName);
     void runnerFinished(MarbleRunnerResult result);
 };
 

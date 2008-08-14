@@ -53,7 +53,7 @@ LatLonRunner::~LatLonRunner()
 
 void LatLonRunner::parse(const QString &input)
 {
-    emit runnerStarted();
+    emit runnerStarted( name() );
     double coordinates[2];
     //lon
     coordinates[0] = 9999;

@@ -48,8 +48,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_latlonRunner = new LatLonRunner(0);
     m_latlonRunner->start();
     m_latlonRunner->moveToThread(m_latlonRunner);
-    connect( m_latlonRunner, SIGNAL( runnerStarted() ),
-             this,           SLOT( slotRunnerStarted() ));
+    connect( m_latlonRunner, SIGNAL( runnerStarted(QString) ),
+             this,           SLOT( slotRunnerStarted(QString) ));
     connect( m_latlonRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
              this,           SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
     connect( this,           SIGNAL( engage(QString) ),
@@ -58,14 +58,12 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_onfRunner = new OnfRunner(0);
     m_onfRunner->start();
     m_onfRunner->moveToThread(m_onfRunner);
-    connect( m_onfRunner, SIGNAL( runnerStarted() ),
-             this,        SLOT( slotRunnerStarted() ));
+    connect( m_onfRunner, SIGNAL( runnerStarted(QString) ),
+             this,        SLOT( slotRunnerStarted(QString) ));
     connect( m_onfRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
              this,        SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
-    /* //disabled until it worksforsure
     connect( this,        SIGNAL( engage(QString) ),
              m_onfRunner, SLOT( parse(QString) ));
-    */
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
@@ -109,10 +107,10 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleRunnerResult result )
     emit modelChanged( m_model );
 }
 
-void MarbleRunnerManager::slotRunnerStarted()
+void MarbleRunnerManager::slotRunnerStarted(QString runnerName)
 {
-    qDebug() << "Runner starting, active runners: " << m_activeRunners;
     m_activeRunners++;
+    qDebug() << runnerName << "starting, active runners: " << m_activeRunners;
 }
 
 MarblePlacemarkModel* MarbleRunnerManager::model()
