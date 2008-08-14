@@ -45,13 +45,13 @@ public:
 	explicit LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
 	double value();
 	Marble::Dimension dimension();
-public slots:
+public Q_SLOTS:
 	void setValue(double newvalue);
 	void setDimension( Marble::Dimension dimension );
-signals:
+Q_SIGNALS:
 	void dimensionChanged( Marble::Dimension dimension );
 	void valueChanged( double value );
-private slots:
+private Q_SLOTS:
 	// changes value based on combobox
 	void comboBoxChanged( int index );
 	// recalculates m_value based on spinboxes
