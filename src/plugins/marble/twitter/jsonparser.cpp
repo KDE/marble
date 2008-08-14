@@ -73,3 +73,5 @@ googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 //     qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
     return returnStructure;
 }
+
+
