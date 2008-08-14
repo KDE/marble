@@ -151,3 +151,5 @@ void LatLonRunner::parse(const QString &input)
 }
 
 }
+
+#include "LatLonRunner.moc"

@@ -108,3 +108,5 @@ void MarbleRunnerManager::setModel( MarblePlacemarkModel *model )
 }
 
 }
+
+#include "MarbleRunnerManager.moc"

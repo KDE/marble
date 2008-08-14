@@ -40,3 +40,5 @@ void MarbleAbstractRunner::parse( const QString &input )
 }
 
 }
+
+#include "MarbleAbstractRunner.moc"
