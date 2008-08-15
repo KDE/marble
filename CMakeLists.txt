@@ -13,7 +13,7 @@ option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 # Check if KDE4 is available
 if( NOT QTONLY AND NOT KDE4_FOUND )
     find_package(KDE4)
-endif( NOT QTONLY) 
+endif( NOT QTONLY AND NOT KDE4_FOUND) 
 
 ####################################################
 # build unit tests
