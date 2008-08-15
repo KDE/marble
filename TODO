@@ -60,7 +60,7 @@ Widget:
     - Let the view know about the globe, but not the other way.         done
 
  
-Before KDE 4.1
+Before KDE 4.2
 ================================================================
 
 Documentation / Specification
@@ -71,10 +71,8 @@ Documentation / Specification
 
 Planning and architecture:
  * write proposals for Marble 0.6 / KDE 4.1                             ----
-    - Layer Management class                                            done
     - Data source plugins                                               --
     - Visualization plugins (layers?)                                   TACK in progress
-    - Projection class                                                  no
     - Bounding boxes                                                    TACK
     - Model-View concept                                                --
     - Spatial Indices                                                   --
@@ -88,36 +86,16 @@ Vector backend
 Features:
  * Settings								----
     - DMS  <-->  Degrees (decimal)					done
- * Support for OpenStreetMap                                            JM
-    - Load tiles                                                        done
-    - Display tiles                                                     done
-    - Expiration of tiles                                               done
-    - Searching for cities and streets                                  done
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
- * A more general projection system					INGE
-    - Move projection stuff to its own subdirectory			done
-    - Create a helper class ProjectionHelper to perform actual actions	done
-    - Move paintBase to ProjectionHelper				done
-    - Move activeRegion to ProjectionHelper				done
-    - Move mapCoversImage (prev. globeCoversImage) to Projection	done
- * Mercator Projection                                                  INGE
-    - Create a MercatorScanlineTextureMapper	      			inge
-    - Make the vector base work (VectorMap)	   			inge
-    - ActiveRegion for Mercator.					done
-    - Gridmap								done
 
- * Fix GPS Support (that's a regression) 				ANDR
+ * Fix GPS Support (that's a regression) 				----
     - Make it a Marble plugin						--
 
 
 Internal structure:
- * Create a QPersistentModelIndex for MarblePlaceMarkModel items to     DONE
-   improve speed on close up zooms.
  * New class MarbleMap that can paint a map on any QPainter             DONE
     - Check Apidox if there is anything missing.                        --
- * Design and implement Projection class                                DONE
- * Refactor KML to use QXmlStreamReader                                 DONE
  * Make MarbleModel a real model and MarbleWidget a real view           ----
      Move to 4.2?  Probably...
  * Make it possible to paint on whatever QPainter Marble is given       ----
@@ -142,11 +120,6 @@ Internal structure:
       session if the tile couldn't get fetched on first try"
 
 User experience / Usability
- * Make Marble have a RenderingQuality setting in ViewParams:           DONE
-   - Use different render settings while panning (MOVE) and             done
-     after releasing the mouse (DROP).
-   - Rerender the map at "PRINT quality" once "File -> Print" or        done
-     "Edit -> Copy" get selected.
  * Add a small indicator to the status bar indicates map downloads      ----
    (see explanation below)
 
@@ -176,15 +149,6 @@ Data
    that make sense for us to have.
 
 
-Moved to KDE 4.2
-================================================================
-
-Features:
- * Areas, e.g. countries or districts                                   ----
-
-To be populated...
-
-
 
 Longer Explanations for some things
 ================================================================
@@ -194,39 +158,9 @@ don't have to explain them in the list above and thus get better
 overview.
 
 
-RenderingQuality in ViewParams
-------------------------------
-
-For performance reasons, Marble should render the map in different
-qualities in different situations.
-
- - LOW: For slow hardware with different defaults
-    - No relief in Atlas View
-    - using setShowQuickAndDirty(true) for really sloppy interpolation
- - MEDIUM: Basically what we have now
- - HIGH: Uses Antialiased vector lines
- - PRINT: Adds some Really Slow (TM) nice things that are typical for
-   printed maps: e.g. Blue antialiased coast lines for the Atlas map.
-
- ** Make Marble use different render settings while panning (MOVE) and
-    after releasing the mouse (DROP)
-
-    For KDE 4.0.1 it should use the render quality MEDIUM for panning
-    and HIGH or PRINT after the mouse button has been released. Note:
-    For KDE 4.1 there should be two comboboxes in the settings dialog:
-
-    Display Quality:
-
-    During mouse move: [^ Medium ]
-    On mouse drop:     [^ High   ]
-
- ** Rerender the map at "PRINT quality" once "File -> Print" or 
-    "Edit -> Copy" get selected.
-
-
 Small indicator in the status bar for downloads
 -----------------------------------------------
-    downloads (should be really tiny and not obtrusive just to see
+    Downloads (should be really tiny and not obtrusive just to see
     that something is going on). Ideally the user would get a tooltip
     once he hovers that progress bar with numbers of files in the
     queue, maybe amount of data that has been downloaded during the
