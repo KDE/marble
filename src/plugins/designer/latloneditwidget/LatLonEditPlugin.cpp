@@ -17,9 +17,9 @@
 */
 //Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 
-#include "../../lib/LatLonEdit.h"
-
 #include "LatLonEditPlugin.h"
+
+#include "../../lib/LatLonEdit.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
