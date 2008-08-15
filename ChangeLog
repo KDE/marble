@@ -1,3 +1,29 @@
+2008-08-15  Inge Wallin  <inge@lysator.liu.se>
+
+	Rename Layers to RenderPluginsPlugin
+
+	* src/lib/MarbleLayerInterface.h -> MarbleRenderPluginInterface.h.
+	* src/lib/MarbleAbstractLayer.{h,cpp} -> MarbleRenderPlugin.{h,cpp}
+	* src/lib/CMakeLists.txt: Reflect name changes
+	
+	* src/lib/LayerManager.{h,cpp},
+	* src/lib/MarbleAbstractFloatItem.{h,cpp},
+	* src/lib/MarbleWidget.{h,cpp},
+	* src/lib/MarbleMap.{h,cpp},
+	* src/lib/MarbleModel.{h,cpp},
+	* src/lib/PluginManager.{h,cpp},
+	* src/lib/PluginManager.h,
+	* src/lib/tests/PluginManagerTest.cpp,
+	* src/marble_part.cpp,
+	* src/plugins/marble/compass/CompassFloatItem.{h,cpp},
+	* src/plugins/marble/mapscale/MapScaleFloatItem.{h,cpp},
+	* src/plugins/marble/geodata/MarbleGeoDataPlugin.h,
+	* src/plugins/marble/overviewmap/MarbleOverviewMap.h,
+	* src/plugins/marble/panoramio/PanoramioPlugin.h,
+	* src/plugins/marble/satellites/SatellitesPlugin.h,
+	* src/plugins/marble/stars/MarbleStarsPlugin.h:
+	Use new name of the plugins.
+
 2008-08-14  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/plugins/marble/test/MarbleTestPlugin.cpp:

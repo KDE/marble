@@ -1170,9 +1170,9 @@ SunLocator* MarbleMap::sunLocator()
     return d->m_model->sunLocator();
 }
 
-QList<MarbleAbstractLayer *> MarbleMap::layerPlugins() const
+QList<MarbleRenderPlugin *> MarbleMap::renderPlugins() const
 {
-    return d->m_model->layerPlugins();
+    return d->m_model->renderPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const

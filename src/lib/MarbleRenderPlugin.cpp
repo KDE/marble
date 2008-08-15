@@ -6,23 +6,25 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
+// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>"
 //
 
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 #include "MarbleDataFacade.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QDebug>
 #include <QtGui/QStandardItem>
 
+
 namespace Marble
 {
 
-class MarbleAbstractLayerPrivate
+class MarbleRenderPluginPrivate
 {
   public:
-    MarbleAbstractLayerPrivate()
+    MarbleRenderPluginPrivate()
         : m_dataFacade(0),
           m_action(0),
           m_item(0),
@@ -31,7 +33,7 @@ class MarbleAbstractLayerPrivate
     {
     }
 
-    ~MarbleAbstractLayerPrivate()
+    ~MarbleRenderPluginPrivate()
     {
     }
 
@@ -44,30 +46,32 @@ class MarbleAbstractLayerPrivate
 };
 
 
-MarbleAbstractLayer::MarbleAbstractLayer()
-    : d( new MarbleAbstractLayerPrivate() )
+MarbleRenderPlugin::MarbleRenderPlugin()
+    : d( new MarbleRenderPluginPrivate() )
 {
     d->m_action = new QAction( this );
-    connect( d->m_action, SIGNAL( toggled( bool ) ), this, SLOT( setVisible( bool ) ) );
+    connect( d->m_action, SIGNAL( toggled( bool ) ),
+	     this,        SLOT( setVisible( bool ) ) );
+
     d->m_item = new QStandardItem();
 }
 
-MarbleAbstractLayer::~MarbleAbstractLayer()
+MarbleRenderPlugin::~MarbleRenderPlugin()
 {
     delete d;
 }
 
-MarbleDataFacade*  MarbleAbstractLayer::dataFacade() const
+MarbleDataFacade*  MarbleRenderPlugin::dataFacade() const
 {
     return d->m_dataFacade;
 }
 
-void  MarbleAbstractLayer::setDataFacade( MarbleDataFacade* dataFacade )
+void  MarbleRenderPlugin::setDataFacade( MarbleDataFacade* dataFacade )
 {
     d->m_dataFacade = dataFacade;
 }
 
-QAction* MarbleAbstractLayer::action() const
+QAction* MarbleRenderPlugin::action() const
 {
     d->m_action->setCheckable( true );
     d->m_action->setChecked( visible() );
@@ -77,7 +81,7 @@ QAction* MarbleAbstractLayer::action() const
     return d->m_action;
 }
 
-QStandardItem* MarbleAbstractLayer::item() const
+QStandardItem* MarbleRenderPlugin::item() const
 {
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );
@@ -91,52 +95,51 @@ QStandardItem* MarbleAbstractLayer::item() const
     return d->m_item;
 }
 
-void MarbleAbstractLayer::applyItemState()
+void MarbleRenderPlugin::applyItemState()
 {
-    d->m_enabled = ( d->m_item->checkState() == Qt::Checked ) ? true : false;
+    d->m_enabled = ( d->m_item->checkState() == Qt::Checked );
 
     d->m_action->setEnabled( d->m_enabled );
 }
 
-void MarbleAbstractLayer::retrieveItemState()
+void MarbleRenderPlugin::retrieveItemState()
 {
     d->m_item->setCheckState( enabled() ?  Qt::Checked : Qt::Unchecked  );
 }
 
-void MarbleAbstractLayer::setEnabled( bool enabled )
+void MarbleRenderPlugin::setEnabled( bool enabled )
 {
     if ( enabled == d->m_enabled )
-    {
         return;
-    }
+
     d->m_enabled = enabled;
     d->m_action->setEnabled( enabled );
 
     d->m_item->setCheckState( enabled ?  Qt::Checked : Qt::Unchecked  );
 }
 
-void MarbleAbstractLayer::setVisible( bool visible )
+void MarbleRenderPlugin::setVisible( bool visible )
 {
     if ( visible == d->m_visible )
-    {
         return;
-    }
+
     d->m_visible = visible;
     d->m_action->setChecked( visible );
 
     emit valueChanged( nameId(), visible );
 }
 
-bool MarbleAbstractLayer::enabled() const
+bool MarbleRenderPlugin::enabled() const
 {
     return d->m_enabled;
 }
 
-bool MarbleAbstractLayer::visible() const
+bool MarbleRenderPlugin::visible() const
 {
     return d->m_visible;
 }
 
 }
 
-#include "MarbleAbstractLayer.moc"
+#include "MarbleRenderPlugin.moc"
+

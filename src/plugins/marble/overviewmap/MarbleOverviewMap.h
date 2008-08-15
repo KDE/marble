@@ -33,7 +33,7 @@ namespace Marble
 class MarbleOverviewMap : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),

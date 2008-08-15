@@ -26,7 +26,7 @@ namespace Marble
 class MapScaleFloatItem : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),

@@ -6,11 +6,12 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Inge Wallin  <inge@lysator.liu.se>"
 //
 
 
-#ifndef MARBLE_LAYER_INTERFACE_H
-#define MARBLE_LAYER_INTERFACE_H
+#ifndef MARBLERENDERPLUGINH
+#define MARBLERENDERPLUGINH
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -29,10 +30,10 @@ class ViewportParams;
  *
  */
 
-class MarbleLayerInterface
+class MarbleRenderPluginInterface
 {
  public:
-    virtual ~MarbleLayerInterface(){}
+    virtual ~MarbleRenderPluginInterface(){}
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
@@ -48,9 +49,9 @@ class MarbleLayerInterface
     virtual QStringList backendTypes() const = 0;
 
     /**
-     * @brief Preferred position in the layer stack for the rendering
-     * Gives a preferred position where in the existing layer stack
-     * the render() method of this plugin should get executed.
+     * @brief Return how the plugin settings should be used.
+     *
+     * FIXME: Document this
      *.
      * Possible Values:
      * "ALWAYS"            -- the plugin renders at the preferred posion
@@ -64,12 +65,20 @@ class MarbleLayerInterface
     virtual QString renderPolicy() const = 0;
 
     /**
-     * @brief Preferred position in the layer stack for the rendering
-     * Gives a preferred position where in the existing layer stack
+     * @brief Preferred level in the layer stack for the rendering
+     *
+     * Gives a preferred level in the existing layer stack where
      * the render() method of this plugin should get executed.
      *.
      * Possible Values:
-     * "NONE", "STARS", "BEHIND_TARGET", "SURFACE", "ATMOSPHERE", "ORBIT", "ALWAYS_ON_TOP", "FLOAT_ITEM"
+     * "NONE"
+     * "STARS"
+     * "BEHIND_TARGET"
+     * "SURFACE"
+     * "ATMOSPHERE"
+     * "ORBIT"
+     * "ALWAYS_ON_TOP"
+     * "FLOAT_ITEM"
      */
     virtual QStringList renderPosition() const = 0;
 
@@ -113,7 +122,7 @@ class MarbleLayerInterface
 
 
     /**
-     * @brief Renders the content provided by the layer on the viewport.
+     * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
     virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
@@ -121,6 +130,6 @@ class MarbleLayerInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::MarbleLayerInterface, "org.kde.Marble.MarbleLayerInterface/1.02" )
+Q_DECLARE_INTERFACE( Marble::MarbleRenderPluginInterface, "org.kde.Marble.MarbleRenderPluginInterface/1.02" )
 
-#endif // MARBLE_LAYER_INTERFACE_H
+#endif // MARBLERENDERPLUGINH

@@ -15,10 +15,11 @@
 #include <QtCore/QObject>
 #include "marble_export.h"
 
+
 namespace Marble
 {
 
-class MarbleAbstractLayer;
+class MarbleRenderPlugin;
 class MarbleAbstractFloatItem;
 class PluginManagerPrivate;
 
@@ -35,8 +36,8 @@ class MARBLE_EXPORT PluginManager : public QObject
     explicit PluginManager( QObject *parent = 0 );
     ~PluginManager();
 
-    QList<MarbleAbstractFloatItem *> floatItems() const;
-    QList<MarbleAbstractLayer *> layerPlugins() const;
+    QList<MarbleAbstractFloatItem *> floatItems()    const;
+    QList<MarbleRenderPlugin *>      renderPlugins() const;
 
  public Q_SLOTS:
     /**

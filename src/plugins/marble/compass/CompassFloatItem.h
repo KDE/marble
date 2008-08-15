@@ -33,7 +33,7 @@ namespace Marble
 class CompassFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),

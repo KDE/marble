@@ -19,7 +19,7 @@
 
 // Local dir
 #include "MarbleDirs.h"
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 #include "MarbleAbstractFloatItem.h"
 
 namespace Marble
@@ -32,7 +32,7 @@ class PluginManagerPrivate
     {
     }
 
-    QList<MarbleAbstractLayer *> m_layerPlugins;
+    QList<MarbleRenderPlugin *> m_renderPlugins;
 };
 
 PluginManager::PluginManager( QObject *parent )
@@ -45,8 +45,8 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-//    qDeleteAll( d->m_layerPlugins );
-//    d->m_layerPlugins.clear();
+//    qDeleteAll( d->m_renderPlugins );
+//    d->m_renderPlugins.clear();
     delete d;
 }
 
@@ -54,8 +54,8 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
 {
     QList<MarbleAbstractFloatItem *> floatItemList;
 
-    QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = d->m_layerPlugins.begin(); i != d->m_layerPlugins.end(); ++i)
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = d->m_renderPlugins.begin(); i != d->m_renderPlugins.end(); ++i)
     {
         MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
         if ( floatItem )
@@ -67,9 +67,9 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
     return floatItemList;
 }
 
-QList<MarbleAbstractLayer *> PluginManager::layerPlugins() const
+QList<MarbleRenderPlugin *> PluginManager::renderPlugins() const
 {
-    return d->m_layerPlugins;
+    return d->m_renderPlugins;
 }
 
 void PluginManager::loadPlugins()
@@ -81,21 +81,20 @@ void PluginManager::loadPlugins()
 
     MarbleDirs::debug();
 
-    qDeleteAll( d->m_layerPlugins );
-    d->m_layerPlugins.clear();
+    qDeleteAll( d->m_renderPlugins );
+    d->m_renderPlugins.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject *obj = loader.instance();
-        MarbleAbstractLayer * layerPlugin = qobject_cast<MarbleAbstractLayer *>(obj);
+        MarbleRenderPlugin * layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
 
         if( layerPlugin ) {
-            d->m_layerPlugins.append( layerPlugin );
+            d->m_renderPlugins.append( layerPlugin );
         }
-        else
-        {
+        else {
             qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
             qDebug() << loader.errorString();
         }

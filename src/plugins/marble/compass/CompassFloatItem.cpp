@@ -100,7 +100,9 @@ bool CompassFloatItem ::needsUpdate( ViewportParams *viewport )
     return true;
 }
 
-bool CompassFloatItem ::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool CompassFloatItem ::renderFloatItem( GeoPainter *painter,
+					 ViewportParams *viewport,
+					 GeoSceneLayer * layer )
 {
     painter->save();
 

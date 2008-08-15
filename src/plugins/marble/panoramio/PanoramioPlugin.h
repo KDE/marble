@@ -21,7 +21,7 @@
 #include "../lib/CacheStoragePolicy.h"
 // #include "../lib/HttpJob.h"
 #include "jsonparser.h"
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 
 namespace Marble
 {
@@ -31,10 +31,10 @@ namespace Marble
  *
  */
 
-class PanoramioPlugin : public MarbleAbstractLayer
+class PanoramioPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES(Marble::MarbleLayerInterface)
+    Q_INTERFACES(Marble::MarbleRenderPluginInterface)
 
 public:
     QStringList backendTypes() const;

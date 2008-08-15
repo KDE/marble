@@ -18,7 +18,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 #include "Quaternion.h"
 
 class QDateTime;
@@ -62,10 +62,10 @@ class StarPoint {
  *
  */
 
-class MarbleStarsPlugin : public MarbleAbstractLayer
+class MarbleStarsPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     QStringList backendTypes() const;

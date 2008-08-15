@@ -19,7 +19,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 
 
 namespace Marble
@@ -35,10 +35,10 @@ class GeoDataDocument;
  * MarbleGeoDataPlugin is the beginning of a 
  */
 
-class MarbleGeoDataPlugin : public MarbleAbstractLayer
+class MarbleGeoDataPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
     void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );

@@ -23,7 +23,7 @@
 #include <QtGui/QPainterPath>
 #include <QtGui/QFont>
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 #include "marble_export.h"
 
 class QAction;
@@ -39,7 +39,7 @@ class MarbleAbstractFloatItemPrivate;
  *
  */
 
-class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleAbstractLayer
+class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
 {
     Q_OBJECT
 

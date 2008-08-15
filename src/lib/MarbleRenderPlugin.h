@@ -6,17 +6,19 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Inge Wallin  <inge@lysator.liu.se>"
 //
 
 
-#ifndef MARBLE_ABSTRACT_LAYER_H
-#define MARBLE_ABSTRACT_LAYER_H
+#ifndef MARBLE_RENDER_PLUGIN_H
+#define MARBLE_RENDER_PLUGIN_H
 
 #include <QtCore/QObject>
 #include <QtCore/Qt>
 
-#include "MarbleLayerInterface.h"
+#include "MarbleRenderPluginInterface.h"
 #include "marble_export.h"
+
 
 class QAction;
 class QStandardItem;
@@ -24,7 +26,7 @@ class QStandardItem;
 namespace Marble
 {
 
-class MarbleAbstractLayerPrivate;
+class MarbleRenderPluginPrivate;
 class MarbleDataFacade;
 
 /**
@@ -32,20 +34,20 @@ class MarbleDataFacade;
  *
  */
 
-class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInterface
+class MARBLE_EXPORT MarbleRenderPlugin : public QObject, public MarbleRenderPluginInterface
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( MarbleRenderPluginInterface )
 
  public:
-    explicit MarbleAbstractLayer();
-    virtual ~MarbleAbstractLayer();
+    explicit MarbleRenderPlugin();
+    virtual ~MarbleRenderPlugin();
 
     MarbleDataFacade* dataFacade() const;
     void  setDataFacade( MarbleDataFacade* );
 
-    QAction* action() const;
-    QStandardItem* item() const;
+    QAction       *action() const;
+    QStandardItem *item()   const;
 
     void applyItemState();
     void retrieveItemState();
@@ -61,10 +63,10 @@ class MARBLE_EXPORT MarbleAbstractLayer : public QObject, public MarbleLayerInte
     void    valueChanged( QString nameId, bool visible );
 
  private:
-    Q_DISABLE_COPY( MarbleAbstractLayer )
-    MarbleAbstractLayerPrivate  * const d;
+    Q_DISABLE_COPY( MarbleRenderPlugin )
+    MarbleRenderPluginPrivate  * const d;
 };
 
 }
 
-#endif // MARBLE_ABSTRACT_LAYER_H
+#endif // MARBLE_RENDER_PLUGIN_H

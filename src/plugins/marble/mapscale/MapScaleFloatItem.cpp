@@ -106,7 +106,9 @@ bool MapScaleFloatItem::needsUpdate( ViewportParams *viewport )
     return true;
 }
 
-bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
+					 ViewportParams *viewport,
+					 GeoSceneLayer * layer )
 {
     painter->save();
 

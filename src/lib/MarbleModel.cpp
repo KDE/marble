@@ -806,9 +806,9 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
     tile->loadTile(requestTileUpdate);
 }
 
-QList<MarbleAbstractLayer *> MarbleModel::layerPlugins() const
+QList<MarbleRenderPlugin *> MarbleModel::renderPlugins() const
 {
-    return d->m_layerManager->layerPlugins();
+    return d->m_layerManager->renderPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const

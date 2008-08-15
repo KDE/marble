@@ -1282,9 +1282,9 @@ quint16 MarbleWidget::proxyPort() const
     return d->m_proxyPort;
 }
 
-QList<MarbleAbstractLayer *> MarbleWidget::layerPlugins() const
+QList<MarbleRenderPlugin *> MarbleWidget::renderPlugins() const
 {
-    return d->m_model->layerPlugins();
+    return d->m_model->renderPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const

@@ -330,20 +330,17 @@ void MarblePart::readSettings()
     int nameIdSize = MarbleSettings::pluginNameId().size();
     int enabledSize = MarbleSettings::pluginEnabled().size();
 
-    if ( nameIdSize == enabledSize )
-    {
-        for ( int i = 0; i < enabledSize; ++i )
-        {
-            pluginEnabled[ MarbleSettings::pluginNameId()[i] ] = MarbleSettings::pluginEnabled()[i];
+    if ( nameIdSize == enabledSize ) {
+        for ( int i = 0; i < enabledSize; ++i ) {
+            pluginEnabled[ MarbleSettings::pluginNameId()[i] ]
+		= MarbleSettings::pluginEnabled()[i];
         }
     }
 
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
-    QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
-    {
-        if ( pluginEnabled.contains( (*i)->nameId() ) )
-        {
+    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+        if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
             (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
         }
@@ -401,15 +398,14 @@ void MarblePart::writeSettings()
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
     MarbleSettings::setProxyPort( m_controlView->marbleWidget()->proxyPort() );
 
-    QList<int> pluginEnabled;
-    QStringList pluginNameId;
+    QList<int>   pluginEnabled;
+    QStringList  pluginNameId;
 
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
-    QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
-    {
-            pluginEnabled << static_cast<int>( (*i)->enabled() );
-            pluginNameId  << (*i)->nameId();
+    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+	pluginEnabled << static_cast<int>( (*i)->enabled() );
+	pluginNameId  << (*i)->nameId();
     }
     MarbleSettings::setPluginEnabled( pluginEnabled );
     MarbleSettings::setPluginNameId(  pluginNameId );
@@ -423,12 +419,12 @@ void MarblePart::setupActions()
 {
     // Adding some actions for translation
 
-    KAction action1(i18n("Open Map &Data..."), this);
-    KAction action2(i18n("&Import Map Data..."), this);
-    KAction action3(i18n("Scale &Bar"), this);
+    KAction action1( i18n("Open Map &Data..."), this );
+    KAction action2( i18n("&Import Map Data..."), this );
+    KAction action3( i18n("Scale &Bar"), this );
 
-    KAction action4(i18n("&Add Place"), this);
-    KAction action5(i18n("Panoramio Photos"), this);
+    KAction action4( i18n("&Add Place"), this );
+    KAction action5( i18n("Panoramio Photos"), this );
 
     // Action: Print Map
     m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ), actionCollection() );
@@ -443,21 +439,26 @@ void MarblePart::setupActions()
              this,              SLOT( exportMapScreenShot() ) );
 
     // Action: Copy Map to the Clipboard
-    m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ), actionCollection() );
+    m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
+					     actionCollection() );
     m_copyMapAction->setText( i18n( "&Copy Map" ) );
 
     // Action: Copy Coordinates string
     m_copyCoordinatesAction = new KAction( this );
-    actionCollection()->addAction( "edit_copy_coordinates", m_copyCoordinatesAction );
+    actionCollection()->addAction( "edit_copy_coordinates",
+				   m_copyCoordinatesAction );
     m_copyCoordinatesAction->setText( i18n( "C&opy Coordinates" ) );
-    connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ), this, SLOT( copyCoordinates() ) );
+    connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ),
+	     this,                    SLOT( copyCoordinates() ) );
 
     // Action: Open a Gpx or a Kml File
-    m_openAct = KStandardAction::open( this, SLOT( openFile() ), actionCollection() );
+    m_openAct = KStandardAction::open( this, SLOT( openFile() ),
+				       actionCollection() );
     m_openAct->setText( i18n( "&Open Map..." ) );
 
     // Standard actions.  So far only Quit.
-    KStandardAction::quit( kapp, SLOT( closeAllWindows() ), actionCollection() );
+    KStandardAction::quit( kapp, SLOT( closeAllWindows() ),
+			   actionCollection() );
 
     // Action: Get hot new stuff
     m_newStuffAction = KNS::standardAction(QString(), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
@@ -468,7 +469,8 @@ void MarblePart::setupActions()
 #endif
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
-    KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ), actionCollection() );
+    KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
+				    actionCollection() );
 
     m_sideBarAct = new KAction( i18n("Show &Navigation Panel"), this );
     actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
@@ -476,10 +478,13 @@ void MarblePart::setupActions()
     m_sideBarAct->setCheckable( true );
     m_sideBarAct->setChecked( true );
     m_sideBarAct->setStatusTip( i18n( "Show Navigation Panel" ) );
-    connect( m_sideBarAct, SIGNAL( triggered( bool ) ), this, SLOT( showSideBar( bool ) ) );
+    connect( m_sideBarAct, SIGNAL( triggered( bool ) ),
+	     this,         SLOT( showSideBar( bool ) ) );
 
-    m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(), actionCollection() );
-    connect( m_fullScreenAct, SIGNAL( triggered( bool ) ), this, SLOT( showFullScreen( bool ) ) );
+    m_fullScreenAct = KStandardAction::fullScreen( 0, 0, widget(),
+						   actionCollection() );
+    connect( m_fullScreenAct, SIGNAL( triggered( bool ) ),
+	     this,            SLOT( showFullScreen( bool ) ) );
 
     // Action: Show Atmosphere option
     m_showAtmosphereAction = new KAction( this );
@@ -487,7 +492,8 @@ void MarblePart::setupActions()
     m_showAtmosphereAction->setCheckable( true );
     m_showAtmosphereAction->setChecked( true );
     m_showAtmosphereAction->setText( i18n( "&Atmosphere" ) );
-    connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ), this, SLOT( setShowAtmosphere( bool ) ) );
+    connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
+	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );
@@ -495,24 +501,28 @@ void MarblePart::setupActions()
     m_showCloudsAction->setCheckable( true );
     m_showCloudsAction->setChecked( true );
     m_showCloudsAction->setText( i18n( "&Clouds" ) );
-    connect( m_showCloudsAction, SIGNAL( triggered( bool ) ), this, SLOT( setShowClouds( bool ) ) );
+    connect( m_showCloudsAction, SIGNAL( triggered( bool ) ),
+	     this,               SLOT( setShowClouds( bool ) ) );
 
     // Action: Show Sunshade options
     m_showSunAct = new KAction( this );
     actionCollection()->addAction( "show_sun", m_showSunAct );
     m_showSunAct->setText( i18n( "S&un Control" ) );
-    connect( m_showSunAct, SIGNAL( triggered( bool ) ), this, SLOT( showSun() ) );
+    connect( m_showSunAct, SIGNAL( triggered( bool ) ),
+	     this,         SLOT( showSun() ) );
 
     // Action: Lock float items
     m_lockFloatItemsAct = new KAction ( this );
-    actionCollection()->addAction( "options_lock_floatitems", m_lockFloatItemsAct );
+    actionCollection()->addAction( "options_lock_floatitems",
+				   m_lockFloatItemsAct );
     m_lockFloatItemsAct->setText( i18n( "Lock Position" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
-    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ), this, 
-            SLOT( lockFloatItemPosition( bool ) ) );
+    connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ),
+	     this,                SLOT( lockFloatItemPosition( bool ) ) );
 
-    KStandardAction::preferences( this, SLOT( editSettings() ), actionCollection() );
+    KStandardAction::preferences( this, SLOT( editSettings() ),
+				  actionCollection() );
 
     readSettings();
 }
@@ -524,10 +534,10 @@ void MarblePart::createInfoBoxesMenu()
     QList<QAction*> actionList;
 
     QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
-    {
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
         actionList.append( (*i)->action() );
     }
+
     unplugActionList( "infobox_actionlist" );
     plugActionList( "infobox_actionlist", actionList );
 }
@@ -564,7 +574,8 @@ void MarblePart::setupStatusBar()
     QString templatePositionString =
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
     int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
-                            + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
+	+ 2 * m_positionLabel->margin()
+	+ 2 * m_positionLabel->indent();
     m_positionLabel->setFixedWidth( maxPositionWidth );
     m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
 
@@ -573,7 +584,8 @@ void MarblePart::setupStatusBar()
     QString templateDistanceString =
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
-                            + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
+	+ 2 * m_distanceLabel->margin()
+	+ 2 * m_distanceLabel->indent();
     m_distanceLabel->setFixedWidth( maxDistanceWidth );
     m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
 
@@ -599,7 +611,7 @@ void MarblePart::showNewStuffDialog()
 
     // Update the map theme widget by updating the model.
     // Shouldn't be needed anymore ...
-//    m_controlView->marbleControl()->updateMapThemes();
+    //m_controlView->marbleControl()->updateMapThemes();
 }
 
 void MarblePart::editSettings()
@@ -607,55 +619,64 @@ void MarblePart::editSettings()
     if ( KConfigDialog::showDialog( "settings" ) )
         return;
 
-        m_configDialog = new KConfigDialog( m_controlView, "settings", MarbleSettings::self() );
+    m_configDialog = new KConfigDialog( m_controlView, "settings",
+					MarbleSettings::self() );
 
-        // view page
-        Ui_MarbleViewSettingsWidget ui_viewSettings;
-        QWidget *w_viewSettings = new QWidget( 0 );
-        w_viewSettings->setObjectName( "view_page" );
-        ui_viewSettings.setupUi( w_viewSettings );
-        m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
+    // view page
+    Ui_MarbleViewSettingsWidget  ui_viewSettings;
+    QWidget                     *w_viewSettings = new QWidget( 0 );
 
-        // navigation page
-        Ui_MarbleNavigationSettingsWidget ui_navigationSettings;
-        QWidget *w_navigationSettings = new QWidget( 0 );
-        w_navigationSettings->setObjectName( "navigation_page" );
-        ui_navigationSettings.setupUi( w_navigationSettings );
-        m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ), "transform-move" );
+    w_viewSettings->setObjectName( "view_page" );
+    ui_viewSettings.setupUi( w_viewSettings );
+    m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
 
-        // cache page
-        MarbleCacheSettingsWidget *w_cacheSettings =
-            new MarbleCacheSettingsWidget();
-        w_cacheSettings->setObjectName( "cache_page" );
-        m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ), "preferences-web-browser-cache" );
-        connect( w_cacheSettings, SIGNAL( clearVolatileCache() ), m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
-        connect( w_cacheSettings, SIGNAL( clearPersistentCache() ), m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+    // navigation page
+    Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
+    QWidget                           *w_navigationSettings = new QWidget( 0 );
 
-        // plugin page
+    w_navigationSettings->setObjectName( "navigation_page" );
+    ui_navigationSettings.setupUi( w_navigationSettings );
+    m_configDialog->addPage( w_navigationSettings, i18n( "Navigation" ),
+			     "transform-move" );
 
-        m_pluginModel = new QStandardItemModel();
-        QStandardItem *parentItem = m_pluginModel->invisibleRootItem();
+    // cache page
+    MarbleCacheSettingsWidget *w_cacheSettings = new MarbleCacheSettingsWidget();
+    w_cacheSettings->setObjectName( "cache_page" );
+    m_configDialog->addPage( w_cacheSettings, i18n( "Cache & Proxy" ),
+			     "preferences-web-browser-cache" );
+    connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
+	     m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
+    connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
+	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
-        QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
-        QList<MarbleAbstractLayer *>::const_iterator i;
-        for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
-        {
-            parentItem->appendRow( (*i)->item() );
-        }
+    // plugin page
+    m_pluginModel = new QStandardItemModel();
+    QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
-        MarblePluginSettingsWidget *w_pluginSettings =
-            new MarblePluginSettingsWidget();
-        w_pluginSettings->setModel( m_pluginModel );
-        w_pluginSettings->setObjectName( "plugin_page" );
-        m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ), "preferences-plugin" );
+    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+	parentItem->appendRow( (*i)->item() );
+    }
 
-        connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ), SLOT( slotEnableButtonApply() ) );
-        connect( m_configDialog, SIGNAL( settingsChanged( const QString &) ), SLOT( slotUpdateSettings() ) );
-        connect( m_configDialog, SIGNAL( applyClicked() ), SLOT( slotApply() ) );
-        connect( m_configDialog, SIGNAL( okClicked() ), SLOT( slotApply() ) );
-        connect( m_configDialog, SIGNAL( cancelClicked() ), SLOT( slotCancel() ) );
+    MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget();
+    w_pluginSettings->setModel( m_pluginModel );
+    w_pluginSettings->setObjectName( "plugin_page" );
+    m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ),
+			     "preferences-plugin" );
 
-        m_configDialog->show();
+    connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
+	                       SLOT( slotEnableButtonApply() ) );
+    connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
+	                       SLOT( slotUpdateSettings() ) );
+    connect( m_configDialog,   SIGNAL( applyClicked() ),
+	                       SLOT( slotApply() ) );
+    connect( m_configDialog,   SIGNAL( okClicked() ),
+	                       SLOT( slotApply() ) );
+    connect( m_configDialog,   SIGNAL( cancelClicked() ),
+	                       SLOT( slotCancel() ) );
+
+    m_configDialog->show();
 }
 
 void MarblePart::slotEnableButtonApply()
@@ -665,20 +686,18 @@ void MarblePart::slotEnableButtonApply()
 
 void MarblePart::slotApply()
 {
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
-    QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
-    {
+    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator  i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
         (*i)->applyItemState();
     }
 }
 
 void MarblePart::slotCancel()
 {
-    QList<MarbleAbstractLayer *> pluginList = m_controlView->marbleWidget()->layerPlugins();
-    QList<MarbleAbstractLayer *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i)
-    {
+    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator  i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
         (*i)->retrieveItemState();
     }
 }
@@ -711,7 +730,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
 
     QList<MarbleAbstractFloatItem *>::const_iterator i;
     for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
-        // locking one would suffice as it affects all. nevertheless go through all.
+        // Locking one would suffice as it affects all. 
+	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);
     }
 }

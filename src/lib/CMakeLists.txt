@@ -74,8 +74,6 @@ set(marblewidget_SRCS
     PluginManager.cpp
     CrossHairFloatItem.cpp
     MarbleCacheSettingsWidget.cpp
-    MarblePluginSettingsWidget.cpp
-    MarbleAbstractLayer.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
     MarblePhysics.cpp
@@ -141,6 +139,9 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayer.cpp
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
+
+    MarbleRenderPlugin.cpp
+    MarblePluginSettingsWidget.cpp
 
     SunLocator.cpp
     ExtDateTime.cpp
@@ -269,8 +270,6 @@ else (APPLE AND QTONLY)
     MarbleNavigator.h
     MarbleDataFacade.h
     MarbleAbstractFloatItem.h
-    MarbleAbstractLayer.h
-    MarbleLayerInterface.h
     AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
 
@@ -300,6 +299,8 @@ else (APPLE AND QTONLY)
     geodata/parser/GeoDocument.h
     ExtDateTime.h
     TileCreator.h
+    MarbleRenderPlugin.h
+    MarbleRenderPluginInterface.h
     marble_export.h
 
     LatLonEdit.h

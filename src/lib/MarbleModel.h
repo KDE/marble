@@ -59,7 +59,7 @@ class VectorComposer;
 class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
-class MarbleAbstractLayer;
+class MarbleRenderPlugin;
 class MarbleAbstractFloatItem;
 class GeoDataDocument;
 class GeoSceneDocument;
@@ -247,7 +247,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
-    QList<MarbleAbstractLayer *> layerPlugins() const;
+    QList<MarbleRenderPlugin *>      renderPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:

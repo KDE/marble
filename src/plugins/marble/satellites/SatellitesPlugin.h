@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 
 namespace Marble
 {
@@ -22,10 +22,10 @@ namespace Marble
  * \brief This class displays a layer of satellites (which satellites TBD).
  *
  */
-class SatellitesPlugin : public MarbleAbstractLayer
+class SatellitesPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     QStringList backendTypes() const;

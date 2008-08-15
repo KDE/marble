@@ -20,8 +20,7 @@
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
-#include "MarbleLayerInterface.h"
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 #include "MarbleAbstractFloatItem.h"
 #include "MarbleDataFacade.h"
 #include "ViewParams.h"
@@ -40,12 +39,13 @@ class LayerManagerPrivate
 
     GeoSceneDocument *m_mapTheme;
 
-    MarbleModel* m_model;
+    MarbleModel      *m_model;
     MarbleDataFacade *m_dataFacade;
-    PluginManager *m_pluginManager;
+    PluginManager    *m_pluginManager;
 
-    QList<MarbleAbstractLayer *> m_layerPlugins;
+    QList<MarbleRenderPlugin *> m_renderPlugins;
 };
+
 
 LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     : QObject( parent ),
@@ -54,10 +54,10 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     d->m_pluginManager = new PluginManager( this );
 
     // Just for initial testing
-    d->m_layerPlugins = d->m_pluginManager->layerPlugins();
-    foreach( MarbleAbstractLayer * layerPlugin,  d->m_layerPlugins ) {
-        layerPlugin->setDataFacade( d->m_dataFacade );
-        layerPlugin->initialize();
+    d->m_renderPlugins = d->m_pluginManager->renderPlugins();
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+        renderPlugin->setDataFacade( d->m_dataFacade );
+        renderPlugin->initialize();
     }
 }
 
@@ -67,9 +67,9 @@ LayerManager::~LayerManager()
     delete d;
 }
 
-QList<MarbleAbstractLayer *> LayerManager::layerPlugins() const
+QList<MarbleRenderPlugin *> LayerManager::renderPlugins() const
 {
-    return d->m_layerPlugins;
+    return d->m_renderPlugins;
 }
 
 QList<MarbleAbstractFloatItem *> LayerManager::floatItems() const
@@ -79,30 +79,29 @@ QList<MarbleAbstractFloatItem *> LayerManager::floatItems() const
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
 {
-    if ( !viewParams || !viewParams->viewport() )
-    {
+    if ( !viewParams || !viewParams->viewport() ) {
         qDebug() << "LayerManager: No valid viewParams set!";
         return;
     }
 
     ViewportParams* viewport = viewParams->viewport();
 
-    foreach( MarbleAbstractLayer *layerPlugin,  d->m_layerPlugins ) {
-        if ( layerPlugin ){
-            if ( layerPlugin->enabled() && layerPlugin->visible() )
-            {
-                layerPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
+    foreach( MarbleRenderPlugin *renderPlugin,  d->m_renderPlugins ) {
+        if ( renderPlugin ){
+            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
             }
         }
     }
 
     // Looping a second time through is a quick and dirty way to get 
     // the float items displayed on top:
-    foreach( MarbleAbstractLayer * layerPlugin,  d->m_layerPlugins ) {
-        if ( layerPlugin->renderPosition().contains("FLOAT_ITEM") )
-        {
-            MarbleAbstractFloatItem *floatItem = dynamic_cast<MarbleAbstractFloatItem *>(layerPlugin);
-            if ( floatItem && floatItem->enabled() && layerPlugin->visible() )
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+        if ( renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
+            MarbleAbstractFloatItem *floatItem = dynamic_cast<MarbleAbstractFloatItem *>(renderPlugin);
+            if ( floatItem
+		 && floatItem->enabled() 
+		 && renderPlugin->visible() )
             {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );
             }
@@ -118,39 +117,38 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 {
     d->m_mapTheme = mapTheme;
 
-    foreach( MarbleAbstractLayer * layerPlugin,  d->m_layerPlugins ) {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
         bool propertyAvailable = false;
-        mapTheme->settings()->propertyAvailable( layerPlugin->nameId(), propertyAvailable );
+        mapTheme->settings()->propertyAvailable( renderPlugin->nameId(), 
+						 propertyAvailable );
         bool propertyValue = false;
-        mapTheme->settings()->propertyValue( layerPlugin->nameId(), propertyValue );
+        mapTheme->settings()->propertyValue( renderPlugin->nameId(), 
+					     propertyValue );
 
-        if ( propertyAvailable == true )
-        {
-            layerPlugin->setVisible( propertyValue );
+        if ( propertyAvailable ) {
+            renderPlugin->setVisible( propertyValue );
         }
 
-        layerPlugin->disconnect();
-        connect( layerPlugin->action(), SIGNAL( changed() ), 
-                 this,                  SIGNAL( floatItemsChanged() ) );
-        connect( layerPlugin, SIGNAL( valueChanged( QString, bool ) ),
-                 this, SLOT( syncPropertyWithAction( QString, bool ) ) );
+        renderPlugin->disconnect();
+        connect( renderPlugin->action(), SIGNAL( changed() ), 
+                 this,                   SIGNAL( floatItemsChanged() ) );
+        connect( renderPlugin, SIGNAL( valueChanged( QString, bool ) ),
+                 this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
     }
 
     disconnect( mapTheme->settings(), 0, this, 0 );
     connect( mapTheme->settings(), SIGNAL( valueChanged( QString, bool ) ),
-             this, SLOT( syncActionWithProperty( QString, bool ) ) );
+             this,                 SLOT( syncActionWithProperty( QString, bool ) ) );
 }
 
 void LayerManager::syncActionWithProperty( QString nameId, bool checked )
 {
-    foreach( MarbleAbstractLayer * layerPlugin,  d->m_layerPlugins ) {
-        if ( nameId == layerPlugin->nameId() ) {
-            if ( layerPlugin->visible() == checked )
-            {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+        if ( nameId == renderPlugin->nameId() ) {
+            if ( renderPlugin->visible() == checked )
                 return;
-            }
 
-            layerPlugin->setVisible( checked );
+            renderPlugin->setVisible( checked );
 
             return;
         }

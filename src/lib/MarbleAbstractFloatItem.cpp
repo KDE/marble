@@ -105,7 +105,7 @@ bool         MarbleAbstractFloatItemPrivate::s_positionLocked = false;
 
 MarbleAbstractFloatItem::MarbleAbstractFloatItem( const QPointF &point,
                                                   const QSizeF &size )
-    : MarbleAbstractLayer(),
+    : MarbleRenderPlugin(),
       d( new MarbleAbstractFloatItemPrivate( point, size ) )
 {
 }
