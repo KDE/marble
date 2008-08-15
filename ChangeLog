@@ -1,11 +1,15 @@
 2008-08-15  Inge Wallin  <inge@lysator.liu.se>
 
-	Rename Layers to RenderPluginsPlugin
+	Add a template for Float Item plugins
+	* src/plugins/marble/FITemplate: new directory
+	* src/plugins/marble/FITemplate/CMakeLists.txt: new file
+	* src/plugins/marble/FITemplate/FITemplateFloatItem.h: new file
+	* src/plugins/marble/FITemplate/FITemplateFloatItem.cpp: new file
 
+	Rename Layers to RenderPlugin to reduce confusion.
 	* src/lib/MarbleLayerInterface.h -> MarbleRenderPluginInterface.h.
 	* src/lib/MarbleAbstractLayer.{h,cpp} -> MarbleRenderPlugin.{h,cpp}
 	* src/lib/CMakeLists.txt: Reflect name changes
-	
 	* src/lib/LayerManager.{h,cpp},
 	* src/lib/MarbleAbstractFloatItem.{h,cpp},
 	* src/lib/MarbleWidget.{h,cpp},
