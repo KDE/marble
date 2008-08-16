@@ -26,6 +26,7 @@
 //#include <QtDBus/QDBusConnection>
 
 #include "AbstractProjection.h"
+#include "MarbleDirs.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Quaternion.h"
@@ -34,7 +35,6 @@
 #include "FileViewModel.h"
 #include "GeoDataPoint.h"
 #include "GpxFileViewItem.h"
-#include "MarbleDirs.h"
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
@@ -89,6 +89,8 @@ class MarbleWidgetPrivate
     }
 
     void  construct();
+
+    void  paintEmptyMapWarning();
 
     MarbleWidget    *m_widget;
     // The model we are showing.
@@ -229,6 +231,31 @@ void MarbleWidgetPrivate::construct()
                         m_widget, SLOT( updateAnimation( qreal ) ) );
 }
 
+void  MarbleWidgetPrivate::paintEmptyMapWarning()
+{
+    QPainter logoPainter;
+    logoPainter.begin( m_widget );
+
+    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
+
+    if ( logoPixmap.width() > m_widget->width() * 0.7 || logoPixmap.height() > m_widget->height() * 0.7 )
+    {
+        logoPixmap = logoPixmap.scaled( m_widget->size() * 0.7, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    }
+
+    QPoint logoPosition( ( m_widget->width()  - logoPixmap.width() ) / 2 , 
+                            ( m_widget->height() - logoPixmap.height() ) / 2 ); 
+    logoPainter.drawPixmap( logoPosition, logoPixmap );
+
+    QString noThemeWarning = "Please assign a map theme!";
+
+    logoPainter.setPen( Qt::white );
+    QRect textRect( 0, logoPosition.y() + logoPixmap.height() + m_widget->fontMetrics().height(),
+                    m_widget->width(), m_widget->fontMetrics().height() );
+    logoPainter.drawText( textRect, Qt::AlignCenter, noThemeWarning ); 
+    logoPainter.end();
+}
+
 
 // ----------------------------------------------------------------
 
@@ -290,7 +317,7 @@ void MarbleWidget::setRadius(const int radius)
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     emit distanceChanged( distanceString() );
 
@@ -474,7 +501,7 @@ void MarbleWidget::zoomView(int newZoom)
 
     // We only have to repaint the background every time if the globe
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     emit distanceChanged( distanceString() );
 
@@ -504,7 +531,7 @@ void MarbleWidget::rotateBy(const Quaternion& incRot)
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -515,7 +542,7 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -534,7 +561,7 @@ void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -564,7 +591,7 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -588,7 +615,7 @@ void MarbleWidget::centerOn( const GeoDataPoint &position, bool animated )
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -614,7 +641,7 @@ void MarbleWidget::setCenterLatitude( double lat )
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 }
 
 void MarbleWidget::setCenterLongitude( double lon )
@@ -623,7 +650,7 @@ void MarbleWidget::setCenterLongitude( double lon )
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 }
 
 Projection MarbleWidget::projection() const
@@ -635,7 +662,7 @@ void MarbleWidget::setProjection( Projection projection )
 {
     d->m_map->setProjection( projection );
 
-    setAttribute( Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -667,7 +694,7 @@ void MarbleWidget::moveLeft()
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -678,7 +705,7 @@ void MarbleWidget::moveRight()
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -690,7 +717,7 @@ void MarbleWidget::moveUp()
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -701,7 +728,7 @@ void MarbleWidget::moveDown()
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -715,7 +742,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     d->m_map->setSize( width(), height() );
 
-    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
 }
@@ -803,6 +830,12 @@ const QRegion MarbleWidget::projectedRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
+    if ( mapThemeId().isEmpty() ) 
+    {
+        d->paintEmptyMapWarning();
+        return;
+    }
+
     QTime t;
     t.start();
 
@@ -842,7 +875,7 @@ void MarbleWidget::goHome()
 
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,  d->m_map->mapCoversViewport() );
+    setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint(); // not obsolete in case the zoomlevel stays unaltered
 }

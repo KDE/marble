@@ -26,6 +26,7 @@ svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
 svg/marble-logo-72dpi.png
+svg/marble-logo-inverted-72dpi.png
 svg/application-x-marble.svg
 svg/application-x-marble.png
 svg/application-x-marble-gray.png
