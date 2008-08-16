@@ -211,8 +211,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // analytically the lon-/lat- range.
     double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
-    if ( 2 * viewport->radius() < viewport->height()
-	 && viewport->radius() < viewport->width() )
+    if ( 2 * viewport->radius() + 1 <= viewport->height()
+	 &&  2 * viewport->radius() + 1 <= viewport->width() )
     { 
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:
