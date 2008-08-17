@@ -180,7 +180,15 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @param lat the latitude value
      */
     static void normalizeLonLat( double &lon, double &lat );
-
+    
+    /**
+     * @brief try to parse the string into a coordinate pair
+     * @param successful becomes true if the conversion succeeds
+     * @return the geodatacoordinates
+     */
+     
+    static GeoDataCoordinates fromString( const QString &string, bool& successful );
+     
     /**
     * @brief return a string representation of the coordinate
     * this is a convenience function which uses the default notation

@@ -16,7 +16,11 @@
 
 #include <cmath>
 
+#include <QtCore/QRegExp>
 #include <QtCore/QDebug>
+#include <QtCore/QLocale>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
 #include <QtCore/QCoreApplication>
 #include "global.h"
 
@@ -211,6 +215,262 @@ void GeoDataCoordinates::normalizeLonLat( double &lon, double &lat )
     } 
     return;
 }
+
+GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
+{
+    //NOTE: when describing regexes in comments it will say eg
+    //becomes (?:(?:north|south)|[ns],?\\s).*(?:(?:east|west)|[ew])
+    //This is to give an idea of what the final regexp *looks like*, in english.
+    //Other languages/locals will obviously look different.
+    
+    successful = false; //assume failure
+    
+    QString input = string.toLower();
+    input = input.trimmed(); //remove front spaces
+    qDebug() << "Creating GeoDataCoordinates from string " << input;
+    
+    double lat, lon;
+    
+    // c is for cardinal directions and is short which saves space in regexps
+    QStringList c; 
+    c << QCoreApplication::translate( "GeoDataCoordinates", //can't use QObject::tr()
+                        "North", "The compass direction" ).toLower();
+    c << QCoreApplication::translate( "GeoDataCoordinates", 
+                        "East",  "The compass direction" ).toLower();
+    c << QCoreApplication::translate( "GeoDataCoordinates", 
+                        "South", "The compass direction" ).toLower();
+    c << QCoreApplication::translate( "GeoDataCoordinates", 
+                        "West",  "The compass direction" ).toLower();
+    QRegExp regex; //the main regex we use
+    QString regexstr; // temp. string for constructing the regex
+    QString dec( QLocale::system().decimalPoint() ); //for regex construction
+    
+    
+    //BEGIN REGEX1
+    // #1: Just two numbers, no directions, eg 74.2245 -32.2434 etc
+    //firstletters is used for *negative* matching to ensure that this is not case #2
+    QString firstletters;
+    for(int i = 0; i < 4; i++) { firstletters.append( c[i].at(0) ); }
+    // <frac> = fractional part; <sp> = whitespace
+    //            <first coord ><decimal  ><frac><sp/symbol but NOT a direction>
+    regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)\\s*[^\\d" + firstletters + "]*"
+    //           ^----------cap(1)--------------^
+    //         <sp ><2nd coord     ><decimal ><frac>
+             + "\\s*(-?\\+?\\d{1,3}" + dec + "?\\d*)";
+    //              ^----------cap(2)--------------^
+    regex = QRegExp( regexstr );
+    if( input.contains( regex ) ) {
+        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        lat = regex.cap(1).toDouble();
+        lon = regex.cap(2).toDouble();
+        
+        qDebug() << "Created lat / lon " << lat << lon;
+        
+        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
+        successful = true;
+        return coords;
+    }
+    //END REGEX1
+    
+    //BEGIN STUFF
+    //we put this after regex #1 since it is not used in that case so it will only make things slower.
+                      
+    //this is used to make regexps which determine which coord element comes first.
+    //if it doesn't match it is assumed that the longitude comes first.
+    //Note that it is "QString( c[0].at(0) )" because QChar doesn't work
+    //for adding things in a big long chain like this. TODO: investigate.
+    //becomes (?:(?:north|south)|[ns],?\\s).*(?:(?:east|west)|[ew]) in en
+    const QString latfirst = "(?:" + c[0] + "|" + c[2] + "|[" 
+                           + QString( c[0].at(0) ) + QString( c[2].at(0) ) + "],?\\s).*"
+                           + "(?:" + c[1] + "|" + c[3] + "|[" 
+                           + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])";
+                           
+    //this is a snippet which matches (AND CAPTURES!!) a direction.
+    //becomes  (north|east|south|west|[nsew]) in en.
+    //               <north   >   <east    >   <south   >   <west    >
+    QString dir = "(" + c[0] + "|" + c[1] + "|" + c[2] + "|" + c[3] + "|["
+                      + QString( c[0].at(0) ) + QString( c[2].at(0) ) // + <n> + <s>
+                      + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])"; // + <e> + <w>
+                      
+                      
+    //END STUFF
+    
+    //BEGIN REGEX2
+    // #2: Two numbers with directions, eg 74.2245 N 32.2434 W etc
+    // Or also 34 * W 12 * N etc
+    // <frac> = fractional part; <1coord> = 1st coord etc
+    //           <+ve/-ve><1coord ><decimal  ><frac><seperator    >
+    regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)\\s*[^\\d]*\\s*"
+    //           ^-----------cap(1)----------------^
+    //     <direction><sep ><+ve/-ve><2coord><decimal><frac>
+             + dir + ",?\\s*(-?\\+?\\d{1,3}" +  dec + "?\\d*)"
+    //       ^cap(2)^       ^-------------cap(3)------------^
+    //          <seperator    >  <direction>
+             + "\\s*[^\\d]*\\s*" + dir; // dir --> cap(4)
+    regex = QRegExp( regexstr );
+    if( input.contains( regex ) ) {
+        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        QString latdeg, londeg, latdir, londir;
+        
+        if( input.contains( QRegExp( latfirst ) ) ) {
+            qDebug() << "latitude comes first";
+            latdeg = regex.cap( 1 );
+            latdir = regex.cap( 2 );
+            londeg = regex.cap( 3 );
+            londir = regex.cap( 4 );
+        } else { 
+            qDebug() << "longitude comes first";
+            londeg = regex.cap( 1 );
+            londir = regex.cap( 2 );
+            latdeg = regex.cap( 3 );
+            latdir = regex.cap( 4 );
+        }
+        
+        if( latdir == c[2] ) //south
+            lat = latdeg.toDouble() * -1.0;
+        else //north
+            lat = latdeg.toDouble();
+            
+        if( londir == c[4] ) //west
+            lon = londeg.toDouble() * -1.0;
+        else // east
+            lon = londeg.toDouble();
+        
+        qDebug() << "Created lat / lon " << lat << lon;
+        
+        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
+        successful = true;
+        return coords;
+    }
+    //END REGEX2
+    
+    //BEGIN REGEX3
+    // #3: Sexagesimal
+    //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*
+    //         (north|east|south|west|[nsew]),?\\s*(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})
+    //         \\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
+    //           <degrees ><seperator    ><minutes ><seperator    >
+    regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
+    //           ^-cap(1)-^               ^-cap(2)-^
+    //           <seconds ><seperator    > <direction><seperator>
+    regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*" +   dir  + ",?\\s*";
+    //          ^-cap(3)-^                  ^cap(4)^
+    //           <degrees ><seperator    ><minutes ><seperator    >
+    regexstr += "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
+    //           ^-cap(5)-^               ^-cap(6)-^
+    //           <seconds ><seperator    >    <direction>
+    regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*"  +   dir;
+    //           ^-cap(6)-^                   ^sep(7)^
+    regex = QRegExp( regexstr );
+    if( input.contains( regex ) ) {
+        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        QString latdeg, londeg, latmin, lonmin, latsec, lonsec, latdir, londir;
+        
+        if( input.contains( QRegExp( latfirst ) ) ) {
+            qDebug() << "latitude comes first";
+            latdeg = regex.cap( 1 );
+            latmin = regex.cap( 2 );
+            latsec = regex.cap( 3 );
+            latdir = regex.cap( 4 );
+            londeg = regex.cap( 5 );
+            lonmin = regex.cap( 6 );
+            lonsec = regex.cap( 7 );
+            londir = regex.cap( 8 );
+        } else { 
+            qDebug() << "longitude comes first";
+            londeg = regex.cap( 1 );
+            lonmin = regex.cap( 2 );
+            lonsec = regex.cap( 3 );
+            londir = regex.cap( 4 );
+            latdeg = regex.cap( 5 );
+            latmin = regex.cap( 6 );
+            latsec = regex.cap( 7 );
+            latdir = regex.cap( 8 );
+        }
+        
+        if( latdir == c[2] ) { //south
+            lat = latdeg.toDouble() + latmin.toDouble() + latsec.toDouble();
+            lat *= -1.0;
+        } else { //north
+            lat = latdeg.toDouble() + latmin.toDouble() + latsec.toDouble();
+        }
+            
+        if( londir == c[4] ) { //west
+            lon = londeg.toDouble() + lonmin.toDouble() + lonsec.toDouble();
+            lon *= -1.0;
+        } else { // east
+            lon = londeg.toDouble() + lonmin.toDouble() + lonsec.toDouble();
+        }
+        qDebug() << "Created lat / lon " << lat << lon;
+        
+        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
+        successful = true;
+        return coords;
+    }
+    //END REGEX3
+    
+    //BEGIN REGEX4
+    // #4: Sexagesimal with minute precision
+    //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew]),?\\s*
+    //         (\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
+    //           <degrees ><seperator    ><minutes ><seperator    >
+    regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
+    //           ^-cap(1)-^               ^-cap(2)-^
+    //       <direction><seperator>
+             +   dir  + ",?\\s*"
+    //       ^-cap(3)-^
+    //           <degrees ><seperator    ><minutes ><seperator    >
+             +  "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
+    //           ^-cap(4)-^               ^-cap(5)-^
+             +   dir;
+    //         ^cap(6)^
+    regex = QRegExp( regexstr );
+    if( input.contains( regex ) ) {
+        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        QString latdeg, londeg, latmin, lonmin, latdir, londir;
+        
+        if( input.contains( QRegExp( latfirst ) ) ) {
+            qDebug() << "latitude comes first";
+            latdeg = regex.cap( 1 );
+            latmin = regex.cap( 2 );
+            latdir = regex.cap( 3 );
+            londeg = regex.cap( 4 );
+            lonmin = regex.cap( 5 );
+            londir = regex.cap( 6 );
+        } else { 
+            qDebug() << "longitude comes first";
+            londeg = regex.cap( 1 );
+            lonmin = regex.cap( 2 );
+            londir = regex.cap( 3 );
+            latdeg = regex.cap( 4 );
+            latmin = regex.cap( 5 );
+            latdir = regex.cap( 6 );
+        }
+        
+        if( latdir == c[2] ) { //south
+            lat = latdeg.toDouble() + latmin.toDouble();
+            lat *= -1.0;
+        } else { //north
+            lat = latdeg.toDouble() + latmin.toDouble();
+        }
+            
+        if( londir == c[4] ) { //west
+            lon = londeg.toDouble() + lonmin.toDouble();
+            lon *= -1.0;
+        } else { // east
+            lon = londeg.toDouble() + lonmin.toDouble();
+        }
+        qDebug() << "Created lat / lon " << lat << lon;
+        
+        GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
+        successful = true;
+        return coords;
+    }
+    //END REGEX4
+    
+    return GeoDataCoordinates();
+}
+
 
 QString GeoDataCoordinates::toString()
 {
