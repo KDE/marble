@@ -299,13 +299,13 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     // #2: Two numbers with directions, eg 74.2245 N 32.2434 W etc
     // Or also 34 * W 12 * N etc
     // <frac> = fractional part; <1coord> = 1st coord etc
-    //           <+ve/-ve><1coord ><decimal  ><frac><seperator    >
+    //           <+ve/-ve><1coord ><decimal  ><frac><separator    >
     regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)\\s*[^\\d]*\\s*"
     //           ^-----------cap(1)----------------^
     //     <direction><sep ><+ve/-ve><2coord><decimal><frac>
              + dir + ",?\\s*(-?\\+?\\d{1,3}" +  dec + "?\\d*)"
     //       ^cap(2)^       ^-------------cap(3)------------^
-    //          <seperator    >  <direction>
+    //          <separator    >  <direction>
              + "\\s*[^\\d]*\\s*" + dir; // dir --> cap(4)
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
@@ -349,16 +349,16 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*
     //         (north|east|south|west|[nsew]),?\\s*(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})
     //         \\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
-    //           <degrees ><seperator    ><minutes ><seperator    >
+    //           <degrees ><separator    ><minutes ><separator    >
     regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
     //           ^-cap(1)-^               ^-cap(2)-^
-    //           <seconds ><seperator    > <direction><seperator>
+    //           <seconds ><separator    > <direction><separator>
     regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*" +   dir  + ",?\\s*";
     //          ^-cap(3)-^                  ^cap(4)^
-    //           <degrees ><seperator    ><minutes ><seperator    >
+    //           <degrees ><separator    ><minutes ><separator    >
     regexstr += "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
     //           ^-cap(5)-^               ^-cap(6)-^
-    //           <seconds ><seperator    >    <direction>
+    //           <seconds ><separator    >    <direction>
     regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*"  +   dir;
     //           ^-cap(6)-^                   ^sep(7)^
     regex = QRegExp( regexstr );
@@ -413,13 +413,13 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     // #4: Sexagesimal with minute precision
     //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew]),?\\s*
     //         (\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
-    //           <degrees ><seperator    ><minutes ><seperator    >
+    //           <degrees ><separator    ><minutes ><separator    >
     regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
     //           ^-cap(1)-^               ^-cap(2)-^
-    //       <direction><seperator>
+    //       <direction><separator>
              +   dir  + ",?\\s*"
     //       ^-cap(3)-^
-    //           <degrees ><seperator    ><minutes ><seperator    >
+    //           <degrees ><separator    ><minutes ><separator    >
              +  "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
     //           ^-cap(4)-^               ^-cap(5)-^
              +   dir;
