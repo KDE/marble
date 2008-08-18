@@ -80,6 +80,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
 void MarbleRunnerManager::newText(QString text)
 {
     if( text != m_lastString ) {
+        m_lastString = text;
         qDebug() << "Creating new model";
         MarblePlacemarkModel *model = new MarblePlacemarkModel(0);
         emit modelChanged( model );
