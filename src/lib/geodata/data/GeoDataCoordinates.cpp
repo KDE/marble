@@ -29,7 +29,7 @@ namespace Marble
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
-GeoDataCoordinates::GeoDataCoordinates( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit, int _detail )
+GeoDataCoordinates::GeoDataCoordinates( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit, int _detail )
   : d( new GeoDataCoordinatesPrivate() )
 {
     d->m_altitude = _alt;
@@ -66,7 +66,7 @@ GeoDataCoordinates::~GeoDataCoordinates()
 #endif
 }
 
-void GeoDataCoordinates::set( double _lon, double _lat, double _alt, GeoDataCoordinates::Unit unit )
+void GeoDataCoordinates::set( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit )
 {
     d->m_altitude = _alt;
     switch( unit ){
@@ -83,7 +83,7 @@ void GeoDataCoordinates::set( double _lon, double _lat, double _alt, GeoDataCoor
     }
 }
 
-void GeoDataCoordinates::geoCoordinates( double& lon, double& lat, 
+void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, 
                                GeoDataCoordinates::Unit unit ) const
 {
     switch ( unit ) 
@@ -109,7 +109,7 @@ void GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Notation notati
     s_notation = notation;
 }
 
-double GeoDataCoordinates::normalizeLon( double lon )
+qreal GeoDataCoordinates::normalizeLon( qreal lon )
 {
     if ( lon > +M_PI ) {
         int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
@@ -123,11 +123,11 @@ double GeoDataCoordinates::normalizeLon( double lon )
     return lon;
 }
 
-double GeoDataCoordinates::normalizeLat( double lat )
+qreal GeoDataCoordinates::normalizeLat( qreal lat )
 {
     if ( lat > ( +M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
-        double temp;
+        qreal temp;
         if( cycles == 0 ) { // pi/2 < lat < pi
             temp = M_PI - lat;
         } else {
@@ -143,7 +143,7 @@ double GeoDataCoordinates::normalizeLat( double lat )
     } 
     if ( lat < ( -M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
-        double temp;
+        qreal temp;
         if( cycles == 0 ) { 
             temp = -M_PI - lat;
         } else {
@@ -160,7 +160,7 @@ double GeoDataCoordinates::normalizeLat( double lat )
     return lat;
 }
 
-void GeoDataCoordinates::normalizeLonLat( double &lon, double &lat )
+void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
 {
     if ( lon > +M_PI ) {
         int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
@@ -173,7 +173,7 @@ void GeoDataCoordinates::normalizeLonLat( double &lon, double &lat )
 
     if ( lat > ( +M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
-        double temp;
+        qreal temp;
         if( cycles == 0 ) { // pi/2 < lat < pi
             temp = M_PI - lat;
         } else {
@@ -194,7 +194,7 @@ void GeoDataCoordinates::normalizeLonLat( double &lon, double &lat )
     } 
     if ( lat < ( -M_PI / 2.0 ) ) {
         int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
-        double temp;
+        qreal temp;
         if( cycles == 0 ) { 
             temp = -M_PI - lat;
         } else {
@@ -229,7 +229,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     input = input.trimmed(); //remove front spaces
     qDebug() << "Creating GeoDataCoordinates from string " << input;
     
-    double lat, lon;
+    qreal lat, lon;
     
     // c is for cardinal directions and is short which saves space in regexps
     QStringList c; 
@@ -482,7 +482,7 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )
     QString nsstring = ( d->m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
     QString westring = ( d->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
 
-    double lat, lon;
+    qreal lat, lon;
     lon = fabs( d->m_lon * RAD2DEG );
     lat = fabs( d->m_lat * RAD2DEG );
 
@@ -490,12 +490,12 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )
     {
         int londeg = (int) lon;
         int lonmin = (int) ( 60 * (lon - londeg) );
-        int lonsec = (int) ( 3600 * (lon - londeg - ((double)(lonmin) / 60) ) );
+        int lonsec = (int) ( 3600 * (lon - londeg - ((qreal)(lonmin) / 60) ) );
 
 
         int latdeg = (int) lat;
         int latmin = (int) ( 60 * (lat - latdeg) );
-        int latsec = (int) ( 3600 * (lat - latdeg - ((double)(latmin) / 60) ) );
+        int latsec = (int) ( 3600 * (lat - latdeg - ((qreal)(latmin) / 60) ) );
 
         return QString("%1\xb0 %2\' %3\"%4, %5\xb0 %6\' %7\"%8")
         .arg(londeg, 3, 10, QChar(' ') ).arg(lonmin, 2, 10, QChar('0') )
@@ -517,10 +517,10 @@ bool GeoDataCoordinates::operator==( const GeoDataCoordinates &test ) const
     // Therefore we compare the Lon-Lat coordinates instead 
     // of the Position-Quaternion.
 
-    double lonTest;
-    double latTest;
-    double lonThis;
-    double latThis;
+    qreal lonTest;
+    qreal latTest;
+    qreal lonThis;
+    qreal latThis;
     
     geoCoordinates( lonThis, latThis );
     test.geoCoordinates( lonTest, latTest );
@@ -529,12 +529,12 @@ bool GeoDataCoordinates::operator==( const GeoDataCoordinates &test ) const
              && latTest == latThis );
 }
 
-void GeoDataCoordinates::setAltitude( const double altitude )
+void GeoDataCoordinates::setAltitude( const qreal altitude )
 {
     d->m_altitude = altitude;
 }
 
-double GeoDataCoordinates::altitude() const
+qreal GeoDataCoordinates::altitude() const
 {
     return d->m_altitude;
 }

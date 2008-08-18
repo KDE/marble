@@ -35,10 +35,10 @@ class BoundingBox
     void  init();
 
  private:
-    double m_topX;
-    double m_bottomX;
-    double m_topY;
-    double m_bottomY;
+    qreal m_topX;
+    qreal m_bottomX;
+    qreal m_topY;
+    qreal m_bottomY;
 
     bool m_dateLine;
     // bool m_valid;

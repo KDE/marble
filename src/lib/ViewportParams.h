@@ -76,7 +76,7 @@ class MARBLE_EXPORT ViewportParams
     void setBoundingBox( const BoundingBox & );
 
     // Other functions
-    void centerCoordinates( double &centerLon, double &centerLat ) const;
+    void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;
 
     bool  mapCoversViewport() const;
 

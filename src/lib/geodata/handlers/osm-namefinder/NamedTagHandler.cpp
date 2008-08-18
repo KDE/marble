@@ -61,12 +61,12 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     named->setId( id );
 
     // attributes lat and lon
-    double lat = 0.0;
+    qreal lat = 0.0;
     const QString latStr = parser.attribute( attr_lat ).trimmed();
     if ( !latStr.isEmpty() )
         lat = latStr.toDouble();
 
-    double lon = 0.0;
+    qreal lon = 0.0;
     const QString lonStr = parser.attribute( attr_lon ).trimmed();
     if ( !lonStr.isEmpty() )
         lon = lonStr.toDouble();

@@ -170,7 +170,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void projectionSelected( Projection );
     
     void gpsInputDisabled( bool );
-    void gpsPositionChanged( double lat, double lon);
+    void gpsPositionChanged( qreal lat, qreal lon);
     void updateGps();
    
  public Q_SLOTS:
@@ -190,7 +190,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void changeZoom(int zoom);
     void disableGpsInput( bool );
-    void receiveGpsCoordinates( double, double, GeoDataCoordinates::Unit );
+    void receiveGpsCoordinates( qreal, qreal, GeoDataCoordinates::Unit );
     void enableFileViewActions();
     
     /**

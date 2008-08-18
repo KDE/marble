@@ -85,15 +85,15 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Scanline based algorithm to texture map a sphere
 
     // Initialize needed variables:
-    double  lon = 0.0;
-    double  lat = 0.0;
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
 
-    const double  inverseRadius = 1.0 / (double)(radius);
+    const qreal  inverseRadius = 1.0 / (qreal)(radius);
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-    m_toTileCoordinatesLon = (double)(globalWidth() / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (double)(globalHeight() / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (qreal)(globalWidth() / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (qreal)(globalHeight() / 2 - m_tilePosY);
 
     // Reset backend
     m_tileLoader->resetTilehash();
@@ -106,10 +106,10 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         m_n = 1;    // Don't interpolate for print quality.
     }
 
-    m_nInverse = 1.0 / (double)(m_n);
+    m_nInverse = 1.0 / (qreal)(m_n);
 
     // Calculate north pole position to decrease pole distortion later on
-    Quaternion northPole( 0.0, (double)( M_PI * 0.5 ) );
+    Quaternion northPole( 0.0, (qreal)( M_PI * 0.5 ) );
 
     northPole.rotateAroundAxis( viewParams->planetAxis().inverse() );
 
@@ -132,11 +132,11 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     for ( int y = yTop; y < yBottom ; ++y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        const double qy = inverseRadius * (double)( m_imageHeight / 2 - y );
-        const double qr = 1.0 - qy * qy;
+        const qreal qy = inverseRadius * (qreal)( m_imageHeight / 2 - y );
+        const qreal qr = 1.0 - qy * qy;
 
         // rx is the radius component in x direction
-        int rx = (int)sqrt( (double)( radius * radius 
+        int rx = (int)sqrt( (qreal)( radius * radius 
                                       - ( ( y - m_imageHeight / 2 )
                                           * ( y - m_imageHeight / 2 ) ) ) );
 
@@ -209,10 +209,10 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
-            const double qx = (double)( x - m_imageWidth / 2 ) * inverseRadius;
+            const qreal qx = (qreal)( x - m_imageWidth / 2 ) * inverseRadius;
 
-            const double qr2z = qr - qx * qx;
-            const double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+            const qreal qr2z = qr - qx * qx;
+            const qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
             // Create Quaternion from vector coordinates and rotate it
             // around globe axis
@@ -272,21 +272,21 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 // This method will do by far most of the calculations for the 
 // texturemapping, so we move towards integer math to improve speed.
 
-void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
-						      const double& lat, QRgb *scanLine, bool smooth )
+void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
+						      const qreal& lat, QRgb *scanLine, bool smooth )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
-    double stepLat = lat - m_prevLat;
-    double stepLon = lon - m_prevLon;
+    qreal stepLat = lat - m_prevLat;
+    qreal stepLon = lon - m_prevLon;
 
     // As long as the distance is smaller than 180 deg we can assume that 
     // we didn't cross the dateline.
 
     if ( fabs(stepLon) < M_PI ) {
         if ( smooth ) {
-            const double itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
-            const double itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
+            const qreal itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
+            const qreal itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
     
             m_prevLon = rad2PixelX( m_prevLon );
             m_prevLat = rad2PixelY( m_prevLat );
@@ -295,8 +295,8 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
             // AbstractScanlineTextureMapper::pixelValue(...) here and 
             // calculate the performance critical issues via integers
     
-            double itLon = m_prevLon + m_toTileCoordinatesLon;
-            double itLat = m_prevLat + m_toTileCoordinatesLat;
+            qreal itLon = m_prevLon + m_toTileCoordinatesLon;
+            qreal itLat = m_prevLat + m_toTileCoordinatesLat;
     
             for ( int j=1; j < m_n; ++j ) {
                 m_posX = itLon + itStepLon * j;
@@ -387,12 +387,12 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const double& lon,
         // ... and vice versa: from west to east.
 
         else { 
-            double curStepLon = lon - m_n * stepLon;
+            qreal curStepLon = lon - m_n * stepLon;
 
             for ( int j = 1; j < m_n; ++j ) {
                 m_prevLat += stepLat;
                 curStepLon += stepLon;
-                double  evalLon = curStepLon;
+                qreal  evalLon = curStepLon;
                 if ( curStepLon <= -M_PI )
                     evalLon += TWOPI;
                 pixelValue( evalLon, m_prevLat, scanLine, smooth );

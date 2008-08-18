@@ -54,7 +54,7 @@ class AbstractProjection
 
     virtual ~AbstractProjection();
 
-    virtual double  maxLat()  const        { return m_maxLat; }
+    virtual qreal  maxLat()  const        { return m_maxLat; }
     virtual bool    traversableMaxLat()  const        { return m_traversableMaxLat; }
 
     virtual bool    repeatX() const        { return m_repeatX; }
@@ -79,7 +79,7 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const double lon, const double lat,
+    virtual bool screenCoordinates( const qreal lon, const qreal lat,
                                     const ViewportParams *viewport,
                                     int& x, int& y,
 				    CoordinateType coordType = originalCoordinates ) = 0;
@@ -146,7 +146,7 @@ class AbstractProjection
      */
     virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
-                                 double& lon, double& lat,
+                                 qreal& lon, qreal& lat,
                                  Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
 
     /**
@@ -176,14 +176,14 @@ class AbstractProjection
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
-    double  m_maxLat;               // The max latitude.  Not always 90 degrees.
-    double  m_traversableMaxLat;    // Whether it's possible to center beyond maxLat.
+    qreal  m_maxLat;               // The max latitude.  Not always 90 degrees.
+    qreal  m_traversableMaxLat;    // Whether it's possible to center beyond maxLat.
     bool    m_repeatX;              // Map repeated in X direction.
 
-    void coordinateExtremes( double lon, double lat, 
-                             double &westLon, double &eastLon,
-                             double &otherWestLon, double &otherEastLon,
-                             double &northLat, double &southLat );
+    void coordinateExtremes( qreal lon, qreal lat, 
+                             qreal &westLon, qreal &eastLon,
+                             qreal &otherWestLon, qreal &otherEastLon,
+                             qreal &northLat, qreal &southLat );
 };
 
 }

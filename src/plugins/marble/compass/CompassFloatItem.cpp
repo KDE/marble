@@ -125,8 +125,8 @@ bool CompassFloatItem ::renderFloatItem( GeoPainter *painter,
     QBrush outlinebrush( pen().color() );
 
     QPainterPath   outlinepath;
-    const QPointF  baseline( 0.5 * (double)( compassRect.width() - fontwidth ),
-                             (double)(fontheight) + 2.0 );
+    const QPointF  baseline( 0.5 * (qreal)( compassRect.width() - fontwidth ),
+                             (qreal)(fontheight) + 2.0 );
 
     outlinepath.addText( baseline, font(), dirstr );
 

@@ -29,7 +29,7 @@ class RouteContainer : public virtual AbstractLayerContainer
      */
     /*
      virtual void draw( ClipPainter *painter, 
-                        const QSize &canvasSize, double radius,
+                        const QSize &canvasSize, qreal radius,
                         Quaternion invRotAxis );*/
     
      virtual void draw( ClipPainter *painter, 

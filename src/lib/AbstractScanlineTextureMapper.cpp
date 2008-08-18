@@ -96,20 +96,20 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
     // As our tile resolution doubles with each level we calculate
     // the tile level from tilesize and the globe radius via log(2)
 
-    double  linearLevel = ( 2.0 * (double)( radius )
-			    / (double) ( m_tileLoader->tileWidth() ) );
+    qreal  linearLevel = ( 2.0 * (qreal)( radius )
+			    / (qreal) ( m_tileLoader->tileWidth() ) );
     int     tileLevel   = 0;
 
     if ( linearLevel < 1.0 )
         linearLevel = 1.0; // Dirty fix for invalid entry linearLevel
 
-    double tileLevelF = log( linearLevel ) / log( 2.0 ) + 1.0;
+    qreal tileLevelF = log( linearLevel ) / log( 2.0 ) + 1.0;
     tileLevel = (int)( tileLevelF );
 
 //    qDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
-    double tileCol = 0.0; 
-    double tileRow = 0.0;
+    qreal tileCol = 0.0; 
+    qreal tileRow = 0.0;
 
     if (    tileLevelF > tileLevel + 0.3 
          && m_preloadTileLevel != tileLevel + 1
@@ -147,9 +147,9 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 
 
 void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams, 
-    const int tileLevel, double& tileCol, double& tileRow )
+    const int tileLevel, qreal& tileCol, qreal& tileRow )
 {
-    double centerLon, centerLat;
+    qreal centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
     tileCol = TileLoaderHelper::levelToColumn( m_tileLoader->textureLayer()->levelZeroColumns(),
@@ -168,9 +168,9 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     m_tileLevel = tileLevel;
 
     m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
-    m_normGlobalWidth = (double)( m_globalWidth / ( 2 * M_PI ) );
+    m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
     m_globalHeight = m_tileLoader->globalHeight( m_tileLevel );
-    m_normGlobalHeight = (double)( m_globalHeight /  M_PI );
+    m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
 
     m_maxGlobalX = m_globalWidth  - 1;
     m_maxGlobalY = m_globalHeight - 1;
@@ -180,8 +180,8 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     // in that coordinate system. In total this equals a coordinate 
     // transformation to tile coordinates.
   
-    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
 }
 
 
@@ -194,13 +194,13 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
                       + m_imageHeight * m_imageHeight / 4 );
 }
 
-void AbstractScanlineTextureMapper::pixelValue(const double& lon,
-                                               const double& lat, 
+void AbstractScanlineTextureMapper::pixelValue(const qreal& lon,
+                                               const qreal& lat, 
                                                QRgb* scanLine,
                                                bool smooth )
 {
     // The same method using integers performs about 33% faster.
-    // However we need the double version to create the high quality mode.
+    // However we need the qreal version to create the high quality mode.
 
     if ( smooth ) {
         // Convert the lon and lat coordinates of the position on the scanline
@@ -214,9 +214,9 @@ void AbstractScanlineTextureMapper::pixelValue(const double& lon,
         // same tile. However at the tile border we might "fall off". If that 
         // happens we need to find out the next tile that needs to be loaded.
     
-        if ( m_posX  >= (double)( m_tileLoader->tileWidth() ) 
+        if ( m_posX  >= (qreal)( m_tileLoader->tileWidth() ) 
             || m_posX < 0.0
-            || m_posY >= (double)( m_tileLoader->tileHeight() )
+            || m_posY >= (qreal)( m_tileLoader->tileHeight() )
             || m_posY < 0.0 )
         {
             nextTile( m_posX, m_posY );
@@ -276,15 +276,15 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
-    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
     posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileLoader->tileHeight();
-    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
 }
 
-void AbstractScanlineTextureMapper::nextTile( double &posX, double &posY )
+void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
 {
     // Move from tile coordinates to global texture coordinates 
     // ( with origin in upper left corner, measured in pixel) 
@@ -311,11 +311,11 @@ void AbstractScanlineTextureMapper::nextTile( double &posX, double &posY )
     // ( origin upper left, measured in pixels )
 
     m_tilePosX = tileCol * m_tileLoader->tileWidth();
-    m_toTileCoordinatesLon = (double)(m_globalWidth / 2 - m_tilePosX);
+    m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
     posX = lon - m_tilePosX;
 
     m_tilePosY = tileRow * m_tileLoader->tileHeight();
-    m_toTileCoordinatesLat = (double)(m_globalHeight / 2 - m_tilePosY);
+    m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
 }
 

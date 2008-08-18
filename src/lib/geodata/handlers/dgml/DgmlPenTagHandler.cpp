@@ -54,7 +54,7 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
 
     QString color = parser.attribute(dgmlAttr_color).trimmed();
     QString style = parser.attribute(dgmlAttr_style).toLower().trimmed();
-    double  width = parser.attribute(dgmlAttr_width).toDouble();
+    qreal  width = parser.attribute(dgmlAttr_width).toDouble();
 
     GeoSceneVector *vector = 0;
     QPen pen;

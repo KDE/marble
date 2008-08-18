@@ -102,11 +102,11 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             || viewParams->projection() == Mercator )
         {
             // Calculate translation of center point
-            double  centerLon;
-            double  centerLat;
+            qreal  centerLon;
+            qreal  centerLat;
             viewParams->centerCoordinates( centerLon, centerLat );
 
-            const float rad2Pixel = (double)( 2 * radius ) / M_PI;
+            const float rad2Pixel = (qreal)( 2 * radius ) / M_PI;
             if ( viewParams->projection() == Equirectangular ) {
                 int yCenterOffset = (int)( centerLat * rad2Pixel );
                 yTop = ( imgry - radius + yCenterOffset < 0)? 0 : imgry - radius + yCenterOffset;
@@ -158,7 +158,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     }
                 }
                 else {
-                    double c = 1.0 / 255.0;
+                    qreal c = 1.0 / 255.0;
 
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
 
@@ -201,7 +201,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
         for ( int y = yTop; y < yBottom; ++y ) {
             const int  dy = imgry - y;
-            int  rx = (int)sqrt( (double)( radius * radius - dy * dy ) );
+            int  rx = (int)sqrt( (qreal)( radius * radius - dy * dy ) );
             int  xLeft  = 0; 
             int  xRight = imgwidth;
 
@@ -247,7 +247,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                     }
                 }
                 else {
-                    double c = 1.0 / 255.0;
+                    qreal c = 1.0 / 255.0;
 
                     if ( qRed( *coastData ) != 0 && qGreen( *coastData ) == 0) {
 

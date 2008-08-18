@@ -101,7 +101,7 @@ class MARBLE_EXPORT ViewParams
     Quaternion planetAxis() const;
     void setPlanetAxis(const Quaternion &newAxis);
 
-    void centerCoordinates( double &centerLon, double &centerLat );
+    void centerCoordinates( qreal &centerLon, qreal &centerLat );
 
     QImage * canvasImage() const;
     void setCanvasImage( QImage * const );

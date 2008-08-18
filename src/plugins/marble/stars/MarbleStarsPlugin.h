@@ -36,14 +36,14 @@ class StarPoint {
      * @param  mag
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    StarPoint(double rect, double decl, double mag) {
+    StarPoint(qreal rect, qreal decl, qreal mag) {
         m_q = Quaternion( rect, decl );
         m_mag = mag;
     }
 
     ~StarPoint(){}
 
-    double magnitude() const {
+    qreal magnitude() const {
         return m_mag;
     }
 
@@ -52,7 +52,7 @@ class StarPoint {
     }
 
  private:
-    double      m_mag;
+    qreal      m_mag;
     Quaternion  m_q;
 };
 
@@ -93,7 +93,7 @@ class MarbleStarsPlugin : public MarbleRenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     // sidereal time in hours:
-    double siderealTime( const QDateTime& );
+    qreal siderealTime( const QDateTime& );
 
  private:
     QVector<StarPoint> m_stars;

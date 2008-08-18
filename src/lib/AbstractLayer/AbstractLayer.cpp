@@ -39,7 +39,7 @@ AbstractLayer::~AbstractLayer()
 }
 
 
-bool AbstractLayer::getPixelPosFromGeoDataCoordinates( double _lon, double _lat,
+bool AbstractLayer::getPixelPosFromGeoDataCoordinates( qreal _lon, qreal _lat,
                                              const QSize &screenSize,
                                              ViewParams *viewParams,
                                              QPoint *point)
@@ -116,14 +116,14 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
     }
 }
 
-double AbstractLayer::distance ( const QPoint &a, const QPoint &b )
+qreal AbstractLayer::distance ( const QPoint &a, const QPoint &b )
 {
     return distance( QPointF( a.x(), a.y() ),
                      QPointF( b.x(), b.y() ) );
 
 }
 
-double AbstractLayer::distance ( const QPointF &a, const QPointF &b )
+qreal AbstractLayer::distance ( const QPointF &a, const QPointF &b )
 {
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );

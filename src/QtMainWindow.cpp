@@ -282,8 +282,8 @@ void MainWindow::showSideBar( bool isChecked )
 
 void MainWindow::copyCoordinates()
 {
-    double lon = m_controlView->marbleWidget()->centerLongitude();
-    double lat = m_controlView->marbleWidget()->centerLatitude();
+    qreal lon = m_controlView->marbleWidget()->centerLongitude();
+    qreal lat = m_controlView->marbleWidget()->centerLatitude();
 
     QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ).toString();
     QClipboard  *clipboard = QApplication::clipboard();
@@ -496,8 +496,8 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
-         double homeLon = 0;
-         double homeLat = 0;
+         qreal homeLon = 0;
+         qreal homeLat = 0;
          int homeZoom = 0;
          m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
          QString  mapTheme = m_controlView->marbleWidget()->mapThemeId();

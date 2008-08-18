@@ -39,18 +39,18 @@ namespace Marble
 class MARBLE_EXPORT /* QDESIGNER_WIDGET_EXPORT*/ LatLonEdit : public QWidget
 {
 	Q_OBJECT
-	//Q_PROPERTY( double m_value READ value WRITE setValue )
+	//Q_PROPERTY( qreal m_value READ value WRITE setValue )
 	//Q_PROPERTY( int m_dimension READ dimension WRITE setDimension )
 public:
 	explicit LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
-	double value();
+	qreal value();
 	Marble::Dimension dimension();
 public Q_SLOTS:
-	void setValue(double newvalue);
+	void setValue(qreal newvalue);
 	void setDimension( Marble::Dimension dimension );
 Q_SIGNALS:
 	void dimensionChanged( Marble::Dimension dimension );
-	void valueChanged( double value );
+	void valueChanged( qreal value );
 private Q_SLOTS:
 	// changes value based on combobox
 	void comboBoxChanged( int index );
@@ -77,7 +77,7 @@ private:
 	QLabel *m_minutesLabel;
 	QLabel *m_secondsLabel;
 
-	double m_value;
+	qreal m_value;
 };
 
 }

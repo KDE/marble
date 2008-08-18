@@ -75,13 +75,13 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Return the coordinate of the placemark as @p longitude
      * and @p latitude.
      */
-    void coordinate( double &longitude, double &latitude, double &altitude );
+    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude );
 
     /**
      * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
-    void setCoordinate( double longitude, double latitude, double altitude = 0 );
+    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0 );
     
     /**
     * Set the coordinate of the placemark with an @p GeoDataPoint.
@@ -105,12 +105,12 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * move this into the GeoDataArea class which will get 
      * inherited from GeoDataPlaceMark (or GeoDataFeature). 
      */
-    double area() const;
+    qreal area() const;
 
     /**
      * Set the area size of the feature in square km.
      */
-    void setArea( double area );
+    void setArea( qreal area );
 
     /**
      * Return the population of the placemark.

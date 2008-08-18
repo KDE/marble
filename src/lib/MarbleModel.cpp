@@ -501,7 +501,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     // Paint the map on the Widget
 //    QTime t;
 //    t.start();
-    int radius = (int)(1.05 * (double)(viewParams->radius()));
+    int radius = (int)(1.05 * (qreal)(viewParams->radius()));
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         if ( viewParams->projection() == Spherical ) {

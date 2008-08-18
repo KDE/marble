@@ -33,10 +33,10 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * This constructor sets all of the pointers to 0 and allows the 
      * AbstractLayerData constructor make a geopoint from the latitude
      * and longitude.
-     * @param lat double representation of latitude
-     * @param lon double representation of longitude
+     * @param lat qreal representation of latitude
+     * @param lon qreal representation of longitude
      */
-    Waypoint( double lat, double lon );
+    Waypoint( qreal lat, qreal lon );
     
     /**
      * @brief Constructor froim a geopoint object
@@ -50,7 +50,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     void draw ( ClipPainter *painter, const QPoint &point ){}
 
     void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, double radius,
+                      const QSize &canvasSize, qreal radius,
                       Quaternion invRotAxis){}
     */
 
@@ -74,12 +74,12 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_elevation getter
      */
-    double elevation() const;
+    qreal elevation() const;
     
     /**
      * @brief m_elevation setter
      */
-    void setElevation( const double &elevation );
+    void setElevation( const qreal &elevation );
     
     /**
      * @brief m_time getter
@@ -94,22 +94,22 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_magVariation getter
      */
-    double magVariation() const;
+    qreal magVariation() const;
     
     /**
      * @brief m_magVariation setter
      */
-    void setMagVariation( const double &magVar );
+    void setMagVariation( const qreal &magVar );
     
     /**
      * @brief m_geoIdHeight getter
      */
-    double geoIdHeight() const;
+    qreal geoIdHeight() const;
     
     /**
      * @brief m_geoIdHeight setter
      */
-    void setGeoIdHeight( const double &geoHeightId );
+    void setGeoIdHeight( const qreal &geoHeightId );
     
     /**
      * @brief m_gpsSymbol getter
@@ -154,42 +154,42 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief m_hdop getter
      */
-    double hdop() const;
+    qreal hdop() const;
     
     /**
      * @brief m_hdop setter
      */
-    void setHdop( const double &hdop );
+    void setHdop( const qreal &hdop );
     
     /**
      * @brief m_vdop getter
      */
-    double vdop() const;
+    qreal vdop() const;
     
     /**
      * @brief m_vdop setter
      */
-    void setVdop( const double &vdop );
+    void setVdop( const qreal &vdop );
     
     /**
      * @brief m_pdop getter
      */
-    double pdop() const;
+    qreal pdop() const;
     
     /**
      * @brief m_pdop setter
      */
-    void setPdop( const double &pdop );
+    void setPdop( const qreal &pdop );
     
     /**
      * @brief m_ageOfGpsData getter
      */
-    double ageOfGpsData() const;
+    qreal ageOfGpsData() const;
     
     /**
      * @brief m_ageOfGpsData setter
      */
-    void setAgeOfGpsData( const double &age );
+    void setAgeOfGpsData( const qreal &age );
     
     /**
      * @brief m_dgpsid getter
@@ -205,7 +205,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     /**
      * @brief Elevation (in meters) of the waypoint
      */
-    double m_elevation;
+    qreal m_elevation;
     
     /**
      * @brief Timestamp on waypoint creation
@@ -217,14 +217,14 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * 
      * this is a value where 0.0 <= value <= 360.0
      */
-    double m_magVariation;
+    qreal m_magVariation;
     
     /**
      * Quote from GPX schema:
      * Height (in meters) of geoid (mean sea level) above WGS84 earth
      * ellipsoid. As defined in NMEA GGA message.
      */
-    double m_geoIdHeight;
+    qreal m_geoIdHeight;
     
     /**
      * @brief Text representation of GPS symbol name.
@@ -257,22 +257,22 @@ class Waypoint : public AbstractLayerData, public GpsElement
      * positional accuracy due to the wider angular separation 
      * between the satellites used to calculate a GPS unit's position
      */
-    double m_hdop;
+    qreal m_hdop;
     
     /**
      * @brief Vertical dilution of presision.
      */
-    double m_vdop;
+    qreal m_vdop;
     
     /**
      * @brief Position dilution of precision.
      */
-    double m_pdop;
+    qreal m_pdop;
     
     /**
      * @brief Number of seconds since last DGPS update.
      */
-    double m_ageOfGpsData;
+    qreal m_ageOfGpsData;
     
     /**
      * @brief ID of DGPS station used in differential correction.

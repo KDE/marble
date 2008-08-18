@@ -281,8 +281,8 @@ void MarblePart::copyMap()
 
 void MarblePart::copyCoordinates()
 {
-    double lon = m_controlView->marbleWidget()->centerLongitude();
-    double lat = m_controlView->marbleWidget()->centerLatitude();
+    qreal lon = m_controlView->marbleWidget()->centerLongitude();
+    qreal lat = m_controlView->marbleWidget()->centerLatitude();
 
     QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Degree ).toString();
     QClipboard  *clipboard = QApplication::clipboard();
@@ -351,8 +351,8 @@ void MarblePart::readSettings()
 
 void MarblePart::writeSettings()
 {
-    double  quitLon = m_controlView->marbleWidget()->centerLongitude();
-    double  quitLat = m_controlView->marbleWidget()->centerLatitude();
+    qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
+    qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
     int     quitZoom = m_controlView->marbleWidget()->zoom();
 
     // Get the 'home' values from the widget and store them in the settings.
@@ -360,8 +360,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setQuitLatitude( quitLat );
     MarbleSettings::setQuitZoom( quitZoom );
 
-    double  homeLon = 0;
-    double  homeLat = 0;
+    qreal  homeLon = 0;
+    qreal  homeLat = 0;
     int     homeZoom = 0;
 
     // Get the 'home' values from the widget and store them in the settings.

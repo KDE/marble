@@ -33,10 +33,10 @@ MarblePhysics::~MarblePhysics()
 
 GeoDataCoordinates MarblePhysics::suggestedPosition() const
 {
-    double lon, lat;
+    qreal lon, lat;
     Quaternion  itpos;
 
-    double t = m_timeLine->currentValue();
+    qreal t = m_timeLine->currentValue();
 
     // Spherical interpolation for current position between source position
     // and target position
@@ -45,17 +45,17 @@ GeoDataCoordinates MarblePhysics::suggestedPosition() const
 
     // Purely cinematic approach to calculate the jump path
 
-    double g = m_sourcePosition.altitude(); // Initial altitude
-    double h = 3000.0;                      // Jump height
+    qreal g = m_sourcePosition.altitude(); // Initial altitude
+    qreal h = 3000.0;                      // Jump height
 
     // Parameters for the parabolic function that has the maximum at
     // the point H ( 0.5 * m_jumpDuration, g + h )
-    double a = - h / ( (double)( 0.25 * m_jumpDuration * m_jumpDuration ) );
-    double b = 2.0 * h / (double)( 0.5 * m_jumpDuration );
+    qreal a = - h / ( (qreal)( 0.25 * m_jumpDuration * m_jumpDuration ) );
+    qreal b = 2.0 * h / (qreal)( 0.5 * m_jumpDuration );
 
-    double x = (double)(m_jumpDuration ) * t;
+    qreal x = (qreal)(m_jumpDuration ) * t;
 
-    double y = a * x * x + b * x + g;       // Parabolic function
+    qreal y = a * x * x + b * x + g;       // Parabolic function
 
     return GeoDataCoordinates( lon, lat, y );
 }

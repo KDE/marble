@@ -81,7 +81,7 @@ bool MarbleOverviewMap::isInitialized () const
 bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
 {
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
-    double centerLon, centerLat;
+    qreal centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     if ( m_latLonAltBox == latLonAltBox 
@@ -118,29 +118,29 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
 
     // Now draw the latitude longitude bounding box
-    double xWest = mapRect.width() / 2.0 
+    qreal xWest = mapRect.width() / 2.0 
                     + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.west();
-    double xEast = mapRect.width() / 2.0
+    qreal xEast = mapRect.width() / 2.0
                     + mapRect.width() / ( 2.0 * M_PI ) * m_latLonAltBox.east();
-    double xNorth = mapRect.height() / 2.0 
+    qreal xNorth = mapRect.height() / 2.0 
                     - mapRect.height() / M_PI * m_latLonAltBox.north();
-    double xSouth = mapRect.height() / 2.0
+    qreal xSouth = mapRect.height() / 2.0
                     - mapRect.height() / M_PI * m_latLonAltBox.south();
 
-    double lon, lat;
+    qreal lon, lat;
     viewport->centerCoordinates( lon, lat );
     GeoDataPoint::normalizeLonLat( lon, lat );
-    double x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
-    double y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
+    qreal x = mapRect.width() / 2.0 + mapRect.width() / ( 2.0 * M_PI ) * lon;
+    qreal y = mapRect.height() / 2.0 - mapRect.height() / M_PI * lat;
 
     painter->setPen( QPen( Qt::white ) );
     painter->setBrush( QBrush( Qt::transparent ) );
     painter->setRenderHint( QPainter::Antialiasing, false );
 
-    double boxWidth  = xEast  - xWest;
-    double boxHeight = xSouth - xNorth;
+    qreal boxWidth  = xEast  - xWest;
+    qreal boxHeight = xSouth - xNorth;
 
-    double minBoxSize = 2.0;
+    qreal minBoxSize = 2.0;
     if ( boxHeight < minBoxSize ) boxHeight = minBoxSize;
 
     if ( m_latLonAltBox.west() <= m_latLonAltBox.east() ) {
@@ -171,7 +171,7 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     painter->setPen( QPen( Qt::white ) );
     painter->setBrush( QBrush( Qt::white ) );
 
-    double circleRadius = 2.5;
+    qreal circleRadius = 2.5;
     painter->setRenderHint( QPainter::Antialiasing, true );
     painter->drawEllipse( QRectF( x - circleRadius, y - circleRadius , 2 * circleRadius, 2 * circleRadius ) );
 
@@ -206,8 +206,8 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
                 QPointF pos = event->pos() - floatItemRect.topLeft() 
                     - QPointF(padding(),padding());
 
-                double lon = ( pos.x() - mapRect.width() / 2.0 ) / mapRect.width() * 360.0 ;
-                double lat = ( mapRect.height() / 2.0 - pos.y() ) / mapRect.height() * 180.0;
+                qreal lon = ( pos.x() - mapRect.width() / 2.0 ) / mapRect.width() * 360.0 ;
+                qreal lat = ( mapRect.height() / 2.0 - pos.y() ) / mapRect.height() * 180.0;
                 widget->centerOn(lon,lat,true);
 
                 return true;

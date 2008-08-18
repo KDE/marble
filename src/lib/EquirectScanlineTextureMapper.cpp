@@ -47,14 +47,14 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     //const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
 
     // Initialize needed variables:
-    double  lon = 0.0;
-    double  lat = 0.0;
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
 
-    m_toTileCoordinatesLon = (double)(globalWidth() / 2 - m_tilePosX);
-    m_toTileCoordinatesLat = (double)(globalHeight() / 2 - m_tilePosY);
+    m_toTileCoordinatesLon = (qreal)(globalWidth() / 2 - m_tilePosX);
+    m_toTileCoordinatesLat = (qreal)(globalHeight() / 2 - m_tilePosY);
 
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
@@ -68,7 +68,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     selectTileLevel( viewParams );
 
     // Calculate translation of center point
-    double centerLon, centerLat;
+    qreal centerLon, centerLat;
 
     viewParams->centerCoordinates( centerLon, centerLat );
 
@@ -88,7 +88,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
 
-    const double pixel2Rad = 1.0/rad2Pixel;
+    const qreal pixel2Rad = 1.0/rad2Pixel;
 
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {

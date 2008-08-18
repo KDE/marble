@@ -29,11 +29,11 @@ class GeoDataLatLonBoxPrivate
     {
     }
 
-    double m_north;
-    double m_south;
-    double m_east;
-    double m_west;
-    double m_rotation; // NOT implemented yet!
+    qreal m_north;
+    qreal m_south;
+    qreal m_east;
+    qreal m_west;
+    qreal m_rotation; // NOT implemented yet!
 };
 
 bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
@@ -51,7 +51,7 @@ GeoDataLatLonBox::GeoDataLatLonBox()
 {
 }
 
-GeoDataLatLonBox::GeoDataLatLonBox( double north, double south, double east, double west, GeoDataCoordinates::Unit unit )
+GeoDataLatLonBox::GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit )
     : GeoDataObject(),
       d( new GeoDataLatLonBoxPrivate )
 {
@@ -69,7 +69,7 @@ GeoDataLatLonBox::~GeoDataLatLonBox()
     delete d;
 }
 
-double GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
 {
     if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_north * RAD2DEG;
@@ -77,7 +77,7 @@ double GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
     return d->m_north;
 }
 
-void GeoDataLatLonBox::setNorth( const double north, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setNorth( const qreal north, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -89,7 +89,7 @@ void GeoDataLatLonBox::setNorth( const double north, GeoDataCoordinates::Unit un
     }
 }
 
-double GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
 {
     if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_south * RAD2DEG;
@@ -97,7 +97,7 @@ double GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
     return d->m_south;
 }
 
-void GeoDataLatLonBox::setSouth( const double south, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setSouth( const qreal south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -110,7 +110,7 @@ void GeoDataLatLonBox::setSouth( const double south, GeoDataCoordinates::Unit un
 }
 
 
-double GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
 {
     if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_east * RAD2DEG;
@@ -118,7 +118,7 @@ double GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
     return d->m_east;
 }
 
-void GeoDataLatLonBox::setEast( const double east, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setEast( const qreal east, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -130,7 +130,7 @@ void GeoDataLatLonBox::setEast( const double east, GeoDataCoordinates::Unit unit
     }
 }
 
-double GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
 {
     if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_west * RAD2DEG;
@@ -138,7 +138,7 @@ double GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
     return d->m_west;
 }
 
-void GeoDataLatLonBox::setWest( const double west, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setWest( const qreal west, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -150,7 +150,7 @@ void GeoDataLatLonBox::setWest( const double west, GeoDataCoordinates::Unit unit
     }
 }
 
-void GeoDataLatLonBox::setRotation( const double rotation, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setRotation( const qreal rotation, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -162,7 +162,7 @@ void GeoDataLatLonBox::setRotation( const double rotation, GeoDataCoordinates::U
     }
 }
 
-double GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
+qreal GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
 {
     if ( unit == GeoDataCoordinates::Degree ) {
         return d->m_rotation * RAD2DEG;
@@ -170,7 +170,7 @@ double GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
     return d->m_rotation;
 }
 
-void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, double &south, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::boundaries( qreal &west, qreal &east, qreal &north, qreal &south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -188,7 +188,7 @@ void GeoDataLatLonBox::boundaries( double &west, double &east, double &north, do
     }
 }
 
-void GeoDataLatLonBox::setBoundaries( double west, double east, double north, double south, GeoDataCoordinates::Unit unit )
+void GeoDataLatLonBox::setBoundaries( qreal west, qreal east, qreal north, qreal south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -217,7 +217,7 @@ bool GeoDataLatLonBox::crossesDateLine() const
 
 bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
 {
-    double lon, lat;
+    qreal lon, lat;
 
     point.geoCoordinates( lon, lat );
 
@@ -235,7 +235,7 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
 
 bool GeoDataLatLonBox::contains( const GeoDataPoint &point )
 {
-    double lon, lat;
+    qreal lon, lat;
 
     point.geoCoordinates( lon, lat );
 
@@ -322,8 +322,8 @@ class GeoDataLatLonAltBoxPrivate
     {
     }
 
-    double m_minAltitude;
-    double m_maxAltitude;
+    qreal m_minAltitude;
+    qreal m_maxAltitude;
     AltitudeMode m_altitudeMode;
 };
 
@@ -372,22 +372,22 @@ GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
     delete d;
 }
 
-double GeoDataLatLonAltBox::minAltitude() const
+qreal GeoDataLatLonAltBox::minAltitude() const
 {
     return d->m_minAltitude;
 }
 
-void GeoDataLatLonAltBox::setMinAltitude( const double minAltitude )
+void GeoDataLatLonAltBox::setMinAltitude( const qreal minAltitude )
 {
     d->m_minAltitude = minAltitude;
 }
 
-double GeoDataLatLonAltBox::maxAltitude() const
+qreal GeoDataLatLonAltBox::maxAltitude() const
 {
     return d->m_maxAltitude;
 }
 
-void GeoDataLatLonAltBox::setMaxAltitude( const double maxAltitude )
+void GeoDataLatLonAltBox::setMaxAltitude( const qreal maxAltitude )
 {
     d->m_maxAltitude = maxAltitude;
 }

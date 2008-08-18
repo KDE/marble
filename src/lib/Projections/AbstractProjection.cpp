@@ -46,13 +46,13 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     int xStep = 4;
     int yStep = 4;
 
-    double lon, lat;
-    double eastLon  = -M_PI; 
-    double otherEastLon  = -M_PI; 
-    double westLon  = +M_PI; 
-    double otherWestLon  = +M_PI; 
-    double northLat = -m_maxLat; 
-    double southLat = +m_maxLat; 
+    qreal lon, lat;
+    qreal eastLon  = -M_PI; 
+    qreal otherEastLon  = -M_PI; 
+    qreal westLon  = +M_PI; 
+    qreal otherWestLon  = +M_PI; 
+    qreal northLat = -m_maxLat; 
+    qreal southLat = +m_maxLat; 
 
     // Move along the screenborder and save the highest and lowest lon-lat values.
 
@@ -114,7 +114,7 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     // inside the viewport.
 
     // We need a point on the screen at maxLat that definetely gets displayed:
-    double averageLongitude = ( westLon + eastLon ) / 2.0;
+    qreal averageLongitude = ( westLon + eastLon ) / 2.0;
 
     GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );
@@ -138,10 +138,10 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     return latLonAltBox;
 }
 
-void AbstractProjection::coordinateExtremes( double lon, double lat,
-                                             double &westLon, double &eastLon,
-                                             double &otherWestLon, double &otherEastLon,
-                                             double &northLat, double &southLat )
+void AbstractProjection::coordinateExtremes( qreal lon, qreal lat,
+                                             qreal &westLon, qreal &eastLon,
+                                             qreal &otherWestLon, qreal &otherEastLon,
+                                             qreal &northLat, qreal &southLat )
 {
     if ( lon < westLon ) westLon = lon;
     if ( lon < otherWestLon && lon > 0.0 ) otherWestLon = lon;

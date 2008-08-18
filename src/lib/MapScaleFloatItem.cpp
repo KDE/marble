@@ -82,7 +82,7 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
     m_radius        = radius;
     m_scalebarwidth = width - m_leftmargin - m_rightmargin;
 
-    m_scalebarkm = (double)(m_scalebarwidth) * EARTH_RADIUS / (double)(radius);
+    m_scalebarkm = (qreal)(m_scalebarwidth) * EARTH_RADIUS / (qreal)(radius);
 
     calcScaleBar();
 
@@ -140,7 +140,7 @@ void MapScaleFloatItem::paintScaleBar( QPainter* painter, int radius, int width 
 
 void MapScaleFloatItem::calcScaleBar()
 {
-    double  magnitude = 1;
+    qreal  magnitude = 1;
 
     // First we calculate the exact length of the whole area that is possibly 
     // available scale bar available to the scalebar in kilometers
@@ -177,8 +177,8 @@ void MapScaleFloatItem::calcScaleBar()
         // decreased by i.
     }
 
-    m_pixelinterval = (int)( m_scalebarwidth * (double)( bestmagvalue )
-                             / (double)( magvalue ) / m_bestdivisor );
+    m_pixelinterval = (int)( m_scalebarwidth * (qreal)( bestmagvalue )
+                             / (qreal)( magvalue ) / m_bestdivisor );
     m_valueinterval = (int)( bestmagvalue * magnitude / m_bestdivisor );
 }
 

@@ -68,8 +68,8 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
     virtual QPainterPath backgroundShape() const;
     void renderBackground( QPainter* );
 
-    double border() const;
-    void setBorder( double width );
+    qreal border() const;
+    void setBorder( qreal width );
 
     QBrush borderBrush() const;
     void setBorderBrush( const QBrush &brush );
@@ -80,23 +80,23 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
     QFont font() const;
     void setFont( const QFont &font );
 
-    double margin() const; 
-    void setMargin( double margin );
+    qreal margin() const; 
+    void setMargin( qreal margin );
 
-    double marginTop() const; 
-    void setMarginTop( double marginTop );
+    qreal marginTop() const; 
+    void setMarginTop( qreal marginTop );
 
-    double marginBottom() const; 
-    void setMarginBottom( double marginBottom );
+    qreal marginBottom() const; 
+    void setMarginBottom( qreal marginBottom );
 
-    double marginLeft() const; 
-    void setMarginLeft( double marginLeft );
+    qreal marginLeft() const; 
+    void setMarginLeft( qreal marginLeft );
 
-    double marginRight() const; 
-    void setMarginRight( double marginRight );
+    qreal marginRight() const; 
+    void setMarginRight( qreal marginRight );
 
-    double padding () const;
-    void setPadding( double width );
+    qreal padding () const;
+    void setPadding( qreal width );
 
     bool positionLocked() const;
     void setPositionLocked( bool enabled );

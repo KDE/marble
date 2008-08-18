@@ -214,7 +214,7 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 QString WorldClock::getZone()
 {
     //kDebug() << "Finding Timezone";
-    double lat, lon;
+    qreal lat, lon;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
                                     ->geoCoordinates(                     
                                     m_hover.x(), m_hover.y(),
@@ -236,16 +236,16 @@ QString WorldClock::getZone()
     //because if the lookup fails the default SHOULD be 0,0
     QString closest = "America/Toronto";
     
-    double mindist = 10000;
+    qreal mindist = 10000;
     
     for (int i = 0; i < zones.size(); i++ ) {
         KTimeZone curzone = m_locations.value( zones.at( i ) );
-        double tzlon = curzone.longitude();
-        double tzlat = curzone.latitude();
-        double londelta, latdelta;
+        qreal tzlon = curzone.longitude();
+        qreal tzlat = curzone.latitude();
+        qreal londelta, latdelta;
         latdelta = lat - tzlat;
         londelta = lon - tzlon;
-        double dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
+        qreal dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
         //kDebug() << "Distance between mouse and " << zones.at(i)
                  //<< "is " << dist;
         if ( dist < mindist ) {
@@ -383,8 +383,8 @@ void WorldClock::paintInterface(QPainter *p,
     //Show the location on the map
     int tzx = 0;
     int tzy = 0;
-    double lon = m_locations.value(m_locationkey).longitude();
-    double lat = m_locations.value(m_locationkey).latitude();
+    qreal lon = m_locations.value(m_locationkey).longitude();
+    qreal lat = m_locations.value(m_locationkey).latitude();
     lon *= DEG2RAD;
     lat *= DEG2RAD;
     //kDebug() << "TZ " << m_locationkey <<  " lon, lat = " << lon << lat;

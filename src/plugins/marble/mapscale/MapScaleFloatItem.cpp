@@ -118,8 +118,8 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 
     setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
 
-    m_scaleBarKm    = (double)(m_scaleBarWidth) * EARTH_RADIUS / 
-                      (double)(viewport->radius());
+    m_scaleBarKm    = (qreal)(m_scaleBarWidth) * EARTH_RADIUS / 
+                      (qreal)(viewport->radius());
 
     calcScaleBar();
 
@@ -177,7 +177,7 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 
 void MapScaleFloatItem::calcScaleBar()
 {
-    double  magnitude = 1;
+    qreal  magnitude = 1;
 
     // First we calculate the exact length of the whole area that is possibly 
     // available to the scalebar in kilometers
@@ -214,8 +214,8 @@ void MapScaleFloatItem::calcScaleBar()
         // decreased by i.
     }
 
-    m_pixelInterval = (int)( m_scaleBarWidth * (double)( bestMagValue )
-                             / (double)( magValue ) / m_bestDivisor );
+    m_pixelInterval = (int)( m_scaleBarWidth * (qreal)( bestMagValue )
+                             / (qreal)( magValue ) / m_bestDivisor );
     m_valueInterval = (int)( bestMagValue * magnitude / m_bestDivisor );
 }
 

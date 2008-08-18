@@ -49,8 +49,8 @@ class GpxSax : public QXmlDefaultHandler
     
     Track               *m_track;
     TrackSegment        *m_trackSeg;
-    double              m_tempLat;
-    double              m_tempLon;
+    qreal              m_tempLat;
+    qreal              m_tempLon;
 };
 
 }

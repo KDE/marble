@@ -101,10 +101,10 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
         const int columnsCurrentLevel =
             TileLoaderHelper::levelToColumn( levelZeroColumns, currentLevel );
 
-        double normalizedX = (double)(x) / (double)( rowsRequestedLevel );
-        double normalizedY = (double)(y) / (double)( columnsRequestedLevel );
-        double currentX    = normalizedX * (double)( rowsCurrentLevel );
-        double currentY    = normalizedY * (double)( columnsCurrentLevel );
+        qreal normalizedX = (qreal)(x) / (qreal)( rowsRequestedLevel );
+        qreal normalizedY = (qreal)(y) / (qreal)( columnsRequestedLevel );
+        qreal currentX    = normalizedX * (qreal)( rowsCurrentLevel );
+        qreal currentY    = normalizedY * (qreal)( columnsCurrentLevel );
 
         const QDateTime now = QDateTime::currentDateTime();
         QDateTime lastModified;
@@ -236,7 +236,7 @@ void TextureTile::loadTile( bool requestTileUpdate )
     }
 }
 
-void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, double sourceX, double sourceY, int sourceLevel, int targetX, int targetY, int targetLevel )
+void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, qreal sourceX, qreal sourceY, int sourceLevel, int targetX, int targetY, int targetLevel )
 {
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
@@ -248,10 +248,10 @@ void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, do
     // qDebug() << "About to start cropping an existing image.";
 
     QSize tilesize = tile.size();
-    double normalizedX2 = (double)(targetX + 1) / (double)( rowsRequestedLevel );
-    double normalizedY2 = (double)(targetY + 1) / (double)( columnsRequestedLevel );
-    double currentX2    = normalizedX2 * (double)( rowsCurrentLevel );
-    double currentY2    = normalizedY2 * (double)( columnsCurrentLevel );
+    qreal normalizedX2 = (qreal)(targetX + 1) / (qreal)( rowsRequestedLevel );
+    qreal normalizedY2 = (qreal)(targetY + 1) / (qreal)( columnsRequestedLevel );
+    qreal currentX2    = normalizedX2 * (qreal)( rowsCurrentLevel );
+    qreal currentY2    = normalizedY2 * (qreal)( columnsCurrentLevel );
 
     // Determine the rectangular section of the previous tile data 
     // which we intend to copy from:

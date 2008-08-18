@@ -97,8 +97,8 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
     int      m_leftpressedx;
     int      m_leftpressedy;
     int      m_midpressedy;
-    double   m_leftpresseda;
-    double   m_leftpressedb;
+    qreal   m_leftpresseda;
+    qreal   m_leftpressedb;
 
     int      m_dragThreshold;
     QTime    m_dragtimer;

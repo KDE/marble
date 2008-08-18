@@ -49,11 +49,11 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
     painter->setBrush( brush );
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)(centerLat * (double)( 2 * radius ) / M_PI );
+    int yCenterOffset = (int)(centerLat * (qreal)( 2 * radius ) / M_PI );
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
@@ -75,11 +75,11 @@ void EquirectProjectionHelper::createActiveRegion( ViewportParams *viewport )
     int  height = viewport->height();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
+    int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 
@@ -105,11 +105,11 @@ void EquirectProjectionHelper::createProjectedRegion( ViewportParams *viewport )
     int  height = viewport->height();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int yCenterOffset = (int)( centerLat * (double)( 2 * radius ) / M_PI );
+    int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
     int yTop          = height / 2 - radius + yCenterOffset;
     int yBottom       = yTop + 2 * radius;
 

@@ -47,9 +47,9 @@ class MARBLE_EXPORT SunLocator : public QObject
     explicit SunLocator(ExtDateTime *dateTime);
     virtual ~SunLocator();
 
-    double  shading(double lon, double lat);
-    void    shadePixel(QRgb& pixcol, double shade);
-    void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, double shade);
+    qreal  shading(qreal lon, qreal lat);
+    void    shadePixel(QRgb& pixcol, qreal shade);
+    void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade);
 	
     void  setShow(bool show);
     void  setCitylights(bool show) {m_citylights = show;}
@@ -58,8 +58,8 @@ class MARBLE_EXPORT SunLocator : public QObject
     bool getShow() {return m_show;}
     bool getCitylights() {return m_citylights;}
     bool getCentered() {return m_centered;}
-    double getLon() {return m_lon * 180.0 / M_PI;}
-    double getLat() {return -m_lat * 180.0 / M_PI;}
+    qreal getLon() {return m_lon * 180.0 / M_PI;}
+    qreal getLat() {return -m_lat * 180.0 / M_PI;}
 	
     ExtDateTime* datetime() {return m_datetime;}
 	
@@ -77,8 +77,8 @@ class MARBLE_EXPORT SunLocator : public QObject
 
  protected:
     Q_DISABLE_COPY( SunLocator )
-    double m_lon;
-    double m_lat;
+    qreal m_lon;
+    qreal m_lat;
 
     ExtDateTime* m_datetime;
     bool m_show;

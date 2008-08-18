@@ -25,22 +25,22 @@
 #include "MathHelper.h"
 
 namespace {
-    const double a1 = 1.0/6.0; 
-    const double a2 = 1.0/24.0; 
-    const double a3 = 61.0/5040; 
-    const double a4 = 277.0/72576.0;  
-    const double a5 = 50521.0/39916800.0; 
-    const double a6 = 41581.0/95800320.0; 
-    const double a7 = 199360981.0/1307674368000.0; 
-    const double a8 = 228135437.0/4184557977600.0; 
-    const double a9 = 2404879675441.0/121645100408832000.0; 
-    const double a10 = 14814847529501.0/2043637686868377600.0; 
-    const double a11 = 69348874393137901.0/25852016738884976640000.0; 
-    const double a12 = 238685140977801337.0/238634000666630553600000.0; 
-    const double a13 = 4087072509293123892361.0/10888869450418352160768000000.0;
-    const double a14 = 454540704683713199807.0/3209350995912777478963200000.0;
-    const double a15 = 441543893249023104553682821.0/8222838654177922817725562880000000.0;
-    const double a16 = 2088463430347521052196056349.0/102156677868375135241390522368000000.0;
+    const qreal a1 = 1.0/6.0; 
+    const qreal a2 = 1.0/24.0; 
+    const qreal a3 = 61.0/5040; 
+    const qreal a4 = 277.0/72576.0;  
+    const qreal a5 = 50521.0/39916800.0; 
+    const qreal a6 = 41581.0/95800320.0; 
+    const qreal a7 = 199360981.0/1307674368000.0; 
+    const qreal a8 = 228135437.0/4184557977600.0; 
+    const qreal a9 = 2404879675441.0/121645100408832000.0; 
+    const qreal a10 = 14814847529501.0/2043637686868377600.0; 
+    const qreal a11 = 69348874393137901.0/25852016738884976640000.0; 
+    const qreal a12 = 238685140977801337.0/238634000666630553600000.0; 
+    const qreal a13 = 4087072509293123892361.0/10888869450418352160768000000.0;
+    const qreal a14 = 454540704683713199807.0/3209350995912777478963200000.0;
+    const qreal a15 = 441543893249023104553682821.0/8222838654177922817725562880000000.0;
+    const qreal a16 = 2088463430347521052196056349.0/102156677868375135241390522368000000.0;
 }
 
 namespace Marble
@@ -68,7 +68,7 @@ public:
     void setInterlaced( bool enabled );
 
     void centerTiles( ViewParams *viewParams, const int tileLevel,
-                      double& tileCol, double& tileRow );
+                      qreal& tileCol, qreal& tileRow );
 
  Q_SIGNALS:
     void mapChanged();
@@ -77,14 +77,14 @@ public:
     void notifyMapChanged();
 
  protected:
-    void pixelValue( const double& lon, const double& lat, 
+    void pixelValue( const qreal& lon, const qreal& lat, 
                      QRgb* scanLine, bool smooth = false );
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
 
     // method for precise interpolation
-    void nextTile( double& posx, double& posy );
+    void nextTile( qreal& posx, qreal& posy );
 
     void detectMaxTileLevel();
     void tileLevelInit( int tileLevel );
@@ -94,8 +94,8 @@ public:
 
     // Converts Radian to global texture coordinates 
     // ( with origin in center, measured in pixel) 
-    double rad2PixelX( const double longitude ) const;
-    double rad2PixelY( const double latitude ) const;
+    qreal rad2PixelX( const qreal longitude ) const;
+    qreal rad2PixelY( const qreal latitude ) const;
 
     QRgb bilinearSmooth( const QRgb& topLeftValue ) const;
 
@@ -103,8 +103,8 @@ public:
     int        m_iPosX;
     int        m_iPosY;
     // Coordinates on the tile for precise interpolation
-    double     m_posX;
-    double     m_posY;
+    qreal     m_posX;
+    qreal     m_posY;
 
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
@@ -116,16 +116,16 @@ public:
     int     m_imageRadius;
 
     // Previous coordinates
-    double  m_prevLat;
-    double  m_prevLon;
+    qreal  m_prevLat;
+    qreal  m_prevLon;
 
     // Coordinate transformations:
 
     // Converts global texture coordinates 
     // ( with origin in center, measured in pixel) 
     // to tile coordinates ( measured in pixel )
-    double  m_toTileCoordinatesLon;
-    double  m_toTileCoordinatesLat;
+    qreal  m_toTileCoordinatesLon;
+    qreal  m_toTileCoordinatesLat;
 
     bool m_interlaced;
 
@@ -153,8 +153,8 @@ public:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     int          m_globalWidth;
     int          m_globalHeight;
-    double       m_normGlobalWidth;
-    double       m_normGlobalHeight;
+    qreal       m_normGlobalWidth;
+    qreal       m_normGlobalHeight;
 };
 
 inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )
@@ -182,12 +182,12 @@ inline int AbstractScanlineTextureMapper::globalHeight() const
     return m_globalHeight;
 }
 
-inline double AbstractScanlineTextureMapper::rad2PixelX( const double longitude ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal longitude ) const
 {
     return longitude * m_normGlobalWidth;
 }
 
-inline double AbstractScanlineTextureMapper::rad2PixelY( const double lat ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 {
     switch ( m_tileProjection ) {
     case GeoSceneTexture::Equirectangular:
@@ -203,7 +203,7 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double lat ) cons
 
         // We are using the Horner Scheme as a polynom representation
 
-        const double lat2 = lat * lat;
+        const qreal lat2 = lat * lat;
 
             return - ( lat 
         + lat * lat2 * (  a1
@@ -227,7 +227,7 @@ inline double AbstractScanlineTextureMapper::rad2PixelY( const double lat ) cons
 
 inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
 {
-    double fY = m_posY - (int)(m_posY);
+    qreal fY = m_posY - (int)(m_posY);
 
     // Interpolation in y-direction
     if ( ( m_posY + 1.0 ) < m_tileLoader->tileHeight() ) {
@@ -242,7 +242,7 @@ inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftVa
         // Interpolation in x-direction
         if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
 
-            double fX = m_posX - (int)(m_posX);
+            qreal fX = m_posX - (int)(m_posX);
 
             QRgb topRightValue    =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY      ) );
             QRgb bottomRightValue =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY + 1.0) );
@@ -268,7 +268,7 @@ inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftVa
         // Interpolation in x-direction
         if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
 
-            double fX = m_posX - (int)(m_posX);
+            qreal fX = m_posX - (int)(m_posX);
 
             if ( fX == 0.0 ) 
                 return topLeftValue;

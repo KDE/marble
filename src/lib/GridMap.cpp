@@ -30,10 +30,10 @@ using namespace Marble;
 // Except for the equator the major circles of latitude are defined via 
 // the earth's axial tilt, which currently measures about 23°26'21".
  
-const double  AXIALTILT = DEG2RAD * ( 23.0
+const qreal  AXIALTILT = DEG2RAD * ( 23.0
 				      + 26.0 / 60.0
 				      + 21.0 / 3600.0 );
-const double  PIHALF    = M_PI / 2.0;
+const qreal  PIHALF    = M_PI / 2.0;
 
 
 GridMap::GridMap()
@@ -137,7 +137,7 @@ void GridMap::createCircles( const int lonNum, const int latNum,
         createCircle( +PIHALF, Longitude, precision, viewport );	
 
         for ( int i = 1; i < lonNum; ++i ) {
-            double cutOff = PIHALF / (double)(latNum);
+            qreal cutOff = PIHALF / (qreal)(latNum);
             createCircle( +i * PIHALF / lonNum, Longitude, 
                           precision, viewport, cutOff );
             createCircle( -i * PIHALF / lonNum, Longitude,
@@ -146,9 +146,9 @@ void GridMap::createCircles( const int lonNum, const int latNum,
     }
 }
 
-void GridMap::createCircle( double angle, SphereDim dim,
+void GridMap::createCircle( qreal angle, SphereDim dim,
                             int precision,
-                            ViewportParams *viewport, double cutOff)
+                            ViewportParams *viewport, qreal cutOff)
 {
     switch( viewport->projection() ) {
         case Spherical:
@@ -161,24 +161,24 @@ void GridMap::createCircle( double angle, SphereDim dim,
     }
 }
 
-void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
+void GridMap::sphericalCreateCircle( qreal angle, SphereDim dim,
                                      int precision,
-                                     ViewportParams *viewport, double cutOff )
+                                     ViewportParams *viewport, qreal cutOff )
 {
     // cutOff: the amount of each quarter circle that is cut off at
     //         the pole in radians
 
-    const double cutCoeff   = 1.0 - cutOff / PIHALF;
+    const qreal cutCoeff   = 1.0 - cutOff / PIHALF;
 
     // We draw each circle in quarters ( or parts of those ).
     // This is especially convenient for the great longitude circles which 
     // are being cut off close to the poles.
     // quartSteps: the number of nodes in a "quarter" of a circle.
 
-    const double quartSteps = (double) precision;
+    const qreal quartSteps = (qreal) precision;
 
-    double coeff  = 1.0;
-    double offset = 0.0;
+    qreal coeff  = 1.0;
+    qreal offset = 0.0;
 
     // Some convenience variables
     int  imgWidth  = viewport->width();
@@ -198,20 +198,20 @@ void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
         Quaternion qpos;
         for ( int j = 0; j < steps + 1; ++j ) {
 
-            double itval  = (j != steps) ? (double)(j) / quartSteps : cutCoeff;
-            double dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
+            qreal itval  = (j != steps) ? (qreal)(j) / quartSteps : cutCoeff;
+            qreal dimVal = coeff * ( PIHALF * fabs( offset - itval ) + offset * PIHALF );
 
-            double lat = ( dim == Latitude )  ? angle : dimVal;
-            double lon = ( dim == Longitude ) ? angle : dimVal;
+            qreal lat = ( dim == Latitude )  ? angle : dimVal;
+            qreal lon = ( dim == Longitude ) ? angle : dimVal;
 
             qpos.set( lon, -lat );
             qpos.rotateAroundAxis(m_planetAxisMatrix);
 
-            m_currentPoint = QPointF( (double)(imgWidth / 2 + radius * qpos.v[Q_X]),
-                                      (double)(imgHeight / 2 - radius * qpos.v[Q_Y]) );
+            m_currentPoint = QPointF( (qreal)(imgWidth / 2 + radius * qpos.v[Q_X]),
+                                      (qreal)(imgHeight / 2 - radius * qpos.v[Q_Y]) );
             //qDebug() << "Radius: " << radius
-            //         << "QPointF(" << (double)(imgWidth / 2 + radius*qpos.v[Q_X])+1
-            //        << ", " << (double)(imgHeight / 2 + radius*qpos.v[Q_Y])+1 << ")";
+            //         << "QPointF(" << (qreal)(imgWidth / 2 + radius*qpos.v[Q_X])+1
+            //        << ", " << (qreal)(imgHeight / 2 + radius*qpos.v[Q_Y])+1 << ")";
 
             // Take care of horizon crossings if horizon is visible.
             m_lastVisible = m_currentlyVisible;
@@ -262,9 +262,9 @@ void GridMap::sphericalCreateCircle( double angle, SphereDim dim,
 //  - Equirectangular
 //  - Mercator
 //
-void GridMap::flatCreateCircle( double angle, SphereDim dim,
+void GridMap::flatCreateCircle( qreal angle, SphereDim dim,
 				int precision,
-				ViewportParams *viewport, double cutOff )
+				ViewportParams *viewport, qreal cutOff )
 {
     // Only used in spherical projection.
     Q_UNUSED( precision );
@@ -288,8 +288,8 @@ void GridMap::flatCreateCircle( double angle, SphereDim dim,
         currentProjection->screenCoordinates( 0.0, angle, viewport, 
                            dummy, y );
 
-        QPointF  startPoint( 0.0f,     (double)y );
-        QPointF  endPoint(   imgWidth, (double)y );
+        QPointF  startPoint( 0.0f,     (qreal)y );
+        QPointF  endPoint(   imgWidth, (qreal)y );
         m_polygon << startPoint << endPoint;
         append( m_polygon );
     }
@@ -388,20 +388,20 @@ int GridMap::getPrecision( ViewportParams *viewport )
 const QPointF GridMap::horizonPoint( ViewportParams *viewport)
 {
     // qDebug("Interpolating");
-    double  xa = 0;
-    double  ya = 0;
+    qreal  xa = 0;
+    qreal  ya = 0;
 
     xa = m_currentPoint.x() - ( viewport->width() / 2 ) ;
 
     // Move the m_currentPoint along the y-axis to match the horizon.
-    double  radius   = (double)(viewport->radius());
-    double  radicant = radius * radius - xa * xa;
+    qreal  radius   = (qreal)(viewport->radius());
+    qreal  radicant = radius * radius - xa * xa;
     if ( radicant > 0 )
         ya = sqrt( radicant );
 
     if ( ( m_currentPoint.y() - ( viewport->height() / 2 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( (double)viewport->width()  / 2 + xa,
-                    (double)viewport->height() / 2 + ya );
+    return QPointF( (qreal)viewport->width()  / 2 + xa,
+                    (qreal)viewport->height() / 2 + ya );
 }

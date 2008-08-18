@@ -29,24 +29,24 @@ Quaternion::Quaternion()
 //    set( 1.0, 0.0, 0.0, 0.0 );
 }
 
-Quaternion::Quaternion(double w, double x, double y, double z) 
+Quaternion::Quaternion(qreal w, qreal x, qreal y, qreal z) 
 {
     set( w, x, y, z );
 }
 
-Quaternion::Quaternion(double lon, double lat)
+Quaternion::Quaternion(qreal lon, qreal lat)
 {
     v[Q_W] = 0.0;
 
-    const double  cosLat = cos(lat);
+    const qreal  cosLat = cos(lat);
     v[Q_X] = cosLat * sin(lon);
     v[Q_Y] = sin(lat);
     v[Q_Z] = cosLat * cos(lon);
 }
 
-void Quaternion::getSpherical(double &lon, double &lat) const 
+void Quaternion::getSpherical(qreal &lon, qreal &lat) const 
 {
-    double  y = v[Q_Y];
+    qreal  y = v[Q_Y];
     if ( y > 1.0 )
         y = 1.0;
     else if ( y < -1.0 )
@@ -65,7 +65,7 @@ void Quaternion::normalize()
     scalar( 1.0 / sqrt(quatNorm) );
 }
 
-void Quaternion::scalar(double mult)
+void Quaternion::scalar(qreal mult)
 {
     v[Q_W] *= mult;
     v[Q_X] *= mult;
@@ -81,9 +81,9 @@ Quaternion Quaternion::inverse() const
     return inverse;
 }
 
-void Quaternion::createFromEuler(double pitch, double yaw, double roll)
+void Quaternion::createFromEuler(qreal pitch, qreal yaw, qreal roll)
 {
-    double  cPhi, cThe, cPsi, sPhi, sThe, sPsi, 
+    qreal  cPhi, cThe, cPsi, sPhi, sThe, sPsi, 
             cThecPsi, sThesPsi, sThecPsi, cThesPsi;
 
     pitch *= 0.5;
@@ -109,19 +109,19 @@ void Quaternion::createFromEuler(double pitch, double yaw, double roll)
     v[Q_Z] = cPhi * cThesPsi - sPhi * sThecPsi;
 }
 
-double Quaternion::pitch() const // "heading", phi
+qreal Quaternion::pitch() const // "heading", phi
 {
     return atan2( 2.0*(v[Q_X]*v[Q_W]-v[Q_Y]*v[Q_Z]),
                 ( 1.0 - 2.0*(v[Q_X]*v[Q_X]+v[Q_Z]*v[Q_Z] ) ) );
 }
 
-double Quaternion::yaw() const // "attitude", theta
+qreal Quaternion::yaw() const // "attitude", theta
 {
     return atan2( 2.0*(v[Q_Y]*v[Q_W]-v[Q_X]*v[Q_Z]),
                  (1.0 - 2.0*(v[Q_Y]*v[Q_Y]+v[Q_Z]*v[Q_Z] ) ) );
 }
 
-double Quaternion::roll() const // "bank", psi 
+qreal Quaternion::roll() const // "bank", psi 
 {
     return asin(2.0*(v[Q_X]*v[Q_Y]+v[Q_Z]*v[Q_W]));
 }
@@ -136,7 +136,7 @@ void Quaternion::display() const
 
 void Quaternion::operator*=(const Quaternion &q)
 {
-    double x, y, z, w;
+    qreal x, y, z, w;
 
     w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
     x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
@@ -157,7 +157,7 @@ bool Quaternion::operator==(const Quaternion &q) const
 
 Quaternion Quaternion::operator*(const Quaternion &q) const
 {
-    double  w, x, y, z;
+    qreal  w, x, y, z;
 
     w = v[Q_W] * q.v[Q_W] - v[Q_X] * q.v[Q_X] - v[Q_Y] * q.v[Q_Y] - v[Q_Z] * q.v[Q_Z];
     x = v[Q_W] * q.v[Q_X] + v[Q_X] * q.v[Q_W] + v[Q_Y] * q.v[Q_Z] - v[Q_Z] * q.v[Q_Y];
@@ -168,7 +168,7 @@ Quaternion Quaternion::operator*(const Quaternion &q) const
 
 void Quaternion::rotateAroundAxis(const Quaternion &q)
 {
-    double w, x, y, z;
+    qreal w, x, y, z;
 
     w = + v[Q_X] * q.v[Q_X] + v[Q_Y] * q.v[Q_Y] + v[Q_Z] * q.v[Q_Z];
     x = + v[Q_X] * q.v[Q_W] - v[Q_Y] * q.v[Q_Z] + v[Q_Z] * q.v[Q_Y];
@@ -182,18 +182,18 @@ void Quaternion::rotateAroundAxis(const Quaternion &q)
 }
 
 void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2, 
-                        double t)
+                        qreal t)
 {
-    double  p1;
-    double  p2;
+    qreal  p1;
+    qreal  p2;
 
     // Let alpha be the angle between the two quaternions.
-    double  cosAlpha = ( q1.v[Q_X] * q2.v[Q_X]
+    qreal  cosAlpha = ( q1.v[Q_X] * q2.v[Q_X]
                          + q1.v[Q_Y] * q2.v[Q_Y]
                          + q1.v[Q_Z] * q2.v[Q_Z]
                          + q1.v[Q_W] * q2.v[Q_W] );
-    double  alpha    = acos( cosAlpha );
-    double  sinAlpha = sin( alpha );
+    qreal  alpha    = acos( cosAlpha );
+    qreal  sinAlpha = sin( alpha );
 
     if ( sinAlpha > 0.0 ) {
         p1 = sin( ( 1.0 - t ) * alpha ) / sinAlpha;
@@ -213,16 +213,16 @@ void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2,
 void Quaternion::toMatrix(matrix &m) const
 {
 
-    double xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
-    double yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
-    double zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
+    qreal xy = v[Q_X] * v[Q_Y], xz = v[Q_X] * v[Q_Z];
+    qreal yy = v[Q_Y] * v[Q_Y], yw = v[Q_Y] * v[Q_W];
+    qreal zw = v[Q_Z] * v[Q_W], zz = v[Q_Z] * v[Q_Z];
 
     m[0][0] = 1.0 - 2.0 * (yy + zz);
     m[0][1] = 2.0 * (xy + zw);
     m[0][2] = 2.0 * (xz - yw);
     m[0][3] = 0.0;
 
-    double xx = v[Q_X] * v[Q_X], xw = v[Q_X] * v[Q_W], yz = v[Q_Y] * v[Q_Z];
+    qreal xx = v[Q_X] * v[Q_X], xw = v[Q_X] * v[Q_W], yz = v[Q_Y] * v[Q_Z];
 
     m[1][0] = 2.0 * (xy - zw);
     m[1][1] = 1.0 - 2.0 * (xx + zz);
@@ -237,7 +237,7 @@ void Quaternion::toMatrix(matrix &m) const
 
 void Quaternion::rotateAroundAxis(const matrix &m)
 {
-    double x, y, z;
+    qreal x, y, z;
 
     x =  m[0][0] * v[Q_X] + m[1][0] * v[Q_Y] + m[2][0] * v[Q_Z];
     y =  m[0][1] * v[Q_X] + m[1][1] * v[Q_Y] + m[2][1] * v[Q_Z];

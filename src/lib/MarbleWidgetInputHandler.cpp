@@ -153,8 +153,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
         if ( dirx != 0 || diry != 0 ) {
-            m_widget->rotateBy( -m_widget->moveStep() * (double)(dirx),
-                                -m_widget->moveStep() * (double)(diry) );
+            m_widget->rotateBy( -m_widget->moveStep() * (qreal)(dirx),
+                                -m_widget->moveStep() * (qreal)(diry) );
         }
 
         return true;
@@ -183,8 +183,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         // emit the position string only if the signal got attached
         if ( m_positionSignalConnected ) {
-            double  lat;
-            double  lon;
+            qreal  lat;
+            qreal  lon;
             bool    isValid = m_widget->geoCoordinates( event->x(), event->y(),
                                                         lon, lat,
                                                         GeoDataCoordinates::Radian );
@@ -287,7 +287,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             // Regarding all kinds of mouse moves:
             if ( m_leftpressed == true ) {
-                double  radius = (double)(m_widget->radius());
+                qreal  radius = (qreal)(m_widget->radius());
                 int     deltax = event->x() - m_leftpressedx;
                 int     deltay = event->y() - m_leftpressedy;
 
@@ -295,7 +295,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                      && abs(deltay) <= m_dragThreshold )
                     return true;
 
-                double direction = 1;
+                qreal direction = 1;
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
                 if ( m_widget->projection() == Spherical ) {
@@ -311,9 +311,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                             direction = -1;
                     }
                 }
-                m_widget->centerOn( RAD2DEG * (double)(m_leftpresseda)
+                m_widget->centerOn( RAD2DEG * (qreal)(m_leftpresseda)
                                     - 90.0 * direction * deltax / radius,
-                                    RAD2DEG * (double)(m_leftpressedb)
+                                    RAD2DEG * (qreal)(m_leftpressedb)
                                     + 90.0 * deltay / radius );
             }
 
@@ -355,11 +355,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && e->type() == QEvent::MouseButtonPress ) {
 
                 if ( polarity < 0 )
-                    m_widget->rotateBy( -m_widget->moveStep() * (double)(+dirx),
-                                        m_widget->moveStep() * (double)(+diry) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(+dirx),
+                                        m_widget->moveStep() * (qreal)(+diry) );
                 else
-                    m_widget->rotateBy( -m_widget->moveStep() * (double)(-dirx),
-                                        m_widget->moveStep() * (double)(+diry) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(-dirx),
+                                        m_widget->moveStep() * (qreal)(+diry) );
             }
         }
 

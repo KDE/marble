@@ -69,8 +69,8 @@ class MarbleOverviewMap : public MarbleAbstractFloatItem
     QPixmap        m_worldmap;
 
     GeoDataLatLonAltBox m_latLonAltBox;
-    double m_centerLat;
-    double m_centerLon;
+    qreal m_centerLat;
+    qreal m_centerLon;
 };
 
 }

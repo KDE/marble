@@ -34,7 +34,7 @@ class TrackPoint : public Waypoint
      * this initialises a trackpoint to a position and any other
      * information elements can be entered layer
      */
-    TrackPoint( double lat, double lon );
+    TrackPoint( qreal lat, qreal lon );
     TrackPoint( const TrackPoint& );
     
     /**

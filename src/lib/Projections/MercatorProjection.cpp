@@ -43,7 +43,7 @@ AbstractProjectionHelper *MercatorProjection::helper()
 }
 
 
-bool MercatorProjection::screenCoordinates( const double lon, const double lat,
+bool MercatorProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             int& x, int& y,
 					    CoordinateType coordType )
@@ -58,11 +58,11 @@ bool MercatorProjection::screenCoordinates( const double lon, const double lat,
     int  width  = viewport->width();
     int  height = viewport->height();
 
-    double  rad2Pixel = 2 * radius / M_PI;
+    qreal  rad2Pixel = 2 * radius / M_PI;
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Let (x, y) be the position on the screen of the placemark..
@@ -77,8 +77,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             int &x, int &y, bool &globeHidesPoint )
 {
     globeHidesPoint = false;
-    double  lon;
-    double  lat;
+    qreal  lon;
+    qreal  lat;
 
     geopoint.geoCoordinates( lon, lat );
 
@@ -90,10 +90,10 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     int  width  = viewport->width();
     int  height = viewport->height();
 
-    double  rad2Pixel = 2 * radius / M_PI;
+    qreal  rad2Pixel = 2 * radius / M_PI;
 
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
     
     // Let (x, y) be the position on the screen of the placemark..
@@ -117,8 +117,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     // obscured by the target planet itself.
     globeHidesPoint = false;
 
-    double  lon;
-    double  lat;
+    qreal  lon;
+    qreal  lat;
 
     geopoint.geoCoordinates( lon, lat );
 
@@ -130,10 +130,10 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     int  width  = viewport->width();
     int  height = viewport->height();
 
-    double  rad2Pixel = 2.0 * radius / M_PI;
+    qreal  rad2Pixel = 2.0 * radius / M_PI;
 
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Let (itX, y) be the first guess for one possible position on screen..
@@ -192,7 +192,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
-                                         double& lon, double& lat,
+                                         qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )
 {
     int           radius             = viewport->radius();
@@ -201,12 +201,12 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     bool          noerr              = false;
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Calculate how many pixel are being represented per radians.
-    const float rad2Pixel = (double)( 2 * radius )/M_PI;
+    const float rad2Pixel = (qreal)( 2 * radius )/M_PI;
 
     int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
     int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
@@ -214,7 +214,7 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
 
     if ( y >= yTop && y < yBottom ) {
         int    const  xPixels   = x - halfImageWidth;
-        double const  pixel2Rad = M_PI / (2 * radius);
+        qreal const  pixel2Rad = M_PI / (2 * radius);
 
         lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
                           * pixel2Rad ) );
@@ -255,7 +255,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
 
     // If the whole globe is visible we can easily calculate
     // analytically the lon-/lat- range.
-    double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( m_repeatX ) {
         int xRepeatDistance = 4 * viewport->radius();
@@ -267,7 +267,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
     else {
         // We need a point on the screen at maxLat that definetely
         // gets displayed:
-        double averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
+        qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
         GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
         GeoDataCoordinates minLonPoint( -M_PI, averageLatitude, GeoDataCoordinates::Radian );
@@ -295,8 +295,8 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
     int           height = viewport->height();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Calculate how many pixel are being represented per radians.

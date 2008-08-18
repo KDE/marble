@@ -75,9 +75,9 @@ long ExtDateTime::toJDN()
 }
 
 
-double ExtDateTime::dayFraction()
+qreal ExtDateTime::dayFraction()
 {
-    double f;
+    qreal f;
     f = m_datetime.time().second();
     f = f/60.0 + m_datetime.time().minute();
     f = f/60.0 + m_datetime.time().hour();

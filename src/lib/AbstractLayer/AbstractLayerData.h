@@ -40,7 +40,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * @param lat longitude of the object
      * @param lon latitude of the object
      */
-    AbstractLayerData( double lat, double lon);
+    AbstractLayerData( qreal lat, qreal lon);
     
     /**
      * @brief destructor
@@ -108,12 +108,12 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     /**
      * @brief evaluate the latitude of this LayerData object
      */
-    double lat() const;
+    qreal lat() const;
     
     /**
      * @brief evaluate the longitude of this LayerData object
      */
-    double lon() const;
+    qreal lon() const;
    
     /**
      * @brief m_position setter
@@ -131,7 +131,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * convience method to set the position from latitude and
      * longitude
      */
-    void setPosition( const double &lat, const double &lon);
+    void setPosition( const qreal &lat, const qreal &lon);
     
     /**
      * @brief get the position on screen

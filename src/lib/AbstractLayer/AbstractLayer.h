@@ -117,7 +117,7 @@ class AbstractLayer: public QObject
      *
      * 
      **/
-    static bool getPixelPosFromGeoDataCoordinates(double _lon, double _lat, 
+    static bool getPixelPosFromGeoDataCoordinates(qreal _lon, qreal _lat, 
                                  const QSize &screenSize, 
                                  ViewParams *viewParams,
                                  QPoint *position);
@@ -161,12 +161,12 @@ class AbstractLayer: public QObject
      * geoPoints, the intended use is only for measuring points on the
      * view for drawing purposes.
      */
-    static double distance ( const QPoint &, const QPoint & );
+    static qreal distance ( const QPoint &, const QPoint & );
 
     /**
      * @brief overloaded method to allow for double presision distance
      */
-    static double distance ( const QPointF &, const QPointF & );
+    static qreal distance ( const QPointF &, const QPointF & );
 
  private:
     /**

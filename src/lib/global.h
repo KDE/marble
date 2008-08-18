@@ -110,8 +110,8 @@ enum AltitudeMode {
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
-const double DEG2RAD = M_PI / 180.0;
-const double RAD2DEG = 180.0 / M_PI;
+const qreal DEG2RAD = M_PI / 180.0;
+const qreal RAD2DEG = 180.0 / M_PI;
 
 // Version definitions to use with an external application (as digiKam)
 
@@ -130,10 +130,10 @@ static const char NOT_AVAILABLE[] = QT_TR_NOOP("not available");
 const int tileDigits = 6;
 
 // Usage deprecated:
-const double RAD2INT = 21600.0 / M_PI;
+const qreal RAD2INT = 21600.0 / M_PI;
 
 // Average earth radius in m
-const double EARTH_RADIUS = 6378000.0;
+const qreal EARTH_RADIUS = 6378000.0;
 
 }
 

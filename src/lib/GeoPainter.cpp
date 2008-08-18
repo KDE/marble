@@ -130,30 +130,30 @@ class GeoPainterPrivate
     void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
     {
         // TODO: MOVE this into an own Annotation class
-        double arrowPosition = 0.3;
-        double arrowWidth = 12.0;
+        qreal arrowPosition = 0.3;
+        qreal arrowWidth = 12.0;
 
-        double width =  (double)( bubbleSize.width() );
-        double height = (double)( bubbleSize.height() );
+        qreal width =  (qreal)( bubbleSize.width() );
+        qreal height = (qreal)( bubbleSize.height() );
 
-        double dx = ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
-        double dy = ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
+        qreal dx = ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
+        qreal dy = ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
 
-        double x0 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
-        double x1 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
-        double x2 = (double) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
-        double x3 = (double) ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
-        double x4 = (double) ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
-        double x5 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
-        double x6 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
-        double x7 = (double) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
+        qreal x0 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
+        qreal x1 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
+        qreal x2 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
+        qreal x3 = (qreal) ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
+        qreal x4 = (qreal) ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
+        qreal x5 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
+        qreal x6 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
+        qreal x7 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
 
-        double y0 = (double) ( y + bubbleOffsetY );
-        double y1 = (double) ( y + bubbleOffsetY ) - dy * yRnd;
-        double y2 = (double) ( y + bubbleOffsetY ) - dy * 2 * yRnd;
-        double y5 = (double) ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
-        double y6 = (double) ( y + bubbleOffsetY ) - dy * ( height - yRnd );
-        double y7 = (double) ( y + bubbleOffsetY ) - dy * height;
+        qreal y0 = (qreal) ( y + bubbleOffsetY );
+        qreal y1 = (qreal) ( y + bubbleOffsetY ) - dy * yRnd;
+        qreal y2 = (qreal) ( y + bubbleOffsetY ) - dy * 2 * yRnd;
+        qreal y5 = (qreal) ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
+        qreal y6 = (qreal) ( y + bubbleOffsetY ) - dy * ( height - yRnd );
+        qreal y7 = (qreal) ( y + bubbleOffsetY ) - dy * height;
 
         QPointF p1 ( x, y ); // pointing point
         QPointF p2 ( x4, y0 );
@@ -192,10 +192,10 @@ class GeoPainterPrivate
         path.lineTo( p11 );
         path.lineTo( p1 );
 
-        double left   = ( dx > 0 ) ? x1 : x6;
-        double right  = ( dx > 0 ) ? x6 : x1;
-        double top    = ( dy > 0 ) ? y6 : y1;
-        double bottom = ( dy > 0 ) ? y1 : y6;
+        qreal left   = ( dx > 0 ) ? x1 : x6;
+        qreal right  = ( dx > 0 ) ? x6 : x1;
+        qreal top    = ( dy > 0 ) ? y6 : y1;
+        qreal bottom = ( dy > 0 ) ? y1 : y6;
 
         rect.setTopLeft( QPointF( left, top ) );
         rect.setBottomRight( QPointF( right, bottom ) );

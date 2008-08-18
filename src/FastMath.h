@@ -26,7 +26,7 @@ namespace FastMath {
     bool haveSSE();
 
     //	inline const int acos_lt (int i) { return ACos[i]; }
-    //	const int atan2_lt(double x, double y);
+    //	const int atan2_lt(qreal x, qreal y);
     //	extern ushort ATan2[16384];
 }
 

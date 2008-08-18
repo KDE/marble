@@ -61,7 +61,7 @@ int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )
             .arg( row );
         return 0;
     }
-    return (int)( std::log( (double)(row / levelZeroRows) ) / std::log( (double)2.0 ) );
+    return (int)( std::log( (qreal)(row / levelZeroRows) ) / std::log( (qreal)2.0 ) );
 }
 
 int TileLoaderHelper::columnToLevel( const int levelZeroColumns, int column )
@@ -71,7 +71,7 @@ int TileLoaderHelper::columnToLevel( const int levelZeroColumns, int column )
         .arg( column );
         return 0;
     }
-    return (int)( std::log( (double)(column / levelZeroColumns) ) / std::log( (double)2.0 ) );
+    return (int)( std::log( (qreal)(column / levelZeroColumns) ) / std::log( (qreal)2.0 ) );
 }
 
 QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel, int x,

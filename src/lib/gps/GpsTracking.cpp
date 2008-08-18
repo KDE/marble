@@ -69,7 +69,7 @@ GpsTracking::~GpsTracking()
 void GpsTracking::construct( const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-    //double const radius = viewParams->m_radius;
+    //qreal const radius = viewParams->m_radius;
 
 #ifdef HAVE_LIBGPS
     if( !m_gpsd ) {
@@ -93,7 +93,7 @@ void GpsTracking::construct( const QSize &canvasSize,
         return;
     }
 
-    double distance = std::sqrt( AbstractLayer::distance( position,
+    qreal distance = std::sqrt( AbstractLayer::distance( position,
                                                      previousPosition) );
     if (distance == 0) {
         return;
@@ -147,8 +147,8 @@ void GpsTracking::updateIp( )
 //         qDebug() << gmlFile.readAll();
 //         qDebug() << host.readAll();
 //         
-    double lon;
-    double lat;
+    qreal lon;
+    qreal lat;
     QXmlInputSource gmlInput/*( &gmlFile )*/;
     gmlInput.setData( m_data );
 

@@ -88,9 +88,9 @@ void MarbleStarsPlugin::initialize ()
         qDebug() << "stars.dat: file too new.";
         return;
     }
-    double ra;
-    double de;
-    double mag;
+    qreal ra;
+    qreal de;
+    qreal mag;
 
     while ( !in.atEnd() ) {
         in >> ra;
@@ -121,10 +121,10 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     QDateTime currentDateTime = dataFacade()->dateTime();
 
-    double gmst = siderealTime( currentDateTime );
-    double skyRotationAngle = gmst / 12.0 * M_PI;
+    qreal gmst = siderealTime( currentDateTime );
+    qreal skyRotationAngle = gmst / 12.0 * M_PI;
 
-    double centerLon, centerLat;
+    qreal centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     Quaternion  skyAxis;
@@ -148,10 +148,10 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                 continue;
             }
 
-            double  skyRadius      = 0.6 * sqrt( (double)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
-            double  earthRadius    = viewport->radius();
-            double  earthCenteredX = qpos.v[Q_X] * skyRadius;
-            double  earthCenteredY = qpos.v[Q_Y] * skyRadius;
+            qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
+            qreal  earthRadius    = viewport->radius();
+            qreal  earthCenteredX = qpos.v[Q_X] * skyRadius;
+            qreal  earthCenteredY = qpos.v[Q_Y] * skyRadius;
 
             // Don't draw high placemarks (e.g. satellites) that aren't visible.
             if ( qpos.v[Q_Z] < 0
@@ -170,7 +170,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 		 || y < 0 || y >= viewport->height() )
                 continue;
 
-            double size;
+            qreal size;
             if ( (*i).magnitude() < -1 ) size = 6.5;
             else if ( (*i).magnitude() < 0 ) size = 5.5;
             else if ( (*i).magnitude() < 1 ) size = 4.5;
@@ -186,19 +186,19 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-double MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
+qreal MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
 {
     QDateTime utcDateTime = localDateTime.toTimeSpec ( Qt::UTC );
-    double mjdUtc = (double)( utcDateTime.date().toJulianDay() );
+    qreal mjdUtc = (qreal)( utcDateTime.date().toJulianDay() );
 
-    double offsetUtcSecs = -utcDateTime.time().secsTo( QTime( 00, 00 ) );
-    double d_days = mjdUtc - 2451545.5;
-    double d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
+    qreal offsetUtcSecs = -utcDateTime.time().secsTo( QTime( 00, 00 ) );
+    qreal d_days = mjdUtc - 2451545.5;
+    qreal d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
 
     //  Appendix A of USNO Circular No. 163 (1981):
     //  Approximate value for Greenwich mean sidereal time in hours: 
     //  (Loss of precision: 0.1 secs per century)
-    double gmst = 18.697374558 + 24.06570982441908 * d;
+    qreal gmst = 18.697374558 + 24.06570982441908 * d;
 
     // Range (0..24) for gmst: 
     return gmst - (int)( gmst / 24.0 ) * 24.0; 

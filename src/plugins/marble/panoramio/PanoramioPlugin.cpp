@@ -81,14 +81,14 @@ bool PanoramioPlugin::isInitialized() const
 
 bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
 {
-    static double deltaWest = 0 , deltaEast = 0 , deltaSouth = 0 , deltaNorth = 0;
+    static qreal deltaWest = 0 , deltaEast = 0 , deltaSouth = 0 , deltaNorth = 0;
     painter->autoMapQuality();
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
 
-    double west = mylatLonAltBox.west();
-    double east = mylatLonAltBox.east();
-    double south = mylatLonAltBox.south();
-    double north = mylatLonAltBox.north();
+    qreal west = mylatLonAltBox.west();
+    qreal east = mylatLonAltBox.east();
+    qreal south = mylatLonAltBox.south();
+    qreal north = mylatLonAltBox.north();
     if ((west - deltaWest) != 0 || (east - deltaEast != 0) || (south - deltaSouth != 0) || (north - deltaNorth != 00)) {
         flag = 0 ;
         qDebug() << "delta part";
@@ -145,7 +145,7 @@ void PanoramioPlugin::slotImageDownloadComplete(const QString relativeUrlString,
     flag = 1;
 }
 
-void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , double east , double west , double north , double south)
+void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
     m_downloadManager->addJob(QUrl("http://www.panoramio.com/map/get_panoramas.php?from="
                                    + QString::number(rangeFrom)

@@ -126,8 +126,8 @@ void PlaceMarkInfoDialog::showContent()
     country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
 
     const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
-    const double area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
-    const double altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().altitude();
+    const qreal area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
+    const qreal altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().altitude();
 
 
     area_lbl->setText( tr("Area:") );

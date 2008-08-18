@@ -223,7 +223,7 @@ void ViewParams::setPlanetAxis(const Quaternion &newAxis)
 */
 }
 
-void ViewParams::centerCoordinates( double &centerLon, double &centerLat )
+void ViewParams::centerCoordinates( qreal &centerLon, qreal &centerLat )
 {
     d->m_viewport.centerCoordinates( centerLon, centerLat );
 }

@@ -129,7 +129,7 @@ void MergedLayerDecorator::paintClouds()
         uchar  *cscanline = (uchar*)cloudtile.scanLine( cur_y );
         QRgb   *scanline  = (QRgb*)m_tile->scanLine( cur_y );
         for ( int cur_x = 0; cur_x < ctileWidth; ++cur_x ) {
-            double  c;
+            qreal  c;
             if ( cloudtile.depth() == 32)
                 c = qRed( *((QRgb*)cscanline) ) / 255.0;
             else
@@ -157,20 +157,20 @@ void MergedLayerDecorator::paintSunShading()
 	
     // TODO add support for 8-bit maps?
     // add sun shading
-    const double  global_width  = m_tile->width()
+    const qreal  global_width  = m_tile->width()
                                   * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
                                                                      m_level );
-    const double  global_height = m_tile->height()
+    const qreal  global_height = m_tile->height()
                                   * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
                                                                   m_level );
-    const double lon_scale = 2*M_PI / global_width;
-    const double lat_scale = -M_PI / global_height;
+    const qreal lon_scale = 2*M_PI / global_width;
+    const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = m_tile->height();
     const int tileWidth = m_tile->width();
 
     // First we determine the supporting point interval for the interpolation.
     const int n = maxDivisor( 30, tileWidth );
-    const double nInverse = 1.0 / (double)(n);
+    const qreal nInverse = 1.0 / (qreal)(n);
     const int ipRight = n * (int)( tileWidth / n );
 
     if ( m_sunLocator->getCitylights() ) {
@@ -178,10 +178,10 @@ void MergedLayerDecorator::paintSunShading()
         if ( nighttile.isNull() )
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
-            double lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
+            qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
-            double lastShade = 0.0;
+            qreal lastShade = 0.0;
 
             for ( int cur_x = 0; cur_x < tileWidth; ++cur_x) {
 
@@ -189,8 +189,8 @@ void MergedLayerDecorator::paintSunShading()
 
                 if ( interpolate == true ) cur_x+= n - 1;
 
-                double lon   = lon_scale * (m_x * tileWidth + cur_x);
-                double shade = m_sunLocator->shading( lon, lat );
+                qreal lon   = lon_scale * (m_x * tileWidth + cur_x);
+                qreal shade = m_sunLocator->shading( lon, lat );
 
                 if ( interpolate == true ) {
 
@@ -202,8 +202,8 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     else {
-                        double interpolatedShade = lastShade;
-                        const double shadeDiff = ( shade - lastShade ) * nInverse;
+                        qreal interpolatedShade = lastShade;
+                        const qreal shadeDiff = ( shade - lastShade ) * nInverse;
 
                         // Now we do linear interpolation across the tile width
                         for ( int t = 1; t < n; ++t )
@@ -228,10 +228,10 @@ void MergedLayerDecorator::paintSunShading()
         }
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
-            double lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
+            qreal lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 
-            double lastShade = 0.0;
+            qreal lastShade = 0.0;
 
             for ( int cur_x = 0; cur_x <= tileWidth; ++cur_x ) {
 
@@ -239,8 +239,8 @@ void MergedLayerDecorator::paintSunShading()
 
                 if ( interpolate == true ) cur_x+= n - 1;
 
-                double lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                double shade = m_sunLocator->shading(lon, lat);
+                qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                qreal shade = m_sunLocator->shading(lon, lat);
 
                 if ( interpolate == true ) {
 
@@ -251,8 +251,8 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     else {
-                        double interpolatedShade = lastShade;
-                        const double shadeDiff = ( shade - lastShade ) * nInverse;
+                        qreal interpolatedShade = lastShade;
+                        const qreal shadeDiff = ( shade - lastShade ) * nInverse;
 
                         // Now we do linear interpolation across the tile width
                         for ( int t = 1; t < n; ++t )
@@ -287,8 +287,8 @@ void MergedLayerDecorator::paintTileId(const QString& themeId)
     QColor foreground;
     QColor background;
 
-    if ( ( (double)(m_x)/2 == m_x/2 && (double)(m_y)/2 == m_y/2 ) 
-         || ( (double)(m_x)/2 != m_x/2 && (double)(m_y)/2 != m_y/2 ) 
+    if ( ( (qreal)(m_x)/2 == m_x/2 && (qreal)(m_y)/2 == m_y/2 ) 
+         || ( (qreal)(m_x)/2 != m_x/2 && (qreal)(m_y)/2 != m_y/2 ) 
        )
     {
         foreground.setNamedColor("#FFFFFF");

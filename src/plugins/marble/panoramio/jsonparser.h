@@ -33,8 +33,8 @@ struct panoramioDataStructure {
     QString photo_title; // Title of each photograph
     QString photo_url; // Url of each photograph
     QString photo_file_url;
-    double longitude;
-    double latitude;
+    qreal longitude;
+    qreal latitude;
     int width;
     int height;
     QString upload_date;

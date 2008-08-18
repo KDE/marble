@@ -108,7 +108,7 @@ LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget(
 	         this, SLOT( comboBoxChanged( int ) ) );
 }
 
-double LatLonEdit::value()
+qreal LatLonEdit::value()
 {
 	return m_value;
 }
@@ -200,7 +200,7 @@ void LatLonEdit::minutesOverflow()
 	recalculate();
 }
 
-void LatLonEdit::setValue( double newvalue )
+void LatLonEdit::setValue( qreal newvalue )
 {
 	m_value = newvalue;
 	reverseRecalculate();
@@ -210,9 +210,9 @@ void LatLonEdit::setValue( double newvalue )
 
 void LatLonEdit::recalculate()
 {
-	double newvalue = m_degreesSpin->value();
-	double minsfract = m_minutesSpin->value();
-	double secsfract = m_secondsSpin->value();
+	qreal newvalue = m_degreesSpin->value();
+	qreal minsfract = m_minutesSpin->value();
+	qreal secsfract = m_secondsSpin->value();
 
 	minsfract = minsfract / 60;
 	secsfract = secsfract / 3600;
@@ -280,7 +280,7 @@ void LatLonEdit::reverseRecalculate()
 
 	//minutesremainder is the fraction of a degree that
 	//is left over
-	double minutesremainder = m_value - degreesvalue;
+	qreal minutesremainder = m_value - degreesvalue;
 	//multipy the fraction of a degree by 60 to
 	//turn it into minutes
 	minutesremainder = minutesremainder * 60;
@@ -293,7 +293,7 @@ void LatLonEdit::reverseRecalculate()
 
 	//secondsremainder is the fraction of a minute
 	//that is left over
-	double secondsremainder = minutesremainder - minutesvalue;
+	qreal secondsremainder = minutesremainder - minutesvalue;
 	//multiply the fraction of a minute by 60 to
 	//turn it into seconds
 	secondsvalue = secondsremainder * 60;

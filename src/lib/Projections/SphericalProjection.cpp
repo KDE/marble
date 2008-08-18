@@ -41,7 +41,7 @@ AbstractProjectionHelper *SphericalProjection::helper()
 }
 
 
-bool SphericalProjection::screenCoordinates( const double lon, const double lat,
+bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
                                              int& x, int& y,
 					     CoordinateType coordType )
@@ -50,8 +50,8 @@ bool SphericalProjection::screenCoordinates( const double lon, const double lat,
     if ( coordType == originalCoordinates )
 	p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
-    x = (int)( viewport->width()  / 2 + (double)( viewport->radius() ) * p.v[Q_X] );
-    y = (int)( viewport->height() / 2 - (double)( viewport->radius() ) * p.v[Q_Y] );
+    x = (int)( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
+    y = (int)( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
  
     return p.v[Q_Z] > 0;
 }
@@ -60,12 +60,12 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                              const ViewportParams *viewport,
                                              int &x, int &y, bool &globeHidesPoint )
 {
-    double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
+    qreal      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
 
     qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
 
-    double      pixelAltitude = ( ( viewport->radius() ) 
+    qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
     if ( geopoint.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
@@ -75,9 +75,9 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
         }
     }
     else {
-        double  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        double  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        double  radius         = viewport->radius();
+        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
+        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
+        qreal  radius         = viewport->radius();
 
         // Don't draw high placemarks (e.g. satellites) that aren't visible.
         if ( qpos.v[Q_Z] < 0
@@ -109,12 +109,12 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 					     int &pointRepeatNum,
 					     bool &globeHidesPoint )
 {
-    double      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
+    qreal      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
 
     qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
 
-    double      pixelAltitude = ( ( viewport->radius() ) 
+    qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
     if ( geopoint.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
@@ -124,9 +124,9 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
         }
     }
     else {
-        double  earthCenteredX = pixelAltitude * qpos.v[Q_X];
-        double  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
-        double  radius         = viewport->radius();
+        qreal  earthCenteredX = pixelAltitude * qpos.v[Q_X];
+        qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
+        qreal  radius         = viewport->radius();
 
         // Don't draw high placemarks (e.g. satellites) that aren't visible.
         if ( qpos.v[Q_Z] < 0
@@ -159,23 +159,23 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
-                                          double& lon, double& lat,
+                                          qreal& lon, qreal& lat,
                                           GeoDataCoordinates::Unit unit )
 {
-    const double  inverseRadius = 1.0 / (double)(viewport->radius());
+    const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
     bool          noerr         = false;
 
-    double radius = (double)( viewport->radius() );
-    double centerX = (double)( x - viewport->width() / 2 );
-    double centerY = (double)( y - viewport->height() / 2 );
+    qreal radius = (qreal)( viewport->radius() );
+    qreal centerX = (qreal)( x - viewport->width() / 2 );
+    qreal centerY = (qreal)( y - viewport->height() / 2 );
 
     if ( radius * radius > centerX * centerX + centerY * centerY ) {
-        double qx = inverseRadius * +centerX;
-        double qy = inverseRadius * -centerY;
-        double qr = 1.0 - qy * qy;
+        qreal qx = inverseRadius * +centerX;
+        qreal qy = inverseRadius * -centerY;
+        qreal qr = 1.0 - qy * qy;
 
-        double qr2z = qr - qx * qx;
-        double qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+        qreal qr2z = qr - qx * qx;
+        qreal qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
         Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( viewport->planetAxis() );
@@ -209,7 +209,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
 
     // If the whole globe is visible we can easily calculate
     // analytically the lon-/lat- range.
-    double pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( 2 * viewport->radius() + 1 <= viewport->height()
 	 &&  2 * viewport->radius() + 1 <= viewport->width() )
@@ -234,7 +234,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         // globe is fully visible and pitch = 0.0 or pitch = -M_PI or
         // pitch = +M_PI
         if ( pitch == 0.0 || pitch == -M_PI || pitch == +M_PI ) {
-            double yaw = viewport->planetAxis().yaw();
+            qreal yaw = viewport->planetAxis().yaw();
             latLonAltBox.setWest( GeoDataPoint::normalizeLon( yaw - M_PI / 2.0 ) );
             latLonAltBox.setEast( GeoDataPoint::normalizeLon( yaw + M_PI / 2.0 ) );
         }
@@ -244,7 +244,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // inside the viewport to get more accurate values for east and west.
 
     // We need a point on the screen at maxLat that definetely gets displayed:
-    double averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
+    qreal averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
     GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );

@@ -65,7 +65,7 @@ using namespace Marble;
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   static long double sqrt(int a) { return sqrt((long double)a); }
+   static long qreal sqrt(int a) { return sqrt((long qreal)a); }
 # endif
 #endif
 
@@ -258,13 +258,13 @@ QItemSelectionModel *MarbleMap::placeMarkSelectionModel() const
     return d->m_model->placeMarkSelectionModel();
 }
 
-double MarbleMap::moveStep()
+qreal MarbleMap::moveStep()
 {
-    if ( radius() < sqrt( (double)(width() * width() + height() * height()) ) )
+    if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
 	return 180.0 * 0.1;
     else
-	return 180.0 * atan( (double)width()
-		     / (double)( 2 * radius() ) ) * 0.2;
+	return 180.0 * atan( (qreal)width()
+		     / (qreal)( 2 * radius() ) ) * 0.2;
 }
 
 int MarbleMap::zoom() const
@@ -273,7 +273,7 @@ int MarbleMap::zoom() const
 }
 
 
-double MarbleMap::distance() const
+qreal MarbleMap::distance() const
 {
     // Due to Marble's orthographic projection ("we have no focus")
     // it's actually not possible to calculate a "real" distance.
@@ -285,37 +285,37 @@ double MarbleMap::distance() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
 
-    const double VIEW_ANGLE = 110.0;
+    const qreal VIEW_ANGLE = 110.0;
 
     return ( EARTH_RADIUS * 0.4
-            / (double)( radius() )
+            / (qreal)( radius() )
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 }
 
-void MarbleMap::setDistance( double distance )
+void MarbleMap::setDistance( qreal distance )
 {
-    const double VIEW_ANGLE = 110.0;
+    const qreal VIEW_ANGLE = 110.0;
 
     setRadius( (int)( EARTH_RADIUS * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
 }
 
-double MarbleMap::centerLatitude() const
+qreal MarbleMap::centerLatitude() const
 {
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
 
     d->m_viewParams.centerCoordinates( centerLon, centerLat );
     return centerLat * RAD2DEG;
 }
 
-double MarbleMap::centerLongitude() const
+qreal MarbleMap::centerLongitude() const
 {
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
 
     d->m_viewParams.centerCoordinates(centerLon, centerLat);
     return centerLon * RAD2DEG;
@@ -510,7 +510,7 @@ void MarbleMap::rotateBy(const Quaternion& incRot)
     d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
 }
 
-void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
+void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat)
 {
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
@@ -523,7 +523,7 @@ void MarbleMap::rotateBy( const double& deltaLon, const double& deltaLat)
 }
 
 
-void MarbleMap::centerOn(const double& lon, const double& lat)
+void MarbleMap::centerOn(const qreal& lon, const qreal& lat)
 {
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
@@ -540,8 +540,8 @@ void MarbleMap::centerOn(const QModelIndex& index)
     if ( index.isValid() ) {
         const GeoDataCoordinates point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
   
-        double  lon;
-        double  lat;
+        qreal  lon;
+        qreal  lat;
         point.geoCoordinates( lon, lat );
 
         centerOn( lon * RAD2DEG, lat * RAD2DEG );
@@ -554,12 +554,12 @@ void MarbleMap::centerOn(const QModelIndex& index)
 }
 
 
-void MarbleMap::setCenterLatitude( double lat )
+void MarbleMap::setCenterLatitude( qreal lat )
 {
     centerOn( centerLongitude(), lat );
 }
 
-void MarbleMap::setCenterLongitude( double lon )
+void MarbleMap::setCenterLongitude( qreal lon )
 {
     centerOn( lon, centerLatitude() );
 }
@@ -585,13 +585,13 @@ void MarbleMap::setProjection( Projection projection )
     setNeedsUpdate();
 }
 
-void MarbleMap::home( double &lon, double &lat, int& zoom )
+void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
 {
     d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
     zoom = d->m_homeZoom;
 }
 
-void MarbleMap::setHome( const double lon, const double lat, const int zoom)
+void MarbleMap::setHome( const qreal lon, const qreal lat, const int zoom)
 {
     d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
     d->m_homeZoom = zoom;
@@ -664,7 +664,7 @@ int MarbleMap::northPoleY()
     return (int)( d->m_viewParams.radius() * northPole.v[Q_Y] );
 }
 
-bool MarbleMap::screenCoordinates( const double lon, const double lat,
+bool MarbleMap::screenCoordinates( const qreal lon, const qreal lat,
                                    int& x, int& y )
 {
     return d->m_viewParams.currentProjection()
@@ -674,7 +674,7 @@ bool MarbleMap::screenCoordinates( const double lon, const double lat,
 }
 
 bool MarbleMap::geoCoordinates( const int x, const int y,
-                                double& lon, double& lat,
+                                qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit )
 {
     return d->m_viewParams.currentProjection()
@@ -687,17 +687,17 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;
 
-    const double  inverseRadius = 1.0 / (double)(radius());
+    const qreal  inverseRadius = 1.0 / (qreal)(radius());
 
-    if ( radius() > sqrt( (double)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
+    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
         + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
     {
-        double qx = inverseRadius * (double)( x - imageHalfWidth );
-        double qy = inverseRadius * (double)( y - imageHalfHeight );
-        double qr = 1.0 - qy * qy;
+        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
+        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
+        qreal qr = 1.0 - qy * qy;
 
-        double qr2z = qr - qx * qx;
-        double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+        qreal qr2z = qr - qx * qx;
+        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
         Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( planetAxis() );
@@ -740,10 +740,10 @@ void MarbleMapPrivate::drawAtmosphere()
     painter.setBrush( brush1 );
     painter.setPen( pen1 );
     painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth  - (int)( (double)(m_parent->radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (double)(m_parent->radius()) * 1.05 ),
-                         (int)( 2.1 * (double)(m_parent->radius()) ),
-                         (int)( 2.1 * (double)(m_parent->radius()) ) );
+    painter.drawEllipse( imageHalfWidth  - (int)( (qreal)(m_parent->radius()) * 1.05 ),
+                         imageHalfHeight - (int)( (qreal)(m_parent->radius()) * 1.05 ),
+                         (int)( 2.1 * (qreal)(m_parent->radius()) ),
+                         (int)( 2.1 * (qreal)(m_parent->radius()) ) );
 }
 
 
@@ -825,7 +825,7 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     customPaint( &painter );
     d->paintOverlay(painter, dirtyRect);
 
-    double fps = 1000.0 / (double)( t.elapsed() );
+    qreal fps = 1000.0 / (qreal)( t.elapsed() );
     d->paintFps(painter, dirtyRect, fps);
     emit framesPerSecond( fps );
 }
@@ -838,8 +838,8 @@ void MarbleMap::customPaint(GeoPainter *painter)
 
 void MarbleMap::goHome()
 {
-    double  homeLon = 0;
-    double  homeLat = 0;
+    qreal  homeLon = 0;
+    qreal  homeLat = 0;
     d->m_homePoint.geoCoordinates( homeLon, homeLat );
 
     centerOn( homeLon * RAD2DEG, homeLat * RAD2DEG );
@@ -973,7 +973,7 @@ void MarbleMap::setShowGps( bool visible )
     d->m_viewParams.setShowGps( visible );
 }
 
-void MarbleMap::changeCurrentPosition( double lon, double lat)
+void MarbleMap::changeCurrentPosition( qreal lon, qreal lat)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
 }
@@ -981,8 +981,8 @@ void MarbleMap::changeCurrentPosition( double lon, double lat)
 void MarbleMap::notifyMouseClick( int x, int y)
 {
     bool    valid = false;
-    double  lon   = 0;
-    double  lat   = 0;
+    qreal  lon   = 0;
+    qreal  lat   = 0;
 
     valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
@@ -1087,7 +1087,7 @@ void MarbleMap::setDownloadUrl( const QUrl &url )
 
 QString MarbleMap::distanceString() const
 {
-    const double VIEW_ANGLE = 110.0;
+    const qreal VIEW_ANGLE = 110.0;
 
     // Due to Marble's orthographic projection ("we have no focus")
     // it's actually not possible to calculate a "real" distance.
@@ -1099,8 +1099,8 @@ QString MarbleMap::distanceString() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
     //
-    double distance = ( EARTH_RADIUS * 0.4
-			/ (double)( radius() )
+    qreal distance = ( EARTH_RADIUS * 0.4
+			/ (qreal)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
@@ -1158,8 +1158,8 @@ void MarbleMap::centerSun()
 {
     SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    double  lon = sunLocator->getLon();
-    double  lat = sunLocator->getLat();
+    qreal  lon = sunLocator->getLon();
+    qreal  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
     qDebug() << "Centering on Sun at " << lat << lon;
@@ -1235,7 +1235,7 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
     setBoundingBox();
 }
 
-void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, double fps)
+void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
 {
     Q_UNUSED(dirtyRect);
 

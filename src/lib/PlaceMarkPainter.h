@@ -33,7 +33,7 @@ namespace Marble
 class ViewportParams;
 class VisiblePlaceMark;
 
-static const double s_labelOutlineWidth = 2.5;
+static const qreal s_labelOutlineWidth = 2.5;
 
 
 class PlaceMarkPainter : public QObject

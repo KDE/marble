@@ -276,9 +276,9 @@ void PlaceMarkManager::saveFile( const QString& filename,
 
     out.setVersion( QDataStream::Qt_4_2 );
 
-    double lon;
-    double lat;
-    double alt;
+    qreal lon;
+    qreal lat;
+    qreal alt;
 
     PlaceMarkContainer::const_iterator it = placeMarkContainer->constBegin();
     PlaceMarkContainer::const_iterator const end = placeMarkContainer->constEnd();
@@ -329,10 +329,10 @@ bool PlaceMarkManager::loadFile( const QString& filename,
     in.setVersion( QDataStream::Qt_4_2 );
 
     // Read the data itself
-    double   lon;
-    double   lat;
-    double   alt;
-    double   area;
+    qreal   lon;
+    qreal   lat;
+    qreal   alt;
+    qreal   area;
 
     QString  tmpstr;
     qint64   tmpint64;

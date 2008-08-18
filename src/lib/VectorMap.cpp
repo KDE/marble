@@ -84,16 +84,16 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
 {
     clear();
 
-    // We must use double or int64 for the calculations because we
+    // We must use qreal or int64 for the calculations because we
     // square radius sometimes below, and it may cause an overflow. We
-    // choose double because of some sqrt() calculations.
-    double   radius     = viewport->radius();
-    double   imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
+    // choose qreal because of some sqrt() calculations.
+    qreal   radius     = viewport->radius();
+    qreal   imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
 
     // zlimit: describes the lowest z value of the sphere that is
     //         visible on the screen.  This should happen in the
     //         corners.
-    double zlimit = ( ( imgradius2 < radius * radius )
+    qreal zlimit = ( ( imgradius2 < radius * radius )
                       ? sqrt( 1 - imgradius2 / ( radius * radius ) )
                       : 0.0 );
     // qDebug() << "zlimit: " << zlimit;
@@ -154,13 +154,13 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     int  radius = viewport->radius();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    double rad2Pixel = (float)( 2 * radius ) / M_PI;
-    double lon, lat;
-    double x, y;
+    qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
+    qreal lon, lat;
+    qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
@@ -184,8 +184,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         // box point for this projection.
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
-            x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
-            y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
+            x = (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
+            y = (qreal)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -202,8 +202,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
-		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
                 );
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
@@ -215,12 +215,12 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
 		     && ( visibleArea.intersects(
 			    QRectF( boundingPolygon.at(1),
-				    QPointF( (double)(m_imgwidth) / 2.0
+				    QPointF( (qreal)(m_imgwidth) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
 					     + m_offset, 
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
-			         QRectF( QPointF( (double)(m_imgwidth) / 2.0
+			         QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
 						  + m_offset,
 						  boundingPolygon.at(1).y() ),
@@ -248,13 +248,13 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     int  radius = viewport->radius();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    double rad2Pixel = (float)( 2 * radius ) / M_PI;
-    double lon, lat;
-    double x, y;
+    qreal rad2Pixel = (float)( 2 * radius ) / M_PI;
+    qreal lon, lat;
+    qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
     GeoPolygon::PtrVector::Iterator       itPolyLine;
@@ -278,8 +278,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         // this projection
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
-            x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
-            y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
+            x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
+            y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 
             boundingPolygon << QPointF( x, y );
         }
@@ -297,8 +297,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
-		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (double)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
+                || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
                 );
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
@@ -310,12 +310,12 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
 		     && ( visibleArea.intersects(
 			    QRectF( boundingPolygon.at(1),
-				    QPointF( (double)(m_imgwidth) / 2.0
+				    QPointF( (qreal)(m_imgwidth) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
 					     + m_offset, 
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
-			         QRectF( QPointF( (double)(m_imgwidth) / 2.0
+			         QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
 						  + m_offset,
 						  boundingPolygon.at(1).y() ),
@@ -444,18 +444,18 @@ void VectorMap::rectangularCreatePolyLine(
     Quaternion qpos;
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Other convenience variables
-    double  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
+    qreal  rad2Pixel = (float)( 2 * viewport->radius() ) / M_PI;
 
     ScreenPolygon otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
     bool CrossedDateline = false;
     bool firstPoint = true;
-    double lon, lat;
+    qreal lon, lat;
 
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -468,8 +468,8 @@ void VectorMap::rectangularCreatePolyLine(
 #endif
 
 	itPoint->geoCoordinates( lon, lat);
-	double x = (double)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
-	double y = (double)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
+	qreal x = (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
+	qreal y = (qreal)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
@@ -483,10 +483,10 @@ void VectorMap::rectangularCreatePolyLine(
 
 	    // X coordinate on the screen for the points on the
 	    // dateline on both sides of the flat map.
-	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-	    double lastYAtDateLine = (double)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
-	    double yAtSouthPole = (double)(m_imgheight) / 2.0 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
+	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal lastYAtDateLine = (qreal)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
+	    qreal yAtSouthPole = (qreal)(m_imgheight) / 2.0 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 
@@ -494,12 +494,12 @@ void VectorMap::rectangularCreatePolyLine(
 		// FIXME: This should actually need to get investigated
 		//        in GeoPainter.  For now though we just help
 		//        GeoPainter to get the clipping right.
-		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 )
-		    lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine > (qreal)(m_imgwidth) - 1.0 )
+		    lastXAtDateLine = (qreal)(m_imgwidth) - 1.0;
 		if ( lastXAtDateLine < 0.0 )
 		    lastXAtDateLine = 0.0; 
-		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 )
-		    xAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( xAtDateLine > (qreal)(m_imgwidth) - 1.0 )
+		    xAtDateLine = (qreal)(m_imgwidth) - 1.0;
 		if ( xAtDateLine < 0.0 )
 		    xAtDateLine = 0.0; 
 
@@ -552,20 +552,20 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
     Quaternion qpos;
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     // Other convenience variables
-    double  rad2Pixel = (double)( 2 * viewport->radius() ) / M_PI;
+    qreal  rad2Pixel = (qreal)( 2 * viewport->radius() ) / M_PI;
 
     ScreenPolygon  otherPolygon;
     otherPolygon.setClosed ( m_polygon.closed() );
 
     bool    CrossedDateline = false;
     bool    firstPoint      = true;
-    double  lon;
-    double  lat;
+    qreal  lon;
+    qreal  lat;
 
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
@@ -578,15 +578,15 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 #endif
 
 	// FIXME: Call the projection.  Unfortunately there is no
-	//        screenCoordinates taking doubles.
+	//        screenCoordinates taking qreals.
 	itPoint->geoCoordinates( lon, lat );
 
     // Removing all points beyond +/- 85 deg for Mercator:
     if ( fabs( lat ) > viewport->currentProjection()->maxLat() )
         continue;
 
-	double x = (double)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
-	double y = (double)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
+	qreal x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
+	qreal y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
@@ -602,10 +602,10 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 	    // x coordinate on the screen for the points on the dateline on both
 	    // sides of the flat map.
 	    // FIXME: mercator projection here too.
-	    double lastXAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    double xAtDateLine = (double)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-        double lastYAtDateLine = (double)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( m_lastLat ) ) - atanh( sin( centerLat ) ) ) );
-        double yAtSouthPole = (double)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->maxLat() ) ) - atanh( sin( centerLat ) ) ) );
+	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+        qreal lastYAtDateLine = (qreal)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( m_lastLat ) ) - atanh( sin( centerLat ) ) ) );
+        qreal yAtSouthPole = (qreal)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->maxLat() ) ) - atanh( sin( centerLat ) ) ) );
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 
@@ -613,12 +613,12 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 		// FIXME: This should actually need to get investigated
 		//        in GeoPainter.  For now though we just help
 		//        GeoPainter to get the clipping right.
-		if ( lastXAtDateLine > (double)(m_imgwidth) - 1.0 )
-		    lastXAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine > (qreal)(m_imgwidth) - 1.0 )
+		    lastXAtDateLine = (qreal)(m_imgwidth) - 1.0;
 		if ( lastXAtDateLine < 0.0 )
 		    lastXAtDateLine = 0.0; 
-		if ( xAtDateLine > (double)(m_imgwidth) - 1.0 )
-		    xAtDateLine = (double)(m_imgwidth) - 1.0;
+		if ( xAtDateLine > (qreal)(m_imgwidth) - 1.0 )
+		    xAtDateLine = (qreal)(m_imgwidth) - 1.0;
 		if ( xAtDateLine < 0.0 )
 		    xAtDateLine = 0.0; 
 
@@ -770,15 +770,15 @@ void VectorMap::manageCrossHorizon()
 const QPointF VectorMap::horizonPoint()
 {
     // qDebug("Interpolating");
-    double  xa;
-    double  ya;
+    qreal  xa;
+    qreal  ya;
 
     xa = m_currentPoint.x() - ( m_imgrx + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
-    //	ya = sqrt( ((double)m_radius + 1) * ( (double)m_radius + 1) - xa*xa);
+    //	ya = sqrt( ((qreal)m_radius + 1) * ( (qreal)m_radius + 1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
-        ? sqrt( (double)(m_rlimit) - (double)( xa * xa ) ) : 0;
+        ? sqrt( (qreal)(m_rlimit) - (qreal)( xa * xa ) ) : 0;
     // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
     if ( ( m_currentPoint.y() - ( m_imgry + 1 ) ) < 0 )
         ya = -ya; 
@@ -790,20 +790,20 @@ const QPointF VectorMap::horizonPoint()
 void VectorMap::createArc()
 {
 
-    double  beta  = (double)( RAD2DEG 
+    qreal  beta  = (qreal)( RAD2DEG 
 			      * atan2( m_horizonb.y() - m_imgry - 1,
 				       m_horizonb.x() - m_imgrx - 1 ) );
-    double  alpha = (double)( RAD2DEG
+    qreal  alpha = (qreal)( RAD2DEG
 			      * atan2( m_horizona.y() - m_imgry - 1,
 				       m_horizona.x() - m_imgrx - 1 ) );
 
-    double diff = beta - alpha;
+    qreal diff = beta - alpha;
 
     if ( diff != 0.0 && diff != 180.0 && diff != -180.0 ) {
 
         m_polygon.append( m_horizona );
 
-        double sgndiff = diff / fabs(diff);
+        qreal sgndiff = diff / fabs(diff);
 
         if (fabs(diff) > 180.0)
             diff = - sgndiff * (360.0 - fabs(diff));
@@ -816,11 +816,11 @@ void VectorMap::createArc()
 	
         int  itx;
         int  ity;
-        // qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((double)(m_rlimit));
-        double  arcradius = sqrt( (double)( m_rlimit ) );
+        // qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((qreal)(m_rlimit));
+        qreal  arcradius = sqrt( (qreal)( m_rlimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
-            double angle = DEG2RAD * (double)( alpha + (sgndiff * it) );
+            qreal angle = DEG2RAD * (qreal)( alpha + (sgndiff * it) );
             itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
             ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
             // qDebug() << " ity: " << ity;

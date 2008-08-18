@@ -35,8 +35,8 @@ struct twitterDataStructure {
 };
 
 struct googleMapDataStructure {
-    double lat;
-    double lon;
+    qreal lat;
+    qreal lon;
 };
 
 class jsonParser : public QObject

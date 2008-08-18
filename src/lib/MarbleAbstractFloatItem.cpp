@@ -40,10 +40,10 @@ class MarbleAbstractFloatItemPrivate
 
     void calculateLayout()
     {
-        double marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;;
-        double marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;;
-        double marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
-        double marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;;
+        qreal marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;;
+        qreal marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;;
+        qreal marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
+        qreal marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;;
 
         m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) );
 
@@ -64,16 +64,16 @@ class MarbleAbstractFloatItemPrivate
 
     static QPen         s_pen;
     static QBrush       s_background;
-    static double       s_border;
+    static qreal       s_border;
     static QBrush       s_borderBrush;
     static Qt::PenStyle s_borderStyle;
     static QFont        s_font;
-    static double       s_margin;
-    static double       s_marginTop;
-    static double       s_marginBottom;
-    static double       s_marginLeft;
-    static double       s_marginRight;
-    static double       s_padding;
+    static qreal       s_margin;
+    static qreal       s_marginTop;
+    static qreal       s_marginBottom;
+    static qreal       s_marginLeft;
+    static qreal       s_marginRight;
+    static qreal       s_padding;
     static bool         s_pixmapCacheEnabled;
     static bool         s_positionLocked;
 
@@ -86,7 +86,7 @@ class MarbleAbstractFloatItemPrivate
 
 QPen         MarbleAbstractFloatItemPrivate::s_pen = QPen( Qt::black );
 QBrush       MarbleAbstractFloatItemPrivate::s_background = QBrush( QColor( 192, 192, 192, 192 ) );
-double       MarbleAbstractFloatItemPrivate::s_border = 1.0;
+qreal       MarbleAbstractFloatItemPrivate::s_border = 1.0;
 QBrush       MarbleAbstractFloatItemPrivate::s_borderBrush = QBrush( Qt::black );
 Qt::PenStyle MarbleAbstractFloatItemPrivate::s_borderStyle = Qt::SolidLine;
 #ifdef Q_OS_MACX
@@ -94,12 +94,12 @@ Qt::PenStyle MarbleAbstractFloatItemPrivate::s_borderStyle = Qt::SolidLine;
 #else
     QFont MarbleAbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 8 );
 #endif
-double       MarbleAbstractFloatItemPrivate::s_margin = 0.0;
-double       MarbleAbstractFloatItemPrivate::s_marginTop = 0.0;
-double       MarbleAbstractFloatItemPrivate::s_marginBottom = 0.0;
-double       MarbleAbstractFloatItemPrivate::s_marginLeft = 0.0;
-double       MarbleAbstractFloatItemPrivate::s_marginRight = 0.0;
-double       MarbleAbstractFloatItemPrivate::s_padding = 4.0;
+qreal       MarbleAbstractFloatItemPrivate::s_margin = 0.0;
+qreal       MarbleAbstractFloatItemPrivate::s_marginTop = 0.0;
+qreal       MarbleAbstractFloatItemPrivate::s_marginBottom = 0.0;
+qreal       MarbleAbstractFloatItemPrivate::s_marginLeft = 0.0;
+qreal       MarbleAbstractFloatItemPrivate::s_marginRight = 0.0;
+qreal       MarbleAbstractFloatItemPrivate::s_padding = 4.0;
 bool         MarbleAbstractFloatItemPrivate::s_pixmapCacheEnabled = true;
 bool         MarbleAbstractFloatItemPrivate::s_positionLocked = false;
 
@@ -129,7 +129,7 @@ QPointF MarbleAbstractFloatItem::position() const
 
 QPointF MarbleAbstractFloatItem::positivePosition( const QRectF& viewPort ) const
 {
-    double x, y;
+    qreal x, y;
     x = ( d->m_position.x() < 0 ) ? viewPort.width() - d->m_size.width() + d->m_position.x() : d->m_position.x();
     y = ( d->m_position.y() < 0 ) ? viewPort.height() - d->m_size.height() + d->m_position.y() : d->m_position.y();
 
@@ -204,12 +204,12 @@ void MarbleAbstractFloatItem::renderBackground( QPainter* painter )
     painter->restore();
 }
 
-double MarbleAbstractFloatItem::border() const
+qreal MarbleAbstractFloatItem::border() const
 {
     return d->s_border;
 }
 
-void MarbleAbstractFloatItem::setBorder( double border )
+void MarbleAbstractFloatItem::setBorder( qreal border )
 {
     d->s_border = border;
     d->m_newItemProperties = true;
@@ -248,12 +248,12 @@ void MarbleAbstractFloatItem::setFont( const QFont &font )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::margin() const
+qreal MarbleAbstractFloatItem::margin() const
 {
     return d->s_margin;
 }
 
-void MarbleAbstractFloatItem::setMargin( double margin )
+void MarbleAbstractFloatItem::setMargin( qreal margin )
 {
     d->s_margin = margin;
 
@@ -261,12 +261,12 @@ void MarbleAbstractFloatItem::setMargin( double margin )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::marginTop() const
+qreal MarbleAbstractFloatItem::marginTop() const
 {
     return d->s_marginTop;
 }
 
-void MarbleAbstractFloatItem::setMarginTop( double marginTop )
+void MarbleAbstractFloatItem::setMarginTop( qreal marginTop )
 {
     d->s_marginTop = marginTop;
 
@@ -274,12 +274,12 @@ void MarbleAbstractFloatItem::setMarginTop( double marginTop )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::marginBottom() const
+qreal MarbleAbstractFloatItem::marginBottom() const
 {
     return d->s_marginBottom;
 }
 
-void MarbleAbstractFloatItem::setMarginBottom( double marginBottom )
+void MarbleAbstractFloatItem::setMarginBottom( qreal marginBottom )
 {
     d->s_marginBottom = marginBottom;
 
@@ -287,12 +287,12 @@ void MarbleAbstractFloatItem::setMarginBottom( double marginBottom )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::marginLeft() const
+qreal MarbleAbstractFloatItem::marginLeft() const
 {
     return d->s_marginLeft;
 }
 
-void MarbleAbstractFloatItem::setMarginLeft( double marginLeft )
+void MarbleAbstractFloatItem::setMarginLeft( qreal marginLeft )
 {
     d->s_marginLeft = marginLeft;
 
@@ -300,12 +300,12 @@ void MarbleAbstractFloatItem::setMarginLeft( double marginLeft )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::marginRight() const
+qreal MarbleAbstractFloatItem::marginRight() const
 {
     return d->s_marginRight;
 }
 
-void MarbleAbstractFloatItem::setMarginRight( double marginRight )
+void MarbleAbstractFloatItem::setMarginRight( qreal marginRight )
 {
     d->s_marginRight = marginRight;
 
@@ -313,12 +313,12 @@ void MarbleAbstractFloatItem::setMarginRight( double marginRight )
     d->m_newItemProperties = true;
 }
 
-double MarbleAbstractFloatItem::padding () const
+qreal MarbleAbstractFloatItem::padding () const
 {
     return d->s_padding;
 }
 
-void MarbleAbstractFloatItem::setPadding( double padding )
+void MarbleAbstractFloatItem::setPadding( qreal padding )
 {
     d->s_padding = padding;
 

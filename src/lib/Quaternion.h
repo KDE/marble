@@ -34,55 +34,55 @@ enum
 };
 
 
-typedef double    xmmfloat[4];
+typedef qreal    xmmfloat[4];
 typedef xmmfloat  matrix[3];
 
 
 class MARBLE_EXPORT Quaternion {
  public:
     Quaternion();
-    Quaternion(double w, double x, double y, double z);
+    Quaternion(qreal w, qreal x, qreal y, qreal z);
     /*!\brief used to generate Quaternion from longitude and latitude
      * 
      * \param lon longitude
      * \param lat latitude
      */
-    Quaternion(double lon, double lat);
+    Quaternion(qreal lon, qreal lat);
 
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
     bool        operator==(const Quaternion &q) const;
     void        operator*=(const Quaternion &q);
 
-    void        set(double w, double x, double y, double z) {
+    void        set(qreal w, qreal x, qreal y, qreal z) {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
     }
-    void        set(double lon, double lat) {
+    void        set(qreal lon, qreal lat) {
         v[Q_W] = 0.0;
-        const double  cosLat = cos(lat);
+        const qreal  cosLat = cos(lat);
         v[Q_X] = cosLat * sin(lon);
         v[Q_Y] = sin(lat);
         v[Q_Z] = cosLat * cos(lon);
     }
 
-    void        getSpherical(double &lon, double &lat) const;
+    void        getSpherical(qreal &lon, qreal &lat) const;
 
     void        normalize();
 
     Quaternion  inverse() const;
 
-    void        createFromEuler(double pitch, double yaw, double roll);
-    double      pitch() const;
-    double      yaw() const;
-    double      roll() const;
+    void        createFromEuler(qreal pitch, qreal yaw, qreal roll);
+    qreal      pitch() const;
+    qreal      yaw() const;
+    qreal      roll() const;
 
 
     void        display() const;
 
     void        rotateAroundAxis(const Quaternion &q);
-    void        slerp(const Quaternion &q1, const Quaternion &q2, double t);
+    void        slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
 
-    void        scalar(double mult);
+    void        scalar(qreal mult);
 
     void        toMatrix(matrix &m) const;
     void        rotateAroundAxis(const matrix &m);

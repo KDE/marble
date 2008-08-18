@@ -53,7 +53,7 @@ GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         QString area = parser.readElementText().trimmed();
-        double ar = area.toDouble();
+        qreal ar = area.toDouble();
         if( ar < 0.0 ) ar = 0.0;
         parentItem.nodeAs<GeoDataPlacemark>()->setArea( ar );
 #ifdef DEBUG_TAGS

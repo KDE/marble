@@ -30,8 +30,8 @@ using std::fabs;
 
 using namespace Marble;
 
-const double ARCMINUTE = 10800; // distance of 180deg in arcminutes
-const double INT2RAD = M_PI / 10800.0;
+const qreal ARCMINUTE = 10800; // distance of 180deg in arcminutes
+const qreal INT2RAD = M_PI / 10800.0;
 
 GeoPolygon::GeoPolygon()
 {
@@ -51,7 +51,7 @@ GeoPolygon::~GeoPolygon()
     qDeleteAll( m_boundary );
 }
 
-void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, double latBottom)
+void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal latBottom)
 {
     m_lonLeft   = lonLeft;
     m_latTop    = latTop;
@@ -60,7 +60,7 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
 
     m_boundary.clear();
     if ( getDateLine() == GeoPolygon::Even ) {
-        double xcenter = ( lonLeft + ( 2.0 * M_PI + lonRight) ) / 2.0;
+        qreal xcenter = ( lonLeft + ( 2.0 * M_PI + lonRight) ) / 2.0;
 
         if ( xcenter > M_PI ) 
             xcenter -=  2.0 * M_PI;
@@ -81,8 +81,8 @@ void GeoPolygon::setBoundary( double lonLeft, double latTop, double lonRight, do
 
 void GeoPolygon::displayBoundary(){
     Quaternion  q;
-    double      lon;
-    double      lat;
+    qreal      lon;
+    qreal      lat;
     m_boundary.at(0)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
     m_boundary.at(1)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
@@ -172,11 +172,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
+            last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
         }
         ++count;
     }
@@ -223,11 +223,11 @@ void PntMap::load(const QString &filename)
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataCoordinates( (double)(iLon) * INT2RAD, (double)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
+            last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
         }
         ++count;
     }
@@ -248,9 +248,9 @@ void PntMap::load(const QString &filename)
     //
     // FIXME: Break this out into its own function.
 		
-    double  lon     = 0.0;
-    double  lastLon = 0.0;
-    double  lat     = 0.0;
+    qreal  lon     = 0.0;
+    qreal  lastLon = 0.0;
+    qreal  lat     = 0.0;
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
@@ -260,12 +260,12 @@ void PntMap::load(const QString &filename)
 	
     for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
-        double  lonLeft       =  +M_PI;
-        double  lonRight      =  -M_PI;
-        double  otherLonLeft  =  +M_PI;
-        double  otherLonRight =  -M_PI;
-        double  latTop        =  -M_PI / 2.0;
-        double  latBottom     =  +M_PI / 2.0;		
+        qreal  lonLeft       =  +M_PI;
+        qreal  lonRight      =  -M_PI;
+        qreal  otherLonLeft  =  +M_PI;
+        qreal  otherLonRight =  -M_PI;
+        qreal  latTop        =  -M_PI / 2.0;
+        qreal  latBottom     =  +M_PI / 2.0;		
 
         bool isCrossingDateLine = false;
         bool isOriginalSide = true;
@@ -319,7 +319,7 @@ void PntMap::load(const QString &filename)
 
 //            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
 
-            double leftLonRight, rightLonLeft;
+            qreal leftLonRight, rightLonLeft;
 
             if ( fabs( M_PI * lonRight/fabs(lonRight) - lonRight ) >  
                  fabs( M_PI * otherLonRight/fabs(otherLonRight) - otherLonRight ) ) {

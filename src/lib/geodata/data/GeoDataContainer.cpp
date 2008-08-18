@@ -229,10 +229,10 @@ PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const
         GeoDataPlacemark* placemark = *it;
         qpos = placemark->coordinate().quaternion();
 
-        double xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
+        qreal xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
 
-        double degX;
-        double degY;
+        qreal degX;
+        qreal degY;
         qpos.getSpherical(degX,degY);
 
         x = (int)(imgwidth  / 2 + xyFactor * (degX + centerLon));

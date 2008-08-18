@@ -127,7 +127,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * @return the square of the distance between the points, if the 
      *         actual distance is needed get the square root.
      */
-    double distance ( const QPoint &a, const QPoint &b );
+    qreal distance ( const QPoint &a, const QPoint &b );
     
     /**
      * @brief get the distance between 2 points
@@ -137,7 +137,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * @return the square of the distance between the points, if the 
      *         actual distance is needed get the square root.
      */
-    double distance ( const QPointF &a, const QPointF &b );
+    qreal distance ( const QPointF &a, const QPointF &b );
     
     /**
      * @brief creates a bouding box from this Contianer

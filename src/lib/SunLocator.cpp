@@ -26,7 +26,7 @@ using std::cos;
 using std::asin;
 
 const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
-const double twilightZone = 0.1; // this equals 18 deg astronomical twilight.
+const qreal twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
 SunLocator::SunLocator(ExtDateTime *dateTime)
@@ -49,11 +49,11 @@ void SunLocator::updatePosition()
     long d = m_datetime->toJDN() - J2000;
 	
     // Adapted from http://www.stargazing.net/kepler/sun.html
-    double       L = 4.89497 + 0.0172028 * d;                  // mean longitude
-    double       g = 6.24004 + 0.0172020 * d;                  // mean anomaly
-    double  lambda = L + 0.0334 * sin(g) + 3.49e-4 * sin(2*g); // ecliptic longitude
-    double epsilon = 0.40909 - 7e-9 * d;                       // obliquity of the ecliptic plane
-    double   delta = asin(sin(epsilon)*sin(lambda));           // declination
+    qreal       L = 4.89497 + 0.0172028 * d;                  // mean longitude
+    qreal       g = 6.24004 + 0.0172020 * d;                  // mean anomaly
+    qreal  lambda = L + 0.0334 * sin(g) + 3.49e-4 * sin(2*g); // ecliptic longitude
+    qreal epsilon = 0.40909 - 7e-9 * d;                       // obliquity of the ecliptic plane
+    qreal   delta = asin(sin(epsilon)*sin(lambda));           // declination
 	
     // Convert position of sun to coordinates.
     m_lon = M_PI - m_datetime->dayFraction() * 2*M_PI;
@@ -61,12 +61,12 @@ void SunLocator::updatePosition()
 }
 
 
-double SunLocator::shading(double lon, double lat)
+qreal SunLocator::shading(qreal lon, qreal lat)
 {
     // haversine formula
-    double a = sin((lat-m_lat)/2.0);
-    double b = sin((lon-m_lon)/2.0);
-    double h = (a*a)+cos(lat)*cos(m_lat)*(b*b);
+    qreal a = sin((lat-m_lat)/2.0);
+    qreal b = sin((lon-m_lon)/2.0);
+    qreal h = (a*a)+cos(lat)*cos(m_lat)*(b*b);
 	
     /*
       h = 0.0 // directly beneath sun
@@ -75,7 +75,7 @@ double SunLocator::shading(double lon, double lat)
       theta = 2*asin(sqrt(h))
     */
 	
-    double brightness;
+    qreal brightness;
     if ( h <= 0.5 - twilightZone / 2.0 )
         brightness = 1.0;
     else if ( h >= 0.5 + twilightZone / 2.0 )
@@ -86,7 +86,7 @@ double SunLocator::shading(double lon, double lat)
     return brightness;
 }
 
-void SunLocator::shadePixel(QRgb& pixcol, double brightness)
+void SunLocator::shadePixel(QRgb& pixcol, qreal brightness)
 {
     // daylight - no change
     if ( brightness > 0.99999 )
@@ -101,13 +101,13 @@ void SunLocator::shadePixel(QRgb& pixcol, double brightness)
         int r = qRed( pixcol );
         int g = qGreen( pixcol );
         int b = qBlue( pixcol );
-        double  d = 0.5 * brightness + 0.5;
+        qreal  d = 0.5 * brightness + 0.5;
         pixcol = qRgb((int)(d * r), (int)(d * g), (int)(d * b));
     }
 }
 
 void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
-                                     double brightness)
+                                     qreal brightness)
 {
     // daylight - no change
     if ( brightness > 0.99999 )
@@ -118,7 +118,7 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
         pixcol = dpixcol;
     } else {
         // gradual shadowing
-        double& d = brightness;
+        qreal& d = brightness;
 		
         int r = qRed( pixcol );
         int g = qGreen( pixcol );

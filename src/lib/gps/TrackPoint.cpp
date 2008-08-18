@@ -15,7 +15,7 @@
 
 using namespace Marble;
 
-TrackPoint::TrackPoint( double lat, double lon )
+TrackPoint::TrackPoint( qreal lat, qreal lon )
     :Waypoint ( lat, lon )
 {
 }

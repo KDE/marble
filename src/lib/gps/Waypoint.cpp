@@ -21,7 +21,7 @@
 
 using namespace Marble;
 
-Waypoint::Waypoint( double lat, double lon )
+Waypoint::Waypoint( qreal lat, qreal lon )
     : AbstractLayerData( lat, lon ),
       GpsElement(),
       m_elevation(0.0),
@@ -91,24 +91,24 @@ QPixmap Waypoint::symbolPixmap()
 }
 */
 /*
-void Waypoint::setLat( const double &lat )
+void Waypoint::setLat( const qreal &lat )
 {
-    m_lat = new double;
+    m_lat = new qreal;
     *m_lat = lat;
 }
 
-void Waypoint::setLon( const double &lon )
+void Waypoint::setLon( const qreal &lon )
 {
-    m_lon = new double;
+    m_lon = new qreal;
     *m_lon = lon;
 }*/
 
-double Waypoint::elevation() const
+qreal Waypoint::elevation() const
 {
     return m_elevation;
 }
 
-void Waypoint::setElevation( const double &elevation )
+void Waypoint::setElevation( const qreal &elevation )
 {
     m_elevation = elevation;
 }
@@ -123,22 +123,22 @@ void Waypoint::setTime( const QTime &time )
     m_time = time;
 }
 
-double Waypoint::magVariation() const
+qreal Waypoint::magVariation() const
 {
     return m_magVariation;
 }
 
-void Waypoint::setMagVariation( const double &magVar )
+void Waypoint::setMagVariation( const qreal &magVar )
 {
     m_magVariation = magVar;
 }
 
-double Waypoint::geoIdHeight() const
+qreal Waypoint::geoIdHeight() const
 {
     return m_geoIdHeight;
 }
 
-void Waypoint::setGeoIdHeight( const double &geoHeightId )
+void Waypoint::setGeoIdHeight( const qreal &geoHeightId )
 {
     m_geoIdHeight = geoHeightId;
 }
@@ -183,42 +183,42 @@ void Waypoint::setSatalites( const int &satalites )
     m_satalites = satalites;
 }
 
-double Waypoint::hdop() const
+qreal Waypoint::hdop() const
 {
     return m_hdop;
 }
 
-void Waypoint::setHdop( const double &hdop )
+void Waypoint::setHdop( const qreal &hdop )
 {
     m_hdop = hdop;
 }
 
-double Waypoint::vdop() const
+qreal Waypoint::vdop() const
 {
     return m_vdop;
 }
 
-void Waypoint::setVdop( const double &vdop )
+void Waypoint::setVdop( const qreal &vdop )
 {
     m_vdop = vdop;
 }
 
-double Waypoint::pdop() const
+qreal Waypoint::pdop() const
 {
     return m_pdop;
 }
 
-void Waypoint::setPdop( const double &pdop )
+void Waypoint::setPdop( const qreal &pdop )
 {
     m_pdop = pdop;
 }
 
-double Waypoint::ageOfGpsData() const
+qreal Waypoint::ageOfGpsData() const
 {
     return m_ageOfGpsData;
 }
 
-void Waypoint::setAgeOfGpsData( const double &age )
+void Waypoint::setAgeOfGpsData( const qreal &age )
 {
     m_ageOfGpsData = age;
 }

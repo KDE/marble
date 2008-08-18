@@ -125,7 +125,7 @@ void twitterPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString 
 }
 
 
-void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , double east , double west , double north , double south)
+void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
     m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
 

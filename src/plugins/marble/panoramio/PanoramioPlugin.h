@@ -70,7 +70,7 @@ private:
     HttpDownloadManager *m_downloadManager;
     jsonParser panoramioJsonParser;
     int decimalToSexagecimal();//convert decimal to DMS system
-    void downloadPanoramio(int, int, double, double, double, double);
+    void downloadPanoramio(int, int, qreal, qreal, qreal, qreal);
     QList <QPixmap > imagesWeHave;//this list will hold pointers to pixmaps we have downloaded
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;

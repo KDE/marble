@@ -45,7 +45,7 @@ class GpsLayer : public AbstractLayer
                                        const QSize &canvasSize, 
                                        ViewParams *viewParams );
 
-    void changeCurrentPosition( double lat, double lon );
+    void changeCurrentPosition( qreal lat, qreal lon );
 
     void loadGpx(const QString &fileName);
 //  public slots:

@@ -46,15 +46,15 @@ class GridMap : public ScreenPolygon::Vector
     void createCircles( int lonNum, int latNum, int precision,
                         ViewportParams *port );
 
-    void createCircle( double angle, SphereDim, 
+    void createCircle( qreal angle, SphereDim, 
                        int precision,
-                       ViewportParams *viewport, double cutCoeff = 0.0 );
-    void sphericalCreateCircle( double angle, SphereDim,
+                       ViewportParams *viewport, qreal cutCoeff = 0.0 );
+    void sphericalCreateCircle( qreal angle, SphereDim,
                                 int precision,
-                                ViewportParams *viewport, double cutCoeff = 0.0 );
-    void flatCreateCircle( double angle, SphereDim,
+                                ViewportParams *viewport, qreal cutCoeff = 0.0 );
+    void flatCreateCircle( qreal angle, SphereDim,
 			   int precision,
-			   ViewportParams *viewport, double cutCoeff = 0.0 );
+			   ViewportParams *viewport, qreal cutCoeff = 0.0 );
 
     int            getPrecision( ViewportParams *viewport );
     const QPointF  horizonPoint( ViewportParams *viewport );

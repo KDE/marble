@@ -46,7 +46,7 @@ class MarbleWidgetPopupMenu  : public QObject
     void  showFeatureInfo( QAction* );
 
  Q_SIGNALS:
-    void  addMeasurePoint( double, double );
+    void  addMeasurePoint( qreal, qreal );
     void  removeMeasurePoints();
 
  protected Q_SLOTS:

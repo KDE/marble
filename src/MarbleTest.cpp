@@ -75,7 +75,7 @@ void MarbleTest::timeDemo()
     }
 
     qDebug( "Timedemo finished in %ims", t.elapsed() );
-    qDebug() <<  QString("= %1 fps").arg(200*1000/(double)(t.elapsed()));
+    qDebug() <<  QString("= %1 fps").arg(200*1000/(qreal)(t.elapsed()));
 
 }
 

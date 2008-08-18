@@ -220,7 +220,7 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         // Mountain (H), Volcano (V), Shipwreck (W)
         if ( placemark->role() == 'H' || placemark->role() == 'V' || placemark->role() == 'W' )
         {
-            double altitude = placemark->coordinate().altitude();
+            qreal altitude = placemark->coordinate().altitude();
             if ( altitude != 0.0 )
             {
                 hasPopularity = true;
@@ -231,7 +231,7 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         // Continent (K), Ocean (O), Nation (S)
         else if ( placemark->role() == 'K' || placemark->role() == 'O' || placemark->role() == 'S' )
         {
-            double area = placemark->area();
+            qreal area = placemark->area();
             if ( area >= 0.0 )
             {
                 hasPopularity = true;
@@ -320,7 +320,7 @@ int MarblePlacemarkModel::cityPopIdx( qint64 population )
     return popidx;
 }
 
-int MarblePlacemarkModel::areaPopIdx( double area )
+int MarblePlacemarkModel::areaPopIdx( qreal area )
 {
     Q_UNUSED( area );
     int popidx = 17;

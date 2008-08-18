@@ -40,7 +40,7 @@ class GeoDataPlacemarkPrivate
     GeoDataGeometry*    m_geometry;     // any GeoDataGeometry entry like locations
     GeoDataPoint        m_coordinate;     // The geographic position
     QString             m_countrycode;  // Country code.
-    double              m_area;         // Area in square kilometer
+    qreal              m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
 };
 
@@ -75,13 +75,13 @@ GeoDataCoordinates GeoDataPlacemark::coordinate() const
     return static_cast<GeoDataCoordinates>( d->m_coordinate );
 }
 
-void GeoDataPlacemark::coordinate( double& lon, double& lat, double& alt )
+void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt )
 {
     d->m_coordinate.geoCoordinates( lon, lat );
     alt = d->m_coordinate.altitude();
 }
 
-void GeoDataPlacemark::setCoordinate( double lon, double lat, double alt )
+void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt )
 {
     d->m_coordinate = GeoDataPoint( lon, lat, alt );
 }
@@ -121,12 +121,12 @@ void GeoDataPlacemark::setGeometry( GeoDataMultiGeometry *point )
     d->m_geometry = point;
 }
 
-double GeoDataPlacemark::area() const
+qreal GeoDataPlacemark::area() const
 {
     return d->m_area;
 }
 
-void GeoDataPlacemark::setArea( double area )
+void GeoDataPlacemark::setArea( qreal area )
 {
     d->m_area = area;
 }

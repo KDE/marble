@@ -58,7 +58,7 @@ void LatLonRunner::parse(const QString &input)
     MarbleRunnerResult::Score score;
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setName( input );
-    double lon, lat;
+    qreal lon, lat;
     coord.geoCoordinates( lon, lat );
     placemark->setCoordinate( lon, lat );
     

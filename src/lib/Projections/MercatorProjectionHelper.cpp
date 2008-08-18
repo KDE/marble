@@ -73,8 +73,8 @@ void MercatorProjectionHelper::createActiveRegion( ViewportParams *viewport )
     int  height = viewport->height();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     int  yTop;
@@ -111,8 +111,8 @@ void MercatorProjectionHelper::createProjectedRegion( ViewportParams *viewport )
     int  height = viewport->height();
 
     // Calculate translation of center point
-    double  centerLon;
-    double  centerLat;
+    qreal  centerLon;
+    qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
     int  yTop;

@@ -101,7 +101,7 @@ class TextureTile : public QObject {
     QDateTime m_created;
 
     void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
-                        double sourceX, double sourceY, int sourceLevel,
+                        qreal sourceX, qreal sourceY, int sourceLevel,
                         int targetX, int targetY, int targetLevel );
 };
 

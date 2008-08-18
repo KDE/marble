@@ -66,7 +66,7 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
     int      m_scaleBarWidth;
     int      m_viewportWidth;
     int      m_scaleBarHeight;
-    double   m_scaleBarKm;
+    qreal   m_scaleBarKm;
 
     int      m_bestDivisor;
     int      m_pixelInterval;

@@ -62,7 +62,7 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
     int getDateLine() const { return m_dateLineCrossing; }
     void setDateLine(int dateLineCrossing){ m_dateLineCrossing = dateLineCrossing; }
 
-    void setBoundary( double, double, double, double );
+    void setBoundary( qreal, qreal, qreal, qreal );
     GeoDataCoordinates::PtrVector getBoundary() const { return m_boundary; }
 
     void displayBoundary();
@@ -78,10 +78,10 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 
     GeoDataCoordinates::PtrVector  m_boundary;
 
-    double  m_lonLeft;
-    double  m_latTop;
-    double  m_lonRight;
-    double  m_latBottom;
+    qreal  m_lonLeft;
+    qreal  m_latTop;
+    qreal  m_lonRight;
+    qreal  m_latBottom;
     int     m_index;
 };
 

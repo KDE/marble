@@ -27,10 +27,10 @@
 #ifdef Q_CC_MSVC
 #include <math.h>
 
-double msvc_asinh(double x);
+qreal msvc_asinh(qreal x);
 #define asinh msvc_asinh
 
-double msvc_atanh(double x);
+qreal msvc_atanh(qreal x);
 #define atanh msvc_atanh
 #endif
 

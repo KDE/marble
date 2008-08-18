@@ -52,7 +52,7 @@ class MercatorProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const double lon, const double lat,
+    bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             int& x, int& y,
 			    CoordinateType coordType = originalCoordinates );
@@ -77,7 +77,7 @@ class MercatorProjection : public AbstractProjection
      */
     bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
-                         double& lon, double& lat,
+                         qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
     /**

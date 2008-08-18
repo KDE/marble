@@ -307,11 +307,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsInputDisabled( bool ) ),
              d->m_widget, SLOT( setShowGps( bool ) ) );
-    connect( this, SIGNAL( gpsPositionChanged( double, double ) ),
-             d->m_widget, SLOT( changeCurrentPosition( double, double ) ) );
-    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( double, double,
+    connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
+             d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
+    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( qreal, qreal,
                                             GeoDataCoordinates::Unit ) ),
-             this, SLOT( receiveGpsCoordinates ( double, double,
+             this, SLOT( receiveGpsCoordinates ( qreal, qreal,
                                                  GeoDataCoordinates::Unit) ) );
 
     connect( d->m_widget, SIGNAL( timeout() ),
@@ -379,8 +379,8 @@ void MarbleControlBox::disableGpsInput( bool in )
     d->uiWidget.m_latComboBox->setEnabled( !in );
     d->uiWidget.m_lonComboBox->setEnabled( !in );
 
-    double t_lat = d->uiWidget.m_latSpinBox->value();
-    double t_lon = d->uiWidget.m_lonSpinBox->value();
+    qreal t_lat = d->uiWidget.m_latSpinBox->value();
+    qreal t_lon = d->uiWidget.m_lonSpinBox->value();
 
     if( d->uiWidget.m_lonComboBox->currentIndex() == 1 ){
         t_lon *= -1;
@@ -394,7 +394,7 @@ void MarbleControlBox::disableGpsInput( bool in )
     emit gpsInputDisabled( in );
 }
 
-void MarbleControlBox::receiveGpsCoordinates( double x, double y,
+void MarbleControlBox::receiveGpsCoordinates( qreal x, qreal y,
                                               GeoDataCoordinates::Unit unit)
 {
     if ( d->uiWidget.m_catchGps->isChecked() ) {
@@ -405,7 +405,7 @@ void MarbleControlBox::receiveGpsCoordinates( double x, double y,
             emit gpsPositionChanged( y, x );
             break;
         case GeoDataCoordinates::Radian:
-            double t_lat=0,t_lon=0;
+            qreal t_lat=0,t_lon=0;
             t_lat = y * -RAD2DEG;
             t_lon = x * +RAD2DEG;
 

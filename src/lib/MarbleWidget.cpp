@@ -57,7 +57,7 @@ namespace Marble
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   static long double sqrt(int a) { return sqrt((long double)a); }
+   static long qreal sqrt(int a) { return sqrt((long qreal)a); }
 # endif
 #endif
 
@@ -200,8 +200,8 @@ void MarbleWidgetPrivate::construct()
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
     MeasureTool  *measureTool = m_map->measureTool();
-    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( double, double ) ),
-                       measureTool, SLOT( addMeasurePoint( double, double ) ) );
+    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
+                       measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
     m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
                        measureTool, SLOT( removeMeasurePoints( ) ) );
 
@@ -348,7 +348,7 @@ QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
     return d->m_map->placeMarkSelectionModel();
 }
 
-double MarbleWidget::moveStep()
+qreal MarbleWidget::moveStep()
 {
     return d->m_map->moveStep();
 }
@@ -538,7 +538,7 @@ void MarbleWidget::rotateBy(const Quaternion& incRot)
     repaint();
 }
 
-void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
+void MarbleWidget::rotateBy( const qreal& deltaLon, const qreal& deltaLat)
 {
     d->m_map->rotateBy( deltaLon, deltaLat );
 
@@ -550,7 +550,7 @@ void MarbleWidget::rotateBy( const double& deltaLon, const double& deltaLat)
 }
 
 
-void MarbleWidget::centerOn( const double& lon, const double& lat, bool animated )
+void MarbleWidget::centerOn( const qreal& lon, const qreal& lat, bool animated )
 {
     if ( d->m_animationsEnabled && animated )
     {
@@ -610,7 +610,7 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
     }
     else
     {
-        double  lon, lat;
+        qreal  lon, lat;
         position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
         d->m_map->setDistance( position.altitude() );
         d->m_map->centerOn( lon, lat );
@@ -638,7 +638,7 @@ void MarbleWidget::updateAnimation( qreal updateValue )
     centerOn( position );
 }
 
-void MarbleWidget::setCenterLatitude( double lat )
+void MarbleWidget::setCenterLatitude( qreal lat )
 {
     centerOn( centerLongitude(), lat );
 
@@ -647,7 +647,7 @@ void MarbleWidget::setCenterLatitude( double lat )
     setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 }
 
-void MarbleWidget::setCenterLongitude( double lon )
+void MarbleWidget::setCenterLongitude( qreal lon )
 {
     centerOn( lon, centerLatitude() );
 
@@ -675,12 +675,12 @@ void MarbleWidget::setProjection( int projection )
     setProjection( (Projection)( projection ) );
 }
 
-void MarbleWidget::home( double &lon, double &lat, int& zoom )
+void MarbleWidget::home( qreal &lon, qreal &lat, int& zoom )
 {
     d->m_map->home( lon, lat, zoom );
 }
 
-void MarbleWidget::setHome( const double lon, const double lat, const int zoom)
+void MarbleWidget::setHome( const qreal lon, const qreal lat, const int zoom)
 {
     d->m_map->setHome( lon, lat, zoom );
 }
@@ -771,25 +771,25 @@ int MarbleWidget::northPoleY()
     return d->m_map->northPoleY();
 }
 
-bool MarbleWidget::screenCoordinates( const double lon, const double lat,
+bool MarbleWidget::screenCoordinates( const qreal lon, const qreal lat,
                                       int& x, int& y )
 {
     return d->m_map->screenCoordinates( lon, lat, x, y );
 }
 
 bool MarbleWidget::geoCoordinates(const int x, const int y,
-                                  double& lon, double& lat,
+                                  qreal& lon, qreal& lat,
                                   GeoDataCoordinates::Unit unit )
 {
     return d->m_map->geoCoordinates( x, y, lon, lat, unit );
 }
 
-double MarbleWidget::centerLatitude() const
+qreal MarbleWidget::centerLatitude() const
 {
     return d->m_map->centerLatitude();
 }
 
-double MarbleWidget::centerLongitude() const
+qreal MarbleWidget::centerLongitude() const
 {
     return d->m_map->centerLongitude();
 }
@@ -799,17 +799,17 @@ bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
     int  imageHalfWidth  = width() / 2;
     int  imageHalfHeight = height() / 2;
 
-    const double  inverseRadius = 1.0 / (double)(radius());
+    const qreal  inverseRadius = 1.0 / (qreal)(radius());
 
-    if ( radius() > sqrt( (double)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
+    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
         + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
     {
-        double qx = inverseRadius * (double)( x - imageHalfWidth );
-        double qy = inverseRadius * (double)( y - imageHalfHeight );
-        double qr = 1.0 - qy * qy;
+        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
+        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
+        qreal qr = 1.0 - qy * qy;
 
-        double qr2z = qr - qx * qx;
-        double qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+        qreal qr2z = qr - qx * qx;
+        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
 
         Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( planetAxis() );
@@ -860,7 +860,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     customPaint(&painter);
     d->m_map->d->paintOverlay( painter, dirtyRect );
 
-    double fps = 1000.0 / (double)( t.elapsed() );
+    qreal fps = 1000.0 / (qreal)( t.elapsed() );
     d->m_map->d->paintFps(painter, dirtyRect, fps);
     emit d->m_map->framesPerSecond( fps );
 }
@@ -1042,7 +1042,7 @@ void MarbleWidget::setShowGps( bool visible )
     repaint();
 }
 
-void MarbleWidget::changeCurrentPosition( double lon, double lat)
+void MarbleWidget::changeCurrentPosition( qreal lon, qreal lat)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
     repaint();
@@ -1051,8 +1051,8 @@ void MarbleWidget::changeCurrentPosition( double lon, double lat)
 void MarbleWidget::notifyMouseClick( int x, int y)
 {
     bool    valid = false;
-    double  lon   = 0;
-    double  lat   = 0;
+    qreal  lon   = 0;
+    qreal  lat   = 0;
 
     valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
@@ -1233,12 +1233,12 @@ void MarbleWidget::setDefaultFont( const QFont& font )
     map()->setDefaultFont( font );
 }
 
-double MarbleWidget::distance() const
+qreal MarbleWidget::distance() const
 {
     return map()->distance();
 }
 
-void MarbleWidget::setDistance( double distance )
+void MarbleWidget::setDistance( qreal distance )
 {
     map()->setDistance( distance );
 }
@@ -1263,8 +1263,8 @@ void MarbleWidget::centerSun()
 {
     SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    double  lon = sunLocator->getLon();
-    double  lat = sunLocator->getLat();
+    qreal  lon = sunLocator->getLon();
+    qreal  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
     qDebug() << "centering on Sun at" << lat << lon;

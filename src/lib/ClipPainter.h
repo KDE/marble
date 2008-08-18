@@ -58,10 +58,10 @@ class ClipPainter : public QPainter
     bool    m_doClip;
 
     // The limits
-    double  m_left;
-    double  m_right;
-    double  m_top;
-    double  m_bottom;
+    qreal  m_left;
+    qreal  m_right;
+    qreal  m_top;
+    qreal  m_bottom;
 
     // Size of the image
     int     m_imgWidth;

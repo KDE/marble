@@ -204,8 +204,8 @@ void TileCreator::run()
     QImage  sourceImage( sourcePath );
 
     for ( int n = 0; n < nmax; ++n ) {
-        QRect   sourceRowRect( 0, (int)( (double)( n * imageHeight ) / (double)( nmax )),
-                               imageWidth,(int)( (double)( imageHeight ) / (double)( nmax ) ) );
+        QRect   sourceRowRect( 0, (int)( (qreal)( n * imageHeight ) / (qreal)( nmax )),
+                               imageWidth,(int)( (qreal)( imageHeight ) / (qreal)( nmax ) ) );
 
 
         QImage  row = sourceImage.copy( sourceRowRect );
@@ -246,8 +246,8 @@ void TileCreator::run()
             if ( !ok )
                 qDebug() << "Error while writing Tile: " << tileName;
 
-            percentCompleted =  (int) ( 90 * (double)(createdTilesCount) 
-                                        / (double)(totalTileCount) );	
+            percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount) 
+                                        / (qreal)(totalTileCount) );	
             createdTilesCount++;
 						
             emit progress( percentCompleted );
@@ -381,8 +381,8 @@ void TileCreator::run()
                 if ( ! ok ) 
                     qDebug() << "Error while writing Tile: " << tileName;
 
-                percentCompleted =  (int) ( 90 * (double)(createdTilesCount)
-                                            / (double)(totalTileCount) );	
+                percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount)
+                                            / (qreal)(totalTileCount) );	
                 createdTilesCount++;
 						
                 emit progress( percentCompleted );
@@ -418,8 +418,8 @@ void TileCreator::run()
                 if ( !ok )
                     qDebug() << "Error while writing Tile: " << tileName; 
                 // Don't exceed 99% as this would cancel the thread unexpectedly
-                percentCompleted = 90 + (int)( 9 * (double)(savedTilesCount) 
-                                               / (double)(totalTileCount) );	
+                percentCompleted = 90 + (int)( 9 * (qreal)(savedTilesCount) 
+                                               / (qreal)(totalTileCount) );	
                 emit progress( percentCompleted );
                 //qDebug() << "Saving Tile #" << savedTilesCount
                 //         << " of " << totalTileCount

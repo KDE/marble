@@ -43,7 +43,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
  public:
     GeoDataLatLonBox();
-    GeoDataLatLonBox( double north, double south, double east, double west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
     GeoDataLatLonBox( const GeoDataLatLonBox & );
     virtual ~GeoDataLatLonBox();
 
@@ -55,39 +55,39 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      * @brief Get the northern boundary of the bounding box.
      * @return the latitude of the northern boundary.
      */
-    double north( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setNorth( const double north, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    qreal north( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setNorth( const qreal north, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the southern boundary of the bounding box.
      * @return the latitude of the southern boundary.
      */
-    double south( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setSouth( const double south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    qreal south( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setSouth( const qreal south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the eastern boundary of the bounding box.
      * @return the longitude of the eastern boundary.
      */
-    double east( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setEast( const double east, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    qreal east( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setEast( const qreal east, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the western boundary of the bounding box.
      * @return the longitude of the western boundary.
      */
-    double west( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setWest( const double west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    qreal west( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setWest( const qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Get the rotation of the bounding box.
      * @return the rotation of the bounding box.
      */
-    double rotation( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setRotation( const double rotation, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    qreal rotation( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    void setRotation( const qreal rotation, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
-    void    boundaries( double &west, double &east, double &north, double &south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-    void    setBoundaries( double west, double east, double north, double south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    void    boundaries( qreal &west, qreal &east, qreal &north, qreal &south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+    void    setBoundaries( qreal west, qreal east, qreal north, qreal south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief Detect whether the bounding box crosses the IDL.
@@ -144,15 +144,15 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      * @brief Get the lower altitude boundary of the bounding box.
      * @return the height of the lower altitude boundary.
      */
-    double minAltitude() const;
-    void setMinAltitude( const double minAltitude );
+    qreal minAltitude() const;
+    void setMinAltitude( const qreal minAltitude );
 
     /**
      * @brief Get the upper altitude boundary of the bounding box.
      * @return the height of the upper altitude boundary.
      */
-    double maxAltitude() const;
-    void setMaxAltitude( const double maxAltitude );
+    qreal maxAltitude() const;
+    void setMaxAltitude( const qreal maxAltitude );
 
     /**
      * @brief Get the reference system for the altitude.ar

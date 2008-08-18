@@ -111,14 +111,14 @@ void AbstractLayerContainer::printToStream( QTextStream & out) const
     }
 }
 
-double AbstractLayerContainer::distance ( const QPoint &a, 
+qreal AbstractLayerContainer::distance ( const QPoint &a, 
                                           const QPoint &b )
 {
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
 }
 
-double AbstractLayerContainer::distance ( const QPointF &a, 
+qreal AbstractLayerContainer::distance ( const QPointF &a, 
                                           const QPointF &b )
 {
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )

@@ -82,7 +82,7 @@ void GpsLayer::paintCurrentPosition( ClipPainter *painter,
     m_tracking->draw( painter, canvasSize, viewParams );
 }
 
-void GpsLayer::changeCurrentPosition( double lat, double lon )
+void GpsLayer::changeCurrentPosition( qreal lat, qreal lon )
 {
     m_currentPosition->setPosition( lat, lon );
 }

@@ -44,14 +44,14 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
     void mapTexture( ViewParams *viewParams );
 
  protected:
-    void pixelValueApprox(const double& lon, const double& lat,
+    void pixelValueApprox(const qreal& lon, const qreal& lat,
                           QRgb *scanLine, bool smooth );
 
     bool         m_interpolate;
     int          m_nBest;
 
     int     m_n;
-    double  m_nInverse;
+    qreal  m_nInverse;
 };
 
 }

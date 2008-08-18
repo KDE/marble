@@ -122,8 +122,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     Q_PROPERTY(QString mapThemeId  READ mapThemeId    WRITE setMapThemeId)
     Q_PROPERTY(int projection    READ projection      WRITE setProjection)
 
-    Q_PROPERTY(double longitude  READ centerLongitude WRITE setCenterLongitude)
-    Q_PROPERTY(double latitude   READ centerLatitude  WRITE setCenterLatitude)
+    Q_PROPERTY(qreal longitude  READ centerLongitude WRITE setCenterLongitude)
+    Q_PROPERTY(qreal latitude   READ centerLatitude  WRITE setCenterLatitude)
 
     Q_PROPERTY(bool showOverviewMap READ showOverviewMap    WRITE setShowOverviewMap)
     Q_PROPERTY(bool showScaleBar READ showScaleBar    WRITE setShowScaleBar)
@@ -227,13 +227,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the current distance.
      */
-    double      distance() const;
+    qreal      distance() const;
 
     /**
      * @brief  Set the distance of the observer to the globe in km.
      * @param  distance  The new distance in km.
      */
-    void        setDistance( double distance );
+    void        setDistance( qreal distance );
 
     /**
      * @brief Return the current distance string.
@@ -268,7 +268,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const double lon, const double lat,
+    bool screenCoordinates( const qreal lon, const qreal lat,
                             int& x, int& y );
 
     /**
@@ -287,7 +287,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     bool geoCoordinates( const int x, const int y,
-                         double& lon, double& lat,
+                         qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
     /**
@@ -305,12 +305,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the longitude of the center point.
      */
-    double  centerLongitude() const;
+    qreal  centerLongitude() const;
 
     /**
      * @brief Return the latitude of the center point.
      */
-    double  centerLatitude()  const;
+    qreal  centerLatitude()  const;
 
     /**
      * @brief Returns the model for all the placemarks on the globe.
@@ -326,7 +326,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
      */
-    double  moveStep();
+    qreal  moveStep();
 
     /**
      * @brief  Add a GeoDataPlacemark file to the model.
@@ -524,7 +524,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void  rotateBy( const double &deltaLon, const double &deltaLat );
+    void  rotateBy( const qreal &deltaLon, const qreal &deltaLat );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
@@ -539,7 +539,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lon  an angle parallel to the longitude lines
      *              +180(W) - -180(E)
      */
-    void  centerOn( const double &lon, const double &lat, bool animated = false );
+    void  centerOn( const qreal &lon, const qreal &lat, bool animated = false );
 
     /**
      * @brief  Center the view on a point
@@ -558,13 +558,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude
      */
-    void setCenterLatitude( double lat );
+    void setCenterLatitude( qreal lat );
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude
      */
-    void setCenterLongitude( double lon );
+    void setCenterLongitude( qreal lon );
 
     /**
      * @brief  Get the Projection used for the map
@@ -588,14 +588,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void  home(double &lon, double &lat, int& zoom);
+    void  home(qreal &lon, qreal &lat, int& zoom);
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void  setHome(const double lon, const double lat, const int zoom = 1050);
+    void  setHome(const qreal lon, const qreal lat, const int zoom = 1050);
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
@@ -774,7 +774,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param lat the new latitude value
      * @param lon the new longitude value
      */
-    void changeCurrentPosition( double lon, double lat );
+    void changeCurrentPosition( qreal lon, qreal lat );
 
      /**
      * @brief Used to notify about the position of the mouse click
@@ -916,11 +916,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void  mouseMoveGeoPosition( QString );
 
-    void  mouseClickGeoPosition( double lon, double lat, GeoDataCoordinates::Unit );
+    void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
     void  timeout();
 
-    void  framesPerSecond( double fps );
+    void  framesPerSecond( qreal fps );
 
  protected:
     /**

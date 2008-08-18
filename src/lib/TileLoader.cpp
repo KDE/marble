@@ -41,7 +41,7 @@ using namespace Marble;
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   long double log(int i) { return log((long double)i); }
+   long qreal log(int i) { return log((long qreal)i); }
 # endif
 #endif
 

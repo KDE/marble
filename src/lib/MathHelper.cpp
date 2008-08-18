@@ -28,7 +28,7 @@
 
 using namespace Marble;
 
-double msvc_asinh(double x)
+qreal msvc_asinh(qreal x)
 {
   if ( _isnan ( x ) ) {
     errno = EDOM;
@@ -38,7 +38,7 @@ double msvc_asinh(double x)
   return ( log( x + sqrt ( x * x + 1.0 ) ) );
 }
 
-double msvc_atanh(double x)
+qreal msvc_atanh(qreal x)
 {
   return ( 0.5 * log( ( 1.0 + x ) / ( 1.0 - x ) ) );
 }

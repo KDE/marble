@@ -34,7 +34,7 @@
 namespace Marble
 {
 
-const double TWOPI = 2 * M_PI;
+const qreal TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
 
@@ -97,7 +97,7 @@ class GEODATA_EXPORT GeoDataCoordinates
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      * @param _detail detail (default: 0)
      */
-    GeoDataCoordinates( double lon, double lat, double alt = 0,
+    GeoDataCoordinates( qreal lon, qreal lat, qreal alt = 0,
                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian,
                         int detail = 0 );
 
@@ -106,12 +106,12 @@ class GEODATA_EXPORT GeoDataCoordinates
     /**
         * @brief return the altitude of the Point
         */
-    double altitude() const;
+    qreal altitude() const;
     /**
     * @brief set the altitude of the Point
     * @param altitude altitude
     */
-    void setAltitude( const double altitude );
+    void setAltitude( const qreal altitude );
 
     /**
     * @brief return the detail flag
@@ -131,7 +131,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @param _unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
-    void set( double lon, double lat, double alt = 0,
+    void set( qreal lon, qreal lat, qreal alt = 0,
               GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
@@ -142,7 +142,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @param unit units that lon and lat get measured in
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
-    void geoCoordinates( double& lon, double& lat,
+    void geoCoordinates( qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
                                                                 const;
 
@@ -166,20 +166,20 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI
      * @param lon longitude
      */
-    static double normalizeLon( double lon );
+    static qreal normalizeLon( qreal lon );
 
     /**
      * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2.
      * @param lat latitude
      */
-    static double normalizeLat( double lat );
+    static qreal normalizeLat( qreal lat );
 
     /**
      * @brief normalize both longitude and latitude at the same time
      * @param lon the longitude value
      * @param lat the latitude value
      */
-    static void normalizeLonLat( double &lon, double &lat );
+    static void normalizeLonLat( qreal &lon, qreal &lat );
     
     /**
      * @brief try to parse the string into a coordinate pair

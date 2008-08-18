@@ -50,9 +50,9 @@ class VectorMap : public ScreenPolygon::Vector
     void setPen ( const QPen & p )     { m_pen   = p; }
     void setBrush ( const QBrush & b ) { m_brush = b; }
 
-    void setzBoundingBoxLimit ( const double zBoundingBoxLimit ) {
+    void setzBoundingBoxLimit ( const qreal zBoundingBoxLimit ) {
         m_zBoundingBoxLimit = zBoundingBoxLimit; }
-    void setzPointLimit ( const double zPointLimit ) {
+    void setzPointLimit ( const qreal zPointLimit ) {
         m_zPointLimit = zPointLimit; }
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
@@ -83,10 +83,10 @@ class VectorMap : public ScreenPolygon::Vector
     int            getDetailLevel( int radius ) const;
 
  private:
-    double            m_zlimit;
-    double            m_plimit;
-    double            m_zBoundingBoxLimit;	
-    double            m_zPointLimit;	
+    qreal            m_zlimit;
+    qreal            m_plimit;
+    qreal            m_zBoundingBoxLimit;	
+    qreal            m_zPointLimit;	
 
     //	Quaternion m_invRotAxis;
     matrix            m_rotMatrix;
@@ -120,8 +120,8 @@ class VectorMap : public ScreenPolygon::Vector
     // Needed for repetition in the X direction for flat projection
     int         m_lastSign;
     int         m_offset;
-    double      m_lastLon;
-    double      m_lastLat;
+    qreal      m_lastLon;
+    qreal      m_lastLat;
 };
 
 }

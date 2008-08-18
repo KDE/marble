@@ -15,7 +15,7 @@
 
 using namespace Marble;
 
-GmlSax::GmlSax( double *lon, double *lat )
+GmlSax::GmlSax( qreal *lon, qreal *lat )
 {
     m_lon = lon;
     m_lat = lat;

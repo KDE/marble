@@ -60,7 +60,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      * @param _unit units that lon and lat get measured in
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
-    GeoDataPoint( double _lon, double _lat, double alt = 0,
+    GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
                   GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0 );
 
     ~GeoDataPoint();

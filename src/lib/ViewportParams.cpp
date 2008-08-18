@@ -206,7 +206,7 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
     bool valid = true;
 
-    double maxLat = currentProjection()->maxLat();
+    qreal maxLat = currentProjection()->maxLat();
 
     // Make sure that the planetAxis doesn't get invalid
     // The planetAxis is invalid if lat exceeds
@@ -217,7 +217,7 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 
     if ( !currentProjection()->traversableMaxLat() && fabs( newAxis.pitch() ) > maxLat ) {
 
-        double centerLon, centerLat;
+        qreal centerLon, centerLat;
         centerCoordinates( centerLon, centerLat );
 
         // Normalize latitude and longitude
@@ -308,7 +308,7 @@ void ViewportParams::setBoundingBox( const BoundingBox & boundingBox )
 //                        Other functions
 
 
-void ViewportParams::centerCoordinates( double &centerLon, double &centerLat ) const
+void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
 {
     // Calculate translation of center point
     centerLat = - d->m_planetAxis.pitch();

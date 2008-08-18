@@ -41,7 +41,7 @@ class ExtDateTime : public QObject
      * @brief Convert to julian day number. Adapted from http://en.wikipedia.org/wiki/Julian_day#Calculation
      **/
     long toJDN();
-    double dayFraction();
+    qreal dayFraction();
 
     /**
      * @brief Sets the internal date and time with the current one

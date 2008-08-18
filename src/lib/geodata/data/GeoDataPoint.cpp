@@ -23,7 +23,7 @@
 namespace Marble
 {
 
-GeoDataPoint::GeoDataPoint( double _lon, double _lat, double _alt, 
+GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt, 
                             GeoDataPoint::Unit unit, int _detail )
   : GeoDataCoordinates( _lon, _lat, _alt, 
                         static_cast<GeoDataCoordinates::Unit>( unit ), _detail )

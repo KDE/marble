@@ -27,8 +27,8 @@ AbstractLayerData::AbstractLayerData( const GeoDataCoordinates &position ):
     *m_position = position;
 }
 
-AbstractLayerData::AbstractLayerData( double lat, 
-                                      double lon): m_visible(true)
+AbstractLayerData::AbstractLayerData( qreal lat, 
+                                      qreal lon): m_visible(true)
 {
 //  FIXME: Add altitude as soon as it becomes relevant  
     m_position = new GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree);
@@ -90,20 +90,20 @@ GeoDataCoordinates AbstractLayerData::position() const
     return *m_position; 
 } 
 
-double  AbstractLayerData::lat() const
+qreal  AbstractLayerData::lat() const
 {
-    double tmpLat;
-    double tmpLon;
+    qreal tmpLat;
+    qreal tmpLon;
 
     m_position->geoCoordinates( tmpLon, tmpLat, GeoDataCoordinates::Degree );
 
     return tmpLat;
 }
 
-double  AbstractLayerData::lon() const
+qreal  AbstractLayerData::lon() const
 {
-    double tmpLat;
-    double tmpLon;
+    qreal tmpLat;
+    qreal tmpLon;
 
     m_position->geoCoordinates( tmpLon, tmpLat, GeoDataCoordinates::Degree );
 
@@ -116,8 +116,8 @@ void AbstractLayerData::setPosition( const GeoDataCoordinates &position )
     m_position = new GeoDataCoordinates(position);
 }
 
-void AbstractLayerData::setPosition( const double &lat,
-                                     const double &lon )
+void AbstractLayerData::setPosition( const qreal &lat,
+                                     const qreal &lon )
 {
     //int detail = m_position->detail();
     delete m_position;
@@ -161,12 +161,12 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
             }
         break;
         case Equirectangular:
-            double lon;
-            double lat;
-            double xyFactor = 2 * viewParams->radius() / M_PI;
+            qreal lon;
+            qreal lat;
+            qreal xyFactor = 2 * viewParams->radius() / M_PI;
 
-            double centerLon;
-            double centerLat;
+            qreal centerLon;
+            qreal centerLat;
 
             // Let (x, y) be the position on the screen of the placemark..
             qpos.getSpherical( lon, lat );

@@ -32,8 +32,8 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent );
 
-    inline static int toLogScale( int zoom ) { return (int)(200.0 * log( (double)zoom ) ); }
-    inline static int fromLogScale( int zoom ) { return (int)pow( M_E, ( (double)zoom / 200.0 ) ); }
+    inline static int toLogScale( int zoom ) { return (int)(200.0 * log( (qreal)zoom ) ); }
+    inline static int fromLogScale( int zoom ) { return (int)pow( M_E, ( (qreal)zoom / 200.0 ) ); }
 
     void  construct();
     void  drawAtmosphere();
@@ -43,7 +43,7 @@ class MarbleMapPrivate
 
     void  paintGround( GeoPainter &painter, QRect &dirtyRect);
     void  paintOverlay( GeoPainter &painter, QRect &dirtyRect);
-    void  paintFps( GeoPainter &painter, QRect &dirtyRect, double fps);
+    void  paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
 
     MarbleMap       *m_parent;
 

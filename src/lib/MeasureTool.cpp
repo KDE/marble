@@ -64,11 +64,11 @@ void MeasureTool::paint( GeoPainter *painter,
     painter->setPen( m_pen );
 
     // Paint the paths and calculate the total length
-    double  totalDistance = 0.0;
-    double  lon = 0.0;
-    double  lat = 0.0;
-    double  prevLon = 0.0;
-    double  prevLat = 0.0;
+    qreal  totalDistance = 0.0;
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+    qreal  prevLon = 0.0;
+    qreal  prevLat = 0.0;
     Quaternion  qpos;
     Quaternion  prevqpos;
 
@@ -118,8 +118,8 @@ void MeasureTool::drawDistancePoints( GeoPainter *painter,
           it != m_pMeasurePointList.constEnd();
           ++it )
     {
-        double  lon;
-        double  lat;
+        qreal  lon;
+        qreal  lat;
 
         qpos = (*it)->quaternion();
         qpos.getSpherical( lon, lat );
@@ -197,9 +197,9 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
     Quaternion  itpos;
     QPolygonF   distancePath;
     for ( int i = 0; i < 21; ++i ) {
-        double  t = (double)(i) / 20.0;
-        double  lon = 0.0;
-        double  lat = 0.0;
+        qreal  t = (qreal)(i) / 20.0;
+        qreal  lon = 0.0;
+        qreal  lat = 0.0;
         int     x = 0;
         int     y = 0;
 
@@ -235,10 +235,10 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
         rightX += 4 * radius;
         leftX  += 4 * radius;
 
-        path2.translate( (double) -move, 0.0 );
+        path2.translate( (qreal) -move, 0.0 );
         while ( leftX < width ) {
             painter->drawPolyline( path2 );
-            path2.translate( (double) ( 4 * radius ), 0.0 );
+            path2.translate( (qreal) ( 4 * radius ), 0.0 );
 
             leftX += 4 * radius;
         }
@@ -261,23 +261,23 @@ void MeasureTool::rectangularDrawDistancePath( GeoPainter *painter,
     int         imgheight = viewport->height();
     int         radius    = viewport->radius();
 
-    double      x;
-    double      y;
+    qreal      x;
+    qreal      y;
     int         currentSign;
     int         previousSign;
-    double      lon;
-    double      lat;
-    double      previousLon;
-    double      previousY = 0.0;
-    double      previousX;
-    double      interpolatedY;
+    qreal      lon;
+    qreal      lat;
+    qreal      previousLon;
+    qreal      previousY = 0.0;
+    qreal      previousX;
+    qreal      interpolatedY;
 
     QPolygonF   distancePath;
     m_visibleArea = QRectF( 0, 0, imgwidth, imgheight );
 
     Q_UNUSED( antialiasing );
 
-    double      t = 0.0;
+    qreal      t = 0.0;
     Quaternion  itpos;
     //Calculate the sign of the first measurePoint
     itpos.slerp( prevqpos, qpos, t );
@@ -288,13 +288,13 @@ void MeasureTool::rectangularDrawDistancePath( GeoPainter *painter,
     Q_UNUSED( antialiasing );
 
     for ( int i = 0; i < 21; ++i ) {
-        t = (double)(i) / 20.0;
+        t = (qreal)(i) / 20.0;
 
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical(lon,lat);
 
-        x = (double)( imgwidth  / 2 - ( m_centerLon - lon ) * m_rad2Pixel );
-        y = (double)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
+        x = (qreal)( imgwidth  / 2 - ( m_centerLon - lon ) * m_rad2Pixel );
+        y = (qreal)( imgheight / 2 + ( m_centerLat - lat ) * m_rad2Pixel );
 
         if ( i == 0 ) {
             previousY = y;
@@ -365,7 +365,7 @@ void MeasureTool::drawAndRepeatDistancePath( GeoPainter* painter,
 #endif
 
 void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter, 
-                                          double totalDistance )
+                                          qreal totalDistance )
 {
     QString  distanceString;
     if ( totalDistance >= 1000.0 )
@@ -382,7 +382,7 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
 }
 
 
-void MeasureTool::addMeasurePoint( double lon, double lat )
+void MeasureTool::addMeasurePoint( qreal lon, qreal lat )
 {
     m_pMeasurePointList << new GeoDataCoordinates( lon, lat );
 }

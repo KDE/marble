@@ -99,8 +99,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->addAction( m_earthaction );
     m_lmbMenu->addSeparator();
 
-    double  lat;
-    double  lon;
+    qreal  lat;
+    qreal  lon;
 
     m_widget->geoCoordinates( xpos, ypos, lon, lat, GeoDataCoordinates::Radian );
 
@@ -141,8 +141,8 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
 {
     QPoint  p = m_setHomePointAction->data().toPoint();
 
-    double  lat;
-    double  lon;
+    qreal  lat;
+    qreal  lon;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
     if ( valid == true )
@@ -156,8 +156,8 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
 {
     QPoint  p = m_copyCoordinateAction->data().toPoint();
 
-    double  lon;
-    double  lat;
+    qreal  lon;
+    qreal  lat;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
     if ( valid == true )
@@ -173,8 +173,8 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 {
     QPoint  p = m_addMeasurePointAction->data().toPoint();
 
-    double  lat;
-    double  lon;
+    qreal  lat;
+    qreal  lon;
 
     m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
 

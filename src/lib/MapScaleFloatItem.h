@@ -63,7 +63,7 @@ class MapScaleFloatItem : public QObject
     int      m_radius;
     int      m_scalebarwidth;
     int      m_scalebarheight;
-    double   m_scalebarkm;
+    qreal   m_scalebarkm;
 
     QFont    m_font;
     int      m_leftmargin;

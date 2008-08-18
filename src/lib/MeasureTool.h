@@ -43,7 +43,7 @@ class MeasureTool : public QObject
                  bool antialiasing );
 
  public Q_SLOTS:
-    void  addMeasurePoint( double lon, double lat );
+    void  addMeasurePoint( qreal lon, qreal lat );
     void  removeMeasurePoints();
 
  private:
@@ -54,7 +54,7 @@ class MeasureTool : public QObject
                             const Quaternion&, const Quaternion&,
                             ViewportParams *viewport );
     void  drawTotalDistanceLabel( GeoPainter *painter,
-                                  double totalDistance );
+                                  qreal totalDistance );
 
     bool  testBug(); 
 

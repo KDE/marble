@@ -28,7 +28,7 @@ A very simple Xml Parser that will be based on the Gml Scema ( Geographic Markup
 class GmlSax : public QXmlDefaultHandler
 {
 public:
-    GmlSax( double *lon, double *lat );
+    GmlSax( qreal *lon, qreal *lat );
 
     ~GmlSax();
 
@@ -44,8 +44,8 @@ public:
     bool characters( const QString &str );
 
 private:
-    double *m_lat;
-    double *m_lon;
+    qreal *m_lat;
+    qreal *m_lon;
 
     QString currentText;
 };
