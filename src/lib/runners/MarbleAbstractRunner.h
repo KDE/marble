@@ -29,20 +29,50 @@ class QString;
 
 namespace Marble
 {
-
+/**
+ * This class is the base class for all Marble Runners. 
+ */
 class MarbleAbstractRunner : public QThread
 {
     Q_OBJECT
 public:
+    /**
+     * Constructor; note that @p parent should be 0
+     */
     MarbleAbstractRunner(QObject *parent = 0);
+    /**
+     * Destructor.
+     */
     ~MarbleAbstractRunner();
+    /**
+     * This function should return the user-visible name for this runner
+     */
     virtual QString name() const;
     
 public slots:
+    /**
+     * This function does the actual parsing. This should emit runnerStarted()
+     * at the beginning and emit runnerFinished() to give the result back. Note
+     * that there <b>must</b> be one runnerFinished() emitted for each runnerStarted()
+     * emitted.
+     * @p input the string to be parsed
+     */
     virtual void parse(const QString &input);
     
 signals:
+    /**
+     * This is emitted to indicate that the runner has started to work.
+     * @param runnerName the user-visible name for the runner.
+     * @see parse()
+     * @see name()
+     */
     void runnerStarted(QString runnerName);
+    /**
+     * This is emitted to indicate that the runner has finished.
+     * If the parsing failed, @p result should have MarbleRunnerResult::NoMatch
+     * @param result the result of the parsing.
+     * @see parse()
+     */
     void runnerFinished(MarbleRunnerResult result);
 };
 
