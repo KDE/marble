@@ -40,8 +40,6 @@ public:
     
 public slots:
     void parse(const QString &input);
-private:
-    QStringList m_cardinals;
 };
 
 }
