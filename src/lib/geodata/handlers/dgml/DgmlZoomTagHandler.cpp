@@ -35,15 +35,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Zoom)
 
-DgmlZoomTagHandler::DgmlZoomTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlZoomTagHandler::~DgmlZoomTagHandler()
-{
-}
-
 GeoNode* DgmlZoomTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Zoom));

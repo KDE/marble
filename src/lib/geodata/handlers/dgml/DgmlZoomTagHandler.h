@@ -30,9 +30,6 @@ namespace Marble
 class DgmlZoomTagHandler : public GeoTagHandler
 {
  public:
-    DgmlZoomTagHandler();
-    virtual ~DgmlZoomTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

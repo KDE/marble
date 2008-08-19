@@ -41,15 +41,6 @@ using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Palette)
 
-DgmlPaletteTagHandler::DgmlPaletteTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlPaletteTagHandler::~DgmlPaletteTagHandler()
-{
-}
-
 GeoNode* DgmlPaletteTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

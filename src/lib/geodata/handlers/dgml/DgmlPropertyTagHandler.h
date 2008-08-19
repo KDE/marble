@@ -30,9 +30,6 @@ namespace Marble
 class DgmlPropertyTagHandler : public GeoTagHandler
 {
  public:
-    DgmlPropertyTagHandler();
-    virtual ~DgmlPropertyTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

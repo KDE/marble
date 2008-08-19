@@ -39,15 +39,6 @@ using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Vector)
 
-DgmlVectorTagHandler::DgmlVectorTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlVectorTagHandler::~DgmlVectorTagHandler()
-{
-}
-
 GeoNode* DgmlVectorTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

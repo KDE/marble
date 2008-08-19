@@ -31,9 +31,6 @@ namespace Marble
 class DgmlSectionTagHandler : public GeoTagHandler
 {
 public:
-    DgmlSectionTagHandler();
-    virtual ~DgmlSectionTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

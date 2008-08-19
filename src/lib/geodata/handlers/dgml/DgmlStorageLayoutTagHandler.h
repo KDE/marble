@@ -30,9 +30,6 @@ namespace Marble
 class DgmlStorageLayoutTagHandler : public GeoTagHandler
 {
 public:
-    DgmlStorageLayoutTagHandler();
-    virtual ~DgmlStorageLayoutTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

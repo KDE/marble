@@ -36,15 +36,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Legend)
 
-DgmlLegendTagHandler::DgmlLegendTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlLegendTagHandler::~DgmlLegendTagHandler()
-{
-}
-
 GeoNode* DgmlLegendTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Legend));

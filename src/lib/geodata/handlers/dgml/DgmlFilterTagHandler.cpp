@@ -42,15 +42,6 @@ using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Filter)
 
-DgmlFilterTagHandler::DgmlFilterTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlFilterTagHandler::~DgmlFilterTagHandler()
-{
-}
-
 GeoNode* DgmlFilterTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

@@ -32,15 +32,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Minimum)
 
-DgmlMinimumTagHandler::DgmlMinimumTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlMinimumTagHandler::~DgmlMinimumTagHandler()
-{
-}
-
 GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

@@ -32,15 +32,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Name)
 
-DgmlNameTagHandler::DgmlNameTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlNameTagHandler::~DgmlNameTagHandler()
-{
-}
-
 GeoNode* DgmlNameTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

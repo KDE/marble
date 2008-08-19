@@ -34,15 +34,6 @@ using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Discrete)
 
-DgmlDiscreteTagHandler::DgmlDiscreteTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlDiscreteTagHandler::~DgmlDiscreteTagHandler()
-{
-}
-
 GeoNode* DgmlDiscreteTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

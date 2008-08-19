@@ -36,15 +36,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(StorageLayout)
 
-DgmlStorageLayoutTagHandler::DgmlStorageLayoutTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlStorageLayoutTagHandler::~DgmlStorageLayoutTagHandler()
-{
-}
-
 GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

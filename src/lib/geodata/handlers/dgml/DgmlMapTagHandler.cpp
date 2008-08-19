@@ -39,15 +39,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Map)
 
-DgmlMapTagHandler::DgmlMapTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlMapTagHandler::~DgmlMapTagHandler()
-{
-}
-
 GeoNode* DgmlMapTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Map));

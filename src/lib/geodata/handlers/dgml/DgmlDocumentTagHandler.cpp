@@ -34,15 +34,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Document)
 
-DgmlDocumentTagHandler::DgmlDocumentTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlDocumentTagHandler::~DgmlDocumentTagHandler()
-{
-}
-
 GeoNode* DgmlDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(dgmlTag_Document));

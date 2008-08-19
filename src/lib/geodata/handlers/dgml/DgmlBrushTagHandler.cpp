@@ -38,15 +38,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Brush)
 
-DgmlBrushTagHandler::DgmlBrushTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlBrushTagHandler::~DgmlBrushTagHandler()
-{
-}
-
 GeoNode* DgmlBrushTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

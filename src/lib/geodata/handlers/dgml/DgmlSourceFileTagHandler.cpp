@@ -34,15 +34,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(SourceFile)
 
-DgmlSourceFileTagHandler::DgmlSourceFileTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlSourceFileTagHandler::~DgmlSourceFileTagHandler()
-{
-}
-
 GeoNode* DgmlSourceFileTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

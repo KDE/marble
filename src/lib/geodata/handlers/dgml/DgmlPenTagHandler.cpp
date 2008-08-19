@@ -38,15 +38,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Pen)
 
-DgmlPenTagHandler::DgmlPenTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlPenTagHandler::~DgmlPenTagHandler()
-{
-}
-
 GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

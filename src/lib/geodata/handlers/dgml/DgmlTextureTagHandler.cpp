@@ -41,15 +41,6 @@ using namespace GeoSceneAuxillaryDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Texture)
 
-DgmlTextureTagHandler::DgmlTextureTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlTextureTagHandler::~DgmlTextureTagHandler()
-{
-}
-
 GeoNode* DgmlTextureTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

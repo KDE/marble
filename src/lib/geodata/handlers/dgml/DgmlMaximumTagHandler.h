@@ -30,9 +30,6 @@ namespace Marble
 class DgmlMaximumTagHandler : public GeoTagHandler
 {
  public:
-    DgmlMaximumTagHandler();
-    virtual ~DgmlMaximumTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

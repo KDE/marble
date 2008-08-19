@@ -32,15 +32,6 @@ using namespace GeoSceneElementDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Maximum)
 
-DgmlMaximumTagHandler::DgmlMaximumTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlMaximumTagHandler::~DgmlMaximumTagHandler()
-{
-}
-
 GeoNode* DgmlMaximumTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

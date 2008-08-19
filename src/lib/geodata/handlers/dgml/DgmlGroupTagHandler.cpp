@@ -38,15 +38,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Group)
 
-DgmlGroupTagHandler::DgmlGroupTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlGroupTagHandler::~DgmlGroupTagHandler()
-{
-}
-
 GeoNode* DgmlGroupTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid

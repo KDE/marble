@@ -41,15 +41,6 @@ using namespace GeoSceneAttributeDictionary;
 
 DGML_DEFINE_TAG_HANDLER(Icon)
 
-DgmlIconTagHandler::DgmlIconTagHandler()
-    : GeoTagHandler()
-{
-}
-
-DgmlIconTagHandler::~DgmlIconTagHandler()
-{
-}
-
 GeoNode* DgmlIconTagHandler::parse(GeoParser& parser) const
 {
     // Check whether the tag is valid
