@@ -133,4 +133,6 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     return;
 }
 
-} // namespoace Marble
+} // namespace Marble
+
+#include "OnfRunner.moc"
