@@ -91,7 +91,8 @@ bool twitterPlugin::isInitialized() const
     return true;
 }
 
-bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
+bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport,
+			   const QString& renderPos, GeoSceneLayer * layer)
 {
     QBrush brush(QColor(99, 198, 198, 80));
     painter->setPen(QColor(198, 99, 99, 255));
@@ -101,9 +102,14 @@ bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport, const 
 
     if (privateFlagForRenderingTwitts >= 1) {
         for (int counter = 0;counter < 4;counter++)
-            painter->drawAnnotation(twitsWithLocation[counter].location , parsedData[counter].user + " said " + "\n" + parsedData[counter].text , QSize(140, 140));
+            painter->drawAnnotation(twitsWithLocation[counter].location,
+				    parsedData[counter].user + " said " + "\n"
+				    + parsedData[counter].text,
+				    QSize(140, 140));
     } else {
-        painter->drawAnnotation(GeoDataCoordinates(0.0, 0.0, 0.0, GeoDataCoordinates::Degree), "Twitts are being Downlaoded @Twitter Plugin");
+        painter->drawAnnotation(GeoDataCoordinates(0.0, 0.0, 0.0,
+						   GeoDataCoordinates::Degree),
+				"Twitts are being Downlaoded @Twitter Plugin");
     }
     return true;
 }

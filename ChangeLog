@@ -1,3 +1,18 @@
+2008-08-19  Inge Wallin  <inge@lysator.liu.se>
+
+	Fix Krazy issue 5: Single char QString operations
+	* src/lib/gps/GmlSax.cpp
+	* src/lib/MarbleLegendBrowser.cpp
+	* src/lib/DiscCache.cpp
+	* src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+	* src/lib/geodata/data/GeoDataCoordinates.cpp
+	* src/plugins/marble/twitter/twitterPlugin.cpp
+	* src/plasmoid/worldclock.cpp
+	* docs/layermanagement.txt
+	* tools/svg2pnt/svgxmlhandler.cpp
+	* tools/asc2kml/asc2kml.cpp
+
+
 2008-08-18  Inge Wallin  <inge@lysator.liu.se>
 
 	Convert all doubles to qreals.

@@ -295,7 +295,7 @@ void WorldClock::recalculateFonts( )
     
     QString locstr = m_locationkey;
     if (!m_showFull) {
-        locstr.remove( 0, locstr.lastIndexOf( "/" ) + 1 ).replace( "_", " " );
+        locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
     } 
     QRect timeRect( m_points.value( "topleft" ),
                     m_points.value( "middleright" ) );
@@ -418,10 +418,10 @@ void WorldClock::paintInterface(QPainter *p,
     
     QString locstr = m_locationkey;
     if (m_showFull) {
-        locstr.replace( "_", " " );
+        locstr.replace( '_', ' ' );
     } else {
         //remove TZ prefixes
-        locstr.remove( 0, locstr.lastIndexOf( "/" ) + 1 ).replace( "_", " " );
+        locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
     }
 
     p->setFont( m_timeFont );

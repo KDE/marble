@@ -21,11 +21,11 @@
 QString escapeXml( const QString &str )
 {
     QString xml = str;
-    xml.replace("&", "&amp;");
-    xml.replace("<", "&lt;");
-    xml.replace(">", "&gt;");
-    xml.replace("'", "&apos;");
-    xml.replace("\"", "&quot;");
+    xml.replace('&', "&amp;");
+    xml.replace('<', "&lt;");
+    xml.replace('>', "&gt;");
+    xml.replace('\'', "&apos;");
+    xml.replace('"', "&quot;");
 
     return xml;
 }
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
         while ( !sourcestream.atEnd() ) {
 
             rawline=sourcestream.readLine();
-            splitline = rawline.split("\t");
+            splitline = rawline.split('\t');
 
             name    = splitline[0];
             state   = splitline[1];

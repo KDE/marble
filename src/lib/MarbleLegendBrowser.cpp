@@ -184,7 +184,7 @@ void MarbleLegendBrowser::translateHtml( QString & html )
     rx.setMinimal( true );
     s.replace( rx, "\n" );
     s.replace( QRegExp( "\\s*\n\\s*" ), "\n" );
-    QStringList words = s.split( "\n", QString::SkipEmptyParts );
+    QStringList words = s.split( '\n', QString::SkipEmptyParts );
 
     for (QStringList::const_iterator i = words.constBegin(); 
          i != words.constEnd(); ++i)

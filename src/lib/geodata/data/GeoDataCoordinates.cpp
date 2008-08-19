@@ -280,15 +280,15 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     //Note that it is "QString( c[0].at(0) )" because QChar doesn't work
     //for adding things in a big long chain like this. TODO: investigate.
     //becomes (?:(?:north|south)|[ns],?\\s).*(?:(?:east|west)|[ew]) in en
-    const QString latfirst = "(?:" + c[0] + "|" + c[2] + "|[" 
+    const QString latfirst = "(?:" + c[0] + '|' + c[2] + "|[" 
                            + QString( c[0].at(0) ) + QString( c[2].at(0) ) + "],?\\s).*"
-                           + "(?:" + c[1] + "|" + c[3] + "|[" 
+                           + "(?:" + c[1] + '|' + c[3] + "|[" 
                            + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])";
                            
     //this is a snippet which matches (AND CAPTURES!!) a direction.
     //becomes  (north|east|south|west|[nsew]) in en.
     //               <north   >   <east    >   <south   >   <west    >
-    QString dir = "(" + c[0] + "|" + c[1] + "|" + c[2] + "|" + c[3] + "|["
+    QString dir = "(" + c[0] + '|' + c[1] + '|' + c[2] + '|' + c[3] + "|["
                       + QString( c[0].at(0) ) + QString( c[2].at(0) ) // + <n> + <s>
                       + QString( c[1].at(0) ) + QString( c[3].at(0) ) + "])"; // + <e> + <w>
                       

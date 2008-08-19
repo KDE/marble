@@ -33,7 +33,7 @@ short the new LMC concept aims to:
 - The backend functionality of the current rendering classes should go
   into BACKEND PLUGINS.
 
-- The backend classes should be QT-THREAD-based.
+- The backend classes should be QT-THREAD-based. (NYI)
 
 - The backend classes should encourage the Model-View concept and make
   use of Qt's INTERVIEW framework.

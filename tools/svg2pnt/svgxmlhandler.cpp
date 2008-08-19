@@ -37,7 +37,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
 
         QStringList  stringlist;
         coordinates.chop(2);
-        stringlist << coordinates.mid( 1 ).split( "L" );
+        stringlist << coordinates.mid( 1 ).split( 'L' );
         // The last element is the first element
         //		stringlist.removeLast();
         QString  str;

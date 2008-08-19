@@ -52,7 +52,7 @@ bool GmlSax::endElement( const QString &namespaceURI,
         QString temp = currentText;
         qDebug() << temp;
         
-        QStringList tempList = temp.split(",");
+        QStringList tempList = temp.split( ',' );
         
         qDebug() << tempList[0]<<  tempList[1];
         
