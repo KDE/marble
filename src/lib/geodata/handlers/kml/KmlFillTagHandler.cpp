@@ -34,15 +34,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( fill )
 
-KmlfillTagHandler::KmlfillTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlfillTagHandler::~KmlfillTagHandler()
-{
-}
-
 GeoNode* KmlfillTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_fill ) );

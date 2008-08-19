@@ -1,5 +1,101 @@
 2008-08-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KmlPairTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlSchemaTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlOpenTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlSimpleFieldTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlTessellateTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlAreaTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLineStringTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlIconStyleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlWidthTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlNameTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlMarblePlacemarkTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlStyleUrlTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlColorTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlHrefTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler.h:
+    * src/lib/geodata/handlers/kml/Kml_scaleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlDescriptionTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlFillTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPairTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlIconTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlSimpleFieldTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlKeyTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlStyleMapTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlLabelStyleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlHotSpotTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlCountrycodeTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPopTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlCountryNameCodeTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPlacemarkTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPolyStyleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlSchemaTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlRoleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlIconStyleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlDocumentTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLineStringTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlDescriptionTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlNameTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlExtrudeTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlMarblePlacemarkTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlColorModeTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlHrefTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/Kml_scaleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPointTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPlacemarkTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlCountryNameCodeTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlStyleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlRoleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlStyleMapTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLabelStyleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlHotSpotTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLineStyleTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlPolyStyleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlFolderTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlColorModeTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlDocumentTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlOutlineTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPointTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlVisibilityTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlPolygonTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlHeadingTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlStyleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlOpenTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlAreaTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlTessellateTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlFolderTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlLineStyleTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlColorTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlOutlineTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlAltitudeModeTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlWidthTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlFillTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlPolygonTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlVisibilityTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlIconTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlKeyTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlStyleUrlTagHandler.h:
+    * src/lib/geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlCountrycodeTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlPopTagHandler.cpp:
+    * src/lib/geodata/handlers/kml/KmlHeadingTagHandler.cpp:
+    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
+    * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.h:
+
+    Remove unneccessary constructors and destructors. The generated
+    ones are equivalent.
+
+2008-08-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
+
     * src/lib/geodata/handlers/dgml/DgmlVectorTagHandler.cpp:
     * src/lib/geodata/handlers/dgml/DgmlItemTagHandler.h:
     * src/lib/geodata/handlers/dgml/DgmlInstallMapTagHandler.cpp:

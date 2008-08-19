@@ -30,9 +30,6 @@ namespace Marble
 class KmlvisibilityTagHandler : public GeoTagHandler
 {
 public:
-    KmlvisibilityTagHandler();
-    virtual ~KmlvisibilityTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

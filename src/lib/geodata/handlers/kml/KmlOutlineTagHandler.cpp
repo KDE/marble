@@ -34,15 +34,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( outline )
 
-KmloutlineTagHandler::KmloutlineTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmloutlineTagHandler::~KmloutlineTagHandler()
-{
-}
-
 GeoNode* KmloutlineTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outline ) );

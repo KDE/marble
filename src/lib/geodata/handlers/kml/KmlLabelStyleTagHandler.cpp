@@ -35,15 +35,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LabelStyle )
 
-KmlLabelStyleTagHandler::KmlLabelStyleTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlLabelStyleTagHandler::~KmlLabelStyleTagHandler()
-{
-}
-
 GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LabelStyle ) );

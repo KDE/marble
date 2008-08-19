@@ -34,15 +34,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( heading )
 
-KmlheadingTagHandler::KmlheadingTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlheadingTagHandler::~KmlheadingTagHandler()
-{
-}
-
 GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_heading ) );

@@ -30,9 +30,6 @@ namespace Marble
 class KmlStyleMapTagHandler : public GeoTagHandler
 {
 public:
-    KmlStyleMapTagHandler();
-    virtual ~KmlStyleMapTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

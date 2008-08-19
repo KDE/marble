@@ -29,9 +29,6 @@ namespace Marble
 
 class GPXgpxTagHandler : public GeoTagHandler {
 public:
-    GPXgpxTagHandler();
-    virtual ~GPXgpxTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

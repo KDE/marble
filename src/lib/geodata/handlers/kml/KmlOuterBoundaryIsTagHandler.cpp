@@ -36,15 +36,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( outerBoundaryIs )
 
-KmlouterBoundaryIsTagHandler::KmlouterBoundaryIsTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlouterBoundaryIsTagHandler::~KmlouterBoundaryIsTagHandler()
-{
-}
-
 GeoNode* KmlouterBoundaryIsTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outerBoundaryIs ) );

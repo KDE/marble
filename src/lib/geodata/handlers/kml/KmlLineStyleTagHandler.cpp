@@ -35,15 +35,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( LineStyle )
 
-KmlLineStyleTagHandler::KmlLineStyleTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlLineStyleTagHandler::~KmlLineStyleTagHandler()
-{
-}
-
 GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_LineStyle ) );

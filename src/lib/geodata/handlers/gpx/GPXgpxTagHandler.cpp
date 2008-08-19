@@ -33,15 +33,6 @@ using namespace GeoDataElementDictionary;
 
 GPX_DEFINE_TAG_HANDLER(gpx)
 
-GPXgpxTagHandler::GPXgpxTagHandler()
-    : GeoTagHandler()
-{
-}
-
-GPXgpxTagHandler::~GPXgpxTagHandler()
-{
-}
-
 GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_gpx));

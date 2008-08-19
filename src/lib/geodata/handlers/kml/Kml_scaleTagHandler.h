@@ -34,9 +34,6 @@ namespace Marble
 class KmlscaleTagHandler : public GeoTagHandler
 {
 public:
-    KmlscaleTagHandler();
-    virtual ~KmlscaleTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

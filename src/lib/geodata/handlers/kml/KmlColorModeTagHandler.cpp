@@ -36,15 +36,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( colorMode )
 
-KmlcolorModeTagHandler::KmlcolorModeTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlcolorModeTagHandler::~KmlcolorModeTagHandler()
-{
-}
-
 GeoNode* KmlcolorModeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_colorMode ) );

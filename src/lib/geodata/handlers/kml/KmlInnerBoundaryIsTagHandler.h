@@ -30,9 +30,6 @@ namespace Marble
 class KmlinnerBoundaryIsTagHandler : public GeoTagHandler
 {
 public:
-    KmlinnerBoundaryIsTagHandler();
-    virtual ~KmlinnerBoundaryIsTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

@@ -30,9 +30,6 @@ namespace Marble
 class KmlSimpleFieldTagHandler : public GeoTagHandler
 {
 public:
-    KmlSimpleFieldTagHandler();
-    virtual ~KmlSimpleFieldTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

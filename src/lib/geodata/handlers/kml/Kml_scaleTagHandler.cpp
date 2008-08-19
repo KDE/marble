@@ -39,15 +39,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( scale )
 
-KmlscaleTagHandler::KmlscaleTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlscaleTagHandler::~KmlscaleTagHandler()
-{
-}
-
 GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_scale ) );

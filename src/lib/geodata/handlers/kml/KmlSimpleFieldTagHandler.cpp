@@ -34,15 +34,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( SimpleField )
 
-KmlSimpleFieldTagHandler::KmlSimpleFieldTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlSimpleFieldTagHandler::~KmlSimpleFieldTagHandler()
-{
-}
-
 GeoNode* KmlSimpleFieldTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_SimpleField ) );

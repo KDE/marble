@@ -30,9 +30,6 @@ namespace Marble
 class KmlCountryNameCodeTagHandler : public GeoTagHandler
 {
 public:
-    KmlCountryNameCodeTagHandler();
-    virtual ~KmlCountryNameCodeTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
 

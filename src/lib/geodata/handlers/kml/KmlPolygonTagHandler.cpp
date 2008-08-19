@@ -37,15 +37,6 @@ using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( Polygon )
 
-KmlPolygonTagHandler::KmlPolygonTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmlPolygonTagHandler::~KmlPolygonTagHandler()
-{
-}
-
 GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Polygon ) );
