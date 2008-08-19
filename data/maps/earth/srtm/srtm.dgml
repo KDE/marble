@@ -263,39 +263,39 @@
                 <heading>Elevation</heading>
 
                 <item name="topography7000">
-                    <icon color="#c39d55"/>
+                    <icon color="#efe9dd"/>
                     <text>7000 m</text>
                 </item>
                 <item name="topography5000">
-                    <icon color="#dcbd80"/>
+                    <icon color="#e0d1b5"/>
                     <text>5000 m</text>
                 </item>
                 <item name="topography3500">
-                    <icon color="#f0da96"/>
+                    <icon color="#bd974f"/>
                     <text>3500 m</text>
                 </item>
                 <item name="topography2000">
-                    <icon color="#f1e7ad"/>
+                    <icon color="#d6b678"/>
                     <text>2000 m</text>
                 </item>
                 <item name="topography1000">
-                    <icon color="#d7d399"/>
+                    <icon color="#e3dc9d"/>
                     <text>1000 m</text>
                 </item>
                 <item name="topography500">
-                    <icon color="#bcc48a"/>
+                    <icon color="#cecf91"/>
                     <text>500 m</text>
                 </item>
                 <item name="topography200">
-                    <icon color="#98b47a"/>
+                    <icon color="#a9ba7e"/>
                     <text>200 m</text>
                 </item>
                 <item name="topography50">
-                    <icon color="#81a96d"/>
+                    <icon color="#84ab68"/>
                     <text>50 m</text>
                 </item>
                 <item name="topography0">
-                    <icon color="#689961"/>
+                    <icon color="#669b5f"/>
                     <text>0 m</text>
                 </item>
                 <item name="topography-0">

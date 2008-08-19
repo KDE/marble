@@ -254,7 +254,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     if (   viewParams->mapQuality() == Marble::High
         || viewParams->mapQuality() == Marble::Print )
     {
-	antialiased = true;
+        antialiased = true;
     }
 
     // Coastlines
@@ -315,11 +315,70 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
          m_vectorMap -> setzPointLimit( -1.0 );
          m_vectorMap -> createFromPntMap( m_countries, viewParams->viewport() );
 
-         m_vectorMap -> setPen( m_countryPen );
-         m_vectorMap -> setBrush( m_countryBrush );
-         m_vectorMap -> paintMap( painter, antialiased );
+        // Fancy Boundaries Hack:
+        // FIXME: Find a clean solution that allows for all the 
+        // tuning necessary for the different quality levels.
 
-        // US-States
+        int radius = viewParams->radius();
+        qreal penWidth = (double)(radius) / 400.0;
+        if ( radius < 400.0 ) penWidth = 1.0;
+        if ( radius > 800.0 ) penWidth = 1.75;
+        if ( showCoastlines ) penWidth = 1.0;
+
+        QPen countryPen( m_countryPen);
+        countryPen.setWidthF( penWidth );
+        QColor penColor = m_countryPen.color();
+
+        QPen borderDashPen( Qt::black );
+        m_vectorMap -> setBrush( m_countryBrush );
+
+        if ( viewParams->mapQuality() == Marble::High 
+          || viewParams->mapQuality() == Marble::Print ) {
+
+            countryPen.setColor( penColor );
+            m_vectorMap -> setPen( countryPen );
+            m_vectorMap -> paintMap( painter, antialiased );
+
+            // Only paint fancy style if the coast line doesn't get painted as well
+            // (as it looks a bit awkward otherwise)
+
+            if ( !showCoastlines ) {
+                borderDashPen.setDashPattern( QVector<qreal>() << 1 << 5 );
+                borderDashPen.setWidthF( penWidth * 0.5 );
+                m_vectorMap -> setPen( borderDashPen );
+                m_vectorMap -> paintMap( painter, antialiased );
+            }
+        }
+        if ( viewParams->mapQuality() == Marble::Normal ) {
+
+            // Only paint fancy style if the coast line doesn't get painted as well
+            // (as it looks a bit awkward otherwise)
+
+            if ( !showCoastlines ) {
+                countryPen.setColor( penColor.darker(110) );
+            }
+
+            m_vectorMap -> setPen( countryPen );
+            m_vectorMap -> paintMap( painter, antialiased );
+
+            if ( !showCoastlines ) {
+                borderDashPen.setStyle( Qt::DotLine );
+                m_vectorMap -> setPen( borderDashPen );
+                m_vectorMap -> paintMap( painter, antialiased );
+            }
+        }
+        if ( viewParams->mapQuality() == Marble::Outline 
+          || viewParams->mapQuality() == Marble::Low ) {
+
+            if ( !showCoastlines ) {
+                countryPen.setWidthF( 1.0 );
+                countryPen.setColor( penColor.darker(115) );
+            }
+            m_vectorMap -> setPen( countryPen );
+            m_vectorMap -> paintMap( painter, antialiased );
+         }
+
+         // US-States
          m_vectorMap -> setzBoundingBoxLimit( -1.0 );
          m_vectorMap -> setzPointLimit( -1.0 );
          m_vectorMap -> createFromPntMap( m_usaStates, viewParams->viewport() );
@@ -336,7 +395,6 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
          m_vectorMap -> setPen( m_dateLinePen );
          m_vectorMap -> setBrush( m_dateLineBrush );
          m_vectorMap -> paintMap( painter, antialiased );
-
     }
 
     // qDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
