@@ -503,14 +503,14 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
                 const qreal dockArea = 60.0; // Alignment area width/height
                 const qreal dockJump = 30.0; // Alignment indicator jump size
                 if ( widget->width()-size().width()-newX < dockArea ) {
-                    newX = qMin(-1.0, size().width()+newX-widget->width());
+                    newX = qMin(qreal(-1.0), size().width()+newX-widget->width());
                     if (d->m_floatItemMoveStartPos.x()<event->pos().x()) {
                         // Indicate change to right alignment with a short jump
                         newX = qMax( newX, -(dockArea-dockJump) );
                     }
                 }
                 if ( widget->height()-size().height()-newY < dockArea ) {
-                    newY = qMin(-1.0,size().height()+newY-widget->height());
+                    newY = qMin(qreal(-1.0),size().height()+newY-widget->height());
                     if (d->m_floatItemMoveStartPos.y()<event->pos().y()) {
                        // Indicate change to bottom alignment with a short jump
                        newY = qMax( newY, -(dockArea-dockJump) );
