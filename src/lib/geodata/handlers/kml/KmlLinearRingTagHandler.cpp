@@ -45,13 +45,13 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLinearRing* linearRing = 0;
     if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
-        linearRing = new GeoDataLinearRing();
+        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataPolygon>() );
         parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
     } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
-        linearRing = new GeoDataLinearRing();
+        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataPolygon>() );
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        linearRing = new GeoDataLinearRing();
+        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataMultiGeometry>() );
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
     }
 #ifdef DEBUG_TAGS

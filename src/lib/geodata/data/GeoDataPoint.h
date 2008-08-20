@@ -50,7 +50,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     typedef GeoDataCoordinates::Unit Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
-    GeoDataPoint();
+    explicit GeoDataPoint( GeoDataObject *parent = 0 );
 
     /**
      * @brief create a geopoint from longitude and latitude
@@ -61,7 +61,19 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
-                  GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0 );
+                  GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0,
+                  GeoDataObject *parent = 0 );
+
+    /**
+     * @brief create a geopoint from longitude and latitude
+     * @param _lon longitude
+     * @param _lat latitude
+     * @param alt altitude (default: 0)
+     * @param _unit units that lon and lat get measured in
+     * (default for Radian: north pole at pi/2, southpole at -pi/2)
+     */
+    GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
+                  GeoDataObject *parent = 0 );
 
     ~GeoDataPoint();
 

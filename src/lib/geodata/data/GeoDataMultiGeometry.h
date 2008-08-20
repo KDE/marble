@@ -32,7 +32,7 @@ namespace Marble
 class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
                                             public GeoDataGeometry {
  public:
-    GeoDataMultiGeometry();
+    explicit GeoDataMultiGeometry( GeoDataObject *parent = 0 );
     GeoDataMultiGeometry( const GeoDataMultiGeometry& );
 
     virtual ~GeoDataMultiGeometry();

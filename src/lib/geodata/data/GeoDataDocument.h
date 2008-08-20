@@ -51,7 +51,7 @@ class GeoDataDocumentPrivate;
 class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
                                        public GeoDataContainer {
 public:
-    GeoDataDocument();
+    explicit GeoDataDocument( GeoDataObject *parent = 0 );
     ~GeoDataDocument();
 
     virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };

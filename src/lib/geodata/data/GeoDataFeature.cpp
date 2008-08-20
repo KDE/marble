@@ -65,15 +65,15 @@ class GeoDataFeaturePrivate
 };
 
 
-GeoDataFeature::GeoDataFeature()
-    : GeoDataObject(),
+GeoDataFeature::GeoDataFeature( GeoDataObject* parent )
+    : GeoDataObject( parent ),
       m_visualCategory( Unknown ),
       d( new GeoDataFeaturePrivate() )
 {
 }
 
-GeoDataFeature::GeoDataFeature( const QString& name )
-    : GeoDataObject(),
+GeoDataFeature::GeoDataFeature( const QString& name, GeoDataObject* parent )
+    : GeoDataObject( parent ),
       m_visualCategory( Unknown ),
       d( new GeoDataFeaturePrivate() )
 {

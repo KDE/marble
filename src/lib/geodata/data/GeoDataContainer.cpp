@@ -39,8 +39,9 @@ class GeoDataContainerPrivate
     QVector < GeoDataFeature* >  m_features;
 };
 
-GeoDataContainer::GeoDataContainer()
-    : d( new GeoDataContainerPrivate() )
+GeoDataContainer::GeoDataContainer( GeoDataObject *parent )
+    : GeoDataFeature( parent ),
+    d( new GeoDataContainerPrivate() )
 {
 }
 
@@ -90,7 +91,23 @@ QVector<GeoDataFeature*> GeoDataContainer::features() const
 
 void GeoDataContainer::addFeature(GeoDataFeature* feature)
 {
+    feature->setParent( this );
     d->m_features.append(feature);
+}
+
+GeoDataObject* GeoDataContainer::child( int pos )
+{
+    return d->m_features.value( pos );
+}
+
+int GeoDataContainer::childPosition( GeoDataObject *child )
+{
+    return d->m_features.indexOf( static_cast<GeoDataFeature*>( child ) );
+}
+
+int GeoDataContainer::childCount()
+{
+    return d->m_features.count();
 }
 
 void GeoDataContainer::pack( QDataStream& stream ) const
@@ -124,14 +141,14 @@ void GeoDataContainer::unpack( QDataStream& stream )
                 /* not usable!!!! */ break;
             case GeoDataFolderId:
                 {
-                GeoDataFolder* folder = new GeoDataFolder();
+                GeoDataFolder* folder = new GeoDataFolder( this );
                 folder->unpack( stream );
                 d->m_features.append( folder );
                 }
                 break;
             case GeoDataPlacemarkId:
                 {
-                GeoDataPlacemark* placemark = new GeoDataPlacemark();
+                GeoDataPlacemark* placemark = new GeoDataPlacemark( this );
                 placemark->unpack( stream );
                 d->m_features.append( placemark );
                 }

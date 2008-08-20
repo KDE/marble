@@ -248,9 +248,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static void setDefaultFont( const QFont& font );
 
  protected:
-    GeoDataFeature();
+    explicit GeoDataFeature( GeoDataObject *parent = 0 );
     /// Create a new GeoDataFeature with @p name as its name.
-    explicit GeoDataFeature( const QString& name );
+    explicit GeoDataFeature( const QString& name, GeoDataObject *parent = 0 );
 
     // FIXME: move member to d-pointer class
     /// The visual category of this feature.  @see GeoDataVisualCategory

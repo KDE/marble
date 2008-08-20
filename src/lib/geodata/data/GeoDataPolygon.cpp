@@ -20,8 +20,8 @@ namespace Marble
 class GeoDataPolygonPrivate
 {
  public:
-    GeoDataPolygonPrivate()
-	: outer( new GeoDataLinearRing() ),
+    GeoDataPolygonPrivate( GeoDataPolygon *geoDataPolygon )
+	: outer( new GeoDataLinearRing( geoDataPolygon ) ),
 	  m_dirtyBox( true )
     {
     }
@@ -44,9 +44,9 @@ class GeoDataPolygonPrivate
                                             // been calculated. Saves performance. 
 };
 
-GeoDataPolygon::GeoDataPolygon()
-  : GeoDataGeometry(),
-    d( new GeoDataPolygonPrivate() )
+GeoDataPolygon::GeoDataPolygon( GeoDataObject *parent )
+  : GeoDataGeometry( parent ),
+    d( new GeoDataPolygonPrivate( this ) )
 {
 }
 
@@ -128,7 +128,7 @@ void GeoDataPolygon::unpack( QDataStream& stream )
     
     stream >> size;
     for(int i = 0; i < size; i++ ) {
-        GeoDataLinearRing* linearRing = new GeoDataLinearRing();
+        GeoDataLinearRing* linearRing = new GeoDataLinearRing( this );
         linearRing->unpack( stream );
         d->inner.append( linearRing );
     }

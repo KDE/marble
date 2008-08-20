@@ -28,8 +28,9 @@ class GeoDataLineStringPrivate
                              // been calculated. Saves performance. 
 };
 
-GeoDataLineString::GeoDataLineString()
-  : QVector<GeoDataCoordinates*>(), GeoDataGeometry(),
+GeoDataLineString::GeoDataLineString( GeoDataObject *parent )
+  : QVector<GeoDataCoordinates*>(),
+  GeoDataGeometry( parent ), 
     d( new GeoDataLineStringPrivate )
 {
 }

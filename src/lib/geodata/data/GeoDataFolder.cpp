@@ -25,7 +25,8 @@
 namespace Marble
 {
 
-GeoDataFolder::GeoDataFolder()
+GeoDataFolder::GeoDataFolder( GeoDataObject* parent)
+    : GeoDataContainer( parent )
 {
 }
 

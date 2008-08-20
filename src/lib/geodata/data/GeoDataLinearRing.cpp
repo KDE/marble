@@ -15,7 +15,8 @@
 namespace Marble
 {
 
-GeoDataLinearRing::GeoDataLinearRing()
+GeoDataLinearRing::GeoDataLinearRing( GeoDataObject *parent )
+    : GeoDataLineString( parent )
 {
 }
 

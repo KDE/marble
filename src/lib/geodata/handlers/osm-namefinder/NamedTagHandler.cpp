@@ -47,7 +47,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     qDebug() << "parentItem:" << parentItem.qualifiedName().first;
 
     // FIXME: better check tags before?
-    GeoDataPlacemark * named = new GeoDataPlacemark;
+    GeoDataPlacemark * named = new GeoDataPlacemark( parentItem.nodeAs<GeoDataObject>() );
 
     // FIXME: attribute type
 //     const ItemType type = getItemType( parser.attribute( attr_type ).trimmed() );
@@ -70,7 +70,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString lonStr = parser.attribute( attr_lon ).trimmed();
     if ( !lonStr.isEmpty() )
         lon = lonStr.toDouble();
-    named->setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree ));
+    named->setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0, parentItem.nodeAs<GeoDataObject>() ));
 
     // attribute name
     const QString name = parser.attribute( attr_name ).trimmed();

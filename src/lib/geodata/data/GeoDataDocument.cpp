@@ -47,9 +47,9 @@ class GeoDataDocumentPrivate
     QHash<QString, GeoDataStyleMap*> m_styleMapHash;
 };
 
-GeoDataDocument::GeoDataDocument()
+GeoDataDocument::GeoDataDocument( GeoDataObject *parent )
     : GeoDocument()
-    , GeoDataContainer()
+    , GeoDataContainer( parent )
     , d( new GeoDataDocumentPrivate() )
 {
 }

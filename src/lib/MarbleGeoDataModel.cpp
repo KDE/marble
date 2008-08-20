@@ -104,7 +104,9 @@ bool MarbleGeoDataModel::addGeoDataFile( QString filename )
     foreach(GeoDataStyleMap* map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
         d->m_rootDocument->addStyleMap( map );
     }
-
+    
+    emit( dataChanged() );
+    
     return true;
 }
 

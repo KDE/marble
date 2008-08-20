@@ -5,14 +5,15 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>"
+// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+// Copyright 2008      Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#ifndef MarbleGeoDataModel_H
-#define MarbleGeoDataModel_H
+#ifndef MarbleGeoDataDebugModel_H
+#define MarbleGeoDataDebugModel_H
 
 
-#include <QtCore/QAbstractListModel>
+#include <QtCore/QAbstractItemModel>
 
 #include "marble_export.h"
 
@@ -23,10 +24,8 @@ class GeoDataDocument;
 /**
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
- * It will encapsule the different Tiles needed to form one layer.
- * Thus each layer will be represented by one MarbleGeoDataModel.
  */
-class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
+class MARBLE_EXPORT MarbleGeoDataDebugModel : public QAbstractItemModel
 {
     Q_OBJECT
 
@@ -37,49 +36,47 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
      *
      * @param parent The parent object.
      */
-    explicit MarbleGeoDataModel( QObject *parent = 0 );
+    explicit MarbleGeoDataDebugModel( GeoDataDocument*, QObject *parent = 0 );
 
     /**
      * Destroys the GeoDataModel.
      */
-    ~MarbleGeoDataModel();
+    ~MarbleGeoDataDebugModel();
 
-    QList<QPersistentModelIndex> persistentIndexList () const;
-	
     /**
      * Return the number of Items in the Model.
      */
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
-    
+
     /**
     * Return the 
     */
     QVariant data( const QModelIndex &index, int role ) const;
 
-    /**
-    * Load another kml file and merge it into the current geoDataRoot
-    * @param filename the filename in the local filesystem
-    */
-    bool addGeoDataFile( QString filename );
-    
+    QModelIndex index(int row, int column,
+                       const QModelIndex &parent = QModelIndex()) const;
+
+    QModelIndex parent(const QModelIndex &index) const;
+
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+
+    void reset() { QAbstractItemModel::reset(); }
+
     /**
     * Return a pointer to the root object of a geodata tree.
     * This tree is a merged version of all the files loaded into this model
     */
     Marble::GeoDataDocument* geoDataRoot();
- Q_SIGNALS:
- 
-    /**
-     * Emitted whenever the data in the Model has changed
-     */
-    void dataChanged();
- 
+    
+  public Q_SLOTS:
+    void update();
+    
  private:
-    Q_DISABLE_COPY( MarbleGeoDataModel )
+    Q_DISABLE_COPY( MarbleGeoDataDebugModel )
     class Private;
     Private* const d;
 };
 
 }
 
-#endif // MarbleGeoDataModel_H
+#endif // MarbleGeoDataDebugModel_H

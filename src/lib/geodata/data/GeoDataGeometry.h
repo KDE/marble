@@ -51,7 +51,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    GeoDataGeometry();
+    explicit GeoDataGeometry( GeoDataObject *parent = 0 );
     GeoDataGeometry( const GeoDataGeometry & other );
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     

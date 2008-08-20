@@ -44,7 +44,7 @@ class GeoDataLineStringPrivate;
 class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
                                          public GeoDataGeometry {
  public:
-    GeoDataLineString();
+    explicit GeoDataLineString( GeoDataObject *parent = 0 );
     GeoDataLineString( const GeoDataLineString & );
     GeoDataLineString& operator=( const GeoDataLineString & );
 

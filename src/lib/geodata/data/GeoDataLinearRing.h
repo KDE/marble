@@ -36,7 +36,7 @@ namespace Marble
 
 class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
  public:
-    GeoDataLinearRing();
+    explicit GeoDataLinearRing( GeoDataObject *parent = 0 );
 
     virtual ~GeoDataLinearRing();
     virtual EnumGeometryId geometryId() const { return GeoDataLinearRingId; };

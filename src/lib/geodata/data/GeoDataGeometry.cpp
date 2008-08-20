@@ -64,8 +64,9 @@ void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
 }
 
 
-GeoDataGeometry::GeoDataGeometry() 
-    : d( new GeoDataGeometryPrivate() )
+GeoDataGeometry::GeoDataGeometry( GeoDataObject *parent ) 
+    : GeoDataObject( parent ),
+      d( new GeoDataGeometryPrivate() )
 {
 }
 

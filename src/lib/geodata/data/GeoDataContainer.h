@@ -80,6 +80,21 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     void addFeature( GeoDataFeature* feature );
 
     /**
+     * @brief  returns the requested child item
+     */
+    virtual GeoDataObject* child( int );
+    
+    /**
+     * @brief returns the position of an item in the list
+     */
+    virtual int childPosition( GeoDataObject* );
+    
+    /**
+     * @brief returns the number of items in the list
+     */
+    virtual int childCount();
+    
+    /**
      * @brief  Serialize the container to a stream.
      * @param  stream  the stream
      */
@@ -92,7 +107,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 
  protected:
     /// Default constructor
-    GeoDataContainer();
+    explicit GeoDataContainer( GeoDataObject *parent = 0 );
 
  private:
     Q_DISABLE_COPY( GeoDataContainer )

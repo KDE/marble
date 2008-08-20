@@ -43,7 +43,7 @@ class GeoDataPolygonPrivate;
 
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
  public:
-    GeoDataPolygon();
+    explicit GeoDataPolygon( GeoDataObject *parent = 0 );
     GeoDataPolygon( const GeoDataPolygon & );
     GeoDataPolygon& operator=( const GeoDataPolygon & );
 

@@ -10,7 +10,7 @@
 //
 
 
-#include "GeoDataObject.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
@@ -21,19 +21,21 @@ namespace Marble
 class GeoDataObjectPrivate
 {
   public:
-    GeoDataObjectPrivate()
+    GeoDataObjectPrivate(GeoDataObject* parent)
         : m_id(0),
-          m_targetId(0)
+          m_targetId(0),
+          m_parent( parent )
     {
     }
 
     int  m_id;
     int  m_targetId;
+    GeoDataObject* m_parent;
 };
 
-GeoDataObject::GeoDataObject()
+GeoDataObject::GeoDataObject( GeoDataObject* parent )
     : GeoNode(), Serializable(),
-      d( new GeoDataObjectPrivate )
+      d( new GeoDataObjectPrivate( parent ) )
 {
 }
 
@@ -72,6 +74,40 @@ int GeoDataObject::targetId() const
 void GeoDataObject::setTargetId( int value )
 {
     d->m_targetId = value;
+}
+
+void GeoDataObject::setParent( GeoDataObject *parent )
+{
+    d->m_parent = parent;
+}
+
+GeoDataObject* GeoDataObject::parent()
+{
+    return d->m_parent;
+}
+
+GeoDataObject* GeoDataObject::child(int /* pos */ )
+{
+    return 0;
+}
+
+int GeoDataObject::row()
+{
+    if ( d->m_parent )
+        return d->m_parent->childPosition( this );
+    
+    return 0;
+}
+
+int GeoDataObject::childPosition( GeoDataObject *child )
+{
+    Q_UNUSED( child );
+    return 0;
+}
+
+int GeoDataObject::childCount()
+{
+    return 0;
 }
 
 void GeoDataObject::pack( QDataStream& stream ) const

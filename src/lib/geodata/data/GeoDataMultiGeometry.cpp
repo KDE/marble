@@ -19,7 +19,8 @@
 namespace Marble
 {
 
-GeoDataMultiGeometry::GeoDataMultiGeometry()
+GeoDataMultiGeometry::GeoDataMultiGeometry( GeoDataObject *parent )
+    : GeoDataGeometry( parent )
 {
 }
 
@@ -73,28 +74,28 @@ void GeoDataMultiGeometry::unpack( QDataStream& stream )
                 break;
             case GeoDataLineStringId:
                 {
-                GeoDataLineString* lineString = new GeoDataLineString();
+                GeoDataLineString* lineString = new GeoDataLineString( this );
                 lineString->unpack( stream );
                 this->append( lineString );
                 }
                 break;
             case GeoDataLinearRingId:
                 {
-                GeoDataLinearRing* linearRing = new GeoDataLinearRing();
+                GeoDataLinearRing* linearRing = new GeoDataLinearRing( this );
                 linearRing->unpack( stream );
                 this->append( linearRing );
                 }
                 break;
             case GeoDataPolygonId:
                 {
-                GeoDataPolygon* polygon = new GeoDataPolygon();
+                GeoDataPolygon* polygon = new GeoDataPolygon( this );
                 polygon->unpack( stream );
                 this->append( polygon );
                 }
                 break;
             case GeoDataMultiGeometryId:
                 {
-                GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry();
+                GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry( this );
                 multiGeometry->unpack( stream );
                 this->append( multiGeometry );
                 }

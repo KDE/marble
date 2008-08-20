@@ -46,10 +46,10 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLineString* lineString = 0;
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-        lineString = new GeoDataLineString();
+        lineString = new GeoDataLineString( parentItem.nodeAs<GeoDataPlacemark>() );
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        lineString = new GeoDataLineString();
+        lineString = new GeoDataLineString( parentItem.nodeAs<GeoDataMultiGeometry>() );
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
     }
 #ifdef DEBUG_TAGS

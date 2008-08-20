@@ -1,3 +1,48 @@
+2008-08-20  Simon Schmeisser  <mail_to_wrt@gmx.de>
+
+    * src/lib/MarbleGeoDataModel.h
+    * src/lib/MarbleGeoDataModel.cpp
+    * src/lib/geodata/handlers/kml/KmlLineStringTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlMarblePlacemarkTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlLinearRingTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlPlacemarkTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlFolderTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlPolygonTagHandler.cpp
+    * src/lib/geodata/handlers/osm-namefinder/NamedTagHandler.cpp
+    * src/lib/geodata/data/GeoDataMultiGeometry.h
+    * src/lib/geodata/data/GeoDataLineString.cpp
+    * src/lib/geodata/data/GeoDataFolder.h
+    * src/lib/geodata/data/GeoDataContainer.cpp
+    * src/lib/geodata/data/GeoDataDocument.h
+    * src/lib/geodata/data/GeoDataPolygon.cpp
+    * src/lib/geodata/data/GeoDataGeometry.cpp
+    * src/lib/geodata/data/GeoDataPoint.h
+    * src/lib/geodata/data/GeoDataLinearRing.h
+    * src/lib/geodata/data/GeoDataPlacemark.cpp
+    * src/lib/geodata/data/GeoDataFeature.h
+    * src/lib/geodata/data/GeoDataMultiGeometry.cpp
+    * src/lib/geodata/data/GeoDataObject.h
+    * src/lib/geodata/data/GeoDataFolder.cpp
+    * src/lib/geodata/data/GeoDataDocument.cpp
+    * src/lib/geodata/data/GeoDataLineString.h
+    * src/lib/geodata/data/GeoDataContainer.h
+    * src/lib/geodata/data/GeoDataPoint.cpp
+    * src/lib/geodata/data/GeoDataLinearRing.cpp
+    * src/lib/geodata/data/GeoDataFeature.cpp
+    * src/lib/geodata/data/GeoDataPolygon.h
+    * src/lib/geodata/data/GeoDataGeometry.h
+    * src/lib/geodata/data/GeoDataPlacemark.h
+    * src/lib/geodata/data/GeoDataObject.cpp
+    * src/plugins/marble/dataview
+    * src/plugins/marble/dataview/MarbleGeoDataDebugModel.cpp
+    * src/plugins/marble/dataview/MarbleGeoDataDebugModel.h
+    * src/plugins/marble/dataview/MarbleDataViewPlugin.cpp
+    * src/plugins/marble/dataview/MarbleDataViewPlugin.h
+    * src/plugins/marble/dataview/CMakeLists.txt
+    * src/plugins/marble/CMakeLists.txt
+
+Added a basic Model that allows introspection into the GeoData loaded from KML
+
 2008-08-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
 
     * src/lib/geodata/handlers/kml/KmlPairTagHandler.h:

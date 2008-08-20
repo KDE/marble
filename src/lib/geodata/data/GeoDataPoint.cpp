@@ -23,20 +23,32 @@
 namespace Marble
 {
 
-GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt, 
-                            GeoDataPoint::Unit unit, int _detail )
-  : GeoDataCoordinates( _lon, _lat, _alt, 
+GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
+                            GeoDataPoint::Unit unit, int _detail,
+                            GeoDataObject *parent )
+  : GeoDataGeometry( parent ),
+  GeoDataCoordinates( _lon, _lat, _alt, 
                         static_cast<GeoDataCoordinates::Unit>( unit ), _detail )
 {
 }
 
-GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataCoordinates( other ),
-    GeoDataGeometry( other )
+GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
+                            GeoDataObject *parent )
+  : GeoDataGeometry( parent ),
+  GeoDataCoordinates( _lon, _lat, _alt, 
+                        GeoDataPoint::Radian, 0 )
 {
 }
 
-GeoDataPoint::GeoDataPoint()
+GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
+  : GeoDataGeometry( other ),
+   GeoDataCoordinates( other )
+    
+{
+}
+
+GeoDataPoint::GeoDataPoint( GeoDataObject *parent )
+    : GeoDataGeometry( parent )
 {
 }
 

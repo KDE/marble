@@ -45,11 +45,11 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
     
     GeoDataPolygon* polygon = 0;
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-        polygon = new GeoDataPolygon();
+        polygon = new GeoDataPolygon( parentItem.nodeAs<GeoDataPlacemark>() );
 
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        polygon = new GeoDataPolygon();
+        polygon = new GeoDataPolygon( parentItem.nodeAs<GeoDataMultiGeometry>() );
 
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
     }
