@@ -27,6 +27,7 @@ import sys
 import os
 
 # the taglist lists all the tags of KML spec 2.1 with their respective parent tags
+# please keep in mind that tags are case sensitive in XML
 
 TAGLIST = """
 address,Feature
@@ -179,13 +180,15 @@ HEADER="""/*
 
 #include "GeoTagHandler.h"
 
+namespace Marble
+{
+
 class KmltemplateTagHandler : public GeoTagHandler {
 public:
-    KmltemplateTagHandler();
-    virtual ~KmltemplateTagHandler();
-
     virtual GeoNode* parse(GeoParser&) const;
 };
+
+}   // Marble
 
 #endif // KmltemplateTagHandler_h
 """
@@ -221,18 +224,12 @@ SOURCE="""/*
 TEMPLATE_PARENT_HEADERS
 #include "GeoDataParser.h"
 
+namespace Marble
+{
+
 using namespace GeoDataElementDictionary;
 
 KML_DEFINE_TAG_HANDLER( template )
-
-KmltemplateTagHandler::KmltemplateTagHandler()
-    : GeoTagHandler()
-{
-}
-
-KmltemplateTagHandler::~KmltemplateTagHandler()
-{
-}
 
 GeoNode* KmltemplateTagHandler::parse( GeoParser& parser ) const
 {
@@ -252,34 +249,29 @@ GeoNode* KmltemplateTagHandler::parse( GeoParser& parser ) const
 
     return 0;
 }
+
+} // Marble
 """
 
-# all known abstract parents - those need a different handling of the 
-abstractParents=['Feature', 'Container', 'Geometry', 'ColorStyle', 'StyleSelector', 'SchemaField', 'Overlay', 'TimePrimitive']
 path = os.getcwd() + os.sep
-print path, os.sep
-if os.sep == "\\":
-    path.replace( os.sep, "a")
-    print "replace"
-print path
 
-"""    if( parentItem.represents( kmlTag_Parent ) ) {
-        QString content = parser.readElementText().trimmed();
-        
-        parentItem.nodeAs<GeoDataParent>()->doSomething( content );
-        qDebug() << "Parsed <" << kmlTag_template << "> containing: " << content
-                 << " parent item name: " << parentItem.qualifiedName().first;
-    }
-"""
+# all known abstract parents - those need a different handling
+abstractParents=['Feature', 'Container', 'Geometry', 'ColorStyle', 'StyleSelector', 'SchemaField', 'Overlay', 'TimePrimitive']
 
 def add_new_copy( tagname, parents ):
+    """ add new source files for Tag tagname """
+# set pretend to True to not actually generate the source files
     pretend = False
     if not ( os.path.exists( path + "Kml" + tagname.capitalize() + "TagHandler.h" ) or os.path.exists( path + "Kml" + tagname.capitalize() + "TagHandler.cpp" ) ):
         if not pretend:
-            file( path + "Kml" + tagname.capitalize() + "TagHandler.h", "wb" ).write( HEADER )
-            file( path + "Kml" + tagname.capitalize() + "TagHandler.cpp", "wb" ).write( SOURCE )
+            file( path + "Kml" + capitalize( tagname ) + "TagHandler.h", "wb" ).write( HEADER )
+            file( path + "Kml" + capitalize( tagname ) + "TagHandler.cpp", "wb" ).write( SOURCE )
+        else:
+            print "writing " + path + "Kml" + capitalize( tagname ) + "TagHandler.h"
+            print "writing " + path + "Kml" + capitalize( tagname ) + "TagHandler.cpp"
 
         HEADERS = ""
+# generate a list of the include headers according to the parent tags (which are normally equivalent to a GeoDataObject header)
         if tagname in parents.keys():
             for i in parents[ tagname ]:
                 if i in abstractParents:
@@ -291,15 +283,15 @@ def add_new_copy( tagname, parents ):
             firstParent = "Parent"
                 
         sedHeaderCommand = "sed -i -e \"s/KmltemplateTagHandler/Kml" + tagname + "TagHandler/g\" " \
-                           + path + "Kml" + tagname.capitalize() + "TagHandler.h"
+                           + path + "Kml" + capitalize( tagname ) + "TagHandler.h"
 
         sedCPPCommand = "sed -i -e \"s/KmltemplateTagHandler/Kml" + tagname + "TagHandler/g\" " \
                         + "-e \"s/kmlTag_template/kmlTag_" + tagname +"/g\" " \
                         + "-e \"s/kmlTag_Parent/kmlTag_" + firstParent +"/g\" " \
                         + "-e \"s/KML_DEFINE_TAG_HANDLER( template )/KML_DEFINE_TAG_HANDLER( " + tagname +" )/g\" " \
                         + "-e \"s/TEMPLATE_PARENT_HEADERS/" + HEADERS + "/g\" " \
-                        + "-e \"s/KmltemplateTagHandler.h/Kml" + tagname +"TagHandler.h/g\" " \
-                        + path + "Kml" + tagname.capitalize() + "TagHandler.cpp"
+                        + "-e \"s/KmltemplateTagHandler.h/Kml" + capitalize( tagname ) +"TagHandler.h/g\" " \
+                        + path + "Kml" + capitalize( tagname ) + "TagHandler.cpp"
         #print sedHeaderCommand
         print sedCPPCommand
         if not pretend:
@@ -308,12 +300,15 @@ def add_new_copy( tagname, parents ):
     else:
         print "file already existing: ", tagname
 
+def capitalize( tagname ):
+    """ because the capitalize function does not work correctly for CamelCase """
+    return tagname[0].capitalize() + tagname[1:]
 
 def usage( name ):
     print
     print name + " [Tag1 [...]]"
     print
-    print "generate new source file for kml"
+    print "generate new source file for any kml tag"
     print "source files will be added in the directory where you execute"
     print "this script"
     
@@ -329,8 +324,11 @@ if len(sys.argv) > 1:
     if sys.argv[ 1 ] in ['-h', '--help']:
         usage( sys.argv[ 0 ] )
         sys.exit( 0 )
+        
     newTags = sys.argv[ 1: ]
+    
     for tag in newTags:
+        """ check if parents of to-be-generated are available """
         if maintainer==False:
             try:
                 p = parents[ tag ]
