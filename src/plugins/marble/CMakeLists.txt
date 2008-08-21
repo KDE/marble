@@ -9,7 +9,7 @@ add_subdirectory( stars )
 # add_subdirectory( panoramio )
 # add_subdirectory ( twitter )
 
-# add_subdirectory( navigation )
+add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )
 
 #add_subdirectory( dataview )

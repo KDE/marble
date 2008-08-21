@@ -16,6 +16,7 @@ if (QTONLY)
   qt4_wrap_ui(navigation_SRCS ${navigation_UI})
   qt4_automoc(${navigation_SRCS})
 else (QTONLY)
+  include_directories (${KDE4_INCLUDES})
   kde4_add_ui_files(navigation_SRCS ${navigation_UI})
 endif (QTONLY)
 
