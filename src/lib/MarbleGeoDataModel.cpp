@@ -27,9 +27,10 @@ using namespace Marble;
 
 class MarbleGeoDataModel::Private {
  public:
-    Private() : m_rootDocument( new GeoDataDocument() ) {};
+    Private() : m_rootDocument( new GeoDataDocument() ), m_latestId( 0 ) {};
     GeoDataDocument* m_rootDocument;
-    QVector<GeoDataDocument*> m_documents;
+    QHash<int, GeoDataDocument*> m_documents;
+    unsigned long m_latestId;
 };
 
 MarbleGeoDataModel::MarbleGeoDataModel( QObject *parent )
@@ -67,7 +68,7 @@ QVariant MarbleGeoDataModel::data( const QModelIndex &index, int role ) const
     return QVariant();
 }
 
-bool MarbleGeoDataModel::addGeoDataFile( QString filename )
+unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
 {
     /*
     * read a GeoDataDocument for now - hard coded
@@ -77,7 +78,7 @@ bool MarbleGeoDataModel::addGeoDataFile( QString filename )
     QFile file( filename );
     if ( !file.exists() ) {
         qWarning( "File does not exist!" );
-        return false;
+        return 0;
     }
 
     // Open file in right mode
@@ -85,7 +86,7 @@ bool MarbleGeoDataModel::addGeoDataFile( QString filename )
     
     if ( !parser.read( &file ) ) {
         qWarning( "Could not parse file!" );
-        return false;
+        return 0;
     }
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT_X( document, "geoRoot()", "document unparseable" );
@@ -94,7 +95,8 @@ bool MarbleGeoDataModel::addGeoDataFile( QString filename )
         d->m_rootDocument->addFeature( feature );
     }
 
-    d->m_documents << static_cast<GeoDataDocument*>( document );
+    // add this document as a new entry into the hash
+    d->m_documents[++(d->m_latestId)] = static_cast<GeoDataDocument*>( document );
     
     // get the styles and the stylemaps
     foreach(GeoDataStyle* style, static_cast<GeoDataDocument*>( document )->styles() ) {
@@ -107,7 +109,28 @@ bool MarbleGeoDataModel::addGeoDataFile( QString filename )
     
     emit( dataChanged() );
     
-    return true;
+    return d->m_latestId;
+}
+
+bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
+{
+    if(d->m_documents.contains( removeId ) ) {
+        GeoDataDocument *doc = d->m_documents[ removeId ];
+        foreach(GeoDataFeature* feature, doc->features() ) {
+            d->m_rootDocument->removeFeature( feature );
+        }
+        // get the styles and the stylemaps
+        foreach(GeoDataStyle* style, doc->styles() ) {
+            d->m_rootDocument->removeStyle( style );
+        }
+
+        foreach(GeoDataStyleMap* map, doc->styleMaps() ) {
+            d->m_rootDocument->removeStyleMap( map );
+        }
+        delete doc;
+        return true;
+    }
+    return false;
 }
 
 GeoDataDocument* MarbleGeoDataModel::geoDataRoot()

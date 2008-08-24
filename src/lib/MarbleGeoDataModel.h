@@ -29,7 +29,6 @@ class GeoDataDocument;
 class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
 {
     Q_OBJECT
-
  public:
 
     /**
@@ -57,11 +56,22 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
     QVariant data( const QModelIndex &index, int role ) const;
 
     /**
-    * Load another kml file and merge it into the current geoDataRoot
+    * @brief Load another kml file and merge it into the current geoDataRoot
+    * The styles, styleMaps and features are merged into the geoDataRoot document
+    * the return value is a unique id given for each loaded document 
     * @param filename the filename in the local filesystem
     */
-    bool addGeoDataFile( QString filename );
-    
+    unsigned long addGeoDataFile( QString filename );
+
+    /**
+    * @brief Unload a document from geoDataRoot
+    * a specific kml file is unmerged from the current geoDataRoot
+    * please keep in mind that styles and styleMaps added by this document
+    * will become invalid when the document is removed
+    * @param keyId the Id given when adding the GeoDataDocument
+    */
+    bool removeGeoDataFile( unsigned long keyId );
+
     /**
     * Return a pointer to the root object of a geodata tree.
     * This tree is a merged version of all the files loaded into this model

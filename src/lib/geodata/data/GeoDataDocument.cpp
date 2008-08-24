@@ -62,20 +62,27 @@ GeoDataDocument::~GeoDataDocument()
     delete d;
 }
 
-void GeoDataDocument::addStyle(GeoDataStyle* style)
+void GeoDataDocument::addStyle( GeoDataStyle* style )
 {
-    Q_ASSERT(style);
-    qDebug("GeoDataDocument: Add new style");
-    d->m_styleHash.insert(style->styleId(), style);
+    Q_ASSERT( style );
+    qDebug( "GeoDataDocument: Add new style" );
+    d->m_styleHash.insert( style->styleId(), style );
 }
 
-GeoDataStyle* GeoDataDocument::style(const QString& styleId)
+void GeoDataDocument::removeStyle( GeoDataStyle* style )
+{
+    Q_ASSERT( style );
+    qDebug( "GeoDataDocument: remove style" );
+    d->m_styleHash.remove( style->styleId() );
+}
+
+GeoDataStyle* GeoDataDocument::style( const QString& styleId )
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
-    return d->m_styleHash.value(styleId);
+    return d->m_styleHash.value( styleId );
 }
 
 QList<GeoDataStyle*> GeoDataDocument::styles() const
@@ -83,16 +90,23 @@ QList<GeoDataStyle*> GeoDataDocument::styles() const
     return d->m_styleHash.values();
 }
 
-void GeoDataDocument::addStyleMap(GeoDataStyleMap* map)
+void GeoDataDocument::addStyleMap( GeoDataStyleMap* map )
 {
-    Q_ASSERT(map);
-    qDebug("GeoDataDocument: Add new styleMap");
-    d->m_styleMapHash.insert(map->styleId(), map);
+    Q_ASSERT( map );
+    qDebug( "GeoDataDocument: Add new styleMap" );
+    d->m_styleMapHash.insert( map->styleId(), map );
 }
 
-GeoDataStyleMap* GeoDataDocument::styleMap(const QString& styleId)
+void GeoDataDocument::removeStyleMap( GeoDataStyleMap* map )
 {
-    return d->m_styleMapHash.value(styleId);
+    Q_ASSERT( map );
+    qDebug( "GeoDataDocument: remove styleMap" );
+    d->m_styleMapHash.remove( map->styleId() );
+}
+
+GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId )
+{
+    return d->m_styleMapHash.value( styleId );
 }
 
 QList<GeoDataStyleMap*> GeoDataDocument::styleMaps() const

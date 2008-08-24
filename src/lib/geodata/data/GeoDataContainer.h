@@ -77,7 +77,13 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @brief  Add a feature to the container
      * @param  feature  the new feature
      */
-    void addFeature( GeoDataFeature* feature );
+    void addFeature( GeoDataFeature* feature, bool setChild = true );
+    
+    /**
+    * @brief Remove a feature given by its pointer
+    * @param feature the feature which needs to be removed
+    */
+    void removeFeature( GeoDataFeature* feature );
 
     /**
      * @brief  returns the requested child item

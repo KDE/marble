@@ -89,10 +89,18 @@ QVector<GeoDataFeature*> GeoDataContainer::features() const
     return d->m_features;
 }
 
-void GeoDataContainer::addFeature(GeoDataFeature* feature)
+void GeoDataContainer::addFeature( GeoDataFeature* feature, bool setChild )
 {
-    feature->setParent( this );
-    d->m_features.append(feature);
+    if( setChild ) feature->setParent( this );
+    d->m_features.append( feature );
+}
+
+void GeoDataContainer::removeFeature(GeoDataFeature* feature )
+{
+    if( int pos = d->m_features.indexOf( feature ) && pos >= 0 ) {
+        feature->setParent( 0 );
+        d->m_features.remove( pos );
+    }
 }
 
 GeoDataObject* GeoDataContainer::child( int pos )

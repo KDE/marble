@@ -61,13 +61,19 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle(GeoDataStyle*);
+    void addStyle( GeoDataStyle* style );
+
+    /**
+     * @brief Add a style to the style storage
+     * @param style  the new style
+     */
+    void removeStyle( GeoDataStyle* style );
 
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyle* style(const QString& styleId);
+    GeoDataStyle* style( const QString& styleId );
     
     /**
     * @brief dump a Vector of all styles
@@ -78,13 +84,19 @@ public:
     * @brief Add a stylemap to the stylemap storage
     * @param map  the new stylemap
     */
-    void addStyleMap(GeoDataStyleMap*);
+    void addStyleMap( GeoDataStyleMap* map );
+    
+    /**
+    * @brief remove stylemap from storage
+    * @param map the styleMap to be removed
+    */
+    void removeStyleMap( GeoDataStyleMap* map );
     
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyleMap* styleMap(const QString& styleId);
+    GeoDataStyleMap* styleMap( const QString& styleId );
     
     /**
     * @brief dump a Vector of all styles
