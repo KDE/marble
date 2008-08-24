@@ -17641,7 +17641,7 @@ Kaarina	Varsinais-Suomi	fi	N	21,2	60.42°N	22.42°E
 Snina	Prešovský	sk	N	21,2	48.99°N	22.15°E
 Piteå	Norrbotten	se	N	21,2	65.32°N	21.51°E
 Boo	Stockholm	se	N	21,2	59.31°N	18.14°E
-Nové Mesto nad Váhom	Trenčianský	sk	N	21,2	48.75°N	17.83°E
+Nové Mesto nad Váhom	Trenčiansky	sk	N	21,2	48.75°N	17.83°E
 Senica	Trnavský	sk	N	21,2	48.68°N	17.37°E
 Yanagawa	Fukushima	jp	N	21,2	37.86°N	140.60°E
 Kahoku	Yamagata	jp	N	21,2	38.42°N	140.28°E
