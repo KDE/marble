@@ -32,8 +32,8 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2008-02-07</date>
-		 <releaseinfo>0.5</releaseinfo>
+		 <date>2008-08-24</date>
+		 <releaseinfo>0.6</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual desktop globe 
@@ -68,8 +68,8 @@
              the world at your fingertips. Just like a real atlas or a conventional globe 
              &marble; allows you to freely move across its map and lookup places. 
              Furthermore &marble; allows you to zoom in and have many different views on the 
-             surface of the Earth. In its default configuration &marble; offers four different 
-             views: <guilabel>Atlas</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>.
+             surface of the Earth. In its default configuration &marble; offers 9 different 
+             views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
          </para>
          <para>
              &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are partially integrated with 
@@ -117,7 +117,7 @@
      <chapter id="map-views">
          <title>Choosing different map views for &marble;</title>
          <para>
-            &marble; comes with four different views: <guilabel>Atlas</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Satellite View</guilabel> and <guilabel>Earth at Night</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
+            &marble; comes with 9 different views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
          </para>
 
          <screenshot>
@@ -134,9 +134,9 @@
                     <guilabel>Atlas</guilabel>: A classic topographic map. It uses vector lines ( "MicroWorldDataBase II" ) to mark coastlines, country borders &etc; and bitmap graphics ( "ETOPO2" ) to create the height relief.
                 </para>
              </listitem>
-             <listitem>
+              <listitem>
                 <para>
-                    <guilabel>Plain Map</guilabel>: A plain map. It uses vector lines to mark coastlines and country borders &etc;
+                   <guilabel>Open Street Map</guilabel>: A lobal roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.
                 </para>
              </listitem>
              <listitem>
@@ -147,6 +147,31 @@
              <listitem>
                 <para>
                     <guilabel>Earth at Night</guilabel>: This image of Earth’s city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). 
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Plain Map</guilabel>: A plain map. It uses vector lines to mark coastlines and country borders &etc;
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Precipitation (December)</guilabel>: A map which shows the average precipitation in December.
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Precipitation (July)</guilabel>: A map which shows the average precipitation (rain/snow/hail/etc) in July. 
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Temperature (December)</guilabel>: A map which shows the average temperature in December. 
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Temperature (July)</guilabel>: A map which shows the average temperature in July. 
                 </para>
              </listitem>
          </itemizedlist>
@@ -285,9 +310,75 @@
                          </menuchoice></term>
                          <listitem><para><action>Copies</action> a screenshot of &marble;'s map to the global clipboard.</para></listitem>
                      </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
+                                 <guimenu>Edit</guimenu>
+                                 <guimenuitem>Copy Coordinates</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Copies</action> the current coordinates the global clipboard.</para></listitem>
+                     </varlistentry>
                  </variablelist>
 
              </sect2>
+
+<sect2>
+<title>The <guimenu>View</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Show Statusbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle</action> the display of the status bar.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycap>F9</keycap>
+</shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Show Navigation Panel</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle</action> the display of the navigation panel.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guisubmenu>Infoboxes</guisubmenu>
+</menuchoice></term>
+<listitem><para>In this submenu you can to lock the position of the infoboxes and show or hide the plugins you have enabled in the <link linkend="configplugins">Plugins</link> page of &marble;s configuration dialog.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Clouds</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show</action> real time cloud cover. A real time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Atmosphere</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Show</action> the diffuse reflection of the atmosphere around the earth.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Sun Control</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays</action> the <guilabel>Sun Control</guilabel> where you can set date and time, the simulation time speed, the <guilabel>Sun Shading</guilabel> and center the map on sun position.</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
 
 			 <sect2>
 				 <title>The <guimenu>Settings</guimenu> Menu</title>
@@ -328,6 +419,13 @@
 						 </menuchoice></term>
 						 <listitem><para><action>Switches between normal view and full screen view.</action> In full screen view, the titlebar is hidden and the actual application window is resized to the entire screen.</para></listitem>
 					 </varlistentry>
+					 <varlistentry>
+						 <term><menuchoice>
+								 <guimenu>Settings</guimenu>
+								 <guimenuitem>Configure &marble; Desktop Globe...</guimenuitem>
+						 </menuchoice></term>
+						 <listitem><para><action>Display</action> the <link linkend="configure">&marble; configuration</link> dialog.</para></listitem>
+					 </varlistentry>
 
 				 </variablelist>
 
@@ -339,6 +437,195 @@
 			 </sect2>
 		 </sect1>
 	 </chapter>
+
+<chapter id="configure">
+<title>Configuring &marble;</title>
+
+<sect1 id="configview">
+<title>View Configuration</title>
+<screenshot>
+<screeninfo>The View configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-view.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The View configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+<variablelist>
+
+<varlistentry>
+<term><guilabel>Distance</guilabel></term>
+<listitem>
+<para>The unit that gets used to measure altitude, lengths and distances (&eg; km, mi, ft).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Angle</guilabel></term>
+<listitem>
+<para>Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (e.g. 54°30'00" ) gets used. As an alternative you can choose decimal degrees (e.g. 54.5°).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Still image</guilabel></term>
+<listitem>
+<para>Specifies the map quality that gets displayed while there is no user input. Usually this allows for high map quality as speed is no concern.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>During animations</guilabel></term>
+<listitem>
+<para>Specifies the map quality that gets displayed during map animations (e.g. while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Place names</guilabel></term>
+<listitem>
+<para>Places often have different names in different languages. The label on the map can show the name in the user's language. Alternatively it can display the name in the official language and glyphs of that place.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Default Map Font</guilabel></term>
+<listitem>
+<para>The default font that gets used on the map.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="confignavigation">
+<title>Navigation Configuration</title>
+<screenshot>
+<screeninfo>The Navigation configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-navigation.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Navigation configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Drag location</guilabel></term>
+<listitem>
+<para>While dragging the mouse there are two standard behaviours when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result e.g. the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly "detaches" from the cursor.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>On Startup</guilabel></term>
+<listitem>
+<para>By default Marble will display the home location immediately after the application has started. As an alternative it can also show the last position that was active when the user left the application.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Animate voyage to the target</guilabel></term>
+<listitem>
+<para>When searching for a location Marble can either move instantly to the new location or it can show a travel animation from the previous place to the new place.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configcacheproxy">
+<title>Cache &amp; Proxy Configuration</title>
+<screenshot>
+<screeninfo>The Cache &amp; Proxy configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-cacheproxy.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Cache &amp; Proxy configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Cache</guilabel></term>
+<listitem>
+<para>There are two caches being used for &marble;: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (e.g. Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Proxy</guilabel></term>
+<listitem>
+<para>Proxy settings for your local intranet. Please leave empty if there is no proxy.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="configplugins">
+<title>Plugins Configuration</title>
+<screenshot>
+<screeninfo>The Plugins configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-plugins.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Plugins configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Compass</guilabel></term>
+<listitem>
+<para>This is a float item that provides a compass.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Scale Bar</guilabel></term>
+<listitem>
+<para>This is a float item that provides a map scale.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Overview Map</guilabel></term>
+<listitem>
+<para>This is a float item that provides an overview map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Stars Plugin</guilabel></term>
+<listitem>
+<para>A plugin that shows the Starry Sky.</para>
+</listitem>
+</varlistentry>
+<!-- Pre-07 svn in trunk, remove comment after backport to 4.1.2
+<varlistentry>
+<term><guilabel>Navigation</guilabel></term>
+<listitem>
+<para>A mouse control to zoom and move the map.</para>
+</listitem>
+</varlistentry>
+-->
+</variablelist>
+</sect1>
+
+</chapter>
 
 	 <chapter id="faq">
 		 <title>Questions and Answers</title>
@@ -453,8 +740,7 @@
 
              <para>
                  &marble; can be compiled as a &Qt; 4-only version as well as featuring &kde; 4 support.
-                 To compile &marble; with &Qt; 4-only support check out &marble; from &kde; SVN into ~/marble and just do: <command>cmake -DQTONLY=ON ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; support check instructions on how to compile &kde; applications at <ulink
-                     url="http://techbase.kde.org/marble">&kde;'s TechBase</ulink>.
+                 To compile &marble; with &Qt; 4-only support check out &marble; from &kde; SVN into ~/marble and just do: <command>cmake -DQTONLY=ON ~/marble</command> and <command>sudo make install</command>. To compile &marble; with &kde; support check instructions on how to compile &kde; applications at <ulink url="http://techbase.kde.org/">&kde;'s TechBase</ulink>.
              </para> 
 		 </sect1>
 
