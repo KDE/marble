@@ -136,7 +136,7 @@
              </listitem>
               <listitem>
                 <para>
-                   <guilabel>Open Street Map</guilabel>: A lobal roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.
+                   <guilabel>Open Street Map</guilabel>: A global roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.
                 </para>
              </listitem>
              <listitem>
