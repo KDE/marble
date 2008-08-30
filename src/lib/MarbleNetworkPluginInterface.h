@@ -1,0 +1,51 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2008 Pino Toscano <pino@kde.org>
+//
+
+
+#ifndef MARBLENETWORKPLUGININTERFACE_H
+#define MARBLENETWORKPLUGININTERFACE_H
+
+#include <QtCore/QObject>
+
+class QUrl;
+
+namespace Marble
+{
+
+class HttpJob;
+
+/**
+ * @short The interface for network operation plugins.
+ *
+ */
+class MarbleNetworkPluginInterface
+{
+ public:
+    virtual ~MarbleNetworkPluginInterface() {}
+
+    /**
+     * @brief Returns the name ID of the backend.
+     *.
+     * Example: "QNetworkAccessManager"
+     */
+    virtual QString nameId() const = 0;
+
+    /**
+     * @brief Creates a new HTTP download job.
+     * @return the new HTTP job
+     */
+    virtual HttpJob *createJob( const QUrl &source, const QString &destination, const QString &id ) = 0;
+};
+
+}
+
+Q_DECLARE_INTERFACE( Marble::MarbleNetworkPluginInterface, "org.kde.Marble.MarbleNetworkPluginInterface/1.00" )
+
+#endif // MARBLENETWORKPLUGININTERFACE_H

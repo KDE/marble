@@ -70,6 +70,8 @@ set(marblewidget_SRCS
     GridMap.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
+    MarbleNetworkPlugin.cpp
+    QHttpNetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
     CrossHairFloatItem.cpp

@@ -1,3 +1,19 @@
+2008-08-31  Pino Toscano    <pino@kde.org>
+
+    * src/lib/MarbleNetworkPlugin.{cpp,h}:
+    * src/lib/MarbleNetworkPluginInterface.h:
+    * src/lib/HttpJob.{cpp,h}:
+    * src/lib/QHttpNetworkPlugin.{cpp,h}:
+    * src/lib/HttpDownloadManager.{cpp,h}:
+    * src/lib/CMakeLists.txt:
+
+    - add a structure for network plugins, interface and abstract class.
+    - decouple the QHttp stuff into an own QHttpNetworkPlugin, compiled
+      statically, and leave HttpJob and abstract class.
+    - start adapting the HttpDownloadManager to use a network plugin for
+      creating the HTTP jobs; at the moment no plugin is used, but the static
+      QHttp-based one is.
+
 2008-08-30  Pino Toscano    <pino@kde.org>
 
     * src/lib/HttpFetchFile.{cpp,h}:

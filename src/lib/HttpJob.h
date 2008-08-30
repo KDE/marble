@@ -11,17 +11,10 @@
 // Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
-//
-// The HttpFetchFile class downloads files.
-//
-
 
 #ifndef HTTPJOB_H
 #define HTTPJOB_H
 
-#include <QtCore/QBuffer>
-#include <QtCore/QDebug>
-#include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 
@@ -40,12 +33,9 @@ class HttpJob: public QObject
     Q_OBJECT
 
  public:
-    HttpJob( const QUrl & sourceUrl, const QString & destFileName, QString const id );
+    HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id );
     ~HttpJob();
 
-    // allocates QHttp and QBuffer member, has to be done before
-    // execute() because of signal connections.
-    // see FIXME in .cpp
     virtual void prepareExecution();
 
     QUrl sourceUrl() const;
@@ -63,18 +53,15 @@ class HttpJob: public QObject
 
     void setStoragePolicy( StoragePolicy * );
 
-    QBuffer * buffer();
-    QByteArray & data();
-
  Q_SIGNALS:
     void jobDone( HttpJob *, int );
     void statusMessage( QString );
 
  public Q_SLOTS:
-    virtual void execute();
+    virtual void execute() = 0;
 
- private Q_SLOTS:
-    void httpRequestFinished( int requestId, bool error );
+ protected:
+    StoragePolicy *storagePolicy() const;
 
  private:
     Q_DISABLE_COPY( HttpJob )
@@ -83,14 +70,10 @@ class HttpJob: public QObject
     // if there is a redirection, we have to know the original file name
     // for proper blacklisting etc.
     QString     m_originalDestinationFileName;
-    QByteArray  m_data;
-    QBuffer    *m_buffer;
     QString     m_initiatorId;
     Status      m_status;
     Priority    m_priority;
-    QHttp       *m_http; // FIXME: cleans this up after 4.1
     StoragePolicy *m_storagePolicy;
-    int m_currentRequest;
 };
 
 
@@ -132,16 +115,6 @@ inline QString HttpJob::originalDestinationFileName() const
 inline void HttpJob::setStatus( const Status status )
 {
     m_status = status;
-}
-
-inline QBuffer * HttpJob::buffer()
-{
-    return m_buffer;
-}
-
-inline QByteArray & HttpJob::data()
-{
-    return m_data;
 }
 
 }

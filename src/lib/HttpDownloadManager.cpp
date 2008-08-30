@@ -17,6 +17,7 @@
 #include "HttpJob.h"
 #include "MarbleDirs.h"
 #include "StoragePolicy.h"
+#include "QHttpNetworkPlugin.h"
 
 using namespace Marble;
 
@@ -25,7 +26,8 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
     : m_activatedJobsLimit( 40 ),
       m_jobQueueLimit( 1000 ),
       m_serverUrl( serverUrl ),
-      m_storagePolicy( policy )
+      m_storagePolicy( policy ),
+      m_networkPlugin( 0 )
 {
     m_downloadEnabled = true; //enabled for now
 }
@@ -94,7 +96,7 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, const QStrin
     QString path = sourceUrl.path();
     sourceUrl.setPath( path + relativeUrlString );
 
-    HttpJob *job = new HttpJob( sourceUrl, relativeUrlString, id );
+    HttpJob *job = createJob( sourceUrl, relativeUrlString, id );
     addJob( job );
 }
 
@@ -104,7 +106,7 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
     if ( !m_downloadEnabled )
         return;
 
-    HttpJob *job = new HttpJob( sourceUrl, destFileName, id );
+    HttpJob *job = createJob( sourceUrl, destFileName, id );
     addJob( job );
 }
 
@@ -203,6 +205,17 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
         removeJob( job );
     }
 
+}
+
+HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& destFileName,
+                                         const QString &id )
+{
+    if ( !m_networkPlugin ) {
+        // ### TODO use the network plugins
+        m_networkPlugin = new QHttpNetworkPlugin();
+        m_networkPlugin->setParent( this );
+    }
+    return m_networkPlugin->createJob( sourceUrl, destFileName, id );
 }
 
 #include "HttpDownloadManager.moc"

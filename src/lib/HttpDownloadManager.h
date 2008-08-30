@@ -33,6 +33,7 @@ namespace Marble
 
 class HttpJob;
 class StoragePolicy;
+class MarbleNetworkPlugin;
 
 /*
  * @Short This class manages scheduled downloads. 
@@ -109,6 +110,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     Q_DISABLE_COPY( HttpDownloadManager )
     // Check whether the job gets processed already or whether it got blacklisted
     bool              acceptJob( HttpJob *job );
+    HttpJob          *createJob( const QUrl& sourceUrl, const QString& destFileName,
+                                 const QString &id );
 
     /**
      * Helper method for the public addJob methods which contains shared code.
@@ -126,6 +129,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
     QUrl              m_serverUrl;
     StoragePolicy    *m_storagePolicy;
+
+    MarbleNetworkPlugin *m_networkPlugin;
 };
 
 }
