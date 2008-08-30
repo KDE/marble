@@ -8,6 +8,7 @@
 // Copyright 2007      Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
 //
@@ -15,8 +16,8 @@
 //
 
 
-#ifndef HTTPFETCHFILE_H
-#define HTTPFETCHFILE_H
+#ifndef HTTPJOB_H
+#define HTTPJOB_H
 
 #include <QtCore/QBuffer>
 #include <QtCore/QDebug>
@@ -145,4 +146,4 @@ inline QByteArray & HttpJob::data()
 
 }
 
-#endif // HTTPFETCHFILE_H
+#endif // HTTPJOB_H

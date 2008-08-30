@@ -14,7 +14,7 @@
 
 #include <QtCore/QDebug>
 
-#include "HttpFetchFile.h"
+#include "HttpJob.h"
 #include "MarbleDirs.h"
 #include "StoragePolicy.h"
 

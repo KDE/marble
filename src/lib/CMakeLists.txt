@@ -69,7 +69,7 @@ set(marblewidget_SRCS
     GeoPolygon.cpp
     GridMap.cpp
     HttpDownloadManager.cpp
-    HttpFetchFile.cpp
+    HttpJob.cpp
     LayerManager.cpp
     PluginManager.cpp
     CrossHairFloatItem.cpp

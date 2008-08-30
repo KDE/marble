@@ -1,6 +1,13 @@
 2008-08-30  Pino Toscano    <pino@kde.org>
 
     * src/lib/HttpFetchFile.{cpp,h}:
+    * src/lib/HttpJob.{cpp,h}:
+
+    Rename HttpFetchFile.{cpp,h} into HttpJob.{cpp,h}.
+
+2008-08-30  Pino Toscano    <pino@kde.org>
+
+    * src/lib/HttpFetchFile.{cpp,h}:
     * src/lib/HttpDownloadManager.{cpp,h}:
 
     Merge HttpJob and HttpFetchFile into the former.
