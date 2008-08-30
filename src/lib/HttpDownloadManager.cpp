@@ -28,13 +28,6 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
       m_storagePolicy( policy )
 {
     m_downloadEnabled = true; //enabled for now
-
-    m_fetchFile = new HttpFetchFile( m_storagePolicy, this );
-
-    connect( m_fetchFile, SIGNAL( jobDone( HttpJob*, int ) ),
-             this, SLOT( reportResult( HttpJob*, int ) ) );
-    connect( m_fetchFile, SIGNAL( statusMessage( QString ) ),
-             this, SIGNAL( statusMessage( QString ) ) );
 }
 
 
@@ -177,8 +170,16 @@ void HttpDownloadManager::activateJobs()
 //         qDebug() << "On activatedJobList: " << job->sourceUrl().toString()
 //                  << job->destinationFileName();
         m_activatedJobList.push_back( job );
+        job->prepareExecution();
+        job->setStoragePolicy( storagePolicy() );
         job->setStatus( Activated );
-        m_fetchFile->executeJob( job );
+
+        connect( job, SIGNAL( jobDone( HttpJob*, int ) ),
+                 this, SLOT( reportResult( HttpJob*, int ) ) );
+        connect( job, SIGNAL( statusMessage( QString ) ),
+                 this, SIGNAL( statusMessage( QString ) ) );
+
+        job->execute();
     }
 }
 

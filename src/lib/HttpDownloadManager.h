@@ -31,7 +31,6 @@
 namespace Marble
 {
 
-class HttpFetchFile;
 class HttpJob;
 class StoragePolicy;
 
@@ -121,8 +120,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     QStack<HttpJob*>  m_jobQueue;
     QList<HttpJob*>   m_activatedJobList;
     QList<HttpJob*>   m_jobBlackList;
-
-    HttpFetchFile    *m_fetchFile;
 
     int               m_activatedJobsLimit;
     int               m_jobQueueLimit;

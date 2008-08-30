@@ -12,6 +12,7 @@
 
 #include "HttpFetchFile.h"
 
+#include <QtCore/QMetaObject>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
@@ -29,7 +30,9 @@ HttpJob::HttpJob ( const QUrl & sourceUrl, const QString & destFileName, QString
         m_initiatorId ( id ),
         m_status ( NoStatus ),
         m_priority ( NoPriority ),
-        m_http( 0 )
+        m_http( 0 ),
+        m_storagePolicy( 0 ),
+        m_currentRequest( -1 )
 {
 }
 
@@ -48,11 +51,16 @@ void HttpJob::prepareExecution()
         m_http = new QHttp;
         m_buffer = new QBuffer ( &m_data );
         m_buffer->open ( QIODevice::WriteOnly );
+
+        connect( m_http, SIGNAL( requestFinished( int, bool ) ),
+                 this, SLOT( httpRequestFinished( int, bool ) ) );
     }
 }
 
-int HttpJob::execute()
+void HttpJob::execute()
 {
+    emit statusMessage ( tr ( "Downloading data..." ) );
+
     m_http->setHost( m_sourceUrl.host(),
                      m_sourceUrl.port() != -1 ? m_sourceUrl.port() : 80 );
     if ( !m_sourceUrl.userName().isEmpty() )
@@ -73,46 +81,20 @@ int HttpJob::execute()
     header.setValue ( "User-Agent", "Marble TinyWebBrowser" );
     header.setValue ( "Host", m_sourceUrl.host() );
 
-    const int httpGetId = m_http->request( header, 0, m_buffer );
-    return httpGetId;
+    m_currentRequest = m_http->request( header, 0, m_buffer );
 }
 
-HttpFetchFile::HttpFetchFile ( StoragePolicy *policy, QObject *parent )
-        : QObject ( parent ),
-        m_storagePolicy ( policy )
+void HttpJob::setStoragePolicy( StoragePolicy *policy )
 {
+    m_storagePolicy = policy;
 }
 
-HttpFetchFile::~HttpFetchFile()
+void HttpJob::httpRequestFinished ( int requestId, bool error )
 {
-}
-
-void HttpFetchFile::executeJob ( HttpJob* job )
-{
-    // FIXME: this is a little bit ugly, but it resolves the following issues:
-    // 1. not all jobs in the queue should have QHttp allocated,
-    //    but only the active ones
-    // 2. we have to connect before execution, even if it is asynchronously,
-    //    I think.
-    job->prepareExecution();
-
-    connect( job->m_http, SIGNAL( requestFinished( int, bool ) ),
-	     this, SLOT( httpRequestFinished( int, bool ) ) );
-
-    int httpGetId = job->execute();
-    m_pJobMap.insert ( httpGetId, job );
-
-    emit statusMessage ( tr ( "Downloading data..." ) );
-}
-
-void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
-{
-    if ( !m_pJobMap.contains ( requestId ) )
+    if ( requestId != m_currentRequest )
         return;
 
-    HttpJob * job = m_pJobMap[ requestId ];
-
-    QHttpResponseHeader responseHeader = job->m_http->lastResponse();
+    QHttpResponseHeader responseHeader = m_http->lastResponse();
 //     qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
 //              << responseHeader.reasonPhrase();
 
@@ -125,11 +107,12 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     if ( responseHeader.statusCode() == 301 )
     {
         QUrl newLocation ( responseHeader.value ( "Location" ) );
-        job->setSourceUrl ( newLocation );
-        job->setDestinationFileName ( newLocation.path() );
+        setSourceUrl ( newLocation );
+        setDestinationFileName ( newLocation.path() );
+        m_currentRequest = -1;
 
         // Let's try again
-        executeJob ( job );
+        QMetaObject::invokeMethod( this, "execute", Qt::QueuedConnection );
         return;
     }
 
@@ -137,37 +120,33 @@ void HttpFetchFile::httpRequestFinished ( int requestId, bool error )
     {
         emit statusMessage ( tr ( "Download failed: %1." )
                              .arg ( responseHeader.reasonPhrase() ) );
-        emit jobDone ( m_pJobMap[ requestId ], 1 );
+        emit jobDone ( this, 1 );
 
-        m_pJobMap.remove ( requestId );
         return;
     }
 
     if ( error != 0 )
     {
         emit statusMessage ( tr ( "Download failed: %1." )
-                             .arg ( job->m_http->errorString() ) );
-        emit jobDone ( m_pJobMap[ requestId ], error );
+                             .arg ( m_http->errorString() ) );
+        emit jobDone ( this, error );
 
-        m_pJobMap.remove ( requestId );
         return;
 
     }
 
-    if ( !m_storagePolicy->updateFile ( job->originalDestinationFileName(), job->data() ) )
+    if ( m_storagePolicy && !m_storagePolicy->updateFile ( originalDestinationFileName(), data() ) )
     {
         emit statusMessage ( tr ( "Download failed: %1." )
                              .arg ( m_storagePolicy->lastErrorMessage() ) );
-        emit jobDone ( m_pJobMap[ requestId ], error );
+        emit jobDone ( this, error );
 
-        m_pJobMap.remove ( requestId );
         return;
     }
 
     emit statusMessage ( tr ( "Download finished." ) );
 
-    emit jobDone ( m_pJobMap[ requestId ], 0 );
-    m_pJobMap.remove ( requestId );
+    emit jobDone ( this, 0 );
 }
 
 #include "HttpFetchFile.moc"

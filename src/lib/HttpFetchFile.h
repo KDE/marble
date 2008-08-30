@@ -45,10 +45,7 @@ class HttpJob: public QObject
     // allocates QHttp and QBuffer member, has to be done before
     // execute() because of signal connections.
     // see FIXME in .cpp
-    void prepareExecution();
-
-    // async, returns http get id
-    int execute();
+    virtual void prepareExecution();
 
     QUrl sourceUrl() const;
     void setSourceUrl( const QUrl & );
@@ -63,8 +60,20 @@ class HttpJob: public QObject
 
     void setStatus( const Status );
 
+    void setStoragePolicy( StoragePolicy * );
+
     QBuffer * buffer();
     QByteArray & data();
+
+ Q_SIGNALS:
+    void jobDone( HttpJob *, int );
+    void statusMessage( QString );
+
+ public Q_SLOTS:
+    virtual void execute();
+
+ private Q_SLOTS:
+    void httpRequestFinished( int requestId, bool error );
 
  private:
     Q_DISABLE_COPY( HttpJob )
@@ -78,41 +87,9 @@ class HttpJob: public QObject
     QString     m_initiatorId;
     Status      m_status;
     Priority    m_priority;
- public:
     QHttp       *m_http; // FIXME: cleans this up after 4.1
-};
-
-
-class HttpFetchFile : public QObject
-{
-    Q_OBJECT
-
- public:
-    /**
-     * Creates a new http fetch file object.
-     */
-    explicit HttpFetchFile( StoragePolicy *policy, QObject* parent = 0 );
-
-    /**
-     * Destroys the http fetch file object.
-     */
-    ~HttpFetchFile();
-
- public Q_SLOTS:
-    void executeJob( HttpJob* job );
-
- Q_SIGNALS:
-    void jobDone( HttpJob*, int );
-    void statusMessage( QString );
-
- private Q_SLOTS:
-    // process feedback from m_Http
-    void httpRequestFinished( int requestId, bool error );
-
- private:
-    Q_DISABLE_COPY( HttpFetchFile )
-    QMap<int, HttpJob*> m_pJobMap;
     StoragePolicy *m_storagePolicy;
+    int m_currentRequest;
 };
 
 

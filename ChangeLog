@@ -1,3 +1,10 @@
+2008-08-30  Pino Toscano    <pino@kde.org>
+
+    * src/lib/HttpFetchFile.{cpp,h}:
+    * src/lib/HttpDownloadManager.{cpp,h}:
+
+    Merge HttpJob and HttpFetchFile into the former.
+
 2008-08-24  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/lib/geodata/data/GeoDataContainer.{h|cpp}
