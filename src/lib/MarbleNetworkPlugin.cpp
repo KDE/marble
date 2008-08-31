@@ -35,6 +35,7 @@ MarbleNetworkPlugin::MarbleNetworkPlugin()
 
 MarbleNetworkPlugin::~MarbleNetworkPlugin()
 {
+    delete d;
 }
 
 }
