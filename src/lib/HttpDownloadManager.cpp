@@ -176,8 +176,8 @@ void HttpDownloadManager::activateJobs()
         job->setStoragePolicy( storagePolicy() );
         job->setStatus( Activated );
 
-        connect( job, SIGNAL( jobDone( HttpJob*, int ) ),
-                 this, SLOT( reportResult( HttpJob*, int ) ) );
+        connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
+                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
         connect( job, SIGNAL( statusMessage( QString ) ),
                  this, SIGNAL( statusMessage( QString ) ) );
 

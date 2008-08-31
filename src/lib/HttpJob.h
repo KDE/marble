@@ -54,7 +54,7 @@ class HttpJob: public QObject
     void setStoragePolicy( StoragePolicy * );
 
  Q_SIGNALS:
-    void jobDone( HttpJob *, int );
+    void jobDone( Marble::HttpJob *, int );
     void statusMessage( QString );
 
  public Q_SLOTS:

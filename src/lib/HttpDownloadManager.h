@@ -104,7 +104,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
  private Q_SLOTS:
     void activateJobs();
-    void reportResult( HttpJob *job, int id );
+    void reportResult( Marble::HttpJob *job, int id );
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
