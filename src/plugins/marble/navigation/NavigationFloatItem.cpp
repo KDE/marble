@@ -111,8 +111,8 @@ bool NavigationFloatItem::renderFloatItem(GeoPainter *painter,
     Q_UNUSED(layer);
 
     // Paint widget without a background
-    m_navigationParent->render(painter, QPoint(), QRegion(),
-            QWidget::RenderFlags(QWidget::DrawChildren));
+    m_navigationParent->render(painter->device(), 
+          QPoint(), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
     return true;
 }
 
@@ -162,7 +162,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
 
         QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint()
                 - QPoint(padding(), padding());
-        if ( floatItemRect.contains(event->posF()) ) {
+        if ( floatItemRect.contains(event->pos()) ) {
             QWidget *child = m_navigationParent->childAt(shiftedPos);
             if ( child ) {
                 m_marbleWidget->setCursor(Qt::ArrowCursor);

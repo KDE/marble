@@ -175,7 +175,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             QRectF floatItemRect = QRectF(floatItem->positivePosition(widgetRect), 
                     floatItem->size());
             if ( floatItem->enabled() && floatItem->visible() 
-                    && floatItemRect.contains(event->posF()))
+                    && floatItemRect.contains(event->pos()))
             {
                 return false;
             }

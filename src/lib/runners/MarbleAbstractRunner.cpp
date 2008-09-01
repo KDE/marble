@@ -44,6 +44,11 @@ QString MarbleAbstractRunner::name() const
     return QString("Abstract Runner");
 }
 
+void MarbleAbstractRunner::run() 
+{
+    exec();
+}
+
 }
 
 #include "MarbleAbstractRunner.moc"

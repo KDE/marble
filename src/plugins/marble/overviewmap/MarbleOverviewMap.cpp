@@ -197,7 +197,7 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
         QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
                 widget->height())), size());
 
-        if ( floatItemRect.contains(event->posF()) ) {
+        if ( floatItemRect.contains(event->pos()) ) {
             cursorAboveFloatItem = true;
 
             // Double click triggers recentering the map at the specified position

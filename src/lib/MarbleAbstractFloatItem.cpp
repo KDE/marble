@@ -480,7 +480,7 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
                 widget->height())), size());
 
         // Click and move above a float item triggers moving the float item
-        if ( floatItemRect.contains(event->posF()) ) {
+        if ( floatItemRect.contains(event->pos()) ) {
             cursorAboveFloatItem = true;
 
             if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {

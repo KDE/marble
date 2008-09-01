@@ -48,7 +48,9 @@ public:
      * This function should return the user-visible name for this runner
      */
     virtual QString name() const;
-    
+
+    void run(); 
+
 public slots:
     /**
      * This function does the actual parsing. This should emit runnerStarted()
