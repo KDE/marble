@@ -244,7 +244,8 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     QRegExp regex; //the main regex we use
     QString regexstr; // temp. string for constructing the regex
     QString dec( QLocale::system().decimalPoint() ); //for regex construction
-    
+    if( dec.contains(".") )
+        dec.prepend("\\");
     
     //BEGIN REGEX1
     // #1: Just two numbers, no directions, eg 74.2245 -32.2434 etc
@@ -271,7 +272,8 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         return coords;
     }
     //END REGEX1
-    
+
+
     //BEGIN STUFF
     //we put this after regex #1 since it is not used in that case so it will only make things slower.
                       
@@ -331,7 +333,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         else //north
             lat = latdeg.toDouble();
             
-        if( londir == c[4] ) //west
+        if( londir == c[3] ) //west
             lon = londeg.toDouble() * -1.0;
         else // east
             lon = londeg.toDouble();
@@ -395,7 +397,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             lat = latdeg.toDouble() + latmin.toDouble() + latsec.toDouble();
         }
             
-        if( londir == c[4] ) { //west
+        if( londir == c[3] ) { //west
             lon = londeg.toDouble() + lonmin.toDouble() + lonsec.toDouble();
             lon *= -1.0;
         } else { // east
@@ -454,7 +456,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             lat = latdeg.toDouble() + latmin.toDouble();
         }
             
-        if( londir == c[4] ) { //west
+        if( londir == c[3] ) { //west
             lon = londeg.toDouble() + lonmin.toDouble();
             lon *= -1.0;
         } else { // east
