@@ -148,7 +148,7 @@ bool MarblePart::openFile()
 void MarblePart::exportMapScreenShot()
 {
     QString  fileName = KFileDialog::getSaveFileName( QDir::homePath(),
-                                                      i18n( "Images (*.jpg *.png)" ),
+                                                      i18n( "Images *.jpg *.png" ),
                                                       widget(), i18n("Export Map") );
 
     if ( !fileName.isEmpty() ) {
