@@ -20,15 +20,17 @@
 
 #include "MarbleRunnerManager.h"
 
-#include "MarbleRunnerResult.h"
 #include "MarblePlacemarkModel.h"
 #include "PlaceMarkManager.h"
+#include "PlaceMarkContainer.h"
+#include "GeoDataPlacemark.h"
 
 #include "LatLonRunner.h"
 #include "OnfRunner.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include <QtDebug>
 
@@ -38,8 +40,8 @@ namespace Marble
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
             : QObject(parent)
 {
-    qRegisterMetaType<MarbleRunnerResult>("MarbleRunnerResult");
-    
+    qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
+
     m_model = new MarblePlacemarkModel(0);
     m_activeRunners = 0;
     m_lastString = "";
@@ -50,8 +52,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_latlonRunner->moveToThread(m_latlonRunner);
     connect( m_latlonRunner, SIGNAL( runnerStarted(QString) ),
              this,           SLOT( slotRunnerStarted(QString) ));
-    connect( m_latlonRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
-             this,           SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
+    connect( m_latlonRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
+             this,           SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
     connect( this,           SIGNAL( engage(QString) ),
              m_latlonRunner, SLOT( parse(QString) ));
 
@@ -60,8 +62,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_onfRunner->moveToThread(m_onfRunner);
     connect( m_onfRunner, SIGNAL( runnerStarted(QString) ),
              this,        SLOT( slotRunnerStarted(QString) ));
-    connect( m_onfRunner, SIGNAL( runnerFinished( MarbleRunnerResult ) ),
-             this,        SLOT( slotRunnerFinished( MarbleRunnerResult ) ));
+    connect( m_onfRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
+             this,        SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
     connect( this,        SIGNAL( engage(QString) ),
              m_onfRunner, SLOT( parse(QString) ));
 }
@@ -91,18 +93,13 @@ void MarbleRunnerManager::newText(QString text)
     emit engage(text);
 }
 
-void MarbleRunnerManager::slotRunnerFinished( MarbleRunnerResult result )
+void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark*> result )
 {
     m_activeRunners--;
     qDebug() << "Runner finished, active runners: " << m_activeRunners;
-    if( result.score() == MarbleRunnerResult::NoMatch ) {
-        qDebug() << "[RunnerManager]" << result.runnerName() << "failed to match :(";
-        return;
-    }
-    qDebug() << "[RunnerManager]" << result.runnerName() << "reports match found ("
-             << static_cast<int>(result.score()) << ") :D";
-    //TODO: use MarbleRunnerResult::ResultType to list the objects in order
-    PlaceMarkContainer cont = result.placemarks();
+    qDebug() << "Runner reports" << result.size() << "results";
+
+    PlaceMarkContainer cont( result, "Runner Results" );
     m_model->addPlaceMarks( cont, false );
 //     qDebug() << "emit modelchanged";
     emit modelChanged( m_model );

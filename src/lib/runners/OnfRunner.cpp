@@ -21,13 +21,13 @@
 #include "OnfRunner.h"
 
 #include "MarbleAbstractRunner.h"
-#include "MarbleRunnerResult.h"
 #include "GeoOnfParser.h"
 #include "GeoDataDocument.h"
-#include "PlaceMarkContainer.h"
+#include "GeoDataPlacemark.h"
 
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
+#include <QtCore/QVector>
 #include <QtCore/QtDebug>
 
 #include <QtNetwork/QHttp>
@@ -41,7 +41,6 @@ TODO: grade results individually instead of giving them all a score of 100
 
 OnfRunner::OnfRunner( QObject *parent ) : MarbleAbstractRunner( parent )
 {
-    qRegisterMetaType<MarbleRunnerResult>();
     m_http = new QHttp("gazetteer.openstreetmap.org");
     m_buffer = 0;
     
@@ -65,9 +64,8 @@ void OnfRunner::fail()
     //The manager needs to know when parsing starts and stops
     //in order to have a balanced count of active runners. So
     //we emit runnerFinished() to balance the previous failed runnerStarted()
-    MarbleRunnerResult fail;
-    fail.setRunnerName( name() );
-    emit runnerFinished( fail );
+    QVector<GeoDataPlacemark*> empty;
+    emit runnerFinished( empty );
     return;
 }
 
@@ -119,17 +117,15 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     
     GeoDataDocument *results = static_cast<GeoDataDocument*>( parser.releaseDocument() );
     Q_ASSERT( results );
-    
-    PlaceMarkContainer container( results->placemarks(), "ONF Search Results" );
-    MarbleRunnerResult result;
-    
-    if( container.isEmpty() ) {
-        result = MarbleRunnerResult( container, MarbleRunnerResult::NoMatch, name() );
-    } else {
-        result = MarbleRunnerResult( container, MarbleRunnerResult::PerfectMatch, name() );
+
+    QVector<GeoDataPlacemark*> placemarks = results->placemarks();
+    //TODO: get icons working
+/*
+    foreach( GeoDataPlacemark* placemark, placemarks ) {
+        //SET ICON using name()
     }
-        
-    emit runnerFinished( result );
+*/
+    emit runnerFinished( placemarks );
     return;
 }
 

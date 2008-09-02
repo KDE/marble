@@ -23,10 +23,6 @@
 
 #include "MarbleAbstractRunner.h"
 
-class QThread;
-class QString;
-class QStringList;
-
 namespace Marble
 {
 

@@ -21,18 +21,15 @@
 #ifndef MARBLERUNNERMANAGER_H
 #define MARBLERUNNERMANAGER_H
 
-
-#include "MarbleRunnerResult.h"
-
 #include <QtCore/QObject>
-
-class QString;
+#include <QtCore/QVector>
+#include <QtCore/QString>
 
 namespace Marble
 {
 
 class MarblePlacemarkModel;
-class PlaceMarkManager;
+class GeoDataPlacemark;
 
 class LatLonRunner;
 class OnfRunner;
@@ -54,7 +51,7 @@ signals:
     //tells runners to make it so
     void engage(QString text);
 private slots:
-    void slotRunnerFinished(MarbleRunnerResult result);
+    void slotRunnerFinished(QVector<GeoDataPlacemark*> result);
     void slotRunnerStarted(QString runnerName);
 private:
     int m_activeRunners;

@@ -157,7 +157,6 @@ set(marblewidget_SRCS
     MapThemeSortFilterProxyModel.cpp
     
     MarbleRunnerManager.cpp
-    MarbleRunnerResult.cpp
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
     runners/OnfRunner.cpp

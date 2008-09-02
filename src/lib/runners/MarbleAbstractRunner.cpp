@@ -41,7 +41,7 @@ void MarbleAbstractRunner::parse( const QString& /*input*/ )
 
 QString MarbleAbstractRunner::name() const
 {
-    return QString("Abstract Runner");
+    return "FIXME";
 }
 
 void MarbleAbstractRunner::run() 

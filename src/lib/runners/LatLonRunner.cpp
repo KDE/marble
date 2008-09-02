@@ -21,13 +21,12 @@
 #include "LatLonRunner.h"
 
 #include "MarbleAbstractRunner.h"
-#include "MarbleRunnerResult.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
-#include "PlaceMarkContainer.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtCore/QVector>
 
 #include <QtDebug>
 
@@ -41,7 +40,7 @@ LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
 
 QString LatLonRunner::name() const
 {
-    return tr("Latitude / Longitude Runner");
+    return "FIXME";
 }
 
 LatLonRunner::~LatLonRunner()
@@ -55,26 +54,22 @@ void LatLonRunner::parse(const QString &input)
     bool successful = false;
     GeoDataCoordinates coord = GeoDataCoordinates::fromString( input, successful );
     
-    MarbleRunnerResult::Score score;
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
     placemark->setName( input );
     qreal lon, lat;
     coord.geoCoordinates( lon, lat );
     placemark->setCoordinate( lon, lat );
+    QVector<GeoDataPlacemark*> vector;
     
+    //TODO: FIXME
     if( successful ) {
-        score = MarbleRunnerResult::PerfectMatch; // matches regex
-    } else {
-        score = MarbleRunnerResult::NoMatch; //does not match
+        //TODO: set placemark icon  
+        placemark->setPopularity( 1000000000 );
+        placemark->setPopularityIndex( 18 );
+        vector.append( placemark );
     }
     
-    PlaceMarkContainer container;
-    container.setName( "Coordinate search result" );
-    container.append( placemark );
-    
-    MarbleRunnerResult result( container, score, name() );
-    
-    emit runnerFinished( result );    
+    emit runnerFinished( vector );    
 }
 
 }

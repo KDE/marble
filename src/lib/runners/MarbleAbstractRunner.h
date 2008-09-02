@@ -21,14 +21,17 @@
 #ifndef MARBLEABSTRACTRUNNER_H
 #define MARBLEABSTRACTRUNNER_H
 
-#include "MarbleRunnerResult.h"
 
 #include <QThread>
+#include <QVector>
 
 class QString;
 
 namespace Marble
 {
+
+class GeoDataPlacemark;
+
 /**
  * This class is the base class for all Marble Runners. 
  */
@@ -45,7 +48,8 @@ public:
      */
     ~MarbleAbstractRunner();
     /**
-     * This function should return the user-visible name for this runner
+     * This function gives the name of the icon for this runner
+     * @return the name of the icon of the runner
      */
     virtual QString name() const;
 
@@ -64,18 +68,17 @@ public slots:
 signals:
     /**
      * This is emitted to indicate that the runner has started to work.
-     * @param runnerName the user-visible name for the runner.
+     * @param runnerName the name of the icon for the runner.
      * @see parse()
      * @see name()
      */
     void runnerStarted(QString runnerName);
     /**
      * This is emitted to indicate that the runner has finished.
-     * If the parsing failed, @p result should have MarbleRunnerResult::NoMatch
      * @param result the result of the parsing.
      * @see parse()
      */
-    void runnerFinished(MarbleRunnerResult result);
+    void runnerFinished(QVector<GeoDataPlacemark*> result);
 };
 
 }
