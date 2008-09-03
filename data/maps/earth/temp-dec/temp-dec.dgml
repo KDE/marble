@@ -127,12 +127,12 @@
                     <available>true</available>
                 </property>
                 <property name="international-boundaries">
-                    <available>true</available>
-                    <value>true</value>
+                    <available>false</available>
+                    <value>false</value>
                 </property>
                 <property name="state-boundaries">
-                    <available>true</available>
-                    <value>true</value>
+                    <available>false</available>
+                    <value>false</value>
                 </property>
             </group>
             <group name="Water Bodies">
