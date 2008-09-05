@@ -55,7 +55,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
       VisualCategoryRole,              ///< The category
       StyleRole,                       ///< The style
       PopularityIndexRole,             ///< The popularity index
-      PopularityRole                   ///< The popularity
+      PopularityRole,                  ///< The popularity
+      ObjectPointerRole                ///< The pointer to a specific object
     };
 
     /**
