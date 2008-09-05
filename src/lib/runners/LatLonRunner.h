@@ -32,7 +32,7 @@ class LatLonRunner : public MarbleAbstractRunner
 public:
     LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
-    QString name() const;
+    GeoDataFeature::GeoDataVisualCategory category() const;
     
 public slots:
     void parse(const QString &input);

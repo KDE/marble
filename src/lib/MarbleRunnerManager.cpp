@@ -50,8 +50,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_latlonRunner = new LatLonRunner(0);
     m_latlonRunner->start();
     m_latlonRunner->moveToThread(m_latlonRunner);
-    connect( m_latlonRunner, SIGNAL( runnerStarted(QString) ),
-             this,           SLOT( slotRunnerStarted(QString) ));
+    connect( m_latlonRunner, SIGNAL( runnerStarted() ),
+             this,           SLOT( slotRunnerStarted() ));
     connect( m_latlonRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
              this,           SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
     connect( this,           SIGNAL( engage(QString) ),
@@ -60,8 +60,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_onfRunner = new OnfRunner(0);
     m_onfRunner->start();
     m_onfRunner->moveToThread(m_onfRunner);
-    connect( m_onfRunner, SIGNAL( runnerStarted(QString) ),
-             this,        SLOT( slotRunnerStarted(QString) ));
+    connect( m_onfRunner, SIGNAL( runnerStarted() ),
+             this,        SLOT( slotRunnerStarted() ));
     connect( m_onfRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
              this,        SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
     connect( this,        SIGNAL( engage(QString) ),
@@ -105,10 +105,10 @@ void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark*> result 
     emit modelChanged( m_model );
 }
 
-void MarbleRunnerManager::slotRunnerStarted(QString runnerName)
+void MarbleRunnerManager::slotRunnerStarted()
 {
     m_activeRunners++;
-    qDebug() << runnerName << "starting, active runners: " << m_activeRunners;
+    qDebug() << "Runner starting, active runners: " << m_activeRunners;
 }
 
 MarblePlacemarkModel* MarbleRunnerManager::model()

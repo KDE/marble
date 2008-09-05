@@ -36,7 +36,7 @@ class OnfRunner : public MarbleAbstractRunner
 public:
     OnfRunner(QObject *parent = 0);
     ~OnfRunner();
-    QString name() const;
+    GeoDataFeature::GeoDataVisualCategory category() const;
     
 public slots:
     void parse(const QString &input);

@@ -54,9 +54,9 @@ OnfRunner::~OnfRunner()
     delete m_buffer;
 }
 
-QString OnfRunner::name() const
+GeoDataFeature::GeoDataVisualCategory OnfRunner::category() const
 {
-    return tr("OpenStreetMap Name Finder Runner");
+    return GeoDataFeature::Default;
 }
 
 void OnfRunner::fail()
@@ -71,7 +71,7 @@ void OnfRunner::fail()
 
 void OnfRunner::parse(const QString &input)
 {
-    emit runnerStarted( name() );
+    emit runnerStarted();
     if( input.isEmpty() ) {
         return;
     }

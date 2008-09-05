@@ -21,6 +21,7 @@
 #include "LatLonRunner.h"
 
 #include "MarbleAbstractRunner.h"
+#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 
@@ -38,9 +39,9 @@ LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
 }
 
 
-QString LatLonRunner::name() const
+GeoDataFeature::GeoDataVisualCategory LatLonRunner::category() const
 {
-    return "FIXME";
+    return GeoDataFeature::Default;
 }
 
 LatLonRunner::~LatLonRunner()
@@ -49,7 +50,7 @@ LatLonRunner::~LatLonRunner()
 
 void LatLonRunner::parse(const QString &input)
 {
-    emit runnerStarted( name() );
+    emit runnerStarted();
     
     bool successful = false;
     GeoDataCoordinates coord = GeoDataCoordinates::fromString( input, successful );

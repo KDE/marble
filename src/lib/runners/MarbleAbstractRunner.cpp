@@ -28,20 +28,19 @@ namespace Marble
 
 MarbleAbstractRunner::MarbleAbstractRunner(QObject *parent) : QThread(parent)
 {
-//     moveToThread(this);
 }
 
 MarbleAbstractRunner::~MarbleAbstractRunner()
 {
 }
 
-void MarbleAbstractRunner::parse( const QString& /*input*/ )
+GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
 {
+    return GeoDataFeature::Default;
 }
 
-QString MarbleAbstractRunner::name() const
+void MarbleAbstractRunner::parse(const QString& /*input*/)
 {
-    return "FIXME";
 }
 
 void MarbleAbstractRunner::run() 

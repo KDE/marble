@@ -21,6 +21,7 @@
 #ifndef MARBLEABSTRACTRUNNER_H
 #define MARBLEABSTRACTRUNNER_H
 
+#include "GeoDataFeature.h"
 
 #include <QThread>
 #include <QVector>
@@ -40,7 +41,8 @@ class MarbleAbstractRunner : public QThread
     Q_OBJECT
 public:
     /**
-     * Constructor; note that @p parent should be 0
+     * Constructor; note that @p parent should be 0 in order to move the
+     * thread object into its own thread.
      */
     MarbleAbstractRunner(QObject *parent = 0);
     /**
@@ -48,10 +50,10 @@ public:
      */
     ~MarbleAbstractRunner();
     /**
-     * This function gives the name of the icon for this runner
-     * @return the name of the icon of the runner
+     * This function gives the  icon for this runner
+     * @return the icon of the runner
      */
-    virtual QString name() const;
+    virtual GeoDataFeature::GeoDataVisualCategory category() const;
 
     void run(); 
 
@@ -68,11 +70,9 @@ public slots:
 signals:
     /**
      * This is emitted to indicate that the runner has started to work.
-     * @param runnerName the name of the icon for the runner.
      * @see parse()
-     * @see name()
      */
-    void runnerStarted(QString runnerName);
+    void runnerStarted();
     /**
      * This is emitted to indicate that the runner has finished.
      * @param result the result of the parsing.
